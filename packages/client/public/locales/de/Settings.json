@@ -42,7 +42,6 @@
   "AuditSubheader": "Subsecțiunea vă permite să răsfoiți lista celor mai recente modificări (creare, modificare, ştergere etc.) efectuate de utilizatori asupra elementelor (săli, oportunităţi, fişiere etc.) din cadrul {{productName}}.",
   "AuditTrailNav": "Audit-Trail",
   "AuthorizationKeysInfo": "Mit Autorisierungsschlüsseln können Sie Drittanbieterdienste mit Ihrem Bereich verbinden. Melden Sie sich einfach mit Facebook, Google oder LinkedIn an. Fügen Sie Dropbox, OneDrive und andere Konten hinzu, um mit dort gespeicherten Dateien zu arbeiten.",
-  "Backup": "Backup",
   "BackupCreatedError": "Ein Fehler ist aufgetreten. Bitte kontaktieren Sie Ihren Administrator.",
   "BackupCreatedSuccess": "Die Sicherungskopie wurde erfolgreich erstellt.",
   "BackupFile": "Sicherungsdatei",

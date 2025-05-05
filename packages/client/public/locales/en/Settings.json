@@ -34,7 +34,6 @@
   "AuditSubheader": "The subsection allows you to browse through the list of the latest changes (creation, modification, deletion etc.) made by users to the entities (rooms, opportunities, files etc.) within your {{productName}}.",
   "AuditTrailNav": "Audit Trail",
   "AuthorizationKeysInfo": "With Authorization keys, you can connect third-party services to your space. Sign in easily with Facebook, Google, or LinkedIn. Add Dropbox, OneDrive, and other accounts to work with files stored there.",
-  "Backup": "Backup",
   "BackupCreatedError": "An error has been encountered. Please contact your administrator.",
   "BackupFile": "Backup file",
   "BackupFileUploading": "Backup file is being uploaded to the server. Please wait.",

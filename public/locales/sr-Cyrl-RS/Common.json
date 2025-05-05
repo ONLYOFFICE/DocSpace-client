@@ -855,5 +855,6 @@
   "YouHaveUnsavedChanges": "Имате несачуване промене",
   "YourCurrentDomain": "Ваш тренутни домен",
   "YourLogo": "Ваш лого",
-  "YourTurn": "Ваш ред"
+  "YourTurn": "Ваш ред",
+  "Backup": "Резервна копија"
 }

@@ -42,7 +42,6 @@
   "AuditSubheader": "La sous-section vous permet de parcourir la liste des derniers changements (création, modification, suppression, etc.) apportés par les utilisateurs aux entités (salles, opportunités, fichiers, etc.) de votre {{productName}}.",
   "AuditTrailNav": "Piste d'audit ",
   "AuthorizationKeysInfo": "Grâce aux clés d'autorisation, vous pouvez connecter des services tiers à votre espace. Connectez-vous facilement avec Facebook, Google ou LinkedIn. Ajoutez Dropbox, OneDrive et d'autres comptes pour travailler avec les fichiers qui y sont stockés.",
-  "Backup": "Sauvegarde",
   "BackupCreatedError": "Une erreur s'est produite. S'il vous plaît contactez votre administrateur.",
   "BackupCreatedSuccess": "La copie de sauvegarde a été créée avec succès.",
   "BackupFile": "Fichier de sauvegarde",

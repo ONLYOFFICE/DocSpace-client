@@ -42,7 +42,6 @@
   "AuditSubheader": "Alt bölüm, kullanıcılar tarafından {{productName}}'inizdeki varlıklarda (odalar, fırsatlar, dosyalar vb.) yapılan en son değişikliklerin (oluşturma, değiştirme, silme vb.) listesine göz atmanıza olanak tanır.",
   "AuditTrailNav": "Denetim İzleme",
   "AuthorizationKeysInfo": "Yetkilendirme Anahtarları ile üçüncü parti hizmetleri alanınıza bağlayabilirsiniz. Facebook, Google veya LinkedIn ile kolayca giriş yapın. Dropbox, OneDrive ve diğer hesapları ekleyerek orada saklanan dosyalarla çalışın.",
-  "Backup": "Yedek",
   "BackupCreatedError": "Bir hata oluştu. Lütfen site yöneticisi ile görüşün.",
   "BackupCreatedSuccess": "Yedekleme kopyası başarıyla oluşturuldu.",
   "BackupFile": "Yedekleme dosyası",

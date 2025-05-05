@@ -42,7 +42,6 @@
   "AuditSubheader": "Alt bölmə sizə {{productName}}-dəki (otaqlara, imkanlara, fayllara və s.) istifadəçilər tərəfindən edilən ən son dəyişikliklərin (yaradılması, dəyişdirilməsi, silinməsi və s.) siyahısını nəzərdən keçirməyə imkan verir.",
   "AuditTrailNav": "Audit izi",
   "AuthorizationKeysInfo": "Avtorizasiya açarları ilə üçüncü tərəf xidmətlərini fəzaya qoşa bilərsiniz. Facebook, Google və ya LinkedIn ilə asanlıqla daxil olun. Dropbox, OneDrive və digər hesabları əlavə edərək orada saxlanılan fayllarla işləyin.",
-  "Backup": "Yedəkləmə",
   "BackupCreatedError": "Xəta ilə üzləşdiniz. Administratorunuzla əlaqə saxlayın.",
   "BackupCreatedSuccess": "Ehtiyat nüsxə uğurla yaradıldı.",
   "BackupFile": "Ehtiyat fayl",

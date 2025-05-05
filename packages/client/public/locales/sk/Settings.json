@@ -42,7 +42,6 @@
   "AuditSubheader": "Podsekcia vám umožňuje prezerať zoznam posledných zmien (vytvorenie, úprava, odstránenie atď.), ktoré vykonali používatelia v objektoch (miestnosti, príležitosti, súbory atď.) vo vašom {{productName}}.",
   "AuditTrailNav": "Auditné záznamy",
   "AuthorizationKeysInfo": "Pomocou Autorizačných kľúčov môžete pripojiť služby tretích strán k vášmu priestoru. Jednoducho sa prihláste pomocou Facebooku, Googlu alebo LinkedInu. Pridajte Dropbox, OneDrive a ďalšie účty pre prácu so súbormi uloženými tam.",
-  "Backup": "Záloha",
   "BackupCreatedError": "Vyskytla sa chyba. Prosím kontaktujte svojho správcu.",
   "BackupCreatedSuccess": "Kópia zálohy bola úspešne vytvorená.",
   "BackupFile": "Zálohovať súbor",

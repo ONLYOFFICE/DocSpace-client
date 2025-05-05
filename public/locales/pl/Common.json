@@ -847,5 +847,6 @@
   "YouHaveUnsavedChanges": "Masz niezapisane zmiany",
   "YourCurrentDomain": "Twoja obecna domena",
   "YourLogo": "Twoje Logo",
-  "YourTurn": "Twoja kolej"
+  "YourTurn": "Twoja kolej",
+  "Backup": "Kopia zapasowa"
 }

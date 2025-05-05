@@ -42,7 +42,6 @@
   "AuditSubheader": "サブセクションでは、{{productName}}内のエンティティ（ルーム、機会、ファイルなど）に対してユーザーが行った最新の変更（作成、変更、削除など）のリストを閲覧することができます。",
   "AuditTrailNav": "監査証跡",
   "AuthorizationKeysInfo": "認証キーを使用すると、サードパーティサービスをスペースに接続できます。Facebook、Google、LinkedIn で簡単にサインインできます。Dropbox、OneDrive などのアカウントを追加し、そこに保存されているファイルを操作できます。",
-  "Backup": "バックアップ",
   "BackupCreatedError": "エラーが発生してしまいました。管理者を連絡ください。",
   "BackupCreatedSuccess": "バックアップ・コピーは正常に作成されました。",
   "BackupFile": "バックアップファイル",

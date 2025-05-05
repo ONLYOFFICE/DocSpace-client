@@ -42,7 +42,6 @@
   "AuditSubheader": "Podrazdelek vam omogoča brskanje po seznamu zadnjih sprememb (ustvarjanje, spreminjanje, brisanje itd.), ki so jih uporabniki naredili za entitete (sobe, priložnosti, datoteke itd.) v vašem prostoru {{productName}}.",
   "AuditTrailNav": "Revizijska pot",
   "AuthorizationKeysInfo": "Z avtorizacijskimi ključi lahko povežete storitve tretjih oseb s svojim prostorom. Enostavno se prijavite z Facebook, Google ali LinkedIn. Dodajte Dropbox, OneDrive in druge račune za delo s tam shranjenimi datotekami.",
-  "Backup": "Varnostna kopija",
   "BackupCreatedError": "Prišlo je do napake. Prosim kontaktirajte svojega administratorja.",
   "BackupCreatedSuccess": "Varnostna kopija je bila uspešno ustvarjena.",
   "BackupFile": "Datoteka varnostne kopije",

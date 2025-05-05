@@ -42,7 +42,6 @@
   "AuditSubheader": "Met deze subsectie kunt u bladeren door de lijst met de laatste wijzigingen (aanmaak, wijziging, verwijdering enz.) die gebruikers hebben aangebracht in de entiteiten (ruimtes, kansen, bestanden enz.) binnen uw {{productName}}.",
   "AuditTrailNav": "Audit Trail",
   "AuthorizationKeysInfo": "Met Autorisatiesleutels kunt u externe services koppelen aan uw werkruimte. Meld u eenvoudig aan met Facebook, Google of LinkedIn. Voeg Dropbox, OneDrive en andere accounts toe om met daar opgeslagen bestanden te werken.",
-  "Backup": "Back-up",
   "BackupCreatedError": "Er is een fout opgetreden. Neem contact op met de beheerder.",
   "BackupCreatedSuccess": "De back-up kopie is succesvol aangemaakt.",
   "BackupFile": "Back-up bestand",

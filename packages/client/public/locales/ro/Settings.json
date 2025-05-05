@@ -42,7 +42,6 @@
   "AuditSubheader": "Subsecțiunea vă permite să răsfoiți lista celor mai recente modificări (creare, modificare, ştergere etc.) efectuate de utilizatori asupra elementelor (săli, oportunităţi, fişiere etc.) din cadrul {{productName}}.",
   "AuditTrailNav": "Lanţ de audit",
   "AuthorizationKeysInfo": "Cu cheile de acces, vă puteți conecta spațiu dvs la servici terțe. Conectați-vă cu ușurință cu Facebook, Google sau LinkedIn. Adăugați Dropbox, OneDrive și alte conturi pentru a lucra cu fișierele din spații de stocare.",
-  "Backup": "Copie de siguranță",
   "BackupCreatedError": "S-a produs o eroare. Vă rugăm să contactați administratorul.",
   "BackupCreatedSuccess": "O copie de rezervă a fost creată cu succes.",
   "BackupFile": "Fișier de rezervă",

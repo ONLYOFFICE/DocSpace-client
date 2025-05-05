@@ -26,7 +26,6 @@
   "AuditSubheader": "ඔබගේ {{productName}} තුළ අඩංගු ඒකකවල (කාමර, අවකාශ, ගොනු ආදිය) පරිශ්‍රීලකයින් සිදු කරන ලද නවතම වෙනස්කම් (සෑදීම්, සංශෝධන, මකාදැමීම් ආදිය) ලැයිස්තුව හරහා පිරික්සීමට අනුකොටස ඔබට ඉඩ සලසයි.",
   "AuditTrailNav": "විගණන මඟ",
   "AuthorizationKeysInfo": "Z Avtorizacijskimi ključi lahko povežete storitve tretjih oseb s svojim prostorom. Enostavno se prijavite z Facebook, Google ali LinkedIn. Dodajte Dropbox, OneDrive in druge račune za delo s tam shranjenimi datotekami.",
-  "Backup": "උපස්ථය",
   "BackupCreatedError": "දෝෂයක් හටගෙන ඇත. ඔබගේ පරිපාලක අමතන්න.",
   "BackupCreatedSuccess": "උපස්ථ පිටපත සාර්ථකව සාදා ඇත.",
   "BackupFile": "උපස්ථ ගොනුව",

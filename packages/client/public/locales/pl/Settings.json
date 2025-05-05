@@ -42,7 +42,6 @@
   "AuditSubheader": "Podsekcja umożliwia przeglądanie listy najnowszych zmian (utworzeń, modyfikacji, usunięć itp.) wprowadzonych przez użytkowników w poszczególnych elementach (pokojach, możliwościach, plikach itp.) w {{productName}}.",
   "AuditTrailNav": "Szlak audytu",
   "AuthorizationKeysInfo": "Dzięki Kluczom autoryzacyjnym możesz łączyć usługi stron trzecich ze swoją przestrzenią. Loguj się łatwo przez Facebook, Google lub LinkedIn. Dodaj Dropbox, OneDrive i inne konta, aby pracować z przechowywanymi tam plikami.",
-  "Backup": "Kopia zapasowa",
   "BackupCreatedError": "Napotkano błąd. Skontaktuj się ze swoim administratorem.",
   "BackupCreatedSuccess": "Kopia zapasowa została pomyślnie utworzona.",
   "BackupFile": "Plik kopii zapasowej",

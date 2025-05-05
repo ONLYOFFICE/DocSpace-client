@@ -42,7 +42,6 @@
   "AuditSubheader": "Apakšsadaļa ļauj pārlūkot jaunāko izmaiņu sarakstu (izveide, modificēšana, dzēšana utt.), ko lietotāji veikuši jūsu {{productName}} esošajās entītijās (telpas, iespējas, faili utt.).",
   "AuditTrailNav": "Audita žurnāls",
   "AuthorizationKeysInfo": "Izmantojot Autorizācijas atslēgas, varat savienot trešo pušu pakalpojumus ar savu darba vietu. Vienkārši piesakieties, izmantojot Facebook, Google vai LinkedIn. Pievienojiet Dropbox, OneDrive un citus kontus, lai strādātu ar tur glabātiem failiem.",
-  "Backup": "Dublēšana",
   "BackupCreatedError": "Radās kļūda. Lūdzu, sazinieties ar savu administratoru.",
   "BackupCreatedSuccess": "Rezerves kopija veiksmīgi izveidota.",
   "BackupFile": "Dublējuma fails",

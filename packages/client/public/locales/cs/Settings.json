@@ -42,7 +42,6 @@
   "AuditSubheader": "Tato podsekce umožňuje procházet seznam nejnovějších změn (vytvoření, úpravy, odstranění atd.), které uživatelé provedli v entitách (místnostech, příležitostech, souborech atd.) v rámci vašeho prostoru {{productName}}.",
   "AuditTrailNav": "Audit Trail",
   "AuthorizationKeysInfo": "S Autorizačními klíči můžete připojit služby třetích stran ke svému prostoru. Přihlaste se snadno pomocí Facebooku, Googlu nebo LinkedInu. Přidejte Dropbox, OneDrive a další účty pro práci se soubory uloženými tam.",
-  "Backup": "Záloha",
   "BackupCreatedError": "Došlo k chybě. Prosím kontaktujte Vašeho Administrátora.",
   "BackupCreatedSuccess": "Kopie zálohy byla úspěšně vytvořena.",
   "BackupFile": "Záložní soubor",

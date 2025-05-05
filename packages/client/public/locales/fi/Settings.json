@@ -42,7 +42,6 @@
   "AuditSubheader": "Alaosio mahdollistaa sinun katsella käyttäjien kokonaisuuksiin (huoneet, mahdollisuudet, tiedostot jne.) tekemien muutosten listaa (luonti, muokkaus, poisto jne.) kautta {{productName}}.",
   "AuditTrailNav": "Tapahtumien seuranta",
   "AuthorizationKeysInfo": "Valtuutusavaimien avulla voit yhdistää kolmannen osapuolen palveluja tilaan. Kirjaudu helposti Facebook-, Google- tai LinkedIn-tilillä. Lisää Dropbox, OneDrive ja muut tilit käyttääksesi siellä tallennettuja tiedostoja.",
-  "Backup": "Varmuuskopio",
   "BackupCreatedError": "On tapahtunut jokin outo virhe. Tosi outo. Ota yhteys järjestelmänvalvojaan.",
   "BackupCreatedSuccess": "Turvatallenteen kopio on luotu onnistuneesti.",
   "BackupFile": "Varmuuskopiotiedosto",

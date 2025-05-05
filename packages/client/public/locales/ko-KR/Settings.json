@@ -42,7 +42,6 @@
   "AuditSubheader": "하위 섹션에서는 사용자가 {{productName}} 내의 항목(방, 기회, 파일 등)에 대해 수행한 최신 변경 사항(생성, 수정, 삭제 등) 목록을 검색할 수 있습니다.",
   "AuditTrailNav": "감사 추적",
   "AuthorizationKeysInfo": "인증 키를 사용하면 타사 서비스를 작업 공간에 연결할 수 있습니다. Facebook, Google 또는 LinkedIn으로 쉽게 로그인하세요. Dropbox, OneDrive 및 기타 계정을 추가하여 해당 서비스에 저장된 파일로 작업하세요.",
-  "Backup": "백업",
   "BackupCreatedError": "오류가 발생했습니다. 관리자에게 문의하세요.",
   "BackupCreatedSuccess": "백업 복사본 생성에 성공했습니다.",
   "BackupFile": "백업 파일",

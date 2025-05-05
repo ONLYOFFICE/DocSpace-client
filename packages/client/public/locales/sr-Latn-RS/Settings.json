@@ -42,7 +42,6 @@
   "AuditSubheader": "Ova podsekcija vam omogućava pregled liste poslednjih promena (kreacija, modifikacija, brisanje itd.) koje su korisnici izvršili na entitetima (sobama, prilikama, datotekama itd.) unutar vašeg {{productName}}-a.",
   "AuditTrailNav": "Revizorska staza",
   "AuthorizationKeysInfo": "Pomoću ključeva za autorizaciju možete da povežete usluge trećih strana sa svojim prostorom. Prijavite se lako sa Facebook-om, Google-om ili LinkedIn-om. Dodajte Dropbox, OneDrive i druge naloge da biste radili sa datotekama koje su tamo uskladištene.",
-  "Backup": "Rezervna kopija",
   "BackupCreatedError": "Naišla je greška. Molimo kontaktirajte vašeg administratora.",
   "BackupCreatedSuccess": "Rezervna kopija je uspešno kreirana.",
   "BackupFile": "Rezervna datoteka",

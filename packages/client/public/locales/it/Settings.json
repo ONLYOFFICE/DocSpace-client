@@ -42,7 +42,6 @@
   "AuditSubheader": "La sottosezione ti permette di navigare attraverso l’elenco delle ultime modifiche (creazione, modifica, cancellazione ecc.) apportate dagli utenti alle entità (stanze, opportunità, file ecc.) all’interno del tuo {{productName}}.",
   "AuditTrailNav": "Registro di controllo",
   "AuthorizationKeysInfo": "Con le Chiavi di autorizzazione puoi collegare servizi di terze parti al tuo spazio. Accedi facilmente con Facebook, Google o LinkedIn. Aggiungi Dropbox, OneDrive e altri account per lavorare con i file lì archiviati.",
-  "Backup": "Copia di sicurezza",
   "BackupCreatedError": "Si è verificato un errore. Contatta il tuo amministratore.",
   "BackupCreatedSuccess": "La copia di backup è stata creata con successo.",
   "BackupFile": "File di backup",

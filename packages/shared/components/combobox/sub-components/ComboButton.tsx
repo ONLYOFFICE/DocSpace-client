@@ -82,9 +82,7 @@ const ComboButton: React.FC<TComboButtonProps> = ({
 
   const Icon = selectedOption.icon;
   const isIconReactElement =
-    Icon &&
-    typeof Icon === "function" &&
-    React.isValidElement(React.createElement(Icon));
+    Icon && typeof Icon === "function" && React.isValidElement(<Icon />);
 
   return (
     <ComboButtonTheme
@@ -130,7 +128,7 @@ const ComboButton: React.FC<TComboButtonProps> = ({
           isLoading={isLoading}
           data-test-id="combo-button-icon"
         >
-          {isIconReactElement ? React.createElement(Icon) : null}
+          {isIconReactElement ? <Icon /> : null}
 
           {typeof selectedOption.icon === "string" ? (
             <ReactSVG
@@ -140,7 +138,6 @@ const ComboButton: React.FC<TComboButtonProps> = ({
           ) : null}
         </StyledIcon>
       ) : null}
-
       {type === "badge" ? (
         <Badge
           label={selectedOption.label}
@@ -187,13 +184,11 @@ const ComboButton: React.FC<TComboButtonProps> = ({
           {selectedOption?.label}
         </Text>
       ) : null}
-
       {plusBadgeValue ? (
         <StyledPlusBadge
           isOpen={isOpen}
         >{`+${plusBadgeValue}`}</StyledPlusBadge>
       ) : null}
-
       <StyledArrowIcon
         displayArrow={displayArrow}
         isOpen={isOpen}
@@ -219,7 +214,6 @@ const ComboButton: React.FC<TComboButtonProps> = ({
           )
         ) : null}
       </StyledArrowIcon>
-
       {isLoading ? (
         <StyledLoader displaySize={size} type={LoaderTypes.track} size="20px" />
       ) : null}

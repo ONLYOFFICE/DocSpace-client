@@ -34,7 +34,7 @@ const ComboButtonTheme = ({
   ref,
   ...props
 }: PropsWithChildren<TComboButtonThemeProps> & {
-  ref: React.RefObject<HTMLDivElement>;
+  ref?: React.RefObject<HTMLDivElement>;
 }) => {
   const defaultTheme = use(ThemeContext);
 

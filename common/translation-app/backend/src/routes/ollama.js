@@ -81,7 +81,7 @@ async function routes(fastify, options) {
     }
   });
 
-    // Validate translations using LLM
+  // Validate translations using LLM
   fastify.post("/validate/translation", async (request, reply) => {
     try {
       const {
@@ -102,9 +102,10 @@ async function routes(fastify, options) {
       }
 
       if (!sourceText || !targetText) {
-        return reply
-          .code(400)
-          .send({ success: false, error: "Source and target texts are required" });
+        return reply.code(400).send({
+          success: false,
+          error: "Source and target texts are required",
+        });
       }
 
       // Send notification that validation is starting
@@ -156,7 +157,7 @@ async function routes(fastify, options) {
         targetLanguage,
         namespace,
         model,
-        maxKeys = 10,  // Limit the number of keys to validate to avoid overloading
+        maxKeys = 10, // Limit the number of keys to validate to avoid overloading
       } = request.body;
 
       if (!model) {
@@ -198,10 +199,14 @@ async function routes(fastify, options) {
 
       // Select keys that exist in both source and target
       const keysToValidate = Object.keys(flattenedSource)
-        .filter(key => key in flattenedTarget && 
-                 typeof flattenedSource[key] === 'string' && 
-                 typeof flattenedTarget[key] === 'string' &&
-                 flattenedSource[key] && flattenedTarget[key])
+        .filter(
+          (key) =>
+            key in flattenedTarget &&
+            typeof flattenedSource[key] === "string" &&
+            typeof flattenedTarget[key] === "string" &&
+            flattenedSource[key] &&
+            flattenedTarget[key]
+        )
         .slice(0, maxKeys);
 
       // Track overall progress
@@ -255,7 +260,7 @@ async function routes(fastify, options) {
             errors: [{ message: `Validation failed: ${error.message}` }],
             suggestions: [],
           };
-          
+
           // Update progress even when error occurs
           completedKeys++;
           fastify.io.emit("validation:batch:progress", {
@@ -288,8 +293,8 @@ async function routes(fastify, options) {
           stats: {
             total: totalKeys,
             completed: completedKeys,
-            valid: Object.values(results).filter(r => r.isValid).length,
-            invalid: Object.values(results).filter(r => !r.isValid).length,
+            valid: Object.values(results).filter((r) => r.isValid).length,
+            invalid: Object.values(results).filter((r) => !r.isValid).length,
           },
         },
       };
@@ -422,6 +427,7 @@ async function routes(fastify, options) {
       };
     } catch (error) {
       request.log.error(error);
+
       return reply.code(500).send({
         success: false,
         error: "Translation failed",
@@ -687,29 +693,32 @@ function getLanguageInfo(code) {
  * Translate text using Ollama API
  */
 async function translateText(text, sourceLanguage, targetLanguage, model) {
-  try {
-    // Get language information for better translation context
-    const sourceInfo = getLanguageInfo(sourceLanguage);
-    const targetInfo = getLanguageInfo(targetLanguage);
+  // Get language information for better translation context
+  const sourceInfo = getLanguageInfo(sourceLanguage);
+  const targetInfo = getLanguageInfo(targetLanguage);
 
-    // Create a more detailed prompt with language information
-    //     const prompt = `Translate the following text from ${sourceInfo.name} to ${targetInfo.name}.
-    // ${targetInfo.isRightToLeft ? 'Note that the target language is written right-to-left.' : ''}
-    // Please maintain any formatting, placeholders (like {{variable}}), and HTML tags if present.
-    // Return only the translated text without any commentary or explanations.\n\n${text}`;
+  // Create a more detailed prompt with language information
+  //     const prompt = `Translate the following text from ${sourceInfo.name} to ${targetInfo.name}.
+  // ${targetInfo.isRightToLeft ? 'Note that the target language is written right-to-left.' : ''}
+  // Please maintain any formatting, placeholders (like {{variable}}), and HTML tags if present.
+  // Return only the translated text without any commentary or explanations.\n\n${text}`;
 
-    const prompt = `You are a professional translator.
-Task: Translate from ${sourceInfo.name} to ${targetInfo.name}
-Rules: 
+  const prompt = `# You are a professional translator.
+
+## Task: Translate from ${sourceInfo.name} to ${targetInfo.name}
+
+### Rules:
 ${targetInfo.isRightToLeft ? "- Note that the target language is written right-to-left." : ""}
 - Preserve all formatting
 - Keep {{variables}} unchanged
 - Keep HTML tags intact
 - Return only the translation
+- If you don't know the translation, return "NO_TRANSLATION"
 
-Text to translate:
+### Text to translate:
 ${text}`;
 
+  try {
     // First verify Ollama connection
     const isConnected = await verifyOllamaConnection();
     if (!isConnected) {
@@ -722,7 +731,7 @@ ${text}`;
     );
     debug(`Using model: ${model}`);
     debug(
-      `Translating text of length ${text.length} from ${sourceLanguage} to ${targetLanguage}`
+      `Translating text of length ${text.length} from ${sourceInfo.name} (${sourceLanguage}) to ${targetInfo.name} (${targetLanguage})`
     );
 
     // Create a new Ollama client instance
@@ -740,6 +749,10 @@ ${text}`;
       },
     });
 
+    if (response === "NO_TRANSLATION") {
+      throw new Error("Translation not available");
+    }
+
     return response.trim();
   } catch (error) {
     debug("Translation error details:", {
@@ -747,7 +760,9 @@ ${text}`;
       name: error.name,
       code: error.code,
       stack: error.stack,
+      prompt,
     });
+
     console.error("Translation error:", error);
     throw error;
   }
@@ -837,25 +852,32 @@ Keep your analysis concise and precise.`;
       if (!jsonMatch) {
         throw new Error("Invalid JSON format in response");
       }
-      
+
       const jsonStr = jsonMatch[0];
       const result = JSON.parse(jsonStr);
-      
+
       // Ensure the result has the expected structure
       return {
         isValid: Boolean(result.isValid),
         errors: Array.isArray(result.errors) ? result.errors : [],
-        suggestions: Array.isArray(result.suggestions) ? result.suggestions : [],
+        suggestions: Array.isArray(result.suggestions)
+          ? result.suggestions
+          : [],
         rating: Number(result.rating) || 0,
       };
     } catch (jsonError) {
       debug("Failed to parse LLM response as JSON:", jsonError);
       debug("Raw response:", response);
-      
+
       // Fallback: create a structured response based on the text
       return {
         isValid: false,
-        errors: [{ type: "validation_error", message: "Failed to analyze translation" }],
+        errors: [
+          {
+            type: "validation_error",
+            message: "Failed to analyze translation",
+          },
+        ],
         suggestions: [],
         rating: 0,
         rawResponse: response.trim(),

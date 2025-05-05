@@ -32,17 +32,10 @@ import { Checkbox } from "../../checkbox";
 
 import { StyledSelectAll } from "../Selector.styled";
 import { SelectAllContext } from "../contexts/SelectAll";
+import { SelectAllProps } from "../Selector.types";
 
 const SelectAll = React.memo(
-  ({
-    show,
-    isLoading,
-    rowLoader,
-  }: {
-    show: boolean;
-    isLoading: boolean;
-    rowLoader: ReactNode;
-  }) => {
+  ({ show, isLoading, rowLoader }: SelectAllProps) => {
     const {
       selectAllIcon,
       selectAllLabel,

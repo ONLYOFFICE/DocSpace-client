@@ -26,8 +26,8 @@
 
 import React from "react";
 
-import { HeaderProps } from "../Selector.types";
 import { AsideHeader } from "../../aside-header";
+import { HeaderProps } from "../Selector.types";
 
 const Header = React.memo(
   ({
@@ -41,9 +41,7 @@ const Header = React.memo(
     return (
       <AsideHeader
         header={headerLabel}
-        isBackButton={
-          !withoutBackButton ? typeof withoutBackButton === "boolean" : false
-        }
+        isBackButton={withoutBackButton}
         onBackClick={onBackClick}
         onCloseClick={onCloseClick}
         withoutBorder={withoutBorder}

@@ -1,6 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { fetchTranslationStats } from "@/lib/api";
-import { getLanguageName } from "@/utils/languageUtils";
+import { getLanguageName, getLanguageColor } from "@/utils/languageUtils";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  Cell,
+  LabelList
+} from "recharts";
 
 interface LanguageStats {
   language: string;
@@ -196,77 +208,83 @@ const TranslationStats: React.FC<TranslationStatsProps> = ({ projectName }) => {
           Language Completion
         </h3>
 
-        {/* Left-Skewed Histogram Chart */}
+        {/* Recharts Bar Chart - Vertical and showing only languages < 100% completion */}
         <div className="mb-8 bg-gray-50 dark:bg-gray-750 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
-          <div className="flex">
-            {/* Percentage labels on the left */}
-            <div className="pr-2 flex flex-col justify-between text-sm text-gray-500 dark:text-gray-400">
-              <span>100%</span>
-              <span>90%</span>
-              <span>75%</span>
-              <span>50%</span>
-              <span>0%</span>
+          <h4 className="text-md font-medium text-gray-600 dark:text-gray-400 mb-3">
+            Languages Needing Translation Work
+          </h4>
+          
+          {/* Filter for languages with less than 100% completion */}
+          {sortedLanguageStats.filter(stat => stat.completionPercentage < 100).length === 0 ? (
+            <div className="text-center py-8 text-gray-600 dark:text-gray-400">
+              <p>All languages are 100% complete! 🎉</p>
             </div>
-            
-            <div className="relative flex-grow">
-              {/* Horizontal grid lines with non-linear spacing */}
-              <div className="absolute inset-0 w-full h-full">
-                <div className="absolute top-0 w-full border-b border-gray-200 dark:border-gray-700"></div>
-                <div className="absolute top-1/6 w-full border-b border-gray-200 dark:border-gray-700"></div>
-                <div className="absolute top-1/3 w-full border-b border-gray-200 dark:border-gray-700"></div>
-                <div className="absolute top-2/3 w-full border-b border-gray-200 dark:border-gray-700"></div>
-              </div>
-              
-              {/* Language bars with skewed scale (horizontal) */}
-              <div className="relative h-full pl-2 pr-4 pt-6 pb-2 flex flex-col justify-between gap-4">
-                {sortedLanguageStats.map((langStat, index) => {
-                  // Apply skew function to emphasize higher percentages
-                  const skewedWidth = calculateSkewedWidth(langStat.completionPercentage);
-                  return (
-                    <div key={langStat.language} className="flex gap-2 items-center">
-                      <div className="w-20 text-right text-sm font-medium">
-                        {getLanguageName(langStat.language)}
-                        {langStat.language === "en" && (
-                          <span className="ml-1 text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 px-1 py-0.5 rounded">
-                            Base
-                          </span>
-                        )}
-                      </div>
-                      
-                      <div className="flex-grow">
-                        <div className="w-full h-6 bg-gray-200 dark:bg-gray-700 rounded-md overflow-hidden relative group">
-                          <div 
-                            className={`h-full ${getCompletionColorClass(langStat.completionPercentage)} relative transition-all duration-300 hover:brightness-110`}
-                            style={{ width: `${skewedWidth}%` }}
-                          >
-                            {/* Only show percentage on the bar if it's wide enough */}
-                            {skewedWidth > 15 ? (
-                              <span className="absolute inset-0 flex items-center justify-center text-white font-medium text-sm">
-                                {Math.round(langStat.completionPercentage)}%
-                              </span>
-                            ) : (
-                              <span className="absolute left-full ml-2 top-1/2 -translate-y-1/2 text-gray-600 dark:text-gray-400 text-sm">
-                                {Math.round(langStat.completionPercentage)}%
-                              </span>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                      
-                      {/* Tooltip with detailed stats (appears on hover) */}
-                      <div className="hidden group-hover:block absolute right-0 p-1 rounded bg-gray-900 text-white text-xs whitespace-nowrap z-20">
-                        <div className="font-bold">{getLanguageName(langStat.language)}</div>
-                        <div>Translated: {langStat.translatedCount}</div>
-                        <div>Missing: {langStat.untranslatedCount}</div>
-                        <div>Total: {langStat.totalCount}</div>
-                        <div>Completion: {Math.round(langStat.completionPercentage)}%</div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
+          ) : (
+            <ResponsiveContainer width="100%" height={400}>
+              <BarChart
+                layout="horizontal"
+                data={sortedLanguageStats
+                  .filter(stat => stat.completionPercentage < 100)
+                  .map((stat) => ({
+                    language: getLanguageName(stat.language),
+                    completionPercentage: stat.completionPercentage,
+                    translatedCount: stat.translatedCount,
+                    untranslatedCount: stat.untranslatedCount,
+                    totalCount: stat.totalCount,
+                    code: stat.language,
+                  }))}
+                margin={{ top: 20, right: 30, left: 20, bottom: 70 }}
+              >
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  stroke="#444"
+                  opacity={0.1}
+                />
+                <XAxis
+                  dataKey="language"
+                  angle={-45}
+                  textAnchor="end"
+                  height={70}
+                  tick={{ fill: "var(--color-text-secondary)" }}
+                />
+                <YAxis
+                  label={{ 
+                    value: "Completion %", 
+                    angle: -90, 
+                    position: "insideLeft",
+                    style: { fill: "var(--color-text-secondary)" } 
+                  }}
+                  domain={[0, 100]}
+                  tick={{ fill: "var(--color-text-secondary)" }}
+                />
+                <Tooltip content={<CustomTooltip />} />
+                <Legend />
+                <Bar
+                  dataKey="completionPercentage"
+                  name="Completion"
+                  radius={[4, 4, 0, 0]}
+                  barSize={30}
+                >
+                  {sortedLanguageStats
+                    .filter(stat => stat.completionPercentage < 100)
+                    .map((entry, index) => (
+                      <Cell 
+                        key={`cell-${index}`} 
+                        fill={getLanguageColor(entry.language)}
+                      />
+                    ))}
+                  <LabelList
+                    dataKey="completionPercentage"
+                    position="top"
+                    fill="var(--color-text-primary)"
+                    fontSize={12}
+                    fontWeight="bold"
+                    formatter={(value: number | string) => `${(value as number).toFixed(1)}%`}
+                  />
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          )}
         </div>
 
         {/* Detail Table (collapsed by default) */}
@@ -334,29 +352,64 @@ const TranslationStats: React.FC<TranslationStatsProps> = ({ projectName }) => {
 };
 
 // Helper function to get color class based on completion percentage
-function getCompletionColorClass(percentage: number): string {
-  if (percentage < 50) return "bg-red-600";
-  if (percentage < 80) return "bg-amber-500";
-  if (percentage < 95) return "bg-yellow-400";
-  return "bg-green-500";
-}
+const getCompletionColorClass = (percentage: number): string => {
+  if (percentage >= 90) return "bg-green-500";
+  if (percentage >= 70) return "bg-blue-500";
+  if (percentage >= 40) return "bg-yellow-500";
+  return "bg-red-500";
+};
+
+// Helper function to get color for charts based on completion percentage
+const getCompletionChartColor = (percentage: number): string => {
+  if (percentage >= 90) return "#10B981"; // Green
+  if (percentage >= 70) return "#3B82F6"; // Blue
+  if (percentage >= 40) return "#F59E0B"; // Yellow
+  return "#EF4444"; // Red
+};
 
 // Function to calculate skewed width to emphasize high completion percentages
-function calculateSkewedWidth(percentage: number): number {
-  // Apply non-linear transformation to emphasize higher percentages
-  if (percentage >= 90) {
-    // Scale 90-100% to occupy 40-100% of the width
-    return 40 + (percentage - 90) * 6;
-  } else if (percentage >= 75) {
-    // Scale 75-90% to occupy 25-40% of the width
-    return 25 + (percentage - 75) * 1;
-  } else if (percentage >= 50) {
-    // Scale 50-75% to occupy 15-25% of the width
-    return 15 + (percentage - 50) * 0.4;
-  } else {
-    // Scale 0-50% to occupy 0-15% of the width
-    return percentage * 0.3;
-  }
+const calculateSkewedWidth = (percentage: number): number => {
+  // Apply a non-linear transformation to visually emphasize high completion rates
+  // This will make the bars wider as they get closer to 100%
+  // We're using a power function here: percentage ^ exponent
+  const exponent = 1.5; // Higher values create more skew (emphasize high percentages more)
+  const normalizedPercentage = percentage / 100;
+  const skewedValue = Math.pow(normalizedPercentage, exponent) * 100;
+
+  // Scale the result to ensure it's not too narrow at low percentages
+  // Minimum width is 2% of max-width
+  const minWidth = 2;
+  const scaledWidth = minWidth + (skewedValue * (100 - minWidth)) / 100;
+
+  // Round to the nearest integer
+  return Math.round(scaledWidth);
+};
+
+// Custom tooltip component for recharts
+interface CustomTooltipProps {
+  active?: boolean;
+  payload?: Array<{
+    value: number;
+    payload: LanguageStats & { language: string };
+  }>;
+  label?: string;
 }
+
+const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-white dark:bg-gray-800 p-2 border border-gray-200 dark:border-gray-700 shadow-md rounded-md">
+        <p className="font-medium">{`${label}`}</p>
+        <p className="text-primary-600 dark:text-primary-400">
+          {`Completion: ${payload[0].value.toFixed(1)}%`}
+        </p>
+        <p className="text-gray-600 dark:text-gray-400">
+          {`Translated: ${payload[0].payload.translatedCount} / ${payload[0].payload.totalCount}`}
+        </p>
+      </div>
+    );
+  }
+  return null;
+};
 
 export default TranslationStats;

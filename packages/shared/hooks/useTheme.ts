@@ -24,12 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useContext } from "react";
+import { use } from "react";
 
 import { ThemeContext } from "../context/ThemeContext";
 
 export const useTheme = () => {
-  const theme = useContext(ThemeContext);
+  const theme = use(ThemeContext);
 
   return { theme, isBase: theme === "Base" };
 };

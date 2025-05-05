@@ -26,7 +26,7 @@
 
 "use client";
 
-import React, { PropsWithChildren, useContext } from "react";
+import React, { PropsWithChildren, use } from "react";
 import { ThemeContext } from "styled-components";
 
 import { ColorThemeProps } from "./ColorTheme.types";
@@ -56,7 +56,7 @@ const ColorTheme = ({
 }: PropsWithChildren<ColorThemeProps> & {
   ref: React.RefObject<HTMLDivElement>;
 }) => {
-  const defaultTheme = useContext(ThemeContext);
+  const defaultTheme = use(ThemeContext);
 
   const currentColorScheme = defaultTheme?.currentColorScheme;
 

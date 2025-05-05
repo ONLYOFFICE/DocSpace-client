@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { PropsWithChildren, useContext } from "react";
+import React, { PropsWithChildren, use } from "react";
 import { ThemeContext } from "styled-components";
 
 import { StyledThemeComboButton } from "./ComboBox.styled";
@@ -36,7 +36,7 @@ const ComboButtonTheme = ({
 }: PropsWithChildren<TComboButtonThemeProps> & {
   ref: React.RefObject<HTMLDivElement>;
 }) => {
-  const defaultTheme = useContext(ThemeContext);
+  const defaultTheme = use(ThemeContext);
 
   const currentColorScheme = defaultTheme?.currentColorScheme;
 

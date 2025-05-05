@@ -26,7 +26,7 @@
 
 "use client";
 
-import React, { useContext } from "react";
+import React, { use } from "react";
 import { useTranslation } from "react-i18next";
 
 import { createFile, deleteFile } from "../../api/files";
@@ -100,7 +100,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
   } = props;
   const { t } = useTranslation(["Common"]);
   const { isFirstLoad, setIsFirstLoad, showLoader } =
-    useContext(LoadersContext);
+    use(LoadersContext);
 
   const currentSelectedItemId = React.useRef<undefined | number | string>(
     undefined,

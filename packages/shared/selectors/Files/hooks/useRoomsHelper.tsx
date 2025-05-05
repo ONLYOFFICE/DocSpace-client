@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useContext } from "react";
+import React, { use } from "react";
 import { useTranslation } from "react-i18next";
 
 import { getRooms } from "../../../api/rooms";
@@ -75,7 +75,7 @@ const useRoomsHelper = ({
     setIsFirstLoad,
 
     isFirstLoad,
-  } = useContext(LoadersContext);
+  } = use(LoadersContext);
 
   const { addInputItem } = useInputItemHelper({ withCreate, setItems });
 

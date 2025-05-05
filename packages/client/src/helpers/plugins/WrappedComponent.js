@@ -105,7 +105,7 @@ export const PluginComponent = inject(({ pluginStore }) => {
         isRequestRunning,
         setIsRequestRunning,
         setModalRequestRunning,
-      } = React.useContext(PropsContext);
+      } = React.use(PropsContext);
 
       React.useEffect(() => {
         if (

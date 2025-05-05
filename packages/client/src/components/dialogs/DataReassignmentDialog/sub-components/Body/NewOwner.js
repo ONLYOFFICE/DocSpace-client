@@ -65,10 +65,10 @@ const ChoiceNewOwner = ({
       <SelectorAddButton
         className="selector-add-button"
         onClick={onTogglePeopleSelector}
+        label={t("Translations:ChooseFromList")}
+        titleText={t("Translations:ChooseFromList")}
+        noSelect
       />
-      <Text className="label" noSelect title={t("Translations:ChooseFromList")}>
-        {t("Translations:ChooseFromList")}
-      </Text>
     </StyledPeopleSelector>
   );
 };

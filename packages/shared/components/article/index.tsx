@@ -230,6 +230,10 @@ const Article = ({
     window.location.pathname.includes("portal-settings") ||
     window.location.pathname.includes("management");
 
+  const pathDevTools = user?.isAdmin
+    ? "/portal-settings/developer-tools"
+    : "/developer-tools";
+
   const articleComponent = (
     <>
       <div
@@ -276,6 +280,7 @@ const Article = ({
                   currentDeviceType={currentDeviceType}
                   toggleArticleOpen={toggleArticleOpen}
                   showText={showText}
+                  path={pathDevTools}
                 />
               ) : null}
               {!hideAppsBlock ? (

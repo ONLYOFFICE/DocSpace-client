@@ -290,7 +290,7 @@ export const feedInfo = [
     actionType: `${FeedAction.Delete}`,
   },
   {
-    key: "RoomArchived",
+    key: "RoomToArchiveMove",
     targetType: `${FeedTarget.Room}`,
     actionType: `${FeedAction.Archived}`,
   },

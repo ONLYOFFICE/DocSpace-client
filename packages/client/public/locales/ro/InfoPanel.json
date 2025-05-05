@@ -58,7 +58,6 @@
   "MembersEmptyScreenText": "Detaliile membrilor aici",
   "NoRecordsFound": "Nu s-au găsit înregistrări",
   "Properties": "Proprietăţi",
-  "RoomArchived": "Sala este mutată în Arhivă",
   "RoomCreateUser": "Utilizatorul a fost adăugat.",
   "RoomCreateUserCount": "Utilizatorul a fost adăugat ({{count}}).",
   "RoomDenyDownloadDisabled": "Încărcarea și copierea nu sunt restricționate",

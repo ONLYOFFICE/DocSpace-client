@@ -287,8 +287,10 @@ export const useFeedTranslation = (
       return t("InfoPanel:RoomDenyDownloadEnabled");
     case "RoomDenyDownloadDisabled":
       return t("InfoPanel:RoomDenyDownloadDisabled");
-    case "RoomArchived":
-      return t("InfoPanel:RoomArchived");
+    case "RoomToArchiveMove":
+      return t("InfoPanel:RoomToArchiveMove", {
+        sectionName: t("Common:Archive"),
+      });
     case "RoomUnarchived":
       return t("InfoPanel:RoomUnarchived");
     case "RoomIndexExportLocation":

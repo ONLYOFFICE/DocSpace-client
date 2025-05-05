@@ -58,7 +58,6 @@
   "MembersEmptyScreenText": "Katso jäsentiedot täältä",
   "NoRecordsFound": "Merkintöjä ei löydy",
   "Properties": "Ominaisuudet",
-  "RoomArchived": "Huone siirretty arkistoon",
   "RoomCreateUser": "Käyttäjät lisätty.",
   "RoomCreateUserCount": "Käyttäjät lisätty ({{count}}).",
   "RoomDenyDownloadDisabled": "Lataaminen ja kopiointi rajoittamaton",

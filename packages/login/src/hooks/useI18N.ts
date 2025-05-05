@@ -39,7 +39,7 @@ interface UseI18NProps {
 }
 
 const useI18N = ({ settings, locale }: UseI18NProps) => {
-  const lng = locale ||getCookie(LANGUAGE) || settings?.culture || "en";
+  const lng = locale || getCookie(LANGUAGE) || settings?.culture || "en";
   const [i18N, seti18N] = useState<i18n>(() =>
     getI18NInstance(getCookie(LANGUAGE) ?? lng),
   );

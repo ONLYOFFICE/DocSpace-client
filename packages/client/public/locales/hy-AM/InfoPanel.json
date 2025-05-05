@@ -79,7 +79,6 @@
   "RoomRemoveUser": "Օգտատերը հեռացվել է:",
   "RoomRenamed": "Սենյակը <1>«{{oldRoomTitle}}»</1> վերանվանվել է <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Սենյակների մանրամասները տես ",
-  "RoomUnarchived": "Սենյակը վերականգնվել է արխիվից",
   "RoomUpdateAccess": "նշանակվել է",
   "RoomWatermarkDisabled": "Ջրանշանը սենյակում գտնվող ֆայլերի համար անջատված է",
   "RoomWatermarkSet": "Ջրանշանը սենյակում գտնվող ֆայլերի համար միացված է",

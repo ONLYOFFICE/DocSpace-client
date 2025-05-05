@@ -79,7 +79,6 @@
   "RoomRemoveUser": "Utente rimosso.",
   "RoomRenamed": "Stanza <1>«{{oldRoomTitle}}»</1> rinominata <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Vedi i dettagli delle stanze qui",
-  "RoomUnarchived": "Stanza recuperata dall'archivio",
   "RoomUpdateAccess": "è stato assegnato",
   "RoomWatermarkDisabled": "Filigrana per i file nella stanza disattivata",
   "RoomWatermarkSet": "Filigrana per i file nella stanza abilitata",

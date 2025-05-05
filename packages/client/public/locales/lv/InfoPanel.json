@@ -79,7 +79,6 @@
   "RoomRemoveUser": "Lietotājs ir noņemts.",
   "RoomRenamed": "Telpa ir <1>«{{oldRoomTitle}}»</1> pārdēvēta par <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Detalizētu informāciju par telpām skatīt šeit",
-  "RoomUnarchived": "Telpa ir atgūta no arhīva",
   "RoomUpdateAccess": "ir piešķirts",
   "RoomWatermarkDisabled": "Ūdenszīme failiem telpā ir atspējota",
   "RoomWatermarkSet": "Iespējota ūdenszīme telpā esošajiem failiem",

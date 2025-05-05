@@ -79,7 +79,6 @@
   "RoomRemoveUser": "İstifadəçi silindi.",
   "RoomRenamed": "Otağın <1>«{{oldRoomTitle}}»</1> adı <2>«{{roomTitle}}»</2> olaraq dəyişdirildi",
   "RoomsEmptyScreenTent": "Otaq detallarına burada baxın",
-  "RoomUnarchived": "Otaq arxivdən çıxarıldı",
   "RoomUpdateAccess": "təyin edilmişdir",
   "RoomWatermarkDisabled": "Otaqdakı fayllar üçün su nişanı deaktiv edilib",
   "RoomWatermarkSet": "Otaqdakı fayllar üçün su nişanı aktivləşdirilib",

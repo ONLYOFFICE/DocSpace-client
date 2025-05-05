@@ -79,7 +79,6 @@
   "RoomRemoveUser": "Ikona spremenjena",
   "RoomRenamed": "Soba <1>«{{oldRoomTitle}}»</1> preimenovana v <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Oglej si podrobnosti o sobah tukaj",
-  "RoomUnarchived": "Soba obnovljena iz Arhiva",
   "RoomUpdateAccess": "je bila dodeljena vloga",
   "RoomWatermarkDisabled": "Vodni žig za datoteke v sobi onemogočen",
   "RoomWatermarkSet": "Vodni žig za datoteke v sobi omogočen",

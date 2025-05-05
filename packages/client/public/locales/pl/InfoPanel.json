@@ -79,7 +79,6 @@
   "RoomRemoveUser": "Użytkownik został usunięty.",
   "RoomRenamed": "Nazwa pokoju <1>«{{oldRoomTitle}}»</1> została zmieniona na <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Zobacz dane pokoi tutaj",
-  "RoomUnarchived": "Pokój został przywrócony z Archiwum",
   "RoomUpdateAccess": "przypisano",
   "RoomWatermarkDisabled": "Znak wodny dla plików w tym pokoju jest wyłączony",
   "RoomWatermarkSet": "Znak wodny dla plików w tym pokoju jest włączony",

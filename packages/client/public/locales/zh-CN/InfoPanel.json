@@ -79,7 +79,6 @@
   "RoomRemoveUser": "用户已删除。",
   "RoomRenamed": "房间<1>«{{oldRoomTitle}}»</1>已重命名为<2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "在此查看房间详情",
-  "RoomUnarchived": "房间已从存档中恢复",
   "RoomUpdateAccess": "已分配角色",
   "RoomWatermarkDisabled": "房间内文件水印已禁用",
   "RoomWatermarkSet": "房间内文件水印已启用",

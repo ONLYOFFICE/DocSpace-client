@@ -79,7 +79,6 @@
   "RoomRemoveUser": "Simge değişti",
   "RoomRenamed": "Oda <1>«{{oldRoomTitle}}»</1> <2>«{{roomTitle}}»</2> olarak yeniden adlandırıldı",
   "RoomsEmptyScreenTent": "Oda detaylarını buradan gör",
-  "RoomUnarchived": "Arşivden geri döndürülen oda",
   "RoomUpdateAccess": "rol atanmıştır",
   "RoomWatermarkDisabled": "Odadaki dosyalar için filigran devre dışı bırakıldı",
   "RoomWatermarkSet": "Odadaki dosyalar için filigran etkinleştirildi",

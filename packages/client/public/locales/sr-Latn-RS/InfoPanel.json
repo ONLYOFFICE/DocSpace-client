@@ -79,7 +79,6 @@
   "RoomRemoveUser": "Korisnik uklonjen.",
   "RoomRenamed": "Prostorija <1>«{{oldRoomTitle}}»</1> preimenovana na <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Vidi detalje sobe ovde",
-  "RoomUnarchived": "Soba vraćena iz arhive",
   "RoomUpdateAccess": "dodeljena je uloga",
   "RoomWatermarkDisabled": "Vodeni žig za fajlove u sobi je onemogućen",
   "RoomWatermarkSet": "Vodeni žig za fajlove u sobi je onemogućen",

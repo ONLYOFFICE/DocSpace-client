@@ -79,7 +79,6 @@
   "RoomRemoveUser": "사용자가 제거되었습니다.",
   "RoomRenamed": "<1>«{{oldRoomTitle}}»</1> 룸의 이름이 <2>«{{roomTitle}}»</2> 룸으로 변경되었습니다",
   "RoomsEmptyScreenTent": "여기에서 방 세부 정보를 확인하세요",
-  "RoomUnarchived": "아카이브에서 룸을 복구했습니다",
   "RoomUpdateAccess": "님에게 역할이 할당되었습니다",
   "RoomWatermarkDisabled": "룸에 있는 파일에 대한 워터마크가 비활성화되었습니다",
   "RoomWatermarkSet": "룸에 있는 파일에 대한 워터마크가 활성화되었습니다",

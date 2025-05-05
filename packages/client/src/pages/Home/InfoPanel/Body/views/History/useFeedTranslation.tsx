@@ -291,8 +291,10 @@ export const useFeedTranslation = (
       return t("InfoPanel:RoomToArchiveMove", {
         sectionName: t("Common:Archive"),
       });
-    case "RoomUnarchived":
-      return t("InfoPanel:RoomUnarchived");
+    case "RoomFromArchiveRestore":
+      return t("InfoPanel:RoomFromArchiveRestore", {
+        sectionName: t("Common:Archive"),
+      });
     case "RoomIndexExportLocation":
       return t("InfoPanel:RoomIndexExportLocation", {
         sectionName: t("Common:MyFilesSection"),

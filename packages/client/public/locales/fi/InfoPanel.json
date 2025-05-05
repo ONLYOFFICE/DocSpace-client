@@ -79,7 +79,6 @@
   "RoomRemoveUser": "Käyttäjä poistettu.",
   "RoomRenamed": "Huone <1>«{{oldRoomTitle}}»</1> nimetty uudelleen <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Katso huonetiedot täältä",
-  "RoomUnarchived": "Huone palautettu arkistosta",
   "RoomUpdateAccess": "on määrätty",
   "RoomWatermarkDisabled": "Tiedostojen vesileima on poistettu käytöstä tässä huoneessa",
   "RoomWatermarkSet": "Tiedostojen vesileima on otettu käyttöön tässä huoneessa",

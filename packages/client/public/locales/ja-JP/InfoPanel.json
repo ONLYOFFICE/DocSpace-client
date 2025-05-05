@@ -79,7 +79,6 @@
   "RoomRemoveUser": "ユーザーが削除されました。",
   "RoomRenamed": "ルーム名<1>«{{oldRoomTitle}}»</1>を<2>«{{roomTitle}}»</2>に変更されました。",
   "RoomsEmptyScreenTent": "ルームの詳細情報はこちら",
-  "RoomUnarchived": "アーカイブから回復されたルーム",
   "RoomUpdateAccess": "に次の役割が割り当てられた：",
   "RoomWatermarkDisabled": "ルーム内のファイルの透かしは無効です",
   "RoomWatermarkSet": "ルーム内のファイルの透かしは有効です",

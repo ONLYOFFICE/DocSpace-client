@@ -79,7 +79,6 @@
   "RoomRemoveUser": "Gebruiker verwijderd",
   "RoomRenamed": "Kamer <1>«{{oldRoomTitle}}\"</1> hernoemd naar <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Bekijk hier de details van de kamers",
-  "RoomUnarchived": "Kamer hersteld uit Archief",
   "RoomUpdateAccess": "heeft toegewezen gekregen",
   "RoomWatermarkDisabled": "Watermerk voor bestanden in de kamer uitgeschakeld",
   "RoomWatermarkSet": "Watermerk voor bestanden in de kamer ingeschakeld ",

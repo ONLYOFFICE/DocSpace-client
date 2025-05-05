@@ -79,7 +79,6 @@
   "RoomRemoveUser": "Usuário removido.",
   "RoomRenamed": "Sala <1>«{{oldRoomTitle}}»</1> renomeada para <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Veja os detalhes dos quartos aqui",
-  "RoomUnarchived": "Sala recuperada do arquivo",
   "RoomUpdateAccess": "foi assinado",
   "RoomWatermarkDisabled": "Marca d'água para arquivos na sala desativada",
   "RoomWatermarkSet": "Marca d'água para arquivos na sala ativada",

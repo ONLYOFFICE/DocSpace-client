@@ -79,7 +79,6 @@
   "RoomRemoveUser": "Потребителят е премахнат.",
   "RoomRenamed": "Стаята <1>«{{oldRoomTitle}}»</1> е преименувана на <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Вижте подробности за стаите тук",
-  "RoomUnarchived": "Възстановена от Архива стая",
   "RoomUpdateAccess": "бе назначен",
   "RoomWatermarkDisabled": "Водният знак за файлове в стаята е деактивиран",
   "RoomWatermarkSet": "Водният знак за файлове в стаята е активиран",

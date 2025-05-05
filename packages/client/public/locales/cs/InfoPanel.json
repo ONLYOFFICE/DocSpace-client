@@ -79,7 +79,6 @@
   "RoomRemoveUser": "Odstraněný uživatel.",
   "RoomRenamed": "Místnost <1>«{{oldRoomTitle}}»</1> přejmenována na <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Podrobnosti o místnostech najdete zde",
-  "RoomUnarchived": "Místnost obnovena z archivu",
   "RoomUpdateAccess": "byl přidělen",
   "RoomWatermarkDisabled": "Vodoznak pro soubory v místnosti vypnut",
   "RoomWatermarkSet": "Vodoznak pro soubory v místnosti povolen",

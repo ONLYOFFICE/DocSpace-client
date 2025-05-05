@@ -79,7 +79,6 @@
   "RoomRemoveUser": "Utilisateur supprimé.",
   "RoomRenamed": "Salle <1>«{{oldRoomTitle}}»</1> renommée en <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Voir les détails des salles ici",
-  "RoomUnarchived": "Salle récupérée des archives",
   "RoomUpdateAccess": "a été assigné",
   "RoomWatermarkDisabled": "Filigrane pour les fichiers dans la salle désactivé",
   "RoomWatermarkSet": "Filigrane pour les fichiers dans la salle activé",

@@ -79,7 +79,6 @@
   "RoomRemoveUser": "Ο χρήστης αφαιρέθηκε.",
   "RoomRenamed": "Το δωμάτιο <1>«{{oldRoomTitle}}»</1> μετονομάστηκε σε <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Δείτε λεπτομέρειες για τα δωμάτια εδώ",
-  "RoomUnarchived": "Έγινε ανάκτηση δωματίου από το Αρχείο",
   "RoomUpdateAccess": "έχει εκχωρηθεί",
   "RoomWatermarkDisabled": "Έγινε απενεργοποίηση υδατογραφήματος για τα αρχεία στο δωμάτιο",
   "RoomWatermarkSet": "Έγινε ενεργοποίηση υδατογραφήματος για αρχεία στο δωμάτιο ",

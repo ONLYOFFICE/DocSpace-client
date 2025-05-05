@@ -79,7 +79,6 @@
   "RoomRemoveUser": "Benutzer entfernt.",
   "RoomRenamed": "Raum <1>«{{oldRoomTitle}}»</1> umbenannt in <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Siehe Details von Räumen hier",
-  "RoomUnarchived": "Aus dem Archiv geborgener Raum",
   "RoomUpdateAccess": "wurde zugewiesen",
   "RoomWatermarkDisabled": "Wasserzeichen für Dateien im Raum deaktiviert",
   "RoomWatermarkSet": "Wasserzeichen für Dateien im Raum aktiviert",

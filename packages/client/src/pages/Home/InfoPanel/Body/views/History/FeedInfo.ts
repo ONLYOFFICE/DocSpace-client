@@ -295,7 +295,7 @@ export const feedInfo = [
     actionType: `${FeedAction.Archived}`,
   },
   {
-    key: "RoomUnarchived",
+    key: "RoomFromArchiveRestore",
     targetType: `${FeedTarget.Room}`,
     actionType: `${FeedAction.Unarchived}`,
   },

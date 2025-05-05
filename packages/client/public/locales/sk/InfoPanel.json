@@ -79,7 +79,6 @@
   "RoomRemoveUser": "Ikonka zmenená",
   "RoomRenamed": "Miestnosť <1>«{{oldRoomTitle}}»</1> premenovaná na <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Podrobnosti o miestnosti nájdete tu",
-  "RoomUnarchived": "Miestnosť bola obnovená z archívu",
   "RoomUpdateAccess": "bola pridelená rola",
   "RoomWatermarkDisabled": "Vodoznak pre súbory v miestnosti je vypnutý",
   "RoomWatermarkSet": "Vodoznak pre súbory v miestnosti je povolený",

@@ -79,7 +79,6 @@
   "RoomRemoveUser": "Đã xoá người dùng.",
   "RoomRenamed": "Phòng <1>«{{oldRoomTitle}}»</1> được đổi tên thành <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Xem chi tiết phòng tại đây",
-  "RoomUnarchived": "Đã khôi phục phòng từ Lưu trữ",
   "RoomUpdateAccess": "đã được chỉ định vai trò",
   "RoomWatermarkDisabled": "Watermark cho các tập tin trong phòng đã bị vô hiệu hóa",
   "RoomWatermarkSet": "Watermark cho các tập tin trong phòng đã được bật",

@@ -79,7 +79,6 @@
   "RoomRemoveUser": "Піктограму змінено",
   "RoomRenamed": "Кімнату <1>«{{oldRoomTitle}}»</1> перейменовано в <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Див. інформацію про кімнати тут",
-  "RoomUnarchived": "Кімната відновлена з Архіву",
   "RoomUpdateAccess": "призначено роль",
   "RoomWatermarkDisabled": "Водяний знак для файлів у кімнаті вимкнено",
   "RoomWatermarkSet": "Водяний знак для файлів у кімнаті ввімкнено",

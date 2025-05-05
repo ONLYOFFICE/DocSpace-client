@@ -294,6 +294,18 @@ export default class MessageStore {
             (e as Error).message.includes("aborted")
           ) {
             console.log("Request was canceled");
+            const userMsg = this.messages[this.messages.length - 2];
+            const msg = this.messages[this.messages.length - 1];
+
+            if (this.sessions.get(this.currentSession)) {
+              this.sessions.get(this.currentSession)!.push(userMsg, msg);
+            } else {
+              this.sessions.set(this.currentSession, [userMsg, msg]);
+              this.sortedSessions = [
+                [this.currentSession, new Date(msg.timestamp)],
+                ...this.sortedSessions,
+              ];
+            }
             this.isRequestRunning = false;
             this.abortController = null;
           }
@@ -334,11 +346,11 @@ export default class MessageStore {
 
     this.currentSession = session;
     this.messages = this.sessions.get(session) || [];
-
-    console.log(this.messages);
   };
 
   startNewSessions = () => {
+    if (this.isRequestRunning) return;
+
     this.currentSession = getSessionId(this.aiSelectedFolder, this.aiUserId);
     this.messages = [];
   };

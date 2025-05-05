@@ -88,6 +88,7 @@ const ChatMessageBody = ({
             })}
           >
             {messages.map((message) => {
+              if (!message) return;
               if (message.message === "") return null;
 
               return (

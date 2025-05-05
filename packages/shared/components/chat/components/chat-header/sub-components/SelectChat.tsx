@@ -24,11 +24,14 @@ const SelectChat = ({ isFullScreen, currentDeviceType }: SelectChatProps) => {
     isSelectSessionOpen,
     setIsSelectSessionOpen,
     preparedMessages,
+    isRequestRunning,
   } = useMessageStore();
 
   const { t } = useTranslation(["Common"]);
 
   const toggleOpen = () => {
+    if (isRequestRunning) return;
+
     if (isFullScreen && currentDeviceType === "desktop") {
       setIsSelectSessionOpen(!isSelectSessionOpen);
 
@@ -39,6 +42,8 @@ const SelectChat = ({ isFullScreen, currentDeviceType }: SelectChatProps) => {
   };
 
   const onSelectAction = (session: string) => {
+    if (isRequestRunning) return;
+
     selectSession(session);
     setIsOpen(false);
   };
@@ -60,6 +65,7 @@ const SelectChat = ({ isFullScreen, currentDeviceType }: SelectChatProps) => {
           forwardedRef={parentRef}
           maxHeight={300}
           manualWidth="280px"
+          isNoFixedHeightOptions
         >
           {preparedMessages.map(({ title, value, isActive, isDate }) => {
             const currentTitle =

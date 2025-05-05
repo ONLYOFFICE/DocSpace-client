@@ -25,7 +25,6 @@
   "FileMoved": "Датотеке су померене.",
   "FileMovedCount": "Датотеке су премештене ({{count}}).",
   "FileMovedTo": "Датотека премештена у «{{folderTitle}}»",
-  "FileMovedToTrashCount": "Datoteke su premeštene u Otpad ({{count}}).",
   "FileRenamed": "Датотека је преименована.",
   "FilesEmptyScreenText": "Види детаље датотеке и фолдера овде",
   "FileUploaded": "Датотеке су додате.",

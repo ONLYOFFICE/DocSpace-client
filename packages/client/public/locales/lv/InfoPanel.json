@@ -25,7 +25,6 @@
   "FileMoved": "Faili ir pārvietoti.",
   "FileMovedCount": "Faili pārvietoti ({{count}}).",
   "FileMovedTo": "Fails ir pārvietots uz «{{folderTitle}}»",
-  "FileMovedToTrashCount": "Faili pārvietoti uz Atkritni ({{count}}).",
   "FileRenamed": "Fails ir pārdēvēts.",
   "FilesEmptyScreenText": "Detalizētu informāciju par failu un mapi skatiet šeit",
   "FileUploaded": "Pievienoti faili.",

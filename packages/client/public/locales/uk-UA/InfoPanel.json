@@ -25,7 +25,6 @@
   "FileMoved": "Файли переміщено.",
   "FileMovedCount": "Файли переміщено ({{count}}).",
   "FileMovedTo": "Файл переміщено до папки «{{folderTitle}}»",
-  "FileMovedToTrashCount": "Файли переміщено до Кошика ({{count}}).",
   "FileRenamed": "Файл перейменовано.",
   "FilesEmptyScreenText": "Подробиці про файли та папки дивіться тут",
   "FileUploaded": "Файли додано.",

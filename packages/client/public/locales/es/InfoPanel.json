@@ -25,7 +25,6 @@
   "FileMoved": "Archivos movidos.",
   "FileMovedCount": "Archivos movidos ({{count}}).",
   "FileMovedTo": "Archivo movido a «{{folderTitle}}»",
-  "FileMovedToTrashCount": "Archivos movidos a la papelera ({{count}}).",
   "FileRenamed": "Archivo renombrado.",
   "FilesEmptyScreenText": "Vea los detalles de archivos y carpetas aquí",
   "FileUploaded": "Archivos añadidos.",

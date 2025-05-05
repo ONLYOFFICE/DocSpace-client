@@ -13,7 +13,6 @@
   "FileDeletedCount": "Datoteke odstranjene ({{count}}).",
   "FileExtension": "ගොනුවේ දිගුව",
   "FileMovedCount": "Datoteke premaknjene ({{count}}).",
-  "FileMovedToTrashCount": "Datoteke premaknjene v Koš ({{count}}).",
   "FilesEmptyScreenText": "ගොනු සහ බහාලුම්වල විස්තර මෙතැන බලන්න",
   "FileUploadedCount": "Datoteke dodane ({{count}}).",
   "FileVersionRemoved": "Izbrisana verzija datoteke: V.{{version}}.",

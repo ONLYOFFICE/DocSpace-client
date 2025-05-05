@@ -131,8 +131,11 @@ const GuestReleaseTip = ({
               <Trans
                 t={t}
                 ns="Translations"
-                i18nKey="GuestReleaseTipDescripton"
-                values={{ productName: t("Common:ProductName") }}
+                i18nKey="GuestConversionNote"
+                values={{
+                  productName: t("Common:ProductName"),
+                  sectionName: t("Common:Contacts"),
+                }}
               />
             </Text>
             {accessRightsLink ? (

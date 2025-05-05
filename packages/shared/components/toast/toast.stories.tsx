@@ -142,38 +142,42 @@ const ToastTemplate = ({
 };
 
 export const Success: Story = {
-  render: (args) => <ToastTemplate {...args} type={ToastType.success} />,
+  render: (args) => <ToastTemplate {...args} />,
   args: {
     data: "Operation completed successfully",
     title: "Success",
     timeout: 5000,
+    type: ToastType.success,
   },
 };
 
 export const Error: Story = {
-  render: (args) => <ToastTemplate {...args} type={ToastType.error} />,
+  render: (args) => <ToastTemplate {...args} />,
   args: {
     data: "An error occurred while processing your request",
     title: "Error",
     timeout: 5000,
+    type: ToastType.error,
   },
 };
 
 export const Warning: Story = {
-  render: (args) => <ToastTemplate {...args} type={ToastType.warning} />,
+  render: (args) => <ToastTemplate {...args} />,
   args: {
     data: "Please review the changes before proceeding",
     title: "Warning",
     timeout: 5000,
+    type: ToastType.warning,
   },
 };
 
 export const Info: Story = {
-  render: (args) => <ToastTemplate {...args} type={ToastType.info} />,
+  render: (args) => <ToastTemplate {...args} />,
   args: {
     data: "New updates are available",
     title: "Information",
     timeout: 5000,
+    type: ToastType.info,
   },
 };
 

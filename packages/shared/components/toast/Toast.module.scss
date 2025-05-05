@@ -1,6 +1,7 @@
 @import "../../styles/variables/index.scss";
 @import "../../styles/variables/_colors.scss";
 @import "../../styles/_mixins.scss";
+@import "../../styles/common-icons-style.scss";
 
 .iconButton {
   opacity: 0.5;
@@ -306,4 +307,8 @@
       }
     }
   }
+}
+
+.toastrIcon {
+  @include common-icons-style;
 }

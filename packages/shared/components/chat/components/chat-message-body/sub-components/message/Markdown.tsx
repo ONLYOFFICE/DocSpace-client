@@ -73,7 +73,7 @@ const MarkdownField = ({ chatMessage }: MarkdownFieldProps) => {
           code: ({ className, children, ...props }) => {
             let content = children as string;
 
-            const inline = content.indexOf("\n") === -1;
+            const inline = content ? content.indexOf("\n") === -1 : false;
 
             if (
               Array.isArray(children) &&

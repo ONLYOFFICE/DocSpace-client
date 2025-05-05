@@ -334,6 +334,8 @@ export default class MessageStore {
 
     this.currentSession = session;
     this.messages = this.sessions.get(session) || [];
+
+    console.log(this.messages);
   };
 
   startNewSessions = () => {

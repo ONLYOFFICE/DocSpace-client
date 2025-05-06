@@ -32,7 +32,6 @@ import { ThemeContext } from "styled-components";
 import { ColorThemeProps } from "./ColorTheme.types";
 import { ThemeId } from "./ColorTheme.enums";
 
-import IconButtonTheme from "./styled-components/iconButton";
 import IconButtonMuteTheme from "./styled-components/iconButtonMute";
 import IconButtonPinTheme from "./styled-components/iconButtonPin";
 import IconButtonCustomFilterTheme from "./styled-components/iconButtonCustomFilter";
@@ -45,7 +44,6 @@ import LoadingButton from "./styled-components/loadingButton";
 import ProgressColorTheme from "./styled-components/progress";
 import VersionBadgeTheme from "./styled-components/versionBadge";
 import SubmenuTextTheme from "./styled-components/submenuText";
-import StyledIndexWrapper from "./sub-components/StyledIndexWrapper";
 
 const ColorTheme = forwardRef<
   HTMLDivElement,
@@ -57,26 +55,6 @@ const ColorTheme = forwardRef<
 
   const getElement = () => {
     switch (themeId) {
-      case ThemeId.IndexIconButton: {
-        const onClickAction = (e: React.MouseEvent<Element>) => {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-expect-error
-          if ("onClick" in props) props.onClick?.(e);
-        };
-
-        return (
-          <StyledIndexWrapper
-            $currentColorScheme={currentColorScheme}
-            onClick={onClickAction}
-          >
-            <IconButtonTheme
-              {...props}
-              $currentColorScheme={currentColorScheme}
-            />
-          </StyledIndexWrapper>
-        );
-      }
-
       case ThemeId.IconButtonMute: {
         return (
           <IconButtonMuteTheme

@@ -78,6 +78,9 @@ const IconButton = ({
   onMouseUp,
   onClick,
 
+  // For test
+  dataTestId,
+
   ...rest
 }: IconButtonProps) => {
   const buttonRef = React.useRef<HTMLDivElement>(null);
@@ -232,7 +235,7 @@ const IconButton = ({
       data-for={id}
       id={id}
       style={buttonStyle}
-      data-testid="icon-button"
+      data-testid={dataTestId || "icon-button"}
       data-iconname={currentIcon.name}
       data-size={size}
       {...rest}

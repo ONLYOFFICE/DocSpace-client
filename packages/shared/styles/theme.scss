@@ -2077,3 +2077,13 @@
 .dark {
   --modal-dialog-border-color: #{$gray-dark-strong};
 }
+
+.light {
+  --index-bg-button-hover: #{$light-blue-hover};
+  --index-arrow-button-hover: #{$light-blue-main};
+}
+
+.dark {
+  --index-bg-button-hover: #{$dark-grey-hover};
+  --index-arrow-button-hover: #{$white};
+}

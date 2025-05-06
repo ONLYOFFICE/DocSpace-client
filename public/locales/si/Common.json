@@ -535,7 +535,7 @@
   "ContentCreator": "අන්තර්ගත නිර්මාතෘ",
   "CopyAndKeepAll": "පිටපත් කර සියල්ල තබා ගන්න",
   "CopyAndKeepBothFolders": "ෆෝල්ඩර දෙකම පිටපත් කර තබා ගන්න",
-  "CopyItem": "{{title}}</2> <1>{{folderName}}</1> වෙත සාර්ථකව පිටපත් කරන ලදී",
+  "CopyItem": "<2>{{title}}</2> <1>{{folderName}}</1> වෙත සාර්ථකව පිටපත් කරන ලදී",
   "CopyLink": "ලින්ක් එක පිටපත් කරන්න",
   "CopyPublicLink": "පොදු සබැඳියක් පිටපත් කරන්න",
   "CreatedBy": "නිර්මාණය කළේ",

@@ -31,8 +31,9 @@ import { InputSize } from "../../text-input";
 
 import { SearchContext, SearchDispatchContext } from "../contexts/Search";
 import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
+import { SearchProps } from "../Selector.types";
 
-const Search = React.memo(({ isSearch }: { isSearch: boolean }) => {
+const Search = React.memo(({ isSearch }: SearchProps) => {
   const {
     searchPlaceholder,
     searchValue,

@@ -297,7 +297,6 @@ const config = {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: "static/styles/[name].[contenthash].css",
-      chunkFilename: "static/styles/[id].[contenthash].css",
       ignoreOrder: true,
     }),
     new ExternalTemplateRemotesPlugin(),
@@ -378,6 +377,20 @@ module.exports = (env, argv) => {
       ],
     };
   }
+
+  // Extract css processed by MiniCssExtractPlugin in a single file
+  config.optimization = {
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: "styles",
+          type: "css/mini-extract",
+          chunks: "all",
+          enforce: true,
+        },
+      },
+    },
+  };
 
   config.plugins.push(
     new ModuleFederationPlugin({

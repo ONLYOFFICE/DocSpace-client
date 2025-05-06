@@ -26,7 +26,7 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-
+import { useTranslation } from "react-i18next";
 import { AboutContent as AboutContentComponent } from "@docspace/shared/components/about-dialog/About.content";
 
 const AboutContent = (props) => {
@@ -38,7 +38,14 @@ const AboutContent = (props) => {
     licenseAgreementsUrl,
     isEnterprise,
     logoText,
+    isBrandingAvailable,
   } = props;
+
+  const { t } = useTranslation("Common");
+
+  const logoName = isBrandingAvailable
+    ? logoText
+    : t("Common:OrganizationName");
 
   return (
     <AboutContentComponent
@@ -48,7 +55,7 @@ const AboutContent = (props) => {
       standalone={standalone}
       licenseAgreementsUrl={licenseAgreementsUrl}
       isEnterprise={isEnterprise}
-      logoText={logoText}
+      logoText={logoName}
     />
   );
 };

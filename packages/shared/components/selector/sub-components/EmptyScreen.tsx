@@ -39,7 +39,6 @@ import { IconButton } from "../../icon-button";
 import { Link, LinkType } from "../../link";
 
 import { StyledEmptyScreen } from "../Selector.styled";
-import { EmptyScreenProps } from "../Selector.types";
 
 import useCreateDropDown from "../hooks/useCreateDropDown";
 import { EmptyScreenContext } from "../contexts/EmptyScreen";
@@ -47,6 +46,7 @@ import { EmptyScreenContext } from "../contexts/EmptyScreen";
 import NewItemDropDown from "./NewItemDropDown";
 import { SearchContext, SearchDispatchContext } from "../contexts/Search";
 import EmptyScreenFormRoom from "./EmptySreen/EmptyScreenFormRoom";
+import { EmptyScreenProps } from "../Selector.types";
 
 const linkStyles = {
   isHovered: true,

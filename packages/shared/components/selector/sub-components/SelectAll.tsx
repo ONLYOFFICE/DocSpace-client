@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { ReactNode, useContext } from "react";
+import React, { useContext } from "react";
 
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
 import { Text } from "../../text";
@@ -32,17 +32,10 @@ import { Checkbox } from "../../checkbox";
 
 import { StyledSelectAll } from "../Selector.styled";
 import { SelectAllContext } from "../contexts/SelectAll";
+import { SelectAllProps } from "../Selector.types";
 
 const SelectAll = React.memo(
-  ({
-    show,
-    isLoading,
-    rowLoader,
-  }: {
-    show: boolean;
-    isLoading: boolean;
-    rowLoader: ReactNode;
-  }) => {
+  ({ show, isLoading, rowLoader }: SelectAllProps) => {
     const {
       selectAllIcon,
       selectAllLabel,

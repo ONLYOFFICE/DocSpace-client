@@ -61,6 +61,7 @@ import { IconSizeType, isDesktop, isTablet, size } from "../../utils";
 
 import styles from "./Badges.module.scss";
 import type { BadgesProps, BadgeWrapperProps } from "./Badges.type";
+import { IconButton } from "../icon-button";
 
 const BadgeWrapper = ({
   onClick,
@@ -264,14 +265,12 @@ const Badges = ({
       )}
     >
       {/* {startFilling && (
-        <ColorTheme
-          isEditing
+        <IconButton
           size={sizeBadge}
           iconName={iconForm}
           onClick={onFilesClick}
-          themeId={ThemeId.IconButton}
           title={t("Common:ReadyToFillOut")}
-          hoverColor={theme.filesBadges.hoverIconColor}
+          hoverColor={accent}
           className="badge icons-group is-editing tablet-badge tablet-edit"
         />
       )} */}
@@ -313,16 +312,15 @@ const Badges = ({
       ) : null}
 
       {isEditing && !(isRecentTab && !canEditing) ? (
-        <ColorTheme
-          themeId={ThemeId.IconButton}
-          isEditing={isEditing}
+        <IconButton
           iconNode={iconEdit}
           className={classNames(
             styles.iconBadge,
             "badge icons-group is-editing tablet-badge tablet-edit",
           )}
           onClick={onFilesClick}
-          hoverColor={theme.filesBadges.hoverIconColor}
+          color="accent"
+          hoverColor="accent"
           title={t("Common:EditButton")}
         />
       ) : null}
@@ -332,15 +330,14 @@ const Badges = ({
       security?.Convert &&
       !isTrashFolder &&
       !isArchiveFolderRoot ? (
-        <ColorTheme
-          themeId={ThemeId.IconButton}
+        <IconButton
           onClick={setConvertDialogVisible}
           iconName={iconRefresh}
           className={classNames(
             styles.iconBadge,
             "badge tablet-badge icons-group can-convert",
           )}
-          hoverColor={theme.filesBadges.hoverIconColor}
+          hoverColor="accent"
         />
       ) : null}
       {versionGroup && versionGroup > 1 ? (
@@ -414,8 +411,7 @@ const Badges = ({
       })}
     >
       {showCopyLinkIcon ? (
-        <ColorTheme
-          themeId={ThemeId.IconButton}
+        <IconButton
           iconName={LinkReactSvgUrl}
           className={classNames(
             styles.iconBadge,
@@ -423,12 +419,12 @@ const Badges = ({
           )}
           onClick={onCopyPrimaryLink}
           title={t("Common:CopySharedLink")}
+          hoverColor="accent"
         />
       ) : null}
 
       {showCopyLinkIcon ? (
-        <ColorTheme
-          themeId={ThemeId.IconButton}
+        <IconButton
           iconName={TabletLinkReactSvgUrl}
           className={classNames(
             styles.iconBadge,
@@ -436,6 +432,7 @@ const Badges = ({
           )}
           onClick={onCopyPrimaryLink}
           title={t("Common:CopySharedLink")}
+          hoverColor="accent"
         />
       ) : null}
 
@@ -464,8 +461,7 @@ const Badges = ({
         />
       ) : null}
       {isTemplatesFolder && isTile ? (
-        <ColorTheme
-          themeId={ThemeId.IconButton}
+        <IconButton
           iconName={CreateRoomReactSvgUrl}
           className={classNames(
             styles.iconBadge,
@@ -474,6 +470,7 @@ const Badges = ({
           size={IconSizeType.medium}
           onClick={onCreateRoom}
           title={t("Common:CreateRoom")}
+          hoverColor="accent"
         />
       ) : null}
       {showNew && !isTile && isRoom ? newFilesBadge : null}

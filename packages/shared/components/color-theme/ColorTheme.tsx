@@ -57,14 +57,6 @@ const ColorTheme = forwardRef<
 
   const getElement = () => {
     switch (themeId) {
-      case ThemeId.IconButton: {
-        return (
-          <IconButtonTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-          />
-        );
-      }
       case ThemeId.IndexIconButton: {
         const onClickAction = (e: React.MouseEvent<Element>) => {
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment

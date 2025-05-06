@@ -29,10 +29,19 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
+
+import { isIconSizeType } from "../../utils";
+
 import styles from "./IconButton.module.scss";
 import { IconButtonProps } from "./IconButton.types";
 
 const isTouchDevice = () => "ontouchstart" in document.documentElement;
+
+const getColor = (color: IconButtonProps["color"]): string => {
+  if (!color) return "";
+
+  return color === "accent" ? "var(--color-scheme-main-accent)" : color;
+};
 
 const IconButton = ({
   // Icon props
@@ -85,20 +94,6 @@ const IconButton = ({
       color: color || "",
     });
   }, [iconName, color]);
-
-  // Update CSS variables when color or size changes
-  useEffect(() => {
-    if (!buttonRef.current) return;
-
-    buttonRef.current.style.setProperty(
-      "--icon-button-color",
-      currentIcon.color ?? "",
-    );
-    buttonRef.current.style.setProperty(
-      "--icon-button-hover-color",
-      currentIcon.color ?? "",
-    );
-  }, [currentIcon.color, size]);
 
   // Helper function to update icon state
   const updateIconState = useCallback(
@@ -209,6 +204,7 @@ const IconButton = ({
       [styles.notClickable]: !onClick && !isClickable,
       [styles.fill]: isFill && !isStroke,
       [styles.stroke]: isStroke,
+      [styles.commonIconsStyle]: isIconSizeType(size),
     },
     className,
     "icon-button_svg",
@@ -216,6 +212,8 @@ const IconButton = ({
 
   const buttonStyle = {
     "--icon-button-size": typeof size === "number" ? `${size}px` : size,
+    "--icon-button-color": getColor(currentIcon.color),
+    "--icon-button-hover-color": getColor(currentIcon.color),
     ...style,
   } as React.CSSProperties;
 
@@ -236,6 +234,7 @@ const IconButton = ({
       style={buttonStyle}
       data-testid="icon-button"
       data-iconname={currentIcon.name}
+      data-size={size}
       {...rest}
     >
       {iconNode ? (

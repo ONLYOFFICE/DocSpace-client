@@ -43,7 +43,7 @@ import { classNames, IconSizeType, isTablet } from "../../utils";
 import { DeviceType, RoomsType, ShareAccessRights } from "../../enums";
 import { Tooltip } from "../tooltip";
 import { Text } from "../text";
-import { ColorTheme, ThemeId } from "../color-theme";
+import { IconButton } from "../icon-button";
 
 import type { QuickButtonsProps } from "./QuickButtons.types";
 
@@ -65,7 +65,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     currentDeviceType,
     showLifetimeIcon,
     expiredDate,
-    currentColorScheme,
     roomLifetime,
     onCreateRoom,
     isTemplatesFolder,
@@ -95,9 +94,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     ? theme.filesQuickButtons.sharedColor
     : theme.filesQuickButtons.color;
 
-  const colorShare = shared
-    ? currentColorScheme?.main?.accent
-    : theme.filesQuickButtons.color;
+  const colorShare = shared ? "accent" : theme.filesQuickButtons.color;
 
   const tabletViewQuickButton = isTablet() || isTabletDevice;
 
@@ -153,8 +150,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
         <>
           {showLifetimeIcon ? (
             <>
-              <ColorTheme
-                themeId={ThemeId.IconButton}
+              <IconButton
                 iconName={LifetimeReactSvgUrl}
                 className="badge file-lifetime icons-group"
                 size={sizeQuickButton}
@@ -173,8 +169,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
           ) : null}
 
           {isAvailableLockFile ? (
-            <ColorTheme
-              themeId={ThemeId.IconButton}
+            <IconButton
               iconNode={<IconLock />}
               className="badge lock-file icons-group"
               size={sizeQuickButton}
@@ -183,52 +178,48 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               onClick={onClickLock}
               color={colorLock}
               isDisabled={isDisabled}
-              hoverColor={theme.filesQuickButtons.sharedColor}
+              hoverColor="accent"
               title={t("Common:UnblockVersion")}
             />
           ) : null}
           {isAvailableDownloadFile ? (
-            <ColorTheme
-              themeId={ThemeId.IconButton}
+            <IconButton
               iconNode={<FileActionsDownloadReactSvg />}
               className="badge download-file icons-group"
               size={sizeQuickButton}
               onClick={onClickDownload}
               color={colorLock}
               isDisabled={isDisabled}
-              hoverColor={theme.filesQuickButtons.sharedColor}
+              hoverColor="accent"
               title={t("Common:Download")}
             />
           ) : null}
           {isTemplatesFolder ? (
-            <ColorTheme
-              themeId={ThemeId.IconButton}
+            <IconButton
               iconName={CreateRoomReactSvgUrl}
               className="badge create-room icons-group"
               size={IconSizeType.medium}
               onClick={onCreateRoom}
               color={colorLock}
               isDisabled={isDisabled}
-              hoverColor={theme.filesQuickButtons.sharedColor}
+              hoverColor="accent"
               title={t("Common:CreateRoom")}
             />
           ) : null}
           {showCopyLinkIcon ? (
-            <ColorTheme
-              themeId={ThemeId.IconButton}
+            <IconButton
               iconName={LinkReactSvgUrl}
               className="badge copy-link icons-group"
               size={sizeQuickButton}
               onClick={onCopyPrimaryLink}
               color={colorLock}
               isDisabled={isDisabled}
-              hoverColor={theme.filesQuickButtons.sharedColor}
+              hoverColor="accent"
               title={t("Common:CopySharedLink")}
             />
           ) : null}
           {isAvailableShareFile ? (
-            <ColorTheme
-              themeId={ThemeId.IconButton}
+            <IconButton
               iconName={LinkReactSvgUrl}
               className={classNames("badge copy-link icons-group", {
                 "create-share-link": !item.shared,
@@ -237,13 +228,12 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               onClick={onClickShare}
               color={colorShare}
               isDisabled={isDisabled}
-              hoverColor={theme.filesQuickButtons.sharedColor}
+              hoverColor="accent"
               title={t("Common:CopySharedLink")}
             />
           ) : null}
           {/* {fileExst && !isTrashFolder && displayBadges && (
-        <ColorTheme
-          themeId={ThemeId.IconButton}
+        <IconButton
           iconName={iconLock}
           className="badge lock-file icons-group"
           size={sizeQuickButton}
@@ -252,7 +242,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
           onClick={onClickLock}
           color={colorLock}
           isDisabled={isDisabled}
-          hoverColor={theme.filesQuickButtons.sharedColor}
+          hoverColor="accent"
           title={t("Common:UnblockVersion")}
         />
       )}

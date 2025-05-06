@@ -46,6 +46,7 @@ export const portalTimeZonesSuccess = {
       id: "America/Juneau",
       displayName: "(UTC-09:00) Alaska Time (Juneau)",
     },
+    { id: "UTC", displayName: "(UTC) Coordinated Universal Time" },
   ],
   count: 10,
   links: [

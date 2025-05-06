@@ -47,6 +47,7 @@ type WalletProps = {
   isPayer: boolean;
   cardLinkedOnFreeTariff: boolean;
   isFreeTariff: boolean;
+  isNonProfit: boolean;
 };
 
 const typeClassMap: Record<string, string> = {
@@ -66,6 +67,7 @@ const Wallet = (props: WalletProps) => {
     isPayer,
     cardLinkedOnFreeTariff,
     isFreeTariff,
+    isNonProfit,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
@@ -100,7 +102,9 @@ const Wallet = (props: WalletProps) => {
       <Text className="wallet-description">
         {t("WalletDescription", { productName: t("Common:ProductName") })}
       </Text>
-      {cardLinkedOnFreeTariff || !isFreeTariff ? <PayerInformation /> : null}
+      {!isNonProfit && (cardLinkedOnFreeTariff || !isFreeTariff) ? (
+        <PayerInformation />
+      ) : null}
 
       <div className="balance-wrapper">
         <div className="header-container">
@@ -154,7 +158,7 @@ export default inject(
       walletCodeCurrency,
       isPayer,
     } = paymentStore;
-    const { isFreeTariff } = currentQuotaStore;
+    const { isFreeTariff, isNonProfit } = currentQuotaStore;
 
     return {
       walletBalance,
@@ -164,6 +168,7 @@ export default inject(
       isPayer,
       cardLinkedOnFreeTariff,
       isFreeTariff,
+      isNonProfit,
     };
   },
 )(observer(Wallet));

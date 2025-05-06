@@ -244,19 +244,16 @@ export default inject(
     const {
       accountLink,
       isStripePortalAvailable,
-      walletCustomerEmail,
       payerInfo: walletPayer,
+      payer,
     } = paymentStore;
     const { theme } = settingsStore;
     const {
-      customerId,
       isGracePeriod,
       isNotPaidPeriod,
       payerInfo: paymentPayer,
     } = currentTariffStatusStore;
     const { user } = userStore;
-
-    const email = customerId || walletCustomerEmail;
 
     const payerInfo = paymentPayer ?? walletPayer;
 
@@ -267,7 +264,7 @@ export default inject(
       accountLink,
       isGracePeriod,
       isNotPaidPeriod,
-      email,
+      email: payer,
       payerInfo,
     };
   },

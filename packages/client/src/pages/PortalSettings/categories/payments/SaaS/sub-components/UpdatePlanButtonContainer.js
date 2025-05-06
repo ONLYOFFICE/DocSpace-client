@@ -24,14 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
-import { Button } from "@docspace/shared/components/button";
+import { Trans } from "react-i18next";
 import styled from "styled-components";
+
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import api from "@docspace/shared/api";
-
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
 import { updatePayment } from "@docspace/shared/api/portal";
+import { Text } from "@docspace/shared/components/text";
+
 import DowngradePlanButtonContainer from "./DowngradePlanButtonContainer";
 
 const StyledBody = styled.div`
@@ -39,6 +46,13 @@ const StyledBody = styled.div`
     width: 100%;
   }
 `;
+const StyledModalBody = styled.div`
+  .text-warning {
+    margin: 16px 0 8px 0;
+    color: ${(props) => props.theme.client.settings.backup.warningColor};
+  }
+`;
+
 const MANAGER = "manager";
 let timerId = null;
 let intervalId = null;
@@ -60,7 +74,12 @@ const UpdatePlanButtonContainer = ({
   canPayTariff,
   isYearTariff,
   cardLinkedOnFreeTariff,
+  tariffPlanTitle,
+  totalPrice,
+  currencySymbol,
 }) => {
+  const [isVisible, setIsVisible] = useState(false);
+
   const resetIntervalSuccess = () => {
     intervalId &&
       toastr.success(
@@ -113,12 +132,17 @@ const UpdatePlanButtonContainer = ({
       isWaitRequest = false;
     }, 2000);
   };
+  const onClose = () => {
+    setIsVisible(false);
+  };
 
   const onUpdateTariff = async () => {
     try {
       timerId = setTimeout(() => {
         setIsLoading(true);
       }, 500);
+
+      if (isVisible) onClose();
 
       const res = await updatePayment(managersCount, isYearTariff);
 
@@ -196,7 +220,7 @@ const UpdatePlanButtonContainer = ({
           size="medium"
           primary
           isDisabled={isLoading || isDisabled}
-          onClick={onUpdateTariff}
+          onClick={() => setIsVisible(true)}
           isLoading={isLoading}
         />
       );
@@ -227,19 +251,90 @@ const UpdatePlanButtonContainer = ({
       {isAlreadyPaid || cardLinkedOnFreeTariff
         ? updatingCurrentTariffButton()
         : payTariffButton()}
+
+      {isVisible ? (
+        <ModalDialog
+          visible={isVisible}
+          onClose={onClose}
+          displayType={ModalDialogType.modal}
+        >
+          <ModalDialog.Header>{t("PlanUpgrade")}</ModalDialog.Header>
+          <ModalDialog.Body>
+            <StyledModalBody>
+              <Text>
+                <Trans
+                  i18nKey="SwitchPlan"
+                  ns="Payments"
+                  t={t}
+                  values={{ planName: tariffPlanTitle }}
+                  components={{
+                    1: <span style={{ fontWeight: 600 }} />,
+                  }}
+                />
+              </Text>
+              <Text>
+                <Trans
+                  i18nKey="ChargeAmount"
+                  ns="Payments"
+                  t={t}
+                  values={{ currencySymbol, price: totalPrice }}
+                  components={{
+                    1: <span style={{ fontWeight: 600 }} />,
+                  }}
+                />
+              </Text>
+              <Text className="text-warning" isBold fontSize="16px">
+                {t("Common:Warning")}
+              </Text>
+              <Text>
+                <Trans
+                  i18nKey="PaymentNonRefundable"
+                  ns="Payments"
+                  t={t}
+                  components={{
+                    1: <span style={{ fontWeight: 600 }} />,
+                  }}
+                />
+              </Text>
+            </StyledModalBody>
+          </ModalDialog.Body>
+          <ModalDialog.Footer>
+            <Button
+              key="OkButton"
+              label={t("ConfirmPayment")}
+              size={ButtonSize.normal}
+              primary
+              scale
+              onClick={onUpdateTariff}
+            />
+            <Button
+              key="CancelButton"
+              label={t("Common:CancelButton")}
+              size={ButtonSize.normal}
+              scale
+              onClick={onClose}
+            />
+          </ModalDialog.Footer>
+        </ModalDialog>
+      ) : null}
     </StyledBody>
   );
 };
 
 export default inject(
-  ({ currentQuotaStore, paymentStore, currentTariffStatusStore }) => {
+  ({
+    currentQuotaStore,
+    paymentStore,
+    currentTariffStatusStore,
+    paymentQuotasStore,
+  }) => {
     const {
       maxCountManagersByQuota,
       setPortalQuotaValue,
       currentTariffPlanTitle,
       isYearTariff,
     } = currentQuotaStore;
-
+    const { tariffPlanTitle, planCost } = paymentQuotasStore;
     const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
 
     const {
@@ -253,6 +348,7 @@ export default inject(
       isAlreadyPaid,
       canPayTariff,
       cardLinkedOnFreeTariff,
+      totalPrice,
     } = paymentStore;
 
     return {
@@ -272,6 +368,9 @@ export default inject(
       currentTariffPlanTitle,
       isYearTariff,
       cardLinkedOnFreeTariff,
+      tariffPlanTitle,
+      currencySymbol: planCost.currencySymbol,
+      totalPrice,
     };
   },
 )(observer(UpdatePlanButtonContainer));

@@ -83,5 +83,11 @@
   "WebhooksGuide": "Tīmekļa aizķeru rokasgrāmata",
   "WebhooksInfo": "Izmantojiet tīmekļa aizķeres, lai veiktu pielāgotas darbības jebkurā izmantotajā lietojumprogrammā vai tīmekļa vietnē, pamatojoties uz dažādiem notikumiem {{organizationName}} {{productName}}.\nŠeit varat izveidot un pārvaldīt visus savus tīmekļa aizķeres, konfigurēt tās un pārlūkot katra tīmekļa aizķeres vēsturi, lai pārbaudītu to veiktspēju.",
   "DeliveryTime": "Piegādes laiks",
-  "EventTime": "Pasākuma laiks"
+  "EventTime": "Pasākuma laiks",
+  "EventToTriggerThisWebhook": "Notikums, kas aktivizēs šo tīmekļa āķi",
+  "EventType": "Pasākuma tips",
+  "IndividualEvents": "Individuāli pasākumi",
+  "SendEverything": "Sūtīt visu",
+  "WebhookDisabled": "Webhook atspējots",
+  "WebhookEnabled": "Webhook aktivizēts"
 }

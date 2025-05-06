@@ -81,5 +81,13 @@
   "WebhookRemoved": "Webhook تمت إزالة",
   "Webhooks": "ويب هوك",
   "WebhooksGuide": "دليل ويب هوك",
-  "WebhooksInfo": "استخدم ويب هوك لتنفيذ إجراءات مخصصة على جانب أي تطبيق أو موقع ويب تستخدمه بناءً على أحداث مختلفة في {{organizationName}} {{productName}}\nهنا، يمكنك إنشاء وإدارة جميع ويب هوك الخاصة بك وتكوينها وتصفح سجل كل ويب هوك لتعديل أدائها."
+  "WebhooksInfo": "استخدم ويب هوك لتنفيذ إجراءات مخصصة على جانب أي تطبيق أو موقع ويب تستخدمه بناءً على أحداث مختلفة في {{organizationName}} {{productName}}\nهنا، يمكنك إنشاء وإدارة جميع ويب هوك الخاصة بك وتكوينها وتصفح سجل كل ويب هوك لتعديل أدائها.",
+  "DeliveryTime": "وقت التسليم",
+  "EventTime": "وقت الحدث",
+  "EventToTriggerThisWebhook": "حدث لتشغيل هذا الـ webhook",
+  "EventType": "نوع الحدث",
+  "IndividualEvents": "فعاليات فردية",
+  "SendEverything": "أرسل كل شيء",
+  "WebhookDisabled": "تم تعطيل الـWebhook",
+  "WebhookEnabled": "تم تفعيل Webhook"
 }

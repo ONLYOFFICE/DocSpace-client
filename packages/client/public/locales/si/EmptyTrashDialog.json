@@ -1,4 +1,6 @@
 {
   "DeleteForeverButton": "සදහටම මකන්න",
-  "DeleteForeverTitle": "සදහටම මකන්නද?"
+  "DeleteForeverTitle": "සදහටම මකන්නද?",
+  "DeleteForeverNote": "{{sectionName}} කොටසින් සියලුම අයිතමයන් සදහටම මකා දමනු ලැබේ. ඒවා ප්‍රතිෂ්ඨාපනය කිරීමට ඔබට හැකියාවක් නොවනු ඇත.",
+  "SuccessEmptyAction": "{{sectionName}} කොටස හිස් කරılmıştır"
 }

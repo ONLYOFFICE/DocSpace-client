@@ -83,5 +83,11 @@
   "WebhooksGuide": "Hướng dẫn Webhook",
   "WebhooksInfo": "Sử dụng webhook để thực hiện các hành động tùy chỉnh ở bên cạnh bất kỳ ứng dụng hoặc trang web nào bạn đang sử dụng dựa trên các sự kiện khác nhau trong {{organizationName}} {{productName}}.\nTại đây, bạn có thể tạo và quản lý tất cả các webhook của mình, định cấu hình chúng và duyệt lịch sử của mọi webhook để kiểm tra hiệu suất của chúng.",
   "DeliveryTime": "Thời gian giao hàng",
-  "EventTime": "Thời gian sự kiện"
+  "EventTime": "Thời gian sự kiện",
+  "EventToTriggerThisWebhook": "Sự kiện kích hoạt webhook này",
+  "EventType": "Loại sự kiện",
+  "IndividualEvents": "Các sự kiện cá nhân",
+  "SendEverything": "Gửi tất cả mọi thứ",
+  "WebhookDisabled": "Webhook bị tắt",
+  "WebhookEnabled": "Webhook được bật"
 }

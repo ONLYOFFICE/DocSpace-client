@@ -35,5 +35,17 @@
   "UpgradePlan": "සැලසුම උත්ශ්‍රේණි කරන්න",
   "UserNotFound": "<1>{{email}}</1> පරිශ්‍රීලකයා හමු නොවිණි.",
   "UserNotFoundMatchingEmail": "අපට ස්ට්‍රයිප් වි-තැපෑලට ගැළපෙන පරිශ්‍රීලකයෙකු හමු නොවිණි.",
-  "YourPrice": "ඔබගේ මිල"
+  "YourPrice": "ඔබගේ මිල",
+  "BusinessRequestDescription": "වැඩි {{peopleNumber}} පරිපාලකයන් සිටින මිල සැලසුම් ඉල්ලීම මත පමණක් ලබාගත හැකිය.",
+  "CannotCreateNewRoom": "කාමරය නිර්මාණය කළ නොහැකි විය.",
+  "CannotCreatePaidUsers": "ගෙවුම් කළ පරිශීලකයින් එකතු කළ නොහැකි",
+  "CannotRestoreRoom": "කාමරය ප්‍රතිෂ්ඨාපනය කළ නොහැකි",
+  "NewRoomWillExceedLimit": "ඔබේ වත්මන් සැලැස්මේ ඇතුළත් කර ඇති කාමර සංඛ්‍යාව සඳහා සීමාව ළඟා වී ඇති නිසා මෙම කාමරය නිර්මාණය කිරීමේ හැකියාවක් නැත.",
+  "NewUsersWillExceedMembersLimit": "ඔබේ වත්මන් සැලැසේ ඇතුළත් කළ හැකි පරිපාලකයන්ගේ ප්‍රමාණය ඉක්මවා ඇති නිසා නව ගෙවුම් පරිශීලකයින් එකතු කිරීමේ හැකියාවක් නැත.",
+  "NotPossibleRoomRestoring": "මෙම කාමරය ප්‍රතිෂ්ඨාපනය කිරීම ඔබේ වත්මන් සැලැස්මේ ඇතුළත් කාමර සංඛ්‍යාව සඳහා ඇති සීමාව ඉක්මවා ඇති නිසා අpossibleවශය නොවේ.",
+  "NumberOfRoomsAccordingToTariff": "ඔබේ ගාමි සැලැස්මට අනුව කාමර සංඛ්‍යාව: {{currentValue}}/{{maxValue}}",
+  "NumberOfUsersAccordingToTariff": "ඔබේ මිල ගණන් සැලැස්මට අනුව පරිපාලකයින් සංඛ්‍යාව: {{currentValue}}/{{maxValue}}",
+  "RoomsQuotaAlmostExhausted": "කෙරෙහි කාමර ප්‍රමාණය ඉක්මවා ගොස් ඇත.",
+  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/වසරක්</3>",
+  "UsersQuotaAlmostExhausted": "අවලංගු ගෙවුම් පරිශීලකයින්ගේ ප්‍රමාණය ඉක්මවා යාමට ආසන්නය."
 }

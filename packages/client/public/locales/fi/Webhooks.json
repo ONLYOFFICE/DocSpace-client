@@ -81,5 +81,13 @@
   "WebhookRemoved": "Webhook poistettu",
   "Webhooks": "Webhookit",
   "WebhooksGuide": "Webhooks-opas",
-  "WebhooksInfo": "Webhookien avulla voit  suorittaa mukautettuja toimintoja millä tahansa sovelluksella tai verkkosivulla {{organizationName}} {{productName}}:n tapahtumien perusteella.\nTässä voit luoda ja hallita kaikkia webhookeja, määrittää ne ja selata kaikkien webhookien historiaa tarkastaaksesi niiden suoritusta."
+  "WebhooksInfo": "Webhookien avulla voit  suorittaa mukautettuja toimintoja millä tahansa sovelluksella tai verkkosivulla {{organizationName}} {{productName}}:n tapahtumien perusteella.\nTässä voit luoda ja hallita kaikkia webhookeja, määrittää ne ja selata kaikkien webhookien historiaa tarkastaaksesi niiden suoritusta.",
+  "DeliveryTime": "Toimitusaika",
+  "EventTime": "Tapahtuman aika",
+  "EventToTriggerThisWebhook": "Tapahtuma, joka käynnistää tämän webhookin",
+  "EventType": "Tapahtumatyyppi",
+  "IndividualEvents": "Yksittäiset tapahtumat",
+  "SendEverything": "Lähetä kaikki",
+  "WebhookDisabled": "Webhook poistettu käytöstä",
+  "WebhookEnabled": "Webhook käytössä"
 }

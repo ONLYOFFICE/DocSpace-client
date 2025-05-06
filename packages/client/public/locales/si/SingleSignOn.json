@@ -56,5 +56,8 @@
   "TurnOnSSOCaption": "ඔබට තනි-පිවිසුම් (SSO) සේවාවෙන් පරිශ්‍රීලකයින් ස්වයංක්‍රීයව ඔබගේ අවකාශයට එක් කිරීමට වුවමනා නම් මෙම විකල්පය සබල කරන්න.",
   "UploadXML": "වුවමනා ක්‍ෂේත්‍ර ස්වයංක්‍රීයව පිරවීමට XML වෙතින් පාරදත්ත පූරණය කරන්න.",
   "UploadXMLPlaceholder": "IdP පාරදත්ත XML වෙත ඒ.ස.නි.",
-  "UsedFor": "භාවිතා වන්නේ"
+  "UsedFor": "භාවිතා වන්නේ",
+  "ServiceProviderSettings": "{{organizationName}} SP සැකසුම්",
+  "SpMetadata": "{{organizationName}} SP Metadata",
+  "SpMetadataDescription": "IdP ගිණුමක විශ්වාසවන්ත සේවා සැපයුම්කරුවෙකු ලෙස {{organizationName}} {{productName}} එකතු කිරීම සඳහා Access Service Provider metadata වෙත පිවිසීම."
 }

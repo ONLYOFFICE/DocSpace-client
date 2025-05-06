@@ -81,5 +81,13 @@
   "WebhookRemoved": "Odstranění webhooku",
   "Webhooks": "Webové háčky",
   "WebhooksGuide": "Průvodce webovými háčky",
-  "WebhooksInfo": "Pomocí webhooků můžete provádět vlastní akce na straně jakékoli aplikace nebo webové stránky, kterou používáte, na základě různých událostí v aplikaci {{organizationName}} {{productName}}.\nZde můžete vytvářet a spravovat všechny své webové háčky, konfigurovat je a procházet historii všech webhooků a kontrolovat jejich výkonnost."
+  "WebhooksInfo": "Pomocí webhooků můžete provádět vlastní akce na straně jakékoli aplikace nebo webové stránky, kterou používáte, na základě různých událostí v aplikaci {{organizationName}} {{productName}}.\nZde můžete vytvářet a spravovat všechny své webové háčky, konfigurovat je a procházet historii všech webhooků a kontrolovat jejich výkonnost.",
+  "DeliveryTime": "Doba doručení",
+  "EventTime": "Čas události",
+  "EventToTriggerThisWebhook": "Událost, která spustí tento webhook",
+  "EventType": "Typ události",
+  "IndividualEvents": "Individuální události",
+  "SendEverything": "Pošlete všechno",
+  "WebhookDisabled": "Webhook vypnutý",
+  "WebhookEnabled": "Webhook povolen"
 }

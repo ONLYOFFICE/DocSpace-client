@@ -1,3 +1,15 @@
 {
-  "DescriptionUploading": "Ustvarjajte PDF obrazce v {{productName}}, na primer v vašem {{sectionName}}, in naložite končne v sobo. Uporabite vgrajeno knjižnico predlog in izberite med številnimi pripravljenimi PDF predlogami."
+  "DescriptionUploading": "Ustvarjajte PDF obrazce v {{productName}}, na primer v vašem {{sectionName}}, in naložite končne v sobo. Uporabite vgrajeno knjižnico predlog in izberite med številnimi pripravljenimi PDF predlogami.",
+  "HeaderComplete": "එකතු කරන ලද ප්‍රතිචාර විශ්ලේෂණය කිරීම පහසුයි.",
+  "HeaderSharing": "වේගයෙන් බෙදාගැනීම",
+  "HeaderStarting": "පෝරම පුරවීමේ ක්‍රියාවලිය ආරම්භ කරයි",
+  "HeaderSubmitting": "ප්‍රතිචාරය යොමු කිරීම",
+  "HeaderUploading": "සරල ආකෘති උඩුගත කිරීම",
+  "TitleComplete": "පිරවුණු ආකෘති පරීක්ෂා කර දත්ත ස්ප්‍රෙඩ්ෂීට් එකට ස්වයංක්‍රීයව රැස් කර විශ්ලේෂණය කරන්න. සියල්ලම – එකම කාමරයක් තුළ.",
+  "TitleSharing": "කාමරයට අනෙකුත් {{productName}} සාමාජිකයන්ව ආරාධනා කරමින්, උඩුගත කළ PDF ආකෘති පිරවීමට ඔවුන්ට ඉඩ දෙන්න. බාහිර පරිශීලකයින් සමඟ කාමරය බෙදා ගැනීමට පොදු ප්‍රවේශ සම්බන්ධතාවයක් පිටපත් කරන්න.",
+  "TitleStarting": "පෝරමයක් පිරවීම සඳහා திறக்கப்படும் විට, ප්‍රතිචාර දක්වන සෑම අයෙකු සඳහාම තනි පිටපතක් ස්වයංක්‍රීයව සාදා In Progress ෆෝල්ඩරයට සුරක්ෂිත කරනු ලැබේ. එහි අදහස් වන්නේ, එම පෝරමය ආරම්භ වී ඇති නමුත් එය තවමත් සම්පූර්ණ වී නැති බවයි.",
+  "TitleSubmitting": "පිටුපත විවෘත වූ විට, Complete & Submit බොත්තම ක්ලික් කළ පසු, එය Complete ෆෝල්ඩරයට ගෙනයනු ලැබේ.",
+  "WelcomeDescription": "මෙහි, ඔබට සරල PDF ආකෘති පිරීම් සංවිධානය කළ හැකි අතර ප්‍රතිචාර පහසුවෙන් රැස් කර විශ්ලේෂණය කළ හැකිය. ආරම්භ කිරීමට සූදානම්ද?",
+  "WelcomeFillingForm": "ආයුබෝවන්! ආකෘති පිරවුම් කාමරයට සාදරයෙන් පිළිගන්නෙමු!",
+  "WelcomeStartTutorial": "කුඩා සංචාරයක් ගන්න"
 }

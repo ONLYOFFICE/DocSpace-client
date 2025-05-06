@@ -33,5 +33,6 @@
   "UpgradeToProBannerItemScalabilityHeader": "Khả năng mở rộng và phân cụm.",
   "UpgradeToProBannerItemSupportDescr": "Nhận hỗ trợ chuyên nghiệp nhanh chóng cho tất cả các vấn đề bạn gặp phải.",
   "UpgradeToProBannerItemSupportHeader": "Nhóm hộ trợ kỹ thuật.",
-  "UploadLicenseFile": "Tải giấy phép lên"
+  "UploadLicenseFile": "Tải giấy phép lên",
+  "ActivateRenewSubscriptionHeader": "Gia hạn đăng ký cho {{license}}"
 }

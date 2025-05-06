@@ -83,5 +83,11 @@
   "WebhooksGuide": "Guia de webhooks",
   "WebhooksInfo": "Use webhooks para executar ações personalizadas em qualquer aplicativo ou site que você esteja usando com base em vários eventos no {{organizationName}} {{productName}}.\nAqui, você pode criar e gerenciar todos os seus webhooks, configurá-los e navegar no histórico de cada webhook para auditar seu desempenho.",
   "DeliveryTime": "Tempo de entrega",
-  "EventTime": "Horário do evento"
+  "EventTime": "Horário do evento",
+  "EventToTriggerThisWebhook": "Evento para acionar este webhook",
+  "EventType": "Tipo de evento",
+  "IndividualEvents": "Eventos individuais",
+  "SendEverything": "Envie tudo",
+  "WebhookDisabled": "Webhook desativado",
+  "WebhookEnabled": "Webhook ativado"
 }

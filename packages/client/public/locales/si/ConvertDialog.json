@@ -7,5 +7,7 @@
   "HideMessage": "මෙම පණිවිඩය නැවත නොපෙන්වන්න",
   "InfoCreateFileIn": "නව '{{fileTitle}}' ගොනුව '{{folderTitle}}' හි සාදා ඇත",
   "OpenFileMessage": "ඔබ විවෘත කරන ලේඛන ගොනුව ඉක්මනින් බැලීම සහ සංස්කරණය සඳහා ඔෆිස් විවෘත XML ආකෘතියට හරවනු ලැබේ.",
-  "SaveOriginalFormatMessage": "ගොනුවේ පිටපත මුල් ආකෘතියෙන් සුරකින්න"
+  "SaveOriginalFormatMessage": "ගොනුවේ පිටපත මුල් ආකෘතියෙන් සුරකින්න",
+  "ConversionXmlMessage": "ඔබ විවෘත කරන ගොනුව Office Open XML ආකෘතියට (docx හෝ xlsx) පරිවර්තනය කරනු ලැබේ. එය ඉක්මන් දර්ශනය සහ සංपादनය සඳහා වේ.",
+  "SelectFileType": "ෆයිල් වර්ගයක් තෝරා ගන්න:"
 }

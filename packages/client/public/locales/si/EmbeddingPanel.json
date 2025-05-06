@@ -1,4 +1,11 @@
 {
   "Height": "උස",
-  "Width": "පළල"
+  "Width": "පළල",
+  "CodeSuccessfullyCopied": "කුறியீடு வெற்றජනකව ක්ලිප්බෝඩ් එකට පිටපත් කරන ලදි",
+  "ContentRestricted": "අන්තර්ගත පිටපත් කිරීම, ගොනු බාගත කිරීම සහ මුద్రණය කිරීම සීමා කරப்பட்டுள்ளது.",
+  "DisplaySettings": "ප්‍රදර්ශන සැකසුම්",
+  "EmbeddingBarAllowList": "<1>අනුමැත ලැදිස්තුවට</1> වෙබ් අඩවිය URL එක ඇතුළත් කරන්න.",
+  "EmbeddingBarDescription": "{{productName}} පරිපාලකයා විසින් JavaScript SDK සැකසුම්වල දක්වන ලද URL සඳහා පමණක් අන්තර්ගත කිරීම ක්‍රියාත්මක වනු ඇත.",
+  "Link": "ලිංකිය",
+  "LinkProtectedWithPassword": "මුළු සබැඳියාවම මුරපදයකින් ආරක්ෂා කර ඇත."
 }

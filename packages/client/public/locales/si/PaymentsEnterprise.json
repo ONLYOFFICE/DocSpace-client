@@ -25,5 +25,14 @@
   "UpgradeToProBannerItemScalabilityHeader": "පරිමාණය සහ පොකුරු කිරීම.",
   "UpgradeToProBannerItemSupportDescr": "ඔබ මුහුණ දෙන සියළුම ගැටළු සඳහා ඉක්මනින් සහාය ගන්න.",
   "UpgradeToProBannerItemSupportHeader": "තාක්‍ෂණික සහාය",
-  "UploadLicenseFile": "බලපත්‍රය උඩුගත කරන්න"
+  "UploadLicenseFile": "බලපත්‍රය උඩුගත කරන්න",
+  "ActivateRenewalDescr": "ඔබ මිලදීගත් අලුත් කිරීමේ ක්‍රියාවලි සක්‍රිය කිරීමට, එය පහතින් උඩුගත කර සක්‍රිය කරන්නැති බොත්තම මත ක්ලික් කරන්න.",
+  "ActivateSwithToProHeader": "පූර්ණ {{license}} අනුවාදයට මාරුවන්න",
+  "ActivateTariffDescr": "ඔබ {{organizationName}} {{productName}} {{license}} භාවිතා කරමින් සිටී.",
+  "ActivateToProBannerHeaderTrial": "පූර්ණ {{license}} අනුවර්තනය මිලදී ගෙන පහත දේ ලබා ගන්න:",
+  "UpgradeToProBannerHeader": "30 දින සඳහා ව්‍යාපාරික භාවිතයට සුදුසු කාර්යාල தொகுப்புக்கு இலவசமாக ප්‍රවේශය ලබා ගන්න",
+  "UpgradeToProBannerInstructionHeader": "වෘත්තීය විශේෂාංග ලබා ගැනීමට, {{organizationName}} {{license}} සංස්කරණයේ නොමිලේ 30-දින විමසුමක් ආරම්භ කරන්න.",
+  "UpgradeToProBannerItemMobileHeader": "ජංගම සංස්කරණය.",
+  "ActivateRenewSubscriptionHeader": "{{license}} සඳහා ගිවිසුම අලුතින් කර ගන්න.",
+  "UpgradeToProBannerInformationAboutShort": "{{license}} பதிப்பைப் பற்றி மேலும் அறிய <1>அதிகாரப்பூர்வ வலைத்தளத்தைப்</1> பார்வையிடவும்."
 }

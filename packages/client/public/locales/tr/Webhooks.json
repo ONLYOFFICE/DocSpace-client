@@ -83,5 +83,11 @@
   "WebhooksGuide": "Webhook Kılavuzu",
   "WebhooksInfo": "{{organizationName}} {{productName}}'deki çeşitli olaylara dayalı olarak kullandığınız herhangi bir uygulama veya web sitesinin yanında özel eylemler gerçekleştirmek için webhook kullanın. Burada, tüm webhook’larını oluşturup yönetebilir, yapılandırabilir ve performanslarını denetlemek için her bir webhook’un geçmişine göz atabilirsiniz.",
   "DeliveryTime": "Teslimat süresi",
-  "EventTime": "Etkinlik zamanı"
+  "EventTime": "Etkinlik zamanı",
+  "EventToTriggerThisWebhook": "Bu webhook'u tetikleyecek olay",
+  "EventType": "Etkinlik türü",
+  "IndividualEvents": "Bireysel etkinlikler",
+  "SendEverything": "Her şeyi gönder",
+  "WebhookDisabled": "Webhook devre dışı bırakıldı",
+  "WebhookEnabled": "Webhook etkinleştirildi"
 }

@@ -44,18 +44,15 @@ const EmptyTrashDialogComponent = (props) => {
     isArchiveFolder,
     emptyPersonalRoom,
     isPersonalReadOnly,
-    personalUserFolderTitle,
-    trashFolderTitle,
-    archiveFolderTitle,
   } = props;
 
   const onClose = () => setEmptyTrashDialogVisible(false);
 
   const sectionName = isArchiveFolder
-    ? archiveFolderTitle
+    ? t("Common:Archive")
     : isPersonalReadOnly
-      ? personalUserFolderTitle
-      : trashFolderTitle;
+      ? t("Common:MyFilesSection")
+      : t("Common:TrashSection");
 
   const onEmptyTrash = () => {
     onClose();
@@ -138,13 +135,7 @@ export default inject(
     const { isLoading } = filesStore;
     const { emptyTrash, emptyArchive, emptyPersonalRoom } = filesActionsStore;
 
-    const {
-      isArchiveFolder,
-      isPersonalReadOnly,
-      personalUserFolderTitle,
-      trashFolderTitle,
-      archiveFolderTitle,
-    } = treeFoldersStore;
+    const { isArchiveFolder, isPersonalReadOnly } = treeFoldersStore;
 
     const { emptyTrashDialogVisible: visible, setEmptyTrashDialogVisible } =
       dialogsStore;
@@ -161,9 +152,6 @@ export default inject(
       isArchiveFolder,
       isPersonalReadOnly,
       emptyPersonalRoom,
-      personalUserFolderTitle,
-      trashFolderTitle,
-      archiveFolderTitle,
     };
   },
 )(observer(EmptyTrashDialog));

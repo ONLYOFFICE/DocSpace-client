@@ -26,7 +26,7 @@
 
 import React from "react";
 import moment from "moment";
-import { withTranslation, Trans } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { RadioButton } from "@docspace/shared/components/radio-button";
 import { Text } from "@docspace/shared/components/text";
@@ -36,11 +36,7 @@ import {
   createBackupSchedule,
 } from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/shared/components/toast";
-import {
-  BackupStorageType,
-  AutoBackupPeriod,
-  FolderType,
-} from "@docspace/shared/enums";
+import { BackupStorageType, AutoBackupPeriod } from "@docspace/shared/enums";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import {
   getBackupStorage,
@@ -113,8 +109,6 @@ class AutomaticBackup extends React.PureComponent {
 
   componentDidMount() {
     const {
-      fetchTreeFolders,
-      rootFoldersTitles,
       setDownloadingProgress,
       setTemporaryLink,
       t,
@@ -144,8 +138,6 @@ class AutomaticBackup extends React.PureComponent {
     this.timerId = setTimeout(() => {
       this.setState({ isInitialLoading: true });
     }, 200);
-
-    if (Object.keys(rootFoldersTitles).length === 0) fetchTreeFolders();
 
     this.setBasicSettings();
   }
@@ -467,7 +459,6 @@ class AutomaticBackup extends React.PureComponent {
       downloadingProgress,
       theme,
       selectedEnableSchedule,
-      rootFoldersTitles,
       isEnableAuto,
       automaticBackupUrl,
       currentColorScheme,
@@ -501,7 +492,6 @@ class AutomaticBackup extends React.PureComponent {
       onClick: this.onClickShowStorage,
     };
 
-    const roomName = rootFoldersTitles[FolderType.USER]?.title;
     return isEmptyContentBeforeLoader &&
       !isInitialLoading ? null : isInitialLoading ? (
       <AutoBackupLoader />
@@ -579,10 +569,11 @@ class AutomaticBackup extends React.PureComponent {
                 isChecked={isCheckedDocuments}
                 isDisabled={isLoadingData}
               />
+
               <Text className="backup-description">
-                <Trans t={t} i18nKey="RoomsModuleDescription" ns="Settings">
-                  {{ roomName }}
-                </Trans>
+                {t("RoomsModuleDescription", {
+                  sectionName: t("Common:MyFilesSection"),
+                })}
               </Text>
               {isCheckedDocuments ? (
                 <RoomsModule {...commonProps} isError={isError} />
@@ -671,7 +662,6 @@ export default inject(
     authStore,
     settingsStore,
     backup,
-    treeFoldersStore,
     filesSelectorInput,
     currentQuotaStore,
   }) => {
@@ -733,8 +723,6 @@ export default inject(
     const isCheckedThirdPartyStorage =
       selectedStorageType === `${StorageModuleType}`;
 
-    const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
-
     const isEnableAuto = checkEnablePortalSettings(
       isRestoreAndAutoBackupAvailable,
     );
@@ -743,8 +731,7 @@ export default inject(
       setConnectedThirdPartyAccount,
       defaultFolderId,
       isEnableAuto,
-      fetchTreeFolders,
-      rootFoldersTitles,
+
       downloadingProgress,
       theme,
       language,

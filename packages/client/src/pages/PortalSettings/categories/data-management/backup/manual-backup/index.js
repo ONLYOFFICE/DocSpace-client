@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { withTranslation, Trans } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
@@ -33,7 +33,7 @@ import { Link } from "@docspace/shared/components/link";
 import { startBackup } from "@docspace/shared/api/portal";
 import { RadioButton } from "@docspace/shared/components/radio-button";
 import { toastr } from "@docspace/shared/components/toast";
-import { BackupStorageType, FolderType } from "@docspace/shared/enums";
+import { BackupStorageType } from "@docspace/shared/enums";
 // import { getThirdPartyCommonFolderTree } from "@docspace/shared/api/files";
 import DataBackupLoader from "@docspace/shared/skeletons/backup/DataBackup";
 import {
@@ -100,8 +100,6 @@ class ManualBackup extends React.Component {
 
   componentDidMount() {
     const {
-      fetchTreeFolders,
-      rootFoldersTitles,
       isNotPaidPeriod,
       setDownloadingProgress,
       setTemporaryLink,
@@ -139,7 +137,6 @@ class ManualBackup extends React.Component {
       this.setState({ isInitialLoading: true });
     }, 200);
 
-    if (Object.keys(rootFoldersTitles).length === 0) fetchTreeFolders();
     this.setBasicSettings();
   }
 
@@ -296,7 +293,6 @@ class ManualBackup extends React.Component {
       // commonThirdPartyList,
       buttonSize,
 
-      rootFoldersTitles,
       isNotPaidPeriod,
       dataBackupUrl,
       currentColorScheme,
@@ -329,8 +325,6 @@ class ManualBackup extends React.Component {
       onMakeCopy: this.onMakeCopy,
       buttonSize,
     };
-
-    const roomName = rootFoldersTitles[FolderType.USER]?.title;
 
     return isEmptyContentBeforeLoader &&
       !isInitialLoading ? null : isInitialLoading ? (
@@ -414,9 +408,9 @@ class ManualBackup extends React.Component {
             {...commonRadioButtonProps}
           />
           <Text className="backup-description module-documents settings_unavailable">
-            <Trans t={t} i18nKey="RoomsModuleDescription" ns="Settings">
-              {{ roomName }}
-            </Trans>
+            {t("RoomsModuleDescription", {
+              sectionName: t("Common:MyFilesSection"),
+            })}
           </Text>
           {isCheckedDocuments ? (
             <RoomsModule
@@ -486,64 +480,61 @@ class ManualBackup extends React.Component {
   }
 }
 
-export default inject(
-  ({ settingsStore, backup, treeFoldersStore, currentTariffStatusStore }) => {
-    const {
-      resetDownloadingProgress,
-      clearLocalStorage,
-      // commonThirdPartyList,
-      downloadingProgress,
-      getProgress,
+export default inject(({ settingsStore, backup, currentTariffStatusStore }) => {
+  const {
+    resetDownloadingProgress,
+    clearLocalStorage,
+    // commonThirdPartyList,
+    downloadingProgress,
+    getProgress,
 
-      setDownloadingProgress,
-      setTemporaryLink,
-      // setCommonThirdPartyList,
-      temporaryLink,
-      getStorageParams,
-      setThirdPartyStorage,
-      setStorageRegions,
-      setConnectedThirdPartyAccount,
-      isBackupProgressVisible,
-      errorInformation,
-      setErrorInformation,
-      setIsBackupProgressVisible,
-      setBackupProgressError,
-      backupPrgressError,
-    } = backup;
+    setDownloadingProgress,
+    setTemporaryLink,
+    // setCommonThirdPartyList,
+    temporaryLink,
+    getStorageParams,
+    setThirdPartyStorage,
+    setStorageRegions,
+    setConnectedThirdPartyAccount,
+    isBackupProgressVisible,
+    errorInformation,
+    setErrorInformation,
+    setIsBackupProgressVisible,
+    setBackupProgressError,
+    backupPrgressError,
+  } = backup;
 
-    const { currentColorScheme, dataBackupUrl, portals } = settingsStore;
-    const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
-    const { isNotPaidPeriod } = currentTariffStatusStore;
+  const { currentColorScheme, dataBackupUrl, portals } = settingsStore;
 
-    const pageIsDisabled = isManagement() && portals?.length === 1;
+  const { isNotPaidPeriod } = currentTariffStatusStore;
 
-    return {
-      isNotPaidPeriod,
-      setThirdPartyStorage,
-      resetDownloadingProgress,
-      clearLocalStorage,
-      // commonThirdPartyList,
-      downloadingProgress,
-      getProgress,
-      errorInformation,
-      setDownloadingProgress,
-      setTemporaryLink,
-      setStorageRegions,
-      // setCommonThirdPartyList,
-      temporaryLink,
-      getStorageParams,
-      rootFoldersTitles,
-      fetchTreeFolders,
-      setConnectedThirdPartyAccount,
+  const pageIsDisabled = isManagement() && portals?.length === 1;
 
-      dataBackupUrl,
-      currentColorScheme,
-      pageIsDisabled,
-      isBackupProgressVisible,
-      setErrorInformation,
-      setIsBackupProgressVisible,
-      setBackupProgressError,
-      backupPrgressError,
-    };
-  },
-)(withTranslation(["Settings", "Common"])(observer(ManualBackup)));
+  return {
+    isNotPaidPeriod,
+    setThirdPartyStorage,
+    resetDownloadingProgress,
+    clearLocalStorage,
+    // commonThirdPartyList,
+    downloadingProgress,
+    getProgress,
+    errorInformation,
+    setDownloadingProgress,
+    setTemporaryLink,
+    setStorageRegions,
+    // setCommonThirdPartyList,
+    temporaryLink,
+    getStorageParams,
+
+    setConnectedThirdPartyAccount,
+
+    dataBackupUrl,
+    currentColorScheme,
+    pageIsDisabled,
+    isBackupProgressVisible,
+    setErrorInformation,
+    setIsBackupProgressVisible,
+    setBackupProgressError,
+    backupPrgressError,
+  };
+})(withTranslation(["Settings", "Common"])(observer(ManualBackup)));

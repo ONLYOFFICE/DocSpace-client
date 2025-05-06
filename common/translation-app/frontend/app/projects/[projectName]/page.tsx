@@ -641,13 +641,9 @@ export default function ProjectPage() {
               Languages:
             </span>
             <LanguageSelector
-              languages={languages}
-              baseLanguage={baseLanguage}
-              selectedLanguages={selectedLanguages}
               onToggle={handleLanguageToggle}
               projectName={projectName}
               horizontal={true}
-              showUntranslated={showUntranslated}
               onShowUntranslatedChange={setShowUntranslated}
             />
           </div>

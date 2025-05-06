@@ -33,9 +33,9 @@ import {
 import { ContextMenuModel } from "../../context-menu";
 
 import {
-  BreadCrumbsProps,
   TBreadCrumb,
   TDisplayedItem,
+  BreadCrumbsProps,
 } from "../Selector.types";
 import {
   StyledBreadCrumbs,

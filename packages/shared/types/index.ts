@@ -66,6 +66,10 @@ export type NonFunctionProperties<T, ExcludeTypes> = Pick<
 
 export type MergeTypes<T, MergedType> = Omit<T, keyof MergedType> & MergedType;
 
+export type WithFlag<K extends string, V> =
+  | ({ [P in K]: true } & V)
+  | ({ [P in K]?: undefined } & Partial<Record<keyof V, undefined>>);
+
 export type NonNullableFields<T> = {
   [P in keyof T]: NonNullable<T[P]>;
 };

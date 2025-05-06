@@ -28,8 +28,7 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import { DocumentEditor } from "@onlyoffice/document-editor-react";
-import IConfig from "@onlyoffice/document-editor-react/dist/esm/types/model/config";
+import { DocumentEditor, type IConfig } from "@onlyoffice/document-editor-react";
 
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";

@@ -28,7 +28,7 @@ import React, { useCallback } from "react";
 import isUndefined from "lodash/isUndefined";
 import { usePathname, useSearchParams } from "next/navigation";
 
-import IConfig from "@onlyoffice/document-editor-react/dist/esm/types/model/config";
+import { type IConfig } from "@onlyoffice/document-editor-react";
 
 import {
   createFile,

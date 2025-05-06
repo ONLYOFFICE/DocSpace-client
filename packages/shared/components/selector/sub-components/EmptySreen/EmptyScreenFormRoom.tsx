@@ -38,16 +38,12 @@ import { Text } from "../../../text";
 import { Heading } from "../../../heading";
 import { SelectorAddButton } from "../../../selector-add-button";
 import styles from "../../Selector.module.scss";
-
-type Props = {
-  onCreateClickAction: VoidFunction;
-  createDefineRoomType: RoomsType;
-};
+import { EmptyScreenFormRoomProps } from "../../Selector.types";
 
 const EmptyScreenFormRoom = ({
   onCreateClickAction,
   createDefineRoomType,
-}: Props) => {
+}: EmptyScreenFormRoomProps) => {
   const { t } = useTranslation(["Common"]);
 
   const theme = useTheme();

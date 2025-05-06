@@ -302,7 +302,7 @@ const Body = ({
         />
       ) : null}
 
-      <Search className="search-input" isSearch={itemsCount > 0 || isSearch} />
+      <Search isSearch={itemsCount > 0 || isSearch} />
 
       {withInfo && !isLoading ? (
         <Info

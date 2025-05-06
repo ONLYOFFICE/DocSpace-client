@@ -27,8 +27,7 @@ import { useContext, forwardRef, ForwardedRef } from "react";
 import PublicRoomBar from "../../public-room-bar";
 
 import { InfoBarContext } from "../contexts/InfoBar";
-
-import type { InfoBarProps } from "../Selector.types";
+import { InfoBarProps } from "../Selector.types";
 
 export const InfoBar = forwardRef(
   ({ visible, className }: InfoBarProps, ref: ForwardedRef<HTMLDivElement>) => {

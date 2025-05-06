@@ -36,9 +36,9 @@ import {
 } from "../../context-menu-button";
 import { ContextMenuModel } from "../../context-menu";
 import {
-  BreadCrumbsProps,
   TBreadCrumb,
   TDisplayedItem,
+  BreadCrumbsProps,
 } from "../Selector.types";
 import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
 import { SearchDispatchContext } from "../contexts/Search";

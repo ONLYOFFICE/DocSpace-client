@@ -230,7 +230,6 @@
   "WantToRestoreTheRoom": "Všechny externí odkazy v této místnosti se stanou aktivními a její obsah bude dostupný všem, kteří na ni odkazují. Chcete místnost obnovit?",
   "WantToRestoreTheRooms": "Všechny externí odkazy v obnovených místnostech se stanou aktivními a jejich obsah bude dostupný všem, kteří mají odkazy na místnosti. Chcete místnosti obnovit?",
   "WarningCopyToFormRoomServal": "Kopírování více souborů do místnosti pro vyplňování formulářů není podporováno. Kopírujte PDF formuláře {{ organizationName }} po jednom.",
-  "WarningCreationFormRoom": "Vytváření na základě několika souborů a složek není pro tento typ místnosti k dispozici. Chcete-li takovou místnost vytvořit, přejděte do části Místnosti nebo použijte některý z formulářů PDF.",
   "WarningMoveToFormRoom": "Soubor nelze do této místnosti přesunout. Zkuste prosím přesunout soubor {{ organizationName }}. PDF formulář.",
   "WarningMoveToFormRoomServal": "Přesunutí několika souborů do místnosti pro vyplňování formulářů není podporováno. Přesunujte PDF formuláře {{ organizationName }} po jednom.",
   "WillBeDeletedPermanently": "{{date}} bude trvale smazáno",

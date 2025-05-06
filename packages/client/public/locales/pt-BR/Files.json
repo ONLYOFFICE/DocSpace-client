@@ -230,7 +230,6 @@
   "WantToRestoreTheRoom": "Todos os links externos desta sala ficarão ativos e seu conteúdo estará disponível para todos que possuem o link. Você quer restaurar a sala?",
   "WantToRestoreTheRooms": "Todos os links externos nas salas restauradas ficarão ativos e seu conteúdo estará disponível para todos com os links das salas. Quer restaurar as salas?",
   "WarningCopyToFormRoomServal": "Não há suporte para a cópia de vários arquivos para a sala de preenchimento de formulários. Copie um formulário PDF {{ organizationName }} formulário PDF de cada vez.",
-  "WarningCreationFormRoom": "A criação com base em vários arquivos e pastas não está disponível para esse tipo de sala. Para criar uma sala desse tipo, vá para a seção Salas ou use um dos formulários PDF.",
   "WarningMoveToFormRoom": "O arquivo não pode ser movido para esta sala. Tente mover o formulário em PDF {{ organizationName }} formulário PDF.",
   "WarningMoveToFormRoomServal": "Não há suporte para a movimentação de vários arquivos para a sala de preenchimento de formulários. Mova um formulário PDF {{ organizationName }} formulário PDF de cada vez.",
   "WillBeDeletedPermanently": "{{date}} será excluído permanentemente",

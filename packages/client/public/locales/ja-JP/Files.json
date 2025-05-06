@@ -230,7 +230,6 @@
   "WantToRestoreTheRoom": "このルームの全ての外部リンクは有効になり、その内容はリンクを持つ全ての人が利用できるようになります。このルームを復元しますか？",
   "WantToRestoreTheRooms": "復元されたルームの共有リンクは全て有効になり、ルームのリンクを持つ全員がその内容を利用できるようになります。ルームを復元しますか？",
   "WarningCopyToFormRoomServal": "フォーム記入ルームに複数のファイルをコピーすることはサポートされていません。{{ organizationName }} PDFフォームを1つずつコピーしてください。",
-  "WarningCreationFormRoom": "このタイプのルームでは、複数のファイルやフォルダを基に作成することはできません。このようなルームを作成するには、ルームセクションに移動するか、PDFフォームのいずれかを使用してください。",
   "WarningMoveToFormRoom": "このルームにファイルを移動できません。{{ organizationName }} PDFフォームを移動してみてください。",
   "WarningMoveToFormRoomServal": "フォーム記入ルームへの複数のファイルの移動はサポートされていません。{{ organizationName }} PDFフォームを1つずつ移動してください。",
   "WillBeDeletedPermanently": "{{date}}は完全に削除されます",

@@ -230,7 +230,6 @@
   "WantToRestoreTheRoom": "Visas ārējās saites šajā telpā kļūs aktīvas, un tās saturs būs pieejams ikvienam, kam ir saite. Vai vēlaties atjaunot telpu?",
   "WantToRestoreTheRooms": "Visas ārējās saites atjaunotajās telpās kļūs aktīvas, un to saturs būs pieejams ikvienam, kam ir telpas saites. Vai vēlaties atjaunot telpas?",
   "WarningCopyToFormRoomServal": "Vairāku failu kopēšana uz veidlapu aizpildīšanas telpu netiek atbalstīta. Vienlaikus kopējiet vienu {{ organizationName }} PDF veidlapu.",
-  "WarningCreationFormRoom": "Šāda veida telpai nav pieejama izveide, pamatojoties uz vairākiem failiem un mapēm. Lai izveidotu šādu telpu, dodieties uz sadaļu Telpas vai izmantojiet kādu no PDF veidlapām.",
   "WarningMoveToFormRoom": "Failu nevar pārvietot uz šo telpu. Mēģiniet pārvietot {{ organizationName }} PDF veidlapu.",
   "WarningMoveToFormRoomServal": "Vairāku failu pārvietošana uz veidlapu aizpildīšanas telpu netiek atbalstīta. Vienlaikus pārvietojiet vienu {{ organizationName }} PDF veidlapu.",
   "WillBeDeletedPermanently": "{{date}} tiks neatgriezeniski dzēsts",

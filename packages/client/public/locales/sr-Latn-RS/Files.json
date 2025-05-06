@@ -230,7 +230,6 @@
   "WantToRestoreTheRoom": "Svi deljeni linkovi u ovoj sobi će postati aktivni, a njen sadržaj će biti dostupan svima sa linkom. Da li želite da obnovite sobu?",
   "WantToRestoreTheRooms": "Svi deljeni linkovi u obnovljenim sobama će postati aktivni, a njihov sadržaj će biti dostupan svima sa linkom sobe. Da li želite da obnovite sobe?",
   "WarningCopyToFormRoomServal": "Kopiranje više fajlova u sobu za popunjavanje obrazaca nije podržano. Kopirajte jedan {{ organizationName }} PDF obrazac u isto vreme.",
-  "WarningCreationFormRoom": "Kreiranje zasnovano na više fajlova i foldera nije dostupno za ovu vrstu sobe. Da biste kreirali takvu sobu, idite na odeljak Sobe ili koristite jedan od PDF obrazaca.",
   "WarningMoveToFormRoom": "Fajl ne može biti premesten u ovu sobu. Pokušajte da premestite {{ organizationName }} PDF obrazac.",
   "WarningMoveToFormRoomServal": "Premještanje više fajlova u sobu za popunjavanje obrazaca nije podržano. Premestite jedan {{ organizationName }} PDF obrazac u isto vreme.",
   "WillBeDeletedPermanently": "{{date}} će biti trajno obrisan",

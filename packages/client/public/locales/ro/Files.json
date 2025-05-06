@@ -230,7 +230,6 @@
   "WantToRestoreTheRoom": "Toate link-urile externe din această sală vor deveni active și tot conținutul vor fi disponibil tuturor pe link-ul. Doriți să restaurați această sală?",
   "WantToRestoreTheRooms": "Toate link-urile partajate către sălile restaurate vor deveni active, iar conținutul lor va fi disponibil pentru toți utilizatorii care au link-urile către sălile. Doriți să restaurați sălile?",
   "WarningCopyToFormRoomServal": "Copierea mai multor fișiere în Sala de completare a formularelor nu este acceptată. Copiați câte un formular PDF {{ organizationName }}.",
-  "WarningCreationFormRoom": "Crearea bazată pe mai multe fișiere sau foldere nu este posibilă pentru acest tip de sală. Pentru crearea unei astfel de sală, treceți la secțiunea Săli sau folosiți unul dintre formularele PDF.",
   "WarningMoveToFormRoom": "Imposibil de mutat fișierul în acestă sală. Încercați să deplasați formularul PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Deplasarea mai multor fișiere în Sala de completare a formularelor nu este acceptată. Deplasați câte un formular PDF  {{ organizationName }}.",
   "WillBeDeletedPermanently": "{{date}} va fi şters definitiv",

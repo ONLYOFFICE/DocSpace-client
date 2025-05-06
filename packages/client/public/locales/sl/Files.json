@@ -229,7 +229,6 @@
   "WantToRestoreTheRoom": "Vse zunanje povezave v tej sobi bodo postale aktivne, njena vsebina pa bo na voljo vsem s povezavo. Ali želite obnoviti sobo?",
   "WantToRestoreTheRooms": "Vse zunanje povezave v obnovljenih sobah bodo postale aktivne, njihova vsebina pa bo na voljo vsem s povezavami do sob. Ali želite obnoviti sobe?",
   "WarningCopyToFormRoomServal": "Kopiranje več datotek v prostor za izpolnjevanje obrazcev ni podprto. Kopirajte po en obrazec PDF {{ organizationName }} naenkrat.",
-  "WarningCreationFormRoom": "Ustvarjanje na podlagi več datotek in map ni na voljo za to vrsto sobe. Če želite ustvariti takšno sobo, pojdite v razdelek Sobe ali uporabite enega od obrazcev PDF.",
   "WarningMoveToFormRoom": "Datoteke ni mogoče premakniti v to sobo. Poskusite premakniti obrazec PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Premikanje več datotek v prostor za izpolnjevanje obrazcev ni podprto. Premaknite po en obrazec PDF {{ organizationName }} naenkrat.",
   "WillBeDeletedPermanently": "{{date}} bo trajno izbrisan",

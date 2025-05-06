@@ -230,7 +230,6 @@
   "WantToRestoreTheRoom": "Alle externe links in deze ruimte worden actief en het materiaal is beschikbaar voor iedereen die de link gebruikt. Wilt u de kamer herstellen?",
   "WantToRestoreTheRooms": "Alle externe links in herstelde kamers zullen actief worden, en hun materiaal zal beschikbaar zijn voor iedereen met een link naar de kamer. Wilt u de kamers herstellen?",
   "WarningCopyToFormRoomServal": "Het kopiëren van meerdere bestanden naar de Kamer voor het invullen van formulieren wordt niet ondersteund. Kopieer één {{ organizationName }} PDF formulier tegelijk.",
-  "WarningCreationFormRoom": "Aanmaken op basis van meerdere bestanden en mappen is niet beschikbaar voor dit type kamer. Om een dergelijke kamer aan te maken, gaat u naar de sectie Kamers of gebruikt u een van de PDF formulieren.",
   "WarningMoveToFormRoom": "Het bestand kan niet naar deze kamer worden verplaatst. Probeer het {{ organizationName }} PDF formulier te verplaatsen.",
   "WarningMoveToFormRoomServal": "Het verplaatsen van meerdere bestanden naar de kamer voor het invullen van formulieren wordt niet ondersteund. Verplaats één {{ organizationName }} PDF formulier tegelijk.",
   "WillBeDeletedPermanently": "{{date}} wordt definitief verwijderd",

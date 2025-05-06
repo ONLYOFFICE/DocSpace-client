@@ -143,6 +143,8 @@ class PaymentStore {
 
   isInitServicesPage = false;
 
+  isVisibleWalletSettings = false;
+
   constructor(
     userStore: UserStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
@@ -410,12 +412,14 @@ class PaymentStore {
 
       this.setIsInitWalletPage(true);
 
-      if (window.location.href.includes("complete=true"))
+      if (window.location.href.includes("complete=true")) {
         window.history.replaceState(
           {},
           document.title,
           window.location.pathname,
         );
+        this.isVisibleWalletSettings = true;
+      }
     } catch (error) {
       toastr.error(t("Common:UnexpectedError"));
       console.error(error);

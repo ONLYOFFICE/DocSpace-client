@@ -48,6 +48,7 @@ type WalletProps = {
   cardLinkedOnFreeTariff: boolean;
   isFreeTariff: boolean;
   isNonProfit: boolean;
+  isVisibleWalletSettings: boolean;
 };
 
 const typeClassMap: Record<string, string> = {
@@ -68,11 +69,12 @@ const Wallet = (props: WalletProps) => {
     cardLinkedOnFreeTariff,
     isFreeTariff,
     isNonProfit,
+    isVisibleWalletSettings,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
 
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(isVisibleWalletSettings);
   const [isEditAutoPayment, setIsEditAutoPayment] = useState(false);
 
   const tokens = formattedBalanceTokens(
@@ -157,6 +159,7 @@ export default inject(
       cardLinkedOnFreeTariff,
       walletCodeCurrency,
       isPayer,
+      isVisibleWalletSettings,
     } = paymentStore;
     const { isFreeTariff, isNonProfit } = currentQuotaStore;
 
@@ -169,6 +172,7 @@ export default inject(
       cardLinkedOnFreeTariff,
       isFreeTariff,
       isNonProfit,
+      isVisibleWalletSettings,
     };
   },
 )(observer(Wallet));

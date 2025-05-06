@@ -41,7 +41,7 @@ type AmountProps = {
   amount: string;
   language: string;
   currency: string;
-  walletCustomerEmail: string | null;
+  walletCustomerEmail?: boolean;
 };
 
 const Amount = (props: AmountProps) => {

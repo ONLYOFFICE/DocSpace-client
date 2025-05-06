@@ -811,19 +811,6 @@ export const getBaseTheme = () => {
       hoverIconColor: grayStrong,
     },
 
-    inputPhone: {
-      activeBorderColor: lightSecondMain,
-      inactiveBorderColor: grayStrong,
-      errorBorderColor: lightErrorStatus,
-      backgroundColor: white,
-      color: black,
-      scrollBackground: gray,
-      placeholderColor: gray,
-      dialCodeColor: gray,
-      width: "320px",
-      height: "44px",
-    },
-
     textInput: {
       fontWeight: "normal",
       placeholderColor: gray,

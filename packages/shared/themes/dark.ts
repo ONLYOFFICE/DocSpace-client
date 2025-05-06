@@ -806,18 +806,6 @@ const Dark: TTheme = {
     hoverIconColor: grayDark,
   },
 
-  inputPhone: {
-    activeBorderColor: lightSecondMain,
-    inactiveBorderColor: grayDarkStrong,
-    errorBorderColor: darkErrorStatus,
-    backgroundColor: black,
-    color: white,
-    scrollBackground: grayDark,
-    placeholderColor: grayDark,
-    dialCodeColor: grayDark,
-    width: "320px",
-    height: "44px",
-  },
   textInput: {
     fontWeight: "normal",
     placeholderColor: grayDark,

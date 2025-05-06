@@ -6,13 +6,13 @@ import { observer } from "mobx-react";
 import { usePathname, useRouter } from "next/navigation";
 
 import { Tabs, type TTabItem } from "@docspace/shared/components/tabs";
-import { DeviceType } from "@docspace/shared/enums";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
 } from "@docspace/shared/utils/socket";
 
 import { pathsWithoutTabs } from "@/lib/constants";
+import useAppState from "@/hooks/useAppState";
 
 import { StyledWrapper } from "./layout.styled";
 
@@ -20,6 +20,10 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
   const { t } = useTranslation(["Common"]);
   const pathname = usePathname();
   const router = useRouter();
+
+  const { settings } = useAppState();
+
+  const standalone = settings?.standalone;
 
   const data = [
     {
@@ -56,6 +60,12 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
       SocketHelper.emit(SocketCommands.Subscribe, {
         roomParts: "backup",
       });
+
+      if (standalone) {
+        SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
+          roomParts: "backup",
+        });
+      }
     }
 
     return () => {
@@ -63,8 +73,14 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
       SocketHelper.emit(SocketCommands.Unsubscribe, {
         roomParts: "backup",
       });
+
+      if (standalone) {
+        SocketHelper?.emit(SocketCommands.UnsubscribeInSpaces, {
+          roomParts: "backup",
+        });
+      }
     };
-  }, []);
+  }, [standalone]);
 
   const getCurrentTab = () => {
     const currentTab = data.find((item) => pathname.includes(item.id));
@@ -91,4 +107,3 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
 };
 
 export default observer(SettingsLayout);
-

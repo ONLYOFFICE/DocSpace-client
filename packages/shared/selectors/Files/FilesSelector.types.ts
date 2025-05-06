@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TSelectorItem } from "../../components/selector";
-import {
+import type {
   TBreadCrumb,
   TInfoBar,
+  TSelectorHeader,
 } from "../../components/selector/Selector.types";
 import {
   TFile,
@@ -180,6 +181,7 @@ export type TFilesSelectorInit =
     };
 
 export type FilesSelectorProps = TInfoBar &
+  TSelectorHeader &
   TFilesSelectorInit &
   (
     | {

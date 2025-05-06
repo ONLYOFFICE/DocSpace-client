@@ -88,7 +88,7 @@
   :global {
     .combo-button {
       min-height: 40px;
-      padding-inline-start: var(--combobox-button-padding-left);
+      padding-inline-start: 16px;
     }
 
     .combo-button-label,

@@ -137,7 +137,7 @@ const SearchInput = ({
     <div
       className={classNames(
         styles.searchInputBlock,
-        { [styles.scale]: scale },
+        { [styles.scale]: scale, [styles.isFilled]: !!inputValue },
         className,
       )}
       id={id}

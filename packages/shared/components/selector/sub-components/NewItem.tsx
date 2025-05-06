@@ -31,6 +31,7 @@ import { SelectorAddButton } from "../../selector-add-button";
 import { StyledItem } from "../Selector.styled";
 import NewItemDropDown from "./NewItemDropDown";
 import useCreateDropDown from "../hooks/useCreateDropDown";
+import { NewItemProps } from "../Selector.types";
 
 const NewItem = ({
   label,
@@ -40,15 +41,7 @@ const NewItem = ({
   hotkey,
   inputItemVisible,
   listHeight,
-}: {
-  label: string;
-  style: React.CSSProperties;
-  dropDownItems?: React.ReactElement[];
-  onCreateClick?: VoidFunction;
-  hotkey?: string;
-  inputItemVisible?: boolean;
-  listHeight: number;
-}) => {
+}: NewItemProps) => {
   const { isOpenDropDown, onCloseDropDown, setIsOpenDropDown } =
     useCreateDropDown();
 

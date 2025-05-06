@@ -136,7 +136,6 @@
   "MoveItems": "<2>{{qty}} prvky</2> úspěšně přesunuty do <1>{{{folderName}}</1>",
   "MoveOrCopy": "Přesunout nebo kopírovat",
   "MoveToArchive": "Přesunout do archivu",
-  "MoveToPublicRoom": "Tato místnost a veškerý její obsah jsou k dispozici komukoli, kdo má k dispozici odkaz. Chcete pokračovat?",
   "MoveToPublicRoomTitle": "Přesun do veřejné místnosti",
   "MovingToTrash": "Přesun do koše",
   "NewInFolder": "Novinka ve složce",

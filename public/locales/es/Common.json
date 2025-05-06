@@ -856,5 +856,6 @@
   "YouHaveUnsavedChanges": "Tiene cambios no guardados",
   "YourCurrentDomain": "Su dominio actual",
   "YourLogo": "Su logotipo",
-  "YourTurn": "Su turno"
+  "YourTurn": "Su turno",
+  "MoveToPublicRoom": "Esta sala y todo su contenido están disponibles para cualquiera que tenga el enlace. ¿Desea continuar?"
 }

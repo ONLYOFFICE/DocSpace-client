@@ -24,23 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect } from "react";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
-
-import { inject, observer } from "mobx-react";
+import { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-const BackupToPublicRoomComponent = (props) => {
-  const { visible, setIsVisible, backupToPublicRoomData } = props;
-  const { t, ready } = useTranslation(["Files", "Common"]);
+import { Text } from "@docspace/shared/components/text";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import type { BackupToPublicRoomProps } from "./BackupToPublicRoomDialog";
 
-  const onClose = () => {
+const BackupToPublicRoom = ({
+  visible,
+  setIsVisible,
+  backupToPublicRoomData,
+}: BackupToPublicRoomProps) => {
+  const { t, ready } = useTranslation(["Common"]);
+
+  const onClose = useCallback(() => {
     setIsVisible(false);
-  };
+  }, [setIsVisible]);
 
-  const onBackupTo = () => {
+  const onBackupTo = useCallback(() => {
     const {
       selectedItemId,
       breadCrumbs,
@@ -48,16 +51,19 @@ const BackupToPublicRoomComponent = (props) => {
       onClose: onCloseAction,
     } = backupToPublicRoomData;
 
-    onSelectFolder && onSelectFolder(selectedItemId, breadCrumbs);
+    onSelectFolder?.(selectedItemId, breadCrumbs);
 
     onClose();
     onCloseAction();
-  };
+  }, [backupToPublicRoomData, onClose]);
 
-  const onKeyUp = (e) => {
-    if (e.keyCode === 27) onClose();
-    if (e.keyCode === 13 || e.which === 13) onBackupTo();
-  };
+  const onKeyUp = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "Enter") onBackupTo();
+    },
+    [onBackupTo, onClose],
+  );
 
   useEffect(() => {
     document.addEventListener("keyup", onKeyUp, false);
@@ -65,14 +71,14 @@ const BackupToPublicRoomComponent = (props) => {
     return () => {
       document.removeEventListener("keyup", onKeyUp, false);
     };
-  }, []);
+  }, [onKeyUp]);
 
   return (
     <ModalDialog isLoading={!ready} visible={visible} onClose={onClose}>
       <ModalDialog.Header>{t("Common:SaveToPublicRoom")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className="modal-dialog-content-body">
-          <Text noSelect>{t("Files:MoveToPublicRoom")}</Text>
+          <Text noSelect>{t("Common:MoveToPublicRoom")}</Text>
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -80,7 +86,7 @@ const BackupToPublicRoomComponent = (props) => {
           id="delete-file-modal_submit"
           key="OkButton"
           label={t("Common:OKButton")}
-          size="normal"
+          size={ButtonSize.normal}
           primary
           scale
           onClick={onBackupTo}
@@ -89,7 +95,7 @@ const BackupToPublicRoomComponent = (props) => {
           id="delete-file-modal_cancel"
           key="CancelButton"
           label={t("Common:CancelButton")}
-          size="normal"
+          size={ButtonSize.normal}
           scale
           onClick={onClose}
         />
@@ -98,17 +104,19 @@ const BackupToPublicRoomComponent = (props) => {
   );
 };
 
-export default inject(({ dialogsStore }) => {
-  const {
-    backupToPublicRoomVisible,
-    setBackupToPublicRoomVisible,
-    backupToPublicRoomData,
-  } = dialogsStore;
+export default BackupToPublicRoom;
 
-  return {
-    visible: backupToPublicRoomVisible,
-    setIsVisible: setBackupToPublicRoomVisible,
+// export default inject(({ dialogsStore }) => {
+//   const {
+//     backupToPublicRoomVisible,
+//     setBackupToPublicRoomVisible,
+//     backupToPublicRoomData,
+//   } = dialogsStore;
 
-    backupToPublicRoomData,
-  };
-})(observer(BackupToPublicRoomComponent));
+//   return {
+//     visible: backupToPublicRoomVisible,
+//     setIsVisible: setBackupToPublicRoomVisible,
+
+//     backupToPublicRoomData,
+//   };
+// })(observer(BackupToPublicRoomComponent));

@@ -136,7 +136,6 @@
   "MoveItems": "<2>{{qty}} elemente</2> au fost copiate cu succes în <1>{{folderName}}</1>",
   "MoveOrCopy": "Mutare sau copiere",
   "MoveToArchive": "Mutare în arhivă",
-  "MoveToPublicRoom": "Această sala și tot conținutul vor fi disponibile tuturor pe link-ul. Doriți să continuați?",
   "MoveToPublicRoomTitle": "Deplasare în Sală publică",
   "MovingToTrash": "Mutare în coșul de gunoi",
   "NewInFolder": "Nou în dosar",

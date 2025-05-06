@@ -135,7 +135,6 @@
   "MoveItems": "تم نقل <2>{{qty}} عنصرًا</2> بنجاح إلى <1>{{folderName}}</1>",
   "MoveOrCopy": "انقل أو انسخ",
   "MoveToArchive": "انقل إلى الأرشيف",
-  "MoveToPublicRoom": "هذه الغرفة وكافة محتوياتها متاحة لأي شخص لديه الرابط. هل تريد المتابعة؟",
   "MoveToPublicRoomTitle": "نقل إلى غرفة عامة",
   "MovingToTrash": "جارٍ النقل إلى سلة المحذوفات",
   "NewInFolder": "جديد في المجلد",

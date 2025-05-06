@@ -136,7 +136,6 @@
   "MoveItems": "<2>{{qty}} elementlər</2> uğurla <1>{{folderName}}</1> qovluğuna köçürüldü",
   "MoveOrCopy": "Köçür və ya Kopyala",
   "MoveToArchive": "Arxivə köçürün",
-  "MoveToPublicRoom": "Bu otaq və onun bütün məzmunu keçidi olan hər kəs üçün əlçatandır. Davam etmək istəyirsiniz?",
   "MoveToPublicRoomTitle": "Ümumi otağa keçin",
   "MovingToTrash": "Zibil qutusuna köçürülür",
   "NewInFolder": "Qovluqda yeni",

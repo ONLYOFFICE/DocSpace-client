@@ -136,7 +136,6 @@
   "MoveItems": "Pomyślnie przeniesiono <2>{{qty}} element(-y/-ów)</2> do katalogu <1>{{folderName}}</1>",
   "MoveOrCopy": "Przenieś lub kopiuj",
   "MoveToArchive": "Przenieś do archiwum",
-  "MoveToPublicRoom": "Ten pokój i cała jego zawartość są dostępne dla każdego, kto ma link. Kontynuować?",
   "MoveToPublicRoomTitle": "Przenieś do pokoju publicznego",
   "MovingToTrash": "Przenoszenie do kosza",
   "NewInFolder": "Nowe w katalogu",

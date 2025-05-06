@@ -136,7 +136,6 @@
   "MoveItems": "<2>{{qty}}个元素</2>已成功移至<1>{{folderName}}</1>",
   "MoveOrCopy": "移动或复制",
   "MoveToArchive": "移动至存档",
-  "MoveToPublicRoom": "任何人都可以通过此链接访问此房间及房间中的所有内容。您要继续吗？",
   "MoveToPublicRoomTitle": "移至公共房间",
   "MovingToTrash": "正在移至回收站",
   "NewInFolder": "文件夹中新建",

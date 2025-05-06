@@ -136,7 +136,6 @@
   "MoveItems": "<2>{{qty}} elementen</2> met succes verplaatst naar <1>{{folderName}}</1>",
   "MoveOrCopy": "Verplaats of kopieer",
   "MoveToArchive": "Verplaatsen naar archief",
-  "MoveToPublicRoom": "Deze kamer en alle inhoud zijn beschikbaar voor iedereen met de link. Wilt u doorgaan?",
   "MoveToPublicRoomTitle": "Naar Openbare kamer",
   "MovingToTrash": "Verplaatsen naar prullenbak",
   "NewInFolder": "Nieuw in map",

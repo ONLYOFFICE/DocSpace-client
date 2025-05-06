@@ -28,7 +28,7 @@ import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.
 import type { TGetIcon } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import type { TFilesSettings } from "@docspace/shared/api/files/types";
 import type { DeviceType } from "@docspace/shared/enums";
-import type { Nullable } from "@docspace/shared/types";
+import type { BackupToPublicRoomOptionType } from "@docspace/shared/types";
 
 export type FileInfoType = {
   id: string | number;
@@ -36,16 +36,6 @@ export type FileInfoType = {
   path?: string[];
   fileExst?: string;
   inPublic?: boolean;
-};
-
-export type BackupToPublicRoomOptionType = {
-  breadCrumbs: TBreadCrumb[];
-  selectedItemId: number | string | undefined;
-  onClose: VoidFunction;
-  onSelectFolder: (
-    folderId: number | string | undefined,
-    breadCrumbs: TBreadCrumb[],
-  ) => void;
 };
 
 export type FilesSelectorSettings =
@@ -93,7 +83,7 @@ export type FilesSelectorInputProps = {
 
   setBackupToPublicRoomVisible?: (
     visible: boolean,
-    options?: Nullable<BackupToPublicRoomOptionType>,
+    options: BackupToPublicRoomOptionType,
   ) => void;
 };
 

@@ -136,7 +136,6 @@
   "MoveItems": "<2>{{qty}} elements</2> onnistuneesti siirretty <1>{{folderName}}</1>",
   "MoveOrCopy": "Siirrä tai Kopioi",
   "MoveToArchive": "Siirrä arkistoon",
-  "MoveToPublicRoom": "Tämä huone ja kaikki sen sisältö on saatavilla kaikille linkin kautta. Haluatko jatkaa?",
   "MoveToPublicRoomTitle": "Siirry Julkiseen huoneeseen",
   "MovingToTrash": "Siirretään roskakoriin",
   "NewInFolder": "Uutta kansiossa",

@@ -856,5 +856,6 @@
   "YouHaveUnsavedChanges": "您有未保存的变更",
   "YourCurrentDomain": "您当前的域",
   "YourLogo": "您的logo",
-  "YourTurn": "轮到您了"
+  "YourTurn": "轮到您了",
+  "MoveToPublicRoom": "任何人都可以通过此链接访问此房间及房间中的所有内容。您要继续吗？"
 }

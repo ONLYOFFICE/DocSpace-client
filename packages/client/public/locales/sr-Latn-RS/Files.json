@@ -136,7 +136,6 @@
   "MoveItems": "<2>{{qty}} elemenata</2> uspešno premešteno u <1>{{folderName}}</1>",
   "MoveOrCopy": "Pomeri ili kopiraj",
   "MoveToArchive": "Pomeri u arhivu",
-  "MoveToPublicRoom": "Ova soba i sav njen sadržaj su dostupni svima sa linkom. Da li želite da nastavite?",
   "MoveToPublicRoomTitle": "Pomeri u Javnu sobu",
   "MovingToTrash": "Premeštanje u otpad",
   "NewInFolder": "Novi u fascikli",

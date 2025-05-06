@@ -136,7 +136,6 @@
   "MoveItems": "<2>{{qty}} elementi</2> veiksmīgi pārvietoti uz <1>{{folderName}}</1>",
   "MoveOrCopy": "Pārvietot vai kopēt",
   "MoveToArchive": "Pārvietot uz arhīvu",
-  "MoveToPublicRoom": "Šī telpa un viss tās saturs ir pieejams ikvienam, kam ir saite. Vai vēlaties turpināt?",
   "MoveToPublicRoomTitle": "Pāriet uz publisko telpu",
   "MovingToTrash": "Pārvieto uz atkritni",
   "NewInFolder": "Jauns mapē",

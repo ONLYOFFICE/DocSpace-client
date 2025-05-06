@@ -136,7 +136,6 @@
   "MoveItems": "<2>{{qty}} éléments</2> déplacés avec succès dans <1>{{folderName}}</1>",
   "MoveOrCopy": "Déplacer ou copier",
   "MoveToArchive": "Déplacer dans l’archive",
-  "MoveToPublicRoom": "Cette salle et tout son contenu sont accessibles à toute personne disposant du lien. Voulez-vous continuer ?",
   "MoveToPublicRoomTitle": "Déplacer vers la salle publique",
   "MovingToTrash": "Déplacement dans la poubelle",
   "NewInFolder": "Nouveau dans le dossier",

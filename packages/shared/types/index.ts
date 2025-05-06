@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import {
   TGetColorTheme,
   TSettings,
@@ -71,6 +72,16 @@ export type ThirdPartyAccountType = {
   id?: string;
   disabled: boolean;
   className?: string;
+};
+
+export type BackupToPublicRoomOptionType = {
+  breadCrumbs: TBreadCrumb[];
+  selectedItemId: number | string | undefined;
+  onClose: VoidFunction;
+  onSelectFolder: (
+    folderId: number | string | undefined,
+    breadCrumbs: TBreadCrumb[],
+  ) => void;
 };
 
 export type TSortOrder = "descending" | "ascending";

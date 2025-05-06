@@ -848,5 +848,6 @@
   "YouHaveUnsavedChanges": "Masz niezapisane zmiany",
   "YourCurrentDomain": "Twoja obecna domena",
   "YourLogo": "Twoje Logo",
-  "YourTurn": "Twoja kolej"
+  "YourTurn": "Twoja kolej",
+  "MoveToPublicRoom": "Ten pokój i cała jego zawartość są dostępne dla każdego, kto ma link. Kontynuować?"
 }

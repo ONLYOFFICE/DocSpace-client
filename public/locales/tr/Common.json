@@ -848,5 +848,6 @@
   "YouHaveUnsavedChanges": "Kaydedilmemiş değişiklikleriniz var",
   "YourCurrentDomain": "Mevcut alanınız",
   "YourLogo": "Logonuz",
-  "YourTurn": "Sıra sizde"
+  "YourTurn": "Sıra sizde",
+  "MoveToPublicRoom": "Bu oda ve tüm içeriği, bağlantıya sahip olan herkesin kullanımına açıktır. Devam etmek istiyor musunuz?"
 }

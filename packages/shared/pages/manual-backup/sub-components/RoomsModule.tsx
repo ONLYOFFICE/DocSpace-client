@@ -32,9 +32,14 @@ import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage"
 import { BackupStorageType, DeviceType } from "@docspace/shared/enums";
 import { FilesSelectorInput } from "@docspace/shared/components/files-selector-input";
 import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
+import BackupToPublicRoom from "@docspace/shared/dialogs/backup-to-public-room-dialog";
 
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import type { FilesSelectorSettings } from "@docspace/shared/components/files-selector-input/FilesSelectorInput.types";
+import type {
+  BackupToPublicRoomOptionType,
+  Nullable,
+} from "@docspace/shared/types";
 
 const Documents = "Documents";
 
@@ -61,6 +66,11 @@ export interface RoomsModuleProps {
   settingsFileSelector: FilesSelectorSettings;
 }
 
+const defaultState = {
+  visible: false,
+  data: null,
+};
+
 const RoomsModule = ({
   onMakeCopy,
   buttonSize,
@@ -76,6 +86,21 @@ const RoomsModule = ({
   settingsFileSelector,
 }: RoomsModuleProps) => {
   const { t } = useTranslation(["Common"]);
+
+  const [backupToPublicRoomDialog, setBackupToPublicRoom] = useState<{
+    visible: boolean;
+    data: Nullable<BackupToPublicRoomOptionType>;
+  }>(defaultState);
+
+  const setBackupToPublicRoomVisible = (
+    visible: boolean,
+    data: Nullable<BackupToPublicRoomOptionType> = null,
+  ) => {
+    setBackupToPublicRoom({
+      visible,
+      data,
+    });
+  };
 
   const folderRef = useRef("");
   const isMountRef = useRef(false);
@@ -136,9 +161,19 @@ const RoomsModule = ({
           withoutInitPath={!selectedFolder}
           currentDeviceType={currentDeviceType}
           filesSelectorSettings={settingsFileSelector}
+          setBackupToPublicRoomVisible={setBackupToPublicRoomVisible}
           {...(selectedFolder ? { id: selectedFolder } : { openRoot: true })}
         />
       </div>
+
+      {backupToPublicRoomDialog.visible && backupToPublicRoomDialog.data ? (
+        <BackupToPublicRoom
+          key="backup-to-public-room-panel"
+          visible={backupToPublicRoomDialog.visible}
+          backupToPublicRoomData={backupToPublicRoomDialog.data}
+          setIsVisible={setBackupToPublicRoomVisible}
+        />
+      ) : null}
       <div className="manual-backup_buttons">
         <Button
           primary

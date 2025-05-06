@@ -136,7 +136,6 @@
   "MoveItems": "<2>{{qty}} 要素</2>が正常に<1>{{folderName}}</1>に移動しました",
   "MoveOrCopy": "移動またはコピーする",
   "MoveToArchive": "アーカイブに移動する",
-  "MoveToPublicRoom": "このルームとすべてのコンテンツは、リンクがあれば誰でも利用できます。このまま続けますか？",
   "MoveToPublicRoomTitle": "パブリックルームへ移動",
   "MovingToTrash": "ゴミ箱に移動",
   "NewInFolder": "フォルダに新しい項目",

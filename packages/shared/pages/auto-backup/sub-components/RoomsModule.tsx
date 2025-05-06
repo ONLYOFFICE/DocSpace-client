@@ -24,14 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useState } from "react";
 
 import { BackupStorageType, type DeviceType } from "@docspace/shared/enums";
 import {
   FilesSelectorInput,
   type FilesSelectorSettings,
 } from "@docspace/shared/components/files-selector-input";
-import type { Nullable } from "@docspace/shared/types";
+import BackupToPublicRoom from "@docspace/shared/dialogs/backup-to-public-room-dialog";
+
+import type {
+  BackupToPublicRoomOptionType,
+  Nullable,
+} from "@docspace/shared/types";
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 
 import {
@@ -60,6 +65,11 @@ interface RoomsModuleProps extends ScheduleComponentProps {
   defaultFolderId: Nullable<string>;
   // end back store
 }
+
+const defaultState = {
+  visible: false,
+  data: null,
+};
 
 const RoomsModule = ({
   isError,
@@ -94,6 +104,21 @@ const RoomsModule = ({
   setTime,
   setWeekday,
 }: RoomsModuleProps) => {
+  const [backupToPublicRoomDialog, setBackupToPublicRoom] = useState<{
+    visible: boolean;
+    data: Nullable<BackupToPublicRoomOptionType>;
+  }>(defaultState);
+
+  const setBackupToPublicRoomVisible = (
+    visible: boolean,
+    data: Nullable<BackupToPublicRoomOptionType> = null,
+  ) => {
+    setBackupToPublicRoom({
+      visible,
+      data,
+    });
+  };
+
   const isDocumentsDefault =
     defaultStorageType === BackupStorageType.DocumentModuleType.toString();
 
@@ -122,9 +147,19 @@ const RoomsModule = ({
           setNewPath={setNewPath}
           setBasePath={setBasePath}
           onSelectFolder={onSelectFolder}
+          setBackupToPublicRoomVisible={setBackupToPublicRoomVisible}
           {...(passedId ? { id: passedId } : { openRoot: true })}
         />
       </div>
+      {backupToPublicRoomDialog.visible && backupToPublicRoomDialog.data ? (
+        <BackupToPublicRoom
+          key="backup-to-public-room-panel"
+          visible={backupToPublicRoomDialog.visible}
+          backupToPublicRoomData={backupToPublicRoomDialog.data}
+          setIsVisible={setBackupToPublicRoomVisible}
+        />
+      ) : null}
+
       <ScheduleComponent
         hoursArray={hoursArray}
         selectedHour={selectedHour}

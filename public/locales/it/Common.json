@@ -856,5 +856,6 @@
   "YouHaveUnsavedChanges": "Hai delle modifiche non salvate",
   "YourCurrentDomain": "Il tuo dominio attuale",
   "YourLogo": "Il tuo logo",
-  "YourTurn": "Il tuo turno"
+  "YourTurn": "Il tuo turno",
+  "MoveToPublicRoom": "Questa stanza e tutti i suoi contenuti sono disponibili a chiunque abbia il link. Vuoi continuare?"
 }

@@ -856,5 +856,6 @@
   "YouHaveUnsavedChanges": "Имате несачуване промене",
   "YourCurrentDomain": "Ваш тренутни домен",
   "YourLogo": "Ваш лого",
-  "YourTurn": "Ваш ред"
+  "YourTurn": "Ваш ред",
+  "MoveToPublicRoom": "Ова соба и сав њен садржај су доступни свима са линком. Да ли желите да наставите?"
 }

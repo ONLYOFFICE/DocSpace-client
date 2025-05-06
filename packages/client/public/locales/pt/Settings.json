@@ -289,7 +289,6 @@
   "SharedFiles": "Arquivos compartilhados",
   "SharedFilesImportLocation": "Arquivos compartilhados por outros usuários serão importados para {{sectionName}} > Acessados recentemente via link. Observação: alguns direitos de acesso podem ser perdidos durante a importação.",
   "SharedFolders": "Pastas partilhadas",
-  "SharedFoldersDescription": "As pastas compartilhadas serão importadas para a seção Salas como salas com usuários aos quais foi concedido acesso. Observação: alguns direitos de acesso podem ser perdidos durante a importação",
   "ShowFeedbackAndSupport": "Mostre a link Feedback & Support",
   "ShowHelpCenter": "Mostre os links para o Centro de Ajuda",
   "SingleSignOn": "Início de Sessão Único",

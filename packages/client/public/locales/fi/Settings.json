@@ -289,7 +289,6 @@
   "SharedFiles": "Jaetut tiedostot",
   "SharedFilesImportLocation": "Muiden käyttäjien jakamat tiedostot tuodaan {{sectionName}} > Äskettäin linkin kautta saatavilla -osioon. Huomaa: jotkut käyttöoikeudet voivat kadota tuonnin yhteydessä.",
   "SharedFolders": "Jaetut kansiot",
-  "SharedFoldersDescription": "Jaetut kansiot tuodaan Huoneet-osioon huoneina käyttäjineen. Huom: Jotkin käyttöoikeudet saattavat hävitä tuonnin aikana",
   "ShowFeedbackAndSupport": "Näytä palaute & tukilinkki",
   "ShowHelpCenter": "Näytä Help Centerin linkit",
   "SingleSignOn": "Kertakirjautuminen",

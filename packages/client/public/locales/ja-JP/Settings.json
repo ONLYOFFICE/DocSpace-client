@@ -289,7 +289,6 @@
   "SharedFiles": "共有ファイル",
   "SharedFilesImportLocation": "他のユーザーが共有したファイルは {{sectionName}} > 「リンク経由で最近アクセスしたファイル」にインポートされます。注意: インポート中に一部のアクセス権が失われる場合があります。",
   "SharedFolders": "共有フォルダ",
-  "SharedFoldersDescription": "共有フォルダは、アクセス権が付与されたユーザーのルームとして「ルーム」セクションにインポートされます。注意： 一部のアクセス権は、インポート中に失われる場合があります。",
   "ShowFeedbackAndSupport": "フィードバックとサポートリンクを表示",
   "ShowHelpCenter": "ヘルプセンターへのリンクを表示",
   "SingleSignOn": "シングルサインオン",

@@ -289,7 +289,6 @@
   "SharedFiles": "Fichiers partagés",
   "SharedFilesImportLocation": "Les fichiers partagés par d'autres utilisateurs seront importés dans {{sectionName}} > Récemment accessible par un lien. Remarque : certains droits d'accès peuvent être perdus lors de l'importation.",
   "SharedFolders": "Dossiers partagés",
-  "SharedFoldersDescription": "Dossiers partagés sont importés dans la section Salles en tant que salles avec les utilisateurs auxquels on a accordé l'accès. Remarque: il se peut que certains autorisations d'accès soient perdus lors de l'importation.",
   "ShowFeedbackAndSupport": "Afficher le lien Feedback et assistance",
   "ShowHelpCenter": "Afficher les liens vers le centre d'aide",
   "SingleSignOn": "Authentification unique",

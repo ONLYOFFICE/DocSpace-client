@@ -289,7 +289,6 @@
   "SharedFiles": "Paylaşılan dosyalar",
   "SharedFilesImportLocation": "Diğer kullanıcılar tarafından paylaşılan dosyalar {{sectionName}} > Bağlantı ile son erişilenler bölümüne aktarılacaktır. Not: İçe aktarma sırasında bazı erişim izinleri kaybolabilir.",
   "SharedFolders": "Paylaşılan klasörler",
-  "SharedFoldersDescription": "Paylaşılan klasörler, erişim hakkı verilen kullanıcıların bulunduğu odalar olarak Odalar bölümüne aktarılacaktır. Lütfen dikkat: içe aktarma sırasında bazı erişim hakları kaybedilebilir",
   "ShowFeedbackAndSupport": "Geri Bildirim ve Destek bağlantısını göster",
   "ShowHelpCenter": "Yardım Merkezine bağlantıları göster",
   "SingleSignOn": "Tek Seferlik Giriş",

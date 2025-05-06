@@ -289,7 +289,6 @@
   "SharedFiles": "Deljene datoteke",
   "SharedFilesImportLocation": "Fajlovi koje dele drugi korisnici biće uvezeni u {{sectionName}} > Nedavno dostupno preko veze. Imajte na umu: neka prava pristupa mogu biti izgubljena tokom uvoza.",
   "SharedFolders": "Deljeni folderi",
-  "SharedFoldersDescription": "Deljeni folderi će biti uvezeni u odeljak Sobe kao sobe sa korisnicima kojima je dat pristup. Molimo vas da imate na umu: neka prava pristupa mogu biti izgubljena tokom uvoza.",
   "ShowFeedbackAndSupport": "Prikaži link za povratne informacije i podršku",
   "ShowHelpCenter": "Prikaži linkove ka Centru za pomoć",
   "SingleSignOn": "Jednokratna prijava",

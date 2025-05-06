@@ -289,7 +289,6 @@
   "SharedFiles": "Koplietotie faili",
   "SharedFilesImportLocation": "Citu lietotāju koplietotie faili tiks importēti uz {{sectionName}} > Nesen pieejami caur saiti. Ņemiet vērā: importēšanas laikā var tikt zaudētas dažas piekļuves tiesības.",
   "SharedFolders": "Kopīgotās mapes",
-  "SharedFoldersDescription": "Koplietojamās mapes tiks importētas sadaļā Telpas kā telpas ar lietotājiem, kuriem tika piešķirta piekļuve. Ņemiet vērā: importēšanas laikā dažas piekļuves tiesības var tikt zaudētas",
   "ShowFeedbackAndSupport": "Rādīt atsauksmju un atbalsta saiti",
   "ShowHelpCenter": "Rādīt saites uz palīdzības centru",
   "SingleSignOn": "Vienotā pierakstīšanās",

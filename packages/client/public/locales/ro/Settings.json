@@ -289,7 +289,6 @@
   "SharedFiles": "Fișiere partajate",
   "SharedFilesImportLocation": "Fișierele partajate de alți utilizatori vor fi importate în {{sectionName}} > Recente sunt accesibile prin link. Rețineți: este posibil ca unele drepturi de acces să se piardă în timpul importului.",
   "SharedFolders": "Foldere partajate",
-  "SharedFoldersDescription": "Folderele partajate vor fi importate în secțiunea Săli ca sălile cu utilizatorii cărora li s-a acordat accesul. Rețineți: este posibil ca unele drepturi de acces să se piardă în timpul importului",
   "ShowFeedbackAndSupport": "Afişare linkul de feedback şi asistenţă",
   "ShowHelpCenter": "Afişare linkul către Centru de ajutor",
   "SingleSignOn": "Autentificare unică",

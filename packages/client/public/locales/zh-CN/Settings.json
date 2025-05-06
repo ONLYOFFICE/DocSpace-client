@@ -289,7 +289,6 @@
   "SharedFiles": "共享文件",
   "SharedFilesImportLocation": "其他用户共享的文件将导入{{sectionName}} > 最近通过链接访问。请注意：导入过程中可能会丢失部分访问权限。",
   "SharedFolders": "共享文件夹",
-  "SharedFoldersDescription": "共享文件夹会被导入至“房间”部分，作为有被授予访问权限的用户的房间。请注意：导入过程中某些访问权限可能会丢失",
   "ShowFeedbackAndSupport": "显示反馈 & 支持链接",
   "ShowHelpCenter": "显示帮助中心链接",
   "SingleSignOn": "单点登录",

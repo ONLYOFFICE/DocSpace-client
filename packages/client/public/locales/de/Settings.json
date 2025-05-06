@@ -289,7 +289,6 @@
   "SharedFiles": "Freigegebene Dateien",
   "SharedFilesImportLocation": "Von anderen Benutzern freigegebene Dateien werden in {{sectionName}} > Zuletzt über Link aufgerufen importiert. Bitte beachten Sie: Beim Import können Zugriffsrechte verloren gehen.",
   "SharedFolders": "Freigegebene Ordner",
-  "SharedFoldersDescription": "Freigegebene Ordner werden in den Bereich „Räume“ als Räume mit Benutzern importiert, denen Zugriff gewährt wurde. Bitte beachten Sie: Beim Import können einige Zugriffsrechte verloren gehen",
   "ShowFeedbackAndSupport": "Link zu Feedback & Support anzeigen",
   "ShowHelpCenter": "Links zum Hilfe-Center anzeigen",
   "SingleSignOn": "Single Sign-On",

@@ -289,7 +289,6 @@
   "SharedFiles": "Udostępnione pliki",
   "SharedFilesImportLocation": "Pliki udostępnione przez innych użytkowników zostaną zaimportowane do {{sectionName}} > Ostatnio dostępne przez link. Uwaga: niektóre uprawnienia dostępu mogą zostać utracone podczas importu.",
   "SharedFolders": "Współdzielone katalogi",
-  "SharedFoldersDescription": "Współdzielone katalogi zostaną zaimportowane do sekcji Pokoje jako pokoje z użytkownikami, którym przyznano dostęp. Uwaga: niektóre prawa dostępu mogą zostać utracone podczas importu.",
   "ShowFeedbackAndSupport": "Pokaż link do sekcji Opinii i wsparcia",
   "ShowHelpCenter": "Pokaż linki do sekcji Centrum pomocy",
   "SingleSignOn": "Logowanie jednokrotne (SSO)",

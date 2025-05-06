@@ -289,7 +289,6 @@
   "SharedFiles": "Zdieľané súbory",
   "SharedFilesImportLocation": "Súbory zdieľané inými používateľmi budú importované do {{sectionName}} > Nedávno prístupné pomocou odkazu. Poznámka: počas importu môžu byť stratené niektoré prístupové práva.",
   "SharedFolders": "Zdieľané priečinky",
-  "SharedFoldersDescription": "Zdieľané priečinky budú importované do časti Miestnosti ako miestnosti s používateľmi, ktorým bol udelený prístup. Upozornenie: počas importu sa môžu stratiť niektoré prístupové práva.",
   "ShowFeedbackAndSupport": "Zobraziť odkaz na spätnú väzbu a podporu",
   "ShowHelpCenter": "Zobraziť odkazy na Centrum pomoci",
   "SingleSignOn": "Jednotné prihlásenie",

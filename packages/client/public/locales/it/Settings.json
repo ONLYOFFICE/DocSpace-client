@@ -289,7 +289,6 @@
   "SharedFiles": "File condivisi",
   "SharedFilesImportLocation": "I file condivisi da altri utenti verranno importati in {{sectionName}} > Accessibili di recente tramite link. Nota: alcuni diritti di accesso potrebbero andare persi durante l'importazione.",
   "SharedFolders": "Cartelle condivise",
-  "SharedFoldersDescription": "Le cartelle condivise verranno importate nella sezione Stanze come stanze con utenti a cui è stato concesso l'accesso. Nota: alcuni diritti di accesso potrebbero andare persi durante l'importazione.",
   "ShowFeedbackAndSupport": "Mostra link a Feedback e Supporto",
   "ShowHelpCenter": "Mostra link al Centro assistenza",
   "SingleSignOn": "Single Sign-On",

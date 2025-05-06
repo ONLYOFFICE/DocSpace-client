@@ -3066,17 +3066,6 @@ const Dark: TTheme = {
     descriptionTextColor: grayDark,
   },
 
-  codeInput: {
-    background: darkGrayLight,
-    border: `1px solid ${grayDarkStrong}`,
-    color: white,
-    lineColor: grayDark,
-    disabledBackground: grayDarkStrong,
-    disabledBorder: `1px solid ${grayDarkStrong}`,
-    disabledColor: grayDark,
-    focusBorder: `1px solid ${lightSecondMain}`,
-  },
-
   accessRightSelect: {
     descriptionColor: grayDark,
   },

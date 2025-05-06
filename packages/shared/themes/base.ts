@@ -3079,17 +3079,6 @@ export const getBaseTheme = () => {
       descriptionTextColor: gray,
     },
 
-    codeInput: {
-      background: white,
-      border: `1px solid ${grayStrong}`,
-      color: black,
-      lineColor: grayStrong,
-      disabledBackground: grayLight,
-      disabledBorder: `1px solid ${grayLightMid}`,
-      disabledColor: gray,
-      focusBorder: `1px solid ${lightSecondMain}`,
-    },
-
     accessRightSelect: {
       descriptionColor: gray,
     },

@@ -28,7 +28,6 @@
   padding-bottom: 21px;
   padding-top: 21px;
   border-bottom: 1px solid var(--aside-header-border-color);
-  border-top: 1px solid var(--aside-header-border-color);
 
   .payment-method-description {
     margin-bottom: 12px;
@@ -60,12 +59,6 @@
       width: 12px;
       height: 24px;
     }
-  }
-
-  .add-payment-text {
-    font-size: 14px;
-    line-height: 16px;
-    color: var(--payment-dialog-text);
   }
 
   .card-linked {

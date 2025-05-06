@@ -26,12 +26,14 @@
 
 import React, { useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { isMobile } from "react-device-detect";
 
 import { Tabs, TabsTypes, TTabItem } from "@docspace/shared/components/tabs";
 import { InputType, TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
-import { formatCurrencyValue } from "../utils";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 
+import { formatCurrencyValue } from "../utils";
 import "../styles/Amount.scss";
 
 type AmountProps = {
@@ -39,10 +41,11 @@ type AmountProps = {
   amount: string;
   language: string;
   currency: string;
+  walletCustomerEmail: string | null;
 };
 
 const Amount = (props: AmountProps) => {
-  const { setAmount, amount, language, currency } = props;
+  const { setAmount, amount, language, currency, walletCustomerEmail } = props;
 
   const [selectedAmount, setSelectedAmount] = useState<string | undefined>();
   const { t } = useTranslation("Payments");
@@ -54,33 +57,38 @@ const Amount = (props: AmountProps) => {
         id: "10",
         value: 10,
         content: null,
+        isDisabled: !walletCustomerEmail,
       },
       {
         name: formatCurrencyValue(language, 20, currency),
         id: "20",
         value: 20,
         content: null,
+        isDisabled: !walletCustomerEmail,
       },
       {
         name: formatCurrencyValue(language, 30, currency),
         id: "30",
         value: 30,
         content: null,
+        isDisabled: !walletCustomerEmail,
       },
       {
         name: formatCurrencyValue(language, 50, currency),
         id: "50",
         value: 50,
         content: null,
+        isDisabled: !walletCustomerEmail,
       },
       {
         name: formatCurrencyValue(language, 100, currency),
         id: "100",
         value: 100,
         content: null,
+        isDisabled: !walletCustomerEmail,
       },
     ],
-    [language, currency],
+    [language, currency, walletCustomerEmail],
   );
 
   const onSelectAmount = (data: TTabItem) => {
@@ -97,33 +105,54 @@ const Amount = (props: AmountProps) => {
     }
   };
 
+  const textTooltip = () => {
+    return (
+      <Text fontSize="12px" noSelect>
+        {t("FirstAddPaymentMethod")}
+      </Text>
+    );
+  };
+
   return (
     <div className="amount-container">
-      <div className="tabs-wrapper">
-        <Text fontWeight="700" fontSize="16px" className="amount-title">
-          {t("AmountSelection")}
+      <div data-tooltip-id="iconTooltip">
+        <div className="tabs-wrapper">
+          <Text fontWeight="700" fontSize="16px" className="amount-title-main">
+            {t("AmountSelection")}
+          </Text>
+          <Tabs
+            items={amountTabs}
+            selectedItemId={selectedAmount}
+            onSelect={onSelectAmount}
+            type={TabsTypes.Secondary}
+            allowNoSelection
+            withoutStickyIntend
+          />
+        </div>
+        <Text fontWeight={600} className="amount-title ">
+          {t("Amount")}
         </Text>
-        <Tabs
-          items={amountTabs}
-          selectedItemId={selectedAmount}
-          onSelect={onSelectAmount}
-          type={TabsTypes.Secondary}
-          allowNoSelection
-          withoutStickyIntend
+        <TextInput
+          value={amount}
+          onChange={onChangeTextInput}
+          pattern="\d+"
+          scale
+          withBorder
+          type={InputType.text}
+          placeholder={t("EnterAmount")}
+          isDisabled={!walletCustomerEmail}
         />
       </div>
-      <Text fontWeight={600} className="amount-title ">
-        {t("Amount")}
-      </Text>
-      <TextInput
-        value={amount}
-        onChange={onChangeTextInput}
-        pattern="\d+"
-        scale
-        withBorder
-        type={InputType.text}
-        placeholder={t("EnterAmount")}
-      />
+      {!walletCustomerEmail ? (
+        <Tooltip
+          id="iconTooltip"
+          place="bottom"
+          maxWidth="300px"
+          float
+          getContent={textTooltip}
+          openOnClick={isMobile}
+        />
+      ) : null}
     </div>
   );
 };

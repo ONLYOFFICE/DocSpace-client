@@ -27,7 +27,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
 
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Text } from "@docspace/shared/components/text";
@@ -35,7 +34,6 @@ import { TextInput, InputType } from "@docspace/shared/components/text-input";
 import { toastr } from "@docspace/shared/components/toast";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { TAutoTopUpSettings } from "@docspace/shared/api/portal/types";
-import { Tooltip } from "@docspace/shared/components/tooltip";
 
 import CheckRoundSvg from "PUBLIC_DIR/images/icons/16/check.round.react.svg";
 
@@ -318,44 +316,23 @@ const AutoPayments = (props: AutoPaymentsProps) => {
     </div>
   );
 
-  const textTooltip = () => {
-    return (
-      <Text fontSize="12px" noSelect>
-        {t("FirstAddPaymentMethod")}
-      </Text>
-    );
-  };
-
   return (
     <div className="automatic-payments-block">
-      <div data-tooltip-id="iconTooltip">
-        <div className="auto-payment-header">
-          <Text noSelect isBold fontSize="16px">
-            {t("AutomaticPayments")}
-          </Text>
-          <ToggleButton
-            isChecked={isAutomaticPaymentsEnabled}
-            onChange={onToggleClick}
-            className="toggle-button"
-            isDisabled={!walletCustomerEmail}
-          />
-        </div>
-
-        <Text fontSize="12px" className="auto-payment-description" noSelect>
-          {t("AutomaticallyTopUpCard")}
+      <div className="auto-payment-header">
+        <Text noSelect isBold fontSize="16px">
+          {t("AutomaticPayments")}
         </Text>
+        <ToggleButton
+          isChecked={isAutomaticPaymentsEnabled}
+          onChange={onToggleClick}
+          className="toggle-button"
+          isDisabled={!walletCustomerEmail}
+        />
       </div>
 
-      {!walletCustomerEmail ? (
-        <Tooltip
-          id="iconTooltip"
-          place="bottom"
-          maxWidth="300px"
-          float
-          getContent={textTooltip}
-          openOnClick={isMobile}
-        />
-      ) : null}
+      <Text fontSize="12px" className="auto-payment-description" noSelect>
+        {t("AutomaticallyTopUpCard")}
+      </Text>
 
       {isAutomaticPaymentsEnabled
         ? isCurrentSettings

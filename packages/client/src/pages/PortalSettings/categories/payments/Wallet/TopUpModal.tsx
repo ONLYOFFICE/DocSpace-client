@@ -136,23 +136,27 @@ const TopUpModal = (props: TopUpModalProps) => {
       <ModalDialog.Body>
         <StyledBody>
           <WalletInfo balance={balanceValue} />
-          <Amount
-            setAmount={setAmount}
-            amount={amount}
-            language={language!}
-            currency={currency}
-          />
           <PaymentMethod
             walletCustomerEmail={walletCustomerEmail!}
             cardLinked={cardLinked!}
             accountLink={accountLink!}
           />
-          <AutomaticPaymentsBlock
-            walletCustomerEmail={walletCustomerEmail!}
-            currency={currency}
-            isEditAutoPayment={isEditAutoPayment!}
+          <Amount
+            setAmount={setAmount}
+            amount={amount}
             language={language!}
+            currency={currency}
+            walletCustomerEmail={walletCustomerEmail}
           />
+
+          {walletCustomerEmail ? (
+            <AutomaticPaymentsBlock
+              walletCustomerEmail={walletCustomerEmail!}
+              currency={currency}
+              isEditAutoPayment={isEditAutoPayment!}
+              language={language!}
+            />
+          ) : null}
         </StyledBody>
       </ModalDialog.Body>
       <ModalDialog.Footer>

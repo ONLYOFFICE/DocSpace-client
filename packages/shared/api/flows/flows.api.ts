@@ -22,6 +22,7 @@ import {
   CHECK_FOLDER_ID,
   CHAT_ID,
   SUMMARIZE_FILE_ID,
+  SAVE_TO_FILE_ID,
 } from "./flows.constants";
 
 let eventDelivery: TEventDelivery = "";
@@ -335,11 +336,11 @@ class FlowsApi {
   }
 
   static async getFlow(flowId: string): Promise<Flow> {
-    const response: { data: unknown } = await FlowsApi.getAPI().get(
+    const response: { data: Flow } = await FlowsApi.getAPI().get(
       `flows/${flowId}`,
     );
 
-    return response.data as Flow;
+    return response.data;
   }
 
   static async buildFlow(
@@ -480,6 +481,14 @@ class FlowsApi {
       "text",
       {},
     );
+  }
+
+  static async getSaveToFileFlow(): Promise<Flow> {
+    return FlowsApi.getFlow(SAVE_TO_FILE_ID);
+  }
+
+  static async saveToFile(tweaks: Tweaks): Promise<SimpleRunFlowResponse> {
+    return FlowsApi.simpleRunFlow(SAVE_TO_FILE_ID, "", "text", "text", tweaks);
   }
 }
 

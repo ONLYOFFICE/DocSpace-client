@@ -28,6 +28,7 @@ import React from "react";
 import { makeAutoObservable, runInAction } from "mobx";
 
 import FlowsApi from "../../../api/flows/flows.api";
+import { Flow, Tweaks } from "../../../api/flows/flows.types";
 
 import { TSelectorItem } from "../../selector";
 
@@ -41,6 +42,8 @@ import {
 
 export default class MessageStore {
   flowId = "";
+
+  saveToFileFlow: Flow | null = null;
 
   aiSelectedFolder: string | number = "";
 
@@ -89,10 +92,10 @@ export default class MessageStore {
 
     this.isRequestRunning = true;
 
-    const messages = await FlowsApi.getMessages(
-      this.flowId,
-      this.aiSelectedFolder.toString(),
-    );
+    const [messages, saveToFileFlow] = await Promise.all([
+      FlowsApi.getMessages(this.flowId, this.aiSelectedFolder.toString()),
+      FlowsApi.getSaveToFileFlow(),
+    ]);
 
     const sessions = new Map<string, ChatMessageType[]>();
 
@@ -180,6 +183,7 @@ export default class MessageStore {
 
     runInAction(() => {
       this.sessions = newSessions;
+      this.saveToFileFlow = saveToFileFlow;
       this.sortedSessions = sortedTimestampSessions;
       this.isInit = true;
       this.isRequestRunning = false;
@@ -354,6 +358,34 @@ export default class MessageStore {
       console.log("Unexpected error in sendMessage:", e);
       this.isRequestRunning = false;
     }
+  };
+
+  saveMessageToFile = async (message: string, title: string) => {
+    if (!this.saveToFileFlow) return;
+
+    const tweaks: Tweaks = {};
+
+    this.saveToFileFlow.data.nodes.forEach((n) => {
+      if (n.id.includes("ContentInput")) {
+        tweaks[n.id] = { input_value: message };
+      }
+
+      if (n.id.includes("TitleInput")) {
+        tweaks[n.id] = { input_value: title };
+      }
+
+      if (n.id.includes("FolderIDInput")) {
+        tweaks[n.id] = { input_value: this.aiSelectedFolder };
+      }
+    });
+
+    await FlowsApi.simpleRunFlow(
+      this.saveToFileFlow.id,
+      "",
+      "text",
+      "text",
+      tweaks,
+    );
   };
 
   cancelBuild = () => {

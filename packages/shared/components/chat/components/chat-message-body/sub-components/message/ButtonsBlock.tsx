@@ -26,14 +26,17 @@
 
 import React from "react";
 import copy from "copy-to-clipboard";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 
 import FileReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
 import { IconButton } from "../../../../../icon-button";
+import { toastr } from "../../../../..//toast";
+import { Text } from "../../../../../text";
 
 import { ChatMessageType } from "../../../../types/chat";
+import { useMessageStore } from "../../../../store/messageStore";
 
 import styles from "../../ChatMessageBody.module.scss";
 
@@ -41,9 +44,39 @@ type ButtonsBlockProps = Pick<ChatMessageType, "message">;
 
 const ButtonsBlock = ({ message }: ButtonsBlockProps) => {
   const { t } = useTranslation(["Common"]);
+
+  const { saveMessageToFile } = useMessageStore();
+
   const onCopy = () => {
     if (typeof message === "string") {
       copy(message);
+
+      toastr.success(t("Common:CopyMessageSuccess"));
+    }
+  };
+
+  const onCreateFile = async () => {
+    if (typeof message === "string") {
+      const title = message.substring(0, 20);
+
+      try {
+        await saveMessageToFile(message, title);
+
+        toastr.success(
+          <Trans
+            i18nKey="SaveMessageSuccess"
+            ns="Common"
+            t={t}
+            values={{ title }}
+            components={{
+              1: <Text fontSize="13px" fontWeight={600} />,
+            }}
+          />,
+        );
+      } catch (error) {
+        toastr.error(error as string);
+        return;
+      }
     }
   };
 
@@ -63,6 +96,7 @@ const ButtonsBlock = ({ message }: ButtonsBlockProps) => {
         isClickable
         tooltipId="fileTooltip"
         tooltipContent={t("Common:SaveMessage")}
+        onClick={onCreateFile}
       />
     </div>
   );

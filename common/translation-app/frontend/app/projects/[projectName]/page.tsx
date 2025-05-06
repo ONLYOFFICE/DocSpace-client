@@ -32,8 +32,6 @@ export default function ProjectPage() {
   // we need to keep a reference of the toastId to be able to update it
   const toastId = useRef<Id | null>(null);
 
-  const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
-  const [showUntranslated, setShowUntranslated] = useState<boolean>(false);
   const [isNamespaceModalOpen, setIsNamespaceModalOpen] =
     useState<boolean>(false);
   const [namespaceForContextMenu, setNamespaceForContextMenu] = useState<
@@ -80,6 +78,10 @@ export default function ProjectPage() {
     fetchLanguages,
     loading: languagesLoading,
     error: languagesError,
+    selectedLanguages,
+    setSelectedLanguages,
+    showUntranslated,
+    setShowUntranslated,
   } = useLanguageStore();
 
   const {
@@ -145,12 +147,14 @@ export default function ProjectPage() {
   useEffect(() => {
     if (languages.length > 0 && baseLanguage) {
       // Select all languages by default instead of just the base language
-      setSelectedLanguages([...languages]);
+      if (selectedLanguages.length === 0) {
+        setSelectedLanguages([...languages]);
+      }
 
       // Fetch namespaces for the base language
       fetchNamespaces(projectName, baseLanguage);
     }
-  }, [languages, baseLanguage]);
+  }, [languages, selectedLanguages, baseLanguage]);
 
   // Get URL parameters and manage state
   const [keyFromUrl, setKeyFromUrl] = useState<string | null>(null);
@@ -292,28 +296,25 @@ export default function ProjectPage() {
 
   // Toggle a language selection
   const handleLanguageToggle = (language: string) => {
-    setSelectedLanguages((prev) => {
-      // Handle special 'selectAll' and 'deselectAll' actions
-      if (language === "selectAll") {
-        return [...languages]; // Select all languages
-      }
+    if (!language) return;
 
-      if (language === "deselectAll") {
-        return baseLanguage ? [baseLanguage] : []; // Keep only base language
-      }
+    if (language === baseLanguage) {
+      return;
+    }
 
-      // Always keep at least the base language
-      if (language === baseLanguage) {
-        return prev;
-      }
+    let newSelection = [];
 
-      // Toggle the language
-      if (prev.includes(language)) {
-        return prev.filter((lang) => lang !== language);
-      } else {
-        return [...prev, language];
-      }
-    });
+    if (language === "selectAll") {
+      newSelection = [...languages];
+    } else if (language === "deselectAll") {
+      newSelection = [baseLanguage];
+    } else {
+      newSelection = selectedLanguages.includes(language)
+        ? selectedLanguages.filter((lang) => lang !== language)
+        : [...selectedLanguages, language];
+    }
+
+    setSelectedLanguages(newSelection);
   };
 
   // Handle namespace selection
@@ -555,7 +556,7 @@ export default function ProjectPage() {
   const handleBackClick = () => {
     // Clear all state before navigating back
     setCurrentNamespace(null); // Clear namespace selection
-    setSelectedLanguages([]); // Clear selected languages
+    // setSelectedLanguages([]); // Clear selected languages
     resetTranslations(); // Reset translation data including the current key
 
     // Navigate back to the projects list

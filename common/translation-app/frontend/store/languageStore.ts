@@ -1,14 +1,22 @@
 import { create } from "zustand";
 import * as api from "@/lib/api";
-import { useProjectStore } from './projectStore';
+import { useProjectStore } from "./projectStore";
+
+// Local storage keys
+const SELECTED_LANGUAGES_KEY = "translation-app-selected-languages";
+const SHOW_UNTRANSLATED_KEY = "translation-app-show-untranslated";
 
 interface LanguageState {
   languages: string[];
+  selectedLanguages: string[];
   baseLanguage: string;
   loading: boolean;
   error: string | null;
+  showUntranslated: boolean;
 
   // Actions
+  setSelectedLanguages: (languages: string[]) => void;
+  setShowUntranslated: (show: boolean) => void;
   fetchLanguages: (projectName: string) => Promise<void>;
   addLanguage: (projectName: string, language: string) => Promise<boolean>;
   addLanguageToAllProjects: (
@@ -17,11 +25,44 @@ interface LanguageState {
   clearError: () => void;
 }
 
+// Helper function to safely parse JSON from localStorage
+const getStoredValue = <T>(key: string, defaultValue: T): T => {
+  if (typeof window === "undefined") return defaultValue;
+  
+  try {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : defaultValue;
+  } catch (error) {
+    console.error(`Error retrieving ${key} from localStorage:`, error);
+    return defaultValue;
+  }
+};
+
 export const useLanguageStore = create<LanguageState>((set, get) => ({
   languages: [],
+  selectedLanguages: getStoredValue<string[]>(SELECTED_LANGUAGES_KEY, []),
   baseLanguage: "en",
   loading: false,
   error: null,
+  showUntranslated: getStoredValue<boolean>(SHOW_UNTRANSLATED_KEY, false),
+
+  setSelectedLanguages: (languages: string[]) => {
+    set({ selectedLanguages: languages });
+    
+    // Save to localStorage
+    if (typeof window !== "undefined") {
+      localStorage.setItem(SELECTED_LANGUAGES_KEY, JSON.stringify(languages));
+    }
+  },
+
+  setShowUntranslated: (show: boolean) => {
+    set({ showUntranslated: show });
+    
+    // Save to localStorage
+    if (typeof window !== "undefined") {
+      localStorage.setItem(SHOW_UNTRANSLATED_KEY, JSON.stringify(show));
+    }
+  },
 
   fetchLanguages: async (projectName: string) => {
     try {
@@ -102,16 +143,19 @@ export const useLanguageStore = create<LanguageState>((set, get) => ({
       try {
         // Get the current project from the project store
         const currentProject = useProjectStore.getState().currentProject;
-        
+
         if (currentProject) {
           // Refresh languages for current project
           await get().fetchLanguages(currentProject.name);
         }
       } catch (refreshError) {
-        console.error('Failed to refresh language list after adding new language:', refreshError);
+        console.error(
+          "Failed to refresh language list after adding new language:",
+          refreshError
+        );
         // Continue despite refresh error - the language addition was still successful
       }
-      
+
       set({ loading: false });
 
       return {

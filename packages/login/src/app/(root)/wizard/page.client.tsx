@@ -159,13 +159,15 @@ function WizardForm(props: WizardFormProps) {
 
   const cultureNames = useMemo(() => {
     if (portalCultures) return mapCulturesToArray(portalCultures, true, i18n);
+    return [];
   }, [portalCultures, i18n]);
   const currentCulture = cultureNames?.find((item) => item.key === currCulture);
 
   const zones = useMemo(() => {
     if (portalTimeZones) return mapTimezonesToArray(portalTimeZones);
+    return [];
   }, [portalTimeZones]);
-  const currentZones = getSelectZone(zones ?? [], userTimeZone)[0];
+  const currentZone = getSelectZone(zones ?? [], userTimeZone)[0];
 
   const onEmailChangeHandler = (result: TValidate): undefined => {
     setHasErrorEmail(!result.isValid);
@@ -292,7 +294,7 @@ function WizardForm(props: WizardFormProps) {
         emailTrim,
         hash,
         currentCulture?.key || "en",
-        selectedTimezone?.key || currentZones?.key,
+        selectedTimezone?.key || currentZone?.key,
         wizardToken,
         analytics,
         isAmi && amiId ? amiId : null,
@@ -457,7 +459,7 @@ function WizardForm(props: WizardFormProps) {
           <ComboBox
             withoutPadding
             directionY="both"
-            options={cultureNames || []}
+            options={cultureNames ?? []}
             selectedOption={currentCulture as TOption}
             onSelect={onLanguageSelect}
             isDisabled={isCreated}
@@ -494,8 +496,8 @@ function WizardForm(props: WizardFormProps) {
           textOverflow
           withoutPadding
           directionY="both"
-          options={zones || []}
-          selectedOption={selectedTimezone || currentZones}
+          options={zones ?? []}
+          selectedOption={selectedTimezone ?? currentZone}
           onSelect={onTimezoneSelect}
           isDisabled={isCreated}
           scaled={isMobileView}

@@ -40,7 +40,7 @@ const GroupsLoader = () => {
             height="32px"
             borderRadius="50%"
           />
-          <div className="user-info">
+          <div className={styles.userInfo}>
             <RectangleSkeleton width="128px" height="12px" borderRadius="3px" />
             <RectangleSkeleton
               className="role-selector"

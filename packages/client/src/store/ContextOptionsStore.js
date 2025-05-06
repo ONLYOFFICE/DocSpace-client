@@ -1363,7 +1363,6 @@ class ContextOptionsStore {
       isRecycleBinFolder,
       isArchiveFolder,
       isTemplatesFolder,
-      personalUserFolderTitle,
       isPersonalReadOnly,
     } = this.treeFoldersStore;
     const { roomsForDelete, roomsForRestore } = this.filesStore;

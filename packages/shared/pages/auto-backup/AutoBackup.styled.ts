@@ -48,14 +48,6 @@ const UnavailableStyles = css`
   }
 `;
 
-const floatingButtonStyles = css`
-  .layout-progress-bar {
-    position: fixed;
-    inset-inline-end: 24px;
-    bottom: 24px;
-  }
-`;
-
 const commonStyles = css`
   .backup_modules-description {
     margin-bottom: 8px;
@@ -139,7 +131,6 @@ export const StyledModules = styled.div<{ isDisabled?: boolean }>`
 export const StyledAutoBackup = styled.div<{ pageIsDisabled?: boolean }>`
   ${commonStyles}
 
-  ${floatingButtonStyles}
   .auto-backup_third-party-module {
     margin-top: 16px;
     margin-inline-start: 24px;

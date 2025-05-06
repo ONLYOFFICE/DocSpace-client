@@ -123,17 +123,8 @@ export const UnavailableStyles = css`
   }
 `;
 
-const floatingButtonStyles = css`
-  .layout-progress-bar {
-    position: fixed;
-    inset-inline-end: 24px;
-    bottom: 24px;
-  }
-`;
-
 export const StyledRestoreBackup = styled.div<StyledRestoreBackupProps>`
   ${commonStyles}
-  ${floatingButtonStyles}
 
   max-width: ${TEXT_LENGTH};
 

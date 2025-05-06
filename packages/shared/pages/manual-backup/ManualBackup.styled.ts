@@ -34,14 +34,6 @@ import type { StyledModulesProps } from "./ManualBackup.types";
 const INPUT_LENGTH = "350px";
 const TEXT_LENGTH = "700px";
 
-const floatingButtonStyles = css`
-  .layout-progress-bar {
-    position: fixed;
-    inset-inline-end: 24px;
-    bottom: 24px;
-  }
-`;
-
 const commonStyles = css`
   .backup_modules-description {
     margin-bottom: 8px;
@@ -115,8 +107,6 @@ const commonStyles = css`
 
 export const StyledManualBackup = styled.div`
   ${commonStyles}
-
-  ${floatingButtonStyles}
 
   .manual-backup_buttons {
     margin-top: 16px;

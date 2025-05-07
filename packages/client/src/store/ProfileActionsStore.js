@@ -270,15 +270,16 @@ class ProfileActionsStore {
 
     const protocol = window?.location?.protocol;
 
-    const managementItems = portals.map((portal) => {
-      return {
-        key: portal.tenantId,
-        label: portal.domain,
-        onClick: () => window.open(`${protocol}//${portal.domain}/`, "_self"),
-        disabled: false,
-        checked: tenantAlias === portal.portalName,
-      };
-    });
+    const managementItems =
+      portals?.map((portal) => {
+        return {
+          key: portal.tenantId,
+          label: portal.domain,
+          onClick: () => window.open(`${protocol}//${portal.domain}/`, "_self"),
+          disabled: false,
+          checked: tenantAlias === portal.portalName,
+        };
+      }) ?? [];
 
     const management =
       isAdmin && standalone && !limitedAccessSpace

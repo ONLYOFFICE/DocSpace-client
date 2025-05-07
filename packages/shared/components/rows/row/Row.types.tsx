@@ -38,7 +38,7 @@ export type RowProps = {
    * If there is no value, the occupied space is distributed among the other child elements. */
   checked?: boolean;
   /** Displays the child elements */
-  children?: React.ReactNode;
+  children?: React.ReactElement<{ item?: any }>;
   /** Accepts class */
   className?: string;
   /** Required for displaying a certain element in the row */
@@ -52,7 +52,7 @@ export type RowProps = {
   data?: TData;
   /** In case Checkbox component is specified, it is located in a fixed order,
    * otherwise it is located in the first position. If there is no value, the occupied space is distributed among the other child elements. */
-  element?: React.ReactElement<any>;
+  element?: React.ReactElement;
   /** Accepts id  */
   id?: string;
   /** If true, this state is shown as a rectangle in the checkbox */

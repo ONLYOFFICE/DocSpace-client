@@ -80,5 +80,5 @@ export type TooltipProps = Pick<
   /** Whether to allow fallback to the perpendicular axis of the preferred placement */
   fallbackAxisSideDirection?: TFallbackAxisSideDirection;
   noUserSelect?: boolean;
-  ref?: React.RefObject<TooltipRefProps>;
+  ref?: React.RefObject<TooltipRefProps | null>;
 };

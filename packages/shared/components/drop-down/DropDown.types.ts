@@ -24,9 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TDirectionX, TDirectionY } from "../../types";
-
 import type { JSX } from "react";
+import { TDirectionX, TDirectionY } from "../../types";
 
 export interface DropDownProps {
   /** Children elements */
@@ -61,7 +60,7 @@ export interface DropDownProps {
   columnCount?: number;
   /** Sets the disabled items to display */
   showDisabledItems?: boolean;
-  forwardedRef?: React.MutableRefObject<HTMLDivElement | null>;
+  forwardedRef?: React.RefObject<HTMLDivElement | null>;
   /** Sets the operation mode of the component. The default option is set to portal mode */
   isDefaultMode?: boolean;
   /** Used to open people and group selectors correctly when the section width is small */

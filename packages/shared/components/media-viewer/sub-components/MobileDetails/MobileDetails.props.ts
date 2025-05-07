@@ -27,7 +27,7 @@
 import { ContextMenuRefType } from "../../../context-menu";
 
 interface MobileDetailsProps {
-  ref?: React.RefObject<ContextMenuRefType>;
+  ref?: React.RefObject<ContextMenuRefType | null>;
   icon: string;
   title: string;
   isError: boolean;

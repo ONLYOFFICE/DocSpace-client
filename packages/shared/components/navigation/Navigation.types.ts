@@ -158,14 +158,14 @@ export type TControlButtonProps = Omit<TToggleInfoPanelButtonProps, "id"> &
     /** Used for navigation button click handler */
     onNavigationButtonClick?: () => void;
     /** Optional tariff bar element */
-    tariffBar?: React.ReactElement<any>;
+    tariffBar?: React.ReactElement;
     /** Controls visibility of TrashWarning */
     isEmptyPage?: boolean;
 
     isMobile?: boolean;
     /** Used for guidance */
     addButtonRef?: RefObject<HTMLDivElement | null>;
-    buttonRef?: Ref<HTMLButtonElement>;
+    buttonRef?: React.RefObject<HTMLButtonElement>;
     isContextButtonVisible?: boolean;
   };
 
@@ -180,7 +180,7 @@ export type TDropBoxProps = TArrowButtonProps &
     | "isMobile"
   > &
   TRowParam & {
-    ref?: React.RefObject<HTMLDivElement>;
+    ref?: React.RefObject<HTMLDivElement | null>;
     sectionHeight: number;
     dropBoxWidth: number;
 

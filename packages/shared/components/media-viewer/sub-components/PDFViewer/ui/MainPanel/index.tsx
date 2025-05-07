@@ -102,6 +102,7 @@ const MainPanel = ({
   );
 
   return (
+    // @ts-expect-error - React Spring types issue with React 19
     <animated.section
       ref={wrapperRef}
       style={style}

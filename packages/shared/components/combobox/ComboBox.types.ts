@@ -67,7 +67,7 @@ export type TOption = TRegularOption | TSeparatorOption;
 
 export type TComboboxProps = {
   /** Displays advanced options */
-  advancedOptions?: React.ReactNode;
+  advancedOptions?: React.ReactElement<{ children?: React.ReactNode }>;
   /** Number of advanced options */
   advancedOptionsCount?: number;
   /** Children elements */

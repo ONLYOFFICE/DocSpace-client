@@ -27,23 +27,34 @@
 import React from "react";
 
 export const getSideInfo = (
-  content: React.ReactNode[],
+  content: React.ReactElement<{
+    containerWidth?: string;
+    children?: React.ReactElement;
+  }>[],
   convert: boolean,
   interfaceDirection: string = "ltr",
 ) => {
-  const info: React.ReactElement<any>[] = [];
+  const info: React.ReactElement[] = [];
   let child = null;
   const lastIndex = content.length - 1;
 
-  content.forEach((element: React.ReactNode, index: number) => {
-    if (index > 1) {
-      if (!convert && index === lastIndex) {
-        child = element;
-      } else if (React.isValidElement(element) && "props" in element) {
-        info.push(element.props.children);
+  content.forEach(
+    (
+      element: React.ReactElement<{
+        containerWidth?: string;
+        children?: React.ReactElement;
+      }>,
+      index: number,
+    ) => {
+      if (index > 1) {
+        if (!convert && index === lastIndex) {
+          child = element;
+        } else if (React.isValidElement(element) && "props" in element) {
+          info.push(element.props.children as React.JSX.Element);
+        }
       }
-    }
-  });
+    },
+  );
 
   if (interfaceDirection === "rtl") {
     info.reverse();

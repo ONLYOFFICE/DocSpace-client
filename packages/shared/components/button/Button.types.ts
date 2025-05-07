@@ -83,6 +83,6 @@ export type ButtonProps = BaseButtonProps & {
 
 /** Props for the styled ButtonTheme component */
 export type ButtonThemeProps = ButtonProps & {
-  ref: React.RefObject<HTMLButtonElement>;
+  ref?: React.RefObject<HTMLButtonElement | null>;
   $currentColorScheme?: TColorScheme;
 };

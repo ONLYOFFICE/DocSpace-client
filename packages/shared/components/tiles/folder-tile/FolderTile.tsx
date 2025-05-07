@@ -82,7 +82,7 @@ export const FolderTile = ({
     contextOptions &&
     contextOptions?.length > 0;
 
-  const firstChild = childrenArray[0];
+  const firstChild = childrenArray[0] as React.ReactElement<{ item?: any }>;
   const contextMenuHeader: HeaderType | undefined =
     React.isValidElement(firstChild) && firstChild.props?.item
       ? {

@@ -143,9 +143,7 @@ export type TableHeaderProps = {
 
   sectionWidth: number;
 
-  containerRef: React.MutableRefObject<
-    Nullable<React.ForwardedRef<HTMLDivElement>>
-  >;
+  containerRef: React.RefObject<Nullable<React.ForwardedRef<HTMLDivElement>>>;
 
   navigate: NavigateFunction;
   location: Location;

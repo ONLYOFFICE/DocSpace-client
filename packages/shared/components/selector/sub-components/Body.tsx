@@ -251,6 +251,8 @@ const Body = ({
     (Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom) ||
       Boolean(items?.[0]?.createDefineRoomType === RoomsType.VirtualDataRoom));
 
+  const cloneProps = { ref: injectedElementRef };
+
   return (
     <StyledBody
       ref={bodyRef}
@@ -273,9 +275,7 @@ const Body = ({
       <InfoBar ref={infoBarRef} visible={itemsCount !== 0} />
       <BreadCrumbs visible={!isShareFormEmpty} />
 
-      {injectedElement
-        ? React.cloneElement(injectedElement, { ref: injectedElementRef })
-        : null}
+      {injectedElement ? React.cloneElement(injectedElement, cloneProps) : null}
 
       {withTabs && tabsData ? (
         <StyledTabs

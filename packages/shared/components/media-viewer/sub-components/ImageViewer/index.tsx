@@ -992,22 +992,23 @@ export const ImageViewer = ({
           data-testid="image-wrapper"
         >
           <animated.img
-            className={classNames(styles.image)}
-            draggable="false"
-            src={
-              window.ClientConfig?.imageThumbnails &&
-              thumbnailSrc &&
-              !showOriginSrc
-                ? `${thumbnailSrc}&size=3840x2160&view=true`
-                : src
-            }
-            ref={imgRef}
-            style={style}
-            onDoubleClick={handleDoubleTapOrClick}
-            onLoad={imageLoaded}
-            onError={onError}
-            onContextMenu={(event) => event.preventDefault()}
-            data-testid="image-content"
+            {...({
+              className: classNames(styles.image),
+              draggable: false,
+              src:
+                window.ClientConfig?.imageThumbnails &&
+                thumbnailSrc &&
+                !showOriginSrc
+                  ? `${thumbnailSrc}&size=3840x2160&view=true`
+                  : src,
+              ref: imgRef,
+              style,
+              onDoubleClick: handleDoubleTapOrClick,
+              onLoad: imageLoaded,
+              onError,
+              onContextMenu: (event: MouseEvent) => event.preventDefault(),
+              "data-testid": "image-content",
+            } as unknown as React.ImgHTMLAttributes<HTMLImageElement>)}
           />
         </div>
       </div>

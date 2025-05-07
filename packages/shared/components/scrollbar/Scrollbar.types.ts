@@ -36,7 +36,7 @@ type PickedScrollbarLibraryProps = Pick<
 
 export type ScrollbarProps = PickedScrollbarLibraryProps & {
   /** Ref to access the DOM element or React component instance */
-  ref?: React.RefObject<CustomScrollbar>;
+  ref?: React.RefObject<CustomScrollbar | null>;
   /** This class will be placed on scroller element */
   scrollClass?: string;
   /** Enable tracks auto hiding.  */
@@ -68,5 +68,5 @@ export type CustomScrollbarsVirtualListProps = Pick<
   | "paddingAfterLastItem"
 > & {
   forwardedRef?: React.ForwardedRef<unknown>;
-  contentRef?: React.MutableRefObject<HTMLDivElement | null>;
+  contentRef?: React.RefObject<HTMLDivElement | null>;
 };

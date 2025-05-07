@@ -44,11 +44,7 @@ import { Text } from "../text";
 import { Tooltip } from "../tooltip";
 import { InputType } from "../text-input";
 
-import {
-  PasswordInputHandle,
-  PasswordInputProps,
-  TPasswordSettings,
-} from "./PasswordInput.types";
+import { PasswordInputProps, TPasswordSettings } from "./PasswordInput.types";
 import { globalColors } from "../../themes";
 
 import {

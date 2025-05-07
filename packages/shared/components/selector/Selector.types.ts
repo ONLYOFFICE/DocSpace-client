@@ -69,7 +69,7 @@ export type TInfoBar = {
 };
 
 export type InfoBarProps = {
-  ref?: React.RefObject<HTMLDivElement>;
+  ref?: React.RefObject<HTMLDivElement | null>;
   visible: boolean;
   className?: string;
 };

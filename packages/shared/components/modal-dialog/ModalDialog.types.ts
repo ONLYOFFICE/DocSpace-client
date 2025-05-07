@@ -124,6 +124,9 @@ export type ModalDialogFormWrapperProps = {
 
 export type ModalDialogBackdropProps = {
   className?: string;
-  children: React.ReactNode | React.ReactElement<any>[] | React.ReactElement<any>;
+  children:
+    | React.ReactNode
+    | React.ReactElement<any>[]
+    | React.ReactElement<any>;
   zIndex?: number;
 };

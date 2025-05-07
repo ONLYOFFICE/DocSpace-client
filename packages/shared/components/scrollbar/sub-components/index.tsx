@@ -81,14 +81,14 @@ const CustomScrollbarsVirtualList = ({
   ref,
   ...props
 }: CustomScrollbarsVirtualListProps & {
-  ref: React.RefObject<unknown>;
+  ref?: React.RefObject<unknown>;
 }) => <CustomScrollbars {...props} forwardedRef={ref} />;
 
 const CustomScrollbarsVirtualListWithAutoFocus = ({
   ref,
   ...props
 }: CustomScrollbarsVirtualListProps & {
-  ref: React.RefObject<unknown>;
+  ref?: React.RefObject<unknown>;
 }) => <CustomScrollbars {...props} forwardedRef={ref} autoFocus />;
 
 export {

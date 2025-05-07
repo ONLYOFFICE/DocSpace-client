@@ -29,7 +29,12 @@ import React, { useEffect, useRef } from "react";
 import { CustomScrollbarsVirtualList } from "../../scrollbar";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "../../../constants";
 
-export const VirtualScroll = ({ ref, ...props }) => {
+export const VirtualScroll = ({
+  ref,
+  ...props
+}: {
+  ref?: React.RefObject<unknown>;
+}) => {
   const scrollContentRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {

@@ -36,7 +36,7 @@ export type TAvarModel = { label: string; icon: string } & (
     }
   | {
       key: "upload";
-      onClick: (ref?: React.MutableRefObject<Nullable<HTMLDivElement>>) => void;
+      onClick: (ref?: React.RefObject<Nullable<HTMLDivElement>>) => void;
     }
 );
 

@@ -82,7 +82,9 @@ const ComboButton: React.FC<TComboButtonProps> = ({
 
   const Icon = selectedOption.icon;
   const isIconReactElement =
-    Icon && typeof Icon === "function" && React.isValidElement(<Icon />);
+    Icon &&
+    typeof Icon === "function" &&
+    React.isValidElement(React.createElement(Icon));
 
   return (
     <ComboButtonTheme
@@ -128,7 +130,7 @@ const ComboButton: React.FC<TComboButtonProps> = ({
           isLoading={isLoading}
           data-test-id="combo-button-icon"
         >
-          {isIconReactElement ? <Icon /> : null}
+          {isIconReactElement ? React.createElement(Icon) : null}
 
           {typeof selectedOption.icon === "string" ? (
             <ReactSVG

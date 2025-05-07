@@ -57,12 +57,7 @@ import styles from "./ContextMenu.module.scss";
 
 const MARGIN_BORDER = 16; // Indentation from the border of the screen
 
-const ContextMenu = ({
-  ref,
-  ...props
-}: ContextMenuProps & {
-  ref?: React.RefObject<ContextMenuRefType>;
-}) => {
+const ContextMenu = (props: ContextMenuProps) => {
   const [visible, setVisible] = React.useState(false);
   const [reshow, setReshow] = React.useState(false);
   const [resetMenu, setResetMenu] = React.useState(false);
@@ -87,6 +82,7 @@ const ContextMenu = ({
   const { isRTL } = useInterfaceDirection();
 
   const {
+    ref,
     getContextModel,
     onShow,
     onHide,

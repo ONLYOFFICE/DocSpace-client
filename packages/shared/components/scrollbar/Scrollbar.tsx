@@ -104,9 +104,9 @@ const Scrollbar = (props: ScrollbarProps) => {
   );
 
   const refSetter = (elementRef: CustomScrollbar) => {
-    if (typeof ref === "function") {
+    /* if (typeof ref === "function") {
       ref(elementRef);
-    } else if (ref) {
+    } else */ if (ref) {
       ref.current = elementRef;
     }
     scrollRef.current = elementRef;

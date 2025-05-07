@@ -49,6 +49,7 @@ export const Button = React.forwardRef<
     testId = "button",
     type,
     id,
+    style,
     ...rest
   } = props;
 
@@ -77,6 +78,7 @@ export const Button = React.forwardRef<
       id={id}
       ref={ref}
       type={type === "submit" ? "submit" : "button"}
+      style={style}
       className={buttonClasses}
       disabled={isDisabled || isLoading}
       data-testid={testId}

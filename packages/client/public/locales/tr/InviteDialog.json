@@ -11,7 +11,6 @@
   "InviteViaLinkDescriptionAccounts": "{{productName}}'te kendi kendine yetkilendirme için evrensel bir bağlantı oluştur",
   "InviteViaLinkDescriptionRoom": "Odada kendi kendine yetkilendirme için evrensel bir bağlantı oluştur",
   "LinkCopySuccess": "Bağlantı kopyalandı",
-  "ResetChange": "Değişikliği sıfırla",
   "SendInvitation": "Davetiye gönder",
   "UserMaxAvailableRoleWarning": "Konuklar ve Kullanıcılar Oda yöneticisi olarak atanamaz. Belirtilen rol için yalnızca Oda ve {{productName}} yöneticileri uygundur.",
   "UsersAlreadyAdded": "Bazı kullanıcılar zaten eklenmiş"

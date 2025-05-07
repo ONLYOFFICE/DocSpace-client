@@ -29,7 +29,7 @@
 import { useTranslation } from "react-i18next";
 import { GreetingContainer } from "../GreetingContainer";
 
-const WizardGreeting = () => {
+const WizardGreeting = ({ culture }: { culture?: string }) => {
   const { t } = useTranslation(["Wizard", "Common"]);
 
   return (
@@ -37,6 +37,7 @@ const WizardGreeting = () => {
       greetingText={t("Wizard:WelcomeTitle", {
         productName: t("Common:ProductName"),
       })}
+      culture={culture}
     />
   );
 };

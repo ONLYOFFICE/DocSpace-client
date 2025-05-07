@@ -74,6 +74,7 @@ import {
   LANGUAGE,
   PUBLIC_MEDIA_VIEW_URL,
   RTL_LANGUAGES,
+  TIMEZONE,
 } from "../constants";
 
 import { TI18n, TTranslation } from "../types";
@@ -1275,6 +1276,12 @@ export function setLanguageForUnauthorized(culture: string) {
   }
 
   window.location.reload();
+}
+
+export function setTimezoneForUnauthorized(timezone: string) {
+  setCookie(TIMEZONE, timezone, {
+    "max-age": COOKIE_EXPIRATION_YEAR,
+  });
 }
 
 export const imageProcessing = async (file: File, maxSize?: number) => {

@@ -41,7 +41,7 @@ export type DropDownItemProps = {
 
   // Icon Related Props
   /** URL or path to the icon to display at the start of the item */
-  icon?: string;
+  icon?: string | React.ReactElement | React.ElementType;
   /** Whether the icon should be filled with the current text color. If false, uses original icon colors */
   fillIcon?: boolean;
   /** Whether to hide the icon element even when an icon prop is provided */

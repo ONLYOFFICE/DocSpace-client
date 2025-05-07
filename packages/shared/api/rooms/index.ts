@@ -28,41 +28,34 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import { AxiosRequestConfig } from "axios";
-
 import moment from "moment";
 import { FolderType, MembersSubjectType, ShareAccessRights } from "../../enums";
-import { request } from "../client";
-import {
-  checkFilterInstance,
-  decodeDisplayName,
-  toUrlParams,
-} from "../../utils/common";
+import { request, roomsClient } from "../client";
+import { decodeDisplayName, toUrlParams } from "../../utils/common";
 import RoomsFilter from "./filter";
 import {
-  TGetRooms,
   TExportRoomIndexTask,
   TPublicRoomPassword,
   TValidateShareRoom,
   TRoom,
 } from "./types";
 
-export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
-  let params;
+export async function getRooms(filter?: RoomsFilter, signal?: AbortSignal) {
+  const response = await roomsClient.getRoomsFolder(
+    filter?.type,
+    filter?.subjectId,
+    filter?.searchArea,
+    filter?.withoutTags,
+    filter?.tags,
+    filter?.excludeSubject,
+    filter?.provider,
+    filter?.subjectFilter,
+    filter?.quotaFilter,
+    filter?.storageFilter,
+    { signal },
+  );
 
-  if (filter) {
-    checkFilterInstance(filter, RoomsFilter);
-
-    params = `?${filter.toApiUrlParams()}`;
-  }
-
-  const options: AxiosRequestConfig = {
-    method: "get",
-    url: `/files/rooms${params}`,
-    signal,
-  };
-
-  const res = (await request(options)) as TGetRooms;
+  const res = response.data.response;
 
   res.files = decodeDisplayName(res.files);
   res.folders = decodeDisplayName(res.folders);
@@ -77,12 +70,9 @@ export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
 }
 
 export function getRoomInfo(id) {
-  const options = {
-    method: "get",
-    url: `/files/rooms/${id}`,
-  };
+  return roomsClient.getRoomInfo(id).then((response) => {
+    const res = response.data.response;
 
-  return request(options).then((res) => {
     if (res.rootFolderType === FolderType.Archive) res.isArchive = true;
 
     return res as TRoom;
@@ -90,36 +80,24 @@ export function getRoomInfo(id) {
 }
 
 export function getRoomMembers(id, filter) {
-  let params = "";
+  return roomsClient
+    .getRoomSecurityInfo(id, filter.filterType)
+    .then((response) => {
+      const res = response.data.response;
 
-  const str = toUrlParams(filter);
-  if (str) params = `?${str}`;
+      res.forEach((item) => {
+        if (item.subjectType === MembersSubjectType.Group) {
+          item.sharedTo.isGroup = true;
+        }
+      });
 
-  const options = {
-    method: "get",
-    url: `/files/rooms/${id}/share${params}`,
-  };
-
-  return request(options).then((res) => {
-    res.items.forEach((item) => {
-      if (item.subjectType === MembersSubjectType.Group) {
-        item.sharedTo.isGroup = true;
-      }
+      return res;
     });
-
-    return res;
-  });
 }
 
 export function updateRoomMemberRole(id, data) {
-  const options = {
-    method: "put",
-    url: `/files/rooms/${id}/share`,
-    data,
-  };
-
-  return request(options).then((res) => {
-    return res;
+  return roomsClient.setRoomSecurity(id, data).then((response) => {
+    return response.data.response;
   });
 }
 
@@ -169,10 +147,8 @@ export function getFileHistory(id) {
 }
 
 export function createRoom(data) {
-  const options = { method: "post", url: `/files/rooms`, data };
-
-  return request(options).then((res) => {
-    return res;
+  return roomsClient.createRoom(data).then((response) => {
+    return response.data.response;
   });
 }
 
@@ -189,227 +165,127 @@ export function createRoomInThirdpary(id, data) {
 }
 
 export function editRoom(id, data) {
-  const options = { method: "put", url: `/files/rooms/${id}`, data };
-
-  return request(options).then((res) => {
-    return res;
+  return roomsClient.updateRoom(id, data).then((response) => {
+    return response.data.response;
   });
 }
 
 export function pinRoom(id) {
-  const options = { method: "put", url: `/files/rooms/${id}/pin` };
-
-  const skipRedirect = true;
-
-  return request(options, skipRedirect).then((res) => {
-    return res;
+  return roomsClient.pinRoom(id).then((response) => {
+    return response.data.response;
   });
 }
 
 export function unpinRoom(id) {
-  const options = { method: "put", url: `/files/rooms/${id}/unpin` };
-
-  return request(options).then((res) => {
-    return res;
+  return roomsClient.unpinRoom(id).then((response) => {
+    return response.data.response;
   });
 }
 
 export function deleteRoom(id, deleteAfter = false) {
-  const data = { deleteAfter };
-
-  const options = {
-    method: "delete",
-    url: `/files/rooms/${id}`,
-    data,
-  };
-
-  return request(options).then((res) => {
-    return res;
+  return roomsClient.deleteRoom(id, deleteAfter).then((response) => {
+    return response.data.response;
   });
 }
 
 export function archiveRoom(id, deleteAfter = false) {
-  const data = { deleteAfter };
-
-  const options = {
-    method: "put",
-    url: `/files/rooms/${id}/archive`,
-    data,
-  };
-
-  return request(options).then((res) => {
-    return res;
+  return roomsClient.archiveRoom(id, deleteAfter).then((response) => {
+    return response.data.response;
   });
 }
 
 export function unarchiveRoom(id) {
-  const data = { deleteAfter: false };
-  const options = {
-    method: "put",
-    url: `/files/rooms/${id}/unarchive`,
-    data,
-  };
-
-  return request(options).then((res) => {
-    return res;
+  return roomsClient.unarchiveRoom(id).then((response) => {
+    return response.data.response;
   });
 }
 
 export function createTag(name) {
-  const data = { name };
-  const options = {
-    method: "post",
-    url: "/files/tags",
-    data,
-  };
-
-  return request(options).then((res) => {
-    return res;
+  return roomsClient.createTag({ name }).then((response) => {
+    return response.data.response;
   });
 }
 
 export function addTagsToRoom(id, tagArray) {
-  const data = { names: tagArray };
-  const options = {
-    method: "put",
-    url: `/files/rooms/${id}/tags`,
-    data,
-  };
-
-  return request(options).then((res) => {
-    return res;
-  });
+  return roomsClient
+    .updateRoomTags(id, { names: tagArray })
+    .then((response) => {
+      return response.data.response;
+    });
 }
 
 export function removeTagsFromRoom(id, tagArray) {
-  const data = { names: tagArray };
-  const options = {
-    method: "delete",
-    url: `/files/rooms/${id}/tags`,
-    data,
-  };
-
-  return request(options).then((res) => {
-    return res;
+  return roomsClient.deleteRoomTag(id, { names: tagArray }).then((response) => {
+    return response.data.response;
   });
 }
 
 export function getTags() {
-  const options = {
-    method: "get",
-    url: "/files/tags",
-  };
-
-  return request(options).then((res) => {
-    return res;
+  return roomsClient.getTagsInfo().then((response) => {
+    return response.data.response;
   });
 }
 
 export function uploadRoomLogo(data) {
-  const options = {
-    method: "post",
-    url: `/files/logos`,
-    data,
-  };
-
-  return request(options).then((res) => {
-    return res;
+  return roomsClient.uploadLogo(data).then((response) => {
+    return response.data.response;
   });
 }
 
 export function addLogoToRoom(id, data) {
-  const options = {
-    method: "post",
-    url: `/files/rooms/${id}/logo`,
-    data,
-  };
-
-  return request(options).then((res) => {
-    return res;
+  return roomsClient.addLogoToRoom(id, data).then((response) => {
+    return response.data.response;
   });
 }
 
 export function removeLogoFromRoom(id) {
-  const options = {
-    method: "delete",
-    url: `/files/rooms/${id}/logo`,
-  };
-
-  return request(options).then((res) => {
-    return res;
+  return roomsClient.removeLogoFromRoom(id).then((response) => {
+    return response.data.response;
   });
 }
 
 export const setInvitationLinks = async (roomId, title, access, linkId) => {
-  const options = {
-    method: "put",
-    url: `/files/rooms/${roomId}/links`,
-    data: {
+  return roomsClient
+    .setLink(roomId, {
       linkId,
       title,
       access,
-    },
-  };
-  const skipRedirect = true;
-  const res = await request(options, skipRedirect);
-
-  return res;
+    })
+    .then((response) => {
+      return response.data.response;
+    });
 };
 
 export const resendEmailInvitations = async (id, resendAll = true) => {
-  const options = {
-    method: "post",
-    url: `/files/rooms/${id}/resend`,
-    data: {
-      resendAll,
-    },
-  };
-
-  const res = await request(options);
-
-  return res;
+  return roomsClient.resendRoomInvites(id, { resendAll }).then((response) => {
+    return response.data.response;
+  });
 };
 
-// 1 (Invitation link)
 export const getRoomSecurityInfo = async (id) => {
-  const options = {
-    method: "get",
-    url: `/files/rooms/${id}/share?filterType=1`,
-  };
-
-  const res = await request(options);
-
-  return res;
+  return roomsClient.getRoomSecurityInfo(id, 1).then((response) => {
+    return response.data.response;
+  });
 };
 
 export const setRoomSecurity = async (id, data) => {
-  const options = {
-    method: "put",
-    url: `/files/rooms/${id}/share`,
-    data,
-  };
+  return roomsClient.setRoomSecurity(id, data).then((response) => {
+    const res = response.data.response;
 
-  const skipRedirect = true;
-  const res = await request(options, skipRedirect);
+    res.members.forEach((item) => {
+      if (item.subjectType === MembersSubjectType.Group) {
+        item.sharedTo.isGroup = true;
+      }
+    });
 
-  res.members.forEach((item) => {
-    if (item.subjectType === MembersSubjectType.Group) {
-      item.sharedTo.isGroup = true;
-    }
+    return res;
   });
-
-  return res;
 };
 
 export const acceptInvitationByLink = async () => {
-  const options = {
-    method: "post",
-    url: `/files/rooms/accept`,
-  };
-
-  const res = await request(options);
-
-  return res;
+  return roomsClient.acceptInvitation().then((response) => {
+    return response.data.response;
+  });
 };
 
 export function editExternalLink(
@@ -423,48 +299,37 @@ export function editExternalLink(
   disabled: boolean,
   denyDownload: boolean,
 ) {
-  const skipRedirect = true;
-
-  return request(
-    {
-      method: "put",
-
-      url: `/files/rooms/${roomId}/links`,
-      data: {
-        linkId,
-        title,
-        access,
-        expirationDate,
-        linkType,
-        password,
-        disabled,
-        denyDownload,
-      },
-    },
-    skipRedirect,
-  );
+  return roomsClient
+    .setLink(roomId, {
+      linkId,
+      title,
+      access,
+      expirationDate,
+      linkType,
+      password,
+      disabled,
+      denyDownload,
+    })
+    .then((response) => {
+      return response.data.response;
+    });
 }
 
 export function getExternalLinks(roomId, type) {
-  const linkType = `?type=${type}`;
-
-  return request({
-    method: "get",
-    url: `files/rooms/${roomId}/links${linkType}`,
+  return roomsClient.getRoomLinks(roomId, type).then((response) => {
+    return response.data.response;
   });
 }
 
 export function getPrimaryLink(roomId) {
-  return request({
-    method: "get",
-    url: `files/rooms/${roomId}/link`,
+  return roomsClient.getRoomsPrimaryExternalLink(roomId).then((response) => {
+    return response.data.response;
   });
 }
 
 export function validatePublicRoomKey(key) {
-  return request<TValidateShareRoom>({
-    method: "get",
-    url: `files/share/${key}`,
+  return roomsClient.validatePublicRoomKey(key).then((response) => {
+    return response.data.response as TValidateShareRoom;
   });
 }
 
@@ -473,78 +338,52 @@ export async function validatePublicRoomPassword(
   passwordHash: string,
   signal?: AbortSignal,
 ) {
-  const res = (await request({
-    method: "post",
-    url: `files/share/${key}/password`,
-    data: { password: passwordHash },
-    signal,
-  })) as TPublicRoomPassword;
-
-  return res;
+  return roomsClient
+    .validatePublicRoomPassword(key, { password: passwordHash }, signal)
+    .then((response) => {
+      return response.data.response as TPublicRoomPassword;
+    });
 }
 
 export function setCustomRoomQuota(roomIds, quota) {
-  const data = {
-    roomIds,
-    quota,
-  };
-  const options = {
-    method: "put",
-    url: "files/rooms/roomquota",
-    data,
-  };
-
-  return request(options);
+  return roomsClient.setRoomQuota({ roomIds, quota }).then((response) => {
+    return response.data.response;
+  });
 }
 
 export function resetRoomQuota(roomIds) {
-  const data = {
-    roomIds,
-  };
-  const options = {
-    method: "put",
-    url: "files/rooms/resetquota",
-    data,
-  };
-
-  return request(options);
+  return roomsClient.resetRoomQuota({ roomIds }).then((response) => {
+    return response.data.response;
+  });
 }
 
 export function getRoomCovers() {
-  const options = {
-    method: "get",
-    url: "files/rooms/covers",
-  };
-
-  return request(options);
+  return roomsClient.getRoomCovers().then((response) => {
+    return response.data.response;
+  });
 }
 
 export function exportRoomIndex(roomId: number) {
-  return request({
-    method: "post",
-    url: `files/rooms/${roomId}/indexexport`,
-  }) as Promise<TExportRoomIndexTask>;
+  return roomsClient.exportRoomIndex(roomId).then((response) => {
+    return response.data.response as TExportRoomIndexTask;
+  });
 }
 
 export function getExportRoomIndexProgress() {
-  return request({
-    method: "get",
-    url: `files/rooms/indexexport`,
-  }) as Promise<TExportRoomIndexTask>;
+  return roomsClient.getExportRoomIndexProgress().then((response) => {
+    return response.data.response as TExportRoomIndexTask;
+  });
 }
 
 export function setRoomCover(roomId, cover) {
-  const data = {
-    Color: cover.color,
-    Cover: cover.cover,
-  };
-  const options = {
-    method: "post",
-    url: `files/rooms/${roomId}/cover`,
-    data,
-  };
-
-  return request(options);
+  return roomsClient
+    .setRoomCover(roomId, {
+      Color: cover.color,
+      Cover: cover.cover,
+    })
+    .then((response) => {
+      return response.data.response;
+    });
 }
 
 export function createTemplate(data: {
@@ -556,68 +395,48 @@ export function createTemplate(data: {
   public: boolean;
   quota: number;
 }) {
-  const options = {
-    method: "post",
-    url: `/files/roomtemplate`,
-    data,
-  };
-
-  return request(options);
+  return roomsClient.createRoomTemplate(data).then((response) => {
+    return response.data.response;
+  });
 }
 
 export function getCreateTemplateProgress() {
-  const options = {
-    method: "get",
-    url: `/files/roomtemplate/status`,
-  };
-
-  return request(options);
+  return roomsClient.getRoomTemplateProgress().then((response) => {
+    return response.data.response;
+  });
 }
 
 export function createRoomFromTemplate(data) {
-  const options = {
-    method: "post",
-    url: `/files/rooms/fromTemplate`,
-    data,
-  };
-
-  return request(options);
+  return roomsClient.createRoomFromTemplate(data).then((response) => {
+    return response.data.response;
+  });
 }
 
 export function getCreateRoomFromTemplateProgress() {
-  const options = {
-    method: "get",
-    url: `/files/rooms/fromTemplate/status`,
-  };
-
-  return request(options);
+  return roomsClient.getRoomFromTemplateProgress().then((response) => {
+    return response.data.response;
+  });
 }
 
 export function getTemplateAvailable(id: number) {
-  const options = {
-    method: "get",
-    url: `/files/roomtemplate/${id}/public`,
-  };
-
-  return request(options);
+  return roomsClient.getTemplateAvailable(id).then((response) => {
+    return response.data.response;
+  });
 }
 
 export function setTemplateAvailable(id: number, isAvailable: boolean) {
-  const options = {
-    method: "put",
-    url: `/files/roomtemplate/public`,
-    data: { id, public: isAvailable },
-  };
-
-  return request(options);
+  return roomsClient
+    .setTemplateAvailable({
+      id,
+      public: isAvailable,
+    })
+    .then((response) => {
+      return response.data.response;
+    });
 }
 
 export function hideConfirmRoomLifetime(val: boolean) {
-  const options = {
-    method: "put",
-    url: "/files/hideconfirmroomlifetime",
-    data: { set: val },
-  };
-
-  return request(options);
+  return roomsClient.hideConfirmRoomLifetime({ set: val }).then((response) => {
+    return response.data.response;
+  });
 }

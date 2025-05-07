@@ -449,11 +449,11 @@ const Badges = ({
         />
       ) : null}
       {isRoom && pinned ? (
-        <ColorTheme
-          themeId={ThemeId.IconButtonPin}
+        <IconButton
           onClick={onUnpinClick}
           className={classNames(
             styles.iconBadge,
+            styles.pinBadge,
             "badge icons-group is-pinned tablet-badge tablet-pinned",
           )}
           iconName={iconPin}

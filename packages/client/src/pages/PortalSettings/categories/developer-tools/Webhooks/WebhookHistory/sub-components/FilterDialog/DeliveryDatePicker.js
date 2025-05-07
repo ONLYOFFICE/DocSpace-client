@@ -308,10 +308,8 @@ const DeliveryDatePicker = ({
                 title={t("Common:AddButton")}
                 onClick={showTimePicker}
                 className="mr-8 add-delivery-time-button"
+                label={t("SelectDeliveryTime")}
               />
-              <Text isInline fontWeight={600} color={globalColors.gray}>
-                {t("SelectDeliveryTime")}
-              </Text>
             </TimePickerCell>
           )
         ) : null}

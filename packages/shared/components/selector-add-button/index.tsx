@@ -29,8 +29,8 @@ import classNames from "classnames";
 import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
 
 import { useTheme } from "styled-components";
+import { Text } from "../text";
 import { IconButton } from "../icon-button";
-
 import styles from "./SelectorAddButton.module.scss";
 import { SelectorAddButtonProps } from "./SelectorAddButton.types";
 
@@ -45,6 +45,16 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
     iconName = ActionsHeaderTouchReactSvgUrl,
     onClick,
     iconSize = 12,
+    size,
+
+    label,
+    titleText,
+    fontSize = "13px",
+    lineHeight = "20px",
+    noSelect,
+    dir,
+    truncate,
+
     ...rest
   } = props;
 
@@ -55,11 +65,18 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
     if (!isDisabled) onClick?.(e);
   };
 
-  const buttonClassName = classNames(
+  const buttonClassName = classNames(styles.selectorButton, {
+    [styles.isAction]: isAction,
+    [styles.isDisabled]: isDisabled,
+    [styles.isSize]: !!size,
+    "---selector-add-button-size": size,
+  });
+
+  const containerClassName = classNames(
     styles.container,
     {
-      [styles.isAction]: isAction,
       [styles.isDisabled]: isDisabled,
+      [styles.truncate]: truncate,
     },
     className,
   );
@@ -72,22 +89,40 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
     : style;
 
   return (
-    <div
-      {...rest}
-      id={id}
-      style={buttonStyle}
-      title={title}
-      className={buttonClassName}
-      onClick={onClickAction}
-      data-testid="selector-add-button"
-    >
-      <IconButton
-        size={iconSize}
-        iconName={iconName}
-        isFill
-        isDisabled={isDisabled}
-        isClickable={!isDisabled}
-      />
+    <div className={containerClassName}>
+      <div
+        {...rest}
+        id={id}
+        style={buttonStyle}
+        title={title}
+        className={buttonClassName}
+        onClick={onClickAction}
+        data-testid="selector-add-button"
+      >
+        <IconButton
+          size={iconSize}
+          iconName={iconName}
+          isFill
+          isDisabled={isDisabled}
+          isClickable={!isDisabled}
+        />
+      </div>
+
+      {label ? (
+        <Text
+          className={styles.selectorText}
+          fontWeight={600}
+          lineHeight={lineHeight}
+          onClick={onClickAction}
+          title={titleText}
+          fontSize={fontSize}
+          noSelect={noSelect}
+          dir={dir}
+          truncate={truncate}
+        >
+          {label}
+        </Text>
+      ) : null}
     </div>
   );
 };

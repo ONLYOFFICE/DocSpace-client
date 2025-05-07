@@ -857,5 +857,12 @@
   "YourCurrentDomain": "Your current domain",
   "YourLogo": "Your logo",
   "YourTurn": "Your turn",
-  "MoveToPublicRoom": "This room and all its contents are available to anyone with the link. Do you want to continue?"
+  "MoveToPublicRoom": "This room and all its contents are available to anyone with the link. Do you want to continue?",
+  "ForcePathStyle": "Force Path Style",
+  "ServiceUrl": "Service URL",
+  "ServerSideEncryptionMethod": "Server Side Encryption Method",
+  "UseHttp": "Use Http",
+  "AmazonSSE": "Server-Side Encryption",
+  "AmazonCSE": "Client-Side Encryption",
+  "Path": "Path"
 }

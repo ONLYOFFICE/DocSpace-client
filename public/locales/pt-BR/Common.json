@@ -857,5 +857,12 @@
   "YourCurrentDomain": "Seu domínio atual",
   "YourLogo": "Seu logotipo",
   "YourTurn": "Sua vez",
-  "MoveToPublicRoom": "Esta sala e todo o seu conteúdo estão disponíveis para qualquer pessoa com o link. Você quer continuar?"
+  "MoveToPublicRoom": "Esta sala e todo o seu conteúdo estão disponíveis para qualquer pessoa com o link. Você quer continuar?",
+  "ForcePathStyle": "Estilo de Caminho de Força",
+  "ServiceUrl": "URL de serviço",
+  "ServerSideEncryptionMethod": "Método de Criptografia do Lado do Servidor",
+  "UseHttp": "Utilizar Http",
+  "AmazonSSE": "Criptografia do lado do servidor",
+  "AmazonCSE": "Criptografia do lado do cliente",
+  "Path": "Caminho"
 }

@@ -857,5 +857,12 @@
   "YourCurrentDomain": "您当前的域",
   "YourLogo": "您的logo",
   "YourTurn": "轮到您了",
-  "MoveToPublicRoom": "任何人都可以通过此链接访问此房间及房间中的所有内容。您要继续吗？"
+  "MoveToPublicRoom": "任何人都可以通过此链接访问此房间及房间中的所有内容。您要继续吗？",
+  "ForcePathStyle": "力路风格",
+  "ServiceUrl": "服务Url",
+  "ServerSideEncryptionMethod": "服务器端加密方法",
+  "UseHttp": "使用Http",
+  "AmazonSSE": "服务器端加密",
+  "AmazonCSE": "客户端加密",
+  "Path": "路径"
 }

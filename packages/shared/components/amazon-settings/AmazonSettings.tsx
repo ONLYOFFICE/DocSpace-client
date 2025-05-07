@@ -79,15 +79,15 @@ const AmazonSettings = ({
   const isDisabled = selectedStorage && !selectedStorage.isSet;
   const bucketPlaceholder =
     selectedStorage && selectedStorage.properties[0]?.title;
-  const forcePathStylePlaceholder = t("ForcePathStyle");
+  const forcePathStylePlaceholder = t("Common:ForcePathStyle");
   const regionPlaceholder =
     selectedStorage && selectedStorage.properties[2]?.title;
 
-  const serviceUrlPlaceholder = t("ServiceUrl");
-  const SSEPlaceholder = t("ServerSideEncryptionMethod");
-  const useHttpPlaceholder = t("UseHttp");
-  const serverSideEncryption = t("AmazonSSE");
-  const clientSideEncryption = t("AmazonCSE");
+  const serviceUrlPlaceholder = t("Common:ServiceUrl");
+  const SSEPlaceholder = t("Common:ServerSideEncryptionMethod");
+  const useHttpPlaceholder = t("Common:UseHttp");
+  const serverSideEncryption = t("Common:AmazonSSE");
+  const clientSideEncryption = t("Common:AmazonCSE");
 
   const sseKms = "SSE-KMS";
   const sseS3 = "SSE-S3";
@@ -260,7 +260,7 @@ const AmazonSettings = ({
       <StyledBody>
         <div className="backup_storage-tooltip">
           <Text isBold>{bucketPlaceholder}</Text>
-          {renderTooltip(t("AmazonBucketTip"), "bucket-tooltip")}
+          {renderTooltip(t("Common:AmazonBucketTip"), "bucket-tooltip")}
         </div>
         <TextInput
           id="bucket-input"
@@ -279,7 +279,7 @@ const AmazonSettings = ({
       <StyledBody>
         <div className="backup_storage-tooltip">
           <Text isBold>{regionPlaceholder}</Text>
-          {renderTooltip(t("AmazonRegionTip"), "region-tooltip")}
+          {renderTooltip(t("Common:AmazonRegionTip"), "region-tooltip")}
         </div>
         <ComboBox
           className="region-combo-box backup_text-input"
@@ -302,7 +302,7 @@ const AmazonSettings = ({
       <StyledBody>
         <div className="backup_storage-tooltip">
           <Text isBold>{serviceUrlPlaceholder}</Text>
-          {renderTooltip(t("AmazonServiceTip"), "service-tooltip")}
+          {renderTooltip(t("Common:AmazonServiceTip"), "service-tooltip")}
         </div>
         <TextInput
           id="service-url-input"
@@ -332,7 +332,7 @@ const AmazonSettings = ({
           helpButton={
             <div className="backup_storage-tooltip">
               {renderTooltip(
-                t("AmazonForcePathStyleTip"),
+                t("Common:AmazonForcePathStyleTip"),
                 "force-path-style-tooltip",
               )}
             </div>
@@ -352,7 +352,7 @@ const AmazonSettings = ({
           tabIndex={5}
           helpButton={
             <div className="backup_storage-tooltip">
-              {renderTooltip(t("AmazonHTTPTip"), "http-tooltip")}
+              {renderTooltip(t("Common:AmazonHTTPTip"), "http-tooltip")}
             </div>
           }
         />
@@ -360,7 +360,7 @@ const AmazonSettings = ({
       <StyledBody>
         <div className="backup_storage-tooltip">
           <Text isBold>{SSEPlaceholder}</Text>
-          {renderTooltip(t("AmazonSSETip"), "sse-method-tooltip")}
+          {renderTooltip(t("Common:AmazonSSETip"), "sse-method-tooltip")}
         </div>
         <ComboBox
           className="sse-method-combo-box backup_text-input"
@@ -475,7 +475,7 @@ const AmazonSettings = ({
           value={formSettings[filePath]}
           onChange={onChangeText}
           isDisabled={isLoadingData || isLoading || isDisabled}
-          placeholder={t("Path")}
+          placeholder={t("Common:Path")}
           hasError={isError[filePath]}
           type={InputType.text}
           size={InputSize.base}

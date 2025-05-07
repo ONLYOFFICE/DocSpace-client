@@ -849,5 +849,12 @@
   "YourCurrentDomain": "Uw huidige domein",
   "YourLogo": "Uw logo",
   "YourTurn": "Uw beurt",
-  "MoveToPublicRoom": "Deze kamer en alle inhoud zijn beschikbaar voor iedereen met de link. Wilt u doorgaan?"
+  "MoveToPublicRoom": "Deze kamer en alle inhoud zijn beschikbaar voor iedereen met de link. Wilt u doorgaan?",
+  "ForcePathStyle": "Forceer Path Style",
+  "ServiceUrl": "Service Url",
+  "ServerSideEncryptionMethod": "Server Side Encryptiemethode",
+  "UseHttp": "Gebruik Http",
+  "AmazonSSE": "Versleuteling aan de serverzijde",
+  "AmazonCSE": "Versleuteling aan de klantzijde",
+  "Path": "Pad"
 }

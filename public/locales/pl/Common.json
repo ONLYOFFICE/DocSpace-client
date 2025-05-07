@@ -849,5 +849,12 @@
   "YourCurrentDomain": "Twoja obecna domena",
   "YourLogo": "Twoje Logo",
   "YourTurn": "Twoja kolej",
-  "MoveToPublicRoom": "Ten pokój i cała jego zawartość są dostępne dla każdego, kto ma link. Kontynuować?"
+  "MoveToPublicRoom": "Ten pokój i cała jego zawartość są dostępne dla każdego, kto ma link. Kontynuować?",
+  "ForcePathStyle": "Wymuś styl ścieżki",
+  "ServiceUrl": "URL usługi",
+  "ServerSideEncryptionMethod": "Metoda szyfrowania po stronie serwera",
+  "UseHttp": "Użyj Http",
+  "AmazonSSE": "Szyfrowanie po stronie serwera",
+  "AmazonCSE": "Szyfrowanie po stronie klienta",
+  "Path": "Ścieżka"
 }

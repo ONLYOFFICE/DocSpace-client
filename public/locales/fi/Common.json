@@ -849,5 +849,12 @@
   "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
   "YourLogo": "Logosi",
   "YourTurn": "Sinun vuorosi",
-  "MoveToPublicRoom": "Tämä huone ja kaikki sen sisältö on saatavilla kaikille linkin kautta. Haluatko jatkaa?"
+  "MoveToPublicRoom": "Tämä huone ja kaikki sen sisältö on saatavilla kaikille linkin kautta. Haluatko jatkaa?",
+  "ForcePathStyle": "Pakota polku -tyyli",
+  "ServiceUrl": "Palvelun URL-osoite",
+  "ServerSideEncryptionMethod": "Palvelinpuolen salausmenetelmä",
+  "UseHttp": "Sisällettävä Http",
+  "AmazonSSE": "Palvelinpuolen salaus",
+  "AmazonCSE": "Asiakkaan puolen salaus",
+  "Path": "Polku"
 }

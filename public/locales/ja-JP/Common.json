@@ -857,5 +857,12 @@
   "YourCurrentDomain": "現在お使いのドメイン",
   "YourLogo": "あなたのロゴ",
   "YourTurn": "あなたの番です",
-  "MoveToPublicRoom": "このルームとすべてのコンテンツは、リンクがあれば誰でも利用できます。このまま続けますか？"
+  "MoveToPublicRoom": "このルームとすべてのコンテンツは、リンクがあれば誰でも利用できます。このまま続けますか？",
+  "ForcePathStyle": "強制パススタイル",
+  "ServiceUrl": "サービスURL",
+  "ServerSideEncryptionMethod": "サーバー側暗号化方法",
+  "UseHttp": "Httpを使用します",
+  "AmazonSSE": "サーバー側の暗号化",
+  "AmazonCSE": "クライアント側の暗号化",
+  "Path": "パス"
 }

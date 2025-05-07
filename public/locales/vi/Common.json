@@ -846,5 +846,12 @@
   "YourCurrentDomain": "Tên miền hiện tại của bạn",
   "YourLogo": "Logo của bạn",
   "YourTurn": "Phiên của bạn",
-  "MoveToPublicRoom": "Phòng này và tất cả nội dung của nó đều khả dụng cho bất kỳ ai có liên kết. Bạn có muốn tiếp tục không?"
+  "MoveToPublicRoom": "Phòng này và tất cả nội dung của nó đều khả dụng cho bất kỳ ai có liên kết. Bạn có muốn tiếp tục không?",
+  "ForcePathStyle": "Kiểu đường dẫn bắt buộc",
+  "ServiceUrl": "Url dịch vụ",
+  "ServerSideEncryptionMethod": "Phương pháp mã hóa phía máy chủ",
+  "UseHttp": "Sử dụng Http",
+  "AmazonSSE": "Mã hóa phía máy chủ",
+  "AmazonCSE": "Mã hóa phía máy khách",
+  "Path": "Đường dẫn"
 }

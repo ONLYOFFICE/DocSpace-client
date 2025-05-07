@@ -849,5 +849,12 @@
   "YourCurrentDomain": "Vaše aktuální doména",
   "YourLogo": "Vaše logo",
   "YourTurn": "Jste na řadě",
-  "MoveToPublicRoom": "Tato místnost a veškerý její obsah jsou k dispozici komukoli, kdo má k dispozici odkaz. Chcete pokračovat?"
+  "MoveToPublicRoom": "Tato místnost a veškerý její obsah jsou k dispozici komukoli, kdo má k dispozici odkaz. Chcete pokračovat?",
+  "ForcePathStyle": "Vynutit styl cesty",
+  "ServiceUrl": "URL adresa služby",
+  "ServerSideEncryptionMethod": "Metoda šifrování na straně serveru",
+  "UseHttp": "Použijte Http",
+  "AmazonSSE": "Šifrování na straně serveru",
+  "AmazonCSE": "Šifrování na straně klienta",
+  "Path": "Сesta"
 }

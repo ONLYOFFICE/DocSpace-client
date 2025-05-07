@@ -849,5 +849,12 @@
   "YourCurrentDomain": "Cari domen adınız",
   "YourLogo": "Loqonuz",
   "YourTurn": "Sizin növbəniz",
-  "MoveToPublicRoom": "Bu otaq və onun bütün məzmunu keçidi olan hər kəs üçün əlçatandır. Davam etmək istəyirsiniz?"
+  "MoveToPublicRoom": "Bu otaq və onun bütün məzmunu keçidi olan hər kəs üçün əlçatandır. Davam etmək istəyirsiniz?",
+  "ForcePathStyle": "Məcburi Keçid Üslubu",
+  "ServiceUrl": "Xidmət URL-si",
+  "ServerSideEncryptionMethod": "Server Tərəfində Şifrələmə Metodu",
+  "UseHttp": "Http istifadə edin",
+  "AmazonSSE": "Server tərəfində şifrələmə",
+  "AmazonCSE": "Müştəri tərəfinin şifrələməsi",
+  "Path": "Cığır"
 }

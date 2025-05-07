@@ -26,7 +26,7 @@
 
 /* eslint-disable jsx-a11y/tabindex-no-positive */
 
-import React, { useEffect } from "react";
+import React from "react";
 
 import {
   InputSize,
@@ -119,7 +119,7 @@ const SelectelSettings = ({
           value={formSettings[FILE_PATH]}
           onChange={onChangeText}
           isDisabled={isLoadingData || isLoading || isDisabled}
-          placeholder={t("Path")}
+          placeholder={t("Common:Path")}
           tabIndex={3}
           hasError={isError[FILE_PATH]}
           type={InputType.text}

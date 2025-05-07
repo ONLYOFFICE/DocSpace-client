@@ -857,5 +857,12 @@
   "YourCurrentDomain": "Domeniul dvs. actual",
   "YourLogo": "Logo-ul dvs",
   "YourTurn": "Acum e rândul dvs.",
-  "MoveToPublicRoom": "Această sala și tot conținutul vor fi disponibile tuturor pe link-ul. Doriți să continuați?"
+  "MoveToPublicRoom": "Această sala și tot conținutul vor fi disponibile tuturor pe link-ul. Doriți să continuați?",
+  "ForcePathStyle": "Tip cale forțat",
+  "ServiceUrl": "Url a serverului",
+  "ServerSideEncryptionMethod": "Metoda de criptare pe partea de server",
+  "UseHttp": "Utilizare Http",
+  "AmazonSSE": "Criptarea pe partea de server",
+  "AmazonCSE": "Criptare executată la client",
+  "Path": "Cale"
 }

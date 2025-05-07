@@ -847,5 +847,12 @@
   "YourCurrentDomain": "Vaš trenutni domen",
   "YourLogo": "Vaš logo",
   "YourTurn": "Vaš red",
-  "MoveToPublicRoom": "Ova soba i sav njen sadržaj su dostupni svima sa linkom. Da li želite da nastavite?"
+  "MoveToPublicRoom": "Ova soba i sav njen sadržaj su dostupni svima sa linkom. Da li želite da nastavite?",
+  "ForcePathStyle": "Prisili Stil putanje",
+  "ServiceUrl": "URL servisa",
+  "ServerSideEncryptionMethod": "Metod šifrovanja na serverskoj strani",
+  "UseHttp": "Koristi Http",
+  "AmazonSSE": "Šifrovanje na serveru",
+  "AmazonCSE": "Šifrovanje na strani klijenta",
+  "Path": "Putanja"
 }

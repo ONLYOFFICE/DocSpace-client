@@ -849,5 +849,12 @@
   "YourCurrentDomain": "Mevcut alanınız",
   "YourLogo": "Logonuz",
   "YourTurn": "Sıra sizde",
-  "MoveToPublicRoom": "Bu oda ve tüm içeriği, bağlantıya sahip olan herkesin kullanımına açıktır. Devam etmek istiyor musunuz?"
+  "MoveToPublicRoom": "Bu oda ve tüm içeriği, bağlantıya sahip olan herkesin kullanımına açıktır. Devam etmek istiyor musunuz?",
+  "ForcePathStyle": "Zorla Yol Stili",
+  "ServiceUrl": "Hizmet Url'si",
+  "ServerSideEncryptionMethod": "Sunucu Tarafı Şifreleme Yöntemi",
+  "UseHttp": "Http kullan",
+  "AmazonSSE": "Sunucu Taraflı Şifreleme",
+  "AmazonCSE": "İstemci Tarafında Şifreleme",
+  "Path": "Yol"
 }

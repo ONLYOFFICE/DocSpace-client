@@ -847,5 +847,12 @@
   "YourCurrentDomain": "내 현재 도메인",
   "YourLogo": "로고",
   "YourTurn": "고객님의 차례입니다",
-  "MoveToPublicRoom": "링크를 가진 누구나 이 방과 이 방의 모든 콘텐츠를 사용할 수 있습니다. 계속 하시겠습니까?"
+  "MoveToPublicRoom": "링크를 가진 누구나 이 방과 이 방의 모든 콘텐츠를 사용할 수 있습니다. 계속 하시겠습니까?",
+  "ForcePathStyle": "경로 스타일 강제",
+  "ServiceUrl": "서비스 Url",
+  "ServerSideEncryptionMethod": "서버측 암호화 방법",
+  "UseHttp": "Http 사용",
+  "AmazonSSE": "서버측 암호화",
+  "AmazonCSE": "클라이언트측 암호화",
+  "Path": "경로"
 }

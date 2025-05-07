@@ -322,6 +322,7 @@ const Root = ({
           isSkipError={!!isSkipError}
           onDownloadAs={onDownloadAs}
           filesSettings={filesSettings}
+          shareKey={shareKey}
           onSDKRequestSharingSettings={onSDKRequestSharingSettings}
           onSDKRequestSaveAs={onSDKRequestSaveAs}
           onSDKRequestInsertImage={onSDKRequestInsertImage}

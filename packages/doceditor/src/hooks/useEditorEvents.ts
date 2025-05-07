@@ -28,7 +28,7 @@ import React, { useCallback } from "react";
 import isUndefined from "lodash/isUndefined";
 import { usePathname, useSearchParams } from "next/navigation";
 
-import IConfig from "@onlyoffice/document-editor-react/dist/esm/types/model/config";
+import { type IConfig } from "@onlyoffice/document-editor-react";
 
 import {
   createFile,
@@ -37,6 +37,7 @@ import {
   getProtectUsers,
   getReferenceData,
   getSharedUsers,
+  openEdit,
   restoreDocumentsVersion,
   sendEditorNotify,
   startFilling,
@@ -92,6 +93,7 @@ const useEditorEvents = ({
   t,
   sdkConfig,
   organizationName,
+  shareKey,
   setFillingStatusDialogVisible,
   openShareFormDialog,
   onStartFillingVDRPanel,
@@ -99,7 +101,6 @@ const useEditorEvents = ({
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
-  const [events, setEvents] = React.useState<IConfigEvents>({});
   const [documentReady, setDocumentReady] = React.useState(false);
   const [createUrl, setCreateUrl] = React.useState<Nullable<string>>(null);
   const [usersInRoom, setUsersInRoom] = React.useState<TSharedUsers[]>([]);
@@ -830,8 +831,31 @@ const useEditorEvents = ({
     [config?.startFillingMode, openShareFormDialog, onStartFillingVDRPanel],
   );
 
+  const onRequestRefreshFile = React.useCallback(async () => {
+    if (!fileInfo?.id) return;
+
+    const res = await openEdit(
+      fileInfo.id,
+      fileInfo.version,
+      doc,
+      config?.editorConfig.mode,
+      undefined,
+      shareKey,
+      config?.editorType,
+      config?.editorConfig.mode,
+    );
+
+    window.DocEditor?.instances[EDITOR_ID]?.refreshFile(res);
+  }, [
+    fileInfo?.id,
+    fileInfo?.version,
+    doc,
+    shareKey,
+    config?.editorType,
+    config?.editorConfig.mode,
+  ]);
+
   return {
-    events,
     createUrl,
     documentReady,
     usersInRoom,
@@ -856,6 +880,7 @@ const useEditorEvents = ({
     onSubmit,
     onRequestFillingStatus,
     onRequestStartFilling,
+    onRequestRefreshFile,
   };
 };
 

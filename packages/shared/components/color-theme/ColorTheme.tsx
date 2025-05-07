@@ -32,7 +32,6 @@ import { ThemeContext } from "styled-components";
 import { ColorThemeProps } from "./ColorTheme.types";
 import { ThemeId } from "./ColorTheme.enums";
 
-import InfoPanelToggleTheme from "./styled-components/infoPanelToggle";
 import LinkTheme from "./styled-components/link";
 import LinkForgotPasswordColorTheme from "./styled-components/linkForgotPassword";
 import LoadingButton from "./styled-components/loadingButton";
@@ -50,16 +49,6 @@ const ColorTheme = forwardRef<
 
   const getElement = () => {
     switch (themeId) {
-      case ThemeId.InfoPanelToggle: {
-        return (
-          <InfoPanelToggleTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            ref={ref}
-          />
-        );
-      }
-
       case ThemeId.LinkForgotPassword: {
         return (
           <LinkForgotPasswordColorTheme

@@ -30,7 +30,6 @@ export const enum ThemeId {
   IndicatorFilterButton = "indicatorFilterButton",
   FilterBlockItemTag = "filterBlockItemTag",
   VersionBadge = "versionBadge",
-  LoadingButton = "loadingButton",
   InfoPanelToggle = "infoPanelToggle",
   Link = "link",
   IndicatorLoader = "indicatorLoader",

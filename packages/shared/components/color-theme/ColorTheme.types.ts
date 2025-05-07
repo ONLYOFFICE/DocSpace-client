@@ -63,12 +63,6 @@ export interface InfoPanelToggleColorTheme extends DefaultColorThemeProps {
   isInfoPanelVisible?: boolean;
 }
 
-export interface LoadingButtonColorTheme extends DefaultColorThemeProps {
-  themeId: ThemeId.LoadingButton;
-  loaderColor?: React.CSSProperties["color"];
-  onClick?: VoidFunction;
-}
-
 export interface ProgressColorTheme extends DefaultColorThemeProps {
   themeId: ThemeId.Progress;
   percent?: number;
@@ -102,7 +96,6 @@ export type ColorThemeProps =
   | IndicatorFilterButtonColorTheme
   | IndicatorLoaderColorTheme
   | InfoPanelToggleColorTheme
-  | LoadingButtonColorTheme
   | ProgressColorTheme
   | VersionBadgeTheme
   | LinkColorTheme

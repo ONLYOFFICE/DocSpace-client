@@ -33,7 +33,6 @@ import { ColorThemeProps } from "./ColorTheme.types";
 import { ThemeId } from "./ColorTheme.enums";
 
 import LinkTheme from "./styled-components/link";
-import LoadingButton from "./styled-components/loadingButton";
 import ProgressColorTheme from "./styled-components/progress";
 import VersionBadgeTheme from "./styled-components/versionBadge";
 import SubmenuTextTheme from "./styled-components/submenuText";
@@ -48,16 +47,6 @@ const ColorTheme = forwardRef<
 
   const getElement = () => {
     switch (themeId) {
-      case ThemeId.LoadingButton: {
-        return (
-          <LoadingButton
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            ref={ref}
-          />
-        );
-      }
-
       case ThemeId.Progress: {
         return (
           <ProgressColorTheme

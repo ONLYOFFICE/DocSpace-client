@@ -28,8 +28,7 @@ import React, { use } from "react";
 import PublicRoomBar from "../../public-room-bar";
 
 import { InfoBarContext } from "../contexts/InfoBar";
-
-import type { InfoBarProps } from "../Selector.types";
+import { InfoBarProps } from "../Selector.types";
 
 export const InfoBar = ({ ref, visible }: InfoBarProps) => {
   const { infoBarData, withInfoBar } = use(InfoBarContext);

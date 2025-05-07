@@ -79,7 +79,6 @@ const ColorTheme = forwardRef<
 
       case ThemeId.Link: {
         const onClickAction = (e: React.MouseEvent<Element>) => {
-          // @ts-expect-error Its not error, because its link onClick, not IconButton
           if ("onClick" in props) props.onClick?.(e);
         };
 

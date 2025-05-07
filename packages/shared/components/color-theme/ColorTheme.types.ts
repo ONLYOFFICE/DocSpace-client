@@ -26,7 +26,6 @@
 
 import { TColorScheme } from "../../themes";
 
-import { IconButtonProps } from "../icon-button/IconButton.types";
 import { LinkProps } from "../link/Link.types";
 import { TextProps } from "../text/Text.types";
 import type { TTheme } from "../../themes";
@@ -45,34 +44,6 @@ export interface FilterBlockItemTagColorTheme extends DefaultColorThemeProps {
   name?: string;
 }
 
-export interface IconButtonColorTheme
-  extends IconButtonProps,
-    DefaultColorThemeProps {
-  themeId: ThemeId.IconButton;
-  shared?: boolean;
-  locked?: boolean;
-  isFavorite?: boolean;
-  isEditing?: boolean;
-}
-
-export interface IconButtonMuteColorTheme
-  extends IconButtonProps,
-    DefaultColorThemeProps {
-  themeId: ThemeId.IconButtonMute;
-}
-
-export interface IconButtonPinColorTheme
-  extends IconButtonProps,
-    DefaultColorThemeProps {
-  themeId: ThemeId.IconButtonPin;
-}
-
-export interface IconButtonCustomFilterColorTheme
-  extends IconButtonProps,
-    DefaultColorThemeProps {
-  themeId: ThemeId.IconButtonCustomFilter;
-}
-
 export interface IconWrapperColorTheme extends DefaultColorThemeProps {
   themeId: ThemeId.IconWrapper;
   isRoot?: boolean;
@@ -83,12 +54,6 @@ export interface IndicatorFilterButtonColorTheme
   themeId: ThemeId.IndicatorFilterButton;
 }
 
-export interface IndexIconButton
-  extends IconButtonProps,
-    DefaultColorThemeProps {
-  themeId: ThemeId.IndexIconButton;
-}
-
 export interface IndicatorLoaderColorTheme extends DefaultColorThemeProps {
   themeId: ThemeId.IndicatorLoader;
 }
@@ -96,11 +61,6 @@ export interface IndicatorLoaderColorTheme extends DefaultColorThemeProps {
 export interface InfoPanelToggleColorTheme extends DefaultColorThemeProps {
   themeId: ThemeId.InfoPanelToggle;
   isInfoPanelVisible?: boolean;
-}
-
-export interface LinkForgotPasswordColorTheme extends DefaultColorThemeProps {
-  themeId: ThemeId.LinkForgotPassword;
-  isRegisterContainerVisible?: boolean;
 }
 
 export interface LoadingButtonColorTheme extends DefaultColorThemeProps {
@@ -137,19 +97,13 @@ export interface SubmenuTextTheme extends TextProps, DefaultColorThemeProps {
 }
 
 export type ColorThemeProps =
-  | IconButtonColorTheme
   | FilterBlockItemTagColorTheme
-  | IconButtonMuteColorTheme
-  | IconButtonPinColorTheme
-  | IconButtonCustomFilterColorTheme
   | IconWrapperColorTheme
   | IndicatorFilterButtonColorTheme
   | IndicatorLoaderColorTheme
   | InfoPanelToggleColorTheme
-  | LinkForgotPasswordColorTheme
   | LoadingButtonColorTheme
   | ProgressColorTheme
   | VersionBadgeTheme
   | LinkColorTheme
-  | IndexIconButton
   | SubmenuTextTheme;

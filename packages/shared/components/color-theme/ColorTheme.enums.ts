@@ -27,18 +27,13 @@
 export const enum ThemeId {
   IconWrapper = "iconWrapper",
   IconButton = "iconButton",
-  IconButtonPin = "iconButtonPin",
-  IconButtonMute = "iconButtonMute",
-  IconButtonCustomFilter = "iconButtonCustomFilter",
   IndicatorFilterButton = "indicatorFilterButton",
   FilterBlockItemTag = "filterBlockItemTag",
   VersionBadge = "versionBadge",
-  LinkForgotPassword = "linkForgotPassword",
   LoadingButton = "loadingButton",
   InfoPanelToggle = "infoPanelToggle",
   Link = "link",
   IndicatorLoader = "indicatorLoader",
   Progress = "progress",
   SubmenuText = "submenuText",
-  IndexIconButton = "indexIconButton",
 }

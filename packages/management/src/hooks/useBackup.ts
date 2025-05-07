@@ -176,7 +176,7 @@ export const useBackup = ({
 
     let firstError = false;
 
-    Object.keys(requiredFormSettings).forEach((key) => {
+    requiredFormSettings.forEach((key) => {
       const elem = selected.formSettings[key];
 
       errors[key] = !elem.trim();
@@ -190,6 +190,16 @@ export const useBackup = ({
 
     return !firstError;
   };
+
+  const isValidForm = useMemo(() => {
+    if (!requiredFormSettings.length) return false;
+
+    return !requiredFormSettings.some((key) => {
+      const value = selected.formSettings[key];
+
+      return !value || !value.trim();
+    });
+  }, [requiredFormSettings, selected.formSettings]);
 
   const getStorageParams = (
     isCheckedThirdPartyStorage: boolean,
@@ -375,7 +385,7 @@ export const useBackup = ({
     setRequiredFormSettings,
 
     isFormReady,
-
+    isValidForm,
     errorsFieldsBeforeSafe,
     setErrorsFormFields,
 

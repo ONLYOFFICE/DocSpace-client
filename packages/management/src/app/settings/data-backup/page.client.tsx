@@ -124,6 +124,7 @@ const DataBackup = ({
     deleteThirdParty,
     openConnectWindow,
 
+    isValidForm,
     defaultRegion,
 
     backupProgressError,
@@ -186,6 +187,7 @@ const DataBackup = ({
       connectedThirdPartyAccount={connectedThirdPartyAccount}
       errorInformation={errorInformation}
       isFormReady={isFormReady}
+      isValidForm={isValidForm}
       clearLocalStorage={clearLocalStorage}
       setErrorInformation={(err: unknown) => setErrorInformation(err, t)}
       setTemporaryLink={setTemporaryLink}

@@ -278,6 +278,7 @@ const AutomaticBackup = ({
         .catch((error) => {
           setErrorInformation(error, t);
           toastr.error(error);
+          console.error(error);
         })
         .finally(() => setIsLoadingData(false));
     });
@@ -317,6 +318,7 @@ const AutomaticBackup = ({
     } catch (e) {
       toastr.error(e as Error);
       setErrorInformation(e, t);
+      console.error(e);
       if (isCheckedThirdParty || isCheckedDocuments) updateBaseFolderPath();
     } finally {
       setIsLoadingData(false);

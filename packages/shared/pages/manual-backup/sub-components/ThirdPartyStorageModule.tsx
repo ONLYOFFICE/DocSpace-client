@@ -36,6 +36,7 @@ import { BackupStorageType, ThirdPartyStorages } from "@docspace/shared/enums";
 import { getOptions } from "@docspace/shared/utils/getThirdPartyStoragesOptions";
 import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
 import { IconButton } from "@docspace/shared/components/icon-button";
+import { toastr } from "@docspace/shared/components/toast";
 import type { ButtonSize } from "@docspace/shared/components/button";
 
 import type {
@@ -161,6 +162,7 @@ const ThirdPartyStorageModule = ({
       setIsStartCopy(false);
     } catch (error) {
       console.error(error);
+      toastr.error(error as Error);
     }
   };
 

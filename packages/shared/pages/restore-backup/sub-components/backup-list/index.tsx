@@ -83,7 +83,11 @@ const BackupListModalDialog = ({
       .then((filesList) =>
         setState((val) => ({ ...val, filesList, isLoading: false })),
       )
-      .catch(() => setState((val) => ({ ...val, isLoading: false })));
+      .catch((error) => {
+        setState((val) => ({ ...val, isLoading: false }));
+        toastr.error(error);
+        console.error(error);
+      });
   }, []);
 
   const onSelectFile = (
@@ -112,6 +116,7 @@ const BackupListModalDialog = ({
       )
       .catch((error) => {
         toastr.error(error);
+        console.error(error);
         setState((val) => ({ ...val, isLoading: false }));
       });
   };
@@ -133,6 +138,7 @@ const BackupListModalDialog = ({
       )
       .catch((error) => {
         toastr.error(error);
+        console.error(error);
         setState((val) => ({ ...val, isLoading: false }));
       });
   };
@@ -170,7 +176,10 @@ const BackupListModalDialog = ({
         //   ),
         // ),
       })
-      .catch((error) => toastr.error(error))
+      .catch((error) => {
+        toastr.error(error);
+        console.error(error);
+      })
       .finally(() =>
         setState((val) => ({
           ...val,

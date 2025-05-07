@@ -194,6 +194,7 @@ const ManualBackup = ({
       setDownloadingProgress(1);
     } catch (err) {
       setErrorInformation(err, t);
+      console.error(err);
     }
   };
 
@@ -243,6 +244,7 @@ const ManualBackup = ({
       setTemporaryLink("");
     } catch (err) {
       setErrorInformation(err, t);
+      console.error(err);
     }
   };
 

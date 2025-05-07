@@ -33,6 +33,7 @@ import { BackupStorageType, DeviceType } from "@docspace/shared/enums";
 import { FilesSelectorInput } from "@docspace/shared/components/files-selector-input";
 import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 import BackupToPublicRoom from "@docspace/shared/dialogs/backup-to-public-room-dialog";
+import { toastr } from "@docspace/shared/components/toast";
 
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import type { FilesSelectorSettings } from "@docspace/shared/components/files-selector-input/FilesSelectorInput.types";
@@ -135,6 +136,7 @@ const RoomsModule = ({
       );
     } catch (error) {
       console.error(error);
+      toastr.error(error as Error);
     } finally {
       setIsStartCopy(false);
     }

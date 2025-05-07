@@ -127,8 +127,9 @@ const ButtonContainer = (props: ButtonContainerProps) => {
         // ),
       );
     } catch (e) {
+      console.error(e);
+      toastr.error(e as Error);
       setErrorInformation(e, t);
-
       setIsLoading(false);
     }
   };

@@ -33,6 +33,7 @@ import { Backdrop } from "../../backdrop";
 import { Scrollbar } from "../../scrollbar";
 
 import { StyledCreateDropDown } from "../Selector.styled";
+import { NewItemDropDownProps } from "../Selector.types";
 
 export const DROPDOWN_CLASS_NAME = "selector-create-new-dropdown";
 
@@ -44,12 +45,7 @@ const NewItemDropDown = ({
   isEmpty,
   onCloseDropDown,
   listHeight,
-}: {
-  dropDownItems: React.ReactElement[];
-  isEmpty?: boolean;
-  onCloseDropDown: (e?: MouseEvent) => void;
-  listHeight?: number;
-}) => {
+}: NewItemDropDownProps) => {
   const [isMobile, setIsMobile] = React.useState(
     isMobileUtils(window.innerWidth),
   );

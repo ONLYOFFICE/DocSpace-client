@@ -39,16 +39,12 @@ import { Heading } from "../../../heading";
 import { SelectorAddButton } from "../../../selector-add-button";
 
 import { StyledNewEmptyScreen } from "../../Selector.styled";
-
-type Props = {
-  onCreateClickAction: VoidFunction;
-  createDefineRoomType: RoomsType;
-};
+import { EmptyScreenFormRoomProps } from "../../Selector.types";
 
 const EmptyScreenFormRoom = ({
   onCreateClickAction,
   createDefineRoomType,
-}: Props) => {
+}: EmptyScreenFormRoomProps) => {
   const { t } = useTranslation(["Common"]);
 
   const theme = useTheme();

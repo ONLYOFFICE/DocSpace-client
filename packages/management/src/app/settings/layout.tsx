@@ -101,7 +101,6 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
         selectedItemId={getCurrentTab()}
         onSelect={(e) => onSelect(e)}
       />
-      <div className="content">{children}</div>
     </StyledWrapper>
   );
 };

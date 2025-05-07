@@ -832,7 +832,7 @@ const useEditorEvents = ({
   );
 
   const onRequestRefreshFile = React.useCallback(async () => {
-    if (!fileInfo) return;
+    if (!fileInfo?.id) return;
 
     const res = await openEdit(
       fileInfo.id,

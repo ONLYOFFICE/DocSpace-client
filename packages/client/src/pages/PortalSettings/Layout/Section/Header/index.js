@@ -179,8 +179,6 @@ const SectionHeaderContent = (props) => {
   };
 
   const isAvailableSettings = (key) => {
-    console.log({ key });
-
     switch (key) {
       case "DNSSettings":
         return isCustomizationAvailable;

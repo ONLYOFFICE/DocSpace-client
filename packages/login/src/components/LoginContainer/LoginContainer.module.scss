@@ -64,6 +64,10 @@
 
   // ========= global classes ===========
   :global {
+    .login-link {
+      color: var(--accent-main);
+    }
+
     .remember-wrapper {
       max-width: 170px;
       display: flex;
@@ -221,7 +225,6 @@
         .login-link {
           line-height: 20px;
           margin-inline-start: auto;
-          color: var(--accent-main);
         }
       }
 

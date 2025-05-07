@@ -116,6 +116,17 @@ export default async function RootLayout({
     settings.culture = cookieLng.value;
   }
 
+  const currentColorScheme = colorTheme?.themes.find(
+    (theme) => theme.id === colorTheme.selected,
+  );
+
+  const styles = {
+    "--color-scheme-main-accent": currentColorScheme?.main.accent,
+    "--color-scheme-text-accent": currentColorScheme?.text.accent,
+    "--color-scheme-main-buttons": currentColorScheme?.main.buttons,
+    "--color-scheme-text-buttons": currentColorScheme?.text.buttons,
+  } as React.CSSProperties;
+
   console.log("Render root layout");
 
   return (
@@ -136,6 +147,7 @@ export default async function RootLayout({
         <meta name="google" content="notranslate" />
       </head>
       <body
+        style={styles}
         className={`${systemTheme?.value === ThemeKeys.DarkStr ? "dark" : "light"}`}
       >
         <StyledComponentsRegistry>

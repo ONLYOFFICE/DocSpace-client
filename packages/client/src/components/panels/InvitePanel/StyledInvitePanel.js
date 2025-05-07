@@ -465,16 +465,6 @@ const StyledLink = styled(Link)`
   float: inline-end;
 `;
 
-const ResetLink = styled(Link)`
-  float: inline-start;
-  padding: 0 16px;
-  margin-bottom: 16px;
-  font-size: 13px;
-  color: ${(props) => props.theme.createEditRoomDialog.commonParam.textColor};
-  font-style: normal;
-  line-height: 15px;
-`;
-
 const StyledToggleButton = styled(ToggleButton)`
   inset-inline-end: 8px;
   margin-top: -4px;
@@ -494,7 +484,6 @@ const StyledInviteLanguage = styled.div`
   font-weight: 600;
   line-height: 20px;
   .list-link {
-    margin-inline-start: 4px;
     color: ${(props) => props.theme.createEditRoomDialog.commonParam.textColor};
   }
 
@@ -558,7 +547,6 @@ export {
   StyledDeleteIcon,
   StyledButtons,
   StyledLink,
-  ResetLink,
   ScrollList,
   StyledToggleButton,
   StyledDescription,

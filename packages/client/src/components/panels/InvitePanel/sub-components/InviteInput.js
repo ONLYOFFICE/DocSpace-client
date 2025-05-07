@@ -54,9 +54,11 @@ import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
+import BackupIcon from "PUBLIC_DIR/images/icons/16/backup.svg?url";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 import { getUserType } from "@docspace/shared/utils/common";
+import { IconButton } from "@docspace/shared/components/icon-button";
 import {
   StyledSubHeader,
   StyledLink,
@@ -66,7 +68,6 @@ import {
   SearchItemText,
   StyledDescription,
   StyledInviteLanguage,
-  ResetLink,
   StyledCrossIcon,
 } from "../StyledInvitePanel";
 import AccessSelector from "../../../AccessSelector";
@@ -613,29 +614,15 @@ const InviteInput = ({
             shouldShowBackdrop={isMobileView}
           />
         </div>
-        {isChangeLangMail && !isMobileView ? (
-          <StyledLink
+        {isChangeLangMail ? (
+          <IconButton
             className="list-link"
-            fontWeight="600"
-            type="action"
-            isHovered
+            iconName={BackupIcon}
             onClick={onResetLangMail}
-          >
-            {t("ResetChange")}
-          </StyledLink>
+            size={12}
+          />
         ) : null}
       </StyledInviteLanguage>
-      {isChangeLangMail && isMobileView ? (
-        <ResetLink
-          className="reset-link"
-          fontWeight="600"
-          type="action"
-          isHovered
-          onClick={onResetLangMail}
-        >
-          {t("ResetChange")}
-        </ResetLink>
-      ) : null}
 
       <StyledInviteInputContainer ref={inputsRef}>
         <StyledInviteInput ref={searchRef} isShowCross={!!inputValue}>

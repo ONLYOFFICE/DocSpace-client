@@ -499,6 +499,7 @@ const AutomaticBackup = ({
                 setTime={setTime}
                 {...commonProps}
                 isError={isError}
+                setIsError={setIsError}
               />
             ) : null}
           </StyledModules>

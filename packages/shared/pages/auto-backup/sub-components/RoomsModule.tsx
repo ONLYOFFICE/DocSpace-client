@@ -49,6 +49,7 @@ interface RoomsModuleProps extends ScheduleComponentProps {
   isLoadingData: boolean;
   settingsFileSelector: FilesSelectorSettings;
   currentDeviceType?: DeviceType;
+  setIsError: (error: boolean) => void;
 
   // filesSelectorInput
   basePath: string;
@@ -73,6 +74,7 @@ const defaultState = {
 
 const RoomsModule = ({
   isError,
+  setIsError,
   setSelectedFolder,
   defaultStorageType,
   defaultFolderId,
@@ -126,6 +128,7 @@ const RoomsModule = ({
 
   const onSelectFolder = (id: string | number | undefined) => {
     setSelectedFolder(`${id}`);
+    setIsError(false);
   };
 
   return (

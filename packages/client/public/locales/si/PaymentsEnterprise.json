@@ -30,9 +30,9 @@
   "ActivateSwithToProHeader": "පූර්ණ {{license}} අනුවාදයට මාරුවන්න",
   "ActivateTariffDescr": "ඔබ {{organizationName}} {{productName}} {{license}} භාවිතා කරමින් සිටී.",
   "ActivateToProBannerHeaderTrial": "පූර්ණ {{license}} අනුවර්තනය මිලදී ගෙන පහත දේ ලබා ගන්න:",
-  "UpgradeToProBannerHeader": "30 දින සඳහා ව්‍යාපාරික භාවිතයට සුදුසු කාර්යාල தொகுப்புக்கு இலவசமாக ප්‍රවේශය ලබා ගන්න",
+  "UpgradeToProBannerHeader": "දින 30ක් සඳහා ව්‍යවසාය-සූදානම් කාර්යාල කට්ටලයකට නොමිලේ ප්‍රවේශය ලබා ගන්න.",
   "UpgradeToProBannerInstructionHeader": "වෘත්තීය විශේෂාංග ලබා ගැනීමට, {{organizationName}} {{license}} සංස්කරණයේ නොමිලේ 30-දින විමසුමක් ආරම්භ කරන්න.",
   "UpgradeToProBannerItemMobileHeader": "ජංගම සංස්කරණය.",
   "ActivateRenewSubscriptionHeader": "{{license}} සඳහා ගිවිසුම අලුතින් කර ගන්න.",
-  "UpgradeToProBannerInformationAboutShort": "{{license}} பதிப்பைப் பற்றி மேலும் அறிய <1>அதிகாரப்பூர்வ வலைத்தளத்தைப்</1> பார்வையிடவும்."
+  "UpgradeToProBannerInformationAboutShort": "{{license}} සංස්කරණය ගැන <1>නිල වෙබ් අඩවියෙන්</1> වැඩිදුර ඉගෙන ගන්න."
 }

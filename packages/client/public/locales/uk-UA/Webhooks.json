@@ -88,6 +88,6 @@
   "EventType": "Тип події",
   "IndividualEvents": "Індивідуальні події",
   "SendEverything": "Надішліть все",
-  "WebhookDisabled": "Webhook вимкнено",
+  "WebhookDisabled": "Вебхук вимкнено",
   "WebhookEnabled": "Вебхук увімкнено"
 }

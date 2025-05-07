@@ -3,7 +3,7 @@
   "CreateWebhook": "Tạo webhook",
   "DeleteHint": "Webhook sẽ bị xóa vĩnh viễn.\nBạn sẽ không thể hoàn tác thao tác này.",
   "DeleteWebhook": "Xóa webhook",
-  "DeleteWebhookForeverQuestion": "Bạn muốn xóa Webhook vĩnh viễn?",
+  "DeleteWebhookForeverQuestion": "Bạn muốn xóa webhook vĩnh viễn?",
   "Delivery": "Đã gửi",
   "DeliveryDate": "Ngày gửi",
   "DisableSSL": "Vô hiệu hóa (không khuyến khích)",

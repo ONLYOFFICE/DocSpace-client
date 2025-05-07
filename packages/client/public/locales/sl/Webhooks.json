@@ -3,7 +3,7 @@
   "CreateWebhook": "Ustvari webhook",
   "DeleteHint": "Webhook bo trajno izbrisan.\nTega dejanja ne boste mogli razveljaviti.",
   "DeleteWebhook": "Izbriši webhook",
-  "DeleteWebhookForeverQuestion": "Izbriši Webhook trajno?",
+  "DeleteWebhookForeverQuestion": "Izbriši webhook trajno?",
   "Delivery": "Dostava",
   "DeliveryDate": "Datum dostave",
   "DisableSSL": "Onemogoči (ni priporočljivo)",

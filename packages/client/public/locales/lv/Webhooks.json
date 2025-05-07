@@ -88,6 +88,6 @@
   "EventType": "Pasākuma tips",
   "IndividualEvents": "Individuāli pasākumi",
   "SendEverything": "Sūtīt visu",
-  "WebhookDisabled": "Webhook atspējots",
-  "WebhookEnabled": "Webhook aktivizēts"
+  "WebhookDisabled": "Tīmekļa aizķere ir atspējota",
+  "WebhookEnabled": "Tīmekļa aizķere ir iespējota"
 }

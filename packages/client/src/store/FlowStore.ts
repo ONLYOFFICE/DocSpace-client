@@ -156,11 +156,11 @@ class FlowStore {
           (f) => String(f.id) === id && String(f.version) === version,
         );
 
-        if (!this.localCheckVectorizeDocument(file)) return file;
+        if (file && !this.localCheckVectorizeDocument(file)) return file;
 
         return null;
       })
-      .filter(Boolean);
+      .filter(Boolean) as SimpleFile[];
 
     filesId.forEach((f) => {
       const isFound = msg.includes(`${f.id}:${f.version}`);

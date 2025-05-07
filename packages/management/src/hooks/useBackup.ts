@@ -294,14 +294,15 @@ export const useBackup = ({
         setTemporaryLink(link);
       }
       setErrorInformation("", t);
-    } else {
+    } else if (backupProgress) {
       const error =
         backupProgress && "error" in backupProgress
           ? backupProgress.error
           : backupProgress;
 
       setProgress(100);
-      setErrorInformation(error, t);
+      setErrorInformation(error ?? "", t);
+      console.error(backupProgress);
       backupStore.setIsBackupProgressVisible(false);
     }
   }, [backupProgress, setErrorInformation, t, backupStore, setProgress]);

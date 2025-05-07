@@ -26,7 +26,8 @@
 
 import { SETTINGS_SIZE } from "./Table.constants";
 
-export const getSubstring = (str: string) => +str.substring(0, str.length - 2);
+export const getSubstring = (str: string) =>
+  str ? +str.substring(0, str.length - 2) : 0;
 
 export const checkingForUnfixedSize = (
   item: string,

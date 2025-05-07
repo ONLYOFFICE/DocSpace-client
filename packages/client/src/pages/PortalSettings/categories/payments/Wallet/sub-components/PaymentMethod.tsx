@@ -48,7 +48,7 @@ const PaymentMethod = (props: PaymentMethodProps) => {
 
   const goLinkCard = () => {
     cardLinked
-      ? window.open(cardLinked, "_blank")
+      ? window.open(cardLinked, "_self")
       : toastr.error(t("ErrorNotification"));
   };
 

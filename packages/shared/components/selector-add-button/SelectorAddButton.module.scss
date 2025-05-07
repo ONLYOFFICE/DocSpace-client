@@ -11,23 +11,35 @@
   padding: var(--selector-add-button-padding);
   cursor: pointer;
 
-  svg path {
-    fill: var(--selector-add-button-icon-color);
+  :global(.icon-button_svg) {
+    svg {
+      path {
+        fill: var(--selector-add-button-icon-color);
+      }
+    }
   }
 
   &:hover {
     background: var(--selector-add-button-hover-background);
 
-    svg path {
-      fill: var(--selector-add-button-icon-color-hover);
+    :global(.icon-button_svg) {
+      svg {
+        path {
+          fill: var(--selector-add-button-icon-color-hover);
+        }
+      }
     }
   }
 
   &:active {
     background: var(--selector-add-button-active-background);
 
-    svg path {
-      fill: var(--selector-add-button-icon-color-active);
+    :global(.icon-button_svg) {
+      svg {
+        path {
+          fill: var(--selector-add-button-icon-color-active);
+        }
+      }
     }
   }
 
@@ -36,8 +48,12 @@
   &.isDisabled {
     cursor: default;
 
-    svg path {
-      fill: var(--selector-add-button-icon-color);
+    :global(.icon-button_svg) {
+      svg {
+        path {
+          fill: var(--selector-add-button-icon-color);
+        }
+      }
     }
 
     &:hover {
@@ -60,18 +76,24 @@
   &.isAction {
     background-color: var(--main-accent-button);
 
-    & svg path {
-      fill: var(--accent-main);
+    :global(.icon-button_svg) {
+      svg {
+        path {
+          fill: var(--accent-main);
+        }
+      }
     }
 
     &:hover {
       background-color: var(--main-accent-button);
 
       &:not(.disabled) {
-        svg {
-          path {
-            fill: var(--accent-main);
-            opacity: 0.85;
+        :global(.icon-button_svg) {
+          svg {
+            path {
+              fill: var(--accent-main);
+              opacity: 0.85;
+            }
           }
         }
       }
@@ -80,10 +102,14 @@
     &:active {
       background-color: var(--main-accent-button);
 
-      & svg path {
-        fill: var(--accent-main);
-        opacity: 1;
-        filter: brightness(90%);
+      :global(.icon-button_svg) {
+        svg {
+          path {
+            fill: var(--accent-main);
+            opacity: 1;
+            filter: brightness(90%);
+          }
+        }
       }
     }
 

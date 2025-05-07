@@ -32,7 +32,6 @@ import { ThemeContext } from "styled-components";
 import { ColorThemeProps } from "./ColorTheme.types";
 import { ThemeId } from "./ColorTheme.enums";
 
-import IconButtonCustomFilterTheme from "./styled-components/iconButtonCustomFilter";
 import IconWrapperTheme from "./styled-components/iconWrapper";
 import IndicatorLoaderTheme from "./styled-components/indicatorLoader";
 import InfoPanelToggleTheme from "./styled-components/infoPanelToggle";
@@ -53,15 +52,6 @@ const ColorTheme = forwardRef<
 
   const getElement = () => {
     switch (themeId) {
-      case ThemeId.IconButtonCustomFilter: {
-        return (
-          <IconButtonCustomFilterTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-          />
-        );
-      }
-
       case ThemeId.IconWrapper: {
         return (
           <IconWrapperTheme

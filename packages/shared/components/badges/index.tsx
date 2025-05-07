@@ -53,9 +53,9 @@ import { Tooltip } from "../tooltip";
 import { Text } from "../text";
 import { Link, LinkTarget, LinkType } from "../link";
 import { Badge } from "../badge";
-import { ColorTheme, ThemeId } from "../color-theme";
 
 import { RoomsType, ShareAccessRights } from "../../enums";
+import { globalColors } from "../../themes";
 
 import { IconSizeType, isDesktop, isTablet, size } from "../../utils";
 
@@ -382,13 +382,14 @@ const Badges = ({
 
       {customFilterEnabled && !isRoom && isExtsCustomFilter ? (
         <>
-          <ColorTheme
+          <IconButton
             id="customFilterTooltip"
-            themeId={ThemeId.IconButtonCustomFilter}
             iconName={iconCustomFilter}
             size={sizeBadge}
             data-tooltip-id="customFilterTooltip"
             className="badge is-custom-filter tablet-badge"
+            color={globalColors.mainGreen}
+            hoverColor={globalColors.mainGreen}
           />
 
           <Tooltip

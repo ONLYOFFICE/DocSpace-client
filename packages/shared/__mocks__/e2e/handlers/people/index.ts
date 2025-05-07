@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,4 +38,5 @@ export {
   PATH_UPDATE_USER as SELF_PATH_UPDATE_USER,
   PATH_DELETE_USER as SELF_PATH_DELETE_USER,
   PATH_USER_BY_EMAIL as SELF_PATH_USER_BY_EMAIL,
+  PATH_ADD_GUEST,
 } from "./self";

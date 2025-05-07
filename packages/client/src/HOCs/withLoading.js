@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,13 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { observer, inject } from "mobx-react";
-import { isMobile } from "@docspace/shared/utils";
 import { DeviceType } from "@docspace/shared/enums";
 
 const withLoading = (WrappedComponent) => {
-  const withLoading = (props) => {
+  const LoaderWrapper = (props) => {
     const {
       isLoadedArticleBody,
       isLoadedSectionHeader,
@@ -48,9 +47,13 @@ const withLoading = (WrappedComponent) => {
     } = props;
 
     const viewMobile = deviceType === DeviceType.mobile;
+    const pathname = window.location.pathname;
+    const index = pathname.lastIndexOf("/");
+    const setting = pathname.slice(index + 1);
 
     useEffect(() => {
-      if (window.location.pathname.includes("profile")) {
+      if (setting === "developer-tools") return;
+      if (pathname.includes("profile")) {
         if (!isLoadedArticleBody) {
           setIsBurgerLoading(true);
         } else {
@@ -64,10 +67,6 @@ const withLoading = (WrappedComponent) => {
         setIsBurgerLoading(true);
       }
     }, [isLoadedArticleBody, setIsBurgerLoading]);
-
-    const pathname = location.pathname;
-    const index = pathname.lastIndexOf("/");
-    const setting = pathname.slice(index + 1);
 
     const loadedPortalRenaming = enablePortalRename
       ? isLoadedPortalRenaming
@@ -172,6 +171,6 @@ const withLoading = (WrappedComponent) => {
       enablePortalRename,
       deviceType,
     };
-  })(observer(withLoading));
+  })(observer(LoaderWrapper));
 };
 export default withLoading;

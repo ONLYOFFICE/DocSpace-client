@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -45,18 +45,7 @@ const LeaveRoomDialog = (props) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyUp, false);
-
-    return () => {
-      document.removeEventListener("keyup", onKeyUp, false);
-    };
-  }, []);
-
-  const onKeyUp = (e) => {
-    if (e.keyCode === 27) onClose();
-    if (e.keyCode === 13 || e.which === 13) onLeaveRoom();
-  };
+  const onClose = () => setIsVisible(false);
 
   const onLeaveRoom = async () => {
     if (isRoomOwner) {
@@ -71,7 +60,18 @@ const LeaveRoomDialog = (props) => {
     }
   };
 
-  const onClose = () => setIsVisible(false);
+  const onKeyUp = (e) => {
+    if (e.keyCode === 27) onClose();
+    if (e.keyCode === 13 || e.which === 13) onLeaveRoom();
+  };
+
+  useEffect(() => {
+    document.addEventListener("keyup", onKeyUp, false);
+
+    return () => {
+      document.removeEventListener("keyup", onKeyUp, false);
+    };
+  }, []);
 
   return (
     <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { LOADER_STYLE } from "@docspace/shared/constants";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { Box } from "@docspace/shared/components/box";
+import { LOADER_STYLE } from "../../constants";
+
+import { RectangleSkeleton } from "../rectangle";
 import {
   SectionTitleProps,
   SettingProps,
@@ -41,9 +41,10 @@ const sectionGap = "12px";
 const sectionsGap = "12px";
 
 const Setting = ({ width = "280px" }: SettingProps) => (
-  <Box
-    displayProp="grid"
+  <div
     style={{
+      boxSizing: "border-box",
+      display: "grid",
       gridGap: "8px",
       gridTemplateColumns: `28px ${width}`,
       alignItems: "center",
@@ -67,7 +68,7 @@ const Setting = ({ width = "280px" }: SettingProps) => (
       speed={speed}
       animate
     />
-  </Box>
+  </div>
 );
 
 const SectionTitle = ({ height = "16", width = "62" }: SectionTitleProps) => (
@@ -88,11 +89,13 @@ const SettingsSection = ({
   width2,
   withTitle = true,
 }: SettingsSectionProps) => (
-  <Box displayProp="grid" style={{ gridGap: sectionGap }}>
-    {withTitle && <SectionTitle />}
+  <div
+    style={{ boxSizing: "border-box", display: "grid", gridGap: sectionGap }}
+  >
+    {withTitle ? <SectionTitle /> : null}
     <Setting width={width1} />
     <Setting width={width2} />
-  </Box>
+  </div>
 );
 
 // const SettingsTabs = () => (
@@ -125,13 +128,16 @@ const SettingsSection = ({
 // );
 
 export const SettingsCommonSkeleton = () => (
-  <Box
-    widthProp="100%"
-    heightProp="100%"
-    displayProp="grid"
-    style={{ gridGap: sectionsGap }}
+  <div
+    style={{
+      boxSizing: "border-box",
+      display: "grid",
+      width: "100%",
+      height: "100%",
+      gridGap: sectionsGap,
+    }}
   >
     <SettingsSection width1="225px" width2="281px" withTitle={false} />
     <SettingsSection width1="324px" width2="351px" withTitle={false} />
-  </Box>
+  </div>
 );

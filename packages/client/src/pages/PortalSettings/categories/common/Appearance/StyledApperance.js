@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,6 @@
 import { mobile } from "@docspace/shared/utils";
 import PlusThemeSvgUrl from "PUBLIC_DIR/images/plus.theme.svg?url";
 import styled, { css } from "styled-components";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
 const StyledComponent = styled.div`
   width: 100%;
@@ -40,6 +39,9 @@ const StyledComponent = styled.div`
   }
 
   .preview-header {
+    display: flex;
+    align-items: center;
+    gap: 4px;
     padding-bottom: 20px;
   }
 

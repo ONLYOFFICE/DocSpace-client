@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -67,7 +67,7 @@ export type LinkRowProps =
       isRoomsLink?: undefined;
       isPrimaryLink?: undefined;
       isArchiveFolder?: undefined;
-      getData: () => undefined;
+      getData?: () => undefined;
       onOpenContextMenu?: undefined;
       onCloseContextMenu?: undefined;
       onAccessRightsSelect?: undefined;
@@ -138,4 +138,10 @@ export type ShareProps = {
   ) => Promise<TFileLink>;
 
   selfId: string;
+  onOpenPanel?: (options: {
+    visible: boolean;
+    updateAccessLink: () => Promise<void>;
+    fileId: string | number;
+  }) => void;
+  onlyOneLink?: boolean;
 };

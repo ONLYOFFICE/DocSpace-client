@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import Filter from "./people/filter";
 import FilesFilter from "./files/filter";
 import RoomsFilter from "./rooms/filter";
@@ -41,6 +44,7 @@ import * as management from "./management";
 import * as oforms from "./oforms";
 import * as oauth from "./oauth";
 import * as debuginfo from "./debuginfo";
+import * as apiKeys from "./api-keys";
 
 export default {
   Filter,
@@ -60,4 +64,5 @@ export default {
   oauth,
   management,
   debuginfo,
+  apiKeys,
 };

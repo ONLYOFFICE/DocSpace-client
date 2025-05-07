@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -65,6 +65,7 @@ const FilesSelectorInput = (props) => {
     isDocumentIcon,
     withCreate,
     checkCreating,
+    openRoot,
   } = props;
 
   const isFilesSelection = !!filterParam;
@@ -102,12 +103,12 @@ const FilesSelectorInput = (props) => {
   };
 
   const filesSelectionProps = {
-    onSelectFile: onSelectFile,
-    filterParam: filterParam,
+    onSelectFile,
+    filterParam,
   };
 
   const foldersSelectionProps = {
-    onSelectFolder: onSelectFolder,
+    onSelectFolder,
     onSetBaseFolderPath: onSetBasePath,
   };
 
@@ -142,6 +143,7 @@ const FilesSelectorInput = (props) => {
           withCreate={withCreate}
           {...(isFilesSelection ? filesSelectionProps : foldersSelectionProps)}
           checkCreating={checkCreating}
+          openRoot={openRoot}
         />
       </Aside>
     </>
@@ -160,10 +162,7 @@ const FilesSelectorInput = (props) => {
         placeholder={t("SelectAction")}
       />
 
-      <Portal
-        visible={isPanelVisible}
-        element={<div>{selectorComponent}</div>}
-      />
+      <Portal element={<div>{selectorComponent}</div>} />
     </StyledBodyWrapper>
   );
 };

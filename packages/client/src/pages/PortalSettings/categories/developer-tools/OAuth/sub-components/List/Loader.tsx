@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,10 +26,10 @@
 
 import React from "react";
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons/rectangle";
+// import { RectangleSkeleton } from "@docspace/shared/skeletons/rectangle";
 import { TableSkeleton } from "@docspace/shared/skeletons/table";
 import { RowsSkeleton } from "@docspace/shared/skeletons/rows";
-import { DeviceType } from "@docspace/shared/enums";
+// import { DeviceType } from "@docspace/shared/enums";
 
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";
 
@@ -38,22 +38,22 @@ import { StyledContainer } from "./List.styled";
 
 const OAuthLoader = ({
   viewAs,
-  currentDeviceType,
+  // currentDeviceType,
 }: {
   viewAs: ViewAsType;
-  currentDeviceType: DeviceType;
+  // currentDeviceType: DeviceType;
 }) => {
-  const buttonHeight = currentDeviceType !== "desktop" ? "40px" : "32px";
+  // const buttonHeight = currentDeviceType !== "desktop" ? "40px" : "32px";
 
   return (
     <OAuthContainer>
       <StyledContainer>
-        <RectangleSkeleton className="description" width="100%" height="16px" />
+        {/* <RectangleSkeleton className="description" width="100%" height="16px" />
         <RectangleSkeleton
           className="add-button"
           width="220px"
           height={buttonHeight}
-        />
+        /> */}
         {viewAs === "table" ? (
           <TableSkeleton style={{}} />
         ) : (

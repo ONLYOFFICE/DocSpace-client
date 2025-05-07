@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,10 +23,19 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { CompletedForm } from "@/components/completed-form";
-import { logger } from "@/../logger.mjs";
+import { StartFillingMode } from "@docspace/shared/enums";
 
-import { getFillingSession } from "@/utils/actions";
+import { logger } from "@/../logger.mjs";
+import { CompletedForm } from "@/components/completed-form";
+
+import {
+  getFileById,
+  getFillingSession,
+  getFormFillingStatus,
+  getUser,
+} from "@/utils/actions";
+import { CompletedVDRForm } from "@/components/completed-form/CompletedVDRForm";
+import { CompletedFormEmpty } from "@/components/completed-form/CompletedForm.empty";
 
 const log = logger.child({ module: "Create page" });
 
@@ -35,9 +44,29 @@ interface PageProps {
 }
 
 async function Page({ searchParams }: PageProps) {
-  const { share, fillingSessionId, is_file } = searchParams;
+  const { share, fillingSessionId, roomId, is_file, formId, type } =
+    searchParams;
 
   log.info("Open completed form page");
+
+  if (type && type === StartFillingMode.StartFilling.toString()) {
+    const [formFillingStatus, file, user] = await Promise.all([
+      getFormFillingStatus(formId!),
+      getFileById(formId!),
+      getUser(formId!),
+    ]);
+
+    if (!file || !user || !roomId) return <CompletedFormEmpty />;
+
+    return (
+      <CompletedVDRForm
+        file={file}
+        user={user}
+        roomId={roomId}
+        formFillingStatus={formFillingStatus}
+      />
+    );
+  }
 
   const session = await getFillingSession(fillingSessionId!, share);
 

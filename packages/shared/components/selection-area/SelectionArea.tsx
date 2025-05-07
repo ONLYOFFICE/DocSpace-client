@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,14 +27,14 @@
 import React from "react";
 import { useTheme } from "styled-components";
 
-import { StyledSelectionArea } from "./SelectionArea.styled";
+import styles from "./SelectionArea.module.scss";
 import { frames } from "./SelectionArea.utils";
 import { SelectionAreaProps, TArrayTypes } from "./SelectionArea.types";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "../../utils";
 
 const SelectionArea = ({
   onMove,
-  selectableClass,
+  selectableClass = "",
   scrollClass,
   viewAs,
   itemsContainerClass,
@@ -411,12 +411,6 @@ const SelectionArea = ({
       )
         return;
 
-      // if (e.target.tagName === "A") {
-      //   const node = e.target.closest("." + selectableClass);
-      //   node && onMove && onMove({ added: [node], removed: [], clear: true });
-      //   return;
-      // }
-
       const selectables = document.getElementsByClassName(selectableClass);
 
       if (!selectables.length) return;
@@ -453,19 +447,24 @@ const SelectionArea = ({
       const itemsContainer =
         document.getElementsByClassName(itemsContainerClass);
 
-      if (!itemsContainer) return;
+      if (!itemsContainer?.length) return;
 
-      const itemsContainerRect = itemsContainer[0].getBoundingClientRect();
+      try {
+        const itemsContainerRect = itemsContainer[0].getBoundingClientRect();
 
-      if (scroll instanceof Element) {
-        if (!isRooms && viewAs === "tile") {
-          elemRect.current.top =
-            scroll.scrollTop + itemsContainerRect.top + folderHeaderHeight;
-          elemRect.current.left = scroll.scrollLeft + itemsContainerRect.left;
-        } else {
-          elemRect.current.top = scroll.scrollTop + itemsContainerRect.top;
-          elemRect.current.left = scroll.scrollLeft + itemsContainerRect.left;
+        if (scroll instanceof Element) {
+          if (!isRooms && viewAs === "tile") {
+            elemRect.current.top =
+              scroll.scrollTop + itemsContainerRect.top + folderHeaderHeight;
+            elemRect.current.left = scroll.scrollLeft + itemsContainerRect.left;
+          } else {
+            elemRect.current.top = scroll.scrollTop + itemsContainerRect.top;
+            elemRect.current.left = scroll.scrollLeft + itemsContainerRect.left;
+          }
         }
+      } catch (err) {
+        console.error("Error getting container bounds:", err);
+        return;
       }
 
       const newElemRect = itemsContainer[0]
@@ -499,11 +498,13 @@ const SelectionArea = ({
     arrayOfTypes.current = [];
   }, [isRooms, viewAs]);
 
-  return <StyledSelectionArea className="selection-area" ref={areaRef} />;
-};
-
-SelectionArea.defaultProps = {
-  selectableClass: "",
+  return (
+    <div
+      ref={areaRef}
+      className={`${styles.selectionArea} selection-area`}
+      data-testid="selection-area"
+    />
+  );
 };
 
 export { SelectionArea };

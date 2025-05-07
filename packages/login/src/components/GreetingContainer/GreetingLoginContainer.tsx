@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,14 +37,16 @@ import { Text } from "@docspace/shared/components/text";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { getLogoUrl } from "@docspace/shared/utils/common";
 
-import { GreetingContainersProps } from "@/types";
 import { DEFAULT_PORTAL_TEXT, DEFAULT_ROOM_TEXT } from "@/utils/constants";
 import { getInvitationLinkData } from "@/utils";
 
 export const GreetingLoginContainer = ({
   greetingSettings,
   culture,
-}: GreetingContainersProps) => {
+}: {
+  greetingSettings: string;
+  culture?: string;
+}) => {
   const { t } = useTranslation(["Login", "Wizard", "TenantList"]);
   const theme = useTheme();
 
@@ -63,8 +65,7 @@ export const GreetingLoginContainer = ({
     getInvitationLinkData(loginData) || {
       email: "",
       roomName: "",
-      firstName: "",
-      lastName: "",
+      displayName: "",
       type: "",
       spaceAddress: "",
     },
@@ -80,8 +81,7 @@ export const GreetingLoginContainer = ({
     setInvitationLinkData(queryParams);
   }, [loginData]);
 
-  const { type, roomName, firstName, lastName, spaceAddress } =
-    invitationLinkData;
+  const { type, roomName, displayName, spaceAddress } = invitationLinkData;
 
   return (
     <>
@@ -108,8 +108,7 @@ export const GreetingLoginContainer = ({
               ns="Common"
               defaults={roomName ? DEFAULT_ROOM_TEXT : DEFAULT_PORTAL_TEXT}
               values={{
-                firstName,
-                lastName,
+                displayName,
                 productName: t("Common:ProductName"),
                 ...(roomName ? { roomName } : { spaceAddress }),
               }}

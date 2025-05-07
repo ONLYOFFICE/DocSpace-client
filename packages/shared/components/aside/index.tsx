@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,5 +24,48 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { Aside } from "./Aside";
-export { AsideHeader } from "./AsideHeader";
+import React from "react";
+import classNames from "classnames";
+
+import { Scrollbar } from "../scrollbar";
+import { AsideProps } from "./Aside.types";
+import { AsideHeader } from "../aside-header";
+import styles from "./Aside.module.scss";
+
+const AsidePure = (props: AsideProps) => {
+  const {
+    visible,
+    children,
+    scale = false,
+    zIndex = 400,
+    className,
+    withoutBodyScroll = false,
+    onClose,
+    withoutHeader = false,
+    ...rest
+  } = props;
+
+  const asideClasses = classNames(
+    styles.aside,
+    className,
+    "not-selectable",
+    "aside",
+    {
+      [styles.scale]: scale,
+      [styles.visible]: visible,
+    },
+  );
+
+  return (
+    <aside className={asideClasses} style={{ zIndex }} data-testid="aside">
+      {!withoutHeader ? (
+        <AsideHeader isCloseable onCloseClick={onClose} {...rest} />
+      ) : null}
+      {withoutBodyScroll ? children : <Scrollbar>{children}</Scrollbar>}
+    </aside>
+  );
+};
+
+const Aside = React.memo(AsidePure);
+
+export { Aside };

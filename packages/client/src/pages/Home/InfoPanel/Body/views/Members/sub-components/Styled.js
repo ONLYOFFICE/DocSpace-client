@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base } from "@docspace/shared/themes";
 
-const LinksBlock = styled.div`
+import { injectDefaultTheme } from "@docspace/shared/utils";
+
+const LinksBlock = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   height: 100%;
 
@@ -49,9 +50,7 @@ const LinksBlock = styled.div`
   }
 `;
 
-LinksBlock.defaultProps = { theme: Base };
-
-const StyledLinkRow = styled.div`
+const StyledLinkRow = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -139,8 +138,10 @@ export const StyledPublicRoomBarContainer = styled.div`
   background: ${(props) => props.theme.backgroundColor};
   overflow: hidden;
   z-index: 1;
-`;
 
-StyledLinkRow.defaultProps = { theme: Base };
+  .public-room-bar {
+    margin-top: 0;
+  }
+`;
 
 export { LinksBlock, StyledLinkRow };

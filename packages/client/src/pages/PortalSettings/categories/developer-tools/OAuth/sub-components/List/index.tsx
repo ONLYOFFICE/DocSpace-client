@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -41,12 +41,15 @@ import TableView from "./TableView";
 import RowView from "./RowView";
 
 import { StyledContainer } from "./List.styled";
+import OAuthLoader from "./Loader";
 
 interface ListProps {
   clients: IClientProps[];
   viewAs: ViewAsType;
   currentDeviceType: DeviceType;
   apiOAuthLink: string;
+  logoText: string;
+  isLoading: boolean;
 }
 
 const List = ({
@@ -54,6 +57,8 @@ const List = ({
   viewAs,
   currentDeviceType,
   apiOAuthLink,
+  logoText,
+  isLoading,
 }: ListProps) => {
   const { t } = useTranslation(["OAuth", "Common"]);
 
@@ -64,7 +69,7 @@ const List = ({
       i18nKey="OAuthAppDescription"
       values={{
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }}
     />
   );
@@ -79,34 +84,40 @@ const List = ({
       >
         {descText}
       </Text>
-      <ColorTheme
-        target={LinkTarget.blank}
-        type={LinkType.page}
-        fontWeight={600}
-        isHovered
-        href={apiOAuthLink}
-        tag="a"
-        themeId={ThemeId.Link}
-        style={{ marginBottom: "20px" }}
-      >
-        {t("OAuth:OAuth")} {t("Common:Guide")}
-      </ColorTheme>
+      {apiOAuthLink ? (
+        <ColorTheme
+          target={LinkTarget.blank}
+          type={LinkType.page}
+          fontWeight={600}
+          isHovered
+          href={apiOAuthLink}
+          tag="a"
+          themeId={ThemeId.Link}
+          style={{ marginBottom: "20px" }}
+        >
+          {t("OAuth:OAuth")} {t("Common:Guide")}
+        </ColorTheme>
+      ) : null}
       <RegisterNewButton currentDeviceType={currentDeviceType} />
-      <Consumer>
-        {(context) =>
-          viewAs === "table" ? (
-            <TableView
-              items={clients || []}
-              sectionWidth={context.sectionWidth || 0}
-            />
-          ) : (
-            <RowView
-              items={clients || []}
-              sectionWidth={context.sectionWidth || 0}
-            />
-          )
-        }
-      </Consumer>
+      {isLoading ? (
+        <OAuthLoader viewAs={viewAs} />
+      ) : (
+        <Consumer>
+          {(context) =>
+            viewAs === "table" ? (
+              <TableView
+                items={clients || []}
+                sectionWidth={context.sectionWidth || 0}
+              />
+            ) : (
+              <RowView
+                items={clients || []}
+                sectionWidth={context.sectionWidth || 0}
+              />
+            )
+          }
+        </Consumer>
+      )}
     </StyledContainer>
   );
 };

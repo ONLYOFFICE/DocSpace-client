@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -69,22 +69,22 @@ const DetailsItemWrapper = styled.div`
   display: inline-block;
 `;
 
+const DetailsItemLoader = () => (
+  <DetailsItemWrapper>
+    <RectangleSkeleton
+      width="37px"
+      height="16px"
+      className="mb-5 display-block"
+    />
+    <RectangleSkeleton width="180px" height="20px" />
+  </DetailsItemWrapper>
+);
+
+const MessageHeader = () => (
+  <RectangleSkeleton width="130px" height="20px" className="mb-4" />
+);
+
 export const WebhookDetailsLoader = () => {
-  const DetailsItemLoader = () => (
-    <DetailsItemWrapper>
-      <RectangleSkeleton
-        width="37px"
-        height="16px"
-        className="mb-5 display-block"
-      />
-      <RectangleSkeleton width="180px" height="20px" />
-    </DetailsItemWrapper>
-  );
-
-  const MessageHeader = () => (
-    <RectangleSkeleton width="130px" height="20px" className="mb-4" />
-  );
-
   return (
     <LoaderWrapper>
       <DetailsWrapperLoader>

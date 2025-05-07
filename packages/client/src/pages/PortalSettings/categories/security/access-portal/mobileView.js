@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,14 +26,15 @@
 
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Trans, withTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
+
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+
 import { MainContainer } from "../StyledSecurity";
 import MobileCategoryWrapper from "../../../components/MobileCategoryWrapper";
 
-const MobileView = (props) => {
-  const { t } = props;
-
+const MobileView = ({ withoutExternalLink }) => {
+  const { t } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -48,7 +49,7 @@ const MobileView = (props) => {
   };
 
   return (
-    <MainContainer>
+    <MainContainer withoutExternalLink={withoutExternalLink}>
       <MobileCategoryWrapper
         title={t("SettingPasswordTittle")}
         subtitle={
@@ -75,6 +76,18 @@ const MobileView = (props) => {
           <Trans i18nKey="TrustedMailMobileDescription" ns="Settings" t={t} />
         }
         url="/portal-settings/security/access-portal/trusted-mail"
+        onClickLink={onClickLink}
+      />
+      <MobileCategoryWrapper
+        title={t("DeveloperToolsAccess")}
+        subtitle={
+          <Trans
+            i18nKey="DeveloperToolsAccessMobileDescription"
+            ns="Settings"
+            t={t}
+          />
+        }
+        url="/portal-settings/security/access-portal/access-dev-tools"
         onClickLink={onClickLink}
       />
       <MobileCategoryWrapper
@@ -111,4 +124,4 @@ const MobileView = (props) => {
   );
 };
 
-export default withTranslation("Settings")(MobileView);
+export default MobileView;

@@ -1,0 +1,15 @@
+{
+  "DescriptionUploading": "Create PDF forms in {{productName}}, e.g. in your {{sectionName}}, and upload the ready ones to the room. Make use of the integrated template library and choose among numerous ready PDF templates.",
+  "HeaderComplete": "Convenient analyzing of the collected responses",
+  "HeaderSharing": "Quick sharing",
+  "HeaderStarting": "Starting the form filling process",
+  "HeaderSubmitting": "Submitting the responses",
+  "HeaderUploading": "Easy form uploading",
+  "TitleComplete": "Check the filled forms and analyze data automatically collected into a spreadsheet. Everything – within one room.",
+  "TitleSharing": "Invite other {{productName}} members to the room to fill out the uploaded PDF forms. Copy a public access link to share the room with external users.",
+  "TitleStarting": "When a form is opened for filling, an individual copy is automatically created for each responder and is saved to the In Progress folder. It means that the form has been started but has not been completed yet.",
+  "TitleSubmitting": "Once the Complete & Submit button is clicked in the opened form copy, it is moved to the Complete folder.",
+  "WelcomeDescription": "Here, you can organize straightforward PDF form filling, easily collect and analyze responses. Ready to get started?",
+  "WelcomeFillingForm": "Welcome to the Form Filling Room!",
+  "WelcomeStartTutorial": "Take a short tour"
+}

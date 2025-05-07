@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,6 +36,12 @@ const StyledComponent = styled.div`
     max-width: 700px;
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
     line-height: 20px;
+
+    ${(props) =>
+      props.withoutExternalLink &&
+      css`
+        margin-bottom: 20px;
+      `};
   }
 
   .smtp-settings_main-title {

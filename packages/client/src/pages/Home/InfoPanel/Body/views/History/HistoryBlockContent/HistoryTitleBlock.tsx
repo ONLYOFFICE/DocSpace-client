@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -52,16 +52,16 @@ const HistoryTitleBlock = ({ t, feed }: HistoryBlockContentProps) => {
         "without-break": targetType === "group",
       })}
     >
-      {targetType === "user" && actionType === "update" && (
+      {targetType === "user" && actionType === "update" ? (
         <HistoryUserList feed={feed} />
-      )}
+      ) : null}
 
-      {targetType === "group" && actionType === "update" && (
+      {targetType === "group" && actionType === "update" ? (
         <>
           {t("Common:Group")}
           <HistoryGroupList feed={feed} />
         </>
-      )}
+      ) : null}
 
       <div className="action-title">
         <Text
@@ -76,28 +76,23 @@ const HistoryTitleBlock = ({ t, feed }: HistoryBlockContentProps) => {
         >
           {useFeedTranslation(t, feed, hasRelatedItems)}
         </Text>
-        {hasRelatedItems && (
-          <Text as="span" className="users-counter">
-            {`(${feed.related.length + 1}).`}
-          </Text>
-        )}
-        {isDisplayFolderInfo && (
+        {isDisplayFolderInfo ? (
           <HistoryMainTextFolderInfo feed={feed} actionType={actionType} />
-        )}
+        ) : null}
         {feed.related.length === 0 &&
-          targetType === "group" &&
-          actionType !== "update" && (
-            <HistoryGroupList feed={feed} withWrapping />
-          )}
+        targetType === "group" &&
+        actionType !== "update" ? (
+          <HistoryGroupList feed={feed} withWrapping />
+        ) : null}
 
         {feed.related.length === 0 &&
-          targetType === "user" &&
-          actionType !== "update" && (
-            <HistoryUserList feed={feed} withWrapping />
-          )}
-        {targetType === "roomExternalLink" && actionType === "create" && (
+        targetType === "user" &&
+        actionType !== "update" ? (
+          <HistoryUserList feed={feed} withWrapping />
+        ) : null}
+        {targetType === "roomExternalLink" && actionType === "create" ? (
           <HistoryRoomExternalLink feedData={feed.data} withWrapping />
-        )}
+        ) : null}
       </div>
 
       <Text className="date">{getDateTime(feed.date)}</Text>

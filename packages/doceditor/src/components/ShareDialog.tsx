@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,10 +35,10 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { NoUserSelect } from "@docspace/shared/utils/commonStyles";
-import { Base } from "@docspace/shared/themes";
 import { TFile } from "@docspace/shared/api/files/types";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled.div.attrs(injectDefaultTheme)`
   ${NoUserSelect}
   margin-top: 16px;
   height: 100%;
@@ -46,18 +46,20 @@ const StyledWrapper = styled.div`
   flex-direction: column;
 `;
 
-StyledWrapper.defaultProps = { theme: Base };
-
 type SharingDialogProps = {
   fileInfo: TFile;
   onCancel: () => void;
   isVisible: boolean;
+  onOpenPanel: () => void;
+  selfId?: string;
 };
 
 const SharingDialog = ({
   fileInfo,
   onCancel,
   isVisible,
+  selfId,
+  onOpenPanel,
 }: SharingDialogProps) => {
   const { t, i18n } = useTranslation(["Common"]);
 
@@ -76,7 +78,12 @@ const SharingDialog = ({
       <ModalDialog.Body>
         <StyledWrapper>
           <div className="share-file_body">
-            <Share infoPanelSelection={fileInfo} />
+            <Share
+              infoPanelSelection={fileInfo}
+              selfId={selfId ?? ""}
+              onOpenPanel={onOpenPanel}
+              onlyOneLink={fileInfo.isForm}
+            />
           </div>
         </StyledWrapper>
       </ModalDialog.Body>

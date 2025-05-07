@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,48 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
 import { useMemo, useContext } from "react";
 import { inject, observer } from "mobx-react";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { Base } from "@docspace/shared/themes";
 import { Context } from "@docspace/shared/utils";
-import { RowContainer } from "@docspace/shared/components/row-container";
+import { RowContainer } from "@docspace/shared/components/rows";
+
+import styles from "@docspace/shared/styles/FilesRowContainer.module.scss";
+
+import withContainer from "../../../../../HOCs/withContainer";
 
 import SimpleFilesRow from "./SimpleFilesRow";
 
-const StyledRowContainer = styled(RowContainer)`
-  .row-list-item:first-child {
-    .row-wrapper {
-      height: 57px;
-
-      margin-top: 1px;
-      border-top: 1px solid transparent;
-
-      .styled-checkbox-container {
-        padding-bottom: 5px;
-      }
-
-      .row_content {
-        padding-bottom: 5px;
-      }
-    }
-  }
-
-  .row-list-item {
-    margin-top: -1px;
-  }
-`;
-
-StyledRowContainer.defaultProps = { theme: Base };
-
 const FilesRowContainer = ({
-  filesList,
+  list,
   viewAs,
   setViewAs,
-  infoPanelVisible,
   filterTotal,
   fetchMoreFiles,
   hasMoreFiles,
@@ -75,8 +51,9 @@ const FilesRowContainer = ({
   currentDeviceType,
   isIndexEditingMode,
   changeIndex,
-  icon,
-  isDownload,
+  isTutorialEnabled,
+  setRefMap,
+  deleteRefMap,
 }) => {
   const { sectionWidth } = useContext(Context);
 
@@ -87,7 +64,7 @@ const FilesRowContainer = ({
   });
 
   const filesListNode = useMemo(() => {
-    return filesList.map((item, index) => (
+    return list.map((item, index) => (
       <SimpleFilesRow
         id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
         key={
@@ -100,28 +77,30 @@ const FilesRowContainer = ({
         isTrashFolder={isTrashFolder}
         changeIndex={changeIndex}
         isHighlight={
-          highlightFile.id == item.id && highlightFile.isExst === !item.fileExst
+          highlightFile.id == item.id
+            ? highlightFile.isExst === !item.fileExst
+            : null
         }
         isIndexEditingMode={isIndexEditingMode}
-        icon={icon}
-        isDownload={isDownload}
+        isTutorialEnabled={isTutorialEnabled}
+        setRefMap={setRefMap}
+        deleteRefMap={deleteRefMap}
       />
     ));
   }, [
-    filesList,
+    list,
     sectionWidth,
     isRooms,
     highlightFile.id,
     highlightFile.isExst,
     isTrashFolder,
-    icon,
-    isDownload,
+    isTutorialEnabled,
   ]);
 
   return (
-    <StyledRowContainer
-      className="files-row-container"
-      filesLength={filesList.length}
+    <RowContainer
+      className={`files-row-container ${styles.filesRowContainer}`}
+      filesLength={list.length}
       itemCount={filterTotal}
       fetchMoreFiles={fetchMoreFiles}
       hasMoreFiles={hasMoreFiles}
@@ -130,7 +109,7 @@ const FilesRowContainer = ({
       itemHeight={58}
     >
       {filesListNode}
-    </StyledRowContainer>
+    </RowContainer>
   );
 };
 
@@ -142,10 +121,9 @@ export default inject(
     treeFoldersStore,
     indexingStore,
     filesActionsStore,
-    uploadDataStore,
+    guidanceStore,
   }) => {
     const {
-      filesList,
       viewAs,
       setViewAs,
       filter,
@@ -154,6 +132,8 @@ export default inject(
       roomsFilter,
       highlightFile,
     } = filesStore;
+
+    const { setRefMap, deleteRefMap } = guidanceStore;
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
     const { currentDeviceType } = settingsStore;
@@ -161,10 +141,7 @@ export default inject(
 
     const isRooms = isRoomsFolder || isArchiveFolder;
 
-    const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
-
     return {
-      filesList,
       viewAs,
       setViewAs,
       infoPanelVisible,
@@ -177,8 +154,8 @@ export default inject(
       currentDeviceType,
       isIndexEditingMode,
       changeIndex: filesActionsStore.changeIndex,
-      icon,
-      isDownload,
+      setRefMap,
+      deleteRefMap,
     };
   },
-)(observer(FilesRowContainer));
+)(withContainer(observer(FilesRowContainer)));

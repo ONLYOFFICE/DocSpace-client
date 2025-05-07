@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,7 +35,6 @@ import { useNavigate } from "react-router-dom";
 
 import { RoomSearchArea } from "@docspace/shared/enums";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import { frameCallEvent } from "@docspace/shared/utils/common";
 import { EmptyView } from "@docspace/shared/components/empty-view";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -48,11 +47,6 @@ const RoomNoAccessContainer = (props) => {
   const titleRoomNoAccess = t("NoAccessRoomTitle");
 
   const navigate = useNavigate();
-
-  React.useEffect(() => {
-    const timer = setTimeout(onGoToShared, 5000);
-    return () => clearTimeout(timer);
-  }, []);
 
   /**
    * @param {React.MouseEvent<HTMLAnchorElement, MouseEvent> | undefined} event
@@ -72,6 +66,11 @@ const RoomNoAccessContainer = (props) => {
 
     navigate(`${path}?${filterParamsStr}`);
   };
+
+  React.useEffect(() => {
+    const timer = setTimeout(onGoToShared, 5000);
+    return () => clearTimeout(timer);
+  }, [onGoToShared]);
 
   /**
    * @type {import("@docspace/shared/components/empty-view/EmptyView.types").EmptyViewProps}

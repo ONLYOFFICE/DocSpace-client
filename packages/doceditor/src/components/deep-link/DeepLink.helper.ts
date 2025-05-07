@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -47,7 +47,7 @@ const openDeepLink = (
 ) => {
   const time = isSafari ? 3000 : 1000;
   let timeout: NodeJS.Timeout;
-  let interval: NodeJS.Timer;
+  let interval: NodeJS.Timeout;
   let visible: DocumentVisibilityState = "visible";
 
   const handleOpen = () => {
@@ -56,7 +56,7 @@ const openDeepLink = (
   };
   const handleResponse = () => {
     if (visible === "visible") return options?.onFail?.();
-    clearInterval(interval);
+    if (interval) clearInterval(interval);
     handleOpen();
   };
 

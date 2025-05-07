@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,41 +34,41 @@ import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { Tag } from "@docspace/shared/components/tag";
 import { decode } from "he";
+import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 
 import {
   connectedCloudsTypeTitleTranslation as getProviderTranslation,
-  getFileTypeName,
   getRoomTypeName,
-} from "@docspace/client/src/helpers/filesUtils";
-import CommentEditor from "../sub-components/CommentEditor";
-
+} from "SRC_DIR/helpers/filesUtils";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
+import { getPropertyClassName } from "SRC_DIR/helpers/infopanel";
+import CommentEditor from "../sub-components/CommentEditor";
 
 // Property Content Components
 
-const text = (text) => (
+const text = (value) => (
   <Text truncate className="property-content">
-    {text}
+    {value}
   </Text>
 );
 
-const link = (text, onClick) => (
+const link = (txt, onClick) => (
   <Link
     isTextOverflow
     className="property-content"
-    isHovered={true}
+    isHovered
     onClick={onClick}
     enableUserSelect
   >
-    {text}
+    {txt}
   </Link>
 );
 
 const tagList = (tags, selectTag) => (
   <div className="property-tag_list">
-    {tags.map((tag, i) => (
+    {tags.map((tag) => (
       <Tag
-        key={i}
+        key={tag}
         className="property-tag"
         label={tag}
         onClick={() => selectTag({ label: tag })}
@@ -112,45 +112,10 @@ class DetailsHelper {
   getPropertyList = () => {
     return this.getNeededProperties().map((propertyId) => ({
       id: propertyId,
-      className: this.getPropertyClassName(propertyId),
+      className: getPropertyClassName(propertyId),
       title: this.getPropertyTitle(propertyId),
       content: this.getPropertyContent(propertyId),
     }));
-  };
-
-  getPropertyClassName = (propertyId) => {
-    switch (propertyId) {
-      case "Owner":
-        return "info_details_owner";
-      case "Location":
-        return "info_details_location";
-      case "Type":
-        return "info_details_type";
-      case "Storage Type":
-        return "info_details_storage-type";
-      case "File extension":
-        return "info_details_file-extension";
-      case "Content":
-        return "info_details_content";
-      case "Size":
-        return "info_details_size";
-      case "Date modified":
-        return "info_details_date_modified";
-      case "Last modified by":
-        return "info_details_last-modified-by";
-      case "Creation date":
-        return "info_details_creation-date";
-      case "Versions":
-        return "info_details_versions";
-      case "Comments":
-        return "info_details_comments";
-      case "Tags":
-        return "info_details_tags";
-      case "Lifetime ends":
-        return "info_details_lifetime";
-      case "Storage":
-        return "info_details_storage";
-    }
   };
 
   getNeededProperties = () => {
@@ -170,7 +135,7 @@ class DetailsHelper {
         : this.item.isFolder
           ? [
               "Owner",
-              //"Location",
+              // "Location",
               "Type",
               "Content",
               "Date modified",
@@ -180,7 +145,7 @@ class DetailsHelper {
             ]
           : [
               "Owner",
-              //"Location",
+              // "Location",
               "Type",
               "File extension",
               "Size",
@@ -241,7 +206,9 @@ class DetailsHelper {
             : this.t("Common:Storage");
         }
 
-        return <></>;
+        return null;
+      default:
+        break;
     }
   };
 
@@ -250,17 +217,17 @@ class DetailsHelper {
       case "Owner":
         return this.getAuthorDecoration("createdBy");
       case "Location":
-        return this.getItemLocation();
+        return text("...");
 
       case "Index":
         return this.getItemIndex();
 
       case "Type":
-        return this.getItemType();
+        return this.getItemType(this.t);
       case "Storage Type":
         return this.getItemStorageType();
       case "Storage account":
-        return this.getItemStorageAccount();
+        return this.text("...");
 
       case "File extension":
         return this.getItemFileExtention();
@@ -287,6 +254,8 @@ class DetailsHelper {
         return this.getItemTags();
       case "Storage":
         return this.getQuotaItem();
+      default:
+        break;
     }
   };
 
@@ -302,22 +271,18 @@ class DetailsHelper {
 
     if (isAnonim) name = this.t("Common:Anonymous");
 
-    //console.log("getAuthorDecoration", { name, displayName });
+    // console.log("getAuthorDecoration", { name, displayName });
 
     return this.isVisitor || this.isCollaborator || isAnonim
       ? text(name)
       : link(name, onClick);
   };
 
-  getItemLocation = () => {
-    return text("...");
-  };
-
-  getItemType = () => {
+  getItemType = (t) => {
     return text(
       this.item.isRoom
-        ? getRoomTypeName(this.item.roomType, this.t)
-        : getFileTypeName(this.item.fileType),
+        ? getRoomTypeName(this.item.roomType, t)
+        : getFileTypeName(this.item.fileType, t),
     );
   };
 
@@ -331,14 +296,10 @@ class DetailsHelper {
     return text(getProviderTranslation(this.item.providerKey, this.t));
   };
 
-  getItemStorageAccount = () => {
-    return text("...");
-  };
-
   getItemContent = () => {
     return text(
-      `${this.t("Translations:Folders")}: ${this.item.foldersCount} | ${this.t(
-        "Translations:Files",
+      `${this.t("Common:Folders")}: ${this.item.foldersCount} | ${this.t(
+        "Common:Files",
       )}: ${this.item.filesCount}`,
     );
   };
@@ -400,7 +361,7 @@ class DetailsHelper {
       );
     }
 
-    return <></>;
+    return null;
   };
 }
 

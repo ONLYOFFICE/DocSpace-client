@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,23 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { inject, observer } from "mobx-react";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import withLoading from "SRC_DIR/HOCs/withLoading";
+import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
+import { injectDefaultTheme, mobileMore } from "@docspace/shared/utils";
 import { LanguageAndTimeZoneSettings } from "./Customization/language-and-time-zone";
 import { WelcomePageSettings } from "./Customization/welcome-page-settings";
 import { PortalRenaming } from "./Customization/portal-renaming";
 import { DNSSettings } from "./Customization/dns-settings";
+import { ConfigureDeepLink } from "./Customization/configure-deep-link";
 import CustomizationNavbar from "./customization-navbar";
-import { Base } from "@docspace/shared/themes";
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import LoaderDescriptionCustomization from "./sub-components/loaderDescriptionCustomization";
-import withLoading from "SRC_DIR/HOCs/withLoading";
-import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
-import { mobileMore } from "@docspace/shared/utils";
 
-const StyledComponent = styled.div`
+const StyledComponent = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
 
   .combo-button-label {
@@ -84,8 +84,6 @@ const StyledComponent = styled.div`
     }
   }
 `;
-
-StyledComponent.defaultProps = { theme: Base };
 
 const Customization = (props) => {
   const {
@@ -136,12 +134,14 @@ const Customization = (props) => {
       <StyledSettingsSeparator />
       <DNSSettings isMobileView={viewMobile} />
 
-      {enablePortalRename && (
+      {enablePortalRename ? (
         <>
           <StyledSettingsSeparator />
           <PortalRenaming isMobileView={viewMobile} />
         </>
-      )}
+      ) : null}
+      <StyledSettingsSeparator />
+      <ConfigureDeepLink />
     </StyledComponent>
   );
 };

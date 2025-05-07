@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -51,8 +51,22 @@ export type TChangeUserTypeDialogData = {
   fromType: EmployeeType[];
   userIDs: string[];
   userNames: string[];
+  user?: {
+    id: string;
+    status: EmployeeStatus;
+    activationStatus: number;
+    statusType: string;
+    role: EmployeeType;
+    displayName?: string;
+  };
   successCallback?: (users?: TUser[]) => void;
   abortCallback?: VoidFunction;
+  getReassignmentProgress?: () => Promise<number>;
+  reassignUserData?: boolean;
+  cancelReassignment?: VoidFunction;
+  showDeleteProfileCheckbox?: boolean;
+  needReassignData?: boolean;
+  noRoomFilesToMove?: boolean;
 };
 
 export type TChangeUserStatusDialogData = {

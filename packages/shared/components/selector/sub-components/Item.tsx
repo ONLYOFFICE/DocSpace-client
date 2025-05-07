@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,10 +26,9 @@
 
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { ReactSVG } from "react-svg";
 
-import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
-import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
+import Planet12ReactSvg from "PUBLIC_DIR/images/icons/12/planet.react.svg";
+import LifetimeRoomIcon from "PUBLIC_DIR/images/lifetime-room.react.svg";
 
 import { SettingsContext } from "../../../selectors/Files/contexts/Settings";
 import { getUserTypeTranslation } from "../../../utils/common";
@@ -123,6 +122,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       cover,
       userType,
       fileExst: ext,
+      isTemplate,
     } = item;
 
     if (isInputItem) {
@@ -169,7 +169,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
         item.roomType === RoomsType.CustomRoom) &&
       item.shared;
 
-    const badgeUrl = showPlanetIcon ? Planet12ReactSvgUrl : null;
+    const badgeIconNode = showPlanetIcon ? <Planet12ReactSvg /> : null;
 
     const currentRole = role || AvatarRole.user;
 
@@ -210,6 +210,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
         onClick={onClick}
         className="test-22"
         isDisabled={isDisabled}
+        data-testid={`selector-item-${index}`}
       >
         {avatar || isGroup ? (
           <Avatar
@@ -224,18 +225,20 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           <RoomIcon
             color={color}
             title={label}
-            logo={{ cover, large: "", original: "", small: "" }}
+            logo={{ cover, large: "", original: "", small: "", medium: "" }}
             showDefault={false}
-            badgeUrl={badgeUrl ?? ""}
+            badgeIconNode={badgeIconNode ?? undefined}
             className="item-logo"
+            isTemplate={isTemplate}
           />
         ) : color ? (
           <RoomIcon
             color={color}
             title={label}
             showDefault
-            badgeUrl={badgeUrl ?? ""}
+            badgeIconNode={badgeIconNode ?? undefined}
             className="item-logo"
+            isTemplate={isTemplate}
           />
         ) : icon ? (
           <RoomIcon
@@ -244,7 +247,8 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             imgClassName="room-logo"
             logo={icon}
             showDefault={false}
-            badgeUrl={badgeUrl ?? ""}
+            badgeIconNode={badgeIconNode ?? undefined}
+            isTemplate={isTemplate}
           />
         ) : null}
         {renderCustomItem ? (
@@ -260,18 +264,19 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
               dir="auto"
             >
               {label}
-              {displayFileExtension && ext && (
+              {displayFileExtension && ext ? (
                 <span className="item-file-exst">{ext}</span>
-              )}
+              ) : null}
             </Text>
 
-            {lifetimeTooltip && (
+            {lifetimeTooltip ? (
               <>
-                <ReactSVG
+                <div
                   data-tooltip-id={`${item.id}_iconTooltip`}
                   className="title-icon"
-                  src={LifetimeRoomIconUrl}
-                />
+                >
+                  <LifetimeRoomIcon />
+                </div>
                 <Tooltip
                   id={`${item.id}_iconTooltip`}
                   place="bottom"
@@ -279,7 +284,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
                   maxWidth="300px"
                 />
               </>
-            )}
+            ) : null}
           </div>
         )}
 

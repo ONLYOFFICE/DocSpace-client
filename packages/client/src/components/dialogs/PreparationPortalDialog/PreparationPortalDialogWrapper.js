@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,14 +29,12 @@ import { Provider as MobxProvider } from "mobx-react";
 import PreparationPortalDialog from ".";
 import stores from "../../../store/index";
 
-class PreparationPortalWrapper extends React.Component {
-  render() {
-    return (
-      <MobxProvider {...stores}>
-        <PreparationPortalDialog {...this.props} />
-      </MobxProvider>
-    );
-  }
-}
+const PreparationPortalWrapper = (props) => {
+  return (
+    <MobxProvider {...stores}>
+      <PreparationPortalDialog {...props} />
+    </MobxProvider>
+  );
+};
 
 export default PreparationPortalWrapper;

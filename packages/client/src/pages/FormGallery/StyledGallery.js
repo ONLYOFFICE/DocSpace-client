@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,9 +26,8 @@
 
 import styled, { css } from "styled-components";
 
-import { tablet, mobile } from "@docspace/shared/utils";
-import Headline from "@docspace/shared/components/headline/Headline";
-import { Base } from "@docspace/shared/themes";
+import { tablet, mobile, injectDefaultTheme } from "@docspace/shared/utils";
+import { Heading } from "@docspace/shared/components/heading";
 import { Button } from "@docspace/shared/components/button";
 
 const StyledContainer = styled.div`
@@ -39,10 +38,7 @@ const StyledContainer = styled.div`
 
   display: grid;
   align-items: center;
-  grid-template-columns: ${({ isInfoPanelVisible }) =>
-    isInfoPanelVisible
-      ? "29px min-content auto"
-      : "29px min-content auto 52px"};
+  grid-template-columns: 29px min-content auto 52px;
 
   .arrow-button {
     width: 17px;
@@ -90,7 +86,7 @@ const StyledHeading = styled.div`
   }
 `;
 
-const StyledHeadline = styled(Headline)`
+const StyledHeadline = styled(Heading)`
   width: 100%;
   max-width: min-content;
   font-weight: 700;
@@ -109,22 +105,21 @@ const StyledHeadline = styled(Headline)`
   }
 `;
 
-const StyledSubmitToGalleryButton = styled(Button)`
+const StyledSubmitToGalleryButton = styled(Button).attrs(injectDefaultTheme)`
   margin-inline-start: auto;
 
   @media ${mobile} {
     display: none;
   }
 `;
-StyledSubmitToGalleryButton.defaultProps = { theme: Base };
 
-const StyledInfoPanelToggleWrapper = styled.div`
+const StyledInfoPanelToggleWrapper = styled.div.attrs(injectDefaultTheme)`
   box-sizing: border-box;
-  display: ${(props) => (props.isInfoPanelVisible ? "none" : "flex")};
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 16px;
-  height: 16px;
+  height: 30px;
+  width: 30px;
 
   margin-block: 0;
   margin-inline: 28px 8px;
@@ -134,8 +129,8 @@ const StyledInfoPanelToggleWrapper = styled.div`
   }
 
   .info-panel-toggle-bg {
-    height: 16px;
-    width: 16px;
+    height: 30px;
+    width: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -156,11 +151,10 @@ const StyledInfoPanelToggleWrapper = styled.div`
       fill: ${(props) =>
         props.isInfoPanelVisible
           ? props.theme.infoPanel.sectionHeaderToggleIconActive
-          : props.theme.infoPanel.sectionHeaderToggleIcon};
+          : props.theme.infoPanel.sectionHeaderToggleIcon} !important;
     }
   }
 `;
-StyledInfoPanelToggleWrapper.defaultProps = { theme: Base };
 
 export {
   StyledHeading,

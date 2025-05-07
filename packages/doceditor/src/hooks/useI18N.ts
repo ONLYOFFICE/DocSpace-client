@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,15 +34,15 @@ import { getI18NInstance } from "@/utils/i18n";
 interface UseI18NProps {
   settings?: TSettings;
   user?: TUser;
+  locale?: string;
 }
 
-const useI18N = ({ settings, user }: UseI18NProps) => {
+const useI18N = ({ settings, user, locale }: UseI18NProps) => {
+  const lng = locale || user?.cultureName || settings?.culture || "en";
+  const portalLng = settings?.culture || "en";
+
   const [i18n, setI18N] = React.useState<i18n>(
-    () =>
-      getI18NInstance(
-        user?.cultureName ?? settings?.culture ?? "en",
-        settings?.culture ?? "en",
-      ) ?? ({} as i18n),
+    () => getI18NInstance(lng, portalLng) ?? ({} as i18n),
   );
 
   const isInit = React.useRef(false);
@@ -55,13 +55,10 @@ const useI18N = ({ settings, user }: UseI18NProps) => {
   React.useEffect(() => {
     isInit.current = true;
 
-    const instance = getI18NInstance(
-      user?.cultureName ?? settings?.culture ?? "en",
-      settings?.culture ?? "en",
-    );
+    const instance = getI18NInstance(lng, portalLng);
 
     if (instance) setI18N(instance);
-  }, [settings?.culture, user?.cultureName]);
+  }, [lng, portalLng]);
 
   return { i18n };
 };

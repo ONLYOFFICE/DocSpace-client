@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-
+import { getFetchedRoomParams } from "@docspace/shared/utils/rooms";
+import {
+  getRoomMembers,
+  getTemplateAvailable,
+} from "@docspace/shared/api/rooms";
 import { EditRoomDialog } from "../dialogs";
 
 const EditRoomEvent = ({
@@ -45,41 +49,16 @@ const EditRoomEvent = ({
 
   const [fetchedTags, setFetchedTags] = useState([]);
   const [fetchedImage, setFetchedImage] = useState(null);
+  const [accessItems, setAccessItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isInitLoading, setIsInitLoading] = useState(false);
+  const [isAvailable, setIsAvailable] = useState(false);
 
-  const startTags = Object.values(item.tags);
-  const startObjTags = startTags.map((tag, i) => ({ id: i, name: tag }));
-
-  const fetchedRoomParams = {
-    title: item.title,
-    type: item.roomType,
-    tags: startObjTags,
-    isThirdparty: !!item.providerKey,
-    storageLocation: {
-      title: item.title,
-      parentId: item.parentId,
-      providerKey: item.providerKey,
-      iconSrc: getThirdPartyIcon(item.providerKey),
-    },
-    isPrivate: false,
-    icon: {
-      uploadedFile: item.logo.original,
-      tmpFile: "",
-      x: 0.5,
-      y: 0.5,
-      zoom: 1,
-    },
-    roomOwner: item.createdBy,
-    canChangeRoomOwner: item?.security?.ChangeOwner || false,
-    indexing: item.indexing,
-    lifetime: item.lifetime,
-    denyDownload: item.denyDownload,
-    watermark: item.watermark,
-    ...(isDefaultRoomsQuotaSet && {
-      quota: item.quotaLimit,
-    }),
-  };
+  const fetchedRoomParams = getFetchedRoomParams(
+    item,
+    getThirdPartyIcon,
+    isDefaultRoomsQuotaSet,
+  );
 
   const onSave = async (roomParams) => {
     setIsLoading(true);
@@ -103,6 +82,29 @@ const EditRoomEvent = ({
     setFetchedImage(file);
   }, []);
 
+  const getTemplateMembers = useCallback(async () => {
+    const templateMembersData = await getRoomMembers(item.id, {});
+
+    if (templateMembersData?.items?.length) {
+      const convertedItems = templateMembersData.items.map(
+        ({ access, isOwner, sharedTo }) => {
+          return {
+            templateAccess: access,
+            templateIsOwner: isOwner,
+            ...sharedTo,
+          };
+        },
+      );
+      setAccessItems(convertedItems);
+    }
+  }, []);
+
+  const getTemplateIsAvailable = useCallback(() => {
+    getTemplateAvailable(item.id)
+      .then((available) => setIsAvailable(available))
+      .catch((err) => console.error(err));
+  }, []);
+
   useEffect(() => {
     setCreateRoomDialogVisible(true);
     setIsInitLoading(true);
@@ -110,6 +112,11 @@ const EditRoomEvent = ({
     const logo = item?.logo?.original ? item.logo.original : "";
 
     const requests = [fetchTags()];
+
+    if (item.isTemplate) {
+      requests.push(getTemplateMembers());
+      requests.push(getTemplateIsAvailable());
+    }
 
     if (logo) requests.push(fetchLogoAction);
 
@@ -136,8 +143,13 @@ const EditRoomEvent = ({
       fetchedTags={fetchedTags}
       fetchedImage={fetchedImage}
       isLoading={isLoading}
+      setIsLoading={setIsLoading}
       isInitLoading={isInitLoading}
       cover={cover}
+      item={item}
+      isTemplate={item.isTemplate}
+      accessItems={accessItems}
+      templateIsAvailable={isAvailable}
     />
   );
 };

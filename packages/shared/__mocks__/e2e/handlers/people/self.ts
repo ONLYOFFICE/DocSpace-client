@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,6 +37,7 @@ export const PATH_ACTIVATION_STATUS = "people/activationstatus/*";
 export const PATH_UPDATE_USER = "people/*";
 export const PATH_DELETE_USER = "people/@self";
 export const PATH_USER_BY_EMAIL = "people/email?email=**";
+export const PATH_ADD_GUEST = "people/guests/share/approve";
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 

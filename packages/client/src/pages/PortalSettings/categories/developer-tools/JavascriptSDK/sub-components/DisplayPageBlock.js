@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,10 +35,10 @@ export const DisplayPageBlock = ({ t, config, setConfig }) => {
   const [value, setValue] = useState(config.filter.page);
 
   const debouncedSetConfig = useCallback(
-    debounce((value) => {
-      setConfig((config) => ({
-        ...config,
-        filter: { ...config.filter, page: value },
+    debounce((newValue) => {
+      setConfig((oldConfig) => ({
+        ...oldConfig,
+        filter: { ...oldConfig.filter, page: newValue },
       }));
     }, 500),
     [setConfig],

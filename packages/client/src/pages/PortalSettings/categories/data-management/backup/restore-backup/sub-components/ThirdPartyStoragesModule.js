@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,8 +28,8 @@ import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?u
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { ReactSVG } from "react-svg";
 
+import { IconButton } from "@docspace/shared/components/icon-button";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { Text } from "@docspace/shared/components/text";
@@ -54,6 +54,7 @@ class ThirdPartyStoragesModule extends React.PureComponent {
       selectedStorageId: "",
     };
   }
+
   componentDidMount() {
     const { onSetStorageId, thirdPartyStorage } = this.props;
     if (thirdPartyStorage) {
@@ -77,18 +78,16 @@ class ThirdPartyStoragesModule extends React.PureComponent {
       });
     }
   }
-  onSelect = (event) => {
-    const data = event.target.dataset;
 
-    const selectedStorageId = data.thirdPartyKey;
+  onSelect = (key) => () => {
     const { storagesInfo } = this.state;
     const { onSetStorageId } = this.props;
-    const storage = storagesInfo[selectedStorageId];
-    const selectedStorage = storagesInfo[selectedStorageId];
 
-    if (!selectedStorage.isSet) {
+    const storage = storagesInfo[key];
+
+    if (!storage.isSet) {
       return window.open(
-        `/portal-settings/integration/third-party-services?service=${data.thirdPartyKey}`,
+        `/portal-settings/integration/third-party-services?service=${key}`,
         "_blank",
       );
     }
@@ -100,6 +99,7 @@ class ThirdPartyStoragesModule extends React.PureComponent {
       selectedStorageId: storage.id,
     });
   };
+
   render() {
     const {
       comboBoxOptions,
@@ -119,9 +119,8 @@ class ThirdPartyStoragesModule extends React.PureComponent {
       return (
         <StyledComboBoxItem isDisabled={item.disabled} key={item.key}>
           <DropDownItem
-            onClick={this.onSelect}
+            onClick={this.onSelect(item.key)}
             className={item.className}
-            data-third-party-key={item.key}
             disabled={item.disabled}
           >
             <Text className="drop-down-item_text" fontWeight={600}>
@@ -129,13 +128,14 @@ class ThirdPartyStoragesModule extends React.PureComponent {
             </Text>
 
             {!item.disabled && !item.connected ? (
-              <ReactSVG
-                src={ExternalLinkReactSvgUrl}
+              <IconButton
                 className="drop-down-item_icon"
+                size="16"
+                onClick={this.onSelect(item.key)}
+                iconName={ExternalLinkReactSvgUrl}
+                isFill
               />
-            ) : (
-              <></>
-            )}
+            ) : null}
           </DropDownItem>
         </StyledComboBoxItem>
       );
@@ -148,13 +148,13 @@ class ThirdPartyStoragesModule extends React.PureComponent {
           advancedOptions={advancedOptions}
           selectedOption={{ key: 0, label: selectedStorageTitle }}
           onSelect={this.onSelect}
-          isDisabled={!!!thirdPartyStorage}
+          isDisabled={!thirdPartyStorage}
           size="content"
-          manualWidth={"400px"}
+          manualWidth="400px"
           directionY="both"
           displaySelectedOption
           noBorder={false}
-          isDefaultMode={true}
+          isDefaultMode
           hideMobileView={false}
           forceCloseClickOutside
           scaledOptions
@@ -163,18 +163,18 @@ class ThirdPartyStoragesModule extends React.PureComponent {
           className="backup_combo"
         />
 
-        {selectedStorageId === GoogleId && (
+        {selectedStorageId === GoogleId ? (
           <GoogleCloudStorage {...commonProps} {...this.props} />
-        )}
-        {selectedStorageId === RackspaceId && (
+        ) : null}
+        {selectedStorageId === RackspaceId ? (
           <RackspaceStorage {...commonProps} {...this.props} />
-        )}
-        {selectedStorageId === SelectelId && (
+        ) : null}
+        {selectedStorageId === SelectelId ? (
           <SelectelStorage {...commonProps} {...this.props} />
-        )}
-        {selectedStorageId === AmazonId && (
+        ) : null}
+        {selectedStorageId === AmazonId ? (
           <AmazonStorage {...commonProps} {...this.props} />
-        )}
+        ) : null}
       </>
     );
   }

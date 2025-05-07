@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,23 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
-import styled from "styled-components";
-import { TableRow } from "@docspace/shared/components/table";
-import { TableCell } from "@docspace/shared/components/table";
-import { Text } from "@docspace/shared/components/text";
-
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import SettingsIcon from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import HistoryIcon from "PUBLIC_DIR/images/history.react.svg?url";
 import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
-import StatusBadge from "../../StatusBadge";
+import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 
+import React, { useState } from "react";
+import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
 import { inject, observer } from "mobx-react";
+
+import { TableRow, TableCell } from "@docspace/shared/components/table";
+import { Text } from "@docspace/shared/components/text";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+
 import { globalColors } from "@docspace/shared/themes";
+
+import StatusBadge from "../../StatusBadge";
 
 const StyledWrapper = styled.div`
   display: contents;
@@ -55,10 +57,18 @@ const StyledTableRow = styled(TableRow)`
   .mr-8 {
     margin-inline-end: 8px;
   }
+
   .textOverflow {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  .author-avatar-cell {
+    width: 16px;
+    min-width: 16px;
+    height: 16px;
+    margin-inline-end: 8px;
   }
 `;
 
@@ -70,6 +80,7 @@ const WebhooksTableRow = (props) => {
     openDeleteModal,
     setCurrentWebhook,
     hideColumns,
+    isAdmin,
   } = props;
   const navigate = useNavigate();
 
@@ -78,7 +89,7 @@ const WebhooksTableRow = (props) => {
   const [isChecked, setIsChecked] = useState(webhook.enabled);
 
   const redirectToHistory = () => {
-    navigate(window.location.pathname + `/${webhook.id}`);
+    navigate(`${window.location.pathname}/${webhook.id}`);
   };
 
   const handleRowClick = (e) => {
@@ -96,7 +107,7 @@ const WebhooksTableRow = (props) => {
     redirectToHistory();
   };
   const handleToggleEnabled = () => {
-    toggleEnabled(webhook);
+    toggleEnabled(webhook, t);
     setIsChecked((prevIsChecked) => !prevIsChecked);
   };
 
@@ -134,49 +145,70 @@ const WebhooksTableRow = (props) => {
     },
   ];
 
+  const avatarSource = webhook.createdBy?.hasAvatar
+    ? webhook.createdBy?.avatarSmall
+    : DefaultUserPhotoSize32PngUrl;
+
   return (
-    <>
-      <StyledWrapper onClick={handleRowClick}>
-        <StyledTableRow
-          contextOptions={contextOptions}
-          hideColumns={hideColumns}
-        >
+    <StyledWrapper onClick={handleRowClick}>
+      <StyledTableRow contextOptions={contextOptions} hideColumns={hideColumns}>
+        <TableCell>
+          <Text as="span" fontWeight={600} className="mr-8 textOverflow">
+            {webhook.name}{" "}
+          </Text>
+          <StatusBadge status={webhook.status} />
+        </TableCell>
+        {isAdmin ? (
           <TableCell>
-            <Text as="span" fontWeight={600} className="mr-8 textOverflow">
-              {webhook.name}{" "}
-            </Text>
-            <StatusBadge status={webhook.status} />
-          </TableCell>
-          <TableCell>
+            {webhook.createdBy?.hasAvatar ? (
+              <Avatar
+                source={avatarSource}
+                className="author-avatar-cell"
+                role="user"
+              />
+            ) : null}
             <Text
-              as="span"
-              fontSize="11px"
-              color={globalColors.gray}
+              fontSize="12px"
               fontWeight={600}
-              className="textOverflow"
+              title={webhook.createdBy?.displayName}
+              truncate
             >
-              {webhook.uri}
+              {webhook.createdBy?.displayName}
             </Text>
           </TableCell>
-          <TableCell>
-            <ToggleButton
-              className="toggle toggleButton"
-              id="toggle id"
-              isChecked={isChecked}
-              onChange={handleToggleEnabled}
-            />
-          </TableCell>
-        </StyledTableRow>
-      </StyledWrapper>
-    </>
+        ) : (
+          <div />
+        )}
+        <TableCell>
+          <Text
+            as="span"
+            fontSize="11px"
+            color={globalColors.gray}
+            fontWeight={600}
+            className="textOverflow"
+          >
+            {webhook.uri}
+          </Text>
+        </TableCell>
+        <TableCell>
+          <ToggleButton
+            className="toggle toggleButton"
+            id="toggle id"
+            isChecked={isChecked}
+            onChange={handleToggleEnabled}
+          />
+        </TableCell>
+      </StyledTableRow>
+    </StyledWrapper>
   );
 };
 
-export default inject(({ webhooksStore }) => {
+export default inject(({ webhooksStore, userStore }) => {
   const { toggleEnabled, setCurrentWebhook } = webhooksStore;
 
   return {
     toggleEnabled,
     setCurrentWebhook,
+    isAdmin: userStore.user.isAdmin,
   };
 })(observer(WebhooksTableRow));

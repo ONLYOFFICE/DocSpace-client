@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,10 +27,9 @@
 "use client";
 
 import styled from "styled-components";
-import { tablet, mobile } from "../../../utils";
-import { Base } from "../../../themes";
+import { tablet, mobile, injectDefaultTheme } from "../../../utils";
 
-const LoginContainer = styled.div<{
+const LoginContainer = styled.div.attrs(injectDefaultTheme)<{
   type: string;
   isRegisterContainerVisible: boolean;
 }>`
@@ -304,7 +303,5 @@ const LoginContainer = styled.div<{
     height: 20px;
   }
 `;
-
-LoginContainer.defaultProps = { theme: Base };
 
 export default LoginContainer;

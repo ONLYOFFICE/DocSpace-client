@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -46,11 +46,13 @@ import ListLoader from "@docspace/shared/skeletons/list";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { HelpButton } from "@docspace/shared/components/help-button";
+import { isManagement } from "@docspace/shared/utils/common";
+
 import config from "PACKAGE_FILE";
-import { StyledBackupList } from "../../../StyledBackup";
-import BackupListBody from "./BackupListBody";
 import { TenantStatus } from "@docspace/shared/enums";
 import styled from "styled-components";
+import { StyledBackupList } from "../../../StyledBackup";
+import BackupListBody from "./BackupListBody";
 
 const StyledFooterContent = styled.div`
   width: 100%;
@@ -94,7 +96,7 @@ const BackupListModalDialog = (props) => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    getBackupHistory()
+    getBackupHistory(isManagement())
       .then((filesList) =>
         setState((val) => ({ ...val, filesList, isLoading: false })),
       )
@@ -116,8 +118,8 @@ const BackupListModalDialog = (props) => {
 
   const onCleanBackupList = () => {
     setState((val) => ({ ...val, isLoading: true }));
-    deleteBackupHistory()
-      .then(() => getBackupHistory())
+    deleteBackupHistory(isManagement())
+      .then(() => getBackupHistory(isManagement()))
       .then((filesList) =>
         setState((val) => ({ ...val, filesList, isLoading: false })),
       )
@@ -131,7 +133,7 @@ const BackupListModalDialog = (props) => {
 
     setState((val) => ({ ...val, isLoading: true }));
     deleteBackup(backupId)
-      .then(() => getBackupHistory())
+      .then(() => getBackupHistory(isManagement()))
       .then((filesList) =>
         setState((val) => ({
           ...val,
@@ -167,7 +169,9 @@ const BackupListModalDialog = (props) => {
     startRestore(backupId, storageType, storageParams, isNotify)
       .then(() => setTenantStatus(TenantStatus.PortalRestore))
       .then(() => {
-        SocketHelper.emit(SocketCommands.RestoreBackup);
+        SocketHelper.emit(SocketCommands.RestoreBackup, {
+          dump: isManagement(),
+        });
       })
       .then(() =>
         navigate(
@@ -204,20 +208,18 @@ const BackupListModalDialog = (props) => {
   const { filesList, isLoading, selectedFileIndex, isChecked } = state;
 
   const helpContent = () => (
-    <>
-      <Text className="restore-backup_warning-description">
-        {t("RestoreBackupWarningText", {
-          productName: t("Common:ProductName"),
-        })}{" "}
-        {!standalone && (
-          <Text as="span" className="restore-backup_warning-link">
-            {t("RestoreBackupResetInfoWarningText", {
-              productName: t("Common:ProductName"),
-            })}
-          </Text>
-        )}
-      </Text>
-    </>
+    <Text className="restore-backup_warning-description">
+      {t("RestoreBackupWarningText", {
+        productName: t("Common:ProductName"),
+      })}{" "}
+      {!standalone ? (
+        <Text as="span" className="restore-backup_warning-link">
+          {t("RestoreBackupResetInfoWarningText", {
+            productName: t("Common:ProductName"),
+          })}
+        </Text>
+      ) : null}
+    </Text>
   );
 
   return (
@@ -234,7 +236,7 @@ const BackupListModalDialog = (props) => {
           theme={theme}
         >
           <div className="backup-list_content">
-            {filesList.length > 0 && (
+            {filesList.length > 0 ? (
               <div className="backup-restore_dialog-header">
                 <Text fontSize="12px" style={{ marginBottom: "10px" }}>
                   {t("BackupListWarningText")}
@@ -248,7 +250,7 @@ const BackupListModalDialog = (props) => {
                   {t("ClearBackupList")}
                 </Link>
               </div>
-            )}
+            ) : null}
 
             <div className="backup-restore_dialog-scroll-body">
               {!isLoading ? (
@@ -294,7 +296,7 @@ const BackupListModalDialog = (props) => {
                 offsetLeft={100}
                 iconName={HelpReactSvgUrl}
                 getContent={helpContent}
-                tooltipMaxWidth={"286px"}
+                tooltipMaxWidth="286px"
               />
             </Text>
           </div>

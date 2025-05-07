@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,9 +30,8 @@ import { withTranslation } from "react-i18next";
 
 import { TFilterSortBy } from "@docspace/shared/api/people/types";
 import { TableHeader, TTableColumn } from "@docspace/shared/components/table";
-import { Events } from "@docspace/shared/enums";
 
-import { SortByFieldName } from "SRC_DIR/helpers/constants";
+import { Events, SortByFieldName } from "@docspace/shared/enums";
 
 import {
   TableHeaderColumn,
@@ -69,7 +68,7 @@ class PeopleTableHeader extends React.Component<
 
     const nameColumn: TableHeaderColumn = {
       key: "Name",
-      title: t!("Common:Name"),
+      title: t!("Common:Label"),
       resizable: true,
       enable: true,
       default: true,

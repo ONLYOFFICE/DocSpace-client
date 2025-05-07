@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,17 +29,15 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useParams } from "react-router-dom";
 
-import { Base } from "@docspace/shared/themes";
 import FilterReactSvrUrl from "PUBLIC_DIR/images/filter.react.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Text } from "@docspace/shared/components/text";
 
+import { tablet, mobile, injectDefaultTheme } from "@docspace/shared/utils";
 import FilterDialog from "./FilterDialog";
 import StatusBar from "./StatusBar";
 
 import { HistoryHeaderLoader } from "../../sub-components/Loaders/HistoryHeaderLoader";
-
-import { tablet, mobile } from "@docspace/shared/utils";
 
 const ListHeader = styled.header`
   display: flex;
@@ -63,7 +61,7 @@ const ListHeading = styled(Text)`
   text-overflow: ellipsis;
 `;
 
-const FilterButton = styled.div`
+const FilterButton = styled.div.attrs(injectDefaultTheme)`
   position: relative;
   display: flex;
   box-sizing: border-box;
@@ -80,8 +78,7 @@ const FilterButton = styled.div`
 
   z-index: ${(props) => (props.isGroupMenuVisible ? 199 : 201)};
 
-  border: 1px solid;
-  border-color: ${(props) => props.theme.client.settings.webhooks.filterBorder};
+  border: ${(props) => props.theme.client.settings.webhooks.filterBorder};
   border-radius: 3px;
   cursor: pointer;
 
@@ -111,8 +108,6 @@ const FilterButton = styled.div`
   }
 `;
 
-FilterButton.defaultProps = { theme: Base };
-
 const HistoryFilterHeader = (props) => {
   const {
     applyFilters,
@@ -124,7 +119,7 @@ const HistoryFilterHeader = (props) => {
   } = props;
 
   const [isFiltersVisible, setIsFiltersVisible] = useState(false);
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
   const { id } = useParams();
 
   const openFiltersModal = () => {
@@ -160,11 +155,13 @@ const HistoryFilterHeader = (props) => {
             isGroupMenuVisible={isGroupMenuVisible}
           >
             <IconButton iconName={FilterReactSvrUrl} size={16} />
-            <span hidden={historyFilters === null}></span>
+            <span hidden={historyFilters === null} />
           </FilterButton>
         </ListHeader>
       </Suspense>
-      {historyFilters !== null && <StatusBar applyFilters={applyFilters} />}
+      {historyFilters !== null ? (
+        <StatusBar applyFilters={applyFilters} />
+      ) : null}
       <FilterDialog
         visible={isFiltersVisible}
         closeModal={closeFiltersModal}

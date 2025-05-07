@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,13 +26,12 @@
 
 import { useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 import styled from "styled-components";
 
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link, LinkType } from "@docspace/shared/components/link";
-import { Box } from "@docspace/shared/components/box";
 import {
   TableGroupMenu,
   TableBody,
@@ -42,6 +41,7 @@ import {
 import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 import { StyledTableContainer } from "../../../../StyledDataImport";
 import UsersTableRow from "./UsersTableRow";
 import UsersTableHeader from "./UsersTableHeader";
@@ -50,7 +50,9 @@ import {
   InjectedTypeSelectTableViewProps,
 } from "../../../../types";
 
-const UserSelectTableContainer = styled(StyledTableContainer)`
+const UserSelectTableContainer = styled(StyledTableContainer).attrs(
+  injectDefaultTheme,
+)`
   .table-group-menu {
     height: 69px;
     position: sticky;
@@ -81,9 +83,13 @@ const UserSelectTableContainer = styled(StyledTableContainer)`
       padding-inline: 28px 15px;
     }
   }
-`;
 
-UserSelectTableContainer.defaultProps = { theme: Base };
+  .buttons-box {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+  }
+`;
 
 const TABLE_VERSION = "6";
 const COLUMNS_SIZE = `nextcloudFourthColumnsSize_ver-${TABLE_VERSION}`;
@@ -135,7 +141,7 @@ const TableView = (props: TypeSelectTableViewProps) => {
 
   return (
     <UserSelectTableContainer forwardedRef={tableRef} useReactWindow>
-      {checkedUsers.result.length > 0 && (
+      {checkedUsers.result.length > 0 ? (
         <div className="table-group-menu">
           <TableGroupMenu
             checkboxOptions={[]}
@@ -147,7 +153,7 @@ const TableView = (props: TypeSelectTableViewProps) => {
             onChange={toggleAll}
           />
         </div>
-      )}
+      ) : null}
       {accountsData.length > 0 ? (
         <>
           <UsersTableHeader
@@ -192,7 +198,7 @@ const TableView = (props: TypeSelectTableViewProps) => {
           headerText={t("Common:NotFoundUsers")}
           descriptionText={t("Common:NotFoundUsersDescription")}
           buttons={
-            <Box displayProp="flex" alignItems="center">
+            <div className="buttons-box">
               <IconButton
                 className="clear-icon"
                 isFill
@@ -208,7 +214,7 @@ const TableView = (props: TypeSelectTableViewProps) => {
               >
                 {t("Common:ClearFilter")}
               </Link>
-            </Box>
+            </div>
           }
         />
       )}

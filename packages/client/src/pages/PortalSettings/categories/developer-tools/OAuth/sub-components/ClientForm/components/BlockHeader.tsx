@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -56,7 +56,7 @@ const BlockHeader = ({
         textAlign=""
       >
         {header}
-        {isRequired && (
+        {isRequired ? (
           <span
             style={{
               color: globalColors.lightErrorStatus,
@@ -67,10 +67,10 @@ const BlockHeader = ({
             {" "}
             *
           </span>
-        )}
+        ) : null}
       </Text>
 
-      {helpButtonText && <HelpButton tooltipContent={helpButtonText} />}
+      {helpButtonText ? <HelpButton tooltipContent={helpButtonText} /> : null}
     </StyledHeaderRow>
   );
 };

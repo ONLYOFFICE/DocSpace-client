@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,6 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "@docspace/shared/components/box";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { RadioButton } from "@docspace/shared/components/radio-button";
 import { Text } from "@docspace/shared/components/text";
@@ -68,9 +67,9 @@ const Checkboxes = ({
   };
 
   return (
-    <Box className="ldap_checkbox-container">
+    <div className="ldap_checkbox-container">
       <div className="ldap_connection_type-text">
-        <Text fontWeight={600} fontSize={"14px"}>
+        <Text fontWeight={600} fontSize="14px">
           {t("LdapConnectionType")}
         </Text>
       </div>
@@ -81,7 +80,7 @@ const Checkboxes = ({
             tabIndex={1}
             key={ConnectionType.Unencrypted}
             value={ConnectionType.Unencrypted}
-            isChecked={!isTlsEnabled && !isSslEnabled}
+            isChecked={!isTlsEnabled ? !isSslEnabled : null}
             onChange={onChangeUnencrypted}
             isDisabled={!isLdapEnabled || isUIDisabled}
             label={t("LdapConnectionTypeUnencrypted")}
@@ -114,7 +113,7 @@ const Checkboxes = ({
           <HelpButton tooltipContent={t("LdapConnectionTypeSSLTooltip")} />
         </div>
       </div>
-    </Box>
+    </div>
   );
 };
 

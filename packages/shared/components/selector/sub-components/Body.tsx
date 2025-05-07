@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -87,11 +87,17 @@ const Body = ({
 
   withInfo,
   infoText,
+  withInfoBadge,
   setInputItemVisible,
   inputItemVisible,
+  injectedElement,
+
+  isSSR,
 }: BodyProps) => {
   const infoBarRef = useRef<HTMLDivElement>(null);
+  const injectedElementRef = useRef<HTMLElement>(null);
   const [infoBarHeight, setInfoBarHeight] = useState(0);
+  const [injectedElementHeight, setInjectedElementHeight] = useState(0);
 
   const { withSearch } = React.useContext(SearchContext);
   const isSearch = React.useContext(SearchValueContext);
@@ -201,13 +207,29 @@ const Body = ({
       }
     }
   }, [withInfoBar, itemsCount]);
+  useLayoutEffect(() => {
+    if (injectedElement) {
+      const element = injectedElementRef.current;
 
-  let listHeight = bodyHeight - CONTAINER_PADDING - infoBarHeight;
+      if (element) {
+        const { height } = element.getBoundingClientRect();
+        setInjectedElementHeight(height);
+      }
+    }
+  }, [injectedElement, itemsCount]);
+
+  let listHeight = bodyHeight - infoBarHeight - injectedElementHeight;
 
   const showSearch = withSearch && (isSearch || itemsCount > 0);
   const showSelectAll = (isMultiSelect && withSelectAll && !isSearch) || false;
 
-  if (showSearch) listHeight -= SEARCH_HEIGHT;
+  if (withPadding) {
+    listHeight -= CONTAINER_PADDING;
+  }
+
+  if (showSearch) {
+    listHeight -= SEARCH_HEIGHT;
+  }
   if (withTabs) listHeight -= TABS_HEIGHT;
   if (withInfo) {
     const infoEl = document.getElementById("selector-info-text");
@@ -226,7 +248,8 @@ const Body = ({
   const isShareFormEmpty =
     itemsCount === 0 &&
     Boolean(items?.[0]?.isRoomsOnly) &&
-    Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom);
+    (Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom) ||
+      Boolean(items?.[0]?.createDefineRoomType === RoomsType.VirtualDataRoom));
 
   return (
     <StyledBody
@@ -250,19 +273,27 @@ const Body = ({
       <InfoBar ref={infoBarRef} visible={itemsCount !== 0} />
       <BreadCrumbs visible={!isShareFormEmpty} />
 
-      {withTabs && tabsData && (
+      {injectedElement
+        ? React.cloneElement(injectedElement, { ref: injectedElementRef })
+        : null}
+
+      {withTabs && tabsData ? (
         <StyledTabs
           items={tabsData}
           selectedItemId={activeTabId}
           className="selector_body_tabs"
         />
-      )}
+      ) : null}
 
       <Search isSearch={itemsCount > 0 || isSearch} />
 
-      {withInfo && !isLoading && (
-        <Info withInfo={withInfo} infoText={infoText} />
-      )}
+      {withInfo && !isLoading ? (
+        <Info
+          withInfo={withInfo}
+          infoText={infoText}
+          withInfoBadge={withInfoBadge}
+        />
+      ) : null}
 
       {isLoading ? (
         <Scrollbar style={{ height: listHeight }}>{rowLoader}</Scrollbar>
@@ -274,9 +305,9 @@ const Body = ({
         />
       ) : (
         <>
-          {!!descriptionText && (
+          {descriptionText ? (
             <Text className="body-description-text">{descriptionText}</Text>
-          )}
+          ) : null}
 
           <SelectAll
             show={showSelectAll}
@@ -284,7 +315,47 @@ const Body = ({
             rowLoader={rowLoader}
           />
 
-          {bodyHeight && (
+          {isSSR && !bodyHeight ? (
+            <Scrollbar
+              style={
+                {
+                  height: `calc(100% - ${Math.abs(listHeight + CONTAINER_PADDING)}px)`,
+                  overflow: "hidden",
+                  "--scrollbar-padding-inline-end": 0,
+                  "--scrollbar-padding-inline-end-mobile": 0,
+                } as React.CSSProperties
+              }
+            >
+              {items.map((item, index) => (
+                <div
+                  key={item.id}
+                  style={{
+                    height: 48,
+                    display: "flex",
+                    alignItems: "stretch",
+                  }}
+                >
+                  <Item
+                    index={index}
+                    style={{ flexGrow: 1 }}
+                    data={{
+                      items,
+                      onSelect,
+                      isMultiSelect: isMultiSelect || false,
+                      rowLoader,
+                      isItemLoaded,
+                      renderCustomItem,
+                      setInputItemVisible,
+                      inputItemVisible,
+                      savedInputValue,
+                      setSavedInputValue,
+                      listHeight,
+                    }}
+                  />
+                </div>
+              ))}
+            </Scrollbar>
+          ) : (
             <InfiniteLoader
               ref={listOptionsRef}
               isItemLoaded={isItemLoaded}

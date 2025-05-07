@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,15 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
-import { ReactSVG } from "react-svg";
 
 import { Button } from "@docspace/shared/components/button";
-import RecoverAccessModalDialog from "@docspace/shared/components/recover-access-modal-dialog/RecoverAccessModalDialog";
+import RecoverAccessModalDialog from "@docspace/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog";
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
@@ -97,14 +96,14 @@ const PortalUnavailable = ({ onLogoutClick }) => {
             })}
           </Text>
           {!window.navigator.userAgent.includes("ZoomWebKit") &&
-            !window.navigator.userAgent.includes("ZoomApps") && (
-              <Button
-                scale
-                label={t("Common:LogoutButton")}
-                size={"medium"}
-                onClick={onClick}
-              />
-            )}
+          !window.navigator.userAgent.includes("ZoomApps") ? (
+            <Button
+              scale
+              label={t("Common:LogoutButton")}
+              size="medium"
+              onClick={onClick}
+            />
+          ) : null}
 
           <ColorTheme
             textAlign="center"

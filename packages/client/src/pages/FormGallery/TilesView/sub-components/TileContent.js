@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -43,7 +43,9 @@ const TileContent = (props) => {
       onClick={onClick}
     >
       <MainContainerWrapper
-        mainContainerWidth={children.props && children.props.containerWidth}
+        mainContainerWidth={
+          children.props ? children.props.containerWidth : null
+        }
       >
         <MainContainer className="row-main-container">{children}</MainContainer>
       </MainContainerWrapper>
@@ -56,7 +58,6 @@ TileContent.propTypes = {
   className: PropTypes.string,
   id: PropTypes.string,
   onClick: PropTypes.func,
-  sideColor: PropTypes.string,
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };
 

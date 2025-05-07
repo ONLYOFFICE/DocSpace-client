@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,14 +29,13 @@ import { inject, observer } from "mobx-react";
 import { useState, useRef } from "react";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { Base } from "@docspace/shared/themes";
-import { TableBody } from "@docspace/shared/components/table";
-import { TableContainer } from "@docspace/shared/components/table";
+import { TableBody, TableContainer } from "@docspace/shared/components/table";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 import WebhooksTableRow from "./WebhooksTableRow";
 import WebhookTableHeader from "./WebhookTableHeader";
 
-const TableWrapper = styled(TableContainer)`
+const TableWrapper = styled(TableContainer).attrs(injectDefaultTheme)`
   margin-top: 16px;
 
   .header-container-text {
@@ -70,8 +69,6 @@ const TableWrapper = styled(TableContainer)`
     }
   }
 `;
-
-TableWrapper.defaultProps = { theme: Base };
 
 const TABLE_VERSION = "5";
 const COLUMNS_SIZE = `webhooksConfigColumnsSize_ver-${TABLE_VERSION}`;

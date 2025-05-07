@@ -1,0 +1,11 @@
+@import "../../../styles/mixins.scss";
+@import "../../../styles/variables/devices.scss";
+
+.container {
+  width: 211px;
+  margin: 0;
+
+  @include tablet-and-below {
+    display: none;
+  }
+}

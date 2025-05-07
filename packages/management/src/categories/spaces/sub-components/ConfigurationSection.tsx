@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -92,7 +92,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
         setIsLoading(true);
         await setDomainName(domain);
         await setPortalName(name).then((result) => {
-          let url = new URL(result);
+          const url = new URL(result);
           url.searchParams.append("referenceUrl", "/management");
           return window.location.replace(url);
         });
@@ -154,17 +154,18 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
             tabIndex={1}
           />
           <div style={{ marginTop: "5px" }}>
-            {domainNameError &&
-              domainNameError.map((err, index) => (
-                <Text
-                  className="error-text"
-                  key={index}
-                  fontSize="12px"
-                  fontWeight="400"
-                >
-                  {err}
-                </Text>
-              ))}
+            {domainNameError
+              ? domainNameError.map((err) => (
+                  <Text
+                    className="error-text"
+                    key={`error-${err}`}
+                    fontSize="12px"
+                    fontWeight="400"
+                  >
+                    {err}
+                  </Text>
+                ))
+              : null}
           </div>
         </div>
         <div className="spaces-input-block">
@@ -195,7 +196,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
         className="spaces-button"
         label={t("Common:Connect")}
         onClick={onConfigurationPortal}
-        primary={true}
+        primary
         style={{ marginTop: "2px" }}
         tabIndex={3}
       />

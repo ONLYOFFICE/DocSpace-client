@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,7 +30,6 @@ import { inject, observer } from "mobx-react";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link, LinkType } from "@docspace/shared/components/link";
-import { Box } from "@docspace/shared/components/box";
 import { TableBody } from "@docspace/shared/components/table";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
@@ -96,8 +95,10 @@ const TableView = (props: TableViewProps) => {
             columnInfoPanelStorageName={columnInfoPanelStorageName}
             isIndeterminate={isIndeterminate}
             isChecked={
-              usersWithFilledEmails.length > 0 &&
-              checkedUsers.withoutEmail.length === usersWithFilledEmails.length
+              usersWithFilledEmails.length > 0
+                ? checkedUsers.withoutEmail.length ===
+                  usersWithFilledEmails.length
+                : null
             }
             toggleAll={toggleAll}
           />
@@ -134,7 +135,7 @@ const TableView = (props: TableViewProps) => {
           headerText={t("Common:NotFoundUsers")}
           descriptionText={t("Common:NotFoundUsersDescription")}
           buttons={
-            <Box displayProp="flex" alignItems="center">
+            <div className="buttons-box">
               <IconButton
                 className="clear-icon"
                 isFill
@@ -150,7 +151,7 @@ const TableView = (props: TableViewProps) => {
               >
                 {t("Common:ClearFilter")}
               </Link>
-            </Box>
+            </div>
           }
         />
       )}

@@ -1,5 +1,7 @@
 {
   "LblInviteAgain": "Mời lại",
   "MessageEmailActivationInstuctionsSentOnEmail": "Email hướng dẫn kích hoạt đã được gửi đến địa chỉ email <1>{{email}}</1>.",
+  "RemoveUser": "Xóa người dùng",
+  "RemoveUserConfirmationText": "Bạn sắp xóa một người dùng khỏi phòng. Xin lưu ý rằng người dùng này đang tích cực tham gia hoàn thành biểu mẫu. Nếu bạn tiếp tục, bất kỳ biểu mẫu nào mà họ tham gia điền sẽ bị dừng lại ở bước của họ.",
   "UserStatus": "Trạng thái"
 }

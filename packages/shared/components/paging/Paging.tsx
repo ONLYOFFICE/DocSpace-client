@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -77,10 +77,10 @@ const Paging = (props: PagingProps) => {
         isDisabled={disablePrevious}
         disableHover={disableHover}
       />
-      {pageItems && (
+      {pageItems ? (
         <StyledPage>
           <ComboBox
-            isDisabled={disablePrevious && disableNext}
+            isDisabled={disablePrevious ? disableNext : false}
             className="manualWidth"
             directionY={openDirection}
             options={pageItems}
@@ -90,7 +90,7 @@ const Paging = (props: PagingProps) => {
             {...setDropDownMaxHeight}
           />
         </StyledPage>
-      )}
+      ) : null}
       <Button
         className="next-button not-selectable"
         size={ButtonSize.small}

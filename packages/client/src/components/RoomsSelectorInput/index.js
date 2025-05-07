@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,10 +31,10 @@ import { withTranslation } from "react-i18next";
 import { FileInput } from "@docspace/shared/components/file-input";
 
 import RoomSelector from "@docspace/shared/selectors/Room";
-import { StyledBodyWrapper } from "./StyledComponents";
 
 import { Aside } from "@docspace/shared/components/aside";
 import { Backdrop } from "@docspace/shared/components/backdrop";
+import { StyledBodyWrapper } from "./StyledComponents";
 
 const RoomsSelectorInput = (props) => {
   const {
@@ -74,7 +74,7 @@ const RoomsSelectorInput = (props) => {
   const [path, setPath] = useState("");
 
   const handleOnSubmit = (rooms) => {
-    setPath(BasePath + "/ " + rooms[0].label);
+    setPath(`${BasePath}/ ${rooms[0].label}`);
     onSubmit && onSubmit(rooms);
     setIsPanelVisible(false);
   };

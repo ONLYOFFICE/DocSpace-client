@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -45,19 +45,6 @@ const DeleteGroupDialog = (props) => {
     isLoading,
   } = props;
 
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyUp, false);
-
-    return () => {
-      document.removeEventListener("keyup", onKeyUp, false);
-    };
-  }, []);
-
-  const onKeyUp = (e) => {
-    if (e.keyCode === 27) onClose();
-    if (e.keyCode === 13 || e.which === 13) onDeleteAction();
-  };
-
   const hasMoreGroups = selection.length > 1;
 
   const onDeleteAction = () => {
@@ -72,6 +59,19 @@ const DeleteGroupDialog = (props) => {
       console.error(err);
     }
   };
+
+  const onKeyUp = (e) => {
+    if (e.keyCode === 27) onClose();
+    if (e.keyCode === 13 || e.which === 13) onDeleteAction();
+  };
+
+  useEffect(() => {
+    document.addEventListener("keyup", onKeyUp, false);
+
+    return () => {
+      document.removeEventListener("keyup", onKeyUp, false);
+    };
+  }, []);
 
   return (
     <ModalDialog visible={visible} onClose={onClose} displayType="modal">

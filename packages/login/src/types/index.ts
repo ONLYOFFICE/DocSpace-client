@@ -1,5 +1,5 @@
 import { isSeparator } from "@docspace/shared/utils/typeGuards";
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -43,7 +43,8 @@ import {
   ThemeKeys,
 } from "@docspace/shared/enums";
 
-import { AuthenticatedAction, ValidationResult } from "@/utils/enums";
+import { ValidationResult } from "@/utils/enums";
+import { TUser } from "@docspace/shared/api/people/types";
 
 export type TError =
   | {
@@ -72,12 +73,12 @@ export type TCulturesOption =
       isBeta?: boolean;
       key: string | number;
       label: string;
-      icon?: string;
+      icon?: string | React.ReactElement;
     }
   | {
       isBeta?: boolean;
       key: string | number;
-      icon?: string;
+      icon?: string | React.ReactElement;
     };
 
 export type TDataContext = {
@@ -113,6 +114,7 @@ export type TConfirmLinkParams = {
   type?: string;
   first?: string;
   roomId?: string;
+  linkData?: string;
 };
 
 export type TConfirmLinkResult = {
@@ -155,18 +157,16 @@ export type TTfaSecretKeyAndQR = {
 };
 
 export interface ConfirmRouteProps {
-  doAuthenticated?: AuthenticatedAction;
-  defaultPage?: string;
   socketUrl?: string;
   children: ReactNode;
   confirmLinkResult: TConfirmLinkResult;
   confirmLinkParams: TConfirmLinkParams;
+  user?: TUser;
 }
 
 export type GreetingCreateUserContainerProps = {
   type: string;
-  firstName?: string;
-  lastName?: string;
+  displayName?: string;
   culture?: string;
   hostName?: string;
 };
@@ -213,7 +213,6 @@ export type LoginFormProps = {
   reCaptchaType?: RecaptchaType;
   cookieSettingsEnabled: boolean;
   clientId?: string;
-  oauthUrl?: string;
   client?: IClientProps;
   ldapDomain?: string;
   ldapEnabled?: boolean;

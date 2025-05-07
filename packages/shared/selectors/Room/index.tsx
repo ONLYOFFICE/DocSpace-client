@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -73,22 +73,41 @@ const RoomSelector = ({
   onCancel,
 
   roomType,
+  searchArea,
 
   disableThirdParty,
+  emptyScreenHeader,
+  emptyScreenDescription,
+
+  withInit,
+  initItems,
+  initTotal,
+  initHasNextPage,
+  initSearchValue,
 }: RoomSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
-  const [searchValue, setSearchValue] = React.useState("");
-  const [hasNextPage, setHasNextPage] = React.useState(false);
+  const [searchValue, setSearchValue] = React.useState(() =>
+    withInit ? initSearchValue : "",
+  );
+  const [hasNextPage, setHasNextPage] = React.useState(() =>
+    withInit ? initHasNextPage : false,
+  );
   const [isNextPageLoading, setIsNextPageLoading] = React.useState(false);
   const [selectedItem, setSelectedItem] = React.useState<TSelectorItem | null>(
     null,
   );
-  const [total, setTotal] = React.useState(-1);
+  const [total, setTotal] = React.useState(() => (withInit ? initTotal : -1));
+  const [items, setItems] = React.useState<TSelectorItem[]>(
+    withInit
+      ? convertToItems(initItems).filter((x) =>
+          excludeItems ? !excludeItems.includes(x.id) : true,
+        )
+      : [],
+  );
 
-  const [items, setItems] = React.useState<TSelectorItem[]>([]);
-
-  const isFirstLoad = React.useRef(true);
+  const withInitRef = React.useRef<boolean>(withInit ?? false);
+  const isFirstLoad = React.useRef(!withInit);
   const afterSearch = React.useRef(false);
 
   const onSelect = (
@@ -133,6 +152,11 @@ const RoomSelector = ({
 
   const onLoadNextPage = React.useCallback(
     async (startIndex: number) => {
+      if (withInitRef.current && startIndex === 0) {
+        withInitRef.current = false;
+        isFirstLoad.current = false;
+        return;
+      }
       setIsNextPageLoading(true);
 
       const page = startIndex / PAGE_COUNT;
@@ -143,6 +167,7 @@ const RoomSelector = ({
       filter.pageCount = PAGE_COUNT;
       filter.type = roomType as unknown as string | string[];
       filter.filterValue = searchValue || null;
+      filter.searchArea = searchArea || "";
 
       if (disableThirdParty)
         filter.storageFilter = RoomsStorageFilter.internal as unknown as string;
@@ -159,7 +184,7 @@ const RoomSelector = ({
 
       setHasNextPage(count === PAGE_COUNT);
 
-      if (isFirstLoad) {
+      if (isFirstLoad.current || startIndex === 0) {
         setTotal(totalCount);
 
         setItems([...rooms]);
@@ -177,7 +202,14 @@ const RoomSelector = ({
 
       setIsNextPageLoading(false);
     },
-    [disableThirdParty, excludeItems, roomType, searchValue, setIsDataReady],
+    [
+      disableThirdParty,
+      excludeItems,
+      roomType,
+      searchValue,
+      searchArea,
+      setIsDataReady,
+    ],
   );
 
   const headerSelectorProps: TSelectorHeader = withHeader
@@ -226,8 +258,10 @@ const RoomSelector = ({
       onSubmit={onSubmit}
       isMultiSelect={isMultiSelect}
       emptyScreenImage={EmptyScreenCorporateSvgUrl}
-      emptyScreenHeader={t("Common:EmptyRoomsHeader")}
-      emptyScreenDescription={t("Common:EmptyRoomsDescription")}
+      emptyScreenHeader={emptyScreenHeader ?? t("Common:EmptyRoomsHeader")}
+      emptyScreenDescription={
+        emptyScreenDescription ?? t("Common:EmptyRoomsDescription")
+      }
       searchEmptyScreenImage={EmptyScreenCorporateSvgUrl}
       searchEmptyScreenHeader={t("Common:NotFoundTitle")}
       searchEmptyScreenDescription={t("Common:SearchEmptyRoomsDescription")}
@@ -245,6 +279,7 @@ const RoomSelector = ({
           isUser={false}
         />
       }
+      isSSR={withInit}
     />
   );
 };

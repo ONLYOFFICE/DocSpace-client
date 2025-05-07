@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
-import styled, { css } from "styled-components";
+import { useState } from "react";
+import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -97,18 +97,18 @@ const InterfaceTheme = (props) => {
   } = props;
   const [currentTheme, setCurrentTheme] = useState(theme);
 
-  const themeChange = async (theme) => {
+  const themeChange = async (newTheme) => {
     showLoader();
 
     try {
-      setCurrentTheme(theme);
+      setCurrentTheme(newTheme);
 
       if (isDesktopClient) {
-        const editorTheme = getEditorTheme(theme);
+        const editorTheme = getEditorTheme(newTheme);
         window.AscDesktopEditor.execCommand("portal:uitheme", editorTheme);
       }
 
-      await changeTheme(theme);
+      await changeTheme(newTheme);
     } catch (error) {
       console.error(error);
       toastr.error(error);

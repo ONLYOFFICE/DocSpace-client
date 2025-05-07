@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,15 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { Button } from "@docspace/shared/components/button";
 import styled from "styled-components";
 import { toastr } from "@docspace/shared/components/toast";
-import DowngradePlanButtonContainer from "./DowngradePlanButtonContainer";
 import api from "@docspace/shared/api";
-import { Trans } from "react-i18next";
+
 import { updatePayment } from "@docspace/shared/api/portal";
+import DowngradePlanButtonContainer from "./DowngradePlanButtonContainer";
 
 const StyledBody = styled.div`
   button {
@@ -40,10 +40,10 @@ const StyledBody = styled.div`
   }
 `;
 const MANAGER = "manager";
-let timerId = null,
-  intervalId = null,
-  isWaitRequest = false,
-  previousManagersCount = null;
+let timerId = null;
+let intervalId = null;
+let isWaitRequest = false;
+let previousManagersCount = null;
 const UpdatePlanButtonContainer = ({
   setIsLoading,
   paymentLink,
@@ -57,35 +57,8 @@ const UpdatePlanButtonContainer = ({
   currentTariffPlanTitle,
   t,
   canPayTariff,
+  isYearTariff,
 }) => {
-  const onUpdateTariff = async () => {
-    try {
-      timerId = setTimeout(() => {
-        setIsLoading(true);
-      }, 500);
-
-      const res = await updatePayment(managersCount);
-
-      if (res === false) {
-        toastr.error(t("ErrorNotification"));
-
-        setIsLoading(false);
-        clearTimeout(timerId);
-        timerId = null;
-
-        return;
-      }
-
-      previousManagersCount = maxCountManagersByQuota;
-      waitingForQuota();
-    } catch (e) {
-      toastr.error(t("ErrorNotification"));
-      setIsLoading(false);
-      clearTimeout(timerId);
-      timerId = null;
-    }
-  };
-
   const resetIntervalSuccess = () => {
     intervalId &&
       toastr.success(
@@ -95,12 +68,7 @@ const UpdatePlanButtonContainer = ({
     intervalId = null;
     setIsLoading(false);
   };
-  useEffect(() => {
-    if (intervalId && maxCountManagersByQuota !== previousManagersCount) {
-      resetIntervalSuccess();
-      return;
-    }
-  }, [maxCountManagersByQuota, intervalId, previousManagersCount]);
+
   const waitingForQuota = () => {
     isWaitRequest = false;
     let requestsCount = 0;
@@ -144,6 +112,40 @@ const UpdatePlanButtonContainer = ({
     }, 2000);
   };
 
+  const onUpdateTariff = async () => {
+    try {
+      timerId = setTimeout(() => {
+        setIsLoading(true);
+      }, 500);
+
+      const res = await updatePayment(managersCount, isYearTariff);
+
+      if (res === false) {
+        toastr.error(t("ErrorNotification"));
+
+        setIsLoading(false);
+        clearTimeout(timerId);
+        timerId = null;
+
+        return;
+      }
+
+      previousManagersCount = maxCountManagersByQuota;
+      waitingForQuota();
+    } catch (e) {
+      toastr.error(t("ErrorNotification"));
+      setIsLoading(false);
+      clearTimeout(timerId);
+      timerId = null;
+    }
+  };
+
+  useEffect(() => {
+    if (intervalId && maxCountManagersByQuota !== previousManagersCount) {
+      resetIntervalSuccess();
+    }
+  }, [maxCountManagersByQuota, intervalId, previousManagersCount]);
+
   const goToStripePortal = () => {
     paymentLink
       ? window.open(paymentLink, "_blank")
@@ -165,7 +167,7 @@ const UpdatePlanButtonContainer = ({
       <Button
         className="upgrade-now-button"
         label={t("UpgradeNow")}
-        size={"medium"}
+        size="medium"
         primary
         isDisabled={isLessCountThanAcceptable || isLoading || isDisabled}
         onClick={goToStripePortal}
@@ -194,7 +196,7 @@ const UpdatePlanButtonContainer = ({
       <Button
         className="upgrade-now-button"
         label={t("UpgradeNow")}
-        size={"medium"}
+        size="medium"
         primary
         isDisabled={
           isLessCountThanAcceptable || isTheSameCount || isLoading || isDisabled
@@ -218,6 +220,7 @@ export default inject(
       maxCountManagersByQuota,
       setPortalQuotaValue,
       currentTariffPlanTitle,
+      isYearTariff,
     } = currentQuotaStore;
 
     const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
@@ -249,6 +252,7 @@ export default inject(
       accountLink,
       setPortalQuotaValue,
       currentTariffPlanTitle,
+      isYearTariff,
     };
   },
 )(observer(UpdatePlanButtonContainer));

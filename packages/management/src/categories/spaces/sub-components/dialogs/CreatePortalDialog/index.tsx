@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -82,7 +82,7 @@ const CreatePortalDialog = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const { spacesStore, settingsStore, userStore } = useStore();
-  const { tenantAlias, baseDomain, domainValidator } = settingsStore;
+  const { baseDomain, domainValidator } = settingsStore;
 
   const {
     createPortalDialogVisible: visible,
@@ -94,15 +94,13 @@ const CreatePortalDialog = () => {
 
   const [name, setName] = React.useState<string>("");
 
-  const onHandleName = (e) => {
+  const onHandleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(toLower(e.target.value));
     if (registerError) setRegisterError(null);
   };
 
-  const onKeyDown = (event: React.KeyboardEvent) => {
-    if (event.code === "Enter") {
-      onHandleClick();
-    }
+  const onClose = () => {
+    setCreatePortalDialogVisible(false);
   };
 
   const onHandleClick = async () => {
@@ -121,7 +119,6 @@ const CreatePortalDialog = () => {
     };
 
     const protocol = window?.location?.protocol;
-    const host = `${tenantAlias}.${baseDomain}`;
 
     const isValidPortalName = validatePortalName(
       name,
@@ -151,8 +148,10 @@ const CreatePortalDialog = () => {
     }
   };
 
-  const onClose = () => {
-    setCreatePortalDialogVisible(false);
+  const onKeyDown = (event: React.KeyboardEvent) => {
+    if (event.code === "Enter") {
+      onHandleClick();
+    }
   };
 
   return (
@@ -168,7 +167,7 @@ const CreatePortalDialog = () => {
       </ModalDialog.Header>
       <ModalDialog.Body>
         <StyledBodyContent>
-          <Text noSelect={true}>
+          <Text noSelect>
             {t("CreateSpaceDescription", {
               productName: t("Common:ProductName"),
             })}
@@ -209,7 +208,7 @@ const CreatePortalDialog = () => {
             <Checkbox
               className="create-portal-checkbox"
               label={t("VisitSpace")}
-              onChange={() => setVisit((visit) => !visit)}
+              onChange={() => setVisit((visitPrev) => !visitPrev)}
               isChecked={visit}
             />
 

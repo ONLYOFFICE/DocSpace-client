@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -151,24 +151,6 @@ export const DEFAULT_SELECT_LANGUAGE = {
 export const LinkType = Object.freeze({
   Invite: 0,
   External: 1,
-});
-
-/**
- * Enum for sort by field name
- * @readonly
- */
-export const SortByFieldName = Object.freeze({
-  Name: "AZ",
-  ModifiedDate: "DateAndTime",
-  CreationDate: "DateAndTimeCreation",
-  Author: "Author",
-  Size: "Size",
-  Type: "Type",
-  Room: "Room",
-  Tags: "Tags",
-  RoomType: "roomType",
-  LastOpened: "LastOpened",
-  UsedSpace: "usedspace",
 });
 
 export const ThirdPartyServicesUrlName = Object.freeze({

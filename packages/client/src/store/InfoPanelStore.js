@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,15 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
-import moment from "moment";
 import clone from "lodash/clone";
 import { getUserById } from "@docspace/shared/api/people";
 import { getUserType } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   EmployeeActivationStatus,
-  Events,
   FileType,
+  // Events,
+  // FileType,
   FolderType,
   RoomsType,
   ShareAccessRights,
@@ -41,16 +41,16 @@ import {
 import config from "PACKAGE_FILE";
 import Filter from "@docspace/shared/api/people/filter";
 import {
-  getCreateShareLinkKey,
+  DEFAULT_CREATE_LINK_SETTINGS,
   getExpirationDate,
 } from "@docspace/shared/components/share/Share.helpers";
-import { getRoomInfo } from "@docspace/shared/api/rooms";
+import { getRoomInfo, getTemplateAvailable } from "@docspace/shared/api/rooms";
 import {
   getPrimaryLink,
   getExternalLinks,
   editExternalLink,
   addExternalLink,
-  checkIsPDFForm,
+  // checkIsPDFForm,
   getPrimaryLinkIfNotExistCreate,
 } from "@docspace/shared/api/files";
 import isEqual from "lodash/isEqual";
@@ -77,43 +77,61 @@ const infoMembers = "info_members";
 const infoHistory = "info_history";
 const infoDetails = "info_details";
 const infoShare = "info_share";
-const infoPlugin = "info_plugin";
+// const infoPlugin = "info_plugin"; // Useless?
 
 class InfoPanelStore {
   userStore = null;
 
   isVisible = false;
+
   isMobileHidden = false;
 
   infoPanelSelection = null;
+
   selectionHistory = null;
+
   selectionHistoryTotal = null;
 
   roomsView = infoMembers;
+
   fileView = infoHistory;
 
   isScrollLocked = false;
+
   historyWithFileList = false;
 
   filesSettingsStore = null;
+
   peopleStore = null;
+
   filesStore = null;
+
   selectedFolderStore = null;
+
   treeFoldersStore = null;
+
   publicRoomStore = null;
 
   infoPanelMembers = null;
+
+  templateAvailableToEveryone = false;
+
   infoPanelRoom = null;
+
   membersIsLoading = false;
+
   isMembersPanelUpdating = false;
 
   shareChanged = false;
+
   calendarDay = null;
 
   showSearchBlock = false;
+
   searchValue = "";
 
   infoPanelSelectedGroup = null;
+
   historyFilter = {
     page: 0,
     pageCount: 100,
@@ -175,8 +193,6 @@ class InfoPanelStore {
     this.setShowSearchBlock(false);
     this.setSearchValue("");
   };
-
-  setSelectionHistory = (obj) => (this.selectionHistory = obj);
 
   setSelectionHistory = (obj, total) => {
     this.selectionHistory = obj;
@@ -272,9 +288,7 @@ class InfoPanelStore {
       ? this.infoPanelSelection
       : selection.length
         ? selection[0]
-        : bufferSelection
-          ? bufferSelection
-          : null;
+        : bufferSelection || null;
   }
 
   get isRoomMembersPanelOpen() {
@@ -299,13 +313,12 @@ class InfoPanelStore {
       // if (!this.infoPanelSelection?.id) {
       return this.getInfoPanelSelectedFolder();
       // }
-    } else {
-      return this.infoPanelSelectedItems[0];
     }
+    return this.infoPanelSelectedItems[0];
   };
 
   setNewInfoPanelSelection = () => {
-    const selectedItems = this.infoPanelSelectedItems; //files list
+    const selectedItems = this.infoPanelSelectedItems; // files list
     const selectedFolder = this.getInfoPanelSelectedFolder(); // root or current folder
     let newInfoPanelSelection = this.infoPanelSelection;
 
@@ -341,10 +354,10 @@ class InfoPanelStore {
     this.setInfoPanelSelection({
       ...this.infoPanelSelection,
       logo: {
-        small: logo.small.split("?")[0] + "?" + new Date().getTime(),
-        medium: logo.medium.split("?")[0] + "?" + new Date().getTime(),
-        large: logo.large.split("?")[0] + "?" + new Date().getTime(),
-        original: logo.original.split("?")[0] + "?" + new Date().getTime(),
+        small: `${logo.small.split("?")[0]}?${new Date().getTime()}`,
+        medium: `${logo.medium.split("?")[0]}?${new Date().getTime()}`,
+        large: `${logo.large.split("?")[0]}?${new Date().getTime()}`,
+        original: `${logo.original.split("?")[0]}?${new Date().getTime()}`,
       },
     });
   };
@@ -356,9 +369,8 @@ class InfoPanelStore {
         this.setInfoPanelRoom(this.normalizeSelection(room));
       }
       return;
-    } else {
-      this.setNewInfoPanelSelection();
     }
+    this.setNewInfoPanelSelection();
 
     if (!this.getIsRooms) return;
 
@@ -369,8 +381,6 @@ class InfoPanelStore {
     if (!currentFolderRoomId) return;
 
     const newInfoPanelSelection = await getRoomInfo(currentFolderRoomId);
-
-    console.log("newInfoPanelSelection", newInfoPanelSelection);
 
     const roomIndex = this.selectedFolderStore.navigationPath.findIndex(
       (f) => f.id === currentFolderRoomId,
@@ -520,6 +530,10 @@ class InfoPanelStore {
     this.infoPanelMembers = infoPanelMembers;
   };
 
+  setTemplateAvailableToEveryone = (isAvailable) => {
+    this.templateAvailableToEveryone = isAvailable;
+  };
+
   setInfoPanelSelection = (infoPanelSelection) => {
     if (isEqual(infoPanelSelection, this.infoPanelSelection)) {
       return;
@@ -564,7 +578,7 @@ class InfoPanelStore {
     groups,
     guests,
   ) => {
-    let hasPrevAdminsTitle = this.getHasPrevTitle(
+    const hasPrevAdminsTitle = this.getHasPrevTitle(
       administrators,
       "administration",
     );
@@ -577,7 +591,7 @@ class InfoPanelStore {
       });
     }
 
-    let hasPrevGroupsTitle = this.getHasPrevTitle(groups, "groups");
+    const hasPrevGroupsTitle = this.getHasPrevTitle(groups, "groups");
 
     if (groups.length && !hasPrevGroupsTitle) {
       groups.unshift({
@@ -587,7 +601,7 @@ class InfoPanelStore {
       });
     }
 
-    let hasPrevUsersTitle = this.getHasPrevTitle(users, "user");
+    const hasPrevUsersTitle = this.getHasPrevTitle(users, "user");
 
     if (users.length && !hasPrevUsersTitle) {
       users.unshift({
@@ -597,7 +611,7 @@ class InfoPanelStore {
       });
     }
 
-    let hasPrevGuestsTitle = this.getHasPrevTitle(users, "guest");
+    const hasPrevGuestsTitle = this.getHasPrevTitle(users, "guest");
 
     if (guests?.length && !hasPrevGuestsTitle) {
       guests.unshift({
@@ -607,7 +621,7 @@ class InfoPanelStore {
       });
     }
 
-    let hasPrevExpectedTitle = this.getHasPrevTitle(
+    const hasPrevExpectedTitle = this.getHasPrevTitle(
       expectedMembers,
       "expected",
     );
@@ -629,7 +643,7 @@ class InfoPanelStore {
     const groups = [];
     const guests = [];
 
-    members?.map((fetchedMember) => {
+    members?.forEach((fetchedMember) => {
       const member = {
         access: fetchedMember.access,
         canEditAccess: fetchedMember.canEditAccess,
@@ -671,11 +685,12 @@ class InfoPanelStore {
     t,
     clearFilter = true,
     withoutTitlesAndLinks = false,
-    membersFilter,
+    membersFilter = null,
   ) => {
     if (this.membersIsLoading) return;
     const roomId = this.infoPanelSelection.id;
     const roomType = this.infoPanelSelection.roomType;
+    const isTemplate = this.infoPanelSelection.isTemplate;
 
     const isPublicRoomType =
       roomType === RoomsType.PublicRoom ||
@@ -690,7 +705,8 @@ class InfoPanelStore {
       isPublicRoomType &&
       clearFilter &&
       this.withPublicRoomBlock &&
-      !withoutTitlesAndLinks
+      !withoutTitlesAndLinks &&
+      !isTemplate
     ) {
       requests.push(
         api.rooms
@@ -731,7 +747,7 @@ class InfoPanelStore {
     const newMembers = this.convertMembers(t, data, false, true);
 
     const mergedMembers = {
-      roomId: roomId,
+      roomId,
       administrators: [
         ...oldMembers.administrators,
         ...newMembers.administrators,
@@ -766,6 +782,13 @@ class InfoPanelStore {
     }
 
     this.setIsMembersPanelUpdating(true);
+
+    if (this.infoPanelSelection.isTemplate) {
+      const templateAvailable = await getTemplateAvailable(
+        this.infoPanelSelection.id,
+      );
+      this.setTemplateAvailableToEveryone(templateAvailable);
+    }
 
     const fetchedMembers = await this.fetchMembers(t, true, !!this.searchValue);
     this.setInfoPanelMembers(fetchedMembers);
@@ -806,9 +829,9 @@ class InfoPanelStore {
       .getHistory(
         selectionType,
         this.infoPanelSelection.id,
-        abortControllerSignal,
         this.infoPanelSelection?.requestToken,
         filter,
+        abortControllerSignal,
       )
       .then(async (data) => {
         if (withLinks) {
@@ -847,7 +870,7 @@ class InfoPanelStore {
         this.infoPanelSelection.roomType,
       );
 
-    let newFilter = clone(this.historyFilter);
+    const newFilter = clone(this.historyFilter);
 
     newFilter.page += 1;
     newFilter.startIndex = newFilter.page * newFilter.pageCount;
@@ -863,9 +886,9 @@ class InfoPanelStore {
       .getHistory(
         selectionType,
         this.infoPanelSelection.id,
-        abortControllerSignal,
         this.infoPanelSelection?.requestToken,
         filter,
+        abortControllerSignal,
       )
       .then(async (data) => {
         if (withLinks) {
@@ -920,6 +943,7 @@ class InfoPanelStore {
     this.setView(infoShare);
     this.isVisible = true;
   };
+
   openMembersTab = () => {
     this.setView(infoMembers);
     this.isVisible = true;
@@ -928,34 +952,24 @@ class InfoPanelStore {
   getPrimaryFileLink = async (fileId) => {
     const file = this.filesStore.files.find((item) => item.id === fileId);
 
-    if (file && !file.shared && file.fileType === FileType.PDF) {
-      try {
-        this.filesStore.addActiveItems([file.id], null);
-        const result = await checkIsPDFForm(fileId);
-
-        if (result) {
-          const event = new CustomEvent(Events.Share_PDF_Form, {
-            detail: { file },
-          });
-
-          window.dispatchEvent(event);
-          return;
-        }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        this.filesStore.removeActiveItem(file);
-      }
-    }
-
     /**
      *  @type {import("@docspace/shared/components/share/Share.types").DefaultCreatePropsType | null}
      */
-    const value = JSON.parse(
-      localStorage.getItem(
-        getCreateShareLinkKey(this.userStore.user?.id ?? "", file?.fileType),
-      ) ?? "null",
-    );
+    const value = { ...DEFAULT_CREATE_LINK_SETTINGS };
+
+    if (value && file.isForm) {
+      value.access = ShareAccessRights.Editing;
+    }
+
+    if (
+      value &&
+      !file.isForm &&
+      file.fileType === FileType.PDF &&
+      (value.access === ShareAccessRights.Editing ||
+        value.access === ShareAccessRights.FormFilling)
+    ) {
+      value.access = ShareAccessRights.ReadOnly;
+    }
 
     const { getFileInfo } = this.filesStore;
 

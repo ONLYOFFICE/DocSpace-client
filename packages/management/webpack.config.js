@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,6 +31,7 @@ const ModuleFederationPlugin =
   require("webpack").container.ModuleFederationPlugin;
 const DefinePlugin = require("webpack").DefinePlugin;
 const BannerPlugin = require("webpack").BannerPlugin;
+const ESLintPlugin = require("eslint-webpack-plugin");
 
 const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
@@ -99,16 +100,27 @@ const config = {
   },
   resolve: {
     extensions: [".jsx", ".js", ".tsx", ".ts", ".json"],
-    fallback: {
-      crypto: false,
-    },
     alias: {
+      SRC_DIR: path.resolve(__dirname, "src"),
       PUBLIC_DIR: path.resolve(__dirname, "../../public"),
-      ASSETS_DIR: path.resolve(__dirname, "./public"),
-      SRC_DIR: path.resolve(__dirname, "./src"),
+      ASSETS_DIR: path.resolve(__dirname, "public"),
       CLIENT_PUBLIC_DIR: path.resolve(__dirname, "../client/public"),
       PACKAGE_FILE: path.resolve(__dirname, "package.json"),
       COMMON_DIR: path.resolve(__dirname, "../common"),
+      "@docspace/shared": path.resolve(__dirname, "../shared"),
+      "@docspace/shared/utils": path.resolve(__dirname, "../shared/utils"),
+      "@docspace/shared/components": path.resolve(
+        __dirname,
+        "../shared/components"
+      ),
+      "@docspace/shared/skeletons": path.resolve(
+        __dirname,
+        "../shared/skeletons"
+      ),
+      "@docspace/shared/enums": path.resolve(__dirname, "../shared/enums"),
+    },
+    fallback: {
+      crypto: false,
     },
   },
 
@@ -298,6 +310,8 @@ const getBuildYear = () => {
 };
 
 module.exports = (env, argv) => {
+  console.log("ENV", { env });
+
   config.devtool = "source-map";
 
   if (argv.mode === "production") {
@@ -313,6 +327,7 @@ module.exports = (env, argv) => {
             },
           },
           extractComments: false,
+          parallel: false,
         }),
       ],
     };
@@ -396,6 +411,23 @@ module.exports = (env, argv) => {
 */`,
     })
   );
+
+  if (!env.lint || env.lint == "true") {
+    console.log("Enable eslint");
+    config.plugins.push(
+      new ESLintPlugin({
+        configType: "eslintrc",
+        cacheLocation: path.resolve(
+          __dirname,
+          "../../node_modules/.cache/.eslintcache"
+        ),
+        quiet: true,
+        formatter: "json",
+      })
+    );
+  } else {
+    console.log("Skip eslint");
+  }
 
   return config;
 };

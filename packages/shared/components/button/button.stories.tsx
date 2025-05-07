@@ -35,12 +35,22 @@ import { Button, ButtonSize } from ".";
 import { ButtonProps } from "./Button.types";
 
 const meta = {
-  title: "Components/Button",
+  title: "Interactive Elements/Button",
   component: Button,
   parameters: {
     docs: {
       description: {
-        component: "Button is used for a action on a page.",
+        component: `Button is used for actions on a page.
+          
+### Accessibility
+
+The Button component includes the following ARIA attributes for improved accessibility:
+
+- \`aria-label\`: Provides a text description of the button's action
+- \`aria-disabled\`: Indicates when the button is disabled
+- \`aria-busy\`: Indicates when the button is in a loading state
+
+These attributes help users of assistive technologies better understand the button's state and purpose.`,
       },
     },
     design: {
@@ -49,6 +59,7 @@ const meta = {
     },
   },
 } satisfies Meta<typeof Button>;
+
 type Story = StoryObj<typeof Button>;
 
 export default meta;

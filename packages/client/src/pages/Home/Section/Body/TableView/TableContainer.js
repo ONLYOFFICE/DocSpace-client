@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,13 +38,12 @@ import React, {
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { Base } from "@docspace/shared/themes";
-import { TableContainer } from "@docspace/shared/components/table";
-import { TableBody } from "@docspace/shared/components/table";
-import { Context } from "@docspace/shared/utils";
+import { TableContainer, TableBody } from "@docspace/shared/components/table";
+import { Context, injectDefaultTheme } from "@docspace/shared/utils";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
+import withContainer from "../../../../../HOCs/withContainer";
 
 const fileNameCss = css`
   margin-inline-start: -24px;
@@ -56,7 +55,7 @@ const contextCss = css`
   padding-inline-end: 20px;
 `;
 
-const StyledTableContainer = styled(TableContainer)`
+const StyledTableContainer = styled(TableContainer).attrs(injectDefaultTheme)`
   .table-row-selected {
     .table-container_file-name-cell {
       ${fileNameCss}
@@ -123,15 +122,13 @@ const StyledTableContainer = styled(TableContainer)`
   }
 `;
 
-StyledTableContainer.defaultProps = { theme: Base };
-
 const elementResizeDetector = elementResizeDetectorMaker({
   strategy: "scroll",
   callOnAdd: false,
 });
 
 const Table = ({
-  filesList,
+  list,
   viewAs,
   setViewAs,
   setFirsElemChecked,
@@ -144,14 +141,16 @@ const Table = ({
   isRooms,
   isTrashFolder,
   isIndexEditingMode,
+  isTemplatesFolder,
   columnStorageName,
   columnInfoPanelStorageName,
   highlightFile,
   currentDeviceType,
   onEditIndex,
   isIndexing,
-  icon,
-  isDownload,
+  isTutorialEnabled,
+  setRefMap,
+  deleteRefMap,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -207,7 +206,7 @@ const Table = ({
   }, [isRooms]);
 
   const filesListNode = useMemo(() => {
-    return filesList.map((item, index) => (
+    return list.map((item, index) => (
       <TableRow
         id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
         key={
@@ -224,17 +223,21 @@ const Table = ({
         theme={theme}
         tagCount={tagCount}
         isRooms={isRooms}
+        isTemplates={isTemplatesFolder}
         isTrashFolder={isTrashFolder}
         hideColumns={hideColumns}
         isHighlight={
-          highlightFile.id == item.id && highlightFile.isExst === !item.fileExst
+          highlightFile.id == item.id
+            ? highlightFile.isExst === !item.fileExst
+            : null
         }
-        icon={icon}
-        isDownload={isDownload}
+        isTutorialEnabled={isTutorialEnabled}
+        setRefMap={setRefMap}
+        deleteRefMap={deleteRefMap}
       />
     ));
   }, [
-    filesList,
+    list,
     setFirsElemChecked,
     setHeaderBorder,
     theme,
@@ -246,8 +249,9 @@ const Table = ({
     isTrashFolder,
     isIndexEditingMode,
     isIndexing,
-    icon,
-    isDownload,
+    isTutorialEnabled,
+    setRefMap,
+    deleteRefMap,
   ]);
 
   return (
@@ -265,13 +269,13 @@ const Table = ({
         location={location}
         isRooms={isRooms}
         isIndexing={isIndexing}
-        filesList={filesList}
+        filesList={list}
       />
 
       <TableBody
         fetchMoreFiles={fetchMoreFiles}
         columnStorageName={columnStorageName}
-        filesLength={filesList.length}
+        filesLength={list.length}
         hasMoreFiles={hasMoreFiles}
         itemCount={filterTotal}
         useReactWindow
@@ -291,27 +295,23 @@ export default inject(
     filesStore,
     infoPanelStore,
     treeFoldersStore,
-
     tableStore,
     userStore,
     settingsStore,
-
+    guidanceStore,
     indexingStore,
     filesActionsStore,
     selectedFolderStore,
-    uploadDataStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
-    const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isTemplatesFolder } =
+      treeFoldersStore;
+    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
 
     const { columnStorageName, columnInfoPanelStorageName } = tableStore;
 
-    const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
-
     const {
-      filesList,
       viewAs,
       setViewAs,
       setFirsElemChecked,
@@ -327,9 +327,9 @@ export default inject(
     const { changeIndex } = filesActionsStore;
     const { isIndexedFolder } = selectedFolderStore;
     const { theme, currentDeviceType } = settingsStore;
+    const { setRefMap, deleteRefMap } = guidanceStore;
 
     return {
-      filesList,
       viewAs,
       setViewAs,
       setFirsElemChecked,
@@ -344,13 +344,14 @@ export default inject(
       isTrashFolder,
       isIndexEditingMode,
       isIndexing: isIndexedFolder,
+      isTemplatesFolder,
       columnStorageName,
       columnInfoPanelStorageName,
       highlightFile,
       currentDeviceType,
       onEditIndex: changeIndex,
-      icon,
-      isDownload,
+      setRefMap,
+      deleteRefMap,
     };
   },
-)(observer(Table));
+)(withContainer(observer(Table)));

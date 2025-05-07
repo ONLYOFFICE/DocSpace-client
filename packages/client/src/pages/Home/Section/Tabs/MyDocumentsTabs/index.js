@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -40,8 +40,11 @@ const MyDocumentsTabs = ({
   isRoot,
   user,
   setChangeDocumentsTabs,
+  isPersonalReadOnly,
 }) => {
   const { t } = useTranslation(["Common", "Files"]);
+
+  if (isPersonalReadOnly) return null;
 
   const tabs = [
     {
@@ -105,7 +108,8 @@ export default inject(
     userStore,
     selectedFolderStore,
   }) => {
-    const { isPersonalRoom, isRecentTab, isRoot } = treeFoldersStore;
+    const { isPersonalRoom, isRecentTab, isRoot, isPersonalReadOnly } =
+      treeFoldersStore;
     const { setFilter } = filesStore;
     const { showTabsLoader } = clientLoadingStore;
     const { user } = userStore;
@@ -119,6 +123,7 @@ export default inject(
       isRoot,
       user,
       setChangeDocumentsTabs,
+      isPersonalReadOnly,
     };
   },
 )(observer(MyDocumentsTabs));

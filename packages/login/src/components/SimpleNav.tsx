@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,12 +33,12 @@ import styled, { useTheme } from "styled-components";
 import { TPortalCultures } from "@docspace/shared/api/settings/types";
 import { mobile } from "@docspace/shared/utils/device";
 import { getLogoUrl } from "@docspace/shared/utils/common";
-import { Base } from "@docspace/shared/themes";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 import LanguageComboboxWrapper from "./LanguageCombobox";
 
-const StyledSimpleNav = styled.div`
+const StyledSimpleNav = styled.div.attrs(injectDefaultTheme)`
   display: none;
   height: 48px;
   align-items: center;
@@ -63,8 +63,6 @@ const StyledSimpleNav = styled.div`
     }
   }
 `;
-
-StyledSimpleNav.defaultProps = { theme: Base };
 
 interface SimpleNavProps {
   culture?: string;

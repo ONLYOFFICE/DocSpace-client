@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,13 +27,13 @@
 import { useState, useEffect, useRef } from "react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
-import { LabledInput } from "./LabledInput";
 import styled from "styled-components";
-import { Hint } from "../styled-components";
-import { SSLVerification } from "./SSLVerification";
-import SecretKeyInput from "./SecretKeyInput";
 import { useTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
+import { LabledInput } from "./LabledInput";
+import { SSLVerification } from "./SSLVerification";
+import SecretKeyInput from "./SecretKeyInput";
+import TriggersForm from "./TriggersForm";
 
 const StyledWebhookForm = styled.form`
   margin-top: 7px;
@@ -56,12 +56,7 @@ const Footer = styled.div`
 `;
 
 function validateUrl(url) {
-  try {
-    new URL(url);
-  } catch (error) {
-    return false;
-  }
-  return true;
+  return URL.canParse(url);
 }
 
 const WebhookDialog = (props) => {
@@ -75,8 +70,10 @@ const WebhookDialog = (props) => {
     additionalId,
   } = props;
 
-  const [isResetVisible, setIsResetVisible] = useState(isSettingsModal);
+  const { t } = useTranslation(["Webhooks", "Common"]);
+  const submitButtonRef = useRef(null);
 
+  const [isResetVisible, setIsResetVisible] = useState(isSettingsModal);
   const [isLoading, setIsLoading] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isValid, setIsValid] = useState({
@@ -84,9 +81,6 @@ const WebhookDialog = (props) => {
     uri: true,
     secretKey: true,
   });
-
-  const { t } = useTranslation(["Webhooks", "Common"]);
-
   const [webhookInfo, setWebhookInfo] = useState({
     id: webhook ? webhook.id : 0,
     name: webhook ? webhook.name : "",
@@ -94,16 +88,28 @@ const WebhookDialog = (props) => {
     secretKey: "",
     enabled: webhook ? webhook.enabled : true,
     ssl: webhook ? webhook.ssl : true,
+    triggers: webhook ? webhook.triggers : 0,
+    targetId: webhook ? webhook?.targetId : "",
   });
-
   const [passwordInputKey, setPasswordInputKey] = useState(0);
-
-  const submitButtonRef = useRef(null);
+  const [triggerAll, setTriggerAll] = useState(
+    webhook ? webhook.triggers === 0 : true,
+  );
 
   const onModalClose = () => {
     onClose();
     isSettingsModal && setIsResetVisible(true);
   };
+
+  const onKeyPress = (e) =>
+    (e.key === "Esc" || e.key === "Escape") && onModalClose();
+
+  const cleanUpEvent = () => window.removeEventListener("keyup", onKeyPress);
+
+  useEffect(() => {
+    window.addEventListener("keyup", onKeyPress);
+    return cleanUpEvent;
+  }, []);
 
   const onInputChange = (e) => {
     if (e.target.name) {
@@ -117,6 +123,13 @@ const WebhookDialog = (props) => {
         [e.target.name]: e.target.value,
       }));
     }
+  };
+
+  const toggleTrigger = (triggerValue) => {
+    setWebhookInfo((prev) => ({
+      ...prev,
+      triggers: prev.triggers ^ triggerValue,
+    }));
   };
 
   const validateForm = () => {
@@ -134,11 +147,16 @@ const WebhookDialog = (props) => {
     validateForm() && submitButtonRef.current.click();
   };
 
+  const handleOnChangeTriggerAll = (value) => {
+    setTriggerAll(value === "true");
+  };
+
   const onFormSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
     setIsLoading(true);
     try {
+      if (triggerAll) webhookInfo.triggers = 0;
       await onSubmit(webhookInfo);
       isSettingsModal
         ? toastr.success(t("WebhookEditedSuccessfully"))
@@ -149,6 +167,8 @@ const WebhookDialog = (props) => {
         uri: "",
         secretKey: "",
         enabled: true,
+        triggers: 0,
+        targetId: "",
       });
       setIsPasswordValid(false);
       setPasswordInputKey((prevKey) => prevKey + 1);
@@ -160,13 +180,6 @@ const WebhookDialog = (props) => {
     }
   };
 
-  const cleanUpEvent = () => window.removeEventListener("keyup", onKeyPress);
-
-  useEffect(() => {
-    window.addEventListener("keyup", onKeyPress);
-    return cleanUpEvent;
-  }, []);
-
   useEffect(() => {
     setWebhookInfo({
       id: webhook ? webhook.id : 0,
@@ -175,11 +188,11 @@ const WebhookDialog = (props) => {
       secretKey: "",
       enabled: webhook ? webhook.enabled : true,
       ssl: webhook ? webhook.ssl : true,
+      triggers: webhook ? webhook.triggers : 0,
+      targetId: webhook ? webhook.targetId : "",
     });
+    setTriggerAll(webhook ? webhook.triggers === 0 : true);
   }, [webhook]);
-
-  const onKeyPress = (e) =>
-    (e.key === "Esc" || e.key === "Escape") && onModalClose();
 
   return (
     <ModalDialog
@@ -191,15 +204,8 @@ const WebhookDialog = (props) => {
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledWebhookForm onSubmit={onFormSubmit}>
-          {!isSettingsModal && (
-            <Hint>
-              {t("WebhookCreationHint", {
-                productName: t("Common:ProductName"),
-              })}
-            </Hint>
-          )}
           <LabledInput
-            id={additionalId + "-name-input"}
+            id={`${additionalId}-name-input`}
             label={t("WebhookName")}
             placeholder={t("EnterWebhookName")}
             name="name"
@@ -211,7 +217,7 @@ const WebhookDialog = (props) => {
             required
           />
           <LabledInput
-            id={additionalId + "-payload-url-input"}
+            id={`${additionalId}-payload-url-input`}
             label={t("PayloadUrl")}
             placeholder={t("EnterUrl")}
             name="uri"
@@ -238,8 +244,29 @@ const WebhookDialog = (props) => {
             onChange={onInputChange}
             isDisabled={isLoading}
           />
-
-          <button type="submit" ref={submitButtonRef} hidden></button>
+          <TriggersForm
+            isDisabled={isLoading}
+            triggers={webhookInfo.triggers}
+            toggleTrigger={toggleTrigger}
+            triggerAll={triggerAll}
+            onChange={handleOnChangeTriggerAll}
+          />
+          <LabledInput
+            id={`${additionalId}-target-id-input`}
+            label={t("TargetId")}
+            placeholder={t("EnterTargetId")}
+            name="targetId"
+            value={webhookInfo.targetId}
+            onChange={onInputChange}
+            isDisabled={isLoading}
+            maxLength={36}
+          />
+          <button
+            type="submit"
+            ref={submitButtonRef}
+            hidden
+            aria-label="submit"
+          />
         </StyledWebhookForm>
       </ModalDialog.Body>
 
@@ -251,7 +278,7 @@ const WebhookDialog = (props) => {
               isSettingsModal ? t("Common:SaveButton") : t("Common:Create")
             }
             size="normal"
-            primary={true}
+            primary
             onClick={handleSubmitClick}
             isDisabled={isLoading}
             isLoading={isLoading}

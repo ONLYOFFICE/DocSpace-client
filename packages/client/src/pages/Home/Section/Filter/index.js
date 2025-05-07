@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,39 +26,47 @@
 
 import React, { useCallback } from "react";
 import { inject, observer } from "mobx-react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { withTranslation } from "react-i18next";
-import find from "lodash/find";
-import result from "lodash/result";
 
 import { isMobile, isTablet } from "@docspace/shared/utils";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import FilterInput from "@docspace/shared/components/filter";
 import { withLayoutSize } from "@docspace/shared/HOC/withLayoutSize";
-import { getUser, getUserById } from "@docspace/shared/api/people";
+import { getUser } from "@docspace/shared/api/people";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-
 import FilesFilter from "@docspace/shared/api/files/filter";
+
 import {
-  AccountLoginType,
+  getFilterType,
+  getSubjectFilter,
+  getAuthorType,
+  getRoomId,
+  getSearchParams,
+  getType,
+  getProviderType,
+  getSubjectId,
+  getFilterContent,
+  getTags,
+  getQuotaFilter,
+} from "@docspace/shared/components/filter/Filter.utils";
+
+import {
   DeviceType,
-  EmployeeStatus,
-  EmployeeType,
   FilterGroups,
   FilterKeys,
   FilterSubject,
   FilterType,
-  PaymentsType,
   RoomSearchArea,
   RoomsProviderType,
   RoomsType,
+  SortByFieldName,
 } from "@docspace/shared/enums";
 import { ROOMS_PROVIDER_TYPE_NAME } from "@docspace/shared/constants";
+import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
-
-import { SortByFieldName } from "SRC_DIR/helpers/constants";
 
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
@@ -67,124 +75,6 @@ import { getRoomInfo } from "@docspace/shared/api/rooms";
 import { FilterLoader } from "@docspace/shared/skeletons/filter";
 
 import { useContactsFilter } from "./useContacts";
-
-const getFilterType = (filterValues) => {
-  const filterType = result(
-    find(filterValues, (value) => {
-      return value.group === FilterGroups.filterType;
-    }),
-    "key",
-  );
-
-  return filterType?.toString() ? +filterType : null;
-};
-
-const getSubjectFilter = (filterValues) => {
-  const subjectFilter = result(
-    find(filterValues, (value) => {
-      return value.group === FilterGroups.roomFilterOwner;
-    }),
-    "key",
-  );
-
-  return subjectFilter?.toString() ? subjectFilter?.toString() : null;
-};
-
-const getAuthorType = (filterValues) => {
-  const authorType = result(
-    find(filterValues, (value) => {
-      return value.group === FilterGroups.filterAuthor;
-    }),
-    "key",
-  );
-
-  return authorType ? authorType : null;
-};
-
-const getRoomId = (filterValues) => {
-  const filterRoomId = result(
-    find(filterValues, (value) => {
-      return value.group === FilterGroups.filterRoom;
-    }),
-    "key",
-  );
-
-  return filterRoomId || null;
-};
-
-const getSearchParams = (filterValues) => {
-  const searchParams = result(
-    find(filterValues, (value) => {
-      return value.group === FilterGroups.filterFolders;
-    }),
-    "key",
-  );
-
-  return searchParams || FilterKeys.excludeSubfolders;
-};
-
-const getType = (filterValues) => {
-  const filterType = filterValues.find(
-    (value) => value.group === FilterGroups.roomFilterType,
-  )?.key;
-
-  const type = filterType;
-
-  return type;
-};
-
-const getProviderType = (filterValues) => {
-  const filterType = filterValues.find(
-    (value) => value.group === FilterGroups.roomFilterProviderType,
-  )?.key;
-
-  const type = filterType;
-
-  return type;
-};
-
-const getSubjectId = (filterValues) => {
-  const filterOwner = result(
-    find(filterValues, (value) => {
-      return value.group === FilterGroups.roomFilterSubject;
-    }),
-    "key",
-  );
-
-  return filterOwner ? filterOwner : null;
-};
-
-const getFilterContent = (filterValues) => {
-  const filterContent = result(
-    find(filterValues, (value) => {
-      return value.group === FilterGroups.filterContent;
-    }),
-    "key",
-  );
-
-  return filterContent ? filterContent : null;
-};
-
-const getTags = (filterValues) => {
-  const filterTags = filterValues.find(
-    (value) => value.group === FilterGroups.roomFilterTags,
-  )?.key;
-
-  const tags = filterTags?.length > 0 ? filterTags : null;
-
-  return tags;
-};
-
-const getQuotaFilter = (filterValues) => {
-  const filterType = result(
-    find(filterValues, (value) => {
-      return value.group === FilterGroups.filterQuota;
-    }),
-    "key",
-  );
-
-  return filterType?.toString() ? +filterType : null;
-};
 
 const SectionFilterContent = ({
   t,
@@ -213,14 +103,12 @@ const SectionFilterContent = ({
   setClearSearch,
   setMainButtonMobileVisible,
   isArchiveFolder,
-  canSearchByContent,
 
-  //contacts
+  // contacts
   contactsViewAs,
   contactsTab,
-  groups,
 
-  //groups
+  // groups
   groupsFilter,
   setGroupsFilter,
 
@@ -237,6 +125,7 @@ const SectionFilterContent = ({
   isRoomAdmin,
   showStorageInfo,
   isDefaultRoomsQuotaSet,
+  isTemplatesFolder,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -274,11 +163,11 @@ const SectionFilterContent = ({
     isDefaultRoomsQuotaSet,
   });
 
-  const onNavigate = (path, filter) => {
+  const onNavigate = (path, newFilter) => {
     if (isPublicRoom) {
-      navigate(`${path}?key=${publicRoomKey}&${filter.toUrlParams()}`);
+      navigate(`${path}?key=${publicRoomKey}&${newFilter.toUrlParams()}`);
     } else {
-      navigate(`${path}/filter?${filter.toUrlParams()}`);
+      navigate(`${path}/filter?${newFilter.toUrlParams()}`);
     }
   };
 
@@ -301,8 +190,8 @@ const SectionFilterContent = ({
         const newFilter = roomsFilter.clone();
 
         newFilter.page = 0;
-        newFilter.provider = providerType ? providerType : null;
-        newFilter.type = type ? type : null;
+        newFilter.provider = providerType || null;
+        newFilter.type = type || null;
 
         newFilter.subjectFilter = null;
         newFilter.subjectId = null;
@@ -337,7 +226,8 @@ const SectionFilterContent = ({
         }
 
         const path =
-          newFilter.searchArea === RoomSearchArea.Active
+          newFilter.searchArea === RoomSearchArea.Active ||
+          newFilter.searchArea === RoomSearchArea.Templates
             ? "rooms/shared"
             : "rooms/archived";
         navigate(
@@ -404,7 +294,8 @@ const SectionFilterContent = ({
       newFilter.searchArea = roomsFilter.searchArea;
 
       const path =
-        roomsFilter.searchArea === RoomSearchArea.Active
+        roomsFilter.searchArea === RoomSearchArea.Active ||
+        roomsFilter.searchArea === RoomSearchArea.Templates
           ? "rooms/shared"
           : "rooms/archived";
 
@@ -435,6 +326,14 @@ const SectionFilterContent = ({
     (data = "") => {
       const searchValue = data?.trim() ?? "";
 
+      const currentSearch =
+        filter.search ||
+        roomsFilter.filterValue ||
+        usersFilter.search ||
+        groupsFilter.search ||
+        "";
+      if (searchValue === currentSearch) return;
+
       if (
         !filter.search &&
         !roomsFilter.filterValue &&
@@ -454,7 +353,8 @@ const SectionFilterContent = ({
         newFilter.filterValue = searchValue;
 
         const path =
-          newFilter.searchArea === RoomSearchArea.Active
+          newFilter.searchArea === RoomSearchArea.Active ||
+          newFilter.searchArea === RoomSearchArea.Templates
             ? "rooms/shared"
             : "rooms/archived";
 
@@ -505,7 +405,8 @@ const SectionFilterContent = ({
 
       if (isRooms) {
         const path =
-          newFilter.searchArea === RoomSearchArea.Active
+          newFilter.searchArea === RoomSearchArea.Active ||
+          newFilter.searchArea === RoomSearchArea.Templates
             ? "rooms/shared"
             : "rooms/archived";
         setRoomsFilter(newFilter);
@@ -611,17 +512,17 @@ const SectionFilterContent = ({
         const user = await getUser(roomsFilter.subjectId);
         const isMe = userId === roomsFilter.subjectId;
 
-        let label = isMe ? t("Common:MeLabel") : user.displayName;
+        const label = isMe ? t("Common:MeLabel") : user.displayName;
 
         const subject = {
           key: isMe ? FilterKeys.me : roomsFilter.subjectId,
           group: FilterGroups.roomFilterSubject,
-          label: label,
+          label,
         };
 
         if (roomsFilter.subjectFilter?.toString()) {
           if (roomsFilter.subjectFilter.toString() === FilterSubject.Owner) {
-            subject.selectedLabel = t("Common:Owner") + ": " + label;
+            subject.selectedLabel = `${t("Common:Owner")}: ${label}`;
           }
 
           filterValues.push(subject);
@@ -641,8 +542,8 @@ const SectionFilterContent = ({
         const label = getRoomTypeName(key, t);
 
         filterValues.push({
-          key: key,
-          label: label,
+          key,
+          label,
           group: FilterGroups.roomFilterType,
         });
       }
@@ -656,7 +557,7 @@ const SectionFilterContent = ({
 
         filterValues.push({
           key: roomsFilter.quotaFilter,
-          label: label,
+          label,
           group: FilterGroups.filterQuota,
         });
       }
@@ -676,27 +577,11 @@ const SectionFilterContent = ({
 
         filterValues.push({
           key: provider,
-          label: label,
+          label,
           group: FilterGroups.roomFilterProviderType,
         });
       }
     } else if (!isContactsPage) {
-      if (filter.withSubfolders === "true") {
-        filterValues.push({
-          key: FilterKeys.withSubfolders,
-          label: t("WithSubfolders"),
-          group: FilterGroups.filterFolders,
-        });
-      }
-
-      if (filter.searchInContent) {
-        filterValues.push({
-          key: "true",
-          label: t("FileContents"),
-          group: FilterGroups.filterContent,
-        });
-      }
-
       if (filter.filterType) {
         let label = "";
 
@@ -705,34 +590,39 @@ const SectionFilterContent = ({
             label = t("Common:Documents");
             break;
           case FilterType.FoldersOnly.toString():
-            label = t("Translations:Folders");
+            label = t("Common:Folders");
             break;
           case FilterType.SpreadsheetsOnly.toString():
-            label = t("Translations:Spreadsheets");
+            label = t("Common:Spreadsheets");
             break;
           case FilterType.ArchiveOnly.toString():
-            label = t("Archives");
+            label = t("Common:Archives");
             break;
           case FilterType.PresentationsOnly.toString():
-            label = t("Translations:Presentations");
+            label = t("Common:Presentations");
             break;
           case FilterType.ImagesOnly.toString():
-            label = t("Images");
+            label = t("Common:Images");
             break;
           case FilterType.MediaOnly.toString():
-            label = t("Media");
+            label = t("Common:Media");
             break;
           case FilterType.FilesOnly.toString():
-            label = t("Translations:Files");
+            label = t("Common:Files");
+            break;
+          case FilterType.PDFForm.toString():
+            label = getManyPDFTitle(t, true);
             break;
           case FilterType.Pdf.toString():
-            label = t("Forms");
+            label = getManyPDFTitle(t, false);
+            break;
+          default:
             break;
         }
 
         filterValues.push({
           key: `${filter.filterType}`,
-          label: label.toLowerCase(),
+          label,
           group: FilterGroups.filterType,
         });
       }
@@ -758,7 +648,7 @@ const SectionFilterContent = ({
               : FilterKeys.me
             : filter.authorType.replace("user_", ""),
           group: FilterGroups.filterAuthor,
-          label: label,
+          label,
         });
       }
 
@@ -769,7 +659,7 @@ const SectionFilterContent = ({
         filterValues.push({
           key: filter.roomId,
           group: FilterGroups.filterRoom,
-          label: label,
+          label,
         });
       }
     }
@@ -777,13 +667,11 @@ const SectionFilterContent = ({
     // return filterValues;
     const currentFilterValues = [];
 
-    setSelectedFilterValues((value) => {
-      if (!value) {
-        currentFilterValues.push(...filterValues);
-        return filterValues.map((f) => ({ ...f }));
-      }
-
-      const items = value.map((v) => {
+    if (!selectedFilterValues) {
+      currentFilterValues.push(...filterValues);
+      setSelectedFilterValues(filterValues.map((f) => ({ ...f })));
+    } else {
+      const items = selectedFilterValues.map((v) => {
         const item = filterValues.find((f) => f.group === v.group);
 
         if (item) {
@@ -799,13 +687,11 @@ const SectionFilterContent = ({
             if (isEqual) return item;
 
             return false;
-          } else {
-            if (item.key === v.key) return item;
-            return false;
           }
-        } else {
+          if (item.key === v.key) return item;
           return false;
         }
+        return false;
       });
 
       const newItems = filterValues.filter(
@@ -813,19 +699,16 @@ const SectionFilterContent = ({
       );
 
       items.push(...newItems);
-
       currentFilterValues.push(...items.filter((i) => i));
 
-      return items.filter((i) => i);
-    });
+      setSelectedFilterValues(items.filter((i) => i));
+    }
 
     return currentFilterValues;
   }, [
-    filter.withSubfolders,
     filter.authorType,
     filter.roomId,
     filter.filterType,
-    filter.searchInContent,
     filter.excludeSubject,
     roomsFilter.provider,
     roomsFilter.type,
@@ -897,7 +780,7 @@ const SectionFilterContent = ({
               id: "filter_type-folders",
               key: FilterType.FoldersOnly.toString(),
               group: FilterGroups.filterType,
-              label: t("Translations:Folders").toLowerCase(),
+              label: t("Common:Folders"),
             },
           ]
         : "";
@@ -907,7 +790,7 @@ const SectionFilterContent = ({
         id: "filter_type-images",
         key: FilterType.ImagesOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Images").toLowerCase(),
+        label: t("Common:Images"),
       },
     ];
 
@@ -916,7 +799,7 @@ const SectionFilterContent = ({
         id: "filter_type-archive",
         key: FilterType.ArchiveOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Archives").toLowerCase(),
+        label: t("Common:Archives"),
       },
     ];
 
@@ -925,7 +808,7 @@ const SectionFilterContent = ({
         id: "filter_type-media",
         key: FilterType.MediaOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Media").toLowerCase(),
+        label: t("Common:Media"),
       },
     ];
 
@@ -1013,31 +896,37 @@ const SectionFilterContent = ({
             id: "filter_type-all-files",
             key: FilterType.FilesOnly.toString(),
             group: FilterGroups.filterType,
-            label: t("Translations:Files").toLowerCase(),
+            label: t("Common:Files"),
           },
           {
             id: "filter_type-documents",
             key: FilterType.DocumentsOnly.toString(),
             group: FilterGroups.filterType,
-            label: t("Common:Documents").toLowerCase(),
+            label: t("Common:Documents"),
           },
           {
             id: "filter_type-spreadsheets",
             key: FilterType.SpreadsheetsOnly.toString(),
             group: FilterGroups.filterType,
-            label: t("Translations:Spreadsheets").toLowerCase(),
+            label: t("Common:Spreadsheets"),
           },
           {
             id: "filter_type-presentations",
             key: FilterType.PresentationsOnly.toString(),
             group: FilterGroups.filterType,
-            label: t("Translations:Presentations").toLowerCase(),
+            label: t("Common:Presentations"),
+          },
+          {
+            id: "filter_type-pdf",
+            key: FilterType.Pdf.toString(),
+            group: FilterGroups.filterType,
+            label: getManyPDFTitle(t, false),
           },
           {
             id: "filter_type-forms",
-            key: FilterType.Pdf.toString(),
+            key: FilterType.PDFForm.toString(),
             group: FilterGroups.filterType,
-            label: t("Forms").toLowerCase(),
+            label: getManyPDFTitle(t, true),
           },
           ...archives,
           ...images,
@@ -1048,7 +937,7 @@ const SectionFilterContent = ({
       {
         key: FilterGroups.roomFilterSubject,
         group: FilterGroups.roomFilterSubject,
-        label: t("Common:Member"),
+        label: isTemplatesFolder ? t("TemplateOwner") : t("Common:Member"),
         isHeader: true,
         withoutSeparator: true,
         withMultiItems: true,
@@ -1157,7 +1046,7 @@ const SectionFilterContent = ({
         filterOptions.push(...tagsOptions);
       }
 
-      if (connectedThirdParty.length > 0) {
+      if (connectedThirdParty.length > 0 && !isTemplatesFolder) {
         const thirdPartyOptions = connectedThirdParty.map((thirdParty) => {
           const key = Object.entries(RoomsProviderType).find(
             (item) => item[0] === thirdParty,
@@ -1187,64 +1076,12 @@ const SectionFilterContent = ({
         isDefaultRoomsQuotaSet &&
         filterOptions.push(...quotaFilter);
     } else {
-      if (!isRecentTab && !isFavoritesFolder && !isTrash) {
-        const foldersOptions = [
-          {
-            key: FilterGroups.filterFolders,
-            group: FilterGroups.filterFolders,
-            label: t("Common:Search"),
-            isHeader: true,
-            withoutSeparator: true,
-          },
-          {
-            id: "filter_folders",
-            key: "folders",
-            group: FilterGroups.filterFolders,
-            label: "",
-            withOptions: true,
-            options: [
-              {
-                id: "filter_folders_exclude-subfolders",
-                key: FilterKeys.excludeSubfolders,
-                label: t("ExcludeSubfolders"),
-              },
-              {
-                id: "filter_folders_with-subfolders",
-                key: FilterKeys.withSubfolders,
-                label: t("WithSubfolders"),
-              },
-            ],
-          },
-        ];
-
-        const contentOptions = [
-          {
-            key: FilterGroups.filterContent,
-            group: FilterGroups.filterContent,
-            isHeader: true,
-            withoutHeader: true,
-          },
-        ];
-        canSearchByContent &&
-          contentOptions.push({
-            id: "filter_search-by-file-contents",
-            key: "true",
-            group: FilterGroups.filterContent,
-            label: t("SearchByContent"),
-            isCheckbox: true,
-          });
-
-        filterOptions.push(...foldersOptions);
-        filterOptions.push(...contentOptions);
-      }
-
       const authorOption = [
         {
           key: FilterGroups.filterAuthor,
           group: FilterGroups.filterAuthor,
           label: t("ByAuthor"),
           isHeader: true,
-          withMultiItems: true,
         },
         {
           id: "filter_author-me",
@@ -1302,6 +1139,7 @@ const SectionFilterContent = ({
     isRecentTab,
     isTrash,
     isPublicRoom,
+    isTemplatesFolder,
     getContactsFilterData,
   ]);
 
@@ -1333,7 +1171,7 @@ const SectionFilterContent = ({
     const name = {
       id: "sort-by_name",
       key: SortByFieldName.Name,
-      label: t("Common:Name"),
+      label: t("Common:Label"),
       default: true,
     };
     const modifiedDate = {
@@ -1355,24 +1193,6 @@ const SectionFilterContent = ({
       default: true,
     };
 
-    const room = {
-      id: "sort-by_room",
-      key: SortByFieldName.Room,
-      label: t("Common:Room"),
-      default: true,
-    };
-    const authorOption = {
-      id: "sort-by_author",
-      key: SortByFieldName.Author,
-      label: t("ByAuthor"),
-      default: true,
-    };
-    const creationDate = {
-      id: "sort-by_created",
-      key: SortByFieldName.CreationDate,
-      label: t("InfoPanel:CreationDate"),
-      default: true,
-    };
     const owner = {
       id: "sort-by_owner",
       key: SortByFieldName.Author,
@@ -1397,12 +1217,7 @@ const SectionFilterContent = ({
       label: t("Common:Size"),
       default: true,
     };
-    const type = {
-      id: "sort-by_type",
-      key: SortByFieldName.Type,
-      label: t("Common:Type"),
-      default: true,
-    };
+
     const roomType = {
       id: "sort-by_room-type",
       key: SortByFieldName.RoomType,
@@ -1510,7 +1325,8 @@ const SectionFilterContent = ({
         newFilter.page = 0;
 
         const path =
-          newFilter.searchArea === RoomSearchArea.Active
+          newFilter.searchArea === RoomSearchArea.Active ||
+          newFilter.searchArea === RoomSearchArea.Templates
             ? "rooms/shared"
             : "rooms/archived";
 
@@ -1524,12 +1340,6 @@ const SectionFilterContent = ({
         if (group === FilterGroups.filterAuthor) {
           newFilter.authorType = null;
           newFilter.excludeSubject = null;
-        }
-        if (group === FilterGroups.filterFolders) {
-          newFilter.withSubfolders = null;
-        }
-        if (group === FilterGroups.filterContent) {
-          newFilter.searchInContent = null;
         }
         if (group === FilterGroups.filterRoom) {
           newFilter.roomId = null;
@@ -1570,8 +1380,13 @@ const SectionFilterContent = ({
         newFilter.searchArea = RoomSearchArea.Archive;
       }
 
+      if (isTemplatesFolder) {
+        newFilter.searchArea = RoomSearchArea.Templates;
+      }
+
       const path =
-        newFilter.searchArea === RoomSearchArea.Active
+        newFilter.searchArea === RoomSearchArea.Active ||
+        newFilter.searchArea === RoomSearchArea.Templates
           ? "rooms/shared"
           : "rooms/archived";
 
@@ -1661,7 +1476,6 @@ export default inject(
       clearSearch,
       setClearSearch,
       isLoadedEmptyPage,
-      filesSettingsStore,
       setRoomsFilter,
     } = filesStore;
 
@@ -1678,9 +1492,10 @@ export default inject(
       isArchiveFolder,
       isPersonalRoom,
       isTrashFolder: isTrash,
+      isTemplatesFolder,
     } = treeFoldersStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { showStorageInfo, isDefaultRoomsQuotaSet } = currentQuotaStore;
@@ -1700,8 +1515,6 @@ export default inject(
 
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
 
-    const { canSearchByContent } = filesSettingsStore;
-
     return {
       isRoomAdmin,
       showStorageInfo,
@@ -1720,6 +1533,7 @@ export default inject(
       isRooms,
       isTrash,
       isArchiveFolder,
+      isTemplatesFolder,
       isIndexing: isIndexedFolder,
       isIndexEditingMode,
 
@@ -1741,8 +1555,6 @@ export default inject(
       setClearSearch,
 
       setMainButtonMobileVisible,
-
-      canSearchByContent,
 
       contactsViewAs,
       contactsTab,

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -59,22 +59,29 @@ export const settingsTree = [
     isHeader: true,
   },
   {
-    id: "management-settings_catalog-white-label",
+    id: "management-settings_catalog-brand-name",
     key: "1-1-1",
+    icon: "",
+    link: "brand-name",
+    tKey: "BrandName",
+  },
+  {
+    id: "management-settings_catalog-white-label",
+    key: "1-1-2",
     icon: "",
     link: "white-label",
     tKey: "WhiteLabel",
   },
   {
     id: "management-settings_catalog-company-info-settings",
-    key: "1-1-2",
+    key: "1-1-3",
     icon: "",
     link: "company-info-settings",
     tKey: "CompanyInfoSettings",
   },
   {
     id: "management-settings_catalog-additional-resources",
-    key: "1-1-3",
+    key: "1-1-4",
     icon: "",
     link: "additional-resources",
     tKey: "AdditionalResources",
@@ -101,6 +108,14 @@ export const settingsTree = [
     icon: RestoreIconUrl,
     link: "restore",
     tKey: "Common:Settings",
+    isHeader: true,
+  },
+  {
+    id: "management-settings_catalog-encrypt",
+    key: "1-5",
+    icon: "",
+    link: "encrypt-data",
+    tKey: "Common:Storage",
     isHeader: true,
   },
   {

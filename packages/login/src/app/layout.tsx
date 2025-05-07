@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -40,6 +40,7 @@ import {
 } from "@/utils/actions";
 
 import "../styles/globals.scss";
+import "../../../shared/styles/theme.scss";
 import Scripts from "@/components/Scripts";
 
 export default async function RootLayout({
@@ -48,6 +49,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const hdrs = headers();
+  const type = hdrs.get("x-confirm-type") ?? "";
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
     console.log("is health check");
@@ -61,18 +63,23 @@ export default async function RootLayout({
 
   let redirectUrl = "";
 
-  console.log("start requests from layout");
-
   const [settings, colorTheme, user] = await Promise.all([
     getSettings(),
     getColorTheme(),
     getUser(),
   ]);
 
+  if (
+    type === "GuestShareLink" &&
+    typeof settings !== "string" &&
+    !settings?.socketUrl
+  ) {
+    redirectUrl = "login";
+  }
+
   if (settings === "access-restricted") redirectUrl = `/${settings}`;
 
   if (settings === "portal-not-found") {
-    const hdrs = headers();
     const config = await getConfig();
 
     const host = hdrs.get("host");
@@ -109,6 +116,8 @@ export default async function RootLayout({
     settings.culture = cookieLng.value;
   }
 
+  console.log("Render root layout");
+
   return (
     <html lang="en" translate="no">
       <head>
@@ -126,7 +135,9 @@ export default async function RootLayout({
         />
         <meta name="google" content="notranslate" />
       </head>
-      <body>
+      <body
+        className={`${systemTheme?.value === ThemeKeys.DarkStr ? "dark" : "light"}`}
+      >
         <StyledComponentsRegistry>
           <Providers
             value={{

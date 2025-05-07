@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -80,12 +80,6 @@ const ChangeDomainDialogComponent = () => {
     setChangeDomainDialogVisible(false);
   };
 
-  const onKeyDown = (event: React.KeyboardEvent) => {
-    if (event.code === "Enter") {
-      onClickDomainChange();
-    }
-  };
-
   const onClickDomainChange = async () => {
     const isValidDomain = parseDomain(domain, setDomainNameError, t);
 
@@ -100,9 +94,15 @@ const ChangeDomainDialogComponent = () => {
 
       onClose();
     } catch (err) {
-      toastr.error(err);
+      toastr.error(err!);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const onKeyDown = (event: React.KeyboardEvent) => {
+    if (event.code === "Enter") {
+      onClickDomainChange();
     }
   };
 
@@ -116,7 +116,7 @@ const ChangeDomainDialogComponent = () => {
       <ModalDialog.Header>{t("DomainSettings")}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledBodyContent>
-          <Text noSelect={true} fontSize="13px">
+          <Text noSelect fontSize="13px">
             {t("ChangeDomainDescription")}
           </Text>
           <div className="create-portal-input-block">
@@ -139,17 +139,18 @@ const ChangeDomainDialogComponent = () => {
               className="create-portal-input"
             />
             <div>
-              {domainNameError &&
-                domainNameError.map((err, index) => (
-                  <Text
-                    className="error-text"
-                    key={index}
-                    fontSize="12px"
-                    fontWeight="400"
-                  >
-                    {err}
-                  </Text>
-                ))}
+              {domainNameError
+                ? domainNameError.map((err) => (
+                    <Text
+                      className="error-text"
+                      key={`error-${err}`}
+                      fontSize="12px"
+                      fontWeight="400"
+                    >
+                      {err}
+                    </Text>
+                  ))
+                : null}
             </div>
           </div>
         </StyledBodyContent>
@@ -162,14 +163,14 @@ const ChangeDomainDialogComponent = () => {
           onClick={onClickDomainChange}
           size={ButtonSize.normal}
           primary
-          scale={true}
+          scale
         />
         <Button
           key="CancelButton"
           label={t("Common:CancelButton")}
           size={ButtonSize.normal}
           onClick={onClose}
-          scale={true}
+          scale
         />
       </ModalDialog.Footer>
     </ModalDialog>

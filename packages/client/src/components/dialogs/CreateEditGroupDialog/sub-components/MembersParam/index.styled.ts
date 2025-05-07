@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,6 +35,10 @@ export const Header = styled.div`
   font-size: 14px;
   font-weight: 600;
   line-height: 16px;
+
+  &.membersHeader {
+    padding-top: 20px;
+  }
 `;
 
 export const AddMembersButton = styled.div<{}>`

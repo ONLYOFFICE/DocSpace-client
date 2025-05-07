@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,7 +35,7 @@ import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
 import OutlineReactSvgUrl from "PUBLIC_DIR/images/outline-true.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
-import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
+import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
@@ -175,7 +175,7 @@ const LinkRow = (props: LinkRowProps) => {
       },
       {
         key: "copy-link-settings-key",
-        label: t("Files:CopySharedLink"),
+        label: t("Common:CopySharedLink"),
         icon: CopyToReactSvgUrl,
         onClick: onCopyExternalLink,
         disabled: isDisabled,

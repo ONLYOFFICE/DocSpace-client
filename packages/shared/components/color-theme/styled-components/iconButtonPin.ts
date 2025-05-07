@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,25 +25,26 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { commonIconsStyles } from "../../../utils";
-import { Base, TColorScheme } from "../../../themes";
+import { commonIconsStyles, injectDefaultTheme } from "../../../utils";
+import { TColorScheme } from "../../../themes";
 import StyledPinIcon from "../sub-components/StyledPinIcon";
 
 import { IconButtonPinColorTheme } from "../ColorTheme.types";
 
-const IconButtonPinTheme = styled(StyledPinIcon)<
+const IconButtonPinTheme = styled(StyledPinIcon).attrs(injectDefaultTheme)<
   IconButtonPinColorTheme & { $currentColorScheme?: TColorScheme }
 >`
   margin-top: 2px;
   ${commonIconsStyles}
-  svg {
+
+  && svg {
     path {
       fill: ${(props) =>
         props.theme.isBase && props.$currentColorScheme?.main?.accent};
     }
   }
 
-  &:hover {
+  &&:hover:not(.disabled) {
     svg {
       path {
         fill: ${(props) =>
@@ -52,7 +53,5 @@ const IconButtonPinTheme = styled(StyledPinIcon)<
     }
   }
 `;
-
-IconButtonPinTheme.defaultProps = { theme: Base };
 
 export default IconButtonPinTheme;

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,29 +26,35 @@
 
 import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
-
 import { inject, observer } from "mobx-react";
+import styled from "styled-components";
+
+import { isManagement } from "@docspace/shared/utils/common";
+import { DeviceType } from "@docspace/shared/enums";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { WhiteLabel } from "./Branding/whitelabel";
+import { BrandName } from "./Branding/brandName";
 import { CompanyInfoSettings } from "./Branding/companyInfoSettings";
-import styled from "styled-components";
 import { AdditionalResources } from "./Branding/additionalResources";
-import { isManagement } from "@docspace/shared/utils/common";
-import LoaderBrandingDescription from "./sub-components/loaderBrandingDescription";
-
 import MobileView from "./Branding/MobileView";
 
+import LoaderBrandingSubtitle from "./sub-components/loaderBrandingSubtitle";
+import LoaderBrandingDescription from "./sub-components/loaderBrandingDescription";
 import { UnavailableStyles } from "../../utils/commonSettingsStyles";
-import { resetSessionStorage } from "../../utils";
-import { DeviceType } from "@docspace/shared/enums";
 
 const StyledComponent = styled.div`
   max-width: 700px;
   width: 100%;
   font-weight: 400;
   font-size: 13px;
+
+  .category-description {
+    line-height: 20px;
+    color: ${(props) => props.theme.client.settings.common.descriptionColor};
+    margin-bottom: 20px;
+  }
 
   .header {
     font-weight: 700;
@@ -73,7 +79,7 @@ const StyledComponent = styled.div`
   }
 
   hr {
-    margin: 24px 0;
+    margin: 20px 0;
     border: none;
     border-top: ${(props) => props.theme.client.settings.separatorBorder};
   }
@@ -84,6 +90,8 @@ const StyledComponent = styled.div`
 const Branding = ({
   t,
   isLoadedCompanyInfoSettingsData,
+  isWhiteLabelLoaded,
+  isBrandNameLoaded,
   isSettingPaid,
   standalone,
   deviceType,
@@ -96,14 +104,7 @@ const Branding = ({
     setDocumentTitle(t("Branding"));
   }, []);
 
-  useEffect(() => {
-    return () => {
-      if (!window.location.pathname.includes("customization")) {
-        resetSessionStorage();
-      }
-    };
-  }, []);
-  const hideBlock = isManagement() ? false : portals?.length > 1 ? true : false;
+  const hideBlock = isManagement() ? false : portals?.length > 1;
 
   const showSettings = standalone && !hideBlock;
 
@@ -118,8 +119,15 @@ const Branding = ({
 
   return (
     <StyledComponent isSettingPaid={isSettingPaid}>
+      {!isWhiteLabelLoaded && !isBrandNameLoaded ? (
+        <LoaderBrandingSubtitle />
+      ) : (
+        <div className="category-description">{t("BrandingSubtitle")}</div>
+      )}
+      <BrandName />
+      <hr />
       <WhiteLabel />
-      {showSettings && (
+      {showSettings ? (
         <>
           <hr />
           {displayAbout ? (
@@ -135,19 +143,21 @@ const Branding = ({
               )}
               <CompanyInfoSettings />
             </>
-          ) : (
-            <></>
-          )}
+          ) : null}
           <AdditionalResources />
         </>
-      )}
+      ) : null}
     </StyledComponent>
   );
 };
 
-export default inject(({ settingsStore, currentQuotaStore, common }) => {
+export default inject(({ settingsStore, currentQuotaStore, brandingStore }) => {
   const { isCustomizationAvailable } = currentQuotaStore;
-  const { isLoadedCompanyInfoSettingsData } = common;
+  const {
+    isLoadedCompanyInfoSettingsData,
+    isWhiteLabelLoaded,
+    isBrandNameLoaded,
+  } = brandingStore;
   const {
     standalone,
     portals,
@@ -159,6 +169,8 @@ export default inject(({ settingsStore, currentQuotaStore, common }) => {
 
   return {
     isLoadedCompanyInfoSettingsData,
+    isWhiteLabelLoaded,
+    isBrandNameLoaded,
     isSettingPaid,
     standalone,
     portals,

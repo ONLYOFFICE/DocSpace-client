@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -63,14 +63,14 @@ const StyledBody = styled.div`
         css`
           svg {
             path {
-              fill: ${(props) =>
-                props.theme.client.settings.payment.benefitsContainer
+              fill: ${({ theme }) =>
+                theme.client.settings.payment.benefitsContainer
                   .iconsColor} !important;
             }
             mask + path {
               fill: none !important;
-              stroke: ${(props) =>
-                props.theme.client.settings.payment.benefitsContainer
+              stroke: ${({ theme }) =>
+                theme.client.settings.payment.benefitsContainer
                   .iconsColor} !important;
             }
           }
@@ -79,21 +79,21 @@ const StyledBody = styled.div`
   }
 `;
 
-const BenefitsContainer = ({ t, features, theme }) => {
+const BenefitsContainer = ({ t, features }) => {
   return (
     <StyledBody className="benefits-container">
       <Text
-        fontSize={"16px"}
-        fontWeight={"600"}
+        fontSize="16px"
+        fontWeight="600"
         className="payment-benefits_text"
         noSelect
       >
         {t("Benefits")}
       </Text>
-      {features.map((item, index) => {
+      {Array.from(features.values()).map((item) => {
         if (!item.title || !item.image) return;
         return (
-          <div className="payment-benefits" key={index}>
+          <div className="payment-benefits" key={item.title || item.image}>
             <div
               dangerouslySetInnerHTML={{ __html: item.image }}
               className="icons-container"

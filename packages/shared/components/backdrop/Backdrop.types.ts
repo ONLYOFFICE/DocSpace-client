@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,21 +29,68 @@ import React from "react";
 export interface BackdropProps {
   /** Sets visible or hidden */
   visible: boolean;
-  /** CSS z-index */
+
+  /**
+   * Sets the z-index CSS property for stacking context
+   * @default 203
+   */
   zIndex?: number;
-  /** Accepts class */
+
+  /**
+   * Custom CSS class name(s) to apply to the backdrop
+   * Can be a single string or an array of strings
+   */
   className?: string | string[];
-  /** Accepts id */
+
+  /** HTML id attribute for the backdrop element */
   id?: string;
-  /** Accepts css style */
+
+  /** Custom inline styles to apply to the backdrop */
   style?: React.CSSProperties;
-  /** Displays the background. *The background is not displayed if the viewport width is more than 1024 */
+
+  /**
+   * Enables background visibility for the backdrop
+   * Note: Background is not displayed if viewport width > 1024px
+   * @default false
+   */
   withBackground?: boolean;
-  /** Must be true if used with Aside component */
+
+  /**
+   * Indicates if the backdrop is being used with an Aside component
+   * Affects backdrop stacking and background behavior
+   * @default false
+   */
   isAside?: boolean;
-  /** Must be true if used with Context menu */
+
+  /**
+   * Disables the blur effect, typically used with context menus
+   * @default false
+   */
   withoutBlur?: boolean;
+
+  /**
+   * Forces the backdrop to render without a background
+   * Takes precedence over withBackground
+   * @default false
+   */
   withoutBackground?: boolean;
+
+  /**
+   * Indicates if the backdrop is being used with a modal dialog
+   * Affects touch event handling
+   * @default false
+   */
   isModalDialog?: boolean;
+
+  /**
+   * Click event handler for the backdrop
+   * @param e - React mouse event
+   */
   onClick?: (e: React.MouseEvent) => void;
+
+  /**
+   * Indicates if the backdrop should be shown
+   * @default false
+   */
+  shouldShowBackdrop?: boolean;
 }

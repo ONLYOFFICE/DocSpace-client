@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -41,6 +41,15 @@ const UnsavedChangesDialogComponent = (props) => {
     setEditLinkPanelIsVisible,
   } = props;
 
+  const onClose = () => {
+    setUnsavedChangesDialog(false);
+  };
+
+  const onCloseMenu = () => {
+    setEditLinkPanelIsVisible(false);
+    onClose();
+  };
+
   const onKeyPress = (e) => {
     if (e.keyCode === 13) {
       onCloseMenu();
@@ -52,15 +61,6 @@ const UnsavedChangesDialogComponent = (props) => {
 
     return () => window.removeEventListener("keydown", onKeyPress);
   }, []);
-
-  const onCloseMenu = () => {
-    setEditLinkPanelIsVisible(false);
-    onClose();
-  };
-
-  const onClose = () => {
-    setUnsavedChangesDialog(false);
-  };
 
   return (
     <ModalDialog

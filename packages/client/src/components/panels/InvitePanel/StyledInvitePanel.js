@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,19 +28,22 @@ import styled, { css } from "styled-components";
 import { Heading } from "@docspace/shared/components/heading";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { ComboBox } from "@docspace/shared/components/combobox";
-import { Box } from "@docspace/shared/components/box";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Link } from "@docspace/shared/components/link";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { mobile, commonIconsStyles } from "@docspace/shared/utils";
+import {
+  mobile,
+  commonIconsStyles,
+  injectDefaultTheme,
+  desktop,
+  commonInputStyles,
+} from "@docspace/shared/utils";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
-import { isMobile, desktop, commonInputStyles } from "@docspace/shared/utils";
-import Base from "@docspace/shared/themes/base";
 import { globalColors } from "@docspace/shared/themes";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 
@@ -111,6 +114,13 @@ const StyledInviteUserBody = styled.div`
   flex-direction: column;
   overflow: auto;
 
+  .invite-user-box {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
   .group-name {
     padding-top: 8px;
   }
@@ -121,8 +131,8 @@ const StyledInviteUserBody = styled.div`
 `;
 
 const StyledSubHeader = styled(Heading)`
-  font-weight: 700;
-  font-size: 16px;
+  font-weight: 700 !important;
+  font-size: 16px !important;
   margin: 16px 0 8px;
 
   ${(props) =>
@@ -134,7 +144,7 @@ const StyledSubHeader = styled(Heading)`
     `};
 `;
 
-const StyledDescription = styled(Text)`
+const StyledDescription = styled(Text).attrs(injectDefaultTheme)`
   color: ${(props) =>
     props.theme.createEditRoomDialog.commonParam.descriptionColor};
   margin-bottom: 16px;
@@ -143,8 +153,6 @@ const StyledDescription = styled(Text)`
   font-size: 12px;
   line-height: 16px;
 `;
-
-StyledDescription.defaultProps = { theme: Base };
 
 const StyledRow = styled.div`
   display: grid;
@@ -175,6 +183,11 @@ const StyledRow = styled.div`
   }
 
   .role-access {
+    box-sizing: border-box;
+    display: flex;
+    align-items: right;
+    gap: 8px;
+
     .role-warning {
       padding-top: 4px;
     }
@@ -236,7 +249,6 @@ const StyledInviteInput = styled.div`
 `;
 
 const StyledEditInput = styled(TextInput)`
-  width: 100%;
   height: 32px;
 `;
 
@@ -331,6 +343,13 @@ const StyledDropDown = styled(DropDown)`
     .list-item_content {
       text-overflow: ellipsis;
       overflow: hidden;
+
+      .list-item_content-box {
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
     }
 
     .email-list_avatar {
@@ -374,7 +393,7 @@ const StyledDropDown = styled(DropDown)`
   }
 `;
 
-const SearchItemText = styled(Text)`
+const SearchItemText = styled(Text).attrs(injectDefaultTheme)`
   line-height: 16px;
 
   text-overflow: ellipsis;
@@ -390,12 +409,10 @@ const SearchItemText = styled(Text)`
   ${(props) => props.info && `margin-inline-start: auto`}
 `;
 
-SearchItemText.defaultProps = { theme: Base };
-
 const StyledEditButton = styled(Button)`
-  width: 32px;
-  height: 32px;
-  padding: 0px;
+  width: 32px !important;
+  height: 32px !important;
+  padding: 0px !important;
 `;
 
 const iconStyles = css`
@@ -408,31 +425,26 @@ const iconStyles = css`
   }
 `;
 
-const StyledCheckIcon = styled(CheckIcon)`
+const StyledCheckIcon = styled(CheckIcon).attrs(injectDefaultTheme)`
   ${iconStyles}
 `;
 
-StyledCheckIcon.defaultProps = { theme: Base };
-
-const StyledCrossIcon = styled(CrossIcon)`
+const StyledCrossIcon = styled(CrossIcon).attrs(injectDefaultTheme)`
   ${iconStyles}
 `;
 
-StyledCrossIcon.defaultProps = { theme: Base };
-
-const StyledDeleteIcon = styled(DeleteIcon)`
+const StyledDeleteIcon = styled(DeleteIcon).attrs(injectDefaultTheme)`
   cursor: pointer;
 
   ${iconStyles}
 `;
 
-StyledDeleteIcon.defaultProps = { theme: Base };
-
 const StyledHelpButton = styled(HelpButton)`
   margin-inline-start: 8px;
 `;
 
-const StyledButtons = styled(Box)`
+const StyledButtons = styled.div.attrs(injectDefaultTheme)`
+  box-sizing: border-box;
   padding: 16px;
   display: flex;
   align-items: center;
@@ -458,8 +470,6 @@ const ResetLink = styled(Link)`
   font-style: normal;
   line-height: 15px;
 `;
-
-StyledButtons.defaultProps = { theme: Base };
 
 const StyledToggleButton = styled(ToggleButton)`
   inset-inline-end: 8px;
@@ -515,8 +525,6 @@ const StyledInviteLanguage = styled.div`
     gap: 2px;
   }
 `;
-
-StyledCrossIcon.defaultProps = { theme: Base };
 
 const ErrorWrapper = styled.div`
   display: flex;

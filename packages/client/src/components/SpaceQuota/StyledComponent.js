@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 
 const StyledBody = styled.div`
@@ -48,7 +48,7 @@ const StyledBody = styled.div`
     flex: 1;
     min-width: 0;
     .combo-button {
-      padding-inline: 8px 0;
+      padding-inline: ${(props) => (props.isLoading ? "16px 0" : "8px 0")};
       width: auto;
     }
   }

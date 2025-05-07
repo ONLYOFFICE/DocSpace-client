@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { ReactSVG } from "react-svg";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
@@ -37,8 +37,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 import { SelectedItem } from "@docspace/shared/components/selected-item";
-import { tablet } from "@docspace/shared/utils";
-import Base from "@docspace/shared/themes/base";
+import { injectDefaultTheme, tablet } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
 
 const CategoryHeader = styled.div`
@@ -50,7 +49,7 @@ const CategoryHeader = styled.div`
   line-height: 22px;
 `;
 
-const Container = styled.div`
+const Container = styled.div.attrs(injectDefaultTheme)`
   margin-bottom: 4px;
 
   &.description-holder {
@@ -74,8 +73,6 @@ const Container = styled.div`
     }
   }
 `;
-
-Container.defaultProps = { theme: Base };
 
 const ChipsContainer = styled.div`
   display: flex;
@@ -136,39 +133,41 @@ const CSP = ({
   standalone,
   t,
   theme,
+  disableCSP,
 }) => {
+  const [domain, changeDomain] = useState("");
+  const [error, setError] = useState(null);
+
   useEffect(() => {
     getCSPSettings();
   }, []);
 
-  const [domain, changeDomain] = useState("");
-  const [error, setError] = useState(null);
+  const addDomain = async () => {
+    if (!domain.trim()) return;
 
-  const onKeyPress = (e) => {
-    if (e.key === "Enter" && !!domain.length) {
-      addDomain();
+    const domainSet = new Set(cspDomains);
+    const initialSize = domainSet.size;
+
+    const domainsToAdd = domain
+      .trim()
+      .split(/\s+/)
+      .filter((newDomain) => newDomain && !domainSet.has(newDomain));
+
+    domainsToAdd.forEach((newDomain) => domainSet.add(newDomain));
+
+    if (domainSet.size > initialSize) {
+      try {
+        await setCSPSettings({ domains: Array.from(domainSet) });
+        if (error) setError(null);
+      } catch (err) {
+        setError(
+          err?.response?.data?.error?.message || t("Common:UnknownError"),
+        );
+      }
     }
+
+    changeDomain("");
   };
-
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyPress);
-    return () => document.removeEventListener("keyup", onKeyPress);
-  });
-
-  const getChips = (domains) =>
-    domains ? (
-      domains.map((item, index) => (
-        <SelectedItem
-          key={`${item}-${index}`}
-          isInline
-          label={item}
-          onClose={() => deleteDomain(item)}
-          title={item}
-        />
-      ))
-    ) : (
-      <></>
-    );
 
   const deleteDomain = (value) => {
     const domains = cspDomains.filter((item) => item !== value);
@@ -178,30 +177,43 @@ const CSP = ({
     setCSPSettings({ domains });
   };
 
-  const addDomain = async () => {
-    const domainsSetting = [...cspDomains];
-    const trimmedDomain = domain.trim();
-    const domains = trimmedDomain.split(" ");
-
-    domains.map((domain) => {
-      if (domain === "" || domainsSetting.includes(domain)) return;
-
-      domainsSetting.push(domain);
-    });
-
-    try {
-      await setCSPSettings({ domains: domainsSetting });
-    } catch (error) {
-      setError(error?.response?.data?.error?.message);
-    } finally {
-      changeDomain("");
-    }
-  };
+  const getChips = (domains) =>
+    domains
+      ? domains.map((item) => (
+          <SelectedItem
+            key={item}
+            isInline
+            label={item}
+            onClose={() => deleteDomain(item)}
+            title={item}
+            hideCross={disableCSP}
+          />
+        ))
+      : null;
 
   const onChangeDomain = (e) => {
     if (error) setError(null);
+
     changeDomain(e.target.value);
   };
+
+  const onAddByKey = useCallback(
+    (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+
+        if (!disableCSP && domain.trim().length > 0) {
+          addDomain();
+        }
+      }
+    },
+    [domain, addDomain, disableCSP],
+  );
+
+  useEffect(() => {
+    document.addEventListener("keyup", onAddByKey);
+    return () => document.removeEventListener("keyup", onAddByKey);
+  }, [onAddByKey]);
 
   return (
     <>
@@ -217,7 +229,7 @@ const CSP = ({
           tooltipContent={<Text fontSize="12px">{t("CSPHelp")}</Text>}
         />
       </Container>
-      {standalone && window.location.protocol !== "https:" && (
+      {standalone && window.location.protocol !== "https:" ? (
         <InfoBar>
           <div className="text-container">
             <div className="header-body">
@@ -236,18 +248,20 @@ const CSP = ({
               {t("CSPInfoBarDescription", {
                 productName: t("Common:ProductName"),
               })}{" "}
-              <Link
-                color={currentColorScheme?.main?.accent}
-                fontSize="13px"
-                fontWeight="400"
-                onClick={() => window.open(installationGuidesUrl, "_blank")}
-              >
-                {t("Common:LearnMore")}
-              </Link>
+              {installationGuidesUrl ? (
+                <Link
+                  color={currentColorScheme?.main?.accent}
+                  fontSize="13px"
+                  fontWeight="400"
+                  onClick={() => window.open(installationGuidesUrl, "_blank")}
+                >
+                  {t("Common:LearnMore")}
+                </Link>
+              ) : null}
             </div>
           </div>
         </InfoBar>
-      )}
+      ) : null}
       <Container className="input-holder">
         <TextInput
           onChange={onChangeDomain}
@@ -255,6 +269,7 @@ const CSP = ({
           placeholder={t("CSPInputPlaceholder")}
           tabIndex={1}
           hasError={error}
+          isDisabled={disableCSP}
         />
         <SelectorAddButton isDisabled={!domain.trim()} onClick={addDomain} />
       </Container>
@@ -262,16 +277,14 @@ const CSP = ({
         lineHeight="20px"
         color={error ? theme?.input.focusErrorBorderColor : globalColors.gray}
       >
-        {error
-          ? error
-          : t("CSPUrlHelp", { productName: t("Common:ProductName") })}
+        {error || t("CSPUrlHelp", { productName: t("Common:ProductName") })}
       </Text>
       <ChipsContainer>{getChips(cspDomains)}</ChipsContainer>
     </>
   );
 };
 
-export default inject(({ settingsStore }) => {
+export default inject(({ settingsStore, userStore }) => {
   const {
     cspDomains,
     currentColorScheme,
@@ -280,6 +293,11 @@ export default inject(({ settingsStore }) => {
     setCSPSettings,
     standalone,
   } = settingsStore;
+
+  const { user } = userStore;
+
+  const disableCSP = user.isCollaborator || user.isRoomAdmin;
+
   return {
     cspDomains,
     currentColorScheme,
@@ -287,5 +305,6 @@ export default inject(({ settingsStore }) => {
     installationGuidesUrl,
     setCSPSettings,
     standalone,
+    disableCSP,
   };
 })(observer(CSP));

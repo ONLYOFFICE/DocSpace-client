@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -56,7 +56,10 @@ const BodyComponent = ({
   onlyOneUser,
   onlyGuests,
 }: BodyComponentProps) => {
-  const warningMessageMyDocuments = t("DeleteMyDocumentsUser");
+  const warningMessageMyDocuments = t("UserFilesRemovalScope", {
+    sectionNameFirst: t("Common:MyFilesSection"),
+    sectionNameSecond: t("Common:TrashSection"),
+  });
 
   const warningMessageReassign = onlyGuests ? (
     t("DeleteReqassignDescriptionGuest", {
@@ -104,7 +107,11 @@ const BodyComponent = ({
         </Text>
         <Text className="text-warning">{t("PleaseNote")}</Text>
         <Text className="text-delete-description">
-          {t("DeletePersonalData", { productName: t("Common:ProductName") })}
+          {t("PersonalDataDeletionInfo", {
+            productName: t("Common:ProductName"),
+            sectionNameFirst: t("Common:MyFilesSection"),
+            sectionNameSecond: t("Common:TrashSection"),
+          })}
         </Text>
         <Text className="text-delete-description">
           {t("CannotReassignFiles")}
@@ -145,7 +152,7 @@ const BodyComponent = ({
       <Text className="text-warning">{t("Common:Warning")}</Text>
       <Text className="text-delete-description">{warningMessage}</Text>
 
-      {needReassignData && (
+      {needReassignData ? (
         <Link
           className="reassign-data"
           type={LinkType.action}
@@ -156,7 +163,7 @@ const BodyComponent = ({
         >
           {t("DeleteProfileEverDialog:ReassignDataToAnotherUser")}
         </Link>
-      )}
+      ) : null}
     </>
   );
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -40,13 +40,22 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
-import { deleteCookie } from "@docspace/shared/utils/cookie";
+import {
+  getOAuthJWTSignature,
+  setOAuthJWTSignature,
+} from "@docspace/shared/api/oauth";
+import {
+  getCookie,
+  deleteCookie,
+  setCookie,
+} from "@docspace/shared/utils/cookie";
 import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import api from "@docspace/shared/api";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import OAuthClientInfo from "../../../components/ConsentInfo";
+import { getRedirectURL } from "@/utils";
 
 const StyledButtonContainer = styled.div`
   margin-top: 32px;
@@ -99,6 +108,43 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
   const [isAllowRunning, setIsAllowRunning] = React.useState(false);
   const [isDenyRunning, setIsDenyRunning] = React.useState(false);
 
+  React.useEffect(() => {
+    const redirect_url = getCookie("x-redirect-authorization-uri");
+    if (!redirect_url) return;
+
+    // Your cookie processing logic here
+    const decodedRedirectUrl = window.atob(
+      redirect_url.replace(/-/g, "+").replace(/_/g, "/"),
+    );
+
+    deleteCookie("x-redirect-authorization-uri");
+    const splitedURL = decodedRedirectUrl.split("&scope=");
+    setCookie("x-scopes", splitedURL[1].split("%20").join(";"));
+    setCookie("x-url", splitedURL[0]);
+  }, []);
+
+  React.useEffect(() => {
+    const validateToken = async () => {
+      if (!user.id) return;
+
+      const token = getOAuthJWTSignature(user.id);
+
+      if (token) return;
+
+      await setOAuthJWTSignature(user.id);
+
+      const redirect_url = getRedirectURL();
+
+      if (!redirect_url) {
+        return;
+      }
+
+      window.location.replace(redirect_url);
+    };
+
+    validateToken();
+  }, [user.id]);
+
   const onAllowClick = async () => {
     if (!("clientId" in client)) return;
 
@@ -119,7 +165,7 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
         clientState = c.replace("client_state=", "").trim();
     });
 
-    await api.oauth.onOAuthSubmit(clientId, clientState, scope);
+    await api.oauth.onOAuthSubmit(clientId, clientState, scope, user.id);
 
     setIsAllowRunning(false);
   };
@@ -144,7 +190,7 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
 
     deleteCookie("client_state");
 
-    await api.oauth.onOAuthCancel(clientId, clientState);
+    await api.oauth.onOAuthCancel(clientId, clientState, user.id);
 
     setIsDenyRunning(false);
   };

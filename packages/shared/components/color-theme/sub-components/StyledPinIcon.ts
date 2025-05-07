@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,13 +31,13 @@ import { IconButton } from "../../icon-button";
 const StyledPinIcon = styled(IconButton)`
   ${commonIconsStyles}
 
-  svg {
+  && svg {
     path {
       fill: ${(props) => props.theme.filesSection.rowView.pinColor};
     }
   }
 
-  :hover {
+  &&:hover:not(.disabled) {
     svg {
       path {
         fill: ${(props) => props.theme.filesSection.rowView.pinColor};

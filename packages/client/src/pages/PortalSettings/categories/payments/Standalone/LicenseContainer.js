@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -57,7 +57,7 @@ const LicenseContainer = (props) => {
       setIsLicenseUploading(true);
     }, [100]);
 
-    let fd = new FormData();
+    const fd = new FormData();
     fd.append("files", file);
 
     await setPaymentsLicense(null, fd);

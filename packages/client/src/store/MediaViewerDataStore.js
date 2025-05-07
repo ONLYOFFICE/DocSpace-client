@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,9 +29,9 @@ import { makeAutoObservable, runInAction } from "mobx";
 import {
   MEDIA_VIEW_URL,
   PUBLIC_MEDIA_VIEW_URL,
+  thumbnailStatuses,
 } from "@docspace/shared/constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { thumbnailStatuses } from "SRC_DIR/helpers/filesConstants";
 import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { toastr } from "@docspace/shared/components/toast";
@@ -48,19 +48,25 @@ class MediaViewerDataStore {
 
   publicRoomStore;
 
+  filesActionsStore;
+
   autoPlay = true;
 
   id = null;
+
   visible = false;
+
   previewFile = null;
+
   currentItem = null;
+
   prevPostionIndex = 0;
 
-  constructor(filesStore, publicRoomStore) {
+  constructor(filesStore, publicRoomStore, filesActionsStore) {
     makeAutoObservable(this);
     this.filesStore = filesStore;
-
     this.publicRoomStore = publicRoomStore;
+    this.filesActionsStore = filesActionsStore;
   }
 
   setAutoPlay = (value) => {
@@ -136,23 +142,43 @@ class MediaViewerDataStore {
       const key = this.publicRoomStore.publicRoomKey;
       const filterObj = FilesFilter.getFilter(window.location);
 
-      return `${combineUrl("/rooms/share", MEDIA_VIEW_URL, id)}?key=${key}&${filterObj.toUrlParams()}`;
+      if (!filterObj.key) {
+        filterObj.key = key;
+      }
+
+      return `${combineUrl("/rooms/share", MEDIA_VIEW_URL, id)}?${filterObj.toUrlParams()}`;
     }
 
     return combineUrl(MEDIA_VIEW_URL, id);
   };
 
-  getFirstUrl = () => {
+  getFirstUrl = async () => {
     if (this.publicRoomStore.isPublicRoom) {
       const key = this.publicRoomStore.publicRoomKey;
       const filterObj = FilesFilter.getFilter(window.location);
 
-      const url = `${combineUrl("/rooms/share")}?key=${key}&${filterObj.toUrlParams()}`;
+      if (!filterObj.key) {
+        filterObj.key = key;
+      }
+
+      const url = `${combineUrl("/rooms/share")}?${filterObj.toUrlParams()}`;
 
       return url;
     }
 
+    const { getPublicKey } = this.filesActionsStore;
+    const { bufferSelection } = this.filesStore;
+
     const filter = this.filesStore.filter;
+
+    const shareKey = await getPublicKey({
+      id: bufferSelection.folderId,
+      shared: bufferSelection.shared,
+      rootFolderType: bufferSelection.rootFolderType,
+      type: bufferSelection.type,
+    });
+
+    filter.key = shareKey;
 
     const queryParams = filter.toUrlParams();
 
@@ -193,7 +219,7 @@ class MediaViewerDataStore {
   prevMedia = () => {
     const { setBufferSelection, files } = this.filesStore;
 
-    let currentPlaylistPos = this.currentPostionIndex - 1;
+    const currentPlaylistPos = this.currentPostionIndex - 1;
 
     if (currentPlaylistPos === -1) {
       return;
@@ -244,7 +270,7 @@ class MediaViewerDataStore {
 
     if (this.currentItem) {
       playlist.push({
-        id: id,
+        id,
         fileId: this.currentItem.fileId,
         src: this.currentItem.fileInfo.viewUrl,
         title: this.currentItem.fileInfo.title,
@@ -265,7 +291,7 @@ class MediaViewerDataStore {
 
         if (canOpenPlayer) {
           playlist.push({
-            id: id,
+            id,
             fileId: file.id,
             src: file.viewUrl,
             title: file.title,
@@ -296,7 +322,7 @@ class MediaViewerDataStore {
     } else if (this.previewFile) {
       playlist.push({
         ...this.previewFile,
-        id: id,
+        id,
         fileId: this.previewFile.id,
         src: this.previewFile.viewUrl,
         version: this.previewFile.version,

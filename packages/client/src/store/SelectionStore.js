@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,6 +28,7 @@ import { makeAutoObservable } from "mobx";
 
 class SelectionStore {
   selection = [];
+
   selected = "none";
 
   constructor(settingsSetupStore) {
@@ -81,7 +82,7 @@ class SelectionStore {
   };
 
   getUsersBySelected = (users) => {
-    let newSelection = [];
+    const newSelection = [];
     users.forEach((user) => {
       const checked = this.getUserChecked();
 
@@ -108,7 +109,7 @@ class SelectionStore {
   }
 
   get isHeaderIndeterminate() {
-    //console.log("RUN isHeaderIndeterminate");
+    // console.log("RUN isHeaderIndeterminate");
     const { admins } = this.settingsSetupStore.security.accessRight;
     return (
       this.isHeaderVisible &&

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,6 +36,7 @@ import { StyledTableRow } from "./Table.styled";
 import { TableRowProps } from "./Table.types";
 
 import { TableCell } from "./sub-components/TableCell";
+import { hasOwnProperty } from "../../utils/object";
 
 const TableRow = (props: TableRowProps) => {
   const {
@@ -50,6 +51,7 @@ const TableRow = (props: TableRowProps) => {
     getContextModel,
     badgeUrl,
     isIndexEditingMode,
+    forwardedRef,
     ...rest
   } = props;
 
@@ -65,7 +67,7 @@ const TableRow = (props: TableRowProps) => {
   };
 
   const renderContext =
-    Object.prototype.hasOwnProperty.call(props, "contextOptions") &&
+    hasOwnProperty(props, "contextOptions") &&
     contextOptions &&
     contextOptions.length > 0;
 
@@ -79,12 +81,11 @@ const TableRow = (props: TableRowProps) => {
       onContextMenu={onContextMenu}
       isIndexEditingMode={isIndexEditingMode}
       className={`${className} table-container_row`}
+      ref={forwardedRef}
       {...rest}
     >
       {children}
-      {isIndexEditingMode ? (
-        <></>
-      ) : (
+      {isIndexEditingMode ? null : (
         <div className="context-menu-container">
           <TableCell
             {...selectionProp}

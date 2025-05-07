@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,17 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useCallback, useState } from "react";
+import { useEffect, useCallback, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { isMobile, isIOS } from "react-device-detect";
 
-import { toastr } from "@docspace/shared/components/toast";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Button } from "@docspace/shared/components/button";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import { Box } from "@docspace/shared/components/box";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 
 import { removeEmojiCharacters } from "SRC_DIR/helpers/utils";
@@ -64,19 +62,28 @@ const Dialog = ({
   const [isChecked, setIsChecked] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
 
-  useEffect(() => {
-    keepNewFileName && isCreateDialog && setIsChecked(keepNewFileName);
-  }, [isCreateDialog, keepNewFileName]);
+  const onCancelAction = useCallback(
+    (e) => {
+      onCancel && onCancel(e);
+    },
+    [onCancel],
+  );
 
-  useEffect(() => {
-    let input = document?.getElementById("create-text-input");
-    if (isMobile && isIOS) return;
-    if (input && value === startValue && !isChanged) input.select();
-  }, [visible, value]);
+  const onCloseAction = useCallback(
+    (e) => {
+      onClose && onClose(e);
+    },
+    [onClose],
+  );
 
-  useEffect(() => {
-    if (startValue) setValue(startValue);
-  }, [startValue]);
+  const onSaveAction = useCallback(
+    (e) => {
+      setIsDisabled(true);
+      isCreateDialog && isChecked && setKeepNewFileName(isChecked);
+      onSave && onSave(e, value);
+    },
+    [onSave, isCreateDialog, value, isChecked, setKeepNewFileName],
+  );
 
   const onKeyUpHandler = useCallback(
     (e) => {
@@ -84,8 +91,22 @@ const Dialog = ({
 
       if (e.keyCode === 13 && !withForm && !isError) onSaveAction(e);
     },
-    [value, isError],
+    [onCancelAction, onSaveAction, withForm, isError],
   );
+
+  useEffect(() => {
+    keepNewFileName && isCreateDialog && setIsChecked(keepNewFileName);
+  }, [isCreateDialog, keepNewFileName]);
+
+  useEffect(() => {
+    const input = document?.getElementById("create-text-input");
+    if (isMobile && isIOS) return;
+    if (input && value === startValue && !isChanged) input.select();
+  }, [visible, value, startValue, isChanged]);
+
+  useEffect(() => {
+    if (startValue) setValue(startValue);
+  }, [startValue]);
 
   useEffect(() => {
     document.addEventListener("keyup", onKeyUpHandler, false);
@@ -95,44 +116,25 @@ const Dialog = ({
     };
   }, [onKeyUpHandler]);
 
-  const onChange = useCallback((e) => {
-    let newValue = e.target.value;
+  const onChange = useCallback(
+    (e) => {
+      let newValue = e.target.value;
 
-    newValue = removeEmojiCharacters(newValue);
-    if (newValue.match(folderFormValidation)) {
-      setIsError(true);
-      // toastr.warning(t("Files:ContainsSpecCharacter"));
-    } else {
-      setIsError(false);
-    }
+      newValue = removeEmojiCharacters(newValue);
+      if (newValue.match(folderFormValidation)) {
+        setIsError(true);
+      } else {
+        setIsError(false);
+      }
 
-    // newValue = newValue.replace(folderFormValidation, "_");
-
-    // console.log(folderFormValidation);
-
-    setValue(newValue);
-    setIsChanged(true);
-  }, []);
+      setValue(newValue);
+      setIsChanged(true);
+    },
+    [folderFormValidation],
+  );
 
   const onFocus = useCallback((e) => {
     e.target.select();
-  }, []);
-
-  const onSaveAction = useCallback(
-    (e) => {
-      setIsDisabled(true);
-      isCreateDialog && isChecked && setKeepNewFileName(isChecked);
-      onSave && onSave(e, value);
-    },
-    [onSave, isCreateDialog, value, isChecked],
-  );
-
-  const onCancelAction = useCallback((e) => {
-    onCancel && onCancel(e);
-  }, []);
-
-  const onCloseAction = useCallback((e) => {
-    onClose && onClose(e);
   }, []);
 
   const onChangeCheckbox = () => {
@@ -143,8 +145,8 @@ const Dialog = ({
     <ModalDialog
       withForm={withForm}
       visible={visible}
-      displayType={"modal"}
-      scale={true}
+      displayType="modal"
+      scale
       onClose={onCloseAction}
       zIndex={405}
     >
@@ -153,17 +155,17 @@ const Dialog = ({
         <FieldContainer
           hasError={isError}
           labelVisible={false}
-          errorMessageWidth={"100%"}
+          errorMessageWidth="100%"
           errorMessage={t("Files:ContainsSpecCharacter")}
           removeMargin
         >
           <TextInput
             id="create-text-input"
             name="create"
-            type="search"
-            scale={true}
+            type="text"
+            scale
             value={value}
-            isAutoFocussed={true}
+            isAutoFocussed
             tabIndex={1}
             onChange={onChange}
             onFocus={onFocus}
@@ -171,25 +173,32 @@ const Dialog = ({
             maxLength={165}
           />
         </FieldContainer>
-        {isCreateDialog && extension && (
-          <Box displayProp="flex" alignItems="center" paddingProp="16px 0 0">
+        {isCreateDialog && extension ? (
+          <div
+            style={{
+              boxSizing: "border-box",
+              display: "flex",
+              alignItems: "center",
+              padding: "16px 0 0",
+            }}
+          >
             <Checkbox
               className="dont-ask-again"
               label={t("Common:DontAskAgain")}
               isChecked={isChecked}
               onChange={onChangeCheckbox}
             />
-          </Box>
-        )}
+          </div>
+        ) : null}
 
-        {options && (
+        {options ? (
           <ComboBox
             style={{ marginTop: "16px" }}
             options={options}
             selectedOption={selectedOption}
             onSelect={onSelect}
           />
-        )}
+        ) : null}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

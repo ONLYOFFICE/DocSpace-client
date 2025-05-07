@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,11 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import axios, { AxiosRequestConfig } from "axios";
 import moment from "moment";
 import {
   ConflictResolveType,
   FolderType,
+  type FormFillingManageAction,
   ShareAccessRights,
 } from "../../enums";
 import {
@@ -65,7 +69,10 @@ import {
   TUploadOperation,
   TConnectingStorages,
   TIndexItems,
+  TFormRoleMappingRequest,
+  TFileFillingFormStatus,
 } from "./types";
+import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialog.types";
 
 export async function openEdit(
   fileId: number,
@@ -152,12 +159,13 @@ export async function getFolderPath(folderId: number) {
 }
 
 export async function getFolder(
-  folderId: string | number,
+  folderIdParam: string | number,
   filter: FilesFilter,
   signal?: AbortSignal,
   share?: string,
 ) {
-  let params = folderId;
+  let params = folderIdParam;
+  let folderId = folderIdParam;
 
   if (folderId && typeof folderId === "string") {
     folderId = encodeURIComponent(folderId.replace(/\\\\/g, "\\"));
@@ -237,6 +245,27 @@ export async function getFoldersTree() {
       new: newItems,
     } as TFolder;
   });
+}
+
+export async function getPersonalFolderTree() {
+  const res = (await request({
+    method: "get",
+    url: "/files/@my",
+  })) as TGetFolder;
+
+  return [
+    {
+      id: res.current.id,
+      parentId: res.current.parentId,
+      title: res.current.title,
+      rootFolderType: +res.current.rootFolderType,
+      rootFolderName: "@my",
+      pathParts: res.pathParts,
+      foldersCount: res.current.foldersCount,
+      newItems: res.new,
+      security: res.current.security,
+    },
+  ];
 }
 
 export async function getCommonFoldersTree() {
@@ -402,7 +431,7 @@ export async function deleteFolder(
 }
 
 export async function createFile(
-  folderId: number,
+  folderId: number | string,
   title: string,
   templateId?: number,
   formId?: number,
@@ -493,7 +522,11 @@ export async function createFile(
 //   return request(options);
 // }
 
-export async function getFileInfo(fileId: number | string, share?: string) {
+export async function getFileInfo(
+  fileId: number | string,
+  share?: string,
+  skipRedirect = false,
+) {
   const options: AxiosRequestConfig = {
     method: "get",
     url: `/files/file/${fileId}`,
@@ -504,7 +537,7 @@ export async function getFileInfo(fileId: number | string, share?: string) {
       : undefined,
   };
 
-  const res = (await request(options)) as TFile;
+  const res = (await request(options, skipRedirect)) as TFile;
 
   return res;
 }
@@ -558,6 +591,16 @@ export async function emptyTrash() {
   const res = (await request({
     method: "put",
     url: "/files/fileops/emptytrash",
+  })) as TOperation[];
+  return res;
+}
+
+export async function enableCustomFilter(fileId: number, enabled: boolean) {
+  const data = { enabled };
+  const res = (await request({
+    method: "put",
+    url: `/files/file/${fileId}/customfilter`,
+    data,
   })) as TOperation[];
   return res;
 }
@@ -675,7 +718,7 @@ export function uploadBackup(url: string, data: unknown) {
 }
 
 export async function downloadFiles(
-  fileIds: number[],
+  fileIds: number[] | TFileConvertId[],
   folderIds: number[],
   shareKey: string,
 ) {
@@ -724,6 +767,7 @@ export async function copyToFolder(
   conflictResolveType: ConflictResolveType,
   deleteAfter: boolean,
   content = false,
+  toFillOut = false,
 ) {
   const data = {
     destFolderId,
@@ -732,6 +776,7 @@ export async function copyToFolder(
     conflictResolveType,
     deleteAfter,
     content,
+    toFillOut,
   };
 
   const res = (await request({
@@ -764,6 +809,7 @@ export async function moveToFolder(
   fileIds: number[],
   conflictResolveType: ConflictResolveType,
   deleteAfter: boolean,
+  toFillOut = false,
 ) {
   const data = {
     destFolderId,
@@ -771,6 +817,7 @@ export async function moveToFolder(
     fileIds,
     conflictResolveType,
     deleteAfter,
+    toFillOut,
   };
   const res = (await request({
     method: "put",
@@ -831,7 +878,7 @@ export async function convertFile(
     method: "put",
     url: `/files/file/${fileId}/checkconversion`,
     data,
-  })) as { result: { webUrl: string } }[];
+  })) as { result: { webUrl: string; title: string } }[];
 
   return res;
 }
@@ -985,6 +1032,17 @@ export async function changeOpenEditorInSameTab(val: boolean) {
   return res;
 }
 
+export async function changeHideConfirmCancelOperation(val: boolean) {
+  const data = { set: val };
+  const res = (await request({
+    method: "put",
+    url: "files/hideconfirmcanceloperation",
+    data,
+  })) as boolean;
+
+  return res;
+}
+
 export function enableThirdParty(val: boolean) {
   const data = { set: val };
   return request({ method: "put", url: "files/thirdparty", data });
@@ -1055,7 +1113,10 @@ export function saveSettingsThirdParty(
 
 // TODO: Need update res type
 export function getSettingsThirdParty() {
-  return request({ method: "get", url: "files/thirdparty/backup" });
+  return request({
+    method: "get",
+    url: "files/thirdparty/backup",
+  });
 }
 
 export function deleteThirdParty(providerId: string) {
@@ -1359,8 +1420,11 @@ export async function getDocumentServiceLocation(version?: number | string) {
 
 export async function changeDocumentServiceLocation(
   docServiceUrl: string,
+  secretKey: string,
+  authHeader: string,
   internalUrl: string,
   portalUrl: string,
+  sslVerification: boolean,
 ) {
   const res = (await request({
     method: "put",
@@ -1369,6 +1433,9 @@ export async function changeDocumentServiceLocation(
       DocServiceUrl: docServiceUrl,
       DocServiceUrlInternal: internalUrl,
       DocServiceUrlPortal: portalUrl,
+      DocServiceSignatureSecret: secretKey,
+      DocServiceSignatureHeader: authHeader,
+      DocServiceSslVerification: sslVerification,
     },
   })) as TDocServiceLocation;
 
@@ -1545,4 +1612,48 @@ export async function removeSharedFolder(folderIds: Array<string | number>) {
       folderIds,
     },
   });
+}
+
+export async function deleteVersionFile(fileId: number, versions: number[]) {
+  const data = { fileId, versions };
+  const res = (await request({
+    method: "put",
+    url: "/files/fileops/deleteversion",
+    data,
+  })) as TOperation[];
+
+  return res;
+}
+
+export async function formRoleMapping(data: TFormRoleMappingRequest) {
+  return request({
+    method: "post",
+    url: `files/file/${data.formId}/formrolemapping`,
+    data,
+  });
+}
+
+export async function manageFormFilling(
+  formId: string | number,
+  action: FormFillingManageAction,
+) {
+  return request({
+    method: "put",
+    url: `files/file/${formId}/manageformfilling`,
+    data: {
+      formId,
+      action,
+    },
+  });
+}
+
+export async function getFormFillingStatus(
+  formId: string | number,
+): Promise<TFileFillingFormStatus[]> {
+  const res = (await request({
+    method: "get",
+    url: `/files/file/${formId}/formroles`,
+  })) as TFileFillingFormStatus[];
+
+  return res;
 }

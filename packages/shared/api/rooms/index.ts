@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @typescript-eslint/default-param-last */
+// eslint-disable @typescript-eslint/default-param-last
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { AxiosRequestConfig } from "axios";
 
 import moment from "moment";
@@ -38,9 +41,10 @@ import {
 import RoomsFilter from "./filter";
 import {
   TGetRooms,
-  TRoomLifetime,
   TExportRoomIndexTask,
   TPublicRoomPassword,
+  TValidateShareRoom,
+  TRoom,
 } from "./types";
 
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
@@ -81,7 +85,7 @@ export function getRoomInfo(id) {
   return request(options).then((res) => {
     if (res.rootFolderType === FolderType.Archive) res.isArchive = true;
 
-    return res;
+    return res as TRoom;
   });
 }
 
@@ -122,9 +126,9 @@ export function updateRoomMemberRole(id, data) {
 export function getHistory(
   selectionType: "file" | "folder",
   id,
-  signal = null,
   requestToken,
   filter,
+  signal = null,
 ) {
   let params = "";
 
@@ -458,7 +462,7 @@ export function getPrimaryLink(roomId) {
 }
 
 export function validatePublicRoomKey(key) {
-  return request({
+  return request<TValidateShareRoom>({
     method: "get",
     url: `files/share/${key}`,
   });
@@ -538,6 +542,81 @@ export function setRoomCover(roomId, cover) {
     method: "post",
     url: `files/rooms/${roomId}/cover`,
     data,
+  };
+
+  return request(options);
+}
+
+export function createTemplate(data: {
+  roomId: number;
+  title: string;
+  logo: TRoom["logo"];
+  share;
+  tags: TRoom["tags"];
+  public: boolean;
+  quota: number;
+}) {
+  const options = {
+    method: "post",
+    url: `/files/roomtemplate`,
+    data,
+  };
+
+  return request(options);
+}
+
+export function getCreateTemplateProgress() {
+  const options = {
+    method: "get",
+    url: `/files/roomtemplate/status`,
+  };
+
+  return request(options);
+}
+
+export function createRoomFromTemplate(data) {
+  const options = {
+    method: "post",
+    url: `/files/rooms/fromTemplate`,
+    data,
+  };
+
+  return request(options);
+}
+
+export function getCreateRoomFromTemplateProgress() {
+  const options = {
+    method: "get",
+    url: `/files/rooms/fromTemplate/status`,
+  };
+
+  return request(options);
+}
+
+export function getTemplateAvailable(id: number) {
+  const options = {
+    method: "get",
+    url: `/files/roomtemplate/${id}/public`,
+  };
+
+  return request(options);
+}
+
+export function setTemplateAvailable(id: number, isAvailable: boolean) {
+  const options = {
+    method: "put",
+    url: `/files/roomtemplate/public`,
+    data: { id, public: isAvailable },
+  };
+
+  return request(options);
+}
+
+export function hideConfirmRoomLifetime(val: boolean) {
+  const options = {
+    method: "put",
+    url: "/files/hideconfirmroomlifetime",
+    data: { set: val },
   };
 
   return request(options);

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,31 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "@docspace/shared/components/box";
-import { FieldContainer } from "@docspace/shared/components/field-container";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/shared/components/text";
 
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { SSO_GIVEN_NAME, SSO_SN, SSO_EMAIL } from "SRC_DIR/helpers/constants";
 import SsoFormField from "./sub-components/SsoFormField";
-
-import {
-  SSO_GIVEN_NAME,
-  SSO_SN,
-  SSO_EMAIL,
-  SSO_LOCATION,
-  SSO_TITLE,
-  SSO_PHONE,
-} from "SRC_DIR/helpers/constants";
 
 const StyledWrapper = styled.div`
   .icon-button {
     padding: 0 5px;
+  }
+
+  .attribute-matching-box {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    font-size: 14px;
+    margin: 24px 0 16px 0;
   }
 `;
 
@@ -58,26 +55,14 @@ const FieldMapping = (props) => {
     firstName,
     lastName,
     email,
-    location,
-    title,
-    phone,
     firstNameHasError,
     lastNameHasError,
     emailHasError,
-    locationHasError,
-    titleHasError,
-    phoneHasError,
   } = props;
 
   return (
     <StyledWrapper>
-      <Box
-        alignItems="center"
-        displayProp="flex"
-        flexDirection="row"
-        fontSize="14px"
-        marginProp="24px 0 16px 0"
-      >
+      <div className="attribute-matching-box">
         <Text as="h2" fontSize="15px" fontWeight={600} noSelect>
           {t("AttributeMatching")}
         </Text>
@@ -89,7 +74,7 @@ const FieldMapping = (props) => {
             <Text fontSize="12px">{t("AttributeMatchingTooltip")}</Text>
           }
         />
-      </Box>
+      </div>
 
       <SsoFormField
         labelText={t("Common:FirstName")}
@@ -118,7 +103,7 @@ const FieldMapping = (props) => {
         hasError={emailHasError}
       />
 
-      {/*<SsoFormField
+      {/* <SsoFormField
         labelText={t("Common:Location")}
         name="location"
         placeholder={SSO_LOCATION}
@@ -143,7 +128,7 @@ const FieldMapping = (props) => {
         tabIndex={21}
         value={phone}
         hasError={phoneHasError}
-  />*/}
+  /> */}
     </StyledWrapper>
   );
 };

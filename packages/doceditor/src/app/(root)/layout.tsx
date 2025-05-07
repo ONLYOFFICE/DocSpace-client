@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,6 +30,8 @@ import { ThemeKeys } from "@docspace/shared/enums";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 
+import "@docspace/shared/styles/theme.scss";
+
 import Providers from "@/providers";
 import Scripts from "@/components/Scripts";
 import StyledComponentsRegistry from "@/utils/registry";
@@ -46,12 +48,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const hdrs = headers();
-
   const cookieStore = cookies();
-
-  const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
-    | ThemeKeys
-    | undefined;
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
     log.info("get health check and return empty layout");
@@ -63,6 +60,27 @@ export default async function RootLayout({
     getSettings(),
     getColorTheme(),
   ]);
+
+  const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
+    | ThemeKeys
+    | undefined;
+
+  const theme =
+    (hdrs.get("x-sdk-config-theme") as ThemeKeys | null) ||
+    user?.theme ||
+    systemTheme ||
+    ThemeKeys.BaseStr;
+
+  const themeClass =
+    (theme !== ThemeKeys.SystemStr ? theme : systemTheme) === ThemeKeys.DarkStr
+      ? "dark"
+      : "light";
+
+  const locale =
+    (hdrs.get("x-sdk-config-locale") as string | null) ||
+    user?.cultureName ||
+    (typeof settings === "object" && settings.culture) ||
+    "en";
 
   if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
 
@@ -79,9 +97,18 @@ export default async function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
       </head>
-      <body>
+      <body className={themeClass}>
         <StyledComponentsRegistry>
-          <Providers contextData={{ user, settings, systemTheme, colorTheme }}>
+          <Providers
+            contextData={{
+              initialTheme: theme,
+              user,
+              settings,
+              systemTheme,
+              colorTheme,
+              locale,
+            }}
+          >
             {children}
           </Providers>
         </StyledComponentsRegistry>

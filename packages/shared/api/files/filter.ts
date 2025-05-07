@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,6 +23,9 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 
 import queryString from "query-string";
 
@@ -72,6 +75,42 @@ const KEY = "key";
 // TODO: add next params
 // subjectGroup bool
 // subjectID
+
+const getOtherSearchParams = () => {
+  const searchParams = new URLSearchParams(window.location.search);
+
+  const filterSearchParams = [
+    SEARCH_TYPE,
+    AUTHOR_TYPE,
+    FILTER_TYPE,
+    ROOM_ID,
+    SEARCH,
+    SORT_BY,
+    SORT_ORDER,
+    VIEW_AS,
+    PAGE,
+    PAGE_COUNT,
+    FOLDER,
+    SEARCH_IN_CONTENT,
+    EXCLUDE_SUBJECT,
+    APPLY_FILTER_OPTION,
+    EXTENSION,
+    SEARCH_AREA,
+    KEY,
+  ];
+
+  Array.from(searchParams.keys()).forEach((key) => {
+    if (
+      filterSearchParams.some(
+        (param) => param.toLowerCase() === key.toLowerCase(),
+      )
+    ) {
+      searchParams.delete(key);
+    }
+  });
+
+  return searchParams.toString();
+};
 
 class FilesFilter {
   page: number;
@@ -338,12 +377,28 @@ class FilesFilter {
     dtoFilter[SORT_BY] = sortBy;
     dtoFilter[SORT_ORDER] = sortOrder;
 
+    const otherSearchParams = getOtherSearchParams();
+
     const str = toUrlParams(dtoFilter, true);
-    return str;
+    return `${str}&${otherSearchParams}`;
   };
 
   getLastPage() {
     return Math.ceil(this.total / this.pageCount) - 1;
+  }
+
+  isFiltered() {
+    return Boolean(
+      this.filterType ||
+        this.withSubfolders ||
+        this.search ||
+        this.roomId ||
+        this.authorType ||
+        this.searchInContent ||
+        this.excludeSubject ||
+        this.applyFilterOption ||
+        this.extension,
+    );
   }
 
   clone() {

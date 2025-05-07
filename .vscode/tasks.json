@@ -378,6 +378,21 @@
       }
     },
     {
+      "label": "Frontend | build:lite",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn build:lite",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Frontend | start",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; yarn start",
@@ -396,6 +411,21 @@
       "label": "Frontend | start-prod",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; yarn start-prod",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | start-prod:lite",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn start-prod:lite",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -441,6 +471,21 @@
       "label": "Frontend | build-and-start-prod",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; yarn build ; yarn start-prod",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | build-and-start-prod:lite",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn build:lite ; yarn start-prod:lite",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -588,9 +633,9 @@
       }
     },
     {
-      "label": "Test | Test build",
+      "label": "Test | Test e2e docker build",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn test:build ; ",
+      "command": "cd ${workspaceFolder} ; yarn test:e2e:docker:build ; ",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -603,9 +648,9 @@
       }
     },
     {
-      "label": "Test | Test e2e",
+      "label": "Test | Test e2e docker start",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn test:e2e ; ",
+      "command": "cd ${workspaceFolder} ; yarn test:e2e:docker:start ; ",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -618,24 +663,9 @@
       }
     },
     {
-      "label": "Test | Test e2e model",
+      "label": "Test | Test e2e docker clear",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn test:e2e:model ; ",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Test | e2e playwright setup",
-      "type": "shell",
-      "command": "cd ${workspaceFolder} ; npx playwright install ; ",
+      "command": "cd ${workspaceFolder} ; yarn test:e2e:docker:clear ; ",
       "group": {
         "kind": "build",
         "isDefault": true

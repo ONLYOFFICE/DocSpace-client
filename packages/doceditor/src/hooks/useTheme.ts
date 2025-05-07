@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -42,7 +42,7 @@ import type { TGetColorTheme } from "@docspace/shared/api/settings/types";
 type MatchType = [ThemeKeys | undefined, ThemeKeys | undefined];
 
 export interface UseThemeProps {
-  user?: TUser;
+  initialTheme?: ThemeKeys;
   i18n?: i18n;
   systemTheme?: ThemeKeys;
   colorTheme?: TGetColorTheme;
@@ -50,7 +50,7 @@ export interface UseThemeProps {
 }
 
 const useTheme = ({
-  user,
+  initialTheme,
   i18n,
   systemTheme,
   colorTheme,
@@ -69,7 +69,7 @@ const useTheme = ({
   const [theme, setTheme] = React.useState<TTheme>(() => {
     const interfaceDirection = i18n?.dir ? i18n.dir(lang) : "ltr";
 
-    const newTheme = match<MatchType>([user?.theme, systemTheme])
+    const newTheme = match<MatchType>([initialTheme, systemTheme])
       .returnType<TTheme>()
       .with([ThemeKeys.DarkStr, P._], () => Dark)
       .with([ThemeKeys.BaseStr, P._], () => Base)
@@ -105,10 +105,10 @@ const useTheme = ({
   const getUserTheme = React.useCallback(() => {
     const SYSTEM_THEME = getSystemTheme();
 
-    let theme = user?.theme ?? SYSTEM_THEME;
+    let theme = initialTheme ?? SYSTEM_THEME;
     const interfaceDirection = i18n?.dir ? i18n.dir(lang) : "ltr";
 
-    if (user?.theme === ThemeKeys.SystemStr) theme = SYSTEM_THEME;
+    if (initialTheme === ThemeKeys.SystemStr) theme = SYSTEM_THEME;
 
     const fontFamily = getFontFamilyDependingOnLanguage(i18n?.language ?? "en");
 
@@ -123,7 +123,7 @@ const useTheme = ({
     });
 
     setCookie(SYSTEM_THEME_KEY, themeCookie);
-  }, [user?.theme, i18n, currentColorTheme, lang]);
+  }, [initialTheme, i18n, currentColorTheme, lang]);
 
   React.useEffect(() => {
     getCurrentColorTheme();

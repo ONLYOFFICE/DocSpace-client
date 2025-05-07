@@ -1,6 +1,4 @@
 {
   "ErrorEmptyResponse": "Празен отговор",
-  "ErrorUnavailableText": "{{productName}} не е наличен",
-  "LinkDoesNotExist": "Линкът, който се опитвате да отворите, не съществува.",
-  "LinkHasExpired": "Линкът, който сте последвали, е изтекъл."
+  "ErrorUnavailableText": "{{productName}} не е наличен"
 }

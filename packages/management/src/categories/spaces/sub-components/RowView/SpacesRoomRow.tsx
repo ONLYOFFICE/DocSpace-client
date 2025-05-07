@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,14 +37,15 @@ import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import { ReactSVG } from "react-svg";
 
-import { Row } from "@docspace/shared/components/row";
+import { Row } from "@docspace/shared/components/rows";
 import { toastr } from "@docspace/shared/components/toast";
-import { RoomContent } from "./RoomContent";
 
 import ChangeStorageQuotaDialog from "client/ChangeStorageQuotaDialog";
 
 import { TPortals } from "SRC_DIR/types/spaces";
 import { useStore } from "SRC_DIR/store";
+
+import { RoomContent } from "./RoomContent";
 
 const StyledRoomRow = styled(Row)`
   padding: 4px 0;

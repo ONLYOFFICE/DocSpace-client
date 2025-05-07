@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,10 +26,17 @@
 
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-console */
+/* eslint-disable no-var */
+/* eslint-disable vars-on-top */
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 
 import io, { Socket } from "socket.io-client";
-
 import { DefaultEventsMap } from "@socket.io/component-emitter";
+
+import { TUser } from "../api/people/types";
+import { TGroup } from "../api/groups/types";
+
 import { addLog } from ".";
 
 /**
@@ -40,6 +47,8 @@ import { addLog } from ".";
  * @readonly
  */
 export const enum SocketEvents {
+  Restore = "restore",
+  Backup = "backup",
   RestoreBackup = "restore-backup",
   LogoutSession = "s:logout-session",
   ModifyFolder = "s:modify-folder",
@@ -53,6 +62,19 @@ export const enum SocketEvents {
   ChangedQuotaUsedValue = "s:change-quota-used-value",
   ChangedQuotaFeatureValue = "s:change-quota-feature-value",
   ChangedQuotaUserUsedValue = "s:change-user-quota-used-value",
+  AddUser = "s:add-user",
+  UpdateUser = "s:update-user",
+  DeleteUser = "s:delete-user",
+  AddGroup = "s:add-group",
+  UpdateGroup = "s:update-group",
+  DeleteGroup = "s:delete-group",
+  AddGuest = "s:add-guest",
+  UpdateGuest = "s:update-guest",
+  DeleteGuest = "s:delete-guest",
+  BackupProgress = "s:backup-progress",
+  RestoreProgress = "s:restore-progress",
+  EncryptionProgress = "s:encryption-progress",
+  ChangeMyType = "s:change-my-type",
 }
 
 /**
@@ -66,6 +88,8 @@ export const enum SocketCommands {
   Unsubscribe = "unsubscribe",
   RefreshFolder = "refresh-folder",
   RestoreBackup = "restore-backup",
+  SubscribeInSpaces = "subscribeInSpaces",
+  UnsubscribeInSpaces = "unsubscribeInSpaces",
 }
 
 /**
@@ -101,22 +125,64 @@ export type TConfig = {
 };
 
 /**
- * Represents the data to be emitted through a socket connection.
+ * Represents the data to be emitted through a socket connection with subscribe and unsubscribe commands.
  *
- * @typedef {Object} TEmitData
+ * @typedef {Object} TSubscribeEmitData
  * @property {string | string[]} roomParts - The parts of the room to which the data is emitted.
  * @property {boolean} [individual] - Optional flag indicating if the emission is for an individual.
  */
-export type TEmitData = { roomParts: string | string[]; individual?: boolean };
+export type TSubscribeEmitData = {
+  roomParts: string | string[];
+  individual?: boolean;
+};
+
+/**
+ * Represents the data to be emitted through a socket connection with restore backup command.
+ *
+ * @typedef {Object} TRestoreBackupEmitData
+ * @property {boolean} dump - Flag indicating if it's a dump operation
+ * @property {boolean} [individual] - Optional flag indicating if the emission is for an individual
+ */
+export type TRestoreBackupEmitData = {
+  dump: boolean;
+  individual?: boolean;
+};
+
+/**
+ * A mapping between socket commands and their respective data types.
+ * Each key corresponds to a command from the `SocketCommands` enum,
+ */
+export type TEmitEventsDataMap = {
+  [SocketCommands.Subscribe]: TSubscribeEmitData;
+  [SocketCommands.Unsubscribe]: TSubscribeEmitData;
+  [SocketCommands.SubscribeInSpaces]: TSubscribeEmitData;
+  [SocketCommands.UnsubscribeInSpaces]: TSubscribeEmitData;
+  [SocketCommands.RefreshFolder]: string;
+  [SocketCommands.RestoreBackup]: TRestoreBackupEmitData;
+};
+
+/**
+ * Resolves the associated data type for a given socket command.
+ * If the provided command exists in `TEmitEventsDataMap`, it returns the associated data type.
+ * Otherwise, it resolves to `never`.
+ *
+ * @template T - A specific socket command from the `SocketCommands` enum.
+ * @typedef {any} TEmitData<T>
+ */
+export type TEmitData<T extends SocketCommands> =
+  T extends keyof TEmitEventsDataMap ? TEmitEventsDataMap[T] : never;
 
 /**
  * Represents the structure of an emit event for a socket connection.
  *
  * @typedef {Object} TEmit
  * @property {SocketCommands} command - The command to be sent through the socket.
- * @property {TEmitData} [data] - Optional data associated with the command.
+ * @property {TEmitData<SocketCommands>} [data] - Optional data associated with the command.
  */
-export type TEmit = { command: SocketCommands; data?: TEmitData };
+export type TEmit = {
+  command: SocketCommands;
+  data?: TEmitData<SocketCommands>;
+};
 
 /**
  * Represents an optional quota configuration.
@@ -157,37 +223,126 @@ export type TOptSocket = {
 } & TOptQuota;
 
 /**
- * Represents the callback data structure for socket events.
+ * A type defining the mapping between socket events and their respective listener callbacks.
+ * The keys represent events from the `SocketEvents` enum, and the values define the types of
+ * callbacks associated with those events.
  *
- * @typedef {Object} TOnCallback
- * @property {string} featureId - The unique identifier for the feature.
- * @property {number} value - The value associated with the feature.
- * @property {number} usedSpace - The amount of space used.
- * @property {number} quotaLimit - The limit of the quota.
- * @property {string} customQuotaFeature - The custom quota feature identifier.
- * @property {boolean} enableQuota - Flag indicating if the quota is enabled.
- * @property {number} quota - The quota value.
+ * Each callback can have specific parameters and a return type, which are defined for each event.
  */
-export type TOnCallback = {
-  featureId: string;
-  value: number;
-  usedSpace: number;
-  quotaLimit: number;
-  customQuotaFeature: string;
-  enableQuota: boolean;
-  quota: number;
+export type TListenEventCallbackMap = {
+  [SocketEvents.LogoutSession]: (loginEventId: unknown) => void;
+  [SocketEvents.ModifyFolder]: (data?: TOptSocket) => void;
+  [SocketEvents.ModifyRoom]: (data: TOptSocket) => void;
+  [SocketEvents.UpdateHistory]: (data: {
+    id: number | string;
+    type: string;
+  }) => void;
+  [SocketEvents.RefreshFolder]: (id: number) => void;
+  [SocketEvents.MarkAsNewFolder]: (data: {
+    folderId: number | string;
+    count: number;
+  }) => void;
+  [SocketEvents.MarkAsNewFile]: (data: {
+    fileId: number | string;
+    count: number;
+  }) => void;
+  [SocketEvents.StartEditFile]: (id: number | string) => void;
+  [SocketEvents.StopEditFile]: (id: number | string) => void;
+  [SocketEvents.ChangedQuotaUsedValue]: (data: TOptSocket) => void;
+  [SocketEvents.ChangedQuotaFeatureValue]: (data: TOptSocket) => void;
+  [SocketEvents.ChangedQuotaUserUsedValue]: (data: TOptSocket) => void;
+  [SocketEvents.AddUser]: (data: { id: string; data: TUser }) => void;
+  [SocketEvents.UpdateUser]: (data: { id: string; data: TUser }) => void;
+  [SocketEvents.DeleteUser]: (data: string) => void;
+  [SocketEvents.AddGroup]: (data: { id: string; data: TGroup }) => void;
+  [SocketEvents.UpdateGroup]: (data: { id: string; data: TGroup }) => void;
+  [SocketEvents.AddGuest]: (data: { id: string; data: TUser }) => void;
+  [SocketEvents.UpdateGuest]: (data: { id: string; data: TUser }) => void;
+  [SocketEvents.DeleteGuest]: (data: string) => void;
+  [SocketEvents.DeleteGroup]: (data: string) => void;
+  [SocketEvents.RestoreProgress]: (opt: {
+    progress: number;
+    isCompleted: boolean;
+    error: string;
+  }) => void;
+  [SocketEvents.EncryptionProgress]: (opt: {
+    percentage: number;
+    error: string;
+  }) => void;
+  [SocketEvents.ChangeMyType]: (data: {
+    id: string;
+    data: TUser;
+    admin: string;
+    hasPersonalFolder: boolean;
+  }) => void;
 };
+
+/**
+ * A type representing a default listener for socket events not explicitly defined in `TListenEventCallbackMap`.
+ */
+export type TUnmappedSocketListener = () => void;
+
+/**
+ * A type that resolves the appropriate listener type for a given socket event.
+ *
+ * If the event is mapped in `TListenEventCallbackMap`, it resolves to the corresponding callback type.
+ * Otherwise, it defaults to `TUnmappedSocketListener`.
+ */
+export type TSocketListener<T extends SocketEvents> =
+  T extends keyof TListenEventCallbackMap
+    ? TListenEventCallbackMap[T]
+    : TUnmappedSocketListener;
 
 /**
  * Represents a callback function to be used with socket events.
  *
  * @typedef {Object} TCallback
  * @property {SocketEvents} eventName - The name of the socket event.
- * @property {(value: TOnCallback) => void} callback - The function to be called when the event is triggered.
+ * @property {TSocketListener<SocketEvents>} callback - The function to be called when the event is triggered.
  */
 export type TCallback = {
   eventName: SocketEvents;
-  callback: (value: TOnCallback) => void;
+  callback: TSocketListener<SocketEvents>;
+};
+
+declare global {
+  interface Window {
+    SOCKET_INSTANCE: SocketHelper | undefined;
+  }
+
+  // Extend the globalThis type to include SOCKET_INSTANCE
+  var SOCKET_INSTANCE: SocketHelper | undefined;
+
+  // @ts-ignore
+
+  interface globalThis {
+    SOCKET_INSTANCE: typeof SOCKET_INSTANCE;
+  }
+}
+
+const isEmitDataValid = (
+  command: SocketCommands,
+  data?: TEmitData<SocketCommands>,
+) => {
+  if (
+    command !== SocketCommands.Subscribe &&
+    command !== SocketCommands.Unsubscribe &&
+    command !== SocketCommands.SubscribeInSpaces &&
+    command !== SocketCommands.UnsubscribeInSpaces
+  ) {
+    return true;
+  }
+
+  if (
+    data &&
+    typeof data === "object" &&
+    "roomParts" in data &&
+    data.roomParts?.length
+  ) {
+    return true;
+  }
+
+  return false;
 };
 
 /**
@@ -266,10 +421,22 @@ class SocketHelper {
    * @returns {SocketHelper} The singleton instance of the SocketHelper class.
    */
   static getInstance() {
-    if (this.instance) {
-      return this.instance;
+    // if (this.instance) return this.instance;
+
+    // this.instance = new SocketHelper();
+    // return this.instance;
+    if (typeof globalThis !== "undefined" && globalThis.SOCKET_INSTANCE) {
+      // [WS] Returning existing global socket instance
+      return globalThis.SOCKET_INSTANCE;
     }
-    this.instance = new SocketHelper();
+
+    if (!this.instance) {
+      // [WS] Creating new socket instance
+      this.instance = new SocketHelper();
+      if (typeof globalThis !== "undefined")
+        globalThis.SOCKET_INSTANCE = this.instance;
+    }
+    // [WS] Returning existing socket instance
     return this.instance;
   }
 
@@ -285,11 +452,16 @@ class SocketHelper {
    */
   private tryConnect() {
     try {
-      if (!this.connectionSettings || !this.connectionSettings.url) return;
+      if (
+        !this.connectionSettings ||
+        !this.connectionSettings.url ||
+        (this.client && this.client.connected)
+      )
+        return;
 
       const { url, publicRoomKey } = this.connectionSettings;
 
-      const origin = window.location.origin;
+      const { origin } = window.location;
 
       const config: TConfig = {
         withCredentials: true,
@@ -424,18 +596,13 @@ class SocketHelper {
    * Emits a command with associated data to a specified room or globally.
    * If the socket is not ready, the command is saved in a queue for later emission.
    *
-   * @param {SocketCommands} command - The command to emit.
-   * @param {TEmitData} data - The parameters for the emit function.
+   * @param {T} command - The socket command to be emitted.
+   * @param {TEmitData<T>} [data] - Optional data associated with the command. The type of data is resolved based on the command.
    *
    * @returns {void}
    */
-  public emit = (command: SocketCommands, data?: TEmitData) => {
-    if (
-      (command === SocketCommands.Subscribe ||
-        command === SocketCommands.Unsubscribe) &&
-      !data?.roomParts?.length
-    )
-      return;
+  public emit = <T extends SocketCommands>(command: T, data?: TEmitData<T>) => {
+    if (!isEmitDataValid(command, data)) return;
 
     if (!this.isEnabled || !this.isReady || !this.client) {
       addLog(
@@ -448,18 +615,23 @@ class SocketHelper {
 
     addLog(`[WS] emit.  Command: ${command}, data: ${data}`, "socket");
 
-    const ids =
-      !data || !data.roomParts
-        ? []
-        : typeof data.roomParts === "object"
-          ? data.roomParts
-          : [data.roomParts];
+    const dataHasRoomParts =
+      typeof data === "object" && "roomParts" in data && data.roomParts;
+
+    const ids = !dataHasRoomParts
+      ? []
+      : typeof data.roomParts === "object"
+        ? data.roomParts
+        : [data.roomParts];
 
     ids.forEach((id: string) => {
       if (command === "subscribe") {
         if (this.subscribeEmits.has(id)) return;
 
-        this.subscribeEmits.set(id, data?.individual);
+        this.subscribeEmits.set(
+          id,
+          typeof data === "object" && data?.individual,
+        );
       }
 
       if (command === "unsubscribe") {
@@ -478,9 +650,9 @@ class SocketHelper {
    * @param eventName - The name of the event to listen for.
    * @param callback - The callback function to be executed when the event is triggered.
    */
-  public on = (
-    eventName: SocketEvents,
-    callback: (value: TOnCallback) => void,
+  public on = <T extends SocketEvents>(
+    eventName: T,
+    callback: TSocketListener<T>,
   ) => {
     if (!this.isEnabled || !this.isReady || !this.client) {
       addLog(
@@ -493,7 +665,7 @@ class SocketHelper {
 
     addLog(`[WS] on event: ${eventName}`, "socket");
 
-    this.client.on(eventName, callback);
+    this.client.on(eventName satisfies string, callback);
   };
 
   /**
@@ -504,9 +676,9 @@ class SocketHelper {
    * @param eventName - The name of the event to listen for.
    * @param callback - The callback function to be executed when the event is triggered.
    */
-  public off = (
-    eventName: SocketEvents,
-    callback: (value: TOnCallback) => void,
+  public off = <T extends SocketEvents>(
+    eventName: T,
+    callback: TSocketListener<T>,
   ) => {
     if (!this.isEnabled || !this.isReady || !this.client) {
       addLog(
@@ -523,7 +695,7 @@ class SocketHelper {
 
     addLog(`[WS] off event: ${eventName}`, "socket");
 
-    this.client.off(eventName, callback);
+    this.client.off(eventName satisfies string, callback);
   };
 }
 

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,6 +28,19 @@ import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
 
+import {
+  clearEdgeScrollingTimer,
+  getFormFillingTipsStorageName,
+  isMobile,
+  isTablet,
+  onEdgeScrolling,
+} from "@docspace/shared/utils";
+import { isElementInViewport } from "@docspace/shared/utils/common";
+import {
+  DeviceType,
+  VDRIndexingAction,
+  RoomsType,
+} from "@docspace/shared/enums";
 import FilesRowContainer from "./RowsView/FilesRowContainer";
 import FilesTileContainer from "./TilesView/FilesTileContainer";
 import RoomNoAccessContainer from "../../../../components/EmptyContainer/RoomNoAccessContainer";
@@ -35,15 +48,6 @@ import EmptyContainer from "../../../../components/EmptyContainer";
 import withLoader from "../../../../HOCs/withLoader";
 import TableView from "./TableView/TableContainer";
 import withHotkeys from "../../../../HOCs/withHotkeys";
-import {
-  clearEdgeScrollingTimer,
-  isMobile,
-  isTablet,
-  onEdgeScrolling,
-} from "@docspace/shared/utils";
-import { isElementInViewport } from "@docspace/shared/utils/common";
-
-import { DeviceType, VDRIndexingAction } from "@docspace/shared/enums";
 
 const separatorStyles = `width: 100vw;  position: absolute; height: 3px; z-index: 1;`;
 const sectionClass = "section-wrapper-content";
@@ -89,11 +93,31 @@ const SectionBodyContent = (props) => {
     isIndexEditingMode,
     changeIndex,
     isErrorRoomNotAvailable,
+    getSelectedFolder,
+    welcomeFormFillingTipsVisible,
+    formFillingTipsVisible,
+    roomType,
+    userId,
+    onEnableFormFillingGuid,
   } = props;
 
   useEffect(() => {
     return () => window?.getSelection()?.removeAllRanges();
   }, []);
+
+  useEffect(() => {
+    const storageName = getFormFillingTipsStorageName(userId);
+
+    const closedFormFillingTips = localStorage.getItem(storageName);
+
+    if (isMobile()) {
+      return window.localStorage.setItem(storageName, "true");
+    }
+
+    if (roomType === RoomsType.FormRoom && !closedFormFillingTips && userId) {
+      onEnableFormFillingGuid(t, roomType);
+    }
+  }, [roomType, onEnableFormFillingGuid]);
 
   useEffect(() => {
     const customScrollElm = document.querySelector(
@@ -106,38 +130,6 @@ const SectionBodyContent = (props) => {
   }, [currentDeviceType]);
 
   useEffect(() => {
-    window.addEventListener("beforeunload", onBeforeunload);
-    window.addEventListener("mousedown", onMouseDown);
-    startDrag && window.addEventListener("mouseup", onMouseUp);
-    startDrag && document.addEventListener("mousemove", onMouseMove);
-
-    document.addEventListener("dragover", onDragOver);
-    document.addEventListener("dragleave", onDragLeaveDoc);
-    document.addEventListener("drop", onDropEvent);
-
-    return () => {
-      window.removeEventListener("beforeunload", onBeforeunload);
-      window.removeEventListener("mousedown", onMouseDown);
-      window.removeEventListener("mouseup", onMouseUp);
-      document.removeEventListener("mousemove", onMouseMove);
-
-      document.removeEventListener("dragover", onDragOver);
-      document.removeEventListener("dragleave", onDragLeaveDoc);
-      document.removeEventListener("drop", onDropEvent);
-    };
-  }, [
-    onMouseUp,
-    onMouseMove,
-    onClickBack,
-    startDrag,
-    folderId,
-    viewAs,
-    uploaded,
-    currentDeviceType,
-    filesList,
-  ]);
-
-  useEffect(() => {
     if (scrollToItem) {
       const { type, id } = scrollToItem;
 
@@ -145,7 +137,7 @@ const SectionBodyContent = (props) => {
 
       if (!targetElement) return;
 
-      let isInViewport = isElementInViewport(targetElement);
+      const isInViewport = isElementInViewport(targetElement);
 
       if (!isInViewport || viewAs === "table") {
         const bodyScroll =
@@ -241,16 +233,19 @@ const SectionBodyContent = (props) => {
       indexSeparatorNode.setAttribute("style", separatorStyles);
       indexSeparatorNode.style.top = styles.top;
     }
-
     if (currentDroppable !== droppable) {
       if (currentDroppable) {
         if (viewAs === "table") {
           const value = currentDroppable.getAttribute("value");
           const classElements = document.getElementsByClassName(value);
 
-          for (let cl of classElements) {
-            cl.classList.remove("droppable-hover");
-          }
+          // add check for column with width = 0, because without it dark theme d`n`d have bug color
+          // 30 - it`s column padding
+          Array.from(classElements).forEach((cl) => {
+            if (cl.clientWidth - 30) {
+              cl.classList.add("droppable-hover");
+            }
+          });
           if (isIndexEditingMode) {
             droppableSeparator.remove();
           }
@@ -267,11 +262,11 @@ const SectionBodyContent = (props) => {
 
           // add check for column with width = 0, because without it dark theme d`n`d have bug color
           // 30 - it`s column padding
-          for (let cl of classElements) {
+          Array.from(classElements).forEach((cl) => {
             if (cl.clientWidth - 30) {
               cl.classList.add("droppable-hover");
             }
-          }
+          });
           if (isIndexEditingMode) {
             parent.insertBefore(indexSeparatorNode, tableItem);
           }
@@ -290,13 +285,18 @@ const SectionBodyContent = (props) => {
       if (wrappedClass === sectionClass) {
         indexSeparatorNode.setAttribute(
           "style",
-          separatorStyles + "bottom: 0px;",
+          `${separatorStyles}bottom: 0px;`,
         );
         return parent.append(indexSeparatorNode);
       }
 
       parent.insertBefore(indexSeparatorNode, tableItem);
     }
+  };
+
+  const onMoveTo = (destFolderId, title, destFolderInfo) => {
+    const id = Number.isNaN(+destFolderId) ? destFolderId : +destFolderId;
+    moveDragItems(id, title, destFolderInfo);
   };
 
   const onMouseUp = (e) => {
@@ -329,14 +329,22 @@ const SectionBodyContent = (props) => {
       return;
     }
 
-    const folderId = value
+    const selectedFolderId = value
       ? value.split("_").slice(1, -3).join("_")
       : treeValue;
 
-    if (!isIndexEditingMode) return onMoveTo(folderId, title);
+    const selectedFolder = getSelectedFolder();
+    const destFolderInfo = selectedFolder.folders.find(
+      (folder) => folder.id == selectedFolderId,
+    );
+
+    if (!isIndexEditingMode)
+      return onMoveTo(selectedFolderId, title, destFolderInfo);
     if (filesList.length === 1) return;
 
-    const replaceableItemId = isNaN(+folderId) ? folderId : +folderId;
+    const replaceableItemId = Number.isNaN(+selectedFolderId)
+      ? selectedFolderId
+      : +selectedFolderId;
 
     const replaceableItemType = value && value.split("_").slice(0, 1).join("_");
     const isSectionTarget = elem && elem.className === sectionClass;
@@ -359,15 +367,6 @@ const SectionBodyContent = (props) => {
     if (!replaceable) return;
 
     changeIndex(VDRIndexingAction.MoveIndex, replaceable, t, isSectionTarget);
-    return;
-  };
-
-  const onMoveTo = (destFolderId, title) => {
-    const id = isNaN(+destFolderId) ? destFolderId : +destFolderId;
-    moveDragItems(id, title, {
-      copy: t("Common:CopyOperation"),
-      move: t("Common:MoveToOperation"),
-    });
   };
 
   const onDropEvent = () => {
@@ -391,11 +390,48 @@ const SectionBodyContent = (props) => {
     }
   };
 
+  useEffect(() => {
+    window.addEventListener("beforeunload", onBeforeunload);
+    window.addEventListener("mousedown", onMouseDown);
+    startDrag && window.addEventListener("mouseup", onMouseUp);
+    startDrag && document.addEventListener("mousemove", onMouseMove);
+
+    document.addEventListener("dragover", onDragOver);
+    document.addEventListener("dragleave", onDragLeaveDoc);
+    document.addEventListener("drop", onDropEvent);
+
+    return () => {
+      window.removeEventListener("beforeunload", onBeforeunload);
+      window.removeEventListener("mousedown", onMouseDown);
+      window.removeEventListener("mouseup", onMouseUp);
+      document.removeEventListener("mousemove", onMouseMove);
+
+      document.removeEventListener("dragover", onDragOver);
+      document.removeEventListener("dragleave", onDragLeaveDoc);
+      document.removeEventListener("drop", onDropEvent);
+    };
+  }, [
+    onMouseUp,
+    onMouseMove,
+    onClickBack,
+    startDrag,
+    folderId,
+    viewAs,
+    uploaded,
+    currentDeviceType,
+    filesList,
+  ]);
+
   if (isErrorRoomNotAvailable) return <RoomNoAccessContainer />;
 
-  if (isEmptyFilesList && movingInProgress) return <></>;
+  if (isEmptyFilesList && movingInProgress) return null;
 
-  if (isEmptyFilesList) return <EmptyContainer isEmptyPage={isEmptyPage} />;
+  if (
+    isEmptyFilesList &&
+    !welcomeFormFillingTipsVisible &&
+    !formFillingTipsVisible
+  )
+    return <EmptyContainer isEmptyPage={isEmptyPage} />;
 
   const FileViewComponent = fileViews[viewAs] ?? FilesRowContainer;
 
@@ -411,6 +447,9 @@ export default inject(
     filesActionsStore,
     uploadDataStore,
     indexingStore,
+    dialogsStore,
+    userStore,
+    contextOptionsStore,
   }) => {
     const {
       isEmptyFilesList,
@@ -434,6 +473,11 @@ export default inject(
       isErrorRoomNotAvailable,
     } = filesStore;
 
+    const { welcomeFormFillingTipsVisible, formFillingTipsVisible } =
+      dialogsStore;
+
+    const { onEnableFormFillingGuid } = contextOptionsStore;
+
     return {
       dragging,
       startDrag,
@@ -442,6 +486,7 @@ export default inject(
       isEmptyFilesList,
       setDragging,
       folderId: selectedFolderStore.id,
+      roomType: selectedFolderStore.roomType,
       setTooltipPosition,
       isRecycleBinFolder: treeFoldersStore.isRecycleBinFolder,
       moveDragItems: filesActionsStore.moveDragItems,
@@ -463,10 +508,15 @@ export default inject(
       isEmptyPage,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
       isErrorRoomNotAvailable,
+      getSelectedFolder: selectedFolderStore.getSelectedFolder,
+      welcomeFormFillingTipsVisible,
+      formFillingTipsVisible,
+      userId: userStore?.user?.id,
+      onEnableFormFillingGuid,
     };
   },
 )(
-  withTranslation(["Files", "Common", "Translations"])(
+  withTranslation(["Files", "Common", "Translations", "FormFillingTipsDialog"])(
     withHotkeys(withLoader(observer(SectionBodyContent))()),
   ),
 );

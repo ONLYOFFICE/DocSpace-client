@@ -1,0 +1,15 @@
+{
+  "DescriptionUploading": "Izveidojiet PDF veidlapas {{productName}}, piemēram, savā {{sectionName}}, un augšupielādējiet gatavās telpā. Izmantojiet iebūvēto veidņu bibliotēku un izvēlieties no daudzām gatavām PDF veidnēm.",
+  "HeaderComplete": "Apkopoto atbilžu ērta analīze",
+  "HeaderSharing": "Ātrā kopīgošana",
+  "HeaderStarting": "Veidlapu aizpildīšanas procesa sākšana",
+  "HeaderSubmitting": "Atbilžu iesniegšana",
+  "HeaderUploading": "Viegla veidlapu augšupielāde",
+  "TitleComplete": "Pārskatiet aizpildītās veidlapas un analizējiet automātiski apkopotos datus izklājlapā. Viss - vienā telpā.",
+  "TitleSharing": "Uzaiciniet citus {{productName}} dalībniekus telpā, lai aizpildītu augšupielādētās PDF veidlapas. Nokopējiet publiskās piekļuves saiti, lai kopīgotu telpu ar ārējiem lietotājiem.",
+  "TitleStarting": "Kad veidlapa tiek atvērta aizpildīšanai, katram respondentam automātiski tiek izveidota individuāla kopija, kas tiek saglabāta mapē \"Procesā\". Tas nozīmē, ka veidlapas aizpildīšana ir sākta, bet vēl nav pabeigta.",
+  "TitleSubmitting": "Kad atvērtajā veidlapas kopijā tiek noklikšķināta poga \"Pabeigt un nosūtīt\", tā tiek pārvietota uz mapi \"Pabeigtas\".",
+  "WelcomeDescription": "Šeit varat organizēt vienkāršu PDF veidlapu aizpildīšanu, viegli apkopot un analizēt atbildes. Vai esat gatavs sākt?",
+  "WelcomeFillingForm": "Laipni lūgti Veidlapu aizpildīšanas telpā!",
+  "WelcomeStartTutorial": "Īsa ievadapmācība"
+}

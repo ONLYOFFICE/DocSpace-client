@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,26 +25,34 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { PropsWithChildren } from "react";
-
-import type { DeviceType } from "@docspace/shared/enums";
-import type { TUser } from "@docspace/shared/api/people/types";
-import type FirebaseHelper from "@docspace/shared/utils/firebase";
-import type { TColorScheme, TTheme } from "@docspace/shared/themes";
 import { i18n } from "i18next";
+import type { DeviceType } from "../../enums";
+import type { TUser } from "../../api/people/types";
+import type FirebaseHelper from "../../utils/firebase";
+import type { TColorScheme, TTheme } from "../../themes";
 
-export interface ErrorBoundaryProps extends PropsWithChildren {
+export type ErrorBoundaryProps = PropsWithChildren & {
+  /** Callback function to be called when an error occurs */
   onError?: VoidFunction;
+  /** Current user information */
   user: TUser;
+  /** Application version string */
   version: string;
+  /** Firebase helper instance for error reporting and analytics */
   firebaseHelper: FirebaseHelper;
+  /** Current device type (desktop, mobile, etc.) */
   currentDeviceType: DeviceType;
+  /** Current color scheme (light/dark) */
   currentColorScheme?: TColorScheme;
-
+  /** Flag indicating if the app is running in Next.js environment */
   isNextJS?: boolean;
+  /** Current theme settings */
   theme?: TTheme;
+  /** i18next instance for translations */
   i18n?: i18n;
-}
+};
 
-export interface ErrorBoundaryState {
+export type ErrorBoundaryState = {
+  /** Current error object if an error occurred, null otherwise */
   error: Error | null;
-}
+};

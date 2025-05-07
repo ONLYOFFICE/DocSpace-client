@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,20 +27,23 @@
 import React from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
+import Error404 from "@docspace/shared/components/errors/Error404";
+import { PreparationPortal } from "@docspace/shared/pages/PreparationPortal";
+
+import { WhiteLabel } from "client/WhiteLabelPage";
+import { BrandName } from "client/BrandNamePage";
+import { CompanyInfoSettings } from "client/CompanyInfoPage";
+import { AdditionalResources } from "client/AdditionalResPage";
+
 import App from "./App";
 
 import Spaces from "./categories/spaces";
 import Settings from "./categories/settings";
-import { WhiteLabel } from "client/WhiteLabelPage";
-import { CompanyInfoSettings } from "client/CompanyInfoPage";
-import { AdditionalResources } from "client/AdditionalResPage";
 import Payments from "./categories/payments";
 import Bonus from "./categories/bonus";
+
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import PrivateRouteWrapper from "./components/PrivateRouterWrapper";
-
-import Error404 from "@docspace/shared/components/errors/Error404";
-import { PreparationPortal } from "@docspace/shared/pages/PreparationPortal";
 
 const routes = [
   {
@@ -68,6 +71,10 @@ const routes = [
         element: <Settings />,
       },
       {
+        path: "/management/settings/branding/brand-name",
+        element: <BrandName />,
+      },
+      {
         path: "/management/settings/branding/white-label",
         element: <WhiteLabel />,
       },
@@ -92,6 +99,10 @@ const routes = [
         element: <Settings />,
       },
       {
+        path: "/management/settings/encrypt-data",
+        element: <Settings />,
+      },
+      {
         path: "/management/payments",
         element: <Payments />,
       },
@@ -100,7 +111,7 @@ const routes = [
         element: <Bonus />,
       },
       {
-        path: "preparation-portal",
+        path: "/management/preparation-portal",
         element: <PreparationPortal />,
       },
     ],

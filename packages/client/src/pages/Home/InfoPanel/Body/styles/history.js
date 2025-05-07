@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 const strikethroughStyles = css`
   color: ${(props) => props.theme.infoPanel.history.renamedItemColor};
@@ -38,7 +38,7 @@ const StyledHistoryList = styled.div`
   flex-direction: column;
 `;
 
-const StyledHistorySubtitle = styled.div`
+const StyledHistorySubtitle = styled.div.attrs(injectDefaultTheme)`
   position: sticky;
   background: ${(props) => props.theme.infoPanel.backgroundColor};
   top: 80px;
@@ -51,7 +51,7 @@ const StyledHistorySubtitle = styled.div`
   color: ${(props) => props.theme.infoPanel.history.subtitleColor};
 `;
 
-const StyledHistoryBlock = styled.div`
+const StyledHistoryBlock = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
   display: flex;
   gap: 8px;
@@ -123,7 +123,7 @@ const StyledHistoryDisplaynameBlock = styled.div`
   }
 `;
 
-const StyledHistoryBlockMessage = styled.span`
+const StyledHistoryBlockMessage = styled.span.attrs(injectDefaultTheme)`
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
@@ -202,17 +202,16 @@ const StyledHistoryBlockTagList = styled.div`
   margin-top: 8px;
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
 `;
 
-const StyledHistoryBlockFilesList = styled.div`
+const StyledHistoryBlockFilesList = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   flex-direction: column;
   padding: 8px 0;
   border-radius: 3px;
 `;
 
-const StyledHistoryBlockFile = styled.div`
+const StyledHistoryBlockFile = styled.div.attrs(injectDefaultTheme)`
   padding: 4px 0px;
   display: flex;
   gap: 8px;
@@ -286,6 +285,13 @@ const StyledHistoryBlockFile = styled.div`
     }
   }
 
+  .old-item-title {
+    .name,
+    .exst {
+      ${strikethroughStyles}
+    }
+  }
+
   .location-btn {
     margin-inline-start: 8px;
     min-width: 16px;
@@ -347,12 +353,6 @@ const StyledHistoryBlockExpandLink = styled.div`
     text-underline-offset: 2px;
   }
 `;
-
-StyledHistorySubtitle.defaultProps = { theme: Base };
-StyledHistoryBlock.defaultProps = { theme: Base };
-StyledHistoryBlockMessage.defaultProps = { theme: Base };
-StyledHistoryBlockFilesList.defaultProps = { theme: Base };
-StyledHistoryBlockFile.defaultProps = { theme: Base };
 
 export {
   StyledHistoryList,

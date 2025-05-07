@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,26 +33,30 @@ import { Button } from "@docspace/shared/components/button";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Text } from "@docspace/shared/components/text";
 import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
-import Preview from "./Appearance/preview";
-import { saveToSessionStorage, getFromSessionStorage } from "../../utils";
-import ColorSchemeDialog from "./sub-components/colorSchemeDialog";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { DropDown } from "@docspace/shared/components/drop-down";
-import api from "@docspace/shared/api";
-import Loader from "./sub-components/loaderAppearance";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Link } from "@docspace/shared/components/link";
 
-import {
-  StyledComponent,
-  StyledTheme,
-  StyledBodyContent,
-} from "./Appearance/StyledApperance.js";
+import api from "@docspace/shared/api";
+
 import { ReactSVG } from "react-svg";
-import ModalDialogDelete from "./sub-components/modalDialogDelete";
 import { isMobile, getTextColor } from "@docspace/shared/utils";
 import { DeviceType } from "@docspace/shared/enums";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { ColorPicker } from "@docspace/shared/components/color-picker";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+
+import ModalDialogDelete from "./sub-components/modalDialogDelete";
+import {
+  StyledComponent,
+  StyledTheme,
+  StyledBodyContent,
+} from "./Appearance/StyledApperance";
+import Loader from "./sub-components/loaderAppearance";
+import ColorSchemeDialog from "./sub-components/colorSchemeDialog";
+import Preview from "./Appearance/preview";
 
 const Appearance = (props) => {
   const {
@@ -66,6 +70,8 @@ const Appearance = (props) => {
     t,
     currentDeviceType,
     resetIsInit,
+
+    appearanceBlockHelpUrl,
   } = props;
 
   const defaultAppliedColorAccent = currentColorScheme.main?.accent;
@@ -104,8 +110,6 @@ const Appearance = (props) => {
     useState(false);
   const [changeCurrentColorButtons, setChangeCurrentColorButtons] =
     useState(false);
-
-  const [isSmallWindow, setIsSmallWindow] = useState(false);
 
   const [showSaveButtonDialog, setShowSaveButtonDialog] = useState(false);
 
@@ -169,20 +173,20 @@ const Appearance = (props) => {
     [previewAccent, selectThemeId, colorCheckImg, tReady],
   );
 
-  const getSettings = () => {
-    const selectColorId = getFromSessionStorage("selectColorId");
-    const defaultColorId = selectedThemeId;
-    saveToSessionStorage("defaultColorId", defaultColorId);
-    if (selectColorId) {
-      setSelectThemeId(selectColorId);
-    } else {
-      setSelectThemeId(defaultColorId);
-    }
-  };
+  // const getSettings = () => {
+  //   const selectColorId = getFromSessionStorage("selectColorId");
+  //   const defaultColorId = selectedThemeId;
+  //   saveToSessionStorage("defaultColorId", defaultColorId);
+  //   if (selectColorId) {
+  //     setSelectThemeId(selectColorId);
+  //   } else {
+  //     setSelectThemeId(defaultColorId);
+  //   }
+  // };
 
   useEffect(() => {
     // getSettings();
-    setDocumentTitle(t("Common:Appearance"));
+    setDocumentTitle(t("Settings:Appearance"));
   }, []);
 
   useEffect(() => {
@@ -190,11 +194,7 @@ const Appearance = (props) => {
   }, [selectThemeId]);
 
   useEffect(() => {
-    onCheckView();
-    window.addEventListener("resize", onCheckView);
-
     return () => {
-      window.removeEventListener("resize", onCheckView);
       !isMobileView && resetIsInit();
     };
   }, []);
@@ -209,6 +209,15 @@ const Appearance = (props) => {
     defaultAppliedColorButtons,
     defaultAppliedColorAccent,
   ]);
+
+  const onColorCheck = useCallback(
+    (themes) => {
+      const img = themes.find((item) => item.id == selectThemeId)?.text?.accent;
+
+      setColorCheckImg(img);
+    },
+    [selectThemeId],
+  );
 
   useEffect(() => {
     onColorCheck(appearanceTheme);
@@ -247,7 +256,7 @@ const Appearance = (props) => {
   useEffect(() => {
     onColorCheck(appearanceTheme);
 
-    if (appearanceTheme.find((theme) => theme.id == selectThemeId)?.name) {
+    if (appearanceTheme.find((aTheme) => aTheme.id == selectThemeId)?.name) {
       setIsDisabledEditButton(true);
       setIsDisabledDeleteButton(true);
       return;
@@ -296,42 +305,24 @@ const Appearance = (props) => {
     previewAccent,
   ]);
 
-  const onColorCheck = useCallback(
-    (themes) => {
-      const colorCheckImg = themes.find((theme) => theme.id == selectThemeId)
-        ?.text?.accent;
-
-      setColorCheckImg(colorCheckImg);
-    },
-    [selectThemeId],
-  );
-
   const onColorCheckImgHover = useCallback(
     (e) => {
       const id = e.target.id;
       if (!id) return;
 
-      const colorCheckImg = appearanceTheme.find((theme) => theme.id == id).text
+      const img = appearanceTheme.find((aTheme) => aTheme.id == id).text
         ?.accent;
 
-      setColorCheckImgHover(colorCheckImg);
+      setColorCheckImgHover(img);
     },
     [appearanceTheme],
   );
 
-  const onCheckView = () => {
-    if (isMobile()) {
-      setIsSmallWindow(true);
-    } else {
-      setIsSmallWindow(false);
-    }
-  };
-
   const onColorSelection = useCallback(
     (e) => {
-      const theme = e.currentTarget;
-      const id = +theme.id;
-      const accent = appearanceTheme.find((theme) => theme.id == id).main
+      const currentTheme = e.currentTarget;
+      const id = +currentTheme.id;
+      const accent = appearanceTheme.find((aTheme) => aTheme.id == id).main
         ?.accent;
 
       setPreviewAccent(accent);
@@ -369,6 +360,10 @@ const Appearance = (props) => {
       setOpenHexColorPickerButtons(true);
       setOpenHexColorPickerAccent(false);
     }
+  };
+
+  const onCloseDialogDelete = () => {
+    setVisibleDialog(false);
   };
 
   const onClickDeleteModal = useCallback(async () => {
@@ -434,7 +429,7 @@ const Appearance = (props) => {
   };
 
   const onClickEdit = () => {
-    appearanceTheme.map((item) => {
+    appearanceTheme.forEach((item) => {
       if (item.id === selectThemeId) {
         setCurrentColorAccent(item.main?.accent.toUpperCase());
         setCurrentColorButtons(item.main.buttons.toUpperCase());
@@ -503,9 +498,9 @@ const Appearance = (props) => {
   );
 
   const onSaveNewThemes = useCallback(
-    async (theme) => {
+    async (newTheme) => {
       try {
-        await api.settings.sendAppearanceTheme({ theme: theme });
+        await api.settings.sendAppearanceTheme({ theme: newTheme });
         await getAppearanceTheme();
 
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
@@ -537,7 +532,7 @@ const Appearance = (props) => {
 
     if (isAddThemeDialog) {
       // Saving a new custom theme
-      const theme = {
+      const newTheme = {
         main: {
           accent: currentColorAccent,
           buttons: currentColorButtons,
@@ -548,7 +543,7 @@ const Appearance = (props) => {
         },
       };
 
-      onSaveNewThemes(theme);
+      onSaveNewThemes(newTheme);
 
       setCurrentColorAccent(null);
       setCurrentColorButtons(null);
@@ -577,10 +572,6 @@ const Appearance = (props) => {
     setCurrentColorButtons(appliedColorButtons);
 
     onCloseColorSchemeDialog();
-  };
-
-  const onCloseDialogDelete = () => {
-    setVisibleDialog(false);
   };
 
   const onOpenDialogDelete = () => {
@@ -704,22 +695,22 @@ const Appearance = (props) => {
           <div className="theme-name">{t("Common:Standard")}</div>
 
           <div className="theme-container">
-            {appearanceTheme.map((item, index) => {
+            {appearanceTheme.map((item) => {
               if (!item.name) return;
               return (
                 <StyledTheme
-                  key={index}
+                  key={item.name}
                   id={item.id}
                   colorCheckImgHover={colorCheckImgHover}
                   style={{ background: item.main?.accent }}
                   onClick={onColorSelection}
                   onMouseOver={onColorCheckImgHover}
                 >
-                  {selectThemeId === item.id && (
+                  {selectThemeId === item.id ? (
                     <ReactSVG className="check-img" src={CheckWhiteSvgUrl} />
-                  )}
+                  ) : null}
 
-                  {selectThemeId !== item.id && checkImgHover}
+                  {selectThemeId !== item.id ? checkImgHover : null}
                 </StyledTheme>
               );
             })}
@@ -731,21 +722,21 @@ const Appearance = (props) => {
 
           <div className="theme-container">
             <div className="custom-themes">
-              {appearanceTheme.map((item, index) => {
+              {appearanceTheme.map((item) => {
                 if (item.name) return;
                 return (
                   <StyledTheme
-                    key={index}
+                    key={item.id}
                     id={item.id}
                     style={{ background: item.main?.accent }}
                     colorCheckImgHover={colorCheckImgHover}
                     onClick={onColorSelection}
                     onMouseOver={onColorCheckImgHover}
                   >
-                    {selectThemeId === item.id && (
+                    {selectThemeId === item.id ? (
                       <ReactSVG className="check-img" src={CheckWhiteSvgUrl} />
-                    )}
-                    {selectThemeId !== item.id && checkImgHover}
+                    ) : null}
+                    {selectThemeId !== item.id ? checkImgHover : null}
                   </StyledTheme>
                 );
               })}
@@ -757,7 +748,7 @@ const Appearance = (props) => {
               className="theme-add"
               onClick={onAddTheme}
             />
-            {!abilityAddTheme && (
+            {!abilityAddTheme ? (
               <Tooltip
                 id="theme-add"
                 offsetBottom={0}
@@ -766,7 +757,7 @@ const Appearance = (props) => {
                 getContent={textTooltip}
                 maxWidth="300px"
               />
-            )}
+            ) : null}
           </div>
         </div>
 
@@ -785,7 +776,27 @@ const Appearance = (props) => {
           showSaveButtonDialog={showSaveButtonDialog}
           onSaveColorSchemeDialog={onSaveColorSchemeDialog}
         />
-        <div className="header preview-header">{t("Common:Preview")}</div>
+        <div className="header preview-header">
+          {t("Common:Preview")}
+          <HelpButton
+            place="right"
+            tooltipContent={
+              <div>
+                <Text fontSize="12px" fontWeight={400}>
+                  {t("Settings:PreviewTooltipDescription")}
+                </Text>
+                <Link
+                  isHovered
+                  type="page"
+                  href={appearanceBlockHelpUrl}
+                  target="_blank"
+                >
+                  {t("Common:LearnMore")}
+                </Link>
+              </div>
+            }
+          />
+        </div>
         <Tabs items={arrayItems} type={TabsTypes.Secondary} />
 
         <div className="buttons-container">
@@ -805,7 +816,7 @@ const Appearance = (props) => {
             size={buttonSize}
             isDisabled={isDisabledEditButton}
           />
-          {isShowDeleteButton && (
+          {isShowDeleteButton ? (
             <Button
               className="delete-theme button"
               label={t("Settings:DeleteTheme")}
@@ -813,7 +824,7 @@ const Appearance = (props) => {
               size={buttonSize}
               isDisabled={isDisabledDeleteButton}
             />
-          )}
+          ) : null}
         </div>
       </StyledComponent>
     </>
@@ -830,6 +841,8 @@ export default inject(({ settingsStore, common }) => {
 
     theme,
     currentDeviceType,
+
+    appearanceBlockHelpUrl,
   } = settingsStore;
 
   const { resetIsInit } = common;
@@ -844,5 +857,7 @@ export default inject(({ settingsStore, common }) => {
     currentDeviceType,
     theme,
     resetIsInit,
+
+    appearanceBlockHelpUrl,
   };
 })(withTranslation(["Profile", "Common", "Settings"])(observer(Appearance)));

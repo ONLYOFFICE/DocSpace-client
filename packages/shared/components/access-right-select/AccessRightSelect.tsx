@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -64,7 +64,7 @@ export const AccessRightSelectPure = ({
       if (option) {
         if (isSelectionDisabled) {
           let isError =
-            option.access && option.access !== selectedOption.access;
+            option.access && option.access !== selectedOption?.access;
 
           if (availableAccess && option.access) {
             isError = availableAccess.every((item) => item !== option.access);
@@ -80,11 +80,19 @@ export const AccessRightSelectPure = ({
         onSelect?.(option);
       }
     },
-    [onSelect],
+    [
+      availableAccess,
+      isSelectionDisabled,
+      onSelect,
+      selectedOption?.access,
+      selectionErrorText,
+    ],
   );
 
   const formatToAccessRightItem = (data: TOption[]) => {
     const items = data.map((item: TOption) => {
+      const isSelected = currentItem?.key === item?.key;
+
       return "isSeparator" in item && item.isSeparator ? (
         <DropDownItem key={item.key} isSeparator />
       ) : (
@@ -92,19 +100,21 @@ export const AccessRightSelectPure = ({
           className="access-right-item"
           key={item.key}
           data-key={item.key}
+          isSelected={isSelected}
+          isActive={isSelected}
           onClick={() => onSelectCurrentItem(item)}
         >
           <StyledItem>
-            {item.icon && (
+            {item.icon && typeof item.icon === "string" ? (
               <StyledItemIcon
                 src={item.icon}
                 isShortenIcon={type === "onlyIcon"}
               />
-            )}
+            ) : null}
             <StyledItemContent>
               <StyledItemTitle>
                 {item.label}
-                {item.quota && (
+                {item.quota ? (
                   <Badge
                     label={item.quota}
                     backgroundColor={item.color}
@@ -112,7 +122,7 @@ export const AccessRightSelectPure = ({
                     isPaidBadge
                     noHover
                   />
-                )}
+                ) : null}
               </StyledItemTitle>
               <StyledItemDescription>{item.description}</StyledItemDescription>
             </StyledItemContent>

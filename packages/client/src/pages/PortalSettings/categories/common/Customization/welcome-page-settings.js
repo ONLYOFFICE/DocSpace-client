@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,24 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import CombinedShapeSvgUrl from "PUBLIC_DIR/images/combined.shape.svg?url";
 import React from "react";
 import { withTranslation } from "react-i18next";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { toastr } from "@docspace/shared/components/toast";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import { isMobileDevice } from "@docspace/shared/utils";
-import checkScrollSettingsBlock from "../utils";
-import { StyledSettingsComponent } from "./StyledSettings";
-import LoaderCustomization from "../sub-components/loaderCustomization";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+import checkScrollSettingsBlock from "../utils";
+import { StyledSettingsComponent } from "./StyledSettings";
+import LoaderCustomization from "../sub-components/loaderCustomization";
 
 let greetingTitleFromSessionStorage = "";
 let greetingTitleDefaultFromSessionStorage = "";
@@ -90,13 +90,59 @@ const WelcomePageSettingsComponent = (props) => {
     greetingSettings: "",
   });
 
+  const settingIsEqualInitialValue = (stateName, value) => {
+    const defaultValue = JSON.stringify(state[`${stateName}Default`]);
+    const currentValue = JSON.stringify(value);
+    return defaultValue === currentValue;
+  };
+
+  const checkChanges = () => {
+    let hasChanged = false;
+
+    settingNames.forEach((settingName) => {
+      const valueFromSessionStorage = getFromSessionStorage(settingName);
+      if (
+        valueFromSessionStorage !== "none" &&
+        valueFromSessionStorage !== null &&
+        !settingIsEqualInitialValue(settingName, valueFromSessionStorage)
+      )
+        hasChanged = true;
+    });
+
+    if (hasChanged !== state.hasChanged) {
+      setState((val) => ({
+        ...val,
+        hasChanged,
+        showReminder: hasChanged,
+      }));
+    }
+  };
+
+  const checkInnerWidth = () => {
+    if (!isMobileDevice()) {
+      setState((val) => ({ ...val, isCustomizationView: true }));
+
+      const currentUrl = window.location.href.replace(
+        window.location.origin,
+        "",
+      );
+
+      const newUrl = "/portal-settings/customization/general";
+
+      if (newUrl === currentUrl) return;
+
+      navigate(newUrl);
+    } else {
+      setState((val) => ({ ...val, isCustomizationView: false }));
+    }
+  };
+
   React.useEffect(() => {
     greetingTitleFromSessionStorage = getFromSessionStorage("greetingTitle");
 
     greetingTitleDefaultFromSessionStorage = getFromSessionStorage(
       "greetingTitleDefault",
     );
-    getGreetingSettingsIsDefault();
 
     setDocumentTitle(t("CustomTitlesWelcome"));
 
@@ -113,7 +159,10 @@ const WelcomePageSettingsComponent = (props) => {
         : greetingTitleDefaultFromSessionStorage;
 
     const page = isMobileView ? "language-and-time-zone" : "general";
-    if (!isLoaded) initSettings(page).then(() => setIsLoaded(true));
+    if (!isLoaded) {
+      initSettings(page).then(() => setIsLoaded(true));
+      getGreetingSettingsIsDefault();
+    }
 
     checkInnerWidth();
     window.addEventListener("resize", checkInnerWidth);
@@ -135,7 +184,16 @@ const WelcomePageSettingsComponent = (props) => {
     return () => {
       window.removeEventListener("resize", checkInnerWidth);
     };
-  }, []);
+  }, [
+    isLoaded,
+    isMobileView,
+    t,
+    tReady,
+    greetingSettings,
+    navigate,
+    setIsLoaded,
+    setIsLoadedWelcomePageSettings,
+  ]);
 
   React.useEffect(() => {
     if (
@@ -161,12 +219,17 @@ const WelcomePageSettingsComponent = (props) => {
     if (state.greetingTitleDefault || state.greetingTitle) {
       checkChanges();
     }
+
+    return () => {
+      window.removeEventListener("resize", checkScroll);
+    };
   }, [
     isLoaded,
     setIsLoadedWelcomePageSettings,
     tReady,
     state.hasScroll,
     state.greetingTitle,
+    state.greetingTitleDefault,
     state.isLoadingGreetingSave,
     state.isLoadingGreetingRestore,
   ]);
@@ -219,6 +282,7 @@ const WelcomePageSettingsComponent = (props) => {
     setGreetingTitle(greetingTitle)
       .then(() => {
         toastr.success(t("SuccessfullySaveGreetingSettingsMessage"));
+        setState((val) => ({ ...val, greetingTitleDefault: greetingTitle }));
       })
       .catch((error) => toastr.error(error))
       .finally(() => {
@@ -254,70 +318,18 @@ const WelcomePageSettingsComponent = (props) => {
       });
   };
 
-  const settingIsEqualInitialValue = (stateName, value) => {
-    const defaultValue = JSON.stringify(state[stateName + "Default"]);
-    const currentValue = JSON.stringify(value);
-    return defaultValue === currentValue;
-  };
-
-  const checkChanges = () => {
-    let hasChanged = false;
-
-    settingNames.forEach((settingName) => {
-      const valueFromSessionStorage = getFromSessionStorage(settingName);
-      if (
-        valueFromSessionStorage !== "none" &&
-        valueFromSessionStorage !== null &&
-        !settingIsEqualInitialValue(settingName, valueFromSessionStorage)
-      )
-        hasChanged = true;
-    });
-
-    if (hasChanged !== state.hasChanged) {
-      setState((val) => ({
-        ...val,
-        hasChanged: hasChanged,
-        showReminder: hasChanged,
-      }));
-    }
-  };
-
-  const checkInnerWidth = () => {
-    if (!isMobileDevice()) {
-      setState((val) => ({ ...val, isCustomizationView: true }));
-
-      const currentUrl = window.location.href.replace(
-        window.location.origin,
-        "",
-      );
-
-      const newUrl = "/portal-settings/customization/general";
-
-      if (newUrl === currentUrl) return;
-
-      navigate(newUrl);
-    } else {
-      setState((val) => ({ ...val, isCustomizationView: false }));
-    }
-  };
-
-  const onClickLink = (e) => {
-    e.preventDefault();
-    navigate(e.target.pathname);
-  };
-
   const settingsBlock = (
     <div className="settings-block">
       <FieldContainer
         id="fieldContainerWelcomePage"
         className="field-container-width"
         labelText={`${t("Common:Title")}`}
-        isVertical={true}
+        isVertical
       >
         <TextInput
           tabIndex={5}
           id="textInputContainerWelcomePage"
-          scale={true}
+          scale
           value={state.greetingTitle}
           onChange={onChangeGreetingTitle}
           isDisabled={
@@ -330,30 +342,33 @@ const WelcomePageSettingsComponent = (props) => {
   );
 
   return !isLoadedPage ? (
-    <LoaderCustomization welcomePage={true} />
+    <LoaderCustomization welcomePage />
   ) : (
     <StyledSettingsComponent
       hasScroll={state.hasScroll}
       className="category-item-wrapper"
+      withoutExternalLink={!welcomePageSettingsUrl}
     >
-      {state.isCustomizationView && !isMobileView && (
+      {state.isCustomizationView && !isMobileView ? (
         <div className="category-item-heading">
           <div className="category-item-title">{t("CustomTitlesWelcome")}</div>
         </div>
-      )}
+      ) : null}
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight={400}>
           {t("CustomTitlesDescription")}
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={welcomePageSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {welcomePageSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={welcomePageSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
       {settingsBlock}
       <SaveCancelButtons
@@ -366,7 +381,7 @@ const WelcomePageSettingsComponent = (props) => {
         reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:Restore")}
-        displaySettings={true}
+        displaySettings
         hasScroll={state.hasScroll}
         disableRestoreToDefault={greetingSettingsIsDefault}
         additionalClassSaveButton="welcome-page-save"

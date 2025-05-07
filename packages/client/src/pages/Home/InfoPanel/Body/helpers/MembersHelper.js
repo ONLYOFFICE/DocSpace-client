@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,11 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  ShareAccessRights,
-  EmployeeType,
-  RoomsType,
-} from "@docspace/shared/enums";
+import { ShareAccessRights, RoomsType } from "@docspace/shared/enums";
 
 class MembersHelper {
   constructor(props) {
@@ -57,7 +53,7 @@ class MembersHelper {
       },
       viewer: {
         key: "viewer",
-        label: this.t("Translations:RoleViewer"),
+        label: this.t("Common:RoleViewer"),
         access: ShareAccessRights.ReadOnly,
         type: "user",
       },
@@ -69,19 +65,19 @@ class MembersHelper {
       },
       formFiller: {
         key: "formFiller",
-        label: this.t("Translations:RoleFormFiller"),
+        label: this.t("Common:RoleFormFiller"),
         access: ShareAccessRights.FormFilling,
         type: "user",
       },
       reviewer: {
         key: "reviewer",
-        label: this.t("Translations:RoleReviewer"),
+        label: this.t("Common:RoleReviewer"),
         access: ShareAccessRights.Review,
         type: "user",
       },
       commentator: {
         key: "commentator",
-        label: this.t("Translations:RoleCommentator"),
+        label: this.t("Common:RoleCommentator"),
         access: ShareAccessRights.Comment,
         type: "user",
       },
@@ -162,6 +158,7 @@ class MembersHelper {
           options.roomAdmin,
           options.collaborator,
           options.editor,
+          options.formFiller,
           options.viewer,
           ...deleteOption,
         ];

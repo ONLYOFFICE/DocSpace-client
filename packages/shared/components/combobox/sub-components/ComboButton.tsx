@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,49 +38,53 @@ import {
   StyledLoader,
   StyledPlusBadge,
   DescriptiveContainer,
-} from "../Combobox.styled";
+} from "../ComboBox.styled";
 
 import { Text } from "../../text";
 import { Badge } from "../../badge";
 
-import ComboButtonTheme from "../Combobox.theme";
+import ComboButtonTheme from "../ComboBox.theme";
 
-import { ComboBoxSize } from "../Combobox.enums";
-import type { ComboButtonProps } from "../Combobox.types";
+import { ComboBoxSize } from "../ComboBox.enums";
+import type { TComboButtonProps } from "../ComboBox.types";
 
-const ComboButton = (props: ComboButtonProps) => {
-  const {
-    onClick,
+const ComboButton: React.FC<TComboButtonProps> = ({
+  onClick,
 
-    innerContainer,
+  innerContainer,
 
-    selectedOption,
-    optionsLength = 0,
+  selectedOption,
+  optionsLength = 0,
 
-    comboIcon,
-    fillIcon,
+  comboIcon,
+  fillIcon,
 
-    type,
-    plusBadgeValue,
-    noBorder = false,
-    isDisabled = false,
-    withOptions = true,
-    withAdvancedOptions = false,
-    innerContainerClassName = "innerContainer",
-    isOpen = false,
-    size = ComboBoxSize.content,
-    scaled = false,
-    modernView = false,
-    tabIndex = -1,
-    isLoading = false,
-    displayArrow: displayArrowProp,
-  } = props;
-
+  type,
+  plusBadgeValue,
+  noBorder = false,
+  isDisabled = false,
+  withOptions = true,
+  withAdvancedOptions = false,
+  innerContainerClassName = "innerContainer",
+  isOpen = false,
+  size = ComboBoxSize.content,
+  scaled = false,
+  modernView = false,
+  tabIndex = -1,
+  isLoading = false,
+  displayArrow: displayArrowProp,
+}) => {
   const defaultOption = selectedOption?.default;
   // const isSelected = selectedOption?.key !== 0;
   const displayArrow = withOptions || withAdvancedOptions || displayArrowProp;
 
   const comboButtonClassName = `combo-button combo-button_${isOpen ? "open" : "closed"}`;
+
+  const Icon = selectedOption.icon;
+  const isIconReactElement =
+    Icon &&
+    typeof Icon === "function" &&
+    React.isValidElement(React.createElement(Icon));
 
   return (
     <ComboButtonTheme
@@ -92,7 +96,6 @@ const ComboButton = (props: ComboButtonProps) => {
       onClick={onClick}
       scaled={scaled}
       size={size}
-      //  isSelected={isSelected}
       modernView={modernView}
       className={comboButtonClassName}
       tabIndex={tabIndex}
@@ -101,8 +104,14 @@ const ComboButton = (props: ComboButtonProps) => {
       type={type}
       selectedOption={selectedOption}
       plusBadgeValue={plusBadgeValue}
+      aria-disabled={isDisabled}
+      aria-expanded={isOpen}
+      aria-pressed={isOpen}
+      aria-haspopup="listbox"
+      role="button"
+      data-test-id="combo-button"
     >
-      {innerContainer && (
+      {innerContainer ? (
         <StyledOptionalItem
           className={innerContainerClassName}
           isDisabled={isDisabled}
@@ -112,21 +121,25 @@ const ComboButton = (props: ComboButtonProps) => {
         >
           {innerContainer}
         </StyledOptionalItem>
-      )}
-      {selectedOption && selectedOption.icon && (
+      ) : null}
+      {selectedOption && selectedOption.icon ? (
         <StyledIcon
           className="combo-button_selected-icon-container"
           isDisabled={isDisabled}
           defaultOption={defaultOption}
-          // isSelected={isSelected}
           isLoading={isLoading}
+          data-test-id="combo-button-icon"
         >
-          <ReactSVG
-            src={selectedOption.icon}
-            className={fillIcon ? "combo-button_selected-icon" : ""}
-          />
+          {isIconReactElement ? React.createElement(Icon) : null}
+
+          {typeof selectedOption.icon === "string" ? (
+            <ReactSVG
+              src={selectedOption.icon}
+              className={fillIcon ? "combo-button_selected-icon" : ""}
+            />
+          ) : null}
         </StyledIcon>
-      )}
+      ) : null}
 
       {type === "badge" ? (
         <Badge
@@ -136,9 +149,10 @@ const ComboButton = (props: ComboButtonProps) => {
           backgroundColor={selectedOption.backgroundColor}
           border={`2px solid ${selectedOption.border}`}
           compact={!!selectedOption.border}
+          data-test-id="combo-button-badge"
         />
       ) : type === "descriptive" ? (
-        <DescriptiveContainer>
+        <DescriptiveContainer data-test-id="combo-button-descriptive">
           <Text
             title={selectedOption?.label}
             as="div"
@@ -152,7 +166,6 @@ const ComboButton = (props: ComboButtonProps) => {
             {selectedOption?.label}
           </Text>
           <Text
-            textType="secondary"
             title={selectedOption?.description}
             fontSize="12px"
             lineHeight="16px"
@@ -175,11 +188,11 @@ const ComboButton = (props: ComboButtonProps) => {
         </Text>
       ) : null}
 
-      {plusBadgeValue && (
+      {plusBadgeValue ? (
         <StyledPlusBadge
           isOpen={isOpen}
         >{`+${plusBadgeValue}`}</StyledPlusBadge>
-      )}
+      ) : null}
 
       <StyledArrowIcon
         displayArrow={displayArrow}
@@ -187,21 +200,29 @@ const ComboButton = (props: ComboButtonProps) => {
         className="combo-buttons_arrow-icon"
         isLoading={isLoading}
         isDisabled={isDisabled}
+        data-test-id="combo-button-arrow"
+        aria-hidden="true"
       >
-        {displayArrow &&
-          (comboIcon ? (
-            <ReactSVG src={comboIcon} className="combo-buttons_expander-icon" />
+        {displayArrow ? (
+          comboIcon ? (
+            <ReactSVG
+              src={comboIcon}
+              className="combo-buttons_expander-icon"
+              data-test-id="combo-button-custom-icon"
+            />
           ) : (
             <StyledTriangleDownIcon
               size={IconSizeType.scale}
               className="combo-buttons_expander-icon"
+              data-test-id="combo-button-default-icon"
             />
-          ))}
+          )
+        ) : null}
       </StyledArrowIcon>
 
-      {isLoading && (
+      {isLoading ? (
         <StyledLoader displaySize={size} type={LoaderTypes.track} size="20px" />
-      )}
+      ) : null}
     </ComboButtonTheme>
   );
 };

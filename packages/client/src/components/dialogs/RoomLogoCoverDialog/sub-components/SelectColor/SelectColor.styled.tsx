@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -157,10 +157,10 @@ const CustomSelectedColor = styled.div<ColorItemProps>`
       width: 30px;
       height: 30px;
 
-      border: ${(props) =>
-        props.color === globalColors.white
+      border: ${({ color }) =>
+        color === globalColors.white
           ? `solid 2px ${globalColors.black}`
-          : `solid 2px ${props.color}`};
+          : `solid 2px ${color}`};
       @media ${tablet} {
         width: 40px;
         height: 40px;
@@ -178,14 +178,14 @@ const CustomSelectedColor = styled.div<ColorItemProps>`
       fill: ${(props) =>
         props.color === globalColors.white
           ? globalColors.black
-          : globalColors.white};
+          : globalColors.white} !important;
     }
     &:hover {
       path {
         fill: ${(props) =>
           props.color === globalColors.white
             ? globalColors.black
-            : globalColors.white};
+            : globalColors.white} !important;
       }
     }
   }

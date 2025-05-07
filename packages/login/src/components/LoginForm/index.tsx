@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -53,16 +53,14 @@ import { login } from "@docspace/shared/utils/loginUtils";
 import { toastr } from "@docspace/shared/components/toast";
 import { thirdPartyLogin, checkConfirmLink } from "@docspace/shared/api/user";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";
-import { deletePortal } from "@docspace/shared/api/management";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { ButtonKeys, RecaptchaType } from "@docspace/shared/enums";
 import { getCookie } from "@docspace/shared/utils";
-import { deleteCookie } from "@docspace/shared/utils/cookie";
 import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
 import { LoginFormProps } from "@/types";
-import { getAvailablePortals } from "@/utils/actions";
-import { getEmailFromInvitation } from "@/utils";
+import { getAvailablePortals } from "@/utils";
+import { getEmailFromInvitation, getRedirectURL } from "@/utils";
 
 import EmailContainer from "./sub-components/EmailContainer";
 import PasswordContainer from "./sub-components/PasswordContainer";
@@ -80,7 +78,6 @@ const LoginForm = ({
   reCaptchaPublicKey,
   clientId,
   client,
-  oauthUrl,
   reCaptchaType,
   ldapDomain,
   ldapEnabled,
@@ -259,7 +256,8 @@ const LoginForm = ({
 
     let hasError = false;
 
-    const user = identifier.trim();
+    const user =
+      typeof identifier === "string" ? identifier.trim() : identifier[0].trim();
 
     if (!user) {
       hasError = true;
@@ -302,22 +300,16 @@ const LoginForm = ({
     const session = !isChecked;
 
     if (client?.isPublic && hash) {
-      const region = oauthUrl?.replace("identity", "");
-      console.log(region);
-      const portals = await getAvailablePortals(
-        {
-          Email: user,
-          PasswordHash: hash,
-          recaptchaResponse: captchaToken,
-          recaptchaType: reCaptchaType,
-        },
-        region,
-      );
+      const portals = await getAvailablePortals({
+        Email: user,
+        PasswordHash: hash,
+        recaptchaResponse: captchaToken,
+        recaptchaType: reCaptchaType,
+      });
 
       if (portals.error) {
         const error = portals;
 
-        console.log(error);
         let errorMessage = "";
         if (typeof error === "object") {
           errorMessage =
@@ -354,7 +346,7 @@ const LoginForm = ({
             ? portals[0].portalName
             : `${portals[0].portalName}.${baseDomain}`;
 
-        let redirectUrl = getCookie("x-redirect-authorization-uri");
+        let redirectUrl = getRedirectURL();
         let portalLink = portals[0].portalLink;
 
         const isLocalhost = name === "http://localhost";
@@ -388,22 +380,30 @@ const LoginForm = ({
 
     login(user, hash, pwd, session, captchaToken, currentCulture, reCaptchaType)
       .then(async (res: string | object) => {
-        const redirectUrl = getCookie("x-redirect-authorization-uri");
+        let redirectUrl = getCookie("x-redirect-authorization-uri");
         if (clientId && redirectUrl) {
+          redirectUrl = window.atob(
+            redirectUrl!.replace(/-/g, "+").replace(/_/g, "/"),
+          );
+
           window.location.replace(redirectUrl);
 
           return;
         }
 
+        const isConfirm = typeof res === "string" && res.includes("confirm");
         try {
-          if (confirmData) await checkConfirmLink(confirmData);
+          if (confirmData && !isConfirm) await checkConfirmLink(confirmData);
         } catch (e) {
           console.error(e);
         }
         return res;
       })
       .then(async (res: string | object | undefined) => {
-        if (isPublicAuth) {
+        const tfaIsEnabled =
+          typeof res === "string" ? true : (res as { tfa?: boolean })?.tfa;
+
+        if (isPublicAuth && !tfaIsEnabled) {
           localStorage.setItem(PUBLIC_STORAGE_KEY, "true");
           window.close();
         }
@@ -417,7 +417,7 @@ const LoginForm = ({
 
         const redirectPath = referenceUrl || redirectPathStorage;
 
-        if (redirectPathStorage) {
+        if (redirectPathStorage && !isConfirm) {
           sessionStorage.removeItem("referenceUrl");
         }
 
@@ -426,8 +426,19 @@ const LoginForm = ({
           return;
         }
 
-        if (typeof res === "string") window.location.replace(res);
-        else window.location.replace("/"); //TODO: save { user, hash } for tfa
+        if (typeof res === "string") {
+          let redirectUrl = `${res}`;
+
+          if (linkData) {
+            redirectUrl += `&linkData=${linkData}`;
+          }
+
+          if (isPublicAuth) {
+            redirectUrl += `&publicAuth=${isPublicAuth}`;
+          }
+
+          window.location.replace(redirectUrl);
+        } else window.location.replace("/"); //TODO: save { user, hash } for tfa
       })
       .catch((error) => {
         let errorMessage = "";
@@ -471,7 +482,6 @@ const LoginForm = ({
     reCaptchaType,
     isCaptchaSuccessful,
     linkData,
-    oauthUrl,
     router,
     baseDomain,
     clientId,
@@ -556,10 +566,14 @@ const LoginForm = ({
       )}
 
       <EmailContainer
-        emailFromInvitation={emailFromInvitation}
+        emailFromInvitation={
+          typeof emailFromInvitation === "string"
+            ? emailFromInvitation
+            : emailFromInvitation[0]
+        }
         isEmailErrorShow={isEmailErrorShow}
         errorText={errorText}
-        identifier={identifier}
+        identifier={typeof identifier === "string" ? identifier : identifier[0]}
         isLoading={isLoading}
         onChangeLogin={onChangeLogin}
         onBlurEmail={onBlurEmail}
@@ -570,7 +584,11 @@ const LoginForm = ({
       />
       <PasswordContainer
         isLoading={isLoading}
-        emailFromInvitation={emailFromInvitation}
+        emailFromInvitation={
+          typeof emailFromInvitation === "string"
+            ? emailFromInvitation
+            : emailFromInvitation[0]
+        }
         passwordValid={passwordValid}
         passwordErrorMessage={passwordErrorMessage}
         password={password}
@@ -579,7 +597,7 @@ const LoginForm = ({
       <ForgotContainer
         cookieSettingsEnabled={cookieSettingsEnabled}
         isChecked={isChecked}
-        identifier={identifier}
+        identifier={typeof identifier === "string" ? identifier : identifier[0]}
         onChangeCheckbox={onChangeCheckbox}
       />
 

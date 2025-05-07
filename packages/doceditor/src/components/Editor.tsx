@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,19 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 "use client";
-
-import React from "react";
-import { useSearchParams } from "next/navigation";
+import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
 import IConfig from "@onlyoffice/document-editor-react/dist/esm/types/model/config";
 
-import { FolderType, ThemeKeys } from "@docspace/shared/enums";
+import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
 
-import { getBackUrl } from "@/utils";
+import { getBackUrl, isFormRole } from "@/utils";
 import { IS_DESKTOP_EDITOR, IS_ZOOM, SHOW_CLOSE } from "@/utils/constants";
 import { EditorProps, TGoBack } from "@/types";
 import {
@@ -56,6 +54,9 @@ type IConfigType = IConfig & {
   events?: {
     onRequestStartFilling?: (event: object) => void;
     onSubmit?: (event: object) => void;
+    onRequestFillingStatus?: (event: object) => void;
+    onStartFilling?: (data: object) => void;
+    onUserActionRequired?: (event: object) => void;
   };
   editorConfig?: {
     customization?: {
@@ -70,14 +71,14 @@ const Editor = ({
   user,
 
   doc,
-  documentserverUrl,
+  documentServerUrl,
   fileInfo,
   isSharingAccess,
   errorMessage,
   isSkipError,
 
   sdkConfig,
-
+  organizationName = "",
   filesSettings,
 
   onDownloadAs,
@@ -87,11 +88,12 @@ const Editor = ({
   onSDKRequestSelectSpreadsheet,
   onSDKRequestSelectDocument,
   onSDKRequestReferenceSource,
-  onSDKRequestStartFilling,
+  onStartFillingVDRPanel,
+  setFillingStatusDialogVisible,
+  openShareFormDialog,
+  onStartFilling,
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
-
-  const searchParams = useSearchParams();
 
   const openOnNewPage = IS_ZOOM ? false : !filesSettings?.openEditorInSameTab;
 
@@ -113,7 +115,12 @@ const Editor = ({
     // onRequestStartFilling,
     documentReady,
 
+    onUserActionRequired,
+
     setDocTitle,
+    onSubmit,
+    onRequestFillingStatus,
+    onRequestStartFilling,
   } = useEditorEvents({
     user,
     successAuth,
@@ -125,6 +132,10 @@ const Editor = ({
     openOnNewPage,
     t,
     sdkConfig,
+    organizationName,
+    setFillingStatusDialogVisible,
+    openShareFormDialog,
+    onStartFillingVDRPanel,
   });
 
   useInit({
@@ -135,20 +146,22 @@ const Editor = ({
     documentReady,
     setDocTitle,
     t,
+    organizationName,
   });
 
-  const newConfig: IConfigType = config
-    ? {
-        document: config.document,
-        documentType: config.documentType,
-        token: config.token,
-        type: config.type,
-      }
-    : {};
+  const newConfig: IConfigType = useMemo(() => {
+    return config
+      ? {
+          document: config.document,
+          documentType: config.documentType,
+          token: config.token,
+          type: config.type,
+          editorConfig: { ...config.editorConfig },
+        }
+      : {};
+  }, [config]);
 
-  if (config) newConfig.editorConfig = { ...config.editorConfig };
-
-  const search = typeof window !== "undefined" ? window.location.search : "";
+  // if (config) newConfig.editorConfig = { ...config.editorConfig };
 
   //if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
 
@@ -156,6 +169,7 @@ const Editor = ({
 
   if (fileInfo) {
     const editorGoBack = sdkConfig?.editorGoBack;
+
     const openFileLocationText = (
       (
         i18n.getDataByLanguage(i18n.language) as unknown as {
@@ -166,12 +180,7 @@ const Editor = ({
       }
     )?.["FileLocation"]; // t("FileLocation");
 
-    if (
-      editorGoBack === "false" ||
-      editorGoBack === false ||
-      user?.isVisitor ||
-      !user
-    ) {
+    if (editorGoBack === false || user?.isVisitor || !user) {
     } else if (editorGoBack === "event") {
       goBack = {
         requestClose: true,
@@ -210,7 +219,7 @@ const Editor = ({
       uiTheme: getEditorTheme(theme as ThemeKeys),
     };
 
-    if (SHOW_CLOSE) {
+    if (SHOW_CLOSE && !sdkConfig?.theme) {
       newConfig.editorConfig.customization.close = {
         visible: SHOW_CLOSE,
         text: t("Common:CloseButton"),
@@ -248,18 +257,14 @@ const Editor = ({
     onMakeActionLink,
     onOutdatedVersion,
     onDownloadAs,
+    onUserActionRequired,
+    onSubmit,
   };
 
   if (successAuth) {
-    if (
-      fileInfo?.rootFolderType !== FolderType.USER &&
-      fileInfo?.rootFolderType !== FolderType.SHARE &&
-      fileInfo?.rootFolderType !== FolderType.Recent
-    ) {
-      //TODO: remove condition for share in my
-      newConfig.events.onRequestUsers = onSDKRequestUsers;
-      newConfig.events.onRequestSendNotify = onSDKRequestSendNotify;
-    }
+    newConfig.events.onRequestUsers = onSDKRequestUsers;
+    newConfig.events.onRequestSendNotify = onSDKRequestSendNotify;
+
     if (!user?.isVisitor) {
       newConfig.events.onRequestSaveAs = onSDKRequestSaveAs;
       if (
@@ -276,7 +281,7 @@ const Editor = ({
     newConfig.events.onRequestReferenceSource = onSDKRequestReferenceSource;
   }
 
-  if (isSharingAccess) {
+  if (isSharingAccess && !config?.startFilling) {
     newConfig.events.onRequestSharingSettings = onSDKRequestSharingSettings;
   }
 
@@ -311,32 +316,18 @@ const Editor = ({
   }
 
   if (config?.startFilling && !IS_ZOOM) {
-    newConfig.events.onRequestStartFilling = () =>
-      onSDKRequestStartFilling?.(t("Common:ShareAndCollect"));
+    newConfig.events.onRequestStartFilling = onRequestStartFilling;
+    newConfig.events.onStartFilling = onStartFilling;
   }
 
-  newConfig.events.onSubmit = () => {
-    const origin = window.location.origin;
-
-    const otherSearchParams = new URLSearchParams();
-
-    if (config?.fillingSessionId)
-      otherSearchParams.append("fillingSessionId", config.fillingSessionId);
-
-    const combinedSearchParams = new URLSearchParams({
-      ...Object.fromEntries(searchParams),
-      ...Object.fromEntries(otherSearchParams),
-    });
-
-    window.location.replace(
-      `${origin}/doceditor/completed-form?${combinedSearchParams.toString()}`,
-    );
-  };
+  if (config?.fillingStatus) {
+    newConfig.events.onRequestFillingStatus = onRequestFillingStatus;
+  }
 
   return (
     <DocumentEditor
       id={EDITOR_ID}
-      documentServerUrl={documentserverUrl}
+      documentServerUrl={documentServerUrl}
       config={
         errorMessage || isSkipError
           ? {

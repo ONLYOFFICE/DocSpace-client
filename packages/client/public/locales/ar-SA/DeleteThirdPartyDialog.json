@@ -1,5 +1,5 @@
 {
-  "DisconnectCloudMessage": "هل أنت متأكد أنك تريد إزالة {{service}}? لن يؤثر هذا على حساب {{account}} الخاص بك بأي شكل من الأشكال.",
   "DisconnectCloudTitle": "فك ربط التخزين السحابي",
-  "SuccessDeleteThirdParty": "تم حذف {{service}} الجهة الخارجية"
+  "SuccessDeleteThirdParty": "تم حذف {{service}} الجهة الخارجية",
+  "ThirdPartyDisconnectPrompt": "هل أنت متأكد أنك تريد إزالة {{service}}؟ هذا لن يؤثر على حساب {{account}} بأي شكل."
 }

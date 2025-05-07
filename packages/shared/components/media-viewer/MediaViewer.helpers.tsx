@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,27 +26,26 @@
 
 import React from "react";
 
-import type { TFile } from "@docspace/shared/api/files/types";
-
 import MediaZoomInIcon from "PUBLIC_DIR/images/media.zoomin.react.svg";
 import MediaZoomOutIcon from "PUBLIC_DIR/images/media.zoomout.react.svg";
 import MediaRotateLeftIcon from "PUBLIC_DIR/images/media.rotateleft.react.svg";
 import MediaRotateRightIcon from "PUBLIC_DIR/images/media.rotateright.react.svg";
 import MediaDeleteIcon from "PUBLIC_DIR/images/media.delete.react.svg";
-import MediaDownloadIcon from "PUBLIC_DIR/images/download.react.svg";
+import MediaDownloadIcon from "PUBLIC_DIR/images/icons/16/download.react.svg";
 import ViewerSeparator from "PUBLIC_DIR/images/viewer.separator.react.svg";
 import PanelReactSvg from "PUBLIC_DIR/images/panel.react.svg";
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
-import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
+import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
-import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
+import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
 import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
-import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
-import DuplicateReactSvgUrl from "PUBLIC_DIR/images/duplicate.react.svg?url";
+import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
+import DuplicateReactSvgUrl from "PUBLIC_DIR/images/icons/16/duplicate.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
-import MoveReactSvgUrl from "PUBLIC_DIR/images/move.react.svg?url";
+import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
+import type { TFile } from "../../api/files/types";
 
 import { ToolbarActionType } from "./MediaViewer.enums";
 import type { ContextFunctions, TranslationType } from "./MediaViewer.types";
@@ -81,7 +80,7 @@ export const getPDFContextModel = (
     {
       id: "option_link-for-room-members",
       key: "link-for-room-members",
-      label: t("Files:CopyLink"),
+      label: t("Common:CopyLink"),
       icon: InvitationLinkReactSvgUrl,
       onClick: () => funcs.onCopyLink?.(item, t),
       disabled: false,
@@ -112,7 +111,7 @@ export const getPDFContextModel = (
     {
       id: "option_download-as",
       key: "download-as",
-      label: t("Translations:DownloadAs"),
+      label: t("Common:DownloadAs"),
       icon: DownloadAsReactSvgUrl,
       onClick: funcs.onClickDownloadAs,
       disabled: !item.security.Download,

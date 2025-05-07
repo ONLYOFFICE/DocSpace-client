@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,9 +34,9 @@ import {
   sendingTestMail,
 } from "@docspace/shared/api/settings";
 
+import { DeviceType } from "@docspace/shared/enums";
 import { ButtonStyledComponent } from "../StyledComponent";
 import { SMTPSettingsFields } from "../constants";
-import { DeviceType } from "@docspace/shared/enums";
 
 const {
   HOST,
@@ -47,8 +47,8 @@ const {
   AUTHENTICATION,
 } = SMTPSettingsFields;
 
-let timerId = null,
-  intervalId = null;
+let timerId = null;
+let intervalId = null;
 const ButtonContainer = (props) => {
   const {
     t,

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -46,16 +46,17 @@ const StyledBodyContent = styled.div`
 `;
 
 const ChangeNameDialog = (props) => {
-  const { t, ready } = useTranslation(["PeopleTranslations", "Common"]);
   const {
     visible,
     onClose,
     profile,
     updateProfile,
     updateProfileInUsers,
-    fromList,
     userNameRegex,
+    fromList,
   } = props;
+
+  const { t, ready } = useTranslation(["PeopleTranslations", "Common"]);
   const [firstName, setFirstName] = useState(profile.firstName);
   const [lastName, setLastName] = useState(profile.lastName);
   const [isSaving, setIsSaving] = useState(false);
@@ -80,10 +81,6 @@ const ChangeNameDialog = (props) => {
     }
   };
 
-  const onKeyDown = (e) => {
-    if (e.keyCode === 13 || e.which === 13) onSaveClick();
-  };
-
   const onSaveClick = async () => {
     if (
       !isNameValid ||
@@ -93,22 +90,27 @@ const ChangeNameDialog = (props) => {
     )
       return;
 
-    const newProfile = profile;
-    newProfile.firstName = firstName;
-    newProfile.lastName = lastName;
+    setIsSaving(true);
 
     try {
-      setIsSaving(true);
+      const newProfile = profile;
+      newProfile.firstName = firstName.trim();
+      newProfile.lastName = lastName.trim();
+
       const currentProfile = await updateProfile(newProfile);
       fromList && (await updateProfileInUsers(currentProfile));
       toastr.success(t("Common:ChangesSavedSuccessfully"));
-    } catch (error) {
-      console.error(error);
-      toastr.error(error);
-    } finally {
+
       setIsSaving(false);
       onClose();
+    } catch (error) {
+      toastr.error(error);
+      setIsSaving(false);
     }
+  };
+
+  const onKeyDown = (e) => {
+    if (e.keyCode === 13 || e.which === 13) onSaveClick();
   };
 
   return (
@@ -136,8 +138,8 @@ const ChangeNameDialog = (props) => {
           >
             <TextInput
               className="first-name"
-              scale={true}
-              isAutoFocussed={true}
+              scale
+              isAutoFocussed
               value={firstName}
               onChange={handleNameChange}
               placeholder={t("Common:FirstName")}
@@ -161,7 +163,7 @@ const ChangeNameDialog = (props) => {
           >
             <TextInput
               className="last-name"
-              scale={true}
+              scale
               value={lastName}
               onChange={handleSurnameChange}
               placeholder={t("Common:LastName")}
@@ -180,7 +182,7 @@ const ChangeNameDialog = (props) => {
           label={t("Common:SaveButton")}
           size="normal"
           scale
-          primary={true}
+          primary
           onClick={onSaveClick}
           isLoading={isSaving}
           tabIndex={3}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css, keyframes } from "styled-components";
-import { Base } from "../../../themes";
+import { injectDefaultTheme } from "../../../utils";
 
 const rotate360 = keyframes`
   from {
@@ -36,7 +36,7 @@ const rotate360 = keyframes`
   }
 `;
 
-const StyledCircle = styled.div<{
+const StyledCircle = styled.div.attrs(injectDefaultTheme)<{
   percent: number;
   isAnimation?: boolean;
   inConversion?: boolean;
@@ -70,8 +70,10 @@ const StyledCircle = styled.div<{
 
   .circle__mask .circle__fill {
     clip: rect(0px, 8px, 16px, 0px);
-    background-color: ${(props) =>
-      props.theme.filesPanels.upload.loadingButton.color};
+    background-color: var(
+      --circle-fill-color,
+      ${(props) => props.theme.filesPanels.upload.loadingButton.color}
+    );
   }
 
   .circle__mask.circle__full {
@@ -88,7 +90,5 @@ const StyledCircle = styled.div<{
     }
   }
 `;
-
-StyledCircle.defaultProps = { theme: Base };
 
 export default StyledCircle;

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,9 +33,9 @@ import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 
+import { EmailInput } from "@docspace/shared/components/email-input";
 import { StyledComponent } from "../StyledComponent";
 import { SMTPSettingsFields } from "../constants";
-import { EmailInput } from "@docspace/shared/components/email-input";
 import ButtonContainer from "./ButtonContainer";
 
 const {
@@ -86,12 +86,12 @@ const CustomSettings = (props) => {
   };
 
   const onValidateEmailInput = (result) => {
-    const { isValid, errors } = result;
+    const { isValid, errors: newErrors } = result;
 
     setEmailError({
       ...emailError,
       isValid,
-      errors,
+      errors: newErrors,
     });
   };
 
@@ -141,7 +141,7 @@ const CustomSettings = (props) => {
       <TextInput
         className="smtp-settings_input"
         name={HOST_PASSWORD}
-        placeholder={t("UploadPanel:EnterPassword")}
+        placeholder={t("Common:EnterPassword")}
         onChange={onChange}
         value={settings[HOST_PASSWORD]}
         isDisabled={isLoading || !settings[AUTHENTICATION]}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,12 +27,12 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
+import { classNames, getLastColumn } from "@docspace/shared/utils";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
-import { classNames, getLastColumn } from "@docspace/shared/utils";
 import { StyledBadgesContainer } from "../StyledTable";
 
 const RecentRowDataComponent = (props) => {
@@ -225,7 +225,6 @@ export default inject(({ tableStore }) => {
     modifiedRecentColumnIsEnabled,
     sizeRecentColumnIsEnabled,
     typeRecentColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
     lastOpenedColumnIsEnabled,
     tableStorageName,
   } = tableStore;
@@ -236,7 +235,6 @@ export default inject(({ tableStore }) => {
     modifiedRecentColumnIsEnabled,
     sizeRecentColumnIsEnabled,
     typeRecentColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
     lastOpenedColumnIsEnabled,
     tableStorageName,
   };

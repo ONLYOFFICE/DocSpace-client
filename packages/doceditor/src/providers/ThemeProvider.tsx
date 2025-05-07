@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -43,27 +43,29 @@ type TThemeProvider = {
   children: React.ReactNode;
   settings: TSettings | undefined;
   user: TUser | undefined;
+  initialTheme: ThemeKeys | undefined;
   systemTheme: ThemeKeys | undefined;
   colorTheme: TGetColorTheme | undefined;
+  locale?: string;
 };
 
 const ThemeProvider = ({
   children,
   user,
   settings,
+  initialTheme,
   systemTheme,
   colorTheme,
+  locale,
 }: TThemeProvider) => {
-  const { i18n } = useI18N({ settings, user });
-
-  const lang = user?.cultureName ?? settings?.culture;
+  const { i18n } = useI18N({ settings, user, locale });
 
   const { theme, currentColorTheme } = useTheme({
-    user,
+    initialTheme,
     i18n,
     systemTheme,
     colorTheme,
-    lang,
+    lang: locale,
   });
 
   return (

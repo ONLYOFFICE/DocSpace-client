@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,11 +35,16 @@ import { getSelectorsByUserAgent } from "react-device-detect";
 
 import { ValidationStatus } from "@docspace/shared/enums";
 
-import { getData, validatePublicRoomKey } from "@/utils/actions";
+import {
+  getData,
+  validatePublicRoomKey,
+  getDeepLinkSettings,
+} from "@/utils/actions";
 import { logger } from "@/../logger.mjs";
 
 import { RootPageProps } from "@/types";
 import Root from "@/components/Root";
+import { TFrameConfig } from "@docspace/shared/types/Frame";
 
 const FilePassword = dynamic(() => import("@/components/file-password"), {
   ssr: false,
@@ -58,8 +63,36 @@ const initialSearchParams: RootPageProps["searchParams"] = {
 };
 
 async function Page({ searchParams }: RootPageProps) {
-  const { fileId, fileid, version, doc, action, share, editorType, error } =
-    searchParams ?? initialSearchParams;
+  const {
+    fileId,
+    fileid,
+    version,
+    doc,
+    action,
+    share,
+    editorType,
+    error,
+    locale,
+    theme,
+    is_file,
+    editorGoBack,
+    isSDK,
+  } = searchParams ?? initialSearchParams;
+
+  const baseSdkConfig: TFrameConfig & { is_file?: boolean; isSDK?: boolean } = {
+    frameId: "",
+    mode: "",
+    src: "",
+    editorCustomization: { uiTheme: theme },
+    editorGoBack,
+    editorType,
+    id: fileId,
+    locale,
+    requestToken: share,
+    theme,
+    is_file,
+    isSDK,
+  };
 
   const cookieStore = cookies();
   const hdrs = headers();
@@ -100,7 +133,25 @@ async function Page({ searchParams }: RootPageProps) {
     }
   }
 
-  if (share) {
+  log.debug(
+    {
+      fileId: fileId ?? fileid,
+      isShare: !!share,
+      isAuth: !!cookieStore.get("asc_auth_key")?.value,
+    },
+    "Start get data for open file",
+  );
+
+  const data = await getData(
+    fileId ?? fileid ?? "",
+    version,
+    doc,
+    action,
+    share,
+    type,
+  );
+
+  if (data.error?.status === "access-denied" && share) {
     const roomData = await validatePublicRoomKey(share, fileId ?? fileid ?? "");
     if (!roomData) {
       log.error(
@@ -128,22 +179,7 @@ async function Page({ searchParams }: RootPageProps) {
     }
   }
 
-  log.debug(
-    {
-      fileId: fileId ?? fileid,
-      isShare: !!share,
-      isAuth: !!cookieStore.get("asc_auth_key")?.value,
-    },
-    "Start get data for open file",
-  );
-  const data = await getData(
-    fileId ?? fileid ?? "",
-    version,
-    doc,
-    action,
-    share,
-    type,
-  );
+  const deepLinkSettings = await getDeepLinkSettings();
 
   if (data.error?.status === "not-found" && error) {
     data.error.message = error;
@@ -180,7 +216,6 @@ async function Page({ searchParams }: RootPageProps) {
 
   return (
     <>
-      <Root {...data} shareKey={share} />
       {url && (
         <Script
           id="onlyoffice-api-script"
@@ -188,6 +223,12 @@ async function Page({ searchParams }: RootPageProps) {
           src={docApiUrl}
         />
       )}
+      <Root
+        {...data}
+        shareKey={share}
+        baseSdkConfig={baseSdkConfig}
+        deepLinkSettings={deepLinkSettings?.handlingMode}
+      />
     </>
   );
 }

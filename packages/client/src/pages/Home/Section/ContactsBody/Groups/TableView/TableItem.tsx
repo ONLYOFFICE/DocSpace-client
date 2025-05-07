@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -158,9 +158,10 @@ const GroupsTableItem = ({
             onClick={onOpenGroup}
             title={item.name}
             fontWeight="600"
-            fontSize="12px"
+            fontSize="13px"
             isTextOverflow
             className="table-cell_group-manager"
+            truncate
           >
             {item.name}
           </Link>
@@ -193,6 +194,7 @@ const GroupsTableItem = ({
               className="table-cell_group-manager"
               color={globalColors.gray}
               dir="auto"
+              truncate
             >
               {item.manager?.displayName}
             </Text>

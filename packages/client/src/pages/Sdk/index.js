@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,21 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useParams } from "react-router-dom";
 import AppLoader from "@docspace/shared/components/app-loader";
 import RoomSelector from "@docspace/shared/selectors/Room";
-import FilesSelector from "../../components/FilesSelector";
 import {
   frameCallEvent,
   frameCallbackData,
   createPasswordHash,
   frameCallCommand,
 } from "@docspace/shared/utils/common";
-import { RoomsType, FilterType } from "@docspace/shared/enums";
+import { getSelectFormatTranslation } from "@docspace/shared/utils";
+import { RoomsType } from "@docspace/shared/enums";
 import api from "@docspace/shared/api";
+import FilesSelector from "../../components/FilesSelector";
 
 const Sdk = ({
   t,
@@ -55,48 +56,9 @@ const Sdk = ({
   getRoomsIcon,
   getFilesSettings,
   getPrimaryLink,
+  logoText,
 }) => {
   const [isDataReady, setIsDataReady] = useState(false);
-
-  const formatsDescription = {
-    [FilterType.DocumentsOnly]: t("Common:SelectTypeFiles", {
-      type: t("Common:Documents").toLowerCase(),
-    }),
-    [FilterType.SpreadsheetsOnly]: t("Common:SelectTypeFiles", {
-      type: t("Translations:Spreadsheets").toLowerCase(),
-    }),
-    [FilterType.PresentationsOnly]: t("Common:SelectTypeFiles", {
-      type: t("Translations:Presentations").toLowerCase(),
-    }),
-    [FilterType.ImagesOnly]: t("Common:SelectTypeFiles", {
-      type: t("Files:Images").toLowerCase(),
-    }),
-    [FilterType.MediaOnly]: t("Common:SelectExtensionFiles", {
-      extension: t("Files:Media").toLowerCase(),
-    }),
-    [FilterType.ArchiveOnly]: t("Common:SelectTypeFiles", {
-      type: t("Files:Archives").toLowerCase(),
-    }),
-    [FilterType.FoldersOnly]: t("Common:SelectTypeFiles", {
-      type: t("Translations:Folders").toLowerCase(),
-    }),
-    [FilterType.Pdf]: t("Common:SelectTypeFiles", {
-      type: t("Files:Forms").toLowerCase(),
-    }),
-    EditorSupportedTypes: t("Common:SelectTypeFiles", {
-      type: t("AllTypesAvailableForEditing", {
-        organizationName: t("Common:OrganizationName"),
-      }),
-    }),
-  };
-
-  useEffect(() => {
-    window.addEventListener("message", handleMessage, false);
-    return () => {
-      window.removeEventListener("message", handleMessage, false);
-      setFrameConfig(null);
-    };
-  }, [handleMessage]);
 
   const callCommand = useCallback(
     () => frameCallCommand("setConfig", { src: window.location.origin }),
@@ -181,12 +143,19 @@ const Sdk = ({
           default:
             res = "Wrong method for this mode";
         }
-      } catch (e) {
-        res = e;
+      } catch (err) {
+        res = err;
       }
       frameCallbackData(res);
     }
   };
+
+  useEffect(() => {
+    window.addEventListener("message", handleMessage, false);
+    return () => {
+      window.removeEventListener("message", handleMessage, false);
+    };
+  }, [handleMessage]);
 
   const onSelectRoom = useCallback(
     async (data) => {
@@ -246,7 +215,7 @@ const Sdk = ({
     !frameConfig?.id;
 
   switch (mode) {
-    case "room-selector":
+    case "room-selector": {
       const cancelButtonProps = frameConfig?.showSelectorCancel
         ? {
             withCancelButton: true,
@@ -276,13 +245,14 @@ const Sdk = ({
         />
       );
       break;
+    }
     case "file-selector":
       component = (
         <FilesSelector
-          isPanelVisible={true}
-          embedded={true}
+          isPanelVisible
+          embedded
           withHeader={frameConfig?.showSelectorHeader}
-          isSelect={true}
+          isSelect
           setIsDataReady={setIsDataReady}
           onSelectFile={onSelectFile}
           onClose={onClose}
@@ -297,7 +267,11 @@ const Sdk = ({
           cancelButtonLabel={frameConfig?.cancelButtonLabel}
           currentFolderId={frameConfig?.id}
           openRoot={selectorOpenRoot}
-          descriptionText={formatsDescription[frameConfig?.filterParam] || ""}
+          descriptionText={getSelectFormatTranslation(
+            t,
+            frameConfig?.filterParam || "",
+            logoText,
+          )}
           headerProps={{ isCloseable: false }}
           withPadding={frameConfig?.showSelectorHeader}
         />
@@ -320,8 +294,14 @@ export const Component = inject(
     filesStore,
   }) => {
     const { login, logout } = authStore;
-    const { theme, setFrameConfig, frameConfig, getSettings, isLoaded } =
-      settingsStore;
+    const {
+      theme,
+      setFrameConfig,
+      frameConfig,
+      getSettings,
+      isLoaded,
+      logoText,
+    } = settingsStore;
     const { loadCurrentUser, user } = userStore;
     const { updateProfileCulture } = peopleStore.targetUserStore;
     const { getIcon, getRoomsIcon, getFilesSettings } = filesSettingsStore;
@@ -342,6 +322,7 @@ export const Component = inject(
       userId: user?.id,
       getFilesSettings,
       getPrimaryLink,
+      logoText,
     };
   },
 )(

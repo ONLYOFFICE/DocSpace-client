@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,51 +24,137 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
-import { SaveCancelButtons } from "./SaveCancelButton";
+import { SaveCancelButtons } from ".";
 
-describe("<MainButton />", () => {
-  it("renders without error", () => {
+describe("<SaveCancelButtons />", () => {
+  const defaultProps = {
+    showReminder: true,
+    reminderText: "You have unsaved changes",
+    saveButtonLabel: "Save",
+    cancelButtonLabel: "Cancel",
+    onSaveClick: jest.fn(),
+    onCancelClick: jest.fn(),
+  };
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it("renders without error and has correct ARIA attributes", () => {
+    render(<SaveCancelButtons {...defaultProps} />);
+
+    const container = screen.getByTestId("save-cancel-buttons");
+    expect(container).toBeInTheDocument();
+    expect(container).toHaveAttribute("role", "group");
+    expect(container).toHaveAttribute("aria-label", "Save or cancel changes");
+
+    const saveButton = screen.getByTestId("save-button");
+    const cancelButton = screen.getByTestId("cancel-button");
+
+    expect(saveButton).toHaveAttribute("aria-label", "Save");
+    expect(cancelButton).toHaveAttribute("aria-label", "Cancel");
+  });
+
+  it("displays custom id and className", () => {
     render(
       <SaveCancelButtons
-        showReminder
-        reminderText="You have unsaved changes"
-        saveButtonLabel="Save"
-        cancelButtonLabel="Cancel"
+        {...defaultProps}
+        id="custom-id"
+        className="custom-class"
       />,
     );
 
-    expect(screen.getByTestId("save-cancel-buttons")).toBeInTheDocument();
+    const container = screen.getByTestId("save-cancel-buttons");
+    expect(container).toHaveAttribute("id", "custom-id");
+    expect(container).toHaveClass("custom-class");
   });
 
-  // it("accepts id", () => {
-  //   const wrapper = mount(
-  //     <SaveCancelButtons
-  //       showReminder={true}
-  //       reminderText="You have unsaved changes"
-  //       saveButtonLabel="Save"
-  //       cancelButtonLabel="Cancel"
-  //       id="testId"
-  //     />,
-  //   );
+  it("shows reminder text with correct ARIA attributes when showReminder is true", () => {
+    render(<SaveCancelButtons {...defaultProps} />);
 
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
+    const reminder = screen.getByTestId("save-cancel-reminder");
+    expect(reminder).toBeInTheDocument();
+    expect(reminder).toHaveAttribute("aria-live", "polite");
+    expect(reminder).toHaveTextContent(defaultProps.reminderText);
+  });
 
-  // it("accepts className", () => {
-  //   const wrapper = mount(
-  //     <SaveCancelButtons
-  //       showReminder={true}
-  //       reminderText="You have unsaved changes"
-  //       saveButtonLabel="Save"
-  //       cancelButtonLabel="Cancel"
-  //       className="test"
-  //     />,
-  //   );
+  it("hides reminder text when showReminder is false", () => {
+    render(<SaveCancelButtons {...defaultProps} showReminder={false} />);
+    expect(
+      screen.queryByTestId("save-cancel-reminder"),
+    ).not.toBeInTheDocument();
+  });
 
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
+  it("calls onSaveClick when save button is clicked", async () => {
+    render(<SaveCancelButtons {...defaultProps} />);
+
+    await userEvent.click(screen.getByTestId("save-button"));
+    expect(defaultProps.onSaveClick).toHaveBeenCalledTimes(1);
+  });
+
+  it("calls onCancelClick when cancel button is clicked", async () => {
+    render(<SaveCancelButtons {...defaultProps} />);
+
+    await userEvent.click(screen.getByTestId("cancel-button"));
+    expect(defaultProps.onCancelClick).toHaveBeenCalledTimes(1);
+  });
+
+  it("handles keyboard events correctly", () => {
+    render(<SaveCancelButtons {...defaultProps} />);
+
+    fireEvent.keyDown(document, { key: "Enter" });
+    expect(defaultProps.onSaveClick).toHaveBeenCalledTimes(1);
+
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(defaultProps.onCancelClick).toHaveBeenCalledTimes(1);
+  });
+
+  it("disables save button when saveButtonDisabled is true", () => {
+    render(<SaveCancelButtons {...defaultProps} saveButtonDisabled />);
+
+    const saveButton = screen.getByTestId("save-button");
+    expect(saveButton).toBeDisabled();
+    expect(saveButton).toHaveAttribute("aria-disabled", "true");
+  });
+
+  it("disables cancel button based on cancelEnable and showReminder", () => {
+    render(
+      <SaveCancelButtons
+        {...defaultProps}
+        showReminder={false}
+        cancelEnable={false}
+      />,
+    );
+
+    const cancelButton = screen.getByTestId("cancel-button");
+    expect(cancelButton).toBeDisabled();
+    expect(cancelButton).toHaveAttribute("aria-disabled", "true");
+  });
+
+  it("applies additional class names to buttons", () => {
+    render(
+      <SaveCancelButtons
+        {...defaultProps}
+        additionalClassSaveButton="extra-save"
+        additionalClassCancelButton="extra-cancel"
+      />,
+    );
+
+    const saveButton = screen.getByTestId("save-button");
+    const cancelButton = screen.getByTestId("cancel-button");
+
+    expect(saveButton).toHaveClass("save-button", "extra-save");
+    expect(cancelButton).toHaveClass("cancel-button", "extra-cancel");
+  });
+
+  it("shows loading state when isSaving is true", () => {
+    render(<SaveCancelButtons {...defaultProps} isSaving />);
+
+    const saveButton = screen.getByTestId("save-button");
+    expect(saveButton).toHaveAttribute("aria-busy", "true");
+  });
 });

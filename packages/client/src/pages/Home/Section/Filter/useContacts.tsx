@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -45,6 +45,7 @@ import {
   FilterGroups,
   FilterKeys,
   PaymentsType,
+  SortByFieldName,
 } from "@docspace/shared/enums";
 import { TFilterSortBy, TSortOrder } from "@docspace/shared/api/people/types";
 import { TTranslation } from "@docspace/shared/types";
@@ -52,7 +53,6 @@ import { TTranslation } from "@docspace/shared/types";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 import { TContactsTab, getContactsUrl } from "SRC_DIR/helpers/contacts";
-import { SortByFieldName } from "SRC_DIR/helpers/constants";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 
 type TFilterValues = (TGroupItem | TItem)[];

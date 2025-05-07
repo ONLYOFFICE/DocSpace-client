@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { mobile, tablet } from "@docspace/shared/utils";
+import { mobile, tablet } from "../../utils";
 
 const StyledPaymentsLoader = styled.div`
   .payments-loader_title {

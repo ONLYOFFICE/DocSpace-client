@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -217,7 +217,7 @@ const EditGroupDialog = ({
                     withInfiniteLoader
                     total={currentTotal}
                     loadNextPage={loadMembers}
-                    hasNextPage={!!members && members.length < currentTotal}
+                    hasNextPage={members ? members.length < currentTotal : null}
                   />
                 </>
               )
@@ -249,7 +249,7 @@ const EditGroupDialog = ({
         </ModalDialog.Footer>
       </ModalDialog>
 
-      {selectGroupMangerPanelIsVisible && (
+      {selectGroupMangerPanelIsVisible ? (
         <SelectGroupManagerPanel
           onClose={onHideSelectGroupManagerPanel}
           onParentPanelClose={onClose}
@@ -258,9 +258,9 @@ const EditGroupDialog = ({
             setSelectGroupMangerPanelIsVisible(false);
           }}
         />
-      )}
+      ) : null}
 
-      {selectMembersPanelIsVisible && (
+      {selectMembersPanelIsVisible ? (
         <SelectMembersPanel
           onClose={onHideSelectMembersPanel}
           onParentPanelClose={onClose}
@@ -269,7 +269,7 @@ const EditGroupDialog = ({
             setSelectMembersPanelIsVisible(false);
           }}
         />
-      )}
+      ) : null}
     </>
   );
 };

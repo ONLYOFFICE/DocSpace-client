@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -216,16 +216,16 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
               size={32}
               onClick={handleSaveClick}
               iconName={CheckSvgUrl}
-              isFill={true}
-              isClickable={true}
+              isFill
+              isClickable
             />
             <IconButton
               className="import-clear-container-button"
               size={32}
               onClick={clearEmail}
               iconName={CrossSvgUrl}
-              isFill={true}
-              isClickable={true}
+              isFill
+              isClickable
             />
           </EmailInputWrapper>
         ) : (

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,7 @@ import React from "react";
 
 import { RectangleSkeleton } from "../rectangle";
 
-import { StyledStorageManagementLoader } from "./Settings.styled";
+import styles from "./Settings.module.scss";
 import type { SettingsStorageManagementSkeletonProps } from "./Settings.types";
 
 export const SettingsStorageManagementSkeleton = ({
@@ -48,7 +48,10 @@ export const SettingsStorageManagementSkeleton = ({
   } = rest;
 
   return (
-    <StyledStorageManagementLoader className={className} style={style}>
+    <div
+      className={`${className} ${styles.storageManagementLoader}`}
+      style={style}
+    >
       <RectangleSkeleton
         className="storage-loader_title"
         title={title}
@@ -166,6 +169,6 @@ export const SettingsStorageManagementSkeleton = ({
           animate={animate}
         />
       </div>
-    </StyledStorageManagementLoader>
+    </div>
   );
 };

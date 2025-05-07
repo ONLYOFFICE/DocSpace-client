@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,15 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { memo } from "react";
+import React from "react";
 
-import VersionRow from "./VersionRow";
 import { inject, observer } from "mobx-react";
-import { VariableSizeList as List, areEqual } from "react-window";
+import { VariableSizeList as List } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 import HistoryRowsSkeleton from "@docspace/shared/skeletons/history";
 import { CustomScrollbarsVirtualListWithAutoFocus } from "@docspace/shared/components/scrollbar";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
+import VersionRow from "./VersionRow";
 import { StyledBody, StyledVersionList } from "./StyledVersionHistory";
 
 const VirtualScroll = (props) => (
@@ -48,21 +48,19 @@ class SectionBodyContent extends React.Component {
     this.state = {
       isRestoreProcess: false,
       rowSizes: {},
+      showRows: false,
     };
-    this.listKey = 0;
+
     this.listRef = React.createRef();
     this.timerId = null;
   }
 
   componentDidMount() {
-    const { setFirstLoad } = this.props;
+    const { setFirstLoad, fileId, fileSecurity } = this.props;
 
-    const fileId = this.props.fileId;
+    this.getFileVersions(fileId, fileSecurity);
 
-    if (fileId && fileId !== this.props.fileId) {
-      this.getFileVersions(fileId, this.props.fileSecurity);
-      setFirstLoad(false);
-    }
+    setFirstLoad(false);
   }
 
   getFileVersions = (fileId, fileSecurity) => {
@@ -92,6 +90,7 @@ class SectionBodyContent extends React.Component {
         });
     }
   };
+
   onUpdateHeight = (i, itemHeight) => {
     if (this.listRef.current) {
       this.listRef.current.resetAfterIndex(i);
@@ -100,30 +99,35 @@ class SectionBodyContent extends React.Component {
     this.setState((prevState) => ({
       rowSizes: {
         ...prevState.rowSizes,
-        [i]: itemHeight + 27, //composed of itemHeight = clientHeight of div and padding-top = 13px and padding-bottom = 12px
+        [i]: itemHeight + 27, // composed of itemHeight = clientHeight of div and padding-top = 13px and padding-bottom = 12px
       },
     }));
+
+    this.setState({
+      showRows: true,
+    });
   };
 
   getSize = (i) => {
-    return this.state.rowSizes[i] ? this.state.rowSizes[i] : 66;
+    const { rowSizes } = this.state;
+    return rowSizes[i] || 66;
   };
 
-  renderRow = memo(({ index, style }) => {
+  renderRow = ({ index, style }) => {
     const { versions, culture, onClose } = this.props;
 
     const prevVersion = versions[index > 0 ? index - 1 : index].versionGroup;
-    let isVersion = true;
+    let hasVersion = true;
 
     if (index > 0 && prevVersion === versions[index].versionGroup) {
-      isVersion = false;
+      hasVersion = false;
     }
     return (
       <div style={style}>
         <VersionRow
           onClose={onClose}
           getFileVersions={this.getFileVersions}
-          isVersion={true}
+          isVersion={hasVersion}
           key={`${versions[index].id}-${index}`}
           info={versions[index]}
           versionsListLength={versions.length}
@@ -134,28 +138,31 @@ class SectionBodyContent extends React.Component {
         />
       </div>
     );
-  }, areEqual);
+  };
+
   render() {
     const { versions, isLoading } = this.props;
+    const { isRestoreProcess, showRows } = this.state;
 
-    const renderList = ({ height, width }) => {
-      return (
-        <StyledVersionList isRestoreProcess={this.state.isRestoreProcess}>
-          <List
-            ref={this.listRef}
-            className="List"
-            height={height}
-            width={width}
-            itemSize={this.getSize}
-            itemCount={versions.length}
-            itemData={versions}
-            outerElementType={VirtualScroll}
-          >
-            {this.renderRow}
-          </List>
-        </StyledVersionList>
-      );
-    };
+    const renderList = ({ height, width }) => (
+      <StyledVersionList
+        isRestoreProcess={isRestoreProcess}
+        showRows={showRows}
+      >
+        <List
+          ref={this.listRef}
+          className="List"
+          height={height}
+          width={width}
+          itemSize={this.getSize}
+          itemCount={versions.length}
+          itemData={versions}
+          outerElementType={VirtualScroll}
+        >
+          {this.renderRow}
+        </List>
+      </StyledVersionList>
+    );
 
     return (
       <StyledBody>

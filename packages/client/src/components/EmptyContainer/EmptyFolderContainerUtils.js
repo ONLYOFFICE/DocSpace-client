@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,11 +31,6 @@ const startInterval = () => {
   if (elem) elem.style.display = "grid";
 };
 
-export function showLoader() {
-  hideLoader();
-  timer = setTimeout(() => startInterval(), 300);
-}
-
 export function hideLoader() {
   if (timer) {
     clearTimeout(timer);
@@ -44,4 +39,9 @@ export function hideLoader() {
 
   const elem = document.getElementById("empty-container-loader");
   if (elem) elem.style.display = "none";
+}
+
+export function showLoader() {
+  hideLoader();
+  timer = setTimeout(() => startInterval(), 300);
 }

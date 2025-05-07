@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,9 +26,6 @@
 
 import { TFile } from "@docspace/shared/api/files/types";
 import { DeviceType } from "@docspace/shared/enums";
-import { TTheme } from "@docspace/shared/themes";
-import { TWhiteLabel } from "@docspace/shared/utils/whiteLabelHelper";
-
 import { TDeepLinkConfig } from "./DeepLink.helper";
 
 export interface DeepLinkProps {
@@ -39,5 +36,6 @@ export interface DeepLinkProps {
   deepLinkConfig?: TDeepLinkConfig;
 
   setIsShowDeepLink: (value: boolean) => void;
-}
 
+  deepLinkSettings: number;
+}

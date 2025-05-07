@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -39,7 +39,14 @@ export type TDirectionY = "bottom" | "top" | "both";
 export type TViewAs = "tile" | "table" | "row" | "settings" | "profile";
 
 export type TSortOrder = "descending" | "ascending";
-export type TSortBy = "DateAndTime" | "Tags" | "AZ";
+export type TSortBy =
+  | "DateAndTimeCreation"
+  | "Tags"
+  | "AZ"
+  | "Author"
+  | "Type"
+  | "usedspace"
+  | "Size";
 
 export type TTranslation = (
   key: string,
@@ -59,6 +66,15 @@ export type NonFunctionProperties<T, ExcludeTypes> = Pick<
 
 export type MergeTypes<T, MergedType> = Omit<T, keyof MergedType> & MergedType;
 
+export type NonNullableFields<T> = {
+  [P in keyof T]: NonNullable<T[P]>;
+};
+
+export type TResolver<Res = VoidFunction, Rej = VoidFunction> = {
+  resolve: Res;
+  reject: Rej;
+};
+
 export type TPathParts = {
   id: number;
   title: string;
@@ -67,10 +83,15 @@ export type TPathParts = {
 
 export type TCreatedBy = {
   avatarSmall: string;
+  avatar?: string;
+  avatarOriginal?: string;
+  avatarMax?: string;
+  avatarMedium?: string;
   displayName: string;
   hasAvatar: boolean;
   id: string;
   profileUrl: string;
+  isAnonim?: boolean;
 };
 
 export type TI18n = {
@@ -84,6 +105,16 @@ declare module "styled-components" {
     currentColorScheme?: TColorScheme;
   }
 }
+
+export interface StaticImageData {
+  src: string;
+  height: number;
+  width: number;
+  blurDataURL?: string;
+  blurWidth?: number;
+  blurHeight?: number;
+}
+
 declare global {
   interface Window {
     firebaseHelper: FirebaseHelper;
@@ -93,8 +124,9 @@ declare global {
       appearanceTheme: TGetColorTheme;
       versionInfo: TVersionBuild;
     };
-    zESettings: {};
-    zE: {};
+    Asc: unknown;
+    zESettings: unknown;
+    zE: unknown;
     i18n: {
       loaded: {
         [key: string]: { data: { [key: string]: string }; namespaces: string };
@@ -104,7 +136,7 @@ declare global {
     snackbar?: {};
     DocSpace: {
       navigate: (path: string, state?: { [key: string]: unknown }) => void;
-      location: Location;
+      location: Location & { state: unknown };
     };
     logs: {
       socket: string[];
@@ -122,6 +154,8 @@ declare global {
       imageThumbnails?: boolean;
       oauth2: {
         origin: string;
+        secret: string;
+        apiSystem: string[];
       };
       editor?: {
         requestClose: boolean;

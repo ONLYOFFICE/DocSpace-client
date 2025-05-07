@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,12 +30,14 @@ import FileRow from "./FileRow";
 
 const RowWrapper = memo(({ data, index, style }) => {
   const item = data[index];
-  //console.log("RowWrapper render");
+  // console.log("RowWrapper render");
   return (
     <div style={style}>
       <FileRow item={item} />
     </div>
   );
 }, areEqual);
+
+RowWrapper.displayName = "RowWrapper";
 
 export default RowWrapper;

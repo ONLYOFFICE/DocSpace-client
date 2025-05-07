@@ -1,0 +1,47 @@
+name: Build and Deploy test SSR-SDK 
+
+on:
+  push:
+    branches:
+      - 'feature/sdk-ssr'
+env:
+  BUILD_ALL_SERVICES: "false"
+  BUILD_SERVICES_LIST: " onlyoffice-router onlyoffice-sdk onlyoffice-doceditor onlyoffice-client"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest-docspace
+  
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.REMOTE_HOST }} >> ~/.ssh/known_hosts
+          echo ~/.ssh/id_rsa
+      
+      - name: Run Deployment Script
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.REMOTE_HOST }} 'cd /home/ubuntu/projects/docspace-build/docker/ &&  ./deploy.sh'
+          
+        shell: bash
+      
+      # AWS invalidation
+      - name: Invalidate AWS CLOUDFRONT cache
+        run: |
+             DISTRIBUTION_ID=${{ secrets.AWS_DISTRIBUTION_ID }}
+             aws cloudfront create-invalidation \
+                --paths "/*" \
+                --distribution-id ${DISTRIBUTION_ID}
+        shell: bash

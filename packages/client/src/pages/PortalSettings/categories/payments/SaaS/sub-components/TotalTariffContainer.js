@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -46,6 +46,10 @@ const StyledBody = styled.div`
     margin-top: 16px;
     margin-bottom: 16px;
 
+    .lagerFontSize {
+      font-size: 48px;
+    }
+
     .payment_price_description,
     .payment_price_price-text,
     .total-tariff_description {
@@ -86,6 +90,7 @@ const TotalTariffContainer = ({
   totalPrice,
   isNeedRequest,
   currencySymbol,
+  isYearTariff,
 }) => {
   return (
     <StyledBody isDisabled={isDisabled} theme={theme}>
@@ -93,7 +98,7 @@ const TotalTariffContainer = ({
         {isNeedRequest ? (
           <Text
             noSelect
-            fontSize={"14"}
+            fontSize="14"
             textAlign="center"
             fontWeight={600}
             className="total-tariff_description"
@@ -103,57 +108,56 @@ const TotalTariffContainer = ({
             </Trans>
           </Text>
         ) : (
-          <>
-            <Trans t={t} i18nKey="TotalPricePerMonth" ns="Payments">
-              ""
-              <Text
-                fontSize="48px"
-                as="span"
-                textAlign={"center"}
-                fontWeight={600}
-                className="payment_price_price-text"
-                noSelect
-              >
-                {{ currencySymbol }}
-              </Text>
-              <Text
-                fontSize="48px"
-                as="span"
-                fontWeight={600}
-                className="payment_price_price-text"
-                noSelect
-              >
-                {{ price: totalPrice }}
-              </Text>
-              <Text
-                as="span"
-                fontWeight={600}
-                fontSize="16px"
-                className="payment_price_month-text"
-                noSelect
-              >
-                /month
-              </Text>
-            </Trans>
-          </>
+          <Text fontWeight={600} fontSize="16px">
+            {isYearTariff ? (
+              <Trans
+                t={t}
+                i18nKey="TotalPricePerYear"
+                ns="Payments"
+                values={{ currencySymbol, price: totalPrice }}
+                components={{
+                  1: <span className="lagerFontSize" />,
+                  2: <span className="lagerFontSize" />,
+                  3: <span />,
+                }}
+              />
+            ) : (
+              <Trans
+                t={t}
+                i18nKey="TotalPricePerMonth"
+                ns="Payments"
+                values={{ currencySymbol, price: totalPrice }}
+                components={{
+                  1: <span className="lagerFontSize" />,
+                  2: <span className="lagerFontSize" />,
+                  3: <span />,
+                }}
+              />
+            )}
+          </Text>
         )}
       </div>
     </StyledBody>
   );
 };
 
-export default inject(({ settingsStore, paymentStore, paymentQuotasStore }) => {
-  const { theme } = settingsStore;
-  const { isLoading, totalPrice, isNeedRequest, maxAvailableManagersCount } =
-    paymentStore;
+export default inject(
+  ({ settingsStore, paymentStore, paymentQuotasStore, currentQuotaStore }) => {
+    const { theme } = settingsStore;
+    const { isLoading, totalPrice, isNeedRequest, maxAvailableManagersCount } =
+      paymentStore;
 
-  const { planCost } = paymentQuotasStore;
-  return {
-    theme,
-    totalPrice,
-    isLoading,
-    isNeedRequest,
-    maxAvailableManagersCount,
-    currencySymbol: planCost.currencySymbol,
-  };
-})(observer(TotalTariffContainer));
+    const { planCost } = paymentQuotasStore;
+    const { isYearTariff } = currentQuotaStore;
+
+    return {
+      theme,
+      totalPrice,
+      isLoading,
+      isNeedRequest,
+      maxAvailableManagersCount,
+      currencySymbol: planCost.currencySymbol,
+      isYearTariff,
+    };
+  },
+)(observer(TotalTariffContainer));

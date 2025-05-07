@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -42,7 +42,7 @@ const ThirdPartyLoader = () => {
     <StyledLoader>
       {rectangles.map((_, index) => (
         <RectangleSkeleton
-          key={`third-party-loader-${index}`}
+          key={`third-party-loader-${index}`} // eslint-disable-line react/no-array-index-key
           height="120px"
           borderRadius="6px"
         />

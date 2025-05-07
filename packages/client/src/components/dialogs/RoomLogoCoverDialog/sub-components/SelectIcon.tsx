@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -64,8 +64,8 @@ const StyledWithoutIcon = styled.div<WithoutIconProps>`
   ${(props) =>
     !props.isSelected &&
     css`
-      background-color: ${(props) => props.theme.logoCover.backgroundColor};
-      border: 1px solid ${(props) => props.theme.logoCover.borderColor};
+      background-color: ${({ theme }) => theme.logoCover.backgroundColor};
+      border: 1px solid ${({ theme }) => theme.logoCover.borderColor};
     `}
 `;
 
@@ -154,25 +154,26 @@ export const SelectIcon = ({
       </div>
 
       <div className="cover-icon-container">
-        {covers &&
-          covers?.map((icon) => {
-            function createMarkup() {
-              return { __html: icon.data };
-            }
-            return (
-              <StyledIconContainer
-                isSelected={coverId === icon.id && !withoutIcon}
-                $currentColorScheme={$currentColorScheme}
-                onClick={
-                  coverId === icon.id
-                    ? toggleWithoutIcon
-                    : () => onSelectIcon(icon)
-                }
-                key={icon.id}
-                dangerouslySetInnerHTML={createMarkup()}
-              />
-            );
-          })}
+        {covers
+          ? covers?.map((icon) => {
+              function createMarkup() {
+                return { __html: icon.data };
+              }
+              return (
+                <StyledIconContainer
+                  isSelected={coverId === icon.id ? !withoutIcon : null}
+                  $currentColorScheme={$currentColorScheme}
+                  onClick={
+                    coverId === icon.id
+                      ? toggleWithoutIcon
+                      : () => onSelectIcon(icon)
+                  }
+                  key={icon.id}
+                  dangerouslySetInnerHTML={createMarkup()}
+                />
+              );
+            })
+          : null}
       </div>
     </div>
   );

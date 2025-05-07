@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,7 +31,6 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
-import { Box } from "@docspace/shared/components/box";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { Loader } from "@docspace/shared/components/loader";
 import styled from "styled-components";
@@ -81,9 +80,24 @@ const StyledFooterContent = styled.div`
   display: contents;
 
   .markdown-wrapper {
+    box-sizing: border-box;
+    overflow: auto;
+    height: 362px;
     width: 100%;
   }
 `;
+
+const MarkdownLink = ({ href, children }) => (
+  <ColorTheme
+    fontWeight="600"
+    target="_blank"
+    tag="a"
+    href={href}
+    themeId={ThemeId.Link}
+  >
+    {children}
+  </ColorTheme>
+);
 
 const DebugInfoDialog = (props) => {
   const { visible, onClose, user, debugInfoData, getDebugInfo } = props;
@@ -107,54 +121,33 @@ const DebugInfoDialog = (props) => {
         <StyledBodyContent>
           {/* <Text>{`# Build version: ${BUILD_VERSION}`}</Text> */}
           <Text>
-            # Version: <span className="version">{VERSION}</span>
+            # Version:{" "}
+            <span className="version">{VERSION /* eslint-disable-line */}</span>
           </Text>
-          <Text>{`# Build date: ${BUILD_AT}`}</Text>
-          {user && (
+          <Text>{`# Build date: ${BUILD_AT}` /* eslint-disable-line */}</Text>
+          {user ? (
             <Text>{`# Current User: ${user?.displayName} (id:${user?.id})`}</Text>
-          )}
+          ) : null}
           <Text>{`# User Agent: ${navigator.userAgent}`}</Text>
         </StyledBodyContent>
       </ModalDialog.Body>
       <ModalDialog.Footer className="debug-info-footer">
         <StyledFooterContent>
-          <Box
-            className="markdown-wrapper"
-            overflowProp="auto"
-            heightProp={"362px"}
-          >
+          <div className="markdown-wrapper">
             <Scrollbar>
-              {!debugInfoData && <Loader size="20px" type="track" />}
-              {debugInfoData && (
+              {!debugInfoData ? <Loader size="20px" type="track" /> : null}
+              {debugInfoData ? (
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   components={{
-                    a: ({ node, href, children, ...props }) => (
-                      <ColorTheme
-                        fontWeight="600"
-                        target="_blank"
-                        tag="a"
-                        href={href}
-                        themeId={ThemeId.Link}
-                      >
-                        {children}
-                      </ColorTheme>
-                      // <a
-                      //   href={href}
-                      //   target="_blank"
-                      //   rel="noopener noreferrer"
-                      //   {...props}
-                      // >
-                      //   {children}
-                      // </a>
-                    ),
+                    a: MarkdownLink,
                   }}
                 >
                   {debugInfoData}
                 </ReactMarkdown>
-              )}
+              ) : null}
             </Scrollbar>
-          </Box>
+          </div>
         </StyledFooterContent>
       </ModalDialog.Footer>
     </ModalDialog>
@@ -164,7 +157,6 @@ const DebugInfoDialog = (props) => {
 DebugInfoDialog.propTypes = {
   visible: PropTypes.bool,
   onClose: PropTypes.func,
-  buildVersionInfo: PropTypes.object,
 };
 
 export default inject(({ userStore, settingsStore }) => {

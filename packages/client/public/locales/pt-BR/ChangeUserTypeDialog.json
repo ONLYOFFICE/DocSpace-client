@@ -1,11 +1,17 @@
 {
+  "ChangeContactType": "Alterar tipo de contato",
   "ChangeGuestsTypeMessage": "O convidado <strong>{{userName}}</strong> será movido para a seção {{membersSection}} e receberá o tipo Usuário. Os usuários têm sua própria seção {{documentsSection}} , podem criar e editar arquivos, mas não podem criar salas.",
   "ChangeGuestsTypeMessageMulti": "Os convidados selecionados serão movidos para a seção {{membersSection}} e receberão o tipo de usuário. Os usuários têm sua própria seção {{documentsSection}}, podem criar e editar arquivos, mas não podem criar salas.",
+  "ChangeGuestsTypeToAdmin": "O convidado <strong>{{userName}}</strong> será movido para a seção {{membersSection}} e receberá o tipo <strong>'{{ secondType }}'</strong>. Os administradores do {{productName}} podem acessar as configurações do {{productName}}, gerenciar e arquivar salas, convidar novos usuários e atribuir funções abaixo do nível deles. Os administradores do {{productName}} têm acesso à seção {{documentsSection}}.",
+  "ChangeGuestsTypeToAdminMulti": "Os convidados selecionados serão movidos para a seção {{membersSection}} e atribuídos ao tipo <strong>'{{ secondType }}'</strong>. Os administradores do {{productName}} podem acessar as configurações do {{productName}}, gerenciar e arquivar salas, convidar novos usuários e atribuir funções abaixo do nível deles. Os administradores do {{productName}} têm acesso à seção {{documentsSection}}.",
+  "ChangeGuestsTypeToManager": "O convidado <strong>{{userName}}</strong> será movido para a seção {{membersSection}} e atribuído ao tipo <strong>'{{ secondType }}'</strong>. Os administradores de salas podem criar e gerenciar as salas atribuídas, convidar novos usuários e atribuir funções de administrador de sala e inferiores. Os administradores de salas têm acesso à seção {{documentsSection}}.",
+  "ChangeGuestsTypeToManagerMulti": "Os convidados selecionados serão movidos para a seção {{membersSection}} e atribuídos ao tipo <strong>'{{ secondType }}'</strong>. Os administradores de sala podem criar e gerenciar as salas atribuídas, convidar novos usuários e atribuir funções de administrador de sala e inferiores. Os administradores de sala têm acesso à seção {{documentsSection}}.",
   "ChangeUserTypeButton": "Alterar Tipo",
-  "ChangeUserTypeHeader": "Alterar tipo do usuário",
   "ChangeUserTypeMessage": "Os usuários com o tipo <strong>'{{ firstType }}'</strong> serão movidos para o tipo <strong>'{{ secondType }}'</strong>.",
-  "ChangeUserTypeMessageMulti": "Os usuários selecionados serão movidos para o tipo <strong>'{{ secondType }}'</strong>.",
-  "ChangeUserTypeMessageWarning": "Você não pode mudar o tipo para os administradores do {{productName}} e para você.",
+  "ChangeUserTypeNote": "<1>Observação:</1> você não pode alterar o tipo para o administrador do {{productName}} e para você mesmo.",
+  "DataReassignmentInfo": "As salas criadas por este usuário serão automaticamente atribuídas a você. Para reatribuir as salas a outra pessoa, clique no link correspondente abaixo.",
+  "DataReassignmentWithFilesDeletion": "Todos os arquivos compartilhados criados por este contato serão <1>automaticamente atribuídos a você em 30 dias</1>. Para reatribuir as salas/arquivos compartilhados a outra pessoa, clique no link correspondente abaixo.",
+  "PersonalDataDeletion": "Todos os arquivos e pastas na seção {{sectionName}} deste contato serão <1>excluídos permanentemente em 30 dias</1>.",
   "SuccessChangeGuestType": "O tipo de hóspede foi alterado com sucesso",
   "SuccessChangeUserType": "O tipo de usuário foi alterado com sucesso"
 }

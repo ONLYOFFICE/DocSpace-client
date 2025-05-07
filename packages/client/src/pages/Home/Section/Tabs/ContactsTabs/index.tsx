@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,7 +33,6 @@ import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TUser } from "@docspace/shared/api/people/types";
 import { Badge } from "@docspace/shared/components/badge";
-import { globalColors } from "@docspace/shared/themes";
 import Filter from "@docspace/shared/api/people/filter";
 
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
@@ -155,11 +154,7 @@ const ContactsTabs = ({
       onClick: onGuests,
       content: null,
       badge: !guestsTabVisited ? (
-        <Badge
-          label={t("Files:New")}
-          backgroundColor={globalColors.redRomb}
-          noHover
-        />
+        <Badge label={t("Common:New")} noHover />
       ) : undefined,
     });
   }

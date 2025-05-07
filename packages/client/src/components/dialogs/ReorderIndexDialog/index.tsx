@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,9 +38,10 @@ import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 
 import DialogsStore from "SRC_DIR/store/DialogsStore";
-import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
+import SelectedFolderStore, {
+  TSelectedFolder,
+} from "SRC_DIR/store/SelectedFolderStore";
 import FilesActionsStore from "SRC_DIR/store/FilesActionsStore";
-import { TSelectedFolder } from "@docspace/client/src/store/SelectedFolderStore";
 
 export interface ReorderIndexDialogProps {
   reorderIndexOfFiles: (id: number | string | null, t: TTranslation) => void;

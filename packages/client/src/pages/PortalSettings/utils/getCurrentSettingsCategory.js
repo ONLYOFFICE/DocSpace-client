@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { getSettingsIndex } from "./getSettingsIndex";
+
 export const getCurrentSettingsCategory = (arrayOfParams, settingsTree) => {
   let key = "0-0";
   let groupIndex = null;
@@ -40,7 +41,7 @@ export const getCurrentSettingsCategory = (arrayOfParams, settingsTree) => {
         groupIndex = getSettingsIndex(settingsTree, currentParam);
         key =
           groupIndex || groupIndex === 0
-            ? settingsTree[groupIndex].key + "-0"
+            ? `${settingsTree[groupIndex].key}-0`
             : key;
         break;
 

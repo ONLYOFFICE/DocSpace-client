@@ -12,12 +12,14 @@
     "skeletons",
     "HOC",
     "hooks",
-    "api",
     "sw",
     "selectors",
     "store",
     "dialogs",
     "pages",
+    "styles",
+    "context",
+    "forms",
     // add all files in which you see
     // the "parserOptions.project" error
     ".eslintrc.cjs",
@@ -29,5 +31,7 @@
     "tsconfig.eslint.json",
     "routes",
     "polyfills",
+    "api",
+    "jest"
   ]
 }

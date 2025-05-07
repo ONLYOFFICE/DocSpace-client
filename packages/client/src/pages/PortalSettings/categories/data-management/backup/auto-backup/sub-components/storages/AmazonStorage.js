@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,15 +34,12 @@ import { StyledStoragesModule } from "../../../StyledBackup";
 class AmazonStorage extends React.Component {
   constructor(props) {
     super(props);
-    const { selectedStorage, setCompletedFormFields, storageRegions } =
-      this.props;
+    const { setCompletedFormFields, storageRegions } = this.props;
 
     setCompletedFormFields(
       AmazonSettings.formNames(storageRegions[0].systemName),
       "s3",
     );
-
-    this.isDisabled = !selectedStorage?.isSet;
   }
 
   render() {

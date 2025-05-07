@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,8 @@
 import styled from "styled-components";
 
 import { mobile } from "@docspace/shared/utils/device";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -95,7 +96,7 @@ const StyledInputBlock = styled.div`
   }
 `;
 
-const StyledInputGroup = styled.div`
+const StyledInputGroup = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
   height: auto;
 
@@ -113,6 +114,10 @@ const StyledInputGroup = styled.div`
     display: flex;
     align-items: center;
     gap: 0px;
+
+    .icon-button {
+      padding: 0 8px;
+    }
   }
 
   .public_client {
@@ -168,8 +173,6 @@ const StyledInputGroup = styled.div`
   }
 `;
 
-StyledInputGroup.defaultProps = { theme: Base };
-
 const StyledInputRow = styled.div`
   width: 100%;
 
@@ -195,7 +198,9 @@ const StyledChipsContainer = styled.div`
   gap: 4px;
 `;
 
-const StyledScopesContainer = styled.div<{ isRequiredError?: boolean }>`
+const StyledScopesContainer = styled.div.attrs(injectDefaultTheme)<{
+  isRequiredError?: boolean;
+}>`
   width: 100%;
 
   display: grid;
@@ -236,9 +241,7 @@ const StyledScopesContainer = styled.div<{ isRequiredError?: boolean }>`
   }
 `;
 
-StyledScopesContainer.defaultProps = { theme: Base };
-
-const StyledScopesName = styled.div`
+const StyledScopesName = styled.div.attrs(injectDefaultTheme)`
   display: flex;
 
   align-content: flex-start;
@@ -252,8 +255,6 @@ const StyledScopesName = styled.div`
     color: ${(props) => props.theme.oauth.clientForm.scopeDesc};
   }
 `;
-
-StyledScopesName.defaultProps = { theme: Base };
 
 const StyledScopesCheckbox = styled.div`
   width: 100%;

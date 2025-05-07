@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -78,12 +78,43 @@ class GroupsTableHeader extends React.Component<
   constructor(props: GroupsTableHeaderProps) {
     super(props);
 
-    const {
-      t,
-      peopleGroupsColumnIsEnabled,
-      managerGroupsColumnIsEnabled,
-      getColumns,
-    } = props;
+    const { getColumns } = props;
+
+    const defaultColumns = this.getDefaultColumns();
+    const columns: TableHeaderColumn[] = getColumns!(defaultColumns);
+
+    const tableColumns = columns.map((c) => c.enable && c.key);
+
+    this.setTableColumns(tableColumns as string[]);
+
+    this.state = { columns };
+  }
+
+  componentDidUpdate(prevProps: GroupsTableHeaderProps) {
+    const { columnStorageName, columnInfoPanelStorageName } = this.props;
+    if (
+      columnStorageName !== prevProps.columnStorageName ||
+      columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName
+    ) {
+      return this.updateTableColumns();
+    }
+  }
+
+  updateTableColumns = () => {
+    const { getColumns } = this.props;
+    const defaultColumns = this.getDefaultColumns();
+    const columns: TableHeaderColumn[] = getColumns!(defaultColumns);
+
+    const tableColumns = columns.map((c) => c.enable && c.key);
+
+    this.setTableColumns(tableColumns as string[]);
+
+    this.setState({ columns });
+  };
+
+  getDefaultColumns = () => {
+    const { t, peopleGroupsColumnIsEnabled, managerGroupsColumnIsEnabled } =
+      this.props;
 
     const defaultColumns = [
       {
@@ -116,14 +147,8 @@ class GroupsTableHeader extends React.Component<
       },
     ];
 
-    const columns: TableHeaderColumn[] = getColumns!(defaultColumns);
-
-    const tableColumns = columns.map((c) => c.enable && c.key);
-
-    this.setTableColumns(tableColumns as string[]);
-
-    this.state = { columns };
-  }
+    return defaultColumns;
+  };
 
   onColumnChange = (key: string) => {
     const { columns } = this.state;

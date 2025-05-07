@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,10 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 import { TableRow } from "@docspace/shared/components/table";
-import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
+import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 import CursorPalmSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 const hotkeyBorderStyle = css`
   border-image-slice: 1;
@@ -127,10 +128,10 @@ const StyledTableRow = styled(TableRow)`
       :hover {
         .table-container_cell {
           cursor: pointer;
-          background: ${(props) =>
-            props.isIndexEditingMode
-              ? `${props.theme.filesSection.tableView.row.indexActive} !important`
-              : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
+          background: ${({ theme, isIndexEditingMode }) =>
+            isIndexEditingMode
+              ? `${theme.filesSection.tableView.row.indexActive} !important`
+              : `${theme.filesSection.tableView.row.backgroundActive} !important`};
         }
 
         .table-container_file-name-cell,
@@ -151,21 +152,21 @@ const StyledTableRow = styled(TableRow)`
     css`
       .table-container_cell {
         cursor: pointer;
-        background: ${(props) =>
-          props.isIndexEditingMode
-            ? `${props.theme.filesSection.tableView.row.indexUpdate} !important`
-            : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
+        background: ${({ theme, isIndexEditingMode }) =>
+          isIndexEditingMode
+            ? `${theme.filesSection.tableView.row.indexUpdate} !important`
+            : `${theme.filesSection.tableView.row.backgroundActive} !important`};
       }
 
       &:hover .table-container_cell {
-        background: ${(props) =>
-          `${props.theme.filesSection.tableView.row.indexActive} !important`};
+        background: ${({ theme }) =>
+          `${theme.filesSection.tableView.row.indexActive} !important`};
       }
 
       .table-container_file-name-cell,
       .table-container_index-cell {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
+        ${({ theme }) =>
+          theme.interfaceDirection === "rtl"
             ? css`
                 margin-right: -24px;
                 padding-right: 24px;
@@ -177,8 +178,8 @@ const StyledTableRow = styled(TableRow)`
       }
 
       .table-container_row-context-menu-wrapper {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
+        ${({ theme }) =>
+          theme.interfaceDirection === "rtl"
             ? css`
                 margin-left: -20px;
                 padding-left: 20px !important;
@@ -204,7 +205,7 @@ const StyledTableRow = styled(TableRow)`
       `url(${CursorPalmSvgUrl}) 8 0, auto !important`};
 
     ${(props) =>
-      props.inProgress &&
+      props.isBlockingOperation &&
       css`
         pointer-events: none;
         /* cursor: wait; */
@@ -357,7 +358,7 @@ const StyledTableRow = styled(TableRow)`
 
         @keyframes Highlight {
           0% {
-            background: ${(props) => props.theme.filesSection.animationColor};
+            background: ${({ theme }) => theme.filesSection.animationColor};
           }
 
           100% {
@@ -428,7 +429,8 @@ const StyledBadgesContainer = styled.div`
   }
 
   .row-copy-link,
-  .tablet-row-copy-link {
+  .tablet-row-copy-link,
+  .tablet-row-create-room {
     display: none;
   }
 
@@ -462,7 +464,7 @@ const StyledBadgesContainer = styled.div`
   }
 `;
 
-const StyledQuickButtonsContainer = styled.div`
+const StyledQuickButtonsContainer = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -497,8 +499,6 @@ const StyledQuickButtonsContainer = styled.div`
     -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   }
 `;
-
-StyledQuickButtonsContainer.defaultProps = { theme: Base };
 
 export {
   StyledBadgesContainer,

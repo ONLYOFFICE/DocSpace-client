@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,16 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import ViewerMediaCloseSvgUrl from "PUBLIC_DIR/images/viewer.media.close.svg?url";
 
-import { Text } from "@docspace/shared/components/text";
-import { IconButton } from "@docspace/shared/components/icon-button";
-
-import { ControlBtn } from "../../MediaViewer.styled";
+import { Text } from "../../../text";
+import { IconButton } from "../../../icon-button";
 
 import type { DesktopDetailsProps } from "./DesktopDetails.type";
-import { DesktopDetailsContainer } from "./DesktopDetails.styled";
+import styles from "./DesktopDetails.module.scss";
 import { globalColors } from "../../../../themes";
 
 export const DesktopDetails = ({
@@ -44,21 +43,34 @@ export const DesktopDetails = ({
   showCloseButton,
 }: DesktopDetailsProps) => {
   return (
-    <DesktopDetailsContainer className={className}>
-      <Text isBold fontSize="14px" className="title">
+    <div
+      className={classNames(styles.container, className)}
+      data-testid="desktop-details"
+      role="dialog"
+      aria-labelledby="media-viewer-title"
+    >
+      <Text
+        id="media-viewer-title"
+        className={styles.title}
+        data-testid="desktop-details-title"
+      >
         {title}
       </Text>
 
-      {showCloseButton && (
-        <ControlBtn onClick={onMaskClick} className="mediaPlayerClose">
+      {showCloseButton ? (
+        <div
+          className={styles.controlBtn}
+          onClick={onMaskClick}
+          data-testid="desktop-details-close"
+        >
           <IconButton
             color={globalColors.white}
             iconName={ViewerMediaCloseSvgUrl}
             size={28}
             isClickable
           />
-        </ControlBtn>
-      )}
-    </DesktopDetailsContainer>
+        </div>
+      ) : null}
+    </div>
   );
 };

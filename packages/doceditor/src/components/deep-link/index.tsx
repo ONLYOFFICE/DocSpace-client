@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,6 +37,7 @@ import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { getBgPattern } from "@docspace/shared/utils/common";
 import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { DeepLinkType } from "@docspace/shared/enums";
 
 import { getDeepLink } from "./DeepLink.helper";
 import {
@@ -57,6 +58,7 @@ const DeepLink = ({
   userEmail,
   setIsShowDeepLink,
   deepLinkConfig,
+  deepLinkSettings,
 }: DeepLinkProps) => {
   const { t } = useTranslation(["DeepLink", "Common"]);
   const theme = useTheme();
@@ -98,6 +100,8 @@ const DeepLink = ({
   };
 
   const bgPattern = getBgPattern(theme.currentColorScheme?.id);
+
+  if (deepLinkSettings === DeepLinkType.App) return null;
 
   return (
     <StyledWrapper>

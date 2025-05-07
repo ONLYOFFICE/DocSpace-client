@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -106,16 +106,19 @@ const QuotaPerItemComponent = (props) => {
         />
         <Text className="toggle_label" fontSize="12px">
           {type === "user"
-            ? t("SetDefaultUserQuota", { productName: t("Common:ProductName") })
+            ? t("UserDefaultQuotaDescription", {
+                productName: t("Common:ProductName"),
+                sectionName: t("Common:MyFilesSection"),
+              })
             : t("SetDefaultRoomQuota", {
                 productName: t("Common:ProductName"),
               })}
         </Text>
-        {isToggleChecked && (
+        {isToggleChecked ? (
           <QuotaForm
             isButtonsEnable
             label={formLabel}
-            maxInputWidth={"214px"}
+            maxInputWidth="214px"
             isLoading={isLoading}
             isDisabled={isDisabled}
             onSave={onSaveQuota}
@@ -123,7 +126,7 @@ const QuotaPerItemComponent = (props) => {
             initialSize={initialSize}
             tabIndex={tabIndex}
           />
-        )}
+        ) : null}
       </div>
     </StyledBaseQuotaComponent>
   );

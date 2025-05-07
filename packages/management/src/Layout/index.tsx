@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,8 +38,8 @@ type TLayoutProps = {
 const MainLayout = ({ children, isPortalRestoring }: TLayoutProps) => {
   return (
     <>
-      {!isPortalRestoring && <ArticleWrapper />}
-      <Section children={children} />
+      {!isPortalRestoring ? <ArticleWrapper /> : null}
+      <Section>{children}</Section>
     </>
   );
 };

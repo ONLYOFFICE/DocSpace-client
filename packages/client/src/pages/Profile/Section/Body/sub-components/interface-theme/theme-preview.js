@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,8 +27,8 @@
 import React from "react";
 import { RadioButton } from "@docspace/shared/components/radio-button";
 
-import { StyledWrapper } from "./styled-preview";
 import Preview from "SRC_DIR/pages/PortalSettings/categories/common/Appearance/preview";
+import { StyledWrapper } from "./styled-preview";
 
 const ThemePreview = (props) => {
   const {

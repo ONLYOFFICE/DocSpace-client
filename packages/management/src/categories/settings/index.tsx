@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,41 +26,50 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { observer } from "mobx-react";
 import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+
+import { useStore } from "SRC_DIR/store";
+import ConnectDialog from "client/ConnectDialog";
 
 import Branding from "../branding";
 import Backup from "../backup";
 import AutoBackup from "../auto-backup";
 import Restore from "../restore";
-
-import { useStore } from "SRC_DIR/store";
-import ConnectDialog from "client/ConnectDialog";
+import EncryptDataPage from "../encrypt-data";
 
 const Settings = () => {
   const { t } = useTranslation(["Common", "Settings"]);
   const navigate = useNavigate();
-  const { dialogsStore, currentTariffStatusStore } = useStore();
+  const location = useLocation();
+
+  const { dialogsStore, currentTariffStatusStore, settingsStore } = useStore();
   const { connectDialogVisible } = dialogsStore;
   const { isCommunity } = currentTariffStatusStore;
+  const { logoText } = settingsStore;
 
   const data = [
     {
       id: "data-backup",
       name: t("Settings:DataBackup"),
-      content: <Backup />,
+      content: <Backup logoText={logoText} />,
     },
     {
       id: "auto-backup",
       name: t("Settings:AutoBackup"),
-      content: <AutoBackup />,
+      content: <AutoBackup logoText={logoText} />,
     },
     {
       id: "restore",
       name: t("Settings:RestoreBackup"),
-      content: <Restore />,
+      content: <Restore logoText={logoText} />,
+    },
+    {
+      id: "encrypt-data",
+      name: t("Common:Storage"),
+      content: <EncryptDataPage logoText={logoText} />,
     },
   ];
 
@@ -68,7 +77,7 @@ const Settings = () => {
     data.unshift({
       id: "branding",
       name: t("Settings:Branding"),
-      content: <Branding />,
+      content: <Branding logoText={logoText} />,
     });
   }
 
@@ -91,7 +100,7 @@ const Settings = () => {
 
   return (
     <>
-      {connectDialogVisible && <ConnectDialog key="connect-dialog" />}
+      {connectDialogVisible ? <ConnectDialog key="connect-dialog" /> : null}
       <Tabs
         items={data}
         selectedItemId={currentTabId}

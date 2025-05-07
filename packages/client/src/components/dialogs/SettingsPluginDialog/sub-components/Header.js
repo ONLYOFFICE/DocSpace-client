@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,9 +26,9 @@
 
 import styled from "styled-components";
 
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledHeader = styled.div`
+const StyledHeader = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   align-items: center;
 
@@ -36,8 +36,6 @@ const StyledHeader = styled.div`
     color: ${(props) => props.theme.plugins.pluginName};
   }
 `;
-
-StyledHeader.defaultProps = { theme: Base };
 
 const Header = ({ t, name }) => {
   return (

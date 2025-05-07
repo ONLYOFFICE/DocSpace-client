@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,12 +32,11 @@ import { ThemeContext } from "styled-components";
 import { ColorThemeProps } from "./ColorTheme.types";
 import { ThemeId } from "./ColorTheme.enums";
 
-import FilterBlockItemTagTheme from "./styled-components/filterBlockItemTag";
 import IconButtonTheme from "./styled-components/iconButton";
 import IconButtonMuteTheme from "./styled-components/iconButtonMute";
 import IconButtonPinTheme from "./styled-components/iconButtonPin";
+import IconButtonCustomFilterTheme from "./styled-components/iconButtonCustomFilter";
 import IconWrapperTheme from "./styled-components/iconWrapper";
-import IndicatorFilterButtonTheme from "./styled-components/indicatorFilterButton";
 import IndicatorLoaderTheme from "./styled-components/indicatorLoader";
 import InfoPanelToggleTheme from "./styled-components/infoPanelToggle";
 import LinkTheme from "./styled-components/link";
@@ -58,16 +57,6 @@ const ColorTheme = forwardRef<
 
   const getElement = () => {
     switch (themeId) {
-      case ThemeId.FilterBlockItemTag: {
-        return (
-          <FilterBlockItemTagTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            ref={ref}
-          />
-        );
-      }
-
       case ThemeId.IconButton: {
         return (
           <IconButtonTheme
@@ -78,10 +67,16 @@ const ColorTheme = forwardRef<
         );
       }
       case ThemeId.IndexIconButton: {
+        const onClickAction = (e: React.MouseEvent<Element>) => {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
+          if ("onClick" in props) props.onClick?.(e);
+        };
+
         return (
           <StyledIndexWrapper
             $currentColorScheme={currentColorScheme}
-            onClick={props.onClick}
+            onClick={onClickAction}
           >
             <IconButtonTheme
               {...props}
@@ -111,19 +106,19 @@ const ColorTheme = forwardRef<
         );
       }
 
-      case ThemeId.IconWrapper: {
+      case ThemeId.IconButtonCustomFilter: {
         return (
-          <IconWrapperTheme
+          <IconButtonCustomFilterTheme
             {...props}
+            themeId={themeId}
             $currentColorScheme={currentColorScheme}
-            ref={ref}
           />
         );
       }
 
-      case ThemeId.IndicatorFilterButton: {
+      case ThemeId.IconWrapper: {
         return (
-          <IndicatorFilterButtonTheme
+          <IconWrapperTheme
             {...props}
             $currentColorScheme={currentColorScheme}
             ref={ref}

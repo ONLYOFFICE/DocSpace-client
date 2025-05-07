@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -44,10 +44,12 @@ export const LoadersContext = createContext<TLoaderContext>({
 
 export const LoadersContextProvider = ({
   children,
+  withInit,
 }: {
   children: ReactNode;
+  withInit?: boolean;
 }) => {
-  const value = useLoadersHelper();
+  const value = useLoadersHelper({ withInit });
 
   return (
     <LoadersContext.Provider value={value}>{children}</LoadersContext.Provider>

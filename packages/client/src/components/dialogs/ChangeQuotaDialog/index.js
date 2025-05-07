@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,7 +31,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 
-import QuotaForm from "../../../components/QuotaForm";
+import QuotaForm from "../../QuotaForm";
 import StyledBodyContent from "./StyledComponent";
 
 const ChangeQuotaDialog = (props) => {

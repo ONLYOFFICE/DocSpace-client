@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -42,7 +42,6 @@ const EmptyFolderContainer = ({
   t,
   onCreate,
   type, // folder type
-  folderId,
   linkStyles,
   sectionWidth,
   canCreateFiles,
@@ -50,7 +49,6 @@ const EmptyFolderContainer = ({
   roomType,
   isArchiveFolderRoot,
   isEmptyPage,
-  parentRoomType, // folder parent room type
 }) => {
   const isRoom = !!roomType;
   const displayRoomCondition = isRoom && !isArchiveFolderRoot;
@@ -95,7 +93,6 @@ export default inject(
     selectedFolderStore,
     clientLoadingStore,
     treeFoldersStore,
-    filesStore,
   }) => {
     const { roomType, id: folderId, parentRoomType } = selectedFolderStore;
 

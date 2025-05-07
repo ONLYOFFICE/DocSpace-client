@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -179,7 +179,10 @@ class CurrentTariffStatusStore {
     return api.portal.getPortalTariff(refresh).then((res) => {
       if (!res) return;
 
-      this.portalTariffStatus = res;
+      runInAction(() => {
+        this.portalTariffStatus = res;
+      });
+
       this.setIsLoaded(true);
     });
   };

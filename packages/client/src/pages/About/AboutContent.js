@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -106,8 +106,9 @@ const AboutContent = (props) => {
     companyInfoSettingsData,
     previewData,
     standalone,
-    licenseUrl,
+    licenseAgreementsUrl,
     isEnterprise,
+    logoText,
   } = props;
   const { t } = useTranslation(["About", "Common"]);
   const isCommercial = !standalone || isEnterprise;
@@ -160,14 +161,14 @@ const AboutContent = (props) => {
             target="_blank"
             enableUserSelect
           >
-            &nbsp;{t("Common:OrganizationName")} {t("Common:ProductName")}&nbsp;
+            &nbsp;{logoText} {t("Common:ProductName")}&nbsp;
           </ColorTheme>
 
           <Text
             className="row-el select-el"
             fontSize="13px"
             fontWeight="600"
-            title={`${BUILD_AT}`}
+            title={`${BUILD_AT}`} // eslint-disable-line no-undef
           >
             v.
             <span className="version-document-management">
@@ -191,8 +192,7 @@ const AboutContent = (props) => {
             target="_blank"
             enableUserSelect
           >
-            &nbsp;{t("Common:OrganizationName")}{" "}
-            {t("Common:ProductEditorsName")}&nbsp;
+            &nbsp;{logoText} {t("Common:ProductEditorsName")}&nbsp;
           </ColorTheme>
           <Text className="row-el select-el" fontSize="13px" fontWeight="600">
             v.
@@ -214,7 +214,7 @@ const AboutContent = (props) => {
               className="row-el"
               fontSize="13px"
               fontWeight="600"
-              href={licenseUrl}
+              href={licenseAgreementsUrl}
               target="_blank"
               enableUserSelect
             >
@@ -293,15 +293,21 @@ const AboutContent = (props) => {
 };
 
 export default inject(({ settingsStore, currentTariffStatusStore }) => {
-  const { theme, companyInfoSettingsData, standalone, licenseUrl } =
-    settingsStore;
+  const {
+    theme,
+    companyInfoSettingsData,
+    standalone,
+    licenseAgreementsUrl,
+    logoText,
+  } = settingsStore;
   const { isEnterprise } = currentTariffStatusStore;
 
   return {
     theme,
     companyInfoSettingsData,
     standalone,
-    licenseUrl,
+    licenseAgreementsUrl,
     isEnterprise,
+    logoText,
   };
 })(observer(AboutContent));

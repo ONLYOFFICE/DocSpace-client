@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,20 +30,18 @@ import Section from "@docspace/shared/components/section";
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import { withTranslation } from "react-i18next";
 
-import { SectionHeaderContent, SectionBodyContent } from "./Section";
 import { inject, observer } from "mobx-react";
 import SectionWrapper from "SRC_DIR/components/Section";
+import { SectionHeaderContent, SectionBodyContent } from "./Section";
+
 class PureVersionHistory extends React.Component {
   render() {
-    const { isLoading, versions, showProgressBar } = this.props;
+    const { isLoading, versions } = this.props;
 
     return (
       <SectionWrapper
-        withBodyAutoFocus={true}
-        headerBorderBottom={true}
-        showSecondaryProgressBar={showProgressBar}
-        secondaryProgressBarIcon="file"
-        showSecondaryButtonAlert={false}
+        withBodyAutoFocus
+        headerBorderBottom
         withBodyScroll={false}
       >
         <Section.SectionHeader>
@@ -73,15 +71,13 @@ export default inject(
   ({ settingsStore, filesStore, clientLoadingStore, versionHistoryStore }) => {
     const { filter } = filesStore;
     const { isLoading } = clientLoadingStore;
-    const { setIsVerHistoryPanel, versions, showProgressBar } =
-      versionHistoryStore;
+    const { setIsVerHistoryPanel, versions } = versionHistoryStore;
 
     return {
       isTabletView: settingsStore.isTabletView,
       isLoading,
       filter,
       versions,
-      showProgressBar,
 
       setIsVerHistoryPanel,
     };

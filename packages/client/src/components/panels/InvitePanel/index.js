@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -40,9 +40,7 @@ import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import api from "@docspace/shared/api";
-import ItemsList from "./sub-components/ItemsList";
-import InviteInput from "./sub-components/InviteInput";
-import ExternalLinks from "./sub-components/ExternalLinks";
+import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
@@ -50,10 +48,13 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { fixAccess, getAccessOptions } from "./utils";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
+import { fixAccess } from "./utils";
+import ExternalLinks from "./sub-components/ExternalLinks";
+import InviteInput from "./sub-components/InviteInput";
+import ItemsList from "./sub-components/ItemsList";
 
 const InvitePanel = ({
   folders,
@@ -63,14 +64,12 @@ const InvitePanel = ({
   setInviteItems,
   setInvitePanelOptions,
   t,
-  visible,
+  isVisible,
   defaultAccess,
   setInfoPanelIsMobileHidden,
   updateInfoPanelMembers,
   isRoomMembersPanelOpen,
   setInviteLanguage,
-  getUsersList,
-  filter,
   isRoomAdmin,
   setIsNewUserByCurrentUser,
 
@@ -102,6 +101,27 @@ const InvitePanel = ({
   const invitePanelBodyRef = useRef();
   const loaderRef = useRef();
 
+  const onClose = () => {
+    setInviteLanguage({ key: "", label: "" });
+    setInfoPanelIsMobileHidden(false);
+    setInvitePanelOptions({
+      visible: false,
+      hideSelector: false,
+      defaultAccess: 1,
+    });
+    setInviteItems([]);
+  };
+
+  const onCheckHeight = () => {
+    setScrollAllPanelContent(!isDesktop());
+    setIsMobileView(isMobile());
+  };
+
+  const onMouseDown = (e) => {
+    if (e.target.id === "InvitePanelWrapper") onClose();
+  };
+
+  const roomType = selectedRoom ? selectedRoom.roomType : -1;
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
   const onChangeExternalLinksVisible = (visible) => {
@@ -141,11 +161,10 @@ const InvitePanel = ({
     if (room) {
       setSelectedRoom(room);
       return Promise.resolve();
-    } else {
-      return getFolderInfo(roomId).then((info) => {
-        setSelectedRoom(info);
-      });
     }
+    return getFolderInfo(roomId).then((info) => {
+      setSelectedRoom(info);
+    });
   };
 
   const getInfo = () => {
@@ -157,7 +176,7 @@ const InvitePanel = ({
         if (link) {
           const { shareLink, id, title, expirationDate } = link.sharedTo;
 
-          const activeLink = {
+          const newLink = {
             id,
             title,
             shareLink,
@@ -167,8 +186,8 @@ const InvitePanel = ({
 
           onChangeExternalLinksVisible(!!links.length);
 
-          setShareLinks([activeLink]);
-          setActiveLink(activeLink);
+          setShareLinks([newLink]);
+          setActiveLink(newLink);
         }
       });
   };
@@ -199,9 +218,11 @@ const InvitePanel = ({
   }, [roomId]);
 
   useEffect(() => {
-    const hasErrors = inviteItems.some((item) => !!item.errors?.length);
+    const hasValidationErrors = () => {
+      return inviteItems.some((item) => !!item.errors?.length);
+    };
 
-    setHasErrors(hasErrors);
+    setHasErrors(hasValidationErrors());
   }, [inviteItems]);
 
   useEffect(() => {
@@ -217,26 +238,6 @@ const InvitePanel = ({
   useEffect(() => {
     isMobileView && window.addEventListener("mousedown", onMouseDown);
   }, [isMobileView]);
-
-  const onMouseDown = (e) => {
-    if (e.target.id === "InvitePanelWrapper") onClose();
-  };
-
-  const onCheckHeight = () => {
-    setScrollAllPanelContent(!isDesktop());
-    setIsMobileView(isMobile());
-  };
-
-  const onClose = () => {
-    setInviteLanguage({ key: "", label: "" });
-    setInfoPanelIsMobileHidden(false);
-    setInvitePanelOptions({
-      visible: false,
-      hideSelector: false,
-      defaultAccess: 1,
-    });
-    setInviteItems([]);
-  };
 
   const onKeyPress = (e) =>
     (e.key === "Esc" || e.key === "Escape") && onClose();
@@ -286,14 +287,14 @@ const InvitePanel = ({
       <>
         {error}
         &nbsp;
-        {!isRoomAdmin && paymentLink}
+        {!isRoomAdmin ? paymentLink : null}
       </>
     );
   };
 
-  const onClickSend = async (e) => {
+  const onClickSend = async () => {
     const invitations = inviteItems.map((item) => {
-      let newItem = {};
+      const newItem = {};
 
       roomId === -1
         ? (newItem.type = item.access)
@@ -359,16 +360,13 @@ const InvitePanel = ({
         const isPeoplePage =
           window.location.pathname.includes("accounts/people");
 
-        if (isPeoplePage) {
-          await getUsersList(filter, false);
-        } else {
+        if (!isPeoplePage) {
           navigate("/accounts/people/filter");
         }
       }
     }
   };
 
-  const roomType = selectedRoom ? selectedRoom.roomType : -1;
   const hasInvitedUsers = !!inviteItems.length;
 
   const removeExist = (items) => {
@@ -418,7 +416,7 @@ const InvitePanel = ({
           usersList={usersList}
           setUsersList={setUsersList}
         />
-        {hasInvitedUsers && (
+        {hasInvitedUsers ? (
           <ItemsList
             t={t}
             setHasErrors={setHasErrors}
@@ -429,7 +427,7 @@ const InvitePanel = ({
             invitePanelBodyRef={invitePanelBodyRef}
             isMobileView={isMobileView}
           />
-        )}
+        ) : null}
       </div>
     );
   }, [
@@ -500,15 +498,15 @@ const InvitePanel = ({
 
   return (
     <ModalDialog
-      visible={visible}
+      visible={isVisible}
       onClose={onClose}
       displayType={ModalDialogType.aside}
-      containerVisible={!hideSelector && addUsersPanelVisible}
+      containerVisible={!hideSelector ? addUsersPanelVisible : null}
       isLoading={invitePanelIsLoding}
       withBodyScroll
-      isInvitePanelLoader={true}
+      isInvitePanelLoader
     >
-      {!hideSelector && addUsersPanelVisible && (
+      {!hideSelector && addUsersPanelVisible ? (
         <ModalDialog.Container>
           <PeopleSelector
             useAside
@@ -544,15 +542,15 @@ const InvitePanel = ({
             }}
           />
         </ModalDialog.Container>
-      )}
+      ) : null}
 
       <ModalDialog.Header>{t("Common:Invite")}</ModalDialog.Header>
       <ModalDialog.Body>{bodyInvitePanel}</ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           className="send-invitation"
-          scale={true}
-          size={"normal"}
+          scale
+          size="normal"
           isDisabled={hasErrors || !hasInvitedUsers}
           primary
           onClick={onClickSend}
@@ -561,8 +559,8 @@ const InvitePanel = ({
         />
         <Button
           className="cancel-button"
-          scale={true}
-          size={"normal"}
+          scale
+          size="normal"
           onClick={onClose}
           label={t("Common:CancelButton")}
           isDisabled={isLoading}
@@ -575,7 +573,6 @@ const InvitePanel = ({
 export default inject(
   ({
     settingsStore,
-    peopleStore,
     filesStore,
     dialogsStore,
     infoPanelStore,
@@ -585,7 +582,6 @@ export default inject(
   }) => {
     const { theme, standalone } = settingsStore;
 
-    const { getUsersList, filter } = peopleStore.usersStore;
     const {
       setIsMobileHidden: setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
@@ -617,14 +613,12 @@ export default inject(
       setInviteItems,
       setInvitePanelOptions,
       theme,
-      visible: invitePanelOptions.visible,
+      isVisible: invitePanelOptions.visible,
       defaultAccess: invitePanelOptions.defaultAccess,
       getFolderInfo,
       setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
       isRoomMembersPanelOpen,
-      getUsersList,
-      filter,
       isRoomAdmin,
 
       setIsNewUserByCurrentUser,

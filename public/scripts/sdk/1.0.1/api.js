@@ -457,17 +457,17 @@
         }
 
         case "room-selector": {
-          path = `/sdk/room-selector`;
+          path = `/old-sdk/room-selector`;
           break;
         }
 
         case "file-selector": {
-          path = `/sdk/file-selector?selectorType=${config.selectorType}`;
+          path = `/old-sdk/file-selector?selectorType=${config.selectorType}`;
           break;
         }
 
         case "system": {
-          path = `/sdk/system`;
+          path = `/old-sdk/system`;
           break;
         }
 

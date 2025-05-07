@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,10 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import IconCropperGridSvgUrl from "PUBLIC_DIR/images/icon-cropper-grid.svg?url";
-import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
+import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import ZoomMinusReactSvgUrl from "PUBLIC_DIR/images/zoom-minus.react.svg?url";
 import ZoomPlusReactSvgUrl from "PUBLIC_DIR/images/zoom-plus.react.svg?url";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { ReactSVG } from "react-svg";
 import throttle from "lodash/throttle";
@@ -37,9 +37,9 @@ import AvatarEditor from "react-avatar-editor";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Slider } from "@docspace/shared/components/slider";
 
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledIconCropper = styled.div`
+const StyledIconCropper = styled.div.attrs(injectDefaultTheme)`
   max-width: 368px;
 
   .icon_cropper-crop_area {
@@ -125,8 +125,6 @@ const StyledIconCropper = styled.div`
   }
 `;
 
-StyledIconCropper.defaultProps = { theme: Base };
-
 const IconCropper = ({
   t,
   icon,
@@ -148,7 +146,7 @@ const IconCropper = ({
   const handleSliderChange = (e, newZoom = null) => {
     if (isDisabled) return;
 
-    onChangeIcon({ ...icon, zoom: newZoom ? newZoom : +e.target.value });
+    onChangeIcon({ ...icon, zoom: newZoom || +e.target.value });
   };
 
   const handleZoomInClick = () => {
@@ -222,7 +220,7 @@ const IconCropper = ({
           size="16"
           onClick={handleZoomOutClick}
           iconName={ZoomMinusReactSvgUrl}
-          isFill={true}
+          isFill
           isClickable={false}
           isDisabled={isDisabled}
         />
@@ -240,7 +238,7 @@ const IconCropper = ({
           size="16"
           onClick={handleZoomInClick}
           iconName={ZoomPlusReactSvgUrl}
-          isFill={true}
+          isFill
           isClickable={false}
           isDisabled={isDisabled}
         />

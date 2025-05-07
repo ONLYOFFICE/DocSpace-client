@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -91,7 +91,7 @@ const ToggleAutoSync = ({
           .then(() =>
             toastr.success(t("Settings:SuccessfullySaveSettingsMessage")),
           )
-          .catch((e) => toastr.error(e));
+          .catch((err) => toastr.error(err));
       }
     },
     [toggleCron],
@@ -116,7 +116,7 @@ const ToggleAutoSync = ({
           >
             {t("LdapAutoSyncToggle")}
           </Text>
-          {!isLdapAvailable && (
+          {!isLdapAvailable ? (
             <Badge
               backgroundColor={
                 theme.isBase
@@ -125,9 +125,9 @@ const ToggleAutoSync = ({
               }
               label={t("Common:Paid")}
               className="toggle-caption_title_badge"
-              isPaidBadge={true}
+              isPaidBadge
             />
-          )}
+          ) : null}
         </div>
         <Text
           fontSize="12px"

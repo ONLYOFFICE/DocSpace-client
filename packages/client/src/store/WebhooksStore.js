@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,31 +24,42 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { makeAutoObservable, runInAction } from "mobx";
+
+import { toastr } from "@docspace/shared/components/toast";
+
 import {
   createWebhook,
   getAllWebhooks,
   getWebhooksJournal,
   removeWebhook,
-  retryWebhook,
-  retryWebhooks,
   toggleEnabledWebhook,
   updateWebhook,
 } from "@docspace/shared/api/settings";
-import { makeAutoObservable, runInAction } from "mobx";
 
 class WebhooksStore {
   settingsStore;
 
   webhooks = [];
+
   checkedEventIds = [];
+
   historyFilters = null;
+
   historyItems = [];
+
   startIndex = 0;
+
   totalItems = 0;
+
   currentWebhook = {};
+
   eventDetails = {};
+
   FETCH_COUNT = 100;
+
   isRetryPending = false;
+
   configName = "";
 
   constructor(settingsStore) {
@@ -86,6 +97,9 @@ class WebhooksStore {
           enabled: data.configs.enabled,
           ssl: data.configs.ssl,
           status: data.status,
+          triggers: data.configs.triggers,
+          createdBy: data.configs.createdBy,
+          targetId: data.configs.targetId,
         }));
       });
     } catch (error) {
@@ -99,6 +113,8 @@ class WebhooksStore {
       webhook.uri,
       webhook.secretKey,
       webhook.ssl,
+      webhook.triggers,
+      webhook.targetId,
     );
 
     this.webhooks = [
@@ -110,16 +126,28 @@ class WebhooksStore {
         enabled: webhookData.enabled,
         secretKey: webhookData.secretKey,
         ssl: webhookData.ssl,
+        triggers: webhookData.triggers,
+        createdBy: webhookData.createdBy,
+        targetId: webhookData.targetId,
       },
     ];
   };
 
-  toggleEnabled = async (desiredWebhook) => {
-    await toggleEnabledWebhook(desiredWebhook);
-    const index = this.webhooks.findIndex(
-      (webhook) => webhook.id === desiredWebhook.id,
-    );
-    this.webhooks[index].enabled = !this.webhooks[index].enabled;
+  toggleEnabled = async (desiredWebhook, t) => {
+    try {
+      await toggleEnabledWebhook(desiredWebhook);
+      const index = this.webhooks.findIndex(
+        (webhook) => webhook.id === desiredWebhook.id,
+      );
+      this.webhooks[index].enabled = !this.webhooks[index].enabled;
+      toastr.success(
+        this.webhooks[index].enabled
+          ? t("WebhookEnabled")
+          : t("WebhookDisabled"),
+      );
+    } catch (error) {
+      toastr.error(error);
+    }
   };
 
   deleteWebhook = async (webhook) => {
@@ -136,20 +164,14 @@ class WebhooksStore {
       webhookInfo.uri,
       webhookInfo.secretKey || prevWebhook.secretKey,
       webhookInfo.ssl,
+      webhookInfo.triggers,
+      webhookInfo.targetId,
     );
     this.webhooks = this.webhooks.map((webhook) =>
       webhook.id === prevWebhook.id
         ? { ...prevWebhook, ...webhookInfo }
         : webhook,
     );
-  };
-
-  retryWebhookEvent = async (id) => {
-    return await retryWebhook(id);
-  };
-
-  retryWebhookEvents = async (ids) => {
-    return await retryWebhooks(ids);
   };
 
   fetchConfigName = async (params) => {
@@ -159,7 +181,7 @@ class WebhooksStore {
       count: 1,
     });
 
-    this.configName = historyData.items[0].configName;
+    this.configName = historyData.items[0]?.configName || "";
   };
 
   clearConfigName = () => {
@@ -173,7 +195,7 @@ class WebhooksStore {
     const historyData = await getWebhooksJournal({
       ...params,
       startIndex: this.startIndex,
-      count: count,
+      count,
     });
     runInAction(() => {
       this.startIndex = count;
@@ -181,22 +203,25 @@ class WebhooksStore {
       this.totalItems = historyData.total;
     });
   };
+
   fetchMoreItems = async (params) => {
     const count = params.count ? params.count : this.FETCH_COUNT;
     const historyData = await getWebhooksJournal({
       ...params,
       startIndex: this.startIndex,
-      count: count,
+      count,
     });
     runInAction(() => {
-      this.startIndex = this.startIndex + count;
+      this.startIndex += count;
       this.historyItems = [...this.historyItems, ...historyData.items];
     });
   };
+
   fetchEventData = async (eventId) => {
     const data = await getWebhooksJournal({ eventId });
     this.eventDetails = data.items[0];
   };
+
   get hasMoreItems() {
     return this.totalItems > this.startIndex;
   }
@@ -208,12 +233,15 @@ class WebhooksStore {
   setHistoryFilters = (filters) => {
     this.historyFilters = filters;
   };
+
   clearHistoryFilters = () => {
     this.historyFilters = null;
   };
+
   clearDate = () => {
     this.historyFilters = { ...this.historyFilters, deliveryDate: null };
   };
+
   unselectStatus = (statusCode) => {
     this.historyFilters = {
       ...this.historyFilters,
@@ -221,56 +249,28 @@ class WebhooksStore {
     };
   };
 
-  formatFilters = (filters) => {
-    const params = {};
-    if (filters.deliveryDate !== null) {
-      params.deliveryFrom =
-        filters.deliveryDate.format("YYYY-MM-DD") +
-        "T" +
-        filters.deliveryFrom.format("HH:mm:ss");
-
-      params.deliveryTo =
-        filters.deliveryDate.format("YYYY-MM-DD") +
-        "T" +
-        filters.deliveryTo.format("HH:mm:ss");
-    }
-
-    const statusEnum = {
-      "Not sent": 1,
-      "2XX": 2,
-      "3XX": 4,
-      "4XX": 8,
-      "5XX": 16,
-    };
-
-    if (filters.status.length > 0) {
-      const statusFlag = filters.status.reduce(
-        (sum, currentValue) => sum + statusEnum[currentValue],
-        0,
-      );
-      params.groupStatus = statusFlag;
-    }
-
-    return params;
-  };
-
   toggleEventId = (id) => {
     this.checkedEventIds = this.checkedEventIds.includes(id)
       ? this.checkedEventIds.filter((checkedId) => checkedId !== id)
       : [...this.checkedEventIds, id];
   };
+
   isIdChecked = (id) => {
     return this.checkedEventIds.includes(id);
   };
+
   checkAllIds = () => {
     this.checkedEventIds = this.historyItems.map((event) => event.id);
   };
+
   emptyCheckedIds = () => {
     this.checkedEventIds = [];
   };
+
   get areAllIdsChecked() {
     return this.checkedEventIds.length === this.historyItems.length;
   }
+
   get isIndeterminate() {
     return this.checkedEventIds.length > 0 && !this.areAllIdsChecked;
   }

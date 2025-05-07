@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,6 +37,7 @@ const TABLE_ROOMS_COLUMNS = `roomsTableColumns_ver-${TableVersions.Rooms}`;
 const TABLE_TRASH_COLUMNS = `trashTableColumns_ver-${TableVersions.Trash}`;
 const TABLE_RECENT_COLUMNS = `recentTableColumns_ver-${TableVersions.Recent}`;
 const TABLE_VDR_INDEXING_COLUMNS = `vdrIndexingColumns_ver-${TableVersions.Rooms}`;
+const TABLE_TEMPLATES_ROOM_COLUMNS = `templatesRoomsTableColumns_ver-${TableVersions.Rooms}`;
 
 const COLUMNS_SIZE = `filesColumnsSize_ver-${TableVersions.Files}`;
 const COLUMNS_ROOMS_SIZE = `roomsColumnsSize_ver-${TableVersions.Rooms}`;
@@ -47,6 +48,7 @@ const COLUMNS_PEOPLE_SIZE = `peopleColumnsSize_ver-${TableVersions.People}`;
 const COLUMNS_GUESTS_SIZE = `guestsColumnsSize_ver-${TableVersions.Guests}`;
 const COLUMNS_GROUPS_SIZE = `groupsColumnsSize_ver-${TableVersions.Groups}`;
 const COLUMNS_INSIDE_GROUPS_SIZE = `insideGroupColumnsSize_ver-${TableVersions.InsideGroup}`;
+const COLUMNS_TEMPLATES_ROOM_SIZE = `templatesRoomsColumnsSize_ver-${TableVersions.Rooms}`;
 
 const COLUMNS_SIZE_INFO_PANEL = `filesColumnsSizeInfoPanel_ver-${TableVersions.Files}`;
 const COLUMNS_ROOMS_SIZE_INFO_PANEL = `roomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
@@ -57,68 +59,116 @@ const COLUMNS_PEOPLE_INFO_PANEL_SIZE = `infoPanelPeopleColumnsSize_ver-${TableVe
 const COLUMNS_GUESTS_INFO_PANEL_SIZE = `infoPanelGuestsColumnsSize_ver-${TableVersions.Guests}`;
 const COLUMNS_GROUPS_INFO_PANEL_SIZE = `infoPanelGuestsColumnsSize_ver-${TableVersions.Groups}`;
 const COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE = `infoPanelInsideGroupPeopleColumnsSize_ver-${TableVersions.InsideGroup}`;
+const COLUMNS_TEMPLATES_ROOM_SIZE_INFO_PANEL = `templatesRoomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
 
 class TableStore {
   authStore;
+
   treeFoldersStore;
+
   userStore;
+
   settingsStore;
+
   selectedFolderStore;
+
   peopleStore;
 
   roomColumnNameIsEnabled = true; // always true
+
   roomColumnTypeIsEnabled = false;
+
   roomColumnTagsIsEnabled = true;
+
   roomColumnOwnerIsEnabled = false;
+
   roomColumnActivityIsEnabled = true;
+
   roomQuotaColumnIsEnable = false;
 
   nameColumnIsEnabled = true; // always true
+
   authorColumnIsEnabled = false;
+
   roomColumnIsEnabled = true;
+
   erasureColumnIsEnabled = true;
+
   createdColumnIsEnabled = false;
+
   modifiedColumnIsEnabled = true;
+
   sizeColumnIsEnabled = true;
-  typeColumnIsEnabled = true;
+
   typeColumnIsEnabled = false;
-  quickButtonsColumnIsEnabled = true;
 
   authorRecentColumnIsEnabled = true;
+
   modifiedRecentColumnIsEnabled = false;
+
   createdRecentColumnIsEnabled = false;
+
   sizeRecentColumnIsEnabled = true;
+
   typeRecentColumnIsEnabled = false;
+
   lastOpenedColumnIsEnabled = true;
 
   authorTrashColumnIsEnabled = true;
+
   createdTrashColumnIsEnabled = false;
+
   sizeTrashColumnIsEnabled = true;
+
   typeTrashColumnIsEnabled = false;
 
   peopleGroupsColumnIsEnabled = true;
+
   managerGroupsColumnIsEnabled = true;
 
   typePeopleColumnIsEnabled = true;
+
   groupPeopleColumnIsEnabled = true;
+
   emailPeopleColumnIsEnabled = true;
+
   storagePeopleColumnIsEnabled = true;
 
   inviterGuestsColumnIsEnabled = true;
+
   emailGuestsColumnIsEnabled = true;
+
   invitedDateGuestsColumnIsEnabled = true;
 
   typeInsideGroupColumnIsEnabled = true;
+
   groupInsideGroupColumnIsEnabled = true;
+
   emailInsideGroupColumnIsEnabled = true;
+
   storageInsideGroupColumnIsEnabled = true;
 
   indexVDRColumnIsEnabled = true; // always true
+
   authorVDRColumnIsEnabled = true;
+
   modifiedVDRColumnIsEnabled = true;
+
   createdVDRColumnIsEnabled = false;
+
   sizeVDRColumnIsEnabled = true;
+
   typeVDRColumnIsEnabled = false;
+
+  templatesRoomColumnTypeIsEnabled = true;
+
+  templatesRoomColumnOwnerIsEnabled = true;
+
+  templateRoomColumnTagsIsEnabled = true;
+
+  templateRoomColumnActivityIsEnabled = true;
+
+  templateRoomQuotaColumnIsEnable = false;
 
   constructor(
     authStore,
@@ -148,6 +198,10 @@ class TableStore {
     this.roomColumnTagsIsEnabled = enable;
   };
 
+  setTemplateRoomColumnTags = (enable) => {
+    this.templateRoomColumnTagsIsEnabled = enable;
+  };
+
   setRoomColumnOwner = (enable) => {
     this.roomColumnOwnerIsEnabled = enable;
   };
@@ -156,8 +210,16 @@ class TableStore {
     this.roomColumnActivityIsEnabled = enable;
   };
 
+  setTemplateRoomColumnActivity = (enable) => {
+    this.templateRoomColumnActivityIsEnabled = enable;
+  };
+
   setRoomColumnQuota = (enable) => {
     this.roomQuotaColumnIsEnable = enable;
+  };
+
+  setTemplateRoomColumnQuota = (enable) => {
+    this.templateRoomQuotaColumnIsEnable = enable;
   };
 
   setAuthorColumn = (enable) => {
@@ -170,6 +232,10 @@ class TableStore {
 
   setAuthorVDRColumn = (enable) => {
     this.authorVDRColumnIsEnabled = enable;
+  };
+
+  setOwnerTemplatesColumn = (enable) => {
+    this.templatesRoomColumnOwnerIsEnabled = enable;
   };
 
   setCreatedColumn = (enable) => {
@@ -228,40 +294,53 @@ class TableStore {
     this.typeVDRColumnIsEnabled = enable;
   };
 
-  setQuickButtonsColumn = (enable) => {
-    this.quickButtonsColumnIsEnabled = enable;
+  setTypeTemplatesColumn = (enable) => {
+    this.templatesRoomColumnTypeIsEnabled = enable;
   };
 
   setAuthorTrashColumn = (enable) => (this.authorTrashColumnIsEnabled = enable);
+
   setCreatedTrashColumn = (enable) =>
     (this.createdTrashColumnIsEnabled = enable);
+
   setSizeTrashColumn = (enable) => (this.sizeTrashColumnIsEnabled = enable);
+
   setTypeTrashColumn = (enable) => (this.typeTrashColumnIsEnabled = enable);
+
   setLastOpenedColumn = (enable) => (this.lastOpenedColumnIsEnabled = enable);
 
   setGroupsColumnPeople = (enable) =>
     (this.peopleGroupsColumnIsEnabled = enable);
+
   setGroupsColumnManager = (enable) =>
     (this.managerGroupsColumnIsEnabled = enable);
 
   setPeopleColumnType = (enable) => (this.typePeopleColumnIsEnabled = enable);
+
   setPeopleColumnEmail = (enable) => (this.emailPeopleColumnIsEnabled = enable);
+
   setPeopleColumnGroup = (enable) => (this.groupPeopleColumnIsEnabled = enable);
+
   setPeopleColumnStorage = (enable) =>
     (this.storagePeopleColumnIsEnabled = enable);
 
   setGuestsColumnInviter = (enable) =>
     (this.inviterGuestsColumnIsEnabled = enable);
+
   setGuestsColumnEmail = (enable) => (this.emailGuestsColumnIsEnabled = enable);
+
   setGuestsColumnInvitedDate = (enable) =>
     (this.invitedDateGuestsColumnIsEnabled = enable);
 
   setInsideGroupColumnType = (enable) =>
     (this.typeInsideGroupColumnIsEnabled = enable);
+
   setInsideGroupColumnEmail = (enable) =>
     (this.emailInsideGroupColumnIsEnabled = enable);
+
   setInsideGroupColumnGroup = (enable) =>
     (this.groupInsideGroupColumnIsEnabled = enable);
+
   setInsideGroupColumnStorage = (enable) =>
     (this.storageInsideGroupColumnIsEnabled = enable);
 
@@ -275,8 +354,13 @@ class TableStore {
         : null;
 
     if (splitColumns) {
-      const { isRoomsFolder, isArchiveFolder, isTrashFolder } =
-        this.treeFoldersStore;
+      const {
+        isRoomsFolder,
+        isArchiveFolder,
+        isTrashFolder,
+        isTemplatesFolder,
+        isPersonalReadOnly,
+      } = this.treeFoldersStore;
 
       const contactsView = getContactsView();
 
@@ -294,6 +378,20 @@ class TableStore {
         : contactsTab === "inside_group";
 
       const isRooms = isRoomsFolder || isArchiveFolder;
+
+      if (isTemplatesFolder) {
+        this.setTypeTemplatesColumn(splitColumns.includes("TypeTemplates"));
+        this.setTemplateRoomColumnTags(splitColumns.includes("TagsTemplates"));
+        this.setOwnerTemplatesColumn(splitColumns.includes("OwnerTemplates"));
+        this.setTemplateRoomColumnActivity(
+          splitColumns.includes("ActivityTemplates"),
+        );
+        this.setTemplateRoomColumnQuota(
+          splitColumns.includes("StorageTemplates"),
+        );
+
+        return;
+      }
 
       if (isRooms) {
         this.setRoomColumnType(splitColumns.includes("Type"));
@@ -351,7 +449,6 @@ class TableStore {
         this.setLastOpenedColumn(splitColumns.includes("LastOpened"));
         this.setSizeRecentColumn(splitColumns.includes("SizeRecent"));
         this.setTypeRecentColumn(splitColumns.includes("TypeRecent"));
-        this.setQuickButtonsColumn(splitColumns.includes("QuickButtons"));
         return;
       }
 
@@ -366,10 +463,11 @@ class TableStore {
       this.setModifiedColumn(splitColumns.includes("Modified"));
       this.setAuthorColumn(splitColumns.includes("Author"));
       this.setCreatedColumn(splitColumns.includes("Created"));
+      if (isPersonalReadOnly)
+        this.setErasureColumn(splitColumns.includes("Erasure"));
       this.setSizeColumn(splitColumns.includes("Size"));
       this.setTypeColumn(splitColumns.includes("Type"));
       this.setLastOpenedColumn(splitColumns.includes("LastOpened"));
-      this.setQuickButtonsColumn(splitColumns.includes("QuickButtons"));
     }
   };
 
@@ -405,6 +503,9 @@ class TableStore {
         return;
       case "AuthorIndexing":
         this.setAuthorVDRColumn(!this.authorVDRColumnIsEnabled);
+        return;
+      case "OwnerTemplates":
+        this.setOwnerTemplatesColumn(!this.templatesRoomColumnOwnerIsEnabled);
         return;
       case "Created":
         this.setCreatedColumn(!this.createdColumnIsEnabled);
@@ -478,20 +579,30 @@ class TableStore {
         this.setTypeVDRColumn(!this.typeVDRColumnIsEnabled);
         return;
 
-      case "QuickButtons":
-        this.setQuickButtonsColumn(!this.quickButtonsColumnIsEnabled);
-        return;
-
       case "Owner":
         this.setRoomColumnOwner(!this.roomColumnOwnerIsEnabled);
+        return;
+
+      case "TypeTemplates":
+        this.setTypeTemplatesColumn(!this.templatesRoomColumnTypeIsEnabled);
         return;
 
       case "Tags":
         this.setRoomColumnTags(!this.roomColumnTagsIsEnabled);
         return;
 
+      case "TagsTemplates":
+        this.setTemplateRoomColumnTags(!this.templateRoomColumnTagsIsEnabled);
+        return;
+
       case "Activity":
         this.setRoomColumnActivity(!this.roomColumnActivityIsEnabled);
+        return;
+
+      case "ActivityTemplates":
+        this.setTemplateRoomColumnActivity(
+          !this.templateRoomColumnActivityIsEnabled,
+        );
         return;
 
       case "LastOpened":
@@ -521,6 +632,10 @@ class TableStore {
             : this.setRoomColumnQuota(!this.roomQuotaColumnIsEnable);
         return;
 
+      case "StorageTemplates":
+        this.setTemplateRoomColumnQuota(!this.templateRoomQuotaColumnIsEnable);
+        return;
+
       case "Inviter":
         this.setGuestsColumnInviter(!this.inviterGuestsColumnIsEnabled);
         return;
@@ -531,10 +646,8 @@ class TableStore {
 
       case "Head of Group":
         this.setGroupsColumnManager(!this.managerGroupsColumnIsEnabled);
-        return;
 
       default:
-        return;
     }
   };
 
@@ -549,30 +662,35 @@ class TableStore {
     if (splitColumns) {
       this.setColumnsEnable(null, isRecentTab);
 
-      for (let col of defaultColumns) {
+      defaultColumns.forEach((col) => {
         const column = splitColumns.find((key) => key === col.key);
         column ? (col.enable = true) : (col.enable = false);
 
         columns.push(col);
-      }
+      });
       return columns;
-    } else if (isFrame && frameTableColumns) {
+    }
+    if (isFrame && frameTableColumns) {
       this.setColumnsEnable(frameTableColumns);
 
       const frameTableArray = frameTableColumns.split(",");
       return defaultColumns.map((col) => {
-        col.enable = frameTableArray.includes(col.key) ? true : false;
+        col.enable = !!frameTableArray.includes(col.key);
         return col;
       });
-    } else {
-      return defaultColumns;
     }
+    return defaultColumns;
   };
 
   // Column names
   get tableStorageName() {
-    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isRecentTab } =
-      this.treeFoldersStore;
+    const {
+      isRoomsFolder,
+      isArchiveFolder,
+      isTrashFolder,
+      isRecentTab,
+      isTemplatesFolder,
+    } = this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
     const { isIndexedFolder } = this.selectedFolderStore;
@@ -597,25 +715,27 @@ class TableStore {
     const isFrame = this.settingsStore.isFrame;
     const isDocumentsFolder = !isRooms;
 
-    const tableStorageName = isRooms
-      ? `${TABLE_ROOMS_COLUMNS}=${userId}`
-      : isContactsPeople
-        ? `${TABLE_PEOPLE_COLUMNS}=${userId}`
-        : isContactsGuests
-          ? `${TABLE_GUESTS_COLUMNS}=${userId}`
-          : isContactsGroups
-            ? `${TABLE_GROUPS_COLUMNS}=${userId}`
-            : isContactsInsideGroup
-              ? `${TABLE_INSIDE_GROUP_COLUMNS}=${userId}`
-              : isTrashFolder
-                ? `${TABLE_TRASH_COLUMNS}=${userId}`
-                : isRecentTab
-                  ? `${TABLE_RECENT_COLUMNS}=${userId}`
-                  : isIndexedFolder
-                    ? `${TABLE_VDR_INDEXING_COLUMNS}=${userId}`
-                    : isDocumentsFolder
-                      ? `${TABLE_COLUMNS}=${userId}`
-                      : "";
+    let tableStorageName;
+
+    if (isTemplatesFolder)
+      tableStorageName = `${TABLE_TEMPLATES_ROOM_COLUMNS}=${userId}`;
+    else if (isRooms) tableStorageName = `${TABLE_ROOMS_COLUMNS}=${userId}`;
+    else if (isContactsPeople)
+      tableStorageName = `${TABLE_PEOPLE_COLUMNS}=${userId}`;
+    else if (isContactsGuests)
+      tableStorageName = `${TABLE_GUESTS_COLUMNS}=${userId}`;
+    else if (isContactsGroups)
+      tableStorageName = `${TABLE_GROUPS_COLUMNS}=${userId}`;
+    else if (isContactsInsideGroup)
+      tableStorageName = `${TABLE_INSIDE_GROUP_COLUMNS}=${userId}`;
+    else if (isTrashFolder)
+      tableStorageName = `${TABLE_TRASH_COLUMNS}=${userId}`;
+    else if (isRecentTab)
+      tableStorageName = `${TABLE_RECENT_COLUMNS}=${userId}`;
+    else if (isIndexedFolder)
+      tableStorageName = `${TABLE_VDR_INDEXING_COLUMNS}=${userId}`;
+    else if (isDocumentsFolder) tableStorageName = `${TABLE_COLUMNS}=${userId}`;
+    else tableStorageName = "";
 
     return isFrame && tableStorageName
       ? `SDK_${tableStorageName}`
@@ -624,8 +744,13 @@ class TableStore {
 
   // Table column sizes
   get columnStorageName() {
-    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isRecentTab } =
-      this.treeFoldersStore;
+    const {
+      isRoomsFolder,
+      isArchiveFolder,
+      isTrashFolder,
+      isRecentTab,
+      isTemplatesFolder,
+    } = this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
     const { isIndexedFolder } = this.selectedFolderStore;
@@ -650,25 +775,27 @@ class TableStore {
     const isFrame = this.settingsStore.isFrame;
     const isDocumentsFolder = !isRooms;
 
-    const columnStorageName = isRooms
-      ? `${COLUMNS_ROOMS_SIZE}=${userId}`
-      : isTrashFolder
-        ? `${COLUMNS_TRASH_SIZE}=${userId}`
-        : isRecentTab
-          ? `${COLUMNS_RECENT_SIZE}=${userId}`
-          : isIndexedFolder
-            ? `${COLUMNS_VDR_INDEXING_SIZE}=${userId}`
-            : isContactsPeople
-              ? `${COLUMNS_PEOPLE_SIZE}=${userId}`
-              : isContactsGuests
-                ? `${COLUMNS_GUESTS_SIZE}=${userId}`
-                : isContactsInsideGroup
-                  ? `${COLUMNS_INSIDE_GROUPS_SIZE}=${userId}`
-                  : isContactsGroups
-                    ? `${COLUMNS_GROUPS_SIZE}=${userId}`
-                    : isDocumentsFolder
-                      ? `${COLUMNS_SIZE}=${userId}`
-                      : "";
+    let columnStorageName;
+
+    if (isTemplatesFolder)
+      columnStorageName = `${COLUMNS_TEMPLATES_ROOM_SIZE}=${userId}`;
+    else if (isRooms) columnStorageName = `${COLUMNS_ROOMS_SIZE}=${userId}`;
+    else if (isTrashFolder)
+      columnStorageName = `${COLUMNS_TRASH_SIZE}=${userId}`;
+    else if (isRecentTab)
+      columnStorageName = `${COLUMNS_RECENT_SIZE}=${userId}`;
+    else if (isIndexedFolder)
+      columnStorageName = `${COLUMNS_VDR_INDEXING_SIZE}=${userId}`;
+    else if (isContactsPeople)
+      columnStorageName = `${COLUMNS_PEOPLE_SIZE}=${userId}`;
+    else if (isContactsGuests)
+      columnStorageName = `${COLUMNS_GUESTS_SIZE}=${userId}`;
+    else if (isContactsInsideGroup)
+      columnStorageName = `${COLUMNS_INSIDE_GROUPS_SIZE}=${userId}`;
+    else if (isContactsGroups)
+      columnStorageName = `${COLUMNS_GROUPS_SIZE}=${userId}`;
+    else if (isDocumentsFolder) columnStorageName = `${COLUMNS_SIZE}=${userId}`;
+    else columnStorageName = "";
 
     return isFrame && columnStorageName
       ? `SDK_${columnStorageName}`
@@ -677,8 +804,13 @@ class TableStore {
 
   // Column names for info-panel
   get columnInfoPanelStorageName() {
-    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isRecentTab } =
-      this.treeFoldersStore;
+    const {
+      isRoomsFolder,
+      isArchiveFolder,
+      isTrashFolder,
+      isRecentTab,
+      isTemplatesFolder,
+    } = this.treeFoldersStore;
 
     const { isIndexedFolder } = this.selectedFolderStore;
     const { contactsTab } = this.peopleStore.usersStore;
@@ -703,25 +835,29 @@ class TableStore {
     const isFrame = this.settingsStore.isFrame;
     const isDocumentsFolder = !isRooms;
 
-    const columnInfoPanelStorageName = isRooms
-      ? `${COLUMNS_ROOMS_SIZE_INFO_PANEL}=${userId}`
-      : isTrashFolder
-        ? `${COLUMNS_TRASH_SIZE_INFO_PANEL}=${userId}`
-        : isRecentTab
-          ? `${COLUMNS_RECENT_SIZE_INFO_PANEL}=${userId}`
-          : isIndexedFolder
-            ? `${COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL}=${userId}`
-            : isContactsPeople
-              ? `${COLUMNS_PEOPLE_INFO_PANEL_SIZE}=${userId}`
-              : isContactsGuests
-                ? `${COLUMNS_GUESTS_INFO_PANEL_SIZE}=${userId}`
-                : isContactsInsideGroup
-                  ? `${COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE}=${userId}`
-                  : isContactsGroups
-                    ? `${COLUMNS_GROUPS_INFO_PANEL_SIZE}=${userId}`
-                    : isDocumentsFolder
-                      ? `${COLUMNS_SIZE_INFO_PANEL}=${userId}`
-                      : "";
+    let columnInfoPanelStorageName;
+
+    if (isTemplatesFolder)
+      columnInfoPanelStorageName = `${COLUMNS_TEMPLATES_ROOM_SIZE_INFO_PANEL}=${userId}`;
+    else if (isRooms)
+      columnInfoPanelStorageName = `${COLUMNS_ROOMS_SIZE_INFO_PANEL}=${userId}`;
+    else if (isTrashFolder)
+      columnInfoPanelStorageName = `${COLUMNS_TRASH_SIZE_INFO_PANEL}=${userId}`;
+    else if (isRecentTab)
+      columnInfoPanelStorageName = `${COLUMNS_RECENT_SIZE_INFO_PANEL}=${userId}`;
+    else if (isIndexedFolder)
+      columnInfoPanelStorageName = `${COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL}=${userId}`;
+    else if (isContactsPeople)
+      columnInfoPanelStorageName = `${COLUMNS_PEOPLE_INFO_PANEL_SIZE}=${userId}`;
+    else if (isContactsGuests)
+      columnInfoPanelStorageName = `${COLUMNS_GUESTS_INFO_PANEL_SIZE}=${userId}`;
+    else if (isContactsInsideGroup)
+      columnInfoPanelStorageName = `${COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE}=${userId}`;
+    else if (isContactsGroups)
+      columnInfoPanelStorageName = `${COLUMNS_GROUPS_INFO_PANEL_SIZE}=${userId}`;
+    else if (isDocumentsFolder)
+      columnInfoPanelStorageName = `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;
+    else columnInfoPanelStorageName = "";
 
     return isFrame && columnInfoPanelStorageName
       ? `SDK_${columnInfoPanelStorageName}`

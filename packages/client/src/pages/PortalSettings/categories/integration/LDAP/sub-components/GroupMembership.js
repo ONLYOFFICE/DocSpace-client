@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,18 +29,17 @@ import { useTranslation } from "react-i18next";
 
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { Box } from "@docspace/shared/components/box";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 
 import LdapFieldComponent from "./LdapFieldComponent";
 
 const FIELD_STYLE = { marginBottom: "0px" };
 
-const GROUP_DN = "groupDN",
-  GROUP_ATTRIBUTE = "groupAttribute",
-  GROUP_NAME_ATTRIBUTE = "groupNameAttribute",
-  USER_ATTRIBUTE = "userAttribute",
-  GROUP_FILTER = "groupFilter";
+const GROUP_DN = "groupDN";
+const GROUP_ATTRIBUTE = "groupAttribute";
+const GROUP_NAME_ATTRIBUTE = "groupNameAttribute";
+const USER_ATTRIBUTE = "userAttribute";
+const GROUP_FILTER = "groupFilter";
 
 const GroupMembership = (props) => {
   const {
@@ -83,6 +82,8 @@ const GroupMembership = (props) => {
       case GROUP_ATTRIBUTE:
         setGroupAttribute(value);
         break;
+      default:
+        break;
     }
   };
 
@@ -102,10 +103,10 @@ const GroupMembership = (props) => {
           })}
         />
       </div>
-      <Box className="group_membership-container">
+      <div className="group_membership-container">
         <FieldContainer
           isVertical
-          labelVisible={true}
+          labelVisible
           style={FIELD_STYLE}
           errorMessage={t("Common:EmptyFieldError")}
           labelText={t("LdapGroupDN")}
@@ -126,7 +127,7 @@ const GroupMembership = (props) => {
         </FieldContainer>
         <FieldContainer
           isVertical
-          labelVisible={true}
+          labelVisible
           style={FIELD_STYLE}
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.userAttribute}
@@ -148,7 +149,7 @@ const GroupMembership = (props) => {
         <FieldContainer
           style={FIELD_STYLE}
           isVertical
-          labelVisible={true}
+          labelVisible
           errorMessage={t("Common:EmptyFieldError")}
           labelText={t("LdapGroupFilter")}
           hasError={errors.groupFilter}
@@ -171,7 +172,7 @@ const GroupMembership = (props) => {
         <FieldContainer
           style={FIELD_STYLE}
           isVertical
-          labelVisible={true}
+          labelVisible
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.groupNameAttribute}
           labelText={t("LdapGroupNameAttribute")}
@@ -191,7 +192,7 @@ const GroupMembership = (props) => {
         </FieldContainer>
         <FieldContainer
           isVertical
-          labelVisible={true}
+          labelVisible
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.groupAttribute}
           labelText={t("LdapGroupAttribute")}
@@ -209,7 +210,7 @@ const GroupMembership = (props) => {
             tabIndex={17}
           />
         </FieldContainer>
-      </Box>
+      </div>
     </>
   );
 };

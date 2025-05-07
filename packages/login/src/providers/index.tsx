@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -57,7 +57,8 @@ export const Providers = ({
   const firebaseHelper = new FirebaseHelper(
     value.settings?.firebase ?? ({} as TFirebaseSettings),
   );
-  const confirmType = useSearchParams().get("type");
+  const searchParams = useSearchParams();
+  const confirmType = searchParams.get("type");
 
   let shouldRedirect = true;
   if (redirectURL === "unavailable" && confirmType === "PortalContinue") {
@@ -66,6 +67,15 @@ export const Providers = ({
 
   const pathName = usePathname();
   const expectedPathName = `/${redirectURL}`;
+
+  React.useEffect(() => {
+    if (redirectURL && confirmType === "GuestShareLink") {
+      sessionStorage.setItem(
+        "referenceUrl",
+        `/confirm/${confirmType}?${searchParams.toString()}`,
+      );
+    }
+  }, [redirectURL, searchParams, confirmType]);
 
   React.useEffect(() => {
     if (shouldRedirect && redirectURL && pathName !== expectedPathName)

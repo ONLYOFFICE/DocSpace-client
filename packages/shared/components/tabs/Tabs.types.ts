@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -42,7 +42,7 @@ export type TTabItem = {
   badge?: React.ReactNode;
 };
 
-export interface TabsProps {
+export type TabsProps = {
   /** Child elements. */
   items: TTabItem[];
   /** Selected item of tabs. */
@@ -60,4 +60,4 @@ export interface TabsProps {
   onSelect?: (element: TTabItem) => void;
 
   style?: React.CSSProperties;
-}
+};

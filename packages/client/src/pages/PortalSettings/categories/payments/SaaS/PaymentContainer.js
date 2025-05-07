@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -127,35 +127,34 @@ const PaymentContainer = (props) => {
     t,
     isNonProfit,
     isPaymentDateValid,
+    isYearTariff,
   } = props;
   const renderTooltip = () => {
     return (
-      <>
-        <HelpButton
-          className="payment-tooltip"
-          offsetRight={0}
-          iconName={HelpReactSvgUrl}
-          tooltipContent={
-            <>
-              <Text isBold>{t("ManagerTypesDescription")}</Text>
-              <br />
-              <Text isBold>
-                {t("Common:PortalAdmin", {
-                  productName: t("Common:ProductName"),
-                })}
-              </Text>
-              <Text>
-                {t("AdministratorDescription", {
-                  productName: t("Common:ProductName"),
-                })}
-              </Text>
-              <br />
-              <Text isBold>{t("Common:RoomAdmin")}</Text>
-              <Text>{t("RoomManagerDescription")}</Text>
-            </>
-          }
-        />
-      </>
+      <HelpButton
+        className="payment-tooltip"
+        offsetRight={0}
+        iconName={HelpReactSvgUrl}
+        tooltipContent={
+          <>
+            <Text isBold>{t("ManagerTypesDescription")}</Text>
+            <br />
+            <Text isBold>
+              {t("Common:PortalAdmin", {
+                productName: t("Common:ProductName"),
+              })}
+            </Text>
+            <Text>
+              {t("AdministratorDescription", {
+                productName: t("Common:ProductName"),
+              })}
+            </Text>
+            <br />
+            <Text isBold>{t("Common:RoomAdmin")}</Text>
+            <Text>{t("RoomManagerDescription")}</Text>
+          </>
+        }
+      />
     );
   };
 
@@ -203,7 +202,7 @@ const PaymentContainer = (props) => {
           noSelect
           fontSize="16px"
           isBold
-          className={"payment-info_suggestion"}
+          className="payment-info_suggestion"
         >
           <Trans t={t} i18nKey="StartupSuggestion" ns="Payments">
             {{ planName: tariffPlanTitle }}
@@ -218,7 +217,7 @@ const PaymentContainer = (props) => {
           noSelect
           fontSize="16px"
           isBold
-          className={"payment-info_suggestion"}
+          className="payment-info_suggestion"
         >
           <Trans t={t} i18nKey="BusinessSuggestion" ns="Payments">
             {{ planName: tariffPlanTitle }}
@@ -233,7 +232,7 @@ const PaymentContainer = (props) => {
           noSelect
           fontSize="16px"
           isBold
-          className={"payment-info_suggestion"}
+          className="payment-info_suggestion"
         >
           <Trans t={t} i18nKey="RenewSubscription" ns="Payments">
             {{ planName: tariffPlanTitle }}
@@ -248,7 +247,7 @@ const PaymentContainer = (props) => {
           noSelect
           fontSize="16px"
           isBold
-          className={"payment-info_grace-period"}
+          className="payment-info_grace-period"
           color={theme.client.settings.payment.warningColor}
         >
           <Trans t={t} i18nKey="DelayedPayment" ns="Payments">
@@ -257,8 +256,6 @@ const PaymentContainer = (props) => {
         </Text>
       );
     }
-
-    return;
   };
 
   const planDescription = () => {
@@ -266,7 +263,7 @@ const PaymentContainer = (props) => {
 
     if (isGracePeriod)
       return (
-        <Text noSelect fontSize={"14px"} lineHeight={"16px"}>
+        <Text noSelect fontSize="14px" lineHeight="16px">
           <Trans t={t} i18nKey="GracePeriodActivatedInfo" ns="Payments">
             Grace period activated
             <strong>
@@ -287,8 +284,8 @@ const PaymentContainer = (props) => {
       return (
         <Text
           noSelect
-          fontSize={"14px"}
-          lineHeight={"16px"}
+          fontSize="14px"
+          lineHeight="16px"
           className="payment-info_managers-price"
         >
           <Trans t={t} i18nKey="BusinessFinalDateInfo" ns="Payments">
@@ -304,17 +301,19 @@ const PaymentContainer = (props) => {
     <Consumer>
       {(context) => (
         <StyledBody
-          isChangeView={context.sectionWidth <= size.mobile && expandArticle}
+          isChangeView={
+            context.sectionWidth <= size.mobile ? expandArticle : null
+          }
         >
           {isNotPaidPeriod
             ? expiredTitleSubscriptionWarning()
             : currentPlanTitle()}
 
-          {!isNonProfit && isAlreadyPaid && (
+          {!isNonProfit && isAlreadyPaid ? (
             <PayerInformationContainer
               isFreeAfterPaidPeriod={isFreeAfterPaidPeriod}
             />
-          )}
+          ) : null}
 
           <CurrentTariffContainer />
 
@@ -322,33 +321,46 @@ const PaymentContainer = (props) => {
           {planDescription()}
 
           {!isNonProfit &&
-            !isGracePeriod &&
-            !isNotPaidPeriod &&
-            !isFreeAfterPaidPeriod && (
-              <div className="payment-info_wrapper">
-                <Text
-                  noSelect
-                  fontWeight={600}
-                  fontSize={"14px"}
-                  className="payment-info_managers-price"
-                >
-                  <Trans t={t} i18nKey="PerUserMonth" ns="Common">
-                    From {{ currencySymbol }}
-                    {{ price: startValue }} per admin/month
-                  </Trans>
-                </Text>
+          !isGracePeriod &&
+          !isNotPaidPeriod &&
+          !isFreeAfterPaidPeriod ? (
+            <div className="payment-info_wrapper">
+              <Text
+                noSelect
+                fontWeight={600}
+                fontSize="14px"
+                className="payment-info_managers-price"
+              >
+                {isYearTariff ? (
+                  <Trans
+                    t={t}
+                    i18nKey="PerUserYear"
+                    ns="Common"
+                    values={{ currencySymbol, price: startValue }}
+                    components={{ 1: <span /> }}
+                  />
+                ) : (
+                  <Trans
+                    t={t}
+                    i18nKey="PerUserMonth"
+                    ns="Common"
+                    values={{ currencySymbol, price: startValue }}
+                    components={{ 1: <span /> }}
+                  />
+                )}
+              </Text>
 
-                {renderTooltip()}
-              </div>
-            )}
+              {renderTooltip()}
+            </div>
+          ) : null}
 
           <div className="payment-info">
-            {!isNonProfit && (
+            {!isNonProfit ? (
               <PriceCalculation
                 t={t}
                 isFreeAfterPaidPeriod={isFreeAfterPaidPeriod}
               />
-            )}
+            ) : null}
 
             <BenefitsContainer t={t} />
           </div>
@@ -369,7 +381,7 @@ export default inject(
   }) => {
     const { showText: expandArticle, theme } = settingsStore;
 
-    const { isFreeTariff, currentTariffPlanTitle, isNonProfit } =
+    const { isFreeTariff, currentTariffPlanTitle, isNonProfit, isYearTariff } =
       currentQuotaStore;
 
     const {
@@ -413,6 +425,7 @@ export default inject(
       portalPaymentQuotas,
       isNonProfit,
       isPaymentDateValid,
+      isYearTariff,
     };
   },
 )(observer(PaymentContainer));

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,12 +26,14 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
+import { useLocation } from "react-router-dom";
 
 import { DeviceType } from "@docspace/shared/enums";
 import Section from "@docspace/shared/components/section";
 
-import SectionHeaderContent from "./Header";
 import Bar from "SRC_DIR/components/Bar";
+
+import SectionHeaderContent from "./Header";
 
 interface ISectionProps {
   children: React.ReactNode;
@@ -49,6 +51,7 @@ interface ISectionProps {
   snackbarExist?: boolean;
   showText?: boolean;
   isInfoPanelScrollLocked?: boolean;
+  isPortalRestoring?: boolean;
 }
 
 const SectionWrapper = ({
@@ -67,7 +70,10 @@ const SectionWrapper = ({
   snackbarExist,
   showText,
   isInfoPanelScrollLocked,
+  isPortalRestoring,
 }: ISectionProps) => {
+  const location = useLocation();
+
   return (
     <Section
       withBodyScroll
@@ -85,10 +91,15 @@ const SectionWrapper = ({
       snackbarExist={snackbarExist}
       showText={showText}
       isInfoPanelScrollLocked={isInfoPanelScrollLocked}
+      pathname={location.pathname}
     >
-      <Section.SectionHeader>
-        <SectionHeaderContent />
-      </Section.SectionHeader>
+      {!isPortalRestoring ? (
+        <Section.SectionHeader>
+          <SectionHeaderContent />
+        </Section.SectionHeader>
+      ) : (
+        <></>
+      )}
       <Section.SectionWarning>
         <Bar />
       </Section.SectionWarning>
@@ -115,6 +126,7 @@ export default inject(
       maintenanceExist,
       snackbarExist,
       showText,
+      isPortalRestoring,
     } = settingsStore;
 
     const { isVisible, isMobileHidden, setIsVisible, getCanDisplay } =
@@ -143,6 +155,7 @@ export default inject(
       snackbarExist,
       showText,
       isInfoPanelScrollLocked,
+      isPortalRestoring,
     };
   }
 )(observer(SectionWrapper));

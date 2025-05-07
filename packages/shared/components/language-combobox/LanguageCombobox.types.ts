@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,7 +32,7 @@ export type TCulture = {
 };
 
 export type TCultures = TCulture[];
-export interface ComboboxProps {
+export type ComboboxProps = {
   selectedCulture: string;
   cultures: string[];
   onSelectLanguage: (culture: TCulture) => void;
@@ -43,4 +43,4 @@ export interface ComboboxProps {
   /** Indicates that component contain border */
   withBorder?: boolean;
   isMobileView?: boolean;
-}
+};

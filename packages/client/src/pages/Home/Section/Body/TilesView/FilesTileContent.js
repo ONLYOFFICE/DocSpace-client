@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,20 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
+import { getRoomTypeTitleTranslation } from "@docspace/shared/components/room-type/RoomType.utils";
 
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 
-import TileContent from "./sub-components/TileContent";
-import withContent from "../../../../../HOCs/withContent";
-import withBadges from "../../../../../HOCs/withBadges";
-
 import { DeviceType } from "@docspace/shared/enums";
 import { tablet } from "@docspace/shared/utils";
+import { TileContent } from "@docspace/shared/components/tiles";
+import withContent from "../../../../../HOCs/withContent";
+import withBadges from "../../../../../HOCs/withBadges";
 
 const SimpleFilesTileContent = styled(TileContent)`
   .row-main-container {
@@ -46,6 +45,17 @@ const SimpleFilesTileContent = styled(TileContent)`
     display: flex;
     align-items: flex-end;
   }
+
+  ${(props) =>
+    props.isTemplate &&
+    css`
+      overflow: hidden;
+
+      .row-main-container {
+        flex-direction: column;
+        align-items: start;
+      }
+    `}
 
   .main-icons {
     align-self: flex-end;
@@ -85,7 +95,7 @@ const SimpleFilesTileContent = styled(TileContent)`
 
   .item-file-name {
     max-height: 100%;
-    line-height: 20px;
+    line-height: ${(props) => (props.isRooms ? "22px" : "20px")};
 
     overflow: hidden;
     text-overflow: ellipsis;
@@ -93,19 +103,26 @@ const SimpleFilesTileContent = styled(TileContent)`
     display: -webkit-box;
     -webkit-box-orient: vertical;
     text-align: start;
+
+    font-size: ${(props) =>
+      (props.isRooms && "16px") ||
+      (!props.isRooms && props.currentDeviceType === DeviceType.desktop
+        ? "13px"
+        : "14px")};
   }
 
   .item-file-exst {
     color: ${(props) => props.theme.filesSection.tableView.fileExstColor};
   }
 
-  ${({ isRooms }) =>
-    isRooms &&
-    css`
-      .item-file-name {
-        font-size: 16px;
-      }
-    `}
+  ${({ isRooms, isTemplate }) =>
+    isRooms ||
+    (isTemplate &&
+      css`
+        .item-file-name {
+          font-size: 16px;
+        }
+      `)}
 
   @media ${tablet} {
     display: inline-flex;
@@ -118,6 +135,7 @@ const SimpleFilesTileContent = styled(TileContent)`
 `;
 
 const FilesTileContent = ({
+  t,
   item,
   titleWithoutExt,
   linkStyles,
@@ -126,43 +144,54 @@ const FilesTileContent = ({
   currentDeviceType,
   displayFileExtension,
 }) => {
-  const { fileExst, title, viewAccessibility } = item;
+  const { fileExst, title, isTemplate } = item;
 
-  const isMedia = viewAccessibility?.ImageView || viewAccessibility?.MediaView;
+  const roomType = getRoomTypeTitleTranslation(t, item.roomType);
 
   return (
-    <>
-      <SimpleFilesTileContent
-        sideColor={theme.filesSection.tilesView.sideColor}
-        isFile={fileExst}
-        isRooms={isRooms}
+    <SimpleFilesTileContent
+      sideColor={theme.filesSection.tilesView.sideColor}
+      isFile={fileExst}
+      isRooms={isRooms}
+      isTemplate={isTemplate}
+      currentDeviceType={currentDeviceType}
+    >
+      <Link
+        className="item-file-name"
+        containerWidth="100%"
+        type="page"
+        title={title}
+        fontWeight={isTemplate ? 700 : 600}
+        target="_blank"
+        {...linkStyles}
+        color={theme.filesSection.tilesView.color}
+        isTextOverflow
+        dir="auto"
+        view="tile"
       >
-        <Link
-          className="item-file-name"
-          containerWidth="100%"
-          type="page"
-          title={title}
-          fontWeight="600"
-          fontSize={currentDeviceType === DeviceType.desktop ? "13px" : "14px"}
-          target="_blank"
-          {...linkStyles}
-          color={theme.filesSection.tilesView.color}
-          isTextOverflow
-          dir="auto"
-          view="tile"
+        {titleWithoutExt}
+        {displayFileExtension ? (
+          <span className="item-file-exst">{fileExst}</span>
+        ) : null}
+      </Link>
+      {isTemplate ? (
+        <Text
+          className="item-file-sub-name"
+          color={theme.filesSection.tilesView.subTextColor}
+          fontSize="13px"
+          fontWeight={400}
+          truncate
         >
-          {titleWithoutExt}
-          {displayFileExtension && (
-            <span className="item-file-exst">{fileExst}</span>
-          )}
-        </Link>
-      </SimpleFilesTileContent>
-    </>
+          {roomType}
+        </Text>
+      ) : null}
+    </SimpleFilesTileContent>
   );
 };
 
 export default inject(({ settingsStore, treeFoldersStore }) => {
-  const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
+  const { isRoomsFolder, isArchiveFolder, isTemplatesFolder } =
+    treeFoldersStore;
 
   const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -170,6 +199,7 @@ export default inject(({ settingsStore, treeFoldersStore }) => {
     theme: settingsStore.theme,
     currentDeviceType: settingsStore.currentDeviceType,
     isRooms,
+    isTemplate: isTemplatesFolder,
   };
 })(
   observer(

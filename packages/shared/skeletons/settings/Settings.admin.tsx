@@ -24,9 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { Box } from "@docspace/shared/components/box";
-import { LOADER_STYLE } from "@docspace/shared/constants";
+import { LOADER_STYLE } from "../../constants";
 
 import { RectangleSkeleton } from "../rectangle";
 
@@ -39,9 +37,9 @@ const sectionGap = "16px";
 const sectionsGap = "32px";
 
 const Setting = ({ width = "280px" }: SettingProps) => (
-  <Box
-    displayProp="grid"
+  <div
     style={{
+      display: "grid",
       gridGap: "8px",
       gridTemplateColumns: `28px ${width}`,
       alignItems: "center",
@@ -65,7 +63,7 @@ const Setting = ({ width = "280px" }: SettingProps) => (
       speed={speed}
       animate
     />
-  </Box>
+  </div>
 );
 
 const SectionTitle = ({
@@ -85,16 +83,16 @@ const SectionTitle = ({
 );
 
 const SettingsSection = ({ width }: Required<SettingProps>) => (
-  <Box displayProp="grid" style={{ gridGap: sectionGap }}>
+  <div style={{ display: "grid", gridGap: sectionGap }}>
     <SectionTitle />
     <Setting width={width} />
-  </Box>
+  </div>
 );
 
 const SettingsTabs = () => (
-  <Box
-    displayProp="grid"
+  <div
     style={{
+      display: "grid",
       gridGap: "20px",
       gridTemplateColumns: "41px 58px",
     }}
@@ -117,18 +115,20 @@ const SettingsTabs = () => (
       speed={speed}
       animate
     />
-  </Box>
+  </div>
 );
 
 export const SettingsAdminSkeleton = () => (
-  <Box
-    widthProp="100%"
-    heightProp="100%"
-    displayProp="grid"
-    style={{ gridGap: sectionsGap }}
+  <div
+    style={{
+      width: "100%",
+      height: "100%",
+      display: "grid",
+      gridGap: sectionsGap,
+    }}
   >
     <SettingsTabs />
     <SettingsSection width="222px" />
     <SettingsSection width="260px" />
-  </Box>
+  </div>
 );

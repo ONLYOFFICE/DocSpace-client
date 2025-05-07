@@ -1,5 +1,4 @@
-import { AvatarRole } from "./../components/avatar/Avatar.enums";
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,8 +37,6 @@ import { I18nextProviderProps } from "react-i18next";
 import sjcl from "sjcl";
 import resizeImage from "resize-image";
 
-import { flagsIcons } from "@docspace/shared/utils/image-flags";
-
 import LoginPageSvgUrl from "PUBLIC_DIR/images/logo/loginpage.svg?url";
 import DarkLoginPageSvgUrl from "PUBLIC_DIR/images/logo/dark_loginpage.svg?url";
 import LeftMenuSvgUrl from "PUBLIC_DIR/images/logo/leftmenu.svg?url";
@@ -56,16 +53,21 @@ import BackgroundPatternRedReactSvgUrl from "PUBLIC_DIR/images/background.patter
 import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pattern.purple.react.svg?url";
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
+
+import { AvatarRole } from "../components/avatar/Avatar.enums";
+
+import { flagsIcons } from "./image-flags";
+
 import { parseAddress } from "./email";
 
 import {
   FolderType,
   RoomsType,
-  ShareAccessRights,
   ThemeKeys,
   ErrorKeys,
   WhiteLabelLogoType,
   EmployeeType,
+  UrlActionType,
 } from "../enums";
 import {
   COOKIE_EXPIRATION_YEAR,
@@ -85,6 +87,8 @@ import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie, setCookie } from "./cookie";
 import { checkIsSSR } from "./device";
+import { hasOwnProperty } from "./object";
+import { TFrameConfig } from "../types/Frame";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -112,9 +116,9 @@ export function createPasswordHash(
     !hashSettings ||
     typeof password !== "string" ||
     typeof hashSettings !== "object" ||
-    !Object.prototype.hasOwnProperty.call(hashSettings, "salt") ||
-    !Object.prototype.hasOwnProperty.call(hashSettings, "size") ||
-    !Object.prototype.hasOwnProperty.call(hashSettings, "iterations") ||
+    !hasOwnProperty(hashSettings, "salt") ||
+    !hasOwnProperty(hashSettings, "size") ||
+    !hasOwnProperty(hashSettings, "iterations") ||
     typeof hashSettings.size !== "number" ||
     typeof hashSettings.iterations !== "number" ||
     typeof hashSettings.salt !== "string"
@@ -452,6 +456,10 @@ export const isLanguageRtl = (lng: string) => {
   return RTL_LANGUAGES.includes(splittedLng[0]);
 };
 
+export const getDirectionByLanguage = (lng: string) => {
+  return isLanguageRtl(lng) ? "rtl" : "ltr";
+};
+
 // temporary function needed to replace rtl language in Editor to ltr
 export const getLtrLanguageForEditor = (
   userLng: string | undefined,
@@ -558,10 +566,11 @@ export function isElementInViewport(el: HTMLElement) {
 }
 
 export function assign(
-  obj: { [key: string]: {} },
+  objParam: { [key: string]: {} },
   keyPath: string[],
   value: {},
 ) {
+  let obj = objParam;
   const lastKeyIndex = keyPath.length - 1;
   for (let i = 0; i < lastKeyIndex; ++i) {
     const key = keyPath[i];
@@ -752,7 +761,8 @@ export const getDaysRemaining = (autoDelete: Date) => {
   return `${daysRemaining}`;
 };
 
-export const getFileExtension = (fileTitle: string) => {
+export const getFileExtension = (fileTitleParam: string) => {
+  let fileTitle = fileTitleParam;
   if (!fileTitle) {
     return "";
   }
@@ -1029,17 +1039,18 @@ export const getSystemTheme = () => {
 };
 
 export const getEditorTheme = (theme?: ThemeKeys) => {
+  const systemTheme =
+    getSystemTheme() === ThemeKeys.DarkStr ? "default-dark" : "default-light";
+
   switch (theme) {
     case ThemeKeys.BaseStr:
       return "default-light";
     case ThemeKeys.DarkStr:
       return "default-dark";
-    case ThemeKeys.SystemStr: {
-      const uiTheme = getSystemTheme();
-      return uiTheme === ThemeKeys.DarkStr ? "default-dark" : "default-light";
-    }
+    case ThemeKeys.SystemStr:
+      return systemTheme;
     default:
-      return "default-dark";
+      return systemTheme;
   }
 };
 
@@ -1233,13 +1244,17 @@ export const getUserTypeDescription = (
   t: TTranslation,
 ) => {
   if (isPortalAdmin)
-    return t("Translations:RolePortalAdminDescription", {
+    return t("Common:RolePortalAdminDescription", {
       productName: t("Common:ProductName"),
+      sectionName: t("Common:MyFilesSection"),
     });
 
-  if (isRoomAdmin) return t("Translations:RoleRoomAdminDescription");
+  if (isRoomAdmin)
+    return t("Common:RoleRoomAdminDescription", {
+      sectionName: t("Common:MyFilesSection"),
+    });
 
-  if (isCollaborator) return t("Translations:RoleNewUserDescription");
+  if (isCollaborator) return t("Common:RoleNewUserDescription");
 
   return t("Translations:RoleGuestDescriprion");
 };
@@ -1270,8 +1285,8 @@ export const imageProcessing = async (file: File, maxSize?: number) => {
   const maxImageSize = maxSize ?? ONE_MEGABYTE;
   const imageBitMap = await createImageBitmap(file);
 
-  const width = imageBitMap.width;
-  const height = imageBitMap.height;
+  const { width } = imageBitMap;
+  const { height } = imageBitMap;
 
   // @ts-expect-error imageBitMap
   const canvas = resizeImage.resize2Canvas(imageBitMap, width, height);
@@ -1323,4 +1338,64 @@ export const imageProcessing = async (file: File, maxSize?: number) => {
     { width, height },
     file.size > maxImageSize ? COMPRESSION_RATIO : NO_COMPRESSION_RATIO,
   );
+};
+
+export const getBackupProgressInfo = (
+  opt: {
+    progress: number;
+    isCompleted?: boolean;
+    link?: string;
+    error?: string;
+  },
+  t: TTranslation,
+  setBackupProgress: (progress: number) => void,
+  setLink: (link: string) => void,
+) => {
+  const { isCompleted, link, error, progress } = opt;
+  setBackupProgress(progress);
+
+  if (isCompleted) {
+    if (error) {
+      setBackupProgress(100);
+      return { error };
+    }
+
+    if (link && link.slice(0, 1) === "/") {
+      setLink(link);
+    }
+
+    return { success: t("Settings:BackupCreatedSuccess") };
+  }
+};
+
+type OpenUrlParams = {
+  url: string;
+  action: UrlActionType;
+  replace?: boolean;
+  isFrame?: boolean;
+  frameConfig?: TFrameConfig | null;
+};
+
+export const openUrl = ({
+  url,
+  action,
+  replace,
+  isFrame,
+  frameConfig,
+}: OpenUrlParams) => {
+  if (action === UrlActionType.Download) {
+    return isFrame &&
+      frameConfig?.downloadToEvent &&
+      frameConfig?.events?.onDownload
+      ? frameCallEvent({ event: "onDownload", data: url })
+      : replace
+        ? (window.location.href = url)
+        : window.open(url, "_self");
+  }
+};
+
+export const getSdkScriptUrl = (version: string) => {
+  return typeof window !== "undefined"
+    ? `${window.location.origin}/static/scripts/sdk/${version}/api.js`
+    : "";
 };

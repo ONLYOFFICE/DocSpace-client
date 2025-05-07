@@ -1,5 +1,5 @@
 {
-  "DisconnectCloudMessage": "Haluatko varmasti poistaa  {{service}}? Tämä ei vaikuta {{account}} tiliin millään tavalla.",
   "DisconnectCloudTitle": "Katkaise yhteys pilveen",
-  "SuccessDeleteThirdParty": "Kolmannen osapuolen {{service}} poistetaan"
+  "SuccessDeleteThirdParty": "Kolmannen osapuolen {{service}} poistetaan",
+  "ThirdPartyDisconnectPrompt": "Haluatko varmasti poistaa {{service}}? Tämä ei vaikuta {{account}}-tililläsi millään tavalla."
 }

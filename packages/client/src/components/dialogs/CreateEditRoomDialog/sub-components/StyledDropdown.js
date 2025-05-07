@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,17 +26,17 @@
 
 import styled from "styled-components";
 
-import { mobile } from "@docspace/shared/utils";
+import { injectDefaultTheme, mobile } from "@docspace/shared/utils";
 
 import { DropDown } from "@docspace/shared/components/drop-down";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledDropDownWrapper = styled.div`
   width: 100%;
   position: relative;
 `;
 
-const StyledDropDown = styled(DropDown)`
+const StyledDropDown = styled(DropDown).attrs(injectDefaultTheme)`
   margin-top: ${(props) => (props.marginTop ? props.marginTop : "4px")};
   padding: 6px 0;
   background: ${(props) =>
@@ -50,15 +50,24 @@ const StyledDropDown = styled(DropDown)`
 
   width: 446px;
   max-width: 446px;
-  div {
-    max-width: 446px;
+  .dropdown-item {
+    min-width: 446px;
   }
 
   @media ${mobile} {
     width: calc(100vw - 34px);
     max-width: calc(100vw - 34px);
-    div {
-      max-width: calc(100vw - 34px);
+    .dropdown-item {
+      min-width: calc(100vw - 34px);
+    }
+  }
+
+  .ScrollbarsCustom {
+    .track-vertical {
+      height: 100% !important;
+    }
+    .scroll-body {
+      padding-bottom: unset !important;
     }
   }
 
@@ -90,7 +99,5 @@ const StyledDropDown = styled(DropDown)`
     }
   }
 `;
-
-StyledDropDown.defaultProps = { theme: Base };
 
 export { StyledDropDownWrapper, StyledDropDown };

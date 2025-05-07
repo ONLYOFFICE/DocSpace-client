@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,18 +26,18 @@
 
 import styled from "styled-components";
 
-import { commonIconsStyles } from "../../../utils";
-import { Base, TColorScheme } from "../../../themes";
+import { commonIconsStyles, injectDefaultTheme } from "../../../utils";
+import { TColorScheme } from "../../../themes";
 
 import StyledMuteIcon from "../sub-components/StyledMuteIcon";
 
 import { IconButtonMuteColorTheme } from "../ColorTheme.types";
 
-const IconButtonMuteTheme = styled(StyledMuteIcon)<
+const IconButtonMuteTheme = styled(StyledMuteIcon).attrs(injectDefaultTheme)<
   IconButtonMuteColorTheme & { $currentColorScheme?: TColorScheme }
 >`
   ${commonIconsStyles}
-  svg {
+  && svg {
     path:first-child {
       stroke: ${(props) =>
         props.theme.isBase && props.$currentColorScheme?.main?.accent};
@@ -52,7 +52,7 @@ const IconButtonMuteTheme = styled(StyledMuteIcon)<
     }
   }
 
-  &:hover {
+  &&:hover:not(.disabled) {
     svg {
       path {
         fill: ${(props) =>
@@ -61,7 +61,5 @@ const IconButtonMuteTheme = styled(StyledMuteIcon)<
     }
   }
 `;
-
-IconButtonMuteTheme.defaultProps = { theme: Base };
 
 export default IconButtonMuteTheme;

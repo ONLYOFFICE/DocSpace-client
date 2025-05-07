@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,14 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useContext } from "react";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/12/plus.svg?url";
 import UpSvgUrl from "PUBLIC_DIR/images/up.svg?url";
-import FormRoomEmptyDarkImageUrl from "PUBLIC_DIR/images/emptyview/selector.form.room.empty.screen.dark.svg?url";
-import FormRoomEmptyLightImageUrl from "PUBLIC_DIR/images/emptyview/selector.form.room.empty.screen.light.svg?url";
-import Plus16SvgUrl from "PUBLIC_DIR/images/icons/16/plus.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 
 import { RoomsType } from "../../../enums";
@@ -41,9 +37,8 @@ import { Heading } from "../../heading";
 import { Text } from "../../text";
 import { IconButton } from "../../icon-button";
 import { Link, LinkType } from "../../link";
-import { SelectorAddButton } from "../../selector-add-button";
 
-import { StyledEmptyScreen, StyledNewEmptyScreen } from "../Selector.styled";
+import { StyledEmptyScreen } from "../Selector.styled";
 import { EmptyScreenProps } from "../Selector.types";
 
 import useCreateDropDown from "../hooks/useCreateDropDown";
@@ -51,6 +46,7 @@ import { EmptyScreenContext } from "../contexts/EmptyScreen";
 
 import NewItemDropDown from "./NewItemDropDown";
 import { SearchContext, SearchDispatchContext } from "../contexts/Search";
+import EmptyScreenFormRoom from "./EmptySreen/EmptyScreenFormRoom";
 
 const linkStyles = {
   isHovered: true,
@@ -74,17 +70,12 @@ const EmptyScreen = ({
     searchEmptyScreenDescription,
   } = useContext(EmptyScreenContext);
 
-  const theme = useTheme();
   const { t } = useTranslation(["Common"]);
 
   const { onClearSearch } = useContext(SearchContext);
   const setIsSearch = useContext(SearchDispatchContext);
   const { isOpenDropDown, setIsOpenDropDown, onCloseDropDown } =
     useCreateDropDown();
-
-  const formRoomEmptyScreenImage = theme.isBase
-    ? FormRoomEmptyLightImageUrl
-    : FormRoomEmptyDarkImageUrl;
 
   const currentImage = withSearch ? searchEmptyScreenImage : emptyScreenImage;
   const currentHeader = withSearch
@@ -113,34 +104,14 @@ const EmptyScreen = ({
   if (
     !withSearch &&
     createItem?.isRoomsOnly &&
-    createItem.createDefineRoomType === RoomsType.FormRoom
+    (createItem.createDefineRoomType === RoomsType.FormRoom ||
+      createItem.createDefineRoomType === RoomsType.VirtualDataRoom)
   )
     return (
-      <StyledNewEmptyScreen>
-        <img
-          className="empty-image"
-          src={formRoomEmptyScreenImage}
-          alt="empty-screen"
-        />
-        <Heading level={3} className="empty-header">
-          {t("Common:NoRoomsFound")}
-        </Heading>
-        <Text className="empty-description" noSelect>
-          {t("Common:SelectorFormRoomEmptyScreenDescription")}
-        </Text>
-        <div className="empty_button-wrapper" onClick={onCreateClickAction}>
-          <SelectorAddButton
-            isAction
-            iconSize={16}
-            className="empty-button"
-            iconName={Plus16SvgUrl}
-            title={t("Common:CreateFormFillingRoom")}
-          />
-          <Text className="empty-button-label" noSelect>
-            {t("Common:CreateFormFillingRoom")}
-          </Text>
-        </div>
-      </StyledNewEmptyScreen>
+      <EmptyScreenFormRoom
+        onCreateClickAction={onCreateClickAction}
+        createDefineRoomType={createItem.createDefineRoomType}
+      />
     );
 
   return (
@@ -154,7 +125,7 @@ const EmptyScreen = ({
       <Text className="empty-description" noSelect>
         {currentDescription}
       </Text>
-      {createItem && (
+      {createItem ? (
         <div className="buttons">
           <div className="empty-folder_container-links">
             <IconButton
@@ -167,13 +138,13 @@ const EmptyScreen = ({
             <Link {...linkStyles} onClick={onCreateClickAction}>
               {items[0].label}
             </Link>
-            {isOpenDropDown && createItem && createItem.dropDownItems && (
+            {isOpenDropDown && createItem && createItem.dropDownItems ? (
               <NewItemDropDown
                 dropDownItems={createItem.dropDownItems}
                 isEmpty
                 onCloseDropDown={onCloseDropDown}
               />
-            )}
+            ) : null}
           </div>
           <div className="empty-folder_container-links">
             <IconButton
@@ -199,7 +170,7 @@ const EmptyScreen = ({
             </Link>
           </div>
         </div>
-      )}
+      ) : null}
     </StyledEmptyScreen>
   );
 };

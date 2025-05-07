@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,14 +27,14 @@
 export const getKeyByLink = (linkArr, data, index = 0) => {
   const length = linkArr.length;
   const currentElement = linkArr[index];
-  const item = data.find((item) => item.link === currentElement);
+  const item = data.find((element) => element.link === currentElement);
 
   if (index === length - 1 && item) {
     return item.key;
-  } else if (!item || !item.children) {
-    return "0";
-  } else {
-    const newIndex = index + 1;
-    return getKeyByLink(linkArr, item.children, newIndex);
   }
+  if (!item || !item.children) {
+    return "0";
+  }
+  const newIndex = index + 1;
+  return getKeyByLink(linkArr, item.children, newIndex);
 };

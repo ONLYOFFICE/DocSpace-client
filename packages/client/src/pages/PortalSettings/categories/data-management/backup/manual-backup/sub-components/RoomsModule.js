@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,10 +26,15 @@
 
 import React from "react";
 import { withTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+
 import { Button } from "@docspace/shared/components/button";
-import { getFromLocalStorage } from "../../../../../utils";
 import { BackupStorageType } from "@docspace/shared/enums";
+
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
+import BackupToPublicRoom from "SRC_DIR/components/dialogs/BackupToPublicRoom";
+
+import { getFromLocalStorage } from "../../../../../utils";
 
 let folder = "";
 const Documents = "Documents";
@@ -45,20 +50,22 @@ class RoomsModule extends React.Component {
 
     this.state = {
       isStartCopy: false,
-      selectedFolder: selectedFolder,
+      selectedFolder,
     };
 
-    this._isMount = false;
+    this.isMount = false;
   }
 
   componentDidMount() {
-    this._isMount = true;
+    this.isMount = true;
   }
+
   componentWillUnmount() {
-    this._isMount = false;
+    this.isMount = false;
   }
+
   onSelectFolder = (folderId) => {
-    this._isMount &&
+    this.isMount &&
       this.setState({
         selectedFolder: folderId,
       });
@@ -79,17 +86,20 @@ class RoomsModule extends React.Component {
       isStartCopy: false,
     });
   };
+
   render() {
-    const { isMaxProgress, t, buttonSize } = this.props;
+    const { isMaxProgress, t, buttonSize, backupToPublicRoomVisible } =
+      this.props;
     const { isStartCopy, selectedFolder } = this.state;
 
     const isModuleDisabled = !isMaxProgress || isStartCopy;
+
     return (
       <>
         <div className="manual-backup_folder-input">
           <FilesSelectorInput
             onSelectFolder={this.onSelectFolder}
-            {...(selectedFolder && { id: selectedFolder })}
+            {...(selectedFolder ? { id: selectedFolder } : { openRoot: true })}
             withoutInitPath={!selectedFolder}
             isDisabled={isModuleDisabled}
             isRoomBackup
@@ -97,6 +107,9 @@ class RoomsModule extends React.Component {
             withCreate
           />
         </div>
+        {backupToPublicRoomVisible ? (
+          <BackupToPublicRoom key="backup-to-public-room-panel" />
+        ) : null}
         <div className="manual-backup_buttons">
           <Button
             id="create-copy"
@@ -111,4 +124,11 @@ class RoomsModule extends React.Component {
     );
   }
 }
-export default withTranslation(["Settings", "Common"])(RoomsModule);
+
+export default inject(({ dialogsStore }) => {
+  const { backupToPublicRoomVisible } = dialogsStore;
+
+  return {
+    backupToPublicRoomVisible,
+  };
+})(observer(withTranslation(["Settings", "Common"])(RoomsModule)));

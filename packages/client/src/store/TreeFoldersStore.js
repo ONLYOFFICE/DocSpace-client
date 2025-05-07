@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,13 +31,19 @@ import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 
 class TreeFoldersStore {
   selectedFolderStore;
+
   settingsStore;
+
   publicRoomStore;
 
   treeFolders = [];
+
   selectedTreeNode = [];
+
   expandedPanelKeys = null;
+
   rootFoldersTitles = {};
+
   isLoadingNodes = false;
 
   constructor(selectedFolderStore, settingsStore, publicRoomStore) {
@@ -113,8 +119,7 @@ class TreeFoldersStore {
   setRootFoldersTitles = (treeFolders) => {
     treeFolders.forEach((elem) => {
       this.rootFoldersTitles[elem.rootFolderType] = {
-        id: elem.id,
-        title: elem.title,
+        ...elem,
       };
     });
   };
@@ -132,6 +137,7 @@ class TreeFoldersStore {
   setIsLoadingNodes = (isLoadingNodes) => {
     this.isLoadingNodes = isLoadingNodes;
   };
+
   setSelectedNode = (node) => {
     if (node[0]) {
       this.selectedTreeNode = node;
@@ -154,8 +160,11 @@ class TreeFoldersStore {
   // };
 
   isMy = (myType) => myType === FolderType.USER;
+
   isCommon = (commonType) => commonType === FolderType.COMMON;
+
   isShare = (shareType) => shareType === FolderType.SHARE;
+
   isRoomRoot = (type) => type === FolderType.Rooms;
 
   getRootFolder = (rootFolderType) => {
@@ -172,8 +181,32 @@ class TreeFoldersStore {
     return this.rootFoldersTitles[FolderType.Archive]?.id;
   }
 
-  get recycleBinFolderId() {
-    return this.rootFoldersTitles[FolderType.TRASH]?.id;
+  get trashFolderInfo() {
+    return this.rootFoldersTitles[FolderType.TRASH];
+  }
+
+  get personalFolderId() {
+    return this.rootFoldersTitles[FolderType.USER]?.id;
+  }
+
+  get personalUserFolderTitle() {
+    return this.rootFoldersTitles[FolderType.USER]?.title;
+  }
+
+  get trashFolderTitle() {
+    return this.rootFoldersTitles[FolderType.TRASH]?.title;
+  }
+
+  get archiveFolderTitle() {
+    return this.rootFoldersTitles[FolderType.Archive]?.title;
+  }
+
+  get isPersonalReadOnly() {
+    return (
+      this.isPersonalRoom &&
+      this.rootFoldersTitles[FolderType.USER]?.security?.Read &&
+      !this.rootFoldersTitles[FolderType.USER]?.security?.Create
+    );
   }
 
   /**
@@ -196,6 +229,7 @@ class TreeFoldersStore {
   get recentFolder() {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.Recent);
   }
+
   /**
    * @type {import("@docspace/shared/api/rooms/types").TRoom=}
    */
@@ -206,6 +240,12 @@ class TreeFoldersStore {
   get archiveFolder() {
     return this.treeFolders.find(
       (x) => x.rootFolderType === FolderType.Archive,
+    );
+  }
+
+  get templatesFolder() {
+    return this.treeFolders.find(
+      (x) => x.rootFolderType === FolderType.Templates,
     );
   }
 
@@ -318,6 +358,21 @@ class TreeFoldersStore {
     );
   }
 
+  get isTemplatesFolderRoot() {
+    return FolderType.RoomTemplates === this.selectedFolderStore.rootFolderType;
+  }
+
+  get isTemplatesFolder() {
+    return (
+      FolderType.RoomTemplates === this.selectedFolderStore.rootFolderType &&
+      this.selectedFolderStore.isRootFolder
+    );
+  }
+
+  get isRoomsFolderRoot() {
+    return FolderType.Rooms === this.selectedFolderStore.rootFolderType;
+  }
+
   get isArchiveFolderRoot() {
     return FolderType.Archive === this.selectedFolderStore.rootFolderType;
   }
@@ -340,7 +395,7 @@ class TreeFoldersStore {
       this.selectedTreeNode[0] !== "@my" &&
       this.selectedTreeNode[0] !== "@common"
         ? this.selectedTreeNode
-        : [this.selectedFolderStore.id + ""];
+        : [`${this.selectedFolderStore.id}`];
     return selectedKeys;
   }
 }

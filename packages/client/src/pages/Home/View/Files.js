@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,13 +32,11 @@ import { SectionBodyContent } from "../Section";
 export const FilesView = () => {
   return (
     <Consumer>
-      {(context) => (
-        <>
-          {context.sectionWidth && (
-            <SectionBodyContent sectionWidth={context.sectionWidth} />
-          )}
-        </>
-      )}
+      {(context) =>
+        context.sectionWidth && (
+          <SectionBodyContent sectionWidth={context.sectionWidth} />
+        )
+      }
     </Consumer>
   );
 };

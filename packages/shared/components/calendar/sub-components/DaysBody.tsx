@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,10 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-
+import classNames from "classnames";
 import { getDayElements, getWeekdayElements } from "../utils";
-import { CalendarContainer } from "../Calendar.styled";
 import { DaysBodyProps } from "../Calendar.types";
+import styles from "../Calendar.module.scss";
 
 export const DaysBody = ({
   observedDate,
@@ -36,7 +36,6 @@ export const DaysBody = ({
   selectedDate,
   minDate,
   maxDate,
-  isMobile,
   isScroll,
 }: DaysBodyProps) => {
   const daysElements = getDayElements(
@@ -45,13 +44,16 @@ export const DaysBody = ({
     handleDateChange,
     minDate,
     maxDate,
-    isMobile,
   );
-  const weekdayElements = getWeekdayElements(isMobile);
+  const weekdayElements = getWeekdayElements();
 
   return (
-    <CalendarContainer isMobile={isMobile} isScroll={isScroll}>
+    <div
+      className={classNames(styles.calendarContainer, {
+        [styles.isScroll]: isScroll,
+      })}
+    >
       {weekdayElements} {daysElements}
-    </CalendarContainer>
+    </div>
   );
 };

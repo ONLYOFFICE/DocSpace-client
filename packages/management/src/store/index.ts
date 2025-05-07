@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,11 +26,12 @@
 
 import { createContext, useContext } from "react";
 
-import SpacesStore from "./SpacesStore";
-
 import store from "client/store";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+
+import SpacesStore from "./SpacesStore";
+
 const {
   authStore,
   userStore,
@@ -47,10 +48,15 @@ const {
 
 export class RootStore {
   authStore = authStore;
+
   userStore = userStore;
+
   settingsStore = settingsStore;
+
   currentTariffStatusStore = currentTariffStatusStore;
+
   spacesStore = new SpacesStore(this.settingsStore);
+
   dialogsStore = dialogsStore;
 }
 

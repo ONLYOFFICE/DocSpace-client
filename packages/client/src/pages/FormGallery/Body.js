@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,14 +31,14 @@ import { useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { withTranslation } from "react-i18next";
-import TileContainer from "./TilesView/sub-components/TileContainer";
-import FileTile from "./TilesView/FileTile";
 import { TilesSkeleton } from "@docspace/shared/skeletons/tiles";
-import SubmitToGalleryTile from "./TilesView/sub-components/SubmitToGalleryTile";
 import { Link } from "@docspace/shared/components/link";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import styled from "styled-components";
+import SubmitToGalleryTile from "./TilesView/sub-components/SubmitToGalleryTile";
+import FileTile from "./TilesView/FileTile";
+import TileContainer from "./TilesView/sub-components/TileContainer";
 
 const StyledEmptyContainerLinks = styled.div`
   display: grid;
@@ -81,7 +81,8 @@ const SectionBodyContent = ({
       e.target.closest(".scroll-body") &&
       !e.target.closest(".files-item") &&
       !e.target.closest(".not-selectable") &&
-      !e.target.closest(".info-panel")
+      !e.target.closest(".info-panel") &&
+      !e.target.closest(".info-panel-toggle-bg")
     ) {
       setGallerySelected(null);
     }
@@ -115,19 +116,19 @@ const SectionBodyContent = ({
       buttons={
         <StyledEmptyContainerLinks theme={theme}>
           <IconButton
-            className={"icon"}
+            className="icon"
             size="12"
             onClick={resetFilters}
             iconName={ClearEmptyFilterSvgUrl}
             isFill
           />
           <Link
-            className={"link"}
+            className="link"
             onClick={resetFilters}
-            isHovered={true}
-            type={"action"}
-            fontWeight={"600"}
-            display={"flex"}
+            isHovered
+            type="action"
+            fontWeight="600"
+            display="flex"
           >
             {t("Common:ClearFilter")}
           </Link>
@@ -136,11 +137,11 @@ const SectionBodyContent = ({
     />
   ) : (
     <TileContainer className="tile-container">
-      {submitToGalleryTileIsVisible && canSubmitToFormGallery() && (
+      {submitToGalleryTileIsVisible && canSubmitToFormGallery() ? (
         <SubmitToGalleryTile />
-      )}
-      {oformFiles.map((item, index) => (
-        <FileTile key={`${item.id}_${index}`} item={item} />
+      ) : null}
+      {oformFiles.map((item) => (
+        <FileTile key={item.id} item={item} />
       ))}
     </TileContainer>
   );

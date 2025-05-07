@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,9 +28,9 @@ import BreakpointWarningSvgUrl from "PUBLIC_DIR/images/manage.access.rights.reac
 import BreakpointWarningSvgDarkUrl from "PUBLIC_DIR/images/manage.access.rights.dark.react.svg?url";
 import React from "react";
 import { Trans, withTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 import StyledBreakpointWarning from "./sub-components/StyledBreakpointWarning";
 import Loader from "./sub-components/loader";
-import { inject, observer } from "mobx-react";
 
 const BreakpointWarning = ({
   t,
@@ -68,7 +68,7 @@ const BreakpointWarning = ({
     <Loader />
   ) : (
     <StyledBreakpointWarning>
-      <img src={img} />
+      <img src={img} alt="Breakpoint warning" />
       <div className="description">
         <div className="text-breakpoint">{textHeader}</div>
         <div className="text-prompt">{textPrompt}</div>

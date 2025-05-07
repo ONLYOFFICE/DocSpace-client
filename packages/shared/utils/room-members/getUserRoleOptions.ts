@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -48,7 +48,7 @@ export const getUserRoleOptions = (t: TTranslation) => ({
   },
   viewer: {
     key: "viewer",
-    label: t("Translations:RoleViewer"),
+    label: t("Common:RoleViewer"),
     access: ShareAccessRights.ReadOnly,
     type: "user",
   },
@@ -60,19 +60,19 @@ export const getUserRoleOptions = (t: TTranslation) => ({
   },
   formFiller: {
     key: "formFiller",
-    label: t("Translations:RoleFormFiller"),
+    label: t("Common:RoleFormFiller"),
     access: ShareAccessRights.FormFilling,
     type: "user",
   },
   reviewer: {
     key: "reviewer",
-    label: t("Translations:RoleReviewer"),
+    label: t("Common:RoleReviewer"),
     access: ShareAccessRights.Review,
     type: "user",
   },
   commentator: {
     key: "commentator",
-    label: t("Translations:RoleCommentator"),
+    label: t("Common:RoleCommentator"),
     access: ShareAccessRights.Comment,
     type: "user",
   },

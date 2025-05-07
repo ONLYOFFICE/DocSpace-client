@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,11 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { TextUserSelect } from "@docspace/shared/utils";
-import { Base } from "@docspace/shared/themes";
+import styled from "styled-components";
+import { injectDefaultTheme, TextUserSelect } from "@docspace/shared/utils";
 
-const StyledUserTypeHeader = styled.div`
+const StyledUserTypeHeader = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -128,5 +127,4 @@ const StyledUser = styled.div`
   }
 `;
 
-StyledUserTypeHeader.defaultProps = { theme: Base };
 export { StyledUserTypeHeader, StyledUserList, StyledUser };

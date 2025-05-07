@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,14 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import { isDesktop } from "@docspace/shared/utils";
+import { isDesktop } from "../../utils";
 
 import { RowsSkeleton } from "../rows";
 import { RectangleSkeleton } from "../rectangle";
 
-import { FooterBlock } from "./Profile.styled";
+import styles from "./Profile.module.scss";
 import { ProfileFooterLoaderProps } from "./Profile.types";
 
 export const ProfileFooterLoader = ({
@@ -65,7 +65,7 @@ export const ProfileFooterLoader = ({
 
   return (
     <div id={id} className={className} style={style}>
-      <FooterBlock>
+      <div className={styles.footerBlock} data-testid="profile-footer">
         <div className="header">
           <RectangleSkeleton
             title={title}
@@ -94,7 +94,7 @@ export const ProfileFooterLoader = ({
           />
         </div>
 
-        {isDesktopView && (
+        {isDesktopView ? (
           <div className="table-header">
             <RectangleSkeleton
               title={title}
@@ -135,10 +135,10 @@ export const ProfileFooterLoader = ({
               animate={animate}
             />
           </div>
-        )}
+        ) : null}
 
         <RowsSkeleton count={3} />
-      </FooterBlock>
+      </div>
     </div>
   );
 };

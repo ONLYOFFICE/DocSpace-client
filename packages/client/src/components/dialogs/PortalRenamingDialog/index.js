@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -56,7 +56,7 @@ const PortalRenamingDialog = (props) => {
           label={t("Common:ContinueButton")}
           size="normal"
           scale
-          primary={true}
+          primary
           onClick={onSave}
           isLoading={isSaving}
           tabIndex={3}

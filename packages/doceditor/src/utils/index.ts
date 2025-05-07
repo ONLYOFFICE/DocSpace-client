@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,6 +31,7 @@ import { convertFile } from "@docspace/shared/api/files";
 import { TEditHistory } from "@docspace/shared/api/files/types";
 import { FolderType } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
+import { TFormRole } from "@/types";
 
 export const getBackUrl = (
   rootFolderType: FolderType,
@@ -160,9 +161,9 @@ export const setDocumentTitle = (
   fileType: string,
   documentReady: boolean,
   successAuth: boolean,
+  organizationName: string,
   callback?: (value: string) => void,
 ) => {
-  const organizationName = t("Common:OrganizationName");
   const moduleTitle = "Documents"; //TODO: Replace to API variant
 
   let newSubTitle = subTitle;
@@ -248,4 +249,8 @@ export const calculateAsideHeight = (callback?: () => void) => {
       top: styles.top,
     });
   }
+};
+
+export const isFormRole = (role: unknown): role is TFormRole[] => {
+  return typeof role === "object" && Array.isArray(role) && "name" in role[0];
 };

@@ -1,0 +1,15 @@
+{
+  "DescriptionUploading": "Vytvárajte PDF formuláre v {{productName}}, napríklad vo vašej {{sectionName}}, a nahrajte hotové do miestnosti. Využite integrovanú knižnicu šablón a vyberte si z mnohých pripravených PDF šablón.",
+  "HeaderComplete": "Pohodlné analyzovanie zozbieraných odpovedí",
+  "HeaderSharing": "Rýchle zdieľanie",
+  "HeaderStarting": "Začať vyplňovanie formulára",
+  "HeaderSubmitting": "Odoslanie odpovedí",
+  "HeaderUploading": "Jednoduché nahrávanie formulárov",
+  "TitleComplete": "Kontrolujte vyplnené formuláre a analyzujte údaje automaticky zhromaždené do tabuľky. Všetko - v jednej miestnosti.",
+  "TitleSharing": "Pozvite ostatných členov {{productName}} do miestnosti, aby vyplnili nahrané PDF formuláre. Skopírujte verejný odkaz na prístup, aby ste mohli miestnosť zdieľať s externými používateľmi.",
+  "TitleStarting": "Pre každého respondenta sa po otvorení formulára na vyplnenie automaticky vytvorí individuálna kópia a uloží do priečinka V procese. Znamená to, že formulár začali vyplňovať, ale ešte nedokončili.",
+  "TitleSubmitting": "Po tom, ako v otvorenej kópii formulára kliknete na tlačidlo Dokončiť a odoslať, formulár sa premiestni do priečinka Vyplnené.",
+  "WelcomeDescription": "Tu môžete organizovať bezprostredné vyplňovanie PDF formulárov, jednoducho zhromažďovať a analyzovať odpovede. Ste pripravení začať?",
+  "WelcomeFillingForm": "Vitajte v miestnosti na vyplňovanie formulárov!",
+  "WelcomeStartTutorial": "Spravte si krátku obhliadku"
+}

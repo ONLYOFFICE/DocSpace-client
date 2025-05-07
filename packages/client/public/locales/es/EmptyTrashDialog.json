@@ -1,8 +1,6 @@
 {
   "DeleteForeverButton": "Eliminar para siempre",
-  "DeleteForeverNote": "Todos los elementos de la Papelera se eliminarán para siempre. No será posible restaurarlos.",
-  "DeleteForeverNoteArchive": "Todos los elementos archivados se eliminarán para siempre. No podrá restaurarlos.",
+  "DeleteForeverNote": "Todos los elementos de la sección {{sectionName}} se eliminarán para siempre. No podrá restaurarlos.",
   "DeleteForeverTitle": "¿Eliminar para siempre?",
-  "SuccessEmptyArchived": "Archivado vaciado",
-  "SuccessEmptyTrash": "Papelera vaciada"
+  "SuccessEmptyAction": "{{sectionName}} sección vaciada"
 }

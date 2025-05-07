@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,7 @@ import { withTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 
-import withLoader from "@docspace/client/src/HOCs/withLoader";
+import withLoader from "SRC_DIR/HOCs/withLoader";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import api from "@docspace/shared/api";
 import AccountsFilter from "@docspace/shared/api/people/filter";
@@ -173,7 +173,9 @@ const Groups = ({
     <Styled.GroupsContent>
       {isFirstLoad || !groupMembers ? null : (
         <>
-          {groupManager && <GroupMember groupMember={groupManager} isManager />}
+          {groupManager ? (
+            <GroupMember groupMember={groupManager} isManager />
+          ) : null}
           <GroupMembersList
             members={groupMembers}
             hasNextPage={groupMembers.length < totalWithoutManager}

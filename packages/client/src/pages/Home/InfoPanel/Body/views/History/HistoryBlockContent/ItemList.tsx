@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,6 +37,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { ReactSVG } from "react-svg";
 import { TTranslation } from "@docspace/shared/types";
+import { toastr } from "@docspace/shared/components/toast";
 import {
   getFileExtension,
   getObjectByLocation,
@@ -113,7 +114,7 @@ const HistoryItemList = ({
 
   const sortItems =
     actionType === FeedAction.Change
-      ? items.sort((a, b) => a?.oldIndex - b?.oldIndex)
+      ? items.sort((a, b) => (a?.oldIndex ?? 0) - (b?.oldIndex ?? 0))
       : items;
 
   const oldItem = actionType === "rename" && {
@@ -125,6 +126,18 @@ const HistoryItemList = ({
 
   const handleOpenFile = async (item) => {
     try {
+      if (isFolder) {
+        const folderId = getObjectByLocation(window.location)?.folder;
+        if (Number(folderId) === item.id) return;
+        return await getFolderInfo(item.id, true).then((res) => {
+          openItemAction!({ ...res, isFolder: true });
+        });
+      }
+
+      await getFileInfo(item.id, true).then((res) => {
+        openItemAction!({ ...res });
+      });
+
       const isMedia =
         item?.accessibility?.ImageView || item?.accessibility?.MediaView;
       if (isMedia) {
@@ -137,19 +150,8 @@ const HistoryItemList = ({
           ),
         );
       }
-
-      if (isFolder) {
-        const folderId = getObjectByLocation(window.location)?.folder;
-        if (Number(folderId) === item.id) return;
-        return await getFolderInfo(item.id).then((res) => {
-          openItemAction!({ ...res, isFolder: true });
-        });
-      }
-      await getFileInfo(item.id).then((res) => {
-        openItemAction!({ ...res });
-      });
     } catch (e) {
-      console.log(e);
+      toastr.error(e);
     }
   };
 
@@ -167,9 +169,7 @@ const HistoryItemList = ({
                   <SortDesc className="arrow-index" />
                   <div className="index"> {item.newIndex} </div>
                 </div>
-              ) : (
-                <></>
-              )}
+              ) : null}
 
               <div
                 className="item-wrapper"
@@ -186,18 +186,18 @@ const HistoryItemList = ({
                       <span className="name" key="hbil-item-name">
                         {item.title}
                       </span>
-                      {item.fileExst && (
+                      {item.fileExst ? (
                         <span className="exst" key="hbil-item-exst">
                           {item.fileExst}
                         </span>
-                      )}
+                      ) : null}
                     </>
                   ) : (
                     <span className="name">{item.fileExst}</span>
                   )}
                 </div>
               </div>
-              {isDisabledOpenLocationButton && (
+              {isDisabledOpenLocationButton ? (
                 <IconButton
                   className="location-btn"
                   iconName={FolderLocationReactSvgUrl}
@@ -206,10 +206,10 @@ const HistoryItemList = ({
                   onClick={() => checkAndOpenLocationAction!(item, actionType)}
                   title={t("Files:OpenLocation")}
                 />
-              )}
+              ) : null}
             </StyledHistoryBlockFile>
 
-            {actionType === "rename" && oldItem && (
+            {actionType === "rename" && oldItem ? (
               <StyledHistoryBlockFile>
                 <div className="old-item-wrapper">
                   <ReactSVG
@@ -222,11 +222,11 @@ const HistoryItemList = ({
                         <span className="name" key="hbil-item-name">
                           {oldItem.title}
                         </span>
-                        {oldItem.fileExst && (
+                        {oldItem.fileExst ? (
                           <span className="exst" key="hbil-item-exst">
                             {oldItem.fileExst}
                           </span>
-                        )}
+                        ) : null}
                       </>
                     ) : (
                       <span className="name">{oldItem.fileExst}</span>
@@ -234,11 +234,11 @@ const HistoryItemList = ({
                   </div>
                 </div>
               </StyledHistoryBlockFile>
-            )}
+            ) : null}
           </Fragment>
         );
       })}
-      {isExpandable && !isExpanded && (
+      {isExpandable && !isExpanded ? (
         <StyledHistoryBlockExpandLink
           className="files-list-expand-link"
           onClick={onExpand}
@@ -251,7 +251,7 @@ const HistoryItemList = ({
             components={{ 1: <strong /> }}
           />
         </StyledHistoryBlockExpandLink>
-      )}
+      ) : null}
     </StyledHistoryBlockFilesList>
   );
 };

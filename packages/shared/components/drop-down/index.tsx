@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,6 @@
 import React from "react";
 import { isMobile } from "react-device-detect";
 
-import { Portal } from "../portal";
 import { Backdrop } from "../backdrop";
 
 import { DropDownProps } from "./DropDown.types";
@@ -53,10 +52,12 @@ const DropDown = (props: DropDownProps) => {
     offsetLeft = 0,
     enableKeyboardEvents = true,
     usePortalBackdrop = false,
+    shouldShowBackdrop = false,
   } = props;
 
-  const toggleDropDown = () => {
+  const toggleDropDown = (e: React.MouseEvent) => {
     clickOutsideAction?.({} as Event, !open);
+    e.stopPropagation();
   };
 
   const eventTypesProp = forceCloseClickOutside
@@ -76,12 +77,13 @@ const DropDown = (props: DropDownProps) => {
       isAside={isAside}
       withBackground={withBackground}
       withoutBackground={withoutBackground}
+      shouldShowBackdrop={shouldShowBackdrop}
     />
   ) : null;
 
   return (
     <>
-      {!usePortalBackdrop && backDrop}
+      {!usePortalBackdrop ? backDrop : null}
       <EnhancedComponent
         {...eventTypesProp}
         showDisabledItems={showDisabledItems}

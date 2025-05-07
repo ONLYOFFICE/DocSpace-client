@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { TableHeader } from "@docspace/shared/components/table";
 
 import { useTranslation } from "react-i18next";
@@ -35,21 +35,18 @@ const TABLE_COLUMNS = `webhooksConfigColumns_ver-${TABLE_VERSION}`;
 
 const getColumns = (defaultColumns, userId) => {
   const storageColumns = localStorage.getItem(`${TABLE_COLUMNS}=${userId}`);
-  const columns = [];
 
   if (storageColumns) {
     const splitColumns = storageColumns.split(",");
 
-    for (let col of defaultColumns) {
+    const columns = defaultColumns.map((col) => {
       const column = splitColumns.find((key) => key === col.key);
-      column ? (col.enable = true) : (col.enable = false);
+      return { ...(col || {}), enable: !!column };
+    });
 
-      columns.push(col);
-    }
     return columns;
-  } else {
-    return defaultColumns;
   }
+  return defaultColumns;
 };
 
 const WebhookTableHeader = (props) => {
@@ -60,13 +57,41 @@ const WebhookTableHeader = (props) => {
     columnStorageName,
     columnInfoPanelStorageName,
     setHideColumns,
+    isAdmin,
   } = props;
-  const { t } = useTranslation(["Webhooks", "Common"]);
+  const { t } = useTranslation(["Webhooks", "Files", "Common"]);
+
+  const [columns, setColumns] = useState([]);
+
+  function onColumnChange(key) {
+    const columnIndex = columns.findIndex((c) => c.key === key);
+
+    if (columnIndex === -1) return;
+
+    setColumns((prevColumns) =>
+      prevColumns.map((item, index) =>
+        index === columnIndex ? { ...item, enable: !item.enable } : item,
+      ),
+    );
+
+    const tableColumns = columns.map((c) => c.enable && c.key);
+    localStorage.setItem(`${TABLE_COLUMNS}=${userId}`, tableColumns);
+  }
+
+  const authorBlock = isAdmin
+    ? {
+        key: "Author",
+        title: t("Files:ByAuthor"),
+        enable: true,
+        resizable: true,
+        onChange: onColumnChange,
+      }
+    : {};
 
   const defaultColumns = [
     {
       key: "Name",
-      title: t("Common:Name"),
+      title: t("Common:Label"),
       resizable: true,
       enable: true,
       default: true,
@@ -74,6 +99,7 @@ const WebhookTableHeader = (props) => {
       minWidth: 210,
       onChange: onColumnChange,
     },
+    authorBlock,
     {
       key: "URL",
       title: t("URL"),
@@ -90,22 +116,9 @@ const WebhookTableHeader = (props) => {
     },
   ];
 
-  const [columns, setColumns] = useState(getColumns(defaultColumns, userId));
-
-  function onColumnChange(key, e) {
-    const columnIndex = columns.findIndex((c) => c.key === key);
-
-    if (columnIndex === -1) return;
-
-    setColumns((prevColumns) =>
-      prevColumns.map((item, index) =>
-        index === columnIndex ? { ...item, enable: !item.enable } : item,
-      ),
-    );
-
-    const tableColumns = columns.map((c) => c.enable && c.key);
-    localStorage.setItem(`${TABLE_COLUMNS}=${userId}`, tableColumns);
-  }
+  useEffect(() => {
+    setColumns(getColumns(defaultColumns, userId));
+  }, []);
 
   return (
     <TableHeader
@@ -127,5 +140,6 @@ const WebhookTableHeader = (props) => {
 export default inject(({ userStore }) => {
   return {
     userId: userStore.user.id,
+    isAdmin: userStore.user.isAdmin,
   };
 })(observer(WebhookTableHeader));

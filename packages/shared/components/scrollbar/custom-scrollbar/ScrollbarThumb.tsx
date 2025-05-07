@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -186,6 +186,9 @@ class ScrollbarThumb extends React.Component<ScrollbarThumbProps, unknown> {
       ev.preventDefault();
     }
     ev.stopPropagation();
+
+    // @ts-expect-error: get React.MouseEvent instead of MouseEvent here. DraggableCore lib probably has wrong types
+    ev.nativeEvent?.stopImmediatePropagation?.();
 
     if (!isUndef(ev.offsetX)) {
       /* istanbul ignore next */

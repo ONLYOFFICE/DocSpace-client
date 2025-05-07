@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -44,13 +44,11 @@ class RackspaceStorage extends React.Component {
     const { t, selectedStorage } = this.props;
 
     return (
-      <>
-        <RackspaceSettings
-          t={t}
-          selectedStorage={selectedStorage}
-          isNeedFilePath
-        />
-      </>
+      <RackspaceSettings
+        t={t}
+        selectedStorage={selectedStorage}
+        isNeedFilePath
+      />
     );
   }
 }

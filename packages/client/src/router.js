@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,8 +27,8 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 
-import routes from "./routes";
 import Error404 from "@docspace/shared/components/errors/Error404";
+import routes from "./routes";
 
 import Root from "./Shell";
 

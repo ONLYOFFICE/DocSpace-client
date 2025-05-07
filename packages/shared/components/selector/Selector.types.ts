@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,6 +30,7 @@ import {
   EmployeeType,
   RoomsType,
   ShareAccessRights,
+  FileType,
 } from "../../enums";
 import { MergeTypes, Nullable } from "../../types";
 
@@ -239,6 +240,7 @@ export type TAccessRight = {
   label: string;
   description?: string;
   access: string | number;
+  isSeparator?: boolean;
 };
 
 type TWithAccessRightsProps = {
@@ -319,8 +321,12 @@ export type TSelectorFooterCheckbox = TSelectorCheckbox & {
 };
 
 export type TSelectorInfo =
-  | { withInfo: true; infoText: string }
-  | { withInfo?: undefined; infoText?: undefined };
+  | { withInfo: true; infoText: string; withInfoBadge?: boolean }
+  | {
+      withInfo?: undefined;
+      infoText?: undefined;
+      withInfoBadge?: undefined;
+    };
 
 export type TRenderCustomItem = (
   label: string,
@@ -373,6 +379,10 @@ export type SelectorProps = TSelectorHeader &
     descriptionText?: string;
 
     withPadding?: boolean;
+    injectedElement?: React.ReactElement;
+
+    isSSR?: boolean;
+    selectedItem?: TSelectorItem | null; // no multiSelect only
   };
 
 export type BodyProps = TSelectorInfo & {
@@ -402,6 +412,10 @@ export type BodyProps = TSelectorInfo & {
   withFooterInput?: boolean;
   withFooterCheckbox?: boolean;
   descriptionText?: string;
+  withInfoBadge?: boolean;
+  injectedElement?: React.ReactElement;
+
+  isSSR?: boolean;
 };
 
 export type FooterProps = TSelectorFooterSubmitButton &
@@ -431,6 +445,7 @@ type TSelectorItemEmpty = {
   status?: undefined;
   access?: undefined;
   fileExst?: undefined;
+  fileType?: undefined;
   shared?: undefined;
   parentId?: undefined;
   rootFolderType?: undefined;
@@ -481,6 +496,7 @@ export type TSelectorItemFile = MergeTypes<
   TSelectorItemEmpty,
   {
     fileExst: string;
+    fileType: FileType;
     parentId: string | number;
     rootFolderType: string | number;
     security: TFileSecurity;
@@ -516,6 +532,7 @@ export type TSelectorItemRoom = MergeTypes<
     icon?: string;
     color?: string;
     iconOriginal?: string;
+    cover?: ICover;
   }
 >;
 
@@ -577,6 +594,7 @@ export type TSelectorItem = TSelectorItemType & {
   disabledText?: string;
   lifetimeTooltip?: string | null;
   viewUrl?: string;
+  isTemplate?: boolean;
 };
 
 export type Data = {
@@ -598,3 +616,15 @@ export interface ItemProps {
   style: React.CSSProperties;
   data: Data;
 }
+
+export type ProvidersProps = {
+  emptyScreenProps: TSelectorEmptyScreen;
+  breadCrumbsProps: TSelectorBreadCrumbs;
+  infoBarProps: TInfoBar;
+  searchProps: TSelectorSearch;
+  selectAllProps: TSelectorSelectAll & {
+    isAllChecked: boolean;
+    isAllIndeterminate: boolean;
+  };
+  tabsProps: TSelectorTabs;
+};

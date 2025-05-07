@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { StaticImageData } from "../types";
 import type { TFolder } from "../api/files/types";
 import type {
   ContextMenuModel,
@@ -34,11 +35,11 @@ export const isNumber = (value: unknown): value is number => {
   return typeof value === "number";
 };
 
-export const includesMethod = <T extends Object, MethodName extends string>(
+export const includesMethod = <T extends object, MethodName extends string>(
   obj: T,
   method: MethodName,
-): obj is T & Record<MethodName, Function> => {
-  return method in obj && typeof obj[method as keyof Object] === "function";
+): obj is T & Record<MethodName, (...args: unknown[]) => unknown> => {
+  return method in obj && typeof obj[method as keyof object] === "function";
 };
 
 export const isSeparator = (arg: ContextMenuModel): arg is SeparatorType => {
@@ -56,4 +57,8 @@ export const isFolder = (item: unknown): item is TFolder => {
     "parentId" in item &&
     !isNullOrUndefined(item.parentId)
   );
+};
+
+export const isNextImage = (item: unknown): item is StaticImageData => {
+  return typeof item === "object" && item !== null && "src" in item;
 };

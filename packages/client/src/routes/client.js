@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,9 +28,9 @@ import { Navigate } from "react-router-dom";
 
 import componentLoader from "@docspace/shared/utils/component-loader";
 
+import Error404 from "@docspace/shared/components/errors/Error404";
 import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
-import Error404 from "@docspace/shared/components/errors/Error404";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 
 import { generalRoutes } from "./general";
@@ -85,6 +85,14 @@ const ClientRoutes = [
             element: (
               <PrivateRoute>
                 <Navigate to="/rooms/archived" replace />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "templates",
+            element: (
+              <PrivateRoute>
+                <Navigate to="/rooms/templates" replace />
               </PrivateRoute>
             ),
           },
@@ -305,6 +313,79 @@ const ClientRoutes = [
             },
           },
           {
+            path: "rooms/templates",
+
+            async lazy() {
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
+              );
+
+              const Component = () => {
+                return (
+                  <PrivateRoute>
+                    <FilesView />
+                  </PrivateRoute>
+                );
+              };
+
+              return { Component };
+            },
+          },
+          {
+            path: "rooms/templates/filter",
+            async lazy() {
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
+              );
+
+              const Component = () => {
+                return (
+                  <PrivateRoute>
+                    <FilesView />
+                  </PrivateRoute>
+                );
+              };
+
+              return { Component };
+            },
+          },
+          {
+            path: "rooms/templates/:room",
+            async lazy() {
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
+              );
+
+              const Component = () => {
+                return (
+                  <PrivateRoute>
+                    <FilesView />
+                  </PrivateRoute>
+                );
+              };
+
+              return { Component };
+            },
+          },
+          {
+            path: "rooms/templates/:room/filter",
+            async lazy() {
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
+              );
+
+              const Component = () => {
+                return (
+                  <PrivateRoute>
+                    <FilesView />
+                  </PrivateRoute>
+                );
+              };
+
+              return { Component };
+            },
+          },
+          {
             path: "media/view/:id",
             async lazy() {
               const { FilesView } = await componentLoader(
@@ -471,7 +552,7 @@ const ClientRoutes = [
     ],
   },
   {
-    path: "/sdk/:mode",
+    path: "/old-sdk/:mode",
     lazy: () => import("SRC_DIR/pages/Sdk"),
   },
   {
@@ -547,6 +628,22 @@ const ClientRoutes = [
     },
   },
   {
+    path: "/encryption-portal",
+    async lazy() {
+      const { EncryptionPortal } = await componentLoader(
+        () => import("@docspace/shared/pages/EncryptionPortal"),
+      );
+
+      const Component = () => (
+        <ErrorBoundary>
+          <EncryptionPortal />
+        </ErrorBoundary>
+      );
+
+      return { Component };
+    },
+  },
+  {
     path: "/preparation-portal",
     async lazy() {
       const { PreparationPortal } = await componentLoader(
@@ -560,6 +657,26 @@ const ClientRoutes = [
           </ErrorBoundary>
         </PublicRoute>
       );
+
+      return { Component };
+    },
+  },
+  {
+    path: "/shared/invalid-link",
+    async lazy() {
+      const { ErrorInvalidLink } = await componentLoader(
+        () => import("@docspace/shared/components/errors/ErrorInvalidLink"),
+      );
+
+      const Component = () => {
+        return (
+          <PrivateRoute>
+            <ErrorBoundary>
+              <ErrorInvalidLink />
+            </ErrorBoundary>
+          </PrivateRoute>
+        );
+      };
 
       return { Component };
     },

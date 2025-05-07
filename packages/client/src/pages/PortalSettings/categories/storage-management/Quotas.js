@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,6 @@
 
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { Trans } from "react-i18next";
 import { useTheme } from "styled-components";
 
 import { isMobile } from "@docspace/shared/utils";
@@ -39,9 +38,6 @@ import { StyledBaseQuotaComponent, StyledMainTitle } from "./StyledComponent";
 import { QuotaPerRoomComponentSection } from "./sub-components/QuotaPerRoom";
 import { QuotaPerUserComponentSection } from "./sub-components/QuotaPerUser";
 import MobileQuotasComponent from "./sub-components/MobileQuotas";
-
-const helpLink =
-  "https://helpcenter.onlyoffice.com/administration/docspace-settings.aspx#StorageManagement_block";
 
 const QuotaPerItemsComponent = ({ isStatisticsAvailable }) => {
   if (isMobile())
@@ -58,7 +54,7 @@ const QuotasComponent = (props) => {
   const { t } = useTranslation("Settings");
   const theme = useTheme();
 
-  const { isStatisticsAvailable } = props;
+  const { isStatisticsAvailable, storageManagementUrl } = props;
 
   return (
     <StyledBaseQuotaComponent>
@@ -67,7 +63,7 @@ const QuotasComponent = (props) => {
           {t("Quotas")}
         </StyledMainTitle>
 
-        {!isStatisticsAvailable && (
+        {!isStatisticsAvailable ? (
           <Badge
             backgroundColor={
               theme.isBase
@@ -78,21 +74,21 @@ const QuotasComponent = (props) => {
             className="paid-badge"
             isPaidBadge
           />
-        )}
+        ) : null}
       </div>
       <Text className="quotas_description">
-        <Trans t={t} i18nKey="QuotasDescription" ns="Settings">
-          Here, you can set storage quota for users and rooms.
+        {t("Settings:QuotasDescription")}{" "}
+        {storageManagementUrl ? (
           <ColorTheme
             themeId={ThemeId.Link}
             tag="a"
             isHovered={false}
             target="_blank"
-            href={helpLink}
+            href={storageManagementUrl}
           >
-            Help Center
+            {t("Common:HelpCenter")}
           </ColorTheme>
-        </Trans>
+        ) : null}
       </Text>
 
       <QuotaPerItemsComponent isStatisticsAvailable={isStatisticsAvailable} />
@@ -100,10 +96,12 @@ const QuotasComponent = (props) => {
   );
 };
 
-export default inject(({ currentQuotaStore }) => {
+export default inject(({ currentQuotaStore, settingsStore }) => {
   const { isStatisticsAvailable } = currentQuotaStore;
+  const { storageManagementUrl } = settingsStore;
 
   return {
     isStatisticsAvailable,
+    storageManagementUrl,
   };
 })(observer(QuotasComponent));

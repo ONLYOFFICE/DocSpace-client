@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,7 +31,8 @@ import { isMobile } from "@docspace/shared/utils";
 import { AccessRightSelect } from "@docspace/shared/components/access-right-select";
 import { TTranslation } from "@docspace/shared/types";
 import { RoomsType } from "@docspace/shared/enums";
-import { getAccessOptions } from "../panels/InvitePanel/utils";
+import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
+
 import StyledAccessSelector from "./AccessSelector.styled";
 
 interface AccessSelectorProps {
@@ -130,7 +131,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
 
   return (
     <StyledAccessSelector className="access-selector">
-      {!(isMobile() && !isMobileHorizontalOrientation) && (
+      {!(isMobile() && !isMobileHorizontalOrientation) ? (
         <AccessRightSelect
           className={className}
           selectedOption={selectedOption}
@@ -151,9 +152,9 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           availableAccess={availableAccess}
           scaledOptions={scaledOptions}
         />
-      )}
+      ) : null}
 
-      {isMobile() && !isMobileHorizontalOrientation && (
+      {isMobile() && !isMobileHorizontalOrientation ? (
         <AccessRightSelect
           className={className}
           selectedOption={selectedOption}
@@ -168,8 +169,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           isAside={isMobileView}
           setIsOpenItemAccess={setIsOpenItemAccess}
           manualY="0px"
-          withoutBackground={isMobileView}
-          withBackground={!isMobileView}
+          withBackground={isMobileView}
           withBlur={isMobileView}
           isDisabled={isDisabled}
           isSelectionDisabled={isSelectionDisabled}
@@ -177,7 +177,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           availableAccess={availableAccess}
           scaledOptions={scaledOptions}
         />
-      )}
+      ) : null}
     </StyledAccessSelector>
   );
 };

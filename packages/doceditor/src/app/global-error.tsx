@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -54,7 +54,7 @@ export default function GlobalError({ error }: { error: Error }) {
 
   const { i18n } = useI18N({ settings, user });
   const { currentDeviceType } = useDeviceType();
-  const { theme } = useTheme({ user, i18n });
+  const { theme } = useTheme({ initialTheme: user?.theme, i18n });
   const firebaseHelper = useMemo(() => {
     return new FirebaseHelper(settings?.firebase ?? ({} as TFirebaseSettings));
   }, [settings?.firebase]);

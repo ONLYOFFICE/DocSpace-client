@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,7 +31,7 @@ import { IconButton } from "../../icon-button";
 const StyledMuteIcon = styled(IconButton)`
   ${commonIconsStyles}
 
-  svg {
+  && svg {
     path:first-child {
       stroke: ${(props) => props.theme.filesSection.rowView.pinColor};
     }

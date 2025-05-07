@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,15 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { RowContainer } from "@docspace/shared/components/row-container";
-import SpacesRoomRow from "./SpacesRoomRow";
-import styled, { css } from "styled-components";
-import Base from "@docspace/shared/themes/base";
+import styled from "styled-components";
+
+import { RowContainer } from "@docspace/shared/components/rows";
+import { desktop, injectDefaultTheme } from "@docspace/shared/utils";
+
 import { TPortals } from "SRC_DIR/types/spaces";
 
-import { desktop } from "@docspace/shared/utils";
+import SpacesRoomRow from "./SpacesRoomRow";
 
-const StyledRowContainer = styled(RowContainer)`
+const StyledRowContainer = styled(RowContainer).attrs(injectDefaultTheme)`
   @media ${desktop} {
     max-width: 620px;
 
@@ -54,7 +55,6 @@ type TRowContainer = {
   portals: TPortals[];
 };
 
-StyledRowContainer.defaultProps = { theme: Base };
 export const SpacesRowContainer = ({ portals }: TRowContainer) => {
   return (
     <StyledRowContainer useReactWindow={false}>

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -137,7 +137,9 @@ const ImportStep = (props: ImportStepProps) => {
         isChecked={importOptions.importPersonalFiles}
         onChange={(e) => onChange(e, "importPersonalFiles")}
         sectionName={t("Settings:PersonalFiles")}
-        description={t("Settings:PersonalFilesDescription")}
+        description={t("Settings:ImportFilesLocation", {
+          sectionName: t("Common:MyFilesSection"),
+        })}
         exportSection={{
           sectionName: personalExportDetails.name,
           workspace: serviceName,
@@ -155,7 +157,9 @@ const ImportStep = (props: ImportStepProps) => {
         isChecked={importOptions.importSharedFiles}
         onChange={(e) => onChange(e, "importSharedFiles")}
         sectionName={t("Settings:SharedFiles")}
-        description={t("Settings:SharedFilesDescription")}
+        description={t("Settings:SharedFilesImportLocation", {
+          sectionName: t("Common:MyFilesSection"),
+        })}
         exportSection={{
           sectionName: sharedFilesExportDetails.name,
           workspace: serviceName,
@@ -222,7 +226,7 @@ const ImportStep = (props: ImportStepProps) => {
         }}
         isDisabled={false}
       />
-      {hasCommonFiles && (
+      {hasCommonFiles ? (
         <ImportSection
           isChecked={importOptions.importCommonFiles}
           onChange={(e) => onChange(e, "importCommonFiles")}
@@ -242,9 +246,9 @@ const ImportStep = (props: ImportStepProps) => {
           }}
           isDisabled={false}
         />
-      )}
+      ) : null}
 
-      {hasProjectFiles && (
+      {hasProjectFiles ? (
         <ImportSection
           isChecked={importOptions.importProjectFiles}
           onChange={(e) => onChange(e, "importProjectFiles")}
@@ -262,7 +266,7 @@ const ImportStep = (props: ImportStepProps) => {
           }}
           isDisabled={false}
         />
-      )}
+      ) : null}
 
       <MigrationButtons
         className="save-cancel-buttons"
@@ -276,7 +280,7 @@ const ImportStep = (props: ImportStepProps) => {
         onMigrationCancelClick={showCancelDialog}
       />
 
-      {cancelUploadDialogVisible && (
+      {cancelUploadDialogVisible ? (
         <CancelUploadDialog
           visible={cancelUploadDialogVisible}
           onClose={hideCancelDialog}
@@ -285,7 +289,7 @@ const ImportStep = (props: ImportStepProps) => {
           isFifthStep={false}
           isSixthStep={false}
         />
-      )}
+      ) : null}
     </Wrapper>
   );
 };

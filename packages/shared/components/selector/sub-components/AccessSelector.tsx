@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -78,7 +78,7 @@ const AccessSelector = (props: AccessSelectorProps) => {
       accessOptions={accessRights as TOption[]}
       size={ComboBoxSize.content}
       scaled={false}
-      directionX="right"
+      directionX="left"
       directionY="top"
       fixedDirection={isMobileView}
       manualWidth={isMobileView ? "auto" : `${width}px`}

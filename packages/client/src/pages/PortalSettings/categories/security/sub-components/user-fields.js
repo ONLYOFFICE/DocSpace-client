@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,22 +26,27 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { commonIconsStyles, mobile } from "@docspace/shared/utils";
-import TrashIcon from "PUBLIC_DIR/images/trash.react.svg";
+import {
+  commonIconsStyles,
+  injectDefaultTheme,
+  mobile,
+} from "@docspace/shared/utils";
+import TrashIcon from "PUBLIC_DIR/images/icons/16/trash.react.svg";
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg";
 import { Link } from "@docspace/shared/components/link";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { Base } from "@docspace/shared/themes";
+import {
+  TextInput,
+  InputSize,
+  InputType,
+} from "@docspace/shared/components/text-input";
 
-const StyledPlusIcon = styled(PlusIcon)`
+const StyledPlusIcon = styled(PlusIcon).attrs(injectDefaultTheme)`
   ${commonIconsStyles}
 
   path {
     fill: ${(props) => props.theme.client.settings.iconFill};
   }
 `;
-
-StyledPlusIcon.defaultProps = { theme: Base };
 
 const StyledTrashIcon = styled(TrashIcon)`
   ${commonIconsStyles}
@@ -102,19 +107,19 @@ const UserFields = (props) => {
   }, [inputs]);
 
   const onBlur = (index) => {
-    let newErrors = Array.from(errors);
+    const newErrors = Array.from(errors);
     newErrors[index] = true;
     setErrors(newErrors);
   };
 
   const onFocus = (index) => {
-    let newErrors = Array.from(errors);
+    const newErrors = Array.from(errors);
     newErrors[index] = false;
     setErrors(newErrors);
   };
 
   const onDelete = (index) => {
-    let newErrors = Array.from(errors);
+    const newErrors = Array.from(errors);
     newErrors.splice(index, 1);
     setErrors(newErrors);
 
@@ -123,45 +128,47 @@ const UserFields = (props) => {
 
   return (
     <div className={className}>
-      {inputs ? (
-        inputs.map((input, index) => {
-          let newInput1;
-          let newInput2;
+      {inputs
+        ? inputs.map((input, index) => {
+            let newInput1;
+            let newInput2;
 
-          if (input?.includes("-")) {
-            newInput1 = input.split("-")[0];
-            newInput2 = input.split("-")[1];
-          }
+            if (input?.includes("-")) {
+              newInput1 = input.split("-")[0];
+              newInput2 = input.split("-")[1];
+            }
 
-          const error = newInput2
-            ? input?.split("-").length - 1 > 1 ||
-              !regexp.test(newInput1) ||
-              !regexp.test(newInput2)
-            : !regexp.test(input);
+            const error = newInput2
+              ? (input && input.split("-").length - 1 > 1) ||
+                !regexp.test(newInput1) ||
+                !regexp.test(newInput2)
+              : !regexp.test(input);
 
-          return (
-            <StyledInputWrapper key={`user-input-${index}`}>
-              <TextInput
-                className={`${classNameAdditional}-input`}
-                id={`user-input-${index}`}
-                isAutoFocussed={isAutoFocussed}
-                value={input}
-                onChange={(e) => onChangeInput(e, index)}
-                onBlur={() => onBlur(index)}
-                onFocus={() => onFocus(index)}
-                hasError={errors[index] && error}
-              />
-              <StyledTrashIcon
-                className={`${classNameAdditional}-delete-icon`}
-                size="medium"
-                onClick={() => onDelete(index)}
-              />
-            </StyledInputWrapper>
-          );
-        })
-      ) : (
-        <></>
-      )}
+            return (
+              <StyledInputWrapper key={`user-input-${input}`}>
+                <TextInput
+                  type={InputType.text}
+                  size={InputSize.base}
+                  tabIndex={index}
+                  className={`${classNameAdditional}-input`}
+                  id={`user-input-${input}`}
+                  isAutoFocussed={isAutoFocussed}
+                  keepCharPositions
+                  value={input}
+                  onChange={(e) => onChangeInput(e, index)}
+                  onBlur={() => onBlur(index)}
+                  onFocus={() => onFocus(index)}
+                  hasError={errors[index] ? error : null}
+                />
+                <StyledTrashIcon
+                  className={`${classNameAdditional}-delete-icon`}
+                  size="medium"
+                  onClick={() => onDelete(index)}
+                />
+              </StyledInputWrapper>
+            );
+          })
+        : null}
 
       <StyledAddWrapper
         className={classNameAdditional}
@@ -169,7 +176,7 @@ const UserFields = (props) => {
         inputsLength={inputs.length}
       >
         <StyledPlusIcon size="small" />
-        <Link type="action" isHovered={true} fontWeight={600}>
+        <Link type="action" isHovered fontWeight={600}>
           {buttonLabel}
         </Link>
       </StyledAddWrapper>

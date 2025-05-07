@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,11 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { SelectionArea as SelectionAreaComponent } from "@docspace/shared/components/selection-area";
-import { getCountTilesInRow } from "SRC_DIR/helpers/filesUtils";
+import { getCountTilesInRow } from "@docspace/shared/utils";
 
 const SelectionArea = (props) => {
   const {
@@ -42,25 +42,26 @@ const SelectionArea = (props) => {
     isIndexEditingMode,
   } = props;
 
-  const [countTilesInRow, setCountTilesInRow] = useState(getCountTilesInRow());
+  const [countTilesInRow, setCountTilesInRow] = useState();
 
-  useEffect(() => {
+  const setTilesCount = () => {
+    if (isRooms === undefined) return;
+    const newCount = getCountTilesInRow(isRooms);
+    if (countTilesInRow !== newCount) setCountTilesInRow(newCount);
+  };
+
+  const onResize = () => {
+    setTilesCount();
+  };
+
+  useLayoutEffect(() => {
     setTilesCount();
     window.addEventListener("resize", onResize);
 
     return () => {
       window.removeEventListener("resize", onResize);
     };
-  }, [isInfoPanelVisible]);
-
-  const onResize = () => {
-    setTilesCount();
-  };
-
-  const setTilesCount = () => {
-    const newCount = getCountTilesInRow();
-    setCountTilesInRow(newCount);
-  };
+  }, [isInfoPanelVisible, onResize]);
 
   const onMove = ({ added, removed, clear }) => {
     setSelections(added, removed, clear);
@@ -83,14 +84,12 @@ const SelectionArea = (props) => {
     {
       type: "folder",
       rowCount: Math.ceil(foldersLength / countTilesInRow),
-      rowGap: 12,
+      rowGap: isRooms ? 14 : 12,
       countOfMissingTiles: getCountOfMissingFilesTiles(foldersLength),
     },
   ];
 
-  return isMobile || dragging || isIndexEditingMode ? (
-    <></>
-  ) : (
+  return isMobile || dragging || isIndexEditingMode ? null : (
     <SelectionAreaComponent
       containerClass="section-scroll"
       scrollClass="section-scroll"

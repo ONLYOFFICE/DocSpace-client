@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -41,7 +41,7 @@ const NoHistory = ({ t, theme }) => {
   return (
     <StyledNoItemContainer className="info-panel_gallery-empty-screen">
       <div className="no-thumbnail-img-wrapper">
-        <img src={imageSrc} alt="No History Image" />
+        <img src={imageSrc} alt="No History" />
       </div>
       <Text className="no-history-text" textAlign="center">
         {t("HistoryEmptyScreenText")}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -110,13 +110,13 @@ const NewItem = ({
       >
         {label}
       </Text>
-      {isOpenDropDown && dropDownItems && dropDownItems.length > 0 && (
+      {isOpenDropDown && dropDownItems && dropDownItems.length > 0 ? (
         <NewItemDropDown
           dropDownItems={dropDownItems}
           onCloseDropDown={onCloseDropDown}
           listHeight={listHeight}
         />
-      )}
+      ) : null}
     </StyledItem>
   );
 };

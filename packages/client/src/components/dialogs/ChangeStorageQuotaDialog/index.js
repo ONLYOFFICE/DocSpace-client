@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,8 +32,9 @@ import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 import { setTenantQuotaSettings } from "@docspace/shared/api/settings";
+import StyledBodyContent from "./StyledComponent";
 
-import QuotaForm from "../../../components/QuotaForm";
+import QuotaForm from "../../QuotaForm";
 
 const ChangeStorageQuotaDialog = (props) => {
   const {
@@ -51,24 +52,15 @@ const ChangeStorageQuotaDialog = (props) => {
   const [isError, setIsError] = useState(false);
   const [size, setSize] = useState("");
 
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyUpHandler, false);
-
-    return () => {
-      document.removeEventListener("keyup", onKeyUpHandler, false);
-    };
-  }, [size]);
-
   const isSizeError = () => {
     if (isDisableQuota) return false;
-
     if (size.trim() === "") {
       setIsError(true);
       return true;
     }
-
     return false;
   };
+
   const onSaveClick = async () => {
     if (isSizeError()) return;
 
@@ -82,7 +74,6 @@ const ChangeStorageQuotaDialog = (props) => {
       });
 
       await updateFunction(storageQuota);
-
       toastr.success(t("Common:StorageQuotaSet"));
     } catch (e) {
       toastr.error(e);
@@ -96,17 +87,23 @@ const ChangeStorageQuotaDialog = (props) => {
   const onSetQuotaBytesSize = (bytes) => {
     setSize(bytes);
   };
+
   const onKeyUpHandler = (e) => {
     if (e.keyCode === 13 || e.which === 13) {
       if (isSizeError()) return;
-
       onSaveClick();
       setSize("");
       setIsError(false);
-
-      return;
     }
   };
+
+  useEffect(() => {
+    document.addEventListener("keyup", onKeyUpHandler, false);
+    return () => {
+      document.removeEventListener("keyup", onKeyUpHandler, false);
+    };
+  }, [size]);
+
   const onCloseClick = () => {
     setSize("");
     setIsError(false);
@@ -121,24 +118,26 @@ const ChangeStorageQuotaDialog = (props) => {
           : t("Common:ManageStorageQuota")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect>
-          {isDisableQuota
-            ? t("Common:TurnOffDiskSpaceLimit", {
-                productName: t("Common:ProductName"),
-              })
-            : t("Common:SetDiskSpaceQuota", {
-                productName: t("Common:ProductName"),
-              })}
-        </Text>
-        {!isDisableQuota && (
-          <QuotaForm
-            onSetQuotaBytesSize={onSetQuotaBytesSize}
-            isLoading={isLoading}
-            isError={isError}
-            initialSize={initialSize}
-            isAutoFocussed
-          />
-        )}
+        <StyledBodyContent>
+          <Text noSelect>
+            {isDisableQuota
+              ? t("Common:TurnOffDiskSpaceLimit", {
+                  productName: t("Common:ProductName"),
+                })
+              : t("Common:SetDiskSpaceQuota", {
+                  productName: t("Common:ProductName"),
+                })}
+          </Text>
+          {!isDisableQuota ? (
+            <QuotaForm
+              onSetQuotaBytesSize={onSetQuotaBytesSize}
+              isLoading={isLoading}
+              isError={isError}
+              initialSize={initialSize}
+              isAutoFocussed
+            />
+          ) : null}
+        </StyledBodyContent>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -147,7 +146,7 @@ const ChangeStorageQuotaDialog = (props) => {
           primary
           onClick={onSaveClick}
           isLoading={isLoading}
-          isDisabled={!isDisableQuota && size.trim() === ""}
+          isDisabled={!isDisableQuota ? size.trim() === "" : null}
           scale
         />
         <Button

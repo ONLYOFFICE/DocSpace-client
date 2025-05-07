@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,14 +29,13 @@ import { inject, observer } from "mobx-react";
 import moment from "moment";
 
 import { toastr } from "@docspace/shared/components/toast";
+import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import {
   copyDocumentShareLink,
   copyRoomShareLink,
 } from "@docspace/shared/components/share/Share.helpers";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
-
-import QuickButtons from "../components/QuickButtons";
 
 export default function withQuickButtons(WrappedComponent) {
   class WithQuickButtons extends React.Component {
@@ -51,8 +50,9 @@ export default function withQuickButtons(WrappedComponent) {
     onClickLock = () => {
       const { item, lockFileAction, t } = this.props;
       const { locked, id, security } = item;
+      const { isLoading } = this.state;
 
-      if (security?.Lock && !this.state.isLoading) {
+      if (security?.Lock && !isLoading) {
         this.setState({ isLoading: true });
         return lockFileAction(id, !locked)
           .then(() =>
@@ -65,11 +65,11 @@ export default function withQuickButtons(WrappedComponent) {
             this.setState({ isLoading: false }),
           );
       }
-      return;
     };
 
     onClickDownload = () => {
-      window.open(this.props.item.viewUrl, "_self");
+      const { item } = this.props;
+      window.open(item.viewUrl, "_self");
     };
 
     onClickFavorite = (showFavorite) => {
@@ -118,8 +118,9 @@ export default function withQuickButtons(WrappedComponent) {
     };
 
     getStartDate = () => {
-      const { period, value } = this.props.roomLifetime;
-      const date = new Date(this.props.item.expired);
+      const { roomLifetime, item } = this.props;
+      const { period, value } = roomLifetime;
+      const date = new Date(item.expired);
 
       switch (period) {
         case 0:
@@ -150,6 +151,13 @@ export default function withQuickButtons(WrappedComponent) {
       return getCorrectDate(locale, item.expired);
     };
 
+    onCreateRoom = () => {
+      const { item, onCreateRoomFromTemplate, setBufferSelection } = this.props;
+      setBufferSelection(item);
+
+      onCreateRoomFromTemplate(item);
+    };
+
     render() {
       const { isLoading } = this.state;
 
@@ -168,6 +176,7 @@ export default function withQuickButtons(WrappedComponent) {
         currentDeviceType,
         roomLifetime,
         currentColorScheme,
+        isTemplatesFolder,
       } = this.props;
 
       const showLifetimeIcon =
@@ -199,6 +208,8 @@ export default function withQuickButtons(WrappedComponent) {
           expiredDate={expiredDate}
           roomLifetime={roomLifetime}
           currentColorScheme={currentColorScheme}
+          onCreateRoom={this.onCreateRoom}
+          isTemplatesFolder={isTemplatesFolder}
         />
       );
 
@@ -225,14 +236,19 @@ export default function withQuickButtons(WrappedComponent) {
       contextOptionsStore,
       selectedFolderStore,
     }) => {
-      const { lockFileAction, setFavoriteAction, onSelectItem } =
-        filesActionsStore;
+      const {
+        lockFileAction,
+        setFavoriteAction,
+        onSelectItem,
+        onCreateRoomFromTemplate,
+      } = filesActionsStore;
       const {
         isDocumentsFolder,
         isArchiveFolderRoot,
         isTrashFolder,
         isPersonalRoom,
         isArchiveFolder,
+        isTemplatesFolder,
       } = treeFoldersStore;
 
       const { isIndexEditingMode } = indexingStore;
@@ -268,6 +284,9 @@ export default function withQuickButtons(WrappedComponent) {
         roomLifetime: infoPanelRoom?.lifetime ?? selectedFolderStore?.lifetime,
         getManageLinkOptions,
         currentColorScheme: settingsStore.currentColorScheme,
+        isTemplatesFolder,
+        onCreateRoomFromTemplate,
+        setBufferSelection: filesStore.setBufferSelection,
       };
     },
   )(observer(WithQuickButtons));

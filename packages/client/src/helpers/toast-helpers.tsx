@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -41,9 +41,9 @@ export const showSuccessExportRoomIndexToast = (
   const toastMessage = (
     <Trans
       t={t}
-      i18nKey="FileExportedToMyDocuments"
+      i18nKey="FileExportDestination"
       ns="Files"
-      values={{ fileName }}
+      values={{ fileName, sectionName: t("Common:MyFilesSection") }}
       components={{
         1: (
           <ColorTheme

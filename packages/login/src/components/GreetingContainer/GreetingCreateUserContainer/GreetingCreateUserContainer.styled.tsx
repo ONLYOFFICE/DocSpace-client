@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -43,10 +43,18 @@ export const GreetingContainer = styled.div`
 
   .portal-logo{
     padding-bottom: 40px;
+
+    &.guest {
+      padding-bottom: 20px;
+    }
   }
 
   .tooltip {
-  margin-bottom: 32px;
+    margin-bottom: 32px;
+  
+    &.guest {
+      margin-bottom: 40px;
+    }
 
     p {
       text-align: center;

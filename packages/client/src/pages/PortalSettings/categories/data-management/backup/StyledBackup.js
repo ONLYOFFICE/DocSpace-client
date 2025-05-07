@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,24 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
+
+import { tablet, mobile } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
 import {
   commonSettingsStyles,
   UnavailableStyles,
 } from "../../../utils/commonSettingsStyles";
 
-import { tablet, mobile } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
-
 const INPUT_LENGTH = "350px";
 const TEXT_LENGTH = "700px";
 
-const floatingButtonStyles = css`
-  .layout-progress-bar {
-    position: fixed;
-    inset-inline-end: 24px;
-    bottom: 24px;
-  }
-`;
 const commonStyles = css`
   .backup_modules-description {
     margin-bottom: 8px;
@@ -63,8 +56,6 @@ const commonStyles = css`
 
   .radio-button_text {
     margin-inline-end: 7px;
-    font-size: 13px;
-    font-weight: 600;
   }
 
   .backup_radio-button {
@@ -118,8 +109,6 @@ const commonStyles = css`
 const StyledManualBackup = styled.div`
   ${commonStyles}
 
-  ${floatingButtonStyles}
-
   .manual-backup_buttons {
     margin-top: 16px;
     margin-inline-start: 24px;
@@ -172,7 +161,6 @@ const StyledManualBackup = styled.div`
 const StyledAutoBackup = styled.div`
   ${commonStyles}
 
-  ${floatingButtonStyles}
   .auto-backup_third-party-module {
     margin-top: 16px;
     margin-inline-start: 24px;
@@ -182,9 +170,6 @@ const StyledAutoBackup = styled.div`
   }
   .automatic-backup_main {
     margin-bottom: 30px;
-    .radio-button_text {
-      font-size: 13px;
-    }
   }
   .backup_toggle-btn {
     position: static;
@@ -248,7 +233,8 @@ const StyledStoragesModule = styled.div`
 `;
 const StyledRestoreBackup = styled.div`
   ${commonStyles}
-  ${floatingButtonStyles}
+
+  max-width: ${TEXT_LENGTH};
 
   .restore-backup_third-party-module {
     margin-top: 16px;
@@ -477,9 +463,7 @@ const StyledBackup = styled.div`
     font-weight: bold;
     padding-bottom: 8px;
   }
-  .layout-progress-bar {
-    cursor: default;
-  }
+
   .backup-section_wrapper {
     margin-bottom: 27px;
     .backup-section_heading {
@@ -567,8 +551,8 @@ const StyledBackupList = styled.div`
     ${(props) =>
       props.isChecked &&
       css`
-        background: ${(props) =>
-          props.theme.client.settings.backup.backupCheckedListItemBackground};
+        background: ${({ theme }) =>
+          theme.client.settings.backup.backupCheckedListItemBackground};
       `}
     padding-inline: 16px;
   }

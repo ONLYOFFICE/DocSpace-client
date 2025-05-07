@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,6 +23,9 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 
 import { AxiosRequestConfig } from "axios";
 import { EmployeeType } from "../../enums";
@@ -97,26 +100,35 @@ export function startBackup(
   return request(options);
 }
 
-export function getBackupProgress() {
+export function getBackupProgress(dump: boolean = false) {
   const options = {
     method: "get",
     url: "/portal/getbackupprogress",
+    params: {
+      dump,
+    },
   };
   return request(options);
 }
 
-export function deleteBackupSchedule() {
+export function deleteBackupSchedule(dump: boolean = false) {
   const options = {
     method: "delete",
     url: "/portal/deletebackupschedule",
+    params: {
+      dump,
+    },
   };
   return request(options);
 }
 
-export function getBackupSchedule() {
+export function getBackupSchedule(dump: boolean = false) {
   const options = {
     method: "get",
     url: "/portal/getbackupschedule",
+    params: {
+      dump,
+    },
   };
   return request(options);
 }
@@ -152,19 +164,37 @@ export function createBackupSchedule(
   return request(options);
 }
 
-export function deleteBackupHistory() {
-  return request({ method: "delete", url: "/portal/deletebackuphistory" });
+export function deleteBackupHistory(dump: boolean = false) {
+  return request({
+    method: "delete",
+    url: "/portal/deletebackuphistory",
+    params: {
+      dump,
+    },
+  });
 }
 
 export function deleteBackup(id) {
   return request({ method: "delete", url: `/portal/deletebackup/${id}` });
 }
 
-export function getBackupHistory() {
-  return request({ method: "get", url: "/portal/getbackuphistory" });
+export function getBackupHistory(dump: boolean = false) {
+  return request({
+    method: "get",
+    url: "/portal/getbackuphistory",
+    params: {
+      dump,
+    },
+  });
 }
 
-export function startRestore(backupId, storageType, storageParams, notify) {
+export function startRestore(
+  backupId,
+  storageType,
+  storageParams,
+  notify,
+  dump = false,
+) {
   return request({
     method: "post",
     url: `/portal/startrestore`,
@@ -173,6 +203,7 @@ export function startRestore(backupId, storageType, storageParams, notify) {
       storageType,
       storageParams,
       notify,
+      dump,
     },
   });
 }
@@ -309,12 +340,14 @@ export async function getPaymentLink(
   return res;
 }
 
-export function updatePayment(adminCount) {
+export function updatePayment(adminCount, isYearTariff) {
+  const data = isYearTariff ? { adminyear: adminCount } : { admin: adminCount };
+
   return request({
     method: "put",
     url: `/portal/payment/update`,
     data: {
-      quantity: { admin: adminCount },
+      quantity: data,
     },
   });
 }

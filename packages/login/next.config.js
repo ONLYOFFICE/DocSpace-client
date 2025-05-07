@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,10 +28,29 @@
 
 const path = require("path");
 const pkg = require("./package.json");
+const BannerPlugin = require("webpack").BannerPlugin;
+const TerserPlugin = require("terser-webpack-plugin");
+
+const version = pkg.version;
+
+const getBuildDate = () => {
+  const timeElapsed = Date.now();
+  const today = new Date(timeElapsed);
+  return JSON.stringify(today.toISOString().split(".")[0] + "Z");
+};
+
+const getBuildYear = () => {
+  const timeElapsed = Date.now();
+  const today = new Date(timeElapsed);
+  return today.getFullYear();
+};
 
 const nextConfig = {
   basePath: "/login",
   output: "standalone",
+  typescript: {
+    ignoreBuildErrors: process.env.TS_ERRORS_IGNORE === "true",
+  },
   compiler: {
     styledComponents: true,
   },
@@ -42,22 +61,47 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  typescript: {
-    // !! WARN !!
-    // Dangerously allow production builds to successfully complete even if
-    // your project has type errors.
-    // !! WARN !!
-    ignoreBuildErrors: true,
-  },
   logging: {
     fetches: {
       fullUrl: true,
     },
   },
-};
+  webpack: (config) => {
+    console.log("ENV", { env: process.env });
 
-module.exports = {
-  webpack(config) {
+    config.devtool = "source-map";
+
+    if (config.mode === "production") {
+      config.optimization = {
+        splitChunks: { chunks: "all" },
+        minimize: true,
+        minimizer: [
+          new TerserPlugin({
+            terserOptions: {
+              format: {
+                comments: /\*\s*\(c\)\s+Copyright\s+Ascensio\s+System\s+SIA/i,
+              },
+            },
+            extractComments: false,
+            parallel: false,
+          }),
+        ],
+      };
+
+      config.plugins.push(
+        new BannerPlugin({
+          raw: true,
+          banner: `/*
+* (c) Copyright Ascensio System SIA 2009-${getBuildYear()}. All rights reserved
+*
+* https://www.onlyoffice.com/
+*
+* Version: ${version} (build: ${getBuildDate()})
+*/`,
+        }),
+      );
+    }
+
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.(".svg"),
@@ -70,8 +114,9 @@ module.exports = {
       not: [...fileLoaderRule.resourceQuery.not, /url/],
     };
 
+    // Configure CSS handling
     config.module.rules.push(
-      // Reapply the existing rule, but only for svg imports ending in ?url
+      // Existing asset rules
       {
         type: "asset/resource",
         generator: {
@@ -79,14 +124,13 @@ module.exports = {
           filename: "static/chunks/[path][name][ext]?[hash]",
         },
         test: /\.(svg|png|jpe?g|gif|ico|woff2)$/i,
-        resourceQuery: /url/, // *.svg?url
+        resourceQuery: /url/,
       },
-      // Convert all other *.svg imports to React components
+      // SVG handling
       {
         test: /\.svg$/i,
         issuer: fileLoaderRule.issuer,
-        resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
-
+        resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] },
         loader: "@svgr/webpack",
         options: {
           prettier: false,
@@ -96,7 +140,7 @@ module.exports = {
               {
                 name: "preset-default",
                 params: {
-                  overrides: { removeViewBox: false },
+                  overrides: { removeViewBox: false, cleanupIds: false },
                 },
               },
             ],
@@ -117,5 +161,6 @@ module.exports = {
 
     return config;
   },
-  ...nextConfig,
 };
+
+module.exports = nextConfig;

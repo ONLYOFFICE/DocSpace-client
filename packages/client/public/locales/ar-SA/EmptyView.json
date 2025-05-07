@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "سيتم عرض المستندات التي قمت بعرضها أو تحريرها مؤخرًا في هذا القسم.",
   "EmptyRootRoomUserDescription": "ستظهر الغرفة المشتركة هنا.",
   "EmptyRootRoomUserTitle": "لا توجد غرف هنا حتى الآن",
+  "EmptyTemplatesDescription": "يمكنكم إنشاء قالب من غرفة موجودة ضمن قسم الغرف.",
+  "EmptyTemplatesTitle": "لا توجد قوالب هنا بعد.",
   "FormFolderDefaultDescription": "أسقط نماذج PDF هنا أو قم بتحميلها من {{productName}} أو من الجهاز.",
   "FormFolderDefaultTitle": "لا توجد نماذج هنا حتى الآن",
   "FormFolderDefaultUserDescription": "ستظهر هنا النماذج التي تم تحميلها من قبل المسؤولين.",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "استيراد البيانات إلى {{productName}} من Workspace {{organizationName}} أو Google Workspace أو Nextcloud.",
   "MigrationDataTitle": "بيانات الهجرة",
   "PublicRoomEmptyTitle": "مرحبًا بك في الغرفة العامة",
+  "SectionsUploadDescription": "رفع أي نوع من الملفات من {{sectionNameFirst}} أو {{sectionNameSecond}}",
   "SendInvitationLetter": "أرسل رسالة دعوة لإضافة أعضاء جدد إلى البوابة",
   "ShareOptionDescription": "انسخ رابط الوصول العام أو قم بدعوة مستخدمين آخرين إلى الغرفة لبدء عملية تعبئة النموذج.",
   "ShareOptionTitle": "مشاركة غرفة",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "تحميل من جهازك",
   "UploadDevicePDFFormOptionDescription": "قم بتحميل نموذج PDF جاهز إلى الغرفة من جهازك.",
   "UploadDevicePDFFormOptionTitle": "تحميل من الجهاز",
-  "UploadFromPortalDescription": "قم بتحميل أي نوع من الملفات من المستندات أو الغرف",
   "UploadFromPortalTitle": "تحميل من {{productName}}",
   "UploadPDFFormOptionDescription": "حدد نموذج  PDFجاهزًا متاحًا في {{productName}} وقم بتحميله إلى الغرفة. ",
-  "UserEmptyDescription": "ستظهر هنا الملفات والمجلدات التي تم تحميلها بواسطة المسؤولين.",
   "VirtualDataRoomEmptyTitle": "مرحبًا بك في غرفة البيانات الافتراضية"
 }

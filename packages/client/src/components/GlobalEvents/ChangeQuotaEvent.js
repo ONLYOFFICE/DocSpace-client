@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,6 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
+import api from "@docspace/shared/api";
 
 import { ChangeQuotaDialog } from "../dialogs";
 
@@ -41,7 +42,6 @@ const ChangeQuotaEvent = (props) => {
     bodyDescription,
     headerTitle,
     onClose,
-    setCustomUserQuota,
     setCustomRoomQuota,
     successCallback,
     abortCallback,
@@ -58,15 +58,16 @@ const ChangeQuotaEvent = (props) => {
   const [isError, setIsError] = useState(false);
   const [size, setSize] = useState();
 
-  const onSetQuotaBytesSize = (size) => {
-    setSize(size);
+  const onSetQuotaBytesSize = (value) => {
+    setSize(value);
   };
 
-  const updateFunction = (size) => {
+  const updateFunction = () => {
     return type === "user"
-      ? setCustomUserQuota(size, ids)
-      : setCustomRoomQuota(size, ids, inRoom);
+      ? api.people.setCustomUserQuota(ids, size)
+      : setCustomRoomQuota(ids, size, inRoom);
   };
+
   const onSaveClick = async () => {
     if (!size || size.trim() === "") {
       setIsError(true);
@@ -130,13 +131,9 @@ const ChangeQuotaEvent = (props) => {
 };
 
 export default inject(
-  (
-    { peopleStore, filesStore, auth, currentQuotaStore, infoPanelStore },
-    { type },
-  ) => {
+  ({ peopleStore, filesStore, infoPanelStore }, { type }) => {
     const { usersStore } = peopleStore;
-    const { setCustomUserQuota, getPeopleListItem, needResetUserSelection } =
-      usersStore;
+    const { getPeopleListItem, needResetUserSelection } = usersStore;
     const { setCustomRoomQuota, needResetFilesSelection } = filesStore;
 
     const {
@@ -150,7 +147,6 @@ export default inject(
       type === "user" ? needResetUserSelection : needResetFilesSelection;
 
     return {
-      setCustomUserQuota,
       setCustomRoomQuota,
       inRoom,
       setNewInfoPanelSelection,

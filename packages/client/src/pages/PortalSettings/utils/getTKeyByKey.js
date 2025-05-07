@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,9 +27,9 @@
 export const getTKeyByKey = (key, treeData, depth = 0) => {
   if (!treeData) return;
   const keysCollection = key.split("-");
-  let newKey = keysCollection.slice(0, depth + 1).join("-");
+  const newKey = keysCollection.slice(0, depth + 1).join("-");
 
-  const item = treeData.find((item) => item.key === newKey);
+  const item = treeData.find((element) => element.key === newKey);
 
   if (item.children?.length === 1 && item.children[0].link === "") {
     return item.children[0].tKey;
@@ -37,8 +37,7 @@ export const getTKeyByKey = (key, treeData, depth = 0) => {
 
   if (key === newKey) {
     return item.tKey;
-  } else {
-    const depthLevel = depth + 1;
-    return getTKeyByKey(key, item.children, depthLevel);
   }
+  const depthLevel = depth + 1;
+  return getTKeyByKey(key, item.children, depthLevel);
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -44,8 +44,7 @@ import { GreetingContainer } from "./GreetingCreateUserContainer.styled";
 
 export const GreetingCreateUserContainer = ({
   type,
-  firstName,
-  lastName,
+  displayName,
   culture,
   hostName,
 }: GreetingCreateUserContainerProps) => {
@@ -73,8 +72,7 @@ export const GreetingCreateUserContainer = ({
                 ns="Common"
                 defaults={DEFAULT_ROOM_TEXT}
                 values={{
-                  firstName,
-                  lastName,
+                  displayName,
                   ...(roomData.title
                     ? { roomName: roomData.title }
                     : { spaceAddress: hostName }),
@@ -90,8 +88,7 @@ export const GreetingCreateUserContainer = ({
                 ns="Common"
                 defaults={DEFAULT_PORTAL_TEXT}
                 values={{
-                  firstName,
-                  lastName,
+                  displayName,
                   productName: t("Common:ProductName"),
                   ...(roomData.title
                     ? { roomName: roomData.title }

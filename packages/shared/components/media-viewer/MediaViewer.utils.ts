@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
+import { isNullOrUndefined } from "../../utils/typeGuards";
 
 import { mapSupplied, mediaTypes } from "./MediaViewer.constants";
 import type { BoundsType, PlaylistType, Point } from "./MediaViewer.types";
@@ -136,10 +136,12 @@ export const getImagePositionAndSize = (
 export const calculateAdjustImageUtil = (
   element: HTMLElement | null,
   container: HTMLElement | null,
-  point: Point,
+  pointProp: Point,
   diffScale: number = 1,
 ) => {
-  if (!element || !container) return point;
+  if (!element || !container) return pointProp;
+
+  const point = pointProp;
 
   // debugger;
 
@@ -208,10 +210,13 @@ export const calculateAdjustImageUtil = (
 };
 
 export const calculateAdjustBoundsUtils = (
-  x: number,
-  y: number,
+  xProp: number,
+  yProp: number,
   bounds: BoundsType | null,
 ): Point => {
+  let x = xProp;
+  let y = yProp;
+
   if (!bounds) return { x, y };
 
   const { left, right, top, bottom } = bounds;

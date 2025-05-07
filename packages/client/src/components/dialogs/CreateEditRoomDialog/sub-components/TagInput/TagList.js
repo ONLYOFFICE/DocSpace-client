@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -51,7 +51,7 @@ const StyledTagList = styled.div`
   }
 `;
 
-const TagList = ({ defaultTagLabel, tagHandler, isDisabled }) => {
+const TagList = ({ tagHandler, isDisabled }) => {
   const { tags } = tagHandler;
 
   const onDeleteAction = (id) => {

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,10 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
+
+import { inject, observer } from "mobx-react";
+import { Link } from "@docspace/shared/components/link";
+import { DeviceType } from "@docspace/shared/enums";
 import { MainContainer } from "../StyledSecurity";
 import { TfaSection } from "./tfa";
 import { PasswordStrengthSection } from "./passwordStrength";
@@ -36,12 +41,9 @@ import { IpSecuritySection } from "./ipSecurity";
 import { AdminMessageSection } from "./adminMessage";
 import { SessionLifetimeSection } from "./sessionLifetime";
 import { BruteForceProtectionSection } from "./bruteForceProtection";
+import { DevToolsAccessSection } from "./devToolsAccess";
+
 import MobileView from "./mobileView";
-import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
-import { size } from "@docspace/shared/utils";
-import { inject, observer } from "mobx-react";
-import { Link } from "@docspace/shared/components/link";
-import { DeviceType } from "@docspace/shared/enums";
 
 const AccessPortal = (props) => {
   const {
@@ -55,6 +57,8 @@ const AccessPortal = (props) => {
     ipSettingsUrl,
     isMobileView,
     resetIsInit,
+    helpCenterDomain,
+    limitedDevToolsBlockHelpUrl,
   } = props;
 
   useEffect(() => {
@@ -65,9 +69,13 @@ const AccessPortal = (props) => {
     return () => resetIsInit();
   }, []);
 
-  if (isMobileView) return <MobileView />;
+  if (isMobileView)
+    return <MobileView withoutExternalLink={!helpCenterDomain} />;
   return (
-    <MainContainer className="desktop-view">
+    <MainContainer
+      className="desktop-view"
+      withoutExternalLink={!helpCenterDomain}
+    >
       <Text className="subtitle">{t("PortalSecurityTitle")}</Text>
 
       <Text fontSize="16px" fontWeight="700">
@@ -81,15 +89,17 @@ const AccessPortal = (props) => {
         <Text fontSize="13px" fontWeight="400">
           <Trans t={t} i18nKey="SaveToApply" />
         </Text>
-        <Link
-          className="link-learn-more"
-          target="_blank"
-          isHovered
-          color={currentColorScheme.main?.accent}
-          href={passwordStrengthSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {passwordStrengthSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            target="_blank"
+            isHovered
+            color={currentColorScheme.main?.accent}
+            href={passwordStrengthSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
 
       <PasswordStrengthSection />
@@ -107,15 +117,17 @@ const AccessPortal = (props) => {
         <Text fontSize="13px" fontWeight="400">
           <Trans t={t} i18nKey="TwoFactorAuthSave" />
         </Text>
-        <Link
-          className="link-learn-more"
-          target="_blank"
-          isHovered
-          color={currentColorScheme.main?.accent}
-          href={tfaSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {tfaSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            target="_blank"
+            isHovered
+            color={currentColorScheme.main?.accent}
+            href={tfaSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
 
       <TfaSection />
@@ -131,19 +143,46 @@ const AccessPortal = (props) => {
         <Text fontSize="13px" fontWeight="400">
           <Trans t={t} i18nKey="SaveToApply" />
         </Text>
-        <Link
-          className="link-learn-more"
-          target="_blank"
-          isHovered
-          color={currentColorScheme.main?.accent}
-          href={trustedMailDomainSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {trustedMailDomainSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            target="_blank"
+            isHovered
+            color={currentColorScheme.main?.accent}
+            href={trustedMailDomainSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
 
       <TrustedMailSection />
       <StyledSettingsSeparator />
+
+      <Text fontSize="16px" fontWeight="700">
+        {t("DeveloperToolsAccess")}
+      </Text>
+      <div className="category-item-description">
+        <Text fontSize="13px" fontWeight="400">
+          {t("DeveloperToolsAccessDescription", {
+            productName: t("Common:ProductName"),
+          })}
+        </Text>
+        {limitedDevToolsBlockHelpUrl ? (
+          <Link
+            className="link-learn-more"
+            target="_blank"
+            isHovered
+            color={currentColorScheme.main?.accent}
+            href={limitedDevToolsBlockHelpUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
+      </div>
+      <DevToolsAccessSection />
+      <StyledSettingsSeparator />
+
       <Text fontSize="16px" fontWeight="700">
         {t("IPSecurity")}
       </Text>
@@ -152,15 +191,17 @@ const AccessPortal = (props) => {
           {t("IPSecuritySettingDescription")}
         </Text>
 
-        <Link
-          className="link-learn-more"
-          target="_blank"
-          isHovered
-          color={currentColorScheme.main?.accent}
-          href={ipSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {ipSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            target="_blank"
+            isHovered
+            color={currentColorScheme.main?.accent}
+            href={ipSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
 
       <IpSecuritySection />
@@ -188,15 +229,17 @@ const AccessPortal = (props) => {
           <Trans t={t} i18nKey="SaveToApply" />
         </Text>
 
-        <Link
-          className="link-learn-more"
-          target="_blank"
-          isHovered
-          color={currentColorScheme.main?.accent}
-          href={administratorMessageSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {administratorMessageSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            target="_blank"
+            isHovered
+            color={currentColorScheme.main?.accent}
+            href={administratorMessageSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
 
       <AdminMessageSection />
@@ -211,15 +254,17 @@ const AccessPortal = (props) => {
           {t("SessionLifetimeSettingDescription")}
         </Text>
 
-        <Link
-          className="link-learn-more"
-          target="_blank"
-          isHovered
-          color={currentColorScheme.main?.accent}
-          href={lifetimeSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {lifetimeSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            target="_blank"
+            isHovered
+            color={currentColorScheme.main?.accent}
+            href={lifetimeSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
 
       <SessionLifetimeSection />
@@ -237,6 +282,8 @@ export default inject(({ settingsStore, setup }) => {
     lifetimeSettingsUrl,
     ipSettingsUrl,
     currentDeviceType,
+    helpCenterDomain,
+    limitedDevToolsBlockHelpUrl,
   } = settingsStore;
   const { resetIsInit } = setup;
 
@@ -252,5 +299,7 @@ export default inject(({ settingsStore, setup }) => {
     ipSettingsUrl,
     isMobileView,
     resetIsInit,
+    helpCenterDomain,
+    limitedDevToolsBlockHelpUrl,
   };
 })(withTranslation(["Settings", "Profile"])(observer(AccessPortal)));

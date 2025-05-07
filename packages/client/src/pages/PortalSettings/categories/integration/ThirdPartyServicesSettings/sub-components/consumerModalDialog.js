@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,14 +33,14 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { TextInput } from "@docspace/shared/components/text-input";
-import { Box } from "@docspace/shared/components/box";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { showLoader, hideLoader } from "@docspace/shared/utils/common";
 import { mobile } from "@docspace/shared/utils";
 import styled from "styled-components";
 
-const StyledBox = styled(Box)`
+const StyledBox = styled.div`
+  box-sizing: border-box;
   padding: 20px 0 8px;
   @media ${mobile} {
     padding-top: 0;
@@ -60,18 +60,67 @@ class ConsumerModalDialog extends React.Component {
     const required = createRef();
     required.current = [];
     this.requiredRef = required.current;
+
+    const { selectedConsumer, t, theme, feedbackAndSupportUrl } = this.props;
+
+    this.consumerInstruction =
+      selectedConsumer.instruction &&
+      format(
+        selectedConsumer.instruction,
+        <div style={{ boxSizing: "border-box", margin: 0 }} />,
+      );
+
+    this.helpCenterDescription = (
+      <Trans t={t} i18nKey="ThirdPartyBodyDescription" ns="Settings">
+        Detailed instructions in our{" "}
+        <Link
+          id="help-center-link"
+          color={theme.client.settings.integration.linkColor}
+          isHovered={false}
+          target="_blank"
+          href={this.thirdPartyServicesUrl()}
+        >
+          Help Center
+        </Link>
+      </Trans>
+    );
+
+    this.supportTeamDescription = (
+      <StyledBox>
+        <Trans t={t} i18nKey="ThirdPartyBottomDescription" ns="Settings">
+          If you still have some questions on how to connect this service or
+          need technical assistance, please feel free to contact our{" "}
+          <Link
+            id="support-team-link"
+            color={theme.client.settings.integration.linkColor}
+            isHovered={false}
+            target="_blank"
+            href={feedbackAndSupportUrl}
+          >
+            Support Team
+          </Link>
+        </Trans>
+      </StyledBox>
+    );
+
+    this.description =
+      feedbackAndSupportUrl && this.thirdPartyServicesUrl() ? (
+        <>
+          <Text as="div">{this.supportTeamDescription}</Text>
+          <Text as="div">{this.helpCenterDescription}</Text>
+        </>
+      ) : !feedbackAndSupportUrl && this.thirdPartyServicesUrl() ? (
+        <Text as="div">
+          <StyledBox>{this.helpCenterDescription}</StyledBox>
+        </Text>
+      ) : feedbackAndSupportUrl && !this.thirdPartyServicesUrl() ? (
+        <Text as="div">{this.supportTeamDescription}</Text>
+      ) : null;
   }
 
-  mapTokenNameToState = () => {
-    const { selectedConsumer } = this.props;
-    selectedConsumer.props.map((prop) => {
-      this.requiredRef.push(prop.name);
-
-      this.setState({
-        [`${prop.name}`]: prop.value,
-      });
-    });
-  };
+  componentDidMount() {
+    this.mapTokenNameToState();
+  }
 
   onChangeHandler = (e) => {
     this.setState({
@@ -94,7 +143,7 @@ class ConsumerModalDialog extends React.Component {
     const prop = [];
 
     let i = 0;
-    let stateLength = Object.keys(state).length;
+    const stateLength = Object.keys(state).length;
     for (i = 0; i < stateLength; i++) {
       prop.push({
         name: Object.keys(state)[i],
@@ -127,99 +176,91 @@ class ConsumerModalDialog extends React.Component {
   //   return nextState !== this.state;
   // }
 
-  componentDidMount() {
-    this.mapTokenNameToState();
-  }
+  mapTokenNameToState = () => {
+    const { selectedConsumer } = this.props;
+    selectedConsumer.props.forEach((prop) => {
+      this.requiredRef.push(prop.name);
 
-  thirdPartyServicesUrl = () => {
-    switch (this.props.selectedConsumer.name) {
-      case "docusign" || "docuSign":
-        return this.props.docuSignUrl;
-      case "dropbox":
-        return this.props.dropboxUrl;
-      case "box":
-        return this.props.boxUrl;
-      case "mailru":
-        return this.props.mailRuUrl;
-      case "skydrive":
-        return this.props.oneDriveUrl;
-      case "microsoft":
-        return this.props.microsoftUrl;
-      case "google":
-        return this.props.googleUrl;
-      case "facebook":
-        return this.props.facebookUrl;
-      case "linkedin":
-        return this.props.linkedinUrl;
-      case "clickatell":
-        return this.props.clickatellUrl;
-      case "smsc":
-        return this.props.smsclUrl;
-      case "firebase":
-        return this.props.firebaseUrl;
-      case "appleID":
-        return this.props.appleIDUrl;
-      case "telegram":
-        return this.props.telegramUrl;
-      case "wordpress":
-        return this.props.wordpressUrl;
-      case "s3":
-        return this.props.awsUrl;
-      case "googlecloud":
-        return this.props.googleCloudUrl;
-      case "rackspace":
-        return this.props.rackspaceUrl;
-      case "selectel":
-        return this.props.selectelUrl;
-      case "yandex":
-        return this.props.yandexUrl;
-      case "vk":
-        return this.props.vkUrl;
-      default:
-        return this.props.portalSettingsUrl;
-    }
+      this.setState({
+        [`${prop.name}`]: prop.value,
+      });
+    });
   };
 
-  consumerInstruction =
-    this.props.selectedConsumer.instruction &&
-    format(this.props.selectedConsumer.instruction, <Box marginProp="0" />);
-
-  helpCenterDescription = (
-    <Trans t={this.props.t} i18nKey="ThirdPartyBodyDescription" ns="Settings">
-      Detailed instructions in our{" "}
-      <Link
-        id="help-center-link"
-        color={this.props.theme.client.settings.integration.linkColor}
-        isHovered={false}
-        target="_blank"
-        href={this.thirdPartyServicesUrl()}
-      >
-        Help Center
-      </Link>
-    </Trans>
-  );
-
-  supportTeamDescription = (
-    <StyledBox>
-      <Trans
-        t={this.props.t}
-        i18nKey="ThirdPartyBottomDescription"
-        ns="Settings"
-      >
-        If you still have some questions on how to connect this service or need
-        technical assistance, please feel free to contact our{" "}
-        <Link
-          id="support-team-link"
-          color={this.props.theme.client.settings.integration.linkColor}
-          isHovered={false}
-          target="_blank"
-          href={this.props.urlSupport}
-        >
-          Support Team
-        </Link>
-      </Trans>
-    </StyledBox>
-  );
+  thirdPartyServicesUrl = () => {
+    const {
+      selectedConsumer,
+      portalSettingsUrl,
+      docuSignUrl,
+      dropboxUrl,
+      boxUrl,
+      mailRuUrl,
+      oneDriveUrl,
+      microsoftUrl,
+      googleUrl,
+      facebookUrl,
+      linkedinUrl,
+      clickatellUrl,
+      smsclUrl,
+      firebaseUrl,
+      appleIDUrl,
+      telegramUrl,
+      wordpressUrl,
+      awsUrl,
+      googleCloudUrl,
+      rackspaceUrl,
+      selectelUrl,
+      yandexUrl,
+      vkUrl,
+    } = this.props;
+    switch (selectedConsumer.name) {
+      case "docusign":
+      case "docuSign":
+        return docuSignUrl;
+      case "dropbox":
+        return dropboxUrl;
+      case "box":
+        return boxUrl;
+      case "mailru":
+        return mailRuUrl;
+      case "skydrive":
+        return oneDriveUrl;
+      case "microsoft":
+        return microsoftUrl;
+      case "google":
+        return googleUrl;
+      case "facebook":
+        return facebookUrl;
+      case "linkedin":
+        return linkedinUrl;
+      case "clickatell":
+        return clickatellUrl;
+      case "smsc":
+        return smsclUrl;
+      case "firebase":
+        return firebaseUrl;
+      case "appleID":
+        return appleIDUrl;
+      case "telegram":
+        return telegramUrl;
+      case "wordpress":
+        return wordpressUrl;
+      case "s3":
+        return awsUrl;
+      case "googlecloud":
+        return googleCloudUrl;
+      case "rackspace":
+        return rackspaceUrl;
+      case "selectel":
+        return selectelUrl;
+      case "yandex":
+        return yandexUrl;
+      case "vk":
+        return vkUrl;
+      default:
+        return portalSettingsUrl;
+    }
+  };
 
   inputsRender = (item, index) => {
     const { onChangeHandler, state, props } = this;
@@ -227,17 +268,18 @@ class ConsumerModalDialog extends React.Component {
 
     return (
       <React.Fragment key={item.name}>
-        <Box
-          displayProp="flex"
-          flexDirection="column"
-          marginProp={
-            selectedConsumer.props.length == index + 1 ? "0" : "0 0 16px 0"
-          }
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            margin:
+              selectedConsumer.props.length == index + 1 ? "0" : "0 0 16px 0",
+          }}
         >
-          <Box marginProp="0 0 4px 0">
+          <div style={{ margin: "0 0 4px 0" }}>
             <Text isBold>{item.title}:</Text>
-          </Box>
-          <Box>
+          </div>
+          <div>
             <TextInput
               scale
               id={item.name}
@@ -250,11 +292,12 @@ class ConsumerModalDialog extends React.Component {
               onChange={onChangeHandler}
               maxLength={maxLength[item.name] ?? defaultMaxLength}
             />
-          </Box>
-        </Box>
+          </div>
+        </div>
       </React.Fragment>
     );
   };
+
   render() {
     const { selectedConsumer, onModalClose, dialogVisible, isLoading, t } =
       this.props;
@@ -262,9 +305,8 @@ class ConsumerModalDialog extends React.Component {
       state,
       updateConsumerValues,
       consumerInstruction,
-      helpCenterDescription,
-      supportTeamDescription,
       requiredRef,
+      description,
     } = this;
 
     const isDisabled = requiredRef.some((name) => state[name].trim() === "");
@@ -278,14 +320,13 @@ class ConsumerModalDialog extends React.Component {
       >
         <ModalDialog.Header>{selectedConsumer.title}</ModalDialog.Header>
         <ModalDialog.Body>
-          <Box paddingProp="16px 0 16px">{consumerInstruction}</Box>
-          <React.Fragment>
+          <div style={{ padding: "16px 0 16px" }}>{consumerInstruction}</div>
+          <>
             {selectedConsumer.props.map((prop, i) =>
               this.inputsRender(prop, i),
             )}
-          </React.Fragment>
-          <Text as="div">{supportTeamDescription}</Text>
-          <Text as="div">{helpCenterDescription}</Text>
+          </>
+          {description}
         </ModalDialog.Body>
         <ModalDialog.Footer>
           <Button
@@ -315,20 +356,19 @@ class ConsumerModalDialog extends React.Component {
 
 ConsumerModalDialog.propTypes = {
   t: PropTypes.func.isRequired,
-  i18n: PropTypes.object.isRequired,
   selectedConsumer: PropTypes.object,
   onModalClose: PropTypes.func.isRequired,
   dialogVisible: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
   onChangeLoading: PropTypes.func.isRequired,
   updateConsumerProps: PropTypes.func.isRequired,
-  urlSupport: PropTypes.string,
+  feedbackAndSupportUrl: PropTypes.string,
 };
 
 export default inject(({ setup, settingsStore }) => {
   const {
     theme,
-    urlSupport,
+    feedbackAndSupportUrl,
     portalSettingsUrl,
     docuSignUrl,
     dropboxUrl,
@@ -358,7 +398,7 @@ export default inject(({ setup, settingsStore }) => {
   return {
     theme,
     selectedConsumer,
-    urlSupport,
+    feedbackAndSupportUrl,
     portalSettingsUrl,
     docuSignUrl,
     dropboxUrl,

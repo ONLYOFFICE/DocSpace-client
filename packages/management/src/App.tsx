@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,21 +28,25 @@ import { observer } from "mobx-react";
 import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { isMobileOnly } from "react-device-detect";
+import { useTranslation } from "react-i18next";
 
 import { ThemeKeys } from "@docspace/shared/enums";
 import { Toast } from "@docspace/shared/components/toast";
 import { Portal } from "@docspace/shared/components/portal";
 import AppLoader from "@docspace/shared/components/app-loader";
-
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
 import "@docspace/shared/styles/custom.scss";
-
-import { useStore } from "./store";
-import SimpleHeader from "./SimpleHeader";
 
 import Main from "client/Main";
 import Layout from "client/Layout";
 import NavMenu from "client/NavMenu";
 import MainLayout from "SRC_DIR/Layout";
+
+import { useStore } from "./store";
+import SimpleHeader from "./SimpleHeader";
 
 declare global {
   interface Window {
@@ -54,7 +58,9 @@ const App = observer(() => {
   const { authStore, userStore, settingsStore } = useStore();
 
   const { init, isLoaded } = authStore;
-  const { setTheme, timezone } = settingsStore;
+  const { setTheme, timezone, logoText, setLogoText } = settingsStore;
+
+  const { t } = useTranslation(["Common", "Settings"]);
 
   window.timezone = timezone;
 
@@ -74,10 +80,44 @@ const App = observer(() => {
     if (userTheme) setTheme(userTheme);
   }, [userTheme]);
 
+  useEffect(() => {
+    if (!logoText) setLogoText(t("Common:OrganizationName"));
+  }, [logoText, setLogoText]);
+
+  useEffect(() => {
+    const { socketSubscribers } = SocketHelper;
+
+    if (!SocketHelper.isReady) return;
+
+    if (!socketSubscribers.has("restore")) {
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: "restore",
+      });
+      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
+        roomParts: "restore",
+      });
+    }
+    if (!socketSubscribers.has("backup")) {
+      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
+        roomParts: "backup",
+      });
+    }
+  }, [SocketHelper.isReady]);
+
+  useEffect(() => {
+    return () => {
+      SocketHelper.off(SocketEvents.BackupProgress);
+
+      SocketHelper.emit(SocketCommands.UnsubscribeInSpaces, {
+        roomParts: "backup",
+      });
+    };
+  }, []);
+
   const rootElement = document.getElementById("root") as HTMLElement;
 
   const toast = isMobileOnly ? (
-    <Portal element={<Toast />} appendTo={rootElement} visible={true} />
+    <Portal element={<Toast />} appendTo={rootElement} visible />
   ) : (
     <Toast />
   );

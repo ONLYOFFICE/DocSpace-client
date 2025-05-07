@@ -30,11 +30,27 @@ You can use simple html tags. For this action you should wrap your message by em
 <button onClick={() => toastr.success(<>You have <b>bold text</b></>)}>Click</button>
 ```
 
-If your notification include only text in html tags or data in JSX tags, you can omit empty tags:
+If your notification includes only text in html tags or data in JSX tags, you can omit empty tags:
 
 ```jsx
 <Toast />
 <button onClick={() => toastr.success(<b>Bold text</b>)}>Click</button>
+```
+
+You can also pass an array of elements that will be joined together:
+
+```jsx
+<Toast />
+<button onClick={() =>
+  toastr.success([
+    "Status: ",
+    <b>Completed</b>,
+    " at ",
+    <i>12:30 PM</i>
+  ])
+}>
+  Click
+</button>
 ```
 
 #### Other Options
@@ -47,13 +63,13 @@ If your notification include only text in html tags or data in JSX tags, you can
 
 ### Properties
 
-| Props       |        Type        | Required |                Values                 | Default | Description                                                                                                                    |
-| ----------- | :----------------: | :------: | :-----------------------------------: | :-----: | ------------------------------------------------------------------------------------------------------------------------------ |
-| `className` |      `string`      |    -     |                   -                   |    -    | Accepts class                                                                                                                  |
-| `data`      | `element`,`string` |    -     |                   -                   |    -    | Any components or data inside a toast                                                                                          |
-| `id`        |      `string`      |    -     |                   -                   |    -    | Accepts id                                                                                                                     |
-| `style`     |   `obj`, `array`   |    -     |                   -                   |    -    | Accepts css style                                                                                                              |
-| `timeout`   |      `number`      |    -     |     `from 750ms`, `0 - disabling`     | `5000`  | Time (in milliseconds) for showing your toast. Setting in `0` let you to show toast constantly until clicking on it            |
-| `title`     |      `string`      |    -     |                   -                   |    -    | Title inside a toast                                                                                                           |
-| `type`      |      `oneOf`       |    ✅    | `success`, `error`, `warning`, `info` |    -    | Define color and icon of toast                                                                                                 |
-| `withCross` |       `bool`       |    -     |                   -                   | `false` | If `false`: toast disappeared after clicking on any area of toast. If `true`: toast disappeared after clicking on close button |
+| Props       |                        Type                         | Required |                Values                 | Default | Description                                                                                                                    |
+| ----------- | :-------------------------------------------------: | :------: | :-----------------------------------: | :-----: | ------------------------------------------------------------------------------------------------------------------------------ |
+| `className` |                      `string`                       |    -     |                   -                   |    -    | Accepts class                                                                                                                  |
+| `data`      | `React.ReactNode`, `string`, `React.ReactElement[]` |    -     |                   -                   |    -    | Components, strings, or arrays of elements to display in the toast                                                             |
+| `id`        |                      `string`                       |    -     |                   -                   |    -    | Accepts id                                                                                                                     |
+| `style`     |                   `obj`, `array`                    |    -     |                   -                   |    -    | Accepts css style                                                                                                              |
+| `timeout`   |                      `number`                       |    -     |     `from 750ms`, `0 - disabling`     | `5000`  | Time (in milliseconds) for showing your toast. Setting in `0` let you to show toast constantly until clicking on it            |
+| `title`     |                      `string`                       |    -     |                   -                   |    -    | Title inside a toast                                                                                                           |
+| `type`      |                       `oneOf`                       |    ✅    | `success`, `error`, `warning`, `info` |    -    | Define color and icon of toast                                                                                                 |
+| `withCross` |                       `bool`                        |    -     |                   -                   | `false` | If `false`: toast disappeared after clicking on any area of toast. If `true`: toast disappeared after clicking on close button |

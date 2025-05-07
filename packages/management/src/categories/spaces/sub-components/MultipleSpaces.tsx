@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,11 +35,11 @@ import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { DeviceType } from "@docspace/shared/enums";
 
-import { SpacesRowContainer } from "./RowView/SpacesRowContainer";
-import { StyledMultipleSpaces } from "../StyledSpaces";
-
 import { useStore } from "SRC_DIR/store";
 import { TranslationType } from "SRC_DIR/types/spaces";
+
+import { SpacesRowContainer } from "./RowView/SpacesRowContainer";
+import { StyledMultipleSpaces } from "../StyledSpaces";
 
 type TMultipleSpaces = {
   t: TranslationType;
@@ -65,7 +65,7 @@ const MultipleSpaces = ({ t }: TMultipleSpaces) => {
           size={buttonSize}
           label={t("NewSpace")}
           className="spaces-button"
-          primary={true}
+          primary
           onClick={() => setCreatePortalDialogVisible(true)}
         />
         <SpacesRowContainer portals={portals} />
@@ -86,7 +86,7 @@ const MultipleSpaces = ({ t }: TMultipleSpaces) => {
               value=""
               type={InputType.text}
               size={InputSize.base}
-              isDisabled={true}
+              isDisabled
               placeholder={baseDomain || ""}
               className="spaces-input"
             />
@@ -96,7 +96,7 @@ const MultipleSpaces = ({ t }: TMultipleSpaces) => {
             className="spaces-button"
             size={buttonSize}
             label={t("Common:EditButton")}
-            primary={true}
+            primary
             onClick={() => setChangeDomainDialogVisible(true)}
           />
         </div>

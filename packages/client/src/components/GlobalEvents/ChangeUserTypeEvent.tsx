@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,8 +31,8 @@ import { useTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
 import { ButtonKeys, EmployeeType } from "@docspace/shared/enums";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
+import { downgradeUserType } from "@docspace/shared/api/people";
 
-import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import { TChangeUserTypeDialogData } from "SRC_DIR/helpers/contacts";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 
@@ -45,11 +45,10 @@ type ChangeUserTypeEventProps = {
   getPeopleListItem: UsersStore["getPeopleListItem"];
   needResetUserSelection: UsersStore["needResetUserSelection"];
 
-  setInfoPanelSelection: InfoPanelStore["setInfoPanelSelection"];
-
   dialogData: TChangeUserTypeDialogData;
 
   onClose: VoidFunction;
+  personalUserFolderTitle?: string;
 };
 
 const ChangeUserTypeEvent = ({
@@ -60,24 +59,22 @@ const ChangeUserTypeEvent = ({
   setSelected,
   getPeopleListItem,
 
-  setInfoPanelSelection,
-
   onClose,
+  personalUserFolderTitle,
 }: ChangeUserTypeEventProps) => {
   const { t } = useTranslation(["ChangeUserTypeDialog", "Common", "Payments"]);
 
   const [isRequestRunning, setIsRequestRunning] = useState(false);
 
-  const {
-    toType,
-    fromType,
-    userIDs,
-    userNames,
-    successCallback,
-    abortCallback,
-  } = dialogData;
+  const { toType, fromType, userIDs, successCallback, abortCallback } =
+    dialogData;
 
   const isGuestsDialog = fromType[0] === EmployeeType.Guest;
+
+  const isDowngradeType =
+    (toType === EmployeeType.Guest || toType === EmployeeType.User) &&
+    fromType[0] !== EmployeeType.Guest;
+  const isDowngradeToUser = toType === EmployeeType.User;
 
   const onCloseAction = useCallback(() => {
     if (isRequestRunning) return;
@@ -90,19 +87,17 @@ const ChangeUserTypeEvent = ({
 
     setIsRequestRunning(true);
 
-    updateUserType(toType, userIDs)
+    const updatePromise = isDowngradeType
+      ? downgradeUserType(toType, userIDs[0])
+      : updateUserType(toType, userIDs);
+
+    updatePromise
       .then((users) => {
         toastr.success(
           isGuestsDialog
             ? t("SuccessChangeGuestType")
             : t("SuccessChangeUserType"),
         );
-
-        if (!needResetUserSelection && users) {
-          const user = getPeopleListItem(users[0]);
-
-          setInfoPanelSelection(user);
-        }
 
         successCallback?.(users);
       })
@@ -133,7 +128,6 @@ const ChangeUserTypeEvent = ({
     isRequestRunning,
     needResetUserSelection,
     onClose,
-    setInfoPanelSelection,
     setSelected,
     successCallback,
     t,
@@ -176,22 +170,25 @@ const ChangeUserTypeEvent = ({
     <ChangeUserTypeDialog
       visible
       isGuestsDialog={isGuestsDialog}
+      toType={toType}
       firstType={firstType ?? ""}
       secondType={secondType}
-      userNames={userNames}
       onClose={onCloseAction}
       onChangeUserType={onChangeUserType}
       isRequestRunning={isRequestRunning}
+      personalUserFolderTitle={personalUserFolderTitle}
+      isDowngradeType={isDowngradeType}
+      isDowngradeToUser={isDowngradeToUser}
     />
   );
 };
 
-export default inject(({ peopleStore, infoPanelStore }: TStore) => {
-  const { setInfoPanelSelection } = infoPanelStore;
-
+export default inject(({ peopleStore, treeFoldersStore }: TStore) => {
   const { dialogStore, usersStore } = peopleStore;
 
   const { data: dialogData } = dialogStore!;
+
+  const { personalUserFolderTitle } = treeFoldersStore;
   const {
     updateUserType,
     getPeopleListItem,
@@ -202,10 +199,11 @@ export default inject(({ peopleStore, infoPanelStore }: TStore) => {
     needResetUserSelection,
 
     getPeopleListItem,
-    setInfoPanelSelection,
+
     setSelected,
 
     dialogData,
     updateUserType,
+    personalUserFolderTitle,
   };
 })(observer(ChangeUserTypeEvent));

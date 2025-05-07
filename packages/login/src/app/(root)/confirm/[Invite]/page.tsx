@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -57,11 +57,11 @@ async function Page({ searchParams, params }: LinkInviteProps) {
   const headersList = headers();
   const hostName = headersList.get("x-forwarded-host") ?? "";
 
-  const [settings, user, thirdParty, capabilities, passwordSettings] =
+  const [user, settings, thirdParty, capabilities, passwordSettings] =
     await Promise.all([
-      getSettings(),
       getUserFromConfirm(uid, confirmKey),
-      getThirdPartyProviders(),
+      getSettings(),
+      getThirdPartyProviders(true),
       getCapabilities(),
       getPortalPasswordSettings(confirmKey),
     ]);
@@ -77,8 +77,7 @@ async function Page({ searchParams, params }: LinkInviteProps) {
         <>
           <GreetingCreateUserContainer
             type={type}
-            firstName={user?.firstName}
-            lastName={user?.lastName}
+            displayName={user?.displayName}
             culture={culture}
             hostName={hostName}
           />
@@ -86,14 +85,14 @@ async function Page({ searchParams, params }: LinkInviteProps) {
             <CreateUserForm
               userNameRegex={settings.userNameRegex}
               passwordHash={settings.passwordHash}
-              firstName={user?.firstName}
-              lastName={user?.lastName}
+              displayName={user?.displayName}
               passwordSettings={passwordSettings}
               capabilities={capabilities}
               thirdPartyProviders={thirdParty}
-              legalTerms={settings.legalTerms}
-              licenseUrl={settings.licenseUrl}
+              legalTerms={settings.externalResources.common?.entries.legalterms}
+              licenseUrl={settings.externalResources.common?.entries.license}
               isStandalone={settings.standalone}
+              logoText={settings.logoText}
             />
           </FormWrapper>
         </>

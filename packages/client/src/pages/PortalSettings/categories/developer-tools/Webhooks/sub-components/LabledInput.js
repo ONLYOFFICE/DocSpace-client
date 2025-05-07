@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -54,6 +54,7 @@ export const LabledInput = ({
   required = false,
   id,
   isDisabled,
+  maxLength = 255,
 }) => {
   return (
     <StyledLabel text={label} className={className}>
@@ -67,7 +68,9 @@ export const LabledInput = ({
         required={required}
         hasError={hasError}
         isDisabled={isDisabled}
-        {...(mask ? { mask: mask } : {})}
+        maxLength={maxLength}
+        scale
+        {...(mask ? { mask } : {})}
       />
     </StyledLabel>
   );

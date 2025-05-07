@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -40,7 +40,7 @@ export type ICover = {
 };
 
 export type TLogo = {
-  cover: ICover;
+  cover?: ICover;
   original: string;
   large: string;
   medium: string;
@@ -49,6 +49,12 @@ export type TLogo = {
 };
 
 export type TRoomSecurity = {
+  ChangeOwner: boolean;
+  CopyLink: boolean;
+  CreateRoomFrom: boolean;
+  Embed: boolean;
+  IndexExport: boolean;
+  Reconnect: boolean;
   Read: boolean;
   Create: boolean;
   Delete: boolean;
@@ -93,23 +99,32 @@ export type TRoom = {
   private: boolean;
   inRoom: boolean;
   id: number;
+  usedSpace?: number;
+  fileEntryType: number;
   rootFolderId: number;
   canShare: boolean;
   title: string;
   access: ShareAccessRights;
   shared: boolean;
-  created: Date;
+  created: string;
   createdBy: TCreatedBy;
-  updated: Date;
+  updated: string;
   rootFolderType: FolderType;
   updatedBy: TCreatedBy;
   isArchive?: boolean;
   security: TRoomSecurity;
-  lifetime: TRoomLifetime;
+  lifetime?: TRoomLifetime;
   external?: boolean;
   passwordProtected?: boolean;
   requestToken?: string;
   expired?: boolean;
+  indexing?: boolean;
+  denyDownload?: boolean;
+  watermark?: TWatermark;
+  providerKey?: string;
+  quotaLimit?: number;
+  isTemplate?: boolean;
+  isAvailable?: boolean;
 };
 
 export type TGetRooms = {
@@ -135,6 +150,7 @@ export type TExportRoomIndexTask = {
 };
 
 export type TPublicRoomPassword = {
+  id: string;
   linkId: string;
   shared: boolean;
   status: ValidationStatus;
@@ -147,3 +163,21 @@ export type TNewFiles = {
   date: string;
   items: TNewFilesItem[];
 };
+
+export type TValidateShareRoom =
+  | {
+      id: string;
+      isAuthenticated: boolean;
+      linkId: string;
+      shared: boolean;
+      status: number;
+      tenantId: number;
+      title: string;
+    }
+  | {
+      isAuthenticated: boolean;
+      linkId: string;
+      shared: boolean;
+      status: number;
+      tenantId: number;
+    };

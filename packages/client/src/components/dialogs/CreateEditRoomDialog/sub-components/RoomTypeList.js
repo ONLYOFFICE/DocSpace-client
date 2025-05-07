@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,13 +29,12 @@ import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 
 import RoomType from "@docspace/shared/components/room-type";
-import withLoader from "@docspace/client/src/HOCs/withLoader";
+import withLoader from "SRC_DIR/HOCs/withLoader";
 import RoomTypeListLoader from "@docspace/shared/skeletons/create-edit-room/RoomTypeList";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import { RoomsType } from "@docspace/shared/enums";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Text } from "@docspace/shared/components/text";
-import { isDesktop } from "@docspace/shared/utils";
 
 const StyledRoomTypeList = styled.div`
   margin-top: 20px;
@@ -46,11 +45,28 @@ const StyledRoomTypeList = styled.div`
   gap: 16px;
 `;
 
-const RoomTypeList = ({ t, setRoomType, disabledFormRoom }) => {
+const RoomTypeList = ({
+  t,
+  setRoomType,
+  disabledFormRoom,
+  setTemplateDialogIsVisible,
+}) => {
   const handleClick = (roomType) => {
     if (disabledFormRoom && roomType === RoomsType.FormRoom) return;
 
+    if (!roomType) {
+      setTemplateDialogIsVisible(true);
+    }
+
     setRoomType(roomType);
+  };
+
+  const getTooltipContent = () => {
+    return (
+      <Text fontSize="12px" noSelect>
+        {t("Files:WarningCreationFormRoom")}
+      </Text>
+    );
   };
 
   return (
@@ -59,11 +75,7 @@ const RoomTypeList = ({ t, setRoomType, disabledFormRoom }) => {
         place="bottom"
         id="create-room-tooltip"
         openOnClick={false}
-        getContent={() => (
-          <Text fontSize="12px" noSelect>
-            {t("Files:WarningCreationFormRoom")}
-          </Text>
-        )}
+        getContent={getTooltipContent}
       />
 
       {RoomsTypeValues.map((roomType) => (
@@ -72,11 +84,19 @@ const RoomTypeList = ({ t, setRoomType, disabledFormRoom }) => {
           t={t}
           key={roomType}
           roomType={roomType}
-          type={"listItem"}
+          type="listItem"
           onClick={() => handleClick(roomType)}
           disabledFormRoom={disabledFormRoom}
         />
       ))}
+      <RoomType
+        id="Template"
+        t={t}
+        isTemplate
+        type="listItem"
+        onClick={() => handleClick()}
+        disabledFormRoom={disabledFormRoom}
+      />
     </StyledRoomTypeList>
   );
 };

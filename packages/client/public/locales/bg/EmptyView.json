@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Последните ви прегледани или редактирани документи ще бъдат показани в този раздел.",
   "EmptyRootRoomUserDescription": "Споделената стая ще се появи тук.",
   "EmptyRootRoomUserTitle": "Тук все още няма стаи",
+  "EmptyTemplatesDescription": "Можете да създадете шаблон от стая в раздел Стая",
+  "EmptyTemplatesTitle": "Тук още няма шаблони",
   "FormFolderDefaultDescription": "Пуснете PDF формуляри тук или качете от {{productName}} или устройство.",
   "FormFolderDefaultTitle": "Тук все още няма формуляри",
   "FormFolderDefaultUserDescription": "Тук ще се показват формуляри, качени от администраторите.",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "Импортирайте данни във вашия {{productName}} от {{organizationName}} Workspace, Google Workspace или Nextcloud.",
   "MigrationDataTitle": "Миграционни данни",
   "PublicRoomEmptyTitle": "Добре дошли в Обществената стая",
+  "SectionsUploadDescription": "Качване на всякакви файлове от {{sectionNameFirst}} или {{sectionNameSecond}}",
   "SendInvitationLetter": "Изпратете писмо с покана за добавяне на нови членове към портала",
   "ShareOptionDescription": "Копирайте линка за публичен достъп или поканете други потребители в стаята, за да започнете процеса на попълване на формуляра.",
   "ShareOptionTitle": "Споделете стая",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "Качете от устройството си",
   "UploadDevicePDFFormOptionDescription": "Качете готов PDF формуляр в стаята от устройството си.",
   "UploadDevicePDFFormOptionTitle": "Качете от устройство",
-  "UploadFromPortalDescription": "Качвайте всякакъв тип файлове от Документи или Стаи",
   "UploadFromPortalTitle": "Качете от {{productName}}",
   "UploadPDFFormOptionDescription": "Изберете готов PDF формуляр, наличен в {{productName}}, и го качете в стаята.",
-  "UserEmptyDescription": "Файлове и папки, качени от администраторите, ще се показват тук.",
   "VirtualDataRoomEmptyTitle": "Добре дошли във Виртуалната стая за данни"
 }

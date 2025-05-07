@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,7 +33,6 @@ import { withTranslation } from "react-i18next";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link } from "@docspace/shared/components/link";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 
 import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
@@ -49,7 +48,7 @@ const OptionsComponent = (props) => {
   return (
     <>
       <div className="empty-folder_container-links">
-        <Box className="flex-wrapper_container">
+        <div className="flex-wrapper_container">
           <div className="first-button">
             <IconButton
               data-format="docx"
@@ -72,7 +71,7 @@ const OptionsComponent = (props) => {
           <Link data-format="pdf" onClick={onCreate} {...linkStyles}>
             {t("Translations:NewForm")}
           </Link>
-        </Box>
+        </div>
       </div>
 
       <div className="empty-folder_container-links">
@@ -139,9 +138,7 @@ const ButtonsComponent = (props) => {
         {...props}
         onInviteUsersClick={onInviteUsersClick}
       />
-    ) : (
-      <></>
-    );
+    ) : null;
   }
 
   if (!isRoot) {
@@ -161,7 +158,7 @@ const ButtonsComponent = (props) => {
     );
   }
 
-  return <></>;
+  return null;
 };
 
 const CommonButtons = (props) => {
@@ -253,7 +250,7 @@ const CommonButtons = (props) => {
     );
   }
 
-  return <></>;
+  return null;
 };
 
 export default inject(

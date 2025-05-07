@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import { TTabItem } from "./Tabs.types";
 import { FileInput } from "../file-input";
-import { Row } from "../row";
+import { Row } from "../rows";
 import { Text } from "../text";
 import { InputSize } from "../text-input";
 
@@ -71,6 +71,8 @@ export const data: TTabItem[] = [
         ]}
         onRowClick={() => {}}
         onSelect={() => {}}
+        isIndexEditingMode
+        onChangeIndex={() => {}}
       >
         <div
           style={{

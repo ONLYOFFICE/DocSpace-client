@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,26 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useEffect, useReducer } from "react";
+import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+
+import { Button } from "@docspace/shared/components/button";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { Text } from "@docspace/shared/components/text";
+import { saveSettingsThirdParty } from "@docspace/shared/api/files";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { toastr } from "@docspace/shared/components/toast";
+import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
+import { getOAuthToken } from "@docspace/shared/utils/common";
+import { IconButton } from "@docspace/shared/components/icon-button";
+
+import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 
-import { useEffect, useReducer } from "react";
-import { ReactSVG } from "react-svg";
-import { Button } from "@docspace/shared/components/button";
-import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { Text } from "@docspace/shared/components/text";
-import { saveSettingsThirdParty } from "@docspace/shared/api/files";
-import { StyledBackup, StyledComboBoxItem } from "../StyledBackup";
-import { ComboBox } from "@docspace/shared/components/combobox";
-import { toastr } from "@docspace/shared/components/toast";
-import { inject, observer } from "mobx-react";
-import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import DeleteThirdPartyDialog from "../../../../../../components/dialogs/DeleteThirdPartyDialog";
-import { getOAuthToken } from "@docspace/shared/utils/common";
-import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
-import { useTranslation } from "react-i18next";
+import { StyledBackup, StyledComboBoxItem } from "../StyledBackup";
 import { ThirdPartyServicesUrlName } from "../../../../../../helpers/constants";
 
 const initialState = {
@@ -81,11 +83,42 @@ const DirectThirdPartyConnection = (props) => {
   } = props;
 
   const [state, setState] = useReducer(
-    (state, newState) => ({ ...state, ...newState }),
+    (oldState, newState) => ({ ...oldState, ...newState }),
     initialState,
   );
 
   const { t } = useTranslation(["Translations", "Common"]);
+
+  const saveSettings = async (
+    token = "",
+    urlValue = "",
+    loginValue = "",
+    passwordValue = "",
+  ) => {
+    const { label, key, provider_id } = selectedThirdPartyAccount;
+    setState({ isLoading: true, isUpdatingInfo: true });
+    connectDialogVisible && setConnectDialogVisible(false);
+    onSelectFolder && onSelectFolder("");
+
+    try {
+      await saveSettingsThirdParty(
+        urlValue,
+        loginValue,
+        passwordValue,
+        token,
+        false,
+        label,
+        key,
+        provider_id,
+      );
+
+      await setThirdPartyAccountsInfo(t);
+    } catch (e) {
+      toastr.error(e);
+    }
+
+    setState({ isLoading: false, isUpdatingInfo: false });
+  };
 
   const onSetSettings = async () => {
     try {
@@ -114,17 +147,16 @@ const DirectThirdPartyConnection = (props) => {
     clearLocalStorage();
     onSelectFolder && onSelectFolder("");
 
-    const { provider_key, provider_link: directConnection } =
-      selectedThirdPartyAccount;
+    const { key, provider_link: directConnection } = selectedThirdPartyAccount;
 
     if (directConnection) {
-      let authModal = window.open(
+      const authModal = window.open(
         "",
         t("Common:Authorization"),
         "height=600, width=1020",
       );
 
-      openConnectWindow(provider_key, authModal)
+      openConnectWindow(key, authModal)
         .then((modal) => getOAuthToken(modal))
         .then((token) => {
           authModal.close();
@@ -140,41 +172,8 @@ const DirectThirdPartyConnection = (props) => {
     }
   };
 
-  const saveSettings = async (
-    token = "",
-    urlValue = "",
-    loginValue = "",
-    passwordValue = "",
-  ) => {
-    const { label, provider_key, provider_id } = selectedThirdPartyAccount;
-    setState({ isLoading: true, isUpdatingInfo: true });
-    connectDialogVisible && setConnectDialogVisible(false);
-    onSelectFolder && onSelectFolder("");
-
-    try {
-      await saveSettingsThirdParty(
-        urlValue,
-        loginValue,
-        passwordValue,
-        token,
-        false,
-        label,
-        provider_key,
-        provider_id,
-      );
-
-      await setThirdPartyAccountsInfo(t);
-    } catch (e) {
-      toastr.error(e);
-    }
-
-    setState({ isLoading: false, isUpdatingInfo: false });
-  };
-
-  const onSelectAccount = (event) => {
-    const data = event.currentTarget.dataset;
-
-    const account = accounts.find((t) => t.key === data.thirdPartyKey);
+  const onSelectAccount = (name) => () => {
+    const account = accounts.find((a) => a.name === name);
 
     if (!account.connected) {
       setSelectedThirdPartyAccount({
@@ -183,7 +182,7 @@ const DirectThirdPartyConnection = (props) => {
       });
 
       return window.open(
-        `/portal-settings/integration/third-party-services?service=${ThirdPartyServicesUrlName[data.thirdPartyKey]}`,
+        `/portal-settings/integration/third-party-services?service=${ThirdPartyServicesUrlName[name]}`,
         "_blank",
       );
     }
@@ -208,7 +207,7 @@ const DirectThirdPartyConnection = (props) => {
         key: "Disconnect-settings",
         label: t("Common:Disconnect"),
         onClick: onDisconnect,
-        disabled: selectedThirdPartyAccount?.storageIsConnected ? false : true,
+        disabled: false,
         icon: AccessNoneReactSvgUrl,
       },
     ];
@@ -227,9 +226,8 @@ const DirectThirdPartyConnection = (props) => {
     return (
       <StyledComboBoxItem isDisabled={item.disabled} key={item.key}>
         <DropDownItem
-          onClick={onSelectAccount}
+          onClick={onSelectAccount(item.name)}
           className={item.className}
-          data-third-party-key={item.key}
           disabled={item.disabled}
         >
           <Text className="drop-down-item_text" fontWeight={600}>
@@ -237,21 +235,27 @@ const DirectThirdPartyConnection = (props) => {
           </Text>
 
           {!item.disabled && !item.connected ? (
-            <ReactSVG
-              src={ExternalLinkReactSvgUrl}
+            <IconButton
               className="drop-down-item_icon"
+              size="16"
+              onClick={onSelectAccount(item.name)}
+              iconName={ExternalLinkReactSvgUrl}
+              isFill
             />
-          ) : (
-            <></>
-          )}
+          ) : null}
         </DropDownItem>
       </StyledComboBoxItem>
     );
   });
+
+  const updateInfo = async () => {
+    setThirdPartyAccountsInfo(t);
+  };
+
   return (
     <StyledBackup
       isConnectedAccount={
-        connectedThirdPartyAccount && isTheSameThirdPartyAccount
+        connectedThirdPartyAccount ? isTheSameThirdPartyAccount : null
       }
       isMobileScale={isMobileScale}
     >
@@ -266,11 +270,11 @@ const DirectThirdPartyConnection = (props) => {
           advancedOptions={advancedOptions}
           scaled
           size="content"
-          manualWidth={"auto"}
+          manualWidth="auto"
           directionY="both"
           displaySelectedOption
           noBorder={false}
-          isDefaultMode={true}
+          isDefaultMode
           hideMobileView={false}
           forceCloseClickOutside
           scaledOptions
@@ -280,18 +284,18 @@ const DirectThirdPartyConnection = (props) => {
         />
 
         {connectedThirdPartyAccount?.id &&
-          selectedThirdPartyAccount &&
-          isTheSameThirdPartyAccount && (
-            <ContextMenuButton
-              zIndex={402}
-              className="backup_third-party-context"
-              iconName={VerticalDotsReactSvgUrl}
-              size={15}
-              getData={getContextOptions}
-              isDisabled={isDisabledComponent}
-              displayIconBorder
-            />
-          )}
+        selectedThirdPartyAccount &&
+        isTheSameThirdPartyAccount ? (
+          <ContextMenuButton
+            zIndex={402}
+            className="backup_third-party-context"
+            iconName={VerticalDotsReactSvgUrl}
+            size={15}
+            getData={getContextOptions}
+            isDisabled={isDisabledComponent}
+            displayIconBorder
+          />
+        ) : null}
       </div>
 
       {!connectedThirdPartyAccount?.id || !isTheSameThirdPartyAccount ? (
@@ -304,36 +308,33 @@ const DirectThirdPartyConnection = (props) => {
           isDisabled={isDisabledComponent}
         />
       ) : (
-        <>
-          {folderList.id && selectedThirdPartyAccount && (
-            <FilesSelectorInput
-              className={"restore-backup_input"}
-              descriptionText={descriptionText}
-              filterParam={filterParam}
-              rootThirdPartyId={selectedThirdPartyAccount.id}
-              onSelectFolder={onSelectFolder}
-              onSelectFile={onSelectFile}
-              id={id ? id : folderList.id}
-              withoutInitPath={withoutInitPath}
-              isError={isError}
-              isDisabled={isDisabledSelector}
-              isThirdParty
-              isSelectFolder={isSelectFolder}
-              isSelect={isSelect}
-              checkCreating={
-                selectedThirdPartyAccount?.provider_key === "WebDav"
-              }
-            />
-          )}
-        </>
+        folderList.id &&
+        selectedThirdPartyAccount && (
+          <FilesSelectorInput
+            className="restore-backup_input"
+            descriptionText={descriptionText}
+            filterParam={filterParam}
+            rootThirdPartyId={selectedThirdPartyAccount.id}
+            onSelectFolder={onSelectFolder}
+            onSelectFile={onSelectFile}
+            id={id || folderList.id}
+            withoutInitPath={withoutInitPath}
+            isError={isError}
+            isDisabled={isDisabledSelector}
+            isThirdParty
+            isSelectFolder={isSelectFolder}
+            isSelect={isSelect}
+            checkCreating={selectedThirdPartyAccount?.key === "WebDav"}
+          />
+        )
       )}
-      {deleteThirdPartyDialogVisible && (
+      {deleteThirdPartyDialogVisible ? (
         <DeleteThirdPartyDialog
-          updateInfo={setThirdPartyAccountsInfo}
+          updateInfo={updateInfo}
           key="thirdparty-delete-dialog"
           isConnectionViaBackupModule
         />
-      )}
+      ) : null}
     </StyledBackup>
   );
 };

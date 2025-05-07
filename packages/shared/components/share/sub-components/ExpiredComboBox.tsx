@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -162,6 +162,7 @@ const ExpiredComboBox = ({
           fontSize="12px"
           fontWeight={400}
           isDisabled={isDisabled}
+          directionY="both"
         >
           {/* @ts-expect-error pass object as children for correct work link component */}
           {{ date }}
@@ -204,7 +205,7 @@ const ExpiredComboBox = ({
           {getExpirationTrans()}
         </Text>
       )}
-      {showCalendar && (
+      {showCalendar ? (
         <ShareCalendar
           bodyRef={bodyRef}
           onDateSet={setDateFromCalendar}
@@ -213,7 +214,7 @@ const ExpiredComboBox = ({
           locale={i18n.language}
           useDropDown={isRoomsLink}
         />
-      )}
+      ) : null}
     </div>
   );
 };

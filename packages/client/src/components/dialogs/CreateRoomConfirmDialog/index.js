@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -41,12 +40,13 @@ const CreateRoomConfirmDialog = ({
   onCreateRoom,
   selectedRoomType,
 }) => {
+  const onClose = () => setVisible(false);
+
   const onContinue = async () => {
-    await onCreateRoom(true);
+    await onCreateRoom(t, true);
     onClose();
   };
 
-  const onClose = () => setVisible(false);
   const bodyText =
     selectedRoomType === RoomsType.VirtualDataRoom
       ? t("CreateEditRoomDialog:CreateRoomWatermarksConfirmation")

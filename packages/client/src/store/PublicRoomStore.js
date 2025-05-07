@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,37 +25,45 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import axios from "axios";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import {
-  frameCallCommand,
-  isPublicRoom as isPublicRoomUtil,
-} from "@docspace/shared/utils/common";
+import { isPublicRoom as isPublicRoomUtil } from "@docspace/shared/utils/common";
 
-import { CategoryType } from "SRC_DIR/helpers/constants";
+import { CategoryType, LinkType } from "SRC_DIR/helpers/constants";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
-import { LinkType } from "../helpers/constants";
 import { ValidationStatus } from "@docspace/shared/enums";
+import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
 class PublicRoomStore {
   externalLinks = [];
+
   roomTitle = null;
+
   roomId = null;
+
   roomStatus = null;
+
   roomType = null;
+
   publicRoomKey = null;
 
   isLoaded = false;
+
   isLoading = false;
+
+  windowIsOpen = false;
 
   clientLoadingStore;
 
-  constructor(clientLoadingStore) {
+  filesStore;
+
+  constructor(clientLoadingStore, filesStore) {
     this.clientLoadingStore = clientLoadingStore;
+    this.filesStore = filesStore;
     makeAutoObservable(this);
   }
 
@@ -80,7 +88,7 @@ class PublicRoomStore {
   };
 
   fetchPublicRoom = (fetchFiles) => {
-    let filterObj = FilesFilter.getFilter(window.location);
+    const filterObj = FilesFilter.getFilter(window.location);
 
     if (!filterObj) return;
 
@@ -119,14 +127,15 @@ class PublicRoomStore {
     return axios
       .all(requests)
       .catch((err) => {
+        console.log(err);
         Promise.resolve(FilesFilter.getDefault());
       })
       .then((data) => {
-        const filter = data[0];
+        const resolvedFilter = data[0];
 
-        if (filter) {
-          const folderId = filter.folder;
-          return fetchFiles(folderId, filter).catch((error) => {
+        if (resolvedFilter) {
+          const folderId = resolvedFilter.folder;
+          return fetchFiles(folderId, resolvedFilter).catch((error) => {
             if (error?.response?.status === 403) {
               window.location.replace(
                 combineUrl(window.ClientConfig?.proxy?.url, "/login"),
@@ -165,6 +174,10 @@ class PublicRoomStore {
     }
 
     this.externalLinks = externalLinks;
+  };
+
+  setPublicRoomKey = (key) => {
+    this.publicRoomKey = key;
   };
 
   setExternalLink = (link) => {
@@ -213,7 +226,7 @@ class PublicRoomStore {
 
     const url = getCategoryUrl(CategoryType.Shared);
 
-    filter.folder = subFolder ? subFolder : res.id;
+    filter.folder = subFolder || res.id;
     filter.key = key;
 
     window.location.replace(`${url}?${filter.toUrlParams()}`);
@@ -224,15 +237,22 @@ class PublicRoomStore {
     api.rooms
       .validatePublicRoomKey(key)
       .then((res) => {
-        if (res?.shared) {
-          return this.gotoFolder(res);
-        }
+        runInAction(() => {
+          this.publicRoomKey = key;
+        });
 
-        if (res?.isAuthenticated) {
+        const needPassword = res.status === ValidationStatus.Password;
+
+        const currentUrl = window.location.href;
+
+        if (
+          !needPassword &&
+          (res?.shared || res?.isAuthenticated) &&
+          !currentUrl.includes("/rooms/shared")
+        ) {
           return this.gotoFolder(res, key);
         }
 
-        this.publicRoomKey = key;
         this.setRoomData(res);
       })
       .finally(() => this.setIsLoading(false));
@@ -240,6 +260,46 @@ class PublicRoomStore {
 
   validatePublicRoomPassword = (key, passwordHash) => {
     return api.rooms.validatePublicRoomPassword(key, passwordHash);
+  };
+
+  getAuthWindow = () => {
+    return new Promise((res, rej) => {
+      try {
+        const path = combineUrl(
+          window.ClientConfig?.proxy?.url,
+          "/login?publicAuth=true",
+        );
+
+        const authModal = window.open(path, "_blank", "height=800, width=866");
+
+        const checkConnect = setInterval(() => {
+          if (!authModal || !authModal.closed) {
+            return;
+          }
+
+          clearInterval(checkConnect);
+
+          res(authModal);
+        }, 500);
+      } catch (error) {
+        rej(error);
+      }
+    });
+  };
+
+  onOpenSignInWindow = async () => {
+    if (this.windowIsOpen) return;
+
+    this.windowIsOpen = true;
+    await this.getAuthWindow();
+    this.windowIsOpen = false;
+
+    const isAuth = localStorage.getItem(PUBLIC_STORAGE_KEY);
+
+    if (isAuth) {
+      localStorage.removeItem(PUBLIC_STORAGE_KEY);
+      window.location.reload();
+    }
   };
 
   get isPublicRoom() {
@@ -254,9 +314,8 @@ class PublicRoomStore {
           !l.sharedTo.isTemplate &&
           l.sharedTo.linkType === LinkType.External,
       );
-    } else {
-      return [];
     }
+    return [];
   }
 
   get primaryLink() {

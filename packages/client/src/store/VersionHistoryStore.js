@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,31 +26,42 @@
 
 import { makeAutoObservable, runInAction } from "mobx";
 import api from "@docspace/shared/api";
-import { size } from "@docspace/shared/utils";
 import { FileStatus } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 
 class VersionHistoryStore {
   isVisible = false;
+
   fileId = null;
 
   fileSecurity = null;
+
   versions = null;
+
   filesStore = null;
+
   showProgressBar = false;
+
   timerId = null;
+
   isEditing = false;
 
-  constructor(filesStore, settingsStore) {
+  deleteVersionDialogVisible = false;
+
+  versionSelectedForDeletion = null;
+
+  versionDeletionProcess = false;
+
+  constructor(filesStore) {
     makeAutoObservable(this);
     this.filesStore = filesStore;
 
     if (this.versions) {
-      //TODO: Files store in not initialized on versionHistory page. Need socket.
+      // TODO: Files store in not initialized on versionHistory page. Need socket.
 
       SocketHelper.on(SocketEvents.StartEditFile, (id) => {
-        //console.log(`VERSION STORE Call s:start-edit-file (id=${id})`);
+        // console.log(`VERSION STORE Call s:start-edit-file (id=${id})`);
         const verIndex = this.versions.findIndex((x) => x.id == id);
         if (verIndex == -1) return;
 
@@ -58,7 +69,7 @@ class VersionHistoryStore {
       });
 
       SocketHelper.on(SocketEvents.StopEditFile, (id) => {
-        //console.log(`VERSION STORE Call s:stop-edit-file (id=${id})`);
+        // console.log(`VERSION STORE Call s:stop-edit-file (id=${id})`);
         const verIndex = this.files.findIndex((x) => x.id === id);
         if (verIndex == -1) return;
 
@@ -93,11 +104,20 @@ class VersionHistoryStore {
   setVerHistoryFileSecurity = (security) => {
     this.fileSecurity = security;
   };
+
   setVersions = (versions) => {
     this.versions = versions;
   };
 
-  //setFileVersions
+  setVersionSelectedForDeletion = (version) => {
+    this.versionSelectedForDeletion = version;
+  };
+
+  setVersionDeletionProcess = (process) => {
+    this.versionDeletionProcess = process;
+  };
+
+  // setFileVersions
   setVerHistoryFileVersions = (versions) => {
     const file = this.filesStore.files.find((item) => item.id == this.fileId);
 
@@ -125,17 +145,18 @@ class VersionHistoryStore {
     this.versions = versions;
   };
 
-  fetchFileVersions = (fileId, access, requestToken) => {
-    if (this.fileId !== fileId || !this.versions) {
-      this.setVerHistoryFileId(fileId);
-      this.setVerHistoryFileSecurity(access);
+  fetchFileVersions = (fileId, access, requestToken, update) => {
+    if (this.fileId !== fileId || !this.versions || update) {
+      if (!update) {
+        this.setVerHistoryFileId(fileId);
+        this.setVerHistoryFileSecurity(access);
+      }
 
       return api.files
         .getFileVersionInfo(fileId, requestToken)
         .then((versions) => this.setVerHistoryFileVersions(versions));
-    } else {
-      return Promise.resolve(this.versions);
     }
+    return Promise.resolve(this.versions);
   };
 
   markAsVersion = (id, isVersion, version) => {
@@ -179,6 +200,10 @@ class VersionHistoryStore {
 
   setShowProgressBar = (show) => {
     this.showProgressBar = show;
+  };
+
+  onSetDeleteVersionDialogVisible = (deleteVersionDialogVisible) => {
+    this.deleteVersionDialogVisible = deleteVersionDialogVisible;
   };
 }
 

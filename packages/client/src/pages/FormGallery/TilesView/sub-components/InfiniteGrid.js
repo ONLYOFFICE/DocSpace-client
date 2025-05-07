@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,9 +30,9 @@ import React, { useEffect, useState } from "react";
 
 import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
 import { InfiniteLoaderComponent } from "@docspace/shared/components/infinite-loader";
+import { getCountTilesInRow } from "@docspace/shared/utils";
 
 import { StyledCard, StyledItem } from "../StyledTileView";
-import { getCountTilesInRow } from "SRC_DIR/helpers/filesUtils";
 
 const Card = ({ children, countTilesInRow, ...rest }) => {
   const horizontalGap = 16;
@@ -125,7 +125,7 @@ const InfiniteGrid = (props) => {
       cards.push(
         <TileSkeleton
           key={key}
-          className={"tiles-loader isFile"}
+          className="tiles-loader isFile"
           isFolder={false}
         />,
       );

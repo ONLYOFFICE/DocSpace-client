@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,6 @@ import { inject, observer } from "mobx-react";
 import { useTheme } from "styled-components";
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
-import { StyledUser } from "../../styles/members";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
@@ -44,12 +43,11 @@ import {
 } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
 import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
-import { StyledUserTypeHeader } from "../../styles/members";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Link } from "@docspace/shared/components/link";
-import { ShareAccessRights } from "@docspace/shared/enums";
 import api from "@docspace/shared/api";
+import { FolderType, RoomSecurityError } from "@docspace/shared/enums";
+import { StyledUserTypeHeader, StyledUser } from "../../styles/members";
 
 const User = ({
   t,
@@ -57,23 +55,23 @@ const User = ({
   membersHelper,
   currentMember,
   infoPanelSelection,
-  changeUserType,
-  setIsScrollLocked,
   membersFilter,
   setMembersFilter,
   fetchMembers,
   hasNextPage,
-  showTooltip,
   infoPanelMembers,
   setInfoPanelMembers,
   searchValue,
   setEditMembersGroup,
   setEditGroupMembersDialogVisible,
+  setRemoveUserConfirmation,
 }) => {
+  const theme = useTheme();
+
+  const [isLoading, setIsLoading] = useState(false);
+
   if (!infoPanelSelection) return null;
   if (!user.displayName && !user.name && !user.email) return null;
-
-  const theme = useTheme();
 
   const security = infoPanelSelection ? infoPanelSelection.security : {};
   const isExpect = user.isExpect;
@@ -81,8 +79,8 @@ const User = ({
   const showInviteIcon = canInviteUserInRoomAbility && isExpect;
   const canChangeUserRole = user.canEditAccess;
   const withoutTitles = !!searchValue;
-
-  const [isLoading, setIsLoading] = useState(false);
+  const hideUserRole =
+    infoPanelSelection.rootFolderType === FolderType.RoomTemplates;
 
   const fullRoomRoleOptions = membersHelper.getOptionsByRoomType(
     infoPanelSelection.roomType,
@@ -104,15 +102,22 @@ const User = ({
       .catch((err) => toastr.error(err));
   };
 
-  const updateRole = (option) => {
+  const updateRole = (option, force) => {
     return api.rooms
       .updateRoomMemberRole(infoPanelSelection.id, {
         invitations: [{ id: user.id, access: option.access }],
         notify: false,
         sharingMessage: "",
+        force,
       })
-      .then(async () => {
+      .then(async (item) => {
         setIsLoading(false);
+
+        if (item?.error === RoomSecurityError.FormRoleBlockingDeletion) {
+          return setRemoveUserConfirmation(true, () => {
+            return updateRole(option, true);
+          });
+        }
 
         if (option.key === "remove") {
           const newMembersFilter = JSON.parse(JSON.stringify(membersFilter));
@@ -173,7 +178,7 @@ const User = ({
               newMembersFilter,
             );
 
-            const newMembers = {
+            const newData = {
               administrators: [
                 ...newAdministrators,
                 ...fetchedMembers.administrators,
@@ -181,12 +186,12 @@ const User = ({
               users: [...newUsers, ...fetchedMembers.users],
               expected: [...newExpected, ...fetchedMembers.expected],
               groups: [...newGroups, ...fetchedMembers.groups],
-              guests: [...newMembersFilter.guests],
+              guests: [...newGuests, ...fetchedMembers.guests],
             };
 
             setInfoPanelMembers({
               roomId: infoPanelSelection.id,
-              ...newMembers,
+              ...newData,
             });
 
             newMembersFilter.startIndex = oldStartIndex;
@@ -219,10 +224,6 @@ const User = ({
         toastr.error(err);
         setIsLoading(false);
       });
-  };
-
-  const abortCallback = () => {
-    setIsLoading(false);
   };
 
   const onOptionClick = (option) => {
@@ -260,16 +261,16 @@ const User = ({
     <StyledUserTypeHeader isExpect={isExpect}>
       <Text className="title">{user.displayName}</Text>
 
-      {showInviteIcon && (
+      {showInviteIcon ? (
         <IconButton
-          className={"icon"}
+          className="icon"
           title={t("Common:RepeatInvitation")}
           iconName={EmailPlusReactSvgUrl}
-          isFill={true}
+          isFill
           onClick={onRepeatInvitation}
           size={16}
         />
-      )}
+      ) : null}
     </StyledUserTypeHeader>
   ) : (
     <StyledUser isExpect={isExpect} key={user.id}>
@@ -297,7 +298,7 @@ const User = ({
             </Link>
           ) : (
             <Text className="name" data-tooltip-id={uniqueTooltipId}>
-              {user?.displayName && decode(user.displayName)}
+              {user?.displayName ? decode(user.displayName) : null}
             </Text>
           )}
           {/* TODO: uncomment when information about online statuses appears */}
@@ -309,11 +310,11 @@ const User = ({
               place="bottom"
             />
           )} */}
-          {currentMember?.id === user.id && (
+          {currentMember?.id === user.id ? (
             <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
-          )}
+          ) : null}
         </div>
-        {!user.isGroup && (
+        {!user.isGroup ? (
           <div className="role-email" style={{ display: "flex" }}>
             <Text
               className="label"
@@ -326,10 +327,10 @@ const User = ({
               {`${typeLabel} | ${user.email}`}
             </Text>
           </div>
-        )}
+        ) : null}
       </div>
 
-      {userRole && userRoleOptions && (
+      {userRole && userRoleOptions && !hideUserRole ? (
         <div className="role-wrapper">
           {canChangeUserRole ? (
             <ComboBox
@@ -354,7 +355,7 @@ const User = ({
             </div>
           )}
         </div>
-      )}
+      ) : null}
     </StyledUser>
   );
 };
@@ -374,8 +375,11 @@ export default inject(
 
     const { changeType: changeUserType } = peopleStore.usersStore;
 
-    const { setEditMembersGroup, setEditGroupMembersDialogVisible } =
-      dialogsStore;
+    const {
+      setEditMembersGroup,
+      setEditGroupMembersDialogVisible,
+      setRemoveUserConfirmation,
+    } = dialogsStore;
 
     return {
       infoPanelSelection,
@@ -389,6 +393,7 @@ export default inject(
       searchValue,
       setEditMembersGroup,
       setEditGroupMembersDialogVisible,
+      setRemoveUserConfirmation,
     };
   },
 )(observer(User));

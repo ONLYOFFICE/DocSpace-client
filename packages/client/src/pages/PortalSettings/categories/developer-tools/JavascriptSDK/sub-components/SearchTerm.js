@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,10 +37,10 @@ export const SearchTerm = ({ t, config, setConfig }) => {
   const [value, setValue] = useState(config.filter.filterValue);
 
   const debouncedSetConfig = useCallback(
-    debounce((value) => {
-      setConfig((config) => ({
-        ...config,
-        filter: { ...config.filter, filterValue: value },
+    debounce((newValue) => {
+      setConfig((oldConfig) => ({
+        ...oldConfig,
+        filter: { ...oldConfig.filter, filterValue: newValue },
       }));
     }, 500),
     [setConfig],
@@ -52,8 +52,8 @@ export const SearchTerm = ({ t, config, setConfig }) => {
   };
 
   const onChangeWithSubfolders = () => {
-    setConfig((config) => ({
-      ...config,
+    setConfig((oldConfig) => ({
+      ...oldConfig,
       withSubfolders: !config.withSubfolders,
     }));
   };
@@ -71,7 +71,7 @@ export const SearchTerm = ({ t, config, setConfig }) => {
         />
         <Checkbox
           className="checkbox"
-          label={t("Files:WithSubfolders")}
+          label={t("Common:WithSubfolders")}
           onChange={onChangeWithSubfolders}
           isChecked={config.withSubfolders}
         />

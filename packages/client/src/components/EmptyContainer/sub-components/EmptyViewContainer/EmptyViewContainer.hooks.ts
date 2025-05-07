@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -69,6 +69,7 @@ export const useEmptyView = (
     isArchiveFolderRoot,
     rootFolderType,
     isPublicRoom,
+    security,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -86,6 +87,7 @@ export const useEmptyView = (
       isRootEmptyPage,
       rootFolderType,
       isPublicRoom,
+      security,
     );
     const title = getTitle(
       type,
@@ -155,6 +157,7 @@ export const useOptions = (
     inviteUser: inviteRootUser,
     isVisitor,
     isFrame,
+    logoText,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -245,13 +248,13 @@ export const useOptions = (
   );
 
   const onCreate = useCallback(
-    (extension: ExtensionType, withoutDialog?: boolean, t?: TTranslation) => {
+    (extension: ExtensionType, withoutDialog?: boolean) => {
       const event: CreateEvent = new Event(Events.CREATE);
 
       const edit = extension === FileExtensions.PDF;
 
       if (isMobile && edit && t) {
-        toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+        toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
         return;
       }
 
@@ -300,6 +303,7 @@ export const useOptions = (
           onGoToPersonal,
           onGoToShared,
         },
+        logoText,
         isVisitor,
         isFrame,
       ),
@@ -327,6 +331,7 @@ export const useOptions = (
       onGoToShared,
       isVisitor,
       isFrame,
+      logoText,
     ],
   );
 

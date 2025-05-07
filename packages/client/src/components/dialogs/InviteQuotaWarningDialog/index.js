@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -60,13 +60,6 @@ const InviteQuotaWarningDialog = (props) => {
 
   const { fromDate, byDate, delayDaysCount } = datesData;
 
-  useEffect(() => {
-    moment.locale(language);
-    if (window.timezone) moment().tz(window.timezone);
-
-    gracePeriodDays();
-  }, [language, gracePeriodDays, window.timezone]);
-
   const gracePeriodDays = () => {
     const fromDateMoment = moment(dueDate);
     const byDateMoment = moment(delayDueDate);
@@ -77,6 +70,13 @@ const InviteQuotaWarningDialog = (props) => {
       delayDaysCount: getDaysRemaining(byDateMoment),
     });
   };
+
+  useEffect(() => {
+    moment.locale(language);
+    if (window.timezone) moment().tz(window.timezone);
+
+    gracePeriodDays();
+  }, [language, window.timezone]);
 
   const onClose = () => {
     if (!isGracePeriod) {

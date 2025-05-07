@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,10 +30,9 @@ import { useTranslation } from "react-i18next";
 import { ChangeEvent, useContext, useState } from "react";
 
 import { validateTfaCode } from "@docspace/shared/api/settings";
-import { loginWithTfaCode } from "@docspace/shared/api/user";
+import { checkConfirmLink, loginWithTfaCode } from "@docspace/shared/api/user";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import {
@@ -47,6 +46,8 @@ import { ButtonKeys } from "@docspace/shared/enums";
 
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
+import { useSearchParams } from "next/navigation";
+import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
 type TfaAuthFormProps = {
   passwordHash: TPasswordHash;
@@ -62,11 +63,16 @@ const TfaAuthForm = ({
   const { linkData } = useContext(ConfirmRouteContext);
   const { t } = useTranslation(["Confirm", "Common"]);
 
+  const searchParams = useSearchParams();
+
   const [code, setCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
   const { confirmHeader = null } = linkData;
+
+  const linkUrlData = searchParams.get("linkData");
+  const isPublicAuth = searchParams.get("publicAuth");
 
   const onSubmit = async () => {
     try {
@@ -78,10 +84,28 @@ const TfaAuthForm = ({
         await validateTfaCode(code, confirmHeader);
       }
 
+      let confirmData = "";
+      try {
+        if (linkUrlData) confirmData = JSON.parse(atob(linkUrlData));
+      } catch (e) {
+        console.error("parse error", e);
+      }
+
+      try {
+        if (confirmData) await checkConfirmLink(confirmData);
+      } catch (e) {
+        console.error(e);
+      }
+
       const referenceUrl = sessionStorage.getItem("referenceUrl");
 
       if (referenceUrl) {
         sessionStorage.removeItem("referenceUrl");
+      }
+
+      if (isPublicAuth) {
+        localStorage.setItem(PUBLIC_STORAGE_KEY, "true");
+        window.close();
       }
 
       window.location.replace(referenceUrl || defaultPage);
@@ -121,18 +145,14 @@ const TfaAuthForm = ({
 
   return (
     <>
-      <Box className="app-code-description" marginProp="0 0 32px 0">
+      <div className="app-code-description">
         <Text isBold fontSize="14px" className="app-code-text">
           {t("EnterAppCodeTitle")}
         </Text>
         <Text>{t("EnterAppCodeDescription")}</Text>
-      </Box>
-      <Box
-        displayProp="flex"
-        flexDirection="column"
-        className="app-code-wrapper"
-      >
-        <Box className="app-code-input">
+      </div>
+      <div className="app-code-wrapper">
+        <div className="app-code-input">
           <FieldContainer
             labelVisible={false}
             hasError={error ? true : false}
@@ -155,8 +175,8 @@ const TfaAuthForm = ({
               onKeyDown={onKeyPress}
             />
           </FieldContainer>
-        </Box>
-        <Box className="app-code-continue-btn">
+        </div>
+        <div className="app-code-continue-btn">
           <Button
             scale
             primary
@@ -171,8 +191,8 @@ const TfaAuthForm = ({
             isLoading={isLoading}
             onClick={onSubmit}
           />
-        </Box>
-      </Box>
+        </div>
+      </div>
     </>
   );
 };

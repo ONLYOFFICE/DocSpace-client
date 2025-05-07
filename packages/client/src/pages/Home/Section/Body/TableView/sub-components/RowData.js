@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,19 +27,20 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
+import { classNames, getLastColumn } from "@docspace/shared/utils";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow2.react.svg?url";
+import { VDRIndexingAction } from "@docspace/shared/enums";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
-import { classNames, getLastColumn } from "@docspace/shared/utils";
 import {
   StyledBadgesContainer,
   StyledQuickButtonsContainer,
 } from "../StyledTable";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow2.react.svg?url";
-import { VDRIndexingAction } from "@docspace/shared/enums";
+import ErasureCell from "./ErasureCell";
 
 const RowDataComponent = (props) => {
   const {
@@ -66,6 +67,7 @@ const RowDataComponent = (props) => {
     isIndexEditingMode,
     changeIndex,
     isIndexedFolder,
+    erasureColumnIsEnabled,
   } = props;
 
   const [lastColumn, setLastColumn] = useState(
@@ -148,7 +150,7 @@ const RowDataComponent = (props) => {
         <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
           {badgesComponent}
         </StyledBadgesContainer>
-        {lastColumn === "Name" ? lastColumnContent : <></>}
+        {lastColumn === "Name" ? lastColumnContent : null}
       </TableCell>
 
       {authorColumnIsEnabled ? (
@@ -169,7 +171,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Author" ? lastColumnContent : <></>}
+          {lastColumn === "Author" ? lastColumnContent : null}
         </TableCell>
       ) : (
         <div />
@@ -196,7 +198,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Created" ? lastColumnContent : <></>}
+          {lastColumn === "Created" ? lastColumnContent : null}
         </TableCell>
       ) : (
         <div />
@@ -220,7 +222,27 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Modified" ? lastColumnContent : <></>}
+          {lastColumn === "Modified" ? lastColumnContent : null}
+        </TableCell>
+      ) : (
+        <div />
+      )}
+
+      {erasureColumnIsEnabled ? (
+        <TableCell
+          style={
+            !erasureColumnIsEnabled ? { background: "none" } : dragStyles.style
+          }
+          {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Erasure" ? "no-extra-space" : "",
+          )}
+        >
+          <ErasureCell
+            sideColor={theme.filesSection.tableView.row.sideColor}
+            {...props}
+          />
         </TableCell>
       ) : (
         <div />
@@ -242,7 +264,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Size" ? lastColumnContent : <></>}
+          {lastColumn === "Size" ? lastColumnContent : null}
         </TableCell>
       ) : (
         <div />
@@ -266,7 +288,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Type" ? lastColumnContent : <></>}
+          {lastColumn === "Type" ? lastColumnContent : null}
         </TableCell>
       ) : (
         <div />
@@ -284,6 +306,7 @@ export default inject(({ tableStore, selectedFolderStore }) => {
     typeColumnIsEnabled,
     tableStorageName,
     columnStorageName,
+    erasureColumnIsEnabled,
   } = tableStore;
 
   const { isIndexedFolder } = selectedFolderStore;
@@ -298,5 +321,6 @@ export default inject(({ tableStore, selectedFolderStore }) => {
     columnStorageName,
 
     isIndexedFolder,
+    erasureColumnIsEnabled,
   };
 })(observer(RowDataComponent));

@@ -41,6 +41,7 @@
   "StartupTitle": "Používate bezplatný plán {{planName}}",
   "StripeCustomerPortal": "prejdite na zákaznícky portál Stripe",
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/mesiac</3>",
+  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/rok</3>",
   "UpgradeNow": "Aktualizovať teraz",
   "UpgradePlan": "Aktualizovať plán",
   "UserNotFound": "Používateľ <1>{{email}}</1> sa nenašiel.",

@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Vaši nazadnje ogledani ali urejani dokumenti bodo prikazani v tem razdelku.",
   "EmptyRootRoomUserDescription": "Tukaj se bo prikazala skupna soba.",
   "EmptyRootRoomUserTitle": "Tukaj še ni sob",
+  "EmptyTemplatesDescription": "Predlogo lahko ustvarite iz sobe v razdelku Soba",
+  "EmptyTemplatesTitle": "Tu še ni predlog",
   "FormFolderDefaultDescription": "Obrazce PDF spusti sem ali jih naloži iz {{productName}} ali naprave.",
   "FormFolderDefaultTitle": "Tukaj še ni obrazcev",
   "FormFolderDefaultUserDescription": "Tukaj bodo prikazani obrazci, ki so jih naložili skrbniki.",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "Uvozite podatke v {{productName}} iz {{organizationName}} Workspace, Google Workspace ali Nextcloud.",
   "MigrationDataTitle": "Migracijski podatki",
   "PublicRoomEmptyTitle": "Dobrodošli v javni sobi",
+  "SectionsUploadDescription": "Naložite datoteke katere koli vrste iz {{sectionNameFirst}} ali {{sectionNameSecond}}",
   "SendInvitationLetter": "Pošljite vabilo za dodajanje novih članov na portal",
   "ShareOptionDescription": "Kopiraj javno dostopno povezavo ali povabi druge uporabnike v sobo, da začnejo postopek izpolnjevanja obrazcev.",
   "ShareOptionTitle": "Deli sobo",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "Naloži iz svoje naprave",
   "UploadDevicePDFFormOptionDescription": "Naloži pripravljen PDF obrazec v sobo iz svoje naprave.",
   "UploadDevicePDFFormOptionTitle": "Naloži iz naprave",
-  "UploadFromPortalDescription": "Naloži datoteke katere koli vrste iz Dokumenti ali Sobe",
   "UploadFromPortalTitle": "Naloži iz {{productName}}",
   "UploadPDFFormOptionDescription": "Izberi pripravljen PDF obrazec, ki je na voljo v {{productName}} in ga naloži v sobo.",
-  "UserEmptyDescription": "Tukaj bodo prikazane datoteke in mape, ki so jih naložili skrbniki.",
   "VirtualDataRoomEmptyTitle": "Dobrodošli v virtualni podatkovni sobi"
 }

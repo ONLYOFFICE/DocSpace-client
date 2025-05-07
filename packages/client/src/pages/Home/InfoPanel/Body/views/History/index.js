@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,23 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useTransition,
-  useCallback,
-  useContext,
-} from "react";
+import { useState, useEffect, useRef, useCallback, useContext } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-
-import { StyledHistoryList, StyledHistorySubtitle } from "../../styles/history";
+import { RoomsType } from "@docspace/shared/enums";
 
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
 import HistoryItemLoader from "@docspace/shared/skeletons/info-panel/body/views/HistoryItemLoader";
-import { getRelativeDateDay } from "./../../helpers/HistoryHelper";
+import { StyledHistoryList, StyledHistorySubtitle } from "../../styles/history";
+import { getRelativeDateDay } from "../../helpers/HistoryHelper";
 import HistoryBlock from "./HistoryBlock";
 import NoHistory from "../NoItem/NoHistory";
 import ThirdPartyComponent from "./HistoryBlockContent/ThirdParty";
@@ -61,6 +54,7 @@ const History = ({
   setCalendarDay,
   selectionHistoryTotal,
   fetchMoreHistory,
+  setSelectionHistory,
 }) => {
   const scrollContext = useContext(ScrollbarContext);
   const scrollElement = scrollContext.parentScrollbar?.scrollerElement;
@@ -72,6 +66,8 @@ const History = ({
   const [isShowLoader, setIsShowLoader] = useState(false);
 
   const isThirdParty = infoPanelSelection?.providerId;
+  const isPublicRoomType =
+    infoPanelSelection?.roomType === RoomsType.PublicRoom;
 
   const [isLoadingNextPage, setIsLoadingNextPage] = useState(false);
   const [currentHistory, setCurrentHistory] = useState(selectionHistory);
@@ -91,21 +87,6 @@ const History = ({
       });
     }
   };
-
-  useEffect(() => {
-    if (selectionHistory !== currentHistory) {
-      loading = false;
-      setCurrentHistory(selectionHistory);
-    }
-  }, [selectionHistory]);
-
-  useEffect(() => {
-    scrollElement?.addEventListener("scroll", onScroll);
-
-    return () => {
-      scrollElement?.removeEventListener("scroll", onScroll);
-    };
-  }, [scrollElement, selectionHistory]);
 
   const onFetchMoreHistory = async () => {
     setIsLoadingNextPage(true);
@@ -127,8 +108,8 @@ const History = ({
     if (!selectionHistory) return;
     let feedsRelatedLength = 0;
 
-    selectionHistory.map(({ feeds }) => {
-      feeds.map((feed) => {
+    selectionHistory.forEach(({ feeds }) => {
+      feeds.forEach((feed) => {
         if (feed.related.length) feedsRelatedLength += feed.related.length;
       });
 
@@ -146,8 +127,27 @@ const History = ({
     const hasNextPage = onCheckNextPage();
 
     if (hasNextPage) onCheckListScroll();
-  }, [selectionHistory, loading]);
+  }, [selectionHistory, loading, onCheckNextPage]);
+
   useEffect(() => {
+    if (selectionHistory !== currentHistory) {
+      loading = false;
+      setCurrentHistory(selectionHistory);
+    }
+  }, [selectionHistory]);
+
+  useEffect(() => {
+    scrollElement?.addEventListener("scroll", onScroll);
+
+    return () => {
+      scrollElement?.removeEventListener("scroll", onScroll);
+    };
+  }, [scrollElement, onScroll]);
+
+  useEffect(() => {
+    if (isThirdParty && isPublicRoomType) {
+      setSelectionHistory(null, null);
+    }
     if (!isMount.current || isThirdParty) return;
 
     getHistory(infoPanelSelection);
@@ -173,7 +173,7 @@ const History = ({
     selectionHistory.every((item) => {
       if (dateCoincidingWithCalendarDay) return false;
 
-      item.feeds.every((feed) => {
+      item.feeds.forEach((feed) => {
         if (feed.date.slice(0, 10) === calendarDay) {
           dateCoincidingWithCalendarDay = feed.date;
         }
@@ -195,30 +195,32 @@ const History = ({
       return;
     }
 
-    //If there are no entries in the history for the selected day
+    // If there are no entries in the history for the selected day
     const calendarDayModified = new Date(calendarDay);
     let nearestNewerDate = null;
 
     selectionHistory.every((item, indexItem) => {
       if (nearestNewerDate) return false;
 
-      item.feeds.every((feed) => {
+      for (let i = item.feeds.length - 1; i >= 0; i--) {
+        const feed = item.feeds[i];
+
         const date = new Date(feed.date);
 
-        //Stop checking all entries for one day
-        if (date > calendarDayModified) return false;
+        // Stop checking all entries for one day
+        if (date > calendarDayModified) break;
 
-        //Looking for the nearest new date
+        // Looking for the nearest new date
         if (date < calendarDayModified) {
-          //If there are no nearby new entries in the post history, then scroll to the last one
+          // If there are no nearby new entries in the post history, then scroll to the last one
           if (indexItem === 0) {
             nearestNewerDate = feed.date;
-            return false;
+            break;
           }
 
           nearestNewerDate = selectionHistory[indexItem - 1].feeds[0].date;
         }
-      });
+      }
 
       return true;
     });
@@ -260,7 +262,7 @@ const History = ({
           </StyledHistorySubtitle>,
           ...feeds.map((feed, i) => (
             <HistoryBlock
-              key={`${feed.action.id}_${feed.date}_${i}`}
+              key={`${feed.action.id}_${feed.date}`}
               t={t}
               feed={feed}
               selectedFolder={selectedFolder}
@@ -271,12 +273,12 @@ const History = ({
               isVisitor={isVisitor}
               isCollaborator={isCollaborator}
               withFileList={historyWithFileList}
-              isLastEntity={i === feeds.length - 1 && !isLoadingNextPage}
+              isLastEntity={i === feeds.length - 1 ? !isLoadingNextPage : null}
             />
           )),
         ])}
       </StyledHistoryList>
-      {isLoadingNextPage ? <HistoryItemLoader /> : <></>}
+      {isLoadingNextPage ? <HistoryItemLoader /> : null}
     </>
   );
 };
@@ -294,6 +296,7 @@ export default inject(
       calendarDay,
       setCalendarDay,
       fetchMoreHistory,
+      setSelectionHistory,
     } = infoPanelStore;
     const { culture } = settingsStore;
 
@@ -318,6 +321,7 @@ export default inject(
       calendarDay,
       setCalendarDay,
       fetchMoreHistory,
+      setSelectionHistory,
     };
   },
 )(withTranslation(["InfoPanel", "Common", "Translations"])(observer(History)));

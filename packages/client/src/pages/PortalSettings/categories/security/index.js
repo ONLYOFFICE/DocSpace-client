@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,15 +34,14 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { DeviceType } from "@docspace/shared/enums";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
-import AccessPortal from "./access-portal/index.js";
+import config from "PACKAGE_FILE";
+import AccessPortal from "./access-portal";
 import SecurityLoader from "./sub-components/loaders/security-loader";
-import LoginHistory from "./login-history/index.js";
+import LoginHistory from "./login-history";
 import MobileSecurityLoader from "./sub-components/loaders/mobile-security-loader";
 import AccessLoader from "./sub-components/loaders/access-loader";
-import AuditTrail from "./audit-trail/index.js";
+import AuditTrail from "./audit-trail";
 import { resetSessionStorage } from "../../utils";
-
-import config from "PACKAGE_FILE";
 
 const SecurityWrapper = (props) => {
   const { t, initSettings, isInit, resetIsInit, currentDeviceType } = props;

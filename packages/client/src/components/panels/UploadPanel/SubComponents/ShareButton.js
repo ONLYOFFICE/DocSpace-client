@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,7 +30,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { inject, observer } from "mobx-react";
 
 const ShareButton = (props) => {
-  //console.log("Share button render");
+  // console.log("Share button render");
   const { uploadedFile, theme } = props;
   const isShared = uploadedFile[0].fileInfo
     ? uploadedFile[0].fileInfo.shared
@@ -39,7 +39,7 @@ const ShareButton = (props) => {
   if (isShared) color = theme.filesPanels.upload.shareButton.sharedColor;
 
   const onOpenSharingPanel = () => {
-    const { setSharingPanelVisible, selectUploadedFile, uploadedFile } = props;
+    const { setSharingPanelVisible, selectUploadedFile } = props;
 
     const file = uploadedFile[0].fileInfo;
     selectUploadedFile([file]);

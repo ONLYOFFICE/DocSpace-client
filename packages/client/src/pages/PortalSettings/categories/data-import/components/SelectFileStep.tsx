@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,7 +37,6 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { FileInput } from "@docspace/shared/components/file-input";
 import { ProgressBar } from "@docspace/shared/components/progress-bar";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { Box } from "@docspace/shared/components/box";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { InputSize } from "@docspace/shared/components/text-input";
@@ -379,7 +378,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
 
   useEffect(() => {
     if (fileLoadingStatus === "proceed") {
-      uploadInterval.current = window.setInterval(poolStatus, 1000);
+      uploadInterval.current = window.setInterval(() => poolStatus(), 1000);
     } else if (fileLoadingStatus === "done") {
       setIsSaveDisabled(false);
     }
@@ -429,8 +428,8 @@ const SelectFileStep = (props: SelectFileStepProps) => {
         </FileUploadContainer>
       ) : (
         <ErrorBlock>
-          {isFileError && (
-            <Box>
+          {isFileError ? (
+            <div>
               <ProgressBar
                 percent={100}
                 className="complete-progress-bar"
@@ -447,11 +446,11 @@ const SelectFileStep = (props: SelectFileStepProps) => {
               >
                 {t("Settings:CheckUnsupportedFiles")}
               </Link>
-            </Box>
-          )}
+            </div>
+          ) : null}
 
-          {isBackupEmpty && (
-            <Box>
+          {isBackupEmpty ? (
+            <div>
               <ProgressBar
                 percent={100}
                 className="complete-progress-bar"
@@ -460,8 +459,8 @@ const SelectFileStep = (props: SelectFileStepProps) => {
               <Text className="error-text">
                 {t("Settings:NoUsersInBackup")}
               </Text>
-            </Box>
-          )}
+            </div>
+          ) : null}
 
           {isNetworkError ? (
             <SaveCancelButtons
@@ -490,7 +489,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
         </ErrorBlock>
       )}
 
-      {cancelUploadDialogVisible && (
+      {cancelUploadDialogVisible ? (
         <CancelUploadDialog
           visible={cancelUploadDialogVisible}
           onClose={hideCancelDialog}
@@ -499,9 +498,9 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           isFifthStep={false}
           isSixthStep={false}
         />
-      )}
+      ) : null}
 
-      {warningQuotaDialogVisible && (
+      {warningQuotaDialogVisible ? (
         <WarningQuotaDialog
           t={t}
           visible={warningQuotaDialogVisible}
@@ -514,7 +513,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           isDefaultUsersQuotaSet={isDefaultUsersQuotaSet}
           isTenantCustomQuotaSet={isTenantCustomQuotaSet}
         />
-      )}
+      ) : null}
     </Wrapper>
   );
 };

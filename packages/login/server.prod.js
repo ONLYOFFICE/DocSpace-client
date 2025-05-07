@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,7 +30,16 @@ const dir = path.join(__dirname);
 
 const dev = process.env.NODE_ENV === "development";
 
-const currentPort = 5011;
+const argv = (key) => {
+  if (process.argv.includes(`--${key}`)) return true;
+
+  return (
+    process.argv.find((arg) => arg.startsWith(`--${key}=`))?.split("=")[1] ||
+    null
+  );
+};
+
+const port = (argv("app.port") || process.env.PORT) ?? 5011;
 const hostname = "0.0.0.0";
 
 process.env.NODE_ENV = "production" || process.env.NODE_ENV;
@@ -222,7 +231,7 @@ startServer({
   isDev: dev,
   config: nextConfig,
   hostname,
-  port: currentPort,
+  port,
   allowRetry: false,
   keepAliveTimeout,
 }).catch((err) => {

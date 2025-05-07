@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,6 +34,8 @@ import { tryParseToNumber } from "@docspace/shared/utils/tryParseToNumber";
 import type {
   TDocServiceLocation,
   TFile,
+  TFileFillingFormStatus,
+  TFileLink,
 } from "@docspace/shared/api/files/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import type {
@@ -230,6 +232,8 @@ export async function createFile(
     );
 
     const fileRes = await fetch(createFile);
+
+    if (!fileRes.ok) console.log("fileRes", fileRes);
 
     if (fileRes.status === 401) {
       log.debug(`POST /files/${parentId}/file user auth failed`);
@@ -685,3 +689,109 @@ export async function getColorTheme() {
 
   return colorTheme.response as TGetColorTheme;
 }
+
+export async function getDeepLinkSettings() {
+  log.debug(`Start GET /settings/deeplink`);
+
+  const [getSettings] = createRequest(
+    [`/settings/deeplink`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getSettings);
+
+  if (!res.ok) {
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+
+    log.error({ error: res, url: hostname }, "GET /settings/deeplink failed");
+    return;
+  }
+
+  const deepLinkSettings = await res.json();
+
+  return deepLinkSettings.response;
+}
+
+export async function getFormFillingStatus(formId: string | number) {
+  log.debug(`Start GET /files/file/${formId}/formroles`);
+
+  const [getFormFillingStatus] = createRequest(
+    [`/files/file/${formId}/formroles`],
+    [["", ""]],
+    "GET",
+  );
+
+  const response = await fetch(getFormFillingStatus);
+
+  if (response.ok)
+    return (await response.json()).response as TFileFillingFormStatus[];
+
+  const hdrs = headers();
+
+  const hostname = hdrs.get("x-forwarded-host");
+
+  log.error(
+    { error: response, url: hostname },
+    `GET /files/file/${formId}/formroles failed`,
+  );
+
+  return [];
+}
+
+export async function getFileById(fileId: number | string) {
+  log.debug(`Start GET /files/file/${fileId}`);
+
+  const [getFile] = createRequest([`/files/file/${fileId}`], [["", ""]], "GET");
+
+  const response = await fetch(getFile);
+
+  if (response.ok) return (await response.json()).response as TFile;
+
+  const hdrs = headers();
+
+  const hostname = hdrs.get("x-forwarded-host");
+
+  log.error(
+    { error: response, url: hostname },
+    `GET /files/file/${fileId} failed`,
+  );
+
+  return null;
+}
+
+export async function getFileLink(fileId: number | string) {
+  log.debug(`Start GET /files/file/${fileId}/link`);
+
+  const [getFileLink] = createRequest(
+    [`/files/file/${fileId}/link`],
+    [["", ""]],
+    "GET",
+  );
+
+  const response = await fetch(getFileLink);
+
+  if (response.ok) return (await response.json()) as TFileLink;
+
+  const hdrs = headers();
+
+  const hostname = hdrs.get("x-forwarded-host");
+
+  log.error(
+    { error: response, url: hostname },
+    `GET /files/file/${fileId}/link failed`,
+  );
+
+  return null;
+}
+
+// export async function getFileLink(fileId: number) {
+//   const res = (await request({
+//     method: "get",
+//     url: `/files/file/${fileId}/link`,
+//   })) as TFileLink;
+
+//   return res;
+// }

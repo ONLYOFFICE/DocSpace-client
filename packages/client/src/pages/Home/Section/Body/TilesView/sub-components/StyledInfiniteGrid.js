@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,6 +26,7 @@
 
 import styled, { css } from "styled-components";
 import { desktop, tablet } from "@docspace/shared/utils";
+import { InfiniteLoaderComponent } from "@docspace/shared/components/infinite-loader";
 
 const paddingCss = css`
   @media ${desktop} {
@@ -35,6 +36,7 @@ const paddingCss = css`
 
   @media ${tablet} {
     margin-inline-start: -1px;
+    margin-inline-end: 3px;
   }
 `;
 
@@ -45,15 +47,21 @@ const StyledCard = styled.div`
 
 const StyledItem = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
-  gap: 14px 16px;
-  width: 100%;
-
-  @media ${tablet} {
-    gap: 14px;
-  }
+  grid-template-columns: ${(props) =>
+    props.isRoom || props.isTemplate
+      ? "repeat(auto-fill, minmax(275px, 1fr))"
+      : "repeat(auto-fill, minmax(216px, 1fr))"};
+  gap: ${(props) => (props.isRoom ? "16px" : "14px 16px")};
 
   ${paddingCss};
+
+  ${(props) =>
+    !props.isRoom &&
+    css`
+      @media ${tablet} {
+        gap: 14px;
+      }
+    `}
 `;
 
 const StyledHeaderItem = styled.div`
@@ -61,4 +69,12 @@ const StyledHeaderItem = styled.div`
   grid-column: -1 / 1;
 `;
 
-export { StyledCard, StyledItem, StyledHeaderItem };
+const StyledInfiniteLoader = styled(InfiniteLoaderComponent)`
+  overflow: visible !important;
+
+  & > div {
+    overflow: visible !important;
+  }
+`;
+
+export { StyledCard, StyledItem, StyledHeaderItem, StyledInfiniteLoader };

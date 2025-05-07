@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -47,6 +47,7 @@ const Row = React.memo(
         title={data[0][index].title}
         isRootRoom={data[0][index].isRootRoom}
         isRoot={isRoot}
+        isRootTemplates={data[0][index].isRootTemplates}
         onClick={data[1]}
         withLogo={data[2].withLogo}
         currentDeviceType={data[2].currentDeviceType}

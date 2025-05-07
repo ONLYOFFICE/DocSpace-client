@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,15 +26,15 @@
 
 import React from "react";
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { StyledNoItemLoader } from "../body.styled";
+import { RectangleSkeleton } from "../../../rectangle";
+import styles from "../Body.module.scss";
 
 const NoItemLoader = () => {
   return (
-    <StyledNoItemLoader>
+    <div className={styles.noItemLoader} data-testid="no-item-loader">
       <RectangleSkeleton width="96px" height="96px" borderRadius="6px" />
       <RectangleSkeleton width="150px" height="16px" borderRadius="3px" />
-    </StyledNoItemLoader>
+    </div>
   );
 };
 

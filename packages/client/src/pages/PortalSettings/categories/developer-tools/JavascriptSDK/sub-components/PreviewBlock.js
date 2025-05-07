@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -52,7 +52,13 @@ export const PreviewBlock = ({
   const codeBlock = `<div id="${frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
 
   const code = (
-    <CodeToInsert t={t} codeBlock={codeBlock} config={config} theme={theme} />
+    <CodeToInsert
+      t={t}
+      codeBlock={codeBlock}
+      scriptUrl={scriptUrl}
+      config={config}
+      theme={theme}
+    />
   );
   const dataTabs = [
     {

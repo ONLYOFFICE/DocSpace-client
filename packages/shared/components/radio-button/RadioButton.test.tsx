@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,10 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-
-import { RadioButton } from "./RadioButton";
+import { RadioButton } from ".";
 
 const baseProps = {
   name: "fruits",
@@ -36,40 +35,111 @@ const baseProps = {
   label: "Sweet apple",
 };
 
+const renderComponent = (props = {}) => {
+  return render(<RadioButton {...baseProps} {...props} />);
+};
+
 describe("<RadioButton />", () => {
   it("renders without error", () => {
-    render(<RadioButton {...baseProps} onChange={() => {}} />);
-
+    renderComponent();
     expect(screen.getByTestId("radio-button")).toBeInTheDocument();
+    expect(screen.getByText("Sweet apple")).toBeInTheDocument();
   });
 
-  // it("accepts id", () => {
-  //   // @ts-expect-error TS(2322): Type '{ id: string; name: string; value: string; l... Remove this comment to see the full error message
-  //   const wrapper = mount(<RadioButton {...baseProps} id="testId" />);
+  it("handles checked state correctly", () => {
+    renderComponent({ isChecked: true });
 
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
+    const radio = screen.getByRole("radio") as HTMLInputElement;
+    expect(radio.checked).toBe(true);
+  });
 
-  // it("accepts className", () => {
-  //   // @ts-expect-error TS(2322): Type '{ className: string; name: string; value: st... Remove this comment to see the full error message
-  //   const wrapper = mount(<RadioButton {...baseProps} className="test" />);
+  it("calls onClick handler when clicked and onChange is not provided", () => {
+    const onClick = jest.fn();
+    renderComponent({ onClick, isChecked: false });
 
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
+    const radio = screen.getByRole("radio");
+    fireEvent.click(radio);
+    expect(onClick).toHaveBeenCalled();
+  });
 
-  // it("accepts style", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ style: { color: string; }; name: string; v... Remove this comment to see the full error message
-  //     <RadioButton {...baseProps} style={{ color: "red" }} />,
-  //   );
+  it("applies disabled state correctly", () => {
+    renderComponent({ isDisabled: true });
 
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
+    const radio = screen.getByRole("radio") as HTMLInputElement;
+    const label = screen.getByTestId("radio-button");
 
-  // it("accepts isDisabled prop", () => {
-  //   // @ts-expect-error TS(2322): Type '{ isDisabled: true; name: string; value: str... Remove this comment to see the full error message
-  //   const wrapper = mount(<RadioButton {...baseProps} isDisabled />);
+    expect(radio).toBeDisabled();
+    expect(label).toHaveStyle({ cursor: "default" });
+  });
 
-  //   expect(wrapper.prop("isDisabled")).toEqual(true);
-  // });
+  it("accepts and applies custom className", () => {
+    const className = "custom-radio";
+    renderComponent({ className });
+
+    const label = screen.getByTestId("radio-button");
+    expect(label).toHaveClass(className);
+  });
+
+  it("accepts and applies custom styles", () => {
+    const customStyle = { marginTop: "10px" };
+    renderComponent({ style: customStyle });
+
+    const label = screen.getByTestId("radio-button");
+    expect(label).toHaveStyle(customStyle);
+  });
+
+  it("handles orientation prop", () => {
+    renderComponent({ orientation: "vertical" });
+    const label = screen.getByTestId("radio-button");
+    expect(label).toBeInTheDocument();
+  });
+
+  it("updates when isChecked prop changes", () => {
+    const { rerender } = renderComponent({ isChecked: false });
+    const radio = screen.getByRole("radio") as HTMLInputElement;
+    expect(radio.checked).toBe(false);
+
+    rerender(<RadioButton {...baseProps} isChecked />);
+    expect(radio.checked).toBe(true);
+  });
+
+  it("has proper accessibility attributes", () => {
+    const id = "test-radio";
+    renderComponent({ id });
+
+    const radio = screen.getByRole("radio");
+    const label = screen.getByTestId("radio-button");
+
+    expect(radio).toHaveAttribute("type", "radio");
+    expect(label).toHaveAttribute("id", id);
+  });
+
+  it("calls onChange when provided", () => {
+    const onChange = jest.fn();
+    renderComponent({ onChange });
+
+    const radio = screen.getByRole("radio");
+    fireEvent.click(radio);
+    expect(onChange).toHaveBeenCalled();
+  });
+
+  it("works without handlers", () => {
+    renderComponent();
+    const radio = screen.getByRole("radio");
+
+    // Should not throw error when changed without handlers
+    expect(() => {
+      fireEvent.change(radio);
+    }).not.toThrow();
+  });
+
+  it("updates internal state when changed", () => {
+    const isChecked = false;
+    renderComponent({ isChecked });
+    const radio = screen.getByRole("radio") as HTMLInputElement;
+    expect(radio.checked).toBe(isChecked);
+
+    fireEvent.click(radio);
+    expect(radio.checked).toBe(!isChecked);
+  });
 });

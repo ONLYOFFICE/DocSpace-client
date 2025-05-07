@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, {
+import {
   useEffect,
   useLayoutEffect,
   useState,
@@ -33,30 +33,24 @@ import React, {
 } from "react";
 import { isDesktop, isMobile } from "react-device-detect";
 
-import { loadScript } from "@docspace/shared/utils/common";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { getDocumentServiceLocation } from "@docspace/shared/api/files";
-
+import classNames from "classnames";
+import { loadScript } from "../../../../utils/common";
+import { combineUrl } from "../../../../utils/combineUrl";
+import { getDocumentServiceLocation } from "../../../../api/files";
+import styles from "./PDFViewer.module.scss";
 import type {
   ImperativeHandle,
   ToolbarItemType,
 } from "../ViewerToolbar/ViewerToolbar.props";
 import { ViewerLoader } from "../ViewerLoader";
-
+import { useInterfaceDirection } from "../../../../hooks/useInterfaceDirection";
 import PDFViewerProps, { BookMarkType } from "./PDFViewer.props";
 
 import { Sidebar } from "./ui/SideBar";
 import { MainPanel } from "./ui/MainPanel";
 import { MobileDrawer } from "./ui/MobileDrawer";
-
-import {
-  ErrorMessage,
-  PDFViewerWrapper,
-  DesktopTopBar,
-  PDFToolbar,
-  PDFViewerToolbarWrapper,
-  ErrorMessageWrapper,
-} from "./PDFViewer.styled";
+import { DesktopDetails } from "../DesktopDetails";
+import { ViewerToolbar } from "../ViewerToolbar";
 
 import { ToolbarActionType } from "../../MediaViewer.enums";
 
@@ -83,6 +77,7 @@ export const PDFViewer = ({
   setIsPDFSidebarOpen,
 }: PDFViewerProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { isRTL } = useInterfaceDirection();
 
   // TODO: Add types
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -303,36 +298,38 @@ export const PDFViewer = ({
 
   if (isError) {
     return (
-      <ErrorMessageWrapper onClick={onMask}>
-        <ErrorMessage>Something went wrong</ErrorMessage>
-      </ErrorMessageWrapper>
+      <section className={styles.errorWrapper} onClick={onMask}>
+        <p className={styles.errorMessage}>Something went wrong</p>
+      </section>
     );
   }
 
   return (
     <>
       {isDesktop ? (
-        <DesktopTopBar
+        <DesktopDetails
           title={title}
           onMaskClick={onMask}
-          isPanelOpen={isPDFSidebarOpen}
+          className={classNames(styles.desktopTopBar, {
+            [styles.panelOpen]: isPDFSidebarOpen,
+          })}
         />
       ) : (
         mobileDetails
       )}
 
-      <PDFViewerWrapper>
+      <div className={styles.viewerWrapper} data-dir={isRTL ? "rtl" : "ltr"}>
         <ViewerLoader
           isLoading={isLoadingFile || isLoadingScript || !isFileOpened}
         />
-        {isDesktop && (
+        {isDesktop ? (
           <Sidebar
             bookmarks={bookmarks}
             isPanelOpen={isPDFSidebarOpen}
             navigate={navigate}
             setIsPDFSidebarOpen={setIsPDFSidebarOpen}
           />
-        )}
+        ) : null}
         <MainPanel
           src={src}
           ref={containerRef}
@@ -343,9 +340,9 @@ export const PDFViewer = ({
           isLastImage={isLastImage}
           isLoading={isLoadingFile || isLoadingScript || !isFileOpened}
         />
-      </PDFViewerWrapper>
+      </div>
 
-      {isMobile && (
+      {isMobile ? (
         <MobileDrawer
           bookmarks={bookmarks}
           resizePDFThumbnail={resizePDFThumbnail}
@@ -353,30 +350,34 @@ export const PDFViewer = ({
           navigate={navigate}
           setIsOpenMobileDrawer={setIsOpenMobileDrawer}
         />
-      )}
+      ) : null}
 
-      <PDFViewerToolbarWrapper>
+      <section className={styles.toolbarWrapper}>
         <PageCount
           ref={pageCountRef}
           isPanelOpen={isPDFSidebarOpen}
           className="pdf-viewer_page-count"
           setIsOpenMobileDrawer={setIsOpenMobileDrawer}
-          visible={!isLoadingFile && !isLoadingScript && isFileOpened}
+          visible={!isLoadingFile && !isLoadingScript ? isFileOpened : false}
         />
 
-        {isDesktop && !(isLoadingFile || isLoadingScript) && (
-          <PDFToolbar
+        {isDesktop && !(isLoadingFile || isLoadingScript) ? (
+          <ViewerToolbar
+            className={classNames(
+              styles.toolbar,
+              { [styles.panelOpen]: isPDFSidebarOpen },
+              "pdf-viewer_toolbar",
+            )}
+            data-dir={isRTL ? "rtl" : "ltr"}
             ref={toolbarRef}
             percentValue={1}
             toolbar={toolbar}
-            className="pdf-viewer_toolbar"
             toolbarEvent={toolbarEvent}
-            isPanelOpen={isPDFSidebarOpen}
             generateContextMenu={generateContextMenu}
             setIsOpenContextMenu={setIsOpenContextMenu}
           />
-        )}
-      </PDFViewerToolbarWrapper>
+        ) : null}
+      </section>
     </>
   );
 };

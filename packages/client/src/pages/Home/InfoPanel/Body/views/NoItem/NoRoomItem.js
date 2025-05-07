@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -39,7 +39,7 @@ const NoRoomItem = ({ t, theme }) => {
   return (
     <StyledNoItemContainer className="info-panel_gallery-empty-screen">
       <div className="no-thumbnail-img-wrapper">
-        <img src={imageSrc} alt="No Room Image" />
+        <img src={imageSrc} alt="No Room" />
       </div>
       <Text className="no-item-text" textAlign="center">
         {t("RoomsEmptyScreenTent")}

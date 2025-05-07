@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -41,6 +41,7 @@ import {
 } from "@docspace/shared/components/combobox";
 import { ContextMenuModel } from "@docspace/shared/components/context-menu";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
+import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
@@ -84,6 +85,7 @@ const PeopleTableRow = ({
 
   isGuests,
   isRoomAdmin,
+  inProgress,
 }: TableRowProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["People", "Common", "Settings"]);
@@ -126,18 +128,18 @@ const PeopleTableRow = ({
 
   const onTypeChange = React.useCallback(
     (option: TOption) => {
-      if (option.action) {
-        setIsLoading(true);
-        if (
-          !changeUserType(
-            option.action as EmployeeType,
-            [item],
-            onSuccess,
-            onAbort,
-          )
-        ) {
-          setIsLoading(false);
-        }
+      if (!option.action || option.key === role) return;
+
+      setIsLoading(true);
+      if (
+        !changeUserType(
+          option.action as EmployeeType,
+          [item],
+          onSuccess,
+          onAbort,
+        )
+      ) {
+        setIsLoading(false);
       }
     },
     [item, changeUserType],
@@ -196,6 +198,7 @@ const PeopleTableRow = ({
           color={sideInfoColor}
           onClick={() => onOpenGroupClick({ action: groups[0].id } as TOption)}
           isTextOverflow
+          truncate
         >
           {groups[0].name}
         </Link>
@@ -288,12 +291,22 @@ const PeopleTableRow = ({
             className="table-container_row-checkbox-wrapper"
             checked={isChecked}
           >
-            <div className="table-container_element">{element}</div>
-            <Checkbox
-              className="table-container_row-checkbox"
-              onChange={onChange}
-              isChecked={isChecked}
-            />
+            {inProgress ? (
+              <Loader
+                className="table-container_row-loader"
+                size="20px"
+                type={LoaderTypes.track}
+              />
+            ) : (
+              <>
+                <div className="table-container_element">{element}</div>
+                <Checkbox
+                  className="table-container_row-checkbox"
+                  onChange={onChange}
+                  isChecked={isChecked}
+                />
+              </>
+            )}
           </TableCell>
 
           <Text
@@ -344,6 +357,7 @@ const PeopleTableRow = ({
               onClick={onEmailClick}
               isTextOverflow
               enableUserSelect
+              truncate
             >
               {email}
             </Link>

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,6 +27,7 @@
 import styled, { css } from "styled-components";
 
 import { TableRow, TableContainer } from "@docspace/shared/components/table";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 export const TableWrapper = styled(TableContainer)`
   margin-top: 0px;
@@ -44,7 +45,7 @@ const StyledRowWrapper = styled.div`
   display: contents;
 `;
 
-const StyledTableRow = styled(TableRow)`
+const StyledTableRow = styled(TableRow).attrs(injectDefaultTheme)`
   .table-container_cell {
     text-overflow: ellipsis;
 

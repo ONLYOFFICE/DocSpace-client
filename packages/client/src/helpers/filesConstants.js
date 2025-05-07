@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,12 +27,5 @@
 export const GUID_EMPTY = "00000000-0000-0000-0000-000000000000";
 export const TIMEOUT = 1000;
 export const EDITOR_PROTOCOL = "oo-office";
-
-export const thumbnailStatuses = {
-  WAITING: 0,
-  CREATED: 1,
-  ERROR: 2,
-  NOT_REQUIRED: 3,
-};
 
 export const ADS_TIMEOUT = 300000; // 5 min

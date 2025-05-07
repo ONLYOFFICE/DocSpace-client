@@ -26,73 +26,120 @@
 
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
-
 import { Text } from "../text";
-// import { Link } from "../link";
-
-import { HelpButton } from "./HelpButton";
-import { HelpButtonProps } from "./HelpButton.types";
+import { HelpButton } from ".";
 
 const meta = {
-  title: "Components/HelpButton",
+  title: "Interactive Elements/HelpButton",
   component: HelpButton,
-  // subcomponents: { Text, Link },
-  argTypes: {},
   parameters: {
     docs: {
       description: {
-        component: "HelpButton is used for a action on a page",
+        component:
+          "HelpButton is a component that displays a help icon with a tooltip. It's commonly used to provide additional information or guidance to users.",
       },
     },
   },
+  argTypes: {
+    tooltipContent: {
+      description: "Content to be displayed in the tooltip",
+      control: "text",
+    },
+    place: {
+      description: "Position of the tooltip relative to the button",
+      control: "select",
+      options: ["top", "right", "bottom", "left"],
+    },
+    size: {
+      description: "Size of the help icon",
+      control: { type: "number", min: 8, max: 48 },
+    },
+    color: {
+      description: "Color of the help icon",
+      control: "color",
+    },
+    isClickable: {
+      description: "Whether the button is clickable",
+      control: "boolean",
+    },
+    openOnClick: {
+      description: "Whether to open tooltip on click instead of hover",
+      control: "boolean",
+    },
+  },
+  tags: ["autodocs"],
 } satisfies Meta<typeof HelpButton>;
-type Story = StoryObj<typeof meta>;
 
 export default meta;
+type Story = StoryObj<typeof meta>;
 
-const Template = (args: HelpButtonProps) => {
-  return (
-    <div>
-      <HelpButton {...args} />
-    </div>
-  );
-};
-
+// Basic HelpButton with default settings
 export const Default: Story = {
-  render: (args) => <Template {...args} />,
   args: {
-    offset: 0,
-    tooltipContent: <Text fontSize="13px">Paste you tooltip content here</Text>,
+    tooltipContent: "This is a help tooltip",
     place: "right",
+    offset: 8,
   },
 };
 
-const AutoTemplate = (args: HelpButtonProps) => {
-  return (
-    <div style={{ marginTop: "20px", marginInlineStart: "100px" }}>
-      <HelpButton
-        {...args}
-        style={{ insetInlineStart: "20px" }}
-        tooltipContent={
-          <>
-            <p>You can put every thing here</p>
-            <ul style={{ marginBottom: 0 }}>
-              <li>Word</li>
-              <li>Chart</li>
-              <li>Else</li>
-            </ul>
-          </>
-        }
-      />
-    </div>
-  );
+// HelpButton with custom size and color
+export const CustomStyle: Story = {
+  args: {
+    tooltipContent: "Customized help button",
+    size: 24,
+    color: "#2DA7DB",
+    place: "top",
+    offset: 12,
+  },
 };
 
-export const AutoPosition: Story = {
-  render: (args) => <AutoTemplate {...args} />,
+// HelpButton with rich content
+export const RichContent: Story = {
   args: {
-    offset: 0,
-    tooltipContent: <Text fontSize="13px">Paste you tooltip content here</Text>,
+    tooltipContent: (
+      <div style={{ padding: "8px" }}>
+        <Text fontSize="14px" fontWeight="bold">
+          Help Information
+        </Text>
+        <ul style={{ margin: "8px 0" }}>
+          <li>First instruction</li>
+          <li>Second instruction</li>
+          <li>Third instruction</li>
+        </ul>
+        <Text fontSize="12px" color="gray">
+          Click for more details
+        </Text>
+      </div>
+    ),
     place: "right",
+    offset: 8,
+  },
+};
+
+// HelpButton with dynamic content
+export const DynamicContent: Story = {
+  args: {
+    getContent: () => "This content is generated dynamically",
+    place: "top",
+    offset: 8,
+  },
+};
+
+// HelpButton with custom positioning
+export const CustomPosition: Story = {
+  decorators: [
+    (Story) => (
+      <div
+        style={{ padding: "50px", display: "flex", justifyContent: "center" }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
+  args: {
+    tooltipContent: "Custom positioned tooltip",
+    place: "right",
+    offset: 16,
+    style: { position: "relative" },
   },
 };

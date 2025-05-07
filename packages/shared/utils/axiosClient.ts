@@ -28,6 +28,8 @@
 /* eslint-disable no-console */
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 
+import { Configuration } from "@onlyoffice/docspace-api-typescript";
+
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
 import { combineUrl } from "./combineUrl";
@@ -67,6 +69,16 @@ export type TReqOption = {
   skipLogout?: boolean;
   withRedirect?: boolean;
 };
+
+export const dsApiConfiguration = new Configuration({
+  basePath: apiOrigin,
+  baseOptions: {
+    baseURL: combineUrl(apiOrigin, proxyURL),
+    responseType: "json",
+    timeout: apiTimeout,
+    withCredentials: true,
+  },
+});
 
 class AxiosClient {
   isSSR = false;

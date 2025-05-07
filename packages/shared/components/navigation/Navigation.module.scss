@@ -1,7 +1,6 @@
 @import "../../styles/mixins";
 @import "../../styles/common-icons-style.scss";
 @import "../../styles/variables/colors";
-@import "../../styles/variables/devices.scss";
 
 :global(.rtl) {
   :local {
@@ -275,7 +274,7 @@
   }
 
   @include mobile {
-    margin-inline-start: 0 !important;;
+    margin-inline-start: 0 !important;
   }
 }
 
@@ -378,14 +377,14 @@
 
   @include tablet-and-below {
     width: var(--drop-box-width);
-    inset-inline-start: -16px !important;;
+    inset-inline-start: -16px !important;
     padding: 0 16px;
     padding-top: 14px;
   }
 
   @include mobile {
     padding-top: 10px !important;
-    inset-inline-start: 0 !important;;
+    inset-inline-start: 0 !important;
   }
 }
 

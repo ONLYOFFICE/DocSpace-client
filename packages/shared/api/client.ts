@@ -28,9 +28,16 @@
 // @ts-nocheck
 
 import { AxiosRequestConfig } from "axios";
-import AxiosClient, { TReqOption } from "../utils/axiosClient";
+import { FilesRoomsApi } from "@onlyoffice/docspace-api-typescript";
+
+import AxiosClient, {
+  TReqOption,
+  dsApiConfiguration,
+} from "../utils/axiosClient";
 
 const client = new AxiosClient();
+
+export const roomsClient = new FilesRoomsApi(dsApiConfiguration);
 
 export const initSSR = (headers: Record<string, string>) => {
   client.initSSR(headers);

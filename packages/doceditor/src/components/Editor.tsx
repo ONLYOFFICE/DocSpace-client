@@ -28,8 +28,10 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import { DocumentEditor } from "@onlyoffice/document-editor-react";
-import IConfig from "@onlyoffice/document-editor-react/dist/esm/types/model/config";
+import {
+  DocumentEditor,
+  type IConfig,
+} from "@onlyoffice/document-editor-react";
 
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
@@ -45,25 +47,10 @@ import {
   onSDKWarning,
   onSDKError,
   onSDKRequestRename,
-  onOutdatedVersion,
+  // onOutdatedVersion,
 } from "@/utils/events";
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
-
-type IConfigType = IConfig & {
-  events?: {
-    onRequestStartFilling?: (event: object) => void;
-    onSubmit?: (event: object) => void;
-    onRequestFillingStatus?: (event: object) => void;
-    onStartFilling?: (data: object) => void;
-    onUserActionRequired?: (event: object) => void;
-  };
-  editorConfig?: {
-    customization?: {
-      close?: Record<string, unknown>;
-    };
-  };
-};
 
 const Editor = ({
   config,
@@ -80,6 +67,8 @@ const Editor = ({
   sdkConfig,
   organizationName = "",
   filesSettings,
+
+  shareKey,
 
   onDownloadAs,
   onSDKRequestSharingSettings,
@@ -121,6 +110,8 @@ const Editor = ({
     onSubmit,
     onRequestFillingStatus,
     onRequestStartFilling,
+
+    onRequestRefreshFile,
   } = useEditorEvents({
     user,
     successAuth,
@@ -136,6 +127,7 @@ const Editor = ({
     setFillingStatusDialogVisible,
     openShareFormDialog,
     onStartFillingVDRPanel,
+    shareKey,
   });
 
   useInit({
@@ -149,7 +141,7 @@ const Editor = ({
     organizationName,
   });
 
-  const newConfig: IConfigType = useMemo(() => {
+  const newConfig: IConfig = useMemo(() => {
     return config
       ? {
           document: config.document,
@@ -255,10 +247,11 @@ const Editor = ({
     onDocumentStateChange,
     onMetaChange,
     onMakeActionLink,
-    onOutdatedVersion,
+    // onOutdatedVersion,
     onDownloadAs,
     onUserActionRequired,
     onSubmit,
+    onRequestRefreshFile,
   };
 
   if (successAuth) {

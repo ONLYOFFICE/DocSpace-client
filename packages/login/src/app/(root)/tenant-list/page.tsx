@@ -1,9 +1,9 @@
 import { cookies } from "next/headers";
 
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { LANGUAGE } from "@docspace/shared/constants";
 
 import { GreetingLoginContainer } from "@/components/GreetingContainer";
+import { LoginContainer } from "@/components/LoginContainer";
 import { getSettings } from "@/utils/actions";
 
 import TenantList from "./page.client";
@@ -28,10 +28,7 @@ export default async function Page({
   return (
     <>
       {settings && typeof settings !== "string" && (
-        <ColorTheme
-          themeId={ThemeId.LinkForgotPassword}
-          isRegisterContainerVisible={isRegisterContainerVisible}
-        >
+        <LoginContainer isRegisterContainerVisible={isRegisterContainerVisible}>
           <>
             <GreetingLoginContainer
               greetingSettings={settings?.greetingSettings}
@@ -39,7 +36,7 @@ export default async function Page({
             />
             <TenantList clientId={clientId} baseDomain={settings.baseDomain} />
           </>
-        </ColorTheme>
+        </LoginContainer>
       )}
     </>
   );

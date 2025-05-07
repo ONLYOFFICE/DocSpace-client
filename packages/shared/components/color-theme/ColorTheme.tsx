@@ -33,7 +33,6 @@ import { ColorThemeProps } from "./ColorTheme.types";
 import { ThemeId } from "./ColorTheme.enums";
 
 import LinkTheme from "./styled-components/link";
-import LinkForgotPasswordColorTheme from "./styled-components/linkForgotPassword";
 import LoadingButton from "./styled-components/loadingButton";
 import ProgressColorTheme from "./styled-components/progress";
 import VersionBadgeTheme from "./styled-components/versionBadge";
@@ -49,16 +48,6 @@ const ColorTheme = forwardRef<
 
   const getElement = () => {
     switch (themeId) {
-      case ThemeId.LinkForgotPassword: {
-        return (
-          <LinkForgotPasswordColorTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            ref={ref}
-          />
-        );
-      }
-
       case ThemeId.LoadingButton: {
         return (
           <LoadingButton

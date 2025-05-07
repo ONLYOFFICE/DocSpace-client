@@ -24,9 +24,5 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import LoginContainer from "./sub-components/LoginContainer";
-
 export { ThemeId } from "./ColorTheme.enums";
 export { ColorTheme } from "./ColorTheme";
-
-export { LoginContainer };

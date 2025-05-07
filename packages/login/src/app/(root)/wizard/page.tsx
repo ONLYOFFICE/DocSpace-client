@@ -26,7 +26,6 @@
 
 import { redirect } from "next/navigation";
 
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import {
@@ -40,6 +39,7 @@ import {
 
 import WizardForm from "./page.client";
 import WizardGreeting from "@/components/WizardGreeting/index.client";
+import { LoginContainer } from "@/components/LoginContainer";
 
 async function Page() {
   console.log("start wizzard requests");
@@ -71,7 +71,7 @@ async function Page() {
   const forumLinkUrl = objectSettings?.externalResources.forum.domain;
 
   return (
-    <ColorTheme themeId={ThemeId.LinkForgotPassword}>
+    <LoginContainer>
       <>
         <WizardGreeting />
         <FormWrapper id="wizard-form">
@@ -91,7 +91,7 @@ async function Page() {
           />
         </FormWrapper>
       </>
-    </ColorTheme>
+    </LoginContainer>
   );
 }
 

@@ -27,7 +27,6 @@
 import { cookies } from "next/headers";
 
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { LANGUAGE } from "@docspace/shared/constants";
 
 import {
@@ -39,6 +38,7 @@ import {
   getUser,
 } from "@/utils/actions";
 import { GreetingLoginContainer } from "@/components/GreetingContainer";
+import { LoginContainer } from "@/components/LoginContainer";
 
 import Consent from "./page.client";
 
@@ -85,10 +85,7 @@ async function Page({
   return (
     <>
       {settings && typeof settings !== "string" && (
-        <ColorTheme
-          themeId={ThemeId.LinkForgotPassword}
-          isRegisterContainerVisible={isRegisterContainerVisible}
-        >
+        <LoginContainer isRegisterContainerVisible={isRegisterContainerVisible}>
           <>
             <GreetingLoginContainer
               greetingSettings={settings?.greetingSettings}
@@ -101,7 +98,7 @@ async function Page({
               baseUrl={config?.oauth2?.origin}
             />
           </>
-        </ColorTheme>
+        </LoginContainer>
       )}
     </>
   );

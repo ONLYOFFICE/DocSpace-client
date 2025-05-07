@@ -3062,6 +3062,7 @@ __metadata:
     "@babel/runtime": "npm:7.25.7"
     "@emotion/babel-preset-css-prop": "npm:10.2.1"
     "@emotion/styled": "npm:10.3.0"
+    "@onlyoffice/docspace-api-typescript": "file:./onlyoffice-docspace-api-typescript-3.1.0.tgz"
     "@playwright/test": "npm:1.48.0"
     "@react-spring/web": "npm:9.7.5"
     "@storybook/addon-actions": "npm:7.6.20"
@@ -4948,6 +4949,15 @@ __metadata:
     mkdirp: "npm:^1.0.4"
     rimraf: "npm:^3.0.2"
   checksum: 10/c96381d4a37448ea280951e46233f7e541058cf57a57d4094dd4bdcaae43fa5872b5f2eb6bfb004591a68e29c5877abe3cdc210cb3588cbf20ab2877f31a7de7
+  languageName: node
+  linkType: hard
+
+"@onlyoffice/docspace-api-typescript@file:./onlyoffice-docspace-api-typescript-3.1.0.tgz::locator=%40docspace%2Fshared%40workspace%3Apackages%2Fshared":
+  version: 3.1.0
+  resolution: "@onlyoffice/docspace-api-typescript@file:./onlyoffice-docspace-api-typescript-3.1.0.tgz#./onlyoffice-docspace-api-typescript-3.1.0.tgz::hash=1bdf45&locator=%40docspace%2Fshared%40workspace%3Apackages%2Fshared"
+  dependencies:
+    axios: "npm:^1.6.1"
+  checksum: 10/15d8aa164f5ca8ac0a371742101e419526b91a8c8d7048a77408bda84230d34c26183cff0067aedfd0acc0fbc6ccde04f6e6788ee39359168616c57e10d6e7a2
   languageName: node
   linkType: hard
 
@@ -10735,6 +10745,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"axios@npm:^1.6.1":
+  version: 1.9.0
+  resolution: "axios@npm:1.9.0"
+  dependencies:
+    follow-redirects: "npm:^1.15.6"
+    form-data: "npm:^4.0.0"
+    proxy-from-env: "npm:^1.1.0"
+  checksum: 10/a2f90bba56820883879f32a237e2b9ff25c250365dcafd41cec41b3406a3df334a148f90010182dfdadb4b41dc59f6f0b3e8898ff41b666d1157b5f3f4523497
+  languageName: node
+  linkType: hard
+
 "axobject-query@npm:^4.1.0":
   version: 4.1.0
   resolution: "axobject-query@npm:4.1.0"
@@ -15989,7 +16010,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.4":
+"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.4, follow-redirects@npm:^1.15.6":
   version: 1.15.9
   resolution: "follow-redirects@npm:1.15.9"
   peerDependenciesMeta:
@@ -23394,7 +23415,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"proxy-from-env@npm:^1.0.0":
+"proxy-from-env@npm:^1.0.0, proxy-from-env@npm:^1.1.0":
   version: 1.1.0
   resolution: "proxy-from-env@npm:1.1.0"
   checksum: 10/f0bb4a87cfd18f77bc2fba23ae49c3b378fb35143af16cc478171c623eebe181678f09439707ad80081d340d1593cd54a33a0113f3ccb3f4bc9451488780ee23

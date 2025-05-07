@@ -25,13 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+
+import styles from "./IndicatorLoader.module.scss";
 
 const IndicatorLoader = () => {
   return (
-    <ColorTheme themeId={ThemeId.IndicatorLoader}>
+    <div className={styles.indicatorLoader}>
       <div id="ipl-progress-indicator" />
-    </ColorTheme>
+    </div>
   );
 };
 

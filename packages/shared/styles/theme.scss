@@ -2095,3 +2095,11 @@
 .dark {
   --mute-badge-color: #{$white};
 }
+
+.light {
+  --indicator-loader-bg-color: var(--accent-main);
+}
+
+.dark {
+  --indicator-loader-bg-color: #{$white};
+}

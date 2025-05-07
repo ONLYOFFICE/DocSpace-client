@@ -11,7 +11,6 @@
   "InviteViaLinkDescriptionAccounts": "Создать универсальную ссылку для самостоятельной авторизации в {{productName}}",
   "InviteViaLinkDescriptionRoom": "Создать универсальную ссылку для самостоятельной авторизации в комнате",
   "LinkCopySuccess": "Ссылка скопирована",
-  "ResetChange": "Сбросить изменения",
   "SendInvitation": "Выслать приглашение",
   "UserMaxAvailableRoleWarning": "Гости и Пользователи не могут быть назначены Менеджерами комнат. Указанную роль могут выполнять только администраторы комнат и {{productName}}.",
   "UsersAlreadyAdded": "Некоторые пользователи уже добавлены"

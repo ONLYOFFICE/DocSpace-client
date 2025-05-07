@@ -2087,3 +2087,11 @@
   --index-bg-button-hover: #{$dark-grey-hover};
   --index-arrow-button-hover: #{$white};
 }
+
+.light {
+  --mute-badge-color: var(--accent-main);
+}
+
+.dark {
+  --mute-badge-color: #{$white};
+}

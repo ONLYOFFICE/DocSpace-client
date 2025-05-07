@@ -32,7 +32,6 @@ import { ThemeContext } from "styled-components";
 import { ColorThemeProps } from "./ColorTheme.types";
 import { ThemeId } from "./ColorTheme.enums";
 
-import IconButtonMuteTheme from "./styled-components/iconButtonMute";
 import IconButtonPinTheme from "./styled-components/iconButtonPin";
 import IconButtonCustomFilterTheme from "./styled-components/iconButtonCustomFilter";
 import IconWrapperTheme from "./styled-components/iconWrapper";
@@ -55,14 +54,6 @@ const ColorTheme = forwardRef<
 
   const getElement = () => {
     switch (themeId) {
-      case ThemeId.IconButtonMute: {
-        return (
-          <IconButtonMuteTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-          />
-        );
-      }
       case ThemeId.IconButtonPin: {
         return (
           <IconButtonPinTheme

@@ -110,3 +110,25 @@
   border-radius: 11px;
   border: var(--files-badges-border);
 }
+
+.iconBadge.muteBadge {
+  svg {
+    path:first-child {
+      stroke: var(--mute-badge-color);
+    }
+    path {
+      fill: var(--mute-badge-color);
+    }
+    rect {
+      fill: var(--mute-badge-color);
+    }
+  }
+
+  :hover:not(:global(.disabled)) {
+    svg {
+      path {
+        fill: var(--mute-badge-color);
+      }
+    }
+  }
+}

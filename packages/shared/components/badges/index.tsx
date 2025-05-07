@@ -437,12 +437,12 @@ const Badges = ({
       ) : null}
 
       {isRoom && mute && !isTile ? (
-        <ColorTheme
-          themeId={ThemeId.IconButtonMute}
+        <IconButton
           onClick={onUnmuteClick}
           iconName={iconMute}
           className={classNames(
             styles.iconBadge,
+            styles.muteBadge,
             "badge  is-mute tablet-badge",
           )}
           {...unmuteIconProps}

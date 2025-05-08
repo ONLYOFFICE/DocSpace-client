@@ -75,6 +75,7 @@ const RoomsModule = ({
   return (
     <FilesSelectorInput
       isSelect
+      withoutInitPath
       className="restore-backup_input"
       isDisabled={!isEnableRestore}
       onSelectFile={onSelectFile}

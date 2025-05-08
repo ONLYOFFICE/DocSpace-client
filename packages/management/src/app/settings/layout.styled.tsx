@@ -32,6 +32,10 @@ export const StyledWrapper = styled.div<{ hideTabs?: boolean }>`
     display: none;
   }
 
+  .tabs-body {
+    margin-bottom: 16px;
+  }
+
   @media ${mobile} {
     ${({ hideTabs }) =>
       hideTabs &&
@@ -46,4 +50,3 @@ export const StyledWrapper = styled.div<{ hideTabs?: boolean }>`
       `}
   }
 `;
-

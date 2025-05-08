@@ -288,6 +288,7 @@ const AmazonSettings = ({
             key: 0,
             label: region.label,
           }}
+          directionY="both"
           onSelect={onSelectRegion}
           noBorder={false}
           scaled

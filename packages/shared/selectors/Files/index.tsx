@@ -59,6 +59,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
 
     treeFolders,
     onSetBaseFolderPath,
+    roomType,
     isUserOnly,
     isRoomsOnly,
     openRoot,
@@ -191,6 +192,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     setSelectedItemSecurity,
 
     searchValue,
+    roomType,
     isRoomsOnly,
     isInit,
     withCreate,

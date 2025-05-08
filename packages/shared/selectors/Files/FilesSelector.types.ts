@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TSelectorItem } from "../../components/selector";
+import { WithFlag, Nullable } from "../../types";
 import {
   TBreadCrumb,
   TInfoBar,
@@ -39,7 +40,6 @@ import {
 } from "../../api/files/types";
 import { DeviceType, FolderType, RoomsType, FileType } from "../../enums";
 import { TRoom, TRoomSecurity } from "../../api/rooms/types";
-import { Nullable } from "../../types";
 
 export type TCreateDefineRoom = {
   label: string;
@@ -97,6 +97,7 @@ export type UseRoomsHelperProps = {
       TRoomSecurity | TFileSecurity | TFolderSecurity | undefined
     >
   >;
+  roomType?: RoomsType | RoomsType[];
   subscribe: (id: number) => void;
   withInit?: boolean;
 };
@@ -158,27 +159,19 @@ export type TSelectedFileInfo = {
 
 export type TGetIcon = (size: number, fileExst: string) => string;
 
-export type TFilesSelectorInit =
-  | {
-      withInit: true;
-      initTotal: number;
-      initHasNextPage: boolean;
-      initItems: TRoom[] | (TFolder | TFile)[];
-      initBreadCrumbs: TBreadCrumb[];
-      initSelectedItemType: "rooms" | "files";
-      initSelectedItemId: string | number;
-      initSearchValue?: Nullable<string>;
-    }
-  | {
-      withInit?: never;
-      initItems?: never;
-      initTotal?: never;
-      initHasNextPage?: never;
-      initSearchValue?: never;
-      initSelectedItemType?: never;
-      initSelectedItemId?: never;
-      initBreadCrumbs?: never;
-    };
+export type TFilesSelectorInit = WithFlag<
+  "withInit",
+  {
+    withInit: true;
+    initTotal: number;
+    initHasNextPage: boolean;
+    initItems: TRoom[] | (TFolder | TFile)[];
+    initBreadCrumbs: TBreadCrumb[];
+    initSelectedItemType: "rooms" | "files";
+    initSelectedItemId: string | number;
+    initSearchValue?: Nullable<string>;
+  }
+>;
 
 export type FilesSelectorProps = TSelectorHeader &
   TInfoBar &
@@ -204,6 +197,7 @@ export type FilesSelectorProps = TSelectorHeader &
     ) => void;
     isUserOnly?: boolean;
     openRoot?: boolean;
+    roomType?: RoomsType | RoomsType[];
     isRoomsOnly: boolean;
     isThirdParty: boolean;
     rootThirdPartyId?: string;

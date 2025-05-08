@@ -55,6 +55,7 @@ const useRoomsHelper = ({
   onSetBaseFolderPath,
 
   searchValue,
+  roomType,
   isRoomsOnly,
 
   isInit,
@@ -129,11 +130,22 @@ const useRoomsHelper = ({
 
       const filter = RoomsFilter.getDefault();
 
+      let filterType = roomType;
+
+      if (createDefineRoomType) {
+        if (filterType) {
+          filterType = Array.isArray(filterType)
+            ? [...filterType, createDefineRoomType]
+            : [filterType, createDefineRoomType];
+        } else {
+          filterType = createDefineRoomType;
+        }
+      }
+
       filter.page = page;
       filter.pageCount = PAGE_COUNT;
-
       filter.filterValue = filterValue;
-      filter.type = (createDefineRoomType as unknown as string) ?? undefined;
+      filter.type = filterType as unknown as string | string[];
 
       const rooms = await getRooms(filter);
 
@@ -225,6 +237,7 @@ const useRoomsHelper = ({
       setIsRoot,
       setIsInit,
       setIsFirstLoad,
+      roomType,
       isRoomsOnly,
       subscribe,
       onSetBaseFolderPath,

@@ -72,11 +72,21 @@ export const useBackupSettings = ({
   });
 
   const [selected, setSelected] = useReducer<
-    Reducer<BackupSelectedStateType, Partial<BackupSelectedStateType>>
-  >((state, action) => ({ ...state, ...action }), {
-    ...initBackupSelectedState,
-    periodLabel: t("Common:EveryDay"),
-  });
+    Reducer<
+      BackupSelectedStateType,
+      | Partial<BackupSelectedStateType>
+      | ((state: BackupSelectedStateType) => Partial<BackupSelectedStateType>)
+    >
+  >(
+    (state, action) => ({
+      ...state,
+      ...(typeof action === "function" ? action(state) : action),
+    }),
+    {
+      ...initBackupSelectedState,
+      periodLabel: t("Common:EveryDay"),
+    },
+  );
 
   const setDefaultOptions = useCallback(
     (t: TTranslation, periodObj: TOption[], weekdayArr: TOption[]) => {
@@ -282,35 +292,34 @@ export const useBackupSettings = ({
     values: Record<string, string>,
     module?: string,
   ) => {
-    const formSettingsTemp: Record<string, string> = {};
-
     if (module && module === defaults.storageId) {
       setSelected({ formSettings: { ...defaults.formSettings } });
       return;
     }
 
-    Object.keys(values).forEach((key) => {
-      formSettingsTemp[key] = values[key];
-    });
-
-    setSelected({ formSettings: { ...formSettingsTemp } });
+    setSelected({ formSettings: { ...values } });
     setErrorsFormFields({});
   };
 
   const addValueInFormSettings = (name: string, value: string) => {
-    const { formSettings } = selected;
+    setSelected((prevState) => {
+      const { formSettings } = prevState;
 
-    const newFormSettings = { ...formSettings, [name]: value };
+      const newFormSettings = { ...formSettings, [name]: value };
 
-    setSelected({ formSettings: newFormSettings });
+      return {
+        formSettings: newFormSettings,
+      };
+    });
   };
 
   const deleteValueFormSetting = (key: string) => {
-    const newSettings = { ...selected.formSettings };
-    delete newSettings[key];
-
-    setSelected({
-      formSettings: newSettings,
+    setSelected((state) => {
+      const newSettings = { ...state.formSettings };
+      delete newSettings[key];
+      return {
+        formSettings: newSettings,
+      };
     });
   };
 

@@ -114,21 +114,18 @@ const AmazonSettings = ({
   }>();
 
   const regions = useMemo(() => {
-    const tempRegions = [];
-    for (let index = 0; index < storageRegions.length; index += 1) {
-      const item = storageRegions[index];
-
-      tempRegions.push({
+    return storageRegions.map((storageRegion, index) => {
+      const tempRegion = {
         key: index.toString(),
-        label: `${item.displayName} (${item.systemName})`,
-        systemName: item.systemName,
-      });
+        label: `${storageRegion.displayName} (${storageRegion.systemName})`,
+        systemName: storageRegion.systemName,
+      };
 
-      if (defaultRegion === item.systemName) {
-        defaultRegionValue.current = tempRegions[index];
+      if (defaultRegion === storageRegion.systemName) {
+        defaultRegionValue.current = tempRegion;
       }
-    }
-    return tempRegions;
+      return tempRegion;
+    });
   }, [defaultRegion, storageRegions]);
 
   const [region, setRegion] = useState(() =>
@@ -284,10 +281,7 @@ const AmazonSettings = ({
         <ComboBox
           className="region-combo-box backup_text-input"
           options={regions}
-          selectedOption={{
-            key: 0,
-            label: region.label,
-          }}
+          selectedOption={region}
           directionY="both"
           onSelect={onSelectRegion}
           noBorder={false}
@@ -370,6 +364,7 @@ const AmazonSettings = ({
             key: 0,
             label: selectedEncryption,
           }}
+          directionY="both"
           onSelect={onSelectEncryptionMethod}
           noBorder={false}
           scaled
@@ -415,6 +410,7 @@ const AmazonSettings = ({
                   key: 0,
                   label: managedKeys.label,
                 }}
+                directionY="both"
                 onSelect={onSelectManagedKeys}
                 noBorder={false}
                 scaled

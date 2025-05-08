@@ -106,7 +106,6 @@ export const useBackup = ({
     backupStore.setConnectedThirdPartyAccount(account ?? null);
   }, [account, backupStore]);
 
-  // TODO: required fix is object
   const [requiredFormSettings, setRequiredFormSettings] = useState<string[]>(
     [],
   );

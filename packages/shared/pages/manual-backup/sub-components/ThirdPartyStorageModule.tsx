@@ -192,6 +192,7 @@ const ThirdPartyStorageModule = ({
           // className={item.className}
           data-third-party-key={item.key}
           disabled={item.disabled}
+          isActive={selectedId === item.key}
         >
           <Text className="drop-down-item_text" fontWeight={600}>
             {item.label}

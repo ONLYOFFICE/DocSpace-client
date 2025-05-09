@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-@import "../../styles/variables/index.scss";
+@use "../../styles/variables";
 
 .modalBody {
   padding-inline-start: 16px;
@@ -59,7 +59,7 @@
 
       svg {
         path {
-          fill: $black;
+          fill: variables.$black;
         }
       }
     }

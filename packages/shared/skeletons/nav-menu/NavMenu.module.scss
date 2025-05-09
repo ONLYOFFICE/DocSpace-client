@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-@import "../../styles/mixins";
+@use "../../styles/mixins";
 
 .header {
   height: 48px;
@@ -39,7 +39,7 @@
   padding-inline-start: 20px;
   padding-inline-end: 20px;
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     padding-inline-start: 16px;
     padding-inline-end: 16px;
   }

@@ -111,11 +111,11 @@ const config = {
       "@docspace/shared/utils": path.resolve(__dirname, "../shared/utils"),
       "@docspace/shared/components": path.resolve(
         __dirname,
-        "../shared/components"
+        "../shared/components",
       ),
       "@docspace/shared/skeletons": path.resolve(
         __dirname,
-        "../shared/skeletons"
+        "../shared/skeletons",
       ),
       "@docspace/shared/enums": path.resolve(__dirname, "../shared/enums"),
     },
@@ -248,6 +248,8 @@ const config = {
               },
             },
           },
+          // Fix relative url() in fonts.css
+          "resolve-url-loader",
           // Compiles Sass to CSS
           "sass-loader",
         ],
@@ -349,7 +351,7 @@ module.exports = (env, argv) => {
         ...deps,
         ...sharedDeps,
       },
-    })
+    }),
   );
 
   const htmlTemplate = {
@@ -409,7 +411,7 @@ module.exports = (env, argv) => {
 *
 * Version: ${version} (build: ${getBuildDate()})
 */`,
-    })
+    }),
   );
 
   if (!env.lint || env.lint == "true") {
@@ -419,11 +421,11 @@ module.exports = (env, argv) => {
         configType: "eslintrc",
         cacheLocation: path.resolve(
           __dirname,
-          "../../node_modules/.cache/.eslintcache"
+          "../../node_modules/.cache/.eslintcache",
         ),
         quiet: true,
         formatter: "json",
-      })
+      }),
     );
   } else {
     console.log("Skip eslint");

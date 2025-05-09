@@ -1,5 +1,5 @@
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/mixins.scss";
+@use "../../styles/variables/colors";
+@use "../../styles/mixins";
 
 .dialogLoader {
   height: auto;
@@ -10,7 +10,7 @@
     width: 520px;
   }
 
-  @include mobile {
+  @include mixins.mobile {
     width: 100%;
   }
 

@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../styles/common-icons-style.scss";
+@use "../../../styles/common-icons-style";
 
 .catalogFolderIcon {
-  @include common-icons-style;
+  @include common-icons-style.common-icons-style;
 }

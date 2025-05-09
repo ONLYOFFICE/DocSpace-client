@@ -1,4 +1,4 @@
-@import "./variables/_colors.scss";
+@use "./variables/colors" as *;
 
 .light {
   --row-side-color: #{$gray};

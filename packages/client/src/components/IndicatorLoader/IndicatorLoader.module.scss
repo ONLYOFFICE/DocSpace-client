@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-@import "@docspace/shared/styles/mixins";
+@use "@docspace/shared/styles/mixins";
 
 .indicatorLoader {
   :global(#ipl-progress-indicator) {
@@ -45,7 +45,7 @@
       background-color: var(--indicator-loader-bg-color);
     }
 
-    @include mobile {
+    @include mixins.mobile {
       top: 48px;
     }
   }

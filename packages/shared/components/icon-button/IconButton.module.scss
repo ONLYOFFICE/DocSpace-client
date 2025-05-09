@@ -26,26 +26,26 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-@import "../../styles/_mixins.scss";
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/common-icons-style";
+@use "../../styles/mixins";
+@use "../../styles/variables/colors";
+@use "../../styles/common-icons-style";
 
 :global(.dark) {
   :local {
     .iconButton {
-      --icon-button-color: #{$gray-dark};
-      --icon-button-hover-color: #{$white};
+      --icon-button-color: #{colors.$gray-dark};
+      --icon-button-hover-color: #{colors.$white};
     }
   }
 }
 
 .iconButton {
-  --icon-button-color: #{$gray};
-  --icon-button-hover-color: #{$light-gray-dark};
+  --icon-button-color: #{colors.$gray};
+  --icon-button-hover-color: #{colors.$light-gray-dark};
   --icon-button-size: 20px;
 
   line-height: 0;
-  -webkit-tap-highlight-color: $tap-highlight;
+  -webkit-tap-highlight-color: colors.$tap-highlight;
   cursor: pointer;
 
   color: var(--icon-button-color);
@@ -54,7 +54,7 @@
   height: var(--icon-button-size);
 
   &.commonIconsStyle {
-    @include common-icons-style;
+    @include common-icons-style.common-icons-style;
   }
 
   &.disabled {
@@ -110,6 +110,6 @@
   }
 
   .notSelectable {
-    @include no-user-select;
+    @include mixins.no-user-select;
   }
 }

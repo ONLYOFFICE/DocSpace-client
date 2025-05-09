@@ -23,19 +23,19 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-@import "../../styles/variables/_colors.scss";
+@use "../../styles/variables/colors";
 
 :global(.dark) {
   :local {
     .wrapper {
-      --border-color: #{$gray-dark-strong};
+      --border-color: #{colors.$gray-dark-strong};
     }
   }
 }
 :global(.light) {
   :local {
     .wrapper {
-      --border-color: #{$gray-light-mid};
+      --border-color: #{colors.$gray-light-mid};
     }
   }
 }

@@ -118,15 +118,15 @@ const useSocketHelper = ({
   const addItem = React.useCallback(
     async (opt: TOptSocket) => {
       if (!opt?.data) return;
-
       const data: TFile | TFolder | TRoom = JSON.parse(opt.data);
 
       if (
         "folderId" in data && data.folderId
           ? data.folderId !== subscribedId.current
           : "parentId" in data && data.parentId !== subscribedId.current
-      )
+      ) {
         return;
+      }
 
       let item: TSelectorItem = {} as TSelectorItem;
 
@@ -226,7 +226,7 @@ const useSocketHelper = ({
       }
 
       if (item?.id === subscribedId.current) {
-        return setBreadCrumbs((value) => {
+        return setBreadCrumbs?.((value) => {
           if (!value) return value;
 
           const newValue = [...value];
@@ -253,7 +253,7 @@ const useSocketHelper = ({
             return newValue;
           }
 
-          setBreadCrumbs((breadCrumbsValue) => {
+          setBreadCrumbs?.((breadCrumbsValue) => {
             return breadCrumbsValue;
           });
         }

@@ -30,6 +30,7 @@ import {
   TSelectorCancelButton,
   TSelectorHeader,
   TSelectorItem,
+  TSelectorSearch,
 } from "../../components/selector/Selector.types";
 
 import { RoomSearchArea, RoomsType } from "../../enums";
@@ -46,7 +47,8 @@ export type TInitValue = WithFlag<
 >;
 
 export type RoomSelectorProps = TSelectorHeader &
-  TSelectorCancelButton & {
+  TSelectorCancelButton &
+  TSelectorSearch & {
     id?: string;
     className?: string;
     style?: React.CSSProperties;
@@ -64,6 +66,9 @@ export type RoomSelectorProps = TSelectorHeader &
     disableThirdParty?: boolean;
 
     withPadding?: boolean;
+    withCreate: boolean;
+    createDefineRoomLabel?: string;
+    createDefineRoomType?: RoomsType;
 
     emptyScreenHeader?: string;
     emptyScreenDescription?: string;

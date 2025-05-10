@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 
 import { getRooms } from "../../../api/rooms";
 import RoomsFilter from "../../../api/rooms/filter";
-import { RoomsType } from "../../../enums";
+import { RoomsStorageFilter, RoomsType } from "../../../enums";
 import { RoomsTypeValues } from "../../../utils";
 import RoomType from "../../../components/room-type";
 import { TSelectorItem } from "../../../components/selector";
@@ -55,6 +55,7 @@ const useRoomsHelper = ({
   onSetBaseFolderPath,
 
   searchValue,
+  searchArea,
   roomType,
   isRoomsOnly,
 
@@ -62,6 +63,8 @@ const useRoomsHelper = ({
   setIsInit,
 
   withCreate,
+  disableThirdParty,
+  excludeItems,
   createDefineRoomLabel,
   createDefineRoomType,
   getRootData,
@@ -146,10 +149,14 @@ const useRoomsHelper = ({
       filter.pageCount = PAGE_COUNT;
       filter.filterValue = filterValue;
       filter.type = filterType as unknown as string | string[];
+      filter.searchArea = searchArea || "";
 
-      const rooms = await getRooms(filter);
+      if (disableThirdParty)
+        filter.storageFilter = RoomsStorageFilter.internal as unknown as string;
 
-      const { folders, total, count, current } = rooms;
+      const roomsFromApi = await getRooms(filter);
+
+      const { folders, total, count, current } = roomsFromApi;
 
       if (initRef.current) {
         const { title, id } = current;
@@ -162,15 +169,18 @@ const useRoomsHelper = ({
 
         onSetBaseFolderPath?.(breadCrumbs);
 
-        setBreadCrumbs(breadCrumbs);
+        setBreadCrumbs?.(breadCrumbs);
 
         setIsBreadCrumbsLoading(false);
       }
-      const itemList: TSelectorItem[] = convertRoomsToItems(folders, t);
+
+      const itemList: TSelectorItem[] = convertRoomsToItems(folders, t).filter(
+        (x) => (excludeItems ? !excludeItems.includes(x.id) : true),
+      );
 
       setHasNextPage(count === PAGE_COUNT);
 
-      setSelectedItemSecurity(current.security);
+      setSelectedItemSecurity?.(current.security);
 
       if (firstLoadRef.current || startIndex === 0) {
         const { security } = current;
@@ -190,9 +200,9 @@ const useRoomsHelper = ({
               : createDropDownItems,
 
             onBackClick: () => {
-              setIsRoot(true);
-              setSelectedItemType(undefined);
-              setBreadCrumbs((val) => {
+              setIsRoot?.(true);
+              setSelectedItemType?.(undefined);
+              setBreadCrumbs?.((val) => {
                 const newVal = [...val];
 
                 newVal.pop();
@@ -222,12 +232,11 @@ const useRoomsHelper = ({
 
       requestRunning.current = false;
       setIsNextPageLoading(false);
-      setIsRoot(false);
+      setIsRoot?.(false);
       setIsInit(false);
       setIsFirstLoad(false);
     },
     [
-      setIsNextPageLoading,
       withCreate,
       searchValue,
       createDefineRoomType,
@@ -237,6 +246,7 @@ const useRoomsHelper = ({
       setIsRoot,
       setIsInit,
       setIsFirstLoad,
+      setIsNextPageLoading,
       roomType,
       isRoomsOnly,
       subscribe,
@@ -250,6 +260,9 @@ const useRoomsHelper = ({
       setSelectedItemType,
       getRootData,
       addInputItem,
+      searchArea,
+      disableThirdParty,
+      excludeItems,
     ],
   );
 

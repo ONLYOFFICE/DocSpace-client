@@ -65,34 +65,35 @@ export interface UseRootHelperProps {
 
 export type UseSocketHelperProps = {
   setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
-  setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
+  setBreadCrumbs?: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
   setTotal: React.Dispatch<React.SetStateAction<number>>;
   disabledItems: (string | number)[];
   filterParam?: string;
   withCreate: boolean;
 };
 
-export type UseRoomsHelperProps = {
-  setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
+export type UseRoomsHelperProps = TUseInputItemHelper & {
+  setBreadCrumbs?: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
   setHasNextPage: (value: boolean) => void;
   setTotal: (value: number) => void;
-  setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
-  setIsRoot: (value: boolean) => void;
+  setIsRoot?: (value: boolean) => void;
   searchValue?: string;
+  searchArea?: string;
+  disableThirdParty?: boolean;
   isRoomsOnly: boolean;
   onSetBaseFolderPath?: (
     value: number | string | undefined | TBreadCrumb[],
   ) => void;
+  excludeItems?: (number | string | undefined)[];
   isInit: boolean;
   setIsInit: (value: boolean) => void;
-  withCreate: boolean;
   createDefineRoomLabel?: string;
   createDefineRoomType?: RoomsType;
   getRootData?: () => Promise<void>;
-  setSelectedItemType: React.Dispatch<
+  setSelectedItemType?: React.Dispatch<
     React.SetStateAction<"rooms" | "files" | undefined>
   >;
-  setSelectedItemSecurity: React.Dispatch<
+  setSelectedItemSecurity?: React.Dispatch<
     React.SetStateAction<
       TRoomSecurity | TFileSecurity | TFolderSecurity | undefined
     >

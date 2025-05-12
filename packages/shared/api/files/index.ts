@@ -75,41 +75,39 @@ import {
 import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialog.types";
 
 export async function openEdit(
-  fileId: number,
-  version: string,
-  doc: string,
-  view: string,
-  headers: Record<string, string>,
-  shareKey: string,
+  fileId: number | string,
+  version: string | number,
+  doc?: string,
+  view?: string,
+  headers?: Record<string, string>,
+  shareKey?: string,
+  editorType?: string,
+  action?: string,
 ) {
-  const params = []; // doc ? `?doc=${doc}` : "";
-
-  if (view) {
-    params.push(`view=${view}`);
-  }
+  const params = new URLSearchParams();
 
   if (version) {
-    params.push(`version=${version}`);
+    params.append("version", version);
   }
+  if (doc) params.append("doc", doc);
+  if (shareKey) params.append("share", shareKey);
+  if (editorType) params.append("editorType", editorType);
+  if (action) params.append(action, "true");
 
-  if (doc) {
-    params.push(`doc=${doc}`);
-  }
-
-  if (shareKey) {
-    params.push(`share=${shareKey}`);
-  }
-
-  const paramsString = params.length > 0 ? `?${params.join("&")}` : "";
+  const paramsString = params.toString();
 
   const options: AxiosRequestConfig = {
     method: "get",
-    url: `/files/file/${fileId}/openedit${paramsString}`,
+    url: `/files/file/${fileId}/openedit?${paramsString}`,
   };
 
   if (headers) options.headers = headers;
 
   const res = (await request(options)) as TOpenEditRequest;
+
+  if (action === "view") {
+    res.config.editorConfig.mode = "view";
+  }
 
   return res;
 }

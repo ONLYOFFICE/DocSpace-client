@@ -9,7 +9,6 @@
   "InviteViaLink": "Convidar através de uma hiperligação",
   "InviteViaLinkDescriptionAccounts": "Crie uma hiperligação universal para permitir a auto autorização no {{productName}}",
   "LinkCopySuccess": "A ligação foi copiada",
-  "ResetChange": "Redefinir alteração",
   "SendInvitation": "Enviar convite",
   "UserMaxAvailableRoleWarning": "Hóspedes e Utilizadors não podem ser atribuídos como gerentes de quarto. Apenas os administradores Room e {{productName}} são adequados para a função especificada.",
   "UsersAlreadyAdded": "Alguns usuários já foram adicionados"

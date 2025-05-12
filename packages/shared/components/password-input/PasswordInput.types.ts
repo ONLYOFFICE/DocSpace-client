@@ -108,7 +108,7 @@ export type TPasswordTooltipProps = {
 };
 
 type PasswordInputBaseProps = {
-  ref?: React.RefObject<PasswordInputHandle>;
+  ref?: React.RefObject<PasswordInputHandle | null>;
   /** Input value */
   inputValue?: string;
   /** Required to associate the password field with the email field */

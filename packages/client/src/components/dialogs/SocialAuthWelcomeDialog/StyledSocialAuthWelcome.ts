@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { tablet } from "@docspace/shared/utils";
+import { tablet, mobile } from "@docspace/shared/utils";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
 export const StyledModalDialog = styled(ModalDialog)`
@@ -9,6 +9,12 @@ export const StyledModalDialog = styled(ModalDialog)`
 
     .modal-body {
       padding-bottom: 0px;
+    }
+
+    @media ${mobile} {
+      .modal-header {
+        margin-bottom: 0px;
+      }
     }
   }
 
@@ -67,11 +73,30 @@ export const StyledBodyContent = styled.div`
       padding: 12px;
     }
   }
+
+  @media ${mobile} {
+    .welcome-image {
+      margin-bottom: 16px;
+    }
+
+    .account-details {
+      width: 100%;
+      padding: 12px 8px;
+
+      & > div:first-child {
+        margin-bottom: 16px;
+      }
+    }
+
+    .welcome-auth-social-image {
+      height: 160px;
+    }
+  }
 `;
 
 export const StyledInfoRow = styled.div`
   display: flex;
-  align-items: center;
+  align-items: baseline;
   padding: 1px 16px;
   height: 28px;
   max-height: 28px;
@@ -89,5 +114,21 @@ export const StyledInfoRow = styled.div`
     align-items: center;
     gap: 8px;
     font-weight: 600;
+
+    @media ${mobile} {
+      max-width: 200px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+
+      .change-domain_link {
+        margin-left: 0;
+      }
+
+      p {
+        max-width: 100%;
+        width: 100%;
+      }
+    }
   }
 `;

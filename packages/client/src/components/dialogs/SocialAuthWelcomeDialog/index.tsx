@@ -1,5 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
+import { useNavigate } from "react-router";
+import { useTheme } from "styled-components";
 import { withTranslation, WithTranslation, Trans } from "react-i18next";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import {
@@ -9,13 +11,14 @@ import {
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkType } from "@docspace/shared/components/link";
+import { DeviceType } from "@docspace/shared/enums";
 import WelcomeAuthSocial from "PUBLIC_DIR/images/welcome-social_auth.png";
+import WelcomeAuthSocialDark from "PUBLIC_DIR/images/welcome-social_auth_dark.png";
 import {
   StyledBodyContent,
   StyledInfoRow,
   StyledModalDialog,
 } from "./StyledSocialAuthWelcome";
-import { useNavigate } from "react-router";
 
 interface SocialAuthWelcomeDialogProps extends WithTranslation {
   visible: boolean;
@@ -27,6 +30,7 @@ interface SocialAuthWelcomeDialogProps extends WithTranslation {
     lastName?: string;
     email?: string;
   };
+  currentDeviceType: DeviceType;
 }
 
 const SocialAuthWelcomeDialogComponent = ({
@@ -36,8 +40,14 @@ const SocialAuthWelcomeDialogComponent = ({
   tenantAlias,
   baseDomain,
   user,
+  currentDeviceType,
 }: SocialAuthWelcomeDialogProps) => {
   const navigate = useNavigate();
+  const theme = useTheme();
+
+  const welcomeAuthSocialImage = theme.isBase
+    ? WelcomeAuthSocial
+    : WelcomeAuthSocialDark;
 
   const onContinueClick = (): void => {
     onClose();
@@ -60,7 +70,7 @@ const SocialAuthWelcomeDialogComponent = ({
       displayType={ModalDialogType.modal}
     >
       <ModalDialog.Header>
-        {t("SocialAuthWelcomeDialog:ThanksJoining", {
+        {t("Common:EmptyRootRoomHeader", {
           productName: t("Common:ProductName"),
         })}
       </ModalDialog.Header>
@@ -68,7 +78,7 @@ const SocialAuthWelcomeDialogComponent = ({
         <StyledBodyContent>
           <div className="welcome-image">
             <img
-              src={WelcomeAuthSocial}
+              src={welcomeAuthSocialImage}
               className="welcome-auth-social-image"
               alt="auth-welcome-preview"
             />
@@ -119,9 +129,7 @@ const SocialAuthWelcomeDialogComponent = ({
             </StyledInfoRow>
 
             <StyledInfoRow>
-              <Text truncate>
-                {t("SocialAuthWelcomeDialog:GeneratedPassword")}
-              </Text>
+              <Text>{t("SocialAuthWelcomeDialog:GeneratedPassword")}</Text>
               <Text fontWeight="600">********</Text>
             </StyledInfoRow>
 
@@ -141,11 +149,22 @@ const SocialAuthWelcomeDialogComponent = ({
           </div>
 
           <Text textAlign="center" lineHeight="20px">
-            <Trans
-              t={t}
-              i18nKey="SocialAuthWelcomeDialog:ClickButtonBelow"
-              ns="SocialAuthWelcomeDialog"
-            />
+            {currentDeviceType === DeviceType.mobile ? (
+              <Trans
+                t={t}
+                i18nKey="SocialAuthWelcomeDialog:ClickButtonBelow"
+                ns="SocialAuthWelcomeDialog"
+                components={{
+                  br: <></>,
+                }}
+              />
+            ) : (
+              <Trans
+                t={t}
+                i18nKey="SocialAuthWelcomeDialog:ClickButtonBelow"
+                ns="SocialAuthWelcomeDialog"
+              />
+            )}
           </Text>
         </StyledBodyContent>
       </ModalDialog.Body>
@@ -158,6 +177,7 @@ const SocialAuthWelcomeDialogComponent = ({
           })}
           primary
           onClick={onContinueClick}
+          scale={currentDeviceType === DeviceType.mobile}
         />
       </ModalDialog.Footer>
     </StyledModalDialog>
@@ -179,6 +199,7 @@ export default inject(
     settingsStore: {
       tenantAlias: string;
       baseDomain: string;
+      currentDeviceType: DeviceType;
     };
     userStore: {
       user: { firstName?: string; lastName?: string; email?: string };
@@ -189,7 +210,7 @@ export default inject(
       setSocialAuthWelcomeDialogVisible: setVisible,
     } = dialogsStore;
 
-    const { tenantAlias, baseDomain } = settingsStore;
+    const { tenantAlias, baseDomain, currentDeviceType } = settingsStore;
     const { user } = userStore;
 
     return {
@@ -198,6 +219,7 @@ export default inject(
       tenantAlias,
       baseDomain,
       user,
+      currentDeviceType,
     };
   },
 )(observer(SocialAuthWelcomeDialog));

@@ -856,5 +856,10 @@
   "UseHttp": "Http istifadə edin",
   "AmazonSSE": "Server tərəfində şifrələmə",
   "AmazonCSE": "Müştəri tərəfinin şifrələməsi",
-  "Path": "Cığır"
+  "Path": "Cığır",
+  "ErrorOperation": "{{operationName}}: Xəta",
+  "Processes": "Proseslər: {{count}}",
+  "ErrorUploadingFiles": "Faylları yükləmə xətası: {{count}}",
+  "SuccessOperation": "{{operationName}}: Hazırdır",
+  "CancelUpload": "Yükləmə dayandırıldı. Bəzi fayllar yüklənmədi."
 }

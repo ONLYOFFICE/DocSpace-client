@@ -852,5 +852,10 @@
   "UseHttp": "استخدم Http",
   "AmazonSSE": "التشفير من جانب الخادم",
   "AmazonCSE": "تشفير من جانب العميل",
-  "Path": "مسار"
+  "Path": "مسار",
+  "ErrorOperation": "{{operationName}}: حدث خطأ",
+  "Processes": "عدد العمليات: {{count}}",
+  "ErrorUploadingFiles": "حدث خطأ أثناء تحميل الملفات: {{count}}",
+  "SuccessOperation": "{{operationName}}: تم بنجاح",
+  "CancelUpload": "تمت مقاطعة الرفع. لم يتم رفع بعض الملفات."
 }

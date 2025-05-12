@@ -864,5 +864,10 @@
   "UseHttp": "Користи Http",
   "AmazonSSE": "Шифровање на cерверу",
   "AmazonCSE": "Шифровање на страни клијента",
-  "Path": "Путања"
+  "Path": "Путања",
+  "ErrorOperation": "{{operationName}}: Грешка",
+  "Processes": "Процеси: {{count}}",
+  "ErrorUploadingFiles": "Грешка при отпремању фајлова: {{count}}",
+  "SuccessOperation": "{{operationName}}: Завршено",
+  "CancelUpload": "Отпремање је прекинуто. Неке датотеке нису отпремљене."
 }

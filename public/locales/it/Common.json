@@ -864,5 +864,10 @@
   "UseHttp": "Usa Http",
   "AmazonSSE": "Crittografia lato server",
   "AmazonCSE": "Crittografia sul lato client",
-  "Path": "Percorso"
+  "Path": "Percorso",
+  "ErrorOperation": "{{operationName}}: Errore",
+  "Processes": "Processi: {{count}}",
+  "ErrorUploadingFiles": "Errore durante il caricamento dei file: {{count}}",
+  "SuccessOperation": "{{operationName}}: Completato",
+  "CancelUpload": "Il caricamento è stato interrotto. Alcuni file non sono stati caricati."
 }

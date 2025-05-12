@@ -864,5 +864,10 @@
   "UseHttp": "Использовать Http",
   "AmazonSSE": "Шифрование на стороне сервера",
   "AmazonCSE": "Шифрование на стороне клиента",
-  "Path": "Путь"
+  "Path": "Путь",
+  "ErrorOperation": "{{operationName}}: Ошибка",
+  "Processes": "Процессы: {{count}}",
+  "ErrorUploadingFiles": "Ошибка загрузки файлов: {{count}}",
+  "SuccessOperation": "{{operationName}}: Готово",
+  "CancelUpload": "Загрузка была прервана. Не удалось загрузить часть файлов."
 }

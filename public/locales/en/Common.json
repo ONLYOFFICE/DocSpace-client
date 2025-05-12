@@ -864,5 +864,10 @@
   "UseHttp": "Use Http",
   "AmazonSSE": "Server-Side Encryption",
   "AmazonCSE": "Client-Side Encryption",
-  "Path": "Path"
+  "Path": "Path",
+  "ErrorOperation": "{{operationName}}: Error",
+  "Processes": "Processes: {{count}}",
+  "ErrorUploadingFiles": "Error uploading files: {{count}}",
+  "SuccessOperation": "{{operationName}}: Done",
+  "CancelUpload": "The upload has been interrupted. Some files have not been uploaded."
 }

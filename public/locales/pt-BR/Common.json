@@ -864,5 +864,10 @@
   "UseHttp": "Utilizar Http",
   "AmazonSSE": "Criptografia do lado do servidor",
   "AmazonCSE": "Criptografia do lado do cliente",
-  "Path": "Caminho"
+  "Path": "Caminho",
+  "ErrorOperation": "{{operationName}}: Erro",
+  "Processes": "Processos: {{count}}",
+  "ErrorUploadingFiles": "Erro ao carregar arquivos: {{count}}",
+  "SuccessOperation": "{{operationName}}: Concluído",
+  "CancelUpload": "O upload foi interrompido. Alguns arquivos não foram carregados."
 }

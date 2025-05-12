@@ -856,5 +856,10 @@
   "UseHttp": "Sisällettävä Http",
   "AmazonSSE": "Palvelinpuolen salaus",
   "AmazonCSE": "Asiakkaan puolen salaus",
-  "Path": "Polku"
+  "Path": "Polku",
+  "ErrorOperation": "{{operationName}}: Virhe",
+  "Processes": "Prosessit: {{count}}",
+  "ErrorUploadingFiles": "Virhe ladattaessa tiedostoja: {{count}}",
+  "SuccessOperation": "{{operationName}}: Tehty",
+  "CancelUpload": "Lataus on keskeytetty. Joitakin tiedostoja ei ole ladattu."
 }

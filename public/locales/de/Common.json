@@ -864,5 +864,10 @@
   "UseHttp": "HTTP nutzen",
   "AmazonSSE": "Serverseitige Verschlüsselung",
   "AmazonCSE": "Clientseitige Verschlüsselung",
-  "Path": "Pfad"
+  "Path": "Pfad",
+  "ErrorOperation": "{{operationName}}: Fehler",
+  "Processes": "Prozesse: {{count}}",
+  "ErrorUploadingFiles": "Fehler beim Hochladen der Dateien: {{count}}",
+  "SuccessOperation": "{{operationName}}: Erledigt",
+  "CancelUpload": "Das Hochladen wurde unterbrochen. Einige Dateien sind nicht hochgeladen worden."
 }

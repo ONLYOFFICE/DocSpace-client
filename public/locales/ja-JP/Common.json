@@ -864,5 +864,10 @@
   "UseHttp": "Httpを使用します",
   "AmazonSSE": "サーバー側の暗号化",
   "AmazonCSE": "クライアント側の暗号化",
-  "Path": "パス"
+  "Path": "パス",
+  "ErrorOperation": "{{operationName}}: エラー",
+  "Processes": "プロセス: {{count}}",
+  "ErrorUploadingFiles": "ファイルのアップロードエラー: {{count}}",
+  "SuccessOperation": "{{operationName}}：完了",
+  "CancelUpload": "アップロードが中断されました。一部のファイルがアップロードされていません。"
 }

@@ -856,5 +856,10 @@
   "UseHttp": "Użyj Http",
   "AmazonSSE": "Szyfrowanie po stronie serwera",
   "AmazonCSE": "Szyfrowanie po stronie klienta",
-  "Path": "Ścieżka"
+  "Path": "Ścieżka",
+  "ErrorOperation": "{{operationName}}: Błąd",
+  "Processes": "Procesy {{count}}",
+  "ErrorUploadingFiles": "Błąd podczas przesyłania plików: {{count}}",
+  "SuccessOperation": "{{operationName}}: Gotowe",
+  "CancelUpload": "Przesyłanie zostało przerwane. Nie udało się wgrać wszystkich plików."
 }

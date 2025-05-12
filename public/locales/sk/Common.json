@@ -856,5 +856,10 @@
   "UseHttp": "Použiť Http",
   "AmazonSSE": "Šifrovanie na strane servera",
   "AmazonCSE": "Šifrovanie na strane klienta",
-  "Path": "Cesta"
+  "Path": "Cesta",
+  "ErrorOperation": "{{operationName}}: Chyba",
+  "Processes": "Procesy: {{count}}",
+  "ErrorUploadingFiles": "Chyba pri nahrávaní súborov: {{count}}",
+  "SuccessOperation": "{{operationName}}: Hotovo",
+  "CancelUpload": "Sťahovanie bolo prerušené. Niektoré súbory neboli načítane."
 }

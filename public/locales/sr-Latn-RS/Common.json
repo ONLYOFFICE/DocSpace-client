@@ -854,5 +854,10 @@
   "UseHttp": "Koristi Http",
   "AmazonSSE": "Šifrovanje na serveru",
   "AmazonCSE": "Šifrovanje na strani klijenta",
-  "Path": "Putanja"
+  "Path": "Putanja",
+  "ErrorOperation": "{{operationName}}: Greška",
+  "Processes": "Procesi: {{count}}",
+  "ErrorUploadingFiles": "Greška pri otpremanju fajlova: {{count}}",
+  "SuccessOperation": "{{operationName}}: Završeno",
+  "CancelUpload": "Otpremanje je prekinuto. Neke datoteke nisu otpremljene."
 }

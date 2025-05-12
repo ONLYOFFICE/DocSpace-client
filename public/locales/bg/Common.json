@@ -856,5 +856,10 @@
   "UseHttp": "Използвайте Http",
   "AmazonSSE": "Криптиране от страната на сървъра",
   "AmazonCSE": "Криптиране от страна на клиента",
-  "Path": "Път"
+  "Path": "Път",
+  "ErrorOperation": "{{operationName}}: Грешка",
+  "Processes": "Процеси: {{count}}",
+  "ErrorUploadingFiles": "Грешка при качване на файлове: {{count}}",
+  "SuccessOperation": "{{operationName}}: Готово",
+  "CancelUpload": "Качването беше прекъснато. Някои файлове не са качени."
 }

@@ -856,5 +856,10 @@
   "UseHttp": "Http kullan",
   "AmazonSSE": "Sunucu Taraflı Şifreleme",
   "AmazonCSE": "İstemci Tarafında Şifreleme",
-  "Path": "Yol"
+  "Path": "Yol",
+  "ErrorOperation": "{{operationName}}: Hata",
+  "Processes": "İşlemler: {{count}}",
+  "ErrorUploadingFiles": "Dosyalar yüklenirken hata oluştu: {{count}}",
+  "SuccessOperation": "{{operationName}}: Tamamlandı",
+  "CancelUpload": "Yükleme kesintiye uğradı. Bazı dosyalar yüklenmedi."
 }

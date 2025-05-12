@@ -864,5 +864,10 @@
   "UseHttp": "Utilice Http",
   "AmazonSSE": "Cifrado del lado del servidor",
   "AmazonCSE": "Cifrado del lado del cliente",
-  "Path": "Ruta"
+  "Path": "Ruta",
+  "ErrorOperation": "{{operationName}}: Error",
+  "Processes": "Procesos: {{count}}",
+  "ErrorUploadingFiles": "Error al subir archivos: {{count}}",
+  "SuccessOperation": "{{operationName}}: Hecho",
+  "CancelUpload": "La carga se ha interrumpido. Algunos archivos no se han cargado."
 }

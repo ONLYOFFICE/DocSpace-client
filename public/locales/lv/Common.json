@@ -856,5 +856,10 @@
   "UseHttp": "Izmantojiet Http",
   "AmazonSSE": "Servera puses šifrēšana",
   "AmazonCSE": "Klienta puses šifrēšana",
-  "Path": "Ceļš"
+  "Path": "Ceļš",
+  "ErrorOperation": "{{operationName}}: Kļūda",
+  "Processes": "Procesi: {{count}}",
+  "ErrorUploadingFiles": "Kļūda, augšupielādējot failus: {{count}}",
+  "SuccessOperation": "{{operationName}}: Pabeigts",
+  "CancelUpload": "Augšupielāde ir pārtraukta. Daži faili nav augšupielādēti."
 }

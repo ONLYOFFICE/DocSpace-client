@@ -864,5 +864,10 @@
   "UseHttp": "Utilizare Http",
   "AmazonSSE": "Criptarea pe partea de server",
   "AmazonCSE": "Criptare executată la client",
-  "Path": "Cale"
+  "Path": "Cale",
+  "ErrorOperation": "{{operationName}}: Eroare",
+  "Processes": "Procese: {{count}}",
+  "ErrorUploadingFiles": "Eroare la încărcarea fișierelor: {{count}}",
+  "SuccessOperation": "{{operationName}}: Gata",
+  "CancelUpload": "Încărcarea a fost întreruptă. Unele fișiere nu au fost încărcate."
 }

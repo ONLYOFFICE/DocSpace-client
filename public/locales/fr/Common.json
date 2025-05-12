@@ -854,5 +854,10 @@
   "UseHttp": "Utiliser Http",
   "AmazonSSE": "Chiffrement côté serveur",
   "AmazonCSE": "Chiffrement côté client",
-  "Path": "Chemin"
+  "Path": "Chemin",
+  "ErrorOperation": "{{operationName}} : Erreur",
+  "Processes": "Processus : {{count}}",
+  "ErrorUploadingFiles": "Erreur de téléchargement des fichiers : {{count}}",
+  "SuccessOperation": "{{operationName}} : Terminé",
+  "CancelUpload": "Le téléchargement a été interrompu. Certains fichiers n’ont pas été téléchargés."
 }

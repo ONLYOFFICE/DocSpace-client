@@ -846,5 +846,10 @@
   "UseHttp": "Використовувати Http",
   "AmazonSSE": "Шифрування на стороні сервера",
   "AmazonCSE": "Шифрування на стороні клієнта",
-  "Path": "Шлях"
+  "Path": "Шлях",
+  "ErrorOperation": "{{operationName}}: помилка",
+  "Processes": "Процеси: {{count}}",
+  "ErrorUploadingFiles": "Помилка передавання файлів: {{count}}",
+  "SuccessOperation": "{{operationName}}: готово",
+  "CancelUpload": "Передавання перервано. Деякі файли не передано."
 }

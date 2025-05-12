@@ -854,5 +854,10 @@
   "UseHttp": "Http 사용",
   "AmazonSSE": "서버측 암호화",
   "AmazonCSE": "클라이언트측 암호화",
-  "Path": "경로"
+  "Path": "경로",
+  "ErrorOperation": "{{operationName}}: 오류",
+  "Processes": "프로세스: {{count}}",
+  "ErrorUploadingFiles": "파일 업로드 오류: {{count}}",
+  "SuccessOperation": "{{operationName}}: 완료",
+  "CancelUpload": "업로드가 중단되었습니다. 일부 파일이 업로드되지 않았습니다."
 }

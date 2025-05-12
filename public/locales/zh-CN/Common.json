@@ -864,5 +864,10 @@
   "UseHttp": "使用Http",
   "AmazonSSE": "服务器端加密",
   "AmazonCSE": "客户端加密",
-  "Path": "路径"
+  "Path": "路径",
+  "ErrorOperation": "{{operationName}}：出错",
+  "Processes": "进程：{{count}}",
+  "ErrorUploadingFiles": "上传文件时出错：{{count}}",
+  "SuccessOperation": "{{operationName}}：完成",
+  "CancelUpload": "上传已中断。一些文件未上传成功。"
 }

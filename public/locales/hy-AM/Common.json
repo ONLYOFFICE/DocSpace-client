@@ -864,5 +864,10 @@
   "UseHttp": "Օգտագործել Http",
   "AmazonSSE": "Սերվերի կողմից գաղտնագրում",
   "AmazonCSE": "Հաճախորդի կողմից գաղտնագրում",
-  "Path": "Ուղի"
+  "Path": "Ուղի",
+  "ErrorOperation": "{{operationName}}: սխալ",
+  "Processes": "Գործընթացներ՝ {{count}}",
+  "ErrorUploadingFiles": "Սխալ ֆայլեր վերբեռնելիս՝ {{count}}",
+  "SuccessOperation": "{{operationName}}՝ արված է",
+  "CancelUpload": "Վերբեռնումն ընդհատվել է: Որոշ ֆայլեր չեն վերբեռնվել:"
 }

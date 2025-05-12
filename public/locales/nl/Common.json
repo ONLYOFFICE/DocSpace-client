@@ -856,5 +856,10 @@
   "UseHttp": "Gebruik Http",
   "AmazonSSE": "Versleuteling aan de serverzijde",
   "AmazonCSE": "Versleuteling aan de klantzijde",
-  "Path": "Pad"
+  "Path": "Pad",
+  "ErrorOperation": "{{operationName}}: Fout",
+  "Processes": "Processen: {{count}}",
+  "ErrorUploadingFiles": "Fout bij het uploaden van bestanden: {{count}}",
+  "SuccessOperation": "{{operationName}}: Gereed",
+  "CancelUpload": "De upload is onderbroken. Sommige bestanden zijn niet geüpload."
 }

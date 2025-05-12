@@ -856,5 +856,10 @@
   "UseHttp": "Χρήση Http",
   "AmazonSSE": "Κρυπτογράφηση από την πλευρά του διακομιστή",
   "AmazonCSE": "Κρυπτογράφηση από την πλευρά του πελάτη",
-  "Path": "Μονοπάτι"
+  "Path": "Μονοπάτι",
+  "ErrorOperation": "{{operationName}}: Σφάλμα",
+  "Processes": "Διαδικασίες: {{count}}",
+  "ErrorUploadingFiles": "Σφάλμα μεταφόρτωσης αρχείων: {{count}}",
+  "SuccessOperation": "{{operationName}}: Τέλος",
+  "CancelUpload": "Η μεταφόρτωση έχει διακοπεί. Ορισμένα αρχεία δεν έχουν μεταφορτωθεί."
 }

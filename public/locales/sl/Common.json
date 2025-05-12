@@ -856,5 +856,10 @@
   "UseHttp": "Uporabi Http",
   "AmazonSSE": "Šifriranje na strani strežnika",
   "AmazonCSE": "Šifriranje na strani odjemalca",
-  "Path": "Pot"
+  "Path": "Pot",
+  "ErrorOperation": "{{operationName}}: Napaka",
+  "Processes": "Procesi: {{count}}",
+  "ErrorUploadingFiles": "Napaka pri nalaganju datotek: {{count}}",
+  "SuccessOperation": "{{operationName}}: Končano",
+  "CancelUpload": "Nalaganje je bilo prekinjeno. Nekatere datoteke niso bile naložene."
 }

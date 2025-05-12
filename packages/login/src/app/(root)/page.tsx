@@ -43,11 +43,12 @@ import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { cookies } from "next/headers";
 
-async function Page({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string };
-}) {
+async function Page(
+  props: {
+    searchParams: Promise<{ [key: string]: string }>;
+  }
+) {
+  const searchParams = await props.searchParams;
   const clientId = searchParams.client_id;
 
   const [settings, thirdParty, capabilities, ssoSettings, oauthData] =
@@ -79,7 +80,7 @@ async function Page({
   const settingsCulture =
     typeof settings === "string" ? undefined : settings?.culture;
 
-  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
+  const culture = (await cookies()).get(LANGUAGE)?.value ?? settingsCulture;
 
   return (
     <>

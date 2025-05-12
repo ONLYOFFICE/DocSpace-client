@@ -52,7 +52,7 @@ export const GreetingLoginContainer = ({
 
   const logoUrl = getLogoUrl(
     WhiteLabelLogoType.LoginPage,
-    !theme.isBase,
+    !theme?.isBase,
     false,
     culture,
   );

@@ -40,7 +40,7 @@ import { TYPE_LINK_WITHOUT_LNG_COMBOBOX } from "@/utils/constants";
 const LanguageComboboxWrapper = dynamic(
   () => import("@/components/LanguageCombobox"),
   {
-    ssr: false,
+    ssr: !!false,
   },
 );
 
@@ -59,9 +59,9 @@ export default async function Layout({
   const objectSettings = typeof settings === "string" ? undefined : settings;
 
   const culture =
-    cookies().get("asc_language")?.value ?? objectSettings?.culture;
+    (await cookies()).get("asc_language")?.value ?? objectSettings?.culture;
 
-  const hdrs = headers();
+  const hdrs = await headers();
   const type = hdrs.get("x-confirm-type") ?? "";
 
   let isComboboxVisible = true;

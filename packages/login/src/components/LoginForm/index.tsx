@@ -85,7 +85,7 @@ const LoginForm = ({
 }: LoginFormProps) => {
   const { isLoading, isModalOpen } = useContext(LoginValueContext);
   const { setIsLoading } = useContext(LoginDispatchContext);
-  const toastId = useRef<Id>();
+  const toastId = useRef<Id>(undefined);
   const authToastId = useRef<Id>("");
 
   const searchParams = useSearchParams();

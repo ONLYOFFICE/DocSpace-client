@@ -77,7 +77,7 @@ const SimpleNav = ({
 }: SimpleNavProps) => {
   const theme = useTheme();
 
-  const isDark = !theme.isBase;
+  const isDark = !theme?.isBase;
 
   const logoUrl = getLogoUrl(
     WhiteLabelLogoType.LightSmall,

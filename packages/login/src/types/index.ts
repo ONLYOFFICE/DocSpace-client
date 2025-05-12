@@ -73,12 +73,12 @@ export type TCulturesOption =
       isBeta?: boolean;
       key: string | number;
       label: string;
-      icon?: string | React.ReactElement;
+      icon?: string | React.ReactElement<any>;
     }
   | {
       isBeta?: boolean;
       key: string | number;
-      icon?: string | React.ReactElement;
+      icon?: string | React.ReactElement<any>;
     };
 
 export type TDataContext = {

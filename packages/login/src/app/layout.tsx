@@ -48,7 +48,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const hdrs = headers();
+  const hdrs = await headers();
   const type = hdrs.get("x-confirm-type") ?? "";
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
@@ -56,7 +56,7 @@ export default async function RootLayout({
     return <></>;
   }
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY);
   const cookieLng = cookieStore.get(LANGUAGE);

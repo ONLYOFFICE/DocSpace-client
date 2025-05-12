@@ -58,7 +58,6 @@ import { TData } from "@docspace/shared/components/toast/Toast.type";
 import {
   TBalance,
   TCustomerInfo,
-  TTransactionHistory,
   TAutoTopUpSettings,
   TPaymentFeature,
   TNumericPaymentFeature,
@@ -123,9 +122,9 @@ class PaymentStore {
     email: null,
   };
 
-  balance: TBalance = {
-    subAccounts: [{ currency: "USD", amount: 0.0 }],
-  };
+  balance: TBalance = 0;
+
+  previousBalance: TBalance = 0;
 
   cardLinked = "";
 
@@ -137,6 +136,12 @@ class PaymentStore {
 
   autoPayments: TAutoTopUpSettings | null = null;
 
+  minBalance: string = "";
+
+  upToBalance: string = "";
+
+  isAutomaticPaymentsEnabled: boolean = false;
+
   servicesQuotasFeatures: Map<string, TPaymentFeature> = new Map();
 
   servicesQuotas: TPaymentQuota | null = null;
@@ -144,6 +149,12 @@ class PaymentStore {
   isInitServicesPage = false;
 
   isVisibleWalletSettings = false;
+
+  upToBalanceError = false;
+
+  minBalanceError = false;
+
+  // wasFirstTopUp = false;
 
   constructor(
     userStore: UserStore,
@@ -168,6 +179,26 @@ class PaymentStore {
 
   setIsInitPaymentPage = (value: boolean) => {
     this.isInitPaymentPage = value;
+  };
+
+  setMinBalance = (value: string) => {
+    this.minBalance = value;
+  };
+
+  setUpToBalance = (value: string) => {
+    this.upToBalance = value;
+  };
+
+  setUpToBalanceError = (value: boolean) => {
+    this.upToBalanceError = value;
+  };
+
+  setMinBalanceError = (value: boolean) => {
+    this.minBalanceError = value;
+  };
+
+  setIsAutomaticPaymentsEnabled = (value: boolean) => {
+    this.isAutomaticPaymentsEnabled = value;
   };
 
   setIsUpdatingBasicSettings = (isUpdatingBasicSettings: boolean) => {
@@ -201,8 +232,8 @@ class PaymentStore {
     this.setIsUpdatingBasicSettings(false);
   };
 
-  setIsInitWalletPage = (isInitWalletPage: boolean) => {
-    this.isInitWalletPage = isInitWalletPage;
+  setIsInitWalletPage = (value: boolean) => {
+    this.isInitWalletPage = value;
   };
 
   get walletCustomerEmail() {
@@ -219,6 +250,24 @@ class PaymentStore {
     return "USD";
   }
 
+  get walletBalance() {
+    if (this.balance) return this.balance?.subAccounts[0].amount;
+
+    return 0.0;
+  }
+
+  get wasFirstTopUp() {
+    return typeof this.balance !== "number";
+  }
+
+  get wasChangeBalance() {
+    return (
+      this.previousBalance === 0 &&
+      typeof this.balance !== "number" &&
+      this.balance.subAccounts.length > 0
+    );
+  }
+
   get cardLinkedOnFreeTariff() {
     if (!this.currentQuotaStore || !this.currentTariffStatusStore) return;
 
@@ -231,11 +280,9 @@ class PaymentStore {
     );
   }
 
-  get walletBalance() {
-    if (this.balance) return this.balance?.subAccounts[0].amount;
-
-    return 0.0;
-  }
+  updatePreviousBalance = () => {
+    this.previousBalance = this.balance;
+  };
 
   fetchBalance = async (isRefresh?: boolean) => {
     const res = await getBalance(isRefresh);
@@ -282,6 +329,12 @@ class PaymentStore {
     if (!res) return;
 
     this.autoPayments = res;
+    this.isAutomaticPaymentsEnabled = res.enabled;
+
+    if (res.enabled) {
+      this.setMinBalance(res.minBalance.toString());
+      this.setUpToBalance(res.upToBalance.toString());
+    }
   };
 
   fetchWalletPayer = async (isRefresh?: boolean) => {
@@ -300,22 +353,23 @@ class PaymentStore {
     this.cardLinked = res;
   };
 
-  updateAutoPayments = async (
-    enabled: boolean,
-    minBalance: number,
-    upToBalance: number,
-    currency: string,
-  ) => {
-    const res = (await updateAutoTopUpSettings(
-      enabled,
-      minBalance,
-      upToBalance,
-      currency || "",
-    )) as TAutoTopUpSettings;
+  updateAutoPayments = async () => {
+    try {
+      const res = await updateAutoTopUpSettings(
+        this.isAutomaticPaymentsEnabled,
+        +this.minBalance,
+        +this.upToBalance,
+        this.walletCodeCurrency || "",
+      );
 
-    if (!res) return;
+      if (!res) {
+        throw new Error();
+      }
 
-    this.autoPayments = res;
+      this.autoPayments = res as TAutoTopUpSettings;
+    } catch (error) {
+      toastr.error(error as string);
+    }
   };
 
   get storageQuotaIncrement() {
@@ -395,6 +449,8 @@ class PaymentStore {
         this.fetchWalletPayer(isRefresh),
         this.fetchBalance(isRefresh),
       ]);
+
+      this.previousBalance = this.balance;
 
       if (this.payer && !payerInfo) await setPayerInfo(this.payer);
 

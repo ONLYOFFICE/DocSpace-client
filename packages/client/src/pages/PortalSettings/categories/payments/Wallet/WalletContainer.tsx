@@ -33,6 +33,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 
 import TransactionHistory from "./TransactionHistory";
 import TopUpModal from "./TopUpModal";
+import WalletRefilledModal from "./WalletRefilledModal";
 import { formattedBalanceTokens } from "./utils";
 
 import "./styles/Wallet.scss";
@@ -49,6 +50,7 @@ type WalletProps = {
   isFreeTariff: boolean;
   isNonProfit: boolean;
   isVisibleWalletSettings: boolean;
+  wasChangeBalance?: boolean;
 };
 
 const typeClassMap: Record<string, string> = {
@@ -70,6 +72,7 @@ const Wallet = (props: WalletProps) => {
     isFreeTariff,
     isNonProfit,
     isVisibleWalletSettings,
+    wasChangeBalance,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
@@ -145,6 +148,9 @@ const Wallet = (props: WalletProps) => {
         />
       ) : null}
 
+      {wasChangeBalance ? (
+        <WalletRefilledModal visible={wasChangeBalance} />
+      ) : null}
       <TransactionHistory />
     </div>
   );
@@ -160,6 +166,8 @@ export default inject(
       walletCodeCurrency,
       isPayer,
       isVisibleWalletSettings,
+      wasChangeBalance,
+
     } = paymentStore;
     const { isFreeTariff, isNonProfit } = currentQuotaStore;
 
@@ -173,6 +181,8 @@ export default inject(
       isFreeTariff,
       isNonProfit,
       isVisibleWalletSettings,
+      wasChangeBalance,
+
     };
   },
 )(observer(Wallet));

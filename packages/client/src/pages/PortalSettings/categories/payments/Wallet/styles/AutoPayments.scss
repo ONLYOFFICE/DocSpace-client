@@ -27,15 +27,16 @@
 .automatic-payments-block {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
   margin-top: 20px;
 
   .auto-payment-header {
     display: flex;
     align-items: center;
-    margin-bottom: 8px;
+
     .toggle-button {
-      margin-inline: auto 28px;
+      position: static;
+      margin-inline: auto 0px;
     }
   }
 

@@ -72,6 +72,7 @@ type TopUpModalProps = {
     onCloseClick: () => void;
   };
   walletBalance?: number;
+  wasFirstTopUp?: boolean;
 };
 
 const TopUpModal = (props: TopUpModalProps) => {
@@ -88,6 +89,7 @@ const TopUpModal = (props: TopUpModalProps) => {
     isEditAutoPayment,
     headerProps,
     walletBalance = 0,
+    wasFirstTopUp,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
@@ -149,7 +151,7 @@ const TopUpModal = (props: TopUpModalProps) => {
             walletCustomerEmail={walletCustomerEmail}
           />
 
-          {walletCustomerEmail ? (
+          {wasFirstTopUp && walletCustomerEmail ? (
             <AutomaticPaymentsBlock
               walletCustomerEmail={walletCustomerEmail!}
               currency={currency}
@@ -192,6 +194,7 @@ export default inject(({ paymentStore, authStore }: TStore) => {
     accountLink,
     walletBalance,
     walletCodeCurrency,
+    wasFirstTopUp,
   } = paymentStore;
 
   return {
@@ -203,5 +206,6 @@ export default inject(({ paymentStore, authStore }: TStore) => {
     cardLinked,
     accountLink,
     walletBalance,
+    wasFirstTopUp,
   };
 })(observer(TopUpModal));

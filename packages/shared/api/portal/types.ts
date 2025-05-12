@@ -150,7 +150,7 @@ export type TBalance =
       accountNumber?: number;
       subAccounts: [{ currency: string; amount: number }];
     }
-  | undefined;
+  | 0;
 
 export type TTransactionCollection = {
   date: string;

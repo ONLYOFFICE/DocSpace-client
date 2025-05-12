@@ -30,11 +30,10 @@ import { inject, observer } from "mobx-react";
 
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Text } from "@docspace/shared/components/text";
-import { TextInput, InputType } from "@docspace/shared/components/text-input";
 import { toastr } from "@docspace/shared/components/toast";
+import { TextInput, InputType } from "@docspace/shared/components/text-input";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { TAutoTopUpSettings } from "@docspace/shared/api/portal/types";
-
 import CheckRoundSvg from "PUBLIC_DIR/images/icons/16/check.round.react.svg";
 
 import "../styles/AutoPayments.scss";
@@ -43,20 +42,24 @@ import { formatCurrencyValue } from "../utils";
 type AutoPaymentsProps = {
   walletCustomerEmail: boolean;
   currency: string;
-  isAutoPaymentExist?: boolean;
-  updateAutoPayments?: (
-    enabled: boolean,
-    minBalance: number,
-    upToBalance: number,
-    currency: string,
-  ) => Promise<void>;
-  autoPayments?: TAutoTopUpSettings | null;
+  updateAutoPayments: () => Promise<void>;
+  autoPayments: TAutoTopUpSettings | null | undefined;
+  isAutoPaymentExist: boolean;
+
   language: string;
+
+  setMinBalance: (value: string) => void;
+  setUpToBalance: (value: string) => void;
+  isAutomaticPaymentsEnabled: boolean;
+  setIsAutomaticPaymentsEnabled: (value: boolean) => void;
+  minBalance: string;
+  upToBalance: string;
+  onAdditionalSave?: () => void;
   isEditAutoPayment?: boolean;
 };
 
 type CurrentPaymentSettingsProps = {
-  autoPayments: TAutoTopUpSettings | null | undefined;
+  autoPayments: TAutoTopUpSettings;
   language: string;
   currency: string;
 };
@@ -67,8 +70,6 @@ const CurrentPaymentSettings = ({
   currency,
 }: CurrentPaymentSettingsProps) => {
   const { t } = useTranslation("Payments");
-
-  if (!autoPayments) return;
 
   const { minBalance, upToBalance } = autoPayments!;
 
@@ -90,31 +91,31 @@ const CurrentPaymentSettings = ({
   );
 };
 
-const AutoPayments = (props: AutoPaymentsProps) => {
-  const {
-    walletCustomerEmail,
-    isAutoPaymentExist,
-    autoPayments,
-    updateAutoPayments,
-    language,
-    currency,
-    isEditAutoPayment,
-  } = props;
+const AutoPayments = ({
+  walletCustomerEmail,
+  currency,
+  updateAutoPayments,
+  autoPayments,
+  isAutoPaymentExist,
 
+  language,
+  isEditAutoPayment,
+  setMinBalance,
+  setUpToBalance,
+  isAutomaticPaymentsEnabled,
+  setIsAutomaticPaymentsEnabled,
+  minBalance,
+  upToBalance,
+  onAdditionalSave,
+  setMinBalanceError,
+  minBalanceError,
+  setUpToBalanceError,
+  upToBalanceError,
+}: AutoPaymentsProps) => {
   const { t } = useTranslation(["Payments", "Common"]);
 
   const showCurrentSettings = isAutoPaymentExist && !isEditAutoPayment;
 
-  const [isAutomaticPaymentsEnabled, setIsAutomaticPaymentsEnabled] =
-    useState(isAutoPaymentExist);
-  const [minBalance, setMinBalance] = useState(
-    isAutoPaymentExist ? autoPayments?.minBalance.toString() : "",
-  );
-  const [upToBalance, setUpToBalance] = useState(
-    isAutoPaymentExist ? autoPayments?.upToBalance.toString() : "",
-  );
-  const [minBalanceError, setMinBalanceError] = useState(false);
-  const [upToBalanceError, setUpToBalanceError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isCurrentSettings, setIsCurrentSettings] =
     useState(showCurrentSettings);
@@ -174,18 +175,9 @@ const AutoPayments = (props: AutoPaymentsProps) => {
     }, 200);
 
     try {
-      await updateAutoPayments!(
-        isEnable,
-        +minBalance!,
-        +upToBalance!,
-        currency,
-      );
-
+      await updateAutoPayments!();
       setIsCurrentSettings(isEnable);
-      if (!isEnable) {
-        setMinBalance("");
-        setUpToBalance("");
-      }
+      setIsLoading(false);
       setAnimateSettings(false);
       setTimeout(() => {
         setAnimateSettings(true);
@@ -238,8 +230,8 @@ const AutoPayments = (props: AutoPaymentsProps) => {
       fontWeight={400}
     >
       {t("EnterAnIntegerAmountBetween", {
-        min: formatCurrencyValue(language!, min, currency),
-        max: formatCurrencyValue(language!, max, currency),
+        min: formatCurrencyValue(language, min, currency),
+        max: formatCurrencyValue(language, max, currency),
       })}
     </Text>
   );
@@ -275,26 +267,28 @@ const AutoPayments = (props: AutoPaymentsProps) => {
         />
         {description(minUpToBalance, 5000)}
       </div>
-      <div className="input-buttons">
-        <Button
-          key="OkButton"
-          label={t("Common:SaveButton")}
-          size={ButtonSize.small}
-          primary
-          onClick={onSaveAutoPayment}
-          isLoading={isLoading}
-          isDisabled={
-            minBalanceError || upToBalanceError || !minBalance || !upToBalance
-          }
-        />
-        <Button
-          key="CancelButton"
-          label={t("Common:CancelButton")}
-          size={ButtonSize.small}
-          onClick={onClose}
-          isDisabled={isLoading}
-        />
-      </div>
+      {!onAdditionalSave ? (
+        <div className="input-buttons">
+          <Button
+            key="OkButton"
+            label={t("Common:SaveButton")}
+            size={ButtonSize.small}
+            primary
+            onClick={onSaveAutoPayment}
+            isLoading={isLoading}
+            isDisabled={
+              minBalanceError || upToBalanceError || !minBalance || !upToBalance
+            }
+          />
+          <Button
+            key="CancelButton"
+            label={t("Common:CancelButton")}
+            size={ButtonSize.small}
+            onClick={onClose}
+            isDisabled={isLoading}
+          />
+        </div>
+      ) : null}
     </div>
   );
 
@@ -303,8 +297,8 @@ const AutoPayments = (props: AutoPaymentsProps) => {
       className={`settings-wrapper ${animateSettings ? "animated" : ""} ${isFirstRender.current ? "showBlock" : ""}`}
     >
       <CurrentPaymentSettings
-        autoPayments={autoPayments}
-        language={language!}
+        autoPayments={autoPayments!}
+        language={language}
         currency={currency}
       />
       <Button
@@ -343,18 +337,42 @@ const AutoPayments = (props: AutoPaymentsProps) => {
   );
 };
 
-export default inject(({ paymentStore }: TStore) => {
+export default inject(({ paymentStore, authStore }: TStore) => {
   const {
     walletCustomerEmail,
     updateAutoPayments,
     autoPayments,
     isAutoPaymentExist,
+    setMinBalance,
+    setUpToBalance,
+    isAutomaticPaymentsEnabled,
+    setIsAutomaticPaymentsEnabled,
+    minBalance,
+    upToBalance,
+    walletCodeCurrency,
+    setMinBalanceError,
+    minBalanceError,
+    setUpToBalanceError,
+    upToBalanceError,
   } = paymentStore;
+  const { language } = authStore;
 
   return {
     walletCustomerEmail,
-    isAutoPaymentExist,
     updateAutoPayments,
     autoPayments,
+    isAutoPaymentExist,
+    currency: walletCodeCurrency,
+    language,
+    setMinBalance,
+    setUpToBalance,
+    isAutomaticPaymentsEnabled,
+    setIsAutomaticPaymentsEnabled,
+    minBalance,
+    upToBalance,
+    setMinBalanceError,
+    minBalanceError,
+    setUpToBalanceError,
+    upToBalanceError,
   };
 })(observer(AutoPayments));

@@ -34,7 +34,7 @@ import { Text } from "@docspace/shared/components/text";
 
 import WalletReactSvgUrl from "PUBLIC_DIR/images/icons/16/wallet.react.svg?url";
 
-import "../styles/WalletInfo.scss";
+import styles from "../styles/WalletInfo.module.scss";
 
 type WalletInfoProps = {
   balance?: string;
@@ -46,15 +46,19 @@ const WalletInfo = (props: WalletInfoProps) => {
   const { t } = useTranslation(["Payments", "Common"]);
 
   return (
-    <div className="wallet-info-container">
-      <div className="wallet-info-icon">
+    <div className={styles.walletInfoContainer}>
+      <div className={styles.walletInfoIcon}>
         <ReactSVG src={WalletReactSvgUrl} />
       </div>
-      <div className="wallet-info-body">
-        <Text className="wallet-info-title" fontWeight="600" fontSize="14px">
+      <div className={styles.walletInfoBody}>
+        <Text
+          className={styles.walletInfoTitle}
+          fontWeight="600"
+          fontSize="14px"
+        >
           {t("ProductNameWallet", { productName: t("Common:ProductName") })}
         </Text>
-        <div className="wallet-info-balance">
+        <div className={styles.walletInfoBalance}>
           <Trans
             t={t}
             i18nKey="Balance"
@@ -70,7 +74,7 @@ const WalletInfo = (props: WalletInfoProps) => {
       </div>
       {onTopUp ? (
         <ColorTheme
-          className="wallet-info-top-up"
+          className={styles.walletInfoTopUp}
           themeId={ThemeId.Link}
           fontSize="13px"
           fontWeight="600"

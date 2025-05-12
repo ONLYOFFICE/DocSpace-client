@@ -34,7 +34,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 
 import { formatCurrencyValue } from "../utils";
-import "../styles/Amount.scss";
+import styles from "../styles/Amount.module.scss";
 
 type AmountProps = {
   setAmount: (amount: string) => void;
@@ -114,10 +114,14 @@ const Amount = (props: AmountProps) => {
   };
 
   return (
-    <div className="amount-container">
+    <div className={styles.amountContainer}>
       <div data-tooltip-id="iconTooltip">
-        <div className="tabs-wrapper">
-          <Text fontWeight="700" fontSize="16px" className="amount-title-main">
+        <div className={styles.tabsWrapper}>
+          <Text
+            fontWeight="700"
+            fontSize="16px"
+            className={styles.amountTitleMain}
+          >
             {t("AmountSelection")}
           </Text>
           <Tabs
@@ -129,7 +133,7 @@ const Amount = (props: AmountProps) => {
             withoutStickyIntend
           />
         </div>
-        <Text fontWeight={600} className="amount-title ">
+        <Text fontWeight={600} className={styles.amountTitle}>
           {t("Amount")}
         </Text>
         <TextInput

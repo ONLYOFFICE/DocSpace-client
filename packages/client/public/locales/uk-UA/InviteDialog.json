@@ -9,7 +9,6 @@
   "InviteViaLink": "Запросити за допомогою посилання",
   "InviteViaLinkDescriptionAccounts": "Створити універсальне посилання для самоавторизації в {{productName}}",
   "LinkCopySuccess": "Посилання скопійовано",
-  "ResetChange": "Скинути зміни",
   "SendInvitation": "Надіслати запрошення",
   "UserMaxAvailableRoleWarning": "Гості та користувачі не можуть бути призначені менеджерами кімнат. Лише адміністратори кімнати та {{productName}} підходять для цієї ролі.",
   "UsersAlreadyAdded": "Деяких користувачів уже додано"

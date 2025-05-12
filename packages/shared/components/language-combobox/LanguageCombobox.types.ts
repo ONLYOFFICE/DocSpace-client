@@ -26,7 +26,7 @@
 
 export type TCulture = {
   key: string;
-  icon: string;
+  icon: string | React.ReactElement;
   label?: string;
   index?: number;
 };

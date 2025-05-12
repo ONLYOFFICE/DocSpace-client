@@ -24,85 +24,84 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-.automatic-payments-block {
+.automaticPaymentsBlock {
   display: flex;
   flex-direction: column;
   gap: 8px;
   margin-top: 20px;
 
-  .auto-payment-header {
+  &.noMargin {
+    margin-top: 0;
+  }
+
+  .autoPaymentHeader {
     display: flex;
     align-items: center;
 
-    .toggle-button {
+    .toggleButton {
       position: static;
       margin-inline: auto 0px;
     }
   }
 
-  .auto-payment-description {
-    max-width: 420px;
-    margin-inline-end: 28px;
-
+  .autoPaymentDescription {
     text-align: left;
-
     color: var(--payment-dialog-text);
   }
 
-  .input-fields {
+  .inputFields {
     display: flex;
     flex-direction: column;
     gap: 12px;
     margin-top: 16px;
-    margin-inline-end: 28px;
   }
 
-  .input-field {
+  .inputField {
     flex: 1;
   }
 
-  .input-label {
+  .inputLabel {
     margin-bottom: 4px;
   }
 
-  .input-description {
+  .inputDescription {
     margin-top: 4px;
     color: var(--payment-dialog-text);
   }
 
-  .info-block {
+  .infoBlock {
     background: var(--payment-background-color);
     border-radius: 6px;
     padding: 12px 16px;
     display: flex;
     flex-direction: column;
     gap: 4px;
-    margin: 16px 0;
+    margin-bottom: 16px;
 
-    .info-block-title {
+    .infoBlockTitle {
       display: flex;
       align-items: center;
       gap: 8px;
 
-      .check-icon {
+      .checkIcon {
         width: 16px;
         height: 16px;
         color: var(--payment-credit-color);
       }
     }
 
-    .info-description {
+    .infoDescription {
       color: var(--payment-text-color);
       text-align: left;
     }
   }
 
-  .input-buttons {
+  .inputButtons {
     display: flex;
     gap: 8px;
   }
 
-  .settings-container {
+  .settingsContainer {
     transition:
       opacity 0.5s ease-in-out,
       transform 0.5s ease-in-out;
@@ -115,7 +114,7 @@
     }
   }
 
-  .settings-wrapper {
+  .settingsWrapper {
     opacity: 0;
     transform: translateY(10px);
 

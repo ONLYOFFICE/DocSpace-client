@@ -27,7 +27,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
 
 import {
   ModalDialog,
@@ -44,15 +43,7 @@ import PaymentMethod from "./sub-components/PaymentMethod";
 import Amount from "./sub-components/Amount";
 import AutomaticPaymentsBlock from "./sub-components/AutoPayments";
 import { formatCurrencyValue } from "./utils";
-
-const StyledBody = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 480px;
-  margin: 20px auto 0 auto;
-  padding: 0 0 24px;
-`;
+import styles from "./styles/TopUpModal.module.scss";
 
 type TopUpModalProps = {
   visible: boolean;
@@ -136,7 +127,7 @@ const TopUpModal = (props: TopUpModalProps) => {
     >
       <ModalDialog.Header>{t("TopUpWallet")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledBody>
+        <div className={styles.modalBody}>
           <WalletInfo balance={balanceValue} />
           <PaymentMethod
             walletCustomerEmail={walletCustomerEmail!}
@@ -152,14 +143,9 @@ const TopUpModal = (props: TopUpModalProps) => {
           />
 
           {wasFirstTopUp && walletCustomerEmail ? (
-            <AutomaticPaymentsBlock
-              walletCustomerEmail={walletCustomerEmail!}
-              currency={currency}
-              isEditAutoPayment={isEditAutoPayment!}
-              language={language!}
-            />
+            <AutomaticPaymentsBlock isEditAutoPayment={isEditAutoPayment!} />
           ) : null}
-        </StyledBody>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

@@ -27,6 +27,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import classNames from "classnames";
 
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Text } from "@docspace/shared/components/text";
@@ -36,26 +37,29 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { TAutoTopUpSettings } from "@docspace/shared/api/portal/types";
 import CheckRoundSvg from "PUBLIC_DIR/images/icons/16/check.round.react.svg";
 
-import "../styles/AutoPayments.scss";
+import styles from "../styles/AutoPayments.module.scss";
 import { formatCurrencyValue } from "../utils";
 
 type AutoPaymentsProps = {
-  walletCustomerEmail: boolean;
-  currency: string;
-  updateAutoPayments: () => Promise<void>;
-  autoPayments: TAutoTopUpSettings | null | undefined;
-  isAutoPaymentExist: boolean;
-
-  language: string;
-
-  setMinBalance: (value: string) => void;
-  setUpToBalance: (value: string) => void;
-  isAutomaticPaymentsEnabled: boolean;
-  setIsAutomaticPaymentsEnabled: (value: boolean) => void;
-  minBalance: string;
-  upToBalance: string;
   onAdditionalSave?: () => void;
+  noMargin?: boolean;
+  walletCustomerEmail?: boolean;
+  currency?: string;
+  updateAutoPayments?: () => Promise<void>;
+  autoPayments?: TAutoTopUpSettings | null | undefined;
+  isAutoPaymentExist?: boolean;
+  language?: string;
+  setMinBalance?: (value: string) => void;
+  setUpToBalance?: (value: string) => void;
+  isAutomaticPaymentsEnabled?: boolean;
+  setIsAutomaticPaymentsEnabled?: (value: boolean) => void;
+  minBalance?: string;
+  upToBalance?: string;
   isEditAutoPayment?: boolean;
+  setMinBalanceError?: (value: boolean) => void;
+  minBalanceError?: boolean;
+  setUpToBalanceError?: (value: boolean) => void;
+  upToBalanceError?: boolean;
 };
 
 type CurrentPaymentSettingsProps = {
@@ -74,14 +78,14 @@ const CurrentPaymentSettings = ({
   const { minBalance, upToBalance } = autoPayments!;
 
   return (
-    <div className="info-block">
-      <div className="info-block-title">
+    <div className={styles.infoBlock}>
+      <div className={styles.infoBlockTitle}>
         <CheckRoundSvg />
         <Text fontSize="12px" fontWeight={600}>
           {t("AutoTopUp")}
         </Text>
       </div>
-      <Text fontSize="12px" fontWeight={400} className="info-description">
+      <Text fontSize="12px" fontWeight={400} className={styles.infoDescription}>
         {t("WhenBalanceDropsTo", {
           min: formatCurrencyValue(language, minBalance, currency),
           max: formatCurrencyValue(language, upToBalance, currency),
@@ -97,7 +101,6 @@ const AutoPayments = ({
   updateAutoPayments,
   autoPayments,
   isAutoPaymentExist,
-
   language,
   isEditAutoPayment,
   setMinBalance,
@@ -111,6 +114,7 @@ const AutoPayments = ({
   minBalanceError,
   setUpToBalanceError,
   upToBalanceError,
+  noMargin,
 }: AutoPaymentsProps) => {
   const { t } = useTranslation(["Payments", "Common"]);
 
@@ -134,11 +138,11 @@ const AutoPayments = ({
     const numValue = parseInt(value, 10);
 
     if (Number.isNaN(numValue) || numValue < 5 || numValue > 1000) {
-      setMinBalanceError(true);
+      setMinBalanceError!(true);
       return;
     }
 
-    setMinBalanceError(false);
+    setMinBalanceError!(false);
     setMinUpToBalance(numValue + 1);
   };
 
@@ -148,24 +152,24 @@ const AutoPayments = ({
     const minValue = minInputValue + 1;
 
     if (Number.isNaN(numValue) || numValue < minValue || numValue > 5000) {
-      setUpToBalanceError(true);
+      setUpToBalanceError!(true);
       return;
     }
 
-    setUpToBalanceError(false);
+    setUpToBalanceError!(false);
   };
 
   const onMinBalanceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
-    setMinBalance(value);
+    setMinBalance!(value);
     validateMinBalance(value);
   };
 
   const onMaxUpToBalanceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
-    setUpToBalance(value);
+    setUpToBalance!(value);
     validateMaxUpToBalance(value);
   };
 
@@ -193,7 +197,7 @@ const AutoPayments = ({
   const onToggleClick = () => {
     const isEnable = !isAutomaticPaymentsEnabled;
 
-    setIsAutomaticPaymentsEnabled(isEnable);
+    setIsAutomaticPaymentsEnabled!(isEnable);
 
     if (!isEnable && isAutoPaymentExist) {
       onSave(isEnable);
@@ -225,21 +229,26 @@ const AutoPayments = ({
   const description = (min: number, max: number) => (
     <Text
       fontSize="12px"
-      className="input-description"
+      className={styles.inputDescription}
       noSelect
       fontWeight={400}
     >
       {t("EnterAnIntegerAmountBetween", {
-        min: formatCurrencyValue(language, min, currency),
-        max: formatCurrencyValue(language, max, currency),
+        min: formatCurrencyValue(language!, min, currency!),
+        max: formatCurrencyValue(language!, max, currency!),
       })}
     </Text>
   );
 
-  const renderInputField = (
-    <div className="input-fields">
-      <div className="input-field">
-        <Text fontSize="12px" className="input-label" noSelect fontWeight={600}>
+  const renderInputField = () => (
+    <div className={styles.inputFields}>
+      <div className={styles.inputField}>
+        <Text
+          fontSize="12px"
+          className={styles.inputLabel}
+          noSelect
+          fontWeight={600}
+        >
           {t("WhenBalanceGoesBellow")}
         </Text>
         <TextInput
@@ -253,8 +262,13 @@ const AutoPayments = ({
         {description(5, 1000)}
       </div>
 
-      <div className="input-field">
-        <Text fontSize="12px" className="input-label" noSelect fontWeight={600}>
+      <div className={styles.inputField}>
+        <Text
+          fontSize="12px"
+          className={styles.inputLabel}
+          noSelect
+          fontWeight={600}
+        >
           {t("BringCreditBackUpTo")}
         </Text>
         <TextInput
@@ -268,7 +282,7 @@ const AutoPayments = ({
         {description(minUpToBalance, 5000)}
       </div>
       {!onAdditionalSave ? (
-        <div className="input-buttons">
+        <div className={styles.inputButtons}>
           <Button
             key="OkButton"
             label={t("Common:SaveButton")}
@@ -292,14 +306,17 @@ const AutoPayments = ({
     </div>
   );
 
-  const renderCurrentSettings = (
+  const renderCurrentSettings = () => (
     <div
-      className={`settings-wrapper ${animateSettings ? "animated" : ""} ${isFirstRender.current ? "showBlock" : ""}`}
+      className={classNames(styles.settingsWrapper, {
+        [styles.animated]: animateSettings,
+        [styles.showBlock]: isFirstRender.current,
+      })}
     >
       <CurrentPaymentSettings
         autoPayments={autoPayments!}
-        language={language}
-        currency={currency}
+        language={language!}
+        currency={currency!}
       />
       <Button
         key="EditButton"
@@ -311,27 +328,31 @@ const AutoPayments = ({
   );
 
   return (
-    <div className="automatic-payments-block">
-      <div className="auto-payment-header">
+    <div
+      className={classNames(styles.automaticPaymentsBlock, {
+        [styles.noMargin]: noMargin,
+      })}
+    >
+      <div className={styles.autoPaymentHeader}>
         <Text noSelect isBold fontSize="16px">
           {t("AutomaticPayments")}
         </Text>
         <ToggleButton
           isChecked={isAutomaticPaymentsEnabled}
           onChange={onToggleClick}
-          className="toggle-button"
+          className={styles.toggleButton}
           isDisabled={!walletCustomerEmail}
         />
       </div>
 
-      <Text fontSize="12px" className="auto-payment-description" noSelect>
+      <Text fontSize="12px" className={styles.autoPaymentDescription} noSelect>
         {t("AutomaticallyTopUpCard")}
       </Text>
 
       {isAutomaticPaymentsEnabled
         ? isCurrentSettings
-          ? renderCurrentSettings
-          : renderInputField
+          ? renderCurrentSettings()
+          : renderInputField()
         : null}
     </div>
   );

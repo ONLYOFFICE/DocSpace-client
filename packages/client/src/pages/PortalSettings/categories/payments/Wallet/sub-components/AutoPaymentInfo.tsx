@@ -33,7 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 
 import { formatCurrencyValue } from "../utils";
-import "../styles/Wallet.scss";
+import styles from "../styles/AutoPaymentInfo.module.scss";
 
 type AutoPaymentInfoProps = {
   onOpen: (e: React.MouseEvent) => void;
@@ -68,9 +68,9 @@ const AutoPaymentInfo = (props: AutoPaymentInfoProps) => {
     return null;
 
   return (
-    <div className="auto-payment-information">
+    <div className={styles.autoPaymentInformation}>
       <Text fontWeight={600}>{t("AutoTopUpEnabled")}</Text>
-      <div className="auto-payment-editing">
+      <div className={styles.autoPaymentEditing}>
         <Text>
           {t("WhenBalanceDropsTo", {
             min: formatCurrencyValue(language, minBalance, walletCodeCurrency),
@@ -90,7 +90,6 @@ const AutoPaymentInfo = (props: AutoPaymentInfoProps) => {
 export default inject(({ paymentStore, authStore }: TStore) => {
   const { language } = authStore;
   const {
-    walletBalance,
     cardLinked,
     autoPayments,
     walletCodeCurrency,
@@ -102,7 +101,6 @@ export default inject(({ paymentStore, authStore }: TStore) => {
   const upToBalance = autoPayments?.upToBalance ?? 0;
 
   return {
-    walletBalance,
     walletCodeCurrency,
     language,
     cardLinked,

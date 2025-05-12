@@ -59,6 +59,7 @@ const nextConfig = {
       fullUrl: true,
     },
   },
+  devIndicators: false,
 };
 
 const getBuildDate = () => {

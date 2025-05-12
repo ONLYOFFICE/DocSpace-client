@@ -496,6 +496,7 @@ const StyledInviteLanguage = styled.div`
   font-weight: 600;
   line-height: 20px;
   .list-link {
+    margin-inline-start: 4px;
     color: ${(props) => props.theme.createEditRoomDialog.commonParam.textColor};
   }
 

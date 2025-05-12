@@ -275,6 +275,7 @@ class ProfileActionsStore {
         return {
           key: portal.tenantId,
           label: portal.domain,
+          isPortal: true,
           onClick: () => window.open(`${protocol}//${portal.domain}/`, "_self"),
           disabled: false,
           checked: tenantAlias === portal.portalName,

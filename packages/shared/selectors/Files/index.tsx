@@ -455,7 +455,6 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
 
   const onSearchAction = (value: string, callback?: VoidFunction) => {
     if (selectedItemId !== currentSelectedItemId.current) {
-      console.log("call");
       setSearchValue("");
       return;
     }

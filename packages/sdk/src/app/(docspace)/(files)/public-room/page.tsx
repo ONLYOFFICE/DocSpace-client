@@ -36,7 +36,7 @@ import PublicRoomPage from "./page.client";
 export default async function PublicRoom({
   searchParams,
 }: {
-  searchParams: { [key: string]: string };
+  searchParams: Promise<{ [key: string]: string }>;
 }) {
   const baseConfig = Object.fromEntries(
     Object.entries(searchParams).map(([k, v]) => [
@@ -45,7 +45,7 @@ export default async function PublicRoom({
     ]),
   );
 
-  const filterStr = new URLSearchParams(searchParams).toString();
+  const filterStr = new URLSearchParams(await searchParams).toString();
   const folderId = baseConfig.folder;
 
   const filter = FilesFilter.getFilter({

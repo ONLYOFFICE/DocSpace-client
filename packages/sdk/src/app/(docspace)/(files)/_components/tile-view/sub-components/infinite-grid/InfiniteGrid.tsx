@@ -63,8 +63,12 @@ const Card = ({ children }: { children: React.ReactNode }) => {
 
     if (!React.isValidElement(child)) return titleHeight;
 
-    const isFile = child?.props?.className?.includes("file");
-    const isFolder = child?.props?.className?.includes("folder");
+    const isFile = (child?.props as { className: string })?.className?.includes(
+      "file",
+    );
+    const isFolder = (
+      child?.props as { className: string }
+    )?.className?.includes("folder");
 
     if (isFolder) return folderHeight;
     if (isFile) return fileHeight;
@@ -104,8 +108,8 @@ const InfiniteGrid = (props: InfiniteGridProps) => {
 
   const [countTilesInRow, setCountTilesInRow] = useState(0);
 
-  let cards: React.ReactElement[] = [];
-  const list: React.ReactElement[] = [];
+  let cards: React.ReactElement<any>[] = [];
+  const list: React.ReactElement<any>[] = [];
 
   const addItemToList = (key: string, cls: string, clear?: boolean) => {
     list.push(
@@ -147,38 +151,41 @@ const InfiniteGrid = (props: InfiniteGridProps) => {
   });
 
   if (children && React.isValidElement(children)) {
-    React.Children.map(children.props.children, (child) => {
-      if (child) {
-        if (child?.props["data-type"] === "header") {
-          // If cards is not empty then put the cards into the list
-          if (cards.length) {
-            const type = checkType();
+    React.Children.map(
+      (children.props as { children: any }).children,
+      (child) => {
+        if (child) {
+          if (child?.props["data-type"] === "header") {
+            // If cards is not empty then put the cards into the list
+            if (cards.length) {
+              const type = checkType();
 
-            addItemToList(`last-item-of_${type}`, type, true);
+              addItemToList(`last-item-of_${type}`, type, true);
+            }
+
+            list.push(
+              <HeaderItem
+                className={list.length ? "files_header" : "folder_header"}
+                key="header_item"
+              >
+                {child}
+              </HeaderItem>,
+            );
+          } else {
+            const isFile = child?.props?.className?.includes("file");
+            const cls = isFile ? "isFile" : "isFolder";
+
+            if (cards.length && cards.length === countTilesInRow) {
+              const listKey = uniqueid("list-item_");
+              addItemToList(listKey, cls, true);
+            }
+
+            const cardKey = uniqueid("card-item_");
+            cards.push(<Card key={cardKey}>{child}</Card>);
           }
-
-          list.push(
-            <HeaderItem
-              className={list.length ? "files_header" : "folder_header"}
-              key="header_item"
-            >
-              {child}
-            </HeaderItem>,
-          );
-        } else {
-          const isFile = child?.props?.className?.includes("file");
-          const cls = isFile ? "isFile" : "isFolder";
-
-          if (cards.length && cards.length === countTilesInRow) {
-            const listKey = uniqueid("list-item_");
-            addItemToList(listKey, cls, true);
-          }
-
-          const cardKey = uniqueid("card-item_");
-          cards.push(<Card key={cardKey}>{child}</Card>);
         }
-      }
-    });
+      },
+    );
   }
 
   const type = checkType(!!cards.length);

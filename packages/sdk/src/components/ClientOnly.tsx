@@ -28,6 +28,8 @@
 
 import dynamic from "next/dynamic";
 
+import type { JSX } from "react";
+
 const ClientOnly = ({ children }: { children: JSX.Element }) => children;
 
-export default dynamic(() => Promise.resolve(ClientOnly), { ssr: false });
+export default dynamic(() => Promise.resolve(ClientOnly), { ssr: !!false });

@@ -9,7 +9,6 @@
   "InviteViaLink": "Հրավիրեք հղման միջոցով",
   "InviteViaLinkDescriptionAccounts": "Ստեղծեք ունիվերսալ հղում {{productName}}-ում ինքնալիազորման համար",
   "LinkCopySuccess": "Հղումը պատճենվել է",
-  "ResetChange": "Վերականգնել փոփոխությունը",
   "SendInvitation": "Ուղարկել հրավոր",
   "UserMaxAvailableRoleWarning": "Հյուրերը և օգտատերերը չեն կարող նշանակվել որպես Սենյակի մենեջերներ: Նշված դերի համար հարմար են միայն Սենյակի և {{productName}} ադմինիստրատորները:",
   "UsersAlreadyAdded": "Որոշ օգտվողներ արդեն ավելացվել են"

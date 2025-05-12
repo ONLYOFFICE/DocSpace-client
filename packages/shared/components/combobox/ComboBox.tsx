@@ -318,7 +318,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
         <DropDownItem
           key={key}
           label={label}
-          icon={icon && typeof icon === "string" ? icon : undefined}
+          icon={icon}
           isBeta={isBeta}
           data-testid="drop-down-item"
           data-focused={isOpen ? isActiveOption : undefined}

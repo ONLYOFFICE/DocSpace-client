@@ -153,7 +153,9 @@ const FilePassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
                       ns="Common"
                       i18nKey="EnterPasswordDescription"
                       values={{ fileName: entryTitle }}
-                      components={{ 1: <span className="bold" /> }}
+                      components={{
+                        1: <span key="component_key" className="bold" />,
+                      }}
                     />
                   </Text>
                   <div className="public-room-name">

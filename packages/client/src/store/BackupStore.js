@@ -376,7 +376,7 @@ class BackupStore {
     this.setIsThirdStorageChanged(false);
   };
 
-  setDefaultOptions = (t, periodObj, weekdayArr) => {
+  setDefaultOptions = (periodObj, weekdayArr) => {
     if (this.backupSchedule) {
       const { storageType, cronParams, backupsStored, storageParams } =
         this.backupSchedule;

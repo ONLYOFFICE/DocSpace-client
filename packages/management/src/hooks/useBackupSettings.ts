@@ -64,12 +64,22 @@ export const useBackupSettings = ({
   >(() => backupScheduleResponse ?? null);
 
   const [defaults, setDefaults] = useReducer<
-    Reducer<BackupDefaultStateType, Partial<BackupDefaultStateType>>
-  >((state, action) => ({ ...state, ...action }), {
-    ...initBackupDefaultState,
+    Reducer<
+      BackupDefaultStateType,
+      | Partial<BackupDefaultStateType>
+      | ((state: BackupDefaultStateType) => Partial<BackupDefaultStateType>)
+    >
+  >(
+    (state, action) => ({
+      ...state,
+      ...(typeof action === "function" ? action(state) : action),
+    }),
+    {
+      ...initBackupDefaultState,
 
-    periodLabel: t("Common:EveryDay"),
-  });
+      periodLabel: t("Common:EveryDay"),
+    },
+  );
 
   const [selected, setSelected] = useReducer<
     Reducer<
@@ -89,10 +99,18 @@ export const useBackupSettings = ({
   );
 
   const setDefaultOptions = useCallback(
-    (t: TTranslation, periodObj: TOption[], weekdayArr: TOption[]) => {
-      if (backupSchedule) {
+    (
+      periodObj: TOption[],
+      weekdayArr: TOption[],
+      backupScheduleArg?: TBackupSchedule,
+    ) => {
+      const schedule = backupScheduleArg ?? backupSchedule;
+
+      console.log({ schedule, backupScheduleArg, backupSchedule });
+
+      if (schedule) {
         const { storageType, cronParams, backupsStored, storageParams } =
-          backupSchedule;
+          schedule;
         const { folderId, module, ...other } = storageParams;
         const { period, day, hour } = cronParams;
 
@@ -102,8 +120,14 @@ export const useBackupSettings = ({
         };
 
         if (defaultFormSettings) {
-          setSelected({ formSettings: { ...defaultFormSettings } });
-          setDefaults({ formSettings: { ...defaultFormSettings } });
+          setSelected((state) => ({
+            ...state,
+            formSettings: { ...defaultFormSettings },
+          }));
+          setDefaults((state) => ({
+            ...state,
+            formSettings: { ...defaultFormSettings },
+          }));
 
           if (isThirdStorageChanged) {
             setIsThirdStorageChanged(false);
@@ -117,7 +141,8 @@ export const useBackupSettings = ({
             ? "1"
             : day.toString();
 
-        setDefaults({
+        setDefaults((state) => ({
+          ...state,
           day: day.toString(),
           hour: `${hour}:00`,
           periodNumber: period.toString(),
@@ -128,9 +153,10 @@ export const useBackupSettings = ({
           periodLabel,
           ...(module ? { module: module.toString() } : {}),
           monthDay,
-        });
+        }));
 
-        setSelected({
+        setSelected((state) => ({
+          ...state,
           day: day.toString(),
           hour: `${hour}:00`,
           periodNumber: period.toString(),
@@ -141,7 +167,7 @@ export const useBackupSettings = ({
           periodLabel,
           ...(module ? { module: module.toString() } : {}),
           monthDay,
-        });
+        }));
 
         if (period === AutoBackupPeriod.EveryWeekType) {
           let weekDay: number = 0;
@@ -155,38 +181,45 @@ export const useBackupSettings = ({
           }
           const weekdayLabel = weekdayArr[weekDay].label!;
 
-          setDefaults({
+          setDefaults((state) => ({
+            ...state,
             weekday: day.toString(),
             weekdayLabel,
-          });
-          setSelected({
+          }));
+          setSelected((state) => ({
+            ...state,
             weekday: day.toString(),
             weekdayLabel,
-          });
+          }));
         } else {
           const weekdayLabel = weekdayArr[0].label!;
           const weekday = weekdayArr[0].key.toString();
 
-          setDefaults({
+          setDefaults((state) => ({
+            ...state,
             weekday,
             weekdayLabel,
-          });
+          }));
 
-          setSelected({
+          setSelected((state) => ({
+            ...state,
             weekday,
             weekdayLabel,
-          });
+          }));
         }
       } else {
         const periodLabel = periodObj[+defaults.periodNumber].label!;
         const weekdayLabel = weekdayArr[0].label!;
         const weekday = weekdayArr[0].key.toString();
 
-        setDefaults({
+        console.log({ periodObj, weekdayArr });
+
+        setDefaults((state) => ({
+          ...state,
           weekday,
           periodLabel,
           weekdayLabel,
-        });
+        }));
         setSelected({
           weekday,
           periodLabel,
@@ -213,7 +246,8 @@ export const useBackupSettings = ({
   const deleteSchedule = (weekdayArr: TWeekdaysLabel[]) => {
     setBackupSchedule(null);
 
-    setDefaults({
+    setDefaults((state) => ({
+      ...state,
       day: "0",
       hour: "12:00",
       periodNumber: "0",
@@ -226,9 +260,10 @@ export const useBackupSettings = ({
       monthDay: "1",
       weekday: weekdayArr[0].key.toString(),
       weekdayLabel: weekdayArr[0].label!,
-    });
+    }));
 
-    setSelected({
+    setSelected((state) => ({
+      ...state,
       day: "0",
       hour: "12:00",
       periodNumber: "0",
@@ -241,51 +276,56 @@ export const useBackupSettings = ({
       monthDay: "1",
       weekday: weekdayArr[0].key.toString(),
       weekdayLabel: weekdayArr[0].label!,
-    });
+    }));
 
     setIsThirdStorageChanged(false);
   };
 
   const setMaxCopies = (option: TOption) => {
-    setSelected({
+    setSelected((state) => ({
+      ...state,
       maxCopiesNumber: option.key.toString(),
-    });
+    }));
   };
 
   const setPeriod = (options: TOption) => {
     const key = options.key;
     const label = options.label;
 
-    setSelected({
+    setSelected((state) => ({
+      ...state,
       periodNumber: `${key}`,
       periodLabel: label!,
-    });
+    }));
   };
 
   const setWeekday = (options: TOption) => {
     const key = options.key;
     const label = options.label;
 
-    setSelected({
+    setSelected((state) => ({
+      ...state,
       weekday: `${key}`,
       weekdayLabel: label!,
-    });
+    }));
   };
 
   const setMonthNumber = (options: TOption) => {
     const label = options.label;
 
-    setSelected({
+    setSelected((state) => ({
+      ...state,
       monthDay: label!,
-    });
+    }));
   };
 
   const setTime = (options: TOption) => {
     const label = options.label;
 
-    setSelected({
+    setSelected((state) => ({
+      ...state,
       hour: label!,
-    });
+    }));
   };
 
   const setCompletedFormFields = (
@@ -293,11 +333,14 @@ export const useBackupSettings = ({
     module?: string,
   ) => {
     if (module && module === defaults.storageId) {
-      setSelected({ formSettings: { ...defaults.formSettings } });
+      setSelected((state) => ({
+        ...state,
+        formSettings: { ...defaults.formSettings },
+      }));
       return;
     }
 
-    setSelected({ formSettings: { ...values } });
+    setSelected((state) => ({ ...state, formSettings: { ...values } }));
     setErrorsFormFields({});
   };
 
@@ -324,21 +367,24 @@ export const useBackupSettings = ({
   };
 
   const setStorageId = (id: string) => {
-    setSelected({
+    setSelected((state) => ({
+      ...state,
       storageId: id,
-    });
+    }));
   };
 
   const seStorageType = (type: string) => {
-    setSelected({
+    setSelected((state) => ({
+      ...state,
       storageType: type,
-    });
+    }));
   };
 
   const setSelectedFolder = (folderId: string) => {
-    setSelected({
+    setSelected((state) => ({
+      ...state,
       folderId,
-    });
+    }));
   };
 
   const isChanged = useMemo(() => {

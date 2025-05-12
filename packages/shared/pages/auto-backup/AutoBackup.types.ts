@@ -61,9 +61,9 @@ export interface AutomaticBackupProps {
 
   // backup store
   setDefaultOptions: (
-    t: TTranslation,
     periodObj: TOption[],
     weekdayArr: TOption[],
+    backupSchedule?: TBackupSchedule,
   ) => void;
   setDownloadingProgress: (progress: number) => void;
   setTemporaryLink: (link: string) => void;

@@ -97,7 +97,7 @@ const AutoBackupWrapper = ({
         setBackupSchedule(backupSchedule!);
         setStorageRegions(newStorageRegions);
 
-        setDefaultOptions(t, periodsObject, weekdaysLabelArray);
+        setDefaultOptions(periodsObject, weekdaysLabelArray);
       } catch (error) {
         setErrorInformation(error, t);
         setIsInitialError(true);

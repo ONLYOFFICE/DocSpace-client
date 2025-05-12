@@ -111,7 +111,7 @@ export const useBackup = ({
   );
 
   const [thirdPartyStorage, setThirdPartyStorage] = useState<TStorageBackup[]>(
-    backupStorageResponse,
+    () => backupStorageResponse,
   );
 
   const [isThirdStorageChanged, setIsThirdStorageChanged] =
@@ -153,7 +153,10 @@ export const useBackup = ({
   }, []);
 
   const setterSelectedEnableSchedule = useCallback(() => {
-    setSelected({ enableSchedule: !selected.enableSchedule });
+    setSelected((state) => ({
+      ...state,
+      enableSchedule: !selected.enableSchedule,
+    }));
   }, [selected.enableSchedule, setSelected]);
 
   const setProgress = useCallback(

@@ -181,7 +181,7 @@ const AutoBackup = ({
 
   useDidMount(() => {
     getProgress();
-    setDefaultOptions(t, periodsObject, weekdaysLabelArray);
+    setDefaultOptions(periodsObject, weekdaysLabelArray);
   });
 
   const automaticBackupUrl = useMemo(

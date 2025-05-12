@@ -258,7 +258,7 @@ const Users = ({
           </>
         ) : null}
 
-        {isGuests && infoPanelSelection.status === EmployeeStatus.Active ? (
+        {infoPanelSelection.status === EmployeeStatus.Active ? (
           <>
             <Text
               className="info_field"

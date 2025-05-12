@@ -48,8 +48,10 @@
   }
 
   &.noScrollY {
-    .trackVertical {
-      height: 0 !important;
+    &:global(.trackYVisible) {
+      .trackVertical {
+        height: 0 !important;
+      }
     }
   }
 

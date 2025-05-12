@@ -94,6 +94,7 @@ export type TUser = {
   createdBy?: TCreatedBy;
   hasPersonalFolder?: boolean;
   isAnonim: boolean;
+  tfaAppEnabled?: boolean;
 };
 
 export type TGetUserList = {

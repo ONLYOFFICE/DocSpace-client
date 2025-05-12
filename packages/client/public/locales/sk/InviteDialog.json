@@ -9,7 +9,6 @@
   "InviteViaLink": "Pozvať cez odkaz",
   "InviteViaLinkDescriptionAccounts": "Vytvorte univerzálny odkaz na autorizáciu v {{productName}}",
   "LinkCopySuccess": "Odkaz bol skopírovaný",
-  "ResetChange": "Zrušiť zmenu",
   "SendInvitation": "Poslať pozvánku",
   "UserMaxAvailableRoleWarning": "Hostia a používatelia nemôžu byť označení ako manažéri miestnosti. Iba administrátorom miestnosti a administrátorom {{productName}} môže byť pridelená táto rola.",
   "UsersAlreadyAdded": "Niektorí používatelia už boli pridaní"

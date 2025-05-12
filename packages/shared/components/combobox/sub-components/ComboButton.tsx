@@ -80,7 +80,7 @@ const ComboButton: React.FC<TComboButtonProps> = ({
 
   const comboButtonClassName = `combo-button combo-button_${isOpen ? "open" : "closed"}`;
 
-  const Icon = selectedOption.icon;
+  const Icon = selectedOption?.icon;
   const isIconReactElement =
     Icon &&
     typeof Icon === "function" &&

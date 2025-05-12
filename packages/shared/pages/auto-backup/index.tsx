@@ -333,6 +333,7 @@ const AutomaticBackup = ({
     }
 
     if (!canSave()) return;
+
     setIsLoadingData(true, () => {
       let day: Nullable<string>;
       let period: AutoBackupPeriod;
@@ -625,6 +626,7 @@ const AutomaticBackup = ({
         onCancelModuleSettings={onCancelModuleSettings}
         isChanged={isChanged}
         isThirdStorageChanged={isThirdStorageChanged}
+        selectedEnableSchedule={selectedEnableSchedule}
       />
 
       {isBackupProgressVisible ? (

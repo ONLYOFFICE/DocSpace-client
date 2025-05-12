@@ -32,6 +32,7 @@ export interface ButtonContainerProps {
   isChanged: boolean;
   isLoadingData: boolean;
   isThirdStorageChanged: boolean;
+  selectedEnableSchedule: boolean;
   onSaveModuleSettings: () => Promise<void>;
   onCancelModuleSettings: VoidFunction;
   buttonSize?: ButtonSize;

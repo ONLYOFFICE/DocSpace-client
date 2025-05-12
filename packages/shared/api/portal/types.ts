@@ -162,4 +162,5 @@ export type TBackupProgress = {
   progress: number;
   error?: TError;
   link?: string;
+  isCompleted: boolean;
 };

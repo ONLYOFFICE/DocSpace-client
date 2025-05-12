@@ -122,7 +122,11 @@ export const useBackup = ({
     useState(false);
 
   const [downloadingProgress, setDownloadingProgress] = useState<number>(() => {
-    if (backupProgress && "progress" in backupProgress)
+    if (
+      backupProgress &&
+      "progress" in backupProgress &&
+      !backupProgress.isCompleted
+    )
       return backupProgress.progress;
 
     return 100;
@@ -294,7 +298,21 @@ export const useBackup = ({
 
   const getProgress = useCallback(async () => {
     if (backupProgress && "progress" in backupProgress) {
-      const { progress, link } = backupProgress;
+      const { progress, link, error, isCompleted } = backupProgress;
+
+      if (error) {
+        setProgress(100);
+        setErrorInformation(error, t);
+        backupStore.setIsBackupProgressVisible(false);
+        return;
+      }
+
+      if (isCompleted) {
+        setProgress(100);
+        backupStore.setIsBackupProgressVisible(false);
+        setErrorInformation("", t);
+        return;
+      }
 
       setProgress(progress);
       backupStore.setIsBackupProgressVisible(progress !== 100);

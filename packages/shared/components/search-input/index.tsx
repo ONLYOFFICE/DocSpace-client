@@ -62,7 +62,7 @@ const SearchInput = ({
   isDisabled = false,
   placeholder,
   onFocus,
-  resetOnBlur = true,
+  resetOnBlur = false,
   children,
 }: SearchInputProps) => {
   const [inputValue, setInputValue] = useState(value);

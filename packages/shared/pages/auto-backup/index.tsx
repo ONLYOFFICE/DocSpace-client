@@ -237,6 +237,7 @@ const AutomaticBackup = ({
   ) => {
     const key = e.currentTarget.name;
     seStorageType(key);
+    setIsError(false);
   };
 
   const onCancelModuleSettings = () => {
@@ -306,10 +307,9 @@ const AutomaticBackup = ({
         isManagement,
       );
       const [selectedSchedule, storageInfo] = await Promise.all([
-        getBackupSchedule(),
-        getBackupStorage(),
+        getBackupSchedule(isManagement),
+        getBackupStorage(isManagement),
       ]);
-
 
       if (selectedSchedule) setBackupSchedule(selectedSchedule);
       if (storageInfo) setThirdPartyStorage(storageInfo);

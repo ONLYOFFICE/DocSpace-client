@@ -34,6 +34,7 @@ import { InfoBarProvider } from "./InfoBar";
 import { SearchProvider } from "./Search";
 import { SelectAllProvider } from "./SelectAll";
 import { TabsProvider } from "./Tabs";
+import { DragAndDropProvider } from "./DragAndDrop";
 
 export const Providers = ({
   children,
@@ -43,16 +44,19 @@ export const Providers = ({
   searchProps,
   selectAllProps,
   tabsProps,
+  dragAndDropProps,
 }: { children: React.ReactNode } & ProvidersProps) => (
   <BreadCrumbsProvider {...breadCrumbsProps}>
     <EmptyScreenProvider {...emptyScreenProps}>
-      <InfoBarProvider {...infoBarProps}>
-        <SearchProvider {...searchProps}>
-          <SelectAllProvider {...selectAllProps}>
-            <TabsProvider {...tabsProps}>{children}</TabsProvider>
-          </SelectAllProvider>
-        </SearchProvider>
-      </InfoBarProvider>
+      <DragAndDropProvider {...dragAndDropProps}>
+        <InfoBarProvider {...infoBarProps}>
+          <SearchProvider {...searchProps}>
+            <SelectAllProvider {...selectAllProps}>
+              <TabsProvider {...tabsProps}>{children}</TabsProvider>
+            </SelectAllProvider>
+          </SearchProvider>
+        </InfoBarProvider>
+      </DragAndDropProvider>
     </EmptyScreenProvider>
   </BreadCrumbsProvider>
 );

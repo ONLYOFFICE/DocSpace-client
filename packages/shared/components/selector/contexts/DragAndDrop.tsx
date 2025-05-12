@@ -24,65 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @typescript-eslint/no-use-before-define */
-import React from "react";
-import classNames from "classnames";
-import { useDropzone } from "react-dropzone";
+import { createContext, ReactNode } from "react";
 
-import getFilesFromEvent from "../../utils/get-files-from-event";
+import { TSelectorDragAndDrop } from "../Selector.types";
 
-import styles from "./DragAndDrop.module.scss";
-import { DragAndDropProps } from "./DragAndDrop.types";
+export const DragAndDropContext = createContext<TSelectorDragAndDrop>({});
 
-const DragAndDrop = (props: DragAndDropProps) => {
-  const {
-    isDropZone,
-    children,
-    dragging,
-    className,
-    forwardedRef,
-
-    onDragOver,
-    onDrop,
-    onDragLeave,
-
-    ...rest
-  } = props;
-
-  const classNameProp = className || "";
-
-  const onDropAction = (acceptedFiles: File[]) => {
-    if (acceptedFiles.length) onDrop?.(acceptedFiles);
-  };
-
-  const onDragOverAction = (e: React.DragEvent<HTMLElement>) => {
-    console.log("onDragOver", isDragActive);
-    onDragOver?.(isDragActive, e);
-  };
-
-  const onDragLeaveAction = (e: React.DragEvent<HTMLElement>) => {
-    onDragLeave?.(e);
-  };
-
-  const { getRootProps, isDragActive } = useDropzone({
-    noDragEventsBubbling: !isDropZone,
-    onDrop: onDropAction,
-    onDragOver: onDragOverAction,
-    onDragLeave: onDragLeaveAction,
-    getFilesFromEvent: (event) => getFilesFromEvent(event),
-  });
-
-  const rootClassName = classNames(styles.dragAndDrop, classNameProp, {
-    [styles.dragging]: dragging,
-    [styles.dragAccept]: isDragActive,
-    "drag-and-drop": true,
-  });
-
+export const DragAndDropProvider = ({
+  children,
+  ...rest
+}: TSelectorDragAndDrop & { children: ReactNode }) => {
   return (
-    <div {...rest} className={rootClassName} {...getRootProps()}>
+    <DragAndDropContext.Provider value={rest}>
       {children}
-    </div>
+    </DragAndDropContext.Provider>
   );
 };
-
-export default DragAndDrop;

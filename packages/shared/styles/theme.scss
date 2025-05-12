@@ -2103,6 +2103,9 @@
 
   --selector-navigation-lifetime-fill: #{$gray};
   --selector-navigation-lifetime-stroke: #{$gray};
+
+  --selector-dnd-hover-bg-color: #{$light-blue-main-alpha};
+  --selector-dnd-border: 2px dashed #{$light-blue-main};
 }
 
 .dark {
@@ -2127,4 +2130,7 @@
 
   --selector-navigation-lifetime-fill: #{$dark-gray-dark};
   --selector-navigation-lifetime-stroke: #{$gray};
+
+  --selector-dnd-hover-bg-color: #{$light-blue-main-alpha};
+  --selector-dnd-border: 2px dashed #{$light-blue-main};
 }

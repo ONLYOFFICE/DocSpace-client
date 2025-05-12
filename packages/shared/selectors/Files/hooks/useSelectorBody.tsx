@@ -38,6 +38,7 @@ import {
   TSelectorBreadCrumbs,
   TSelectorCancelButton,
   TSelectorCheckbox,
+  TSelectorDragAndDrop,
   TSelectorHeader,
   TSelectorInput,
   TSelectorSearch,
@@ -109,6 +110,14 @@ const useSelectorBody = ({
   breadCrumbs,
   onSelectBreadCrumb,
 
+  //with drag and drop
+  withDrag,
+  isDragActive,
+  isOuterDragActive,
+  onDragLeave,
+  onDragOver,
+  onDragDrop,
+
   // files selector props
   descriptionText,
   withInfoBar,
@@ -133,6 +142,21 @@ const useSelectorBody = ({
 
   const { showBreadCrumbsLoader, isNextPageLoading, showLoader } =
     useContext(LoadersContext);
+
+  const drag = {
+    withDrag,
+    isDragActive,
+    isOuterDragActive,
+    onDragLeave,
+    onDragOver,
+    onDragDrop,
+  } as TSelectorDragAndDrop;
+
+  const dragAndDropProps = drag.withDrag
+    ? drag
+    : {
+        ...drag,
+      };
 
   const headerSelectorProps: TSelectorHeader = withHeader
     ? {
@@ -208,6 +232,7 @@ const useSelectorBody = ({
       {...footerInputProps}
       {...footerCheckboxProps}
       {...breadCrumbsProps}
+      {...dragAndDropProps}
       isMultiSelect={false}
       items={items}
       onSelect={onSelect}

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import InfiniteLoader from "react-window-infinite-loader";
 import { FixedSizeList as List } from "react-window";
 import { classNames } from "@docspace/shared/utils";
@@ -51,6 +51,8 @@ import { Item } from "./Item";
 import { Info } from "./Info";
 import { VirtualScroll } from "./VirtualScroll";
 import { Tabs } from "../../tabs";
+import { DragAndDrop } from "../../drag-and-drop";
+import { DragAndDropContext } from "../contexts/DragAndDrop";
 
 const CONTAINER_PADDING = 16;
 const HEADER_HEIGHT = 54;
@@ -78,7 +80,6 @@ const Body = ({
   isLoading,
 
   rowLoader,
-
   withFooterInput,
   withFooterCheckbox,
   descriptionText,
@@ -102,6 +103,15 @@ const Body = ({
   const { withSearch } = React.useContext(SearchContext);
   const isSearch = React.useContext(SearchValueContext);
   const { withInfoBar } = React.useContext(InfoBarContext);
+
+  const {
+    withDrag,
+    isDragActive,
+    isOuterDragActive,
+    onDragDrop,
+    onDragLeave,
+    onDragOver,
+  } = React.useContext(DragAndDropContext);
 
   const { withBreadCrumbs } = React.useContext(BreadCrumbsContext);
 
@@ -170,6 +180,8 @@ const Body = ({
       window.removeEventListener("resize", onBodyResize);
     };
   }, [onBodyResize]);
+
+  React.useEffect(() => {});
 
   React.useEffect(() => {
     onBodyResize();
@@ -315,11 +327,33 @@ const Body = ({
       {isLoading ? (
         <Scrollbar style={{ height: listHeight }}>{rowLoader}</Scrollbar>
       ) : itemsCount === 0 ? (
-        <EmptyScreen
-          withSearch={isSearch}
-          items={items}
-          inputItemVisible={inputItemVisible}
-        />
+        <>
+          {withDrag && (
+            <DragAndDrop
+              style={
+                {
+                  "--list-height": `${listHeight}px`,
+                } as React.CSSProperties
+              }
+              isDropZone
+              dragging={isDragActive}
+              onDragOver={onDragOver}
+              onDrop={onDragDrop}
+              onDragLeave={onDragLeave}
+              className={classNames(styles.dropzone, {
+                [styles.dragging]: isDragActive,
+                [styles.isOuterDragging]: isOuterDragActive,
+              })}
+            >
+              {" "}
+            </DragAndDrop>
+          )}
+          <EmptyScreen
+            withSearch={isSearch}
+            items={items}
+            inputItemVisible={inputItemVisible}
+          />
+        </>
       ) : (
         <>
           {descriptionText ? (
@@ -345,6 +379,26 @@ const Body = ({
                 } as React.CSSProperties
               }
             >
+              {withDrag && (
+                <DragAndDrop
+                  style={
+                    {
+                      "--list-height": `calc(100% - ${Math.abs(listHeight + CONTAINER_PADDING)}px)`,
+                    } as React.CSSProperties
+                  }
+                  isDropZone
+                  dragging={isDragActive}
+                  onDragOver={onDragOver}
+                  onDrop={onDragDrop}
+                  onDragLeave={onDragLeave}
+                  className={classNames(styles.dropzone, {
+                    [styles.dragging]: isDragActive,
+                    [styles.isOuterDragging]: isOuterDragActive,
+                  })}
+                >
+                  {" "}
+                </DragAndDrop>
+              )}
               {items.map((item, index) => (
                 <div
                   key={item.id}
@@ -382,31 +436,53 @@ const Body = ({
               loadMoreItems={onLoadMoreItems}
             >
               {({ onItemsRendered, ref }) => (
-                <List
-                  className="items-list"
-                  height={listHeight}
-                  width="100%"
-                  itemCount={itemsCount}
-                  itemData={{
-                    items: isEmptyInput ? [items[1]] : items,
-                    onSelect,
-                    isMultiSelect: isMultiSelect || false,
-                    rowLoader,
-                    isItemLoaded,
-                    renderCustomItem,
-                    setInputItemVisible,
-                    inputItemVisible,
-                    savedInputValue,
-                    setSavedInputValue,
-                    listHeight,
-                  }}
-                  itemSize={48}
-                  onItemsRendered={onItemsRendered}
-                  ref={ref}
-                  outerElementType={VirtualScroll}
-                >
-                  {Item}
-                </List>
+                <>
+                  {withDrag && (
+                    <DragAndDrop
+                      style={
+                        {
+                          "--list-height": `${listHeight}px`,
+                        } as React.CSSProperties
+                      }
+                      isDropZone
+                      dragging={isDragActive}
+                      onDragOver={onDragOver}
+                      onDrop={onDragDrop}
+                      onDragLeave={onDragLeave}
+                      className={classNames(styles.dropzone, {
+                        [styles.dragging]: isDragActive,
+                        [styles.isOuterDragging]: isOuterDragActive,
+                      })}
+                    >
+                      {" "}
+                    </DragAndDrop>
+                  )}
+                  <List
+                    className="items-list"
+                    height={listHeight}
+                    width="100%"
+                    itemCount={itemsCount}
+                    itemData={{
+                      items: isEmptyInput ? [items[1]] : items,
+                      onSelect,
+                      isMultiSelect: isMultiSelect || false,
+                      rowLoader,
+                      isItemLoaded,
+                      renderCustomItem,
+                      setInputItemVisible,
+                      inputItemVisible,
+                      savedInputValue,
+                      setSavedInputValue,
+                      listHeight,
+                    }}
+                    itemSize={48}
+                    onItemsRendered={onItemsRendered}
+                    ref={ref}
+                    outerElementType={VirtualScroll}
+                  >
+                    {Item}
+                  </List>
+                </>
               )}
             </InfiniteLoader>
           )}

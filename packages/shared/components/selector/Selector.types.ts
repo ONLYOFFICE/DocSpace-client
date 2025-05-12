@@ -366,6 +366,18 @@ export type TRenderCustomItem = (
   status?: EmployeeStatus,
 ) => React.ReactNode | null;
 
+export type TSelectorDragAndDrop = WithFlag<
+  "withDrag",
+  {
+    withDrag: true;
+    isDragActive: boolean;
+    isOuterDragActive: boolean;
+    onDragLeave: VoidFunction;
+    onDragOver: (isDragActive: boolean) => void;
+    onDragDrop: (acceptedFiles: File[]) => void;
+  }
+>;
+
 export type SelectorProps = TSelectorHeader &
   TInfoBar &
   TSelectorInfo &
@@ -380,7 +392,8 @@ export type SelectorProps = TSelectorHeader &
   TSelectorInput &
   TSelectorCheckbox &
   TSelectorWithAside &
-  TSelectorPagination & {
+  TSelectorPagination &
+  TSelectorDragAndDrop & {
     id?: string;
     className?: string;
     style?: React.CSSProperties;
@@ -410,7 +423,8 @@ export type SelectorProps = TSelectorHeader &
   };
 
 export type BodyProps = TSelectorInfo &
-  TSelectorPagination & {
+  TSelectorPagination &
+  TSelectorDragAndDrop & {
     footerVisible: boolean;
     withHeader?: boolean;
     withPadding?: boolean;
@@ -424,6 +438,7 @@ export type BodyProps = TSelectorInfo &
 
     renderCustomItem?: TRenderCustomItem;
     onSelect: (item: TSelectorItem, isDoubleClick: boolean) => void;
+    onDrop?: (acceptedFiles: File[]) => void;
 
     loadMoreItems: (startIndex: number) => void;
 
@@ -640,6 +655,7 @@ export type ProvidersProps = {
   breadCrumbsProps: TSelectorBreadCrumbs;
   infoBarProps: TInfoBar;
   searchProps: TSelectorSearch;
+  dragAndDropProps: TSelectorDragAndDrop;
   selectAllProps: TSelectorSelectAll & {
     isAllChecked: boolean;
     isAllIndeterminate: boolean;

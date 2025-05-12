@@ -81,6 +81,34 @@
   }
 }
 
+.dropzone {
+  z-index: 310 !important;
+  position: absolute !important;
+  padding-inline: 2px !important;
+  margin-inline: 6px !important;
+  margin-bottom: 6px !important;
+  width: calc(100% - 12px) !important;
+  height: calc(var(--list-height) - 6px) !important;
+  box-sizing: border-box !important;
+  border-radius: 6px !important;
+  pointer-events: none;
+
+  &.dragging {
+    background: var(--selector-dnd-hover-bg-color) !important;
+  }
+
+  &.isOuterDragging::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: var(--selector-dnd-border); // светло-синий, как на макете
+    border-radius: 6px;
+    border-spacing: 2px;
+    pointer-events: auto;
+    z-index: 1;
+  }
+}
+
 %accessComboboxStyles {
   margin-bottom: 2px;
   max-height: 50px;

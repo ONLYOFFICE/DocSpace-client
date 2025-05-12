@@ -53,6 +53,7 @@ import {
   TSelectorInfo,
   TSelectorSearch,
   TSelectorCancelButton,
+  TSelectorDragAndDrop,
 } from "./Selector.types";
 import { Providers } from "./contexts";
 
@@ -107,6 +108,13 @@ const Selector = ({
   selectedAccessRight,
   onAccessRightsChange,
   accessRightsMode,
+
+  withDrag,
+  isDragActive,
+  isOuterDragActive,
+  onDragLeave,
+  onDragOver,
+  onDragDrop,
 
   withFooterInput,
   footerInputHeader,
@@ -581,6 +589,17 @@ const Selector = ({
       }
     : {};
 
+  const dragAndDropProps: TSelectorDragAndDrop = withDrag
+    ? {
+        withDrag,
+        isDragActive,
+        isOuterDragActive,
+        onDragLeave,
+        onDragOver,
+        onDragDrop,
+      }
+    : {};
+
   const infoBarProps = { infoBarData, withInfoBar };
 
   React.useEffect(() => {
@@ -640,6 +659,7 @@ const Selector = ({
           isAllChecked,
           isAllIndeterminate,
         }}
+        dragAndDropProps={dragAndDropProps}
       >
         {withHeader ? <Header {...headerProps} /> : null}
         <Body

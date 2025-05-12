@@ -119,6 +119,7 @@ const useFiles = ({
   };
 
   const onDrop = (files, uploadToFolder) => {
+    console.log("onDrop", files);
     if (
       folderSecurity &&
       hasOwnProperty(folderSecurity, "Create") &&

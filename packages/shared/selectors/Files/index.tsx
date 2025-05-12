@@ -38,7 +38,10 @@ import { Aside } from "../../components/aside";
 import { Backdrop } from "../../components/backdrop";
 import { Portal } from "../../components/portal";
 import { toastr } from "../../components/toast";
-import { TBreadCrumb } from "../../components/selector/Selector.types";
+import {
+  TBreadCrumb,
+  TSelectorDragAndDrop,
+} from "../../components/selector/Selector.types";
 
 import useFilesHelper from "./hooks/useFilesHelper";
 import useRoomsHelper from "./hooks/useRoomsHelper";
@@ -51,6 +54,7 @@ import { FilesSelectorProps } from "./FilesSelector.types";
 import { SettingsContextProvider } from "./contexts/Settings";
 import { LoadersContext, LoadersContextProvider } from "./contexts/Loaders";
 import { getDefaultBreadCrumb } from "./FilesSelector.utils";
+import { useDragAndDrop } from "./hooks/useDragAndDrop";
 
 const FilesSelectorComponent = (props: FilesSelectorProps) => {
   const {
@@ -79,6 +83,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     getFilesArchiveError,
     setIsDataReady,
     withSearch: withSearchProp,
+    withDrag = true,
 
     withCreate,
     createDefineRoomLabel,
@@ -202,7 +207,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     withInit,
   });
 
-  const { getFileList } = useFilesHelper({
+  const { getFileList, uploadFiles } = useFilesHelper({
     setBreadCrumbs,
     setHasNextPage,
     setTotal,
@@ -234,6 +239,14 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
 
     withInit,
   });
+
+  const drag = useDragAndDrop({
+    withDrag:
+      withDrag && !isRoot && selectedItemType !== "rooms" ? true : undefined,
+    uploadFiles,
+  });
+
+  const dragAndDropProps = drag.withDrag ? drag : { ...drag };
 
   const onClickBreadCrumb = React.useCallback(
     (item: TBreadCrumb) => {
@@ -599,6 +612,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     totalItems: total,
 
     isRoot,
+    ...dragAndDropProps,
   });
 
   const selectorComponent = embedded ? (

@@ -29,6 +29,7 @@ import { WithFlag, Nullable } from "../../types";
 import {
   TBreadCrumb,
   TInfoBar,
+  TSelectorDragAndDrop,
   TSelectorHeader,
 } from "../../components/selector/Selector.types";
 import {
@@ -101,6 +102,11 @@ export type UseRoomsHelperProps = TUseInputItemHelper & {
   roomType?: RoomsType | RoomsType[];
   subscribe: (id: number) => void;
   withInit?: boolean;
+};
+
+export type UseDragAndPropsProps = {
+  withDrag?: boolean;
+  uploadFiles: (files: File[]) => Promise<void>;
 };
 
 export type UseFilesHelpersProps = {
@@ -177,6 +183,7 @@ export type TFilesSelectorInit = WithFlag<
 export type FilesSelectorProps = TSelectorHeader &
   TInfoBar &
   TFilesSelectorInit &
+  TSelectorDragAndDrop &
   (
     | {
         getIcon: TGetIcon;

@@ -35,6 +35,7 @@ const SectionWrapper = ({
   ...rest
 }: SectionProps) => {
   const location = useLocation();
+
   return (
     <Section {...rest} pathname={location.pathname}>
       {children}

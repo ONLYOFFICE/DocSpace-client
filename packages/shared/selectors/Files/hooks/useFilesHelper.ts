@@ -23,14 +23,17 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
 import React, { useContext } from "react";
 
 import { useTranslation } from "react-i18next";
 
 import FolderSvgUrl from "PUBLIC_DIR/images/icons/32/folder.svg?url";
 
-import { getFolder, getFolderInfo } from "../../../api/files";
+import {
+  getFolder,
+  getFolderInfo,
+  startUploadSession,
+} from "../../../api/files";
 import FilesFilter from "../../../api/files/filter";
 import { FolderType } from "../../../enums";
 import { toastr } from "../../../components/toast";
@@ -117,6 +120,36 @@ const useFilesHelper = ({
   React.useEffect(() => {
     initRef.current = isInit;
   }, [isInit]);
+
+  const uploadFiles = React.useCallback(
+    async (files: File[]) => {
+      if (!files.length || requestRunning.current) return;
+
+      const folderId = selectedItemId ?? (isUserOnly ? "@my" : "");
+      requestRunning.current = true;
+
+      try {
+        await Promise.all(
+          files.map((file) =>
+            startUploadSession(
+              folderId,
+              file.name,
+              file.size,
+              "",
+              false,
+              new Date().toISOString(),
+              true,
+            ),
+          ),
+        );
+      } catch (e) {
+        toastr.error(e as TData);
+      } finally {
+        requestRunning.current = false;
+      }
+    },
+    [selectedItemId, isUserOnly],
+  );
 
   const getFileList = React.useCallback(
     async (sIndex: number) => {
@@ -382,7 +415,7 @@ const useFilesHelper = ({
     ],
   );
 
-  return { getFileList };
+  return { getFileList, uploadFiles };
 };
 
 export default useFilesHelper;

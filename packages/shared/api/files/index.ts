@@ -685,7 +685,7 @@ export async function startUploadSession(
   folderId: string | number,
   fileName: string,
   fileSize: number,
-  relativePath: boolean,
+  relativePath: string,
   encrypted: boolean,
   createOn: unknown,
   CreateNewIfExist: boolean,

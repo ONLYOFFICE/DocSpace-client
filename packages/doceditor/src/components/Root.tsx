@@ -33,7 +33,7 @@ import { useTranslation } from "react-i18next";
 const ErrorContainer = dynamic(
   () => import("@docspace/shared/components/error-container/ErrorContainer"),
   {
-    ssr: false,
+    ssr: !!false,
   },
 );
 

@@ -47,12 +47,12 @@ import Root from "@/components/Root";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
 
 const FilePassword = dynamic(() => import("@/components/file-password"), {
-  ssr: false,
+  ssr: !!false,
 });
 
 const log = logger.child({ module: "Doceditor page" });
 
-const initialSearchParams: RootPageProps["searchParams"] = {
+const initialSearchParams: Awaited<RootPageProps["searchParams"]> = {
   fileId: undefined,
   fileid: undefined,
   version: undefined,
@@ -62,7 +62,8 @@ const initialSearchParams: RootPageProps["searchParams"] = {
   editorType: undefined,
 };
 
-async function Page({ searchParams }: RootPageProps) {
+async function Page(props: RootPageProps) {
+  const searchParams = await props.searchParams;
   const {
     fileId,
     fileid,
@@ -94,8 +95,8 @@ async function Page({ searchParams }: RootPageProps) {
     isSDK,
   };
 
-  const cookieStore = cookies();
-  const hdrs = headers();
+  const cookieStore = await cookies();
+  const hdrs = await headers();
 
   const hostname = hdrs.get("x-forwarded-host");
 

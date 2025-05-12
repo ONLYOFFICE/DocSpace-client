@@ -84,7 +84,7 @@ const useStartFillingSelectDialog = (
   openAssignRolesDialog: (form: TFile, roomName: string) => void,
 ) => {
   const { t } = useTranslation(["Common"]);
-  const resolveRef = useRef<(value: string | PromiseLike<string>) => void>();
+  const resolveRef = useRef<(value: string | PromiseLike<string>) => void>(undefined);
 
   const [createDefineRoomType, setCreateDefineRoomType] = useState<RoomsType>(
     RoomsType.FormRoom,

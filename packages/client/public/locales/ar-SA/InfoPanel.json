@@ -94,5 +94,7 @@
   "SubmenuHistory": "التاريخ",
   "UserFileUpdated": "تم تحديث الملف.",
   "Users": "المستخدمين",
-  "Versions": "إصدارات"
+  "Versions": "إصدارات",
+  "RoomIndexingDisabled": "تفعيل الفهرسة التلقائية للملفات معطل في الغرفة",
+  "RoomRenamed": "Room <1>«{{oldRoomTitle}}»</1> تم تغيير اسمها إلى <2>«{{roomTitle}}»</2>"
 }

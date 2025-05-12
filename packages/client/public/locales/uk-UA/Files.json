@@ -240,5 +240,6 @@
   "WillBeDeletedPermanently": "{{date}} буде видалено назавжди",
   "WillBeMovedToTrash": "{{date}} буде переміщено до Кошика",
   "YouLeftTheRoom": "Ви залишили кімнату",
-  "YourUserTypeHasChanged": "Ваш тип користувача змінено на <1>«{{userType}}»</1> адміністратором {{productName}} <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Ваш тип користувача змінено на <1>«{{userType}}»</1> адміністратором {{productName}} <1>{{adminName}}</1>.",
+  "CustomFilterDisable": "Вимкнути користувацький фільтр"
 }

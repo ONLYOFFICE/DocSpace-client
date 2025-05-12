@@ -240,5 +240,6 @@
   "WillBeDeletedPermanently": "سيتم حذف {{date}} نهائيًا",
   "WillBeMovedToTrash": "سيتم نقل {{date}} إلى سلة المهملات",
   "YouLeftTheRoom": "لقد قمت بمغادرة الغرفة",
-  "YourUserTypeHasChanged": "تم تغيير نوع المستخدم الخاص بكم إلى <1>«{{userType}}»</1> من قِبل مسؤول {{productName}} <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "تم تغيير نوع المستخدم الخاص بكم إلى <1>«{{userType}}»</1> من قِبل مسؤول {{productName}} <1>{{adminName}}</1>.",
+  "CustomFilterDisable": "تعطيل الفلتر المخصص"
 }

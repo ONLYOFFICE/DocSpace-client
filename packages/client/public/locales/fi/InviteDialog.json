@@ -11,7 +11,6 @@
   "InviteViaLinkDescriptionAccounts": "Luo universaali linkki itsevaltuutukselle {{productName}}:lla.",
   "InviteViaLinkDescriptionRoom": "Luo yleinen linkki huoneeseen itsevaltuutusta varten",
   "LinkCopySuccess": "Linkki on kopioitu",
-  "ResetChange": "Nollaa muutos",
   "SendInvitation": "Lähetä kutsu",
   "UserMaxAvailableRoleWarning": "Vieraita ja käyttäjiä ei voida asettaa huoneen johtajiksi. Vain huoneen ja {{productName}} pääkäyttäjät ovat sopivia tähän rooliin.",
   "UsersAlreadyAdded": "Jotkut käyttäjät on jo lisätty.",

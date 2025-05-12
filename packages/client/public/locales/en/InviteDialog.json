@@ -11,7 +11,6 @@
   "InviteViaLinkDescriptionAccounts": "Create a universal link for self-authorization in {{productName}}",
   "InviteViaLinkDescriptionRoom": "Create a universal link for self-authorization in the room",
   "LinkCopySuccess": "Link has been copied",
-  "ResetChange": "Reset change",
   "SendInvitation": "Send invitation",
   "UserMaxAvailableRoleWarning": "Guests and Users cannot be assigned as Room managers. Only Room and {{productName}} admins are suitable for the specified role.",
   "UsersAlreadyAdded": "Some users have already been added",

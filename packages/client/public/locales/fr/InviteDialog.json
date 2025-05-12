@@ -11,7 +11,6 @@
   "InviteViaLinkDescriptionAccounts": "Créez un lien universel pour l’auto-autorisation dans {{productName}}",
   "InviteViaLinkDescriptionRoom": "Créer un lien universel pour l’auto-autorisation dans la salle",
   "LinkCopySuccess": "Le lien a été copié",
-  "ResetChange": "Réinitialiser le changement",
   "SendInvitation": "Envoyer une invitation",
   "UserMaxAvailableRoleWarning": "Les invités et les utilisateurs ne peuvent pas être désignés comme gestionnaires de salle. Seuls les administrateurs de salle et de {{productName}} peuvent jouer le rôle spécifié.",
   "UsersAlreadyAdded": "Certains utilisateurs ont déjà été ajoutés",

@@ -39,10 +39,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: process.env.TS_ERRORS_IGNORE === "true",
   },
-  experimental: {
-    instrumentationHook: true,
-    serverComponentsExternalPackages: ["pino", "pino-pretty"],
-  },
+  serverExternalPackages: ["pino", "pino-pretty"],
   compiler: {
     styledComponents: true,
   },

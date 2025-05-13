@@ -68,3 +68,19 @@ export type BaseTileProps = {
   checkboxContainerRef?: React.RefObject<HTMLDivElement | null>;
   forwardRef?: React.RefObject<HTMLDivElement | null>;
 };
+
+export type TileChildProps = {
+  item: {
+    title?: string;
+    icon?: string;
+    logo?: {
+      original?: string;
+      large?: string;
+      medium?: string;
+      small?: string;
+      color?: string;
+      cover?: string | { data: string; id: string };
+    };
+    displayName?: string;
+  };
+};

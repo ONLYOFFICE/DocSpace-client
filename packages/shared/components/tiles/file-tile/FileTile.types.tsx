@@ -129,3 +129,19 @@ export type FileTileProps = {
   isEdit?: boolean;
   forwardRef?: React.RefObject<HTMLDivElement | null>;
 };
+
+export type FileChildProps = {
+  item: {
+    title?: string;
+    icon?: string;
+    logo?: {
+      original?: string;
+      large?: string;
+      medium?: string;
+      small?: string;
+      color?: string;
+      cover?: string | { data: string; id: string };
+    };
+    displayName?: string;
+  };
+};

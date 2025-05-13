@@ -110,6 +110,23 @@ const Row = (props: RowProps) => {
 
   let contextMenuHeader;
   if (React.isValidElement(children) && children.props.item) {
+    const coverValue = children.props.item.logo?.cover;
+    let coverObject;
+
+    // Handle both string and object types for cover
+    if (coverValue) {
+      if (typeof coverValue === "string") {
+        // If cover is a string, create an ICover object with the string as data
+        coverObject = {
+          data: coverValue,
+          id: "",
+        };
+      } else if (typeof coverValue === "object") {
+        // If cover is already an object with data and id
+        coverObject = coverValue;
+      }
+    }
+
     contextMenuHeader = {
       icon: children.props.item.icon,
       avatar: children.props.item.avatar,
@@ -118,7 +135,7 @@ const Row = (props: RowProps) => {
         : children.props.item.displayName || "",
       color: children.props.item.logo?.color,
       logo: children.props.item.logo?.medium,
-      cover: children.props.item.logo?.cover,
+      cover: coverObject,
       original: "",
       large: "",
       medium: "",

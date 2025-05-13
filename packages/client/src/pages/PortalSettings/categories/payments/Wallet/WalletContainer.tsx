@@ -76,6 +76,7 @@ type WalletProps = {
   wasChangeBalance?: boolean;
   wasFirstTopUp?: boolean;
   fetchBalance?: () => Promise<void>;
+  fetchTransactionHistory?: () => Promise<void>;
 };
 
 const typeClassMap: Record<string, string> = {
@@ -99,6 +100,7 @@ const Wallet = (props: WalletProps) => {
     isVisibleWalletSettings,
     wasChangeBalance,
     fetchBalance,
+    fetchTransactionHistory,
     wasFirstTopUp,
   } = props;
 
@@ -136,7 +138,7 @@ const Wallet = (props: WalletProps) => {
     const startTime = Date.now();
 
     try {
-      await fetchBalance!();
+      await Promise.all([fetchBalance!(), fetchTransactionHistory!()]);
 
       const elapsedTime = Date.now() - startTime;
       const minimumAnimationTime = 1000;
@@ -228,6 +230,7 @@ export default inject(
       wasChangeBalance,
       wasFirstTopUp,
       fetchBalance,
+      fetchTransactionHistory,
     } = paymentStore;
     const { isFreeTariff, isNonProfit } = currentQuotaStore;
 
@@ -244,6 +247,7 @@ export default inject(
       wasChangeBalance,
       wasFirstTopUp,
       fetchBalance,
+      fetchTransactionHistory,
     };
   },
 )(observer(Wallet));

@@ -46,8 +46,8 @@ import {
   convertFoldersToItems,
   convertRoomsToItems,
   convertFilesToItems,
-} from "../FilesSelector.utils";
-import { SettingsContext } from "../contexts/Settings";
+} from "../../utils";
+import { SettingsContext } from "../../utils/contexts/Settings";
 
 type UseSelectorStateProps = Pick<
   FilesSelectorProps,

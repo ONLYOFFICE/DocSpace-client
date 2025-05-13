@@ -37,12 +37,9 @@ import { TBreadCrumb } from "../../../components/selector/Selector.types";
 
 import { LoadersContext } from "../contexts/Loaders";
 
-import { PAGE_COUNT } from "../FilesSelector.constants";
-import { UseRoomsHelperProps } from "../FilesSelector.types";
-import {
-  convertRoomsToItems,
-  getDefaultBreadCrumb,
-} from "../FilesSelector.utils";
+import { PAGE_COUNT } from "../constants";
+import { UseRoomsHelperProps } from "../types";
+import { convertRoomsToItems, getDefaultBreadCrumb } from "..";
 
 import useInputItemHelper from "./useInputItemHelper";
 
@@ -222,9 +219,9 @@ const useRoomsHelper = ({
         } else {
           setTotal(total);
         }
-        setItems(itemList);
+        setItems?.(itemList);
       } else {
-        setItems((prevState) => {
+        setItems?.((prevState) => {
           if (prevState) return [...prevState, ...itemList];
           return [...itemList];
         });
@@ -237,7 +234,6 @@ const useRoomsHelper = ({
       setIsFirstLoad(false);
     },
     [
-      withCreate,
       searchValue,
       createDefineRoomType,
       t,
@@ -253,6 +249,7 @@ const useRoomsHelper = ({
       onSetBaseFolderPath,
       setBreadCrumbs,
       setIsBreadCrumbsLoading,
+      withCreate,
       setItems,
       setTotal,
       createDefineRoomLabel,

@@ -9,7 +9,6 @@
   "InviteViaLink": "Uzaicināt, izmantojot saiti",
   "InviteViaLinkDescriptionAccounts": "Izveidot universālu saiti pašautorizācijai {{productName}}",
   "LinkCopySuccess": "Saite ir nokopēta",
-  "ResetChange": "Atiestatīt izmaiņas",
   "SendInvitation": "Sūtīt ielūgumu",
   "UserMaxAvailableRoleWarning": "Viesi un lietotāji nevar būt telpu pārvaldnieki. Norādītajai lomai ir piemērota tikai telpa un {{productName}} administratori.",
   "UsersAlreadyAdded": "Daži lietotāji jau ir pievienoti"

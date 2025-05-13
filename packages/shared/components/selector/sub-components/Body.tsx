@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import InfiniteLoader from "react-window-infinite-loader";
 import { FixedSizeList as List } from "react-window";
 import { classNames } from "@docspace/shared/utils";
@@ -51,8 +51,7 @@ import { Item } from "./Item";
 import { Info } from "./Info";
 import { VirtualScroll } from "./VirtualScroll";
 import { Tabs } from "../../tabs";
-import { DragAndDrop } from "../../drag-and-drop";
-import { DragAndDropContext } from "../contexts/DragAndDrop";
+import { DragAndDropZone } from "./DragAndDropZone";
 
 const CONTAINER_PADDING = 16;
 const HEADER_HEIGHT = 54;
@@ -104,14 +103,6 @@ const Body = ({
   const isSearch = React.useContext(SearchValueContext);
   const { withInfoBar } = React.useContext(InfoBarContext);
 
-  const {
-    withDrag,
-    isDragActive,
-    isOuterDragActive,
-    onDragDrop,
-    onDragLeave,
-    onDragOver,
-  } = React.useContext(DragAndDropContext);
 
   const { withBreadCrumbs } = React.useContext(BreadCrumbsContext);
 
@@ -181,7 +172,7 @@ const Body = ({
     };
   }, [onBodyResize]);
 
-  React.useEffect(() => {});
+  React.useEffect(() => { });
 
   React.useEffect(() => {
     onBodyResize();
@@ -274,6 +265,8 @@ const Body = ({
     return HEADER_HEIGHT + CONTAINER_PADDING;
   };
 
+  const computedScrollbarHeight = `calc(100% - ${Math.abs(listHeight + CONTAINER_PADDING)}px)`;
+
   return (
     <div
       ref={bodyRef}
@@ -328,26 +321,11 @@ const Body = ({
         <Scrollbar style={{ height: listHeight }}>{rowLoader}</Scrollbar>
       ) : itemsCount === 0 ? (
         <>
-          {withDrag && (
-            <DragAndDrop
-              style={
-                {
-                  "--list-height": `${listHeight}px`,
-                } as React.CSSProperties
-              }
-              isDropZone
-              dragging={isDragActive}
-              onDragOver={onDragOver}
-              onDrop={onDragDrop}
-              onDragLeave={onDragLeave}
-              className={classNames(styles.dropzone, {
-                [styles.dragging]: isDragActive,
-                [styles.isOuterDragging]: isOuterDragActive,
-              })}
-            >
-              {" "}
-            </DragAndDrop>
-          )}
+          <DragAndDropZone style={{
+            "--list-height": `${listHeight}px`,
+          } as React.CSSProperties
+          }
+          />
           <EmptyScreen
             withSearch={isSearch}
             items={items}
@@ -372,33 +350,15 @@ const Body = ({
             <Scrollbar
               style={
                 {
-                  height: `calc(100% - ${Math.abs(listHeight + CONTAINER_PADDING)}px)`,
+                  height: computedScrollbarHeight,
                   overflow: "hidden",
                   "--scrollbar-padding-inline-end": 0,
                   "--scrollbar-padding-inline-end-mobile": 0,
                 } as React.CSSProperties
               }
             >
-              {withDrag && (
-                <DragAndDrop
-                  style={
-                    {
-                      "--list-height": `calc(100% - ${Math.abs(listHeight + CONTAINER_PADDING)}px)`,
-                    } as React.CSSProperties
-                  }
-                  isDropZone
-                  dragging={isDragActive}
-                  onDragOver={onDragOver}
-                  onDrop={onDragDrop}
-                  onDragLeave={onDragLeave}
-                  className={classNames(styles.dropzone, {
-                    [styles.dragging]: isDragActive,
-                    [styles.isOuterDragging]: isOuterDragActive,
-                  })}
-                >
-                  {" "}
-                </DragAndDrop>
-              )}
+              <DragAndDropZone style={{ height: computedScrollbarHeight }} />
+
               {items.map((item, index) => (
                 <div
                   key={item.id}
@@ -437,26 +397,12 @@ const Body = ({
             >
               {({ onItemsRendered, ref }) => (
                 <>
-                  {withDrag && (
-                    <DragAndDrop
-                      style={
-                        {
-                          "--list-height": `${listHeight}px`,
-                        } as React.CSSProperties
-                      }
-                      isDropZone
-                      dragging={isDragActive}
-                      onDragOver={onDragOver}
-                      onDrop={onDragDrop}
-                      onDragLeave={onDragLeave}
-                      className={classNames(styles.dropzone, {
-                        [styles.dragging]: isDragActive,
-                        [styles.isOuterDragging]: isOuterDragActive,
-                      })}
-                    >
-                      {" "}
-                    </DragAndDrop>
-                  )}
+                  <DragAndDropZone style={{
+                    "--list-height": `${listHeight}px`,
+                  } as React.CSSProperties
+                  }
+                  />
+
                   <List
                     className="items-list"
                     height={listHeight}

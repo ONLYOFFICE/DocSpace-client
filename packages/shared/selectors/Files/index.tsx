@@ -38,22 +38,23 @@ import { Aside } from "../../components/aside";
 import { Backdrop } from "../../components/backdrop";
 import { Portal } from "../../components/portal";
 import { toastr } from "../../components/toast";
-import {
-  TBreadCrumb,
-  TSelectorDragAndDrop,
-} from "../../components/selector/Selector.types";
+import { TBreadCrumb } from "../../components/selector/Selector.types";
+
+import useRoomsHelper from "../utils/hooks/useRoomsHelper";
+import useSocketHelper from "../utils/hooks/useSocketHelper";
 
 import useFilesHelper from "./hooks/useFilesHelper";
-import useRoomsHelper from "./hooks/useRoomsHelper";
 import useRootHelper from "./hooks/useRootHelper";
-import useSocketHelper from "./hooks/useSocketHelper";
 import useSelectorBody from "./hooks/useSelectorBody";
 import useSelectorState from "./hooks/useSelectorState";
 
 import { FilesSelectorProps } from "./FilesSelector.types";
-import { SettingsContextProvider } from "./contexts/Settings";
-import { LoadersContext, LoadersContextProvider } from "./contexts/Loaders";
-import { getDefaultBreadCrumb } from "./FilesSelector.utils";
+import { SettingsContextProvider } from "../utils/contexts/Settings";
+import {
+  LoadersContext,
+  LoadersContextProvider,
+} from "../utils/contexts/Loaders";
+import { getDefaultBreadCrumb } from "../utils";
 import { useDragAndDrop } from "./hooks/useDragAndDrop";
 
 const FilesSelectorComponent = (props: FilesSelectorProps) => {

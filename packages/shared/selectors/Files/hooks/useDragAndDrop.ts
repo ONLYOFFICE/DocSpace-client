@@ -22,10 +22,10 @@
 //
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-
 import { useCallback, useEffect, useState } from "react";
+import { TSelectorDragAndDrop } from "../../../components/selector/Selector.types";
 import { UseDragAndPropsProps } from "../FilesSelector.types";
-import { TSelectorDragAndDrop } from "components/selector/Selector.types";
+
 export const useDragAndDrop = ({
   withDrag,
   uploadFiles,
@@ -44,7 +44,7 @@ export const useDragAndDrop = ({
     };
 
     const handleDragLeave = () => {
-      dragCounter--;
+      dragCounter -= 1;
       if (dragCounter === 0) {
         setIsOuterDragActive(false);
       }
@@ -80,7 +80,7 @@ export const useDragAndDrop = ({
   }, []);
 
   const onDragDrop = useCallback(
-    async (acceptedFiles: File[]) => {
+    (acceptedFiles: File[]) => {
       setIsDragActive(false);
       uploadFiles(acceptedFiles);
     },

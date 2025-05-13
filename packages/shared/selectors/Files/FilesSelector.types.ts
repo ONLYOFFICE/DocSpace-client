@@ -41,6 +41,7 @@ import {
 } from "../../api/files/types";
 import { DeviceType, FolderType, RoomsType, FileType } from "../../enums";
 import { TRoom, TRoomSecurity } from "../../api/rooms/types";
+import { TGetIcon } from "../utils/types";
 
 export type TCreateDefineRoom = {
   label: string;
@@ -70,27 +71,30 @@ export type UseSocketHelperProps = {
   setTotal: React.Dispatch<React.SetStateAction<number>>;
   disabledItems: (string | number)[];
   filterParam?: string;
-  withCreate: boolean;
+  withCreate?: boolean;
 };
 
 export type UseRoomsHelperProps = TUseInputItemHelper & {
-  setBreadCrumbs?: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
-  setHasNextPage: (value: boolean) => void;
-  setTotal: (value: number) => void;
-  setIsRoot?: (value: boolean) => void;
   searchValue?: string;
   searchArea?: string;
   disableThirdParty?: boolean;
   isRoomsOnly: boolean;
+  roomType?: RoomsType | RoomsType[];
+  excludeItems?: (number | string | undefined)[];
+  isInit: boolean;
+  createDefineRoomLabel?: string;
+  createDefineRoomType?: RoomsType;
   onSetBaseFolderPath?: (
     value: number | string | undefined | TBreadCrumb[],
   ) => void;
-  excludeItems?: (number | string | undefined)[];
-  isInit: boolean;
-  setIsInit: (value: boolean) => void;
-  createDefineRoomLabel?: string;
-  createDefineRoomType?: RoomsType;
   getRootData?: () => Promise<void>;
+  subscribe: (id: number) => void;
+  withInit?: boolean;
+  setIsInit: (value: boolean) => void;
+  setBreadCrumbs?: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
+  setHasNextPage: (value: boolean) => void;
+  setTotal: (value: number) => void;
+  setIsRoot?: (value: boolean) => void;
   setSelectedItemType?: React.Dispatch<
     React.SetStateAction<"rooms" | "files" | undefined>
   >;
@@ -99,9 +103,6 @@ export type UseRoomsHelperProps = TUseInputItemHelper & {
       TRoomSecurity | TFileSecurity | TFolderSecurity | undefined
     >
   >;
-  roomType?: RoomsType | RoomsType[];
-  subscribe: (id: number) => void;
-  withInit?: boolean;
 };
 
 export type UseDragAndPropsProps = {
@@ -150,9 +151,9 @@ export type UseFilesHelpersProps = {
 };
 
 export type TUseInputItemHelper = {
-  withCreate: boolean;
+  withCreate?: boolean;
   selectedItemId?: string | number | undefined;
-  setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
+  setItems?: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
 };
 
 export type TSelectedFileInfo = {
@@ -163,8 +164,6 @@ export type TSelectedFileInfo = {
   fileType?: FileType | undefined;
   inPublic?: boolean | undefined;
 } | null;
-
-export type TGetIcon = (size: number, fileExst: string) => string;
 
 export type TFilesSelectorInit = WithFlag<
   "withInit",

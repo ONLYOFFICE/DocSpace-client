@@ -51,7 +51,7 @@ import {
 } from "../../../skeletons/selector";
 
 import { FilesSelectorProps } from "../FilesSelector.types";
-import { LoadersContext } from "../contexts/Loaders";
+import { LoadersContext } from "../../utils/contexts/Loaders";
 
 type PickedSearchProps = Pick<
   TSelectorSearch,
@@ -110,7 +110,7 @@ const useSelectorBody = ({
   breadCrumbs,
   onSelectBreadCrumb,
 
-  //with drag and drop
+  // with drag and drop
   withDrag,
   isDragActive,
   isOuterDragActive,
@@ -143,7 +143,7 @@ const useSelectorBody = ({
   const { showBreadCrumbsLoader, isNextPageLoading, showLoader } =
     useContext(LoadersContext);
 
-  const drag = {
+  const dragAndDrop = {
     withDrag,
     isDragActive,
     isOuterDragActive,
@@ -152,10 +152,10 @@ const useSelectorBody = ({
     onDragDrop,
   } as TSelectorDragAndDrop;
 
-  const dragAndDropProps = drag.withDrag
-    ? drag
+  const dragAndDropProps = dragAndDrop.withDrag
+    ? dragAndDrop
     : {
-        ...drag,
+        ...dragAndDrop,
       };
 
   const headerSelectorProps: TSelectorHeader = withHeader

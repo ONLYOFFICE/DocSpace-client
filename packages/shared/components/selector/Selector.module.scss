@@ -23,8 +23,8 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-@import "@docspace/shared/styles/_mixins.scss";
-@import "@docspace/shared/styles/variables/devices";
+@import "../../../shared/styles/mixins.scss";
+@import "../../../shared/styles/variables/devices.scss";
 
 .selector {
   width: 100%;
@@ -81,35 +81,8 @@
   }
 }
 
-.dropzone {
-  z-index: 310 !important;
-  position: absolute !important;
-  padding-inline: 2px !important;
-  margin-inline: 6px !important;
-  margin-bottom: 6px !important;
-  width: calc(100% - 12px) !important;
-  height: calc(var(--list-height) - 6px) !important;
-  box-sizing: border-box !important;
-  border-radius: 6px !important;
-  pointer-events: none;
-
-  &.dragging {
-    background: var(--selector-dnd-hover-bg-color) !important;
-  }
-
-  &.isOuterDragging::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border: var(--selector-dnd-border); // светло-синий, как на макете
-    border-radius: 6px;
-    border-spacing: 2px;
-    pointer-events: auto;
-    z-index: 1;
-  }
-}
-
-%accessComboboxStyles {
+.comboBox,
+.accessRightSelect {
   margin-bottom: 2px;
   max-height: 50px;
 
@@ -127,13 +100,7 @@
   }
 }
 
-.comboBox {
-  @extend %accessComboboxStyles;
-}
 
-.accessRightSelect {
-  @extend %accessComboboxStyles;
-}
 
 .footer {
   width: calc(100% - 32px);
@@ -198,6 +165,34 @@
     .sticky-indent {
       height: 0;
     }
+  }
+}
+
+.dropzone {
+  z-index: 310 !important;
+  position: absolute !important;
+  padding-inline: 2px !important;
+  margin-inline: 6px !important;
+  margin-bottom: 6px !important;
+  width: calc(100% - 12px) !important;
+  height: calc(var(--list-height) - 6px) !important;
+  box-sizing: border-box !important;
+  border-radius: 6px !important;
+  pointer-events: none;
+
+  &.dragging {
+    background: var(--selector-dnd-hover-bg-color) !important;
+  }
+
+  &.isOuterDragging::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: var(--selector-dnd-border);
+    border-radius: 6px;
+    border-spacing: 2px;
+    pointer-events: auto;
+    z-index: 1;
   }
 }
 
@@ -363,11 +358,9 @@
     }
   }
   .arrowRightSvg {
-    :global {
       path {
         fill: var(--selector-breadcrumbs-arrow-right-color);
       }
-    }
 
     &.rtl {
       transform: scaleX(-1);

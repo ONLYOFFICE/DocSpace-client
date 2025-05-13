@@ -39,14 +39,14 @@ import { RowLoader, SearchLoader } from "../../skeletons/selector";
 
 import { TTranslation } from "../../types";
 
+import useSocketHelper from "../utils/hooks/useSocketHelper";
+import useRoomsHelper from "../utils/hooks/useRoomsHelper";
 import { RoomSelectorProps } from "./RoomSelector.types";
 import { convertToItems } from "./RoomSelector.utils";
-import useRoomsHelper from "../Files/hooks/useRoomsHelper";
-import useSocketHelper from "../Files/hooks/useSocketHelper";
 import {
   LoadersContext,
   LoadersContextProvider,
-} from "../Files/contexts/Loaders";
+} from "../utils/contexts/Loaders";
 
 const RoomSelectorComponent = ({
   id,
@@ -84,7 +84,7 @@ const RoomSelectorComponent = ({
   createDefineRoomType,
 
   withInit,
-  withCreate = true,
+  withCreate,
   initItems,
   initTotal,
   initHasNextPage,

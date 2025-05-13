@@ -353,7 +353,7 @@ const DirectThirdPartyConnection = ({
             isThirdParty
             isSelectFolder={isSelectFolder}
             isSelect={isSelect}
-            checkCreating={selectedThirdPartyAccount?.provider_key === "WebDav"}
+            checkCreating={selectedThirdPartyAccount?.key === "WebDav"}
             filesSelectorSettings={filesSelectorSettings}
             newPath={newPath}
             basePath={basePath}

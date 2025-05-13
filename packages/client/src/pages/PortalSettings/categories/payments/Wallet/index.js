@@ -28,8 +28,6 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import "./styles/Wallet.scss";
-
 import TransactionHistoryLoader from "./sub-components/TransactionHistoryLoader";
 import WalletContainer from "./WalletContainer";
 

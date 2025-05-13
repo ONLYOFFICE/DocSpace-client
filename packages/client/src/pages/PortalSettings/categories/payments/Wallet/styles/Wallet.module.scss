@@ -24,40 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-.wallet-container {
+.walletContainer {
   width: 100%;
 
-  .wallet-description {
+  .walletDescription {
     font-size: 12px;
     line-height: 1.334em;
-
     max-width: 660px;
     color: var(--payment-text-color);
     margin-bottom: 4px;
   }
 
-  .balance-wrapper {
+  .balanceWrapper {
     max-width: 152px;
     margin-top: 20px;
     margin-bottom: 12px;
   }
-  .auto-payment-information {
+
+  .autoPaymentInformation {
     margin-bottom: 24px;
     color: var(--payment-text-color);
   }
-  .auto-payment-editing {
+
+  .autoPaymentEditing {
     display: flex;
   }
-  .header-container {
+
+  .headerContainer {
     display: flex;
     align-items: center;
     gap: 4px;
   }
 
-  .balance-amount-container {
-    display: flex;
-    align-items: baseline;
-  }
   .balanceAmountContainer {
     display: flex;
     align-items: baseline;
@@ -76,5 +74,35 @@
   .fraction {
     font-weight: 700;
     font-size: 28px;
+  }
+}
+
+@keyframes circularRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  40% {
+    transform: rotate(-180deg);
+  }
+  50% {
+    transform: rotate(-180deg);
+  }
+  90% {
+    transform: rotate(-360deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.refreshIcon {
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+.spinning {
+  svg {
+    animation: circularRotate 2s ease-in-out infinite !important;
+    transform-origin: center;
   }
 }

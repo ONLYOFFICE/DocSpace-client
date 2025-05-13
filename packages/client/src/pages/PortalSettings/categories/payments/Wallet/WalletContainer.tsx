@@ -42,8 +42,7 @@ import WalletRefilledModal from "./WalletRefilledModal";
 import { formattedBalanceTokens } from "./utils";
 import PayerInformation from "../PayerInformation";
 import AutoPaymentInfo from "./sub-components/AutoPaymentInfo";
-import "./styles/Wallet.scss";
-import refreshStyles from "./styles/RefreshIcon.module.scss";
+import styles from "./styles/Wallet.module.scss";
 
 const RefreshIconButton = ({
   isRefreshing,
@@ -57,8 +56,8 @@ const RefreshIconButton = ({
       iconName={RefreshReactSvgUrl}
       size={16}
       onClick={onClick}
-      className={classNames(refreshStyles.refreshIcon, {
-        [refreshStyles.spinning]: isRefreshing,
+      className={classNames(styles.refreshIcon, {
+        [styles.spinning]: isRefreshing,
       })}
     />
   );
@@ -161,16 +160,16 @@ const Wallet = (props: WalletProps) => {
   };
 
   return (
-    <div className="wallet-container">
-      <Text className="wallet-description">
+    <div className={styles.walletContainer}>
+      <Text className={styles.walletDescription}>
         {t("WalletDescription", { productName: t("Common:ProductName") })}
       </Text>
       {!isNonProfit && (cardLinkedOnFreeTariff || !isFreeTariff) ? (
         <PayerInformation />
       ) : null}
 
-      <div className="balance-wrapper">
-        <div className="header-container">
+      <div className={styles.balanceWrapper}>
+        <div className={styles.headerContainer}>
           <Text isBold fontSize="16px">
             {t("BalanceText")}
           </Text>
@@ -179,11 +178,11 @@ const Wallet = (props: WalletProps) => {
           ) : null}
         </div>
 
-        <div className="balance-amount-container">
+        <div className={styles.balanceAmountContainer}>
           {tokens.map((token) => (
             <Text
               key={`${token.type}-${token.value}`}
-              className={typeClassMap[token.type] || ""}
+              className={styles[typeClassMap[token.type]] || ""}
             >
               {token.value}
             </Text>

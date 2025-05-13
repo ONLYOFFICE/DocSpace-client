@@ -36,30 +36,29 @@ const ButtonContainer = ({
   onCancelModuleSettings,
   isChanged,
   isThirdStorageChanged,
-  selectedEnableSchedule,
   t,
 }: ButtonContainerProps) => {
-  return (
-    (selectedEnableSchedule || isChanged || isThirdStorageChanged) && (
-      <div className="auto-backup_buttons">
-        <Button
-          label={t("Common:SaveButton")}
-          onClick={onSaveModuleSettings}
-          primary
-          isDisabled={isLoadingData || !(isChanged || isThirdStorageChanged)}
-          size={buttonSize}
-          className="save-button"
-        />
+  if (!(isChanged || isThirdStorageChanged)) return;
 
-        <Button
-          className="cancel-button"
-          label={t("Common:CancelButton")}
-          isDisabled={isLoadingData || !(isChanged || isThirdStorageChanged)}
-          onClick={onCancelModuleSettings}
-          size={buttonSize}
-        />
-      </div>
-    )
+  return (
+    <div className="auto-backup_buttons">
+      <Button
+        label={t("Common:SaveButton")}
+        onClick={onSaveModuleSettings}
+        primary
+        isDisabled={isLoadingData || !(isChanged || isThirdStorageChanged)}
+        size={buttonSize}
+        className="save-button"
+      />
+
+      <Button
+        className="cancel-button"
+        label={t("Common:CancelButton")}
+        isDisabled={isLoadingData || !(isChanged || isThirdStorageChanged)}
+        onClick={onCancelModuleSettings}
+        size={buttonSize}
+      />
+    </div>
   );
 };
 

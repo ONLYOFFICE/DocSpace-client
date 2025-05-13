@@ -624,7 +624,6 @@ const AutomaticBackup = ({
         onCancelModuleSettings={onCancelModuleSettings}
         isChanged={isChanged}
         isThirdStorageChanged={isThirdStorageChanged}
-        selectedEnableSchedule={selectedEnableSchedule}
       />
 
       {isBackupProgressVisible ? (

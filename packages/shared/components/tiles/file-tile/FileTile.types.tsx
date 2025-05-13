@@ -76,7 +76,7 @@ export type FileTileProps = {
   /** Indicates if the tile is in checked/selected state */
   checked?: boolean;
   /** Child components to render within the tile. Can be a single element or an array of elements */
-  children?: ReactElement<any> | ReactElement<any>[];
+  children?: ReactElement | ReactElement[];
   /** Width of the spacer for the context menu button */
   contextButtonSpacerWidth?: number;
   /** Array of context menu options to display when the context menu is opened */
@@ -98,7 +98,7 @@ export type FileTileProps = {
   /** Function to handle selection with Shift key */
   withShiftSelect?: (item: FileItemType) => void;
   /** Custom element to render within the tile */
-  element?: ReactElement<any>;
+  element?: ReactElement;
   /** Function called when the context menu button is clicked */
   tileContextClick?: (isRightClick?: boolean) => void;
   /** Function to get the context menu model */
@@ -110,9 +110,9 @@ export type FileTileProps = {
   /** Function to set the selection state of the tile */
   setSelection?: (items: FolderItem[]) => void;
   /** Custom content element to be rendered in the tile */
-  contentElement?: ReactElement<any>;
+  contentElement?: ReactElement;
   /** Custom badges to be displayed on the tile */
-  badges?: ReactElement<any>;
+  badges?: ReactElement;
   /** Flag indicating if the tile should be highlighted */
   isHighlight?: boolean;
   /** Indicates if the file is in a blocking operation state */

@@ -80,7 +80,7 @@ export const getCurrentDisplayType = (
 };
 
 export const parseChildren = (
-  children: (React.ReactElement<any> | null)[] | React.ReactElement<any> | null,
+  children: (React.ReactElement | null)[] | React.ReactElement | null,
   headerDisplayName: string,
   bodyDisplayName: string,
   footerDisplayName: string,
@@ -92,7 +92,7 @@ export const parseChildren = (
   let container = null;
 
   if (children) {
-    React.Children.map(children, (child: React.ReactElement<any> | null) => {
+    React.Children.map(children, (child: React.ReactElement | null) => {
       if (!child) return;
       const type:
         | React.JSXElementConstructor<{

@@ -81,7 +81,7 @@ type Story = StoryObj<typeof Toast>;
 
 interface ToastTemplateProps extends ToastProps {
   withCross?: boolean;
-  data?: React.ReactNode | string | React.ReactElement<any>;
+  data?: React.ReactNode | string | React.ReactElement;
   timeout?: number;
 }
 
@@ -98,7 +98,7 @@ const ToastTemplate = ({
     if (typeof data === "string") {
       message = data;
     } else if (React.isValidElement(data)) {
-      message = (data as React.ReactElement<any>).props.children;
+      message = (data as React.ReactElement).props.children;
     } else if (Array.isArray(data)) {
       message = data
         .map((child) => {
@@ -106,7 +106,7 @@ const ToastTemplate = ({
             return child;
           }
           if (React.isValidElement(child)) {
-            const childElement = child as React.ReactElement<any>;
+            const childElement = child as React.ReactElement;
             return childElement.props.children;
           }
           return "";

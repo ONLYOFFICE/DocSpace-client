@@ -87,7 +87,7 @@ const GridComponent = ({
     key: string;
     isScrolling: boolean;
   }) => {
-    const elem = children[index] as React.ReactElement<any>;
+    const elem = children[index] as React.ReactElement;
     const itemClassNames = elem.props?.className;
 
     const isFolder = itemClassNames?.includes("isFolder");
@@ -136,7 +136,7 @@ const GridComponent = ({
   };
 
   const getItemSize = ({ index }: { index: number }) => {
-    const elem = children[index] as React.ReactElement<any>;
+    const elem = children[index] as React.ReactElement;
 
     if (
       React.isValidElement(elem) &&

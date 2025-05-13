@@ -83,7 +83,7 @@ export type PeopleSelectorProps = TSelectorHeader &
     setActiveTab?: (id: string) => void;
 
     checkIfUserInvited?: (user: TUser) => boolean;
-    injectedElement?: React.ReactElement<any>;
+    injectedElement?: React.ReactElement;
     alwaysShowFooter?: boolean;
     onlyRoomMembers?: boolean;
   } & ContactsSelectorGroups &

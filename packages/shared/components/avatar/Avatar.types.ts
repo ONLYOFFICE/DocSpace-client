@@ -71,7 +71,7 @@ export type AvatarProps = {
   /** Display initials for group when `source` is set to blank */
   isGroup?: boolean;
   /** Accepts roleIcon */
-  roleIcon?: React.ReactElement<any>;
+  roleIcon?: React.ReactElement;
   noClick?: boolean;
   hasAvatar?: boolean;
   onChangeFile?: () => void;

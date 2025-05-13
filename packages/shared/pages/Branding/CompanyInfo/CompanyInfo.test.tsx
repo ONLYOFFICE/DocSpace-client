@@ -36,7 +36,7 @@ interface TransProps {
   t: (key: string, values?: Record<string, unknown>) => string;
   i18nKey: string;
   values?: Record<string, unknown>;
-  components?: Record<string, React.ReactElement<any>>;
+  components?: Record<string, React.ReactElement>;
   ns?: string;
   children?: React.ReactNode;
 }

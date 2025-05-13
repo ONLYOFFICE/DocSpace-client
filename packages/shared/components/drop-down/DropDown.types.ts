@@ -106,7 +106,7 @@ export interface VirtualListProps {
   /** Clean children elements */
   cleanChildren?: React.ReactNode;
   /** Children elements */
-  children: React.ReactElement<any> | React.ReactNode;
+  children: React.ReactElement | React.ReactNode;
   /** Row component */
   Row: React.MemoExoticComponent<
     ({ data, index, style }: RowProps) => JSX.Element

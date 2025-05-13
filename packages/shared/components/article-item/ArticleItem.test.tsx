@@ -51,7 +51,7 @@ const baseProps = {
   linkData: { path: "", state: {} },
 };
 
-const renderWithRouter = (ui: React.ReactElement<any>) => {
+const renderWithRouter = (ui: React.ReactElement) => {
   return render(ui, { wrapper: MemoryRouter });
 };
 

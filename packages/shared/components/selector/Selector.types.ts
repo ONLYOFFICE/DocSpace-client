@@ -404,7 +404,7 @@ export type SelectorProps = TSelectorHeader &
     descriptionText?: string;
 
     withPadding?: boolean;
-    injectedElement?: React.ReactElement<any>;
+    injectedElement?: React.ReactElement;
 
     isSSR?: boolean;
     selectedItem?: TSelectorItem | null; // no multiSelect only
@@ -568,7 +568,7 @@ export type TSelectorItemNew = MergeTypes<
   {
     isCreateNewItem: boolean;
     hotkey?: string;
-    dropDownItems?: React.ReactElement<any>[];
+    dropDownItems?: React.ReactElement[];
     onCreateClick?: VoidFunction;
     onBackClick: VoidFunction;
 

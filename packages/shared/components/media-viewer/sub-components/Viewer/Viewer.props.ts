@@ -24,12 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { JSX } from "react";
 import type { TFile } from "../../../../api/files/types";
 import type { DeviceType } from "../../../../enums";
 import type { getCustomToolbar } from "../../MediaViewer.helpers";
 import type { PlaylistType } from "../../MediaViewer.types";
-
-import type { JSX } from "react";
 
 interface ViewerProps {
   targetFile?: TFile;

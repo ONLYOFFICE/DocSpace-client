@@ -34,7 +34,7 @@ export type TCombobox = null | "badge" | "onlyIcon" | "descriptive";
 
 export type TBaseOption = {
   key: string | number;
-  icon?: string | React.ElementType | React.ReactElement<any>;
+  icon?: string | React.ElementType | React.ReactElement;
   label?: string;
   color?: string;
   backgroundColor?: string;

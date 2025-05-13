@@ -108,7 +108,7 @@ export type ModalDialogProps = Partial<
   >
 > & {
   /** Displays the child elements */
-  children: (React.ReactElement<any> | null)[] | React.ReactElement<any>;
+  children: (React.ReactElement | null)[] | React.ReactElement;
   /** Displays type */
   displayType?: ModalDialogType;
   /** Detailed display type for each dimension */
@@ -124,9 +124,6 @@ export type ModalDialogFormWrapperProps = {
 
 export type ModalDialogBackdropProps = {
   className?: string;
-  children:
-    | React.ReactNode
-    | React.ReactElement<any>[]
-    | React.ReactElement<any>;
+  children: React.ReactNode | React.ReactElement[] | React.ReactElement;
   zIndex?: number;
 };

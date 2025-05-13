@@ -38,7 +38,7 @@ export type RowProps = {
    * If there is no value, the occupied space is distributed among the other child elements. */
   checked?: boolean;
   /** Displays the child elements */
-  children?: React.ReactElement<{ item?: any }>;
+  children?: React.ReactElement;
   /** Accepts class */
   className?: string;
   /** Required for displaying a certain element in the row */

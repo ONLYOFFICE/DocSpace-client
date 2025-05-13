@@ -40,7 +40,7 @@ jest.mock("../../utils", () => ({
   isTablet: jest.fn(),
 }));
 
-const renderWithTheme = (ui: React.ReactElement<any>) => {
+const renderWithTheme = (ui: React.ReactElement) => {
   return render(<ThemeProvider theme={Base}>{ui}</ThemeProvider>);
 };
 

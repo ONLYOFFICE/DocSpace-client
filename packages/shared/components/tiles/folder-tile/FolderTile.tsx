@@ -37,7 +37,7 @@ import {
   ContextMenu,
   ContextMenuRefType,
 } from "@docspace/shared/components/context-menu";
-import { FolderTileProps } from "./FolderTile.types";
+import { FolderItem, FolderTileProps } from "./FolderTile.types";
 import { hasOwnProperty } from "../../../utils/object";
 import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
 import { HeaderType } from "../../context-menu/ContextMenu.types";
@@ -82,7 +82,9 @@ export const FolderTile = ({
     contextOptions &&
     contextOptions?.length > 0;
 
-  const firstChild = childrenArray[0] as React.ReactElement<{ item?: any }>;
+  const firstChild = childrenArray[0] as React.ReactElement<{
+    item?: FolderItem;
+  }>;
   const contextMenuHeader: HeaderType | undefined =
     React.isValidElement(firstChild) && firstChild.props?.item
       ? {

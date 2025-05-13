@@ -32,7 +32,7 @@ import { Base } from "../../themes";
 
 import { Slider } from "./index";
 
-const renderWithTheme = (component: React.ReactElement<any>) => {
+const renderWithTheme = (component: React.ReactElement) => {
   return render(<ThemeProvider theme={Base}>{component}</ThemeProvider>);
 };
 

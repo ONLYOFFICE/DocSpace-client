@@ -43,7 +43,7 @@ import classNames from "classnames";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { isMobile } from "@docspace/shared/utils";
 
-import { FileTileProps } from "./FileTile.types";
+import { FileItemType, FileTileProps } from "./FileTile.types";
 
 import styles from "./FileTile.module.scss";
 
@@ -94,7 +94,9 @@ const FileTile = ({
     contextOptions &&
     contextOptions.length > 0;
 
-  const firstChild = childrenArray[0] as React.ReactElement<{ item?: any }>;
+  const firstChild = childrenArray[0] as React.ReactElement<{
+    item?: FileItemType;
+  }>;
   const contextMenuHeader: HeaderType | undefined =
     React.isValidElement(firstChild) && firstChild.props?.item
       ? {

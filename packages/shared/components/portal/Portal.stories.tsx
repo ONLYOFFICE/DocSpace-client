@@ -57,7 +57,7 @@ export const CustomContainer: Story<PortalProps> = () => {
       <h3>Main content</h3>
       <div
         className={styles.customContainer}
-        ref={node => {
+        ref={(node) => {
           setContainer(node);
         }}
       >

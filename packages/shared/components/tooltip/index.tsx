@@ -26,7 +26,7 @@
 
 import React, { useEffect, useRef } from "react";
 import { flip, shift, offset } from "@floating-ui/dom";
-import { Tooltip as ReactTooltip, TooltipRefProps } from "react-tooltip";
+import { Tooltip as ReactTooltip } from "react-tooltip";
 import classNames from "classnames";
 
 import { Portal } from "../portal";

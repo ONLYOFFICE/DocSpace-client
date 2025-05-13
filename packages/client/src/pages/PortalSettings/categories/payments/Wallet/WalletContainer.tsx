@@ -27,19 +27,42 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { toastr } from "@docspace/shared/components/toast";
+
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
 import TransactionHistory from "./TransactionHistory";
 import TopUpModal from "./TopUpModal";
 import WalletRefilledModal from "./WalletRefilledModal";
 import { formattedBalanceTokens } from "./utils";
-
-import "./styles/Wallet.scss";
-
 import PayerInformation from "../PayerInformation";
 import AutoPaymentInfo from "./sub-components/AutoPaymentInfo";
+import "./styles/Wallet.scss";
+import refreshStyles from "./styles/RefreshIcon.module.scss";
+
+const RefreshIconButton = ({
+  isRefreshing,
+  onClick,
+}: {
+  isRefreshing: boolean;
+  onClick: () => void;
+}) => {
+  return (
+    <IconButton
+      iconName={RefreshReactSvgUrl}
+      size={16}
+      onClick={onClick}
+      className={classNames(refreshStyles.refreshIcon, {
+        [refreshStyles.spinning]: isRefreshing,
+      })}
+    />
+  );
+};
 
 type WalletProps = {
   walletBalance: number;
@@ -51,6 +74,8 @@ type WalletProps = {
   isNonProfit: boolean;
   isVisibleWalletSettings: boolean;
   wasChangeBalance?: boolean;
+  wasFirstTopUp?: boolean;
+  fetchBalance?: () => Promise<void>;
 };
 
 const typeClassMap: Record<string, string> = {
@@ -73,12 +98,15 @@ const Wallet = (props: WalletProps) => {
     isNonProfit,
     isVisibleWalletSettings,
     wasChangeBalance,
+    fetchBalance,
+    wasFirstTopUp,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
 
   const [visible, setVisible] = useState(isVisibleWalletSettings);
   const [isEditAutoPayment, setIsEditAutoPayment] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const tokens = formattedBalanceTokens(
     language,
@@ -102,6 +130,34 @@ const Wallet = (props: WalletProps) => {
 
   const isDisbled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
 
+  const onClick = async () => {
+    setIsRefreshing(true);
+
+    const startTime = Date.now();
+
+    try {
+      await fetchBalance!();
+
+      const elapsedTime = Date.now() - startTime;
+      const minimumAnimationTime = 1000;
+
+      const waitForAnimation = async () => {
+        const delay = minimumAnimationTime - elapsedTime;
+        await new Promise((resolve) => {
+          setTimeout(resolve, delay);
+        });
+      };
+
+      if (elapsedTime < minimumAnimationTime) {
+        await waitForAnimation();
+      }
+    } catch (e) {
+      toastr.error(e as Error);
+    } finally {
+      setIsRefreshing(false);
+    }
+  };
+
   return (
     <div className="wallet-container">
       <Text className="wallet-description">
@@ -116,6 +172,9 @@ const Wallet = (props: WalletProps) => {
           <Text isBold fontSize="16px">
             {t("BalanceText")}
           </Text>
+          {wasFirstTopUp ? (
+            <RefreshIconButton isRefreshing={isRefreshing} onClick={onClick} />
+          ) : null}
         </div>
 
         <div className="balance-amount-container">
@@ -167,7 +226,8 @@ export default inject(
       isPayer,
       isVisibleWalletSettings,
       wasChangeBalance,
-
+      wasFirstTopUp,
+      fetchBalance,
     } = paymentStore;
     const { isFreeTariff, isNonProfit } = currentQuotaStore;
 
@@ -182,7 +242,8 @@ export default inject(
       isNonProfit,
       isVisibleWalletSettings,
       wasChangeBalance,
-
+      wasFirstTopUp,
+      fetchBalance,
     };
   },
 )(observer(Wallet));

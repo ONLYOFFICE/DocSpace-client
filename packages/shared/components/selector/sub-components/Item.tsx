@@ -214,7 +214,6 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             [styles.selectedSingle]: isSelected && !isMultiSelect,
             [styles.hoverable]: !isDisabled,
           },
-          "test-22",
         )}
         data-testid={`selector-item-${index}`}
       >

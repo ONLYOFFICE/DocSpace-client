@@ -115,9 +115,8 @@ const ThirdPartyModule = ({
 }: ThirdPartyModuleProps) => {
   const isResourcesDefault =
     defaultStorageType === BackupStorageType.ResourcesModuleType.toString();
-  const passedId = isResourcesDefault
-    ? (defaultFolderId ?? undefined)
-    : undefined;
+  const passedId =
+    isResourcesDefault && defaultFolderId ? defaultFolderId : undefined;
 
   useDidMount(() => {
     if (isResourcesDefault && defaultFolderId) {

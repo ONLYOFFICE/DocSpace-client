@@ -38,7 +38,7 @@ const ButtonContainer = ({
   isThirdStorageChanged,
   t,
 }: ButtonContainerProps) => {
-  if (!(isChanged || isThirdStorageChanged)) return;
+  if (!isChanged && !isThirdStorageChanged) return;
 
   return (
     <div className="auto-backup_buttons">

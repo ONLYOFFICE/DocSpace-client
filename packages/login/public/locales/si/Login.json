@@ -18,5 +18,6 @@
   "LDAPUsernamePlaceholder": "{{ldap_domain}} හි පරිශීලක නාමය",
   "SignInLDAP": "පුරන්න: {{ldap_domain}}",
   "SignInLdapHelper": "ආයතනික වසම සඳහා අක්තපත්‍ර භාවිතා කරන්න",
-  "UserIsAlreadyRegistered": "පරිශීලක <1>{{email}}</1> දැනටමත් මෙම {{productName}} හි ලියාපදිංචි වී ඇත, ඔබගේ මුරපදය ඇතුළත් කරන්න නැතහොත් වෙනත් විද්‍යුත් තැපෑලක් සමඟ ඉදිරියට යාමට ආපසු යන්න."
+  "UserIsAlreadyRegistered": "පරිශීලක <1>{{email}}</1> දැනටමත් මෙම {{productName}} හි ලියාපදිංචි වී ඇත, ඔබගේ මුරපදය ඇතුළත් කරන්න නැතහොත් වෙනත් විද්‍යුත් තැපෑලක් සමඟ ඉදිරියට යාමට ආපසු යන්න.",
+  "ChangePasswordSuccess": "මුරපදය සාර්ථකව වෙනස් කර ඇත"
 }

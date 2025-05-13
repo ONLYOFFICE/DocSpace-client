@@ -1,6 +1,5 @@
 {
   "AccountWillBeCreated": "{{productName}}-tili luodaan käyttäjälle <1>{{email}}</1>. Ole hyvä ja viimeistele rekisteröitymisesi:",
-  "ChangePasswordSuccess": "Salasanan vaihtaminen onnistui",
   "ConfirmOwnerPortalSuccessMessage": "{{productName}} omistajan vaihto onnistui. 10 sekunnin kuluttua sinut uudelleen ohjataan.",
   "ConfirmOwnerPortalTitle": "Vahvista, että haluat vaihtaa {{productName}} omistajaksi henkilön {{newOwner}}.",
   "CurrentNumber": "Nykyinen matkapuhelinnumerosi",

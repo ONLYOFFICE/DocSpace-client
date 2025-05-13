@@ -18,5 +18,6 @@
   "UserIsAlreadyRegistered": "ຜູ້ໃຊ້ <1>{{email}}</1> ໄດ້ລົງທະບຽນຢູ່ໃນ {{productName}} ນີ້ແລ້ວ, ໃສ່ລະຫັດຜ່ານຂອງທ່ານ ຫຼືກັບຄືນເພື່ອສືບຕໍ່ກັບອີເມວອື່ນ.",
   "LDAPUsernamePlaceholder": "ຊື່ຜູ້ໃຊ້ຂອງ {{ldap_domain}}",
   "SignInLDAP": "ເຂົ້າສູ່ລະບົບ: {{ldap_domain}}",
-  "SignInLdapHelper": "ນໍາໃຊ້ຂໍ້ມູນການເຂົ້າສູ່ລະບົບສໍາລັບໂດເມນຂອງບໍລິສັດ"
+  "SignInLdapHelper": "ນໍາໃຊ້ຂໍ້ມູນການເຂົ້າສູ່ລະບົບສໍາລັບໂດເມນຂອງບໍລິສັດ",
+  "ChangePasswordSuccess": "ລະຫັດຜ່ານໄດ້ຖືກປ່ຽນແລ້ວ"
 }

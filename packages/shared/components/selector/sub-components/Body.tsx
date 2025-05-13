@@ -103,7 +103,6 @@ const Body = ({
   const isSearch = React.useContext(SearchValueContext);
   const { withInfoBar } = React.useContext(InfoBarContext);
 
-
   const { withBreadCrumbs } = React.useContext(BreadCrumbsContext);
 
   const { withTabs, tabsData, activeTabId } = React.useContext(TabsContext);
@@ -172,7 +171,7 @@ const Body = ({
     };
   }, [onBodyResize]);
 
-  React.useEffect(() => { });
+  React.useEffect(() => {});
 
   React.useEffect(() => {
     onBodyResize();
@@ -321,10 +320,12 @@ const Body = ({
         <Scrollbar style={{ height: listHeight }}>{rowLoader}</Scrollbar>
       ) : itemsCount === 0 ? (
         <>
-          <DragAndDropZone style={{
-            "--list-height": `${listHeight}px`,
-          } as React.CSSProperties
-          }
+          <DragAndDropZone
+            style={
+              {
+                "--list-height": `${listHeight}px`,
+              } as React.CSSProperties
+            }
           />
           <EmptyScreen
             withSearch={isSearch}
@@ -397,10 +398,12 @@ const Body = ({
             >
               {({ onItemsRendered, ref }) => (
                 <>
-                  <DragAndDropZone style={{
-                    "--list-height": `${listHeight}px`,
-                  } as React.CSSProperties
-                  }
+                  <DragAndDropZone
+                    style={
+                      {
+                        "--list-height": `${listHeight}px`,
+                      } as React.CSSProperties
+                    }
                   />
 
                   <List

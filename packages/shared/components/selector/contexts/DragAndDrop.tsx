@@ -28,7 +28,6 @@ import { createContext, ReactNode } from "react";
 
 import { TSelectorDragAndDrop } from "../Selector.types";
 
-
 export const DragAndDropContext = createContext<TSelectorDragAndDrop>({});
 
 export const DragAndDropProvider = ({

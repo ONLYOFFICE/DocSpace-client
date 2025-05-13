@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useCallback } from "react";
+import React, { forwardRef, useCallback } from "react";
 import {
   FixedSizeList as List,
   type ListChildComponentProps,
@@ -46,12 +46,17 @@ import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 import { StyledBackupList } from "../../RestoreBackup.styled";
 import type { BackupListBodyProps } from "./BackupList.types";
 
-const VirtualScroll = (props: CustomScrollbarsVirtualListProps) => (
-  <CustomScrollbarsVirtualList
-    {...props}
-    paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
-  />
+const VirtualScroll = forwardRef(
+  (props: CustomScrollbarsVirtualListProps, ref) => (
+    <CustomScrollbarsVirtualList
+      ref={ref}
+      {...props}
+      paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
+    />
+  ),
 );
+
+VirtualScroll.displayName = "VirtualScroll";
 
 const BackupListBody = ({
   filesList,

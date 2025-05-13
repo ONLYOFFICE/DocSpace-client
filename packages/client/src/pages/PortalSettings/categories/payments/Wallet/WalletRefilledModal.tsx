@@ -43,12 +43,16 @@ import styles from "./styles/WalletRefilledModal.module.scss";
 
 type WalletRefilledModalProps = {
   visible: boolean;
-  onClose: () => void;
-  walletBalance: number;
+  walletBalance?: number;
   language?: string;
   currency?: string;
   updateAutoPayments?: () => Promise<void>;
   isAutomaticPaymentsEnabled?: boolean;
+  minBalanceError?: boolean;
+  upToBalanceError?: boolean;
+  upToBalance?: string;
+  minBalance?: string;
+  updatePreviousBalance?: () => void;
 };
 
 const WalletRefilledModal = (props: WalletRefilledModalProps) => {
@@ -79,7 +83,7 @@ const WalletRefilledModal = (props: WalletRefilledModalProps) => {
   );
 
   const onCloseDialog = () => {
-    updatePreviousBalance();
+    updatePreviousBalance!();
   };
 
   const onAdditionalSave = async () => {
@@ -126,7 +130,10 @@ const WalletRefilledModal = (props: WalletRefilledModalProps) => {
           </div>
           <Text>{t("WouldYouLikeToEnableAutoTopUps")}</Text>
 
-          <AutomaticPaymentsBlock onAdditionalSave={onAdditionalSave} />
+          <AutomaticPaymentsBlock
+            onAdditionalSave={onAdditionalSave}
+            noMargin
+          />
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -174,7 +181,6 @@ export default inject(({ paymentStore, authStore }: TStore) => {
 
   return {
     language,
-
     walletBalance,
     currency: walletCodeCurrency,
     updateAutoPayments,

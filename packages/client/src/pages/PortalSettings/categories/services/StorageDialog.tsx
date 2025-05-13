@@ -41,7 +41,7 @@ import styles from "./styles/index.module.scss";
 import Amount from "./Amount";
 import Total from "./Total";
 import TopUpModal from "../payments/Wallet/TopUpModal";
-import "../payments/Wallet/styles/Wallet.scss";
+
 import { formatCurrencyValue } from "../payments/Wallet/utils";
 
 type StorageDialogProps = {
@@ -230,12 +230,8 @@ export default inject(
       maxTotalSizeByQuota,
     } = currentQuotaStore;
     const { walletQuotas, fetchPortalTariff } = currentTariffStatusStore;
-    const {
-      walletBalance,
-      walletCodeCurrency,
-      storageQuotaIncrementPrice,
-      fetchBalance,
-    } = paymentStore;
+    const { walletCodeCurrency, storageQuotaIncrementPrice, fetchBalance } =
+      paymentStore;
     const { value, isoCurrencySymbol } = storageQuotaIncrementPrice;
     const { language } = authStore;
     const isTariffExist = walletQuotas?.length > 0;
@@ -246,7 +242,6 @@ export default inject(
       usedTotalStorageSizeCount,
       usedTotalStorageSizeTitle,
       maxTotalSizeByQuota,
-      walletBalance,
       walletCodeCurrency,
       storageQuotaIncrementPrice,
       language,

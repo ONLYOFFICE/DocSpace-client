@@ -18,6 +18,7 @@ This application provides a web interface for managing i18n localization files a
 The application consists of two parts:
 
 1. **Backend (Node.js/Fastify)**
+
    - RESTful API for managing translations
    - Socket.IO for real-time updates
    - Advanced file system operations for translation files
@@ -36,7 +37,6 @@ The application consists of two parts:
 
 The application is configured via environment variables in the `.env` file:
 
-- `DOCSPACE_PATH`: The absolute path to the DocSpace root directory (set automatically by build.docker.py)
 - `PORT`: The port for the backend server (default: 3001)
 - `OLLAMA_API_URL`: URL for Ollama API (optional)
 - `BASE_LANGUAGE`: The base language for translations (default: en)
@@ -49,11 +49,11 @@ Fixed project mapping is defined in `backend/src/config/config.js`:
 
 ```javascript
 const projectLocalesMap = {
-  "web": "public/locales",
-  "client": "public/locales",
-  "doceditor": "public/locales",
-  "login": "public/locales",
-  "management": "public/locales"
+  web: "public/locales",
+  client: "public/locales",
+  doceditor: "public/locales",
+  login: "public/locales",
+  management: "public/locales",
 };
 ```
 
@@ -79,12 +79,14 @@ python build.docker.py
 ```
 
 This script will:
+
 1. Install all necessary dependencies for backend, frontend, and tests
 2. Configure environment variables automatically
 3. Build and start Docker containers for the application
 4. Set up the proper file structure for translations
 
 Once complete, you can access:
+
 - Frontend interface: http://localhost:3000
 - Backend API: http://localhost:3001
 

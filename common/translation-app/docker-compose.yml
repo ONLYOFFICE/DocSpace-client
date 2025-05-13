@@ -1,9 +1,7 @@
-version: '3.8'
-
 services:
   backend:
     build:
-      context: ${DOCSPACE_PATH}/client/common/translation-app/backend
+      context: ./backend
       dockerfile: Dockerfile
     container_name: translation-app-backend
     restart: unless-stopped
@@ -19,7 +17,7 @@ services:
       - DB_NAME=${DB_NAME}
       - NODE_PATH=/app
     volumes:
-      - ${DOCSPACE_PATH}/client:/app
+      - ../../:/app
     working_dir: /app/common/translation-app/backend
     # Start the backend server directly without npm install
     command: sh -c 'node src/index.js'
@@ -28,7 +26,7 @@ services:
 
   frontend:
     build:
-      context: ${DOCSPACE_PATH}/client/common/translation-app/frontend
+      context: ./frontend
       dockerfile: Dockerfile
     container_name: translation-app-frontend
     restart: unless-stopped
@@ -37,7 +35,7 @@ services:
     environment:
       - NEXT_PUBLIC_API_URL=http://backend:3001
     volumes:
-      - ${DOCSPACE_PATH}/client:/app
+      - ../../:/app
     working_dir: /app/common/translation-app/frontend
     depends_on:
       - backend

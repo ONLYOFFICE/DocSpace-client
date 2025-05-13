@@ -54,11 +54,8 @@ if test_install.returncode != 0:
     print("Failed to install tests dependencies")
     exit(1)
 
-print(f"DOCSPACE_PATH: {docspace_dir}")
-
 # Start Docker Compose
 print("Starting Docker Compose...")
-os.environ["DOCSPACE_PATH"] = docspace_dir
 docker_compose = subprocess.run(
     "docker-compose up -d --build", cwd=rd, shell=True)
 if docker_compose.returncode != 0:

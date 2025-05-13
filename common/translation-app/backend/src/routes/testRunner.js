@@ -111,17 +111,17 @@ async function testRunnerRoutes(fastify) {
       };
 
       try {
-        // First ensure npm dependencies are installed
-        console.log("Installing test dependencies...");
-        const installResult = await executeCommand(
-          "npm",
-          ["install"],
-          testsDir
-        );
-        console.log(
-          "Install completed",
-          installResult ? "successfully" : "with issues"
-        );
+        // // First ensure npm dependencies are installed
+        // console.log("Installing test dependencies...");
+        // const installResult = await executeCommand(
+        //   "npm",
+        //   ["install"],
+        //   testsDir
+        // );
+        // console.log(
+        //   "Install completed",
+        //   installResult ? "successfully" : "with issues"
+        // );
 
         let testResult;
         let testSuccess = true;
@@ -178,7 +178,9 @@ async function testRunnerRoutes(fastify) {
         console.error("Error executing dependency installation:", execError);
         return reply.code(500).send({
           success: false,
-          error: `Test setup failed: ${execError.error ? execError.error.message : "Unknown error"}`,
+          error: `Test setup failed: ${
+            execError.error ? execError.error.message : "Unknown error"
+          }`,
           stdout: execError.stdout || "",
           stderr: execError.stderr || "",
         });

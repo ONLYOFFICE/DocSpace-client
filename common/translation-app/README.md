@@ -5,11 +5,13 @@ This application provides a web interface for managing i18n localization files a
 ## Features
 
 - Project management with fixed mapping to locale directories
-- Language management (add/view languages)
+- Advanced language management (add/view/create language folders)
 - Namespace management (add/view translation files)
 - Translation key editing with intuitive interface
+- Robust file validation and error handling
 - Ollama integration for AI-powered translations
 - Real-time updates via Socket.IO
+- Docker support for easy deployment
 
 ## Structure
 
@@ -18,52 +20,77 @@ The application consists of two parts:
 1. **Backend (Node.js/Fastify)**
    - RESTful API for managing translations
    - Socket.IO for real-time updates
-   - Direct file system operations for translation files
-   - Ollama API integration
+   - Advanced file system operations for translation files
+   - Comprehensive test runner for translation validation
+   - Ollama API integration for AI-powered translations
 
 2. **Frontend (Next.js)**
    - Modern UI with App Router and Tailwind CSS
    - Zustand for state management
    - Real-time updates with Socket.IO
+   - Responsive design for all device sizes
 
 ## Configuration
 
-### Backend
+### Environment Variables
 
-The backend is configured via environment variables:
+The application is configured via environment variables in the `.env` file:
 
-- `APP_ROOT_PATH`: The absolute path to the root directory (containing public/ and packages/)
+- `DOCSPACE_PATH`: The absolute path to the DocSpace root directory (set automatically by build.docker.py)
 - `PORT`: The port for the backend server (default: 3001)
-- `OLLAMA_API_URL`: URL for Ollama API (default: http://localhost:11434)
+- `OLLAMA_API_URL`: URL for Ollama API (optional)
 - `BASE_LANGUAGE`: The base language for translations (default: en)
+- `DB_PATH`: Path to the SQLite database directory
+- `DB_NAME`: Name of the SQLite database file
 
-Fixed project mapping is defined in `config.js`:
+### Project Configuration
+
+Fixed project mapping is defined in `backend/src/config/config.js`:
 
 ```javascript
 const projectLocalesMap = {
-  "Common": "public/locales",
-  "Client": "packages/client/public/locales",
-  "DocEditor": "packages/doceditor/public/locales",
-  "Login": "packages/login/public/locales",
-  "Management": "packages/management/public/locales"
+  "web": "public/locales",
+  "client": "public/locales",
+  "doceditor": "public/locales",
+  "login": "public/locales",
+  "management": "public/locales"
 };
 ```
 
-### Frontend
-
-The frontend is configured via environment variables:
-
-- `API_URL`: Backend API URL (default: http://localhost:3001/api)
-- `WS_URL`: WebSocket URL (default: http://localhost:3001)
+This mapping supports the enhanced folder structure with the public/locales directory pattern, allowing for advanced translation management features.
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js (v16+) and npm
+- Node.js (v22+) and npm
+- Python 3.6+ (for build script)
+- Docker and Docker Compose
 - Ollama installed locally for AI translations (optional)
 
-### Installation
+### Installation & Running
+
+#### Option 1: Using the build script (Recommended)
+
+The easiest way to set up and run the application is using the provided build script, which automatically handles dependency installation, environment configuration, and Docker setup:
+
+```bash
+python build.docker.py
+```
+
+This script will:
+1. Install all necessary dependencies for backend, frontend, and tests
+2. Configure environment variables automatically
+3. Build and start Docker containers for the application
+4. Set up the proper file structure for translations
+
+Once complete, you can access:
+- Frontend interface: http://localhost:3000
+- Backend API: http://localhost:3001
+
+#### Option 2: Manual Setup
+
+If you prefer to set up manually:
 
 1. Install backend dependencies:
 
@@ -79,30 +106,67 @@ cd frontend
 npm install
 ```
 
-### Running the Application
-
-1. Start the backend server:
+3. Install test dependencies (required for translation validations):
 
 ```bash
-cd backend
-npm run dev
+cd ../tests
+npm install
 ```
 
-2. Start the frontend development server:
+4. Configure the `.env` file with your DOCSPACE_PATH
+
+5. Start the application using Docker Compose:
 
 ```bash
-cd frontend
-npm run dev
+docker-compose up -d
 ```
 
-3. Open your browser and navigate to `http://localhost:3000`
+### Running Tests
+
+The application provides comprehensive test utilities to validate translation files. You can run tests directly from the UI or use the following commands:
+
+```bash
+# Run tests that check if all keys are translated (skipping base language)
+npm run test:skip-base-languages
+
+# Run tests that only validate base language files
+npm run test:only-base-languages
+```
 
 ### Using Ollama for Translations
+
+To enable AI-powered translations:
 
 1. Install Ollama from [ollama.ai](https://ollama.ai)
 2. Pull a language model (recommended: `ollama pull mistral`)
 3. Run Ollama (`ollama serve`)
-4. Use the translation features in the web UI
+4. Set the `OLLAMA_API_URL` environment variable (defaults to http://localhost:11434)
+5. Use the Translation Management UI to trigger translations
+
+### Docker Support
+
+The application is fully Dockerized for easy deployment:
+
+- **Backend Container**: Runs the Fastify API server and handles file operations
+- **Frontend Container**: Serves the Next.js application
+- **Volume Mounting**: Preserves original file paths for accurate translation management
+- **Environment Configuration**: All settings managed through `.env` file
+
+To manage Docker containers manually:
+
+```bash
+# Start containers
+docker-compose up -d
+
+# Rebuild containers
+docker-compose up -d --build
+
+# Stop containers
+docker-compose down
+
+# View logs
+docker-compose logs -f
+```
 
 ## API Routes
 

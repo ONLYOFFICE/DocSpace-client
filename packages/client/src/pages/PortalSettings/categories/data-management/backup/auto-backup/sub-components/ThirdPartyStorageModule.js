@@ -52,6 +52,11 @@ class ThirdPartyStorageModule extends React.PureComponent {
     };
   }
 
+  componentWillUnmount() {
+    const { defaultStorageId, setStorageId } = this.props;
+    !defaultStorageId && setStorageId(null);
+  }
+
   onSelect = (option) => {
     const selectedStorageId = option.key;
     const { storagesInfo } = this.state;

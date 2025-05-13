@@ -33,7 +33,7 @@ import { RoomsType } from "../../../enums";
 import { TSelectorItem } from "../../../components/selector/Selector.types";
 import { toastr } from "../../../components/toast";
 
-import { TUseInputItemHelper } from "../FilesSelector.types";
+import { TUseInputItemHelper } from "../types";
 
 const useInputItemHelper = ({
   withCreate,
@@ -41,7 +41,7 @@ const useInputItemHelper = ({
   setItems,
 }: TUseInputItemHelper) => {
   const onCancelInput = React.useCallback(() => {
-    if (!withCreate) return;
+    if (!withCreate || !setItems) return;
 
     setItems((value) => {
       if (!value[1]?.isInputItem && !value[0]?.isInputItem) return value;
@@ -83,7 +83,7 @@ const useInputItemHelper = ({
       roomType?: RoomsType,
       placeholder?: string,
     ) => {
-      if (!withCreate) return;
+      if (!withCreate || !setItems) return;
 
       const inputItem: TSelectorItem = {
         label: "",

@@ -33,19 +33,19 @@ import SocketHelper, {
   TOptSocket,
 } from "../../../utils/socket";
 
+import { getFileInfo, getFolderInfo } from "../../../api/files";
+import { getRoomInfo } from "../../../api/rooms";
 import { TSelectorItem } from "../../../components/selector";
 import { TFile, TFolder } from "../../../api/files/types";
 import { TRoom } from "../../../api/rooms/types";
-
 import {
+  convertRoomsToItems,
   convertFilesToItems,
   convertFoldersToItems,
-  convertRoomsToItems,
-} from "../FilesSelector.utils";
-import { UseSocketHelperProps } from "../FilesSelector.types";
+} from "..";
+
+import { UseSocketHelperProps } from "../types";
 import { SettingsContext } from "../contexts/Settings";
-import { getFileInfo, getFolderInfo } from "../../../api/files";
-import { getRoomInfo } from "../../../api/rooms";
 
 const useSocketHelper = ({
   disabledItems,

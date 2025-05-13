@@ -26,10 +26,7 @@
 
 import React from "react";
 
-import {
-  MIN_LOADER_TIMER,
-  SHOW_LOADER_TIMER,
-} from "../FilesSelector.constants";
+import { MIN_LOADER_TIMER, SHOW_LOADER_TIMER } from "../constants";
 
 const useLoadersHelper = ({ withInit }: { withInit?: boolean }) => {
   const [isBreadCrumbsLoading, setIsBreadCrumbsLoading] =

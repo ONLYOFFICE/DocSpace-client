@@ -50,7 +50,7 @@ import {
 } from "../../../skeletons/selector";
 
 import { FilesSelectorProps } from "../FilesSelector.types";
-import { LoadersContext } from "../contexts/Loaders";
+import { LoadersContext } from "../../utils/contexts/Loaders";
 
 type PickedSearchProps = Pick<
   TSelectorSearch,

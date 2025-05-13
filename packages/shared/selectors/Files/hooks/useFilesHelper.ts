@@ -38,18 +38,19 @@ import { TSelectorItem } from "../../../components/selector";
 import { TData } from "../../../components/toast/Toast.type";
 import { TBreadCrumb } from "../../../components/selector/Selector.types";
 
-import { SettingsContext } from "../contexts/Settings";
-import { LoadersContext } from "../contexts/Loaders";
+import useInputItemHelper from "../../utils/hooks/useInputItemHelper";
+import { SettingsContext } from "../../utils/contexts/Settings";
+import { LoadersContext } from "../../utils/contexts/Loaders";
 
-import { PAGE_COUNT } from "../FilesSelector.constants";
+import { PAGE_COUNT } from "../../utils/constants";
 import { UseFilesHelpersProps } from "../FilesSelector.types";
 import {
-  configureFilterByFilterParam,
   convertFilesToItems,
   convertFoldersToItems,
   getDefaultBreadCrumb,
-} from "../FilesSelector.utils";
-import useInputItemHelper from "./useInputItemHelper";
+} from "../../utils";
+
+import { configureFilterByFilterParam } from "../FilesSelector.utils";
 
 const useFilesHelper = ({
   setHasNextPage,

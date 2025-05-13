@@ -27,7 +27,7 @@
 import { createContext, ReactNode, useMemo } from "react";
 
 import type { TFilesSettings } from "../../../api/files/types";
-import type { TGetIcon } from "../FilesSelector.types";
+import type { TGetIcon } from "../types";
 import useFilesSettings from "../hooks/useFilesSettings";
 
 export const SettingsContext = createContext<{

@@ -237,7 +237,7 @@ const AutomaticBackup = ({
   ) => {
     const key = e.currentTarget.name;
     seStorageType(key);
-    setIsError(false);
+    if (isError) setIsError(false);
   };
 
   const onCancelModuleSettings = () => {
@@ -294,8 +294,6 @@ const AutomaticBackup = ({
     day: string | undefined,
   ) => {
     try {
-      if (isCheckedThirdParty || isCheckedDocuments) updateBaseFolderPath();
-
       await createBackupSchedule(
         storageType,
         storageParams,

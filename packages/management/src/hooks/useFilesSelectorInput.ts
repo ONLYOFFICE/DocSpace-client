@@ -38,8 +38,6 @@ export const useFilesSelectorInput = () => {
   }, [basePath]);
 
   const updateBaseFolderPath = useCallback(() => {
-    if (!newPath) return;
-
     setBasePathState(newPath);
   }, [newPath]);
 

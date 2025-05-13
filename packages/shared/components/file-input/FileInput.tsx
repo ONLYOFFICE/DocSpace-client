@@ -29,8 +29,8 @@ import { useTranslation } from "react-i18next";
 import Dropzone from "react-dropzone";
 import equal from "fast-deep-equal/react";
 
-import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
-import DocumentReactSvgUrl from "PUBLIC_DIR/images/document.react.svg?url";
+import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg";
+import DocumentReactSvgUrl from "PUBLIC_DIR/images/document.react.svg";
 
 import classNames from "classnames";
 import { IconButton } from "../icon-button";
@@ -212,10 +212,12 @@ const FileInputPure = ({
                 <IconButton
                   data-testid="icon-button"
                   className={iconButtonClasses}
-                  iconName={
-                    isDocumentIcon
-                      ? DocumentReactSvgUrl
-                      : CatalogFolderReactSvgUrl
+                  iconNode={
+                    isDocumentIcon ? (
+                      <DocumentReactSvgUrl />
+                    ) : (
+                      <CatalogFolderReactSvgUrl />
+                    )
                   }
                   color={globalColors.gray}
                   size={iconSize}

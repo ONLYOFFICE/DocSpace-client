@@ -73,7 +73,7 @@ function ConfirmRoute(props: ConfirmRouteProps) {
   if (!stateData) {
     switch (confirmLinkResult.result) {
       case ValidationResult.Ok:
-        const confirmHeader = searchParams.toString();
+        const confirmHeader = searchParams?.toString();
         const linkData = {
           ...confirmLinkParams,
           confirmHeader,

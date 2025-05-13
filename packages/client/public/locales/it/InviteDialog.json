@@ -9,7 +9,6 @@
   "InviteViaLink": "Invita tramite link",
   "InviteViaLinkDescriptionAccounts": "Crea un link universale per l’auto-autorizzazione in {{productName}}",
   "LinkCopySuccess": "Il link di collegamento è stato copiato",
-  "ResetChange": "Reimposta il cambiamento",
   "SendInvitation": "Invia invito",
   "UserMaxAvailableRoleWarning": "Gli ospiti e gli utenti non possono essere assegnati come gestori di stanze. Solo gli amministratori della Stanza e di {{productName}} sono adatti al ruolo specificato.",
   "UsersAlreadyAdded": "Sono già stati aggiunti alcuni utenti"

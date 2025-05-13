@@ -9,7 +9,6 @@
   "InviteViaLink": "Поканете чрез линк",
   "InviteViaLinkDescriptionAccounts": "Създайте универсален линк за самоупълномощаване в {{productName}}",
   "LinkCopySuccess": "Връзката беше копирана",
-  "ResetChange": "Нулирай промяна",
   "SendInvitation": "Изпращане на покана",
   "UserMaxAvailableRoleWarning": "Гостите и потребителите не могат да бъдат назначени като мениджъри на стаи. Само администратори на стая и {{productName}} са подходящи за посочената роля.",
   "UsersAlreadyAdded": "Някои потребители вече са добавени"

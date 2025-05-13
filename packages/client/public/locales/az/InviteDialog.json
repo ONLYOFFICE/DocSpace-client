@@ -9,7 +9,6 @@
   "InviteViaLink": "Keçidlə dəvət edin",
   "InviteViaLinkDescriptionAccounts": "{{productName}}-də avtorizasiya üçün universal keçid yaradın",
   "LinkCopySuccess": "Link köçürüldü",
-  "ResetChange": "Dəyişikliyi sıfırlayın",
   "SendInvitation": "Dəvət göndərin",
   "UserMaxAvailableRoleWarning": "Qonaq və İstifadəçilər Otaq administratoru kimi təyin edilə bilməz. Yalnız Otaq və {{productName}} administratorları göstərilən rol üçün uyğundur.",
   "UsersAlreadyAdded": "Bəzi istifadəçilər artıq əlavə olunub"

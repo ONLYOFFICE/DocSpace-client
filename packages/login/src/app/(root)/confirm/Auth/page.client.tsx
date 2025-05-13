@@ -64,7 +64,7 @@ const AuthHandler = () => {
   console.log(linkData);
   console.log(email, key);
 
-  const referenceUrl = searchParams.get("referenceUrl");
+  const referenceUrl = searchParams?.get("referenceUrl");
   const isFileHandler =
     referenceUrl && referenceUrl.indexOf("filehandler.ashx") !== -1;
   const isExternalDownloading =

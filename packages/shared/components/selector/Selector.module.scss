@@ -23,8 +23,8 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-@import "@docspace/shared/styles/_mixins.scss";
-@import "@docspace/shared/styles/variables/devices";
+@import "../../../shared/styles/mixins.scss";
+@import "../../../shared/styles/variables/devices.scss";
 
 .selector {
   width: 100%;
@@ -81,7 +81,8 @@
   }
 }
 
-%accessComboboxStyles {
+.comboBox,
+.accessRightSelect {
   margin-bottom: 2px;
   max-height: 50px;
 
@@ -99,13 +100,7 @@
   }
 }
 
-.comboBox {
-  @extend %accessComboboxStyles;
-}
 
-.accessRightSelect {
-  @extend %accessComboboxStyles;
-}
 
 .footer {
   width: calc(100% - 32px);
@@ -335,11 +330,9 @@
     }
   }
   .arrowRightSvg {
-    :global {
       path {
         fill: var(--selector-breadcrumbs-arrow-right-color);
       }
-    }
 
     &.rtl {
       transform: scaleX(-1);

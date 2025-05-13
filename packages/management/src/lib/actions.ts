@@ -295,7 +295,9 @@ export async function getSettingsThirdParty() {
     "GET",
   );
 
-  const settingsThirdParty = await fetch(getSettingsThirdParty);
+  const settingsThirdParty = await fetch(getSettingsThirdParty, {
+    next: { tags: ["backup"] },
+  });
 
   if (!settingsThirdParty.ok) return;
 
@@ -315,7 +317,9 @@ export async function getBackupSchedule(dump: boolean = true) {
     "GET",
   );
 
-  const backupScheduleRes = await fetch(getBackupSchedule);
+  const backupScheduleRes = await fetch(getBackupSchedule, {
+    next: { tags: ["backup"] },
+  });
 
   if (!backupScheduleRes.ok) return;
 
@@ -334,7 +338,9 @@ export async function getBackupStorage(dump: boolean = false) {
     [["", ""]],
     "GET",
   );
-  const backupStorageRes = await fetch(getBackupStorage);
+  const backupStorageRes = await fetch(getBackupStorage, {
+    next: { tags: ["backup"] },
+  });
 
   if (!backupStorageRes.ok) return;
 
@@ -387,7 +393,9 @@ export async function getBackupProgress(dump = true) {
       "GET",
     );
 
-    const backupProgressRes = await fetch(getBackupProgress);
+    const backupProgressRes = await fetch(getBackupProgress, {
+      next: { tags: ["backup"] },
+    });
 
     const backupProgress = await backupProgressRes.json();
 

@@ -56,6 +56,7 @@ import SocketHelper, {
 import { Badge } from "@docspace/shared/components/badge";
 import { Link, LinkTarget } from "@docspace/shared/components/link";
 import { getBackupProgressInfo } from "@docspace/shared/utils/common";
+import action from "@docspace/shared/utils/revalidateTag";
 
 import { globalColors } from "@docspace/shared/themes";
 import { useStateCallback } from "@docspace/shared/hooks/useStateCallback";
@@ -325,6 +326,8 @@ const AutomaticBackup = ({
   };
 
   const onSaveModuleSettings = async () => {
+    action(["backup"]);
+
     if (!selectedEnableSchedule) {
       handleDeleteSchedule();
       return;

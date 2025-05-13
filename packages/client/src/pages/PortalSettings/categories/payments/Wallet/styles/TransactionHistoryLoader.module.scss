@@ -24,44 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-.transaction-history-loader {
+.transactionHistoryLoader {
   display: flex;
   flex-direction: column;
   width: 100%;
   max-width: 920px;
 
-  .loader-row {
+  .loaderRow {
     display: flex;
     align-items: center;
     width: 100%;
     padding: 8px 0;
 
-    &.header-row {
+    &.headerRow {
       gap: 12px;
       margin-bottom: 8px;
       margin-top: 16px;
     }
 
-    &.data-row {
+    &.dataRow {
       max-width: 920px;
       padding: 12px 0;
       justify-content: space-between;
     }
   }
 
-  .flexible-loader {
+  .flexibleLoader {
     max-width: 151px;
   }
 
-  .fixed-loader {
+  .fixedLoader {
     width: 51px;
   }
 
-  .last-child {
+  .lastChild {
     padding-right: 30px;
   }
 
-  .body-row {
+  .bodyRow {
     display: flex;
     flex-direction: column;
     gap: 22px;
@@ -69,27 +69,27 @@
     width: calc(100% - 30px);
   }
 
-  .balance-row {
+  .balanceRow {
     display: flex;
     flex-direction: column;
     margin-bottom: 24px;
     margin-top: 20px;
 
-    .rectangle-skeleton:first-child {
+    .rectangleSkeleton:first-child {
       margin-bottom: 4px;
     }
 
-    .rectangle-skeleton:last-child {
+    .rectangleSkeleton:last-child {
       margin-top: 8px;
     }
   }
 
-  .payment-loader,
-  .description-row {
+  .paymentLoader,
+  .descriptionRow {
     max-width: 660px;
   }
 
-  .description-row {
+  .descriptionRow {
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -97,29 +97,29 @@
   }
 }
 
-.mobile-body {
+.mobileBody {
   display: flex;
   margin-bottom: 16px;
   align-items: center;
 
-  .mobile-body-left {
+  .mobileBodyLeft {
     display: flex;
     flex-direction: column;
     gap: 4px;
     margin-right: auto;
     width: 100%;
-    
-    &.is-tablet {
+
+    &.isTablet {
       max-width: 384px;
     }
-    
-    &:not(.is-tablet) {
+
+    &:not(.isTablet) {
       max-width: 247px;
     }
   }
 }
 
-.loader-item {
+.loaderItem {
   height: 16px;
   background: rgba(0, 0, 0, 0.05);
   border-radius: 3px;

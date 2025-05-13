@@ -26,8 +26,9 @@
 
 import React from "react";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import classNames from "classnames";
 
-import "../styles/TransactionHistoryLoader.scss";
+import styles from "../styles/TransactionHistoryLoader.module.scss";
 import TableLoader from "./TableLoader";
 
 type TransactionHistoryLoaderProps = {
@@ -39,37 +40,39 @@ const TransactionHistoryLoader: React.FC<TransactionHistoryLoaderProps> = ({
   isMobile,
   isTablet,
 }) => {
-  const loaderClassName = `transaction-history-loader${isTablet ? " is-tablet" : ""}`;
+  const loaderClassName = classNames(styles.transactionHistoryLoader, {
+    [styles.isTablet]: isTablet,
+  });
 
   return (
     <div className={loaderClassName}>
-      <div className="description-row">
+      <div className={styles.descriptionRow}>
         <RectangleSkeleton height="40px" borderRadius="3px" width="100%" />
         <RectangleSkeleton height="20px" borderRadius="3px" width="73px" />
       </div>
 
       <RectangleSkeleton
-        className="payment-loader"
+        className={styles.paymentLoader}
         height="72px"
         borderRadius="3px"
         width="100%"
       />
 
-      <div className="balance-row">
+      <div className={styles.balanceRow}>
         <RectangleSkeleton
-          className="rectangle-skeleton"
+          className={styles.rectangleSkeleton}
           height="22px"
           borderRadius="3px"
           width="64px"
         />
         <RectangleSkeleton
-          className="rectangle-skeleton"
+          className={styles.rectangleSkeleton}
           height="60px"
           borderRadius="3px"
           width="152px"
         />
         <RectangleSkeleton
-          className="rectangle-skeleton"
+          className={styles.rectangleSkeleton}
           height="32px"
           borderRadius="3px"
           width={isMobile || isTablet ? "100%" : "152px"}
@@ -79,47 +82,47 @@ const TransactionHistoryLoader: React.FC<TransactionHistoryLoaderProps> = ({
       {!isMobile && !isTablet ? (
         <>
           <RectangleSkeleton
-            className="flexible-loader"
+            className={styles.flexibleLoader}
             height="22px"
             borderRadius="3px"
             width="156px"
           />
-          <div className="loader-row header-row">
+          <div className={classNames(styles.loaderRow, styles.headerRow)}>
             <RectangleSkeleton
-              className="flexible-loader"
+              className={styles.flexibleLoader}
               height="32px"
               borderRadius="3px"
             />
             <RectangleSkeleton
-              className="flexible-loader"
+              className={styles.flexibleLoader}
               height="32px"
               borderRadius="3px"
             />
             <RectangleSkeleton
-              className="flexible-loader"
+              className={styles.flexibleLoader}
               height="32px"
               borderRadius="3px"
             />
           </div>
 
-          <div className="loader-row data-row">
+          <div className={classNames(styles.loaderRow, styles.dataRow)}>
             <RectangleSkeleton
-              className="fixed-loader"
+              className={styles.fixedLoader}
               height="16px"
               borderRadius="3px"
             />
             <RectangleSkeleton
-              className="fixed-loader"
+              className={styles.fixedLoader}
               height="16px"
               borderRadius="3px"
             />
             <RectangleSkeleton
-              className="fixed-loader"
+              className={styles.fixedLoader}
               height="16px"
               borderRadius="3px"
             />
             <RectangleSkeleton
-              className="fixed-loader last-child"
+              className={classNames(styles.fixedLoader, styles.lastChild)}
               height="16px"
               borderRadius="3px"
             />

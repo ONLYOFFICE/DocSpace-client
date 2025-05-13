@@ -31,9 +31,9 @@ import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 
 import CheckReactSvg from "PUBLIC_DIR/images/check.edit.react.svg";
-
-import "../styles/PaymentMethod.scss";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+
+import styles from "../styles/PaymentMethod.module.scss";
 
 type PaymentMethodProps = {
   walletCustomerEmail: boolean;
@@ -59,20 +59,20 @@ const PaymentMethod = (props: PaymentMethodProps) => {
   };
 
   return (
-    <div className="add-payment-method">
-      <div className="payment-method-description">
+    <div className={styles.addPaymentMethod}>
+      <div className={styles.paymentMethodDescription}>
         <Text isBold fontSize="16px">
           {t("PaymentMethod")}
         </Text>
         {!walletCustomerEmail ? (
-          <Text fontSize="12px" className="no-payment">
+          <Text fontSize="12px" className={styles.noPayment}>
             {t("YouHaveNotAddedAnyPayment")}
           </Text>
         ) : null}
       </div>
       {walletCustomerEmail ? (
-        <div className="card-linked">
-          <div className="ticked-wrapper">
+        <div className={styles.cardLinked}>
+          <div className={styles.tickedWrapper}>
             <CheckReactSvg />
             <Text fontWeight={600} fontSize="14px">
               {t("CardLinked")}
@@ -87,11 +87,8 @@ const PaymentMethod = (props: PaymentMethodProps) => {
           </Link>
         </div>
       ) : (
-        <div className="add-payment-method-container" onClick={goLinkCard}>
-          <SelectorAddButton
-            className="selector-add-button"
-            onClick={goLinkCard}
-          />
+        <div className={styles.addPaymentMethodContainer} onClick={goLinkCard}>
+          <SelectorAddButton onClick={goLinkCard} />
           <Text fontWeight={600}>{t("AddPaymentMethod")}</Text>
         </div>
       )}

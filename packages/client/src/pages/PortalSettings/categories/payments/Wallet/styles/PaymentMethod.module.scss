@@ -24,29 +24,29 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-.add-payment-method {
+.addPaymentMethod {
   padding-bottom: 21px;
   padding-top: 21px;
   border-bottom: 1px solid var(--aside-header-border-color);
 
-  .payment-method-description {
+  .paymentMethodDescription {
     margin-bottom: 12px;
     gap: 8px;
     display: flex;
     flex-direction: column;
-    .no-payment {
+    .noPayment {
       color: var(--payment-dialog-text);
     }
   }
 
-  .add-payment-method-container {
+  .addPaymentMethodContainer {
     display: flex;
     align-items: center;
     gap: 8px;
     cursor: pointer;
   }
 
-  .plus-icon-wrapper {
+  .plusIconWrapper {
     width: 32px;
     height: 32px;
     display: flex;
@@ -61,14 +61,14 @@
     }
   }
 
-  .card-linked {
+  .cardLinked {
     display: flex;
     justify-content: space-between;
     padding: 16px;
     background: var(--payment-background-color);
     border-radius: 6px;
 
-    .ticked-wrapper {
+    .tickedWrapper {
       display: flex;
       gap: 8px;
       align-items: baseline;

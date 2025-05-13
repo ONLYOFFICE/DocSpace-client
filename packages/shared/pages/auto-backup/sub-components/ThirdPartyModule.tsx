@@ -118,7 +118,9 @@ const ThirdPartyModule = ({
   const passedId = isResourcesDefault ? (defaultFolderId ?? "") : "";
 
   useDidMount(() => {
-    if (!isResourcesDefault) setSelectedFolder("");
+    if (isResourcesDefault && defaultFolderId) {
+      setSelectedFolder(defaultFolderId);
+    } else setSelectedFolder("");
   });
 
   const onSelectFolder = (id: string | number | undefined) => {

@@ -32,6 +32,7 @@ import {
   type FilesSelectorSettings,
 } from "@docspace/shared/components/files-selector-input";
 import BackupToPublicRoom from "@docspace/shared/dialogs/backup-to-public-room-dialog";
+import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
 import type {
   BackupToPublicRoomOptionType,
@@ -125,6 +126,12 @@ const RoomsModule = ({
     defaultStorageType === BackupStorageType.DocumentModuleType.toString();
 
   const passedId = isDocumentsDefault ? defaultFolderId : "";
+
+  useDidMount(() => {
+    if (isDocumentsDefault && defaultFolderId) {
+      setSelectedFolder(defaultFolderId);
+    } else setSelectedFolder("");
+  });
 
   const onSelectFolder = (id: string | number | undefined) => {
     setSelectedFolder(`${id}`);

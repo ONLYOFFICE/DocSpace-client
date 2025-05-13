@@ -31,11 +31,7 @@ import { useTranslation } from "react-i18next";
 
 import { AutoBackupPeriod } from "@docspace/shared/enums";
 import type { TOption } from "@docspace/shared/components/combobox";
-import type {
-  Nullable,
-  TTranslation,
-  TWeekdaysLabel,
-} from "@docspace/shared/types";
+import type { Nullable, TWeekdaysLabel } from "@docspace/shared/types";
 import type { TBackupSchedule } from "@docspace/shared/api/portal/types";
 
 import type { BackupDefaultStateType, BackupSelectedStateType } from "@/types";
@@ -148,7 +144,7 @@ export const useBackupSettings = ({
           periodNumber: period.toString(),
           maxCopiesNumber: backupsStored.toString(),
           storageType: storageType.toString(),
-          folderId: folderId.toString(),
+          folderId: module ? "" : folderId.toString(),
           enableSchedule: true,
           periodLabel,
           ...(module ? { module: module.toString() } : {}),
@@ -162,7 +158,7 @@ export const useBackupSettings = ({
           periodNumber: period.toString(),
           maxCopiesNumber: backupsStored.toString(),
           storageType: storageType.toString(),
-          folderId: folderId.toString(),
+          folderId: module ? "" : folderId.toString(),
           enableSchedule: true,
           periodLabel,
           ...(module ? { module: module.toString() } : {}),
@@ -366,7 +362,7 @@ export const useBackupSettings = ({
     });
   };
 
-  const setStorageId = (id: string) => {
+  const setStorageId = (id: Nullable<string>) => {
     setSelected((state) => ({
       ...state,
       storageId: id,

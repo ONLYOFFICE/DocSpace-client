@@ -31,6 +31,7 @@ import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
 import { ThirdPartyStorages } from "@docspace/shared/enums";
 import { getOptions } from "@docspace/shared/utils/getThirdPartyStoragesOptions";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
+import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 
 import { GoogleCloudStorage } from "../storages/GoogleCloudStorage";
 import { RackspaceStorage } from "../storages/RackspaceStorage";
@@ -83,6 +84,10 @@ const ThirdPartyStorageModule = ({
 
   useDidMount(() => {
     if (!defaultStorageId) setStorageId(defaultSelectedStorageId);
+  });
+
+  useUnmount(() => {
+    if (!defaultStorageId) setStorageId(null);
   });
 
   const onSelect = (option: TOption) => {

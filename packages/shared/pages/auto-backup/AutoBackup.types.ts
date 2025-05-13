@@ -120,7 +120,7 @@ export interface AutomaticBackupProps {
   setWeekday: (option: TOption) => void;
   setMonthNumber: (option: TOption) => void;
   setTime: (option: TOption) => void;
-  setStorageId: (id: string) => void;
+  setStorageId: (id: Nullable<string>) => void;
   thirdPartyStorage: SelectedStorageType[];
   defaultStorageId: Nullable<string>;
   setCompletedFormFields: (

@@ -33,7 +33,7 @@ import type { TOption } from "@docspace/shared/components/combobox";
 
 export interface ThirdPartyStorageModuleProps {
   thirdPartyStorage: SelectedStorageType[];
-  setStorageId: (id: string) => void;
+  setStorageId: (id: Nullable<string>) => void;
   defaultStorageId: Nullable<string>;
 
   isLoadingData: boolean;

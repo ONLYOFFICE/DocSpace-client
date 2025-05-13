@@ -18,5 +18,6 @@
   "RememberHelper": "La duración de la sesión por defecto es de 20 minutos. Marque esta opción para establecerla en 1 año. Para establecer su propio valor, vaya a Ajustes.",
   "SignInLDAP": "Iniciar sesión en: {{ldap_domain}}",
   "SignInLdapHelper": "Utilice credenciales para el dominio corporativo",
-  "UserIsAlreadyRegistered": "El usuario <1>{{email}}</1> ya está registrado en este {{productName}}, introduzca su contraseña o regrese para continuar con otro correo electrónico."
+  "UserIsAlreadyRegistered": "El usuario <1>{{email}}</1> ya está registrado en este {{productName}}, introduzca su contraseña o regrese para continuar con otro correo electrónico.",
+  "ChangePasswordSuccess": "Contraseña se ha cambiado con éxito"
 }

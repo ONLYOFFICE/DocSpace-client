@@ -84,7 +84,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     getFilesArchiveError,
     setIsDataReady,
     withSearch: withSearchProp,
-    withDrag = true,
+    withDrag,
 
     withCreate,
     createDefineRoomLabel,

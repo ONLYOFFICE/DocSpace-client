@@ -84,7 +84,7 @@ const RoomSelectorComponent = ({
   createDefineRoomType,
 
   withInit,
-  withCreate = true,
+  withCreate,
   initItems,
   initTotal,
   initHasNextPage,

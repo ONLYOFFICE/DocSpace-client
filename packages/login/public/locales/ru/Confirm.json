@@ -1,6 +1,5 @@
 {
   "AccountWillBeCreated": "Учетная запись {{productName}} будет создана для <1>{{email}}</1>. Пожалуйста, завершите регистрацию:",
-  "ChangePasswordSuccess": "Пароль был успешно изменен",
   "ConfirmOwnerPortalSuccessMessage": "Владелец {{productName}} успешно изменен. Через 10 секунд Вы будете перенаправлены.",
   "ConfirmOwnerPortalTitle": "Пожалуйста, подтвердите, что Вы хотите изменить владельца {{productName}} на {{newOwner}}.",
   "CurrentNumber": "Ваш текущий номер мобильного телефона",

@@ -26,19 +26,29 @@
 
 "use client";
 
-import React, { useMemo } from "react";
-import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
+import React, { useCallback, useMemo } from "react";
+import { ComboBox } from "@docspace/shared/components/combobox";
 import { ThirdPartyStorages } from "@docspace/shared/enums";
 import { getOptions } from "@docspace/shared/utils/getThirdPartyStoragesOptions";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 import { useUnmount } from "@docspace/shared/hooks/useUnmount";
+
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Text } from "@docspace/shared/components/text";
+import { THIRD_PARTY_SERVICES_URL } from "@docspace/shared/constants";
+
+import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 
 import { GoogleCloudStorage } from "../storages/GoogleCloudStorage";
 import { RackspaceStorage } from "../storages/RackspaceStorage";
 import { SelectelStorage } from "../storages/SelectelStorage";
 import { AmazonStorage } from "../storages/AmazonStorage";
 
-import { StyledAutoBackup } from "./ThirdPartyStorageModule.styled";
+import {
+  StyledAutoBackup,
+  StyledComboBoxItem,
+} from "./ThirdPartyStorageModule.styled";
 import type { ThirdPartyStorageModuleProps } from "./ThirdPartyStorageModule.types";
 
 const ThirdPartyStorageModule = ({
@@ -90,12 +100,18 @@ const ThirdPartyStorageModule = ({
     if (!defaultStorageId) setStorageId(null);
   });
 
-  const onSelect = (option: TOption) => {
-    const key = option.key;
-    const storage = storagesInfo[key];
+  const onSelect = useCallback(
+    (key: string) => {
+      const storage = storagesInfo[key];
 
-    setStorageId(storage.id);
-  };
+      if (!storage.isSet) {
+        return window.open(`${THIRD_PARTY_SERVICES_URL}${key}`, "_blank");
+      }
+
+      setStorageId(storage.id);
+    },
+    [storagesInfo, setStorageId],
+  );
 
   const commonProps = {
     selectedStorage:
@@ -132,23 +148,58 @@ const ThirdPartyStorageModule = ({
   const storageTitle =
     storagesInfo[selectedStorageId ?? defaultSelectedStorageId]?.title;
 
+  const advancedOptions = useMemo(
+    () =>
+      comboBoxOptions?.map((item) => {
+        return (
+          <StyledComboBoxItem isDisabled={item.disabled} key={item.key}>
+            <DropDownItem
+              onClick={() => onSelect(item.key)}
+              disabled={item.disabled}
+            >
+              <Text className="drop-down-item_text" fontWeight={600}>
+                {item.label}
+              </Text>
+
+              {!item.disabled && !item.connected ? (
+                <IconButton
+                  className="drop-down-item_icon"
+                  size={16}
+                  onClick={() => onSelect(item.key)}
+                  iconName={ExternalLinkReactSvgUrl}
+                  isFill
+                />
+              ) : null}
+            </DropDownItem>
+          </StyledComboBoxItem>
+        );
+      }),
+    [comboBoxOptions, onSelect],
+  );
+
   return (
     <StyledAutoBackup>
       <div className="auto-backup_storages-module">
         <ComboBox
-          options={comboBoxOptions}
+          options={[]}
+          advancedOptions={advancedOptions}
           selectedOption={{
             key: 0,
             label: storageTitle,
           }}
-          onSelect={onSelect}
           isDisabled={isLoadingData}
+          size="content"
+          manualWidth="400px"
+          directionY="both"
+          displaySelectedOption
           noBorder={false}
-          scaled
+          isDefaultMode
+          hideMobileView={false}
+          forceCloseClickOutside
           scaledOptions
-          dropDownMaxHeight={300}
-          className="backup_combo"
           showDisabledItems
+          displayArrow
+          className="backup_combo"
         />
 
         {selectedStorageId === ThirdPartyStorages.GoogleId ? (

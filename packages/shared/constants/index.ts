@@ -238,3 +238,6 @@ export const thumbnailStatuses = {
   ERROR: 2,
   NOT_REQUIRED: 3,
 };
+
+export const THIRD_PARTY_SERVICES_URL =
+  "/portal-settings/integration/third-party-services?service=";

@@ -38,7 +38,10 @@ import { toastr } from "@docspace/shared/components/toast";
 import { ComboBox } from "@docspace/shared/components/combobox";
 
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
-import { ThirdPartyServicesUrlName } from "@docspace/shared/constants";
+import {
+  THIRD_PARTY_SERVICES_URL,
+  ThirdPartyServicesUrlName,
+} from "@docspace/shared/constants";
 import { injectDefaultTheme, isDesktop } from "@docspace/shared/utils";
 
 const StyledStorageLocation = styled.div.attrs(injectDefaultTheme)`
@@ -157,7 +160,7 @@ const ThirdPartyComboBox = ({
   const setStorageLocaiton = (thirparty, isConnected) => {
     if (!isConnected) {
       window.open(
-        `/portal-settings/integration/third-party-services?service=${ThirdPartyServicesUrlName[thirparty.id]}`,
+        `${THIRD_PARTY_SERVICES_URL}${ThirdPartyServicesUrlName[thirparty.id]}`,
         "_blank",
       );
       return;

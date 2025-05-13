@@ -37,6 +37,7 @@ import { getOptions } from "@docspace/shared/utils/getThirdPartyStoragesOptions"
 import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { toastr } from "@docspace/shared/components/toast";
+import { THIRD_PARTY_SERVICES_URL } from "@docspace/shared/constants";
 import type { ButtonSize } from "@docspace/shared/components/button";
 
 import type {
@@ -136,10 +137,7 @@ const ThirdPartyStorageModule = ({
     const selectedStorage = storagesInfo[key];
 
     if (!selectedStorage.isSet) {
-      return window.open(
-        `/portal-settings/integration/third-party-services?service=${key}`,
-        "_blank",
-      );
+      return window.open(`${THIRD_PARTY_SERVICES_URL}${key}`, "_blank");
     }
 
     setSelectedId(selectedStorage.id);

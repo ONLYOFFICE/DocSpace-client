@@ -42,7 +42,7 @@ import { Button } from "@docspace/shared/components/button";
 import { getOAuthToken } from "@docspace/shared/utils/common";
 import { ComboBox, ComboBoxSize } from "@docspace/shared/components/combobox";
 import { saveSettingsThirdParty } from "@docspace/shared/api/files";
-import { ThirdPartyServicesUrlName } from "@docspace/shared/constants";
+import { THIRD_PARTY_SERVICES_URL } from "@docspace/shared/constants";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { DeleteThirdPartyDialog } from "@docspace/shared/dialogs/delete-third-party";
@@ -211,10 +211,7 @@ const DirectThirdPartyConnection = ({
         label: selectedThirdPartyAccount?.label,
       });
 
-      return window.open(
-        `/portal-settings/integration/third-party-services?service=${ThirdPartyServicesUrlName[name as keyof typeof ThirdPartyServicesUrlName]}`,
-        "_blank",
-      );
+      return window.open(`${THIRD_PARTY_SERVICES_URL}${name}`, "_blank");
     }
 
     setSelectedThirdPartyAccount(account);

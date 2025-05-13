@@ -65,6 +65,7 @@ export const COUNT_FOR_SHOWING_BAR = 2;
 export const PERCENTAGE_FOR_SHOWING_BAR = 90;
 
 export const LANGUAGE = "asc_language";
+export const TIMEZONE = "timezone";
 
 export const MOBILE_FOOTER_HEIGHT = "64px";
 export const ASIDE_PADDING_AFTER_LAST_ITEM = "12px";

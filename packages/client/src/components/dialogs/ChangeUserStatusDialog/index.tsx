@@ -50,6 +50,7 @@ type ChangeUserStatusDialogComponentProps = {
 
   setInfoPanelSelection: InfoPanelStore["setInfoPanelSelection"];
   infoPanelVisible: InfoPanelStore["isVisible"];
+  setSelection: UsersStore["setSelection"];
 
   visible: boolean;
 
@@ -63,6 +64,7 @@ const ChangeUserStatusDialogComponent = ({
   needResetUserSelection,
   setInfoPanelSelection,
   infoPanelVisible,
+  setSelection,
   status,
   userIDs,
   visible,
@@ -88,6 +90,7 @@ const ChangeUserStatusDialogComponent = ({
           const user = getPeopleListItem(users[0]);
 
           setInfoPanelSelection(user);
+          setSelection([user]);
         }
 
         toastr.success(
@@ -249,6 +252,7 @@ export default inject(({ peopleStore, infoPanelStore }: TStore) => {
     updateUserStatus,
     needResetUserSelection,
     setSelected,
+    setSelection,
   } = peopleStore.usersStore!;
 
   const { setInfoPanelSelection, isVisible: infoPanelVisible } = infoPanelStore;
@@ -263,5 +267,6 @@ export default inject(({ peopleStore, infoPanelStore }: TStore) => {
 
     setInfoPanelSelection,
     infoPanelVisible,
+    setSelection,
   };
 })(observer(ChangeUserStatusDialog));

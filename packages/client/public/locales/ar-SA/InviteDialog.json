@@ -9,7 +9,6 @@
   "InviteViaLink": "دعوة عبر الرابط",
   "InviteViaLinkDescriptionAccounts": "قم بإنشاء ارتباط عالمي للمصادقة الذاتية في {{productName}}",
   "LinkCopySuccess": "تم نسخ الرابط",
-  "ResetChange": "استعادة التغيير ",
   "SendInvitation": "إرسال دعوة",
   "UserMaxAvailableRoleWarning": "لا يمكن تعيين الضيوف والمستخدمين كمديري غرف. فقط مسؤولو الغرف وإدارة {{productName}} مناسبون لهذا الدور المحدد.",
   "UsersAlreadyAdded": "تمت إضافة بعض المستخدمين بالفعل"

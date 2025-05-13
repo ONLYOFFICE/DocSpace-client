@@ -31,6 +31,8 @@ import PlusSvgUrl from "PUBLIC_DIR/images/icons/12/plus.svg?url";
 import UpSvgUrl from "PUBLIC_DIR/images/up.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 
+import { classNames } from "@docspace/shared/utils";
+
 import { RoomsType } from "../../../enums";
 
 import { Heading } from "../../heading";
@@ -38,14 +40,14 @@ import { Text } from "../../text";
 import { IconButton } from "../../icon-button";
 import { Link, LinkType } from "../../link";
 
-import { StyledEmptyScreen } from "../Selector.styled";
-
 import useCreateDropDown from "../hooks/useCreateDropDown";
 import { EmptyScreenContext } from "../contexts/EmptyScreen";
 
 import NewItemDropDown from "./NewItemDropDown";
 import { SearchContext, SearchDispatchContext } from "../contexts/Search";
 import EmptyScreenFormRoom from "./EmptySreen/EmptyScreenFormRoom";
+
+import styles from "../Selector.module.scss";
 import { EmptyScreenProps } from "../Selector.types";
 
 const linkStyles = {
@@ -115,7 +117,11 @@ const EmptyScreen = ({
     );
 
   return (
-    <StyledEmptyScreen withSearch={withSearch}>
+    <div
+      className={classNames(styles.emptyScreen, {
+        [styles.withSearch]: withSearch,
+      })}
+    >
       <img className="empty-image" src={currentImage} alt="empty-screen" />
 
       <Heading level={3} className="empty-header">
@@ -171,7 +177,7 @@ const EmptyScreen = ({
           </div>
         </div>
       ) : null}
-    </StyledEmptyScreen>
+    </div>
   );
 };
 

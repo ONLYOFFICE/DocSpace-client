@@ -9,7 +9,6 @@
   "InviteViaLink": "링크를 통해 초대",
   "InviteViaLinkDescriptionAccounts": "{{productName}}에서 자체 인증을 위한 범용 링크 생성",
   "LinkCopySuccess": "링크가 복사되었습니다",
-  "ResetChange": "변경 사항 재설정",
   "SendInvitation": "초대장 전송",
   "UserMaxAvailableRoleWarning": "게스트와 사용자를 룸 관리자로 할당할 수 없습니다. 룸 및 {{productName}} 관리자만 지정된 역할에 적합합니다.",
   "UsersAlreadyAdded": "일부 사용자가 이미 추가되었습니다"

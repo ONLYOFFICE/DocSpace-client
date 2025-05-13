@@ -822,6 +822,7 @@ class UsersStore {
       isCustomQuota,
       createdBy,
       registrationDate,
+      tfaAppEnabled,
     } = user;
 
     const statusType = getUserStatus(user);
@@ -878,6 +879,7 @@ class UsersStore {
       isCustomQuota,
       createdBy,
       registrationDate: regDate,
+      tfaAppEnabled,
     };
   };
 

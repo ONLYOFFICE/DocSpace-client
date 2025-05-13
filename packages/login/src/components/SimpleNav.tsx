@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 // (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
@@ -38,6 +37,8 @@ import { injectDefaultTheme } from "@docspace/shared/utils";
 
 import LanguageComboboxWrapper from "./LanguageCombobox";
 
+/* eslint-disable @next/next/no-img-element */
+
 const StyledSimpleNav = styled.div.attrs(injectDefaultTheme)`
   display: none;
   height: 48px;
@@ -47,6 +48,13 @@ const StyledSimpleNav = styled.div.attrs(injectDefaultTheme)`
 
   .logo {
     height: 24px;
+  }
+
+  .modile-combobox {
+    .combo-button {
+      border-width: 0;
+      background: transparent;
+    }
   }
 
   @media ${mobile} {
@@ -90,7 +98,10 @@ const SimpleNav = ({
     <StyledSimpleNav id="login-header">
       <img className="logo" src={logoUrl} alt="logo-url" />
       {isLanguageComboboxVisible && (
-        <LanguageComboboxWrapper initialCultures={initialCultures} />
+        <LanguageComboboxWrapper
+          className="modile-combobox"
+          initialCultures={initialCultures}
+        />
       )}
     </StyledSimpleNav>
   );

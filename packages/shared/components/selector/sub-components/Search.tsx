@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { use, useCallback } from "react";
-
 import { SearchInput } from "../../search-input";
 import { InputSize } from "../../text-input";
 

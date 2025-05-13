@@ -200,7 +200,7 @@ export interface IInitialConfig {
   document: TDocument;
   documentType: TDocumentType;
   editorConfig: TEditorConfig;
-  editorType: number;
+  editorType: string;
   editorUrl: string;
   file: TFile;
   token: string;
@@ -266,6 +266,7 @@ export type EditorProps = {
   isSkipError?: boolean;
   filesSettings?: TFilesSettings;
   organizationName?: string;
+  shareKey?: string;
 
   onDownloadAs?: (obj: object) => void;
   openShareFormDialog?: () => void;
@@ -393,6 +394,7 @@ export interface UseEventsProps {
 
   sdkConfig?: TFrameConfig | null;
   organizationName: string;
+  shareKey?: string;
   setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
   openShareFormDialog?: VoidFunction;
   onStartFillingVDRPanel?: (roles: TFormRole[]) => void;

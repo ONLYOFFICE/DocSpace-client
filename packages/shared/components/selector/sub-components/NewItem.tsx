@@ -26,12 +26,14 @@
 
 import React from "react";
 
+import { classNames } from "@docspace/shared/utils";
 import { SelectorAddButton } from "../../selector-add-button";
 
-import { StyledItem } from "../Selector.styled";
 import NewItemDropDown from "./NewItemDropDown";
 import useCreateDropDown from "../hooks/useCreateDropDown";
 import { NewItemProps } from "../Selector.types";
+
+import styles from "../Selector.module.scss";
 
 const NewItem = ({
   label,
@@ -82,12 +84,10 @@ const NewItem = ({
   }, [hotkey, onCreateClickAction, onKeyDown]);
 
   return (
-    <StyledItem
+    <div
       key="create-new-item"
       style={style}
-      isSelected={false}
-      isMultiSelect={false}
-      noHover
+      className={classNames(styles.selectorItem, styles.hoverable)}
     >
       <SelectorAddButton
         onClick={onCreateClickAction}
@@ -107,7 +107,7 @@ const NewItem = ({
           listHeight={listHeight}
         />
       ) : null}
-    </StyledItem>
+    </div>
   );
 };
 

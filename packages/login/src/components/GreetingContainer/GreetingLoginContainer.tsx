@@ -57,7 +57,7 @@ export const GreetingLoginContainer = ({
     culture,
   );
   const searchParams = useSearchParams();
-  const loginData = searchParams?.get("loginData");
+  const loginData = searchParams?.get("loginData") || null;
 
   const pathname = usePathname();
 

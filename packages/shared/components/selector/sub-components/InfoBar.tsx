@@ -30,7 +30,7 @@ import PublicRoomBar from "../../public-room-bar";
 import { InfoBarContext } from "../contexts/InfoBar";
 import { InfoBarProps } from "../Selector.types";
 
-export const InfoBar = ({ ref, visible }: InfoBarProps) => {
+export const InfoBar = ({ ref, visible, className }: InfoBarProps) => {
   const { infoBarData, withInfoBar } = use(InfoBarContext);
 
   if (!infoBarData || !withInfoBar || !visible) return;
@@ -42,7 +42,7 @@ export const InfoBar = ({ ref, visible }: InfoBarProps) => {
       bodyText={infoBarData.description}
       iconName={infoBarData.icon}
       onClose={infoBarData.onClose}
-      className="selector_info-bar"
+      className={className}
     />
   );
 };

@@ -94,6 +94,12 @@ const AuthHandler = () => {
         //console.log("Login with confirm key success", res);
         frameCallEvent({ event: "onAuthSuccess" });
 
+        const wizard = searchParams?.get("wizard");
+
+        if (wizard === "true") {
+          localStorage.setItem("showSocialAuthWelcomeDialog", "true");
+        }
+
         if (referenceUrl && referenceUrl.includes("oauth2")) {
           const user = await getUser();
 

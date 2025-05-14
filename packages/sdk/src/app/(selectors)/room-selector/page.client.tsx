@@ -159,8 +159,6 @@ export default function RoomSelectorClient({
       initTotal={total}
       isMultiSelect={false}
       onSubmit={onSubmit}
-      withCreate
-      withSearch={baseConfig?.search}
       submitButtonLabel={baseConfig?.acceptLabel}
       withInit
     />

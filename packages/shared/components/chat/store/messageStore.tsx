@@ -371,7 +371,7 @@ export default class MessageStore {
       }
 
       if (n.id.includes("TitleInput")) {
-        tweaks[n.id] = { input_value: title };
+        tweaks[n.id] = { input_value: title.replace(".", "") };
       }
 
       if (n.id.includes("FolderIDInput")) {

@@ -2875,7 +2875,7 @@ const Dark: TTheme = {
         priceColor: darkGrayDark,
         storageSizeTitle: gray,
 
-        backgroundColor: darkGrayLight,
+        backgroundColor: lightDarkGrayHover,
         linkColor: link,
         tariffText: grayDark,
         border: `1px solid ${grayDarkStrong}`,

@@ -42,7 +42,7 @@ const StyledContainer = styled.div`
   box-sizing: border-box;
   margin-top: 16px;
   border-radius: 6px;
-
+  max-width: 660px;
   .payer-info {
     margin-inline-start: 3px;
   }
@@ -79,7 +79,7 @@ const StyledContainer = styled.div`
   }
 `;
 
-const PayerInformationContainer = ({
+const PayerInformation = ({
   style,
   theme,
   user,
@@ -87,7 +87,7 @@ const PayerInformationContainer = ({
   payerInfo,
   email,
   isNotPaidPeriod,
-  isFreeAfterPaidPeriod,
+
   isStripePortalAvailable,
 }) => {
   const { t } = useTranslation("Payments");
@@ -119,7 +119,7 @@ const PayerInformationContainer = ({
           productName: t("Common:ProductName"),
         });
 
-    if (isNotPaidPeriod || isFreeAfterPaidPeriod) {
+    if (isNotPaidPeriod) {
       invalidEmailDescription = user.isOwner
         ? t("InvalidEmailWithoutActiveSubscription", {
             productName: t("Common:ProductName"),
@@ -241,21 +241,31 @@ const PayerInformationContainer = ({
 
 export default inject(
   ({ settingsStore, paymentStore, userStore, currentTariffStatusStore }) => {
-    const { accountLink, isStripePortalAvailable } = paymentStore;
+    const {
+      accountLink,
+      isStripePortalAvailable,
+      payerInfo: walletPayer,
+      payer,
+    } = paymentStore;
     const { theme } = settingsStore;
-    const { customerId, isGracePeriod, isNotPaidPeriod, payerInfo } =
-      currentTariffStatusStore;
+    const {
+      isGracePeriod,
+      isNotPaidPeriod,
+      payerInfo: paymentPayer,
+    } = currentTariffStatusStore;
     const { user } = userStore;
+
+    const payerInfo = paymentPayer ?? walletPayer;
 
     return {
       isStripePortalAvailable,
       theme,
       user,
       accountLink,
-      payerInfo,
-      email: customerId,
       isGracePeriod,
       isNotPaidPeriod,
+      email: payer,
+      payerInfo,
     };
   },
-)(observer(PayerInformationContainer));
+)(observer(PayerInformation));

@@ -259,13 +259,17 @@ const SelectUsersCountContainer = ({
           <MinusIcon {...onClickProp} className="payment-score" />
         </div>
 
-        <TextInput
-          isReadOnly={isDisabled}
-          withBorder={false}
-          className="payment-operations_input"
-          value={value}
-          {...onchangeNumberProp}
-        />
+        {isDisabled ? (
+          <Text className="payment-operations_input">{value}</Text>
+        ) : (
+          <TextInput
+            isReadOnly={isDisabled}
+            withBorder={false}
+            className="payment-operations_input"
+            value={value}
+            {...onchangeNumberProp}
+          />
+        )}
         <div
           className="circle plus-icon"
           {...onClickProp}

@@ -34,48 +34,89 @@
   padding: var(--selector-add-button-padding);
   cursor: pointer;
 
-  &.isSize {
-    height: var(---selector-add-button-size);
-    width: var(---selector-add-button-size);
-  }
-
-  svg path {
-    fill: var(--selector-add-button-icon-color) !important;
+  :global(.icon-button_svg) {
+    svg {
+      path {
+        fill: var(--selector-add-button-icon-color);
+      }
+    }
   }
 
   &:hover {
     background: var(--selector-add-button-hover-background);
 
-    svg path {
-      fill: var(--selector-add-button-icon-color-hover) !important;
+    :global(.icon-button_svg) {
+      svg {
+        path {
+          fill: var(--selector-add-button-icon-color-hover);
+        }
+      }
     }
   }
 
   &:active {
     background: var(--selector-add-button-active-background);
 
-    svg path {
-      fill: var(--selector-add-button-icon-color-active) !important;
+    :global(.icon-button_svg) {
+      svg {
+        path {
+          fill: var(--selector-add-button-icon-color-active);
+        }
+      }
     }
   }
 
   -webkit-tap-highlight-color: #{$tap-highlight};
 
+  &.isDisabled {
+    cursor: default;
+
+    :global(.icon-button_svg) {
+      svg {
+        path {
+          fill: var(--selector-add-button-icon-color);
+        }
+      }
+    }
+
+    &:hover {
+      background: var(--selector-add-button-background);
+
+      svg path {
+        fill: var(--selector-add-button-icon-color);
+      }
+    }
+
+    &:active {
+      background: var(--selector-add-button-background);
+
+      svg path {
+        fill: var(--selector-add-button-icon-color);
+      }
+    }
+  }
+
   &.isAction {
     background-color: var(--main-accent-button) !important;
 
-    & svg path {
-      fill: var(--accent-main) !important;
+    :global(.icon-button_svg) {
+      svg {
+        path {
+          fill: var(--accent-main);
+        }
+      }
     }
 
     &:hover {
       background-color: var(--main-accent-button);
 
       &:not(.disabled) {
-        svg {
-          path {
-            fill: var(--accent-main);
-            opacity: 0.85;
+        :global(.icon-button_svg) {
+          svg {
+            path {
+              fill: var(--accent-main);
+              opacity: 0.85;
+            }
           }
         }
       }
@@ -84,10 +125,14 @@
     &:active {
       background-color: var(--main-accent-button);
 
-      & svg path {
-        fill: var(--accent-main);
-        opacity: 1;
-        filter: brightness(90%);
+      :global(.icon-button_svg) {
+        svg {
+          path {
+            fill: var(--accent-main);
+            opacity: 1;
+            filter: brightness(90%);
+          }
+        }
       }
     }
 

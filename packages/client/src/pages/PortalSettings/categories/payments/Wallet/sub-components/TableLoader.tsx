@@ -24,9 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-import "../styles/TransactionHistoryLoader.scss";
+import styles from "../styles/TransactionHistoryLoader.module.scss";
 
 type TableLoaderProps = {
   isMobile?: boolean;
@@ -35,50 +36,30 @@ type TableLoaderProps = {
 
 const TableLoader = ({ isMobile, isTablet }: TableLoaderProps) => {
   return !isMobile && !isTablet ? (
-    <div className="loader-row body-row">
-      <RectangleSkeleton
-        className="body-loader"
-        height="20px"
-        borderRadius="3px"
-        width="100%"
-      />
-      <RectangleSkeleton
-        className="body-loader"
-        height="20px"
-        borderRadius="3px"
-        width="100%"
-      />
-      <RectangleSkeleton
-        className="body-loader"
-        height="20px"
-        borderRadius="3px"
-        width="100%"
-      />
-      <RectangleSkeleton
-        className="body-loader"
-        height="20px"
-        borderRadius="3px"
-        width="100%"
-      />
+    <div className={classNames(styles.loaderRow, styles.bodyRow)}>
+      <RectangleSkeleton height="20px" borderRadius="3px" width="100%" />
+      <RectangleSkeleton height="20px" borderRadius="3px" width="100%" />
+      <RectangleSkeleton height="20px" borderRadius="3px" width="100%" />
+      <RectangleSkeleton height="20px" borderRadius="3px" width="100%" />
     </div>
   ) : (
     <>
-      <div className="mobile-body">
-        <div className="mobile-body-left">
+      <div className={styles.mobileBody}>
+        <div className={styles.mobileBodyLeft}>
           <RectangleSkeleton height="20px" borderRadius="3px" width="100%" />
           <RectangleSkeleton height="20px" borderRadius="3px" width="114px" />
         </div>
         <RectangleSkeleton height="16px" borderRadius="3px" width="58px" />
       </div>
-      <div className="mobile-body">
-        <div className="mobile-body-left">
+      <div className={styles.mobileBody}>
+        <div className={styles.mobileBodyLeft}>
           <RectangleSkeleton height="20px" borderRadius="3px" width="100%" />
           <RectangleSkeleton height="20px" borderRadius="3px" width="114px" />
         </div>
         <RectangleSkeleton height="16px" borderRadius="3px" width="58px" />
       </div>
-      <div className="mobile-body">
-        <div className="mobile-body-left">
+      <div className={styles.mobileBody}>
+        <div className={styles.mobileBodyLeft}>
           <RectangleSkeleton height="20px" borderRadius="3px" width="100%" />
           <RectangleSkeleton height="20px" borderRadius="3px" width="114px" />
         </div>

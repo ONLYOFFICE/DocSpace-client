@@ -182,4 +182,7 @@ export interface AutomaticBackupProps {
   setConnectDialogVisible: (visible: boolean) => void;
   setDeleteThirdPartyDialogVisible: (visible: boolean) => void;
   // end dialogsStore
+
+  // next
+  revalidateTag?: VoidFunction;
 }

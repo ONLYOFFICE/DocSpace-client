@@ -56,7 +56,6 @@ import SocketHelper, {
 import { Badge } from "@docspace/shared/components/badge";
 import { Link, LinkTarget } from "@docspace/shared/components/link";
 import { getBackupProgressInfo } from "@docspace/shared/utils/common";
-import action from "@docspace/shared/utils/revalidateTag";
 
 import { globalColors } from "@docspace/shared/themes";
 import { useStateCallback } from "@docspace/shared/hooks/useStateCallback";
@@ -179,6 +178,7 @@ const AutomaticBackup = ({
   isManagement = false,
   backupProgressError,
   setBackupProgressError,
+  revalidateTag,
 }: AutomaticBackupProps) => {
   const isCheckedDocuments =
     selectedStorageType === `${BackupStorageType.DocumentModuleType}`;
@@ -326,7 +326,7 @@ const AutomaticBackup = ({
   };
 
   const onSaveModuleSettings = async () => {
-    action(["backup"]);
+    revalidateTag?.();
 
     if (!selectedEnableSchedule) {
       handleDeleteSchedule();

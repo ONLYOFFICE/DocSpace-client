@@ -34,6 +34,7 @@ import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
 import { useDefaultOptions } from "@docspace/shared/pages/auto-backup/hooks";
+import action from "@docspace/shared/utils/revalidateTag";
 
 import type {
   SettingsThirdPartyType,
@@ -189,6 +190,10 @@ const AutoBackup = ({
     [settings],
   );
 
+  const revalidateTag = async () => {
+    await action(["backup"]);
+  };
+
   const isEnableAuto = checkEnablePortalSettings(portals);
 
   return (
@@ -202,6 +207,7 @@ const AutoBackup = ({
       }}
       removeItem={selectedThirdPartyAccount as ThirdPartyAccountType}
       language={language}
+      revalidateTag={revalidateTag}
       // backup
       setDefaultOptions={setDefaultOptions}
       setDownloadingProgress={setDownloadingProgress}

@@ -375,7 +375,7 @@ export default class MessageStore {
       }
 
       if (n.id.includes("FolderIDInput")) {
-        tweaks[n.id] = { input_value: this.aiSelectedFolder };
+        tweaks[n.id] = { input_value: String(this.aiSelectedFolder) };
       }
     });
 

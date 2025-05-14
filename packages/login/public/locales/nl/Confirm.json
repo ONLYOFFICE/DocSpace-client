@@ -1,6 +1,5 @@
 {
   "AccountWillBeCreated": "Er wordt een {{productName}} account aangemaakt voor <1>{{email}}</1>. Voltooi uw registratie:",
-  "ChangePasswordSuccess": "Wachtwoord is succesvol gewijzigd",
   "ConfirmOwnerPortalSuccessMessage": "{{productName}} eigenaar is met succes gewijzigd. Over 10 seconden wordt u doorgestuurd.",
   "ConfirmOwnerPortalTitle": "Bevestig dat u de eigenaar van het {{productName}} wilt wijzigen naar {{newOwner}}.",
   "CurrentNumber": "Uw huidige mobiele nummer",

@@ -1,6 +1,5 @@
 {
   "AccountWillBeCreated": "Uma conta {{productName}} será criada para <1>{{email}}</1>. Por favor, complete seu cadastro:",
-  "ChangePasswordSuccess": "A palavra-chave foi alterada com êxito",
   "ConfirmOwnerPortalSuccessMessage": "O proprietário do {{productName}} foi alterado com êxito. Será reencaminhado dentro de 10 segundos.",
   "ConfirmOwnerPortalTitle": "Por favor, confirme que quer alterar o proprietário do {{productName}} para {{newOwner}}.",
   "CurrentNumber": "O seu número de telemóvel atual",

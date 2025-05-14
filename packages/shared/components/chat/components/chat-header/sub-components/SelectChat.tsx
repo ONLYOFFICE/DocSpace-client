@@ -74,6 +74,8 @@ const SelectChat = ({ isFullScreen, currentDeviceType }: SelectChatProps) => {
     setIsOpen(false);
   };
 
+  const maxHeight = preparedMessages.length > 7 ? { maxHeight: 300 } : {};
+
   return (
     <>
       <div className={styles.selectChat} onClick={toggleOpen} ref={parentRef}>
@@ -89,7 +91,7 @@ const SelectChat = ({ isFullScreen, currentDeviceType }: SelectChatProps) => {
           directionX="right"
           topSpace={16}
           forwardedRef={parentRef}
-          maxHeight={300}
+          {...maxHeight}
           manualWidth="280px"
           isNoFixedHeightOptions
         >

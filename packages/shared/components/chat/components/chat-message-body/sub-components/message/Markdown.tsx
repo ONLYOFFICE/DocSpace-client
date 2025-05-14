@@ -60,8 +60,8 @@ const MarkdownField = ({ chatMessage }: MarkdownFieldProps) => {
           p: ({ children }) => {
             return (
               <Text
-                fontSize="12px"
-                lineHeight="16px"
+                fontSize="13px"
+                lineHeight="20px"
                 fontWeight={400}
                 className={styles.chatMessageTextColor}
               >

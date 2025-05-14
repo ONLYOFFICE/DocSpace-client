@@ -46,6 +46,7 @@ export interface InjectedAutoBackupWrapperProps
   getProgress: (t: TTranslation) => Promise<void>;
   fetchTreeFolders: () => Promise<TFolder[] | undefined>;
   resetDownloadingProgress: VoidFunction;
+  setterSelectedEnableSchedule: (enable: boolean) => void;
 }
 
 export type AutoBackupWrapperProps = InjectedAutoBackupWrapperProps &

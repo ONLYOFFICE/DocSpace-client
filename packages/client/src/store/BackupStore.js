@@ -748,6 +748,10 @@ class BackupStore {
     this.selectedEnableSchedule = !isEnable;
   };
 
+  setterSelectedEnableSchedule = (enable) => {
+    this.selectedEnableSchedule = enable;
+  };
+
   convertServiceName = (serviceName) => {
     // Docusign, OneDrive, Wordpress
     switch (serviceName) {

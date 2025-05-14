@@ -38,6 +38,7 @@ import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import { toastr } from "@docspace/shared/components/toast";
 import AutomaticBackup from "@docspace/shared/pages/auto-backup";
 import { useDefaultOptions } from "@docspace/shared/pages/auto-backup/hooks";
+import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
 import type { TColorScheme } from "@docspace/shared/themes";
@@ -111,14 +112,13 @@ const AutoBackupWrapper = ({
     })();
   }, []);
 
-  useEffect(() => {
-    return () => {
-      clearTimeout(timerIdRef.current);
-      timerIdRef.current = undefined;
-      resetDownloadingProgress();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useUnmount(() => {
+    clearTimeout(timerIdRef.current);
+    timerIdRef.current = undefined;
+    resetDownloadingProgress();
+    props.setterSelectedEnableSchedule(false);
+    props.toDefault();
+  });
 
   useEffect(() => {
     if (ready) setDocumentTitle(t("Common:DataBackup"));
@@ -262,6 +262,7 @@ export default inject<
       setIsBackupProgressVisible,
       backupProgressError,
       setBackupProgressError,
+      setterSelectedEnableSchedule,
     } = backup;
 
     const defaultRegion =
@@ -288,6 +289,7 @@ export default inject<
       setConnectedThirdPartyAccount,
       seStorageType,
       setSelectedEnableSchedule,
+      setterSelectedEnableSchedule,
       toDefault,
       selectedStorageType,
       selectedFolderId,

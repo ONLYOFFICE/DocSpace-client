@@ -26,7 +26,7 @@
 
 import React from "react";
 
-import { BackupStorageType } from "@docspace/shared/enums";
+import { BackupStorageType, ProvidersType } from "@docspace/shared/enums";
 import {
   DirectThirdPartyConnection,
   type DirectThirdPartyConnectionProps,
@@ -128,6 +128,8 @@ const ThirdPartyModule = ({
     setSelectedFolder(`${id}`);
   };
 
+  const checkCreating = selectedThirdPartyAccount?.key === ProvidersType.WebDav;
+
   return (
     <>
       <div className="auto-backup_third-party-module">
@@ -136,6 +138,7 @@ const ThirdPartyModule = ({
           isError={isError}
           buttonSize={buttonSize}
           isDisabled={isLoadingData}
+          checkCreating={checkCreating}
           onSelectFolder={onSelectFolder}
           withoutInitPath={!isResourcesDefault}
           openConnectWindow={openConnectWindow}

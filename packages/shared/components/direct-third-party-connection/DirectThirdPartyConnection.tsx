@@ -104,6 +104,7 @@ const DirectThirdPartyConnection = ({
   setBasePath,
   setNewPath,
   toDefault,
+  checkCreating = false,
 }: DirectThirdPartyConnectionProps) => {
   const [state, setState] = useReducer<
     Reducer<
@@ -353,7 +354,7 @@ const DirectThirdPartyConnection = ({
             isThirdParty
             isSelectFolder={isSelectFolder}
             isSelect={isSelect}
-            checkCreating={selectedThirdPartyAccount?.key === "WebDav"}
+            checkCreating={checkCreating}
             filesSelectorSettings={filesSelectorSettings}
             newPath={newPath}
             basePath={basePath}

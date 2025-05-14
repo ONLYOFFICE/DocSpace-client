@@ -780,3 +780,14 @@ export enum BackupStorageLocalKey {
   ThirdPartyStorageType = "LocalCopyThirdPartyStorageType",
   ThirdPartyStorageValues = "LocalCopyThirdPartyStorageValues",
 }
+
+export enum ProvidersType {
+  Box = "Box",
+  DropBox = "DropBox",
+  GoogleDrive = "Google Drive",
+  kDrive = "kDrive",
+  OneDrive = "OneDrive",
+  SharePoint = "SharePoint",
+  WebDav = "WebDav",
+  Yandex = "Yandex",
+}

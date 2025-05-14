@@ -108,4 +108,5 @@ export interface DirectThirdPartyConnectionProps {
     breadCrumbs?: TBreadCrumb,
   ) => void;
   onSelectFile?: (fileInfo: FileInfoType, breadCrumbs?: TBreadCrumb[]) => void;
+  checkCreating?: boolean;
 }

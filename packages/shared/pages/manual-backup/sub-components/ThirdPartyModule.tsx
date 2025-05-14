@@ -27,7 +27,7 @@
 import { useTranslation } from "react-i18next";
 import React, { useRef, useEffect, useState } from "react";
 
-import { BackupStorageType } from "@docspace/shared/enums";
+import { BackupStorageType, ProvidersType } from "@docspace/shared/enums";
 import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 import { Button, type ButtonSize } from "@docspace/shared/components/button";
 import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
@@ -172,9 +172,12 @@ const ThirdPartyModule = ({
 
   const isModuleDisabled = !isMaxProgress || isStartCopy;
 
+  const checkCreating = selectedThirdPartyAccount?.key === ProvidersType.WebDav;
+
   return (
     <div className="manual-backup_third-party-module">
       <DirectThirdPartyConnection
+        checkCreating={checkCreating}
         openConnectWindow={openConnectWindow}
         connectDialogVisible={connectDialogVisible}
         deleteThirdPartyDialogVisible={deleteThirdPartyDialogVisible}

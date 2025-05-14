@@ -41,9 +41,10 @@ import type {
   ThirdPartyAccountType,
   TTranslation,
 } from "@docspace/shared/types";
+import { connectedCloudsTypeTitleTranslation } from "@docspace/shared/utils/connectedCloudsTypeTitleTranslation";
+import { ProvidersType } from "@docspace/shared/enums";
 
 import { getSettingsThirdParty } from "@/lib/actions";
-import { connectedCloudsTypeTitleTranslation } from "@docspace/shared/utils/connectedCloudsTypeTitleTranslation";
 
 class BackupStore {
   public connectedThirdPartyAccount: Nullable<SettingsThirdPartyType> = null;
@@ -97,7 +98,8 @@ class BackupStore {
       res.map((storage) => ({
         id: storage.name,
         className: `storage_${storage.key}`,
-        providerKey: storage.key !== "WebDav" ? storage.key : storage.name,
+        providerKey:
+          storage.key !== ProvidersType.WebDav ? storage.key : storage.name,
         isConnected: storage.connected,
         isOauth: storage.oauth,
         oauthHref: storage.redirectUrl,
@@ -130,7 +132,8 @@ class BackupStore {
       name: provider.name,
       label: serviceLabel,
       title: serviceLabel,
-      provider_key: provider.key !== "WebDav" ? provider.key : provider.name,
+      provider_key:
+        provider.key !== ProvidersType.WebDav ? provider.key : provider.name,
       ...(provider.clientId && {
         provider_link: provider.clientId,
       }),

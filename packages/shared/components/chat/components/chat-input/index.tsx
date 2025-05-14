@@ -58,6 +58,7 @@ const ChatInput = ({
     isInit,
     isRequestRunning,
     isEmptyMessages,
+    currentSession,
   } = useMessageStore();
   const { files, wrapperHeight, clearFiles } = useFilesStore();
 
@@ -65,9 +66,9 @@ const ChatInput = ({
   const [showSelector, setShowSelector] = React.useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (e.target.value.trim()) {
-      setValue(e.target.value);
-    }
+    if (e.target.value === "\n") return;
+
+    setValue(e.target.value);
   };
 
   const toggleSelector = () => {
@@ -97,6 +98,11 @@ const ChatInput = ({
       window.removeEventListener("keydown", onKeyEnter);
     };
   }, [onKeyEnter]);
+
+  React.useEffect(() => {
+    setValue("");
+    clearFiles();
+  }, [currentSession, clearFiles]);
 
   const withFile = files.length !== 0;
 

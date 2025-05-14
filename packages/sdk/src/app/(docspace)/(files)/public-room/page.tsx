@@ -38,14 +38,15 @@ export default async function PublicRoom({
 }: {
   searchParams: Promise<{ [key: string]: string }>;
 }) {
+  const params = await searchParams;
   const baseConfig = Object.fromEntries(
-    Object.entries(searchParams).map(([k, v]) => [
+    Object.entries(params).map(([k, v]) => [
       k,
       v === "true" ? true : v === "false" ? false : v,
     ]),
   );
 
-  const filterStr = new URLSearchParams(await searchParams).toString();
+  const filterStr = new URLSearchParams(params).toString();
   const folderId = baseConfig.folder;
 
   const filter = FilesFilter.getFilter({

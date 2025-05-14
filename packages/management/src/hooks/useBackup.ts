@@ -100,6 +100,9 @@ export const useBackup = ({
     seStorageType,
     setSelectedFolder,
     setStorageId,
+
+    isThirdStorageChanged,
+    setIsThirdStorageChanged,
   } = useBackupSettings({ backupScheduleResponse });
 
   useLayoutEffect(() => {
@@ -113,9 +116,6 @@ export const useBackup = ({
   const [thirdPartyStorage, setThirdPartyStorage] = useState<TStorageBackup[]>(
     () => backupStorageResponse,
   );
-
-  const [isThirdStorageChanged, setIsThirdStorageChanged] =
-    useState<boolean>(false);
 
   const [errorInformation, setErrorInformationState] = useState<string>("");
   const [deleteThirdPartyDialogVisible, setDeleteThirdPartyDialogVisible] =

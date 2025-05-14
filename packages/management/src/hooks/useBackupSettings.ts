@@ -102,16 +102,14 @@ export const useBackupSettings = ({
     ) => {
       const schedule = backupScheduleArg ?? backupSchedule;
 
-      console.log({ schedule, backupScheduleArg, backupSchedule });
-
       if (schedule) {
         const { storageType, cronParams, backupsStored, storageParams } =
           schedule;
-        const { folderId, module, ...other } = storageParams;
+        const { folderId, module, tenantId, ...other } = storageParams;
         const { period, day, hour } = cronParams;
 
         const defaultFormSettings: Record<string, string> = {
-          folderId: folderId.toString(),
+          ...(folderId ? { folderId } : {}),
           ...other,
         };
 
@@ -125,9 +123,7 @@ export const useBackupSettings = ({
             formSettings: { ...defaultFormSettings },
           }));
 
-          if (isThirdStorageChanged) {
-            setIsThirdStorageChanged(false);
-          }
+          setIsThirdStorageChanged(false);
         }
 
         const periodLabel = periodObj[period].label!;
@@ -144,10 +140,10 @@ export const useBackupSettings = ({
           periodNumber: period.toString(),
           maxCopiesNumber: backupsStored.toString(),
           storageType: storageType.toString(),
-          folderId: module ? "" : folderId.toString(),
+          folderId: module ? "" : folderId,
           enableSchedule: true,
           periodLabel,
-          ...(module ? { module: module.toString() } : {}),
+          ...(module ? { storageId: module } : {}),
           monthDay,
         }));
 
@@ -158,10 +154,10 @@ export const useBackupSettings = ({
           periodNumber: period.toString(),
           maxCopiesNumber: backupsStored.toString(),
           storageType: storageType.toString(),
-          folderId: module ? "" : folderId.toString(),
+          folderId: module ? "" : folderId,
           enableSchedule: true,
           periodLabel,
-          ...(module ? { module: module.toString() } : {}),
+          ...(module ? { storageId: module } : {}),
           monthDay,
         }));
 
@@ -208,8 +204,6 @@ export const useBackupSettings = ({
         const weekdayLabel = weekdayArr[0].label!;
         const weekday = weekdayArr[0].key.toString();
 
-        console.log({ periodObj, weekdayArr });
-
         setDefaults((state) => ({
           ...state,
           weekday,
@@ -225,7 +219,7 @@ export const useBackupSettings = ({
 
       setIsThirdStorageChanged(false);
     },
-    [backupSchedule, defaults.periodNumber, isThirdStorageChanged],
+    [backupSchedule, defaults.periodNumber],
   );
 
   const toDefault = useCallback(() => {
@@ -466,5 +460,8 @@ export const useBackupSettings = ({
     setCompletedFormFields,
     addValueInFormSettings,
     deleteValueFormSetting,
+
+    isThirdStorageChanged,
+    setIsThirdStorageChanged,
   };
 };

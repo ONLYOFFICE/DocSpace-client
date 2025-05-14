@@ -144,8 +144,9 @@ export type TBackupSchedule = {
   dump: boolean;
   lastBackupTime: string;
   storageParams: {
-    folderId: number;
+    folderId: string;
     module?: string;
+    tenantId?: string;
   };
   storageType: BackupStorageType;
 };

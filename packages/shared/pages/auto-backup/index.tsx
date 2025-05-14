@@ -178,7 +178,6 @@ const AutomaticBackup = ({
   isManagement = false,
   backupProgressError,
   setBackupProgressError,
-  revalidateTag,
 }: AutomaticBackupProps) => {
   const isCheckedDocuments =
     selectedStorageType === `${BackupStorageType.DocumentModuleType}`;
@@ -326,8 +325,6 @@ const AutomaticBackup = ({
   };
 
   const onSaveModuleSettings = async () => {
-    revalidateTag?.();
-
     if (!selectedEnableSchedule) {
       handleDeleteSchedule();
       return;

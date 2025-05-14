@@ -79,7 +79,7 @@ import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
 import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 import HelpCenterReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
-import AiRoomReactSvgUrl from "PUBLIC_DIR/images/icons/32/room/ai.svg?url";
+import SummarizeReactSvgUrl from "PUBLIC_DIR/images/icons/16/summarize.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
 
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
@@ -1853,7 +1853,7 @@ class ContextOptionsStore {
         id: "summarize",
         key: "summarize",
         label: "Summarize",
-        icon: AiRoomReactSvgUrl,
+        icon: SummarizeReactSvgUrl,
         onClick: () => {
           this.summarizeToFile(item);
         },

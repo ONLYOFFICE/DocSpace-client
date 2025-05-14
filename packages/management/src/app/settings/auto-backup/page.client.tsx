@@ -190,10 +190,6 @@ const AutoBackup = ({
     [settings],
   );
 
-  const revalidateTag = async () => {
-    await action(["backup"]);
-  };
-
   const isEnableAuto = checkEnablePortalSettings(portals);
 
   return (
@@ -207,7 +203,6 @@ const AutoBackup = ({
       }}
       removeItem={selectedThirdPartyAccount as ThirdPartyAccountType}
       language={language}
-      revalidateTag={revalidateTag}
       // backup
       setDefaultOptions={setDefaultOptions}
       setDownloadingProgress={setDownloadingProgress}

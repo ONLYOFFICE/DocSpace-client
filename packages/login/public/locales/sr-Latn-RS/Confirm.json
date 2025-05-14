@@ -1,6 +1,5 @@
 {
   "AccountWillBeCreated": "{{productName}} nalog će biti kreiran za <1>{{email}}</1>. Molimo vas zavšite vašu registraciju:",
-  "ChangePasswordSuccess": "Lozinka je uspešno promenjena",
   "ConfirmOwnerPortalSuccessMessage": "Vlasnik {{productName}}-a je uspešno promenjen. Bićete preusmereni za 10 sekundi.",
   "ConfirmOwnerPortalTitle": "Molimo vas potvrdite da želite da promenite {{productName}} vlasnika na {{newOwner}}.",
   "CurrentNumber": "Vaš trenutni broj mobilnog telefona",

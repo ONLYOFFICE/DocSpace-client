@@ -312,6 +312,7 @@ const AutomaticBackup = ({
       if (selectedSchedule) setBackupSchedule(selectedSchedule);
       if (storageInfo) setThirdPartyStorage(storageInfo);
 
+      setIsError(false);
       setDefaultOptions(periodsObject, weekdaysLabelArray, selectedSchedule);
       toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (e) {

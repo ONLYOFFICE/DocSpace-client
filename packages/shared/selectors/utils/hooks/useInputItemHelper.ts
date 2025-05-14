@@ -41,9 +41,9 @@ const useInputItemHelper = ({
   setItems,
 }: TUseInputItemHelper) => {
   const onCancelInput = React.useCallback(() => {
-    if (!withCreate || !setItems) return;
+    if (!withCreate) return;
 
-    setItems((value) => {
+    setItems?.((value) => {
       if (!value[1]?.isInputItem && !value[0]?.isInputItem) return value;
 
       let idx = 1;

@@ -230,8 +230,12 @@ export default inject(
       maxTotalSizeByQuota,
     } = currentQuotaStore;
     const { walletQuotas, fetchPortalTariff } = currentTariffStatusStore;
-    const { walletCodeCurrency, storageQuotaIncrementPrice, fetchBalance } =
-      paymentStore;
+    const {
+      walletCodeCurrency,
+      storageQuotaIncrementPrice,
+      fetchBalance,
+      walletBalance,
+    } = paymentStore;
     const { value, isoCurrencySymbol } = storageQuotaIncrementPrice;
     const { language } = authStore;
     const isTariffExist = walletQuotas?.length > 0;
@@ -251,6 +255,7 @@ export default inject(
       isoCurrencySymbol,
       fetchPortalTariff,
       fetchBalance,
+      walletBalance,
     };
   },
 )(observer(StorageDialog));

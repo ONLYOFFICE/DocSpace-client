@@ -29,7 +29,6 @@
 import { ChangeEvent, KeyboardEvent, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { login } from "@docspace/shared/api/user";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { PasswordInput } from "@docspace/shared/components/password-input";
@@ -65,7 +64,7 @@ const PasswordChangeForm = ({
   const [isPasswordErrorShow, setIsPasswordErrorShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { email = "", uid, confirmHeader } = linkData;
+  const { uid, confirmHeader } = linkData;
 
   const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
@@ -96,22 +95,8 @@ const PasswordChangeForm = ({
 
       await changePassword(uid, hash, confirmHeader);
       setIsLoading(false);
-      toastr.success(t("ChangePasswordSuccess"));
 
-      if (!email || !hash) return;
-
-      const res = await login(email, hash);
-
-      const isConfirm = typeof res === "string" && res.includes("confirm");
-      const redirectPath = sessionStorage.getItem("referenceUrl");
-      if (redirectPath && !isConfirm) {
-        sessionStorage.removeItem("referenceUrl");
-        window.location.href = redirectPath;
-        return;
-      }
-
-      if (typeof res === "string") window.location.replace(res);
-      else window.location.replace("/");
+      window.location.replace("/login?passwordChanged=true");
     } catch (error) {
       const knownError = error as TError;
       let errorMessage: string;

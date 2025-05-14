@@ -35,6 +35,15 @@ import BackupToPublicRoom from "SRC_DIR/components/dialogs/BackupToPublicRoom";
 import ScheduleComponent from "./ScheduleComponent";
 
 class RoomsModule extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    const { setSelectedFolder, isDocumentsDefault, defaultFolderId } = props;
+
+    isDocumentsDefault
+      ? setSelectedFolder(defaultFolderId)
+      : setSelectedFolder("");
+  }
+
   onSelectFolder = (id) => {
     const { setSelectedFolder } = this.props;
 

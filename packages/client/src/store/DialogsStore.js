@@ -298,7 +298,7 @@ class DialogsStore {
     file: null,
   };
 
-  socialAuthWelcomeDialogVisible = true;
+  socialAuthWelcomeDialogVisible = false;
 
   constructor(
     authStore,

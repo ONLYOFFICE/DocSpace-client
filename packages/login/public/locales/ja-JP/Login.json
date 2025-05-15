@@ -18,5 +18,6 @@
   "RememberHelper": "デフォルトのセッションライフタイムは20分です。このオプションをチェックすると、1年間に設定されます。独自の値を設定するには、「設定」で設定します。",
   "SignInLDAP": "{{ldap_domain}}にサインインする",
   "SignInLdapHelper": "企業ドメインの認証情報を使用してください",
-  "UserIsAlreadyRegistered": "ユーザー<1>{{email}}</1>はすでにこの{{productName}}に登録されています。パスワードを入力するか、前に戻って別のメールアドレスでログインしてください。"
+  "UserIsAlreadyRegistered": "ユーザー<1>{{email}}</1>はすでにこの{{productName}}に登録されています。パスワードを入力するか、前に戻って別のメールアドレスでログインしてください。",
+  "ChangePasswordSuccess": "パスワードの変更に成功しました。"
 }

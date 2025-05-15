@@ -83,6 +83,7 @@ export type ContextMenuType = {
   checked?: boolean;
   badgeLabel?: string;
   isPaidBadge?: boolean;
+  preventNewTab?: boolean;
 };
 
 export type SeparatorType = {

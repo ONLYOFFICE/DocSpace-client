@@ -100,7 +100,6 @@ const InviteInput = ({
   setAddUsersPanelVisible,
   isMobileView,
   cultureNames,
-  i18n,
   setCultureKey,
   isPaidUserAccess,
   isUserTariffLimit,
@@ -132,13 +131,12 @@ const InviteInput = ({
 
   const selectedLanguage = useMemo(
     () =>
-      cultureNames.find((item) => item.key === language) ||
-      cultureNames.find((item) => item.key === culture.key) || {
+      cultureNames.find((item) => item.key === language) || {
         key: language,
         label: "",
         isBeta: isBetaLanguage(language),
       },
-    [cultureNames, language, culture],
+    [cultureNames, language],
   );
 
   const cultureNamesNew = useMemo(
@@ -163,7 +161,7 @@ const InviteInput = ({
   const onLanguageSelect = (newLanguage) => {
     setInviteLanguage(newLanguage);
     setCultureKey(newLanguage.key);
-    if (newLanguage.key !== i18n.language) setIsChangeLangMail(true);
+    if (newLanguage.key !== selectedLanguage.key) setIsChangeLangMail(true);
     else setIsChangeLangMail(false);
   };
 

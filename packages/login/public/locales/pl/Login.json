@@ -18,5 +18,6 @@
   "RememberHelper": "Domyślny czas trwania sesji to 20 min. Zaznacz tę opcję, aby ustawić go na 1 rok. Aby ustawić wartość niestandardową, przejdź do Ustawień.",
   "SignInLDAP": "Zaloguj się: {{ldap_domain}}",
   "SignInLdapHelper": "Użyj danych uwierzytelniających domeny firmowej",
-  "UserIsAlreadyRegistered": "Użytkownik <1>{{email}}</1>  jest już zarejestrowany w tym {{productName}}, wpisz swoje hasło lub wróć, aby kontynuować z innym adresem e-mail."
+  "UserIsAlreadyRegistered": "Użytkownik <1>{{email}}</1>  jest już zarejestrowany w tym {{productName}}, wpisz swoje hasło lub wróć, aby kontynuować z innym adresem e-mail.",
+  "ChangePasswordSuccess": "Hasło zostało pomyślnie zmienione"
 }

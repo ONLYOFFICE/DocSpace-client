@@ -108,7 +108,8 @@ const SubMenu = (props: SubMenuProps) => {
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
     item: ContextMenuType,
   ) => {
-    const { disabled, url, onClick, items, action, label } = item;
+    const { disabled, url, onClick, items, action, label, preventNewTab } =
+      item;
 
     if (isMobile() && label && (items || item.onLoad)) {
       e.preventDefault();
@@ -124,7 +125,7 @@ const SubMenu = (props: SubMenuProps) => {
       return;
     }
 
-    if (!url) {
+    if (!url || (onClick && preventNewTab)) {
       e.preventDefault();
     }
 

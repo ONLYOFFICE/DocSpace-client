@@ -18,5 +18,6 @@
   "RememberHelper": "Lebensdauer der Sitzung ist standardmäßig 20 Minuten. Wählen Sie diese Option aus, um den Wert 1 Jahr zu setzen. Für benutzerdefinierte Werte öffnen Sie Einstellungen.",
   "SignInLDAP": "Anmelden bei: {{ldap_domain}}",
   "SignInLdapHelper": "Anmeldedaten für die Unternehmensdomäne verwenden",
-  "UserIsAlreadyRegistered": "Benutzer <1>{{email}}</1> ist bereits in diesem {{productName}} registriert. Geben Sie Ihr Passwort ein oder gehen Sie zurück, um mit einer anderen E-Mail fortzufahren."
+  "UserIsAlreadyRegistered": "Benutzer <1>{{email}}</1> ist bereits in diesem {{productName}} registriert. Geben Sie Ihr Passwort ein oder gehen Sie zurück, um mit einer anderen E-Mail fortzufahren.",
+  "ChangePasswordSuccess": "Passwort wurde erfolgreich geändert"
 }

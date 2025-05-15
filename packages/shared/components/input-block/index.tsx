@@ -100,7 +100,7 @@ const InputBlock = React.memo(
     children,
     forwardedRef,
   }: InputBlockProps) => {
-    const [isFocus, setIsFocus] = useState(false);
+    const [isFocus, setIsFocus] = useState(isAutoFocussed);
     const iconButtonSize = useIconSize(size, iconSize);
 
     const handleChange = useCallback(

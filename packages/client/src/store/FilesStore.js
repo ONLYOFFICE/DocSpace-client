@@ -1290,11 +1290,11 @@ class FilesStore {
       this.files[index] = file;
       this.createThumbnail(file);
 
-      if (this.selectedFolderStore.isAIRoom) {
-        if (this.flowStore.localCheckVectorizeDocument(file)) return;
+      // if (this.selectedFolderStore.isAIRoom) {
+      //   if (this.flowStore.localCheckVectorizeDocument(file)) return;
 
-        this.flowStore.checkVectorizeDocument(file);
-      }
+      //   this.flowStore.checkVectorizeDocument(file);
+      // }
     }
   };
 

@@ -13,9 +13,11 @@ import { toastr } from "@docspace/shared/components/toast";
 
 type VectorizeDocumentStatus = "added" | "error" | "exist" | "not_found";
 
-type SimpleFile = Pick<TFile, "id" | "version" | "title">;
+type SimpleFile = Pick<TFile, "id" | "version" | "title" | "fileExst">;
 
 const API_KEY_NAME = "chat_api_key";
+
+const FILE_EXSTS = ["docx", "pdf", "xlsx", "txt"];
 
 class FlowStore {
   private api: FlowsApi;
@@ -172,6 +174,11 @@ class FlowStore {
   };
 
   vectorizeDocument = async (file: TFile | SimpleFile) => {
+    if (!FILE_EXSTS.includes(file.fileExst.replace(".", ""))) {
+      this.vectorizedFiles = [...this.vectorizedFiles, file];
+      return;
+    }
+
     try {
       const response = await FlowsApi.vectorizeFile(String(file.id));
 

@@ -94,6 +94,12 @@ const AuthHandler = () => {
         //console.log("Login with confirm key success", res);
         frameCallEvent({ event: "onAuthSuccess" });
 
+        const wizard = searchParams?.get("wizard");
+
+        if (wizard === "true") {
+          localStorage.setItem("showSocialAuthWelcomeDialog", "true");
+        }
+
         if (referenceUrl && referenceUrl.includes("oauth2")) {
           const user = await getUser();
 
@@ -157,7 +163,14 @@ const AuthHandler = () => {
     loginWithKey();
 
     console.log("call useEffect");
-  }, [email, key, referenceUrl, isFileHandler, isExternalDownloading]);
+  }, [
+    email,
+    key,
+    referenceUrl,
+    isFileHandler,
+    isExternalDownloading,
+    searchParams,
+  ]);
 
   console.log("render");
 

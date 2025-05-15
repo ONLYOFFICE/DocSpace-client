@@ -77,6 +77,9 @@ export const dsApiConfiguration = new Configuration({
     responseType: "json",
     timeout: apiTimeout,
     withCredentials: true,
+    headers: {
+      "Content-Type": "application/json",
+    },
   },
 });
 

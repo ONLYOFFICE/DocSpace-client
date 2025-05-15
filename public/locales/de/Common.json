@@ -869,5 +869,6 @@
   "Processes": "Prozesse: {{count}}",
   "ErrorUploadingFiles": "Fehler beim Hochladen der Dateien: {{count}}",
   "SuccessOperation": "{{operationName}}: Erledigt",
-  "CancelUpload": "Das Hochladen wurde unterbrochen. Einige Dateien sind nicht hochgeladen worden."
+  "CancelUpload": "Das Hochladen wurde unterbrochen. Einige Dateien sind nicht hochgeladen worden.",
+  "BackupNotAllowedInFormRoom": "Die Sicherungsdatei kann nicht im Formularausfüllraum gespeichert werden, da dieser Raumtyp nur PDF-Formulare enthalten kann."
 }

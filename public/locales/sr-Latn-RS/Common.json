@@ -859,5 +859,6 @@
   "Processes": "Procesi: {{count}}",
   "ErrorUploadingFiles": "Greška pri otpremanju fajlova: {{count}}",
   "SuccessOperation": "{{operationName}}: Završeno",
-  "CancelUpload": "Otpremanje je prekinuto. Neke datoteke nisu otpremljene."
+  "CancelUpload": "Otpremanje je prekinuto. Neke datoteke nisu otpremljene.",
+  "BackupNotAllowedInFormRoom": "Rezervna kopija ne može biti sačuvana u sobi za popunjavanje formulara, jer ova vrsta sobe može sadržati samo PDF formulare."
 }

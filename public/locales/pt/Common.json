@@ -861,5 +861,6 @@
   "Processes": "Processos: {{count}}",
   "ErrorUploadingFiles": "Erro ao fazer upload de ficheiros: {{count}}",
   "SuccessOperation": "{{operationName}}: Gotowe",
-  "CancelUpload": "O carregamento foi interrompido. Alguns ficheiros não foram carregados."
+  "CancelUpload": "O carregamento foi interrompido. Alguns ficheiros não foram carregados.",
+  "BackupNotAllowedInFormRoom": "O ficheiro de cópia de segurança não pode ser guardado na sala Preenchimento de formulários, uma vez que este tipo de sala só pode conter formulários PDF."
 }

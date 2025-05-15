@@ -869,5 +869,6 @@
   "Processes": "Procese: {{count}}",
   "ErrorUploadingFiles": "Eroare la încărcarea fișierelor: {{count}}",
   "SuccessOperation": "{{operationName}}: Gata",
-  "CancelUpload": "Încărcarea a fost întreruptă. Unele fișiere nu au fost încărcate."
+  "CancelUpload": "Încărcarea a fost întreruptă. Unele fișiere nu au fost încărcate.",
+  "BackupNotAllowedInFormRoom": "Nu se poate salva fișierul de rezervă în Sala de completare a formularelor deoarece această sală poate conține numai formulare PDF."
 }

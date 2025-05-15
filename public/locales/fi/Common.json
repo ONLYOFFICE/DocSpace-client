@@ -861,5 +861,6 @@
   "Processes": "Prosessit: {{count}}",
   "ErrorUploadingFiles": "Virhe ladattaessa tiedostoja: {{count}}",
   "SuccessOperation": "{{operationName}}: Tehty",
-  "CancelUpload": "Lataus on keskeytetty. Joitakin tiedostoja ei ole ladattu."
+  "CancelUpload": "Lataus on keskeytetty. Joitakin tiedostoja ei ole ladattu.",
+  "BackupNotAllowedInFormRoom": "Varmuuskopiotiedostoa ei voi tallentaa Lomakkeentäyttöhuoneeseen, koska tämä huonetyyppi voi sisältää vain PDF-lomakkeita"
 }

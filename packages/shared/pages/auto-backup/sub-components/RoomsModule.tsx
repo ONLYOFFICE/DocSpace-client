@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import React, { useMemo, useState } from "react";
 
 import { BackupStorageType, type DeviceType } from "@docspace/shared/enums";
 import {
@@ -107,6 +108,8 @@ const RoomsModule = ({
   setTime,
   setWeekday,
 }: RoomsModuleProps) => {
+  const { t } = useTranslation("Common");
+
   const [backupToPublicRoomDialog, setBackupToPublicRoom] = useState<{
     visible: boolean;
     data: Nullable<BackupToPublicRoomOptionType>;
@@ -138,6 +141,14 @@ const RoomsModule = ({
     setIsError(false);
   };
 
+  const formProps = useMemo(
+    () => ({
+      isRoomFormAccessible: false,
+      message: t("Common:BackupNotAllowedInFormRoom"),
+    }),
+    [t],
+  );
+
   return (
     <>
       <div className="auto-backup_folder-input">
@@ -150,6 +161,7 @@ const RoomsModule = ({
           basePath={basePath}
           isErrorPath={isErrorPath}
           isDisabled={isLoadingData}
+          formProps={formProps}
           withoutInitPath={!isDocumentsDefault}
           currentDeviceType={currentDeviceType}
           filesSelectorSettings={settingsFileSelector}

@@ -861,5 +861,6 @@
   "Processes": "Procesi: {{count}}",
   "ErrorUploadingFiles": "Kļūda, augšupielādējot failus: {{count}}",
   "SuccessOperation": "{{operationName}}: Pabeigts",
-  "CancelUpload": "Augšupielāde ir pārtraukta. Daži faili nav augšupielādēti."
+  "CancelUpload": "Augšupielāde ir pārtraukta. Daži faili nav augšupielādēti.",
+  "BackupNotAllowedInFormRoom": "Rezerves kopijas failu nevar saglabāt Veidlapu aizpildīšanas telpā, jo šajā telpas tipā var saglabāt tikai PDF veidlapas."
 }

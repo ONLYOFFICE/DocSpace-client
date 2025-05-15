@@ -869,5 +869,6 @@
   "Processes": "Procesos: {{count}}",
   "ErrorUploadingFiles": "Error al subir archivos: {{count}}",
   "SuccessOperation": "{{operationName}}: Hecho",
-  "CancelUpload": "La carga se ha interrumpido. Algunos archivos no se han cargado."
+  "CancelUpload": "La carga se ha interrumpido. Algunos archivos no se han cargado.",
+  "BackupNotAllowedInFormRoom": "El archivo de respaldo no se puede guardar en la sala para rellenar formularios, ya que este tipo de sala solo puede contener formularios en formato PDF."
 }

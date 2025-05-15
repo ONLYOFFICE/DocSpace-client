@@ -858,5 +858,6 @@
   "Processes": "Các tiến trình: {{count}}",
   "ErrorUploadingFiles": "Lỗi khi tải tập tin lên: {{count}} ",
   "SuccessOperation": "{{operationName}}: Hoàn tất",
-  "CancelUpload": "Quá trình tải lên đã bị gián đoạn. Một số tập tin chưa được tải lên."
+  "CancelUpload": "Quá trình tải lên đã bị gián đoạn. Một số tập tin chưa được tải lên.",
+  "BackupNotAllowedInFormRoom": "Không thể lưu tập tin sao lưu vào phòng Điền Biểu Mẫu vì loại phòng này chỉ có thể chứa các biểu mẫu PDF."
 }

@@ -861,5 +861,6 @@
   "Processes": "Procesy {{count}}",
   "ErrorUploadingFiles": "Błąd podczas przesyłania plików: {{count}}",
   "SuccessOperation": "{{operationName}}: Gotowe",
-  "CancelUpload": "Przesyłanie zostało przerwane. Nie udało się wgrać wszystkich plików."
+  "CancelUpload": "Przesyłanie zostało przerwane. Nie udało się wgrać wszystkich plików.",
+  "BackupNotAllowedInFormRoom": "Plik kopii zapasowej nie może zostać zapisany w pokoju do wypełniania formularzy, ponieważ ten typ pokoju może zawierać tylko formularze PDF."
 }

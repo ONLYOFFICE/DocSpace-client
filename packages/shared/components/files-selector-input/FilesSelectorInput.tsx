@@ -82,6 +82,7 @@ const FilesSelectorInput = ({
   filesSelectorSettings,
   checkCreating,
   openRoot,
+  formProps,
 }: FilesSelectorInputProps) => {
   const { t } = useTranslation("Common");
 
@@ -219,6 +220,7 @@ const FilesSelectorInput = ({
           onSetBaseFolderPath={onSetBasePath}
           getIsDisabled={getIsDisabledAction}
           withCreate={withCreate}
+          formProps={formProps}
           // default
           parentId={0}
           disabledItems={[]}

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
@@ -144,6 +144,14 @@ const RoomsModule = ({
 
   const isModuleDisabled = !isMaxProgress || isStartCopy;
 
+  const formProps = useMemo(
+    () => ({
+      isRoomFormAccessible: false,
+      message: t("Common:BackupNotAllowedInFormRoom"),
+    }),
+    [t],
+  );
+
   return (
     <>
       <div className="manual-backup_folder-input">
@@ -155,6 +163,7 @@ const RoomsModule = ({
           basePath={basePath}
           maxWidth={maxWidth}
           toDefault={toDefault}
+          formProps={formProps}
           setNewPath={setNewPath}
           isErrorPath={isErrorPath}
           setBasePath={setBasePath}

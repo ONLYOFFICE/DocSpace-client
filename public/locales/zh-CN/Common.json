@@ -869,5 +869,6 @@
   "Processes": "进程：{{count}}",
   "ErrorUploadingFiles": "上传文件时出错：{{count}}",
   "SuccessOperation": "{{operationName}}：完成",
-  "CancelUpload": "上传已中断。一些文件未上传成功。"
+  "CancelUpload": "上传已中断。一些文件未上传成功。",
+  "BackupNotAllowedInFormRoom": "无法将备份文件保存到表单填写房间，因为此房间类型仅支持 PDF 格式文件。"
 }

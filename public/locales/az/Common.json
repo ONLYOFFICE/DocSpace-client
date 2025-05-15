@@ -861,5 +861,6 @@
   "Processes": "Proseslər: {{count}}",
   "ErrorUploadingFiles": "Faylları yükləmə xətası: {{count}}",
   "SuccessOperation": "{{operationName}}: Hazırdır",
-  "CancelUpload": "Yükləmə dayandırıldı. Bəzi fayllar yüklənmədi."
+  "CancelUpload": "Yükləmə dayandırıldı. Bəzi fayllar yüklənmədi.",
+  "BackupNotAllowedInFormRoom": "Ehtiyat faylı Forma Doldurma otağında saxlamaq mümkün deyil, çünki bu otaq növü yalnız PDF formalarını ehtiva edə bilər."
 }

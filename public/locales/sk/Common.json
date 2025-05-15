@@ -861,5 +861,6 @@
   "Processes": "Procesy: {{count}}",
   "ErrorUploadingFiles": "Chyba pri nahrávaní súborov: {{count}}",
   "SuccessOperation": "{{operationName}}: Hotovo",
-  "CancelUpload": "Sťahovanie bolo prerušené. Niektoré súbory neboli načítane."
+  "CancelUpload": "Sťahovanie bolo prerušené. Niektoré súbory neboli načítane.",
+  "BackupNotAllowedInFormRoom": "Záložný súbor nie je možné uložiť do miestnosti na vyplňovanie formulárov, pretože tento typ miestnosti môže obsahovať len PDF formuláre."
 }

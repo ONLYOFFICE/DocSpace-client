@@ -861,5 +861,6 @@
   "Processes": "Procesy: {{count}}",
   "ErrorUploadingFiles": "Chyba při nahrávání souborů: {{count}}",
   "SuccessOperation": "{{operationName}}: Hotovo",
-  "CancelUpload": "Nahrávání bylo přerušeno. Některé soubory nebyly nahrány."
+  "CancelUpload": "Nahrávání bylo přerušeno. Některé soubory nebyly nahrány.",
+  "BackupNotAllowedInFormRoom": "Záložní soubor nelze uložit do místnosti Vyplňování formulářů, protože tento typ místnosti může obsahovat pouze formuláře PDF."
 }

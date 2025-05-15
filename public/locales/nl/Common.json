@@ -861,5 +861,6 @@
   "Processes": "Processen: {{count}}",
   "ErrorUploadingFiles": "Fout bij het uploaden van bestanden: {{count}}",
   "SuccessOperation": "{{operationName}}: Gereed",
-  "CancelUpload": "De upload is onderbroken. Sommige bestanden zijn niet geüpload."
+  "CancelUpload": "De upload is onderbroken. Sommige bestanden zijn niet geüpload.",
+  "BackupNotAllowedInFormRoom": "Het back-upbestand kan niet worden opgeslagen in de Kamer voor het invullen van formulieren, omdat dit kamertype alleen PDF formulieren kan bevatten."
 }

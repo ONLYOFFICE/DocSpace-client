@@ -859,5 +859,6 @@
   "Processes": "Processus : {{count}}",
   "ErrorUploadingFiles": "Erreur de téléchargement des fichiers : {{count}}",
   "SuccessOperation": "{{operationName}} : Terminé",
-  "CancelUpload": "Le téléchargement a été interrompu. Certains fichiers n’ont pas été téléchargés."
+  "CancelUpload": "Le téléchargement a été interrompu. Certains fichiers n’ont pas été téléchargés.",
+  "BackupNotAllowedInFormRoom": "Le fichier de sauvegarde ne peut pas être enregistré dans la salle de remplissage de formulaires, car ce type de salle ne peut contenir que des formulaires PDF."
 }

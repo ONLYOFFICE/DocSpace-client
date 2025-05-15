@@ -857,5 +857,6 @@
   "Processes": "عدد العمليات: {{count}}",
   "ErrorUploadingFiles": "حدث خطأ أثناء تحميل الملفات: {{count}}",
   "SuccessOperation": "{{operationName}}: تم بنجاح",
-  "CancelUpload": "تمت مقاطعة الرفع. لم يتم رفع بعض الملفات."
+  "CancelUpload": "تمت مقاطعة الرفع. لم يتم رفع بعض الملفات.",
+  "BackupNotAllowedInFormRoom": "لا يمكن حفظ ملف النسخة الاحتياطية في غرفة تعبئة النماذج، لأن هذا النوع من الغرف يدعم ملفات \"PDF\" فقط."
 }

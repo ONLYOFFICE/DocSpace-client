@@ -869,5 +869,6 @@
   "Processes": "プロセス: {{count}}",
   "ErrorUploadingFiles": "ファイルのアップロードエラー: {{count}}",
   "SuccessOperation": "{{operationName}}：完了",
-  "CancelUpload": "アップロードが中断されました。一部のファイルがアップロードされていません。"
+  "CancelUpload": "アップロードが中断されました。一部のファイルがアップロードされていません。",
+  "BackupNotAllowedInFormRoom": "バックアップファイルは、フォーム記入ルームに保存できません。このルームタイプにはPDFフォームのみを含めることができます。"
 }

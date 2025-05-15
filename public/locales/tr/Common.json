@@ -861,5 +861,6 @@
   "Processes": "İşlemler: {{count}}",
   "ErrorUploadingFiles": "Dosyalar yüklenirken hata oluştu: {{count}}",
   "SuccessOperation": "{{operationName}}: Tamamlandı",
-  "CancelUpload": "Yükleme kesintiye uğradı. Bazı dosyalar yüklenmedi."
+  "CancelUpload": "Yükleme kesintiye uğradı. Bazı dosyalar yüklenmedi.",
+  "BackupNotAllowedInFormRoom": "Yedekleme dosyası Form Doldurma odasına kaydedilemez çünkü bu oda türü sadece PDF formlar içerebilir."
 }

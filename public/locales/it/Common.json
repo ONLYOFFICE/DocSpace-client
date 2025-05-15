@@ -869,5 +869,6 @@
   "Processes": "Processi: {{count}}",
   "ErrorUploadingFiles": "Errore durante il caricamento dei file: {{count}}",
   "SuccessOperation": "{{operationName}}: Completato",
-  "CancelUpload": "Il caricamento è stato interrotto. Alcuni file non sono stati caricati."
+  "CancelUpload": "Il caricamento è stato interrotto. Alcuni file non sono stati caricati.",
+  "BackupNotAllowedInFormRoom": "Il file di backup non può essere salvato nella Stanza di compilazione di moduli poiché questo tipo di stanza può contenere solo moduli PDF."
 }

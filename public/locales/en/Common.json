@@ -869,5 +869,6 @@
   "Processes": "Processes: {{count}}",
   "ErrorUploadingFiles": "Error uploading files: {{count}}",
   "SuccessOperation": "{{operationName}}: Done",
-  "CancelUpload": "The upload has been interrupted. Some files have not been uploaded."
+  "CancelUpload": "The upload has been interrupted. Some files have not been uploaded.",
+  "BackupNotAllowedInFormRoom": "The backup file cannot be saved to the Form Filling room since this room type can only contain PDF forms."
 }

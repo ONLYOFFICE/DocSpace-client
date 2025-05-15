@@ -25,7 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
-import type { TGetIcon } from "@docspace/shared/selectors/Files/FilesSelector.types";
+import type {
+  FilesSelectorProps,
+  TGetIcon,
+} from "@docspace/shared/selectors/Files/FilesSelector.types";
 import type { TFilesSettings } from "@docspace/shared/api/files/types";
 import type { DeviceType } from "@docspace/shared/enums";
 import type { BackupToPublicRoomOptionType } from "@docspace/shared/types";
@@ -70,6 +73,7 @@ export type FilesSelectorInputProps = {
   isRoomBackup?: boolean;
   isDocumentIcon?: boolean;
   filesSelectorSettings: FilesSelectorSettings;
+  formProps?: FilesSelectorProps["formProps"];
 
   setBasePath: (folders: TBreadCrumb[]) => void;
   toDefault: VoidFunction;

@@ -861,5 +861,6 @@
   "Processes": "Procesi: {{count}}",
   "ErrorUploadingFiles": "Napaka pri nalaganju datotek: {{count}}",
   "SuccessOperation": "{{operationName}}: Končano",
-  "CancelUpload": "Nalaganje je bilo prekinjeno. Nekatere datoteke niso bile naložene."
+  "CancelUpload": "Nalaganje je bilo prekinjeno. Nekatere datoteke niso bile naložene.",
+  "BackupNotAllowedInFormRoom": "Datoteke varnostne kopije ni mogoče shraniti v sobo za izpolnjevanje obrazcev, ker ta vrsta sobe lahko vsebuje samo obrazce PDF."
 }

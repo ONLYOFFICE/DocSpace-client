@@ -859,5 +859,6 @@
   "Processes": "프로세스: {{count}}",
   "ErrorUploadingFiles": "파일 업로드 오류: {{count}}",
   "SuccessOperation": "{{operationName}}: 완료",
-  "CancelUpload": "업로드가 중단되었습니다. 일부 파일이 업로드되지 않았습니다."
+  "CancelUpload": "업로드가 중단되었습니다. 일부 파일이 업로드되지 않았습니다.",
+  "BackupNotAllowedInFormRoom": "이 룸 유형에는 PDF 양식만 포함될 수 있으므로 해당 백업 파일을 양식 작성 룸에 저장할 수 없습니다."
 }

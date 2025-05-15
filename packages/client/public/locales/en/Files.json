@@ -21,7 +21,6 @@
   "ArchiveEmptyScreenUser": "Rooms that have been archived will appear here.",
   "AssignOwner": "Assign Owner",
   "BackToParentFolderButton": "Back to parent folder",
-  "BackupNotAllowedInFormRoom": "The backup file cannot be saved to the Form Filling room since this room type can only contain PDF forms.",
   "ByAuthor": "Author",
   "ByCreation": "Created",
   "ByErasure": "Erasure",

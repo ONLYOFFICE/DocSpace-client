@@ -41,11 +41,11 @@ export const StyledBodyContent = styled.div`
 
   .account-details {
     width: 488px;
-    margin: 12px 0;
+    margin: 16px 0;
     border-radius: 6px;
     background-color: ${(props) =>
       props.theme.socialAuthDialog.accountDetailsBackground};
-    padding: 16px 0px;
+    padding: 12px 0px;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -113,7 +113,7 @@ export const StyledInfoRow = styled.div`
     max-width: 300px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
     font-weight: 600;
 
     @media ${mobile} {

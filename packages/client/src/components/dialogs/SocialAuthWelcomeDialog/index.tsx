@@ -96,11 +96,11 @@ const SocialAuthWelcomeDialogComponent = ({
                 })}
               </Text>
               <div className="info-value">
-                <Text
-                  fontWeight="600"
-                  truncate
-                  className="welcome-text"
-                >{`${tenantAlias}.${baseDomain}`}</Text>
+                <Text fontWeight="600" truncate className="welcome-text">
+                  {baseDomain == "localhost"
+                    ? `${baseDomain}`
+                    : `${tenantAlias}.${baseDomain}`}
+                </Text>
                 <Link
                   isHovered
                   className="change-domain_link"

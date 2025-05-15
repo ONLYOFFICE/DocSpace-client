@@ -729,5 +729,7 @@
   "Yes": "Yes",
   "Yesterday": "Yesterday",
   "You": "You",
-  "YourTurn": "Your turn"
+  "YourTurn": "Your turn",
+  "OpenSavedDocument": "Open saved document in new tab",
+  "FileName": "File name"
 }

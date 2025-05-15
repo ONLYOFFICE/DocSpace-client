@@ -716,5 +716,7 @@
   "Yes": "Ja",
   "Yesterday": "Gestern",
   "You": "Sie",
-  "YourTurn": "Jetzt sind Sie dran"
+  "YourTurn": "Jetzt sind Sie dran",
+  "OpenSavedDocument": "Das gespeicherte Dokument im neuen Tab öffnen",
+  "FileName": "Dateiname"
 }

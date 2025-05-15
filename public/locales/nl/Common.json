@@ -708,5 +708,7 @@
   "Yes": "Ja",
   "Yesterday": "Gisteren",
   "You": "U",
-  "YourTurn": "Uw beurt"
+  "YourTurn": "Uw beurt",
+  "OpenSavedDocument": "Open bewaard document in nieuwe tab",
+  "FileName": "Bestandsnaam"
 }

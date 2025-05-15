@@ -3,10 +3,8 @@
   "DocumentsFileType": "documentos",
   "ErrorConnectionLost": "Se ha perdido la conexión",
   "FileLocation": "Abrir ubicación del archivo",
-  "FileName": "Nombre de archivo",
   "ImageFileType": "imágenes",
   "MailMergeFileType": "Seleccionar archivo en formato XLSX",
-  "OpenSavedDocument": "Abrir el documento guardado en una nueva pestaña",
   "SelectFilesType": "Seleccionar archivos de tipo: {{fileType}}",
   "UsersWithoutAccess": "Algunos usuarios a los que desea mencionar no tienen acceso a la sala: {{users}}"
 }

@@ -716,5 +716,7 @@
   "Yes": "Oui",
   "Yesterday": "Hier",
   "You": "Vous",
-  "YourTurn": "Votre tour"
+  "YourTurn": "Votre tour",
+  "OpenSavedDocument": "Ouvrir le document enregistré dans un nouvel onglet",
+  "FileName": "Nom du fichier"
 }

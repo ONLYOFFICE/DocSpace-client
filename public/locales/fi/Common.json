@@ -708,5 +708,7 @@
   "Yes": "Kyllä",
   "Yesterday": "Eilen",
   "You": "Sinä",
-  "YourTurn": "Sinun vuorosi"
+  "YourTurn": "Sinun vuorosi",
+  "OpenSavedDocument": "Avaa tallennettu asiakirja uudessa välilehdessä",
+  "FileName": "Tiedostonimi"
 }

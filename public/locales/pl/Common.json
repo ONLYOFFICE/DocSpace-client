@@ -708,5 +708,7 @@
   "Yes": "Tak",
   "Yesterday": "Wczoraj",
   "You": "Ty",
-  "YourTurn": "Twoja kolej"
+  "YourTurn": "Twoja kolej",
+  "OpenSavedDocument": "Otwórz zapisany dokument w nowej zakładce",
+  "FileName": "Nazwa pliku"
 }

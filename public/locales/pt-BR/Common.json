@@ -716,5 +716,7 @@
   "Yes": "Sim",
   "Yesterday": "Ontem",
   "You": "Você",
-  "YourTurn": "Sua vez"
+  "YourTurn": "Sua vez",
+  "OpenSavedDocument": "Abrir o documento salvo numa pasta nova",
+  "FileName": "Nome de Arquivo"
 }

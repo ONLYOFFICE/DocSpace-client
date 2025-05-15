@@ -706,5 +706,7 @@
   "Yes": "Có",
   "Yesterday": "Hôm qua",
   "You": "Bạn",
-  "YourTurn": "Phiên của bạn"
+  "YourTurn": "Phiên của bạn",
+  "OpenSavedDocument": "Mở tài liệu đã lưu trong tab mới",
+  "FileName": "Tên file"
 }

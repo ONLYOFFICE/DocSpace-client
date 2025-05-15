@@ -708,5 +708,7 @@
   "Yes": "Jā",
   "Yesterday": "어제",
   "You": "Jūs",
-  "YourTurn": "Jūsu kārta"
+  "YourTurn": "Jūsu kārta",
+  "OpenSavedDocument": "Atvērt saglabāto dokumentu jaunā cilnē",
+  "FileName": "Faila nosaukums"
 }

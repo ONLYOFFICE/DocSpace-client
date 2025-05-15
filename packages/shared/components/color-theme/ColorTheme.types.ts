@@ -136,6 +136,11 @@ export interface SubmenuTextTheme extends TextProps, DefaultColorThemeProps {
   isActive?: boolean;
 }
 
+export interface TextTheme extends TextProps, DefaultColorThemeProps {
+  themeId: ThemeId.Text;
+  isInline?: boolean;
+}
+
 export type ColorThemeProps =
   | IconButtonColorTheme
   | FilterBlockItemTagColorTheme
@@ -152,4 +157,5 @@ export type ColorThemeProps =
   | VersionBadgeTheme
   | LinkColorTheme
   | IndexIconButton
-  | SubmenuTextTheme;
+  | SubmenuTextTheme
+  | TextTheme;

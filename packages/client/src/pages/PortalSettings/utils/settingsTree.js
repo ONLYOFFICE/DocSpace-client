@@ -598,11 +598,37 @@ export const settingsTree = [
         tKey: "Common:PaymentsTitle",
         isCategory: true,
       },
+      {
+        id: "portal-settings_catalog-wallet",
+        key: "9-1",
+        icon: "",
+        link: "wallet",
+        tKey: "Wallet",
+        isCategory: true,
+      },
+    ],
+  },
+  {
+    id: "portal-settings_catalog-services",
+    key: "10",
+    type: PageType.services,
+    link: "services",
+    tKey: "Services",
+    isHeader: true,
+    children: [
+      {
+        id: "portal-settings_catalog-services",
+        key: "10-0",
+        icon: "",
+        link: "",
+        tKey: "Services",
+        isCategory: true,
+      },
     ],
   },
   {
     id: "portal-settings_catalog-bonus",
-    key: "10",
+    key: "11",
     type: PageType.bonus,
     link: "bonus",
     tKey: "Common:Bonus",
@@ -610,7 +636,7 @@ export const settingsTree = [
     children: [
       {
         id: "portal-settings_catalog-portal-bonus",
-        key: "10-0",
+        key: "11-0",
         icon: "",
         link: "",
         tKey: "Common:FreeAccessToLicensedVersion",

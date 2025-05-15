@@ -31,6 +31,9 @@ import { AxiosRequestConfig } from "axios";
 import { EmployeeType } from "../../enums";
 import { request } from "../client";
 import {
+  TAutoTopUpSettings,
+  TBalance,
+  TCustomerInfo,
   TPaymentQuota,
   TPortal,
   TPortalTariff,
@@ -289,6 +292,15 @@ export async function getPortalPaymentQuotas() {
   return res;
 }
 
+export async function getServicesQuotas() {
+  const res = (await request({
+    method: "get",
+    url: "/portal/payment/quotas?wallet=true",
+  })) as TPaymentQuota[];
+
+  return res;
+}
+
 export async function getPortalQuota(refresh = false) {
   const params = refresh ? { refresh: true } : {};
   // console.log("getPortalQuota", { params });
@@ -352,6 +364,19 @@ export function updatePayment(adminCount, isYearTariff) {
   });
 }
 
+export function buyStorage(amount, productQuantityType) {
+  return request({
+    method: "put",
+    url: `/portal/payment/update`,
+    data: {
+      quantity: {
+        storage: +amount,
+      },
+      productQuantityType,
+    },
+  });
+}
+
 export function getCurrencies() {
   return request({ method: "get", url: "/portal/payment/currencies" });
 }
@@ -372,9 +397,133 @@ export function sendPaymentRequest(email, userName, message) {
   });
 }
 
-export async function getPortal() {
-  const options: AxiosRequestConfig = {
+export function getBalance(refresh?: boolean) {
+  const params = refresh ? { refresh: true } : {};
+
+  return request({
     method: "get",
+    url: `/portal/payment/customer/balance`,
+    params,
+  }) as TBalance;
+}
+
+export function getWalletPayer(refresh?: boolean) {
+  const params = refresh ? { refresh: true } : {};
+
+  return request({
+    method: "get",
+    url: `/portal/payment/customerinfo`,
+    params,
+  }) as TCustomerInfo;
+}
+
+export async function getCardLinked(backUrl) {
+  const params = backUrl ? { backUrl } : {};
+
+  const res = (await request({
+    method: "get",
+    url: "/portal/payment/chechoutsetupurl",
+    params,
+  })) as string;
+
+  return res;
+}
+
+export async function saveDeposite(amount: number, currency: string) {
+  return request({
+    method: "post",
+    url: "/portal/payment/deposit",
+    data: {
+      amount,
+      currency,
+    },
+  }) as string;
+}
+
+export async function getTransactionHistory(
+  startDate: string,
+  endDate: string,
+  credit: boolean = true,
+  withdrawal: boolean = true,
+  offset: number = 0,
+  limit: number = 25,
+) {
+  const options = {
+    method: "get",
+    url: "/portal/payment/customer/operations",
+    params: {
+      startDate,
+      endDate,
+      credit,
+      withdrawal,
+      offset,
+      limit,
+    },
+  };
+  const res = (await request(options)) as TCustomerOperation;
+
+  return res;
+}
+
+export async function getAutoTopUpSettings() {
+  const options = {
+    method: "get",
+    url: "/portal/payment/topupsettings",
+  };
+  const res = (await request(options)) as TAutoTopUpSettings;
+
+  return res;
+}
+
+export async function updateAutoTopUpSettings(
+  enabled: boolean,
+  minBalance: number,
+  upToBalance: number,
+  currency: string,
+) {
+  const body = enabled
+    ? {
+        settings: {
+          enabled,
+          minBalance,
+          upToBalance,
+          currency,
+        },
+      }
+    : {};
+
+  const options = {
+    method: "post",
+    url: "/portal/payment/topupsettings",
+    data: { ...body },
+  };
+  return request(options);
+}
+
+export async function getTransactionHistoryReport(
+  startDate: string,
+  endDate: string,
+  credit: boolean,
+  withdrawal: boolean,
+) {
+  const options = {
+    method: "post",
+    url: "/portal/payment/customer/operationsreport",
+    data: {
+      startDate,
+      endDate,
+      credit,
+      withdrawal,
+    },
+  };
+  const res = (await request(options)) as string;
+
+  return res;
+}
+
+export async function getPortal() {
+  const options = {
+    method: "post",
     url: "/portal",
   };
   const res = (await request(options)) as TPortal;

@@ -46,7 +46,6 @@ const ButtonContainer = ({
   isNotPaidPeriod,
   isGracePeriod,
   accountLink,
-  isFreeAfterPaidPeriod,
 }) => {
   const goToStripeAccount = () => {
     accountLink
@@ -56,7 +55,7 @@ const ButtonContainer = ({
 
   return (
     <StyledBody>
-      {isNotPaidPeriod || isGracePeriod || isFreeAfterPaidPeriod ? (
+      {isNotPaidPeriod || isGracePeriod ? (
         <Button
           className="pay-button"
           label={t("Pay")}

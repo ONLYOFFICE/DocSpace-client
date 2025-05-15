@@ -31,13 +31,16 @@ import moment from "moment-timezone";
 import { TariffState } from "../enums";
 import api from "../api";
 import { getUserByEmail } from "../api/people";
-import { TPortalTariff } from "../api/portal/types";
+import { TPortalTariff, TQuotas } from "../api/portal/types";
 import { TUser } from "../api/people/types";
 import { isValidDate } from "../utils";
 import { getDaysLeft, getDaysRemaining } from "../utils/common";
 import { Nullable } from "../types";
+import { UserStore } from "./UserStore";
 
 class CurrentTariffStatusStore {
+  userStore: UserStore;
+
   portalTariffStatus: Nullable<TPortalTariff> = null;
 
   isLoaded = false;
@@ -46,8 +49,12 @@ class CurrentTariffStatusStore {
 
   language: string = "en";
 
-  constructor() {
+  walletQuotas: TQuotas[] = [];
+
+  constructor(userStore: UserStore) {
     makeAutoObservable(this);
+
+    this.userStore = userStore;
   }
 
   setLanguage = (language: string) => {
@@ -104,14 +111,16 @@ class CurrentTariffStatusStore {
     return this.portalTariffStatus?.licenseDate;
   }
 
-  setPayerInfo = async () => {
+  setPayerInfo = async (payer?: string) => {
+    const payerInfo = payer ?? this.customerId;
+
     try {
-      if (!this.customerId || !this.customerId?.length) {
+      if (!payerInfo || !payerInfo?.length) {
         this.payerInfo = null;
         return;
       }
 
-      const result = await getUserByEmail(this.customerId);
+      const result = await getUserByEmail(payerInfo);
       if (!result) {
         this.payerInfo = null;
         return;
@@ -179,8 +188,15 @@ class CurrentTariffStatusStore {
     return api.portal.getPortalTariff(refresh).then((res) => {
       if (!res) return;
 
+      const { user } = this.userStore;
+
       runInAction(() => {
         this.portalTariffStatus = res;
+
+        if (user?.isAdmin)
+          this.walletQuotas = res.quotas.filter(
+            (quota) => quota.wallet === true,
+          ) as TQuotas[];
       });
 
       this.setIsLoaded(true);

@@ -163,7 +163,14 @@ const AuthHandler = () => {
     loginWithKey();
 
     console.log("call useEffect");
-  }, [email, key, referenceUrl, isFileHandler, isExternalDownloading]);
+  }, [
+    email,
+    key,
+    referenceUrl,
+    isFileHandler,
+    isExternalDownloading,
+    searchParams,
+  ]);
 
   console.log("render");
 

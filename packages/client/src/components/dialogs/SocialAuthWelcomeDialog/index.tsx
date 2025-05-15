@@ -161,7 +161,7 @@ const SocialAuthWelcomeDialogComponent = ({
                 i18nKey="SocialAuthWelcomeDialog:ClickButtonBelow"
                 ns="SocialAuthWelcomeDialog"
                 components={{
-                  br: <br />,
+                  br: <span style={{ display: "none" }} />,
                 }}
               />
             ) : (

@@ -1,0 +1,23 @@
+{
+  "key_path": "ProductNameDetail",
+  "content_en_sha1_hash": "0f1403b43faa94c0dc6b13a5e45c10558ce66b12",
+  "created_at": "2025-05-15T13:21:03.245Z",
+  "updated_at": "2025-05-15T13:21:03.245Z",
+  "comment_text": "",
+  "comment_ai": false,
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

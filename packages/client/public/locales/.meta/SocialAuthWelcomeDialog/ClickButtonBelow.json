@@ -1,0 +1,23 @@
+{
+  "key_path": "ClickButtonBelow",
+  "content_en_sha1_hash": "39efdaa8209b2d54904408defbd2496f9aae28d0",
+  "created_at": "2025-05-15T13:21:03.353Z",
+  "updated_at": "2025-05-15T13:21:03.353Z",
+  "comment_text": "",
+  "comment_ai": false,
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

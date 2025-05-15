@@ -1,0 +1,23 @@
+{
+  "key_path": "ReviewAccountDetails",
+  "content_en_sha1_hash": "f9bcd9e44c5ea626e9028da56100bd8e43de65b8",
+  "created_at": "2025-05-15T13:21:03.211Z",
+  "updated_at": "2025-05-15T13:21:03.211Z",
+  "comment_text": "",
+  "comment_ai": false,
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "key_path": "UnblockFile",
+  "content_en_sha1_hash": "12aabd251c4213f1cebfe4cb83e6547df55552c3",
+  "created_at": "2025-05-15T13:20:47.853Z",
+  "updated_at": "2025-05-15T13:20:47.853Z",
+  "comment_text": "",
+  "comment_ai": false,
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

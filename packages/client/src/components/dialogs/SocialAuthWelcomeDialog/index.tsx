@@ -12,8 +12,8 @@ import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
-import WelcomeAuthSocial from "PUBLIC_DIR/images/welcome-social_auth.png";
-import WelcomeAuthSocialDark from "PUBLIC_DIR/images/welcome-social_auth_dark.png";
+import WelcomeAuthSocial from "PUBLIC_DIR/images/welcome-social_auth.svg?url";
+import WelcomeAuthSocialDark from "PUBLIC_DIR/images/welcome-social_auth_dark.svg?url";
 import {
   StyledBodyContent,
   StyledInfoRow,
@@ -84,13 +84,13 @@ const SocialAuthWelcomeDialogComponent = ({
             />
           </div>
 
-          <Text textAlign="center">
+          <Text className="welcome-text" textAlign="center">
             {t("SocialAuthWelcomeDialog:ReviewAccountDetails")}
           </Text>
 
           <div className="account-details">
             <StyledInfoRow>
-              <Text>
+              <Text className="welcome-text">
                 {t("SocialAuthWelcomeDialog:ProductNameDetail", {
                   productName: t("Common:ProductName"),
                 })}
@@ -99,6 +99,7 @@ const SocialAuthWelcomeDialogComponent = ({
                 <Text
                   fontWeight="600"
                   truncate
+                  className="welcome-text"
                 >{`${tenantAlias}.${baseDomain}`}</Text>
                 <Link
                   isHovered
@@ -114,27 +115,32 @@ const SocialAuthWelcomeDialogComponent = ({
             </StyledInfoRow>
 
             <StyledInfoRow>
-              <Text>{t("Common:Name")}</Text>
+              <Text className="welcome-text">{t("Common:Name")}</Text>
               <Text
                 fontWeight="600"
                 truncate
+                className="welcome-text"
               >{`${user?.firstName} ${user?.lastName}`}</Text>
             </StyledInfoRow>
 
             <StyledInfoRow>
-              <Text>{t("Common:Email")}</Text>
-              <Text fontWeight="600" truncate>
+              <Text className="welcome-text">{t("Common:Email")}</Text>
+              <Text fontWeight="600" truncate className="welcome-text">
                 {user?.email}
               </Text>
             </StyledInfoRow>
 
             <StyledInfoRow>
-              <Text>{t("SocialAuthWelcomeDialog:GeneratedPassword")}</Text>
-              <Text fontWeight="600">********</Text>
+              <Text className="welcome-text">
+                {t("SocialAuthWelcomeDialog:GeneratedPassword")}
+              </Text>
+              <Text fontWeight="600" className="welcome-text">
+                ********
+              </Text>
             </StyledInfoRow>
 
             <StyledInfoRow className="no-gap">
-              <Text>{""}</Text>
+              <Text className="welcome-text">{""}</Text>
               <Link
                 isHovered
                 className="change-profile_link"
@@ -148,7 +154,7 @@ const SocialAuthWelcomeDialogComponent = ({
             </StyledInfoRow>
           </div>
 
-          <Text textAlign="center" lineHeight="20px">
+          <Text textAlign="center" lineHeight="20px" className="welcome-text">
             {currentDeviceType === DeviceType.mobile ? (
               <Trans
                 t={t}

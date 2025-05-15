@@ -50,11 +50,11 @@ export const StyledBodyContent = styled.div`
     flex-direction: column;
     gap: 8px;
 
-    p {
+    .welcome-text {
       line-height: 20px;
     }
 
-    & > div.no-gap {
+    & > .no-gap {
       margin-top: -8px;
     }
   }
@@ -64,7 +64,8 @@ export const StyledBodyContent = styled.div`
     text-align: center;
   }
 
-  a {
+  .change-domain_link,
+  .change-profile_link {
     color: ${(props) => props.theme.currentColorScheme?.main.accent};
   }
 
@@ -102,7 +103,7 @@ export const StyledInfoRow = styled.div`
   max-height: 28px;
   box-sizing: border-box;
 
-  & > p:first-child {
+  & > .welcome-text:first-child {
     width: 156px;
     min-width: 156px;
     flex-shrink: 0;
@@ -125,7 +126,7 @@ export const StyledInfoRow = styled.div`
         margin-left: 0;
       }
 
-      p {
+      .welcome-text {
         max-width: 100%;
         width: 100%;
       }

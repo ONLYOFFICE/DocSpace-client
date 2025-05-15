@@ -2,8 +2,8 @@
   "key_path": "ChangeGuestsTypeToManagerMulti",
   "content_en_sha1_hash": "8b3004e57c56c64e36caab1cb0081b68cdc7f081",
   "created_at": "2025-05-14T14:04:21.054Z",
-  "updated_at": "2025-05-15T08:14:38.188Z",
-  "comment_text": "Test comment",
+  "updated_at": "2025-05-15T09:32:52.448Z",
+  "comment_text": "Test comment (2)",
   "comment_ai": false,
   "usage": [],
   "languages": {
@@ -189,5 +189,5 @@
     }
   },
   "comment_is_auto": false,
-  "comment_updated_at": "2025-05-15T08:14:38.188Z"
+  "comment_updated_at": "2025-05-15T09:32:52.448Z"
 }

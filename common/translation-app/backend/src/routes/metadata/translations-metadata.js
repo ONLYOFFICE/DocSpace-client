@@ -6,6 +6,7 @@ const fs = require('fs-extra');
 const appRootPath = require('app-root-path').toString();
 const { projectLocalesMap } = require('../../config/config');
 const glob = require('glob');
+const { writeJsonWithConsistentEol } = require('../../utils/fsUtils');
 
 /**
  * Find metadata file for a specific key
@@ -191,7 +192,7 @@ async function routes(fastify, options) {
             usage: []
           };
           
-          await fs.writeJson(metadataFilePath, newMetadata, { spaces: 2 });
+          await writeJsonWithConsistentEol(metadataFilePath, newMetadata);
           
           return {
             success: true,
@@ -207,7 +208,7 @@ async function routes(fastify, options) {
           };
           
           // Write updated metadata back to file
-          await fs.writeJson(metadata.filePath, updatedData, { spaces: 2 });
+          await writeJsonWithConsistentEol(metadata.filePath, updatedData);
           
           return { 
             success: true, 

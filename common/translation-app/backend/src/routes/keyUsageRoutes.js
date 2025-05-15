@@ -3,6 +3,7 @@ const path = require('path');
 const glob = require('glob');
 const { exec } = require('child_process');
 const { appRootPath, projectLocalesMap } = require('../config/config');
+const { writeJsonWithConsistentEol } = require('../utils/fsUtils');
 
 /**
  * Finds all metadata files across all projects for a specific key
@@ -490,7 +491,7 @@ async function keyUsageRoutes(fastify) {
           file.data.usage = codeUsages;
           file.data.updated_at = new Date().toISOString();
           
-          await fs.writeJson(file.metaPath, file.data, { spaces: 2 });
+          await writeJsonWithConsistentEol(file.metaPath, file.data);
           
           updatedFiles.push({
             project: file.project,
@@ -543,7 +544,7 @@ async function keyUsageRoutes(fastify) {
           file.data.comment_updated_at = new Date().toISOString();
           file.data.updated_at = new Date().toISOString();
           
-          await fs.writeJson(file.metaPath, file.data, { spaces: 2 });
+          await writeJsonWithConsistentEol(file.metaPath, file.data);
           
           updatedFiles.push({
             project: file.project,
@@ -597,7 +598,7 @@ async function keyUsageRoutes(fastify) {
               file.data.usage = codeUsages;
               file.data.updated_at = new Date().toISOString();
               
-              await fs.writeJson(file.metaPath, file.data, { spaces: 2 });
+              await writeJsonWithConsistentEol(file.metaPath, file.data);
               updatedCount++;
             }
             

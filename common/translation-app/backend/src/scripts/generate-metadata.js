@@ -5,7 +5,8 @@
  * This script scans the locales directories and generates metadata files
  * for all translation keys, preserving existing metadata where available.
  */
-const fs = require("fs-extra");
+const fs = require('fs-extra');
+const { writeJsonWithConsistentEol } = require('../utils/fsUtils');
 const path = require("path");
 const glob = require("glob");
 const crypto = require("crypto");
@@ -304,7 +305,7 @@ async function generateMetadata(projectName) {
           // Save individual key metadata file
           try {
             console.log(`Saving key metadata to: ${keyMetaFile}`);
-            await fs.writeJson(keyMetaFile, keyMetadata, { spaces: 2 });
+            await writeJsonWithConsistentEol(keyMetaFile, keyMetadata);
             console.log(`Saved metadata for key: ${keyPath}`);
           } catch (keySaveError) {
             console.error(

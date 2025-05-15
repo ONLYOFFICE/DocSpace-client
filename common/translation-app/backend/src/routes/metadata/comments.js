@@ -5,6 +5,7 @@ const path = require('path');
 const fs = require('fs-extra');
 const appRootPath = require('app-root-path').toString();
 const { projectLocalesMap } = require('../../config/config');
+const { writeJsonWithConsistentEol } = require('../../utils/fsUtils');
 
 /**
  * Find metadata file for a specific key
@@ -172,7 +173,7 @@ async function routes(fastify, options) {
       metadata.data.updated_at = new Date().toISOString();
       
       // Save updated metadata
-      await fs.writeJson(metadata.filePath, metadata.data, { spaces: 2 });
+      await writeJsonWithConsistentEol(metadata.filePath, metadata.data);
       
       // Broadcast update to connected clients
       fastify.io.emit('comment:added', { 
@@ -261,7 +262,7 @@ async function routes(fastify, options) {
       metadata.data.updated_at = new Date().toISOString();
       
       // Save updated metadata
-      await fs.writeJson(metadata.filePath, metadata.data, { spaces: 2 });
+      await writeJsonWithConsistentEol(metadata.filePath, metadata.data);
       
       // Broadcast update to connected clients
       fastify.io.emit('comment:deleted', { 
@@ -354,7 +355,7 @@ async function routes(fastify, options) {
       metadata.data.updated_at = new Date().toISOString();
       
       // Save updated metadata
-      await fs.writeJson(metadata.filePath, metadata.data, { spaces: 2 });
+      await writeJsonWithConsistentEol(metadata.filePath, metadata.data);
       
       // Broadcast update to connected clients
       fastify.io.emit('comment:updated', { 

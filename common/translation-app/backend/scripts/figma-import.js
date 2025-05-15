@@ -18,6 +18,7 @@ const fs = require('fs-extra');
 const glob = require('glob');
 const appRootPath = require('app-root-path').toString();
 const { projectLocalesMap } = require('../src/config/config');
+const { writeJsonWithConsistentEol } = require('../src/utils/fsUtils');
 
 // Constants
 const FIGMA_API_KEY = process.env.FIGMA_API_KEY;
@@ -384,7 +385,7 @@ async function storeTextElements(textElements, figmaFileKey) {
       });
       
       // Write updated metadata back to file
-      await fs.writeJson(filePath, data, { spaces: 2 });
+      await writeJsonWithConsistentEol(filePath, data);
       
       // Log progress for every 10 items
       processedCount++;
@@ -495,7 +496,7 @@ async function main() {
               if (refIndex >= 0) {
                 data.figma_references[refIndex].thumbnail_url = thumbnailUrl;
                 data.updated_at = new Date().toISOString();
-                await fs.writeJson(filePath, data, { spaces: 2 });
+                await writeJsonWithConsistentEol(filePath, data);
               }
             }
           }

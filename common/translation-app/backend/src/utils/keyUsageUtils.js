@@ -1,4 +1,5 @@
-const fs = require("fs-extra");
+const fs = require('fs-extra');
+const { writeJsonWithConsistentEol } = require('./fsUtils');
 const path = require("path");
 const readline = require("readline");
 const { appRootPath, projectLocalesMap } = require("../config/config");
@@ -92,7 +93,7 @@ async function createOrUpdateMetadataFile(projectName, namespace, keyPath, data 
   };
   
   // Write updated metadata
-  await fs.writeJson(metadataFilePath, metadata, { spaces: 2 });
+  await writeJsonWithConsistentEol(metadataFilePath, metadata);
   
   return { filePath: metadataFilePath, data: metadata };
 }
@@ -148,7 +149,7 @@ async function recordKeyUsage(projectName, namespace, keyPath, filePath, lineNum
     metadata.data.updated_at = now;
     
     // Save updated metadata
-    await fs.writeJson(metadata.filePath, metadata.data, { spaces: 2 });
+    await writeJsonWithConsistentEol(metadata.filePath, metadata.data);
     updatedMetadata = metadata.data;
   } else {
     // Create new metadata file
@@ -203,7 +204,7 @@ async function clearKeyUsageData() {
             // Remove usage data
             delete data.usage;
             data.updated_at = new Date().toISOString();
-            await fs.writeJson(filePath, data, { spaces: 2 });
+            await writeJsonWithConsistentEol(filePath, data);
             clearedFiles++;
           }
         } catch (error) {

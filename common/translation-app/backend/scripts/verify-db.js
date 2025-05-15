@@ -2,6 +2,7 @@
  * Utility script to verify file-based metadata structure
  */
 const fs = require('fs-extra');
+const { writeJsonWithConsistentEol } = require('../src/utils/fsUtils');
 const path = require('path');
 const appRootPath = require('app-root-path').toString();
 const { projectLocalesMap, appRootPath: configRootPath } = require('../src/config/config');
@@ -54,7 +55,7 @@ async function createMetadataFile(projectName, namespace, keyPath, data = {}) {
   };
   
   // Write metadata file
-  await fs.writeJson(metadataFilePath, metadata, { spaces: 2 });
+  await writeJsonWithConsistentEol(metadataFilePath, metadata);
   
   return { filePath: metadataFilePath, data: metadata };
 }
@@ -197,7 +198,7 @@ async function main() {
   ];
   
   // Save updated test metadata
-  await fs.writeJson(testMetadata.filePath, testMetadata.data, { spaces: 2 });
+  await writeJsonWithConsistentEol(testMetadata.filePath, testMetadata.data);
   console.log("✅ Test metadata updated with all sections");
   
   // Retrieve the metadata to verify it was saved correctly

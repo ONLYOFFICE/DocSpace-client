@@ -194,7 +194,7 @@ async function writeTranslationFile(projectName, language, namespace, content) {
     await fs.ensureDir(langPath);
 
     const filePath = path.join(langPath, `${namespace}.json`);
-    await fs.writeJson(filePath, content, { spaces: 2 });
+    await writeJsonWithConsistentEol(filePath, content);
     return true;
   } catch (error) {
     console.error(
@@ -547,6 +547,28 @@ function compareTranslations(baseObj, targetObj, path = "") {
   return false;
 }
 
+/**
+ * Writes JSON to a file with consistent line endings across platforms
+ * @param {string} filePath - Path to the file
+ * @param {Object} content - JSON content to write
+ * @param {Object} options - Options object
+ * @param {number} options.spaces - Number of spaces for indentation (default: 2)
+ * @returns {Promise<void>}
+ */
+async function writeJsonWithConsistentEol(filePath, content, options = {}) {
+  try {
+    const spaces = options.spaces || 2;
+    await fs.ensureDir(path.dirname(filePath));
+    
+    // Use JSON.stringify with explicit options to ensure consistent line endings
+    const jsonContent = JSON.stringify(content, null, spaces);
+    await fs.writeFile(filePath, jsonContent, { encoding: 'utf8' });
+  } catch (error) {
+    console.error(`Error writing JSON file ${filePath}:`, error);
+    throw error;
+  }
+}
+
 module.exports = {
   resolveProjectPath,
   getAvailableLanguages,
@@ -560,4 +582,5 @@ module.exports = {
   renameNamespace,
   moveNamespaceTo,
   deleteNamespace,
+  writeJsonWithConsistentEol,
 };

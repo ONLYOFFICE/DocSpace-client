@@ -65,7 +65,10 @@ const ChatInput = ({
   const [value, setValue] = React.useState("");
   const [showSelector, setShowSelector] = React.useState(false);
 
+  const prevSession = React.useRef(currentSession);
+
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (!isInit ? false : isRequestRunning) return;
     if (e.target.value === "\n") return;
 
     setValue(e.target.value);
@@ -78,9 +81,10 @@ const ChatInput = ({
   const sendMessageAction = React.useCallback(() => {
     if (isRequestRunning || !value || showSelector) return;
 
-    sendMessage(value, files);
-    setValue("");
-    clearFiles();
+    sendMessage(value, files, () => {
+      setValue("");
+      clearFiles();
+    });
   }, [isRequestRunning, value, showSelector, files, sendMessage, clearFiles]);
 
   const onKeyEnter = React.useCallback(
@@ -100,6 +104,9 @@ const ChatInput = ({
   }, [onKeyEnter]);
 
   React.useEffect(() => {
+    if (currentSession.includes(prevSession.current)) return;
+
+    prevSession.current = currentSession;
     setValue("");
     clearFiles();
   }, [currentSession, clearFiles]);
@@ -111,6 +118,8 @@ const ChatInput = ({
     : t("Common:AIChatInputAskAI");
 
   const isDisabled = !isInit ? !value : isRequestRunning ? false : !value;
+
+  const isSendDisabled = !isInit ? false : isRequestRunning;
 
   const sendIconProps = !isInit
     ? { onClick: sendMessageAction, isDisabled, iconNode: null }
@@ -124,7 +133,9 @@ const ChatInput = ({
 
   return (
     <div
-      className={classNames(styles.chatInput)}
+      className={classNames(styles.chatInput, {
+        [styles.disabled]: isSendDisabled,
+      })}
       style={
         {
           "--chat-input-textarea-wrapper-with-files-padding": `${wrapperHeight + 24}px 8px 44px`,
@@ -144,6 +155,7 @@ const ChatInput = ({
         })}
         placeholder={placeholder}
         isChatMode
+        isDisabled={isSendDisabled}
       />
       <FilePreview
         getIcon={getIcon}
@@ -158,6 +170,7 @@ const ChatInput = ({
           isClickable
           onClick={toggleSelector}
           className={styles.chatInputButtonsFile}
+          isDisabled={isSendDisabled}
         />
 
         <IconButton

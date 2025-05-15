@@ -72,6 +72,13 @@
     border: none;
   }
 
+  &.disabled {
+    .chatInputTextAreaWrapper,
+    .chatInputTextAreaWrapperWithFiles {
+      background-color: var(--input-disabled-bg);
+    }
+  }
+
   .chatInputTextArea {
     min-height: 56px !important;
     max-height: 112px !important;

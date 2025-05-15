@@ -190,7 +190,11 @@ export default class MessageStore {
     });
   };
 
-  sendMessage = async (message: string, files: TSelectorItem[]) => {
+  sendMessage = async (
+    message: string,
+    files: TSelectorItem[],
+    callback: VoidFunction,
+  ) => {
     if (this.isRequestRunning) return;
     this.isRequestRunning = true;
 
@@ -273,6 +277,8 @@ export default class MessageStore {
 
                     return;
                   }
+
+                  callback();
 
                   this.messages = [
                     ...this.messages,

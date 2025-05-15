@@ -63,6 +63,7 @@ import {
   useOperations,
   useContacts,
   useSettings,
+  useFlows,
 } from "./Hooks";
 
 const PureHome = (props) => {
@@ -165,6 +166,9 @@ const PureHome = (props) => {
     hideConfirmCancelOperation,
     welcomeFormFillingTipsVisible,
     formFillingTipsVisible,
+    chatFiles,
+    vectorizedFiles,
+    removeActiveItem,
     allowInvitingGuests,
     checkGuests,
     hasGuests,
@@ -199,6 +203,8 @@ const PureHome = (props) => {
     },
     [setIsSectionHeaderLoading, setIsSectionBodyLoading],
   );
+
+  useFlows({ vectorizedFiles, removeActiveItem });
 
   const { onDrop } = useFiles({
     t,
@@ -327,6 +333,7 @@ const PureHome = (props) => {
       isLoaded: !firstLoad,
       viewAs: contactsViewAs,
       isAccounts: isContactsPage,
+      chatFiles,
     };
 
     if (!isContactsPage) {
@@ -449,6 +456,7 @@ export const Component = inject(
     indexingStore,
     dialogsStore,
     filesSettingsStore,
+    flowStore,
   }) => {
     const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
     const {
@@ -504,6 +512,8 @@ export const Component = inject(
       scrollToTop,
       wsCreatedPDFForm,
       mainButtonVisible,
+
+      removeActiveItem,
     } = filesStore;
 
     const { gallerySelected } = oformsStore;
@@ -693,6 +703,10 @@ export const Component = inject(
       isErrorChecking,
       setOperationCancelVisible,
       hideConfirmCancelOperation,
+
+      chatFiles: filesStore.filesList,
+      vectorizedFiles: flowStore.vectorizedFiles,
+      removeActiveItem,
       allowInvitingGuests,
       checkGuests,
       hasGuests,

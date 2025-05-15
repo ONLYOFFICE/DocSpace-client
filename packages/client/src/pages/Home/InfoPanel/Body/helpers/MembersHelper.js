@@ -134,6 +134,7 @@ class MembersHelper {
           ...deleteOption,
         ];
       case RoomsType.CustomRoom:
+      case RoomsType.AIRoom:
         return [
           options.roomAdmin,
           options.collaborator,

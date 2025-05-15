@@ -201,8 +201,9 @@ export const configureFilterByFilterParam = (
   filter: FilesFilter,
   filterParam: string | number,
   extsWebEdited: string[],
+  applyFilterOption?: ApplyFilterOption,
 ) => {
-  filter.applyFilterOption = ApplyFilterOption.Files;
+  filter.applyFilterOption = applyFilterOption ?? ApplyFilterOption.Files;
   switch (filterParam) {
     case FilesSelectorFilterTypes.DOCX:
       filter.extension = FilesSelectorFilterTypes.DOCX;

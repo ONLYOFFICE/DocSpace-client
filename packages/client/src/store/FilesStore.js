@@ -269,6 +269,7 @@ class FilesStore {
     currentTariffStatusStore,
     settingsStore,
     indexingStore,
+    flowStore,
   ) {
     const pathname = window.location.pathname.toLowerCase();
     this.isEditor = pathname.indexOf("doceditor") !== -1;
@@ -288,6 +289,7 @@ class FilesStore {
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.settingsStore = settingsStore;
     this.indexingStore = indexingStore;
+    this.flowStore = flowStore;
 
     this.roomsController = new AbortController();
     this.filesController = new AbortController();
@@ -1194,6 +1196,29 @@ class FilesStore {
 
     this.files = files;
 
+    if (this.selectedFolderStore.isAIRoom) {
+      const filesId = files
+        .map((f) => {
+          if (this.flowStore.localCheckVectorizeDocument(f)) return false;
+
+          return f.id;
+        })
+        .filter(Boolean);
+
+      if (filesId.length > 0) {
+        if (filesId.length > 1) {
+          this.flowStore.checkVectorizedDocuments(
+            this.selectedFolderStore.id,
+            files.filter((f) => filesId.some((id) => id === f.id)),
+          );
+        } else {
+          this.flowStore.checkVectorizeDocument(this.files[0]);
+        }
+
+        this.setActiveFiles(filesId);
+      }
+    }
+
     if (roomPartsToSub.length > 0) {
       SocketHelper.emit(SocketCommands.Subscribe, {
         roomParts: roomPartsToSub,
@@ -1260,9 +1285,16 @@ class FilesStore {
 
   setFile = (file) => {
     const index = this.files.findIndex((x) => x.id === file.id);
+
     if (index !== -1) {
       this.files[index] = file;
       this.createThumbnail(file);
+
+      // if (this.selectedFolderStore.isAIRoom) {
+      //   if (this.flowStore.localCheckVectorizeDocument(file)) return;
+
+      //   this.flowStore.checkVectorizeDocument(file);
+      // }
     }
   };
 
@@ -1351,6 +1383,8 @@ class FilesStore {
         return roomType === RoomsType.FillingFormsRoom;
       case `room-${RoomsType.CustomRoom}`:
         return roomType === RoomsType.CustomRoom;
+      case `room-${RoomsType.AIRoom}`:
+        return roomType === RoomsType.AIRoom;
       case `room-${RoomsType.EditingRoom}`:
         return roomType === RoomsType.EditingRoom;
       case `room-${RoomsType.ReviewRoom}`:
@@ -2262,6 +2296,7 @@ class FilesStore {
         item.fileExst === ".docxf" || item.fileExst === ".oform"; // TODO: Remove after change security options
       const isPdf = item.fileExst === ".pdf";
 
+      const isAIRoom = this.selectedFolderStore.isAIRoom;
       const extsCustomFilter =
         this.filesSettingsStore?.extsWebCustomFilterEditing || [];
       const isExtsCustomFilter = extsCustomFilter.includes(item.fileExst);
@@ -2298,6 +2333,7 @@ class FilesStore {
         "show-info",
         "block-unblock-version", // need split
         "separator1",
+        "summarize",
         "open-location",
         "mark-read",
         // "mark-as-favorite",
@@ -2321,6 +2357,10 @@ class FilesStore {
         "separate-stop-filling",
         "stop-filling",
       ];
+
+      if (!isAIRoom) {
+        fileOptions = removeOptions(fileOptions, ["summarize"]);
+      }
 
       if (optionsToRemove.length) {
         fileOptions = removeOptions(fileOptions, optionsToRemove);
@@ -3694,6 +3734,7 @@ class FilesStore {
         elem !== `room-${FilterType.FoldersOnly}` &&
         elem !== `room-${RoomsType.FillingFormsRoom}` &&
         elem !== `room-${RoomsType.CustomRoom}` &&
+        elem !== `room-${RoomsType.AIRoom}` &&
         elem !== `room-${RoomsType.EditingRoom}` &&
         elem !== `room-${RoomsType.ReviewRoom}` &&
         elem !== `room-${RoomsType.FormRoom}` &&
@@ -3936,6 +3977,7 @@ class FilesStore {
   getFileInfo = async (id, skipRedirect) => {
     const fileInfo = await api.files.getFileInfo(id, undefined, skipRedirect);
     this.setFile(fileInfo);
+
     return fileInfo;
   };
 

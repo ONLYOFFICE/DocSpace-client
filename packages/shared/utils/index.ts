@@ -92,6 +92,7 @@ import type { TRoom } from "../api/rooms/types";
 import { injectDefaultTheme } from "./injectDefaultTheme";
 import { getFromSessionStorage } from "./getFromSessionStorage";
 import { saveToSessionStorage } from "./saveToSessionStorage";
+import { getFromLocalStorage } from "./getFromLocalStorage";
 import { fakeFormFillingList } from "./formFillingTourData";
 import { getCountTilesInRow } from "./getCountTilesInRow";
 import { getSelectFormatTranslation } from "./getSelectFormatTranslation";
@@ -152,6 +153,7 @@ export {
   getTextColor,
   getFromSessionStorage,
   saveToSessionStorage,
+  getFromLocalStorage,
   getFormFillingTipsStorageName,
   fakeFormFillingList,
   getCountTilesInRow,
@@ -314,6 +316,7 @@ export const getCheckboxItemId = (key: string | FilterType | RoomsType) => {
       return "selected-only-files";
 
     case `room-${RoomsType.CustomRoom}`:
+    case `room-${RoomsType.AIRoom}`:
       return "selected-only-custom-room";
     case `room-${RoomsType.EditingRoom}`:
       return "selected-only-collaboration-rooms";
@@ -359,6 +362,9 @@ export const getCheckboxItemLabel = (
 
     case `room-${RoomsType.FormRoom}`:
       return t("Common:FormRoom");
+
+    case `room-${RoomsType.AIRoom}`:
+      return "AI Room";
 
     case `room-${RoomsType.PublicRoom}`:
       return t("Common:PublicRoomLabel");

@@ -58,6 +58,8 @@ import {
   SECTION_SUBMENU_NAME,
 } from "./Section.constants";
 import { parseChildren } from "./Section.utils";
+
+import { ChatWidget } from "./sub-components/ChatWidget";
 import OperationsProgressButton from "../operations-progress-button";
 
 export type { SectionProps };
@@ -121,6 +123,19 @@ const Section = (props: SectionProps) => {
 
     primaryOperationsAlert,
     needErrorChecking,
+    chatFiles,
+
+    aiChatIsVisible,
+    setAiChatIsVisible,
+    mainBarVisible,
+
+    getIcon,
+    displayFileExtension,
+    aiChatID,
+    aiSelectedFolder,
+    aiUserId,
+    vectorizedFiles,
+    user,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -318,10 +333,25 @@ const Section = (props: SectionProps) => {
               onOpenPanel={onOpenUploadPanel}
               mainButtonVisible={mainButtonVisible}
               showCancelButton={showCancelButton}
-              isInfoPanelVisible={isInfoPanelVisible}
+              isInfoPanelVisible={isInfoPanelVisible || aiChatIsVisible}
             />
           ) : null}
         </SectionContainer>
+
+        <ChatWidget
+          viewAs={viewAs!}
+          isVisible={aiChatIsVisible!}
+          setIsVisible={setAiChatIsVisible!}
+          anotherDialogOpen={anotherDialogOpen!}
+          currentDeviceType={currentDeviceType!}
+          getIcon={getIcon!}
+          displayFileExtension={displayFileExtension!}
+          aiChatID={aiChatID!}
+          aiSelectedFolder={aiSelectedFolder!}
+          aiUserId={aiUserId!}
+          vectorizedFiles={vectorizedFiles!}
+          user={user!}
+        />
 
         {isInfoPanelAvailable ? (
           <InfoPanel

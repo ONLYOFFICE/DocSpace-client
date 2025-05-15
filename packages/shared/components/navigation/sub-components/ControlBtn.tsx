@@ -37,6 +37,7 @@ import ToggleInfoPanelButton from "./ToggleInfoPanelBtn";
 import PlusButton from "./PlusBtn";
 import ContextButton from "./ContextBtn";
 import WarningComponent from "./WarningComponent";
+import ChatBtn from "./ChatBtn";
 
 const ControlButtons = ({
   isRootFolder,
@@ -79,6 +80,11 @@ const ControlButtons = ({
   guidAnimationVisible,
   setGuidAnimationVisible,
   isContextButtonVisible,
+
+  // Chat props
+  withChat,
+  chatOpen,
+  toggleChat,
 }: TControlButtonProps) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel?.();
@@ -170,6 +176,12 @@ const ControlButtons = ({
     return <WarningComponent title={titles?.warningText} />;
   };
 
+  const renderChatButton = () => {
+    if (!withChat || isDesktop) return null;
+
+    return <ChatBtn chatOpen={chatOpen} toggleChat={toggleChat} />;
+  };
+
   return (
     <div
       className={styles.controlButtonContainer}
@@ -178,6 +190,7 @@ const ControlButtons = ({
     >
       {renderPlusButton()}
       {renderContextButton((isContextButtonVisible && !isPublicRoom) ?? false)}
+      {renderChatButton()}
       {renderToggleInfoPanel()}
       {renderContextButton((isPublicRoom && containVisible) ?? false)}
       {renderWarning()}

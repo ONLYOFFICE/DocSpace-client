@@ -221,6 +221,7 @@ export const enum PageType {
   bonus = "bonus",
   dataImport = "dataImport",
   storageManagement = "storageManagement",
+  flows = "flows",
 }
 
 /**
@@ -253,6 +254,7 @@ export const enum FolderType {
   SubFolderInProgress = 28,
   VirtualDataRoom = 29,
   RoomTemplates = 30,
+  Flows = 31,
 }
 
 export const enum ShareAccessRights {
@@ -510,6 +512,8 @@ export const enum ErrorKeys {
 }
 
 export enum RoomsType {
+  AIRoom = 9,
+
   PublicRoom = 6,
   FormRoom = 1,
   // FillingFormsRoom= 1, //TODO: Restore when certs will be done

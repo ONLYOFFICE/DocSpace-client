@@ -135,6 +135,7 @@ const SectionFilterContent = ({
   const isContactsInsideGroupPage = contactsTab === "inside_group";
   const isContactsGroupsPage = contactsTab === "groups";
   const isContactsGuestsPage = contactsTab === "guests";
+  const isFlowsPage = location.pathname.includes("flows");
 
   const {
     onContactsFilter,
@@ -828,6 +829,13 @@ const SectionFilterContent = ({
                   group: FilterGroups.roomFilterType,
                   label: t("Common:VirtualDataRoom"),
                 };
+              case RoomsType.AIRoom:
+                return {
+                  id: "filter_type-ai",
+                  key: RoomsType.AIRoom,
+                  group: FilterGroups.roomFilterType,
+                  label: t("Common:AIRoomTitle"),
+                };
               case RoomsType.CustomRoom:
               default:
                 return {
@@ -1398,6 +1406,7 @@ const SectionFilterContent = ({
       isContactsGroupsPage={isContactsGroupsPage}
       isContactsInsideGroupPage={isContactsInsideGroupPage}
       isContactsGuestsPage={isContactsGuestsPage}
+      isFlowsPage={isFlowsPage}
     />
   );
 };

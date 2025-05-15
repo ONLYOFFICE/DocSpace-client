@@ -69,6 +69,11 @@ const DropBox = React.forwardRef<HTMLDivElement, TDropBoxProps>(
       currentDeviceType,
       navigationTitleContainerNode,
       onCloseDropBox,
+
+      chatOpen,
+      withChat,
+      toggleChat,
+
       isContextButtonVisible,
       isPublicRoom,
     },
@@ -161,6 +166,9 @@ const DropBox = React.forwardRef<HTMLDivElement, TDropBoxProps>(
             isInfoPanelVisible={isInfoPanelVisible}
             onCloseDropBox={onCloseDropBox}
             showTitle
+            withChat={withChat}
+            chatOpen={chatOpen}
+            toggleChat={toggleChat}
             isContextButtonVisible={isContextButtonVisible}
             isPublicRoom={isPublicRoom}
           />

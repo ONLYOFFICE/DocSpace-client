@@ -1503,9 +1503,9 @@ export const getBaseTheme = () => {
         heightWithBorder: "30px",
         heightModernView: "28px",
 
-        paddingLeft: "16px",
+        paddingLeft: "8px",
         paddingRightNoArrow: "16px",
-        paddingRight: "8px",
+        paddingRight: "4px",
 
         selectPaddingLeft: "8px",
         selectPaddingRightNoArrow: "14px",

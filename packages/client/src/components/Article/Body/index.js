@@ -84,6 +84,7 @@ const ArticleBodyContent = (props) => {
     (folderId, title, rootFolderType, canCreate) => {
       let params = null;
       let path = ``;
+      const questionMark = "?";
 
       const state = {
         title,
@@ -151,6 +152,20 @@ const ArticleBodyContent = (props) => {
 
           break;
         }
+        // case "flows": {
+        //   // TODO: implement filter
+        //   /*
+        //     remove_example_flows?: boolean;
+        //     components_only?: boolean;
+        //     get_all?: boolean;
+        //     folder_id?: string;
+        //     header_flows?: boolean;
+        //   */
+        //   // params = "/filter?get_all=true";
+        //   // questionMark = "";
+        //   // path = getCategoryUrl(CategoryType.Flows);
+        //   // break;
+        // }
         default: {
           const newRoomsFilter = RoomsFilter.getDefault(
             userId,
@@ -164,11 +179,9 @@ const ArticleBodyContent = (props) => {
         }
       }
 
-      const searchParams = new URLSearchParams(params);
-      searchParams.delete("date");
-      const srcParams = searchParams.toString();
-
-      path += `?${srcParams}&date=${hashDate}`;
+      path += params
+        ? `${questionMark}${params}&date=${hashDate}`
+        : `?date=${hashDate}`;
 
       return { path, state };
     },
@@ -258,6 +271,10 @@ const ArticleBodyContent = (props) => {
       if (activeItemId) return;
       return setActiveItemId(rootFolderId || roomsFolderId);
     }
+
+    // if (location.pathname.includes("/flows")) {
+    //   return setActiveItemId("flows");
+    // }
 
     if (location.pathname.includes(MEDIA_VIEW_URL)) {
       setActiveItemId(rootFolderId);

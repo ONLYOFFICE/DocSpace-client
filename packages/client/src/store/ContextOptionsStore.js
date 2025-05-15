@@ -79,6 +79,7 @@ import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
 import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 import HelpCenterReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
+import SummarizeReactSvgUrl from "PUBLIC_DIR/images/icons/16/summarize.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
 
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
@@ -210,6 +211,7 @@ class ContextOptionsStore {
     indexingStore,
     clientLoadingStore,
     guidanceStore,
+    flowStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -232,6 +234,7 @@ class ContextOptionsStore {
     this.indexingStore = indexingStore;
     this.clientLoadingStore = clientLoadingStore;
     this.guidanceStore = guidanceStore;
+    this.flowStore = flowStore;
   }
 
   onOpenFolder = async (item, t) => {
@@ -1499,6 +1502,14 @@ class ContextOptionsStore {
     };
   };
 
+  summarizeToFile = async (item) => {
+    this.filesStore.setActiveFiles([item]);
+
+    await this.flowStore.summarizeToFile(item);
+
+    this.filesStore.removeActiveItem([item]);
+  };
+
   getFilesContextOptions = (item, t, isInfoPanel, isHeader) => {
     const optionsToRemove = isInfoPanel
       ? ["select", "room-info", "show-info"]
@@ -1837,6 +1848,16 @@ class ContextOptionsStore {
       {
         key: "separator-SubmitToGallery",
         isSeparator: true,
+      },
+      {
+        id: "summarize",
+        key: "summarize",
+        label: "Summarize",
+        icon: SummarizeReactSvgUrl,
+        onClick: () => {
+          this.summarizeToFile(item);
+        },
+        disabled: false,
       },
       {
         id: "option_reconnect-storage",
@@ -2717,7 +2738,8 @@ class ContextOptionsStore {
     if (!canCreate || (isSectionMenu && (isMobile || someDialogIsOpen)))
       return null;
 
-    const { isRoomsFolder, isPrivacyFolder } = this.treeFoldersStore;
+    const { isRoomsFolder, isPrivacyFolder, isFlowsFolder } =
+      this.treeFoldersStore;
     const { mainButtonItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
     const isFormRoomType =
@@ -2834,15 +2856,18 @@ class ContextOptionsStore {
     ];
 
     const showUploadFolder = !(isMobile || isTablet);
+
     const options = isRoomsFolder
-      ? [
-          {
-            key: "new-room",
-            label: t("Common:NewRoom"),
-            onClick: this.onCreateRoom,
-            icon: CatalogRoomsReactSvgUrl,
-          },
-        ]
+      ? isFlowsFolder
+        ? []
+        : [
+            {
+              key: "new-room",
+              label: t("Common:NewRoom"),
+              onClick: this.onCreateRoom,
+              icon: CatalogRoomsReactSvgUrl,
+            },
+          ]
       : [
           createNewDoc,
           createNewSpreadsheet,

@@ -200,7 +200,7 @@
   &:hover {
     .roomIconHover {
       opacity: 1;
-      transform: translateY(0px);
+      transform: translateY(-1px);
     }
 
     :global {

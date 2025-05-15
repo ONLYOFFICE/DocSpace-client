@@ -42,6 +42,7 @@ import Webhooks from "./Webhooks";
 import Api from "./Api";
 import PluginSDK from "./PluginSDK";
 import OAuth from "./OAuth";
+import OnlyFlow from "./OnlyFlow";
 
 import SSOLoader from "./sub-components/ssoLoader";
 import ApiKeys from "./ApiKeys";
@@ -113,9 +114,11 @@ const DeveloperToolsWrapper = (props) => {
     },
   ];
 
-  // const load = async () => {
-  //   // await loadBaseInfo();
-  // };
+  data.push({
+    id: "onlyflow",
+    name: t("OnlyFlow"),
+    content: <OnlyFlow />,
+  });
 
   useEffect(() => {
     const path = location.pathname;
@@ -132,10 +135,6 @@ const DeveloperToolsWrapper = (props) => {
 
     setIsLoading(true);
   }, [location.pathname]);
-
-  // useEffect(() => {
-  //   ready && startTransition(load);
-  // }, [ready]);
 
   const onSelect = (e) => {
     const path = location.pathname.includes("/portal-settings")

@@ -38,13 +38,13 @@ RUN corepack prepare yarn@4.3.0 --activate
 WORKDIR /app
 
 # Copy yarn-related files
-COPY .yarn/ ./.yarn/
-COPY package.json yarn.lock .yarnrc.yml ./
+COPY ../.yarn/ ./.yarn/
+COPY ../package.json ../yarn.lock ../.yarnrc.yml ./
 
 # Copy the source code with correct directory structure
-COPY common/ ./common/
-COPY packages/ ./packages/
-COPY public/ ./public/
+COPY ../common/ ./common/
+COPY ../packages/ ./packages/
+COPY ../public/ ./public/
 
 # ENV NODE_OPTIONS="--max-old-space-size=8192"
 

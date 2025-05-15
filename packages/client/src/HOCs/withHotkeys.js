@@ -112,7 +112,8 @@ const withHotkeys = (Component) => {
 
     const onKeyDown = (e) => {
       const someDialogIsOpen = checkDialogsOpen();
-      setIsEnabled(!someDialogIsOpen);
+      const isChatWidget = !!e.target.closest("langflow-chat-widget");
+      setIsEnabled(!someDialogIsOpen && !isChatWidget);
 
       if (isIndexEditingMode) return;
 

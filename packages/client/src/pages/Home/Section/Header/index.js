@@ -170,6 +170,10 @@ const SectionHeaderContent = (props) => {
     setRefMap,
     deleteRefMap,
     isPersonalReadOnly,
+
+    aiChatIsVisible,
+    setAiChatIsVisible,
+    withChat,
   } = props;
 
   const location = useLocation();
@@ -210,6 +214,7 @@ const SectionHeaderContent = (props) => {
   });
 
   const isSettingsPage = location.pathname.includes("/settings");
+  const isFlowsPage = location.pathname.includes("/flows");
 
   const onFileChange = React.useCallback(
     async (e) => {
@@ -500,18 +505,21 @@ const SectionHeaderContent = (props) => {
       isIndexEditingMode || isPublicRoom;
   }
 
-  const currentTitle = isSettingsPage
-    ? t("Common:Settings")
-    : isContactsPage
-      ? isContactsInsideGroupPage
-        ? getInsideGroupTitle()
-        : t("Common:Contacts")
-      : isLoading && stateTitle
-        ? stateTitle
-        : title;
+  const currentTitle = isFlowsPage
+    ? t("Common:Flows")
+    : isSettingsPage
+      ? t("Common:Settings")
+      : isContactsPage
+        ? isContactsInsideGroupPage
+          ? getInsideGroupTitle()
+          : t("Common:Contacts")
+        : isLoading && stateTitle
+          ? stateTitle
+          : title;
 
-  const currentCanCreate =
-    isLoading && hasOwnProperty(location?.state, "canCreate")
+  const currentCanCreate = isFlowsPage
+    ? false
+    : isLoading && hasOwnProperty(location?.state, "canCreate")
       ? stateCanCreate
       : security?.Create;
 
@@ -537,6 +545,16 @@ const SectionHeaderContent = (props) => {
       deleteRefMap(GuidanceRefKey.Uploading);
     };
   }, [deleteRefMap]);
+
+  React.useEffect(() => {
+    if (!withChat) setAiChatIsVisible(false);
+  }, [withChat]);
+
+  React.useEffect(() => {
+    return () => {
+      setAiChatIsVisible(false);
+    };
+  }, [setAiChatIsVisible]);
 
   const isCurrentRoom =
     isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
@@ -682,6 +700,12 @@ const SectionHeaderContent = (props) => {
                 guidAnimationVisible={guidAnimationVisible}
                 setGuidAnimationVisible={setGuidAnimationVisible}
                 isContextButtonVisible={isContextButtonVisible()}
+                withChat={withChat}
+                chatOpen={aiChatIsVisible}
+                toggleChat={(visible) => {
+                  setAiChatIsVisible(visible);
+                  if (visible) setIsInfoPanelVisible(false);
+                }}
               />
               {showSignInButton ? (
                 <Button
@@ -741,6 +765,7 @@ export default inject(
     indexingStore,
     dialogsStore,
     guidanceStore,
+    flowStore,
   }) => {
     const { startUpload } = uploadDataStore;
 
@@ -815,6 +840,7 @@ export default inject(
       security,
       rootFolderType,
       shared,
+      isAIRoom,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
@@ -897,6 +923,10 @@ export default inject(
     const rootFolderId = navigationPath.length
       ? navigationPath[navigationPath.length - 1]?.id
       : selectedFolder.id;
+
+    const { aiChatIsVisible, setAiChatIsVisible } = flowStore;
+
+    const withChat = isAIRoom;
 
     return {
       showText: settingsStore.showText,
@@ -1000,6 +1030,10 @@ export default inject(
       setGuidAnimationVisible,
       setRefMap,
       deleteRefMap,
+
+      aiChatIsVisible,
+      setAiChatIsVisible,
+      withChat,
     };
   },
 )(

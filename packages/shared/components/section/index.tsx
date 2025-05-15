@@ -333,7 +333,7 @@ const Section = (props: SectionProps) => {
               onOpenPanel={onOpenUploadPanel}
               mainButtonVisible={mainButtonVisible}
               showCancelButton={showCancelButton}
-              isInfoPanelVisible={isInfoPanelVisible}
+              isInfoPanelVisible={isInfoPanelVisible || aiChatIsVisible}
             />
           ) : null}
         </SectionContainer>

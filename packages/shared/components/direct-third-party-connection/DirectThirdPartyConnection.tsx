@@ -117,16 +117,20 @@ const DirectThirdPartyConnection = ({
 
   const onSetSettings = async () => {
     try {
-      await setThirdPartyAccountsInfo(t);
+      setState({
+        isLoading: true,
+      });
 
+      await setThirdPartyAccountsInfo(t);
+    } catch (e) {
+      if (!e) return;
+      toastr.error(e);
+    } finally {
       setState({
         isLoading: false,
         isUpdatingInfo: false,
         isInitialLoading: false,
       });
-    } catch (e) {
-      if (!e) return;
-      toastr.error(e);
     }
   };
 
@@ -167,9 +171,9 @@ const DirectThirdPartyConnection = ({
       await setThirdPartyAccountsInfo(t);
     } catch (e) {
       toastr.error(e as Error);
+    } finally {
+      setState({ isLoading: false, isUpdatingInfo: false });
     }
-
-    setState({ isLoading: false, isUpdatingInfo: false });
   };
 
   const onConnect = () => {
@@ -307,6 +311,7 @@ const DirectThirdPartyConnection = ({
           size={ComboBoxSize.content}
           className="thirdparty-combobox"
           advancedOptions={advancedOptions}
+          isDisabled={isLoading}
           selectedOption={{
             key: 0,
             label: selectedThirdPartyAccount?.label ?? "",

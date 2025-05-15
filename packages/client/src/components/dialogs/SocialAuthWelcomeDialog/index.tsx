@@ -89,7 +89,7 @@ const SocialAuthWelcomeDialogComponent = ({
           </Text>
 
           <div className="account-details">
-            <StyledInfoRow>
+            <StyledInfoRow className="welcome-product-name">
               <Text className="welcome-text">
                 {t("SocialAuthWelcomeDialog:ProductNameDetail", {
                   productName: t("Common:ProductName"),
@@ -140,7 +140,7 @@ const SocialAuthWelcomeDialogComponent = ({
             </StyledInfoRow>
 
             <StyledInfoRow className="no-gap">
-              <Text className="welcome-text">{""}</Text>
+              <Text className="welcome-text" />
               <Link
                 isHovered
                 className="change-profile_link"
@@ -161,7 +161,7 @@ const SocialAuthWelcomeDialogComponent = ({
                 i18nKey="SocialAuthWelcomeDialog:ClickButtonBelow"
                 ns="SocialAuthWelcomeDialog"
                 components={{
-                  br: <></>,
+                  br: <br />,
                 }}
               />
             ) : (

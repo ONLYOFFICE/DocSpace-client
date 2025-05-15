@@ -84,7 +84,7 @@ export const StyledBodyContent = styled.div`
       width: 100%;
       padding: 12px 8px;
 
-      & > div:first-child {
+      & > .welcome-product-name {
         margin-bottom: 16px;
       }
     }

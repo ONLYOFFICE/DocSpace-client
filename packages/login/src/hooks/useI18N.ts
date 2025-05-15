@@ -35,12 +35,16 @@ import { i18n } from "i18next";
 
 interface UseI18NProps {
   settings?: TSettings;
+  locale?: string;
 }
 
-const useI18N = ({ settings }: UseI18NProps) => {
+const useI18N = ({ settings, locale }: UseI18NProps) => {
+  const lng = locale || getCookie(LANGUAGE) || settings?.culture || "en";
   const [i18N, seti18N] = useState<i18n>(() =>
-    getI18NInstance(getCookie(LANGUAGE) ?? settings?.culture ?? "en"),
+    getI18NInstance(getCookie(LANGUAGE) ?? lng),
   );
+
+  const isInit = React.useRef(false);
 
   React.useEffect(() => {
     if (!settings?.timezone) return;
@@ -48,8 +52,12 @@ const useI18N = ({ settings }: UseI18NProps) => {
   }, [settings?.timezone]);
 
   React.useEffect(() => {
-    seti18N(getI18NInstance(getCookie(LANGUAGE) ?? settings?.culture ?? "en"));
-  }, [settings?.culture]);
+    isInit.current = true;
+
+    const instance = getI18NInstance(lng);
+
+    if (instance) seti18N(instance);
+  }, [lng]);
 
   return {
     i18n: i18N,

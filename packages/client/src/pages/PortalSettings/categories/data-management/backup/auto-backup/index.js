@@ -270,8 +270,13 @@ class AutomaticBackup extends React.PureComponent {
 
   onClickShowStorage = (e) => {
     const { seStorageType } = this.props;
+    const { isError } = this.state;
     const key = e.target.name;
     seStorageType(key);
+    if (isError)
+      this.setState({
+        isError: false,
+      });
   };
 
   onCancelModuleSettings = () => {
@@ -401,7 +406,7 @@ class AutomaticBackup extends React.PureComponent {
     } = this.props;
 
     try {
-      (isCheckedThirdParty || isCheckedDocuments) && updateBaseFolderPath();
+      // (isCheckedThirdParty || isCheckedDocuments) && updateBaseFolderPath();
 
       await createBackupSchedule(
         storageType,
@@ -421,8 +426,10 @@ class AutomaticBackup extends React.PureComponent {
       setThirdPartyStorage(storageInfo);
       setDefaultOptions(t, this.periodsObject, this.weekdaysLabelArray);
       toastr.success(t("SuccessfullySaveSettingsMessage"));
+
       this.setState({
         isLoadingData: false,
+        isError: false,
       });
     } catch (error) {
       setErrorInformation(error, t);

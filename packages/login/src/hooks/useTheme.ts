@@ -36,17 +36,23 @@ import { TGetColorTheme } from "@docspace/shared/api/settings/types";
 import { setCookie } from "@docspace/shared/utils/cookie";
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 import { TUser } from "@docspace/shared/api/people/types";
-
-type MatchType = [ThemeKeys | undefined, ThemeKeys | undefined];
+import { getDirectionByLanguage } from "@docspace/shared/utils/common";
 
 export interface UseThemeProps {
   user?: TUser;
   colorTheme?: TGetColorTheme;
   systemTheme?: ThemeKeys;
   i18n: i18n;
+  lang?: string;
 }
 
-const useTheme = ({ user, colorTheme, systemTheme, i18n }: UseThemeProps) => {
+const useTheme = ({
+  user,
+  colorTheme,
+  systemTheme,
+  i18n,
+  lang,
+}: UseThemeProps) => {
   const [currentColorTheme, setCurrentColorTheme] =
     React.useState<TColorScheme>(() => {
       if (!colorTheme) return {} as TColorScheme;
@@ -58,6 +64,8 @@ const useTheme = ({ user, colorTheme, systemTheme, i18n }: UseThemeProps) => {
     });
 
   const [theme, setTheme] = React.useState<TTheme>(() => {
+    const interfaceDirection = getDirectionByLanguage(lang || "en");
+
     const currColorTheme = colorTheme
       ? (colorTheme.themes.find((theme) => theme.id === colorTheme.selected) ??
         ({} as TColorScheme))
@@ -93,6 +101,7 @@ const useTheme = ({ user, colorTheme, systemTheme, i18n }: UseThemeProps) => {
     return {
       ...(newTheme ?? Base),
       currentColorScheme: currColorTheme,
+      interfaceDirection,
     };
   });
 
@@ -115,7 +124,7 @@ const useTheme = ({ user, colorTheme, systemTheme, i18n }: UseThemeProps) => {
     const SYSTEM_THEME = getSystemTheme();
 
     let theme = user?.theme ?? SYSTEM_THEME;
-    const interfaceDirection = i18n?.dir ? i18n.dir() : "ltr";
+    const interfaceDirection = getDirectionByLanguage(lang || "en");
 
     if (user?.theme === ThemeKeys.SystemStr) theme = SYSTEM_THEME;
 
@@ -135,7 +144,7 @@ const useTheme = ({ user, colorTheme, systemTheme, i18n }: UseThemeProps) => {
 
       window.AscDesktopEditor.execCommand("portal:uitheme", editorTheme);
     }
-  }, [user?.theme, currentColorTheme, i18n]);
+  }, [user?.theme, currentColorTheme, lang]);
 
   React.useEffect(() => {
     getCurrentColorTheme();

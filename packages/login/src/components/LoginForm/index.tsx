@@ -96,13 +96,14 @@ const LoginForm = ({
   const { t, ready, i18n } = useTranslation(["Login", "Common"]);
   const currentCulture = i18n.language;
 
-  const message = searchParams.get("message");
-  const confirmedEmail = searchParams.get("confirmedEmail");
-  const authError = searchParams.get("authError");
-  const referenceUrl = searchParams.get("referenceUrl");
-  const loginData = searchParams.get("loginData");
-  const linkData = searchParams.get("linkData");
-  const isPublicAuth = searchParams.get("publicAuth");
+  const message = searchParams?.get("message");
+  const confirmedEmail = searchParams?.get("confirmedEmail");
+  const authError = searchParams?.get("authError");
+  const referenceUrl = searchParams?.get("referenceUrl");
+  const loginData = searchParams?.get("loginData") ?? null;
+  const linkData = searchParams?.get("linkData");
+  const isPublicAuth = searchParams?.get("publicAuth");
+  const passwordChanged = searchParams?.get("passwordChanged");
 
   const isDesktop =
     typeof window !== "undefined" && window["AscDesktopEditor"] !== undefined;
@@ -228,6 +229,15 @@ const LoginForm = ({
     )
       toastId.current = toastr.success(text);
   }, [message, confirmedEmail, t, ready, authCallback]);
+
+  useEffect(() => {
+    if (
+      passwordChanged &&
+      ready &&
+      !toastr.isActive(toastId.current || "password-changed-toast")
+    )
+      toastId.current = toastr.success(t("ChangePasswordSuccess"));
+  }, [passwordChanged, t, ready]);
 
   const onChangeLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
     //console.log("onChangeLogin", e.target.value);

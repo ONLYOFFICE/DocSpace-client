@@ -1,6 +1,5 @@
 {
   "AccountWillBeCreated": "<1>{{email}}</1> için bir {{productName}} hesabı oluşturulacaktır. Lütfen kaydınızı tamamlayın:",
-  "ChangePasswordSuccess": "Şifre başarıyla değiştirildi",
   "ConfirmOwnerPortalSuccessMessage": "{{productName}} sahibi başarıyla değiştirildi. 10 saniye içinde yönlendirileceksiniz.",
   "ConfirmOwnerPortalTitle": "{{productName}} sahibini {{newOwner}} olarak değiştirmek istediğinizi lütfen onaylayın.",
   "CurrentNumber": "Güncel mobil telefon numaranız",

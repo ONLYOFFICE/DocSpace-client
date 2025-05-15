@@ -48,17 +48,19 @@ export const Providers = ({
   value,
   redirectURL,
   user,
+  locale,
 }: {
   children: React.ReactNode;
   value: TDataContext;
   redirectURL: string;
   user?: TUser;
+  locale?: string;
 }) => {
   const firebaseHelper = new FirebaseHelper(
     value.settings?.firebase ?? ({} as TFirebaseSettings),
   );
   const searchParams = useSearchParams();
-  const confirmType = searchParams.get("type");
+  const confirmType = searchParams?.get("type");
 
   let shouldRedirect = true;
   if (redirectURL === "unavailable" && confirmType === "PortalContinue") {
@@ -72,7 +74,7 @@ export const Providers = ({
     if (redirectURL && confirmType === "GuestShareLink") {
       sessionStorage.setItem(
         "referenceUrl",
-        `/confirm/${confirmType}?${searchParams.toString()}`,
+        `/confirm/${confirmType}?${searchParams?.toString()}`,
       );
     }
   }, [redirectURL, searchParams, confirmType]);
@@ -84,6 +86,7 @@ export const Providers = ({
 
   const { i18n } = useI18N({
     settings: value.settings,
+    locale,
   });
 
   const { theme, currentColorTheme } = useTheme({
@@ -91,6 +94,7 @@ export const Providers = ({
     colorTheme: value.colorTheme,
     systemTheme: value.systemTheme,
     i18n,
+    lang: locale,
   });
 
   return (

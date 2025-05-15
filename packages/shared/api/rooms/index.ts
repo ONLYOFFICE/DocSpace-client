@@ -41,7 +41,7 @@ import {
 } from "./types";
 
 export async function getRooms(filter?: RoomsFilter, signal?: AbortSignal) {
-  const response = await roomsClient.getRoomsFolder(
+  const res = await roomsClient.getRoomsFolder(
     filter?.type,
     filter?.subjectId,
     filter?.searchArea,
@@ -55,8 +55,6 @@ export async function getRooms(filter?: RoomsFilter, signal?: AbortSignal) {
     { signal },
   );
 
-  const res = response.data.response;
-
   res.files = decodeDisplayName(res.files);
   res.folders = decodeDisplayName(res.folders);
 
@@ -69,39 +67,32 @@ export async function getRooms(filter?: RoomsFilter, signal?: AbortSignal) {
   return res;
 }
 
-export function getRoomInfo(id) {
-  return roomsClient.getRoomInfo(id).then((response) => {
-    const res = response.data.response;
+export async function getRoomInfo(id) {
+  const res = await roomsClient.getRoomInfo(id);
 
-    if (res.rootFolderType === FolderType.Archive) res.isArchive = true;
+  if (res.rootFolderType === FolderType.Archive) res.isArchive = true;
 
-    return res as TRoom;
+  return res as TRoom;
+}
+
+export async function getRoomMembers(id, filter) {
+  const res = await roomsClient.getRoomSecurityInfo(id, filter.filterType);
+
+  res.forEach((item) => {
+    if (item.subjectType === MembersSubjectType.Group) {
+      item.sharedTo.isGroup = true;
+    }
   });
+
+  return res;
 }
 
-export function getRoomMembers(id, filter) {
-  return roomsClient
-    .getRoomSecurityInfo(id, filter.filterType)
-    .then((response) => {
-      const res = response.data.response;
-
-      res.forEach((item) => {
-        if (item.subjectType === MembersSubjectType.Group) {
-          item.sharedTo.isGroup = true;
-        }
-      });
-
-      return res;
-    });
+export async function updateRoomMemberRole(id, data) {
+  const res = await roomsClient.setRoomSecurity(id, data);
+  return res;
 }
 
-export function updateRoomMemberRole(id, data) {
-  return roomsClient.setRoomSecurity(id, data).then((response) => {
-    return response.data.response;
-  });
-}
-
-export function getHistory(
+export async function getHistory(
   selectionType: "file" | "folder",
   id,
   requestToken,
@@ -121,174 +112,137 @@ export function getHistory(
 
   if (requestToken) options.headers = { "Request-Token": requestToken };
 
-  return request(options).then((res) => res);
+  const res = await request(options);
+  return res;
 }
 
-export function getRoomHistory(id) {
+export async function getRoomHistory(id) {
   const options = {
     method: "get",
     url: `/feed/filter?module=rooms&withRelated=true&id=${id}`,
   };
 
-  return request(options).then((res) => {
-    return res;
-  });
+  const res = await request(options);
+  return res;
 }
 
-export function getFileHistory(id) {
+export async function getFileHistory(id) {
   const options = {
     method: "get",
     url: `/feed/filter?module=files&withRelated=true&id=${id}`,
   };
 
-  return request(options).then((res) => {
-    return res;
-  });
+  const res = await request(options);
+  return res;
 }
 
-export function createRoom(data) {
-  return roomsClient.createRoom(data).then((response) => {
-    return response.data.response;
-  });
+export async function createRoom(data) {
+  const res = await roomsClient.createRoom(data);
+  return res;
 }
 
-export function createRoomInThirdpary(id, data) {
-  const options = {
-    method: "post",
-    url: `/files/rooms/thirdparty/${id}`,
-    data,
-  };
-
-  return request(options).then((res) => {
-    return res;
-  });
+export async function createRoomInThirdpary(id, data) {
+  const res = await roomsClient.createRoomThirdParty(id, data);
+  return res;
 }
 
-export function editRoom(id, data) {
-  return roomsClient.updateRoom(id, data).then((response) => {
-    return response.data.response;
-  });
+export async function editRoom(id, data) {
+  const res = await roomsClient.updateRoom(id, data);
+  return res;
 }
 
-export function pinRoom(id) {
-  return roomsClient.pinRoom(id).then((response) => {
-    return response.data.response;
-  });
+export async function pinRoom(id) {
+  const res = await roomsClient.pinRoom(id);
+  return res;
 }
 
-export function unpinRoom(id) {
-  return roomsClient.unpinRoom(id).then((response) => {
-    return response.data.response;
-  });
+export async function unpinRoom(id) {
+  const res = await roomsClient.unpinRoom(id);
+  return res;
 }
 
-export function deleteRoom(id, deleteAfter = false) {
-  return roomsClient.deleteRoom(id, deleteAfter).then((response) => {
-    return response.data.response;
-  });
+export async function deleteRoom(id, deleteAfter = false) {
+  const res = await roomsClient.deleteRoom(id, deleteAfter);
+  return res;
 }
 
-export function archiveRoom(id, deleteAfter = false) {
-  return roomsClient.archiveRoom(id, deleteAfter).then((response) => {
-    return response.data.response;
-  });
+export async function archiveRoom(id, deleteAfter = false) {
+  const res = await roomsClient.archiveRoom(id, deleteAfter);
+  return res;
 }
 
-export function unarchiveRoom(id) {
-  return roomsClient.unarchiveRoom(id).then((response) => {
-    return response.data.response;
-  });
+export async function unarchiveRoom(id) {
+  const res = await roomsClient.unarchiveRoom(id);
+  return res;
 }
 
-export function createTag(name) {
-  return roomsClient.createTag({ name }).then((response) => {
-    return response.data.response;
-  });
+export async function createTag(name) {
+  const res = await roomsClient.createTag({ name });
+  return res;
 }
 
-export function addTagsToRoom(id, tagArray) {
-  return roomsClient
-    .updateRoomTags(id, { names: tagArray })
-    .then((response) => {
-      return response.data.response;
-    });
+export async function addTagsToRoom(id, tagArray) {
+  const res = await roomsClient.updateRoomTags(id, { names: tagArray });
+  return res;
 }
 
-export function removeTagsFromRoom(id, tagArray) {
-  return roomsClient.deleteRoomTag(id, { names: tagArray }).then((response) => {
-    return response.data.response;
-  });
+export async function removeTagsFromRoom(id, tagArray) {
+  const res = await roomsClient.deleteRoomTag(id, { names: tagArray });
+  return res;
 }
 
-export function getTags() {
-  return roomsClient.getTagsInfo().then((response) => {
-    return response.data.response;
-  });
+export async function getTags() {
+  const res = await roomsClient.getTagsInfo();
+  return res;
 }
 
-export function uploadRoomLogo(data) {
-  return roomsClient.uploadLogo(data).then((response) => {
-    return response.data.response;
-  });
+export async function uploadRoomLogo(data) {
+  const res = await roomsClient.uploadRoomLogo(data);
+  return res;
 }
 
-export function addLogoToRoom(id, data) {
-  return roomsClient.addLogoToRoom(id, data).then((response) => {
-    return response.data.response;
-  });
+export async function addLogoToRoom(id, data) {
+  const res = await roomsClient.createRoomLogo(id, data);
+  return res;
 }
 
-export function removeLogoFromRoom(id) {
-  return roomsClient.removeLogoFromRoom(id).then((response) => {
-    return response.data.response;
-  });
+export async function removeLogoFromRoom(id) {
+  const res = await roomsClient.deleteRoomLogo(id);
+  return res;
 }
 
-export const setInvitationLinks = async (roomId, title, access, linkId) => {
-  return roomsClient
-    .setLink(roomId, {
-      linkId,
-      title,
-      access,
-    })
-    .then((response) => {
-      return response.data.response;
-    });
-};
-
-export const resendEmailInvitations = async (id, resendAll = true) => {
-  return roomsClient.resendRoomInvites(id, { resendAll }).then((response) => {
-    return response.data.response;
+export async function setInvitationLinks(roomId, title, access, linkId) {
+  const res = await roomsClient.setLink(roomId, {
+    linkId,
+    title,
+    access,
   });
-};
+  return res;
+}
 
-export const getRoomSecurityInfo = async (id) => {
-  return roomsClient.getRoomSecurityInfo(id, 1).then((response) => {
-    return response.data.response;
+export async function resendEmailInvitations(id, resendAll = true) {
+  const res = await roomsClient.resendEmailInvitations(id, { resendAll });
+  return res;
+}
+
+export async function getRoomSecurityInfo(id) {
+  const res = await roomsClient.getRoomSecurityInfo(id, 1);
+  return res;
+}
+
+export async function setRoomSecurity(id, data) {
+  const res = await roomsClient.setRoomSecurity(id, data);
+
+  res.members.forEach((item) => {
+    if (item.subjectType === MembersSubjectType.Group) {
+      item.sharedTo.isGroup = true;
+    }
   });
-};
 
-export const setRoomSecurity = async (id, data) => {
-  return roomsClient.setRoomSecurity(id, data).then((response) => {
-    const res = response.data.response;
+  return res;
+}
 
-    res.members.forEach((item) => {
-      if (item.subjectType === MembersSubjectType.Group) {
-        item.sharedTo.isGroup = true;
-      }
-    });
-
-    return res;
-  });
-};
-
-export const acceptInvitationByLink = async () => {
-  return roomsClient.acceptInvitation().then((response) => {
-    return response.data.response;
-  });
-};
-
-export function editExternalLink(
+export async function editExternalLink(
   roomId: number | string,
   linkId: number | string,
   title: string,
@@ -299,37 +253,33 @@ export function editExternalLink(
   disabled: boolean,
   denyDownload: boolean,
 ) {
-  return roomsClient
-    .setLink(roomId, {
-      linkId,
-      title,
-      access,
-      expirationDate,
-      linkType,
-      password,
-      disabled,
-      denyDownload,
-    })
-    .then((response) => {
-      return response.data.response;
-    });
+  const res = await roomsClient.setLink(roomId, {
+    linkId,
+    title,
+    access,
+    expirationDate,
+    linkType,
+    password,
+    disabled,
+    denyDownload,
+  });
+  return res;
 }
 
-export function getExternalLinks(roomId, type) {
-  return roomsClient.getRoomLinks(roomId, type).then((response) => {
-    return response.data.response;
-  });
+export async function getExternalLinks(roomId, type) {
+  const res = await roomsClient.getRoomLinks(roomId, type);
+  return res;
 }
 
-export function getPrimaryLink(roomId) {
-  return roomsClient.getRoomsPrimaryExternalLink(roomId).then((response) => {
-    return response.data.response;
-  });
+export async function getPrimaryLink(roomId) {
+  const res = await roomsClient.getRoomLinks(roomId);
+  return res;
 }
 
 export function validatePublicRoomKey(key) {
-  return roomsClient.validatePublicRoomKey(key).then((response) => {
-    return response.data.response as TValidateShareRoom;
+  return request<TValidateShareRoom>({
+    method: "get",
+    url: `files/share/${key}`,
   });
 }
 
@@ -338,55 +288,67 @@ export async function validatePublicRoomPassword(
   passwordHash: string,
   signal?: AbortSignal,
 ) {
-  return roomsClient
-    .validatePublicRoomPassword(key, { password: passwordHash }, signal)
-    .then((response) => {
-      return response.data.response as TPublicRoomPassword;
-    });
+  const res = (await request({
+    method: "post",
+    url: `files/share/${key}/password`,
+    data: { password: passwordHash },
+    signal,
+  })) as TPublicRoomPassword;
+
+  return res;
 }
 
 export function setCustomRoomQuota(roomIds, quota) {
-  return roomsClient.setRoomQuota({ roomIds, quota }).then((response) => {
-    return response.data.response;
-  });
+  const data = {
+    roomIds,
+    quota,
+  };
+  const options = {
+    method: "put",
+    url: "files/rooms/roomquota",
+    data,
+  };
+
+  return request(options);
 }
 
 export function resetRoomQuota(roomIds) {
-  return roomsClient.resetRoomQuota({ roomIds }).then((response) => {
-    return response.data.response;
+  const data = {
+    roomIds,
+  };
+  const options = {
+    method: "put",
+    url: "files/rooms/resetquota",
+    data,
+  };
+
+  return request(options);
+}
+
+export async function getRoomCovers() {
+  const res = await roomsClient.getCovers();
+  return res;
+}
+
+export async function exportRoomIndex(roomId: number) {
+  const res = await roomsClient.startRoomIndexExport(roomId);
+  return res as TExportRoomIndexTask;
+}
+
+export async function getExportRoomIndexProgress() {
+  const res = await roomsClient.getRoomIndexExport();
+  return res as TExportRoomIndexTask;
+}
+
+export async function setRoomCover(roomId, cover) {
+  const res = await roomsClient.changeRoomCover(roomId, {
+    color: cover.color,
+    cover: cover.cover,
   });
+  return res;
 }
 
-export function getRoomCovers() {
-  return roomsClient.getRoomCovers().then((response) => {
-    return response.data.response;
-  });
-}
-
-export function exportRoomIndex(roomId: number) {
-  return roomsClient.exportRoomIndex(roomId).then((response) => {
-    return response.data.response as TExportRoomIndexTask;
-  });
-}
-
-export function getExportRoomIndexProgress() {
-  return roomsClient.getExportRoomIndexProgress().then((response) => {
-    return response.data.response as TExportRoomIndexTask;
-  });
-}
-
-export function setRoomCover(roomId, cover) {
-  return roomsClient
-    .setRoomCover(roomId, {
-      Color: cover.color,
-      Cover: cover.cover,
-    })
-    .then((response) => {
-      return response.data.response;
-    });
-}
-
-export function createTemplate(data: {
+export async function createTemplate(data: {
   roomId: number;
   title: string;
   logo: TRoom["logo"];
@@ -395,48 +357,44 @@ export function createTemplate(data: {
   public: boolean;
   quota: number;
 }) {
-  return roomsClient.createRoomTemplate(data).then((response) => {
-    return response.data.response;
-  });
+  const res = await roomsClient.createTemplate(data);
+  return res;
 }
 
-export function getCreateTemplateProgress() {
-  return roomsClient.getRoomTemplateProgress().then((response) => {
-    return response.data.response;
-  });
+export async function getCreateTemplateProgress() {
+  const res = await roomsClient.getTemplateCreatingStatus();
+  return res;
 }
 
-export function createRoomFromTemplate(data) {
-  return roomsClient.createRoomFromTemplate(data).then((response) => {
-    return response.data.response;
-  });
+export async function createRoomFromTemplate(data) {
+  const res = await roomsClient.createRoomFromTemplate(data);
+  return res;
 }
 
-export function getCreateRoomFromTemplateProgress() {
-  return roomsClient.getRoomFromTemplateProgress().then((response) => {
-    return response.data.response;
-  });
+export async function getCreateRoomFromTemplateProgress() {
+  const res = await roomsClient.getRoomCreatingStatus();
+  return res;
 }
 
-export function getTemplateAvailable(id: number) {
-  return roomsClient.getTemplateAvailable(id).then((response) => {
-    return response.data.response;
-  });
+export async function getTemplateAvailable(id: number) {
+  const res = await roomsClient.isPublic(id);
+  return res;
 }
 
-export function setTemplateAvailable(id: number, isAvailable: boolean) {
-  return roomsClient
-    .setTemplateAvailable({
-      id,
-      public: isAvailable,
-    })
-    .then((response) => {
-      return response.data.response;
-    });
+export async function setTemplateAvailable(id: number, isAvailable: boolean) {
+  const res = await roomsClient.setPublic({
+    id,
+    public: isAvailable,
+  });
+  return res;
 }
 
 export function hideConfirmRoomLifetime(val: boolean) {
-  return roomsClient.hideConfirmRoomLifetime({ set: val }).then((response) => {
-    return response.data.response;
-  });
+  const options = {
+    method: "put",
+    url: "/files/hideconfirmroomlifetime",
+    data: { set: val },
+  };
+
+  return request(options);
 }

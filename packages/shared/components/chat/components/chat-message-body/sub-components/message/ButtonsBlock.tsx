@@ -24,28 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { useState } from "react";
 import copy from "copy-to-clipboard";
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import FileReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
 import { IconButton } from "../../../../../icon-button";
-import { toastr } from "../../../../..//toast";
-import { Text } from "../../../../../text";
+import { toastr } from "../../../../../toast";
 
 import { ChatMessageType } from "../../../../types/chat";
-import { useMessageStore } from "../../../../store/messageStore";
 
 import styles from "../../ChatMessageBody.module.scss";
 
-type ButtonsBlockProps = Pick<ChatMessageType, "message">;
+import FolderSelector, { type FolderSelectorProps } from "./FolderSelector";
 
-const ButtonsBlock = ({ message }: ButtonsBlockProps) => {
+type ButtonsBlockProps = Pick<ChatMessageType, "message"> &
+  Pick<FolderSelectorProps, "getIcon" | "currentDeviceType">;
+
+const ButtonsBlock = ({
+  message,
+  getIcon,
+  currentDeviceType,
+}: ButtonsBlockProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const { saveMessageToFile } = useMessageStore();
+  const [showSelector, setShowSelector] = useState(false);
 
   const onCopy = () => {
     if (typeof message === "string") {
@@ -57,26 +62,26 @@ const ButtonsBlock = ({ message }: ButtonsBlockProps) => {
 
   const onCreateFile = async () => {
     if (typeof message === "string") {
-      const title = message.substring(0, 20);
+      setShowSelector(true);
+      // const title = message.substring(0, 20);
 
-      try {
-        await saveMessageToFile(message, title);
+      // try {
+      //   await saveMessageToFile(message, title);
 
-        toastr.success(
-          <Trans
-            i18nKey="SaveMessageSuccess"
-            ns="Common"
-            t={t}
-            values={{ title }}
-            components={{
-              1: <Text fontSize="13px" fontWeight={600} />,
-            }}
-          />,
-        );
-      } catch (error) {
-        toastr.error(error as string);
-        return;
-      }
+      //   toastr.success(
+      //     <Trans
+      //       i18nKey="SaveMessageSuccess"
+      //       ns="Common"
+      //       t={t}
+      //       values={{ title }}
+      //       components={{
+      //         1: <Text fontSize="13px" fontWeight={600} />,
+      //       }}
+      //     />,
+      //   );
+      // } catch (error) {
+      //   toastr.error(error as string);
+      // }
     }
   };
 
@@ -98,6 +103,15 @@ const ButtonsBlock = ({ message }: ButtonsBlockProps) => {
         tooltipContent={t("Common:SaveMessage")}
         onClick={onCreateFile}
       />
+      {showSelector && typeof message === "string" ? (
+        <FolderSelector
+          showSelector={showSelector}
+          toggleSelector={() => setShowSelector(false)}
+          getIcon={getIcon}
+          currentDeviceType={currentDeviceType}
+          message={message}
+        />
+      ) : null}
     </div>
   );
 };

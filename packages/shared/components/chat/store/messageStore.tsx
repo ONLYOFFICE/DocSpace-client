@@ -366,7 +366,11 @@ export default class MessageStore {
     }
   };
 
-  saveMessageToFile = async (message: string, title: string) => {
+  saveMessageToFile = async (
+    message: string,
+    title: string,
+    folderId: number | string,
+  ) => {
     if (!this.saveToFileFlow) return;
 
     const tweaks: Tweaks = {};
@@ -381,7 +385,7 @@ export default class MessageStore {
       }
 
       if (n.id.includes("FolderIDInput")) {
-        tweaks[n.id] = { input_value: String(this.aiSelectedFolder) };
+        tweaks[n.id] = { input_value: String(folderId) };
       }
     });
 

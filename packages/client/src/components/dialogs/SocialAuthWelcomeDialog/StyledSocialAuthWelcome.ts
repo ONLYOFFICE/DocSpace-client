@@ -97,7 +97,7 @@ export const StyledBodyContent = styled.div`
 export const StyledInfoRow = styled.div`
   display: flex;
   align-items: baseline;
-  padding: 1px 16px;
+  padding: 4px 16px;
   height: 28px;
   max-height: 28px;
   box-sizing: border-box;

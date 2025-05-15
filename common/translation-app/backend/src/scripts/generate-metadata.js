@@ -67,11 +67,13 @@ async function generateMetadata(projectName) {
   let currentNamespace = null;
 
   const stats = {
+    totalNamespaces: 0,
     totalFiles: 0,
     totalKeys: 0,
     newKeys: 0,
     updatedKeys: 0,
     unchangedKeys: 0,
+    metadataFiles: 0,
     namespaces: {},
     errors: [],
   };
@@ -302,11 +304,21 @@ async function generateMetadata(projectName) {
             }
           }
 
-          // Save individual key metadata file
+          // Save individual key metadata file only if it doesn't already exist
           try {
-            console.log(`Saving key metadata to: ${keyMetaFile}`);
-            await writeJsonWithConsistentEol(keyMetaFile, keyMetadata);
-            console.log(`Saved metadata for key: ${keyPath}`);
+            const metaFileExists = await fs.pathExists(keyMetaFile);
+            
+            if (metaFileExists) {
+              console.log(`Skipping existing metadata file for key: ${keyPath}`);
+              // Count the existing file in our stats
+              stats.metadataFiles++;
+            } else {
+              console.log(`Saving key metadata to: ${keyMetaFile}`);
+              await writeJsonWithConsistentEol(keyMetaFile, keyMetadata);
+              console.log(`Saved metadata for key: ${keyPath}`);
+              // Count the newly created file in our stats
+              stats.metadataFiles++;
+            }
           } catch (keySaveError) {
             console.error(
               `Error saving metadata file for key ${keyPath}:`,
@@ -377,6 +389,7 @@ async function generateAllMetadata() {
     totalProjects: projects.length,
     totalNamespaces: 0,
     totalKeys: 0,
+    metadataFiles: 0, // Counter for metadata files (new or existing)
     newKeys: 0,
     updatedKeys: 0,
     unchangedKeys: 0,
@@ -394,6 +407,7 @@ async function generateAllMetadata() {
       overallStats.newKeys += projectStats.newKeys || 0;
       overallStats.updatedKeys += projectStats.updatedKeys || 0;
       overallStats.unchangedKeys += projectStats.unchangedKeys || 0;
+      overallStats.metadataFiles += projectStats.metadataFiles || 0;
       overallStats.totalNamespaces += Object.keys(
         projectStats.namespaces || {}
       ).length;
@@ -427,8 +441,16 @@ async function generateAllMetadata() {
 if (require.main === module) {
   generateAllMetadata()
     .then((stats) => {
-      console.log("Complete metadata generation finished");
-      console.log("Overall stats:", JSON.stringify(stats, null, 2));
+      console.log("\n=== Complete metadata generation finished ===");
+      console.log(`Processed ${stats.totalProjects} projects with ${stats.totalNamespaces} namespaces`);
+      console.log(`Total keys: ${stats.totalKeys} (${stats.newKeys} new, ${stats.updatedKeys} updated, ${stats.unchangedKeys} unchanged)`);
+      console.log(`Metadata files: ${stats.metadataFiles} files (existing files were skipped)`);
+      
+      if (stats.processingErrors > 0) {
+        console.log(`\nWARNING: Encountered ${stats.processingErrors} errors during processing`);
+      }
+      
+      console.log("\nDetailed stats:", JSON.stringify(stats, null, 2));
     })
     .catch((error) => {
       console.error("Fatal error during metadata generation:", error);

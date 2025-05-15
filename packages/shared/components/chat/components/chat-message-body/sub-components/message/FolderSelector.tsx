@@ -138,11 +138,11 @@ const FolderSelector = ({
           withSearch
           isRoomsOnly={false}
           isThirdParty={false}
-          // withFooterCheckbox
+          withFooterCheckbox={false}
           withFooterInput
           disabledItems={disabledItems}
           rootFolderType={FolderType.Rooms}
-          // footerCheckboxLabel={t("Common:OpenSavedDocument")}
+          footerCheckboxLabel={t("Common:OpenSavedDocument")}
           footerInputHeader={t("Common:FileName")}
           currentFooterInputValue={initFileName}
           onSubmit={onSubmit}

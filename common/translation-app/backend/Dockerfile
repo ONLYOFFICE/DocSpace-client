@@ -10,7 +10,7 @@ RUN npm install -g jest cross-env
 WORKDIR /app/common/translation-app/backend
 
 # Create db directory
-RUN mkdir -p ./db
+# RUN mkdir -p ./db
 
 # Expose the application port
 EXPOSE 3001

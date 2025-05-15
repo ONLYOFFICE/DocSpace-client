@@ -1,6 +1,10 @@
-const fs = require('fs-extra');
-const path = require('path');
-const { appRootPath, projectLocalesMap, translationConfig } = require('../config/config');
+const fs = require("fs-extra");
+const path = require("path");
+const {
+  appRootPath,
+  projectLocalesMap,
+  translationConfig,
+} = require("../config/config");
 
 /**
  * Resolves a project's locales directory path
@@ -24,10 +28,13 @@ async function getAvailableLanguages(projectName) {
     const projectPath = resolveProjectPath(projectName);
     const entries = await fs.readdir(projectPath, { withFileTypes: true });
     return entries
-      .filter(entry => entry.isDirectory())
-      .map(entry => entry.name);
+      .filter((entry) => entry.isDirectory() && entry.name !== ".meta")
+      .map((entry) => entry.name);
   } catch (error) {
-    console.error(`Error getting available languages for project ${projectName}:`, error);
+    console.error(
+      `Error getting available languages for project ${projectName}:`,
+      error
+    );
     return [];
   }
 }
@@ -43,69 +50,84 @@ async function getAvailableLanguages(projectName) {
  */
 async function getNamespaces(projectName, language, options = {}) {
   try {
-    const { untranslatedOnly = false, baseLanguage = 'en' } = options;
+    const { untranslatedOnly = false, baseLanguage = "en" } = options;
     const langPath = path.join(resolveProjectPath(projectName), language);
     const entries = await fs.readdir(langPath, { withFileTypes: true });
-    
+
     // Get all namespace files
     const namespaces = entries
-      .filter(entry => entry.isFile() && path.extname(entry.name) === '.json')
-      .map(entry => path.basename(entry.name, '.json'));
-    
+      .filter((entry) => entry.isFile() && path.extname(entry.name) === ".json")
+      .map((entry) => path.basename(entry.name, ".json"));
+
     // If untranslatedOnly is false, return all namespaces
     if (!untranslatedOnly) {
       return namespaces;
     }
-    
+
     // Otherwise, filter namespaces with untranslated keys
     const namespaceWithUntranslatedKeys = [];
-    
+
     // Get available languages to compare with
     const languages = await getAvailableLanguages(projectName);
-    const targetLanguages = languages.filter(lang => lang !== baseLanguage);
-    
+    const targetLanguages = languages.filter((lang) => lang !== baseLanguage);
+
     // Check each namespace for untranslated keys
     for (const namespace of namespaces) {
       // Get base language translations for this namespace
-      const baseTranslations = await readTranslationFile(projectName, baseLanguage, namespace);
+      const baseTranslations = await readTranslationFile(
+        projectName,
+        baseLanguage,
+        namespace
+      );
       if (!baseTranslations) continue;
-      
+
       // Check if this namespace has untranslated keys in any target language
       let hasUntranslatedKeys = false;
-      
+
       // Logic to determine if a nested object has untranslated keys
       const checkForUntranslatedKeys = async (targetLang) => {
-        const targetTranslations = await readTranslationFile(projectName, targetLang, namespace);
+        const targetTranslations = await readTranslationFile(
+          projectName,
+          targetLang,
+          namespace
+        );
         if (!targetTranslations) return true; // Missing translation file means untranslated
-        
+
         // Compare keys recursively
-        const compareObjects = (baseObj, targetObj, path = '') => {
+        const compareObjects = (baseObj, targetObj, path = "") => {
           for (const key in baseObj) {
             const currentPath = path ? `${path}.${key}` : key;
-            
+
             // Skip if base value is empty or null
-            if (baseObj[key] === null || baseObj[key] === '') continue;
-            
+            if (baseObj[key] === null || baseObj[key] === "") continue;
+
             // Check if key exists in target
             if (!(key in targetObj)) return true;
-            
+
             // If nested object, recurse
-            if (typeof baseObj[key] === 'object' && baseObj[key] !== null && 
-                typeof targetObj[key] === 'object' && targetObj[key] !== null) {
-              if (compareObjects(baseObj[key], targetObj[key], currentPath)) return true;
-            } 
+            if (
+              typeof baseObj[key] === "object" &&
+              baseObj[key] !== null &&
+              typeof targetObj[key] === "object" &&
+              targetObj[key] !== null
+            ) {
+              if (compareObjects(baseObj[key], targetObj[key], currentPath))
+                return true;
+            }
             // If value is missing or empty in target language
-            else if (typeof baseObj[key] === 'string' && 
-                    (targetObj[key] === null || targetObj[key] === '')) {
+            else if (
+              typeof baseObj[key] === "string" &&
+              (targetObj[key] === null || targetObj[key] === "")
+            ) {
               return true;
             }
           }
           return false;
         };
-        
+
         return compareObjects(baseTranslations, targetTranslations);
       };
-      
+
       // Check each target language for untranslated content
       for (const targetLang of targetLanguages) {
         if (await checkForUntranslatedKeys(targetLang)) {
@@ -113,15 +135,18 @@ async function getNamespaces(projectName, language, options = {}) {
           break; // Found an untranslated key, no need to check other languages
         }
       }
-      
+
       if (hasUntranslatedKeys) {
         namespaceWithUntranslatedKeys.push(namespace);
       }
     }
-    
+
     return namespaceWithUntranslatedKeys;
   } catch (error) {
-    console.error(`Error getting namespaces for project ${projectName}, language ${language}:`, error);
+    console.error(
+      `Error getting namespaces for project ${projectName}, language ${language}:`,
+      error
+    );
     return [];
   }
 }
@@ -135,7 +160,11 @@ async function getNamespaces(projectName, language, options = {}) {
  */
 async function readTranslationFile(projectName, language, namespace) {
   try {
-    const filePath = path.join(resolveProjectPath(projectName), language, `${namespace}.json`);
+    const filePath = path.join(
+      resolveProjectPath(projectName),
+      language,
+      `${namespace}.json`
+    );
     const exists = await fs.pathExists(filePath);
     if (!exists) {
       return null;
@@ -143,7 +172,10 @@ async function readTranslationFile(projectName, language, namespace) {
     const content = await fs.readJson(filePath);
     return content;
   } catch (error) {
-    console.error(`Error reading translation file for project ${projectName}, language ${language}, namespace ${namespace}:`, error);
+    console.error(
+      `Error reading translation file for project ${projectName}, language ${language}, namespace ${namespace}:`,
+      error
+    );
     return null;
   }
 }
@@ -160,12 +192,15 @@ async function writeTranslationFile(projectName, language, namespace, content) {
   try {
     const langPath = path.join(resolveProjectPath(projectName), language);
     await fs.ensureDir(langPath);
-    
+
     const filePath = path.join(langPath, `${namespace}.json`);
     await fs.writeJson(filePath, content, { spaces: 2 });
     return true;
   } catch (error) {
-    console.error(`Error writing translation file for project ${projectName}, language ${language}, namespace ${namespace}:`, error);
+    console.error(
+      `Error writing translation file for project ${projectName}, language ${language}, namespace ${namespace}:`,
+      error
+    );
     return false;
   }
 }
@@ -180,27 +215,42 @@ async function createLanguageFolder(projectName, language) {
   try {
     const langPath = path.join(resolveProjectPath(projectName), language);
     await fs.ensureDir(langPath);
-    
+
     // Copy files from base language if it exists
     const baseLanguage = translationConfig.baseLanguage;
-    const baseLanguagePath = path.join(resolveProjectPath(projectName), baseLanguage);
-    
+    const baseLanguagePath = path.join(
+      resolveProjectPath(projectName),
+      baseLanguage
+    );
+
     if (await fs.pathExists(baseLanguagePath)) {
       const namespaces = await getNamespaces(projectName, baseLanguage);
-      
+
       for (const namespace of namespaces) {
-        const baseContent = await readTranslationFile(projectName, baseLanguage, namespace);
+        const baseContent = await readTranslationFile(
+          projectName,
+          baseLanguage,
+          namespace
+        );
         if (baseContent) {
           // Create empty translations for the new language using the base structure
           const emptyContent = createEmptyTranslations(baseContent);
-          await writeTranslationFile(projectName, language, namespace, emptyContent);
+          await writeTranslationFile(
+            projectName,
+            language,
+            namespace,
+            emptyContent
+          );
         }
       }
     }
-    
+
     return true;
   } catch (error) {
-    console.error(`Error creating language folder for project ${projectName}, language ${language}:`, error);
+    console.error(
+      `Error creating language folder for project ${projectName}, language ${language}:`,
+      error
+    );
     return false;
   }
 }
@@ -212,15 +262,15 @@ async function createLanguageFolder(projectName, language) {
  */
 function createEmptyTranslations(source) {
   const result = {};
-  
+
   for (const [key, value] of Object.entries(source)) {
-    if (typeof value === 'object' && value !== null) {
+    if (typeof value === "object" && value !== null) {
       result[key] = createEmptyTranslations(value);
     } else {
       result[key] = "";
     }
   }
-  
+
   return result;
 }
 
@@ -250,28 +300,31 @@ async function renameNamespace(projectName, oldName, newName) {
     // Check if new name already exists
     const baseLanguage = translationConfig.baseLanguage;
     const baseNamespaces = await getNamespaces(projectName, baseLanguage);
-    
+
     if (baseNamespaces.includes(newName)) {
       throw new Error(`Namespace "${newName}" already exists`);
     }
-    
+
     // Rename the namespace file in all language folders
     const languages = await getAvailableLanguages(projectName);
     const projectPath = resolveProjectPath(projectName);
-    
+
     for (const language of languages) {
       const oldPath = path.join(projectPath, language, `${oldName}.json`);
       const newPath = path.join(projectPath, language, `${newName}.json`);
-      
+
       // Only rename if old file exists
       if (await fs.pathExists(oldPath)) {
         await fs.move(oldPath, newPath, { overwrite: false });
       }
     }
-    
+
     return true;
   } catch (error) {
-    console.error(`Error renaming namespace from ${oldName} to ${newName} for project ${projectName}:`, error);
+    console.error(
+      `Error renaming namespace from ${oldName} to ${newName} for project ${projectName}:`,
+      error
+    );
     throw error; // Re-throw to handle in route
   }
 }
@@ -284,51 +337,82 @@ async function renameNamespace(projectName, oldName, newName) {
  * @param {string} targetNamespace - Target namespace name
  * @returns {Promise<boolean>} - Success status
  */
-async function moveNamespaceTo(sourceProjectName, sourceNamespace, targetProjectName, targetNamespace) {
+async function moveNamespaceTo(
+  sourceProjectName,
+  sourceNamespace,
+  targetProjectName,
+  targetNamespace
+) {
   try {
     // Check if the source namespace exists and target namespace exists
     const baseLanguage = translationConfig.baseLanguage;
-    const sourceNamespaces = await getNamespaces(sourceProjectName, baseLanguage);
-    
+    const sourceNamespaces = await getNamespaces(
+      sourceProjectName,
+      baseLanguage
+    );
+
     if (!sourceNamespaces.includes(sourceNamespace)) {
-      throw new Error(`Source namespace "${sourceNamespace}" does not exist in project ${sourceProjectName}`);
+      throw new Error(
+        `Source namespace "${sourceNamespace}" does not exist in project ${sourceProjectName}`
+      );
     }
-    
+
     // Get all available languages from both projects
     const sourceLanguages = await getAvailableLanguages(sourceProjectName);
     const targetLanguages = await getAvailableLanguages(targetProjectName);
-    
+
     // Process the move for each language
     for (const language of sourceLanguages) {
       // Skip if the language doesn't exist in the target project
       if (!targetLanguages.includes(language)) {
-        console.warn(`Language ${language} not found in target project ${targetProjectName}. Skipping.`);
+        console.warn(
+          `Language ${language} not found in target project ${targetProjectName}. Skipping.`
+        );
         continue;
       }
-      
+
       // Read source content
-      const sourceContent = await readTranslationFile(sourceProjectName, language, sourceNamespace);
+      const sourceContent = await readTranslationFile(
+        sourceProjectName,
+        language,
+        sourceNamespace
+      );
       if (!sourceContent) {
-        console.warn(`No content found for ${language}/${sourceNamespace} in project ${sourceProjectName}. Skipping.`);
+        console.warn(
+          `No content found for ${language}/${sourceNamespace} in project ${sourceProjectName}. Skipping.`
+        );
         continue;
       }
-      
+
       // Read target content if it exists, or create empty
-      let targetContent = await readTranslationFile(targetProjectName, language, targetNamespace) || {};
-      
+      let targetContent =
+        (await readTranslationFile(
+          targetProjectName,
+          language,
+          targetNamespace
+        )) || {};
+
       // Merge content (source takes precedence in case of conflicts)
       targetContent = { ...targetContent, ...sourceContent };
-      
+
       // Write merged content to target
-      await writeTranslationFile(targetProjectName, language, targetNamespace, targetContent);
+      await writeTranslationFile(
+        targetProjectName,
+        language,
+        targetNamespace,
+        targetContent
+      );
     }
-    
+
     // Delete the source namespace now that content is moved
     await deleteNamespace(sourceProjectName, sourceNamespace);
-    
+
     return true;
   } catch (error) {
-    console.error(`Error moving namespace ${sourceNamespace} from project ${sourceProjectName} to ${targetNamespace} in project ${targetProjectName}:`, error);
+    console.error(
+      `Error moving namespace ${sourceNamespace} from project ${sourceProjectName} to ${targetNamespace} in project ${targetProjectName}:`,
+      error
+    );
     throw error; // Re-throw to handle in route
   }
 }
@@ -344,23 +428,28 @@ async function deleteNamespace(projectName, namespace) {
     const languages = await getAvailableLanguages(projectName);
     const projectPath = resolveProjectPath(projectName);
     let deletedAny = false;
-    
+
     for (const language of languages) {
       const filePath = path.join(projectPath, language, `${namespace}.json`);
-      
+
       if (await fs.pathExists(filePath)) {
         await fs.remove(filePath);
         deletedAny = true;
       }
     }
-    
+
     if (!deletedAny) {
-      throw new Error(`Namespace "${namespace}" not found in project ${projectName}`);
+      throw new Error(
+        `Namespace "${namespace}" not found in project ${projectName}`
+      );
     }
-    
+
     return true;
   } catch (error) {
-    console.error(`Error deleting namespace ${namespace} for project ${projectName}:`, error);
+    console.error(
+      `Error deleting namespace ${namespace} for project ${projectName}:`,
+      error
+    );
     throw error; // Re-throw to handle in route
   }
 }
@@ -371,37 +460,51 @@ async function deleteNamespace(projectName, namespace) {
  * @param {string} baseLanguage - The base language to compare against (typically 'en')
  * @returns {Promise<boolean>} - Returns true if the project has untranslated keys, false if all are translated
  */
-async function projectHasUntranslatedKeys(projectName, baseLanguage = 'en') {
+async function projectHasUntranslatedKeys(projectName, baseLanguage = "en") {
   try {
     // Get all languages and namespaces
     const languages = await getAvailableLanguages(projectName);
-    const targetLanguages = languages.filter(lang => lang !== baseLanguage);
-    
+    const targetLanguages = languages.filter((lang) => lang !== baseLanguage);
+
     // If there are no other languages, consider the project fully translated
     if (targetLanguages.length === 0) return false;
-    
+
     const namespaces = await getNamespaces(projectName, baseLanguage);
-    
+
     // Check each namespace for untranslated content
     for (const namespace of namespaces) {
-      const baseTranslations = await readTranslationFile(projectName, baseLanguage, namespace);
+      const baseTranslations = await readTranslationFile(
+        projectName,
+        baseLanguage,
+        namespace
+      );
       if (!baseTranslations) continue;
-      
+
       // Check each target language for untranslated content in this namespace
       for (const targetLang of targetLanguages) {
-        const targetTranslations = await readTranslationFile(projectName, targetLang, namespace);
+        const targetTranslations = await readTranslationFile(
+          projectName,
+          targetLang,
+          namespace
+        );
         if (!targetTranslations) return true; // Missing translation file means untranslated
-        
+
         // Compare keys recursively
-        const hasUntranslated = compareTranslations(baseTranslations, targetTranslations);
+        const hasUntranslated = compareTranslations(
+          baseTranslations,
+          targetTranslations
+        );
         if (hasUntranslated) return true;
       }
     }
-    
+
     // If we get here, all keys in all namespaces are translated
     return false;
   } catch (error) {
-    console.error(`Error checking untranslated keys for project ${projectName}:`, error);
+    console.error(
+      `Error checking untranslated keys for project ${projectName}:`,
+      error
+    );
     // In case of error, assume there are untranslated keys
     return true;
   }
@@ -413,24 +516,31 @@ async function projectHasUntranslatedKeys(projectName, baseLanguage = 'en') {
  * @param {Object} targetObj - The target language translation object
  * @returns {boolean} - Returns true if untranslated keys are found
  */
-function compareTranslations(baseObj, targetObj, path = '') {
+function compareTranslations(baseObj, targetObj, path = "") {
   for (const key in baseObj) {
     const currentPath = path ? `${path}.${key}` : key;
-    
+
     // Skip if base value is empty or null
-    if (baseObj[key] === null || baseObj[key] === '') continue;
-    
+    if (baseObj[key] === null || baseObj[key] === "") continue;
+
     // Check if key exists in target
     if (!(key in targetObj)) return true;
-    
+
     // If nested object, recurse
-    if (typeof baseObj[key] === 'object' && baseObj[key] !== null && 
-        typeof targetObj[key] === 'object' && targetObj[key] !== null) {
-      if (compareTranslations(baseObj[key], targetObj[key], currentPath)) return true;
-    } 
+    if (
+      typeof baseObj[key] === "object" &&
+      baseObj[key] !== null &&
+      typeof targetObj[key] === "object" &&
+      targetObj[key] !== null
+    ) {
+      if (compareTranslations(baseObj[key], targetObj[key], currentPath))
+        return true;
+    }
     // If value is missing or empty in target language
-    else if (typeof baseObj[key] === 'string' && 
-             (targetObj[key] === null || targetObj[key] === '')) {
+    else if (
+      typeof baseObj[key] === "string" &&
+      (targetObj[key] === null || targetObj[key] === "")
+    ) {
       return true;
     }
   }
@@ -449,5 +559,5 @@ module.exports = {
   validateTranslationFile,
   renameNamespace,
   moveNamespaceTo,
-  deleteNamespace
+  deleteNamespace,
 };

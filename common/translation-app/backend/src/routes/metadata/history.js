@@ -1,7 +1,70 @@
 /**
- * Routes for managing translation history
+ * Routes for managing translation history using file-based metadata
  */
-const { history } = require('../../db/repository');
+const path = require('path');
+const fs = require('fs-extra');
+const glob = require('glob');
+const appRootPath = require('app-root-path').toString();
+const { projectLocalesMap } = require('../../config/config');
+
+/**
+ * Find metadata file for a specific key
+ * @param {string} projectName - Project name
+ * @param {string} namespace - Namespace
+ * @param {string} keyPath - Key path
+ * @returns {Promise<{filePath: string, data: object}>} Metadata file info
+ */
+async function findMetadataFile(projectName, namespace, keyPath) {
+  const localesPath = projectLocalesMap[projectName];
+  if (!localesPath) {
+    throw new Error(`Project ${projectName} not found in configuration`);
+  }
+  
+  const projectPath = path.join(appRootPath, localesPath);
+  const metaDir = path.join(projectPath, '.meta');
+  const namespacePath = path.join(metaDir, namespace);
+  const metadataFilePath = path.join(namespacePath, `${keyPath}.json`);
+  
+  if (await fs.pathExists(metadataFilePath)) {
+    const data = await fs.readJson(metadataFilePath);
+    return { filePath: metadataFilePath, data };
+  }
+  
+  return null;
+}
+
+/**
+ * Find all metadata files for a project
+ * @param {string} projectName - Project name
+ * @returns {Promise<Array<{filePath: string, data: object}>>} Metadata files
+ */
+async function findProjectMetadataFiles(projectName) {
+  const localesPath = projectLocalesMap[projectName];
+  if (!localesPath) {
+    throw new Error(`Project ${projectName} not found in configuration`);
+  }
+  
+  const projectPath = path.join(appRootPath, localesPath);
+  const metaDir = path.join(projectPath, '.meta');
+  
+  if (!await fs.pathExists(metaDir)) {
+    return [];
+  }
+  
+  const files = glob.sync(path.join(metaDir, '**/*.json'));
+  const result = [];
+  
+  for (const filePath of files) {
+    try {
+      const data = await fs.readJson(filePath);
+      result.push({ filePath, data });
+    } catch (error) {
+      console.error(`Error reading metadata file ${filePath}:`, error);
+    }
+  }
+  
+  return result;
+}
 
 /**
  * @param {FastifyInstance} fastify - Fastify instance
@@ -21,17 +84,32 @@ async function routes(fastify, options) {
         });
       }
       
-      const translationHistory = history.getTranslationHistory(
-        projectName,
-        language,
-        namespace,
-        keyPath,
-        parseInt(limit)
-      );
+      // Find the metadata file
+      const metadata = await findMetadataFile(projectName, namespace, keyPath);
+      
+      if (!metadata) {
+        return reply.code(404).send({
+          success: false,
+          error: 'Metadata not found for this key'
+        });
+      }
+      
+      // Get history from metadata
+      let historyEntries = metadata.data.history || [];
+      
+      // Sort by timestamp (newest first)
+      historyEntries = historyEntries.sort((a, b) => {
+        return new Date(b.timestamp) - new Date(a.timestamp);
+      });
+      
+      // Apply limit
+      if (limit) {
+        historyEntries = historyEntries.slice(0, parseInt(limit));
+      }
       
       return { 
         success: true, 
-        data: translationHistory 
+        data: historyEntries 
       };
     } catch (error) {
       request.log.error(error);
@@ -48,15 +126,42 @@ async function routes(fastify, options) {
       const { projectName } = request.params;
       const { language, limit = 50 } = request.query;
       
-      const recentChanges = history.getRecentChanges(
-        projectName,
-        language || null,
-        parseInt(limit)
-      );
+      // Get all metadata files for this project
+      const metadataFiles = await findProjectMetadataFiles(projectName);
+      
+      // Extract history entries from all files
+      const allChanges = [];
+      
+      for (const { data } of metadataFiles) {
+        // Skip files that don't match the language filter
+        if (language && data.language !== language) {
+          continue;
+        }
+        
+        if (data.history && Array.isArray(data.history)) {
+          // Add context to each history entry
+          const entriesWithContext = data.history.map(entry => ({
+            ...entry,
+            key_path: data.key_path,
+            namespace: data.namespace,
+            project: data.project
+          }));
+          
+          allChanges.push(...entriesWithContext);
+        }
+      }
+      
+      // Sort by timestamp (newest first)
+      const sortedChanges = allChanges.sort((a, b) => {
+        return new Date(b.timestamp) - new Date(a.timestamp);
+      });
+      
+      // Apply limit
+      const limitedChanges = limit ? sortedChanges.slice(0, parseInt(limit)) : sortedChanges;
       
       return { 
         success: true, 
-        data: recentChanges 
+        data: limitedChanges 
       };
     } catch (error) {
       request.log.error(error);
@@ -73,15 +178,67 @@ async function routes(fastify, options) {
       const { projectName } = request.params;
       const { language, days = 30 } = request.query;
       
-      const changeStats = history.getChangeStatistics(
-        projectName,
-        language || null,
-        parseInt(days)
-      );
+      // Get all metadata files for this project
+      const metadataFiles = await findProjectMetadataFiles(projectName);
+      
+      // Set cutoff date
+      const cutoffDate = new Date();
+      cutoffDate.setDate(cutoffDate.getDate() - parseInt(days));
+      
+      // Extract history entries from all files
+      const allChanges = [];
+      
+      for (const { data } of metadataFiles) {
+        // Skip files that don't match the language filter
+        if (language && data.language !== language) {
+          continue;
+        }
+        
+        if (data.history && Array.isArray(data.history)) {
+          // Filter by date
+          const recentEntries = data.history.filter(entry => {
+            const entryDate = new Date(entry.timestamp);
+            return entryDate >= cutoffDate;
+          });
+          
+          // Add context to each history entry
+          const entriesWithContext = recentEntries.map(entry => ({
+            ...entry,
+            key_path: data.key_path,
+            namespace: data.namespace,
+            project: data.project
+          }));
+          
+          allChanges.push(...entriesWithContext);
+        }
+      }
+      
+      // Calculate statistics
+      const stats = {
+        total_changes: allChanges.length,
+        changes_by_user: {},
+        changes_by_action: {},
+        changes_by_day: {}
+      };
+      
+      // Process changes
+      allChanges.forEach(change => {
+        // Count by user
+        const userId = change.user_id || 'unknown';
+        stats.changes_by_user[userId] = (stats.changes_by_user[userId] || 0) + 1;
+        
+        // Count by action
+        const action = change.action || 'unknown';
+        stats.changes_by_action[action] = (stats.changes_by_action[action] || 0) + 1;
+        
+        // Count by day
+        const day = new Date(change.timestamp).toISOString().split('T')[0];
+        stats.changes_by_day[day] = (stats.changes_by_day[day] || 0) + 1;
+      });
       
       return { 
         success: true, 
-        data: changeStats 
+        data: stats 
       };
     } catch (error) {
       request.log.error(error);
@@ -100,42 +257,119 @@ async function routes(fastify, options) {
         language, 
         namespace, 
         keyPath, 
-        actionType, 
-        previousValue, 
+        action, 
+        oldValue, 
         newValue, 
         userId, 
         userName 
       } = request.body;
       
-      if (!language || !namespace || !keyPath || !actionType) {
+      if (!namespace || !keyPath || !action || !userId || !userName) {
         return reply.code(400).send({ 
           success: false, 
-          error: 'Missing required fields: language, namespace, keyPath, actionType' 
+          error: 'Missing required fields' 
         });
       }
       
-      const historyRecord = history.recordChange(
-        projectName,
-        language,
-        namespace,
+      // Find the metadata file
+      const metadata = await findMetadataFile(projectName, namespace, keyPath);
+      
+      if (!metadata) {
+        return reply.code(404).send({
+          success: false,
+          error: 'Metadata not found for this key'
+        });
+      }
+      
+      // Create history entry
+      const historyEntry = {
+        action,
+        old_value: oldValue,
+        new_value: newValue,
+        user_id: userId,
+        user_name: userName,
+        timestamp: new Date().toISOString()
+      };
+      
+      // Add to history
+      if (!metadata.data.history) {
+        metadata.data.history = [];
+      }
+      
+      metadata.data.history.push(historyEntry);
+      
+      // Update timestamp
+      metadata.data.updated_at = new Date().toISOString();
+      
+      // Save updated metadata
+      await fs.writeJson(metadata.filePath, metadata.data, { spaces: 2 });
+      
+      // Broadcast update to connected clients
+      fastify.io.emit('history:recorded', { 
+        projectName, 
+        language, 
+        namespace, 
         keyPath,
-        actionType,
-        previousValue || null,
-        newValue || null,
-        userId || null,
-        userName || null
-      );
+        action
+      });
       
       return { 
         success: true, 
-        data: historyRecord,
-        message: 'History record created successfully' 
+        data: historyEntry 
       };
     } catch (error) {
       request.log.error(error);
       return reply.code(500).send({ 
         success: false, 
-        error: 'Failed to create history record' 
+        error: 'Failed to record history entry' 
+      });
+    }
+  });
+
+  // Get all history for a project (admin)  
+  fastify.get('/:projectName/all', async (request, reply) => {
+    try {
+      const { projectName } = request.params;
+      const { limit = 100 } = request.query;
+      
+      // Get all metadata files for this project
+      const metadataFiles = await findProjectMetadataFiles(projectName);
+      
+      // Extract all history entries
+      const allHistory = [];
+      
+      for (const { data } of metadataFiles) {
+        if (data.history && Array.isArray(data.history)) {
+          // Add context to each history entry
+          const entriesWithContext = data.history.map(entry => ({
+            ...entry,
+            key_path: data.key_path,
+            namespace: data.namespace,
+            project: data.project
+          }));
+          
+          allHistory.push(...entriesWithContext);
+        }
+      }
+      
+      // Sort by timestamp (newest first)
+      const sortedHistory = allHistory.sort((a, b) => {
+        return new Date(b.timestamp) - new Date(a.timestamp);
+      });
+      
+      // Apply limit
+      const limitedHistory = limit ? sortedHistory.slice(0, parseInt(limit)) : sortedHistory;
+      
+      return { 
+        success: true, 
+        data: limitedHistory,
+        total: allHistory.length
+      };
+    } catch (error) {
+      request.log.error(error);
+      return reply.code(500).send({ 
+        success: false, 
+        error: 'Failed to get all history' 
       });
     }
   });
@@ -145,7 +379,7 @@ async function routes(fastify, options) {
     try {
       const { daysToKeep = 90 } = request.body;
       
-      const deletedCount = history.cleanupOldRecords(parseInt(daysToKeep));
+      const deletedCount = await cleanupOldRecords(parseInt(daysToKeep));
       
       return { 
         success: true, 

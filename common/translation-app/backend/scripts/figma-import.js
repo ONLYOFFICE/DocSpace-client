@@ -1,22 +1,23 @@
 /**
- * Script to import text and component references from Figma into the SQLite database
+ * Script to import text and component references from Figma into file-based metadata
  * 
  * This script:
  * 1. Connects to the Figma API using the FIGMA_API_KEY from .env
  * 2. Fetches a Figma file structure
  * 3. Extracts text elements and their component references
- * 4. Stores the data in the SQLite database for use in the translation system
+ * 4. Stores the data in file-based metadata for use in the translation system
  * 
- * Usage: node scripts/figma-import.js <figma-file-key>
- * Example: node scripts/figma-import.js 12345abcdef
+ * Usage: node scripts/figma-import.js <figma-file-key> [project-name] [namespace]
+ * Example: node scripts/figma-import.js 12345abcdef Common figma
  */
 
 require('dotenv').config();
 const fetch = require('node-fetch');
 const path = require('path');
-const { getDatabase } = require('../src/db/connection');
-const { figmaReferences, translationsMetadata, history } = require('../src/db/repository');
-const dbMigrations = require('../src/db/migrations');
+const fs = require('fs-extra');
+const glob = require('glob');
+const appRootPath = require('app-root-path').toString();
+const { projectLocalesMap } = require('../src/config/config');
 
 // Constants
 const FIGMA_API_KEY = process.env.FIGMA_API_KEY;
@@ -28,14 +29,32 @@ if (!FIGMA_API_KEY) {
   process.exit(1);
 }
 
-// Initialize database
-console.log('Initializing database...');
-const dbInitialized = dbMigrations.initializeDatabase();
-if (!dbInitialized) {
-  console.error('Failed to initialize database');
+// Ensure metadata directories exist
+console.log('Initializing metadata directories...');
+function ensureMetadataDirectories() {
+  try {
+    for (const project in projectLocalesMap) {
+      const localesPath = projectLocalesMap[project];
+      if (!localesPath) continue;
+      
+      const projectPath = path.join(appRootPath, localesPath);
+      const metaDir = path.join(projectPath, '.meta');
+      
+      fs.ensureDirSync(metaDir);
+      console.log(`Metadata directory ensured for project: ${project}`);
+    }
+    return true;
+  } catch (error) {
+    console.error('Failed to initialize metadata directories:', error);
+    return false;
+  }
+}
+
+if (!ensureMetadataDirectories()) {
+  console.error('Failed to initialize metadata directories');
   process.exit(1);
 }
-console.log('Database initialized successfully');
+console.log('Metadata directories initialized successfully');
 
 // Get Figma file key from command line arguments
 const args = process.argv.slice(2);
@@ -243,82 +262,192 @@ function generateTranslationKey(text, path) {
 }
 
 /**
- * Store text elements in the database
+ * Find or create metadata file for a key
+ * @param {string} projectName - Project name
+ * @param {string} namespace - Namespace
+ * @param {string} keyPath - Key path
+ * @returns {Promise<{filePath: string, data: object}>} File path and existing data
+ */
+async function findOrCreateMetadataFile(projectName, namespace, keyPath) {
+  const localesPath = projectLocalesMap[projectName];
+  if (!localesPath) {
+    throw new Error(`Project ${projectName} not found in configuration`);
+  }
+  
+  const projectPath = path.join(appRootPath, localesPath);
+  const namespacePath = path.join(projectPath, '.meta', namespace);
+  
+  // Ensure namespace directory exists
+  await fs.ensureDir(namespacePath);
+  
+  // Determine file path for key
+  const metadataFilePath = path.join(namespacePath, `${keyPath}.json`);
+  
+  // Check if the file exists and create it if not
+  let data = {};
+  try {
+    if (await fs.pathExists(metadataFilePath)) {
+      data = await fs.readJson(metadataFilePath);
+    } else {
+      // Initialize new metadata file
+      data = {
+        key_path: keyPath,
+        namespace: namespace,
+        project: projectName,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+        status: 'new',
+        usage: [],
+        figma_references: [],
+        history: []
+      };
+    }
+    
+    return { filePath: metadataFilePath, data };
+  } catch (error) {
+    console.error(`Error finding/creating metadata file for ${keyPath}:`, error);
+    throw error;
+  }
+}
+
+/**
+ * Store text elements in file-based metadata
  * @param {Array} textElements - Text elements to store
  * @param {string} figmaFileKey - Figma file key
  * @returns {Promise<void>}
  */
 async function storeTextElements(textElements, figmaFileKey) {
-  console.log(`Storing ${textElements.length} text elements in the database...`);
+  console.log(`Storing ${textElements.length} text elements in file-based metadata...`);
   
-  // Get database connection
-  const db = getDatabase();
+  // Process each text element
+  let processedCount = 0;
   
-  // Process in transaction for better performance
-  try {
-    await db.transaction(() => {
-      // Store each text element
-      for (const element of textElements) {
-        // Generate a key for the translation
-        const keyPath = options.generateKeys ? 
-          generateTranslationKey(element.characters, element.path) : 
-          `figma_${element.id}`;
-        
-        // Store in metadata
-        const metadata = translationsMetadata.findOrCreate(
-          options.projectName, 
-          BASE_LANGUAGE, 
-          options.namespace,
-          keyPath
-        );
-        
-        // Update metadata with context from Figma
-        translationsMetadata.update(metadata.id, {
-          context: `Figma path: ${element.path}`,
-          notes: `Imported from Figma file ${figmaFileKey}`,
-          status: 'review_needed',
-          updated_at: new Date().toISOString()
-        });
-        
-        // Store Figma reference
-        figmaReferences.addReference(
-          options.projectName,
-          BASE_LANGUAGE,
-          options.namespace,
-          keyPath,
-          {
-            figmaFileKey: figmaFileKey,
-            figmaNodeId: element.id,
-            componentName: element.componentName || element.name,
-            screenName: element.screen
+  for (const element of textElements) {
+    try {
+      // Generate a key for the translation
+      const keyPath = options.generateKeys ? 
+        generateTranslationKey(element.characters, element.path) : 
+        `figma_${element.id}`;
+      
+      // Find or create metadata file
+      const { filePath, data } = await findOrCreateMetadataFile(
+        options.projectName,
+        options.namespace,
+        keyPath
+      );
+      
+      // Update metadata with context from Figma
+      data.context = `Figma path: ${element.path}`;
+      data.notes = `Imported from Figma file ${figmaFileKey}`;
+      data.status = 'review_needed';
+      data.updated_at = new Date().toISOString();
+      
+      // Add or update Figma reference
+      const figmaReference = {
+        figma_file_key: figmaFileKey,
+        figma_node_id: element.id,
+        component_name: element.componentName || element.name,
+        screen_name: element.screen,
+        updated_at: new Date().toISOString()
+      };
+      
+      // Check if reference already exists and update it
+      const existingRefIndex = (data.figma_references || []).findIndex(
+        ref => ref.figma_node_id === element.id
+      );
+      
+      if (existingRefIndex >= 0) {
+        data.figma_references[existingRefIndex] = {
+          ...data.figma_references[existingRefIndex],
+          ...figmaReference
+        };
+      } else {
+        // Initialize if needed
+        if (!data.figma_references) {
+          data.figma_references = [];
+        }
+        data.figma_references.push(figmaReference);
+      }
+      
+      // Record import in history
+      if (!data.history) {
+        data.history = [];
+      }
+      
+      data.history.push({
+        action: 'figma_import',
+        old_value: null,
+        new_value: element.characters,
+        user_id: 'figma-import-script',
+        user_name: 'Figma Import Script',
+        timestamp: new Date().toISOString()
+      });
+      
+      // Write updated metadata back to file
+      await fs.writeJson(filePath, data, { spaces: 2 });
+      
+      // Log progress for every 10 items
+      processedCount++;
+      if (processedCount % 10 === 0) {
+        console.log(`Processed ${processedCount}/${textElements.length} elements`);
+      }
+    } catch (error) {
+      console.error(`Error processing element ${element.id}:`, error);
+      // Continue with other elements despite the error
+    }
+  }
+  
+  console.log('All text elements stored successfully');
+}
+
+/**
+ * Find metadata files that reference a specific Figma node ID
+ * @param {string} figmaFileKey - Figma file key
+ * @param {string} nodeId - Figma node ID
+ * @returns {Promise<Array<{filePath: string, data: object}>>} Matching metadata files
+ */
+async function findMetadataFilesWithFigmaNodeId(figmaFileKey, nodeId) {
+  const matches = [];
+  
+  // Search through all projects
+  for (const project in projectLocalesMap) {
+    const localesPath = projectLocalesMap[project];
+    if (!localesPath) continue;
+    
+    const projectPath = path.join(appRootPath, localesPath);
+    const metaDir = path.join(projectPath, '.meta');
+    
+    if (!await fs.pathExists(metaDir)) continue;
+    
+    // Get all namespace directories
+    const namespaceDirs = await fs.readdir(metaDir);
+    
+    for (const namespace of namespaceDirs) {
+      const namespacePath = path.join(metaDir, namespace);
+      if (!(await fs.stat(namespacePath)).isDirectory()) continue;
+      
+      // Get all metadata files in this namespace
+      const metadataFiles = glob.sync(path.join(namespacePath, '*.json'));
+      
+      for (const filePath of metadataFiles) {
+        try {
+          const data = await fs.readJson(filePath);
+          
+          // Check if this file references the Figma node
+          if (data.figma_references && 
+              data.figma_references.some(ref => 
+                ref.figma_file_key === figmaFileKey && 
+                ref.figma_node_id === nodeId)) {
+            matches.push({ filePath, data });
           }
-        );
-        
-        // Record import in history
-        history.recordChange(
-          options.projectName,
-          BASE_LANGUAGE,
-          options.namespace,
-          keyPath,
-          'figma_import',
-          null,
-          element.characters,
-          'figma-import-script',
-          'Figma Import Script'
-        );
-        
-        // Log progress for every 10 items
-        if (textElements.indexOf(element) % 10 === 0) {
-          console.log(`Processed ${textElements.indexOf(element)}/${textElements.length} elements`);
+        } catch (error) {
+          console.error(`Error reading metadata file ${filePath}:`, error);
         }
       }
-    })();
-    
-    console.log('All text elements stored successfully');
-  } catch (error) {
-    console.error('Error storing text elements:', error);
-    throw error;
+    }
   }
+  
+  return matches;
 }
 
 /**
@@ -334,7 +463,7 @@ async function main() {
     const textElements = extractTextElements(figmaData.document);
     console.log(`Found ${textElements.length} text elements`);
     
-    // Store text elements in the database
+    // Store text elements in file-based metadata
     await storeTextElements(textElements, figmaFileKey);
     
     // Process thumbnails in batches
@@ -349,18 +478,26 @@ async function main() {
       
       // Process each thumbnail sequentially with rate limiting
       for (const element of batch) {
-        // Find the reference in the database
-        const refs = figmaReferences.findBy({
-          figma_file_key: figmaFileKey,
-          figma_node_id: element.id
-        });
+        // Find the metadata files that reference this Figma node
+        const metadataFiles = await findMetadataFilesWithFigmaNodeId(figmaFileKey, element.id);
         
-        if (refs.length > 0) {
+        if (metadataFiles.length > 0) {
           const thumbnailUrl = await getNodeThumbnail(figmaFileKey, element.id);
           
           if (thumbnailUrl) {
-            // Update thumbnail URL in the database
-            figmaReferences.updateThumbnail(refs[0].id, thumbnailUrl);
+            // Update thumbnail URL in all relevant metadata files
+            for (const { filePath, data } of metadataFiles) {
+              // Find the figma reference in the data
+              const refIndex = data.figma_references.findIndex(
+                ref => ref.figma_node_id === element.id
+              );
+              
+              if (refIndex >= 0) {
+                data.figma_references[refIndex].thumbnail_url = thumbnailUrl;
+                data.updated_at = new Date().toISOString();
+                await fs.writeJson(filePath, data, { spaces: 2 });
+              }
+            }
           }
           
           // Add delay between requests to avoid rate limiting

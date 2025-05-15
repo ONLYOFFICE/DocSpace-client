@@ -1,7 +1,72 @@
 /**
- * Routes for managing translations metadata
+ * Routes for managing translations metadata using file-based storage
  */
-const { translationsMetadata } = require('../../db/repository');
+const path = require('path');
+const fs = require('fs-extra');
+const appRootPath = require('app-root-path').toString();
+const { projectLocalesMap } = require('../../config/config');
+const glob = require('glob');
+
+/**
+ * Find metadata file for a specific key
+ * @param {string} projectName - Project name
+ * @param {string} namespace - Namespace
+ * @param {string} keyPath - Key path
+ * @returns {Promise<{filePath: string, data: object}>} Metadata file info
+ */
+async function findMetadataFile(projectName, namespace, keyPath) {
+  const localesPath = projectLocalesMap[projectName];
+  if (!localesPath) {
+    throw new Error(`Project ${projectName} not found in configuration`);
+  }
+  
+  const projectPath = path.join(appRootPath, localesPath);
+  const metaDir = path.join(projectPath, '.meta');
+  const namespacePath = path.join(metaDir, namespace);
+  const metadataFilePath = path.join(namespacePath, `${keyPath}.json`);
+  
+  if (await fs.pathExists(metadataFilePath)) {
+    const data = await fs.readJson(metadataFilePath);
+    return { filePath: metadataFilePath, data };
+  }
+  
+  return null;
+}
+
+/**
+ * Find all metadata files for a namespace
+ * @param {string} projectName - Project name
+ * @param {string} namespace - Namespace
+ * @returns {Promise<Array<{filePath: string, data: object}>>} Metadata files
+ */
+async function findNamespaceMetadataFiles(projectName, namespace) {
+  const localesPath = projectLocalesMap[projectName];
+  if (!localesPath) {
+    throw new Error(`Project ${projectName} not found in configuration`);
+  }
+  
+  const projectPath = path.join(appRootPath, localesPath);
+  const metaDir = path.join(projectPath, '.meta');
+  const namespacePath = path.join(metaDir, namespace);
+  
+  if (!await fs.pathExists(namespacePath)) {
+    return [];
+  }
+  
+  const files = glob.sync(path.join(namespacePath, '*.json'));
+  const result = [];
+  
+  for (const filePath of files) {
+    try {
+      const data = await fs.readJson(filePath);
+      result.push({ filePath, data });
+    } catch (error) {
+      console.error(`Error reading metadata file ${filePath}:`, error);
+    }
+  }
+  
+  return result;
+}
 
 /**
  * @param {FastifyInstance} fastify - Fastify instance
@@ -9,169 +74,245 @@ const { translationsMetadata } = require('../../db/repository');
  */
 async function routes(fastify, options) {
   // Get metadata for a specific translation key
-  fastify.get('/:projectName/:language/:namespace/key', async (request, reply) => {
-    try {
-      const { projectName, language, namespace } = request.params;
-      const { keyPath } = request.query;
-      
-      if (!keyPath) {
-        return reply.code(400).send({ 
-          success: false, 
-          error: 'Key path is required' 
+  fastify.get(
+    "/:projectName/:language/:namespace/key",
+    async (request, reply) => {
+      try {
+        const { projectName, language, namespace } = request.params;
+        const { keyPath } = request.query;
+
+        if (!keyPath) {
+          return reply.code(400).send({
+            success: false,
+            error: "Key path is required",
+          });
+        }
+
+        const metadata = await findMetadataFile(projectName, namespace, keyPath);
+
+        if (!metadata) {
+          return reply.code(404).send({
+            success: false,
+            error: "Metadata not found for this key",
+          });
+        }
+
+        return { success: true, data: metadata.data };
+      } catch (error) {
+        request.log.error(error);
+        return reply.code(500).send({
+          success: false,
+          error: "Failed to get translation metadata",
         });
       }
-      
-      const metadata = translationsMetadata.findForTranslationKey(
-        projectName, language, namespace, keyPath
-      );
-      
-      if (!metadata) {
-        return reply.code(404).send({ 
-          success: false, 
-          error: 'Metadata not found for this key' 
-        });
-      }
-      
-      return { success: true, data: metadata };
-    } catch (error) {
-      request.log.error(error);
-      return reply.code(500).send({ 
-        success: false, 
-        error: 'Failed to get translation metadata' 
-      });
     }
-  });
-  
+  );
+
   // Get metadata for all keys in a namespace
-  fastify.get('/:projectName/:language/:namespace', async (request, reply) => {
+  fastify.get("/:projectName/:language/:namespace", async (request, reply) => {
     try {
       const { projectName, language, namespace } = request.params;
       
-      const metadataList = translationsMetadata.findForNamespace(
-        projectName, language, namespace
-      );
+      const metadataFiles = await findNamespaceMetadataFiles(projectName, namespace);
+      
+      // Transform data for response
+      const metadataList = metadataFiles.map(file => file.data);
       
       return { 
         success: true, 
-        data: metadataList 
+        data: metadataList,
+        count: metadataList.length
       };
     } catch (error) {
       request.log.error(error);
-      return reply.code(500).send({ 
-        success: false, 
-        error: 'Failed to get namespace metadata' 
+      return reply.code(500).send({
+        success: false,
+        error: "Failed to get namespace metadata",
       });
     }
   });
-  
-  // Create or update metadata for a translation key
-  fastify.put('/:projectName/:language/:namespace/key', async (request, reply) => {
+
+  // Update metadata for a specific key
+  fastify.put(
+    "/:projectName/:language/:namespace/key", 
+    async (request, reply) => {
+      try {
+        const { projectName, language, namespace } = request.params;
+        const { keyPath } = request.query;
+        const updates = request.body;
+        
+        if (!keyPath) {
+          return reply.code(400).send({
+            success: false,
+            error: "Key path is required",
+          });
+        }
+        
+        if (!updates || typeof updates !== 'object') {
+          return reply.code(400).send({
+            success: false,
+            error: "Update data must be a valid object",
+          });
+        }
+        
+        // Check if metadata exists
+        let metadata = await findMetadataFile(projectName, namespace, keyPath);
+        
+        if (!metadata) {
+          // Create new metadata file
+          const localesPath = projectLocalesMap[projectName];
+          if (!localesPath) {
+            return reply.code(404).send({
+              success: false,
+              error: `Project ${projectName} not found in configuration`,
+            });
+          }
+          
+          // Create directories if needed
+          const projectPath = path.join(appRootPath, localesPath);
+          const metaDir = path.join(projectPath, '.meta');
+          const namespacePath = path.join(metaDir, namespace);
+          
+          await fs.ensureDir(namespacePath);
+          
+          const metadataFilePath = path.join(namespacePath, `${keyPath}.json`);
+          
+          // Initialize new metadata
+          const newMetadata = {
+            key_path: keyPath,
+            namespace,
+            project: projectName,
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+            status: updates.status || 'new',
+            priority: updates.priority || 'normal',
+            context: updates.context || '',
+            notes: updates.notes || '',
+            usage: []
+          };
+          
+          await fs.writeJson(metadataFilePath, newMetadata, { spaces: 2 });
+          
+          return {
+            success: true,
+            data: newMetadata,
+            created: true
+          };
+        } else {
+          // Update existing metadata
+          const updatedData = {
+            ...metadata.data,
+            ...updates,
+            updated_at: new Date().toISOString()
+          };
+          
+          // Write updated metadata back to file
+          await fs.writeJson(metadata.filePath, updatedData, { spaces: 2 });
+          
+          return { 
+            success: true, 
+            data: updatedData,
+            updated: true
+          };
+        }
+      } catch (error) {
+        request.log.error(error);
+        return reply.code(500).send({
+          success: false,
+          error: "Failed to update translation metadata",
+        });
+      }
+    }
+  );
+
+  // Get all metadata
+  fastify.get("/:projectName/:language", async (request, reply) => {
     try {
-      const { projectName, language, namespace } = request.params;
-      const { keyPath, status, priority, context, notes } = request.body;
+      const { projectName, language } = request.params;
+      const allMetadata = [];
       
-      if (!keyPath) {
-        return reply.code(400).send({ 
-          success: false, 
-          error: 'Key path is required' 
+      // Get project path
+      const localesPath = projectLocalesMap[projectName];
+      if (!localesPath) {
+        return reply.code(404).send({
+          success: false,
+          error: `Project ${projectName} not found in configuration`,
         });
       }
       
-      let metadata = translationsMetadata.findForTranslationKey(
-        projectName, language, namespace, keyPath
-      );
+      const projectPath = path.join(appRootPath, localesPath);
+      const metaDir = path.join(projectPath, '.meta');
       
-      if (metadata) {
-        // Update existing metadata
-        metadata = translationsMetadata.update(metadata.id, {
-          status: status || metadata.status,
-          priority: priority || metadata.priority,
-          context: context !== undefined ? context : metadata.context,
-          notes: notes !== undefined ? notes : metadata.notes,
-          updated_at: new Date().toISOString()
-        });
-      } else {
-        // Create new metadata
-        metadata = translationsMetadata.create({
-          project_name: projectName,
-          language,
-          namespace,
-          key_path: keyPath,
-          status: status || 'pending',
-          priority: priority || 'normal',
-          context,
-          notes,
-          ai_translated: 0
-        });
+      if (!await fs.pathExists(metaDir)) {
+        return { success: true, data: [], count: 0 };
       }
       
-      // Broadcast update to connected clients
-      fastify.io.emit('metadata:updated', { 
-        projectName, 
-        language, 
-        namespace, 
-        keyPath 
-      });
+      // Get all namespace directories
+      const namespaceDirs = await fs.readdir(metaDir);
       
-      return { 
-        success: true, 
-        data: metadata,
-        message: 'Metadata updated successfully' 
+      for (const namespace of namespaceDirs) {
+        const namespacePath = path.join(metaDir, namespace);
+        if (!(await fs.stat(namespacePath)).isDirectory()) continue;
+        
+        const metadataFiles = await findNamespaceMetadataFiles(projectName, namespace);
+        const namespaceMetadata = metadataFiles.map(file => file.data);
+        allMetadata.push(...namespaceMetadata);
+      }
+      
+      return {
+        success: true,
+        data: allMetadata,
+        count: allMetadata.length
       };
     } catch (error) {
       request.log.error(error);
-      return reply.code(500).send({ 
-        success: false, 
-        error: 'Failed to update translation metadata' 
+      return reply.code(500).send({
+        success: false,
+        error: "Failed to get all metadata",
       });
     }
   });
   
-  // Get all pending translations for a project
-  fastify.get('/:projectName/pending', async (request, reply) => {
-    try {
-      const { projectName } = request.params;
-      const { language } = request.query;
-      
-      const pendingTranslations = translationsMetadata.getPendingTranslations(
-        projectName, language || null
-      );
-      
-      return { 
-        success: true, 
-        data: pendingTranslations 
-      };
-    } catch (error) {
-      request.log.error(error);
-      return reply.code(500).send({ 
-        success: false, 
-        error: 'Failed to get pending translations' 
-      });
+  // Delete metadata for a key
+  fastify.delete(
+    "/:projectName/:language/:namespace/key",
+    async (request, reply) => {
+      try {
+        const { projectName, language, namespace } = request.params;
+        const { keyPath } = request.query;
+        
+        if (!keyPath) {
+          return reply.code(400).send({
+            success: false,
+            error: "Key path is required",
+          });
+        }
+        
+        const metadata = await findMetadataFile(projectName, namespace, keyPath);
+        
+        if (!metadata) {
+          return reply.code(404).send({
+            success: false,
+            error: "Metadata not found for this key",
+          });
+        }
+        
+        // Delete the file
+        await fs.remove(metadata.filePath);
+        
+        return {
+          success: true,
+          message: `Metadata for key ${keyPath} deleted successfully`
+        };
+      } catch (error) {
+        request.log.error(error);
+        return reply.code(500).send({
+          success: false,
+          error: "Failed to delete translation metadata",
+        });
+      }
     }
-  });
-  
-  // Get all AI translated items for a project
-  fastify.get('/:projectName/ai-translated', async (request, reply) => {
-    try {
-      const { projectName } = request.params;
-      const { language } = request.query;
-      
-      const aiTranslatedItems = translationsMetadata.getAiTranslatedItems(
-        projectName, language || null
-      );
-      
-      return { 
-        success: true, 
-        data: aiTranslatedItems 
-      };
-    } catch (error) {
-      request.log.error(error);
-      return reply.code(500).send({ 
-        success: false, 
-        error: 'Failed to get AI translated items' 
-      });
-    }
-  });
+  );
 }
 
 module.exports = routes;

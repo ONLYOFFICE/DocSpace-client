@@ -10,15 +10,14 @@
   },
   "dependencies": {
     "@fastify/cors": "^8.3.0",
-    "better-sqlite3": "^11.9.1",
+    "app-root-path": "^3.1.0",
     "dotenv": "^16.5.0",
     "fastify": "^4.24.0",
     "fastify-socket.io": "^5.0.0",
     "fs-extra": "^11.1.1",
+    "glob": "^10.2.7",
     "node-fetch": "^2.7.0",
-    "ollama": "^0.5.15",
-    "sqlite": "^5.1.1",
-    "sqlite3": "^5.1.7"
+    "ollama": "^0.5.15"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

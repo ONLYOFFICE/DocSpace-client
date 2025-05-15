@@ -5,7 +5,7 @@
  *
  * This script helps set up the environment for tracking translation key usage:
  * 1. Installs required dependencies
- * 2. Creates database directory if it doesn't exist
+ * 2. Creates metadata directories if they don't exist
  * 3. Runs initial analysis of codebase
  *
  * Run with: node setup-key-usage.js
@@ -14,7 +14,8 @@
 const fs = require("fs-extra");
 const path = require("path");
 const { execSync } = require("child_process");
-const { dbConfig } = require("./src/config/config");
+const { projectLocalesMap } = require("./src/config/config");
+const appRootPath = require('app-root-path').toString();
 
 // Colors for console output
 const colors = {
@@ -66,8 +67,9 @@ async function main() {
     const packageJson = require(packageJsonPath);
 
     const requiredDeps = {
-      sqlite3: "^5.1.6",
-      sqlite: "^5.0.1",
+      "fs-extra": "^11.1.0",
+      "app-root-path": "^3.1.0",
+      "glob": "^10.2.7"
     };
 
     let needsInstall = false;
@@ -102,22 +104,31 @@ async function main() {
     process.exit(1);
   }
 
-  // Step 2: Set up database directory
+  // Step 2: Set up metadata directories
   console.log(
-    `${colors.fg.yellow}[2/3] Setting up database directory...${colors.reset}`
+    `${colors.fg.yellow}[2/3] Setting up metadata directories...${colors.reset}`
   );
   try {
-    // Ensure the dbPath directory exists
-    // Make sure we're not trying to create a directory with the .db file name
-    const dbDir = path.dirname(path.resolve(dbConfig.dbPath));
-    await fs.ensureDir(dbDir);
-    console.log(`  Database directory: ${dbDir}`);
+    // Ensure metadata directories exist for each project
+    const projects = Object.keys(projectLocalesMap);
+    
+    for (const project of projects) {
+      const localesPath = projectLocalesMap[project];
+      if (!localesPath) continue;
+      
+      const projectPath = path.join(appRootPath, localesPath);
+      const metaDir = path.join(projectPath, '.meta');
+      
+      await fs.ensureDir(metaDir);
+      console.log(`  Created metadata directory: ${metaDir}`);
+    }
+    
     console.log(
-      `${colors.fg.green}✓ Database directory ready${colors.reset}\n`
+      `${colors.fg.green}✓ Metadata directories ready${colors.reset}\n`
     );
   } catch (error) {
     console.error(
-      `${colors.fg.red}✗ Error setting up database directory:${colors.reset}`,
+      `${colors.fg.red}✗ Error setting up metadata directories:${colors.reset}`,
       error
     );
     process.exit(1);

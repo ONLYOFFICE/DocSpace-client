@@ -56,6 +56,7 @@ if test_install.returncode != 0:
 
 # Start Docker Compose
 print("Starting Docker Compose...")
+os.environ["OLLAMA_API_URL"] = "http://host.docker.internal:11434"
 docker_compose = subprocess.run(
     "docker-compose up -d --build", cwd=rd, shell=True)
 if docker_compose.returncode != 0:

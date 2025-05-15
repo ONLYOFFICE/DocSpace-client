@@ -9,13 +9,212 @@ const {
   BASE_DIR,
   moduleWorkspaces,
 } = require("../../../../tests/utils/files");
-const {
-  initializeDatabase,
-  storeTranslationKey,
-  recordKeyUsage,
-  setKeyAutoComment,
-  clearKeyUsageData,
-} = require("./dbUtils");
+
+/**
+ * Find metadata file for a specific key
+ * @param {string} projectName - Project name
+ * @param {string} namespace - Namespace
+ * @param {string} keyPath - Key path
+ * @returns {Promise<{filePath: string, data: Object}|null>} Metadata file info
+ */
+async function findMetadataFile(projectName, namespace, keyPath) {
+  const localesPath = projectLocalesMap[projectName];
+  if (!localesPath) {
+    console.warn(`Project ${projectName} not found in configuration`);
+    return null;
+  }
+  
+  const projectPath = path.join(appRootPath, localesPath);
+  const metaDir = path.join(projectPath, '.meta');
+  const namespacePath = path.join(metaDir, namespace);
+  const metadataFilePath = path.join(namespacePath, `${keyPath}.json`);
+  
+  if (await fs.pathExists(metadataFilePath)) {
+    try {
+      const data = await fs.readJson(metadataFilePath);
+      return { filePath: metadataFilePath, data };
+    } catch (error) {
+      console.error(`Error reading metadata file ${metadataFilePath}:`, error);
+      return null;
+    }
+  }
+  
+  return null;
+}
+
+/**
+ * Create or update metadata file for a translation key
+ * @param {string} projectName - Project name
+ * @param {string} namespace - Namespace
+ * @param {string} keyPath - Key path
+ * @param {Object} data - Optional default data
+ * @returns {Promise<{filePath: string, data: Object}>} Created metadata file
+ */
+async function createOrUpdateMetadataFile(projectName, namespace, keyPath, data = {}) {
+  const localesPath = projectLocalesMap[projectName];
+  if (!localesPath) {
+    throw new Error(`Project ${projectName} not found in configuration`);
+  }
+  
+  const projectPath = path.join(appRootPath, localesPath);
+  const metaDir = path.join(projectPath, '.meta');
+  const namespacePath = path.join(metaDir, namespace);
+  const metadataFilePath = path.join(namespacePath, `${keyPath}.json`);
+  
+  // Create directories if they don't exist
+  await fs.ensureDir(namespacePath);
+  
+  let metadata;
+  
+  // Check if file exists
+  if (await fs.pathExists(metadataFilePath)) {
+    try {
+      metadata = await fs.readJson(metadataFilePath);
+    } catch (error) {
+      console.warn(`Error reading existing metadata file ${metadataFilePath}, creating new one:`, error);
+      metadata = {};
+    }
+  } else {
+    metadata = {};
+  }
+  
+  // Update metadata with new data
+  const now = new Date().toISOString();
+  
+  metadata = {
+    key_path: keyPath,
+    namespace,
+    project_name: projectName,
+    created_at: metadata.created_at || now,
+    updated_at: now,
+    ...metadata,
+    ...data
+  };
+  
+  // Write updated metadata
+  await fs.writeJson(metadataFilePath, metadata, { spaces: 2 });
+  
+  return { filePath: metadataFilePath, data: metadata };
+}
+
+/**
+ * Record usage of a translation key in its metadata file
+ * @param {string} projectName - Project name
+ * @param {string} namespace - Namespace
+ * @param {string} keyPath - Key path
+ * @param {string} filePath - Path to the file where key is used
+ * @param {number} lineNumber - Line number where key is used
+ * @param {string} context - Code context
+ * @returns {Promise<Object>} Updated metadata
+ */
+async function recordKeyUsage(projectName, namespace, keyPath, filePath, lineNumber, context) {
+  // Find or create metadata file
+  const metadata = await findMetadataFile(projectName, namespace, keyPath);
+  
+  // If metadata doesn't exist, create it
+  const now = new Date().toISOString();
+  const relativeFilePath = filePath.replace(appRootPath, '').replace(/^\/+/, '');
+  
+  let updatedMetadata;
+  
+  if (metadata) {
+    // Update existing metadata
+    if (!metadata.data.usage) {
+      metadata.data.usage = [];
+    }
+    
+    // Check if this usage already exists
+    const existingIndex = metadata.data.usage.findIndex(u => 
+      u.file_path === relativeFilePath && u.line_number === lineNumber
+    );
+    
+    const usage = {
+      id: Date.now().toString(),
+      file_path: relativeFilePath,
+      line_number: lineNumber,
+      context: context || '',
+      created_at: now
+    };
+    
+    if (existingIndex >= 0) {
+      // Update existing usage
+      metadata.data.usage[existingIndex] = usage;
+    } else {
+      // Add new usage
+      metadata.data.usage.push(usage);
+    }
+    
+    // Update timestamp
+    metadata.data.updated_at = now;
+    
+    // Save updated metadata
+    await fs.writeJson(metadata.filePath, metadata.data, { spaces: 2 });
+    updatedMetadata = metadata.data;
+  } else {
+    // Create new metadata file
+    const result = await createOrUpdateMetadataFile(projectName, namespace, keyPath, {
+      usage: [{
+        id: Date.now().toString(),
+        file_path: relativeFilePath,
+        line_number: lineNumber,
+        context: context || '',
+        created_at: now
+      }]
+    });
+    updatedMetadata = result.data;
+  }
+  
+  return updatedMetadata;
+}
+
+/**
+ * Clear all key usage data by removing usage sections from metadata files
+ * @returns {Promise<number>} - Number of files cleared
+ */
+async function clearKeyUsageData() {
+  let clearedFiles = 0;
+  const projects = Object.keys(projectLocalesMap);
+  
+  for (const project of projects) {
+    const localesPath = projectLocalesMap[project];
+    if (!localesPath) continue;
+    
+    const projectPath = path.join(appRootPath, localesPath);
+    const metaDir = path.join(projectPath, '.meta');
+    
+    if (!(await fs.pathExists(metaDir))) continue;
+    
+    const namespaceDirs = await fs.readdir(metaDir);
+    
+    for (const namespace of namespaceDirs) {
+      const namespacePath = path.join(metaDir, namespace);
+      if (!(await fs.stat(namespacePath)).isDirectory()) continue;
+      
+      const files = await fs.readdir(namespacePath);
+      
+      for (const file of files) {
+        if (!file.endsWith('.json')) continue;
+        
+        try {
+          const filePath = path.join(namespacePath, file);
+          const data = await fs.readJson(filePath);
+          
+          if (data.usage) {
+            // Remove usage data
+            delete data.usage;
+            data.updated_at = new Date().toISOString();
+            await fs.writeJson(filePath, data, { spaces: 2 });
+            clearedFiles++;
+          }
+        } catch (error) {
+          console.error(`Error clearing usage data for file ${file}:`, error);
+        }
+      }
+    }
+  }
+  
+  return clearedFiles;
+};
 
 /**
  * Extracts code context surrounding a specific line
@@ -143,18 +342,16 @@ async function extractTranslationKeys(filePath) {
 }
 
 /**
- * Analyzes the codebase and records translation key usage in the database
+ * Analyzes the codebase and records translation key usage in metadata files
  * @returns {Promise<void>}
  */
 async function analyzeCodebase() {
-  let db = null;
-
   try {
-    console.log("Initializing database...");
-    db = await initializeDatabase();
+    console.log("Initializing metadata usage tracking...");
 
     // Clear existing usage data for a clean rebuild
-    await clearKeyUsageData(db);
+    const clearedCount = await clearKeyUsageData();
+    console.log(`Cleared usage data from ${clearedCount} metadata files`);
 
     console.log("Getting workspaces...");
     const workspaces = getWorkSpaces();
@@ -179,8 +376,9 @@ async function analyzeCodebase() {
     );
 
     // Process files in batches to avoid memory issues
-    const batchSize = 100;
+    const batchSize = 50;
     let processedCount = 0;
+    const keysProcessed = new Set();
 
     for (let i = 0; i < javascripts.length; i += batchSize) {
       const batch = javascripts.slice(i, i + batchSize);
@@ -190,22 +388,33 @@ async function analyzeCodebase() {
           const keys = await extractTranslationKeys(filePath);
 
           for (const { key, lineNumber, matchText } of keys) {
-            const keyId = await storeTranslationKey(db, key);
+            // Extract namespace and key path
+            let namespace = 'common';
+            let keyPath = key;
+            
+            if (key.includes(':')) {
+              const parts = key.split(':');
+              namespace = parts[0];
+              keyPath = parts[1];
+            }
 
+            // Get the code context
             const context = await getCodeContext(filePath, lineNumber);
+            
+            // Determine project from file path
             const module = identifyModule(filePath);
 
-            // Store relative path from project root
-            const relativePath = path.relative(appRootPath, filePath);
-
+            // Record key usage in metadata file
             await recordKeyUsage(
-              db,
-              keyId,
-              relativePath,
+              module, // projectName
+              namespace,
+              keyPath,
+              filePath,
               lineNumber,
-              context,
-              module
+              context
             );
+            
+            keysProcessed.add(`${module}:${namespace}:${keyPath}`);
           }
         })
       );
@@ -214,17 +423,12 @@ async function analyzeCodebase() {
       console.log(`Processed ${processedCount}/${javascripts.length} files`);
     }
 
-    console.log("Generating initial auto-comments...");
-    await generateAutoComments(db);
-
+    console.log(`Recorded usage for ${keysProcessed.size} unique translation keys`);
     console.log("Analysis complete");
   } catch (error) {
     console.error("Error analyzing codebase:", error);
-  } finally {
-    if (db) {
-      await db.close();
-    }
   }
+
 }
 
 const { Ollama } = require("ollama");

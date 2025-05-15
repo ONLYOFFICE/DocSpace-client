@@ -1,7 +1,36 @@
 /**
- * Routes for managing translation comments
+ * Routes for managing translation comments using file-based metadata
  */
-const { comments, history } = require('../../db/repository');
+const path = require('path');
+const fs = require('fs-extra');
+const appRootPath = require('app-root-path').toString();
+const { projectLocalesMap } = require('../../config/config');
+
+/**
+ * Find metadata file for a specific key
+ * @param {string} projectName - Project name
+ * @param {string} namespace - Namespace
+ * @param {string} keyPath - Key path
+ * @returns {Promise<{filePath: string, data: object}>} Metadata file info
+ */
+async function findMetadataFile(projectName, namespace, keyPath) {
+  const localesPath = projectLocalesMap[projectName];
+  if (!localesPath) {
+    throw new Error(`Project ${projectName} not found in configuration`);
+  }
+  
+  const projectPath = path.join(appRootPath, localesPath);
+  const metaDir = path.join(projectPath, '.meta');
+  const namespacePath = path.join(metaDir, namespace);
+  const metadataFilePath = path.join(namespacePath, `${keyPath}.json`);
+  
+  if (await fs.pathExists(metadataFilePath)) {
+    const data = await fs.readJson(metadataFilePath);
+    return { filePath: metadataFilePath, data };
+  }
+  
+  return null;
+}
 
 /**
  * @param {FastifyInstance} fastify - Fastify instance
@@ -21,17 +50,48 @@ async function routes(fastify, options) {
         });
       }
       
+      // Find the metadata file
+      const metadata = await findMetadataFile(projectName, namespace, keyPath);
+      
+      if (!metadata || !metadata.data) {
+        return reply.code(404).send({
+          success: false,
+          error: 'Metadata not found for this key'
+        });
+      }
+      
+      // Get comments from metadata
+      const allComments = metadata.data.comments || [];
+      
       let commentsList;
       
       // If threaded=true, return comments in thread structure
       if (threaded === true || threaded === 'true') {
-        commentsList = comments.getThreadStructure(
-          projectName, language, namespace, keyPath
-        );
+        // Organize comments in thread structure
+        const threadsMap = {};
+        
+        // First pass: collect top-level comments and initialize threads
+        const topLevelComments = allComments.filter(comment => !comment.parentId);
+        topLevelComments.forEach(comment => {
+          threadsMap[comment.id] = {
+            ...comment,
+            replies: []
+          };
+        });
+        
+        // Second pass: organize replies
+        allComments.filter(comment => comment.parentId).forEach(reply => {
+          const parentThread = threadsMap[reply.parentId];
+          if (parentThread) {
+            parentThread.replies.push(reply);
+          }
+        });
+        
+        // Return thread structure
+        commentsList = Object.values(threadsMap);
       } else {
-        commentsList = comments.findByTranslationKey(
-          projectName, language, namespace, keyPath
-        );
+        // Return flat list
+        commentsList = allComments;
       }
       
       return { 
@@ -66,31 +126,53 @@ async function routes(fastify, options) {
         });
       }
       
-      const newComment = comments.addComment(
-        projectName, 
-        language, 
-        namespace, 
-        keyPath, 
-        {
-          text,
-          userId,
-          userName,
-          parentId
-        }
-      );
+      // Find the metadata file
+      let metadata = await findMetadataFile(projectName, namespace, keyPath);
       
-      // Record the comment activity in history
-      history.recordChange(
-        projectName,
-        language,
-        namespace,
-        keyPath,
-        'comment',
-        null,
+      if (!metadata) {
+        return reply.code(404).send({
+          success: false,
+          error: 'Metadata not found for this key'
+        });
+      }
+      
+      if (!metadata.data.comments) {
+        metadata.data.comments = [];
+      }
+      
+      // Create new comment
+      const newComment = {
+        id: Date.now().toString(), // Use timestamp as ID
         text,
         userId,
-        userName
-      );
+        userName,
+        parentId: parentId || null,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      };
+      
+      // Add comment to metadata
+      metadata.data.comments.push(newComment);
+      
+      // Record the comment activity in history
+      if (!metadata.data.history) {
+        metadata.data.history = [];
+      }
+      
+      metadata.data.history.push({
+        action: 'comment',
+        old_value: null,
+        new_value: text,
+        user_id: userId,
+        user_name: userName,
+        timestamp: new Date().toISOString()
+      });
+      
+      // Update timestamp
+      metadata.data.updated_at = new Date().toISOString();
+      
+      // Save updated metadata
+      await fs.writeJson(metadata.filePath, metadata.data, { spaces: 2 });
       
       // Broadcast update to connected clients
       fastify.io.emit('comment:added', { 
@@ -116,32 +198,79 @@ async function routes(fastify, options) {
   });
   
   // Delete a comment
-  fastify.delete('/:commentId', async (request, reply) => {
+  fastify.delete('/:projectName/:language/:namespace/key/comment/:commentId', async (request, reply) => {
     try {
-      const { commentId } = request.params;
+      const { projectName, language, namespace, commentId } = request.params;
+      const { keyPath, userId, userName } = request.query;
       
-      // Get the comment first to capture details for the history
-      const comment = comments.getById(commentId);
+      if (!keyPath || !userId || !userName) {
+        return reply.code(400).send({ 
+          success: false, 
+          error: 'Missing required fields: keyPath, userId, userName' 
+        });
+      }
       
-      if (!comment) {
+      // Find the metadata file
+      let metadata = await findMetadataFile(projectName, namespace, keyPath);
+      
+      if (!metadata) {
+        return reply.code(404).send({
+          success: false,
+          error: 'Metadata not found for this key'
+        });
+      }
+      
+      if (!metadata.data.comments) {
+        return reply.code(404).send({
+          success: false,
+          error: 'No comments found for this key'
+        });
+      }
+      
+      // Find the comment to delete
+      const commentIndex = metadata.data.comments.findIndex(c => c.id === commentId);
+      
+      if (commentIndex === -1) {
         return reply.code(404).send({ 
           success: false, 
           error: 'Comment not found' 
         });
       }
       
-      // Delete the comment
-      const success = comments.delete(commentId);
+      // Store the comment text for history
+      const commentText = metadata.data.comments[commentIndex].text;
       
-      if (!success) {
-        return reply.code(500).send({ 
-          success: false, 
-          error: 'Failed to delete comment' 
-        });
+      // Remove the comment
+      metadata.data.comments.splice(commentIndex, 1);
+      
+      // Record the deletion in history
+      if (!metadata.data.history) {
+        metadata.data.history = [];
       }
       
+      metadata.data.history.push({
+        action: 'comment_delete',
+        old_value: commentText,
+        new_value: null,
+        user_id: userId,
+        user_name: userName,
+        timestamp: new Date().toISOString()
+      });
+      
+      // Update timestamp
+      metadata.data.updated_at = new Date().toISOString();
+      
+      // Save updated metadata
+      await fs.writeJson(metadata.filePath, metadata.data, { spaces: 2 });
+      
       // Broadcast update to connected clients
-      fastify.io.emit('comment:deleted', { commentId });
+      fastify.io.emit('comment:deleted', { 
+        projectName, 
+        language, 
+        namespace, 
+        keyPath,
+        commentId
+      });
       
       return { 
         success: true, 
@@ -152,6 +281,99 @@ async function routes(fastify, options) {
       return reply.code(500).send({ 
         success: false, 
         error: 'Failed to delete comment' 
+      });
+    }
+  });
+  
+  // Update a comment
+  fastify.put('/:projectName/:language/:namespace/key/comment/:commentId', async (request, reply) => {
+    try {
+      const { projectName, language, namespace, commentId } = request.params;
+      const { keyPath, text, userId, userName } = request.body;
+      
+      if (!keyPath || !text || !userId || !userName) {
+        return reply.code(400).send({ 
+          success: false, 
+          error: 'Missing required fields: keyPath, text, userId, userName' 
+        });
+      }
+      
+      // Find the metadata file
+      let metadata = await findMetadataFile(projectName, namespace, keyPath);
+      
+      if (!metadata) {
+        return reply.code(404).send({
+          success: false,
+          error: 'Metadata not found for this key'
+        });
+      }
+      
+      if (!metadata.data.comments) {
+        return reply.code(404).send({
+          success: false,
+          error: 'No comments found for this key'
+        });
+      }
+      
+      // Find the comment to update
+      const commentIndex = metadata.data.comments.findIndex(c => c.id === commentId);
+      
+      if (commentIndex === -1) {
+        return reply.code(404).send({ 
+          success: false, 
+          error: 'Comment not found' 
+        });
+      }
+      
+      // Store original comment for history
+      const originalComment = metadata.data.comments[commentIndex];
+      
+      // Update the comment
+      metadata.data.comments[commentIndex] = {
+        ...originalComment,
+        text,
+        updatedBy: userId,
+        updated_at: new Date().toISOString()
+      };
+      
+      // Record the update in history
+      if (!metadata.data.history) {
+        metadata.data.history = [];
+      }
+      
+      metadata.data.history.push({
+        action: 'comment_update',
+        old_value: originalComment.text,
+        new_value: text,
+        user_id: userId,
+        user_name: userName,
+        timestamp: new Date().toISOString()
+      });
+      
+      // Update timestamp
+      metadata.data.updated_at = new Date().toISOString();
+      
+      // Save updated metadata
+      await fs.writeJson(metadata.filePath, metadata.data, { spaces: 2 });
+      
+      // Broadcast update to connected clients
+      fastify.io.emit('comment:updated', { 
+        projectName, 
+        language, 
+        namespace, 
+        keyPath,
+        comment: metadata.data.comments[commentIndex]
+      });
+      
+      return { 
+        success: true, 
+        data: metadata.data.comments[commentIndex] 
+      };
+    } catch (error) {
+      request.log.error(error);
+      return reply.code(500).send({ 
+        success: false, 
+        error: 'Failed to update comment' 
       });
     }
   });

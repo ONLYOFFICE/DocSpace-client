@@ -1259,6 +1259,7 @@ export const getUserTypeDescription = (
 
   return t("Translations:RoleGuestDescriprion");
 };
+
 export function setLanguageForUnauthorized(culture: string) {
   setCookie(LANGUAGE, culture, {
     "max-age": COOKIE_EXPIRATION_YEAR,
@@ -1272,7 +1273,7 @@ export function setLanguageForUnauthorized(culture: string) {
   if (prevCulture) {
     const newUrl = window.location.href.replace(`&culture=${prevCulture}`, ``);
 
-    window.history.pushState("", "", newUrl);
+    window.history.pushState({}, "", newUrl);
   }
 
   window.location.reload();

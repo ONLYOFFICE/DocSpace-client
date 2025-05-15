@@ -191,6 +191,7 @@ const ChatInput = ({
         <FilesSelector
           showSelector={showSelector}
           toggleSelector={toggleSelector}
+          getIcon={getIcon}
           currentDeviceType={currentDeviceType}
         />
       ) : null}

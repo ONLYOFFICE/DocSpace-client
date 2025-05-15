@@ -58,7 +58,7 @@ const disabledItems: Array<string | number> = [];
 const FilesSelector = ({
   showSelector,
   toggleSelector,
-
+  getIcon,
   currentDeviceType,
 }: FilesSelectorProps) => {
   const { setFiles } = useFilesStore();
@@ -124,6 +124,7 @@ const FilesSelector = ({
             onCloseClick: toggleSelector,
             isCloseable: true,
           }}
+          getIcon={getIcon}
           withCancelButton
           cancelButtonLabel={t("Common:CancelButton")}
           submitButtonLabel={t("Common:Select")}

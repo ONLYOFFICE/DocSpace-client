@@ -191,6 +191,63 @@ export default class MessageStore {
     });
   };
 
+  addMessage = async (text: string, sender: string, sender_name: string) => {
+    if (!this.messages.length) {
+      const startMsg = extractFilesFromMessage(
+        removeFolderFromMessage(text.substring(0, 25)),
+      );
+
+      this.currentSession = `${this.currentSession}_${startMsg.cleanedMessage}`;
+    }
+
+    const msgs = await FlowsApi.addMessage(
+      text,
+      sender,
+      sender_name,
+      this.currentSession,
+      this.flowId,
+    );
+
+    const newMsgs = msgs.map((message) => {
+      const { cleanedMessage, fileIds } = extractFilesFromMessage(message.text);
+
+      const msgWithoutFolder = removeFolderFromMessage(cleanedMessage);
+
+      const isSend = message.sender === "User";
+
+      return {
+        isSend,
+        message: isSend ? msgWithoutFolder : message.text,
+        sender_name: message.sender_name,
+        id: message.id,
+        timestamp: message.timestamp,
+        session: message.session_id,
+        edit: message.edit,
+        content_blocks: message.content_blocks || [],
+        category: message.category || "",
+        properties: (message.properties || {}) as PropertiesType,
+        fileIds,
+      };
+    });
+
+    runInAction(() => {
+      this.messages = [...this.messages, ...newMsgs];
+
+      if (this.sessions.get(this.currentSession)) {
+        this.sessions.get(this.currentSession)!.push(...newMsgs);
+      } else {
+        this.sessions.set(this.currentSession, newMsgs);
+        this.sortedSessions = [
+          [
+            this.currentSession,
+            new Date(newMsgs[newMsgs.length - 1].timestamp),
+          ],
+          ...this.sortedSessions,
+        ];
+      }
+    });
+  };
+
   sendMessage = async (
     message: string,
     files: TSelectorItem[],
@@ -507,24 +564,29 @@ export const MessageStoreContextProvider = ({
 
   React.useEffect(() => {
     const handleUserMessage = (event: CustomEvent) => {
-      console.log(event);
+      const { file, isSummary } = event.detail;
+
+      if (isSummary) {
+        store.addMessage(`Summarize file \n @${file.id}`, "User", "User");
+      }
     };
 
     const handleAiMessage = (event: CustomEvent) => {
-      console.log(event);
+      const { text, sender, sender_name: senderName } = event.detail;
+
+      store.addMessage(text, sender, senderName);
     };
 
-    // Add event listeners
     window.addEventListener(
       ChatEvents.ADD_USER_MESSAGE,
       handleUserMessage as EventListener,
     );
+
     window.addEventListener(
       ChatEvents.ADD_AI_MESSAGE,
       handleAiMessage as EventListener,
     );
 
-    // Cleanup function
     return () => {
       window.removeEventListener(
         ChatEvents.ADD_USER_MESSAGE,

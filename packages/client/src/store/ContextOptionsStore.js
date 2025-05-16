@@ -1503,12 +1503,16 @@ class ContextOptionsStore {
     };
   };
 
-  summarizeToFile = async (item) => {
+  summarizeToChat = async (item) => {
     this.filesStore.setActiveFiles([item]);
 
-    await this.flowStore.summarizeToFile(item);
-
-    this.filesStore.removeActiveItem([item]);
+    try {
+      await this.flowStore.summarizeToChat(item);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      this.filesStore.removeActiveItem([item]);
+    }
   };
 
   askAI = async (file) => {
@@ -1867,7 +1871,7 @@ class ContextOptionsStore {
         label: "Summarize",
         icon: SummarizeReactSvgUrl,
         onClick: () => {
-          this.summarizeToFile(item);
+          this.summarizeToChat(item);
         },
         disabled: false,
       },
@@ -1880,6 +1884,10 @@ class ContextOptionsStore {
           this.askAI(item);
         },
         disabled: false,
+      },
+      {
+        key: "separator4",
+        isSeparator: true,
       },
       {
         id: "option_reconnect-storage",

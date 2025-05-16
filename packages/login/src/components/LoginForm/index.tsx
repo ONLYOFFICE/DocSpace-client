@@ -85,7 +85,9 @@ const LoginForm = ({
 }: LoginFormProps) => {
   const { isLoading, isModalOpen } = useContext(LoginValueContext);
   const { setIsLoading } = useContext(LoginDispatchContext);
-  const toastId = useRef<Id>(undefined);
+
+  const emailConfirmedToastShown = useRef<boolean>(false);
+  const passwordChangedToastShown = useRef<boolean>(false);
   const authToastId = useRef<Id>("");
 
   const searchParams = useSearchParams();
@@ -217,26 +219,21 @@ const LoginForm = ({
     message && setErrorText(message);
     confirmedEmail && setIdentifier(confirmedEmail);
 
-    const messageEmailConfirmed = t("MessageEmailConfirmed");
-    const messageAuthorize = t("MessageAuthorize");
+    if (confirmedEmail && ready && !emailConfirmedToastShown.current) {
+      const messageEmailConfirmed = t("MessageEmailConfirmed");
+      const messageAuthorize = t("MessageAuthorize");
+      const text = `${messageEmailConfirmed} ${messageAuthorize}`;
 
-    const text = `${messageEmailConfirmed} ${messageAuthorize}`;
-
-    if (
-      confirmedEmail &&
-      ready &&
-      !toastr.isActive(toastId.current || "confirm-email-toast")
-    )
-      toastId.current = toastr.success(text);
+      toastr.success(text);
+      emailConfirmedToastShown.current = true;
+    }
   }, [message, confirmedEmail, t, ready, authCallback]);
 
   useEffect(() => {
-    if (
-      passwordChanged &&
-      ready &&
-      !toastr.isActive(toastId.current || "password-changed-toast")
-    )
-      toastId.current = toastr.success(t("ChangePasswordSuccess"));
+    if (passwordChanged && ready && !passwordChangedToastShown.current) {
+      toastr.success(t("ChangePasswordSuccess"));
+      passwordChangedToastShown.current = true;
+    }
   }, [passwordChanged, t, ready]);
 
   const onChangeLogin = (e: React.ChangeEvent<HTMLInputElement>) => {

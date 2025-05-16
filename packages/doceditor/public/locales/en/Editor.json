@@ -7,6 +7,8 @@
   "ImageFileType": "images",
   "MailMergeFileType": "Select .XLSX file",
   "OpenSavedDocument": "Open saved document in new tab",
+  "QuotaLimitWarning": "User quota limit is about to be reached.",
   "SelectFilesType": "Select files type: {{fileType}}",
-  "UsersWithoutAccess": "Some users whom you want to mention don't have access to the room: {{users}}"
+  "UsersWithoutAccess": "Some users whom you want to mention don't have access to the room: {{users}}",
+  "YourFurtherEditsNotSaved": "Your further edits may not be saved."
 }

@@ -51,6 +51,7 @@ import {
 } from "@/utils/events";
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
+import Bar from "./Bar";
 
 const Editor = ({
   config,
@@ -318,22 +319,35 @@ const Editor = ({
   }
 
   return (
-    <DocumentEditor
-      id={EDITOR_ID}
-      documentServerUrl={documentServerUrl}
-      config={
-        errorMessage || isSkipError
-          ? {
-              events: {
-                onAppReady: onSDKAppReady,
-              },
-            }
-          : newConfig
-      }
-      height="100%"
-      width="100%"
-      events_onDocumentReady={onDocumentReady}
-    />
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        width: "100%",
+      }}
+    >
+      <div style={{ height: documentReady ? "auto" : "0", overflow: "hidden" }}>
+        <Bar isStorageQuotaLimit={true} />
+      </div>
+
+      <DocumentEditor
+        id={EDITOR_ID}
+        documentServerUrl={documentServerUrl}
+        config={
+          errorMessage || isSkipError
+            ? {
+                events: {
+                  onAppReady: onSDKAppReady,
+                },
+              }
+            : newConfig
+        }
+        height="100%"
+        width="100%"
+        events_onDocumentReady={onDocumentReady}
+      />
+    </div>
   );
 };
 

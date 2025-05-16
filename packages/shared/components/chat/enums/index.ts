@@ -33,7 +33,7 @@ export enum BuildStatus {
 }
 
 export enum ChatEvents {
-  SUMMARY = "summary",
-  ASK_AI = "ask_ai",
-  FAQ = "faq",
+  ADD_USER_MESSAGE = "add_user_message",
+  ADD_AI_MESSAGE = "add_ai_message",
+  ADD_FILE = "add_file",
 }

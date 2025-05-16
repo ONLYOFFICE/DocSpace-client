@@ -135,6 +135,7 @@ import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { createLoader } from "@docspace/shared/utils/createLoader";
 import { FILLING_STATUS_ID } from "@docspace/shared/constants";
+import { ChatEvents } from "@docspace/shared/components/chat/enums";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -1510,6 +1511,17 @@ class ContextOptionsStore {
     this.filesStore.removeActiveItem([item]);
   };
 
+  askAI = async (file) => {
+    if (!this.flowStore.aiChatIsVisible)
+      this.flowStore.setAiChatIsVisible(true);
+
+    // timeout need for open chat and start handle this event
+    setTimeout(() => {
+      const event = new CustomEvent(ChatEvents.ADD_FILE, { detail: file });
+      window.dispatchEvent(event);
+    }, 0);
+  };
+
   getFilesContextOptions = (item, t, isInfoPanel, isHeader) => {
     const optionsToRemove = isInfoPanel
       ? ["select", "room-info", "show-info"]
@@ -1856,6 +1868,16 @@ class ContextOptionsStore {
         icon: SummarizeReactSvgUrl,
         onClick: () => {
           this.summarizeToFile(item);
+        },
+        disabled: false,
+      },
+      {
+        id: "ask_ai",
+        key: "ask_ai",
+        label: "Ask AI",
+        icon: SummarizeReactSvgUrl,
+        onClick: () => {
+          this.askAI(item);
         },
         disabled: false,
       },

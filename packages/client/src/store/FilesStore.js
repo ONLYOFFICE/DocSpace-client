@@ -2334,6 +2334,7 @@ class FilesStore {
         "block-unblock-version", // need split
         "separator1",
         "summarize",
+        "ask_ai",
         "open-location",
         "mark-read",
         // "mark-as-favorite",
@@ -2359,7 +2360,7 @@ class FilesStore {
       ];
 
       if (!isAIRoom) {
-        fileOptions = removeOptions(fileOptions, ["summarize"]);
+        fileOptions = removeOptions(fileOptions, ["summarize", "ask_ai"]);
       }
 
       if (optionsToRemove.length) {

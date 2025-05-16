@@ -490,6 +490,15 @@ class FlowsApi {
   static async saveToFile(tweaks: Tweaks): Promise<SimpleRunFlowResponse> {
     return FlowsApi.simpleRunFlow(SAVE_TO_FILE_ID, "", "text", "text", tweaks);
   }
+
+  static async addMessage(message: Message): Promise<{ detail: Message[] }> {
+    const response: { data: unknown } = await FlowsApi.getAPI().post(
+      `monitor/messages`,
+      message,
+    );
+
+    return response.data as { detail: Message[] };
+  }
 }
 
 export default FlowsApi;

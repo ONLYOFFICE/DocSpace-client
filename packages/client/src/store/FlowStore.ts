@@ -193,7 +193,7 @@ class FlowStore {
       }
 
       if (msg === "added") {
-        toastr.success(`Document vectorized: ${file.title}`);
+        toastr.success(`Document ready for chat: ${file.title}`);
         this.vectorizedFiles = [...this.vectorizedFiles, file];
       }
 

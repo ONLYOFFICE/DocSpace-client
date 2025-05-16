@@ -39,6 +39,7 @@ import {
   getSessionId,
   getChatDate,
 } from "../utils";
+import { ChatEvents } from "../enums";
 
 export default class MessageStore {
   flowId = "";
@@ -502,7 +503,39 @@ export const MessageStoreContextProvider = ({
     store.setAiSelectedFolder(aiSelectedFolder);
 
     store.fetchMessages();
-  }, [aiChatID, store, aiSelectedFolder, aiUserId]);
+  }, [store, aiChatID, aiSelectedFolder, aiUserId]);
+
+  React.useEffect(() => {
+    const handleUserMessage = (event: CustomEvent) => {
+      console.log(event);
+    };
+
+    const handleAiMessage = (event: CustomEvent) => {
+      console.log(event);
+    };
+
+    // Add event listeners
+    window.addEventListener(
+      ChatEvents.ADD_USER_MESSAGE,
+      handleUserMessage as EventListener,
+    );
+    window.addEventListener(
+      ChatEvents.ADD_AI_MESSAGE,
+      handleAiMessage as EventListener,
+    );
+
+    // Cleanup function
+    return () => {
+      window.removeEventListener(
+        ChatEvents.ADD_USER_MESSAGE,
+        handleUserMessage as EventListener,
+      );
+      window.removeEventListener(
+        ChatEvents.ADD_AI_MESSAGE,
+        handleAiMessage as EventListener,
+      );
+    };
+  }, [store]);
 
   return (
     <MessageStoreContext.Provider value={store}>

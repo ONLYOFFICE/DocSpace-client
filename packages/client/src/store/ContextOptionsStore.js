@@ -1511,7 +1511,7 @@ class ContextOptionsStore {
     } catch (error) {
       console.error(error);
     } finally {
-      this.filesStore.removeActiveItem([item]);
+      this.filesStore.removeActiveItem(item);
     }
   };
 

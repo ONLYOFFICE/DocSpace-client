@@ -108,8 +108,8 @@ const InfiniteGrid = (props: InfiniteGridProps) => {
 
   const [countTilesInRow, setCountTilesInRow] = useState(0);
 
-  let cards: React.ReactElement<any>[] = [];
-  const list: React.ReactElement<any>[] = [];
+  let cards: React.ReactElement[] = [];
+  const list: React.ReactElement[] = [];
 
   const addItemToList = (key: string, cls: string, clear?: boolean) => {
     list.push(
@@ -152,10 +152,14 @@ const InfiniteGrid = (props: InfiniteGridProps) => {
 
   if (children && React.isValidElement(children)) {
     React.Children.map(
-      (children.props as { children: any }).children,
+      (children.props as { children: React.ReactNode }).children,
       (child) => {
         if (child) {
-          if (child?.props["data-type"] === "header") {
+          const childElement = child as React.ReactElement<{
+            "data-type"?: string;
+            className?: string;
+          }>;
+          if (childElement.props["data-type"] === "header") {
             // If cards is not empty then put the cards into the list
             if (cards.length) {
               const type = checkType();
@@ -168,11 +172,11 @@ const InfiniteGrid = (props: InfiniteGridProps) => {
                 className={list.length ? "files_header" : "folder_header"}
                 key="header_item"
               >
-                {child}
+                {childElement}
               </HeaderItem>,
             );
           } else {
-            const isFile = child?.props?.className?.includes("file");
+            const isFile = childElement.props?.className?.includes("file");
             const cls = isFile ? "isFile" : "isFolder";
 
             if (cards.length && cards.length === countTilesInRow) {
@@ -181,7 +185,7 @@ const InfiniteGrid = (props: InfiniteGridProps) => {
             }
 
             const cardKey = uniqueid("card-item_");
-            cards.push(<Card key={cardKey}>{child}</Card>);
+            cards.push(<Card key={cardKey}>{childElement}</Card>);
           }
         }
       },

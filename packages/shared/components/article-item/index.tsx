@@ -27,7 +27,6 @@
 import React from "react";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
-import { Link } from "react-router";
 import { isMobile } from "react-device-detect";
 
 import { Text } from "../text";
@@ -63,8 +62,8 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
     badgeTitle,
     badgeComponent,
     title,
-    linkData,
     item,
+    iconNode,
   } = props;
 
   const onClickAction = (e: React.MouseEvent) => {
@@ -105,90 +104,85 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
 
   const renderItem = () => {
     return (
-      <Link
-        style={{ textDecoration: "none" }}
-        to={linkData?.path}
-        state={linkData?.state}
+      <div
+        className={classNames(styles.articleItemContainer, className, {
+          [styles.showText]: showText,
+          [styles.endOfBlock]: isEndOfBlock,
+          [styles.active]: isActive,
+        })}
+        style={style}
+        data-testid="article-item"
+        title={tooltipTitle}
       >
         <div
-          className={classNames(styles.articleItemContainer, className, {
-            [styles.showText]: showText,
-            [styles.endOfBlock]: isEndOfBlock,
+          className={classNames(styles.articleItemSibling, {
+            [styles.active]: isActive,
+            [styles.dragging]: isDragging,
+            [styles.dragActive]: isDragActive,
+            [styles.mobileDevice]: isMobile,
+          })}
+          id={folderId}
+          onClick={onClickAction}
+          onMouseUp={onMouseUpAction}
+          onMouseDown={onMouseDown}
+          data-testid="article-item-sibling"
+        />
+        <div
+          className={classNames(styles.articleItemImg, {
             [styles.active]: isActive,
           })}
-          style={style}
-          data-testid="article-item"
-          title={tooltipTitle}
         >
-          <div
-            className={classNames(styles.articleItemSibling, {
-              [styles.active]: isActive,
-              [styles.dragging]: isDragging,
-              [styles.dragActive]: isDragActive,
-              [styles.mobileDevice]: isMobile,
-            })}
-            id={folderId}
-            onClick={onClickAction}
-            onMouseUp={onMouseUpAction}
-            onMouseDown={onMouseDown}
-            data-testid="article-item-sibling"
-          />
-          <div
-            className={classNames(styles.articleItemImg, {
-              [styles.active]: isActive,
-            })}
-          >
+          {iconNode ? (
+            <div className={styles.nodeIcon}>{iconNode}</div>
+          ) : icon ? (
             <ReactSVG className={styles.icon} src={icon} />
-            {!showText ? (
-              <>
-                {showInitial ? (
-                  <Text className={styles.articleItemInitialText}>
-                    {getInitial(text)}
-                  </Text>
-                ) : null}
-                {showBadge && !iconBadge ? (
-                  <div
-                    className={classNames(styles.articleItemBadgeWrapper, {
-                      [styles.showText]: showText,
-                    })}
-                    onClick={onClickBadgeAction}
-                  />
-                ) : null}
-              </>
-            ) : null}
-          </div>
-          {showText ? (
-            <Text
-              className={classNames(styles.articleItemText, {
-                [styles.active]: isActive,
-              })}
-              noSelect
-            >
-              {text}
-            </Text>
           ) : null}
-          {showBadge && showText ? (
-            <div
-              className={classNames(styles.articleItemBadgeWrapper, {
-                [styles.showText]: showText,
-              })}
-              onClick={onClickBadgeAction}
-              title={badgeTitle}
-            >
-              {iconBadge ? (
-                <ReactSVG className={styles.articleItemIcon} src={iconBadge} />
-              ) : (
-                (badgeComponent ?? (
-                  <Badge
-                    className={styles.articleItemBadge}
-                    label={labelBadge}
-                  />
-                ))
-              )}
-            </div>
+          {!showText ? (
+            <>
+              {showInitial ? (
+                <Text className={styles.articleItemInitialText}>
+                  {getInitial(text)}
+                </Text>
+              ) : null}
+              {showBadge && !iconBadge ? (
+                <div
+                  className={classNames(styles.articleItemBadgeWrapper, {
+                    [styles.showText]: showText,
+                  })}
+                  onClick={onClickBadgeAction}
+                />
+              ) : null}
+            </>
           ) : null}
         </div>
-      </Link>
+        {showText ? (
+          <Text
+            className={classNames(styles.articleItemText, {
+              [styles.active]: isActive,
+            })}
+            noSelect
+          >
+            {text}
+          </Text>
+        ) : null}
+        {showBadge && showText ? (
+          <div
+            className={classNames(styles.articleItemBadgeWrapper, {
+              [styles.showText]: showText,
+            })}
+            onClick={onClickBadgeAction}
+            title={badgeTitle}
+          >
+            {iconBadge ? (
+              <ReactSVG className={styles.articleItemIcon} src={iconBadge} />
+            ) : (
+              (badgeComponent ?? (
+                <Badge className={styles.articleItemBadge} label={labelBadge} />
+              ))
+            )}
+          </div>
+        ) : null}
+      </div>
     );
   };
 

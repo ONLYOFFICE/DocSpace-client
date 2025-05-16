@@ -29,8 +29,9 @@ import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import React from "react";
 import styled from "styled-components";
 import { ReactSVG } from "react-svg";
+import { useTranslation } from "react-i18next";
+
 import { Text } from "../../../components/text";
-import { TTranslation } from "../../../types";
 
 const StyledWrapper = styled.div`
   background: ${(props) =>
@@ -54,12 +55,9 @@ const StyledWrapper = styled.div`
   }
 `;
 
-interface IProps {
-  t: TTranslation;
-}
+export const NotAvailable = () => {
+  const { t } = useTranslation("Common");
 
-export const NotAvailable = (props: IProps) => {
-  const { t } = props;
   return (
     <StyledWrapper>
       <ReactSVG className="lock-icon" src={LockedReactSvgUrl} />

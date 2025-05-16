@@ -25,8 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
-import { globalColors } from "@docspace/shared/themes";
+
+import { globalColors } from "../../../themes";
 
 import { Text } from "../../../components/text";
 import { Badge } from "../../../components/badge";
@@ -48,7 +50,6 @@ import {
 import { IHeaderProps } from "./WhiteLabel.types";
 
 export const WhiteLabelHeader = ({
-  t,
   showNotAvailable,
   isSettingPaid,
   standalone,
@@ -58,11 +59,12 @@ export const WhiteLabelHeader = ({
   onChange,
   onClear,
 }: IHeaderProps) => {
+  const { t } = useTranslation("Common");
   const theme = useTheme();
 
   return (
     <StyledHeader>
-      {showNotAvailable ? <NotAvailable t={t} /> : null}
+      {showNotAvailable ? <NotAvailable /> : null}
       <div className="header-container">
         <Text fontSize="16px" fontWeight="700">
           {t("WhiteLabel")}
@@ -85,6 +87,7 @@ export const WhiteLabelHeader = ({
 
       <div className="wl-helper">
         <Text
+          as="div"
           className="wl-subtitle wl-helper-label settings_unavailable"
           fontSize="13px"
         >

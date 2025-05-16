@@ -1,5 +1,4 @@
 {
-  "ActivationRequired": "изисква активиране",
   "AddStaticText": "Добави статичен текст",
   "AddWatermarkElements": "Добави елементи на воден знак",
   "AddWatermarksToDocuments": "Добави воден знак към документи",
@@ -33,7 +32,6 @@
   "StorageDescription": "Зададена квота за съхранение на стая. Можете да промените тази стойност или да изключите ограничението за съхранение.",
   "TagsPlaceholder": "Добавяне на таг",
   "ThirdPartyStorageComboBoxPlaceholder": "Изберете място за съхранение",
-  "ThirdPartyStorageDescription": "Използвайте услуги на трети страни за хранилище за данните от тази стая. В свързаното хранилище ще бъде създадена нова папка за съхраняване на данните от тази стая.",
   "ThirdPartyStorageNoStorageAlert": "Преди това трябва да свържете съответната услуга в раздела „Интеграция“. В противен случай връзката няма да бъде възможна.",
   "ThirdPartyStoragePermanentSettingDescription": "Файловете се съхраняват в {{thirdpartyTitle}} хранилище на трета страна в папката \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "За да свържете хранилище на трета страна, трябва да добавите съответната услуга в секцията Интеграция на настройките на {{productName}}. Свържете се със собственика или администратора на {{productName}}, за да активирате интеграцията.",

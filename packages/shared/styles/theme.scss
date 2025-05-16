@@ -1951,6 +1951,16 @@
 }
 
 .light {
+  --settings-description-color: #{$gray-text};
+  --settings-arrow-fill: #{$black};
+}
+
+.dark {
+  --settings-description-color: #{$gray-dark};
+  --settings-arrow-fill: #{$white};
+}
+
+.light{
   --icon-cropper-grid-color: #{$gray-strong};
   --icon-cropper-delete-button-bg: #{$gray-light};
   --icon-cropper-delete-button-hover-bg: #{$light-gray-hover};

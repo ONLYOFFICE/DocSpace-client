@@ -45,28 +45,15 @@ const useSocketHelper = ({
   standalone,
 }: UseSocketHelperProps) => {
   React.useEffect(() => {
-    SocketHelper?.connect(socketUrl, shareKey ?? "");
-  }, [shareKey, socketUrl]);
-
-  React.useEffect(() => {
     SocketHelper?.emit(SocketCommands.Subscribe, {
-      roomParts: "restore",
+      roomParts: "quota",
     });
 
     SocketHelper?.emit(SocketCommands.Subscribe, {
-      roomParts: user?.id || "",
+      roomParts: "QUOTA",
+      individual: true,
     });
-  }, [user?.id]);
 
-  React.useEffect(() => {
-    if (standalone) {
-      SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
-        roomParts: "restore",
-      });
-    }
-  }, [standalone]);
-
-  React.useEffect(() => {
     const callback = async () => {
       try {
         // const message = t("Common:PreparationPortalTitle");
@@ -88,6 +75,28 @@ const useSocketHelper = ({
       SocketHelper?.off(SocketEvents.RestoreBackup, callback);
     };
   }, []);
+
+  React.useEffect(() => {
+    SocketHelper?.connect(socketUrl, shareKey ?? "");
+  }, [shareKey, socketUrl]);
+
+  React.useEffect(() => {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: "restore",
+    });
+
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: user?.id || "",
+    });
+  }, [user?.id]);
+
+  React.useEffect(() => {
+    if (standalone) {
+      SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
+        roomParts: "restore",
+      });
+    }
+  }, [standalone]);
 
   React.useEffect(() => {
     const callback = async (loginEventId: unknown) => {

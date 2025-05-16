@@ -36,6 +36,7 @@ import {
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
+import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 
 import { getBackUrl, isFormRole } from "@/utils";
 import { IS_DESKTOP_EDITOR, IS_ZOOM, SHOW_CLOSE } from "@/utils/constants";
@@ -141,6 +142,23 @@ const Editor = ({
     t,
     organizationName,
   });
+
+  const [isStorageQuotaLimit, setIsStorageQuotaLimit] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleQuotaChange = () => {
+      setIsStorageQuotaLimit(true);
+    };
+
+    SocketHelper?.on(SocketEvents.ChangedQuotaUserUsedValue, handleQuotaChange);
+
+    return () => {
+      SocketHelper?.off(
+        SocketEvents.ChangedQuotaUserUsedValue,
+        handleQuotaChange,
+      );
+    };
+  }, []);
 
   const newConfig: IConfig = useMemo(() => {
     return config
@@ -328,7 +346,7 @@ const Editor = ({
       }}
     >
       <div style={{ height: documentReady ? "auto" : "0", overflow: "hidden" }}>
-        <Bar isStorageQuotaLimit={true} />
+        <Bar isStorageQuotaLimit={isStorageQuotaLimit} />
       </div>
 
       <DocumentEditor

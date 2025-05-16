@@ -84,6 +84,11 @@ export const CompanyInfo = ({
     onSave(address, companyName, email, phone, site, hideAbout);
   };
 
+  const onChangeHideAboutAction = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.target.checked = !e.target.checked;
+    onChangeHideAbout(e);
+  };
+
   const {
     hasErrorAddress,
     hasErrorCompanyName,
@@ -123,8 +128,8 @@ export const CompanyInfo = ({
       <div className="settings-block">
         <FieldContainer>
           <Checkbox
-            isChecked={hideAbout}
-            onChange={onChangeHideAbout}
+            isChecked={!hideAbout}
+            onChange={onChangeHideAboutAction}
             data-testid="show-about-window-checkbox"
             label={t("Settings:ShowAboutWindow")}
           />

@@ -371,7 +371,7 @@ class ProfileActionsStore {
     }
 
     let about = null;
-    const isDisplayAbout = displayAbout && companyInfoSettingsData.hideAbout;
+    const isDisplayAbout = displayAbout && !companyInfoSettingsData.hideAbout;
 
     if (isDisplayAbout) {
       about = {

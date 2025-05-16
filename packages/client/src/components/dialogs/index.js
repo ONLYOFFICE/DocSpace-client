@@ -73,6 +73,7 @@ import DeleteVersionDialog from "./DeleteVersionDialog";
 import CancelOperationDialog from "./CancelOperationDialog";
 import FormFillingTipsDialog from "./FormFillingTipsDialog";
 import ReducedRightsDialog from "./ReducedRightsDialog";
+import SocialAuthWelcomeDialog from "./SocialAuthWelcomeDialog";
 
 export {
   EmptyTrashDialog,
@@ -124,4 +125,5 @@ export {
   CancelOperationDialog,
   FormFillingTipsDialog,
   ReducedRightsDialog,
+  SocialAuthWelcomeDialog,
 };

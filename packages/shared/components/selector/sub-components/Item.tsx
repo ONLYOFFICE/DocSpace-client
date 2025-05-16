@@ -207,15 +207,11 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
         key={`${label}-${avatar}-${role}`}
         style={style}
         onClick={onClick}
-        className={classNames(
-          styles.selectorItem,
-          {
-            [styles.disabled]: isDisabled,
-            [styles.selectedSingle]: isSelected && !isMultiSelect,
-            [styles.hoverable]: !isDisabled,
-          },
-          "test-22",
-        )}
+        className={classNames(styles.selectorItem, {
+          [styles.disabled]: isDisabled,
+          [styles.selectedSingle]: isSelected && !isMultiSelect,
+          [styles.hoverable]: !isDisabled,
+        })}
         data-testid={`selector-item-${index}`}
       >
         {avatar || isGroup ? (

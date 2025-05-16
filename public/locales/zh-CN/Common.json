@@ -716,5 +716,7 @@
   "Yes": "是",
   "Yesterday": "昨天",
   "You": "您",
-  "YourTurn": "轮到您了"
+  "YourTurn": "轮到您了",
+  "OpenSavedDocument": "在新标签中打开已保存的文件",
+  "FileName": "文件名称"
 }

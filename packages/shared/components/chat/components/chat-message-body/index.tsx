@@ -31,6 +31,8 @@ import classNames from "classnames";
 import { TFile } from "../../../../api/files/types";
 import { TUser } from "../../../../api/people/types";
 
+import { DeviceType } from "../../../../enums";
+
 import { Scrollbar } from "../../../scrollbar";
 import type { Scrollbar as CustomScrollbar } from "../../../scrollbar/custom-scrollbar";
 
@@ -47,12 +49,14 @@ const ChatMessageBody = ({
   user,
   getIcon,
   isFullScreen,
+  currentDeviceType,
 }: {
   displayFileExtension: boolean;
   vectorizedFiles: TFile[];
   user: TUser;
   getIcon: (size: number, fileExst: string) => string;
   isFullScreen: boolean;
+  currentDeviceType: DeviceType;
 }) => {
   const { messages } = useMessageStore();
   const scrollbarRef = useRef<CustomScrollbar>(null);
@@ -100,6 +104,7 @@ const ChatMessageBody = ({
                   user={user}
                   getIcon={getIcon}
                   isFullScreen={isFullScreen}
+                  currentDeviceType={currentDeviceType}
                 />
               );
             })}

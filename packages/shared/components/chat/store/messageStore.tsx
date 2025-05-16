@@ -39,6 +39,7 @@ import {
   getSessionId,
   getChatDate,
 } from "../utils";
+import { ChatEvents } from "../enums";
 
 export default class MessageStore {
   flowId = "";
@@ -187,6 +188,63 @@ export default class MessageStore {
       this.sortedSessions = sortedTimestampSessions;
       this.isInit = true;
       this.isRequestRunning = false;
+    });
+  };
+
+  addMessage = async (text: string, sender: string, sender_name: string) => {
+    if (!this.messages.length) {
+      const startMsg = extractFilesFromMessage(
+        removeFolderFromMessage(text.substring(0, 25)),
+      );
+
+      this.currentSession = `${this.currentSession}_${startMsg.cleanedMessage}`;
+    }
+
+    const msgs = await FlowsApi.addMessage(
+      text,
+      sender,
+      sender_name,
+      this.currentSession,
+      this.flowId,
+    );
+
+    const newMsgs = msgs.map((message) => {
+      const { cleanedMessage, fileIds } = extractFilesFromMessage(message.text);
+
+      const msgWithoutFolder = removeFolderFromMessage(cleanedMessage);
+
+      const isSend = message.sender === "User";
+
+      return {
+        isSend,
+        message: isSend ? msgWithoutFolder : message.text,
+        sender_name: message.sender_name,
+        id: message.id,
+        timestamp: message.timestamp,
+        session: message.session_id,
+        edit: message.edit,
+        content_blocks: message.content_blocks || [],
+        category: message.category || "",
+        properties: (message.properties || {}) as PropertiesType,
+        fileIds,
+      };
+    });
+
+    runInAction(() => {
+      this.messages = [...this.messages, ...newMsgs];
+
+      if (this.sessions.get(this.currentSession)) {
+        this.sessions.get(this.currentSession)!.push(...newMsgs);
+      } else {
+        this.sessions.set(this.currentSession, newMsgs);
+        this.sortedSessions = [
+          [
+            this.currentSession,
+            new Date(newMsgs[newMsgs.length - 1].timestamp),
+          ],
+          ...this.sortedSessions,
+        ];
+      }
     });
   };
 
@@ -366,7 +424,11 @@ export default class MessageStore {
     }
   };
 
-  saveMessageToFile = async (message: string, title: string) => {
+  saveMessageToFile = async (
+    message: string,
+    title: string,
+    folderId: number | string,
+  ) => {
     if (!this.saveToFileFlow) return;
 
     const tweaks: Tweaks = {};
@@ -381,7 +443,7 @@ export default class MessageStore {
       }
 
       if (n.id.includes("FolderIDInput")) {
-        tweaks[n.id] = { input_value: String(this.aiSelectedFolder) };
+        tweaks[n.id] = { input_value: String(folderId) };
       }
     });
 
@@ -498,7 +560,44 @@ export const MessageStoreContextProvider = ({
     store.setAiSelectedFolder(aiSelectedFolder);
 
     store.fetchMessages();
-  }, [aiChatID, store, aiSelectedFolder, aiUserId]);
+  }, [store, aiChatID, aiSelectedFolder, aiUserId]);
+
+  React.useEffect(() => {
+    const handleUserMessage = (event: CustomEvent) => {
+      const { file, isSummary } = event.detail;
+
+      if (isSummary) {
+        store.addMessage(`Summarize file \n @${file.id}`, "User", "User");
+      }
+    };
+
+    const handleAiMessage = (event: CustomEvent) => {
+      const { text, sender, sender_name: senderName } = event.detail;
+
+      store.addMessage(text, sender, senderName);
+    };
+
+    window.addEventListener(
+      ChatEvents.ADD_USER_MESSAGE,
+      handleUserMessage as EventListener,
+    );
+
+    window.addEventListener(
+      ChatEvents.ADD_AI_MESSAGE,
+      handleAiMessage as EventListener,
+    );
+
+    return () => {
+      window.removeEventListener(
+        ChatEvents.ADD_USER_MESSAGE,
+        handleUserMessage as EventListener,
+      );
+      window.removeEventListener(
+        ChatEvents.ADD_AI_MESSAGE,
+        handleAiMessage as EventListener,
+      );
+    };
+  }, [store]);
 
   return (
     <MessageStoreContext.Provider value={store}>

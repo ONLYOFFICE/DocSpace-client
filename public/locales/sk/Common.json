@@ -708,5 +708,7 @@
   "Yes": "Áno",
   "Yesterday": "Včera",
   "You": "Vy",
-  "YourTurn": "Ste na rade"
+  "YourTurn": "Ste na rade",
+  "OpenSavedDocument": "Otevřít uložený dokument na nové kartě",
+  "FileName": "Názov súboru"
 }

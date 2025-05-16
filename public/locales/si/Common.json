@@ -495,5 +495,7 @@
   "WithSubfolders": "අනු බහාලුම් සමඟ",
   "Yes": "ඔව්",
   "Yesterday": "ඊයේ",
-  "You": "ඔබ"
+  "You": "ඔබ",
+  "OpenSavedDocument": "සුරැකි ගොනුව නව පටිත්තක අරින්න",
+  "FileName": "ගොනුවේ නම"
 }

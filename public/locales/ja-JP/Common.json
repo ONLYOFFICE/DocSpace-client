@@ -716,5 +716,7 @@
   "Yes": "はい",
   "Yesterday": "昨日",
   "You": "あなた",
-  "YourTurn": "あなたの番です"
+  "YourTurn": "あなたの番です",
+  "OpenSavedDocument": "保存されたファイルを新しいタブで開く",
+  "FileName": "ファイル名"
 }

@@ -708,5 +708,7 @@
   "Yes": "Да",
   "Yesterday": "Вчера",
   "You": "Вие",
-  "YourTurn": "Ваш ред"
+  "YourTurn": "Ваш ред",
+  "OpenSavedDocument": "Отворете записания документ в нов раздел",
+  "FileName": "Име на файла"
 }

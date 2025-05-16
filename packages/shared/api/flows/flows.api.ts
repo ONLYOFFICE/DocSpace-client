@@ -23,6 +23,7 @@ import {
   CHAT_ID,
   SUMMARIZE_FILE_ID,
   SAVE_TO_FILE_ID,
+  SUMMARIZE_FILE_TO_TEXT_ID,
 } from "./flows.constants";
 
 let eventDelivery: TEventDelivery = "";
@@ -471,7 +472,19 @@ class FlowsApi {
     );
   }
 
-  static async summirizeFile(
+  static async summarizeFileToText(
+    inputValue: string,
+  ): Promise<SimpleRunFlowResponse> {
+    return FlowsApi.simpleRunFlow(
+      SUMMARIZE_FILE_TO_TEXT_ID,
+      String(inputValue),
+      "text",
+      "text",
+      {},
+    );
+  }
+
+  static async summarizeFileToFile(
     inputValue: string,
   ): Promise<SimpleRunFlowResponse> {
     return FlowsApi.simpleRunFlow(
@@ -489,6 +502,27 @@ class FlowsApi {
 
   static async saveToFile(tweaks: Tweaks): Promise<SimpleRunFlowResponse> {
     return FlowsApi.simpleRunFlow(SAVE_TO_FILE_ID, "", "text", "text", tweaks);
+  }
+
+  static async addMessage(
+    text: string,
+    sender: string,
+    sender_name: string,
+    session_id: string,
+    flow_id: string,
+  ): Promise<Promise<Message[]>> {
+    const response: { data: Message[] } = await FlowsApi.getAPI().post(
+      `monitor/messages`,
+      {
+        text,
+        sender,
+        sender_name,
+        session_id,
+        flow_id,
+      },
+    );
+
+    return response.data;
   }
 }
 

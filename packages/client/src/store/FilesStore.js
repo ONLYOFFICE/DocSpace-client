@@ -92,6 +92,8 @@ import {
   removeSeparator,
 } from "SRC_DIR/helpers/filesUtils";
 
+import { FILE_EXSTS } from "./FlowStore";
+
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
 
@@ -2334,6 +2336,8 @@ class FilesStore {
         "block-unblock-version", // need split
         "separator1",
         "summarize",
+        "ask_ai",
+        "separator4",
         "open-location",
         "mark-read",
         // "mark-as-favorite",
@@ -2358,8 +2362,12 @@ class FilesStore {
         "stop-filling",
       ];
 
-      if (!isAIRoom) {
-        fileOptions = removeOptions(fileOptions, ["summarize"]);
+      if (!isAIRoom || !FILE_EXSTS.includes(item.fileExst.replace(".", ""))) {
+        fileOptions = removeOptions(fileOptions, [
+          "summarize",
+          "ask_ai",
+          "separator4",
+        ]);
       }
 
       if (optionsToRemove.length) {

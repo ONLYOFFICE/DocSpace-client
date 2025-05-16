@@ -716,5 +716,7 @@
   "Yes": "Да",
   "Yesterday": "Јуче",
   "You": "Ви",
-  "YourTurn": "Ваш ред"
+  "YourTurn": "Ваш ред",
+  "OpenSavedDocument": "Отвори сачуван документ у новој картици",
+  "FileName": "Име датотеке"
 }

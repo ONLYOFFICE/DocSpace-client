@@ -31,3 +31,9 @@ export enum BuildStatus {
   INACTIVE = "INACTIVE",
   ERROR = "ERROR",
 }
+
+export enum ChatEvents {
+  ADD_USER_MESSAGE = "add_user_message",
+  ADD_AI_MESSAGE = "add_ai_message",
+  ADD_FILE = "add_file",
+}

@@ -708,5 +708,7 @@
   "Yes": "Evet",
   "Yesterday": "Dün",
   "You": "Siz",
-  "YourTurn": "Sıra sizde"
+  "YourTurn": "Sıra sizde",
+  "OpenSavedDocument": "Kaydedilen belgeyi yeni sekmede aç",
+  "FileName": "Dosya Adı"
 }

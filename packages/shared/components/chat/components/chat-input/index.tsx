@@ -67,8 +67,11 @@ const ChatInput = ({
 
   const prevSession = React.useRef(currentSession);
 
+  const isSendDisabled = !isInit ? false : value ? isRequestRunning : false;
+
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (!isInit ? false : isRequestRunning) return;
+    if (isSendDisabled) return;
+
     if (e.target.value === "\n") return;
 
     setValue(e.target.value);
@@ -89,7 +92,7 @@ const ChatInput = ({
 
   const onKeyEnter = React.useCallback(
     (e: KeyboardEvent) => {
-      if (e.key === "Enter") return sendMessageAction();
+      if (e.key === "Enter" && !e.shiftKey) return sendMessageAction();
       if (e.key === "Escape") return setShowSelector(false);
     },
     [sendMessageAction],
@@ -119,8 +122,6 @@ const ChatInput = ({
 
   const isDisabled = !isInit ? !value : isRequestRunning ? false : !value;
 
-  const isSendDisabled = !isInit ? false : isRequestRunning;
-
   const sendIconProps = !isInit
     ? { onClick: sendMessageAction, isDisabled, iconNode: null }
     : {
@@ -133,9 +134,7 @@ const ChatInput = ({
 
   return (
     <div
-      className={classNames(styles.chatInput, {
-        [styles.disabled]: isSendDisabled,
-      })}
+      className={classNames(styles.chatInput)}
       style={
         {
           "--chat-input-textarea-wrapper-with-files-padding": `${wrapperHeight + 24}px 8px 44px`,
@@ -155,7 +154,6 @@ const ChatInput = ({
         })}
         placeholder={placeholder}
         isChatMode
-        isDisabled={isSendDisabled}
       />
       <FilePreview
         getIcon={getIcon}
@@ -170,7 +168,6 @@ const ChatInput = ({
           isClickable
           onClick={toggleSelector}
           className={styles.chatInputButtonsFile}
-          isDisabled={isSendDisabled}
         />
 
         <IconButton

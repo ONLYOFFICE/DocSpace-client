@@ -708,5 +708,7 @@
   "Yes": "Bəli",
   "Yesterday": "Dünən",
   "You": "Siz",
-  "YourTurn": "Sizin növbəniz"
+  "YourTurn": "Sizin növbəniz",
+  "OpenSavedDocument": "Yadda saxlanmış sənədi yeni tabda açın",
+  "FileName": "Fayl adı"
 }

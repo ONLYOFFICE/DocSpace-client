@@ -27,7 +27,10 @@
 import React from "react";
 import { makeAutoObservable } from "mobx";
 
+import { TFile } from "../../../api/files/types";
+
 import { TSelectorItem } from "../../selector/Selector.types";
+import { ChatEvents } from "../enums";
 
 export default class FilesStore {
   files: TSelectorItem[] = [];
@@ -37,6 +40,10 @@ export default class FilesStore {
   constructor() {
     makeAutoObservable(this);
   }
+
+  addFile = (file: TSelectorItem) => {
+    this.files.push(file);
+  };
 
   setFiles = (files: TSelectorItem[] = []) => {
     this.files = files;
@@ -63,6 +70,37 @@ export const FilesStoreContextProvider = ({
   children: React.ReactNode;
 }) => {
   const store = React.useMemo(() => new FilesStore(), []);
+
+  React.useEffect(() => {
+    const handleAddFile = (event: CustomEvent) => {
+      const file: TFile = event.detail;
+
+      const selectorItem: TSelectorItem = {
+        id: file.id,
+        fileExst: file.fileExst,
+        fileType: file.fileType,
+        rootFolderType: file.rootFolderType,
+        security: file.security,
+        parentId: file.folderId,
+        icon: "",
+        label: file.title,
+      };
+
+      store.addFile(selectorItem);
+    };
+
+    window.addEventListener(
+      ChatEvents.ADD_FILE,
+      handleAddFile as EventListener,
+    );
+
+    return () => {
+      window.removeEventListener(
+        ChatEvents.ADD_FILE,
+        handleAddFile as EventListener,
+      );
+    };
+  }, [store]);
 
   return (
     <FilesStoreContext.Provider value={store}>

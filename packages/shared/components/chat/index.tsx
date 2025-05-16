@@ -74,6 +74,7 @@ const Chat = ({
               vectorizedFiles={vectorizedFiles}
               user={user}
               isFullScreen={isFullScreen}
+              currentDeviceType={currentDeviceType}
             />
             <ChatInput
               currentDeviceType={currentDeviceType}

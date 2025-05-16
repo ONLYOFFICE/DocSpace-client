@@ -10,6 +10,7 @@ import type {
 import { getCookie } from "@docspace/shared/utils/cookie";
 import { TFile } from "@docspace/shared/api/files/types";
 import { toastr } from "@docspace/shared/components/toast";
+import { ChatEvents } from "@docspace/shared/components/chat/enums";
 
 type VectorizeDocumentStatus = "added" | "error" | "exist" | "not_found";
 
@@ -17,7 +18,7 @@ type SimpleFile = Pick<TFile, "id" | "version" | "title" | "fileExst">;
 
 const API_KEY_NAME = "chat_api_key";
 
-const FILE_EXSTS = ["docx", "pdf", "xlsx", "txt"];
+export const FILE_EXSTS = ["docx", "pdf", "xlsx", "txt"];
 
 class FlowStore {
   private api: FlowsApi;
@@ -193,7 +194,7 @@ class FlowStore {
       }
 
       if (msg === "added") {
-        toastr.success(`Document vectorized: ${file.title}`);
+        toastr.success(`Document ready for chat: ${file.title}`);
         this.vectorizedFiles = [...this.vectorizedFiles, file];
       }
 
@@ -210,6 +211,39 @@ class FlowStore {
     }
   };
 
+  summarizeToChat = async (file: TFile) => {
+    if (!this.apiKey) {
+      setTimeout(() => {
+        this.summarizeToChat(file);
+      }, 1000);
+      return;
+    }
+
+    if (!this.aiChatIsVisible) {
+      this.setAiChatIsVisible(true);
+    }
+
+    // Need to wait for ai chat to be visible
+    setTimeout(async () => {
+      const userEvent = new CustomEvent(ChatEvents.ADD_USER_MESSAGE, {
+        detail: { file, isSummary: true },
+      });
+      window.dispatchEvent(userEvent);
+
+      const res = await FlowsApi.summarizeFileToText(String(file.id));
+
+      const msg = res.outputs[0].outputs[0].results.message;
+
+      delete msg.data;
+
+      const aiEvent = new CustomEvent(ChatEvents.ADD_AI_MESSAGE, {
+        detail: msg,
+      });
+
+      window.dispatchEvent(aiEvent);
+    }, 0);
+  };
+
   summarizeToFile = async (file: TFile) => {
     if (!this.apiKey) {
       setTimeout(() => {
@@ -219,7 +253,7 @@ class FlowStore {
     }
 
     try {
-      await FlowsApi.summirizeFile(String(file.id));
+      await FlowsApi.summarizeFileToFile(String(file.id));
 
       toastr.success(`Document summarized: ${file.title}`);
     } catch (error) {

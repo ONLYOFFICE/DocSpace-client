@@ -49,7 +49,7 @@ const Message = ({
   vectorizedFiles,
   user,
   isFullScreen,
-
+  currentDeviceType,
   getIcon,
 }: MessageProps) => {
   const files: TFile[] = message.fileIds?.length
@@ -120,7 +120,11 @@ const Message = ({
         ) : null}
 
         {!message.isSend ? (
-          <ButtonsBlock message={message.message as string} />
+          <ButtonsBlock
+            message={message.message as string}
+            getIcon={getIcon}
+            currentDeviceType={currentDeviceType}
+          />
         ) : null}
       </div>
     </div>

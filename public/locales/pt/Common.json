@@ -708,5 +708,7 @@
   "Yes": "Sim",
   "Yesterday": "Ontem",
   "You": "Você",
-  "YourTurn": "A sua vez"
+  "YourTurn": "A sua vez",
+  "OpenSavedDocument": "Abrir o documento guardado numa nova aba",
+  "FileName": "Nome do ficheiro"
 }

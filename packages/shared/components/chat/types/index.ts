@@ -65,6 +65,8 @@ export type MessageProps = Pick<
   vectorizedFiles: TFile[];
   user: TUser;
 
+  currentDeviceType: DeviceType;
+
   isFullScreen: boolean;
 };
 

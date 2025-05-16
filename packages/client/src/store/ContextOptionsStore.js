@@ -135,6 +135,7 @@ import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { createLoader } from "@docspace/shared/utils/createLoader";
 import { FILLING_STATUS_ID } from "@docspace/shared/constants";
+import { ChatEvents } from "@docspace/shared/components/chat/enums";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -1502,12 +1503,27 @@ class ContextOptionsStore {
     };
   };
 
-  summarizeToFile = async (item) => {
+  summarizeToChat = async (item) => {
     this.filesStore.setActiveFiles([item]);
 
-    await this.flowStore.summarizeToFile(item);
+    try {
+      await this.flowStore.summarizeToChat(item);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      this.filesStore.removeActiveItem(item);
+    }
+  };
 
-    this.filesStore.removeActiveItem([item]);
+  askAI = async (file) => {
+    if (!this.flowStore.aiChatIsVisible)
+      this.flowStore.setAiChatIsVisible(true);
+
+    // timeout need for open chat and start handle this event
+    setTimeout(() => {
+      const event = new CustomEvent(ChatEvents.ADD_FILE, { detail: file });
+      window.dispatchEvent(event);
+    }, 0);
   };
 
   getFilesContextOptions = (item, t, isInfoPanel, isHeader) => {
@@ -1855,9 +1871,23 @@ class ContextOptionsStore {
         label: "Summarize",
         icon: SummarizeReactSvgUrl,
         onClick: () => {
-          this.summarizeToFile(item);
+          this.summarizeToChat(item);
         },
         disabled: false,
+      },
+      {
+        id: "ask_ai",
+        key: "ask_ai",
+        label: "Ask AI",
+        icon: SummarizeReactSvgUrl,
+        onClick: () => {
+          this.askAI(item);
+        },
+        disabled: false,
+      },
+      {
+        key: "separator4",
+        isSeparator: true,
       },
       {
         id: "option_reconnect-storage",

@@ -178,6 +178,7 @@ const ManualBackup = ({
 
   const onMakeTemporaryBackup = async () => {
     setErrorInformation("");
+    setBackupProgressError("");
     clearLocalStorage();
     localStorage.setItem(
       BackupStorageLocalKey.StorageType,
@@ -192,6 +193,7 @@ const ManualBackup = ({
         isManagement,
       );
       setDownloadingProgress(1);
+      setIsBackupProgressVisible(true);
     } catch (err) {
       setErrorInformation(err, t);
       console.error(err);
@@ -221,6 +223,7 @@ const ManualBackup = ({
   ) => {
     clearLocalStorage();
     setErrorInformation("");
+    setBackupProgressError("");
     const storageParams = getStorageParams(
       isCheckedThirdPartyStorage,
       selectedFolder,
@@ -240,6 +243,7 @@ const ManualBackup = ({
 
     try {
       await startBackup(moduleType, storageParams, false, isManagement);
+      setIsBackupProgressVisible(true);
       setDownloadingProgress(1);
       setTemporaryLink("");
     } catch (err) {

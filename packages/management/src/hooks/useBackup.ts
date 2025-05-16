@@ -159,13 +159,10 @@ export const useBackup = ({
     }));
   }, [selected.enableSchedule, setSelected]);
 
-  const setProgress = useCallback(
-    (progress: number) => {
-      setDownloadingProgress(progress);
-      backupStore.setIsBackupProgressVisible(progress !== 100);
-    },
-    [backupStore],
-  );
+  const setProgress = useCallback((progress: number) => {
+    setDownloadingProgress(progress);
+    // backupStore.setIsBackupProgressVisible(progress !== 100);
+  }, []);
 
   const resetDownloadingProgress = useCallback(() => {
     if (

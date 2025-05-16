@@ -81,9 +81,9 @@ const ContextMenu = (props: ContextMenuProps) => {
     | Event
   >(null);
 
-    const [root, setRoot] = React.useState<null | HTMLDivElement>(null);
+  const [root, setRoot] = React.useState<null | HTMLDivElement>(null);
 
-    const { isRTL } = useInterfaceDirection();
+  const { isRTL } = useInterfaceDirection();
 
   const {
     ref,
@@ -421,6 +421,10 @@ const ContextMenu = (props: ContextMenuProps) => {
     };
   }, [documentResizeListener, onHide, visible]);
 
+  React.useEffect(() => {
+    setRoot(document.getElementById("root") as HTMLDivElement);
+  }, []);
+
   const createSyntheticMouseEvent = (
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
   ): MouseEvent => {
@@ -466,16 +470,13 @@ const ContextMenu = (props: ContextMenuProps) => {
     );
   };
 
-    React.useEffect(() => {
-      setRoot(document.getElementById("root") as HTMLDivElement);
-    }, []);
-    const createSyntheticMouseEvent = (
-      e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
-    ): MouseEvent => {
-      const eventX = "clientX" in e ? e.clientX : 0;
-      const eventY = "clientY" in e ? e.clientY : 0;
-      const eventPageX = "pageX" in e ? e.pageX : 0;
-      const eventPageY = "pageY" in e ? e.pageY : 0;
+  const onMobileItemClick = async (
+    e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+    label: string,
+    items?: ContextMenuModel[],
+    loadFunc?: () => Promise<ContextMenuModel[]>,
+  ) => {
+    e.stopPropagation();
 
     setShowMobileMenu(true);
 
@@ -670,8 +671,8 @@ const ContextMenu = (props: ContextMenuProps) => {
     </>
   );
 
-    if (root && isMobileUtil) {
-      const portal = <Portal element={contextMenu} appendTo={root} />;
+  if (root && isMobileUtil) {
+    const portal = <Portal element={contextMenu} appendTo={root} />;
 
     return portal;
   }

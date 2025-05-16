@@ -62,6 +62,7 @@ const defaultProps = {
     phone: "+1234567890",
     site: "https://example.com",
     isDefault: true,
+    hideAbout: false,
     isLicensor: false,
   },
   onSave: jest.fn(),

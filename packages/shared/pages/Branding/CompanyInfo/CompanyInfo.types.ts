@@ -38,6 +38,7 @@ export interface ICompanyInfo {
     email: string,
     phone: string,
     site: string,
+    hideAbout: boolean,
   ) => void;
   onRestore: () => void;
   isLoading: boolean;
@@ -51,6 +52,7 @@ export interface ICompanySettings {
   email: string;
   phone: string;
   site: string;
+  hideAbout: boolean;
   isDefault: boolean;
   isLicensor: boolean;
 }

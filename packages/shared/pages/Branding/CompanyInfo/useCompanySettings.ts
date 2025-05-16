@@ -37,11 +37,12 @@ const defaultCompanySettingsError = {
 };
 
 type TValidators = "site" | "email" | "phone" | "companyName" | "address";
+type TBooleanFields = keyof Pick<ICompanySettings, "hideAbout">;
 
 interface IState {
   fields: Pick<
     ICompanySettings,
-    "address" | "companyName" | "email" | "phone" | "site"
+    "address" | "companyName" | "email" | "phone" | "site" | "hideAbout"
   >;
   errors: typeof defaultCompanySettingsError;
   hasChanges: boolean;
@@ -49,6 +50,11 @@ interface IState {
 
 type Action =
   | { type: "SET_FIELD"; field: TValidators; value: string }
+  | {
+      type: "SET_BOOLEAN_FIELD";
+      field: TBooleanFields;
+      value: boolean;
+    }
   | { type: "RESET"; values: ICompanySettings };
 
 const validators: Record<TValidators, (v: string) => boolean> = {
@@ -75,6 +81,14 @@ function reducer(state: IState, action: Action): IState {
         hasChanges: true,
       };
     }
+    case "SET_BOOLEAN_FIELD": {
+      const newFields = { ...state.fields, [action.field]: action.value };
+      return {
+        fields: newFields,
+        errors: state.errors,
+        hasChanges: true,
+      };
+    }
     case "RESET":
       return {
         fields: {
@@ -83,6 +97,7 @@ function reducer(state: IState, action: Action): IState {
           email: action.values.email,
           phone: action.values.phone,
           site: action.values.site,
+          hideAbout: action.values.hideAbout,
         },
         errors: defaultCompanySettingsError,
         hasChanges: false,
@@ -100,6 +115,7 @@ export const useCompanySettings = (companySettings: ICompanySettings) => {
       email: companySettings.email,
       phone: companySettings.phone,
       site: companySettings.site,
+      hideAbout: companySettings.hideAbout,
     },
     errors: defaultCompanySettingsError,
     hasChanges: false,
@@ -108,6 +124,13 @@ export const useCompanySettings = (companySettings: ICompanySettings) => {
   const createChangeHandler = useCallback(
     (field: TValidators) => (e: React.ChangeEvent<HTMLInputElement>) => {
       dispatch({ type: "SET_FIELD", field, value: e.target.value });
+    },
+    [],
+  );
+
+  const createChangeBooleanHandler = useCallback(
+    (field: TBooleanFields) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      dispatch({ type: "SET_BOOLEAN_FIELD", field, value: e.target.checked });
     },
     [],
   );
@@ -125,5 +148,6 @@ export const useCompanySettings = (companySettings: ICompanySettings) => {
     onChangeEmail: createChangeHandler("email"),
     onChangePhone: createChangeHandler("phone"),
     onChangeSite: createChangeHandler("site"),
+    onChangeHideAbout: createChangeBooleanHandler("hideAbout"),
   };
 };

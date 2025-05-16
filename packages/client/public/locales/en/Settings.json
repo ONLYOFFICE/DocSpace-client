@@ -313,6 +313,7 @@
   "SuccessfullySaveGreetingSettingsMessage": "Welcome Page settings have been successfully saved",
   "SuccessfullySavePortalNameMessage": "Space has been renamed successfully",
   "SuccessfullySaveSettingsMessage": "Settings have been successfully updated",
+  "ShowAboutWindow": "Show the About window",
   "TemporaryStorage": "Temporary storage",
   "TemporaryStorageDescription": "Backup is stored in the 'Backup' section, you will be able to download it within 24 hours after creating.",
   "TenantQuotaLimit": "{{tenantQuotaLimit}} for {{productName}}",

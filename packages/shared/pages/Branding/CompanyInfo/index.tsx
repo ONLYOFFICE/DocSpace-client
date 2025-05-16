@@ -34,6 +34,9 @@ import {
   InputType,
   InputSize,
 } from "../../../components/text-input";
+
+import { Checkbox } from "../../../components/checkbox";
+
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 
 import { useResponsiveNavigation } from "../../../hooks/useResponsiveNavigation";
@@ -66,6 +69,7 @@ export const CompanyInfo = ({
     email,
     phone,
     site,
+    hideAbout,
     companySettingsError,
     hasChanges,
     onChangeAddress,
@@ -73,10 +77,11 @@ export const CompanyInfo = ({
     onChangeEmail,
     onChangePhone,
     onChangeSite,
+    onChangeHideAbout,
   } = useCompanySettings(companySettings);
 
   const onSaveAction = () => {
-    onSave(address, companyName, email, phone, site);
+    onSave(address, companyName, email, phone, site, hideAbout);
   };
 
   const {
@@ -116,6 +121,14 @@ export const CompanyInfo = ({
         />
       </div>
       <div className="settings-block">
+        <FieldContainer>
+          <Checkbox
+            isChecked={hideAbout}
+            onChange={onChangeHideAbout}
+            data-testid="show-about-window-checkbox"
+            label={t("Settings:ShowAboutWindow")}
+          />
+        </FieldContainer>
         <FieldContainer
           id="fieldContainerCompanyName"
           className="field-container-width settings_unavailable"

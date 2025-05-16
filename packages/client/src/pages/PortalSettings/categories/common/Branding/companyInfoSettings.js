@@ -63,11 +63,18 @@ const CompanyInfoSettingsComponent = (props) => {
   }, [companyInfoSettingsData, tReady]);
 
   const onSave = useCallback(
-    async (address, companyName, email, phone, site) => {
+    async (address, companyName, email, phone, site, hideAbout) => {
       setIsLoading(true);
 
       try {
-        await setCompanyInfoSettings(address, companyName, email, phone, site);
+        await setCompanyInfoSettings(
+          address,
+          companyName,
+          email,
+          phone,
+          site,
+          hideAbout,
+        );
         await getCompanyInfoSettings();
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       } catch (error) {

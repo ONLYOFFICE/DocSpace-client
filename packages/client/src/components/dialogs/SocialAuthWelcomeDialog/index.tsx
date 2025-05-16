@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
 import { useTheme } from "styled-components";
@@ -44,6 +44,19 @@ const SocialAuthWelcomeDialogComponent = ({
 }: SocialAuthWelcomeDialogProps) => {
   const navigate = useNavigate();
   const theme = useTheme();
+  const [showDialog, setShowDialog] = useState(false);
+  const [isLoaded, setIsLoaded] = React.useState(false);
+
+  const imageRef = React.useRef<HTMLImageElement>(null);
+
+  const handleImageLoaded = () => {
+    if (!isLoaded) {
+      setIsLoaded(true);
+      if (imageRef.current) {
+        setShowDialog(true);
+      }
+    }
+  };
 
   const welcomeAuthSocialImage = theme.isBase
     ? WelcomeAuthSocial
@@ -63,11 +76,18 @@ const SocialAuthWelcomeDialogComponent = ({
     navigate("/portal-settings/customization/general/dns-settings");
   };
 
+  if (!visible) return null;
+
   return (
     <StyledModalDialog
       visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.modal}
+      style={{
+        opacity: showDialog ? 1 : 0,
+        transition: "opacity 0.3s ease-in-out",
+        visibility: showDialog ? "visible" : "hidden",
+      }}
     >
       <ModalDialog.Header>
         {t("Common:EmptyRootRoomHeader", {
@@ -81,6 +101,8 @@ const SocialAuthWelcomeDialogComponent = ({
               src={welcomeAuthSocialImage}
               className="welcome-auth-social-image"
               alt="auth-welcome-preview"
+              onLoad={handleImageLoaded}
+              ref={imageRef}
             />
           </div>
 

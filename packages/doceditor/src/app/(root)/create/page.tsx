@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { permanentRedirect, redirect, RedirectType } from "next/navigation";
-import dynamic from "next/dynamic";
 import { headers } from "next/headers";
 
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
@@ -33,13 +32,8 @@ import { EditorConfigErrorType } from "@docspace/shared/enums";
 
 import { createFile, fileCopyAs, getEditorUrl } from "@/utils/actions";
 import { logger } from "@/../logger.mjs";
-
-const Editor = dynamic(() => import("@/components/Editor"), {
-  ssr: !!false,
-});
-const CreateFileError = dynamic(() => import("@/components/CreateFileError"), {
-  ssr: !!false,
-});
+import Editor from "@/components/Editor";
+import CreateFileError from "@/components/CreateFileError";
 
 const log = logger.child({ module: "Create page" });
 

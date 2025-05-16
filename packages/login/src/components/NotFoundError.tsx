@@ -34,7 +34,7 @@ import AppLoader from "@docspace/shared/components/app-loader";
 const Error404 = dynamic(
   () => import("@docspace/shared/components/errors/Error404"),
   {
-    ssr: !!false,
+    ssr: false,
     loading: () => <AppLoader />,
   },
 );

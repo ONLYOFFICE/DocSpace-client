@@ -26,7 +26,6 @@
 
 import { cookies, headers } from "next/headers";
 import Script from "next/script";
-import dynamic from "next/dynamic";
 
 import "pino-roll";
 import "pino-pretty";
@@ -44,11 +43,8 @@ import { logger } from "@/../logger.mjs";
 
 import { RootPageProps } from "@/types";
 import Root from "@/components/Root";
+import FilePassword from "@/components/file-password";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
-
-const FilePassword = dynamic(() => import("@/components/file-password"), {
-  ssr: !!false,
-});
 
 const log = logger.child({ module: "Doceditor page" });
 

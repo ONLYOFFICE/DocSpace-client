@@ -26,10 +26,11 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import dynamic from "next/dynamic";
+"use client";
 
 import type { JSX } from "react";
+import dynamic from "next/dynamic";
 
 const ClientOnly = ({ children }: { children: JSX.Element }) => children;
 
-export default dynamic(() => Promise.resolve(ClientOnly), { ssr: !!false });
+export default dynamic(() => Promise.resolve(ClientOnly), { ssr: false });

@@ -128,14 +128,13 @@ const RowContent = observer(
           {badgesComponent}
         </div>
 
-        <Text
-          fontSize="12px"
-          fontWeight={400}
-          className="row_update-text"
-          style={{ display: mainInfo ? "block" : "none" }}
-        >
-          {mainInfo || ""}
-        </Text>
+        {mainInfo ? (
+          <Text fontSize="12px" fontWeight={400} className="row_update-text">
+            {mainInfo}
+          </Text>
+        ) : (
+          <></>
+        )}
       </SimpleFilesRowContent>
     );
   },

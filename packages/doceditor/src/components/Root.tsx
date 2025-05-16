@@ -25,15 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 "use client";
-import dynamic from "next/dynamic";
 
 import React from "react";
+import dynamic from "next/dynamic";
 import { useTranslation } from "react-i18next";
 
 const ErrorContainer = dynamic(
   () => import("@docspace/shared/components/error-container/ErrorContainer"),
   {
-    ssr: !!false,
+    ssr: false,
   },
 );
 

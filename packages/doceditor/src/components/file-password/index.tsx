@@ -27,6 +27,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { Trans, useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
@@ -215,4 +216,4 @@ const FilePassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
   );
 };
 
-export default FilePassword;
+export default dynamic(() => Promise.resolve(FilePassword), { ssr: false });

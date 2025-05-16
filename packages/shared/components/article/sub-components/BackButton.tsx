@@ -26,7 +26,7 @@
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow-left.react.svg?url";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { IconButton } from "../../icon-button";
 import { Text } from "../../text";
 import styles from "../Article.module.scss";

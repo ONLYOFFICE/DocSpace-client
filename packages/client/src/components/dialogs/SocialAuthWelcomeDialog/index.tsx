@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
 import { useTheme } from "styled-components";

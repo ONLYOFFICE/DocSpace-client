@@ -265,7 +265,6 @@ const SetRoomParams = ({
 
     if (newValue.match(folderFormValidation)) {
       setIsWrongTitle(true);
-      // toastr.warning(t("Files:ContainsSpecCharacter"));
     } else {
       setIsWrongTitle(false);
     }

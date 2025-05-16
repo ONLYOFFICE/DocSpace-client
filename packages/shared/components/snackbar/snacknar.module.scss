@@ -83,6 +83,13 @@
   }
 }
 
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+}
+
 .textHeader {
   font-size: 12px !important;
   line-height: 16px;

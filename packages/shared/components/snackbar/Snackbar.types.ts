@@ -41,6 +41,10 @@ export type SnackbarProps = {
    */
   headerText?: string;
   /**
+   * Specifies additional information text next to the header.
+   */
+  additionalHeaderText?: string;
+  /**
    * Specifies the button text.
    */
   btnText?: string;

@@ -129,6 +129,7 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
     const {
       text,
       headerText,
+      additionalHeaderText,
       btnText,
       textColor = globalColors.darkBlack,
       showIcon,
@@ -212,16 +213,29 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
                 </div>
               ) : null}
 
-              <Heading
-                size={HeadingSize.xsmall}
-                isInline
-                className={styles.textHeader}
-                style={headerStyles}
-                color={textColor}
-                data-testid="snackbar-header"
-              >
-                {headerText}
-              </Heading>
+              <div className={styles.headerContainer}>
+                <Heading
+                  size={HeadingSize.xsmall}
+                  isInline
+                  className={styles.textHeader}
+                  style={headerStyles}
+                  color={textColor}
+                  data-testid="snackbar-header"
+                >
+                  {headerText}
+                </Heading>
+                {additionalHeaderText ? (
+                  <Text
+                    as="span"
+                    isInline
+                    color={textColor}
+                    fontSize="12px"
+                    data-testid="snackbar-additional-info"
+                  >
+                    {additionalHeaderText}
+                  </Text>
+                ) : null}
+              </div>
             </div>
             <div className={styles.textBody}>
               <Text
@@ -256,7 +270,7 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
             </div>
           </div>
         )}
-        {!btnText ? (
+        {!btnText && onAction ? (
           <button
             className={styles.action}
             type="submit"

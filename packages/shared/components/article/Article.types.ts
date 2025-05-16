@@ -40,6 +40,7 @@ export type ArticleHeaderProps = {
   isBurgerLoading: boolean;
   withCustomArticleHeader: boolean;
   currentDeviceType: DeviceType;
+  showBackButton: boolean;
 };
 
 export type ArticleAppsProps = {

@@ -27,6 +27,7 @@
 import { headers, cookies } from "next/headers";
 
 const API_PREFIX = "api/2.0";
+const APISYSTEM_PREFIX = "apisystem";
 
 export const getBaseUrl = async () => {
   const hdrs = await headers();
@@ -42,7 +43,7 @@ export const getBaseUrl = async () => {
 export const getAPIUrl = async (apiSystem?: boolean) => {
   const baseUrl = process.env.API_HOST?.trim() ?? (await getBaseUrl());
 
-  const baseAPIUrl = `${baseUrl}/${!apiSystem ? API_PREFIX : "apisystem"}`;
+  const baseAPIUrl = `${baseUrl}/${!apiSystem ? API_PREFIX : APISYSTEM_PREFIX}`;
 
   return baseAPIUrl;
 };

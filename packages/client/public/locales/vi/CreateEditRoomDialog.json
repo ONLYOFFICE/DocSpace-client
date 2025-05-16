@@ -1,5 +1,4 @@
 {
-  "ActivationRequired": "cần kích hoạt ",
   "AddStaticText": "Thêm văn bản tĩnh",
   "AddWatermarkElements": "Thêm các phần watermark ",
   "AddWatermarksToDocuments": "Thêm watermark vào tài liệu",
@@ -33,7 +32,6 @@
   "StorageDescription": "Hạn mức lưu trữ được đặt cho mỗi phòng. Bạn có thể thay đổi giá trị này hoặc tắt giới hạn lưu trữ.",
   "TagsPlaceholder": "Thêm thẻ",
   "ThirdPartyStorageComboBoxPlaceholder": "Chọn bộ nhớ",
-  "ThirdPartyStorageDescription": "Sử dụng dịch vụ của bên thứ ba làm nơi lưu trữ dữ liệu cho phòng này. Một thư mục mới để lưu trữ dữ liệu của phòng này sẽ được tạo trong bộ nhớ được kết nối.",
   "ThirdPartyStorageNoStorageAlert": "Trước tiên, bạn cần kết nối dịch vụ tương ứng trong phần 'Tích hợp'. Nếu không, kết nối sẽ không thể thực hiện được.",
   "ThirdPartyStoragePermanentSettingDescription": "Các tập tin được lưu trữ trong bộ nhớ của bên thứ ba {{thirdpartyTitle}} trong thư mục \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "Để kết nối bộ nhớ của bên thứ ba, bạn cần thêm dịch vụ tương ứng trong phần Tích hợp của cài đặt {{productName}}. Liên hệ với chủ sở hữu hoặc quản trị viên {{productName}} để kích hoạt tích hợp.",

@@ -36,8 +36,9 @@ import { Tabs } from "@docspace/shared/components/tabs";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
+
 import { DeviceType } from "@docspace/shared/enums";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isManagement } from "@docspace/shared/utils/common";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import SocketHelper, {
@@ -46,6 +47,7 @@ import SocketHelper, {
 } from "@docspace/shared/utils/socket";
 
 import config from "../../../../../package.json";
+
 import ManualBackup from "./backup/manual-backup";
 import AutoBackup from "./backup/auto-backup";
 
@@ -109,14 +111,14 @@ const DataManagementWrapper = (props) => {
   const data = [
     {
       id: "data-backup",
-      name: t("DataBackup"),
+      name: t("Common:DataBackup"),
       content: (
         <ManualBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
       ),
     },
     {
       id: "auto-backup",
-      name: t("AutoBackup"),
+      name: t("Common:AutoBackup"),
       content: (
         <AutoBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
       ),

@@ -42,6 +42,10 @@ import {
   removeLogoFromRoom,
 } from "@docspace/shared/api/rooms";
 
+/**
+ * @typedef {import("@docspace/shared/components/files-selector-input/FilesSelectorInput.types").BackupToPublicRoomOptionType } BackupToPublicRoomOptionType
+ */
+
 class DialogsStore {
   authStore;
 
@@ -819,6 +823,10 @@ class DialogsStore {
     this.moveToPublicRoomData = data;
   };
 
+  /**
+   * @param {boolean} visible
+   * @param {null | BackupToPublicRoomOptionType } [data]
+   */
   setBackupToPublicRoomVisible = (visible, data = null) => {
     this.backupToPublicRoomVisible = visible;
     this.backupToPublicRoomData = data;

@@ -14,7 +14,6 @@
   "CannotRestoreRoom": "Room cannot be restored",
   "ChooseNewPayer": "Choose a new Payer",
   "ChooseNewPlan": "Would you like to choose a new pricing plan?",
-  "ContactUs": "For sales questions, contact us at",
   "DelayedPayment": "Delayed payment of the {{planName}} plan dated {{date}}",
   "DowngradeNow": "Downgrade now",
   "ErrorNotification": "Failed to update tariff plan. Try again later or contact the sales department.",

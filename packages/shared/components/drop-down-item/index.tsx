@@ -119,7 +119,7 @@ const DropDownItem = ({
   const theme = useTheme();
 
   const handleClick = (
-    e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+    e: React.MouseEvent<HTMLElement> | React.ChangeEvent<HTMLInputElement>,
   ) => {
     if (!disabled) onClick?.(e);
     if (isSelected) onClickSelectedItem?.();

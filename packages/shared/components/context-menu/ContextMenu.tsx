@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use client";
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import { CSSTransition } from "react-transition-group";
@@ -79,7 +81,9 @@ const ContextMenu = (props: ContextMenuProps) => {
     | Event
   >(null);
 
-  const { isRTL } = useInterfaceDirection();
+    const [root, setRoot] = React.useState<null | HTMLDivElement>(null);
+
+    const { isRTL } = useInterfaceDirection();
 
   const {
     ref,
@@ -462,13 +466,16 @@ const ContextMenu = (props: ContextMenuProps) => {
     );
   };
 
-  const onMobileItemClick = async (
-    e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
-    label: string,
-    items?: ContextMenuModel[],
-    loadFunc?: () => Promise<ContextMenuModel[]>,
-  ) => {
-    e.stopPropagation();
+    React.useEffect(() => {
+      setRoot(document.getElementById("root") as HTMLDivElement);
+    }, []);
+    const createSyntheticMouseEvent = (
+      e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+    ): MouseEvent => {
+      const eventX = "clientX" in e ? e.clientX : 0;
+      const eventY = "clientY" in e ? e.clientY : 0;
+      const eventPageX = "pageX" in e ? e.pageX : 0;
+      const eventPageY = "pageY" in e ? e.pageY : 0;
 
     setShowMobileMenu(true);
 
@@ -663,9 +670,8 @@ const ContextMenu = (props: ContextMenuProps) => {
     </>
   );
 
-  const root = typeof window !== "undefined" && document.getElementById("root");
-  if (isMobileUtil) {
-    const portal = <Portal element={contextMenu} appendTo={root || null} />;
+    if (root && isMobileUtil) {
+      const portal = <Portal element={contextMenu} appendTo={root} />;
 
     return portal;
   }

@@ -196,7 +196,7 @@
   "QuotaPerRoom": "Quota per room",
   "QuotaPerUser": "Quota per user",
   "Quotas": "Quotas",
-  "QuotasDescription": "Here, you can set storage quota for users and rooms. <1>Help Center.</1>",
+  "QuotasDescription": "Here, you can set storage quota for users and rooms.",
   "Recalculate": "Recalculate",
   "ReportSaveLocation": "The report will be saved to {{sectionName}}",
   "RestoreToDefault": "Restore to default",

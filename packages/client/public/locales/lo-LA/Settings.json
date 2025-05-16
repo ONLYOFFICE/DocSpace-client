@@ -135,7 +135,7 @@
   "QuotaPerRoom": "ໂຄຕ້າຕໍ່ຫ້ອງ",
   "QuotaPerUser": "ໂຄຕ້າຕໍ່ຜູ້ໃຊ້",
   "Quotas": "ໂຄຕ້າ",
-  "QuotasDescription": "ທີ່ນີ້, ທ່ານສາມາດກໍານົດໂຄຕ້າການເກັບຮັກສາສໍາລັບຜູ້ໃຊ້ແລະຫ້ອງ. <1>ສູນຊ່ວຍເຫຼືອ.</1>",
+  "QuotasDescription": "ທີ່ນີ້, ທ່ານສາມາດກໍານົດໂຄຕ້າການເກັບຮັກສາສໍາລັບຜູ້ໃຊ້ແລະຫ້ອງ.",
   "Recalculate": "ຄິດໄລ່ຄືນ",
   "SaveToApply": "ຄລິກທີ່ປຸ່ມ <strong>ບັນທຶກ</strong> ຢູ່ລຸ່ມສຸດເພື່ອນຳໃຊ້.",
   "SelectedUsersCounter": "ເລືອກແລ້ວ: {{selectedUsers}}/{{totalUsers}} ຜູ້ໃຊ້",

@@ -34,7 +34,7 @@ import { Text } from "@docspace/shared/components/text";
 
 import WalletReactSvgUrl from "PUBLIC_DIR/images/icons/16/wallet.react.svg?url";
 
-import styles from "../styles/WalletInfo.module.scss";
+import styles from "../styles/Wallet.module.scss";
 
 type WalletInfoProps = {
   balance?: string;

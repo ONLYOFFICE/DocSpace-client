@@ -134,3 +134,12 @@
     transform: translateY(0);
   }
 }
+
+.autoPaymentInformation {
+  margin-bottom: 24px;
+  color: var(--payment-text-color);
+}
+
+.autoPaymentEditing {
+  display: flex;
+}

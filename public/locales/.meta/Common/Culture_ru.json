@@ -1,10 +1,14 @@
 {
   "key_path": "Culture_ru",
+  "content": "Русский (Россия)",
   "content_en_sha1_hash": "2846f48fb77392bab8e577c1dfd0da485ee6a3aa",
-  "created_at": "2025-05-14T14:04:15.525Z",
-  "updated_at": "2025-05-14T14:04:15.525Z",
-  "comment_text": "",
-  "comment_ai": false,
+  "created_at": "2025-05-19T21:30:44.162Z",
+  "updated_at": "2025-05-19T21:30:44.162Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
   "usage": [],
   "languages": {
     "en": {

@@ -1,11 +1,28 @@
 {
   "key_path": "LinkExpired",
+  "content": "The link has expired.",
   "content_en_sha1_hash": "ef3fc8d140fe94ebbb33acc6c724acb2c51a4cb9",
-  "created_at": "2025-05-14T14:04:17.509Z",
-  "updated_at": "2025-05-14T14:04:17.509Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:46.180Z",
+  "updated_at": "2025-05-19T21:56:08.731Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/components/ConfirmRoute.tsx",
+      "line_number": 99,
+      "context": "case ValidationResult.Expired:\n console.error(\"expired link\", {\n confirmLinkParams,\n validationResult: confirmLinkResult.result,\n });\n throw new Error(t(\"Common:LinkExpired\"));\n case ValidationResult.TariffLimit:\n console.error(\"tariff limit\", {\n confirmLinkParams,\n validationResult: confirmLinkResult.result,\n });",
+      "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/shared/components/share/sub-components/ExpiredComboBox.tsx",
+      "line_number": 185,
+      "context": "})}\n as=\"div\"\n fontSize=\"12px\"\n fontWeight=\"400\"\n >\n {t(\"Common:LinkExpired\")}{\" \"}\n <Link\n type={LinkType.action}\n fontWeight={400}\n fontSize=\"12px\"\n color={globalColors.lightBlueMain}",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

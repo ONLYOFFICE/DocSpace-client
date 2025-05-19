@@ -1,11 +1,28 @@
 {
   "key_path": "Write",
+  "content": "Write",
   "content_en_sha1_hash": "4a48932789d199bbed709777e2d743ca2bafdc6c",
-  "created_at": "2025-05-14T14:04:24.211Z",
-  "updated_at": "2025-05-14T14:04:24.211Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.069Z",
+  "updated_at": "2025-05-19T21:56:08.428Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
+      "line_number": 257,
+      "context": "</Text>\n <Text\n className=\"api-key_permission-container-text separator\"\n fontWeight={600}\n >\n {t(\"OAuth:Write\")}\n </Text>\n \n {permissionsList.map((item) => {\n return item;\n })}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/ScopesBlock.tsx",
+      "line_number": 89,
+      "context": "type: ScopeType,\n name: string = \"\",\n ) => {\n const isChecked = checkedScopes.includes(name);\n \n const isWrite = type === \"write\";\n \n if (!isChecked) {\n setFilteredScopes((val) => {\n val[group].isChecked = true;\n val[group].checkedType = type;",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

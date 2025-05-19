@@ -1,11 +1,22 @@
 {
   "key_path": "FormVDRConfirmationOfStartTitle",
+  "content": "Form is ready for filling in room",
   "content_en_sha1_hash": "7e7a3ee89a17104067a57c00273fc1efdc5a7071",
-  "created_at": "2025-05-14T14:04:28.058Z",
-  "updated_at": "2025-05-14T14:04:28.058Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.179Z",
+  "updated_at": "2025-05-19T21:56:08.713Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
+      "line_number": 143,
+      "context": "return t(\"CompletedForm:LinkToForm\");\n }, [t, isStartFilling, completed]);\n \n const header = useMemo(() => {\n if (isStartFilling) {\n return t(\"CompletedForm:FormVDRConfirmationOfStartTitle\");\n }\n \n if (completed) return t(\"CompletedForm:FormFinalized\");\n \n return t(\"CompletedForm:FormSectionCompleted\");",
+      "module": "/packages/doceditor"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,22 @@
 {
   "key_path": "UpgradeToProBannerItemScalabilityHeader",
+  "content": "Scalability and clustering.",
   "content_en_sha1_hash": "6cc8e719d41e0d79ee36d84a4938186906c5e5a8",
-  "created_at": "2025-05-14T14:04:24.394Z",
-  "updated_at": "2025-05-14T14:04:24.394Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.632Z",
+  "updated_at": "2025-05-19T21:56:08.049Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/StandaloneComponents/BenefitsContainer.js",
+      "line_number": 73,
+      "context": "description: t(\"UpgradeToProBannerItemLicenseDescr\"),\n };\n \n const scalabilityClustering = {\n imag: ScalabilityReactSvgUrl,\n title: t(\"UpgradeToProBannerItemScalabilityHeader\"),\n description: t(\"UpgradeToProBannerItemScalabilityDescr\"),\n };\n \n const featuresArray = [];",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

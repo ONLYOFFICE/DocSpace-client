@@ -1,11 +1,22 @@
 {
   "key_path": "CreateSampleRoomSelector",
+  "content": "Create sample Room selector embed",
   "content_en_sha1_hash": "93d831166dcad24892ee84ef09c7ee51f7c5531b",
-  "created_at": "2025-05-14T14:04:23.283Z",
-  "updated_at": "2025-05-14T14:04:23.283Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.405Z",
+  "updated_at": "2025-05-19T21:56:08.468Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
+      "line_number": 207,
+      "context": ");\n \n return (\n <PresetWrapper\n description={t(\"RoomSelectorDescription\")}\n header={t(\"CreateSampleRoomSelector\")}\n >\n <Container>\n <PreviewBlock\n t={t}\n loadCurrentFrame={initFrame}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

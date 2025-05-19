@@ -1,11 +1,22 @@
 {
   "key_path": "PrivateRoomDescriptionSafest",
+  "content": "The safest storage for docx, xlsx and pptx.",
   "content_en_sha1_hash": "6222ee42df0183296c6c97c0bc9da69661e9f48c",
-  "created_at": "2025-05-14T14:04:22.418Z",
-  "updated_at": "2025-05-14T14:04:22.418Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.979Z",
+  "updated_at": "2025-05-19T21:56:07.997Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
+      "line_number": 130,
+      "context": "});\n \n const privacyIcon = <img alt=\"\" src={PrivacySvgUrl} />;\n \n const privateRoomDescTranslations = [\n t(\"PrivateRoomDescriptionSafest\"),\n t(\"PrivateRoomDescriptionSecure\"),\n t(\"PrivateRoomDescriptionEncrypted\"),\n t(\"PrivateRoomDescriptionUnbreakable\"),\n ];",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

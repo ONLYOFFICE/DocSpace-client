@@ -1,11 +1,22 @@
 {
   "key_path": "NewInFolder",
+  "content": "New in folder",
   "content_en_sha1_hash": "e5ef7b6c7c00114460d0779f23ffaafda3613917",
-  "created_at": "2025-05-14T14:04:22.324Z",
-  "updated_at": "2025-05-14T14:04:22.324Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.884Z",
+  "updated_at": "2025-05-19T21:56:08.033Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/NewFilesBadge/sub-components/NewFilesPanel.tsx",
+      "line_number": 217,
+      "context": "displayType={ModalDialogType.aside}\n withFooterBorder\n withBodyScroll\n >\n <ModalDialog.Header>\n {isRooms ? t(\"NewInRooms\") : isRoom ? t(\"NewInRoom\") : t(\"NewInFolder\")}\n </ModalDialog.Header>\n <ModalDialog.Body>{content}</ModalDialog.Body>\n <ModalDialog.Footer>{markAsReadButton}</ModalDialog.Footer>\n </ModalDialog>\n );",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

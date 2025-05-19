@@ -1,11 +1,22 @@
 {
   "key_path": "PersonalUserQuotaAdminsDescription",
+  "content": "To upload and create new files and folders, please free up disk space, or manage quota per user in the <1>Storage management settings.</1>",
   "content_en_sha1_hash": "d3fb9b35c837c5329abc87569daecaa83b8fff21",
-  "created_at": "2025-05-14T14:04:23.889Z",
-  "updated_at": "2025-05-14T14:04:23.889Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.114Z",
+  "updated_at": "2025-05-19T21:56:08.026Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
+      "line_number": 160,
+      "context": "});\n \n return (\n <Trans\n t={t}\n i18nKey=\"PersonalUserQuotaAdminsDescription\"\n components={{\n 1: (\n <Link\n fontSize=\"12px\"\n fontWeight=\"400\"",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

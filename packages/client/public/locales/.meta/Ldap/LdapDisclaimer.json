@@ -1,11 +1,22 @@
 {
   "key_path": "LdapDisclaimer",
+  "content": "Please, keep in mind: the portal user email will be taken from the 'Mail Attribute' setting. If it is missing, it will be formed in the following way: 'Login Attribute + @ + LDAP Domain'. In case such an email does not exist, the user will not receive any portal notification.",
   "content_en_sha1_hash": "8572743e32379ae667edfb0ddac6d16c85a44092",
-  "created_at": "2025-05-14T14:04:23.599Z",
-  "updated_at": "2025-05-14T14:04:23.599Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.199Z",
+  "updated_at": "2025-05-19T21:56:08.540Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/SettingsContainer.js",
+      "line_number": 92,
+      "context": "{isMobileView ? <ToggleLDAP /> : null}\n \n {isMobileView || isSettingsShown ? (\n <>\n <div>\n <Text className=\"ldap-disclaimer\">{t(\"LdapDisclaimer\")}</Text>\n <Checkboxes />\n </div>\n \n <ConnectionSettings />\n <AttributeMapping />",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

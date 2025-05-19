@@ -1,11 +1,22 @@
 {
   "key_path": "Users",
+  "content": "Users",
   "content_en_sha1_hash": "57f2b181d0a5e79a147ea1cdf41457f58dbbb3c9",
-  "created_at": "2025-05-14T14:04:23.184Z",
-  "updated_at": "2025-05-14T14:04:23.184Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.976Z",
+  "updated_at": "2025-05-19T21:56:08.698Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/InfoPanelStore.js",
+      "line_number": 609,
+      "context": "const hasPrevUsersTitle = this.getHasPrevTitle(users, \"user\");\n \n if (users.length && !hasPrevUsersTitle) {\n users.unshift({\n id: \"user\",\n displayName: t(\"InfoPanel:Users\"),\n isTitle: true,\n });\n }\n \n const hasPrevGuestsTitle = this.getHasPrevTitle(users, \"guest\");",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

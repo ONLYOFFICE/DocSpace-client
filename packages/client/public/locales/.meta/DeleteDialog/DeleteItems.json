@@ -1,11 +1,34 @@
 {
   "key_path": "DeleteItems",
+  "content": "You are about to delete these items.",
   "content_en_sha1_hash": "b1d5aa32b50eb60054a839e1db625efe3155a510",
-  "created_at": "2025-05-14T14:04:21.263Z",
-  "updated_at": "2025-05-14T14:04:21.263Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.703Z",
+  "updated_at": "2025-05-19T21:56:08.137Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
+      "line_number": 205,
+      "context": "<>{t(\"Common:WantToContinue\")}</>\n </>\n )\n ) : (\n <>\n <>{t(\"DeleteItems\")} </>\n <>{t(\"ItemsPermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n );\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
+      "line_number": 205,
+      "context": "<>{t(\"Common:WantToContinue\")}</>\n </>\n )\n ) : (\n <>\n <>{t(\"DeleteItems\")} </>\n <>{t(\"ItemsPermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n );\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
+      "line_number": 205,
+      "context": "<>{t(\"Common:WantToContinue\")}</>\n </>\n )\n ) : (\n <>\n <>{t(\"DeleteItems\")} </>\n <>{t(\"ItemsPermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n );\n }",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

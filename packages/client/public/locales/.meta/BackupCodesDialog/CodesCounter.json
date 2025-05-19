@@ -1,11 +1,22 @@
 {
   "key_path": "CodesCounter",
+  "content": "codes:",
   "content_en_sha1_hash": "182fa94ceffa8e593b7c9b54ae58703edfb9445b",
-  "created_at": "2025-05-14T14:04:20.942Z",
-  "updated_at": "2025-05-14T14:04:20.942Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.036Z",
+  "updated_at": "2025-05-19T21:56:08.061Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/BackupCodesDialog/index.js",
+      "line_number": 118,
+      "context": "<Text\n className=\"backup-codes-counter\"\n fontWeight={600}\n lineHeight=\"20px\"\n >\n {backupCodesCount} {t(\"CodesCounter\")}\n </Text>\n \n <Text className=\"backup-codes-codes\" isBold>\n {backupCodes.length > 0\n ? backupCodes.map((item) => {",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

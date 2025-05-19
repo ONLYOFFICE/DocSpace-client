@@ -1,11 +1,22 @@
 {
   "key_path": "SDKDescription",
+  "content": "JavaScript SDK allows you to embed the whole {{productName}} or its part into your web interface. Select ready-to-use modes with the pre-defined parameters or a custom one to configure it manually. To learn more about SDK, refer to the ",
   "content_en_sha1_hash": "a1157dfcd63f4800fb7fd52598f037f5ecf88505",
-  "created_at": "2025-05-14T14:04:23.493Z",
-  "updated_at": "2025-05-14T14:04:23.493Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.647Z",
+  "updated_at": "2025-05-19T21:56:08.448Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
+      "line_number": 160,
+      "context": "return (\n <SDKContainer>\n <CategoryDescription theme={theme}>\n <Text className=\"sdk-description\">\n {t(\"SDKDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <Link\n color={currentColorScheme?.main?.accent}\n fontSize=\"13px\"\n fontWeight=\"400\"",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

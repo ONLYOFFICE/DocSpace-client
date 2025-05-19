@@ -1,11 +1,22 @@
 {
   "key_path": "SendInviteAgainDialogMessage",
+  "content": "After users accept the invitation, their status will be changed to 'Active'.",
   "content_en_sha1_hash": "ca00a33b999745953583a0dd0b93a69885f3ca4b",
-  "created_at": "2025-05-14T14:04:24.639Z",
-  "updated_at": "2025-05-14T14:04:24.639Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.274Z",
+  "updated_at": "2025-05-19T21:56:08.179Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/SendInviteDialog/index.js",
+      "line_number": 89,
+      "context": "<ModalDialog.Header>\n {t(\"PeopleTranslations:SendInviteAgain\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"SendInviteAgainDialog\")}</Text>\n <Text>{t(\"SendInviteAgainDialogMessage\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"send-inite-again-modal_submit\"\n label={t(\"Common:SendButton\")}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

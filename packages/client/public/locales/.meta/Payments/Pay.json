@@ -1,11 +1,22 @@
 {
   "key_path": "Pay",
+  "content": "Pay",
   "content_en_sha1_hash": "80c37573afed72cb3ec54133cd32508d33bcb52d",
-  "created_at": "2025-05-14T14:04:24.285Z",
-  "updated_at": "2025-05-14T14:04:24.285Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.714Z",
+  "updated_at": "2025-05-19T21:56:08.568Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/ButtonContainer.js",
+      "line_number": 62,
+      "context": "return (\n <StyledBody>\n {isNotPaidPeriod || isGracePeriod || isFreeAfterPaidPeriod ? (\n <Button\n className=\"pay-button\"\n label={t(\"Pay\")}\n size=\"medium\"\n primary\n isDisabled={isLoading || isDisabled}\n onClick={goToStripeAccount}\n isLoading={isLoading}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

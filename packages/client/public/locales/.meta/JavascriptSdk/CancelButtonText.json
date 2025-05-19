@@ -1,11 +1,22 @@
 {
   "key_path": "CancelButtonText",
+  "content": "Cancel button text",
   "content_en_sha1_hash": "619520053dee4d51223c942aa13fe5635deaa4f0",
-  "created_at": "2025-05-14T14:04:23.256Z",
-  "updated_at": "2025-05-14T14:04:23.256Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.379Z",
+  "updated_at": "2025-05-19T21:56:08.469Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/CancelTextInput.js",
+      "line_number": 51,
+      "context": "debouncedSetConfig(e.target.value);\n };\n \n return (\n <>\n <Label className=\"label\" text={t(\"CancelButtonText\")} />\n <TextInput\n scale\n onChange={onChangeCancelLabel}\n placeholder={t(\"Common:CancelButton\")}\n value={value}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

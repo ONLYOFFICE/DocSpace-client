@@ -1,11 +1,22 @@
 {
   "key_path": "MovingToTrash",
+  "content": "Moving to trash",
   "content_en_sha1_hash": "44ff31b78a30f9fb9bf3894698f1963fbdaef5f8",
-  "created_at": "2025-05-14T14:04:22.320Z",
-  "updated_at": "2025-05-14T14:04:22.320Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.880Z",
+  "updated_at": "2025-05-19T21:56:08.233Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/filesUtils.js",
+      "line_number": 264,
+      "context": "convert,\n deleteVersionFile,\n } = OPERATIONS_NAME;\n switch (type) {\n case trash:\n return i18n.t(\"Files:MovingToTrash\");\n case move:\n return i18n.t(\"Common:MoveToOperation\");\n case copy:\n return i18n.t(\"Common:CopyOperation\");\n case download:",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

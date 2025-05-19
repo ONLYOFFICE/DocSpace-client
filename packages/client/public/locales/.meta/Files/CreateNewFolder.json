@@ -1,11 +1,28 @@
 {
   "key_path": "CreateNewFolder",
+  "content": "Create new Folder",
   "content_en_sha1_hash": "7b9586f7ba02a0921bd879908cb87f65dee16c08",
-  "created_at": "2025-05-14T14:04:21.830Z",
-  "updated_at": "2025-05-14T14:04:21.830Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.371Z",
+  "updated_at": "2025-05-19T21:56:07.980Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/Article/MainButton/index.js",
+      "line_number": 350,
+      "context": "const createNewFolder = {\n id: \"actions_new-folder\",\n className: \"main-button_drop-down\",\n icon: CatalogFolderReactSvgUrl,\n label: t(\"Files:CreateNewFolder\"),\n onClick: onCreate,\n key: \"new-folder\",\n };\n \n const showSelectorFormRoomDocx = {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2647,
+      "context": "const createNewFolder = {\n id: \"actions_new-folder\",\n className: \"main-button_drop-down\",\n icon: CatalogFolderReactSvgUrl,\n label: t(\"Files:CreateNewFolder\"),\n onClick: () => this.onCreate(),\n key: \"new-folder\",\n };\n \n // const showUploadFolder = !(isMobile || isTablet);",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

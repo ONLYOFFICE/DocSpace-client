@@ -1,11 +1,22 @@
 {
   "key_path": "CustomizationDescription",
+  "content": "This subsection allows you to change the look and feel of your space. You can use your own company logo, name and text to match your organization brand.",
   "content_en_sha1_hash": "3ed304aa4cbda2d1fbc3a0c1d04d2decae6a4ba6",
-  "created_at": "2025-05-14T14:04:25.365Z",
-  "updated_at": "2025-05-14T14:04:25.365Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:51.011Z",
+  "updated_at": "2025-05-19T21:56:08.396Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization.js",
+      "line_number": 128,
+      "context": "<StyledComponent>\n {!isLoadedPage ? (\n <LoaderDescriptionCustomization />\n ) : (\n <div className=\"category-description\">\n {t(\"Settings:CustomizationDescription\")}\n </div>\n )}\n <LanguageAndTimeZoneSettings isMobileView={viewMobile} />\n <StyledSettingsSeparator />\n <WelcomePageSettings isMobileView={viewMobile} />",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

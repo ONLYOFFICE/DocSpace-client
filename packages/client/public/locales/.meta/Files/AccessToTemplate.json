@@ -1,11 +1,34 @@
 {
   "key_path": "AccessToTemplate",
+  "content": "Access to template",
   "content_en_sha1_hash": "678bbfe48f2257d467715657fc03edc26cc09c72",
-  "created_at": "2025-05-14T14:04:21.657Z",
-  "updated_at": "2025-05-14T14:04:21.657Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.192Z",
+  "updated_at": "2025-05-19T21:56:08.114Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/TemplateAccess/TemplateAccess.tsx",
+      "line_number": 118,
+      "context": "const accessLabel = getAccessLabel();\n \n return (\n <Styled.TemplateAccess>\n <Text className=\"template-access_label\" fontWeight={600} fontSize=\"13px\">\n {`${t(\"Files:AccessToTemplate\")}:`}\n </Text>\n \n {isAvailable ? (\n <PublicRoomBar\n headerText={t(\"Files:TemplateAvailable\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/index.tsx",
+      "line_number": 361,
+      "context": "isDisabled={isAvailable}\n roomId={templateId}\n />\n \n <StyledSubHeader className=\"invite-input-text\">\n {t(\"Files:AccessToTemplate\")}\n </StyledSubHeader>\n {hasInvitedUsers ? (\n <ItemsList\n t={t}\n inviteItems={accessItems}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/index.tsx",
+      "line_number": 361,
+      "context": "isDisabled={isAvailable}\n roomId={templateId}\n />\n \n <StyledSubHeader className=\"invite-input-text\">\n {t(\"Files:AccessToTemplate\")}\n </StyledSubHeader>\n {hasInvitedUsers ? (\n <ItemsList\n t={t}\n inviteItems={accessItems}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

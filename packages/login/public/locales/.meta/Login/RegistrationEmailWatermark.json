@@ -1,11 +1,22 @@
 {
   "key_path": "RegistrationEmailWatermark",
+  "content": "Email",
   "content_en_sha1_hash": "84add5b2952787581cb9a8851eef63d1ec75d22b",
-  "created_at": "2025-05-14T14:04:28.260Z",
-  "updated_at": "2025-05-14T14:04:28.260Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.264Z",
+  "updated_at": "2025-05-19T21:56:08.734Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/components/LoginForm/sub-components/EmailContainer.tsx",
+      "line_number": 155,
+      "context": "<EmailInput\n id=\"login_username\"\n name=\"login\"\n hasError={isEmailErrorShow}\n value={identifier}\n placeholder={t(\"RegistrationEmailWatermark\")}\n size={InputSize.large}\n scale={true}\n isAutoFocussed={true}\n tabIndex={1}\n isDisabled={isLoading}",
+      "module": "/packages/login"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

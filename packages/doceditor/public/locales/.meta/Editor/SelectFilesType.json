@@ -1,11 +1,22 @@
 {
   "key_path": "SelectFilesType",
+  "content": "Select files type: {{fileType}}",
   "content_en_sha1_hash": "c64f6411e3fd9b49bb6c3279ce1ac24d94710f73",
-  "created_at": "2025-05-14T14:04:28.100Z",
-  "updated_at": "2025-05-14T14:04:28.100Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.134Z",
+  "updated_at": "2025-05-19T21:56:08.709Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/doceditor/src/components/SelectFileDialog.tsx",
+      "line_number": 72,
+      "context": "const selectFilesListTitle = React.useCallback(() => {\n const type = getFileTypeTranslation();\n return fileTypeDetection.filterParam === FilesSelectorFilterTypes.XLSX\n ? type\n : t\n ? t(\"Editor:SelectFilesType\", { fileType: type })\n : \"\";\n }, [fileTypeDetection.filterParam, getFileTypeTranslation, t]);\n \n const listTitle = selectFilesListTitle();",
+      "module": "/packages/doceditor"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

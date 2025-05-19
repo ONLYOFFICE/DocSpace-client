@@ -1,11 +1,22 @@
 {
   "key_path": "CancellaionNotification",
+  "content": "Don't display cancellation notification again",
   "content_en_sha1_hash": "537727f09456ab87cd615e057378ddfcf8cdf4b9",
-  "created_at": "2025-05-14T14:04:22.807Z",
-  "updated_at": "2025-05-14T14:04:22.807Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.169Z",
+  "updated_at": "2025-05-19T21:56:08.673Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.js",
+      "line_number": 156,
+      "context": "<ToggleButton\n className=\"cancelletion-notification toggle-btn\"\n onChange={onChangeCancellationNotification}\n isChecked={hideConfirmCancelOperation}\n />\n <Text>{t(\"CancellaionNotification\")}</Text>\n </div>\n </div>\n </StyledWrapper>\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

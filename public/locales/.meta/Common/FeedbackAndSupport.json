@@ -1,11 +1,22 @@
 {
   "key_path": "FeedbackAndSupport",
+  "content": "Feedback & Support",
   "content_en_sha1_hash": "7714e1a8a44cee405d24cfadd08ff22d9fc4f6b9",
-  "created_at": "2025-05-14T14:04:16.497Z",
-  "updated_at": "2025-05-14T14:04:16.497Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:45.233Z",
+  "updated_at": "2025-05-19T21:56:08.701Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/ProfileActionsStore.js",
+      "line_number": 439,
+      "context": "},\n liveChat,\n feedbackAndSupportEnabled && {\n key: \"user-menu-support\",\n icon: EmailReactSvgUrl,\n label: t(\"Common:FeedbackAndSupport\"),\n onClick: this.onSupportClick,\n url: this.settingsStore.feedbackAndSupportUrl || \"#\",\n preventNewTab: true,\n },\n bookTraining,",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

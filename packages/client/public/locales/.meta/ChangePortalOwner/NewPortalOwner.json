@@ -1,11 +1,28 @@
 {
   "key_path": "NewPortalOwner",
+  "content": "New {{productName}} owner",
   "content_en_sha1_hash": "1dbd9dfcd68022a3ab1a7bcc8a0dea635c19ff3c",
-  "created_at": "2025-05-14T14:04:20.996Z",
-  "updated_at": "2025-05-14T14:04:20.996Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.996Z",
+  "updated_at": "2025-05-19T21:56:08.075Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
+      "line_number": 181,
+      "context": "</Text>\n </div>\n </StyledOwnerInfo>\n \n <StyledPeopleSelectorInfo>\n <Text className=\"new-owner\" noSelect title={t(\"NewPortalOwner\")}>\n {t(\"NewPortalOwner\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <Text className=\"description\" noSelect title={t(\"ChangeInstruction\")}>\n {t(\"ChangeInstruction\", { productName: t(\"Common:ProductName\") })}\n </Text>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
+      "line_number": 181,
+      "context": "</Text>\n </div>\n </StyledOwnerInfo>\n \n <StyledPeopleSelectorInfo>\n <Text className=\"new-owner\" noSelect title={t(\"NewPortalOwner\")}>\n {t(\"NewPortalOwner\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <Text className=\"description\" noSelect title={t(\"ChangeInstruction\")}>\n {t(\"ChangeInstruction\", { productName: t(\"Common:ProductName\") })}\n </Text>",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

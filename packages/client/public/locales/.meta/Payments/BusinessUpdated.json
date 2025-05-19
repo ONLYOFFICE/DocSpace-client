@@ -1,11 +1,22 @@
 {
   "key_path": "BusinessUpdated",
+  "content": "{{planName}} plan updated",
   "content_en_sha1_hash": "d072992aaddc06db95b3109b8a055ea6d40dc9e2",
-  "created_at": "2025-05-14T14:04:24.238Z",
-  "updated_at": "2025-05-14T14:04:24.238Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.665Z",
+  "updated_at": "2025-05-19T21:56:08.569Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
+      "line_number": 65,
+      "context": "isYearTariff,\n }) => {\n const resetIntervalSuccess = () => {\n intervalId &&\n toastr.success(\n t(\"BusinessUpdated\", { planName: currentTariffPlanTitle }),\n );\n clearInterval(intervalId);\n intervalId = null;\n setIsLoading(false);\n };",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

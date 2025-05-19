@@ -1,11 +1,22 @@
 {
   "key_path": "DeletedRoomTags",
+  "content": "Tags removed.",
   "content_en_sha1_hash": "453b4c78053004eb819254db86b4ee03ae201130",
-  "created_at": "2025-05-14T14:04:22.984Z",
-  "updated_at": "2025-05-14T14:04:22.984Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.773Z",
+  "updated_at": "2025-05-19T21:56:08.267Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
+      "line_number": 171,
+      "context": "/>\n );\n case \"AddedRoomTags\":\n return t(\"InfoPanel:AddedRoomTags\");\n case \"DeletedRoomTags\":\n return t(\"InfoPanel:DeletedRoomTags\");\n case \"RoomLogoCreated\":\n case \"RoomColorChanged\":\n case \"RoomCoverChanged\":\n return t(\"InfoPanel:RoomLogoChanged\");\n case \"RoomLogoDeleted\":",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

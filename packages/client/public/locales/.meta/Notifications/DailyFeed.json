@@ -1,11 +1,22 @@
 {
   "key_path": "DailyFeed",
+  "content": "Daily {{productName}} feed",
   "content_en_sha1_hash": "86616eb49388f5f6bbcafaecd812e76ec70ed24b",
-  "created_at": "2025-05-14T14:04:23.939Z",
-  "updated_at": "2025-05-14T14:04:23.939Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.080Z",
+  "updated_at": "2025-05-19T21:56:08.675Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/DailyFeedContainer.js",
+      "line_number": 34,
+      "context": "import { ToggleButton } from \"@docspace/shared/components/toggle-button\";\n import { Text } from \"@docspace/shared/components/text\";\n import { NotificationsType } from \"@docspace/shared/enums\";\n import { toastr } from \"@docspace/shared/components/toast\";\n \n const DailyFeedContainer = ({\n t,\n dailyFeedSubscriptions,\n changeSubscription,\n textProps,\n textDescriptionsProps,",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

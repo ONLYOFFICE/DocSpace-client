@@ -1,11 +1,22 @@
 {
   "key_path": "CannotRestoreRoom",
+  "content": "Room cannot be restored",
   "content_en_sha1_hash": "535cea729d9ce554fc381ca1a410cd6f99bcf7ca",
-  "created_at": "2025-05-14T14:04:24.245Z",
-  "updated_at": "2025-05-14T14:04:24.245Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.672Z",
+  "updated_at": "2025-05-19T21:56:08.162Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/sub-components/RoomsContent.tsx",
+      "line_number": 64,
+      "context": "if (isRoomsTariffLimit)\n return (\n <>\n <Text fontWeight={600}>\n {isArchiveFolderRoot\n ? t(\"CannotRestoreRoom\")\n : t(\"CannotCreateNewRoom\")}\n </Text>\n <br />\n <Text>\n {isArchiveFolderRoot",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

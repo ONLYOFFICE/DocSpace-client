@@ -1,11 +1,22 @@
 {
   "key_path": "RevokeConsentLogin",
+  "content": "If you want to renew an automatic login into {{name}} using {{organizationName}} {{productName}}, you will be asked to grant access to your {{productName}} account data.",
   "content_en_sha1_hash": "80e0baa463c37d74f45ecfd7a35edb8830c07fc3",
-  "created_at": "2025-05-14T14:04:24.159Z",
-  "updated_at": "2025-05-14T14:04:24.159Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.015Z",
+  "updated_at": "2025-05-19T21:56:08.670Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/authorized-apps/sub-components/RevokeDialog.tsx",
+      "line_number": 55,
+      "context": "/>\n );\n const secondDesc = isGroup ? (\n <Trans\n t={t}\n i18nKey=\"RevokeConsentLoginGroup\"\n ns=\"OAuth\"\n values={{\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,22 @@
 {
   "key_path": "PrivateRoomHeader",
+  "content": "Welcome to {{organizationName}} private room where every symbol you type is encrypted",
   "content_en_sha1_hash": "36df06668f4bf43e280d1c9bf15c6f66134e0b84",
-  "created_at": "2025-05-14T14:04:22.432Z",
-  "updated_at": "2025-05-14T14:04:22.432Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.995Z",
+  "updated_at": "2025-05-19T21:56:07.997Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
+      "line_number": 123,
+      "context": "const archiveRoomsDescription =\n isVisitor || isCollaborator\n ? t(\"ArchiveEmptyScreenUser\")\n : t(\"ArchiveEmptyScreen\", { productName: t(\"Common:ProductName\") });\n \n const privateRoomHeader = t(\"PrivateRoomHeader\", {\n organizationName: logoText,\n });\n \n const privacyIcon = <img alt=\"\" src={PrivacySvgUrl} />;",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

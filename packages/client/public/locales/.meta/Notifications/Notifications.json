@@ -1,11 +1,22 @@
 {
   "key_path": "Notifications",
+  "content": "Notifications",
   "content_en_sha1_hash": "753a22b2eb617204efee4644795034b8ace1ee14",
-  "created_at": "2025-05-14T14:04:23.943Z",
-  "updated_at": "2025-05-14T14:04:23.943Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.085Z",
+  "updated_at": "2025-05-19T21:56:08.668Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/index.js",
+      "line_number": 77,
+      "context": "name: t(\"ConnectDialog:Login\"),\n content: <LoginContent />,\n },\n {\n id: \"notifications\",\n name: t(\"Notifications:Notifications\"),\n content: <Notifications />,\n },\n {\n id: \"interface-theme\",\n name: t(\"InterfaceTheme\"),",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

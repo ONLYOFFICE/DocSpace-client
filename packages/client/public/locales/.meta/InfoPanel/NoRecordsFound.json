@@ -1,11 +1,28 @@
 {
   "key_path": "NoRecordsFound",
+  "content": "No records found",
   "content_en_sha1_hash": "96f4f9b2d6ff4a7e639152ace9aeefde1231d331",
-  "created_at": "2025-05-14T14:04:23.108Z",
-  "updated_at": "2025-05-14T14:04:23.108Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.896Z",
+  "updated_at": "2025-05-19T21:56:08.259Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/HistoryBlockContent/ThirdParty.tsx",
+      "line_number": 51,
+      "context": "const theme = useTheme();\n \n return (\n <StyledEmptyScreenContainer\n imageSrc={theme.isBase ? EmptyCanceledLight : EmptyCanceledDark}\n headerText={t(\"NoRecordsFound\")}\n descriptionText={t(\"HistoryThirdParty\")}\n imageAlt={t(\"NoRecordsFound\")}\n />\n );\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/HistoryBlockContent/ThirdParty.tsx",
+      "line_number": 51,
+      "context": "const theme = useTheme();\n \n return (\n <StyledEmptyScreenContainer\n imageSrc={theme.isBase ? EmptyCanceledLight : EmptyCanceledDark}\n headerText={t(\"NoRecordsFound\")}\n descriptionText={t(\"HistoryThirdParty\")}\n imageAlt={t(\"NoRecordsFound\")}\n />\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

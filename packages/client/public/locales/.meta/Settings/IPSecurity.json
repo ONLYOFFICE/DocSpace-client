@@ -1,11 +1,34 @@
 {
   "key_path": "IPSecurity",
+  "content": "IP Security",
   "content_en_sha1_hash": "6384288df2a9807354de1df765c871288d7c2492",
-  "created_at": "2025-05-14T14:04:25.970Z",
-  "updated_at": "2025-05-14T14:04:25.970Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:51.718Z",
+  "updated_at": "2025-05-19T21:56:08.576Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
+      "line_number": 187,
+      "context": "</div>\n <DevToolsAccessSection />\n <StyledSettingsSeparator />\n \n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"IPSecurity\")}\n </Text>\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"IPSecuritySettingDescription\")}\n </Text>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
+      "line_number": 94,
+      "context": "}\n url=\"/portal-settings/security/access-portal/access-dev-tools\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"IPSecurity\")}\n subtitle={\n <Trans i18nKey=\"IPSecurityMobileDescription\" ns=\"Settings\" t={t} />\n }\n url=\"/portal-settings/security/access-portal/ip\"\n onClickLink={onClickLink}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 196,
+      "context": "{\n id: \"portal-settings_catalog-ip-security\",\n key: \"1-0-4\",\n icon: \"\",\n link: \"ip\",\n tKey: \"IPSecurity\",\n },\n {\n id: \"portal-settings_catalog-brute-force-protection\",\n key: \"1-0-5\",\n icon: \"\",",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,22 @@
 {
   "key_path": "UsersQuotaAlmostExhausted",
+  "content": "The quota of paid users is almost exhausted.",
   "content_en_sha1_hash": "927d67a9f7bbc37eff445b88935db61772b1bae8",
-  "created_at": "2025-05-14T14:04:24.318Z",
-  "updated_at": "2025-05-14T14:04:24.318Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.753Z",
+  "updated_at": "2025-05-19T21:56:08.164Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/sub-components/UsersContent.tsx",
+      "line_number": 96,
+      "context": "</>\n );\n \n return (\n <>\n <Text fontWeight={600}>{t(\"UsersQuotaAlmostExhausted\")}</Text>\n <br />\n <Text>\n {t(\"NumberOfUsersAccordingToTariff\", {\n currentValue: addedManagersCount,\n maxValue: maxCountManagersByQuota,",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

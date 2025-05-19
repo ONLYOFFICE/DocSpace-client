@@ -1,10 +1,14 @@
 {
   "key_path": "ThirdPartyStorageDescription",
+  "content": "Backup can be saved to a third-party storage. Before, you need to connect the corresponding service in the 'Integration' section. Otherwise, the following settings will be inactive.",
   "content_en_sha1_hash": "5e6be94c1952c34628c180bcbab06fe0c10d622a",
-  "created_at": "2025-05-14T14:04:27.163Z",
-  "updated_at": "2025-05-14T14:04:27.163Z",
-  "comment_text": "",
-  "comment_ai": false,
+  "created_at": "2025-05-19T21:30:52.927Z",
+  "updated_at": "2025-05-19T21:30:52.927Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
   "usage": [],
   "languages": {
     "en": {

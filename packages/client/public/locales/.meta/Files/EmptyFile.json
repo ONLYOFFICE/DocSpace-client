@@ -1,11 +1,22 @@
 {
   "key_path": "EmptyFile",
+  "content": "Empty file",
   "content_en_sha1_hash": "06b230452d24c5e771108b0f7e2f027c9f34c403",
-  "created_at": "2025-05-14T14:04:21.979Z",
-  "updated_at": "2025-05-14T14:04:21.979Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.537Z",
+  "updated_at": "2025-05-19T21:56:08.705Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/UploadDataStore.js",
+      "line_number": 1090,
+      "context": "uniqueId: uniqueid(\"download_row-key_\"),\n fileId: null,\n // toFolderId,\n toFolderId: file.parentFolderId,\n action: \"upload\",\n error: file.size ? null : t(\"Files:EmptyFile\"),\n fileInfo: null,\n cancel: false,\n needConvert,\n encrypted: file.encrypted,\n percent: 0,",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

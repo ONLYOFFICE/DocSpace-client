@@ -1,11 +1,52 @@
 {
   "key_path": "DeleteFromTrash",
+  "content": "Selected elements were successfully deleted from Trash",
   "content_en_sha1_hash": "b6c08a9f5c3e7891c0f5473a6111ef1f9a96855a",
-  "created_at": "2025-05-14T14:04:27.693Z",
-  "updated_at": "2025-05-14T14:04:27.693Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:49.962Z",
+  "updated_at": "2025-05-19T21:56:07.973Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/HOCs/withHotkeys.js",
+      "line_number": 364,
+      "context": "if (confirmDelete) {\n setDeleteDialogVisible(true);\n } else {\n const translations = {\n deleteFromTrash: t(\"Translations:DeleteFromTrash\"),\n };\n deleteAction(translations).catch((err) => toastr.error(err));\n }\n }\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/Article/Body/Items.js",
+      "line_number": 303,
+      "context": "[moveDragItems],\n );\n \n const onRemove = React.useCallback(() => {\n const translations = {\n deleteFromTrash: t(\"Translations:DeleteFromTrash\"),\n };\n \n deleteAction(translations);\n }, [deleteAction]);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
+      "line_number": 93,
+      "context": "const onDelete = () => {\n setSelected(\"none\");\n onClose();\n \n const translations = {\n deleteFromTrash: t(\"Translations:DeleteFromTrash\"),\n };\n \n if (!selection.length) return;\n \n deleteAction(translations, selection);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 785,
+      "context": "deleteRoomsAction([selectedFolderId], translations).catch((err) =>\n toastr.error(err),\n );\n } else {\n translations = {\n deleteFromTrash: t(\"Translations:DeleteFromTrash\"),\n };\n \n deleteAction(translations, [selectedFolder], true).catch((err) =>\n toastr.error(err),\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 785,
+      "context": "deleteRoomsAction([selectedFolderId], translations).catch((err) =>\n toastr.error(err),\n );\n } else {\n translations = {\n deleteFromTrash: t(\"Translations:DeleteFromTrash\"),\n };\n \n deleteAction(translations, [selectedFolder], true).catch((err) =>\n toastr.error(err),\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 2336,
+      "context": "onClick: () => {\n if (this.filesSettingsStore.confirmDelete) {\n setDeleteDialogVisible(true);\n } else {\n const translations = {\n deleteFromTrash: t(\"Translations:DeleteFromTrash\"),\n };\n \n this.deleteAction(translations).catch((err) => toastr.error(err));\n }\n },",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

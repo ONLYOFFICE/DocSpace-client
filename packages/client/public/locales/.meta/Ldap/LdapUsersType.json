@@ -1,11 +1,28 @@
 {
   "key_path": "LdapUsersType",
+  "content": "Users type",
   "content_en_sha1_hash": "06f3eb37b8e067964f5ab9325f6a9fcdb96ba946",
-  "created_at": "2025-05-14T14:04:23.865Z",
-  "updated_at": "2025-05-14T14:04:23.865Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.338Z",
+  "updated_at": "2025-05-19T21:56:08.526Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
+      "line_number": 251,
+      "context": "</div>\n <div className=\"ldap_users-type-box\">\n <div className=\"ldap_users-type-box-title\">\n <div className=\"ldap_users-type-title\">\n <Text fontWeight={600} fontSize=\"15px\" lineHeight=\"16px\">\n {t(\"LdapUsersType\")}\n </Text>\n </div>\n <Text fontWeight={400} fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"LdapUserTypeTooltip\", {\n productName: t(\"Common:ProductName\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/UsersType.tsx",
+      "line_number": 67,
+      "context": "gap: \"4px\",\n margin: \"0 0 8px 0\",\n }}\n >\n <Text fontWeight={600} fontSize=\"15px\" lineHeight=\"16px\">\n {t(\"LdapUsersType\")}\n </Text>\n </div>\n <StyledInputWrapper>\n <Text fontWeight={400} fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"LdapUserTypeTooltip\", {",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

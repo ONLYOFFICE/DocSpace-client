@@ -1,11 +1,22 @@
 {
   "key_path": "InvalidEmailWithActiveSubscription",
+  "content": "Your subscription remains active, but we recommend choosing a new Payer who gets access to subscription settings in {{productName}}.",
   "content_en_sha1_hash": "56ba8d49065a3fd83f9914a4525a568901e02a68",
-  "created_at": "2025-05-14T14:04:24.263Z",
-  "updated_at": "2025-05-14T14:04:24.263Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.693Z",
+  "updated_at": "2025-05-19T21:56:08.564Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PayerInformationContainer.js",
+      "line_number": 115,
+      "context": "const unknownPayerDescription = () => {\n const userNotFound = `${t(\"UserNotFoundMatchingEmail\")} `;\n \n let invalidEmailDescription = user.isOwner\n ? t(\"InvalidEmailWithActiveSubscription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"InvalidEmailWithActiveSubscriptionForAdmin\", {\n productName: t(\"Common:ProductName\"),\n });",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

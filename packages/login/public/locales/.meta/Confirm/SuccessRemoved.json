@@ -1,11 +1,22 @@
 {
   "key_path": "SuccessRemoved",
+  "content": "Your account has been successfully removed. In 10 seconds you will be redirected to the <1>site</1>.",
   "content_en_sha1_hash": "ded5fa686d70c749e7d37045876d5285b2515f6e",
-  "created_at": "2025-05-14T14:04:28.169Z",
-  "updated_at": "2025-05-14T14:04:28.169Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.400Z",
+  "updated_at": "2025-05-19T21:56:08.721Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/app/(root)/confirm/PortalRemove/page.client.tsx",
+      "line_number": 93,
+      "context": "return (\n <>\n {isRemoved ? (\n <Text>\n <Trans t={t} i18nKey=\"SuccessRemoved\" ns=\"Confirm\">\n Your account has been successfully removed. In 10 seconds you will\n be redirected to the\n <Link isHovered href={url}>\n site\n </Link>",
+      "module": "/packages/login"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

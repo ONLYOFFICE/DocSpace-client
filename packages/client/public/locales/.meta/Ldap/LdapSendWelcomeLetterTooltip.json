@@ -1,11 +1,22 @@
 {
   "key_path": "LdapSendWelcomeLetterTooltip",
+  "content": "If checked all new users will receive welcome letter. Available only when Mail Attribute is mapped to LDAP.",
   "content_en_sha1_hash": "9d5bbfe758465098b39bf00c96aa285961833c28",
-  "created_at": "2025-05-14T14:04:23.665Z",
-  "updated_at": "2025-05-14T14:04:23.665Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.265Z",
+  "updated_at": "2025-05-19T21:56:08.523Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AdvancedSettings.js",
+      "line_number": 68,
+      "context": "label={t(\"LdapSendWelcomeLetter\")}\n isChecked={isSendWelcomeEmail}\n onChange={onChangeSendWelcomeEmail}\n isDisabled={!isLdapEnabled || isUIDisabled}\n />\n <HelpButton tooltipContent={t(\"LdapSendWelcomeLetterTooltip\")} />\n </div>\n \n <div className=\"ldap_advanced-settings-header\">\n <Checkbox\n className=\"ldap_checkbox-disable-email-verification\"",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

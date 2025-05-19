@@ -1,11 +1,22 @@
 {
   "key_path": "BusinessFinalDateInfo",
+  "content": "Subscription will be automatically renewed on {{finalDate}} with updated pricing and specifications. You can cancel it or change your billing info on your Stripe customer portal.",
   "content_en_sha1_hash": "f7c32402a08d667135c600c9b76018150ae168ad",
-  "created_at": "2025-05-14T14:04:24.227Z",
-  "updated_at": "2025-05-14T14:04:24.227Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.654Z",
+  "updated_at": "2025-05-19T21:56:08.567Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PaymentContainer.js",
+      "line_number": 291,
+      "context": "noSelect\n fontSize=\"14px\"\n lineHeight=\"16px\"\n className=\"payment-info_managers-price\"\n >\n <Trans t={t} i18nKey=\"BusinessFinalDateInfo\" ns=\"Payments\">\n {{ finalDate: paymentDate }}\n </Trans>\n </Text>\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

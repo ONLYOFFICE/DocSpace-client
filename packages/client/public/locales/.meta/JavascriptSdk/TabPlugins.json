@@ -1,11 +1,22 @@
 {
   "key_path": "TabPlugins",
+  "content": "Tab Plugins",
   "content_en_sha1_hash": "e55bd87644d60d366a8efd44d8bb849c63a4a8f9",
-  "created_at": "2025-05-14T14:04:23.547Z",
-  "updated_at": "2025-05-14T14:04:23.547Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.702Z",
+  "updated_at": "2025-05-19T21:56:08.454Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
+      "line_number": 249,
+      "context": "onChange={() => {}}\n isChecked\n />\n <Checkbox\n className=\"checkbox\"\n label={t(\"TabPlugins\")}\n onChange={() => {}}\n isChecked\n />\n <RowContainer>\n <Checkbox label={t(\"Chat\")} onChange={() => {}} isChecked />",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

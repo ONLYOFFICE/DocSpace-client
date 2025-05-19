@@ -1,11 +1,22 @@
 {
   "key_path": "ActivatePurchaseRenewLicense",
+  "content": "To continue getting support and updates, buy a renewal.",
   "content_en_sha1_hash": "ec58935d8687f19ed9ad71853d7932c9a2c5e29f",
-  "created_at": "2025-05-14T14:04:24.341Z",
-  "updated_at": "2025-05-14T14:04:24.341Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.580Z",
+  "updated_at": "2025-05-19T21:56:08.570Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Standalone/EnterpriseContainer.js",
+      "line_number": 59,
+      "context": "{isLicenseDateExpired ? <BenefitsContainer t={t} /> : null}\n <Text fontSize=\"14px\" className=\"payments_renew-subscription\">\n {isLicenseDateExpired\n ? t(\"ActivatePurchaseBuyLicense\")\n : t(\"ActivatePurchaseRenewLicense\")}\n </Text>\n <ButtonContainer t={t} />\n \n <div className=\"payments_support\">\n <Text>",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,22 @@
 {
   "key_path": "AccountWillBeCreated",
+  "content": "A {{productName}} account will be created for <1>{{email}}</1>. Please complete your registration:",
   "content_en_sha1_hash": "3f6f73d8114801f9916e2149b49a336075d95113",
-  "created_at": "2025-05-14T14:04:28.103Z",
-  "updated_at": "2025-05-14T14:04:28.103Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.333Z",
+  "updated_at": "2025-05-19T21:56:08.732Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/components/GreetingContainer/GreetingUserContainer.tsx",
+      "line_number": 74,
+      "context": "</Text>\n </div>\n <Text>\n <Trans\n t={t}\n i18nKey=\"AccountWillBeCreated\"\n ns=\"Confirm\"\n defaults={DEFAULT_CREATION_TEXT}\n values={{\n email,\n productName: t(\"Common:ProductName\"),",
+      "module": "/packages/login"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

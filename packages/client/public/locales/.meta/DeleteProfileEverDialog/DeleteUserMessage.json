@@ -1,11 +1,22 @@
 {
   "key_path": "DeleteUserMessage",
+  "content": "{{userCaption}} <strong>{{user}}</strong> will be deleted. This action cannot be undone.",
   "content_en_sha1_hash": "7642f09084fe82ba204a82245382506eb9f0b4a8",
-  "created_at": "2025-05-14T14:04:21.310Z",
-  "updated_at": "2025-05-14T14:04:21.310Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.669Z",
+  "updated_at": "2025-05-19T21:56:08.150Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
+      "line_number": 90,
+      "context": "needReassignData || onlyGuests\n ? warningMessageReassign\n : warningMessageMyDocuments;\n \n const deleteMessage = (\n <Trans i18nKey=\"DeleteUserMessage\" ns=\"DeleteProfileEverDialog\" t={t}>\n {{ userCaption: onlyGuests ? t(\"Common:Guest\") : t(\"Common:User\") }}\n <strong>{{ user: users[0].displayName }}</strong>\n </Trans>\n );",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

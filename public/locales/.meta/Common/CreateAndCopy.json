@@ -1,11 +1,28 @@
 {
   "key_path": "CreateAndCopy",
+  "content": "Create and copy",
   "content_en_sha1_hash": "664c11524d7aaec28682c1ec39a8d3e5f847912d",
-  "created_at": "2025-05-14T14:04:15.210Z",
-  "updated_at": "2025-05-14T14:04:15.210Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:43.837Z",
+  "updated_at": "2025-05-19T21:56:08.775Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/share/sub-components/LinkRow.tsx",
+      "line_number": 114,
+      "context": "<StyledLinkRow onClick={onAddClick}>\n <StyledSquare>\n <IconButton size={12} iconName={PlusIcon} isDisabled />\n </StyledSquare>\n <Link className=\"create-and-copy_link\" noHover fontWeight={600}>\n {t(\"Common:CreateAndCopy\")}\n </Link>\n </StyledLinkRow>\n ) : (\n links.map((link, index) => {\n if ((\"isLoaded\" in link && link.isLoaded) || \"isLoaded\" in link)",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/share/sub-components/LinkRow.tsx",
+      "line_number": 114,
+      "context": "<StyledLinkRow onClick={onAddClick}>\n <StyledSquare>\n <IconButton size={12} iconName={PlusIcon} isDisabled />\n </StyledSquare>\n <Link className=\"create-and-copy_link\" noHover fontWeight={600}>\n {t(\"Common:CreateAndCopy\")}\n </Link>\n </StyledLinkRow>\n ) : (\n links.map((link, index) => {\n if ((\"isLoaded\" in link && link.isLoaded) || \"isLoaded\" in link)",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,22 @@
 {
   "key_path": "PrivateRoomSupport",
+  "content": "Work in Private Room is available via {{organizationName}} desktop app. <3>Instructions</3>",
   "content_en_sha1_hash": "e819786ec6afd5c83c2b4659d21c2a8e4f27e967",
-  "created_at": "2025-05-14T14:04:22.436Z",
-  "updated_at": "2025-05-14T14:04:22.436Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.000Z",
+  "updated_at": "2025-05-19T21:56:07.998Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
+      "line_number": 160,
+      "context": "</div>\n ))}\n </Text>\n {!isDesktop ? (\n <Text fontSize=\"12px\">\n <Trans t={t} i18nKey=\"PrivateRoomSupport\" ns=\"Files\">\n Work in Private Room is available via{\" \"}\n {{ organizationName: logoText }} desktop app.\n <Link\n isBold\n isHovered",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

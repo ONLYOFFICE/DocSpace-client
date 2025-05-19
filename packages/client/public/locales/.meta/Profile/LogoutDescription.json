@@ -1,11 +1,22 @@
 {
   "key_path": "LogoutDescription",
+  "content": "Note. All active connections except this connection will be logged out, as it is currently in use.",
   "content_en_sha1_hash": "20e853f73fa6e4fe2c68afd99e55c4ce5099c204",
-  "created_at": "2025-05-14T14:04:24.580Z",
-  "updated_at": "2025-05-14T14:04:24.580Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.368Z",
+  "updated_at": "2025-05-19T21:56:08.167Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/LogoutAllSessionDialog/index.js",
+      "line_number": 60,
+      "context": "displayType=\"modal\"\n autoMaxHeight\n >\n <ModalDialog.Header>{t(\"Common:LogoutButton\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"Profile:LogoutDescription\")}</Text>\n <Text style={{ margin: \"15px 0\" }}>\n {t(\"Profile:DescriptionForSecurity\")}\n </Text>\n <div\n style={{",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

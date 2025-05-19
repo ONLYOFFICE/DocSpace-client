@@ -1,11 +1,22 @@
 {
   "key_path": "ImportFromPortal",
+  "content": "Import from {{organizationName}} Workspace",
   "content_en_sha1_hash": "e724af9a3984c03739c4b609de92912ffbbdbb33",
-  "created_at": "2025-05-14T14:04:25.925Z",
-  "updated_at": "2025-05-14T14:04:25.925Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:51.672Z",
+  "updated_at": "2025-05-19T21:56:08.383Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
+      "line_number": 319,
+      "context": "? workspace === \"GoogleWorkspace\"\n ? t(\"ImportFromGoogle\")\n : workspace === \"Nextcloud\"\n ? t(\"ImportFromNextcloud\")\n : workspace === \"Workspace\"\n ? t(\"ImportFromPortal\", {\n organizationName: logoText,\n })\n : t(\"DataImport\")\n : t(header, {\n organizationName: logoText,",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,22 @@
 {
   "key_path": "MigrationDataTitle",
+  "content": "Migration Data",
   "content_en_sha1_hash": "358a99f13e368da3be2c47e85266469f4630703f",
-  "created_at": "2025-05-14T14:04:21.470Z",
-  "updated_at": "2025-05-14T14:04:21.470Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.526Z",
+  "updated_at": "2025-05-19T21:56:08.007Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
+      "line_number": 328,
+      "context": "},\n ],\n };\n \n const migrationData = {\n title: t(\"EmptyView:MigrationDataTitle\"),\n description: t(\"EmptyView:MigrationDataDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n icon: <InviteUserFormIcon />,",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

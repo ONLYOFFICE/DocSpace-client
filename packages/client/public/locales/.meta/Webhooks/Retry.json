@@ -1,11 +1,34 @@
 {
   "key_path": "Retry",
+  "content": "Retry",
   "content_en_sha1_hash": "9f5cd8a2e8807d73efa02c844bfbca9fe552b283",
-  "created_at": "2025-05-14T14:04:27.914Z",
-  "updated_at": "2025-05-14T14:04:27.914Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:49.814Z",
+  "updated_at": "2025-05-19T21:56:08.508Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader.js",
+      "line_number": 34,
+      "context": "import styled from \"styled-components\";\n import { useNavigate, useParams, useLocation } from \"react-router-dom\";\n import { inject, observer } from \"mobx-react\";\n \n import ArrowPathReactSvgUrl from \"PUBLIC_DIR/images/arrow.path.react.svg?url\";\n import RetryIcon from \"PUBLIC_DIR/images/icons/16/refresh.react.svg?url\";\n \n import { Heading } from \"@docspace/shared/components/heading\";\n import { IconButton } from \"@docspace/shared/components/icon-button\";\n // import { Hint } from \"../../styled-components\";",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/WebhookHistoryTable/HistoryRowView/HistoryRow.js",
+      "line_number": 35,
+      "context": "import { useNavigate, useParams } from \"react-router-dom\";\n \n import { Row } from \"@docspace/shared/components/rows\";\n import { retryWebhook } from \"@docspace/shared/api/settings\";\n \n import RetryIcon from \"PUBLIC_DIR/images/icons/16/refresh.react.svg?url\";\n import InfoIcon from \"PUBLIC_DIR/images/info.outline.react.svg?url\";\n \n import { toastr } from \"@docspace/shared/components/toast\";\n \n import { useTranslation } from \"react-i18next\";",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/WebhookHistoryTable/HistoryTableView/HistoryTableRow.js",
+      "line_number": 27,
+      "context": "//\n // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing\n // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0\n // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n \n import RetryIcon from \"PUBLIC_DIR/images/icons/16/refresh.react.svg?url\";\n import InfoIcon from \"PUBLIC_DIR/images/info.outline.react.svg?url\";\n \n import React from \"react\";\n import styled, { css } from \"styled-components\";\n import { inject, observer } from \"mobx-react\";",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

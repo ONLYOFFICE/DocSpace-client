@@ -12,6 +12,30 @@
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "restart": true
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Backend Script (generate-metadata)",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/backend/src/scripts/generate-metadata.js",
+      "cwd": "${workspaceFolder}/backend",
+      "envFile": "${workspaceFolder}/backend/.env",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "restart": true
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Backend Script (save-meta-keys-usage)",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/backend/src/scripts/save-meta-keys-usage.js",
+      "cwd": "${workspaceFolder}/backend",
+      "envFile": "${workspaceFolder}/backend/.env",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "restart": true
     }
   ]
 }

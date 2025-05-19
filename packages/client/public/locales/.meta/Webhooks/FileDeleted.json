@@ -1,10 +1,14 @@
 {
   "key_path": "FileDeleted",
+  "content": "File deleted",
   "content_en_sha1_hash": "80bb638b8b9d2b50c437a89c6f74323269298583",
-  "created_at": "2025-05-14T14:04:27.836Z",
-  "updated_at": "2025-05-14T14:04:27.836Z",
-  "comment_text": "",
-  "comment_ai": false,
+  "created_at": "2025-05-19T21:30:49.726Z",
+  "updated_at": "2025-05-19T21:30:49.726Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
   "usage": [],
   "languages": {
     "en": {

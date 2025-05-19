@@ -1,11 +1,34 @@
 {
   "key_path": "BackupProgress",
+  "content": "Backup: {{progress}}%",
   "content_en_sha1_hash": "67556deadd1d0bbd475e81e5accc92229e607451",
-  "created_at": "2025-05-14T14:04:25.063Z",
-  "updated_at": "2025-05-14T14:04:25.063Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:50.703Z",
+  "updated_at": "2025-05-19T21:56:08.415Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/auto-backup/index.js",
+      "line_number": 59,
+      "context": "import { getSettingsThirdParty } from \"@docspace/shared/api/files\";\n import StatusMessage from \"@docspace/shared/components/status-message\";\n import SocketHelper, { SocketEvents } from \"@docspace/shared/utils/socket\";\n import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n import {\n getBackupProgressInfo,\n isManagement,\n } from \"@docspace/shared/utils/common\";\n import { globalColors } from \"@docspace/shared/themes\";\n import { OPERATIONS_NAME } from \"@docspace/shared/constants\";",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/manual-backup/index.js",
+      "line_number": 50,
+      "context": "import StatusMessage from \"@docspace/shared/components/status-message\";\n import SocketHelper, { SocketEvents } from \"@docspace/shared/utils/socket\";\n import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n import {\n isManagement,\n getBackupProgressInfo,\n } from \"@docspace/shared/utils/common\";\n import { OPERATIONS_NAME } from \"@docspace/shared/constants\";\n \n import { getFromLocalStorage, saveToLocalStorage } from \"../../../../utils\";\n import { StyledModules, StyledManualBackup } from \"../StyledBackup\";",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/restore-backup/sub-components/ButtonComponent.js",
+      "line_number": 59,
+      "context": "buttonSize,\n setTenantStatus,\n isFormReady,\n getStorageParams,\n uploadLocalFile,\n isBackupProgressVisible,\n setErrorInformation,\n setIsBackupProgressVisible,\n backupPrgressError,\n } = props;",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

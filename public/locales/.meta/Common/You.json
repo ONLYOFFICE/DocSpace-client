@@ -1,11 +1,28 @@
 {
   "key_path": "You",
+  "content": "You",
   "content_en_sha1_hash": "905cb326c779f0123e079bf8ccb223176a3cf32d",
-  "created_at": "2025-05-14T14:04:20.868Z",
-  "updated_at": "2025-05-14T14:04:20.868Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:49.648Z",
+  "updated_at": "2025-05-19T21:56:08.131Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Progress.js",
+      "line_number": 168,
+      "context": "<InterruptIcon className=\"status-icon\" />\n <Text className=\"status\">{t(\"DataReassignmentDialog:Interrupted\")}</Text>\n </div>\n );\n \n const you = `${`(${t(\"Common:You\")})`}`;\n \n const reassigningDataStart = isReassignCurrentUser ? (\n <Trans\n i18nKey=\"ReassigningDataToItself\"\n ns=\"DataReassignmentDialog\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
+      "line_number": 79,
+      "context": "t={t}\n >\n {{ warningMessageMyDocuments }}\n <strong>\n {{ userPerformedDeletion: userPerformedDeletion!.displayName }}\n {{ userYou: t(\"Common:You\") }}\n </strong>\n </Trans>\n );\n \n const warningMessage =",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

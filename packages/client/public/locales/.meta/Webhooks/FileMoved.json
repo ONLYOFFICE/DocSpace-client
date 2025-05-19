@@ -1,10 +1,14 @@
 {
   "key_path": "FileMoved",
+  "content": "File moved",
   "content_en_sha1_hash": "4e4b376cb841b13d111316ba24598b32fe7b1dbd",
-  "created_at": "2025-05-14T14:04:27.838Z",
-  "updated_at": "2025-05-14T14:04:27.838Z",
-  "comment_text": "",
-  "comment_ai": false,
+  "created_at": "2025-05-19T21:30:49.728Z",
+  "updated_at": "2025-05-19T21:30:49.728Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
   "usage": [],
   "languages": {
     "en": {

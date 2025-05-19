@@ -1,11 +1,28 @@
 {
   "key_path": "LinkExpireAfter",
+  "content": "The link will expire after <1>{{date}}</1>",
   "content_en_sha1_hash": "f9f44c4a33ec8d0bd302053f5c321d452539b5a3",
-  "created_at": "2025-05-14T14:04:17.500Z",
-  "updated_at": "2025-05-14T14:04:17.500Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:46.171Z",
+  "updated_at": "2025-05-19T21:56:08.771Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 301,
+      "context": "const date = getDate(expirationDate);\n \n return (\n <Trans\n t={t}\n i18nKey=\"LinkExpireAfter\"\n ns=\"Common\"\n values={{ date }}\n components={{ 1: <strong /> }}\n />\n );",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/share/sub-components/ExpiredComboBox.tsx",
+      "line_number": 134,
+      "context": "const getExpirationTrans = () => {\n if (expirationDate) {\n const date = getDate(expirationDate);\n \n return (\n <Trans t={t} i18nKey=\"LinkExpireAfter\" ns=\"Common\">\n The link will expire after\n <LinkWithDropdown\n className=\"expired-options\"\n color={globalColors.lightBlueMain}\n dropdownType=\"alwaysDashed\"",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

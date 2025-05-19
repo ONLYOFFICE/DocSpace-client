@@ -1,11 +1,22 @@
 {
   "key_path": "HotkeysMove",
+  "content": "Move between items",
   "content_en_sha1_hash": "dbd1ab23f2124a4ce62b46e43d9985055559b5c8",
-  "created_at": "2025-05-14T14:04:22.921Z",
-  "updated_at": "2025-05-14T14:04:22.921Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.058Z",
+  "updated_at": "2025-05-19T21:56:08.213Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/HotkeysPanel/index.js",
+      "line_number": 130,
+      "context": "t={t}\n textStyles={textStyles}\n keyTextStyles={keyTextStyles}\n CtrlKey={CtrlKey}\n />\n <Heading className=\"hotkeys_sub-header\">{t(\"HotkeysMove\")}</Heading>\n <MoveBlock\n t={t}\n textStyles={textStyles}\n keyTextStyles={keyTextStyles}\n CtrlKey={CtrlKey}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

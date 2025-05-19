@@ -1,11 +1,28 @@
 {
   "key_path": "FileCopied",
+  "content": "Files copied.",
   "content_en_sha1_hash": "9bab25397cd16a5f1461f06dc1004411ecc74e27",
-  "created_at": "2025-05-14T14:04:23.002Z",
-  "updated_at": "2025-05-14T14:04:23.002Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.792Z",
+  "updated_at": "2025-05-19T21:56:08.262Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
+      "line_number": 74,
+      "context": "count,\n });\n return t(\"InfoPanel:FileMovedToTrash\");\n case \"FileCopied\":\n if (feed.data.fromParentTitle) {\n return t(\"InfoPanel:FileCopiedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"InfoPanel:FileCopiedCount\", {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
+      "line_number": 58,
+      "context": "return t(\"FileTrashed\");\n case WebhookTriggers.FileDeleted:\n return t(\"FileDeleted\");\n case WebhookTriggers.FileRestored:\n return t(\"FileRestored\");\n case WebhookTriggers.FileCopied:\n return t(\"FileCopied\");\n case WebhookTriggers.FileMoved:\n return t(\"FileMoved\");\n case WebhookTriggers.FolderCreated:\n return t(\"FolderCreated\");",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

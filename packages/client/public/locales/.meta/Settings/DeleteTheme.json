@@ -1,11 +1,22 @@
 {
   "key_path": "DeleteTheme",
+  "content": "Delete theme",
   "content_en_sha1_hash": "bd17efc386422720b42d5a367d2b782acd621131",
-  "created_at": "2025-05-14T14:04:25.497Z",
-  "updated_at": "2025-05-14T14:04:25.497Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:51.143Z",
+  "updated_at": "2025-05-19T21:56:08.394Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
+      "line_number": 822,
+      "context": "isDisabled={isDisabledEditButton}\n />\n {isShowDeleteButton ? (\n <Button\n className=\"delete-theme button\"\n label={t(\"Settings:DeleteTheme\")}\n onClick={onOpenDialogDelete}\n size={buttonSize}\n isDisabled={isDisabledDeleteButton}\n />\n ) : null}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

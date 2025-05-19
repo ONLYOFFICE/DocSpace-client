@@ -1,11 +1,28 @@
 {
   "key_path": "RoomEmptyContainerDescription",
+  "content": "Please create the first room.",
   "content_en_sha1_hash": "d81ffd8917231e32c17f72ee8658dc82cb505c46",
-  "created_at": "2025-05-14T14:04:22.520Z",
-  "updated_at": "2025-05-14T14:04:22.520Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.086Z",
+  "updated_at": "2025-05-19T21:56:07.996Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
+      "line_number": 113,
+      "context": "<>\n <div>{t(\"Common:RoomEmptyAtTheMoment\")}</div>\n <div>{t(\"Common:FilesWillAppearHere\")}</div>\n </>\n ) : isVisitor || isCollaborator ? (\n t(\"RoomEmptyContainerDescriptionUser\")\n ) : (\n t(\"RoomEmptyContainerDescription\")\n );\n \n const archiveRoomsDescription =",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 180,
+      "context": "isPublicRoom: boolean,\n security: Nullable<TFolderSecurity>,\n ) => {\n return match([rootFolderType, access])\n .with([FolderType.Rooms, ShareAccessRights.None], () =>\n t(\"Files:RoomEmptyContainerDescription\"),\n )\n .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>\n t(\"EmptyView:EmptyRootRoomUserDescription\"),\n )\n .with([FolderType.RoomTemplates, P._], () =>",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

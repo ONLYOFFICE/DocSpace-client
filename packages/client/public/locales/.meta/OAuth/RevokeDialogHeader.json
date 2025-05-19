@@ -1,11 +1,28 @@
 {
   "key_path": "RevokeDialogHeader",
+  "content": "Revoke token",
   "content_en_sha1_hash": "9b8466169cf13a97ddbd21c83909af55a5a8e71a",
-  "created_at": "2025-05-14T14:04:24.169Z",
-  "updated_at": "2025-05-14T14:04:24.169Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.026Z",
+  "updated_at": "2025-05-19T21:56:08.498Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/RevokeDeveloperTokenDialog.tsx",
+      "line_number": 157,
+      "context": "visible\n onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>{t(\"OAuth:RevokeDialogHeader\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div>\n <Text style={{ marginBottom: \"16px\" }} noSelect>\n {t(\"OAuth:RevokeDialogDescription\")}\n </Text>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/OAuthStore.ts",
+      "line_number": 768,
+      "context": "};\n \n const revokeDeveloperTokenOption = {\n key: \"revoke-token\",\n icon: RevokeIconUrl,\n label: t(\"OAuth:RevokeDialogHeader\"),\n onClick: onRevokeDeveloperToken,\n disabled: !item.enabled,\n };\n \n const contextOptions: ContextMenuModel[] = [",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

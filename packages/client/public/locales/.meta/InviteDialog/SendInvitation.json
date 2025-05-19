@@ -1,11 +1,22 @@
 {
   "key_path": "SendInvitation",
+  "content": "Send invitation",
   "content_en_sha1_hash": "abb6cb2d460af2a3a0a5b3ef9a16f1af50bf3bd9",
-  "created_at": "2025-05-14T14:04:23.214Z",
-  "updated_at": "2025-05-14T14:04:23.214Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.737Z",
+  "updated_at": "2025-05-19T21:56:08.214Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
+      "line_number": 557,
+      "context": "scale\n size=\"normal\"\n isDisabled={hasErrors || !hasInvitedUsers}\n primary\n onClick={onClickSend}\n label={t(\"SendInvitation\")}\n isLoading={isLoading}\n />\n <Button\n className=\"cancel-button\"\n scale",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

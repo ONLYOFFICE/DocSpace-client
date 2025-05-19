@@ -1,11 +1,22 @@
 {
   "key_path": "AppName",
+  "content": "{{organizationName}} Documents",
   "content_en_sha1_hash": "db01b8765ec0bbda9628a90d2f7c09d5e66f8c63",
-  "created_at": "2025-05-14T14:04:27.654Z",
-  "updated_at": "2025-05-14T14:04:27.654Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:50.041Z",
+  "updated_at": "2025-05-19T21:56:08.042Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/SmartBanner/index.js",
+      "line_number": 96,
+      "context": "navigator.msMaxTouchPoints > 0;\n \n return isMobile && isBannerVisible && ready && isTouchDevice ? (\n <Wrapper>\n <SmartBanner\n title={t(\"SmartBanner:AppName\", {\n organizationName: logoText,\n })}\n author=\"Ascensio System SIA\"\n button={t(\"Common:View\")}\n force={force}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

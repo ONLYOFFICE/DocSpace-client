@@ -1,11 +1,22 @@
 {
   "key_path": "UpgradeToProBannerInstructionDescr",
+  "content": "Use the official documentation to upgrade:",
   "content_en_sha1_hash": "543e777ff5b1b9ec51febc46ab0a1b341669aea6",
-  "created_at": "2025-05-14T14:04:24.371Z",
-  "updated_at": "2025-05-14T14:04:24.371Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.609Z",
+  "updated_at": "2025-05-19T21:56:08.240Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Bonus/index.js",
+      "line_number": 57,
+      "context": "{t(\"UpgradeToProBannerInstructionHeader\", {\n organizationName: logoText,\n license: t(\"Common:EnterpriseLicense\"),\n })}\n </Text>\n <Text>{t(\"UpgradeToProBannerInstructionDescr\")}</Text>\n \n <OfficialDocumentation />\n \n <ContactContainer />\n </StyledComponent>",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

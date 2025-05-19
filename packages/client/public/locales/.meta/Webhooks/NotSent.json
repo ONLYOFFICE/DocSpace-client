@@ -1,11 +1,28 @@
 {
   "key_path": "NotSent",
+  "content": "Not sent",
   "content_en_sha1_hash": "587c501eb4069b3a59c57ceec50534b82deec57e",
-  "created_at": "2025-05-14T14:04:27.880Z",
-  "updated_at": "2025-05-14T14:04:27.880Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:49.779Z",
+  "updated_at": "2025-05-19T21:56:08.508Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/StatusPicker.js",
+      "line_number": 92,
+      "context": "const StatusBadgeElements = StatusCodes.map((code) =>\n code === \"Not sent\" ? (\n <StatusBadgeSelector\n id=\"not-sent\"\n label={t(\"NotSent\")}\n statusCode={code}\n isStatusSelected={isStatusSelected}\n handleStatusClick={handleStatusClick}\n key={code}\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/StatusBadge.js",
+      "line_number": 75,
+      "context": "return (\n <StyledBadge\n id=\"webhook-status\"\n backgroundColor={badgeColorScheme.backgroundColor}\n color={badgeColorScheme.color}\n label={status === 0 ? t(\"NotSent\") : status.toString()}\n fontSize=\"9px\"\n maxWidth=\"80px\"\n fontWeight={700}\n noHover\n isVersionBadge",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

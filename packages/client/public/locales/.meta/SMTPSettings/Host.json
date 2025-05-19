@@ -1,11 +1,22 @@
 {
   "key_path": "Host",
+  "content": "Host",
   "content_en_sha1_hash": "3960ec4ca5fb5e5d8cdb2cc1c5121c003e426517",
-  "created_at": "2025-05-14T14:04:27.675Z",
-  "updated_at": "2025-05-14T14:04:27.675Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.301Z",
+  "updated_at": "2025-05-19T21:56:08.544Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/CustomSettings.js",
+      "line_number": 120,
+      "context": "label={t(\"Common:Authentication\")}\n isDisabled={isLoading}\n />\n \n <div className=\"smtp-settings_title smtp-settings_login\">\n <Text {...commonTextProps}>{t(\"HostLogin\")}</Text>\n <Text as=\"span\" {...requirementColor}>\n *\n </Text>\n </div>\n <TextInput",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

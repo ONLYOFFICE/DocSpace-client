@@ -1,11 +1,22 @@
 {
   "key_path": "UnsavedChangesBody",
+  "content": "If you close the link settings menu right now, your changes will not be saved.",
   "content_en_sha1_hash": "664be2f693842e9d61109ed95c6d8038cb2c4188",
-  "created_at": "2025-05-14T14:04:27.275Z",
-  "updated_at": "2025-05-14T14:04:27.275Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.044Z",
+  "updated_at": "2025-05-19T21:56:08.186Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/UnsavedChangesDialog/index.js",
+      "line_number": 77,
+      "context": ">\n <ModalDialog.Header>\n {t(\"Settings:YouHaveUnsavedChanges\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text noSelect>{t(\"Settings:UnsavedChangesBody\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OkButton\"\n label={t(\"Settings:CloseMenu\")}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

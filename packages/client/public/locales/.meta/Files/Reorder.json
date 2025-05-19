@@ -1,11 +1,28 @@
 {
   "key_path": "Reorder",
+  "content": "Reorder",
   "content_en_sha1_hash": "33d9978c44777f5262fb2dbe921b919fa3fad96c",
-  "created_at": "2025-05-14T14:04:22.474Z",
-  "updated_at": "2025-05-14T14:04:22.474Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.040Z",
+  "updated_at": "2025-05-19T21:56:08.172Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ReorderIndexDialog/index.tsx",
+      "line_number": 80,
+      "context": "onClose={onClose}\n >\n <ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" fontWeight={400} noSelect>\n {t(\"Files:ReorderIndex\")}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"create-room\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
+      "line_number": 454,
+      "context": "const headerMenu = isIndexEditingMode\n ? [\n {\n id: \"reorder-index\",\n label: t(\"Files:Reorder\"),\n onClick: onIndexReorder,\n iconUrl: RoundedArrowSvgUrl,\n },\n {\n id: \"save-index\",",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

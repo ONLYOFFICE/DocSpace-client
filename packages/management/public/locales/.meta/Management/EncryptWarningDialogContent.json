@@ -1,11 +1,22 @@
 {
   "key_path": "EncryptWarningDialogContent",
+  "content": "All spaces will become unavailable during the encryption process. Are you sure you want to continue?",
   "content_en_sha1_hash": "e4ffd51a2b586f696bcb3f491a238a9cf9a70d68",
-  "created_at": "2025-05-14T14:04:28.344Z",
-  "updated_at": "2025-05-14T14:04:28.344Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.450Z",
+  "updated_at": "2025-05-19T21:56:08.809Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/management/src/categories/encrypt-data/EncryptWarningDialog.tsx",
+      "line_number": 79,
+      "context": ">\n <ModalDialog.Header>{t(\"Common:Confirmation\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {status === EncryptionStatus.Decrypted\n ? t(\"EncryptWarningDialogContent\")\n : t(\"DecryptWarningDialogContent\")}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "module": "/packages/management"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

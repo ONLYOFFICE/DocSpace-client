@@ -1,11 +1,22 @@
 {
   "key_path": "BreakpointMobileWarningTextPrompt",
+  "content": "Please use the desktop or tablet to access the <1>{{sectionName}}</1>.",
   "content_en_sha1_hash": "e02848140f969778622004016539527a0c8733f2",
-  "created_at": "2025-05-14T14:04:25.137Z",
-  "updated_at": "2025-05-14T14:04:25.137Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:50.782Z",
+  "updated_at": "2025-05-19T21:56:07.987Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/BreakpointWarning/BreakpointWarning.js",
+      "line_number": 52,
+      "context": ": t(\"BreakpointWarningText\");\n \n const textPrompt = isSmallWindow ? (\n t(\"BreakpointSmallTextPrompt\")\n ) : isMobileUnavailableOnly ? (\n <Trans t={t} i18nKey=\"BreakpointMobileWarningTextPrompt\" ns=\"Settings\">\n \"Please use the desktop site to access the {{ sectionName }}\n settings.\"\n </Trans>\n ) : (\n <Trans t={t} i18nKey=\"BreakpointWarningTextPrompt\" ns=\"Settings\">",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

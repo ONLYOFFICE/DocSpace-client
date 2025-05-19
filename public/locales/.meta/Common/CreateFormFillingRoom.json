@@ -1,11 +1,34 @@
 {
   "key_path": "CreateFormFillingRoom",
+  "content": "Create Form filling room",
   "content_en_sha1_hash": "2c00eeebf71b5e09d7795d3137d22acce6f3542a",
-  "created_at": "2025-05-14T14:04:15.264Z",
-  "updated_at": "2025-05-14T14:04:15.264Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:43.893Z",
+  "updated_at": "2025-05-19T21:56:08.040Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/ShareCollectSelector/ShareCollectSelector.tsx",
+      "line_number": 263,
+      "context": "onClose: onCloseInfoBar,\n };\n \n const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {\n [RoomsType.VirtualDataRoom]: t(\"Common:CreateVirtualDataRoom\"),\n [RoomsType.FormRoom]: t(\"Common:CreateFormFillingRoom\"),\n };\n \n return (\n <FilesSelectorWrapper\n withCreate",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/doceditor/src/components/StartFillingSelectDialog.tsx",
+      "line_number": 74,
+      "context": "onClose: onCloseInfoBar,\n };\n \n const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {\n [RoomsType.VirtualDataRoom]: t(\"Common:CreateVirtualDataRoom\"),\n [RoomsType.FormRoom]: t(\"Common:CreateFormFillingRoom\"),\n };\n \n return (\n <FilesSelectorWrapper\n withCreate",
+      "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/shared/components/selector/sub-components/EmptySreen/EmptyScreenFormRoom.tsx",
+      "line_number": 67,
+      "context": "? t(\"Common:SelectorFormRoomEmptyScreenDescription\")\n : t(\"Common:SelectorVDREmptyScreenDescription\");\n \n const buttonLabel =\n createDefineRoomType === RoomsType.FormRoom\n ? t(\"Common:CreateFormFillingRoom\")\n : t(\"Common:CreateVirtualDataRoom\");\n \n return (\n <StyledNewEmptyScreen>\n <img",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

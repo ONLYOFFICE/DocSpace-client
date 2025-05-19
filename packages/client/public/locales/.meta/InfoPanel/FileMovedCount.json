@@ -1,11 +1,22 @@
 {
   "key_path": "FileMovedCount",
+  "content": "Files moved ({{count}}).",
   "content_en_sha1_hash": "63c34a945bf73b0cfeb83951dd5f8d83de11f174",
-  "created_at": "2025-05-14T14:04:23.024Z",
-  "updated_at": "2025-05-14T14:04:23.024Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.814Z",
+  "updated_at": "2025-05-19T21:56:08.261Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
+      "line_number": 62,
+      "context": "return t(\"InfoPanel:FileMovedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"InfoPanel:FileMovedCount\", {\n count,\n });\n return t(\"InfoPanel:FileMoved\");\n case \"FileMovedToTrash\":\n if (hasRelatedItems)",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

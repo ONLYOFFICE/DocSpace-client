@@ -1,11 +1,22 @@
 {
   "key_path": "ErrorOccuredDownloadLog",
+  "content": "Errors occurred during data import. Download the log to check them.",
   "content_en_sha1_hash": "aabe25d4edb5d4821ac11cc9654982a6b1cee13a",
-  "created_at": "2025-05-14T14:04:25.802Z",
-  "updated_at": "2025-05-14T14:04:25.802Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:51.549Z",
+  "updated_at": "2025-05-19T21:56:08.404Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportCompleteStep.tsx",
+      "line_number": 154,
+      "context": "})}\n </ErrorText>\n ) : null}\n \n {importResult.errors?.length > 0 ? (\n <ErrorText>{t(\"Settings:ErrorOccuredDownloadLog\")}</ErrorText>\n ) : null}\n \n <Wrapper>\n <Checkbox\n label={t(\"Settings:SendInviteLetter\")}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,22 @@
 {
   "key_path": "DeleteItemsSharedNote",
+  "content": "Please note that if you have shared them with someone, they will become unavailable.",
   "content_en_sha1_hash": "840b5acfff4dfd6368270d6e180b41874d1ce417",
-  "created_at": "2025-05-14T14:04:21.265Z",
-  "updated_at": "2025-05-14T14:04:21.265Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.705Z",
+  "updated_at": "2025-05-19T21:56:08.139Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
+      "line_number": 256,
+      "context": "</>\n )\n ) : (\n <>\n <>{t(\"DeleteItems\")} </>\n <>{t(\"DeleteItemsSharedNote\")} </>\n {!isThirdParty ? <>{t(\"ItemsPermanentlyDeleted\")} </> : null}\n <>{t(\"Common:WantToContinue\")}</>\n </>\n );\n }",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

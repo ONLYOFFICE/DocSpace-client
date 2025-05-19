@@ -1,11 +1,22 @@
 {
   "key_path": "InvitationToRoom",
+  "content": "<1>{{displayName}}</1> invites you to join the room <1>{{roomName}}</1> for secure document collaboration.",
   "content_en_sha1_hash": "a562c988747a5f073b4f2c0e05a5d2508c3d523a",
-  "created_at": "2025-05-14T14:04:17.293Z",
-  "updated_at": "2025-05-14T14:04:17.293Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:45.954Z",
+  "updated_at": "2025-05-19T21:56:08.731Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/components/GreetingContainer/GreetingCreateUserContainer/index.tsx",
+      "line_number": 71,
+      "context": "<div className=\"tooltip\">\n <Text fontSize=\"16px\">\n {roomData.title ? (\n <Trans\n t={t}\n i18nKey=\"InvitationToRoom\"\n ns=\"Common\"\n defaults={DEFAULT_ROOM_TEXT}\n values={{\n displayName,\n ...(roomData.title",
+      "module": "/packages/login"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

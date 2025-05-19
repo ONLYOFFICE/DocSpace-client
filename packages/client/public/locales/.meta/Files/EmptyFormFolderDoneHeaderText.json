@@ -1,11 +1,28 @@
 {
   "key_path": "EmptyFormFolderDoneHeaderText",
+  "content": "No finished forms yet",
   "content_en_sha1_hash": "43fb198123ae11d4e4ffaad9fdb88dfdf93a092e",
-  "created_at": "2025-05-14T14:04:21.997Z",
-  "updated_at": "2025-05-14T14:04:21.997Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.556Z",
+  "updated_at": "2025-05-19T21:56:07.988Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyContainer.helper.ts",
+      "line_number": 80,
+      "context": "export const getTranslateHeaderKey = (\n t: TTranslation,\n type: EmptyScreenTypeEnum,\n ) => {\n const translateHeaderKey: Record<EmptyScreenTypeEnum, string> = {\n [EmptyScreenTypeEnum.Done]: t(\"EmptyFormFolderDoneHeaderText\"),\n [EmptyScreenTypeEnum.InProgress]: t(\"EmptyFormFolderProgressHeaderText\"),\n [EmptyScreenTypeEnum.Default]: t(\"Common:EmptyScreenFolder\"),\n [EmptyScreenTypeEnum.Corporate]: t(\"RoomCreated\"),\n [EmptyScreenTypeEnum.SubFolderDone]: t(\"EmptyFormSubFolderHeaderText\"),\n [EmptyScreenTypeEnum.SubFolderinProgress]: t(",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 221,
+      "context": "folderType: Nullable<FolderType>,\n parentRoomType: Nullable<FolderType>,\n ) => {\n return match([parentRoomType, folderType, access])\n .with([P._, FolderType.Done, P._], () =>\n t(\"Files:EmptyFormFolderDoneHeaderText\"),\n )\n \n .with([P._, FolderType.InProgress, P._], () =>\n t(\"Files:EmptyFormFolderProgressHeaderText\"),\n )",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

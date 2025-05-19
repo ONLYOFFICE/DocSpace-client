@@ -1,11 +1,34 @@
 {
   "key_path": "PreparingBackup",
+  "content": "Preparing backup",
   "content_en_sha1_hash": "f35ddbcec9c65837f3811de3b81fc5dcd00e1d93",
-  "created_at": "2025-05-14T14:04:26.447Z",
-  "updated_at": "2025-05-14T14:04:26.447Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:52.308Z",
+  "updated_at": "2025-05-19T21:56:08.415Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/auto-backup/index.js",
+      "line_number": 664,
+      "context": "operation: OPERATIONS_NAME.backup,\n label:\n downloadingProgress === 100\n ? t(\"Backup\")\n : downloadingProgress === 0\n ? t(\"PreparingBackup\")\n : t(\"BackupProgress\", { progress: downloadingProgress }),\n percent: downloadingProgress,\n },\n ]}\n clearOperationsData={() => setIsBackupProgressVisible(false)}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/manual-backup/index.js",
+      "line_number": 476,
+      "context": "operation: OPERATIONS_NAME.backup,\n label:\n downloadingProgress === 100\n ? t(\"Backup\")\n : downloadingProgress === 0\n ? t(\"PreparingBackup\")\n : t(\"BackupProgress\", { progress: downloadingProgress }),\n percent: downloadingProgress,\n },\n ]}\n clearOperationsData={() => setIsBackupProgressVisible(false)}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/restore-backup/sub-components/ButtonComponent.js",
+      "line_number": 167,
+      "context": "operation: OPERATIONS_NAME.backup,\n label:\n downloadingProgress === 100\n ? t(\"Backup\")\n : downloadingProgress === 0\n ? t(\"PreparingBackup\")\n : t(\"BackupProgress\", { progress: downloadingProgress }),\n percent: downloadingProgress,\n },\n ]}\n clearOperationsData={() => setIsBackupProgressVisible(false)}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

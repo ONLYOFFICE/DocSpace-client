@@ -1,11 +1,22 @@
 {
   "key_path": "OAuthFilesWriteDescription",
+  "content": "View and manage all files and folders",
   "content_en_sha1_hash": "07c9e42a035928c689645c2bb99f9e8490d45a8b",
-  "created_at": "2025-05-14T14:04:18.307Z",
-  "updated_at": "2025-05-14T14:04:18.307Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:47.010Z",
+  "updated_at": "2025-05-19T21:56:08.807Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/utils/oauth/index.ts",
+      "line_number": 117,
+      "context": "t: TTranslation,\n ) => {\n switch (group) {\n case ScopeGroup.files:\n if (type === ScopeType.read) return t(\"Common:OAuthFilesReadDescription\");\n return t(\"Common:OAuthFilesWriteDescription\");\n case ScopeGroup.accounts:\n case ScopeGroup.contacts:\n if (type === ScopeType.read)\n return t(\"Common:OAuthAccountsReadDescription\");\n return t(\"Common:OAuthAccountsWriteDescription\");",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

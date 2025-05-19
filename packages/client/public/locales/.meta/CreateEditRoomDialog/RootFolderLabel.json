@@ -1,11 +1,28 @@
 {
   "key_path": "RootFolderLabel",
+  "content": "Root folder",
   "content_en_sha1_hash": "aa608b6955d74fbf2015416119d097d0da2bf762",
-  "created_at": "2025-05-14T14:04:21.180Z",
-  "updated_at": "2025-05-14T14:04:21.180Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.834Z",
+  "updated_at": "2025-05-19T21:56:08.114Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/FolderInput.js",
+      "line_number": 174,
+      "context": "console.log(thirdpartyAccount);\n \n if (!thirdpartyAccount.id) return null;\n \n let title = createNewFolderIsChecked || path ? \"/\" : t(\"RootFolderLabel\");\n title += path;\n if (createNewFolderIsChecked) {\n title += path ? \"/\" : \"\";\n title += roomTitle || t(\"Common:NewRoom\");\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/FolderInput.js",
+      "line_number": 174,
+      "context": "console.log(thirdpartyAccount);\n \n if (!thirdpartyAccount.id) return null;\n \n let title = createNewFolderIsChecked || path ? \"/\" : t(\"RootFolderLabel\");\n title += path;\n if (createNewFolderIsChecked) {\n title += path ? \"/\" : \"\";\n title += roomTitle || t(\"Common:NewRoom\");\n }",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,22 @@
 {
   "key_path": "BarMaintenanceDescription",
+  "content": "We apologize for any short-term technical issues in service functioning that may appear on {{targetDate}} during the update of {{productName}}.",
   "content_en_sha1_hash": "eb03d1adcd417e295fcdd7ba6656cd2c333a4f16",
-  "created_at": "2025-05-14T14:04:14.548Z",
-  "updated_at": "2025-05-14T14:04:14.548Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:43.244Z",
+  "updated_at": "2025-05-19T21:56:07.976Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/Shell.jsx",
+      "line_number": 316,
+      "context": "const targetDate = to.locale(language).format(\"LL\");\n \n const barConfig = {\n parentElementId: \"main-bar\",\n headerText: t(\"Attention\"),\n text: `${t(\"BarMaintenanceDescription\", {\n targetDate,\n productName: `${logoText} ${t(\"Common:ProductName\")}`,\n })} ${t(\"BarMaintenanceDisclaimer\")}`,\n isMaintenance: true,\n onAction: () => {",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

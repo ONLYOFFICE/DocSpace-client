@@ -1,11 +1,40 @@
 {
   "key_path": "DataBackup",
+  "content": "Data backup",
   "content_en_sha1_hash": "557da1f0ef4a81b758b4c447e2a745dbf3a4b0fe",
-  "created_at": "2025-05-14T14:04:25.398Z",
-  "updated_at": "2025-05-14T14:04:25.398Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:51.043Z",
+  "updated_at": "2025-05-19T21:56:08.419Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/manual-backup/index.js",
+      "line_number": 38,
+      "context": "import { startBackup } from \"@docspace/shared/api/portal\";\n import { RadioButton } from \"@docspace/shared/components/radio-button\";\n import { toastr } from \"@docspace/shared/components/toast\";\n import { BackupStorageType, FolderType } from \"@docspace/shared/enums\";\n // import { getThirdPartyCommonFolderTree } from \"@docspace/shared/api/files\";\n import DataBackupLoader from \"@docspace/shared/skeletons/backup/DataBackup\";\n import {\n getBackupStorage,\n getStorageRegions,\n } from \"@docspace/shared/api/settings\";\n import OperationsProgressButton from \"@docspace/shared/components/operations-progress-button\";",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/manual-backup/index.js",
+      "line_number": 38,
+      "context": "import { startBackup } from \"@docspace/shared/api/portal\";\n import { RadioButton } from \"@docspace/shared/components/radio-button\";\n import { toastr } from \"@docspace/shared/components/toast\";\n import { BackupStorageType, FolderType } from \"@docspace/shared/enums\";\n // import { getThirdPartyCommonFolderTree } from \"@docspace/shared/api/files\";\n import DataBackupLoader from \"@docspace/shared/skeletons/backup/DataBackup\";\n import {\n getBackupStorage,\n getStorageRegions,\n } from \"@docspace/shared/api/settings\";\n import OperationsProgressButton from \"@docspace/shared/components/operations-progress-button\";",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/index.js",
+      "line_number": 112,
+      "context": "};\n \n const data = [\n {\n id: \"data-backup\",\n name: t(\"DataBackup\"),\n content: (\n <ManualBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />\n ),\n },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/management/src/categories/settings/index.tsx",
+      "line_number": 56,
+      "context": "const { logoText } = settingsStore;\n \n const data = [\n {\n id: \"data-backup\",\n name: t(\"Settings:DataBackup\"),\n content: <Backup logoText={logoText} />,\n },\n {\n id: \"auto-backup\",\n name: t(\"Settings:AutoBackup\"),",
+      "module": "/packages/management"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,22 @@
 {
   "key_path": "NoFindingsFound",
+  "content": "No findings",
   "content_en_sha1_hash": "ab5062b935491263fcc3318d6d8d558b82d2b044",
-  "created_at": "2025-05-14T14:04:18.067Z",
-  "updated_at": "2025-05-14T14:04:18.067Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:46.827Z",
+  "updated_at": "2025-05-19T21:56:07.993Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyFilterContainer.js",
+      "line_number": 128,
+      "context": "const imageSrc = getIconURL();\n \n return (\n <EmptyView\n icon={imageSrc}\n title={t(\"Common:NoFindingsFound\")}\n options={options}\n description={descriptionText}\n />\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

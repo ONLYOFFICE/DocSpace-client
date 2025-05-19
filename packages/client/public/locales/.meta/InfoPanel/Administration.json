@@ -1,11 +1,22 @@
 {
   "key_path": "Administration",
+  "content": "Administration",
   "content_en_sha1_hash": "b8be3d1264310c3b8c848d4b90d5206179a40cc4",
-  "created_at": "2025-05-14T14:04:22.973Z",
-  "updated_at": "2025-05-14T14:04:22.973Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.760Z",
+  "updated_at": "2025-05-19T21:56:08.698Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/InfoPanelStore.js",
+      "line_number": 589,
+      "context": ");\n \n if (administrators.length && !hasPrevAdminsTitle) {\n administrators.unshift({\n id: \"administration\",\n displayName: t(\"InfoPanel:Administration\"),\n isTitle: true,\n });\n }\n \n const hasPrevGroupsTitle = this.getHasPrevTitle(groups, \"groups\");",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,52 @@
 {
   "key_path": "RestoreBackup",
+  "content": "Restore",
   "content_en_sha1_hash": "3cbe6d6b9a8d1596bb5bca12e14d81c9e108a1a3",
-  "created_at": "2025-05-14T14:04:26.530Z",
-  "updated_at": "2025-05-14T14:04:26.530Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:52.395Z",
+  "updated_at": "2025-05-19T21:56:08.381Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
+      "line_number": 219,
+      "context": "return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"RestoreBackup\":\n return t(\"RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", { productName: t(\"Common:ProductName\") });\n case \"Common:DeveloperTools\":\n return t(\"Common:DeveloperTools\");",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/restore-backup/index.js",
+      "line_number": 35,
+      "context": "import { getSettingsThirdParty } from \"@docspace/shared/api/files\";\n import {\n getBackupStorage,\n getStorageRegions,\n } from \"@docspace/shared/api/settings\";\n import RestoreBackupLoader from \"@docspace/shared/skeletons/backup/RestoreBackup\";\n import { toastr } from \"@docspace/shared/components/toast\";\n import { RadioButtonGroup } from \"@docspace/shared/components/radio-button-group\";\n import { BackupStorageType, DeviceType } from \"@docspace/shared/enums\";\n import { Checkbox } from \"@docspace/shared/components/checkbox\";\n import { Text } from \"@docspace/shared/components/text\";",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 286,
+      "context": "{\n id: \"portal-settings_catalog-restore\",\n key: \"3\",\n type: PageType.restore,\n link: \"restore\",\n tKey: \"RestoreBackup\",\n isHeader: true,\n children: [\n {\n key: \"3-0\",\n icon: \"\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 286,
+      "context": "{\n id: \"portal-settings_catalog-restore\",\n key: \"3\",\n type: PageType.restore,\n link: \"restore\",\n tKey: \"RestoreBackup\",\n isHeader: true,\n children: [\n {\n key: \"3-0\",\n icon: \"\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/management/src/categories/restore/index.tsx",
+      "line_number": 41,
+      "context": "const Restore = ({ logoText }: RestoreProps) => {\n const { t } = useTranslation([\"Settings\"]);\n \n useEffect(() => {\n setDocumentTitle(t(\"RestoreBackup\"), logoText);\n }, []);\n \n return <Component />;\n };",
+      "module": "/packages/management"
+    },
+    {
+      "file_path": "/packages/management/src/categories/settings/index.tsx",
+      "line_number": 66,
+      "context": "name: t(\"Settings:AutoBackup\"),\n content: <AutoBackup logoText={logoText} />,\n },\n {\n id: \"restore\",\n name: t(\"Settings:RestoreBackup\"),\n content: <Restore logoText={logoText} />,\n },\n {\n id: \"encrypt-data\",\n name: t(\"Common:Storage\"),",
+      "module": "/packages/management"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

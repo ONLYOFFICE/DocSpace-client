@@ -1,11 +1,22 @@
 {
   "key_path": "DocumentServiceDisableCertificat",
+  "content": "Disable certificate verification (insecure)",
   "content_en_sha1_hash": "3b6c75c57f9e4bd00424d14d59eb15255dc55259",
-  "created_at": "2025-05-14T14:04:25.631Z",
-  "updated_at": "2025-05-14T14:04:25.631Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:51.361Z",
+  "updated_at": "2025-05-19T21:56:08.519Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
+      "line_number": 279,
+      "context": "example: EDITOR_URL_PLACEHOLDER,\n })}\n </Text>\n <Checkbox\n id=\"isDisabledCertificat\"\n label={t(\"Settings:DocumentServiceDisableCertificat\")}\n className=\"checkbox\"\n isChecked={isDisabledCertificat}\n onChange={onChangeIsDisabledCertificat}\n isDisabled={isSaveLoading || isResetLoading}\n />",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,10 +1,14 @@
 {
   "key_path": "Culture_it",
+  "content": "Italiano (Italia)",
   "content_en_sha1_hash": "8712d78f19829847a61322838bef26e32301d64c",
-  "created_at": "2025-05-14T14:04:15.434Z",
-  "updated_at": "2025-05-14T14:04:15.434Z",
-  "comment_text": "",
-  "comment_ai": false,
+  "created_at": "2025-05-19T21:30:44.068Z",
+  "updated_at": "2025-05-19T21:30:44.068Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
   "usage": [],
   "languages": {
     "en": {

@@ -1,11 +1,22 @@
 {
   "key_path": "DeleteSharedLink",
+  "content": "The previous link will become unavailable. A new shared link will be created.",
   "content_en_sha1_hash": "126e609ac5db4aaad297d7da944fb8e0cc5a2767",
-  "created_at": "2025-05-14T14:04:21.890Z",
-  "updated_at": "2025-05-14T14:04:21.890Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.435Z",
+  "updated_at": "2025-05-19T21:56:08.144Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteLinkDialog/index.js",
+      "line_number": 130,
+      "context": "}\n \n if (isPublicRoomType || isCustomRoom)\n return t(\"Files:DeleteSharedCustomPublic\");\n \n return t(\"Files:DeleteSharedLink\");\n };\n \n console.debug({\n primary: link.sharedTo.primary,\n isPublicRoomType,",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

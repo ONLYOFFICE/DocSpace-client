@@ -1,11 +1,34 @@
 {
   "key_path": "BlockFile",
+  "content": "Block",
   "content_en_sha1_hash": "82dd2cdf36f9436d89f404454654ad3e53fd428d",
-  "created_at": "2025-05-15T13:19:50.081Z",
-  "updated_at": "2025-05-15T13:19:50.081Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:43.300Z",
+  "updated_at": "2025-05-19T21:56:08.691Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2021,
+      "context": "disabled: false,\n },\n {\n id: \"option_block-unblock-version\",\n key: \"block-unblock-version\",\n label: item.locked ? t(\"Common:UnblockFile\") : t(\"Common:BlockFile\"),\n icon: LockedReactSvgUrl,\n onClick: () => this.lockFile(item, t),\n disabled: false,\n },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/quick-buttons/index.tsx",
+      "line_number": 187,
+      "context": "data-locked={!!locked}\n onClick={onClickLock}\n color={colorLock}\n isDisabled={isDisabled}\n hoverColor={theme.filesQuickButtons.sharedColor}\n title={locked ? t(\"Common:UnblockFile\") : t(\"Common:BlockFile\")}\n />\n ) : null}\n {isAvailableDownloadFile ? (\n <ColorTheme\n themeId={ThemeId.IconButton}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/quick-buttons/index.tsx",
+      "line_number": 187,
+      "context": "data-locked={!!locked}\n onClick={onClickLock}\n color={colorLock}\n isDisabled={isDisabled}\n hoverColor={theme.filesQuickButtons.sharedColor}\n title={locked ? t(\"Common:UnblockFile\") : t(\"Common:BlockFile\")}\n />\n ) : null}\n {isAvailableDownloadFile ? (\n <ColorTheme\n themeId={ThemeId.IconButton}",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

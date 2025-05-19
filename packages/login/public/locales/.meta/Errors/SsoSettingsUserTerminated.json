@@ -1,11 +1,22 @@
 {
   "key_path": "SsoSettingsUserTerminated",
+  "content": "This user is disabled",
   "content_en_sha1_hash": "0e9c3deb45147da572671a87a2d7616bd6ae6b14",
-  "created_at": "2025-05-14T14:04:28.230Z",
-  "updated_at": "2025-05-14T14:04:28.230Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.313Z",
+  "updated_at": "2025-05-19T21:56:08.745Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/utils/index.ts",
+      "line_number": 98,
+      "context": "case \"SsoSettingsNotValidToken\":\n return t(\"Errors:SsoSettingsNotValidToken\");\n case \"SsoSettingsCantCreateUser\":\n return t(\"Errors:SsoSettingsCantCreateUser\");\n case \"SsoSettingsUserTerminated\":\n return t(\"Errors:SsoSettingsUserTerminated\");\n case \"SsoError\":\n return t(\"Errors:SsoError\");\n case \"SsoAuthFailed\":\n return t(\"Errors:SsoAuthFailed\");\n case \"SsoAttributesNotFound\":",
+      "module": "/packages/login"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

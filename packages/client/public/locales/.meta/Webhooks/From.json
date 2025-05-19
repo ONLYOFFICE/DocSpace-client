@@ -1,11 +1,22 @@
 {
   "key_path": "From",
+  "content": "From",
   "content_en_sha1_hash": "3f66052a107eaf9bae7cad0f61fb462f47ec2c47",
-  "created_at": "2025-05-14T14:04:27.865Z",
-  "updated_at": "2025-05-14T14:04:27.865Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:49.764Z",
+  "updated_at": "2025-05-19T21:56:08.507Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/DeliveryDatePicker.js",
+      "line_number": 114,
+      "context": "closeCalendar,\n i18n,\n }) => {\n const formattedTime = isTimeEqual\n ? \"\"\n : ` ${moment(filters.deliveryFrom).tz(window.timezone).format(\"HH:mm\")} - ${moment(\n filters.deliveryTo,\n )\n .tz(window.timezone)\n .format(\"HH:mm\")}`;",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

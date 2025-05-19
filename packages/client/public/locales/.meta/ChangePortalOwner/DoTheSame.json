@@ -1,11 +1,22 @@
 {
   "key_path": "DoTheSame",
+  "content": "Do the same as administrators",
   "content_en_sha1_hash": "272398b00206ff74884bbf1457345352a0aaf52b",
-  "created_at": "2025-05-14T14:04:20.991Z",
-  "updated_at": "2025-05-14T14:04:20.991Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.990Z",
+  "updated_at": "2025-05-19T21:56:08.072Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
+      "line_number": 115,
+      "context": "if (isLoading) return;\n setSelectedUser(null);\n };\n \n const ownerRights = [\n t(\"DoTheSame\"),\n t(\"AppointAdmin\"),\n t(\"SetAccessRights\"),\n t(\"ManagePortal\", { productName: t(\"Common:ProductName\") }),\n t(\"ManageUser\"),\n t(\"ChangePortalOwner:ChangeOwner\", {",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

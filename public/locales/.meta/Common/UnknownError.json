@@ -1,11 +1,34 @@
 {
   "key_path": "UnknownError",
+  "content": "Unknown error",
   "content_en_sha1_hash": "e5fd9aa24c9417e7332e6f25936ae2a6ec8f1524",
-  "created_at": "2025-05-14T14:04:20.636Z",
-  "updated_at": "2025-05-14T14:04:20.636Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:49.406Z",
+  "updated_at": "2025-05-19T21:56:08.480Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/csp.js",
+      "line_number": 164,
+      "context": "try {\n await setCSPSettings({ domains: Array.from(domainSet) });\n if (error) setError(null);\n } catch (err) {\n setError(\n err?.response?.data?.error?.message || t(\"Common:UnknownError\"),\n );\n }\n }\n \n changeDomain(\"\");",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/login/src/utils/index.ts",
+      "line_number": 68,
+      "context": "export const getMessageKeyTranslate = (t: TTranslation, message: string) => {\n switch (message) {\n case \"Error\":\n return t(\"Common:Error\");\n case \"None\":\n return t(\"Common:UnknownError\");\n case \"ErrorUserNotFound\":\n return t(\"Errors:ErrorUserNotFound\");\n case \"ErrorExpiredActivationLink\":\n return t(\"Errors:ErrorExpiredActivationLink\");\n case \"ErrorInvalidActivationLink\":",
+      "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/login/src/utils/index.ts",
+      "line_number": 68,
+      "context": "export const getMessageKeyTranslate = (t: TTranslation, message: string) => {\n switch (message) {\n case \"Error\":\n return t(\"Common:Error\");\n case \"None\":\n return t(\"Common:UnknownError\");\n case \"ErrorUserNotFound\":\n return t(\"Errors:ErrorUserNotFound\");\n case \"ErrorExpiredActivationLink\":\n return t(\"Errors:ErrorExpiredActivationLink\");\n case \"ErrorInvalidActivationLink\":",
+      "module": "/packages/login"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

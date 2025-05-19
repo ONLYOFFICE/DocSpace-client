@@ -1,11 +1,34 @@
 {
   "key_path": "Example",
+  "content": "Example: {{example}}",
   "content_en_sha1_hash": "293ca42e3dda6b344ea17733c7b72ab1a0dc1b5e",
-  "created_at": "2025-05-14T14:04:16.479Z",
-  "updated_at": "2025-05-14T14:04:16.479Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:45.215Z",
+  "updated_at": "2025-05-19T21:56:08.518Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
+      "line_number": 273,
+      "context": "placeholder={EDITOR_URL_PLACEHOLDER}\n hasError={!docServiceUrlIsValid}\n isDisabled={isSaveLoading || isResetLoading}\n />\n <Text className=\"subtitle\">\n {t(\"Common:Example\", {\n example: EDITOR_URL_PLACEHOLDER,\n })}\n </Text>\n <Checkbox\n id=\"isDisabledCertificat\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
+      "line_number": 273,
+      "context": "placeholder={EDITOR_URL_PLACEHOLDER}\n hasError={!docServiceUrlIsValid}\n isDisabled={isSaveLoading || isResetLoading}\n />\n <Text className=\"subtitle\">\n {t(\"Common:Example\", {\n example: EDITOR_URL_PLACEHOLDER,\n })}\n </Text>\n <Checkbox\n id=\"isDisabledCertificat\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
+      "line_number": 273,
+      "context": "placeholder={EDITOR_URL_PLACEHOLDER}\n hasError={!docServiceUrlIsValid}\n isDisabled={isSaveLoading || isResetLoading}\n />\n <Text className=\"subtitle\">\n {t(\"Common:Example\", {\n example: EDITOR_URL_PLACEHOLDER,\n })}\n </Text>\n <Checkbox\n id=\"isDisabledCertificat\"",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

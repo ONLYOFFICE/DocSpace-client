@@ -1,11 +1,28 @@
 {
   "key_path": "InfoPanel",
+  "content": "Info panel",
   "content_en_sha1_hash": "700658d503d6d7ee04433b62d51c26c408f588da",
-  "created_at": "2025-05-14T14:04:17.248Z",
-  "updated_at": "2025-05-14T14:04:17.248Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:45.909Z",
+  "updated_at": "2025-05-19T21:56:08.245Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/FormGallery/Header.js",
+      "line_number": 135,
+      "context": "className=\"info-panel-toggle\"\n iconName={PanelReactSvgUrl}\n size=\"16\"\n isFill\n onClick={onToggleInfoPanel}\n title={t(\"Common:InfoPanel\")}\n />\n </div>\n </StyledInfoPanelToggleWrapper>\n ) : null}\n </StyledContainer>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
+      "line_number": 648,
+      "context": "warningText,\n actions: isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Translations:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),\n }}\n withMenu={!isRoomsFolder}\n onPlusClick={onCreateRoom}\n isEmptyPage={isEmptyPage}\n isRoom={isCurrentRoom || isContactsPage}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

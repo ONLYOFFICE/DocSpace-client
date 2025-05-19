@@ -1,11 +1,22 @@
 {
   "key_path": "AddWatermarksToDocumentsDescription",
+  "content": "Protect all documents in this room with watermarks. If a document already contains one, it will not be replaced.",
   "content_en_sha1_hash": "2e056742504b46dd1b79913edc7568d76aafd5c2",
-  "created_at": "2025-05-14T14:04:21.126Z",
-  "updated_at": "2025-05-14T14:04:21.126Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.777Z",
+  "updated_at": "2025-05-19T21:56:08.121Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/VirtualDataRoomBlock.js",
+      "line_number": 171,
+      "context": "isChecked={copyAndDownloadChecked}\n />\n \n <Block\n headerText={t(\"AddWatermarksToDocuments\")}\n bodyText={t(\"AddWatermarksToDocumentsDescription\")}\n onChange={onChangeAddWatermarksToDocuments}\n isDisabled={false}\n isChecked={watermarksChecked}\n >\n <Watermarks",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

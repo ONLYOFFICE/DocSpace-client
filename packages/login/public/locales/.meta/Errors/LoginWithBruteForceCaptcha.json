@@ -1,11 +1,22 @@
 {
   "key_path": "LoginWithBruteForceCaptcha",
+  "content": "Confirm that you are not a robot",
   "content_en_sha1_hash": "3aab2c84eba713b9e899821400ca17067061fc52",
-  "created_at": "2025-05-14T14:04:28.209Z",
-  "updated_at": "2025-05-14T14:04:28.209Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.292Z",
+  "updated_at": "2025-05-19T21:56:08.733Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/components/LoginForm/index.tsx",
+      "line_number": 639,
+      "context": "onChange={onSuccessfullyComplete}\n />\n )}\n </div>\n {isCaptchaError && (\n <Text>{t(\"Errors:LoginWithBruteForceCaptcha\")}</Text>\n )}\n </StyledCaptcha>\n )}\n <Button\n id=\"login_submit\"",
+      "module": "/packages/login"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

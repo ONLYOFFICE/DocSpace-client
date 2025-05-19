@@ -1,11 +1,22 @@
 {
   "key_path": "ResetDescription",
+  "content": "If you reset client secret, all active consents and authorizations will be revoked. To apply the next consent, you need to use a new client secret. Note that all users will again be required to complete the consent screen.",
   "content_en_sha1_hash": "14943bd94638faa9077e66e7cad906bda2038e06",
-  "created_at": "2025-05-14T14:04:24.143Z",
-  "updated_at": "2025-05-14T14:04:24.143Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.999Z",
+  "updated_at": "2025-05-19T21:56:08.498Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ResetDialog.tsx",
+      "line_number": 78,
+      "context": "onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"ResetHeader\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Trans t={t} i18nKey=\"ResetDescription\" ns=\"OAuth\" />\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"delete-button\"\n key=\"DeletePortalBtn\"",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

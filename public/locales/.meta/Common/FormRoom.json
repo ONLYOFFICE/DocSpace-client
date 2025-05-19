@@ -1,11 +1,34 @@
 {
   "key_path": "FormRoom",
+  "content": "Form room",
   "content_en_sha1_hash": "d52d36abd86c722b352cf2a1f855ae5a1408dd21",
-  "created_at": "2025-05-14T14:04:16.861Z",
-  "updated_at": "2025-05-14T14:04:16.861Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:45.520Z",
+  "updated_at": "2025-05-19T21:56:08.226Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/filesUtils.js",
+      "line_number": 66,
+      "context": "case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoom\");\n \n case RoomsType.FormRoom:\n return t(\"Common:FormRoom\");\n default:\n break;\n }\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 857,
+      "context": "case RoomsType.FormRoom:\n return {\n id: \"filter_type-form\",\n key: RoomsType.FormRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:FormRoom\"),\n };\n case RoomsType.PublicRoom:\n return {\n id: \"filter_type-public\",\n key: RoomsType.PublicRoom,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/utils/index.ts",
+      "line_number": 361,
+      "context": "return t(\"Common:CustomRooms\");\n case `room-${RoomsType.EditingRoom}`:\n return t(\"Common:CollaborationRooms\");\n \n case `room-${RoomsType.FormRoom}`:\n return t(\"Common:FormRoom\");\n \n case `room-${RoomsType.PublicRoom}`:\n return t(\"Common:PublicRoomLabel\");\n case `room-${RoomsType.VirtualDataRoom}`:\n return t(\"Common:VirtualDataRoom\");",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

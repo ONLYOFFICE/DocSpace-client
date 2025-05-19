@@ -1,11 +1,22 @@
 {
   "key_path": "StopFillingBody",
+  "content": "Are you sure you want to stop filling? It will be impossible to resume filling out this form after cancellation. Filling out the form will be stopped at the stage it is currently at. The file will be marked as \"Stopped\".",
   "content_en_sha1_hash": "2561d6901b3b3e363f37554ebafa3fb369555825",
-  "created_at": "2025-05-14T14:04:20.304Z",
-  "updated_at": "2025-05-14T14:04:20.304Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:49.064Z",
+  "updated_at": "2025-05-19T21:56:08.785Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/dialogs/stop-filling/StopFillingDialog.tsx",
+      "line_number": 69,
+      "context": "displayType={ModalDialogType.modal}\n onClose={onClose}\n data-testid=\"stop-filling-dialog\"\n >\n <ModalDialog.Header>{t(\"Common:StopFillingTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>{t(\"Common:StopFillingBody\")}</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"stop-filling-dialog_submit\"\n key=\"OkButton\"\n label={t(\"Common:StopFilling\")}",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

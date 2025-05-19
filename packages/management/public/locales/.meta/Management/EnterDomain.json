@@ -1,11 +1,28 @@
 {
   "key_path": "EnterDomain",
+  "content": "Enter domain name",
   "content_en_sha1_hash": "4aad4fadabc0049631d44b1adfbfcc29e2437e12",
-  "created_at": "2025-05-14T14:04:28.346Z",
-  "updated_at": "2025-05-14T14:04:28.346Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.452Z",
+  "updated_at": "2025-05-19T21:56:08.812Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/management/src/categories/spaces/sub-components/ConfigurationSection.tsx",
+      "line_number": 152,
+      "context": "type={InputType.text}\n size={InputSize.base}\n hasError={!!(domainNameError || checkDomainError)}\n onChange={onHandleDomain}\n value={domain}\n placeholder={t(\"EnterDomain\")}\n className=\"spaces-input\"\n tabIndex={1}\n />\n <div style={{ marginTop: \"5px\" }}>\n {domainNameError",
+      "module": "/packages/management"
+    },
+    {
+      "file_path": "/packages/management/src/categories/spaces/sub-components/dialogs/ChangeDomainDialog/index.tsx",
+      "line_number": 138,
+      "context": "size={InputSize.base}\n hasError={!!domainNameError}\n onChange={onHandleDomain}\n onKeyDown={onKeyDown}\n value={domain}\n placeholder={t(\"EnterDomain\")}\n className=\"create-portal-input\"\n />\n <div>\n {domainNameError\n ? domainNameError.map((err) => (",
+      "module": "/packages/management"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

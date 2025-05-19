@@ -1,11 +1,22 @@
 {
   "key_path": "RoomRestored",
+  "content": "Room restored",
   "content_en_sha1_hash": "056dcc7d185c90e55521946e4191b567be71b70a",
-  "created_at": "2025-05-14T14:04:27.923Z",
-  "updated_at": "2025-05-14T14:04:27.923Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:49.823Z",
+  "updated_at": "2025-05-19T21:56:08.512Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
+      "line_number": 84,
+      "context": "return t(\"RoomUpdated\");\n case WebhookTriggers.RoomArchived:\n return t(\"RoomArchived\");\n case WebhookTriggers.RoomDeleted:\n return t(\"RoomDeleted\");\n case WebhookTriggers.RoomRestored:\n return t(\"RoomRestored\");\n case WebhookTriggers.RoomCopied:\n return t(\"RoomCopied\");\n default:\n return \"\";",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

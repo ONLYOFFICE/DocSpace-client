@@ -1,11 +1,22 @@
 {
   "key_path": "Reviewing",
+  "content": "reviewing",
   "content_en_sha1_hash": "7cd4341e2d7a4899e6abe3e3fb0ef1034064bdc6",
-  "created_at": "2025-05-14T14:04:19.216Z",
-  "updated_at": "2025-05-14T14:04:19.216Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:47.947Z",
+  "updated_at": "2025-05-19T21:56:08.680Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PublicRoom/PublicRoomPage.js",
+      "line_number": 97,
+      "context": "case ShareAccessRights.ReadOnly:\n return t(\"Common:ViewOnly\");\n case ShareAccessRights.Comment:\n return t(\"Common:Commenting\");\n case ShareAccessRights.Review:\n return t(\"Common:Reviewing\");\n case ShareAccessRights.Editing:\n return t(\"Common:Editor\");\n default:\n return t(\"Common:ViewOnly\");\n }",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

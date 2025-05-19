@@ -1,11 +1,28 @@
 {
   "key_path": "BackupList",
+  "content": "Backup List",
   "content_en_sha1_hash": "104eab22b64bfdd7ac57f7948dadb9a22f16bc6c",
-  "created_at": "2025-05-14T14:04:25.048Z",
-  "updated_at": "2025-05-14T14:04:25.048Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:50.684Z",
+  "updated_at": "2025-05-19T21:56:08.422Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/restore-backup/index.js",
+      "line_number": 52,
+      "context": "import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n import LocalFileModule from \"./sub-components/LocalFileModule\";\n import ThirdPartyStoragesModule from \"./sub-components/ThirdPartyStoragesModule\";\n import ThirdPartyResourcesModule from \"./sub-components/ThirdPartyResourcesModule\";\n import BackupListModalDialog from \"./sub-components/backup-list\";\n import RoomsModule from \"./sub-components/RoomsModule\";\n import ButtonContainer from \"./sub-components/ButtonComponent\";\n import { StyledRestoreBackup } from \"../StyledBackup\";\n \n const LOCAL_FILE = \"localFile\";",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/restore-backup/sub-components/backup-list/index.js",
+      "line_number": 54,
+      "context": "import { isManagement } from \"@docspace/shared/utils/common\";\n \n import config from \"PACKAGE_FILE\";\n import { TenantStatus } from \"@docspace/shared/enums\";\n import styled from \"styled-components\";\n import { StyledBackupList } from \"../../../StyledBackup\";\n import BackupListBody from \"./BackupListBody\";\n \n const StyledFooterContent = styled.div`\n width: 100%;\n .restore_dialog-button {",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

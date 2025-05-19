@@ -1,11 +1,22 @@
 {
   "key_path": "ReassignData",
+  "content": "Reassign data",
   "content_en_sha1_hash": "22c68a0740223ff4ac25287bac3de5829dc35cf3",
-  "created_at": "2025-05-14T14:04:21.233Z",
-  "updated_at": "2025-05-14T14:04:21.233Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.751Z",
+  "updated_at": "2025-05-19T21:56:08.706Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
+      "line_number": 242,
+      "context": "case \"reassign-data\":\n return {\n id: \"option_reassign-data\",\n key: option,\n icon: ReassignDataReactSvgUrl,\n label: t(\"DataReassignmentDialog:ReassignData\"),\n onClick: () => this.toggleDataReassignmentDialog(item),\n };\n case \"delete-personal-data\":\n return {\n id: \"option_delete-personal-data\",",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

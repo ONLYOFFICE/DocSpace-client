@@ -1,11 +1,22 @@
 {
   "key_path": "Clean",
+  "content": "Clean",
   "content_en_sha1_hash": "fa893d87e1fa0a69c7942dd1e65f3bd1932e53d1",
-  "created_at": "2025-05-14T14:04:21.793Z",
-  "updated_at": "2025-05-14T14:04:21.793Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.333Z",
+  "updated_at": "2025-05-19T21:56:08.192Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/EditLinkPanel/PasswordAccessBlock.js",
+      "line_number": 153,
+      "context": "isHovered\n type=\"action\"\n isDisabled={isLoading}\n onClick={onCleanClick}\n >\n {t(\"Files:Clean\")}\n </Link>\n <Link\n fontSize=\"13px\"\n fontWeight={600}\n isHovered",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

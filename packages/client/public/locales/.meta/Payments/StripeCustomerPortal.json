@@ -1,11 +1,22 @@
 {
   "key_path": "StripeCustomerPortal",
+  "content": "go to the Stripe customer portal",
   "content_en_sha1_hash": "57a05d723768ad8e0ee1140bb6eb2934cc9dd4ab",
-  "created_at": "2025-05-14T14:04:24.304Z",
-  "updated_at": "2025-05-14T14:04:24.304Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.734Z",
+  "updated_at": "2025-05-19T21:56:08.565Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PayerInformationContainer.js",
+      "line_number": 170,
+      "context": "className=\"payer-info_account-link\"\n tag=\"a\"\n themeId={ThemeId.Link}\n target=\"_blank\"\n >\n {t(\"StripeCustomerPortal\")}\n </ColorTheme>\n ) : (\n <ColorTheme\n fontWeight={600}\n href={`mailto:${email}`}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

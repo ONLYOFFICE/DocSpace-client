@@ -1,11 +1,22 @@
 {
   "key_path": "LdapAddCertificateToStoreConfirmation",
+  "content": "Do you want to add this certificate to certificate store and continue with user import?",
   "content_en_sha1_hash": "ff7af28fff53533dec74633a798b78b64ae40315",
-  "created_at": "2025-05-14T14:04:23.555Z",
-  "updated_at": "2025-05-14T14:04:23.555Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.157Z",
+  "updated_at": "2025-05-19T21:56:08.529Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/CertificateDialog.js",
+      "line_number": 114,
+      "context": "<ModalDialog.Header>{t(\"LdapCertificateConfirm\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledCertificateDialogBody hasError={hasError}>\n <div className=\"ldap-settings-crt-confirmation\">\n <Text lineHeight=\"20px\" fontSize=\"13px\" fontWeight=\"400\">\n {t(\"LdapAddCertificateToStoreConfirmation\")}\n </Text>\n </div>\n <div className=\"ldap-settings-crt-details\">\n <Text as=\"p\">\n {t(\"LdapSettingsSerialNumber\")}: {cerficateIssue.serialNumber}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

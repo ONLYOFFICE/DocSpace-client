@@ -1,11 +1,22 @@
 {
   "key_path": "DocumentConversionTitle",
+  "content": "Document conversion",
   "content_en_sha1_hash": "f96037ca2ed0cf02f83458fa984002b431ca5108",
-  "created_at": "2025-05-14T14:04:21.092Z",
-  "updated_at": "2025-05-14T14:04:21.092Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.882Z",
+  "updated_at": "2025-05-19T21:56:08.099Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ConvertDialog/index.js",
+      "line_number": 164,
+      "context": "withFooterCheckboxes\n autoMaxHeight\n >\n <ModalDialog.Header>\n {convertSingleFile\n ? t(\"DocumentConversionTitle\")\n : t(\"FileUploadTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body style={{ paddingBottom: \"0px\" }}>\n <Text>\n {convertSingleFile",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,22 @@
 {
   "key_path": "EmptyGroupAddedUserOptionDescription",
+  "content": "Add group members and assign the head",
   "content_en_sha1_hash": "9a4a1f9a41fc7dac52783546c78743d3ecfbbb4b",
-  "created_at": "2025-05-14T14:04:21.429Z",
-  "updated_at": "2025-05-14T14:04:21.429Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.478Z",
+  "updated_at": "2025-05-19T21:56:08.365Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreen.tsx",
+      "line_number": 122,
+      "context": "if (isEmptyGroup && currentGroup) {\n return [\n {\n key: \"group-add-user\",\n title: t(\"PeopleTranslations:AddMembers\"),\n description: t(\"EmptyView:EmptyGroupAddedUserOptionDescription\"),\n disabled: isRoomAdmin || currentGroup?.isLDAP,\n icon: <InviteUserIcon />,\n onClick: () => editGroup(currentGroup),\n },\n {",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

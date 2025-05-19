@@ -1,11 +1,28 @@
 {
   "key_path": "SelectFileDescriptionGoogle",
+  "content": "Select the Google Workspace backup files to start the data import. Multiple files can be selected. Once the data upload and analysis are complete, the next step will be initiated automatically.",
   "content_en_sha1_hash": "f25f818a58e3d7ec05c1f90165f66a8facd46ed1",
-  "created_at": "2025-05-14T14:04:26.732Z",
-  "updated_at": "2025-05-14T14:04:26.732Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:52.519Z",
+  "updated_at": "2025-05-19T21:56:08.397Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
+      "line_number": 50,
+      "context": "logoText: string,\n ) => {\n return [\n {\n title: t(\"Common:SelectFiles\"),\n description: t(\"Settings:SelectFileDescriptionGoogle\"),\n component: (\n <SelectFileStep\n t={t}\n isMultipleUpload\n migratorName=\"GoogleWorkspace\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepDescription.js",
+      "line_number": 37,
+      "context": "isTypeSelectEmpty,\n logoText,\n ) => {\n switch (stepIndex) {\n case 1:\n return t(\"Settings:SelectFileDescriptionGoogle\");\n case 2:\n return t(\"Settings:SelectUsersDescriptionGoogle\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n });",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

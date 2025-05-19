@@ -1,11 +1,22 @@
 {
   "key_path": "DocumentManagement",
+  "content": "Document management",
   "content_en_sha1_hash": "24950bb532a5d93538689a3039a5e3b8266d0a27",
-  "created_at": "2025-05-14T14:04:20.907Z",
-  "updated_at": "2025-05-14T14:04:20.907Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.073Z",
+  "updated_at": "2025-05-19T21:56:08.237Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/About/AboutContent.js",
+      "line_number": 165,
+      "context": "className=\"logo-docspace-theme no-select\"\n />\n </div>\n <div className=\"row\">\n <Text className=\"row-el\" fontSize=\"13px\">\n {t(\"DocumentManagement\")}:\n </Text>\n <div className=\"program-with-version\">\n <ColorTheme\n {...props}\n tag=\"a\"",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,22 @@
 {
   "key_path": "NoAccessRoomTitle",
+  "content": "Sorry, you don't have access to this room.",
   "content_en_sha1_hash": "231a1798cb7e11ce36fa013454ceb04d6deeb54d",
-  "created_at": "2025-05-14T14:04:22.343Z",
-  "updated_at": "2025-05-14T14:04:22.343Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.903Z",
+  "updated_at": "2025-05-19T21:56:07.993Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/RoomNoAccessContainer.js",
+      "line_number": 47,
+      "context": "const RoomNoAccessContainer = (props) => {\n const { t, setIsLoading, theme, isFrame, userId } = props;\n \n const descriptionRoomNoAccess = t(\"NoAccessRoomDescription\");\n const titleRoomNoAccess = t(\"NoAccessRoomTitle\");\n \n const navigate = useNavigate();\n \n /**\n * @param {React.MouseEvent<HTMLAnchorElement, MouseEvent> | undefined} event",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

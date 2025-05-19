@@ -1,10 +1,14 @@
 {
   "key_path": "Culture_cs",
+  "content": "Český (Česká republika)",
   "content_en_sha1_hash": "1e684322685b13f58f4df111901bda4f4ac77f86",
-  "created_at": "2025-05-14T14:04:15.335Z",
-  "updated_at": "2025-05-14T14:04:15.335Z",
-  "comment_text": "",
-  "comment_ai": false,
+  "created_at": "2025-05-19T21:30:43.968Z",
+  "updated_at": "2025-05-19T21:30:43.968Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
   "usage": [],
   "languages": {
     "en": {

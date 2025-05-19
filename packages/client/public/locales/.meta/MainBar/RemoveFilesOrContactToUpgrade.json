@@ -1,11 +1,22 @@
 {
   "key_path": "RemoveFilesOrContactToUpgrade",
+  "content": "Remove the unnecessary files or contact the {{productName}} administrator to upgrade the tariff plan.",
   "content_en_sha1_hash": "9fd6bb65f7678c7fb00eb2a9266bacc48fe55e5b",
-  "created_at": "2025-05-14T14:04:23.894Z",
-  "updated_at": "2025-05-14T14:04:23.894Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.119Z",
+  "updated_at": "2025-05-19T21:56:08.025Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
+      "line_number": 56,
+      "context": "const onCloseAction = () => {\n onClose && onClose(type);\n };\n \n const getTenantCustomQuota = () => {\n if (!isAdmin) return t(\"RemoveFilesOrContactToUpgradeQuota\");\n \n return (\n <Trans i18nKey=\"TenantCustomQuotaDescription\" t={t}>\n You can remove the unnecessary files or change quota in the\n <Link",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

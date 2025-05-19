@@ -1,11 +1,34 @@
 {
   "key_path": "CopyHere",
+  "content": "Copy here",
   "content_en_sha1_hash": "92816e8a2d8cd79faa7d9b23fa0080284e21fef3",
-  "created_at": "2025-05-14T14:04:15.134Z",
-  "updated_at": "2025-05-14T14:04:15.134Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:43.763Z",
+  "updated_at": "2025-05-19T21:56:08.018Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
+      "line_number": 85,
+      "context": "isFormRoom?: boolean,\n isSelectFolder?: boolean,\n ) => {\n if (isRestore) return t(\"Common:RestoreHere\");\n if (isMove) return t(\"Common:MoveHere\");\n if (isCopy && !isEditorDialog) return t(\"Common:CopyHere\");\n if (isRestoreAll) return t(\"Common:RestoreHere\");\n if (isSelect || isFormRoom || isSelectFolder) return t(\"Common:SelectAction\");\n \n if (filterParam === FilesSelectorFilterTypes.DOCX) return t(\"Common:Create\");\n // if (filterParam === FilesSelectorFilterTypes.DOCXF) return t(\"Common:SubmitToGallery\");",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/ShareCollectSelector/ShareCollectSelector.tsx",
+      "line_number": 288,
+      "context": "isPanelVisible={visible ? !conflictResolveDialogVisible : false}\n currentDeviceType={currentDeviceType}\n createDefineRoomLabel={\n createDefineRoomLabels[createDefineRoomType] ?? \"\"\n }\n submitButtonLabel={t(\"Common:CopyHere\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n cancelButtonId=\"share-collect-selector-cancel\"\n onCancel={onCancel}\n onSubmit={onSubmit}\n getIsDisabled={getIsDisabled}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/doceditor/src/components/StartFillingSelectDialog.tsx",
+      "line_number": 93,
+      "context": "createDefineRoomLabel={createDefineRoomLabels[createDefineRoomType]}\n createDefineRoomType={createDefineRoomType}\n isPanelVisible={isVisible}\n filesSettings={filesSettings}\n currentDeviceType={currentDeviceType}\n submitButtonLabel={t(\"Common:CopyHere\")}\n onSubmit={onSubmit}\n getIsDisabled={getIsDisabled}\n {...cancelButtonProps}\n disabledItems={[]}\n descriptionText=\"\"",
+      "module": "/packages/doceditor"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

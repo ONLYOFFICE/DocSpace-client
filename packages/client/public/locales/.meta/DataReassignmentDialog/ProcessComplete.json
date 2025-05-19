@@ -1,11 +1,22 @@
 {
   "key_path": "ProcessComplete",
+  "content": "You can close this page. When the process is completed, the responsible administrator will be notified by email.",
   "content_en_sha1_hash": "f948c2151d1a668d61233bde490bc86add9d5495",
-  "created_at": "2025-05-14T14:04:21.230Z",
-  "updated_at": "2025-05-14T14:04:21.230Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.747Z",
+  "updated_at": "2025-05-19T21:56:08.132Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Progress.js",
+      "line_number": 240,
+      "context": "className=\"progress\"\n percent={isAbortTransfer ? percentAllReassignment : percent}\n />\n \n <Text lineHeight=\"20px\" className=\"description\" noSelect>\n {t(\"DataReassignmentDialog:ProcessComplete\")}\n </Text>\n </StyledProgress>\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

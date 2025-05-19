@@ -1,10 +1,14 @@
 {
   "key_path": "Culture_nl",
+  "content": "Nederlands (Nederland)",
   "content_en_sha1_hash": "1285319cef39bf5df9677ecc54e160dd94b79a97",
-  "created_at": "2025-05-14T14:04:15.480Z",
-  "updated_at": "2025-05-14T14:04:15.480Z",
-  "comment_text": "",
-  "comment_ai": false,
+  "created_at": "2025-05-19T21:30:44.116Z",
+  "updated_at": "2025-05-19T21:30:44.116Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
   "usage": [],
   "languages": {
     "en": {

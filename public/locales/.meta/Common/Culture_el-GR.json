@@ -1,10 +1,14 @@
 {
   "key_path": "Culture_el-GR",
+  "content": "Ελληνικά (Ελλάδα)",
   "content_en_sha1_hash": "3788b90891387df51981f692ece3bd1e7b7552c0",
-  "created_at": "2025-05-14T14:04:15.362Z",
-  "updated_at": "2025-05-14T14:04:15.362Z",
-  "comment_text": "",
-  "comment_ai": false,
+  "created_at": "2025-05-19T21:30:43.996Z",
+  "updated_at": "2025-05-19T21:30:43.996Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
   "usage": [],
   "languages": {
     "en": {

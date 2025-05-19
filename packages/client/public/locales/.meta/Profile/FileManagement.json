@@ -1,11 +1,22 @@
 {
   "key_path": "FileManagement",
+  "content": "File management",
   "content_en_sha1_hash": "5cdd155bb48d903d911fae98b21437d3fcd9e39d",
-  "created_at": "2025-05-14T14:04:24.565Z",
-  "updated_at": "2025-05-14T14:04:24.565Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.358Z",
+  "updated_at": "2025-05-19T21:56:08.668Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/index.js",
+      "line_number": 42,
+      "context": "import { SECTION_HEADER_HEIGHT } from \"@docspace/shared/components/section/Section.constants\";\n import MainProfile from \"./sub-components/main-profile\";\n import LoginContent from \"./sub-components/LoginContent\";\n import Notifications from \"./sub-components/notifications\";\n import FileManagement from \"./sub-components/file-management\";\n import InterfaceTheme from \"./sub-components/interface-theme\";\n \n import AuthorizedApps from \"./sub-components/authorized-apps\";\n \n const Wrapper = styled.div`",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,34 @@
 {
   "key_path": "LoginHistoryTitle",
+  "content": "Login History",
   "content_en_sha1_hash": "d755284b3b68f68fa53e1d95ff88d8d202c5bbc1",
-  "created_at": "2025-05-14T14:04:26.074Z",
-  "updated_at": "2025-05-14T14:04:26.074Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:51.828Z",
+  "updated_at": "2025-05-19T21:56:08.591Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/index.js",
+      "line_number": 61,
+      "context": "name: t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n content: <AccessPortal />,\n },\n {\n id: \"login-history\",\n name: t(\"LoginHistoryTitle\"),\n content: <LoginHistory />,\n },\n {\n id: \"audit-trail\",\n name: t(\"AuditTrailNav\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/login-history/index.js",
+      "line_number": 53,
+      "context": "isAuditAvailable,\n resetIsInit,\n } = props;\n \n useEffect(() => {\n setDocumentTitle(t(\"LoginHistoryTitle\"));\n \n getLoginHistory();\n \n getLifetimeAuditSettings();",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 242,
+      "context": "{\n id: \"portal-settings_catalog-login-history\",\n key: \"1-2\",\n icon: \"\",\n link: \"login-history\",\n tKey: \"LoginHistoryTitle\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-audit-trail\",\n key: \"1-3\",",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,28 @@
 {
   "key_path": "EveryDay",
+  "content": "Every day",
   "content_en_sha1_hash": "3b2eb5131055ad07ac1d08de2f11f900286a51b5",
-  "created_at": "2025-05-14T14:04:16.400Z",
-  "updated_at": "2025-05-14T14:04:16.400Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:45.130Z",
+  "updated_at": "2025-05-19T21:56:08.413Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/auto-backup/index.js",
+      "line_number": 90,
+      "context": "};\n \n this.periodsObject = [\n {\n key: 0,\n label: t(\"Common:EveryDay\"),\n },\n {\n key: 1,\n label: t(\"Common:EveryWeek\"),\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/cron/Cron.utils.ts",
+      "line_number": 537,
+      "context": "case \"Month\":\n return t(\"EveryMonth\");\n case \"Week\":\n return t(\"EveryWeek\");\n case \"Day\":\n return t(\"EveryDay\");\n case \"Hour\":\n return t(\"EveryHour\");\n default:\n return \"\";\n }",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

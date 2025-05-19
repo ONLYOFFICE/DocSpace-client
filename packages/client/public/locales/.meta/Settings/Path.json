@@ -1,11 +1,40 @@
 {
   "key_path": "Path",
+  "content": "Path",
   "content_en_sha1_hash": "519e39132bb98418cc0483cc446ccf5f3c8dcffe",
-  "created_at": "2025-05-14T14:04:26.282Z",
-  "updated_at": "2025-05-14T14:04:26.282Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:52.146Z",
+  "updated_at": "2025-05-19T21:56:08.419Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/consumer-storage-settings/AmazonSettings.js",
+      "line_number": 51,
+      "context": "const sse_kms = \"awskms\";\n const sse_key = \"ssekey\";\n const sse_s3 = \"aes256\";\n const sse_client_side = \"clientawskms\";\n \n const filePath = \"filePath\";\n \n const StyledBody = styled.div`\n margin-bottom: 16px;\n .backup_storage-tooltip {\n display: flex;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/consumer-storage-settings/GoogleCloudSettings.js",
+      "line_number": 32,
+      "context": "import React from \"react\";\n import { inject, observer } from \"mobx-react\";\n import { TextInput } from \"@docspace/shared/components/text-input\";\n \n const bucket = \"bucket\";\n const filePath = \"filePath\";\n class GoogleCloudSettings extends React.Component {\n static formNames = () => {\n return { bucket: \"\" };\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/consumer-storage-settings/RackspaceSettings.js",
+      "line_number": 34,
+      "context": "import { inject, observer } from \"mobx-react\";\n \n const region = \"region\";\n const public_container = \"public_container\";\n const private_container = \"private_container\";\n const filePath = \"filePath\";\n class RackspaceSettings extends React.Component {\n static formNames = () => {\n return { region: \"\", public_container: \"\", private_container: \"\" };\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/consumer-storage-settings/SelectelSettings.js",
+      "line_number": 33,
+      "context": "import { inject, observer } from \"mobx-react\";\n import { TextInput } from \"@docspace/shared/components/text-input\";\n \n const public_container = \"public_container\";\n const private_container = \"private_container\";\n const filePath = \"filePath\";\n class SelectelSettings extends React.Component {\n static formNames = () => {\n return { public_container: \"\", private_container: \"\" };\n };",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

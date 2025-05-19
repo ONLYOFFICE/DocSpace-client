@@ -1,11 +1,58 @@
 {
   "key_path": "ByCreation",
+  "content": "Created",
   "content_en_sha1_hash": "accf40c89baa4fa88e6a7ff11e1f805beecafd3f",
-  "created_at": "2025-05-14T14:04:21.769Z",
-  "updated_at": "2025-05-14T14:04:21.769Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.310Z",
+  "updated_at": "2025-05-19T21:56:08.361Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
+      "line_number": 269,
+      "context": "onClick: this.onFilter,\n },\n { ...authorBlock },\n {\n key: \"Created\",\n title: t(\"ByCreation\"),\n enable: createdColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.CreationDate,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
+      "line_number": 269,
+      "context": "onClick: this.onFilter,\n },\n { ...authorBlock },\n {\n key: \"Created\",\n title: t(\"ByCreation\"),\n enable: createdColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.CreationDate,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
+      "line_number": 269,
+      "context": "onClick: this.onFilter,\n },\n { ...authorBlock },\n {\n key: \"Created\",\n title: t(\"ByCreation\"),\n enable: createdColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.CreationDate,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
+      "line_number": 269,
+      "context": "onClick: this.onFilter,\n },\n { ...authorBlock },\n {\n key: \"Created\",\n title: t(\"ByCreation\"),\n enable: createdColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.CreationDate,\n // onClick: this.onFilter,\n onChange: this.onColumnChange,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/TableView/TableHeader.tsx",
+      "line_number": 65,
+      "context": "enable: true,\n resizable: true,\n },\n {\n key: \"Created\",\n title: t(\"Files:ByCreation\"),\n enable: true,\n resizable: true,\n },\n {\n key: \"LastUsed\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
+      "line_number": 107,
+      "context": "const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },\n ];\n \n const dataSortOrder = [\n { key: \"descending\", label: t(\"Descending\"), default: true },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/GenerateDeveloperTokenDialog.tsx",
+      "line_number": 229,
+      "context": "onIconClick={onCopyClick}\n type={InputType.text}\n maxLength={10000}\n />\n <Text className=\"dates\">\n <strong>{t(\"Files:ByCreation\")}</strong>: {dates.created}\n <br />\n <strong>{t(\"Expires\")}</strong>: {dates.expires}\n </Text>\n </>\n )}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,22 @@
 {
   "key_path": "FileLocation",
+  "content": "Open file location",
   "content_en_sha1_hash": "3e3e6fccc753b74da3c1194baf8f98ec4f2b9768",
-  "created_at": "2025-05-14T14:04:28.092Z",
-  "updated_at": "2025-05-14T14:04:28.092Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.126Z",
+  "updated_at": "2025-05-19T21:56:08.708Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/doceditor/src/components/Editor.tsx",
+      "line_number": 173,
+      "context": "let goBack: TGoBack = {} as TGoBack;\n \n if (fileInfo) {\n const editorGoBack = sdkConfig?.editorGoBack;\n \n const openFileLocationText = (\n (\n i18n.getDataByLanguage(i18n.language) as unknown as {\n Editor: { [key: string]: string };\n }\n )?.[\"Editor\"] as {",
+      "module": "/packages/doceditor"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,76 @@
 {
   "key_path": "NotFoundUsersDescription",
+  "content": "No users match your search. Please adjust your search parameters or clear the search field to view the full list of users.",
   "content_en_sha1_hash": "e38c6445c5ffaacd4c043f8ec2d9a0484e70bae4",
-  "created_at": "2025-05-14T14:04:18.174Z",
-  "updated_at": "2025-05-14T14:04:18.174Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:46.936Z",
+  "updated_at": "2025-05-19T21:56:08.154Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/EditGroupMembersDialog/EmptyContainer.tsx",
+      "line_number": 53,
+      "context": "return (\n <StyledEmptyScreen\n imageSrc={imageSrc}\n imageAlt=\"Empty screen image\"\n headerText={t(\"NotFoundMembers\")}\n descriptionText={t(\"NotFoundUsersDescription\")}\n />\n );\n };\n \n export default EmptyContainer;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/EmptyContainer.tsx",
+      "line_number": 53,
+      "context": "return (\n <StyledEmptyScreen\n imageSrc={imageSrc}\n imageAlt=\"Empty screen image\"\n headerText={t(\"NotFoundMembers\")}\n descriptionText={t(\"NotFoundUsersDescription\")}\n />\n );\n };\n \n export default EmptyContainer;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreen.tsx",
+      "line_number": 96,
+      "context": "? isFiltered\n ? t(\"Common:NotFoundFilterGuestsDescription\")\n : t(\"Common:NotFoundGuestsDescription\")\n : isEmptyGroup\n ? t(\"Common:EmptyGroupDescription\")\n : t(\"Common:NotFoundUsersDescription\");\n \n const setIsLoading = (param: boolean) => {\n setIsSectionBodyLoading?.(param);\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/RowView/index.tsx",
+      "line_number": 143,
+      "context": ") : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/index.tsx",
+      "line_number": 136,
+      "context": ") : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/RowView/index.tsx",
+      "line_number": 190,
+      "context": ") : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/TableView/index.tsx",
+      "line_number": 131,
+      "context": ") : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/RowView/index.tsx",
+      "line_number": 199,
+      "context": ") : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/TableView/index.tsx",
+      "line_number": 199,
+      "context": ") : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"\n isFill",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/selectors/People/index.tsx",
+      "line_number": 654,
+      "context": "}\n searchEmptyScreenDescription={\n activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundFilterGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:NotFoundUsersDescription\")\n : t(\"Common:GroupsNotFoundDescription\")\n }\n hasNextPage={hasNextPage}\n isNextPageLoading={isNextPageLoading}\n loadNextPage={loadNextPage}",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

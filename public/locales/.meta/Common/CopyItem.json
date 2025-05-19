@@ -1,11 +1,28 @@
 {
   "key_path": "CopyItem",
+  "content": "<2>{{title}}</2> successfully copied to <1>{{folderName}}</1>",
   "content_en_sha1_hash": "230031d75ca57d38f165f05a0fbf2c89bf74c2c6",
-  "created_at": "2025-05-14T14:04:15.143Z",
-  "updated_at": "2025-05-14T14:04:15.143Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:43.772Z",
+  "updated_at": "2025-05-19T21:56:08.702Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/SecondaryProgressDataStore.js",
+      "line_number": 170,
+      "context": "/>\n ) : (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"CopyItem\"\n components={commonComponents}\n values={commonProps}\n />\n )\n ) : (",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/doceditor/src/hooks/useStartFillingSelectDialog.tsx",
+      "line_number": 209,
+      "context": "toastr.success(\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"CopyItem\"\n values={values}\n components={components}\n />,\n );",
+      "module": "/packages/doceditor"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

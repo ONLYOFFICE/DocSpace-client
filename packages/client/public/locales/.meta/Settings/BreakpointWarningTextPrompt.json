@@ -1,11 +1,22 @@
 {
   "key_path": "BreakpointWarningTextPrompt",
+  "content": "Please use the desktop site to access <1>{{sectionName}}</1> settings.",
   "content_en_sha1_hash": "553dbb73cb74df69524855512bd08b96a32ea765",
-  "created_at": "2025-05-14T14:04:25.167Z",
-  "updated_at": "2025-05-14T14:04:25.167Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:50.812Z",
+  "updated_at": "2025-05-19T21:56:07.987Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/BreakpointWarning/BreakpointWarning.js",
+      "line_number": 57,
+      "context": "<Trans t={t} i18nKey=\"BreakpointMobileWarningTextPrompt\" ns=\"Settings\">\n \"Please use the desktop site to access the {{ sectionName }}\n settings.\"\n </Trans>\n ) : (\n <Trans t={t} i18nKey=\"BreakpointWarningTextPrompt\" ns=\"Settings\">\n \"Please use the desktop site to access the {{ sectionName }}\n settings.\"\n </Trans>\n );",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,28 @@
 {
   "key_path": "LogoutBtn",
+  "content": "Log out",
   "content_en_sha1_hash": "6e78c91f5a05fc0d4f1a787d38e3d6fe2f856d46",
-  "created_at": "2025-05-14T14:04:24.578Z",
-  "updated_at": "2025-05-14T14:04:24.578Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.366Z",
+  "updated_at": "2025-05-19T21:56:08.168Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/LogoutAllSessionDialog/index.js",
+      "line_number": 83,
+      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"logout\"\n key=\"LogoutBtn\"\n label={t(\"Profile:LogoutBtn\")}\n size=\"normal\"\n scale\n primary\n onClick={onClickLogout}\n isLoading={isLoading}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/LogoutSessionDialog/index.js",
+      "line_number": 56,
+      "context": "})}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"LogoutBtn\"\n label={t(\"Profile:LogoutBtn\")}\n size=\"normal\"\n scale\n primary\n onClick={onClick}\n isLoading={isLoading}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

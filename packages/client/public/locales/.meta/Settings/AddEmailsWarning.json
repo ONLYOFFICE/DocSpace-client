@@ -1,11 +1,22 @@
 {
   "key_path": "AddEmailsWarning",
+  "content": "You don't have users with emails. Please proceed to the next step to add them.",
   "content_en_sha1_hash": "d0de0fa7652a248f3b7cd62973555fe24111973b",
-  "created_at": "2025-05-14T14:04:24.713Z",
-  "updated_at": "2025-05-14T14:04:24.713Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:50.343Z",
+  "updated_at": "2025-05-19T21:56:08.411Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/index.tsx",
+      "line_number": 170,
+      "context": ") : null}\n </>\n ) : (\n <>\n <Text fontWeight={600} lineHeight=\"20px\" className=\"mb-17\">\n {t(\"Settings:AddEmailsWarning\")}\n </Text>\n {Buttons}\n </>\n )}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

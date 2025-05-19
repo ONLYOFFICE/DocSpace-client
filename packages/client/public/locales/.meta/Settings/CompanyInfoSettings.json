@@ -1,11 +1,40 @@
 {
   "key_path": "CompanyInfoSettings",
+  "content": "Company info settings",
   "content_en_sha1_hash": "192f2a8a9bec6d013a113f97fc1ce9b3cdd0c794",
-  "created_at": "2025-05-14T14:04:25.286Z",
-  "updated_at": "2025-05-14T14:04:25.286Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:50.934Z",
+  "updated_at": "2025-05-19T21:56:08.384Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Branding/MobileView.js",
+      "line_number": 72,
+      "context": "/>\n {showSettings ? (\n <>\n {displayAbout ? (\n <MobileCategoryWrapper\n title={t(\"CompanyInfoSettings\")}\n subtitle={t(\"BrandingSectionDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n url={`${baseUrl}/branding/company-info-settings`}\n withPaidBadge={!isSettingPaid}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 117,
+      "context": "{\n id: \"portal-settings_catalog-company-info-settings\",\n key: \"0-1-2\",\n icon: \"\",\n link: \"company-info-settings\",\n tKey: \"CompanyInfoSettings\",\n },\n {\n id: \"portal-settings_catalog-additional-resources\",\n key: \"0-1-3\",\n icon: \"\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
+      "line_number": 99,
+      "context": "hasErrorSite;\n \n return (\n <StyledCompanyInfo isSettingPaid={isSettingPaid}>\n <div className=\"header settings_unavailable\">\n {t(\"Settings:CompanyInfoSettings\")}\n </div>\n <div className=\"description settings_unavailable\">\n <Trans\n t={t}\n ns=\"Settings\"",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/management/src/utils/settingsTree.ts",
+      "line_number": 80,
+      "context": "{\n id: \"management-settings_catalog-company-info-settings\",\n key: \"1-1-3\",\n icon: \"\",\n link: \"company-info-settings\",\n tKey: \"CompanyInfoSettings\",\n },\n {\n id: \"management-settings_catalog-additional-resources\",\n key: \"1-1-4\",\n icon: \"\",",
+      "module": "/packages/management"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

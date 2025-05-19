@@ -1,11 +1,22 @@
 {
   "key_path": "DisplayFileExtension",
+  "content": "Display file extension next to file name",
   "content_en_sha1_hash": "5aca0949443f945850e45a5d1a5def5c80406042",
-  "created_at": "2025-05-14T14:04:22.815Z",
-  "updated_at": "2025-05-14T14:04:22.815Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.177Z",
+  "updated_at": "2025-05-19T21:56:08.673Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.js",
+      "line_number": 56,
+      "context": "openEditorInSameTab,\n setOpenEditorInSameTab,\n \n displayFileExtension,\n setDisplayFileExtension,\n getFilesSettings,\n logoText,\n hideConfirmCancelOperation,\n setHideConfirmCancelOperation,\n }) => {",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

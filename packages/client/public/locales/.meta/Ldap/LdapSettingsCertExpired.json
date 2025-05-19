@@ -1,11 +1,22 @@
 {
   "key_path": "LdapSettingsCertExpired",
+  "content": "Certificate is expired",
   "content_en_sha1_hash": "0e0e2850e34d19c183e47644c6c298a42a529894",
-  "created_at": "2025-05-14T14:04:23.677Z",
-  "updated_at": "2025-05-14T14:04:23.677Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.278Z",
+  "updated_at": "2025-05-19T21:56:08.527Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/CertificateDialog.js",
+      "line_number": 68,
+      "context": "}, []);\n \n const mapError = (error) => {\n switch (error) {\n case LDAPCertificateProblem.CertExpired:\n return t(\"LdapSettingsCertExpired\");\n case LDAPCertificateProblem.CertCnNoMatch:\n return t(\"LdapSettingsCertCnNoMatch\");\n case LDAPCertificateProblem.CertIssuerChaining:\n return t(\"LdapSettingsCertIssuerChaining\");\n case LDAPCertificateProblem.CertUntrustedCa:",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

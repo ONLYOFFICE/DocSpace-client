@@ -1,11 +1,28 @@
 {
   "key_path": "AddCertificate",
+  "content": "Add certificate",
   "content_en_sha1_hash": "631b330b27d1a4930628f96ea352593dfee627ba",
-  "created_at": "2025-05-14T14:04:27.520Z",
-  "updated_at": "2025-05-14T14:04:27.520Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:50.051Z",
+  "updated_at": "2025-05-19T21:56:08.547Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/Certificates.js",
+      "line_number": 140,
+      "context": "{prefix === \"idp\" ? (\n <>\n <Button\n id=\"idp-add-certificate\"\n isDisabled={!enableSso || isLoadingXml}\n label={t(\"AddCertificate\")}\n onClick={openIdpModal}\n size=\"small\"\n tabIndex={9}\n />\n <AddIdpCertificateModal />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/Certificates.js",
+      "line_number": 140,
+      "context": "{prefix === \"idp\" ? (\n <>\n <Button\n id=\"idp-add-certificate\"\n isDisabled={!enableSso || isLoadingXml}\n label={t(\"AddCertificate\")}\n onClick={openIdpModal}\n size=\"small\"\n tabIndex={9}\n />\n <AddIdpCertificateModal />",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

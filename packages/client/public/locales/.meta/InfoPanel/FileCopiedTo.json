@@ -1,11 +1,22 @@
 {
   "key_path": "FileCopiedTo",
+  "content": "Files copied to «{{folderTitle}}»",
   "content_en_sha1_hash": "efc9d1eb35c4eee0ddc64e6c32501869b672aac8",
-  "created_at": "2025-05-14T14:04:23.007Z",
-  "updated_at": "2025-05-14T14:04:23.007Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.796Z",
+  "updated_at": "2025-05-19T21:56:08.262Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
+      "line_number": 74,
+      "context": "count,\n });\n return t(\"InfoPanel:FileMovedToTrash\");\n case \"FileCopied\":\n if (feed.data.fromParentTitle) {\n return t(\"InfoPanel:FileCopiedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"InfoPanel:FileCopiedCount\", {",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

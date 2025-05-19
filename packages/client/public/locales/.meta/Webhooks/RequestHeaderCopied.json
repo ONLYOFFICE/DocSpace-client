@@ -1,11 +1,22 @@
 {
   "key_path": "RequestHeaderCopied",
+  "content": "POST request header successfully copied to clipboard",
   "content_en_sha1_hash": "ca124d3d017bd3d886527d03bb4cc89a5a901183",
-  "created_at": "2025-05-14T14:04:27.893Z",
-  "updated_at": "2025-05-14T14:04:27.893Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:49.793Z",
+  "updated_at": "2025-05-19T21:56:08.504Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/RequestDetails.js",
+      "line_number": 78,
+      "context": "value={eventDetails.requestHeaders}\n enableCopy\n hasNumeration\n isFullHeight\n isJSONField\n copyInfoText={t(\"RequestHeaderCopied\")}\n />\n )}\n \n <Text as=\"h3\" fontWeight={600} className=\"mb-4 mt-16\">\n {t(\"RequestPostBody\")}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

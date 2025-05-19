@@ -1,10 +1,14 @@
 {
   "key_path": "FolderMoved",
+  "content": "Folder moved",
   "content_en_sha1_hash": "91e37f7d0a130e302a977f6f36f5a32bb8449bcb",
-  "created_at": "2025-05-14T14:04:27.855Z",
-  "updated_at": "2025-05-14T14:04:27.855Z",
-  "comment_text": "",
-  "comment_ai": false,
+  "created_at": "2025-05-19T21:30:49.754Z",
+  "updated_at": "2025-05-19T21:30:49.754Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
   "usage": [],
   "languages": {
     "en": {

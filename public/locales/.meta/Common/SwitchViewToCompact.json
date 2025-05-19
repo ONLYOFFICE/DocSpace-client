@@ -1,11 +1,28 @@
 {
   "key_path": "SwitchViewToCompact",
+  "content": "Switch to compact view",
   "content_en_sha1_hash": "00089d46aa530f8ca9b4dd1cc4f17fed0a89d0bf",
-  "created_at": "2025-05-14T14:04:20.475Z",
-  "updated_at": "2025-05-14T14:04:20.475Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:49.242Z",
+  "updated_at": "2025-05-19T21:56:08.777Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/view-selector/index.tsx",
+      "line_number": 85,
+      "context": "id={id}\n key={value}\n data-view={value}\n title={\n value === \"row\"\n ? t(\"Common:SwitchViewToCompact\")\n : t(\"Common:SwitchToThumbnails\")\n }\n data-testid=\"view-selector-icon\"\n >\n {typeof icon === \"string\" ? <ReactSVG src={icon} /> : icon}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/view-selector/index.tsx",
+      "line_number": 85,
+      "context": "id={id}\n key={value}\n data-view={value}\n title={\n value === \"row\"\n ? t(\"Common:SwitchViewToCompact\")\n : t(\"Common:SwitchToThumbnails\")\n }\n data-testid=\"view-selector-icon\"\n >\n {typeof icon === \"string\" ? <ReactSVG src={icon} /> : icon}",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

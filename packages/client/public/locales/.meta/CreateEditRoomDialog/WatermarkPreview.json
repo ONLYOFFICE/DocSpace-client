@@ -1,11 +1,22 @@
 {
   "key_path": "WatermarkPreview",
+  "content": "Watermark Preview",
   "content_en_sha1_hash": "dbfb9b8a63ad0c23b973116c08bce722f4620ccf",
-  "created_at": "2025-05-14T14:04:21.204Z",
-  "updated_at": "2025-05-14T14:04:21.204Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.860Z",
+  "updated_at": "2025-05-19T21:56:08.122Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/Watermarks/ImageWatermark.js",
+      "line_number": 276,
+      "context": "{selectedImageUrl ? (\n <div className=\"image-wrapper\">\n <div>\n <div className=\"image-description\">\n <Text fontWeight={600} className=\"image-watermark_text\">\n {t(\"WatermarkPreview\")}\n </Text>\n <HelpButton\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"WatermarkPreviewHelp\")}</Text>\n }",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

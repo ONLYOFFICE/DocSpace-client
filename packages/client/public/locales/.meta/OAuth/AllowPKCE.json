@@ -1,11 +1,22 @@
 {
   "key_path": "AllowPKCE",
+  "content": "Allow public client (PKCE)",
   "content_en_sha1_hash": "1d8744c94f9db618bd1791df5c0f1839c47e717d",
-  "created_at": "2025-05-14T14:04:23.967Z",
-  "updated_at": "2025-05-14T14:04:23.967Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.787Z",
+  "updated_at": "2025-05-19T21:56:08.485Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
+      "line_number": 125,
+      "context": "img.src = URL.createObjectURL(file);\n }\n };\n \n const pkceHelpButtonText = (\n <Trans t={t} i18nKey=\"AllowPKCEHelpButton\" ns=\"OAuth\" />\n );\n \n const isNameRequiredError = requiredErrorFields.includes(\"name\");\n const isWebsiteRequiredError = requiredErrorFields.includes(\"website_url\");\n const isNameError = errorFields.includes(\"name\");",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

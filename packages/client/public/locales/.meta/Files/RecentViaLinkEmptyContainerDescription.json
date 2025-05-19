@@ -1,11 +1,22 @@
 {
   "key_path": "RecentViaLinkEmptyContainerDescription",
+  "content": "Here you will find a list of the recently opened files shared with you via an external link.",
   "content_en_sha1_hash": "aa72cbced2dac026503fb91dde5060cca5b6b447",
-  "created_at": "2025-05-14T14:04:22.459Z",
-  "updated_at": "2025-05-14T14:04:22.459Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.026Z",
+  "updated_at": "2025-05-19T21:56:07.995Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
+      "line_number": 105,
+      "context": "const emptyScreenHeader = t(\"Common:EmptyScreenFolder\");\n const archiveHeader = t(\"ArchiveEmptyScreenHeader\");\n const noFilesHeader = t(\"NoFilesHereYet\");\n const trashDescription = t(\"TrashEmptyDescription\");\n const favoritesDescription = t(\"FavoritesEmptyContainerDescription\");\n const recentDescription = t(\"RecentViaLinkEmptyContainerDescription\");\n \n const roomsDescription = isPublicRoom ? (\n <>\n <div>{t(\"Common:RoomEmptyAtTheMoment\")}</div>\n <div>{t(\"Common:FilesWillAppearHere\")}</div>",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

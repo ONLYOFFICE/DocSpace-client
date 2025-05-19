@@ -1,11 +1,28 @@
 {
   "key_path": "FilesWillAppearHere",
+  "content": "Files and folders added to the room will appear here.",
   "content_en_sha1_hash": "52cd903bd75b3f0b726ed3310678ed5925968532",
-  "created_at": "2025-05-14T14:04:16.647Z",
-  "updated_at": "2025-05-14T14:04:16.647Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:45.315Z",
+  "updated_at": "2025-05-19T21:56:07.996Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
+      "line_number": 110,
+      "context": "const recentDescription = t(\"RecentViaLinkEmptyContainerDescription\");\n \n const roomsDescription = isPublicRoom ? (\n <>\n <div>{t(\"Common:RoomEmptyAtTheMoment\")}</div>\n <div>{t(\"Common:FilesWillAppearHere\")}</div>\n </>\n ) : isVisitor || isCollaborator ? (\n t(\"RoomEmptyContainerDescriptionUser\")\n ) : (\n t(\"RoomEmptyContainerDescription\")",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 192,
+      "context": ")\n .with([FolderType.Rooms, P.when(() => isPublicRoom)], () => (\n <>\n <span>{t(\"Common:RoomEmptyAtTheMoment\")}</span>\n <br />\n <span>{t(\"Common:FilesWillAppearHere\")}</span>\n </>\n ))\n .with([FolderType.USER, P.when(() => security?.Create)], () =>\n t(\"EmptyView:DefaultFolderDescription\"),\n )",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

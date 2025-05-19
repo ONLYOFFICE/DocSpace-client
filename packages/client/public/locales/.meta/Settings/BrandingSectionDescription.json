@@ -1,11 +1,28 @@
 {
   "key_path": "BrandingSectionDescription",
+  "content": "Specify your company information, add links to external resources and email addresses displayed within the {{productName}} interface.",
   "content_en_sha1_hash": "d799aef730dd0a79a451093abbc8378f23c3c2f2",
-  "created_at": "2025-05-14T14:04:25.085Z",
-  "updated_at": "2025-05-14T14:04:25.085Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:50.727Z",
+  "updated_at": "2025-05-19T21:56:08.384Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Branding/MobileView.js",
+      "line_number": 73,
+      "context": "{showSettings ? (\n <>\n {displayAbout ? (\n <MobileCategoryWrapper\n title={t(\"CompanyInfoSettings\")}\n subtitle={t(\"BrandingSectionDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n url={`${baseUrl}/branding/company-info-settings`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Common:Paid\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/branding.js",
+      "line_number": 137,
+      "context": "<hr />\n {displayAbout ? (\n <>\n {isLoadedCompanyInfoSettingsData ? (\n <div className=\"section-description settings_unavailable\">\n {t(\"Settings:BrandingSectionDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </div>\n ) : (\n <LoaderBrandingDescription />",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

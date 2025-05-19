@@ -1,11 +1,34 @@
 {
   "key_path": "ConfigureDeepLink",
+  "content": "Configure deep link",
   "content_en_sha1_hash": "edfb8002794be0c3c97a60c2efb077b54207446d",
-  "created_at": "2025-05-14T14:04:25.301Z",
-  "updated_at": "2025-05-14T14:04:25.301Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:50.950Z",
+  "updated_at": "2025-05-19T21:56:08.385Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/configure-deep-link.tsx",
+      "line_number": 67,
+      "context": ".save-cancel-buttons {\n margin-top: 16px;\n }\n `;\n \n const ConfigureDeepLinkComponent = (props: Props) => {\n const { isMobileView, deepLinkSettings, initSettings } = props;\n \n const { t } = useTranslation([\"Settings\", \"Common\"]);\n const navigate = useNavigate();\n const location = useLocation();",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
+      "line_number": 98,
+      "context": "url=\"/portal-settings/customization/general/portal-renaming\"\n onClickLink={onClickLink}\n />\n ) : null}\n <MobileCategoryWrapper\n title={t(\"ConfigureDeepLink\")}\n subtitle={t(\"ConfigureDeepLinkDescription\")}\n url=\"/portal-settings/customization/general/configure-deep-link\"\n onClickLink={onClickLink}\n />\n </StyledComponent>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 86,
+      "context": "{\n id: \"portal-settings_catalog-configure-deep-link\",\n key: \"0-0-4\",\n icon: \"\",\n link: \"configure-deep-link\",\n tKey: \"ConfigureDeepLink\",\n },\n ],\n },\n {\n id: \"portal-settings_catalog-branding\",",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

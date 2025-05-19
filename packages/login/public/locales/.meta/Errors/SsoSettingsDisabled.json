@@ -1,11 +1,22 @@
 {
   "key_path": "SsoSettingsDisabled",
+  "content": "Single sign-on is disabled",
   "content_en_sha1_hash": "389c1b2a152f3b998ef97aafc11a5af93e69a5ad",
-  "created_at": "2025-05-14T14:04:28.225Z",
-  "updated_at": "2025-05-14T14:04:28.225Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.309Z",
+  "updated_at": "2025-05-19T21:56:08.743Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/utils/index.ts",
+      "line_number": 88,
+      "context": "case \"LoginWithAccountNotFound\":\n return t(\"Errors:LoginWithAccountNotFound\");\n case \"InvalidUsernameOrPassword\":\n return t(\"Errors:InvalidUsernameOrPassword\");\n case \"SsoSettingsDisabled\":\n return t(\"Errors:SsoSettingsDisabled\");\n case \"ErrorNotAllowedOption\":\n return t(\"Errors:ErrorNotAllowedOption\");\n case \"SsoSettingsEmptyToken\":\n return t(\"Errors:SsoSettingsEmptyToken\");\n case \"SsoSettingsNotValidToken\":",
+      "module": "/packages/login"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

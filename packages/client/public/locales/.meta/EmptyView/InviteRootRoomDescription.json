@@ -1,11 +1,22 @@
 {
   "key_path": "InviteRootRoomDescription",
+  "content": "Send an invitation to add new members to your {{productName}}",
   "content_en_sha1_hash": "abbd8fb2bdab0b643dd2213a6498d3863b588070",
-  "created_at": "2025-05-14T14:04:21.464Z",
-  "updated_at": "2025-05-14T14:04:21.464Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.520Z",
+  "updated_at": "2025-05-19T21:56:08.006Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
+      "line_number": 290,
+      "context": "disabled: false,\n };\n \n const inviteRootRoom = {\n title: t(\"EmptyView:InviteNewUsers\"),\n description: t(\"EmptyView:InviteRootRoomDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: <InviteUserFormIcon />,\n key: \"invite-root-room\",\n onClick: () => actions.inviteRootUser(EmployeeType.User),",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

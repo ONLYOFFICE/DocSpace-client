@@ -1,11 +1,22 @@
 {
   "key_path": "ErrorLicenseBody",
+  "content": "The license is not valid. Make sure you select the correct file.",
   "content_en_sha1_hash": "c341f78e4aeff67e1ff38612677f3f38cb476b47",
-  "created_at": "2025-05-14T14:04:28.288Z",
-  "updated_at": "2025-05-14T14:04:28.288Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.213Z",
+  "updated_at": "2025-05-19T21:56:08.729Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
+      "line_number": 430,
+      "context": "className=\"license-filed\"\n isVertical={true}\n labelVisible={false}\n hasError={hasErrorLicense}\n errorMessage={\n invalidLicense ? t(\"ErrorLicenseBody\") : t(\"ErrorUploadLicenseFile\")\n }\n >\n <FileInput\n scale\n size={InputSize.large}",
+      "module": "/packages/login"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

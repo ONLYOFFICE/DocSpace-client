@@ -1,11 +1,34 @@
 {
   "key_path": "FileLocked",
+  "content": "File locked",
   "content_en_sha1_hash": "d56ec25816d2caab4e55bb34552b52e102303854",
-  "created_at": "2025-05-14T14:04:27.695Z",
-  "updated_at": "2025-05-14T14:04:27.695Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:49.965Z",
+  "updated_at": "2025-05-19T21:56:07.974Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/HOCs/withQuickButtons.js",
+      "line_number": 61,
+      "context": "this.setState({ isLoading: true });\n return lockFileAction(id, !locked)\n .then(() =>\n locked\n ? toastr.success(t(\"Translations:FileUnlocked\"))\n : toastr.success(t(\"Translations:FileLocked\")),\n )\n .catch(\n (err) => toastr.error(err),\n this.setState({ isLoading: false }),\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
+      "line_number": 90,
+      "context": "return t(\"InfoPanel:FileDeletedCount\", {\n count,\n });\n return t(\"InfoPanel:FileDeleted\");\n case \"FileLocked\":\n return `${t(\"Translations:FileLocked\")}.`;\n case \"FileUnlocked\":\n return `${t(\"Translations:FileUnlocked\")}.`;\n case \"FileVersionRemoved\":\n if (feed.data.version) {\n return t(\"InfoPanel:FileVersionRemoved\", {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 453,
+      "context": "this.filesActionsStore\n .lockFileAction(id, !locked)\n .then(() =>\n locked\n ? toastr.success(t(\"Translations:FileUnlocked\"))\n : toastr.success(t(\"Translations:FileLocked\")),\n )\n .then(() => setInfoPanelSelection({ ...item, locked: !locked }))\n .catch((err) => {\n toastr.error(err);\n });",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

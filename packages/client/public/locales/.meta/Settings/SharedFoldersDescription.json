@@ -1,11 +1,22 @@
 {
   "key_path": "SharedFoldersDescription",
+  "content": "Shared folders will be imported into the Rooms section as rooms with users who were granted access. Please note: some access rights may get lost during import",
   "content_en_sha1_hash": "7509526cb45a495f2c7c974a169ea44dbb437957",
-  "created_at": "2025-05-14T14:04:26.961Z",
-  "updated_at": "2025-05-14T14:04:26.961Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:52.713Z",
+  "updated_at": "2025-05-19T21:56:08.407Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
+      "line_number": 179,
+      "context": "/>\n <ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:SharedFoldersDescription\")}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,\n }}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

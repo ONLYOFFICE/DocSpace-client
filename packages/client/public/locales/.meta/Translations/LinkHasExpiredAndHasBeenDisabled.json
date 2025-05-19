@@ -1,11 +1,22 @@
 {
   "key_path": "LinkHasExpiredAndHasBeenDisabled",
+  "content": "The link has expired and has been disabled",
   "content_en_sha1_hash": "0d17398d6f4b329335a9bb4c55a3f6fff17c2689",
-  "created_at": "2025-05-14T14:04:27.719Z",
-  "updated_at": "2025-05-14T14:04:27.719Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:49.993Z",
+  "updated_at": "2025-05-19T21:56:08.194Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/EditLinkPanel/index.js",
+      "line_number": 241,
+      "context": "return \"\";\n }\n \n if (isExpired) {\n return t(\"Translations:LinkHasExpiredAndHasBeenDisabled\");\n }\n \n return expirationDate\n ? `${t(\"Files:LinkValidUntil\")}:`\n : t(\"Files:ChooseExpirationDate\");",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

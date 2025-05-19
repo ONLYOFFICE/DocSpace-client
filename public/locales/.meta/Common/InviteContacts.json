@@ -1,11 +1,34 @@
 {
   "key_path": "InviteContacts",
+  "content": "Invite contacts",
   "content_en_sha1_hash": "43f0bde391682834922b0b6b0e4c82714e94586e",
-  "created_at": "2025-05-14T14:04:17.320Z",
-  "updated_at": "2025-05-14T14:04:17.320Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:45.983Z",
+  "updated_at": "2025-05-19T21:56:08.002Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
+      "line_number": 221,
+      "context": "t(\"EmptyView:UploadDevicePDFFormOptionDescription\"),\n \"pdf\",\n );\n \n const inviteUser = createInviteOption(\n t(\"Common:InviteContacts\"),\n t(\"EmptyView:InviteUsersOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/Rooms/index.js",
+      "line_number": 188,
+      "context": "id=\"info_add-user\"\n className=\"icon\"\n title={\n isTemplate\n ? t(\"Files:AccessSettings\")\n : t(\"Common:InviteContacts\")\n }\n iconName={PersonPlusReactSvgUrl}\n isFill\n onClick={\n isTemplate ? onOpenTemplateAccessOptions : onClickInviteUsers",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 1884,
+      "context": "disabled: !isTemplateOwner,\n },\n {\n id: \"option_invite-users-to-room\",\n key: \"invite-users-to-room\",\n label: t(\"Common:InviteContacts\"),\n icon: PersonReactSvgUrl,\n onClick: (e) => this.onClickInviteUsers(e, item.roomType),\n disabled: false,\n action: item.id,\n },",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,22 @@
 {
   "key_path": "DisplayNotification",
+  "content": "Display notification when moving items to Trash",
   "content_en_sha1_hash": "09128fbd2346eda0e72d39ced8071e2f31d2f719",
-  "created_at": "2025-05-14T14:04:22.817Z",
-  "updated_at": "2025-05-14T14:04:22.817Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.179Z",
+  "updated_at": "2025-05-19T21:56:08.672Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.js",
+      "line_number": 126,
+      "context": "<ToggleButton\n className=\"display-notification toggle-btn\"\n onChange={onChangeDeleteConfirm}\n isChecked={confirmDelete}\n />\n <Text>{t(\"DisplayNotification\")}</Text>\n </div>\n \n <div className=\"toggle-btn-wrapper\">\n <ToggleButton\n className=\"open-same-tab toggle-btn\"",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

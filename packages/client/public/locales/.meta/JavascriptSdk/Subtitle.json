@@ -1,11 +1,28 @@
 {
   "key_path": "Subtitle",
+  "content": "Subtitle",
   "content_en_sha1_hash": "e159d05a124cfbe60229903bf1f8e6a61682bee5",
-  "created_at": "2025-05-14T14:04:23.542Z",
-  "updated_at": "2025-05-14T14:04:23.542Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.697Z",
+  "updated_at": "2025-05-19T21:56:08.458Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
+      "line_number": 48,
+      "context": "import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n import { getManyPDFTitle } from \"@docspace/shared/utils/getPDFTite\";\n \n import SearchUrl from \"PUBLIC_DIR/images/sdk-presets_files-search.react.svg?url\";\n import SearchUrlDark from \"PUBLIC_DIR/images/sdk-presets_files-search_dark.png?url\";\n import SubtitleUrl from \"PUBLIC_DIR/images/sdk-presets_subtitle.react.svg?url\";\n import SubtitleUrlDark from \"PUBLIC_DIR/images/sdk-presets_subtitle_dark.png?url\";\n \n import {\n defaultDimension,\n defaultSize,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
+      "line_number": 48,
+      "context": "import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n import { getManyPDFTitle } from \"@docspace/shared/utils/getPDFTite\";\n \n import SearchUrl from \"PUBLIC_DIR/images/sdk-presets_files-search.react.svg?url\";\n import SearchUrlDark from \"PUBLIC_DIR/images/sdk-presets_files-search_dark.png?url\";\n import SubtitleUrl from \"PUBLIC_DIR/images/sdk-presets_subtitle.react.svg?url\";\n import SubtitleUrlDark from \"PUBLIC_DIR/images/sdk-presets_subtitle_dark.png?url\";\n \n import {\n defaultDimension,\n defaultSize,",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

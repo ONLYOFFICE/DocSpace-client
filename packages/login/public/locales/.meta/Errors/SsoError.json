@@ -1,11 +1,22 @@
 {
   "key_path": "SsoError",
+  "content": "Internal server error",
   "content_en_sha1_hash": "fbb5b2a6d5252a4f6e3d33341268fab223c77c30",
-  "created_at": "2025-05-14T14:04:28.222Z",
-  "updated_at": "2025-05-14T14:04:28.222Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.305Z",
+  "updated_at": "2025-05-19T21:56:08.745Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/utils/index.ts",
+      "line_number": 100,
+      "context": "case \"SsoSettingsCantCreateUser\":\n return t(\"Errors:SsoSettingsCantCreateUser\");\n case \"SsoSettingsUserTerminated\":\n return t(\"Errors:SsoSettingsUserTerminated\");\n case \"SsoError\":\n return t(\"Errors:SsoError\");\n case \"SsoAuthFailed\":\n return t(\"Errors:SsoAuthFailed\");\n case \"SsoAttributesNotFound\":\n return t(\"Errors:SsoAttributesNotFound\");\n case \"QuotaPaidUserLimitError\":",
+      "module": "/packages/login"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

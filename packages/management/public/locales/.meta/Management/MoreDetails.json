@@ -1,11 +1,22 @@
 {
   "key_path": "MoreDetails",
+  "content": "For more details on how to stop services, please refer to our <1>{{link}}</1>.",
   "content_en_sha1_hash": "afdfaa8cb704a34e72e7ca89afd9debdf626498d",
-  "created_at": "2025-05-14T14:04:28.350Z",
-  "updated_at": "2025-05-14T14:04:28.350Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.457Z",
+  "updated_at": "2025-05-19T21:56:08.810Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/management/src/categories/encrypt-data/index.tsx",
+      "line_number": 121,
+      "context": "</Text>\n {encryptionBlockHelpUrl ? (\n <Text>\n <Trans\n t={t}\n i18nKey=\"MoreDetails\"\n ns=\"Management\"\n values={{ link: t(\"Common:HelpCenter\") }}\n components={{\n 1: (\n <Link",
+      "module": "/packages/management"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

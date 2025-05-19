@@ -1,11 +1,22 @@
 {
   "key_path": "PrivateRoomDescriptionUnbreakable",
+  "content": "Unbreakable AES-256 algorithm.",
   "content_en_sha1_hash": "1568d0980e87c187522b1560cb26e4baa6a5730e",
-  "created_at": "2025-05-14T14:04:22.427Z",
-  "updated_at": "2025-05-14T14:04:22.427Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.989Z",
+  "updated_at": "2025-05-19T21:56:07.998Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
+      "line_number": 133,
+      "context": "const privateRoomDescTranslations = [\n t(\"PrivateRoomDescriptionSafest\"),\n t(\"PrivateRoomDescriptionSecure\"),\n t(\"PrivateRoomDescriptionEncrypted\"),\n t(\"PrivateRoomDescriptionUnbreakable\"),\n ];\n \n const roomHeader = t(\"Common:EmptyRootRoomHeader\", {\n productName: t(\"Common:ProductName\"),\n });",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

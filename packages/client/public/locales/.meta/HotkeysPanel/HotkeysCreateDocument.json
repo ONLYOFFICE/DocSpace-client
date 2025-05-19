@@ -1,11 +1,22 @@
 {
   "key_path": "HotkeysCreateDocument",
+  "content": "Create document",
   "content_en_sha1_hash": "fc51cb7ddc24a62bd43599b45c07fa0ba5a16d12",
-  "created_at": "2025-05-14T14:04:22.898Z",
-  "updated_at": "2025-05-14T14:04:22.898Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.034Z",
+  "updated_at": "2025-05-19T21:56:08.204Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/HotkeysPanel/CreationBlock.js",
+      "line_number": 35,
+      "context": "const CreationBlock = ({ t, textStyles, keyTextStyles, AltKey }) => {\n return (\n <>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysCreateDocument\")}</Text>\n <Text {...keyTextStyles}>Shift + d</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

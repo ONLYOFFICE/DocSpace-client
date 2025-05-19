@@ -1,11 +1,34 @@
 {
   "key_path": "CountPerPage",
+  "content": "{{count}} per page",
   "content_en_sha1_hash": "f07055bdc1868a249738e0fb89860a79c00f399e",
-  "created_at": "2025-05-14T14:04:15.192Z",
-  "updated_at": "2025-05-14T14:04:15.192Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:43.819Z",
+  "updated_at": "2025-05-19T21:56:08.411Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/AccountsPaging.tsx",
+      "line_number": 57,
+      "context": "};\n \n const countItems = [\n {\n key: \"25-items-per-page\",\n label: t(\"Common:CountPerPage\", { count: pagesPerPage }),\n count: pagesPerPage,\n },\n {\n key: \"50-items-per-page\",\n label: t(\"Common:CountPerPage\", { count: pagesPerPage * 2 }),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/AccountsPaging.tsx",
+      "line_number": 57,
+      "context": "};\n \n const countItems = [\n {\n key: \"25-items-per-page\",\n label: t(\"Common:CountPerPage\", { count: pagesPerPage }),\n count: pagesPerPage,\n },\n {\n key: \"50-items-per-page\",\n label: t(\"Common:CountPerPage\", { count: pagesPerPage * 2 }),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/AccountsPaging.tsx",
+      "line_number": 57,
+      "context": "};\n \n const countItems = [\n {\n key: \"25-items-per-page\",\n label: t(\"Common:CountPerPage\", { count: pagesPerPage }),\n count: pagesPerPage,\n },\n {\n key: \"50-items-per-page\",\n label: t(\"Common:CountPerPage\", { count: pagesPerPage * 2 }),",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

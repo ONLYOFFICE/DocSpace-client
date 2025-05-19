@@ -1,11 +1,28 @@
 {
   "key_path": "EmailNotVerified",
+  "content": "Email is not verified",
   "content_en_sha1_hash": "7aa3f602be968a5b4cba5393057ed4f0013e45a4",
-  "created_at": "2025-05-14T14:04:24.562Z",
-  "updated_at": "2025-05-14T14:04:24.562Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.354Z",
+  "updated_at": "2025-05-19T21:56:08.675Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.js",
+      "line_number": 381,
+      "context": "<StyledLabel as=\"div\">{t(\"Common:Email\")}</StyledLabel>\n <div className=\"email-container\">\n <div className=\"email-edit-container\">\n <Text\n data-tooltip-id=\"emailTooltip\"\n data-tooltip-content={t(\"EmailNotVerified\")}\n as=\"div\"\n className=\"email-text-container\"\n fontWeight={600}\n truncate\n >",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.js",
+      "line_number": 381,
+      "context": "<StyledLabel as=\"div\">{t(\"Common:Email\")}</StyledLabel>\n <div className=\"email-container\">\n <div className=\"email-edit-container\">\n <Text\n data-tooltip-id=\"emailTooltip\"\n data-tooltip-content={t(\"EmailNotVerified\")}\n as=\"div\"\n className=\"email-text-container\"\n fontWeight={600}\n truncate\n >",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

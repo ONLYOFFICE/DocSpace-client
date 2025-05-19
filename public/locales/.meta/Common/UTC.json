@@ -1,11 +1,22 @@
 {
   "key_path": "UTC",
+  "content": "UTC",
   "content_en_sha1_hash": "bdfd4d8d6952777c39403b2d2e2f8a2a52bf255f",
-  "created_at": "2025-05-14T14:04:20.708Z",
-  "updated_at": "2025-05-14T14:04:20.708Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:49.484Z",
+  "updated_at": "2025-05-19T21:56:08.751Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/cron/Cron.tsx",
+      "line_number": 213,
+      "context": "minutes={minutes}\n setMinutes={setMinutes}\n isDisabled={isDisabled}\n />\n ) : null}\n <span className={styles.suffix}>{t(\"Common:UTC\")}</span>\n </div>\n </div>\n );\n };",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

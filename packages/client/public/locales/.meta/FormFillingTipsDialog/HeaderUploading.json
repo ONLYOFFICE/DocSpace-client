@@ -1,11 +1,22 @@
 {
   "key_path": "HeaderUploading",
+  "content": "Easy form uploading",
   "content_en_sha1_hash": "53b5cd8f127b338e857ffd707341bec35ab11adc",
-  "created_at": "2025-05-14T14:04:22.848Z",
-  "updated_at": "2025-05-14T14:04:22.848Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.142Z",
+  "updated_at": "2025-05-19T21:56:08.758Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/guidance/configs/form-filling.ts",
+      "line_number": 84,
+      "context": "},\n ],\n },\n {\n id: 5,\n header: t(\"FormFillingTipsDialog:HeaderUploading\"),\n description: t(\"FormFillingTipsDialog:DescriptionUploading\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n }),\n key: \"form-filling-uploading\",",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,22 @@
 {
   "key_path": "ConsentDescription",
+  "content": "Data shared with <strong>{{displayName}}</strong> will be governed by <strong>{{nameApp}}</strong> <6>privacy policy</6> and <6>terms of service</6>. You can revoke this consent at any time in your {{productName}} account settings.",
   "content_en_sha1_hash": "adb9c93b661c124ad0f90e380ee2a371dc3d7df3",
-  "created_at": "2025-05-14T14:04:28.182Z",
-  "updated_at": "2025-05-14T14:04:28.182Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.323Z",
+  "updated_at": "2025-05-19T21:56:08.727Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/app/(root)/consent/page.client.tsx",
+      "line_number": 248,
+      "context": "isLoading={isDenyRunning}\n />\n </StyledButtonContainer>\n <StyledDescriptionContainer>\n <Text fontWeight={400} fontSize={\"13px\"} lineHeight={\"20px\"}>\n <Trans t={t} i18nKey=\"ConsentDescription\" ns=\"Consent\">\n Data shared with {{ displayName: user.displayName }} will be\n governed by {{ nameApp: client.name }}\n <Link\n className={\"login-link\"}\n type={LinkType.page}",
+      "module": "/packages/login"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

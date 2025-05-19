@@ -1,11 +1,22 @@
 {
   "key_path": "DeleteVersion",
+  "content": "Delete version",
   "content_en_sha1_hash": "9398dcc860e4a9b586e651d154b9eb533e57b091",
-  "created_at": "2025-05-14T14:04:27.774Z",
-  "updated_at": "2025-05-14T14:04:27.774Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:49.927Z",
+  "updated_at": "2025-05-19T21:56:08.153Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteVersionDialog/index.tsx",
+      "line_number": 86,
+      "context": "}, []);\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>\n {t(\"VersionHistory:DeleteVersion\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className=\"modal-dialog-content-body\">\n <Text lineHeight=\"20px\" noSelect>\n {t(\"VersionHistory:DeleteVersionDescription\")}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

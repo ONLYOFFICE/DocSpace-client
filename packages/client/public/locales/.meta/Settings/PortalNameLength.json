@@ -1,11 +1,34 @@
 {
   "key_path": "PortalNameLength",
+  "content": "The account name must be between {{minLength}} and {{maxLength}} characters long",
   "content_en_sha1_hash": "fc3643edea764dc1006d640f4f99f132b319f558",
-  "created_at": "2025-05-14T14:04:26.379Z",
-  "updated_at": "2025-05-14T14:04:26.379Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:52.246Z",
+  "updated_at": "2025-05-19T21:56:08.390Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
+      "line_number": 251,
+      "context": "saveToSessionStorage(\"errorValue\", t(\"PortalNameEmpty\"));\n break;\n case value.length < domainValidator.minLength ||\n value.length > domainValidator.maxLength:\n setErrorValue(\n t(\"PortalNameLength\", {\n minLength: domainValidator.minLength,\n maxLength: domainValidator.maxLength,\n }),\n );\n saveToSessionStorage(",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
+      "line_number": 251,
+      "context": "saveToSessionStorage(\"errorValue\", t(\"PortalNameEmpty\"));\n break;\n case value.length < domainValidator.minLength ||\n value.length > domainValidator.maxLength:\n setErrorValue(\n t(\"PortalNameLength\", {\n minLength: domainValidator.minLength,\n maxLength: domainValidator.maxLength,\n }),\n );\n saveToSessionStorage(",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/utils/common.ts",
+      "line_number": 200,
+      "context": "case value === \"\":\n return setError(t(\"Settings:PortalNameEmpty\"));\n case value.length < nameValidator.minLength ||\n value.length > nameValidator.maxLength:\n return setError(\n t(\"Settings:PortalNameLength\", {\n minLength: nameValidator.minLength.toString(),\n maxLength: nameValidator.maxLength.toString(),\n }),\n );\n case !validName.test(value):",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

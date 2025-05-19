@@ -1,11 +1,34 @@
 {
   "key_path": "RoleBasedFillingDescription",
+  "content": "Fill out the original form by roles with other participants in VDR.",
   "content_en_sha1_hash": "f73c05d6e0b2e2295ced208487a13043d1dc0322",
-  "created_at": "2025-05-14T14:04:19.243Z",
-  "updated_at": "2025-05-14T14:04:19.243Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:47.975Z",
+  "updated_at": "2025-05-19T21:56:08.159Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/FillPDFDialog/FillPDFDialog.tsx",
+      "line_number": 123,
+      "context": "icon: <FormDataCollectionIcon />,\n },\n {\n id: \"role-based-filling\",\n title: t(\"Common:RoleBasedFilling\"),\n description: t(\"Common:RoleBasedFillingDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: () => openSelector(RoomsType.VirtualDataRoom),\n icon: <RoleBasedFillingIcon />,\n },\n ] satisfies PanelCard[];",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/ShareFormPanel/index.js",
+      "line_number": 104,
+      "context": "icon: <FormDataCollectionIcon />,\n },\n {\n id: \"role-based-filling\",\n title: t(\"Common:RoleBasedFilling\"),\n description: t(\"Common:RoleBasedFillingDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickVirtualDataRoom,\n icon: <RoleBasedFillingIcon />,\n },\n ],",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
+      "line_number": 173,
+      "context": "icon: <FormDataCollectionIcon />,\n },\n {\n id: \"virtual-data-room\",\n title: t(\"Common:RoleBasedFilling\"),\n description: t(\"Common:RoleBasedFillingDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickVirtualDataRoom,\n icon: <RoleBasedFillingIcon />,\n },\n ];",
+      "module": "/packages/doceditor"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

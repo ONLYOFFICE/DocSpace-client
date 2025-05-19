@@ -1,11 +1,28 @@
 {
   "key_path": "ContentCreator",
+  "content": "Content creator",
   "content_en_sha1_hash": "19984b0eed18a37a50dc1dace36b9a212c829a2e",
-  "created_at": "2025-05-14T14:04:15.054Z",
-  "updated_at": "2025-05-14T14:04:15.054Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:43.682Z",
+  "updated_at": "2025-05-19T21:56:08.251Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/MembersHelper.js",
+      "line_number": 50,
+      "context": "access: ShareAccessRights.RoomManager,\n type: \"manager\",\n },\n collaborator: {\n key: \"collaborator\",\n label: this.t(\"Common:ContentCreator\"),\n access: ShareAccessRights.Collaborator,\n type: \"collaborator\",\n },\n viewer: {\n key: \"viewer\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/utils/getAccessOptions.ts",
+      "line_number": 141,
+      "context": "roomType === None ? EmployeeType.User : ShareAccessRights.Collaborator,\n type: EmployeeType.User,\n },\n contentCreator: {\n key: \"contentCreator\",\n label: t(\"Common:ContentCreator\"),\n description: getUserDescription(roomType, t),\n access:\n roomType === None ? EmployeeType.User : ShareAccessRights.Collaborator,\n type: EmployeeType.User,\n },",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

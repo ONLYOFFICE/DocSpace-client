@@ -1,11 +1,22 @@
 {
   "key_path": "SelectDOCXFFormat",
+  "content": "Select .DOCXF file",
   "content_en_sha1_hash": "c87578509cc70195115bab940d290a60e663f6d1",
-  "created_at": "2025-05-14T14:04:19.639Z",
-  "updated_at": "2025-05-14T14:04:19.639Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:48.383Z",
+  "updated_at": "2025-05-19T21:56:08.013Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FilesPanels/index.js",
+      "line_number": 202,
+      "context": "};\n \n const descriptionTextFileFormRoomDialog = useMemo(() => {\n const text = {\n [FilesSelectorFilterTypes.DOCX]: t(\"Common:SelectDOCXFormat\"),\n // [FilesSelectorFilterTypes.DOCXF]: t(\"Common:SelectDOCXFFormat\"),\n [FilesSelectorFilterTypes.PDF]: t(\"Common:SelectPDFFormat\"),\n [FilterType.PDFForm]: t(\"Common:SelectPDFFormat\"),\n };\n \n return text[selectFileFormRoomFilterParam];",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

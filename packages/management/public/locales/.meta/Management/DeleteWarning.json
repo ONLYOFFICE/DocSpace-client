@@ -1,11 +1,22 @@
 {
   "key_path": "DeleteWarning",
+  "content": "The last full access space cannot be deleted",
   "content_en_sha1_hash": "b684b6f8185450f454f665f01f5c551f723dd323",
-  "created_at": "2025-05-14T14:04:28.328Z",
-  "updated_at": "2025-05-14T14:04:28.328Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.434Z",
+  "updated_at": "2025-05-19T21:56:08.813Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/management/src/categories/spaces/sub-components/RowView/SpacesRoomRow.tsx",
+      "line_number": 84,
+      "context": "const [isVisibleDialog, setIsVisibleDialog] = useState(false);\n const [isDisableQuota, setIsDisableQuota] = useState(false);\n \n const onDelete = () => {\n if (portals.length === 1) {\n return toastr.error(t(\"Management:DeleteWarning\"));\n }\n setCurrentPortal(item);\n setDeletePortalDialogVisible(true);\n };",
+      "module": "/packages/management"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

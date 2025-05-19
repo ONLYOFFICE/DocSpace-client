@@ -1,11 +1,22 @@
 {
   "key_path": "SetDiskSpaceQuota",
+  "content": "Set storage quota to define the maximum disk space for this {{productName}}.",
   "content_en_sha1_hash": "499f7a97f93e9c092c5eca67c5fa8cfdfa381f2e",
-  "created_at": "2025-05-14T14:04:19.818Z",
-  "updated_at": "2025-05-14T14:04:19.818Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:48.569Z",
+  "updated_at": "2025-05-19T21:56:08.078Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangeStorageQuotaDialog/index.js",
+      "line_number": 127,
+      "context": "<Text noSelect>\n {isDisableQuota\n ? t(\"Common:TurnOffDiskSpaceLimit\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Common:SetDiskSpaceQuota\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {!isDisableQuota ? (\n <QuotaForm",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

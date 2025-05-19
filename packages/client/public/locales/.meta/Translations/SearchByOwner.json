@@ -1,11 +1,28 @@
 {
   "key_path": "SearchByOwner",
+  "content": "Search by Owners",
   "content_en_sha1_hash": "871fbf34747757d5e66494981884a599ad165876",
-  "created_at": "2025-05-14T14:04:27.732Z",
-  "updated_at": "2025-05-14T14:04:27.732Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:50.005Z",
+  "updated_at": "2025-05-19T21:56:08.369Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 974,
+      "context": "},\n {\n id: \"filter_author-user\",\n key: FilterSubject.Owner,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Translations:SearchByOwner\"),\n isCheckbox: true,\n isDisabled: false,\n },\n ];",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
+      "line_number": 506,
+      "context": "</UserInputContainer>\n )}\n \n <Checkbox\n className=\"checkbox\"\n label={t(\"Translations:SearchByOwner\")}\n onChange={toggleSubjectFilter}\n isChecked={false}\n />\n </>\n ) : null}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

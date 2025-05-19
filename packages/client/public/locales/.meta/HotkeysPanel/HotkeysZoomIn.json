@@ -1,11 +1,22 @@
 {
   "key_path": "HotkeysZoomIn",
+  "content": "Zoom in",
   "content_en_sha1_hash": "4fc05f2763ba31e2d3be5f08e7d0bab5d5dcbf78",
-  "created_at": "2025-05-14T14:04:22.963Z",
-  "updated_at": "2025-05-14T14:04:22.963Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.104Z",
+  "updated_at": "2025-05-19T21:56:08.207Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/HotkeysPanel/PreviewActionsBlock.js",
+      "line_number": 48,
+      "context": "<Text {...keyTextStyles}>Space</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysZoomIn\")}</Text>\n <Text {...keyTextStyles}>+ {t(\"Common:Or\")} =</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,22 @@
 {
   "key_path": "ThisSectionIsEmpty",
+  "content": "This section is empty",
   "content_en_sha1_hash": "2b06a278224aa9ce04d45d59105ba0394f86ef15",
-  "created_at": "2025-05-14T14:04:20.520Z",
-  "updated_at": "2025-05-14T14:04:20.520Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:49.289Z",
+  "updated_at": "2025-05-19T21:56:08.366Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreenGroups.tsx",
+      "line_number": 97,
+      "context": "};\n \n const getDescription = () => {\n if (groupsIsFiltered) return t(\"Common:GroupsNotFoundDescription\");\n \n return t(\"Common:ThisSectionIsEmpty\");\n };\n \n const getOptions = () => {\n if (groupsIsFiltered) {\n return [",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

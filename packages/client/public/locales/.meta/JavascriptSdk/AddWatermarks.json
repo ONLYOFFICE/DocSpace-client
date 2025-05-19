@@ -1,11 +1,22 @@
 {
   "key_path": "AddWatermarks",
+  "content": "Add watermarks to documents",
   "content_en_sha1_hash": "22034bd673fd6d7cd91245241c5115556634de93",
-  "created_at": "2025-05-14T14:04:23.231Z",
-  "updated_at": "2025-05-14T14:04:23.231Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.353Z",
+  "updated_at": "2025-05-19T21:56:08.456Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
+      "line_number": 262,
+      "context": "<RowContainer>\n <Checkbox label={t(\"FeedbackAndSupport\")} onChange={() => {}} isChecked />\n <Text color=\"gray\">({t(\"InLeftPanel\")})</Text>\n </RowContainer>\n </InterfaceElements>\n <CategorySubHeader>{t(\"AddWatermarks\")}</CategorySubHeader>\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"SelectImage\")} />\n </LabelGroup>\n <FilesSelectorInputWrapper>",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

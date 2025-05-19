@@ -1,11 +1,52 @@
 {
   "key_path": "Spreadsheets",
+  "content": "Spreadsheets",
   "content_en_sha1_hash": "e8a0fe95bcd9c07d210920e52baa1560871c11ad",
-  "created_at": "2025-05-14T14:04:20.251Z",
-  "updated_at": "2025-05-14T14:04:20.251Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:49.008Z",
+  "updated_at": "2025-05-19T21:56:08.367Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 594,
+      "context": "break;\n case FilterType.FoldersOnly.toString():\n label = t(\"Common:Folders\");\n break;\n case FilterType.SpreadsheetsOnly.toString():\n label = t(\"Common:Spreadsheets\");\n break;\n case FilterType.ArchiveOnly.toString():\n label = t(\"Common:Archives\");\n break;\n case FilterType.PresentationsOnly.toString():",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 594,
+      "context": "break;\n case FilterType.FoldersOnly.toString():\n label = t(\"Common:Folders\");\n break;\n case FilterType.SpreadsheetsOnly.toString():\n label = t(\"Common:Spreadsheets\");\n break;\n case FilterType.ArchiveOnly.toString():\n label = t(\"Common:Archives\");\n break;\n case FilterType.PresentationsOnly.toString():",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
+      "line_number": 113,
+      "context": "key: FilterType.PresentationsOnly,\n label: t(`Common:Presentations`),\n },\n {\n key: FilterType.SpreadsheetsOnly,\n label: t(`Common:Spreadsheets`),\n },\n {\n key: FilterType.PDFForm,\n label: getManyPDFTitle(t, true),\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
+      "line_number": 153,
+      "context": "label: t(\"Common:Folders\"),\n typeKey: FilterType.FoldersOnly,\n },\n {\n key: \"filter-type-spreadsheets\",\n label: t(\"Common:Spreadsheets\"),\n typeKey: FilterType.SpreadsheetsOnly,\n },\n {\n key: \"filter-type-archives\",\n label: t(\"Common:Archives\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
+      "line_number": 461,
+      "context": "isChecked={state.spreadsheets.isChecked}\n isIndeterminate={state.spreadsheets.isIndeterminate}\n items={state.spreadsheets.files}\n titleFormat={state.spreadsheets.format || t(\"Common:OriginalFormat\")}\n type={DownloadedDocumentType.Spreadsheets}\n title={t(\"Common:Spreadsheets\")}\n />\n ) : null}\n \n {state.presentations.files.length > 0 ? (\n <DownloadContent",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/utils/index.ts",
+      "line_number": 345,
+      "context": "case FilterType.DocumentsOnly:\n return t(\"Common:Documents\");\n case FilterType.PresentationsOnly:\n return t(\"Common:Presentations\");\n case FilterType.SpreadsheetsOnly:\n return t(\"Common:Spreadsheets\");\n case FilterType.ImagesOnly:\n return t(\"Common:Images\");\n case FilterType.MediaOnly:\n return t(\"Common:Media\");\n case FilterType.ArchiveOnly:",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

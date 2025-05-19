@@ -1,11 +1,34 @@
 {
   "key_path": "SetToDefault",
+  "content": "Set to default",
   "content_en_sha1_hash": "e0512dbd102921703bbdd2a1da2632a0ca371f46",
-  "created_at": "2025-05-14T14:04:19.853Z",
-  "updated_at": "2025-05-14T14:04:19.853Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:48.606Z",
+  "updated_at": "2025-05-19T21:56:08.044Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/SpaceQuota/index.js",
+      "line_number": 70,
+      "context": "if (item.isCustomQuota)\n items?.splice(1, 0, {\n id: \"info-account-quota_no-quota\",\n key: \"default-quota\",\n label: t(\"Common:SetToDefault\"),\n action: \"default\",\n });\n \n return items;\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 2301,
+      "context": "case \"default-quota\":\n if (!this.isAvailableOption(\"default-quota\")) return null;\n return {\n id: \"menu-default-quota\",\n key: \"default-quota\",\n label: t(\"Common:SetToDefault\"),\n iconUrl: DefaultQuotaReactSvgUrl,\n onClick: () => this.resetRoomQuota(selection, t),\n disabled: !showStorageInfo,\n };\n case \"disable-quota\":",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contacts/HeaderMenuStore.ts",
+      "line_number": 238,
+      "context": "onClick: () => changeUserQuota(selection as unknown as TUser[]),\n },\n {\n id: \"menu-default-quota\",\n key: \"default-quota\",\n label: t(\"Common:SetToDefault\"),\n disabled: !hasUsersToResetQuota || isGuests,\n iconUrl: DefaultQuotaReactSvgUrl,\n onClick: () => this.resetUserQuota(selection as unknown as TUser[], t),\n },\n {",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

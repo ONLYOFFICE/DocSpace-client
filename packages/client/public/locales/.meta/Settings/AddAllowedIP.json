@@ -1,11 +1,22 @@
 {
   "key_path": "AddAllowedIP",
+  "content": "Add allowed IP address",
   "content_en_sha1_hash": "af9c05a9deff4df886dbc45b353bc08a5f221460",
-  "created_at": "2025-05-14T14:04:24.684Z",
-  "updated_at": "2025-05-14T14:04:24.684Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:50.310Z",
+  "updated_at": "2025-05-19T21:56:08.578Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
+      "line_number": 287,
+      "context": "{enable ? (\n <UserFields\n className=\"user-fields\"\n inputs={ips}\n buttonLabel={t(\"AddAllowedIP\")}\n onChangeInput={onChangeInput}\n onDeleteInput={onDeleteInput}\n onClickAdd={onClickAdd}\n regexp={regexp}\n classNameAdditional=\"add-allowed-ip-address\"",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

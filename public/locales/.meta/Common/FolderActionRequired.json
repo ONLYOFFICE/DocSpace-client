@@ -1,11 +1,22 @@
 {
   "key_path": "FolderActionRequired",
+  "content": "The destination already contains a folder named «<1>{{folderName}}</1>».",
   "content_en_sha1_hash": "84e03768c28e7d8864816ce977c8c2b9f91a4f66",
-  "created_at": "2025-05-14T14:04:16.772Z",
-  "updated_at": "2025-05-14T14:04:16.772Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:45.425Z",
+  "updated_at": "2025-05-19T21:56:08.090Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
+      "line_number": 252,
+      "context": "const singleFolderMessage = (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"FolderActionRequired\"\n values={{ folderName: items[0].title }}\n components={{ 1: <span className=\"bold\" /> }}\n />\n );",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,34 @@
 {
   "key_path": "Phone",
+  "content": "Phone",
   "content_en_sha1_hash": "77064d5265236e0ac252f3fc4a5ba7b274b6a583",
-  "created_at": "2025-05-14T14:04:18.660Z",
-  "updated_at": "2025-05-14T14:04:18.660Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:47.371Z",
+  "updated_at": "2025-05-19T21:56:08.239Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/About/AboutContent.js",
+      "line_number": 263,
+      "context": "</Text>\n </div>\n \n <div className=\"row\">\n <Text className=\"tel-title\" fontSize=\"13px\">\n {t(\"Common:Phone\")}:{\" \"}\n </Text>\n <Text className=\"tel-title select-el\" fontSize=\"13px\">\n {phone}\n </Text>\n </div>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/FieldMapping.js",
+      "line_number": 125,
+      "context": "value={title}\n hasError={titleHasError}\n />\n \n <SsoFormField\n labelText={t(\"Common:Phone\")}\n name=\"phone\"\n placeholder={SSO_PHONE}\n tabIndex={21}\n value={phone}\n hasError={phoneHasError}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
+      "line_number": 160,
+      "context": "/>\n </FieldContainer>\n <FieldContainer\n id=\"fieldContainerPhone\"\n className=\"field-container-width settings_unavailable\"\n labelText={t(\"Common:Phone\")}\n isVertical\n >\n <TextInput\n testId=\"phone-input\"\n id=\"textInputContainerPhone\"",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

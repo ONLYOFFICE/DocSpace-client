@@ -1,11 +1,22 @@
 {
   "key_path": "LinkToForm",
+  "content": "Link to form:",
   "content_en_sha1_hash": "50f3f84afe5ad2613a1c1fcafe7a2ba39b7e4ca0",
-  "created_at": "2025-05-14T14:04:28.065Z",
-  "updated_at": "2025-05-14T14:04:28.065Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.187Z",
+  "updated_at": "2025-05-19T21:56:08.713Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
+      "line_number": 138,
+      "context": "const label = useMemo(() => {\n if (isStartFilling) return t(\"CompletedForm:LinkToFillOutForm\");\n \n if (completed) return t(\"CompletedForm:LinkToViewOnlyForm\");\n \n return t(\"CompletedForm:LinkToForm\");\n }, [t, isStartFilling, completed]);\n \n const header = useMemo(() => {\n if (isStartFilling) {\n return t(\"CompletedForm:FormVDRConfirmationOfStartTitle\");",
+      "module": "/packages/doceditor"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

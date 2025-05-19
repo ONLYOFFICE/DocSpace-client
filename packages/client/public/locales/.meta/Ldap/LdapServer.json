@@ -1,11 +1,22 @@
 {
   "key_path": "LdapServer",
+  "content": "Server",
   "content_en_sha1_hash": "cb0cb170d106f8e8d5af1e05bbdbd3a96a7de197",
-  "created_at": "2025-05-14T14:04:23.667Z",
-  "updated_at": "2025-05-14T14:04:23.667Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.268Z",
+  "updated_at": "2025-05-19T21:56:08.533Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ConnectionSettings.js",
+      "line_number": 95,
+      "context": "style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.server}\n labelText={t(\"LdapServer\")}\n tooltipContent={t(\"LdapServerTooltip\")}\n inlineHelpButton\n isRequired\n >\n <LdapFieldComponent",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

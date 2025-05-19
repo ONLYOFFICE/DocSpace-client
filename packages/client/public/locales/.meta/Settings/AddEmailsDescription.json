@@ -1,11 +1,22 @@
 {
   "key_path": "AddEmailsDescription",
+  "content": "Check list of unimported users to import into {{organizationName}} {{productName}}.",
   "content_en_sha1_hash": "f813ddb0fd692acc396a9c04232098593d622568",
-  "created_at": "2025-05-14T14:04:24.706Z",
-  "updated_at": "2025-05-14T14:04:24.706Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:50.334Z",
+  "updated_at": "2025-05-19T21:56:08.401Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
+      "line_number": 73,
+      "context": "<SelectUsersStep t={t} canDisable={false} shouldSetUsers={false} />\n ),\n },\n {\n title: t(\"Settings:AddEmails\"),\n description: t(\"Settings:AddEmailsDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <AddEmailsStep t={t} />,\n },",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,22 @@
 {
   "key_path": "ItemsSelected",
+  "content": "Items selected",
   "content_en_sha1_hash": "71df4f9b608d03b3dfa07d8ce7cdee242420abae",
-  "created_at": "2025-05-14T14:04:23.099Z",
-  "updated_at": "2025-05-14T14:04:23.099Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.887Z",
+  "updated_at": "2025-05-19T21:56:08.356Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/SeveralItems/index.tsx",
+      "line_number": 74,
+      "context": "const itemsText = isGroups\n ? t(\"InfoPanel:SelectedGroups\")\n : isContacts\n ? t(\"InfoPanel:SelectedUsers\")\n : t(\"InfoPanel:ItemsSelected\");\n \n return (\n <StyledSeveralItemsContainer className=\"no-thumbnail-img-wrapper\">\n <img src={imgSrc} alt=\"Several items\" />\n <Text fontSize=\"16px\" fontWeight={700}>",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

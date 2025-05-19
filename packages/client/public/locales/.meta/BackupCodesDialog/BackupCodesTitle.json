@@ -1,11 +1,28 @@
 {
   "key_path": "BackupCodesTitle",
+  "content": "Backup codes",
   "content_en_sha1_hash": "e7cba1a232c33bc65ed4971b30b922911010f6e5",
-  "created_at": "2025-05-14T14:04:20.941Z",
-  "updated_at": "2025-05-14T14:04:20.941Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.034Z",
+  "updated_at": "2025-05-19T21:56:08.060Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/BackupCodesDialog/index.js",
+      "line_number": 82,
+      "context": "const printWindow = window.open(\n \"about:blank\",\n \"\",\n \"toolbar=0,scrollbars=1,status=0\",\n );\n printWindow.document.write(`<h1>${t(\"BackupCodesTitle\")}</h1>`);\n printWindow.document.write(printContent.innerHTML);\n printWindow.document.close();\n printWindow.focus();\n printWindow.print();\n printWindow.close();",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/BackupCodesDialog/index.js",
+      "line_number": 82,
+      "context": "const printWindow = window.open(\n \"about:blank\",\n \"\",\n \"toolbar=0,scrollbars=1,status=0\",\n );\n printWindow.document.write(`<h1>${t(\"BackupCodesTitle\")}</h1>`);\n printWindow.document.write(printContent.innerHTML);\n printWindow.document.close();\n printWindow.focus();\n printWindow.print();\n printWindow.close();",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

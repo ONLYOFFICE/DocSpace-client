@@ -1,11 +1,22 @@
 {
   "key_path": "GuestReleaseTipDescripton",
+  "content": "All previously added Users became Guests and now available in the Contacts list of the {{productName}} administrators only. Guests are no longer part of any groups. You can always change their type and add them to a group, if necessary.",
   "content_en_sha1_hash": "de15dd23e864c862abd1d9c2273ed11ebd43e2c3",
-  "created_at": "2025-05-14T14:04:27.716Z",
-  "updated_at": "2025-05-14T14:04:27.716Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:49.987Z",
+  "updated_at": "2025-05-19T21:56:08.161Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/GuestReleaseTip/index.tsx",
+      "line_number": 134,
+      "context": "<StyledBody>\n <Text fontSize=\"12px\" fontWeight={400} lineHeight=\"16px\" noSelect>\n <Trans\n t={t}\n ns=\"Translations\"\n i18nKey=\"GuestReleaseTipDescripton\"\n values={{ productName: t(\"Common:ProductName\") }}\n />\n </Text>\n {accessRightsLink ? (\n <ColorTheme",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

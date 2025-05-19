@@ -1,11 +1,22 @@
 {
   "key_path": "RoomManagerDescription",
+  "content": "Room administration and archiving, user invitation and management. Several admins can be assigned to the room.",
   "content_en_sha1_hash": "fcf79ad90b7d19194bb1754fbe16c0cc2c3a8dc2",
-  "created_at": "2025-05-14T14:04:24.296Z",
-  "updated_at": "2025-05-14T14:04:24.296Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.725Z",
+  "updated_at": "2025-05-19T21:56:08.566Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PaymentContainer.js",
+      "line_number": 154,
+      "context": "productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <br />\n <Text isBold>{t(\"Common:RoomAdmin\")}</Text>\n <Text>{t(\"RoomManagerDescription\")}</Text>\n </>\n }\n />\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,22 @@
 {
   "key_path": "AddNewLink",
+  "content": "Add new link",
   "content_en_sha1_hash": "44ff7a980d99eb935ed009b254bb3b7b58a347c4",
-  "created_at": "2025-05-14T14:04:21.682Z",
-  "updated_at": "2025-05-14T14:04:21.682Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.216Z",
+  "updated_at": "2025-05-19T21:56:08.342Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.js",
+      "line_number": 210,
+      "context": "className=\"link-to-viewing-icon\"\n iconName={LinksToViewingIconUrl}\n onClick={onAddNewLink}\n size={16}\n isDisabled={additionalLinks.length >= LINKS_LIMIT_COUNT}\n title={t(\"Files:AddNewLink\")}\n />\n \n {additionalLinks.length >= LINKS_LIMIT_COUNT ? (\n <Tooltip\n float={isDesktop()}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

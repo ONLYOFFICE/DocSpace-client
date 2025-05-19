@@ -1,11 +1,28 @@
 {
   "key_path": "Read",
+  "content": "Read",
   "content_en_sha1_hash": "852b438f91ad9eb2cdd84419a675a216d543c687",
-  "created_at": "2025-05-14T14:04:24.130Z",
-  "updated_at": "2025-05-14T14:04:24.130Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.981Z",
+  "updated_at": "2025-05-19T21:56:08.428Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
+      "line_number": 251,
+      "context": "</Text>\n <Text\n className=\"api-key_permission-container-text separator\"\n fontWeight={600}\n >\n {t(\"OAuth:Read\")}\n </Text>\n <Text\n className=\"api-key_permission-container-text separator\"\n fontWeight={600}\n >",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/ScopesBlock.tsx",
+      "line_number": 109,
+      "context": "return { ...val };\n });\n } else {\n setFilteredScopes((val) => {\n const isReadChecked = checkedScopes.includes(\n val[group].read?.name || \"\",\n );\n \n val[group].isChecked = isReadChecked;\n val[group].checkedType = isReadChecked ? ScopeType.read : undefined;",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

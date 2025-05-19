@@ -1,11 +1,22 @@
 {
   "key_path": "LeftAndAppointNewOwner",
+  "content": "You have left the room and appointed a new owner",
   "content_en_sha1_hash": "70c6513ecf2f1d31d81657e1a47a62c5179cea80",
-  "created_at": "2025-05-14T14:04:22.174Z",
-  "updated_at": "2025-05-14T14:04:22.174Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.742Z",
+  "updated_at": "2025-05-19T21:56:08.697Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 3053,
+      "context": "} else {\n this.filesStore.setInRoomFolder(roomId, false);\n }\n \n isOwner\n ? toastr.success(t(\"Files:LeftAndAppointNewOwner\"))\n : toastr.success(t(\"Files:YouLeftTheRoom\"));\n });\n };\n \n changeRoomOwner = (t, userId, isLeaveChecked = false) => {",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,22 @@
 {
   "key_path": "CreateRoomConfirmation",
+  "content": "Continue without connecting the storage?\nYou have selected a third-party storage option that is not connected yet. If you proceed without connecting the service, this option will not be added.",
   "content_en_sha1_hash": "2d29b440ea315d9ac9d67057564aa95d991d43fd",
-  "created_at": "2025-05-14T14:04:21.135Z",
-  "updated_at": "2025-05-14T14:04:21.135Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.786Z",
+  "updated_at": "2025-05-19T21:56:08.126Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateRoomConfirmDialog/index.js",
+      "line_number": 53,
+      "context": "};\n \n const bodyText =\n selectedRoomType === RoomsType.VirtualDataRoom\n ? t(\"CreateEditRoomDialog:CreateRoomWatermarksConfirmation\")\n : t(\"CreateEditRoomDialog:CreateRoomConfirmation\");\n \n return (\n <ModalDialog\n visible={visible || confirmDialogIsLoading}\n onClose={onClose}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

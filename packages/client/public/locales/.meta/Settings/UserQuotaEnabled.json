@@ -1,11 +1,22 @@
 {
   "key_path": "UserQuotaEnabled",
+  "content": "User quota has been successfully enabled.",
   "content_en_sha1_hash": "54f6f93690a1ebe93c7db897adb749e9da5be3c2",
-  "created_at": "2025-05-14T14:04:27.365Z",
-  "updated_at": "2025-05-14T14:04:27.365Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.138Z",
+  "updated_at": "2025-05-19T21:56:08.793Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/store/CurrentQuotaStore.ts",
+      "line_number": 446,
+      "context": "const isEnable = +quota !== -1;\n \n try {\n await setDefaultUserQuota(isEnable, +quota);\n const toastrText = isEnable\n ? t(\"UserQuotaEnabled\")\n : t(\"UserQuotaDisabled\");\n \n toastr.success(toastrText);\n } catch (e: unknown) {\n toastr.error(e as TData);",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

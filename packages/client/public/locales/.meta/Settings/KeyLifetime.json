@@ -1,11 +1,22 @@
 {
   "key_path": "KeyLifetime",
+  "content": "Key lifetime",
   "content_en_sha1_hash": "4542cdd571d747286d9eef72438ab8529c366c75",
-  "created_at": "2025-05-14T14:04:26.000Z",
-  "updated_at": "2025-05-14T14:04:26.000Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:51.751Z",
+  "updated_at": "2025-05-19T21:56:08.430Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
+      "line_number": 448,
+      "context": "</div>\n {!isEdit ? (\n <div className=\"api-key_name\">\n <div className=\"api-key_lifetime\">\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Settings:KeyLifetime\")}\n </Text>\n <ToggleButton\n className=\"api-key_toggle\"\n isChecked={lifetimeIsChecked}\n onChange={() => setLifetimeIsChecked(!lifetimeIsChecked)}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,22 @@
 {
   "key_path": "BreakpointSmallText",
+  "content": "Your window is too small to display all page contents",
   "content_en_sha1_hash": "53e0d19e2b95ce530a76a84a4792c15e1e6dcbb8",
-  "created_at": "2025-05-14T14:04:25.145Z",
-  "updated_at": "2025-05-14T14:04:25.145Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:50.790Z",
+  "updated_at": "2025-05-19T21:56:07.986Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/BreakpointWarning/BreakpointWarning.js",
+      "line_number": 44,
+      "context": "theme,\n isSmallWindow,\n isMobileUnavailableOnly,\n }) => {\n const textHeader = isSmallWindow\n ? t(\"BreakpointSmallText\")\n : isMobileUnavailableOnly\n ? t(\"BreakpointMobileWarningText\")\n : t(\"BreakpointWarningText\");\n \n const textPrompt = isSmallWindow ? (",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

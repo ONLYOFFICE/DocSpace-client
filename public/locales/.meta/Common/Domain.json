@@ -1,11 +1,28 @@
 {
   "key_path": "Domain",
+  "content": "Domain",
   "content_en_sha1_hash": "9b10914d8b0a097ace7176e8973f5c3dee92bb44",
-  "created_at": "2025-05-14T14:04:15.875Z",
-  "updated_at": "2025-05-14T14:04:15.875Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:44.590Z",
+  "updated_at": "2025-05-19T21:56:08.730Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
+      "line_number": 447,
+      "context": "</FieldContainer>\n )}\n \n <StyledInfo>\n <Text className=\"text\" fontWeight={400}>\n {t(\"Common:Domain\")}\n </Text>\n <Text fontWeight={600} className=\"machine-name\">\n {machineName}\n </Text>\n </StyledInfo>",
+      "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/management/src/categories/spaces/sub-components/ConfigurationSection.tsx",
+      "line_number": 141,
+      "context": "<Text\n fontSize=\"13px\"\n fontWeight={600}\n className=\"spaces-domain-text\"\n >\n {t(\"Common:Domain\")}\n </Text>\n <Text className=\"spaces-input-subheader\">(example.com)</Text>\n </div>\n \n <TextInput",
+      "module": "/packages/management"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

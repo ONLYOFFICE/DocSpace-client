@@ -1,11 +1,28 @@
 {
   "key_path": "TokenRevokedSuccessfully",
+  "content": "Token revoked successfully",
   "content_en_sha1_hash": "40f07694c195b055dc6382019e7a4f7ad297f06a",
-  "created_at": "2025-05-14T14:04:24.206Z",
-  "updated_at": "2025-05-14T14:04:24.206Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.064Z",
+  "updated_at": "2025-05-19T21:56:08.493Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/GenerateDeveloperTokenDialog.tsx",
+      "line_number": 109,
+      "context": "await api.oauth.revokeDeveloperToken(token, client!.clientId, secret);\n \n setRequestRunning(false);\n \n toastr.success(t(\"TokenRevokedSuccessfully\"));\n \n setToken(\"\");\n \n onClose();\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/RevokeDeveloperTokenDialog.tsx",
+      "line_number": 88,
+      "context": "setRequestRunning(false);\n \n setToken(\"\");\n setRevokeDeveloperTokenDialogVisible?.(false);\n \n toastr.success(t(\"OAuth:TokenRevokedSuccessfully\"));\n } catch (e) {\n toastr.error(e as TData);\n }\n };",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

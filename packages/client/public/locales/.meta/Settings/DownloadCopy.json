@@ -1,11 +1,22 @@
 {
   "key_path": "DownloadCopy",
+  "content": "Download copy",
   "content_en_sha1_hash": "f779a16e5bd57fac3371cd6ff082decdc8a0baad",
-  "created_at": "2025-05-14T14:04:25.698Z",
-  "updated_at": "2025-05-14T14:04:25.698Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:51.434Z",
+  "updated_at": "2025-05-19T21:56:08.420Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/manual-backup/index.js",
+      "line_number": 388,
+      "context": "size={buttonSize}\n />\n {temporaryLink?.length > 0 && isMaxProgress ? (\n <Button\n id=\"download-copy\"\n label={t(\"DownloadCopy\")}\n onClick={this.onClickDownloadBackup}\n isDisabled={pageIsDisabled}\n size={buttonSize}\n style={{ marginInlineStart: \"8px\" }}\n />",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

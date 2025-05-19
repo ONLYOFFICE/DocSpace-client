@@ -1,11 +1,22 @@
 {
   "key_path": "LdapConnectionType",
+  "content": "Connection Type",
   "content_en_sha1_hash": "1d86d4c525b2780f86aa92b4d0a80e3b7d211f2f",
-  "created_at": "2025-05-14T14:04:23.583Z",
-  "updated_at": "2025-05-14T14:04:23.583Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.183Z",
+  "updated_at": "2025-05-19T21:56:08.530Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/Checkboxes.js",
+      "line_number": 73,
+      "context": "return (\n <div className=\"ldap_checkbox-container\">\n <div className=\"ldap_connection_type-text\">\n <Text fontWeight={600} fontSize=\"14px\">\n {t(\"LdapConnectionType\")}\n </Text>\n </div>\n <div className=\"ldap_radio_buttons_group\">\n <div className=\"ldap_checkbox-header\">\n <RadioButton",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

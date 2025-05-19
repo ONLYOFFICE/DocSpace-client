@@ -1,11 +1,22 @@
 {
   "key_path": "EmptyFilterFilesDescription",
+  "content": "No files or folders match this filter. Try another or remove the filter to view all files.",
   "content_en_sha1_hash": "f2861dacb0262bcf7db8f51e73d24b3a7e422750",
-  "created_at": "2025-05-14T14:04:16.109Z",
-  "updated_at": "2025-05-14T14:04:16.109Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:44.832Z",
+  "updated_at": "2025-05-19T21:56:07.992Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyFilterContainer.js",
+      "line_number": 64,
+      "context": "const navigate = useNavigate();\n const location = useLocation();\n \n const descriptionText = isRooms\n ? t(\"Common:EmptyFilterRoomsDescription\")\n : t(\"Common:EmptyFilterFilesDescription\");\n \n const getIconURL = () => {\n if (isRooms)\n return theme.isBase ? (\n <EmptyFilterRoomsLightIcon />",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

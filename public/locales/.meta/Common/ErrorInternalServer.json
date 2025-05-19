@@ -1,11 +1,40 @@
 {
   "key_path": "ErrorInternalServer",
+  "content": "Internal server error. Try again later.",
   "content_en_sha1_hash": "50b64918b994b2985e494b4a494e20d58180ff95",
-  "created_at": "2025-05-14T14:04:16.355Z",
-  "updated_at": "2025-05-14T14:04:16.355Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:45.082Z",
+  "updated_at": "2025-05-19T21:56:08.059Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/AvatarEditorDialog/index.js",
+      "line_number": 177,
+      "context": "if (res.success) {\n res.data && updateCreatedAvatar(res.data);\n setHasAvatar(true);\n toastr.success(t(\"Common:ChangesSavedSuccessfully\"));\n } else {\n throw new Error(t(\"Common:ErrorInternalServer\"));\n }\n \n onClose();\n } catch (error) {\n console.error(error);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
+      "line_number": 134,
+      "context": "components={{ 1: <span /> }}\n />\n );\n const translations = {\n label: t(\"Common:ArchivingData\"),\n error: t(\"Common:ErrorInternalServer\"),\n passwordError,\n };\n \n return translations;\n }, [t]);",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/EncryptionPortal/index.tsx",
+      "line_number": 49,
+      "context": "export const EncryptionPortal = () => {\n const theme = useTheme();\n \n const { t, ready } = useTranslation(\"Common\");\n \n const errorInternalServer = t(\"Common:ErrorInternalServer\");\n \n const [percent, setPercent] = useState(0);\n const [errorMessage, setErrorMessage] = useState(\"\");\n \n const getProgress = useCallback(async () => {",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/PreparationPortal/index.tsx",
+      "line_number": 50,
+      "context": "const theme = useTheme();\n \n const { t, ready } = useTranslation([\"PreparationPortal\", \"Common\"]);\n \n const errorInternalServer = t(\"Common:ErrorInternalServer\");\n \n const [percent, setPercent] = useState(0);\n const [errorMessage, setErrorMessage] = useState(\"\");\n \n const getRecoveryProgress = useCallback(async () => {",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

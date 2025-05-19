@@ -1,11 +1,22 @@
 {
   "key_path": "LdapToggleDescription",
+  "content": "Enable this option if you want to add users from LDAP server to {{productName}} automatically. The added users will be able to authorize using their LDAP server credentials. {{productName}} does not save the user passwords locally and will authenticate users sending their login and password to LDAP server.",
   "content_en_sha1_hash": "da5fb1c0bb22d780f948c5590af28e3858662dfd",
-  "created_at": "2025-05-14T14:04:23.844Z",
-  "updated_at": "2025-05-14T14:04:23.844Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.320Z",
+  "updated_at": "2025-05-19T21:56:08.541Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ToggleLDAP.js",
+      "line_number": 133,
+      "context": "fontWeight={400}\n lineHeight=\"16px\"\n className=\"settings_unavailable\"\n noSelect\n >\n {t(\"LdapToggleDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </div>\n </StyledWrapper>",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

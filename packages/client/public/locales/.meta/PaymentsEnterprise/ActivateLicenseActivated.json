@@ -1,11 +1,22 @@
 {
   "key_path": "ActivateLicenseActivated",
+  "content": "License activated",
   "content_en_sha1_hash": "576ed3bc179267c56642a371e93bad575e13aa61",
-  "created_at": "2025-05-14T14:04:24.333Z",
-  "updated_at": "2025-05-14T14:04:24.333Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.572Z",
+  "updated_at": "2025-05-19T21:56:08.699Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/PaymentStore.ts",
+      "line_number": 324,
+      "context": "if (message) {\n toastr.error(message);\n return;\n }\n \n toastr.success(t(\"ActivateLicenseActivated\"));\n localStorage.removeItem(\"enterpriseAlertClose\");\n \n await getPaymentInfo();\n } catch (e) {\n toastr.error(e as TData);",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,22 @@
 {
   "key_path": "UpgradePlan",
+  "content": "Upgrade plan",
   "content_en_sha1_hash": "e80fe7c8f56aeba1c9594500c8faf418c36a8fe5",
-  "created_at": "2025-05-14T14:04:24.312Z",
-  "updated_at": "2025-05-14T14:04:24.312Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.743Z",
+  "updated_at": "2025-05-19T21:56:08.162Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
+      "line_number": 97,
+      "context": "}\n \n setIsVisible(false);\n };\n \n const onUpgradePlan = () => {\n onClose();\n \n const paymentPageUrl = \"/portal-settings/payments/portal-payments\";\n \n navigate(paymentPageUrl);",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

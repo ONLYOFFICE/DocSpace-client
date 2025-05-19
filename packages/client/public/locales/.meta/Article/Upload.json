@@ -1,11 +1,28 @@
 {
   "key_path": "Upload",
+  "content": "Upload",
   "content_en_sha1_hash": "8bdf057f91e76ae328b2a21d35f682daa08a0ec0",
-  "created_at": "2025-05-14T14:04:20.926Z",
-  "updated_at": "2025-05-14T14:04:20.926Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.042Z",
+  "updated_at": "2025-05-19T21:56:07.985Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/Article/MainButton/index.js",
+      "line_number": 27,
+      "context": "//\n // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing\n // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0\n // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n \n import ActionsUploadReactSvgUrl from \"PUBLIC_DIR/images/actions.upload.react.svg?url\";\n import FormReactSvgUrl from \"PUBLIC_DIR/images/access.form.react.svg?url\";\n import FormBlankReactSvgUrl from \"PUBLIC_DIR/images/form.blank.react.svg?url\";\n import FormFileReactSvgUrl from \"PUBLIC_DIR/images/form.file.react.svg?url\";\n import FormGalleryReactSvgUrl from \"PUBLIC_DIR/images/form.gallery.react.svg?url\";\n import ActionsDocumentsReactSvgUrl from \"PUBLIC_DIR/images/actions.documents.react.svg?url\";",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/sub-components/Dropzone.tsx",
+      "line_number": 48,
+      "context": "<StyledDropzoneComponent\n isDisabled={isDisabled}\n isLoading={isLoading}\n onDrop={onDrop}\n accept={[\".zip\"]}\n linkMainText={t(\"Article:Upload\")}\n linkSecondaryText={t(\"Common:DropzoneTitleSecondary\")}\n exstsText=\"(ZIP)\"\n />\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

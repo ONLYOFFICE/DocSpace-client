@@ -1,11 +1,22 @@
 {
   "key_path": "GenerateLogoButton",
+  "content": "Generate",
   "content_en_sha1_hash": "fc45f9b7a9a6e8b48f0e28821ec1981804dd1eb6",
-  "created_at": "2025-05-14T14:04:25.824Z",
-  "updated_at": "2025-05-14T14:04:25.824Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:51.573Z",
+  "updated_at": "2025-05-19T21:56:08.788Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/pages/Branding/WhiteLabel/WhiteLabelHeader.tsx",
+      "line_number": 136,
+      "context": "<Button\n testId=\"generate-logo-button\"\n id=\"btnGenerateLogo\"\n className=\"generate-logo\"\n size={ButtonSize.small}\n label={t(\"GenerateLogoButton\")}\n onClick={onUseTextAsLogo}\n isDisabled={!isSettingPaid || isEmpty}\n />\n </FieldContainer>\n </div>",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

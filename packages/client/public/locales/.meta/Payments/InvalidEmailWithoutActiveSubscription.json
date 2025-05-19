@@ -1,11 +1,22 @@
 {
   "key_path": "InvalidEmailWithoutActiveSubscription",
+  "content": "We recommend choosing a new Payer who gets access to subscription settings in {{productName}}.",
   "content_en_sha1_hash": "9892967bb06c7eefb95a79087af920be8fb6dea6",
-  "created_at": "2025-05-14T14:04:24.267Z",
-  "updated_at": "2025-05-14T14:04:24.267Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.697Z",
+  "updated_at": "2025-05-19T21:56:08.564Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PayerInformationContainer.js",
+      "line_number": 124,
+      "context": "productName: t(\"Common:ProductName\"),\n });\n \n if (isNotPaidPeriod || isFreeAfterPaidPeriod) {\n invalidEmailDescription = user.isOwner\n ? t(\"InvalidEmailWithoutActiveSubscription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"InvalidEmailWithoutActiveSubscriptionByAdmin\", {\n productName: t(\"Common:ProductName\"),\n });",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

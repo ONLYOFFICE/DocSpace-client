@@ -1,11 +1,22 @@
 {
   "key_path": "FreeDaysLeft",
+  "content": "{{count}} Free days left",
   "content_en_sha1_hash": "00a662738fd8c9e8f2a747858170f89777247fd7",
-  "created_at": "2025-05-14T14:04:24.358Z",
-  "updated_at": "2025-05-14T14:04:24.358Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.597Z",
+  "updated_at": "2025-05-19T21:56:08.572Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Standalone/sub-components/TariffTitleContainer.js",
+      "line_number": 61,
+      "context": "<Text\n className=\"payments_subscription-expired\"\n fontWeight={600}\n fontSize=\"14px\"\n >\n {t(\"FreeDaysLeft\", { count: trialDaysLeft })}\n </Text>\n );\n }\n \n return (",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

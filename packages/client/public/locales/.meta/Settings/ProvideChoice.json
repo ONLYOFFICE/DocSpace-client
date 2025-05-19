@@ -1,11 +1,22 @@
 {
   "key_path": "ProvideChoice",
+  "content": "Provide a choice (web or app)",
   "content_en_sha1_hash": "c9fd6c7fc15f2174a7e0860621d49b561ee899ac",
-  "created_at": "2025-05-14T14:04:26.470Z",
-  "updated_at": "2025-05-14T14:04:26.470Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:52.331Z",
+  "updated_at": "2025-05-19T21:56:08.386Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/configure-deep-link.tsx",
+      "line_number": 164,
+      "context": "orientation=\"vertical\"\n spacing=\"8px\"\n options={[\n {\n id: \"provide-a-choice\",\n label: t(\"ProvideChoice\"),\n value: 0,\n },\n {\n id: \"by-web\",\n label: t(\"OpenInWebOnly\"),",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

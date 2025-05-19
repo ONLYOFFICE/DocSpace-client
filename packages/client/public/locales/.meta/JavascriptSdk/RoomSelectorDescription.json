@@ -1,11 +1,28 @@
 {
   "key_path": "RoomSelectorDescription",
+  "content": "Embed a room selector to allow users to access any room from the list of the available ones. ",
   "content_en_sha1_hash": "a0805f766f94a0e3694b326697264720862a82a5",
-  "created_at": "2025-05-14T14:04:23.482Z",
-  "updated_at": "2025-05-14T14:04:23.482Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.635Z",
+  "updated_at": "2025-05-19T21:56:08.441Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
+      "line_number": 115,
+      "context": "image: theme.isBase ? ViewerImg : ViewerImgDark,\n handleOnClick: navigateToViewer,\n },\n {\n title: t(\"Common:RoomSelector\"),\n description: t(\"RoomSelectorDescription\"),\n image: theme.isBase ? RoomSelectorImg : RoomSelectorImgDark,\n handleOnClick: navigateToRoomSelector,\n },\n {\n title: t(\"Common:FileSelector\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
+      "line_number": 206,
+      "context": "</Frame>\n );\n \n return (\n <PresetWrapper\n description={t(\"RoomSelectorDescription\")}\n header={t(\"CreateSampleRoomSelector\")}\n >\n <Container>\n <PreviewBlock\n t={t}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

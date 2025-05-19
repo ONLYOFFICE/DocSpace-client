@@ -1,11 +1,28 @@
 {
   "key_path": "ClickButtonBelow",
+  "content": "If you'd like to log in using your email, please set your own password. <br /> Once ready, please click the button below.",
   "content_en_sha1_hash": "39efdaa8209b2d54904408defbd2496f9aae28d0",
-  "created_at": "2025-05-15T13:21:03.353Z",
-  "updated_at": "2025-05-15T13:21:03.353Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:50.039Z",
+  "updated_at": "2025-05-19T21:56:08.184Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/SocialAuthWelcomeDialog/index.tsx",
+      "line_number": 183,
+      "context": "<Text textAlign=\"center\" lineHeight=\"20px\" className=\"welcome-text\">\n {currentDeviceType === DeviceType.mobile ? (\n <Trans\n t={t}\n i18nKey=\"SocialAuthWelcomeDialog:ClickButtonBelow\"\n ns=\"SocialAuthWelcomeDialog\"\n components={{\n br: <span style={{ display: \"none\" }} />,\n }}\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/SocialAuthWelcomeDialog/index.tsx",
+      "line_number": 183,
+      "context": "<Text textAlign=\"center\" lineHeight=\"20px\" className=\"welcome-text\">\n {currentDeviceType === DeviceType.mobile ? (\n <Trans\n t={t}\n i18nKey=\"SocialAuthWelcomeDialog:ClickButtonBelow\"\n ns=\"SocialAuthWelcomeDialog\"\n components={{\n br: <span style={{ display: \"none\" }} />,\n }}\n />",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,10 +1,14 @@
 {
   "key_path": "Culture_uk-UA",
+  "content": "Українська (Україна)",
   "content_en_sha1_hash": "c86c06cc2da451508643ab5e3c6e5d3cb06899b7",
-  "created_at": "2025-05-14T14:04:15.590Z",
-  "updated_at": "2025-05-14T14:04:15.590Z",
-  "comment_text": "",
-  "comment_ai": false,
+  "created_at": "2025-05-19T21:30:44.226Z",
+  "updated_at": "2025-05-19T21:30:44.226Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
   "usage": [],
   "languages": {
     "en": {

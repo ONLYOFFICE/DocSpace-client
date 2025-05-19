@@ -1,11 +1,22 @@
 {
   "key_path": "ResetHeader",
+  "content": "Reset client secret",
   "content_en_sha1_hash": "0801d7f7175fdcf12e141a570e84a590edfa9dd1",
-  "created_at": "2025-05-14T14:04:24.146Z",
-  "updated_at": "2025-05-14T14:04:24.146Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.001Z",
+  "updated_at": "2025-05-19T21:56:08.498Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ResetDialog.tsx",
+      "line_number": 76,
+      "context": "isLoading={!ready}\n visible={isVisible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"ResetHeader\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Trans t={t} i18nKey=\"ResetDescription\" ns=\"OAuth\" />\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

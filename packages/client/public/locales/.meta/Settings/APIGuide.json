@@ -1,11 +1,22 @@
 {
   "key_path": "APIGuide",
+  "content": "API Guide",
   "content_en_sha1_hash": "95bf0e870e2f1145571690754754b56cb523c59b",
-  "created_at": "2025-05-14T14:04:24.854Z",
-  "updated_at": "2025-05-14T14:04:24.854Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:50.490Z",
+  "updated_at": "2025-05-19T21:56:08.426Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/index.tsx",
+      "line_number": 215,
+      "context": "color={currentColorScheme?.main?.accent}\n fontSize=\"13px\"\n fontWeight={600}\n onClick={() => window.open(apiKeysLink, \"_blank\")}\n >\n {t(\"Settings:APIGuide\")}\n </Link>\n </div>\n <div>\n {isMobile() ? (\n <StyledMobileButton>",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

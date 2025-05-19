@@ -1,11 +1,22 @@
 {
   "key_path": "Quotas",
+  "content": "Quotas",
   "content_en_sha1_hash": "34ed58657019e0ff061ea2eef787a27a97813fe2",
-  "created_at": "2025-05-14T14:04:26.492Z",
-  "updated_at": "2025-05-14T14:04:26.492Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:52.354Z",
+  "updated_at": "2025-05-19T21:56:08.609Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/Quotas.js",
+      "line_number": 40,
+      "context": "import { globalColors } from \"@docspace/shared/themes\";\n \n import { StyledBaseQuotaComponent, StyledMainTitle } from \"./StyledComponent\";\n import { QuotaPerRoomComponentSection } from \"./sub-components/QuotaPerRoom\";\n import { QuotaPerUserComponentSection } from \"./sub-components/QuotaPerUser\";\n import MobileQuotasComponent from \"./sub-components/MobileQuotas\";\n \n const QuotaPerItemsComponent = ({ isStatisticsAvailable }) => {\n if (isMobile())\n return <MobileQuotasComponent isDisabled={!isStatisticsAvailable} />;",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

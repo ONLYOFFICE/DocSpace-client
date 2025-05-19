@@ -1,11 +1,22 @@
 {
   "key_path": "BreakpointMobileWarningText",
+  "content": "This section is unavailable in mobile version",
   "content_en_sha1_hash": "85213c9da217597acc63825e72d40de59cb758e1",
-  "created_at": "2025-05-14T14:04:25.130Z",
-  "updated_at": "2025-05-14T14:04:25.130Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:50.774Z",
+  "updated_at": "2025-05-19T21:56:07.986Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/BreakpointWarning/BreakpointWarning.js",
+      "line_number": 46,
+      "context": "isMobileUnavailableOnly,\n }) => {\n const textHeader = isSmallWindow\n ? t(\"BreakpointSmallText\")\n : isMobileUnavailableOnly\n ? t(\"BreakpointMobileWarningText\")\n : t(\"BreakpointWarningText\");\n \n const textPrompt = isSmallWindow ? (\n t(\"BreakpointSmallTextPrompt\")\n ) : isMobileUnavailableOnly ? (",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

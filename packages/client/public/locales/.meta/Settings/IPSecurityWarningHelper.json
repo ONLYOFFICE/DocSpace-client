@@ -1,11 +1,22 @@
 {
   "key_path": "IPSecurityWarningHelper",
+  "content": "First, you need to specify your current IP or the IP range your current IP address belongs to, otherwise your space access will be blocked right after you save the settings. The space owner will have the space access from any IP address.",
   "content_en_sha1_hash": "25490f5125cf44c29790cae04b3c1e1a30e87500",
-  "created_at": "2025-05-14T14:04:25.992Z",
-  "updated_at": "2025-05-14T14:04:25.992Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:51.742Z",
+  "updated_at": "2025-05-19T21:56:08.578Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
+      "line_number": 303,
+      "context": "<>\n <Text fontSize=\"16px\" fontWeight=\"700\" className=\"warning-text\">\n {t(\"Common:Warning\")}\n </Text>\n <Text className=\"ip-security_warning\">\n {t(\"IPSecurityWarningHelper\")}\n </Text>\n </>\n ) : null}\n \n <SaveCancelButtons",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

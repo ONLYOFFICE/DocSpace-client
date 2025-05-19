@@ -1,11 +1,22 @@
 {
   "key_path": "RoomGroupRemove",
+  "content": "Group removed",
   "content_en_sha1_hash": "587c704467c3ef25e9a2b18a68181777f6352ac6",
-  "created_at": "2025-05-14T14:04:23.137Z",
-  "updated_at": "2025-05-14T14:04:23.137Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.925Z",
+  "updated_at": "2025-05-19T21:56:08.270Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
+      "line_number": 237,
+      "context": "});\n return t(\"InfoPanel:RoomGroupAdded\");\n case \"RoomUpdateAccessForGroup\":\n return t(\"InfoPanel:RoomUpdateAccess\");\n case \"RoomGroupRemove\":\n return t(\"InfoPanel:RoomGroupRemove\");\n case \"RoomWatermarkSet\":\n return t(\"InfoPanel:RoomWatermarkSet\");\n case \"RoomWatermarkDisabled\":\n return t(\"InfoPanel:RoomWatermarkDisabled\");\n case \"RoomIndexingEnabled\":",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

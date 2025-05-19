@@ -1,11 +1,22 @@
 {
   "key_path": "MainHeaderSelectAll",
+  "content": "Select all",
   "content_en_sha1_hash": "913afff1faf79724f1f685fe8b1e36a729123ca2",
-  "created_at": "2025-05-14T14:04:17.658Z",
-  "updated_at": "2025-05-14T14:04:17.658Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:46.332Z",
+  "updated_at": "2025-05-19T21:56:08.776Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/table/TableGroupMenu.tsx",
+      "line_number": 96,
+      "context": "id=\"menu-checkbox_selected-all-file\"\n className=\"table-container_group-menu-checkbox\"\n onChange={onCheckboxChange}\n isChecked={isChecked}\n isIndeterminate={isIndeterminate}\n title={t(\"Common:MainHeaderSelectAll\")}\n />\n )}\n \n {withComboBox ? (\n <ComboBox",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

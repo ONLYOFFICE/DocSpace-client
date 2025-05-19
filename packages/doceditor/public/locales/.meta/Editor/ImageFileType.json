@@ -1,11 +1,22 @@
 {
   "key_path": "ImageFileType",
+  "content": "images",
   "content_en_sha1_hash": "19f49d852660fe0a079cbf95c3efb34ba88de911",
-  "created_at": "2025-05-14T14:04:28.095Z",
-  "updated_at": "2025-05-14T14:04:28.095Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.130Z",
+  "updated_at": "2025-05-19T21:56:08.709Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/doceditor/src/components/SelectFileDialog.tsx",
+      "line_number": 59,
+      "context": "const getFileTypeTranslation = React.useCallback(() => {\n switch (fileTypeDetection.filterParam) {\n case FilesSelectorFilterTypes.XLSX:\n return t?.(\"Editor:MailMergeFileType\") ?? \"\";\n case FilesSelectorFilterTypes.IMG:\n return t?.(\"Editor:ImageFileType\") ?? \"\";\n case FilesSelectorFilterTypes.DOCX:\n return t?.(\"Editor:DocumentsFileType\") ?? \"\";\n default:\n return \"\";\n }",
+      "module": "/packages/doceditor"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

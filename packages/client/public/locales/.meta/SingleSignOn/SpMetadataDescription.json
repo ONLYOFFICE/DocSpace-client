@@ -1,11 +1,22 @@
 {
   "key_path": "SpMetadataDescription",
+  "content": "Access Service Provider metadata to add {{organizationName}} {{productName}} as a trusted Service Provider in your IdP account.",
   "content_en_sha1_hash": "098786ad0d536a8db1b1460c33f375fa8fd80406",
-  "created_at": "2025-05-14T14:04:27.627Z",
-  "updated_at": "2025-05-14T14:04:27.627Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:50.169Z",
+  "updated_at": "2025-05-19T21:56:08.551Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/MobileView.js",
+      "line_number": 65,
+      "context": "/>\n <MobileCategoryWrapper\n title={t(\"SpMetadata\", {\n organizationName: logoText,\n })}\n subtitle={t(\"SpMetadataDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n url=\"/portal-settings/integration/sso/metadata\"\n withPaidBadge={!isSSOAvailable}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

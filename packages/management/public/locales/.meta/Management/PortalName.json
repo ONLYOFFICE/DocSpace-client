@@ -1,11 +1,28 @@
 {
   "key_path": "PortalName",
+  "content": "{{productName}} name",
   "content_en_sha1_hash": "0f1403b43faa94c0dc6b13a5e45c10558ce66b12",
-  "created_at": "2025-05-14T14:04:28.357Z",
-  "updated_at": "2025-05-14T14:04:28.357Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.465Z",
+  "updated_at": "2025-05-19T21:56:08.812Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/management/src/categories/spaces/sub-components/ConfigurationSection.tsx",
+      "line_number": 40,
+      "context": "InputSize,\n InputType,\n } from \"@docspace/shared/components/text-input\";\n import { Text } from \"@docspace/shared/components/text\";\n import { toastr } from \"@docspace/shared/components/toast\";\n import { parseDomain, validatePortalName } from \"@docspace/shared/utils/common\";\n \n import { TranslationType } from \"SRC_DIR/types/spaces\";\n import { useStore } from \"SRC_DIR/store\";\n import { ConfigurationWrapper } from \"../StyledSpaces\";",
+      "module": "/packages/management"
+    },
+    {
+      "file_path": "/packages/management/src/categories/spaces/sub-components/dialogs/CreatePortalDialog/index.tsx",
+      "line_number": 45,
+      "context": "TextInput,\n InputSize,\n InputType,\n } from \"@docspace/shared/components/text-input\";\n import { Checkbox } from \"@docspace/shared/components/checkbox\";\n import { validatePortalName } from \"@docspace/shared/utils/common\";\n \n import { useStore } from \"SRC_DIR/store\";\n \n const StyledBodyContent = styled.div`\n display: contents;",
+      "module": "/packages/management"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

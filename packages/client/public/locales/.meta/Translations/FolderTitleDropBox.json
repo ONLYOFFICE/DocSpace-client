@@ -1,11 +1,22 @@
 {
   "key_path": "FolderTitleDropBox",
+  "content": "Dropbox directory",
   "content_en_sha1_hash": "1a991dfb32e8cd8808fd95385917355bc689cb86",
-  "created_at": "2025-05-14T14:04:27.704Z",
-  "updated_at": "2025-05-14T14:04:27.704Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:49.974Z",
+  "updated_at": "2025-05-19T21:56:08.228Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/filesUtils.js",
+      "line_number": 100,
+      "context": "case \"BoxNet\":\n return t(\"Translations:FolderTitleBoxNet\");\n \n case \"DropBox\":\n case \"DropboxV2\":\n return t(\"Translations:FolderTitleDropBox\");\n \n case \"DocuSign\":\n return t(\"Translations:FolderTitleDocuSign\");\n \n case \"Google\":",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

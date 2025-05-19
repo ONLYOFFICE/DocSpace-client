@@ -1,11 +1,22 @@
 {
   "key_path": "ResetApplicationDescription",
+  "content": "Authenticator application configuration will be reset.",
   "content_en_sha1_hash": "ffbed1b3d21982dae035e132087888bf52daaf37",
-  "created_at": "2025-05-14T14:04:24.605Z",
-  "updated_at": "2025-05-14T14:04:24.605Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.322Z",
+  "updated_at": "2025-05-19T21:56:08.173Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ResetApplicationDialog/index.js",
+      "line_number": 53,
+      "context": "return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"ResetApplicationTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"ResetApplicationDescription\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"ResetSendBtn\"\n label={t(\"Common:ResetApplication\")}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

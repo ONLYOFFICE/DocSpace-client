@@ -1,11 +1,22 @@
 {
   "key_path": "ServiceUrl",
+  "content": "Service URL",
   "content_en_sha1_hash": "077225837f3d213b1dc433defc47c2a4e06d2b94",
-  "created_at": "2025-05-14T14:04:26.878Z",
-  "updated_at": "2025-05-14T14:04:26.878Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:52.629Z",
+  "updated_at": "2025-05-19T21:56:08.417Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/consumer-storage-settings/AmazonSettings.js",
+      "line_number": 105,
+      "context": "this.forcePathStylePlaceholder = t(\"ForcePathStyle\");\n \n this.regionPlaceholder =\n selectedStorage && selectedStorage.properties[2]?.title;\n \n this.serviceUrlPlaceholder = t(\"ServiceUrl\");\n this.SSEPlaceholder = t(\"ServerSideEncryptionMethod\");\n this.useHttpPlaceholder = t(\"UseHttp\");\n \n this.sse_kms = \"SSE-KMS\";\n this.sse_s3 = \"SSE-S3\";",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

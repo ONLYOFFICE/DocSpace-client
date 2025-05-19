@@ -1,11 +1,22 @@
 {
   "key_path": "TenantCustomQuotaDescription",
+  "content": "You can remove the unnecessary files or change quota in the <1>Storage management settings.</1>",
   "content_en_sha1_hash": "d0b6e663cdf5c62e3b4172bf066004046767f146",
-  "created_at": "2025-05-14T14:04:23.918Z",
-  "updated_at": "2025-05-14T14:04:23.918Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.143Z",
+  "updated_at": "2025-05-19T21:56:08.024Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
+      "line_number": 59,
+      "context": "const getTenantCustomQuota = () => {\n if (!isAdmin) return t(\"RemoveFilesOrContactToUpgradeQuota\");\n \n return (\n <Trans i18nKey=\"TenantCustomQuotaDescription\" t={t}>\n You can remove the unnecessary files or change quota in the\n <Link\n fontSize=\"12px\"\n fontWeight=\"400\"\n color={currentColorScheme?.main?.accent}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

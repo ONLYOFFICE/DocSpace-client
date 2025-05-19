@@ -1,11 +1,22 @@
 {
   "key_path": "ConvertedFileDestination",
+  "content": "The file copy will be created in the <strong>{{folderTitle}}</strong> folder.",
   "content_en_sha1_hash": "3273fcf8e47ee80db4b47756d8934bf476806321",
-  "created_at": "2025-05-14T14:04:21.091Z",
-  "updated_at": "2025-05-14T14:04:21.091Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.881Z",
+  "updated_at": "2025-05-19T21:56:08.101Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ConvertDialog/index.js",
+      "line_number": 208,
+      "context": "storeOriginalFiles ? \"file-destination_visible\" : \"\"\n }`}\n >\n <Trans\n t={t}\n i18nKey=\"ConvertedFileDestination\"\n ns=\"ConvertDialog\"\n >\n The file copy will be created in the\n {{ folderTitle: rootFolderTitle }} folder\n </Trans>",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,22 @@
 {
   "key_path": "NewMasterForm",
+  "content": "New form template",
   "content_en_sha1_hash": "dd33fb07a6cc6e1d3265f06284317a86321d5d53",
-  "created_at": "2025-05-14T14:04:17.995Z",
-  "updated_at": "2025-05-14T14:04:17.995Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:46.754Z",
+  "updated_at": "2025-05-19T21:56:08.717Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/doceditor/src/hooks/useEditorEvents.ts",
+      "line_number": 340,
+      "context": "break;\n case \"pptx\":\n fileName = t(\"Common:NewPresentation\");\n break;\n case \"docxf\":\n fileName = t(\"Common:NewMasterForm\");\n break;\n default:\n break;\n }",
+      "module": "/packages/doceditor"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

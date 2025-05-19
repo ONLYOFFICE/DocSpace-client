@@ -1,11 +1,22 @@
 {
   "key_path": "MetadataLoadError",
+  "content": "Metadata file not transferred",
   "content_en_sha1_hash": "cda5ccce62dbf3d4f7635fc868380764681ac8cb",
-  "created_at": "2025-05-14T14:04:27.574Z",
-  "updated_at": "2025-05-14T14:04:27.574Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:50.110Z",
+  "updated_at": "2025-05-19T21:56:08.704Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/SsoFormStore.js",
+      "line_number": 342,
+      "context": "this.setFieldsFromMetaData(response.data.meta);\n this.hideErrors();\n this.isLoadingXml = false;\n } catch (err) {\n this.isLoadingXml = false;\n toastr.error(t(\"MetadataLoadError\"));\n console.error(err);\n }\n };\n \n uploadXml = async (file) => {",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

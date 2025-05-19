@@ -1,11 +1,22 @@
 {
   "key_path": "LdapConnectionTypeSSLTooltip",
+  "content": "You can make LDAP traffic confidential and secure by using Secure Sockets Layer (SSL)",
   "content_en_sha1_hash": "26f97bbcf06293a2a89bf41d8970fab3287b75f9",
-  "created_at": "2025-05-14T14:04:23.589Z",
-  "updated_at": "2025-05-14T14:04:23.589Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.189Z",
+  "updated_at": "2025-05-19T21:56:08.533Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/Checkboxes.js",
+      "line_number": 113,
+      "context": "isChecked={isSslEnabled}\n onChange={onChangeSsl}\n isDisabled={!isLdapEnabled || isUIDisabled}\n label={t(\"LdapConnectionTypeSSL\")}\n />\n <HelpButton tooltipContent={t(\"LdapConnectionTypeSSLTooltip\")} />\n </div>\n </div>\n </div>\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

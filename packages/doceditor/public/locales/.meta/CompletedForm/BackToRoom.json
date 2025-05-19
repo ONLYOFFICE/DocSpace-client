@@ -1,11 +1,22 @@
 {
   "key_path": "BackToRoom",
+  "content": "Back to room",
   "content_en_sha1_hash": "05b5ad942bc5883b0e92e79a35cf1ad9a6740b9d",
-  "created_at": "2025-05-14T14:04:28.030Z",
-  "updated_at": "2025-05-14T14:04:28.030Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.150Z",
+  "updated_at": "2025-05-19T21:56:08.712Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/doceditor/src/components/completed-form/CompletedForm.tsx",
+      "line_number": 221,
+      "context": "/>\n {(!isShareFile || isRoomMember) && !isSDK && (\n <Button\n scale\n size={ButtonSize.medium}\n label={t(\"CompletedForm:BackToRoom\")}\n onClick={handleBackToRoom}\n />\n )}\n </ButtonWrapper>\n <Link",
+      "module": "/packages/doceditor"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,22 @@
 {
   "key_path": "ConsentSubHeader",
+  "content": "<1>{{nameApp}}</1> would like the ability to access the following data in <strong>your {{productName}} account</strong>:",
   "content_en_sha1_hash": "c957267e1716ff361bf4fba5521f23172333de4b",
-  "created_at": "2025-05-14T14:04:28.184Z",
-  "updated_at": "2025-05-14T14:04:28.184Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.325Z",
+  "updated_at": "2025-05-19T21:56:08.731Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/components/ConsentInfo.tsx",
+      "line_number": 81,
+      "context": "lineHeight=\"22px\"\n >\n {isConsentScreen ? (\n <Trans\n t={t}\n i18nKey=\"ConsentSubHeader\"\n ns=\"Consent\"\n values={{ nameApp: name, productName: t(\"Common:ProductName\") }}\n components={{\n 1: (\n <Link",
+      "module": "/packages/login"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

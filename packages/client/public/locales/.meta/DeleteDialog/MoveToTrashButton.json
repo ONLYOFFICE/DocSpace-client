@@ -1,11 +1,22 @@
 {
   "key_path": "MoveToTrashButton",
+  "content": "Move to Trash",
   "content_en_sha1_hash": "dffd3b9a8af6c5f81130b3b3e75c9ab26f670bfa",
-  "created_at": "2025-05-14T14:04:21.278Z",
-  "updated_at": "2025-05-14T14:04:21.278Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.718Z",
+  "updated_at": "2025-05-19T21:56:08.140Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
+      "line_number": 282,
+      "context": "? t(\"EmptyTrashDialog:DeleteForeverButton\")\n : isPrivacyFolder || selection[0]?.providerKey\n ? t(\"Common:OKButton\")\n : unsubscribe\n ? t(\"UnsubscribeButton\")\n : t(\"MoveToTrashButton\");\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{title}</ModalDialog.Header>\n <ModalDialog.Body>",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

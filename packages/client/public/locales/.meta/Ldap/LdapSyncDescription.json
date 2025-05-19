@@ -1,11 +1,22 @@
 {
   "key_path": "LdapSyncDescription",
+  "content": "Sync LDAP data is a way to synchronize data changes between your portal and the LDAP server. Enable the ‘Auto Sync’ option and set a time period to automatically update the information.",
   "content_en_sha1_hash": "d74da14d2a38d2e42dac8606b14ba3b7e3528973",
-  "created_at": "2025-05-14T14:04:23.836Z",
-  "updated_at": "2025-05-14T14:04:23.836Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.313Z",
+  "updated_at": "2025-05-19T21:56:08.540Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/SyncContainer.js",
+      "line_number": 111,
+      "context": "fontWeight={400}\n lineHeight=\"16px\"\n noSelect\n className=\"settings_unavailable sync-description\"\n >\n {t(\"LdapSyncDescription\")}\n </Text>\n \n <Button\n tabIndex={-1}\n className=\"manual-sync-button\"",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

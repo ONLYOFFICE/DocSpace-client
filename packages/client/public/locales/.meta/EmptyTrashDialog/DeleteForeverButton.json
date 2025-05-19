@@ -1,11 +1,34 @@
 {
   "key_path": "DeleteForeverButton",
+  "content": "Delete forever",
   "content_en_sha1_hash": "8debd8a189280c0693541508343266395a288eae",
-  "created_at": "2025-05-14T14:04:21.374Z",
-  "updated_at": "2025-05-14T14:04:21.374Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.561Z",
+  "updated_at": "2025-05-19T21:56:08.140Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
+      "line_number": 277,
+      "context": "const noteText = unsubscribe ? t(\"UnsubscribeNote\") : moveToTrashNoteText();\n \n const accessButtonLabel = isTemplate\n ? t(\"Common:Delete\")\n : isRoomDelete || isRecycleBinFolder\n ? t(\"EmptyTrashDialog:DeleteForeverButton\")\n : isPrivacyFolder || selection[0]?.providerKey\n ? t(\"Common:OKButton\")\n : unsubscribe\n ? t(\"UnsubscribeButton\")\n : t(\"MoveToTrashButton\");",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/EmptyTrashDialog/index.js",
+      "line_number": 109,
+      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"empty-archive_delete-submit\"\n key=\"OkButton\"\n label={t(\"DeleteForeverButton\")}\n size=\"normal\"\n primary\n onClick={onEmptyTrash}\n isLoading={isLoading}\n scale",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/DeleteWebhookDialog.js",
+      "line_number": 83,
+      "context": "<ModalDialog.Footer>\n <Footer>\n <Button\n id=\"delete-forever-button\"\n label={t(\"EmptyTrashDialog:DeleteForeverButton\")}\n size=\"normal\"\n primary\n onClick={handleDeleteClick}\n />\n <Button",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

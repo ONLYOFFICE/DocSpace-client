@@ -1,11 +1,22 @@
 {
   "key_path": "EditColorScheme",
+  "content": "Edit color scheme",
   "content_en_sha1_hash": "e4b8ec853d190dec813a72518343f018e0a210e4",
-  "created_at": "2025-05-14T14:04:25.728Z",
-  "updated_at": "2025-05-14T14:04:25.728Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:51.466Z",
+  "updated_at": "2025-05-19T21:56:08.392Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
+      "line_number": 83,
+      "context": "const defaultAppliedColorButtons = currentColorScheme.main.buttons;\n \n const isMobileView = currentDeviceType === DeviceType.mobile;\n \n const headerAddTheme = t(\"Settings:NewColorScheme\");\n const headerEditTheme = t(\"Settings:EditColorScheme\");\n \n const checkImgHover = (\n <ReactSVG className=\"check-hover\" src={CheckWhiteSvgUrl} />\n );",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

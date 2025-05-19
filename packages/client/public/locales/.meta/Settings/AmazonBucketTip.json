@@ -1,11 +1,22 @@
 {
   "key_path": "AmazonBucketTip",
+  "content": "Enter the unique name of the Amazon S3 bucket where you want to store your backups.",
   "content_en_sha1_hash": "984ca1a8ea33fadebedbf5d6ea2b3e68e52ecefe",
-  "created_at": "2025-05-14T14:04:24.788Z",
-  "updated_at": "2025-05-14T14:04:24.788Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:50.419Z",
+  "updated_at": "2025-05-19T21:56:08.418Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/consumer-storage-settings/AmazonSettings.js",
+      "line_number": 317,
+      "context": "return (\n <>\n <StyledBody>\n <div className=\"backup_storage-tooltip\">\n <Text isBold>{this.bucketPlaceholder}</Text>\n {renderTooltip(t(\"AmazonBucketTip\"), \"bucket-tooltip\")}\n </div>\n <TextInput\n id=\"bucket-input\"\n name={bucket}\n className=\"backup_text-input\"",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

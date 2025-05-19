@@ -1,11 +1,22 @@
 {
   "key_path": "RoomsQuotaLimit",
+  "content": "{{roomsQuotaLimit}} for rooms",
   "content_en_sha1_hash": "ee9270f5c126fdf6af89661d474505448542d564",
-  "created_at": "2025-05-14T14:04:26.687Z",
-  "updated_at": "2025-05-14T14:04:26.687Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:52.473Z",
+  "updated_at": "2025-05-19T21:56:08.186Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/WarningQuotaDialog/WarningQuotaDialog.tsx",
+      "line_number": 54,
+      "context": "const getWarningDescription = () => {\n const quotaLimits = [];\n \n if (isDefaultRoomsQuotaSet) {\n quotaLimits.push(\n t(\"Settings:RoomsQuotaLimit\", {\n roomsQuotaLimit: getConvertedSize(t, defaultRoomsQuota),\n }),\n );\n }\n if (isDefaultUsersQuotaSet) {",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

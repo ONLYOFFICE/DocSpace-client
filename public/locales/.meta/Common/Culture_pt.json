@@ -1,10 +1,14 @@
 {
   "key_path": "Culture_pt",
+  "content": "Português (Portugal)",
   "content_en_sha1_hash": "ef3617bad9b83a60e00bc79498f76a9ffea2f593",
-  "created_at": "2025-05-14T14:04:15.498Z",
-  "updated_at": "2025-05-14T14:04:15.498Z",
-  "comment_text": "",
-  "comment_ai": false,
+  "created_at": "2025-05-19T21:30:44.135Z",
+  "updated_at": "2025-05-19T21:30:44.135Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
   "usage": [],
   "languages": {
     "en": {

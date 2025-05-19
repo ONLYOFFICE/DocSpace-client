@@ -1,11 +1,28 @@
 {
   "key_path": "AboutHeader",
+  "content": "About this program",
   "content_en_sha1_hash": "56fb7336f231f3007d1a564b2c67ede83691a9e3",
-  "created_at": "2025-05-14T14:04:20.902Z",
-  "updated_at": "2025-05-14T14:04:20.902Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.071Z",
+  "updated_at": "2025-05-19T21:56:08.240Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/About/AboutDialog.js",
+      "line_number": 45,
+      "context": "visible={visible}\n onClose={onClose}\n displayType=\"modal\"\n isLarge\n >\n <ModalDialog.Header>{t(\"AboutHeader\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBodyContent>\n <AboutContent\n buildVersionInfo={buildVersionInfo}\n previewData={previewData}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/About/AboutHeader.js",
+      "line_number": 57,
+      "context": "theme.interfaceDirection === \"rtl\" && \"transform: scaleX(-1);\"}\n }\n }\n `;\n \n const AboutHeader = (props) => {\n const { t } = props;\n \n const navigate = useNavigate();\n \n const onBack = () => {",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

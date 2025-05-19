@@ -1,11 +1,22 @@
 {
   "key_path": "HotkeysZoomOut",
+  "content": "Zoom out",
   "content_en_sha1_hash": "a4ae4b24a1f5369c2bff61abdbc221170e4b27d8",
-  "created_at": "2025-05-14T14:04:22.965Z",
-  "updated_at": "2025-05-14T14:04:22.965Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.105Z",
+  "updated_at": "2025-05-19T21:56:08.208Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/HotkeysPanel/PreviewActionsBlock.js",
+      "line_number": 54,
+      "context": "<Text {...keyTextStyles}>+ {t(\"Common:Or\")} =</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysZoomOut\")}</Text>\n <Text {...keyTextStyles}>-</Text>\n </>\n </Row>\n </>\n );",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

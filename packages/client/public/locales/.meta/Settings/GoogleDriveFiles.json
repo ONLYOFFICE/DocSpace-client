@@ -1,11 +1,22 @@
 {
   "key_path": "GoogleDriveFiles",
+  "content": "Google Drive's Files",
   "content_en_sha1_hash": "03293463a6f92221c71c20964b6eac4df743685f",
-  "created_at": "2025-05-14T14:04:25.839Z",
-  "updated_at": "2025-05-14T14:04:25.839Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:51.588Z",
+  "updated_at": "2025-05-19T21:56:08.399Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
+      "line_number": 136,
+      "context": "usersExportDetails={{\n name: t(\"Common:Contacts\"),\n icon: PeopleIcon,\n }}\n personalExportDetails={{\n name: t(\"Settings:GoogleDriveFiles\"),\n }}\n sharedFilesExportDetails={{\n name: t(\"Settings:SharedFiles\"),\n }}\n sharedFoldersExportDetails={{",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

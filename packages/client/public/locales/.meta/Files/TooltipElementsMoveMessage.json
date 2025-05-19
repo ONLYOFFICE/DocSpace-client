@@ -1,11 +1,22 @@
 {
   "key_path": "TooltipElementsMoveMessage",
+  "content": "Move {{element}} elements",
   "content_en_sha1_hash": "f9236f0310f2736deb1485bc3643886987b72e2a",
-  "created_at": "2025-05-14T14:04:22.692Z",
-  "updated_at": "2025-05-14T14:04:22.692Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.261Z",
+  "updated_at": "2025-05-19T21:56:07.988Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/DragTooltip/DragTooltip.js",
+      "line_number": 130,
+      "context": "? isSingleItem\n ? t(\"TooltipElementCopyMessage\", { element: filesCount })\n : t(\"TooltipElementsCopyMessage\", { element: filesCount })\n : isSingleItem\n ? renderFileMoveTooltip()\n : t(\"TooltipElementsMoveMessage\", { element: filesCount })\n : t(\"\");\n \n return <StyledTooltip ref={tooltipRef}>{tooltipLabel}</StyledTooltip>;\n };",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,34 @@
 {
   "key_path": "MoveToArchive",
+  "content": "Move to archive",
   "content_en_sha1_hash": "bc085e822ae67c9e26aba6df62730c436e6c09b2",
-  "created_at": "2025-05-14T14:04:22.306Z",
-  "updated_at": "2025-05-14T14:04:22.306Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.866Z",
+  "updated_at": "2025-05-19T21:56:08.693Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2162,
+      "context": "disabled: false,\n },\n {\n id: \"option_archive-room\",\n key: \"archive-room\",\n label: t(\"MoveToArchive\"),\n icon: RoomArchiveSvgUrl,\n onClick: (e) => this.onClickArchive(e),\n disabled: false,\n \"data-action\": \"archive\",\n action: \"archive\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2162,
+      "context": "disabled: false,\n },\n {\n id: \"option_archive-room\",\n key: \"archive-room\",\n label: t(\"MoveToArchive\"),\n icon: RoomArchiveSvgUrl,\n onClick: (e) => this.onClickArchive(e),\n disabled: false,\n \"data-action\": \"archive\",\n action: \"archive\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 2271,
+      "context": "case \"archive\":\n if (!this.isAvailableOption(\"archive\")) return null;\n return {\n id: \"menu-archive\",\n key: \"archive\",\n label: t(\"MoveToArchive\"),\n iconUrl: RoomArchiveSvgUrl,\n onClick: () => this.archiveRooms(\"archive\"),\n disabled: false,\n };\n case \"unarchive\":",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

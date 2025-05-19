@@ -1,11 +1,22 @@
 {
   "key_path": "MobilePhoneChangeTitle",
+  "content": "Change mobile phone",
   "content_en_sha1_hash": "e7bdb793e871f330d24dd0b1c18fcb0e91b3e5c2",
-  "created_at": "2025-05-14T14:04:20.972Z",
-  "updated_at": "2025-05-14T14:04:20.972Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:57.009Z",
+  "updated_at": "2025-05-19T21:56:08.071Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangePhoneDialog/index.js",
+      "line_number": 63,
+      "context": "const { t, tReady, visible, onClose } = this.props;\n const { isRequestRunning } = this.state;\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"MobilePhoneChangeTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"MobilePhoneEraseDescription\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

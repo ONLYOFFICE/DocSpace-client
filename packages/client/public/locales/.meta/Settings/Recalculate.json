@@ -1,11 +1,22 @@
 {
   "key_path": "Recalculate",
+  "content": "Recalculate",
   "content_en_sha1_hash": "3298e1d39481606de3841cfddc8d851a3e8fa018",
-  "created_at": "2025-05-14T14:04:26.507Z",
-  "updated_at": "2025-05-14T14:04:26.507Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:52.371Z",
+  "updated_at": "2025-05-19T21:56:08.664Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/RecalculateButton.js",
+      "line_number": 37,
+      "context": "import { toastr } from \"@docspace/shared/components/toast\";\n \n import { Text } from \"@docspace/shared/components/text\";\n import { Button } from \"@docspace/shared/components/button\";\n \n const RecalculateButton = (props) => {\n const { t } = useTranslation(\"Settings\");\n \n const {\n isRecalculating,\n setIsRecalculating,",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

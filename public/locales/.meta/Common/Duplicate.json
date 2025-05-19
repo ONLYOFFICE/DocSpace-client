@@ -1,11 +1,46 @@
 {
   "key_path": "Duplicate",
+  "content": "Duplicate",
   "content_en_sha1_hash": "972d57379db3e5be76d4ead709fef1ad71ff03d6",
-  "created_at": "2025-05-14T14:04:16.008Z",
-  "updated_at": "2025-05-14T14:04:16.008Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:44.727Z",
+  "updated_at": "2025-05-19T21:56:08.687Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 1629,
+      "context": "disabled: false,\n },\n {\n id: \"option_create-duplicate\",\n key: \"duplicate\",\n label: t(\"Common:Duplicate\"),\n icon: DuplicateReactSvgUrl,\n onClick: () => this.onDuplicate(item, t),\n disabled: false,\n },\n ],",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 1629,
+      "context": "disabled: false,\n },\n {\n id: \"option_create-duplicate\",\n key: \"duplicate\",\n label: t(\"Common:Duplicate\"),\n icon: DuplicateReactSvgUrl,\n onClick: () => this.onDuplicate(item, t),\n disabled: false,\n },\n ],",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 1629,
+      "context": "disabled: false,\n },\n {\n id: \"option_create-duplicate\",\n key: \"duplicate\",\n label: t(\"Common:Duplicate\"),\n icon: DuplicateReactSvgUrl,\n onClick: () => this.onDuplicate(item, t),\n disabled: false,\n },\n ],",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",
+      "line_number": 99,
+      "context": "disabled: !item.security.Copy,\n },\n {\n id: \"option_create-copy\",\n key: \"copy\",\n label: t(\"Common:Duplicate\"),\n icon: DuplicateReactSvgUrl,\n onClick: () => funcs.onDuplicate?.(item, t),\n disabled: !item.security.Duplicate,\n },\n {",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",
+      "line_number": 99,
+      "context": "disabled: !item.security.Copy,\n },\n {\n id: \"option_create-copy\",\n key: \"copy\",\n label: t(\"Common:Duplicate\"),\n icon: DuplicateReactSvgUrl,\n onClick: () => funcs.onDuplicate?.(item, t),\n disabled: !item.security.Duplicate,\n },\n {",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

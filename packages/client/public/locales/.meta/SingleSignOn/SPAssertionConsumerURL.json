@@ -1,11 +1,22 @@
 {
   "key_path": "SPAssertionConsumerURL",
+  "content": "SP Assertion Consumer URL (support POST and Redirect binding)",
   "content_en_sha1_hash": "2b8529e9db8bb8d718ee9270222543091dfae4c0",
-  "created_at": "2025-05-14T14:04:27.608Z",
-  "updated_at": "2025-05-14T14:04:27.608Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:50.149Z",
+  "updated_at": "2025-05-19T21:56:08.551Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/ProviderMetadata.js",
+      "line_number": 89,
+      "context": "tooltipContent={<Text fontSize=\"12px\">{t(\"SPEntityIdTooltip\")}</Text>}\n tooltipClass=\"sp-entity-id-tooltip icon-button\"\n />\n \n <MetadataUrlField\n labelText={t(\"SPAssertionConsumerURL\")}\n name=\"spAssertionConsumerUrl\"\n placeholder={`${url}/sso/acs`}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"SPAssertionConsumerURLTooltip\")}</Text>\n }",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

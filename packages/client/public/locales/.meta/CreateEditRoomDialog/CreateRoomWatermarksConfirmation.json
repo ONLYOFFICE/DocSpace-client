@@ -1,11 +1,22 @@
 {
   "key_path": "CreateRoomWatermarksConfirmation",
+  "content": "You have not set a watermark to be applied to documents in this room. You can always add a watermark in the room editing settings. Continue without a watermark?",
   "content_en_sha1_hash": "80a70ccecba5b9a550d241c2d43109463c002f3e",
-  "created_at": "2025-05-14T14:04:21.137Z",
-  "updated_at": "2025-05-14T14:04:21.137Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.788Z",
+  "updated_at": "2025-05-19T21:56:08.126Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateRoomConfirmDialog/index.js",
+      "line_number": 52,
+      "context": "onClose();\n };\n \n const bodyText =\n selectedRoomType === RoomsType.VirtualDataRoom\n ? t(\"CreateEditRoomDialog:CreateRoomWatermarksConfirmation\")\n : t(\"CreateEditRoomDialog:CreateRoomConfirmation\");\n \n return (\n <ModalDialog\n visible={visible || confirmDialogIsLoading}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

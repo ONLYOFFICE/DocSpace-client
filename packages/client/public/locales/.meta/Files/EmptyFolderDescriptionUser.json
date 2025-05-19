@@ -1,11 +1,22 @@
 {
   "key_path": "EmptyFolderDescriptionUser",
+  "content": "Files and folders uploaded by admins will appear here.",
   "content_en_sha1_hash": "0767ecbe60b7c00919c415b7ad8511ac67cac67e",
-  "created_at": "2025-05-14T14:04:21.988Z",
-  "updated_at": "2025-05-14T14:04:21.988Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.546Z",
+  "updated_at": "2025-05-19T21:56:07.991Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyContainer.helper.ts",
+      "line_number": 102,
+      "context": "const translateDescriptionKey: Record<EmptyScreenTypeEnum, string> = {\n [EmptyScreenTypeEnum.Done]: t(\"EmptyFormFolderDoneDescriptionText\"),\n [EmptyScreenTypeEnum.InProgress]: t(\n \"EmptyFormFolderProgressDescriptionText\",\n ),\n [EmptyScreenTypeEnum.Default]: t(\"EmptyFolderDescriptionUser\"),\n [EmptyScreenTypeEnum.Corporate]: t(\"EmptyFolderDecription\"),\n [EmptyScreenTypeEnum.SubFolderDone]: t(\n \"EmptyFormSubFolderDoneDescriptionText\",\n ),\n [EmptyScreenTypeEnum.SubFolderinProgress]: t(",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

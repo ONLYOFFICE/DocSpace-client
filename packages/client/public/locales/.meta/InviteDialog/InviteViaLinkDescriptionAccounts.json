@@ -1,11 +1,22 @@
 {
   "key_path": "InviteViaLinkDescriptionAccounts",
+  "content": "Create a universal link for self-authorization in {{productName}}",
   "content_en_sha1_hash": "533c585d8d2f76cf27cc52d2d1d5266fd4da6892",
-  "created_at": "2025-05-14T14:04:23.208Z",
-  "updated_at": "2025-05-14T14:04:23.208Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.732Z",
+  "updated_at": "2025-05-19T21:56:08.218Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
+      "line_number": 276,
+      "context": "isDisabled={isLinksToggling}\n />\n </StyledSubHeader>\n <StyledDescription noSelect>\n {roomId === -1\n ? t(\"InviteViaLinkDescriptionAccounts\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"InviteViaLinkDescriptionRoom\")}\n </StyledDescription>\n {externalLinksVisible ? (",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

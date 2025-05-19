@@ -1,11 +1,22 @@
 {
   "key_path": "RoleFormFillerFormRoomDescription",
+  "content": "Form fillers can fill out forms and view only their completed/started forms within the Complete and In Process folders.",
   "content_en_sha1_hash": "feefe7fdf044fbc2fbabfaea05d182d09dbe37d8",
-  "created_at": "2025-05-14T14:04:19.315Z",
-  "updated_at": "2025-05-14T14:04:19.315Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:48.048Z",
+  "updated_at": "2025-05-19T21:56:08.803Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/utils/getAccessOptions.ts",
+      "line_number": 77,
+      "context": "};\n \n const getFormFillerDescription = (roomType: RoomsType, t: TTranslation) => {\n switch (roomType) {\n case RoomsType.FormRoom:\n return t(\"Common:RoleFormFillerFormRoomDescription\");\n default:\n return t(\"Common:RoleFormFillerDescription\");\n }\n };",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

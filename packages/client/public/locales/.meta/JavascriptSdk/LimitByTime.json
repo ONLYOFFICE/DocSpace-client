@@ -1,11 +1,22 @@
 {
   "key_path": "LimitByTime",
+  "content": "Limit by time period",
   "content_en_sha1_hash": "03e40a5e784a8aec64ccc72778ffd126b2588b86",
-  "created_at": "2025-05-14T14:04:23.413Z",
-  "updated_at": "2025-05-14T14:04:23.413Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.551Z",
+  "updated_at": "2025-05-19T21:56:08.479Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/SharedLinkHint.js",
+      "line_number": 39,
+      "context": "currentColorScheme,\n }) => {\n const settingsTranslations = {\n password: t(\"Common:Password\").toLowerCase(),\n denyDownload: t(\"FileContentCopy\").toLowerCase(),\n expirationDate: t(\"LimitByTime\").toLowerCase(),\n };\n \n return (\n linkSettings.length > 0 && (\n <div>",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

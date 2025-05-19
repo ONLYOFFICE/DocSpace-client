@@ -1,11 +1,22 @@
 {
   "key_path": "GuestInvitation",
+  "content": "<1>{{displayName}}</1> wants to share with you the contact of the guest.",
   "content_en_sha1_hash": "22e94db1f497e5a36b2d093d14a19ffc364fc51a",
-  "created_at": "2025-05-14T14:04:17.031Z",
-  "updated_at": "2025-05-14T14:04:17.031Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:45.696Z",
+  "updated_at": "2025-05-19T21:56:08.731Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/components/GreetingContainer/GreetingGuestContainer.tsx",
+      "line_number": 68,
+      "context": "<img src={logoUrl} className=\"portal-logo guest\" alt=\"greeting-logo\" />\n <div className=\"tooltip guest\">\n <Text fontSize=\"16px\">\n <Trans\n t={t}\n i18nKey=\"GuestInvitation\"\n ns=\"Common\"\n defaults={DEFAULT_GUEST_TEXT}\n values={{\n displayName,\n }}",
+      "module": "/packages/login"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

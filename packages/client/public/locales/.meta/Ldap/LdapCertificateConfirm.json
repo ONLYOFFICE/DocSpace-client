@@ -1,11 +1,22 @@
 {
   "key_path": "LdapCertificateConfirm",
+  "content": "Confirm certificate",
   "content_en_sha1_hash": "69ce41b2cdf9a76e9b116cc810c60bfb9987f24f",
-  "created_at": "2025-05-14T14:04:23.581Z",
-  "updated_at": "2025-05-14T14:04:23.581Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.181Z",
+  "updated_at": "2025-05-19T21:56:08.528Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/CertificateDialog.js",
+      "line_number": 109,
+      "context": "autoMaxWidth\n visible={isCertificateDialogVisible}\n displayType={ModalDialogType.modal}\n onClose={onCloseAction}\n >\n <ModalDialog.Header>{t(\"LdapCertificateConfirm\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledCertificateDialogBody hasError={hasError}>\n <div className=\"ldap-settings-crt-confirmation\">\n <Text lineHeight=\"20px\" fontSize=\"13px\" fontWeight=\"400\">\n {t(\"LdapAddCertificateToStoreConfirmation\")}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

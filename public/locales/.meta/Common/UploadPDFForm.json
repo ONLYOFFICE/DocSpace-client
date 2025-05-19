@@ -1,11 +1,28 @@
 {
   "key_path": "UploadPDFForm",
+  "content": "Upload PDF form",
   "content_en_sha1_hash": "b5afa97be11c4d1636475bc3623a9f975f26ebd9",
-  "created_at": "2025-05-14T14:04:20.672Z",
-  "updated_at": "2025-05-14T14:04:20.672Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:49.443Z",
+  "updated_at": "2025-05-19T21:56:07.982Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/Article/MainButton/index.js",
+      "line_number": 398,
+      "context": "const uploadPDFFrom = {\n id: \"actions_upload-ready-Pdf-from\",\n className: \"main-button_drop-down_sub\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:UploadPDFForm\"),\n key: \"actions_upload-ready-Pdf-from\",\n items: [uploadFromDocSpace, uploadFormDevice],\n };\n \n // const moreActions = {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2618,
+      "context": "const uploadReadyPDFFrom = {\n id: \"personal_upload-ready-Pdf-from\",\n className: \"main-button_drop-down_sub\",\n icon: ActionsUploadReactSvgUrl,\n label: t(\"Common:UploadPDFForm\"),\n key: \"personal_upload-ready-Pdf-from\",\n items: [\n {\n id: \"personal_upload-from-docspace\",\n className: \"main-button_drop-down\",",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -1,11 +1,22 @@
 {
   "key_path": "UsersQuotaLimit",
+  "content": "{{usersQuotaLimit}} for users",
   "content_en_sha1_hash": "9e6e5c83a7705ebda93dbfed5f4cb4f8bf50f01c",
-  "created_at": "2025-05-14T14:04:27.388Z",
-  "updated_at": "2025-05-14T14:04:27.388Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.161Z",
+  "updated_at": "2025-05-19T21:56:08.187Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/WarningQuotaDialog/WarningQuotaDialog.tsx",
+      "line_number": 61,
+      "context": "}),\n );\n }\n if (isDefaultUsersQuotaSet) {\n quotaLimits.push(\n t(\"Settings:UsersQuotaLimit\", {\n usersQuotaLimit: getConvertedSize(t, defaultUsersQuota),\n }),\n );\n }\n if (isTenantCustomQuotaSet) {",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

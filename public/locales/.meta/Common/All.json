@@ -1,11 +1,46 @@
 {
   "key_path": "All",
+  "content": "All",
   "content_en_sha1_hash": "6a72085653e4c5be8c7640c868ef787cbcf063d1",
-  "created_at": "2025-05-14T14:04:14.288Z",
-  "updated_at": "2025-05-14T14:04:14.288Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:42.972Z",
+  "updated_at": "2025-05-19T21:56:08.224Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/contacts/utils.ts",
+      "line_number": 23,
+      "context": "//\n // Pursuant to Section 7(b) of the License you must retain the original Product logo when\n // distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under\n // trademark law for use of our trademarks.\n //\n // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing\n // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0\n // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n import { matchPath } from \"react-router-dom\";\n import type { Location } from \"@remix-run/router\";",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
+      "line_number": 235,
+      "context": "const permissionsList = getPermissionsList();\n \n const tabsItems = [\n {\n id: \"all\",\n name: t(\"Common:All\"),\n content: null,\n },\n {\n id: \"restricted\",\n name: t(\"Common:Restricted\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/utils.ts",
+      "line_number": 125,
+      "context": "key: \"all\" | \"readonly\" | \"restricted\",\n t: TTranslation,\n ) => {\n switch (key) {\n case \"all\":\n return t(\"Common:All\");\n case \"readonly\":\n return t(\"Common:ReadOnly\");\n case \"restricted\":\n return t(\"Common:Restricted\");",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/utils.ts",
+      "line_number": 125,
+      "context": "key: \"all\" | \"readonly\" | \"restricted\",\n t: TTranslation,\n ) => {\n switch (key) {\n case \"all\":\n return t(\"Common:All\");\n case \"readonly\":\n return t(\"Common:ReadOnly\");\n case \"restricted\":\n return t(\"Common:Restricted\");",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/utils/index.ts",
+      "line_number": 337,
+      "context": "t: TTranslation,\n key: FilterType | RoomsType | string,\n ) => {\n switch (key) {\n case \"all\":\n return t(\"Common:All\");\n case FilterType.FoldersOnly:\n return t(\"Common:Folders\");\n case FilterType.DocumentsOnly:\n return t(\"Common:Documents\");\n case FilterType.PresentationsOnly:",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

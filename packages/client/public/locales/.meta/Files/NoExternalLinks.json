@@ -1,11 +1,22 @@
 {
   "key_path": "NoExternalLinks",
+  "content": "No external links",
   "content_en_sha1_hash": "ff672adde427c15e2c3387c1d27fc7212794d3f5",
-  "created_at": "2025-05-14T14:04:22.348Z",
-  "updated_at": "2025-05-14T14:04:22.348Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.908Z",
+  "updated_at": "2025-05-19T21:56:08.682Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 957,
+      "context": "//         linksArray = [\n //           {\n //             id: \"no-external-links-option\",\n //             key: \"no-external-links\",\n //             label: !links.length\n //               ? t(\"Files:NoExternalLinks\")\n //               : t(\"Files:AllLinksAreDisabled\"),\n //             disableColor: true,\n //           },\n //           !isMobile && {\n //             key: \"separator0\",",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

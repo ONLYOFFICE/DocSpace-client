@@ -1,11 +1,22 @@
 {
   "key_path": "FileDeletedCount",
+  "content": "Files removed ({{count}}).",
   "content_en_sha1_hash": "042a8b55f4b0f4f8ec5ac79191e404ed05a3b7a0",
-  "created_at": "2025-05-14T14:04:23.018Z",
-  "updated_at": "2025-05-14T14:04:23.018Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.807Z",
+  "updated_at": "2025-05-19T21:56:08.262Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
+      "line_number": 85,
+      "context": "count,\n });\n return t(\"InfoPanel:FileCopied\");\n case \"FileDeleted\":\n if (hasRelatedItems)\n return t(\"InfoPanel:FileDeletedCount\", {\n count,\n });\n return t(\"InfoPanel:FileDeleted\");\n case \"FileLocked\":\n return `${t(\"Translations:FileLocked\")}.`;",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

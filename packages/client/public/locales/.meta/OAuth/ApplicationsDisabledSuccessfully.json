@@ -1,11 +1,22 @@
 {
   "key_path": "ApplicationsDisabledSuccessfully",
+  "content": "Applications disabled successfully",
   "content_en_sha1_hash": "3973762d1a46d2cdb20ace836d486fbc344b3913",
-  "created_at": "2025-05-14T14:04:23.986Z",
-  "updated_at": "2025-05-14T14:04:23.986Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.807Z",
+  "updated_at": "2025-05-19T21:56:08.491Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/DisableDialog.tsx",
+      "line_number": 61,
+      "context": "await onDisable?.();\n \n setIsRequestRunning(true);\n toastr.success(\n isGroup\n ? t(\"OAuth:ApplicationsDisabledSuccessfully\")\n : t(\"OAuth:ApplicationDisabledSuccessfully\"),\n );\n onClose?.();\n } catch (error: unknown) {\n const e = error as TData;",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

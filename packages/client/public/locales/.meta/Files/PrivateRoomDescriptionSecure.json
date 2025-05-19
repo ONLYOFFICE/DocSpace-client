@@ -1,11 +1,22 @@
 {
   "key_path": "PrivateRoomDescriptionSecure",
+  "content": "Secure sharing with trusted teammates.",
   "content_en_sha1_hash": "9ba9be313cd631e2af8e9d427283182aa557cd86",
-  "created_at": "2025-05-14T14:04:22.422Z",
-  "updated_at": "2025-05-14T14:04:22.422Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.984Z",
+  "updated_at": "2025-05-19T21:56:07.997Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
+      "line_number": 131,
+      "context": "const privacyIcon = <img alt=\"\" src={PrivacySvgUrl} />;\n \n const privateRoomDescTranslations = [\n t(\"PrivateRoomDescriptionSafest\"),\n t(\"PrivateRoomDescriptionSecure\"),\n t(\"PrivateRoomDescriptionEncrypted\"),\n t(\"PrivateRoomDescriptionUnbreakable\"),\n ];\n \n const roomHeader = t(\"Common:EmptyRootRoomHeader\", {",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

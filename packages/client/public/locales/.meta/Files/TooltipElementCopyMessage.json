@@ -1,11 +1,22 @@
 {
   "key_path": "TooltipElementCopyMessage",
+  "content": "Copy {{element}}",
   "content_en_sha1_hash": "ed0ee7f92937e2893de3d1552b5c943e15bf62a7",
-  "created_at": "2025-05-14T14:04:22.683Z",
-  "updated_at": "2025-05-14T14:04:22.683Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.251Z",
+  "updated_at": "2025-05-19T21:56:07.988Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/DragTooltip/DragTooltip.js",
+      "line_number": 126,
+      "context": "}, [title, iconOfDraggedFile]);\n \n const tooltipLabel = tooltipOptions\n ? operationName === \"copy\"\n ? isSingleItem\n ? t(\"TooltipElementCopyMessage\", { element: filesCount })\n : t(\"TooltipElementsCopyMessage\", { element: filesCount })\n : isSingleItem\n ? renderFileMoveTooltip()\n : t(\"TooltipElementsMoveMessage\", { element: filesCount })\n : t(\"\");",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

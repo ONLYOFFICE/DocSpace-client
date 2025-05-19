@@ -1,11 +1,28 @@
 {
   "key_path": "UploadPicture",
+  "content": "Upload picture",
   "content_en_sha1_hash": "0a024e54cb81f9e05f0faa90496774cb8e76dcae",
-  "created_at": "2025-05-14T14:04:24.621Z",
-  "updated_at": "2025-05-14T14:04:24.621Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.320Z",
+  "updated_at": "2025-05-19T21:56:08.694Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/DialogsStore.js",
+      "line_number": 966,
+      "context": "};\n \n getLogoCoverModel = (t, hasImage, onDelete) => {\n return [\n {\n label: t(\"RoomLogoCover:UploadPicture\"),\n icon: UploadSvgUrl,\n key: \"upload\",\n onClick: (ref) => ref.current.click(),\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contacts/TargetUserStore.js",
+      "line_number": 171,
+      "context": "};\n \n getProfileModel = (t) => {\n return [\n {\n label: t(\"RoomLogoCover:UploadPicture\"),\n icon: UploadSvgUrl,\n key: \"upload\",\n onClick: (ref) => ref.current.click(),\n },\n {",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

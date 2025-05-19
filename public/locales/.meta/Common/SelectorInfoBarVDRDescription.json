@@ -1,11 +1,28 @@
 {
   "key_path": "SelectorInfoBarVDRDescription",
+  "content": "Share your form to a Virtual Data Room. Assign roles to the room participants to fill out the form. Select an existing room or create a new one.",
   "content_en_sha1_hash": "a1fad26982aedd280bbc995fc51025041a8925ca",
-  "created_at": "2025-05-14T14:04:19.737Z",
-  "updated_at": "2025-05-14T14:04:19.737Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:48.486Z",
+  "updated_at": "2025-05-19T21:56:08.040Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/ShareCollectSelector/ShareCollectSelector.tsx",
+      "line_number": 256,
+      "context": "const infoBarData: TInfoBarData = {\n title: t(\"Common:SelectorInfoBarTitle\"),\n description:\n createDefineRoomType === RoomsType.FormRoom\n ? t(\"Common:SelectorInfoBarDescription\")\n : t(\"Common:SelectorInfoBarVDRDescription\"),\n icon: InfoIcon,\n onClose: onCloseInfoBar,\n };\n \n const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/doceditor/src/components/StartFillingSelectDialog.tsx",
+      "line_number": 67,
+      "context": "const infoBarData: TInfoBarData = {\n title: t(\"Common:SelectorInfoBarTitle\"),\n description:\n createDefineRoomType === RoomsType.FormRoom\n ? t(\"Common:SelectorInfoBarDescription\")\n : t(\"Common:SelectorInfoBarVDRDescription\"),\n icon: InfoIcon,\n onClose: onCloseInfoBar,\n };\n \n const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {",
+      "module": "/packages/doceditor"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

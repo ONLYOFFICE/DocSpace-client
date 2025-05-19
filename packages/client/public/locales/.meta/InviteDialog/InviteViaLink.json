@@ -1,11 +1,22 @@
 {
   "key_path": "InviteViaLink",
+  "content": "Invite via link",
   "content_en_sha1_hash": "a8314a068e610756fa8088a3772ae621fcd59e37",
-  "created_at": "2025-05-14T14:04:23.206Z",
-  "updated_at": "2025-05-14T14:04:23.206Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:54.730Z",
+  "updated_at": "2025-05-19T21:56:08.217Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
+      "line_number": 239,
+      "context": "roomType === -1 ? accesses : filterPaidRoleOptions(accesses);\n \n return (\n <StyledExternalLink noPadding ref={inputsRef}>\n <StyledSubHeader inline>\n {t(\"InviteViaLink\")}\n {/* {false ? (\n <div style={{ position: \"relative\" }}>\n <IconButton\n size={16}\n iconName={MediaDownloadReactSvgUrl}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

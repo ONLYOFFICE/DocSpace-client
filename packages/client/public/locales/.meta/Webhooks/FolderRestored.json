@@ -1,11 +1,22 @@
 {
   "key_path": "FolderRestored",
+  "content": "Folder restored",
   "content_en_sha1_hash": "f365ee67e4cc7e11a06fc7fab662e4e3a41e8779",
-  "created_at": "2025-05-14T14:04:27.857Z",
-  "updated_at": "2025-05-14T14:04:27.857Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:49.757Z",
+  "updated_at": "2025-05-19T21:56:08.511Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
+      "line_number": 70,
+      "context": "return t(\"FolderUpdated\");\n case WebhookTriggers.FolderTrashed:\n return t(\"FolderTrashed\");\n case WebhookTriggers.FolderDeleted:\n return t(\"FolderDeleted\");\n case WebhookTriggers.FolderRestored:\n return t(\"FolderRestored\");\n case WebhookTriggers.FolderCopied:\n return t(\"FolderCopied\");\n case WebhookTriggers.FolderMoved:\n return t(\"FolderMoved\");",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

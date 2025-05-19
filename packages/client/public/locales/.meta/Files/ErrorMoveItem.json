@@ -1,11 +1,22 @@
 {
   "key_path": "ErrorMoveItem",
+  "content": "Error moving <2>{{title}}</2> to <1>{{folderName}}</1>",
   "content_en_sha1_hash": "6b0a2a33b1ba27a0f050169f9a804766851a5e70",
-  "created_at": "2025-05-14T14:04:22.058Z",
-  "updated_at": "2025-05-14T14:04:22.058Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:55.623Z",
+  "updated_at": "2025-05-19T21:56:08.702Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/SecondaryProgressDataStore.js",
+      "line_number": 150,
+      "context": "/>\n )\n ) : (\n <Trans\n t={t}\n i18nKey=\"ErrorMoveItem\"\n components={commonComponents}\n values={commonProps}\n />\n );\n }",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

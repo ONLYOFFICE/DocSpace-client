@@ -1,11 +1,22 @@
 {
   "key_path": "ByApp",
+  "content": "By authenticator app",
   "content_en_sha1_hash": "3b67ff7b02933cd6dfbd70b74628ba41aaf1425f",
-  "created_at": "2025-05-14T14:04:25.204Z",
-  "updated_at": "2025-05-14T14:04:25.204Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:50.850Z",
+  "updated_at": "2025-05-19T21:56:08.580Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
+      "line_number": 217,
+      "context": "value: \"sms\",\n disabled: !smsAvailable,\n }, */\n {\n id: \"by-app\",\n label: t(\"ByApp\"),\n value: \"app\",\n disabled: !appAvailable,\n },\n ]}\n selected={type}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

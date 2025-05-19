@@ -1,11 +1,22 @@
 {
   "key_path": "WithoutIcon",
+  "content": "Without icon",
   "content_en_sha1_hash": "e4be945bce935b4bef2b29cc800b01af24c69cf1",
-  "created_at": "2025-05-14T14:04:20.823Z",
-  "updated_at": "2025-05-14T14:04:20.823Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:49.603Z",
+  "updated_at": "2025-05-19T21:56:08.175Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/sub-components/SelectIcon.tsx",
+      "line_number": 35,
+      "context": "import { tablet } from \"@docspace/shared/utils\";\n import { TColorScheme } from \"@docspace/shared/themes\";\n import hexRgb from \"hex-rgb\";\n import { ILogo, SelectIconProps } from \"../RoomLogoCoverDialog.types\";\n \n interface WithoutIconProps {\n isSelected?: boolean;\n }\n \n const StyledWithoutIcon = styled.div<WithoutIconProps>`\n display: flex;",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

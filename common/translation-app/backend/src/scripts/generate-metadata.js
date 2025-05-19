@@ -5,8 +5,8 @@
  * This script scans the locales directories and generates metadata files
  * for all translation keys, preserving existing metadata where available.
  */
-const fs = require('fs-extra');
-const { writeJsonWithConsistentEol } = require('../utils/fsUtils');
+const fs = require("fs-extra");
+const { writeJsonWithConsistentEol } = require("../utils/fsUtils");
 const path = require("path");
 const glob = require("glob");
 const crypto = require("crypto");
@@ -196,6 +196,7 @@ async function generateMetadata(projectName) {
 
           // Read existing metadata for this key if available
           let keyMetadata = null;
+          let hasChanges = false;
           try {
             if (await fs.pathExists(keyMetaFile)) {
               keyMetadata = await fs.readJson(keyMetaFile);
@@ -210,15 +211,23 @@ async function generateMetadata(projectName) {
 
           const now = new Date().toISOString();
 
-          if (!keyMetadata) {
+          if (
+            !keyMetadata ||
+            keyMetadata.content_en_sha1_hash !== contentHash
+          ) {
+            hasChanges = true;
             // New key - create metadata
             keyMetadata = {
               key_path: keyPath, // Store the original key path
+              content: baseValue,
               content_en_sha1_hash: contentHash,
               created_at: now,
               updated_at: now,
-              comment_text: "", // Empty by default
-              comment_ai: false,
+              comment: {
+                text: "",
+                is_auto: false,
+                updated_at: null,
+              },
               usage: [],
               languages: {
                 [baseLanguage]: {
@@ -231,31 +240,6 @@ async function generateMetadata(projectName) {
             };
             stats.newKeys++;
             stats.namespaces[namespace].newKeys++;
-          } else {
-            // Existing key - check for content changes
-            if (keyMetadata.content_en_sha1_hash !== contentHash) {
-              // Content changed - update hash and timestamp
-              keyMetadata.content_en_sha1_hash = contentHash;
-              keyMetadata.updated_at = now;
-              stats.updatedKeys++;
-              stats.namespaces[namespace].updatedKeys++;
-            } else {
-              stats.unchangedKeys++;
-              stats.namespaces[namespace].unchangedKeys++;
-            }
-
-            // Ensure key path is stored
-            keyMetadata.key_path = keyPath;
-
-            // Ensure base language exists in languages object
-            if (!keyMetadata.languages[baseLanguage]) {
-              keyMetadata.languages[baseLanguage] = {
-                ai_translated: false,
-                ai_model: null,
-                ai_spell_check_issues: [],
-                approved_at: null,
-              };
-            }
           }
 
           // Process other languages for this key
@@ -307,9 +291,11 @@ async function generateMetadata(projectName) {
           // Save individual key metadata file only if it doesn't already exist
           try {
             const metaFileExists = await fs.pathExists(keyMetaFile);
-            
-            if (metaFileExists) {
-              console.log(`Skipping existing metadata file for key: ${keyPath}`);
+
+            if (metaFileExists && !hasChanges) {
+              console.log(
+                `Skipping existing metadata file for key: ${keyPath}`
+              );
               // Count the existing file in our stats
               stats.metadataFiles++;
             } else {
@@ -442,14 +428,22 @@ if (require.main === module) {
   generateAllMetadata()
     .then((stats) => {
       console.log("\n=== Complete metadata generation finished ===");
-      console.log(`Processed ${stats.totalProjects} projects with ${stats.totalNamespaces} namespaces`);
-      console.log(`Total keys: ${stats.totalKeys} (${stats.newKeys} new, ${stats.updatedKeys} updated, ${stats.unchangedKeys} unchanged)`);
-      console.log(`Metadata files: ${stats.metadataFiles} files (existing files were skipped)`);
-      
+      console.log(
+        `Processed ${stats.totalProjects} projects with ${stats.totalNamespaces} namespaces`
+      );
+      console.log(
+        `Total keys: ${stats.totalKeys} (${stats.newKeys} new, ${stats.updatedKeys} updated, ${stats.unchangedKeys} unchanged)`
+      );
+      console.log(
+        `Metadata files: ${stats.metadataFiles} files (existing files were skipped)`
+      );
+
       if (stats.processingErrors > 0) {
-        console.log(`\nWARNING: Encountered ${stats.processingErrors} errors during processing`);
+        console.log(
+          `\nWARNING: Encountered ${stats.processingErrors} errors during processing`
+        );
       }
-      
+
       console.log("\nDetailed stats:", JSON.stringify(stats, null, 2));
     })
     .catch((error) => {

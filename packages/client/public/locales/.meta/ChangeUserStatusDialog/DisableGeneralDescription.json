@@ -1,11 +1,22 @@
 {
   "key_path": "DisableGeneralDescription",
+  "content": "You can later delete or enable the disabled users if needed. Note that you can’t disable users such as the Owner and yourself.",
   "content_en_sha1_hash": "c8ab22320844cd45d5b33e77f82bfb1ef5ad2b83",
-  "created_at": "2025-05-14T14:04:21.001Z",
-  "updated_at": "2025-05-14T14:04:21.001Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.941Z",
+  "updated_at": "2025-05-19T21:56:08.081Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
+      "line_number": 187,
+      "context": "productName: t(\"Common:ProductName\"),\n });\n \n bodyText += isGuests\n ? t(\"DisableGuestsGeneralDescription\")\n : t(\"DisableGeneralDescription\");\n \n buttonLabelSave = isGuests\n ? t(\"Common:Disable\")\n : t(\"PeopleTranslations:DisableUserButton\");\n } else {",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

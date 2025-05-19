@@ -1,11 +1,22 @@
 {
   "key_path": "TemplateRoomCreated",
+  "content": "Room based on the template <1>«{{title}}»</1> created.",
   "content_en_sha1_hash": "6a8df0a004c7e61b689c124e267e93ff4887cded",
-  "created_at": "2025-05-14T14:04:22.678Z",
-  "updated_at": "2025-05-14T14:04:22.678Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.247Z",
+  "updated_at": "2025-05-19T21:56:08.020Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/GlobalEvents/CreateRoomEvent.js",
+      "line_number": 93,
+      "context": "const successToast = roomParams.isTemplate ? (\n <Trans\n t={t}\n ns=\"Files\"\n i18nKey=\"TemplateRoomCreated\"\n values={{\n title: roomParams.title,\n }}\n components={{\n 1: <Text as=\"span\" fontWeight={600} fontSize=\"12px\" />,",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

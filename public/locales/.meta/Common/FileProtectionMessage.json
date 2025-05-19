@@ -1,11 +1,22 @@
 {
   "key_path": "FileProtectionMessage",
+  "content": "These files are protected. Please try entering the password for all files. If you don't remember the password but need these files, you can download them in their original format or simply remove them from the list. Then you can download the rest of the files.",
   "content_en_sha1_hash": "f5fddb42e87596a64459b490711a116988ce134e",
-  "created_at": "2025-05-14T14:04:16.524Z",
-  "updated_at": "2025-05-14T14:04:16.524Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:45.260Z",
+  "updated_at": "2025-05-19T21:56:08.782Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/dialogs/download-dialog/sub-components/PasswordContent.tsx",
+      "line_number": 104,
+      "context": "data-testid=\"password-content\"\n >\n {barIsVisible ? (\n <PublicRoomBar\n headerText={t(\"Common:ProtectedFiles\")}\n bodyText={t(\"Common:FileProtectionMessage\")}\n iconName={InfoSvgUrl}\n onClose={onClose}\n />\n ) : null}\n {other && other?.length > 0",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

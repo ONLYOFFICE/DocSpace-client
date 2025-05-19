@@ -1,11 +1,28 @@
 {
   "key_path": "DeleteProfileTitle",
+  "content": "Disable account",
   "content_en_sha1_hash": "198562d776cf89feb842e248f463dff4797e7cd5",
-  "created_at": "2025-05-14T14:04:21.334Z",
-  "updated_at": "2025-05-14T14:04:21.334Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.638Z",
+  "updated_at": "2025-05-19T21:56:08.146Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteOwnerProfileDialog/index.js",
+      "line_number": 50,
+      "context": "console.log(\"DeleteOwnerProfileDialog render\");\n const { t, tReady, visible, onClose } = this.props;\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"DeleteProfileTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">\n {t(\"DeleteOwnerRestrictionText\", {\n productName: t(\"Common:ProductName\"),\n })}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteSelfProfileDialog/index.js",
+      "line_number": 75,
+      "context": "const { t, tReady, visible, email, onClose } = this.props;\n const { isRequestRunning } = this.state;\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"DeleteProfileTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">\n {t(\"DeleteProfileInfo\")}{\" \"}\n <ColorTheme\n type=\"page\"",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

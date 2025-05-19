@@ -1,11 +1,28 @@
 {
   "key_path": "SubNewForm",
+  "content": "Blank",
   "content_en_sha1_hash": "276c9361fff15e60f48af4d733ec83315d2bb251",
-  "created_at": "2025-05-14T14:04:27.734Z",
-  "updated_at": "2025-05-14T14:04:27.734Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:50.007Z",
+  "updated_at": "2025-05-19T21:56:07.982Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/Article/MainButton/index.js",
+      "line_number": 494,
+      "context": "const createTemplateBlankDocxf = {\n id: \"actions_template_blank\",\n className: \"main-button_drop-down_sub\",\n icon: FormBlankReactSvgUrl,\n label: t(\"Translations:SubNewForm\"),\n onClick: onCreate,\n action: \"pdf\",\n key: \"pdf\",\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2754,
+      "context": "};\n \n const createTemplateForm = {\n id: \"personal_template_black\",\n key: \"new-form\",\n label: t(\"Translations:SubNewForm\"),\n icon: FormBlankReactSvgUrl,\n onClick: () => this.onCreate(\"pdf\", t),\n };\n \n const createTemplateNewFormFile = {",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

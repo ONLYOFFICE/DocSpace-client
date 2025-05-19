@@ -1,11 +1,22 @@
 {
   "key_path": "DeleteGroupDescription",
+  "content": "Group {{groupName}} will be deleted. Users in the group will not be removed from {{productName}}. Are you sure you want to continue?",
   "content_en_sha1_hash": "1def40bc5db30b6384216cdbb18e26567e154700",
-  "created_at": "2025-05-14T14:04:21.260Z",
-  "updated_at": "2025-05-14T14:04:21.260Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:56.699Z",
+  "updated_at": "2025-05-19T21:56:08.142Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteGroupDialog/index.js",
+      "line_number": 89,
+      "context": "<Text>\n {hasMoreGroups\n ? t(\"DeleteDialog:DeleteAllGroupDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"DeleteDialog:DeleteGroupDescription\", {\n productName: t(\"Common:ProductName\"),\n groupName,\n })}\n </Text>\n </ModalDialog.Body>",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

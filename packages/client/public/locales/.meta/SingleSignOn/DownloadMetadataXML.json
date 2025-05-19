@@ -1,11 +1,22 @@
 {
   "key_path": "DownloadMetadataXML",
+  "content": "Download SP metadata XML",
   "content_en_sha1_hash": "69cdbb542da10c910280c5a6dd9347606d5ba14e",
-  "created_at": "2025-05-14T14:04:27.543Z",
-  "updated_at": "2025-05-14T14:04:27.543Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:50.077Z",
+  "updated_at": "2025-05-19T21:56:08.552Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/ProviderMetadata.js",
+      "line_number": 111,
+      "context": "/>\n \n <div className=\"button-wrapper\">\n <Button\n id=\"download-metadata-xml\"\n label={t(\"DownloadMetadataXML\")}\n primary\n scale={isMobileView}\n size={isMobileView ? \"normal\" : \"small\"}\n tabIndex={25}\n onClick={downloadMetadata}",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

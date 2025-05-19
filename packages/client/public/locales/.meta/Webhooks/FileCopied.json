@@ -1,10 +1,14 @@
 {
   "key_path": "FileCopied",
+  "content": "File copied",
   "content_en_sha1_hash": "4a6bc2861eef671be7f536859194a8d6b3428164",
-  "created_at": "2025-05-14T14:04:27.832Z",
-  "updated_at": "2025-05-14T14:04:27.832Z",
-  "comment_text": "",
-  "comment_ai": false,
+  "created_at": "2025-05-19T21:30:49.720Z",
+  "updated_at": "2025-05-19T21:30:49.720Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
   "usage": [],
   "languages": {
     "en": {

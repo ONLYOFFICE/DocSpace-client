@@ -1,11 +1,28 @@
 {
   "key_path": "Permissions",
+  "content": "Permissions",
   "content_en_sha1_hash": "d06d55570938d12f87db3bf2b48caa9de22d9c67",
-  "created_at": "2025-05-14T14:04:18.624Z",
-  "updated_at": "2025-05-14T14:04:18.624Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:47.333Z",
+  "updated_at": "2025-05-19T21:56:08.429Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
+      "line_number": 435,
+      "context": "scale\n />\n </div>\n <div className=\"api-key_name\">\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:Permissions\")}\n </Text>\n <Tabs\n type={TabsTypes.Secondary}\n items={tabsItems}\n onSelect={onSelectPermission}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/TableView/TableHeader.tsx",
+      "line_number": 83,
+      "context": "enable: true,\n resizable: true,\n },\n {\n key: \"Permissions\",\n title: t(\"Common:Permissions\"),\n enable: true,\n resizable: true,\n },\n {\n key: \"State\",",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

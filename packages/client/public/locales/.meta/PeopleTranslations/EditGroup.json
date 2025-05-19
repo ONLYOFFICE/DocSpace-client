@@ -1,11 +1,34 @@
 {
   "key_path": "EditGroup",
+  "content": "Edit group",
   "content_en_sha1_hash": "edb57d8eeff83c091697eab4d31079c72abcd3d1",
-  "created_at": "2025-05-14T14:04:24.446Z",
-  "updated_at": "2025-05-14T14:04:24.446Z",
-  "comment_text": "",
-  "comment_ai": false,
-  "usage": [],
+  "created_at": "2025-05-19T21:30:53.468Z",
+  "updated_at": "2025-05-19T21:56:08.104Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/EditGroupDialog.tsx",
+      "line_number": 190,
+      "context": "withBodyScroll\n visible={visible}\n onClose={closeModal}\n >\n <ModalDialog.Header>\n {t(\"PeopleTranslations:EditGroup\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <StyledBodyContent>\n {showLoader ? (",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
+      "line_number": 502,
+      "context": "if (!isRoomAdmin && !isCollaborator && !item?.isLDAP)\n options.push({\n id: \"edit-group\",\n key: \"edit-group\",\n className: \"group-menu_drop-down\",\n label: t(\"PeopleTranslations:EditGroup\"),\n title: t(\"PeopleTranslations:EditGroup\"),\n icon: PencilReactSvgUrl,\n onClick: () => editGroup(item),\n });",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
+      "line_number": 502,
+      "context": "if (!isRoomAdmin && !isCollaborator && !item?.isLDAP)\n options.push({\n id: \"edit-group\",\n key: \"edit-group\",\n className: \"group-menu_drop-down\",\n label: t(\"PeopleTranslations:EditGroup\"),\n title: t(\"PeopleTranslations:EditGroup\"),\n icon: PencilReactSvgUrl,\n onClick: () => editGroup(item),\n });",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

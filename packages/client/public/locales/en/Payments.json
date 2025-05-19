@@ -42,6 +42,7 @@
   "DiskSpace": "Disk space",
   "DiskStorage": "Disk storage",
   "DowngradeNow": "Downgrade now",
+  "EnableAutoTopUp": "Enable Auto Top-up",
   "EnterAmount": "Enter an integer amount...",
   "EnterAnIntegerAmountBetween": "Enter an integer amount between {{min}} and {{max}}",
   "ErrorNotification": "Failed to update tariff plan. Try again later or contact the sales department.",

@@ -384,6 +384,7 @@
   "MergeFoldersDescription": "Two folders will be merged into one with all the contents",
   "MobileAndroid": "Get {{organizationName}} Documents on Google Play",
   "MobileEditPdfNotAvailableInfo": "Unsupported action. Please switch to the desktop mode to be able to edit PDFs or create PDF forms.",
+  "MobileStartFillingPdfNotAvailableInfo": "Unsupported action. Please switch to the desktop mode to fill out PDF forms.",
   "MobileIos": "Download {{organizationName}} Documents on the App Store",
   "MobileLinux": "Download {{organizationName}} Desktop Editors for Linux",
   "MobileMac": "Download {{organizationName}} Desktop Editors for macOS",

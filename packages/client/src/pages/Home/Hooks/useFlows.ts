@@ -24,21 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import { TFile } from "@docspace/shared/api/files/types";
 
 type UseFlowsProps = {
   vectorizedFiles: TFile[];
+  wrongFiles: TFile[];
   removeActiveItem: (file: TFile) => void;
 };
 
-const useFlows = ({ vectorizedFiles, removeActiveItem }: UseFlowsProps) => {
+const useFlows = ({
+  vectorizedFiles,
+  wrongFiles,
+  removeActiveItem,
+}: UseFlowsProps) => {
   useEffect(() => {
     vectorizedFiles.forEach((file) => {
       removeActiveItem(file);
     });
   }, [vectorizedFiles]);
+
+  useEffect(() => {
+    wrongFiles.forEach((file) => {
+      removeActiveItem(file);
+    });
+  }, [wrongFiles]);
 };
 
 export default useFlows;

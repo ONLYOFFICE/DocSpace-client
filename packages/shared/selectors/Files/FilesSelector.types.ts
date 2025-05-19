@@ -119,6 +119,7 @@ export type UseFilesHelpersProps = {
   setIsInit: (value: boolean) => void;
   searchValue?: string;
   disabledItems: (string | number)[];
+  includedItems?: (string | number)[];
   setSelectedItemSecurity: (value: TFileSecurity | TFolderSecurity) => void;
   isThirdParty: boolean;
   setSelectedTreeNode: (treeNode: TFolder) => void;
@@ -199,6 +200,7 @@ export type FilesSelectorProps = TSelectorHeader &
     | { getIcon?: never; filesSettings: TFilesSettings }
   ) & {
     disabledItems: (string | number)[];
+    includedItems?: (string | number)[];
     filterParam?: string | number;
     withoutBackButton: boolean;
     withBreadCrumbs: boolean;

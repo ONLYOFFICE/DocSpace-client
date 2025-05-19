@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TFile } from "../../../../api/files/types";
 import { DeviceType } from "../../../../enums";
 
 import { TGetIcon } from "../../types";
@@ -34,8 +35,10 @@ export type FilesSelectorProps = {
   getIcon: TGetIcon;
 
   currentDeviceType: DeviceType;
+  includedItems?: (string | number)[];
 };
 
 export type ChatInputProps = {
   displayFileExtension: boolean;
+  vectorizedFiles: TFile[];
 } & Pick<FilesSelectorProps, "currentDeviceType" | "getIcon">;

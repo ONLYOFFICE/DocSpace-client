@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useMemo } from "react";
 import classNames from "classnames";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -34,6 +34,10 @@ import SendReactSvgUrl from "PUBLIC_DIR/images/icons/12/arrow.up.react.svg?url";
 
 import { Textarea } from "../../../textarea";
 import { IconButton } from "../../../icon-button";
+import { DropDown } from "../../../drop-down";
+import { DropDownItem } from "../../../drop-down-item";
+import { Text } from "../../../text";
+import { TSelectorItem } from "../../../selector";
 
 import { useFilesStore } from "../../store/filesStore";
 import { useMessageStore } from "../../store/messageStore";
@@ -48,6 +52,8 @@ import { ChatInputProps } from "./ChatInput.types";
 const ChatInput = ({
   currentDeviceType,
   displayFileExtension,
+  vectorizedFiles,
+
   getIcon,
 }: ChatInputProps) => {
   const { t } = useTranslation(["Common"]);
@@ -60,21 +66,49 @@ const ChatInput = ({
     isEmptyMessages,
     currentSession,
   } = useMessageStore();
-  const { files, wrapperHeight, clearFiles } = useFilesStore();
+  const { files, wrapperHeight, clearFiles, addFile } = useFilesStore();
 
   const [value, setValue] = React.useState("");
+  const [fileValue, setFileValue] = React.useState("");
   const [showSelector, setShowSelector] = React.useState(false);
+  const [showDropDown, setShowDropDown] = React.useState(false);
+  const [startPosition, setStartPosition] = React.useState(-1);
 
   const prevSession = React.useRef(currentSession);
+  const inputRef = React.useRef<HTMLDivElement>(null);
 
   const isSendDisabled = !isInit ? false : value ? isRequestRunning : false;
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (isSendDisabled) return;
 
-    if (e.target.value === "\n") return;
+    const val = e.target.value;
 
-    setValue(e.target.value);
+    if (val === "\n") {
+      setShowDropDown(false);
+      setStartPosition(-1);
+      return;
+    }
+
+    const lastSymbol = val[val.length - 1];
+
+    if (lastSymbol === "@") {
+      setShowDropDown(true);
+      setStartPosition(val.length - 1);
+      setFileValue("");
+    }
+    if (lastSymbol === " " || !val) {
+      setShowDropDown(false);
+      setFileValue("");
+      setStartPosition(-1);
+    }
+
+    if (showDropDown) {
+      // Include all characters after '@' including the last one
+      setFileValue(val.substring(startPosition + 1));
+    }
+
+    setValue(val);
   };
 
   const toggleSelector = () => {
@@ -132,6 +166,63 @@ const ChatInput = ({
         ) : null,
       };
 
+  const dropDownItems = useMemo(() => {
+    const items = vectorizedFiles
+      .filter((file) => !files.find((f) => f.id === file.id))
+      .filter((file) => {
+        if (fileValue) {
+          return file.title.toLowerCase().includes(fileValue.toLowerCase());
+        }
+
+        return true;
+      })
+      .map((item) => (
+        <DropDownItem
+          key={item.id}
+          onClick={() => {
+            const selectorItem: TSelectorItem = {
+              label: item.title,
+              fileExst: item.fileExst,
+              id: item.id,
+              icon: "",
+              parentId: item.folderId,
+              rootFolderType: item.rootFolderType,
+              security: item.security,
+              fileType: item.fileType,
+            };
+
+            // Remove the '@' and any text after it from the input value
+            setValue((prev) => prev.substring(0, startPosition));
+
+            setFileValue("");
+            setShowDropDown(false);
+            setStartPosition(-1);
+
+            addFile(selectorItem);
+          }}
+        >
+          <img src={getIcon(24, item.fileExst)} alt={item.title} />
+          <Text truncate> {item.title}</Text>
+        </DropDownItem>
+      ));
+
+    return items;
+  }, [vectorizedFiles, getIcon, files, fileValue, addFile, startPosition]);
+
+  const style = useMemo(() => {
+    if (!inputRef.current || !showDropDown) return;
+
+    const rects = inputRef.current.getBoundingClientRect();
+
+    const width =
+      currentDeviceType === "desktop" ? rects.width - 40 : rects.width - 32;
+
+    return {
+      width: `${width}px`,
+      bottom: `${window.innerHeight - rects.bottom + rects.height + 4}px`,
+    };
+  }, [showDropDown, currentDeviceType]);
+
   return (
     <div
       className={classNames(styles.chatInput)}
@@ -142,6 +233,7 @@ const ChatInput = ({
           "--chat-input-textarea-wrapper-with-files-max-height": `${172 + wrapperHeight + 24}px`,
         } as React.CSSProperties
       }
+      ref={inputRef}
     >
       <Textarea
         onChange={handleChange}
@@ -190,7 +282,29 @@ const ChatInput = ({
           toggleSelector={toggleSelector}
           getIcon={getIcon}
           currentDeviceType={currentDeviceType}
+          includedItems={vectorizedFiles.map((v) => v.id)}
         />
+      ) : null}
+      {showDropDown ? (
+        <DropDown
+          open={showDropDown}
+          directionY="top"
+          forwardedRef={inputRef}
+          clickOutsideAction={() => setShowDropDown(false)}
+          style={style}
+          offsetLeft={currentDeviceType === "desktop" ? 20 : 16}
+          isNoFixedHeightOptions
+          maxHeight={dropDownItems.length > 7 ? 300 : undefined}
+          className={styles.selectFileDropDown}
+        >
+          {dropDownItems.length ? (
+            dropDownItems
+          ) : (
+            <DropDownItem noActive noHover>
+              No results
+            </DropDownItem>
+          )}
+        </DropDown>
       ) : null}
     </div>
   );

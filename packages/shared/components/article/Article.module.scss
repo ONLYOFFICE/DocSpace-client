@@ -523,24 +523,27 @@
     font-weight: 600;
   }
 
-  @include desktop {
+  @include mixins.desktop {
     p {
       font-size: 13px;
     }
   }
 
-  @include tablet {
+  @include mixins.tablet {
     &[data-show-article="false"] {
       justify-content: center;
     }
   }
 
-  @include mobile {
+  @include mixins.mobile {
     margin-bottom: 0;
   }
 
   .arrowIcon {
-    @include desktop {
+    width: 20px;
+    height: 20px;
+
+    @include mixins.desktop {
       width: 16px !important;
       height: 16px !important;
 
@@ -549,9 +552,6 @@
         height: 16px !important;
       }
     }
-
-    width: 20px;
-    height: 20px;
 
     svg {
       height: 20px;

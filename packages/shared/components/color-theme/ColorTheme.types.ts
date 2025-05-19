@@ -27,7 +27,6 @@
 import { TColorScheme } from "../../themes";
 
 import { LinkProps } from "../link/Link.types";
-import { TextProps } from "../text/Text.types";
 import { ThemeId } from "./ColorTheme.enums";
 
 export interface DefaultColorThemeProps {
@@ -72,16 +71,10 @@ export interface LinkColorTheme extends LinkProps, DefaultColorThemeProps {
   $isUnderline?: boolean;
 }
 
-export interface SubmenuTextTheme extends TextProps, DefaultColorThemeProps {
-  themeId: ThemeId.SubmenuText;
-  isActive?: boolean;
-}
-
 export type ColorThemeProps =
   | FilterBlockItemTagColorTheme
   | IconWrapperColorTheme
   | IndicatorFilterButtonColorTheme
   | IndicatorLoaderColorTheme
   | InfoPanelToggleColorTheme
-  | LinkColorTheme
-  | SubmenuTextTheme;
+  | LinkColorTheme;

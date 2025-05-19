@@ -33,7 +33,6 @@ import { ColorThemeProps } from "./ColorTheme.types";
 import { ThemeId } from "./ColorTheme.enums";
 
 import LinkTheme from "./styled-components/link";
-import SubmenuTextTheme from "./styled-components/submenuText";
 
 const ColorTheme = forwardRef<
   HTMLDivElement,
@@ -54,15 +53,6 @@ const ColorTheme = forwardRef<
           <LinkTheme
             {...props}
             onClick={onClickAction}
-            $currentColorScheme={currentColorScheme}
-          />
-        );
-      }
-
-      case ThemeId.SubmenuText: {
-        return (
-          <SubmenuTextTheme
-            {...props}
             $currentColorScheme={currentColorScheme}
           />
         );

@@ -24,46 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import styled, { css } from "styled-components";
+import { TColorScheme } from "../../../themes";
+import StyledInfoPanelToggleWrapper from "../sub-components/StyledWrapper";
+import { injectDefaultTheme } from "../../../utils";
 
-import React, { PropsWithChildren, forwardRef, useContext } from "react";
-import { ThemeContext } from "styled-components";
-
-import { ColorThemeProps } from "./ColorTheme.types";
-import { ThemeId } from "./ColorTheme.enums";
-
-import InfoPanelToggleTheme from "./styled-components/infoPanelToggle";
-
-const ColorTheme = forwardRef<
-  HTMLDivElement,
-  PropsWithChildren<ColorThemeProps>
->(({ isVersion, themeId, hoverColor, ...props }, ref) => {
-  const defaultTheme = useContext(ThemeContext);
-
-  const currentColorScheme = defaultTheme?.currentColorScheme;
-
-  const getElement = () => {
-    switch (themeId) {
-      case ThemeId.InfoPanelToggle: {
-        return (
-          <InfoPanelToggleTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            ref={ref}
-          />
-        );
+const getDefaultStyles = ({
+  $currentColorScheme,
+  isInfoPanelVisible,
+}: {
+  $currentColorScheme?: TColorScheme;
+  isInfoPanelVisible?: boolean;
+}) =>
+  $currentColorScheme &&
+  isInfoPanelVisible &&
+  css`
+    .info-panel-toggle-bg {
+      path {
+        fill: ${$currentColorScheme.main?.accent} !important;
       }
-
-      default:
-        return null;
+      &:hover {
+        path {
+          fill: ${$currentColorScheme.main?.accent} !important;
+        }
+      }
     }
-  };
+  `;
 
-  const element = getElement();
-
-  return element;
-});
-
-ColorTheme.displayName = "ColorTheme";
-
-export { ColorTheme };
+export default styled(StyledInfoPanelToggleWrapper).attrs(injectDefaultTheme)(
+  getDefaultStyles,
+);

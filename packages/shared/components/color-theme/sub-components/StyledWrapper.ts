@@ -24,46 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import styled from "styled-components";
 
-import React, { PropsWithChildren, forwardRef, useContext } from "react";
-import { ThemeContext } from "styled-components";
+import { injectDefaultTheme, mobile } from "../../../utils";
 
-import { ColorThemeProps } from "./ColorTheme.types";
-import { ThemeId } from "./ColorTheme.enums";
+const StyledWrapper = styled.div.attrs(injectDefaultTheme)`
+  #ipl-progress-indicator {
+    position: fixed;
+    z-index: 390;
+    top: 0;
+    inset-inline-start: -6px;
+    width: 0%;
+    height: 3px;
+    -moz-border-radius: 1px;
+    -webkit-border-radius: 1px;
+    border-radius: 1px;
 
-import InfoPanelToggleTheme from "./styled-components/infoPanelToggle";
-
-const ColorTheme = forwardRef<
-  HTMLDivElement,
-  PropsWithChildren<ColorThemeProps>
->(({ isVersion, themeId, hoverColor, ...props }, ref) => {
-  const defaultTheme = useContext(ThemeContext);
-
-  const currentColorScheme = defaultTheme?.currentColorScheme;
-
-  const getElement = () => {
-    switch (themeId) {
-      case ThemeId.InfoPanelToggle: {
-        return (
-          <InfoPanelToggleTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            ref={ref}
-          />
-        );
-      }
-
-      default:
-        return null;
+    @media ${mobile} {
+      top: 48px;
     }
-  };
+  }
+`;
 
-  const element = getElement();
-
-  return element;
-});
-
-ColorTheme.displayName = "ColorTheme";
-
-export { ColorTheme };
+export default StyledWrapper;

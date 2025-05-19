@@ -41,6 +41,7 @@ import ArticleLiveChat from "./sub-components/LiveChat";
 import ArticleApps from "./sub-components/Apps";
 import ArticleDevToolsBar from "./sub-components/DevToolsBar";
 import HideArticleMenuButton from "./sub-components/HideMenuButton";
+import BackButton from "./sub-components/BackButton";
 
 import styles from "./Article.module.scss";
 import { HEADER_NAME, MAIN_BUTTON_NAME, BODY_NAME } from "./Article.constants";
@@ -234,6 +235,8 @@ const Article = ({
     ? "/portal-settings/developer-tools"
     : "/developer-tools";
 
+  const showBackButton = window.location.pathname.includes("portal-settings");
+
   const articleComponent = (
     <>
       <div
@@ -252,6 +255,7 @@ const Article = ({
           withCustomArticleHeader={withCustomArticleHeader}
           isBurgerLoading={isBurgerLoading}
           onIconClick={toggleArticleOpen}
+          showBackButton={showBackButton}
         >
           {articleHeaderContent ? articleHeaderContent.props.children : null}
         </SubArticleHeader>
@@ -271,6 +275,9 @@ const Article = ({
           className="article-body__scrollbar"
           scrollClass="article-scroller"
         >
+          {showBackButton && currentDeviceType !== DeviceType.mobile ? (
+            <BackButton showText={showText} />
+          ) : null}
           {articleBodyContent ? articleBodyContent.props.children : null}
           {!showArticleLoader ? (
             <>

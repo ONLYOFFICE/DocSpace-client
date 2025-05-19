@@ -174,7 +174,7 @@ const DevToolsAccess = ({
       setShowReminder(false);
       saveToSessionStorage("defaultDevToolsAccessSettings", accessEnabled);
       saveToSessionStorage("currentDevToolsAccessSettings", accessEnabled);
-      toastr.success(t("SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error: unknown) {
       const message = (error as { message: string }).message
         ? ((error as { message: string }).message as TData)

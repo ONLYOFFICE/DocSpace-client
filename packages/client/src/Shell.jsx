@@ -99,6 +99,7 @@ const Shell = ({ page = "home", ...rest }) => {
     setLogoText,
     standalone,
     isGuest,
+    setSocialAuthWelcomeDialogVisible,
   } = rest;
 
   const theme = useTheme();
@@ -436,6 +437,16 @@ const Shell = ({ page = "home", ...rest }) => {
     if (userTheme) setTheme(userTheme);
   }, [userTheme]);
 
+  useEffect(() => {
+    if (
+      isLoaded &&
+      localStorage.getItem("showSocialAuthWelcomeDialog") === "true"
+    ) {
+      localStorage.removeItem("showSocialAuthWelcomeDialog");
+      setSocialAuthWelcomeDialogVisible(true);
+    }
+  }, [isLoaded]);
+
   const pathname = window.location.pathname.toLowerCase();
   const isEditor = pathname.indexOf("doceditor") !== -1;
 
@@ -591,6 +602,7 @@ const ShellWrapper = inject(
       formFillingTipsVisible,
 
       setFormCreationInfo,
+      setSocialAuthWelcomeDialogVisible,
     } = dialogsStore;
     const { user } = userStore;
 
@@ -647,6 +659,7 @@ const ShellWrapper = inject(
       logoText,
       setLogoText,
       standalone,
+      setSocialAuthWelcomeDialogVisible,
     };
   },
 )(observer(Shell));

@@ -52,7 +52,6 @@ jest.mock("../../../hooks/useResponsiveNavigation", () => ({
 }));
 
 const defaultProps = {
-  t: (key: string) => key,
   isSettingPaid: true,
   onShowExample: jest.fn(),
   companySettings: {
@@ -72,6 +71,17 @@ const defaultProps = {
   isLoading: false,
   companyInfoSettingsIsDefault: false,
   deviceType: DeviceType.desktop,
+  licenseAgreementsUrl: "https://example.com",
+  isEnterprise: true,
+  logoText: "ONLYOFFICE",
+  standalone: true,
+  buildVersionInfo: {
+    version: "",
+    buildDate: "",
+    docSpace: "",
+    communityServer: "",
+    documentServer: "",
+  },
 };
 
 describe("<CompanyInfo />", () => {

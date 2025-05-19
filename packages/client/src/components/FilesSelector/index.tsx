@@ -209,7 +209,7 @@ const FilesSelectorWrapper = ({
       const several = selection.length > 1;
 
       // for backup
-      if (!selection.length) return t("Files:BackupNotAllowedInFormRoom");
+      if (!selection.length) return t("Common:BackupNotAllowedInFormRoom");
 
       const option = { organizationName: logoText };
 

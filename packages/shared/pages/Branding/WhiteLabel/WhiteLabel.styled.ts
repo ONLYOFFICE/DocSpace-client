@@ -84,6 +84,11 @@ export const StyledHeader = styled.div`
       props.theme.client.settings.common.whiteLabel.paidBadgeBackground};
   }
 
+  @media ${mobile} {
+    .header-container {
+      display: none;
+    }
+  }
   .field-label-icon {
       margin-top: 4px;
       margin-bottom: 16px;
@@ -137,6 +142,7 @@ export const WhiteLabelWrapper = styled.div`
   .generate-logo {
     margin-top: 16px;
     margin-bottom: 24px;
+    width: fit-content !important;
   }
 
   .subtitle {
@@ -146,12 +152,20 @@ export const WhiteLabelWrapper = styled.div`
 
   .input {
     max-width: 350px;
+
+    @media ${mobile} {
+      max-width: 100%;
+    }
   }
 
   .logos-container {
     display: flex;
     flex-direction: column;
     gap: 40px;
+
+    @media ${mobile} {
+      margin-bottom: 64px;
+    }
   }
 
   .logo-wrapper {

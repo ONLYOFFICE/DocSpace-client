@@ -121,14 +121,15 @@ export type TSettings = {
   wizardToken?: string;
   defaultPage?: string;
   tagManagerId?: string;
+  limitedAccessSpace: boolean;
   enabledJoin?: boolean;
   recaptchaPublicKey?: string;
   recaptchaType?: RecaptchaType;
   maxImageUploadSize: number;
   isAmi: boolean;
   logoText: string;
-  externalResources: TExternalResources;
   displayAbout: boolean;
+  externalResources: TExternalResources;
 };
 
 export type TCustomSchema = {
@@ -498,6 +499,16 @@ export type TMigrationData = {
 export type TSendWelcomeEmailData = { isSendWelcomeEmail: boolean };
 
 export type TPortalCultures = string[];
+
+export type PropertiesType = { name: string; value: string; title: string };
+
+export type TStorageBackup = {
+  id: string;
+  current: boolean;
+  isSet: boolean;
+  title: string;
+  properties: PropertiesType[];
+};
 
 export type TEncryptionSettings = {
   password: string;

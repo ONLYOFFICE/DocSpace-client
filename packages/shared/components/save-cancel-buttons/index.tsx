@@ -27,8 +27,8 @@
 import React from "react";
 import classNames from "classnames";
 import { ButtonKeys } from "../../enums";
-import { isDesktop, isMobile } from "../../utils";
-import { Button, ButtonSize } from "../button";
+import { isMobile } from "../../utils";
+import { Button } from "../button";
 import { Text } from "../text";
 import { SaveCancelButtonProps } from "./SaveCancelButton.types";
 import styles from "./SaveCancelButtons.module.scss";
@@ -88,13 +88,16 @@ const SaveCancelButtons = ({
   const tabIndexSaveButton = tabIndex || -1;
   const tabIndexCancelButton = tabIndex ? tabIndex + 1 : -1;
 
-  const classNameSave = classNames("save-button", additionalClassSaveButton);
+  const classNameSave = classNames(
+    styles.button,
+    "save-button",
+    additionalClassSaveButton,
+  );
   const classNameCancel = classNames(
+    styles.button,
     "cancel-button",
     additionalClassCancelButton,
   );
-
-  const buttonSize = isDesktop() ? ButtonSize.small : ButtonSize.normal;
 
   const containerClassName = classNames(
     styles.saveCancelButtons,
@@ -120,7 +123,6 @@ const SaveCancelButtons = ({
         <Button
           className={classNameSave}
           primary
-          size={buttonSize}
           label={saveButtonLabel}
           onClick={onSaveClick}
           tabIndex={tabIndexSaveButton}
@@ -133,7 +135,6 @@ const SaveCancelButtons = ({
         />
         <Button
           className={classNameCancel}
-          size={buttonSize}
           label={cancelButtonLabel}
           onClick={onCancelClick}
           tabIndex={tabIndexCancelButton}

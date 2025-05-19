@@ -28,7 +28,6 @@ import { TColorScheme } from "../../themes";
 
 import { LinkProps } from "../link/Link.types";
 import { TextProps } from "../text/Text.types";
-import type { TTheme } from "../../themes";
 import { ThemeId } from "./ColorTheme.enums";
 
 export interface DefaultColorThemeProps {
@@ -63,13 +62,6 @@ export interface InfoPanelToggleColorTheme extends DefaultColorThemeProps {
   isInfoPanelVisible?: boolean;
 }
 
-export interface ProgressColorTheme extends DefaultColorThemeProps {
-  themeId: ThemeId.Progress;
-  percent?: number;
-  $currentColorScheme?: TColorScheme;
-  theme: TTheme;
-}
-
 export interface VersionBadgeTheme extends DefaultColorThemeProps {
   themeId: ThemeId.VersionBadge;
   $isVersion?: boolean;
@@ -96,7 +88,6 @@ export type ColorThemeProps =
   | IndicatorFilterButtonColorTheme
   | IndicatorLoaderColorTheme
   | InfoPanelToggleColorTheme
-  | ProgressColorTheme
   | VersionBadgeTheme
   | LinkColorTheme
   | SubmenuTextTheme;

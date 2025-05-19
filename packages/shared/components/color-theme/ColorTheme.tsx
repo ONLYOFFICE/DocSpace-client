@@ -33,30 +33,19 @@ import { ColorThemeProps } from "./ColorTheme.types";
 import { ThemeId } from "./ColorTheme.enums";
 
 import LinkTheme from "./styled-components/link";
-import ProgressColorTheme from "./styled-components/progress";
 import VersionBadgeTheme from "./styled-components/versionBadge";
 import SubmenuTextTheme from "./styled-components/submenuText";
 
 const ColorTheme = forwardRef<
   HTMLDivElement,
   PropsWithChildren<ColorThemeProps>
->(({ isVersion, themeId, hoverColor, ...props }, ref) => {
+>(({ isVersion, themeId, hoverColor, ...props }) => {
   const defaultTheme = useContext(ThemeContext);
 
   const currentColorScheme = defaultTheme?.currentColorScheme;
 
   const getElement = () => {
     switch (themeId) {
-      case ThemeId.Progress: {
-        return (
-          <ProgressColorTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            ref={ref}
-          />
-        );
-      }
-
       case ThemeId.VersionBadge: {
         return (
           <VersionBadgeTheme

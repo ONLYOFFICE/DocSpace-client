@@ -1073,6 +1073,7 @@ class SettingsStore {
 
     this.setCompanyInfoSettingsData(res);
     this.setCompanyInfoSettingsIsDefault(res.isDefault);
+    this.getSettings();
   };
 
   getWhiteLabelLogoUrls = async () => {

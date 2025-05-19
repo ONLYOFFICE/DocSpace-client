@@ -56,12 +56,16 @@ export const CompanyInfo = ({
   isLoading,
   companyInfoSettingsIsDefault,
   deviceType,
+  displayAbout,
+  isBrandingAvailable,
 }: ICompanyInfo) => {
   useResponsiveNavigation({
     redirectUrl: brandingRedirectUrl,
     currentLocation: "company-info-settings",
     deviceType,
   });
+
+  console.log("CompanyInfo render", displayAbout, isBrandingAvailable);
 
   const {
     address,
@@ -78,7 +82,7 @@ export const CompanyInfo = ({
     onChangePhone,
     onChangeSite,
     onChangeHideAbout,
-  } = useCompanySettings(companySettings);
+  } = useCompanySettings({ companySettings, displayAbout });
 
   const onSaveAction = () => {
     onSave(address, companyName, email, phone, site, hideAbout);
@@ -128,6 +132,7 @@ export const CompanyInfo = ({
       <div className="settings-block">
         <FieldContainer>
           <Checkbox
+            isDisabled={!isBrandingAvailable}
             isChecked={!hideAbout}
             onChange={onChangeHideAboutAction}
             data-testid="show-about-window-checkbox"

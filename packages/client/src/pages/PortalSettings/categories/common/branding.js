@@ -130,20 +130,16 @@ const Branding = ({
       {showSettings ? (
         <>
           <hr />
-          {displayAbout ? (
-            <>
-              {isLoadedCompanyInfoSettingsData ? (
-                <div className="section-description settings_unavailable">
-                  {t("Settings:BrandingSectionDescription", {
-                    productName: t("Common:ProductName"),
-                  })}
-                </div>
-              ) : (
-                <LoaderBrandingDescription />
-              )}
-              <CompanyInfoSettings />
-            </>
-          ) : null}
+          {isLoadedCompanyInfoSettingsData ? (
+            <div className="section-description settings_unavailable">
+              {t("Settings:BrandingSectionDescription", {
+                productName: t("Common:ProductName"),
+              })}
+            </div>
+          ) : (
+            <LoaderBrandingDescription />
+          )}
+          <CompanyInfoSettings />
           <AdditionalResources />
         </>
       ) : null}

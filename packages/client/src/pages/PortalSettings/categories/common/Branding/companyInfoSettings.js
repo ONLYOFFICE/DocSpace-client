@@ -43,6 +43,8 @@ const CompanyInfoSettingsComponent = (props) => {
   const {
     t,
     isSettingPaid,
+    isBrandingAvailable,
+    displayAbout,
     companyInfoSettingsIsDefault,
     companyInfoSettingsData,
     tReady,
@@ -128,6 +130,8 @@ const CompanyInfoSettingsComponent = (props) => {
         onSave={onSave}
         onRestore={onRestore}
         isLoading={isLoading}
+        isBrandingAvailable={isBrandingAvailable}
+        displayAbout={displayAbout}
         companyInfoSettingsIsDefault={companyInfoSettingsIsDefault}
         deviceType={deviceType}
       />
@@ -149,9 +153,10 @@ export const CompanyInfoSettings = inject(
       checkEnablePortalSettings,
       deviceType,
       getCompanyInfoSettings,
+      displayAbout,
     } = settingsStore;
 
-    const { isCustomizationAvailable } = currentQuotaStore;
+    const { isCustomizationAvailable, isBrandingAvailable } = currentQuotaStore;
     const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
 
     return {
@@ -161,7 +166,9 @@ export const CompanyInfoSettings = inject(
       isLoadedCompanyInfoSettingsData,
       buildVersionInfo,
       isSettingPaid,
+      isBrandingAvailable,
       deviceType,
+      displayAbout,
       getCompanyInfoSettings,
     };
   },

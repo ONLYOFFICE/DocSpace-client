@@ -254,7 +254,6 @@ class ProfileActionsStore {
       tenantAlias,
       limitedAccessSpace,
       displayAbout,
-      companyInfoSettingsData,
     } = this.settingsStore;
     const isAdmin = this.authStore.isAdmin;
     const isCommunity = this.currentTariffStatusStore.isCommunity;
@@ -371,9 +370,8 @@ class ProfileActionsStore {
     }
 
     let about = null;
-    const isDisplayAbout = displayAbout && !companyInfoSettingsData.hideAbout;
 
-    if (isDisplayAbout) {
+    if (displayAbout) {
       about = {
         key: "user-menu-about",
         icon: InfoOutlineReactSvgUrl,

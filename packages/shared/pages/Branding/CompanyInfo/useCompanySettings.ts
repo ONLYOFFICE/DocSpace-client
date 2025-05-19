@@ -26,7 +26,7 @@
 
 import React, { useReducer, useCallback, useEffect } from "react";
 
-import { ICompanySettings } from "./CompanyInfo.types";
+import { ICompanySettings, IUseCompanySettings } from "./CompanyInfo.types";
 
 const defaultCompanySettingsError = {
   hasErrorAddress: false,
@@ -107,7 +107,10 @@ function reducer(state: IState, action: Action): IState {
   }
 }
 
-export const useCompanySettings = (companySettings: ICompanySettings) => {
+export const useCompanySettings = ({
+  companySettings,
+  displayAbout,
+}: IUseCompanySettings) => {
   const [state, dispatch] = useReducer(reducer, {
     fields: {
       address: companySettings.address,
@@ -115,7 +118,7 @@ export const useCompanySettings = (companySettings: ICompanySettings) => {
       email: companySettings.email,
       phone: companySettings.phone,
       site: companySettings.site,
-      hideAbout: companySettings.hideAbout,
+      hideAbout: !displayAbout,
     },
     errors: defaultCompanySettingsError,
     hasChanges: false,

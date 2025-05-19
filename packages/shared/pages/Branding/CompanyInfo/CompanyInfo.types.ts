@@ -44,6 +44,13 @@ export interface ICompanyInfo {
   isLoading: boolean;
   companyInfoSettingsIsDefault: boolean;
   deviceType: DeviceType;
+  displayAbout: boolean;
+  isBrandingAvailable: boolean;
+}
+
+export interface IUseCompanySettings {
+  companySettings: ICompanySettings;
+  displayAbout: boolean;
 }
 
 export interface ICompanySettings {
@@ -52,9 +59,9 @@ export interface ICompanySettings {
   email: string;
   phone: string;
   site: string;
-  hideAbout: boolean;
   isDefault: boolean;
   isLicensor: boolean;
+  hideAbout: boolean;
 }
 
 export interface ICompanySettingsError {

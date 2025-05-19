@@ -84,6 +84,15 @@ export const StyledAboutContent = styled.div`
     }
   }
 
+  .tel-title.select-el {
+    direction: ltr;
+  }
+
+  .program-with-version {
+    display: inline;
+    direction: ltr;
+  }
+
   .logo-theme {
     svg {
       g:nth-child(2) {

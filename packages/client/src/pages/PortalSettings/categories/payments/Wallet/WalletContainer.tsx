@@ -73,7 +73,6 @@ type WalletProps = {
   isNonProfit: boolean;
   isVisibleWalletSettings: boolean;
   wasChangeBalance?: boolean;
-  wasFirstTopUp?: boolean;
   fetchBalance?: () => Promise<void>;
   fetchTransactionHistory?: () => Promise<void>;
 };
@@ -100,7 +99,6 @@ const Wallet = (props: WalletProps) => {
     wasChangeBalance,
     fetchBalance,
     fetchTransactionHistory,
-    wasFirstTopUp,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
@@ -173,7 +171,8 @@ const Wallet = (props: WalletProps) => {
           <Text isBold fontSize="16px">
             {t("BalanceText")}
           </Text>
-          {wasFirstTopUp ? (
+
+          {cardLinkedOnFreeTariff ? (
             <RefreshIconButton isRefreshing={isRefreshing} onClick={onClick} />
           ) : null}
         </div>
@@ -227,7 +226,6 @@ export default inject(
       isPayer,
       isVisibleWalletSettings,
       wasChangeBalance,
-      wasFirstTopUp,
       fetchBalance,
       fetchTransactionHistory,
     } = paymentStore;
@@ -244,7 +242,6 @@ export default inject(
       isNonProfit,
       isVisibleWalletSettings,
       wasChangeBalance,
-      wasFirstTopUp,
       fetchBalance,
       fetchTransactionHistory,
     };

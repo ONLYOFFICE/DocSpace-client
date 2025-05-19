@@ -39,8 +39,7 @@ import {
   TextInput,
 } from "@docspace/shared/components/text-input";
 import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import { LinkTarget } from "@docspace/shared/components/link";
+import { Link, LinkTarget } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
@@ -134,21 +133,21 @@ const RegistrationForm = ({
           i18nKey="TermsAndConditions"
           components={{
             1: (
-              <ColorTheme
+              <Link
                 tag="a"
-                themeId={ThemeId.Link}
                 href={licenseUrl}
                 target={LinkTarget.blank}
                 fontSize={"13px"}
+                color="accent"
               />
             ),
             2: (
-              <ColorTheme
+              <Link
                 tag="a"
-                themeId={ThemeId.Link}
                 href={legalTerms}
                 target={LinkTarget.blank}
                 fontSize={"13px"}
+                color="accent"
               />
             ),
           }}

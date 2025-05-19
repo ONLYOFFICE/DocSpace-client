@@ -26,38 +26,13 @@
 
 "use client";
 
-import React, { PropsWithChildren, forwardRef, useContext } from "react";
-import { ThemeContext } from "styled-components";
+import { PropsWithChildren } from "react";
 
 import { ColorThemeProps } from "./ColorTheme.types";
-import { ThemeId } from "./ColorTheme.enums";
 
-import LinkTheme from "./styled-components/link";
-
-const ColorTheme = forwardRef<
-  HTMLDivElement,
-  PropsWithChildren<ColorThemeProps>
->(({ isVersion, themeId, hoverColor, ...props }) => {
-  const defaultTheme = useContext(ThemeContext);
-
-  const currentColorScheme = defaultTheme?.currentColorScheme;
-
+const ColorTheme = ({ themeId }: PropsWithChildren<ColorThemeProps>) => {
   const getElement = () => {
     switch (themeId) {
-      case ThemeId.Link: {
-        const onClickAction = (e: React.MouseEvent<Element>) => {
-          if ("onClick" in props) props.onClick?.(e);
-        };
-
-        return (
-          <LinkTheme
-            {...props}
-            onClick={onClickAction}
-            $currentColorScheme={currentColorScheme}
-          />
-        );
-      }
-
       default:
         return null;
     }
@@ -66,7 +41,7 @@ const ColorTheme = forwardRef<
   const element = getElement();
 
   return element;
-});
+};
 
 ColorTheme.displayName = "ColorTheme";
 

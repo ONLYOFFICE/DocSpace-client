@@ -24,9 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TColorScheme } from "../../themes";
-
-import { LinkProps } from "../link/Link.types";
 import { ThemeId } from "./ColorTheme.enums";
 
 export interface DefaultColorThemeProps {
@@ -61,20 +58,9 @@ export interface InfoPanelToggleColorTheme extends DefaultColorThemeProps {
   isInfoPanelVisible?: boolean;
 }
 
-export interface LinkColorTheme extends LinkProps, DefaultColorThemeProps {
-  themeId: ThemeId.Link;
-  noHover?: boolean;
-  tag?: string;
-  truncate?: boolean;
-  $currentColorScheme?: TColorScheme;
-  onClick?: (e: React.MouseEvent<Element>) => void;
-  $isUnderline?: boolean;
-}
-
 export type ColorThemeProps =
   | FilterBlockItemTagColorTheme
   | IconWrapperColorTheme
   | IndicatorFilterButtonColorTheme
   | IndicatorLoaderColorTheme
-  | InfoPanelToggleColorTheme
-  | LinkColorTheme;
+  | InfoPanelToggleColorTheme;

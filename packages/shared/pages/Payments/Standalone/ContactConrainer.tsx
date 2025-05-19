@@ -27,10 +27,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { ColorTheme, ThemeId } from "../../../components/color-theme";
 import { Text } from "../../../components/text";
 
 import { StyledContactContainer } from "./Payments.styled";
+import { Link } from "../../../components/link";
 
 export const ContactContainer = ({ salesEmail }: { salesEmail: string }) => {
   const { t } = useTranslation("Common");
@@ -39,15 +39,15 @@ export const ContactContainer = ({ salesEmail }: { salesEmail: string }) => {
       {salesEmail ? (
         <Text as="span" noSelect fontWeight={600}>
           {t("ContactUs")}
-          <ColorTheme
+          <Link
             className="sales-email-link"
             tag="a"
-            themeId={ThemeId.Link}
             fontWeight="600"
             href={`mailto:${salesEmail}`}
+            color="accent"
           >
             {salesEmail}
-          </ColorTheme>
+          </Link>
         </Text>
       ) : null}
     </StyledContactContainer>

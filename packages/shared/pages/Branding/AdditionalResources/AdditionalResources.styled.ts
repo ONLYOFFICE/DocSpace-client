@@ -28,11 +28,7 @@ import styled from "styled-components";
 import { mobile } from "../../../utils";
 
 export const StyledAdditionalResources = styled.div`
-  margin-top: 40px;
-
   @media ${mobile} {
-    margin-top: 0px;
-
     .header {
       display: none;
     }

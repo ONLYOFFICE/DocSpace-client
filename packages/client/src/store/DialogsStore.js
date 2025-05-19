@@ -42,6 +42,10 @@ import {
   removeLogoFromRoom,
 } from "@docspace/shared/api/rooms";
 
+/**
+ * @typedef {import("@docspace/shared/components/files-selector-input/FilesSelectorInput.types").BackupToPublicRoomOptionType } BackupToPublicRoomOptionType
+ */
+
 class DialogsStore {
   authStore;
 
@@ -297,6 +301,8 @@ class DialogsStore {
     /** @type {import("@docspace/shared/api/files/types").TFile | null} */
     file: null,
   };
+
+  socialAuthWelcomeDialogVisible = false;
 
   constructor(
     authStore,
@@ -817,6 +823,10 @@ class DialogsStore {
     this.moveToPublicRoomData = data;
   };
 
+  /**
+   * @param {boolean} visible
+   * @param {null | BackupToPublicRoomOptionType } [data]
+   */
   setBackupToPublicRoomVisible = (visible, data = null) => {
     this.backupToPublicRoomVisible = visible;
     this.backupToPublicRoomData = data;
@@ -1028,6 +1038,10 @@ class DialogsStore {
    */
   setAssignRolesDialogData = (visible, roomName = "", file = null) => {
     this.assignRolesDialogData = { visible, roomName, file };
+  };
+
+  setSocialAuthWelcomeDialogVisible = (visible) => {
+    this.socialAuthWelcomeDialogVisible = visible;
   };
 }
 

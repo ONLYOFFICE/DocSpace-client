@@ -41,7 +41,7 @@ export type DropDownItemProps = {
 
   // Icon Related Props
   /** URL or path to the icon to display at the start of the item */
-  icon?: string;
+  icon?: string | React.ReactElement | React.ElementType;
   /** Whether the icon should be filled with the current text color. If false, uses original icon colors */
   fillIcon?: boolean;
   /** Whether to hide the icon element even when an icon prop is provided */
@@ -89,7 +89,9 @@ export type DropDownItemProps = {
 
   // Event Handlers
   /** Callback function triggered when the item is clicked */
-  onClick?: (e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>) => void;
+  onClick?: (
+    e: React.MouseEvent<HTMLElement> | React.ChangeEvent<HTMLInputElement>,
+  ) => void;
   /** Callback function triggered when a selected item is clicked */
   onClickSelectedItem?: () => void;
   /** Callback function to control the open state of a parent dropdown */

@@ -24,10 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TTimeZoneOption } from "@/types";
-import { TOption } from "@docspace/shared/components/combobox";
-import EnUSReactSvgUrl from "PUBLIC_DIR/images/flags/en-US.react.svg";
-
 export const DEFAULT_EMAIL_TEXT =
   "User <1>{{email}}</1> is already registered in this {{productName}}, enter your password or go back to continue with another email.";
 export const DEFAULT_ROOM_TEXT =
@@ -37,18 +33,7 @@ export const DEFAULT_PORTAL_TEXT =
 export const DEFAULT_GUEST_TEXT =
   "<strong>{{displayName}}</strong> wants to share with you the contact of the guest.";
 
-export const DEFAULT_SELECT_TIMEZONE: TTimeZoneOption = {
-  key: "UTC",
-  label: "(UTC) Coordinated Universal Time",
-};
-
-export const DEFAULT_SELECT_LANGUAGE: TOption = {
-  key: "en-US",
-  label: "English (United States)",
-  icon: EnUSReactSvgUrl,
-};
-
-export const TFA_ANDROID_APP_URL =
+  export const TFA_ANDROID_APP_URL =
   "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2";
 export const TFA_IOS_APP_URL =
   "https://apps.apple.com/app/google-authenticator/id388497605";

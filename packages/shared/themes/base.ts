@@ -3243,6 +3243,10 @@ export const getBaseTheme = () => {
       selectedColor: white,
       circleBorder: `3px solid ${lightSecondMain}`,
     },
+
+    socialAuthDialog: {
+      accountDetailsBackground: grayLight,
+    },
   };
 };
 

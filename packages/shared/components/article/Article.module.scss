@@ -510,3 +510,52 @@
     margin: 0;
   }
 }
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  cursor: pointer;
+
+  p {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  @include desktop {
+    p {
+      font-size: 13px;
+    }
+  }
+
+  @include tablet {
+    &[data-show-article="false"] {
+      justify-content: center;
+    }
+  }
+
+  @include mobile {
+    margin-bottom: 0;
+  }
+
+  .arrowIcon {
+    @include desktop {
+      width: 16px !important;
+      height: 16px !important;
+
+      svg {
+        width: 16px !important;
+        height: 16px !important;
+      }
+    }
+
+    width: 20px;
+    height: 20px;
+
+    svg {
+      height: 20px;
+      width: 20px;
+    }
+  }
+}

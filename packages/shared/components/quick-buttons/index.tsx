@@ -179,7 +179,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               color={colorLock}
               isDisabled={isDisabled}
               hoverColor="accent"
-              title={t("Common:UnblockVersion")}
+              title={locked ? t("Common:UnblockFile") : t("Common:BlockFile")}
             />
           ) : null}
           {isAvailableDownloadFile ? (
@@ -243,7 +243,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
           color={colorLock}
           isDisabled={isDisabled}
           hoverColor="accent"
-          title={t("Common:UnblockVersion")}
+          title={locked ? t("Common:UnblockFile") : t("Common:BlockFile")}
         />
       )}
 

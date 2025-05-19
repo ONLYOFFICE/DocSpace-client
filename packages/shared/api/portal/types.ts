@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TError } from "../../utils/axiosClient";
-import { TariffState } from "../../enums";
+import type { TariffState, BackupStorageType } from "../../enums";
 
 export type TQuotas = { id: number; quantity: number };
 
@@ -124,4 +124,44 @@ export type TTariff = {
 export type TRestoreProgress = {
   progress: number;
   error?: TError;
+};
+
+export type TBackupHistory = {
+  id: string;
+  fileName: string;
+  storageType: BackupStorageType;
+  createdOn: string;
+  expiresOn: string;
+};
+
+export type TBackupSchedule = {
+  backupsStored: number;
+  cronParams: {
+    day: number;
+    hour: number;
+    period: number;
+  };
+  dump: boolean;
+  lastBackupTime: string;
+  storageParams: {
+    folderId: string;
+    module?: string;
+    tenantId?: string;
+  };
+  storageType: BackupStorageType;
+};
+
+export type TStorageRegion = {
+  displayName: string;
+  originalSystemName: string;
+  partitionDnsSuffix: string;
+  partitionName: string;
+  systemName: string;
+};
+
+export type TBackupProgress = {
+  progress: number;
+  error?: TError;
+  link?: string;
+  isCompleted: boolean;
 };

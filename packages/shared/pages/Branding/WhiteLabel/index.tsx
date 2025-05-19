@@ -26,6 +26,7 @@
 
 import React, { useState } from "react";
 import isEqual from "lodash/isEqual";
+import { useTranslation } from "react-i18next";
 
 import { Text } from "../../../components/text";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
@@ -33,18 +34,14 @@ import { toastr } from "../../../components/toast";
 import { WhiteLabelLogoType } from "../../../enums";
 import { globalColors } from "../../../themes";
 
-import { useResponsiveNavigation } from "../../../hooks/useResponsiveNavigation";
-
 import { Logo } from "./Logo";
 import { WhiteLabelWrapper, StyledSpacer } from "./WhiteLabel.styled";
 import { IWhiteLabel, IWhiteLabelData } from "./WhiteLabel.types";
 import { getLogoOptions, generateLogo, uploadLogo } from "./WhiteLabel.helper";
 import { WhiteLabelHeader } from "./WhiteLabelHeader";
-import { brandingRedirectUrl } from "../constants";
 
 export const WhiteLabel = (props: IWhiteLabel) => {
   const {
-    t,
     logoUrls,
     isSettingPaid,
     showAbout,
@@ -54,19 +51,14 @@ export const WhiteLabel = (props: IWhiteLabel) => {
     onRestoreDefault,
     isSaving,
     enableRestoreButton,
-    deviceType,
     setLogoUrls,
     defaultWhiteLabelLogoUrls,
   } = props;
+  const { t } = useTranslation("Common");
+
   const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
 
   const [isEmptyLogoText, setIsEmptyLogoText] = useState(!logoTextWhiteLabel);
-
-  useResponsiveNavigation({
-    redirectUrl: brandingRedirectUrl,
-    currentLocation: "white-label",
-    deviceType,
-  });
 
   const onChangeLogoText = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -182,7 +174,6 @@ export const WhiteLabel = (props: IWhiteLabel) => {
   return (
     <WhiteLabelWrapper>
       <WhiteLabelHeader
-        t={t}
         showNotAvailable={showNotAvailable}
         isSettingPaid={isSettingPaid}
         standalone={standalone}
@@ -206,7 +197,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
           <div className="logos-wrapper">
             <Logo
               name={logoUrls[0].name}
-              title={t("Profile:LightTheme")}
+              title={t("LightTheme")}
               src={logoUrls[0].path.light}
               imageClass="logo-header background-light"
               inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}
@@ -217,7 +208,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             />
             <Logo
               name={logoUrls[0].name}
-              title={t("Profile:DarkTheme")}
+              title={t("DarkTheme")}
               src={logoUrls[0].path.dark}
               imageClass="logo-header background-dark"
               inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_dark`}
@@ -241,7 +232,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
           <div className="logos-wrapper">
             <Logo
               name={logoUrls[5].name}
-              title={t("Profile:LightTheme")}
+              title={t("LightTheme")}
               src={logoUrls[5].path.light}
               imageClass="border-img logo-compact background-light"
               inputId={`logoUploader_${WhiteLabelLogoType.LeftMenu}_light`}
@@ -252,7 +243,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             />
             <Logo
               name={logoUrls[5].name}
-              title={t("Profile:DarkTheme")}
+              title={t("DarkTheme")}
               src={logoUrls[5].path.dark}
               imageClass="border-img logo-compact background-dark"
               inputId={`logoUploader_${WhiteLabelLogoType.LeftMenu}_dark`}
@@ -276,7 +267,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
           <div className="logos-login-wrapper">
             <Logo
               name={logoUrls[1].name}
-              title={t("Profile:LightTheme")}
+              title={t("LightTheme")}
               src={logoUrls[1].path.light}
               imageClass="border-img logo-big background-white"
               inputId={`logoUploader_${WhiteLabelLogoType.LoginPage}_light`}
@@ -287,7 +278,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             />
             <Logo
               name={logoUrls[1].name}
-              title={t("Profile:DarkTheme")}
+              title={t("DarkTheme")}
               src={logoUrls[1].path.dark}
               imageClass="border-img logo-big background-dark"
               inputId={`logoUploader_${WhiteLabelLogoType.LoginPage}_dark`}
@@ -312,7 +303,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             <div className="logos-wrapper">
               <Logo
                 name={logoUrls[6].name}
-                title={t("Profile:LightTheme")}
+                title={t("LightTheme")}
                 src={logoUrls[6].path.light}
                 imageClass="border-img logo-about background-white"
                 inputId={`logoUploader_${WhiteLabelLogoType.AboutPage}_light`}
@@ -323,7 +314,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
               />
               <Logo
                 name={logoUrls[6].name}
-                title={t("Profile:DarkTheme")}
+                title={t("DarkTheme")}
                 src={logoUrls[6].path.dark}
                 imageClass="border-img logo-about background-dark"
                 inputId={`logoUploader_${WhiteLabelLogoType.AboutPage}_dark`}

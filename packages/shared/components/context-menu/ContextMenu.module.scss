@@ -3,6 +3,14 @@
 @use "../../styles/mixins";
 
 .contextMenu {
+  :global(.rtl) {
+    --context-menu-header-text-margin: 0 8px 0 0;
+    --context-menu-submenu-list-margin: -4px;
+
+    --context-menu-submenu-transoform: scaleX(-1);
+    --context-menu-submenu-transoform-box: content-box;
+  }
+
   :global {
     .p-contextmenu {
       position: absolute;
@@ -200,6 +208,12 @@
         }
       }
       margin-inline-end: 8px;
+    }
+
+    .p-portal-icon {
+      cursor: pointer;
+      margin-inline-start: 12px;
+      margin-inline-end: 0px;
     }
 
     .p-contextmenu-enter {

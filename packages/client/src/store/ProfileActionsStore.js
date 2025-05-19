@@ -50,6 +50,7 @@ import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.ClientConfig?.proxy?.url, "/");
 const PROFILE_SELF_URL = combineUrl(PROXY_HOMEPAGE_URL, "/profile");
+const SETTINGS_URL = combineUrl(PROXY_HOMEPAGE_URL, "/portal-settings");
 // const PROFILE_MY_URL = combineUrl(PROXY_HOMEPAGE_URL, "/my");
 const ABOUT_URL = combineUrl(PROXY_HOMEPAGE_URL, "/about");
 const PAYMENTS_URL = combineUrl(
@@ -105,6 +106,8 @@ class ProfileActionsStore {
     this.isShowLiveChat = this.getStateLiveChat();
 
     makeAutoObservable(this);
+
+    this.checkUrlActions();
   }
 
   getStateLiveChat = () => {
@@ -207,11 +210,17 @@ class ProfileActionsStore {
   //  window.open(VIDEO_GUIDES_URL, "_blank");
   // };
 
-  onHotkeysClick = () => {
+  onHotkeysClick = (event) => {
+    if (event && event.originalEvent) {
+      event.originalEvent.preventDefault();
+    }
     this.settingsStore.setHotkeyPanelVisible(true);
   };
 
-  onAboutClick = () => {
+  onAboutClick = (event) => {
+    if (event && event.originalEvent) {
+      event.originalEvent.preventDefault();
+    }
     if (isDesktop() || isTablet()) {
       this.setIsAboutDialogVisible(true);
     } else {
@@ -265,20 +274,24 @@ class ProfileActionsStore {
           icon: CatalogSettingsReactSvgUrl,
           label: t("Common:Settings"),
           onClick: (obj) => this.onSettingsClick("/portal-settings", obj),
+          url: SETTINGS_URL,
+          preventNewTab: true,
         }
       : null;
 
     const protocol = window?.location?.protocol;
 
-    const managementItems = portals.map((portal) => {
-      return {
-        key: portal.tenantId,
-        label: portal.domain,
-        onClick: () => window.open(`${protocol}//${portal.domain}/`, "_self"),
-        disabled: false,
-        checked: tenantAlias === portal.portalName,
-      };
-    });
+    const managementItems =
+      portals?.map((portal) => {
+        return {
+          key: portal.tenantId,
+          label: portal.domain,
+          isPortal: true,
+          onClick: () => window.open(`${protocol}//${portal.domain}/`, "_self"),
+          disabled: false,
+          checked: tenantAlias === portal.portalName,
+        };
+      }) ?? [];
 
     const management =
       isAdmin && standalone && !limitedAccessSpace
@@ -288,6 +301,8 @@ class ProfileActionsStore {
             icon: SpacesReactSvgUrl,
             label: t("Common:Spaces"),
             onClick: this.onSpacesClick,
+            url: SPACES_URL,
+            preventNewTab: true,
             items:
               baseDomain && baseDomain !== "localhost"
                 ? [
@@ -319,7 +334,9 @@ class ProfileActionsStore {
         key: "user-menu-hotkeys",
         icon: HotkeysReactSvgUrl,
         label: t("Common:Hotkeys"),
-        onClick: this.onHotkeysClick,
+        onClick: (e) => this.onHotkeysClick(e),
+        url: `${window.location.pathname}?action=hotkeys`,
+        preventNewTab: true,
       };
     }
     // }
@@ -360,7 +377,8 @@ class ProfileActionsStore {
         key: "user-menu-about",
         icon: InfoOutlineReactSvgUrl,
         label: t("Common:AboutCompanyTitle"),
-        onClick: this.onAboutClick,
+        onClick: (e) => this.onAboutClick(e),
+        url: `${window.location.pathname}?action=about`,
       };
     }
 
@@ -378,6 +396,8 @@ class ProfileActionsStore {
         icon: ProfileReactSvgUrl,
         label: t("Common:Profile"),
         onClick: (obj) => this.onProfileClick(obj),
+        url: PROFILE_SELF_URL,
+        preventNewTab: true,
       },
       settings,
       management,
@@ -388,6 +408,8 @@ class ProfileActionsStore {
           label: t("Common:PaymentsTitle"),
           onClick: (obj) => this.onPaymentsClick(obj),
           additionalElement: <TariffBar />,
+          url: PAYMENTS_URL,
+          preventNewTab: true,
         },
       {
         isSeparator: true,
@@ -398,6 +420,8 @@ class ProfileActionsStore {
         icon: HelpCenterReactSvgUrl,
         label: t("Common:HelpCenter"),
         onClick: this.onHelpCenterClick,
+        url: this.settingsStore.helpCenterDomain || "#",
+        preventNewTab: true,
       },
       /* videoGuidesEnabled && {
         key: "user-menu-video",
@@ -416,6 +440,8 @@ class ProfileActionsStore {
         icon: EmailReactSvgUrl,
         label: t("Common:FeedbackAndSupport"),
         onClick: this.onSupportClick,
+        url: this.settingsStore.feedbackAndSupportUrl || "#",
+        preventNewTab: true,
       },
       bookTraining,
       about,
@@ -450,6 +476,25 @@ class ProfileActionsStore {
     }
 
     return actions.filter(Boolean);
+  };
+
+  checkUrlActions = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const action = urlParams.get("action");
+    if (action === "hotkeys") {
+      const newUrl = window.location.pathname + window.location.hash;
+      window.history.replaceState({}, document.title, newUrl);
+      setTimeout(() => {
+        this.onHotkeysClick();
+      }, 1000);
+    } else if (action === "about") {
+      const newUrl = window.location.pathname + window.location.hash;
+      window.history.replaceState({}, document.title, newUrl);
+
+      setTimeout(() => {
+        this.onAboutClick();
+      }, 1000);
+    }
   };
 }
 

@@ -62,11 +62,6 @@ export interface InfoPanelToggleColorTheme extends DefaultColorThemeProps {
   isInfoPanelVisible?: boolean;
 }
 
-export interface VersionBadgeTheme extends DefaultColorThemeProps {
-  themeId: ThemeId.VersionBadge;
-  $isVersion?: boolean;
-}
-
 export interface LinkColorTheme extends LinkProps, DefaultColorThemeProps {
   themeId: ThemeId.Link;
   noHover?: boolean;
@@ -88,6 +83,5 @@ export type ColorThemeProps =
   | IndicatorFilterButtonColorTheme
   | IndicatorLoaderColorTheme
   | InfoPanelToggleColorTheme
-  | VersionBadgeTheme
   | LinkColorTheme
   | SubmenuTextTheme;

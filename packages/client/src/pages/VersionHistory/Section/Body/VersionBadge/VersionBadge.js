@@ -24,33 +24,57 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { TColorScheme, TTheme } from "../../../themes";
+import React from "react";
+import { Text } from "@docspace/shared/components/text";
+import classNames from "classnames";
+import VersionSvg from "PUBLIC_DIR/images/versionrevision_active.react.svg";
+import { useTranslation } from "react-i18next";
+import styles from "./VersionBadge.module.scss";
 
-const getDefaultStyles = ({
-  $currentColorScheme,
-  $isVersion,
-  $isFirst,
-}: {
-  $currentColorScheme?: TColorScheme;
-  $isVersion?: boolean;
-  $isFirst?: boolean;
-  theme: TTheme;
-}) =>
-  $currentColorScheme &&
-  $isVersion &&
-  !$isFirst &&
-  css`
-    .version-mark-icon {
-      path {
-        fill: ${$currentColorScheme?.main?.accent};
-        stroke: ${$currentColorScheme?.main?.accent};
-      }
-    }
+const VersionBadge = ({
+  className,
+  isVersion,
+  versionGroup,
+  index,
+  t,
+  theme,
+  ...rest
+}) => {
+  const { i18n } = useTranslation();
+  const isJapanese = i18n.language === "ja-JP";
+  const isFirst = index === 0;
 
-    .version_badge-text {
-      color: ${$currentColorScheme.text?.accent};
-    }
-  `;
+  return (
+    <div
+      className={classNames(styles.versionBadge, className, {
+        [styles.isAccent]: !isFirst,
+      })}
+      {...rest}
+    >
+      <VersionSvg
+        className={classNames(styles.versionMarkIcon, {
+          [styles.isVersion]: isVersion,
+          [styles.isFirst]: isFirst,
+        })}
+      />
 
-export default styled.div(getDefaultStyles);
+      <Text
+        className={classNames(styles.versionBadgeText, "version_badge-text", {
+          [styles.reverse]: isJapanese,
+        })}
+        color={theme.filesVersionHistory.badge.color}
+        isBold
+        fontSize="12px"
+      >
+        {isVersion ? (
+          <>
+            <span>{t("Version")}</span>
+            <span>{versionGroup}</span>
+          </>
+        ) : null}
+      </Text>
+    </div>
+  );
+};
+
+export default VersionBadge;

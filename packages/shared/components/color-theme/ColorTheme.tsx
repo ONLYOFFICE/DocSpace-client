@@ -33,7 +33,6 @@ import { ColorThemeProps } from "./ColorTheme.types";
 import { ThemeId } from "./ColorTheme.enums";
 
 import LinkTheme from "./styled-components/link";
-import VersionBadgeTheme from "./styled-components/versionBadge";
 import SubmenuTextTheme from "./styled-components/submenuText";
 
 const ColorTheme = forwardRef<
@@ -46,15 +45,6 @@ const ColorTheme = forwardRef<
 
   const getElement = () => {
     switch (themeId) {
-      case ThemeId.VersionBadge: {
-        return (
-          <VersionBadgeTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-          />
-        );
-      }
-
       case ThemeId.Link: {
         const onClickAction = (e: React.MouseEvent<Element>) => {
           if ("onClick" in props) props.onClick?.(e);

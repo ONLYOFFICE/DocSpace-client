@@ -39,7 +39,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import AutomaticPaymentsBlock from "./sub-components/AutoPayments";
 import { formatCurrencyValue } from "./utils";
 
-import styles from "./styles/WalletRefilledModal.module.scss";
+import styles from "./styles/Wallet.module.scss";
 
 type WalletRefilledModalProps = {
   visible: boolean;

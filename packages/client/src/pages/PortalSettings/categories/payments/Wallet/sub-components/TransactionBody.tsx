@@ -37,7 +37,6 @@ import NoTransactionsFilterIcon from "PUBLIC_DIR/images/no.transactions.filter.r
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import "../styles/TransactionHistory.scss";
 import TableView from "./TableView";
 import RowView from "./RowView";
 

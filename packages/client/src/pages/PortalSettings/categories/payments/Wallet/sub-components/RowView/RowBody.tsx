@@ -28,13 +28,14 @@ import React from "react";
 import moment from "moment";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { TTheme } from "@docspace/shared/themes";
 import { Text } from "@docspace/shared/components/text";
 import { Row, RowContent } from "@docspace/shared/components/rows";
 import { TTransactionCollection } from "@docspace/shared/api/portal/types";
 
-import "../../styles/TransactionHistory.scss";
+import styles from "../../styles/TransactionHistory.module.scss";
 import { accountingLedgersFormat } from "../../utils";
 
 type TransactionRowViewProps = {
@@ -82,12 +83,14 @@ const TransactionRowView: React.FC<TransactionRowViewProps> = ({
 
   return (
     <Row
-      className="transaction-row"
+      className={styles.transactionRow}
       badgesComponent={
         <Text
           fontWeight={600}
           fontSize="13px"
-          className={`transaction-row__amount transaction-row__amount--${isCredit ? "credit" : ""}`}
+          className={classNames(styles.transactionRowAmount, {
+            [styles.transactionRowAmountCredit]: isCredit,
+          })}
         >
           {formattedAmount}
         </Text>

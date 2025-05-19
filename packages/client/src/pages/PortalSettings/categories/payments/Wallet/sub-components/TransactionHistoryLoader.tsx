@@ -28,7 +28,7 @@ import React from "react";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import classNames from "classnames";
 
-import styles from "../styles/TransactionHistoryLoader.module.scss";
+import styles from "../styles/TransactionHistory.module.scss";
 import TableLoader from "./TableLoader";
 
 type TransactionHistoryLoaderProps = {

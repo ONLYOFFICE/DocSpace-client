@@ -35,61 +35,31 @@ import { Tooltip } from "@docspace/shared/components/tooltip";
 
 import { formatCurrencyValue } from "../utils";
 import styles from "../styles/Amount.module.scss";
+import { useAmountValue } from "../context";
 
 type AmountProps = {
-  setAmount: (amount: string) => void;
-  amount: string;
   language: string;
   currency: string;
   walletCustomerEmail?: boolean;
 };
 
 const Amount = (props: AmountProps) => {
-  const { setAmount, amount, language, currency, walletCustomerEmail } = props;
+  const { language, currency, walletCustomerEmail } = props;
 
+  const { amount, setAmount } = useAmountValue();
   const [selectedAmount, setSelectedAmount] = useState<string | undefined>();
   const { t } = useTranslation("Payments");
 
-  const amountTabs = useMemo(
-    () => [
-      {
-        name: formatCurrencyValue(language, 10, currency),
-        id: "10",
-        value: 10,
-        content: null,
-        isDisabled: !walletCustomerEmail,
-      },
-      {
-        name: formatCurrencyValue(language, 20, currency),
-        id: "20",
-        value: 20,
-        content: null,
-        isDisabled: !walletCustomerEmail,
-      },
-      {
-        name: formatCurrencyValue(language, 30, currency),
-        id: "30",
-        value: 30,
-        content: null,
-        isDisabled: !walletCustomerEmail,
-      },
-      {
-        name: formatCurrencyValue(language, 50, currency),
-        id: "50",
-        value: 50,
-        content: null,
-        isDisabled: !walletCustomerEmail,
-      },
-      {
-        name: formatCurrencyValue(language, 100, currency),
-        id: "100",
-        value: 100,
-        content: null,
-        isDisabled: !walletCustomerEmail,
-      },
-    ],
-    [language, currency, walletCustomerEmail],
-  );
+  const amountTabs = () => {
+    const amounts = [10, 20, 30, 50, 100];
+    return amounts.map((item) => ({
+      name: formatCurrencyValue(language, item, currency),
+      id: item.toString(),
+      value: item,
+      content: null,
+      isDisabled: !walletCustomerEmail,
+    }));
+  };
 
   const onSelectAmount = (data: TTabItem) => {
     setSelectedAmount(data.id);
@@ -125,7 +95,7 @@ const Amount = (props: AmountProps) => {
             {t("AmountSelection")}
           </Text>
           <Tabs
-            items={amountTabs}
+            items={amountTabs()}
             selectedItemId={selectedAmount}
             onSelect={onSelectAmount}
             type={TabsTypes.Secondary}

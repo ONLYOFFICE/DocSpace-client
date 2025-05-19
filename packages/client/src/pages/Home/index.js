@@ -168,6 +168,7 @@ const PureHome = (props) => {
     formFillingTipsVisible,
     chatFiles,
     vectorizedFiles,
+    wrongFiles,
     removeActiveItem,
     allowInvitingGuests,
     checkGuests,
@@ -204,7 +205,7 @@ const PureHome = (props) => {
     [setIsSectionHeaderLoading, setIsSectionBodyLoading],
   );
 
-  useFlows({ vectorizedFiles, removeActiveItem });
+  useFlows({ vectorizedFiles, removeActiveItem, wrongFiles });
 
   const { onDrop } = useFiles({
     t,
@@ -706,6 +707,7 @@ export const Component = inject(
 
       chatFiles: filesStore.filesList,
       vectorizedFiles: flowStore.vectorizedFiles,
+      wrongFiles: flowStore.wrongFiles,
       removeActiveItem,
       allowInvitingGuests,
       checkGuests,

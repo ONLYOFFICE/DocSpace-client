@@ -60,6 +60,7 @@ const FilesSelector = ({
   toggleSelector,
   getIcon,
   currentDeviceType,
+  includedItems,
 }: FilesSelectorProps) => {
   const { setFiles } = useFilesStore();
   const { aiSelectedFolder } = useMessageStore();
@@ -151,6 +152,7 @@ const FilesSelector = ({
           applyFilterOption={ApplyFilterOption.All}
           isMultiSelect
           onSelectItem={onSelect}
+          includedItems={includedItems}
         />
       }
     />

@@ -38,6 +38,7 @@ class FlowStore {
   userId: string = "";
 
   vectorizedFiles: (TFile | SimpleFile)[] = [];
+  wrongFiles: (TFile | SimpleFile)[] = [];
 
   constructor() {
     this.api = new FlowsApi("/onlyflow/api/v1");
@@ -76,6 +77,13 @@ class FlowStore {
     )
       return true;
 
+    if (
+      this.wrongFiles.some(
+        (f) => f.id === file.id && f.version === file.version,
+      )
+    )
+      return true;
+
     return false;
   };
 
@@ -105,7 +113,7 @@ class FlowStore {
 
       if (msg === "error") {
         toastr.error(`Error vectorizing document: ${file.title}`);
-        this.vectorizedFiles = [...this.vectorizedFiles, file];
+        this.wrongFiles = [...this.wrongFiles, file];
 
         return;
       }
@@ -115,7 +123,7 @@ class FlowStore {
       }
     } catch (error) {
       toastr.error(`Error vectorizing document: ${file.title}`);
-      this.vectorizedFiles = [...this.vectorizedFiles, file];
+      this.wrongFiles = [...this.wrongFiles, file];
 
       console.log(error);
     }
@@ -176,7 +184,7 @@ class FlowStore {
 
   vectorizeDocument = async (file: TFile | SimpleFile) => {
     if (!FILE_EXSTS.includes(file.fileExst.replace(".", ""))) {
-      this.vectorizedFiles = [...this.vectorizedFiles, file];
+      this.wrongFiles = [...this.wrongFiles, file];
       return;
     }
 
@@ -188,7 +196,7 @@ class FlowStore {
 
       if (msg === "error") {
         toastr.error(`Error vectorizing document: ${file.title}`);
-        this.vectorizedFiles = [...this.vectorizedFiles, file];
+        this.wrongFiles = [...this.wrongFiles, file];
 
         return;
       }
@@ -205,7 +213,7 @@ class FlowStore {
       return msg;
     } catch (error) {
       toastr.error(`Error vectorizing document: ${file.title}`);
-      this.vectorizedFiles = [...this.vectorizedFiles, file];
+      this.wrongFiles = [...this.wrongFiles, file];
 
       console.log(error);
     }

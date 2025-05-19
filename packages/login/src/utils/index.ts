@@ -195,7 +195,11 @@ export const getRedirectURL = () => {
     const scopes = getCookie("x-scopes");
     const url = getCookie("x-url");
 
-    return `${url}&scope=${scopes?.split(";").join("%20")}`;
+    let redirectUrl = url;
+
+    if (scopes) redirectUrl += `&scope=${scopes?.split(";").join("%20")}`;
+
+    return redirectUrl;
   }
 
   const decodedRedirectUrl = window.atob(

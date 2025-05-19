@@ -78,7 +78,7 @@
   "RoomDenyDownloadEnabled": "බාගැනීම සහ පිටපත් කිරීම සීමා කර ඇත",
   "RoomExternalLinkCreated": "ලිංකිය සාදා ගන්නා ලදි.",
   "RoomExternalLinkDeleted": "<1>«{{linkTitle}}»</1> සබැඳිය මකා දමන ලදී.",
-  "RoomExternalLinkRenamed": "සබැඳිය <1>«{{oldLinkTitle}}»</1> <1>«{{linkTitle}}»</1> ලෙස නැවත නම් කරන ලදී <1>«{{linkTitle}}»</1>",
+  "RoomExternalLinkRenamed": "සබැඳිය <1>«{{oldLinkTitle}}»</1> ලෙස නැවත නම් කරන ලදී <1>«{{linkTitle}}»</1>",
   "RoomExternalLinkRevoked": "පෙරමුණ සම්බන්ධතාව <1>«{{linkTitle}}»</1> අවලංගු කරන ලදි <br/> නව සම්බන්ධතාව <1>«{{linkTitle}}»</1> සාදා ගන්නා ලදි",
   "RoomGroupAdded": "කණ්ඩායම් එකතු කරන ලදි.",
   "RoomGroupRemove": "කුழு ඉවත් කරනු ලැබුවා",

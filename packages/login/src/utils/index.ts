@@ -199,7 +199,7 @@ export const getRedirectURL = () => {
 
     if (scopes) redirectUrl += `&scope=${scopes?.split(";").join("%20")}`;
 
-    return redirectUrl;
+    return redirectUrl!;
   }
 
   const decodedRedirectUrl = window.atob(

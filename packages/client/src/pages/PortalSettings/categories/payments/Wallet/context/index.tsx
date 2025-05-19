@@ -24,58 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-.walletInfoContainer {
-  display: flex;
-  background: var(--payment-background-color);
-  min-height: 72px;
-  padding: 16px;
-  box-sizing: border-box;
-  border-radius: 6px;
-  align-items: center;
-  position: relative;
-}
+import React, { createContext, useContext, useState, useMemo } from "react";
 
-.walletInfoIcon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: var(--payment-icon-background);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 16px;
+const AmountContext = createContext<{
+  amount: string;
+  setAmount: React.Dispatch<React.SetStateAction<string>>;
+} | null>(null);
 
-  svg {
-    width: 16px;
-    height: 16px;
-    path {
-      fill: var(--payment-icon-color);
-    }
+export const useAmountValue = () => {
+  const context = useContext(AmountContext);
+  if (!context) {
+    throw new Error("useAmountValue must be used within an AmountProvider");
   }
-}
+  return context;
+};
 
-.walletInfoBody {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
+export const AmountProvider: React.FC<{
+  children: React.ReactNode;
+}> = ({ children }) => {
+  const [amount, setAmount] = useState<string>("");
+  const value = useMemo(() => ({ amount, setAmount }), [amount]);
 
-.walletInfoTitle {
-  line-height: 16px;
-}
-
-.walletInfoBalance {
-  font-size: 14px;
-  line-height: 16px;
-}
-
-.walletInfoTopUp {
-  margin-left: auto;
-  color: var(--payment-link-color, #4781D1);
-  cursor: pointer;
-  font-weight: 600;
-  
-  &:hover {
-    text-decoration: underline;
-  }
-}
+  return (
+    <AmountContext.Provider value={value}>{children}</AmountContext.Provider>
+  );
+};

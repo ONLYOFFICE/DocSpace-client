@@ -47,7 +47,7 @@ import {
 import FilterIcon from "@docspace/shared/components/filter/sub-components/FilterIcon";
 
 import TransactionBody from "./sub-components/TransactionBody";
-import "./styles/TransactionHistory.scss";
+import styles from "./styles/TransactionHistory.module.scss";
 import TableLoader from "./sub-components/TableLoader";
 
 type TransactionHistoryProps = {
@@ -206,7 +206,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
   };
 
   const datesComponent = (
-    <Text fontWeight={600} fontSize="14px" className="transaction-dates">
+    <Text fontWeight={600} fontSize="14px" className={styles.transactionDates}>
       <Trans
         i18nKey="FromTo"
         ns="Payments"
@@ -244,7 +244,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
   );
 
   const filterCombobox = (
-    <div className="transaction-history-combobox">
+    <div className={styles.transactionHistoryCombobox}>
       <ComboBox
         tabIndex={1}
         options={typeOfHistoty}
@@ -275,8 +275,8 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
 
   return (
     <>
-      <div className="transaction-history-header">
-        <Text isBold fontSize="16px" className="transaction-history-title">
+      <div className={styles.transactionHistoryHeader}>
+        <Text isBold fontSize="16px" className={styles.transactionHistoryTitle}>
           {t("TransactionHistory")}
         </Text>
         {(hasAppliedDateFilter || isTransactionHistoryExist) && isMobile
@@ -298,16 +298,15 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
       )}
 
       {isTransactionHistoryExist && !isLoading ? (
-        <div className="download-wrapper">
+        <div className={styles.downloadWrapper}>
           <Button
-            className="download-report_button"
             label={t("Settings:DownloadReportBtnText")}
             size={ButtonSize.small}
             minWidth="auto"
             onClick={getReport}
             isLoading={isFormationHistory}
           />
-          <Text as="span" className="download-report_description">
+          <Text as="span" className={styles.downloadReportDescription}>
             {t("Settings:ReportSaveLocation", {
               sectionName: t("Common:MyFilesSection"),
             })}
@@ -320,12 +319,12 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
           visible={isFilterDialogVisible}
           onClose={closeFilterDialog}
           displayType={ModalDialogType.aside}
-          className="filter-dialog"
+          className={styles.filterDialog}
         >
           <ModalDialog.Header>{t("Filter")}</ModalDialog.Header>
           <ModalDialog.Body>
-            <div className="filter-dialog-content">
-              <div className="filter-dialog-section">
+            <div className={styles.filterDialogContent}>
+              <div className={styles.filterDialogSection}>
                 <Text fontWeight={600} fontSize="15px">
                   {t("Common:Type")}
                 </Text>
@@ -341,8 +340,8 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
                   scaled
                 />
               </div>
-              <div className="filter-dialog-divider" />
-              <div className="filter-dialog-section">
+              <div className={styles.filterDialogDivider} />
+              <div className={styles.filterDialogSection}>
                 <Text fontWeight={600} fontSize="15px">
                   {t("TransactionPeriod")}
                 </Text>

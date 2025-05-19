@@ -28,12 +28,13 @@ import React from "react";
 import moment from "moment";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 import { TTransactionCollection } from "@docspace/shared/api/portal/types";
 
-import "../../styles/TransactionHistory.scss";
+import styles from "../../styles/TransactionHistory.module.scss";
 import { accountingLedgersFormat } from "../../utils";
 
 interface TransactionRowProps {
@@ -96,7 +97,9 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
         <Text
           fontWeight={600}
           fontSize="11px"
-          className={`transaction-row__amount--${isCredit ? "credit" : ""}`}
+          className={classNames({
+            [styles.transactionRowAmountCredit]: isCredit,
+          })}
         >
           {formattedAmount}
         </Text>

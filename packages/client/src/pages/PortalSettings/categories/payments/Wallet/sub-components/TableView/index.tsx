@@ -29,6 +29,7 @@ import { inject, observer } from "mobx-react";
 import { TableBody, TableContainer } from "@docspace/shared/components/table";
 import { TTransactionCollection } from "@docspace/shared/api/portal/types";
 
+import styles from "../../styles/TransactionHistory.module.scss";
 import TableHeader from "./TableHeader";
 import TransactionRow from "./TableBody";
 
@@ -52,7 +53,7 @@ const TableView = ({
   const ref = useRef(null);
 
   return (
-    <div className="transaction-history-body">
+    <div className={styles.transactionHistoryBody}>
       <TableContainer forwardedRef={ref} useReactWindow={false}>
         <TableHeader
           sectionWidth={sectionWidth}

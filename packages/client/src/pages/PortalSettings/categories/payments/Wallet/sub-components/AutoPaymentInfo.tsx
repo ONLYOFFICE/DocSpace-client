@@ -33,7 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 
 import { formatCurrencyValue } from "../utils";
-import styles from "../styles/AutoPaymentInfo.module.scss";
+import styles from "../styles/AutoPayments.module.scss";
 
 type AutoPaymentInfoProps = {
   onOpen: (e: React.MouseEvent) => void;

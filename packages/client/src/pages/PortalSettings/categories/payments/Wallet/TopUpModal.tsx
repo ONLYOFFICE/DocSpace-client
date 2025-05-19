@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -33,16 +33,13 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 
-import { toastr } from "@docspace/shared/components/toast";
-
-import { saveDeposite } from "@docspace/shared/api/portal";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-
 import WalletInfo from "./sub-components/WalletInfo";
 import PaymentMethod from "./sub-components/PaymentMethod";
 import Amount from "./sub-components/Amount";
+import TopUpButtons from "./sub-components/TopUpButtons";
 import AutomaticPaymentsBlock from "./sub-components/AutoPayments";
 import { formatCurrencyValue } from "./utils";
+import { AmountProvider } from "./context";
 import styles from "./styles/TopUpModal.module.scss";
 
 type TopUpModalProps = {
@@ -84,31 +81,6 @@ const TopUpModal = (props: TopUpModalProps) => {
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
-  const [amount, setAmount] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-
-  const isButtonDisabled = !amount || !walletCustomerEmail;
-
-  const onTopUp = async () => {
-    try {
-      setIsLoading(true);
-
-      const res = await saveDeposite(+amount, currency);
-
-      if (!res) return;
-      if (!res.includes("ok")) throw new Error(res);
-
-      await Promise.allSettled([fetchBalance!(), fetchTransactionHistory!()]);
-
-      onClose();
-    } catch (e) {
-      console.error(e);
-
-      toastr.error(e instanceof Error ? e.message : String(e));
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   const balanceValue = formatCurrencyValue(
     language!,
@@ -119,54 +91,44 @@ const TopUpModal = (props: TopUpModalProps) => {
   );
 
   return (
-    <ModalDialog
-      visible={visible}
-      onClose={onClose}
-      displayType={ModalDialogType.aside}
-      {...headerProps}
-    >
-      <ModalDialog.Header>{t("TopUpWallet")}</ModalDialog.Header>
-      <ModalDialog.Body>
-        <div className={styles.modalBody}>
-          <WalletInfo balance={balanceValue} />
-          <PaymentMethod
-            walletCustomerEmail={walletCustomerEmail!}
-            cardLinked={cardLinked!}
-            accountLink={accountLink!}
-          />
-          <Amount
-            setAmount={setAmount}
-            amount={amount}
-            language={language!}
+    <AmountProvider>
+      <ModalDialog
+        visible={visible}
+        onClose={onClose}
+        displayType={ModalDialogType.aside}
+        {...headerProps}
+      >
+        <ModalDialog.Header>{t("TopUpWallet")}</ModalDialog.Header>
+        <ModalDialog.Body>
+          <div className={styles.modalBody}>
+            <WalletInfo balance={balanceValue} />
+            <PaymentMethod
+              walletCustomerEmail={walletCustomerEmail!}
+              cardLinked={cardLinked!}
+              accountLink={accountLink!}
+            />
+            <Amount
+              language={language!}
+              currency={currency}
+              walletCustomerEmail={walletCustomerEmail}
+            />
+
+            {wasFirstTopUp && walletCustomerEmail ? (
+              <AutomaticPaymentsBlock isEditAutoPayment={isEditAutoPayment!} />
+            ) : null}
+          </div>
+        </ModalDialog.Body>
+        <ModalDialog.Footer>
+          <TopUpButtons
             currency={currency}
+            fetchBalance={fetchBalance}
+            fetchTransactionHistory={fetchTransactionHistory}
+            onClose={onClose}
             walletCustomerEmail={walletCustomerEmail}
           />
-
-          {wasFirstTopUp && walletCustomerEmail ? (
-            <AutomaticPaymentsBlock isEditAutoPayment={isEditAutoPayment!} />
-          ) : null}
-        </div>
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          key="OkButton"
-          label={t("TopUp")}
-          size={ButtonSize.normal}
-          primary
-          scale
-          isDisabled={isButtonDisabled}
-          onClick={onTopUp}
-          isLoading={isLoading}
-        />
-        <Button
-          key="CancelButton"
-          label={t("Common:CancelButton")}
-          size={ButtonSize.normal}
-          scale
-          onClick={onClose}
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
+        </ModalDialog.Footer>
+      </ModalDialog>
+    </AmountProvider>
   );
 };
 

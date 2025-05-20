@@ -127,7 +127,10 @@ const Wallet = (props: WalletProps) => {
     setIsEditAutoPayment(true);
   };
 
-  const isDisbled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
+  const isDisbled =
+    !isNonProfit && (cardLinkedOnFreeTariff || !isFreeTariff)
+      ? !isPayer
+      : false;
 
   const onClick = async () => {
     setIsRefreshing(true);

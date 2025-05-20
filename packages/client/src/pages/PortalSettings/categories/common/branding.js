@@ -32,7 +32,7 @@ import styled from "styled-components";
 
 import { isManagement } from "@docspace/shared/utils/common";
 import { DeviceType } from "@docspace/shared/enums";
-import { MobileView } from "@docspace/shared/pages/Branding/mobile-view";
+import { MobileView } from "@docspace/shared/pages/Branding/MobileView";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";

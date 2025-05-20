@@ -561,9 +561,9 @@ async function keyUsageRoutes(fastify) {
         try {
           // Add or update comment in the metadata
           // Store comment in the correct format expected by the application
-          file.data.comment_text = comment;
-          file.data.comment_is_auto = false;
-          file.data.comment_updated_at = new Date().toISOString();
+          file.data.comment.text = comment;
+          file.data.comment.is_auto = false;
+          file.data.comment.updated_at = new Date().toISOString();
           file.data.updated_at = new Date().toISOString();
 
           await writeJsonWithConsistentEol(file.metaPath, file.data);

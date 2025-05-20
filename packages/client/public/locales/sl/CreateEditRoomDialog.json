@@ -1,5 +1,4 @@
 {
-  "ActivationRequired": "zahtevana aktivacija",
   "AddStaticText": "Dodaj statični tekst",
   "AddWatermarkElements": "Dodaj elemente vodnega žiga",
   "AddWatermarksToDocuments": "Dodaj vodni žig dokumentom",
@@ -33,7 +32,6 @@
   "StorageDescription": "Kvota prostora za shranjevanje je nastavljena na sobo. To vrednost lahko spremenite ali izklopite omejitev prostora za shranjevanje.",
   "TagsPlaceholder": "Dodaj oznak",
   "ThirdPartyStorageComboBoxPlaceholder": "Izberi shrambo",
-  "ThirdPartyStorageDescription": "Za shranjevanje podatkov za to sobo uporabi storitve tretjih oseb. V povezani shrambi bo ustvarjena nova mapa za shranjevanje podatkov te sobe.",
   "ThirdPartyStorageNoStorageAlert": "Predhodno morate povezati ustrezno storitev v razdelku “Integracija”. V nasprotnem primeru povezava ne bo mogoča.",
   "ThirdPartyStoragePermanentSettingDescription": "Datoteke so shranjene v shrambi tretje osebe {{thirdpartyTitle}} v mapi \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "Če želite povezati shrambo tretje osebe, morate dodati ustrezno storitev v razdelku Integracija v nastavitvah {{productName}}. Obrnite se na lastnika ali skrbnika {{productName}}, da omogočite integracijo.",

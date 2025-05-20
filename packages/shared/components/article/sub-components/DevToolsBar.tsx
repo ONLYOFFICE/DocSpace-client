@@ -46,16 +46,17 @@ const ArticleDevToolsBar = ({
   articleOpen,
   currentDeviceType,
   toggleArticleOpen,
+  path,
 }: ArticleDevToolsBarProps) => {
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
 
   const onClick = (e: React.MouseEvent) => {
-    const path = "/developer-tools";
+    const pathDevTools = path ?? "/developer-tools";
 
-    if (openingNewTab(path, e)) return;
+    if (openingNewTab(pathDevTools, e)) return;
 
-    navigate(path);
+    navigate(pathDevTools);
 
     if (articleOpen && currentDeviceType === DeviceType.mobile)
       toggleArticleOpen();

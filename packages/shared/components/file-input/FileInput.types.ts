@@ -52,7 +52,7 @@ export type FileInputProps = {
   /** Used as HTML `name` property */
   name?: string;
   /** Called when a file is selected */
-  onInput: (file: File | File[]) => void;
+  onInput?: (file: File | File[]) => void;
   /** Specifies the files visible for upload */
   accept?: string[];
   /** Specifies the label for the upload button */

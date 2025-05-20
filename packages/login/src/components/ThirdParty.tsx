@@ -76,7 +76,7 @@ const ThirdParty = ({
     if (
       ssoUrl &&
       hideAuthPage &&
-      searchParams.get("skipssoredirect") !== "true"
+      searchParams?.get("skipssoredirect") !== "true"
     ) {
       window.location.replace(ssoUrl);
     }

@@ -477,16 +477,6 @@ const StyledLink = styled(Link)`
   float: inline-end;
 `;
 
-const ResetLink = styled(Link)`
-  float: inline-start;
-  padding: 0 16px;
-  margin-bottom: 16px;
-  font-size: 13px;
-  color: ${(props) => props.theme.createEditRoomDialog.commonParam.textColor};
-  font-style: normal;
-  line-height: 15px;
-`;
-
 const StyledToggleButton = styled(ToggleButton)`
   inset-inline-end: 8px;
   margin-top: -4px;
@@ -570,7 +560,6 @@ export {
   StyledDeleteIcon,
   StyledButtons,
   StyledLink,
-  ResetLink,
   ScrollList,
   StyledToggleButton,
   StyledDescription,

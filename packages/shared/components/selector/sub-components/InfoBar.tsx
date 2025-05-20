@@ -23,16 +23,14 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React, { useContext, forwardRef, ForwardedRef } from "react";
-
+import { useContext, forwardRef, ForwardedRef } from "react";
 import PublicRoomBar from "../../public-room-bar";
 
 import { InfoBarContext } from "../contexts/InfoBar";
-
-import type { InfoBarProps } from "../Selector.types";
+import { InfoBarProps } from "../Selector.types";
 
 export const InfoBar = forwardRef(
-  ({ visible }: InfoBarProps, ref: ForwardedRef<HTMLDivElement>) => {
+  ({ visible, className }: InfoBarProps, ref: ForwardedRef<HTMLDivElement>) => {
     const { infoBarData, withInfoBar } = useContext(InfoBarContext);
 
     if (!infoBarData || !withInfoBar || !visible) return;
@@ -44,7 +42,7 @@ export const InfoBar = forwardRef(
         bodyText={infoBarData.description}
         iconName={infoBarData.icon}
         onClose={infoBarData.onClose}
-        className="selector_info-bar"
+        className={className}
       />
     );
   },

@@ -224,25 +224,20 @@ export const useContactsFilter = ({
           newFilter.area = "people";
         }
 
-        if (groupId) {
-          newFilter.group = groupId;
-        }
+        newFilter.group = groupId || null;
 
         newFilter.quotaFilter = quota;
 
         newFilter.page = 0;
 
-        if (status) newFilter.employeeStatus = status;
+        newFilter.employeeStatus = status;
 
-        if (role) newFilter.role = role;
-        if (payments) newFilter.payments = payments;
-        if (accountLoginType) newFilter.accountLoginType = accountLoginType;
-        if (withoutGroup) newFilter.withoutGroup = withoutGroup;
-        if (group) newFilter.group = group;
-        if (inviterId) {
-          newFilter.inviterId =
-            inviterId === FilterKeys.me ? userId : inviterId;
-        }
+        newFilter.role = role;
+        newFilter.payments = payments;
+        newFilter.accountLoginType = accountLoginType;
+        newFilter.withoutGroup = withoutGroup;
+        newFilter.group = group;
+        newFilter.inviterId = inviterId === FilterKeys.me ? userId : inviterId;
 
         const url = getContactsUrl(contactsTab, group ?? undefined);
 
@@ -597,7 +592,7 @@ export const useContactsFilter = ({
           {
             key: "filter-account",
             group: "filter-account",
-            label: t("ConnectDialog:Account"),
+            label: t("Common:Account"),
             isHeader: true,
             isLast: false,
           },

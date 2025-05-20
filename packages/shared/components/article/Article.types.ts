@@ -40,6 +40,7 @@ export type ArticleHeaderProps = {
   isBurgerLoading: boolean;
   withCustomArticleHeader: boolean;
   currentDeviceType: DeviceType;
+  showBackButton: boolean;
 };
 
 export type ArticleAppsProps = {
@@ -62,6 +63,7 @@ export type ArticleDevToolsBarProps = {
   articleOpen: boolean;
   currentDeviceType: DeviceType;
   toggleArticleOpen: TToggleArticleOpen;
+  path?: string;
 };
 
 export type ArticleZendeskProps = {

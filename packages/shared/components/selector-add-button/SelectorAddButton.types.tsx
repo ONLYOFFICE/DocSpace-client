@@ -43,4 +43,20 @@ export type SelectorAddButtonProps = {
   isAction?: boolean;
   /** Specifies the icon size */
   iconSize?: number;
+  /** Label attribute for text */
+  label?: string;
+  /** Font size property */
+  fontSize?: string;
+  /** Title attribute for text */
+  titleText?: string;
+  /** Disables text selection */
+  noSelect?: boolean;
+  /** Text direction */
+  dir?: "ltr" | "rtl" | "auto";
+  /** Sets the line height */
+  lineHeight?: string;
+  /** Disables word wrapping */
+  truncate?: boolean;
+  /** Size  the icon container */
+  size?: string;
 };

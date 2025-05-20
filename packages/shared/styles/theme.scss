@@ -1105,10 +1105,12 @@
   --selector-add-button-background: #{$gray-light-mid};
   --selector-add-button-hover-background: #{$light-gray-selected};
   --selector-add-button-active-background: #{$gray-strong};
+  --selector-add-button-disabled-background: #{$light-gray-hover};
 
   --selector-add-button-icon-color: #{$light-gray-dark};
   --selector-add-button-icon-color-hover: #{$light-gray-dark};
   --selector-add-button-icon-color-active: #{$light-gray-dark};
+  --selector-add-button-icon-color-disabled: #{$gray};
 
   --selector-add-button-border: none;
   --selector-add-button-box-sizing: border-box;
@@ -1118,19 +1120,25 @@
   --selector-add-button-padding: 10px;
   --selector-add-button-color: #{$light-gray-dark};
   --selector-add-button-hover-color: #{$black};
+
+  --selector-add-button-text-disabled: #{$gray-strong};
 }
 
 .dark {
   --selector-add-button-background: #{$gray-dark-mid};
-  --selector-add-button-hover-background: #{$dark-gray-light};
+  --selector-add-button-hover-background: #{$gray-dark-strong};
   --selector-add-button-active-background: #{$gray-dark-mid};
+  --selector-add-button-disabled-background: #{$light-dark-gray-hover};
 
-  --selector-add-button-icon-color: #{$gray-dark};
+  --selector-add-button-icon-color: #{$dark-gray-dark};
   --selector-add-button-icon-color-hover: #{$white};
-  --selector-add-button-icon-color-active: #{$dark-gray-dark};
+  --selector-add-button-icon-color-active: #{$gray-dark-pressed};
+  --selector-add-button-icon-color-disabled: #{$gray-dark};
 
   --selector-add-button-color: #{$gray-dark};
   --selector-add-button-hover-color: #{$white};
+
+  --selector-add-button-text-disabled: #{$gray-dark-text};
 }
 
 .light {
@@ -1440,6 +1448,8 @@
 .light {
   --files-section-tiles-view-tile-border: 1px solid #{$gray-strong};
 
+  --files-section-table-view-exst-color: #{$gray};
+
   --files-badges-bg-color: #{$white};
 
   --files-badges-link-color: #{$light-gray-dark};
@@ -1449,6 +1459,8 @@
 
 .dark {
   --files-section-tiles-view-tile-border: 1px solid #{$gray-dark-strong};
+
+  --files-section-table-view-exst-color: #{$gray};
 
   --files-badges-bg-color: #{$black};
 
@@ -1941,6 +1953,16 @@
 }
 
 .light {
+  --settings-description-color: #{$gray-text};
+  --settings-arrow-fill: #{$black};
+}
+
+.dark {
+  --settings-description-color: #{$gray-dark};
+  --settings-arrow-fill: #{$white};
+}
+
+.light{
   --icon-cropper-grid-color: #{$gray-strong};
   --icon-cropper-delete-button-bg: #{$gray-light};
   --icon-cropper-delete-button-hover-bg: #{$light-gray-hover};
@@ -2070,4 +2092,51 @@
 
 .dark {
   --modal-dialog-border-color: #{$gray-dark-strong};
+}
+
+.light {
+  --selector-body-description-text: #{$gray};
+  --selector-breadcrumbs-prev-item-color: #{$light-gray-dark};
+  --selector-breadcrumbs-arrow-right-color: #{$light-gray-dark};
+
+  --selector-info-background-color: #{$gray-light};
+  --selector-info-color: #{$gray-text};
+
+  --selector-item-hover-background: #{$gray-light};
+  --selector-item-disabled-text-color: #{$gray};
+  --selector-item-selected-background: #{$light-gray-hover};
+  --selector-item-input-button-border: 1px solid #{$gray-strong};
+  --selector-item-input-button-border-hover: #{$light-gray-dark};
+
+  --selector-empty-screen-pressed-button-color: #{$gray-text};
+  --selector-empty-screen-button-color: #{$light-gray-dark};
+  --selector-empty-screen-hover-button-color: #{$black};
+  --selector-empty-screen-description-color: #{$gray-text};
+
+  --selector-navigation-lifetime-fill: #{$gray};
+  --selector-navigation-lifetime-stroke: #{$gray};
+}
+
+.dark {
+  --selector-body-description-text: #{$gray-dark};
+
+  --selector-breadcrumbs-prev-item-color: #{$dark-gray-dark};
+  --selector-breadcrumbs-arrow-right-color: #{$dark-gray-dark};
+
+  --selector-info-background-color: #{$dark-gray-light};
+  --selector-info-color: #{$dark-gray-dark};
+
+  --selector-item-hover-background: #{$light-dark-gray-hover};
+  --selector-item-disabled-text-color: #{$gray-dark};
+  --selector-item-selected-background: #{$light-dark-gray-hover};
+  --selector-item-input-button-border: 1px solid #{$gray-dark-strong};
+  --selector-item-input-button-border-hover: #{$white};
+
+  --selector-empty-screen-pressed-button-color: #{$gray-dark-text};
+  --selector-empty-screen-button-color: #{$dark-gray-dark};
+  --selector-empty-screen-hover-button-color: #{$white};
+  --selector-empty-screen-description-color: #{$dark-gray-dark};
+
+  --selector-navigation-lifetime-fill: #{$dark-gray-dark};
+  --selector-navigation-lifetime-stroke: #{$gray};
 }

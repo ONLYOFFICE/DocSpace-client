@@ -74,13 +74,18 @@ import {
   LANGUAGE,
   PUBLIC_MEDIA_VIEW_URL,
   RTL_LANGUAGES,
+  TIMEZONE,
 } from "../constants";
 
 import { TI18n, TTranslation } from "../types";
 import { TUser } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
 import { TRoom } from "../api/rooms/types";
-import { TPasswordHash, TTimeZone } from "../api/settings/types";
+import {
+  TDomainValidator,
+  TPasswordHash,
+  TTimeZone,
+} from "../api/settings/types";
 import TopLoaderService from "../components/top-loading-indicator";
 
 import { Encoder } from "./encoder";
@@ -185,24 +190,24 @@ export const parseDomain = (
 
 export const validatePortalName = (
   value: string,
-  nameValidator: { minLength: number; maxLength: number; regex: RegExp },
+  nameValidator: TDomainValidator,
   setError: Function,
   t: TTranslation,
 ) => {
   const validName = new RegExp(nameValidator.regex);
   switch (true) {
     case value === "":
-      return setError(t("Settings:PortalNameEmpty"));
+      return setError(t("Common:PortalNameEmpty"));
     case value.length < nameValidator.minLength ||
       value.length > nameValidator.maxLength:
       return setError(
-        t("Settings:PortalNameLength", {
+        t("Common:PortalNameLength", {
           minLength: nameValidator.minLength.toString(),
           maxLength: nameValidator.maxLength.toString(),
         }),
       );
     case !validName.test(value):
-      return setError(t("Settings:PortalNameIncorrect"));
+      return setError(t("Common:PortalNameIncorrect"));
 
     default:
       setError(null);
@@ -867,7 +872,7 @@ export const decodeDisplayName = <T extends TFile | TFolder | TRoom>(
     if (!item) return item;
 
     if ("updatedBy" in item) {
-      const updatedBy = item.updatedBy as {};
+      const updatedBy = item.updatedBy;
       if (
         updatedBy &&
         "displayName" in updatedBy &&
@@ -878,7 +883,7 @@ export const decodeDisplayName = <T extends TFile | TFolder | TRoom>(
     }
 
     if ("createdBy" in item) {
-      const createdBy = item.createdBy as {};
+      const createdBy = item.createdBy;
       if (
         createdBy &&
         "displayName" in createdBy &&
@@ -1258,6 +1263,7 @@ export const getUserTypeDescription = (
 
   return t("Translations:RoleGuestDescriprion");
 };
+
 export function setLanguageForUnauthorized(culture: string) {
   setCookie(LANGUAGE, culture, {
     "max-age": COOKIE_EXPIRATION_YEAR,
@@ -1271,10 +1277,16 @@ export function setLanguageForUnauthorized(culture: string) {
   if (prevCulture) {
     const newUrl = window.location.href.replace(`&culture=${prevCulture}`, ``);
 
-    window.history.pushState("", "", newUrl);
+    window.history.pushState({}, "", newUrl);
   }
 
   window.location.reload();
+}
+
+export function setTimezoneForUnauthorized(timezone: string) {
+  setCookie(TIMEZONE, timezone, {
+    "max-age": COOKIE_EXPIRATION_YEAR,
+  });
 }
 
 export const imageProcessing = async (file: File, maxSize?: number) => {
@@ -1364,7 +1376,7 @@ export const getBackupProgressInfo = (
       setLink(link);
     }
 
-    return { success: t("Settings:BackupCreatedSuccess") };
+    return { success: t("Common:BackupCreatedSuccess") };
   }
 };
 

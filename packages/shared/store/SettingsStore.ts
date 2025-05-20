@@ -50,6 +50,7 @@ import {
   TExternalResources,
 } from "../api/settings/types";
 import { TUser } from "../api/people/types";
+import { TPortals } from "../api/management/types";
 import {
   size as deviceSize,
   isTablet,
@@ -285,7 +286,7 @@ class SettingsStore {
 
   baseDomain: string | null = null;
 
-  portals: string[] = [];
+  portals: Nullable<TPortals[]> = null;
 
   domain = null;
 
@@ -840,7 +841,7 @@ class SettingsStore {
     this.baseDomain = domain;
   };
 
-  setPortals = (portals: string[]) => {
+  setPortals = (portals: TPortals[]) => {
     this.portals = portals;
   };
 

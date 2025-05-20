@@ -44,6 +44,17 @@ export const StyledCompanyInfo = styled.div<{ isSettingPaid: boolean }>`
       props.theme.client.settings.common.companyInfo.color};
   }
 
+  .section-description {
+    color: ${(props) =>
+      props.theme.client.settings.common.brandingDescriptionColor};
+    line-height: 20px;
+    padding-bottom: 20px;
+  }
+
+  .settings-block {
+    max-width: 433px;
+  }
+
   .text-input {
     font-size: 13px;
   }
@@ -60,6 +71,10 @@ export const StyledCompanyInfo = styled.div<{ isSettingPaid: boolean }>`
   @media ${mobile} {
     .header {
       display: none;
+    }
+
+    .settings-block {
+      max-width: 100%;
     }
   }
 `;

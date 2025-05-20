@@ -32,8 +32,8 @@ import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
 
 import { ComboButton } from "./sub-components/ComboButton";
-import { StyledComboBox } from "./ComboBox.styled";
-import { ComboBoxSize, ComboBoxDisplayType } from "./ComboBox.enums";
+import { StyledComboBox } from "./Combobox.styled";
+import { ComboBoxSize, ComboBoxDisplayType } from "./Combobox.enums";
 import type { TComboboxProps, TOption } from "./ComboBox.types";
 
 const compare = (prevProps: TComboboxProps, nextProps: TComboboxProps) => {
@@ -318,7 +318,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
         <DropDownItem
           key={key}
           label={label}
-          icon={icon && typeof icon === "string" ? icon : undefined}
+          icon={icon}
           isBeta={isBeta}
           data-testid="drop-down-item"
           data-focused={isOpen ? isActiveOption : undefined}

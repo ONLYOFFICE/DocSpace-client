@@ -25,14 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-
+import { classNames } from "@docspace/shared/utils";
 import { isMobile as isMobileUtils } from "../../../utils";
 import { Portal } from "../../portal";
 import { Backdrop } from "../../backdrop";
 
 import { Scrollbar } from "../../scrollbar";
 
-import { StyledCreateDropDown } from "../Selector.styled";
+import styles from "../Selector.module.scss";
+import { NewItemDropDownProps } from "../Selector.types";
 
 export const DROPDOWN_CLASS_NAME = "selector-create-new-dropdown";
 
@@ -44,12 +45,7 @@ const NewItemDropDown = ({
   isEmpty,
   onCloseDropDown,
   listHeight,
-}: {
-  dropDownItems: React.ReactElement[];
-  isEmpty?: boolean;
-  onCloseDropDown: (e?: MouseEvent) => void;
-  listHeight?: number;
-}) => {
+}: NewItemDropDownProps) => {
   const [isMobile, setIsMobile] = React.useState(
     isMobileUtils(window.innerWidth),
   );
@@ -80,9 +76,12 @@ const NewItemDropDown = ({
 
   const dropDown =
     dropDownItems.length > 0 ? (
-      <StyledCreateDropDown
-        className={DROPDOWN_CLASS_NAME}
-        isEmpty={isEmpty ?? false}
+      <div
+        className={classNames(
+          styles.createDropDown,
+          { [styles.isEmpty]: isEmpty },
+          DROPDOWN_CLASS_NAME,
+        )}
       >
         {listHeight && listHeight < DROPDOWN_CONTAINER_WITH_PADDING ? (
           <Scrollbar style={{ height: listHeight - PADDING }}>
@@ -91,7 +90,7 @@ const NewItemDropDown = ({
         ) : (
           dropDownItems.map((item) => item)
         )}
-      </StyledCreateDropDown>
+      </div>
     ) : null;
 
   const portal =
@@ -108,12 +107,15 @@ const NewItemDropDown = ({
               isAside
               zIndex={450}
             />
-            <StyledCreateDropDown
-              className={DROPDOWN_CLASS_NAME}
-              isEmpty={isEmpty ?? false}
+            <div
+              className={classNames(
+                styles.createDropDown,
+                { [styles.isEmpty]: isEmpty },
+                DROPDOWN_CLASS_NAME,
+              )}
             >
               {dropDownItems.map((item) => item)}
-            </StyledCreateDropDown>
+            </div>
           </>
         }
       />

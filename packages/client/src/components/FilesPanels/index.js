@@ -75,6 +75,7 @@ import {
   DeleteVersionDialog,
   CancelOperationDialog,
   ReducedRightsDialog,
+  SocialAuthWelcomeDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -172,6 +173,7 @@ const Panels = (props) => {
     reducedRightsVisible,
     removeUserConfirmation,
     assignRolesDialogVisible,
+    socialAuthWelcomeDialogVisible,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -425,6 +427,9 @@ const Panels = (props) => {
       <RemoveUserConfirmationDialog key="remove-user-confirmation-dialog" />
     ),
     assignRolesDialogVisible && <AssignRoles key="assign-roles-dialog" />,
+    socialAuthWelcomeDialogVisible && (
+      <SocialAuthWelcomeDialog key="joining-space-dialog" />
+    ),
   ];
 };
 
@@ -509,6 +514,7 @@ export default inject(
       reducedRightsData,
       removeUserConfirmation,
       assignRolesDialogData,
+      socialAuthWelcomeDialogVisible,
     } = dialogsStore;
 
     const { viewAs } = filesStore;
@@ -626,6 +632,7 @@ export default inject(
       reducedRightsVisible: reducedRightsData.visible,
       removeUserConfirmation: removeUserConfirmation.visible,
       assignRolesDialogVisible: assignRolesDialogData.visible,
+      socialAuthWelcomeDialogVisible,
     };
   },
 )(observer(Panels));

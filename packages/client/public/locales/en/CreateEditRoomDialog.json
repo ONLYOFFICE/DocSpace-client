@@ -1,5 +1,4 @@
 {
-  "ActivationRequired": "activation required",
   "AddStaticText": "Add static text",
   "AddWatermarkElements": "Add watermark elements",
   "AddWatermarksToDocuments": "Add watermarks to documents",
@@ -33,7 +32,6 @@
   "StorageDescription": "Storage quota set per room. You can change this value or turn off storage limit.",
   "TagsPlaceholder": "Add a tag",
   "ThirdPartyStorageComboBoxPlaceholder": "Select storage",
-  "ThirdPartyStorageDescription": "Use third-party services as data storage for this room. You can create a new folder or select the existing one in the connected storage.",
   "ThirdPartyStorageNoStorageAlert": "Before, you need to connect the corresponding service in the “Integration” section. Otherwise, the connection will not be possible.",
   "ThirdPartyStoragePermanentSettingDescription": "Files are stored in a third-party {{thirdpartyTitle}} storage in the \"{{thirdpartyFolderName}}\" folder.\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "To connect a third-party storage, you need to add the corresponding service in the Integration section of {{productName}} settings. Contact {{productName}} owner or administrator to enable the integration.",

@@ -26,7 +26,7 @@
 
 import type { TSelectorItem } from "../../components/selector";
 import { WithFlag, Nullable } from "../../types";
-import {
+import type {
   TBreadCrumb,
   TInfoBar,
   TSelectorDragAndDrop,
@@ -179,8 +179,8 @@ export type TFilesSelectorInit = WithFlag<
   }
 >;
 
-export type FilesSelectorProps = TSelectorHeader &
-  TInfoBar &
+export type FilesSelectorProps = TInfoBar &
+  TSelectorHeader &
   TFilesSelectorInit &
   TSelectorDragAndDrop &
   (

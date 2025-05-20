@@ -18,5 +18,6 @@
   "RememberHelper": "默认会话寿命为20分钟。勾选此选项以将其设为1年。如需自行设置其值，请前往设置。",
   "SignInLDAP": "登录到：{{ldap_domain}}",
   "SignInLdapHelper": "使用公司域的凭据",
-  "UserIsAlreadyRegistered": "用户 <1>{{email}}</1>已在此{{productName}}中注册，请输入您的密码或返回继续使用另一封电子邮件。"
+  "UserIsAlreadyRegistered": "用户 <1>{{email}}</1>已在此{{productName}}中注册，请输入您的密码或返回继续使用另一封电子邮件。",
+  "ChangePasswordSuccess": "密码已成功更改"
 }

@@ -190,7 +190,7 @@
 .articleItemText {
   width: 100%;
 
-  margin-inline-start: 8px;
+  margin-inline-start: 8px !important;
 
   line-height: 20px;
 
@@ -213,7 +213,7 @@
   }
 
   @include tablet-and-below {
-    margin-inline-start: 12px;
+    margin-inline-start: 12px !important;
     line-height: 20px;
     font-size: 15px;
     font-weight: 600;
@@ -237,6 +237,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .nodeIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+
+    @include tablet-and-below {
+      width: 20px;
+      height: 20px;
+    }
   }
 
   svg {

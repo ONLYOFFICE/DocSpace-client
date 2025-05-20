@@ -1,5 +1,0 @@
-{
-  "DisconnectCloudTitle": "断开云端的连接",
-  "SuccessDeleteThirdParty": "第三方{{service}}已删除",
-  "ThirdPartyDisconnectPrompt": "您确定要删除{{service}}吗？这不会对您的{{account}}账户造成任何影响。"
-}

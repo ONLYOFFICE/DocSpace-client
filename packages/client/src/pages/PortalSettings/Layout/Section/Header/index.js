@@ -182,7 +182,7 @@ const SectionHeaderContent = (props) => {
     switch (key) {
       case "DNSSettings":
         return isCustomizationAvailable;
-      case "RestoreBackup":
+      case "Common:RestoreBackup":
         return isRestoreAndAutoBackupAvailable;
       case "BrandName":
         return isCustomizationAvailable || standalone;

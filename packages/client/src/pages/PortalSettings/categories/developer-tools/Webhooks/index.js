@@ -37,6 +37,7 @@ import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { EmptyServerErrorContainer } from "SRC_DIR/components/EmptyContainer/EmptyServerErrorContainer";
 import { DeleteWebhookDialog } from "./sub-components/DeleteWebhookDialog";
 import { WebhookConfigsLoader } from "./sub-components/Loaders";
 import WebhooksTable from "./sub-components/WebhooksTable";
@@ -79,6 +80,7 @@ const Webhooks = (props) => {
     currentWebhook,
     editWebhook,
     deleteWebhook,
+    errorWebhooks,
   } = props;
 
   const { t, ready } = useTranslation(["Webhooks", "Common"]);
@@ -112,8 +114,14 @@ const Webhooks = (props) => {
   };
 
   useEffect(() => {
-    ready && startTranslation(loadWebhooks);
+    if (ready) {
+      startTranslation(() => loadWebhooks());
+    }
   }, [ready]);
+
+  if (errorWebhooks) {
+    return <EmptyServerErrorContainer />;
+  }
 
   return (
     <Suspense fallback={<WebhookConfigsLoader />}>
@@ -181,6 +189,7 @@ export default inject(({ webhooksStore }) => {
     currentWebhook,
     editWebhook,
     deleteWebhook,
+    errorWebhooks,
   } = webhooksStore;
 
   return {
@@ -191,5 +200,6 @@ export default inject(({ webhooksStore }) => {
     currentWebhook,
     editWebhook,
     deleteWebhook,
+    errorWebhooks,
   };
 })(observer(Webhooks));

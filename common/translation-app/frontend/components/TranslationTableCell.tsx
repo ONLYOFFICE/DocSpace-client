@@ -72,17 +72,42 @@ const TranslationTableCell: React.FC<TranslationTableCellProps> = ({
           >
             {currentEntry?.translations[lang] || "Not translated"}
           </div>
-          {lang !== "en" && ollamaConnected && (
-            <button
-              onClick={() => handleTranslate(currentEntry?.path, lang)}
-              disabled={translating || isTranslating(currentEntry?.path, lang)}
-              className="ml-2 text-xs btn btn-secondary py-0 px-2"
-              title="Translate using Ollama"
-            >
-              {isTranslating(currentEntry?.path, lang)
-                ? "Translating..."
-                : "AI"}
-            </button>
+          {lang !== "en" && (
+            <div className="flex space-x-1">
+              {ollamaConnected && (
+                <button
+                  onClick={() => handleTranslate(currentEntry?.path, lang)}
+                  disabled={
+                    translating || isTranslating(currentEntry?.path, lang)
+                  }
+                  className="ml-2 text-xs btn btn-secondary py-0 px-2"
+                  title="Translate using Ollama"
+                >
+                  {isTranslating(currentEntry?.path, lang)
+                    ? "Translating..."
+                    : "AI"}
+                </button>
+              )}
+              {currentEntry?.translations[lang] && (
+                <button
+                  onClick={() => {
+                    const sourceText = currentEntry?.translations[lang] || "";
+                    const url = `https://translate.google.com/?sl=auto&tl=en&text=${encodeURIComponent(sourceText)}`;
+                    window.open(url, "_blank");
+                  }}
+                  className="text-xs btn btn-secondary py-0 px-2"
+                  title="Open in Google Translate"
+                >
+                  <img
+                    src="/GT_logo.svg"
+                    alt="Google Translate"
+                    width="16"
+                    height="16"
+                    style={{ verticalAlign: "middle" }}
+                  />
+                </button>
+              )}
+            </div>
           )}
         </div>
       )}

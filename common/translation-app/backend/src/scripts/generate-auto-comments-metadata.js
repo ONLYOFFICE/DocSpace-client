@@ -44,7 +44,9 @@ async function isOllamaRunning() {
 async function generateBasicComment(keyPath, content, usages) {
   // Skip if no usages or content is empty
   if (!usages || usages.length === 0 || !content) {
-    console.log(`Skipping comment generation for ${keyPath}: insufficient data`);
+    console.log(
+      `Skipping comment generation for ${keyPath}: insufficient data`
+    );
     return null;
   }
 
@@ -58,11 +60,13 @@ async function generateBasicComment(keyPath, content, usages) {
   // Create prompt for Ollama - limit context to prevent request size issues
   // Only use the first 3 usages to keep the prompt size reasonable
   const limitedUsages = usages.slice(0, 3);
-  
+
   // Truncate context to prevent extremely long prompts
-  const processedUsages = limitedUsages.map(u => ({
+  const processedUsages = limitedUsages.map((u) => ({
     ...u,
-    context: u.context ? u.context.substring(0, 300) + (u.context.length > 300 ? '...' : '') : ''
+    context: u.context
+      ? u.context.substring(0, 300) + (u.context.length > 300 ? "..." : "")
+      : "",
   }));
 
   const prompt = `
@@ -93,48 +97,65 @@ Based on this information, please write a short, clear description of what this 
 
   while (retries < maxRetries) {
     try {
-      console.log(`Generating comment for ${keyPath} (attempt ${retries + 1}/${maxRetries})`);
-      
+      console.log(
+        `Generating comment for ${keyPath} (attempt ${retries + 1}/${maxRetries})`
+      );
+
       // Call Ollama API with timeout
-      const response = await axios.post(ollamaConfig.apiUrl + "/api/generate", {
-        model: MODEL,
-        prompt: prompt,
-        stream: false,
-      }, {
-        timeout: 30000, // 30 second timeout
-        headers: {
-          'Content-Type': 'application/json'
+      const response = await axios.post(
+        ollamaConfig.apiUrl + "/api/generate",
+        {
+          model: MODEL,
+          prompt: prompt,
+          stream: false,
+        },
+        {
+          timeout: 30000, // 30 second timeout
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      });
+      );
 
       // Return the generated comment
       if (response.data && response.data.response) {
         return response.data.response.trim();
       } else {
-        throw new Error(`Unexpected Ollama response format: ${JSON.stringify(response.data)}`);
+        throw new Error(
+          `Unexpected Ollama response format: ${JSON.stringify(response.data)}`
+        );
       }
     } catch (error) {
       lastError = error;
       retries++;
-      
+
       // Log the error
-      console.error(`Error calling Ollama (attempt ${retries}/${maxRetries}):`, error.message);
-      
+      console.error(
+        `Error calling Ollama (attempt ${retries}/${maxRetries}):`,
+        error.message
+      );
+
       // If it's a socket hang up or timeout, wait before retrying
-      if (error.code === 'ECONNRESET' || error.code === 'ETIMEDOUT' || 
-          error.message.includes('socket hang up') || error.message.includes('timeout')) {
+      if (
+        error.code === "ECONNRESET" ||
+        error.code === "ETIMEDOUT" ||
+        error.message.includes("socket hang up") ||
+        error.message.includes("timeout")
+      ) {
         console.log(`Network error detected. Waiting before retry...`);
         // Wait for a few seconds before retrying (increasing with each retry)
-        await new Promise(resolve => setTimeout(resolve, 2000 * retries));
+        await new Promise((resolve) => setTimeout(resolve, 2000 * retries));
       } else if (retries < maxRetries) {
         // For other errors, wait a shorter time
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
       }
     }
   }
 
-  console.error(`Failed to generate comment for ${keyPath} after ${maxRetries} attempts:`, 
-               lastError ? lastError.message : 'Unknown error');
+  console.error(
+    `Failed to generate comment for ${keyPath} after ${maxRetries} attempts:`,
+    lastError ? lastError.message : "Unknown error"
+  );
   return null;
 }
 
@@ -153,12 +174,12 @@ async function generateAutoComment(projectName) {
     totalNamespaces: 0,
     totalFiles: 0,
     totalKeys: 0,
-    newKeys: 0,
-    updatedKeys: 0,
-    unchangedKeys: 0,
-    metadataFiles: 0,
-    namespaces: {},
+    processedKeys: 0,
+    updatedComments: 0,
+    skippedKeys: 0,
     errors: [],
+    namespaces: {},
+    startTime: new Date(),
   };
 
   try {
@@ -200,14 +221,36 @@ async function generateAutoComment(projectName) {
       // Get all key files in this namespace
       const keyFiles = glob.sync(path.join(namespacePath, "*.json"));
 
+      // Update namespace stats
+      stats.namespaces[namespace] = stats.namespaces[namespace] || {
+        totalKeys: 0,
+        processedKeys: 0,
+        updatedComments: 0,
+        skippedKeys: 0,
+        errors: 0,
+      };
+
+      stats.namespaces[namespace].totalKeys = keyFiles.length;
+      stats.totalKeys += keyFiles.length;
+      stats.totalFiles += keyFiles.length;
+      stats.totalNamespaces++;
+
+      let processedCount = 0;
+
       for (const keyFile of keyFiles) {
         try {
           const keyMeta = await fs.readJson(keyFile);
           const keyPath = keyMeta.key_path || path.basename(keyFile, ".json");
 
-          console.log(`Processing key: ${keyPath}`);
+          processedCount++;
+          stats.namespaces[namespace].processedKeys++;
 
-          if (keyMeta.comment.text === "") {
+          // Show progress information
+          console.log(
+            `Processing key: ${keyPath} (${processedCount}/${keyFiles.length} in ${namespace})`
+          );
+
+          if (!keyMeta.comment || keyMeta.comment.text === "") {
             const comment = await generateBasicComment(
               keyPath,
               keyMeta.content,
@@ -215,6 +258,15 @@ async function generateAutoComment(projectName) {
             );
 
             if (comment && comment !== "") {
+              // Initialize comment object if it doesn't exist
+              if (!keyMeta.comment) {
+                keyMeta.comment = {
+                  text: "",
+                  is_auto: false,
+                  updated_at: null,
+                };
+              }
+
               keyMeta.comment.text = comment;
               keyMeta.comment.is_auto = true;
               const now = new Date().toISOString();
@@ -222,10 +274,28 @@ async function generateAutoComment(projectName) {
               keyMeta.updated_at = now;
 
               await writeJsonWithConsistentEol(keyFile, keyMeta);
+
+              // Update stats
+              stats.namespaces[namespace].updatedComments++;
+              stats.updatedComments++;
+              console.log(`  ✓ Generated comment for ${keyPath}`);
+            } else {
+              stats.namespaces[namespace].skippedKeys++;
+              stats.skippedKeys++;
+              console.log(`  ✗ Skipped ${keyPath}: no comment generated`);
             }
+          } else {
+            stats.namespaces[namespace].skippedKeys++;
+            stats.skippedKeys++;
+            console.log(`  ↷ Skipped ${keyPath}: already has a comment`);
           }
         } catch (error) {
           console.error(`Error reading metadata file ${keyFile}:`, error);
+          stats.namespaces[namespace].errors++;
+          stats.errors.push({
+            file: keyFile,
+            error: error.message,
+          });
         }
       }
     }
@@ -315,26 +385,42 @@ async function generateAutoCommentsMetadata() {
 // Run the script if executed directly
 generateAutoCommentsMetadata()
   .then((stats) => {
-    console.log("\n=== Complete metadata generation finished ===");
-    console.log(
-      `Processed ${stats.totalProjects} projects with ${stats.totalNamespaces} namespaces`
-    );
-    console.log(
-      `Total keys: ${stats.totalKeys} (${stats.newKeys} new, ${stats.updatedKeys} updated, ${stats.unchangedKeys} unchanged)`
-    );
-    console.log(
-      `Metadata files: ${stats.metadataFiles} files (existing files were skipped)`
-    );
+    const endTime = new Date();
+    const durationMs = endTime - stats.startTime;
+    const durationMin = Math.floor(durationMs / 60000);
+    const durationSec = Math.floor((durationMs % 60000) / 1000);
 
-    if (stats.processingErrors > 0) {
+    console.log("\n=== Auto Comments Generation Summary ===");
+    console.log(`Duration: ${durationMin} minutes, ${durationSec} seconds`);
+    console.log(
+      `Processed ${stats.totalNamespaces} namespaces with ${stats.totalKeys} total keys`
+    );
+    console.log(`Comments generated: ${stats.updatedComments} keys`);
+    console.log(`Skipped: ${stats.skippedKeys} keys`);
+
+    if (stats.errors.length > 0) {
       console.log(
-        `\nWARNING: Encountered ${stats.processingErrors} errors during processing`
+        `\nWARNING: Encountered ${stats.errors.length} errors during processing`
       );
     }
 
-    console.log("\nDetailed stats:", JSON.stringify(stats, null, 2));
+    // Display namespace-specific stats
+    console.log("\nNamespace Statistics:");
+    Object.entries(stats.namespaces).forEach(([namespace, nsStats]) => {
+      console.log(
+        `  ${namespace}: ${nsStats.updatedComments}/${nsStats.totalKeys} comments generated`
+      );
+    });
+
+    // Only show detailed stats if there are errors
+    if (stats.errors.length > 0) {
+      console.log("\nError details:");
+      stats.errors.forEach((err, index) => {
+        console.log(`  ${index + 1}. ${err.file}: ${err.error}`);
+      });
+    }
   })
   .catch((error) => {
-    console.error("Fatal error during metadata generation:", error);
+    console.error("Error generating auto comments:", error);
     process.exit(1);
   });

@@ -3,11 +3,11 @@
   "content": "Select {{type}}",
   "content_en_sha1_hash": "362dad28aa0bb6ca287f03d3b542c0aea7263bf8",
   "created_at": "2025-05-19T21:30:48.523Z",
-  "updated_at": "2025-05-19T21:56:08.804Z",
+  "updated_at": "2025-05-20T08:51:45.422Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"Select {{type}}\" is used to display a prompt in user interfaces that asks users to select a file type. This text appears as a button label or dialog title, guiding users through the process of choosing a specific type of file. Translators should consider the context and conventions of their language when translating this text.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T08:51:45.422Z"
   },
   "usage": [
     {

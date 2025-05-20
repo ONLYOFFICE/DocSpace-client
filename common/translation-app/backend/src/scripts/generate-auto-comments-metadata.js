@@ -177,6 +177,7 @@ async function generateAutoComment(projectName) {
   let currentNamespace = null;
 
   const stats = {
+    totalProjects: 1, // Start with 1 for the current project
     totalNamespaces: 0,
     totalFiles: 0,
     totalKeys: 0,
@@ -336,20 +337,19 @@ async function generateAutoComment(projectName) {
  */
 async function generateAutoCommentsMetadata() {
   const projects = Object.keys(projectLocalesMap);
-  console.log(
-    `Generating metadata for ${projects.length} projects: ${projects.join(", ")}`
-  );
+  console.log(`Generating metadata for ${projects.length} projects: ${projects.join(", ")}`);
 
   const overallStats = {
     totalProjects: projects.length,
     totalNamespaces: 0,
+    totalFiles: 0,
     totalKeys: 0,
-    metadataFiles: 0, // Counter for metadata files (new or existing)
-    newKeys: 0,
-    updatedKeys: 0,
-    unchangedKeys: 0,
-    processingErrors: 0,
-    projectStats: {},
+    processedKeys: 0,
+    updatedComments: 0,
+    skippedKeys: 0,
+    errors: [],
+    namespaces: {},
+    startTime: new Date()
   };
 
   for (const project of projects) {
@@ -359,33 +359,49 @@ async function generateAutoCommentsMetadata() {
 
       // Update overall statistics
       overallStats.totalKeys += projectStats.totalKeys || 0;
-      overallStats.newKeys += projectStats.newKeys || 0;
-      overallStats.updatedKeys += projectStats.updatedKeys || 0;
-      overallStats.unchangedKeys += projectStats.unchangedKeys || 0;
-      overallStats.metadataFiles += projectStats.metadataFiles || 0;
-      overallStats.totalNamespaces += Object.keys(
-        projectStats.namespaces || {}
-      ).length;
-
-      // Log namespace statistics
-      if (
-        projectStats.namespaces &&
-        Object.keys(projectStats.namespaces).length > 0
-      ) {
-        console.log(`\nNamespace statistics for project ${project}:`);
-        Object.entries(projectStats.namespaces).forEach(
-          ([namespace, stats]) => {
-            console.log(
-              `  - ${namespace}: ${stats.totalKeys} keys (${stats.newKeys} new, ${stats.updatedKeys} updated)`
-            );
-          }
-        );
+      overallStats.totalFiles += projectStats.totalFiles || 0;
+      overallStats.totalNamespaces += projectStats.totalNamespaces || 0;
+      overallStats.processedKeys += projectStats.processedKeys || 0;
+      overallStats.updatedComments += projectStats.updatedComments || 0;
+      overallStats.skippedKeys += projectStats.skippedKeys || 0;
+      
+      if (projectStats.errors && projectStats.errors.length) {
+        overallStats.errors.push(...projectStats.errors);
       }
-
-      overallStats.projectStats[project] = projectStats;
+      
+      // Merge namespace stats
+      if (projectStats.namespaces) {
+        Object.entries(projectStats.namespaces).forEach(([namespace, nsStats]) => {
+          if (!overallStats.namespaces[namespace]) {
+            overallStats.namespaces[namespace] = {
+              totalKeys: 0,
+              processedKeys: 0,
+              updatedComments: 0,
+              skippedKeys: 0,
+              errors: 0
+            };
+          }
+          
+          overallStats.namespaces[namespace].totalKeys += nsStats.totalKeys || 0;
+          overallStats.namespaces[namespace].processedKeys += nsStats.processedKeys || 0;
+          overallStats.namespaces[namespace].updatedComments += nsStats.updatedComments || 0;
+          overallStats.namespaces[namespace].skippedKeys += nsStats.skippedKeys || 0;
+          overallStats.namespaces[namespace].errors += nsStats.errors || 0;
+        });
+      }
+      
+      console.log(`Namespace statistics for project ${project}:`);
+      if (projectStats.namespaces) {
+        Object.entries(projectStats.namespaces).forEach(([namespace, nsStats]) => {
+          console.log(`  - ${namespace}: ${nsStats.totalKeys || 0} keys (${nsStats.updatedComments || 0} comments generated)`);
+        });
+      }
     } catch (error) {
       console.error(`Error processing project ${project}:`, error);
-      overallStats.processingErrors++;
+      overallStats.errors.push({
+        project,
+        error: error.message
+      });
     }
   }
 
@@ -395,20 +411,35 @@ async function generateAutoCommentsMetadata() {
 // Run the script if executed directly
 generateAutoCommentsMetadata()
   .then((stats) => {
+    // Ensure stats object has all required properties
+    stats = {
+      totalProjects: stats.totalProjects || 0,
+      totalNamespaces: stats.totalNamespaces || 0,
+      totalFiles: stats.totalFiles || 0,
+      totalKeys: stats.totalKeys || 0,
+      processedKeys: stats.processedKeys || 0,
+      updatedComments: stats.updatedComments || 0,
+      skippedKeys: stats.skippedKeys || 0,
+      errors: stats.errors || [],
+      namespaces: stats.namespaces || {},
+      startTime: stats.startTime || new Date(Date.now() - 1000), // Default to 1 second ago if missing
+      ...stats
+    };
+
     const endTime = new Date();
     const durationMs = endTime - stats.startTime;
-    const durationMin = Math.floor(durationMs / 60000);
-    const durationSec = Math.floor((durationMs % 60000) / 1000);
+    const durationMin = Math.floor(durationMs / 60000) || 0;
+    const durationSec = Math.floor((durationMs % 60000) / 1000) || 0;
 
     console.log("\n=== Auto Comments Generation Summary ===");
     console.log(`Duration: ${durationMin} minutes, ${durationSec} seconds`);
     console.log(
       `Processed ${stats.totalNamespaces} namespaces with ${stats.totalKeys} total keys`
     );
-    console.log(`Comments generated: ${stats.updatedComments} keys`);
-    console.log(`Skipped: ${stats.skippedKeys} keys`);
+    console.log(`Comments generated: ${stats.updatedComments || 0} keys`);
+    console.log(`Skipped: ${stats.skippedKeys || 0} keys`);
 
-    if (stats.errors.length > 0) {
+    if (stats.errors && stats.errors.length > 0) {
       console.log(
         `\nWARNING: Encountered ${stats.errors.length} errors during processing`
       );
@@ -416,14 +447,16 @@ generateAutoCommentsMetadata()
 
     // Display namespace-specific stats
     console.log("\nNamespace Statistics:");
-    Object.entries(stats.namespaces).forEach(([namespace, nsStats]) => {
-      console.log(
-        `  ${namespace}: ${nsStats.updatedComments}/${nsStats.totalKeys} comments generated`
-      );
+    Object.entries(stats.namespaces || {}).forEach(([namespace, nsStats]) => {
+      if (nsStats) {
+        console.log(
+          `  ${namespace}: ${nsStats.updatedComments || 0}/${nsStats.totalKeys || 0} comments generated`
+        );
+      }
     });
 
     // Only show detailed stats if there are errors
-    if (stats.errors.length > 0) {
+    if (stats.errors && stats.errors.length > 0) {
       console.log("\nError details:");
       stats.errors.forEach((err, index) => {
         console.log(`  ${index + 1}. ${err.file}: ${err.error}`);

@@ -2151,7 +2151,7 @@
   --rombs-loader-blue-colorStep_3: #{$rombs-loader-gray-colorStep};
   --rombs-loader-blue-colorStep_4: #{$rombs-loader-dark-gray-colorStep};
 
-  --rombs-loader-red-colorStep_1: #bfe8f8;
+  --rombs-loader-red-colorStep_1: #{$rombs-loader-blue-colorStep};
   --rombs-loader-red-colorStep_2: #{$white};
   --rombs-loader-red-colorStep_3: #{$rombs-loader-light-gray-colorStep};
 

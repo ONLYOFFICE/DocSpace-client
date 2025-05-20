@@ -716,5 +716,7 @@
   "Yes": "Yes",
   "Yesterday": "Yesterday",
   "You": "You",
-  "YourTurn": "Your turn"
+  "YourTurn": "Your turn",
+  "ServerErrorEmptyDescription": "Please reload the page or come back later.",
+  "ServerErrorEmptyTitle": "Something went wrong"
 }

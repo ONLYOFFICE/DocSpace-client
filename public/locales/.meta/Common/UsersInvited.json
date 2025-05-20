@@ -3,11 +3,11 @@
   "content": "Users invited",
   "content_en_sha1_hash": "72c2af47b22442f2b4c2dd3ce416b620691f6ca7",
   "created_at": "2025-05-19T21:30:49.475Z",
-  "updated_at": "2025-05-19T21:56:08.214Z",
+  "updated_at": "2025-05-20T08:35:32.962Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"UsersInvited\" translation key is used to display a success message when a user is invited. It is typically displayed after an invite button is clicked and the invitation is processed, providing feedback to the user that they have been successfully invited.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T08:35:32.962Z"
   },
   "usage": [
     {

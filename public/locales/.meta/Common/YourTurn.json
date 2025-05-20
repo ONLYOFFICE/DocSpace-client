@@ -3,11 +3,11 @@
   "content": "Your turn",
   "content_en_sha1_hash": "8a4e60471b34b8af985c6dd2d93792af71788f57",
   "created_at": "2025-05-19T21:30:49.657Z",
-  "updated_at": "2025-05-19T21:56:08.805Z",
+  "updated_at": "2025-05-20T08:24:16.337Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "\"This translation key displays the message 'Your turn' to indicate whose action is being requested or awaited. It is used in UI elements where a user's input or submission is required.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T08:24:16.337Z"
   },
   "usage": [
     {

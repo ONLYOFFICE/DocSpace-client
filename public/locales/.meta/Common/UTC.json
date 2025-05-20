@@ -3,11 +3,11 @@
   "content": "UTC",
   "content_en_sha1_hash": "bdfd4d8d6952777c39403b2d2e2f8a2a52bf255f",
   "created_at": "2025-05-19T21:30:49.484Z",
-  "updated_at": "2025-05-19T21:56:08.751Z",
+  "updated_at": "2025-05-20T08:37:12.589Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the label \"UTC\" in a dropdown menu for setting minutes in a cron job component. It appears as a suffix on a button and should be translated as a time unit or timezone abbreviation.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T08:37:12.589Z"
   },
   "usage": [
     {

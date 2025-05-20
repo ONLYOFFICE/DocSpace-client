@@ -3,11 +3,11 @@
   "content": "Set quota to define storage limit.",
   "content_en_sha1_hash": "76b938d40e18046c5b737223c4a69f182b330d1c",
   "created_at": "2025-05-19T21:30:48.578Z",
-  "updated_at": "2025-05-19T21:56:08.077Z",
+  "updated_at": "2025-05-20T08:41:41.333Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a label that informs the user about the storage limit they are setting. It appears in a change quota dialog where users can adjust the storage limits for files.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T08:41:41.333Z"
   },
   "usage": [
     {

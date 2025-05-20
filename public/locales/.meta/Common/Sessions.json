@@ -3,11 +3,11 @@
   "content": "Sessions",
   "content_en_sha1_hash": "e11e37a9253b34ff1c7224447e143fabca1be9fd",
   "created_at": "2025-05-19T21:30:48.560Z",
-  "updated_at": "2025-05-19T21:56:08.668Z",
+  "updated_at": "2025-05-20T08:41:47.559Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for the title of a table header in a user profile page, displaying \"Sessions\" to the user. It should be translated as \"Sessions\" to match the English content, and will appear on a component within the \"/packages/client/src/pages/Profile\" section of the UI.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T08:41:47.559Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Sign up with Zoom",
   "content_en_sha1_hash": "2596473d7776e251c5ee2d75c7cf026af02ce2c9",
   "created_at": "2025-05-19T21:30:48.880Z",
-  "updated_at": "2025-05-19T21:56:08.797Z",
+  "updated_at": "2025-05-20T08:39:42.336Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"SignUpWithZoom\" translation key is used to display the label for a button that allows users to sign up using Zoom. This text is typically displayed on a sign-up or registration form and may appear in a dialog or modal window. Its purpose is to provide clarity to users about how they can complete the sign-up process with their Zoom account.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T08:39:42.336Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Unlimited",
   "content_en_sha1_hash": "b8bef37b7153b5665e94cf9b212c8708eb06db1f",
   "created_at": "2025-05-19T21:30:49.415Z",
-  "updated_at": "2025-05-19T21:56:08.043Z",
+  "updated_at": "2025-05-20T08:35:48.338Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display \"Unlimited\" when an account has no quota limit. It appears in various UI elements, such as space quota components and share helpers, where it indicates that there are no restrictions on data storage or sharing.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T08:35:48.338Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Standard",
   "content_en_sha1_hash": "2dfa66079d9b7229409430972fd5f1567d78a3b6",
   "created_at": "2025-05-19T21:30:49.027Z",
-  "updated_at": "2025-05-19T21:56:08.393Z",
+  "updated_at": "2025-05-20T08:38:52.879Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the \"Standard\" theme name in a portal settings category. It appears as part of the \"Appearance\" section and is displayed below a button that toggles its visibility.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T08:38:52.879Z"
   },
   "usage": [
     {

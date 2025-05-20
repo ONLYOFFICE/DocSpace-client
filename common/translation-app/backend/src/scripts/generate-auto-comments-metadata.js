@@ -1,0 +1,340 @@
+#!/usr/bin/env node
+/**
+ * Generate Metadata for Translation Files
+ *
+ * This script scans the locales directories and generates metadata files
+ * for all translation keys, preserving existing metadata where available.
+ */
+const fs = require("fs-extra");
+const { writeJsonWithConsistentEol } = require("../utils/fsUtils");
+const path = require("path");
+const glob = require("glob");
+const {
+  appRootPath,
+  projectLocalesMap,
+  ollamaConfig,
+} = require("../config/config");
+const axios = require("axios");
+
+const MODEL = process.env.OLLAMA_MODEL || "llama3.2";
+
+/**
+ * Checks if Ollama is running and available
+ * @returns {Promise<boolean>} True if Ollama is running
+ */
+async function isOllamaRunning() {
+  try {
+    const response = await axios.get(ollamaConfig.apiUrl + "/api/tags", {
+      timeout: 2000, // 2 second timeout
+    });
+    return response.status === 200;
+  } catch (error) {
+    console.log("Ollama connection check failed:", error.message);
+    return false;
+  }
+}
+
+/**
+ * Generates a comment for a translation key using Ollama with retry mechanism
+ * @param {string} keyPath - The key path
+ * @param {string} content - The key content
+ * @param {Array<Object>} usages - Array of usage objects with file_path, line_number, and context
+ * @returns {Promise<string>} Generated comment
+ */
+async function generateBasicComment(keyPath, content, usages) {
+  // Skip if no usages or content is empty
+  if (!usages || usages.length === 0 || !content) {
+    console.log(`Skipping comment generation for ${keyPath}: insufficient data`);
+    return null;
+  }
+
+  // Check if Ollama is connected
+  const ollamaRunning = await isOllamaRunning();
+  if (!ollamaRunning) {
+    console.log("Ollama is not running. Skipping comment generation.");
+    return null;
+  }
+
+  // Create prompt for Ollama - limit context to prevent request size issues
+  // Only use the first 3 usages to keep the prompt size reasonable
+  const limitedUsages = usages.slice(0, 3);
+  
+  // Truncate context to prevent extremely long prompts
+  const processedUsages = limitedUsages.map(u => ({
+    ...u,
+    context: u.context ? u.context.substring(0, 300) + (u.context.length > 300 ? '...' : '') : ''
+  }));
+
+  const prompt = `
+# Translation Key Description Task
+
+## Context Information
+- **Key Name:** ${keyPath}
+- **English Content:** "${content}"
+- **Usage Contexts:**
+${processedUsages.map((u) => `  - **File:** ${u.file_path}\n    **Line:** ${u.line_number}\n    **Context:** ${u.context}`).join("\n")}
+
+## Instructions
+You are a helpful assistant that creates concise descriptions for translation keys.
+Based on this information, please write a short, clear description of what this translation key is used for.
+
+- Keep it to 1-3 sentences
+- Explain the purpose of this text in the UI
+- Mention where it appears (button, dialog, etc.) if apparent
+- Provide context helpful for translators
+
+**Important:** Respond with ONLY the description, no additional text.
+  `;
+
+  // Retry configuration
+  const maxRetries = 3;
+  let retries = 0;
+  let lastError = null;
+
+  while (retries < maxRetries) {
+    try {
+      console.log(`Generating comment for ${keyPath} (attempt ${retries + 1}/${maxRetries})`);
+      
+      // Call Ollama API with timeout
+      const response = await axios.post(ollamaConfig.apiUrl + "/api/generate", {
+        model: MODEL,
+        prompt: prompt,
+        stream: false,
+      }, {
+        timeout: 30000, // 30 second timeout
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      // Return the generated comment
+      if (response.data && response.data.response) {
+        return response.data.response.trim();
+      } else {
+        throw new Error(`Unexpected Ollama response format: ${JSON.stringify(response.data)}`);
+      }
+    } catch (error) {
+      lastError = error;
+      retries++;
+      
+      // Log the error
+      console.error(`Error calling Ollama (attempt ${retries}/${maxRetries}):`, error.message);
+      
+      // If it's a socket hang up or timeout, wait before retrying
+      if (error.code === 'ECONNRESET' || error.code === 'ETIMEDOUT' || 
+          error.message.includes('socket hang up') || error.message.includes('timeout')) {
+        console.log(`Network error detected. Waiting before retry...`);
+        // Wait for a few seconds before retrying (increasing with each retry)
+        await new Promise(resolve => setTimeout(resolve, 2000 * retries));
+      } else if (retries < maxRetries) {
+        // For other errors, wait a shorter time
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      }
+    }
+  }
+
+  console.error(`Failed to generate comment for ${keyPath} after ${maxRetries} attempts:`, 
+               lastError ? lastError.message : 'Unknown error');
+  return null;
+}
+
+/**
+ * Creates or updates metadata for a project
+ * @param {string} projectName - Project name
+ * @returns {Promise<Object>} Statistics
+ */
+async function generateAutoComment(projectName) {
+  console.log(`Generating auto comments metadata for project: ${projectName}`);
+
+  // Debug variable to track current namespace
+  let currentNamespace = null;
+
+  const stats = {
+    totalNamespaces: 0,
+    totalFiles: 0,
+    totalKeys: 0,
+    newKeys: 0,
+    updatedKeys: 0,
+    unchangedKeys: 0,
+    metadataFiles: 0,
+    namespaces: {},
+    errors: [],
+  };
+
+  try {
+    // Get the project locales path
+    const localesPath = projectLocalesMap[projectName];
+    if (!localesPath) {
+      throw new Error(`No locales path defined for project: ${projectName}`);
+    }
+
+    const projectPath = path.join(appRootPath, localesPath);
+    console.log(`Project path: ${projectPath}`);
+
+    // Check if the project path exists
+    if (!(await fs.pathExists(projectPath))) {
+      throw new Error(`Project path does not exist: ${projectPath}`);
+    }
+
+    const metaDir = path.join(projectPath, ".meta");
+    console.log(`Metadata directory: ${metaDir}`);
+
+    // Create metadata directory if it doesn't exist
+    try {
+      await fs.ensureDir(metaDir);
+      console.log(`Metadata directory created/verified: ${metaDir}`);
+    } catch (dirError) {
+      console.error(`Error creating metadata directory: ${metaDir}`, dirError);
+      throw dirError;
+    }
+
+    // Process all translation files in the base language
+    const metaNamespaceDirs = (await fs.readdir(metaDir)).filter(
+      (dir) => dir !== ".DS_Store"
+    );
+
+    for (const namespace of metaNamespaceDirs) {
+      const namespacePath = path.join(metaDir, namespace);
+      if (!(await fs.stat(namespacePath)).isDirectory()) continue;
+
+      // Get all key files in this namespace
+      const keyFiles = glob.sync(path.join(namespacePath, "*.json"));
+
+      for (const keyFile of keyFiles) {
+        try {
+          const keyMeta = await fs.readJson(keyFile);
+          const keyPath = keyMeta.key_path || path.basename(keyFile, ".json");
+
+          console.log(`Processing key: ${keyPath}`);
+
+          if (keyMeta.comment.text === "") {
+            const comment = await generateBasicComment(
+              keyPath,
+              keyMeta.content,
+              keyMeta.usage
+            );
+
+            if (comment && comment !== "") {
+              keyMeta.comment.text = comment;
+              keyMeta.comment.is_auto = true;
+              const now = new Date().toISOString();
+              keyMeta.comment.updated_at = now;
+              keyMeta.updated_at = now;
+
+              await writeJsonWithConsistentEol(keyFile, keyMeta);
+            }
+          }
+        } catch (error) {
+          console.error(`Error reading metadata file ${keyFile}:`, error);
+        }
+      }
+    }
+
+    return stats;
+  } catch (error) {
+    console.error(
+      `Error generating metadata for project ${projectName} (current namespace: ${currentNamespace}):`,
+      error
+    );
+    stats.errors.push({
+      type: "project",
+      project: projectName,
+      error: error.message,
+      namespace: currentNamespace,
+    });
+
+    // Continue execution and return stats even after error
+    console.log("Metadata generation completed with errors");
+    console.log("Stats:", JSON.stringify(stats, null, 2));
+    return stats;
+  }
+}
+
+/**
+ * Generate metadata for all projects
+ * @returns {Promise<Object>} Overall statistics
+ */
+async function generateAutoCommentsMetadata() {
+  const projects = Object.keys(projectLocalesMap);
+  console.log(
+    `Generating metadata for ${projects.length} projects: ${projects.join(", ")}`
+  );
+
+  const overallStats = {
+    totalProjects: projects.length,
+    totalNamespaces: 0,
+    totalKeys: 0,
+    metadataFiles: 0, // Counter for metadata files (new or existing)
+    newKeys: 0,
+    updatedKeys: 0,
+    unchangedKeys: 0,
+    processingErrors: 0,
+    projectStats: {},
+  };
+
+  for (const project of projects) {
+    try {
+      console.log(`\n--- Processing project: ${project} ---`);
+      const projectStats = await generateAutoComment(project);
+
+      // Update overall statistics
+      overallStats.totalKeys += projectStats.totalKeys || 0;
+      overallStats.newKeys += projectStats.newKeys || 0;
+      overallStats.updatedKeys += projectStats.updatedKeys || 0;
+      overallStats.unchangedKeys += projectStats.unchangedKeys || 0;
+      overallStats.metadataFiles += projectStats.metadataFiles || 0;
+      overallStats.totalNamespaces += Object.keys(
+        projectStats.namespaces || {}
+      ).length;
+
+      // Log namespace statistics
+      if (
+        projectStats.namespaces &&
+        Object.keys(projectStats.namespaces).length > 0
+      ) {
+        console.log(`\nNamespace statistics for project ${project}:`);
+        Object.entries(projectStats.namespaces).forEach(
+          ([namespace, stats]) => {
+            console.log(
+              `  - ${namespace}: ${stats.totalKeys} keys (${stats.newKeys} new, ${stats.updatedKeys} updated)`
+            );
+          }
+        );
+      }
+
+      overallStats.projectStats[project] = projectStats;
+    } catch (error) {
+      console.error(`Error processing project ${project}:`, error);
+      overallStats.processingErrors++;
+    }
+  }
+
+  return overallStats;
+}
+
+// Run the script if executed directly
+generateAutoCommentsMetadata()
+  .then((stats) => {
+    console.log("\n=== Complete metadata generation finished ===");
+    console.log(
+      `Processed ${stats.totalProjects} projects with ${stats.totalNamespaces} namespaces`
+    );
+    console.log(
+      `Total keys: ${stats.totalKeys} (${stats.newKeys} new, ${stats.updatedKeys} updated, ${stats.unchangedKeys} unchanged)`
+    );
+    console.log(
+      `Metadata files: ${stats.metadataFiles} files (existing files were skipped)`
+    );
+
+    if (stats.processingErrors > 0) {
+      console.log(
+        `\nWARNING: Encountered ${stats.processingErrors} errors during processing`
+      );
+    }
+
+    console.log("\nDetailed stats:", JSON.stringify(stats, null, 2));
+  })
+  .catch((error) => {
+    console.error("Fatal error during metadata generation:", error);
+    process.exit(1);
+  });

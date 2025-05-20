@@ -3,11 +3,11 @@
   "content": "Storage / Quota",
   "content_en_sha1_hash": "0803802b74bb476878a34c8d544b0b2f5a1fecb8",
   "created_at": "2025-05-19T21:30:49.101Z",
-  "updated_at": "2025-05-19T21:56:08.250Z",
+  "updated_at": "2025-05-20T08:38:32.496Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a label indicating storage and quota information. It appears as a table header column title in a UI component, informing users about the available storage capacity. The text will vary depending on whether default rooms quota has been set or not.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T08:38:32.496Z"
   },
   "usage": [
     {

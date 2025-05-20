@@ -36,6 +36,18 @@
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "restart": true
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Backend Script (generate-auto-comments-metadata)",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/backend/src/scripts/generate-auto-comments-metadata.js",
+      "cwd": "${workspaceFolder}/backend",
+      "envFile": "${workspaceFolder}/backend/.env",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "restart": true
     }
   ]
 }

@@ -3,11 +3,11 @@
   "content": "Video",
   "content_en_sha1_hash": "bc17c1f0179a888f2a7e8389f67d4f2cf5cf4531",
   "created_at": "2025-05-19T21:30:49.512Z",
-  "updated_at": "2025-05-19T21:56:08.363Z",
+  "updated_at": "2025-05-20T08:35:24.739Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the type of a file. It appears as \"Video\" on files categorized as videos in a UI component.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T08:35:24.739Z"
   },
   "usage": [
     {

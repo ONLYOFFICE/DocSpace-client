@@ -3,11 +3,11 @@
   "content": "Stop filling?",
   "content_en_sha1_hash": "b3fff789a91323a06fd3adcd922650270391f583",
   "created_at": "2025-05-19T21:30:49.074Z",
-  "updated_at": "2025-05-19T21:56:08.785Z",
+  "updated_at": "2025-05-20T08:38:40.901Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for the title of a modal dialog that prompts the user to stop filling a form field. It appears on the header of the dialog and is displayed when the \"Stop Filling\" button is clicked or visible in certain contexts.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T08:38:40.901Z"
   },
   "usage": [
     {

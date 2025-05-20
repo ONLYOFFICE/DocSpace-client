@@ -3,11 +3,11 @@
   "content": "You",
   "content_en_sha1_hash": "905cb326c779f0123e079bf8ccb223176a3cf32d",
   "created_at": "2025-05-19T21:30:49.648Z",
-  "updated_at": "2025-05-19T21:56:08.131Z",
+  "updated_at": "2025-05-20T08:26:27.485Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a message indicating that data is being reassigned or interrupted, typically in a dialog or button context. It appears in UI elements such as Data Reassignment Dialog and Delete Profile Ever Dialog, and is intended to notify users that an action is in progress related to their own data.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T08:26:27.485Z"
   },
   "usage": [
     {

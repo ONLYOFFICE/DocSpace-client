@@ -3,11 +3,11 @@
   "content": "Storage",
   "content_en_sha1_hash": "9e092dda4f0e27d0c7686ddd00272079e678b6e6",
   "created_at": "2025-05-19T21:30:49.092Z",
-  "updated_at": "2025-05-19T21:56:08.250Z",
+  "updated_at": "2025-05-20T08:38:35.575Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the content \"Storage\" in various places throughout the application, such as on a user's profile page or in an info panel. The text appears when displaying storage information and quotas for users. It provides context for translators to ensure consistency in language usage.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T08:38:35.575Z"
   },
   "usage": [
     {

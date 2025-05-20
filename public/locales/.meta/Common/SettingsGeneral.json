@@ -3,11 +3,11 @@
   "content": "General",
   "content_en_sha1_hash": "9239ee2cda84eca4c3440e2a7b50148af67da3d4",
   "created_at": "2025-05-19T21:30:48.597Z",
-  "updated_at": "2025-05-19T21:56:08.377Z",
+  "updated_at": "2025-05-20T08:41:28.684Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the general settings title in the Portal Settings page. It appears as a label on the top level of the settings tree and is also referenced in a data object that lists categories of settings. Translators should provide a clear and concise translation for this key, which will be displayed in the user interface.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T08:41:28.684Z"
   },
   "usage": [
     {

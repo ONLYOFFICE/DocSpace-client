@@ -3,11 +3,11 @@
   "content": "Unknown error",
   "content_en_sha1_hash": "e5fd9aa24c9417e7332e6f25936ae2a6ec8f1524",
   "created_at": "2025-05-19T21:30:49.406Z",
-  "updated_at": "2025-05-19T21:56:08.480Z",
+  "updated_at": "2025-05-20T08:35:51.363Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a generic error message when an unknown error occurs, often in situations where user input or system actions result in unexpected outcomes. It appears as part of error messages and dialogues throughout the application, providing a standardized response for users when unknown errors occur.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T08:35:51.363Z"
   },
   "usage": [
     {

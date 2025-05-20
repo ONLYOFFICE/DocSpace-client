@@ -51,8 +51,6 @@ type BaseButtonProps = {
   style?: React.CSSProperties;
   /** Sets the button to show a hovered state */
   isHovered?: boolean;
-  /** Disable hover effect */
-  disableHover?: boolean;
   /** Sets the button to show a clicked state */
   isClicked?: boolean;
   /** Sets the button to show a disabled state */

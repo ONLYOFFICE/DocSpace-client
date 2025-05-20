@@ -168,8 +168,17 @@ If no issues are found, return an empty array [].
       if (response.data && response.data.response) {
         const responseText = response.data.response.trim();
         try {
+          // Check if response is wrapped in markdown code blocks and extract the JSON
+          let jsonText = responseText;
+          
+          // Handle markdown code blocks (```json ... ```)
+          const markdownMatch = responseText.match(/```(?:json)?\s*([\s\S]*?)```/);
+          if (markdownMatch && markdownMatch[1]) {
+            jsonText = markdownMatch[1].trim();
+          }
+          
           // Try to parse as JSON
-          const issues = JSON.parse(responseText);
+          const issues = JSON.parse(jsonText);
           if (Array.isArray(issues)) {
             return issues;
           } else {

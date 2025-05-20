@@ -1444,25 +1444,7 @@ const Dark: TTheme = {
     marginRight: "2px",
     borderRadius: "50%",
   },
-  rombsLoader: {
-    blue: {
-      colorStep_1: black,
-      colorStep_2: black,
-      colorStep_3: "#323032",
-      colorStep_4: "#323032",
-    },
-    red: {
-      colorStep_1: black,
-      colorStep_2: black,
-      colorStep_3: "#323032",
-    },
-    green: {
-      colorStep_1: black,
-      colorStep_2: black,
-      colorStep_3: "#323032",
-      colorStep_4: "#323032",
-    },
-  },
+
   dialogLoader: {
     borderBottom: `1px solid ${black}`,
   },

@@ -33,6 +33,7 @@ import React, {
 } from "react";
 
 import { useTheme } from "styled-components";
+import { isIOS } from "react-device-detect";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
@@ -187,8 +188,8 @@ const Guid = ({
       positions.map((position) => ({
         style: {
           ["--backdrop-filter-value" as string]: theme.isBase
-            ? "contrast(165%)"
-            : "contrast(0.82)",
+            ? "contrast(200%)"
+            : "contrast(0.72)",
           width: position.width
             ? `${position.width}px`
             : `${sectionWidth - 4}px`,
@@ -213,6 +214,7 @@ const Guid = ({
 
       const elementClippedClassName = classNames(styles.guidElement, {
         [styles.smallBorderRadius]: width === height,
+        [styles.iosBackdrop]: isIOS,
       });
 
       return (

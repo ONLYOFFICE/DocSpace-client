@@ -80,6 +80,7 @@ const Chat = ({
               currentDeviceType={currentDeviceType}
               displayFileExtension={displayFileExtension}
               getIcon={getIcon}
+              vectorizedFiles={vectorizedFiles}
             />
           </ChatBody>
         </ModelStoreContextProvider>

@@ -46,7 +46,7 @@ export default class FilesStore {
   };
 
   setFiles = (files: TSelectorItem[] = []) => {
-    this.files = files;
+    this.files = [...files, ...this.files];
   };
 
   removeFile = (file: TSelectorItem) => {

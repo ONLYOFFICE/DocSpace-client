@@ -2962,7 +2962,11 @@ class FilesActionStore {
     this.isGroupMenuBlocked = blocked;
   };
 
-  preparingDataForCopyingToRoom = async (destFolderId, selections) => {
+  preparingDataForCopyingToRoom = async (
+    destFolderId,
+    selections,
+    destFolderInfo,
+  ) => {
     const fileIds = [];
     let folderIds = [];
 
@@ -3001,6 +3005,7 @@ class FilesActionStore {
 
     const operationData = {
       destFolderId,
+      destFolderInfo,
       folderIds,
       fileIds,
       deleteAfter: false,

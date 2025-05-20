@@ -48,6 +48,18 @@
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "restart": true
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Backend Script (verify-translations-spell-check)",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/backend/src/scripts/verify-translations-spell-check.js",
+      "cwd": "${workspaceFolder}/backend",
+      "envFile": "${workspaceFolder}/backend/.env",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "restart": true
     }
   ]
 }

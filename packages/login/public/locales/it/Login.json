@@ -18,5 +18,6 @@
   "RememberHelper": "‎La durata predefinita della sessione è di 20 minuti. Selezionare questa opzione per impostarla su 1 anno. Per impostare il proprio valore, passare a Impostazioni.‎",
   "SignInLDAP": "Accedi a: {{ldap_domain}}",
   "SignInLdapHelper": "Utilizza le credenziali per il dominio aziendale",
-  "UserIsAlreadyRegistered": "L'utente <1>{{email}}</1> è già registrato in questo {{productName}}, inserisci la tua password o torna indietro per continuare con un'altra email."
+  "UserIsAlreadyRegistered": "L'utente <1>{{email}}</1> è già registrato in questo {{productName}}, inserisci la tua password o torna indietro per continuare con un'altra email.",
+  "ChangePasswordSuccess": "La password è stata cambiata con successo"
 }

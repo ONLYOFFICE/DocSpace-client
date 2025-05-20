@@ -82,7 +82,7 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
   showCancelButton,
   isInfoPanelVisible,
 }) => {
-  const { t } = useTranslation(["UploadPanel", "Files"]);
+  const { t } = useTranslation(["Common"]);
 
   const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(false);
   const [isHideTooltip, setIsHideTooltip] = useState<boolean>(false);
@@ -246,7 +246,7 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
     if (isSeveralOperations) {
       return (
         <Text fontWeight={600}>
-          {t("Files:Processes", { count: allOperationsLength })}
+          {t("Common:Processes", { count: allOperationsLength })}
         </Text>
       );
     }
@@ -261,13 +261,13 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
           <Text fontWeight={600}>
             {operationName}
             <br />
-            {t("Files:ErrorUploadingFiles", { count: getErrorCount() })}
+            {t("Common:ErrorUploadingFiles", { count: getErrorCount() })}
           </Text>
         );
       }
       return (
         <Text fontWeight={600}>
-          {t("Files:ErrorOperation", {
+          {t("Common:ErrorOperation", {
             operationName,
           })}
         </Text>
@@ -281,7 +281,7 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
 
       return (
         <Text fontWeight={600}>
-          {t("Files:SuccessOperation", {
+          {t("Common:SuccessOperation", {
             operationName,
           })}
         </Text>

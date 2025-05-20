@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { Trans } from "react-i18next";
+import React, { useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
 
 import { Link } from "../../../components/link";
 import { FieldContainer } from "../../../components/field-container";
@@ -35,30 +35,27 @@ import {
   InputSize,
 } from "../../../components/text-input";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
-
-import { useResponsiveNavigation } from "../../../hooks/useResponsiveNavigation";
+import { AboutDialog } from "../../../components/about-dialog";
 
 import { StyledCompanyInfo } from "./CompanyInfo.styled";
 import { ICompanyInfo } from "./CompanyInfo.types";
 import { useCompanySettings } from "./useCompanySettings";
-import { brandingRedirectUrl } from "../constants";
 
 export const CompanyInfo = ({
-  t,
   isSettingPaid,
-  onShowExample,
   companySettings,
   onSave,
   onRestore,
   isLoading,
   companyInfoSettingsIsDefault,
-  deviceType,
+  buildVersionInfo,
+  standalone,
+  licenseAgreementsUrl,
+  isEnterprise,
+  logoText,
 }: ICompanyInfo) => {
-  useResponsiveNavigation({
-    redirectUrl: brandingRedirectUrl,
-    currentLocation: "company-info-settings",
-    deviceType,
-  });
+  const { t } = useTranslation("Common");
+  const [isAboutDialogVisible, setIsAboutDialogVisible] = useState(false);
 
   const {
     address,
@@ -93,141 +90,165 @@ export const CompanyInfo = ({
     hasErrorPhone ||
     hasErrorSite;
 
+  const link = t("Common:AboutCompanyTitle");
+
+  const showExample = () => {
+    if (!isSettingPaid) return;
+    setIsAboutDialogVisible(true);
+  };
+
   return (
-    <StyledCompanyInfo isSettingPaid={isSettingPaid}>
-      <div className="header settings_unavailable">
-        {t("Settings:CompanyInfoSettings")}
-      </div>
-      <div className="description settings_unavailable">
-        <Trans
-          t={t}
-          ns="Settings"
-          i18nKey="CompanyInfoSettingsDescription"
-          values={{
-            link: t("Common:AboutCompanyTitle"),
-          }}
-          components={{
-            1: isSettingPaid ? (
-              <Link className="link" onClick={onShowExample} noHover />
-            ) : (
-              <span className="link" />
-            ),
-          }}
-        />
-      </div>
-      <div className="settings-block">
-        <FieldContainer
-          id="fieldContainerCompanyName"
-          className="field-container-width settings_unavailable"
-          labelText={t("Common:CompanyName")}
-          isVertical
-        >
-          <TextInput
-            testId="company-name-input"
-            id="textInputContainerCompanyName"
-            className="text-input"
-            isDisabled={!isSettingPaid}
-            scale
-            value={companyName}
-            hasError={hasErrorCompanyName}
-            onChange={onChangeCompanyName}
-            type={InputType.text}
-            size={InputSize.base}
-          />
-        </FieldContainer>
-        <FieldContainer
-          id="fieldContainerEmail"
-          className="field-container-width settings_unavailable"
-          labelText={t("Common:Email")}
-          isVertical
-        >
-          <TextInput
-            testId="email-input"
-            id="textInputContainerEmail"
-            className="text-input"
-            isDisabled={!isSettingPaid}
-            scale
-            value={email}
-            hasError={hasErrorEmail}
-            onChange={onChangeEmail}
-            type={InputType.text}
-            size={InputSize.base}
-          />
-        </FieldContainer>
-        <FieldContainer
-          id="fieldContainerPhone"
-          className="field-container-width settings_unavailable"
-          labelText={t("Common:Phone")}
-          isVertical
-        >
-          <TextInput
-            testId="phone-input"
-            id="textInputContainerPhone"
-            className="text-input"
-            isDisabled={!isSettingPaid}
-            scale
-            value={phone}
-            hasError={hasErrorPhone}
-            onChange={onChangePhone}
-            type={InputType.text}
-            size={InputSize.base}
-          />
-        </FieldContainer>
-        <FieldContainer
-          id="fieldContainerWebsite"
-          className="field-container-width settings_unavailable"
-          labelText={t("Common:Website")}
-          isVertical
-        >
-          <TextInput
-            testId="site-input"
-            id="textInputContainerWebsite"
-            className="text-input"
-            isDisabled={!isSettingPaid}
-            scale
-            value={site}
-            hasError={hasErrorSite}
-            onChange={onChangeSite}
-            type={InputType.text}
-            size={InputSize.base}
-          />
-        </FieldContainer>
-        <FieldContainer
-          id="fieldContainerAddress"
-          className="field-container-width settings_unavailable"
-          labelText={t("Common:Address")}
-          isVertical
-        >
-          <TextInput
-            testId="address-input"
-            id="textInputContainerAddress"
-            className="text-input"
-            isDisabled={!isSettingPaid}
-            scale
-            value={address}
-            hasError={hasErrorAddress}
-            onChange={onChangeAddress}
-            type={InputType.text}
-            size={InputSize.base}
-          />
-        </FieldContainer>
-      </div>
-      <SaveCancelButtons
-        className="save-cancel-buttons"
-        onSaveClick={onSaveAction}
-        onCancelClick={onRestore}
-        saveButtonLabel={t("Common:SaveButton")}
-        cancelButtonLabel={t("Common:Restore")}
-        reminderText={t("YouHaveUnsavedChanges")}
-        displaySettings
-        saveButtonDisabled={isDisabled}
-        hasScroll
-        hideBorder
-        showReminder={(isSettingPaid && hasChanges) || isLoading}
-        disableRestoreToDefault={companyInfoSettingsIsDefault || isLoading}
-        additionalClassSaveButton="company-info-save"
-        additionalClassCancelButton="company-info-cancel"
+    <>
+      <AboutDialog
+        visible={isAboutDialogVisible}
+        onClose={() => setIsAboutDialogVisible(false)}
+        buildVersionInfo={buildVersionInfo}
+        previewData={companySettings}
+        companyInfoSettingsData={companySettings}
+        standalone={standalone}
+        licenseAgreementsUrl={licenseAgreementsUrl}
+        isEnterprise={isEnterprise}
+        logoText={logoText}
       />
-    </StyledCompanyInfo>
+      <StyledCompanyInfo isSettingPaid={isSettingPaid}>
+        <div className="section-description settings_unavailable">
+          {t("BrandingSectionDescription", {
+            productName: t("Common:ProductName"),
+          })}
+        </div>
+        <div className="header settings_unavailable">
+          {t("CompanyInfoSettings")}
+        </div>
+        <div className="description settings_unavailable">
+          {isSettingPaid ? (
+            <Trans
+              t={t}
+              i18nKey="CompanyInfoSettingsDescription"
+              ns="Common"
+              values={{ link }}
+              components={{
+                1: <Link className="link" onClick={showExample} noHover />,
+              }}
+            />
+          ) : (
+            <Trans
+              t={t}
+              i18nKey="CompanyInfoSettingsDescription"
+              ns="Common"
+              values={{ link }}
+              components={{ 1: <span className="link" /> }}
+            />
+          )}
+        </div>
+        <div className="settings-block">
+          <FieldContainer
+            id="fieldContainerCompanyName"
+            className="field-container-width settings_unavailable"
+            labelText={t("Common:CompanyName")}
+            isVertical
+          >
+            <TextInput
+              id="textInputContainerCompanyName"
+              className="text-input"
+              isDisabled={!isSettingPaid}
+              scale
+              value={companyName}
+              hasError={hasErrorCompanyName}
+              onChange={onChangeCompanyName}
+              type={InputType.text}
+              size={InputSize.base}
+            />
+          </FieldContainer>
+          <FieldContainer
+            id="fieldContainerEmail"
+            className="field-container-width settings_unavailable"
+            labelText={t("Common:Email")}
+            isVertical
+          >
+            <TextInput
+              id="textInputContainerEmail"
+              className="text-input"
+              isDisabled={!isSettingPaid}
+              scale
+              value={email}
+              hasError={hasErrorEmail}
+              onChange={onChangeEmail}
+              type={InputType.text}
+              size={InputSize.base}
+            />
+          </FieldContainer>
+          <FieldContainer
+            id="fieldContainerPhone"
+            className="field-container-width settings_unavailable"
+            labelText={t("Common:Phone")}
+            isVertical
+          >
+            <TextInput
+              id="textInputContainerPhone"
+              className="text-input"
+              isDisabled={!isSettingPaid}
+              scale
+              value={phone}
+              hasError={hasErrorPhone}
+              onChange={onChangePhone}
+              type={InputType.text}
+              size={InputSize.base}
+            />
+          </FieldContainer>
+          <FieldContainer
+            id="fieldContainerWebsite"
+            className="field-container-width settings_unavailable"
+            labelText={t("Common:Website")}
+            isVertical
+          >
+            <TextInput
+              id="textInputContainerWebsite"
+              className="text-input"
+              isDisabled={!isSettingPaid}
+              scale
+              value={site}
+              hasError={hasErrorSite}
+              onChange={onChangeSite}
+              type={InputType.text}
+              size={InputSize.base}
+            />
+          </FieldContainer>
+          <FieldContainer
+            id="fieldContainerAddress"
+            className="field-container-width settings_unavailable"
+            labelText={t("Common:Address")}
+            isVertical
+          >
+            <TextInput
+              id="textInputContainerAddress"
+              className="text-input"
+              isDisabled={!isSettingPaid}
+              scale
+              value={address}
+              hasError={hasErrorAddress}
+              onChange={onChangeAddress}
+              type={InputType.text}
+              size={InputSize.base}
+            />
+          </FieldContainer>
+        </div>
+        <SaveCancelButtons
+          className="save-cancel-buttons"
+          onSaveClick={onSaveAction}
+          onCancelClick={onRestore}
+          saveButtonLabel={t("Common:SaveButton")}
+          cancelButtonLabel={t("Common:Restore")}
+          reminderText={t("YouHaveUnsavedChanges")}
+          displaySettings
+          saveButtonDisabled={isDisabled}
+          hasScroll
+          hideBorder
+          showReminder={(isSettingPaid && hasChanges) || isLoading}
+          disableRestoreToDefault={companyInfoSettingsIsDefault || isLoading}
+          additionalClassSaveButton="company-info-save"
+          additionalClassCancelButton="company-info-cancel"
+        />
+      </StyledCompanyInfo>
+    </>
   );
 };

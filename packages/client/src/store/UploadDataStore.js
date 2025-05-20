@@ -289,7 +289,7 @@ class UploadDataStore {
     this.setUploadData(newUploadData);
     this.uploadedFilesHistory = newHistory;
 
-    toastr.info(t("CancelUpload"));
+    toastr.info(t("Common:CancelUpload"));
   };
 
   cancelConversion = () => {

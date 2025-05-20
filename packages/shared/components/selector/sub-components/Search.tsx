@@ -73,6 +73,7 @@ const Search = React.memo(({ isSearch }: SearchProps) => {
       onChange={onSearchAction}
       onClearSearch={onClearSearchAction}
       size={InputSize.base}
+      resetOnBlur
     />
   );
 });

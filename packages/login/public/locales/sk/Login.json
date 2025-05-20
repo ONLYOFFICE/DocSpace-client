@@ -18,5 +18,6 @@
   "RememberHelper": "Predvolená doba trvania relácie je 20 minút. Začiarknutím tejto možnosti ju nastavíte na 1 rok. Ak chcete nastaviť vlastnú hodnotu, prejdite do časti Nastavenia.",
   "SignInLDAP": "Prihláste sa do: {{ldap_domain}}",
   "SignInLdapHelper": "Použite prihlasovacie údaje pre firemnú doménu",
-  "UserIsAlreadyRegistered": "Používateľ <1>{{email}}</1> je už zaregistrovaný v tomto priestore {{productName}}, zadajte svoje heslo alebo sa vráťte späť a pokračujte s iným e-mailom."
+  "UserIsAlreadyRegistered": "Používateľ <1>{{email}}</1> je už zaregistrovaný v tomto priestore {{productName}}, zadajte svoje heslo alebo sa vráťte späť a pokračujte s iným e-mailom.",
+  "ChangePasswordSuccess": "Heslo bolo úspešne zmenené"
 }

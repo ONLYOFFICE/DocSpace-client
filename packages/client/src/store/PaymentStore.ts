@@ -443,6 +443,7 @@ class PaymentStore {
     if (!this.currentTariffStatusStore) return;
 
     const { setPayerInfo, payerInfo } = this.currentTariffStatusStore;
+    this.isVisibleWalletSettings = false;
 
     try {
       await Promise.all([

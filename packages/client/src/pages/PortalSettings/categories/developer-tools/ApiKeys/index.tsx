@@ -29,6 +29,7 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { EmptyServerErrorContainer } from "SRC_DIR/components/EmptyContainer/EmptyServerErrorContainer";
 import {
   changeApiKeyStatus,
   deleteApiKey,
@@ -101,6 +102,7 @@ const ApiKeys = (props: ApiKeysProps) => {
     useState(false);
   const [actionItem, setActionItem] = useState<TApiKey | null>(null);
   const [isRequestRunning, setIsRequestRunning] = useState(false);
+  const [error, setError] = useState<null | Error>(null);
 
   const onDeleteApiKey = (id: TApiKey["id"]) => {
     const itemIndex = listItems.findIndex((x) => x.id === id);
@@ -177,7 +179,10 @@ const ApiKeys = (props: ApiKeysProps) => {
         setListItems(keys);
         setPermissions(permissionsData);
       })
-      .catch((err) => toastr.error(err));
+      .catch((err) => {
+        toastr.error(err);
+        setError(err);
+      });
   };
 
   useEffect(() => {
@@ -189,6 +194,10 @@ const ApiKeys = (props: ApiKeysProps) => {
       setDocumentTitle(t("Settings:ApiKeys"));
     }
   }, [ready]);
+
+  // if (error) {
+  //   return <EmptyServerErrorContainer />;
+  // }
 
   return (
     <StyledApiKeys>
@@ -216,36 +225,41 @@ const ApiKeys = (props: ApiKeysProps) => {
         </Link>
       </div>
       <div>
-        {isMobile() ? (
-          <StyledMobileButton>
-            <Button
-              onClick={() => setCreateKeyDialogIsVisible(true)}
-              label={t("Settings:CreateNewSecretKey")}
-              primary
-              size={ButtonSize.normal}
-              scale
-            />
-          </StyledMobileButton>
-        ) : (
-          <Button
-            onClick={() => setCreateKeyDialogIsVisible(true)}
-            label={t("Settings:CreateNewSecretKey")}
-            primary
-            size={ButtonSize.small}
-          />
+        {error && <EmptyServerErrorContainer />}
+        {!error && (
+          <>
+            {isMobile() ? (
+              <StyledMobileButton>
+                <Button
+                  onClick={() => setCreateKeyDialogIsVisible(true)}
+                  label={t("Settings:CreateNewSecretKey")}
+                  primary
+                  size={ButtonSize.normal}
+                  scale
+                />
+              </StyledMobileButton>
+            ) : (
+              <Button
+                onClick={() => setCreateKeyDialogIsVisible(true)}
+                label={t("Settings:CreateNewSecretKey")}
+                primary
+                size={ButtonSize.small}
+              />
+            )}
+            <div>
+              {listItems.length ? (
+                <ApiKeysView
+                  items={listItems}
+                  viewAs={viewAs}
+                  onDeleteApiKey={onDeleteApiKey}
+                  onChangeApiKeyParams={onChangeApiKeyParams}
+                  onEditApiKey={onEditApiKey}
+                  permissions={permissions}
+                />
+              ) : null}
+            </div>
+          </>
         )}
-        <div>
-          {listItems.length ? (
-            <ApiKeysView
-              items={listItems}
-              viewAs={viewAs}
-              onDeleteApiKey={onDeleteApiKey}
-              onChangeApiKeyParams={onChangeApiKeyParams}
-              onEditApiKey={onEditApiKey}
-              permissions={permissions}
-            />
-          ) : null}
-        </div>
       </div>
       {createKeyDialogIsVisible ? (
         <CreateApiKeyDialog

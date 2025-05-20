@@ -278,6 +278,7 @@ class OAuthStore {
     } catch (e) {
       const err = e as TData;
       toastr.error(err);
+      throw err;
     }
   };
 
@@ -473,6 +474,7 @@ class OAuthStore {
     } catch (e) {
       const err = e as TData;
       toastr.error(err);
+      throw err;
     }
   };
 

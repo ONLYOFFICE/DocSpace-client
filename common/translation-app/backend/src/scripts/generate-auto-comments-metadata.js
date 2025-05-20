@@ -219,7 +219,9 @@ async function generateAutoComment(projectName) {
       if (!(await fs.stat(namespacePath)).isDirectory()) continue;
 
       // Get all key files in this namespace
-      const keyFiles = glob.sync(path.join(namespacePath, "*.json"));
+      // Use normalized path with forward slashes for glob to work on all platforms
+      const globPattern = path.join(namespacePath, "*.json").replace(/\\/g, "/");
+      const keyFiles = glob.sync(globPattern) || [];
 
       // Update namespace stats
       stats.namespaces[namespace] = stats.namespaces[namespace] || {

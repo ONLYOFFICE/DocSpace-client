@@ -411,7 +411,8 @@ class PaymentStore {
 
       const { setPayerInfo, payerInfo } = this.currentTariffStatusStore;
 
-      if (this.payer && !payerInfo) await setPayerInfo(this.payer);
+      if (this.isPayerExist && !payerInfo)
+        await setPayerInfo(this.isPayerExist);
 
       if (this.walletCustomerEmail) {
         if (this.isPayer) {
@@ -436,6 +437,10 @@ class PaymentStore {
     }
   };
 
+  setVisibleWalletSetting = (isVisibleWalletSettings) => {
+    this.isVisibleWalletSettings = isVisibleWalletSettings;
+  };
+
   walletInit = async (t: TTranslation) => {
     const requests = [];
 
@@ -443,7 +448,7 @@ class PaymentStore {
     if (!this.currentTariffStatusStore) return;
 
     const { setPayerInfo, payerInfo } = this.currentTariffStatusStore;
-    this.isVisibleWalletSettings = false;
+    this.setVisibleWalletSetting(false);
 
     try {
       await Promise.all([
@@ -453,7 +458,8 @@ class PaymentStore {
 
       this.previousBalance = this.balance;
 
-      if (this.payer && !payerInfo) await setPayerInfo(this.payer);
+      if (this.isPayerExist && !payerInfo)
+        await setPayerInfo(this.isPayerExist);
 
       if (this.walletCustomerEmail) {
         if (this.isPayer) {
@@ -475,7 +481,7 @@ class PaymentStore {
           document.title,
           window.location.pathname,
         );
-        this.isVisibleWalletSettings = true;
+        this.setVisibleWalletSetting(true);
       }
     } catch (error) {
       toastr.error(t("Common:UnexpectedError"));
@@ -511,9 +517,11 @@ class PaymentStore {
     else if (this.walletCustomerEmail)
       await setPayerInfo(this.walletCustomerEmail);
 
-    if ((this.isAlreadyPaid || this.walletCustomerEmail) && this.isPayer)
-      requests.push(this.setPaymentAccount());
-    else requests.push(this.getBasicPaymentLink(addedManagersCount));
+    if (this.isPayer) {
+      if (this.isAlreadyPaid || this.walletCustomerEmail)
+        requests.push(this.setPaymentAccount());
+      else requests.push(this.getBasicPaymentLink(addedManagersCount));
+    }
 
     try {
       await Promise.all(requests);
@@ -753,7 +761,7 @@ class PaymentStore {
     return this.managersCount < this.minAvailableManagersValue;
   }
 
-  get payer() {
+  get isPayerExist() {
     if (!this.currentTariffStatusStore) return;
 
     const { customerId } = this.currentTariffStatusStore;
@@ -789,6 +797,11 @@ class PaymentStore {
     const { user } = this.userStore;
 
     if (!user) return false;
+
+    if (this.currentQuotaStore.isNonProfit) {
+      if (!this.walletCustomerEmail) return true;
+      return this.isPayer;
+    }
 
     if (!this.cardLinkedOnFreeTariff) return true;
 

@@ -33,6 +33,7 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { EmptyServerErrorContainer } from "SRC_DIR/components/EmptyContainer/EmptyServerErrorContainer";
 
 import { OAuthContainer } from "./OAuth.styled";
 import { OAuthProps } from "./OAuth.types";
@@ -73,6 +74,7 @@ const OAuth = ({
   const { t } = useTranslation(["OAuth"]);
 
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  const [error, setError] = React.useState<null | Error>(null);
 
   const startLoadingRef = React.useRef<null | Date>(null);
 
@@ -80,15 +82,19 @@ const OAuth = ({
     if (startLoadingRef.current) return;
     const actions: Promise<void>[] = [];
 
-    if (!isInit) {
-      actions.push(fetchScopes());
+    try {
+      if (!isInit) {
+        actions.push(fetchScopes());
+      }
+
+      actions.push(fetchClients());
+
+      startLoadingRef.current = new Date();
+
+      await Promise.all(actions);
+    } catch (e) {
+      setError(e as Error);
     }
-
-    actions.push(fetchClients());
-
-    startLoadingRef.current = new Date();
-
-    await Promise.all(actions);
 
     if (startLoadingRef.current) {
       const currentDate = new Date();
@@ -124,6 +130,10 @@ const OAuth = ({
   React.useEffect(() => {
     setDocumentTitle(t("OAuth"));
   }, [t]);
+
+  if (error) {
+    return <EmptyServerErrorContainer />;
+  }
 
   return (
     <OAuthContainer>

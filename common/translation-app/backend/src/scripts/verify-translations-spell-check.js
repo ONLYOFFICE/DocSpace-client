@@ -324,8 +324,13 @@ async function verifyTranslationsSpellCheck(projectName) {
     });
 
     // Find all metadata files
-    const metaPattern = path.join(projectPath, ".meta", "**", "*.json");
-    const metaFiles = glob.sync(metaPattern);
+    // Use normalized path with forward slashes for glob to work on all platforms
+    const metaPattern = path
+      .join(projectPath, ".meta", "**", "*.json")
+      .replace(/\\/g, "/");
+
+    const metaFiles = glob.sync(metaPattern) || [];
+
     console.log(`Found ${metaFiles.length} metadata files`);
 
     stats.totalFiles = metaFiles.length;

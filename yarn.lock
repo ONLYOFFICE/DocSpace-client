@@ -4954,10 +4954,10 @@ __metadata:
 
 "@onlyoffice/docspace-api-typescript@file:./onlyoffice-docspace-api-typescript-3.1.0.tgz::locator=%40docspace%2Fshared%40workspace%3Apackages%2Fshared":
   version: 3.1.0
-  resolution: "@onlyoffice/docspace-api-typescript@file:./onlyoffice-docspace-api-typescript-3.1.0.tgz#./onlyoffice-docspace-api-typescript-3.1.0.tgz::hash=1bdf45&locator=%40docspace%2Fshared%40workspace%3Apackages%2Fshared"
+  resolution: "@onlyoffice/docspace-api-typescript@file:./onlyoffice-docspace-api-typescript-3.1.0.tgz#./onlyoffice-docspace-api-typescript-3.1.0.tgz::hash=693b76&locator=%40docspace%2Fshared%40workspace%3Apackages%2Fshared"
   dependencies:
     axios: "npm:^1.6.1"
-  checksum: 10/15d8aa164f5ca8ac0a371742101e419526b91a8c8d7048a77408bda84230d34c26183cff0067aedfd0acc0fbc6ccde04f6e6788ee39359168616c57e10d6e7a2
+  checksum: 10/11ee534960d60b655f7508e740402ad299d9e34c7844055a8a775eb58592713d1f45578c13e88e83cfafbd7842ef694512778697ff36952da2efa174135f55e1
   languageName: node
   linkType: hard
 

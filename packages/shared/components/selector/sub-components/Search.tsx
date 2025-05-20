@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useContext, useCallback } from "react";
-
 import { SearchInput } from "../../search-input";
 import { InputSize } from "../../text-input";
 
@@ -74,6 +73,7 @@ const Search = React.memo(({ isSearch }: SearchProps) => {
       onChange={onSearchAction}
       onClearSearch={onClearSearchAction}
       size={InputSize.base}
+      resetOnBlur
     />
   );
 });

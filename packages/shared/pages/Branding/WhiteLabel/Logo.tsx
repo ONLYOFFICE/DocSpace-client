@@ -132,6 +132,7 @@ export const Logo = (props: ILogoProps) => {
           data-testid={inputId}
           id={inputId}
           type="file"
+          accept=".png, .jpg, .jpeg, .svg"
           className="hidden"
           onChange={onChange}
           disabled={!isSettingPaid}

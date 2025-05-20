@@ -209,7 +209,7 @@ const SessionLifetime = (props) => {
 
     setSessionLifetimeSettings(sessionValue, type)
       .then(() => {
-        toastr.success(t("SuccessfullySaveSettingsMessage"));
+        toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
         saveToSessionStorage("defaultSessionLifetimeSettings", {
           lifetime: sessionValue?.toString(),
           type,

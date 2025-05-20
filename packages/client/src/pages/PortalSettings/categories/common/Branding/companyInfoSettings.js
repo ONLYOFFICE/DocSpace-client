@@ -33,11 +33,12 @@ import {
   restoreCompanyInfoSettings,
 } from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/shared/components/toast";
+import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveNavigation";
 import { CompanyInfo } from "@docspace/shared/pages/Branding/CompanyInfo";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderCompanyInfoSettings from "../sub-components/loaderCompanyInfoSettings";
-import AboutDialog from "../../../../About/AboutDialog";
+import { brandingRedirectUrl } from "./constants";
 
 const CompanyInfoSettingsComponent = (props) => {
   const {
@@ -51,10 +52,18 @@ const CompanyInfoSettingsComponent = (props) => {
     buildVersionInfo,
     deviceType,
     getCompanyInfoSettings,
+    standalone,
+    licenseAgreementsUrl,
+    isEnterprise,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+
+  useResponsiveNavigation({
+    redirectUrl: brandingRedirectUrl,
+    currentLocation: "company-info-settings",
+    deviceType,
+  });
 
   useEffect(() => {
     if (!(companyInfoSettingsData && tReady)) return;
@@ -69,7 +78,7 @@ const CompanyInfoSettingsComponent = (props) => {
       try {
         await setCompanyInfoSettings(address, companyName, email, phone, site);
         await getCompanyInfoSettings();
-        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+        toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       } catch (error) {
         toastr.error(error);
       } finally {
@@ -85,7 +94,7 @@ const CompanyInfoSettingsComponent = (props) => {
     try {
       await restoreCompanyInfoSettings();
       await getCompanyInfoSettings();
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
     } finally {
@@ -93,43 +102,32 @@ const CompanyInfoSettingsComponent = (props) => {
     }
   }, [setIsLoading]);
 
-  const onShowExample = () => {
-    if (!isSettingPaid) return;
-
-    setShowModal(true);
-  };
-
-  const onCloseModal = () => {
-    setShowModal(false);
-  };
-
   if (!isLoadedCompanyInfoSettingsData) return <LoaderCompanyInfoSettings />;
 
   return (
-    <>
-      <AboutDialog
-        visible={showModal}
-        onClose={onCloseModal}
-        buildVersionInfo={buildVersionInfo}
-        previewData={companyInfoSettingsData}
-      />
-      <CompanyInfo
-        t={t}
-        isSettingPaid={isSettingPaid}
-        onShowExample={onShowExample}
-        companySettings={companyInfoSettingsData}
-        onSave={onSave}
-        onRestore={onRestore}
-        isLoading={isLoading}
-        companyInfoSettingsIsDefault={companyInfoSettingsIsDefault}
-        deviceType={deviceType}
-      />
-    </>
+    <CompanyInfo
+      t={t}
+      isSettingPaid={isSettingPaid}
+      companySettings={companyInfoSettingsData}
+      onSave={onSave}
+      onRestore={onRestore}
+      isLoading={isLoading}
+      companyInfoSettingsIsDefault={companyInfoSettingsIsDefault}
+      buildVersionInfo={buildVersionInfo}
+      standalone={standalone}
+      licenseAgreementsUrl={licenseAgreementsUrl}
+      isEnterprise={isEnterprise}
+    />
   );
 };
 
 export const CompanyInfoSettings = inject(
-  ({ settingsStore, brandingStore, currentQuotaStore }) => {
+  ({
+    settingsStore,
+    brandingStore,
+    currentQuotaStore,
+    currentTariffStatusStore,
+  }) => {
     const {
       setIsLoadedCompanyInfoSettingsData,
       isLoadedCompanyInfoSettingsData,
@@ -142,7 +140,11 @@ export const CompanyInfoSettings = inject(
       checkEnablePortalSettings,
       deviceType,
       getCompanyInfoSettings,
+      standalone,
+      licenseAgreementsUrl,
     } = settingsStore;
+
+    const { isEnterprise } = currentTariffStatusStore;
 
     const { isCustomizationAvailable } = currentQuotaStore;
     const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
@@ -156,6 +158,9 @@ export const CompanyInfoSettings = inject(
       isSettingPaid,
       deviceType,
       getCompanyInfoSettings,
+      standalone,
+      licenseAgreementsUrl,
+      isEnterprise,
     };
   },
 )(

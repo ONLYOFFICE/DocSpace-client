@@ -28,13 +28,13 @@ import { TContextMenuValueTypeOnClick } from "../context-menu/ContextMenu.types"
 import { ShareAccessRights } from "../../enums";
 import { TColorScheme } from "../../themes";
 import { TDirectionX, TDirectionY } from "../../types";
-import { ComboBoxDisplayType, ComboBoxSize } from "./ComboBox.enums";
+import { ComboBoxDisplayType, ComboBoxSize } from "./Combobox.enums";
 
 export type TCombobox = null | "badge" | "onlyIcon" | "descriptive";
 
 export type TBaseOption = {
   key: string | number;
-  icon?: string | React.ReactElement;
+  icon?: string | React.ReactElement | React.ElementType;
   label?: string;
   color?: string;
   backgroundColor?: string;

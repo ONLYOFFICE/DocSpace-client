@@ -30,9 +30,9 @@ import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { QuotaForm } from "@docspace/shared/components/quota-form";
 
 import { StyledBaseQuotaComponent } from "../StyledComponent";
-import QuotaForm from "../../../../../components/QuotaForm";
 
 let timerId = null;
 const QuotaPerItemComponent = (props) => {

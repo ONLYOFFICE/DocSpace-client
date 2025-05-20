@@ -1,6 +1,5 @@
 {
   "AccountWillBeCreated": "{{productName}} հաշիվը կստեղծվի <1>{{email}}</1>-ի համար: Խնդրում ենք լրացնել ձեր գրանցումը՝",
-  "ChangePasswordSuccess": "Գաղտնաբառը հաջողությամբ փոխվել է",
   "ConfirmOwnerPortalSuccessMessage": "{{productName}}-ի տնօրինողը հաջողությամբ փոխվել է: 10 վայրկյանից դուք կվերաուղղորդվեք:",
   "ConfirmOwnerPortalTitle": "Խնդրում ենք հաստատել, որ ցանկանում եք փոխել {{productName}} սեփականատիրոջը {{newOwner}}:",
   "CurrentNumber": "Ձեր ընթացիկ բջջային հեռախոսահամարը",

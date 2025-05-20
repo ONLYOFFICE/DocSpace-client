@@ -41,7 +41,10 @@ import {
   TextInput,
 } from "@docspace/shared/components/text-input";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { TPasswordHash } from "@docspace/shared/api/settings/types";
+import {
+  TGetColorTheme,
+  TPasswordHash,
+} from "@docspace/shared/api/settings/types";
 import { ButtonKeys } from "@docspace/shared/enums";
 
 import { TError } from "@/types";
@@ -53,6 +56,7 @@ type TfaAuthFormProps = {
   passwordHash: TPasswordHash;
   userName?: string;
   defaultPage?: string;
+  colorTheme?: TGetColorTheme;
 };
 
 const TfaAuthForm = ({
@@ -71,8 +75,8 @@ const TfaAuthForm = ({
 
   const { confirmHeader = null } = linkData;
 
-  const linkUrlData = searchParams.get("linkData");
-  const isPublicAuth = searchParams.get("publicAuth");
+  const linkUrlData = searchParams?.get("linkData");
+  const isPublicAuth = searchParams?.get("publicAuth");
 
   const onSubmit = async () => {
     try {
@@ -125,7 +129,6 @@ const TfaAuthForm = ({
 
       setError(errorMessage);
       toastr.error(errorMessage);
-    } finally {
       setIsLoading(false);
     }
   };

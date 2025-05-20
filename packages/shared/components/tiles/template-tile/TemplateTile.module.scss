@@ -29,8 +29,9 @@
 @import "../../../styles/_mixins.scss";
 
 .templateTile {
-  height: 128px;
-  gap: 12px;
+  max-height: 128px;
+  row-gap: 12px;
+  padding: 12px 0px;
 
   :global {
     .content {
@@ -90,6 +91,10 @@
 
       box-sizing: border-box;
       overflow: hidden;
+    }
+
+    .topContent {
+      height: 44px;
     }
   }
 }

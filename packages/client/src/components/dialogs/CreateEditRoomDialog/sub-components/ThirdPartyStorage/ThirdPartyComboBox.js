@@ -38,8 +38,11 @@ import { toastr } from "@docspace/shared/components/toast";
 import { ComboBox } from "@docspace/shared/components/combobox";
 
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
+import {
+  THIRD_PARTY_SERVICES_URL,
+  ThirdPartyServicesUrlName,
+} from "@docspace/shared/constants";
 import { injectDefaultTheme, isDesktop } from "@docspace/shared/utils";
-import { ThirdPartyServicesUrlName } from "../../../../../helpers/constants";
 
 const StyledStorageLocation = styled.div.attrs(injectDefaultTheme)`
   display: flex;
@@ -157,7 +160,7 @@ const ThirdPartyComboBox = ({
   const setStorageLocaiton = (thirparty, isConnected) => {
     if (!isConnected) {
       window.open(
-        `/portal-settings/integration/third-party-services?service=${ThirdPartyServicesUrlName[thirparty.id]}`,
+        `${THIRD_PARTY_SERVICES_URL}${ThirdPartyServicesUrlName[thirparty.id]}`,
         "_blank",
       );
       return;
@@ -250,7 +253,8 @@ const ThirdPartyComboBox = ({
     ?.map((item) => {
       const disabled = !item.isConnected && !isAdmin;
       const itemLabel =
-        item.title + (item.isConnected ? "" : ` (${t("ActivationRequired")})`);
+        item.title +
+        (item.isConnected ? "" : ` (${t("Common:ActivationRequired")})`);
 
       const disabledData = disabled
         ? { "data-tooltip-id": "file-links-tooltip", "data-tip": "tooltip" }

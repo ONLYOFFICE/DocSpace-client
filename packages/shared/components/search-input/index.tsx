@@ -62,13 +62,20 @@ const SearchInput = ({
   isDisabled = false,
   placeholder,
   onFocus,
+  resetOnBlur = false,
   children,
 }: SearchInputProps) => {
   const [inputValue, setInputValue] = useState(value);
+
+  const afterClear = useRef(false);
   const prevValueRef = useRef(value);
 
   const debouncedOnChange = useDebounce(
-    useCallback((v: string) => onChange?.(v), [onChange]),
+    useCallback(() => {
+      if (!afterClear.current) {
+        onChange?.(prevValueRef.current);
+      }
+    }, [onChange]),
     refreshTimeout,
   );
 
@@ -76,6 +83,8 @@ const SearchInput = ({
     (e: ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value;
       setInputValue(newValue);
+      prevValueRef.current = newValue;
+      afterClear.current = false;
       if (autoRefresh) {
         debouncedOnChange(newValue);
       }
@@ -85,8 +94,18 @@ const SearchInput = ({
 
   const handleClearSearch = useCallback(() => {
     setInputValue("");
+    prevValueRef.current = "";
+    afterClear.current = true;
     onClearSearch?.();
   }, [onClearSearch]);
+
+  const handleBlur = useCallback(() => {
+    // Reset to the external value when focus is lost if they don't match
+    if (resetOnBlur && inputValue !== value) {
+      setInputValue(value);
+      prevValueRef.current = value;
+    }
+  }, [inputValue, value, resetOnBlur]);
 
   useEffect(() => {
     if (prevValueRef.current !== value) {
@@ -156,6 +175,7 @@ const SearchInput = ({
         isDisabled={isDisabled}
         onChange={handleInputChange}
         onFocus={onFocus}
+        onBlur={handleBlur}
         type={InputType.text}
         iconNode={iconNode}
         iconButtonClassName={

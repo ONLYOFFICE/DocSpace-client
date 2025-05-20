@@ -232,12 +232,12 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   const tabsItems = [
     {
       id: "all",
-      name: "All",
+      name: t("Common:All"),
       content: null,
     },
     {
       id: "restricted",
-      name: "Restricted",
+      name: t("Common:Restricted"),
       content: (
         <div className="api-key_permission-tab">
           <div className="api-key_permission-container">
@@ -266,7 +266,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
     },
     {
       id: "readonly",
-      name: "Read only",
+      name: t("Common:ReadOnly"),
       content: null,
     },
   ];

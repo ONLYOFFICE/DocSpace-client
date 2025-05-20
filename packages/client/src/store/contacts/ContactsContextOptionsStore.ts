@@ -285,7 +285,7 @@ class ContactsConextOptionsStore {
             icon: RestoreAuthReactSvgUrl,
             label: t("PeopleTranslations:ResetAuth"),
             onClick: () => this.onResetAuth(item),
-            disabled: this.tfaStore.tfaSettings !== "app",
+            disabled: !item.tfaAppEnabled,
           };
         case "share-guest":
           return {

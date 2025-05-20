@@ -1,5 +1,4 @@
 {
-  "ActivationRequired": "需要激活",
   "AddStaticText": "添加静态文本",
   "AddWatermarkElements": "添加水印元素",
   "AddWatermarksToDocuments": "添加水印到文档",
@@ -33,7 +32,6 @@
   "StorageDescription": "您可以为每个房间设置存储空间配额，可以更改配额值，或关闭存储空间限制。",
   "TagsPlaceholder": "添加标签",
   "ThirdPartyStorageComboBoxPlaceholder": "选择存储空间",
-  "ThirdPartyStorageDescription": "使用第三方服务存储此房间的数据。启用后将在已连接的存储空间中创建一个新文件夹，用于存储此房间的数据。",
   "ThirdPartyStorageNoStorageAlert": "您需要在此之前于“集成”部分中连接相应服务。否则将无法建立连接。",
   "ThirdPartyStoragePermanentSettingDescription": "文件已存储在第三方 {{thirdpartyTitle}} 存储空间的\"{{thirdpartyFolderName}}\"文件夹中。\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "要连接第三方存储，您需要在{{productName}}设置的集成部分中添加相应的服务。联系{{productName}}所有者或管理员以启用集成。",

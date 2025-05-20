@@ -142,7 +142,13 @@ Based on this information, please write a short, clear description of what this 
         error.message.includes("socket hang up") ||
         error.message.includes("timeout")
       ) {
-        console.log(`Network error detected. Waiting before retry...`);
+        console.log(
+          `Network error detected. Waiting before retry... ${error.message}`
+        );
+        console.log(
+          `ollama api url: '${ollamaConfig.apiUrl}' model: '${MODEL}'`
+        );
+        console.log(`prompt: ${prompt}`);
         // Wait for a few seconds before retrying (increasing with each retry)
         await new Promise((resolve) => setTimeout(resolve, 2000 * retries));
       } else if (retries < maxRetries) {
@@ -220,7 +226,9 @@ async function generateAutoComment(projectName) {
 
       // Get all key files in this namespace
       // Use normalized path with forward slashes for glob to work on all platforms
-      const globPattern = path.join(namespacePath, "*.json").replace(/\\/g, "/");
+      const globPattern = path
+        .join(namespacePath, "*.json")
+        .replace(/\\/g, "/");
       const keyFiles = glob.sync(globPattern) || [];
 
       // Update namespace stats

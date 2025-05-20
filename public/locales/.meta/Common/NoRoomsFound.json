@@ -3,11 +3,11 @@
   "content": "No rooms found",
   "content_en_sha1_hash": "ad2c3ebdb031938200e1b48e4c1f024860a8d3b2",
   "created_at": "2025-05-19T21:30:46.846Z",
-  "updated_at": "2025-05-19T21:56:08.763Z",
+  "updated_at": "2025-05-20T09:35:19.588Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"NoRoomsFound\" is used to display a message indicating that no rooms are available for selection in an empty screen form. It appears as a heading on an empty room selection screen and provides context for users when no rooms can be found.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:19.588Z"
   },
   "usage": [
     {

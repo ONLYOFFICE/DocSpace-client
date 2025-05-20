@@ -3,11 +3,11 @@
   "content": "Provider successfully disconnected",
   "content_en_sha1_hash": "7e19e2606519e4f26445f6a151a930a854841fd1",
   "created_at": "2025-05-19T21:30:53.375Z",
-  "updated_at": "2025-05-19T21:56:08.677Z",
+  "updated_at": "2025-05-20T09:43:50.204Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"ProviderSuccessfullyDisconnected\" translation key is used to display a success message when a user disconnects from an OAuth provider. This message is shown as a toast notification in the UI, confirming that the disconnection was successful and providing feedback to the user.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:50.204Z"
   },
   "usage": [
     {

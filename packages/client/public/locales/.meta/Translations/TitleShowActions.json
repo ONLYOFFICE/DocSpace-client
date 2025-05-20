@@ -3,11 +3,11 @@
   "content": "Show File Actions",
   "content_en_sha1_hash": "5f4d732bf49f42d2b52ab6682a11f986c01135a6",
   "created_at": "2025-05-19T21:30:50.015Z",
-  "updated_at": "2025-05-19T21:56:08.253Z",
+  "updated_at": "2025-05-20T09:46:27.022Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key \"TitleShowActions\" is used to display the text \"Show File Actions\" in various UI elements, including buttons and dialogs. It appears in contexts where file actions are relevant, such as in a context menu or a button title. Translators should ensure the text accurately reflects the functionality of these elements.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:27.022Z"
   },
   "usage": [
     {

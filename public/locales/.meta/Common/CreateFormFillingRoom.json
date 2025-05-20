@@ -3,11 +3,11 @@
   "content": "Create Form filling room",
   "content_en_sha1_hash": "2c00eeebf71b5e09d7795d3137d22acce6f3542a",
   "created_at": "2025-05-19T21:30:43.893Z",
-  "updated_at": "2025-05-19T21:56:08.040Z",
+  "updated_at": "2025-05-20T09:36:51.542Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"CreateFormFillingRoom\" is used to display the label for a button that allows users to create a new form filling room. It appears in a dialog and has been translated from English as \"Create Form filling room\". This translation key is part of a set of labels for different types of rooms, with this one specifically referring to a space for filling out forms.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:51.542Z"
   },
   "usage": [
     {

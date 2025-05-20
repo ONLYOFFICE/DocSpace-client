@@ -3,11 +3,11 @@
   "content": "Some users have already been added",
   "content_en_sha1_hash": "11ba705efbb4050c93a4d4827ad25f4eb90bb39d",
   "created_at": "2025-05-19T21:30:54.741Z",
-  "updated_at": "2025-05-19T21:56:08.104Z",
+  "updated_at": "2025-05-20T09:41:13.255Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "\"This translation key is used to display a message when a user has already been added to a group or panel, indicating that they cannot be added again. It appears in warning notifications and dialog boxes, typically triggered by actions such as adding users to a group or editing invite panels.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:13.255Z"
   },
   "usage": [
     {

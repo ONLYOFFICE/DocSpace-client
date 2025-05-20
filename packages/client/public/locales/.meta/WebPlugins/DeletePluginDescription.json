@@ -3,11 +3,11 @@
   "content": "This plugin will no longer be available to {{productName}} users. Are you sure you want to continue?",
   "content_en_sha1_hash": "f9dd38d9a79d72110282ab407149bc43bb96edf0",
   "created_at": "2025-05-19T21:30:49.904Z",
-  "updated_at": "2025-05-19T21:56:08.147Z",
+  "updated_at": "2025-05-20T09:46:43.396Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a confirmation message that appears when deleting a plugin in an application, prompting users to confirm their action. The message includes placeholders for product name and title. It is displayed within a delete dialog modal.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:43.396Z"
   },
   "usage": [
     {

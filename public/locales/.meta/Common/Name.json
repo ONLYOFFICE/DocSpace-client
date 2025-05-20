@@ -3,11 +3,11 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.705Z",
-  "updated_at": "2025-05-19T21:56:08.183Z",
+  "updated_at": "2025-05-20T09:35:24.514Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key displays the user's full name, typically their first and last names. It is used in a social authentication welcome dialog to provide user information. Translators should note that the name may be truncated or displayed as an alias if not available.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:24.514Z"
   },
   "usage": [
     {

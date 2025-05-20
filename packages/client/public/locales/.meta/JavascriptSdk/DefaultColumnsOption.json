@@ -3,11 +3,11 @@
   "content": "Default (Quantity depends on screen width)",
   "content_en_sha1_hash": "c9cffe920b3fe39998cc9c0a0c4b442c111c6746",
   "created_at": "2025-05-19T21:30:54.447Z",
-  "updated_at": "2025-05-19T21:56:08.462Z",
+  "updated_at": "2025-05-20T09:41:44.222Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a label for a preset option that controls the quantity of columns displayed based on screen width. It appears in a dropdown menu or button, likely within settings or configuration pages, where users can select from predefined options.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:44.222Z"
   },
   "usage": [
     {

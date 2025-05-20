@@ -3,11 +3,11 @@
   "content": "No authorized apps",
   "content_en_sha1_hash": "c1f73d4def787f095d112a62e150b77244de4f23",
   "created_at": "2025-05-19T21:30:53.918Z",
-  "updated_at": "2025-05-19T21:56:08.670Z",
+  "updated_at": "2025-05-20T09:42:44.377Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "\"NoAuthorizedApps\" is used to display a message indicating that there are no authorized apps. It appears in an empty list screen, providing feedback to users about their app settings on the Profile page. Translators should provide a clear and concise equivalent of this message for all languages, using phrases like \"No authorized applications available\" or similar expressions.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:44.377Z"
   },
   "usage": [
     {

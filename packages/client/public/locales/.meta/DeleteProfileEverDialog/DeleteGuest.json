@@ -3,11 +3,11 @@
   "content": "Delete guest",
   "content_en_sha1_hash": "74f9b74ae1d024f81e7e6e366926f86c3246c8f2",
   "created_at": "2025-05-19T21:30:56.657Z",
-  "updated_at": "2025-05-19T21:56:08.148Z",
+  "updated_at": "2025-05-20T09:38:29.692Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a confirmation message when deleting a guest. It is used within a delete profile ever dialog and is intended to be displayed after successful deletion of the guest's information.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:29.692Z"
   },
   "usage": [
     {

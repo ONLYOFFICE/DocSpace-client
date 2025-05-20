@@ -3,11 +3,11 @@
   "content": "Edit group",
   "content_en_sha1_hash": "edb57d8eeff83c091697eab4d31079c72abcd3d1",
   "created_at": "2025-05-19T21:30:53.468Z",
-  "updated_at": "2025-05-19T21:56:08.104Z",
+  "updated_at": "2025-05-20T09:43:42.204Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "EditGroup is used as a label in a modal dialog, appearing on a button to indicate editing of a group. It translates to \"Edit group\" and should be visible when allowing users to modify group settings.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:42.204Z"
   },
   "usage": [
     {

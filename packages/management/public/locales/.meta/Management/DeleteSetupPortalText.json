@@ -3,11 +3,11 @@
   "content": "You are going to permanently delete the <1>{{domain}}</1> space with all the data and accounts.  A request to delete <1>{{domain}}</1> will be sent to the {{productName}} owner to the email address <1>{{email}}</1>.",
   "content_en_sha1_hash": "f282835d6f73c55713757f54bfc6d5a08befebc7",
   "created_at": "2025-05-19T21:30:57.432Z",
-  "updated_at": "2025-05-19T21:56:08.818Z",
+  "updated_at": "2025-05-20T09:47:59.587Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a warning message before permanently deleting a setup portal. The message informs users that all data and accounts will be deleted and sends a request to the product owner via email. This appears in a dialog component for confirmation of deletion.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:59.587Z"
   },
   "usage": [
     {

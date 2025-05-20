@@ -3,11 +3,11 @@
   "content": "History",
   "content_en_sha1_hash": "90ccd6497400b5576aeca1bd94af74aae1e0a250",
   "created_at": "2025-05-19T21:30:54.971Z",
-  "updated_at": "2025-05-19T21:56:08.360Z",
+  "updated_at": "2025-05-20T09:40:41.087Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"InfoPanel:SubmenuHistory\" translation key is used to display the label \"History\" in a submenu within an info panel on the Home page. It appears as a heading in a developer tool section, prompting users to view or manage their history.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:41.087Z"
   },
   "usage": [
     {

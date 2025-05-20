@@ -3,11 +3,11 @@
   "content": "Profile",
   "content_en_sha1_hash": "ff4fc0276e960c348647b647235f68200887c9d2",
   "created_at": "2025-05-19T21:30:47.037Z",
-  "updated_at": "2025-05-19T21:56:08.435Z",
+  "updated_at": "2025-05-20T09:35:12.611Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for the label of a permission group that corresponds to the OAuth profile. It appears in a UI element related to portal settings and is intended to be displayed as \"Profile\" for users. Translators should provide a localized version of this phrase for their respective languages.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:12.611Z"
   },
   "usage": [
     {

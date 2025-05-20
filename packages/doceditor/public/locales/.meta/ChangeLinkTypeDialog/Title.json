@@ -3,11 +3,11 @@
   "content": "Change link type",
   "content_en_sha1_hash": "85b52eccc3ad049741c44630c48bebcececce91a",
   "created_at": "2025-05-19T21:30:57.198Z",
-  "updated_at": "2025-05-19T21:56:08.708Z",
+  "updated_at": "2025-05-20T09:47:09.924Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"Change link type\" is used to display a title for a dialog that allows users to change the link type. It appears as part of a modal dialog in the DocEditor application, providing context for the user's interaction.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:09.924Z"
   },
   "usage": [
     {

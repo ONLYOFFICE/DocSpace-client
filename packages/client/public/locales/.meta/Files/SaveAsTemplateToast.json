@@ -3,11 +3,11 @@
   "content": "Room template <1>«{{title}}»</1> saved",
   "content_en_sha1_hash": "496cf170e612670afa1b398b24d8e9cdd2c96d27",
   "created_at": "2025-05-19T21:30:56.171Z",
-  "updated_at": "2025-05-19T21:56:08.021Z",
+  "updated_at": "2025-05-20T09:39:08.883Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a success toast notification when a room template is saved as a template in the UI. The notification includes the title of the saved template and is displayed after saving. It appears in the application's global events section.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:08.883Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "<strong>Note:</strong> That all users all again be required to complete the consent screen",
   "content_en_sha1_hash": "1c303372ca0d8ed4c8a367080e38ccf644bf0f33",
   "created_at": "2025-05-19T21:30:53.865Z",
-  "updated_at": "2025-05-19T21:56:08.492Z",
+  "updated_at": "2025-05-20T09:42:50.596Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to describe why an application should be disabled, prompting users to re-enter consent. It appears in a modal dialog, providing feedback to the user on what action led to this request.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:50.596Z"
   },
   "usage": [
     {

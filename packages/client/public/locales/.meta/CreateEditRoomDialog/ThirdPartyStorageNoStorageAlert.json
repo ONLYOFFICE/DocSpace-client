@@ -3,11 +3,11 @@
   "content": "Before, you need to connect the corresponding service in the “Integration” section. Otherwise, the connection will not be possible.",
   "content_en_sha1_hash": "2feb1762a1140fb97479d8150fe486ac65e755b3",
   "created_at": "2025-05-19T21:30:56.844Z",
-  "updated_at": "2025-05-19T21:56:08.116Z",
+  "updated_at": "2025-05-20T09:38:02.009Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display an alert message indicating that a connection to third-party storage is required in order to proceed. It appears as a pop-up notification when attempting to create or edit a room without having connected the necessary service.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:02.009Z"
   },
   "usage": [
     {

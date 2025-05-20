@@ -3,11 +3,11 @@
   "content": "OAuth 2.0",
   "content_en_sha1_hash": "11ff1c5f1bf611e663f09de411b0c9a4d410b907",
   "created_at": "2025-05-19T21:30:53.924Z",
-  "updated_at": "2025-05-19T21:56:08.482Z",
+  "updated_at": "2025-05-20T09:42:43.654Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "OAuth 2.0 is a translation key used to display the English content \"OAuth 2.0\" in various UI contexts throughout the application, primarily for title settings and button labels, such as on create and edit pages of OAuth-related settings.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:43.654Z"
   },
   "usage": [
     {

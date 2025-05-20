@@ -3,11 +3,11 @@
   "content": "The selected guests will be moved to the {{membersSection}} section and assigned the <strong>'{{ secondType }}'</strong> type. {{productName}} admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. {{productName}} admins have access to the {{documentsSection}} section.",
   "content_en_sha1_hash": "88ee3565e7278333f18e98758425d1d926d181c4",
   "created_at": "2025-05-19T21:30:56.920Z",
-  "updated_at": "2025-05-19T21:56:08.085Z",
+  "updated_at": "2025-05-20T09:37:51.818Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"ChangeGuestsTypeToAdminMulti\" translation key describes the action of assigning a guest to an admin role in the [productName] settings, moving them to the {{membersSection}} section, and granting access to various features. This text is used in a dialog or button that allows admins to manage user types.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:51.818Z"
   },
   "usage": [
     {

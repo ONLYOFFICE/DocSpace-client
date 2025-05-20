@@ -3,11 +3,11 @@
   "content": "Restore",
   "content_en_sha1_hash": "3cbe6d6b9a8d1596bb5bca12e14d81c9e108a1a3",
   "created_at": "2025-05-19T21:30:52.395Z",
-  "updated_at": "2025-05-19T21:56:08.381Z",
+  "updated_at": "2025-05-20T09:44:39.403Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key \"RestoreBackup\" is used to display the text \"Restore\" in the user interface, specifically on a button or link that allows users to restore backup data. It appears in the Portal Settings page, under the Data Management category, and is part of the third-party integration settings for managing backups.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:39.403Z"
   },
   "usage": [
     {

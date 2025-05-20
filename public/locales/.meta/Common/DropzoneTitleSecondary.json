@@ -3,11 +3,11 @@
   "content": "or drop file here",
   "content_en_sha1_hash": "a14bf554e59e9cd5cf0f303dcfd839a050b061d2",
   "created_at": "2025-05-19T21:30:44.718Z",
-  "updated_at": "2025-05-19T21:56:08.542Z",
+  "updated_at": "2025-05-20T09:36:34.473Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a secondary label on dropzone buttons, typically indicating that files can be dropped here instead of being selected. It appears in various UI elements where a file input or drag-and-drop functionality is present, such as portal settings categories and an image editor component. Translators should focus on providing a clear and descriptive phrase for this context.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:34.473Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Create sample Public room embed",
   "content_en_sha1_hash": "1b93783d2de58b201928a571c81e9ce53f4ce3b9",
   "created_at": "2025-05-19T21:30:54.403Z",
-  "updated_at": "2025-05-19T21:56:08.468Z",
+  "updated_at": "2025-05-20T09:41:48.124Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for the button header that creates a sample public room embed. It appears in a preset settings page and is used to provide a descriptive text for the button that triggers this action.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:48.124Z"
   },
   "usage": [
     {

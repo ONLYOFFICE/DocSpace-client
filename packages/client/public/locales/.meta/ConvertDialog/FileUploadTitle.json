@@ -3,11 +3,11 @@
   "content": "File upload",
   "content_en_sha1_hash": "0ace8ef1b6a975a594252501b9d36470f2bd79a6",
   "created_at": "2025-05-19T21:30:56.885Z",
-  "updated_at": "2025-05-19T21:56:08.099Z",
+  "updated_at": "2025-05-20T09:37:56.743Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"FileUploadTitle\" is used to display the text \"File upload\" in a modal dialog header. It is used as a fallback title when converting a single file, and as the title for uploading a file, allowing users to select a file from their device.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:56.743Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "This link will be valid until",
   "content_en_sha1_hash": "529ee7a00442d6f484c8d84c00051941ecc9d956",
   "created_at": "2025-05-19T21:30:55.800Z",
-  "updated_at": "2025-05-19T21:56:08.194Z",
+  "updated_at": "2025-05-20T09:39:35.540Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "\"This translation key is used to display a message indicating when a link's validity expires. It will appear in the UI as an expiration date prompt or confirmation message. For translators, it should describe the action of linking a valid time frame for a digital asset.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:35.540Z"
   },
   "usage": [
     {

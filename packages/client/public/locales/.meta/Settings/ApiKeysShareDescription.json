@@ -3,11 +3,11 @@
   "content": "Do not share your API key with others or expose it in the browser or other client-side code.",
   "content_en_sha1_hash": "0f6d896cc685ae0a76c5eb9007fc9fc99f03c8da",
   "created_at": "2025-05-19T21:30:50.552Z",
-  "updated_at": "2025-05-19T21:56:08.426Z",
+  "updated_at": "2025-05-20T09:45:46.800Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a warning message reminding users not to share their API keys. It appears in the PortalSettings page, specifically on an API Keys-related setting or button.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:46.800Z"
   },
   "usage": [
     {

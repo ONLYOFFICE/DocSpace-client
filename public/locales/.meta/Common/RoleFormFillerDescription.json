@@ -3,11 +3,11 @@
   "content": "Operations with existing files: viewing, form filling, reviewing, commenting.",
   "content_en_sha1_hash": "3474de7fd9cdc6860caeafd949a5852e84fd6ac8",
   "created_at": "2025-05-19T21:30:48.039Z",
-  "updated_at": "2025-05-19T21:56:08.803Z",
+  "updated_at": "2025-05-20T09:34:36.990Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key provides a description of operations related to existing files, including viewing, form filling, reviewing, and commenting. It is used in UI elements where file management options are displayed, such as buttons or dialogs. Translators should focus on conveying a comprehensive overview of these file-related actions in different languages.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:36.990Z"
   },
   "usage": [
     {

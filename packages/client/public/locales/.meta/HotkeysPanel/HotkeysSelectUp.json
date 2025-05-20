@@ -3,11 +3,11 @@
   "content": "Select next item up",
   "content_en_sha1_hash": "5f64a2463187ada6fc34e1aee18d04b790dc954c",
   "created_at": "2025-05-19T21:30:55.095Z",
-  "updated_at": "2025-05-19T21:56:08.209Z",
+  "updated_at": "2025-05-20T09:40:27.767Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the label for a \"Select next item up\" hotkey action in the UI. It appears as a button label and is part of the selection block component in the HotkeysPanel.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:27.767Z"
   },
   "usage": [
     {

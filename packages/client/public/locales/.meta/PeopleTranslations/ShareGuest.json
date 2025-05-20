@@ -3,11 +3,11 @@
   "content": "Share guest",
   "content_en_sha1_hash": "3bc1f18e87e31dceec9010b37ce1ea9d3950e820",
   "created_at": "2025-05-19T21:30:53.513Z",
-  "updated_at": "2025-05-19T21:56:08.708Z",
+  "updated_at": "2025-05-20T09:43:35.370Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a button label that shares contact information with others, likely found on a contact details page or in a shared contacts list. The translated text appears when the \"Share Guest\" option is clicked. Translators should replace \"ShareGuest\" with the corresponding localized text for their language.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:35.370Z"
   },
   "usage": [
     {

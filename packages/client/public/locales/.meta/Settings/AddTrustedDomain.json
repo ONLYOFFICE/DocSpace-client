@@ -3,11 +3,11 @@
   "content": "Add trusted domain",
   "content_en_sha1_hash": "4d8d1f52d9615d9c81391e0cd5314c57146e0a06",
   "created_at": "2025-05-19T21:30:50.373Z",
-  "updated_at": "2025-05-19T21:56:08.581Z",
+  "updated_at": "2025-05-20T09:45:54.188Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"AddTrustedDomain\" is used to display the label \"Add trusted domain\" in a UI element, likely a button or input field, where users can add a trusted mail domain to access secure content. It appears in a category dialog related to security settings for an access portal.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:54.188Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Automatically switch between light and dark themes depending on the current theme of Desktop Editors.",
   "content_en_sha1_hash": "f22c34003047b47698610a16f3357dd63749f1ba",
   "created_at": "2025-05-19T21:30:53.350Z",
-  "updated_at": "2025-05-19T21:56:08.674Z",
+  "updated_at": "2025-05-20T09:43:54.620Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to describe the automatically switching theme feature between light and dark themes on Desktop Editors. The text appears in a system settings or preferences section, likely as part of the interface that controls this feature. Translators should focus on conveying the idea of automatic theme adaptation for desktop editors.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:54.620Z"
   },
   "usage": [
     {

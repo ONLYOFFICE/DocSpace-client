@@ -3,11 +3,11 @@
   "content": "The webhook will be deleted permanently.\nYou will not be able to undo this action.",
   "content_en_sha1_hash": "d2e29d4502234f1509e66bd661e2e021ba35e634",
   "created_at": "2025-05-19T21:30:49.681Z",
-  "updated_at": "2025-05-19T21:56:08.513Z",
+  "updated_at": "2025-05-20T09:47:08.950Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a warning message that appears when a user attempts to delete a webhook. The message informs them of the permanent nature of the deletion and prevents them from undoing the action. It is displayed in a modal dialog when the \"Delete\" button is clicked in the Delete Webhook Dialog component.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:08.950Z"
   },
   "usage": [
     {

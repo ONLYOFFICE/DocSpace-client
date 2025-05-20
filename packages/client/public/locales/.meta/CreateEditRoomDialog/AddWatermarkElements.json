@@ -3,11 +3,11 @@
   "content": "Add watermark elements",
   "content_en_sha1_hash": "94abb53514ef98225a4845be5d8c3af77e687253",
   "created_at": "2025-05-19T21:30:56.773Z",
-  "updated_at": "2025-05-19T21:56:08.125Z",
+  "updated_at": "2025-05-20T09:38:12.762Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for the \"Add Watermark Elements\" title in a dialog component, appearing as the header of a watermark viewer section. It provides context for users when adding watermarks to their room.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:12.762Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "If you enable this user, they will be able to log in to {{productName}} again and access their documents and data.",
   "content_en_sha1_hash": "836adb0ca7430c88f18a6accb627246172813c61",
   "created_at": "2025-05-19T21:30:56.971Z",
-  "updated_at": "2025-05-19T21:56:08.083Z",
+  "updated_at": "2025-05-20T09:37:43.647Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key describes the text displayed when enabling a user's access to {{productName}}, allowing them to log in and access their documents and data. It appears in a dialog for changing user status.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:43.647Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Commenter",
   "content_en_sha1_hash": "bf4df9c00c605d80b4491471e60b45b6eaaca147",
   "created_at": "2025-05-19T21:30:47.984Z",
-  "updated_at": "2025-05-19T21:56:08.252Z",
+  "updated_at": "2025-05-20T09:34:38.915Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display \"Commenter\" as a role label in the application's UI. It appears on various screens where user roles are displayed, such as information panels and room member settings, helping users understand their permissions and access levels.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:38.915Z"
   },
   "usage": [
     {

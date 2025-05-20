@@ -3,11 +3,11 @@
   "content": "Application could not be found",
   "content_en_sha1_hash": "560c59db081117f2c4b8a0fb377e3750ce3e34f2",
   "created_at": "2025-05-19T21:30:57.296Z",
-  "updated_at": "2025-05-19T21:56:08.746Z",
+  "updated_at": "2025-05-20T09:47:38.025Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key displays an error message when an OAuth application is not found. It appears on screens indicating that an application has been disabled or missing, and its purpose is to inform the user of the error.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:38.025Z"
   },
   "usage": [
     {

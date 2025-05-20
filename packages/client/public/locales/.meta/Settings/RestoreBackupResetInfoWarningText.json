@@ -3,11 +3,11 @@
   "content": "All current passwords will be reset. {{productName}} users will get an email with the access restoration link.",
   "content_en_sha1_hash": "3531a741576e6d7f3c7d70f497013990e0744339",
   "created_at": "2025-05-19T21:30:52.411Z",
-  "updated_at": "2025-05-19T21:56:08.421Z",
+  "updated_at": "2025-05-20T09:44:38.651Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key displays a warning message informing users that their current passwords will be reset and provides an email link to restore access. It is used in UI elements where standalone or backup restore operations are initiated, such as settings pages or backup lists.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:38.651Z"
   },
   "usage": [
     {

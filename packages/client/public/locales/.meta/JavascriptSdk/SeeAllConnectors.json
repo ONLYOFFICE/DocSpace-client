@@ -3,11 +3,11 @@
   "content": "See all connectors",
   "content_en_sha1_hash": "a539ba0228d0ead28c404acb9364e7d9b0f2a540",
   "created_at": "2025-05-19T21:30:54.665Z",
-  "updated_at": "2025-05-19T21:56:08.476Z",
+  "updated_at": "2025-05-20T09:41:22.148Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a button label that opens a URL in a new tab when clicked. It appears as a \"See all connectors\" link within a portal settings page, likely to provide users with access to additional connection options.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:22.148Z"
   },
   "usage": [
     {

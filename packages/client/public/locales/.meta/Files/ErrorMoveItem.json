@@ -3,11 +3,11 @@
   "content": "Error moving <2>{{title}}</2> to <1>{{folderName}}</1>",
   "content_en_sha1_hash": "6b0a2a33b1ba27a0f050169f9a804766851a5e70",
   "created_at": "2025-05-19T21:30:55.623Z",
-  "updated_at": "2025-05-19T21:56:08.702Z",
+  "updated_at": "2025-05-20T09:39:47.910Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key displays an error message when attempting to move a file or item. The error message includes the title and folder name of the item being moved, providing context for users. It appears in a UI element where file movement attempts fail, likely in a confirmation dialog or progress bar.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:47.910Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Delivery time",
   "content_en_sha1_hash": "fac21896589baac71fc217cd87162f623e22647d",
   "created_at": "2025-05-19T21:30:49.693Z",
-  "updated_at": "2025-05-19T21:56:08.502Z",
+  "updated_at": "2025-05-20T09:47:07.336Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for displaying the \"Delivery Time\" label in a specific UI component, typically seen on portal settings pages, such as the webhook event details. The key is used to format and display localized time values, providing context to users about when their packages are expected to be delivered.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:07.336Z"
   },
   "usage": [
     {

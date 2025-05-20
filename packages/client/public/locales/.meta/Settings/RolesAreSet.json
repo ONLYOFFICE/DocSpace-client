@@ -3,11 +3,11 @@
   "content": "Roles already set for the selected users.",
   "content_en_sha1_hash": "257dd5e7c55b84f09c6e056798f95277ffabdfb9",
   "created_at": "2025-05-19T21:30:52.435Z",
-  "updated_at": "2025-05-19T21:56:08.398Z",
+  "updated_at": "2025-05-20T09:44:37.749Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a message indicating that roles have already been set for selected users. It appears as a label in a UI component to inform users about their role settings.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:37.749Z"
   },
   "usage": [
     {

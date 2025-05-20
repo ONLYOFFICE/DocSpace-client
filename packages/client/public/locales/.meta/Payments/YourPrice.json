@@ -3,11 +3,11 @@
   "content": "Your price",
   "content_en_sha1_hash": "16a067af179c1f81645e2954ee05c68337fd773c",
   "created_at": "2025-05-19T21:30:53.756Z",
-  "updated_at": "2025-05-19T21:56:08.567Z",
+  "updated_at": "2025-05-20T09:43:02.621Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display \"Your price\" in a payment calculation context, typically on a settings page or pricing information section. It appears as a title and will be shown when certain conditions are met, indicating that the user's price should be displayed instead of another option.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:02.621Z"
   },
   "usage": [
     {

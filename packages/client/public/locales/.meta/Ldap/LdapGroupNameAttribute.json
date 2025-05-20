@@ -3,11 +3,11 @@
   "content": "Group Name Attribute",
   "content_en_sha1_hash": "e8b8084a19124762c9b8ebabd5800b40497124b5",
   "created_at": "2025-05-19T21:30:54.221Z",
-  "updated_at": "2025-05-19T21:56:08.536Z",
+  "updated_at": "2025-05-20T09:42:09.861Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key describes the label for a field used to input a Group Name Attribute in LDAP group membership settings, typically found within a portal's category page. The field is expected to be filled and validated before proceeding.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:09.861Z"
   },
   "usage": [
     {

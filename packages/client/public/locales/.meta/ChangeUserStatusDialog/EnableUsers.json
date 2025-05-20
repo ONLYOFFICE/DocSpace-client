@@ -3,11 +3,11 @@
   "content": "Enable users",
   "content_en_sha1_hash": "17c615111e9de5f0bb43739d228fa20668b04a5e",
   "created_at": "2025-05-19T21:30:56.973Z",
-  "updated_at": "2025-05-19T21:56:08.083Z",
+  "updated_at": "2025-05-20T09:37:43.374Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the text \"Enable users\" in a change user status dialog, indicating a user's permission level. It appears on a button or similar UI element, allowing users to enable or disable their permissions. The key should be translated for use with non-English products and platforms.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:43.374Z"
   },
   "usage": [
     {

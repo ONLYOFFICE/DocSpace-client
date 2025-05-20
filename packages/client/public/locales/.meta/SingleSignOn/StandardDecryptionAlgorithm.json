@@ -3,11 +3,11 @@
   "content": "Default Decrypt Algorithm",
   "content_en_sha1_hash": "619446c4bdadbe754814d7355bf5c6666d7bac32",
   "created_at": "2025-05-19T21:30:50.187Z",
-  "updated_at": "2025-05-19T21:56:08.547Z",
+  "updated_at": "2025-05-20T09:46:02.150Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"StandardDecryptionAlgorithm\" is used to display the default decryption algorithm name as a label in the Single Sign-On certificate settings page. It appears in a dropdown list and is typically used by users to select or review the encryption method. This term should be translated accordingly to provide consistency across different languages.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:02.150Z"
   },
   "usage": [
     {

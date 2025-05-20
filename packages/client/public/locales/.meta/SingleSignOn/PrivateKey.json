@@ -3,11 +3,11 @@
   "content": "Private Key",
   "content_en_sha1_hash": "ade5ddaf2557ee93225fc565adbfe1ade3bae3a0",
   "created_at": "2025-05-19T21:30:50.121Z",
-  "updated_at": "2025-05-19T21:56:08.553Z",
+  "updated_at": "2025-05-20T09:46:11.599Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for the label \"Private Key\" in a modal window or dialog box where users can add and manage Single Sign-On certificates. It appears as a field name in the UI, prompting users to input their private key details.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:11.599Z"
   },
   "usage": [
     {

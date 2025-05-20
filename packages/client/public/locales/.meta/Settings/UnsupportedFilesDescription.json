@@ -3,11 +3,11 @@
   "content": "Some of the backup files are not supported. Click \"Check unsupported files\" to download the list of the unsupported items",
   "content_en_sha1_hash": "8920aec1acfe5e0af4ab26e2a95abe5be8859e34",
   "created_at": "2025-05-19T21:30:53.053Z",
-  "updated_at": "2025-05-19T21:56:08.409Z",
+  "updated_at": "2025-05-20T09:44:12.879Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"UnsupportedFilesDescription\" translation key is used to display a message when certain backup files are not supported, indicating that users can click on \"Check unsupported files\" to download a list of unsupported items. This message appears in a UI element and provides context for users to understand the issue with their files.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:12.879Z"
   },
   "usage": [
     {

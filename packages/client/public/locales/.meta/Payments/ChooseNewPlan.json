@@ -3,11 +3,11 @@
   "content": "Would you like to choose a new pricing plan?",
   "content_en_sha1_hash": "827866603046faa49bb9d21d0bd4785aba26a659",
   "created_at": "2025-05-19T21:30:53.677Z",
-  "updated_at": "2025-05-19T21:56:08.162Z",
+  "updated_at": "2025-05-20T09:43:13.444Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a message asking users to choose a new pricing plan, typically found in contexts where user plans need to be upgraded or changed.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:13.444Z"
   },
   "usage": [
     {

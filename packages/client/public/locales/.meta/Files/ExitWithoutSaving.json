@@ -3,11 +3,11 @@
   "content": "Exit without saving?",
   "content_en_sha1_hash": "73ba4e3217e4b6c986b82b340dfcc5db9cec0519",
   "created_at": "2025-05-19T21:30:55.642Z",
-  "updated_at": "2025-05-19T21:56:08.088Z",
+  "updated_at": "2025-05-20T09:39:46.492Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a confirmation message that appears when exiting an edit mode without saving changes. It is part of a warning message in a file editing dialog, prompting users to consider the potential consequences of leaving unsaved work.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:46.492Z"
   },
   "usage": [
     {

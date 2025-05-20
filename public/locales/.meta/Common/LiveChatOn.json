@@ -3,11 +3,11 @@
   "content": "Live chat was successfully connected",
   "content_en_sha1_hash": "7bcf42efaa0f21c0fcd4e7feb04b48e397e369c3",
   "created_at": "2025-05-19T21:30:46.253Z",
-  "updated_at": "2025-05-19T21:56:08.700Z",
+  "updated_at": "2025-05-20T09:35:37.537Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a success message when live chat is successfully connected. It appears as a toast notification and indicates that the live chat feature is now active.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:37.537Z"
   },
   "usage": [
     {

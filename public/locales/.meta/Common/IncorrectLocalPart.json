@@ -3,11 +3,11 @@
   "content": "Incorrect local part",
   "content_en_sha1_hash": "f295e102907935b47152a237d618a71a6cfb0930",
   "created_at": "2025-05-19T21:30:45.882Z",
-  "updated_at": "2025-05-19T21:56:08.066Z",
+  "updated_at": "2025-05-20T09:35:52.161Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display an error message when a local part of an email address contains incorrect formatting. It appears in dialog boxes where users can change their email addresses. Translators should provide a clear and concise error message that informs users about the issue with their local part.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:52.161Z"
   },
   "usage": [
     {

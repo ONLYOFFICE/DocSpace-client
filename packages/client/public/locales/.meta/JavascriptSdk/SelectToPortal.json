@@ -3,11 +3,11 @@
   "content": "Select to {{productName}}",
   "content_en_sha1_hash": "a4087cedfe5229e56d7a33ecd56a49f3bb29e90d",
   "created_at": "2025-05-19T21:30:54.675Z",
-  "updated_at": "2025-05-19T21:56:08.478Z",
+  "updated_at": "2025-05-20T09:41:20.937Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a placeholder text that displays when users select an option in a user interface element, providing a default message to be displayed next to a product name. It appears on a form or input field within a developer tool and should display the name of a specific product.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:20.937Z"
   },
   "usage": [
     {

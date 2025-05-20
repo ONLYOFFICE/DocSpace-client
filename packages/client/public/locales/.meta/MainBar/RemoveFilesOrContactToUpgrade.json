@@ -3,11 +3,11 @@
   "content": "Remove the unnecessary files or contact the {{productName}} administrator to upgrade the tariff plan.",
   "content_en_sha1_hash": "9fd6bb65f7678c7fb00eb2a9266bacc48fe55e5b",
   "created_at": "2025-05-19T21:30:54.119Z",
-  "updated_at": "2025-05-19T21:56:08.025Z",
+  "updated_at": "2025-05-20T09:42:24.113Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a message prompting users to remove unnecessary files or contact an administrator to upgrade their tariff plan. It appears in a quota management interface and informs users of available options to modify their plans.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:24.113Z"
   },
   "usage": [
     {

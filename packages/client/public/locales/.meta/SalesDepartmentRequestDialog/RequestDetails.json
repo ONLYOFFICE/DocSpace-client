@@ -3,11 +3,11 @@
   "content": "Please describe your request details here.",
   "content_en_sha1_hash": "e3d8ba02396cc0208836153dd6559764b59673bd",
   "created_at": "2025-05-19T21:30:53.276Z",
-  "updated_at": "2025-05-19T21:56:08.177Z",
+  "updated_at": "2025-05-20T09:44:03.820Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a placeholder message in a textarea field within a sales department request dialog, prompting users to enter their request details. The text will be visible when the \"request details\" input is empty or disabled due to an error check.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:03.820Z"
   },
   "usage": [
     {

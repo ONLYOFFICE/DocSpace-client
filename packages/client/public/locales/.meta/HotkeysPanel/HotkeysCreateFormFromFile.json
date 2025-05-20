@@ -3,11 +3,11 @@
   "content": "Create form template from file",
   "content_en_sha1_hash": "70f54a7f5feedcf15d4f7789a07e062bd260a28d",
   "created_at": "2025-05-19T21:30:55.040Z",
-  "updated_at": "2025-05-19T21:56:08.205Z",
+  "updated_at": "2025-05-20T09:40:37.018Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the label for a button or action that allows users to create a form template from a file. The text appears in the UI as \"HotkeysCreateFormFromFile\" and provides context for translators on where it's used (e.g., hotkey shortcut information).",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:37.018Z"
   },
   "usage": [
     {

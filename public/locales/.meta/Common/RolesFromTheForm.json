@@ -3,11 +3,11 @@
   "content": "Roles from the form:",
   "content_en_sha1_hash": "9aebb40c190759d663dcd420b90d3ba134b620a6",
   "created_at": "2025-05-19T21:30:48.131Z",
-  "updated_at": "2025-05-19T21:56:08.785Z",
+  "updated_at": "2025-05-20T09:34:33.638Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a label indicating that the roles selection is from a form. It appears as a title in a UI component where users can select roles, likely in a start filling or role assignment dialog.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:33.638Z"
   },
   "usage": [
     {

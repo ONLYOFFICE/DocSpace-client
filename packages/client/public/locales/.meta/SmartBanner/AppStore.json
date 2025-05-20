@@ -3,11 +3,11 @@
   "content": "On the App Store",
   "content_en_sha1_hash": "e31bba1e7988ce96d6a7dc542d32bcfb6bdda2be",
   "created_at": "2025-05-19T21:30:50.047Z",
-  "updated_at": "2025-05-19T21:56:08.041Z",
+  "updated_at": "2025-05-20T09:46:21.078Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for displaying a specific banner on mobile apps when accessing the App Store. The text will appear as a notification or prompt, indicating the app's presence on the App Store. It appears in a banner component on iOS devices.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:21.078Z"
   },
   "usage": [
     {

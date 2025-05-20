@@ -3,11 +3,11 @@
   "content": "{{roleName}} role fields",
   "content_en_sha1_hash": "20226340335e5021214756174c2a4e1c98126f6e",
   "created_at": "2025-05-19T21:30:48.021Z",
-  "updated_at": "2025-05-19T21:56:08.783Z",
+  "updated_at": "2025-05-20T09:34:37.613Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a title for a section of role fields in a user interface, specifically in a start-filling panel dialogue. The phrase should include the roleName variable and will appear within an h3 heading.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:37.613Z"
   },
   "usage": [
     {

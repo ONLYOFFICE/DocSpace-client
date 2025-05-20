@@ -3,11 +3,11 @@
   "content": "Hide",
   "content_en_sha1_hash": "34d8b60fe25332f7b98585e82e753eaf502c3e50",
   "created_at": "2025-05-19T21:30:49.949Z",
-  "updated_at": "2025-05-19T21:56:08.035Z",
+  "updated_at": "2025-05-20T09:46:37.892Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display \"Hide\" when a password input field needs to be toggled on or off. It appears as a button text in an error file component and is linked to the visibility of a password input field.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:37.892Z"
   },
   "usage": [
     {

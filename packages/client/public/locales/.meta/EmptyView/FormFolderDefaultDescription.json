@@ -3,11 +3,11 @@
   "content": "Drop PDF forms here or upload from {{productName}} or device.",
   "content_en_sha1_hash": "97750a613b8c03b3f21e2f52d0fddbd5e0284429",
   "created_at": "2025-05-19T21:30:56.506Z",
-  "updated_at": "2025-05-19T21:56:08.009Z",
+  "updated_at": "2025-05-20T09:38:46.863Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a default description displayed when users drop PDF forms or upload them from their device in an empty folder. It is likely to appear as a tooltip or hover text next to a button or icon that allows users to add PDF files to a folder. The description refers to the product name, which should be translated separately.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:46.863Z"
   },
   "usage": [
     {

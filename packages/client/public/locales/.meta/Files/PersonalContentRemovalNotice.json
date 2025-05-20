@@ -3,11 +3,11 @@
   "content": "Your personal files and folders in the {{sectionName}} section will be <1>deleted</1> since Guests don't have access to this section. Files remain available for viewing and downloading <1>for 30 days</1>.",
   "content_en_sha1_hash": "ffca39de3d5ca19023e9ef716b66c6633b7fc354",
   "created_at": "2025-05-19T21:30:55.950Z",
-  "updated_at": "2025-05-19T21:56:08.169Z",
+  "updated_at": "2025-05-20T09:39:24.639Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a warning message that informs users about the deletion of their personal files and folders in a specific section when they are removed from access. It appears on a dialog component, specifically on a reduced rights confirmation notice.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:24.639Z"
   },
   "usage": [
     {

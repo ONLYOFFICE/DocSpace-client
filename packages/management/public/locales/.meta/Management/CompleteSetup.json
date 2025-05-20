@@ -3,11 +3,11 @@
   "content": "Complete the setup",
   "content_en_sha1_hash": "1bf0c07dc9bdea39a6c1bbaaf41f773da850cc1c",
   "created_at": "2025-05-19T21:30:57.412Z",
-  "updated_at": "2025-05-19T21:56:08.813Z",
+  "updated_at": "2025-05-20T09:48:02.510Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a label that indicates a setup process has been completed. It appears as a bold and truncated text element in the UI.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:48:02.510Z"
   },
   "usage": [
     {

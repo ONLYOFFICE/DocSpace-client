@@ -3,11 +3,11 @@
   "content": "The quota of rooms is almost exhausted.",
   "content_en_sha1_hash": "a53e0908fec6be50fa0a49846a1efd994db59482",
   "created_at": "2025-05-19T21:30:53.728Z",
-  "updated_at": "2025-05-19T21:56:08.163Z",
+  "updated_at": "2025-05-20T09:43:05.975Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a warning message indicating that the available rooms are almost exhausted. It appears in a dialog box in the UI, specifically in the \"RoomsContent\" component, and is intended to notify users of an impending room availability issue.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:05.975Z"
   },
   "usage": [
     {

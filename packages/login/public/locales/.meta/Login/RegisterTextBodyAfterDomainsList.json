@@ -3,11 +3,11 @@
   "content": "To register, enter your email address and click Send request. A message with a link to activate your account will be sent to the specified address.",
   "content_en_sha1_hash": "cdd8bdf8b53883670489773a82a81b4a59176cc8",
   "created_at": "2025-05-19T21:30:57.259Z",
-  "updated_at": "2025-05-19T21:56:08.738Z",
+  "updated_at": "2025-05-20T09:47:43.839Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display instructions on how to complete the registration process after listing domains. It appears in a modal dialog and provides guidance on sending a request and receiving activation confirmation via email.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:43.839Z"
   },
   "usage": [
     {

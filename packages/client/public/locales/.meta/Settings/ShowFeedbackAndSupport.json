@@ -3,11 +3,11 @@
   "content": "Show the Feedback & Support link",
   "content_en_sha1_hash": "93217d8ef39e60f8313f1c2b0e0d24b3ac3a7139",
   "created_at": "2025-05-19T21:30:52.720Z",
-  "updated_at": "2025-05-19T21:56:08.786Z",
+  "updated_at": "2025-05-20T09:44:26.461Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a label for a checkbox that controls access to feedback and support features. It appears in a UI component where users can toggle this setting, allowing them to enable or disable these features.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:26.461Z"
   },
   "usage": [
     {

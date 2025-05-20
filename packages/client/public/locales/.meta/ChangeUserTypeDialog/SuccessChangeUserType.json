@@ -3,11 +3,11 @@
   "content": "The user type was successfully changed",
   "content_en_sha1_hash": "3ee5a6b6de38a88a91c320830641268174acb905",
   "created_at": "2025-05-19T21:30:56.939Z",
-  "updated_at": "2025-05-19T21:56:08.020Z",
+  "updated_at": "2025-05-20T09:37:48.203Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a success message that appears when a user type is successfully changed. It's displayed to the user in a notification, likely triggered by an event or callback after the update process completes.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:48.203Z"
   },
   "usage": [
     {

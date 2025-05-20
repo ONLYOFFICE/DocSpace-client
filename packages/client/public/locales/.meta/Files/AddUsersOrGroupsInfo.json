@@ -3,11 +3,11 @@
   "content": "Only <1>{{productName}}</1> and <1>Room admins</1> are shown here",
   "content_en_sha1_hash": "d3dc5f5f10409aae79d6e20dfd3e8141a71a122f",
   "created_at": "2025-05-19T21:30:55.239Z",
-  "updated_at": "2025-05-19T21:56:08.053Z",
+  "updated_at": "2025-05-20T09:40:12.545Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a message indicating which users are shown on a specific template, specifically focusing on administrators of a room. It appears in a UI component where users can select different types of templates.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:12.545Z"
   },
   "usage": [
     {

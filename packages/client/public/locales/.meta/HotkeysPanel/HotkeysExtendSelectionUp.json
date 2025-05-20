@@ -3,11 +3,11 @@
   "content": "Extend selection up",
   "content_en_sha1_hash": "aaa950882a83710ee632094d3f0e9915b936c6b6",
   "created_at": "2025-05-19T21:30:55.054Z",
-  "updated_at": "2025-05-19T21:56:08.210Z",
+  "updated_at": "2025-05-20T09:40:34.147Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"HotkeysExtendSelectionUp\" is used to display the text \"Extend selection up\" in UI elements, indicating a keyboard shortcut that extends the selected text upwards. This text appears in hotkey lists or labels within the application, guiding users on how to use this specific shortcut.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:34.147Z"
   },
   "usage": [
     {

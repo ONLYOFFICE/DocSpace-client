@@ -3,11 +3,11 @@
   "content": "Hide auth page",
   "content_en_sha1_hash": "5316ca6866fa2cf3366a0647deae3c189d460422",
   "created_at": "2025-05-19T21:30:50.088Z",
-  "updated_at": "2025-05-19T21:56:08.546Z",
+  "updated_at": "2025-05-20T09:46:16.034Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"HideAuthPage\" is used to display a label for a checkbox that allows users to hide the authentication page in the Portal Settings. This value appears as a label on a Checkbox component and can be translated to provide clarity for users in different languages.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:16.034Z"
   },
   "usage": [
     {

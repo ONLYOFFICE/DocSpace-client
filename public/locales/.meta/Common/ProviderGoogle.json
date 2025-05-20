@@ -3,11 +3,11 @@
   "content": "Google",
   "content_en_sha1_hash": "2b681c0a24baff8899d7163cc7f805c75e1f44e4",
   "created_at": "2025-05-19T21:30:47.559Z",
-  "updated_at": "2025-05-19T21:56:08.797Z",
+  "updated_at": "2025-05-20T09:34:54.639Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"ProviderGoogle\" is used to display the label for a Google provider option in the application. It will appear as a button or option in the UI, allowing users to select Google as their preferred provider.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:54.639Z"
   },
   "usage": [
     {

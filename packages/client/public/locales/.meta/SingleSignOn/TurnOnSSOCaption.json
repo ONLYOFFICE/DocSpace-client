@@ -3,11 +3,11 @@
   "content": "Enable this option if you want to add users from SSO service to your space automatically.",
   "content_en_sha1_hash": "53b0b644d322e1cc595b46ed2bd913242f06931c",
   "created_at": "2025-05-19T21:30:50.193Z",
-  "updated_at": "2025-05-19T21:56:08.558Z",
+  "updated_at": "2025-05-20T09:46:01.329Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a caption that explains the purpose of enabling single sign-on (SSO) integration. It provides context for users deciding whether to enable automatic addition of SSO users to their space. The text appears as a tooltip or label in the UI, likely within a toggle switch component, such as the \"Turn On SSO\" button in Portal Settings.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:01.329Z"
   },
   "usage": [
     {

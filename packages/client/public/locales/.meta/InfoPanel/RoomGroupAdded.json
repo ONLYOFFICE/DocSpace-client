@@ -3,11 +3,11 @@
   "content": "Groups added.",
   "content_en_sha1_hash": "b5a565f02102919ca707ad4dfe829242fca68461",
   "created_at": "2025-05-19T21:30:54.921Z",
-  "updated_at": "2025-05-19T21:56:08.270Z",
+  "updated_at": "2025-05-20T09:40:48.594Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the phrase \"Groups added\" in a user interface. It appears as the title of an info panel or modal window, possibly after a group has been successfully created or updated. The goal is to inform users that their group has been successfully added or updated.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:48.594Z"
   },
   "usage": [
     {

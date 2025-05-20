@@ -3,11 +3,11 @@
   "content": "Anyone with the link",
   "content_en_sha1_hash": "8a78b4998feeb4f409891d0eb1716fe3eb7a2c9a",
   "created_at": "2025-05-19T21:30:43.022Z",
-  "updated_at": "2025-05-19T21:56:08.764Z",
+  "updated_at": "2025-05-20T09:37:22.726Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a descriptive label for a user interface component that allows access to content via a shared link. The translated text will appear on a UI element prompting users to share or invite others.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:22.726Z"
   },
   "usage": [
     {

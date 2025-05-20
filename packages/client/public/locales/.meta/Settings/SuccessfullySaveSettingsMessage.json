@@ -3,11 +3,11 @@
   "content": "Settings have been successfully updated",
   "content_en_sha1_hash": "a3e0f1940499fb1b34253a9a7b050c2136e1f58b",
   "created_at": "2025-05-19T21:30:52.842Z",
-  "updated_at": "2025-05-19T21:56:08.385Z",
+  "updated_at": "2025-05-20T09:44:21.460Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a success message when settings are successfully updated or saved, typically after clicking a button or submitting a form. It appears in various UI elements, such as dialog boxes and toast notifications, to inform users of the outcome of their actions. Its purpose is to provide positive feedback to the user after completing a task.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:21.460Z"
   },
   "usage": [
     {

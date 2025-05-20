@@ -3,11 +3,11 @@
   "content": "Enter target ID",
   "content_en_sha1_hash": "fe78a1ea977c72d5ae4f869b5249824c80846aa6",
   "created_at": "2025-05-19T21:30:49.702Z",
-  "updated_at": "2025-05-19T21:56:08.516Z",
+  "updated_at": "2025-05-20T09:47:06.273Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "\"Helps users input a target ID when enabled in the WebhookDialog component.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:06.273Z"
   },
   "usage": [
     {

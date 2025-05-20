@@ -3,11 +3,11 @@
   "content": "You can remove the unnecessary files or change quota in the <1>Storage management settings.</1>",
   "content_en_sha1_hash": "d0b6e663cdf5c62e3b4172bf066004046767f146",
   "created_at": "2025-05-19T21:30:54.143Z",
-  "updated_at": "2025-05-19T21:56:08.024Z",
+  "updated_at": "2025-05-20T09:42:19.881Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a message that allows users to remove unnecessary files or adjust their quota in the storage management settings. It appears as part of a button label on the Quotas Bar component, providing context for users when they need to take action regarding their storage allocation.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:19.881Z"
   },
   "usage": [
     {

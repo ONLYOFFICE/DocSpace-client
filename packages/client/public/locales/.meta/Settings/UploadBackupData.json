@@ -3,11 +3,11 @@
   "content": "Upload a backup copy from a desired service below to start migration.",
   "content_en_sha1_hash": "8db98a36a6994c02a48c58e7e37ba3d33924915f",
   "created_at": "2025-05-19T21:30:53.069Z",
-  "updated_at": "2025-05-19T21:56:08.408Z",
+  "updated_at": "2025-05-20T09:44:12.188Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"UploadBackupData\" translation key is used to display a button label or prompt that instructs users to upload a backup copy from a desired service. This text appears in a UI component where users can select and configure data import options, likely as part of a portal settings page.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:12.188Z"
   },
   "usage": [
     {

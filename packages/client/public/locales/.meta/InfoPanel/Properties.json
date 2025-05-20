@@ -3,11 +3,11 @@
   "content": "Properties",
   "content_en_sha1_hash": "bc6c88db2f0703a9e2461a4a8060ccf1cb881998",
   "created_at": "2025-05-19T21:30:54.899Z",
-  "updated_at": "2025-05-19T21:56:08.257Z",
+  "updated_at": "2025-05-20T09:40:52.019Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"Properties\" is used to display a label for properties related to rooms or spaces. It appears in the UI as part of the Room Bar and Gallery components, likely on buttons, thumbnails, or descriptions that show room information.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:52.019Z"
   },
   "usage": [
     {

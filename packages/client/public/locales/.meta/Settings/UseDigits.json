@@ -3,11 +3,11 @@
   "content": "Use digits",
   "content_en_sha1_hash": "6477de469e3182a8015fec35ea60e36684b88d3e",
   "created_at": "2025-05-19T21:30:53.085Z",
-  "updated_at": "2025-05-19T21:56:08.580Z",
+  "updated_at": "2025-05-20T09:44:11.573Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "\"Password strength setting: This text informs users about the requirement to use digits in their password. It is likely displayed on a form or settings page where users can adjust their password requirements.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:11.573Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Enable this setting to disable downloads and content copying for users with the \"{{role}}\" role.",
   "content_en_sha1_hash": "d2ad963c095604e49bab1866809e7b2772f3a3e1",
   "created_at": "2025-05-19T21:30:56.829Z",
-  "updated_at": "2025-05-19T21:56:08.120Z",
+  "updated_at": "2025-05-20T09:38:04.499Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a descriptive text that explains the purpose of a setting to restrict downloads and content copying, particularly for users with a specific role. It appears in a dialog box where users can adjust this setting.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:04.499Z"
   },
   "usage": [
     {

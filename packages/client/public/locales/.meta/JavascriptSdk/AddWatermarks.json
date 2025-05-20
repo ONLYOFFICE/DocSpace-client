@@ -3,11 +3,11 @@
   "content": "Add watermarks to documents",
   "content_en_sha1_hash": "22034bd673fd6d7cd91245241c5115556634de93",
   "created_at": "2025-05-19T21:30:54.353Z",
-  "updated_at": "2025-05-19T21:56:08.456Z",
+  "updated_at": "2025-05-20T09:41:53.565Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the text \"Add watermarks\" in a UI category header. It appears as part of a larger settings page for developer tools and allows users to toggle adding watermarks to documents.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:53.565Z"
   },
   "usage": [
     {

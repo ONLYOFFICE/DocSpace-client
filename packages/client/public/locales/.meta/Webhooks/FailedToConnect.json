@@ -3,11 +3,11 @@
   "content": "We couldn’t deliver this payload: failed to connect to host",
   "content_en_sha1_hash": "1b25cf1f64afabdb272c5f4f640f17f53dbc8be8",
   "created_at": "2025-05-19T21:30:49.718Z",
-  "updated_at": "2025-05-19T21:56:08.504Z",
+  "updated_at": "2025-05-20T09:47:04.100Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display an error message when a connection to a host fails. It appears as a status message in the UI, typically under a request details section, and indicates that the payload delivery was unsuccessful.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:04.100Z"
   },
   "usage": [
     {

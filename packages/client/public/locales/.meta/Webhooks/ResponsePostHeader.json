@@ -3,11 +3,11 @@
   "content": "POST response header",
   "content_en_sha1_hash": "7f2adfe37c167c810ce7ffd4e55249c87d28d23e",
   "created_at": "2025-05-19T21:30:49.812Z",
-  "updated_at": "2025-05-19T21:56:08.505Z",
+  "updated_at": "2025-05-20T09:46:54.906Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the label \"Response Post Header\" in a UI component, specifically in the details section of webhook event details. It appears as an h3 header element and helps to identify the response headers of a POST request.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:54.906Z"
   },
   "usage": [
     {

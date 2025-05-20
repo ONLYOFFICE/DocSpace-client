@@ -3,11 +3,11 @@
   "content": "All the data you entered will be lost. Are you sure you want to continue?",
   "content_en_sha1_hash": "e99a68715daa80c6d8b8fffc16f35951fc75370e",
   "created_at": "2025-05-19T21:30:43.634Z",
-  "updated_at": "2025-05-19T21:56:08.173Z",
+  "updated_at": "2025-05-20T09:37:01.129Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a confirmation message when a user wants to reset data, warning them that all entered data will be lost. It appears in a modal dialog footer and is translated from the English content \"All the data you entered will be lost. Are you sure you want to continue?\".",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:01.129Z"
   },
   "usage": [
     {

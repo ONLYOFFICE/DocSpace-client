@@ -3,11 +3,11 @@
   "content": "Developer Tools section",
   "content_en_sha1_hash": "8e2edfe027bccc66916acfd0ca199bbf466f8f61",
   "created_at": "2025-05-19T21:30:51.166Z",
-  "updated_at": "2025-05-19T21:56:08.576Z",
+  "updated_at": "2025-05-20T09:45:22.687Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"DeveloperToolsAccess\" translation key is used to display the title and description of a section in the Portal Settings application. This text appears as a category title and brief description within a settings page, providing context about developer tools access.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:22.687Z"
   },
   "usage": [
     {

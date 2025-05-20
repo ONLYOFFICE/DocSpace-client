@@ -3,11 +3,11 @@
   "content": "Storage period",
   "content_en_sha1_hash": "58eebe4d0ed34f94e0198cff2f9111c9ccc932b0",
   "created_at": "2025-05-19T21:30:52.796Z",
-  "updated_at": "2025-05-19T21:56:08.586Z",
+  "updated_at": "2025-05-20T09:44:23.614Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the \"Storage period\" label in various security settings pages. It will appear as a subheader or caption, indicating the duration of stored login history or audit trail data.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:23.614Z"
   },
   "usage": [
     {

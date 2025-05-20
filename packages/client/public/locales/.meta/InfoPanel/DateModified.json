@@ -3,11 +3,11 @@
   "content": "Date modified",
   "content_en_sha1_hash": "dcef8297cd84445acb4ad6b84e674163d3d9765e",
   "created_at": "2025-05-19T21:30:54.770Z",
-  "updated_at": "2025-05-19T21:56:08.247Z",
+  "updated_at": "2025-05-20T09:41:10.857Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the label \"Date modified\" in a file's properties section. It appears on the /packages/client/src/pages/Home/InfoPanel/Body/views/Gallery/index.js page and should be translated to provide consistency across different languages.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:10.857Z"
   },
   "usage": [
     {

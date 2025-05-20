@@ -3,11 +3,11 @@
   "content": "Watermark Preview",
   "content_en_sha1_hash": "dbfb9b8a63ad0c23b973116c08bce722f4620ccf",
   "created_at": "2025-05-19T21:30:56.860Z",
-  "updated_at": "2025-05-19T21:56:08.122Z",
+  "updated_at": "2025-05-20T09:37:59.709Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a watermark preview in an image editing component. It appears as a textual overlay on the image and provides a brief explanation of its purpose. Translators should focus on providing a clear and concise description that is suitable for the context where this text will be displayed.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:59.709Z"
   },
   "usage": [
     {

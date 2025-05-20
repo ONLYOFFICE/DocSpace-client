@@ -3,11 +3,11 @@
   "content": "Role for link",
   "content_en_sha1_hash": "69c2c795dae8fa5a3e6f70b13ed8b5690d284d62",
   "created_at": "2025-05-19T21:30:50.253Z",
-  "updated_at": "2025-05-19T21:56:08.193Z",
+  "updated_at": "2025-05-20T09:45:59.215Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"RoleForLink\" translation key is used to display a brief description explaining how roles relate to links in an editing panel. It is typically displayed as a label or title and appears in the UI when editing link roles.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:59.215Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Deny",
   "content_en_sha1_hash": "53577bb5df0ee9b6376e87f4896b6957a25d7a43",
   "created_at": "2025-05-19T21:30:44.480Z",
-  "updated_at": "2025-05-19T21:56:08.719Z",
+  "updated_at": "2025-05-20T09:36:43.769Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"Deny\" is used to display a button label that cancels or rejects an action in a UI element. It appears as a button labeled \"Deny\" and is likely used in a dialog or confirmation page where the user needs to approve or reject an invitation, share link, or other action.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:43.769Z"
   },
   "usage": [
     {

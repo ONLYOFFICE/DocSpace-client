@@ -3,11 +3,11 @@
   "content": "Connect",
   "content_en_sha1_hash": "b65463cb6a42a17de514acc4659f7fd331e0876a",
   "created_at": "2025-05-19T21:30:43.652Z",
-  "updated_at": "2025-05-19T21:56:08.116Z",
+  "updated_at": "2025-05-20T09:37:00.431Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a \"Connect\" button that appears in various UI elements, such as buttons and dialog components. Its purpose is to provide a consistent label for this action across different applications and languages, allowing users to understand what happens when they click on the button.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:00.431Z"
   },
   "usage": [
     {

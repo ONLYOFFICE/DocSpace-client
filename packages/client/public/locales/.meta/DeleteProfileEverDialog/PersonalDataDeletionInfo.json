@@ -3,11 +3,11 @@
   "content": "Personal data, all personal files and folders in the {{sectionNameFirst}} and {{sectionNameSecond}} sections* of the selected users will be permanently deleted. Files and folders of the selected users kept in common sections* such as rooms will remain in {{productName}}.",
   "content_en_sha1_hash": "82efe26f171e64da1f9a5952e525fc023af5ef30",
   "created_at": "2025-05-19T21:30:56.673Z",
-  "updated_at": "2025-05-19T21:56:08.151Z",
+  "updated_at": "2025-05-20T09:38:27.113Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a warning message informing users that their personal data will be permanently deleted from specific sections of their account, while files in common sections remain intact. It appears in a dialog box prompting users to delete their profile. The content describes the scope and consequences of deleting personal data.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:27.113Z"
   },
   "usage": [
     {

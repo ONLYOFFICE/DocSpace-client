@@ -3,11 +3,11 @@
   "content": "Editor",
   "content_en_sha1_hash": "c7e9fb2ea6c3b8c3ce97645eb902c348d859f36d",
   "created_at": "2025-05-19T21:30:44.767Z",
-  "updated_at": "2025-05-19T21:56:08.251Z",
+  "updated_at": "2025-05-20T09:36:32.573Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"Editor\" is used to display the label for an editing feature within a user interface, likely in a settings or configuration panel. It appears as a title and is linked to navigate to an editor view or functionality. The translated term should describe this editing capability in a neutral and descriptive manner.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:32.573Z"
   },
   "usage": [
     {

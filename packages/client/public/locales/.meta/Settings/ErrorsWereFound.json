@@ -3,11 +3,11 @@
   "content": "{{errors}} errors were found",
   "content_en_sha1_hash": "11d153f3db1683b3e3c58c3ddd299e7ff10894bf",
   "created_at": "2025-05-19T21:30:51.557Z",
-  "updated_at": "2025-05-19T21:56:08.404Z",
+  "updated_at": "2025-05-20T09:45:09.975Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a message indicating that errors were found during data import, typically when importing failed users. It appears on screen in the case of an import failure, providing context to the user about what went wrong.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:09.975Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Import data to your {{productName}} from {{organizationName}} Workspace, Google Workspace, or Nextcloud.",
   "content_en_sha1_hash": "43136c0eceec75981e7d0da5bf5088cc77608a6e",
   "created_at": "2025-05-19T21:30:56.524Z",
-  "updated_at": "2025-05-19T21:56:08.007Z",
+  "updated_at": "2025-05-20T09:38:44.245Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a brief message explaining how to import data into {{productName}} from other services. It is likely used in a button or link that allows users to import their data. The key includes placeholders for productName and organizationName, which should be replaced with actual values during translation.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:44.245Z"
   },
   "usage": [
     {

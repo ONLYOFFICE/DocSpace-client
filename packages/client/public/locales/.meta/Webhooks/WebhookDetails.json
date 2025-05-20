@@ -3,11 +3,11 @@
   "content": "Webhook details",
   "content_en_sha1_hash": "fab9b0a82d59909c30061f70e790f5909f513155",
   "created_at": "2025-05-19T21:30:49.870Z",
-  "updated_at": "2025-05-19T21:56:08.503Z",
+  "updated_at": "2025-05-20T09:46:47.112Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for the label of a dropdown menu that displays details about webhooks. It appears in a table view within the Webhook History section and contains the text \"Webhook details\" when displayed as an option.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:47.112Z"
   },
   "usage": [
     {

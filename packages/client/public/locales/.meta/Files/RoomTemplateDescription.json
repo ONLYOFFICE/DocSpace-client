@@ -3,11 +3,11 @@
   "content": "Use this template to quickly create a new room.",
   "content_en_sha1_hash": "7164e5be24cd4f164abaf5db47bf85dd7a58fd3c",
   "created_at": "2025-05-19T21:30:56.157Z",
-  "updated_at": "2025-05-19T21:56:08.256Z",
+  "updated_at": "2025-05-20T09:39:09.980Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to provide a brief description that explains the purpose of a button labeled \"Create Room\". The text will appear on a button in an info panel, prompting users to quickly create a new room.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:09.980Z"
   },
   "usage": [
     {

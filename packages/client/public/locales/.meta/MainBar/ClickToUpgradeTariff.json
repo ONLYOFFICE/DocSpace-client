@@ -3,11 +3,11 @@
   "content": "<1>Click here</1> to upgrade your tariff plan.",
   "content_en_sha1_hash": "05e8679da260d74355c1ac6f0c80db766199b304",
   "created_at": "2025-05-19T21:30:54.102Z",
-  "updated_at": "2025-05-19T21:56:08.028Z",
+  "updated_at": "2025-05-20T09:42:27.292Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a call-to-action button that encourages users to upgrade their tariff plan. The text will appear as a clickable link within a UI component, likely part of an online quota management system. Translators should provide a clear and actionable message in the user's preferred language.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:27.292Z"
   },
   "usage": [
     {

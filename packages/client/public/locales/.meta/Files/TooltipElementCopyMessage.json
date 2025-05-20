@@ -3,11 +3,11 @@
   "content": "Copy {{element}}",
   "content_en_sha1_hash": "ed0ee7f92937e2893de3d1552b5c943e15bf62a7",
   "created_at": "2025-05-19T21:30:56.251Z",
-  "updated_at": "2025-05-19T21:56:07.988Z",
+  "updated_at": "2025-05-20T09:39:03.206Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a tooltip when copying files. The placeholder \"{element}\" should be replaced with a plural form of \"file\" or \"files\", depending on the context. It appears in the UI for file copy operations.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:03.206Z"
   },
   "usage": [
     {

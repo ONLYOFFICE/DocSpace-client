@@ -3,11 +3,11 @@
   "content": "Get free access to enterprise-ready office suite for 30 days",
   "content_en_sha1_hash": "0d8b509f3c64afbf4bf3e8a5ff4ff6e06c6f5653",
   "created_at": "2025-05-19T21:30:53.599Z",
-  "updated_at": "2025-05-19T21:56:08.046Z",
+  "updated_at": "2025-05-20T09:43:24.760Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a banner header that offers free access to an enterprise office suite for 30 days. It appears as a banner or dialog that prompts users to activate their trial license. Translators should focus on localizing the promotional phrase \"Get [free] access\" while maintaining the tone and style of the original content.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:24.760Z"
   },
   "usage": [
     {

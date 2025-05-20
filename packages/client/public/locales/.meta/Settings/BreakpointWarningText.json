@@ -3,11 +3,11 @@
   "content": "This section is only available in the desktop version",
   "content_en_sha1_hash": "bfb490d729b54b57f73cdf410786c000e9c8e004",
   "created_at": "2025-05-19T21:30:50.805Z",
-  "updated_at": "2025-05-19T21:56:07.986Z",
+  "updated_at": "2025-05-20T09:45:36.692Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a warning message indicating that certain content is only available in the desktop version. It is displayed on a component (BreakpointWarning) when specific conditions are met, such as being in a small window or having mobile availability disabled.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:36.692Z"
   },
   "usage": [
     {

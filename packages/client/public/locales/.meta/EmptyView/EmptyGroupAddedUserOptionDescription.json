@@ -3,11 +3,11 @@
   "content": "Add group members and assign the head",
   "content_en_sha1_hash": "9a4a1f9a41fc7dac52783546c78743d3ecfbbb4b",
   "created_at": "2025-05-19T21:30:56.478Z",
-  "updated_at": "2025-05-19T21:56:08.365Z",
+  "updated_at": "2025-05-20T09:38:49.254Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"EmptyGroupAddedUserOptionDescription\" translation key is used to display a message when a new group is created and users can be added. It appears on an empty screen where users can add members and assign a head. The translator should provide a descriptive title for this option to indicate its purpose in the UI.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:49.254Z"
   },
   "usage": [
     {

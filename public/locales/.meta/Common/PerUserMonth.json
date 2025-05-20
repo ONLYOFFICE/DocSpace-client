@@ -3,11 +3,11 @@
   "content": "<1>{{currencySymbol}}</1><1>{{price}}</1> per admin/month",
   "content_en_sha1_hash": "d3eb0f575626630961e0da29da3a6896ee7cc824",
   "created_at": "2025-05-19T21:30:47.342Z",
-  "updated_at": "2025-05-19T21:56:08.567Z",
+  "updated_at": "2025-05-20T09:35:02.903Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to format a price per admin/user/month, displayed in a specific format with currency symbol and value. It appears as part of UI components that calculate or display payment costs, typically in settings or configuration pages. Translators should focus on adapting the price and currency symbol for different languages.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:02.903Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Create a universal link for self-authorization in the room",
   "content_en_sha1_hash": "7f413c6fc64740d17a9a09f65062425318806790",
   "created_at": "2025-05-19T21:30:54.734Z",
-  "updated_at": "2025-05-19T21:56:08.218Z",
+  "updated_at": "2025-05-20T09:41:14.233Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key describes the text that appears when creating a universal link for self-authorization in a room, displayed on an invite panel and accessible via external links. The purpose is to inform users about the authorization process. It appears on a UI component related to invites.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:14.233Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Form Section Completed",
   "content_en_sha1_hash": "48b6af71d7abdd814d10f4a7d93a2bf85013fb95",
   "created_at": "2025-05-19T21:30:57.173Z",
-  "updated_at": "2025-05-19T21:56:08.713Z",
+  "updated_at": "2025-05-20T09:47:13.750Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key \"FormSectionCompleted\" is used to display the text \"Form Section Completed\" in a form section completion indicator. It is likely displayed on a button or dialog related to submitting or finalizing a form, and its purpose is to provide feedback to the user that their form has been completed.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:13.750Z"
   },
   "usage": [
     {

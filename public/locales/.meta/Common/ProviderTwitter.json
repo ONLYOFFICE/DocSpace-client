@@ -3,11 +3,11 @@
   "content": "Twitter",
   "content_en_sha1_hash": "5392c950bdde4be7e5f5b8fdc6a1ca5f21e905cf",
   "created_at": "2025-05-19T21:30:47.613Z",
-  "updated_at": "2025-05-19T21:56:08.798Z",
+  "updated_at": "2025-05-20T09:34:52.395Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for displaying social media providers on a platform, commonly found on authentication or sign-up buttons. It is likely used to display \"Twitter\" as one of the available provider options.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:52.395Z"
   },
   "usage": [
     {

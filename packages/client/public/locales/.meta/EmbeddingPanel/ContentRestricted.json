@@ -3,11 +3,11 @@
   "content": "Content copying, file downloading and printing are restricted.",
   "content_en_sha1_hash": "d8e271a937efa90e3953ecc46a4796d2a538adac",
   "created_at": "2025-05-19T21:30:56.580Z",
-  "updated_at": "2025-05-19T21:56:08.197Z",
+  "updated_at": "2025-05-20T09:38:37.480Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Content restricted message is used to inform users that certain actions like downloading or printing are not allowed due to content restrictions. It appears on an Embedding Panel and is translated as per the \"ContentRestricted\" key.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:37.480Z"
   },
   "usage": [
     {

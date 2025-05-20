@@ -3,11 +3,11 @@
   "content": "Please use the desktop or tablet to access the <1>{{sectionName}}</1>.",
   "content_en_sha1_hash": "e02848140f969778622004016539527a0c8733f2",
   "created_at": "2025-05-19T21:30:50.782Z",
-  "updated_at": "2025-05-19T21:56:07.987Z",
+  "updated_at": "2025-05-20T09:45:37.596Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a warning message prompting users to access the \"<sectionName>\" settings on the desktop site instead of the mobile app. The text appears when accessing certain settings on a mobile device.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:37.596Z"
   },
   "usage": [
     {

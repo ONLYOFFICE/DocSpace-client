@@ -3,11 +3,11 @@
   "content": "Projects",
   "content_en_sha1_hash": "53e890d5f0fffe09587c55dce74e9a6febf59b5c",
   "created_at": "2025-05-19T21:30:47.523Z",
-  "updated_at": "2025-05-19T21:56:08.407Z",
+  "updated_at": "2025-05-20T09:34:55.934Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "\"Projects\" translation key is used to display the label for a section related to importing projects. It appears in the data-import component and is connected to settings for project file import options.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:55.934Z"
   },
   "usage": [
     {

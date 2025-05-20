@@ -3,11 +3,11 @@
   "content": "Restore",
   "content_en_sha1_hash": "3cbe6d6b9a8d1596bb5bca12e14d81c9e108a1a3",
   "created_at": "2025-05-19T21:30:47.901Z",
-  "updated_at": "2025-05-19T21:56:08.016Z",
+  "updated_at": "2025-05-20T09:34:42.124Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"Restore\" is used to display a button label or header in various UI elements, such as buttons and dialogs. It indicates an action of recovering or returning a file or room to its original state. This translation key appears on screens like Restore Room Dialogs where users can restore a room.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:42.124Z"
   },
   "usage": [
     {

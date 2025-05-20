@@ -3,11 +3,11 @@
   "content": "Open selected item/Confirm action",
   "content_en_sha1_hash": "b8c0bea4ca2d610ff6487bd0c2c17bc9f412f3b5",
   "created_at": "2025-05-19T21:30:55.069Z",
-  "updated_at": "2025-05-19T21:56:08.201Z",
+  "updated_at": "2025-05-20T09:40:31.910Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"HotkeysOpen\" is used to display the label for a button or action that opens a selected item or confirms an action. In the UI, it appears as part of a hotkey panel. It should be translated to convey the purpose of this action in different languages.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:31.910Z"
   },
   "usage": [
     {

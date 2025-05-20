@@ -3,11 +3,11 @@
   "content": "<2>{{qty}} elements</2> successfully moved to <1>{{folderName}}</1>",
   "content_en_sha1_hash": "8d45a4b7ed28e83552a5814b1fc3c815140bbab7",
   "created_at": "2025-05-19T21:30:55.856Z",
-  "updated_at": "2025-05-19T21:56:08.703Z",
+  "updated_at": "2025-05-20T09:39:31.362Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a success message after moving items to a folder. It appears in a toast notification and indicates the number of elements successfully moved to the specified folder. Translators should focus on conveying a positive outcome for this action.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:31.362Z"
   },
   "usage": [
     {

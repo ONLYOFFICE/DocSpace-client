@@ -3,11 +3,11 @@
   "content": "Room list",
   "content_en_sha1_hash": "61e05608df86be266bae6e1183981c8d88c82435",
   "created_at": "2025-05-19T21:30:48.199Z",
-  "updated_at": "2025-05-19T21:56:08.706Z",
+  "updated_at": "2025-05-20T09:34:31.081Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"RoomList\" translation key is used to display a room list label on buttons and other UI elements. It appears in contexts where users can select or view rooms, such as in contact options and selector components. Translators should replace this term with local language equivalents to make the interface accessible to diverse user bases.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:31.081Z"
   },
   "usage": [
     {

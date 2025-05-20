@@ -3,11 +3,11 @@
   "content": "Edit comment",
   "content_en_sha1_hash": "3b168257183896cf72ca48607075940bcabeb683",
   "created_at": "2025-05-19T21:30:49.937Z",
-  "updated_at": "2025-05-19T21:56:08.681Z",
+  "updated_at": "2025-05-20T09:46:38.784Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "EditComment is used in a version history page to display the text \"Edit comment\" in a button or edit panel, prompting users to modify the comment associated with a specific version.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:38.784Z"
   },
   "usage": [
     {

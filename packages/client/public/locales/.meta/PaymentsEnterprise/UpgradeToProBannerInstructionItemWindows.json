@@ -3,11 +3,11 @@
   "content": "Windows instruction.",
   "content_en_sha1_hash": "deb54dea949d2be02af8b22d87c61f6454d31396",
   "created_at": "2025-05-19T21:30:53.617Z",
-  "updated_at": "2025-05-19T21:56:08.242Z",
+  "updated_at": "2025-05-20T09:43:21.750Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a banner instruction about Windows updates on a website. It appears as part of an official documentation section and is linked to read more information. Translators should provide a clear and concise description for the \"UpgradeToProBannerInstructionItemWindows\" text that can be displayed in various contexts.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:21.750Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Sales department request",
   "content_en_sha1_hash": "0e3ac6e1bce337108997dca6f6f3b9a728a8e578",
   "created_at": "2025-05-19T21:30:53.281Z",
-  "updated_at": "2025-05-19T21:56:08.176Z",
+  "updated_at": "2025-05-20T09:44:03.498Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for the \"Sales department request\" text that appears in a dialogue box, specifically in the SalesDepartmentRequestDialog component where users can submit requests. The text is intended to provide clear context for the user's action.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:03.498Z"
   },
   "usage": [
     {

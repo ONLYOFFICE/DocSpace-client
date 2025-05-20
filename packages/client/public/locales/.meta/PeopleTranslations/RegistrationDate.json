@@ -3,11 +3,11 @@
   "content": "Registration date",
   "content_en_sha1_hash": "c498221a5aad95b5674daf56badfb16892c6ed05",
   "created_at": "2025-05-19T21:30:53.492Z",
-  "updated_at": "2025-05-19T21:56:08.359Z",
+  "updated_at": "2025-05-20T09:43:38.249Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the registration date of a user in the application. It appears as a label on an info panel and is rendered when the user's status is active. Translators should provide a human-readable version of this date in their respective language.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:38.249Z"
   },
   "usage": [
     {

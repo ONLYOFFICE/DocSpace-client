@@ -3,11 +3,11 @@
   "content": "Link successfully edited and copied",
   "content_en_sha1_hash": "cb5242ae321d8a7d77464290445a8fc5c67d8d3a",
   "created_at": "2025-05-19T21:30:55.781Z",
-  "updated_at": "2025-05-19T21:56:08.193Z",
+  "updated_at": "2025-05-20T09:39:36.966Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"LinkEditedSuccessfully\" is used to display a success message when editing a link is successfully completed in the Edit Link Panel. This message appears after clicking the \"Edit\" button and copying the shared link. Translators should provide a descriptive phrase that reflects this action's completion.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:36.966Z"
   },
   "usage": [
     {

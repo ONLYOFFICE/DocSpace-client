@@ -3,11 +3,11 @@
   "content": "Redo the last undone action",
   "content_en_sha1_hash": "58482ac07336f2f8bcecfd37e693e26f63436630",
   "created_at": "2025-05-19T21:30:55.076Z",
-  "updated_at": "2025-05-19T21:56:08.202Z",
+  "updated_at": "2025-05-20T09:40:30.955Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"HotkeysRedoLastUndoneAction\" is used to display the text \"Redo the last undone action\" in a user interface. This text appears as a label on hotkey buttons, providing context for users who want to repeat their most recent undone action using the Ctrl+Shift+z shortcut.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:30.955Z"
   },
   "usage": [
     {

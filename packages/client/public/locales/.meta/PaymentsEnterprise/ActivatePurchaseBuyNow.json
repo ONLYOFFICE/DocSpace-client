@@ -3,11 +3,11 @@
   "content": "Buy now",
   "content_en_sha1_hash": "c38860a3ba58e9263dba3ac926101f8b2358d4c9",
   "created_at": "2025-05-19T21:30:53.578Z",
-  "updated_at": "2025-05-19T21:56:08.572Z",
+  "updated_at": "2025-05-20T09:43:28.439Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the text \"Buy now\" on a button component, typically found in payment or checkout flows. It is part of a UI element that prompts users to initiate a purchase. Translators should consider the context of payments and transactions when rendering this translation.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:28.439Z"
   },
   "usage": [
     {

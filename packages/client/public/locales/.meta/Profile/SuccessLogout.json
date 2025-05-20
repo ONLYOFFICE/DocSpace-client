@@ -3,11 +3,11 @@
   "content": "The active connection was logged out: {{platform}}, {{browser}}",
   "content_en_sha1_hash": "c2bc7dfa3f021091fb7c6a6188474f39cbee9fee",
   "created_at": "2025-05-19T21:30:53.384Z",
-  "updated_at": "2025-05-19T21:56:08.668Z",
+  "updated_at": "2025-05-20T09:43:49.134Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The SuccessLogout translation key is used to display a success message when an active connection is logged out. This message informs the user that their session has been successfully ended. It appears in the application after the logout action is completed.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:49.134Z"
   },
   "usage": [
     {

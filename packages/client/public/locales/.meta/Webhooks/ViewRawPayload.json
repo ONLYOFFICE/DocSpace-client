@@ -3,11 +3,11 @@
   "content": "View raw payload",
   "content_en_sha1_hash": "f9816af43fcbbce0fd79cf925d8a03b716aa0802",
   "created_at": "2025-05-19T21:30:49.865Z",
-  "updated_at": "2025-05-19T21:56:08.506Z",
+  "updated_at": "2025-05-20T09:46:47.816Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a button label that prompts users to view the raw payload of a webhook event. In the UI, this label appears as \"View raw payload\" on a small-sized button within a specific page component, typically accessible when viewing detailed information about webhooks or responses.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:47.816Z"
   },
   "usage": [
     {

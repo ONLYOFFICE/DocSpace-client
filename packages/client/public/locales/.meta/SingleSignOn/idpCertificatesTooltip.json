@@ -3,11 +3,11 @@
   "content": "The Identity provider public certificates used for either verification or decryption (or both) of the requests and responses from the IdP.",
   "content_en_sha1_hash": "7846c6461388c273f52adc2c6ee4a3e2120da395",
   "created_at": "2025-05-19T21:30:50.096Z",
-  "updated_at": "2025-05-19T21:56:08.546Z",
+  "updated_at": "2025-05-20T09:46:15.125Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a tooltip describing identity provider public certificates in the portal settings page. It provides context on the certificates' purpose and usage in single sign-on processes.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:15.125Z"
   },
   "usage": [
     {

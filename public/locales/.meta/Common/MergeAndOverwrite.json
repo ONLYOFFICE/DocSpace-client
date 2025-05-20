@@ -3,11 +3,11 @@
   "content": "Merge and overwrite",
   "content_en_sha1_hash": "eb9c66da688e2f80d058216855946cdad7300b1b",
   "created_at": "2025-05-19T21:30:46.458Z",
-  "updated_at": "2025-05-19T21:56:08.092Z",
+  "updated_at": "2025-05-20T09:35:30.954Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"MergeAndOverwrite\" is used to describe a merge and overwrite action in a conflict resolution dialog. This text appears as a title in a file-based merge dialog, instructing the user on what action they are about to take. It should be translated to convey a similar sense of merging content with an option to replace it.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:30.954Z"
   },
   "usage": [
     {

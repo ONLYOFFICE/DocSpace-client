@@ -3,11 +3,11 @@
   "content": "Blocking time (sec)",
   "content_en_sha1_hash": "490a942a08ee42cd63c3e4b0cf291fa362e24a10",
   "created_at": "2025-05-19T21:30:50.711Z",
-  "updated_at": "2025-05-19T21:56:08.574Z",
+  "updated_at": "2025-05-20T09:45:40.446Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for the label that displays a blocking time value in seconds on the brute force protection settings page. It appears in a dropdown menu or similar control within the security category of portal settings, allowing users to configure the duration for blocking IP addresses after a certain number of failed login attempts.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:40.446Z"
   },
   "usage": [
     {

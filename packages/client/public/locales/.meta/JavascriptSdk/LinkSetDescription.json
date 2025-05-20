@@ -3,11 +3,11 @@
   "content": "This link is protected with a {{parameter}}. To configure the link,",
   "content_en_sha1_hash": "6ef158eba8e1e4e0ad362ef6746097143b6229f0",
   "created_at": "2025-05-19T21:30:54.553Z",
-  "updated_at": "2025-05-19T21:56:08.479Z",
+  "updated_at": "2025-05-20T09:41:33.187Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to describe a link protection parameter and its impact on configuration. It appears as a tooltip or hint in UI elements where users configure links with protected parameters.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:33.187Z"
   },
   "usage": [
     {

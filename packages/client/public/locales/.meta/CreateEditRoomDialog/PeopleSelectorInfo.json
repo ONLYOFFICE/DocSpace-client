@@ -3,11 +3,11 @@
   "content": "Only a room admin or a {{productName}} admin can become the owner of the room",
   "content_en_sha1_hash": "8ede5abe2c677bff3d329bb01b0c44bc63d58938",
   "created_at": "2025-05-19T21:30:56.817Z",
-  "updated_at": "2025-05-19T21:56:08.189Z",
+  "updated_at": "2025-05-20T09:38:06.483Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a message that explains the permission requirements for becoming the room owner. It appears in a change room owner panel and informs users about the necessary admin permissions. The message aims to clarify the ownership restrictions in the application.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:06.483Z"
   },
   "usage": [
     {

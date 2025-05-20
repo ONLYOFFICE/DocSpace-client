@@ -3,11 +3,11 @@
   "content": "The subsection allows you to browse through the list of the latest changes (creation, modification, deletion etc.) made by users to the entities (rooms, opportunities, files etc.) within your {{productName}}.",
   "content_en_sha1_hash": "14dcf30f13f317e2c76ba01c199429d2e0ccc37a",
   "created_at": "2025-05-19T21:30:50.592Z",
-  "updated_at": "2025-05-19T21:56:08.582Z",
+  "updated_at": "2025-05-20T09:45:45.249Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used as a subheader on an empty screen that displays when there are no audit trail users. It informs the user about the purpose of the section and how it relates to their {{productName}}.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:45.249Z"
   },
   "usage": [
     {

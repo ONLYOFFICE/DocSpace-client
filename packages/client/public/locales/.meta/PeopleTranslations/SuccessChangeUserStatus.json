@@ -3,11 +3,11 @@
   "content": "The user status was successfully changed",
   "content_en_sha1_hash": "5a045d1563039d47bcc45200906a8f30b72d2afc",
   "created_at": "2025-05-19T21:30:53.521Z",
-  "updated_at": "2025-05-19T21:56:08.079Z",
+  "updated_at": "2025-05-20T09:43:34.006Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a success message when a user's status is successfully changed. It appears in a notification toast when the \"Change User Status\" dialog is closed, and its content may vary depending on whether the action affects a guest or an actual user.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:34.006Z"
   },
   "usage": [
     {

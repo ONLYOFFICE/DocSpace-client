@@ -3,11 +3,11 @@
   "content": "Use special characters",
   "content_en_sha1_hash": "4fd46a4ca880394c20ea7a80b64f2c6478a48924",
   "created_at": "2025-05-19T21:30:53.176Z",
-  "updated_at": "2025-05-19T21:56:08.580Z",
+  "updated_at": "2025-05-20T09:44:07.866Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a checkbox label that enables users to select \"Use special characters\" in password strength settings. The checkbox appears on a form in a portal settings page, allowing users to toggle this feature on or off.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:07.866Z"
   },
   "usage": [
     {

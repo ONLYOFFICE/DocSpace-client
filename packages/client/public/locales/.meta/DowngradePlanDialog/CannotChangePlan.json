@@ -3,11 +3,11 @@
   "content": "You cannot change your plan because the used storage volume or the number of admins exceeds the limitations of the selected plan:",
   "content_en_sha1_hash": "4bdb41a36f148f1de76272d60696b987b70a76a0",
   "created_at": "2025-05-19T21:30:56.593Z",
-  "updated_at": "2025-05-19T21:56:08.077Z",
+  "updated_at": "2025-05-20T09:38:34.722Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "\"This translation key is used for a message that indicates users cannot change their pricing plan due to storage or admin limitations. It appears in a modal dialog header, informing users about the reason for the restriction. Translators should provide an equivalent message that conveys this same limitation.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:34.722Z"
   },
   "usage": [
     {

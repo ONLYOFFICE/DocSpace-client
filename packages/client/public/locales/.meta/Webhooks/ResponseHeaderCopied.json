@@ -3,11 +3,11 @@
   "content": "POST response header successfully copied to clipboard",
   "content_en_sha1_hash": "50da04dc146d7120bc3518082ec95e554fbcc735",
   "created_at": "2025-05-19T21:30:49.808Z",
-  "updated_at": "2025-05-19T21:56:08.505Z",
+  "updated_at": "2025-05-20T09:46:55.584Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"ResponseHeaderCopied\" translation key is used to display a message when a response header is successfully copied to the clipboard in a web application. This message appears as a button label in UI elements, prompting users to perform an action on the copied data. Translators should provide a phrase that indicates success and informs the user about the action taken on the copied data.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:55.584Z"
   },
   "usage": [
     {

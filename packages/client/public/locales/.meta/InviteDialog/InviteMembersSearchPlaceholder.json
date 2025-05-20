@@ -3,11 +3,11 @@
   "content": "Invite members by email",
   "content_en_sha1_hash": "25be32bc4914ade0794cba6ad711881458da0fcf",
   "created_at": "2025-05-19T21:30:54.725Z",
-  "updated_at": "2025-05-19T21:56:08.220Z",
+  "updated_at": "2025-05-20T09:41:15.640Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used as a placeholder text for an input field that allows users to search and invite members by email in an invitation panel. It appears when creating or editing an invite, indicating its purpose. Translators should provide a corresponding text to make the invitation process accessible across languages.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:15.640Z"
   },
   "usage": [
     {

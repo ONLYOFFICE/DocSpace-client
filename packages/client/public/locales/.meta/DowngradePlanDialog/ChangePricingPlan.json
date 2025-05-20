@@ -3,11 +3,11 @@
   "content": "Change pricing plan",
   "content_en_sha1_hash": "45b92d09374c0e5e5e6e57dae357f87761b85ef3",
   "created_at": "2025-05-19T21:30:56.598Z",
-  "updated_at": "2025-05-19T21:56:08.077Z",
+  "updated_at": "2025-05-20T09:38:34.373Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"ChangePricingPlan\" is used to display the text \"Change pricing plan\" in a dialog. This text is likely part of a button or confirmation prompt within the ChangePricingPlanDialog component, where users can update their pricing plan settings.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:34.373Z"
   },
   "usage": [
     {

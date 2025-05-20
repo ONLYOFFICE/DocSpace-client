@@ -3,11 +3,11 @@
   "content": "Code to insert successfully copied to clipboard",
   "content_en_sha1_hash": "c574d56e885b5568a713afd840749a5369418b97",
   "created_at": "2025-05-19T21:30:56.574Z",
-  "updated_at": "2025-05-19T21:56:08.198Z",
+  "updated_at": "2025-05-20T09:38:37.853Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a success message displayed when code is successfully copied to the clipboard. It is shown in a notification toast after the user clicks a button that triggers the copy action. Translators should provide a message indicating successful copying of code, suitable for various language and cultural contexts.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:37.853Z"
   },
   "usage": [
     {

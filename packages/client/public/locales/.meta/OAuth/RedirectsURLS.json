@@ -3,11 +3,11 @@
   "content": "Redirects URLs",
   "content_en_sha1_hash": "a8bd02c4b796e4cf78be011a8178f1851c9536db",
   "created_at": "2025-05-19T21:30:53.985Z",
-  "updated_at": "2025-05-19T21:56:08.487Z",
+  "updated_at": "2025-05-20T09:42:41.027Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Redirects URLs is a field that allows users to enter custom URL redirects. In the Client Form component, this key is used as the label for an input group where users can add and manage redirect URLs.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:41.027Z"
   },
   "usage": [
     {

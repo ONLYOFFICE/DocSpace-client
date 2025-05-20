@@ -3,11 +3,11 @@
   "content": "File updated",
   "content_en_sha1_hash": "9550e8ec24af33e7a5898da2edb027d6e0b2b0de",
   "created_at": "2025-05-19T21:30:49.738Z",
-  "updated_at": "2025-05-19T21:56:08.510Z",
+  "updated_at": "2025-05-20T09:47:02.981Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key \"FileUpdated\" is used to display the phrase \"File updated\" when a file has been successfully modified or saved in the Portal Settings categories. It appears as part of the UI's feedback or success message after the file operation is completed.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:02.981Z"
   },
   "usage": [
     {

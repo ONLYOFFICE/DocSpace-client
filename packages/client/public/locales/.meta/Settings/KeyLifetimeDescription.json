@@ -3,11 +3,11 @@
   "content": "Set lifetime to automatically deactivate  the secret key after a defined period. Lifetime begins of creation of the key.",
   "content_en_sha1_hash": "752153e2665fc818eb2ae85c84c0ad47c2f8b75f",
   "created_at": "2025-05-19T21:30:51.759Z",
-  "updated_at": "2025-05-19T21:56:08.430Z",
+  "updated_at": "2025-05-20T09:45:02.051Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to describe a setting option that determines when an API key is automatically deactivated after creation. It explains the lifecycle of the key and its deactivation process. This text appears in a dialog where users can configure API key settings, such as creation date and lifetime.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:02.051Z"
   },
   "usage": [
     {

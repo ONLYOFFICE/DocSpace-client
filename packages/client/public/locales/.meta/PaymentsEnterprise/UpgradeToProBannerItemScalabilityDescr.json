@@ -3,11 +3,11 @@
   "content": "Comfortably edit and collaborate on docs no matter what size your team is.",
   "content_en_sha1_hash": "e1913bff71c5bcb9a57aeaa6c2b538f7ac43e9b9",
   "created_at": "2025-05-19T21:30:53.630Z",
-  "updated_at": "2025-05-19T21:56:08.049Z",
+  "updated_at": "2025-05-20T09:43:19.307Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to describe the benefits of a feature that enables comfortable editing and collaboration on documents, regardless of team size. It will appear in UI elements related to pro upgrade or enterprise features.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:19.307Z"
   },
   "usage": [
     {

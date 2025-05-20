@@ -3,11 +3,11 @@
   "content": "Day of the month",
   "content_en_sha1_hash": "067497ecd979a531adeb039b5c57048e6702a8f2",
   "created_at": "2025-05-19T21:30:44.405Z",
-  "updated_at": "2025-05-19T21:56:08.752Z",
+  "updated_at": "2025-05-20T09:36:46.658Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"DayOfTheMonth\" is used to display a placeholder text for a calendar component that represents a specific day of the month. When there are no days in the selection (i.e., every day), it shows \"Every Day Of The Month\". This text appears in a dropdown select component, indicating available days of the month.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:46.658Z"
   },
   "usage": [
     {

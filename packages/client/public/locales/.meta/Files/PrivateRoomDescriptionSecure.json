@@ -3,11 +3,11 @@
   "content": "Secure sharing with trusted teammates.",
   "content_en_sha1_hash": "9ba9be313cd631e2af8e9d427283182aa557cd86",
   "created_at": "2025-05-19T21:30:55.984Z",
-  "updated_at": "2025-05-19T21:56:07.997Z",
+  "updated_at": "2025-05-20T09:39:22.168Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a descriptive phrase about secure sharing in collaboration contexts. It appears on a button or other UI element in the client application, providing users with information about how private data is being handled when sharing files with trusted teammates. Translators should adapt this phrase to convey the intended meaning and tone for their respective languages.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:22.168Z"
   },
   "usage": [
     {

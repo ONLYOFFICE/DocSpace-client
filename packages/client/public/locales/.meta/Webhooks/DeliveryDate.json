@@ -3,11 +3,11 @@
   "content": "Delivery date",
   "content_en_sha1_hash": "1093fae5fbc2f03091a8f32f8add755d266e6d58",
   "created_at": "2025-05-19T21:30:49.690Z",
-  "updated_at": "2025-05-19T21:56:08.507Z",
+  "updated_at": "2025-05-20T09:47:07.675Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"DeliveryDate\" translation key is used to display the date related to deliveries. It appears in a filter dialog within the application, allowing users to select and manage dates. Translators should provide an alternative text for this date format as it may vary across languages.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:07.675Z"
   },
   "usage": [
     {

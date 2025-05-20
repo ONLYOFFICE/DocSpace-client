@@ -3,11 +3,11 @@
   "content": "Sign out",
   "content_en_sha1_hash": "dc1649a16c1496db3e4073be6a73faf5121aeae7",
   "created_at": "2025-05-19T21:30:46.319Z",
-  "updated_at": "2025-05-19T21:56:08.166Z",
+  "updated_at": "2025-05-20T09:35:35.135Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the text \"Sign out\" in various parts of the application, including a logout button in a modal dialog and as the label for a button on the portal unavailable page. Its purpose is to provide a clear instruction for users to log out of their session.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:35.135Z"
   },
   "usage": [
     {

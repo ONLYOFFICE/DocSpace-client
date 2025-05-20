@@ -3,11 +3,11 @@
   "content": "Form is ready for filling in room",
   "content_en_sha1_hash": "7e7a3ee89a17104067a57c00273fc1efdc5a7071",
   "created_at": "2025-05-19T21:30:57.179Z",
-  "updated_at": "2025-05-19T21:56:08.713Z",
+  "updated_at": "2025-05-20T09:47:12.615Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a confirmation title when starting to fill in a form. It appears on the screen of a completed form and indicates that it's ready for user input. The exact wording will vary depending on the state of the form (start filling or finalized).",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:12.615Z"
   },
   "usage": [
     {

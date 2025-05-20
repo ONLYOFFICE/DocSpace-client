@@ -3,11 +3,11 @@
   "content": "The invitation will be sent again to the selected users with the 'Pending' status.",
   "content_en_sha1_hash": "55886668778f3f617d123dd0f693ab2a77946f58",
   "created_at": "2025-05-19T21:30:53.268Z",
-  "updated_at": "2025-05-19T21:56:08.178Z",
+  "updated_at": "2025-05-20T09:44:04.317Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "\"This translation key is used for a modal dialog's header, displaying 'The invitation will be sent again to the selected users with the 'Pending' status'. It appears on the footer of a send invite dialog.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:04.317Z"
   },
   "usage": [
     {

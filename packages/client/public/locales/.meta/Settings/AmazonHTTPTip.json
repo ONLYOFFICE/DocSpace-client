@@ -3,11 +3,11 @@
   "content": "If this property is set to true, the client attempts to use HTTP protocol, if the target endpoint supports it. By default, this property is set to false.",
   "content_en_sha1_hash": "cee047b295247a75beff622fdf5c057a35ac83a4",
   "created_at": "2025-05-19T21:30:50.441Z",
-  "updated_at": "2025-05-19T21:56:08.418Z",
+  "updated_at": "2025-05-20T09:45:51.353Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for the tooltip that explains why HTTP protocol is attempted when a certain checkbox is enabled in the portal settings. It appears as a help button on the page and provides context to users about this setting's functionality.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:51.353Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Filling form",
   "content_en_sha1_hash": "7d83d7eca125edcf45bdc6c74e4efc3a8e517850",
   "created_at": "2025-05-19T21:30:45.351Z",
-  "updated_at": "2025-05-19T21:56:08.225Z",
+  "updated_at": "2025-05-20T09:36:11.304Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"FillingFormRooms\" is used to display the label for a filter option in the Home page's room filtering section, specifically when selecting rooms of type \"Filling Forms Room\". This text will appear as the label on a filter dropdown.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:11.304Z"
   },
   "usage": [
     {

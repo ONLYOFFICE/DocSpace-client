@@ -3,11 +3,11 @@
   "content": "No templates found",
   "content_en_sha1_hash": "f11224d0c5d283fb61cb849c74ff0e760a29e1b4",
   "created_at": "2025-05-19T21:30:44.914Z",
-  "updated_at": "2025-05-19T21:56:08.106Z",
+  "updated_at": "2025-05-20T09:36:27.411Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"EmptyTemplatesRoomsHeader\" translation key is used to display a message when no templates are found in a room's template selection. It appears as a header label in a modal dialog that allows users to create or edit rooms.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:27.411Z"
   },
   "usage": [
     {

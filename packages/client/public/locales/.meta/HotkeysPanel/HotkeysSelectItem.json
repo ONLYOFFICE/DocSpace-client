@@ -3,11 +3,11 @@
   "content": "Select or deselect item",
   "content_en_sha1_hash": "c55dd249fffabde37969cf62f277edca80967e6b",
   "created_at": "2025-05-19T21:30:55.089Z",
-  "updated_at": "2025-05-19T21:56:08.208Z",
+  "updated_at": "2025-05-20T09:40:28.819Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a label indicating whether an item can be selected or deselected in a hotkey panel. It typically appears as part of a UI component that allows users to toggle an item's selection status. The description should help translators understand the purpose and context of this text, such as in a button or dialog related to item management.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:28.819Z"
   },
   "usage": [
     {

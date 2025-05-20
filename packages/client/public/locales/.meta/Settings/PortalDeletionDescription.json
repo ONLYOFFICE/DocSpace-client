@@ -3,11 +3,11 @@
   "content": "Use this option to delete your space permanently.",
   "content_en_sha1_hash": "eda8701798195496d0dcc13393b3bf9f69ca3417",
   "created_at": "2025-05-19T21:30:52.208Z",
-  "updated_at": "2025-05-19T21:56:08.424Z",
+  "updated_at": "2025-05-20T09:44:47.213Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a description that informs users about the permanent deletion of their space. It appears on a button in the Portal Settings page when the user has not activated their account.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:47.213Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Copy and keep both folders",
   "content_en_sha1_hash": "176432b01539932c5ac6c8eb8c154f33251b3418",
   "created_at": "2025-05-19T21:30:43.753Z",
-  "updated_at": "2025-05-19T21:56:08.093Z",
+  "updated_at": "2025-05-20T09:36:56.988Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the text \"Copy and keep both folders\" in a file conflict resolution dialog. It is likely displayed as a button or option within the dialog, prompting users to choose whether to copy the contents of both source and destination folders.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:56.988Z"
   },
   "usage": [
     {

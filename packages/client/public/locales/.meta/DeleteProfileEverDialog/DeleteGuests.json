@@ -3,11 +3,11 @@
   "content": "Delete guests",
   "content_en_sha1_hash": "fd88f6bb7d2f3efadaf159eedf20c2a5daab777c",
   "created_at": "2025-05-19T21:30:56.659Z",
-  "updated_at": "2025-05-19T21:56:08.149Z",
+  "updated_at": "2025-05-20T09:38:29.421Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key \"DeleteGuests\" is used to display a message when deleting guests from user profiles in a delete profile ever dialog. The message appears as part of a button label and should be translated accordingly.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:29.421Z"
   },
   "usage": [
     {

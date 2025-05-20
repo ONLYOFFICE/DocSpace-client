@@ -3,11 +3,11 @@
   "content": "Connect app",
   "content_en_sha1_hash": "4a7f6f5831a934a0bf6d0fe0d4cfbc86482cd92d",
   "created_at": "2025-05-19T21:30:57.386Z",
-  "updated_at": "2025-05-19T21:56:08.725Z",
+  "updated_at": "2025-05-20T09:47:24.476Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the label \"Connect app\" on a button that prompts the user to activate an app connection in the login flow. The button appears on-screen when a user confirms their account settings.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:24.476Z"
   },
   "usage": [
     {

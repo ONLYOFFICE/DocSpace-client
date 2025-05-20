@@ -3,11 +3,11 @@
   "content": "Send an invitation to add new members to your {{productName}}",
   "content_en_sha1_hash": "abbd8fb2bdab0b643dd2213a6498d3863b588070",
   "created_at": "2025-05-19T21:30:56.520Z",
-  "updated_at": "2025-05-19T21:56:08.006Z",
+  "updated_at": "2025-05-20T09:38:44.890Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a button that invites new members to join a room in the product, typically displayed on an \"Empty View\" container. The button sends an invitation notification containing the product name. It appears as a visible action element.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:44.890Z"
   },
   "usage": [
     {

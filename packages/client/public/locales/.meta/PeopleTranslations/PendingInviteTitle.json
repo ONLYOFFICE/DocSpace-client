@@ -3,11 +3,11 @@
   "content": "Pending invite",
   "content_en_sha1_hash": "4c0cead4ed08558db964b020a52ab1b4c0661e30",
   "created_at": "2025-05-19T21:30:53.487Z",
-  "updated_at": "2025-05-19T21:56:08.223Z",
+  "updated_at": "2025-05-20T09:43:38.908Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a label for pending invitations. It appears as a button title and will be displayed when an invitation is pending review or approval. The translator should provide a clear and concise phrase that communicates the status of the invitation in a user-friendly manner.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:38.908Z"
   },
   "usage": [
     {

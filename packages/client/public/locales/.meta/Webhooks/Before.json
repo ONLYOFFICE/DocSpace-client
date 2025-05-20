@@ -3,11 +3,11 @@
   "content": "Before",
   "content_en_sha1_hash": "74f39697ac328c6325ce068b6aaca626abc0bf63",
   "created_at": "2025-05-19T21:30:49.670Z",
-  "updated_at": "2025-05-19T21:56:08.507Z",
+  "updated_at": "2025-05-20T09:47:09.611Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the text \"Before\" in a filter dialog component. It likely appears on a date picker input field within the FilterDialog, allowing users to select a time frame that occurred before a specified delivery date.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:09.611Z"
   },
   "usage": [
     {

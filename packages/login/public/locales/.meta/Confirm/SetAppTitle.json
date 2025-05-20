@@ -3,11 +3,11 @@
   "content": "Configure your authenticator application",
   "content_en_sha1_hash": "5a812c83be8c97b662816888e9f8955859f6b9d1",
   "created_at": "2025-05-19T21:30:57.392Z",
-  "updated_at": "2025-05-19T21:56:08.724Z",
+  "updated_at": "2025-05-20T09:47:23.564Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Configure a title that describes the authenticator application setup process. This text is used as the app title in a login confirmation page, guiding users through the configuration of their authenticator application.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:23.564Z"
   },
   "usage": [
     {

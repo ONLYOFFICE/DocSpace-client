@@ -3,11 +3,11 @@
   "content": "Invalid email or expired link",
   "content_en_sha1_hash": "c0a2370e7342390662dccc58db6ad239d084d6a5",
   "created_at": "2025-05-19T21:30:57.274Z",
-  "updated_at": "2025-05-19T21:56:08.741Z",
+  "updated_at": "2025-05-20T09:47:41.538Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"ErrorConfirmURLError\" translation key is used to display an error message when a user tries to confirm a URL that has expired or is invalid. This message appears as part of an error dialog or alert when the user attempts to perform an action involving the potentially incorrect link, such as logging in to an account.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:41.538Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "A {{productName}} account will be created for <1>{{email}}</1>. Please complete your registration:",
   "content_en_sha1_hash": "3f6f73d8114801f9916e2149b49a336075d95113",
   "created_at": "2025-05-19T21:30:57.333Z",
-  "updated_at": "2025-05-19T21:56:08.732Z",
+  "updated_at": "2025-05-20T09:47:31.957Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a greeting message when an account is created. It indicates that a user's account has been successfully created and provides details about the newly created account, such as the email address. This message appears in the UI after successful registration, prompting the user to complete their registration process.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:31.957Z"
   },
   "usage": [
     {

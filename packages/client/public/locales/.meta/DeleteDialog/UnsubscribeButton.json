@@ -3,11 +3,11 @@
   "content": "Unsubscribe",
   "content_en_sha1_hash": "834cc0ee6089e541b395509ba562516bcafa78e2",
   "created_at": "2025-05-19T21:30:56.720Z",
-  "updated_at": "2025-05-19T21:56:08.140Z",
+  "updated_at": "2025-05-20T09:38:19.882Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a \"Unsubscribe\" button that appears when a user attempts to unsubscribe from something. It is part of a modal dialog and is displayed as an alternative option when specific conditions are met, such as in a privacy folder or when deleting data. The text should be translated to indicate the action of unsubscribing.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:19.882Z"
   },
   "usage": [
     {

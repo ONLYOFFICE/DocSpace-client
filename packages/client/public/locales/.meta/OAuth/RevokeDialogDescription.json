@@ -3,11 +3,11 @@
   "content": "Any integrations using this token will no longer be able to access the API. You cannot undo this action.",
   "content_en_sha1_hash": "79302397ee86c7a499f68d74b556077608115ed1",
   "created_at": "2025-05-19T21:30:54.021Z",
-  "updated_at": "2025-05-19T21:56:08.498Z",
+  "updated_at": "2025-05-20T09:42:36.773Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a warning message when revoking an OAuth token, informing users that any integrations using the token will be disabled. The message appears in a modal dialog header.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:36.773Z"
   },
   "usage": [
     {

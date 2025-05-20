@@ -3,11 +3,11 @@
   "content": "Cancel button text",
   "content_en_sha1_hash": "619520053dee4d51223c942aa13fe5635deaa4f0",
   "created_at": "2025-05-19T21:30:54.379Z",
-  "updated_at": "2025-05-19T21:56:08.469Z",
+  "updated_at": "2025-05-20T09:41:50.655Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for the text displayed on a cancel button. It's intended to be translated and will appear as the label of a \"Cancel\" button in certain UI elements.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:50.655Z"
   },
   "usage": [
     {

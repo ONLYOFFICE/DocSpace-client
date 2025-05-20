@@ -3,11 +3,11 @@
   "content": "Check the filled forms and analyze data automatically collected into a spreadsheet. Everything – within one room.",
   "content_en_sha1_hash": "4c9431d01e59d77faab35a63316a049bc247258b",
   "created_at": "2025-05-19T21:30:55.144Z",
-  "updated_at": "2025-05-19T21:56:08.758Z",
+  "updated_at": "2025-05-20T09:40:20.635Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"TitleComplete\" is used to display a button title that indicates reviewing and analyzing completed forms within one room. This text is likely used in a form-filling dialog or header element to provide context for users. Translators should focus on conveying the idea of completing forms within a specific area.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:20.635Z"
   },
   "usage": [
     {

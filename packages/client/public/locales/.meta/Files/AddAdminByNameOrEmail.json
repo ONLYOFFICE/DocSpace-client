@@ -3,11 +3,11 @@
   "content": "Add admin by name or email",
   "content_en_sha1_hash": "c917300875036e8a075e1740087c98c90e3179cf",
   "created_at": "2025-05-19T21:30:55.202Z",
-  "updated_at": "2025-05-19T21:56:08.223Z",
+  "updated_at": "2025-05-20T09:40:14.571Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the text \"Add admin by name or email\" in a UI component, specifically as a placeholder in an invite input field. It appears on the screen when the user interacts with the input field and needs to add an administrator by either name or email address.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:14.571Z"
   },
   "usage": [
     {

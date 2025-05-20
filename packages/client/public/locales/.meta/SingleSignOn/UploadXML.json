@@ -3,11 +3,11 @@
   "content": "Load metadata from XML to fill the required fields automatically.",
   "content_en_sha1_hash": "5dc7828aee10be08ff27972ea80701e595ddd1d2",
   "created_at": "2025-05-19T21:30:50.195Z",
-  "updated_at": "2025-05-19T21:56:08.558Z",
+  "updated_at": "2025-05-20T09:46:00.865Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "\"Load metadata from XML to fill required fields automatically\" is used as a tooltip or description for an icon button that enables Single Sign On. This translation key appears in the PortalSettings page and helps users understand its purpose.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:00.865Z"
   },
   "usage": [
     {

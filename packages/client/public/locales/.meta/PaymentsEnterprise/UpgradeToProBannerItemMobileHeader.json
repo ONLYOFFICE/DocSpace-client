@@ -3,11 +3,11 @@
   "content": "Mobile editing.",
   "content_en_sha1_hash": "950b8cee66034eb2754ac6639406c09cff5b454d",
   "created_at": "2025-05-19T21:30:53.628Z",
-  "updated_at": "2025-05-19T21:56:08.047Z",
+  "updated_at": "2025-05-20T09:43:19.637Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a mobile-specific editing feature description. It appears on a component that showcases product benefits and is related to the \"Upgrade To Pro\" feature. Translators should update this description to reflect the product's editing capabilities in a mobile context.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:19.637Z"
   },
   "usage": [
     {

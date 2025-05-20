@@ -3,11 +3,11 @@
   "content": "File search within the opened folder/room.",
   "content_en_sha1_hash": "95f0c2077da6a6debdffb60f637b128300446cff",
   "created_at": "2025-05-19T21:30:54.506Z",
-  "updated_at": "2025-05-19T21:56:08.459Z",
+  "updated_at": "2025-05-20T09:41:38.271Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "File search within the opened folder or room is used as a tooltip description to help users understand the purpose of the file selector tool in the PortalSettings page.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:38.271Z"
   },
   "usage": [
     {

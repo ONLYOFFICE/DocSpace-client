@@ -3,11 +3,11 @@
   "content": "Decrypt storage",
   "content_en_sha1_hash": "2ae114849bb95cfb13d5eb2d05d02b8708d00d3e",
   "created_at": "2025-05-19T21:30:57.424Z",
-  "updated_at": "2025-05-19T21:56:08.811Z",
+  "updated_at": "2025-05-20T09:48:00.679Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "DecryptStorage button label: Used to toggle between \"Encrypt\" and \"Decrypt\" buttons on the File Management screen.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:48:00.679Z"
   },
   "usage": [
     {

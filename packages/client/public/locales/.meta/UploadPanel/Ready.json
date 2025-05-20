@@ -3,11 +3,11 @@
   "content": "Done",
   "content_en_sha1_hash": "e9b450d14bc2363d292c84f17cfad5cfbd58a458",
   "created_at": "2025-05-19T21:30:49.950Z",
-  "updated_at": "2025-05-19T21:56:08.189Z",
+  "updated_at": "2025-05-20T09:46:37.587Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used as the label for a \"Done\" button, appearing on conversion and upload buttons in the UI, indicating completion or readiness. The translation key will be rendered when the value of \"Ready\" matches the content of this key, which should display as \"Done\".",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:37.587Z"
   },
   "usage": [
     {

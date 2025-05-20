@@ -3,11 +3,11 @@
   "content": "To connect a third-party storage, you need to add the corresponding service in the Integration section of {{productName}} settings. Contact {{productName}} owner or administrator to enable the integration.",
   "content_en_sha1_hash": "6d21f17fc8337aa5d64cc41bd098795b12ff02d3",
   "created_at": "2025-05-19T21:30:56.848Z",
-  "updated_at": "2025-05-19T21:56:08.116Z",
+  "updated_at": "2025-05-20T09:38:01.410Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a message when a third-party storage room's integration is not enabled. It prompts the user to contact the product owner/administrator to set up the integration in {{productName}} settings. This message appears in the CreateEditRoomDialog when no connected items are found.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:01.410Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "The user could not be found",
   "content_en_sha1_hash": "f05293a26ddd45b11f7c4227d12eecdc3d1228dd",
   "created_at": "2025-05-19T21:30:57.286Z",
-  "updated_at": "2025-05-19T21:56:08.740Z",
+  "updated_at": "2025-05-20T09:47:40.062Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"ErrorUserNotFound\" represents a generic error message when a user cannot be found. This message is used in various UI elements, such as login errors or account management dialogs, to provide a clear indication of an unsuccessful search or lookup operation.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:40.062Z"
   },
   "usage": [
     {

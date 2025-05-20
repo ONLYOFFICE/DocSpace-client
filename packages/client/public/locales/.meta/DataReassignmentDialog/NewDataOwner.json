@@ -3,11 +3,11 @@
   "content": "New data owner",
   "content_en_sha1_hash": "7ca3235c1bc6aeddbdad6d4a5e5512698930f922",
   "created_at": "2025-05-19T21:30:56.743Z",
-  "updated_at": "2025-05-19T21:56:08.131Z",
+  "updated_at": "2025-05-20T09:38:16.767Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"NewDataOwner\" is used to display a user's name as the new data owner in a file reassignment dialogue. It appears on a screen where users select and transfer ownership of files, and its content should indicate that this person will be responsible for managing the transferred data. This text helps inform users about their role in the reassignment process.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:16.767Z"
   },
   "usage": [
     {

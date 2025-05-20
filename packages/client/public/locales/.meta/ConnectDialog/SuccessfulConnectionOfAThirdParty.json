@@ -3,11 +3,11 @@
   "content": "Third-party service was successfully connected.",
   "content_en_sha1_hash": "d90004d45511c7e00dbd7ab694c8f7ffb4579948",
   "created_at": "2025-05-19T21:30:56.905Z",
-  "updated_at": "2025-05-19T21:56:08.096Z",
+  "updated_at": "2025-05-20T09:37:53.566Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "\"Notification text displayed when a third-party service is successfully connected, typically shown as a success message after clicking a connection button in the ConnectDialog.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:53.566Z"
   },
   "usage": [
     {

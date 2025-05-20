@@ -3,11 +3,11 @@
   "content": "Scopes",
   "content_en_sha1_hash": "c23540e5fb551edff0ac95649a1d551f9736d55e",
   "created_at": "2025-05-19T21:30:54.029Z",
-  "updated_at": "2025-05-19T21:56:08.495Z",
+  "updated_at": "2025-05-20T09:42:35.779Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the label \"Scopes\" in a list or table view within the Portal Settings UI. It appears as a column header and provides context for users to select scopes, likely related to access or permissions settings.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:35.779Z"
   },
   "usage": [
     {

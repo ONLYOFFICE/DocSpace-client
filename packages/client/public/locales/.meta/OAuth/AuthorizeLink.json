@@ -3,11 +3,11 @@
   "content": "Authorize link",
   "content_en_sha1_hash": "81ad6b89c40401161374de86969d1109d955deff",
   "created_at": "2025-05-19T21:30:53.826Z",
-  "updated_at": "2025-05-19T21:56:08.497Z",
+  "updated_at": "2025-05-20T09:42:55.588Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"AuthorizeLink\" translation key is used to display the text for an authorization link in a preview dialog, providing users with a clear indication of what action will be performed when they click the link. This text appears on a button-like component within the dialog. Translators should provide a descriptive and actionable label for this link.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:55.588Z"
   },
   "usage": [
     {

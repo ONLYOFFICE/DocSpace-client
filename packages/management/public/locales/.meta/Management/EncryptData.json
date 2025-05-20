@@ -3,11 +3,11 @@
   "content": "Encrypt data at rest",
   "content_en_sha1_hash": "55866187e3f73d7f89a5bbe25fe1344c85a640cd",
   "created_at": "2025-05-19T21:30:57.442Z",
-  "updated_at": "2025-05-19T21:56:08.809Z",
+  "updated_at": "2025-05-20T09:47:57.884Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for the phrase \"Encrypt data at rest\" which appears on a button or similar action element in the encrypt data management page. It informs users about the encryption process's purpose and impact on stored files.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:57.884Z"
   },
   "usage": [
     {

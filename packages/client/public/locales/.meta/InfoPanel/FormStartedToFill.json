@@ -3,11 +3,11 @@
   "content": "Started to fill.",
   "content_en_sha1_hash": "bab99848f56bf61cd12c948d2c1dfd7cd478d768",
   "created_at": "2025-05-19T21:30:54.865Z",
-  "updated_at": "2025-05-19T21:56:08.286Z",
+  "updated_at": "2025-05-20T09:40:57.422Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a status message indicating when a form starts being filled, likely on a button or submit action in an info panel. It is part of a larger context related to file custom filters and form states in a user interface. Translators should aim to convey the idea that the form has begun being populated with data.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:57.422Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Files and folder will not be copied",
   "content_en_sha1_hash": "66648e8a0c6d0b325af25f71b0d660b44211a56d",
   "created_at": "2025-05-19T21:30:45.297Z",
-  "updated_at": "2025-05-19T21:56:08.094Z",
+  "updated_at": "2025-05-20T09:36:13.539Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a message indicating that files and folders will not be copied when certain actions are performed in a file management context. It appears as part of a dialog box or component where users can resolve conflicts or cancel uploads.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:13.539Z"
   },
   "usage": [
     {

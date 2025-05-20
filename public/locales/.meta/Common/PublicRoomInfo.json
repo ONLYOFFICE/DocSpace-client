@@ -3,11 +3,11 @@
   "content": "Share documents for viewing, editing, commenting, or reviewing without registration. You can also embed this room into any web interface.",
   "content_en_sha1_hash": "9eb88d5eef886330584cd438a6dc42214e1d9081",
   "created_at": "2025-05-19T21:30:47.660Z",
-  "updated_at": "2025-05-19T21:56:08.461Z",
+  "updated_at": "2025-05-20T09:34:50.816Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a tooltip explaining that PublicRoomInfo allows sharing documents without registration, and can be embedded in web interfaces. It appears as a HelpButton in a LabelGroup within a ComboBox, providing context for users configuring portal settings.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:50.816Z"
   },
   "usage": [
     {

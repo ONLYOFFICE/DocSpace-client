@@ -3,11 +3,11 @@
   "content": "You can't use the same email address",
   "content_en_sha1_hash": "f85d5552131bdd2fc625627ca72a0cb482f3e288",
   "created_at": "2025-05-19T21:30:48.291Z",
-  "updated_at": "2025-05-19T21:56:08.064Z",
+  "updated_at": "2025-05-20T09:34:27.618Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key displays an error message indicating that a user cannot use the same email address. It is used in a change email dialog to inform users of a validation rule when attempting to send a new email.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:27.618Z"
   },
   "usage": [
     {

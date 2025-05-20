@@ -3,11 +3,11 @@
   "content": "Status",
   "content_en_sha1_hash": "bae7d5be70820ed56467bd9a63744e23b47bd711",
   "created_at": "2025-05-19T21:30:53.557Z",
-  "updated_at": "2025-05-19T21:56:08.181Z",
+  "updated_at": "2025-05-20T09:43:30.182Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the status of a user in various parts of the application. It appears as \"Status\" next to the user's current state in the SettingsPluginDialog and as part of the user information panel. Its purpose is to provide a clear understanding of the user's current status, helping users navigate and understand their account settings or quotas effectively.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:30.182Z"
   },
   "usage": [
     {

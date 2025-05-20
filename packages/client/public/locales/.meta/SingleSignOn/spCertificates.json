@@ -3,11 +3,11 @@
   "content": "SP Certificates",
   "content_en_sha1_hash": "ddb5368e6f2802175629771e18ffdae9be88db3d",
   "created_at": "2025-05-19T21:30:50.156Z",
-  "updated_at": "2025-05-19T21:56:08.546Z",
+  "updated_at": "2025-05-20T09:46:06.714Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "\"SP Certificates\" - This translation key is used to display a label for Single Sign-On certificates in the PortalSettings UI. It typically appears as a button or modal title, guiding users to select their SP certificates.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:06.714Z"
   },
   "usage": [
     {

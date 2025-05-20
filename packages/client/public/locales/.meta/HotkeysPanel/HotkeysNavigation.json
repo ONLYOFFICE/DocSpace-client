@@ -3,11 +3,11 @@
   "content": "Navigation",
   "content_en_sha1_hash": "cf03cf2e9cdf95a20af09137dfb9071db0c31bf2",
   "created_at": "2025-05-19T21:30:55.067Z",
-  "updated_at": "2025-05-19T21:56:08.211Z",
+  "updated_at": "2025-05-20T09:40:32.200Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the title \"Navigation\" in a modal dialog. It appears as the header of a panel within the HotkeysPanel component and provides context for the user about what the hotkey navigation features are.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:32.200Z"
   },
   "usage": [
     {

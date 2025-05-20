@@ -3,11 +3,11 @@
   "content": "No users match your search. Please adjust your search parameters or clear the search field to view the full list of users.",
   "content_en_sha1_hash": "e38c6445c5ffaacd4c043f8ec2d9a0484e70bae4",
   "created_at": "2025-05-19T21:30:46.936Z",
-  "updated_at": "2025-05-19T21:56:08.154Z",
+  "updated_at": "2025-05-20T09:35:16.104Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "\"No users are found based on your search criteria. This message is displayed when a user cannot be retrieved due to an empty or invalid search result.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:16.104Z"
   },
   "usage": [
     {

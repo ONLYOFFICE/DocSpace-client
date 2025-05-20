@@ -3,11 +3,11 @@
   "content": "NameId Format",
   "content_en_sha1_hash": "09c33ee71511c0a8e0cba56fd26679f490c998fe",
   "created_at": "2025-05-19T21:30:50.112Z",
-  "updated_at": "2025-05-19T21:56:08.550Z",
+  "updated_at": "2025-05-20T09:46:13.041Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for the label of a dropdown menu in a user interface, specifically related to Single Sign-On settings. It will appear as \"NameId Format\" in the application, and its purpose is to provide a clear indication of the option being selected from a list.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:13.041Z"
   },
   "usage": [
     {

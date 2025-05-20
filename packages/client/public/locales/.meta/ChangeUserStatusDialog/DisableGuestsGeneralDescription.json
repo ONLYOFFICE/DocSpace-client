@@ -3,11 +3,11 @@
   "content": "You can later delete or enable the disabled guests if needed.",
   "content_en_sha1_hash": "67d26028f16e1fa6aeb7ee0d7cbceeb7c5d95f6d",
   "created_at": "2025-05-19T21:30:56.954Z",
-  "updated_at": "2025-05-19T21:56:08.081Z",
+  "updated_at": "2025-05-20T09:37:46.530Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a message that explains how to later manage disabled guests. It appears in a change user status dialog when users can't be enabled as guests and allows administrators to delete or enable them if needed.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:46.530Z"
   },
   "usage": [
     {

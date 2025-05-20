@@ -3,11 +3,11 @@
   "content": "Your name",
   "content_en_sha1_hash": "ab42293e29e1ffb306c1403dd95144d664853a60",
   "created_at": "2025-05-19T21:30:53.285Z",
-  "updated_at": "2025-05-19T21:56:08.177Z",
+  "updated_at": "2025-05-20T09:44:02.813Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"YourName\" is used to display a placeholder text for a user's name input field in a sales department request dialog. The text appears as a prompt when the input field is empty and is displayed on a text input element.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:02.813Z"
   },
   "usage": [
     {

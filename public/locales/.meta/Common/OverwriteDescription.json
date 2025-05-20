@@ -3,11 +3,11 @@
   "content": "The new file will replace the existing one as a new version.",
   "content_en_sha1_hash": "0d9f5c9f81c7babac9ce4dd02769692be95654fb",
   "created_at": "2025-05-19T21:30:47.186Z",
-  "updated_at": "2025-05-19T21:56:08.092Z",
+  "updated_at": "2025-05-20T09:35:08.852Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"OverwriteDescription\" is used to display a message when a user chooses to overwrite an existing file. This message informs users that their new file will replace the current one as a new version. It appears in dialog boxes, such as the ConflictResolveDialog, where users can select action options.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:08.852Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Linux instruction.",
   "content_en_sha1_hash": "4b856283dbe4b6431a050771a1ebbbed5a4f4760",
   "created_at": "2025-05-19T21:30:53.614Z",
-  "updated_at": "2025-05-19T21:56:08.241Z",
+  "updated_at": "2025-05-20T09:43:22.096Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a short instruction related to Linux on a product page or documentation. It's likely used as a banner instruction and appears near an \"Upgrade to Pro\" button or link, guiding users to read more information about upgrading their experience for Linux features.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:22.096Z"
   },
   "usage": [
     {

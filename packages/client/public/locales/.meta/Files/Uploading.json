@@ -3,11 +3,11 @@
   "content": "Uploading",
   "content_en_sha1_hash": "de27240983ef2f1432e07df25dd609712f69a107",
   "created_at": "2025-05-19T21:30:56.289Z",
-  "updated_at": "2025-05-19T21:56:08.223Z",
+  "updated_at": "2025-05-20T09:39:00.293Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the state of file upload progress. It appears on an upload panel and changes depending on whether an upload is in progress, completed successfully, or failed. The phrase is translated from \"Uploading\" and should reflect the progress or status of the upload operation.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:00.293Z"
   },
   "usage": [
     {

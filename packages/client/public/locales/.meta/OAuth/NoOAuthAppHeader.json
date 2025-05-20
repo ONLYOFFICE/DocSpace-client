@@ -3,11 +3,11 @@
   "content": "No OAuth applications",
   "content_en_sha1_hash": "028f0e7642805c7f7a4b4c084907a60307bacd55",
   "created_at": "2025-05-19T21:30:53.921Z",
-  "updated_at": "2025-05-19T21:56:08.493Z",
+  "updated_at": "2025-05-20T09:42:43.956Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the phrase \"No OAuth applications\" in a UI component. It is likely used as a title or heading on an empty screen where no OAuth apps are available, found in developer tools within Portal Settings.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:43.956Z"
   },
   "usage": [
     {

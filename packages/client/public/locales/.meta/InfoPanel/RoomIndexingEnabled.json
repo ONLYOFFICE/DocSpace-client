@@ -3,11 +3,11 @@
   "content": "Automatic file indexing enabled in the room",
   "content_en_sha1_hash": "7a847c4f14ff109b1a13c27a8774a3a16f658ac1",
   "created_at": "2025-05-19T21:30:54.932Z",
-  "updated_at": "2025-05-19T21:56:08.271Z",
+  "updated_at": "2025-05-20T09:40:46.963Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Automatic file indexing is enabled in the room, allowing users to easily access and manage files within the space. This setting is typically found on a configuration panel or settings screen within the application, where users can toggle its availability.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:46.963Z"
   },
   "usage": [
     {

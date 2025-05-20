@@ -3,11 +3,11 @@
   "content": "Select types",
   "content_en_sha1_hash": "164b0535dd6dc494de23f43e7fdd2d8e60f1b350",
   "created_at": "2025-05-19T21:30:54.678Z",
-  "updated_at": "2025-05-19T21:56:08.458Z",
+  "updated_at": "2025-05-20T09:41:20.573Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used as a button label for a file selector dialog. It is displayed to the user as \"Select types\" and is part of the JavaScriptSDK preset in the PortalSettings page.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:20.573Z"
   },
   "usage": [
     {

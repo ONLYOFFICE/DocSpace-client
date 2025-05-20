@@ -3,11 +3,11 @@
   "content": "Sorry, you don't have access to this room.",
   "content_en_sha1_hash": "231a1798cb7e11ce36fa013454ceb04d6deeb54d",
   "created_at": "2025-05-19T21:30:55.903Z",
-  "updated_at": "2025-05-19T21:56:07.993Z",
+  "updated_at": "2025-05-20T09:39:27.975Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a message indicating that a user does not have access to a specific room. It appears in a container element on a page and is likely displayed as a notification or alert when a user attempts to enter a restricted area.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:27.975Z"
   },
   "usage": [
     {

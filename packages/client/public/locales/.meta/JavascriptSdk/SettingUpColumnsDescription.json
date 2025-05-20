@@ -3,11 +3,11 @@
   "content": "You can disable the ability for users to manage and customize file information columns in list view.",
   "content_en_sha1_hash": "76868dd0a3859dca5c680f703c78401724009d5e",
   "created_at": "2025-05-19T21:30:54.686Z",
-  "updated_at": "2025-05-19T21:56:08.466Z",
+  "updated_at": "2025-05-20T09:41:19.748Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "You can disable the ability for users to manage and customize file information columns in list view. This setting is typically found on a portal settings page or similar configuration option.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:19.748Z"
   },
   "usage": [
     {

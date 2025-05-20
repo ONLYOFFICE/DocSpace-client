@@ -3,11 +3,11 @@
   "content": "Rooms activity",
   "content_en_sha1_hash": "f71bd5b34d373a23601f919dff742323448e97ff",
   "created_at": "2025-05-19T21:30:54.089Z",
-  "updated_at": "2025-05-19T21:56:08.676Z",
+  "updated_at": "2025-05-20T09:42:28.692Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"RoomsActivity\" is used to display a notification title related to room activities. It appears in a toast component, indicating the type of notification (e.g., \"New activity in room\").",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:28.692Z"
   },
   "usage": [
     {

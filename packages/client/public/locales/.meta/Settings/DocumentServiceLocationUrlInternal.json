@@ -3,11 +3,11 @@
   "content": "Document Service address for internal requests from the {{productName}}",
   "content_en_sha1_hash": "2e77cbaa428ed8b0c1752c38f06e1df3760ca3af",
   "created_at": "2025-05-19T21:30:51.393Z",
-  "updated_at": "2025-05-19T21:56:08.523Z",
+  "updated_at": "2025-05-20T09:45:16.529Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for internal requests to access document service addresses related to the product name. It appears in a label within an input field, prompting users to enter or select their document service location URL internally.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:16.529Z"
   },
   "usage": [
     {

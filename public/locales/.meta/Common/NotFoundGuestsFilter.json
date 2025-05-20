@@ -3,11 +3,11 @@
   "content": "No guests found",
   "content_en_sha1_hash": "b91968e9823bf736346896bcc6a5923a94d5c5b3",
   "created_at": "2025-05-19T21:30:46.891Z",
-  "updated_at": "2025-05-19T21:56:08.364Z",
+  "updated_at": "2025-05-20T09:35:17.881Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"NotFoundGuestsFilter\" translation key is used to display a message when no guests are found in a contacts list. It appears as a header on an empty screen in the Home/ContactsBody section, informing users that there are no guest groups or members.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:17.881Z"
   },
   "usage": [
     {

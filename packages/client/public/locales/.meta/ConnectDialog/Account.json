@@ -3,11 +3,11 @@
   "content": "Account",
   "content_en_sha1_hash": "85dfa32c97d8618d1bea083609e2c8a29845abe5",
   "created_at": "2025-05-19T21:30:56.895Z",
-  "updated_at": "2025-05-19T21:56:08.097Z",
+  "updated_at": "2025-05-20T09:37:54.985Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the account label in a connect dialog, indicating that the user's account information should be saved. It appears as a title and header in a file upload confirmation dialog. Translators can use this context to ensure the label accurately reflects the UI's purpose.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:54.985Z"
   },
   "usage": [
     {

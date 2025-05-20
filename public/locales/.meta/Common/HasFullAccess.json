@@ -3,11 +3,11 @@
   "content": "He has full access to the room",
   "content_en_sha1_hash": "5539dff97c62fdc09da717399b225a9c3eeaa745",
   "created_at": "2025-05-19T21:30:45.734Z",
-  "updated_at": "2025-05-19T21:56:08.288Z",
+  "updated_at": "2025-05-20T09:35:57.724Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a message indicating that a user has full access to a room. It appears in an info panel on the Home page and is part of a tooltip that shows permissions related to room ownership or admin status.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:57.724Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Use this option if you want to get all data contained in the space as a file.",
   "content_en_sha1_hash": "72b06ec623764ca1cdcbbdbe125f16fc48240dee",
   "created_at": "2025-05-19T21:30:51.927Z",
-  "updated_at": "2025-05-19T21:56:08.419Z",
+  "updated_at": "2025-05-20T09:44:55.119Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to describe a button or option that allows users to download all data from a space as a file. It appears on a settings page and is intended to provide clarity for users navigating manual backup options. The text should help translators understand that this action will export all data from the space, providing context for accessibility and clarity needs.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:55.119Z"
   },
   "usage": [
     {

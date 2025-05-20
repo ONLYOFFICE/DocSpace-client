@@ -3,11 +3,11 @@
   "content": "Unbreakable AES-256 algorithm.",
   "content_en_sha1_hash": "1568d0980e87c187522b1560cb26e4baa6a5730e",
   "created_at": "2025-05-19T21:30:55.989Z",
-  "updated_at": "2025-05-19T21:56:07.998Z",
+  "updated_at": "2025-05-20T09:39:21.759Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to describe the security level of a private room, specifically emphasizing its unbreakable encryption using the AES-256 algorithm. It appears in the header of an empty root folder container and is intended for display to users, informing them about the robust security measures in place.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:21.759Z"
   },
   "usage": [
     {

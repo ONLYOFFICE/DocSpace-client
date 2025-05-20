@@ -3,11 +3,11 @@
   "content": "Disable notifications",
   "content_en_sha1_hash": "db3ec8bfad4224952386dfedb382aacc48341c19",
   "created_at": "2025-05-19T21:30:55.463Z",
-  "updated_at": "2025-05-19T21:56:08.685Z",
+  "updated_at": "2025-05-20T09:39:58.048Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a notification disablement option. It appears as \"Disable notifications\" and is typically seen in UI elements such as mute or notification settings buttons.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:58.048Z"
   },
   "usage": [
     {

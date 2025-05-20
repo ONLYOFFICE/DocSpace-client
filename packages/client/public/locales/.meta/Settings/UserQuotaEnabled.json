@@ -3,11 +3,11 @@
   "content": "User quota has been successfully enabled.",
   "content_en_sha1_hash": "54f6f93690a1ebe93c7db897adb749e9da5be3c2",
   "created_at": "2025-05-19T21:30:53.138Z",
-  "updated_at": "2025-05-19T21:56:08.793Z",
+  "updated_at": "2025-05-20T09:44:09.532Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"UserQuotaEnabled\" translation key is used to display a success message when user quota has been successfully enabled. It is typically displayed as a toast notification in an application, providing confirmation to users that their quotas have been set up correctly after enabling it.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:09.532Z"
   },
   "usage": [
     {

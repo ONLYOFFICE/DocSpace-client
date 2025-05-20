@@ -3,11 +3,11 @@
   "content": "Filling was stopped by <1>{{userName}}</1>",
   "content_en_sha1_hash": "093cefe1472a16419b884b4d52a6896fc3d841fb",
   "created_at": "2025-05-19T21:30:45.782Z",
-  "updated_at": "2025-05-19T21:56:08.755Z",
+  "updated_at": "2025-05-20T09:35:56.029Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a message indicating when filling was stopped by a user. It typically appears in a UI element related to filling or process management, such as a history summary or report. The exact appearance depends on the surrounding context and usage in the application.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:56.029Z"
   },
   "usage": [
     {

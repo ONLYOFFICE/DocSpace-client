@@ -3,11 +3,11 @@
   "content": "Not need enter settings",
   "content_en_sha1_hash": "7f28597ca75d3662220ad43431be4c426a249474",
   "created_at": "2025-05-19T21:30:49.916Z",
-  "updated_at": "2025-05-19T21:56:08.179Z",
+  "updated_at": "2025-05-20T09:46:41.462Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the text \"Not need enter settings\" in a settings plugin dialog. It appears as part of a button or similar UI element that indicates whether entering settings is necessary or not. The text helps users understand their current status and navigate accordingly.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:41.462Z"
   },
   "usage": [
     {

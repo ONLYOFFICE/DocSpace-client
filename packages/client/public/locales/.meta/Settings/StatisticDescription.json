@@ -3,11 +3,11 @@
   "content": "Here, you can view the detailed storage usage data in this {{productName}}.",
   "content_en_sha1_hash": "c25e93f04d549177e51dc81450d226b9b0dfe235",
   "created_at": "2025-05-19T21:30:52.761Z",
-  "updated_at": "2025-05-19T21:56:08.611Z",
+  "updated_at": "2025-05-20T09:44:24.908Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a general description of storage usage data in the product. It appears on a page within the Portal Settings categories and is rendered as a text label next to an icon indicating availability. The product name is used for contextualization.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:24.908Z"
   },
   "usage": [
     {

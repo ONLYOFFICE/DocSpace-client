@@ -3,11 +3,11 @@
   "content": "Access denied",
   "content_en_sha1_hash": "64343a83ad8c0b8e2789c32ca5ab1eb6abb614e0",
   "created_at": "2025-05-19T21:30:42.816Z",
-  "updated_at": "2025-05-19T21:56:08.731Z",
+  "updated_at": "2025-05-20T09:37:29.396Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key displays a message indicating that access has been denied, used when the user lacks permissions to perform an action. It is displayed in an error container within the login component and can also be triggered by OAuth errors, such as client permission denial.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:29.396Z"
   },
   "usage": [
     {

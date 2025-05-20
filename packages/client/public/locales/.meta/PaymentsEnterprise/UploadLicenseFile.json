@@ -3,11 +3,11 @@
   "content": "Upload license file",
   "content_en_sha1_hash": "6333456e22fe94df2bb16029236561d60ddcd9ea",
   "created_at": "2025-05-19T21:30:53.638Z",
-  "updated_at": "2025-05-19T21:56:08.571Z",
+  "updated_at": "2025-05-20T09:43:18.235Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Upload license file is a placeholder text used to prompt users to upload a license file when uploading a payment method in the Portal Settings categories. This text appears as a button label and is translated by assistive tools to facilitate internationalization of the application.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:18.235Z"
   },
   "usage": [
     {

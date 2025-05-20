@@ -3,11 +3,11 @@
   "content": "Media URL could not be loaded",
   "content_en_sha1_hash": "424dfd762048f75672a8f07db850ecfde8feaa14",
   "created_at": "2025-05-19T21:30:46.408Z",
-  "updated_at": "2025-05-19T21:56:08.759Z",
+  "updated_at": "2025-05-20T09:35:32.471Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The MediaError translation key displays an error message when a media URL cannot be loaded. It is used in a media viewer component to inform users of loading failures.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:32.471Z"
   },
   "usage": [
     {

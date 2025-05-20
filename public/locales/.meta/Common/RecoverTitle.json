@@ -3,11 +3,11 @@
   "content": "Access recovery",
   "content_en_sha1_hash": "27cdeed1252a2d59d9bf1278b5eb5a19975f0b4a",
   "created_at": "2025-05-19T21:30:47.772Z",
-  "updated_at": "2025-05-19T21:56:08.783Z",
+  "updated_at": "2025-05-20T09:34:46.800Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"RecoverTitle\" translation key is used to display the text \"Access recovery\" in a modal dialog that allows users to recover access. This key appears in the header of a modal dialog and provides context for the user's interaction.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:46.800Z"
   },
   "usage": [
     {

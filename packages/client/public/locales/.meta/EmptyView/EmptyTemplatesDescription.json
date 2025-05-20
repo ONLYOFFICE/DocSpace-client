@@ -3,11 +3,11 @@
   "content": "You can create a template from a room in the Room section",
   "content_en_sha1_hash": "3ae0630d6f2123e351bffec005e5b0541a21b4dd",
   "created_at": "2025-05-19T21:30:56.500Z",
-  "updated_at": "2025-05-19T21:56:08.010Z",
+  "updated_at": "2025-05-20T09:38:47.426Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key describes the text that will be displayed when creating a template from an empty room in the Room section. It explains how to proceed with the process and provides context for users navigating the Room templates page.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:47.426Z"
   },
   "usage": [
     {

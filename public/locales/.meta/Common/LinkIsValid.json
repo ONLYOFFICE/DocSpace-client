@@ -3,11 +3,11 @@
   "content": "The link is valid for <1>{{date}}</1>",
   "content_en_sha1_hash": "963d9b3a0d59aabbefdcf5cad77bdbe0fa590621",
   "created_at": "2025-05-19T21:30:46.198Z",
-  "updated_at": "2025-05-19T21:56:08.772Z",
+  "updated_at": "2025-05-20T09:35:39.596Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to format a message indicating the validity period of a link. It will be displayed in various UI components, such as expired options dialog, likely informing users about the remaining time before a link expires or becomes invalid.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:39.596Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Token revoked successfully",
   "content_en_sha1_hash": "40f07694c195b055dc6382019e7a4f7ad297f06a",
   "created_at": "2025-05-19T21:30:54.064Z",
-  "updated_at": "2025-05-19T21:56:08.493Z",
+  "updated_at": "2025-05-20T09:42:31.405Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a success message when a developer token is revoked. It appears in a toast notification after clicking the \"Revoke Developer Token\" button or closing the revoke dialog. The message confirms that the token has been successfully revoked.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:31.405Z"
   },
   "usage": [
     {

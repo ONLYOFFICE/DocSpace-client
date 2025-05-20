@@ -3,11 +3,11 @@
   "content": "Remove the unnecessary files or contact the {{productName}} administrator to increase the storage quota.",
   "content_en_sha1_hash": "09ed5b98a2721316678b9366deac8adabae0bf8a",
   "created_at": "2025-05-19T21:30:54.121Z",
-  "updated_at": "2025-05-19T21:56:08.024Z",
+  "updated_at": "2025-05-20T09:42:23.828Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a message when a user cannot be upgraded due to their storage quota. It informs the user that they can either remove unnecessary files or contact the {{productName}} administrator to increase the quota. This text appears as an error message in the QuotasBar component on a user's account page.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:23.828Z"
   },
   "usage": [
     {

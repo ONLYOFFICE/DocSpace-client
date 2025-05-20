@@ -3,11 +3,11 @@
   "content": "Request",
   "content_en_sha1_hash": "4aed03cac49d5e43da4e855a967286931a4d621a",
   "created_at": "2025-05-19T21:30:49.789Z",
-  "updated_at": "2025-05-19T21:56:08.503Z",
+  "updated_at": "2025-05-20T09:46:57.972Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"Request\" translation key is used to display the label for a request-related component, likely in a portal settings page or event details view. It appears as the title of a sub-component within the MessagesDetails, providing context for users interacting with webhooks. The translator should focus on providing a clear and concise description that accurately reflects this UI element's purpose.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:57.972Z"
   },
   "usage": [
     {

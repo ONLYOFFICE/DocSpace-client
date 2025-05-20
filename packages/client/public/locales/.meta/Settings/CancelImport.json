@@ -3,11 +3,11 @@
   "content": "Cancel import",
   "content_en_sha1_hash": "a4b5358b5d50407c88f27bef1900ad0b73db2767",
   "created_at": "2025-05-19T21:30:50.865Z",
-  "updated_at": "2025-05-19T21:56:08.403Z",
+  "updated_at": "2025-05-20T09:45:34.194Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a \"Cancel Import\" button in data import steps within the portal settings. It appears as a label on a save button and, when clicked, triggers cancellation of the import process.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:34.194Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Authentication failed (assertion attributes not found)",
   "content_en_sha1_hash": "1a1de4443c05c90af27dd1e2f5a63d1f61a7593e",
   "created_at": "2025-05-19T21:30:57.301Z",
-  "updated_at": "2025-05-19T21:56:08.745Z",
+  "updated_at": "2025-05-20T09:47:36.970Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display an error message when authentication fails due to missing assertion attributes. It is likely displayed in a login form or authentication dialog, notifying users that their credentials are invalid. The translator should consider the tone and nuance of this phrase to convey a clear and informative error message to users.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:36.970Z"
   },
   "usage": [
     {

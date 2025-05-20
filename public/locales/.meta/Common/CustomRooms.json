@@ -3,11 +3,11 @@
   "content": "Custom",
   "content_en_sha1_hash": "081ae3fdc403609cf6e760849ebb14117b7a50cb",
   "created_at": "2025-05-19T21:30:44.377Z",
-  "updated_at": "2025-05-19T21:56:08.224Z",
+  "updated_at": "2025-05-20T09:36:47.685Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the text \"Custom\" in various contexts throughout the application, typically appearing on filters or buttons related to custom rooms. The text is rendered using the \"Common:CustomRooms\" translation from the i18n module, which provides a consistent and localized experience for users.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:47.685Z"
   },
   "usage": [
     {

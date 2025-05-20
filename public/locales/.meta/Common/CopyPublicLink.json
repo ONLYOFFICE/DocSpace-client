@@ -3,11 +3,11 @@
   "content": "Copy public link",
   "content_en_sha1_hash": "a06b066cea1096a0cf9ea23b4ac87cb7383239a1",
   "created_at": "2025-05-19T21:30:43.800Z",
-  "updated_at": "2025-05-19T21:56:08.127Z",
+  "updated_at": "2025-05-20T09:36:55.104Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a button that copies a public link when clicked. In the context of a file upload process, this link can be shared publicly to provide quick access to the uploaded content. It appears as a primary button in a dialog box, allowing users to easily share their files.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:55.104Z"
   },
   "usage": [
     {

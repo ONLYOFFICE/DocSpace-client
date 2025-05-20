@@ -3,11 +3,11 @@
   "content": "Create folder",
   "content_en_sha1_hash": "e59f63fa517890d45d5ab20a380fe68f2302ef67",
   "created_at": "2025-05-19T21:30:55.036Z",
-  "updated_at": "2025-05-19T21:56:08.205Z",
+  "updated_at": "2025-05-20T09:40:37.576Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key describes the text displayed on a UI element that prompts users to create a folder, specifically in a Hotkeys panel. It is used for accessibility purposes to provide alternative text for keyboard navigation.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:37.576Z"
   },
   "usage": [
     {

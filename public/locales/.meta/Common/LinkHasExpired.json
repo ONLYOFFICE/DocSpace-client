@@ -3,11 +3,11 @@
   "content": "The link you followed has expired.",
   "content_en_sha1_hash": "6adda4f7fd5f80e95e77211ab0f5b7ab26d04a11",
   "created_at": "2025-05-19T21:30:46.189Z",
-  "updated_at": "2025-05-19T21:56:08.791Z",
+  "updated_at": "2025-05-20T09:35:39.944Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for displaying a message when a shared link has expired. It appears on an error page and is selected as the fallback option if another error message is not applicable. Translators should provide a clear and concise phrase to convey this status in their native language.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:39.944Z"
   },
   "usage": [
     {

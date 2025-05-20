@@ -3,11 +3,11 @@
   "content": "Show",
   "content_en_sha1_hash": "d97d1ee339e4eeaba8cac91dca37c8b4ec8f5501",
   "created_at": "2025-05-19T21:30:50.132Z",
-  "updated_at": "2025-05-19T21:56:08.538Z",
+  "updated_at": "2025-05-20T09:46:09.860Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key \"Show\" is used to display a button that toggles the visibility of settings or parameters in a user interface. It is rendered as part of a styled link component and appears in the layout of a portal settings page. Translators should provide an equivalent word for this text that conveys the same action, such as \"Toggle\", \"Activate\", or similar words depending on the intended context.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:09.860Z"
   },
   "usage": [
     {

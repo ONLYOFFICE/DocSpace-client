@@ -3,11 +3,11 @@
   "content": "Sync users",
   "content_en_sha1_hash": "ef3b2becca7b9d065d4fc56d36dab3c502ddc054",
   "created_at": "2025-05-19T21:30:54.308Z",
-  "updated_at": "2025-05-19T21:56:08.540Z",
+  "updated_at": "2025-05-20T09:41:58.500Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for the \"Sync users\" label on a button that triggers LDAP synchronization. The button appears in a sync container component and is disabled when LDAP integration is not enabled or UID is disabled.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:58.500Z"
   },
   "usage": [
     {

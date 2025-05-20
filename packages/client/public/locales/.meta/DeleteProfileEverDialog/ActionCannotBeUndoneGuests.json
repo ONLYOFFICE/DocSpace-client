@@ -3,11 +3,11 @@
   "content": "The selected disabled guests will be removed from {{productName}}. This action cannot be undone.",
   "content_en_sha1_hash": "30d31508654a982388d1de3331d59f4101062ba0",
   "created_at": "2025-05-19T21:30:56.650Z",
-  "updated_at": "2025-05-19T21:56:08.151Z",
+  "updated_at": "2025-05-20T09:38:30.895Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used in a \"Delete Profile Ever\" dialog to inform users that removing disabled guests from {{productName}} is an irreversible action. The text appears as a confirmation message when deleting guests without reassigning them.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:30.895Z"
   },
   "usage": [
     {

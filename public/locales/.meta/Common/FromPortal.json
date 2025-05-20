@@ -3,11 +3,11 @@
   "content": "From {{productName}}",
   "content_en_sha1_hash": "1073fa45036b8ba0fa65e7fd286576670d3c8398",
   "created_at": "2025-05-19T21:30:45.587Z",
-  "updated_at": "2025-05-19T21:56:07.981Z",
+  "updated_at": "2025-05-20T09:36:03.320Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for the \"From Portal\" label on a main button dropdown menu in an article component. The label displays a phrase that includes the product name, indicating where data will be uploaded from a portal.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:03.320Z"
   },
   "usage": [
     {

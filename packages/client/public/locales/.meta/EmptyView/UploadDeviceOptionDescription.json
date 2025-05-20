@@ -3,11 +3,11 @@
   "content": "Upload any type files from your personal device",
   "content_en_sha1_hash": "668f73764cc99938a3a442a47ee4a5d6a62e4d50",
   "created_at": "2025-05-19T21:30:56.543Z",
-  "updated_at": "2025-05-19T21:56:08.007Z",
+  "updated_at": "2025-05-20T09:38:41.632Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Upload any type of file from your personal device. This translation key is used to provide a descriptive text for a UI element that allows users to upload files from their device, appearing in an empty view container on mobile devices or as part of a dialog on desktop devices.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:41.632Z"
   },
   "usage": [
     {

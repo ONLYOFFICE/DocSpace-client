@@ -3,11 +3,11 @@
   "content": "Personal data, all files and folders in the {{sectionNameFirst}} and {{sectionNameSecond}} sections of this user will be permanently deleted.",
   "content_en_sha1_hash": "8e8526e553b6a2fa34f8aaf2a83da2857e899496",
   "created_at": "2025-05-19T21:30:56.684Z",
-  "updated_at": "2025-05-19T21:56:08.149Z",
+  "updated_at": "2025-05-20T09:38:24.953Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a warning message when deleting a user's profile, stating that personal files and folders will be permanently deleted from specific sections of the user's account. It appears in a dialog box where users confirm deletion, providing context for translators on the scope of data being removed.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:24.953Z"
   },
   "usage": [
     {

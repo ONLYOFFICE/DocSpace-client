@@ -3,11 +3,11 @@
   "content": "API Guide",
   "content_en_sha1_hash": "95bf0e870e2f1145571690754754b56cb523c59b",
   "created_at": "2025-05-19T21:30:50.490Z",
-  "updated_at": "2025-05-19T21:56:08.426Z",
+  "updated_at": "2025-05-20T09:45:49.582Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"APIGuide\" translation key is used to display the label for an API documentation button, which opens a new window to view API guide content when clicked. The label appears on a portal settings page, allowing users to access API documentation from within the application.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:49.582Z"
   },
   "usage": [
     {

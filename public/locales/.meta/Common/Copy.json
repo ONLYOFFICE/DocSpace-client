@@ -3,11 +3,11 @@
   "content": "Copy",
   "content_en_sha1_hash": "af74f7c5362aaee985bf8cda3dd75fc80751ce51",
   "created_at": "2025-05-19T21:30:43.729Z",
-  "updated_at": "2025-05-19T21:56:08.016Z",
+  "updated_at": "2025-05-20T09:36:57.822Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the text \"Copy\" in various UI elements, such as buttons and labels, to provide a clear indication of the action being performed, typically copying files or data. It appears in buttons within the FilesSelector component, EmbeddingPanel, and GetCodeDialog modal dialog, helping users understand the purpose of each button's functionality.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:57.822Z"
   },
   "usage": [
     {

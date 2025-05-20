@@ -3,11 +3,11 @@
   "content": "New document",
   "content_en_sha1_hash": "762b84690217181b9f127d2cfc1991e0892e844a",
   "created_at": "2025-05-19T21:30:46.732Z",
-  "updated_at": "2025-05-19T21:56:08.227Z",
+  "updated_at": "2025-05-20T09:35:23.514Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key displays a label for new document creation options in the editor. It is used in buttons and contexts where users can create a new document, such as file formats dropdowns or dialog prompts.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:23.514Z"
   },
   "usage": [
     {

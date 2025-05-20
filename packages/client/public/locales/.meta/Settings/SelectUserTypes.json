@@ -3,11 +3,11 @@
   "content": "Select user types",
   "content_en_sha1_hash": "e927a3a263b9c357799a240f53e6fae4a0f1665a",
   "created_at": "2025-05-19T21:30:52.590Z",
-  "updated_at": "2025-05-19T21:56:08.398Z",
+  "updated_at": "2025-05-20T09:44:31.682Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "\"Select user types\" is a label used to describe a step or option in a workflow that allows users to select different types of users. This translation key is used in UI elements such as buttons, dialog titles, and descriptions, where it appears in contexts like data import steps for Google Workspace, Nextcloud Workspace, and Onlyoffice Workspace.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:31.682Z"
   },
   "usage": [
     {

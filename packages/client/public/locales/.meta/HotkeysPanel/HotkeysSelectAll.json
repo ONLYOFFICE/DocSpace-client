@@ -3,11 +3,11 @@
   "content": "Select all visible folders and files",
   "content_en_sha1_hash": "c4590f28ac086a3a4600fb3c26cba40da425c029",
   "created_at": "2025-05-19T21:30:55.083Z",
-  "updated_at": "2025-05-19T21:56:08.211Z",
+  "updated_at": "2025-05-20T09:40:29.855Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"HotkeysSelectAll\" is used to display a tooltip or label indicating that pressing the Ctrl + A hotkey will select all visible folders and files in a UI element, such as a HotkeysPanel component. This message appears on a button within a panel.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:29.855Z"
   },
   "usage": [
     {

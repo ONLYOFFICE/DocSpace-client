@@ -3,11 +3,11 @@
   "content": "Info panel",
   "content_en_sha1_hash": "700658d503d6d7ee04433b62d51c26c408f588da",
   "created_at": "2025-05-19T21:30:45.909Z",
-  "updated_at": "2025-05-19T21:56:08.245Z",
+  "updated_at": "2025-05-20T09:35:50.978Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"InfoPanel\" translation key is used to display a panel's title in various places within the application, such as on toggle buttons and in section headers. It provides information about an info panel component, indicating its purpose as a container for displaying additional details. This translation key appears primarily on header elements.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:50.978Z"
   },
   "usage": [
     {

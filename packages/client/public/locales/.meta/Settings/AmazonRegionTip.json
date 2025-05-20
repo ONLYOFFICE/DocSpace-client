@@ -3,11 +3,11 @@
   "content": "Enter the AWS region where your Amazon bucket resides.",
   "content_en_sha1_hash": "8b30b6e8c00c36cc42c9387f6a8891f2053a78a2",
   "created_at": "2025-05-19T21:30:50.449Z",
-  "updated_at": "2025-05-19T21:56:08.418Z",
+  "updated_at": "2025-05-20T09:45:51.058Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a tooltip that provides guidance on selecting an AWS region for an Amazon bucket. It appears as a pop-up message when users interact with a region selection field in the portal settings. The purpose of this text is to inform users about the importance of choosing the correct AWS region for their bucket.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:51.058Z"
   },
   "usage": [
     {

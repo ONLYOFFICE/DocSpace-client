@@ -3,11 +3,11 @@
   "content": "Read now",
   "content_en_sha1_hash": "9f762253688c402f7f083fe41a6f024509cb2b8b",
   "created_at": "2025-05-19T21:30:53.621Z",
-  "updated_at": "2025-05-19T21:56:08.241Z",
+  "updated_at": "2025-05-20T09:43:21.068Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for the text \"Read now\" which appears as a button or link on an official documentation page, prompting users to upgrade to Pro. The text is displayed in a bold font and opens a new tab when clicked. Translators should provide a clear and concise equivalent of this text in their target language.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:21.068Z"
   },
   "usage": [
     {

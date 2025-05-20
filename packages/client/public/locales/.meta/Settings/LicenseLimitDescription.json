@@ -3,11 +3,11 @@
   "content": "The license limit counter consists of: already existing accounts in {{productName}} and new users that you want to import. If you import users who already have a {{productName}} account, they will not be counted again in the counter. Your {{productName}} license allows you to have a maximum of {{maxLimit}} users.",
   "content_en_sha1_hash": "48bb127c07477ce132bbeea9ad21b81eedf91b24",
   "created_at": "2025-05-19T21:30:51.797Z",
-  "updated_at": "2025-05-19T21:56:08.413Z",
+  "updated_at": "2025-05-20T09:45:00.533Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a descriptive message about the license limit counter in the Portal Settings page. It explains that the limit applies to existing accounts and new users being imported, without counting duplicate users. The text appears as a tooltip when clicking the \"Help\" button on this page.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:00.533Z"
   },
   "usage": [
     {

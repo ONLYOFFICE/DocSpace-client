@@ -3,11 +3,11 @@
   "content": "Mark as version",
   "content_en_sha1_hash": "9f8223cc47438831ca1519c318fd28060ec91cbc",
   "created_at": "2025-05-19T21:30:55.814Z",
-  "updated_at": "2025-05-19T21:56:08.681Z",
+  "updated_at": "2025-05-20T09:39:34.672Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to mark a file as a version. It appears as a button label on a version row in a version history page, allowing users to select a version to update or revert to. The exact text may vary depending on the selected context (revision or version).",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:34.672Z"
   },
   "usage": [
     {

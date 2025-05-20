@@ -3,11 +3,11 @@
   "content": "Notifications",
   "content_en_sha1_hash": "753a22b2eb617204efee4644795034b8ace1ee14",
   "created_at": "2025-05-19T21:30:54.085Z",
-  "updated_at": "2025-05-19T21:56:08.668Z",
+  "updated_at": "2025-05-20T09:42:29.264Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"Notifications\" translation key is used to display the title of a section that contains notification-related content in a dialog. It appears as part of a Connect Dialog login interface and indicates that it holds notifications information.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:29.264Z"
   },
   "usage": [
     {

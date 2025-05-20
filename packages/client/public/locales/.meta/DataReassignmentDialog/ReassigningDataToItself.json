@@ -3,11 +3,11 @@
   "content": "The process of data reassignment from user <0>{{fromUser}}</0> to user <1>{{toUser}}</1> <2>{{you}}</2> has started. Please note that it may take a considerable time.",
   "content_en_sha1_hash": "ca58b699fcc803526fdd659431542a2f947a0e32",
   "created_at": "2025-05-19T21:30:56.757Z",
-  "updated_at": "2025-05-19T21:56:08.132Z",
+  "updated_at": "2025-05-20T09:38:14.753Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a notification that announces the start of data reassignment from one user to another. It appears in a progress bar or similar indicator within a dialog or UI element, informing users about the process and potential time required.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:14.753Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Add members for joint editing in the room",
   "content_en_sha1_hash": "dd3d55974b01e5c72167bb188cb7036fcffbce1b",
   "created_at": "2025-05-19T21:30:56.522Z",
-  "updated_at": "2025-05-19T21:56:08.002Z",
+  "updated_at": "2025-05-20T09:38:44.571Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to describe the option to add members for joint editing in a room. It appears in a button or dialog related to sharing and inviting users to edit files. Translators should provide a clear and concise description of this action in various languages.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:44.571Z"
   },
   "usage": [
     {

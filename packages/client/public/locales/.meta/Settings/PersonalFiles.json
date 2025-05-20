@@ -3,11 +3,11 @@
   "content": "Personal files",
   "content_en_sha1_hash": "e79d8267d987d7b931ea816e2a68ba4f1a20029a",
   "created_at": "2025-05-19T21:30:52.154Z",
-  "updated_at": "2025-05-19T21:56:08.406Z",
+  "updated_at": "2025-05-20T09:44:49.539Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"PersonalFiles\" is used to display the phrase \"Personal files\" in a settings section. It appears as the label of a toggle button within an import settings dialog, allowing users to select or deselect importing personal files during data import.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:49.539Z"
   },
   "usage": [
     {

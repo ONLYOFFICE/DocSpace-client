@@ -3,11 +3,11 @@
   "content": "Last modified by",
   "content_en_sha1_hash": "0bd7b845232486d9f552a294c8d4177d957bf0c3",
   "created_at": "2025-05-19T21:30:54.889Z",
-  "updated_at": "2025-05-19T21:56:08.248Z",
+  "updated_at": "2025-05-20T09:40:53.493Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the phrase \"Last modified by\" in the user interface, typically appearing next to or below a file timestamp. It is likely used on a file info panel or similar UI element, where it provides context about who last edited the file. Translators should focus on localizing this text to provide clarity and consistency across different languages and regions.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:53.493Z"
   },
   "usage": [
     {

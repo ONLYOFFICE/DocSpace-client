@@ -3,11 +3,11 @@
   "content": "Edit link",
   "content_en_sha1_hash": "ae7b279c96200b853008a352fa110ac2565f3dc5",
   "created_at": "2025-05-19T21:30:55.508Z",
-  "updated_at": "2025-05-19T21:56:08.195Z",
+  "updated_at": "2025-05-20T09:39:55.402Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a button that allows users to edit links within files. The text will vary depending on the file type and access permissions.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:55.402Z"
   },
   "usage": [
     {

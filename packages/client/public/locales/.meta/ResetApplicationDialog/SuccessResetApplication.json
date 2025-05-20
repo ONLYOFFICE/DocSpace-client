@@ -3,11 +3,11 @@
   "content": "Application settings for authentication have been successfully reset.",
   "content_en_sha1_hash": "04485034a5d6d72d584937bd147b79bc74b54daa",
   "created_at": "2025-05-19T21:30:53.329Z",
-  "updated_at": "2025-05-19T21:56:08.173Z",
+  "updated_at": "2025-05-20T09:43:57.187Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a success message that is displayed when application authentication settings have been successfully reset. It appears as a toast notification in a Reset Application Dialog.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:57.187Z"
   },
   "usage": [
     {

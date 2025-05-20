@@ -3,11 +3,11 @@
   "content": "Overwrite with version update",
   "content_en_sha1_hash": "85c42df31bdf2069fe66ddcdd0fbefbdae0a2df4",
   "created_at": "2025-05-19T21:30:47.196Z",
-  "updated_at": "2025-05-19T21:56:08.091Z",
+  "updated_at": "2025-05-20T09:35:08.456Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a title that instructs users to overwrite existing files or folders when merging changes. It appears in conflict resolution dialogs and is typically displayed as a button label or header in UI components. The user is prompted to overwrite existing content with the new version update.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:08.456Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Items in Trash are automatically deleted after 30 days.",
   "content_en_sha1_hash": "efb29be1a65077ab83e127bff8d6e583328edadd",
   "created_at": "2025-05-19T21:30:56.270Z",
-  "updated_at": "2025-05-19T21:56:08.373Z",
+  "updated_at": "2025-05-20T09:39:01.764Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The TrashErasureWarning translation key is used to display a notification that files in the trash will be automatically deleted after 30 days. This message appears on desktop devices as part of a warning section, reminding users of this retention policy. The translator should ensure the wording accurately conveys this automated deletion process.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:01.764Z"
   },
   "usage": [
     {

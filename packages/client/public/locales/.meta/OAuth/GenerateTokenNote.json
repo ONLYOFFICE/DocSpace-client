@@ -3,11 +3,11 @@
   "content": "<strong>Note:</strong> If you generate a new token, the previous one will no longer be valid.",
   "content_en_sha1_hash": "f521006595ab27df60cadaa644588ccfca4ed058",
   "created_at": "2025-05-19T21:30:53.897Z",
-  "updated_at": "2025-05-19T21:56:08.494Z",
+  "updated_at": "2025-05-20T09:42:46.827Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a note that informs users about the implications of generating a new token, explaining that the previous one will become invalid. It appears in a dialog component, specifically below a button related to OAuth token generation. The goal is to provide context for translators to ensure that this message accurately communicates its meaning and purpose in different languages.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:46.827Z"
   },
   "usage": [
     {

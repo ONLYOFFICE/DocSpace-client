@@ -3,11 +3,11 @@
   "content": "Remove guest",
   "content_en_sha1_hash": "f4c08fab02f6f28372817ad4c2797960ec7e89d6",
   "created_at": "2025-05-19T21:30:53.496Z",
-  "updated_at": "2025-05-19T21:56:08.170Z",
+  "updated_at": "2025-05-20T09:43:37.647Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"RemoveGuest\" is used to display the text that will be shown when removing a selected guest from a contact. This text appears in a remove dialog and should convey the action being performed.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:37.647Z"
   },
   "usage": [
     {

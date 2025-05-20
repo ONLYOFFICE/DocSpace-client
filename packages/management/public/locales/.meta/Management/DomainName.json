@@ -3,11 +3,11 @@
   "content": "Domain name",
   "content_en_sha1_hash": "79f88a9bb9f4ec699c8ec64acf057a2ef9a2bf7c",
   "created_at": "2025-05-19T21:30:57.436Z",
-  "updated_at": "2025-05-19T21:56:08.814Z",
+  "updated_at": "2025-05-20T09:47:58.863Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"DomainName\" translation key is used to translate the text \"Domain name\" in a change domain dialog component. It appears as a label on a form or input field where users can edit their domain information.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:58.863Z"
   },
   "usage": [
     {

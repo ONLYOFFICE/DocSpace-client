@@ -3,11 +3,11 @@
   "content": "Sorry, this file format isn't supported",
   "content_en_sha1_hash": "44faa0a5086202b59ef30646e8573a659f5c5bc0",
   "created_at": "2025-05-19T21:30:46.955Z",
-  "updated_at": "2025-05-19T21:56:08.682Z",
+  "updated_at": "2025-05-20T09:35:15.491Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display an error message when a file format is not supported, typically appearing as a notification in UI elements such as the Avatar Editor Dialog or File Input component. The intended message informs the user that the selected file cannot be processed due to its unsupported format.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:15.491Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Manage",
   "content_en_sha1_hash": "bf58d17e561b1b858e35f9202f811297dac2e9db",
   "created_at": "2025-05-19T21:30:54.083Z",
-  "updated_at": "2025-05-19T21:56:08.683Z",
+  "updated_at": "2025-05-20T09:42:29.557Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the English phrase \"Manage\" as part of a notification management interface. It appears in various UI elements, including buttons and links, allowing users to access notification settings or options.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:29.557Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Show backup codes",
   "content_en_sha1_hash": "ef39b662d908a8305219bddff4da149f743f9ad9",
   "created_at": "2025-05-19T21:30:53.382Z",
-  "updated_at": "2025-05-19T21:56:08.674Z",
+  "updated_at": "2025-05-20T09:43:49.517Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"ShowBackupCodes\" represents a button label that displays instructions to show backup codes for two-factor authentication. It is used in a login settings page, where clicking this button will toggle a dialog open for managing backup codes. Translators should ensure the phrase provides clarity and accuracy in this context.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:49.517Z"
   },
   "usage": [
     {

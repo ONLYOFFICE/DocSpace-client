@@ -3,11 +3,11 @@
   "content": "Action",
   "content_en_sha1_hash": "97c89a4d6630adeb18fa12ba9976a31413fe293e",
   "created_at": "2025-05-19T21:30:42.859Z",
-  "updated_at": "2025-05-19T21:56:08.581Z",
+  "updated_at": "2025-05-20T09:37:28.239Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"Action\" is used to display the English content \"Action\", which likely serves as a title or header in a UI element, possibly in a table header or a settings page, guiding users to take a specific action.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:28.239Z"
   },
   "usage": [
     {

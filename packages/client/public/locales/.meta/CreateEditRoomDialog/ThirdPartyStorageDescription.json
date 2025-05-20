@@ -3,11 +3,11 @@
   "content": "Use third-party services as data storage for this room. You can create a new folder or select the existing one in the connected storage.",
   "content_en_sha1_hash": "8ee654276c6565ec4cf6f3acaa8d7446755d929b",
   "created_at": "2025-05-19T21:30:56.842Z",
-  "updated_at": "2025-05-19T21:56:08.117Z",
+  "updated_at": "2025-05-20T09:38:02.444Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to provide a description for a toggle button that allows users to enable third-party storage services for data in a room. The description is intended to help users understand the purpose of this option and what it does when enabled. It appears in various UI elements, including dialogs and form fields related to data storage options.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:02.444Z"
   },
   "usage": [
     {

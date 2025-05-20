@@ -3,11 +3,11 @@
   "content": "Groups were deleted successfully",
   "content_en_sha1_hash": "583bba7040608f8de20a30e546a10a26271233d7",
   "created_at": "2025-05-19T21:30:53.526Z",
-  "updated_at": "2025-05-19T21:56:08.708Z",
+  "updated_at": "2025-05-20T09:43:32.982Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"Groups were deleted successfully\" translation key is used to display a success message after deleting groups. It will appear when the user deletes a group and is associated with a confirmation dialog or button action in the GroupsStore.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:32.982Z"
   },
   "usage": [
     {

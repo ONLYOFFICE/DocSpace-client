@@ -3,11 +3,11 @@
   "content": "Disable",
   "content_en_sha1_hash": "9a7d4e0687b14e2b7cda406900b802782cd50a62",
   "created_at": "2025-05-19T21:30:53.466Z",
-  "updated_at": "2025-05-19T21:56:08.081Z",
+  "updated_at": "2025-05-20T09:43:42.582Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used as a button label in various contexts, including a change user status dialog and options store. It corresponds to the action of disabling or removing users from systems, such as guests or individuals. Translators should provide a clear and concise equivalent for this context.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:42.582Z"
   },
   "usage": [
     {

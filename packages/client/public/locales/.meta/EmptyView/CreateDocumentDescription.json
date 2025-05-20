@@ -3,11 +3,11 @@
   "content": "Take advantage of vast word processing functionality.",
   "content_en_sha1_hash": "722e0e14c0c91f4013c10e4fad822951b0ab6b0d",
   "created_at": "2025-05-19T21:30:56.447Z",
-  "updated_at": "2025-05-19T21:56:08.004Z",
+  "updated_at": "2025-05-20T09:38:53.298Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to provide a descriptive text for a button or action that enables users to create new documents. The text appears on a button in an interface where users can create new content.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:53.298Z"
   },
   "usage": [
     {

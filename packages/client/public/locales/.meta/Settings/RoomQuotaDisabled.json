@@ -3,11 +3,11 @@
   "content": "Room quota has been successfully disabled.",
   "content_en_sha1_hash": "bc508edc6864a5a5ff719032d851c846cc501122",
   "created_at": "2025-05-19T21:30:52.442Z",
-  "updated_at": "2025-05-19T21:56:08.794Z",
+  "updated_at": "2025-05-20T09:44:37.479Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a success message when room quota has been successfully disabled. It is likely used in an UI element such as a button or dialog that triggers this functionality. The text appears after attempting to disable room quota, and its translation will be shown depending on the current room quota status.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:37.479Z"
   },
   "usage": [
     {

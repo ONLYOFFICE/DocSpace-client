@@ -3,11 +3,11 @@
   "content": "Day of the week",
   "content_en_sha1_hash": "a2dfedeffd1ead187411349e305b1fe627303452",
   "created_at": "2025-05-19T21:30:44.414Z",
-  "updated_at": "2025-05-19T21:56:08.752Z",
+  "updated_at": "2025-05-20T09:36:46.238Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"DayOfTheWeek\" translation key represents the English word for a specific day of the week, used in a calendar component that displays options for selecting weekdays. This text appears as an option label in a select menu within the WeekDays component.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:46.238Z"
   },
   "usage": [
     {

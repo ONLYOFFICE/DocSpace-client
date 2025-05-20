@@ -3,11 +3,11 @@
   "content": "Payload URL",
   "content_en_sha1_hash": "a097fab3ebda07ac0c8349da3156f6eb4496cb07",
   "created_at": "2025-05-19T21:30:49.784Z",
-  "updated_at": "2025-05-19T21:56:08.516Z",
+  "updated_at": "2025-05-20T09:46:58.642Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"PayloadUrl\" translation key is used to display a label for entering or selecting a URL. In the context of a Webhook Dialog component, this text appears as a placeholder and label for an input field where users can enter or select a payload URL.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:58.642Z"
   },
   "usage": [
     {

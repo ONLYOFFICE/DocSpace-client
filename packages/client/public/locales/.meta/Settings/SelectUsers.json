@@ -3,11 +3,11 @@
   "content": "Select users",
   "content_en_sha1_hash": "8f2012e6097eda31bbf0f7e51ae403b08862e983",
   "created_at": "2025-05-19T21:30:52.552Z",
-  "updated_at": "2025-05-19T21:56:08.397Z",
+  "updated_at": "2025-05-20T09:44:33.312Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "\"Select users\" is used to describe a step or action in data import processes within Google Workspace and OnlyOffice Workspaces. It appears on a settings page as part of a stepper component, guiding users through selecting specific files or users for import.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:33.312Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Do you really want to leave this room? You will be able to join it again via new invitation by a room admin.",
   "content_en_sha1_hash": "13519137916019126edd61d57af7ca5d5cc99ed0",
   "created_at": "2025-05-19T21:30:56.317Z",
-  "updated_at": "2025-05-19T21:56:08.165Z",
+  "updated_at": "2025-05-20T09:38:58.459Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a confirmation message that appears when a user attempts to leave a room. The message informs them they will be able to rejoin via a new invitation by an admin. It is displayed in a dialog box within the Leave Room Dialog component.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:58.459Z"
   },
   "usage": [
     {

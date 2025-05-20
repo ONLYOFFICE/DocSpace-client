@@ -3,11 +3,11 @@
   "content": "The correspondence of the Single Sign-On attributes to the entries of the 'Accounts' section.",
   "content_en_sha1_hash": "c7591a0a501267c1ec099b33a718569ff4884c4e",
   "created_at": "2025-05-19T21:30:50.065Z",
-  "updated_at": "2025-05-19T21:56:08.548Z",
+  "updated_at": "2025-05-20T09:46:19.251Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a tooltip that describes the purpose of matching Single Sign-On attributes to account entries in the 'Accounts' section. It appears as an icon button next to a form field on a settings page. Translators should provide a clear and concise explanation of this process for internationalization purposes.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:19.251Z"
   },
   "usage": [
     {

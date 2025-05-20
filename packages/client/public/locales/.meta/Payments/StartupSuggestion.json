@@ -3,11 +3,11 @@
   "content": "Do more with {{planName}} plan",
   "content_en_sha1_hash": "e2ed747ebe643fc02022f1f0dfa21047a14d8063",
   "created_at": "2025-05-19T21:30:53.730Z",
-  "updated_at": "2025-05-19T21:56:08.566Z",
+  "updated_at": "2025-05-20T09:43:05.651Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a suggestion for users who have selected a payment plan. The suggested action is to \"Do more with\" the currently chosen plan, which helps guide users towards exploring further benefits of their plan. This text appears in the UI as part of a payment container element.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:05.651Z"
   },
   "usage": [
     {

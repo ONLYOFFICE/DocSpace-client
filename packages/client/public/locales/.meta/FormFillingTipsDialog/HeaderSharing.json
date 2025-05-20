@@ -3,11 +3,11 @@
   "content": "Quick sharing",
   "content_en_sha1_hash": "660b23a00ba73a3e08d794e2f110b7cb5498b3c5",
   "created_at": "2025-05-19T21:30:55.137Z",
-  "updated_at": "2025-05-19T21:56:08.756Z",
+  "updated_at": "2025-05-20T09:40:21.758Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a button label that enables quick sharing, likely appearing in a file guidance component. The text \"Quick sharing\" will be displayed as the label when translated, allowing users to easily access this feature within the UI.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:21.758Z"
   },
   "usage": [
     {

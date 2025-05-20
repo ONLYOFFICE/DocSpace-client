@@ -3,11 +3,11 @@
   "content": "Install now",
   "content_en_sha1_hash": "8607e4bae1d0e9652aa19e26a8ea7706b6066429",
   "created_at": "2025-05-19T21:30:53.433Z",
-  "updated_at": "2025-05-19T21:56:08.667Z",
+  "updated_at": "2025-05-20T09:43:45.817Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a button label that says \"Install now\" and is typically displayed as a link in private room invitations. Its purpose is to prompt users to initiate the installation process of a privacy-related feature.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:45.817Z"
   },
   "usage": [
     {

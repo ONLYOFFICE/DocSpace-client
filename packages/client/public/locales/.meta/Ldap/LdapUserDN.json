@@ -3,11 +3,11 @@
   "content": "User DN",
   "content_en_sha1_hash": "cd3e5d959eafef42593d538687647d5c129dbd20",
   "created_at": "2025-05-19T21:30:54.326Z",
-  "updated_at": "2025-05-19T21:56:08.533Z",
+  "updated_at": "2025-05-20T09:41:56.506Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"LdapUserDN\" translation key is used to display the user's DN in a LDAP connection settings. It is labeled as \"User DN\" and appears on a form, likely a button or input field, where users can enter their distinguished name for LDAP authentication.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:56.506Z"
   },
   "usage": [
     {

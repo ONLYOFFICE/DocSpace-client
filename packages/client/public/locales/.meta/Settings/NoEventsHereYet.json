@@ -3,11 +3,11 @@
   "content": "No events here yet",
   "content_en_sha1_hash": "d5dabb69303d00324a084b615296dcb2481cba3d",
   "created_at": "2025-05-19T21:30:52.033Z",
-  "updated_at": "2025-05-19T21:56:08.583Z",
+  "updated_at": "2025-05-20T09:44:52.675Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a message when there are currently no events logged or tracked in an audit trail. It appears as a header text on a screen where user activity is expected to be logged. Translators should provide a localized version of this phrase to indicate that no data is available.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:52.675Z"
   },
   "usage": [
     {

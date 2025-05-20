@@ -3,11 +3,11 @@
   "content": "File name",
   "content_en_sha1_hash": "09979a78c9954035af250cb7f4619ed9d606f0ef",
   "created_at": "2025-05-19T21:30:57.128Z",
-  "updated_at": "2025-05-19T21:56:08.709Z",
+  "updated_at": "2025-05-20T09:47:20.342Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "File name is displayed as a header in a footer input field within a select folder dialog, prompting users to enter or select a file name. This translation key is used in a save button's tooltip and modal footer.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:20.342Z"
   },
   "usage": [
     {

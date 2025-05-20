@@ -3,11 +3,11 @@
   "content": "Number of rooms according to your tariff plan: {{currentValue}}/{{maxValue}}",
   "content_en_sha1_hash": "50c21689104208a689abc871f03f39356411633c",
   "created_at": "2025-05-19T21:30:53.710Z",
-  "updated_at": "2025-05-19T21:56:08.163Z",
+  "updated_at": "2025-05-20T09:43:08.374Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key displays the number of rooms available according to a user's tariff plan. It is used in an invite quota warning dialog to show the current room count and maximum available rooms by quota.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:08.374Z"
   },
   "usage": [
     {

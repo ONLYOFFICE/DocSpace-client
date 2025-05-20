@@ -3,11 +3,11 @@
   "content": "Document management",
   "content_en_sha1_hash": "24950bb532a5d93538689a3039a5e3b8266d0a27",
   "created_at": "2025-05-19T21:30:57.073Z",
-  "updated_at": "2025-05-19T21:56:08.237Z",
+  "updated_at": "2025-05-20T09:37:31.405Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key \"DocumentManagement\" is used to display the title \"Document Management\" in a UI element. It appears as a label for a content section on an About page, likely used to introduce or highlight document management features within a software application.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:31.405Z"
   },
   "usage": [
     {

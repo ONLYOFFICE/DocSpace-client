@@ -3,11 +3,11 @@
   "content": "Hourly notifications. Stay updated about all activity in your rooms.",
   "content_en_sha1_hash": "b3d6568bc7ee244821ee54526782a44ca24a0131",
   "created_at": "2025-05-19T21:30:54.090Z",
-  "updated_at": "2025-05-19T21:56:08.676Z",
+  "updated_at": "2025-05-20T09:42:28.422Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for the description of a toggle button that controls room activity notifications. It appears in a UI component responsible for managing email subscriptions. The text informs users about the purpose of this toggle.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:28.422Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Payload is too large to display.",
   "content_en_sha1_hash": "2438fb4af4a1a90475310b4c809c6e49d9f54ebe",
   "created_at": "2025-05-19T21:30:49.782Z",
-  "updated_at": "2025-05-19T21:56:08.506Z",
+  "updated_at": "2025-05-20T09:46:59.025Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a message when the response payload exceeds a certain size limit. It is intended to be shown as an alternative label in a button. Translators should provide a concise and clear equivalent for this message that can be displayed in various UI contexts, such as buttons or error messages.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:59.025Z"
   },
   "usage": [
     {

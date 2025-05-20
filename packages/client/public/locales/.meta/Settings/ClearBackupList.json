@@ -3,11 +3,11 @@
   "content": "Delete all backups",
   "content_en_sha1_hash": "5cabdc609272c7a869a9ffb8c11071fd32fff07a",
   "created_at": "2025-05-19T21:30:50.912Z",
-  "updated_at": "2025-05-19T21:56:08.423Z",
+  "updated_at": "2025-05-20T09:45:32.449Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for the text \"Delete all backups\" which appears as a button label on a file management page in a data backup/restore interface. The purpose of this text is to provide a clear instruction to the user when deleting all backups.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:32.449Z"
   },
   "usage": [
     {

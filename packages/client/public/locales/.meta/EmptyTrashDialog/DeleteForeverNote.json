@@ -3,11 +3,11 @@
   "content": "All items from the {{sectionName}} section will be deleted forever. You won’t be able to restore them.",
   "content_en_sha1_hash": "f63c0cba122e23660d36c3dff04f53bc9ffd90a4",
   "created_at": "2025-05-19T21:30:56.569Z",
-  "updated_at": "2025-05-19T21:56:08.158Z",
+  "updated_at": "2025-05-20T09:38:38.891Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a message when deleting items from a section permanently. It appears as part of a modal dialog and informs users that deleted items cannot be restored. The translation should convey a clear warning about data loss without being overly alarming or technical.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:38.891Z"
   },
   "usage": [
     {

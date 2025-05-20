@@ -3,11 +3,11 @@
   "content": "The selected guests will be moved to the {{membersSection}} section and assigned the User type. Users have their own {{documentsSection}} section, are able to create and edit files, but aren't able to create rooms.",
   "content_en_sha1_hash": "1dde646a293ab068dcf80ea51f4242d063d9863f",
   "created_at": "2025-05-19T21:30:56.916Z",
-  "updated_at": "2025-05-19T21:56:08.085Z",
+  "updated_at": "2025-05-20T09:37:52.618Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"ChangeGuestsTypeMessageMulti\" is used to display a message explaining the implications of assigning a User type to selected guests. This message appears in a change user type dialog and informs users about their new permissions, including access to files but not room creation capabilities.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:52.618Z"
   },
   "usage": [
     {

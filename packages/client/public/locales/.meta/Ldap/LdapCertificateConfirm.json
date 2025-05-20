@@ -3,11 +3,11 @@
   "content": "Confirm certificate",
   "content_en_sha1_hash": "69ce41b2cdf9a76e9b116cc810c60bfb9987f24f",
   "created_at": "2025-05-19T21:30:54.181Z",
-  "updated_at": "2025-05-19T21:56:08.528Z",
+  "updated_at": "2025-05-20T09:42:14.904Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for the label \"Confirm certificate\" in a modal dialog that confirms an LDAP certificate. It is displayed as the header of the dialog and appears on a modal window within a settings page for integrating an LDAP connection.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:14.904Z"
   },
   "usage": [
     {

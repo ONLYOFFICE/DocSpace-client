@@ -3,11 +3,11 @@
   "content": "Nothing found",
   "content_en_sha1_hash": "fed1f5cd946a327d187f842db23041ecd3553315",
   "created_at": "2025-05-19T21:30:46.918Z",
-  "updated_at": "2025-05-19T21:56:08.242Z",
+  "updated_at": "2025-05-20T09:35:16.775Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for \"Nothing found\" content, appearing as a header or button text in various screens of the application, such as an empty screen filter or gallery page. It indicates that no data or items were found based on user filters or criteria.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:16.775Z"
   },
   "usage": [
     {

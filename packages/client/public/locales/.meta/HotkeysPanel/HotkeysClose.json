@@ -3,11 +3,11 @@
   "content": "Close/Undo action",
   "content_en_sha1_hash": "f35d7016328d50eb3048f8ac879c03bc5d042b61",
   "created_at": "2025-05-19T21:30:55.031Z",
-  "updated_at": "2025-05-19T21:56:08.207Z",
+  "updated_at": "2025-05-20T09:40:38.538Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the label \"Close/Undo action\" and its purpose is to indicate that pressing a hotkey or button will undo an action, likely in a file editing application. The text appears in a hotkeys panel on the preview actions block.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:38.538Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "You can open this file from the desktop app's interface once your cloud is connected",
   "content_en_sha1_hash": "a56cf9923ee70342d9e2669ee3ab4de8d039979a",
   "created_at": "2025-05-19T21:30:53.425Z",
-  "updated_at": "2025-05-19T21:56:08.667Z",
+  "updated_at": "2025-05-20T09:43:47.255Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a message explaining that users can access files from the desktop app's interface once their cloud connection is established. The text appears in a UI element related to private rooms or file sharing, providing context for users.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:47.255Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Language",
   "content_en_sha1_hash": "89b86ab0e66f527166d98df92ddbcf5416ed58f6",
   "created_at": "2025-05-19T21:30:46.038Z",
-  "updated_at": "2025-05-19T21:56:08.388Z",
+  "updated_at": "2025-05-20T09:35:45.950Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the label \"Language\" in a UI component, specifically in a profile settings section. It appears as a title and has a corresponding help button, providing context for users to select their preferred language.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:45.950Z"
   },
   "usage": [
     {

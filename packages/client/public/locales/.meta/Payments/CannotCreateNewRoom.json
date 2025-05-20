@@ -3,11 +3,11 @@
   "content": "Room cannot be created",
   "content_en_sha1_hash": "1b757c49f0d42f3c24e3e1addc3b7a264bd3589e",
   "created_at": "2025-05-19T21:30:53.667Z",
-  "updated_at": "2025-05-19T21:56:08.162Z",
+  "updated_at": "2025-05-20T09:43:14.878Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a message when attempting to create a new room, indicating that the action is not possible. It appears in the UI of an invitation quota warning dialog, specifically on a button or element prompting the user to refrain from creating a new room. Translators should provide a clear equivalent phrase to convey this message to users in different languages.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:14.878Z"
   },
   "usage": [
     {

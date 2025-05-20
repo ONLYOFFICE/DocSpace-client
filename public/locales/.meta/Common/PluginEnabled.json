@@ -3,11 +3,11 @@
   "content": "Plugin enabled",
   "content_en_sha1_hash": "3063607d780a2074562d9247ffab948b5167f20d",
   "created_at": "2025-05-19T21:30:47.389Z",
-  "updated_at": "2025-05-19T21:56:08.699Z",
+  "updated_at": "2025-05-20T09:35:01.065Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a success message that appears when a plugin is enabled or disabled. It provides feedback to the user about the result of an action in the Plugin Store UI.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:01.065Z"
   },
   "usage": [
     {

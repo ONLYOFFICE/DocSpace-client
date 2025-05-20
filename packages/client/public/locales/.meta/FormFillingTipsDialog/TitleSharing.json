@@ -3,11 +3,11 @@
   "content": "Invite other {{productName}} members to the room to fill out the uploaded PDF forms. Copy a public access link to share the room with external users.",
   "content_en_sha1_hash": "ad1e0c87a150973b6306b6c592210f7a01ea10ce",
   "created_at": "2025-05-19T21:30:55.146Z",
-  "updated_at": "2025-05-19T21:56:08.757Z",
+  "updated_at": "2025-05-20T09:40:20.251Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to describe a tip on how to share a room for filling out PDF forms in a user interface. It explains that users should invite other members of {{productName}} to join and copy a public access link to share the room with external users. This appears to be part of a dialog or guidance component, likely related to sharing or inviting others to complete a form.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:20.251Z"
   },
   "usage": [
     {

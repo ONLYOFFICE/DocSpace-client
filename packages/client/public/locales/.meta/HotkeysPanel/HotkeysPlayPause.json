@@ -3,11 +3,11 @@
   "content": "Play/Pause",
   "content_en_sha1_hash": "ebb1e1e891810d856a734c1b4498ff9b6f11d59c",
   "created_at": "2025-05-19T21:30:55.074Z",
-  "updated_at": "2025-05-19T21:56:08.207Z",
+  "updated_at": "2025-05-20T09:40:31.259Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the text \"Play/Pause\" in various hotkeys contexts within the application, likely on a panel or settings screen where users can customize shortcut keys. It appears alongside other hotkey inputs and controls.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:31.259Z"
   },
   "usage": [
     {

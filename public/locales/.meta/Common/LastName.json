@@ -3,11 +3,11 @@
   "content": "Last name",
   "content_en_sha1_hash": "adec36a821f81a6990b1e65d9e4ac5fb8ee2a205",
   "created_at": "2025-05-19T21:30:46.065Z",
-  "updated_at": "2025-05-19T21:56:08.070Z",
+  "updated_at": "2025-05-20T09:35:44.812Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"LastName\" is used to display the label for a surname field in various UI components, such as dialogs and form fields. It appears on screens where user name information is being edited or inputted, typically on a line below or next to the first name field.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:44.812Z"
   },
   "usage": [
     {

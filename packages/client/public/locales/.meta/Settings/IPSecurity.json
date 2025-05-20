@@ -3,11 +3,11 @@
   "content": "IP Security",
   "content_en_sha1_hash": "6384288df2a9807354de1df765c871288d7c2492",
   "created_at": "2025-05-19T21:30:51.718Z",
-  "updated_at": "2025-05-19T21:56:08.576Z",
+  "updated_at": "2025-05-20T09:45:03.420Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"IPSecurity\" translation key is used to display the title and subtitle of the security category in the portal settings. It appears as a heading on mobile views and as part of the desktop layout, indicating access to IP-related security features.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:03.420Z"
   },
   "usage": [
     {

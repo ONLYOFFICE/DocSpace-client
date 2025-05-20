@@ -3,11 +3,11 @@
   "content": "Your subscription remains active, but we recommend contacting the {{productName}} owner to choose a new Payer.",
   "content_en_sha1_hash": "0455280d38700426ab05131b3ef4c68418095913",
   "created_at": "2025-05-19T21:30:53.695Z",
-  "updated_at": "2025-05-19T21:56:08.564Z",
+  "updated_at": "2025-05-20T09:43:10.796Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key displays a message to an admin user when their subscription is active but their email address is invalid. It prompts the admin to contact the product owner to choose a new payer. This text appears in the Payer Information Container UI.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:10.796Z"
   },
   "usage": [
     {

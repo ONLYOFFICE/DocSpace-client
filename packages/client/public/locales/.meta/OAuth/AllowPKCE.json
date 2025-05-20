@@ -3,11 +3,11 @@
   "content": "Allow public client (PKCE)",
   "content_en_sha1_hash": "1d8744c94f9db618bd1791df5c0f1839c47e717d",
   "created_at": "2025-05-19T21:30:53.787Z",
-  "updated_at": "2025-05-19T21:56:08.485Z",
+  "updated_at": "2025-05-20T09:43:00.339Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"AllowPKCE\" translation key is used to describe a toggle switch that enables public client (PKCE) authentication in an OAuth configuration. This text appears as a help button next to the toggle, providing context for users who need assistance understanding PKCE authentication. Translators should ensure this description accurately reflects the intended functionality and technical term \"PKCE\" to maintain consistency across languages.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:00.339Z"
   },
   "usage": [
     {

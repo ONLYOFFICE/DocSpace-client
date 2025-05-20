@@ -3,11 +3,11 @@
   "content": "Set the default storage quota for rooms in this {{productName}}. It can later be adjusted for each room individually by the room admin.",
   "content_en_sha1_hash": "70a076e65a43bd6bbbe50850d4834ecd8ec75cad",
   "created_at": "2025-05-19T21:30:52.660Z",
-  "updated_at": "2025-05-19T21:56:08.660Z",
+  "updated_at": "2025-05-20T09:44:29.099Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "\"This translation key controls the default storage quota setting displayed to users when adjusting room quotas. It can later be adjusted individually by room admins. Appears in the 'QuotaPerRoom' category.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:29.099Z"
   },
   "usage": [
     {

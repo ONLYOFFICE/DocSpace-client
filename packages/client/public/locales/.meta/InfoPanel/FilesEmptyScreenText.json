@@ -3,11 +3,11 @@
   "content": "See file and folder details here",
   "content_en_sha1_hash": "957a447d0e759d8ee240c00e22da369edeea22c0",
   "created_at": "2025-05-19T21:30:54.825Z",
-  "updated_at": "2025-05-19T21:56:08.352Z",
+  "updated_at": "2025-05-20T09:41:02.646Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a generic text that displays when no file or folder information is available in a UI component. The text is displayed below an image and provides a brief instruction to view file details. It appears in the \"NoItem\" component on the Home page of the client application.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:02.646Z"
   },
   "usage": [
     {

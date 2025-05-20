@@ -3,11 +3,11 @@
   "content": "Microsoft",
   "content_en_sha1_hash": "11f3242118ff2add5d117cbf216f29ac578f6ba6",
   "created_at": "2025-05-19T21:30:47.586Z",
-  "updated_at": "2025-05-19T21:56:08.798Z",
+  "updated_at": "2025-05-20T09:34:53.558Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for displaying Microsoft as a provider option on a Twitter social media platform. It appears in a dropdown menu likely found within a settings or preferences section of the Twitter app or website. Translators should consider regional variations and cultural nuances when localizing this text to provide a consistent experience across languages and regions.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:53.558Z"
   },
   "usage": [
     {

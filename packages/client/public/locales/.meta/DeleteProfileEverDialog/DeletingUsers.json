@@ -3,11 +3,11 @@
   "content": "Deleting users",
   "content_en_sha1_hash": "ef72e6a554f2b6e1a2e4fc6258787996c2e58d5f",
   "created_at": "2025-05-19T21:30:56.671Z",
-  "updated_at": "2025-05-19T21:56:08.149Z",
+  "updated_at": "2025-05-20T09:38:27.394Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for the string \"DeletingUsers\" which appears in a delete user dialog, indicating that users are being deleted. It may be displayed as part of a button label or in a modal header.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:27.394Z"
   },
   "usage": [
     {

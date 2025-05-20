@@ -3,11 +3,11 @@
   "content": "activation required",
   "content_en_sha1_hash": "76f386238b282abadda4b1e1fbd6696b1704ebc9",
   "created_at": "2025-05-19T21:30:56.764Z",
-  "updated_at": "2025-05-19T21:56:08.116Z",
+  "updated_at": "2025-05-20T09:38:13.438Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a message indicating that activation is required when selecting a third-party storage provider. It appears in a combo box, specifically on the ThirdPartyComboBox component, and will be displayed next to certain third-party storage items if they are not connected or require activation.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:13.438Z"
   },
   "usage": [
     {

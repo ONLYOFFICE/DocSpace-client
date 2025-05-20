@@ -3,11 +3,11 @@
   "content": "Are you sure you want to restore rooms?",
   "content_en_sha1_hash": "7af07531b9775b705e2ba1b5184a2bf685879a24",
   "created_at": "2025-05-19T21:30:57.063Z",
-  "updated_at": "2025-05-19T21:56:08.174Z",
+  "updated_at": "2025-05-20T09:37:32.280Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"RestoreRooms\" is used to display a confirmation message when restoring multiple rooms. It appears in a restore room dialog and informs the user that their actions will affect all selected items.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:32.280Z"
   },
   "usage": [
     {

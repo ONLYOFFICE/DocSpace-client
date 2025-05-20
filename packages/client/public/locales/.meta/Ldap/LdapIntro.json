@@ -3,11 +3,11 @@
   "content": "LDAP is a way to import users and groups from an LDAP server, as well as provide user authentication on the portal using logins/passwords stored on the LDAP server. Users will be imported immediately after the settings are saved. Users added later will be imported during their first authentication on the portal.",
   "content_en_sha1_hash": "9e249340246ab27ac0b8ae865d9a38891851afac",
   "created_at": "2025-05-19T21:30:54.228Z",
-  "updated_at": "2025-05-19T21:56:08.523Z",
+  "updated_at": "2025-05-20T09:42:08.817Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a message indicating that LDAP settings are unavailable. It appears as an introductory text on a page related to importing users and groups from an LDAP server, likely on a portal settings page.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:08.817Z"
   },
   "usage": [
     {

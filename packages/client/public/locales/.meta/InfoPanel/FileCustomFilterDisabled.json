@@ -3,11 +3,11 @@
   "content": "Custom filter disabled.",
   "content_en_sha1_hash": "4c388c9f6fa2719cabe63a103613565337ab2e71",
   "created_at": "2025-05-19T21:30:54.801Z",
-  "updated_at": "2025-05-19T21:56:08.280Z",
+  "updated_at": "2025-05-20T09:41:06.452Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key displays a message indicating that custom filtering is disabled, likely appearing in a UI element such as a button or toggle switch. Its purpose is to provide users with information about the current state of file filtering, helping them understand what they can and cannot do within the application.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:06.452Z"
   },
   "usage": [
     {

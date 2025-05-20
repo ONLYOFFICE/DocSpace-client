@@ -3,11 +3,11 @@
   "content": "Remove from list",
   "content_en_sha1_hash": "23a97691b4e6c4fdf5bb0cb8f8d5ab31d1af9fd4",
   "created_at": "2025-05-19T21:30:47.827Z",
-  "updated_at": "2025-05-19T21:56:08.692Z",
+  "updated_at": "2025-05-20T09:34:44.615Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the phrase \"Remove from list\" in a user interface, typically on a button or dialog related to managing shared rooms. The text appears when a user has permission to remove items and external data is not expired.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:44.615Z"
   },
   "usage": [
     {

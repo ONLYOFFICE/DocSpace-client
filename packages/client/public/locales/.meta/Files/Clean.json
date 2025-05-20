@@ -3,11 +3,11 @@
   "content": "Clean",
   "content_en_sha1_hash": "fa893d87e1fa0a69c7942dd1e65f3bd1932e53d1",
   "created_at": "2025-05-19T21:30:55.333Z",
-  "updated_at": "2025-05-19T21:56:08.192Z",
+  "updated_at": "2025-05-20T09:40:06.139Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a button label in an edit link panel, specifically to clean files, and its appearance changes based on hover state. The text appears as part of a password access block on a file-related interface.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:06.139Z"
   },
   "usage": [
     {

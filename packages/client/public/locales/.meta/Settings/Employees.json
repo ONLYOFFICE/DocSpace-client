@@ -3,11 +3,11 @@
   "content": "users",
   "content_en_sha1_hash": "5b7dcd14a4faa2cdd54cf6eb8d4bc35da31914a1",
   "created_at": "2025-05-19T21:30:51.482Z",
-  "updated_at": "2025-05-19T21:56:08.405Z",
+  "updated_at": "2025-05-20T09:45:12.878Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The translation key \"users\" is used to display a label for employee-related settings, likely appearing as a button or dropdown option in UI elements such as portal settings. The translated content will be displayed as an uppercase employee name (\"Settings:Employees\") followed by its original lowercased version, suggesting a reference to a specific type of employee or user category.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:12.878Z"
   },
   "usage": [
     {

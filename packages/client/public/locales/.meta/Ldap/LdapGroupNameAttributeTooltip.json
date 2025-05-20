@@ -3,11 +3,11 @@
   "content": "Please specify the object attribute that corresponds to the group name.",
   "content_en_sha1_hash": "62b46deb9193ad40e2be2bff4f213d28f12d1419",
   "created_at": "2025-05-19T21:30:54.223Z",
-  "updated_at": "2025-05-19T21:56:08.536Z",
+  "updated_at": "2025-05-20T09:42:09.578Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a tooltip that informs users about the required attribute for LDAP group name input. It appears as a tooltip when the \"LDAP Group Name Attribute\" field has an error and needs user attention. Translators should provide a clear explanation of this concept in their native language to assist users with LDAP configuration.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:09.578Z"
   },
   "usage": [
     {

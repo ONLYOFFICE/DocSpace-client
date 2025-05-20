@@ -3,11 +3,11 @@
   "content": "Your current domain",
   "content_en_sha1_hash": "b3923c670b1406884e6e252bae5cd97477f25260",
   "created_at": "2025-05-19T21:30:53.253Z",
-  "updated_at": "2025-05-19T21:56:08.388Z",
+  "updated_at": "2025-05-20T09:44:04.946Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display \"Your current domain\" in various places throughout the app, such as in portal settings and multiple spaces. It appears in a label and input field, guiding users to enter their current domain for DNS settings.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:04.946Z"
   },
   "usage": [
     {

@@ -3,11 +3,11 @@
   "content": "Terms of Service",
   "content_en_sha1_hash": "0c8a9a95e21aeb403402ed64338810d787cc5f91",
   "created_at": "2025-05-19T21:30:54.051Z",
-  "updated_at": "2025-05-19T21:56:08.496Z",
+  "updated_at": "2025-05-20T09:42:33.146Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "The \"TermsOfService\" translation key is used to display the label for a link to view the terms of service in an OAuth information dialog, likely found on a portal settings page. The link is used when hovering over a button or similar element, indicating its purpose.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:33.146Z"
   },
   "usage": [
     {

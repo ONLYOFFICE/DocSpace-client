@@ -3,11 +3,11 @@
   "content": "{{count}} per page",
   "content_en_sha1_hash": "f07055bdc1868a249738e0fb89860a79c00f399e",
   "created_at": "2025-05-19T21:30:43.819Z",
-  "updated_at": "2025-05-19T21:56:08.411Z",
+  "updated_at": "2025-05-20T09:36:54.289Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the pagination count per page. It should be translated to appear as \"{{count}} items per page\". This text appears in UI elements related to data import and filtering options, typically on a settings or configuration page.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:54.289Z"
   },
   "usage": [
     {

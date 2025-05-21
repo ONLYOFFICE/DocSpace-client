@@ -3,7 +3,7 @@
   "content": "Reorder",
   "content_en_sha1_hash": "33d9978c44777f5262fb2dbe921b919fa3fad96c",
   "created_at": "2025-05-19T21:30:56.040Z",
-  "updated_at": "2025-05-20T09:39:18.440Z",
+  "updated_at": "2025-05-21T11:27:20.595Z",
   "comment": {
     "text": "This translation key \"Reorder\" is used to display a button label in the header section of a file page, which triggers reordering functionality when clicked. It appears on the \"Home\" page and also within a reorder index dialog for editing files.",
     "is_auto": true,
@@ -159,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'නවතින්නට සකස් කරන්න' while conveying a sense of arrangement, doesn't perfectly capture the simple meaning of 'Reorder'. It implies a more complex action of preparing for reordering.",
+          "suggestion": "Consider a more direct translation such as 'ලිපි නැවත සැකසීම' (Lipi nawath sata seima) or 'වියපත් කිරීම' (Viyapat karima), which more closely aligns with the meaning of 'Reorder'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +189,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Preuredi\" doesn't accurately convey the meaning of \"Reorder\" in the context of file management. \"Preuredi\" generally means 'to rearrange' or 'to organize,' which isn't quite the same as 'reorder'. A more accurate translation would be \"Ponovo poredi\" or \"Premesti\" depending on the specific function.",
+          "suggestion": "Consider \"Ponovo poredi\" or \"Premesti\"."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

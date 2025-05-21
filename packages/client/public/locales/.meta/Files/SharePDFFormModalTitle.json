@@ -3,7 +3,7 @@
   "content": "Share PDF form",
   "content_en_sha1_hash": "be97f2e5a0e59dd9851031bf40feff0089df4deb",
   "created_at": "2025-05-19T21:30:56.195Z",
-  "updated_at": "2025-05-20T09:39:07.364Z",
+  "updated_at": "2025-05-21T11:12:44.797Z",
   "comment": {
     "text": "The \"Share PDF form\" translation key is used as a title for a modal dialog in an application, indicating that the user can share a specific PDF form. This text appears on a header within the dialog, providing context to users about the purpose of sharing the file.",
     "is_auto": true,
@@ -99,7 +99,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"PDF 양식 공유 \" is a literal translation and lacks the flow of natural Korean. A more natural translation would include a verb indicating the action of sharing.",
+          "suggestion": "PDF 양식 공유하기"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -117,7 +123,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Deel PDF formulier' is not quite idiomatic. 'Formulier' is a correct translation of 'form,' but the phrasing 'PDF formulier' sounds slightly unnatural in Dutch. It would be more common to say 'PDF form' or 'PDF-formulier' (with a hyphen).",
+          "suggestion": "Deel PDF-formulier"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -171,13 +183,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Подели PDF формулар\" uses 'формулар' which is a loanword from German and not the typical Serbian word for 'form'. The more natural and common translation would use 'образац'.",
+          "suggestion": "Подели PDF образац"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Podeli PDF formular' is not the most natural or accurate translation of 'Share PDF form'. While 'Podeli' is correct for 'Share', the phrase 'PDF formular' sounds slightly awkward.",
+          "suggestion": "Deljenje PDF obrasca"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

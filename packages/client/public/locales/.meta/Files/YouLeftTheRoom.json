@@ -3,7 +3,7 @@
   "content": "You have left the room",
   "content_en_sha1_hash": "46542dad576cfe3647d36a31566045dcad57950c",
   "created_at": "2025-05-19T21:30:56.359Z",
-  "updated_at": "2025-05-20T09:38:55.184Z",
+  "updated_at": "2025-05-21T10:54:17.546Z",
   "comment": {
     "text": "\"When you exit a room, displays a confirmation message to inform users that they have left the current room.\"",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'لقد قمت بمغادرة الغرفة' is technically correct but sounds overly formal and verbose for the context of a notification like 'You have left the room.' It's a literal translation of 'you performed leaving the room'.",
+          "suggestion": "A more natural and concise translation would be 'غادرت الغرفة' (ghadarta al-ghurfa) which simply means 'You left the room'."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -63,7 +69,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ha salido de la sala' is a literal translation and doesn't quite convey the natural feel of 'You have left the room' in Spanish. While technically correct, it sounds somewhat awkward.",
+          "suggestion": "A more natural translation would be 'Dejó la sala' (He/She left the room) or 'Has dejado la sala' (You have left the room - using the informal 'tú' form). The best option depends on the context and the intended audience."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -81,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Դուք դուրս եք եկել սենյակից' (Duk durs ek ekel senyakits) literally translates to 'You have exited the room'. While understandable, 'You have left the room' implies a more temporary departure. A better translation might convey that nuance.",
+          "suggestion": "Consider 'Դուք լքել եք սենյակը' (Duk lkel ek senyaku) which translates to 'You have left the room' and better reflects the English meaning."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +111,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation \"正常に退室されました。\" is overly formal and doesn't accurately convey the simple meaning of \"You have left the room.\" It implies a successful and formal departure, which might not be the intended meaning in the original English.",
+          "suggestion": "A more natural and appropriate translation would be something like \"部屋を出られました。(Heya o demarareta)\" or \"部屋を出ました。(Heya o demashita)\" depending on the desired level of politeness."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -153,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'ඔබ කාමරය හැරගියා' literally translates to 'You left the room (past tense, feminine/neutral object focus)'. While understandable, it implies a passive voice or an accidental departure.  A more direct and active translation of 'You have left the room' (present perfect tense implying a recent departure) would be more accurate.",
+          "suggestion": "ඔබ කාමරයෙන් පිට වී ඇත"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +201,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Напустили сте собу' is not an accurate translation of 'You have left the room'. It literally translates to 'You abandoned the room'. While understandable, it has a different connotation.",
+          "suggestion": "A more accurate translation would be 'Отишли сте из собе' (Otšli ste iz sobe) which means 'You left the room'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -201,7 +237,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"您已退出房间\" is not the most natural or accurate translation of \"You have left the room.\" \"退出\" (tuīchū) implies a logout or exit from a system, rather than physically leaving a room. While technically correct, it lacks nuance.",
+          "suggestion": "您已离开房间 (Nín yǐ líkāi fángjiān)"
+        }
+      ],
       "approved_at": null
     }
   }

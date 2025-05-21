@@ -3,7 +3,7 @@
   "content": "Me and groups ({{ groupsCount }})",
   "content_en_sha1_hash": "056c8e719cd461f48ae982914d1324e06bffa247",
   "created_at": "2025-05-19T21:30:55.833Z",
-  "updated_at": "2025-05-20T09:39:33.310Z",
+  "updated_at": "2025-05-21T11:46:36.030Z",
   "comment": {
     "text": "This translation key is used to display a phrase indicating whether the user has a Me and Groups section. If groups are available, it shows the number of groups; otherwise, it displays an empty string. It appears in a dialog component at line 107, likely as part of a button or label.",
     "is_auto": true,
@@ -51,7 +51,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ich und Gruppen' is grammatically incorrect in German. 'Und' should be replaced with 'und'.  Also, the more natural phrasing would be 'Ich und meine Gruppen' or simply 'Meine Gruppen'.",
+          "suggestion": "Ich und meine Gruppen ({{ groupsCount }})"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -75,7 +81,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Me and groups\" is not translated accurately into French. The correct translation for \"Me\" is \"Je,\" and the phrase should be \"Je et groupes.\" While \"Moi et groupes\" is understandable, it's grammatically incorrect in this context.",
+          "suggestion": "Je et groupes"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -93,7 +105,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '私とグループ（{{ groupsCount }}）' is technically correct but could be more natural. While '私とグループ' literally translates to 'Me and groups', a more natural phrasing would be '私とグループたち' (Watashi to gurūputachi) or simply 'グループ（{{groupsCount}}）' depending on the context.",
+          "suggestion": "グループ（{{groupsCount }}）"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -111,7 +129,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Es un grupas ({{ groupsCount })\" is not grammatically correct. The correct translation should be \"Es un grupas ({{ groupsCount })\" or \"Es un grupiem ({{ groupsCount })\".",
+          "suggestion": "Es un grupiem ({{ groupsCount }})"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,7 +165,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Eu și grupuri ({{ groupsCount }})' is not the most natural or idiomatic way to express 'Me and groups'. A more appropriate translation would be 'Eu și grupurile mele ({{ groupsCount }})' or 'Eu și grupurile cu care sunt ({{ groupsCount }})'. 'Eu și grupuri' sounds awkward.",
+          "suggestion": "Eu și grupurile mele ({{ groupsCount }})"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -177,7 +207,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Serbian translation \"Ja i grupe ({{ groupsCount })\" is grammatically incorrect. 'grupe' is plural, but 'ja' ('I') implies a singular subject. It should be 'Ja i grupa' to agree with 'ja'.",
+          "suggestion": "Ja i grupa ({{ groupsCount }})"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,7 +231,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Me and groups' should be translated as 'Tôi và các nhóm' or 'Tôi và những nhóm' instead of just 'Tôi và nhóm'. The single 'nhóm' implies one group, while the English suggests multiple.",
+          "suggestion": "Tôi và các nhóm ({{ groupsCount }})"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

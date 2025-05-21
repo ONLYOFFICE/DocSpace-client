@@ -3,7 +3,7 @@
   "content": "Me, members ({{ membersCount }}) and groups ({{ groupsCount }})",
   "content_en_sha1_hash": "64caf3f805190928e6451798cb92bf8e11d877ce",
   "created_at": "2025-05-19T21:30:55.842Z",
-  "updated_at": "2025-05-20T09:39:32.545Z",
+  "updated_at": "2025-05-21T11:45:55.506Z",
   "comment": {
     "text": "This translation key is used to display a label that describes access to files based on user membership and group membership. It appears in a dialog component where users can edit or create room settings, specifically on the \"Template Access\" section. Translators should focus on the word \"members\" and \"groups\", as it's about describing user groups rather than individual members.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'members' is correctly translated as 'üzvlər'. However, the overall phrasing could be more natural in Azerbaijani. A more idiomatic translation might prioritize flow and clarity over a direct word-for-word translation.",
+          "suggestion": "Mən, {{ membersCount }} üzv və {{ groupsCount }} qrup"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -75,7 +81,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The French translation is a direct copy of the English text. While technically correct, it doesn't sound natural in French. The conjunction 'and' should be replaced with something more idiomatic.",
+          "suggestion": "Moi, {{ membersCount }} membres et {{ groupsCount }} groupes."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -99,7 +111,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'members' is translated as '구성원' which is a very formal term. A more natural and common translation would be '회원'.",
+          "suggestion": "나와 회원({{ membersCount }}) 그리고 그룹({{ groupsCount }})"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -123,7 +141,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'groups' should be 'grupy' to match the English pluralization.",
+          "suggestion": "Ja, członkowie ({{ membersCount }}) i grupy ({{ groupsCount }}) -> Ja, członkowie ({{ membersCount }}) i grupy ({{ groupsCount }})"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,7 +165,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Eu' should be 'Eu,'.  The Romanian language requires a comma after 'Eu' in this context.",
+          "suggestion": "Eu, membrii ({{ membersCount }}) și grupuri ({{ groupsCount }})"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,13 +183,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'මම, සාමාජිකයන් ({{ membersCount }}) සහ කණ්ඩායම් ({{ groupsCount }})' is a literal translation and may not flow naturally in Sinhala. A more natural phrasing would consider the context and typical sentence structure. The direct equivalent of 'Me, members and groups' is a bit clunky in Sinhala.",
+          "suggestion": "Consider alternatives such as 'මා සහ සාමාජිකයන් ({{ membersCount }}) සහ කණ්ඩායම් ({{ groupsCount }})' (Ma saha samajikayan... ) or 'සාමාජිකයන් ({{ membersCount }}) සහ කණ්ඩායම් ({{ groupsCount }}) මෙන්ම මම ද' (Samajikayan...nameta mama da)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak word for 'groups' is 'skupiny', not 'skupiny'. This is a common grammatical error.",
+          "suggestion": "Ja, členovia ({{ membersCount }}) a skupiny ({{ groupsCount }}) should be: Ja, členovia ({{ membersCount }}) a skupiny ({{ groupsCount }})"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,13 +213,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation lacks the necessary article 'са' before 'чланови'. It should be 'Ја, са члановима ({{ membersCount }}) и групе ({{ groupsCount }})' to properly reflect the English structure 'Me, members...'",
+          "suggestion": "Ја, са члановима ({{ membersCount }}) и групе ({{ groupsCount }})"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Me\" is best translated as \"Mene\" in Serbian (Latin) to match the subject pronoun declension and maintain grammatical correctness within the sentence. \"Ja\" is a subject pronoun, but \"Mene\" is needed in this context to correctly reflect possession or connection.",
+          "suggestion": "Mene, članovi ({{ membersCount }}) i grupe ({{ groupsCount }})"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -189,7 +243,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word \"groups\" is translated as \"групи\" which is the singular form in Ukrainian. It should be the plural form \"групи\".",
+          "suggestion": "Я, учасники ({{ membersCount }}) та групи ({{ groupsCount }})"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -201,7 +261,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses '群组' for 'groups'. While technically correct, '群组' can sound slightly formal. '小组' (xiaozǔ) or '群' (qún) might be more natural and common depending on the context.",
+          "suggestion": "Consider using '小组' or '群' instead of '群组' for a more natural feel."
+        }
+      ],
       "approved_at": null
     }
   }

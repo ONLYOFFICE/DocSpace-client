@@ -3,7 +3,7 @@
   "content": "Move to Public room",
   "content_en_sha1_hash": "c8155200ac9c020a87b44239324908d4208b6394",
   "created_at": "2025-05-19T21:30:55.875Z",
-  "updated_at": "2025-05-20T09:39:30.155Z",
+  "updated_at": "2025-05-21T11:42:38.491Z",
   "comment": {
     "text": "The translation key \"MoveToPublicRoomTitle\" is used to display the title of a modal dialog that prompts users to move a file to a public room. The translated text appears in the header of the dialog and provides context for the user's action. Translators should provide a clear and descriptive title that reflects the purpose of this dialog.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ümumi otağa keçin\" while conveying the general meaning of 'Move to Public room', doesn't quite capture the nuance of *moving* something. 'Keçin' implies a transition or going, but 'Move' suggests action on an object. A more appropriate translation could incorporate an action verb indicating movement.",
+          "suggestion": "Consider \"Ümumi otağa köçürün\" (Move to Public room) or \"Ümumi otağa daşıdırın\" (Move to Public room)"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Տեղափոխեք հանրային սենյակ' is a literal translation of 'Move to Public room' but might not be the most natural or idiomatic way to express this in Armenian. A more natural phrasing might be something like 'Ցուցադրել հանրային սենյակում' (Show in Public Room) or 'Տեղադրել հանրային սենյակ' (Place in Public Room), depending on the specific context of 'Move'.",
+          "suggestion": "Consider alternatives like 'Ցուցադրել հանրային սենյակում' or 'Տեղադրել հանրային սենյակ' based on context."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +105,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"パブリックルームへ移動\" can sound a bit formal or stiff in a user interface context. A more natural phrasing might be preferred.",
+          "suggestion": "パブリックルームへ"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -141,7 +159,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Deplasare în Sală publică\" sounds slightly awkward. \"Mutare în Sală publică\" would be a more natural phrasing in Romanian.",
+          "suggestion": "Mutare în Sală publică"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ප්‍රසිද්ධ කාමරයකට ගෙනයන්න\" while literally meaning 'take to a public room' doesn't quite capture the meaning of 'Move to Public room'. It implies a physical movement, whereas 'Move to' often refers to a change in status or location within a system.",
+          "suggestion": "ප්‍රසිද්ධ කාමරයට මාරුවන්න (Prasiddha kamaraya maruwanna) - Meaning: 'Move to Public room' or  ප්‍රසිද්ධ කාමරයට යවන්න (Prasiddha kamaraya yavana) - Meaning: 'Send to Public room'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,19 +201,42 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Помери у Јавну собу' is a literal translation but doesn't quite capture the intended meaning of 'Move to Public room'. 'Помери' implies moving something physical, whereas 'Move to' suggests joining or relocating to a room. A more natural translation would convey the action of joining or relocating to the public room.",
+          "suggestion": "Пребаци у Јавну собу"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Pomeri u Javnu sobu\" doesn't accurately convey the meaning of 'Move to Public room.' 'Pomeri' implies movement by itself, making the phrase redundant. It's more appropriate to use a term that indicates relocation or transferring.",
+          "suggestion": "Premesti u Javnu sobu"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase may benefit from a more natural flow depending on the user interface context. Consider how 'Move' would be best translated.",
+          "suggestion": "Prebaci u Javnu sobu"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Herkese açık odaya taşı\" is not the most natural or precise translation of \"Move to Public room\". While literally correct, it sounds a bit abrupt and might not convey the intended action clearly. A more idiomatic translation would be something like \"Herkese açık odaya aktar\" or \"Herkese açık odaya kaydır\".",
+          "suggestion": "Herkese açık odaya aktar"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

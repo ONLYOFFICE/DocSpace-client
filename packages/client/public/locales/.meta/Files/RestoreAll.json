@@ -3,7 +3,7 @@
   "content": "Restore all",
   "content_en_sha1_hash": "9eca7fb8c0e99c10b51061dabb85aee7a49051cf",
   "created_at": "2025-05-19T21:30:56.049Z",
-  "updated_at": "2025-05-20T09:39:17.893Z",
+  "updated_at": "2025-05-21T11:26:20.317Z",
   "comment": {
     "text": "Restore all button text: \"Restore all\" is used as a label on a restore all button in the empty trash dialog, prompting users to retrieve deleted files. It appears on the screen when an empty trash dialog is opened. Translators should consider the context of file management and restoration.",
     "is_auto": true,
@@ -87,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Վերականգնել բոլորը' while literally meaning 'Restore all', doesn't quite capture the nuance of the English phrase. A more idiomatic translation might be 'Բոլորը վերականգնել' or 'Վերականգնել ամեն ինչ'.",
+          "suggestion": "Consider 'Բոլորը վերականգնել' or 'Վերականգնել ամեն ինչ'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,7 +111,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'전부 복구' while technically correct, lacks nuance. 'Restore all' implies a complete restoration, which '전부 복구' could be interpreted as simply 'recover all'. A more precise translation might be '전체 복구'.",
+          "suggestion": "전체 복구"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -159,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'සියල්ල ප්‍රත්‍යර්පණය' is a literal translation of 'Restore all' but doesn't fully convey the meaning in a natural Sinhala way. 'ප්‍රත්‍යර්පණය' is technically correct but sounds formal and potentially technical for a user interface element like 'Restore all'.",
+          "suggestion": "A more natural translation might be 'මල්ටිප්‍ලේටි ප්‍රත්‍යස්ථාන කරන්න' or 'සියල්ල යථා තත්वात පමුණුවන්න'. Alternatively, a simpler 'ප්‍රත්‍යස්ථාන කරන්න' could also work, depending on the context and target audience."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +195,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Поврати све' while understandable, isn't the most natural or precise translation of 'Restore all'. 'Restore' often implies a return to a previous state. A better translation would consider this nuance.",
+          "suggestion": "Врати све (Vrati sve)"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -189,7 +213,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'Her şeyi eski haline getir' while conveying the general idea of 'Restore all', is a more verbose and literal translation. A more natural and concise translation would be better.",
+          "suggestion": "Geri yükle"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

@@ -3,7 +3,7 @@
   "content": "Removed from favorites",
   "content_en_sha1_hash": "c259d9197c21c066bff3db7e0f183ec9c293053c",
   "created_at": "2025-05-19T21:30:56.030Z",
-  "updated_at": "2025-05-20T09:39:19.103Z",
+  "updated_at": "2025-05-21T11:28:00.545Z",
   "comment": {
     "text": "This translation key \"RemovedFromFavorites\" is used to display a message when an item is removed from favorites. It is typically displayed as a success toast after removing an item from favorites in the UI.",
     "is_auto": true,
@@ -51,7 +51,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Favoritlərdən sil' is a literal translation of 'Removed from favorites.' While understandable, a more natural and idiomatic translation would be something like 'Seçilmişlərdən silindi' or 'Favoritlərə əlavə edilmədi'. 'Sil' implies a direct deletion action, which might be too strong depending on the context.",
+          "suggestion": "Seçilmişlərdən silindi"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -99,7 +105,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Հեռացված է ընտրյալներից' is technically correct but could be more natural. While it literally means 'Removed from favorites,' a more common and idiomatic translation would be something like 'Հեռացվել է սիրվածներից' or 'Հեռացվել է նախընտրածներից'.",
+          "suggestion": "Consider 'Հեռացվել է սիրվածներից' or 'Հեռացվել է նախընտրածներից'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -171,7 +183,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ප්‍රියතමයන්ගෙන් ඉවත් කෙරිණි' while technically meaning 'Removed from favorites', sounds overly formal and passive for a UI element. A more natural and common phrasing for 'Removed from favorites' would be something like 'ප්‍රියතමයන්ගෙන් ඉවත්වී' or 'ප්‍රියතමයන්ගෙන් අයින් විය'.",
+          "suggestion": "Consider 'ප්‍රියතමයන්ගෙන් ඉවත්වී' or 'ප්‍රියතමයන්ගෙන් අයින් විය'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -189,7 +207,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Уклоњено из омиљеног\" translates to 'Removed from favorites' but sounds slightly unnatural in Serbian. A more common and natural phrasing would be \"Избрисано из омиљених\" or \"Ускрњено из омиљених\".",
+          "suggestion": "Избрисано из омиљених"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

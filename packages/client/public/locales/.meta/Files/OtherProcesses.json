@@ -3,7 +3,7 @@
   "content": "Other processes",
   "content_en_sha1_hash": "bd4f563a4d7631eace4dc9537a23971640ee820d",
   "created_at": "2025-05-19T21:30:55.931Z",
-  "updated_at": "2025-05-20T09:39:25.999Z",
+  "updated_at": "2025-05-21T11:37:25.726Z",
   "comment": {
     "text": "\"This translation key is used as a fallback message when an action's intended effect cannot be completed. It appears in the UI on buttons or menus related to file conversions and deletions.\"",
     "is_auto": true,
@@ -105,7 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຂະແນງງານອື່ນໆ' (khanaeng ngan un un) translates to 'other works' or 'other jobs' rather than 'other processes'. While related, 'processes' implies a series of actions or steps, which is a more accurate representation of the English term in this context.",
+          "suggestion": "Consider 'ຂະແນງການອື່ນ' (khanaeng kan un) which translates to 'other operations' or 'other activities', or 'ປະຕິບັດການອື່ນ' (patibat kan un) which translates to 'other operations/actions' depending on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -177,7 +183,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Drugi procesi' while technically meaning 'Other processes', is not the most natural or precise translation for this context. 'Procesi' implies a general set of processes, but 'Other processes' refers to processes potentially interfering with the main process. A more accurate translation might be 'Vanjski procesi' or 'Vanjski postupci'.",
+          "suggestion": "Consider 'Vanjski procesi' or 'Vanjski postupci' for a more accurate translation."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

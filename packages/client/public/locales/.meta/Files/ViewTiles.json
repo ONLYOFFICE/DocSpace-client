@@ -3,7 +3,7 @@
   "content": "Tiles",
   "content_en_sha1_hash": "85f5ca643a1173a67cdaf07bca1715d2defeb309",
   "created_at": "2025-05-19T21:30:56.308Z",
-  "updated_at": "2025-05-20T09:38:59.027Z",
+  "updated_at": "2025-05-21T11:02:16.066Z",
   "comment": {
     "text": "\"Title for a view tile section, used to filter and display room types in a home page.\"",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'مربعات متساوية الحجم' (murabba'at mutasawiyah al-hajm) is a literal translation meaning 'squares of equal size'. While technically correct, it's overly verbose and doesn't capture the conciseness of 'Tiles' in this context.  'Tiles' usually refers to a more general term and not specifically squares.",
+          "suggestion": "Consider a more concise translation such as 'بلاطات' (balatat) which is a common term for tiles, or 'قطع' (qita'a) which means pieces/segments and can be appropriate depending on the application."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -39,7 +45,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Bulgarian translation \"Клетки\" (Kletki) translates to 'cells' which isn't the best equivalent for 'Tiles'. 'Tiles' refers to visual blocks or elements, whereas 'Клетки' generally refers to biological cells or sometimes boxes/compartments. A more accurate translation would depend on the context of where 'Tiles' is used.",
+          "suggestion": "Consider alternatives like 'плочки' (plochki) for tiles in a decorative sense, or 'плоскости' (plosnosti) for flat surfaces, or a more context-specific translation based on the usage."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -51,7 +63,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Tiles' in this context likely refers to visual elements or blocks, not necessarily 'cells' (Zellen). 'Zellen' is more appropriate for biological cells or a spreadsheet. The best translation depends on the specific UI element being described.",
+          "suggestion": "Consider alternatives like 'Kacheln', 'Fliesen', or 'Elemente' depending on the UI context. Without further context, 'Kacheln' is a reasonable possibility."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -63,13 +81,25 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Iconos' is a possible translation of 'Tiles' but might not be the most accurate depending on the specific context. 'Tiles' often refers to visual elements in a user interface, and 'Iconos' emphasizes the icon-like nature, which may not always be the intention. A more precise translation might depend on what the tiles represent. Consider 'Azulejos' (if referring to decorative tiles) or a more general term depending on the intended meaning.",
+          "suggestion": "Evaluate context. Alternatives: 'Azulejos' (if decorative), or a more general UI term."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Kuvakkeet' can mean icons, 'Tiles' in the context of files (likely referring to a visual representation of files) often translates more accurately to something like 'Laattakuvakkeet' or 'Näkymälaatat'. 'Kuvakkeet' is too generic and doesn't convey the 'tile' aspect.",
+          "suggestion": "Consider 'Laattakuvakkeet' or 'Näkymälaatat' for a more accurate translation."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -87,7 +117,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Italian translation \"Tegole\" typically refers to roof tiles, not the general concept of \"Tiles\" (as in UI tiles, for example). This is likely an inaccurate translation depending on the context of the key.",
+          "suggestion": "Consider alternatives like \"Piastrelle\" (for tiles/squares) or a more contextually appropriate term depending on the intended meaning of 'Tiles'."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -99,19 +135,37 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"제목\" (Je-mok) translates to \"Title\" not \"Tiles\". It doesn't accurately convey the meaning of the English word \"Tiles\".",
+          "suggestion": "Consider a translation like \"타일\" (Tai-l), which directly translates to \"Tiles\"."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຫົວຂໍ້' translates to 'headings' or 'titles', not 'tiles'. It doesn't accurately convey the meaning of the English word 'Tiles' in this context.",
+          "suggestion": "A more accurate translation would depend on the specific context of 'Tiles'. Possible suggestions include: ແຖບ (thaep - tiles), ກ້ອນ (kon - blocks), or ອົງປະກອບ (ong khop-ong - components), but without more context it's difficult to determine the best option."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation \"Elementi\" does not accurately convey the meaning of \"Tiles\" in the context of files and visual representations. \"Tiles\" typically refers to smaller, often square, blocks used to display content. \"Elementi\" translates to \"Elements\" and is a much broader term.",
+          "suggestion": "Consider alternatives like \"Flīzes\", \"Bloki\", or \"Izstiepņi\", depending on the specific visual context of the \"Tiles\" feature. Further context is needed for the most accurate translation."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -123,13 +177,25 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation \"Tytuły\" translates to \"Titles\" which is not the best equivalent for \"Tiles\" in this context. \"Tiles\" refers to visual representations, often small images, and \"Tytuły\" implies headings or titles.  A better translation would be something like \"Kafelki\" or \"Płytki\".",
+          "suggestion": "Consider using \"Kafelki\" or \"Płytki\" to better represent \"Tiles\"."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Títulos\" while technically meaning 'titles', doesn't accurately reflect the intended meaning of 'Tiles' in the context of files and visual representation. 'Tiles' refers to small, square images or icons representing files. A better translation would be 'Azulejos' or 'Blocos'.",
+          "suggestion": "Azulejos"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -171,13 +237,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Наслови\" translates to \"Titles\" or \"Headings\", not \"Tiles\". \"Tiles\" refers to individual graphical elements, whereas \"Наслови\" refers to titles or headings of something.",
+          "suggestion": "A more appropriate translation for \"Tiles\" in this context might be something like \"Плички\" (Plichki) or \"Клопчице\" (Klopchice), depending on the exact visual representation intended."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Tiles' refers to visual elements, often small images or icons arranged in a grid. 'Naslovi' primarily means 'headlines' or 'titles'. This doesn't accurately convey the intended meaning.",
+          "suggestion": "Consider alternatives like 'Kocke' (cubes), 'Pločice' (tiles), or 'Klijovi' (chips/elements), depending on the specific context within the software."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -201,7 +279,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Tiles' can have several possible translations in Chinese depending on the context. '卡片' (kǎpiàn) generally refers to cards or postcards. It might be suitable if 'Tiles' refers to something like game cards or postcards displayed on a screen. However, it's a less accurate translation if 'Tiles' refers to, for example, tiles in a floor or wall.",
+          "suggestion": "Consider '瓷砖' (cizhuan) for floor or wall tiles, or '图块' (túkuài) for general tiles/blocks in a digital context if more appropriate."
+        }
+      ],
       "approved_at": null
     }
   }

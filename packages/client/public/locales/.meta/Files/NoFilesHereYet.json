@@ -3,7 +3,7 @@
   "content": "No files here yet",
   "content_en_sha1_hash": "d2b916fc9d3a81b2b8b8ca1e921dd7499f6424e9",
   "created_at": "2025-05-19T21:30:55.913Z",
-  "updated_at": "2025-05-20T09:39:27.299Z",
+  "updated_at": "2025-05-21T11:39:03.011Z",
   "comment": {
     "text": "The translation key \"NoFilesHereYet\" is used to display a message indicating that there are no files available in the current view. It appears on an empty screen or folder, informing the user that no files can be accessed.",
     "is_auto": true,
@@ -87,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Այստեղ դեռ ֆայլեր չկան\" is a literal translation of 'No files here yet'. While technically correct, it sounds a bit formal and unnatural in Armenian. A more idiomatic and natural translation would be \"Այստեղ դեռ չկա ֆայլ\" or \"Այստեղ դեռ ոչինչ չկա\" (meaning 'nothing here yet').",
+          "suggestion": "Consider \"Այստեղ դեռ չկա ֆայլ\" or \"Այստեղ դեռ ոչինչ չկա\"."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -129,7 +135,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Brak plików' is a technically correct translation, but it lacks the nuance and naturalness of 'No files here yet.' A more idiomatic translation might be 'Nie ma tu żadnych plików' or 'Tutaj jeszcze brak plików'.",
+          "suggestion": "Nie ma tu żadnych plików"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -147,7 +159,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Niciun fișier deocamdată aici' is a bit too literal and formal for a user-facing message. 'Deocamdată' implies a temporary state, which might be confusing if files are genuinely absent.",
+          "suggestion": "Consider a more concise and user-friendly translation, such as 'Nu sunt fișiere încă' or 'Nu există fișiere acum'."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -159,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'තවමත් ගොනු නැත' while understandable, doesn't perfectly capture the nuance of 'No files here yet'. A more accurate translation would convey the sense of expectation or future possibility. 'තවමත් ගොනු නැත' literally translates to 'No files yet'.",
+          "suggestion": "කිසිම ගොනු මෙහි නැත"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +201,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Још нема датотека овде' is a literal translation, but a more natural Serbian (Cyrillic) phrasing would be 'Нeма датотека овде' or 'Овде још нема датотека'.",
+          "suggestion": "Нeма датотека овде"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

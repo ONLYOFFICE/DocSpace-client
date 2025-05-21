@@ -3,7 +3,7 @@
   "content": "Link successfully edited and copied",
   "content_en_sha1_hash": "cb5242ae321d8a7d77464290445a8fc5c67d8d3a",
   "created_at": "2025-05-19T21:30:55.781Z",
-  "updated_at": "2025-05-20T09:39:36.966Z",
+  "updated_at": "2025-05-21T11:50:55.441Z",
   "comment": {
     "text": "The translation key \"LinkEditedSuccessfully\" is used to display a success message when editing a link is successfully completed in the Edit Link Panel. This message appears after clicking the \"Edit\" button and copying the shared link. Translators should provide a descriptive phrase that reflects this action's completion.",
     "is_auto": true,
@@ -63,7 +63,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While grammatically correct, the translation 'El enlace se ha editado y copiado correctamente' is a bit literal and could be improved for a more natural Spanish flow. A more common phrasing would imply that the link was both edited and successfully copied.",
+          "suggestion": "El enlace se editó y copió correctamente"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'සබැඳිය සංස්කරණය වී පිටපත් විය' is a literal translation that doesn't quite convey the natural English phrasing 'Link successfully edited and copied.' It sounds slightly awkward in Sinhala.",
+          "suggestion": "Consider a more natural phrasing like 'සබැඳිය සාර්ථකව සංස්කරණය කර පිටපත් කරන ලදි' (Sabandiya saathakava sanskarannya kara pitakarthana ladi) or 'සබැඳිය සංස්කරණය කර, පිටපත් කරන ලදුව' (Sabandiya sanskaranya kara, pitakarthana kaladuwa)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

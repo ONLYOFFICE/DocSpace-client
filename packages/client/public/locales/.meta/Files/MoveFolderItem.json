@@ -3,7 +3,7 @@
   "content": "The folder <2>{{title}}</2> successfully moved to <1>{{folderName}}</1>",
   "content_en_sha1_hash": "c503607b8021da55c3d04b160547b8d9f045a36a",
   "created_at": "2025-05-19T21:30:55.847Z",
-  "updated_at": "2025-05-20T09:39:32.100Z",
+  "updated_at": "2025-05-21T11:45:31.322Z",
   "comment": {
     "text": "The translation key \"MoveFolderItem\" is used to display a success message when a folder has been successfully moved. It appears in a UI where a file or folder operation results in a successful move, such as a confirmation dialog or toast notification. The message includes the original folder name and the destination of the move.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The order of the placeholders is reversed in the Azerbaijani translation compared to the English original. The English is <1>{{folderName}}</1> after the moved folder, while the Azerbaijani has <1>{{folderName}}</1> before.",
+          "suggestion": "Change the order of placeholders to: \"<2>{{title}}</2> qovluğu uğurla <1>{{folderName}}</1> qovluğuna köçürüldü\"."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -63,7 +69,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tag order is incorrect. The English content places the `<1>{{folderName}}</1>` tag *after* the `<2>{{title}}</2>` tag, while the Spanish translation places it before.",
+          "suggestion": "Reorder the tags to match the English: \"La carpeta <2>{{title}}</2> se ha movido correctamente <1>{{folderName}}</1>\""
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -93,19 +105,37 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation maintains the HTML tags `<2>{{title}}</2>` and `<1>{{folderName}}</1>` which are present in the English content. While not technically incorrect, it is unusual to leave these tags in the translated content unless specifically requested or necessary for the application displaying the text.",
+          "suggestion": "Consider removing the HTML tags if they are not required for display.  For example: フォルダー {{title}} が {{folderName}} に正常に移動されました"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation retains the HTML tags (<2> and <1>) which are unnecessary and may cause display issues in some contexts. The original English content uses them, but it's generally better to remove them in the translation if they aren't functionally required.",
+          "suggestion": "Remove the <2> and <1> tags. The translation should be: \"{{title}} 폴더가 {{folderName}} 폴더로 이동되었습니다\""
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຢ່າງສະບາຍດີ' (yang sabai di) translates to 'successfully' or 'well'. While not incorrect, a more natural translation for 'successfully' in this context might be 'เรียบร้อย' (riap roi) in Lao.",
+          "suggestion": "ໄຟລ໌ <2>{{title}}</2> ຍ້າຍໄປທີ່ <1>{{folderName}}</1> ຢ່າງเรียบร້ອຍ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +171,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tags <1> and <2> are in the reverse order compared to the English content. They should be <1> and <2> respectively.",
+          "suggestion": "Change the tags in the Romanian translation to <1>{{folderName}}</1> and <2>{{title}}</2>."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +189,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation maintains the HTML tags but the order is reversed. The English has <2>{{title}}</2> and <1>{{folderName}}</1>, whereas the Sinhala has <1>{{folderName}}</1> before <2>{{title}}</2>. This disrupts the intended flow and meaning.",
+          "suggestion": "Reorder the HTML tags to match the English: ෆෝල්ඩරය <2>{{title}}</2> සාර්ථකව <1>{{folderName}}</1> වෙත ගෙනයන ලදී."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +213,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'folder' is transliterated as 'Фолдер'. While understandable, the more standard and preferred transliteration for 'folder' in Serbian (Cyrillic) is 'папка'.",
+          "suggestion": "папка"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

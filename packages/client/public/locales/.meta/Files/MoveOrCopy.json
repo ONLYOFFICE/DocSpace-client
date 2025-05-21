@@ -3,7 +3,7 @@
   "content": "Move or copy",
   "content_en_sha1_hash": "279d14d0958c69b48ed63e892a91ec9598c2db7f",
   "created_at": "2025-05-19T21:30:55.861Z",
-  "updated_at": "2025-05-20T09:39:31.052Z",
+  "updated_at": "2025-05-21T11:43:39.629Z",
   "comment": {
     "text": "This translation key is used for the text \"Move or copy\" which appears as a label on a button in a UI context, likely related to file management.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Köçür\" means 'move' and \"Kopyala\" means 'copy', the flow and directness of the English \"Move or copy\" aren't perfectly captured.  'Move or copy' implies a choice between two actions.  'Köçür və ya Kopyala' is technically correct, but slightly less idiomatic in some contexts.",
+          "suggestion": "Consider alternatives like \"Köçür və ya surət al\" (Move or take a copy) if the nuance of 'copy' needs extra clarity."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -93,7 +99,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"移動またはコピーする\" is technically correct, it's more verbose than necessary for a simple 'Move or copy'. A more natural and concise translation would be \"移動またはコピー\".",
+          "suggestion": "移動またはコピー"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"පිටපතක් හෝ ගෙනයන්න\" does not accurately convey the meaning of \"Move or copy.\" \"පිටපතක්\" means 'a printout/copy,' and \"ගෙනයන්න\" means 'to take/bring.' The intended meaning of 'move or copy' is missing.",
+          "suggestion": "A more accurate translation could be \"පනතන්න atau පිටපත් කරන්න\" (panaṭaṇna atau piṭakaraṇna) which covers the meanings of 'move' and 'copy' respectively."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,19 +189,37 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Помери или копирај\" is a literal translation but doesn't perfectly convey the intended meaning. \"Помери\" can also mean \"move\" in the sense of relocation, which is not always the desired interpretation.  Depending on the context, a more accurate translation might involve choosing between \"премести или копирај\" (relocate or copy) or \"пребаци или копирај\" (transfer or copy).",
+          "suggestion": "Consider \"Пребаци или копирај\" or \"Премести или копирај\" for a more contextually accurate translation, if 'transfer' or 'relocate' is intended."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Pomeri ili kopiraj' doesn't accurately reflect the English meaning of 'Move or copy'. 'Pomeri' means 'Move' but implies a relocation of an existing file. A better translation would include the nuance of transferring a file.",
+          "suggestion": "Premesti ili kopiraj"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'Taşı veya kopyala' literally translates to 'Carry or copy'. While understandable, it's not the most natural or idiomatic translation for 'Move or copy'. It doesn't convey the action of relocating a file. A more appropriate translation would depend on the context, but something like 'Taşı veya kopyala' (move or copy) or 'Kaydır veya kopyala' (slide or copy) would be better.",
+          "suggestion": "Consider 'Taşı veya kopyala' or 'Kaydır veya kopyala', depending on the intended nuance."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -195,7 +231,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Di chuyển' means 'Move' and 'Sao chép' means 'Copy', the phrasing 'Di chuyển hoặc Sao chép' is slightly less natural than other options for this context. A more natural translation might be 'Chuyển' or 'Đưa' depending on the desired nuance. 'Di chuyển' can imply a longer distance.",
+          "suggestion": "Consider 'Chuyển hoặc Sao chép' or 'Đưa hoặc Sao chép' for a more natural flow."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

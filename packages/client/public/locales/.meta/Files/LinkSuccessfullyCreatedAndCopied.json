@@ -3,7 +3,7 @@
   "content": "Link successfully created and copied to clipboard",
   "content_en_sha1_hash": "e2f282155a04f8b128e934a7c3ee95e5dd9cf092",
   "created_at": "2025-05-19T21:30:55.795Z",
-  "updated_at": "2025-05-20T09:39:35.998Z",
+  "updated_at": "2025-05-21T11:50:09.003Z",
   "comment": {
     "text": "This translation key is used to display a success message when a link is successfully created and copied to the clipboard, typically in response to button clicks or dialog actions. The message informs users that their link has been successfully generated and made available for sharing. It appears in the UI when creating or editing links, such as in edit link panels or info panel dialogs.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'mübadilə buferə' (exchange buffer) isn't the best translation for 'clipboard'.  'Clipboard' is more accurately translated as 'keçid lövhəsi' or simply 'keçid'.",
+          "suggestion": "Link uğurla yaradıldı və keçid lövhəsinə kopyalandı"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -75,7 +81,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'correctly' seems redundant as 'se ha creado' and 'copiado' already imply success. While not strictly incorrect, it's slightly unnatural.",
+          "suggestion": "El enlace se ha creado y copiado en el portapapeles"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -153,7 +165,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Romanian translation uses a hyphenated word 'clipboard' which is not a standard Romanian term. While understood, it's less idiomatic.",
+          "suggestion": "Consider using a more Romanian equivalent like 'aglomează' or rephrasing the sentence to avoid the English term if possible."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -165,7 +183,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'සබැඳිය පසුරුපුවරුවට පිටපත් විය' doesn't fully convey the meaning of 'Link successfully created and copied to clipboard'.  'පිටපත් විය' (copied) is accurate, but 'පසුරුපුවරුවට' (to clipboard) might be too literal and not the natural way to express this in Sinhala. It sounds slightly awkward.",
+          "suggestion": "Consider a more natural phrasing like 'සබැඳිය සාර්ථකව නිර්මාණය වී, ක්ලිප්බෝඩ් වෙත පිටපත් කරන ලදි' (Sabandiya saarthaakava nirmanaaya vey, klippobaad wena pitiyath karaada leni)."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly wrong, Sinhala often utilizes a more conversational tone. The current translation sounds slightly formal for a UI message.",
+          "suggestion": "Consider a slightly less formal tone. Further assessment would require more context."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,13 +212,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'created' is translated as 'креиран', which while understandable, is less common and less natural than using 'направљен' in this context. 'Креиран' is more commonly associated with design or artistic creation.",
+          "suggestion": "Линк успешно направљен и копиран у привремену меморију"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'privremena memorija' literally translates to 'temporary memory,' which is a less common and slightly awkward way to say 'clipboard' in this context. A more natural translation would be 'sistemski isečak' or 'clipbord'.",
+          "suggestion": "Link uspešno kreiran i kopiran u sistemski isečak"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -201,13 +242,30 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"буфера обміну\" is a less common and slightly awkward phrasing. A more natural and common translation for 'clipboard' would be \"клипарту\".",
+          "suggestion": "Посилання успішно створено та скопійовано до кліпарту"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'link' is not accurately translated. 'Liên kết' implies a connection or relationship, not a direct URL or hyperlink. While it's understandable in context, a more precise translation would be 'đường dẫn' (URL) or 'liên kết trực tiếp' (direct link).",
+          "suggestion": "Đã tạo và sao chép đường dẫn thành công vào bộ nhớ tạm"
+        },
+        {
+          "type": "grammar",
+          "description": "While understandable, the sentence structure could be improved for better flow in Vietnamese. The phrasing 'Đã tạo và sao chép...' sounds slightly awkward.",
+          "suggestion": "Đã tạo và sao chép đường dẫn thành công vào bộ nhớ tạm."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

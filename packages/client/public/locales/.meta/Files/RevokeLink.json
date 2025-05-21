@@ -3,7 +3,7 @@
   "content": "Revoke link",
   "content_en_sha1_hash": "60f184b7c84ca59ba034898a93f823c5c9571552",
   "created_at": "2025-05-19T21:30:56.054Z",
-  "updated_at": "2025-05-20T09:39:17.515Z",
+  "updated_at": "2025-05-21T11:26:05.855Z",
   "comment": {
     "text": "\"This translation key is used as a label for a button that allows users to revoke a link, particularly in contexts related to deleting or managing links within files or room settings.\"",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Keçidi ləğv edin\" is a literal translation of \"Revoke link\", it might sound slightly awkward or overly formal in Azerbaijani. A more natural phrasing could be considered.",
+          "suggestion": "Consider alternatives like \"Linki silin\" (Delete the link) or \"Linki etkinsizləşdirin\" (Disable the link)."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -183,7 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Опозови линк' doesn't accurately convey the meaning of 'Revoke link.' 'Опозови' means 'disgrace' or 'humiliate,' which is not the intended meaning. The correct meaning of 'Revoke' in this context is 'cancel' or 'withdraw.'",
+          "suggestion": "Укини линк"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

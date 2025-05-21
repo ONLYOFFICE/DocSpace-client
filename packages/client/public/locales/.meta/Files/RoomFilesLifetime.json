@@ -3,7 +3,7 @@
   "content": "The file lifetime is set to {{days}} {{period}} in this room",
   "content_en_sha1_hash": "c7afb68ede38e6aec1c4f6d16110d1acb00d1aaa",
   "created_at": "2025-05-19T21:30:56.096Z",
-  "updated_at": "2025-05-20T09:39:14.448Z",
+  "updated_at": "2025-05-21T11:21:59.043Z",
   "comment": {
     "text": "This translation key is used to display the file lifetime duration in a room. It will be shown as a tooltip when hovering over a file or in a selector, indicating how long the files will remain available in the room. The format includes days and period (e.g., \"1 day\" or \"2 weeks\").",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'file lifetime' is not accurately translated. 'İstifadə müddəti' more closely translates to 'usage period' or 'time of use', not 'lifetime'.",
+          "suggestion": "Consider using a more accurate translation for 'lifetime', such as 'ömrü' or 'müddəti'. For example: 'Bu otaqda faylın ömrü {{days}} {{period}} olaraq təyin edilib' or 'Bu otaqda faylın müddəti {{days}} {{period}} olaraq təyin edilib'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -75,7 +81,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'period' doesn't have a direct equivalent that fits the context of file lifetime. A more accurate translation might convey the concept of 'days' or 'time'.",
+          "suggestion": "Consider alternatives like 'päivää' (days) or a more descriptive phrase depending on the specific 'period' value (e.g., if 'period' is 'week', translate as 'viikkoa')."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -93,7 +105,18 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'lifetime' is not directly translated into Italian. 'Durata' is a more appropriate translation in this context, suggesting the duration of the file's existence.",
+          "suggestion": "Consider using a phrase like 'periodo di validità' or 'tempo di conservazione' to more accurately convey the concept of 'lifetime' in relation to a file."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'stanza' technically means 'room', in a digital context it can feel slightly awkward. 'Spazio' (space) or 'ambiente' (environment) might be more natural for a digital room.",
+          "suggestion": "Consider replacing 'stanza' with 'spazio' or 'ambiente' to better align with the digital context."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -111,13 +134,25 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຄັ້ງລະ' (khang la) is somewhat awkward in this context. It implies a recurring event or a rate, which isn't the intended meaning.",
+          "suggestion": "Consider replacing 'ຄັ້ງລະ' with a more general term for duration, such as 'ເປັນ' (pen) or removing it entirely."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is overly literal and sounds unnatural in Latvian. The phrase 'ir iestatīts uz' ('is set to') is redundant and doesn't flow well. A more natural phrasing would be preferable.",
+          "suggestion": "Šajā telpā faila kalpošanas laiks ir {{days}} {{period}}."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -129,7 +164,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"The file lifetime is set to\" is not perfectly conveyed by \"Okres ważności plików w tym pokoju jest ustawiony na\". A more direct translation would be something like \"Czas życia plików w tym pokoju wynosi...\" or \"Dostępny okres przechowywania plików w tym pokoju to...\". The current translation is grammatically correct but lacks the precision of the original English.",
+          "suggestion": "Consider 'Czas życia plików w tym pokoju wynosi {{days}} {{period}}' or 'Dostępny okres przechowywania plików w tym pokoju to {{days}} {{period}}'"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -147,7 +188,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Durată de viață a fișierelor în această sală constituie {{days}} {{period}}' is a somewhat literal and slightly awkward translation. A more natural Romanian phrasing would be 'Durata de viață a fișierelor în această cameră este de {{days}} {{period}}'. 'Sală' often implies a large room, while 'cameră' is more general and suitable for a room within a digital space.",
+          "suggestion": "Durata de viață a fișierelor în această cameră este de {{days}} {{period}}"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'această' is correctly spelled, but it might be better to use 'în' before 'această' as it flows better.",
+          "suggestion": "Durata de viață a fișierelor în această cameră este de {{days}} {{period}}"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -159,13 +211,35 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ගොණුවේ කාලය\" (gonuwe kaalaya) literally translates to 'file time'. A more natural and accurate translation for 'file lifetime' would be \"ගොනුවේ ආයුෂ\" (gonuwe ayushaya) or \"ගොණුවේ වලංගු කාලය\" (gonuwe valangu kalaaya).",
+          "suggestion": "මෙම කාමරයේ ගොනුවේ ආයුෂ {{days}} {{period}} දක්වා සකසා ඇත."
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, the word 'සකසා' (sakasaa) could be improved. 'සකස් කර ඇත' (saksa karath) is more commonly used and sounds more natural. It could also depend on the formalness of the tone intended.",
+          "suggestion": "මෙම කාමරයේ ගොනුවේ ආයුෂ {{days}} {{period}} දක්වා සකස් කර ඇත."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'file lifetime' is better translated as 'trvanlivosť súborov' or 'životnosť súborov' in Slovak, not just 'doba používania súborov'. While 'doba používania' isn't wrong, it's not the most natural or precise translation.",
+          "suggestion": "Doba trvania súborov v tejto miestnosti je nastavená na {{days}} {{period}}"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'in this room' is translated as 'v tejto miestnosti'. This is correct. However, a slightly more colloquial and sometimes preferred option is 'v miestnosti'.",
+          "suggestion": "Doba trvania súborov v miestnosti je nastavená na {{days}} {{period}}"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -177,13 +251,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'век' (vek) translates to 'age' or 'era' in English, not 'lifetime'.  'Век' is not the correct term to describe the duration of a file's existence. A more accurate translation for 'lifetime' would be 'трајање' (trajanje).",
+          "suggestion": "Замените 'век' са 'трајање'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'fajla' should be 'fajla'",
+          "suggestion": "fajla"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,13 +281,25 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'file lifetime' is not accurately conveyed by 'період існування файлів'. 'Lifetime' implies a duration, whereas 'period of existence' sounds more formal and less natural in this context.  A more accurate translation of 'lifetime' would be 'термін існування' or 'час існування'.",
+          "suggestion": "У цій кімнаті встановлено термін існування файлів {{days}} {{period}}"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content specifies that the 'days' are before the 'period'. The Vietnamese translation has them reversed ('period' before 'days'). This alters the meaning.",
+          "suggestion": "Thời gian tồn tại của tập tin được đặt thành {{days}} {{period}} trong phòng này"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

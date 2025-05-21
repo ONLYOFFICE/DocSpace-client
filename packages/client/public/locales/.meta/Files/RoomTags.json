@@ -3,7 +3,7 @@
   "content": "Room Tags",
   "content_en_sha1_hash": "072fd428f845879a0d812b1518a09807e3e3099f",
   "created_at": "2025-05-19T21:30:56.143Z",
-  "updated_at": "2025-05-20T09:39:10.885Z",
+  "updated_at": "2025-05-21T11:17:34.901Z",
   "comment": {
     "text": "The translation key \"RoomTags\" is used to display room tags label in a file management dialogue. It appears as part of the title and subtitle of a component displaying files related to rooms.",
     "is_auto": true,
@@ -51,7 +51,18 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Raum-Tags' is understandable, it's a direct transliteration and not a fully natural German translation. A more accurate and idiomatic translation would be 'Raumbeschriftungen' or 'Raumkennzeichnungen'.",
+          "suggestion": "Raumbeschriftungen"
+        },
+        {
+          "type": "formatting",
+          "description": "The hyphen in 'Raum-Tags' is unconventional in German terminology. It's better to avoid it.",
+          "suggestion": "Raumbeschriftungen"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -153,7 +164,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation includes the English term in parentheses after the Sinhala term. While transliteration is acceptable, it's best to evaluate if it's necessary for clarity and consistency. It might be redundant or confusing depending on the context.",
+          "suggestion": "Consider removing '(Room Tags)' if the term 'රූම් ටැග්' is sufficiently understood by the target audience. If clarity is required, a brief explanation in Sinhala might be a better alternative."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -195,7 +212,18 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Thẻ tag (từ khóa) phòng\" is understandable, the phrase \"(từ khóa)\" is redundant. 'Tag' is already understood as a keyword in modern Vietnamese usage, especially in technical contexts. It adds unnecessary length and complexity.",
+          "suggestion": "Thẻ phòng"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of parentheses around \"(từ khóa)\" is slightly awkward and deviates from typical Vietnamese phrasing.",
+          "suggestion": "Remove the parentheses around 'từ khóa'."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

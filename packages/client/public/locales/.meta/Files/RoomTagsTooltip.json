@@ -3,7 +3,7 @@
   "content": "Tags will apply to the room that will be created based on this template.",
   "content_en_sha1_hash": "496a0f22260ab35d09561070f794c68a57378e2b",
   "created_at": "2025-05-19T21:30:56.147Z",
-  "updated_at": "2025-05-20T09:39:10.625Z",
+  "updated_at": "2025-05-21T11:17:22.370Z",
   "comment": {
     "text": "This translation key is used to display a tooltip explaining how room tags will be applied when creating or editing a new room based on a template. The tooltip appears in a dialog component and helps users understand the behavior of room tags in this context.",
     "is_auto": true,
@@ -51,7 +51,18 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is grammatically correct but sounds unnatural and overly formal. A more natural phrasing would be preferred.",
+          "suggestion": "Tags werden auf den Raum angewendet, der anhand dieser Vorlage erstellt wird."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'auf Grundlage' is overly formal and can be simplified.",
+          "suggestion": "Tags werden auf den Raum angewendet, der mit dieser Vorlage erstellt wird."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -81,7 +92,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'կիրառվեն' (kirarven) might be better replaced with 'կգործածվեն' (kgorgatsven) to more accurately convey 'apply' in this context. 'Կիրառվեն' is more formal and less commonly used in this specific scenario.",
+          "suggestion": "Պիտակները կգործածվեն այս կաղապարի հիման վրա ստեղծվելիք սենյակի համար:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,19 +122,37 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing 'will be created based on this template' could be more naturally translated. The current wording is a bit awkward.",
+          "suggestion": "ປ້າຍກຳກັບຈະນຳໃຊ້ກັບຫ້ອງທີ່ຈະສ້າງຕາມແມ່ແບບນີ້."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Birkas tiks piemērotas telpai, kas tiks izveidota, pamatojoties uz šo veidni.\" is overly literal and a bit awkward in Latvian.  A more natural phrasing would convey the meaning more clearly.",
+          "suggestion": "Birkas tiks piemērotas jaunizveidotajam telpai, balstoties uz šo veidni."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence structure is slightly awkward. 'op basis van dit sjabloon wordt gemaakt' could be improved.",
+          "suggestion": "Tags zijn van toepassing op de kamer die op basis van dit sjabloon wordt aangemaakt."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -129,7 +164,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'templates' should be 'template' to match the singular 'template' in the English content.",
+          "suggestion": "templates -> template"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,7 +182,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Etichete sunt aplicate la sala care va fi creată cu ajutorul acestui șablon' is a bit literal and sounds unnatural in Romanian. A more natural phrasing would be something like 'Etichetele se vor aplica camerei create pe baza acestui șablon.' or 'Etichetele vor fi aplicate camerei create din acest șablon.'",
+          "suggestion": "Etichetele se vor aplica camerei create pe baza acestui șablon."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,13 +200,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'මෙම සැකිල්ල මත පදනම්ව නිර්මාණය කරනු ලබන කාමරයට ටැග් අදාළ වනු ඇත' is a bit wordy and slightly deviates from the original English meaning. While technically correct, it's not as concise. 'බැඳී ඇති' (bandi athi) or 'පිහිටි' (pihiti) might be more natural for 'apply to'.",
+          "suggestion": "මෙම සැකිල්ල මත පදනම්ව නිර්මාණය වන කාමරයට ටැග් බැඳී ඇත / මෙම සැකිල්ල මත පදනම්ව නිර්මාණය වන කාමරයට ටැග් පිහිටි ඇත."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Štítky sa použijú na miestnosť, ktorá bude vytvorená na základe tejto šablóny' is somewhat literal and could be improved for naturalness. The English implies the tags are *applied* to the room, while the Slovak phrasing implies the tags will be *used on* the room. A more accurate and natural translation would reflect the 'applying' aspect.",
+          "suggestion": "Štítky sa priradia miestnosti, ktorá bude vytvorená na základe tejto šablóny."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,19 +230,47 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ознаке ће се применити на собу која ће бити креирана на основу овог шаблона.' is a bit literal and could be more natural-sounding in Serbian. While technically correct, it's a bit clunky.",
+          "suggestion": "Ознаке ће бити примјењене на просторију која ће бити креирана на основу шаблона."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'просторију' is more formal and often preferred in technical contexts compared to 'собу' when referring to a room created by a template. While 'собу' isn't incorrect, 'просторију' aligns better with the technical context.",
+          "suggestion": "Consider using 'просторију' if the tone is meant to be more formal."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'šablona' is misspelled. It should be 'šablona'.",
+          "suggestion": "šablona"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Etiketler bu şablona göre oluşturulacak odaya uygulanacaktır' is not the most natural or precise rendering of 'Tags will apply to the room that will be created based on this template.' It's a bit clunky.",
+          "suggestion": "Etiketler, bu şablonla oluşturulacak odaya uygulanır."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of 'oluşturulacak' (will be created) is slightly awkward. A simpler phrasing would improve readability.",
+          "suggestion": "Etiketler, bu şablonla oluşturulacak odaya uygulanır."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -195,7 +282,18 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Vietnamese translation 'Thẻ tag được sẽ áp dụng cho phòng được tạo dựa trên mẫu này' is not the most natural or accurate rendering of the English content. The phrase 'được' is used redundantly and awkwardly.",
+          "suggestion": "Thẻ tag sẽ được áp dụng cho phòng được tạo từ mẫu này."
+        },
+        {
+          "type": "spelling",
+          "description": "While 'tag' is acceptable, using 'nhãn' might be a more common and understandable term for 'tag' in this context.",
+          "suggestion": "Thẻ nhãn sẽ được áp dụng cho phòng được tạo từ mẫu này."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

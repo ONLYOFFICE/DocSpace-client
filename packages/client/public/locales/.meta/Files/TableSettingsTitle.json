@@ -3,7 +3,7 @@
   "content": "Manage displayed columns",
   "content_en_sha1_hash": "edef33d6c30b6b2dbcd0652de4bbdd3b72cfe10e",
   "created_at": "2025-05-19T21:30:56.214Z",
-  "updated_at": "2025-05-20T09:39:05.932Z",
+  "updated_at": "2025-05-21T11:11:15.050Z",
   "comment": {
     "text": "This translation key is used for the title of a settings panel or modal that allows users to manage displayed table columns. It appears in a UI component, possibly as a button or title, and provides context for users to understand its purpose.",
     "is_auto": true,
@@ -93,19 +93,37 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"表示列の管理\" is a literal translation of \"Manage displayed columns\". While technically correct, it's not the most natural or user-friendly phrasing in Japanese. A more common and easily understood phrasing would be something like \"表示する列の設定\" or \"列の表示設定\".",
+          "suggestion": "表示する列の設定"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '표시된 열 관리' is a literal translation that doesn't quite capture the intended meaning of 'Manage displayed columns'. It sounds a bit technical and clunky in Korean. A more natural phrasing would be more user-friendly.",
+          "suggestion": "Consider alternatives like '표시 열 설정' (Display Column Settings) or '표시할 열 선택' (Select Displayed Columns)."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ຈັດການຖັນທີ່ສະແດງ\" while literally meaning 'manage columns that are displayed', doesn't fully capture the intended meaning of 'Manage displayed columns'. It sounds a bit too literal and could be improved for naturalness.",
+          "suggestion": "ປ່ຽນການຈັດຕັ້ງປະຕິບັດຊຸດໂຄລນທີ່ເບິ່ງຄື"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +159,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Gestionează coloane afișate' doesn't accurately convey the meaning of 'Manage displayed columns'. 'Gestionează' (Italian for 'manage') is incorrect.  A more appropriate translation would emphasize controlling or configuring the columns.",
+          "suggestion": "Controlează coloane afișate"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +177,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"දිස්වන තීරු කළමනාකරණය\" is a literal translation of \"displayed columns\" but doesn't accurately convey the meaning of 'Manage displayed columns'. It sounds technical and clunky. A more natural translation would focus on the action of managing columns.",
+          "suggestion": "තීරුවල පෙන්වීම් කළමනාකරණය (tiiruwala penvima kala manakaaraya) - Manage column visibility"
+        },
+        {
+          "type": "spelling",
+          "description": "While the individual words are spelled correctly, the overall phrase might benefit from a slight rewrite for readability in Sinhala.",
+          "suggestion": "Consider rephrasing the entire translation for a more natural flow."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

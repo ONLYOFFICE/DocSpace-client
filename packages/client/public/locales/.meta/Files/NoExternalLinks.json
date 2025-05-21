@@ -3,7 +3,7 @@
   "content": "No external links",
   "content_en_sha1_hash": "ff672adde427c15e2c3387c1d27fc7212794d3f5",
   "created_at": "2025-05-19T21:30:55.908Z",
-  "updated_at": "2025-05-20T09:39:27.650Z",
+  "updated_at": "2025-05-21T11:39:10.318Z",
   "comment": {
     "text": "The translation key \"NoExternalLinks\" is used to describe a feature that disables external links in a user interface. This text appears on a button or option that prevents users from accessing external websites. Translators should provide a phrase that conveys this concept in the target language.",
     "is_auto": true,
@@ -153,7 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'බාහිර' (bahira) is a reasonable translation for 'external', but its accuracy can depend on context. Considering it's referring to links, 'පිටත' (pitatha) might be slightly more precise and commonly used in technical contexts.",
+          "suggestion": "Consider using 'පිටත සබැඳි නැත' for potentially greater clarity in a technical context."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

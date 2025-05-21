@@ -2,6 +2,8 @@
 // @ts-nocheck
 // eslint-disable @typescript-eslint/no-unused-vars
 
+import { TextDecoder, TextEncoder } from "util";
+
 class MockDOMRect {
   static fromRect(other?: DOMRectInit): DOMRect {
     const rect = other || { x: 0, y: 0, width: 0, height: 0 };
@@ -60,3 +62,6 @@ jest.mock("react-i18next", () => ({
     },
   }),
 }));
+
+global.TextEncoder = TextEncoder;
+global.TextDecoder = TextDecoder;

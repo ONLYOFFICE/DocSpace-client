@@ -2226,3 +2226,13 @@
   --files-version-history-badge-fill: #{$main-orange};
   --files-version-history-badge-stroke: #{$gray-dark};
 }
+
+.light {
+  --settings-coommon-description-color: #{$light-gray-dark};
+  --settings-common-white-label-paid-badge-bg: #{$favorites-status};
+}
+
+.dark {
+  --settings-coommon-description-color: #{$gray-dark};
+  --settings-common-white-label-paid-badge-bg: #{$favorite-status-dark};
+}

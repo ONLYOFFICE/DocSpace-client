@@ -343,6 +343,58 @@ async function keyUsageRoutes(fastify) {
     }
   });
 
+  // Approve or unapprove a translation for a specific language
+  fastify.post("/api/key-usage/:key/approve/:language", async (request, reply) => {
+    try {
+      const { key, language } = request.params;
+      const { approved } = request.body;
+      
+      // Find metadata files for this key
+      const metadataFiles = await findMetadataFiles(key);
+      
+      if (metadataFiles.length === 0) {
+        return reply.code(404).send({ error: "Key not found in metadata" });
+      }
+      
+      // Update the metadata file with the approval status
+      for (const file of metadataFiles) {
+        // Ensure the languages object exists
+        if (!file.data.languages) {
+          file.data.languages = {};
+        }
+        
+        // Ensure the specific language entry exists
+        if (!file.data.languages[language]) {
+          file.data.languages[language] = {
+            ai_translated: false,
+            ai_model: null,
+            ai_spell_check_issues: [],
+            approved_at: null
+          };
+        }
+        
+        // Update the approved_at timestamp
+        file.data.languages[language].approved_at = approved ? new Date().toISOString() : null;
+        
+        // Write the updated metadata back to the file
+        await writeJsonWithConsistentEol(file.metaPath, file.data);
+      }
+      
+      // Re-fetch the updated metadata
+      const updatedMetadataFiles = await findMetadataFiles(key);
+      const updatedFile = updatedMetadataFiles[0];
+      
+      return reply.send({
+        success: true,
+        message: approved ? 'Translation approved' : 'Translation approval removed',
+        data: updatedFile ? updatedFile.data : null
+      });
+    } catch (error) {
+      request.log.error(error);
+      return reply.code(500).send({ error: error.message });
+    }
+  });
+
   // Get all keys for a module
   fastify.get("/api/key-usage/module/:module", async (request, reply) => {
     try {

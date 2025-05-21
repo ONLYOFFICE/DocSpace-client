@@ -162,10 +162,11 @@ export const getAllModules = async () => {
   return response.data.modules;
 };
 
-export const setKeyComment = async (key: string, comment: string) => {
-  const response = await api.post(`/key-usage/${encodeURIComponent(key)}/comment`, { comment });
-  return response.data;
-};
+export const setKeyComment = (key: string, comment: string) =>
+  api.put(`/key-usage/${key}/comment`, { comment });
+
+export const approveTranslation = (key: string, language: string, approved: boolean) =>
+  api.post(`/key-usage/${encodeURIComponent(key)}/approve/${language}`, { approved });
 
 export const searchKeys = async (query: string) => {
   const response = await api.get(`/key-usage/search?query=${encodeURIComponent(query)}`);

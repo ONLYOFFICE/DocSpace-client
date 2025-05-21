@@ -49,9 +49,37 @@ interface OllamaState {
   clearError: () => void;
 }
 
+// Local storage keys
+const STORAGE_KEY_SELECTED_MODEL = 'translation-app-selected-model';
+
+// Helper function to get stored model
+const getStoredModel = (): string | null => {
+  if (typeof window === 'undefined') return null;
+  try {
+    return localStorage.getItem(STORAGE_KEY_SELECTED_MODEL);
+  } catch (error) {
+    console.error('Error reading from localStorage:', error);
+    return null;
+  }
+};
+
+// Helper function to store selected model
+const storeSelectedModel = (model: string | null): void => {
+  if (typeof window === 'undefined') return;
+  try {
+    if (model) {
+      localStorage.setItem(STORAGE_KEY_SELECTED_MODEL, model);
+    } else {
+      localStorage.removeItem(STORAGE_KEY_SELECTED_MODEL);
+    }
+  } catch (error) {
+    console.error('Error writing to localStorage:', error);
+  }
+};
+
 export const useOllamaStore = create<OllamaState>((set, get) => ({
   models: [],
-  selectedModel: null,
+  selectedModel: getStoredModel(),
   isConnected: false,
   translationProgress: null,
   loading: false,
@@ -63,7 +91,17 @@ export const useOllamaStore = create<OllamaState>((set, get) => ({
       const response = await api.getOllamaModels();
       
       const models = response.data.data;
-      const selectedModel = models.length > 0 ? models[0].name : null;
+      const storedModel = getStoredModel();
+      
+      // Use stored model if it exists and is available in the models list
+      // Otherwise use the first model from the list
+      const modelExists = storedModel && models.some((m: any) => m.name === storedModel);
+      const selectedModel = modelExists ? storedModel : (models.length > 0 ? models[0].name : null);
+      
+      // Store the selected model
+      if (selectedModel) {
+        storeSelectedModel(selectedModel);
+      }
       
       set({ 
         models,
@@ -81,8 +119,9 @@ export const useOllamaStore = create<OllamaState>((set, get) => ({
     }
   },
   
-  setSelectedModel: (model) => {
-    set({ selectedModel: model });
+  setSelectedModel: (modelName: string) => {
+    set({ selectedModel: modelName });
+    storeSelectedModel(modelName);
   },
   
   translateKey: async (

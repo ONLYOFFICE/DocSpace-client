@@ -3,7 +3,7 @@
   "content": "Owner",
   "content_en_sha1_hash": "89ff31225c5f042fff61e92ec8cf80e417a7140c",
   "created_at": "2025-05-19T21:30:47.205Z",
-  "updated_at": "2025-05-20T09:35:08.082Z",
+  "updated_at": "2025-05-20T22:26:25.419Z",
   "comment": {
     "text": "The translation key \"Owner\" represents the label used to display an owner's name or avatar in a user interface, typically appearing in dialog boxes and info panels. It is translated from \"Common:Owner\", suggesting that it relates to general information about a user's role. This text appears as part of a styled component, likely within a UI element intended to provide context or identify the user.",
     "is_auto": true,
@@ -105,7 +105,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Portal sahibi' literally translates to 'Portal owner', it's not the most natural or commonly used translation for 'Owner' in a general context. 'Sahibi' implies ownership of a specific portal, while 'Owner' can mean owner of anything.",
+          "suggestion": "Consider 'Sahibi' (owner) or 'Malik' (possessor) as a more general translation, depending on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "bg": {

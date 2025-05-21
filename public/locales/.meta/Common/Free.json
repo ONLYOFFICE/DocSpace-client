@@ -3,7 +3,7 @@
   "content": "Free",
   "content_en_sha1_hash": "75f527181b574f84568f33f67adc3b267a6fef9c",
   "created_at": "2025-05-19T21:30:45.558Z",
-  "updated_at": "2025-05-20T09:36:04.363Z",
+  "updated_at": "2025-05-20T23:18:01.488Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Free\" in various contexts across different platforms. It is commonly found on price labels and informational sections, indicating that a product or service has no cost associated with it.",
     "is_auto": true,
@@ -75,7 +75,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation 'Volno' does not accurately convey the meaning of 'Free' in the context of a key name likely referring to cost or availability. 'Volno' generally means 'free time' or 'leeway'.",
+          "suggestion": "Possible alternatives include 'Zdarma', 'Bezplatně', or 'Zadarmo', depending on the specific nuance intended."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -183,7 +189,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Sinhala translation 'නොමිලේ' appears to have a typo. The correct spelling of 'Free' in Sinhala is 'නොමිලේ'.",
+          "suggestion": "නොමිලේ"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

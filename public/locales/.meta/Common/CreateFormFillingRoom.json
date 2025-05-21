@@ -3,7 +3,7 @@
   "content": "Create Form filling room",
   "content_en_sha1_hash": "2c00eeebf71b5e09d7795d3137d22acce6f3542a",
   "created_at": "2025-05-19T21:30:43.893Z",
-  "updated_at": "2025-05-20T09:36:51.542Z",
+  "updated_at": "2025-05-21T00:06:15.773Z",
   "comment": {
     "text": "The translation key \"CreateFormFillingRoom\" is used to display the label for a button that allows users to create a new form filling room. It appears in a dialog and has been translated from English as \"Create Form filling room\". This translation key is part of a set of labels for different types of rooms, with this one specifically referring to a space for filling out forms.",
     "is_auto": true,
@@ -45,13 +45,25 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Forma doldurma otağı yaradın' literally translates to 'You created form filling room'. The English phrase 'Create Form filling room' is an instruction or a command, not a statement about someone creating something. A more accurate translation would imply the action of creation.",
+          "suggestion": "Forma doldurma otağı yarat"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Създайте стая за Попълване на формуляри\" is a literal translation that is slightly awkward in Bulgarian. While technically correct, it's not the most natural phrasing.",
+          "suggestion": "Consider alternatives like \"Създайте помещение за попълване на формуляри\" or \"Създайте стая за обработка на формуляри\", which sound more idiomatic."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -111,7 +123,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"양식 작성 룸 생성 \" is a literal translation but doesn't flow naturally in Korean. While technically correct, it sounds awkward.",
+          "suggestion": "Consider a more natural phrasing like \"양식 작성 공간 생성\" or \"양식 작성실 생성\"."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -153,7 +171,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Creare Sală Completare formular' is not idiomatic Romanian. 'Completare formular' is overly literal and clunky. A more natural translation would be 'Sală de completare formulare' or 'Sală pentru completarea formularelor'.",
+          "suggestion": "Sală de completare formulare"
+        },
+        {
+          "type": "formatting",
+          "description": "The capitalization is inconsistent. 'Sală' should be lowercase unless it's the beginning of a sentence.",
+          "suggestion": "Sală de completare formulare"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -183,13 +212,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Креирај Просторију за попуњавање формулара' is a literal translation and doesn't quite capture the natural flow of the English phrase 'Create Form filling room'. A more natural Serbian translation would emphasize the function or purpose of the room.  'Креирај Соби за попуњавање образаца' is a more common and idiomatic expression.",
+          "suggestion": "Креирај Соби за попуњавање образаца"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Prostorija' is a somewhat formal or archaic term for 'room'. A more natural and commonly used term would be 'soba'.",
+          "suggestion": "Kreiraj Soba za popunjavanje formulara"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -207,7 +248,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Điền biểu mẫu\" is a somewhat literal translation. A more natural phrasing in Vietnamese would be \"phòng nhập liệu biểu mẫu\" or \"phòng điền thông tin biểu mẫu\". \"Điền biểu mẫu\" sounds a little awkward.",
+          "suggestion": "phòng nhập liệu biểu mẫu"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

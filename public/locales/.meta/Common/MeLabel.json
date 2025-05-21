@@ -3,7 +3,7 @@
   "content": "Me",
   "content_en_sha1_hash": "94563ec383e29aa3743abd9b337b2e084fb199fb",
   "created_at": "2025-05-19T21:30:46.429Z",
-  "updated_at": "2025-05-20T09:35:32.004Z",
+  "updated_at": "2025-05-20T22:49:29.383Z",
   "comment": {
     "text": "This translation key \"MeLabel\" is used to display a user's name when they have ownership rights or are the current room owner in various UI components, such as dialogs and templates. The text appears next to the username in a bold font and indicates that the user has specific permissions or access.",
     "is_auto": true,
@@ -213,7 +213,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation \"A mim\" does not accurately convey the meaning of \"Me\". \"Me\" is a reflexive pronoun indicating the person being acted upon. \"A mim\" is a dative pronoun and is not the correct equivalent for this context.",
+          "suggestion": "Eu"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {

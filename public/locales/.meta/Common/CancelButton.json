@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2025-05-20T09:37:10.748Z",
+  "updated_at": "2025-05-21T00:21:40.242Z",
   "comment": {
     "text": "This translation key is used for the \"Cancel\" button in various UI elements such as dialogs and form buttons. It provides the text to be displayed when a user clicks the cancel action, allowing them to terminate an operation or return to their previous state. This key appears in files such as Dialog.js, QuotaForm, and ShareCollectSelector.",
     "is_auto": true,
@@ -849,13 +849,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation \"الغاء\" (Ilgha') is a valid word meaning 'cancellation' or 'cancel', but it's a more formal term. A more common and user-friendly translation for a 'Cancel' button would be \"إلغاء\" (Ilg'aa').",
+          "suggestion": "إلغاء"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Ləğv edin\" is a possible translation for 'Cancel', it is more accurately \"Delete\" or \"Remove\". \"Cancel\" typically implies stopping an action in progress, and \"Ləğv edin\" has a more final connotation.",
+          "suggestion": "Consider alternatives like \"Saxla\" (Hold), \"Dayandır\" (Stop), or a more context-specific translation."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -975,7 +987,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"අවලංගු\" (awalangu) doesn't accurately convey the meaning of \"Cancel\". It translates to 'invalid' or 'illegitimate' which is not the intended meaning of a cancel button. A more appropriate translation would be something like \"ඉවතලන්න\" (iwatalanna) or \"రద్దు කරන්න\" (raddu karanna).",
+          "suggestion": "Consider using \"ඉවතලන්න\" (iwatalanna) or \"රద్దు කරන්න\" (raddu karanna)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -993,7 +1011,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Откажи' is a valid Serbian word related to cancellation, 'Cancel' typically implies a button action. 'Откажи' is an imperative form and might sound abrupt for a button label. A more appropriate translation, considering the context, would be 'Otkaži' (Otkaži) or 'Ponisti' (Reset).",
+          "suggestion": "Consider 'Otkaži' or 'Ponisti' for a more user-friendly button label."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

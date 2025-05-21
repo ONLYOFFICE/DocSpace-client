@@ -3,7 +3,7 @@
   "content": "Continue",
   "content_en_sha1_hash": "2e02623966f9391facf6eaefc8b079ed5b630bee",
   "created_at": "2025-05-19T21:30:43.691Z",
-  "updated_at": "2025-05-20T09:36:59.020Z",
+  "updated_at": "2025-05-21T00:13:32.375Z",
   "comment": {
     "text": "This translation key is used as a label for a \"Continue\" button that appears in various dialogs and confirms user actions. It provides a clear and consistent text to be translated, allowing users to proceed after completing a task or operation.",
     "is_auto": true,
@@ -177,7 +177,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation \"続ける\" (tsuzukeru) means \"to continue\" as a verb. While technically correct, it's not the most natural or common translation for a button labeled 'Continue'.  It implies an action *to* continue, rather than just 'Continue'.",
+          "suggestion": "考慮する (kouryo suru) - Consider, or 進む (susumu) - Proceed would be more natural for a button that progresses to the next step."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -237,7 +243,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'ඉදිරියට' (idiriyata) translates to 'forward' or 'onward', not directly 'Continue'. While it conveys a similar meaning, it's not the most accurate translation for a 'Continue' button.",
+          "suggestion": "Consider 'ගෙනໄປන්න' (gena pinnna) or 'වැඩිහිට්ට' (waddehitto), or a more context-specific translation that accurately reflects the button's function."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -255,7 +267,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Настави\" is the imperative form (command) of the verb \"наставити\" (to continue). For a button labeled \"Continue\", a more appropriate translation would be a noun form, indicating the action of continuing. A better option is \"Наставити\" (Nastaviti), which is the infinitive.",
+          "suggestion": "Наставити"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

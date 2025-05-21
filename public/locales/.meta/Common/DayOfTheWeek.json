@@ -3,7 +3,7 @@
   "content": "Day of the week",
   "content_en_sha1_hash": "a2dfedeffd1ead187411349e305b1fe627303452",
   "created_at": "2025-05-19T21:30:44.414Z",
-  "updated_at": "2025-05-20T09:36:46.238Z",
+  "updated_at": "2025-05-20T23:59:58.601Z",
   "comment": {
     "text": "The \"DayOfTheWeek\" translation key represents the English word for a specific day of the week, used in a calendar component that displays options for selecting weekdays. This text appears as an option label in a select menu within the WeekDays component.",
     "is_auto": true,
@@ -153,7 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Sinhala translation 'සතියේ දවස' has a slight spelling error. The apostrophe in 'සතියේ' should be a hyphen. It should be 'සතියි දවස'.",
+          "suggestion": "සතියි දවස"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +177,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Дан у недељи\" literally translates to 'Day in the week'. The correct translation should be \"Дан недеље\" which means 'Day of the week'.",
+          "suggestion": "Дан недеље"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -201,7 +213,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"星期日期\" is not a correct translation of \"Day of the week\". \"星期\" refers to 'week', and \"日期\" refers to 'date'.  It doesn't convey the meaning of which day within the week it is.",
+          "suggestion": "星期几 (Xīngqí jǐ) is the standard translation for 'Day of the week'."
+        }
+      ],
       "approved_at": null
     }
   }

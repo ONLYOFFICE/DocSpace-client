@@ -3,7 +3,7 @@
   "content": "Save here",
   "content_en_sha1_hash": "2f59885d38dc68521d61e5eb75fd8f19891f7b1e",
   "created_at": "2025-05-19T21:30:48.310Z",
-  "updated_at": "2025-05-20T09:34:27.039Z",
+  "updated_at": "2025-05-20T21:44:03.077Z",
   "comment": {
     "text": "This translation key is used for a button that instructs users to save their selection (\"Save here\") in a file management system, typically appearing as a submit or save button in a dialog or UI element. It's part of a broader set of translations related to file editing and saving, specifically in the context of a select folder dialog.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Burada yadda saxlayın' is a literal translation but doesn't quite capture the natural flow of the English phrase 'Save here' in Azerbaijani. It sounds slightly awkward.",
+          "suggestion": "Consider alternatives like 'Buraya qeyd et' or 'Burada saxla'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -111,7 +117,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ບັນທຶກ ນີ້\" literally translates to \"Record this\". It doesn't convey the meaning of \"Save here\" accurately. A more appropriate translation would be something like \"ເກັບຮັກສາໄວ້ທີ່ນີ້\" or \"ບັນທຶກໄວ້ທີ່ນີ້\".",
+          "suggestion": "ເກັບຮັກສາໄວ້ທີ່ນີ້"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -207,7 +219,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While '在此保存' (Zài zhèlǐ bǎocún) is understandable, a more natural and common translation of 'Save here' would be '另存为' (Lìng cún wéi) or '保存到此' (Bǎocún dào cǐ). '在此保存' implies saving *in* this location, while 'Save here' typically means saving the file *to* this location.",
+          "suggestion": "另存为 (Lìng cún wéi) or 保存到此 (Bǎocún dào cǐ)"
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:48.355Z",
-  "updated_at": "2025-05-20T09:34:25.327Z",
+  "updated_at": "2025-05-20T21:42:58.763Z",
   "comment": {
     "text": "This translation key is used to display a label for selecting an action, such as choosing a file or folder, in various UI elements. It appears in a placeholder position within a dialog and on a component that handles file selection. Translators should provide a descriptive text that indicates the user's ability to make a choice.",
     "is_auto": true,
@@ -261,7 +261,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Selectare\" isn't the most natural or common translation for \"Select\" in this context. \"Selectare\" is technically correct as a verb (to select), but \"Select\" is usually translated as \"Selectare\" or simply \"Select\" in UI contexts.",
+          "suggestion": "Consider using \"Select\" or \"Selecție\"."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -273,13 +279,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'තෝරන්න' (thoranna) means 'to select' or 'to choose', it's more of an action word. 'Select' as a label on a UI element is better conveyed by a more noun-like translation. A better option would be 'ఎంపిక' (emhika) which means 'selection' or 'choice'.",
+          "suggestion": "ఎంపిక (emhika)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Vyberať' is a possible translation for 'Select', it implies the action of selecting repeatedly or choosing from a set of options. 'Select' in this context, especially as a label or button text, often refers to a single, definitive choice. A more accurate and commonly used translation would be 'Výber' (Selection) or 'Zvoliť' (To choose).",
+          "suggestion": "Consider using 'Výber' or 'Zvoliť' depending on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -291,7 +309,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation 'Изабери' translates to 'Choose' or 'Pick', not 'Select'. While similar, 'Select' has a more specific meaning in a user interface context.",
+          "suggestion": "Consider 'Одабери' (Odaberi) which more closely aligns with the meaning of 'Select' in a UI context, or 'Изабери' if 'Choose' is acceptable within the application's design."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

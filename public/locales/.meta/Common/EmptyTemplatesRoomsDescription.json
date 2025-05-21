@@ -3,7 +3,7 @@
   "content": "Create your first room template and then you can create new rooms based on it.",
   "content_en_sha1_hash": "07a4e005f532c156a91be0251d0103ff7ae67865",
   "created_at": "2025-05-19T21:30:44.905Z",
-  "updated_at": "2025-05-20T09:36:27.729Z",
+  "updated_at": "2025-05-20T23:43:26.496Z",
   "comment": {
     "text": "This translation key describes the content to be displayed when creating a new room template, guiding users through the process of initial room creation based on the template. It appears in the Create Room Dialog component, specifically within an empty screen header and description section.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'həmin şablon əsasında' is a bit literal and could be improved for natural flow. While technically correct, it doesn't read as smoothly as it could.",
+          "suggestion": "Consider a more natural phrasing like 'o şablonu əsas götürərək' or 'o şablon ilə'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -129,7 +135,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'divisão' translates to 'room' or 'section' but 'room' is more appropriate in this context as it refers to a room template.",
+          "suggestion": "Crie o seu primeiro modelo de sala e depois pode criar novas salas com base nele."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,7 +153,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Creați-vă primul șablon de sală cu ajutorul căruia puteți crea săli noi' is a bit clunky and doesn't directly convey the meaning of the English sentence. The phrase 'cu ajutorul căruia' (with the help of which) is unnecessary.",
+          "suggestion": "Creați-vă primul șablon de sală și apoi puteți crea săli noi bazate pe el."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit complex, potentially hindering comprehension.",
+          "suggestion": "Consider breaking it into two shorter sentences for better readability: 'Creați-vă primul șablon de sală. Apoi, puteți crea săli noi bazate pe el.'"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +176,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'සාදන්න' (saadanna) is technically correct, but a more common and natural phrasing would be 'ස້າງන්න' (saanganna) when referring to creating something.",
+          "suggestion": "ඔබේ පළමු කාමර සැකිල්ල ස້າງන්න, ඉන්පසු ඔබට එය මත පදනම්ව නව කාමර නිර්මාණය කළ හැකිය."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +200,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'шаблон' is consistently used. While correct, depending on the context, 'образац' might be a more commonly understood equivalent for 'template' in this specific user interface scenario.",
+          "suggestion": "Consider replacing 'шаблон' with 'образац' if appropriate for the target audience.  However, 'шаблон' is perfectly acceptable."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"na osnovu njega\" is a slightly awkward and less natural way to express \"based on it\". A more common and fluent phrasing would be \"prema njemu\" or \"po njemu\".",
+          "suggestion": "Kreirajte svoj prvi šablon sobe, a zatim možete kreirati nove sobe prema njemu."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

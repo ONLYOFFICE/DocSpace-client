@@ -3,7 +3,7 @@
   "content": "Delete permanently",
   "content_en_sha1_hash": "e63b5153bde0d2b885dec00616d064be3e88c11b",
   "created_at": "2025-05-19T21:30:44.471Z",
-  "updated_at": "2025-05-20T09:36:44.028Z",
+  "updated_at": "2025-05-20T23:58:39.549Z",
   "comment": {
     "text": "\"This translation key is used to display a message that confirms permanent deletion. In the CreateEditRoomDialog component, this key is applied as the label of an action button, prompting users to permanently delete files.\"",
     "is_auto": true,
@@ -57,7 +57,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Διαγραφή μόνιμα' is understandable, it's a literal translation and not the most natural way to express 'Delete permanently' in Greek. A more idiomatic translation would be something like 'Μόνιμη διαγραφή'.",
+          "suggestion": "Μόνιμη διαγραφή"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -93,7 +99,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"完全に削除する\" (kanzen ni sakujo suru) is a literal translation of \"Delete permanently,\" it sounds very formal and stiff in most contexts. A more natural and user-friendly translation might be preferable.",
+          "suggestion": "削除する (sakujo suru) or 完全に消去する (kanzen ni shokei suru)"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -105,7 +117,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ລົບລ້າງ' means 'delete' and 'ຖາວອນ' means 'permanent', the combination 'ລົບລ້າງຖາວອນ' feels somewhat unnatural in Lao. A more common and natural phrasing for 'Delete permanently' would be something like 'ລົບຖາວອນ' or 'ລົບລ້າງຢ່າງຖາວອນ'.",
+          "suggestion": "Consider 'ລົບຖາວອນ' or 'ລົບລ້າງຢ່າງຖາວອນ'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -153,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ස්ථිරවම මකන්න\" can be understood as \"Delete permanently\", a more natural and common phrasing in Sinhala would be \"අඛණ්ඩව මකන්න\" or \"සදාචාරව මකන්න\". \"ස්ථිරවම\" is generally used for stability or firmness, not for permanent deletion.",
+          "suggestion": "Consider using \"අඛණ්ඩව මකන්න\" or \"සදාචාරව මකන්න\" for a more natural translation."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +195,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Обриши трајно\" is understandable, a more natural and commonly used translation of \"Delete permanently\" in Serbian (Cyrillic) would be \"Избриши трајно\" or \"Користећи трајно бришење\". \"Обриши\" implies a wiping action which isn't quite the correct nuance for a delete function.",
+          "suggestion": "Избриши трајно"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Obriši trajno' doesn't fully capture the meaning of 'Delete permanently'. While 'Obriši' means 'Delete', 'trajnu' is not the most natural way to convey 'permanently' in this context. It's grammatically correct, but sounds slightly awkward.",
+          "suggestion": "Consider using 'Obriši zauvek' or 'Trajno obriši' for a more natural and accurate translation. 'Obriši bez mogućnosti vraćanja' is a more descriptive but longer alternative."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

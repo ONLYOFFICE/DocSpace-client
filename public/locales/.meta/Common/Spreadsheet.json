@@ -3,7 +3,7 @@
   "content": "Spreadsheet",
   "content_en_sha1_hash": "cc6fdf1b0963eceb567d2f5b641f4950751636eb",
   "created_at": "2025-05-19T21:30:48.999Z",
-  "updated_at": "2025-05-20T08:38:59.574Z",
+  "updated_at": "2025-05-20T21:18:28.764Z",
   "comment": {
     "text": "This translation key is used for the label \"Spreadsheet\" which appears on a button in the \"Actions\" dropdown menu, allowing users to create a new spreadsheet. It is also used as part of a dialog and links within the application, consistently displaying the term \"Spreadsheet\". The text should be translated to appear cohesively across these different contexts.",
     "is_auto": true,
@@ -111,7 +111,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Աղյուսակաթերթ\" (Aghyusakatherth) is a possible translation for 'Spreadsheet', it is quite literal and less common. A more natural and widely understood translation would be \"Տախտակաթերթ\" (Takhdakaatherth) or simply \"Ցուցակ\" (Tsutsak).",
+          "suggestion": "Consider using \"Տախտակաթերթ\" (Takhdakaatherth) or \"Ցուցակ\" (Tsutsak)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -135,7 +141,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຄຳນວນ' (kham-nuan) means 'calculate' or 'compute,' not 'spreadsheet.' A more accurate translation would be something like 'ແຜ່ນກາານ' (phaen gaan) or 'ຕາຕະລາງ' (ta-talaang).",
+          "suggestion": "ແຜ່ນກາານ (phaen gaan) or ຕາຕະລາງ (ta-talaang)"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -201,19 +213,37 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Прорачунска табела\" while technically meaning 'calculation table', is not the standard or most natural translation for 'Spreadsheet'. A more common and accurate translation would be 'Табела' or 'Рачунска табела'.",
+          "suggestion": "Табела"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'računska' is missing an acute accent. It should be 'računska'.",
+          "suggestion": "ProračunSKA tabela"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Elektronik tablo' is a literal translation of 'spreadsheet' and while technically correct, it's not the most common or natural way a Turkish speaker would refer to a spreadsheet. A more idiomatic translation would be 'Excel tablosu' (referring to the Excel software) or simply 'tablo' depending on context.",
+          "suggestion": "Consider 'Excel tablosu' or 'tablo' as a more natural alternative depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

@@ -3,7 +3,7 @@
   "content": "View all contacts",
   "content_en_sha1_hash": "859eb1e255d69ca6c23a42997bfd6dd2ede94b6a",
   "created_at": "2025-05-19T21:30:46.973Z",
-  "updated_at": "2025-05-20T09:35:14.757Z",
+  "updated_at": "2025-05-20T22:33:43.829Z",
   "comment": {
     "text": "This translation key is used to display a brief description of the \"View all contacts\" feature. It will appear in UI elements related to OAuth account scopes and permissions, such as buttons or dialogs, where users can choose to access their contact information.",
     "is_auto": true,
@@ -27,25 +27,49 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation \"عرض جميع الحسابات\" translates to \"View all accounts,\" not \"View all contacts.\" The English content refers to contacts, while the Arabic translation refers to accounts. This is a significant semantic error.",
+          "suggestion": "عرض جميع جهات الاتصال"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Bütün hesablara baxın' literally translates to 'View all accounts'. The English content 'View all contacts' refers to contacts, not accounts. This is a significant mistranslation.",
+          "suggestion": "Bütün əlaqələrə baxın"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Прегледайте всички профили\" does not accurately convey the meaning of \"View all contacts\". 'Профили' translates to 'profiles' which is not the same as 'contacts'.",
+          "suggestion": "Прегледайте всички контакти"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation \"Zobrazit všechny účty\" translates to \"View all accounts\", not \"View all contacts\". The English phrase 'View all contacts' refers to a list of contacts, whereas the translation refers to accounts (likely user accounts).",
+          "suggestion": "Zobrazit všechny kontakty"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -57,7 +81,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation \"Προβολή όλων των λογαριασμών\" translates to \"View all accounts\", not \"View all contacts\". The English content refers to contacts, while the translation refers to accounts.",
+          "suggestion": "Προβολή όλων των επαφών"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,7 +99,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Näytä kaikki tilit\" does not accurately convey the meaning of \"View all contacts.\" \"Tilit\" means \"accounts,\" while the English refers to \"contacts.\" The translation is a mistranslation.",
+          "suggestion": "Näytä kaikki yhteystiedot"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -99,7 +135,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '모든 계정 보기' translates to 'View all accounts,' which doesn't perfectly capture the meaning of 'View all contacts'. While '계정' can sometimes mean 'account,' in this context, '연락처' (yeonrakcheo - contacts) would be more accurate.",
+          "suggestion": "모든 연락처 보기"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -111,7 +153,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation 'Skatīt visus kontus' translates to 'View all accounts', not 'View all contacts'. This is a mistranslation of the English content.",
+          "suggestion": "Skatīt visus kontaktus"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,7 +189,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Afișează toate persoane de contact' is not the most natural or accurate rendering of \"View all contacts.\" While technically correct, it sounds somewhat literal. A more idiomatic translation would be better.",
+          "suggestion": "Vezi toți contactii"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +207,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'සියළු සම්බන්ධතා බලන්න' is a literal translation but doesn't quite capture the intended meaning of \"View all contacts\" in the context of OAuth account permissions. It translates to 'See all contacts,' which is technically correct, but less natural.",
+          "suggestion": "Consider a more idiomatic translation such as 'සියළු සම්බන්ධතා දැකීම' (Siyaḷu saṁpadātatā dēkima) which translates to 'Viewing all contacts' or 'Ability to view all contacts'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +237,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'kontakata' is misspelled. The correct spelling is 'kontakata'.",
+          "suggestion": "kontakata"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

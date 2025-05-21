@@ -3,7 +3,7 @@
   "content": "Do you want to cancel the current process?",
   "content_en_sha1_hash": "c7c374f03228c44cfeaed59926e6745be6dc0052",
   "created_at": "2025-05-19T21:30:43.370Z",
-  "updated_at": "2025-05-20T09:37:10.298Z",
+  "updated_at": "2025-05-21T00:21:26.954Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message when canceling the current process. It appears as a button in a modal dialog, prompting the user to confirm their action before proceeding.",
     "is_auto": true,
@@ -159,7 +159,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation \"Ste si istí, že chcete zrušiť prebiehajúci proces?\" translates to 'Are you sure you want to cancel the running process?' which is a more verbose and slightly different nuance than the English 'Do you want to cancel the current process?'. While understandable, it adds a layer of confirmation not present in the original.",
+          "suggestion": "Consider a more direct translation like \"Chcete zrušiť aktuálny proces?\" which translates to 'Do you want to cancel the current process?'"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,7 +177,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Да ли желите да откажете тренутни процес?' isn't the most natural or accurate translation of 'Do you want to cancel the current process?'. While technically correct, it sounds somewhat formal and uses a less common verb for 'cancel' in this context. A more natural phrasing would use 'укинете' or 'прекинете'.",
+          "suggestion": "Да ли желите да укинете тренутни процес? or Да ли желите да прекинете тренутни процес?"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

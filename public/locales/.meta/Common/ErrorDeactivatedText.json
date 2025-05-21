@@ -3,7 +3,7 @@
   "content": "This {{productName}} is deactivated",
   "content_en_sha1_hash": "192b71af1a142211b0f1573c4d3e056a55e4111b",
   "created_at": "2025-05-19T21:30:45.063Z",
-  "updated_at": "2025-05-20T09:36:21.788Z",
+  "updated_at": "2025-05-20T23:38:02.114Z",
   "comment": {
     "text": "This translation key is used to display a generic message indicating that a product is deactivated, typically found on an error page or unavailable component. It appears when there's an issue with accessing a specific product and is meant to provide a clear explanation without revealing detailed information about the issue.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'is deactivated' is not accurately translated. 'معطل' (mu'attal) typically means 'disabled' or 'out of order,' but 'deactivated' implies a specific process. A more precise translation might consider terms related to product licensing or activation states.",
+          "suggestion": "Consider alternatives like 'تم إلغاء تفعيله' (tam ilgha' taf'eeluhu) - 'its activation has been cancelled' or 'غير مفعل' (ghair mufa'al) - 'not activated', depending on the precise meaning of 'deactivated' in the context of the product."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -45,7 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'prostor' (space) doesn't accurately convey the meaning of 'product' in this context. It implies a physical space rather than a product or service.",
+          "suggestion": "Tento produkt {{productName}} je deaktivován"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -123,7 +135,18 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Dane konto {{productName}} zostało dezaktywowane' is not a direct or accurate translation of 'This {{productName}} is deactivated'. 'Dane konto' is awkward. 'This' doesn't have a direct equivalent that requires a noun phrase.",
+          "suggestion": "This could be rephrased to something like 'Twoje {{productName}} zostało dezaktywowane' (Your {{productName}} is deactivated) or '{{productName}} zostało dezaktywowane' ({{productName}} is deactivated)."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Dane konto' is grammatically incorrect. 'Dane' means data and doesn't fit in this context.",
+          "suggestion": "Remove 'Dane' or rephrase the sentence to avoid it."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,7 +164,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'spațiu' (space) doesn't accurately translate 'product' in this context. It implies a physical space rather than a product.",
+          "suggestion": "Acest produs {{productName}} este dezactivat"
+        }
+      ],
       "approved_at": null
     },
     "ru": {

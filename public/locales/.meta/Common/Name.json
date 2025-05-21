@@ -3,7 +3,7 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.705Z",
-  "updated_at": "2025-05-20T09:35:24.514Z",
+  "updated_at": "2025-05-20T22:41:45.786Z",
   "comment": {
     "text": "This translation key displays the user's full name, typically their first and last names. It is used in a social authentication welcome dialog to provide user information. Translators should note that the name may be truncated or displayed as an alias if not available.",
     "is_auto": true,
@@ -165,7 +165,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ルーム名\" (Room Name) doesn't perfectly convey the meaning of \"Name\" in this context. While it could be acceptable depending on the context where this key is used (e.g., a room naming feature), a more general and accurate translation of \"Name\" would be just \"名前\" (namae).",
+          "suggestion": "名前"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -207,7 +213,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Imagem\" (Image) does not accurately represent the English word \"Name\". \"Name\" refers to a designation or label, while \"Imagem\" means \"Image\".",
+          "suggestion": "A more appropriate translation for \"Name\" would be \"Nome\"."
+        }
+      ],
       "approved_at": null
     },
     "ro": {

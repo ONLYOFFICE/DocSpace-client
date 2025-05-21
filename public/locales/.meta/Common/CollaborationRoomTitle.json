@@ -3,7 +3,7 @@
   "content": "Collaboration room",
   "content_en_sha1_hash": "020e5e753e7a2509b4e791bcc1a8abc08bb1e51d",
   "created_at": "2025-05-19T21:30:43.513Z",
-  "updated_at": "2025-05-20T09:37:05.356Z",
+  "updated_at": "2025-05-21T00:17:05.146Z",
   "comment": {
     "text": "The \"CollaborationRoomTitle\" translation key is used to display the label for collaboration rooms in a portal settings interface. This text appears on screens where users select or filter room types, and it provides clarity about the purpose of each room category. Translators should focus on accurately conveying the meaning of this text to support internationalization efforts.",
     "is_auto": true,
@@ -159,7 +159,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Комната для совместного редактирования\" is a very literal and somewhat clunky translation of \"Collaboration room\". It's a functional description but lacks the conciseness and natural flow of a good translation for a user interface label.",
+          "suggestion": "Consider alternatives like \"Комната для совместной работы\" (Room for collaborative work) or \"Общая комната\" (Shared room) which are more common and natural."
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -183,7 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Соба за сарадњу\" is not an accurate translation of \"Collaboration room\".  \"Соба\" means \"room\", \"за\" means \"for\", and \"сарадњу\" is in the accusative case meaning \"collaboration\". A more appropriate translation would be \"Простор за сарадњу\" (Prostor za saradnju) which translates to 'Space for collaboration' or 'Collaboration space'.",
+          "suggestion": "Простор за сарадњу"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

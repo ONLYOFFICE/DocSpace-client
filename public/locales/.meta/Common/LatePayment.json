@@ -3,7 +3,7 @@
   "content": "Late payment",
   "content_en_sha1_hash": "ef1384780c1411151760b570692633b5fef8f413",
   "created_at": "2025-05-19T21:30:46.083Z",
-  "updated_at": "2025-05-20T09:35:44.100Z",
+  "updated_at": "2025-05-20T23:00:20.450Z",
   "comment": {
     "text": "This translation key is used to display the text \"Late payment\" in a specific UI element, likely as part of an alert or notification on a tariff page when a late payment grace period has expired. The label appears on a red background, indicating its urgent nature. It is intended for use by enterprise users.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Վերջին վճարումը\" translates to 'Last payment', which doesn't accurately convey the meaning of 'Late payment'.  'Late payment' implies a payment made after the due date, while 'Last payment' simply refers to the most recent payment.",
+          "suggestion": "A more accurate translation would be something like 'Հետաժամանակվա վճարում' (Hetažamankva včarum) which means 'Late payment', or 'Ուշացած վճարում' (Ušacac včarum) which also means 'Late payment'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,13 +99,25 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While '延滞料' (Enkai ryou) literally translates to 'late payment fee' or 'delay fee', it doesn't precisely convey the meaning of just 'Late payment'. It implies a fee associated with the late payment.",
+          "suggestion": "Consider '遅延の支払い' (Chien no shiharai) for 'Late payment' if a general term is needed, or adjust the English context to reflect the fee associated with late payment."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'마지막 지불' is a literal translation of 'last payment' and doesn't accurately convey the meaning of 'late payment'. 'Late payment' implies a payment received after the due date.",
+          "suggestion": "연체료 (yeoncheryo) or 지연된 지불 (jiyeon doen jibul) would be more accurate translations for 'late payment'."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -153,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ප්‍රමාද ගෙවීම\" (pramaada gevima) literally translates to 'delayed payment,' it isn't the most natural or commonly used term for 'late payment' in Sinhala. A more suitable translation would be 'වරදායක ගෙවීම' (waradaayaka gevima) or 'දිර්ඝ කාලීන ගෙවීම' (dirgha kaaleena gevima).",
+          "suggestion": "වරදායක ගෙවීම (waradaayaka gevima) or දිර්ඝ කාලීන ගෙවීම (dirgha kaaleena gevima)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +195,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Касна уплата\" is not an accurate translation of \"Late payment\". \"Касна\" translates to \"late\" or \"penalty\", but \"уплата\" means \"payment\" or \"deposit.\" A more accurate translation would be something like \"Закашњела уплата\" or \"Прикасно уплате\".",
+          "suggestion": "Закашњела уплата"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

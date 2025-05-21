@@ -3,7 +3,7 @@
   "content": "Loading is complete 100%",
   "content_en_sha1_hash": "e717c91d11975369ea8b5cd6bb78010cd183e900",
   "created_at": "2025-05-19T21:30:46.271Z",
-  "updated_at": "2025-05-20T09:35:36.971Z",
+  "updated_at": "2025-05-20T22:54:17.791Z",
   "comment": {
     "text": "This translation key displays a message indicating that a file loading process is complete, showing 100% progress. It is used in an error state within a data import component, suggesting that the selected file is not supported.",
     "is_auto": true,
@@ -51,7 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Načítání je dokončeno na 100%' is a literal translation and sounds slightly awkward in Czech. A more natural phrasing would be closer to 'Načítání dokončeno' or 'Načítání je hotovo'. The addition of 'na 100%' isn't standard for this type of message.",
+          "suggestion": "Načítání dokončeno"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -129,7 +135,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, the translation 'Ładowanie zostało zakończone w 100%' is a bit verbose and not as natural-sounding as other options for conveying 'Loading is complete 100%'. A more natural phrasing would emphasize completion rather than the percentage.",
+          "suggestion": "Ładowanie zakończone."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -159,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'පූරණය සම්පූර්ණයි 100%' while literally meaning 'Filling is complete 100%', doesn't fully capture the meaning of 'Loading is complete'. A more accurate translation would convey the idea of data or content being fully loaded.",
+          "suggestion": "A better translation would be something like 'දත්ත බාගන්නා 100% අවසන්' (Data downloading 100% complete) or 'බාගත කිරීම අවසානයයි 100%' (Downloading is complete 100%) depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +195,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Учитавање је завршено 100%' is not the most natural or accurate translation of 'Loading is complete 100%'. 'Учитавање' implies an upload, while 'Loading' generally refers to downloading or a process of appearing. A more accurate translation would use a word like 'Утисак' or 'Пуњење'.",
+          "suggestion": "Утисак је завршен 100%"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -3,7 +3,7 @@
   "content": "Select date",
   "content_en_sha1_hash": "b84a6ecbc04c1f54b6fa504c6441ca78e07db586",
   "created_at": "2025-05-19T21:30:48.374Z",
-  "updated_at": "2025-05-20T08:52:22.543Z",
+  "updated_at": "2025-05-20T21:42:36.548Z",
   "comment": {
     "text": "The \"SelectDate\" translation key is used to display a label for date selection in various UI components, including a toggle block and a filter dialog. Its purpose is to provide users with clear instructions on how to select a date in these interfaces. It appears as part of the labels for date pickers and edit link panels.",
     "is_auto": true,
@@ -147,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Selectare dată' is not the most natural or accurate translation of 'Select date'. 'Selectare' implies a process of selection, whereas 'Select date' refers to choosing a date. A more suitable translation would be 'Alegere dată' or simply 'Data selectată'.",
+          "suggestion": "Alegere dată"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -177,7 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation 'Одабери датум' while understandable, isn't the most natural or common way to say 'Select date' in Serbian. A more idiomatic translation would be 'Избери датум'.",
+          "suggestion": "Избери датум"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -189,7 +201,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Tarih seç' is understandable, a more natural and complete translation of 'Select date' in Turkish would be 'Tarih seçin'. The addition of '-in' makes it a more polite and complete command/request.",
+          "suggestion": "Tarih seçin"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

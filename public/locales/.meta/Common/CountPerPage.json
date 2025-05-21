@@ -3,7 +3,7 @@
   "content": "{{count}} per page",
   "content_en_sha1_hash": "f07055bdc1868a249738e0fb89860a79c00f399e",
   "created_at": "2025-05-19T21:30:43.819Z",
-  "updated_at": "2025-05-20T09:36:54.289Z",
+  "updated_at": "2025-05-21T00:08:32.926Z",
   "comment": {
     "text": "This translation key is used to display the pagination count per page. It should be translated to appear as \"{{count}} items per page\". This text appears in UI elements related to data import and filtering options, typically on a settings or configuration page.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation \"{{count}} hər səhifə üzrə\" doesn't accurately convey the meaning of \"{{count}} per page\". \"Hər səhifə üzrə\" translates to 'on each page' or 'per page', but the phrasing is less natural in this context. A more natural translation would emphasize the quantity of items displayed.",
+          "suggestion": "{{count}} ədəddə bir səhifə"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -81,7 +87,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"{{count}} sivua kohti,\" implies 'pages per page', which is not the intended meaning of 'per page'. The translation should indicate items or records per page.",
+          "suggestion": "{{count}} tuotetta/merkintää sivulla"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -93,7 +105,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"{{count}} ամեն մի էջի համար\" is a literal translation and sounds awkward in Armenian. A more natural phrasing would be \"մեկ էջում {{count}}\" or \"յուրաքանչյուր էջում {{count}}\"",
+          "suggestion": "յուրաքանչյուր էջում {{count}}"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,13 +123,25 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation lacks a particle. While technically understandable, adding 'は' (wa) after 'ページ' would improve flow and grammatical correctness.  It should be 'ページ**は**あたりの{{count}}'",
+          "suggestion": "ページはあたりの{{count}}"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation lacks a space after '페이지당'.",
+          "suggestion": "페이지당 {{count}}"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -123,7 +153,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"per page\" is not perfectly translated. \"Vienā lapā\" translates to \"in one page\" which is not the intended meaning of \"per page\". A more accurate translation would capture the idea of items per page, like 'uz lapas'.",
+          "suggestion": "{{count}} uz lapas"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -165,7 +201,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"පිටුවකට {{count}}\" is not the most natural or accurate way to express \"{{count}} per page\" in Sinhala. While technically correct, it lacks the common phrasing used for pagination.",
+          "suggestion": "පිටුවකට {{count}} ක්"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -195,7 +237,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sayfa başına {{count}}' while understandable, doesn't fully capture the meaning of 'per page'. A more accurate translation would convey the idea of 'items per page'.",
+          "suggestion": "Sayfada {{count}}"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -213,7 +261,18 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '每页{{count}}个' literally translates to 'each page {{count}} items'. It's not the most natural phrasing. A more natural translation would emphasize 'per page'.",
+          "suggestion": "每页{{count}}项"
+        },
+        {
+          "type": "formatting",
+          "description": "The translated string uses '个' to indicate a count. While acceptable, '项' (xiàng) is often more appropriate for abstract counts or items, particularly in a software context. '个' is better for concrete objects.",
+          "suggestion": "Consider using '项' instead of '个' for better clarity and context appropriateness."
+        }
+      ],
       "approved_at": null
     }
   }

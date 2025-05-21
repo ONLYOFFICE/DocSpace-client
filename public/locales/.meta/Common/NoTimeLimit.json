@@ -3,7 +3,7 @@
   "content": "No time limit",
   "content_en_sha1_hash": "ba3ffdc5c084cea0b7c0c475d3801a30fcb258b6",
   "created_at": "2025-05-19T21:30:46.946Z",
-  "updated_at": "2025-05-20T09:35:15.879Z",
+  "updated_at": "2025-05-20T22:34:28.746Z",
   "comment": {
     "text": "\"NoTimeLimit\" is a translation key used to display the phrase \"No time limit\" in the Link Row component of a file's UI, likely appearing as part of a dropdown menu or button. This text provides context about a link's expiration status, indicating that there is no deadline for accessing its content.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Չկա ժամանակի սահմանափակում' is a literal translation of 'No time limit'. While technically correct, a more natural and idiomatic Armenian translation might be preferred, depending on the context. It sounds a bit formal.",
+          "suggestion": "Consider alternatives like 'Անժամանակ' (Anzhamanak) or 'Ժամանակի սահմանափակում չկա' (Zhamanaki sahmanapakum chka) for potentially more natural phrasing."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ບໍ່ມີເວລາໝຸດ\" is understandable, a more natural and accurate translation of \"No time limit\" in Lao might be \"ບໍ່ມີເວລາຈຳກັດ\" or \"ບໍ່ຈຳກັດເວລາ\". \"ໝຸດ\" typically refers to a stuck or jammed state, not a limit.",
+          "suggestion": "ບໍ່ມີເວລາຈຳກັດ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'නොවරමිත කාලයක්' is a literal translation, it's not the most natural way to express 'No time limit' in Sinhala. A more common and idiomatic translation would be 'සීමාවಿಲ್ಲන කාලයක්' or 'කාල සීමාව නැත'.",
+          "suggestion": "සීමාවಿಲ್ಲන කාලයක්"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

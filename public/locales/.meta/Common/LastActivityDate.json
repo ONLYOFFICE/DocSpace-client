@@ -3,7 +3,7 @@
   "content": "Last activity date",
   "content_en_sha1_hash": "7858db9eac1fd53a9a6e83786014f02e6d83aea2",
   "created_at": "2025-05-19T21:30:46.047Z",
-  "updated_at": "2025-05-20T09:35:45.628Z",
+  "updated_at": "2025-05-20T23:01:11.388Z",
   "comment": {
     "text": "The \"LastActivityDate\" translation key is used to display a date label in a filter section, likely on a sorting options page. It appears next to a button or similar UI element that allows users to sort by the last activity date of a file or item. This key should be translated for use in various file and item metadata descriptions.",
     "is_auto": true,
@@ -141,7 +141,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Data când a avut loc ultima activitate\" is a bit verbose and not the most natural Romanian phrasing for 'Last activity date'. It's literally 'Date when the last activity took place'.",
+          "suggestion": "Consider a more concise and idiomatic translation such as \"Data ultimei activități\" or \"Data activității recente\"."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -171,7 +177,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Датум последње активности' is a literal translation of 'Last activity date' but sounds awkward and unnatural in Serbian. A more natural phrasing would be 'Datum poslednje aktivnosti' or 'Datum zadnje aktivnosti'.",
+          "suggestion": "Datum poslednje aktivnosti"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -195,7 +207,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ngày hoạt động cuối' while understandable, isn't the most natural or precise translation of 'Last activity date'. It literally translates to 'Last activity day'.",
+          "suggestion": "Ngày hoạt động gần nhất"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

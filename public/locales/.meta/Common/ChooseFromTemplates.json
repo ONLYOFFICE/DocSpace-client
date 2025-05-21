@@ -3,7 +3,7 @@
   "content": "Choose from Templates",
   "content_en_sha1_hash": "8e45ce4bac54530298690bc33665f4627cd46fb2",
   "created_at": "2025-05-19T21:30:43.457Z",
-  "updated_at": "2025-05-20T09:37:07.362Z",
+  "updated_at": "2025-05-21T00:18:45.799Z",
   "comment": {
     "text": "The translation key \"ChooseFromTemplates\" is used to display a label for a button that allows users to select from pre-defined templates. This key appears in the UI as part of a dropdown menu on a main button, providing an alternative way for users to configure their document.",
     "is_auto": true,
@@ -75,7 +75,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Valitse Pohjista' doesn't accurately convey 'Choose from Templates'. 'Pohjista' is the plural genitive form and doesn't quite fit the context of selecting templates. A more accurate translation would consider the singular form or a phrasing that implies choosing from a collection.",
+          "suggestion": "Valitse malleista"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -87,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ընտրել ձևանմուշներից' while literally meaning 'Choose from templates', may not be the most natural or idiomatic way to express 'Choose from Templates' in Armenian. A more common and user-friendly phrasing might be better. It sounds a bit formal.",
+          "suggestion": "Consider alternatives like: \"Մոդելներից ընտրել\" (Models from choose) or \"Տելեպորտներից ընտրել\" (Template from choose), or simply \"Ընտրել մոդելներ\" (Choose templates)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,7 +111,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation \"テンプレートから選択\" is a literal translation but could be improved for naturalness in this context. While technically correct, it's slightly stiff. A more natural phrasing would depend on the specific UI, but a better option might be something like \"テンプレートを選択\" (template o sentaku - select a template).",
+          "suggestion": "テンプレートを選択"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -159,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'සැකිලි වලින් තෝරන්න' while understandable, is not the most natural or common phrasing in Sinhala. A more natural translation would be 'සැකිලි තෝරා ගන්න' or 'සැකිලි වලින් තොරන්න'. 'සැකිලි වලින් තෝරන්න' sounds a bit literal and awkward.",
+          "suggestion": "සැකිලි තෝරා ගන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +201,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Изабери из Шаблона' directly translates to 'Choose from Templates' but sounds unnatural in Serbian. While technically correct, it's not idiomatic Serbian.",
+          "suggestion": "Избери шаблон"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

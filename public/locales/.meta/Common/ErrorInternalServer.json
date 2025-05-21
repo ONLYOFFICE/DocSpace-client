@@ -3,7 +3,7 @@
   "content": "Internal server error. Try again later.",
   "content_en_sha1_hash": "50b64918b994b2985e494b4a494e20d58180ff95",
   "created_at": "2025-05-19T21:30:45.082Z",
-  "updated_at": "2025-05-20T09:36:21.007Z",
+  "updated_at": "2025-05-20T23:37:34.554Z",
   "comment": {
     "text": "This translation key displays an internal server error message, typically used when a server-side operation fails, and is usually shown in error dialogs or notifications. The exact location of this text may vary depending on the specific use case, but it often appears as a toast notification or within a dialog box. It aims to inform users that something went wrong and encourage them to try again later.",
     "is_auto": true,
@@ -93,7 +93,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "Missing space after the period in 'Réessayez ultérieurement'.",
+          "suggestion": "Erreur interne du serveur. Réessayez ultérieurement."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -117,7 +123,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '인터넷 서버 오류입니다. 나중에 다시 시도하세요.' while understandable, is a somewhat literal and not ideal phrasing for an internal server error message in Korean. '인터넷' (internet) is redundant as '서버 오류' already implies it's an internet server.",
+          "suggestion": "서버 오류가 발생했습니다. 나중에 다시 시도해주세요."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -129,7 +141,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'vēlreiz' (again) is redundant. 'Mēģiniet vēlāk' already implies trying again.",
+          "suggestion": "Iekšējā servera kļūda. Mēģiniet vēlāk."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -171,7 +189,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"සේවාදායකයේ අභ්‍යන්තර දෝෂයකි\" is a literal translation of 'Internal server error.' While understandable, a more natural and user-friendly Sinhala phrasing would be better. It sounds somewhat technical for a typical user.",
+          "suggestion": "Consider alternatives like \"අභ්‍යන්තර සේවකිරීමේ දෝෂයක්. නැවත උත්සාහ කරන්න.\" or \"සgetServer එකේ ප්‍රශ්නයක් ඇතිවිය. නැවත උත්සාහ කරන්න.\" The second option uses a transliteration of 'Server' which can be common in Sinhala online interactions."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -189,7 +213,18 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'грешка' (greshka) is the correct Serbian word for 'error'. The provided translation uses 'Интерна грешка сервера'. While understandable, 'Интерна' is not standard Serbian and should be replaced with 'Унутрашња' (Unutrashnja) or simply omitted for better flow.",
+          "suggestion": "Унутрашња грешка сервера. Покушајте поново касније."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Покушајте поново касније' is a literal translation of 'Try again later', a more natural Serbian phrasing would be 'Пробајте касније' or 'Опет касније'.",
+          "suggestion": "Интерна грешка сервера. Пробајте касније."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

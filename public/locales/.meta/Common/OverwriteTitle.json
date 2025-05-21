@@ -3,7 +3,7 @@
   "content": "Overwrite with version update",
   "content_en_sha1_hash": "85c42df31bdf2069fe66ddcdd0fbefbdae0a2df4",
   "created_at": "2025-05-19T21:30:47.196Z",
-  "updated_at": "2025-05-20T09:35:08.456Z",
+  "updated_at": "2025-05-20T22:26:54.035Z",
   "comment": {
     "text": "This translation key is used to display a title that instructs users to overwrite existing files or folders when merging changes. It appears in conflict resolution dialogs and is typically displayed as a button label or header in UI components. The user is prompted to overwrite existing content with the new version update.",
     "is_auto": true,
@@ -39,13 +39,25 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Versiya yenilənməsi ilə üzərinə yazma\" is a literal translation but doesn't convey the meaning of 'Overwrite with version update' in a natural or idiomatic way in Azerbaijani. It sounds awkward.",
+          "suggestion": "A more natural translation would be something like \"Versiyanın yenilənməsi ilə üstünə yaz\" or \"Versiya yeniləşməsi ilə əvəzləyin\" or \"Yeni versiya ilə üstünə yazın\"."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Препишете с актуализацията на версията\" is a literal translation of \"Overwrite with version update\" but doesn't convey the intended meaning clearly in Bulgarian. 'Overwrite' in this context implies replacing something, not simply 'writing over' something. The phrase sounds unnatural.",
+          "suggestion": "Заменете с актуализация на версията"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -87,7 +99,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Վերագրել տարբերակի արդիացումով\" doesn't accurately convey the meaning of \"Overwrite with version update.\" The word \"վերագրել\" (veragrel) means \"to attribute\" or \"to assign,\" which isn't the intended meaning of 'overwrite'. A more appropriate translation would convey the action of replacing existing data.",
+          "suggestion": "Consider a translation like \"Փոխարինել տարբերակի արդիացումով\" (Poxarine tarberaki ardyatsumov) - meaning 'Replace with version update' or \"Տարբերակի արդիացումով գրել\" (Tarberaki ardyatsumov grel) - meaning 'Overwrite with version update'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -111,7 +129,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ອັບເດດທັບເວີຊັ່ນເກົ່າ\" is a literal translation, but doesn't quite capture the nuance of 'Overwrite with version update'. It sounds slightly awkward. A more natural phrasing might be something like 'ປ່ຽນເວີຊັນໃໝ່ທັບເກົ່າ' (Pian version mai thap gao) which means 'Replace old version with new version'.",
+          "suggestion": "ປ່ຽນເວີຊັນໃໝ່ທັບເກົ່າ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -123,13 +147,25 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Dutch translation 'Overschrijven met versie update' is a literal translation of 'Overwrite with version update' but doesn't sound natural in Dutch. 'Overschrijven' is accurate but the overall phrasing is awkward.",
+          "suggestion": "Een versie-update toepassen"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Zastąp i zaktualizuj wersję' doesn't fully capture the meaning of 'Overwrite with version update'. 'Overwrite' implies replacing something entirely, while 'Zastąp' is closer to 'replace'.  The phrase 'with version update' is somewhat lost in the translation as well. A better translation would convey the action of replacing the previous version with a new one.",
+          "suggestion": "Zastąp najnowszą wersją"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -147,7 +183,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Suprascriere la o versiune actualizată' is a literal translation that doesn't quite capture the nuance of 'Overwrite with version update'. It sounds somewhat technical and awkward in Romanian. A more natural phrasing would be needed.",
+          "suggestion": "Consider 'Înlocuire cu actualizare' or 'Actualizare prin suprascriere' or 'Suprascriere pentru versiunea actualizată'."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -159,13 +201,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'නව අනුවාදය උඩින් ලියන්න' while literally meaning 'Write over the new version', doesn't convey the intended meaning of 'Overwrite with version update'. It sounds like a direct instruction rather than an action being performed automatically.",
+          "suggestion": "A more accurate translation might be something like 'පිටත අනුවාදය ආවරණය කරන්න' (Pitata anivadaaya aawaraakaya kanna) which means 'Cover the previous version' or 'Replace the previous version'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Prepísať a aktualizovať verziu' while understandable, isn't the most natural or precise translation of 'Overwrite with version update'. 'Overwrite' implies replacing existing content, which isn't entirely captured by 'Prepísať'.",
+          "suggestion": "Prepísať verziou"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -177,7 +231,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Преписивање новом верзијом\" doesn't perfectly capture the meaning of \"Overwrite with version update.\"  While 'Преписивање' (Prepisivanje) means 'rewriting' or 'transcription', 'Overwrite' implies replacing existing data.  The meaning isn't quite aligned.",
+          "suggestion": "Записyвање новом верзијом"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -189,7 +249,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sürüm güncellemesiyle üstüne yaz' is a literal translation but doesn't convey the intended meaning of 'Overwrite with version update' in a natural Turkish way. It sounds somewhat awkward.",
+          "suggestion": "Consider a more natural phrasing like 'Sürüm güncellemesiyle değiştir' or 'Sürümle üzerine yaz.' (Version update will replace/override)"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -201,7 +267,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Phiên bản' should have a diacritic mark (â) to be correctly spelled as 'Phiên bản'.",
+          "suggestion": "Ghi đè bằng cập nhật phiên bản"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

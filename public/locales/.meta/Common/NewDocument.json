@@ -3,7 +3,7 @@
   "content": "New document",
   "content_en_sha1_hash": "762b84690217181b9f127d2cfc1991e0892e844a",
   "created_at": "2025-05-19T21:30:46.732Z",
-  "updated_at": "2025-05-20T09:35:23.514Z",
+  "updated_at": "2025-05-20T22:41:05.223Z",
   "comment": {
     "text": "This translation key displays a label for new document creation options in the editor. It is used in buttons and contexts where users can create a new document, such as file formats dropdowns or dialog prompts.",
     "is_auto": true,
@@ -207,7 +207,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Ukrainian translation \"Документ\" simply means \"Document\". It does not convey the meaning of \"New Document\". It lacks the 'new' qualifier.",
+          "suggestion": "Новий документ"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

@@ -3,7 +3,7 @@
   "content": "Deny",
   "content_en_sha1_hash": "53577bb5df0ee9b6376e87f4896b6957a25d7a43",
   "created_at": "2025-05-19T21:30:44.480Z",
-  "updated_at": "2025-05-20T09:36:43.769Z",
+  "updated_at": "2025-05-20T23:58:22.254Z",
   "comment": {
     "text": "The translation key \"Deny\" is used to display a button label that cancels or rejects an action in a UI element. It appears as a button labeled \"Deny\" and is likely used in a dialog or confirmation page where the user needs to approve or reject an invitation, share link, or other action.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation \"Rədd edin\" is a command form (imperative) and doesn't directly translate \"Deny\". \"Deny\" typically refers to a prohibition or refusal. A more accurate translation might be \"İnkar\", \"Qadağan\", or \"Rədd\". The best choice depends on the specific context.",
+          "suggestion": "Consider alternatives like \"İnkar\", \"Qadağan\", or \"Rədd\" depending on the context. A noun form is generally more appropriate for a key name."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"ඉවතලන්න\" (iwathalanna) means \"to abandon\" or \"to reject\" rather than \"deny\". \"Deny\" in the sense of disagreeing with a statement or refusing a request requires a different translation.",
+          "suggestion": "Consider alternatives like \"නොපිළිගැනීම\" (nopiliganem) which means \"rejection\" or \"disagreement\"."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

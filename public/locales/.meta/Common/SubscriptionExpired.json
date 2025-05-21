@@ -3,7 +3,7 @@
   "content": "Your subscription to support and updates has expired",
   "content_en_sha1_hash": "f5833d1780ea3b9e1d44aca439e0e66682bdf6a6",
   "created_at": "2025-05-19T21:30:49.184Z",
-  "updated_at": "2025-05-20T08:38:08.792Z",
+  "updated_at": "2025-05-20T21:11:15.571Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a subscription has expired. It appears as a title in a UI component displaying payment settings, prompting users to renew their subscriptions or update their licenses.",
     "is_auto": true,
@@ -69,7 +69,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Tuen ja päivitysten tilauksesi on vanhentunut' is a bit literal and doesn't flow naturally in Finnish. A more natural phrasing would be closer to 'Your support and update subscription has expired' or 'Your subscription for support and updates has expired'. The use of 'on vanhentunut' (has expired) is correct but makes the sentence a bit stiff.",
+          "suggestion": "Your options are: 'Tukesi ja päivitysten tilaus on päättynyt' or 'Tilaus tukesi ja päivitysten osalta on päättynyt'."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -93,7 +99,18 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is too literal and sounds unnatural in Japanese. \"サブスクリプションの有効期限が切れています\" directly translates to \"the subscription's expiration date has passed,\" which is not the most natural way to convey that a subscription has expired in a user-facing context.",
+          "suggestion": "サポートとアップデートの契約期間が終了しました (Support and update contract period has ended)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "Using \"サブスクリプション\" (subscription) directly from English feels slightly awkward. While understandable, a more natural phrasing would be preferable.",
+          "suggestion": "契約 (keiyaku - contract) could be a better alternative to 'subscription' depending on the broader context."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -123,7 +140,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'support and updates' is translated as 'wsparcie i aktualizacji'. While technically correct, it's a bit formal and could be improved to better convey the meaning in a more user-friendly way. A more natural phrasing might be 'wsparcie techniczne i aktualizacje'.",
+          "suggestion": "Consider translating 'support and updates' as 'wsparcie techniczne i aktualizacje'."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,7 +164,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'abonamentul dvs' is a bit formal for a user-facing message. A more conversational and common phrasing would be better.",
+          "suggestion": "Abonamentul dumneavoastră pentru asistență și actualizări a expirat"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +182,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is overly literal and sounds unnatural in Sinhala. \"සහාය සහ යාවත්කාල සඳහා වන ඔබගේ දායකත්‍වය\" is a verbose way to express subscription to support and updates. It's better to convey the core meaning more concisely.",
+          "suggestion": "ඔබේ සහාය හා යාවත්කාලන දායකත්වය අවසන් වී ඇත"
+        },
+        {
+          "type": "spelling",
+          "description": "While not strictly incorrect, \"යාවත්කාල සඳහා\" could be more naturally rendered as \"යාවත්කාලන සඳහා\".",
+          "suggestion": "යාවත්කාලන සඳහා"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -195,7 +235,18 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Gói dịch vụ đăng ký để hỗ trợ và cập nhật của bạn đã hết hạn' is a bit literal and could be more naturally phrased. 'Gói dịch vụ' is correct for 'package', but 'đăng ký để hỗ trợ và cập nhật' is lengthy and not the most fluent way to say 'to support and updates'.",
+          "suggestion": "Gói hỗ trợ và cập nhật của bạn đã hết hạn"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the sentence structure could be slightly improved for better flow in Vietnamese. Starting with 'Gói...' feels a little abrupt.",
+          "suggestion": "Đăng ký hỗ trợ và cập nhật của bạn đã hết hạn"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

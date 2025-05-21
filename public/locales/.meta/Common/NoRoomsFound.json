@@ -3,7 +3,7 @@
   "content": "No rooms found",
   "content_en_sha1_hash": "ad2c3ebdb031938200e1b48e4c1f024860a8d3b2",
   "created_at": "2025-05-19T21:30:46.846Z",
-  "updated_at": "2025-05-20T09:35:19.588Z",
+  "updated_at": "2025-05-20T22:38:18.225Z",
   "comment": {
     "text": "The translation key \"NoRoomsFound\" is used to display a message indicating that no rooms are available for selection in an empty screen form. It appears as a heading on an empty room selection screen and provides context for users when no rooms can be found.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Otaqlar tapılmadı' is a literal translation of 'No rooms found', a more natural and idiomatic Azerbaijani translation would be 'Xanafələr tapılmadı' or 'Heç bir otaq tapılmadı'.",
+          "suggestion": "Consider using 'Xanafələr tapılmadı' or 'Heç bir otaq tapılmadı' for a more natural-sounding translation."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -111,7 +117,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Nav atrasta neviena telpa' is understandable, a more natural and commonly used translation of 'No rooms found' would be 'Nav atrastas telpas'.  The plural form 'telpas' is more idiomatic in this context.",
+          "suggestion": "Nav atrastas telpas"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'මමගෙ කාමරයක් හමුවේ් නැත.' literally translates to 'I didn't find a room'. While understandable, a more natural and common translation for 'No rooms found' would be 'කාමරයක් නොවීය' or 'කාමර කිසිවක් නොවීය'. The possessive 'මමගෙ' (mine/my) is unnecessary and changes the meaning slightly.",
+          "suggestion": "කාමර කිසිවක් නොවීය"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +195,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Nema pronađenih prostorija\" while grammatically correct, is a more formal and literal translation of \"No rooms found.\" A more natural and common Serbian (Latin) translation would be \"Nema dostupnih soba\" or \"Nema slobodnih soba\". \"Prostorija\" can refer to any room, while \"soba\" is generally understood as a room for living or working.",
+          "suggestion": "Nema dostupnih soba"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

@@ -3,7 +3,7 @@
   "content": "Info panel",
   "content_en_sha1_hash": "700658d503d6d7ee04433b62d51c26c408f588da",
   "created_at": "2025-05-19T21:30:45.909Z",
-  "updated_at": "2025-05-20T09:35:50.978Z",
+  "updated_at": "2025-05-20T23:05:11.904Z",
   "comment": {
     "text": "The \"InfoPanel\" translation key is used to display a panel's title in various places within the application, such as on toggle buttons and in section headers. It provides information about an info panel component, indicating its purpose as a container for displaying additional details. This translation key appears primarily on header elements.",
     "is_auto": true,
@@ -159,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'තොරතුරු මඬල' while technically meaning 'information panel', doesn't naturally convey the meaning of 'Info panel' in a user interface context. It's a very literal translation and sounds overly formal.",
+          "suggestion": "Consider a more natural phrasing like 'අංකුව පුවරුව' (angka puwaru) or 'වැඩි විස්තර පුවරුව' (wadi visthara puwaru) which more closely aligns with the common understanding of an information panel in a UI."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

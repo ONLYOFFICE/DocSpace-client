@@ -3,7 +3,7 @@
   "content": "Download {{organizationName}} Documents on the App Store",
   "content_en_sha1_hash": "88fe15e78deb10b6391b1f522b2fad3eee7ccb8d",
   "created_at": "2025-05-19T21:30:46.567Z",
-  "updated_at": "2025-05-20T09:35:29.478Z",
+  "updated_at": "2025-05-20T22:46:48.153Z",
   "comment": {
     "text": "This translation key is used for the \"Download {{organizationName}} Documents on the App Store\" text displayed in an app store download button. The button likely appears when users tap or click within a specific UI component, such as a component marked as `onClick` event handler, to prompt them to download organization-specific documents from the App Store.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Download' is better translated as 'تنزيل' (Tanzil) instead of 'حمّل' (Hammal) for a more natural and accurate translation in this context. 'حمّل' often implies loading or uploading.",
+          "suggestion": "تنزيل {{organizationName}} Documents من المتجر"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -51,7 +57,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The German translation uses 'AppStore' with a capital 'S'. While 'App Store' is sometimes capitalized, it's generally better to use the lowercase 'app store' in German, as it's treated as a generic term.",
+          "suggestion": "Laden Sie {{organizationName}} Documents im app store herunter"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -63,7 +75,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is too literal. \"Documents\" should be translated to something that implies downloadable materials, rather than just the English word 'documents'.",
+          "suggestion": "Descargar Materiales de {{organizationName}} en el App Store"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -81,7 +99,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Dփաստաթղթերը' is likely a typo and doesn't conform to standard Armenian orthography. It seems intended to be 'Փաստաթղթերը'.",
+          "suggestion": "Փաստաթղթերը"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -117,7 +141,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The preposition 'in' is used instead of 'op'. While 'in de App Store' isn't grammatically incorrect, 'op de App Store' is the more natural and idiomatic translation for 'on the App Store' in Dutch when referring to a location or platform.",
+          "suggestion": "Download {{organizationName}} Documents op de App Store"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -129,7 +159,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Faça o download' is a more formal way of saying 'Download'. A more natural and common translation would be 'Baixe'.",
+          "suggestion": "Baixe {{organizationName}} Documents na App Store"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -153,7 +189,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'බාගන්නන්න' is a colloquial and less formal way of saying 'download'. A more formal and accurate translation would be 'ගන්නා' or 'ලබාගන්න'.",
+          "suggestion": "{{organizationName}} ලේඛන ඇප් ස්ටෝర్‌లో ලබාගන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +213,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The word 'App Store-у' seems grammatically incorrect. It should be in the nominative case.",
+          "suggestion": "Преузми {{organizationName}} Документа на App Store"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -201,7 +249,18 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'Documents' as 'Docs' is too informal for a professional app store listing. It's a shortened version.",
+          "suggestion": "在App Store上下载{{organizationName}}文件"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, placing '上' after 'App Store' could be more naturally rendered with a slight adjustment to improve readability in Chinese.",
+          "suggestion": "在App Store 下载{{organizationName}}文件"
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Deny access",
   "content_en_sha1_hash": "4e81d65fb037d65bf6f3fdeeaf9116c90f9967ff",
   "created_at": "2025-05-19T21:30:44.489Z",
-  "updated_at": "2025-05-20T09:36:43.375Z",
+  "updated_at": "2025-05-20T23:58:12.613Z",
   "comment": {
     "text": "This translation key is used to display the text \"Deny access\" in the user interface. It appears on buttons or controls that allow users to restrict access to a share or file, and its purpose is to provide a clear indication of the action being performed.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Girişə icazə vermə' while literally meaning 'Do not allow access', isn't the most natural or idiomatic way to translate 'Deny access' in Azerbaijani. A more common and direct translation would be something like 'Keçməyə icazə vermə' or 'İnzadə etmə'.",
+          "suggestion": "Keçməyə icazə vermə"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Մերժել մատչումը\" (Merjel matchumə) translates to \"Reject the match\" or \"Reject the pairing.\" While conveying a sense of denial, it doesn't directly translate \"Deny access.\" A more accurate translation would be something like \"արգելել մուտքը\" (argelel mutqə) which means 'to prohibit entry' or 'to deny access'.",
+          "suggestion": "արգելել մուտքը (argelel mutqə)"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ප්‍රවේශය ඉවතලන්න' while literally meaning 'discard access' or 'cancel access', is not the most natural or common way to express 'Deny access' in Sinhala. It implies a removal of access rather than a denial.",
+          "suggestion": "A more accurate translation would be 'ප්‍රවේශය ප්‍රතික්ෂේප කරන්න' (Praveśaya pratikṣēpa karanna) or 'ප්‍රවේශය නැවතන්න' (Praveśaya nāvaṭanna)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +201,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Erişimi reddet\" is a literal translation, a more natural and idiomatic Turkish translation for \"Deny access\" would be \"Erişimi engelleyin\" or \"Erişimi yasaklayın\". \"Erişimi reddet\" sounds somewhat formal and less common in everyday usage.",
+          "suggestion": "Erişimi engelleyin"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

@@ -3,7 +3,7 @@
   "content": "Other",
   "content_en_sha1_hash": "6e6a6f2086bb5fe5dbfd17d8d5f502d48759834b",
   "created_at": "2025-05-19T21:30:47.177Z",
-  "updated_at": "2025-05-20T09:35:09.122Z",
+  "updated_at": "2025-05-20T22:27:57.214Z",
   "comment": {
     "text": "This translation key is used to display \"Other\" when the filter includes a user who is not the current user (\"Me\"). It appears in the UI as a label on a filter component.",
     "is_auto": true,
@@ -207,7 +207,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Drugo' is a valid word but might not be the most accurate or natural translation of 'Other' in this context. 'Ostalo' might be a more suitable alternative depending on the specific meaning intended (e.g., 'Other items' or 'The rest').",
+          "suggestion": "Consider 'Ostalo' as an alternative translation."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

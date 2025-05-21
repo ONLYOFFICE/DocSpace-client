@@ -3,7 +3,7 @@
   "content": "Date",
   "content_en_sha1_hash": "eb9a4bc1c0c153e4e4b042a79113b815b7e3021d",
   "created_at": "2025-05-19T21:30:44.395Z",
-  "updated_at": "2025-05-20T09:36:46.947Z",
+  "updated_at": "2025-05-21T00:00:21.305Z",
   "comment": {
     "text": "This translation key is used for displaying the label \"Date\" in various table headers across different UI components. It is typically rendered as a column title and may be editable or resizable based on its configuration settings.",
     "is_auto": true,
@@ -93,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Ամիս-ամսաթիվ\" literally translates to \"Month-Date\", which is not a direct or accurate translation of \"Date\".  While it implies a date, it's not the standard or most appropriate Armenian term for 'Date'.",
+          "suggestion": "The most common and accurate translation for \"Date\" in Armenian is \"Ամսաթիվ\" (Amsat'iv)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -153,7 +159,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Data\" is incorrect for the English word \"Date\" in the context of a calendar or date field. \"Data\" in Romanian refers to \"data\" or \"information\".",
+          "suggestion": "The correct translation should be \"Dată\"."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -183,7 +195,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Serbian (Cyrillic) translation 'Датум' is a common misspelling of the correct term for 'Date'.",
+          "suggestion": "The correct Serbian (Cyrillic) translation for 'Date' is 'Datum'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

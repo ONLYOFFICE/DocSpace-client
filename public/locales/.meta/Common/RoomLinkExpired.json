@@ -3,7 +3,7 @@
   "content": "The room link you are trying to open does not exist or has expired.",
   "content_en_sha1_hash": "c16f473a9fbf86a65ac485294a575a3b10d7278a",
   "created_at": "2025-05-19T21:30:48.190Z",
-  "updated_at": "2025-05-20T09:34:31.449Z",
+  "updated_at": "2025-05-20T21:49:26.682Z",
   "comment": {
     "text": "The translation key \"RoomLinkExpired\" is used to display a message indicating that a room link has expired or does not exist. It appears in an error message when trying to open an external item, and serves as a fallback for cases where the item is locked or unavailable.",
     "is_auto": true,
@@ -51,7 +51,18 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Açmağa çalışdığınız otaq linki mövcud deyil və ya vaxtı keçib' is a literal translation and doesn't flow naturally in Azerbaijani. 'Açmağa çalışdığınız' is unnecessarily verbose. 'Vaxtı keçib' is a common expression but 'expired' could be better conveyed.",
+          "suggestion": "Cəhd etdiyiniz otaq linki mövcud deyil və ya keçmişdir."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence uses 'və ya' (and or) which can be softened or rephrased for better flow in Azerbaijani.",
+          "suggestion": "Cəhd etdiyiniz otaq linki mövcud deyil ya da keçmişdir."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -63,7 +74,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Odkaz na místnost, který se snažíte otevřít, neexistuje nebo jeho platnost vypršela\" is a bit literal and overly verbose. A more natural and concise translation would improve user experience. \"The link to the room you're trying to open doesn't exist or has expired\" is the English phrasing.  The Czech phrasing is more like 'The link to the room, which you are trying to open, does not exist or its validity has expired.'",
+          "suggestion": "Zkratit na: 'Odkaz na místnost neexistuje nebo vypršel.' (The room link doesn't exist or has expired.)"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -99,7 +116,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'է' appears twice. It should only appear once.",
+          "suggestion": "Remove the second instance of 'է'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -111,7 +134,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"開こうとしているルームリンクは存在しないか、または期限切れです。\" is a literal translation but sounds somewhat unnatural in Japanese. A more natural phrasing would be something along the lines of \"お試し中のルームリンクは存在しないか、有効期限切れです。\" or \"アクセスしようとしているルームリンクは存在しないか、期限切れです。\"",
+          "suggestion": "お試し中のルームリンクは存在しないか、有効期限切れです。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -123,7 +152,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ໝົດ' is technically correct, but 'ສິ້ນສຸດ' is more commonly used to describe expiration in a formal context like this.",
+          "suggestion": "ລິ້ງຂອງຫ້ອງຖ້າທ່ານພະຍາຍາມເປີດນັ້ນບໍ່ມີຢູ່ ຫຼືສິ້ນສຸດເວລາແລ້ວ។"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -159,7 +194,23 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"Lunk-ul\" is a misspelling and incorrect translation of \"room\".  It appears to be a phonetic approximation, but doesn't accurately convey the meaning.",
+          "suggestion": "The correct translation for 'room' in this context should be 'camera' or 'sala'."
+        },
+        {
+          "type": "spelling",
+          "description": "The word \"Lunk-ul\" appears to be a misspelling. It's not a standard Romanian word.",
+          "suggestion": "sala"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The entire phrase is awkwardly translated. It lacks fluency and sounds unnatural in Romanian.",
+          "suggestion": "O legătură către sală pe care încercați să o deschideți nu există sau a expirat."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -171,7 +222,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'කල්' can also be written as 'වස'.",
+          "suggestion": "ඔබ විවෘත කිරීමට උත්සාහ කරන කාමර සබැඳිය නොපවතී හෝ වස ඉකුත් වී ඇත."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -189,13 +246,35 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'собе' is likely a typo and should be 'собе'.",
+          "suggestion": "собе"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While understandable, 'Линк собе' is not the most natural translation of 'Room Link'.  A more accurate translation would be 'Веза за собу'.",
+          "suggestion": "Веза за собу"
+        },
+        {
+          "type": "grammatical",
+          "description": "The phrase 'Линк собе који покушавате да отворите' is grammatically correct but could be slightly more fluid. Consider restructuring.",
+          "suggestion": "Линк за собу коју покушавате да отворите"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Link sobe koji pokušavate da otvorite ne postoji ili je istekao.' is not a direct or natural translation of 'The room link you are trying to open does not exist or has expired.' 'Sobe' means 'rooms', but the English refers to a link.",
+          "suggestion": "Link koji pokušavate da otvorite ne postoji ili je istekao."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

@@ -3,7 +3,7 @@
   "content": "The list of entities has been changed. Please check the contents and try again.",
   "content_en_sha1_hash": "5fcafe5e752386800be3676175e2dc663d211f5b",
   "created_at": "2025-05-19T21:30:45.073Z",
-  "updated_at": "2025-05-20T09:36:21.447Z",
+  "updated_at": "2025-05-20T23:37:47.713Z",
   "comment": {
     "text": "This translation key is used for an error message that occurs when a user attempts to perform an operation on an empty list of entities. It displays a generic error message instructing the user to review and try again. This message appears in a toast notification after clicking a button or navigating to an action, prompting the user to investigate why the list is empty.",
     "is_auto": true,
@@ -159,7 +159,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ස්ථීති ලැයිස්තුව\" (sthithi laisithuwa) for \"list of entities\" is not the most natural or accurate rendering in Sinhala. \"entities\" often refers to objects or items. A more suitable translation might be something like \"ආකාරණ ලැයිස්තුව\" (akaran laisithuwa) or \"ප්‍රතිස්ථාන ලැයිස්තුව\" (prathistaan laisithuwa).",
+          "suggestion": "Consider using \"ආකාරණ ලැයිස්තුව\" (akaran laisithuwa) or \"ප්‍රතිස්ථාන ලැයිස්තුව\" (prathistaan laisithuwa) for \"list of entities\"."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'අන්තර්ගතය' (antharagataya) for 'contents' is grammatically correct, but a more conversational and direct translation might be 'එකතු' (ekathu) or 'අඩුවල'.",
+          "suggestion": "Consider using 'එකතු' (ekathu) or 'අඩුවල' (aduwala) for 'contents' to make the translation more natural."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +188,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"entities\" is translated as \"ентитета\". While technically correct, a more natural and commonly used translation in this context would be \"областа\" (oblasti) or potentially \"стварања\" (stvaranja), depending on the specific meaning of 'entities'. \" ентитета\" sounds overly formal and potentially confusing to a Serbian speaker.",
+          "suggestion": "Consider using \"областа\" (oblasti) or \"стварања\" (stvaranja) instead of \"ентитета\"."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

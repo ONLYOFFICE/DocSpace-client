@@ -3,7 +3,7 @@
   "content": "Editor",
   "content_en_sha1_hash": "c7e9fb2ea6c3b8c3ce97645eb902c348d859f36d",
   "created_at": "2025-05-19T21:30:44.767Z",
-  "updated_at": "2025-05-20T09:36:32.573Z",
+  "updated_at": "2025-05-20T23:49:09.743Z",
   "comment": {
     "text": "The translation key \"Editor\" is used to display the label for an editing feature within a user interface, likely in a settings or configuration panel. It appears as a title and is linked to navigate to an editor view or functionality. The translated term should describe this editing capability in a neutral and descriptive manner.",
     "is_auto": true,
@@ -99,7 +99,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation \"Πρόγραμμα επεξεργασίας\" translates to \"Editing Program\" which is more specific than the English term \"Editor\". While functionally related, it doesn't directly convey the same meaning. A closer translation might be \"Επεξεργαστής\" or \"Επεξεργασία\".",
+          "suggestion": "Επεξεργαστής"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -111,7 +117,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation 'Editori' is not the most accurate or common translation for 'Editor'. While 'Editori' is grammatically correct as a transliteration, it doesn't convey the meaning as effectively as other options.",
+          "suggestion": "Consider using 'Toimittaja' (for journalistic editor) or 'Muokkaaja' (for general editor/modifier) depending on the context.  'Editori' sounds like a transliteration rather than a natural Finnish word."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -135,7 +147,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"エディタ\" (Edita) is a direct transliteration of \"Editor\" and doesn't convey the full meaning in Japanese. While understandable, a more natural and commonly used term would be something like \"編集者\" (henshasha) or \"編集機能\" (henshuu kinou) depending on the context.",
+          "suggestion": "Consider \"編集者\" (henshasha) for a person editor or \"編集機能\" (henshuu kinou) for an editor feature. Context is needed for the optimal translation."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -243,7 +261,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"可编辑\" (ke bianji) translates to \"editable\" or \"can be edited\", not simply \"Editor\". It doesn't convey the meaning of a person or software tool that performs editing.",
+          "suggestion": "A more accurate translation might be \"编辑\" (bianji) or \"编辑器\" (bianji qi)."
+        }
+      ],
       "approved_at": null
     }
   }

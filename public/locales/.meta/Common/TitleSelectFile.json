@@ -3,7 +3,7 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:49.307Z",
-  "updated_at": "2025-05-20T08:37:33.864Z",
+  "updated_at": "2025-05-20T21:08:16.664Z",
   "comment": {
     "text": "The translation key \"TitleSelectFile\" is used to display a file selection title in various places within the application. It appears as the label for checkboxes and dropdown menus related to file management, guiding users to select a file.",
     "is_auto": true,
@@ -153,7 +153,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Выделить\" while technically meaning \"to select\" or \"to highlight,\" doesn't convey the same nuance as the English \"Select\" in a user interface context.  \"Select\" implies choosing something from a list, whereas \"Выделить\" suggests marking or highlighting, which is slightly different.",
+          "suggestion": "Consider using \"Выбрать\" (Vybrat') which more directly translates to 'to choose' or 'to pick,' and is more aligned with the intended function of a selection button."
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -177,7 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation 'Изабери' does not accurately convey the meaning of 'Select'. 'Изабери' translates to 'Choose' or 'Pick', not 'Select'.",
+          "suggestion": "Одреди (Odredi) - which translates to 'Select'"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

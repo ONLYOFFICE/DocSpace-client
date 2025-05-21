@@ -3,7 +3,7 @@
   "content": "Phone",
   "content_en_sha1_hash": "77064d5265236e0ac252f3fc4a5ba7b274b6a583",
   "created_at": "2025-05-19T21:30:47.371Z",
-  "updated_at": "2025-05-20T09:35:01.815Z",
+  "updated_at": "2025-05-20T22:20:39.721Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Phone\" in various UI elements. It is commonly seen as a label or prompt in forms and fields, typically asking users to input their phone number. This key appears in multiple places across the application, including contact information pages and profile settings.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Nömrə' can sometimes refer to a phone number, 'Phone' typically refers to the device itself. 'Nömrə' only translates to 'number'.",
+          "suggestion": "Consider alternatives like 'Telefon' which directly translates to 'Phone'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {

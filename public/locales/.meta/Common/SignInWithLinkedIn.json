@@ -3,7 +3,7 @@
   "content": "Sign in with LinkedIn",
   "content_en_sha1_hash": "c3ef8d2884998eed756a696c641cca91c150684a",
   "created_at": "2025-05-19T21:30:48.771Z",
-  "updated_at": "2025-05-20T08:40:22.096Z",
+  "updated_at": "2025-05-20T21:26:08.364Z",
   "comment": {
     "text": "The translation key \"SignInWithLinkedIn\" is used to display a label for signing in with LinkedIn on the login screen. It appears as part of a button or similar UI element, allowing users to connect their LinkedIn account to access the application. The text should be clear and concise for internationalization purposes.",
     "is_auto": true,
@@ -27,7 +27,18 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation 'تسجيل الدخول LinkedIn' is a literal transliteration of 'Sign in with LinkedIn.' It doesn't convey the full meaning of 'Sign in with LinkedIn' which is to use LinkedIn to authenticate.",
+          "suggestion": "تسجيل الدخول باستخدام LinkedIn"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically accurate, including the English word 'LinkedIn' directly can sometimes feel less integrated. A more natural flow might be preferred depending on the overall context of the application.",
+          "suggestion": "تسجيل الدخول عبر LinkedIn"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -51,7 +62,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Login über LinkedIn' is understandable, 'Sign in with LinkedIn' generally translates better as 'Anmelden mit LinkedIn'. 'Login' is a direct borrowing from English and 'Anmelden' is the more natural German equivalent.",
+          "suggestion": "Anmelden mit LinkedIn"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -171,7 +188,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation 'Пријави се путем LinkedIn-а' while understandable, isn't the most natural way to say 'Sign in with LinkedIn'. A more common and direct translation would be 'Улази путем LinkedIn-а'. 'Пријави се' generally implies a registration process rather than just signing in.",
+          "suggestion": "Улази путем LinkedIn-а"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

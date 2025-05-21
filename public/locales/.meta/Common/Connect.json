@@ -3,7 +3,7 @@
   "content": "Connect",
   "content_en_sha1_hash": "b65463cb6a42a17de514acc4659f7fd331e0876a",
   "created_at": "2025-05-19T21:30:43.652Z",
-  "updated_at": "2025-05-20T09:37:00.431Z",
+  "updated_at": "2025-05-21T00:14:08.219Z",
   "comment": {
     "text": "This translation key is used for a \"Connect\" button that appears in various UI elements, such as buttons and dialog components. Its purpose is to provide a consistent label for this action across different applications and languages, allowing users to understand what happens when they click on the button.",
     "is_auto": true,
@@ -93,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Կապակցվել' (Kapaktsvel) is a valid Armenian word meaning 'to connect', it is an imperfect translation of 'Connect' in this context. 'Connect' often implies a state of being connected, not necessarily the action of connecting. A more suitable translation would depend on the context, but 'Հետ կապված' (Het kapavad) or simply 'Կապ' (Kap) might be better options.",
+          "suggestion": "Consider 'Հետ կապված' (Het kapavad) or 'Կապ' (Kap) depending on the intended meaning."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -153,7 +159,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Adaugă cont' translates to 'Add account', which doesn't accurately reflect the English word 'Connect'. 'Connect' implies a connection or link, not necessarily adding an account.",
+          "suggestion": "Consider alternatives like 'Conectează', 'Asociază', 'Leagă', or a more context-specific term."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -183,7 +195,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Повежи\" is a command form (\"Connect!\") and doesn't accurately reflect the English word \"Connect,\" which can function as a noun or a verb in various tenses. A more neutral translation would be \"Веза\" (Veza) for the noun form, or \"Споји\" (Spoji) for the verb in the present tense.",
+          "suggestion": "Consider \"Веза\" (Veza) for a noun translation or \"Споји\" (Spoji) for the verb."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

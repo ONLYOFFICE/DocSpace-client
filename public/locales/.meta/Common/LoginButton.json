@@ -3,7 +3,7 @@
   "content": "Sign in",
   "content_en_sha1_hash": "ada2e9e96fa9ce85430225b412068b5b62b79800",
   "created_at": "2025-05-19T21:30:46.309Z",
-  "updated_at": "2025-05-20T09:35:35.520Z",
+  "updated_at": "2025-05-20T22:53:29.794Z",
   "comment": {
     "text": "The \"LoginButton\" translation key is used for the text \"Sign in\", which serves as a label for buttons that trigger user login actions. This text appears in various UI elements, including a header button on the Home page and within a public toast message, inviting users to sign in.",
     "is_auto": true,
@@ -165,13 +165,25 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Inscreva-se\" means \"Register\" or \"Subscribe\", not \"Sign in\". \"Sign in\" implies accessing an existing account.",
+          "suggestion": "Entrar"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Autentificare' is a valid Romanian word, but it's a more formal translation of 'Sign in.'  'Autentificare' often implies a more complex authentication process. 'Logare' or 'Conectare' would be more common and natural equivalents for a simple 'Sign in' button.",
+          "suggestion": "Consider 'Logare' or 'Conectare' for a more common and natural translation."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -183,7 +195,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'පිවිසෙන්න' (pivisenna) can mean 'enter' or 'access', it doesn't directly translate to 'Sign in' in the context of a login button. A more appropriate translation would convey the action of logging in.",
+          "suggestion": "Consider alternatives like 'ඇතුළු වන්න' (athuwalu vanna) which means 'enter' or 'log in', or 'පිහිටුවන්න' (pihatuvanna) which conveys the sense of authentication."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -201,7 +219,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Пријави се\" is a valid translation of \"Sign in\", but it's more literally \"Apply yourself/Register\".  A more natural and commonly used translation for a login button would be something like \"Уloguj se\" (Uloguj se).",
+          "suggestion": "Уloguj se"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -213,7 +237,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Oturum aç' is a literal translation of 'Sign in', but a more natural and common Turkish equivalent would be 'Giriş Yap'. 'Oturum aç' is used in some contexts, but 'Giriş Yap' is generally preferred for a login button.",
+          "suggestion": "Giriş Yap"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

@@ -3,7 +3,7 @@
   "content": "Form data collection",
   "content_en_sha1_hash": "3d5d135c8ecaa49feb2eb2292d2853c68b62d6ea",
   "created_at": "2025-05-19T21:30:45.482Z",
-  "updated_at": "2025-05-20T09:36:06.893Z",
+  "updated_at": "2025-05-20T23:22:15.880Z",
   "comment": {
     "text": "This translation key is used to display the title and description of a \"Form data collection\" option, which likely refers to sharing or exporting form data in various UI contexts such as dialogues, panels, and dialogs. The text appears in button labels, titles, and descriptions, typically related to sharing or collaboration features.",
     "is_auto": true,
@@ -99,7 +99,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Italian translation starts with a space. This is likely unintentional and should be removed.",
+          "suggestion": "Raccolta dati del modulo"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -183,7 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Прикупљање података из обрасца' is not the most natural or accurate translation of 'Form data collection'. While technically correct, it sounds somewhat formal and clunky. A more idiomatic translation would be something like 'Сакупљање података из обрасца' or 'Прибављање података из обрасца'.",
+          "suggestion": "Сакупљање података из обрасца"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -201,7 +213,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Збір даних форми\" is a literal translation but doesn't quite capture the nuance of 'Form data collection'. 'Form data collection' implies collecting data *from* a form, not just the form itself. A more accurate translation would reflect this.",
+          "suggestion": "Збір даних з форми"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -213,7 +231,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While '表单数据汇总' (biǎo fán shù jù hǔ zong) is understandable, it doesn't perfectly capture the nuance of 'Form data collection'. '汇总' implies a summary or aggregation, which might not be the full meaning of 'collection'. A more accurate translation might emphasize the gathering or obtaining aspect.",
+          "suggestion": "表单数据收集 (biǎo fán shù jù shōu jí)"
+        }
+      ],
       "approved_at": null
     }
   }

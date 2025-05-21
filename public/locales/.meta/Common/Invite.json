@@ -3,7 +3,7 @@
   "content": "Invite",
   "content_en_sha1_hash": "b136609f068403340f94e46a0174da273bfbce30",
   "created_at": "2025-05-19T21:30:45.964Z",
-  "updated_at": "2025-05-20T09:35:48.762Z",
+  "updated_at": "2025-05-20T23:03:07.035Z",
   "comment": {
     "text": "This translation key is used for the label \"Invite\" in UI elements such as buttons and dialogs. It appears on a main button where user actions are displayed, as well as a modal dialog inviting users to join a room. Translators should focus on providing a consistent invite-related message across various contexts.",
     "is_auto": true,
@@ -57,7 +57,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation \"Dəvət edin\" is a command form (\"Invite\" - imperative). The English \"Invite\" can also function as a noun (an invitation). This translation doesn't account for that possibility. A more versatile translation might be \"Dəvət\" (Invitation).",
+          "suggestion": "Dəvət"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -117,7 +123,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation \"招待する\" (shōtaisu suru) means \"to invite\" (as a verb). The English \"Invite\" is a noun. A more appropriate translation might be \"招待\" (shōtai) which is the noun form of invite.",
+          "suggestion": "招待 (shōtai)"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -195,19 +207,37 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Позови\" translates to \"Invite\" but is more accurately \"Call\" or \"Invite (imperative)\". It's a command form. While it can be used in some contexts to mean invite, it's not a direct translation of \"Invite\" as a noun or general term.",
+          "suggestion": "Consider 'Позвати' for a more accurate translation of 'Invite' as a general term, or 'Позови' is acceptable if the intended meaning is an imperative 'Invite!'"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Pozovi' translates to 'Call' or 'Invite' in an imperative form. While it can be used in the context of inviting someone, it's a more direct and less nuanced translation of 'Invite'. A more appropriate translation might depend on the specific context of 'Invite'.",
+          "suggestion": "Consider alternatives like 'Pozvati' (infinitive - to invite), or a more descriptive phrase depending on the application."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Davet et\" is a verb phrase (invite), but the English content is a noun (\"Invite\"). A more accurate translation would be a noun form.",
+          "suggestion": "Davet"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

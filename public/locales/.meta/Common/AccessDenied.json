@@ -3,7 +3,7 @@
   "content": "Access denied",
   "content_en_sha1_hash": "64343a83ad8c0b8e2789c32ca5ab1eb6abb614e0",
   "created_at": "2025-05-19T21:30:42.816Z",
-  "updated_at": "2025-05-20T09:37:29.396Z",
+  "updated_at": "2025-05-21T00:38:16.676Z",
   "comment": {
     "text": "This translation key displays a message indicating that access has been denied, used when the user lacks permissions to perform an action. It is displayed in an error container within the login component and can also be triggered by OAuth errors, such as client permission denial.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation \"المحاولة مرفوضة\" (Al-muhawala marfuodha) literally translates to \"The attempt is rejected.\" While conveying a similar meaning to \"Access denied\", it's not the most natural or standard translation for \"Access denied.\" A more accurate and common translation would be something like \"ممنوع الدخول\" (Mamnou' ad-dخول).",
+          "suggestion": "ممنوع الدخول"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -99,7 +105,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Italian translation begins with a leading space.",
+          "suggestion": "Remove the leading space: \"Accesso negato\""
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -153,7 +165,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "There is an unnecessary space after 'refuzat'.",
+          "suggestion": "Acces refuzat"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -183,7 +201,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Приступ одбијен\" while technically meaning \"Access denied\", isn't the most natural or idiomatic Serbian translation. A more common and natural translation would be 'Dozvoljen pristup nije dat' or 'Nedozvoljeno'.",
+          "suggestion": "Dozvoljen pristup nije dat"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

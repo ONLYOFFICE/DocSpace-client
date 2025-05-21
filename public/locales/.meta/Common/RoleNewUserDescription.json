@@ -3,7 +3,7 @@
   "content": "Users can create and edit files in the room, but can't create rooms, manage users, or access settings.",
   "content_en_sha1_hash": "c8c55fcf5248cbf283b206afa18995f50c6485cc",
   "created_at": "2025-05-19T21:30:48.058Z",
-  "updated_at": "2025-05-20T09:34:36.293Z",
+  "updated_at": "2025-05-20T21:57:03.517Z",
   "comment": {
     "text": "This translation key is used to display a description for non-admin users who can create and edit files in a room, but have limited access. It appears on screens related to file management within a room.",
     "is_auto": true,
@@ -75,7 +75,18 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation includes 'hallita käyttäjiä' (manage users), which contradicts the English content stating users cannot manage users.",
+          "suggestion": "Käyttäjät voivat luoda ja muokata huoneen tiedostoja, mutta eivät voi luoda huoneita tai käyttää asetuksia."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'huoneen' should likely be 'huoneita' to match the plural context described in the original English.",
+          "suggestion": "Käyttäjät voivat luoda ja muokata huoneita tiedostoja, mutta eivät voi luoda huoneita tai käyttää asetuksia."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -87,7 +98,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a comma after \"խմբագրել\" (edit), which creates an unnatural pause. A conjunction or no punctuation would be more appropriate.",
+          "suggestion": "Օգտատերերը կարող են ստեղծել ֆայլեր սենյակում և խմբագրել դրանք, սակայն չեն կարող..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'manage users' is translated as 'կառավարել օգտատերերին'. While technically correct, 'կառավարել' is a strong word.  A more appropriate word for user management in a collaborative environment might be 'ներառել' (include) or 'գործել' (operate/work with).",
+          "suggestion": "Օգտատերերը կարող են ստեղծել ֆայլեր սենյակում և խմբագրել դրանք, սակայն չեն կարող սենյակներ ստեղծել, ներառել օգտատերերին կամ մուտք գործել կարգավորումներ:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -123,7 +145,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ruimte' is used repeatedly. While technically correct, 'omgeving' or 'werkruimte' might be more natural depending on the context of 'room'.",
+          "suggestion": "Consider replacing 'ruimte' with 'omgeving' or 'werkruimte' for improved naturalness. Requires further context to determine the best choice."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -135,7 +163,18 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'utilizadors' is misspelled. The correct Portuguese word for 'users' is 'utilizadores'.",
+          "suggestion": "utilizadores"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'gerenciar utilizadors' is understandable, a more accurate and natural translation for 'manage users' would be 'administrar utilizadores' or 'gerir utilizadores'.",
+          "suggestion": "administrar utilizadores"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -147,7 +186,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'room' is translated as 'sală' which typically means 'hall' or 'room' in a formal context. In this case, 'room' refers to a collaborative workspace, and a better translation would be 'spațiu' or 'mediu de lucru'.",
+          "suggestion": "Utilizatori pot crea și modifica fișiere în spațiul de lucru, dar nu pot crea spații de lucru, gestiona utilizatorii sau accesa setările."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -159,7 +204,28 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'පරිශීලකයින්' (parishilakayin) is a slightly awkward transliteration of 'users'. It should be 'භාවිතකරුවන්' (bhavitakaruwan) or 'පරිශ්‍රමකරුවන්' (parishramakaruwan) for a more natural feel.",
+          "suggestion": "භාවිතකරුවන් or පරිශ්‍රමකරුවන්"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ගොණු' (gonu) which means 'files' has an incorrect vowel marking. It should be 'ගොණු' (gonu) with a 'u' vowel.",
+          "suggestion": "ගොණු"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'හැකියාවක් లేదు' (hakiyaawak లేదు) translates to 'not possible' which is a bit stronger than the original 'can't'. 'හැකියාවක් නැත' (hakiyaawak nathe) is a more appropriate translation for 'can't'.",
+          "suggestion": "හැකියාවක් නැත"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure could be improved for better flow. The repetition of 'හැකියාවක්' is a bit clunky.",
+          "suggestion": "පරිශීලකයින් గది තුළ ගොණු නිර්මාණය කර සංස්කරණය කළ හැකිය, නමුත් ඔවුන් గది නිර්මාණය කිරීමට, පරිශීලකයන් ನಿರ್ವಹ කිරීමට හෝ සැකසුම් වෙත ප්‍රවේශ වීමට අවසර නැත."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -195,7 +261,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The use of 'а також' is slightly clunky in this context. It's grammatically correct but less fluent.",
+          "suggestion": "Replace 'а також не мають доступу до параметрів' with 'та не мають доступу до параметрів'."
+        }
+      ],
       "approved_at": null
     },
     "vi": {

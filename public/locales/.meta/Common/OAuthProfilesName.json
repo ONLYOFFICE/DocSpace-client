@@ -3,7 +3,7 @@
   "content": "Profile",
   "content_en_sha1_hash": "ff4fc0276e960c348647b647235f68200887c9d2",
   "created_at": "2025-05-19T21:30:47.037Z",
-  "updated_at": "2025-05-20T09:35:12.611Z",
+  "updated_at": "2025-05-20T22:30:59.604Z",
   "comment": {
     "text": "This translation key is used for the label of a permission group that corresponds to the OAuth profile. It appears in a UI element related to portal settings and is intended to be displayed as \"Profile\" for users. Translators should provide a localized version of this phrase for their respective languages.",
     "is_auto": true,
@@ -111,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ຂໍ້ມູນທັງໝົດຂອງເຈົ້າ\" (kh้อมูล thang mot khong jao) translates to 'all your information' or 'all of your data', which is not an accurate translation of 'Profile'. A profile is a summary or representation of a person or entity.",
+          "suggestion": "Consider alternatives like \"ໂປຟາຍ\" (phonetic transliteration - Profai) or a more descriptive phrase that conveys the meaning of a user profile, such as \"ຂໍ້ມູນສ່ວນຕົວ“ (kh้อมูล suan tua - personal information)."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -207,7 +213,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"个人资料\" (gèrén zīliào) is a common translation for \"Profile\" in many contexts, it might be too literal and a bit formal for OAuth profiles. A more succinct and generally accepted translation within the context of OAuth might be \"档案\" (dāng'àn) or \"用户资料\" (yònghù zīliào). \"档案\" is shorter and conveys the idea of a collection of information.",
+          "suggestion": "Consider using \"档案\" (dāng'àn) or \"用户资料\" (yònghù zīliào)"
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Contacts",
   "content_en_sha1_hash": "b0dd615cbbdcbf21ffb72115599ca915634fcb85",
   "created_at": "2025-05-19T21:30:46.964Z",
-  "updated_at": "2025-05-20T09:35:15.118Z",
+  "updated_at": "2025-05-20T22:34:04.945Z",
   "comment": {
     "text": "This translation key is used to display the label \"Contacts\" in the OAuth accounts settings, typically found within a configuration or permissions section. It appears to be related to account management and profile settings, possibly on a portal or application page. The translation value will vary depending on the locale.",
     "is_auto": true,
@@ -33,25 +33,49 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation \"الحسابات\" (al-ḥisābāt) translates to \"Accounts\", not \"Contacts\". The English content \"Contacts\" refers to a list of individuals and their contact information.",
+          "suggestion": "The correct translation for \"Contacts\" in Arabic (Saudi Arabia) would be \"جهات الاتصال\" (jihat al-ittiṣāl)."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Hesablar' means 'Accounts', which is not the intended meaning of 'Contacts'. 'Contacts' refers to individuals or organizations someone interacts with.",
+          "suggestion": "Consider 'Əlaqələr' for 'Contacts'. This is the most accurate translation for the intended meaning."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Профили\" does not accurately reflect the meaning of \"Contacts\". \"Contacts\" refers to a list of people, while \"Профили\" translates to \"Profiles\".",
+          "suggestion": "Consider translations like \"Контакти\" or \"Връзки\" which more accurately convey the meaning of 'Contacts'."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation \"Účty\" translates to \"Accounts\", not \"Contacts\". The English word \"Contacts\" refers to people or entities with whom one interacts. \"Účty\" refers to accounts, which is a different concept.",
+          "suggestion": "Consider using \"Kontakty\" for a more accurate translation of \"Contacts\"."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -63,7 +87,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation 'Λογαριασμοί' translates to 'Accounts', not 'Contacts'.  'Contacts' would be 'Επαφές'.",
+          "suggestion": "Επαφές"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -75,7 +105,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation \"Tilit\" does not accurately convey the meaning of \"Contacts.\" \"Tilit\" translates to \"Accounts.\" \"Contacts\" in the context of OAuth typically refers to the user's contacts list or the ability to access them.",
+          "suggestion": "A more accurate translation would be something like \"Yhteystiedot\" (Contact Information) or \"Ottakaa yhteyttä\" (Get in touch), but the best option depends on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -105,7 +141,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"계정\" translates to \"Accounts\" or \"Logins\", not \"Contacts\". \"Contacts\" refers to a list of people.",
+          "suggestion": "Consider using \"연락처\" for a more accurate translation of \"Contacts\"."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -117,7 +159,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation \"Pārskati\" does not accurately convey the meaning of \"Contacts\". \"Pārskati\" translates to \"Reviews\" or \"Overviews\". \"Contacts\" refers to a list of people or entities you can communicate with.",
+          "suggestion": "Saites"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -129,7 +177,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation \"Kontakt\" is singular. The English \"Contacts\" is plural. The correct translation should be the plural form.",
+          "suggestion": "Kontakty"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -147,7 +201,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Contacte' is the plural form. The English 'Contacts' refers to the list of contacts, which is generally singular in context (e.g., 'OAuth Accounts'). A singular form would be more appropriate.",
+          "suggestion": "Contact"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -207,7 +267,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"联系人信息\" (lianxi ren xinxi) literally translates to 'Contact Information' which, while related to 'Contacts', is not the most accurate or natural translation. It's more descriptive than what's implied by the English term.",
+          "suggestion": "联系人 (lianxi ren)"
+        }
+      ],
       "approved_at": null
     }
   }

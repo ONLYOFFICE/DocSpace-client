@@ -3,7 +3,7 @@
   "content": "Operations with existing files: viewing, editing, form filling, reviewing, commenting.",
   "content_en_sha1_hash": "9f355c9883cbf811bb7d07dfef49aac22ce21e3e",
   "created_at": "2025-05-19T21:30:48.012Z",
-  "updated_at": "2025-05-20T09:34:37.915Z",
+  "updated_at": "2025-05-20T22:00:10.883Z",
   "comment": {
     "text": "This translation key is used to display a description for operations related to existing files, such as viewing, editing, and commenting. It appears in UI elements that allow file interaction, providing context for users and helping to guide their actions.",
     "is_auto": true,
@@ -45,13 +45,25 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ревю' (revyu) doesn't accurately translate 'review' in this context. It's often used for fashion shows or product launches, not document reviews.",
+          "suggestion": "ревю should be replaced with преглед (pregled) or проверка (provka)."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation contains a duplicate of \"prohlížení\" (viewing). The English content lists 'viewing' only once.",
+          "suggestion": "Operace s existujícími soubory: prohlížení, editace, vyplňování formulářů, revize, komentování."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -75,7 +87,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'form filling' is translated as 'lomakkeen arkistointi', which means 'form archiving'. The English meaning of 'form filling' is 'filling out a form', not archiving it. ",
+          "suggestion": "lomakkeen täyttö"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -99,7 +117,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation uses a colon (：) which is appropriate for listing items. However, a more natural phrasing might involve a slightly different structure, although not strictly incorrect.",
+          "suggestion": "Consider rephrasing to something like: 既存ファイルに対する操作は、閲覧、編集、フォームへの記入、レビュー、コメントが含まれます。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -111,7 +135,18 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation uses a colon after 'ການ​ເບິ່ງ', disrupting the consistent formatting of the list.",
+          "suggestion": "Remove the colon after 'ການ​ເບິ່ງ' to match the formatting of the other list items (no colon)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“ຕື່ມຮູບແບບການ” is not the best translation of 'form filling'. It literally means 'adding form style'. A better translation might be something more direct like 'ການຕື່ມແບບຟອມ' or 'ການຕື່ມຂໍ້ມູນໃນແບບຟອມ'.",
+          "suggestion": "Change 'ການຕື່ມຮູບແບບການ' to 'ການຕື່ມແບບຟອມ' or 'ການຕື່ມຂໍ້ມູນໃນແບບຟອມ'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -159,7 +194,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation uses colons after each item, which doesn't perfectly match the English structure. While not incorrect, it's a stylistic difference.",
+          "suggestion": "Consider removing the colons after each item for a closer stylistic match to the English original.  For example: \"පවතින ගොනුවල මෙහෙයුම්: බැලීම්, සංස්කරණ, ආකෘතිපත්‍ර පිරවීම්, සමාලෝචන, අදහස් දැක්වීම්\" could be adjusted to remove the colons if preferred."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -207,7 +248,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Chinese translation uses a colon and a list format, which is a good choice to mirror the English structure. However, consistency with other similar translations would be beneficial.",
+          "suggestion": "Consider standardizing the introductory phrase (e.g., using '可操作的文件' instead of '支持的文件' if that's the common style)."
+        }
+      ],
       "approved_at": null
     }
   }

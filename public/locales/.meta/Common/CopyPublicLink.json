@@ -3,7 +3,7 @@
   "content": "Copy public link",
   "content_en_sha1_hash": "a06b066cea1096a0cf9ea23b4ac87cb7383239a1",
   "created_at": "2025-05-19T21:30:43.800Z",
-  "updated_at": "2025-05-20T09:36:55.104Z",
+  "updated_at": "2025-05-21T00:09:11.477Z",
   "comment": {
     "text": "This translation key is used for a button that copies a public link when clicked. In the context of a file upload process, this link can be shared publicly to provide quick access to the uploaded content. It appears as a primary button in a dialog box, allowing users to easily share their files.",
     "is_auto": true,
@@ -105,7 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ກ໊ອບລິ້ງສາທາລະນະ\" is a literal transliteration and doesn't convey the intended meaning of 'Copy public link' in a natural Lao way. While it's understandable, it sounds awkward.",
+          "suggestion": "ສາທາລະນະລິ້ງຄັດລອກ (Sathalan link kat lok) - This translates to 'Public link copy' and sounds more natural in Lao."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Copiere link public' is not the most natural Romanian phrasing. 'Copiere link public' translates literally as 'Copy public link.' A more idiomatic translation would be 'Copiere link-ul public'.  The use of the definite article 'ul' sounds more natural.",
+          "suggestion": "Copiere link-ul public"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +165,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'සබැඳියක්' (sabandiyak) is slightly awkward. While technically correct, a more natural phrasing could improve readability.",
+          "suggestion": "පොදු සබැඳුම පිටපත් කරන්න (pudu sabanduma pitapata karanna)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation conveys the meaning, a more literal translation of 'public link' is ' පොදු සබැඳිය' (pudu sabandiya).  The suffix '-ak' on 'සබැඳියක්' implies a single instance, which isn't necessarily what is intended.",
+          "suggestion": "පොදු සබැඳුම පිටපත් කරන්න (pudu sabanduma pitapata karanna)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +194,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Копирај јавни линк' is not the most natural or idiomatic way to say 'Copy public link' in Serbian (Cyrillic). While technically correct, it sounds slightly awkward.",
+          "suggestion": "A more natural translation would be 'Копирај линк за јавност' or 'Копирај линк за дељење'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

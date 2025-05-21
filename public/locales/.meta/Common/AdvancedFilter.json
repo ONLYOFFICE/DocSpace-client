@@ -3,7 +3,7 @@
   "content": "Search options",
   "content_en_sha1_hash": "5616c8722256385e28abb27ee4233728e13a8882",
   "created_at": "2025-05-19T21:30:42.953Z",
-  "updated_at": "2025-05-20T09:37:24.997Z",
+  "updated_at": "2025-05-21T00:35:32.333Z",
   "comment": {
     "text": "AdvancedFilter key is used to display a filter button that allows users to adjust search settings, appearing on the Home page's filter section.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Որոնման ընտրանքներ\" (Qronman entrankner) is a very literal translation of \"Search options\". A more natural and idiomatic Armenian translation might be something like \"Փնտրելու եղանակներ\" (Pntrelu eganak) which translates to 'Search methods' or 'Search ways'. \"Որոնման ընտրանքներ\" sounds a bit clunky and formal.",
+          "suggestion": "Consider using \"Փնտրելու եղանակներ\" (Pntrelu eganak) or a similar phrasing that sounds more natural in Armenian."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -123,7 +129,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation 'Opções de pesquisa' is Portuguese, not Polish. It translates to 'Search options' in Portuguese.",
+          "suggestion": "The correct Polish translation should be something like 'Opcje wyszukiwania' or 'Możliwości wyszukiwania'."
+        }
+      ],
       "approved_at": null
     },
     "pt": {

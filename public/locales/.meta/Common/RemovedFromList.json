@@ -3,7 +3,7 @@
   "content": "Removed from list",
   "content_en_sha1_hash": "2f2bdcb4c73e77431fff3aae539197cbb5befd21",
   "created_at": "2025-05-19T21:30:47.817Z",
-  "updated_at": "2025-05-20T09:34:45.009Z",
+  "updated_at": "2025-05-20T22:07:37.478Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that an item has been removed from a list. It is typically displayed in a download dialog when removing a file from a list of available files. The translation should be used for a \"Removed from List\" label or prompt, such as in a button or dialog title.",
     "is_auto": true,
@@ -141,7 +141,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Șters din lista\" is understandable, a more accurate and common translation of \"Removed from list\" in Romanian would be \"Eliminat din listă\". \"Șters\" implies deletion, which isn't always the intent of 'removed'.",
+          "suggestion": "Eliminat din listă"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'ලේඛනයෙන් ඉවත් කරන ලදී' (lekhanayen ivaat karan ladee) literally translates to 'Removed from the document'. While conceptually similar to 'Removed from list', it's not the most accurate or natural translation. It implies a document, not just a list.",
+          "suggestion": "A more accurate and natural translation would be something like 'รายการෙන් ඉවත් කරන ලදී' (liyatanen ivaat karan ladee) - 'Removed from the list', or 'දුරුවා දැමිනි' (duruvaa d’am’n’i) - 'Removed/Discarded'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -165,13 +177,25 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Odstranjeno s seznama\" is understandable, a more natural and accurate translation of \"Removed from list\" would be \"Izbrisano iz seznama\" or \"Odjavljeno s seznama\". \"Odstranjeno\" implies a more general removal, not necessarily from a list.",
+          "suggestion": "Izbrisano iz seznama"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Уклоњено са листе\" while understandable, isn't the most natural or accurate translation of \"Removed from list.\" A more accurate and common phrasing would be something like \"Избрисано са листе\" or \"Одасрђено са листе\". \"Уклоњено\" implies movement or displacement, not necessarily deletion.",
+          "suggestion": "Избрисано са листе"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

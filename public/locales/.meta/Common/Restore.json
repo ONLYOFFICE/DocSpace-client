@@ -3,7 +3,7 @@
   "content": "Restore",
   "content_en_sha1_hash": "3cbe6d6b9a8d1596bb5bca12e14d81c9e108a1a3",
   "created_at": "2025-05-19T21:30:47.901Z",
-  "updated_at": "2025-05-20T09:34:42.124Z",
+  "updated_at": "2025-05-20T22:05:16.738Z",
   "comment": {
     "text": "The translation key \"Restore\" is used to display a button label or header in various UI elements, such as buttons and dialogs. It indicates an action of recovering or returning a file or room to its original state. This translation key appears on screens like Restore Room Dialogs where users can restore a room.",
     "is_auto": true,
@@ -243,7 +243,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ප්‍රත්‍යර්පණය' (pratyarpanaya) is a valid Sinhala word, it primarily means 'repayment', 'offering', or 'dedication'.  'Restore' in the context of data or a system usually implies returning something to a previous state, which is better translated as ' නැවත ස්ථානගත කිරීම' (naewath sthaanagath karuma) or ' නැවත පහසකිරීම' (naewath pahasakareema).",
+          "suggestion": "Consider 'නැවත ස්ථානගත කිරීම' (naewath sthaanagath karuma) or 'නැවත පහසකිරීම' (naewath pahasakareema)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -261,7 +267,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Поврати\" can mean \"return\" or \"restore\" in some contexts, it's not the most common or natural translation of \"Restore\" in this context. A more accurate and common translation would be \"Врати\" or potentially \"Обнови\" depending on the precise nuance intended.",
+          "suggestion": "Врати"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

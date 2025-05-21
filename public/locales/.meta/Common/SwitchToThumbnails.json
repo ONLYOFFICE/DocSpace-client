@@ -3,7 +3,7 @@
   "content": "Switch to thumbnails view",
   "content_en_sha1_hash": "7319bf6b4edb601de0b266f9131c2c8f253e74c9",
   "created_at": "2025-05-19T21:30:49.233Z",
-  "updated_at": "2025-05-20T08:37:56.859Z",
+  "updated_at": "2025-05-20T21:10:10.221Z",
   "comment": {
     "text": "This translation key is used for the \"Switch to thumbnails view\" text in a view selector component. It appears as an icon label on a button and is displayed when switching between different views. Translators should replace \"Switch to thumbnails view\" with the desired localized equivalent.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Eskiz rejiminə keçin' does not accurately convey the meaning of 'Switch to thumbnails view'. 'Eskiz rejimi' translates to 'sketch mode,' which isn't the intended meaning. A more accurate translation would focus on 'thumbnails'.",
+          "suggestion": "Miniaxtarlar görünüşünə keçin"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -57,7 +63,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Thumbnails aktivieren' implies 'enable thumbnails' rather than 'switch to thumbnails view'. While functionally similar, it doesn't directly convey the meaning of the original English phrase.",
+          "suggestion": "Thumbnails anzeigen"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -99,7 +111,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"サムネイル表示へ切り替え\" is a bit formal and lengthy for a simple UI label like 'Switch to thumbnails view'. A more natural and concise translation would improve user experience.",
+          "suggestion": "サムネイル表示"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -159,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'සිඟිති රූ දැක්මට මාරුව' is not the most natural or accurate translation of 'Switch to thumbnails view'. While 'සිඟිති රූ' (sigithi ruu) correctly refers to thumbnails, 'දැක්මට මාරුව' (daekmath maruw) which means 'to change to see' is awkward. A more natural phrasing would emphasize the action of viewing the thumbnails.",
+          "suggestion": "Consider 'සීගිති දර්ශනයට මාරුව' (seegithi darshanaya mata maruw) - 'Switch to thumbnail view' or 'සීගිති ආකාරයට මාරුව' (seegithi aakaaraayaata maruw) - 'Switch to thumbnail format'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +207,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Prebaci se na prikaz sličica' doesn't perfectly capture the meaning of 'Switch to thumbnails view'. 'Prebaci se' implies a transfer or move, which is not the core action of switching to a thumbnails view. A more accurate translation would convey the action of displaying or showing thumbnails.",
+          "suggestion": "Promeni prikaz na sličice"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,7 +225,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Переключитися на подання ескізів' while conveying the general meaning, isn't the most natural or precise translation of 'Switch to thumbnails view'. 'Ескізів' translates to 'sketches' rather than 'thumbnails'.",
+          "suggestion": "Переключитися на перегляд мініатюр"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

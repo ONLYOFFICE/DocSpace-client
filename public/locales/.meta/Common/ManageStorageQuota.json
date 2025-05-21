@@ -3,7 +3,7 @@
   "content": "Manage storage quota",
   "content_en_sha1_hash": "0acf9963c183dbb1e5558ca61bdf05b365b77448",
   "created_at": "2025-05-19T21:30:46.354Z",
-  "updated_at": "2025-05-20T09:35:34.130Z",
+  "updated_at": "2025-05-20T22:52:13.932Z",
   "comment": {
     "text": "Manage storage quota is used as a button label and header title in a modal dialog to allow users to manage their storage space, typically when viewing usage statistics or setting up custom quotas. It appears on a portal settings page and in a change storage quota dialog.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Yaddaş kvotasını idarə edin' is understandable, a more natural and accurate translation of 'Manage storage quota' in Azerbaijani would be 'Saxta həcm kvotasını idarə et'. 'Yaddaş' primarily means 'memory' and 'saxta həcm' is more aligned with 'storage'.",
+          "suggestion": "Saxta həcm kvotasını idarə et"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -69,7 +75,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'αποθ. χώρου' is an abbreviation and may not be ideal for all users. It's understandable but could be replaced with the full word for clarity.",
+          "suggestion": "Διαχείριση ποσόστωσης αποθηκευτικού χώρου"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -117,7 +129,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ຄຸ້ມບານການຈັດສັນຄໍ້າສູງສຸດ\" does not accurately convey the meaning of \"Manage storage quota.\" \"ຄຸ້ມບານ\" (khum ban) generally means 'to manage' or 'to take care of', but the rest of the phrase lacks the nuance of 'quota'.",
+          "suggestion": "Consider alternatives like \"ຈັດການກໍານິສັດຄໍ້າສູງສຸດ\" (jat gaan kaanit ka’a soot) which translates to 'manage quota limit' or \"ການຈັດການຄໍ້າສູງສຸດ\" (kaan jat gaan ka’a soot) which translates to 'storage quota management'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -165,7 +183,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'ආචයන සලාකය කළමනාකරණය' doesn't accurately convey the meaning of \"Manage storage quota\". 'ආචයන' is not directly related to storage or management. It appears to be a mistranslation or misinterpretation.",
+          "suggestion": "A more accurate translation would be something like 'ගබඩාවේ ඉඩ ප්‍රමාණය කළමනාකරණය' (Gabadawe ida pramaṇaya kalamanakaraṇaya) which translates to 'Manage storage space'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

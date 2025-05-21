@@ -3,7 +3,7 @@
   "content": "Process details",
   "content_en_sha1_hash": "4953bc29de892cdbb1d582430dd71fda1ac51f15",
   "created_at": "2025-05-19T21:30:47.485Z",
-  "updated_at": "2025-05-20T09:34:57.384Z",
+  "updated_at": "2025-05-20T22:17:09.892Z",
   "comment": {
     "text": "This translation key is used for displaying process details in a UI. It's displayed as a heading in a filling status panel and related to file information.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Обработи данни\" (Obraboti danni) translates to 'Processes data' or 'Data processing', not 'Process details'. It doesn't accurately convey the meaning of the English phrase.",
+          "suggestion": "A more accurate translation might be \"Подробности за процеса\" (Podrobnosti za protsesa) which means 'Process details'."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Գործընթացի ամնրամասներ' doesn't accurately convey the meaning of 'Process details'. 'ամնրամասներ' implies 'components' or 'aspects,' which isn't a direct equivalent of 'details'.",
+          "suggestion": "Consider alternatives such as 'Գործընթացի մանրամասներ' (Gorts'entaci manramasner) which directly translates to 'Process details' or 'Գործընթացի տեղեկություններ' (Gorts'entaci tegequtyuner) meaning 'Process information'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ප්‍රති ක්‍රියාවලියේ විස්තරాలు' (prati kriyavaliye vistharalu) is too literal and not the most natural way to say 'Process details' in Sinhala. 'ප්‍රති ක්‍රියාවලිය' (prati kriyavaliya) translates to 'counter-process' or 'reactive process,' which is not synonymous with 'Process details'.",
+          "suggestion": "Consider alternatives like 'ප්‍රតិ ක්‍රියාවලියෙහි තොරතුරු' (prati kriyavaliyehi thorathuru) – which translates to 'Process information' or simply 'ප්‍රති ක්‍රියාවේ විස්තර' (prati kriyaye visthar) - 'Process description'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -195,7 +213,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Chi tiết về Quy trình\" is technically correct, but lacks the directness and conciseness of the English \"Process details.\" \"Chi tiết về Quy trình\" is a more verbose phrasing. A more direct translation might be \"Chi tiết quy trình\".",
+          "suggestion": "Chi tiết quy trình"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

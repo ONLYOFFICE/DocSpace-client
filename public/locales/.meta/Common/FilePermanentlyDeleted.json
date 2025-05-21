@@ -3,7 +3,7 @@
   "content": "The file will be permanently deleted in 30 days.",
   "content_en_sha1_hash": "0893b91fab956db6aa23b845defda697042a8cb4",
   "created_at": "2025-05-19T21:30:45.251Z",
-  "updated_at": "2025-05-20T09:36:15.179Z",
+  "updated_at": "2025-05-20T23:33:29.591Z",
   "comment": {
     "text": "The translation key \"FilePermanentlyDeleted\" is used to display a message indicating that a file will be permanently deleted in 30 days. It appears as part of a delete confirmation dialog in the UI, providing context for users who have chosen to delete a file and ensuring they understand the permanent nature of the action.",
     "is_auto": true,
@@ -57,7 +57,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'permanently deleted' is more accurately conveyed as 'безвъзвратно изтрит' in Bulgarian to emphasize the irreversible nature of the action. 'Изтрит завинаги' is understandable but less precise.",
+          "suggestion": "Файлът ще бъде безвъзвратно изтрит след 30 дни."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -129,7 +135,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Fails tiks neatgriezeniski izdzēsts 30 dienu laikā' is a bit awkward. While technically correct, it's not the most natural way to express this in Latvian. A more natural phrasing would emphasize the future action.",
+          "suggestion": "Faili tiks neatgriezeniski izdzēsts pēc 30 dienām."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -171,7 +183,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Sinhala word 'දවස්' (davas) which means 'days' is misspelled. It should be 'වස'.",
+          "suggestion": "ගොනුව වස 30කින් සදහටම මැකෙනු ඇත."
+        },
+        {
+          "type": "formatting",
+          "description": "The Sinhala number '𑇬' doesn't render correctly and the number should appear as '30'.",
+          "suggestion": "ගොනුව වස 30කින් සදහටම මැකෙනු ඇත."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -213,7 +236,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Tập tin sẽ bị xóa vĩnh viễn trong 30 ngày' is not the most natural or accurate rendering of 'The file will be permanently deleted in 30 days.' 'Xóa vĩnh viễn' is a bit awkward. A better phrasing would emphasize the time frame for recovery is over.",
+          "suggestion": "Tập tin sẽ bị xóa sau 30 ngày và không thể phục hồi."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

@@ -3,7 +3,7 @@
   "content": "If you have an account in this {{productName}}, we recommend that you log in so that completed forms are recorded under your account.",
   "content_en_sha1_hash": "e3d3e517125a284eb929dc671a7064ebc8fbdee2",
   "created_at": "2025-05-19T21:30:45.471Z",
-  "updated_at": "2025-05-20T09:36:07.158Z",
+  "updated_at": "2025-05-20T23:23:12.282Z",
   "comment": {
     "text": "This translation key is used for a toast message that recommends logging in to record completed forms under the user's account. The message appears on-screen when users access a product they already have an account for.",
     "is_auto": true,
@@ -33,13 +33,30 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'doldurduğunuz formaların hesabınızda saxlanması' is not a perfect equivalent of 'so that completed forms are recorded under your account'. A more accurate translation would focus on the saving/linking of forms to the account.",
+          "suggestion": "Bu {{productName}} ilə hesabınız varsa, tamamladığınız formalar hesabınızla əlaqəli saxlanması üçün daxil olmanızı tövsiyə edirik."
+        },
+        {
+          "type": "formatting",
+          "description": "The Azerbaijani translation uses lowercase for the start of the sentence. It's generally better to start with a capital letter.",
+          "suggestion": "Bu {{productName}} ilə hesabınız varsa, tamamladığınız formalar hesabınızla əlaqəli saxlanması üçün daxil olmanızı tövsiyə edirik."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"so that completed forms are recorded under your account\" is not perfectly captured by \"така че попълнените формуляри да се записват във вашия профил\". While close, \"recorded under your account\" implies more than just saving to a profile; it suggests a deeper level of association or logging. A more accurate translation might use phrasing closer to 'за да се съхраняват във вашия акаунт'.",
+          "suggestion": "Ако имате профил в този {{productName}}, препоръчваме да влезете, така че попълнените формуляри да се съхраняват във вашия акаунт."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -81,7 +98,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"we recommend\" as \"խորհուրդ ենք տալիս\" is accurate but slightly formal. A more natural phrasing in Armenian might improve readability. While not strictly incorrect, it could be softened.",
+          "suggestion": "Consider a more colloquial alternative like \"մեզ համար ավելի լավ կլինի\" (it would be better for us) or a simpler phrasing like \"ներս մուտք գործեք\" (log in)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,25 +116,134 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing \"ログインしていただくと\" is somewhat formal and indirect. While grammatically correct, it could be softened for a more natural and user-friendly tone. A more conversational alternative would be better suited for a toast message.",
+          "suggestion": "この{{productName}}にアカウントをお持ちでしたら、ログインすると、完了したフォームがアカウントに記録されます。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '로그인하는 것이 좋습니다' (log in is recommended) is a bit formal and passive. A more natural and encouraging phrasing would be better.",
+          "suggestion": "이 {{productName}}에 계정이 있으시면, 완료한 양식이 계정에 저장되도록 로그인하시는 것을 권장합니다."
+        },
+        {
+          "type": "formatting",
+          "description": "The Korean translation maintains the {{productName}} placeholder as in the English. This is correct, but ensure that the Korean version of the template is properly handled during rendering.",
+          "suggestion": "No change needed, but ensure template rendering supports {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຖ້າ' (tha) is correct for 'If'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ທ່ານ' (than) is correct for 'you'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ມີ' (mee) is correct for 'have'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ບັນຊີ' (ban-see) is correct for 'account'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ໃນ' (nai) is correct for 'in'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ນີ້' (nee) is correct for 'this'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ພວກເຮົາ' (pao-ka-ao) is correct for 'we'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ຂໍແນະນໍາ' (kho-na-nam) is correct for 'recommend'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ໃຫ້' (hai) is correct for 'to'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ທ່ານ' (than) is correct for 'you'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ເຂົ້າສູ່ລະບົບ' (khao-soo-lap-bop) is correct for 'log in'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ເພື່ອ' (pheua) is correct for 'so that'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ແບບຟອມ' (bap-form) is correct for 'forms'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ທີ່ສໍາເລັດແລ້ວ' (tee-sam-let-laew) is correct for 'completed'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ຖືກບັນທຶກໄວ້' (thuk-ban-thuek-vai) is correct for 'are recorded'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ພາຍໃຕ້' (phai-tai) is correct for 'under'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ບັນຊີຂອງທ່ານ' (ban-see-thang) is correct for 'your account'.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Ja jums ir šāds konts\" is not the most natural way to say \"If you have an account\". A more common and accurate translation would be \"Ja jums ir konts\" (If you have an account). 'Šāds' implies a specific type of account, which isn't the intent.",
+          "suggestion": "Ja jums ir konts"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -129,7 +261,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'to log in' is better translated as 'faça login' or 'acceda' instead of 'inicie sessão' as it's less common and slightly formal in this context. 'Inicie sessão' suggests starting a session, which isn't quite the right nuance.",
+          "suggestion": "Se tiver uma conta neste {{productName}}, recomendamos que faça login para registar os formulários preenchidos na sua conta."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,7 +279,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '...astfel încât formularele completate sunt salvate în contul dvs.' is a literal translation and sounds awkward in Romanian. A more natural phrasing would be '...astfel încât formularele completate să fie salvate în contul dvs.' or '...astfel încât formularele completate să fie stocate în contul dvs.'",
+          "suggestion": "...astfel încât formularele completate să fie salvate în contul dvs."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,13 +297,30 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'පෝරම' (porama) is a transliteration and may not be the most natural or easily understood word in Sinhala. It's a direct translation of 'form'.",
+          "suggestion": "Consider using a more contextually appropriate Sinhala term for 'form', such as 'ආකෘතිය' (aakruththi) or 'ලේඛනය' (lekhanaya), depending on the specific nuance required. For example: 'ආකෘතිය සම්පූර්ණ කරන ලද...' or 'ලේඛනය සම්පූර්ණ කරන ලද...'"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'සම්පූර්ණ කරන ලද පෝරම ඔබගේ ගිණුම යටතේ සටහන් වන පරිදි' could be slightly improved for readability. The phrasing 'ඔබගේ ගිණුම යටතේ සටහන් වන පරිදි' is a bit verbose.",
+          "suggestion": "Consider restructuring the sentence to something like: 'ඔබගේ ගිණුමට සාමූහිකව පෝරම සටහන් කරනු ලැබේ' or 'පෝරම ඔබගේ ගිණුමට සාමූහිකව تسجيل කරනු ලැබේ'"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"zaevidované pod vaším menom\" doesn't accurately convey the meaning of 'recorded under your account'. It literally translates to 'recorded under your name'. The intended meaning is that forms should be associated with the user's account.",
+          "suggestion": "Ak máte účet v tomto {{productName}}, odporúčame vám prihlásiť sa, aby vyplnené formuláre boli uložené v vašom účte."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,25 +332,54 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'апликацији' (application) seems slightly off. While technically correct, 'у овој {{productName}}' (in this {{productName}}) would be more natural and aligns better with the English phrasing of 'in this {{productName}}'.",
+          "suggestion": "Ако имате налог у овој {{productName}}, препоручујемо да се пријавите како би попуњени обрасци били забележени под вашим налогом."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation uses 'aplikaciji' which translates to 'application'.  'Aplikaciji' suggests a standalone application rather than the broader context of a service or platform where the forms reside.  A more appropriate term would convey the system itself, not just the app.",
+          "suggestion": "Ako imate nalog na ovoj platformi/usluzi {{productName}}, preporučujemo da se prijavite kako bi popunjeni obrasci bili zabeleženi pod vašim nalogom."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"hesabınız altında kaydedilebilmesi için\" is a bit awkward. A more natural Turkish phrasing would be something like \"hesabınızda kayıtlı kalabilmesi için\" or \"hesabınıza bağlanabilmesi için\".",
+          "suggestion": "Bu {{productName}} üzerinde bir hesabınız bulunuyorsa, doldurulan formların hesabınızda kayıtlı kalabilmesi için oturum açmanızı önermekteyiz."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence is quite long. It might be more user-friendly to break it into two shorter sentences.",
+          "suggestion": "Bu {{productName}} üzerinde bir hesabınız bulunuyorsa, lütfen oturum açın. Böylece doldurduğunuz formlar hesabınızda kayıtlı kalır."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"so that completed forms are recorded under your account\" is not perfectly captured by the Ukrainian translation. The Ukrainian phrasing 'щоб заповнені форми реєструвалися під вашим обліковим записом' implies the forms are registered *by* the account, rather than recorded *under* it. A more accurate translation would convey the idea of the forms being associated with the account.",
+          "suggestion": "Якщо у вас є обліковий запис у цьому {{productName}}, рекомендуємо вам увійти, щоб заповнені форми зберігалися у вашому обліковому записі."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -201,7 +391,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"以便将完成的表格记录在您的账户下\" is somewhat awkward and less natural in Chinese. A more natural phrasing would be something like \"以便将您完成的表格关联到您的账户\" or \"以便您的完成的表格能够保存在您的账户中\".",
+          "suggestion": "以便将您完成的表格关联到您的账户"
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "User",
   "content_en_sha1_hash": "9f8a2389a20ca0752aa9e95093515517e90e194c",
   "created_at": "2025-05-19T21:30:49.454Z",
-  "updated_at": "2025-05-20T08:35:38.662Z",
+  "updated_at": "2025-05-20T21:04:02.881Z",
   "comment": {
     "text": "This translation key \"User\" is used to display the content \"User\" in various UI contexts, such as a warning message and a label in a table. It appears in a dialog box when deleting a profile and in a data import component for selecting users. Translators should provide a translated version of this text that accurately reflects its purpose in these contexts.",
     "is_auto": true,
@@ -201,7 +201,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'පරිශ්‍රීලකයා' (parishiilakayaa) can be a valid translation for 'user', it's quite formal and less commonly used in contemporary Sri Lankan Sinhala. A more common and natural translation would be 'භාවිතකරු' (bhavitakaru).",
+          "suggestion": "Consider using 'භාවිතකරු' (bhavitakaru) for a more natural and common translation."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -249,7 +255,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '普通用户' (Pǔtōng Yònghù) literally translates to 'Common User', which is not the most accurate or natural rendering of 'User' in many contexts. It implies a distinction from a 'special' or 'premium' user, which may not be intended.",
+          "suggestion": "Consider alternatives like '用户' (Yònghù), which is the standard and most versatile translation for 'User'."
+        }
+      ],
       "approved_at": null
     }
   }

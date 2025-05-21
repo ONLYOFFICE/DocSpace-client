@@ -3,7 +3,7 @@
   "content": "Select new image",
   "content_en_sha1_hash": "0cfab96c757b48543e5dee1d93361135769c716e",
   "created_at": "2025-05-19T21:30:44.709Z",
-  "updated_at": "2025-05-20T09:36:34.795Z",
+  "updated_at": "2025-05-20T23:51:29.001Z",
   "comment": {
     "text": "The \"Select new image\" translation key is used to provide a descriptive text for a button that allows users to upload or select a new image in an image editor component. This text appears as the label for a dropzone area where files can be uploaded.",
     "is_auto": true,
@@ -153,7 +153,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Sinhala word 'නව' (nawa) is correctly spelled but might benefit from context to confirm it's the most appropriate word for 'new'.",
+          "suggestion": "Consider if 'අලුත්' (alut) might be more suitable depending on the specific nuance of 'new' intended."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure is grammatically correct, but the tone might be slightly informal.  'නව රූපයක් තෝරන්න' is direct.  A slightly more polite or formal phrasing might be preferable depending on the application's overall tone.",
+          "suggestion": "Consider 'නව රූපයක් තෝරා ගන්න' (nawa rupayak thora gana) which is slightly more formal."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +194,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Yeni resim seç\" while understandable, is slightly less formal than the English 'Select new image'. A more appropriate translation would be \"Yeni bir resim seç\".",
+          "suggestion": "Yeni bir resim seç"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

@@ -3,7 +3,7 @@
   "content": "You can't use the same email address",
   "content_en_sha1_hash": "f85d5552131bdd2fc625627ca72a0cb482f3e288",
   "created_at": "2025-05-19T21:30:48.291Z",
-  "updated_at": "2025-05-20T09:34:27.618Z",
+  "updated_at": "2025-05-20T21:44:35.537Z",
   "comment": {
     "text": "This translation key displays an error message indicating that a user cannot use the same email address. It is used in a change email dialog to inform users of a validation rule when attempting to send a new email.",
     "is_auto": true,
@@ -51,7 +51,18 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Dasselbe E-Mail darf nicht benutzt werden' is a literal translation and sounds unnatural in German. It's overly formal and doesn't flow well.",
+          "suggestion": "Eine more natural translation would be 'Die gleiche E-Mail darf nicht verwendet werden' or 'Sie können dieselbe E-Mail nicht verwenden'."
+        },
+        {
+          "type": "grammar",
+          "description": "While technically grammatical, 'benutzt werden' is less common and less elegant than 'verwendet werden' in this context.",
+          "suggestion": "Replace 'benutzt werden' with 'verwendet werden'."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -63,7 +74,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'No se puede utilizar el mismo email' is technically correct but sounds slightly unnatural. A more idiomatic translation would be 'No se puede usar la misma dirección de correo electrónico' or 'No puedes usar la misma dirección de correo electrónico'. The use of 'utilizar' is less common than 'usar' in this context.",
+          "suggestion": "No se puede usar la misma dirección de correo electrónico"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -105,13 +122,25 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ທີ່ບໍ່ສາມາດໃຊ້ອີເມວຊໍ່າກັນ\" is a literal translation but doesn't flow naturally in Lao. It translates to 'that cannot use same email'. A more natural and accurate translation would convey the meaning of 'You cannot use the same email'.",
+          "suggestion": "ບໍ່ສາມາດໃຊ້ອີເມວຊໍ່າກັນໄດ້"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Jūs nevarat izmantot to pašu e-pastu' is a literal translation, but 'e-pasts' is more formal than the context suggests. 'E-pasts' can also be written as 'epasts'. A more natural phrasing would be 'Jūs nevarat lietot to pašu e-pastu adresi' or 'Jūs nevarat lietot to pašu epastu'.",
+          "suggestion": "Jūs nevarat lietot to pašu e-pastu adresi"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,19 +170,42 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Romanian translation is grammatically incorrect and redundant. 'adresa e-mail' is repeated and unnecessary.",
+          "suggestion": "Nu puteți folosi aceeași adresă de e-mail."
+        },
+        {
+          "type": "formatting",
+          "description": "There is an unnecessary space before 'adresa' in the translation.",
+          "suggestion": "Remove the space before 'adresa'."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Email совпадает с текущим\" does not accurately convey the meaning of \"You can't use the same email address.\" It implies the email matches the current one, rather than expressing a restriction on reuse.",
+          "suggestion": "Нельзя использовать этот адрес электронной почты."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඔබට එකම වි-තැපැල් ලිපිනය භාවිතයට නොහැකිය' is a literal translation and doesn't flow naturally in Sinhala. While technically correct, it sounds awkward.",
+          "suggestion": "A more natural translation would be something like 'ඔබ එකම වි-තැපැල් ලිපිනය භාවිතා කළ නොහැකිය' or 'ඔබට එක වි-තැපැල් ලිපිනයක් පමණක් භාවිතා කළ හැකියි'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +223,18 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Не можете користити исту емаил адресу' is not the most natural or accurate rendering of 'You can't use the same email address' in Serbian (Cyrillic). 'Исту' implies a very specific identical email, which isn't the intended meaning.",
+          "suggestion": "Не можете користити исту е-маил адресу (using 'е-маил' for 'email' is more common) or Не можете користити већ коришћену емаил адресу (You cannot use an already used email address)."
+        },
+        {
+          "type": "spelling",
+          "description": "While 'емаил' is often used, 'е-маил' is the more formal and universally accepted spelling of 'email'.",
+          "suggestion": "е-маил"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

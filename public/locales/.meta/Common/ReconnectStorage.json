@@ -3,7 +3,7 @@
   "content": "Reconnect storage",
   "content_en_sha1_hash": "0649139f8f43a246ffc081a20e4c40c7a08245da",
   "created_at": "2025-05-19T21:30:47.753Z",
-  "updated_at": "2025-05-20T09:34:47.302Z",
+  "updated_at": "2025-05-20T22:10:10.702Z",
   "comment": {
     "text": "The translation key \"ReconnectStorage\" is used to display the text \"Reconnect storage\", which appears in a Connect Dialog component, serving as the label for a button that initiates the reconnect process of storage.",
     "is_auto": true,
@@ -33,13 +33,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"أعد توصيل وحدة التخزين\" is a bit literal and formal. A more natural phrasing for \"Reconnect storage\" in a user interface context might be \"إعادة الاتصال بالتخزين\" or \"توصيل التخزين مرة أخرى\". The original translation emphasizes the action of *re*-connecting, which might not be the primary concern for the user.",
+          "suggestion": "إعادة الاتصال بالتخزين"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Yaddaşı yenidən birləşdirin\" is a literal translation and may not be the most natural or idiomatic way to express \"Reconnect storage\" in Azerbaijani. It implies re-establishing a memory connection, rather than re-establishing access to stored data. A better phrasing would depend on the specific context.",
+          "suggestion": "Consider alternatives such as \"Saxlanılan məlumatları yenidən əldə edin\" (Retrieve stored data), \"Saxlanma əlaqəsini bərpa edin\" (Restore storage connection), or a more context-specific translation."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -111,7 +123,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ເຊື່ອມຕໍ່ບ່ອນເກັບຂໍ້ມູນຄືນໃໝ່' is technically a translation, it's quite literal and awkward in Lao. A more natural phrasing for 'Reconnect storage' would be something that implies restoring a storage connection or retrieving data from storage.",
+          "suggestion": "Consider alternatives like 'ຟື້ນຟູການເຊື່ອມຕໍ່ບ່ອນເກັບຂໍ້ມູນ' (fuen fuu gaan seuum dtor bon ngeup kha muun - restore storage connection) or 'ດຶງຂໍ້ມູນຈາກບ່ອນເກັບຂໍ້ມູນຄືນ' (duung kha muun jaak bon ngeup kha muun kuun - retrieve data from storage)."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -129,7 +147,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Podłącz pamięć ponownie\" is understandable, a more accurate and natural translation of \"Reconnect storage\" would be something like \"Połącz pamięć ponownie\" or \"Przywróć połączenie pamięci\". \"Podłącz\" implies connecting something that wasn't connected before, while 'Reconnect' suggests re-establishing a prior connection.",
+          "suggestion": "Połącz pamięć ponownie"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -147,7 +171,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Reconectați spațiu de stocare' is technically correct, a more natural and idiomatic Romanian translation of 'Reconnect storage' would be 'Restabilirea stocării' or 'Reconectarea stocării'. 'Reconectați spațiu de stocare' sounds slightly clunky.",
+          "suggestion": "Restabilirea stocării"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -159,7 +189,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'ආචයනය යළි සබඳින්න' is not an accurate translation of 'Reconnect storage'. 'ආචයනය' (aachayana) typically means 'invocation' or 'calling upon'. 'යළි සබඳින්න' (yali sabandinna) means 'reconnect'. The entire phrase doesn't convey the meaning of reconnecting storage.",
+          "suggestion": "A more accurate translation would be something like 'ගබඩුව යළි සම්බන්ධ කරන්න' (gabaduwa yali samapandakanna) which translates to 'Reconnect the storage'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +213,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Поново повежи складиште\" while understandable, doesn't perfectly capture the nuance of \"Reconnect storage.\" \"Поново повежи\" translates to 'Connect again' or 'Reconnect,' which is accurate, but 'складиште' (warehouse/storage) could be more accurately rendered as 'место за складиште' (storage space) depending on context or just shortened to 'складиште' if it's already established what is being referred to.",
+          "suggestion": "Consider \"Поново повежи место за складиште\" or \"Поново повежи складиште\" (depending on the established context). If the meaning of 'storage' is clear from prior content, 'Поново повежи складиште' is suitable."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

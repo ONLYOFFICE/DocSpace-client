@@ -3,7 +3,7 @@
   "content": "Custom",
   "content_en_sha1_hash": "081ae3fdc403609cf6e760849ebb14117b7a50cb",
   "created_at": "2025-05-19T21:30:44.377Z",
-  "updated_at": "2025-05-20T09:36:47.685Z",
+  "updated_at": "2025-05-21T00:00:49.064Z",
   "comment": {
     "text": "This translation key is used to display the text \"Custom\" in various contexts throughout the application, typically appearing on filters or buttons related to custom rooms. The text is rendered using the \"Common:CustomRooms\" translation from the i18n module, which provides a consistent and localized experience for users.",
     "is_auto": true,
@@ -87,13 +87,25 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Salles personnalisées' is a reasonable translation, it's quite literal and long. Considering the context of 'Custom' (likely referring to a feature or setting), a more concise and natural translation would be 'Personnalisées' or even just 'Personnalisation'.",
+          "suggestion": "Personnalisées"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Հարմարեցնել' (Harmartsetnel) generally means 'to customize' or 'to adapt'. While it's related to 'Custom', it's not a direct or ideal translation in this context, which likely refers to a setting or feature label. A more literal or contextually appropriate translation might be 'Պատվերով' (Patverov - meaning 'custom-made' or 'ordered') or 'Անհատական' (Anhatakan - meaning 'individual' or 'personalized').",
+          "suggestion": "Consider 'Պատվերով' (Patverov) or 'Անհատական' (Anhatakan) depending on the precise meaning intended."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -135,7 +147,18 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Niestandardowa ' does not fully convey the meaning of 'Custom'. While 'Niestandardowa' means 'non-standard' or 'unconventional', 'Custom' often implies personalization or modification. A better translation might be 'Spersonalizowana' (personalized) or 'Dostosowana' (adapted/tailored), depending on the exact context.",
+          "suggestion": "Consider 'Spersonalizowana' or 'Dostosowana' for a more accurate translation."
+        },
+        {
+          "type": "formatting",
+          "description": "The Polish translation has a trailing space.",
+          "suggestion": "Remove the trailing space: 'Niestandardowa'"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -201,7 +224,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Налаштовувана' while technically meaning 'customizable' or 'configurable', doesn't fully capture the meaning of 'Custom' in the context of a room type. It implies a degree of configuration that might not be intended. A more direct and often preferred translation for 'Custom' in a user interface context is 'Індивідуальні'.",
+          "suggestion": "Індивідуальні"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

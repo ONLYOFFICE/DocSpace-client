@@ -3,7 +3,7 @@
   "content": "Spreadsheets",
   "content_en_sha1_hash": "e8a0fe95bcd9c07d210920e52baa1560871c11ad",
   "created_at": "2025-05-19T21:30:49.008Z",
-  "updated_at": "2025-05-20T08:38:55.939Z",
+  "updated_at": "2025-05-20T21:18:14.924Z",
   "comment": {
     "text": "The translation key \"Common:Spreadsheets\" is used to display a label indicating that only spreadsheets are being filtered or selected in a file filter interface. It appears as part of a dropdown menu or list, providing context for users selecting files by type.",
     "is_auto": true,
@@ -171,7 +171,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Foi de calcul' is a valid translation, it's a more literal and less common term for 'Spreadsheets'. A more natural and frequently used translation would be 'Fise de calcul'.",
+          "suggestion": "Fise de calcul"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -201,19 +207,37 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Прорачунске табеле\" while technically meaning 'calculating tables', isn't the standard or most natural Serbian (Cyrillic) translation for 'Spreadsheets'. A more common and accurate translation would be 'Табеле' or 'Електронске табеле'.",
+          "suggestion": "Табеле"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Proračunske tabele' is a literal translation, 'Tabele sa računarom' or simply 'Tabele' might be more natural and commonly used in Serbian for 'Spreadsheets'. 'Proračunske tabele' is a bit clunky.",
+          "suggestion": "Tabele sa računarom or Tabele"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Elektronik tablolar\" is a valid translation for \"Spreadsheets\", it's a more literal and technically specific translation. A more common and natural translation in everyday Turkish would be \"Excel tabloları\" or simply \"Tablolar\".",
+          "suggestion": "Consider using \"Excel tabloları\" or \"Tablolar\" for a more natural-sounding translation."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

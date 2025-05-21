@@ -3,7 +3,7 @@
   "content": "Trash",
   "content_en_sha1_hash": "e3bf62bb7f5af7ba291b2df1a11d573bdb55d7e9",
   "created_at": "2025-05-19T21:30:49.325Z",
-  "updated_at": "2025-05-20T08:37:28.590Z",
+  "updated_at": "2025-05-20T21:08:03.214Z",
   "comment": {
     "text": "This translation key is used to display \"Trash\" as a label for a section in the file system and in a delete profile dialog. It appears in an empty view container and a body component of a delete profile ever dialog, providing context for users navigating file systems or managing profiles.",
     "is_auto": true,
@@ -69,13 +69,25 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation 'Κάδος απορριμάτων' translates to 'Waste Bin' or 'Trash Can'. While acceptable, it's more literal than the concise English term 'Trash'. A more natural and equivalent translation, depending on context, could be something like 'Σκουπίδια'.",
+          "suggestion": "Consider 'Σκουπίδια' for a more natural equivalent, or retain 'Κάδος απορριμάτων' if a more literal translation is required."
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Papelera de reciclaje' is a literal translation, it's overly verbose and doesn't convey the simple meaning of 'Trash'. It implies a recycling bin, not just a trash receptacle.",
+          "suggestion": "Consider more concise and common translations such as 'Basura', 'Residuos', or 'Vertedero'."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -105,7 +117,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation \"ごみ箱\" (gomibako) means \"trash can\" or \"garbage box\", not simply \"trash\". While related, it's not a direct translation of \"Trash\".",
+          "suggestion": "Consider a more direct translation such as \"ゴミ\" (gomi) which means 'trash' or 'garbage'."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -123,7 +141,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation \"Akritne\" does not accurately convey the meaning of \"Trash.\" \"Akritne\" translates to \"ashes\" or \"cinders.\" A more appropriate translation for \"Trash\" would be \"Atkritumi\".",
+          "suggestion": "Atkritumi"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -153,7 +177,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Recycle Bin\" is a functional equivalent, \"Trash\" more accurately represents the English term. \"Recycle Bin\" implies a container for recyclable materials, whereas \"Trash\" refers to general waste.",
+          "suggestion": "Gunoi"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -165,7 +195,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'කුණුකූඩයට' (kunu koodaya) literally translates to 'to the trash bin'. While 'Trash' refers to the concept of refuse or waste, not necessarily a bin. A more accurate translation would depend on the context, but 'ගබර' (gabara) or 'දුල්ල' (dulla) might be more suitable in many situations. 'කුණු' (kunu) is often used, but 'කුණුකූඩයට' is overly specific.",
+          "suggestion": "Consider 'ගබර' (gabara) or 'දුල්ල' (dulla) or 'කුණු' (kunu) depending on the specific context. If referring directly to a trash receptacle, 'කුණුකූඩය' (kunu koodaya) is more precise than 'කුණුකූඩයට'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -201,19 +237,37 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Кошик\" (Koshik) directly translates to \"Basket\", while the English term \"Trash\" refers to a waste container or the act of discarding something. \"Кошик\" doesn't fully capture the intended meaning.",
+          "suggestion": "Consider alternatives like \"Смітник\" (Smittnyk - garbage can) or \"Відходи\" (Vidkhody - waste) to better reflect the meaning of \"Trash\"."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Thùng rác\" translates to 'Trash Can', the English content is simply \"Trash\".  'Thùng rác' is a more specific term than the English word.",
+          "suggestion": "Consider a more direct translation like \"Rác\" or \"Vật bỏ đi\" to better match the simplicity of the English term."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '回收站' (Huíshōu zhàn) typically refers to a recycling center, not a trash can or trash section. While recycling is a form of waste management, it's not a direct equivalent of 'Trash'.",
+          "suggestion": "Consider '垃圾' (Lājī) for 'Trash' which directly translates to garbage or waste. Alternatively, '垃圾桶' (Lājī tǒng) could be used if referring to a trash can."
+        }
+      ],
       "approved_at": null
     }
   }

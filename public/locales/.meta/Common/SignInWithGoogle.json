@@ -3,7 +3,7 @@
   "content": "Sign in with Google",
   "content_en_sha1_hash": "4a0b7281397ff6a6cf1e5d19aad8dd3b71043677",
   "created_at": "2025-05-19T21:30:48.762Z",
-  "updated_at": "2025-05-20T08:40:26.158Z",
+  "updated_at": "2025-05-20T21:26:23.174Z",
   "comment": {
     "text": "The \"Sign in with Google\" translation key is used to display a button label or title that allows users to sign in to the application using their Google account credentials. This text typically appears on a login form, such as a button or dialog prompt, and is intended for display in multiple languages.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation 'تسجيل الدخول Google' is a literal transliteration of 'Sign in with Google' and doesn't convey the intended meaning naturally in Arabic. It's missing the preposition 'باستخدام' (using).",
+          "suggestion": "تسجيل الدخول باستخدام Google (Sign in using Google)"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -51,7 +57,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Login über Google\" is understandable, \"Sign in with Google\" typically translates to \"Anmelden mit Google\" or \"Einloggen mit Google.\" \"Login\" is an English loanword and not the most natural German equivalent.",
+          "suggestion": "Anmelden mit Google"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -135,13 +147,25 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Entrar com Google' is a literal translation but doesn't flow naturally in Portuguese. A more idiomatic translation would be 'Acessar com Google' or 'Fazer login com Google'.",
+          "suggestion": "Acessar com Google"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Conectare cu Google\" is understandable, \"Autentificare cu Google\" or \"Logare cu Google\" would be more accurate translations of \"Sign in with Google\". \"Conectare\" implies connecting to a service, not necessarily authenticating.",
+          "suggestion": "Autentificare cu Google"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -171,13 +195,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Пријави се путем Google-а' is a literal translation and sounds unnatural in Serbian. A more natural and idiomatic translation would be 'Улазак са Google-ом' or 'Пријава са Google-ом'.",
+          "suggestion": "Улазак са Google-ом"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Prijavi se putem Google-a' is a functional translation, but not the most natural or idiomatic way to say 'Sign in with Google' in Serbian. A more common and user-friendly translation would be 'Prijava sa Google-om' or 'Uloguj se sa Google-om'.",
+          "suggestion": "Prijava sa Google-om"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

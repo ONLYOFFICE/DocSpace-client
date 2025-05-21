@@ -3,7 +3,7 @@
   "content": "Please, make sure that all the changes are successfully saved during this day.",
   "content_en_sha1_hash": "94b17010eebe5d31f70c32cf7d338a95514a1cfd",
   "created_at": "2025-05-19T21:30:43.253Z",
-  "updated_at": "2025-05-20T09:37:14.475Z",
+  "updated_at": "2025-05-21T00:24:51.119Z",
   "comment": {
     "text": "This translation key is used to display a notice to users when they access a screen indicating planned maintenance on a bar. The message is displayed when the user clicks on a button or opens a dialog with this ID (\"main-bar\"), and informs them that any changes made during this period should be saved successfully.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Lütfən, bu gün ərzindəki bütün dəyişikliklərin uğurla yadda saxlandığına əmin olun.' is a bit too literal and sounds unnatural in Azerbaijani. A more natural phrasing would be closer to 'Zəhmət olmasa, bu gün edilən bütün dəyişikliklərin düzgün qeydə alındığından əmin olun.'",
+          "suggestion": "Zəhmət olmasa, bu gün edilən bütün dəyişikliklərin düzgün qeydə alındığından əmin olun."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -63,13 +69,25 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Spanish translation uses the present tense \"se guardan\" (are saved) instead of the conditional perfect tense, which would be more appropriate for a polite request to ensure the changes are saved.",
+          "suggestion": "Por favor, asegúrese de que todos los cambios se hayan guardado correctamente durante este día."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Finnish translation uses a double passive construction (\"on tallennettu onnistuneesti\"). It sounds a bit awkward. A more natural phrasing would be preferred.",
+          "suggestion": "Varmista, että kaikki muutokset tallennetaan onnistuneesti tämän päivän aikana."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,55 +99,119 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Խնդրում ենք, համոզվեք, որ բոլոր փոփոխությունները հաջողությամբ պահպանված են այս օրվա ընթացքում:\" is a bit too literal and sounds unnatural in Armenian. While technically correct, it doesn't convey the original meaning as smoothly.",
+          "suggestion": "Consider a more natural phrasing like: \"Խնդրում ենք ապահովել, որ այս օրվա ընթացքում բոլոր փոփոխությունները պահպանվեն:\" or \"Խնդրում ենք համոզվել, որ այսօրվա փոփոխությունները պահպանվեցին:\" (depending on the desired level of formality)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Italian translation uses the present tense 'sono state salvate' which implies ongoing action. A more appropriate past perfect tense ('sono state salvate') would better reflect the English phrasing 'are successfully saved'.",
+          "suggestion": "Per favore, assicurati che tutte le modifiche siano state salvate con successo durante la giornata."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"この日のうちにすべての変更が正常に保存されていることを確認してください\" while technically correct, sounds a bit awkward and formal for a disclaimer intended to be user-friendly. The phrase \"この日のうちに\" implies a strict deadline, which might not be the intended meaning. It also uses the passive voice (\"保存されていることを確認してください\") which can be perceived as less direct.",
+          "suggestion": "Consider a more direct and user-friendly translation like \"すべての変更が保存されていることをご確認ください.\" (Please confirm that all changes have been saved.) or \"変更はすべて保存されていることを確認してください。」(Please confirm that all changes are saved.)"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is overly formal and doesn't convey the casual, reassuring tone of the English original. '확인하시기 바랍니다' (hwaginhasigi baramnida) is very formal for a disclaimer intended to be friendly.",
+          "suggestion": "이 날 모든 변경 사항이 잘 저장되었는지 확인해주세요."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of '이 때' (i ttae - at this time) is a bit awkward. It doesn't clearly tie to the context of 'during this day'.",
+          "suggestion": "오늘 하루 동안"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation's phrasing is slightly awkward and doesn't perfectly capture the original's politeness and directness. \"ກວດເພື່ອໃຫ້ແນ່ໃຈว่า\" (check to make sure) is less direct than 'make sure'.",
+          "suggestion": "ກະລຸນາ, ຮັບປະກັນວ່າການປ່ຽນແປງທັງຫມົດໄດ້ຖືກບັນທຶກສໍາເລັດໃນລະຫວ່າງວັນນີ້."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ບັນທຶກ' (bantuek) is spelled correctly, but depending on the context 'ເກັບຮັກສາ' (keop haksah) might be a more fitting term for saving data.",
+          "suggestion": "Consider using 'ເກັບຮັກສາ' (keop haksah) instead of 'ບັນທຶກ' (bantuek) for a potentially clearer meaning. However, 'ບັນທຶກ' is not inherently incorrect."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'during this day' in the English is a bit awkward. A more natural translation would better reflect the intended meaning, which is about ensuring the changes are saved by the end of the workday or within a specified timeframe, not literally 'during this day'.",
+          "suggestion": "Lūdzu, pārliecinieties, vai visas izmaiņas ir veiksmīgi saglabātas līdz šodienas beigām."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Zorg ervoor dat alle wijzigingen deze dag succesvol worden opgeslagen' is a literal translation that doesn't flow naturally in Dutch. It sounds somewhat formal and clunky.  A more natural phrasing would be closer to 'Controleer of alle wijzigingen gedurende de dag correct zijn opgeslagen' or 'Let op dat alle wijzigingen deze dag worden opgeslagen.'",
+          "suggestion": "Controleer of alle wijzigingen gedurende de dag correct zijn opgeslagen."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Upewnij się, że wszystkie zmiany zostały zapisane tego dnia pomyślnie' is a bit too literal and sounds unnatural in Polish.  'Pomyślnie' (successfully) is redundant as 'zapisane' already implies success. A more natural phrasing would be 'Upewnij się, że wszystkie zmiany zostały zapisane dzisiaj.'",
+          "suggestion": "Upewnij się, że wszystkie zmiany zostały zapisane dzisiaj."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Por favor, certifique-se que guardou todas as alterações feitas no dia indicado' is a less natural and more literal translation of the English content. The phrase 'no dia indicado' is not present in the English and adds unnecessary complexity. 'Guardo' is also slightly awkward; a more natural phrasing would use a conditional form.",
+          "suggestion": "Por favor, certifique-se de que todas as alterações foram guardadas durante o dia."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,19 +223,42 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'with success' is awkward and not a natural way to express the concept of 'successfully' in Romanian. It's a literal translation that doesn't flow well.",
+          "suggestion": "Vă rugăm să vă asigurați că toate modificările sunt salvate cu succes pe parcursul acestei zile."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'В течение дня убедитесь, что все изменения успешно сохранены.' is a bit awkward and doesn't perfectly capture the original meaning. The original emphasizes ensuring *during the day*, which the translation does, but it lacks the polite request tone. A more natural translation would be something like \"Пожалуйста, убедитесь, что все изменения сохранены в течение дня.\" or \"Убедитесь, что все изменения успешно сохранены в течение дня.\"",
+          "suggestion": "Пожалуйста, убедитесь, что все изменения сохранены в течение дня."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'කරුණාකර මෙම දිනයේ සියලු වෙනස්කම් සාර්ථකව සුරැකී ඇති බවට වගබලා ගන්න.' is a bit too formal and wordy for a simple disclaimer like 'Please, make sure that all the changes are successfully saved during this day.' It conveys a sense of responsibility and guarantees that the translator may not want to take.",
+          "suggestion": "කරුණාකර සියලු වෙනස්කම් සාර්ථකව සුරැකී ඇති බව වගබලා ගන්න."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The original English sentence is a more casual reminder. The Sinhala translation conveys a strong obligation which can be misinterpreted.",
+          "suggestion": "සියලු වෙනස්කම් සුරැකී ඇති බව තහවුරු කරන්න."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -165,31 +270,81 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Please, make sure that all the changes are successfully saved during this day' is better translated as 'Please ensure all changes are saved during the day' or 'Please ensure all changes are saved today'. The current translation, 'Prosimo, poskrbite, da bodo vse spremembe uspešno shranjene za ta dan,' while understandable, sounds a bit formal and the 'za ta dan' (for this day) is not the most natural phrasing.",
+          "suggestion": "Prosimo, poskrbite, da bodo vse spremembe uspešno shranjene danes."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'у току овог дана' is not the most natural way to express 'during this day'. It literally translates to 'in the course of this day'.",
+          "suggestion": "Молимо вас, уверите се да су све измене успешно сачуване данас."
+        },
+        {
+          "type": "grammar",
+          "description": "The verb 'сачуване' is in the past participle form and requires a helping verb (e.g., 'су'). Although the context implies a continuous action, it's grammatically incorrect without the auxiliary verb.",
+          "suggestion": "Молимо вас, уверите се да су све измене успешно сачуване данас."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Molimo vas, uverite se da su sve izmene uspešno sačuvane u toku ovog dana.' is a bit overly formal and wordy for the simple English phrase 'Please, make sure that all the changes are successfully saved during this day.' A more natural and concise translation would be preferred.",
+          "suggestion": "Molimo vas, proverite da su sve izmene uspešno sačuvane tokom dana."
+        },
+        {
+          "type": "formatting",
+          "description": "The word 'tokom' could be considered slightly more colloquial than 'u toku'.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is overly formal and doesn't convey the original's gentle reminder tone. 'Başarıyla kaydedildiğinden emin olun' is too direct.",
+          "suggestion": "Lütfen, bugün yapılan tüm değişikliklerin kaydedildiğinden emin olun."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'bütün' (all) is a little redundant and can be removed without changing the meaning.  It makes the sentence a bit clunky.",
+          "suggestion": "Lütfen, bugün yapılan tüm değişikliklerin kaydedildiğinden emin olun."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The passive voice 'успішно збережено' (successfully saved) doesn't quite align with the active tone of the English original.  It sounds slightly awkward.",
+          "suggestion": "Будь ласка, переконайтеся, що всі зміни, зроблені в цей день, успішно збережені."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'зроблені в цей день' (made this day) is a bit verbose and less natural than a more concise phrasing.",
+          "suggestion": "Будь ласка, переконайтеся, що всі зміни, внесені сьогодні, успішно збережені."
+        }
+      ],
       "approved_at": null
     },
     "vi": {

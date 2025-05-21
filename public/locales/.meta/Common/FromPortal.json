@@ -3,7 +3,7 @@
   "content": "From {{productName}}",
   "content_en_sha1_hash": "1073fa45036b8ba0fa65e7fd286576670d3c8398",
   "created_at": "2025-05-19T21:30:45.587Z",
-  "updated_at": "2025-05-20T09:36:03.320Z",
+  "updated_at": "2025-05-20T23:17:13.912Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" label on a main button dropdown menu in an article component. The label displays a phrase that includes the product name, indicating where data will be uploaded from a portal.",
     "is_auto": true,
@@ -75,7 +75,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"{{productName}}:sta\" is a possible, but not necessarily the most natural or accurate translation of \"From {{productName}}\". While ':sta' can indicate 'from', the best translation depends on the context.  A more common and potentially more accurate translation might be '{{productName}}:sta' (using the inessive case if referring to origin) or '{{productName}}ilta' (if referring to a delivery or similar).",
+          "suggestion": "Consider '{{productName}}:sta' or '{{productName}}ilta' based on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -87,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"{{productName}}-ից\" translates to \"from {{productName}}\" but lacks the proper prepositional case. While technically conveys the meaning, it's not the most natural or grammatically correct way to express it in Armenian.  A more natural translation would be \"{{productName}}-ի մասին\" or \"{{productName}}-ի համար\".",
+          "suggestion": "Consider using \"{{productName}}-ի մասին\" or \"{{productName}}-ի համար\" for a more idiomatic and grammatically correct translation."
+        }
+      ],
       "approved_at": null
     },
     "it": {

@@ -3,7 +3,7 @@
   "content": "Select from {{productName}}",
   "content_en_sha1_hash": "3365d131cf57bbe561f947df5ac7dcf4feb0ca97",
   "created_at": "2025-05-19T21:30:48.440Z",
-  "updated_at": "2025-05-20T08:52:08.672Z",
+  "updated_at": "2025-05-20T21:40:47.066Z",
   "comment": {
     "text": "This translation key is used to display a message prompting users to select from a portal. It appears when selecting files or actions in certain contexts and asks users to choose from a list of options related to a product named \"Product Name\".",
     "is_auto": true,
@@ -69,13 +69,25 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation \"Valitse {{productName}}:sta\" is not the most natural or accurate translation of \"Select from {{productName}}\". It literally translates to \"Choose from {{productName}}:sta\".  A more idiomatic Finnish translation would be \"Valitse {{productName}}\" or \"Valitse {{productName}} listasta\" (Select from the list of {{productName}}).",
+          "suggestion": "Valitse {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The French translation 'Sélectionner de {{productName}}' is not the most natural way to say 'Select from {{productName}}'.  'Sélectionner parmi {{productName}}' or 'Choisir parmi {{productName}}' would be more appropriate.",
+          "suggestion": "Sélectionner parmi {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -117,7 +129,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The direct translation 'Selecteer van' is not idiomatic Dutch. A more natural translation would be 'Selecteer uit' or 'Kies uit'. 'Van' implies something originating from, while 'uit' implies selecting from a range of options.",
+          "suggestion": "Selecteer uit {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -141,7 +159,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Selectare din {{productName}}' is a literal translation that doesn't sound natural in Romanian. A more natural phrasing would be 'Alege din {{productName}}' or 'Selectează din {{productName}}'.",
+          "suggestion": "Alege din {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '{{productName}} වෙතින් තෝදන්න' is a literal translation of 'Select from {{productName}}'. While understandable, a more natural and idiomatic Sinhala translation would be '{{productName}} තුලින් තෝදන්න' or '{{productName}} තුළින් තෝදන්න'. 'වෙනින්' implies 'from' in a restrictive sense, whereas 'තුලින්' or 'තුළින්' is more appropriate for selecting within a set of options.",
+          "suggestion": "{{productName}} තුලින් තෝදන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,19 +201,37 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Serbian translation uses the genitive case ('-а') after 'productName'. While grammatically correct, it's stylistically awkward and can be improved for better flow and a more natural feel in this context.  The nominative case might be more appropriate, depending on the specific meaning intended. 'Select from {{productName}}' implies selection *of* a product.",
+          "suggestion": "Изаберите {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Serbian translation 'Izaberite iz {{productName}}-а' uses the genitive case suffix '-а' which might not be the most natural or precise way to express 'from' in this context. While grammatically correct, it sounds slightly awkward.",
+          "suggestion": "Consider alternatives like 'Izaberite {{productName}}' or 'Odaberite {{productName}}' which are simpler and potentially more natural depending on the overall tone."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Turkish translation retains the double curly braces {{productName}}, which is consistent with the English source, but may need adjustment based on the target platform's templating system.",
+          "suggestion": "Review if the double curly braces are necessary and if they are, confirm compatibility with the platform's templating."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

@@ -3,7 +3,7 @@
   "content": "Create virtual data room",
   "content_en_sha1_hash": "cffe205b69e44d4beb86299712697b1f2e680fe5",
   "created_at": "2025-05-19T21:30:43.931Z",
-  "updated_at": "2025-05-20T09:36:50.142Z",
+  "updated_at": "2025-05-21T00:05:26.658Z",
   "comment": {
     "text": "This translation key is used to display the label for creating a virtual data room. It appears as a button label in an empty screen form, and its purpose is to provide a clear instruction for the user when they are presented with an option to create a virtual data room. The translated text will be displayed instead of \"CreateVirtualDataRoom\".",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Virtual məlumat otağı yaradın\" is in the past tense (\"you created\"). The English \"Create virtual data room\" implies a command or option for creation, and should be in the present tense or infinitive form.",
+          "suggestion": "Virtual məlumat otağı yarat"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -129,7 +135,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Creëer een virtuele data kamer\" sounds a bit literal and clunky in Dutch. \"Virtuele dataruimte\" is a more common and natural way to refer to a virtual data room.",
+          "suggestion": "Creëer een virtuele dataruimte"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -165,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'අතථ්‍ය දත්ත කාමරයක් සාදන්න' while conveying the general idea, is not the most natural or accurate rendering of 'Create virtual data room'. 'අතථ්‍ය' (athathya) implies something unreal or illusory, which might not be the intended nuance. A more suitable translation would emphasize the 'virtual' aspect as being digital or online.",
+          "suggestion": "Consider 'විචිත්‍ර‍්‍රීය දත්ත කාමරයක් සාදන්න' (vichitriy dath kamaraayak sadann) - 'Create a digital data room', or 'සරිව‍්‍රතී‍්‍ර‍ය දත්ත කාමරයක් සාදන්න' (sarivathriy dath kamaraayak sadann) - 'Create a virtual data room' which uses a more commonly understood term for 'virtual' in Sinhala. The best option depends on the target audience."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +201,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'виртуелну' is misspelled. It should be 'виртуелну собу'.",
+          "suggestion": "виртуелну собу"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

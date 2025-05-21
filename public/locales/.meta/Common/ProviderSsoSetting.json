@@ -3,7 +3,7 @@
   "content": "Single sign-on",
   "content_en_sha1_hash": "3d6c0814f69af6fd72d59bafb018d7494b3e0841",
   "created_at": "2025-05-19T21:30:47.604Z",
-  "updated_at": "2025-05-20T09:34:52.788Z",
+  "updated_at": "2025-05-20T22:15:26.370Z",
   "comment": {
     "text": "This translation key is used to display the single sign-on setting. It appears on a provider settings page or in related UI elements, where users can configure their single sign-on options. The content of this key should be translated to describe the purpose and functionality of single sign-on for the specific use case it is displayed in.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Bulgarian translation 'Единично влизане' while technically meaning 'Single entry,' doesn't accurately convey the meaning of 'Single sign-on.' The correct term should reflect the concept of a unified authentication process across multiple applications or services.",
+          "suggestion": "A more accurate translation would be 'Унифициран вход' or 'Единствен вход', which more closely represents 'Single sign-on'."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -93,19 +99,37 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation includes a space before the katakana. This is unnecessary and disrupts readability.",
+          "suggestion": "シングルサインオン"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"싱글 사인온\" is a direct transliteration of \"Single sign-on\" and doesn't convey the meaning clearly for Korean speakers. It's essentially just writing the English phrase in Korean characters.",
+          "suggestion": "Consider a more descriptive Korean translation, such as \"단일 로그인\" (dan-il lo-gin), which directly translates to 'single login'. Alternatively, '통합 로그인' (tong-hap lo-gin) could be used, meaning 'integrated login'."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ການເຂົ້າສູ່ລະບົບດ້ວຍບຸສິ້ນດຽວ\" is a literal translation of \"Single sign-on\", it's not the most natural or commonly used term in Lao. It sounds somewhat technical and clunky.",
+          "suggestion": "Consider using a more common Lao equivalent, such as \"ການເຂົ້າສູ່ລະບົບແບບດຽວ\" or \"ການເຂົ້າສູ່ລະບົບດ້ວຍສຳປະນິດດຽວ\".  The best choice will depend on the context and target audience."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -117,7 +141,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Dutch translation 'Single Sign-On' does not follow typical Dutch capitalization rules for proper nouns. While 'Single Sign-On' is acceptable, capitalizing both words is less common.",
+          "suggestion": "Single Sign-On"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -153,7 +183,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"තනි පිවිසුම\" (thani pivisuma) can be interpreted as 'single access' or 'single entry', it doesn't directly convey the meaning of 'single sign-on' which implies a unified authentication process. A more accurate translation would capture the 'sign-on' aspect.",
+          "suggestion": "තනි ඇතුළුවීම (thani athuluvim) - This translates more closely to 'single login' or 'single authentication', capturing the essence of 'single sign-on'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

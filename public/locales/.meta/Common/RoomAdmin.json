@@ -3,7 +3,7 @@
   "content": "Room admin",
   "content_en_sha1_hash": "50dcd25d31ede11f1a215aad608488dd7f404e89",
   "created_at": "2025-05-19T21:30:48.170Z",
-  "updated_at": "2025-05-20T09:34:32.187Z",
+  "updated_at": "2025-05-20T21:50:00.834Z",
   "comment": {
     "text": "This translation key is used as a label for a dropdown button that displays \"Room admin\" in the PortalSettings page. It is also used in a payment form to display the term \"AdministratorDescription\". The text appears in a dialog and a payment container, indicating its use in UI elements related to user management and payment processing.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Raumverwaltung' is technically correct (meaning 'room administration'), it's not the most natural or commonly used translation for 'Room admin'. It sounds very formal and bureaucratic.",
+          "suggestion": "Consider alternatives like 'Raumbetreuer' (room supervisor/caretaker) or 'Raumverwalter' (room manager) which are more aligned with the intended meaning."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -99,7 +105,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Huoneen järjestelmänvalvoja' is overly literal and formal for 'Room admin'. While technically correct, it sounds clunky and not how a Finnish speaker would typically refer to a room administrator.",
+          "suggestion": "Consider a more natural translation such as 'Huoneen ylläpitäjä' or 'Huoneen hoitaja'. 'Huoneen vastuuhenkilö' could also be an option depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -111,7 +123,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Սենյակի ադմին\" is a literal transliteration of \"Room admin\" and doesn't convey the intended meaning accurately in Armenian.  'Admin' is often used in a technical sense and a more accurate translation would depend on the specific context of 'Room admin'. It could mean 'պատվորդ' (patvorrd - manager) or 'վարչակազմ' (varchakazm - administration), or a more specialized term depending on the role.",
+          "suggestion": "Consider context. Possible suggestions: 'պատվորդ' (patvorrd), 'վարչակազմ' (varchakazm), or a more specific term for 'Room admin' based on the role's duties."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -135,7 +153,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ຜູ້ເບິ່ງແຍງຫ້ອງ' is a literal translation of 'room admin', it's not the most natural or commonly used phrasing in Lao. It sounds quite formal and technical. A more common and understandable translation might be 'ຜູ້ບໍລິຫານຫ້ອງ' (phu borihan hong).",
+          "suggestion": "ຜູ້ບໍລິຫານຫ້ອງ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -171,7 +195,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Administratorul sălii\" is a literal translation of \"Room admin\", it's not the most natural or commonly used phrasing in Romanian. \"Administrator de sală\" or \"Administrator al sălii\" would be more idiomatic.",
+          "suggestion": "Administrator de sală"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -183,7 +213,23 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'කාමරයේ' is spelled correctly, meaning 'of the room'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'පරිපාලක' is spelled correctly, meaning 'administrator' or 'manager'.",
+          "suggestion": null
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'කාමරයේ පරිපාලක' is a literal translation, it might sound slightly formal or not entirely natural in everyday Sinhala. 'කාමරයේ වැඩකරු' (kamaraneye wadakarhu) – literally 'room worker' – might be a more common and understandable term for 'room admin' depending on the context.",
+          "suggestion": "කාමරයේ වැඩකරු"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -201,13 +247,35 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Админ собе\" is not an accurate translation of \"Room admin\". \"Админ собе\" literally translates to \"Admin of the room\" and doesn't convey the meaning of someone who has administrative privileges within a room context. A more accurate translation would include a term that reflects administrative responsibility.",
+          "suggestion": "Consider using a more accurate translation like \"Администратор собе\" (Administrator of the room) or \"Особа задужена за собу\" (Person in charge of the room)."
+        },
+        {
+          "type": "spelling",
+          "description": "While \"собе\" is technically correct, depending on the formality and dialect, it could be perceived as slightly informal.  A more formal option might be preferred.",
+          "suggestion": "Consider \"соби\" for a more formal tone, although this is a subtle difference."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Admin sobe' is not the most natural or accurate translation of 'Room admin'. While 'sobe' means 'rooms', 'Admin' needs a more specific term to convey the administrator role.",
+          "suggestion": "Administrator sobe"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Admin' is commonly used, but a more formal term might be preferred depending on the context. 'Administrator' is a more direct translation.",
+          "suggestion": "Administrator sobe"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

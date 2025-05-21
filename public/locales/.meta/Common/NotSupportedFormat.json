@@ -3,7 +3,7 @@
   "content": "Sorry, this file format isn't supported",
   "content_en_sha1_hash": "44faa0a5086202b59ef30646e8573a659f5c5bc0",
   "created_at": "2025-05-19T21:30:46.955Z",
-  "updated_at": "2025-05-20T09:35:15.491Z",
+  "updated_at": "2025-05-20T22:34:17.471Z",
   "comment": {
     "text": "This translation key is used to display an error message when a file format is not supported, typically appearing as a notification in UI elements such as the Avatar Editor Dialog or File Input component. The intended message informs the user that the selected file cannot be processed due to its unsupported format.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation \"Tätä tiedostomuotoa ei tueta. Ei sitten niin mitenkään\" is not a direct or accurate translation of \"Sorry, this file format isn't supported.\" The second part, \"Ei sitten niin mitenkään,\" is colloquial and doesn't convey the intended meaning of apology or technical limitation. It adds unnecessary and potentially confusing wording.",
+          "suggestion": "Tätä tiedostomuotoa ei tueta."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -147,7 +153,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'este tipo arquivo' is grammatically incorrect. It should be 'este tipo de arquivo'.",
+          "suggestion": "Lamentamos, este tipo de arquivo não é suportado"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -165,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ආකෘතියට' (aakruthiyatō) is slightly awkward. While technically correct, it's not the most natural phrasing. A more common way to express 'to this format' would be 'මෙම ආකෘතියේ' (inema aakruthiyē).",
+          "suggestion": "කණගාටුයි, මෙම ආකෘතියේ සහාය නොදක්වයි"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -213,7 +231,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation is understandable, it's a bit formal for a user-facing error message. \"系统暂不支持此文件格式\" (System currently doesn't support this file format) feels overly technical. A more user-friendly option would be better.",
+          "suggestion": "很抱歉，不支持此文件格式"
+        }
+      ],
       "approved_at": null
     }
   }

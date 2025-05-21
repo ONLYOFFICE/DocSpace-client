@@ -3,7 +3,7 @@
   "content": "Google",
   "content_en_sha1_hash": "2b681c0a24baff8899d7163cc7f805c75e1f44e4",
   "created_at": "2025-05-19T21:30:47.559Z",
-  "updated_at": "2025-05-20T09:34:54.639Z",
+  "updated_at": "2025-05-20T22:16:14.976Z",
   "comment": {
     "text": "The translation key \"ProviderGoogle\" is used to display the label for a Google provider option in the application. It will appear as a button or option in the UI, allowing users to select Google as their preferred provider.",
     "is_auto": true,
@@ -201,7 +201,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Google谷歌' is redundant. '谷歌' is an existing Chinese transliteration of 'Google'. Repeating it is unnecessary and unnatural.",
+          "suggestion": "Google"
+        }
+      ],
       "approved_at": null
     }
   }

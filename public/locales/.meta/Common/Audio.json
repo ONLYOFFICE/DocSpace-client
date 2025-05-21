@@ -3,7 +3,7 @@
   "content": "Audio",
   "content_en_sha1_hash": "acdac205f5e24cb75113c4b281a2c13f08b75159",
   "created_at": "2025-05-19T21:30:43.139Z",
-  "updated_at": "2025-05-20T09:37:18.744Z",
+  "updated_at": "2025-05-21T00:30:51.727Z",
   "comment": {
     "text": "This translation key is used for the audio file type, displaying \"Audio\" as its translated label. It appears in UI elements that display file types, such as in a table view of files on the home page.",
     "is_auto": true,
@@ -87,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Ձայնային' translates to 'audio' or 'sound' in a more general sense. While acceptable, it's more descriptive than the single-word English term 'Audio'.  A more direct and concise translation might be preferable depending on the context.",
+          "suggestion": "Consider alternatives like 'Աուդիո' (transliteration of 'Audio') or 'ձայն' if a simpler term is needed, but this depends on the specific application."
+        }
+      ],
       "approved_at": null
     },
     "it": {

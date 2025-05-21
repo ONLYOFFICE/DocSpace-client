@@ -3,7 +3,7 @@
   "content": "or continue with",
   "content_en_sha1_hash": "a1aa5858e0e7bb74686ebe81912f61fc201800cb",
   "created_at": "2025-05-19T21:30:47.130Z",
-  "updated_at": "2025-05-20T08:23:28.654Z",
+  "updated_at": "2025-05-20T22:28:42.626Z",
   "comment": {
     "text": "This translation key is used for the label \"or continue with\" that appears in a social login flow. It prompts the user to either use their email address or proceed with the current authentication method. The text is commonly found on buttons or labels within login confirmation dialogs.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"və ya ilə davam edin\" is not the most natural or accurate translation of \"or continue with\". While technically correct, it sounds somewhat formal and less fluid. A more natural phrasing would be something like \"ya davam edin\" or \"və davam edin\".",
+          "suggestion": "ya davam edin"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -51,7 +57,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'nebo pokračovat pomocí' while technically correct, doesn't quite capture the natural flow of 'or continue with'. 'používat' (to use) is less idiomatic here. A more accurate and natural translation would depend on the context, but options include 'nebo pokračovat' or 'nebo pokračovat s'.",
+          "suggestion": "Consider 'nebo pokračovat' or 'nebo pokračovat s' depending on the surrounding context."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -99,13 +111,25 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation \"あるいは\" (arigato) while meaning 'or', doesn't fully capture the nuance of 'or continue with'. It lacks the sense of continuation. A better translation would convey that meaning. Options include 'または続けて' (mata shite tsuzukete) or 'あるいは継続して' (arigato keizoku shite).",
+          "suggestion": "Consider 'または続けて' (mata shite tsuzukete) or 'あるいは継続して' (arigato keizoku shite)."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"또는 다음을 이용:\" does not accurately convey the meaning of \"or continue with.\" \"또는\" means 'or', but \"다음을 이용:\" translates to something like 'use the following:' which changes the intended flow.  It implies a list or options following, rather than a continuation.",
+          "suggestion": "Consider alternatives like \"또는 계속 진행:\" (or continue) or \"또는 진행:\" (or proceed)."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -129,7 +153,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"lub kontynuuj z\" is a literal translation and doesn't quite capture the nuance of \"or continue with.\" It's grammatically correct, but it might sound awkward in Polish depending on the context.",
+          "suggestion": "Consider alternatives like \"lub kontynuować\" (or continue) or \"lub możesz kontynuować\" (or you can continue), depending on the surrounding text."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -159,7 +189,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'හෝ මෙය සමඟ ඉදිරියට' doesn't accurately convey the meaning of 'or continue with'. 'හෝ මෙය සමඟ' (hoo meya samaaga) translates to 'or with this'. The phrase ' ඉදිරියට' (idiriyaato) means 'forward' but doesn't fully capture the 'continue' aspect.",
+          "suggestion": "A more accurate translation would be something along the lines of 'లేదా కొనసాగించండి' (yadaa kanaasaagaraa dakaa) which means 'or continue'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,25 +213,49 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"или настави са\" doesn't fully capture the nuance of \"or continue with\". It's a literal translation but might sound awkward in context. A more natural phrasing would be \"или наставите\" or \"или настави\" depending on the formality and audience.",
+          "suggestion": "Consider \"или наставите\" or \"или настави\"."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ili nastavi sa' is not the most natural or accurate translation of 'or continue with'. While 'nastavi sa' means 'continue with', 'ili' (or) creates a slightly awkward phrasing. A more natural translation would be 'ili nastavite' or 'ili idite dalje'.",
+          "suggestion": "ili nastavite"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation \"veya şununla devam edin\" is a literal translation of 'or continue with' but doesn't quite capture the natural flow or intended meaning. \"Şununla\" implies continuing with something specific already mentioned, which might not be the case.",
+          "suggestion": "Consider alternatives like \"veya devam edebilirsiniz\" (or you can continue) or \"veya devam etmek için\" (or to continue)."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"або продовжте з\" is not the most natural or accurate translation of \"or continue with\".  While \"або\" correctly translates to \"or\", \"продовжте з\" isn't the most idiomatic way to express \"continue with\".",
+          "suggestion": "Consider alternatives like \"або продовжити\" (or continue), \"або йти далі\" (or proceed), or \"або перейти до\" (or go to)."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -207,7 +267,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '或选择' doesn't accurately convey the meaning of 'or continue with'. '或选择' translates to 'or choose'. '继续' means 'continue', which is not represented.",
+          "suggestion": "Consider alternatives like '或继续' (or continue) or '或者继续' (or continue)."
+        }
+      ],
       "approved_at": null
     }
   }

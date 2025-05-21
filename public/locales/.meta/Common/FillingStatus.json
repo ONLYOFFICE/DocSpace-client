@@ -3,7 +3,7 @@
   "content": "Filling status",
   "content_en_sha1_hash": "4164fcff20d05f212fd1def98fdfe27c566dfcb2",
   "created_at": "2025-05-19T21:30:45.360Z",
-  "updated_at": "2025-05-20T09:36:10.957Z",
+  "updated_at": "2025-05-20T23:28:41.800Z",
   "comment": {
     "text": "This translation key is used for the label on a button or option that displays and controls the filling status in various UI contexts. It appears as \"Filling Status\" and is commonly found in settings or configuration panels, allowing users to enable or disable this feature.",
     "is_auto": true,
@@ -105,7 +105,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"작성 상태\" (jak-seong sang-tae) literally translates to \"writing status\" or \"draft status,\" it doesn't accurately convey the meaning of \"filling status\" in a general context. \"Filling status\" typically refers to the progress of filling out a form or field, implying completion or partial completion.",
+          "suggestion": "Consider alternatives like \"작업 상태\" (jak-eop sang-tae) for \"work status\" or \"작성 진행 상태\" (jak-seong jin-hyeong sang-tae) for \"writing progress status\" depending on the specific context. If it's about filling out a form, \"폼 작성 상태\" (peom jak-seong sang-tae) might be more appropriate."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -165,7 +171,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Miera vyplnenia' is a possible translation for 'Filling status', it leans towards 'completion rate' or 'fill rate'. 'Filling status' implies the current state of being filled (e.g., partially filled, completely filled). A more accurate translation might be 'Stav vyplnenia'.",
+          "suggestion": "Stav vyplnenia"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -201,7 +213,18 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Trạng thái điền thông tin\" is understandable, it's a bit literal and clunky. \"Filling status\" generally refers to the completion state of a form or field, not the act of filling it.",
+          "suggestion": "Trạng thái hoàn thành"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "Another possible translation would be \"Độ đầy\" which focuses on the completeness of the filled data.",
+          "suggestion": "Độ đầy"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

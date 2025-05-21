@@ -3,7 +3,7 @@
   "content": "Share & collect",
   "content_en_sha1_hash": "39376ae6d9b8a7366e97fa2bb58d1d646af34823",
   "created_at": "2025-05-19T21:30:48.624Z",
-  "updated_at": "2025-05-20T08:41:20.062Z",
+  "updated_at": "2025-05-20T21:32:32.954Z",
   "comment": {
     "text": "The translation key \"ShareAndCollect\" is used to describe a feature that allows users to share and collect files. It appears in a header component of a file explorer, typically seen on buttons or labels, prompting users to select files for sharing or collecting.",
     "is_auto": true,
@@ -111,7 +111,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The use of '&' in the Japanese translation is unusual. While not technically incorrect, it's not the standard way to represent 'and' in Japanese. A more natural phrasing would be preferable.",
+          "suggestion": "共有と収集 (Kyōyū to shūshū)"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -189,13 +195,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Подели и прикупи\" doesn't accurately convey the meaning of \"Share & collect\". \"Прикупи\" implies buying or acquiring something, which isn't the intended meaning of \"collect\" in this context. \"Подели\" is a reasonable translation of \"Share\".",
+          "suggestion": "A more accurate translation would depend on the specific nuance of 'collect' intended. Some options include: 'Подели и сабери' (Share and gather/collect), 'Подели и скупи' (Share and acquire - but less desirable), or 'Подели и чувај' (Share and keep)."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Podeli i prikupi' while technically correct, doesn't fully capture the nuanced meaning of 'Share & collect'. 'Share' implies distribution and 'collect' implies aggregation. A more appropriate translation might consider a combination of verbs that better conveys both actions.",
+          "suggestion": "Consider 'Deli i sakupljaj' or 'Podeli i skupi' depending on the desired level of formality and emphasis. 'Deli i sakupljaj' might be slightly better as 'sakupljaj' is a more direct translation of 'collect' than 'prikupi'."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -219,7 +237,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"共享和收集\" (Gongxiang he shouji) is a literal translation, it lacks the concise and impactful nature of \"Share & collect\". \"共享\" often implies a broader sharing concept than just sharing for the purpose of collecting.",
+          "suggestion": "Consider alternatives that better convey the dual action of sharing *in order to* collect. Examples: \"分享与收集\" (Fēnxiǎng yǔ shōují), \"分享并收集\" (Fēnxiǎng bìng shōují), or a more contextually relevant option depending on the product/feature."
+        }
+      ],
       "approved_at": null
     }
   }

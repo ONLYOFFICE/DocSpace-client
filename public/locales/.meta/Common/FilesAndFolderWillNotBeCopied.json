@@ -3,7 +3,7 @@
   "content": "Files and folder will not be copied",
   "content_en_sha1_hash": "66648e8a0c6d0b325af25f71b0d660b44211a56d",
   "created_at": "2025-05-19T21:30:45.297Z",
-  "updated_at": "2025-05-20T09:36:13.539Z",
+  "updated_at": "2025-05-20T23:31:24.492Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that files and folders will not be copied when certain actions are performed in a file management context. It appears as part of a dialog box or component where users can resolve conflicts or cancel uploads.",
     "is_auto": true,
@@ -153,7 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ෆෝල්ඩරය' (folder) is technically correct, but 'ෆෝල්ඩර්' would be more commonly used and reads more naturally in modern Sinhala.",
+          "suggestion": "ගොනු සහ ෆෝල්ඩර් නොපිටපත්කෙරේ"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +177,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Serbian translation 'Датотеке и фолдер неће бити копирани' is grammatically incorrect. The verb conjugation doesn't agree with the plural subject ('files and folder'). It sounds awkward and is not standard Serbian.",
+          "suggestion": "Датотеке и фолдере неће бити копиране"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -189,7 +201,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Ukrainian translation uses the impersonal passive voice ('буде скопійовано'). While grammatically correct, it sounds slightly unnatural and could be more direct depending on the context. A more common phrasing would be 'будуть скопійовані'.",
+          "suggestion": "Файли й папку будуть скопійовані"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

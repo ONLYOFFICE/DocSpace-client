@@ -3,7 +3,7 @@
   "content": "Custom filter",
   "content_en_sha1_hash": "389c48e9de9a170c1fc6fcbbcade4710c271dddb",
   "created_at": "2025-05-19T21:30:44.271Z",
-  "updated_at": "2025-05-20T09:36:49.028Z",
+  "updated_at": "2025-05-21T00:02:20.965Z",
   "comment": {
     "text": "This translation key is used to display the label \"Custom filter\" on a custom filter icon, likely in a settings or configuration area of the application. It appears in a UI component that allows users to customize file permissions, specifically when selecting a share access right. The translated text will replace \"Common:CustomFilter\".",
     "is_auto": true,
@@ -87,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Հարմարեցրած զտիչ\" is a possible translation, \"Custom filter\" often implies a filter that is specifically configured or created by the user. \"Հարմարեցրած\" leans more towards \"adapted\" or \"modified\". A more accurate translation might be \"Ցանկացած զտիչ\" (Tsankats’ Ztitich) or \"Սեփական զտիչ\" (Sepakan Ztitich) depending on the specific nuance desired.",
+          "suggestion": "Consider \"Ցանկացած զտիչ\" (Tsankats’ Ztitich) or \"Սեփական զտիչ\" (Sepakan Ztitich)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -159,7 +165,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Sinhala word 'අභිරුචි' (abiruchi) while generally meaning 'custom' or 'personalized', can sometimes imply a negative connotation like 'unpleasant taste' or 'disagreeable'. In the context of a filter, 'අභිරුචි' might be misinterpreted. A more direct translation for 'custom' in this context would be 'ප්‍රවේණි' (praveṇi).",
+          "suggestion": "Consider using 'ප්‍රවේණි' (praveṇi) instead of 'අභිරුචි' (abiruchi) for a more accurate and neutral translation."
+        },
+        {
+          "type": "translation",
+          "description": "While 'පෙරහන' (perahana) correctly translates to 'filter', combining it with 'අභිරුචි' (abiruchi) might create a slightly unnatural phrasing. Considering the overall context of what the custom filter *does* could influence better word choice. ",
+          "suggestion": "Evaluate if 'ප්‍රවේණි පෙරහන' (praveṇi perahana) might be a better option to more accurately convey 'custom filter'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +194,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'филтер' is a transliteration and not a fully Serbian word. The correct Serbian word for 'filter' is 'филтар'.",
+          "suggestion": "Прилагођени филтар"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

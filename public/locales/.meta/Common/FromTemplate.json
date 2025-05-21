@@ -3,7 +3,7 @@
   "content": "From template",
   "content_en_sha1_hash": "00c3e6cfbaa52740f50102742f3efa926a33d341",
   "created_at": "2025-05-19T21:30:45.596Z",
-  "updated_at": "2025-05-20T09:36:03.024Z",
+  "updated_at": "2025-05-20T23:17:03.923Z",
   "comment": {
     "text": "This translation key is used to display \"From template\" in a room creation dialogue. It appears as a header label and is related to templates for creating new rooms.",
     "is_auto": true,
@@ -105,7 +105,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '템플릿에서' literally translates to 'From template' but might be overly literal depending on the context. A more natural Korean phrasing might be '템플릿을 이용하여' (using a template) or '템플릿을 기반으로' (based on a template). Without more context, it's difficult to say which is better, but '템플릿에서' sounds slightly awkward.",
+          "suggestion": "Consider '템플릿을 이용하여' or '템플릿을 기반으로' depending on the intended meaning.  If the intention is simply to indicate origin, '템플릿에서' is acceptable, but evaluate for naturalness in context."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -135,7 +141,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'De template' doesn't accurately convey the meaning of 'From template'. 'De' means 'of' or 'from' in some contexts, but 'From' typically implies origin or source, and 'De' isn't the best fit here. A more accurate translation would depend on the specific context.",
+          "suggestion": "Consider alternatives like 'Criado a partir de um modelo' (Created from a template) or 'Com base em um modelo' (Based on a template), or re-evaluate the need for a direct translation, perhaps using 'Modelo' if the context allows."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -147,7 +159,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Șablon de formular' is a possible translation, 'Șablon' alone would be more accurate and commonly used for 'template' in this context. 'De formular' adds unnecessary specificity.",
+          "suggestion": "Șablon"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -171,7 +189,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Predloga obrazca\" translates to \"Form template,\" the original English phrase \"From template\" implies derivation or creation *using* a template. \"Predloga obrazca\" focuses on the template itself, not the creation process. A better translation might consider phrases like \"Ustvarjeno na podlagi predloge\" (Created based on a template) or \"Iz predloge\" (From a template - less ideal, but closer to the literal meaning).",
+          "suggestion": "Consider \"Ustvarjeno na podlagi predloge\" or \"Iz predloge\" for a more accurate translation, depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -195,7 +219,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Ukrainian translation \"Шаблон форми\" (Shablon formy) translates to 'Form template' instead of 'From template'. It misses the 'from' aspect of the original phrase.",
+          "suggestion": "Шаблон з (Shablon z)"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

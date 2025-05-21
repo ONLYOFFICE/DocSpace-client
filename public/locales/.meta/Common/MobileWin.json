@@ -3,7 +3,7 @@
   "content": "Download {{organizationName}} Desktop Editors for Windows",
   "content_en_sha1_hash": "21500349b53348f21c32cf3672412c49c1c0f8fc",
   "created_at": "2025-05-19T21:30:46.594Z",
-  "updated_at": "2025-05-20T09:35:28.536Z",
+  "updated_at": "2025-05-20T22:45:56.880Z",
   "comment": {
     "text": "This translation key is used to display a button label that prompts users to download desktop editors for Windows. The text will appear on a button in an application, likely as part of a download link or \"Get Desktop Editors\" action.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'endirin' is a literal translation of 'download' and while technically correct, 'qurun' or 'qoyun' might be more natural and common in Azerbaijani for installing/downloading software.",
+          "suggestion": "Consider using 'qurun' or 'qoyun' instead of 'endirin'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -75,7 +81,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Desktop Editors' is not accurately translated by 'applications de bureau'. While 'applications de bureau' is technically correct, it's more generic. 'Éditeurs de bureau' would be a closer translation for 'Desktop Editors'.",
+          "suggestion": "Télécharger les éditeurs de bureau {{organizationName}} pour Windows"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'Windows සඳහා බාගත කරන්න' doesn't directly translate to 'for Windows'. It's more like 'to download for Windows' or 'for Windows to download'.  While understandable, it's not the most natural phrasing. It could be improved to be more aligned with the English meaning.",
+          "suggestion": "{{organizationName}} Desktop Editors Windows බාගත කිරීම සඳහා"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -165,13 +183,25 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Desktop Editors\" is best translated as \"Namizne urejevalne programe\" rather than \"namizne urejevalnike\". While 'urejevalnike' isn't *wrong*, 'urejevalne programe' is more natural and accurate in this context.",
+          "suggestion": "Prenesi {{organizationName}} namizne urejevalne programe za Windows"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation of \"Desktop Editors\" is \"Десктоп Уређиваче\". While technically correct, \"Desktop\" is often translated as \"Радни сто\" in Serbian, making \"Радни сто Уређивачи\" sound more natural. \"Уређивачи\" is a good translation of \"Editors\".",
+          "suggestion": "Преузми {{organizationName}} Радни сто Уређиваче за Windows"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

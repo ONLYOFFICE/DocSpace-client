@@ -3,7 +3,7 @@
   "content": "BETA",
   "content_en_sha1_hash": "28d6304dd6d05d172bd2c2ad4fe98d0bebabf4de",
   "created_at": "2025-05-19T21:30:43.291Z",
-  "updated_at": "2025-05-20T09:37:13.141Z",
+  "updated_at": "2025-05-21T00:22:34.465Z",
   "comment": {
     "text": "This translation key is used to display the label \"BETA\" in various UI components, such as badges and dropdown items. It indicates that a product or feature is in beta testing phase, providing users with crucial information about the current state of the application.",
     "is_auto": true,

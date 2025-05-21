@@ -3,7 +3,7 @@
   "content": "Upload PDF form",
   "content_en_sha1_hash": "b5afa97be11c4d1636475bc3623a9f975f26ebd9",
   "created_at": "2025-05-19T21:30:49.443Z",
-  "updated_at": "2025-05-20T08:35:43.262Z",
+  "updated_at": "2025-05-20T21:04:15.599Z",
   "comment": {
     "text": "UploadPDFForm is used as a label for a main button that allows users to upload a PDF form. It appears in a button component in the article section of a client-side application. The translation key is used to display this text in different languages.",
     "is_auto": true,
@@ -123,7 +123,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'formulier' is the Dutch word for 'form', the English 'form' in 'PDF form' often refers to a specific document type. A more accurate translation might be 'PDF-formulier' to more closely reflect the original meaning.",
+          "suggestion": "PDF-formulier"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -177,13 +183,30 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Отпреми PDF формулар' is not the most natural or accurate translation of 'Upload PDF form'. 'Отпреми' implies 'dispatch' or 'send off', which isn't the intended meaning of 'upload'.",
+          "suggestion": "Уплоад PDF формулар"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'формулар' is understood, 'форма' is more common and natural for 'form'.",
+          "suggestion": "Уплоад PDF форма"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Otpremi PDF formular' is not the most natural or accurate translation of 'Upload PDF form'. 'Otpremi' implies sending something, while 'Upload' suggests placing a file somewhere.",
+          "suggestion": "I propose 'Postuj PDF formular' or 'Učitaj PDF formular'."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,7 +218,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Передати PDF-форму\" while understandable, isn't the most natural or precise translation of \"Upload PDF form\". \"Передати\" implies transferring or handing over, rather than uploading.",
+          "suggestion": "Завантажити PDF-форму"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

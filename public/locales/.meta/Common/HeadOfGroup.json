@@ -3,7 +3,7 @@
   "content": "Head of group",
   "content_en_sha1_hash": "b90a369c4ac1fd6c6e346e3e7ad26070e42c2ccc",
   "created_at": "2025-05-19T21:30:45.746Z",
-  "updated_at": "2025-05-20T09:35:57.416Z",
+  "updated_at": "2025-05-20T23:12:02.457Z",
   "comment": {
     "text": "The translation key \"HeadOfGroup\" is used to display the English content \"Head of group\". It appears in a header component within a dialogue window, indicating who the user is managing groups. Translators should provide an equivalent phrase that accurately conveys this meaning in their respective language.",
     "is_auto": true,
@@ -189,13 +189,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Лидер групе' is a literal translation of 'Leader group'. 'Head of group' implies a leadership role, which isn't fully conveyed. A more accurate translation would emphasize the leadership aspect.",
+          "suggestion": "Вођа групе"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Lider grupe\" is understandable, a more accurate and natural Serbian translation of \"Head of group\" would be \"Predsednik grupe\" or \"Vođa grupe\". \"Lider grupe\" is a loanword and while increasingly common, it's not the most precise or preferred translation in all contexts.",
+          "suggestion": "Predsednik grupe"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

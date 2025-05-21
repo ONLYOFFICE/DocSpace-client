@@ -3,7 +3,7 @@
   "content": "Microsoft",
   "content_en_sha1_hash": "11f3242118ff2add5d117cbf216f29ac578f6ba6",
   "created_at": "2025-05-19T21:30:47.586Z",
-  "updated_at": "2025-05-20T09:34:53.558Z",
+  "updated_at": "2025-05-20T22:15:51.713Z",
   "comment": {
     "text": "This translation key is used for displaying Microsoft as a provider option on a Twitter social media platform. It appears in a dropdown menu likely found within a settings or preferences section of the Twitter app or website. Translators should consider regional variations and cultural nuances when localizing this text to provide a consistent experience across languages and regions.",
     "is_auto": true,
@@ -201,7 +201,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation includes \"微软\" which is a redundant repetition of Microsoft. \"Microsoft\" itself is a recognized name and doesn't require translation.",
+          "suggestion": "Microsoft"
+        }
+      ],
       "approved_at": null
     }
   }

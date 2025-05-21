@@ -3,7 +3,7 @@
   "content": "Back",
   "content_en_sha1_hash": "b52b36b7269fbfc58ec24bb724691951a3decbe8",
   "created_at": "2025-05-19T21:30:43.167Z",
-  "updated_at": "2025-05-20T09:37:17.641Z",
+  "updated_at": "2025-05-21T00:30:22.844Z",
   "comment": {
     "text": "The translation key \"Back\" is used to display a label that navigates users back to a previous step or screen in a data import process. It appears as the label of a cancel button on forms such as the \"Add Emails Step\", allowing users to exit and return to their previous step.",
     "is_auto": true,
@@ -153,7 +153,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'前に' (mae ni) means 'front' or 'before', not 'back'. The correct Japanese translation for 'Back' would be '後ろ' (ushiro).",
+          "suggestion": "Use '後ろ' (ushiro) instead of '前に' (mae ni)."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -165,7 +171,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ກັບຄືນໄປບ່ອນ\" literally translates to \"back to place\" or \"return to place.\" While it can imply 'back,' it's not a direct and concise equivalent to the English word 'Back.' It lacks the simple meaning of return or opposite direction.",
+          "suggestion": "A more accurate translation would be something like \"ຫຼັງ\" (lang) which is a direct translation of 'back' as in the opposite of front, or “ກັບກ້າຽນ” (gap gien) which implies going back."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -261,7 +273,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'后退' (hòutuì) generally means 'to retreat' or 'to move backward'. While it can sometimes be used for 'back' (as in, a button that moves you back), it's not the most direct or common translation. A more appropriate translation for 'Back' (as in, the back of something, or the back button) could be '背面' (bèi miàn) or '返回' (fǎnhuí).",
+          "suggestion": "Consider '背面' (bèi miàn) or '返回' (fǎnhuí) depending on the context."
+        }
+      ],
       "approved_at": null
     }
   }

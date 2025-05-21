@@ -3,7 +3,7 @@
   "content": "Renew subscription?",
   "content_en_sha1_hash": "1c5271e3535f317ee7b560fe34ef6e9a6978b7ba",
   "created_at": "2025-05-19T21:30:47.854Z",
-  "updated_at": "2025-05-19T21:30:47.854Z",
+  "updated_at": "2025-05-20T22:06:54.067Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -26,7 +26,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Abunəlik yenilənsin?' is a command/request rather than a question. The English 'Renew subscription?' is a question.",
+          "suggestion": "Abunəliyi yeniləmək?"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -74,7 +80,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Թարմացնե՞լ բաժանորդագրությունը:\" is a very literal translation. A more natural Armenian phrasing would be something like \"Վերածնե՞լ բաժանորդությունը:\" or \"Երկարացնել բաժանորդությունը:\" depending on the context of renewing a subscription.",
+          "suggestion": "Consider alternatives like \"Վերածնե՞լ բաժանորդությունը:\" or \"Երկարացնել բաժանորդությունը:\""
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -98,7 +110,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Lao word 'ບໍ' at the end of the sentence is typically used for question tags and doesn't fit the context of a direct question like 'Renew subscription?'. It creates a somewhat indirect or softened tone.",
+          "suggestion": "Consider removing 'ບໍ' to make the question more direct and aligned with the English original. A more direct translation could be 'ຕໍ່ອາຍຸການສະໝັກສິດນຳໃຊ້?'"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -146,7 +164,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'දායකත්‍වය අළුත් කරන්න?' while conveying a similar meaning, doesn't perfectly align with the nuance of 'Renew subscription?'. 'අළුත් කරන්න' translates to 'make new' or 'refresh', which isn't exactly the same as renewing. A more direct translation would be better.",
+          "suggestion": "Consider 'සමනුව ඇනවුම් කරන්න?' (Samanuwa anuvaam karanneyā?) or 'වියන් කිරීමක් කරන්න?' (Viyaan kireemak karanneyā?)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -164,7 +188,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Serbian Cyrillic text contains a spelling error. 'Обнови' should be 'Обнови'.",
+          "suggestion": "Обнови претплату?"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -176,7 +206,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Aboneliği yenile?' is grammatically incorrect and doesn't quite capture the question format of 'Renew subscription?'. The proper question marker should be present. It's missing the question suffix.",
+          "suggestion": "Aboneliği yenilemek ister misin? or Aboneliği yenilemek ister misiniz?"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

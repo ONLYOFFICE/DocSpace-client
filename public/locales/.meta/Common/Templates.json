@@ -3,7 +3,7 @@
   "content": "Templates",
   "content_en_sha1_hash": "f25b700ed9f092123a43acb205a6869342cf9dd6",
   "created_at": "2025-05-19T21:30:49.261Z",
-  "updated_at": "2025-05-20T08:37:47.712Z",
+  "updated_at": "2025-05-20T21:09:13.485Z",
   "comment": {
     "text": "The \"Templates\" translation key is used to display the label for a tabs section that allows users to select templates. This text is typically found on a page or button related to room settings, where it helps users navigate between different template options.",
     "is_auto": true,
@@ -153,7 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'වෙනස් කළ හැකි ආකෘතීන්' (Venasa kala hakuruthin) is a literal translation of 'modifiable templates' rather than the more common and natural translation of 'Templates'.  While technically correct, it's unnecessarily verbose and doesn't convey the same meaning in a concise way.",
+          "suggestion": "විකිපත්‍ර (Wikipatrak)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

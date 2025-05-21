@@ -3,7 +3,7 @@
   "content": "Commenter",
   "content_en_sha1_hash": "bf4df9c00c605d80b4491471e60b45b6eaaca147",
   "created_at": "2025-05-19T21:30:47.984Z",
-  "updated_at": "2025-05-20T09:34:38.915Z",
+  "updated_at": "2025-05-20T22:01:03.250Z",
   "comment": {
     "text": "This translation key is used to display \"Commenter\" as a role label in the application's UI. It appears on various screens where user roles are displayed, such as information panels and room member settings, helping users understand their permissions and access levels.",
     "is_auto": true,
@@ -117,7 +117,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ນັກສະແດງຄວາມຄິດເຫັນ\" (nak sa daeng khwam khit hen) literally translates to 'person showing opinions', it's not the most natural or common way to say 'Commenter' in Lao. A more idiomatic translation would be something like 'ຜູ້ໃຫ້ຄວາມຄິດເຫັນ' (phu hai khwam khit hen) or simply 'ຄຳເຫັນ' (kham hen) depending on the context.",
+          "suggestion": "Consider using 'ຜູ້ໃຫ້ຄວາມຄິດເຫັນ' (phu hai khwam khit hen) or 'ຄຳເຫັນ' (kham hen) as a more natural translation."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +147,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Comentador\" is not the most natural or accurate translation of \"Commenter\" in Portuguese. While technically understandable, it's uncommon and sounds awkward.",
+          "suggestion": "Consider using \"Comentário\" (as a noun referring to the comments themselves) or \"Avaliador\" (evaluator/reviewer, if the context implies a reviewing role) or \"Participante\" (participant) depending on the specific nuance of \"Commenter\" needed."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -165,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"අදහස් දක්වන්නා\" (adahas dakvavannaa) is a valid Sinhala word meaning 'one who expresses opinions' or 'commenter,' it is a rather formal and lengthy translation of the English word 'Commenter.' A more natural and concise translation might be preferable, depending on the context.",
+          "suggestion": "Consider a shorter, more common translation like \"අදහස් කරන්නෙක්\" (adahas karannek) which is closer in formality and more readily understood in casual contexts."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -207,13 +225,25 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Người nhận xét\" can mean 'reviewer', \"Commenter\" implies someone who leaves comments, not necessarily reviewing them. \"Người bình luận\" would be a more accurate translation.",
+          "suggestion": "Người bình luận"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'可评论' literally translates to 'can comment'. While related to 'Commenter', it doesn't accurately convey the role of someone who comments. It suggests ability rather than identity.",
+          "suggestion": "A more accurate translation would depend on the specific context, but options like '评论员' (Commentator), '评论者' (Commenter), or '评论人士' (Person who comments) might be better."
+        }
+      ],
       "approved_at": null
     }
   }

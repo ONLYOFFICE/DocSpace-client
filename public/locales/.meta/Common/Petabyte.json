@@ -3,7 +3,7 @@
   "content": "PB",
   "content_en_sha1_hash": "a092b2d4c9d52807932bfedae96b01210db7e06b",
   "created_at": "2025-05-19T21:30:47.361Z",
-  "updated_at": "2025-05-20T09:35:02.138Z",
+  "updated_at": "2025-05-20T22:20:48.854Z",
   "comment": {
     "text": "This translation key is used to display \"Petabyte\" as a unit of measurement for file size. It appears in a list of byte units on a page where file sizes are being displayed, and is used when the selected value exceeds 1 petabyte.",
     "is_auto": true,
@@ -75,7 +75,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The French translation \"Po\" is incorrect. \"PB\" (Petabyte) should be translated to \"Pi\" in French.",
+          "suggestion": "Pi"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -141,19 +147,37 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'PO' is incorrect. The standard abbreviation for Petabyte in Romanian is 'PB', mirroring the English.",
+          "suggestion": "PB"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Russian translation \"Пб\" is an incorrect transliteration of \"PB\". The correct transliteration is \"ПБ\".",
+          "suggestion": "ПБ"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The abbreviation 'PB' (Petabyte) is commonly understood in Sinhala as well, and translating it directly as 'පෙ.බ.' might cause confusion for some users. While technically correct, keeping the English abbreviation 'PB' might be more recognizable and maintain consistency with international standards.",
+          "suggestion": "Consider keeping the English abbreviation 'PB' instead of translating it to 'පෙ.බ.'"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

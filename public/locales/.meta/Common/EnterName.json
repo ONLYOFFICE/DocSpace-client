@@ -3,7 +3,7 @@
   "content": "Enter name",
   "content_en_sha1_hash": "5df85959e93e078f85961a413efbd7ba4ef678d2",
   "created_at": "2025-05-19T21:30:44.990Z",
-  "updated_at": "2025-05-20T09:36:24.775Z",
+  "updated_at": "2025-05-20T23:39:57.364Z",
   "comment": {
     "text": "\"Enter name\" is used as a placeholder text in various input fields within the application, prompting users to provide a name. It appears in dialogue boxes, room setting pages, and other forms where user-inputted names are required.",
     "is_auto": true,
@@ -111,7 +111,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Saisir un prénom' translates to 'Enter a first name', which is too specific. 'Enter name' is more general and should reflect that.",
+          "suggestion": "Saisir le nom"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -141,7 +147,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ເຂົ້າ ຊື່' is a literal transliteration and not a proper translation of 'Enter name'. It doesn't convey the intended meaning of providing a name in a form or field.",
+          "suggestion": "A more accurate translation would be something like 'ໃສ່ຊື່' (sai suei) which means 'enter name' or 'input name'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -189,7 +201,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'නම ලියන්න' while literally meaning 'Write name', is not the most natural or common way to say 'Enter name' in Sinhala. A more suitable translation would convey the action of entering or typing a name.",
+          "suggestion": "ඇතුළත් කරන්න (Athulath karanna) - Enter, or නම් ඇතුළත් කරන්න (Nam athulath karanna) - Enter name"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -213,7 +231,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Unesi ime' literally translates to 'Enter my name'. The intended meaning of 'Enter name' is a prompt for the user to input their name, not to indicate that the system is entering the user's name.",
+          "suggestion": "Unesite ime"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

@@ -3,7 +3,7 @@
   "content": "Unknown error",
   "content_en_sha1_hash": "e5fd9aa24c9417e7332e6f25936ae2a6ec8f1524",
   "created_at": "2025-05-19T21:30:49.406Z",
-  "updated_at": "2025-05-20T08:35:51.363Z",
+  "updated_at": "2025-05-20T21:05:19.157Z",
   "comment": {
     "text": "This translation key is used to display a generic error message when an unknown error occurs, often in situations where user input or system actions result in unexpected outcomes. It appears as part of error messages and dialogues throughout the application, providing a standardized response for users when unknown errors occur.",
     "is_auto": true,
@@ -165,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"නොදන්නා දෝෂයකි\" is a literal translation of \"Unknown error\", a more natural and commonly used translation in Sinhala would be something like \"සිරිගත කළ නොහැකි වැරදකි\" or \"අනූඩිත දෝෂයක්\". \"නොදන්නා දෝෂයකි\" sounds somewhat awkward.",
+          "suggestion": "Consider using \"සිරිගත කළ නොහැකි වැරදකි\" or \"අනූඩිත දෝෂයක්\"."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

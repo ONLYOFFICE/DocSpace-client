@@ -3,7 +3,7 @@
   "content": "Last used",
   "content_en_sha1_hash": "f1109d3dbc3c686fb22a4ca9f0bf7f89031acec7",
   "created_at": "2025-05-19T21:30:46.074Z",
-  "updated_at": "2025-05-20T09:35:44.452Z",
+  "updated_at": "2025-05-20T23:00:35.964Z",
   "comment": {
     "text": "This translation key is used for a table header label that displays \"Last used\" in a UI component, likely in a settings or configuration page where users can manage API keys. The text will be translated based on the value of this key and should reflect the desired wording for the user interface.",
     "is_auto": true,
@@ -93,7 +93,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"最後に使用した項目\" is too literal and verbose for a key name like 'Last used'. It translates to 'Item last used'. This doesn't convey the meaning of 'Last used' as referring to the last time something was used.",
+          "suggestion": "Consider a more concise translation such as \"最終使用日\" (saishū shiyōbi - Last used date) or \"最終使用\" (saishū shiyō - Last use)."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -105,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ຄັ້ງສຸດທະຍ້າຍ\" while meaning 'last time' or 'last occurrence', doesn't directly translate to the English phrase \"Last used\".  A more accurate translation would convey the meaning of 'last time used' or 'most recent use'.",
+          "suggestion": "Consider alternatives like \"ຄັ້ງໃຊ້ສຸດທະຍ້າຍ\" (Kang sai sutthayai - Last time used) or \"ການໃຊ້ຄັ້ງສຸດທະຍ້າຍ\" (Kan sai kang sutthayai - The last use)."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'අවසන් වරට භාවිතා කළේ' is a literal translation and not the most natural way to express 'Last used' in Sinhala. It implies 'last time it was used by someone'. A more natural translation would depend on the context, but a simpler and more generally appropriate option would be better.",
+          "suggestion": "Consider alternatives like 'උපයෝගීතාවය terakhir' (most recently used) or a phrase that fits the specific context where 'Last used' appears. A more general alternative is 'පසු lần භාවිතා කළේ'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Последњи пут коришћено\" is technically correct, it's a bit verbose and less idiomatic for the meaning of \"Last used.\" A more natural translation would be \"Последњи пут употребљено\" or \"Последња употреба\".",
+          "suggestion": "Последњи пут употребљено"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -183,7 +207,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation \"Son kullanıldığı zaman\" literally translates to \"Time of last use\". While understandable, it's not the most natural or accurate translation of \"Last used\". It sounds somewhat formal and less user-friendly.",
+          "suggestion": "A more natural and concise translation would be \"Son kullanılan\" or \"Son kullanma\". "
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

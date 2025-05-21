@@ -3,7 +3,7 @@
   "content": "OK",
   "content_en_sha1_hash": "9ce3bd4224c8c1780db56b4125ecf3f24bf748b7",
   "created_at": "2025-05-20T08:50:58.658Z",
-  "updated_at": "2025-05-20T08:50:58.658Z",
+  "updated_at": "2025-05-20T22:28:55.199Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -50,7 +50,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Greek translation uses Latin characters (OΚ) instead of Greek characters (Εντάξει). While 'OΚ' is recognizable due to its usage from English, using the Greek equivalent aligns better with the intended localization.",
+          "suggestion": "Replace 'OΚ' with 'Εντάξει'."
+        }
+      ],
       "approved_at": null
     },
     "es": {

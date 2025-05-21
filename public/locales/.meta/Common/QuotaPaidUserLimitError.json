@@ -3,7 +3,7 @@
   "content": "The paid user limit has been reached.",
   "content_en_sha1_hash": "e1d3147e981910f2b0f7ffe1cc79d9fbc9a364c2",
   "created_at": "2025-05-19T21:30:47.705Z",
-  "updated_at": "2025-05-20T09:34:48.946Z",
+  "updated_at": "2025-05-20T22:11:38.745Z",
   "comment": {
     "text": "This translation key is used to display an error message when a user's paid quota has been reached. It appears in various UI components, such as error messages and payment-related interfaces, indicating that the user has exceeded their paid limit. The text translates to \"The paid user limit has been reached.\"",
     "is_auto": true,
@@ -39,13 +39,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"تم الوصول إلى الحد المدفوع للمستخدمين.\" while understandable, isn't the most natural or precise way to express \"The paid user limit has been reached.\" A better phrasing would convey the sense of a 'limit' being exceeded.",
+          "suggestion": "تم الوصول إلى الحد الأقصى للمستخدمين المدفوعين."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ödənişli istifadəçi limitinə çatıldı' is a literal translation but doesn't quite convey the intended meaning of 'The paid user limit has been reached.' It sounds more like 'The paid user limit was reached' (past tense).",
+          "suggestion": "Consider a more idiomatic translation like 'Ödənişli istifadəçi limiti doldu.' or 'Ödənişli istifadəçi limiti keçildi.'"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -63,7 +75,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation \"Das Limit von Benutzern wurde erreicht.\" is a literal translation that doesn't quite convey the meaning of \"The paid user limit has been reached.\" It doesn't specify that these are *paid* users.",
+          "suggestion": "Das Limit für bezahlte Benutzer wurde erreicht."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -93,7 +111,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Վճարովի օգտագործողի սահմանաչափը հասել է:\" is a literal translation, but it sounds somewhat unnatural in Armenian. A more natural phrasing would convey the same meaning.",
+          "suggestion": "Վճարովի օգտագործողների թիվը սահմանափակվել է։ (Vcharovi ogutsvoghneri tivu sahmanapakvel e.) - The number of paid users has reached the limit."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -153,7 +177,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation conveys the meaning, \"S-a atins limita maximă de utilizatori cu plată\" is a bit clunky. A more natural Romanian phrasing would be preferred.",
+          "suggestion": "S-a depășit limita de utilizatori cu plată."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -165,7 +195,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ගෙවන ලද පරිශ්‍රීලකයින්ගේ සීමාවට ළඟා වී ඇත.' is a literal translation and might not be the most natural way to express 'The paid user limit has been reached.' in Sinhala. It sounds a bit formal and clunky.",
+          "suggestion": "Consider a more natural phrasing like 'ගෙවන ලද පරිශ්‍රීලකයින් ප්‍රමාණය අවමයට ළඟා වී ඇත' (Gewana lada pariseelakinayın pramāṇaya awamātaya lăga vē atā) which translates to 'The number of paid users has reached the limit.'"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -189,7 +225,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Limit plaćenog korisnika je dostignut\" sounds unnatural in Serbian. A more idiomatic translation would be \"Dostignut je maksimalan broj plaćenih korisnika.\" or \"Prekošen je broj plaćenih korisnika.\"",
+          "suggestion": "Dostignut je maksimalan broj plaćenih korisnika."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

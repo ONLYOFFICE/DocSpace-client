@@ -3,7 +3,7 @@
   "content": "Select file",
   "content_en_sha1_hash": "63f72dce85635b76fe31d3931ae500471aa30d71",
   "created_at": "2025-05-19T21:30:48.410Z",
-  "updated_at": "2025-05-20T08:52:16.694Z",
+  "updated_at": "2025-05-20T21:41:24.140Z",
   "comment": {
     "text": "This translation key is used to display the label for a file selection action, appearing as \"Select File\" in various UI elements such as buttons or dialogs. It is part of a set of translations related to file management and appears on the FilesSelector component.",
     "is_auto": true,
@@ -189,7 +189,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Selectare fișier' is understandable, a more natural and common Romanian translation for 'Select file' would be 'Alege fișier'. 'Selectare' implies a selection process, while 'Alege' directly means 'choose'.",
+          "suggestion": "Alege fișier"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -219,7 +225,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Изабери датотеку\" is not the most natural or idiomatic Serbian (Cyrillic) translation of 'Select file'. A more common and preferred translation would be 'Избери датотеку'.  'Изабери' is technically correct, but 'Избери' is more frequently used in this context.",
+          "suggestion": "Избери датотеку"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -231,7 +243,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'Dosya Seç' is a literal translation but sounds unnatural. A more natural and idiomatic translation would be 'Dosya Yükle' or 'Dosya Seçimi'.",
+          "suggestion": "Dosya Yükle"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

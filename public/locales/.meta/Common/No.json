@@ -3,7 +3,7 @@
   "content": "No",
   "content_en_sha1_hash": "816c52fd2bdd94a63cd0944823a6c0aa9384c103",
   "created_at": "2025-05-19T21:30:46.818Z",
-  "updated_at": "2025-05-20T09:35:20.526Z",
+  "updated_at": "2025-05-20T22:39:09.273Z",
   "comment": {
     "text": "This translation key is used to display the word \"No\" in various contexts, such as a confirm button in a cancel operation dialog and a button in a cancel upload dialog. It is used to provide an option for users to decline or cancel an action.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word \"No\" is best translated as \"Yox\" in Azerbaijani, not \"Xeyr\". \"Xeyr\" typically means 'goodbye' or 'no, thank you'.",
+          "suggestion": "Change \"Xeyr\" to \"Yox\"."
+        }
+      ],
       "approved_at": null
     },
     "bg": {

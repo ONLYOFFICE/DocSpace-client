@@ -3,7 +3,7 @@
   "content": "Assign to role",
   "content_en_sha1_hash": "c15c6b3c6eb69973c21796b22a961b9f5e454bd4",
   "created_at": "2025-05-19T21:30:43.120Z",
-  "updated_at": "2025-05-20T09:37:19.549Z",
+  "updated_at": "2025-05-21T00:31:12.270Z",
   "comment": {
     "text": "The \"Assign to role\" translation key is used to display a label on a panel header in a user interface. It appears as a button with this text and is part of a dialog that allows users to assign tasks to roles. The translators should provide a short and descriptive phrase that makes sense in the context of the application's workflow, such as \"Assign task to role\".",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Նշանակել դեր' while literal, might not fully capture the nuance of 'Assign to role' in a software or user management context. 'Assign' implies a specific action of assigning someone or something to a predefined role. 'Նշանակել' is more general and can mean 'to designate' or 'to appoint'.",
+          "suggestion": "Consider a translation that more closely reflects the action of assignment, such as 'մասնագործական դեր ցուցաբերել' (masnagortsagan der tsutseaberel - assign a role) or 'դեր տեղաբաշխել' (der telabashkel - allocate a role), depending on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -171,7 +177,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Доделите улогу\" is a possible translation, it implies an action *being done* to a role. \"Assign to role\" is more accurately translated as \"Приреди улогу\" or \"Додели улогу за\". \"Доделите улогу\" is more like \"Allocate a role\" or \"Distribute a role\", but not assign.",
+          "suggestion": "Приреди улогу"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -183,7 +195,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Role ata' is understandable, a more natural and accurate Turkish translation of 'Assign to role' would be 'Role ver' or 'Rol atama yap'. 'Ata' is generally used for attributing something of heritage, not assigning a role.",
+          "suggestion": "Role ver"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -195,7 +213,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Chỉ định vai trò\" is a possible translation, it can be overly formal for a UI label like \"Assign to role\". A more natural and common translation would be something like \"Gán vai trò\" or \"Phân vai trò\".",
+          "suggestion": "Consider \"Gán vai trò\" or \"Phân vai trò\" for a more natural translation."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

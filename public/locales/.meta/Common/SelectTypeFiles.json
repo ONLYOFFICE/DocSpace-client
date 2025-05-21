@@ -3,7 +3,7 @@
   "content": "Select {{type}}",
   "content_en_sha1_hash": "362dad28aa0bb6ca287f03d3b542c0aea7263bf8",
   "created_at": "2025-05-19T21:30:48.523Z",
-  "updated_at": "2025-05-20T08:51:45.422Z",
+  "updated_at": "2025-05-20T21:35:50.471Z",
   "comment": {
     "text": "The translation key \"Select {{type}}\" is used to display a prompt in user interfaces that asks users to select a file type. This text appears as a button label or dialog title, guiding users through the process of choosing a specific type of file. Translators should consider the context and conventions of their language when translating this text.",
     "is_auto": true,
@@ -45,13 +45,25 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Vyberte Select {{type}}' includes the English word 'Select' which is redundant and disrupts the flow. The intended meaning of 'Select' is already conveyed by 'Vyberte'.",
+          "suggestion": "Vyberte {{type}}"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The German translation uses \"{{type}}\" just like the English, which may be unnecessary. It's generally preferred to avoid mirroring the formatting exactly.",
+          "suggestion": "\"Auswählen: {{type}}\" or simply \"{{type}} auswählen\" would be more natural."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -111,7 +123,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation \"Atlasīt {{type}}\" literally translates to \"Select {{type}}\". While understandable, it lacks the nuance of a natural Latvian phrasing for user interface elements. A more idiomatic translation would be something like \"Izvēlēties {{type}}\" or \"Izvēlites {{type}}\".",
+          "suggestion": "Izvēlēties {{type}}"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,7 +159,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The direct translation of 'Select' is 'Selectează', not 'Selectare'. 'Selectare' implies the action of selecting, while 'Selectează' is the imperative form (select).",
+          "suggestion": "Selectează {{type}}"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'type' is enclosed in double curly braces, suggesting a placeholder that might need to be handled differently in Sinhala based on the platform or rendering engine. It's possible the placeholder needs a different syntax to be properly interpreted.",
+          "suggestion": "Investigate how placeholders are handled in the target platform/environment. Consider alternative placeholder syntax like '[type]' or '{{type}}' depending on requirements."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

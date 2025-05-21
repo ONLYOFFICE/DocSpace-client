@@ -3,7 +3,7 @@
   "content": "First name",
   "content_en_sha1_hash": "7e568a90221d853052b3466e581eb5f7c030b901",
   "created_at": "2025-05-19T21:30:45.407Z",
-  "updated_at": "2025-05-20T09:36:09.473Z",
+  "updated_at": "2025-05-20T23:25:09.305Z",
   "comment": {
     "text": "This translation key is used to display the label \"First name\" in various UI elements, particularly in a change name dialog and an attribute mapping form. It appears as a required field label in these contexts, prompting users for their first name.",
     "is_auto": true,
@@ -69,13 +69,25 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Bulgarian translation \"Име\" while technically meaning 'name,' is not the standard translation for \"First name.\" A more accurate translation would be \"Първо име\".",
+          "suggestion": "Първо име"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Křestní jméno\" is a technically correct translation of \"First name\" in some contexts (referring to a baptismal name), it's not the most common or natural translation for a field label like \"First name\". A more appropriate translation would be \"Jméno\".",
+          "suggestion": "Jméno"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -123,13 +135,25 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation \"名\" only translates to \"name\". It's missing the \"first\" qualifier. \"名\" alone is too short and doesn't accurately represent \"First name\".",
+          "suggestion": "氏名 (Shimei) - which includes 'name' but is often used in formal contexts. Alternatively, 最初の名前 (Saisho no namae) - which means 'first name'."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"이름\" (ireum) can mean 'name', a more accurate translation of 'First name' would be 'FirstName' or '명' (myeong).  '이름' is a more general term for 'name'.",
+          "suggestion": "Consider 'FirstName' or '명' (myeong)"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -189,7 +213,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Krstné meno' is a literal translation of 'baptismal name', 'First name' typically refers to the given name, not necessarily a name given at baptism. A more accurate translation would be 'Krstné meno' or 'Mená'.",
+          "suggestion": "Krstné meno"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -201,7 +231,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation 'Име' translates to 'Name', not 'First name'.",
+          "suggestion": "Име и презиме"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -213,7 +249,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation \"İsim\" is a valid word for 'name', but \"First name\" is best translated as \"Adı\" or \"Adı Soyadı\" (if including surname). \"İsim\" is a more general term for name and doesn't specifically denote 'first name'.",
+          "suggestion": "Adı"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -225,13 +267,25 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"First name\" is a label or field name, and \"Tên\" is a valid translation for the noun \"name\" in Vietnamese. However, as a field label, a more suitable translation might be 'Tên (lót)' or 'Họ và tên (lót)' to explicitly indicate it's referring to the first name, especially in forms or data entry contexts. 'Tên' alone is too general.",
+          "suggestion": "Consider 'Tên (lót)' or 'Họ và tên (lót)' for greater clarity."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"名字\" (mingzi) is a general term for \"name,\" not specifically \"first name.\" While often used interchangeably, \"first name\" has a more specific meaning.",
+          "suggestion": "Consider a more specific translation like \"名\" (ming - name) or a fuller translation that conveys the meaning of \"first name,\" such as \"姓\" (xìng) for family name, if a distinction is necessary. The best choice depends on the application."
+        }
+      ],
       "approved_at": null
     }
   }

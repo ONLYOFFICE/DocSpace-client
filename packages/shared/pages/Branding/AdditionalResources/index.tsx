@@ -25,18 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect } from "react";
-
+import { useTranslation } from "react-i18next";
 import { Checkbox } from "../../../components/checkbox";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 
-import { useResponsiveNavigation } from "../../../hooks/useResponsiveNavigation";
-
 import { StyledAdditionalResources } from "./AdditionalResources.styled";
 import { IAdditionalResources } from "./AdditionalResources.types";
-import { brandingRedirectUrl } from "../constants";
 
 export const AdditionalResources = ({
-  t,
   isSettingPaid,
   feedbackAndSupportEnabled,
   helpCenterEnabled,
@@ -44,19 +40,13 @@ export const AdditionalResources = ({
   onRestore,
   isLoading,
   additionalResourcesIsDefault,
-  deviceType,
 }: IAdditionalResources) => {
+  const { t } = useTranslation("Common");
   const [feedbackEnabled, setFeedbackEnabled] = useState(
     feedbackAndSupportEnabled,
   );
   const [helpEnabled, setHelpEnabled] = useState(helpCenterEnabled);
   const [hasChanges, setHasChanges] = useState(false);
-
-  useResponsiveNavigation({
-    redirectUrl: brandingRedirectUrl,
-    currentLocation: "additional-resources",
-    deviceType,
-  });
 
   useEffect(() => {
     if (
@@ -87,11 +77,11 @@ export const AdditionalResources = ({
     <StyledAdditionalResources>
       <div className="header">
         <div className="additional-header settings_unavailable">
-          {t("Settings:AdditionalResources")}
+          {t("AdditionalResources")}
         </div>
       </div>
       <div className="settings_unavailable additional-description">
-        {t("Settings:AdditionalResourcesDescription", {
+        {t("AdditionalResourcesDescription", {
           productName: t("Common:ProductName"),
         })}
       </div>

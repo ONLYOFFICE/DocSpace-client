@@ -34,7 +34,7 @@ import { TextareaProps } from "@docspace/shared/components/textarea/Textarea.typ
 import {
   ComboboxProps,
   TOption,
-} from "@docspace/shared/components/combobox/Combobox.types";
+} from "@docspace/shared/components/combobox/ComboBox.types";
 import { ToastProps } from "@docspace/shared/components/toast/Toast.type";
 import { ModalDialogProps } from "@docspace/shared/components/modal-dialog/ModalDialog.types";
 import { TextProps } from "@docspace/shared/components/text/Text.types";

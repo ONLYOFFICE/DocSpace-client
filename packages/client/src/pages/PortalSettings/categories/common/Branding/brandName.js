@@ -60,7 +60,7 @@ const BrandNameComponent = (props) => {
       await saveBrandName(data);
       setBrandName(data.logoText);
 
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
     } finally {

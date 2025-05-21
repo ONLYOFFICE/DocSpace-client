@@ -167,7 +167,11 @@ async function readTranslationFile(projectName, language, namespace) {
     );
     const exists = await fs.pathExists(filePath);
     if (!exists) {
-      return null;
+      console.log(
+        `Translation file not found: ${filePath}, creating empty file...`
+      );
+      await writeTranslationFile(projectName, language, namespace, {});
+      return {};
     }
     const content = await fs.readJson(filePath);
     return content;

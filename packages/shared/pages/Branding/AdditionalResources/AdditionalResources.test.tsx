@@ -36,12 +36,6 @@ jest.mock("../../../hooks/useResponsiveNavigation", () => ({
   useResponsiveNavigation: jest.fn(),
 }));
 
-jest.mock("react-i18next", () => ({
-  useTranslation: () => ({
-    t: (key: string) => key,
-  }),
-}));
-
 const defaultProps = {
   t: (key: string) => key,
   isSettingPaid: true,

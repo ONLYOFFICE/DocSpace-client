@@ -38,12 +38,6 @@ const baseProps = {
   onClickLink: jest.fn(),
 };
 
-jest.mock("react-i18next", () => ({
-  useTranslation: () => ({
-    t: (key: string) => key,
-  }),
-}));
-
 describe("MobileView", () => {
   it("renders all sections when displayAbout and displayAdditional are true", () => {
     render(<MobileView {...baseProps} />);

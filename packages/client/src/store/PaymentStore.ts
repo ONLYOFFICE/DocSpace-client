@@ -280,6 +280,14 @@ class PaymentStore {
     );
   }
 
+  get cardLinkedOnNonProfit() {
+    if (!this.currentQuotaStore.isNonProfit) return false;
+
+    if (!this.walletCustomerEmail) return false;
+
+    return true;
+  }
+
   updatePreviousBalance = () => {
     this.previousBalance = this.balance;
   };

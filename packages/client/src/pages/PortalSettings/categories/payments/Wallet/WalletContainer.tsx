@@ -70,6 +70,7 @@ type WalletProps = {
   cardLinkedOnFreeTariff: boolean;
   isFreeTariff: boolean;
   isNonProfit: boolean;
+  cardLinkedOnNonProfit: boolean;
   isVisibleWalletSettings: boolean;
   wasChangeBalance?: boolean;
   fetchBalance?: () => Promise<void>;
@@ -94,13 +95,14 @@ const Wallet = (props: WalletProps) => {
     walletCodeCurrency,
     cardLinkedOnFreeTariff,
     isFreeTariff,
-    isNonProfit,
+    cardLinkedOnNonProfit,
     isVisibleWalletSettings,
     wasChangeBalance,
     fetchBalance,
     fetchTransactionHistory,
     canUpdateTariff,
     setVisibleWalletSetting,
+    isNonProfit,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
@@ -172,7 +174,9 @@ const Wallet = (props: WalletProps) => {
       <Text className={styles.walletDescription}>
         {t("WalletDescription", { productName: t("Common:ProductName") })}
       </Text>
-      {!isNonProfit && (cardLinkedOnFreeTariff || !isFreeTariff) ? (
+      {cardLinkedOnNonProfit ||
+      cardLinkedOnFreeTariff ||
+      (!isNonProfit && !isFreeTariff) ? (
         <PayerInformation />
       ) : null}
 
@@ -182,7 +186,7 @@ const Wallet = (props: WalletProps) => {
             {t("BalanceText")}
           </Text>
 
-          {cardLinkedOnFreeTariff || isNonProfit ? (
+          {cardLinkedOnFreeTariff || cardLinkedOnNonProfit ? (
             <RefreshIconButton isRefreshing={isRefreshing} onClick={onClick} />
           ) : null}
         </div>
@@ -240,6 +244,7 @@ export default inject(
       fetchTransactionHistory,
       canUpdateTariff,
       setVisibleWalletSetting,
+      cardLinkedOnNonProfit,
     } = paymentStore;
     const { isFreeTariff, isNonProfit } = currentQuotaStore;
 
@@ -251,13 +256,14 @@ export default inject(
       isPayer,
       cardLinkedOnFreeTariff,
       isFreeTariff,
-      isNonProfit,
+      cardLinkedOnNonProfit,
       isVisibleWalletSettings,
       wasChangeBalance,
       fetchBalance,
       fetchTransactionHistory,
       canUpdateTariff,
       setVisibleWalletSetting,
+      isNonProfit,
     };
   },
 )(observer(Wallet));

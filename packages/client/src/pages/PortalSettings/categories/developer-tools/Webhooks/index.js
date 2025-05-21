@@ -72,6 +72,10 @@ const StyledCreateButton = styled(Button)`
   width: calc(100% - 32px);
 `;
 
+const WebhookInfoWrapper = styled.div`
+  margin-bottom: ${(props) => (props.withEmptyScreen ? "0px" : "25px")};
+`;
+
 const Webhooks = (props) => {
   const {
     loadWebhooks,
@@ -86,6 +90,7 @@ const Webhooks = (props) => {
   const { t, ready } = useTranslation(["Webhooks", "Common"]);
 
   const [, startTranslation] = useTransition();
+  const [isLoading, setIsLoading] = useState(true);
 
   setDocumentTitle(t("Webhooks"));
 
@@ -115,43 +120,59 @@ const Webhooks = (props) => {
 
   useEffect(() => {
     if (ready) {
-      startTranslation(() => loadWebhooks());
+      setIsLoading(true);
+      startTranslation(async () => {
+        try {
+          await loadWebhooks();
+        } finally {
+          setIsLoading(false);
+        }
+      });
     }
   }, [ready]);
-
-  if (errorWebhooks) {
-    return <EmptyServerErrorContainer />;
-  }
 
   return (
     <Suspense fallback={<WebhookConfigsLoader />}>
       <MainWrapper>
-        <WebhookInfo />
-        {isMobile() ? (
-          <ButtonSeating>
-            <StyledCreateButton
-              label={t("CreateWebhook")}
-              primary
-              size="normal"
-              onClick={openCreateModal}
-            />
-          </ButtonSeating>
-        ) : (
-          <Button
-            id="create-webhook-button"
-            label={t("CreateWebhook")}
-            primary
-            size="small"
-            onClick={openCreateModal}
-          />
-        )}
+        <WebhookInfoWrapper withEmptyScreen={errorWebhooks}>
+          <WebhookInfo />
+        </WebhookInfoWrapper>
 
-        {!isWebhooksEmpty ? (
-          <WebhooksTable
-            openSettingsModal={openSettingsModal}
-            openDeleteModal={openDeleteModal}
-          />
-        ) : null}
+        {errorWebhooks ? (
+          <EmptyServerErrorContainer />
+        ) : (
+          <>
+            {isMobile() ? (
+              <ButtonSeating>
+                <StyledCreateButton
+                  label={t("CreateWebhook")}
+                  primary
+                  size="normal"
+                  onClick={openCreateModal}
+                  isDisabled={isLoading}
+                />
+              </ButtonSeating>
+            ) : (
+              <Button
+                id="create-webhook-button"
+                label={t("CreateWebhook")}
+                primary
+                size="small"
+                onClick={openCreateModal}
+                isDisabled={isLoading}
+              />
+            )}
+
+            {!isLoading ? (
+              !isWebhooksEmpty ? (
+                <WebhooksTable
+                  openSettingsModal={openSettingsModal}
+                  openDeleteModal={openDeleteModal}
+                />
+              ) : null
+            ) : null}
+          </>
+        )}
         <WebhookDialog
           visible={isCreateOpened}
           onClose={closeCreateModal}

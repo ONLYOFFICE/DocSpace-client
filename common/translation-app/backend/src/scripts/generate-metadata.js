@@ -119,9 +119,11 @@ async function generateMetadata(projectName) {
     const baseLanguage = languages.includes("en") ? "en" : languages[0];
 
     // Process all translation files in the base language
-    const translationFiles = glob.sync(
-      `${projectPath}/${baseLanguage}/**/*.json`
-    );
+    // Use normalized path with forward slashes for glob to work on all platforms
+    const globPattern = path
+      .join(projectPath, baseLanguage, "**", "*.json")
+      .replace(/\\/g, "/");
+    const translationFiles = glob.sync(globPattern);
 
     console.log(
       `Found ${translationFiles.length} translation files in ${baseLanguage}`

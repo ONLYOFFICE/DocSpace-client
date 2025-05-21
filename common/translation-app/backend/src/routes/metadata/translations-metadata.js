@@ -1,12 +1,12 @@
 /**
  * Routes for managing translations metadata using file-based storage
  */
-const path = require('path');
-const fs = require('fs-extra');
-const appRootPath = require('app-root-path').toString();
-const { projectLocalesMap } = require('../../config/config');
-const glob = require('glob');
-const { writeJsonWithConsistentEol } = require('../../utils/fsUtils');
+const path = require("path");
+const fs = require("fs-extra");
+const appRootPath = require("app-root-path").toString();
+const { projectLocalesMap } = require("../../config/config");
+const glob = require("glob");
+const { writeJsonWithConsistentEol } = require("../../utils/fsUtils");
 
 /**
  * Find metadata file for a specific key
@@ -20,17 +20,17 @@ async function findMetadataFile(projectName, namespace, keyPath) {
   if (!localesPath) {
     throw new Error(`Project ${projectName} not found in configuration`);
   }
-  
+
   const projectPath = path.join(appRootPath, localesPath);
-  const metaDir = path.join(projectPath, '.meta');
+  const metaDir = path.join(projectPath, ".meta");
   const namespacePath = path.join(metaDir, namespace);
   const metadataFilePath = path.join(namespacePath, `${keyPath}.json`);
-  
+
   if (await fs.pathExists(metadataFilePath)) {
     const data = await fs.readJson(metadataFilePath);
     return { filePath: metadataFilePath, data };
   }
-  
+
   return null;
 }
 
@@ -45,18 +45,22 @@ async function findNamespaceMetadataFiles(projectName, namespace) {
   if (!localesPath) {
     throw new Error(`Project ${projectName} not found in configuration`);
   }
-  
+
   const projectPath = path.join(appRootPath, localesPath);
-  const metaDir = path.join(projectPath, '.meta');
+  const metaDir = path.join(projectPath, ".meta");
   const namespacePath = path.join(metaDir, namespace);
-  
-  if (!await fs.pathExists(namespacePath)) {
+
+  if (!(await fs.pathExists(namespacePath))) {
     return [];
   }
-  
-  const files = glob.sync(path.join(namespacePath, '*.json'));
+
+  // Use normalized path with forward slashes for glob to work on all platforms
+  const namespacePathPattern = path
+    .join(namespacePath, "*.json")
+    .replace(/\\/g, "/");
+  const files = glob.sync(namespacePathPattern);
   const result = [];
-  
+
   for (const filePath of files) {
     try {
       const data = await fs.readJson(filePath);
@@ -65,7 +69,7 @@ async function findNamespaceMetadataFiles(projectName, namespace) {
       console.error(`Error reading metadata file ${filePath}:`, error);
     }
   }
-  
+
   return result;
 }
 
@@ -89,7 +93,11 @@ async function routes(fastify, options) {
           });
         }
 
-        const metadata = await findMetadataFile(projectName, namespace, keyPath);
+        const metadata = await findMetadataFile(
+          projectName,
+          namespace,
+          keyPath
+        );
 
         if (!metadata) {
           return reply.code(404).send({
@@ -113,16 +121,19 @@ async function routes(fastify, options) {
   fastify.get("/:projectName/:language/:namespace", async (request, reply) => {
     try {
       const { projectName, language, namespace } = request.params;
-      
-      const metadataFiles = await findNamespaceMetadataFiles(projectName, namespace);
-      
+
+      const metadataFiles = await findNamespaceMetadataFiles(
+        projectName,
+        namespace
+      );
+
       // Transform data for response
-      const metadataList = metadataFiles.map(file => file.data);
-      
-      return { 
-        success: true, 
+      const metadataList = metadataFiles.map((file) => file.data);
+
+      return {
+        success: true,
         data: metadataList,
-        count: metadataList.length
+        count: metadataList.length,
       };
     } catch (error) {
       request.log.error(error);
@@ -135,30 +146,30 @@ async function routes(fastify, options) {
 
   // Update metadata for a specific key
   fastify.put(
-    "/:projectName/:language/:namespace/key", 
+    "/:projectName/:language/:namespace/key",
     async (request, reply) => {
       try {
         const { projectName, language, namespace } = request.params;
         const { keyPath } = request.query;
         const updates = request.body;
-        
+
         if (!keyPath) {
           return reply.code(400).send({
             success: false,
             error: "Key path is required",
           });
         }
-        
-        if (!updates || typeof updates !== 'object') {
+
+        if (!updates || typeof updates !== "object") {
           return reply.code(400).send({
             success: false,
             error: "Update data must be a valid object",
           });
         }
-        
+
         // Check if metadata exists
         let metadata = await findMetadataFile(projectName, namespace, keyPath);
-        
+
         if (!metadata) {
           // Create new metadata file
           const localesPath = projectLocalesMap[projectName];
@@ -168,16 +179,16 @@ async function routes(fastify, options) {
               error: `Project ${projectName} not found in configuration`,
             });
           }
-          
+
           // Create directories if needed
           const projectPath = path.join(appRootPath, localesPath);
-          const metaDir = path.join(projectPath, '.meta');
+          const metaDir = path.join(projectPath, ".meta");
           const namespacePath = path.join(metaDir, namespace);
-          
+
           await fs.ensureDir(namespacePath);
-          
+
           const metadataFilePath = path.join(namespacePath, `${keyPath}.json`);
-          
+
           // Initialize new metadata
           const newMetadata = {
             key_path: keyPath,
@@ -185,35 +196,35 @@ async function routes(fastify, options) {
             project: projectName,
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
-            status: updates.status || 'new',
-            priority: updates.priority || 'normal',
-            context: updates.context || '',
-            notes: updates.notes || '',
-            usage: []
+            status: updates.status || "new",
+            priority: updates.priority || "normal",
+            context: updates.context || "",
+            notes: updates.notes || "",
+            usage: [],
           };
-          
+
           await writeJsonWithConsistentEol(metadataFilePath, newMetadata);
-          
+
           return {
             success: true,
             data: newMetadata,
-            created: true
+            created: true,
           };
         } else {
           // Update existing metadata
           const updatedData = {
             ...metadata.data,
             ...updates,
-            updated_at: new Date().toISOString()
+            updated_at: new Date().toISOString(),
           };
-          
+
           // Write updated metadata back to file
           await writeJsonWithConsistentEol(metadata.filePath, updatedData);
-          
-          return { 
-            success: true, 
+
+          return {
+            success: true,
             data: updatedData,
-            updated: true
+            updated: true,
           };
         }
       } catch (error) {
@@ -231,7 +242,7 @@ async function routes(fastify, options) {
     try {
       const { projectName, language } = request.params;
       const allMetadata = [];
-      
+
       // Get project path
       const localesPath = projectLocalesMap[projectName];
       if (!localesPath) {
@@ -240,30 +251,33 @@ async function routes(fastify, options) {
           error: `Project ${projectName} not found in configuration`,
         });
       }
-      
+
       const projectPath = path.join(appRootPath, localesPath);
-      const metaDir = path.join(projectPath, '.meta');
-      
-      if (!await fs.pathExists(metaDir)) {
+      const metaDir = path.join(projectPath, ".meta");
+
+      if (!(await fs.pathExists(metaDir))) {
         return { success: true, data: [], count: 0 };
       }
-      
+
       // Get all namespace directories
       const namespaceDirs = await fs.readdir(metaDir);
-      
+
       for (const namespace of namespaceDirs) {
         const namespacePath = path.join(metaDir, namespace);
         if (!(await fs.stat(namespacePath)).isDirectory()) continue;
-        
-        const metadataFiles = await findNamespaceMetadataFiles(projectName, namespace);
-        const namespaceMetadata = metadataFiles.map(file => file.data);
+
+        const metadataFiles = await findNamespaceMetadataFiles(
+          projectName,
+          namespace
+        );
+        const namespaceMetadata = metadataFiles.map((file) => file.data);
         allMetadata.push(...namespaceMetadata);
       }
-      
+
       return {
         success: true,
         data: allMetadata,
-        count: allMetadata.length
+        count: allMetadata.length,
       };
     } catch (error) {
       request.log.error(error);
@@ -273,7 +287,7 @@ async function routes(fastify, options) {
       });
     }
   });
-  
+
   // Delete metadata for a key
   fastify.delete(
     "/:projectName/:language/:namespace/key",
@@ -281,29 +295,33 @@ async function routes(fastify, options) {
       try {
         const { projectName, language, namespace } = request.params;
         const { keyPath } = request.query;
-        
+
         if (!keyPath) {
           return reply.code(400).send({
             success: false,
             error: "Key path is required",
           });
         }
-        
-        const metadata = await findMetadataFile(projectName, namespace, keyPath);
-        
+
+        const metadata = await findMetadataFile(
+          projectName,
+          namespace,
+          keyPath
+        );
+
         if (!metadata) {
           return reply.code(404).send({
             success: false,
             error: "Metadata not found for this key",
           });
         }
-        
+
         // Delete the file
         await fs.remove(metadata.filePath);
-        
+
         return {
           success: true,
-          message: `Metadata for key ${keyPath} deleted successfully`
+          message: `Metadata for key ${keyPath} deleted successfully`,
         };
       } catch (error) {
         request.log.error(error);

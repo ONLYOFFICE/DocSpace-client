@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import TranslationTableCell from "./TranslationTableCell";
+import * as api from "../lib/api";
 
 interface TranslationTableRowProps {
   currentEntry: any;
@@ -16,6 +17,7 @@ interface TranslationTableRowProps {
   handleTranslate: (rowPath: string, lang: string) => void;
   isTranslating: (rowPath: string, lang: string) => boolean;
   ollamaConnected: boolean;
+  metadata?: any;
 }
 
 const TranslationTableRow: React.FC<TranslationTableRowProps> = ({
@@ -33,7 +35,33 @@ const TranslationTableRow: React.FC<TranslationTableRowProps> = ({
   handleTranslate,
   isTranslating,
   ollamaConnected,
+  metadata: propMetadata, // Rename to avoid conflict with local state
 }) => {
+  // Local state for metadata
+  const [metadata, setMetadata] = useState<any>(propMetadata);
+  const [isLoadingMetadata, setIsLoadingMetadata] = useState<boolean>(false);
+
+  // Load metadata for the current entry
+  useEffect(() => {
+    if (currentEntry?.path && !propMetadata) {
+      const loadMetadata = async () => {
+        setIsLoadingMetadata(true);
+        try {
+          const response = await api.getKeyUsage(currentEntry.path);
+          setMetadata(response);
+        } catch (error) {
+          console.error("Error loading metadata:", error);
+        } finally {
+          setIsLoadingMetadata(false);
+        }
+      };
+
+      loadMetadata();
+    } else if (propMetadata) {
+      // Use prop metadata if available
+      setMetadata(propMetadata);
+    }
+  }, [currentEntry?.path, propMetadata]);
   return (
     <tbody>
       {languages.map((lang) => (
@@ -63,6 +91,8 @@ const TranslationTableRow: React.FC<TranslationTableRowProps> = ({
             handleTranslate={handleTranslate}
             isTranslating={isTranslating}
             ollamaConnected={ollamaConnected}
+            metadata={metadata}
+            isLoadingMetadata={isLoadingMetadata}
           />
         </tr>
       ))}

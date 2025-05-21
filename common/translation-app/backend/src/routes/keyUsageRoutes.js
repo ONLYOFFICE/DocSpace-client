@@ -197,6 +197,7 @@ async function keyUsageRoutes(fastify) {
       // Collect all usage information
       let allUsages = [];
       let comment = null;
+      let languages = [];
 
       // Process metadata from files
       for (const file of metadataFiles) {
@@ -213,6 +214,10 @@ async function keyUsageRoutes(fastify) {
         // Get usages from metadata
         if (file.data.usage && Array.isArray(file.data.usage)) {
           allUsages = [...allUsages, ...file.data.usage];
+        }
+
+        if (file.data.languages) {
+          languages = file.data.languages;
         }
       }
 
@@ -232,6 +237,7 @@ async function keyUsageRoutes(fastify) {
         key,
         usages: allUsages,
         comment,
+        languages,
       };
 
       return reply.send(result);

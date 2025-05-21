@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useTranslationStore } from "@/store/translationStore";
 import { useOllamaStore } from "@/store/ollamaStore";
+import { useKeyUsageStore } from "@/store/keyUsageStore";
 import { getSocket } from "@/lib/socket";
 import KeyContextMenu from "./KeyContextMenu";
 import RenameKeyModal from "./RenameKeyModal";
@@ -95,6 +96,10 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
   const [activeKeyPath, setActiveKeyPath] = useState<string>("");
   const [activeTranslationValue, setActiveTranslationValue] =
     useState<string>("");
+    
+  // State for metadata
+  const [currentMetadata, setCurrentMetadata] = useState<any>(null);
+  const { loadKeyUsage, keyUsage } = useKeyUsageStore();
 
   // Ref for the key container
   const keyContainerRef = useRef<HTMLDivElement>(null);
@@ -596,6 +601,7 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
     }
   }, [currentPage]);
 
+
   // One-time only initialization from URL parameters
   useEffect(() => {
     // Only run this once when translations are first loaded and not yet initialized
@@ -917,6 +923,7 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
                       handleTranslate={handleTranslate}
                       isTranslating={isTranslating}
                       ollamaConnected={ollamaConnected}
+                      metadata={currentMetadata}
                     />
                   </table>
                 </div>

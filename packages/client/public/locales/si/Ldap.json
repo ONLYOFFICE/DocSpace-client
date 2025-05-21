@@ -1,6 +1,4 @@
 {
-  "LdapConnectionTypeSSL": "SSL",
-  "LdapConnectionTypeStartTls": "StartTLS",
   "LdapAddCertificateToStoreConfirmation": "මෙම සහතිකයේ ගබඩා කිරීමට සහ පරිශීලකයා ආනයනය කිරීම සමඟ ඉදිරියට යාමට ඔබට අවශ්‍යද?",
   "LdapAdvancedSettings": "අධ්‍යයන සැකසුම්",
   "LdapAdvancedSettingsTooltip": "ඔබේ LDAP සේවක සමඟ සමමුහුර්ත කිරීමට අවශ්‍ය පරිශීලක ගුණාංග තෝරන්න.",
@@ -11,7 +9,9 @@
   "LdapAvatar": "පැතිකඩ ඡායාරූපය",
   "LdapCertificateConfirm": "පරීක්ෂණ පත්‍රය තහවුරු කරන්න",
   "LdapConnectionType": "සම්බන්ධතා වර්ගය",
+  "LdapConnectionTypeSSL": "SSL",
   "LdapConnectionTypeSSLTooltip": "ආරක්ෂිත සොකට් ස්ථරය (SSL) භාවිතයෙන් ඔබට LDAP ගමනාගමනය රහසිගත සහ ආරක්ෂිත කළ හැකිය.",
+  "LdapConnectionTypeStartTls": "StartTLS",
   "LdapConnectionTypeStartTlsTooltip": "සංකේතාත්මක සන්නිවේදනය සඳහා වෙනම තොටක් භාවිතා කිරීම වෙනුවට, සරල පෙළ සම්බන්ධතාවයක් සංකේතාත්මක (TLS හෝ SSL) සම්බන්ධතාවයකට උත්ශ්‍රේණි කිරීමට StartTLS ක්‍රමයක් ඉදිරිපත් කරයි.",
   "LdapConnectionTypeUnencrypted": "ක්‍රීප්ටෝ නොකරන ලද සන්නිවේදනය",
   "LdapDisclaimer": "කරුණාකර මතක තබා ගන්න: ද්වාර පරිශීලක විද්‍යුත් තැපෑල 'තැපැල් ගුණාංගය' සැකසුමෙන් ගනු ලැබේ. එය අතුරුදහන් වී තිබේ නම්, එය පහත ආකාරයෙන් සාදා ඇත: 'ලොග්ඉන් ගුණාංගය + @ + LDAP ප්‍රදේශය'. එවැනි විද්‍යුත් තැපෑලක් නොමැති අවස්ථාවක, පරිශීලකයාට කිසිදු ද්වාර දැනුම්දීමක් නොලැබෙනු ඇත.",

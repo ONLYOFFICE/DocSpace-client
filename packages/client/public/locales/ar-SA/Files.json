@@ -40,6 +40,7 @@
   "CreateNewFolderInStorage": "قم بإنشاء مجلد جديد في وحدة التخزين",
   "CreateNewLink": "إنشاء رابط جديد",
   "CreateTemplate": "إنشاء قالب",
+  "CustomFilterDisable": "تعطيل الفلتر المخصص",
   "CustomFilterDisabled": "تم تعطيل الفِلتر المخصص للملف المحدد",
   "CustomFilterEnable": "تمكين الفِلتر المخصص",
   "CustomFilterEnabled": "تم تمكين الفِلتر المخصص للملف المحدد",
@@ -240,6 +241,5 @@
   "WillBeDeletedPermanently": "سيتم حذف {{date}} نهائيًا",
   "WillBeMovedToTrash": "سيتم نقل {{date}} إلى سلة المهملات",
   "YouLeftTheRoom": "لقد قمت بمغادرة الغرفة",
-  "YourUserTypeHasChanged": "تم تغيير نوع المستخدم الخاص بكم إلى <1>«{{userType}}»</1> من قِبل مسؤول {{productName}} <1>{{adminName}}</1>.",
-  "CustomFilterDisable": "تعطيل الفلتر المخصص"
+  "YourUserTypeHasChanged": "تم تغيير نوع المستخدم الخاص بكم إلى <1>«{{userType}}»</1> من قِبل مسؤول {{productName}} <1>{{adminName}}</1>."
 }

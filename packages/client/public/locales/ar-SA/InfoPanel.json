@@ -75,12 +75,14 @@
   "RoomGroupAddedCount": "تمت إضافة المجموعات ({{count}}).",
   "RoomGroupRemove": "تمت إزالة المجموعة",
   "RoomIndexExportLocation": "تم حفظ تصدير فهرس الغرفة في {{sectionName}}",
+  "RoomIndexingDisabled": "تفعيل الفهرسة التلقائية للملفات معطل في الغرفة",
   "RoomIndexingEnabled": "تم تفعيل الفهرسة التلقائية للملفات في الغرفة",
   "RoomInviteResend": "تم إرسال الدعوات مرة أخرى:",
   "RoomLifeTimeDisabled": "تم تعطيل صلاحية الملف في الغرفة",
   "RoomLifeTimeSet": "تعيين مدة حياة <1>{{data}}</1> الجميع الملفات في الغرفة",
   "RoomLogoChanged": "تم تغيير الأيقونة",
   "RoomRemoveUser": "تمت إزالة المستخدم.",
+  "RoomRenamed": "Room <1>«{{oldRoomTitle}}»</1> تم تغيير اسمها إلى <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "انظر تفاصيل الغرف هنا",
   "RoomUnarchived": "تم استعادة الغرفة من الأرشيف",
   "RoomUpdateAccess": "تم تعيين الوظيفة",
@@ -94,7 +96,5 @@
   "SubmenuHistory": "التاريخ",
   "UserFileUpdated": "تم تحديث الملف.",
   "Users": "المستخدمين",
-  "Versions": "إصدارات",
-  "RoomIndexingDisabled": "تفعيل الفهرسة التلقائية للملفات معطل في الغرفة",
-  "RoomRenamed": "Room <1>«{{oldRoomTitle}}»</1> تم تغيير اسمها إلى <2>«{{roomTitle}}»</2>"
+  "Versions": "إصدارات"
 }

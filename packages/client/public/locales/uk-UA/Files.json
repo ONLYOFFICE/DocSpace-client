@@ -40,6 +40,7 @@
   "CreateNewFolderInStorage": "Створити нову папку в сховищі",
   "CreateNewLink": "Створити нове посилання",
   "CreateTemplate": "Створити шаблон",
+  "CustomFilterDisable": "Вимкнути користувацький фільтр",
   "CustomFilterDisabled": "Спеціальний фільтр для обраного файлу вимкнено",
   "CustomFilterEnable": "Увімкнути спеціальний фільтр",
   "CustomFilterEnabled": "Спеціальний фільтр для обраного файлу увімкнено",
@@ -240,6 +241,5 @@
   "WillBeDeletedPermanently": "{{date}} буде видалено назавжди",
   "WillBeMovedToTrash": "{{date}} буде переміщено до Кошика",
   "YouLeftTheRoom": "Ви залишили кімнату",
-  "YourUserTypeHasChanged": "Ваш тип користувача змінено на <1>«{{userType}}»</1> адміністратором {{productName}} <1>{{adminName}}</1>.",
-  "CustomFilterDisable": "Вимкнути користувацький фільтр"
+  "YourUserTypeHasChanged": "Ваш тип користувача змінено на <1>«{{userType}}»</1> адміністратором {{productName}} <1>{{adminName}}</1>."
 }

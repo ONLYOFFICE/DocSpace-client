@@ -1,4 +1,5 @@
 {
+  "DocumentConverted": "ເອກະສານຖືກປ່ຽນເປັນ {{title}} ເພື່ອໃຫ້ສາມາດດັດປ່ຽນໄດ້",
   "DocumentsFileType": "ເອກະສານ",
   "ErrorConnectionLost": "ການເຊື່ອມຕໍ່ຫາຍໄປ",
   "FileLocation": "ເປີດບ່ອນຕຳແໜ່ງເອກະສານ",
@@ -7,6 +8,5 @@
   "MailMergeFileType": "ກະລຸນາເລືືອກໄຟລ໌ເປັນ .XLSX",
   "OpenSavedDocument": "ເປີດເອກະສານທີ່ບັນທືກໄວ້ໃນແຖບໃໝ່",
   "SelectFilesType": "ກະລຸນາເລືອກປະເພດໄຟລ໌ {{fileType}}",
-  "UsersWithoutAccess": "ຜູ້​ໃຊ້​ບາງ​ຄົນ​ທີ່​ທ່ານ​ຕ້ອງ​ການ​ກ່າວ​ເຖິງ​ບໍ່​ມີ​ການ​ເຂົ້າ​ເຖິງ​ຫ້ອງ: {{users}}",
-  "DocumentConverted": "ເອກະສານຖືກປ່ຽນເປັນ {{title}} ເພື່ອໃຫ້ສາມາດດັດປ່ຽນໄດ້"
+  "UsersWithoutAccess": "ຜູ້​ໃຊ້​ບາງ​ຄົນ​ທີ່​ທ່ານ​ຕ້ອງ​ການ​ກ່າວ​ເຖິງ​ບໍ່​ມີ​ການ​ເຂົ້າ​ເຖິງ​ຫ້ອງ: {{users}}"
 }

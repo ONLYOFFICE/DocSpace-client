@@ -8,6 +8,9 @@
   "LoginWithAccountNotFound": "ບໍ່ສາມາດຊອກຫາບັນຊີພາກສ່ວນທີສາມທີ່ກ່ຽວຂ້ອງໄດ້. ທ່ານຈໍາເປັນຕ້ອງເຊື່ອມຕໍ່ບັນຊີເຄືອຂ່າຍສັງຄົມອອນລາຍຂອງທ່ານຢູ່ໃນຫນ້າແກ້ໄຂໂປຣໄຟລ໌ກ່ອນ.",
   "LoginWithBruteForce": "ການອະນຸຍາດຖືກບລັອກຊົ່ວຄາວ",
   "LoginWithBruteForceCaptcha": "ຢືນຢັນວ່າເຈົ້າບໍ່ແມ່ນຫຸ່ນຍົນ",
+  "OAuthApplicationDisabled": "ຄໍາຮ້ອງສະຫມັກນີ້ຖືກປິດງານແລ້ວ",
+  "OAuthApplicationEmpty": "ຄໍາຮ້ອງສະຫມັກບໍ່ພົບ",
+  "OAuthClientEmpty": "ບໍ່ພົບ ID ຂອງລູກຄ້າ",
   "RecaptchaInvalid": "Recaptcha ບໍ່ຖືກຕ້ອງ",
   "SsoAttributesNotFound": "ການກວດສອບບໍ່ສຳເລັດ (ບໍ່ພົບຄຸນສົມບັດການຢືນຢັນ)",
   "SsoAuthFailed": "ການພິສູດຢືນຢັນຕົວວຕົນລົ້ມເຫລວ",
@@ -16,8 +19,5 @@
   "SsoSettingsDisabled": "ການເຂົ້າສູ່ລະບົບແບບເອກະພົດຖືກປິດໃຊ້ງານ",
   "SsoSettingsEmptyToken": "ບໍ່ພົບໂທເຄັນການພິສູດຢືນຢັນຕົວຕົນ",
   "SsoSettingsNotValidToken": "ໂທເຄັນການພິສູດຢືນຢັນຕົວຕົນບໍ່ຖືກຕ້ອງ",
-  "SsoSettingsUserTerminated": "ຜູ້ໃຊ້ນີ້ຖືກປິດໃຊ້ງານ",
-  "OAuthApplicationDisabled": "ຄໍາຮ້ອງສະຫມັກນີ້ຖືກປິດງານແລ້ວ",
-  "OAuthApplicationEmpty": "ຄໍາຮ້ອງສະຫມັກບໍ່ພົບ",
-  "OAuthClientEmpty": "ບໍ່ພົບ ID ຂອງລູກຄ້າ"
+  "SsoSettingsUserTerminated": "ຜູ້ໃຊ້ນີ້ຖືກປິດໃຊ້ງານ"
 }

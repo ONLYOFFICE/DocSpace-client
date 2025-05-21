@@ -1,6 +1,4 @@
 {
-  "LdapConnectionTypeSSL": "SSL",
-  "LdapConnectionTypeStartTls": "StartTLS",
   "LdapAddCertificateToStoreConfirmation": "ທ່ານຕ້ອງການເພີ່ມໃບຢັ້ງຢືນນີ້ເຂົ້າໃນບ່ອນເກັບໃບຢັ້ງຢືນ ແລະ ດໍາເນີນການນໍາເຂົ້າຜູ້ໃຊ້ຕໍ່ບໍ?",
   "LdapAdvancedSettings": "ການຕັ້ງຄ່າ​ເພີ່ມເຕີມ",
   "LdapAdvancedSettingsTooltip": "ເລືອກຄຸນລັກສະນະຂອງຜູ້ໃຊ້ທີ່ທ່ານຕ້ອງການໃຫ້ຊິງໂຄນກັບເຄື່ອງແມ່ຂ່າຍ LDAP ຂອງທ່ານ។",
@@ -11,7 +9,9 @@
   "LdapAvatar": "ຮູບໂປຣໄຟລ໌",
   "LdapCertificateConfirm": "ກວດຢັ້ງຢືນໃບຮັບຮອງ",
   "LdapConnectionType": "ປະເພດການເຊື່ອມຕໍ່",
+  "LdapConnectionTypeSSL": "SSL",
   "LdapConnectionTypeSSLTooltip": "ທ່ານສາມາດເຮັດໃຫ້ການຈະລາຈອນ LDAP ລັບ ແລະປອດໄພໄດ້ໂດຍການໃຊ້ Secure Sockets Layer (SSL)",
+  "LdapConnectionTypeStartTls": "StartTLS",
   "LdapConnectionTypeStartTlsTooltip": "StartTLS ໃຫ້ວິທີການຍົກລະດັບເຊື່ອມຕໍ່ຂໍ້ຄວາມຊາບັດໃຫ້ເປັນການເຊື່ອມຕໍ່ທີ່เข้ารຫັດ (TLS ຫຼື SSL) ແທນທີ່ຈະໃຊ້ພອດທີ່ແບ່ງກັນສໍາລັບການສື່ສານທີ່เข้ารຫັດ.",
   "LdapConnectionTypeUnencrypted": "ການສື່ສານທີ່ບໍ່ໄດ້ເຂົ້າລະຫັດ",
   "LdapDisclaimer": "ກະລຸນາສືນໍ້າໃຈໃສ່: ທີ່ຢູ່ອີເມລ໌ຂອງຜູ້ໃຊ້ພອດທະບານຈະຖືກເອົາຈາກການຕັ້ງຄ່າ 'Mail Attribute'. ຖ້າມັນບໍ່ມີ, ມັນຈະຖືກສ້າງຕັ້ງຂຶ້ນໃນວິທີການຕໍ່ໄປນີ້: 'Login Attribute + @ + LDAP Domain'. ຖ້າມື້ນອກຈາກນັ້ນອີເມລ໌ເຊັ່ນນີ້ບໍ່ມີຢູ່, ຜູ້ໃຊ້ມືໍ່ໄດ້ຮັບການແຈ້ງເຕືອນຈາກພອດທະບານໃດໆ.",

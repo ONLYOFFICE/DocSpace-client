@@ -40,6 +40,7 @@
   "CreateNewFolderInStorage": "Tạo một thư mục mới trong lưu trữ",
   "CreateNewLink": "Tạo liên kết mới",
   "CreateTemplate": "Tạo mẫu",
+  "CustomFilterDisable": "Vô hiệu hóa bộ lọc tùy chỉnh",
   "CustomFilterDisabled": "Bộ lọc tùy chỉnh cho tệp đã chọn đã tắt",
   "CustomFilterEnable": "Bật Bộ lọc tùy chỉnh",
   "CustomFilterEnabled": "Bộ lọc tùy chỉnh cho tệp đã chọn đã bật",
@@ -240,6 +241,5 @@
   "WillBeDeletedPermanently": "{{date}} sẽ bị xóa vĩnh viễn",
   "WillBeMovedToTrash": "{{date}} sẽ được chuyển vào Thùng rác",
   "YouLeftTheRoom": "Bạn đã rời khỏi phòng",
-  "YourUserTypeHasChanged": "Loại người dùng của bạn đã được quản trị viên <1>{{adminName}}</1> của {{productName}} thay đổi thành <1>“{{userType}}”</1>.",
-  "CustomFilterDisable": "Vô hiệu hóa bộ lọc tùy chỉnh"
+  "YourUserTypeHasChanged": "Loại người dùng của bạn đã được quản trị viên <1>{{adminName}}</1> của {{productName}} thay đổi thành <1>“{{userType}}”</1>."
 }

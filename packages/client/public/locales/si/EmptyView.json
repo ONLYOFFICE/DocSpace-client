@@ -1,5 +1,4 @@
 {
-  "SectionsUploadDescription": "{{sectionNameFirst}} හෝ {{sectionNameSecond}} වෙතින් ඕනෑම වර්ගයේ ගොනු උඩුගත කරන්න.",
   "CollaborationRoomEmptyTitle": "ආදරයෙන් පිළිගන්නවා, සහයෝගිතා පරියේෂයට!",
   "CollaboratorEmptyTitle": "කාමරය හිස් ය.",
   "CreateDocument": "නව ලේඛනයක් සාදන්න",
@@ -36,6 +35,7 @@
   "MigrationDataDescription": "ඔබගේ {{productName}} වෙත {{organizationName}} Workspace, Google Workspace, හෝ Nextcloud වෙතින් දත්ත ආනයනය කරන්න.",
   "MigrationDataTitle": "පාරිභාෂික දත්ත",
   "PublicRoomEmptyTitle": "ජන කාමරයට සාදරයෙන් පිළිගන්නවා!",
+  "SectionsUploadDescription": "{{sectionNameFirst}} හෝ {{sectionNameSecond}} වෙතින් ඕනෑම වර්ගයේ ගොනු උඩුගත කරන්න.",
   "SendInvitationLetter": "ප්‍රවේශ ද්වාරයට නව සාමාජිකයන් එක් කිරීම සඳහා ආරාධනා ලිමක් එවන්න.",
   "ShareOptionDescription": "පොදු ප්‍රවේශ සම්බන්ධතාවයක් පිටපත් කරන්න හෝ ආකෘතිය පිරවීම ආරම්භ කිරීමට අනෙකුත් පරිශීලකයින්ව කාමරයට ආමන්ත්‍රණය කරන්න.",
   "ShareOptionTitle": "කාමරයක් බෙදාගන්න",

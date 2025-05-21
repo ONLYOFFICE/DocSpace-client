@@ -40,6 +40,7 @@
   "CreateNewFolderInStorage": "스토리지에 새 폴더 생성",
   "CreateNewLink": "새 링크 생성",
   "CreateTemplate": "템플릿 생성",
+  "CustomFilterDisable": "사용자 지정 필터 사용 안 함",
   "CustomFilterDisabled": "선택한 파일에 대한 사용자 지정 필터 비활성화됨",
   "CustomFilterEnable": "사용자 지정 필터 활성화",
   "CustomFilterEnabled": "선택한 파일에 대한 사용자 지정 필터 활성화됨",
@@ -240,6 +241,5 @@
   "WillBeDeletedPermanently": "{{date}}이 영구적으로 삭제됩니다",
   "WillBeMovedToTrash": "{{date}}이 휴지통으로 이동됩니다",
   "YouLeftTheRoom": "방을 나왔습니다",
-  "YourUserTypeHasChanged": "사용자 유형이 {{productName}} 관리자 <1>{{adminName}}</1>님에 의해 <1>“{{userType}}”</1>(으)로 변경되었습니다.",
-  "CustomFilterDisable": "사용자 지정 필터 사용 안 함"
+  "YourUserTypeHasChanged": "사용자 유형이 {{productName}} 관리자 <1>{{adminName}}</1>님에 의해 <1>“{{userType}}”</1>(으)로 변경되었습니다."
 }

@@ -40,6 +40,7 @@
   "CreateNewFolderInStorage": "Depolama alanında yeni bir klasör oluştur",
   "CreateNewLink": "Yeni bağlantı oluştur",
   "CreateTemplate": "Şablon oluştur",
+  "CustomFilterDisable": "Özel filtreyi devre dışı bırak",
   "CustomFilterDisabled": "Seçili dosya için Özel Filtre devre dışı",
   "CustomFilterEnable": "Özel Filtre'yi etkinleştir",
   "CustomFilterEnabled": "Seçili dosya için Özel Filtre etkin",
@@ -240,6 +241,5 @@
   "WillBeDeletedPermanently": "{{date}} kalıcı olarak silinecek",
   "WillBeMovedToTrash": "{{date}} Çöp Kutusuna taşınacak",
   "YouLeftTheRoom": "Odadan ayrıldınız",
-  "YourUserTypeHasChanged": "Kullanıcı türünüz, {{productName}} yöneticisi <1>{{adminName}}</1> tarafından <1>“{{userType}}”</1> olarak değiştirildi.",
-  "CustomFilterDisable": "Özel filtreyi devre dışı bırak"
+  "YourUserTypeHasChanged": "Kullanıcı türünüz, {{productName}} yöneticisi <1>{{adminName}}</1> tarafından <1>“{{userType}}”</1> olarak değiştirildi."
 }

@@ -1,5 +1,6 @@
 {
   "ConversionMessage": "ເອກະສານທັງໝົດທີ່ທ່ານອັບໂຫລດຈະຖືກປ່ຽນເປັນຮູບແບບ Office Open XML (docx, xlsx ຫຼື pptx) ເພື່ອໃຫ້ແກ້ໄຂໄວຂື້ນ.",
+  "ConversionXmlMessage": "ເອກະສານທີ່ທ່ານເປີດຈະຖືກປ່ຽນເປັນຮູບແບບ Office Open XML (docx ຫຼື xlsx) ເພື່ອຄວາມສະຫງ່າງາມໃນການເບິ່ງແລະການແກ້ໄຂໃຫ້ໄວຂຶ້ນ.",
   "ConvertedFileDestination": "ສຳເນົາໄຟລ໌ຈະຖືກສ້າງຢູ່ໃນໂຟນເດີ <strong>{{folderTitle}}</strong>.",
   "DocumentConversionTitle": "ການແປງເອກະສານ",
   "FailedToConvert": "ລົ້ມເຫລວໃນການແປງ",
@@ -8,6 +9,5 @@
   "InfoCreateFileIn": "ໄຟລ໌ '{{fileTitle}}' ໃໝ່ຖືກສ້າງຂື້ນໃນ '{{folderTitle}}'",
   "OpenFileMessage": "ໄຟລ໌ເອກະສານທີ່ທ່ານເປີດຈະຖືກປ່ຽນເປັນຮູບແບບ Office Open XML ສໍາລັບການເບິ່ງ ແລະແກ້ໄຂໄດ້ໄວ.",
   "SaveOriginalFormatMessage": "ບັນທຶກໄຟລ໌ສຳເນົາໃນຮູບແບບຕົ້ນສະບັບ",
-  "ConversionXmlMessage": "ເອກະສານທີ່ທ່ານເປີດຈະຖືກປ່ຽນເປັນຮູບແບບ Office Open XML (docx ຫຼື xlsx) ເພື່ອຄວາມສະຫງ່າງາມໃນການເບິ່ງແລະການແກ້ໄຂໃຫ້ໄວຂຶ້ນ.",
   "SelectFileType": "ກະລຸນາເລືອກປະເພດ​ເອກະສານ:"
 }

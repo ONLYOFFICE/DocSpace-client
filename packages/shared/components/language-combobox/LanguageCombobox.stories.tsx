@@ -50,7 +50,15 @@ export default {
   },
 } as Meta;
 
-const Template: Story<ComboboxProps> = (args) => <LanguageCombobox {...args} />;
+const Wrapper = ({ children }: { children: React.ReactNode }) => {
+  return <div style={{ height: "280px" }}>{children}</div>;
+};
+
+const Template: Story<ComboboxProps> = (args) => (
+  <Wrapper>
+    <LanguageCombobox {...args} />
+  </Wrapper>
+);
 
 export const Default = Template.bind({});
 Default.args = {
@@ -60,12 +68,16 @@ Default.args = {
   className: "custom-class",
   withBorder: true,
   isMobileView: false,
+  directionY: "bottom",
+  fixedDirection: true,
+  isDefaultMode: false,
 };
 
 export const MobileView = Template.bind({});
 MobileView.args = {
   ...Default.args,
   isMobileView: true,
+  manualWidth: "200px",
 };
 
 export const WithoutBorder = Template.bind({});

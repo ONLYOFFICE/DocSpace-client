@@ -119,22 +119,23 @@ const TranslationTableCell: React.FC<TranslationTableCellProps> = ({
               </button>
             )}
           </div>
-          {lang !== "en" && !isApproved(lang) && (
+          {lang !== "en" && (
             <div className="flex space-x-1 items-center">
-              {ollamaConnected && (
-                <button
-                  onClick={() => handleTranslate(currentEntry?.path, lang)}
-                  disabled={
-                    translating || isTranslating(currentEntry?.path, lang)
-                  }
-                  className="ml-2 text-xs btn btn-secondary py-0 px-2"
-                  title="Translate using Ollama"
-                >
-                  {isTranslating(currentEntry?.path, lang)
-                    ? "Translating..."
-                    : "AI"}
-                </button>
-              )}
+              {ollamaConnected &&
+                (!currentEntry?.translations[lang] || !isApproved(lang)) && (
+                  <button
+                    onClick={() => handleTranslate(currentEntry?.path, lang)}
+                    disabled={
+                      translating || isTranslating(currentEntry?.path, lang)
+                    }
+                    className="ml-2 text-xs btn btn-secondary py-0 px-2"
+                    title="Translate using Ollama"
+                  >
+                    {isTranslating(currentEntry?.path, lang)
+                      ? "Translating..."
+                      : "AI"}
+                  </button>
+                )}
               {currentEntry?.translations[lang] && (
                 <button
                   onClick={() => {

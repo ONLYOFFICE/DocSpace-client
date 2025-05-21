@@ -189,11 +189,6 @@ const ArticleBodyContent = (props) => {
 
       const isAccountsClick = folderId === "accounts";
 
-      const withTimer = isAccountsClick
-        ? window.location.pathname.includes("accounts") &&
-          !window.location.pathname.includes("groups")
-        : !!selectedFolderId;
-
       if (isAccountsClick) {
         clearFiles();
         setContactsTab("people");
@@ -205,7 +200,7 @@ const ArticleBodyContent = (props) => {
 
       setSelection?.([]);
 
-      setIsLoading(true, withTimer);
+      setIsLoading(true, true);
 
       if (currentDeviceType === DeviceType.mobile) {
         toggleArticleOpen();

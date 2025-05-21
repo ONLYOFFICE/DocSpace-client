@@ -33,7 +33,6 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import { EmptyServerErrorContainer } from "SRC_DIR/components/EmptyContainer/EmptyServerErrorContainer";
 
 import { OAuthContainer } from "./OAuth.styled";
 import { OAuthProps } from "./OAuth.types";
@@ -131,10 +130,6 @@ const OAuth = ({
     setDocumentTitle(t("OAuth"));
   }, [t]);
 
-  if (error) {
-    return <EmptyServerErrorContainer />;
-  }
-
   return (
     <OAuthContainer>
       {/* {false ? (
@@ -149,9 +144,8 @@ const OAuth = ({
         apiOAuthLink={apiOAuthLink}
         logoText={logoText}
         isLoading={isLoading}
+        isError={!!error}
       />
-      {/* )} */}
-
       {infoDialogVisible ? <InfoDialog visible={infoDialogVisible} /> : null}
       {disableDialogVisible ? <DisableDialog /> : null}
       {previewDialogVisible ? (

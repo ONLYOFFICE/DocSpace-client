@@ -36,6 +36,12 @@ jest.mock("../../../hooks/useResponsiveNavigation", () => ({
   useResponsiveNavigation: jest.fn(),
 }));
 
+jest.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+  }),
+}));
+
 const defaultProps = {
   t: (key: string) => key,
   isSettingPaid: true,
@@ -56,9 +62,7 @@ describe("<AdditionalResources />", () => {
   it("renders without error", () => {
     renderWithTheme(<AdditionalResources {...defaultProps} />);
 
-    expect(
-      screen.getByText("Settings:AdditionalResources"),
-    ).toBeInTheDocument();
+    expect(screen.getByText("AdditionalResources")).toBeInTheDocument();
     expect(screen.getByText("ShowFeedbackAndSupport")).toBeInTheDocument();
     expect(screen.getByText("ShowHelpCenter")).toBeInTheDocument();
   });

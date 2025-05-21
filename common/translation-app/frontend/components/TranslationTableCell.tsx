@@ -53,7 +53,7 @@ const TranslationTableCell: React.FC<TranslationTableCellProps> = ({
 
   // Check if a language translation is approved
   const isApproved = (language: string): boolean => {
-    return metadata?.languages?.[language]?.approved_at !== null;
+    return !!metadata?.languages?.[language]?.approved_at;
   };
 
   return (

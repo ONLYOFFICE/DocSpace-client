@@ -51,7 +51,7 @@ const TranslationTableRow: React.FC<TranslationTableRowProps> = ({
 
   // Check if a language translation is approved
   const isApproved = (language: string): boolean => {
-    return metadata?.languages?.[language]?.approved_at !== null;
+    return !!metadata?.languages?.[language]?.approved_at;
   };
 
   // Check if a language is currently being approved/unapproved

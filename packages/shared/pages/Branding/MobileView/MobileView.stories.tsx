@@ -28,6 +28,8 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 
+import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDecorator";
+
 import { MobileView } from ".";
 
 const meta = {
@@ -41,6 +43,7 @@ const meta = {
     },
   },
   tags: ["autodocs"],
+  decorators: [i18nextStoryDecorator],
 } satisfies Meta<typeof MobileView>;
 
 export default meta;

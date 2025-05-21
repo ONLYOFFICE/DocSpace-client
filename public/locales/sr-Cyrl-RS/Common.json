@@ -715,5 +715,6 @@
   "Yes": "Да",
   "Yesterday": "Јуче",
   "You": "Ви",
-  "YourTurn": "Ваш ред"
+  "YourTurn": "Ваш ред",
+  "MobileStartFillingPdfNotAvailableInfo": ""
 }

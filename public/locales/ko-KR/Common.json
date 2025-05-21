@@ -715,5 +715,8 @@
   "Yes": "네",
   "Yesterday": "어제",
   "You": "나",
-  "YourTurn": "고객님의 차례입니다"
+  "YourTurn": "고객님의 차례입니다",
+  "BlockFile": "블록",
+  "MobileStartFillingPdfNotAvailableInfo": "지원되지 않는 작업입니다. PDF 양식을 작성하려면 데스크톱 모드로 전환하십시오.",
+  "UnblockFile": "차단 해제"
 }

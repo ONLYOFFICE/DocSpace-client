@@ -715,5 +715,8 @@
   "Yes": "Ναι",
   "Yesterday": "Χθες",
   "You": "Εσείς",
-  "YourTurn": "Η σειρά σας"
+  "YourTurn": "Η σειρά σας",
+  "BlockFile": "Μπλοκ",
+  "MobileStartFillingPdfNotAvailableInfo": "Μη υποστηριζόμενη ενέργεια. Παρακαλώ μεταβείτε στην επιφάνεια εργασίας για να συμπληρώσετε φόρμες PDF.",
+  "UnblockFile": "Ξεμπλόκαρε"
 }

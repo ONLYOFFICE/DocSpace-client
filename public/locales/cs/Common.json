@@ -715,5 +715,8 @@
   "Yes": "Ano",
   "Yesterday": "Včera",
   "You": "Vy",
-  "YourTurn": "Jste na řadě"
+  "YourTurn": "Jste na řadě",
+  "BlockFile": "Blokovat",
+  "MobileStartFillingPdfNotAvailableInfo": "Nepodporovaná akce. Přejděte do režimu stolního počítače pro vyplňování formulářů PDF.",
+  "UnblockFile": "Odblokovat"
 }

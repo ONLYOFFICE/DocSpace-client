@@ -715,5 +715,8 @@
   "Yes": "Так",
   "Yesterday": "Вчора",
   "You": "Ви",
-  "YourTurn": "Ваша черга"
+  "YourTurn": "Ваша черга",
+  "BlockFile": "Блокувати",
+  "MobileStartFillingPdfNotAvailableInfo": "Непідтримувана дія. Будь ласка, перейдіть у режим настільного комп’ютера, щоб заповнювати форми PDF.",
+  "UnblockFile": "Розблокувати"
 }

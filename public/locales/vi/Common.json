@@ -715,5 +715,8 @@
   "Yes": "Có",
   "Yesterday": "Hôm qua",
   "You": "Bạn",
-  "YourTurn": "Phiên của bạn"
+  "YourTurn": "Phiên của bạn",
+  "BlockFile": "Chặn",
+  "MobileStartFillingPdfNotAvailableInfo": "Hành động không được hỗ trợ. Vui lòng chuyển sang chế độ desktop để điền vào các biểu mẫu PDF.",
+  "UnblockFile": "Khôi phục"
 }

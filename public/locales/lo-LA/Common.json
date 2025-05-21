@@ -715,5 +715,8 @@
   "Yes": "ຍາ",
   "Yesterday": "ມື້ວານນີ້",
   "You": "ເຈົ້າ",
-  "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ"
+  "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ",
+  "BlockFile": "ບລອກ",
+  "MobileStartFillingPdfNotAvailableInfo": "ການກະທຳແບບນີ້ບໍ່ສາມາດສະຫຼັບໄດ້ ກະລຸນາປ່ຽນເປັນໂໝດຄອມພິວເຕີ້ເພື່ອຕື່ມແບບຟອມ PDF ໄດ້។",
+  "UnblockFile": "ປົດລອກ"
 }

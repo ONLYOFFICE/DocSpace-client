@@ -715,5 +715,8 @@
   "Yes": "Da",
   "Yesterday": "Včeraj",
   "You": "Vi",
-  "YourTurn": "Vi ste na vrsti"
+  "YourTurn": "Vi ste na vrsti",
+  "BlockFile": "Blokiraj",
+  "MobileStartFillingPdfNotAvailableInfo": "Neuspešna izvedba dejanja. Za izpolnjevanje obrazcev PDF preklopite na namizni način.",
+  "UnblockFile": "Odpri"
 }

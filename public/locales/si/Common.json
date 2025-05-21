@@ -715,5 +715,8 @@
   "Yes": "ඔව්",
   "Yesterday": "ඊයේ",
   "You": "ඔබ",
-  "YourTurn": "ඔබේ වාරය."
+  "YourTurn": "ඔබේ වාරය.",
+  "BlockFile": "ලිහිණිය",
+  "MobileStartFillingPdfNotAvailableInfo": "ක්‍රියාව අනුග්‍රහණය කරන්නේ නැහැ. PDF පෝරම් පිරවීමට ඩෙස්ක්ටොප් පරිසරයට මාරු කරන්න.",
+  "UnblockFile": "අනවහිර කරන්න"
 }

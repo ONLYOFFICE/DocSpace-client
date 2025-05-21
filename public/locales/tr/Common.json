@@ -715,5 +715,8 @@
   "Yes": "Evet",
   "Yesterday": "Dün",
   "You": "Siz",
-  "YourTurn": "Sıra sizde"
+  "YourTurn": "Sıra sizde",
+  "BlockFile": "Blok",
+  "MobileStartFillingPdfNotAvailableInfo": "Desteklenmeyen işlem. Lütfen PDF formlarını doldurmak için masaüstü moduna geçin.",
+  "UnblockFile": "Engellemeyi Kaldır"
 }

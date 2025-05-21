@@ -715,5 +715,8 @@
   "Yes": "Tak",
   "Yesterday": "Wczoraj",
   "You": "Ty",
-  "YourTurn": "Twoja kolej"
+  "YourTurn": "Twoja kolej",
+  "BlockFile": "Zablokować",
+  "MobileStartFillingPdfNotAvailableInfo": "Nieobsługiwane działanie. Aby wypełniać formularze PDF, przejdź do trybu desktopowego.",
+  "UnblockFile": "Odblokuj"
 }

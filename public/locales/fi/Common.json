@@ -715,5 +715,8 @@
   "Yes": "Kyllä",
   "Yesterday": "Eilen",
   "You": "Sinä",
-  "YourTurn": "Sinun vuorosi"
+  "YourTurn": "Sinun vuorosi",
+  "BlockFile": "Lohko",
+  "MobileStartFillingPdfNotAvailableInfo": "Tuntematon toiminto. Ole hyvä ja vaihda työpöytätilaan täyttääksesi PDF-lomakkeet.",
+  "UnblockFile": "Avaa tukos"
 }

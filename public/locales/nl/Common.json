@@ -715,5 +715,8 @@
   "Yes": "Ja",
   "Yesterday": "Gisteren",
   "You": "U",
-  "YourTurn": "Uw beurt"
+  "YourTurn": "Uw beurt",
+  "BlockFile": "Blok",
+  "MobileStartFillingPdfNotAvailableInfo": "Onondersteunde actie. Schakel over naar de desktopmodus om PDF-formulieren in te vullen.",
+  "UnblockFile": "Ontgrendelen"
 }

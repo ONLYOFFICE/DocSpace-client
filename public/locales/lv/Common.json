@@ -715,5 +715,8 @@
   "Yes": "Jā",
   "Yesterday": "어제",
   "You": "Jūs",
-  "YourTurn": "Jūsu kārta"
+  "YourTurn": "Jūsu kārta",
+  "BlockFile": "Bloķēt",
+  "MobileStartFillingPdfNotAvailableInfo": "Atbalstīts rīcības veids nav pieejams. Lūdzu, pārslēdzieties uz darbvietas režīmu, lai aizpildītu PDF veidlapas.",
+  "UnblockFile": "Atbloķēt"
 }

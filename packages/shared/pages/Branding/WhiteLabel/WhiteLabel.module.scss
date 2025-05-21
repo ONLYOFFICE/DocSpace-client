@@ -1,0 +1,316 @@
+@use "../../../styles/mixins";
+@use "../../../styles/common-input-styles";
+@use "../../../styles/common-icons-style";
+@use "../../../styles/variables";
+
+.header {
+  .headerContainer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    @include mixins.mobile {
+      display: none;
+    }
+  }
+
+  .wlSubtitle {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    line-height: 20px;
+    color: var(--settings-common-description-color);
+
+    @include mixins.mobile {
+      margin-top: 0;
+    }
+  }
+
+  .wlHelper {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+
+    .wlHelperLabel > div {
+      display: inline-flex;
+      margin: 0 4px;
+    }
+  }
+
+  .paidBadge {
+    cursor: auto;
+    background-color: var(--settings-common-white-label-paid-badge-bg);
+  }
+
+  @include mixins.mobile {
+    .headerContainer {
+      display: none;
+    }
+  }
+
+  .fieldLabelIcon {
+    margin-top: 4px;
+    margin-bottom: 16px;
+  }
+}
+
+.whiteLabelInput {
+  max-width: 350px;
+  display: flex;
+  border: var(--files-panels-invite-border);
+  border-radius: 3px;
+
+  .inputLink {
+    height: 32px;
+    border: 0;
+
+    > input {
+      height: 30px;
+    }
+  }
+
+  .copyLinkIcon {
+    padding: 0;
+  }
+
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-results-button,
+  input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .append {
+    display: none;
+    align-items: center;
+    padding-inline-end: 8px;
+    cursor: default;
+  }
+
+  &.showCross .append {
+    display: flex;
+  }
+
+  @include common-input-styles.common-input-styles;
+
+  &:focus-within {
+    border-color: var(--input-block-border-color);
+  }
+}
+
+.crossIcon {
+  @include common-icons-style.common-icons-style;
+  path {
+    fill: var(--files-editing-wrapper-fill) !important;
+  }
+}
+
+.notAvailableWrapper {
+  background: var(--settings-common-white-label-not-available-background);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+
+  .lockIcon {
+    width: 16px;
+    height: 16px;
+
+    div > svg {
+      path {
+        fill: var(--settings-common-white-label-text-color);
+      }
+    }
+  }
+}
+
+.whiteLabelWrapper {
+  .generateLogo {
+    margin-top: 16px;
+    margin-bottom: 24px;
+    width: fit-content !important;
+  }
+
+  .subtitle {
+    margin-bottom: 20px;
+    color: var(--settings-common-description-color);
+  }
+
+  .input {
+    max-width: 350px;
+
+    @include mixins.mobile {
+      max-width: 100%;
+    }
+  }
+
+  .logosContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    @include mixins.mobile {
+      margin-bottom: 64px;
+    }
+  }
+
+  .logoWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .logosWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 20px;
+
+    @include mixins.mobile {
+      flex-direction: column;
+    }
+  }
+
+  .logosLoginWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .logosEditorWrapper {
+    display: grid;
+    grid-gap: 16px;
+    margin-bottom: 8px;
+
+    @include mixins.mobile {
+      display: flex;
+      gap: 8px;
+      flex-direction: column;
+    }
+  }
+
+  .logosEditorContainer,
+  .editorHeaderContainer {
+    display: flex;
+    flex-direction: column;
+    width: 310px;
+  }
+
+  .editorLogoHeader {
+    border: none !important;
+    background-color: transparent !important;
+    position: absolute;
+  }
+
+  .editorHeaderContainer {
+    position: relative;
+  }
+
+  .logoItem {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .borderImg {
+    border: var(--client-settings-common-white-label-border-img);
+    box-sizing: content-box;
+  }
+
+  .logoHeader {
+    width: 211px;
+    height: 24px;
+    padding: 22px 20px;
+  }
+
+  .logoCompact {
+    width: 28px;
+    height: 28px;
+    padding: 15px;
+  }
+
+  .logoBig {
+    width: 384px;
+    height: 42px;
+    padding: 12px 20px;
+
+    @include mixins.mobile {
+      width: 310px;
+      height: 35px;
+    }
+  }
+
+  .logoAbout {
+    width: 211px;
+    height: 24px;
+    padding: 12px 20px;
+  }
+
+  .logoFavicon {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 5px;
+  }
+
+  .logoDocsEditor {
+    width: 86px;
+    height: 20px;
+    padding: 0;
+    padding-right: 224px;
+  }
+
+  .logoEmbeddedEditor {
+    width: 86px;
+    height: 20px;
+    left: 0;
+    padding: 0;
+    margin-bottom: 8px;
+  }
+
+  .backgroundGreen {
+    background-color: variables.$editor-green-color;
+  }
+
+  .backgroundBlue {
+    background-color: variables.$editor-blue-color;
+  }
+
+  .backgroundOrange {
+    background-color: variables.$editor-orange-color;
+  }
+
+  .backgroundRed {
+    background-color: variables.$editor-red-color;
+  }
+
+  .backgroundLight {
+    background-color: variables.$gray-light;
+  }
+
+  .backgroundDark {
+    background-color: variables.$dark-gray-light;
+  }
+
+  .backgroundWhite {
+    background-color: variables.$white;
+  }
+
+  .hidden {
+    display: none;
+  }
+}
+
+.spacer {
+  height: 24px;
+
+  @include mixins.mobile {
+    height: 24px;
+
+    &.showReminder {
+      height: 64px;
+    }
+  }
+}

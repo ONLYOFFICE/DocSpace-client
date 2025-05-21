@@ -24,25 +24,57 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
+import { Meta, StoryObj } from "@storybook/react";
 
-import React from "react";
-import { ReactSVG } from "react-svg";
-import { useTranslation } from "react-i18next";
+import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDecorator";
 
-import { Text } from "../../../components/text";
+import { WhiteLabel } from ".";
+import { mockLogos } from "./mockData";
 
-import styles from "./WhiteLabel.module.scss";
+const meta = {
+  title: "Branding/WhiteLabel",
+  component: WhiteLabel,
+  parameters: {
+    docs: {
+      description: {
+        component: "Settings for customizing logos and white label branding.",
+      },
+    },
+  },
+  tags: ["autodocs"],
+  decorators: [i18nextStoryDecorator],
+} satisfies Meta<typeof WhiteLabel>;
 
-export const NotAvailable = () => {
-  const { t } = useTranslation("Common");
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-  return (
-    <div className={styles.notAvailableWrapper}>
-      <ReactSVG className={styles.lockIcon} src={LockedReactSvgUrl} />
-      <Text fontSize="12px" fontWeight="600">
-        {t("NotAvailableUnderLicense")}
-      </Text>
-    </div>
-  );
+export const Default: Story = {
+  args: {
+    isSettingPaid: true,
+    logoUrls: mockLogos,
+    showAbout: true,
+    showNotAvailable: false,
+    standalone: false,
+    onSave: (data) => console.log("Save clicked with data:", data),
+    onRestoreDefault: () => console.log("Restore default clicked"),
+    isSaving: false,
+    enableRestoreButton: true,
+    setLogoUrls: (logoUrls) => console.log("Logo URLs updated:", logoUrls),
+    isWhiteLabelLoaded: true,
+    defaultWhiteLabelLogoUrls: mockLogos,
+  },
+};
+
+export const Paid: Story = {
+  args: {
+    ...Default.args,
+    isSettingPaid: false,
+  },
+};
+
+export const NotAvailable: Story = {
+  args: {
+    ...Default.args,
+    showNotAvailable: true,
+  },
 };

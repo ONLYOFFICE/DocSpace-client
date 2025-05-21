@@ -3,7 +3,7 @@
   "content": "Select or deselect item",
   "content_en_sha1_hash": "c55dd249fffabde37969cf62f277edca80967e6b",
   "created_at": "2025-05-19T21:30:55.089Z",
-  "updated_at": "2025-05-20T09:40:28.819Z",
+  "updated_at": "2025-05-21T10:24:06.661Z",
   "comment": {
     "text": "This translation key is used to display a label indicating whether an item can be selected or deselected in a hotkey panel. It typically appears as part of a UI component that allows users to toggle an item's selection status. The description should help translators understand the purpose and context of this text, such as in a button or dialog related to item management.",
     "is_auto": true,
@@ -33,25 +33,59 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Elementi seçin və ya seçimi ləğv edin' is a literal translation and doesn't flow naturally in Azerbaijani. 'Select or deselect' is better conveyed with more idiomatic language.",
+          "suggestion": "Consider a more natural phrasing like 'Elementi seçib ləğv et' or 'Elementin seçilməsini/ləğv etməsini düzəldin'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Изберете или премахнете избора на елемент' is overly verbose and literal. 'Remove selection' isn't as concise or natural as alternatives.",
+          "suggestion": "Изберете или премахнете елемента"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'премахнете избора на' is redundant and can be simplified.",
+          "suggestion": "премахнете"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Výběr nebo zrušení výběru položky' is overly verbose. A more concise and natural translation would be preferable.",
+          "suggestion": "Vybrat/Odznotit položku"
+        },
+        {
+          "type": "formatting",
+          "description": "The suggested correction uses a forward slash to indicate two options, which might be misinterpreted as a single action.",
+          "suggestion": "Vybrat nebo odznotit položku"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'abwählen' can be perceived as somewhat colloquial or less formal. While grammatically correct, it might not be the most appropriate tone for a UI element.",
+          "suggestion": "Consider using 'abmarkieren' or 'entfernen' for a more neutral and professional tone. Alternatively, 'deaktivieren' could also work depending on the function."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -81,25 +115,54 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ընտրել կամ ապաընտրել միավորը' is a literal translation and might sound awkward in Armenian. ' միավորը' (miavorə) is a general term and doesn't specifically convey the action of selecting or deselecting a hotkey item. It's not clear which type of 'item' is being referred to.",
+          "suggestion": "Consider a more contextually appropriate translation such as 'Ընտրել կամ չընտրել ձևակերպը' (Enqrəl kam ch’enqrel davakerpə) - 'Select or deselect the configuration' or 'Ընտրել կամ չընտրել կարգավորումը' (Enqrəl kam ch’enqrel kargavorumə) - 'Select or deselect the setting', depending on the UI element it relates to. A simpler option could be 'Ընտրել կամ չընտրել' (Enqrəl kam ch’enqrel) - 'Select or deselect'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Selezionare o deseleziona elemento' is not the most natural or precise translation of 'Select or deselect item'. While technically correct, 'deselezionare' is more common than 'deselezionare' in Italian.",
+          "suggestion": "Selezionare o deselezionare elemento"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"アイテムの選択または選択解除\" is technically correct but slightly verbose and potentially confusing for UI elements. A more concise and natural translation would be preferred.",
+          "suggestion": "アイテムの選択/解除"
+        },
+        {
+          "type": "formatting",
+          "description": "Using a slash '/' instead of 'または' creates a more compact and user-friendly label for a UI element.",
+          "suggestion": "Consider using a slash '/' as a separator for concise UI representation."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"항목 선택 또는 선택 해제\" is a literal translation of 'Select or deselect item'. While understandable, it's not the most natural phrasing in Korean. A more natural translation would convey the meaning of toggling the selection.",
+          "suggestion": "항목 선택/해제"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -111,13 +174,35 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Atlasīt vienumu vai noņemiet atlasi\" is a bit awkward and literal. 'Deselect' is not directly translated well. A more natural phrasing would convey the meaning of toggling the selection.",
+          "suggestion": "Atlasīt vai atcirst vienumu"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses 'vai' which might not be the most suitable conjunction in this context. Consider a more concise connector.",
+          "suggestion": "Atlasīt vienumu vai atcirst"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Dutch translation 'Item selecteren of deselecteren' is a literal translation that isn't natural Dutch. While understandable, it lacks the flow of common phrasing. 'Selecteren' and 'deselecteren' are a bit clunky in this context.",
+          "suggestion": "Consider a more natural phrasing like 'Item aan- of uitkiezen' or 'Item selecteren/deselecteren'."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, using two verbs with 'of' can feel less elegant. Using a slash, as in 'Item selecteren/deselecteren', can improve readability and conciseness.",
+          "suggestion": "Item selecteren/deselecteren"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -147,49 +232,97 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Выделить или снять выделение с объекта\" is a literal translation that doesn't quite capture the intended meaning of 'Select or deselect item'. It sounds overly formal and technical. A more natural Russian equivalent for UI elements would be \"Выбрать или снять выбор\" or \"Выделить/Снять выделение\".",
+          "suggestion": "Выбрать или снять выбор"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"අථකය තෝරන්න හෝ නොතෝරන්න\" doesn't accurately convey the meaning of \"Select or deselect item.\" \"අථකය\" (athakaya) means 'thing' or 'object', which is too general. It doesn't specify 'item' as in a list or panel.",
+          "suggestion": "Consider a translation that more accurately reflects 'item' within the context of a hotkeys panel, such as \"අයිතමය තෝරන්න හෝ නොතෝරන්න\" (aimayama thorenna ho no thorenna) or \"ප්‍රවර්ගය තෝරන්න හෝ නොතෝරන්න\" (prawaṛgya thorenna ho no thorenna)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation \"Vybrať alebo zrušiť výber položky\" is a bit verbose and not a direct equivalent of \"Select or deselect item\". A more concise and natural translation would be better.",
+          "suggestion": "Vybrať alebo zrušiť položku"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Izberi ali počisti izbor predmeta' is too literal and awkward. 'Izbira' can refer to both the act of selecting and the selection itself. Using 'Izberi ali odstrani izbor predmeta' or 'Izberi ali počisti predmet' would be more natural.",
+          "suggestion": "Izberi ali odstrani izbor predmeta"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Одабери или поништи ставку\" is not the most natural or accurate translation of 'Select or deselect item'. While technically correct, it sounds somewhat stiff. 'Одабери' is correct for 'Select,' but 'поништи' is a bit too formal for 'deselect'.",
+          "suggestion": "Consider 'Изабери или укини ставку' or 'Избери или укини ставку'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Odaberi ili poništi stavku\" is understandable, \"Odaberi\" typically translates to \"Select\" and \"poništi\" to \"deselect\". A more accurate translation would convey the nuance of selection and deselection.",
+          "suggestion": "Odaberi ili ukloni stavku"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Öğeyi seç veya seçimi kaldır\" is a literal translation but not the most natural way to express 'Select or deselect item' in Turkish. 'Deselect' is a slightly less common action, and a more fluid wording could improve clarity.",
+          "suggestion": "Öğeyi seç veya kaldır"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Вибрати елемент або скасувати його вибір' is a bit verbose and literal. A more concise and natural-sounding translation would improve the user experience.",
+          "suggestion": "Вибрати або зняти вибір"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -201,7 +334,18 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"选择项目或取消项目选择\" is overly verbose and literal. A more concise and natural translation would be better.",
+          "suggestion": "选择或取消选择"
+        },
+        {
+          "type": "formatting",
+          "description": "The repetition of \"项目\" makes the translation sound clunky. Combining '选择' and '取消选择' into a single phrase improves readability.",
+          "suggestion": "选择或取消选择"
+        }
+      ],
       "approved_at": null
     }
   }

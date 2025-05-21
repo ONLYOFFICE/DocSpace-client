@@ -3,7 +3,7 @@
   "content": "Add watermarks to documents",
   "content_en_sha1_hash": "22034bd673fd6d7cd91245241c5115556634de93",
   "created_at": "2025-05-19T21:30:54.353Z",
-  "updated_at": "2025-05-20T09:41:53.565Z",
+  "updated_at": "2025-05-21T09:32:37.140Z",
   "comment": {
     "text": "This translation key is used to display the text \"Add watermarks\" in a UI category header. It appears as part of a larger settings page for developer tools and allows users to toggle adding watermarks to documents.",
     "is_auto": true,
@@ -141,7 +141,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Adăugare incripționare la documente' translates to 'Adding encryption to documents', which is not the intended meaning of 'Add watermarks to documents'. Watermarks are not encryption.",
+          "suggestion": "Adăugare filigran la documente"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ලේඛන' (lekhena) is a general term for documents. While technically correct, 'ලේඛනයන්ට' (lekhenayanta) would be slightly more grammatically precise and conveys the meaning 'to documents' more accurately.",
+          "suggestion": "ලේඛනයන්ට"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Додај жигове документима\" is understandable, a more accurate and natural-sounding translation of \"Add watermarks to documents\" in Serbian (Cyrillic) would be \"Додавање воденених знакова на документе\" or \"Додати водени знаци на документе\". \"Жигови\" typically refers to stamps or seals, not watermarks.",
+          "suggestion": "Додавање воденених знакова на документе"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -195,7 +213,18 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The term 'watermark' is in English within a Vietnamese sentence. While understandable, it's preferable to use the fully translated term consistently.",
+          "suggestion": "Thêm hình mờ vào tài liệu"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'hình mờ' is a valid translation for watermark, it might be less commonly used in some contexts.  Consider alternatives depending on the target audience and style guide.",
+          "suggestion": "Consider 'dấu nước' or 'hình chìm' as alternatives, check style guide for preference."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

@@ -3,7 +3,7 @@
   "content": "Renew subscription for {{license}}",
   "content_en_sha1_hash": "9c780ecb6808d81ca9d60a1e65629e28af6502a2",
   "created_at": "2025-05-19T21:30:53.586Z",
-  "updated_at": "2025-05-20T09:43:27.200Z",
+  "updated_at": "2025-05-21T06:21:56.448Z",
   "comment": {
     "text": "This translation key is used to display a message prompting users to renew their subscription, specifically referencing the type of license they hold. The text will appear in a header, likely on a payment or subscription settings page, such as an enterprise container component.",
     "is_auto": true,
@@ -45,13 +45,30 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"firemního\" implies a company subscription, but the English says \"subscription for {{license}}\". While not strictly incorrect, it's less precise and doesn't directly reflect the meaning of the English.",
+          "suggestion": "Obnovit předplatné pro {{license}}"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation lacks capitalization at the beginning of the sentence, which is common practice in Czech for titles/headers.",
+          "suggestion": "Obnovit předplatné pro {{license}}"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Abonnement für die {{license}}-Version verlängern' is not a direct and natural translation of 'Renew subscription for {{license}}'. While technically correct, it's a bit wordy and unnecessarily specifies 'version'. A more natural translation would be 'Abonnement für {{license}} verlängern'.",
+          "suggestion": "Abonnement für {{license}} verlängern"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -69,7 +86,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Uusi {{license}} tilaus' doesn't accurately convey the meaning of 'Renew subscription for {{license}}'. 'Uusi' means 'new', while 'Renew' implies extending an existing subscription. A more accurate translation would include the concept of 'renewal' or 'jatkaminen'.",
+          "suggestion": "Uusi {{license}} -tilauksen jatkaminen"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +104,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Թարմացրեք բաժանորդագրությունը {{license}}-ի համար\" is a bit literal and could be more natural. While technically correct, a more idiomatic translation might be preferred. \"Թարմացնել {{license}}-ի բաժանորդագրությունը\" or similar would flow better.",
+          "suggestion": "Consider alternatives like \"Թարմացնել {{license}}-ի բաժանորդագրությունը\" or \"Բաժանորդագրության թարմացում {{license}}-ի համար\""
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,7 +134,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ຕໍ່ນະໃໝ່ການສັນຈີການໃຊ້ງານ {{license}}\" is not a natural or accurate translation of \"Renew subscription for {{license}}\".  \"ຕໍ່ນະໃໝ່\" is somewhat literal for \"renew\" and the overall phrasing is clunky.",
+          "suggestion": "Consider a translation like \"ຕໍ່ການຕໍ່ຫານິວການໃຊ້ງານ {{license}}\" or \"ຕໍ່ຫານິວການໃຊ້ງານ {{license}}\" which conveys the intended meaning more naturally.  A more direct and understandable translation might be something like “ອັບເກຣດການໃຊ້ງານ {{license}}\""
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +176,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Reînnoire abonamentul {{license}}' is not a natural or accurate translation of 'Renew subscription for {{license}}'.  'Reînnoire' is the verb form, but it should be the noun, 'Reînnoirea'.",
+          "suggestion": "Reînnoirea abonamentului {{license}}"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,13 +194,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '{{license}} සඳහා ගිවිසුම අලුතින් කර ගන්න.' is a literal translation but doesn't convey the meaning of 'Renew subscription' in a natural way. 'ගිවිසුම අලුතින් කර ගන්න' implies creating a new agreement, not renewing an existing one.",
+          "suggestion": "{{license}} සඳහා දින නියමිත කාලසීමාව පුනරීත කරන්න."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Obnoviť predplatné pre verziu {{license}}' is not the most natural or accurate translation of 'Renew subscription for {{license}}'. The addition of 'verziu' (version) isn't necessary and changes the meaning slightly.",
+          "suggestion": "Obnoviť predplatné pre {{license}}"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,7 +224,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Обновите' (Obnovite) is a correct translation of 'Renew', but 'претплату' (pretplatu) is more accurately 'subscription' in the context of a license. A more natural phrasing would be 'нарачите претплату' (naracite pretplatu) or 'набавите претплату' (nabavite pretplatu).",
+          "suggestion": "Обновите нарачите претплату за {{license}}"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

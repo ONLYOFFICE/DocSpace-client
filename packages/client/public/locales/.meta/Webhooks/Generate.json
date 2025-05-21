@@ -3,7 +3,7 @@
   "content": "Generate",
   "content_en_sha1_hash": "fc45f9b7a9a6e8b48f0e28821ec1981804dd1eb6",
   "created_at": "2025-05-19T21:30:49.766Z",
-  "updated_at": "2025-05-20T09:47:01.460Z",
+  "updated_at": "2025-05-21T01:07:48.876Z",
   "comment": {
     "text": "The translation key \"Generate\" is used to display a button label that enables users to create a new API key or generate a developer token. It appears in various UI components, such as buttons and dialogues, where it prompts users to perform these actions. The exact context can vary between \"EditButton\" (a standard edit action) and \"Generate\" (a specific button for creating an API key).",
     "is_auto": true,
@@ -165,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'උත්පාදනය' (uthpaadanaya) while technically meaning 'generation' or 'production', isn't the most natural or common translation for 'Generate' in the context of webhooks. It's a more formal and technical term.",
+          "suggestion": "Consider alternatives like 'ස້າງ' (saang) meaning 'create' or 'උඩුගත කිරීම' (udugatha kirima) meaning 'upload/trigger' depending on the specific function of the webhook."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,13 +189,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Генериши' is an imperative form (command form) of the verb 'generisati' (to generate).  'Generate' in this context likely refers to a button or option to create something, not a direct command. A more appropriate translation would be a noun or a verb in the infinitive form.",
+          "suggestion": "Генерисање"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Generiši' while phonetically similar to 'Generate', doesn't directly convey the meaning of generating something. It's closer to 'Generate' in the imperative form, but a more neutral translation might be more appropriate depending on the context.",
+          "suggestion": "Kreiraj"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -207,7 +225,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Tạo\" is a valid translation for \"Generate\", it's a very general term. In the context of webhooks, a more specific term like 'Sinh' (create/produce) or 'Tạo mới' (create new) might be more accurate, depending on the exact functionality.",
+          "suggestion": "Consider 'Sinh' or 'Tạo mới' for a more contextually accurate translation."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

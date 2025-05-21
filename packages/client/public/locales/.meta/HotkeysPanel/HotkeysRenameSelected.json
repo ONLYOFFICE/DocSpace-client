@@ -3,7 +3,7 @@
   "content": "Rename selected item",
   "content_en_sha1_hash": "4968d8519450b72f33c8442c325a291da546392f",
   "created_at": "2025-05-19T21:30:55.081Z",
-  "updated_at": "2025-05-20T09:40:30.244Z",
+  "updated_at": "2025-05-21T10:25:57.794Z",
   "comment": {
     "text": "This translation key is used to display the action \"Rename selected item\" as a tooltip or button label in the application's hotkeys panel. It appears next to the keyboard shortcut for renaming an item when multiple items are selected. Translators should provide a phrase that conveys this idea in the local language.",
     "is_auto": true,
@@ -27,13 +27,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'إعادة تسمية العنصر' literally translates to 'Re-naming the item.' While understandable, a more natural and direct translation of 'Rename selected item' would be something like 'تسمية العنصر المحدد' (Tasmiyat al-'Unsur al-Muhaddad).",
+          "suggestion": "تسمية العنصر المحدد"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Seçilmiş elementin adını dəyişdirin' is a literal translation that doesn't quite capture the natural phrasing for renaming an item in a hotkey context.  It's overly formal and verbose.",
+          "suggestion": "Consider alternatives like 'Seçilmiş düymənin adını dəyiş' (Change the name of the selected button) or 'Seçimi yenidən adlandır' (Rename selection)."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -153,7 +165,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'පහත තෝරාගත් අයිතමයේ නම වෙනස් කරන්න' is too literal and sounds unnatural in Sinhala. 'පහත' (pahaata) means 'below' and doesn't fit the context of renaming a selected item. The phrase 'අයිතමයේ නම' (ayitamaye nama) is also a bit clunky.",
+          "suggestion": "තෝරාගත් අයිතමයෙහි නම වෙනස් කරන්න"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically understandable, the suggested translation could be slightly improved for flow.",
+          "suggestion": "තෝරාගත් අයිතමය වෙනස් කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +200,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Preimenuj odabranu stavku\" is not the most accurate or natural translation of \"Rename selected item.\" \"Stavka\" typically refers to an item on a list or a menu item. A better translation would convey the meaning of renaming a hotkey or assigned action.",
+          "suggestion": "Preimenuj izabrani unos"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

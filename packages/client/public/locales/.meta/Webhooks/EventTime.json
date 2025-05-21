@@ -3,7 +3,7 @@
   "content": "Event time",
   "content_en_sha1_hash": "795e7a4d5d53d91259ae038d0eae2894f2e2d5af",
   "created_at": "2025-05-19T21:30:49.711Z",
-  "updated_at": "2025-05-20T09:47:05.180Z",
+  "updated_at": "2025-05-21T01:14:26.258Z",
   "comment": {
     "text": "This translation key is used to display \"Event time\" in the PortalSettings page. It appears next to a formatted creation time value within a DetailsBar component. Translators should provide a localized version of this phrase to match the UI's context.",
     "is_auto": true,
@@ -63,7 +63,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Spanish translation 'Tipo de evento' does not accurately convey the meaning of 'Event time.' 'Tipo de evento' translates to 'Event type,' which is different. 'Event time' refers to the timestamp of an event.",
+          "suggestion": "Tiempo del evento"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -105,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ເວລາເດືອນ\" translates to \"month time\" or \"time of the month\" which is not an accurate translation of \"Event time\". It appears to be a misunderstanding of the term.",
+          "suggestion": "The correct translation for \"Event time\" should be something like \"ເວລາເຫດການ\" (wela hetkan) which translates to \"event time\" or \"time of the event\"."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'සන්දේශය කාලය' literally translates to 'message time'. 'Event time' refers to the time an event occurred, not the time a message was sent.",
+          "suggestion": "Possible suggestions include: 'සංගිහන කාලය' (sangīhana kālaya - event time), 'සිද්ධිය කාලය' (siddhiya kālaya - incident time), or 'සංඝටනය කාලය' (sanghaṭanā kālaya - occurrence time). The most appropriate choice depends on the specific context of 'event'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

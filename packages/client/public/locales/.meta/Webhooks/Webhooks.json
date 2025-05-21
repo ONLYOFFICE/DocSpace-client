@@ -3,7 +3,7 @@
   "content": "Webhooks",
   "content_en_sha1_hash": "fdfe2da709ca2c4f3b21ce6ad01969c1158e9db6",
   "created_at": "2025-05-19T21:30:49.888Z",
-  "updated_at": "2025-05-20T09:46:44.481Z",
+  "updated_at": "2025-05-21T00:49:05.420Z",
   "comment": {
     "text": "The translation key \"Webhooks\" is used to display the label for a plugin that manages webhooks functionality. It appears in a portal settings category and likely serves as a button or section title, guiding users through webhook configurations or management.",
     "is_auto": true,
@@ -33,25 +33,49 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ويب هوك\" is a transliteration of \"Webhooks,\" it doesn't convey the concept accurately in Arabic. A more accurate translation would describe what webhooks *do* rather than just transliterating the term.",
+          "suggestion": "Consider translating to something like \"إشعارات ويب\" (Web Notifications) or \"تنبيهات ويب\" (Web Alerts) depending on the desired level of technicality and the context."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Webhook-lar\" while technically meaning 'Webhooks' (plural), doesn't accurately reflect the English term 'Webhooks'. The singular form is generally preferred when translating single concepts, especially in technical contexts. Using the plural directly can sound awkward.",
+          "suggestion": "Webhook"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Уеб куки\" is an incorrect translation of \"Webhooks\". \"Куки\" means \"cookies\" in Bulgarian, while \"Webhooks\" refers to a specific technology.",
+          "suggestion": "The correct translation should be something like \"Уебкуци\" (a transliteration) or a more descriptive term depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Webové háčky\" is a literal translation of \"Webhooks,\" it's not the standard or most understandable term in Czech. It sounds awkward and might confuse users. The widely accepted and preferred translation is \"Webhooky\".",
+          "suggestion": "Webhooky"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -75,7 +99,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Webhookit\" doesn't accurately reflect the meaning of \"Webhooks.\" It appears to be a modification rather than a translation. A more appropriate translation would be \"Verkkokoukut\" or a transliteration like \"Verkkokoukut\".",
+          "suggestion": "Verkkokoukut"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -93,7 +123,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'Webhooks' (plural) is translated to 'Webhook' (singular) in Italian. While 'Webhook' can be used to refer to a single webhook, 'Webhooks' is the more accurate translation when referring to the overall concept or feature.",
+          "suggestion": "Webhooks"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -117,7 +153,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation \"Tīmekļa aizķeres\" is not an accurate translation of \"Webhooks.\" \"Aizķeres\" implies a blockage or jam, which doesn't align with the concept of webhooks (automated notifications).",
+          "suggestion": "A more accurate translation would be something like \"Tīmekļa atbloķētāji\" (Webhooks - literally Web Unlockers) or simply \"Webhooks\" (using the English term as is common in technical contexts)."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -147,7 +189,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Webhook-uri' is technically a valid pluralization in Romanian, it's not the most natural or common way to express the plural of 'Webhook'. A more idiomatic translation would be 'Webhook-uri' (or less commonly, 'Webhook-uri'). The hyphen usage in the current translation is correct but placing a second 'i' to create a proper plural might be preferred.",
+          "suggestion": "Webhook-uri"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -165,13 +213,25 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Webhooky' is a possible pluralization in Slovak, it's not the standard or most natural translation of 'Webhooks'. The term 'Webhooks' is frequently used in English even when referring to multiple webhooks. A more appropriate translation would be 'Webhooky' or 'Webové hák'.",
+          "suggestion": "Webhooky (acceptable) or Webové hák (more accurate)"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Webhooki' is not the most accurate or common Slovenian term for 'Webhooks'. While 'Webhooki' is a direct pluralization, a more natural or accepted translation might be 'Sprednje točke' or a transliteration like 'Webhooki' with an explanation.",
+          "suggestion": "Consider 'Sprednje točke' or 'Webhooki (sprednje točke)' to provide more clarity and context."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -207,7 +267,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Webhook' is a transliteration and doesn't convey the meaning of 'Webhooks'. While acceptable in some contexts, a more descriptive translation might be preferable depending on the target audience. 'Webhook' doesn't clearly explain what webhooks are.",
+          "suggestion": "Consider a more descriptive translation like '网页挂钩' (wangye guahou) or 'webhook 数据通知' if clarity is paramount. The best translation depends on the context and intended audience."
+        }
+      ],
       "approved_at": null
     }
   }

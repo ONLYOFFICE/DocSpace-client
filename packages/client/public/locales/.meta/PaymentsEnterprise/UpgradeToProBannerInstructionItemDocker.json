@@ -3,7 +3,7 @@
   "content": "Docker instruction.",
   "content_en_sha1_hash": "ebb408553e05d849ad37700e004798f23d8228e3",
   "created_at": "2025-05-19T21:30:53.613Z",
-  "updated_at": "2025-05-20T09:43:22.318Z",
+  "updated_at": "2025-05-21T06:13:58.136Z",
   "comment": {
     "text": "This translation key is used for a Docker instruction on an official documentation page. It appears as a bolded text within a document and helps guide users through the instructions.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'Docker instruction' is more literally translated as 'Instrukce pro Docker' in Czech. 'Pokyny pro práci s nástrojem Docker' is a more verbose and less direct translation. While understandable, it doesn't match the brevity and tone of the original.",
+          "suggestion": "Instrukce pro Docker"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -75,7 +81,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Docker instruction' is a very brief and straightforward phrase. The French translation 'Consignes d'installation à l'aide de Docker' is significantly more verbose and implies a set of instructions rather than a single instruction. It loses the conciseness of the original.",
+          "suggestion": "Consignes Docker."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -87,7 +99,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation includes unnecessary spaces before and after the period.",
+          "suggestion": "Istruzione per Docker"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -105,7 +123,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຄໍາແນະນໍາສຳລັບ Docker' is too literal. A more natural and user-friendly translation would be 'ຄໍາແນະນໍາການໃຊ້ Docker' or 'ວິທີໃຊ້ Docker'.",
+          "suggestion": "ວິທີໃຊ້ Docker"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -123,13 +147,25 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Instrukcje dla Dockera' is overly literal and doesn't convey the natural meaning of \"Docker instruction.\" It implies instructions *for* Docker, rather than a single instruction pertaining to Docker. A more accurate translation would depend on the specific context, but a simpler 'Instrukcja Dockera' or a more descriptive phrase might be better.",
+          "suggestion": "Consider 'Instrukcja Dockera' or a context-specific alternative like 'Wskazówki dotyczące Dockera'."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'Docker instruction' is a bit vague. 'Instruções para Docker' is a literal translation but doesn't convey the intended meaning, which likely refers to instructions *on how to use* Docker. A more accurate translation might be 'Instruções de uso do Docker' or 'Como usar o Docker'.",
+          "suggestion": "Instruções de uso do Docker"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,7 +177,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Docker instruction' is too general. A more accurate translation would convey the purpose or context of the instruction. 'Instrucţiuni pentru Docker' is grammatically correct but doesn't provide enough information. It's unclear what the instructions are *for*.",
+          "suggestion": "Consider a more specific translation based on the context of the banner. Examples: 'Instrucțiuni pentru configurarea Docker' (Instructions for Docker configuration), 'Instrucțiuni pentru utilizarea Docker' (Instructions for using Docker), or 'Instrucțiuni privind Docker' (Instructions regarding Docker)."
+        }
+      ],
       "approved_at": null
     },
     "ru": {

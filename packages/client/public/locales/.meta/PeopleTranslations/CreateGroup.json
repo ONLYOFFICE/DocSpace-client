@@ -3,7 +3,7 @@
   "content": "Create group",
   "content_en_sha1_hash": "5a0b1c170fd55ab07e5656625be963d20baa107a",
   "created_at": "2025-05-19T21:30:53.461Z",
-  "updated_at": "2025-05-20T09:43:43.523Z",
+  "updated_at": "2025-05-21T06:04:26.614Z",
   "comment": {
     "text": "\"This translation key is used to display the text 'Create group' in various UI elements, such as a modal dialog header and a button. It appears when users interact with options related to creating or managing groups, and its purpose is to provide a clear label for this action.\"",
     "is_auto": true,

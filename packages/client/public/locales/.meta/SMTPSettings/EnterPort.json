@@ -3,7 +3,7 @@
   "content": "Enter port",
   "content_en_sha1_hash": "2a63f0e8e10f2911346eb8d0e210209dec06d29b",
   "created_at": "2025-05-19T21:30:53.300Z",
-  "updated_at": "2025-05-20T09:44:00.769Z",
+  "updated_at": "2025-05-21T01:34:56.093Z",
   "comment": {
     "text": "\"Used as a placeholder text in a text input field within a custom settings component for an SMTP settings page.\"",
     "is_auto": true,
@@ -105,7 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ເຂົ້າຜອດ\" literally translates to 'enter hole' or 'enter orifice.' While it might be understood in some contexts, it's not the correct translation for 'Enter port' in the context of SMTP settings, which refers to a network port number. A more accurate translation would convey the action of inputting a number representing a port.",
+          "suggestion": "ປ້ອນຈຳນວນຜອດ (pɔn jamnuan phɔt) - 'Enter port number' or ໃສ່ຜອດ (sài phɔt) - 'Enter port'"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -129,7 +135,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Introduzir porta\" is not the most natural or accurate translation of \"Enter port\" in Portuguese. \"Introduzir\" implies inserting something.  A better translation would convey the meaning of specifying a port number.",
+          "suggestion": "Digite a porta"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Introduceți numărul de port' is technically correct, 'Introduceți portul' would be more natural and concise in this context. 'Numărul de' is often redundant in UI labels.",
+          "suggestion": "Introduceți portul"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"තොට ඇතුල් කරන්න\" (thota athul karanna) literally translates to 'Enter soil/earth'. The correct meaning of 'Enter port' should convey the action of inputting a port number.",
+          "suggestion": "මානපෝර்ட் ඇතුල් කරන්න (maanaport athul karanna) - which means 'Enter port number'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,13 +201,25 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Unesi port' is not the most natural or accurate translation of 'Enter port'. It's literally 'Enter port', but a better translation would convey the action of entering a port number.",
+          "suggestion": "Unesite broj porta"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Bağlantı noktasını girin\" is understandable, a more natural and accurate translation of \"Enter port\" would be \"Port numarasını girin\" or simply \"Port girin\". \"Bağlantı noktası\" refers more to a connection point, not the port number itself.",
+          "suggestion": "Port numarasını girin"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

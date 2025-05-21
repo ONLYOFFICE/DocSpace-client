@@ -3,7 +3,7 @@
   "content": "Advanced server settings",
   "content_en_sha1_hash": "5ebb3289911c026499372bca9d3ef3bdabd8785e",
   "created_at": "2025-05-19T21:30:51.337Z",
-  "updated_at": "2025-05-20T09:45:18.793Z",
+  "updated_at": "2025-05-21T04:27:01.002Z",
   "comment": {
     "text": "The \"Advanced server settings\" translation key is used to display a label for advanced server settings in the UI. It appears as part of a larger section in a portal settings page, possibly as a subheader or title, guiding users to access more detailed configuration options.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Qabaqcıl server parametrləri' is understandable, 'parametrleri' (parameters) is not the most natural translation for 'settings'. 'Parametr' implies technical configuration, whereas 'settings' is more general.",
+          "suggestion": "Qabaqcıl server ayarları"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -105,7 +111,18 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ການຕັ້ງຄ່າເຄື່ອງແມ່ຂ່າຍແບບກ້ານAdvanced\" includes the English word \"Advanced\" which is redundant and unnecessary. It's better to translate the concept of 'advanced' more accurately within the Lao phrasing.",
+          "suggestion": "ການຕັ້ງຄ່າເຄື່ອງແມ່ຂ່າຍແບບກ້ານທີ່ໃຊ້ກົນໄກສູງ"
+        },
+        {
+          "type": "grammar",
+          "description": "The use of 'ແບບກ້ານ' (baep gan) is potentially ambiguous. It's not the clearest way to describe 'advanced' in this context. It could be interpreted in multiple ways.",
+          "suggestion": "Consider rephrasing 'ແບບກ້ານ' to a more specific term indicating advanced functionality or settings within a server context. For instance, using terms related to 'superior', 'expert', or 'complex' would be more suitable."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -153,7 +170,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ඉදිරිපත් සේවාදායක සැකසුම්\" doesn't accurately convey the meaning of \"Advanced server settings.\" \"ඉදිරිපත්\" (idiri path) means 'forward' or 'leading', which is not appropriate here. 'සේවාදායක' (sevaadaka) refers to a servant or server in the sense of a person serving. 'සැකසුම්' (sakasum) means settings.  A better translation would focus on 'අතරමැදි' (ataramadi) or 'උසස්' (usas) to convey 'advanced'.",
+          "suggestion": "උසස් සේවාදායක සැකසුම් (Usas sevadaayak sakasum) or අතරමැදි සේවාදායක සැකසුම් (Ataramadi sevadaayak sakasum)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +194,35 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Напредна' is misspelled. It should be 'Напредни'.",
+          "suggestion": "Напредни"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Напредни' is a closer translation for 'Advanced', the overall phrase doesn't perfectly convey the meaning of 'Advanced server settings'. A more accurate translation would consider the context and perhaps use a phrase like 'Поставке сервера - напредни'.",
+          "suggestion": "Поставке сервера - напредни"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Napredna' is misspelled. It should be 'Napredna'.",
+          "suggestion": "Napredna"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'podešavanja' is misspelled. It should be 'podešavanja'.",
+          "suggestion": "podešavanja"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

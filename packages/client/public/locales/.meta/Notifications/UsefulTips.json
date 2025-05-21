@@ -3,7 +3,7 @@
   "content": "Useful {{productName}} tips",
   "content_en_sha1_hash": "184f3029f854216318bae47c9d442f284b83b435",
   "created_at": "2025-05-19T21:30:54.092Z",
-  "updated_at": "2025-05-20T09:42:28.158Z",
+  "updated_at": "2025-05-21T07:32:35.335Z",
   "comment": {
     "text": "This translation key is used to display a notification title indicating useful tips for a specific product. It appears in a toast notification component, providing users with a hint about relevant information or features available for them.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Useful {{productName}} tips' implies a more concise and engaging title. The Arabic translation 'نصائح مفيدة حول {{productName}}' translates literally to 'Useful tips about {{productName}}' which is somewhat clunky. A more natural and engaging translation would convey the 'tips for' aspect more clearly.",
+          "suggestion": "Consider a translation like 'نصائح {{productName}} المفيدة' (Useful {{productName}} tips) or 'نصائح هامة لـ {{productName}}' (Important tips for {{productName}})"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -93,7 +99,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Useful {{productName}} tips' implies helpful advice or guidance. The Japanese translation '{{productName}}の使い方やヒント' translates more to 'How to use {{productName}} and hints'. It doesn't convey the 'useful' aspect as strongly. A more accurate translation that captures the 'useful' aspect could be '{{productName}}をより便利に使うヒント' ({{productName}} helpful usage tips) or '{{productName}}を最大限に活用するためのヒント' (Hints to maximize the use of {{productName}}).",
+          "suggestion": "Consider '{{productName}}をより便利に使うヒント' or '{{productName}}を最大限に活用するためのヒント' for a more accurate translation."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -129,7 +141,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Dicas úteis para o {{productName}}\" is not a perfect equivalent. A more natural translation would be \"Dicas úteis sobre o {{productName}}\" or \"Dicas úteis do {{productName}}\".  'Para o' implies 'for' which isn't the best fit here.",
+          "suggestion": "Dicas úteis sobre o {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -195,7 +213,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Các mẹo hữu ích sử dụng {{productName}}' is a literal translation and doesn't flow naturally in Vietnamese. 'Sử dụng' (use) is redundant. A better translation would focus on the helpfulness of the tips for the product.",
+          "suggestion": "Các mẹo hữu ích cho {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

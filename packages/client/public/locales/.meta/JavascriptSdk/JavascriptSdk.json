@@ -3,7 +3,7 @@
   "content": "Javascript SDK",
   "content_en_sha1_hash": "e6c94f16090ac34b87010e6e2af5e5e55d93af88",
   "created_at": "2025-05-19T21:30:54.548Z",
-  "updated_at": "2025-05-20T09:41:33.766Z",
+  "updated_at": "2025-05-21T09:00:28.607Z",
   "comment": {
     "text": "\"Javascript SDK\" is a label used to describe presets or settings related to the JavaScript SDK, likely found in developer tools or settings pages, guiding users through configuration options.",
     "is_auto": true,
@@ -75,7 +75,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"مجموعة أدوات تطوير البرمجيات بلغة جافا سكربت\" is a very literal and verbose translation of \"Javascript SDK\". While technically correct, it's not the most natural or concise way to express it in Arabic. A more common and user-friendly translation would be something like \"حزمة تطوير جافاسكربت\" (Java Script Development Kit).",
+          "suggestion": "حزمة تطوير جافاسكربت"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -111,7 +117,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"SDK de JavaScript\" is understandable, a more natural and common translation in Spanish would be \"Kit de desarrollo de JavaScript\".  \"SDK\" is often used directly in Spanish tech contexts, but 'Kit de desarrollo' is clearer for a broader audience.",
+          "suggestion": "Kit de desarrollo de JavaScript"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -123,7 +135,18 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The French translation 'SDK Javascript' reverses the order of the terms. The correct order should be 'Javascript SDK' or, more idiomatically, 'SDK Javascript' (although less common in French). However, the given translation is not the most natural phrasing.",
+          "suggestion": "Javascript SDK"
+        },
+        {
+          "type": "formatting",
+          "description": "The French translation 'SDK Javascript' has a space between 'SDK' and 'Javascript', which is acceptable but less common than 'SDKJavascript'.",
+          "suggestion": "SDKJavascript"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -135,7 +158,18 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Italian translation \"SDK Javascript\" reverses the order of the terms. The standard and expected order would be \"Javascript SDK\".",
+          "suggestion": "Javascript SDK"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, 'Javascript SDK' would benefit from a space between 'Javascript' and 'SDK' for better readability in Italian.",
+          "suggestion": "Javascript SDK"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -171,7 +205,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation \"SDK Javascript\" reverses the order of the terms. The standard and expected order would be \"Javascript SDK\".",
+          "suggestion": "Javascript SDK"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -189,13 +229,25 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'SDK Javascript' reverses the order of the terms. The conventional and more understandable order would be 'Javascript SDK'.",
+          "suggestion": "Javascript SDK"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Пакет SDK для Javascript\" is understandable, a more accurate and common translation would be \"JavaScript SDK\" or \"SDK для Javascript\".  The original phrase includes a brand name (Javascript), and translating it as 'Пакет SDK для Javascript' slightly alters the meaning and sounds less professional. It's better to preserve the English term where possible in a technical context.",
+          "suggestion": "SDK для Javascript"
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -231,13 +283,30 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation adds an unnecessary possessive suffix ('sı') to 'Javascript SDK'. While 'Javascript SDK'sı' is grammatically correct, it's not idiomatic in Turkish when referring to the SDK itself. Keeping it as 'Javascript SDK' is generally preferred, especially in technical contexts.",
+          "suggestion": "Javascript SDK"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'SDK Javascript' reverses the order of the terms. It's more natural and conventional to place the main term ('SDK') first and the clarifying term ('Javascript') second.",
+          "suggestion": "Javascript SDK"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the lack of a space between 'SDK' and 'Javascript' feels a bit awkward in Ukrainian. A space improves readability.",
+          "suggestion": "SDK Javascript"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

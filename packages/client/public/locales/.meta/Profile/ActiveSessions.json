@@ -3,7 +3,7 @@
   "content": "Active Sessions",
   "content_en_sha1_hash": "c71ffaf9d95811865c2053fe8d448a6cc7d90243",
   "created_at": "2025-05-19T21:30:53.331Z",
-  "updated_at": "2025-05-20T09:43:56.967Z",
+  "updated_at": "2025-05-21T05:48:02.434Z",
   "comment": {
     "text": "The \"ActiveSessions\" translation key displays the label for an active session section on a profile page. The exact wording may vary based on translation and localization settings. It appears as a header title in a sub-component within the profile section.",
     "is_auto": true,
@@ -105,7 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ເຊດຊັນທີ່ເຄື່ອນໄຫວ' while literally translating to 'Active Sessions', might not be the most natural or commonly used phrasing in Lao. 'Active Sessions' often refers to a list or count of active user sessions.",
+          "suggestion": "Consider 'ບັນຊີລາຍຊື່ຜູ້ໃຊ້ທີ່ເຄື່ອນໄຫວ' (ban-see lai-see phu-sai thee khuen-hai) for 'Active User Sessions' or 'ຜູ້ໃຊ້ທີ່ເຄື່ອນໄຫວ' (phu-sai thee khuen-hai) for 'Active Users', depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'සක්‍රිය වාර' doesn't accurately convey the meaning of 'Active Sessions'. 'වාර' typically refers to 'times' or 'instances', while 'Active Sessions' refers to ongoing user sessions.",
+          "suggestion": "Possible suggestions include: 'ප්‍රවර්තන සැසි (Prawarthana Seshi)' which translates to 'Current Sessions', or 'මෙතැන් සිට ක්‍රියාත්මක සැසි (Methan Sita Kriyakthiaka Seshi)' which translates to 'Active Sessions from now on'. A more colloquial option could be 'ක්‍රියාත්මක සැසි (Kriyathmak Seshi)'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +183,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation 'Активне сесије' is not an accurate translation of 'Active Sessions'. It literally translates to 'Active Sessions' but doesn't convey the intended meaning in a natural Serbian way. It's a direct transliteration rather than a proper translation.",
+          "suggestion": "A more accurate and natural translation would be 'Активне седнице' (Aktivne sednice) or 'Тренутно активне седнице' (Trenutno aktivne sednice - Currently active sessions)."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Aktivne sesije' is understandable, a more natural and accurate translation of 'Active Sessions' would be 'Trenutne sesije'. 'Aktivne' implies active in the sense of 'being active', while 'trenutne' conveys the meaning of 'current' or 'present' sessions.",
+          "suggestion": "Trenutne sesije"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,13 +219,25 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Các phiên Hoạt động' is not the most natural or accurate translation of 'Active Sessions'. While technically correct, it sounds slightly awkward in Vietnamese. A more common and natural phrasing would be 'Phiên hoạt động'.",
+          "suggestion": "Phiên hoạt động"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While '活动会话' (huódòng huìhuà) is understandable, it's not the most natural or common translation for 'Active Sessions'. '活动' (huódòng) implies an active *event* or *activity*, whereas 'Active Sessions' refers to sessions that are currently open or logged in.",
+          "suggestion": "Consider alternatives like '活跃会话' (huóyuè huìhuà) which better conveys the sense of ongoing, active sessions, or '当前会话' (dāngqián huìhuà) which translates to 'current sessions'."
+        }
+      ],
       "approved_at": null
     }
   }

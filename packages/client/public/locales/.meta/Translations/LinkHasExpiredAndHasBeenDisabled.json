@@ -3,7 +3,7 @@
   "content": "The link has expired and has been disabled",
   "content_en_sha1_hash": "0d17398d6f4b329335a9bb4c55a3f6fff17c2689",
   "created_at": "2025-05-19T21:30:49.993Z",
-  "updated_at": "2025-05-20T09:46:30.705Z",
+  "updated_at": "2025-05-21T01:26:21.184Z",
   "comment": {
     "text": "This translation key is used to display a message when a link has expired and been disabled. It appears in the UI when editing a link, informing users about the status of their link. Translators should provide a clear and concise explanation for this state.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, the translation 'Platnost odkazu vypršela a byl zakázán' is a bit formal and passive for user-facing messages. A more natural and user-friendly translation might be preferred.",
+          "suggestion": "Odkaz vypršel a je zneplatněn."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Այս հղումն ուժի մեջ \" translates to \"This link is in effect\" or \"This link is active.\" It does not accurately convey the meaning of \"The link has expired and has been disabled,\" which implies the link is no longer valid and has been intentionally deactivated.",
+          "suggestion": "A more accurate translation would be something like \"Հղումը գործնականում չեղարկվել է և անջրկվել է\" (Hghumem gorznakanin chelgarkvel e ev anjrkvvel e) which translates to \"The link has been deactivated and disabled\"."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +105,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'リンクは有効期限が切れたため無効になっています' is a bit literal and slightly awkward in Japanese. While technically correct, it doesn't flow naturally. A more natural phrasing would convey the same meaning with better flow.",
+          "suggestion": "リンクが無効になっています"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {

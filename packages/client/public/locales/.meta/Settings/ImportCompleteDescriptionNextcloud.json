@@ -3,7 +3,7 @@
   "content": "Data import from Nextcloud to {{organizationName}} {{productName}} is complete!",
   "content_en_sha1_hash": "3fc84e679584c3062a1a842d78944f1be35528d6",
   "created_at": "2025-05-19T21:30:51.627Z",
-  "updated_at": "2025-05-20T09:45:07.187Z",
+  "updated_at": "2025-05-21T04:11:31.698Z",
   "comment": {
     "text": "This translation key is used to display a success message after completing data import from Nextcloud to an organization. It appears in the UI as a confirmation message, typically on a button or dialog that indicates successful import completion.",
     "is_auto": true,
@@ -39,13 +39,25 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Входиране' (Vhodirane) is not the most natural or accurate translation of 'import' in this context. It implies entering or inputting data, rather than a data migration process.",
+          "suggestion": "Прехвърлянето на данни от Nextcloud към {{organizationName}} {{productName}} е завършено!"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is not ideal. While technically correct, 'Import dat z Nextcloudu' sounds somewhat awkward. A more natural phrasing would be 'Import dat z Nextcloudu do...' or 'Přenášení dat z Nextcloudu...'",
+          "suggestion": "Přenášení dat z Nextcloudu do {{organizationName}} {{productName}} je dokončeno!"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -57,7 +69,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Greek translation places 'του' between 'Nextcloud' and '{{productName}}'. This disrupts the flow and might not be the most natural phrasing. While grammatically correct, consider if a simpler construction is preferred.",
+          "suggestion": "Εισαγωγή δεδομένων από το Nextcloud στο {{productName}} του {{organizationName}} ολοκληρώθηκε!"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,7 +87,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The colon and space after 'Nextcloudista' creates an awkward phrasing. It's better to integrate the organization and product names more smoothly.",
+          "suggestion": "Tietojen tuonti Nextcloudista {{organizationName}} {{productName}} on suoritettu!"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +105,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ավարտված է\" (avartvady e) literally translates to 'is finished' which is correct but slightly less natural in this context. A more natural phrasing would convey completion in a proactive way.",
+          "suggestion": "Nextcloud-ից տվյալների ներմուծումը {{organizationName}} {{productName}}-ի մեջ ավարտվել է:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,7 +129,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Nextcloud에서 {{organizationName}} {{productName}}로 데이터 가져오기가 완료되었습니다!' is technically correct but could be more natural and concise. The phrase '로 데이터 가져오기가 완료되었습니다!' (to {{organizationName}} {{productName}} data import is complete!) feels a little clunky in Korean. It's more common to say something like '에 데이터 가져오기가 완료되었습니다!' (to {{organizationName}} {{productName}} data import is complete!) or to restructure the sentence.",
+          "suggestion": "Nextcloud에서 {{organizationName}} {{productName}}에 데이터 가져오기가 완료되었습니다!"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -129,19 +165,37 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'importação' should be 'importação de dados'. While technically correct, the added 'de dados' makes it more explicit and natural-sounding in Portuguese.",
+          "suggestion": "A importação de dados do Nextcloud para o {{organizationName}} {{productName}} está concluída!"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'importação' should be capitalized at the beginning of the sentence.",
+          "suggestion": "A Importação de dados do Nextcloud para o {{organizationName}} {{productName}} está concluída!"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Import date din Nextcloud în {{organizationName}} {{productName}} este finalizat!\" uses 'date' which translates to 'date' in English. It should be 'Importul'.",
+          "suggestion": "Importul de date din Nextcloud în {{organizationName}} {{productName}} este finalizat!"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -171,7 +225,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Увоз података са Nextcloud на {{organizationName}} {{productName}} је завршен!' translates literally as 'Import of data from Nextcloud to {{organizationName}} {{productName}} is complete!'. A more natural and idiomatic translation would be 'Пренос података са Nextcloud на {{organizationName}} {{productName}} је завршен!' (Transfer of data...).  'Увоз' often implies importing from an external source in a more complex, potentially problematic manner.",
+          "suggestion": "Пренос података са Nextcloud на {{organizationName}} {{productName}} је завршен!"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -201,7 +261,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"Nextcloud\" should be \"Nextcloud\" instead of \"工作区\" (workspace). While technically understandable, it's better to retain the original name for clarity and consistency.",
+          "suggestion": "从 Nextcloud 到 {{organizationName}}{{productName}}的数据导入已完成！"
+        }
+      ],
       "approved_at": null
     }
   }

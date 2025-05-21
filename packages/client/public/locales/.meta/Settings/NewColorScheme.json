@@ -3,7 +3,7 @@
   "content": "New color scheme",
   "content_en_sha1_hash": "3c17e031c8936402d74774e9b5de79de0c318835",
   "created_at": "2025-05-19T21:30:51.962Z",
-  "updated_at": "2025-05-20T09:44:54.095Z",
+  "updated_at": "2025-05-21T03:48:37.561Z",
   "comment": {
     "text": "This translation key is used to display the text \"New color scheme\" as a header in settings pages, specifically in the PortalSettings categories. It appears on a button labeled \"Add Theme\".",
     "is_auto": true,
@@ -153,13 +153,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"නව වර්ණ පරිපාටිය\" is understandable, a more natural and accurate translation of \"New color scheme\" would be \"අළුත් වර්ණ පේට්ටුව\" (Aluta Warna Pettuwa). \"නව\" (nawa) means 'new' in the sense of recently created, whereas \"අළුත්\" (aluta) better conveys the idea of a fresh or different color scheme.",
+          "suggestion": "අළුත් වර්ණ පේට්ටුව"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Nová farebná schéma' is a literal translation but not the most natural phrasing. A more idiomatic translation would be 'Nový farebný režim' or 'Nová farebná téma'. 'Schéma' is often used in a more technical context.",
+          "suggestion": "Nový farebný režim"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,7 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Serbian (Cyrillic) translation 'Нова шема боја' contains a spelling error. The word 'шема' should be 'схема'.",
+          "suggestion": "Нова схема боја"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

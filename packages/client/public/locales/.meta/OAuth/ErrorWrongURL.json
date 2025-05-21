@@ -3,7 +3,7 @@
   "content": "URL not valid, example",
   "content_en_sha1_hash": "350049133db4d2b9f084821bdef5f6282c6d77ec",
   "created_at": "2025-05-19T21:30:53.887Z",
-  "updated_at": "2025-05-20T09:42:48.142Z",
+  "updated_at": "2025-05-21T07:14:57.163Z",
   "comment": {
     "text": "The \"ErrorWrongURL\" translation key is used to display a generic error message when an invalid URL is entered. It appears in various UI elements, including input fields and support blocks, providing a clear indication that the URL is not valid. Translators should provide a descriptive message that conveys this information while maintaining consistency across different contexts.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'عنوان الURL غير صالح، مثال' is a literal translation of 'URL not valid, example'. While technically correct, a more natural and idiomatic Arabic translation for 'URL not valid, example' would be something like 'الرابط غير صحيح، مثال' (al-raabit ghair saheeh, misal). The word 'عنوان' (unwaan) implies a title or heading, not a URL.",
+          "suggestion": "الرابط غير صحيح، مثال"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -87,7 +93,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'URL ei ole voimassa, esimerkiksi' is not the most natural or accurate translation of 'URL not valid, example.' 'Voimassa' primarily means 'valid' in the sense of 'in effect' or 'currently applicable.' 'Valid' in this context refers to a structurally correct URL. A better translation would convey that.",
+          "suggestion": "URL ei ole oikein, esimerkiksi"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -111,7 +123,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'URLが無効です。例：' is technically correct but lacks the same naturalness as a more context-aware translation. '例:' (rei:) literally means 'example' and feels slightly abrupt in this context. A better phrasing would convey the user needs to provide a valid URL, not just an example.",
+          "suggestion": "URLが無効です。正しいURLを入力してください。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -123,13 +141,25 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"URL ບໍຖືກຕ້ອງ, ຕົວຢ່າງ\" is a literal translation but doesn't fully convey the intended meaning of 'example' in the context of an error message. It would be more natural to imply an example of what a valid URL *would* look like or a more general instruction.",
+          "suggestion": "Consider alternative translations like \"URL ບໍຖືກຕ້ອງ, ຕົວຢ່າງເຊັ່ນ: ...\" (URL is not valid, for example: ... ) or \"URL ບໍຖືກຕ້ອງ, ກະລຸນາກວດສອບອີກຄັ້ງ\" (URL is not valid, please double check)."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Vietrādis URL nav derīgs, piemērs\" is not a natural or accurate translation of \"URL not valid, example\". \"Vietrādis\" is related to wind or wind direction, which doesn't fit the context of a URL. A more suitable translation would focus on the meaning of 'invalid'.",
+          "suggestion": "URL nav derīgs, piemērs"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -171,13 +201,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'උදාහරණය' (udaharanya) is a direct transliteration of 'example' and could be more naturally phrased in Sinhala. It feels somewhat literal.",
+          "suggestion": "Consider alternatives like 'උදාහරණයක්' (udaharanyak) or a more descriptive phrase like 'උදාහරණ වශයෙන්' (as an example)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'URL nie je platná, príklad' is a literal translation and somewhat awkward. 'platná' should be 'správna' or 'funkčná' for a more natural flow, especially in an error message. The phrase 'príklad' (example) is unnecessary and confusing in this context.",
+          "suggestion": "URL nie je správna."
+        }
+      ],
       "approved_at": null
     },
     "sl": {

@@ -3,7 +3,7 @@
   "content": "Upload picture",
   "content_en_sha1_hash": "0a024e54cb81f9e05f0faa90496774cb8e76dcae",
   "created_at": "2025-05-19T21:30:53.320Z",
-  "updated_at": "2025-05-20T09:43:57.970Z",
+  "updated_at": "2025-05-21T05:32:30.081Z",
   "comment": {
     "text": "Upload picture is a button label used to trigger uploading an image. It appears as a label on a UI element that allows users to select or upload images.",
     "is_auto": true,
@@ -99,7 +99,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"画像のアップロード\" is a very literal translation. A more natural and user-friendly translation for a button or link labeled \"Upload picture\" would be something like \"写真のアップロード\" (Shashin no upload) or simply \"アップロード\" (upload).",
+          "suggestion": "写真のアップロード"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -147,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Încărcare imagine\" is technically correct but not the most natural phrasing for a button label or instruction. 'Încărcare imagine' translates literally to 'Image Upload'. A more idiomatic translation for 'Upload picture' would be 'Încarcă imagine'.",
+          "suggestion": "Încarcă imagine"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -177,7 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Учитај слику' is not the most natural or accurate translation of 'Upload picture'. A more common and accurate translation would be 'Отпреми слику'. 'Учитај' implies loading data into a system, while 'Отпреми' is the standard term for uploading a file.",
+          "suggestion": "Отпреми слику"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -195,7 +213,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Передати зображення\" doesn't accurately convey the meaning of \"Upload picture\". 'Передати' implies transferring or handing over, not uploading. A more appropriate translation would convey the action of uploading a file.",
+          "suggestion": "Завантажити зображення"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

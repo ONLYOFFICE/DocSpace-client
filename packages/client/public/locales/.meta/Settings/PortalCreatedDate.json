@@ -3,7 +3,7 @@
   "content": "Portal Created date: {{date}}",
   "content_en_sha1_hash": "0c0be7c4225b3b15fff1a9c616f27bd20a672258",
   "created_at": "2025-05-19T21:30:52.170Z",
-  "updated_at": "2025-05-20T09:44:48.815Z",
+  "updated_at": "2025-05-21T03:44:36.305Z",
   "comment": {
     "text": "This translation key displays the date a portal was created. It is used on a page displaying information about portal settings and appears as a label next to a specific field in the MainInfo component of the PortalSettings page.",
     "is_auto": true,
@@ -105,7 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Portal Created date' is not directly equivalent to 'ວັນທີສ້າງປະຕູ'. A more accurate translation would consider the context of 'Portal Created date' and possibly translate it as 'ວັນທີສ້າງເວັບໄຊ້' (Date website created) or a similar phrase, depending on the specific meaning.",
+          "suggestion": "Consider alternative translations like 'ວັນທີສ້າງເວັບໄຊ້' or 'ວັນທີສ້າງໂປຣໂຕຄອນ' (Date portal created) to better reflect the intended meaning."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -117,7 +123,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Aangemaakt' implies 'created' but is more akin to 'manufactured' or 'produced'. A more accurate translation of 'Created' would be 'Gemaakt'.",
+          "suggestion": "Portal Gemaakt datum: {{date}}"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -153,7 +165,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Sinhala word 'ද්වාරය' (dvaaraya) means 'door' and might be too literal. 'Portal' often implies a more sophisticated entry point, which might be better conveyed by a more abstract term. A better translation for 'Portal' might be 'අන්තර් ගතවාරණය' (antharageetvaaranya) or something similar, depending on the specific context.",
+          "suggestion": "Consider using a more abstract word for 'Portal' that accurately reflects its meaning in the context of settings. Examples: 'අන්තර් ගතවාරණය' (antharageetvaaranya), or consult with a subject matter expert for a more precise translation."
+        },
+        {
+          "type": "formatting",
+          "description": "The '{{date}}' placeholder is consistent with the English version. Verify that the Sinhala rendering of this placeholder functions as expected in the target system.",
+          "suggestion": "Confirm proper display and functionality of the '{{date}}' placeholder within the Sinhala environment."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +194,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'креиран' (kreiran) is a less common and potentially awkward way to say 'created' in this context. 'Направљен' (napravljen) or 'Оснван' (osnovan) would be more natural and align better with a formal setting like settings.",
+          "suggestion": "Портал направљен датум: {{date}}"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Portal kreiran datum:' is not the most natural or accurate translation of 'Portal Created date:'. A better translation would be 'Datum kreiranja portala:' or 'Datum osnivanja portala:'",
+          "suggestion": "Datum kreiranja portala:"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

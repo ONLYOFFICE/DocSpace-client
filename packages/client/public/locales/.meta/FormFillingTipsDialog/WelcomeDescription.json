@@ -3,7 +3,7 @@
   "content": "Here, you can organize straightforward PDF form filling, easily collect and analyze responses. Ready to get started?",
   "content_en_sha1_hash": "e55e78dc75d65a0f759607059fbe1b8418fc68bc",
   "created_at": "2025-05-19T21:30:55.151Z",
-  "updated_at": "2025-05-20T09:40:19.092Z",
+  "updated_at": "2025-05-21T10:42:55.113Z",
   "comment": {
     "text": "This translation key contains a welcome message used to describe the functionality of PDF form filling and response collection, appearing in a dialog.",
     "is_auto": true,
@@ -27,19 +27,47 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The English content uses quotation marks around \"PDF\". The Arabic translation lacks this formatting.",
+          "suggestion": "هنا، يمكنكم تنظيم عملية تعبئة نماذج \"PDF\" بسهولة..."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'redaktə edə' (edit) doesn't quite fit the context of 'organize' in the English version. It implies editing an existing form, not organizing the process of filling one.",
+          "suggestion": "Burada sadə PDF formasının doldurulmasını təşkil edə və cavabları asanlıqla toplayıb təhlil edə bilərsiniz."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrasing 'Burada... redaktə edə...' feels slightly awkward. A more natural flow would be to combine the actions.",
+          "suggestion": "Burada sadə PDF formasının doldurulmasını təşkil edə və cavabları asanlıqla toplayıb təhlil edə bilərsiniz."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'straightforward PDF form filling' is translated as 'лесно попълване на PDF формуляри'. While technically correct, it loses the nuance of 'straightforward'. A better translation might emphasize simplicity or ease.",
+          "suggestion": "Тук можете да организирате лесно и бързо попълване на PDF формуляри."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Ready to get started?' is translated as 'Готови ли сте да започнете?'. While a direct translation, it could be more engaging. Considering the context of a welcome message, a more inviting phrasing might be preferable.",
+          "suggestion": "Готови ли сте да започнете? / Хайде да започнем!"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -69,7 +97,18 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"organize straightforward PDF form filling\" is not accurately translated. 'Järjestää' implies to organize or arrange, but in this context 'täyttämistä' (filling) should be emphasized. A more accurate translation would convey the action of completing forms.",
+          "suggestion": "Täällä voit helpottaa PDF-lomakkeiden täyttämisen, helposti kerätä sekä analysoida vastauksia. Oletko valmis aloittamaan?"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'helposti kerätä sekä analysoida vastauksia' is slightly clunky. Using 'ja' instead of 'sekä' would improve flow.",
+          "suggestion": "Täällä voit helpottaa PDF-lomakkeiden täyttämisen, helposti kerätä ja analysoida vastauksia. Oletko valmis aloittamaan?"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +120,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"organize straightforward PDF form filling\" is a bit awkward and could be improved for naturalness in Armenian. \"Կազմակերպել PDF ձևերի պարզ լրացում\" is a literal translation, but sounds less fluid.",
+          "suggestion": "Consider a phrasing like \"Այստեղ դուք կարող եք հեշտությամբ լրացնել PDF ձևեր, հավաքել և վերլուծել արձագանքները\" (Here you can easily fill out PDF forms, collect and analyze responses)."
+        },
+        {
+          "type": "formatting",
+          "description": "The question mark in \"Պատրա՞ստ եք սկսել:\" could be considered slightly less formal than the tone of the original English. While grammatically correct, it might be more appropriate to use a declarative statement or a less emphatic question.",
+          "suggestion": "Consider using \"Պատրաստ եք սկսել?\" (Prepared to start?) or a more affirmative statement such as \"Դուք պատրաստ եք սկսել?\" (Are you prepared to start?)"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,19 +143,57 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'organize straightforward PDF form filling' is not accurately translated. '整理し' (seiri shi) implies organizing something that's already somewhat chaotic or messy. 'Straightforward' suggests simplicity, not needing extensive organization.",
+          "suggestion": "ここでは、シンプルなPDFフォームの記入をサポートし、回答を簡単に収集して分析することができます。"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'Ready to get started?' is missing from the Japanese version. The sentence implies continuation, and the question mark conveys a welcoming and inviting tone.",
+          "suggestion": "それでは、始めましょうか？"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation of \"organize straightforward PDF form filling\" is awkward. \"구성하고\" implies constructing or composing, which doesn't quite convey the meaning of organizing or structuring.",
+          "suggestion": "여기에서 간단한 PDF 양식 작성을 정리하고 응답을 쉽게 수집 및 분석할 수 있습니다."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While not strictly incorrect, \"작성\" (writing) is a bit formal for form filling. A more natural word would be used.",
+          "suggestion": "여기에서 간단한 PDF 양식을 채우고 응답을 쉽게 수집 및 분석할 수 있습니다."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit long and could be broken down for better readability. While grammatically correct, it feels less conversational.",
+          "suggestion": "여기에서 간단한 PDF 양식을 쉽게 채울 수 있고, 응답을 수집 및 분석할 수 있습니다. 시작하시겠어요?"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ຕື່ມຂໍ້ມູນໄດ້ຢ່າງສະຫງ່າງ' (tuem khom dai yang sahng) doesn't accurately convey the meaning of 'easily collect and analyze responses'. It literally translates to 'can fill data elegantly/gracefully'. A more appropriate translation would focus on ease of collection and analysis.",
+          "suggestion": "ຕື່ມຂໍ້ມູນໄດ້ຢ່າງສະດວກສະບາຍ"
+        },
+        {
+          "type": "formatting",
+          "description": "The question mark '?' at the end of the sentence feels slightly abrupt. It's better to soften the tone.",
+          "suggestion": "ຫືຼ? ກຽມພ້ອມທີ່ຈະເລີ່ມຕົ້ນແລ້ວບໍ? ຫືຼ?"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -123,7 +211,23 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Here, you can organize straightforward PDF form filling' is not entirely captured by 'Tutaj możesz zorganizować proste wypełnianie formularzy PDF'. It loses some nuance of 'organize' and the straightforward aspect.",
+          "suggestion": "Tutaj możesz łatwo uporządkować i uprościć wypełnianie formularzy PDF..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'a także' ('as well as') feels a bit clunky and formal in this context. It interrupts the flow.",
+          "suggestion": "Tutaj możesz łatwo uporządkować i uprościć wypełnianie formularzy PDF, a następnie łatwo zbierać i analizować odpowiedzi."
+        },
+        {
+          "type": "formatting",
+          "description": "The question mark at the end of 'Zaczynamy?' is acceptable, but a more engaging phrasing could be considered.",
+          "suggestion": "Gotowi?"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,7 +245,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The verb 'faceți' is unnecessary and incorrect in this context. It's a reflexive verb that doesn't fit with the meaning of 'make straightforward'.",
+          "suggestion": "Aici, puteți simplifica completarea formularelor PDF, dar colectarea și analiza răspunsurilor ușoară. (Here, you can simplify PDF form filling, but collecting and analyzing responses is easy.)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'organize straightforward' isn't accurately translated. 'Simplifica' (to simplify) is a more accurate reflection of the intended meaning.",
+          "suggestion": "Aici, puteți simplifica completarea formularelor PDF..."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,13 +268,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Ready to get started?' is translated as 'ආරම්භ කිරීමට සූදානම්ද?'. While technically correct, a more natural and welcoming translation in Sinhala would be something like 'ඔබ දැන් ආරම්භ කිරීමට කැමතිද?' (Oba dān den aarambha karamāthi dā?) or 'ඔබ දැන් ආරම්භ කරන්න කැමතිද?' (Oba dān den aarambha karanna kamathi dā?)",
+          "suggestion": "ඔබ දැන් ආරම්භ කරන්න කැමතිද? (Oba dān den aarambha karanna kamathi dā?)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"straightforward\" is not accurately translated. \"Bezprostredné\" implies immediacy rather than simplicity or ease.",
+          "suggestion": "Tu môžete organizovať jednoduché vyplňovanie PDF formulárov..."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -177,13 +304,30 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'formulara' is a less common and slightly incorrect form. 'Formi' or 'obrazaca' would be more appropriate for the context of PDF forms.",
+          "suggestion": "Ovde možete organizovati jednostavno popunjavanje PDF formi/obrazaca..."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'straightforward PDF form filling' is translated as 'kolay bir PDF form doldurma süreci'. While 'kolay' (easy) is accurate, 'süreci' (process) adds unnecessary verbosity. A more direct translation would better reflect the original meaning.",
+          "suggestion": "Burada PDF formlarını kolayca doldurabilirsiniz..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Ready to get started?' is translated as 'Başlamaya hazır mısınız?'. This is grammatically correct but slightly less natural in Turkish. A more inviting alternative could be used.",
+          "suggestion": "Hemen başlamaya mı hazırsınız?"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

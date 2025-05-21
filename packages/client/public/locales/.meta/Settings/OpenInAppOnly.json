@@ -3,7 +3,7 @@
   "content": "Open in app only",
   "content_en_sha1_hash": "b846e99fcf5e7930f2706ee5cc4592c7f355bb61",
   "created_at": "2025-05-19T21:30:52.110Z",
-  "updated_at": "2025-05-20T09:44:50.951Z",
+  "updated_at": "2025-05-21T03:46:33.277Z",
   "comment": {
     "text": "The \"OpenInAppOnly\" translation key is used to display the label for a radio button that controls whether links open in the app or in a web browser. In the PortalSettings categories page, this label will be displayed next to the radio buttons allowing users to configure deep link settings. Translators should focus on making this text clear and concise for their respective language.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Yalnız tətbiqdə açın\" is a more literal translation and could be improved for natural flow. \"Təkcə tətbiqdə aç\" or \"Sərfəliş tətbiqdə aç\" might be more idiomatic.",
+          "suggestion": "Consider \"Təkcə tətbiqdə aç\" or \"Sərfəliş tətbiqdə aç\"."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -141,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation conveys the general meaning, 'Deschidere numai cu aplicație' is a slightly literal translation and sounds less natural in Romanian. A more idiomatic translation would be 'Doar în aplicație'.",
+          "suggestion": "Doar în aplicație"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඇප් එකේ විතරක් විවෘත කරන්න' is a literal translation and may not be the most natural or idiomatic way to express 'Open in app only' in Sinhala. While understandable, it sounds slightly awkward.",
+          "suggestion": "Consider a more natural phrasing like 'හැරි ගන්නා හැටි - μόνο යෙදුමේ' (Hari gannena hati - mono yedume) or 'යෙදුමේ විතරක් විවෘත කරන්න' (yedume vitarak vivruta kanna)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Отвори само у апликацији\" while understandable, is not the most natural or idiomatic Serbian translation for 'Open in app only'.  A better translation would convey the restriction more clearly.",
+          "suggestion": "Отвори искључиво у апликацији"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -183,7 +207,18 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Yalnızca uygulamada aç' is literal and doesn't convey the nuance of 'Open in app only' in a user-friendly way. It sounds somewhat robotic and unnatural in Turkish.",
+          "suggestion": "Sadece uygulama içinde aç"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Yalnızca uygulamada aç' lacks the flow and common phrasing used in UI labels. It feels clunky.",
+          "suggestion": "Uygulamada aç"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

@@ -3,7 +3,7 @@
   "content": "Select user types",
   "content_en_sha1_hash": "e927a3a263b9c357799a240f53e6fae4a0f1665a",
   "created_at": "2025-05-19T21:30:52.590Z",
-  "updated_at": "2025-05-20T09:44:31.682Z",
+  "updated_at": "2025-05-21T03:13:23.285Z",
   "comment": {
     "text": "\"Select user types\" is a label used to describe a step or option in a workflow that allows users to select different types of users. This translation key is used in UI elements such as buttons, dialog titles, and descriptions, where it appears in contexts like data import steps for Google Workspace, Nextcloud Workspace, and Onlyoffice Workspace.",
     "is_auto": true,
@@ -159,7 +159,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Selectare tip de utilizator' is not the most natural or accurate translation of 'Select user types'. While technically correct, it sounds somewhat formal and clunky. A more idiomatic translation would be 'Alege tipuri de utilizatori' or 'Selectează tipuri de utilizatori'.",
+          "suggestion": "Alege tipuri de utilizatori"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -171,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'පරිශ්‍රීලකයින්' (parishreelakayin) is a less common and slightly awkward way to say 'users'. A more common and natural translation would be 'පරිශ්‍රමකරුවන්' (parishramakarawan).",
+          "suggestion": "පරිශ්‍රමකරුවන්"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -189,7 +201,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Изабери типове корисника' doesn't fully capture the nuance of 'Select user types'. 'Изабери' means 'Choose' or 'Select', which is acceptable. However, 'типове корисника' translates literally to 'types of users'.  A more natural and accurate translation might be 'Избор типова корисника' which means 'Selection of user types' or 'Одредите типове корисника' which means 'Specify user types'.",
+          "suggestion": "Consider 'Избор типова корисника' or 'Одредите типове корисника'"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

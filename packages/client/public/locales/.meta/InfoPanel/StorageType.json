@@ -3,7 +3,7 @@
   "content": "Storage type",
   "content_en_sha1_hash": "8f4523e42a13768b2f537d048ba0d978c0098600",
   "created_at": "2025-05-19T21:30:54.967Z",
-  "updated_at": "2025-05-20T09:40:41.732Z",
+  "updated_at": "2025-05-21T09:42:45.037Z",
   "comment": {
     "text": "This translation key is used to display different storage type labels in a user interface. It appears on an info panel and is referenced in code when displaying various storage-related information. Translators should provide equivalent descriptions for \"Storage Type\" in different languages.",
     "is_auto": true,
@@ -117,7 +117,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Type opslag' is technically correct but sounds unnatural in Dutch. The standard and more natural translation for 'Storage type' is 'Opslagtype'.",
+          "suggestion": "Opslagtype"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -153,13 +159,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ආචයන වර්ගය' doesn't accurately convey 'Storage type'. 'ආචයන' generally refers to vehicles or machines. A more appropriate translation would relate to data storage or physical storage.",
+          "suggestion": "Possible suggestions include: 'သိimpanan වර්ගය' (simpan wargaya - storage type), 'භාර වැඩියන් වර්ගය' (bhara wadiyan wargaya - data storage type), or a more descriptive phrase depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Typ úložného priestoru\" is a very literal translation and sounds unnatural in Slovak. A more natural phrasing would be \"Typ pamäte\" or \"Úložný priestor\".",
+          "suggestion": "Consider using \"Typ pamäte\" or \"Úložný priestor\" for a more natural-sounding translation."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,7 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Тип складишта\" literally translates to \"Type of warehouse\". While understandable, \"Storage type\" implies a broader category of storage (e.g., SSD, HDD, Cloud storage) rather than a specific warehouse. A more accurate translation that captures the broader meaning might be \"Тип складирања\" (Type of storage).",
+          "suggestion": "Тип складирања"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

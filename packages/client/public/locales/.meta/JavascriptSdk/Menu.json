@@ -3,7 +3,7 @@
   "content": "Left menu",
   "content_en_sha1_hash": "d449e460a7751f303693a0ac9942ffa899262757",
   "created_at": "2025-05-19T21:30:54.577Z",
-  "updated_at": "2025-05-20T09:41:31.157Z",
+  "updated_at": "2025-05-21T08:55:52.670Z",
   "comment": {
     "text": "The translation key \"Left menu\" is used to describe a left navigation menu element. It appears as a label in the PortalSettings page and will be displayed in English translations, indicating that this is where the user can access developer tools and other settings.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"القائمة المتبقية\" (Al-qa'imah al-mutabaqqiyah) literally translates to 'Remaining list' which doesn't accurately convey the meaning of 'Left menu'.  It implies a list that's leftover, rather than a menu positioned on the left side.",
+          "suggestion": "Consider \"القائمة الجانبية\" (Al-qa'imah al-janibiyyah) which translates to 'Side menu' or \"القائمة اليسرى\" (Al-qa'imah al-yusra) which translates to 'Left menu'."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -57,7 +63,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Menü' is a direct transliteration and doesn't fully convey the meaning of 'Left menu'. It only translates 'menu', but misses the 'Left' part.",
+          "suggestion": "Linkes Menü"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -87,13 +99,25 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Ցանկ\" (Tsank') can mean \"list\" or \"menu,\" it's a very literal translation of \"menu.\" A more natural Armenian translation for \"Left menu\" would convey the position (left) as well as the function. Simply \"Ցանկ\" lacks the context of it being a navigation menu on the left side.",
+          "suggestion": "Consider a translation like \"Աջակողմյան ընտրացանկ\" (Ajakoqmjyan entrancank) which translates to \"Left-hand menu\" or \"Ընտրացանկ ձախ կողմում\" (Entrancank dzhakh koghum) which means \"Menu on the left side.\""
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Menù a sinistra\" is understandable, a more natural and accurate translation of \"Left menu\" in Italian would be \"Menu a sinistra\". The capitalization of 'Menù' is not standard.",
+          "suggestion": "Menu a sinistra"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -111,7 +135,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ເມນູ' is simply the transliteration of 'menu' and doesn't convey the meaning of 'Left menu'. It doesn't specify it's a left menu.",
+          "suggestion": "Left menu could be translated as 'ເມນູດ້ານຊ້າຍ' (menu dan sai) or 'ເມນູທາງດ້ານຊ້າຍ' (menu thàng dan sai)."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -123,13 +153,25 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Dutch translation \"Menu links\" does not accurately convey the meaning of \"Left menu\". \"Left menu\" refers to a navigation menu located on the left side of a screen, while \"Menu links\" simply means menu links.",
+          "suggestion": "A more accurate translation would be \"Linkermenu\" or \"Links menu\"."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Menu po lewej' while technically correct, is a literal translation and may not be the most natural or idiomatic way to express 'Left menu' in Polish UI/UX contexts. A more common and user-friendly translation might be 'Menu główne' or 'Lewe menu'.",
+          "suggestion": "Consider 'Menu główne' or 'Lewe menu' for a more natural and idiomatic translation."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -147,7 +189,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Meniu' only translates to 'Menu'. The English 'Left menu' implies a specific location of the menu, which is not conveyed in the Romanian translation. A more accurate translation would include a word specifying 'left'.",
+          "suggestion": "Meniul din stânga"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -159,7 +207,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'වමේ වට්ටෝරුව' (vame vattoruwa) literally translates to 'left plate' which is not an accurate representation of 'Left menu'. It doesn't convey the meaning of a menu on the left side of a screen or application.",
+          "suggestion": "A more accurate translation could be 'මැරකූ මෙනු' (meraku menu) which directly means 'left menu', or 'වාම් පැත්ත මෙනු' (vaam petta menu) which means 'left side menu'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +231,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Леви мени' is a literal translation of 'Left menu'. While understandable, a more natural and idiomatic Serbian (Cyrillic) translation would be 'Лево мени'.",
+          "suggestion": "Лево мени"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -201,7 +261,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Menu trái\" is technically 'Left menu,' it's not the most natural or idiomatic translation in Vietnamese. \"Menu bên trái\" or simply \"Menu trái\" (depending on context) would be more common and clear.",
+          "suggestion": "Menu bên trái"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

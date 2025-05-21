@@ -3,7 +3,7 @@
   "content": "Leave blank to use default header",
   "content_en_sha1_hash": "aae1a22631ce0f516828a9dbc92850fbbd6386dd",
   "created_at": "2025-05-19T21:30:51.353Z",
-  "updated_at": "2025-05-20T09:45:18.141Z",
+  "updated_at": "2025-05-21T04:26:24.792Z",
   "comment": {
     "text": "This translation key is used to display a subtitle that explains the usage of an authentication header when leaving it blank. It is used in a UI element where users can configure document service settings, and appears as a tooltip or label for clarity. The text prompts users to leave the header blank if they wish to use the default header setting.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Standart başlığı istifadə etmək üçün boş buraxın.' while understandable, isn't the most natural or precise translation of 'Leave blank to use default header'. A more accurate rendering might focus on the 'default' aspect.",
+          "suggestion": "Başlanğıc başlığını istifadə etmək üçün boş qoyun."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -69,7 +75,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Jätä tyhjäksi käyttääksesi oletusotsikkoa' is a literal translation and sounds unnatural in Finnish. A more natural phrasing would be something like 'Jätä tyhjäksi käyttääksesi oletusarvoista otsikkoa' or 'Anna tyhjäksi käyttääksesi oletusotsikkoa'.",
+          "suggestion": "Anna tyhjäksi käyttääksesi oletusotsikkoa"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +93,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Թողեք դատարկ՝ լռելյայն վերնագիրը օգտագործելու համար\" is a literal translation that doesn't convey the intended meaning as naturally in Armenian. The phrase 'լռելյայն վերնագիրը' sounds overly formal and technical for a settings context. It's better to use a more common and easily understandable phrase.",
+          "suggestion": "Թողեք դատարկ՝ դեֆոլտ վերնագիրը օգտագործելու համար"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of a hyphen (-) is unusual in this context. A dash (–) or no connector at all would flow better.",
+          "suggestion": "Թողեք դատարկ դեֆոլտ վերնագիրը օգտագործելու համար"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -141,7 +164,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Lăsați spațiu necompletat pentru a folosi antetul implicit' is overly literal and sounds unnatural in Romanian. 'Leave blank' is best translated as 'Lăsați câmpul gol' or 'Lăsați câmpul liber'.",
+          "suggestion": "Lăsați câmpul gol pentru a folosi antetul implicit"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +182,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is overly literal and doesn't flow naturally in Sinhala. 'ශීර්ෂකය හිස්වල් තැබීම පෙරනිතිගත ශීර්ෂකය භාවිතා කිරීමට ඉඩ දීම' is a very wordy and awkward phrasing. It translates to 'Leaving the header empty allows using the default header'.",
+          "suggestion": "A more natural translation would be something like: 'ශීර්ෂකය සුදු හිස්සෙන් තැබුවහ පෙරනිතිගත ශීර්ෂකය භාවිත වේ.' or 'ශීර්ෂකය සුදු හිස්සෙන් තැබුවහ පෙරනිති ආකාරයෙන් පෙනේ.' (This translates to 'If the header is left blank, the default header is used.')"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'ඉඩ දීම' is slightly formal and can be simplified.",
+          "suggestion": "Consider replacing 'ඉඩ දීම' with a simpler word or phrase depending on the specific nuance desired."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

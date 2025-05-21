@@ -3,7 +3,7 @@
   "content": "Metadata",
   "content_en_sha1_hash": "251edc0eb5a820646bda4e103f0f007fd55321f3",
   "created_at": "2025-05-19T21:30:49.911Z",
-  "updated_at": "2025-05-20T09:46:42.297Z",
+  "updated_at": "2025-05-21T00:44:24.054Z",
   "comment": {
     "text": "This translation key is used to display the label \"Metadata\" in a settings plugin dialog. It appears as a heading and is likely associated with a button or section title, providing context for users viewing plugin information.",
     "is_auto": true,
@@ -105,7 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ຂໍ້ມູນກ່ຽວກັບຂໍ້ມູນ\" (kh้อมูล gỉeow kh้อมูล) literally translates to 'information about information.' While it conveys a general idea, it's not a natural or precise translation of 'Metadata.' Metadata means data about data and should be expressed more directly.",
+          "suggestion": "Consider alternatives like \"ຂໍ້ມູນຫຼັກ\" (khỏ mun lạp) – meaning 'core data,' or \"ຂໍ້ມູນລໍາ້ຽວ\" (kh้อมูล lampiao) – meaning 'detailed data' or a more creative translation depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -177,7 +183,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Metapodaci' doesn't accurately convey the meaning of 'Metadata'. While it sounds like a potential derivative, it's not a standard or widely understood Serbian term for Metadata. A more appropriate translation would be 'Metadatak'.",
+          "suggestion": "Metadatak"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

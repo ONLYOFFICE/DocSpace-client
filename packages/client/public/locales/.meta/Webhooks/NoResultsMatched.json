@@ -3,7 +3,7 @@
   "content": "No results match this filter. Try a different one or clear filter to view all items.",
   "content_en_sha1_hash": "27002996de1d43e168e2639dc22f37e3c277047d",
   "created_at": "2025-05-19T21:30:49.777Z",
-  "updated_at": "2025-05-20T09:46:59.657Z",
+  "updated_at": "2025-05-21T01:06:56.294Z",
   "comment": {
     "text": "This translation key is used to display a message when filtering results do not match any items. It appears as a tooltip or button label on a clear filter button in a UI component, prompting users to try again or remove the filter.",
     "is_auto": true,
@@ -27,7 +27,23 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'لا تتطابق نتائج البحث مع هذه المدخلات' doesn't accurately convey the meaning of 'No results match this filter.' 'Madkhalat' (مدخلات) translates to 'inputs', which is not the intended meaning of 'filter' in this context. It suggests a user input rather than a filter selection.",
+          "suggestion": "لا توجد نتائج تطابق هذا الفلتر. حاول فلترًا آخر أو امسح الفلتر لعرض جميع العناصر."
+        },
+        {
+          "type": "spelling",
+          "description": "While 'فلتر' is understandable, it's a transliteration of 'filter' and not the most natural or commonly used Arabic term for a filter in this technological context. It can appear less polished.",
+          "suggestion": "لا توجد نتائج تطابق هذا التصفية. حاول تصفية أخرى أو امسح التصفية لعرض جميع العناصر."
+        },
+        {
+          "type": "grammar",
+          "description": "While the sentence structure isn't overtly wrong, it could be slightly more fluent. The repeated use of 'حاول' (try) in the original English feels clunky in the Arabic translation.",
+          "suggestion": "لا توجد نتائج تطابق هذا الفلتر. جرّب فلترًا آخر أو امسح الفلتر لعرض جميع العناصر."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -81,7 +97,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"մեկ այլ կամ մաքուր զտիչ\" is awkward. 'Or' is unnecessary and 'մաքուր զտիչ' (clear filter) is redundant, as 'մաքուր զտիչ' inherently implies clearing the filter.",
+          "suggestion": "Փորձեք մեկ այլ զտիչ՝ բոլոր տարրերը դիտելու համար."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure could be improved for better readability in Armenian. It feels a bit choppy.",
+          "suggestion": "Փորձեք մեկ այլ զտիչ կամ մաքրեք զտիչը՝ բոլոր տարրերը դիտելու համար."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,13 +126,35 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"다른 항목을 사용하거나\" (use another item) is awkward. It implies the filter itself is an item to be used.",
+          "suggestion": "이 필터를 해제하거나 다른 필터를 사용해 보세요."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"필터를 삭제하세요\" (delete the filter) can sound overly abrupt or technical. A softer phrasing would be better.",
+          "suggestion": "필터를 해제해 보세요."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຕົວກັ່ນຕອງ' is misspelled. It should be 'ຕົວກອງ'.",
+          "suggestion": "ຕົວກອງ"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'ລຶບລ້າງ' is a bit formal and could be simplified for better readability in this context. A more natural phrasing would be 'ລ້າງອອກ'.",
+          "suggestion": "ລ້າງອອກ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -123,7 +172,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Polish translation uses a comma (`,`) to separate the two options 'Wypróbuj inny filtr' and 'wyczyść go'. In Polish, a conjunction (i) or a semicolon (;) is more common for joining two options. While a comma is grammatically correct, it reads less naturally.",
+          "suggestion": "Brak wyników pasujących do tego filtra. Wypróbuj inny filtr i wyczyść go, aby zobaczyć wszystkie elementy."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,19 +196,47 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Filtru nu a produs rezultate\" is slightly awkward. A more natural Romanian phrasing would be \"Niciun rezultat nu a fost găsit\" or \"Nu au fost găsite rezultate\".",
+          "suggestion": "Nu au fost găsite rezultate."
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, a more idiomatic and user-friendly translation of 'clear filter' might be 'ștergeți filtrul' instead of 'ștergeți filtrul'.",
+          "suggestion": "ștergeți filtrul"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'apply another filter' ('применить другой фильтр') is a bit awkward. A more natural phrasing for 'try a different one' would be 'попробуйте другой'.",
+          "suggestion": "Попробуйте другой фильтр или очистите его, чтобы просмотреть все элементы."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'සියලුම අථක බැලීමට' is not the best translation for 'to view all items'. 'අථක' is not commonly used in this context. A more accurate translation would use words related to 'items' or 'entries'.",
+          "suggestion": "සියලුම අයිතම බැලීමට (Siyaḷuma aithama baḷemita) or සියලුම ලිපි බැලීමට (Siyaḷuma lipi baḷemita)"
+        },
+        {
+          "type": "spelling",
+          "description": "While likely a typo and understandable, 'පෙරහන' can also be 'පෙරහඳ'.",
+          "suggestion": "Consider using 'පෙරහඳ' if it suits the overall tone and style."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +254,18 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'филтеру' is a dative case and grammatically incorrect in this context. It should be in the nominative case.",
+          "suggestion": "филтер"
+        },
+        {
+          "type": "grammar",
+          "description": "The verb 'одговарају' (correspond) doesn't quite capture the meaning of 'match'. A more appropriate verb would convey the idea of aligning or fulfilling the filter criteria.",
+          "suggestion": "одговара"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -201,7 +295,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"以查看所有项目\" (yi kan jian suoyou xiangmu) translates to \"to view all projects\" which is slightly less natural than the original's \"to view all items\".  While not technically incorrect, \"items\" is a better fit for the context of filters and results.",
+          "suggestion": "没有与此筛选条件匹配的结果。请尝试其他筛选条件或清除筛选器，以查看所有条目。"
+        }
+      ],
       "approved_at": null
     }
   }

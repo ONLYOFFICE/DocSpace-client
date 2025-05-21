@@ -3,7 +3,7 @@
   "content": "Remove the unnecessary files or contact the {{productName}} administrator to upgrade the tariff plan.",
   "content_en_sha1_hash": "9fd6bb65f7678c7fb00eb2a9266bacc48fe55e5b",
   "created_at": "2025-05-19T21:30:54.119Z",
-  "updated_at": "2025-05-20T09:42:24.113Z",
+  "updated_at": "2025-05-21T07:48:36.965Z",
   "comment": {
     "text": "This translation key is used to display a message prompting users to remove unnecessary files or contact an administrator to upgrade their tariff plan. It appears in a quota management interface and informs users of available options to modify their plans.",
     "is_auto": true,
@@ -27,13 +27,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation uses a full stop at the end of the first clause, which might be preferable to a conjunction. While grammatically correct, it might improve readability to separate the clauses more distinctly.",
+          "suggestion": "قم بإزالة الملفات غير الضرورية. أو اتصل بمسؤول {{productName}} لترقية خطة التعريف."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Azerbaijani translation does not include the same formatting as the English. The English uses bolding to indicate the 'productName' variable, which should ideally be mirrored in the Azerbaijani translation.",
+          "suggestion": "Consider adding a placeholder or variable marker similar to {{productName}} in the Azerbaijani translation to indicate where the product name should be inserted."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -69,7 +81,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"tilauksesi\" (your subscription) isn't a direct and accurate translation of \"tariff plan.\" While it's close in meaning, 'tariff plan' refers to a specific pricing structure.",
+          "suggestion": "Consider a more precise translation such as 'hintasuunnitelmasi' or 'palvelupakettisi' depending on the exact product/service context. If a more general term is acceptable, 'sopimuksesi' (your agreement) could work."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -105,7 +123,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation includes a period (។) at the end of the sentence. While not strictly incorrect, it's more common to omit periods in this type of instruction or notification text in Lao. Consider removing it for a more natural feel.",
+          "suggestion": "ລົບລ້າງເອກະສານທີ່ບໍ່ຈໍາເປັນ ຫຼືຕິດຕໍ່ຜູ້ບໍລິຫານ {{productName}} ເພື່ອຍົກລະດັບແຜນການຄ່າບໍລິການ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +165,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'upgrade the tariff plan' is translated as 'selecta un alt plan tarifar' which means 'select another tariff plan'. While close in meaning, 'upgrade' implies an improvement of the existing plan, which isn't necessarily conveyed by 'select another'. A more accurate translation would be something along the lines of 'actualizați planul tarifar'.",
+          "suggestion": "Actualizați planul tarifar."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +183,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ගාස්තු සැලැස්ම උත්ශ්‍රේණි කිරීම සඳහා\" (Gaasthu selasma uthsreniki karama daka) translates more accurately to 'to upgrade the tariff plan' rather than just 'for upgrading the tariff plan'. While not drastically wrong, the current phrasing is slightly less natural in Sinhala.",
+          "suggestion": "ගාස්තු සැලැස්ම උත්ශ්‍රේණි කරන්න"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of `{{productName}}` suggests it should be preserved in the Sinhala translation, as it is in the English. There doesn't seem to be any Sinhala equivalent provided. ",
+          "suggestion": "Keep the variable `{{productName}}` as is."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +212,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'уклоните' (uklonite) is a somewhat formal and less common way to say 'remove' in this context. A more natural and common translation would be 'обришите' (obrisite).",
+          "suggestion": "Обришите непотребне датотеке"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -201,7 +248,18 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"费用版本\" (feiyong banben) translates to \"tariff version\" which isn't the intended meaning of \"tariff plan\". It should convey the idea of upgrading the pricing tier or plan.",
+          "suggestion": "升级套餐 (shēngjí tàocān) - Upgrade the package/plan"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation retains the {{productName}} placeholder.  The English content uses this, and it's important to maintain consistency.",
+          "suggestion": "Keep the {{productName}} placeholder as is."
+        }
+      ],
       "approved_at": null
     }
   }

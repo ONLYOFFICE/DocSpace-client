@@ -3,7 +3,7 @@
   "content": "Hide",
   "content_en_sha1_hash": "34d8b60fe25332f7b98585e82e753eaf502c3e50",
   "created_at": "2025-05-19T21:30:51.369Z",
-  "updated_at": "2025-05-20T09:45:17.423Z",
+  "updated_at": "2025-05-21T04:25:38.541Z",
   "comment": {
     "text": "This translation key is used to display a label indicating whether document service settings are being shown or hidden. It appears in an integrated settings UI element and changes its content based on the state of the setting.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation \"Gizlədin\" is the first-person singular past tense of the verb 'gizləmək' (to hide). The correct translation for 'Hide' (as a setting label) should be an imperative form or a noun.",
+          "suggestion": "Gizlə"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"පහ කිරීමට\" (paha karamnu) translates to 'to lower' or 'to bring down'. It doesn't accurately convey the meaning of 'Hide', which implies concealing something from view.",
+          "suggestion": "A more appropriate translation for 'Hide' would be \"සඟවා\" (sagawa) which means 'to conceal' or 'to hide'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

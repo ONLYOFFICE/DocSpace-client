@@ -3,7 +3,7 @@
   "content": "Read now",
   "content_en_sha1_hash": "9f762253688c402f7f083fe41a6f024509cb2b8b",
   "created_at": "2025-05-19T21:30:53.621Z",
-  "updated_at": "2025-05-20T09:43:21.068Z",
+  "updated_at": "2025-05-21T06:12:20.706Z",
   "comment": {
     "text": "This translation key is used for the text \"Read now\" which appears as a button or link on an official documentation page, prompting users to upgrade to Pro. The text is displayed in a bold font and opens a new tab when clicked. Translators should provide a clear and concise equivalent of this text in their target language.",
     "is_auto": true,
@@ -189,7 +189,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Pročitaj sada\" is understandable, a more accurate and natural-sounding translation of \"Read now\" in this context (likely for a button or call to action) would be something like \"Čitaj odmah\" or \"Pogledaj sada\". \"Pročitaj sada\" implies a longer reading experience.",
+          "suggestion": "Čitaj odmah"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

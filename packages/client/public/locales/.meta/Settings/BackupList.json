@@ -3,7 +3,7 @@
   "content": "Backup List",
   "content_en_sha1_hash": "104eab22b64bfdd7ac57f7948dadb9a22f16bc6c",
   "created_at": "2025-05-19T21:30:50.684Z",
-  "updated_at": "2025-05-20T09:45:41.488Z",
+  "updated_at": "2025-05-21T05:05:09.010Z",
   "comment": {
     "text": "BackupList is used as a title in data management categories, typically appearing as a button or header in the Portal Settings page. The translation of this key will be displayed instead of \"Backup List\".",
     "is_auto": true,
@@ -159,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'උපස්ථ' (upasth) might be better rendered as 'ආපදි' (apadhi) or 'අවස්ථී' (avasthi) to more accurately convey 'backup'. While 'උපස්ථ' isn't *incorrect*, it's less commonly used in this context and could be confusing.",
+          "suggestion": "Consider replacing 'උපස්ථ' with 'ආපදි' or 'අවස්ථී'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Листа резервних копија' is a bit literal and could be improved for more natural Serbian usage. 'Резервне копије' is often used without the 'Листа' prefix when referring to a list or view of backups.",
+          "suggestion": "Резервне копије"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

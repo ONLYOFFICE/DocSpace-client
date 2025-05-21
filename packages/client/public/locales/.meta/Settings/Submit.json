@@ -3,7 +3,7 @@
   "content": "Submit",
   "content_en_sha1_hash": "2dacf65959849884a011f36f76a04eebea94c5ea",
   "created_at": "2025-05-19T21:30:52.819Z",
-  "updated_at": "2025-05-20T09:44:22.607Z",
+  "updated_at": "2025-05-21T02:55:49.997Z",
   "comment": {
     "text": "This translation key is used to display the label \"Submit\" on a button in various UI contexts, such as a portal settings page and a delete portal dialog. Its purpose is to provide a clear and consistent action label for users to confirm their actions. The translation key is used on buttons that trigger specific actions, like submitting requests or deleting portals.",
     "is_auto": true,
@@ -111,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ສົ່ງອອກ\" (song ok) typically means 'export' or 'release'. It doesn't accurately convey the meaning of 'Submit' which implies submitting something for approval or processing.",
+          "suggestion": "A more accurate translation for 'Submit' in this context might be something like 'ຖ້າສົ່ງ' (tha song) which means 'to send' or 'ຍື່ນສະເໜີ' (yeun sanee) which means 'to present/submit'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -147,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Remitere\" does not accurately convey the meaning of \"Submit\" in the context of settings. \"Remitere\" typically means 'surrender' or 'handover'. A more suitable translation would be 'Trimite' or 'Înregistrează'.",
+          "suggestion": "Trimite"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -159,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'යොමන්න' while generally acceptable, isn't the most natural or precise translation for 'Submit' in a settings context. It carries a stronger connotation of 'dispatch' or 'send away'.",
+          "suggestion": "Consider 'ඉන්​දී​ෆර්​න්' (infern) or 'ගොඩ ගැටි' (godageṭi) for a more contextually appropriate translation of 'Submit' in settings."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,13 +195,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Поднеси\" does not accurately convey the meaning of \"Submit\". \"Поднеси\" translates to \"present\" or \"submit (a document)\", but not the general action of submitting something (like a form or a request).",
+          "suggestion": "A more accurate translation would be \"Пошаљи\" (Posalji) which means 'Send' or \"Изнеси\" (Iznesi) which means 'Submit' in a more general sense."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Podnesi\" while technically meaning \"submit\" or \"present\", doesn't align with the typical usage of 'Submit' in a user interface context, where 'Pošalji' is the preferred translation.",
+          "suggestion": "Pošalji"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

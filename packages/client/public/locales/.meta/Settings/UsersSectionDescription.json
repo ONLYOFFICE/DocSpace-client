@@ -3,7 +3,7 @@
   "content": "Section \"Users\" includes the users you selected in the previous step. By default, it is always enabled and can't be unselected.",
   "content_en_sha1_hash": "a1aa96cf088012a8b3bb36cb32c986c521187c04",
   "created_at": "2025-05-19T21:30:53.169Z",
-  "updated_at": "2025-05-20T09:44:08.229Z",
+  "updated_at": "2025-05-21T02:28:11.512Z",
   "comment": {
     "text": "The \"UsersSectionDescription\" translation key provides a textual explanation for the \"Users\" section in the import step process. It helps to inform users that this section always includes selected users and cannot be disabled by default. This text typically appears on-screen as a tooltip or within an import component.",
     "is_auto": true,
@@ -33,7 +33,18 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'default' is translated as 'defolt'. The correct translation is 'varsayılan'.",
+          "suggestion": "varsayılan"
+        },
+        {
+          "type": "formatting",
+          "description": "The text uses a mix of Latin and Cyrillic characters. It should be consistently in Latin.",
+          "suggestion": "Maintain consistent use of Latin characters throughout the translation."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -75,19 +86,42 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"can't be unselected\" is awkwardly translated as \"impossible à désactiver.\" A more natural and accurate translation would be \"ne peut pas être désactivée\" or \"ne peut pas être annulée\".",
+          "suggestion": "ne peut pas être désactivée"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Ձեր ընտրած օգտվողներին\" (your selected users) is a bit awkward. A more natural phrasing would be something like \"ձեր ընտրած օգտվողները\" (your selected users).",
+          "suggestion": "Ձեր ընտրած օգտվողները"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"չեղարկվել\" (canceled) feels slightly formal for this context. \"անջրկվել\" (disabled) or something similar might be more suitable.",
+          "suggestion": "անջրկվել"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The verb agreement in 'è sempre abilitato' is incorrect. It should agree with 'sezione' which is feminine.",
+          "suggestion": "La sezione \"Utenti\" include gli utenti selezionati nel passaggio precedente. Per impostazione predefinita, è sempre abilitata e non può essere deselezionata."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -111,13 +145,30 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Section \"Users\"\" is awkwardly translated as \"Sadaļā Lietotāji\". A more natural translation would be \"Lietotāju sadaļa\" or simply \"Lietotāji\".",
+          "suggestion": "Lietotāju sadaļa"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'darbībā' (action) might be too vague. 'Solī' (step) would be more precise, aligning with the English 'step'.",
+          "suggestion": "solī"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Dutch translation uses the feminine pronoun 'Deze' (this) to refer to 'Section \"Users\"'. 'Section' is grammatically neutral, so a neutral pronoun like 'Dit' should be used.",
+          "suggestion": "Dit gedeelte \"Gebruikers\"..."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -129,19 +180,42 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'unselected' is not accurately translated. 'Desmarcado' implies a checkbox or similar selection mechanism, while 'unselected' refers to the entire section being disabled or hidden. A more accurate translation would convey the entire section's status.",
+          "suggestion": "A seção \"Usuários\" inclui os usuários selecionados na etapa anterior. Por padrão, está sempre ativada e não pode ser desativada."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'enabled' in the English content is translated as 'ativada'. While technically correct, 'ativada' can have a slightly different connotation than 'enabled' in this context. 'Habilitada' might be a better fit to convey that the section is functional and available.",
+          "suggestion": "A seção \"Usuários\" inclui os usuários selecionados na etapa anterior. Por padrão, está sempre habilitada e não pode ser desativada."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ativado' (activated) doesn't accurately convey the meaning of 'enabled' in this context. 'Habilitado' would be a more appropriate translation.",
+          "suggestion": "A seção \"Usuários\" inclui os usuários selecionados na etapa anterior. Por padrão, está sempre habilitado e não pode ser desmarcado."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"can't be unselected\" is not perfectly conveyed by \"nu poate fi deselectată\". While technically correct, \"nu poate fi dezactivată\" or \"nu poate fi eliminată\" might be more natural depending on the context of 'unselecting' in the application.",
+          "suggestion": "Consider \"nu poate fi dezactivată\" or \"nu poate fi eliminată\" for a more natural translation of 'can't be unselected'."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -201,7 +275,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Chinese translation includes quotation marks around \"用户\" (User) that are not present in the English original. This might be unnecessary and affect readability.",
+          "suggestion": "Remove the quotation marks around \"用户\" in the Chinese translation, resulting in:  “用户部分包括您在上一步中选择的用户。默认情况下，它始终处于启用状态，无法取消选择。”"
+        }
+      ],
       "approved_at": null
     }
   }

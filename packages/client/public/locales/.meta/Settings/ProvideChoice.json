@@ -3,7 +3,7 @@
   "content": "Provide a choice (web or app)",
   "content_en_sha1_hash": "c9fd6c7fc15f2174a7e0860621d49b561ee899ac",
   "created_at": "2025-05-19T21:30:52.331Z",
-  "updated_at": "2025-05-20T09:44:41.885Z",
+  "updated_at": "2025-05-21T03:32:36.311Z",
   "comment": {
     "text": "This translation key is used to display a label for selecting whether to open a link via web or app. It appears in a UI element where users can customize their preferences for a specific feature, likely a button or dialog.",
     "is_auto": true,
@@ -33,25 +33,59 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Seçim təqdim edin (veb və ya tətbiq)\" is a literal translation that doesn't quite convey the intended meaning. 'Provide a choice' implies offering options. A more natural translation would be 'Seçin (veb və ya tətbiq)' which means 'Choose (web or app)'.",
+          "suggestion": "Seçin (veb və ya tətbiq)"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Изберете (уеб или приложение)' while understandable, doesn't directly translate 'Provide a choice'. A more accurate translation would reflect the act of providing the options.",
+          "suggestion": "Предоставете избор (уеб или приложение)"
+        },
+        {
+          "type": "formatting",
+          "description": "The parentheses around 'уеб или приложение' are not necessary and are inconsistent with typical UI/UX patterns in Bulgarian.",
+          "suggestion": "Предоставете избор: уеб или приложение"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Poskytnout možnost volby (web nebo aplikace)' is technically correct but a bit clunky and formal. A more natural and idiomatic Czech would be 'Nabídnout volbu (web nebo aplikace)' or 'Poskytnout možnost: web nebo aplikace'.",
+          "suggestion": "Nabídnout volbu (web nebo aplikace)"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Auswahlmöglichkeit (Web oder App)\" is not idiomatic German. \"Auswahlmöglichkeit\" is overly literal and clunky. A more natural phrasing would be something like \"Web- oder App-Auswahl\" or \"Wahl zwischen Web und App\".",
+          "suggestion": "Wahl zwischen Web und App"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of parentheses is not typical in this context. While technically understandable, it's not the preferred style.",
+          "suggestion": "Wahl zwischen Web und App"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -63,7 +97,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Opciones (web o app)' doesn't accurately convey the original meaning of 'Provide a choice (web or app)'. 'Opciones' simply means 'options,' while the original text implies offering a choice to the user.",
+          "suggestion": "Proporcione una opción (web o aplicación)"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -75,7 +115,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Donner le choix (web ou application)\" is technically correct but slightly awkward in French. \"Fournir le choix\" or \"Proposer le choix\" would be more natural and idiomatic.",
+          "suggestion": "Fournir le choix (web ou application)"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -93,19 +139,47 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"選択肢を提供（ウェブまたはアプリ）\" is a literal translation that is somewhat awkward in Japanese. It lacks natural flow. \"提供する\" (to provide) feels overly formal in this context.",
+          "suggestion": "Consider a more natural phrasing like \"ウェブ版またはアプリ版を選択してください\" (Please choose web or app version) or \"ウェブ版とアプリ版の選択肢を用意します\" (We're offering web and app versions)."
+        },
+        {
+          "type": "formatting",
+          "description": "The parenthesis feels somewhat jarring in Japanese. It isn't the standard way to express this kind of conjunction.",
+          "suggestion": "Replace the parentheses with 'と' (and) or simply remove them depending on the chosen phrasing."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '선택권 제공(웹 또는 앱)' is not the most natural or idiomatic way to express 'Provide a choice (web or app)' in Korean. '선택권 제공' literally means 'provide the right to choose' which is a bit too formal for this context. A more natural rendering would emphasize the offering of a choice.",
+          "suggestion": "선택 사항: 웹 또는 앱"
+        },
+        {
+          "type": "formatting",
+          "description": "The colon and parentheses in the English sentence are not well reflected in the Korean translation. While parentheses are used, the phrasing feels a bit awkward.",
+          "suggestion": "선택 사항: 웹 또는 앱"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ກະລຸນາເລືອກ (ເວັບ ຫຼື ແອບ)' directly translates to 'Please choose (web or app)'. While understandable, a more natural Lao phrasing for a setting would be something like 'ເລືອກປະເພດ (ເວັບ ຫຼື ແອບ)' which means 'Select type (web or app)'.",
+          "suggestion": "ເລືອກປະເພດ (ເວັບ ຫຼື ແອບ)"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +215,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'La alegere (web sau aplicație)' doesn't accurately convey the meaning of 'Provide a choice (web or app)'. 'La alegere' translates to 'For choosing' which isn't the intended meaning. It needs to reflect the act of *providing* a choice.",
+          "suggestion": "Oferă opțiunea (web sau aplicație)"
+        },
+        {
+          "type": "formatting",
+          "description": "The parentheses around 'web sau aplicație' are unnecessary and feel awkward in Romanian. They're not standard practice for this type of phrase.",
+          "suggestion": "Oferă opțiunea web sau aplicație"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +238,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'විකල්පයක් ලබා දෙන්න (වෙබ් හෝ යෙදුම්)' is too literal and doesn't flow naturally in Sinhala for this context. 'Provide a choice' implies an option or selection.",
+          "suggestion": "A more natural translation would be 'වෙබ් හෝ යෙදුමකින් තෝරන්න' or 'වෙබ් හෝ යෙදුම් අතරින් තෝරන්න'.  (Meaning 'Choose from web or app')"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,19 +262,42 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Омогући избор' is a bit clunky. A more natural phrasing would be 'Изаберите' or 'Понуди избор'. 'Омогући' implies enabling, not necessarily presenting a choice.",
+          "suggestion": "Изаберите (изговор или апликација)"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Omogući izbor\" is grammatically correct, \"Provide a choice\" implies enabling or allowing a selection. \"Omogući\" focuses more on enabling. A more accurate translation might be \"Pruži izbor\" or \"Dozvoli izbor\".",
+          "suggestion": "Pruži izbor (pregledač ili aplikacija)"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses parentheses. Consistent use of parentheses or brackets would be preferable to maintain a uniform style across all similar texts.",
+          "suggestion": "Pruži izbor [pregledač ili aplikacija]"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Seçim sun (web veya uygulama)' is not the most natural or accurate way to express 'Provide a choice (web or app)' in Turkish. 'Seçim sun' literally translates to 'Offer a choice,' which is close but doesn't perfectly convey the original meaning of 'provide'.",
+          "suggestion": "Bir seçenek sun (web veya uygulama)"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -201,7 +315,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The use of '网页端/应用程序端' is a bit clunky. While technically correct, it's not the most natural phrasing in Chinese.",
+          "suggestion": "考虑使用更简洁的表达方式，例如“网页版/App版” 或 “网页/App”."
+        }
+      ],
       "approved_at": null
     }
   }

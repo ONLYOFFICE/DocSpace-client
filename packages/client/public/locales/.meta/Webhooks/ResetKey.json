@@ -3,7 +3,7 @@
   "content": "Reset key",
   "content_en_sha1_hash": "4ef3e8546c333e4167016acc1fdffcc96e5714b7",
   "created_at": "2025-05-19T21:30:49.801Z",
-  "updated_at": "2025-05-20T09:46:56.494Z",
+  "updated_at": "2025-05-21T01:02:36.699Z",
   "comment": {
     "text": "This translation key is used for the label of a \"Reset\" button, typically found on password input fields. Its purpose is to provide a clear indication of what action will be taken when clicked, in this case, resetting a secret key.",
     "is_auto": true,
@@ -33,13 +33,25 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sıfırlama açarı' is a literal translation of 'Reset key' but doesn't flow naturally in Azerbaijani. A more common and idiomatic translation for 'Reset key' would be 'Təkrar açarı' or 'Reset açarı'.",
+          "suggestion": "Consider using 'Təkrar açarı' or 'Reset açarı' for a more natural-sounding translation."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Нулирай ключ' is understandable, a more accurate and common translation for 'Reset key' in a technical context would be 'Ресет ключ' or 'Нулиране на ключ'. 'Нулирай ключ' implies an action being performed *by* something, while 'Reset key' typically refers to the key itself.",
+          "suggestion": "Ресет ключ"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -51,7 +63,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The German translation 'Reset-Key' uses a hyphen where a space might be more natural in German, depending on the context. While technically correct, it could appear less readable.",
+          "suggestion": "Reset Key"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -81,13 +99,25 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Վերականգնել ստեղնը\" literally translates to \"Restore the key.\" While \"reset\" and \"restore\" can be conceptually similar in some contexts, \"reset\" implies bringing something back to a default state, which is often what a reset key is used for. \"Restore\" is a broader term. A more accurate translation might be something like \"դարձնել զրոյական վիճակի\" (darcnel zroyakan vichaki) meaning 'return to initial state' or something similar that captures the 'reset' aspect.",
+          "suggestion": "Consider a translation that better reflects the meaning of 'reset,' such as 'դարձնել զրոյական վիճակի' (darcnel zroyakan vichaki) or a similar phrase that conveys the idea of returning to a default or initial state."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Tasto di ripristino\" translates to \"Reset button\" rather than \"Reset key\". While related, it's not an accurate translation of the English term.",
+          "suggestion": "Chiave di reimpostazione"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -99,7 +129,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '재설정 키' is technically correct but sounds slightly unnatural. '재설정' implies a double reset. A more common and natural phrasing would be '키 재설정' or simply '재설정'.",
+          "suggestion": "키 재설정"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -123,19 +159,37 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Przycisk resetowania\" translates to \"Reset button\", not \"Reset key\". While related, it's not a direct or accurate translation of the English term.",
+          "suggestion": "Klucz resetujący"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Botão de reset' (Reset button) is not the most accurate translation of 'Reset key'. While 'botão' (button) is understandable, 'Reset key' refers to a key used for resetting something, not a button that performs the reset action.",
+          "suggestion": "Chave de reset"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Botão de reset\" translates to \"Reset button,\" which is not an exact equivalent of \"Reset key.\" While related, \"key\" implies a code or identifier, while \"button\" implies a control element.",
+          "suggestion": "Chave de reset"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -147,13 +201,25 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Кнопка сброса\" (Button Reset) doesn't accurately convey the meaning of \"Reset key\". A reset key is not a button, but a code or token used to reset something.  A more accurate translation would convey that it's a key or code used for resetting.",
+          "suggestion": "Возможные варианты: 'Ключ сброса', 'Код сброса', 'Ключ для сброса'"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'යතුර යළි සකසන්න' (yatura yali sakasanna) translates to 'reset the key' rather than just 'Reset key'. It adds unnecessary action. A more accurate and concise translation would be closer to 'යතුර ප්‍රතිසංස්කරණය' (yatura pratisamskarayanava) or 'යතුර නැවත' (yatura navatha).",
+          "suggestion": "යතුර නැවත (yatura navatha) or යතුර ප්‍රතිසංස්කරණය (yatura pratisamskarayanava)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +237,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ресет кључ' is a literal transliteration of 'Reset key' and doesn't reflect natural Serbian phrasing. While understandable, it's not idiomatic.",
+          "suggestion": "Поновни кључ (Ponovni ključ) or Кључ за ресетовање (Ključ za resetovanje) would be more natural and accurate translations. The best choice depends on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

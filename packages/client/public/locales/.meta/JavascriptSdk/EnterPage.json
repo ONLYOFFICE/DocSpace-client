@@ -3,7 +3,7 @@
   "content": "Enter page number",
   "content_en_sha1_hash": "7ac45489eeeeea6114ff51313824c781ea011d31",
   "created_at": "2025-05-19T21:30:54.478Z",
-  "updated_at": "2025-05-20T09:41:40.783Z",
+  "updated_at": "2025-05-21T09:10:40.464Z",
   "comment": {
     "text": "This translation key is used to display a placeholder text for an input field in a user interface, allowing users to enter a page number. It appears as a label within a text input component, and its purpose is to provide a clear indication that this field should be filled with a valid page number.",
     "is_auto": true,
@@ -63,13 +63,25 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Introducir número de la página\" is a bit formal and clunky for a Javascript SDK context. A more natural translation would convey the action of entering a page number in a less rigid way.",
+          "suggestion": "Ingresar número de página"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Syötä numerosivu' is not the most natural or accurate translation of 'Enter page number'. While 'Syötä' means 'Enter', 'numerosivu' is not a standard Finnish term. It literally translates to 'number page'. A more accurate and natural translation would use a term like 'sivunumero' (page number) or a more general 'sivu'.",
+          "suggestion": "Syötä sivunumero"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Մուտքագրել համարի էջը\" is not the most natural or accurate translation of \"Enter page number.\" It literally translates to 'Enter the number page.' A more appropriate translation would convey the meaning of entering a page number, not the page itself containing a number.",
+          "suggestion": "Մուտքագրել էջի համարը"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,7 +123,18 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ໃສ່' (sai) is correctly spelled, but its usage in this context might not be the most natural. While it means 'enter' or 'put in', it can sound a bit literal.",
+          "suggestion": "Consider using a more natural phrasing like 'ເລກໜ້າ' (lek na) which means 'page number'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically 'ໃສ່ໜ້າເລກ' means 'enter page number', it's not the most idiomatic Lao translation for a prompt asking for a page number. It sounds a bit forced.",
+          "suggestion": "A more natural translation would be 'ໃສ່ເລກໜ້າ' (sai lek na) or even just 'ເລກໜ້າ' (lek na) depending on the context and desired level of instruction."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -117,7 +146,18 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Dutch translation \"Voor nummer pagina in\" doesn't accurately convey the meaning of \"Enter page number\". It's a literal, but awkward, translation.",
+          "suggestion": "Vul paginanummer in"
+        },
+        {
+          "type": "grammar",
+          "description": "Even with the suggested correction (\"Vul paginanummer in\"), the phrasing could be improved. While grammatically correct, it's a little clunky.",
+          "suggestion": "Geef paginanummer op"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -129,13 +169,25 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Introduzir o número de página' sounds overly formal and doesn't quite capture the brevity of 'Enter page number'. A more natural and common phrasing would be better.",
+          "suggestion": "Digite o número da página"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Insira a página do número\" is not the most natural or accurate translation of 'Enter page number'. While technically correct, it sounds awkward in Portuguese. The phrase 'do número' is unnecessary and makes the instruction less clear.",
+          "suggestion": "Insira o número da página"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -153,7 +205,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'අංකය' (ankaya) is spelled correctly, but the use of 'යොදන්න' (yodanna) might be slightly unnatural in this context. It literally means 'enter' or 'add'.",
+          "suggestion": "Consider using 'ලිපිනය ඇතුළත් කරන්න' (lipinaya etulath karanna) or 'අංකය ඇතුළත් කරන්න' (ankaya etulath karanna) which translates to 'enter the number' or 'enter the address/number' respectively, for a more natural flow."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +241,18 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Numara sayfasını girin' doesn't accurately convey the meaning of 'Enter page number'. 'Numara' means 'number', and 'sayfasını girin' means 'enter the page'. A more accurate translation would emphasize entering a page number.",
+          "suggestion": "Lütfen sayfa numarasını girin"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a more informal phrasing. Adding 'Lütfen' (Please) makes it more polite and appropriate for a user interface.",
+          "suggestion": "Lütfen sayfa numarasını girin"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

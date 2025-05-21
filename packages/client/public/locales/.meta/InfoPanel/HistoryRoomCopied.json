@@ -3,7 +3,7 @@
   "content": "<1>«{{roomTitle}}»</1> room copied",
   "content_en_sha1_hash": "629c4bf0bc934dc0b71f1b2ee8fcf5c30fa59379",
   "created_at": "2025-05-19T21:30:54.878Z",
-  "updated_at": "2025-05-20T09:40:55.301Z",
+  "updated_at": "2025-05-21T10:02:11.932Z",
   "comment": {
     "text": "The translation key \"HistoryRoomCopied\" is used to display a message indicating that a room has been copied. This message appears in an info panel on the home page, providing users with feedback after copying a room.",
     "is_auto": true,
@@ -27,19 +27,37 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"room copied\" is better translated as \"تم نسخ الغرفة\" which accurately conveys the meaning of 'the room has been copied'. The Arabic translation provided is correct.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'room' is translated as 'otaq', which is correct but could be more natural depending on context. 'Otaq' literally means 'room' but could sound slightly formal.  Consider 'bələdə' or a more general term depending on what 'room' refers to in the UI.",
+          "suggestion": "Consider 'bələdə' or a more general term that accurately represents the type of 'room'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"room copied\" is not accurately translated. \"Стаята е копирана\" literally translates to \"The room is copied\", which implies a passive voice, whereas the English implies the action of copying has been performed.",
+          "suggestion": "«{{roomTitle}}» стаята е копирана"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -51,25 +69,49 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'room copied' translates to 'Raum kopiert', which is grammatically correct but lacks the proper article and could be more natural. A more natural translation would be 'Raum wurde kopiert' or 'Raum ist kopiert'.",
+          "suggestion": "Raum wurde kopiert"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The opening and closing tags <1> do not match with the English content's <1>. It appears there is an unclosed tag in the Greek translation.",
+          "suggestion": "Ensure that the opening and closing tags match the English content's tags. It should be <1>Το δωμάτιο «{{roomTitle}}»</1> αντιγράφηκε</1>."
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Spanish translation includes \"se ha\" before \"copiado\". While grammatically correct, it's a reflexive construction that might sound less direct than the English original. Depending on the desired tone, a more direct translation (\"copiada\") might be preferable.",
+          "suggestion": "Consider using \"copiada\" instead of \"se ha copiado\" for a more direct translation."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'huone kopioitu' while technically correct, doesn't quite capture the nuance of 'room copied'. A more natural Finnish phrasing would be 'kopioitu huone'. The current translation places emphasis on 'room' and less on the action of copying.",
+          "suggestion": "«{{roomTitle}}» kopioitu huone"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,37 +123,78 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content uses the singular form 'room copied', while the Armenian translation uses the definite article implying 'the room'. A more accurate translation might use a general term or a more precise phrasing depending on context.",
+          "suggestion": "Consider revising to: «{{roomTitle}}» սենյակ պատճենվել է ({{roomTitle}} room has been copied) or «{{roomTitle}}» սենյակի պատճենը (The copy of the {{roomTitle}} room)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'room' is translated as 'stanza'. While 'stanza' can mean 'room', in the context of a virtual room or space, 'camera' would be a more accurate and natural translation in Italian.",
+          "suggestion": "«{{roomTitle}}»</1> camera copiata"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The English uses `<1>` tags. The Japanese translation also uses 「 and 」, which act as quotation marks.  While not strictly incorrect, maintaining the same markup would improve consistency. The Japanese quotation marks are appropriate for the context, but `<1>` is a bit unusual.",
+          "suggestion": "Consider using a more standard Japanese quotation mark implementation, like \" or ‘ ’ instead of `<1>` and `</1>`.  Alternatively, if `<1>` represents a specific formatting requirement, ensure this is replicated in the localization guidelines and adhered to consistently."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'room copied' is translated as '룸이 복사되었습니다'. While technically correct, a more natural Korean phrasing would be '복사되었습니다' or '복사 완료되었습니다'. '룸이 복사되었습니다' literally translates to 'the room has been copied', which is slightly less fluent.",
+          "suggestion": "룸이 복사 완료되었습니다"
+        },
+        {
+          "type": "formatting",
+          "description": "The English content has `<1>` and `</1>` tags. The Korean translation also has `<1>` and `</1>` tags. It's important to maintain consistent formatting. However, these tags are likely to represent HTML or similar markup and are not actual translation issues.",
+          "suggestion": "Ensure tags are consistent with the source content."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຫ້ອງຖືກສໍາເນົາ' directly translates to 'room is copied'. A more natural and accurate translation would be 'ຫ້ອງຖືກສໍາເນົາໄວ້' which means 'room has been copied' or 'room was copied'.",
+          "suggestion": "ຫ້ອງຖືກສໍາເນົາໄວ້"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'copied' translates more accurately to 'kopija' in Latvian, not 'nokopēta'. 'Nokopēta' implies the room was 'copied', but 'kopija' is the copy itself.",
+          "suggestion": "«{{roomTitle}}»</1> telpas kopija"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -123,43 +206,105 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrasing \"room copied\" implies an action completed *to* the room. The Polish \"został skopiowany\" translates to \"was copied\", which is passive voice and doesn't fully capture the implied active action in the original. A better translation would imply the user copied the room, or state 'the room has been copied'.",
+          "suggestion": "Pokój «{{roomTitle}}» został skopiowany przez Ciebie"
+        },
+        {
+          "type": "formatting",
+          "description": "The number '1' is present in both the English and Polish content. Although likely intended as a placeholder, it might be confusing for the end user and should be verified for consistency.",
+          "suggestion": "Verify that the number '1' is intentional and serves a consistent purpose in both languages. Consider removing it if it is superfluous."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"sala\" (room) is technically correct, but a more natural translation of \"room copied\" in Portuguese would be \"cópia da sala\" or \"sala duplicada\". \"Sala copiada\" sounds a bit awkward.",
+          "suggestion": "«{{roomTitle}}»</1> cópia da sala"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'room' was translated as 'sala', which is correct, but the full meaning isn't quite conveyed. 'Room' implies a specific, designated area, which 'sala' can sometimes lack nuance for. A more precise translation might consider 'ambiente' or 'espaço' depending on the context, but 'sala' is acceptable.",
+          "suggestion": "Consider 'ambiente' or 'espaço' if 'room' refers to a specifically designated area. However, 'sala' is acceptable."
+        },
+        {
+          "type": "formatting",
+          "description": "The formatting ( `<1>` and `</1>`) appears to be replicated verbatim from the English version. While it might be necessary for technical reasons (e.g., placeholder handling), it's worth confirming that this formatting is required in the Portuguese version as well. It's possible it could be adapted.",
+          "suggestion": "Verify if the `<1>` and `</1>` formatting is necessary and appropriate for the Portuguese context. It might be adaptable."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The opening tag '<1>' is present in both the English and Romanian translations. While maintaining consistency is good, it's important to verify if this tag is necessary and meaningful in the context where the translation will be used. It might be unnecessary in the Romanian version, depending on the surrounding UI.",
+          "suggestion": "Evaluate if the tag '<1>' is necessary in the Romanian context and remove if not."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'room' is missing in the Romanian translation. It's implied by 'Sala', but explicitly stating 'camera' would improve clarity and accuracy, especially for users who may not immediately understand the connection between 'Sala' and 'room'.",
+          "suggestion": "Sala «{{roomTitle}}» a fost copiată *camera*."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The opening tag '<1>' is duplicated in the Russian translation. It appears at the beginning and within the quoted room title.",
+          "suggestion": "Remove the extra '<1>' tag within the room title. The translation should be: \"Комната <1>«{{roomTitle}}» скопирована\"."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'room copied' is not accurately translated. ' පිටපත් කරන ලදී' (pitarakaraṇa ladī) translates to 'was copied' or 'has been copied'. A more accurate translation would reflect the action of copying.",
+          "suggestion": "කාමරය පිටපත් විය (kamaraya pitaraya viya)"
+        },
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation retains the same tags as the English, which may not be desirable.  Tags should be considered for localization and potential differences in structure.",
+          "suggestion": "Consider removing or modifying the tags based on the UI requirements."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Slovak translation includes angle brackets '<1>' around the entire string \"«{{roomTitle}}»\". This doesn't appear in the English source and disrupts the intended meaning and display. The angle brackets likely indicate a placeholder or formatting instruction that shouldn't be part of the visible translated text.",
+          "suggestion": "Remove the '<1>' tags from the Slovak translation. The translation should be \"{{roomTitle}} skopírovaná\"."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,37 +316,83 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'room' is translated as 'просторија' which is accurate, but the nuance of 'copied' isn't perfectly conveyed. A more natural translation might include a reflexive verb to indicate the room was copied *to* somewhere.",
+          "suggestion": "«{{roomTitle}}» просторија је копирана"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'room' is translated as 'prostorija'. While 'prostorija' can mean room, in this context 'soba' would be a more natural and common translation. 'Prostorija' implies a larger or more formal space.",
+          "suggestion": "«{{roomTitle}}»</1> soba kopirana"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'room' is translated as 'oda'. While 'oda' means room, a more natural translation considering the context of a digital room copy might be 'ortam' or keeping the English term 'room'.",
+          "suggestion": "«{{roomTitle}}» ortam kopyalandı"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Ukrainian translation 'Кімнату <1>«{{roomTitle}}»</1> скопійовано' is not a natural or accurate translation of '«{{roomTitle}}» room copied'.  The word order is awkward. It translates literally as 'Room <1>«{{roomTitle}}»</1> has been copied'. A better translation would be more like '«{{roomTitle}}» кімната скопійовано' or 'Кімнату «{{roomTitle}}» скопійовано'.",
+          "suggestion": "«{{roomTitle}}» кімната скопійовано"
+        },
+        {
+          "type": "formatting",
+          "description": "The `<1>` tags are included in the Ukrainian translation, mirroring the English. This is unlikely to be the intended behavior and should be removed if they are simply formatting markers.",
+          "suggestion": "Remove the `<1>` tags from the Ukrainian translation."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Vietnamese translation \"Đã sao chép phòng <1>«{{roomTitle}}»</1> \" doesn't accurately reflect the English phrase \"<1>«{{roomTitle}}»</1> room copied\". It places 'copied' at the end when it should be integrated into the sentence more naturally.",
+          "suggestion": "Phòng «{{roomTitle}}» đã được sao chép"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation includes the tags `<1>` which are not present or necessary in the English original for the user facing message. These tags appear to be remnants of a translation process and need to be removed.",
+          "suggestion": "Remove the `<1>` tags."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English \"room\" is translated as \"房间\" (fangjian) which is a more specific term for 'room'. While technically correct, it loses some of the general meaning of 'room' in the original English.",
+          "suggestion": "Consider a more general translation like «{{roomTitle}}» 已复制 (Yi fuza - copied)"
+        }
+      ],
       "approved_at": null
     }
   }

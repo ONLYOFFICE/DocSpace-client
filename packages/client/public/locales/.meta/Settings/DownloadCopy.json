@@ -3,7 +3,7 @@
   "content": "Download copy",
   "content_en_sha1_hash": "f779a16e5bd57fac3371cd6ff082decdc8a0baad",
   "created_at": "2025-05-19T21:30:51.434Z",
-  "updated_at": "2025-05-20T09:45:14.925Z",
+  "updated_at": "2025-05-21T04:20:15.137Z",
   "comment": {
     "text": "This translation key \"DownloadCopy\" is used to display the label for a button that allows users to download a backup file. It appears on the screen when a manual backup option is selected and is intended to provide a clear and concise way to initiate the download process.",
     "is_auto": true,
@@ -51,7 +51,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Die Sicherungskopie herunterladen' is understandable, it doesn't directly translate 'Download copy'. 'Sicherungskopie' implies a backup, not simply a copy. A more accurate translation might be 'Kopie herunterladen' or 'Download einer Kopie'.",
+          "suggestion": "Kopie herunterladen"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -93,7 +99,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Download copy\" is not perfectly conveyed by \"コピーを保存\". While \"保存\" (save) implies saving a copy, \"Download copy\" specifically refers to creating a downloaded version. A more accurate translation would capture the 'download' aspect more explicitly.",
+          "suggestion": "ダウンロード コピー"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -105,7 +117,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ດາວໂຫລດ ໄດ້ ສຳເນົາ' is not the most accurate or natural translation of 'Download copy'. While technically conveying the meaning, it can be improved.",
+          "suggestion": "Consider 'ແດືອນລົງຮູບ' or 'ຖ້າຫາກດາວໂຫລດຮູບ' depending on the exact context. 'ດາວໂຫລດ ສຳເນົາ' is also acceptable, but 'ດາວໂຫລດ ໄດ້ ສຳເນົາ' is slightly awkward."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -153,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"පිටපතක් බාගන්න\" is understandable, a more accurate translation of 'Download copy' might be something like \"බාගත හැකි පිටපත\" (Bāgata hæki pitapata) which emphasizes the ability to download a copy. \"බාගන්න\" implies a more active action than simply making a copy available for download.",
+          "suggestion": "බාගත හැකි පිටපත"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +207,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Kopyayı indir\" is understandable, a more natural and accurate translation of \"Download copy\" would be \"Kopyasını indir\". The possessive suffix '-nı' is needed to indicate the copy *of something* is being downloaded.",
+          "suggestion": "Kopyasını indir"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

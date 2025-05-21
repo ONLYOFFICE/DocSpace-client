@@ -3,7 +3,7 @@
   "content": "The quota of rooms is almost exhausted.",
   "content_en_sha1_hash": "a53e0908fec6be50fa0a49846a1efd994db59482",
   "created_at": "2025-05-19T21:30:53.728Z",
-  "updated_at": "2025-05-20T09:43:05.975Z",
+  "updated_at": "2025-05-21T06:29:05.075Z",
   "comment": {
     "text": "This translation key is used to display a warning message indicating that the available rooms are almost exhausted. It appears in a dialog box in the UI, specifically in the \"RoomsContent\" component, and is intended to notify users of an impending room availability issue.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Otaq kvotası dolmaq üzrədir\" is understandable, a more natural and accurate translation would be \"Otaqların sayı azalmaq üzrədir\" or \"Otaq kvotası tükənməkdədir\". \"Dolmaq üzrədir\" implies fullness rather than exhaustion.",
+          "suggestion": "Otaqların sayı azalmaq üzrədir"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -63,13 +69,35 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"La cuota de salas\" sounds unnatural. \"Cuota\" implies a limit or allowance, but \"salas\" (rooms) feels less precise than something like \"habitaciones\".",
+          "suggestion": "La cuota de habitaciones está casi agotada."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The verb \"se ha agotado\" (has been exhausted) implies the quota has already reached its limit. The original English phrase \"almost exhausted\" indicates it's nearing the limit, but hasn't reached it yet.",
+          "suggestion": "La cuota de habitaciones está casi completa."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation is understandable, 'Huoneiden määrän kiintiö on melkein täysi' is a bit literal and clunky. A more natural Finnish phrasing would convey the meaning more effectively.",
+          "suggestion": "Huoneiden kiintiö on lähes täynnä."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The original English phrase 'quota of rooms' is translated as 'Huoneiden määrän kiintiö', which is technically correct but can be simplified.",
+          "suggestion": "Simply using 'Huoneiden kiintiö' is more concise and reads better in Finnish."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -93,7 +121,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation 'ルームのストレージ容量が残りわずかです' translates to 'The storage capacity of the rooms is almost exhausted.' This is not an accurate translation of 'The quota of rooms is almost exhausted.' The word 'quota' (部屋の割り当て) is lost and replaced with 'ストレージ容量' (storage capacity).",
+          "suggestion": "ルームの割り当て残りがわずかです。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -141,7 +175,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Cota spațiului de stocare aproape epuizată' translates to 'Quota of storage space almost exhausted.' This is not the accurate meaning of 'The quota of rooms is almost exhausted.' The word 'rooms' is missed.",
+          "suggestion": "Cota de camere este aproape epuizată."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +193,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'කෙරෙහි කාමර ප්‍රමාණය ඉක්මවා ගොස් ඇත' translates to 'The number of rooms has exceeded.' This doesn't accurately convey the meaning of 'almost exhausted'. It implies the quota is already over, not nearly full.",
+          "suggestion": "A more accurate translation would be something like 'කාමර ප්‍රමාණය බොහෝමයක් අවහිර වී ඇත' (kaamaraa pramaṇaya bohōmayak ava-hira vee etaa) - 'The room quota is almost blocked/occupied', or 'කාමර ප්‍රමාණය ඉක්ම යාමට ආසන්නය' (kaamaraa pramaṇaya ikma-yaa mata aasaannaya) - 'The room quota is nearing exhaustion'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +217,18 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Квота просторија је скоро исцрпљена' is not the most natural way to express 'The quota of rooms is almost exhausted' in Serbian. 'Просторија' is singular and doesn't accurately convey 'rooms'.",
+          "suggestion": "Квота за собе је скоро исцрпљена."
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, 'исцрпљена' might be perceived as overly formal in some contexts. Depending on the target audience, a more colloquial option could improve readability.",
+          "suggestion": "Квота за собе је скоро попуњена."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -195,7 +252,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Gần như đã dùng hết hạn mức phòng' isn't the most natural or precise way to convey 'The quota of rooms is almost exhausted.' While technically correct, it sounds a bit stiff. A more fluid translation might be 'Số lượng phòng còn lại sắp hết.'",
+          "suggestion": "Số lượng phòng còn lại sắp hết."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

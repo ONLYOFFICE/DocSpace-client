@@ -3,7 +3,7 @@
   "content": "Add e-mail",
   "content_en_sha1_hash": "9d0252e4575b8f94ead7b517531c8aa8ee1729f2",
   "created_at": "2025-05-19T21:30:50.318Z",
-  "updated_at": "2025-05-20T09:45:56.442Z",
+  "updated_at": "2025-05-21T05:26:31.639Z",
   "comment": {
     "text": "This translation key \"AddEmail\" is used to display the text \"Add e-mail\" in a modal dialog that prompts users to enter their email address. The text appears as the header of the dialog and helps to indicate its purpose to the user.",
     "is_auto": true,
@@ -57,7 +57,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Προσθήκη e-mail\" is a direct transliteration and doesn't accurately convey the meaning of \"Add e-mail\" in Greek. While 'Προσθήκη' means 'addition', it sounds awkward when combined with the English word 'email'. A more natural Greek equivalent would be something like 'Προσθήκη διεύθυνσης email' or 'Εισαγωγή email'.",
+          "suggestion": "Consider using 'Προσθήκη διεύθυνσης email' or 'Εισαγωγή email' for a more natural-sounding translation."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Ավելացնել էլ․ հասցե\" is a very literal translation and sounds somewhat stiff in Armenian. A more natural and common phrasing would be \"Ավելացնել էլ․ փոստարկուղի\" or \"Էլ․ հասցե ավելացնել\".",
+          "suggestion": "Consider using \"Ավելացնել էլ․ փոստարկուղի\" or \"Էլ․ հասցե ավելացնել\" for a more natural-sounding translation."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +105,18 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Emailの追加' is a literal translation of 'Add e-mail' but sounds unnatural in Japanese. A more natural phrasing would be something like 'メールを追加' (meeru o tsuukei suru) or simply 'メールの追加'.",
+          "suggestion": "メールを追加 or メール追加"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, 'Emailの追加' lacks a clear action verb and can be improved for flow. The addition of 'する' (suru - to do) would improve the flow but might not be necessary depending on the context.",
+          "suggestion": "メールを追加する"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -141,7 +164,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Adăugare adresă de e-mail\" is a bit verbose for a button label. 'Add email' typically uses a more concise phrasing in UI.",
+          "suggestion": "Adaugă e-mail"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +182,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඊමේල් එක එක් කරන්න' is a literal translation and while understandable, it's not the most natural way to say \"Add e-mail\" in Sinhala. A more idiomatic translation would improve the user experience.",
+          "suggestion": "විකදොමල් එක එක් කරන්න (Vikadomal ek ek karranna)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +206,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Додај е-маил' uses the English word 'е-маил'. The correct Serbian (Cyrillic) term would be 'електронска пошта' or a more common abbreviation like 'мејл'.",
+          "suggestion": "Додај електронску пошту"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -189,7 +230,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Додати адресу ел. пошти' is technically correct but sounds somewhat formal and less natural for a settings menu. 'ел.' is an abbreviation that might not be immediately understood by all users.",
+          "suggestion": "Додати email"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

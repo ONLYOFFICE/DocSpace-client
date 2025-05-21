@@ -3,7 +3,7 @@
   "content": "History",
   "content_en_sha1_hash": "90ccd6497400b5576aeca1bd94af74aae1e0a250",
   "created_at": "2025-05-19T21:30:54.971Z",
-  "updated_at": "2025-05-20T09:40:41.087Z",
+  "updated_at": "2025-05-21T09:42:25.044Z",
   "comment": {
     "text": "The \"InfoPanel:SubmenuHistory\" translation key is used to display the label \"History\" in a submenu within an info panel on the Home page. It appears as a heading in a developer tool section, prompting users to view or manage their history.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Tarixçə' is a valid Azerbaijani word, it doesn't perfectly capture the meaning of 'History' in this UI context. 'Tarix' is a more direct and commonly used translation for 'History' in this scenario, particularly when referring to a history panel or log.",
+          "suggestion": "Tarix"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -105,7 +111,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"기록\" (girok) can mean 'record' or 'history', it's a more formal and detailed term than the English 'History' in this context, which likely refers to a simple history list or navigation.  '이력' (ireok) might be a more appropriate translation for a simpler history or log.",
+          "suggestion": "Consider using '이력' (ireok) instead of '기록' (girok)."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -207,7 +219,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While '历史记录' (lìshǐ jìlù) is a valid translation, '历史' (lìshǐ) alone, which translates to 'history', is a more concise and often preferred equivalent of 'History' in UI elements. '历史记录' implies a detailed log, which might not be necessary based on the context of 'History' as a UI element.",
+          "suggestion": "历史"
+        }
+      ],
       "approved_at": null
     }
   }

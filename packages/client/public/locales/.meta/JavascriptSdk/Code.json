@@ -3,7 +3,7 @@
   "content": "Code to insert",
   "content_en_sha1_hash": "73eb0e1ccc3a17f76090eb3ee695245eb8c9ba3b",
   "created_at": "2025-05-19T21:30:54.384Z",
-  "updated_at": "2025-05-20T09:41:50.124Z",
+  "updated_at": "2025-05-21T09:29:26.555Z",
   "comment": {
     "text": "\"Used as a header text in an EmbeddingPanel component, displaying 'Code' for a translation key that provides a placeholder for inserting code.\"",
     "is_auto": true,
@@ -33,13 +33,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'رمز الإدخال' while understandable, doesn't perfectly capture the nuance of 'Code to insert'. It translates to 'Input Code'. A more accurate translation reflecting the instructional context could be 'كود الإدخال' or 'تعليمات البرمجة'.",
+          "suggestion": "كود الإدخال"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Daxil etmək üçün kod' while technically understandable, isn't the most natural or accurate rendering of 'Code to insert'. 'Code to insert' implies the code is for the purpose of insertion.  A more accurate translation might focus on the code itself being the thing to insert.",
+          "suggestion": "Kodun daxil edilməsi"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -87,7 +99,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Կոդ՝ տեղադրելու համար\" literally translates to 'Code - for placing/inserting'. While understandable, it's not the most natural or idiomatic way to express 'Code to insert' in Armenian. A more fluent translation would be 'Տեղադրելու համար ավանդական ծածկագիր' or 'Ծածկագիր՝ տեղադրելու համար'.",
+          "suggestion": "Consider 'Ծածկագիր՝ տեղադրելու համար' or 'Տեղադրելու համար ավանդական ծածկագիր'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -159,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඇතුළු කිරීමට කේතය' while literally meaning 'code to insert', doesn't quite capture the nuance of 'Code to insert'. It's a bit clunky. A more natural phrasing might be 'ඇතුළත් කල යුතු කේතය' or 'ඇතුළත් කරගත යුතු කේතය'.",
+          "suggestion": "ඇතුළත් කල යුතු කේතය"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +201,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation 'Ћаскање' translates to 'chatting' or 'gossiping,' which is not an accurate translation of 'Code to insert'. It doesn't convey the technical meaning of code.",
+          "suggestion": "A more accurate translation would depend on the context, but possible options include: 'Код за убацивање', 'Убацивање кода', 'Код који се убацује'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

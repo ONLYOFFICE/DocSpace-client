@@ -3,7 +3,7 @@
   "content": "Change email",
   "content_en_sha1_hash": "8f1514b56ee016d4c49a8b4e2e98348f023dc82e",
   "created_at": "2025-05-19T21:30:53.470Z",
-  "updated_at": "2025-05-20T09:43:41.907Z",
+  "updated_at": "2025-05-21T06:02:46.283Z",
   "comment": {
     "text": "The translation key \"EmailChangeButton\" is used to display the label for a button that allows users to change their email address. It appears in a header section of a profile page and is also referenced as an icon in a contacts context options store.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Elektron poçtu dəyiş' is understandable, a more natural and commonly used translation for 'Change email' in Azerbaijani would be 'E-poçtü dəyiş' or 'E-mail dəyiş'. 'Elektron poçtu' is technically correct but sounds less idiomatic.",
+          "suggestion": "E-poçtu dəyiş"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -51,7 +57,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Změnit emailovou adresu' is a literal translation of 'Change email address' and is slightly less natural than a more idiomatic Czech equivalent. While understandable, it's not the most common way a native speaker would phrase this.",
+          "suggestion": "Změnit e-mail"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -63,7 +75,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Αλλαγή email\" is understandable, a more natural and accurate translation for \"Change email\" in Greek would be \"Αλλαγή διεύθυνσης email\" or \"Αλλαγή email διεύθυνσης\".  Simply using 'Αλλαγή email' reads awkwardly and isn't idiomatic.",
+          "suggestion": "Αλλαγή διεύθυνσης email"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -87,7 +105,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Փոխել էլ․ փոստը' is a literal translation and could be improved for naturalness in Armenian. While technically correct, it lacks the flow of a standard user interface text.",
+          "suggestion": "Consider alternatives like 'Փոփոխել էլ․ փոստի հասցեն' (Change email address) or 'Էլ․ փոստի հասցեն փոխել' (Change the email address) for a more natural feel."
+        },
+        {
+          "type": "formatting",
+          "description": "The abbreviation 'էլ․' might be less familiar to all Armenian users. Using the full word 'էլեկտրոնային' (elektronayin - electronic) might improve readability, although it's longer.",
+          "suggestion": "Consider replacing 'էլ․' with 'էլեկտրոնային փոստը' if brevity isn't paramount."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -147,19 +176,37 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Schimbare email' is a literal translation but not the most natural or idiomatic way to say 'Change email' in Romanian. It's understandable, but less elegant.",
+          "suggestion": "Modificare email"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Изменить email' is understandable, a more natural and idiomatic translation of 'Change email' in Russian would be 'Сменить email'. 'Изменить' implies a more formal or extensive change.",
+          "suggestion": "Сменить email"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'වි-තැපෑල සංශෝධනය' is not a natural or accurate translation of 'Change email'. It literally translates to something like 'Email modification'. A more accurate and natural translation would convey the action of changing the email address.",
+          "suggestion": "Possible suggestions include: 'වි-තැපෑල වෙනස් කරන්න' (Vi-tapaela venas karanna - Change email), 'වි-තැපෑල ප්‍රතිස්ථානය කරන්න' (Vi-tapaela pratisthana karanna - Replace email), or simply 'වි-තැපෑල මාරුව' (Vi-tapaela maaruwa - Email change)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +224,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Промени емаил' is not a natural or accurate translation of 'Change email' in Serbian (Cyrillic). While 'Промени' means 'change', 'емаил' is a transliteration of 'email' and isn't standard Serbian. The correct term is 'email'.",
+          "suggestion": "Промени имејл"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

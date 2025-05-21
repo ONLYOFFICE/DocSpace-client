@@ -3,7 +3,7 @@
   "content": "You can disable the search, filter and sort options.",
   "content_en_sha1_hash": "ffa1350e38a35df0eb49fef9d98511c60ac9d833",
   "created_at": "2025-05-19T21:30:54.569Z",
-  "updated_at": "2025-05-20T09:41:31.811Z",
+  "updated_at": "2025-05-21T08:56:50.924Z",
   "comment": {
     "text": "\"This translation key describes the text used to inform users that they can disable search, filter and sort options in a UI component.\"",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Söndürə bilərsiniz' (you can turn off) implies a direct disabling action, which might not be the intended meaning of 'disable'. A more accurate translation might convey the ability to deactivate or remove the features.",
+          "suggestion": "Axtarış, filtr və çeşidləmə seçimlərini deaktiv edə bilərsiniz."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -93,7 +99,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'զտման' (zteman) is spelled incorrectly. It should be 'ֆիլտրման' (fil'trman) to more accurately reflect 'filter'.",
+          "suggestion": "Դուք կարող եք անջատել որոնման, ֆիլտրման և տեսակավորման ընտրանքները:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -117,7 +129,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຄັດເລືອກ' (kat lueak) which translates to 'selection' or 'sort' isn't the most natural translation for 'sort' in this context. While technically correct, 'ຈັດລຽງ' (jat liang) would be more accurate and commonly used.",
+          "suggestion": "ທ່ານ​ສາ​ມາດ​ປິດ​ການ​ທໍາ​ງານ​ການ​ຊອກ​ຫາ​, ຕົວ​ກັ່ນ​ຕອງ​ແລະ​ການ​ຈັດ​ລຽງ​."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -165,7 +183,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඔබට සෙවුම, පෙරහන සහ වර්ගන විකල්ප අබල කිරීමට හැකිය' directly translates to 'You have the ability to disable the search, filter and sort options.' While technically correct, it sounds overly formal and less natural in Sinhala. A more natural phrasing would be closer to 'You can turn off the search, filter, and sort options' or 'It is possible to disable the search, filter and sort options'.",
+          "suggestion": "ඔබ සෙවුම, පෙරහන සහ වර්ගන විකල්ප අවහිර කිරීමට හැකිය (You have the ability to block the search, filter, and sort options) or, preferably,  ඔබ සෙවුම, පෙරහන සහ වර්ගන විකල්ප ක්‍රියා විරහිත කිරීමට හැකිය (You can deactivate the search, filter, and sort options)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +207,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'филтер' is a direct transliteration of 'filter' and not a Serbian word. The correct Serbian word is 'филтар'.",
+          "suggestion": "филтар"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

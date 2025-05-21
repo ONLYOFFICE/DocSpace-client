@@ -3,7 +3,7 @@
   "content": "Do more with {{planName}} plan",
   "content_en_sha1_hash": "e2ed747ebe643fc02022f1f0dfa21047a14d8063",
   "created_at": "2025-05-19T21:30:53.730Z",
-  "updated_at": "2025-05-20T09:43:05.651Z",
+  "updated_at": "2025-05-21T06:28:40.863Z",
   "comment": {
     "text": "This translation key is used to display a suggestion for users who have selected a payment plan. The suggested action is to \"Do more with\" the currently chosen plan, which helps guide users towards exploring further benefits of their plan. This text appears in the UI as part of a payment container element.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'احصل على المزيد مع خطة {{planName}}' while technically correct, doesn't convey the same nuance as 'Do more with {{planName}}'. A more suitable translation might emphasize benefit or potential.",
+          "suggestion": "استفد أكثر مع خطة {{planName}}"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -45,13 +51,30 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Udělejte více díky tarifu {{planName}}' doesn't perfectly convey the meaning of \"Do more with {{planName}} plan\".  'Díky' implies 'thanks to', which isn't the intended nuance. A more accurate translation would highlight the benefit of the plan.",
+          "suggestion": "Získejte více s tarifem {{planName}}"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The German translation includes a space before 'Plan' which should be omitted when it's part of a compound noun.",
+          "suggestion": "Mehr Möglichkeiten mit {{planName}} Plan"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Mehr Möglichkeiten' is a valid translation, it's a bit literal. A more natural and engaging translation for 'Do more with' would be something like 'Profitieren Sie von...' or 'Erleben Sie mehr...'.",
+          "suggestion": "Erleben Sie mehr mit {{planName}} Plan"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -69,19 +92,37 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Tee enemmän {{planName}} ohjelmalla\" doesn't quite capture the intended meaning of \"Do more with {{planName}} plan\".  'Ohjelmalla' implies 'using a program' which isn't a direct equivalent to being *on* or *with* a plan. A better translation would convey the benefit of the plan itself.",
+          "suggestion": "Consider \"Hanki enemmän irti {{planName}} -suunnitelmalla\" or \"Pääse {{planName}} -suunnitelmalla enemmän irti\"."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Faites plus avec le plan tarifaire {{planName}}' is a bit too literal. While technically correct, it's not the most natural-sounding phrasing in French. 'Plan' is understood, but 'tarifaire' is redundant and adds unnecessary formality.",
+          "suggestion": "Faites plus avec le plan {{planName}}"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Կատարեք ավելին {{planName}} պլանի հետ\" is a literal translation but doesn't flow naturally in Armenian. It implies 'do more *with* the plan'. A more natural translation would convey 'do more *using* the plan' or 'get more from the plan'.",
+          "suggestion": "Կատարեք ավելին {{planName}} պլանի միջոցով"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,13 +134,25 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation \"{{planName}}プランの詳細 \" literally translates to 'Details of the {{planName}} plan'. While not entirely wrong, it doesn't convey the original English's emphasis on 'doing more'. A better translation would focus on the benefits and added value of the plan.",
+          "suggestion": "{{planName}}プランで、もっとできる"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"더 많은 기능을 이용하세요\" (use more functions) is a literal translation of 'Do more'. A more natural and idiomatic Korean would be \"더 많은 혜택을 누리세요\" (enjoy more benefits) or \"더 많은 기능을 활용하세요\" (utilize more functions). While 'functions' is technically correct, 'benefits' better conveys the implied value proposition in a marketing context.",
+          "suggestion": "더 많은 혜택을 누리세요"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -117,7 +170,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Dutch translation 'Doe meer met {{planName}} plan' is a direct transliteration and not a natural Dutch phrasing. 'Doe meer met...' is grammatically correct, but stylistically awkward and lacks the persuasive tone of the English original. A more idiomatic translation would convey the meaning of 'Do more with...' in a more appealing way.",
+          "suggestion": "Overweeg meer met {{planName}} plan"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -141,19 +200,42 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While grammatically correct, \"Faceţi mai mult cu abonamentul {{planName}}\" is a somewhat literal and slightly awkward translation. A more natural Romanian phrasing would be something like \"Profitați la maximum de abonamentul {{planName}}\" or \"Obțineți mai mult cu abonamentul {{planName}}\". \"Faceți\" is technically correct, but not the most fluid or persuasive choice for marketing copy.",
+          "suggestion": "Profitați la maximum de abonamentul {{planName}}"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Делайте больше с помощью {{planName}} тарифа' is a literal translation but sounds awkward in Russian. 'Тариф' (tariff) doesn't quite convey the meaning of 'plan' in this context. It sounds overly formal and technical.",
+          "suggestion": "Раскройте весь потенциал {{planName}} тарифа"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '{{planName}} සැලසුම සමඟ බොහෝ දෑ කරන්න' is a literal translation and doesn't convey the natural flow and emphasis of 'Do more with {{planName}} plan'. A more idiomatic translation would be better.",
+          "suggestion": "{{planName}} සැලසුමෙන් වැඩි වැඩක් කරන්න"
+        },
+        {
+          "type": "formatting",
+          "description": "While the variable is present, consider if the casing/presentation of '{{planName}}' is consistent with other instances in the Sinhala interface.",
+          "suggestion": "Ensure consistent variable casing (e.g., lowercase '{{planname}}' if that's the standard)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +253,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Урадите више са {{planName}} планом\" doesn't accurately convey the meaning of \"Do more with {{planName}} plan\". \"Урадите\" means 'Do' in the sense of 'perform' or 'execute'. A more suitable translation would emphasize the benefit of the plan, rather than the action of doing. A better option would be something like \"Остварите више са {{planName}} планом\" (Achieve more with...) or \"Максимизирајте своје могућности са {{planName}} планом\" (Maximize your potential with...)",
+          "suggestion": "Остварите више са {{planName}} планом"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Uradite' is not the best translation for 'Do'. 'Uradite' implies 'to do something specific'. A more natural translation for 'Do' in this context would be 'Zaradite' or 'Isprobajte'.",
+          "suggestion": "Zaradite više sa {{planName}} planom"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -201,7 +295,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"升级为{{planName}}版获得更多权限\" doesn't fully capture the meaning of \"Do more with {{planName}} plan.\" \"升级为...版\" implies upgrading to a version, while the original suggests getting more features or benefits. It could be interpreted as simply upgrading to a different version rather than benefiting from the plan's features.",
+          "suggestion": "A more accurate translation might be something like \"使用{{planName}}版体验更多功能\" (Use {{planName}} plan to experience more features) or \"{{planName}}版，更多可能性\" ({{planName}} plan, more possibilities)."
+        }
+      ],
       "approved_at": null
     }
   }

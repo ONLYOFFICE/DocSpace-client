@@ -3,7 +3,7 @@
   "content": "Second name",
   "content_en_sha1_hash": "ff60d9c846345ff4aad60319ba1214e52ada97f3",
   "created_at": "2025-05-19T21:30:54.260Z",
-  "updated_at": "2025-05-20T09:42:04.877Z",
+  "updated_at": "2025-05-21T08:09:25.831Z",
   "comment": {
     "text": "This translation key is used to display \"Second name\" as a label in a form field for entering an LDAP second name. It appears in a field component within a portal settings category, likely on a settings page or dialog where user attributes are being configured.",
     "is_auto": true,
@@ -75,7 +75,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Nom' can translate to 'Name', in the context of LDAP attributes referring to 'Second name', a more accurate translation would be 'Deuxième nom'. 'Nom' alone is too generic and could refer to the family name.",
+          "suggestion": "Deuxième nom"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -93,7 +99,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation \"姓\" (Sei) typically refers to 'family name' or 'surname', not the general 'second name'. While 'second name' could, in some contexts, be interpreted as a family name, it's not the most accurate translation.",
+          "suggestion": "Consider alternatives like \"ミドルネーム\" (midoruneemu - middle name) or a more descriptive phrase depending on the intended meaning of 'Second name'."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -147,7 +159,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Second name' is commonly translated as 'Отчество' (Otchestvo) in Russian, not 'Фамилия' (Familia). 'Фамилия' means 'Surname'.",
+          "suggestion": "Consider using 'Отчество' as a more accurate translation for 'Second name'."
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -183,7 +201,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"İkinci isim\" is a literal translation of \"Second name\", a more natural and commonly used translation in Turkish might be \"Soyadı\" or \"İkinci ad\". \"İkinci isim\" sounds slightly awkward.",
+          "suggestion": "Soyadı"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -195,13 +219,25 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Họ\" while sometimes used for surname, isn't the most accurate translation of \"Second name\" in the context of LDAP. \"Tên đệm\" would be a more appropriate translation as it specifically refers to a middle name or a second name.",
+          "suggestion": "Tên đệm"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While '姓' (xìng) can sometimes translate to 'second name' in certain contexts, it primarily means 'surname' or 'family name'. 'Second name' is more accurately translated as '中间名' (zhōngjiān míng) or '第二个名字' (dì èr gè míng).",
+          "suggestion": "Consider using '中间名' (zhōngjiān míng) or '第二个名字' (dì èr gè míng) for a more accurate translation of 'Second name'."
+        }
+      ],
       "approved_at": null
     }
   }

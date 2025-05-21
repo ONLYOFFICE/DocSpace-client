@@ -3,7 +3,7 @@
   "content": "Google Drive",
   "content_en_sha1_hash": "07c2964c41f409a224efb389f282268e4928b85f",
   "created_at": "2025-05-19T21:30:50.024Z",
-  "updated_at": "2025-05-20T09:46:25.192Z",
+  "updated_at": "2025-05-21T01:21:10.160Z",
   "comment": {
     "text": "The TypeTitleGoogle translation key is used to display the title \"Google Drive\" in various UI contexts, such as file lists and dialogs, indicating that it's a Google Drive-related file or folder. This translation key helps ensure consistency and clarity across the application when referencing Google Drive storage.",
     "is_auto": true,
@@ -183,7 +183,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'Google sürücü' is a literal translation of 'Google driver' and doesn't accurately convey 'Google Drive'. The correct translation should be 'Google Disk'.",
+          "suggestion": "Google Disk"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -201,7 +207,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Google 云端硬盘' is a literal translation of 'Google Drive' and while understandable, it's not the standard or most natural way to refer to Google Drive in Chinese. It translates to 'Google Cloud Disk'.",
+          "suggestion": "谷歌云盘 (Gǔgē Yún pán) - This is the commonly used and accepted translation for Google Drive."
+        }
+      ],
       "approved_at": null
     }
   }

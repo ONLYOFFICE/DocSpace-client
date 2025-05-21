@@ -3,7 +3,7 @@
   "content": "On the App Store",
   "content_en_sha1_hash": "e31bba1e7988ce96d6a7dc542d32bcfb6bdda2be",
   "created_at": "2025-05-19T21:30:50.047Z",
-  "updated_at": "2025-05-20T09:46:21.078Z",
+  "updated_at": "2025-05-21T01:37:19.643Z",
   "comment": {
     "text": "This translation key is used for displaying a specific banner on mobile apps when accessing the App Store. The text will appear as a notification or prompt, indicating the app's presence on the App Store. It appears in a banner component on iOS devices.",
     "is_auto": true,
@@ -93,7 +93,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'App Storeから' while technically meaning 'from the App Store' isn't the most natural or idiomatic way to express 'On the App Store' in Japanese, especially in a UI context. It's a literal translation that doesn't fully capture the intended meaning.",
+          "suggestion": "アプリストアで (Apuri sto-ro de)"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -111,7 +117,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation 'App Store' is not a complete translation of \"On the App Store\". It omits the preposition 'On'. While 'App Store' is understandable in context, it's not a direct or complete translation.",
+          "suggestion": "App Store vai App Store iekšā"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'ඇප් ස්ටෝර්' is a transliteration of 'App Store' rather than a true translation of 'On the App Store'. It lacks the preposition 'on'.",
+          "suggestion": "Possible suggestions include: 'ඇප් ස්ටෝර් මත' (App Store matha - 'on the App Store') or 'ඇප් ස්ටෝර් හි' (App Store hi - 'on the App Store'). The best option will depend on the desired level of formality and naturalness within the broader context."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +189,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'На App Store-у' is not the most natural or accurate Serbian (Cyrillic) translation of 'On the App Store'. Adding the genitive ending '-у' is grammatically correct but sounds awkward in this context.  A more natural translation would use the locative case.",
+          "suggestion": "На Ап Стору"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'Na App Store-u' contains an unnecessary hyphen and possessive suffix. While understandable, it's not the standard or most natural way to express 'On the App Store' in Serbian (Latin).",
+          "suggestion": "Na App Store"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,13 +225,25 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Xin hãy đánh giá chúng tôi trên App Store' translates to 'Please rate us on the App Store'. This is not an accurate translation of 'On the App Store'. It introduces the idea of a rating request, which is not present in the English phrase.",
+          "suggestion": "Một số gợi ý thay thế: 'Tại App Store', 'Trên App Store', or simply 'App Store'."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The addition of '商店' (shop) is redundant. 'App Store' already implies a store.",
+          "suggestion": "在App Store"
+        }
+      ],
       "approved_at": null
     }
   }

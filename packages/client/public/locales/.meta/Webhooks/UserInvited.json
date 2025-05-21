@@ -3,7 +3,7 @@
   "content": "User invited",
   "content_en_sha1_hash": "8bd59dce4d9b99916a96dbf05d0767dce87fdc89",
   "created_at": "2025-05-19T21:30:49.860Z",
-  "updated_at": "2025-05-20T09:46:48.502Z",
+  "updated_at": "2025-05-21T00:53:07.432Z",
   "comment": {
     "text": "The \"UserInvited\" translation key is used to display a message indicating that a user has been invited. It appears in webhooks related to user invitations and serves as a descriptive label. Translators should provide a clear and concise text for this key.",
     "is_auto": true,
@@ -33,19 +33,37 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'İstifadəçi dəvət olundu' is a passive construction and doesn't quite capture the active sense of 'User invited'. It translates to 'User was invited'.",
+          "suggestion": "Consider 'İstifadəçi dəvət edildi' or 'Kullanıcı dəvət olundu' for a more accurate translation of 'User invited', which implies the action of inviting someone."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Потребителят е поканен\" is technically correct but sounds a bit formal and passive. A more natural and commonly used phrasing would be better.",
+          "suggestion": "Поканен е потребител"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Pozvaný uživatel' translates more literally to 'Invited user' rather than 'User invited'. While not technically incorrect, it doesn't capture the phrasing of the original English.",
+          "suggestion": "Pozvání uživatele"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -105,7 +123,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ຜູ້ຖືກເຊີນ\" literally translates to \"invited person\" or \"invitee\", which is technically correct but lacks the verb \"invited\". The original English phrase \"User invited\" implies an action. The Lao translation doesn't convey the action.",
+          "suggestion": "ຜູ້ໃຊ້ໄດ້ຮັບເຊີນ (Phụ sử dâi háp chin) - User received an invitation"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -153,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"පිටපත් කර ඇති පරිශීලකයා\" (pitapata kara athi parishilakaya) translates to 'copied user' or 'user who has copied'. It doesn't accurately convey the meaning of 'User invited'.",
+          "suggestion": "A more accurate translation would be something like \"අමInvitation කරන ලද පරිශීලකයා\" (amInvitation karana lada parishilakaya) or \"පැinvite කරන ලද පරිශීලකයා\" (pęinvite karana lada parishilakaya), or a simpler construction like \"පරිශීලකයා invite කර ඇත\" (parishilakaya invite kara atha) meaning 'User has been invited'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +201,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Корисник позван\" is a literal translation of \"User invited\" but doesn't sound natural in Serbian.  A more natural phrasing would be \"Позван корисник\" or \"Корисник је позван\". \"Позван\" can also imply a summons, which might not be the intended meaning.",
+          "suggestion": "Consider \"Позван корисник\" or \"Корисник је позван\"."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -3,7 +3,7 @@
   "content": "Import from {{organizationName}} Workspace",
   "content_en_sha1_hash": "e724af9a3984c03739c4b609de92912ffbbdbb33",
   "created_at": "2025-05-19T21:30:51.672Z",
-  "updated_at": "2025-05-20T09:45:05.288Z",
+  "updated_at": "2025-05-21T04:09:21.216Z",
   "comment": {
     "text": "This translation key is used for the \"Import from {{organizationName}} Workspace\" text, which appears on a button or similar element in the Portal Settings page, allowing users to import data from a specified organization workspace.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Входирай от {{organizationName}} Workspace\" is not the most natural or accurate translation of \"Import from {{organizationName}} Workspace\". \"Входирай\" implies 'log in' or 'enter', not 'import'.",
+          "suggestion": "Импортирай от {{organizationName}} Workspace"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a hyphen where a space might be preferred. While acceptable, 'Workspace-ից' could be improved to 'աշխատասեղանից' (ashkhatasեղanits) for a more natural flow in Armenian.",
+          "suggestion": "Ներմուծում {{organizationName}} աշխատասեղանից"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '{{organizationName}} වැඩබිම් වෙතින් ආනයනය කරන්න' is a literal translation. A more natural and idiomatic Sinhala translation for 'Import from {{organizationName}} Workspace' might be something along the lines of '{{organizationName}} වැඩබිමෙන් දත්ත ආපනයනය කරන්න' or '{{organizationName}} වැඩබිමට දත්ත ආපනයනය කරන්න'. The current translation feels somewhat awkward in Sinhala.",
+          "suggestion": "{{organizationName}} වැඩබිමෙන් දත්ත ආපනයනය කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +189,30 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Увези са {{organizationName}} Workspace-а\" uses the verb 'увези' (uvesi) which means 'import' in the sense of bringing something in (like smuggling). The correct term would convey 'Import from' in the sense of 'take data from'.",
+          "suggestion": "Извуци са {{organizationName}} Workspace-а"
+        },
+        {
+          "type": "formatting",
+          "description": "The Serbian translation adds a hyphen to Workspace. While not technically incorrect, it's unusual in a UI context and can be inconsistent.",
+          "suggestion": "Извуци са {{organizationName}} Workspace"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation includes an unnecessary hyphen before 'a' in 'Workspace-a'. It should be 'Workspace' or 'Workspace-om'.",
+          "suggestion": "Uvezi sa {{organizationName}} Workspace"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

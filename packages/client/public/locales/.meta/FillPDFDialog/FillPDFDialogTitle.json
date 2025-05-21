@@ -3,7 +3,7 @@
   "content": "Fill in as",
   "content_en_sha1_hash": "62d09973a4e6e2f1cfccacf01ce520b2acc93623",
   "created_at": "2025-05-19T21:30:55.167Z",
-  "updated_at": "2025-05-20T09:40:17.170Z",
+  "updated_at": "2025-05-21T10:49:08.330Z",
   "comment": {
     "text": "This translation key is used for the title of a dialog that prompts users to fill in a form. The English content \"Fill in as\" will be displayed in this dialog.",
     "is_auto": true,
@@ -27,13 +27,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"تعبئة حسب\" does not accurately convey the meaning of \"Fill in as\". \"تعبئة\" generally means \"filling\" or \"filling out\", but \"حسب\" (according to, as per) doesn't align with the intended meaning of \"as in\" or \"like\". A more appropriate translation would capture the nuance of similarity or example.",
+          "suggestion": "Consider alternatives like \"مثل\" (mithl - like) or \"كما\" (kama - as\") depending on the precise context.  A more literal translation might be difficult without additional context."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Kimi doldurun\" does not accurately convey the meaning of \"Fill in as\". \"Fill in as\" implies assuming a role or completing a form using someone else's information.  \"Kimi doldurun\" literally means \"Fill someone\" which is nonsensical in this context.",
+          "suggestion": "A more accurate translation would depend on the specific context. Possible alternatives include: \"Rolunu doldur\" (Fill the role), \"Başkasının adına doldurun\" (Fill out on behalf of someone), or a more descriptive phrase if the meaning is more specific."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -51,13 +63,25 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ausfüllen als\" is a literal translation of \"Fill in as\" but doesn't accurately convey the intended meaning in the context of a PDF form. \"Fill in as\" typically means 'fill in the field as...' or 'fill in this field as...'.  'Ausfüllen als' can be interpreted as 'to fill out as' which is not the right nuance.",
+          "suggestion": "A better translation would depend on the context, but potential suggestions include: 'Eingeben als', 'Als... ausfüllen', or 'Bitte geben Sie... ein'."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Συμπλήρωση ως' while technically meaning 'filling as', doesn't accurately convey the intended meaning of 'Fill in as' in this context. It sounds awkward and doesn't fit the typical phrasing for a dialog title referring to filling out a PDF form. A more natural translation would depend on the exact intended meaning (e.g., 'Ως' might imply an identity or role being assumed, which is unlikely in this case).",
+          "suggestion": "Consider alternatives like 'Συμπλήρωση φορμ ως...' (Filling form as...), 'Εισαγωγή δεδομένων ως...' (Entering data as...), or a more generic 'Συμπλήρωση πληροφοριών' (Filling information) depending on the precise meaning."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,19 +93,37 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Täytä\" while technically meaning \"Fill\", doesn't convey the nuance of \"Fill in as\". It's too literal and might not be the best choice for a dialog title implying filling out a form or document.",
+          "suggestion": "Consider translations that capture the idea of completing or filling out a form, such as \"Syötä tiedot\" (Enter details) or \"Täytä tiedot\" (Fill in details). The best option depends on the specific context and intended meaning within the FillPDFDialog."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Remplir en tant que\" doesn't accurately convey the meaning of \"Fill in as\".  \"Fill in as\" implies filling out a form or document with a specific role or identity. \"Remplir en tant que\" translates to \"Fill in as\" in the sense of 'to fill in *in the role of*'.",
+          "suggestion": "A more accurate translation might be \"Compléter en tant que\" or \"Remplir avec\" depending on the intended nuance."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Լրացրել որպես\" (Lracrel orpes) doesn't accurately convey the meaning of \"Fill in as\". \"Fill in as\" typically refers to filling a form or document *in the role of* something or someone.  \"Լրացրել որպես\" translates literally to 'Fill as', which is not the intended meaning.",
+          "suggestion": "A more accurate translation would depend on the context, but possibilities include: \"Լրացնել դիմումը որպես\" (Lracnel dimumen orpes - Fill out the application as) or \"Լրացնել դիմումը՝ որպես\" (Lracnel dimumen -  Fill out the application - using 'as' in the idiomatic sense).  Without the context, it's difficult to provide a perfect translation."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,25 +135,49 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"次の役割として記入する:\" is a literal translation that doesn't accurately convey the meaning of \"Fill in as\". It implies filling out a form *as* a specific role, which isn't the intended meaning. A more appropriate translation would convey the idea of 'filling in' or 'acting as'.",
+          "suggestion": "記入するとして (Kinyuu suru to shite) - This is a more direct translation and may need further refinement based on context.  Alternatively, a more natural phrasing might be 役割を記入する (Yakuwari o kinyuu suru) - 'Fill in the role.'"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"다음으로 작성:\" doesn't accurately convey the meaning of \"Fill in as\". \"Fill in as\" implies assuming a role or filling a position, whereas \"다음으로 작성:\" means \"Next, write:\".",
+          "suggestion": "Consider alternatives like \"~로 작성\" (write as ~), \"~로 채우기\" (fill in as ~), or a more contextual translation based on the application's purpose."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ຕື່ມໃສ່ເປັນ\" is a literal translation that doesn't quite capture the nuance of \"Fill in as\". It might be perceived as less natural or idiomatic in Lao. The phrase \"Fill in as\" often implies filling a form or document *as* a certain person or role.",
+          "suggestion": "Consider alternatives like \"ຕື່ມຂໍ້ມູນໃນຖານະ\" (Fill in as/in the capacity of) or \"ຕື່ມຂໍ້ມູນຕາມ\" (Fill in according to/as per) depending on the specific context of the dialog."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Aizpildīt kā\" doesn't accurately convey the meaning of \"Fill in as\". \"Fill in as\" implies filling a document with information representing a specific role or identity. A more accurate translation would depend on the precise context of 'FillPDFDialog'. Possible alternatives include 'Iepildīt par' or 'Aizpildīt vietā'.",
+          "suggestion": "Consider alternatives like 'Iepildīt par' or 'Aizpildīt vietā', depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,7 +207,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Completare în calitate de\" doesn't accurately convey the meaning of \"Fill in as\". \"Fill in as\" implies acting in a role or capacity. \"Completare în calitate de\" literally translates to 'Completion in the quality of,' which is not the intended meaning.",
+          "suggestion": "Consider alternatives like \"Ca\" or \"În rolul de\" to better reflect the intended meaning, depending on the context.  For example, \"Completare ca\" or \"Completare în rolul de\"."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,13 +225,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"පිරවීම ලෙස\" does not accurately convey the meaning of \"Fill in as\". \"පිරවීම ලෙස\" literally translates to \"as filling\" which isn't the intended meaning. A more accurate translation would be something along the lines of \"ලෙසින් පුරවා\" or \"ඒ ආකාරයට පුරවා\".",
+          "suggestion": "ලෙසින් පුරවා"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation \"Vyplniť ako\" doesn't accurately convey the meaning of \"Fill in as\".  \"Fill in as\" implies filling a field with a specific role or identity. \"Vyplniť ako\" translates to \"Fill in as\" in a very literal sense, but lacks the nuance of assuming a role or identity. A better translation would depend on the context, but possibilities include \"Použiť ako\" (Use as) or \"Zahrnúť ako\" (Include as).",
+          "suggestion": "Consider alternatives like \"Použiť ako\" or \"Zahrnúť ako\", or explore other context-dependent options to better reflect the meaning of 'Fill in as'."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,19 +255,37 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Попуни као\" doesn't accurately convey the meaning of \"Fill in as\". \"Popuni kao\" literally translates to \"Fill in as\", but the intended meaning of \"Fill in as\" (likely referring to filling out a form or document *as* someone else) is lost. A more appropriate translation would depend on the context, but it should communicate the idea of filling out a form on behalf of someone.",
+          "suggestion": "Consider alternatives such as \"Испуни у име\", \"Испуни за\", or a phrase that clarifies the intended meaning based on the UI context (e.g., \"Испуни као [име]\")"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Popuni kao\" doesn't accurately convey the meaning of \"Fill in as\". \"Fill in as\" implies assuming a role or acting in a particular way while filling out a form. \"Popuni kao\" translates more literally to 'Fill in as' but lacks the implied action or assumption of a role.",
+          "suggestion": "Consider alternatives like \"Ispunite u svojstvu\", \"Ispunite kao\", or \"Popunite u ulozi\" to better reflect the meaning of 'Fill in as'. The best option would depend on the precise context of its usage."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Şu şekilde doldur\" doesn't accurately convey the meaning of \"Fill in as\". \"Fill in as\" implies filling out a form or document according to a specific example or template.  \"Şu şekilde doldur\" translates to \"Fill in this way,\" which is not the same nuance.",
+          "suggestion": "A better translation would be something along the lines of \"Örnek gibi doldur\" (Fill as an example) or \"Numune gibi doldur\" (Fill as a sample), depending on the precise context of \"Fill in as\". Without more context, providing a definitive improvement is difficult."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -195,13 +297,25 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Điền vào dưới dạng\" doesn't accurately convey the meaning of \"Fill in as\". \"Fill in as\" implies filling out a form or document to represent something or someone. \"Điền vào dưới dạng\" literally means \"Fill in as a form/shape\".",
+          "suggestion": "Consider alternatives such as \"Điền thông tin theo\" (Fill in information according to) or \"Điền vào mục\" (Fill in the field) depending on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '填写为' doesn't accurately convey the meaning of 'Fill in as'. It literally translates to 'fill in as', which isn't the intended meaning. 'Fill in as' implies acting or completing a task *as* something or someone.",
+          "suggestion": "A more accurate translation would depend on the context. Possible suggestions include: '模拟', '假装', '以...身份填写' (fill in as...) or '扮演' (portray as). Without further context, it's difficult to provide a definitive better translation."
+        }
+      ],
       "approved_at": null
     }
   }

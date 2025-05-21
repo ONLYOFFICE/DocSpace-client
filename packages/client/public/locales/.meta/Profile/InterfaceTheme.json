@@ -3,7 +3,7 @@
   "content": "Interface theme",
   "content_en_sha1_hash": "f47f8ed32464b7b3aa479c8638758420470a60e9",
   "created_at": "2025-05-19T21:30:53.359Z",
-  "updated_at": "2025-05-20T09:43:53.024Z",
+  "updated_at": "2025-05-21T05:43:08.684Z",
   "comment": {
     "text": "This translation key is used for the interface theme description displayed on the profile settings page. It explains the purpose of this setting and helps users understand its effect on the app's visual appearance.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation \"واجهة المستخدم\" literally translates to \"user interface\". While it's a related concept, it doesn't directly translate \"interface theme\". \"Theme\" is missing.",
+          "suggestion": "Consider a translation that includes the concept of \"theme\", such as \"مظهر واجهة المستخدم\" (mazhar wajehat al-mustakhdim) which means \"user interface appearance\" or \"interface theme\"."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -45,7 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Vzhled prostředí\" is a possible translation, \"Interface theme\" typically refers to a visual style or a set of design choices. \"Vzhled prostředí\" leans more towards the general appearance of the environment, which is broader than just the theme.",
+          "suggestion": "Consider \"Motiv uživatelského rozhraní\" or \"Téma uživatelského rozhraní\" for a more accurate translation that directly refers to an interface theme."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -105,13 +117,25 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ການໂຕ້ຕອບ ຫົວ​ຂໍ້' is a literal translation but doesn't quite capture the nuance of 'Interface theme'.  'ຫົວ​ຂໍ້' directly translates to 'topic' or 'subject' rather than 'theme'. A more accurate translation would convey the visual style or appearance of the interface.",
+          "suggestion": "Consider a translation like 'ຮູບແບບໂຕ້ຕອບ' (roop baep toetop - interface style/appearance) or 'ໂຕ້ຕອບ ສີ' (toetop see - interface color/theme)."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Interfeisa dizains\" is a possible translation, \"Interfeisa tēma\" would be a more direct and accurate translation of \"Interface theme\". \"Dizains\" translates to \"design\".",
+          "suggestion": "Interfeisa tēma"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -153,13 +177,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"අතුරු මුහුණතේ තේමාව\" is a literal translation of \"interface theme\" and while understandable, it might sound clunky or unnatural in Sinhala. A more natural phrasing might be considered.",
+          "suggestion": "අතුරු තේමාව (Atharu Themava)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Vzhľad prostredia' is understandable, it's a rather literal translation of 'Interface theme'. A more natural and commonly used translation in Slovak would be 'Téma rozhrania' or 'Motív rozhrania'. 'Vzhľad prostredia' emphasizes the appearance of the environment, whereas 'Interface theme' refers to the overall design and stylistic choices.",
+          "suggestion": "Téma rozhrania"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -177,7 +213,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Tema interfejsa\" is understandable, it's not the most natural or precise translation of \"Interface theme.\" \"Tema interfejsa\" literally translates to 'Theme of interface.' A more common and accurate translation would be \"Tema interfejsa\" or possibly \"Izgled interfejsa.\"  The direct literal translation is not preferred in this case.",
+          "suggestion": "Tema interfejsa"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,7 +237,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Chủ đề giao diện\" is understandable, a more natural and accurate translation of \"Interface theme\" would be \"Giao diện chủ đề\" or \"Chủ đề giao diện người dùng\". \"Chủ đề giao diện\" sounds slightly awkward in Vietnamese.",
+          "suggestion": "Giao diện chủ đề"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

@@ -3,7 +3,7 @@
   "content": "Invalid token",
   "content_en_sha1_hash": "7ac1506119d660dbaca215d74b0768e238ddc6fa",
   "created_at": "2025-05-19T21:30:53.911Z",
-  "updated_at": "2025-05-20T09:42:45.159Z",
+  "updated_at": "2025-05-21T07:10:14.079Z",
   "comment": {
     "text": "This translation key is used to display an error message indicating that a token is invalid, typically appearing on a revoke developer token dialog or error handler, and notifies users of authentication issues.",
     "is_auto": true,
@@ -75,7 +75,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Virheellinen tunnus\" is a possible translation, \"Invalid token\" often refers to an OAuth token. A more accurate translation would capture this specific context.",
+          "suggestion": "Virheellinen OAuth-tunnus"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -87,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Անվավեր token' is a direct transliteration of 'Invalid token' and doesn't convey the intended meaning naturally in Armenian. A more accurate and idiomatic translation would be something like 'չհաստատված token' (ch'hastatvats token - 'unverified token') or 'չօրինակ token' (ch'orinak token - 'invalid/illegal token').",
+          "suggestion": "չհաստատված token or չօրինակ token"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -117,7 +129,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation \"Nepareiza atzīme\" doesn't accurately convey the meaning of \"Invalid token\". \"Nepareiza atzīme\" translates to 'Incorrect mark' or 'Incorrect sign', which is not the same as an invalid token.",
+          "suggestion": "A more accurate translation would be something like \"Derīgs atslēgas vārds\" (Valid key word) or \"Nederīgs atslēgas vārds\" (Invalid key word), or simply \"Nederīga atslēga\" (Invalid key)."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -147,7 +165,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Token incorect' is not the most natural or accurate rendering of 'Invalid token' in Romanian. A more common and accurate translation would be 'Token invalid' or 'Token nevalid'.",
+          "suggestion": "Token invalid"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -159,7 +183,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'වලංගු නොවන ටෝකනය' while literally meaning 'invalid token', sounds slightly unnatural in Sinhala. A more common and natural phrasing would be 'చెల్లని టోకెన్'.",
+          "suggestion": "చెల్లని టోకెన్"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

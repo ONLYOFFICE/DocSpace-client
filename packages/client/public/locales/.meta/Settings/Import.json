@@ -3,7 +3,7 @@
   "content": "Import",
   "content_en_sha1_hash": "d6fbc9d2bdd580e18ed0bc5805dc26db323d6f5f",
   "created_at": "2025-05-19T21:30:51.611Z",
-  "updated_at": "2025-05-20T09:45:07.826Z",
+  "updated_at": "2025-05-21T04:12:02.021Z",
   "comment": {
     "text": "This translation key is used for the text \"Import\" displayed on a button or link that initiates data import functionality in a portal settings page. It is intended to be translated into various languages to support global accessibility.",
     "is_auto": true,
@@ -33,13 +33,25 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'İdxal edin' is a command (imperative) form of 'import'. The context 'Settings:Import' likely refers to a button or option, not a direct command to the user. A more appropriate translation would be a noun, such as 'İdxal' or 'Daxil etmə'.",
+          "suggestion": "İdxal"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Bulgarian translation 'Входиране' is not the most natural or accurate translation of 'Import' in this context. While it technically means 'entering' or 'logging in,' it's not commonly used for importing data or files. It might confuse users.",
+          "suggestion": "A better translation would be 'Внасяне' or 'Импортиране'."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -147,13 +159,25 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Импортировать' is the infinitive form of the verb 'to import'. The context 'Settings:Import' likely requires the noun form, which is 'Импорт'.",
+          "suggestion": "Импорт"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ආයාත කරන්න' while understandable, is a command form ('to import'). 'Import' is a noun and a label, so a more appropriate translation would be a noun form.",
+          "suggestion": "ආයාතිය (Ayathiya)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +195,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation 'Увези' translates to 'Carry' or 'Bring' in English, not 'Import'. It doesn't convey the intended meaning of importing data or settings.",
+          "suggestion": "The correct translation should be something like 'Увоз' (Uvoz), which directly means 'Import'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Uvezi' is a valid Serbian word, it doesn't perfectly convey the meaning of 'Import' in the context of settings. It's more accurately translated as 'Introduce' or 'Bring in.'",
+          "suggestion": "Consider 'Uvezi' -> 'Unos' or 'Uvoz' for a more accurate representation of 'Import' in a settings context."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -189,7 +225,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Імпортувати' is a verb form (infinitive) which doesn't fit the context of a UI label representing a button or action. 'Import' in this context is a noun or action label, not an action to perform.",
+          "suggestion": "Consider using 'Імпорт' (noun form) or 'Ввійти' (Import, as an action)"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

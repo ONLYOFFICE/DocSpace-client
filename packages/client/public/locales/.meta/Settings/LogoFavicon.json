@@ -3,7 +3,7 @@
   "content": "Favicon",
   "content_en_sha1_hash": "b0f47aaf773c75735c1c4c32a2e40c0f4e7feecf",
   "created_at": "2025-05-19T21:30:51.880Z",
-  "updated_at": "2025-05-20T09:44:56.927Z",
+  "updated_at": "2025-05-21T03:51:40.488Z",
   "comment": {
     "text": "This translation key \"LogoFavicon\" is used to display the English label for a favicon image. It appears on a page settings component in the branding section, where users can view and manage their website's logo and favicon sizes. The label is used to provide context for the user's selected favicon size.",
     "is_auto": true,
@@ -63,7 +63,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Favicono' is not the standard or most accurate Spanish translation for 'Favicon'. It appears to be a phonetic approximation, but lacks precision.",
+          "suggestion": "Icono de Favorito"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -147,13 +153,25 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Иконка сайта\" is a reasonable translation, \"Favicon\" has a specific technical meaning. \"Иконка сайта\" is a more general term for a website icon. A more precise translation might be something like \"Favicon\" (transliterated) or \"Значок сайта\".",
+          "suggestion": "Consider using \"Favicon\" (transliterated) or \"Значок сайта\" for greater accuracy."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'කුඩා නිරූපකය' (kuda nirupakaya) while literally meaning 'small representation' doesn't accurately convey the meaning of 'Favicon'. A favicon is a small icon representing a website.",
+          "suggestion": "The most appropriate translation would be 'විශේෂිත ලාංඡනය' (visheshitha langchanaya) or 'වෙබ් ලාංඡනය' (web langchanaya), both meaning 'website icon' or 'web icon'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Фавикона\" appears to be a transliteration rather than a true translation. A more appropriate Serbian translation would be something like 'Фавикон'.",
+          "suggestion": "Фавикон"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

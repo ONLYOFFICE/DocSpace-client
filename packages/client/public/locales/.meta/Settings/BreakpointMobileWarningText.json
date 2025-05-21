@@ -3,7 +3,7 @@
   "content": "This section is unavailable in mobile version",
   "content_en_sha1_hash": "85213c9da217597acc63825e72d40de59cb758e1",
   "created_at": "2025-05-19T21:30:50.774Z",
-  "updated_at": "2025-05-20T09:45:37.886Z",
+  "updated_at": "2025-05-21T04:58:41.854Z",
   "comment": {
     "text": "\"This translation key is used for a warning message that indicates a section is unavailable on mobile devices. It is applied when the user navigates to a breakpoint warning component and the 'isMobileUnavailableOnly' condition is true.\"",
     "is_auto": true,
@@ -123,7 +123,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Dana sekcja jest niedostępna w wersji mobilnej' is not the most natural or accurate translation of 'This section is unavailable in mobile version.' 'Dana' is archaic and unusual in this context. A more natural translation would use 'Ta'.",
+          "suggestion": "Ta sekcja jest niedostępna w wersji mobilnej"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'මෙම කොටස ජංගම අනුවර්තනයේ නොමැත.' is a literal translation but doesn't convey the meaning naturally in Sinhala. A more natural and user-friendly translation would be something like 'මෙම කොටස ජංගම දුරකථනය හරහා ලබාගත නොහැක.' or 'ජංගම දුරකථන ක්‍රියේ මෙකී කොටස ක්‍රියාත්මක නොවේ.'",
+          "suggestion": "Consider 'මෙම කොටස ජංගම දුරකථනය හරහා ලබාගත නොහැක.' or 'ජංගම දුරකථන ක්‍රියේ මෙකී කොටස ක්‍රියාත්මක නොවේ.'"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

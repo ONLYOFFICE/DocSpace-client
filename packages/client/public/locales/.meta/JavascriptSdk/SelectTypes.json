@@ -3,7 +3,7 @@
   "content": "Select types",
   "content_en_sha1_hash": "164b0535dd6dc494de23f43e7fdd2d8e60f1b350",
   "created_at": "2025-05-19T21:30:54.678Z",
-  "updated_at": "2025-05-20T09:41:20.573Z",
+  "updated_at": "2025-05-21T08:36:18.493Z",
   "comment": {
     "text": "This translation key is used as a button label for a file selector dialog. It is displayed to the user as \"Select types\" and is part of the JavaScriptSDK preset in the PortalSettings page.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Növləri seçin\" is a possible translation, a more natural and accurate translation of \"Select types\" might be \"Seçiləcək növləri\" or \"Növləri qeyd edin\". \"Seçiləcək növləri\" emphasizes the act of selecting specific types. \"Növləri qeyd edin\" means 'Specify the types'.",
+          "suggestion": "Consider \"Seçiləcək növləri\" or \"Növləri qeyd edin\"."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -45,7 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Vybrané typy' translates to 'Selected types', not 'Select types'. It describes the result of selecting types, not the action of selecting them.",
+          "suggestion": "Zvolené typy"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -75,7 +87,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sélectionner types' is not idiomatic French. While technically correct, it sounds awkward. A more natural translation would use a noun phrase. The verb 'sélectionner' needs a direct object that's a noun.",
+          "suggestion": "Types à sélectionner"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -129,7 +147,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Selecione os t\" is incomplete and doesn't accurately translate \"Select types\". The word 'tipos' (types) is missing.",
+          "suggestion": "Selecione os tipos"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,7 +165,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Selectare tip' is not a natural or accurate translation of 'Select types'. 'Selectare' implies a process of selection, but 'tip' is a singular noun. It should reflect the plural 'types'.",
+          "suggestion": "Selectați tipuri"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +183,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'වර්ග තෝරන්න' is a possible translation, 'Select types' often implies a selection from a pre-defined list or set of options. A more accurate translation might consider conveying this nuance. 'වර්ගය තෝරන්න' (Vargaya Thoranna) which translates to 'Select a type' is slightly more precise.",
+          "suggestion": "වර්ගය තෝරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +207,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Изабери типове' doesn't quite capture the nuance of 'Select types'. 'Изабери' translates to 'Choose' or 'Pick', which is close but 'Select' implies a more deliberate choice from a list or set of options. A better translation might be 'Одабири типове'.",
+          "suggestion": "Одабири типове"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -183,7 +225,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Türleri seç\" while technically accurate, is not the most natural or idiomatic translation for \"Select types\" in Turkish. A more common and natural phrasing would be \"Türü seçin\" or \"Tür seçimi yapın\". \"Türleri seç\" implies selecting multiple types, whereas the original English phrase could refer to selecting a single type.",
+          "suggestion": "Türü seçin"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -195,7 +243,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Chọn kiểu\" is a literal translation of \"Select types\", it lacks nuance and could be misinterpreted. \"Chọn loại\" would be a more natural and accurate translation in Vietnamese when referring to selecting types of data or options.",
+          "suggestion": "Chọn loại"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

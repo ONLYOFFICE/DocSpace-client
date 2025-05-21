@@ -3,7 +3,7 @@
   "content": "API library",
   "content_en_sha1_hash": "2e8c30c46ac47f76494735b3d24e32dd53045866",
   "created_at": "2025-05-19T21:30:54.365Z",
-  "updated_at": "2025-05-20T09:41:52.228Z",
+  "updated_at": "2025-05-21T09:31:31.686Z",
   "comment": {
     "text": "The \"APILink\" translation key is used to display the English label for a button that links to an API library. In the provided code snippet, it appears as part of a Link component within a CategoryDescription element.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation 'knihovny API' is technically correct but could be improved for better flow and common usage. While 'API' is often used as-is, translating it to 'rozhraní API' or 'API rozhraní' would be more natural in many contexts.",
+          "suggestion": "Consider 'rozhraní API' or 'API rozhraní' for a more natural and common usage."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -63,7 +69,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"la biblioteca de API\" is not the most natural-sounding translation. The article 'la' is redundant as 'API' is often treated as an acronym and doesn't inherently require an article.",
+          "suggestion": "biblioteca API"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -75,7 +87,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"bibliothèque de l'API\" is understandable, a more idiomatic and standard translation for \"API library\" would be \"bibliothèque API\". The preposition 'de' isn't necessary in this context.",
+          "suggestion": "bibliothèque API"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -105,7 +123,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ຫ້ອງສະໝຸດ API\" literally translates to 'API library'. While understandable, 'API library' in English already means 'API library'. A more direct and idiomatic translation would be better. Considering the context of a Javascript SDK, 'API' itself is often understood, or a more descriptive phrase emphasizing its function would be preferable.",
+          "suggestion": "Consider alternatives like \"ຕົວເຊື່ອມຕໍ່ API\" (API connector), \"ການເຊື່ອມຕໍ່ API\" (API connection), or simply \"API\" if the audience is technically proficient."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -129,7 +153,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'biblioteca API' is understandable, a more natural and accurate translation of 'API library' in Portuguese would be 'biblioteca de API'.  'de' is a preposition indicating possession or relationship, which is more common in this context.",
+          "suggestion": "biblioteca de API"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -147,13 +177,25 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'библиотеку API' is technically correct, but could be improved for better flow and naturalness in Russian. 'API' is often used without translation in Russian technical contexts.",
+          "suggestion": "API-библиотека"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'යෙ.ක්‍ර.මු. පුස්තකාලය' is a literal transliteration and doesn't accurately convey the meaning of 'API library'. It sounds awkward and isn't a natural way to refer to an API library in Sinhala.",
+          "suggestion": "A more appropriate translation would be something like 'API ශිඛ්‍යාමානය' (API Shikshyamana) or 'API සැපයුම්කරුවෙකු' (API Sapayu Karuwak) or a descriptive phrase like 'අපිඅයි පීඅයි උbibliothekaya' (API library in English phonetic transliteration with added clarity)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

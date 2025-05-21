@@ -3,7 +3,7 @@
   "content": "Two-factor authentication",
   "content_en_sha1_hash": "edfd617aa53e034bf19dce690f417b00bc824fa9",
   "created_at": "2025-05-19T21:30:53.005Z",
-  "updated_at": "2025-05-20T09:44:14.880Z",
+  "updated_at": "2025-05-21T02:41:06.463Z",
   "comment": {
     "text": "Two-factor authentication is a security feature used to add an extra layer of protection when accessing the portal. This translation key is used as the label for a settings category and button in the portal's security settings, informing users about this security measure.",
     "is_auto": true,
@@ -105,7 +105,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Երկգործոն իսկորոշում\" is a literal translation of 'two-factor', but doesn't fully capture the meaning of 'authentication'. A more accurate translation would convey the concept of a security measure requiring two verification factors.",
+          "suggestion": "Մարտահավաքում երկու ֆակտորով (Martahavakum yerk`u faktorov) - 'Authentication with two factors' or Երկկողմ ապացույց (Yerk'kogm apacuyc) - 'Two-way verification'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -129,7 +135,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ການຢືນຢັນ 2 ຊັ້ນ\" is a literal translation, it's not the most natural or commonly understood way to express 'two-factor authentication' in Lao. It can sound clunky.",
+          "suggestion": "Consider a more idiomatic translation, such as \"ການยืนຢັນຕົວຕົນສອງສາຍ\" or \"ລະບົບຢັ້ງຢືນຕົວຕົນສອງສາຍ\" (the latter being more formal and precise, incorporating 'system').  The best choice depends on the overall tone and audience of the application."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -177,7 +189,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ද්වි සාධක තහවුරුව' is a literal transliteration and doesn't fully convey the meaning of 'two-factor authentication' in a natural Sinhala way. While technically understandable, it's not the most idiomatic translation.",
+          "suggestion": "A more natural translation would be 'ද්විත්ව ආරක්ෂණ ක්‍රමයක්' (Dwitwa aarakshana kramayak) or 'ද්විත්ව සාධක ආරක්ෂණය' (Dwitwa saadaka aarakshayanaya)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

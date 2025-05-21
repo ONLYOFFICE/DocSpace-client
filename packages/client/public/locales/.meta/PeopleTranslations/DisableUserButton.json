@@ -3,7 +3,7 @@
   "content": "Disable",
   "content_en_sha1_hash": "9a7d4e0687b14e2b7cda406900b802782cd50a62",
   "created_at": "2025-05-19T21:30:53.466Z",
-  "updated_at": "2025-05-20T09:43:42.582Z",
+  "updated_at": "2025-05-21T06:03:09.803Z",
   "comment": {
     "text": "This translation key is used as a button label in various contexts, including a change user status dialog and options store. It corresponds to the action of disabling or removing users from systems, such as guests or individuals. Translators should provide a clear and concise equivalent for this context.",
     "is_auto": true,
@@ -75,7 +75,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Απενεργοποίηση\" while technically meaning 'deactivation' or 'disabling', is a more formal and technical term. 'Disable' in this context, referring to a user button, would be better conveyed by a more direct and user-friendly term.",
+          "suggestion": "Απενεργοποίηση is accurate but may be too formal. Consider alternatives like 'Απενεργοποίηση Λογαριασμού' (Account Deactivation), 'Απενεργοποίηση Χρήστη' (User Deactivation), or a simpler term depending on the UI context."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -87,7 +93,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Poisteta käytöstä\" is understandable, it's a somewhat verbose and not the most natural translation for 'Disable' in this context. A more common and concise translation would be 'Poista käytöstä'.",
+          "suggestion": "Poista käytöstä"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -165,7 +177,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Заблокировать' is a possible translation for 'Disable', it implies a more severe action (block) than simply disabling a feature or user. A more accurate translation, depending on the context, could be 'Отключить' or 'Деактивировать'.",
+          "suggestion": "Consider 'Отключить' or 'Деактивировать' depending on the specific meaning of 'Disable'."
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -195,13 +213,25 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Onemogući' doesn't perfectly capture the nuance of 'Disable' in a user interface context. While it means 'make impossible' or 'prevent,' it's a bit too literal and might not be the most natural-sounding option for a button label.",
+          "suggestion": "Consider 'Isključi' which is a more common and user-friendly translation for 'Disable' in a UI setting. Alternatively, 'Zaključaj' could also work depending on the specific function."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Devre dışı bırak\" is a valid translation for \"Disable\", it's quite formal and lengthy for a button label. A more user-friendly and concise option would be preferred.",
+          "suggestion": "Pasif"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

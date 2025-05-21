@@ -3,7 +3,7 @@
   "content": "Header",
   "content_en_sha1_hash": "31341c6f0c7af677ffb8fadcb92038e8ac2b6193",
   "created_at": "2025-05-19T21:30:54.517Z",
-  "updated_at": "2025-05-20T09:41:37.218Z",
+  "updated_at": "2025-05-21T09:05:37.885Z",
   "comment": {
     "text": "The translation key \"Header\" is used to display the title of a panel or section in the UI. It appears as a label in a checkbox element and is accompanied by an image to represent the header of the embedding panel.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"العنوان الرئيسي\" (Al-ʿunwān ar-raʾīsī) is a valid Arabic phrase, it translates more closely to 'main title' or 'primary heading'. 'Header' in a software context often refers to a specific element in the code or UI, and a more accurate translation might be something closer to 'رأس الصفحة' (raʾs as-safḥa) or a similar term that emphasizes its technical function.",
+          "suggestion": "Consider 'رأس الصفحة' (raʾs as-safḥa) or a similar technical term that better reflects the software context."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -111,13 +117,25 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"머리글\" is a literal translation of \"header\", it's not the common or idiomatic term used in software development or UI/UX contexts in Korean. \"헤더\" (pronounced similarly to the English \"header\") is the preferred and more widely understood term.",
+          "suggestion": "헤더"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ຫົວຂໍ້ເອກະສານ\" (hua kho ekasarn) translates to 'document header' or 'document title', which isn't a direct or accurate translation of the English 'Header'. 'Header' in a Javascript SDK context generally refers to the header information included in a request, not a document title.",
+          "suggestion": "A more appropriate translation might be \"ຫົວຂໍ້\" (hua kho) - simply 'header', or perhaps \"ສ່ວນຫົວ\" (suan hua) – 'header section' if more context is needed. The best option depends on how 'Header' is actually used in the Javascript SDK."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -213,7 +231,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'页眉' (yè méi) primarily translates to 'header' in the context of a document or web page's top section. While technically a 'header', it might not be the most accurate translation for a Javascript SDK's header, which likely refers to a component or section of code. A more contextually appropriate translation might be '头部' (tóu bù) which means 'head' or 'heading'.",
+          "suggestion": "Consider '头部' (tóu bù) for a more accurate translation if 'header' refers to a component of a Javascript SDK."
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Admins",
   "content_en_sha1_hash": "ed6b52430295a72fda6c352529f3aeb3023bfe0c",
   "created_at": "2025-05-19T21:30:50.380Z",
-  "updated_at": "2025-05-20T09:45:53.824Z",
+  "updated_at": "2025-05-21T05:23:16.260Z",
   "comment": {
     "text": "This translation key is used to display the text \"Admins\" in the Portal Settings page, likely in a dropdown list or filter option, allowing users to select administrators.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ադմինիստրատորներ\" is a literal translation of \"Administrators\" and is more formal than the English term \"Admins\". While technically correct, it lacks the brevity and informality implied by the original.",
+          "suggestion": "Consider a more concise and informal Armenian equivalent, such as \"Վարչատարեր\" (Varchater) or a similar term that reflects the intended meaning of 'admins' within the context of settings.  A more direct translation of 'admins' might be difficult, requiring analysis of how the term is used in the application."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -177,7 +183,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Administratori' is a valid Serbian (Latin) word for 'Administrators', it's a more formal and plural form. 'Admins' is often used as a shortened, more casual term. A more appropriate translation, depending on the context, might be 'Administratori' (plural, slightly less formal) or even a transliteration like 'Admini'.",
+          "suggestion": "Consider 'Administratori' or 'Admini' for a more contextually accurate translation. Evaluate if the formal tone of 'Administratori' is necessary."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

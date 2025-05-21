@@ -3,7 +3,7 @@
   "content": "User quota has been successfully disabled.",
   "content_en_sha1_hash": "585603e4624841cd6229d6ab3952af2f88d04b1e",
   "created_at": "2025-05-19T21:30:53.131Z",
-  "updated_at": "2025-05-20T09:44:09.800Z",
+  "updated_at": "2025-05-21T02:30:19.848Z",
   "comment": {
     "text": "This translation key is used to display a success message when user quota is disabled. It is typically displayed after clicking a button or submitting a form that affects user quota settings, and appears in a toast notification dialog.",
     "is_auto": true,
@@ -111,19 +111,37 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Numuru kvota ir veiksmīgi atspējota' is not the most natural or accurate translation of 'User quota has been successfully disabled'. 'Numuru kvota' literally means 'Number quota', which is a partial translation. 'User quota' implies a broader concept than just a quota for numbers. A better translation would reflect the overall user account limitations.",
+          "suggestion": "Lietotāja kvota ir veiksmīgi atspējota."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Gebruikersquota is met succes uitgeschakeld' is technically correct but slightly awkward. A more natural phrasing would be 'Het gebruikersquota is met succes uitgeschakeld.' or 'Het gebruikersquota is nu uitgeschakeld.'",
+          "suggestion": "Het gebruikersquota is met succes uitgeschakeld."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Limit użytkowników został wyłączony' doesn't accurately convey the meaning of 'User quota has been successfully disabled'. 'Limit użytkowników' translates to 'User Limit', which is not the same as 'User quota'.",
+          "suggestion": "Limit użytkowania został wyłączony."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,7 +159,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Cotă de stocare pentru utilizator a fost dezactivată cu succes' is a bit literal and verbose. A more natural Romanian phrasing would be preferred.",
+          "suggestion": "Utilizatorul nu mai are limită de stocare."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Cotă de stocare pentru utilizator' is slightly redundant. 'Cotă de stocare' is generally sufficient when the context implies it refers to a user.",
+          "suggestion": "Cotă de stocare a fost dezactivată cu succes."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +182,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'පරිශීලක' is a less common and potentially awkward wording for 'user'. A more common and natural term would be 'භාවිතර'.",
+          "suggestion": "පරිශීලක → භාවිතර"
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, the sentence structure could be more fluid and natural in Sinhala. The phrasing is a bit literal from the English.",
+          "suggestion": "පරිශීලක කෝටාව සාර්ථකව අක්‍රිය කර ඇත. → භාවිතකරු කෝටාව සාර්ථකව අක්‍රිය කර ඇත."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

@@ -3,7 +3,7 @@
   "content": "API key copied",
   "content_en_sha1_hash": "7faebff738697e731733d149f55475332d5b9414",
   "created_at": "2025-05-19T21:30:50.498Z",
-  "updated_at": "2025-05-20T09:45:49.252Z",
+  "updated_at": "2025-05-21T05:15:52.319Z",
   "comment": {
     "text": "The \"ApiKeyCopied\" translation key is used to display a confirmation message when an API key is successfully copied in the Create API Key Dialog. The message informs the user that the key has been duplicated. It appears on a button within this dialog.",
     "is_auto": true,
@@ -27,7 +27,18 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"تم نسخ مفتاح \"API\"\" is a literal translation that doesn't convey the full meaning of \"API key copied.\" While technically correct, it sounds unnatural in Arabic. It's better to convey the action and the object more smoothly.",
+          "suggestion": "مفتاح API تم نسخه"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of \"API\" within the Arabic sentence is unusual. It's preferable to either transliterate the term or avoid it if possible depending on the user's technical understanding.",
+          "suggestion": "مفتاح واجهة برمجة التطبيقات تم نسخه"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -51,7 +62,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation \"API-Leitfaden\" translates to \"API guide\" or \"API manual,\" which is not equivalent to \"API key copied.\" It doesn't reflect the original meaning.",
+          "suggestion": "A more accurate translation would be something like \"API-Schlüssel kopiert\" or \"API-Key kopiert\"."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -153,7 +170,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word ' පිටපත් කරන' is a bit awkward. While technically correct, it can be improved for naturalness.",
+          "suggestion": "API යතුරපිටුවලපණි."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

@@ -3,7 +3,7 @@
   "content": "No events here yet",
   "content_en_sha1_hash": "d5dabb69303d00324a084b615296dcb2481cba3d",
   "created_at": "2025-05-19T21:30:52.033Z",
-  "updated_at": "2025-05-20T09:44:52.675Z",
+  "updated_at": "2025-05-21T03:47:27.405Z",
   "comment": {
     "text": "This translation key is used to display a message when there are currently no events logged or tracked in an audit trail. It appears as a header text on a screen where user activity is expected to be logged. Translators should provide a localized version of this phrase to indicate that no data is available.",
     "is_auto": true,
@@ -105,7 +105,18 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຫາກໍ່ວ່າ ບໍ່ມີເຫດການໃດໆຢູ່ທີ່ນີ້ເທື່ອ' is a very literal and slightly awkward translation of 'No events here yet'. 'ຫາກໍ່ວ່າ' implies 'it has just happened' which doesn't fit the meaning. A more natural and accurate translation would convey that there are currently no events.",
+          "suggestion": "ບໍ່ມີເຫດການໃດໆຢູ່ທີ່ນີ້ເທື່ອ"
+        },
+        {
+          "type": "grammatical",
+          "description": "While not strictly incorrect, the presence of 'ເທື່ອ' at the end of the Lao translation makes it sound slightly informal. While acceptable, it's not always appropriate for settings menus.",
+          "suggestion": "ບໍ່ມີເຫດການໃດໆຢູ່ທີ່ນີ້"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +152,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Deocamdată, niciun eveniment aici.\" is understandable, it's a bit verbose and doesn't capture the brevity of \"No events here yet.\" A more direct and concise translation would be preferable.",
+          "suggestion": "Niciun eveniment încă."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -201,7 +218,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"这里目前没有事件\" (Zhè lǐ mùqián méiyǒu shìjiàn) is a bit formal and literal for a UI element like 'No events here yet.' It lacks the casual tone expected in this context.",
+          "suggestion": "Consider a more conversational translation such as \"暂时还没有活动\" (Zànshí hái méiyǒu huódòng) or \"目前还没有活动\" (Mùqián hái méiyǒu huódòng), depending on the desired level of formality. A simpler option is also \"没有活动\" (Méiyǒu huódòng)."
+        }
+      ],
       "approved_at": null
     }
   }

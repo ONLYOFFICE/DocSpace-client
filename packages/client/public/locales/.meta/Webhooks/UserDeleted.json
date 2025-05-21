@@ -3,7 +3,7 @@
   "content": "User deleted",
   "content_en_sha1_hash": "c7134d6795fb5908f40d6edf7909f896154ad953",
   "created_at": "2025-05-19T21:30:49.858Z",
-  "updated_at": "2025-05-20T09:46:48.762Z",
+  "updated_at": "2025-05-21T00:53:19.853Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a user has been deleted from the system. It is typically displayed in a notification or confirmation message after a user account has been removed.",
     "is_auto": true,
@@ -99,7 +99,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation includes a trailing space.",
+          "suggestion": "사용자가 삭제되었습니다"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -111,13 +117,25 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation \"Lietotājs dzēsts\" is a passive voice construction that translates more accurately to \"User was deleted.\"  A more natural and preferred translation for 'User deleted' in this context would be 'Lietotājs izdzēsts' which is an active voice translation.",
+          "suggestion": "Lietotājs izdzēsts"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Dutch word 'verwijderd' is a past participle and needs to be conjugated correctly. It should be 'verwijderd' in this context, but the correct form would be 'is verwijderd' or 'werd verwijderd' depending on the desired nuance.",
+          "suggestion": "Gebruiker is verwijderd"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -153,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"පරිශීලකයා විසින් මකන ලදී\" is too literal and doesn't sound natural in Sinhala. It translates to something like 'The user deleted'. A more natural phrasing would express the action of deletion by a system or process.",
+          "suggestion": "A better translation would be something like \"පරිශීලකයා ඉවත් කරන ලදී\" (Parishilakaya ivat karan ladi) - 'The user was removed' or \"පරිශීලකයා නිශ්චිත කරන ලදී\" (Parishilakaya nischita karan ladi) - 'The user was deactivated/removed'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

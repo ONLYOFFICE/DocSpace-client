@@ -3,7 +3,7 @@
   "content": "Move up without changing selection",
   "content_en_sha1_hash": "45b548b58c917019a11cd41d3c45956c27bd9bfc",
   "created_at": "2025-05-19T21:30:55.065Z",
-  "updated_at": "2025-05-20T09:40:32.525Z",
+  "updated_at": "2025-05-21T10:29:15.700Z",
   "comment": {
     "text": "The translation key \"HotkeysMoveUp\" is used to display the text for a hotkey shortcut that moves the selection up without changing it. This text appears in a panel within a UI component, indicating the action's purpose and providing context for users.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Seçimi dəyişmədən yuxarı hərəkət edin' is a literal translation and doesn't convey the intended meaning as naturally in Azerbaijani. It sounds slightly awkward.",
+          "suggestion": "Consider alternatives like 'Seçimi qoruyaraq yuxarı sürüşdürün' or 'Seçimi saxlayaraq yuxarı hərəkət edin'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Տեղափոխել վեր՝՝ առանց ընտրությունը փոխելու' is a literal translation and could be phrased more naturally in Armenian. While technically correct, it sounds slightly awkward.",
+          "suggestion": "Consider a more natural phrasing such as: 'Վեր տեղաշարժել՝ ընտրությունը չփոխելով' or 'Վեր տեղաշարժել առանց ընտրության փոփոխությանը'"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +105,18 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Move up without changing selection\" implies moving an item up in a list or arrangement while keeping the currently selected item in place. The Japanese translation '選択を変えずに移動（上）' literally translates to 'Move (up) without changing selection.' While not entirely wrong, it lacks the nuance of 'moving *an item* up'.",
+          "suggestion": "選択した項目を移動せずに上に移動する"
+        },
+        {
+          "type": "formatting",
+          "description": "The '（上）' in the translation is a bit abrupt. It's not visually appealing or clear within a UI element.",
+          "suggestion": "選択した項目を移動せずに上に移動する"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -147,13 +170,25 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Перейти вверх без изменения области выделения' is a bit too literal and doesn't quite capture the nuance of 'Move up without changing selection'. 'Перейти вверх' implies a movement action, while 'Move up' in this context refers to modifying the order of items.",
+          "suggestion": "Изменить порядок без изменения выделения"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"තේරීම වෙනස් නොකර ඉහළට යන්න\" while literal, doesn't fully capture the nuance of 'Move up without changing selection'. It emphasizes 'without changing selection' which is implicit in the English phrase. A more natural translation might prioritize conveying the 'move up' action more directly.",
+          "suggestion": "තේරීම නොවෙනස්ව ඉහළට යන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +218,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Seçimi değiştirmeden yukarı git' while technically conveying the meaning, isn't the most natural or idiomatic way to express 'Move up without changing selection' in Turkish. It's a bit literal.",
+          "suggestion": "Consider alternatives like 'Seçimi koruyarak yukarı hareket et' or 'Seçimi bozmadan yukarı git'."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -201,7 +242,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '向上移动而不改变选定' doesn't fully capture the meaning of 'Move up without changing selection'. The phrasing is a bit literal and could be improved for naturalness in Chinese. It focuses on the action of moving up but doesn't quite convey the 'without changing selection' aspect as elegantly.",
+          "suggestion": "向上移动，不改变选中项"
+        }
+      ],
       "approved_at": null
     }
   }

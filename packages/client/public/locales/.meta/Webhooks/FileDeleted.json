@@ -3,7 +3,7 @@
   "content": "File deleted",
   "content_en_sha1_hash": "80bb638b8b9d2b50c437a89c6f74323269298583",
   "created_at": "2025-05-19T21:30:49.726Z",
-  "updated_at": "2025-05-19T21:30:49.726Z",
+  "updated_at": "2025-05-21T01:12:23.842Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -104,7 +104,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Fails dzēsts\" is grammatically correct but doesn't fully convey the meaning of \"File deleted\". A more accurate translation would be \"Fails izdzēsts\" or \"Dzēsts fails\". \"Dzēsts\" implies the act of deleting, but \"izdzēsts\" more specifically conveys the completed action of file deletion.",
+          "suggestion": "Fails izdzēsts"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -146,7 +152,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ගොනුව මකන ලදි\" literally translates to 'File was deleted'. While understandable, a more natural and concise translation for \"File deleted\" would be more appropriate.",
+          "suggestion": "ගොනුව ඉවත් කරන ලදි"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -164,13 +176,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"Фајл\" is a valid transliteration of 'File' but a more common and natural word in Serbian would be 'Datoteka'.",
+          "suggestion": "Datoteka obrisana"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Serbian translation 'Fajl obrisan' uses the English word 'Fajl' instead of the Serbian equivalent. While understandable, it's not the most accurate representation.",
+          "suggestion": "Datoteka obrisana"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

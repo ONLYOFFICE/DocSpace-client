@@ -3,7 +3,7 @@
   "content": "Embed the whole {{productName}} to allow users to interact with all rooms, files, and settings.",
   "content_en_sha1_hash": "bb2ba090ea6b7d4f2d0a63738da632aa07737985",
   "created_at": "2025-05-19T21:30:54.616Z",
-  "updated_at": "2025-05-20T09:41:27.810Z",
+  "updated_at": "2025-05-21T08:50:13.182Z",
   "comment": {
     "text": "This translation key is used for a portal settings page that instructs users to embed the entire product to interact with all rooms, files, and settings. It appears in the \"PresetWrapper\" component, which is likely part of a dropdown or options menu.",
     "is_auto": true,
@@ -39,7 +39,18 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"daxil edin\" (embed) is not the most natural way to describe integrating a product. A more accurate translation might focus on 'integrasiya etmək' (to integrate) or 'quraşdırmaq' (to install/set up).",
+          "suggestion": "İstifadəçilərə bütün otaq, fayl və parametrlərlə qarşılıqlı əlaqə yaratmaq üçün {{productName}}-i inteqrasiya etmək/quraşdırmaq."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the phrasing could be more fluent. Adding a conjunction to connect the actions could improve readability.",
+          "suggestion": "İstifadəçilərə bütün otaq, fayl və parametrlərlə qarşılıqlı əlaqə yaratmaq üçün {{productName}}-i inteqrasiya etmək/quraşdırmaq və onlarla interaktiv olmaq imkanı yaratmaq."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -51,13 +62,30 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'pracovat' (to work) doesn't fully capture the meaning of 'interact' in this context. 'Interact' implies more than just working with, it suggests engaging and using.",
+          "suggestion": "Vložte celý {{productName}}, aby uživatelé mohli s nimi interagovat se všemi místnostmi, soubory a nastaveními."
+        },
+        {
+          "type": "formatting",
+          "description": "The 's nimi' added in the suggestion is slightly awkward.  A more natural flow might be achieved with rephrasing.",
+          "suggestion": "Vložte celý {{productName}}, aby uživatelé mohli používat všechny místnosti, soubory a nastavení."
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Betten Sie' is overly formal and doesn't quite capture the meaning of 'Embed'. A more natural phrasing would be 'Integrieren Sie' or 'Binden Sie ein'.",
+          "suggestion": "Integrieren Sie den gesamten {{productName}} ein, um Benutzern die Interaktion mit allen Räumen, Dateien und Einstellungen zu ermöglichen."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -75,7 +103,18 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"Embed\" as \"Upota\" is technically correct, but might not convey the full meaning of integration or inclusion.  A more nuanced translation might be preferable depending on the context. \"Upota\" can imply a more superficial embedding.",
+          "suggestion": "Consider alternatives like \"Sisällytä\" or \"Integroi\" to better convey the intended meaning of embedding."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"käyttäjien olla vuorovaikutuksessa\" is grammatically correct but sounds a bit clunky and formal.  It's a literal translation of \"to interact.\" ",
+          "suggestion": "Consider a more natural phrasing like \"käyttäjien vuorovaikuttaa\" or \"käyttäjien pystyä vuorovaikuttamaan\" to improve readability."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -87,7 +126,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation includes a hyphenated product name placeholder '{{productName}}-ը'. The hyphen is unnecessary and might look odd in the Armenian context. It's likely intended to simply be '{{productName}}'.",
+          "suggestion": "Remove the hyphen: '{{productName}}' should be '{{productName}}'"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -111,7 +156,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ພົວພັນ' might not be the most appropriate translation for 'interact'. While technically correct, it carries a connotation of 'relate' or 'connect' rather than 'engage with'.",
+          "suggestion": "Consider 'ໂຕ້ຕອບ' or 'ໃຊ້ງານ' instead of 'ພົວພັນ' for a more accurate translation of 'interact'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -123,7 +174,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"interact with\" is better conveyed as \"werken met\" (work with) in Dutch, but a more natural translation might be 'interageren met' which more directly translates to 'interact with'. 'Werken met' is acceptable, but 'interageren met' provides a slightly closer meaning.",
+          "suggestion": "Integreer de volledige {{productName}} zodat gebruikers kunnen interageren met alle kamers, bestanden en instellingen."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -159,31 +216,76 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'කාවද්දන්න' (kāvaddaṇna) implies 'to protect' or 'to shield,' which doesn't accurately reflect the English 'Embed'. The intended meaning is to integrate or include.",
+          "suggestion": "පරිශ්‍රීලකයින්ට සියලු කාමර, ගොනු සහ සැකසුම් වෙත ප්‍රවේශය ලබා දීමට සමස්ත {{productName}} ඒකරාශි කරන්න."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure could be improved for better flow. The placement of 'සමස්ත' (samastha) feels slightly awkward.",
+          "suggestion": "පරිශ්‍රීලකයින්ට සියලු කාමර, ගොනු සහ සැකසුම් වෙත ප්‍රවේශය ලබා දීමට {{productName}} සමස්තයක් වශයෙන් ඒකරාශි කරන්න."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"Vložte celý priestor\" implies inserting a space, which isn't the intended meaning. 'Embed' implies integrating or including the entire product, not just inserting a space.",
+          "suggestion": "Integrujte celý {{productName}}"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'pracovať so' is a bit too generic. 'Interact with' is more specific.",
+          "suggestion": "komunikovať s"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'prostor' (space) doesn't accurately convey the meaning of 'product'. It needs a more general term that can encompass the entire platform or application.",
+          "suggestion": "Consider alternatives like 'platformo' (platform), 'aplikacijo' (application), or a more descriptive phrase depending on the context of 'productName'."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'Vdelajte celoten prostor {{productName}}, da uporabnikom omogočite interakcijo...' is a bit clunky. While grammatically correct, it could be more fluent.",
+          "suggestion": "Consider rephrasing to something like 'Vgradite celoten {{productName}}, da uporabnikom omogočite interakcijo...'"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'уградите' (ugradite) implies 'install' or 'integrate', which is not the intended meaning. It suggests a technical installation rather than embedding or including.",
+          "suggestion": "Consider 'Укључите цео {{productName}}' (Ukljucite ceo {{productName}}) which translates to 'Include the whole {{productName}}' or 'Integrate the whole {{productName}}'. Another option could be 'Додајте цео {{productName}}' (Dodajte ceo {{productName}}) which means 'Add the whole {{productName}}'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"Embed\" as \"Ugradite\" is not ideal. While technically correct, it implies installing rather than integrating or embedding.",
+          "suggestion": "Integrišite ceo {{productName}} da biste omogućili korisnicima interakciju sa svim sobama, datotekama i podešavanjima."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,13 +297,25 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"простір\" (prostir) translates more accurately to \"space\" or \"workspace\" in this context, not just \"space\". \"Вбудуйте весь простір {{productName}}\" implies embedding the entire workspace, which may not be what's intended. It should convey embedding the whole *product* or *platform*.",
+          "suggestion": "Вбудуйте весь {{productName}}, щоб дозволити користувачам взаємодіяти з усіма кімнатами, файлами та параметрами."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"để cho phép\" is redundant. \"để cho phép\" translates to \"in order to allow\", but \"để\" already implies permission.",
+          "suggestion": "Nhúng toàn bộ {{productName}} để người dùng có thể tương tác với tất cả các phòng, tập tin và cài đặt."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

@@ -3,7 +3,7 @@
   "content": "Here, you can view the detailed storage usage data in this {{productName}}.",
   "content_en_sha1_hash": "c25e93f04d549177e51dc81450d226b9b0dfe235",
   "created_at": "2025-05-19T21:30:52.761Z",
-  "updated_at": "2025-05-20T09:44:24.908Z",
+  "updated_at": "2025-05-21T02:57:55.654Z",
   "comment": {
     "text": "This translation key is used to display a general description of storage usage data in the product. It appears on a page within the Portal Settings categories and is rendered as a text label next to an icon indicating availability. The product name is used for contextualization.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The placement of the product name variable {{productName}} seems correct, maintaining readability in the Azerbaijani translation.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -45,7 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'prostoru' (space) doesn't accurately convey the meaning of 'in this {{productName}}'. It implies a designated area rather than the platform or service itself.",
+          "suggestion": "Zde si můžete zobrazit podrobné údaje o využití úložiště v tomto {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -57,7 +69,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'storage' is best translated as 'αποθηκευτικός χώρος' (apothikeftikos choros) instead of just 'αποθ. χώρου'. While 'αποθ. χώρου' is understandable, it's a more abbreviated and less professional phrasing.",
+          "suggestion": "Εδώ, μπορείτε να δείτε τα λεπτομερή δεδομένα χρήσης του αποθηκευτικού χώρου σε αυτό το {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,19 +87,37 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The sentence starts with 'Tässä voit katsella...' which is grammatically correct but stylistically slightly less fluent. A more natural phrasing might be 'Täällä voit tarkastella...' or 'Voit tarkastella...'",
+          "suggestion": "Voit tarkastella yksityiskohtaisesti tämän {{productName}}-n tallennustilan käyttötietoja."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'view the detailed storage usage data' is not perfectly captured by 'consulter l'utilisation de l'espace de stockage'. 'Consulter' implies more of a review or consultation, whereas 'view' implies seeing a detailed presentation. A more accurate translation might include words like 'visualiser' or 'examiner' to convey the 'detailed' aspect.",
+          "suggestion": "Ici, vous pouvez visualiser les données détaillées d'utilisation de l'espace de stockage dans {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The colon after the Armenian sentence is unnecessary and inconsistent with standard English formatting.",
+          "suggestion": "Remove the colon at the end of the sentence: Այստեղ դուք կարող եք դիտել պահեստավորման օգտագործման մանրամասն տվյալները այս {{productName}}-ում:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -153,31 +189,66 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ආචයන' (aachayana) is not the correct term for 'storage' in this context. It refers to rites or ceremonies.",
+          "suggestion": "මෙතැන ඔබට මෙම {{productName}} හි ගබඩා භාවිතය සවිස්තරාත්මක දැකීමට හැකිය."
+        },
+        {
+          "type": "spelling",
+          "description": "While not strictly incorrect, 'ආචයන' is not commonly used. 'ගබඩා' is more natural.",
+          "suggestion": "Use 'ගබඩා' instead of 'ආචයන'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'v tomto priestore' (in this space) doesn't accurately translate 'in this {{productName}}'. '{{productName}}' likely refers to a product name, and the Slovak translation implies a physical space.",
+          "suggestion": "Tu si môžete pozrieť podrobné údaje o využití úložiska v tomto {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"v tem prostoru\" (in this space) doesn't accurately convey the meaning of 'in this {{productName}}'. It implies a physical space rather than the product itself.",
+          "suggestion": "Tukaj si lahko ogledate podrobne podatke o uporabi prostora za shranjevanje v tem izdelku {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The word 'овом' appears twice, the second one is not needed in this context. It should be 'у овом {{productName}}'.",
+          "suggestion": "Овде можете видети детаљне податке о коришћењу складишта у {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The hyphen in 'productName'-u' should be a space. Serbian typically uses a space before the preposition 'u' when referring to an entity.",
+          "suggestion": "Ovde možete videti detaljne podatke o korišćenju skladišta u ovom {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -189,7 +260,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"просторі\" (prostori) doesn't accurately convey the meaning of \"this {{productName}}\". It translates to 'space' or 'area,' which isn't suitable in this context. It needs to be closer to 'in this product/application'.",
+          "suggestion": "Тут ви можете переглянути докладні дані про використання сховища в цьому продукті {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "vi": {

@@ -3,7 +3,7 @@
   "content": "Tags removed.",
   "content_en_sha1_hash": "453b4c78053004eb819254db86b4ee03ae201130",
   "created_at": "2025-05-19T21:30:54.773Z",
-  "updated_at": "2025-05-20T09:41:10.515Z",
+  "updated_at": "2025-05-21T10:17:38.641Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that tags have been removed from a room. It appears in the UI when an action involving room tags has been performed. Translators should provide a neutral or descriptive phrase conveying the removal of tags.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Odstraněné štítky' while technically correct, doesn't quite capture the nuance of 'Tags removed.' It implies the tags *were* removed, rather than the action of removing them. A better translation might be something like 'Odstraněny štítky' which uses the past participle form to indicate an action.",
+          "suggestion": "Odstraněny štítky"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -105,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ລຶບແທັກອອກແລ້ວ' is a literal translation of 'Tags removed' and while understandable, a more natural phrasing might be preferred depending on the context of the InfoPanel. It's slightly abrupt.",
+          "suggestion": "Consider 'ແທັກຖືກລຶບອອກແລ້ວ' (Tags have been removed) or 'ລົບແທັກແລ້ວ' (Tags removed - more concise)."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ටැග් ඉවත් කරන ලදී.' literally translates to 'Tags were removed.' While technically correct, it sounds overly formal and passive for a UI message. It would be more natural to use a more direct and concise phrasing.",
+          "suggestion": "ටැග්​ ඉවත්​."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Тагови уклоњени.' while technically correct, sounds less natural than alternatives. 'Уклоњени тагови' or 'Тагови брисани' would be more common and idiomatic for 'Tags removed.'",
+          "suggestion": "Уклоњени тагови"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

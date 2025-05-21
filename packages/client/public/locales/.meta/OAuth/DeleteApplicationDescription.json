@@ -3,7 +3,7 @@
   "content": "If you delete this application, all active consents and authorization will be revoked. If a user tries to open the consent screen for this app, an error will occur in the document space and the user will be redirected to the specified redirect URL.",
   "content_en_sha1_hash": "2724c8ed6771536c27c73fe8a703a88effb6d918",
   "created_at": "2025-05-19T21:30:53.849Z",
-  "updated_at": "2025-05-20T09:42:52.668Z",
+  "updated_at": "2025-05-21T07:22:30.735Z",
   "comment": {
     "text": "This translation key is used to display a warning message when deleting an application, explaining that revoking active consents and authorization will occur, and a user will be redirected. It appears in a delete dialog component, prompting users to confirm deletion. Translators should focus on conveying this technical information in a clear and concise manner.",
     "is_auto": true,
@@ -27,19 +27,52 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"all active consents\" is not accurately translated. \"Consents\" doesn't have a direct, universally accepted equivalent in Arabic in this technical context. \"Authorization\" is also broad; it might be better to specify the type of authorization.",
+          "suggestion": "Consider using a phrase like \"جميع الأذونات والتفويضات الصادرة\" (jami' al-adhun wal-tafweedat al-saderah) or more specifically \"جميع الموافقات والتفويضات النشطة\" (jami' al-muwafaqat wal-tafweedat al-nashita) depending on the exact meaning intended."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"المصادقة\" (al-musadaqa) for \"authorization\" is technically correct but might be better replaced with a more common and user-friendly term related to access or permission. It is more formal and technical.",
+          "suggestion": "Consider using a more common term like \"الوصول\" (al-wusul) - 'access' or \"الترخيص\" (al-tarkeeb) - 'licensing/permission' for 'authorization'. The best choice depends on the overall tone and target audience."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is slightly clunky. Breaking it into two sentences might improve readability.",
+          "suggestion": "Consider breaking the first sentence into two: \"إذا قمت بحذف هذا التطبيق، فسيتم إلغاء جميع الأذونات والتفويضات النشطة. إذا حاول المستخدم فتح شاشة الأذونات لهذا التطبيق، فسيحدث خطأ في مساحة الوثائق وسيتم توجيه المستخدم إلى عنوان إعادة التوجيه المحدد.\""
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'salahiyyətlər' is a less common and potentially inaccurate translation of 'authorization' in this context. 'Razılıq' or 'İcazə' might be more appropriate depending on the specific nuance intended.",
+          "suggestion": "Consider using 'Razılıq' or 'İcazə' instead of 'salahiyyətlər'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"authorization\" is better translated as \"разрешения\" (razrezheniya) in this context, rather than \"авторизация\" (avtorizatsiya), which implies a more formal process. \"Разрешения\" more accurately conveys the idea of permissions granted to the application.",
+          "suggestion": "Ако изтриете това приложение, всички активни съгласия и разрешения ще бъдат отменени."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the repetition of 'потребител' (user) feels slightly clunky. Rephrasing could improve readability.",
+          "suggestion": "Ако изтриете това приложение, всички активни съгласия и разрешения ще бъдат отменени. Ако потребител се опита да отвори екрана за съгласие за това приложение, ще възникне грешка в пространството на документа и той ще бъде пренасочен към посочения URL адрес за пренасочване."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -57,7 +90,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'redirect URL' is consistently rendered as 'διεύθυνση URL ανακατεύθυνσης'. While technically correct, it's more natural and common in Greek to use 'URL ανακατεύθυνσης' (dropping the 'διεύθυνση').",
+          "suggestion": "URL ανακατεύθυνσης"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,7 +108,18 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'sisällöt' (contents) doesn't accurately translate 'consents' in this context. 'Suostumukset' would be a more accurate translation for consents.",
+          "suggestion": "Jos poistat tämän sovelluksen, kaikki aktiiviset suostumukset ja valtuutukset peruutetaan."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'asiakirjatilassa tapahtuu virhe' (an error occurs in the document space) is a literal translation and doesn't convey the intended meaning. A more natural Finnish phrasing is needed.",
+          "suggestion": "Jos käyttäjä yrittää avata tämän sovelluksen suostumusnäyttöä, järjestelmässä tapahtuu virhe"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,37 +131,98 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"վերահղման URL-ին\" (redirect URL-in) is grammatically correct but sounds slightly unnatural. A more natural phrasing would be \"վերահղման հասցեին\" (redirect address).",
+          "suggestion": "Եթե օգտատերը փորձի բացել այս հավելվածի համաձայնության ձևը, փաստաթղթի տարածքում սխալ կառաջանա, և օգտատերը կվերահղվի նշված վերահղման հասցեին:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'Se si elimina' is grammatically awkward. It should be 'Se si elimina' or 'Se si cancella' for a more natural flow.",
+          "suggestion": "Se si cancella l'applicazione"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“Document space” doesn't have a direct equivalent in Italian and could be misinterpreted. A more understandable translation would be needed based on the actual context.",
+          "suggestion": "Se un utente tenta di aprire la schermata di consenso per questa applicazione, si verificherà un errore nel sistema e l'utente verrà reindirizzato all'URL di reindirizzamento specificato."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'authorization' is not accurately translated. 'Authorization' in this context refers to the granting of permissions, and the Japanese translation doesn't quite capture that nuance. '承認' (shōnin) while meaning 'approval' is not the best fit here. It can be ambiguous.",
+          "suggestion": "Consider using a more precise term for 'authorization' that conveys the granting of permissions, such as '認可' (nin-ka) which is closer to 'licensing' or 'authentication'."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the sentence structure could be improved for better readability in Japanese. The repetition of 'エラーが発生し' (error occurs) feels a bit clunky.",
+          "suggestion": "Rephrase the second sentence to avoid the repetition. For example: 'ユーザーがこのアプリケーションの同意画面を開こうとすると、ドキュメントスペースでエラーが発生し、指定されたリダイレクトURLにリダイレクトされます。' could become 'ユーザーがこのアプリケーションの同意画面を開こうとすると、ドキュメントスペースでエラーとなり、指定されたリダイレクトURLにリダイレクトされます。'"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"유효한 모든 동의\" is slightly awkward. A more natural phrasing would be \"모든 활성 동의\" or \"현재 유효한 모든 동의\". While technically correct, the current phrasing lacks flow.",
+          "suggestion": "모든 활성 동의"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"문서 공간\" (document space) might be too technical for the intended audience. A more user-friendly term might be preferable.",
+          "suggestion": "시스템"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure could be slightly improved for better readability. Separating the two actions (error and redirection) into two sentences might improve flow.",
+          "suggestion": "사용자가 이 앱에 대한 동의 화면을 열려고 시도할 경우 문서 공간에서 오류가 발생합니다. 그리고 사용자는 지정된 리디렉션 URL로 리디렉션됩니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ເອກະສານ' (document) in 'ເຂດແຖວເອກະສານ' seems slightly awkward. While technically correct, it might benefit from a more natural phrasing.",
+          "suggestion": "Consider rephrasing 'ເຂດແຖວເອກະສານ' to something like 'ພື້ນທີ່ເອກະສານ' or 'ສະຖານທີ່ເອກະສານ' for better flow."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'document space' is a technical term that might not have a direct, easily understood equivalent in Lao. The translation 'ເຂດແຖວເອກະສານ' is a literal rendering but might be confusing to the user.",
+          "suggestion": "Consider a more descriptive translation of 'document space' that clarifies its purpose, such as 'ຂັ້ນຕອນການເຮັດວຽກຂອງລະບົບ' or 'ບໍລິເວນທີ່ກ່ຽວຂ້ອງກັບເອກະສານ'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"novirzīšanas vietrādi URL\" is an awkward and less common way to say \"redirect URL\" in Latvian. While technically correct, it's not natural.",
+          "suggestion": "Ja lietotājs mēģinās atvērt šīs lietotnes piekrišanas ekrānu, dokumentu telpā radīsies kļūda un lietotājs tiks novirzīts uz norādīto pārvirzīšanas URL."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -123,13 +234,25 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"obszarze roboczym dokumentu\" translates to \"document workspace\" which is overly literal and doesn't convey the intended meaning clearly in this context. A more natural translation would be something like \"systemie\" or \"platformie\".",
+          "suggestion": "Jeśli usuniesz tę aplikację, wszystkie aktywne zgody i autoryzacja zostaną cofnięte. Jeżeli użytkownik spróbuje otworzyć ekran zgody dla tej aplikacji, w systemie wystąpi błąd, a użytkownik zostanie przekierowany do określonego adresu URL przekierowania."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'document space' is an awkward translation of the intended meaning. It's likely referring to the system or context where the application's data resides.",
+          "suggestion": "Consider a more natural phrasing, such as 'ambiente de documento' or 'sistema de documentos' or something more contextually appropriate depending on the precise intended meaning."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,7 +264,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase \"Dacă utilizatorul încearcă să acceseze\" is slightly awkward. A more natural phrasing would be \"Dacă un utilizator încearcă...\"",
+          "suggestion": "Dacă un utilizator încearcă să acceseze..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'document space' doesn't have a direct equivalent in Romanian and its meaning isn't immediately clear. A more understandable phrase is needed.",
+          "suggestion": "Dacă un utilizator încearcă să acceseze pagina de consimţământ pentru această aplicație, va apărea o eroare în sistem și utilizatorul va fi redirecționat către URL-ul de redirecționare specificat."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,55 +287,154 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"OAuth:DeleteApplicationDescription\" is not translated. The translation focuses solely on the description content.",
+          "suggestion": "While the task doesn't explicitly require translating the key name, it's worth noting for completeness. A possible translation would be 'OAuth: යෙදුම් ඉවත් කිරීමේ ඡායාරූපණය'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'authorization' is translated as 'අවසර'. While technically correct, 'අනුමැතිය' (anumaathiya) might be a more accurate and natural translation in this context, specifically referring to the act of granting access.",
+          "suggestion": "Replace 'අවසර' with 'අනුමැතිය'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'consent screen' is translated as 'අනුමැතීමේ තිරුව'. While understandable, 'අනුමැති තිරය' (anumaathi thiraya) would be a more concise and common way to express this in Sinhala.",
+          "suggestion": "Replace 'අනුමැතීමේ තිරුව' with 'අනුමැති තිරය'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'redirect' is translated as ' නැවත හරවන'. While technically correct, ' නැවත යවන' (nawaatha yawaan) is more commonly used in Sinhala, especially in technical contexts.",
+          "suggestion": "Replace ' නැවත හරවන' with ' නැවත යවන'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"document space\" is not accurately translated. \"Priestor pre dokumenty\" is too literal and doesn't convey the intended meaning in the context of authorization and consent.",
+          "suggestion": "Consider a more natural phrasing like \"autorizačný systém\" or \"systém oprávnení\" or even omitting it and rephrasing the sentence to avoid it entirely (e.g., \"zobrazí sa chyba\")."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'zadanú na presmerovanie' is clunky. It translates 'specified for redirection' literally but could be phrased more elegantly.",
+          "suggestion": "Consider \"na zadanú presmerovaciu URL adresu\" or simply \"na zadanú presmerovaciu adresu.\""
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"document space\" is unclear and doesn't translate well. \"Document space\" doesn't have a direct equivalent in Slovenian in this context. It refers to the application's area within the authorization server.",
+          "suggestion": "Če uporabnik poskuša odpreti zaslon za soglasje za to aplikacijo, se bo pojavila napaka v aplikaciji in uporabnik bo preusmerjen na podani preusmeritveni URL."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'consent' is translated as 'пристанаци' which while technically correct, is not the most natural or common usage in Serbian. A more common and understandable translation would be 'сагласности'.",
+          "suggestion": "Replace 'пристанаци' with 'сагласности'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'authorization' is translated as 'ауторизација'. While understandable, 'овлашћења' might be a more contextually appropriate and common term for 'authorization' in this scenario.",
+          "suggestion": "Consider replacing 'ауторизација' with 'овлашћења'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'document space' is translated as 'простору за документе'. It is a bit too literal. A more natural translation would be 'систему докумената' or 'бази података докумената'.",
+          "suggestion": "Consider replacing 'простору за документе' with 'систему докумената' or 'бази података докумената'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'pristanaci' (consents) is spelled correctly, but 'autorizacija' (authorization) can be better translated as 'odobrenja'.",
+          "suggestion": "Ako obrišete ovu aplikaciju, svi aktivni pristanaci i odobrenja će biti opozvani."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'doći će do greške' can be improved for better flow and readability. A more natural phrasing would be 'pojavit će se greška'.",
+          "suggestion": "Ako korisnik pokuša da otvori ekran pristanka za ovu aplikaciju, pojavit će se greška u prostoru za dokumente..."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the Serbian translation uses long sentences that are common in English but can make the text harder to read in Serbian. Consider breaking the sentences into shorter ones for better flow.",
+          "suggestion": "Ako obrišete ovu aplikaciju, svi aktivni pristanaci i odobrenja će biti opozvani. Ako korisnik pokuša da otvori ekran pristanka za ovu aplikaciju, pojavit će se greška u prostoru za dokumente. Korisnik će biti preusmeren na navedeni URL za preusmeravanje."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'authorization' is best translated as 'yetkilendirme' but the current translation 'yetkilendirmeler' is plural, while 'authorization' in the original text is singular. While technically not incorrect, using the singular form aligns better with the English and creates a more natural flow in Turkish.",
+          "suggestion": "Bu uygulamayı silerseniz, tüm etkin izinler ve yetkilendirme iptal edilir."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"простір документів\" (document space) is a literal translation and might not be the most natural or understandable way to convey the meaning in Ukrainian. It's a technical term that might be confusing to a typical user.  It implies a database or storage location, which might not be the intended meaning.",
+          "suggestion": "Consider alternatives like: 'з'явиться повідомлення про помилку', 'буде відображено повідомлення про помилку', or 'буде виведено повідомлення про помилку'. The best option depends on the specific context and desired tone."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"đồng ý cho màn hình\" is awkward and doesn't accurately translate \"consent screen.\" It implies consent *for* the screen itself, not accessing the consent screen.",
+          "suggestion": "Nếu người dùng cố gắng mở màn hình đồng ý cho ứng dụng này"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'không gian tài liệu' for 'document space' is overly technical and doesn't quite fit the context. It might confuse users.",
+          "suggestion": "nếu có lỗi xảy ra"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"consent screen\" is translated as \"同意界面\". While technically correct, a more natural and commonly used term in Chinese for a consent screen within an OAuth context might be \"授权页面\" or \"同意页面\". \"同意界面\" sounds a little literal and less professional.",
+          "suggestion": "Consider using \"授权页面\" or \"同意页面\" instead of \"同意界面\"."
+        }
+      ],
       "approved_at": null
     }
   }

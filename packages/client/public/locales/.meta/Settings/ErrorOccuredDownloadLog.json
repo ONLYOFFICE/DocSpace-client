@@ -3,7 +3,7 @@
   "content": "Errors occurred during data import. Download the log to check them.",
   "content_en_sha1_hash": "aabe25d4edb5d4821ac11cc9654982a6b1cee13a",
   "created_at": "2025-05-19T21:30:51.549Z",
-  "updated_at": "2025-05-20T09:45:10.267Z",
+  "updated_at": "2025-05-21T04:15:38.776Z",
   "comment": {
     "text": "This translation key is used for an error message that displays when data import fails. It prompts users to download a log file to diagnose and resolve issues. This text appears as an error notification in the \"Import Complete Step\" component.",
     "is_auto": true,
@@ -33,7 +33,18 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'jurnalı' (journal) doesn't accurately convey the meaning of 'log' in this context. 'Log' refers to a technical record of events, whereas 'jurnal' typically refers to a periodical publication.",
+          "suggestion": "Use a more accurate term for 'log' such as 'qeydləri' (records) or 'sistem qeydləri' (system records)."
+        },
+        {
+          "type": "formatting",
+          "description": "While not a major issue, adding a more specific subject for 'endirin' (download) would improve clarity. e.g. 'sistem qeydlərini endirin' (download the system records).",
+          "suggestion": "Add the object being downloaded after 'endirin'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -81,7 +92,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'գրանցամատյանը' (grantsamatyanə) translates to 'register' or 'notebook,' which isn't the most accurate translation for 'log' in this context. While technically correct, it's not the most natural phrasing.",
+          "suggestion": "Consider using a term more closely associated with a log file, such as 'ձևացուցված ֆայլը' (devatsutsvad faylə) - 'output file' or 'error file'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While not entirely incorrect, 'գրանցամատյանը' is a more general term. A more specific term would be preferable.",
+          "suggestion": "Consider 'լոգ ֆայլը' (log faylə) - 'log file' - if the target audience is familiar with this English term, or as suggested above 'ձևացուցված ֆայլը' (devatsutsvad faylə) - 'output file' or 'error file'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,7 +121,18 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Korean translation uses '가져오기하는 동안' which is a bit awkward. It combines the action of importing and the ongoing action in a less natural way. It should be simplified.",
+          "suggestion": "데이터를 가져오는 동안"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Download the log to check them' is not perfectly captured. '확인하세요' is a broad term. It would be more precise to convey the purpose of checking the log.",
+          "suggestion": "로그를 다운로드하여 원인을 확인하세요."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -141,7 +174,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"jurnalul de activități\" (activity log) doesn't directly translate the intended meaning of an error log. It suggests a general activity log, not specifically an error log.",
+          "suggestion": "Descărcați fișierul jurnal de erori pentru a le verifica."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"pentru a le verifica\" is grammatically correct, it's slightly less natural than other options. The pronoun 'le' refers back to 'erori', but a more direct phrasing is often preferred.",
+          "suggestion": "pentru a le examina."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +197,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ලොග්ගය' is a slightly awkward transliteration of 'log'. While understandable, 'ලොග්' would be more natural.",
+          "suggestion": "Replace 'ලොග්ගය' with 'ලොග්'."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'දත්ත ආනයනය අතරතුර දෝෂ සිදු විය. ඒවා පරීක්ෂා කිරීමට ලොග්ගය බාගත කරන්න.' is a bit clunky. A more fluent structure would improve readability.",
+          "suggestion": "Consider rephrasing to 'දත්ත ආනයනයේදී දෝෂ වැටහුණා. ඒවා පරීක්ෂා කිරීමට ලොග් බාගත කරන්න.' or 'දත්ත ආනයනයේදී ඇති වූ දෝෂ පරීක්ෂා කිරීමට ලොග් බාගත කරන්න.'"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +226,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Дошло је до грешака\" is a bit clunky and less natural for this context. A more fluid translation would be \"Наступиле су грешке\" or \"Појавиле су се грешке\".",
+          "suggestion": "Наступиле су грешке / Појавиле су се грешке"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'check them' is translated as 'da biste ih proverili'. While technically correct, a more natural and idiomatic Serbian translation would be 'da ih pregledate' or 'da ih analizirate'. 'Proveriti' implies a more thorough verification, which might not be the intended meaning in this context.",
+          "suggestion": "da ih pregledate"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -201,7 +268,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Errors occurred during data import\" is translated a bit too literal. A more natural and commonly used Chinese expression would be \"数据导入过程中出现错误\" or \"数据导入时发生错误\".",
+          "suggestion": "数据导入过程中出现错误"
+        }
+      ],
       "approved_at": null
     }
   }

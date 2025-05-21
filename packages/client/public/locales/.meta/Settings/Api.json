@@ -3,7 +3,7 @@
   "content": "API",
   "content_en_sha1_hash": "d93d10ff0fbef1b4aa0ddc24e10e907746d3c85a",
   "created_at": "2025-05-19T21:30:50.482Z",
-  "updated_at": "2025-05-20T09:45:49.878Z",
+  "updated_at": "2025-05-21T05:16:09.479Z",
   "comment": {
     "text": "The translation key \"Api\" refers to the name of a developer tool used in Portal Settings. It is displayed as the label for an API-related category or button in the UI, guiding users to access this feature.",
     "is_auto": true,
@@ -165,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"යෙ.ක්‍ර.මු.\" is not a standard or recognizable translation of \"API\". It appears to be an abbreviation, but its meaning is unclear and likely inaccurate in this context. \"API\" is typically rendered as \"API\" or sometimes expanded as \"අප්ලයිකේෂන් ප්‍රෝග්‍රෑම්මුන්ග් ඉන්terෆේස්\" in Sinhala, though the abbreviation is more common.",
+          "suggestion": "Consider using \"API\" or \"අප්ලයිකේෂන් ප්‍රෝග්‍රෑම්මුන්ග් ඉන්terෆේස්\"."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

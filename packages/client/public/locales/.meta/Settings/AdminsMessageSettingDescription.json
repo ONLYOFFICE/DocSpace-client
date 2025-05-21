@@ -3,7 +3,7 @@
   "content": "Enable this option to display the {{productName}} administrator contact form on the Sign In page.",
   "content_en_sha1_hash": "bee5beb31b7719c68dc869268d15a4b372f86cdb",
   "created_at": "2025-05-19T21:30:50.404Z",
-  "updated_at": "2025-05-20T09:45:52.929Z",
+  "updated_at": "2025-05-21T05:21:44.938Z",
   "comment": {
     "text": "This translation key is used to display a message explaining the purpose of enabling an administrator contact form on the Sign In page. It appears in the PortalSettings category and is part of a security setting, likely within a settings or configuration section of the application.",
     "is_auto": true,
@@ -33,25 +33,59 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'مسئول' (mas'ool) translates more accurately to 'responsible person' or 'official', not necessarily 'administrator'.  'Administrator' is often understood as is in technical contexts, or a more specific term like 'مدير' (mudeer) for manager might be more appropriate.",
+          "suggestion": "قم بتفعيل هذا الخيار لعرض نموذج التواصل الخاص بـ{{productName}} في صفحة تسجيل الدخول."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'بـ' before the product name feels slightly unnatural. It's more common to simply say 'خاص بـ'.",
+          "suggestion": "قم بتفعيل هذا الخيار لعرض نموذج التواصل الخاص بـ{{productName}} في صفحة تسجيل الدخول."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"administratoru ilə əlaqə formasını göstərmək\" is awkward. A more natural translation would focus on allowing users to contact the administrator.",
+          "suggestion": "Giriş səhifəsində {{productName}} administratoruna müraciət forması göstərmək üçün bu seçimi aktivləşdirin."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, using a slightly more active voice and simplified language would improve clarity and flow.",
+          "suggestion": "Giriş səhifəsində {{productName}} administratoru ilə əlaqə forması göstərmək üçün bu seçimi aktivləşdirin."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a full stop at the end of the sentence. While acceptable, it might be more consistent to use an exclamation mark or no punctuation, depending on the overall tone of the UI.",
+          "suggestion": "Consider using an exclamation mark or removing the full stop."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Czech translation contains a stray space before 'na' which should be removed.",
+          "suggestion": "Povolením této možnosti zobrazíte kontaktní formulář správce {{productName}} na stránce Přihlášení."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -69,25 +103,54 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Sign In page' is better translated as 'página de inicio de sesión'. While 'página de inicio' is sometimes used, 'inicio de sesión' is more precise and commonly used in this context.",
+          "suggestion": "Active esta opción para mostrar el formulario de contacto del administrador de {{productName}} en la página de inicio de sesión."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"järjestelmälvalvojan\" is a somewhat literal translation of \"administrator.\" A more natural and common Finnish term for administrator in this context would be \"ylläpitäjän\" or \"hallinnoijan\".",
+          "suggestion": "Ota tämä vaihtoehto käyttöön näyttääksesi {{productName}}-ylläpitäjän yhteydenottolomake Kirjaudu sisään-sivulla."
+        },
+        {
+          "type": "formatting",
+          "description": "The dash in '{{productName}}-ylläpitäjän' might be visually jarring.  While not strictly incorrect, consider removing it.",
+          "suggestion": "Ota tämä vaihtoehto käyttöön näyttääksesi {{productName}} ylläpitäjän yhteydenottolomake Kirjaudu sisään-sivulla."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Sign In page' is translated as 'page d'ouverture de session'. While technically correct, 'page de connexion' is a more natural and commonly used term in French for a sign-in page.",
+          "suggestion": "Activez cette option pour afficher le formulaire de contact de l'administrateur de {{productName}} sur la page de connexion."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation includes extra spaces around the hyphen in \"Մուտք գործելու-էջում\".",
+          "suggestion": "Մուտք գործելու էջում"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,31 +168,61 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation includes a trailing newline character at the end. This is not standard for UI text and can cause layout issues.",
+          "suggestion": "Remove the trailing newline character."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation uses a full stop (.) after 'ລະບົບ'. While not strictly incorrect, it's more common to omit it in this context within Lao.",
+          "suggestion": "ເປີດໃຊ້ຕົວເລືອກນີ້ເພື່ອສະແດງແບບຟອມຕິດຕໍ່ຜູ້ເບິ່ງແຍງລະບົບ {{productName}} ໃນໜ້າເຂົ້າສູ່ລະບົບ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"pierakstīšanās\" should be capitalized as it is a proper noun (Sign In page).",
+          "suggestion": "Iespējojiet šo opciju, lai pierakstīšanās Lapā parādītu {{productName}} administratora saziņas veidlapu."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Dutch translation uses \"Aanmelden\" instead of \"Inloggen\" for Sign In. While \"Aanmelden\" can mean sign up, \"Inloggen\" is the more accurate translation for \"Sign In\" in this context.",
+          "suggestion": "Schakel deze optie in om het contactformulier van de {{productName}} beheerder weer te geven op de Inloggen pagina."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Polish translation uses 'na stronie logowania' which translates to 'on the login page.' Considering the English uses 'Sign In page,' 'na stronie logowania' might be slightly less precise.  'na stronie logowania' is acceptable, but a more direct equivalent might improve clarity.",
+          "suggestion": "Consider 'na stronie uwierzytelniania' or 'na stronie zalogowania' for slightly more accurate terminology, although 'na stronie logowania' remains understandable."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -153,13 +246,30 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The double curly braces '{{ }}' are used in the English content but not consistently in the Russian translation. While `{{productName}}` is present, the entire sentence structure doesn't reflect the original's format.",
+          "suggestion": "Consider mirroring the structure more closely: \"Подключите эту опцию, чтобы отобразить форму связи с администратором {{productName}} на странице входа.\""
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'සබල' (sabala) is used. While technically correct, 'අktiv' (aktiv) or 'ප්‍රවර්ධනය' (prawadhana) might be more natural-sounding for 'enable' in this context, especially concerning settings.",
+          "suggestion": "පිවිසෙන පිටුවේ {{productName}} පරිපාලක සබඳතා ආකෘතිපත්‍රය පෙන්වීමට මෙම 'ප්‍රවර්ධනය' (prawadhana) කරන්නේ නම්."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of single quotes around 'ප්‍රවර්ධනය' (prawadhana) in the suggestion might look unusual. Consider removing the quotes or using a different emphasis.",
+          "suggestion": "පිවිසෙන පිටුවේ {{productName}} පරිපාලක සබඳතා ආකෘතිපත්‍රය පෙන්වීමට මෙම 'ප්‍රවර්ධනය' (prawadhana) කරන්නේ නම්."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,19 +287,37 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"прикажеш\" (you display) is in the informal 'you' form. Given the context of settings for an administrator, the formal 'you' form (\"прикаже\") is more appropriate.",
+          "suggestion": "Омогући ову опцију да прикаже {{productName}} администратор контакт образац у страници за Пријаву."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"prikažeš\" is in the second-person singular form (you). It should be in the third-person singular to match the context of a setting option affecting the application's behavior. It should mean 'displays'.",
+          "suggestion": "Omogući ovu opciju da prikaže {{productName}} administrator kontakt obrazac u stranici za Prijavu."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'Oturum Açma sayfasında' is a bit long and slightly awkward. Consider a more concise option.",
+          "suggestion": "Giriş sayfasında {{productName}} yöneticisi iletişim formunu görüntülemek için bu seçeneği etkinleştirin."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

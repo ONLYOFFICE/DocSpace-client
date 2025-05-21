@@ -3,7 +3,7 @@
   "content": "Indexes reordered",
   "content_en_sha1_hash": "f87c280089bdbcf324c2f9234f293a67aa0d80d8",
   "created_at": "2025-05-19T21:30:54.847Z",
-  "updated_at": "2025-05-20T09:40:59.758Z",
+  "updated_at": "2025-05-21T10:07:38.345Z",
   "comment": {
     "text": "The \"FolderIndexReordered\" translation key is used to display a message when the order of folders in an index changes. It appears in UI elements that track or announce changes to folder hierarchies, such as on-screen notifications or update prompts.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Změna pořadí indexů\" is understandable, it's a slightly more verbose translation of \"Indexes reordered.\" A more direct and concise translation would be preferable.",
+          "suggestion": "Přesunutí indexů"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -57,25 +63,54 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Έγινε επαναταξινόμηση ευρετηρίων' is a literal translation of 'Indexes reordered' but might sound overly formal or technical in a user interface context. A more natural and concise translation might be preferable.",
+          "suggestion": "Αλλαγή σειράς ευρετηρίων"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'ευρετηρίων' is technically correct, in modern Greek, 'φακέλων' (folders) would be more common and easily understood in this context, especially if referring to a user interface.",
+          "suggestion": "Αντί για 'ευρετηρίων' χρησιμοποιήστε 'φακέλων'"
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Indexes reordered' implies multiple indexes have been reordered, while the Spanish translation 'Índice reordenado' translates to 'Index reordered.' It's a singular form.",
+          "suggestion": "Índices reordenados"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Hakemistot uusittu' doesn't accurately convey the meaning of 'Indexes reordered'. 'Uusittu' implies a complete refresh or renewal, while 'reordered' signifies a change in sequence or arrangement. A more accurate translation would reflect that the order has been changed, not that the directories themselves are new.",
+          "suggestion": "Hakemistojen järjestys muutettu"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The singular form 'Index' is used while the English content 'Indexes' is plural. This suggests a need for the plural form in French.",
+          "suggestion": "Index réorganisés"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -93,7 +128,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'インデックスの並び替え' is understandable, a more natural and concise translation of 'Indexes reordered' would be 'インデックスの順序変更' or 'インデックスの並び順変更'. '並び替え' implies a more complex rearrangement than simply reordering.",
+          "suggestion": "インデックスの順序変更"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -105,7 +146,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ດັດຊະນະທໍານຽງປ່ຽນແກ້' is a bit literal and might not be the most natural way to express 'Indexes reordered'. While technically correct, it sounds somewhat awkward. 'Reordered' implies a change in the order, and a more idiomatic translation might be better.",
+          "suggestion": "Consider 'ຄຳນວນລຳດັບປ່ຽນແກ້' or 'ປ່ຽນລຳດັບຄຳນວນ' - these are more common ways to say 'reordered indexes' in Lao, depending on context.  'ປ່ຽນແກ້ລຳດັບ' is also an option."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -123,7 +170,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Indeksy zostały uporządkowane\" is a bit too formal and doesn't quite capture the concise nature of \"Indexes reordered\". A more natural and closer translation would be \"Indeksy przestawiono\" or \"Indeksy zmieniono\". \"Uporządkowane\" implies a process of ordering that might not be intended.",
+          "suggestion": "Indeksy przestawiono"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,25 +194,49 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Indexuri au fost înregistrate\" does not accurately convey the meaning of \"Indexes reordered\". 'Înregistrate' implies that the indexes were registered, not that their order was changed.",
+          "suggestion": "A more accurate translation would be something like \"Indexurile au fost rearanjate\" or \"Ordinea indicilor a fost schimbată\"."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Индексы переназначены\" implies 'indexes reassigned' rather than 'indexes reordered'. 'Reordered' suggests a change in the sequence, while 'reassigned' suggests a new assignment.",
+          "suggestion": "Индексы изменены"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඉන්ඩෙක්ස් නැවත සකස් කර ඇත' is a literal translation of 'Indexes reordered'. While understandable, a more natural phrasing in Sinhala would be something like 'උපදෙස් පිළිවෙලෙහි మార్పు' (Upadessa pilivelehæ maru) or 'ලේඛන පිළිවෙලෙහි మార్పు' (Lekhana pilivelehæ maru).",
+          "suggestion": "උපදෙස් පිළිවෙලෙහි మార్పు or ලේඛන පිළිවෙලෙහි మార్పు"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Indexy boli preusporiadané\" sounds slightly awkward. A more natural Slovak phrasing would be \"Premiestili sa indexy\" or \"Zmenili sa indexy\". \"Boli preusporiadané\" sounds passive and a bit formal for a UI element.",
+          "suggestion": "Premiestili sa indexy"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -177,7 +254,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Indeksi ponovo raspoređeni' is not the most natural or concise way to express \"Indexes reordered\" in Serbian. A more common and natural phrasing would be 'Premešteni indeksi' or 'Izmenjeni indeksi'. 'Ponovo raspoređeni' implies a previous ordering that has been changed, which isn't necessarily conveyed by the English phrase.",
+          "suggestion": "Premešteni indeksi"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,7 +278,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Đã sắp xếp lại các chỉ mục\" is a bit literal and sounds awkward in Vietnamese. A more natural and common phrasing would be more conversational.",
+          "suggestion": "Các chỉ mục đã được sắp xếp lại"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

@@ -3,7 +3,7 @@
   "content": "Select users",
   "content_en_sha1_hash": "8f2012e6097eda31bbf0f7e51ae403b08862e983",
   "created_at": "2025-05-19T21:30:52.552Z",
-  "updated_at": "2025-05-20T09:44:33.312Z",
+  "updated_at": "2025-05-21T03:18:29.568Z",
   "comment": {
     "text": "\"Select users\" is used to describe a step or action in data import processes within Google Workspace and OnlyOffice Workspaces. It appears on a settings page as part of a stepper component, guiding users through selecting specific files or users for import.",
     "is_auto": true,
@@ -87,7 +87,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sélectionnez utilisateur' is grammatically incorrect and doesn't accurately reflect the meaning of 'Select users'. It uses the singular form 'utilisateur' instead of the plural 'utilisateurs'.",
+          "suggestion": "Sélectionnez les utilisateurs"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -105,7 +111,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ユーザーの選択\" is a literal translation of 'Select users', it sounds slightly unnatural in Japanese. A more natural phrasing would be \"ユーザーを選択する\" or \"ユーザーを選択してください\" depending on the context (imperative vs. general action).",
+          "suggestion": "ユーザーを選択する"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -165,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'පරිශ්‍රීලකයින්' is a less common and potentially incorrect spelling of 'පරිශ්‍රමකරුවන්' or 'භාවිතකරුවන්' which would be more appropriate for 'users' in this context.",
+          "suggestion": "පරිශ්‍රමකරුවන් or භාවිතකරුවන්"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +201,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Изабери кориснике' is grammatically correct, 'Select users' typically implies a selection from a list or group. 'Изабери кориснике' translates more directly to 'Choose users'. A more accurate translation reflecting the original meaning might be 'Одаберите кориснике' or 'Изаберите кориснике' depending on the preferred register.",
+          "suggestion": "Одаберите кориснике"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -195,7 +219,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Kullanıcıları seç' is a literal translation but sounds slightly awkward in Turkish. A more natural phrasing would be 'Kullanıcı seçin'.",
+          "suggestion": "Kullanıcı seçin"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

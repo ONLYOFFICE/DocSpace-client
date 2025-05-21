@@ -3,7 +3,7 @@
   "content": "Issuer name",
   "content_en_sha1_hash": "830c5ebc0ce087a28a9c11f90d24a0f23b4d07e9",
   "created_at": "2025-05-19T21:30:54.293Z",
-  "updated_at": "2025-05-20T09:42:00.476Z",
+  "updated_at": "2025-05-21T08:04:44.502Z",
   "comment": {
     "text": "The \"LdapSettingsIssuerName\" translation key is used to display the issuer name of an LDAP certificate. It is displayed in a certificate details section within a dialog box, providing context to the user about the certificate's origin and authenticity.",
     "is_auto": true,
@@ -33,13 +33,25 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Emitent adı' while technically meaning 'Issuer name', isn't the standard or most natural way to express it in Azerbaijani within an LDAP settings context. 'Çıxarıcı ad' or 'Verənlər adları' would be more appropriate and commonly used.",
+          "suggestion": "Consider 'Çıxarıcı ad' or 'Verənlər adları' for a more natural and accurate translation."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Име на издател\" while literally correct (Name of Publisher) doesn't fully capture the technical meaning of \"Issuer name\" in the context of LDAP settings. 'Issuer' in this context refers to the entity signing security tokens, and a more accurate translation might be 'Издавател' or 'Издател'.",
+          "suggestion": "Consider 'Издател' or 'Издавател' for a more precise translation."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -51,7 +63,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Name des Herausgebers' is technically correct, 'Herausgeber' has a more formal connotation. For a setting like LDAP settings, a more suitable translation might be 'Ausstellername' or 'Zertifikatsaussteller'. 'Herausgeber' implies a publisher rather than an issuer in a technical context.",
+          "suggestion": "Ausstellername"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -81,7 +99,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Թողարկողի անուն\" is a literal translation of \"Issuer name\", it may not be the most natural or idiomatic phrasing in Armenian. It is rather formal.",
+          "suggestion": "Consider a more natural phrasing like \"Հատուկ շնորհագրի տողարկող\" or \"Հատուկ նույնականացման արտահայտողի անուն\" depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,7 +129,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຊື່ຜູ້ອອກແບບ' (Sue Phuak Dap) literally translates to 'Designer's name', which doesn't accurately convey the meaning of 'Issuer name' in the context of LDAP settings. An issuer is an entity that issues something, typically certificates. A more accurate translation would involve concepts of 'issuance' or 'authority'.",
+          "suggestion": "Consider 'ຊື່ຜູ້ອອກແບບຮັບປະກັນ' (Sue Phuak Dap Rup Phankan) which translates to 'Issuer's name' or 'Name of the issuing entity'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -153,7 +183,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'ගාරක නම' doesn't accurately convey the meaning of 'Issuer name'. 'ගාරක' relates to a protector or guardian, which isn't appropriate in this context. 'Issuer' signifies the entity issuing something (like a certificate).",
+          "suggestion": "A more accurate translation could be 'ප්‍රකාශක නම' (Prakashaka Nama) which means 'Publisher Name' or 'Issuer Name'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +219,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'Düzenleyen adı' does not accurately convey the meaning of 'Issuer name'. 'Issuer' refers to the entity issuing something (e.g., a certificate). A more accurate translation would reflect this.",
+          "suggestion": "Yetkilinin Adı"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

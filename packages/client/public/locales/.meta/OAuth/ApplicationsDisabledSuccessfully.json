@@ -3,7 +3,7 @@
   "content": "Applications disabled successfully",
   "content_en_sha1_hash": "3973762d1a46d2cdb20ace836d486fbc344b3913",
   "created_at": "2025-05-19T21:30:53.807Z",
-  "updated_at": "2025-05-20T09:42:57.814Z",
+  "updated_at": "2025-05-21T07:28:24.482Z",
   "comment": {
     "text": "This translation key is used for a success message when an OAuth application is disabled successfully. It is displayed in a dialog window and also shown in a toast notification to confirm that the operation was completed without errors.",
     "is_auto": true,
@@ -99,7 +99,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '애플리케이션이 비활성화되었습니다' is too literal and lacks the nuance of 'successfully'. It simply states 'Applications have been deactivated'.",
+          "suggestion": "애플리케이션이 성공적으로 비활성화되었습니다"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -201,7 +207,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"多个应用已禁用\" (Duō ge yìngyòng yǐ zhìbì) translates to 'Multiple applications have been disabled'. While not entirely wrong, it's less precise than the original 'Applications disabled successfully'. The original implies a single action resulting in success. The translation suggests multiple applications were disabled, which might not be the intended meaning.",
+          "suggestion": "应用已禁用成功 (Yìngyòng yǐ zhìbì chénggōng) - 'Applications disabled successfully' or 应用禁用成功 (Yìngyòng zhìbì chénggōng) - 'Applications disabled successfully'."
+        }
+      ],
       "approved_at": null
     }
   }

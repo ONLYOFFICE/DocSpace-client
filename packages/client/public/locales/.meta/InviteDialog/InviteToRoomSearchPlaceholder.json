@@ -3,7 +3,7 @@
   "content": "Search and invite by name or email",
   "content_en_sha1_hash": "e3b845f9fc22430a52707d5a40959e118738fae7",
   "created_at": "2025-05-19T21:30:54.729Z",
-  "updated_at": "2025-05-20T09:41:14.984Z",
+  "updated_at": "2025-05-21T09:37:43.757Z",
   "comment": {
     "text": "\"Used as a placeholder text for search input field when inviting users to a room, guiding users to enter names or email addresses.\"",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ابحثوا ودعوا حسب الاسم أو البريد الإلكتروني' is a literal translation and sounds unnatural in Arabic. 'دعوا' implies 'invite' in a command form (imperative). A more natural phrasing would be something along the lines of 'ابحث ودع بالاسم أو البريد الإلكتروني' or 'ابحث عن طريق الاسم أو البريد الإلكتروني لتدعو'.",
+          "suggestion": "ابحث ودع بالاسم أو البريد الإلكتروني"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -81,7 +87,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"email\" is incorrect. \"էլ․հասցեով\" is a fragmented way to represent email address. It should be translated more accurately.",
+          "suggestion": "Որոնեք և հրավիրեք անունով կամ էլ․պատճառագրի (or Որոնեք և հրավիրեք անունով կամ էլ․էլ․ենցիով)"
+        },
+        {
+          "type": "formatting",
+          "description": "The \"կամ էլ․\" construction is awkward and unnatural in Armenian. It should be simplified.",
+          "suggestion": "Որոնեք և հրավիրեք անունով կամ էլ․հասցեով"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -153,7 +170,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'විද්‍යුත්' (vidyut) is a correct spelling, but might be slightly formal for this context. A more common and accessible word might be preferred.",
+          "suggestion": "Consider using a more colloquial term for 'email' like 'ඊමේල්' (imail) or a similar variant, depending on the target audience."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,19 +194,42 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'email' is transliterated incorrectly. It should be 'е-маил'.",
+          "suggestion": "е-маил"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the use of a full stop after 'email' is unconventional in Serbian (Cyrillic).",
+          "suggestion": "е-маил"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'email' is Anglicized. Serbian uses 'e-mail'.",
+          "suggestion": "Pretraži i pozovi po imenu ili e-mail"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'İsim veya e-postaya ile ara ve davet et' is not the most natural way to express \"Search and invite by name or email\" in Turkish. The preposition 'ile' is misplaced and creates an awkward phrasing. It should convey the idea of searching *for* someone by name or email.",
+          "suggestion": "İsim veya e-posta ile ara ve davet et"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -201,7 +247,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"搜索姓名或电子邮件并邀请\" is a literal translation but sounds slightly unnatural in Chinese. A more natural phrasing would imply searching *to* invite.",
+          "suggestion": "搜索或输入姓名/邮箱以邀请"
+        }
+      ],
       "approved_at": null
     }
   }

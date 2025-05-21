@@ -3,7 +3,7 @@
   "content": "Linux instruction.",
   "content_en_sha1_hash": "4b856283dbe4b6431a050771a1ebbbed5a4f4760",
   "created_at": "2025-05-19T21:30:53.614Z",
-  "updated_at": "2025-05-20T09:43:22.096Z",
+  "updated_at": "2025-05-21T06:13:40.440Z",
   "comment": {
     "text": "This translation key is used to display a short instruction related to Linux on a product page or documentation. It's likely used as a banner instruction and appears near an \"Upgrade to Pro\" button or link, guiding users to read more information about upgrading their experience for Linux features.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'instruction' is translated as 'инструкции' (instructions) in Bulgarian. While technically correct, the singular form 'instruction' implies a single instruction. Using the plural 'инструкции' might be more appropriate depending on the context, but 'инструкция' would also be acceptable if a singular instruction is meant.",
+          "suggestion": "Consider using 'Linux инструкция' if a single instruction is intended."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -69,13 +75,25 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'instruction' is best translated as 'ohje', not simply 'Linuxin'. 'Linuxin' just means 'of Linux'. While not strictly incorrect, it lacks the specificity of an instruction.",
+          "suggestion": "Linuxin ohje."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Consignes Linux\" is technically correct, it lacks the nuance of \"instruction\" in the original English. A more accurate translation might consider 'Instructions Linux' or 'Guide Linux'. The current translation is a bit too literal and could be improved for clarity and flow.",
+          "suggestion": "Instructions Linux"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -99,7 +117,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Linux instruction' is translated as 'Linux설명서' which means 'Linux manual' or 'Linux guide'. While related, 'instruction' implies a set of steps, whereas '설명서' suggests a more comprehensive guide. It might be more accurate to translate 'instruction' as '방법' (bangbeop) meaning 'method' or 'way'.",
+          "suggestion": "Linux방법"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -129,7 +153,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Linux instruction' is a more specific phrase. 'Instruções para Linux' translates to 'Instructions for Linux', which is broader and less precise. A more accurate translation would reflect the directness of 'Linux instruction'.",
+          "suggestion": "Instrução para Linux."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -201,7 +231,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Linux 指南' (Linux Zhǐnán) while technically correct, leans towards 'Linux Guide' or 'Linux Manual' rather than a simple 'instruction'. 'Instruction' implies a direct set of steps, while '指南' suggests a broader guide. Given the context of an upgrade banner, a more precise translation might better reflect the prompt.",
+          "suggestion": "Consider 'Linux 指令' (Linux Zhǐlìng) which more closely translates to 'Linux Instructions' or 'Linux Commands' if the instruction item is about a process."
+        }
+      ],
       "approved_at": null
     }
   }

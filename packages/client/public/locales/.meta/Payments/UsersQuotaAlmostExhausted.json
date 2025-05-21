@@ -3,7 +3,7 @@
   "content": "The quota of paid users is almost exhausted.",
   "content_en_sha1_hash": "927d67a9f7bbc37eff445b88935db61772b1bae8",
   "created_at": "2025-05-19T21:30:53.753Z",
-  "updated_at": "2025-05-20T09:43:02.921Z",
+  "updated_at": "2025-05-21T06:25:22.807Z",
   "comment": {
     "text": "This translation key is used to display an alert message when the quota of paid users is almost exhausted, prompting a warning or action in the UI. It appears in a dialog component to inform the user about their subscription level status.",
     "is_auto": true,
@@ -69,7 +69,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Maksettujen käyttäjien määrän kiintiö on melkein täysi' is a bit literal and doesn't flow as naturally as it could in Finnish. While technically correct, it's not the most idiomatic way to express the concept of a quota being almost exhausted.",
+          "suggestion": "Consider 'Maksettujen käyttäjien kiintiö on lähes täynnä.' or 'Maksettujen käyttäjien kiintiö on lähes käytetty.' which reads more naturally in Finnish."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -93,7 +99,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '有料ユーザーのストレージ容量が残りわずかです' translates to 'The storage capacity of paid users is almost exhausted'. It doesn't directly convey the concept of a 'quota' which is important in the original English sentence. While storage capacity can imply quota, it's not a precise translation.",
+          "suggestion": "有料ユーザーの利用枠が残りわずかです。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -105,7 +117,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ກໍານົດຈຳນວນຜູ້ໃຊ້ທີ່ຈ່າຍແລ້ວເກືອບໝົດແລ້ວ\" is a literal translation and sounds awkward in Lao. 'ກໍານົດຈຳນວນ' (defined amount) doesn't accurately convey 'quota'.",
+          "suggestion": "ອັດນິຍົມຜູ້ໃຊ້ຈ່າຍເກືອບເຕັມແລ້ວ (atniyom phou sai jai kueab tem laew) - 'The paid user limit is almost full.'"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -117,7 +135,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Het aantal betaalde gebruikers is bijna opgebruikt\" is a bit clunky and doesn't quite capture the nuance of 'almost exhausted' in this context. 'Quota' implies a limit being reached, and 'opgebruikt' focuses more on consumption. A better translation would emphasize that the limit is nearing its end.",
+          "suggestion": "Het aantal betaalde gebruikers bereikt bijna de limiet."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -141,7 +165,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Cota spațiului de stocare pentru utilizatorii cu plată aproape epuizată\" is not an accurate translation of \"The quota of paid users is almost exhausted.\" \"Spațiului de stocare\" implies storage space, which isn't explicitly mentioned in the English content. It's a broader interpretation.",
+          "suggestion": "Cota utilizatorilor plătitori este aproape epuizată."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +183,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'අවලංගු ගෙවුම් පරිශීලකයින්ගේ ප්‍රමාණය ඉක්මවා යාමට ආසන්නය.' doesn't accurately convey the meaning of 'The quota of paid users is almost exhausted.' It translates more like 'The number of paying users is about to exceed the limit.'  The term 'quota' is not accurately represented.",
+          "suggestion": "Possible alternative: 'ගෙවා භාවිතා කරන්නන්ගේ කීකරුකම සීමාව ඉක්මවා යාමට ආසන්නය.' (Gewa varta karanneyōn keyakurumakama seemāva ikmāva yāmatā āsannaya.) - This translates to 'The limit of paid users is about to be exceeded.'"
+        },
+        {
+          "type": "spelling",
+          "description": "While not technically incorrect, the word 'අවලංගු' (awalangu) is less commonly used in this context. It primarily means 'unnecessary' or 'unimportant'.",
+          "suggestion": "Consider using a word more directly related to 'paid' or 'subscribed', depending on the intended nuance."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -195,7 +236,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Gần như đã dùng hết hạn mức người dùng trả phí' is a bit literal and could be improved for naturalness. 'Hạn mức' (quota) is technically correct, but 'giới hạn' might flow better.",
+          "suggestion": "Gần như đã dùng hết giới hạn người dùng trả phí."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

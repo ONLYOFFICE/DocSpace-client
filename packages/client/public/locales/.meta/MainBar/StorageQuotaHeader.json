@@ -3,7 +3,7 @@
   "content": "Storage space amount is about to be exceeded: {{currentValue}} / {{maxValue}}",
   "content_en_sha1_hash": "c7505cb8d4b5ee00b1538b7c710c4fb40adfc6a9",
   "created_at": "2025-05-19T21:30:54.141Z",
-  "updated_at": "2025-05-20T09:42:20.194Z",
+  "updated_at": "2025-05-21T07:43:22.707Z",
   "comment": {
     "text": "This translation key is used to display a warning message when storage space is about to be exceeded. It shows the current and maximum storage values in a specific format. This message appears as a header in a UI component that displays quota information.",
     "is_auto": true,
@@ -33,13 +33,30 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'حجم مساحة التخزين على وشك أن يتم تجاوزها' is a literal translation and a bit clunky. A more natural phrasing would be closer to 'مساحة التخزين على وشك التجاوز'.",
+          "suggestion": "مساحة التخزين على وشك التجاوز: {{currentValue}} / {{maxValue}}"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Yaddaş sahəsinin həcmi keçmək üzrədir' doesn't perfectly convey the meaning of 'Storage space amount is about to be exceeded'. A more accurate translation would emphasize the approaching limit, not just the action of exceeding it.",
+          "suggestion": "Yaddaş sahəsi limiti yaxınlaşır: {{currentValue}} / {{maxValue}}"
+        },
+        {
+          "type": "formatting",
+          "description": "The colon after 'üzrədir' creates a slightly awkward phrasing. Removing it would improve flow.",
+          "suggestion": "Yaddaş sahəsinin həcmi keçməkdə : {{currentValue}} / {{maxValue}}"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -87,7 +104,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Պահեստային տարածքի քանակը քիչ է մնում գերազանցվի\" is a literal translation of 'Storage space amount is about to be exceeded' but sounds awkward and unnatural in Armenian. A more natural phrasing would convey the impending exceedance more clearly.",
+          "suggestion": "Consider alternatives like \"Պահեստային տարածքը մոտենում է սահմանափակիչ գիծին՝ {{currentValue}} / {{maxValue}}\" (Storage space is approaching the limit: {{currentValue}} / {{maxValue}}) or \"Մնալ է տեղ մոտ՝ {{currentValue}} / {{maxValue}}\" (Remaining space: {{currentValue}} / {{maxValue}}). The best option depends on the overall tone of the UI."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -123,7 +146,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase \"staat op het punt overschreden te worden\" is grammatically awkward. A more natural phrasing would be \"overschreden te worden\" or \"wordt overschreden\".",
+          "suggestion": "De hoeveelheid opslagruimte staat er op het punt te worden overschreden: {{currentValue}} / {{maxValue}}"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -135,7 +164,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"A capacidade de armazenamento do espaço está prestes a ser excedida\" is a bit literal and awkward. A more natural phrasing would be something like 'O espaço de armazenamento está prestes a ser excedido' or 'Sua capacidade de armazenamento está prestes a ser excedida'. The inclusion of 'do espaço' adds unnecessary words.",
+          "suggestion": "Sua capacidade de armazenamento está prestes a ser excedida: {{currentValue}} / {{maxValue}}"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -159,7 +194,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ආචයනයේ ඉඩ ඉක්මවීමට ආසන්නයි: {{currentValue}} / {{maxValue}}\" is not a natural or accurate translation of \"Storage space amount is about to be exceeded: {{currentValue}} / {{maxValue}}\". \"ආචයනයේ\" likely refers to 'organization' or 'institution' and doesn't fit the context of storage space. A more appropriate translation would focus on 'space' or 'capacity'.",
+          "suggestion": "හැලման ඉඩ ඉක්මවීමට ආසන්නයි: {{currentValue}} / {{maxValue}} or నిల్వ స్థలం ඉක්මවීමට ආසන්නයි: {{currentValue}} / {{maxValue}}"
+        },
+        {
+          "type": "spelling",
+          "description": "While technically understandable, 'ආචයනයේ' is not a standard or readily understood word in this context. It appears to be a misinterpretation or incorrect transliteration.",
+          "suggestion": "Remove 'ආචයනයේ' and replace with a more appropriate term relating to storage or capacity."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,13 +223,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ц́е' is a non-standard contraction of 'ће'. The standard and preferred form is 'ће'.",
+          "suggestion": "Количина меморијског простора ће ускоро бити прекорачена: {{currentValue}} / {{maxValue}}"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'memorijskog' is a slightly awkward construction. A more natural phrasing would improve readability.",
+          "suggestion": "Količina disk prostora će uskoro biti prekoračena: {{currentValue}} / {{maxValue}}"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

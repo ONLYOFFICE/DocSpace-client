@@ -3,7 +3,7 @@
   "content": "Group Name Attribute",
   "content_en_sha1_hash": "e8b8084a19124762c9b8ebabd5800b40497124b5",
   "created_at": "2025-05-19T21:30:54.221Z",
-  "updated_at": "2025-05-20T09:42:09.861Z",
+  "updated_at": "2025-05-21T08:18:27.215Z",
   "comment": {
     "text": "This translation key describes the label for a field used to input a Group Name Attribute in LDAP group membership settings, typically found within a portal's category page. The field is expected to be filled and validated before proceeding.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ميزة اسم المجموعة' is a literal translation of 'Group Name Attribute' but doesn't convey the intended meaning in a natural way in Arabic. 'ميزة' translates to 'feature' or 'attribute' in a technical sense, which isn't ideal for this context. A more natural translation for 'Group Name Attribute' would depend on the precise use case, but a direct translation that emphasizes the name itself is better.",
+          "suggestion": "Consider alternatives like 'اسم المجموعة' (Ism al-Majmu'ah) which directly translates to 'Group Name' or 'سمة اسم المجموعة' (Simat Ism al-Majmu'ah) if a more technical attribute is needed."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -45,7 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Atribut název skupiny' is not the most natural or accurate translation of 'Group Name Attribute'. While technically correct, it sounds a bit clunky in Czech. A better translation would emphasize that it's an attribute *containing* the group name.",
+          "suggestion": "Atribut názvu skupiny"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -75,19 +87,37 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Attribut du nom du groupe\" is too literal and slightly awkward. A more natural French translation for 'Group Name Attribute' would be something like 'Nom de l'attribut de groupe' or 'Attribut de nom de groupe'.",
+          "suggestion": "Nom de l'attribut de groupe"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Խմբի անվան հատկանիշ\" is technically correct, it's a bit literal and clunky. A more natural-sounding translation for \"Group Name Attribute\" might be \"Խմբի անվան դաշտ\" (Khambi anvan dasht) or \"Խմբի անվան բնութագրիչ\" (Khambi anvan bnut'yagrich).",
+          "suggestion": "Consider \"Խմբի անվան դաշտ\" (Khambi anvan dasht) or \"Խմբի անվան բնութագրիչ\" (Khambi anvan bnut'yagrich)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Attributo del nome del gruppo' is a literal translation and sounds slightly awkward in Italian. A more natural phrasing would be 'Attributo del nome del gruppo' or 'Attributo del gruppo'.",
+          "suggestion": "Attributo del gruppo"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -105,7 +135,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ຊື່ກຸ່ມຄຸນນະສົມບັດ\" while understandable, doesn't directly translate \"Group Name Attribute.\" A more accurate and natural translation would consider the context of an LDAP attribute. \"ຄຸນນະສົມບັດຊື່ກຸ່ມ\" might be better, emphasizing it's the attribute *of* the group's name.",
+          "suggestion": "ຄຸນນະສົມບັດຊື່ກຸ່ມ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,25 +177,54 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Atributul nume de grup' is not the most natural or accurate translation of 'Group Name Attribute'. While technically correct, it's a bit clunky. A more natural translation would be 'Atributul numelui grupului' or 'Numele atributului grupului'.",
+          "suggestion": "Consider 'Atributul numelui grupului' or 'Numele atributului grupului'."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Атрибут названия группы\" is a literal translation of 'Group Name Attribute' and while technically correct, it's not the most natural or common phrasing in Russian. A more natural translation would be something like 'Имя группы' or 'Атрибут имени группы'.",
+          "suggestion": "Consider 'Имя группы' or 'Атрибут имени группы'"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"නම කාණ්ඩයේ ගුණාංගය\" (nama kandayee gunanganaya) translates to 'Name of the group attribute'. It's a literal translation and doesn't quite capture the intended meaning of 'Group Name Attribute'.  It's too verbose. A more natural translation would convey the attribute *is* the group name, rather than being *of* the group name.",
+          "suggestion": "කාණ්ඩයේ නම (kaandayee nama)"
+        },
+        {
+          "type": "spelling",
+          "description": "While the words themselves are generally spelled correctly based on Sinhala orthography, the flow of the phrase could be improved.",
+          "suggestion": "කාණ්ඩයේ නම (kaandayee nama)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation \"Atribút Názov skupiny\" is a literal translation and slightly awkward. A more natural phrasing would be \"Atribút mena skupiny\" or \"Meno atribút skupiny\".",
+          "suggestion": "Atribút mena skupiny"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,7 +236,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Атрибут Имена Групе' is not the most natural or accurate translation of 'Group Name Attribute'. While technically correct, it's a bit awkward. 'Име групе' is a literal translation of 'name of group'.",
+          "suggestion": "Атрибут назива групе"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -189,13 +260,25 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Атрибут імені групи\" is a literal translation, a more natural and common Ukrainian phrasing for \"Group Name Attribute\" would be \"Атрибут назви групи\". \"Ім'я\" often refers to a person's name, whereas \"назва\" is a general term for a name or title.",
+          "suggestion": "Атрибут назви групи"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Thuộc Tính Tên nhóm\" is a bit literal and can sound awkward in Vietnamese. A more natural and idiomatic translation would be more suitable.",
+          "suggestion": "Nhóm tên thuộc tính"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

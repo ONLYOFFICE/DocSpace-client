@@ -3,7 +3,7 @@
   "content": "Enter email",
   "content_en_sha1_hash": "2561af4e3ae4688b16392bbda30fa27b36cf9e1a",
   "created_at": "2025-05-19T21:30:53.296Z",
-  "updated_at": "2025-05-20T09:44:01.315Z",
+  "updated_at": "2025-05-21T01:35:57.290Z",
   "comment": {
     "text": "\"Used as a placeholder and label for an email input field in various UI components, such as dialogs and tables, to prompt users to enter their email address.\"",
     "is_auto": true,
@@ -87,13 +87,25 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Saisir l'adresse e-mail' is a more literal translation of 'Enter email' than what is typically used in UI. A more natural translation would be 'Entrez votre adresse e-mail' or 'Adresse e-mail'.",
+          "suggestion": "Entrez votre adresse e-mail"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Մուտքագրեք էլ' is an incomplete translation. It seems to be missing the word 'address' or a similar term to fully convey 'Enter email'.",
+          "suggestion": "Մուտքագրեք էլ. հասցե (Mut’yagrek el. Hasce)"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -141,7 +153,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Introduzir email' is not the most natural or common way to say 'Enter email' in Portuguese. While technically correct, it's a bit formal and doesn't flow as well. A more common and idiomatic translation would be 'Digite o email' or 'Insira o email'.",
+          "suggestion": "Digite o email"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -153,7 +171,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Introduceți adresa de e-mail' is a literal translation, but slightly more natural phrasing would be 'Introduceți emailul'. While 'adresa de e-mail' is correct, it can sound overly formal in this context.",
+          "suggestion": "Introduceți emailul"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -165,7 +189,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'වි-තැපෑල යොදන්න' doesn't perfectly capture the meaning of 'Enter email'. While 'යොදන්න' (yodannaa) means 'to add' or 'to enter', 'වි-තැපෑල' (vi-tapaeala) is a more literal translation of 'email' and less natural in this context. A more natural phrasing would convey the action of providing or inputting an email address.",
+          "suggestion": "Consider 'විද්‍යුත් ලිපිනය ඇතුළත් කරන්න' (vidyut lipinaya athulath kannaa) - which means 'Enter email address'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,13 +213,30 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Унеси емаил' is a transliteration of 'Enter email' rather than a true translation. 'Enter' can be translated as 'Унеси' but 'email' is better translated as 'електронска пошта' or 'меjl'. Using 'емаил' is an Anglicism and might not be the most natural or professional choice in Serbian.",
+          "suggestion": "Унеси електронску пошту"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the Anglicism 'емаил' might require a slightly different tone or phrasing adjustment depending on the overall application's voice. Consider using a more native Serbian term for consistency.",
+          "suggestion": "Review the overall brand voice and consider a more integrated Serbian term like 'електронска пошта' or 'меjl'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Unesi email' is not the most natural or accurate Serbian (Latin) translation of 'Enter email'. While 'Unesi' means 'enter' or 'input', the common and preferred phrasing would be 'Uneti email' or 'Unesite email'.",
+          "suggestion": "Uneti email"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -201,19 +248,37 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Ukrainian translation 'Введіть адресу ел. пошти' is a literal translation but can be improved for naturalness and common usage in Ukrainian. 'ел. пошти' is a shortened form, while a more common and fluent phrasing would be 'Введіть електронну пошту'.",
+          "suggestion": "Введіть електронну пошту"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Nhập địa chỉ email' is understandable, a more natural and direct translation of 'Enter email' would be 'Nhập email'. 'Địa chỉ' (address) is redundant in this context.",
+          "suggestion": "Nhập email"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"输入电子邮件\" is a more formal and lengthy translation. A more natural and concise translation for 'Enter email' would be '输入邮箱' or '输入邮件'.",
+          "suggestion": "输入邮箱"
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Reset application configuration",
   "content_en_sha1_hash": "0fcbc09991938c58cba2deb4bf8a21ae5fd3e2f6",
   "created_at": "2025-05-19T21:30:53.328Z",
-  "updated_at": "2025-05-20T09:43:57.494Z",
+  "updated_at": "2025-05-21T05:34:39.717Z",
   "comment": {
     "text": "The \"ResetApplicationTitle\" translation key is used to display a title for a dialog that resets an application's configuration. This title is displayed in a ModalDialog Header and appears when the user interacts with a button labeled \"ResetApplicationTitle\".",
     "is_auto": true,
@@ -63,7 +63,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Resetear ajustes de aplicación\" isn't the most natural or precise translation of \"Reset application configuration.\" While understandable, \"ajustes\" can be too general. \"Configuración\" would be a more direct and accurate translation of 'configuration'.",
+          "suggestion": "Resetear configuración de aplicación"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -99,13 +105,25 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"애플리케이션 구성 리셋\" is a literal translation and could be more natural. While technically correct, it might sound slightly awkward to a native Korean speaker. \"애플리케이션 설정 초기화\" or \"애플리케이션 구성 초기화\" would be more idiomatic.",
+          "suggestion": "애플리케이션 설정 초기화"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ການຕັ້ງຂໍ້ມູນຄືນໃຫມ່\" is a literal translation of \"reset data\" rather than accurately conveying \"reset application configuration.\" While understandable, it's not the most natural or precise rendering of the English meaning.",
+          "suggestion": "Consider a more idiomatic translation such as \"ຣີເຊັດການຕັ້ງຄ່າແອັບພິເຄຊັນ\" (Reset application settings) or \"ຣີເຊັດຄ່າໂອນຄ່າແອັບພິເຄຊັນ\" (Reset application configuration)."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -117,7 +135,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Reset toepassing configuratie' is a literal translation and doesn't read naturally in Dutch. 'Configuratie' is correct but 'toepassing' is a more formal term than generally used in this context. A more natural phrasing would involve a more colloquial term like 'instellingen'.",
+          "suggestion": "Reset applicatie instellingen"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -141,7 +165,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Resetarea aplicației' is too literal and doesn't fully convey the meaning of 'Reset application configuration.' It lacks the 'configuration' aspect. A more accurate translation would include that.",
+          "suggestion": "Resetează configurația aplicației"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +183,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'යෙදුමේ වින්‍යාසය යළි සකසන්න' is a literal translation that might not be the most natural or user-friendly way to express 'Reset application configuration' in Sinhala. A more natural phrasing might be preferred.",
+          "suggestion": "Consider 'අයෙදුම යළි සැකසීමට' or 'අයෙදුම යථා තත්වයට පත් කිරීමට'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +207,18 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ресетуј конфигурацију апликације\" uses the verb 'resetuj' which is a transliteration of the English word 'reset'. While understandable, a more natural Serbian phrasing would be preferable.",
+          "suggestion": "Поврати конфигурацију апликације"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation maintains the English word order, which is not typical for Serbian sentence structure. A more natural flow would improve readability.",
+          "suggestion": "Поврати конфигурацију апликације"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -195,7 +242,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Đặt lại cấu hình ứng dụng' while understandable, doesn't perfectly capture the nuance of 'Reset application configuration'. 'Đặt lại' implies setting something back to a previous state, while 'Reset' can also mean returning to a factory default or initial state. A more accurate translation would convey the latter implication.",
+          "suggestion": "Cài đặt lại cấu hình ứng dụng"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

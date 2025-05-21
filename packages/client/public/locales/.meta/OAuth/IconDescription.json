@@ -3,7 +3,7 @@
   "content": "JPG, PNG or SVG, 32x32",
   "content_en_sha1_hash": "1baf4b76e0d607b049dde3a0f3e90399140b17e4",
   "created_at": "2025-05-19T21:30:53.905Z",
-  "updated_at": "2025-05-20T09:42:45.796Z",
+  "updated_at": "2025-05-21T07:10:33.226Z",
   "comment": {
     "text": "This translation key is used to describe file formats and sizes that are accepted as icons. It appears on a form component in the OAuth settings page, guiding users on what types of images can be uploaded as icons.",
     "is_auto": true,
@@ -27,7 +27,18 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The size specification '3232x' is incorrect and lacks clarity. It seems to be a concatenation of '32' and '32' without proper separation. It's unclear if it indicates width and height or a single value.",
+          "suggestion": "JPG أو PNG أو SVG، بحجم 32 × 32"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of 'بحجم' (bi hajmin) might be too literal and doesn't flow naturally in this context. It implies a general size, not a specific requirement.",
+          "suggestion": "JPG أو PNG أو SVG، بمقاس 32 × 32"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -81,7 +92,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation uses a comma to separate the file types, mirroring the English. While acceptable, a hyphen might be more natural in Armenian.",
+          "suggestion": "JPG, PNG- կամ SVG, 32x32"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -117,7 +134,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Dutch translation uses 'of' instead of 'of' to separate the image file types. The correct Dutch conjunction is 'of'.",
+          "suggestion": "JPG, PNG of SVG, 32x32"
+        }
+      ],
       "approved_at": null
     },
     "pl": {

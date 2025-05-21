@@ -3,7 +3,7 @@
   "content": "Configure deep link",
   "content_en_sha1_hash": "edfb8002794be0c3c97a60c2efb077b54207446d",
   "created_at": "2025-05-19T21:30:50.950Z",
-  "updated_at": "2025-05-20T09:45:31.058Z",
+  "updated_at": "2025-05-21T04:47:57.824Z",
   "comment": {
     "text": "Configure deep link is used to display a title and subtitle for a configuration setting that allows users to customize a deep link within the portal settings. This translation key appears on a page in the portal settings category as part of a navigation bar, guiding users to configure their deep link.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'hyperlinkki' is a valid term for hyperlink, 'deep link' specifically refers to a link that takes the user directly to a specific location within an app. 'Hyperlinkki' is a more general term. A more accurate translation would depend on the specific context and target audience.",
+          "suggestion": "Consider alternatives like 'Syvälinkki' (a direct translation of 'deep link') or a phrase that explains the function of a deep link, depending on context."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -93,13 +99,25 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Կարգավորել խորը հղումները\" is a literal translation, a more natural and commonly used phrasing for \"Configure deep link\" in Armenian would be something like \"Սահմանել խորը հղումները\" or \"Ձևակերպել խորը հղումները\". \"Կարգավորել\" can imply a more complex adjustment than just setting up.",
+          "suggestion": "Consider using \"Սահմանել խորը հղումները\" or \"Ձևակերպել խորը հղումները\"."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Configura deep link' is a direct transliteration and doesn't accurately convey the meaning of 'Configure deep link' in Italian. 'Configure' should be translated to something more natural in Italian context.",
+          "suggestion": "Imposta collegamento profondo"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -141,7 +159,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, the translation 'Configure o deep link' is not the most natural or idiomatic Portuguese. 'O' is the masculine definite article, and while 'deep link' is often borrowed directly, a more natural phrasing might be 'Configurar deep link' or 'Configurar o link profundo'.",
+          "suggestion": "Consider 'Configurar deep link' or 'Configurar o link profundo'."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -165,7 +189,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'දුඹුරු සබැඳියාව සකසන්න' translates to 'brown link configure'. 'Deep link' has a specific technical meaning that isn't conveyed by 'දුඹුරු සබැඳියාව'.",
+          "suggestion": "A more accurate translation of 'Configure deep link' would be something like 'අන්තර්ගත සබැඳිය සකසන්න' or 'උපසංදේශ සබැඳිය සැකසීම'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,13 +213,30 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Подесите дубоки линк' isn't the most natural or accurate translation of 'Configure deep link'. 'Подесите' implies adjusting something that already exists, while 'Configure' can mean both setting up and adjusting. A more appropriate translation would depend on the specific context, but a better option would be 'Подесите дубоке везе' or 'Конфигуришите дубоке везе'.",
+          "suggestion": "Конфигуришите дубоке везе"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'дубоки' is a slightly archaic or less common spelling. The more common and preferred spelling is 'дубоке'.",
+          "suggestion": "дубоке"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Podesite duboki link' is not the most natural or accurate translation of 'Configure deep link'. While 'podesite' is correct for 'configure', 'duboki link' could be improved.",
+          "suggestion": "Konfigurišite duboki link"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

@@ -3,7 +3,7 @@
   "content": "Cancel import",
   "content_en_sha1_hash": "a4b5358b5d50407c88f27bef1900ad0b73db2767",
   "created_at": "2025-05-19T21:30:50.865Z",
-  "updated_at": "2025-05-20T09:45:34.194Z",
+  "updated_at": "2025-05-21T04:51:41.061Z",
   "comment": {
     "text": "This translation key is used for a \"Cancel Import\" button in data import steps within the portal settings. It appears as a label on a save button and, when clicked, triggers cancellation of the import process.",
     "is_auto": true,
@@ -141,7 +141,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Anuluj importowanie' is a bit too literal and slightly awkward. While technically correct, it doesn't flow naturally in Polish. A more idiomatic translation would be 'Anuluj import'.",
+          "suggestion": "Anuluj import"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -177,7 +183,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Zrušiť importovanie\" is a bit clunky. A more natural Slovak translation would be \"Zrušiť import\" or \"Rodiť import\".",
+          "suggestion": "Zrušiť import"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -189,7 +201,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Откажи увоз\" is not the most natural or accurate translation of \"Cancel import\". \"Увоз\" specifically refers to import, but \"Откажи\" (imperative form) isn't the best fit for a settings label. A more common and accurate phrasing would be \"Прекини увоз\" or \"Кажи увоз\" (though the latter is less common).",
+          "suggestion": "Прекини увоз"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

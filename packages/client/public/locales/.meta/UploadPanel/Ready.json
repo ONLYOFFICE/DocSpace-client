@@ -3,7 +3,7 @@
   "content": "Done",
   "content_en_sha1_hash": "e9b450d14bc2363d292c84f17cfad5cfbd58a458",
   "created_at": "2025-05-19T21:30:49.950Z",
-  "updated_at": "2025-05-20T09:46:37.587Z",
+  "updated_at": "2025-05-21T01:20:14.803Z",
   "comment": {
     "text": "This translation key is used as the label for a \"Done\" button, appearing on conversion and upload buttons in the UI, indicating completion or readiness. The translation key will be rendered when the value of \"Ready\" matches the content of this key, which should display as \"Done\".",
     "is_auto": true,
@@ -111,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ແລ້ວໆ\" while meaning 'done' or 'finished' in some contexts, might not fully convey the intended meaning of 'Done' within the 'UploadPanel:Ready' context. It can sound informal or dismissive. A more suitable translation might depend on the specific nuance required within the panel.",
+          "suggestion": "Consider alternatives like \"ສຳເລັດແລ້ວ\" (sam-plet laeo) - 'completed' or \"ອໍ່າແລ້ວ\" (or a similar phrase signifying completion and readiness)"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -159,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"අහවරයි\" does not accurately convey the meaning of \"Done\". It translates to something like \"Sky\" or \"Open Air\". It's a semantically incorrect translation for the context of a \"Done\" button or confirmation.",
+          "suggestion": "The correct translation for \"Done\" would depend on the specific context, but possible alternatives include: අවසානය (Awasaana - End/Finish), සකූඨිත (Sakuutita - Completed), හෝ සිදු (Sidu - Done/Achieved)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

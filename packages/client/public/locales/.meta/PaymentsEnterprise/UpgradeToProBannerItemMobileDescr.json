@@ -3,7 +3,7 @@
   "content": "Edit docs, sheets, and slides in mobile browsers.",
   "content_en_sha1_hash": "5744bdbbc2527993b01e534c281aa1b2255ba9e0",
   "created_at": "2025-05-19T21:30:53.627Z",
-  "updated_at": "2025-05-20T09:43:20.039Z",
+  "updated_at": "2025-05-21T06:11:40.315Z",
   "comment": {
     "text": "The translation key \"UpgradeToProBannerItemMobileDescr\" describes the mobile editing feature, explaining that users can edit documents, sheets, and slides in mobile browsers. This text is used as a tooltip or description for a button or dialog in the file \"/packages/client/src/components/StandaloneComponents/BenefitsContainer.js\".",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'brauzerdə' should be spelled 'brauzerlə'",
+          "suggestion": "Mobil veb brauzerlə sənədləri, cədvəlləri və slaydları redaktə edin."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -75,7 +81,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The verb tense in the French translation is awkward. 'Editez' is the imperative form (edit!), which doesn't fit the context of a feature description. It should be a present indicative.",
+          "suggestion": "Modifiez les documents, les feuilles de calcul et les diapositives dans le navigateur web mobile."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -93,7 +105,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content refers to 'docs, sheets, and slides,' which are typically understood as documents, spreadsheets, and presentations respectively. The Japanese translation uses 'テキスト文書 (text bunsho)' which is too literal for 'docs' and doesn't convey the 'spreadsheet' and 'presentation' meaning. 'シート' is a reasonable translation for 'sheets,' but 'スライド' is appropriate for 'slides.'",
+          "suggestion": "モバイルブラウザでドキュメント、スプレッドシート、プレゼンテーションを編集します。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -105,7 +123,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation of 'sheets' is 'ຄຳນວນ' which translates to 'calculations' or 'computations'. It should be something closer to 'ແຜ່ນຕ່າງໆ' (paen tang tang) which means 'sheets' or 'spreadsheets'.",
+          "suggestion": "ແກ້ໄຂ ເອກະສານ, ແຜ່ນຕ່າງໆ, ແລະ ນຳສະເໜີ້ ໃນຕົວທ່ອງເວັບມືຖື."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +165,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'dicumente' is a misspelling of 'documente'.",
+          "suggestion": "documente"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +183,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'ජංගම අතිරික්සුවල' translates to 'in mobile excesses' which is not accurate. It should refer to 'mobile browsers'.",
+          "suggestion": "ජංගම බ්‍රවුසරുകളില്‍"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'චිත්‍රකාච' is an archaic and overly formal term for 'slides'. A more common and understandable term should be used.",
+          "suggestion": "පේවර"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +218,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Edit docs, sheets, and slides' is not perfectly conveyed by 'Uređujte dokumenta, tabele i prezentacije'. While understandable, 'urediti' implies making changes, whereas 'edit' can also mean viewing. A closer translation might emphasize the viewing aspect.",
+          "suggestion": "Pregledajte dokumenta, tabele i prezentacije u mobilnim pregledačima."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

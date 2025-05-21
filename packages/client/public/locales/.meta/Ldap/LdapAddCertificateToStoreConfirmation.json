@@ -3,7 +3,7 @@
   "content": "Do you want to add this certificate to certificate store and continue with user import?",
   "content_en_sha1_hash": "ff7af28fff53533dec74633a798b78b64ae40315",
   "created_at": "2025-05-19T21:30:54.157Z",
-  "updated_at": "2025-05-20T09:42:17.383Z",
+  "updated_at": "2025-05-21T08:29:48.627Z",
   "comment": {
     "text": "This translation key is used to confirm whether a user wants to add a certificate to the certificate store and continue with the import process. It appears as the title of a modal dialog in the LDAP settings category.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'վկայականը' (certificate) is potentially a bit formal. While not incorrect, a slightly more conversational alternative might improve flow.",
+          "suggestion": "Consider using 'տեղեկանքը' or a more colloquial term depending on the intended tone. However, 'վկայականը' is technically correct."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -153,7 +159,23 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'මෙම සහතිකයේ ගබඩා කිරීමට' (this certificate's storage) is not the most natural phrasing. It's overly literal. A more natural way to say 'add this certificate to certificate store' would be 'මෙම සහතිකය සහතික ගබඩාවට එක් කිරීමට'.",
+          "suggestion": "මෙම සහතිකය සහතික ගබඩාවට එක් කිරීමට"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'පරිශීලකයා ආනයනය කිරීම සමඟ ඉදිරියට යාමට' (with user import to go forward) is awkward. It's better to use a more concise and natural phrasing.",
+          "suggestion": "පරිශීලකයා ආනයනය කරමින් ඉදිරියට යාමට"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "Combining both suggestions from above, the entire translation is not as natural as it could be. The phrasing feels clunky and not idiomatic Sinhala.",
+          "suggestion": "මෙම සහතිකය සහතික ගබඩාවට එක් කර පරිශීලකයා ආනයනය කරමින් ඉදිරියට යාමට ඔබට අවශ්‍යද?"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +193,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'складиште' (skladiste) which translates to 'storage' or 'repository' in this context, is a valid word but may not be the most natural or user-friendly term for 'certificate store'. While technically correct, it can be perceived as overly technical for a general user.",
+          "suggestion": "Consider using a more user-friendly term like 'спремиште' (spremište) which translates more closely to 'repository' or 'container' or 'контејнер' (container)."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'sertifikat' is a misspelling of 'sertifikat'.",
+          "suggestion": "sertifikat"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

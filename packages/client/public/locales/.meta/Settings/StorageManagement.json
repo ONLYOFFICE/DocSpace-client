@@ -3,7 +3,7 @@
   "content": "Storage management",
   "content_en_sha1_hash": "aee08f8d5281c4277ee7ebdfe0a0f452865e73b5",
   "created_at": "2025-05-19T21:30:52.780Z",
-  "updated_at": "2025-05-20T09:44:24.252Z",
+  "updated_at": "2025-05-21T02:57:22.131Z",
   "comment": {
     "text": "The \"StorageManagement\" translation key is used to display the storage management section title on the Portal Settings page. It provides a clear and concise label for this section, helping users navigate through the settings. This translation key appears in a header context, likely as part of a category or tab navigation menu.",
     "is_auto": true,
@@ -75,7 +75,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Διαχείριση αποθ. χώρου\" is understandable, a more accurate and common translation for \"Storage management\" would be \"Διαχείριση αποθήκευσης\" or \"Διαχείριση χώρου αποθήκευσης\". \"Αποθ. χώρου\" is a shortened form that might be less clear to some users.",
+          "suggestion": "Διαχείριση αποθήκευσης"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -99,7 +105,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Պահպանման կառավարում\" translates more accurately to \"Preservation Management\" rather than \"Storage Management\". While 'storage' can be associated with 'preservation,' the direct equivalent of 'storage' is not conveyed.",
+          "suggestion": "Consider a more accurate translation like \"Տվյալների պահպանման աշխատանքներ\" (Data Preservation Work) or \"Պահեստային աշխատանքներ\" (Storage Operations) depending on the intended meaning of 'Storage Management'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -141,7 +153,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Zarządzanie pamięcią\" translates literally to \"Memory management\", in the context of \"Storage management\", a more accurate translation would be \"Zarządzanie pamięcią masową\" or \"Zarządzanie przestrzenią dyskową\". \"Pamięcią\" can imply RAM, not persistent storage.",
+          "suggestion": "Zarządzanie pamięcią masową"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -171,7 +189,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"ආචයන කළමනාකරණය\" translates to something like \"device management\" or \"apparatus management\" and not \"storage management.\" The word 'ආචයන' (aachayana) refers to a device or apparatus.",
+          "suggestion": "භ 収納 කළමනාකරණය (Bh 収納 kamanaakarayanaya) - This would more accurately represent 'storage management'. Alternatively, තැටි කළමනාකරණය (thati kamanaakarayanaya) - meaning 'data management' or 'storage management' could be used, depending on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

@@ -715,5 +715,8 @@
   "Yes": "Oui",
   "Yesterday": "Hier",
   "You": "Vous",
-  "YourTurn": "Votre tour"
+  "YourTurn": "Votre tour",
+  "BlockFile": "Bloquer",
+  "MobileStartFillingPdfNotAvailableInfo": "Action non prise en charge. Veuillez passer en mode bureau pour remplir les formulaires PDF.\n",
+  "UnblockFile": "Débloquer"
 }

@@ -715,5 +715,8 @@
   "Yes": "Да",
   "Yesterday": "Вчера",
   "You": "Вы",
-  "YourTurn": "Ваша очередь"
+  "YourTurn": "Ваша очередь",
+  "BlockFile": "Блокировать",
+  "MobileStartFillingPdfNotAvailableInfo": "Действие не поддерживается. Переключитесь на десктопный режим, чтобы заполнить PDF-формы.",
+  "UnblockFile": "Разблокировать"
 }

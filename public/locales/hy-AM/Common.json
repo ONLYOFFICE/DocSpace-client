@@ -715,5 +715,8 @@
   "Yes": "Այո",
   "Yesterday": "Երեկ",
   "You": "Դու",
-  "YourTurn": "Ձեր հերթն է"
+  "YourTurn": "Ձեր հերթն է",
+  "BlockFile": "Արգելափակում",
+  "MobileStartFillingPdfNotAvailableInfo": "Չաջակցվող գործողություն։ Խնդրում ենք անցնել համակարգչային ռեժիմի՝ PDF ձևերը լրացնելու համար։",
+  "UnblockFile": "Ապակողպել"
 }

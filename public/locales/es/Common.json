@@ -715,5 +715,8 @@
   "Yes": "Sí",
   "Yesterday": "Ayer",
   "You": "Usted",
-  "YourTurn": "Su turno"
+  "YourTurn": "Su turno",
+  "BlockFile": "Bloquear",
+  "MobileStartFillingPdfNotAvailableInfo": "Acción no admitida. Cambie al modo de escritorio para rellenar formularios PDF.\n",
+  "UnblockFile": "Desbloquear"
 }

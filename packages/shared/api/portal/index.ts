@@ -523,7 +523,7 @@ export async function getTransactionHistoryReport(
 
 export async function getPortal() {
   const options = {
-    method: "post",
+    method: "get",
     url: "/portal",
   };
   const res = (await request(options)) as TPortal;

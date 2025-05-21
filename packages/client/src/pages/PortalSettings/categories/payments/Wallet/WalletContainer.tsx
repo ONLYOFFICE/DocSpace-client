@@ -67,14 +67,16 @@ type WalletProps = {
   walletBalance: number;
   language: string;
   walletCodeCurrency: string;
-  isPayer: boolean;
   cardLinkedOnFreeTariff: boolean;
   isFreeTariff: boolean;
   isNonProfit: boolean;
+  cardLinkedOnNonProfit: boolean;
   isVisibleWalletSettings: boolean;
   wasChangeBalance?: boolean;
   fetchBalance?: () => Promise<void>;
   fetchTransactionHistory?: () => Promise<void>;
+  canUpdateTariff: VoidFunction;
+  setVisibleWalletSetting?: (value: boolean) => void;
 };
 
 const typeClassMap: Record<string, string> = {
@@ -91,14 +93,16 @@ const Wallet = (props: WalletProps) => {
     walletBalance,
     language,
     walletCodeCurrency,
-    isPayer,
     cardLinkedOnFreeTariff,
     isFreeTariff,
-    isNonProfit,
+    cardLinkedOnNonProfit,
     isVisibleWalletSettings,
     wasChangeBalance,
     fetchBalance,
     fetchTransactionHistory,
+    canUpdateTariff,
+    setVisibleWalletSetting,
+    isNonProfit,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
@@ -115,6 +119,7 @@ const Wallet = (props: WalletProps) => {
 
   const onClose = () => {
     setVisible(false);
+    if (isVisibleWalletSettings) setVisibleWalletSetting(false);
   };
 
   const onOpen = () => {
@@ -127,7 +132,7 @@ const Wallet = (props: WalletProps) => {
     setIsEditAutoPayment(true);
   };
 
-  const isDisbled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
+  const isDisbled = !canUpdateTariff;
 
   const onClick = async () => {
     setIsRefreshing(true);
@@ -136,24 +141,31 @@ const Wallet = (props: WalletProps) => {
 
     try {
       await Promise.all([fetchBalance!(), fetchTransactionHistory!()]);
-
-      const elapsedTime = Date.now() - startTime;
-      const minimumAnimationTime = 1000;
-
-      const waitForAnimation = async () => {
-        const delay = minimumAnimationTime - elapsedTime;
-        await new Promise((resolve) => {
-          setTimeout(resolve, delay);
-        });
-      };
-
-      if (elapsedTime < minimumAnimationTime) {
-        await waitForAnimation();
-      }
     } catch (e) {
       toastr.error(e as Error);
     } finally {
-      setIsRefreshing(false);
+      const elapsedTime = Date.now() - startTime;
+      const animationCycleTime = 1000;
+
+      if (elapsedTime < animationCycleTime) {
+        const delay = animationCycleTime - elapsedTime;
+
+        setTimeout(() => {
+          setIsRefreshing(false);
+        }, delay);
+      } else {
+        const totalNeededTime =
+          Math.ceil(elapsedTime / animationCycleTime) * animationCycleTime;
+        const remainingTime = totalNeededTime - elapsedTime;
+
+        if (remainingTime > 0) {
+          setTimeout(() => {
+            setIsRefreshing(false);
+          }, remainingTime);
+        } else {
+          setIsRefreshing(false);
+        }
+      }
     }
   };
 
@@ -162,7 +174,9 @@ const Wallet = (props: WalletProps) => {
       <Text className={styles.walletDescription}>
         {t("WalletDescription", { productName: t("Common:ProductName") })}
       </Text>
-      {!isNonProfit && (cardLinkedOnFreeTariff || !isFreeTariff) ? (
+      {cardLinkedOnNonProfit ||
+      cardLinkedOnFreeTariff ||
+      (!isNonProfit && !isFreeTariff) ? (
         <PayerInformation />
       ) : null}
 
@@ -172,7 +186,7 @@ const Wallet = (props: WalletProps) => {
             {t("BalanceText")}
           </Text>
 
-          {cardLinkedOnFreeTariff ? (
+          {cardLinkedOnFreeTariff || cardLinkedOnNonProfit ? (
             <RefreshIconButton isRefreshing={isRefreshing} onClick={onClick} />
           ) : null}
         </div>
@@ -228,6 +242,9 @@ export default inject(
       wasChangeBalance,
       fetchBalance,
       fetchTransactionHistory,
+      canUpdateTariff,
+      setVisibleWalletSetting,
+      cardLinkedOnNonProfit,
     } = paymentStore;
     const { isFreeTariff, isNonProfit } = currentQuotaStore;
 
@@ -239,11 +256,14 @@ export default inject(
       isPayer,
       cardLinkedOnFreeTariff,
       isFreeTariff,
-      isNonProfit,
+      cardLinkedOnNonProfit,
       isVisibleWalletSettings,
       wasChangeBalance,
       fetchBalance,
       fetchTransactionHistory,
+      canUpdateTariff,
+      setVisibleWalletSetting,
+      isNonProfit,
     };
   },
 )(observer(Wallet));

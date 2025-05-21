@@ -24,38 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { observer } from "mobx-react";
+import axios from "axios";
 
-import {
-  ComboBox,
-  ComboBoxDisplayType,
-  ComboBoxSize,
-} from "../../../../combobox";
+const client = axios.create({ baseURL: "/ai/v1" });
 
-import { useModelStore } from "../../../store/modelStore";
-
-const SelectModel = () => {
-  const { preparedModels, preparedSelectedModel, setCurrentModel } =
-    useModelStore();
-
-  if (!preparedModels.length) return null;
-
-  return (
-    <ComboBox
-      options={preparedModels}
-      selectedOption={preparedSelectedModel}
-      scaled={false}
-      displayType={ComboBoxDisplayType.default}
-      size={ComboBoxSize.content}
-      showDisabledItems
-      onSelect={setCurrentModel}
-      isDefaultMode
-      noBorder
-      directionX="right"
-      modernView
-    />
-  );
+export type AIModel = {
+  created: number;
+  display_name: string;
+  id: string;
+  object: "model";
+  owned_by: string;
+  type: "chat" | "embedding";
 };
 
-export default observer(SelectModel);
+export const getModels = async () => {
+  const res = (await client.get("/models")) as { data: { data: AIModel[] } };
+
+  return res.data.data as AIModel[];
+};

@@ -308,3 +308,11 @@ export type TAutoLogin = {
   token_type: string;
   user_id: string;
 };
+
+export type TVariable = {
+  default_fields: [];
+  id: string;
+  name: string;
+  type: string;
+  value: string;
+};

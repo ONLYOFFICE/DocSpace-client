@@ -25,22 +25,24 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
+
+import { type AIModel, getModels } from "../../../api/ai";
+import FlowsApi from "../../../api/flows/flows.api";
 
 import { TOption } from "../../combobox";
-import { TModel } from "../types/chat";
 
-const fakeModels: TModel[] = [
-  { id: "gpt-4o", name: "GPT 4o" },
-  { id: "gpt-4.5", name: "GPT 4.5" },
-  { id: "gemini-2.0-flash", name: "Gemini 2.0 Flash" },
-  { id: "deepseek-r1", name: "DeepSeek R1" },
-];
+const SELECTED_CHAT_MODEL = "selected-ai-model";
 
 export default class ModelStore {
-  selectedModel: TModel = { id: "", name: "" };
+  selectedModel: { display_name: string; id: string } = {
+    display_name: "",
+    id: "",
+  };
 
-  models: TModel[] = [];
+  variableId: string = "";
+
+  models: AIModel[] = [];
 
   selectedFolder: string | number = "";
 
@@ -53,26 +55,64 @@ export default class ModelStore {
   };
 
   fetchModels = async () => {
-    // TODO: fetch models list
-    this.models = fakeModels;
+    const [models, variable] = await Promise.all([
+      getModels(),
+      FlowsApi.readVariable(SELECTED_CHAT_MODEL),
+    ]);
+
+    const modelId = variable?.value;
+    const model = models.find((m) => m.id === modelId);
+
+    runInAction(() => {
+      if (variable && model) {
+        this.selectedModel = model;
+        this.variableId = variable.id;
+      } else {
+        this.selectedModel = models[0];
+      }
+
+      this.models = models.filter((m) => m.type === "chat");
+    });
+
+    if (!model) {
+      const newVar = await FlowsApi.createVariable(
+        SELECTED_CHAT_MODEL,
+        this.selectedModel.id,
+      );
+
+      runInAction(() => {
+        this.variableId = newVar.id;
+      });
+    }
   };
 
-  fetchCurrentModel = async () => {
-    // TODO: fetch current model using selectedFolder
-    this.selectedModel = this.models[0];
-  };
+  setCurrentModel = async (option: TOption) => {
+    this.selectedModel = {
+      id: option.key! as string,
+      display_name: option.title!,
+    };
 
-  setCurrentModel = (option: TOption) => {
-    this.selectedModel = { id: option.key! as string, name: option.title! };
+    if (this.variableId) {
+      await FlowsApi.updateVariable(this.variableId, option.key! as string);
+    } else {
+      const newVar = await FlowsApi.createVariable(
+        SELECTED_CHAT_MODEL,
+        option.key! as string,
+      );
+
+      runInAction(() => {
+        this.variableId = newVar.id;
+      });
+    }
   };
 
   get preparedModels() {
     const prepModels: TOption[] = this.models.map((model) => ({
       id: model.id,
-      name: model.name,
-      label: model.name,
+      display_name: model.display_name,
+      label: model.display_name,
       key: model.id,
-      title: model.name,
+      title: model.display_name,
     }));
 
     return prepModels;
@@ -82,8 +122,8 @@ export default class ModelStore {
     const option: TOption = {
       ...this.selectedModel,
       key: this.selectedModel?.id || "",
-      label: this.selectedModel?.name || "",
-      title: this.selectedModel?.name || "",
+      label: this.selectedModel?.display_name || "",
+      title: this.selectedModel?.display_name || "",
     };
 
     return option;
@@ -104,7 +144,6 @@ export const ModelStoreContextProvider = ({
   React.useEffect(() => {
     store.setSelectedFolder(selectedFolder);
     store.fetchModels();
-    store.fetchCurrentModel();
   }, [selectedFolder, store]);
 
   return (

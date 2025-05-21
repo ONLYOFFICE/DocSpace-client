@@ -38,6 +38,7 @@ class FlowStore {
   userId: string = "";
 
   vectorizedFiles: (TFile | SimpleFile)[] = [];
+
   wrongFiles: (TFile | SimpleFile)[] = [];
 
   constructor() {

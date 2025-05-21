@@ -32,8 +32,9 @@ import { Button, ButtonSize } from "../../components/button";
 import { Text } from "../../components/text";
 import { ConflictResolveType } from "../../enums";
 
-import { StyledBodyContent } from "./ConflictResolve.styled";
 import { ConflictResolveProps } from "./ConflictResolve.types";
+
+import styles from "./ConflictResolve.module.scss";
 
 const ConflictResolve = (props: ConflictResolveProps) => {
   const {
@@ -117,13 +118,13 @@ const ConflictResolve = (props: ConflictResolveProps) => {
     >
       <ModalDialog.Header>{headerLabel}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledBodyContent>
-          <Text truncate className="message conflict-resolve_file-name ">
+        <div className={styles.conflictResolveBodyContent}>
+          <Text truncate className={styles.conflictResolveFileName}>
             {messageText}
           </Text>
-          <Text className="select-action">{selectActionText}</Text>
+          <Text className={styles.selectAction}>{selectActionText}</Text>
           <RadioButtonGroup
-            className="conflict-resolve-radio-button"
+            className={styles.conflictResolveRadioButton}
             orientation="vertical"
             fontSize="13px"
             fontWeight={400}
@@ -132,7 +133,7 @@ const ConflictResolve = (props: ConflictResolveProps) => {
             options={radioOptions}
             selected={ConflictResolveType.Overwrite as unknown as string}
           />
-        </StyledBodyContent>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

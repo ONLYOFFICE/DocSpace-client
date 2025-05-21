@@ -3,7 +3,7 @@
   "content": "Pending invite",
   "content_en_sha1_hash": "4c0cead4ed08558db964b020a52ab1b4c0661e30",
   "created_at": "2025-05-19T21:30:53.487Z",
-  "updated_at": "2025-05-20T09:43:38.908Z",
+  "updated_at": "2025-05-21T05:59:27.503Z",
   "comment": {
     "text": "This translation key is used to display a label for pending invitations. It appears as a button title and will be displayed when an invitation is pending review or approval. The translator should provide a clear and concise phrase that communicates the status of the invitation in a user-friendly manner.",
     "is_auto": true,
@@ -135,7 +135,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Uitnodigingen in afwachting' is grammatically correct, it's a rather literal and formal translation of \"Pending invite\". A more natural and concise Dutch translation would be 'Wachtende uitnodigingen' or 'Openstaande uitnodigingen'.",
+          "suggestion": "Wachtende uitnodigingen"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -171,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'අවලංගු ආරාධනය' while literally translatable, doesn't perfectly convey the meaning of 'Pending invite'. 'Pending' implies a state of waiting. A more accurate translation would consider this nuance.",
+          "suggestion": "නිලන්විත ආරාධනය"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -189,13 +201,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Чекање на позивницу' while technically correct, is a bit literal and can be improved for naturalness. A more common and idiomatic Serbian (Cyrillic) translation for 'Pending invite' would be 'Очекује се позивница' or 'Почечено чекање позивнице'.",
+          "suggestion": "Очекује се позивница"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Čekanje na pozivnicu\" is understandable, a more direct and common translation of 'Pending invite' would be 'Neočekivana pozivnica' or 'Pričekuje se pozivnica'. \"Čekanje na pozivnicu\" is a bit verbose and not the most natural phrasing.",
+          "suggestion": "Pričekuje se pozivnica"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -213,7 +237,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Lời mời đang chờ xử lý' is understandable, it's a bit verbose and formal for a pending invite notification. A more natural and concise translation would be preferable.",
+          "suggestion": "Lời mời đang chờ"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

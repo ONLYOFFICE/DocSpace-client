@@ -3,7 +3,7 @@
   "content": "Frame ID",
   "content_en_sha1_hash": "14ac3a6c6cec002a893f352cfac071b72ddb6294",
   "created_at": "2025-05-19T21:30:54.511Z",
-  "updated_at": "2025-05-20T09:41:37.787Z",
+  "updated_at": "2025-05-21T09:06:22.764Z",
   "comment": {
     "text": "The \"Frame ID\" translation key is used to display a field that allows users to input or select a frame ID. This element is part of the FrameIdSetter component in the PortalSettings page and appears as a label for a configuration setting, guiding users to enter a unique identifier for a JavaScript SDK-related functionality.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"رقم المعرف للإطار\" is technically correct, it's a very literal and clunky translation. A more natural and commonly used phrasing for \"Frame ID\" in Arabic (Saudi Arabia) would be something like \"معرّف الإطار\" (Mu'arrif al-Itaar).",
+          "suggestion": "معرّف الإطار"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -63,7 +69,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Id del marco\" is a literal translation, \"Frame ID\" often refers to a unique identifier within a digital framework. A more appropriate translation might consider conveying that meaning.",
+          "suggestion": "Identificador del marco"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -81,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Շրջանակի id\" is a literal translation, \"Frame ID\" usually refers to a unique identifier. A more accurate translation would convey this function rather than just the word 'frame'.",
+          "suggestion": "Մուրացկան ID (Murakan ID) or Շրջանակի նույնացուցիչ (Shrjanaki nuyntsiutsič)"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,7 +123,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ID ກອບ' while technically conveying 'Frame ID', is not the most natural or commonly used translation in Lao. A more common and accurate translation might be 'ລະຫັດກອບ' or 'ໝາຍເລກກອບ'.",
+          "suggestion": "ລະຫັດກອບ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -153,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'රාමුවේ හැඳු.' is a literal translation of 'Frame ID' but may not be the most natural or commonly used term in Sinhala. 'හැඳු' suggests 'identity' or 'ID' directly applied to the frame. A more natural phrasing might convey the concept of a 'frame identifier'.",
+          "suggestion": "Consider alternatives like ' රාමුවෙහි හැඳුම් අංකය' (raamuwehi hadum angka - frame identification number) or ' රාමුව අංකය' (raamuwe ankaya - frame number)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +201,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ID оквира\" is a literal translation, a more natural and commonly used translation for 'Frame ID' in a technical context in Serbian would be 'Identifikacioni broj okvira' or simply 'Broj okvira'. 'ID' is often directly used in technical documentation, but translating to 'Identifikacioni broj' provides clarity for a wider audience.",
+          "suggestion": "Identifikacioni broj okvira"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ID okvira' is understandable, a more accurate and common translation of 'Frame ID' in a technical context would be 'Identifikacioni broj okvira' or 'Broj okvira'. 'ID' is often used as-is or translated as 'Identifikacioni broj' in Serbian technical documentation.",
+          "suggestion": "Identifikacioni broj okvira"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,7 +237,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Id khung' is a literal translation but doesn't convey the intended meaning of 'Frame ID' in a technical context. It sounds awkward.",
+          "suggestion": "Khung ID"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

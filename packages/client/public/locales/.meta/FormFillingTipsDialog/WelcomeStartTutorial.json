@@ -3,7 +3,7 @@
   "content": "Take a short tour",
   "content_en_sha1_hash": "f769ba61daddc3b54db23529401893568c14a110",
   "created_at": "2025-05-19T21:30:55.154Z",
-  "updated_at": "2025-05-20T09:40:18.610Z",
+  "updated_at": "2025-05-21T10:41:58.493Z",
   "comment": {
     "text": "This translation key is used for a button label that invites users to take a short tour or introduction when they start using a form-filling tips dialog. It appears in the footer of a modal dialog component and serves as a prompt to engage new users. Translators should provide a welcoming phrase that conveys this intention.",
     "is_auto": true,
@@ -87,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Ծանոթացեք համակարգին\" translates to \"Get acquainted with the system.\" While not entirely wrong, it's a more formal and less inviting phrasing than \"Take a short tour.\"  It doesn't convey the same sense of a quick, introductory experience.",
+          "suggestion": "Consider a more direct translation of \"tour\" or a more inviting phrase like \"Համակարգը ծանոթացրեք\" (Get to know the system) or something similar that captures the idea of a brief introduction."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -117,7 +123,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Īsa ievadapmācība' is a literal translation of 'short introductory tutorial,' but it doesn't convey the casual and inviting tone of 'Take a short tour.' A more natural and user-friendly translation would be something like 'Īss apmērs' or 'Īsa ekskursija'.",
+          "suggestion": "Īss apmērs"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -129,13 +141,25 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sprawdź nasz krótki przewodnik' is not the most natural or accurate translation of 'Take a short tour'. While 'sprawdź' means 'check', in this context, a more suitable verb would be 'zobacz' (to see) or 'przejrzyj' (to browse). 'Take a tour' implies experiencing or going through something, not just checking it.",
+          "suggestion": "Zobacz nasz krótki przewodnik"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Faça uma breve visita guiada\" is understandable, it's a more literal and less natural translation of \"Take a short tour.\" The intended meaning is to guide the user through the form filling process, not necessarily a physical tour.",
+          "suggestion": "Faça um rápido tutorial"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -177,7 +201,18 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Крените у кратку туру' is not a natural or accurate rendering of 'Take a short tour'. 'Крените' (Krenite) is formal and doesn't quite fit the tone of an invitation to a tutorial. It also implies a more significant action than a simple tour.",
+          "suggestion": "Покрените кратку туру"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'Крените' is a word, in this context it's not the most appropriate.  'Покрените' would flow better and is more commonly used in similar contexts.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -189,7 +224,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation \"Kısa göz gezdirin\" is a literal translation of \"Take a short tour\" but sounds unnatural and awkward in Turkish. A more natural and idiomatic translation would be \"Kısa bir tur yapın\" or \"Hızlıca turu deneyimleyin\". \"Göz gezdirin\" typically means to glance or skim, not to take a tour.",
+          "suggestion": "Hızlıca turu deneyimleyin"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -201,13 +242,25 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Cùng khám phá nhanh nhé' while understandable, doesn't perfectly capture the concise and inviting tone of 'Take a short tour'. It's a bit more verbose and less direct.",
+          "suggestion": "Một số gợi ý khác có thể là: 'Bắt đầu tour nhanh' hoặc 'Xem hướng dẫn nhanh'."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '进行简短浏览' while literally meaning 'conduct a short browsing', doesn't convey the intended meaning of 'Take a short tour'. It sounds more like a passive exploration rather than an interactive guided tour.",
+          "suggestion": "进行快速导览 (jìn xíng kuài sù dǎo lǎn) - This translates to 'take a quick tour' and is a more accurate representation of the English phrase."
+        }
+      ],
       "approved_at": null
     }
   }

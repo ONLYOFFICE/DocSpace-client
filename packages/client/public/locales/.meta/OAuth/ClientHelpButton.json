@@ -3,7 +3,7 @@
   "content": "Credentials for using OAth 2.0 as your Authentication type.<br/> <strong>Note:</strong> Any enterprise admin who knows the app's client ID will be able to retrieve information about the app including app name, authentication type, app scopes and redirect URI.",
   "content_en_sha1_hash": "a6a1dae9abd8f55ab17beee6619144748aa32158",
   "created_at": "2025-05-19T21:30:53.836Z",
-  "updated_at": "2025-05-20T09:42:54.213Z",
+  "updated_at": "2025-05-21T07:25:13.704Z",
   "comment": {
     "text": "This translation key is used to display a note about OAuth 2.0 authentication type and its associated information. It appears as a button's help text in the PortalSettings categories section, guiding users on what information will be retrieved if they enter their credentials.",
     "is_auto": true,
@@ -27,25 +27,79 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Credentials for using OAth 2.0 as your Authentication type\" could be translated more naturally in Arabic. The current translation is literal and slightly awkward.",
+          "suggestion": "بيانات تسجيل الدخول اللازمة لاستخدام OAuth 2.0 كطريقة للمصادقة."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Client ID' is translated as 'معرف العميل'. While technically correct, a more common and understandable term in a user context might be 'معرف التطبيق' (App ID).",
+          "suggestion": "أي مسؤول مؤسسة يعرف معرف التطبيق الخاص بالتطبيق"
+        },
+        {
+          "type": "formatting",
+          "description": "The '<br/>' tag is present in both English and Arabic, which is generally acceptable for maintaining the original layout.  However, ensure that the display engine properly renders the line break in the Arabic context, accounting for potential right-to-left display considerations.",
+          "suggestion": "Review rendering to confirm proper line break appearance in RTL environment."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "“Credentials” is translated as “rekvizitlər”. While technically correct, a more natural translation in this context would be something like “təminat məlumatları” or “parol məlumatları”. \"Rekvizitlər\" is more commonly used for company details.",
+          "suggestion": "Təminat məlumatları or Parol məlumatları"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“Client ID” is translated as “müştəri identifikatoru”. While understandable, a more common and natural term for a client ID in the Azerbaijani IT context would be “müştəri kodu”.",
+          "suggestion": "müştəri kodu"
+        },
+        {
+          "type": "formatting",
+          "description": "The `<br/>` tags are preserved, which is correct for maintaining the original structure. However, consistency with surrounding content should be checked.",
+          "suggestion": "Ensure consistent use of `<br/>` throughout the application."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'OAuth' is consistently misspelled as 'OAth' in the Bulgarian translation.",
+          "suggestion": "Replace 'OAth' with 'OAuth'."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'корпоративни администратор' is grammatically incorrect. 'корпоративен администратор' is the correct form.",
+          "suggestion": "Replace 'корпоративни администратор' with 'корпоративен администратор'."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The English content uses 'OAth' while the Czech translation uses 'OAuth'. While 'OAth' might be a typo in the original, maintaining consistency is important. Consider correcting it to 'OAuth' in both languages.",
+          "suggestion": "Change 'OAth' to 'OAuth' in the Czech translation."
+        },
+        {
+          "type": "formatting",
+          "description": "The original English content includes `<br/>` for line breaks. The Czech translation also uses `<br/>`. This is generally fine but consider if the rendering in the target platform will handle the line break correctly; plain newlines might be preferable.",
+          "suggestion": "Evaluate whether `<br/>` is the best way to create a line break for the specific rendering environment. If possible, consider using a newline character instead."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -57,37 +111,103 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'app scopes' is translated as 'πεδίων εφαρμογής'. While technically correct, a more natural and commonly used translation would be 'πεδία πρόσβασης' or 'πεδία εξουσιοδότησης'.",
+          "suggestion": "πεδία πρόσβασης"
+        },
+        {
+          "type": "formatting",
+          "description": "The Greek translation retains the `<br/>` tag. While functional, removing it and utilizing proper paragraph breaks within the context of the application's display is recommended for a cleaner user experience.",
+          "suggestion": "Remove `<br/>` and let the application handle paragraph breaks."
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"as your Authentication type\" is a bit awkward in Spanish. A more natural phrasing would be \"como tipo de autenticación\" or simply \"para autenticación\".",
+          "suggestion": "Credenciales para utilizar OAth 2.0 como tipo de autenticación o Credenciales para utilizar OAth 2.0 para autenticación."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Ojo' is used to translate 'Note:'. While understandable, it's less common and a bit abrupt in a professional context. 'Nota:' would be a more appropriate translation.",
+          "suggestion": "Credenciales para utilizar OAth 2.0 como tipo de autenticación.<br/> <strong>Nota:</strong> Cualquier administrador empresarial que conozca el ID del cliente de la aplicación podrá recuperar información sobre la misma, como el nombre, el tipo de autenticación, los ámbitos y el URI de redirección."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Finnish translation uses \"Oath\" instead of \"OAuth\".",
+          "suggestion": "Kirjautumistiedot OAuth 2.0 käyttämiseen todennustyyppinäsi."
+        },
+        {
+          "type": "formatting",
+          "description": "There is an unnecessary space before the period at the end of the first sentence.",
+          "suggestion": "Kirjautumistiedot OAuth 2.0 käyttämiseen todennustyyppinäsi."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Credentials' is translated as 'Les données d'identification'. While technically correct, it's a bit formal and 'Identifiants' would be a more common and natural choice in this context. It's important to use terminology that resonates with the target audience.",
+          "suggestion": "Les identifiants"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'app scopes' is translated as 'champs d'application'. 'Scopes' usually refers to permissions, and a more accurate translation would be 'portées' or 'permissions'.",
+          "suggestion": "portées"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The acronym 'OAth' is incorrectly written as 'OAth' in both the English and Armenian content. It should be 'OAuth'.",
+          "suggestion": "Correct 'OAth' to 'OAuth' in both the English and Armenian versions."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Authentication type' is translated as 'նույնականացման տեսակը' in Armenian. While technically correct, it's a bit formal and could be better conveyed as something simpler like 'չափման ձեւը' or 'լոգինի ձեւը' to resonate with a broader audience. Consider the context and target audience.",
+          "suggestion": "Consider translating 'Authentication type' as 'չափման ձեւը' or 'լոգինի ձեւը' for better clarity and user experience."
+        },
+        {
+          "type": "formatting",
+          "description": "The strong tag is used correctly, but consider if a more visually prominent element might be preferable to convey the note's importance.",
+          "suggestion": "Explore alternative formatting options (e.g., a more styled container or a different visual cue) to ensure the note stands out."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The acronym 'OAuth' is consistently misspelled as 'OAth' throughout the Italian translation.",
+          "suggestion": "Correct 'OAth' to 'OAuth'."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -99,19 +219,52 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The English content uses 'OAuth', but the Korean translation uses 'OAth'.",
+          "suggestion": "Correct 'OAth' to 'OAuth'."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Credentials for using OAth 2.0\" is not accurately translated. 'Credentials' implies something like passwords or keys.  A more appropriate translation might be 'Information needed to use OAth 2.0' or 'Details for using OAth 2.0'.",
+          "suggestion": "ຂໍ້ມູນທີ່ຕ້ອງການສໍາລັບການນໍາໃຊ້ OAth 2.0"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Authentication type' is not accurately translated. While 'ປະເພດການພິສູດຢືນຢັນ' is understandable, a more accurate translation considering the context might be 'Authentication method' or 'Authentication setting'.",
+          "suggestion": "ປະເພດການກວດສອບຢັ້ງຢືນ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'redirect URI' isn't quite accurately conveyed.  'ປ່ຽນເສັ້ນທາງ URI' is too literal. A clearer translation for this specific technical term might be 'redirect URL' or 'redirect address'.",
+          "suggestion": "URL ກັບແກ້ໄຂ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Credentials for using OAth 2.0 as your Authentication type\" is not accurately translated. \"Akreditācijas dati OAth 2.0 izmantošanai par jūsu autentifikācijas veidu\" is a bit clunky and doesn't flow naturally in Latvian. It's literally 'Credentials for using OAth 2.0 as your authentication type'.",
+          "suggestion": "\"OAuth 2.0 autentifikācijas dati\" or \"Dati OAuth 2.0 autentifikācijai\" would be more natural and accurate translations. Consider rewording the entire section for better clarity. A possibility would be something like: \"OAuth 2.0 autentifikācijas dati, kas nepieciešami jūsu autentifikācijas veidam.\""
+        },
+        {
+          "type": "formatting",
+          "description": "The use of `<br/>` tags appears correct for line breaks, however, the overall text block might benefit from review to ensure optimal display in the target application’s UI. This is a minor consideration but could impact readability.",
+          "suggestion": "Review display of the translated text in the application's UI to ensure it renders correctly."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -123,85 +276,264 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Credentials for using OAth 2.0 as your Authentication type' is awkwardly translated. A more natural Polish phrasing would be needed.",
+          "suggestion": "Uwierzytelnianie OAuth 2.0 - dane wymagane do korzystania z niego jako metody uwierzytelniania."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ID' is used as an abbreviation. While understood, it's more formal to use the full word in this context.",
+          "suggestion": "każdy administrator przedsiębiorstwa, który zna identyfikator aplikacji"
+        },
+        {
+          "type": "formatting",
+          "description": "The English original uses `<br/>`. The Polish translation also keeps it. Using `<br/>` in HTML is generally discouraged and should be replaced with a simple line break.",
+          "suggestion": "Remove the `<br/>` tags and allow the HTML renderer to handle line breaks."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The acronym \"OAth\" is consistently misspelled as \"OAth\".",
+          "suggestion": "Correct to \"OAuth\""
+        },
+        {
+          "type": "formatting",
+          "description": "The tag '<br/>' is used for line breaks. While technically valid, using a more natural line break is preferable for readability, especially if displayed in a rich text editor.",
+          "suggestion": "Consider re-evaluating the use of <br/> tags.  If possible, leverage a platform feature for creating paragraph breaks."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The term 'OAuth' is consistently misspelled as 'OAth' throughout the Portuguese translation.",
+          "suggestion": "Correct 'OAth' to 'OAuth'."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Credentials' is translated as 'Datele de autentificare'. While technically correct, it's a bit verbose. A more natural translation would be 'Datele de acces' or 'Informațiile de autentificare'.",
+          "suggestion": "Datele de acces"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Authentication type' is translated as 'metodă de autentificare'. A more direct and common translation would be 'tipul de autentificare'.",
+          "suggestion": "tipul de autentificare"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "'App scopes' is translated as 'domeniile de aplicare'. A more natural translation would be 'permisiunile aplicației' or 'domeniile de autorizare'.",
+          "suggestion": "permisiunile aplicației"
+        },
+        {
+          "type": "formatting",
+          "description": "The line break `<br/>` is present in both the English and Romanian text. While not inherently wrong, consider if the same formatting is desired. In some contexts, keeping the same formatting may not be necessary, especially for UI where text wraps.",
+          "suggestion": "Consider whether `<br/>` is required. If not, remove it."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Russian translation retains the `<br/>` and `<strong>` tags. These should be removed for clean rendering in most UI contexts.",
+          "suggestion": "Remove all HTML tags. The text should be: Учетные данные для использования OAuth 2.0 в качестве типа аутентификации. Примечание: Любой администратор предприятия, знающий ID клиента приложения, сможет получить информацию о приложении, включая название приложения, тип аутентификации, области действия приложения и URI перенаправления."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'области действия приложения' is a somewhat literal translation of 'app scopes.' A more natural phrasing might be 'разрешения приложения' or 'доступы приложения'.",
+          "suggestion": "Consider replacing 'области действия приложения' with 'разрешения приложения' or 'доступы приложения'."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Credentials' is translated as 'සහයෝගිතා පත්‍ර' which is closer to 'cooperation letters' rather than 'authentication credentials'. A more accurate translation would be something like 'ප්‍රauthentication සහතිකපත්' or 'ප්‍රauthentication පරිගණනා'.",
+          "suggestion": "ප්‍රauthentication සහතිකපත්"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'enterprise' is translated as 'ව්‍යවසාය' which is correct, but the sentence structure could be improved for better readability. It's a bit clunky.",
+          "suggestion": "ඕනෑම පරිපාලකයෙකු (ව්‍යවසායක)"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit convoluted. It would be more readable with a slightly different phrasing.",
+          "suggestion": "ඕනෑම ව්‍යවසාය පරිපාලකයෙකු, යෙදුමේ සේවාදායක හැඳුනුම්පත දැනුවත්නම්, යෙදුමේ නම, සත්‍යාපන වර්ගය, යෙදුම් විෂය පථ සහ යළි-යොමුවීම් URI වැනි තොරතුරු ලබා ගත හැකිය."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Slovak translation uses a space before the colon in the Note section (<strong/> Poznámka: ). The English uses a colon directly after the strong tag (<strong>Note:</strong>).",
+          "suggestion": "Remove the space before the colon: <strong/> Poznámka:"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Slovenian translation retains the <br/> tag from the English content, which might not be ideal for all rendering contexts.",
+          "suggestion": "Consider removing the <br/> tag and allowing the formatting to be handled by the application."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Authentication type\" is translated as \"vrsto preverjanja pristnosti\". While technically correct, \"način preverjanja pristnosti\" might be a more natural and idiomatic translation in Slovenian. \"Vrsta\" emphasizes the *type* while \"način\" describes the *method* or *way* of authentication.",
+          "suggestion": "Consider translating \"Authentication type\" as \"način preverjanja pristnosti\"."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The line break `<br/>` is present in both the English and Serbian versions, which is fine, but verify that this line break is appropriate for the platform where this text will be displayed.  It may need to be adjusted depending on rendering.",
+          "suggestion": "Review the context and confirm if the line break is needed. Consider alternative formatting if necessary."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'преусмеравајући URI' is a direct translation of 'redirect URI'. While technically correct, a more natural and commonly used term in Serbian IT context might be 'преусмерење URI' or 'URI за преусмеравање'.",
+          "suggestion": "Consider changing 'преусмеравајући URI' to 'преусмерење URI' or 'URI за преусмеравање'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Serbian translation maintains the `<br/>` and `<strong>` tags, which may not be desirable or consistent with the platform's styling conventions. It's recommended to review and potentially remove or adjust these tags.",
+          "suggestion": "Review and adjust HTML tags to match platform standards. Consider removing them if not required."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'redirect URI' is translated as 'preusmeravajući URI'. While technically correct, a more natural and common term in Serbian would be 'preusmeravajući URL'.",
+          "suggestion": "Change 'preusmeravajući URI' to 'preusmeravajući URL'."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Credentials for using OAth 2.0 as your Authentication type\" is awkwardly translated as \"Kimlik doğrulama türünüz olarak OAth 2.0'ı kullanmak için kimlik bilgileri.\" A more natural translation might be \"OAuth 2.0'ı kimlik doğrulama türü olarak kullanmak için gerekli kimlik bilgileri.\" or \"Kimlik doğrulama türü olarak OAuth 2.0 kullandığınızda ihtiyaç duyacağınız kimlik bilgileri.\" ",
+          "suggestion": "OAuth 2.0'ı kimlik doğrulama türü olarak kullanmak için gerekli kimlik bilgileri."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'scopes' is translated as 'kapsamları'. While technically correct, 'kapsamlar' can be a broader term. It may be beneficial to use a more specific term if the context allows.",
+          "suggestion": "If 'scopes' refers to a defined set of permissions, perhaps consider 'izinler' or 'yetkiler'."
+        },
+        {
+          "type": "formatting",
+          "description": "The original English uses `<br/>` for line breaks. The Turkish translation also uses `<br/>`.  Consider replacing with HTML-safe line breaks for better rendering in different contexts.",
+          "suggestion": "Replace `<br/>` with appropriate line break characters (e.g., `\n` or HTML entity `&NewLine;` depending on the platform)."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The line break `<br/>` is present in both the English and Ukrainian content, which is appropriate. No change needed.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word \"ділянками\" is used for 'scopes'. While technically correct, it can be confusing for users not familiar with technical terminology. A more user-friendly translation might be considered.",
+          "suggestion": "Consider replacing 'ділянками' with something like 'областями доступу' or 'сферами доступу' for better user understanding."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'redirect URI' is translated as 'URI-адресою перенаправлення'. While accurate, a more common and understandable term in Ukrainian would be 'адресою перенаправлення'.",
+          "suggestion": "Change 'URI-адресою перенаправлення' to 'адресою перенаправлення'."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"Credentials\" as \"Thông tin xác thực\" is technically correct, but could be more natural. 'Thông tin đăng nhập' might be a better fit in this context.",
+          "suggestion": "Thông tin đăng nhập"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"Client Help Button\" is not directly translated. The key name indicates a button related to OAuth client help. This information is not conveyed in the translation.",
+          "suggestion": "This is a contextual issue. Ideally, the button's purpose should be subtly implied in the translated text if possible (e.g., 'Hướng dẫn sử dụng OAuth 2.0' - OAuth 2.0 Usage Guide)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'app scopes' is translated as 'phạm vi ứng dụng'.  While correct, it is a bit technical and might not be immediately understandable by all users. It could be simplified.",
+          "suggestion": "phạm vi quyền của ứng dụng"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"用于将 OAuth 2.0 作为您的身份验证类型的凭据\" is a bit awkward. A more natural translation would be something like \"用于将 OAuth 2.0 用作您的身份验证方式的凭据\" or \"OAuth 2.0 身份验证方式的凭据\".",
+          "suggestion": "OAuth 2.0 身份验证方式的凭据"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"应用作用域\" (app scopes) can be ambiguous. It would be clearer to use a more specific term depending on the context.  Consider \"OAuth 范围\" for greater clarity.",
+          "suggestion": "OAuth 范围"
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "The element itself",
   "content_en_sha1_hash": "9aced7d006e732132bb5f1f09abdcbdbbc8dea2e",
   "created_at": "2025-05-19T21:30:54.464Z",
-  "updated_at": "2025-05-20T09:41:42.584Z",
+  "updated_at": "2025-05-21T09:12:38.768Z",
   "comment": {
     "text": "This translation key is used to display a label for a radio button option that references a specific element in its context. It appears in the UI as a radio button within a configuration settings page, likely allowing users to select whether they want to focus on an individual element or another aspect of their project. Translators should provide a localized version of this text to describe \"The element itself\" in the user's preferred language.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Տարրն ինքնին' is a literal translation, it might sound slightly awkward or overly formal in Armenian. A more natural translation depending on the context might be 'այն տարրը' or 'ամենայն տարր' (depending on the nuance required). 'Տարրն ինքնին' could imply a distinction being made, which may not be the intention.",
+          "suggestion": "Consider 'այն տարրը' or 'ամենայն տարր' for a more natural flow, depending on the intended meaning."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,13 +111,25 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ອົງປະກອບຂອງມັນເອງ' is technically correct, it's overly literal and doesn't convey the intended meaning of 'The element itself' in a natural Lao way. It's clunky and could be improved for clarity.",
+          "suggestion": "Consider alternatives like 'ຕົວແກ້ໄຂໂຕເອງ' (tua gae toe ng), 'ໂຕມັນເອງ' (to man ng) or contextually appropriate phrasing depending on the purpose of the translation."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Pats elements\" is understandable, it's not the most natural or idiomatic translation of \"The element itself.\" \"Pats elements\" can be interpreted literally as 'The very element'. A more appropriate translation would capture the emphasis of 'itself'.",
+          "suggestion": "Izmantojiet vairāk kontekstualizētu tulkojumu, kas atbilst izmantošanas veidam. Piemēram, varētu būt \"Pats elements\" vai, atkarībā no konteksta, arī \"Šis elements\" vai \"Konkrētais elements\"."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -153,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"අංගයම\" (angayama) is a possible translation for \"The element itself\", it lacks nuance and may not accurately convey the intended meaning in all contexts. It's a bit too literal and could sound awkward depending on usage. A more natural translation might depend on the context where 'The element itself' is used.  It's quite emphatic and might be more suited to situations where you specifically want to highlight the element's intrinsic nature.",
+          "suggestion": "Consider alternative translations like \"ඒ සංඝඨනය\" (e sanghatana - that component/element), \"මූලිකත්වය\" (mulika thva - the originality/the core), or a phrasing tailored to the specific context."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

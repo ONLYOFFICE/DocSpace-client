@@ -3,7 +3,7 @@
   "content": "Scalability and clustering.",
   "content_en_sha1_hash": "6cc8e719d41e0d79ee36d84a4938186906c5e5a8",
   "created_at": "2025-05-19T21:30:53.632Z",
-  "updated_at": "2025-05-20T09:43:19.045Z",
+  "updated_at": "2025-05-21T06:10:43.866Z",
   "comment": {
     "text": "This translation key describes a header that explains scalability and clustering features in the application, likely appearing on a benefits or feature page within the UI.",
     "is_auto": true,
@@ -129,7 +129,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'agregação' while technically meaning aggregation, doesn't fully capture the meaning of 'clustering' in a technical context like scalability. 'Clustering' refers to grouping resources to improve performance and resilience.",
+          "suggestion": "Consider 'agrupamento' or 'conjunto' to better convey the meaning of 'clustering' in the context of scalability."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"පරිමාණය\" (parimāḍaya) correctly translates to 'scale' or 'size', \"පොකුරු කිරීම\" (pokuru kirima) is a literal translation of 'clustering' which might not be the most natural or easily understood phrasing in Sinhala for a user interface element. A more user-friendly translation for 'clustering' in this context might be something that conveys the benefit of clustering, such as 'සමූහගත කිරීම' (samūhagat kirima - grouping/aggregation) or a more descriptive phrase depending on the intended meaning.",
+          "suggestion": "Consider alternatives like 'සමූහගත කිරීම' (samūhagat kirima) or a more descriptive phrase that conveys the benefit of clustering, depending on context."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

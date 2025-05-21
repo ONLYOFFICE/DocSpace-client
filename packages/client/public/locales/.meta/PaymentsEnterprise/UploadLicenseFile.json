@@ -3,7 +3,7 @@
   "content": "Upload license file",
   "content_en_sha1_hash": "6333456e22fe94df2bb16029236561d60ddcd9ea",
   "created_at": "2025-05-19T21:30:53.638Z",
-  "updated_at": "2025-05-20T09:43:18.235Z",
+  "updated_at": "2025-05-21T06:09:49.497Z",
   "comment": {
     "text": "Upload license file is a placeholder text used to prompt users to upload a license file when uploading a payment method in the Portal Settings categories. This text appears as a button label and is translated by assistive tools to facilitate internationalization of the application.",
     "is_auto": true,
@@ -57,7 +57,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ανέβασμα αρχείου άδειας χρήσης' while containing the correct words, isn't the most natural or accurate translation of 'Upload license file'. It's a gerund construction which isn't the typical way to phrase this instruction in Greek.",
+          "suggestion": "Αναρτήστε αρχείο άδειας χρήσης"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -105,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'license' is rendered as 'ໃບອະນຸຍາດ'. While technically correct (ใบอนุญาต means 'permission' or 'license'), it's a more formal rendering. Considering the context of uploading a file, a more direct translation of 'license' might be clearer for users.",
+          "suggestion": "Consider using a more direct translation of 'license' if available in Lao, or retaining 'ໃບອະນຸຍາດ' if the audience expects a formal tone."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -129,7 +141,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Atualizar o ficheiro da licença\" uses 'Atualizar' which means 'Update'. The original text 'Upload' has a different meaning (to transmit data to a server). A more accurate translation would be 'Carregar o ficheiro da licença'.",
+          "suggestion": "Carregar o ficheiro da licença"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -171,13 +189,30 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Отпремите датотеку лиценце' is not a natural or accurate translation of 'Upload license file'. 'Отпремите' is not a standard verb for 'upload'. It's more akin to 'send'. The word 'датотеку' is also not standard Serbian for 'file'.",
+          "suggestion": "Уплоад лиценце файл"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'датотеку' is a misspelling. The correct form is 'датотеку'.",
+          "suggestion": "датотеку"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Otpremite datoteku licence' is not the most natural or accurate translation of 'Upload license file'. 'Upload' implies transferring a file *to* a destination. 'Otpremite' primarily means 'to send'. A better translation would convey the action of uploading to a platform or system.",
+          "suggestion": "Uploadujte datoteku licence"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

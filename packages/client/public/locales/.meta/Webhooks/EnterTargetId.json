@@ -3,7 +3,7 @@
   "content": "Enter target ID",
   "content_en_sha1_hash": "fe78a1ea977c72d5ae4f869b5249824c80846aa6",
   "created_at": "2025-05-19T21:30:49.702Z",
-  "updated_at": "2025-05-20T09:47:06.273Z",
+  "updated_at": "2025-05-21T01:15:37.347Z",
   "comment": {
     "text": "\"Helps users input a target ID when enabled in the WebhookDialog component.\"",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'أدخلوا المعرّف الهدف' is a literal translation but might not be the most natural phrasing in Saudi Arabian Arabic. 'أدخلوا' (Adkhulu) is a plural imperative. Since the UI element likely refers to a single target ID entry, a singular imperative might be more appropriate.",
+          "suggestion": "أدخل المعرّف الهدف (Adkhil al-Mu'arrif al-Hadaf)"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Մուտքագրեք նպատակային ID-ն\" is a literal translation but sounds slightly awkward in Armenian. A more natural phrasing would be preferred.",
+          "suggestion": "Մուտքագրել նպատակային ID"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -141,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Introduceți ID-ul de destinație\" is a bit verbose and formal for a user interface element like a webhook setting. A more natural and concise translation would be better.",
+          "suggestion": "Introduceți ID"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඉලක්කම් ID ඇතුළත් කරන්න' while understandable, isn't the most natural or accurate translation of 'Enter target ID'. 'ඉලක්කම්' (ilakkam) means 'target' but can sound a bit formal or literary. A more common and natural phrasing would be 'දුරණු ID ඇතුළත් කරන්න' (durunu ID athulatha kornna) or 'අනුගත ID ඇතුළත් කරන්න' (anugatha ID athulatha kornna).",
+          "suggestion": "දුරණු ID ඇතුළත් කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +195,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Унесите циљани ID\" sounds slightly unnatural in Serbian. A more idiomatic translation would be \"Унесите ID циља\" or \"Унесите ID циљања\".",
+          "suggestion": "Унесите ID циља"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

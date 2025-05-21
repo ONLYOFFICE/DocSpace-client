@@ -3,7 +3,7 @@
   "content": "Display keyboard hotkeys list",
   "content_en_sha1_hash": "d746272ad6b80ffced97e2fad978a577b415f8db",
   "created_at": "2025-05-19T21:30:55.096Z",
-  "updated_at": "2025-05-20T09:40:27.484Z",
+  "updated_at": "2025-05-21T10:21:32.536Z",
   "comment": {
     "text": "This translation key is used to display keyboard hotkeys and shortcuts. It will be displayed in a UI component as part of an \"Applications\" block, likely on a settings or preferences page, allowing users to view the associated hotkey for a specific action.",
     "is_auto": true,
@@ -27,19 +27,42 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'عرض قائمة مفاتيح الاخصار للوحة المفاتيح' (ʿarḍ qāʾimat mafātīḥ al-ikhsār li-lawḥat al-mafātīḥ) literally translates to 'Display a list of keyboard shortcuts for the keyboard.' While not entirely wrong, it's a bit redundant and doesn't fully capture the meaning of 'Display keyboard hotkeys list'. The phrase 'hotkeys' doesn't have a direct, universally accepted Arabic equivalent in this context. A more natural translation would focus on the 'shortcuts' functionality.",
+          "suggestion": "عرض قائمة اختصارات لوحة المفاتيح (ʿarḍ qāʾimat ikhtisārāt lawḥat al-mafātīḥ)"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation contains unnecessary wordiness that doesn't flow naturally in Arabic. While technically accurate, it could be streamlined for better readability.",
+          "suggestion": "عرض اختصارات لوحة المفاتيح (ʿarḍ ikhtisārāt lawḥat al-mafātīḥ)"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is too literal. 'Display keyboard hotkeys list' is better conveyed with a more natural phrasing in Azerbaijani. 'Klaviaturadakı qısayollar siyahısını göstərin' is understandable, but sounds slightly awkward.",
+          "suggestion": "Consider a phrasing like 'Klaviatur qısayollarının siyahısını göstər' or 'Klaviatur qısayolları siyahısını aç'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is overly verbose and doesn't capture the brevity of the English phrase. \"Клавишни комбинации на клавиатурата\" is redundant as 'клавишни комбинации' already implies keyboard shortcuts.",
+          "suggestion": "Показване на клавишни комбинации"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -81,13 +104,25 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ստեղնաշարի' is potentially better as 'клавиатуры' or 'клавишах'. While 'ստեղնաշարի' is technically correct, it's slightly awkward in this context.  'клавиатуры' implies the keyboard itself, and 'клавишах' (keyboard keys) would be even more precise.",
+          "suggestion": "Ցուցադրել клавиатуры թեժ ստեղների ցանկը"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Visualizzare l'elenco dei tasti di scelta rapida della tastiera' is overly literal and verbose. While technically correct, it doesn't flow naturally in Italian. 'Tasti di scelta rapida' can be shortened to 'scorciatoie'.",
+          "suggestion": "Visualizzare l'elenco delle scorciatoie da tastiera"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -105,7 +140,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ສະແດງລາຍການຄີບອດແປ້ນພິມ\" is a literal translation and not the most natural way to express 'Display keyboard hotkeys list' in Lao. 'Hotkeys' implies a shortcut function, which isn't directly conveyed.",
+          "suggestion": "ສະແດງລາຍການທາງລັດຄີບອດ (sadaeng laikan thang lat keyboard)"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -135,13 +176,30 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Exibir lista de teclas de acesso do teclado\" is a bit redundant and not the most natural way to express \"Display keyboard hotkeys list\" in Brazilian Portuguese. The phrase 'teclas de acesso do teclado' literally translates to 'access keys of the keyboard'.",
+          "suggestion": "Exibir atalhos de teclado"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, using 'atalhos' instead of 'teclas de acesso' makes the translation more concise and commonly used in UI contexts.",
+          "suggestion": "No change needed, but consider the improvement suggested in the 'incorrect_translation' issue."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"comenzi rapide de la tastatură\" is a bit verbose and less idiomatic than a more concise alternative. \"Comenzi rapide\" is often sufficient in this context.",
+          "suggestion": "Afișează comenzile rapide"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +211,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'කෙටිමං ලැයිස්තුව පෙන්වන්න' while understandable, doesn't perfectly capture the meaning of 'Display keyboard hotkeys list'. 'කෙටිමං' (ketiman) translates to 'shortcuts', but 'keyboard hotkeys list' implies a list specifically for keyboard shortcuts. A more accurate translation would convey this distinction.",
+          "suggestion": "කීබෝඩ් හොට්keys ලැයිස්තුව පෙන්වන්න (Keyboard hotkeys list pena vanna)"
+        },
+        {
+          "type": "formatting",
+          "description": "While not a critical issue, mixing Sinhala and English words ('කීබෝඩ්' and 'hotkeys') can be jarring. It's preferable to use solely Sinhala if possible, or ensure a consistent transliteration style.",
+          "suggestion": "විධානපත් කෙටිමං ලැයිස්තුව පෙන්වන්න (Vidahana patha ketiman laisthuva penavanna)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +240,18 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Прикажи листу пречица тастатуре' is not the most natural or accurate translation of 'Display keyboard hotkeys list'. 'Prečica' translates to 'shortcut,' which is accurate, but the overall phrasing is somewhat awkward. A more natural translation would use 'краћу путању' or 'комбинације тастатуре'.",
+          "suggestion": "Покажи листу пречица на тастатури"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses capitalized letters at the beginning of each word, which is typical for titles but might be better to match the surrounding UI elements.",
+          "suggestion": "покажи листу пречица на тастатури"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

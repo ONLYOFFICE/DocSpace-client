@@ -3,7 +3,7 @@
   "content": "See form template details here",
   "content_en_sha1_hash": "b7b7142711a93367eb3d5281f8eb4a92c1c24471",
   "created_at": "2025-05-19T21:30:54.869Z",
-  "updated_at": "2025-05-20T09:40:56.714Z",
+  "updated_at": "2025-05-21T10:03:03.877Z",
   "comment": {
     "text": "The \"GalleryEmptyScreenText\" translation key is used to display a message indicating that there are no items in a gallery, pointing users to see details about form templates. This text appears in an empty gallery screen within a UI component. Translators should provide a clear and concise message for this context.",
     "is_auto": true,
@@ -147,13 +147,25 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Здесь будут представлены подробности о шаблонах форм' is too literal and doesn't convey the meaning of 'See form template details here' accurately. It implies that the details will be shown later, rather than offering to show them now.",
+          "suggestion": "Смотрите подробности шаблона формы здесь"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ආකෘතිපත්‍ර අච්චුවේ විස්තර මෙතැන බලන්න' is not a direct or natural translation of 'See form template details here'. 'අච්චුවේ' (achchuwe) means 'in the mold' or 'in the die', which is not accurate in this context. It incorrectly implies the details are *within* the template itself.",
+          "suggestion": "A more accurate translation would be something like 'ආකෘතිපත්‍ර විස්තර මෙහි බලන්න' (Akrutipatra visthar mehi balanna) - 'See form details here'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,13 +189,30 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Vidi detalje šablona obrasca ovde\" doesn't accurately convey the meaning of \"See form template details here.\" \"Vidi\" (see) implies a command, whereas the English is more of an informational link or suggestion.  A more suitable translation would use a word like \"Pogledaj\" or \"Vidite\" (more formal) to soften the imperative nature.",
+          "suggestion": "Pogledajte detalje šablona obrasca ovde"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically not strictly incorrect, the word order in \"detalje šablona obrasca\" sounds slightly unnatural in Serbian.  A more natural order would be \"detalje obrasca šablona\" or simply \"detalji obrasca šablona\".",
+          "suggestion": "detalji obrasca šablona"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Form şablonu ayrıntılarına buradan bakın' is a literal translation but doesn't flow naturally in Turkish. A more natural phrasing would be 'Form şablonunun detaylarına buradan ulaşabilirsiniz' or 'Form şablonu detayları için buraya bakın'.",
+          "suggestion": "Form şablonunun detaylarına buradan ulaşabilirsiniz"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

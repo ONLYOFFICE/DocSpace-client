@@ -3,7 +3,7 @@
   "content": "Settings have been successfully updated",
   "content_en_sha1_hash": "a3e0f1940499fb1b34253a9a7b050c2136e1f58b",
   "created_at": "2025-05-19T21:30:52.842Z",
-  "updated_at": "2025-05-20T09:44:21.460Z",
+  "updated_at": "2025-05-21T02:54:52.166Z",
   "comment": {
     "text": "This translation key is used to display a success message when settings are successfully updated or saved, typically after clicking a button or submitting a form. It appears in various UI elements, such as dialog boxes and toast notifications, to inform users of the outcome of their actions. Its purpose is to provide positive feedback to the user after completing a task.",
     "is_auto": true,
@@ -231,7 +231,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ajustes se han actualizado correctamente' is not the most natural or preferred way to express 'Settings have been successfully updated' in Spanish. While technically correct, it sounds a bit awkward. A more natural phrasing would use a verb like 'guardar' (to save).",
+          "suggestion": "Ajustes se han guardado correctamente"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -321,7 +327,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'යාවත්කාල' (yavatthakaala) is technically correct but feels overly formal and archaic in this context. It implies a broader 'upgrade' rather than a simple 'update'.",
+          "suggestion": "Consider a more common and user-friendly term for 'updated', such as 'ආකෘති වෙනස් කෙරිණි' (aakruthi venas keerini - 'settings changed') or 'ගබඩා කෙරිණි' (gabadaa keerini - 'saved')."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'සාර්ථකව' (saarthaakava) translates to 'successfully', it adds unnecessary formality for a user-facing message. It can be omitted without losing the meaning.",
+          "suggestion": "Remove 'සාර්ථකව' (saarthaakava). The sentence would read: 'සැකසුම් යාවත්කාල කෙරිණි' or, preferably, based on the suggestion above: 'සැකසුම් ආකෘති වෙනස් කෙරිණි' or 'සැකසුම් ගබඩා කෙරිණි'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

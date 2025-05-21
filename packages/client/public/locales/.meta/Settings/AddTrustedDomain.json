@@ -3,7 +3,7 @@
   "content": "Add trusted domain",
   "content_en_sha1_hash": "4d8d1f52d9615d9c81391e0cd5314c57146e0a06",
   "created_at": "2025-05-19T21:30:50.373Z",
-  "updated_at": "2025-05-20T09:45:54.188Z",
+  "updated_at": "2025-05-21T05:23:32.700Z",
   "comment": {
     "text": "The translation key \"AddTrustedDomain\" is used to display the label \"Add trusted domain\" in a UI element, likely a button or input field, where users can add a trusted mail domain to access secure content. It appears in a category dialog related to security settings for an access portal.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'İnanılmış domen əlavə et' is not the most natural or idiomatic way to say \"Add trusted domain\" in Azerbaijani. While technically correct, it sounds a bit literal.",
+          "suggestion": "Consider alternatives like 'Güvənli domen əlavə et' or 'Xüsusi domen əlavə et'. 'Güvənli' is often used to convey 'trusted' or 'secure' in this context."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -51,13 +57,25 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sichere Domain hinzufügen' while containing correct words, doesn't precisely convey the meaning of 'Add trusted domain.' 'Sichere' implies 'secure' whereas 'trusted' is the intended meaning. A more accurate translation would convey the concept of a domain being explicitly 'trusted' or 'approved'.",
+          "suggestion": "Vertrauenswürdige Domain hinzufügen"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'domain' is often transliterated as 'domain' in Greek, especially in technical contexts. While 'κτήριο' (ktirio) is a general term for domain, 'domain' is more appropriate here.",
+          "suggestion": "Προσθήκη αξιόπιστου domain"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -75,7 +93,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Ajouter domaine autorisé\" is understandable, a more accurate and natural translation of \"Add trusted domain\" would be \"Ajouter un domaine de confiance\". \"Autorisé\" implies permission, while \"de confiance\" more directly conveys the concept of trust in this context.",
+          "suggestion": "Ajouter un domaine de confiance"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -99,13 +123,25 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '신뢰할 수있는 도메인을 추가' is a literal translation but sounds awkward in Korean. A more natural and idiomatic translation would be preferable.",
+          "suggestion": "신뢰할 도메인 추가"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ຕື່ມ ເຊື່ອຖືໄດ້ ໂດ​ເມນ' is a literal translation and may not be the most natural or idiomatic way to express 'Add trusted domain' in Lao. 'ເຊື່ອຖືໄດ້' directly translates to 'trustworthy' or 'reliable,' which is correct in concept but might feel clunky.",
+          "suggestion": "Consider a more fluent option like 'ເພີ່ມໂດເມນທີ່ເຊື່ອຖືໄດ້' (Phim domeng thi chuea thia dai) - 'Add reliable domain' or 'ເພີ່ມໂດເມນທີ່ຖືກຮັບຮອງ' (Phim domeng thi thuk rap hong) - 'Add approved domain' depending on the intended nuance."
+        }
+      ],
       "approved_at": null
     },
     "lv": {

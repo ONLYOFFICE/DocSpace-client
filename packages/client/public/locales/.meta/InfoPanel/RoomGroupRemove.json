@@ -3,7 +3,7 @@
   "content": "Group removed",
   "content_en_sha1_hash": "587c704467c3ef25e9a2b18a68181777f6352ac6",
   "created_at": "2025-05-19T21:30:54.925Z",
-  "updated_at": "2025-05-20T09:40:47.889Z",
+  "updated_at": "2025-05-21T09:52:38.196Z",
   "comment": {
     "text": "The translation key \"RoomGroupRemove\" is used to display the message \"Group removed\". It is likely displayed when a group of rooms has been successfully deleted or removed from a specific setting.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Премахнати групи\" (Removed groups) is a plural form. The English \"Group removed\" refers to a single group. A more accurate translation would be \"Премахната група\" (Removed group).",
+          "suggestion": "Премахната група"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English \"Group removed\" implies a single group was removed. The Armenian translation \"Խմբերը հեռացվել են։\" translates to \"Groups were removed,\" implying multiple groups. This is a semantic mismatch.",
+          "suggestion": "Consider translating to \"Խումբը հեռացվել է։\" to match the singular nature of the English text, which would mean 'Group was removed'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,7 +117,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ກຸ່ມຖືກລົບອອກ\" is understandable, a more accurate and natural translation of 'Group removed' would be \"ກຸ່ມຖືກລຶບ\" or \"ລົບກຸ່ມອອກ\". The current translation includes the word 'ອອກ' which isn't always necessary and can sound slightly awkward in this context.",
+          "suggestion": "ກຸ່ມຖືກລຶບ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -153,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'කුழு ඉවත් කරනු ලැබුවා' while conveying a general meaning of 'group removed', can be more accurately translated as 'කුழு ඉවත් කරන ලදි'.  'ඉවත් කරනු ලැබුවා' implies an action completed by someone, whereas 'ඉවත් කරන ලදි' is a more direct and common way to state something was removed.",
+          "suggestion": "කුழு ඉවත් කරන ලදි"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

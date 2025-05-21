@@ -3,7 +3,7 @@
   "content": "Deactivate or delete space.",
   "content_en_sha1_hash": "b70998fc4817a45d4d7119737e6a46662004d7ed",
   "created_at": "2025-05-19T21:30:51.081Z",
-  "updated_at": "2025-05-19T21:30:51.081Z",
+  "updated_at": "2025-05-21T04:37:58.341Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -26,13 +26,25 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Sahəni deaktivləşdirin və ya silin\" (Deactivate or delete space) sounds slightly awkward in Azerbaijani. A more natural phrasing would be \"Sahəni bağlayın və ya silin\" or \"Sahəni ləğv edin və ya silin\". \"Deaktivləşdirin\" is a direct translation but not commonly used in this context.",
+          "suggestion": "Consider using \"Sahəni bağlayın və ya silin\" or \"Sahəni ləğv edin və ya silin\"."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'space' is translated as 'портал' (portal). While 'portal' can sometimes be appropriate, 'space' typically refers to a workspace or area within a system. A more accurate translation might be 'пространство' (prostranstvo).",
+          "suggestion": "Consider translating 'space' as 'пространство' (prostranstvo)."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -44,7 +56,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'entfernen' (remove) might be too strong and has a more final connotation than 'delete'. 'Deaktivieren oder löschen Sie den Bereich.' would be a more accurate and nuanced translation.",
+          "suggestion": "Deaktivieren oder löschen Sie den Bereich."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -62,7 +80,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'delete space' is translated as 'poista se'. While 'poista' is correct for delete, 'se' is a pronoun lacking clarity.  'Tila' refers to the space.  A more precise translation of 'delete' would be 'poista tila'.",
+          "suggestion": "Ota tila pois käytöstä tai poista tila."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -74,7 +98,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Ապագործունացնել կամ ջնջել կայքէջը\" translates to 'Deactivate or delete website'. The English content refers to a 'space', which is a more general term. 'Կայքէջը' specifically means 'website'.",
+          "suggestion": "Consider using a more general term for 'space' that doesn't specifically mean 'website'.  Possible alternatives include 'տեղ' (teg - place) or 'բաժին' (bajn - section), depending on the precise meaning of 'space' in the original context."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -86,7 +116,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"スペースを無効にする、または削除する\" (Space o mukyou ni suru, matawa sakujo suru) is a very literal translation. A more natural phrasing would be something like \"スペースを停止するか、削除するか\" (Space o teishi suru ka, matawa sakujo suru) or \"スペースを非表示にする、または削除する\" (Space o hiyou ni suru, matawa sakujo suru).",
+          "suggestion": "スペースを停止するか、削除するか。 (Space o teishi suru ka, matawa sakujo suru) or スペースを非表示にする、または削除する。 (Space o hiyou ni suru, matawa sakujo suru)"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -98,13 +134,25 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ປິດການນຳໃຊ້ ຫຼື ລືບສາຍ' is a literal translation but doesn't fully capture the nuance of 'deactivate or delete space.' 'ປິດການນຳໃຊ້' is correct for 'deactivate' but 'ລືບສາຍ' (delete line/thread) is not the best equivalent for 'delete space'.  'Space' refers to a virtual space, which would need more accurate terminology.",
+          "suggestion": "Consider a translation like 'ປິດການນຳໃຊ້ ຫຼື ລົບອອກ' or 'ປິດການນຳໃຊ້ ຫຼື ລົບຂໍ້ມູນ' which conveys the meaning of deactivating or deleting the space more accurately. Another option might be 'ປິດການນຳໃຊ້ ຫຼື ລົບພື້ນທີ່' (delete area/region)."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'space' is translated as 'portālu'. While 'portāls' can sometimes refer to a space, in this context (likely referring to a user-defined area within a platform) 'portāls' is not the most accurate translation. A better translation would depend on the specific meaning of 'space' in the original context. Possibilities include 'telpa', 'vieta', or a more descriptive term.",
+          "suggestion": "Consider 'telpa' or 'vieta' depending on the specific context of 'space'."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -116,7 +164,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'space' is translated as 'portal'. 'Space' in this context likely refers to a user's personal workspace within the portal, not the portal itself. 'Portal' is too broad.",
+          "suggestion": "Dezaktywuj lub usuń przestrzeń."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -146,7 +200,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'අවකාශය අක්‍රිය කරන්න හෝ මකන්න' is a literal translation but could be improved for clarity and naturalness in Sinhala. 'Deactivate' often implies a temporary state, while 'අක්‍රිය කරන්න' can be too strong. 'Delete' is well translated as 'මකන්න'.",
+          "suggestion": "Consider a more nuanced translation like 'අවකාශය නතර කරන්න හෝ මකන්න' (space pause or delete), or 'අවකාශය අයින් කරන්න හෝ මකන්න' (space remove or delete)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -176,13 +236,25 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Alanı devre dışı bırak veya sil' is understandable, 'Deactivate or delete space' implies a broader context than just a 'space'. 'Portal' is a more accurate term to convey the intended meaning. A better translation might be 'Portalı devre dışı bırak veya sil'.",
+          "suggestion": "Portalı devre dışı bırak veya sil."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'space' is translated as 'portal'. While 'portal' can sometimes be a suitable translation, 'space' in this context likely refers to a collaborative workspace or area within a platform. 'Простір' (prostir) would be a more accurate translation for 'space'.",
+          "suggestion": "Replace 'портал' with 'простір'."
+        }
+      ],
       "approved_at": null
     },
     "vi": {

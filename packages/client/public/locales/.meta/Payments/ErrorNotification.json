@@ -3,7 +3,7 @@
   "content": "Failed to update tariff plan. Try again later or contact the sales department.",
   "content_en_sha1_hash": "bc9b4b305a68ff27847f763ef309786faf03e5d0",
   "created_at": "2025-05-19T21:30:53.686Z",
-  "updated_at": "2025-05-20T09:43:12.376Z",
+  "updated_at": "2025-05-21T06:39:35.211Z",
   "comment": {
     "text": "This translation key is used to display an error message when a tariff plan update fails, prompting the user to try again later or contact the sales department. It appears as an error notification in a UI component that handles payment updates, such as a button click event handler.",
     "is_auto": true,
@@ -105,7 +105,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Try again later\" is translated as \"Փորձեք ավելի ուշ\". While technically correct, it lacks the nuance of urgency or helpfulness found in the English original. A more empathetic translation might be preferable.",
+          "suggestion": "Փորձեք կրկնակի փորձել ավելին կամ կապվեք վաճառքի բաժնին."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'contact the sales department' is translated as 'կապվեք վաճառքի բաժնին'. While accurate, it might sound overly formal. A less formal option could improve user experience.",
+          "suggestion": "կապվեք վաճառքի բաժնի հետ"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -147,19 +158,37 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'tariff plan' is best translated as 'plan taryfowy' or 'plan cenowy' in Polish, not just 'plan subskrypcji'. While 'plan subskrypcji' isn't *wrong*, it's a narrower interpretation and less accurate to the original meaning.",
+          "suggestion": "Nie udało się zaktualizować planu taryfowego/planu cenowego. Spróbuj ponownie później lub skontaktuj się z działem sprzedaży."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'tariff plan' is not accurately translated. 'Tarifário' is a less common and slightly awkward term in this context. 'Plano tarifário' is more natural in Portuguese.",
+          "suggestion": "Plano tarifário"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'contact the sales department' is not accurately translated. 'Entre em contato' is a general 'contact' and doesn't specify the sales department.",
+          "suggestion": "Falha ao atualizar plano tarifário. Tente novamente mais tarde ou entre em contato com o departamento de vendas."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -171,13 +200,30 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'tariff plan' is translated as 'тариф'. While 'тариф' can mean 'tariff', it loses the specificity of a 'tariff plan'. A more accurate translation would be 'план тарификации' or 'тарифный план'.",
+          "suggestion": "Не удалось обновить тарифный план. Попробуйте позже или свяжитесь с отделом продаж."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'අය ක්‍රමය යාවත්කාල කිරීමට අසමත් විය' is a bit too literal. 'අය ක්‍රමය' (aya kramaya) translates to 'payment system' which isn't quite what the English 'tariff plan' means. It should reflect the concept of a pricing structure or plan.",
+          "suggestion": "අයකට්ටිය යාවත්කාල කිරීමට අසමත් විය. (ayakattiya yavatkaalakarimaata asamaatha viya.) - This translates to 'Failed to update the pricing plan.'"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ක්‍රියාංශය' (kriyashanaya) while meaning 'department' sounds formal and bureaucratic. For a user-facing error message, a more approachable term might be better.",
+          "suggestion": "වෙළඳ දෙපාර්තමේන්තුව අමතන්න. (veladadeppaarthamenduwa amathan) - This translates to 'Contact the sales department' and is slightly more conversational."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -201,7 +247,18 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation uses \"Ažuriranje\" which translates to 'Updating' instead of 'Failed to update'. The original English clearly states a failure.",
+          "suggestion": "Nije uspelo ažuriranje tarifnog plana."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'odelenje' is likely a typo and should be 'odsek'. While 'odelenje' exists, in this context 'odsek' (department/section) is more appropriate.",
+          "suggestion": "Kontaktirajte odsek prodaje."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -219,7 +276,18 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'tariff plan' is not accurately translated. 'Bảng phí cho gói dịch vụ' is too literal and doesn't convey the intended meaning of a service plan or subscription.",
+          "suggestion": "Không thể cập nhật gói cước. Hãy thử lại sau hoặc liên hệ với bộ phận kinh doanh."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the phrasing 'bảng phí cho gói dịch vụ' is a bit clunky. Simplifying it improves readability.",
+          "suggestion": "See suggestion above for improved translation."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

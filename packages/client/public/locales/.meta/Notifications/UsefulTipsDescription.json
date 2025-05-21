@@ -3,7 +3,7 @@
   "content": "Get useful guides about {{productName}}",
   "content_en_sha1_hash": "04ac5330b45383f4fd3a8bf806312a34a2d970b3",
   "created_at": "2025-05-19T21:30:54.093Z",
-  "updated_at": "2025-05-20T09:42:27.899Z",
+  "updated_at": "2025-05-21T07:32:20.455Z",
   "comment": {
     "text": "\"This translation key is used to describe a notification section on a profile page, providing useful guides related to a specific product. It appears in a sub-component within the 'Notifications' section of a 'Profile' page.\"",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The verb 'Поучавайте' (Pou4aete) translates more accurately as 'Receive' or 'Learn' rather than 'Get'. 'Get' is a very broad term and doesn't convey the nuance of guided instruction.",
+          "suggestion": "Вземайте/Научете полезни напътствия за {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -69,7 +75,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"-sta\" at the end of {{productName}} is grammatically incorrect in this context. It indicates possession or origin, which isn't the intended meaning. The translation should reflect that the guides are *about* the product.",
+          "suggestion": "Saa hyödyllisiä oppaita {{productName}}:sta"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"մասին\" (about) after the product name isn't ideal. It makes the sentence sound like the guides are *about* the product, rather than *for* the product or concerning the product. A more natural translation would imply the guides are specifically for or related to the product.",
+          "suggestion": "Consider alternatives like \"համար\" (for), or a phrasing that directly indicates the guides are *related to* the product. For example: \"Ստացեք օգտակար ուղեցույցներ {{productName}}-ի հետ կապված\" (Get useful guides related to {{productName}})"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,7 +117,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation uses '에 대한' which can sound slightly formal. A more conversational alternative could be used.",
+          "suggestion": "{{productName}}에 도움이 되는 가이드 얻기"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -135,13 +159,30 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation uses 'Obtenha', which implies obtaining something actively. A more natural and welcoming phrasing for 'Get' in this context would be 'Receba' (receive) or 'Tenha acesso a' (have access to).",
+          "suggestion": "Receba guias úteis sobre o {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'instrucţiuni' (instructions) doesn't quite capture the meaning of 'guides'. 'Guides' suggests helpful tips and advice, not just step-by-step instructions. While not entirely wrong, it's not the best translation.",
+          "suggestion": "Obţineţi sfaturi utile despre {{productName}}"
+        },
+        {
+          "type": "grammar",
+          "description": "The verb form 'Obţineţi' (you obtain - formal plural) implies addressing a group, while the English implies a general offering. If the target audience is singular/informal, 'Obține' should be considered.",
+          "suggestion": "Obține sfaturi utile despre {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,13 +194,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation uses a space before the curly braces {{productName}}. While not strictly incorrect, this deviates from common formatting practices. It's generally best to omit the space.",
+          "suggestion": "{{productName}} ගැන ප්‍රයෝජනවත් මාර්ගෝපදේශ ලබා ගන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Získajte užitočných sprievodcov o {{productName}}' literally translates to 'Get useful guides about {{productName}}'. While understandable, it's slightly awkward. 'Užitočných' is in the genitive case which isn't ideal here. A more natural phrasing would imply 'guides *for* {{productName}}'.",
+          "suggestion": "Získajte užitočné sprievodce {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,13 +224,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Serbian translation uses the preposition \"о\" (o) which, while grammatically correct, can sound slightly awkward in this context. Using \"за\" (za) would make it sound more natural and flow better.",
+          "suggestion": "Добиј корисне водиче за {{productName}}-у"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The preposition 'o' is grammatically correct, but a more natural phrasing in Serbian might use 'za'.",
+          "suggestion": "Dobij korisne vodiče za {{productName}}-u"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

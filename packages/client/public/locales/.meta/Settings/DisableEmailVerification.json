@@ -3,7 +3,7 @@
   "content": "Disable email verification",
   "content_en_sha1_hash": "6752c83196d2f72faefb0d749546f8b3600209a5",
   "created_at": "2025-05-19T21:30:51.198Z",
-  "updated_at": "2025-05-20T09:45:21.395Z",
+  "updated_at": "2025-05-21T04:30:26.869Z",
   "comment": {
     "text": "This translation key is used to display a label for a checkbox that controls email verification settings. In the PortalSettings page, it will be used as a label in an Advanced Settings component. The content should convey that this setting disables email verification, providing clarity for users navigating the portal's settings.",
     "is_auto": true,
@@ -75,7 +75,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ota sähköpostivahvistus pois käytöstä' literally translates to 'Enable email verification out of use'. The English phrase 'Disable email verification' implies deactivation. A more accurate translation would convey that meaning.",
+          "suggestion": "Poista sähköpostivahvistus käytöstä"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -87,7 +93,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Անջատել մեյլի\" is not an accurate translation of \"Disable email verification.\" It translates to something like \"Disable email.\" It's missing the \"verification\" aspect.",
+          "suggestion": "Անջատել էլեկտրոնային փոստի հաստատում"
+        },
+        {
+          "type": "spelling",
+          "description": "While \"Անջատել\" and \"մեյլի\" are valid words, the use of 'մեյլի' might sound less formal or slightly awkward depending on the context. Using a more formal equivalent like \"էլեկտրոնային փոստի\" would be better.",
+          "suggestion": "Consider using \"էլեկտրոնային փոստի\" instead of \"մեյլի\" for a more formal tone."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -135,7 +152,18 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Desactive a verificação do endereço de correio eletrónico' is overly formal and literal. A more natural and common phrasing would be 'Desativar verificação de e-mail' or 'Desabilitar verificação de e-mail'.",
+          "suggestion": "Desativar verificação de e-mail"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'endereço de correio eletrónico' is lengthy. Shortening it to 'e-mail' improves readability and is standard practice.",
+          "suggestion": "e-mail"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -159,7 +187,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'තහවුරු' (tahanuuru) is a less common and slightly archaic way of saying 'verification'. A more common and modern term would improve clarity.",
+          "suggestion": "විද්‍යුත් තැපෑල නිවැරදි කිරීම අක්‍රිය කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,13 +211,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"емаил\" is a transliteration and not a standard Serbian word. While understood, it's not ideal.",
+          "suggestion": "Use the Serbian word \"е-маил\" instead of \"емаил\"."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Onemogući verifikaciju email adrese' is a bit too formal and verbose for a settings option. A more natural and concise translation would be preferred. 'Onemoguži potvrdu e-pošte' or 'Isključi verifikaciju e-pošte' are better alternatives.",
+          "suggestion": "Consider 'Onemoguži potvrdu e-pošte' or 'Isključi verifikaciju e-pošte'."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

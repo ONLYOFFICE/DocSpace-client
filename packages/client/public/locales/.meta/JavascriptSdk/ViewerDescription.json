@@ -3,7 +3,7 @@
   "content": "Embed a viewer to allow users to open a file for viewing from the corresponding room.",
   "content_en_sha1_hash": "a8616ccb3592bd915cdd0ade3cee2667a44bb152",
   "created_at": "2025-05-19T21:30:54.708Z",
-  "updated_at": "2025-05-20T09:41:17.423Z",
+  "updated_at": "2025-05-21T08:30:59.387Z",
   "comment": {
     "text": "Embed a viewer allows users to open a file for viewing from the corresponding room. This feature is used in the RoomSelector preset and appears as the viewer component.",
     "is_auto": true,
@@ -39,25 +39,59 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'İstifadəçilərə həmin otaqdan baxmaqla faylı açmağa icazə vermək üçün izləyici əlavə edin' is a bit literal and not the most natural phrasing in Azerbaijani. 'Embed a viewer to allow users to open a file for viewing from the corresponding room' implies integrating a viewer component. The current translation emphasizes allowing users to open a file *from* the viewer, which isn't the intended meaning.",
+          "suggestion": "Consider a phrasing like 'İstifadəçilərə müvafiq otaqdan faylı baxmaq üçün izləyici daxil edin' or 'Müvafiq otaqdan faylı baxmaq üçün izləyiciyi təqdim edin'."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'təqdim' (used in the suggestion) is used more commonly in some contexts. The word should be checked for best fit with overall tone.",
+          "suggestion": "Further review the word choice 'təqdim' for optimal suitability."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Вградете зрител, за да позволите на потребителите да отварят файл за преглед от съответната стая.' is a bit literal and doesn't flow naturally in Bulgarian. 'Embed a viewer' could be more naturally translated as something like 'Добавете визуализатор' or 'Вграден визуализатор'. 'Allow users to open a file for viewing' is also a little clunky.  A more fluent translation would consider restructuring the sentence.",
+          "suggestion": "Добавете визуализатор, който позволява на потребителите да отварят файлове за преглед от съответната стая."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Vložení prohlížeče\" translates more literally to \"Insertion of a viewer\" rather than \"Embed a viewer.\" It lacks the nuance of embedding something into a larger context.",
+          "suggestion": "Integrujte prohlížeč, který uživatelům umožní otevřít soubor pro prohlížení v příslušné místnosti."
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, the sentence structure could be improved for better flow and naturalness in Czech.",
+          "suggestion": "Umožněte uživatelům otevřít soubor pro prohlížení v příslušné místnosti pomocí prohlížeče."
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Betten Sie einen Viewer ein' (Embed a Viewer) is a very literal and slightly awkward translation. 'Einbetten' (embedding) is technically correct but doesn't flow naturally in this context. A more natural phrasing would be 'Integrieren Sie einen Viewer...' (Integrate a Viewer...) or 'Fügen Sie einen Viewer hinzu...' (Add a Viewer...).",
+          "suggestion": "Integrieren Sie einen Viewer, um Benutzern das Öffnen einer Datei zum Anzeigen im entsprechenden Raum zu ermöglichen."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -75,61 +109,151 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Upota esikatselu\" is not the best translation of \"Embed a viewer.\"  \"Upottaa\" generally refers to submerging something. A more accurate translation would convey the action of integrating or including the viewer.",
+          "suggestion": "Sisällytä tarkastelija"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"katseltavaksi vastaavasta huoneesta\" is a bit awkward and could be clearer. While literally correct, it's not the most natural way to express the intended meaning.",
+          "suggestion": "kyseisestä huoneesta"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"open a file for viewing\" is not accurately translated. \"Lecture seule\" implies read-only access but doesn't convey the 'viewing' aspect. A more accurate translation would focus on viewing or displaying.",
+          "suggestion": "Intégrez le lecteur pour permettre aux utilisateurs d'afficher un fichier à partir d'une salle."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"ֆայլ\" is a misspelling of \"ֆայլ\".",
+          "suggestion": "ֆայլ"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase \"համապատասխան սենյակից դիտելու համար\" is slightly awkward. It could be more naturally phrased.",
+          "suggestion": "համապատասխանող սենյակից դիտելու համար"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation conveys the general meaning, \"Տեղադրեք դիտող\" is quite literal and doesn't quite capture the nuance of \"Embed a viewer\". A more natural phrasing might be \"Համարձրեք դիտողական ծառայություն\" or something similar.",
+          "suggestion": "Համարձրեք դիտողական ծառայություն"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'Embed' as 'Incorpora' is technically correct but doesn't fully convey the meaning of embedding a viewer component. 'Integra' might be a more accurate and natural-sounding equivalent in this context.",
+          "suggestion": "Integra un visualizzatore per consentire agli utenti di aprire un file per visualizzarlo dalla stanza corrispondente."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ビューアを埋め込み、対応するルームからファイルを開いて閲覧できるようにします。\" while understandable, is a bit literal and could be more naturally expressed. The phrase \"開いて閲覧する\" (open and browse) is slightly redundant in Japanese. A more natural phrasing would emphasize the viewer's functionality.",
+          "suggestion": "ビューアを埋め込み、対応するルームからファイルを開き、閲覧できるようにします。"
+        },
+        {
+          "type": "spelling",
+          "description": "While not technically a misspelling, 'ルーム' (ruumu) is a direct transliteration of 'room' and while common, '部屋' (heya) is the more natural Japanese word for 'room' in this context. While 'ルーム' is understood, '部屋' provides a better flow and more native feel.",
+          "suggestion": "ビューアを埋め込み、対応する部屋からファイルを開き、閲覧できるようにします。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '뷰어를 임베드하세요' doesn't quite capture the nuance of 'Embed a viewer'. It's a bit too direct and could be interpreted as simply 'embed a viewer' without specifying the purpose. A more natural translation would include the functionality.",
+          "suggestion": "사용자가 해당 방에서 파일을 열어 볼 수 있도록 뷰어 기능을 포함시켜 삽입하세요."
+        },
+        {
+          "type": "formatting",
+          "description": "The Korean sentence is a command, and while grammatically correct, adding a softening particle like '부탁드립니다' (please) would make it more polite, especially considering the context of instructions.",
+          "suggestion": "사용자가 해당 방에서 파일을 열어 볼 수 있도록 뷰어 기능을 포함시켜 삽입해 주시면 됩니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ຝັງຕົວເບິ່ງ\" (fang tua bing) while technically meaning 'embed viewer', doesn't quite convey the intended meaning of 'Embed a viewer'. It's a bit too literal and awkward in Lao. A more natural phrasing would be something closer to 'ເພີ່ມຕົວເບິ່ງ' (pheam tua bing) meaning 'add a viewer' or 'ຕິດຕົວເບິ່ງ' (tit tua bing) meaning 'attach a viewer'.",
+          "suggestion": "ເພີ່ມຕົວເບິ່ງເພື່ອໃຫ້ຜູ້ໃຊ້ສາມາດເປີດໄຟລ໌ສໍາລັບການເບິ່ງຈາກຫ້ອງທີ່ສອດຄ້ອງກັນ."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Iegult skatītāju, lai ļautu lietotājiem atvērt failu skatīšanai no attiecīgās telpas\" is somewhat awkward. A more natural phrasing would be 'Iegult skatītāju, lai lietotāji varētu atvērt failu skatīšanai no attiecīgās telpas.' The use of 'ļautu' is grammatically correct, but 'varētu' is more common and flows better.",
+          "suggestion": "Iegult skatītāju, lai lietotāji varētu atvērt failu skatīšanai no attiecīgās telpas."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Sluit een viewer in\" could be misinterpreted. 'Sluit in' can imply forcing or including something against its nature. A more natural phrasing would convey the action of integrating or embedding.",
+          "suggestion": "Integreer een viewer"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'de bijbehorende kamer' is grammatically correct but sounds a bit formal. A more conversational and clear phrasing could improve the overall flow.",
+          "suggestion": "de betreffende kamer"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Osadź przeglądarkę, aby umożliwić użytkownikom otwarcie pliku do przeglądania z odpowiedniego pokoju.\" is a bit literal and could be improved for clarity and natural flow in Polish. The word 'przeglądarkę' (browser) might be confusing as 'viewer' doesn't explicitly mean a browser. Also, 'otwarcie pliku do przeglądania' is a bit verbose.",
+          "suggestion": "Osadź widok, aby umożliwić użytkownikom otwarcie i wyświetlanie pliku z odpowiedniego pokoju."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -147,7 +271,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Incorporează vizualizator' is not the most natural way to express 'Embed a viewer'. A more common and fluent phrasing would be 'Adaugă un vizualizator' or 'Integrează un vizualizator'. 'Incorporează' sounds a bit formal and technical.",
+          "suggestion": "Adaugă un vizualizator"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'într-o anumită sală' for 'from the corresponding room' is a little stiff.  A more natural translation would use a phrasing indicating context, not a specific room.",
+          "suggestion": "din camera respectivă"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -159,13 +294,40 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'නරඹනයක් කාවද්දන්න' doesn't quite capture the meaning of 'embed a viewer'. It translates more literally to 'present a viewer' or 'show a viewer'. The intended meaning is to integrate the viewer.",
+          "suggestion": "නිශ්චිත කාමරයක ගොනුවක් බැලීම සඳහා විවෘත කරන ආකාරයට දෘශ්‍යකරණයක‍ට අංගයක් කරන්න."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'නිශ්චිත කාමරයක ගොනුවක් බැලීම සඳහා විවෘත කරන ආකාරයට' is somewhat convoluted.  While grammatically correct, it can be improved for clarity.",
+          "suggestion": "නිශ්චිත කාමරයක ගොනුවක් බැලීම සඳහා විවෘත කිරීමට හැකි වන පරිදි..."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence could benefit from a more natural flow, potentially by breaking it into two shorter sentences.",
+          "suggestion": "නිශ්චිත කාමරයක ගොනුවක් බැලීම සඳහා විවෘත කිරීමට හැකි වන පරිදි දෘශ්‍යකරණයක‍ට අංගයක් කරන්න. එය පරිශීලකයින්ට පහසුවෙන්ම භාවිතා කිරීමට හැකිවනු ඇත."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Vložte prehliadač' is too literal and doesn't fully convey the meaning of 'Embed a viewer'. A more natural translation would be something like 'Integrujte prehliadač' or 'Pridajte prehliadač'.",
+          "suggestion": "Integrujte prehliadač, ktorý používateľom umožní otvoriť súbor na prehliadanie z príslušnej miestnosti."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'na prehliadanie' is slightly awkward.  A more natural phrasing would be 'na zobrazenie'.",
+          "suggestion": "Integrujte prehliadač, ktorý používateľom umožní otvoriť súbor na zobrazenie z príslušnej miestnosti."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -177,19 +339,47 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'уградите' (ugradite) translates to 'install' or 'integrate', not 'embed'. 'Уградите' implies a more permanent integration than intended by 'embed'.",
+          "suggestion": "Уградите прегледач да бисте омогуц́или корисницима да отворе датотеку за гледање из одговарајуц́е собе. ->  Укључите прегледач да бисте омогуц́или корисницима да отворе датотеку за гледање из одговарајуц́е собе."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ugradite pregledač da biste omogućili korisnicima da otvore datoteku za gledanje iz odgovarajuće sobe' is a bit literal and doesn't flow naturally in Serbian. 'Ugradite' (Embed) sounds overly technical in this context.",
+          "suggestion": "Integrišite pregledač da bi korisnici mogli da otvore datoteku za pregled iz odgovarajuće sobe."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'gledanje' is used for 'viewing'. While technically correct, 'pregled' is a more common and natural term for file viewing in this context.",
+          "suggestion": "Replace 'gledanje' with 'pregled'."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Kullanıcıların ilgili odadan görüntülemek üzere bir dosya açmasına izin vermek için bir görüntüleyici yerleştirin' is a literal translation that doesn't flow naturally in Turkish. The phrasing 'görüntülemek üzere bir dosya açmasına izin vermek' is awkward. A more natural phrasing would focus on the viewer enabling file viewing.",
+          "suggestion": "Kullanıcıların ilgili odadan bir dosyayı görüntüleyebilmesi için bir görüntüleyici yerleştirin."
+        },
+        {
+          "type": "grammatical",
+          "description": "While grammatically correct, the use of 'bir' before 'görüntüleyici' could be improved depending on the context.  It's slightly vague. It might be better to use a more specific term if possible. It's not *wrong*, but could be polished.",
+          "suggestion": "Consider removing 'bir' if the context implies a specific viewer is being referenced, or using a more descriptive term instead of 'bir görüntüleyici'."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -201,13 +391,30 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Nhúng trình xem để cho phép người dùng mở tập tin để xem từ phòng tương ứng' is a literal translation and doesn't flow naturally in Vietnamese. The phrase 'để xem' is repeated unnecessarily.",
+          "suggestion": "Tích hợp trình xem để người dùng có thể mở và xem tệp từ phòng tương ứng."
+        },
+        {
+          "type": "formatting",
+          "description": "The repeated 'để' makes the sentence feel clunky.",
+          "suggestion": "Eliminate repetitive phrasing to improve readability."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"嵌入查看器，让用户能够从对应的房间打开文件并进行查看\" is somewhat verbose and doesn't fully capture the succinctness of the English original. The phrase '并进行查看' is redundant.",
+          "suggestion": "嵌入查看器，允许用户从对应的房间打开文件。"
+        }
+      ],
       "approved_at": null
     }
   }

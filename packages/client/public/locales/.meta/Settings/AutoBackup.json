@@ -3,7 +3,7 @@
   "content": "Automatic backup",
   "content_en_sha1_hash": "63c9d2eb5520b137dffca1ebb5266759080b1352",
   "created_at": "2025-05-19T21:30:50.615Z",
-  "updated_at": "2025-05-20T09:45:44.244Z",
+  "updated_at": "2025-05-21T05:07:52.545Z",
   "comment": {
     "text": "This translation key \"Automatic backup\" is used to display a label in the data management settings page, likely as part of a toggle button or dropdown menu, allowing users to enable or disable automatic backups. The exact UI component where this text appears is not specified, but it's related to the \"AutoBackup\" feature.",
     "is_auto": true,
@@ -135,7 +135,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ອັດຕະໂນມັດ ສໍາຮອງຂໍ້ມູນ' is a literal translation of 'Automatic backup', a more natural and commonly used Lao term for 'Automatic backup' might be 'ການสำรองຂໍ້ມູນອັດຕະໂນມັດ' or 'ການອັດຕະໂນມັດສໍາຮອງຂໍ້ມູນ'. The current phrasing sounds somewhat awkward.",
+          "suggestion": "ການสำรองຂໍ້ມູນອັດຕະໂນມັດ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -201,13 +207,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Аутоматка резервна копија\" is not the most natural or common way to translate \"Automatic backup\". \"Аутоматска резервна копија\" is more accurate and aligns better with standard terminology.",
+          "suggestion": "Аутоматска резервна копија"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Automatka rezervna kopija' is not the most natural or accurate translation of 'Automatic backup'. 'Automatka' implies something small or automated, which isn't the intended meaning. While technically understandable, it's not idiomatic Serbian.",
+          "suggestion": "Automatska rezervna kopija"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

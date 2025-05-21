@@ -3,7 +3,7 @@
   "content": "License limit Admins:",
   "content_en_sha1_hash": "1c1e914844eff8d3f3c5049d1d0c96c41a4de0ab",
   "created_at": "2025-05-19T21:30:51.790Z",
-  "updated_at": "2025-05-20T09:45:00.776Z",
+  "updated_at": "2025-05-21T03:59:08.460Z",
   "comment": {
     "text": "The \"LicenseLimitCounter\" translation key is used to display the remaining license quota for admins. It appears in a UI component showing user information and provides context about the available licenses.",
     "is_auto": true,
@@ -27,163 +27,350 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'الحد الأقصى للمسؤولين المسموح بهم:' is a literal translation but doesn't quite capture the nuance of 'License limit Admins:'. It sounds a bit awkward in Arabic. A more natural translation would focus on the limit *for* administrators, not the maximum number *allowed*.",
+          "suggestion": "الحد الأقصى للمسؤولين: (Al-Had al-Aqsa lil-Mas'uleen)"
+        },
+        {
+          "type": "formatting",
+          "description": "The colon (:) at the end of the Arabic translation feels a bit formal and potentially unnecessary in a settings menu.  Consider removing it for a cleaner user interface.",
+          "suggestion": "الحد الأقصى للمسؤولين"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Lisenziya limiti Administratorlar:' is a literal translation but lacks the nuance of the English 'License limit Admins:'. A more natural translation would be something like 'İdarəçilər üçün lisenziya limiti:' or 'Lisenziya limiti (İdarəçilər):'. The current translation is grammatically correct but stylistically awkward.",
+          "suggestion": "İdarəçilər üçün lisenziya limiti:"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ограничение на лиценза Администратори:' is a literal translation and doesn't convey the intended meaning as naturally in Bulgarian. It implies a limitation *of* the administrators themselves, rather than a limit *for* administrators.",
+          "suggestion": "Consider a more natural phrasing like 'Лимити за лицензи за администратори:' or 'Ограничение на броя лицензи за администратори:.'"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Omezení licence Administrátoři:' is not the most natural or accurate rendering of 'License limit Admins:'.  'Administrátoři' literally translates to 'Administrators', but the original phrase implies a limit *for* administrators. A more appropriate translation would consider the context and indicate this limitation.",
+          "suggestion": "Omezení licencí pro administrátory:"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Lizenzbeschränkung Administratoren:\" is a literal translation and doesn't convey the intended meaning. \"Administratoren\" directly translates to 'Administrators', but the context implies a count or label for administrators. A more accurate translation would consider the purpose of this key within the settings, which likely refers to the number of administrators allowed under the license.",
+          "suggestion": "Consider alternative translations like \"Anzahl der Administratoren (Lizenzbeschränkung):\" or \"Lizenzbeschränkung für Administratoren:\" depending on the desired clarity and the overall setting design."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Όριο άδειας χρήσης Διαχειριστές:' is too literal and doesn't flow naturally in Greek. It translates to 'License limit Administrators:' which isn't the common phrasing. A better translation would convey the meaning of 'License limit for Administrators' or similar.",
+          "suggestion": "Περιορισμός αδειών για Διαχειριστές:"
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Límite de licencia para Administradores:\" is slightly awkward. While technically correct, it doesn't flow naturally in Spanish. 'Para' implies *for* the administrators, rather than a limit *of* licenses for administrators.",
+          "suggestion": "Límite de licencias para administradores:"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Lisenssiraja Järjestelmänvalvojat:' is a literal translation, but a more natural phrasing in Finnish would be 'Lisenssirajoitus järjestelmänvalvojille:' or 'Lisenssimäärä järjestelmänvalvojille:'. 'Lisenssiraja' can imply a hard limit, while 'Lisenssimäärä' is more neutral and 'järjestelmänvalvojille' indicates the target group rather than being a direct translation of 'Admins'.",
+          "suggestion": "Lisenssimäärä järjestelmänvalvojille:"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Limite autorisée des Administrateurs' doesn't accurately convey the meaning of 'License limit Admins:'. 'Limite autorisée' translates to 'authorized limit,' while the English implies a counter for the number of administrators allowed. A better translation would focus on the 'limit' aspect in relation to administrators.",
+          "suggestion": "Limite du nombre d'administrateurs"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Լիցենզիայի սահմանաչափ ադմիններ.' is a literal translation but doesn't quite convey the intended meaning. 'Admins' is a role or group, not simply 'administrators'. A more accurate translation would imply a limit applied *to* admins.",
+          "suggestion": "Possible suggestions include: 'Ադմինիստրատորների լիցենզիայի սահման': 'License limit for admins' or 'Ադմինիստրատորների լիցենզիայի թիվ': 'Number of admin licenses'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Limite di licenza Amministratori:\" is overly literal and doesn't flow naturally in Italian. A more idiomatic translation would be \"Limite licenze per amministratori:\" or \"Numero massimo di licenze per amministratori:\". The addition of 'di' makes the phrasing clunky.",
+          "suggestion": "Limite licenze per amministratori:"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ライセンス制限 管理者：' is too literal and doesn't flow naturally in Japanese. A more natural translation would convey that it's about the administrators who manage or are affected by the license limit.",
+          "suggestion": "ライセンス制限の対象管理者："
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '라이센스 제한 관리자:' is a literal translation of 'License limit Admins:' and lacks nuance. A more natural and accurate translation would convey the concept of the limit applying to administrators, rather than administrators being the limit themselves. It sounds awkward in Korean.",
+          "suggestion": "라이센스 제한은 관리자에게 적용됩니다:"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ຈຳກັດຜູ້ເບິ່ງແຍງລະບົບ:\" doesn't accurately convey the meaning of \"License limit Admins:\". \"ຈຳກັດ\" (jam-gat) means 'limit' or 'restrict', which is not the most appropriate term here. It implies a restriction *on* admins rather than referring to the number of admins permitted. A more accurate translation would focus on the concept of a 'limit' on the number of administrators.",
+          "suggestion": "Consider alternatives like \"ຈຳນວນຜູ້ເບິ່ງແຍງລະບົບທີ່ອະນຸຍາດ:\" (jam-nuan phu-bing-yaeng ra-bop thi ar-nu-yat: - 'Number of authorized system administrators:') or \"ສູງສຸດຜູ້ເບິ່ງແຍງລະບົບ:\" (sung-sut phu-bing-yaeng ra-bop: - 'Maximum system administrators:')"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Licences ierobežojums Administratori:' is not an accurate translation of 'License limit Admins:'.  'License limit' should be translated to something like 'Licenču limits'. 'Administratori' is technically correct but feels slightly unnatural in this context. A better phrasing would capture the meaning of 'License limit for Admins'.",
+          "suggestion": "Licenču limits Administratoriem:"
+        },
+        {
+          "type": "formatting",
+          "description": "The colon after 'ierobežojums' and 'limits' may be unnecessary and should be reviewed for consistency with other similar settings labels.",
+          "suggestion": "Consider removing the colon: 'Licenču limits Administratoriem'"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Licentielimiet' is misspelled. It should be 'Licentie Limiet'.",
+          "suggestion": "Licentie Limiet"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Limit licencji Administratorzy:' is not a natural or accurate translation of 'License limit Admins:'. The phrasing is awkward in Polish. 'Limit licencji' can be understood, but 'Administratorzy' directly appended feels unnatural.  A better translation would convey the concept of a limit applied to administrators' licenses.",
+          "suggestion": "Consider alternatives like 'Limit licencji dla administratorów:' or 'Ograniczenie licencji dla administratorów:'"
+        },
+        {
+          "type": "formatting",
+          "description": "The colon is placed after 'Administratorzy' which makes the sentence structure less fluent in Polish. In Polish, colons are often used differently than in English.",
+          "suggestion": "Move the colon before 'Administratorzy', like 'Limit licencji: Administratorzy'."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Limite de licença Administradores:' is not the best rendering of 'License limit Admins:'. 'Administradores' is a valid word but doesn't quite convey the intended meaning in this context. A more accurate translation would emphasize the group being limited. The ideal translation should reflect that it's a count of administrators.",
+          "suggestion": "Limite de licenças para administradores:"
+        },
+        {
+          "type": "formatting",
+          "description": "The colon after 'Administradores:' feels abrupt and might be better replaced with a more fluid construction.",
+          "suggestion": "Limite de licenças para administradores"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Limite de licença Administradores:' is not a natural or accurate rendering of 'License limit Admins:'. The word 'Administradores' is a direct translation of 'Admins' but sounds awkward in this context. A more natural translation would be something like 'Limite de licenças para administradores:' or 'Número máximo de administradores com licença:'.",
+          "suggestion": "Limite de licenças para administradores:"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Limita impusă de licență administratori:\" is not the most natural or accurate translation of \"License limit Admins:\". 'Limită impusă de licență' is a bit clunky. A more fluent translation would prioritize conveying the meaning of a limit applied to administrators regarding licenses.",
+          "suggestion": "Limita de licențe pentru administratori:"
+        },
+        {
+          "type": "formatting",
+          "description": "The colon at the end of the Romanian translation should be checked for consistency with the English original and the overall application's style guide. It might be more appropriate to omit it, or use a slightly different formatting.",
+          "suggestion": "Consider removing the colon or checking the application's style guide for colon usage."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ограничение лицензии Администраторы:\" is not a natural or accurate translation of \"License limit Admins:\". It directly translates 'License Limit' but uses a grammatically awkward construction for 'Admins'.",
+          "suggestion": "The phrase should be translated as \"Лимит лицензий для администраторов:\" or \"Предельное число лицензий для администраторов:\""
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'බලපත්‍රයේ සීමාව පරිපාලකයින්:' is not an accurate translation of 'License limit Admins:'. 'බලපත්‍රයේ සීමාව' translates to 'License Limit', and 'පරිපාලකයින්' means 'Administrators'. While understandable, it lacks the directness of the English phrase. A more accurate translation would be something like 'අනුමැතිපත්ර සීමාව: පරිපාලකයින්' or 'අනුමැතිපත්ර ප්‍රමාණය: පරිපාලකයින්'.",
+          "suggestion": "අනුමැතිපත්ර ප්‍රමාණය: පරිපාලකයින්"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Obmedzenie licencie Administrátori\" is not the most natural or accurate translation of \"License limit Admins:\". \"Licencia\" (license - singular) should be used instead of \"licencie\". Also, the word order is slightly awkward. A more natural translation would include the definite article and rephrase it.",
+          "suggestion": "Licenčný limit administrátorov:"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Omejitev licence Skrbniki:' is a literal translation and could be improved for natural flow in Slovenian. 'Skrbniki' directly translates to 'Administrators,' but in this context, a more natural phrasing would be more appropriate.",
+          "suggestion": "Omejitev licence za skrbnike:"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ограничење лиценце за Админе' doesn't accurately convey the meaning of 'License limit Admins:'. 'Ограничење лиценце' means 'License Limit', but 'за Админе' which translates to 'for Admins' is awkward and doesn't reflect the possessive implied in the English.",
+          "suggestion": "Ограничење лиценце за администраторе"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ograničenje licence za Admine' is not the most natural or accurate translation of 'License limit Admins:'. 'Admins' should likely be translated to reflect its role in the context of license limits, rather than just a direct transliteration. A more natural phrasing might include 'za administratore' or 'za administratori'.",
+          "suggestion": "Ograničenje licence za administratore"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Lisans sınırı Yöneticiler:' is not an accurate translation of \"License limit Admins:\". It literally translates to \"License limit Managers:\". The intended meaning likely refers to the administrators who manage the license limit.",
+          "suggestion": "Lisans limiti yöneticileri:"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -195,7 +382,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Giới hạn bản quyền Quản trị viên:\" is a literal translation and doesn't quite capture the intended meaning of \"License limit Admins:\" in context. It would be more natural to convey the idea of a limit imposed on administrators related to licenses.  A better translation would reflect this.",
+          "suggestion": "Hạn mức bản quyền dành cho Quản trị viên:"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

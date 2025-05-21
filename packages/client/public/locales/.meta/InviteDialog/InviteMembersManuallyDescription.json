@@ -3,7 +3,7 @@
   "content": "Invite new members to {{productName}} personally via email",
   "content_en_sha1_hash": "ef1f3846a0dd7e2a42b3803beac9dd6d39eb70c9",
   "created_at": "2025-05-19T21:30:54.724Z",
-  "updated_at": "2025-05-20T09:41:15.955Z",
+  "updated_at": "2025-05-21T09:39:28.871Z",
   "comment": {
     "text": "This translation key is used to display a message inviting users to manually invite new members to the product via email. It appears in the UI as part of an input field, likely on a panel or dialog where users can manually enter room IDs.",
     "is_auto": true,
@@ -27,13 +27,30 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'قم بدعوة أعضاء جدد إلى {{productName}} شخصيًا عبر البريد الإلكتروني' is a literal translation and can be improved for natural flow in Arabic. A more natural phrasing would emphasize the action of inviting rather than simply stating the act of calling.",
+          "suggestion": "أرسل دعوات شخصية لأعضاء جدد إلى {{productName}} عبر البريد الإلكتروني"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"E-poçt vasitəsilə {{productName}} məhsuluna yeni üzvləri şəxsən dəvət edin \" is not the most natural phrasing. 'Məhsuluna' (to the product) doesn't quite fit the context. A more natural phrasing would involve directly inviting them to the service/platform, not to the product itself.",
+          "suggestion": "E-poçt vasitəsilə {{productName}} xidmətinə/platformasına yeni üzvləri şəxsən dəvət edin"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'məhsuluna' implies possessiveness that is not present in the English. A more general term for 'service' or 'platform' would be more appropriate.",
+          "suggestion": "Consider replacing 'məhsuluna' with 'xidmətinə' or 'platformasına' depending on the precise nature of {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -69,7 +86,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The colon (:) in '{{productName}} :een' is unnecessary and breaks the natural flow of the sentence in Finnish. It seems to be an artifact of directly translating 'to {{productName}}'.",
+          "suggestion": "Kutsu uusia jäseniä {{productName}} henkilökohtaisesti sähköpostilla"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +104,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Անձամբ էլ․փոստի միջոցով հրավիրեք նոր անդամների {{productName}}' is a bit awkward. The phrase 'անձամբ էլ' sounds unnatural and doesn't directly translate 'personally'.",
+          "suggestion": "Հրավիրեք նոր անդամների {{productName}} անձեռքով էլ․փոստի միջոցով։ or Հրավիրեք նոր անդամների {{productName}} անձամբ էլ․փոստի միջոցով։"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +122,18 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '新しいメンバーを個人的に招待するには、{{productName}} からメールを送信してください' is a bit clunky and doesn't directly convey the meaning of 'Invite new members to {{productName}} personally via email'. It's more like 'To invite new members personally, send an email from {{productName}}'. A more accurate and natural translation would be something like '{{productName}} からメールで新しいメンバーを直接招待できます' (You can directly invite new members via email from {{productName}}).",
+          "suggestion": "{{productName}} からメールで新しいメンバーを直接招待できます"
+        },
+        {
+          "type": "formatting",
+          "description": "The original English uses '{{productName}}'.  While the Japanese translation also uses the placeholder, it's important to ensure consistency and proper implementation in the final product. The suggested correction preserves this.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -153,7 +193,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ඊමේල්' (email) is spelled correctly. However, it's a transliteration and might benefit from a more localized equivalent if one exists and is commonly used in this context.  However, in this context, transliteration is acceptable.",
+          "suggestion": null
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure is a bit direct. While grammatically correct, it could be softened for a more natural feel in Sinhala. Consider adding a particle or rephrasing.",
+          "suggestion": "ඊමේල් ඔස්සේ {{productName}} වෙත නව සාමාජිකයන් පුද්ගලිකව ආරාධනා කිරීම."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -165,19 +216,37 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Po e-mailu osebno povabite nove člane v {{productName}}' is slightly awkward. 'Osebno' (personally) feels misplaced in this sentence structure. A more natural flow would be to emphasize the method of invitation first.",
+          "suggestion": "Po e-mailu povabite nove člane osebno v {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Позовите нове чланове у {{productName}} лично путем е-поште' is technically correct but sounds a bit clunky in Serbian. A more natural phrasing would be 'Лично позовите нове чланове у {{productName}} путем е-поште' or 'Позовите нове чланове у {{productName}} лично преко е-поште'.",
+          "suggestion": "Лично позовите нове чланове у {{productName}} путем е-поште"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'personally' is not accurately conveyed by 'lično' in this context. 'Lično' implies in person, while 'personally' refers to directly, through a specific action (sending an email).",
+          "suggestion": "Pozovite nove članove u {{productName}} direktno putem e-pošte"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

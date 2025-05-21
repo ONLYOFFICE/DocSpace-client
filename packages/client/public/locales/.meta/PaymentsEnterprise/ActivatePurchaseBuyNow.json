@@ -3,7 +3,7 @@
   "content": "Buy now",
   "content_en_sha1_hash": "c38860a3ba58e9263dba3ac926101f8b2358d4c9",
   "created_at": "2025-05-19T21:30:53.578Z",
-  "updated_at": "2025-05-20T09:43:28.439Z",
+  "updated_at": "2025-05-21T06:23:54.862Z",
   "comment": {
     "text": "This translation key is used to display the text \"Buy now\" on a button component, typically found in payment or checkout flows. It is part of a UI element that prompts users to initiate a purchase. Translators should consider the context of payments and transactions when rendering this translation.",
     "is_auto": true,
@@ -93,7 +93,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"すぐに購入\" (sugu ni kōnyū) is a possible translation of \"Buy now,\" it's quite literal and might sound slightly unnatural in certain contexts. A more common and natural translation, depending on the overall tone and UI, would be something like \"今すぐ購入\" (ima sugu kōnyū) or simply \"購入\" (kōnyū).",
+          "suggestion": "Consider \"今すぐ購入\" (ima sugu kōnyū) or \"購入\" (kōnyū) for a more natural feel."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -105,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ຊື້​ດຽວ​ນີ້\" while understandable, is a more literal translation of 'now'. 'Buy now' typically conveys immediacy and is better translated as something like 'ຊື້​ທັນທີ' which implies immediate purchase.",
+          "suggestion": "ຊື້​ທັນທີ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Cumpărare acum' is technically correct, it's not the most natural or commonly used translation for 'Buy now' in Romanian. It sounds a bit literal.",
+          "suggestion": "Cumpără acum"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'මිලදී ගන්න' is a general phrase for 'buy' or 'purchase'. While technically correct, 'Buy now' implies immediate action and a sense of urgency. A more accurate translation capturing this nuance might be something like 'ඔබේ දැන් මිලදී ගන්න' (Obei daen miladi ganna) or 'හමාර දැන් මිලදී ගන්න' (Hamara daen miladi ganna).",
+          "suggestion": "Consider 'ඔබේ දැන් මිලදී ගන්න' or 'හමාර දැන් මිලදී ගන්න' to better convey the 'Buy now' urgency."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

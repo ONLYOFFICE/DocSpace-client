@@ -3,7 +3,7 @@
   "content": "Create document",
   "content_en_sha1_hash": "fc51cb7ddc24a62bd43599b45c07fa0ba5a16d12",
   "created_at": "2025-05-19T21:30:55.034Z",
-  "updated_at": "2025-05-20T09:40:37.906Z",
+  "updated_at": "2025-05-21T10:35:10.739Z",
   "comment": {
     "text": "This translation key is used to display the label \"Create document\" in a UI component, specifically a hotkeys panel. It appears as part of a row of buttons, indicating an action that can be triggered by pressing a specific key combination (Shift + d).",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sənəd yarat' is a literal translation of 'Create document' but lacks the implied action. A more natural translation would be 'Yeni sənəd yarat' (Create new document) or 'Sənəd düzəlt' (Create/Prepare document).",
+          "suggestion": "Yeni sənəd yarat"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -87,7 +93,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Creare documento di testo\" includes \"di testo\" (of text), which is not present in the English source. \"Create document\" generally refers to creating a blank document, not specifically a text document. The added context is unnecessary and changes the meaning.",
+          "suggestion": "Creare documento"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {

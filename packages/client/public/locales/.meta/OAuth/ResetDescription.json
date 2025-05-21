@@ -3,7 +3,7 @@
   "content": "If you reset client secret, all active consents and authorizations will be revoked. To apply the next consent, you need to use a new client secret. Note that all users will again be required to complete the consent screen.",
   "content_en_sha1_hash": "14943bd94638faa9077e66e7cad906bda2038e06",
   "created_at": "2025-05-19T21:30:53.999Z",
-  "updated_at": "2025-05-20T09:42:39.666Z",
+  "updated_at": "2025-05-21T07:02:39.311Z",
   "comment": {
     "text": "When resetting a client secret, all active consents and authorizations will be revoked. This message informs users that applying a new consent requires re-completion of the consent screen. It appears in a modal dialog as part of a reset button's context, indicating the consequences of resetting a client secret.",
     "is_auto": true,
@@ -27,25 +27,59 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"all active consents and authorizations\" is not perfectly translated. While \"الموافقات والتفويضات النشطة\" is understandable, a more accurate and natural translation would consider the context of OAuth and user permissions. The nuance of 'authorizations' might be better conveyed with a more specific term related to access permissions.",
+          "suggestion": "Consider using a phrasing like \"جميع الصلاحيات والموافقات النشطة\" or consult with a technical expert for a more precise translation of 'authorizations' in the context of OAuth."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the use of a period after \"العميل\" and before \"فسيتم\" feels slightly abrupt. A comma or a more natural flow could improve readability.",
+          "suggestion": "Consider replacing the period with a comma or rephrasing to improve flow, e.g., \"إذا قمت بإعادة تعيين السر السري للعميل،، فسيتم إلغاء...\" or \"إذا قمت بإعادة تعيين السر السري للعميل، يتم إلغاء...\""
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'consent' is translated as 'təsdiqi'. While understandable, 'icazə' is more accurately translates 'consent' in this context, as it directly relates to permissions. 'Təsdiq' implies confirmation or approval, which isn't the precise meaning here.",
+          "suggestion": "Müştəri sirrini sıfırlasanız, bütün aktiv icazə və səlahiyyətlər ləğv edilir. Növbəti icazəni tətbiq etmək üçün yeni müştəri sirrini istifadə etməlisiniz. Qeyd edək ki, bütün istifadəçilər razılıq ekranını yenidən tamamlamalı olacaqlar."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'To apply the next consent' is translated as 'Növbəti təsdiqi tətbiq etmək üçün'. 'Tətbiq etmək' is technically correct, but using 'qəbul etmək' (to accept) or 'istifadə etmək' (to use) might flow better in Azerbaijani and more accurately reflects the intent.",
+          "suggestion": "Müştəri sirrini sıfırlasanız, bütün aktiv icazə və səlahiyyətlər ləğv edilir. Növbəti icazəni qəbul etmək/istifadə etmək üçün yeni müştəri sirrini istifadə etməlisiniz. Qeyd edək ki, bütün istifadəçilər razılıq ekranını yenidən tamamlamalı olacaqlar."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'оторизация' is a less common and potentially incorrect spelling. The standard spelling is 'авторизация'.",
+          "suggestion": "авторизация"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'client secret' is translated as 'důvěrný klientský klíč'. While technically correct, 'klientské tajemství' is a more common and natural translation within a technical Czech context.",
+          "suggestion": "Replace 'důvěrný klientský klíč' with 'klientské tajemství'."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -69,7 +103,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'uuttaa' is a misspelling of 'uutta'.",
+          "suggestion": "uutta"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,13 +121,30 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'reset' is translated as 'վերականգնել' which means 'restore' or 'recover'. 'Reset' in the context of a client secret implies setting it to a new value, not recovering an old one. It is less accurate than a translation more aligned with 'change' or 'set'.",
+          "suggestion": "Consider using a translation like 'եթե փոխարինել հաճախորդի գաղտնի բանալին' (if you replace the client secret) or 'եթե սահմանել հաճախորդի նոր գաղտնի բանալին' (if you set a new client secret)."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Հաջորդ համաձայնությունը կիրառելու համար' is a bit wordy and could be simplified. While grammatically correct, it’s not the most natural flow.",
+          "suggestion": "Consider 'Հաջորդ համաձայնության համար' (For the next consent) or 'Հաջորդ համաձայնությունը ստանալու համար' (To receive the next consent)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'Si noti' is a bit formal and unnatural in this context. A more conversational and natural phrasing would be better.",
+          "suggestion": "Nota che"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -105,31 +162,86 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The term 'ຄວາມລັບຂອງຜູ້ໃຊ້' is repeated and can be simplified for clarity. While technically correct, it's a bit clunky.",
+          "suggestion": "Consider replacing the second 'ຄວາມລັບຂອງຜູ້ໃຊ້' with just 'ຄວາມລັບ' or 'client secret' again to avoid repetition."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'ການຕົກລົງອີງໃສ່ໜ້າຈໍອີ້ນຍິນໃຫມ່ອີ້ນ' is a bit awkward. It feels like a double use of 'ອີ້ນ'.",
+          "suggestion": "Consider revising to something like 'ການຕົກລົງອີງໃສ່ໜ້າຈໍຕົກລົງໃໝ່' or 'ຕ້ອງເຮັດການຕົກລົງອີງຕາມໜ້າຈໍຕົກລົງໃໝ່'."
+        },
+        {
+          "type": "formatting",
+          "description": "Consistency in terminology. Using both 'ຄວາມລັບຂອງຜູ້ໃຊ້' and 'client secret' could be confusing for some users. Ideally, the Lao term is used consistently or the English term is introduced first with Lao translation in parentheses.",
+          "suggestion": "Choose either consistently using 'ຄວາມລັບຂອງຜູ້ໃຊ້' or 'client secret' throughout the text. If using 'client secret', consider introducing it the first time with (ຄວາມລັບຂອງຜູ້ໃຊ້)."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence \"Lai pieteiktos nākamajai piekrišanai, jāizmanto jauns klienta noslēpums\" is slightly awkward. A more natural phrasing would be 'Lai saņemtu/izmantotu nākamo piekrišanu...'",
+          "suggestion": "Lai saņemtu/izmantotu nākamo piekrišanu, jāizmanto jauns klienta noslēpums."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'autorizācija' is a direct translation of 'authorization' but in Latvian it's less commonly used than 'apstiprinājums'.",
+          "suggestion": "Lai pieteiktos nākamajai piekrišanai, jāizmanto jauns klienta noslēpums. Ņem vērā, ka visiem lietotājiem atkal būs jāaizpilda piekrišanas ekrāns."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"to apply the next consent\" is awkward. A more natural translation would be \"to use the next consent\" or \"to obtain the next consent\".",
+          "suggestion": "Om de volgende instemming te gebruiken"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'autoryzacja zostaną cofnięte' is grammatically incorrect. 'Autoryzacja' is feminine, so it should agree with the verb. It should be 'autoryzacja zostaną cofnięte'.",
+          "suggestion": "autoryzacja zostaną cofnięte"
+        },
+        {
+          "type": "formatting",
+          "description": "There's a missing period after 'klienta' in the second sentence.",
+          "suggestion": "Aby zastosować kolejną zgodę, należy użyć nowego sekretu klienta."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'Para aplicar o próximo consentimento precisa usar novo segredo do cliente' is grammatically awkward. It should be rephrased for better flow.",
+          "suggestion": "Para aplicar o próximo consentimento, é necessário usar um novo segredo do cliente."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'utilizadors' is misspelled. It should be 'usuários'.",
+          "suggestion": "usuários"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,7 +253,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence 'Rețineți că toți utilizatori vor fi obligați să completeze din nou pagina de consimțământ.' is grammatically slightly awkward. The verb 'vor fi obligați' is a bit formal and can be simplified.",
+          "suggestion": "Rețineți că toți utilizatorii vor trebui să completeze din nou pagina de consimțământ."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +271,28 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'reset client secret' is translated as 'පාරිභෝගික රහසය නැවත සකස් කරන්නේ නම්'. While technically correct, 'client secret' is a technical term and might be better conveyed as 'අයදුම්පත් රහසය' or 'අප්තවාදය රහසය' to be more accessible to the target audience, depending on the context. 'සකස්' can imply a complex configuration, whereas a reset might be a simpler operation.",
+          "suggestion": "Consider using 'අයදුම්පත් රහසය නැවත සකස් කරන්නේ නම්' or 'අප්තවාදය රහසය නැවත සකස් කරන්නේ නම්'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "'active consents and authorizations' is translated as 'ක්‍රියාකාරී සියලු කැමැත්තම් සහ අවසර'. 'සියලු' (all) might be overly emphatic. Depending on the technical nuance, 'බහුල' (many) or a more context-specific alternative might be more appropriate.",
+          "suggestion": "Consider rephrasing as 'බහුල කැමැත්තම් සහ අවසර'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'To apply the next consent' is translated as 'ඊළඟ කැමැත්ත යොදනවා නම්'. While understandable, it is slightly awkward. A more natural phrasing might focus on the action of setting or assigning the next consent.",
+          "suggestion": "Consider 'ඊළඟ කැමැත්ත පාවිච්චි කිරීමට නම්' or 'ඊළඟ කැමැත්ත ලබා දෙන්නට නම්'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Note that all users will again be required to complete the consent screen' is translated as 'සියලු පරිශීලකයින් නැවත කැමැත්තම් තිරය සම්පූර්ණ කිරීමට අවශ්‍ය බව කරුණාකර සලකන්න'. 'සලකන්න' (please consider) is too formal and indirect for this context. A more direct instruction is preferred.",
+          "suggestion": "Consider 'සියලු පරිශීලකයින් නැවත කැමැත්තම් තිරය සම්පූර්ණ කල යුතුමය' or 'සියලු පරිශීලකයින් නැවත කැමැත්තම් තිරය සම්පූර්ණ කල යුතුය'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +310,45 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'resetujte' is a less common and slightly less formal way to say 'reset'. While not incorrect, 'постављате' or 'нулирате' would be more standard in this context.",
+          "suggestion": "постављате тајни кључ клијента"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'За примену следећег пристанка' is grammatically correct, but slightly awkward. A more natural phrasing would be 'Да бисте применили следећи пристанак'.",
+          "suggestion": "Да бисте применили следећи пристанак"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"pristanici\" is a general term for 'supporters' or 'adherents'. In this context, 'consents' is more accurate. ",
+          "suggestion": "Replace \"pristanici\" with \"saglasnosti\"."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"autorizacija\" is a direct translation of 'authorization', which is commonly used as 'ovlašćenja' in Serbian.",
+          "suggestion": "Replace \"autorizacija\" with \"ovlašćenja\"."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Za primenu sledećeg pristanka\" is somewhat awkward. A more natural phrasing would be 'Za primenu sledeće saglasnosti'.",
+          "suggestion": "Replace \"Za primenu sledećeg pristanka\" with \"Za primenu sledeće saglasnosti\"."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase \"Imajte na umu da će svi korisnici ponovo morati da završe ekran pristanka\" is grammatically correct but slightly verbose. A more concise phrasing would improve readability.",
+          "suggestion": "Consider: \"Svi korisnici će ponovo morati da završe ekran saglasnosti.\""
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -189,13 +360,40 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'to apply the next consent' is a bit awkward. A more natural translation might be 'to obtain the next consent' or 'to use the next consent'.",
+          "suggestion": "Щоб отримати наступну згоду"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'використати' (vykorystaty) in 'необхідно використати новий секрет клієнта' (neobkhidno vykorystaty novyi sekret kliyenta) is technically correct but sounds less natural than other options. 'Застосувати' (zastosuvaty) would be a better fit as it aligns more closely with the English 'apply'.",
+          "suggestion": "Щоб застосувати наступний секрет клієнта"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'active consents and authorizations' is translated as 'sự đồng ý và ủy quyền đang hoạt động'. While technically correct, a more natural translation would be 'các sự đồng ý và ủy quyền hiện tại' or 'các sự đồng ý và ủy quyền đang có hiệu lực'.",
+          "suggestion": "các sự đồng ý và ủy quyền hiện tại"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'apply' in 'To apply the next consent' is not the best choice. A better translation would be 'sử dụng' or 'áp dụng' to match the earlier usage.",
+          "suggestion": "sử dụng sự đồng ý tiếp theo"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence 'Lưu ý rằng tất cả người dùng sẽ được yêu cầu hoàn thành đồng ý cho màn hình một lần nữa.' is a bit awkward.  'đồng ý cho màn hình' is not the standard phrasing. It should be 'màn hình đồng ý'.",
+          "suggestion": "Lưu ý rằng tất cả người dùng sẽ được yêu cầu hoàn thành màn hình đồng ý một lần nữa."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

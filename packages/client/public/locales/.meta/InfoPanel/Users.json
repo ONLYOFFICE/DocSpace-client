@@ -3,7 +3,7 @@
   "content": "Users",
   "content_en_sha1_hash": "57f2b181d0a5e79a147ea1cdf41457f58dbbb3c9",
   "created_at": "2025-05-19T21:30:54.976Z",
-  "updated_at": "2025-05-20T09:40:40.455Z",
+  "updated_at": "2025-05-21T09:42:02.470Z",
   "comment": {
     "text": "This translation key is used to display the label \"Users\" in the InfoPanelStore.js file. It appears as a title when users are displayed and needs to be translated into different languages, providing a user-friendly interface for various contexts.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Armenian translation 'Օգտատերեր' appears to have a spelling error. The correct spelling for 'Users' in Armenian is 'Օգտատեր'. The ending 'երեր' is a double accusative and is not appropriate here.",
+          "suggestion": "Օգտատեր"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"පරිශ්‍රීලකයින්\" is not the most accurate or common translation of \"Users\". While technically correct, it's rather formal and less frequently used. A more common and natural translation would be \"භාවිතරයන්\" (bhavitaraayan) or \"කරන්නන්\" (akarananan).",
+          "suggestion": "Consider using \"භාවිතරයන්\" (bhavitaraayan) or \"කරන්නන්\" (akarananan) instead of \"පරිශ්‍රීලකයින්\"."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

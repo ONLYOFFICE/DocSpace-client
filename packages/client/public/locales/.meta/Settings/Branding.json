@@ -3,7 +3,7 @@
   "content": "Branding",
   "content_en_sha1_hash": "d17dc3843de8e54fc084f0b952690209018ca128",
   "created_at": "2025-05-19T21:30:50.719Z",
-  "updated_at": "2025-05-20T09:45:40.074Z",
+  "updated_at": "2025-05-21T05:03:52.937Z",
   "comment": {
     "text": "This translation key is used for branding-related settings, and its purpose is to display a descriptive label in the user interface. It appears in various sections of the Portal Settings page, providing context for users navigating through different branding configurations.",
     "is_auto": true,
@@ -63,7 +63,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Brendləşmə' is a possible translation for 'Branding', it's a more technical or process-oriented term. 'Brend' (Brand) or 'Brendinq' (Branding) might be more common and understandable in a general settings context.",
+          "suggestion": "Consider 'Brend' or 'Brendinq' for broader understanding."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -105,7 +111,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Personnalisation\" is a valid French word, it doesn't perfectly capture the meaning of \"Branding\". \"Branding\" refers to a company's visual identity, reputation, and overall perception. \"Personnalisation\" leans more towards customization for individual users. A more accurate translation might be \"Image de marque\" or \"Marque\".",
+          "suggestion": "Consider alternatives like \"Image de marque\" or \"Marque\"."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -135,13 +147,25 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ຍີ່ຫໍ້' (yi hoo) is a common transliteration of 'brand' in Lao, 'Branding' refers to the overall image and identity of a company. A more appropriate translation might be something conveying the concept of 'brand identity' or 'corporate image'.",
+          "suggestion": "Consider 'ຮູບຊົງຂອງບໍລິສັດ' (roop song khong borisat - company image) or 'ການກໍ່ສ້າງເອກະລັກ' (kan kor sang ekalak - building a unique identity)."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation \"Zīmolrade\" is a constructed word and doesn't accurately convey the meaning of \"Branding.\" \"Branding\" refers to a company's visual identity, reputation, and overall perception. \"Zīmolrade\" is closer to 'brand council' or 'brand management,' which isn't quite the same.",
+          "suggestion": "Consider alternatives like \"Zīmols\" (Brand), \"Uzņēmuma identitāte\" (Company Identity), or a more descriptive phrase depending on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "nl": {

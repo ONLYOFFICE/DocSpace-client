@@ -3,7 +3,7 @@
   "content": "Icon changed",
   "content_en_sha1_hash": "46fa2dcaabe5f818483c85df00108c0fabde27f4",
   "created_at": "2025-05-19T21:30:54.941Z",
-  "updated_at": "2025-05-20T09:40:45.706Z",
+  "updated_at": "2025-05-21T09:47:47.014Z",
   "comment": {
     "text": "The \"RoomLogoChanged\" translation key is used to display a message when the room logo changes. This text will appear in the UI where updates are logged or notifications are shown, such as a history panel or activity feed, and provides context for the user when their room's icon has been updated.",
     "is_auto": true,
@@ -39,13 +39,25 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"İşarə dəyişdi\" doesn't accurately convey the meaning of \"Icon changed.\" \"İşarə\" translates to \"sign\" or \"indication,\" while \"Icon\" refers to a visual representation. A more accurate translation would reflect that.",
+          "suggestion": "Simge dəyişdi"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Сменена иконка\" is understandable, a more natural and precise translation of \"Icon changed\" would be \"Променена икона\" or \"Нова икона\". \"Сменена\" implies the icon was replaced with something entirely different, while 'променена' (changed) is more general.",
+          "suggestion": "Променена икона"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -165,7 +177,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Ikonka zmenená\" is technically correct, it's not the most natural or idiomatic way to express \"Icon changed\" in Slovak. It sounds a bit literal. A more common and natural phrasing would be something like \"Zmenila sa ikona\" or \"Ikona bola zmenená\".",
+          "suggestion": "Zmenila sa ikona"
+        }
+      ],
       "approved_at": null
     },
     "sl": {

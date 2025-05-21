@@ -3,7 +3,7 @@
   "content": "Used: {{size}}",
   "content_en_sha1_hash": "a1f147a74895697927042157e570c03e8d3e41f3",
   "created_at": "2025-05-19T21:30:53.093Z",
-  "updated_at": "2025-05-20T09:44:11.317Z",
+  "updated_at": "2025-05-21T02:32:49.603Z",
   "comment": {
     "text": "This translation key is used to display the amount of used storage space in a clear and concise manner. It appears on a Storage Space Used page, showing the total size of used storage.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'مستخدم: {{size}}' is a literal translation of 'Used: {{size}}'. A more natural and accurate translation for 'Used' in the context of storage would be 'مساحة مستخدمة' (masaHa mustakhDaMa).",
+          "suggestion": "مساحة مستخدمة: {{size}}"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -63,7 +69,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Usado\" for \"Used\" in this context (referring to storage space) isn't the most natural or accurate. \"Usado\" generally implies something has been utilized or consumed, but in this case, 'Used' refers to the amount of storage being occupied.",
+          "suggestion": "Consider using \"Ocupado: {{size}}\" or \"Espacio utilizado: {{size}}\" for a more accurate translation."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -135,7 +147,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The direct translation of \"Used\" as \"Usado\" is technically correct, but in the context of storage usage in settings, a more natural and commonly used term would be \"Utilizado\".",
+          "suggestion": "Utilizado: {{size}}"
+        }
+      ],
       "approved_at": null
     },
     "ro": {

@@ -3,7 +3,7 @@
   "content": "Your trial expires on {{date}}.",
   "content_en_sha1_hash": "f29657c8fa2cf900e87405ad4828a95439d18d99",
   "created_at": "2025-05-19T21:30:53.592Z",
-  "updated_at": "2025-05-20T09:43:26.195Z",
+  "updated_at": "2025-05-21T06:20:47.142Z",
   "comment": {
     "text": "This translation key is used to display a message indicating when a trial period for a tariff license expires. The message shows the expiration date and appears in the UI where the user's trial status is being displayed, likely on a settings page or payment details screen.",
     "is_auto": true,
@@ -51,7 +51,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Your trial expires on' is not accurately reflected in the German translation 'Ihre Testversion ist noch... gültig'.  'Expires on' implies a specific date of expiration, while 'ist noch... gültig' (is still... valid) implies a remaining validity period.  A more accurate translation would convey a definitive expiration date.",
+          "suggestion": "Ihre Testversion läuft am {{date}} ab."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -111,7 +117,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation includes a colon and 'šajā datumā' which feels slightly less natural than just stating the date directly. It's a stylistic choice, but 'šajā datumā' adds unnecessary length.",
+          "suggestion": "Jūsu izmēģinājuma periods beidzas {{date}}."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -153,7 +165,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඔබගේ නැහැසුම {{date}} දී කල් ඉකුත් වේ' is a literal translation that doesn't quite convey the intended meaning of 'Your trial expires on {{date}}'. It implies an expiry of a cancellation, not a trial period. A more natural translation would convey the 'trial' aspect.",
+          "suggestion": "ඔබේ කාලීන percobaan {{date}} දින අවසන් වේ."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of {{date}} in the Sinhala translation is consistent with the English, which is good. However, ensure the platform correctly renders this placeholder.",
+          "suggestion": "No change needed, just a note to verify placeholder rendering."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

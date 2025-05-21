@@ -3,7 +3,7 @@
   "content": "Use for",
   "content_en_sha1_hash": "5065b95ee85a13e6526f2ef80a03f69f8a1bcc3b",
   "created_at": "2025-05-19T21:30:50.199Z",
-  "updated_at": "2025-05-20T09:46:00.258Z",
+  "updated_at": "2025-05-21T01:37:57.945Z",
   "comment": {
     "text": "The translation key \"UsedFor\" is used to display a label that indicates the purpose or functionality of an option in a dropdown menu, typically in a modal dialog or settings page. In this case, it appears as a vertical label below a ComboBox component, prompting users to select an option for a specific use case, such as single sign-on integration.",
     "is_auto": true,
@@ -27,7 +27,18 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation \"يسخدم من اجل\" is not the most accurate or natural translation of \"Use for\". It literally translates to \"is used from for\".  A more appropriate translation would convey the intended meaning of purpose or application.",
+          "suggestion": "استخدم لـ (Istemal li-)"
+        },
+        {
+          "type": "spelling",
+          "description": "The Arabic text contains a spelling error. The word \"يسخدم\" should be \"يستخدم\" (yustakhdim).",
+          "suggestion": "يستخدم"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -45,7 +56,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Použijte pro\" is a literal translation of \"Use for\" and while grammatically correct, it may sound unnatural or overly formal depending on the context of 'SingleSignOn:UsedFor'. A more natural or contextually appropriate translation might be needed.",
+          "suggestion": "Consider alternatives like \"Využijte pro\", \"Používejte pro\", or a more context-specific phrase.  Without more context, it's difficult to provide a definitive better translation."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -69,7 +86,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Käyttää' translates to 'uses' or 'to use' in English. While it's a possible translation, 'Use for' implies a purpose or intended application. A more accurate translation would convey that intention.",
+          "suggestion": "Consider 'Määrätty käyttö' (For specific use), 'Tarkoitettu' (Intended for), or 'Käyttötarkoitus' (Purpose of use) depending on the precise context."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +104,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"օգտագործել __ ի համար\" is a literal translation of \"Use for\" but doesn't convey the intended meaning of 'used for' in the context of Single Sign-On. It lacks clarity and could be misinterpreted. It needs to be more idiomatic Armenian.",
+          "suggestion": "Consider alternatives like \"կիրառելու համար\" (kirarrelu hamar - for application) or \"չորսը համար\" (chorsə hamar - for purpose), depending on the precise context of Single Sign-On."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,13 +122,25 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation '使用目的' (shiyō mokuteki) translates more closely to 'intended purpose' or 'purpose of use' rather than the English 'Use for'. While not entirely wrong, it's not the most accurate representation of the original meaning in this context.",
+          "suggestion": "Consider '利用目的' (riyō mokuteki) which translates to 'usage purpose' or 'purpose of usage', or a simpler phrasing like '用途' (yōto) which means 'use' or 'usage'."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Use for' has a broader meaning than '사용' which primarily means 'use' as a verb. 'Use for' implies a purpose or intended application, which '사용' doesn't fully convey.",
+          "suggestion": "Consider alternatives like '적용 대상' (applicable to), '용도' (purpose), or '대상' (target), depending on the specific context of 'SingleSignOn:UsedFor'."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -153,7 +194,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'භාවිතා වන්නේ' literally translates to 'is used'. While not strictly wrong, 'Use for' is a more direct and concise translation.  It lacks the 'is' implied in the Sinhala translation which makes it slightly less natural in context. A better translation would convey the action of using, not the state of being used.",
+          "suggestion": "භාවිතය සඳහා (Bhavitaya saha)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +230,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation \"Şunun için kullan\" is a literal translation of \"Use for\" but might not be the most natural or idiomatic way to express this concept in Turkish, especially in a technical context. It sounds a bit abrupt. A more natural phrasing would depend on the broader context.",
+          "suggestion": "Consider a more natural phrasing like \"Şu amaçla kullanın\" (Use for this purpose) or \"Şunun için geçerli\" (Valid for this). The best option depends on the surrounding text and the intended meaning."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

@@ -3,7 +3,7 @@
   "content": "{{productName}} Renaming",
   "content_en_sha1_hash": "0319b32930f9f565cf61d81d5d89dbc5851737dc",
   "created_at": "2025-05-19T21:30:52.254Z",
-  "updated_at": "2025-05-20T09:44:45.076Z",
+  "updated_at": "2025-05-21T03:38:17.021Z",
   "comment": {
     "text": "The translation key \"PortalRenaming\" is used to display a message when renaming a portal. It appears in a modal dialog header and footer. Translators should provide a phrase that informs users of the action they are about to perform on their portal.",
     "is_auto": true,
@@ -51,7 +51,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation 'إعادة تسمية {{productName}}' translates to 'Renaming {{productName}}'. While technically correct, it lacks the possessive structure implied by the English '{{productName}} Renaming'. A more accurate translation would include 'لـ {{productName}}' (for {{productName}}) to reflect the original meaning.",
+          "suggestion": "إعادة تسمية لـ {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -75,7 +81,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Umbenennung von {{productName}}' is a literal translation but doesn't quite capture the meaning of '{{productName}} Renaming'. A more natural translation might be '{{productName}} umbenennen' or 'Die Umbenennung von {{productName}}'.",
+          "suggestion": "Consider '{{productName}} umbenennen' or 'Die Umbenennung von {{productName}}'"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -87,31 +99,61 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Cambio del nombre de {{productName}}' is not the most natural or idiomatic translation of '{{productName}} Renaming'. A better translation would be 'Renombrar {{productName}}' or 'Cambiar el nombre de {{productName}}'. While 'Cambio del nombre...' is technically correct, it's a bit verbose.",
+          "suggestion": "Renombrar {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '{{productName}}-n uudelleennimeäminen' is a very literal translation and doesn't sound natural in Finnish. 'Uudelleennimeäminen' is a formal and less common way to express renaming. A more natural phrasing would be something like '{{productName}} nimeämisen muuttaminen' or '{{productName}} nimen muuttaminen'.",
+          "suggestion": "{{productName}} nimen muuttaminen"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Changement de nom de {{productName}}\" literally translates to \"Name change of {{productName}}\". A more natural and accurate translation of '{{productName}} Renaming' would be something like 'Renommage de {{productName}}' or '{{productName}}: Renommage'.",
+          "suggestion": "Renommage de {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"{{productName}}-ի վերանվանում\" literally translates to '{{productName}}-'s renaming'.  A more natural translation of '{{productName}} Renaming' would be something like '{{productName}}-ի անվանափոխություն' or '{{productName}}-ի անվան փոփոխությունը', depending on the desired level of formality. The current translation is grammatically correct, but stylistically awkward.",
+          "suggestion": "Consider '{{productName}}-ի անվանափոխություն' or '{{productName}}-ի անվան փոփոխությունը'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ridenominazione di {{productName}}' is technically correct but could be improved for naturalness. 'Rinominare' would be more common and fluent.",
+          "suggestion": "Rinominare {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -129,7 +171,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ການປ່ຽນຊື່ {{productName}}\" literally translates to 'Name Changing {{productName}}'. A more natural and accurate translation for '{{productName}} Renaming' would be something like 'ການเปลี่ยนຊື່ຂອງ {{productName}}' (Renaming of {{productName}}) or 'ການตั้งຊື່ใหม่ {{productName}}' (New Naming of {{productName}}).",
+          "suggestion": "ການเปลี่ยนຊື່ຂອງ {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -147,7 +195,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Renaming' implies the action of renaming something. The Polish translation 'Zmiana nazwy' translates to 'Name Change', which is a more descriptive noun rather than an action. A more appropriate translation would be 'Zmienianie nazwy' or 'Nadawanie nowej nazwy'.",
+          "suggestion": "Zmienianie nazwy"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -159,19 +213,37 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Renomear {{productName}}\" is a literal translation of 'Renaming' but lacks the preceding definite article. A more natural and accurate translation would include 'O/A'.",
+          "suggestion": "O/A Renomear {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Redenumire spațiu {{productName}}\" isn't a direct or natural translation of \"{{productName}} Renaming\". 'Spațiu' translates to 'space', which doesn't accurately convey the concept of renaming a product or portal.",
+          "suggestion": "Consider a more accurate translation like \"Redenumirea {{productName}}\" or \"Redenumire Produs {{productName}}\" (Renaming Product {{productName}})"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Renaming' implies a process of changing a name. The Russian translation 'Изменение имени' translates more literally as 'Name change' or 'Changing of a name', which is less dynamic. A more accurate translation to convey the action of renaming would be something like 'Переименование' (Pereimenovanie).",
+          "suggestion": "Переименование {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -195,13 +267,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Преименовање {{productName}}-а' is not the most natural or accurate translation of '{{productName}} Renaming'. While technically correct, the addition of the genitive case '-а' makes it sound slightly awkward. A more idiomatic translation would be something like 'Преименовање {{productName}}' or 'Преименовање производа {{productName}}'.",
+          "suggestion": "Преименовање {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Serbian translation \"Preimenovanje {{productName}}-a\" is grammatically awkward. The genitive case ('-a') is used but doesn't quite flow naturally. A more natural construction would use the nominative.",
+          "suggestion": "Preimenovanje {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -213,13 +297,25 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation includes a colon after the product name, which might not be consistent with the English version. Consider if the colon is necessary in the UI context.",
+          "suggestion": "Review if the colon is stylistically appropriate for the user interface. If not, remove it: \"Перейменування {{productName}}\""
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Đang đổi tên {{productName}}\" doesn't accurately convey the meaning of \"{{productName}} Renaming\". \"Renaming\" implies a process or a named feature. \"Đang đổi tên {{productName}}\" translates to \"Renaming {{productName}}\" (ongoing action) which is close but lacks the sense of a feature or process. A better translation might focus on the result or action being performed on the product name.",
+          "suggestion": "Consider alternatives like \"Tên sản phẩm: Đổi tên\" (Product Name: Renaming) or \"Đổi tên sản phẩm {{productName}}\" (Renaming product {{productName}}) depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

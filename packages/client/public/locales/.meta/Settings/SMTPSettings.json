@@ -3,7 +3,7 @@
   "content": "SMTP Settings",
   "content_en_sha1_hash": "52ff101f3a7156bd8a868fbddda28dc2f4dfb972",
   "created_at": "2025-05-19T21:30:52.745Z",
-  "updated_at": "2025-05-20T09:44:25.514Z",
+  "updated_at": "2025-05-21T02:59:55.300Z",
   "comment": {
     "text": "SMTP Settings translation key is used to display the title of a page or section within the PortalSettings category, typically in a tab or header. It appears in the integration settings file and is related to sending emails via SMTP (Simple Mail Transfer Protocol).",
     "is_auto": true,
@@ -39,7 +39,18 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'إعدادات بروتوكول نقل البريد الالكتروني' is a very literal and technical translation of 'SMTP Settings'. While accurate, it's overly complex and not user-friendly for typical users. 'SMTP' itself is often understood by users familiar with email settings.",
+          "suggestion": "Consider a more concise and user-friendly translation, such as 'إعدادات SMTP' (SMTP Settings) or 'إعدادات خادم البريد' (Mail Server Settings)."
+        },
+        {
+          "type": "formatting",
+          "description": "The Arabic translation uses a full stop (period) at the end of the phrase. While grammatically correct, it's not always necessary or preferred in UI elements or labels. It depends on the overall design consistency.",
+          "suggestion": "Evaluate if a period is appropriate for the specific UI element where the translation is used. Consider removing it for a cleaner look if preferred."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -165,13 +176,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Sinhala translation 'SMTP සැකසුම්' appears to be a reasonable transliteration, but 'සැකසුම්' is slightly ambiguous. While it generally means 'settings' or 'configurations', it could be misinterpreted without context. A more precise translation might be preferable depending on the specific technical audience.",
+          "suggestion": "Consider 'SMTP සැකසුම්මා' or 'SMTP ආකෘති' for greater clarity, although 'SMTP සැකසුම්' is acceptable."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"SMTP Nastavenie\" is not the most accurate or natural Slovak translation of \"SMTP Settings\". \"Nastavenie\" translates to \"Setting\" but a more common and accurate term would be \"Konfigurácia\".",
+          "suggestion": "SMTP Konfigurácia"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -183,13 +206,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation 'SMTP подешавања' is a literal translation of 'Settings' rather than 'SMTP Settings'. While 'подешавања' correctly translates 'settings,' it doesn't convey the 'SMTP' part of the key. A more accurate translation would incorporate 'SMTP' in a way that is natural in Serbian.",
+          "suggestion": "SMTP поставке"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'podešavanja' is a valid Serbian word, a more common and natural translation of 'Settings' in this context would be 'postavke'. 'Podešavanja' is often used for adjustments or configurations, while 'postavke' is a more general term for settings.",
+          "suggestion": "postavke"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

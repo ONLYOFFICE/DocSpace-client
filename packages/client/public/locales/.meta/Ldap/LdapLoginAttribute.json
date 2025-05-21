@@ -3,7 +3,7 @@
   "content": "Login Attribute",
   "content_en_sha1_hash": "3ac7b30a623c8fc7cb1536f89a7edbd479a9ee87",
   "created_at": "2025-05-19T21:30:54.231Z",
-  "updated_at": "2025-05-20T09:42:08.526Z",
+  "updated_at": "2025-05-21T08:16:03.464Z",
   "comment": {
     "text": "The \"Login Attribute\" translation key is used to display a label for an LDAP authentication field that requires users to select or input their login attribute. This field is expected in a connection settings dialog or similar interface where users configure LDAP integration.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ميزة تسجيل الدخول\" (miza tasjeel al-dakhool) literally translates to \"Login Feature\". While understandable, \"Login Attribute\" implies a specific characteristic or field used for login, not a general feature. A more accurate translation would convey the technical meaning.",
+          "suggestion": "سمة تسجيل الدخول (Samah Tasjeel al-Dakhool)"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -105,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ຄຸນນະສົມບັດເຂົ້າສູ່ລະບົບ\" is a literal translation of \"Login Attribute\", it's a bit clunky and doesn't fully capture the technical meaning in a software context.  'Attribute' often refers to a specific property or field used for identification or authentication.",
+          "suggestion": "Consider something like 'ຊື່ຜູ້ໃຊ້ສໍາລັບການເຂົ້າສູ່ລະບົບ' (username for login) or 'ຄຸນນະສົມບັດການເຂົ້າສູ່ລະບົບ' (login attribute - kept closer to original but might still need adjustment based on context)"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -123,7 +135,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Polish translation includes a colon (':') at the end, which might be unnecessary depending on the context and UI requirements. It might be better to remove it for consistency or if the UI expects a label without a colon.",
+          "suggestion": "Atrybut logowania"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -147,19 +165,37 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Атрибут логин\" is a literal translation but doesn't quite convey the intended meaning of 'Login Attribute' in this context. 'Login Attribute' refers to the LDAP attribute used for login, such as 'sAMAccountName' or 'userPrincipalName'. A more accurate translation would consider this context.",
+          "suggestion": "Consider translations like 'Атрибут для входа' (Attribute for login) or 'Входной атрибут' (Login attribute) depending on the desired level of formality."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"පුරනය වීමේ ගුණාංගය\" (Purana Wimine Gunanganaya) doesn't perfectly capture the meaning of \"Login Attribute\". While it literally translates to something like \"Attribute of Becoming/Entering\", it's not the common or expected terminology for a login attribute in a technical context. A more accurate translation would be something that directly refers to a login characteristic or identifier.",
+          "suggestion": "Consider alternatives like \"පිවිසුම් ලක්ෂණය\" (Pivisum Lakshyanaya - Login Characteristic) or \"පිවිසුම් පවිත්‍රණය\" (Pivisum Pavitharanaya - Login Identifier)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Atribút Prihlásenie\" is not an accurate translation of \"Login Attribute\". \"Prihlásenie\" directly translates to \"Login\" and \"Atribút\" to \"Attribute\", but the combination sounds awkward and doesn't convey the intended meaning clearly in Slovak. It is more of a literal, not semantic translation.",
+          "suggestion": "A better translation would be \"Používateľský atribút pri prihlasovaní\" or simply \"Atribút prihlásenia\".  A more natural phrasing might be \"Atribút pre prihlásenie\". Consider the context of where this key is used to determine the best option."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -177,13 +213,25 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Atribut Prijave' while understandable, isn't the most natural or accurate translation of 'Login Attribute' in Serbian. A more appropriate translation would emphasize 'Login' more directly.",
+          "suggestion": "Atribut za prijavu"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Oturum Açma Özelliği\" is a literal translation, \"Giriş Özelliği\" or \"Kullanıcı Giriş Özelliği\" might be more accurate and commonly used in the context of LDAP configurations. 'Oturum Açma' often implies a complete session, not just the attribute used for login.",
+          "suggestion": "Giriş Özelliği"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

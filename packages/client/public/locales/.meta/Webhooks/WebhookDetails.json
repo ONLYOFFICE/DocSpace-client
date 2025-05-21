@@ -3,7 +3,7 @@
   "content": "Webhook details",
   "content_en_sha1_hash": "fab9b0a82d59909c30061f70e790f5909f513155",
   "created_at": "2025-05-19T21:30:49.870Z",
-  "updated_at": "2025-05-20T09:46:47.112Z",
+  "updated_at": "2025-05-21T00:51:25.300Z",
   "comment": {
     "text": "This translation key is used for the label of a dropdown menu that displays details about webhooks. It appears in a table view within the Webhook History section and contains the text \"Webhook details\" when displayed as an option.",
     "is_auto": true,
@@ -51,7 +51,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Подробности за уеб кука' is understandable, a more accurate and common translation for 'Webhook details' in a technical context would be 'Подробности за уебхук'. 'Уеб кука' is a literal translation of 'web hook' and not the established terminology.",
+          "suggestion": "Подробности за уебхук"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -93,7 +99,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Armenian word 'մանրամասները' is generally correct for 'details', but in the context of 'Webhook details', a more precise translation might be desirable.",
+          "suggestion": "Webhook-ի մանրամասները"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -117,13 +129,25 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation 'ລາຍລະອຽດ Webhook' includes the English word 'Webhook' without translation. While common in technical contexts, it's preferable to translate the entire phrase for clarity and consistency. Consider translating 'Webhook' as something like 'ຕົວເຊື່ອມຕໍ່ເວັບ' or a more descriptive equivalent.",
+          "suggestion": "Consider translating 'Webhook' to a Lao equivalent, such as 'ຕົວເຊື່ອມຕໍ່ເວັບ' or a more contextually appropriate term."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation \"Sīkāka informācija par tīmekļa aizķeri\" translates to 'More information about web traffic' which is not equivalent to 'Webhook details'. 'Webhook' should be included in the translation.",
+          "suggestion": "Sīkāka informācija par tīmekļa atbalstītāju"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -153,7 +177,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Detalii Webhook\" is a literal translation but sounds unnatural in Romanian. While technically correct, a more idiomatic translation would be 'Informații despre webhook' or 'Câteva detalii despre webhook'.",
+          "suggestion": "Informații despre webhook"
+        }
+      ],
       "approved_at": null
     },
     "ru": {

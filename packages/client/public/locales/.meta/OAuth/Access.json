@@ -3,7 +3,7 @@
   "content": "Access",
   "content_en_sha1_hash": "2f81a22de0af5e9eab19326e19693f86ce612518",
   "created_at": "2025-05-19T21:30:53.771Z",
-  "updated_at": "2025-05-20T09:43:01.444Z",
+  "updated_at": "2025-05-21T07:31:56.989Z",
   "comment": {
     "text": "This translation key is used for a UI element displaying the text \"Access\" in a portal settings category. It appears as part of an InfoDialog component and is styled to be displayed prominently. Translators should provide a localized version of this word.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Giriş\" can mean \"access\", in the context of OAuth, it's not the most accurate translation. \"Daxilolma\" or \"İstifadə\" would be more fitting for 'Access' in this specific technical context.",
+          "suggestion": "Consider using \"Daxilolma\" or \"İstifadə\"."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -45,7 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation \"Přístup na\" is not an accurate translation of \"Access\" in the context of OAuth. It implies access *to* something, while \"Access\" itself denotes the ability to access.",
+          "suggestion": "A more appropriate translation might be \"Přístup\" (Access) or \"Autorizace\" (Authorization), depending on the specific context. Without more information, \"Přístup\" is a safer option, although \"Autorizace\" might be even more suitable."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -81,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Մուտք\" generally means \"entrance\" or \"entry,\" not \"access.\" While related, it doesn't accurately convey the technical meaning of 'access' in the context of OAuth.",
+          "suggestion": "Consider alternatives such as \"Պատճառավրաց“ (Patsharach'r) which is closer to \"access\" or a more context-specific term if available."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -171,7 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Приступ\" does not accurately convey the meaning of \"Access\" in the context of OAuth. \"Access\" in this context refers to access rights or permissions, not the act of approaching or getting something. \"Приступ\" implies 'approach' or 'accession'.",
+          "suggestion": "A more appropriate translation would be \"ПравоПриступа\" (Right of Access), \"Доступ\" (Access - a more general term), or \"Поступак Приступа\" (Procedure for Access)."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

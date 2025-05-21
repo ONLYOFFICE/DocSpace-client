@@ -3,7 +3,7 @@
   "content": "No results matching your query could be found",
   "content_en_sha1_hash": "f27a9198370e140fb0316570951bd21c251e8d8d",
   "created_at": "2025-05-19T21:30:55.113Z",
-  "updated_at": "2025-05-20T09:40:25.302Z",
+  "updated_at": "2025-05-21T10:41:31.520Z",
   "comment": {
     "text": "This translation key is used for the \"EmptyFormGalleryScreenDescription\" text, which appears on an empty form gallery screen as a message when no results match the user's query. It is likely displayed in a dialog or card component, indicating that no data was found. Translators should provide a concise and descriptive phrase to convey this message in other languages.",
     "is_auto": true,
@@ -75,7 +75,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Aucun résultat correspondant à votre requête n'a pu être trouvé' is overly formal and complex for this context. A more natural and user-friendly translation would be preferred.",
+          "suggestion": "Aucun résultat trouvé correspondant à votre recherche"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -105,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ບໍ່ພົບຜົນການຊອກຫາທີ່ກົງກັບຄຳຊອກຫາຂອງເຈົ້າ' is a literal translation and sounds somewhat unnatural in Lao. A more natural phrasing would be closer to 'ບໍ່ພົບຜົນການຄົ້ນຫາຕາມຂໍ້ຄວາມທີ່ເຈົ້າຊອກຫາ' or 'ບໍ່ພົບຜົນຕາມການຄົ້ນຫາຂອງທ່ານ'.",
+          "suggestion": "ບໍ່ພົບຜົນຕາມການຄົ້ນຫາຂອງທ່ານ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Nu a putut fi găsit niciun rezultat care să corespundă interogării dvs' is a literal translation and sounds overly formal and awkward in Romanian. A more natural and user-friendly translation would be preferred.",
+          "suggestion": "Niciun rezultat nu a fost găsit pentru căutarea ta."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඔබගේ විමසුමට කිසිවක් නොගැළපේ' is a literal translation and while understandable, it lacks the natural flow of a user-facing message. A more appropriate translation would convey the same meaning in a more user-friendly way.",
+          "suggestion": "තවදුරටත් සොයා බලන්න."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +195,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'одговарају' is spelled correctly but could be improved for natural flow. While technically correct, it's a bit formal in this context.",
+          "suggestion": "Нема резултата који одговара вашем упиту."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

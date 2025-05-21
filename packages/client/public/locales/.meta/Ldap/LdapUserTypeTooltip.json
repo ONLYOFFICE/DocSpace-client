@@ -3,7 +3,7 @@
   "content": "All users will be added to {{productName}} with the selected type.",
   "content_en_sha1_hash": "bd24725f827ea436cfa30beb57d8b76e208843dc",
   "created_at": "2025-05-19T21:30:54.340Z",
-  "updated_at": "2025-05-20T09:41:54.575Z",
+  "updated_at": "2025-05-21T07:55:39.854Z",
   "comment": {
     "text": "This translation key is used for a tooltip that explains how selecting an LDAP user type will add users to a specific product, in this case {{productName}}. It appears as a hover text or tooltip when the \"LdapUserType\" option is selected, providing context for end-users.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The hyphen in '–a' appears unnecessary and creates an unnatural flow in Azerbaijani. It's not standard practice for indicating 'to' in this context.",
+          "suggestion": "Bütün istifadəçilər seçilmiş növlə {{productName}} əlavə olunacaq."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -147,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The verb 'adăugate' (added) should agree with the plural subject 'utilizatorii' (users). It should be 'adăugați'.",
+          "suggestion": "Toți utilizatorii vor fi adăugați în {{productName}} cu tipul selectat."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -159,7 +171,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'පරිශීලකයින්' (parishiilakayin) is a slightly formal term for 'users'. A more common and natural-sounding word might be 'භාවිතකරුවන්' (bhavitakaruwan).",
+          "suggestion": "සියලු භාවිතකරුවන් තෝරාගත් වර්ගය සමඟ {{productName}} වෙත එකතු කරනු ලැබේ."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence structure is a bit stiff. A more fluid phrasing would improve readability.",
+          "suggestion": "තෝරාගත් වර්ගය සමඟ සියලු භාවිතකරුවන් {{productName}} වෙත එක්රැස් කරනු ලැබේ."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +200,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Serbian (Cyrillic) translation uses 'Сви' which can be interpreted as 'all' or 'every'. It might be better to use a word that indicates inclusion.",
+          "suggestion": "Сви корисници биће додани у {{productName}} са одабраним типом."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -207,7 +236,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"所有用户都将使用所选类型添加到{{productName}}。\" doesn't accurately convey the meaning of 'All users will be added to {{productName}} with the selected type.'  '使用' (use) implies the selected type is being *used* by the users, rather than that they are *assigned* a type.  The English sentence implies the selected user type is assigned to the users during the addition process.",
+          "suggestion": "所有用户都将以所选类型被添加到{{productName}}。"
+        }
+      ],
       "approved_at": null
     }
   }

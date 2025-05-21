@@ -3,7 +3,7 @@
   "content": "+ 1-year subscription for functionality and security updates.",
   "content_en_sha1_hash": "bf909f01efdd41c4e5073f4e8f004d859d3df47c",
   "created_at": "2025-05-19T21:30:53.623Z",
-  "updated_at": "2025-05-20T09:43:20.645Z",
+  "updated_at": "2025-05-21T06:12:14.152Z",
   "comment": {
     "text": "This translation key is used to describe a 1-year subscription benefit, indicating that it includes functionality and security updates. It appears in UI elements related to purchasing or upgrading to a professional version of an application.",
     "is_auto": true,
@@ -51,7 +51,18 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Updates von Funktionalität und Sicherheit innerhalb vom 1-jährigen Abonnement' doesn't accurately convey the original meaning. It's a bit wordy and doesn't directly state '1-year subscription'.  The original emphasizes a subscription *for* updates.",
+          "suggestion": "+ 1 Jahr Abonnement für Funktions- und Sicherheitsupdates."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses 'von' which sounds less natural in this context. It could be slightly improved for better flow.",
+          "suggestion": "+ 1 Jahr Abonnement für Funktions- und Sicherheitsupdates."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -81,7 +92,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The plus sign (+) at the beginning of the Armenian translation is missing, mirroring the English content.",
+          "suggestion": "+ 1 տարվա բաժանորդագրություն ֆունկցիոնալության և անվտանգության թարմացումների համար:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,19 +110,42 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The '+' sign is placed awkwardly before the '1-year subscription'. It should be integrated more naturally into the sentence.",
+          "suggestion": "機能およびセキュリティアップデートのための1年間のサブスクリプション。"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, '+ 1 year' sounds a bit unnatural in Japanese and may be better represented as a more fluent phrasing.",
+          "suggestion": "機能およびセキュリティアップデートのための1年間のサブスクリプション。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"for functionality and security updates\" is not perfectly captured by \"에 대한\". While understandable, a more direct translation would improve clarity. \"기능 및 보안 업데이트를 위한\" or \"기능 및 보안 업데이트 제공에 대한\" would be more accurate.",
+          "suggestion": "+ 기능 및 보안 업데이트를 위한 1년 구독."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The term 'ການອັບເດດ' (kaan ap det) could be more accurately translated as 'ການປັບປຸງ' (kaan bap bpung) which means 'improvements' or 'updates'. While 'ການອັບເດດ' is understandable, 'ການປັບປຸງ' is more natural in this context.",
+          "suggestion": "+ ການສະໝັກສິດນຳໃຊ້ 1 ປີສຳລັບການປັບປຸງການເຮັດວຽກ ແລະ ຄວາມປອດໄພ."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -123,7 +163,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content uses the term \"functionality\" which is not directly conveyed by the Polish translation. While 'funkcji' can mean function, it lacks the nuance of capabilities or features. It's also slightly less natural in this context.",
+          "suggestion": "Roczna subskrypcja umożliwiająca dostęp do aktualizacji zabezpieczeń i funkcji."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,19 +187,42 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'functionality and security updates' is not perfectly captured by 'îmbunătățirea funcționalității și securității'. While not incorrect, 'actualizări de funcționalitate și securitate' would be a more direct and natural translation.",
+          "suggestion": "Abonament de 1 an cu actualizări de funcționalitate și securitate"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase '1-year subscription' is not accurately reflected in the Russian translation. 'в течение 1 года' literally translates to 'within 1 year' which implies a period, not a subscription. A more appropriate translation would convey the idea of a subscription or entitlement.",
+          "suggestion": "+ Подписка на 1 год для функциональных возможностей и безопасности."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation includes a Sinhala numeral (𑇡) which is not consistent with the English content (+ 1-year).",
+          "suggestion": "+ වසර 1 ක දායකත්‍වය."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word ' ක්‍රියාකාරිත්‍වය ' (kriyaakaarithvaya) can be translated as 'functionality'. However, a more natural translation for 'functionality and security updates' could be 'කාර‍යන්විතා සහ ආරක්ෂිත යාවත්කාල' (kaaryanvitaa saha arakshithaya yaavathakaala).",
+          "suggestion": "+ ක්‍රියාකාරිත්‍වය සහ ආරක්ෂිත යාවත්කාල සඳහා වසර 1 ක දායකත්‍වය."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -195,7 +264,18 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"+ Đăng ký 1 năm để cập nhật chức năng và bảo mật\" doesn't fully capture the meaning of \"+ 1-year subscription for functionality and security updates.\" \"Đăng ký\" implies simply registering, not necessarily obtaining a subscription with associated rights and benefits. It also misses the nuance of 'for' which implies what is being subscribed *to*.",
+          "suggestion": "+ Đăng ký 1 năm để nhận các bản cập nhật chức năng và bảo mật."
+        },
+        {
+          "type": "formatting",
+          "description": "The '+' sign at the beginning of the translation isn't directly addressed.  It's important to maintain consistency with the English source.",
+          "suggestion": "+ Đăng ký 1 năm để nhận các bản cập nhật chức năng và bảo mật."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

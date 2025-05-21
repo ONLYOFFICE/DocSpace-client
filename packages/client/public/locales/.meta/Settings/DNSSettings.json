@@ -3,7 +3,7 @@
   "content": "DNS Settings",
   "content_en_sha1_hash": "7f2a7680272773297fb8efa578de3f25d6399c36",
   "created_at": "2025-05-19T21:30:51.213Z",
-  "updated_at": "2025-05-20T09:45:20.762Z",
+  "updated_at": "2025-05-21T04:29:56.971Z",
   "comment": {
     "text": "DNS Settings displays the title and subtitle for a DNS settings category in the portal settings customization page. This text is used to label a navigation link that allows users to access their DNS settings.",
     "is_auto": true,
@@ -45,13 +45,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, the translation 'إعدادات نظام أسماء النطاقات' is quite literal and lengthy. A more natural and commonly used translation would be something like 'إعدادات DNS' or 'إعدادات خادم الأسماء'.",
+          "suggestion": "إعدادات DNS"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"DNS Parametrləri\" is a plausible translation, \"DNS Tənzimləmələri\" would be a more accurate and commonly used translation for 'DNS Settings'.  'Parametrləri' implies parameters, while 'Tənzimləmələri' directly translates to 'Settings'.",
+          "suggestion": "DNS Tənzimləmələri"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -171,7 +183,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"ව.නා.ප. සැකසුම්\" doesn't accurately represent \"DNS Settings\". While 'සැකසුම්' (sakasuṁ) correctly translates to 'Settings', 'ව.නා.ප.' seems to be an abbreviation or incomplete representation of 'DNS'. It's not readily understandable to a Sinhala speaker.",
+          "suggestion": "A more accurate translation would be \"DNS සැකසුම්\" or \"වෙබ්‍බ්‍බ්‍ර්‍ අඩත්‍ථිකරණ සැකසුම්\" (web address settings), although the former is preferred for brevity and clarity. A more literal translation incorporating 'DNS' is ideal if audience familiarity is assumed."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -189,7 +207,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"DNS подешавања\" is a generally acceptable translation, but a more precise and commonly used translation would be \"DNS подешавање\" (DNS podešavanje). The plural form \"подешавања\" is not inherently incorrect, but 'подешавање' feels more natural in this context, reflecting a singular setting.",
+          "suggestion": "DNS подешавање"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

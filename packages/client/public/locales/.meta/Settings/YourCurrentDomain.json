@@ -3,7 +3,7 @@
   "content": "Your current domain",
   "content_en_sha1_hash": "b3923c670b1406884e6e252bae5cd97477f25260",
   "created_at": "2025-05-19T21:30:53.253Z",
-  "updated_at": "2025-05-20T09:44:04.946Z",
+  "updated_at": "2025-05-21T02:21:07.897Z",
   "comment": {
     "text": "This translation key is used to display \"Your current domain\" in various places throughout the app, such as in portal settings and multiple spaces. It appears in a label and input field, guiding users to enter their current domain for DNS settings.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Cari domen adınız' is understandable, a more accurate and natural translation of 'Your current domain' would be 'Hazırki domeniniz' or 'Mövcud domeniniz'. 'Cari' can be ambiguous and doesn't directly translate to 'current' in this context.",
+          "suggestion": "Hazırki domeniniz"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -63,7 +69,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Το τρέχον όνομα τομέα σας' is a literal translation of 'Your current domain'. While understandable, it's not the most natural or idiomatic way to express this in Greek. A better translation would convey the meaning of the domain being actively used or selected.",
+          "suggestion": "Consider 'Ο τρέχων τομέας σας' or 'Ο ισχύων τομέας σας' for a more natural-sounding translation."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -75,7 +87,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Nykyinen verkkotunnuksesi\" is technically correct, a more natural and idiomatic translation of \"Your current domain\" in Finnish would be something like \"Nykyinen verkkosivustosi\" or \"Olet nykyisessä verkkotunnuksessa\". \"Verkkotunnuksesi\" is more specific than \"domain\".",
+          "suggestion": "Consider \"Nykyinen verkkosivustosi\" or \"Olet nykyisessä verkkotunnuksessa\""
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -129,7 +147,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Twoja obecna domena' is a literal translation, 'Your current domain' implies ownership or control. A more accurate translation that conveys this context might be 'Państwa domena' (formal) or 'Twoja domena' (informal, but implies possession).",
+          "suggestion": "Consider 'Państwa domena' (formal) or 'Twoja domena' (informal) for a more accurate representation of ownership/control."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -159,7 +183,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ඔබගේ වත්මන් වසම\" is a possible translation, it's a bit formal and less common for user interface text. A more natural and user-friendly translation would be something like \"ඔබේ ඩොමේන්\" (obe domen) or \"ඔබේ දැන් ඩොමේන්\" (oba dan dien domen).",
+          "suggestion": "ඔබේ ඩොමේන්"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -207,7 +237,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, '您当前的域' can sound overly formal and slightly unnatural in many contexts. A more natural translation might be '您的域名' or '当前域名'.",
+          "suggestion": "您的域名"
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Default settings",
   "content_en_sha1_hash": "57afbebd04d4d02458682eb7fa90339a9d41caac",
   "created_at": "2025-05-19T21:30:51.088Z",
-  "updated_at": "2025-05-20T09:45:25.567Z",
+  "updated_at": "2025-05-21T04:37:27.308Z",
   "comment": {
     "text": "This translation key is used to display a label for a button or dialog that refers to default settings. It appears in various UI components such as buttons and save/cancel dialogs, prompting users to reset to default settings when they have unsaved changes. The exact placement may vary across different files.",
     "is_auto": true,
@@ -51,7 +51,18 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'defolt' is a misspelling of 'default'.",
+          "suggestion": "default"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'parametrler' is a valid word, 'parametrlar' is the more common and appropriate pluralization in Azerbaijani for 'parameters'. 'Settings:DefaultSettings' implies 'parameters' rather than a more general word.",
+          "suggestion": "Default parametrlər"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -165,13 +176,30 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"По умолчанию\" while literally meaning \"by default,\" doesn't fully capture the meaning of \"Default settings.\" It lacks the 'settings' portion. A more accurate translation would incorporate that concept.",
+          "suggestion": "Настройки по умолчанию"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'පෙරනිමි' is a somewhat uncommon or archaic form. A more common and clearer translation for 'Default' would be 'පොහොසතාහակի' or 'පෙරහුන්'.",
+          "suggestion": "පොහොසතාහակի සැකසුම්"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'පෙරනිමි' can loosely mean 'default', it's not the most natural or accurate translation in this context. It sounds overly formal and potentially confusing for the average user.",
+          "suggestion": "පොහොසතාහակի සැකසුම්"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -189,7 +217,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Подразумевана подешавања\" while understandable, isn't the most natural or direct translation of 'Default settings'.  'Подразумевана' implies 'assumed' or 'implied' rather than 'default'.",
+          "suggestion": "A more accurate and common translation would be 'Примерна подешавања' (Primerna podešavanja) or 'Злазная подешавања' (Zlazna podešavanja)."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

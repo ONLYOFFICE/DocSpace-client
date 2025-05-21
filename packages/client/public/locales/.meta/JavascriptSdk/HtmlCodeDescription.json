@@ -3,7 +3,7 @@
   "content": "Embedding {{productName}} or its part using the <script> tag. Copy the HTML code below and insert it into your HTML file.",
   "content_en_sha1_hash": "4efa1322ac1505133007a6a20916ec7d8c6e9c89",
   "created_at": "2025-05-19T21:30:54.522Z",
-  "updated_at": "2025-05-20T09:41:36.577Z",
+  "updated_at": "2025-05-21T09:04:25.801Z",
   "comment": {
     "text": "\"This translation key provides a description for embedding or using {{productName}} code via <script> tags in HTML files. It's used to provide instructions on how to insert the code into an HTML file. This text appears in a category subheader for developer tools.\"",
     "is_auto": true,
@@ -33,7 +33,18 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"istifadə edərək\" (using) is somewhat awkward in this context. A more natural phrasing would be something like \"HTML kodunu əlavə etmək üçün\" (to add HTML code).",
+          "suggestion": "<script> teqindən {{productName}}-in və ya onun bir hissəsinin yerləşdirilməsi üçün. Aşağıdakı HTML kodunu kopyalayın və HTML faylınıza əlavə edin."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence flow can be improved by making it more conversational. Splitting the sentence helps with readability.",
+          "suggestion": "<script> teqindən istifadə edərək {{productName}}-in və ya onun bir hissəsinin yerləşdirilməsi üçün. Aşağıdakı HTML kodunu kopyalayın və HTML faylınıza əlavə edin."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -69,7 +80,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Finnish translation includes an unnecessary comma after the first sentence.  It interrupts the flow and is not standard Finnish punctuation.",
+          "suggestion": "{{productName}}-n tai sen osan upotus käyttäen <script> tagia. Kopioi alla oleva HTML-koodi ja syötä se HTML-tiedostoosi."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +98,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation lacks the same bolding or emphasis applied to 'productName' as in the English original. While the variable is present, it doesn't stand out.",
+          "suggestion": "Consider adding a specific formatting style (e.g., bolding) to the {{productName}} variable within the Armenian translation to mirror the English version and highlight it as a placeholder."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,13 +128,25 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ເອກະສານ' should be 'ເອກະສານ HTML'.",
+          "suggestion": "ການຝັງ {{productName}} ຫຼືສ່ວນໜຶ່ງຂອງມັນໂດຍໃຊ້ແທັກ <script> ໃຫ້ສຳເນົາໂຄ້ດ HTML ດ້ານລຸ່ມນີ້ ແລະໃສ່ມັນເຂົ້າໄປໃນເອກະສານ HTML ຂອງທ່ານ।"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Latvian translation maintains the English use of angle brackets (<script>). While technically correct, it might be more natural to avoid the angle brackets in this context for Latvian readers. Consider removing the brackets.",
+          "suggestion": "”{{productName}} vai tās daļas iegulšana, izmantojot skripta tagu. Nokopējiet zemāk esošo HTML kodu un ievietojiet to savā HTML failā.”"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,7 +176,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'spațiului' (of the space) is awkward and doesn't quite capture the meaning of 'Embedding {{productName}}'. A more accurate translation would be 'Integrarea'.",
+          "suggestion": "Integrarea {{productName}} sau a unei părți a acestuia"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +194,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation uses a mix of Sinhala and English (specifically, 'HTML code'). Maintaining consistency would improve readability. While 'HTML code' is commonly understood, a fully Sinhala alternative would be preferable.",
+          "suggestion": "Replace 'HTML code' with a fully Sinhala equivalent like 'HTML ඍජුකෝດය' (HTML rujukanoda) or 'HTML කේතය' (HTML kethaya)."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'පහත HTML code එක පිටපත් කර ඔබේ HTML ගොඩුවට ඇතුළු කරන්න' is slightly awkward.  The word order could be improved for smoother reading.",
+          "suggestion": "Replace with: 'පහත HTML ඍජුකෝදය පිටපත් කර ඔබේ HTML ගොඩුවට ඇතුළු කරන්න.' or 'HTML ඍජුකෝදය පිටපත් කර ඔබේ HTML ගොඩුවට ඇතුළු කරන්න.'"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +223,35 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase \"или његовог дела\" could be improved for clarity and flow. It's grammatically correct but sounds slightly awkward.",
+          "suggestion": "или његовог дела или једног његовог дела"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase \"HTML код испод\" could benefit from a more natural flow. Consider adding a connector like 'и' to link it more smoothly with the preceding clause.",
+          "suggestion": "HTML код испод и"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'pomoću <script> taga' is a bit awkward. 'Pomoću' means 'with' or 'by means of.' While technically correct, it's not the most natural way to express this in Serbian. A more natural phrasing would use 'u' or 'kroz.'",
+          "suggestion": "Ugrađivanje {{productName}}-a ili njegovog dela kroz <script> tag.  (Embedding {{productName}}-a or its part through the <script> tag.)"
+        },
+        {
+          "type": "grammar",
+          "description": "While 'umetnite ga' is grammatically correct, a more common and slightly more formal phrasing would be 'unesite ga'.",
+          "suggestion": "Kopirajte HTML kod ispod i unesite ga u svoju HTML datoteku."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -189,7 +263,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'простору' (prostoru) in 'Вбудовування простору {{productName}}' is not the best fit for 'Embedding {{productName}}'.  'Вбудовування' is correct for embedding, but 'простору' implies a space or area, not the product itself. A more accurate translation would be something like 'Вбудовування {{productName}}' or 'Вбудовування продукту {{productName}}'.",
+          "suggestion": "Вбудовування {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

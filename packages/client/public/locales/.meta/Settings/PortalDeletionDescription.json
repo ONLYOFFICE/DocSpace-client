@@ -3,7 +3,7 @@
   "content": "Use this option to delete your space permanently.",
   "content_en_sha1_hash": "eda8701798195496d0dcc13393b3bf9f69ca3417",
   "created_at": "2025-05-19T21:30:52.208Z",
-  "updated_at": "2025-05-20T09:44:47.213Z",
+  "updated_at": "2025-05-21T03:41:47.378Z",
   "comment": {
     "text": "This translation key is used for a description that informs users about the permanent deletion of their space. It appears on a button in the Portal Settings page when the user has not activated their account.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"استخدم هذا الخيار لحذف إستضافتك بشكل دائم\" translates to \"Use this option to permanently delete your hosting.\"  The English refers to a 'space,' not 'hosting.'  'Space' is likely referring to a user's area or portal.",
+          "suggestion": "استخدم هذا الخيار لحذف مساحتك بشكل دائم."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -51,7 +57,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Space' in the German translation is a direct transliteration from English and might not be the most natural or understandable term for a user. A more appropriate German equivalent for 'space' in this context (e.g., 'Bereich', 'Umgebung', 'Raum') should be considered.",
+          "suggestion": "Verwenden Sie diese Option, um Ihren Bereich endgültig zu löschen."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -81,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'տարածքը' (taraspěqë) is spelled correctly, but depending on the specific context, 'տեղը' (teɣë) might be a better fit for 'space' in this scenario, implying a more allocated or dedicated area.",
+          "suggestion": "Consider using 'տեղը' (teɣë) instead of 'տարածքը' (taraspěqë) if the context is more about a dedicated area rather than a broad space."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -147,7 +165,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'portal' (портал) is used instead of 'space'. While 'portal' can sometimes refer to a space, in this context 'space' is a more accurate and understandable translation.",
+          "suggestion": "Используйте эту опцию, чтобы удалить ваше пространство навсегда."
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -171,13 +195,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'обришеш' (obrišes) implies a more casual or informal command. A more formal and appropriate translation for a settings option would be 'да избришеш' (da izbrišes) or 'за брисање' (za brisanje).",
+          "suggestion": "Користи ову опцију да избришеш трајно свој простор."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Serbian translation uses the informal 'obrišeš' which might not be appropriate for settings. A more formal 'obrišete' or 'izbrišete' would be more aligned with a settings context.",
+          "suggestion": "Koristi ovu opciju da izbrišete trajno svoj prostor."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

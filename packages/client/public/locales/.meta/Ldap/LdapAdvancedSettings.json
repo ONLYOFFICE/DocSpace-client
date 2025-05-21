@@ -3,7 +3,7 @@
   "content": "Advanced Settings",
   "content_en_sha1_hash": "c8fef35bb0051188fdf2fc669c93b9fc3070808e",
   "created_at": "2025-05-19T21:30:54.163Z",
-  "updated_at": "2025-05-20T09:42:17.112Z",
+  "updated_at": "2025-05-21T08:29:32.929Z",
   "comment": {
     "text": "The \"LdapAdvancedSettings\" translation key is used to display a title for advanced LDAP settings within a portal's integration settings. It appears as a heading in a UI component. The translator should provide a brief, descriptive label for this setting.",
     "is_auto": true,
@@ -153,7 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Sinhala translation 'අධ්‍යයන සැකසුම්' appears to have a spelling error. 'අධ්‍යයන' should likely be 'අඩු දියුණු' or 'උසස්'.",
+          "suggestion": "අඩු දියුණු සැකසුම් or උසස් සැකසුම්"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +177,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Serbian (Cyrillic) translation \"Напредна Подешавања\" has a spelling error. The correct spelling should be \"Напредне Подешавања\". The word \"Напредне\" is the correct genitive plural form of \"напред\" (advanced).",
+          "suggestion": "Напредне Подешавања"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -195,7 +207,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Cài Đặt Nâng Cao' is a literal translation of 'Advanced Settings' but doesn't flow naturally in Vietnamese. While 'Cài Đặt' means 'Settings' and 'Nâng Cao' means 'Advanced', a more common and natural phrasing would be 'Thiết lập nâng cao' or 'Cài đặt nâng cao' is acceptable but 'Thiết lập nâng cao' is slightly preferred.",
+          "suggestion": "Thiết lập nâng cao"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

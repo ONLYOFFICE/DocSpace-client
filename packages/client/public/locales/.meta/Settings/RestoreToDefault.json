@@ -3,7 +3,7 @@
   "content": "Restore to default",
   "content_en_sha1_hash": "4679ca338a63ec93afce427c08feb4f9b69c6008",
   "created_at": "2025-05-19T21:30:52.427Z",
-  "updated_at": "2025-05-20T09:44:38.035Z",
+  "updated_at": "2025-05-21T03:26:24.119Z",
   "comment": {
     "text": "RestoreToDefault is used as a label for the cancel button on a portal settings page, prompting users to revert to default brute force protection settings. This translation key appears in a dialog box where users can customize security settings.",
     "is_auto": true,
@@ -27,19 +27,47 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"العودة إلى الإعدادات الإفتراضية \" is a literal translation but could be more natural. 'Restore to default' often implies reverting to a factory setting or original state, which isn't perfectly conveyed here.",
+          "suggestion": "إعادة ضبط الإعدادات"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'الإفتراضية' is spelled with a 'ف'. The correct spelling is 'الإفتراضية'.",
+          "suggestion": "الإفتراضية"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Defolt olaraq bərpa edin' is not the most natural or accurate translation of 'Restore to default'. 'Defolt' is a transliteration of 'default' and not a direct Azerbaijani word. 'Bərpa edin' implies 'restore', but 'default' signifies a reset to the original state, which is more accurately conveyed with a different phrasing.",
+          "suggestion": "Təsdidə qaytar"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'Defolt' is a misspelling of 'Default'.  It is an English transliteration and lacks proper Azerbaijani spelling.",
+          "suggestion": "The English word 'Default' should not be transliterated."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Възстановяване към фабрични настройки' is a generally understandable translation, 'Restore to default' often implies a more simplified reset, not necessarily a factory reset. 'Възстановяване към настройки по подразбиране' would be a more accurate translation.",
+          "suggestion": "Възстановяване към настройки по подразбиране"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -81,7 +109,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Վերականգնել լռելյայն' while conveying a similar meaning, is not the most natural or precise translation of 'Restore to default'. 'Վերականգնել լռելյայն' literally means 'Restore silence/default'. A more natural and accurate translation might be 'Վերականգնել դեֆոլտները' or 'Վերականգնել ծրագրային լռելյայն'.",
+          "suggestion": "Վերականգնել դեֆոլտները"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,7 +139,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ກວດແກ້ຄືນສູ່ຄ່າເລີ່ມຕົ້ນ' translates more closely to 'Check back to the starting value' rather than 'Restore to default'. It implies a check rather than a restoration.",
+          "suggestion": "ອັບເດດສູ່ຄ່າເລີ່ມຕົ້ນ (Update to default value) or ກູ້ຄືນສູ່ຄ່າເລີ່ມຕົ້ນ (Return to default value)"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -153,7 +193,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"පෙරනිදි වලට නැවත හරවන්න\" is a literal translation but not the most natural or idiomatic way to express \"Restore to default\" in Sinhala. It translates to something like \"Return to the originals\". While understandable, a more fluent translation would be preferred.",
+          "suggestion": "Consider a translation like \"setDefault කරන්න\" (setDefault karanawa) or \"පහේට්ටුවට යවන්න\" (pahaettuwata yawanawa) which conveys the meaning more naturally."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +217,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Повратак на подразумевано\" is understandable, a more natural and commonly used translation for \"Restore to default\" would be something closer to \"Враћање на подразумевана подешавања\" or \"Повратак на фабричка подешавања\". \"Повратак на подразумевано\" is a bit awkward in Serbian.",
+          "suggestion": "Враћање на подразумевана подешавања"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

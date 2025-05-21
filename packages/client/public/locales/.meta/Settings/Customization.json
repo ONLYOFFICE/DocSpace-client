@@ -3,7 +3,7 @@
   "content": "Customization",
   "content_en_sha1_hash": "d7f0ac9e007291a6ccc21d036f4711505ad9d0b1",
   "created_at": "2025-05-19T21:30:51.004Z",
-  "updated_at": "2025-05-20T09:45:28.862Z",
+  "updated_at": "2025-05-21T04:44:39.159Z",
   "comment": {
     "text": "This translation key is used to display the label \"Customization\" in the Portal Settings. It appears as a header title and is associated with a customization setting, likely related to user or application settings.",
     "is_auto": true,
@@ -201,7 +201,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Ukrainian translation 'Налаштування' generally translates to 'Settings' or 'Configurations,' not 'Customization.' While it can sometimes be used in a related context, it's not the most accurate equivalent for 'Customization.'",
+          "suggestion": "Consider 'Персоналізація' for a closer translation of 'Customization.'"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

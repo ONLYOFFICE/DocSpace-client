@@ -3,7 +3,7 @@
   "content": "Company info settings",
   "content_en_sha1_hash": "192f2a8a9bec6d013a113f97fc1ce9b3cdd0c794",
   "created_at": "2025-05-19T21:30:50.934Z",
-  "updated_at": "2025-05-20T09:45:31.579Z",
+  "updated_at": "2025-05-21T04:48:49.055Z",
   "comment": {
     "text": "Company info settings are a section within the Portal Settings that displays company-related information. This key is used to translate the title of this section, appearing as \"Company Info Settings\".",
     "is_auto": true,
@@ -51,7 +51,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Şirkət məlumatları parametrləri\" is understandable, it's a somewhat literal and not the most natural way to translate \"Company info settings\" in Azerbaijani. 'Parametrləri' suggests configurable parameters, which isn't the primary meaning of 'settings'.",
+          "suggestion": "Şirkət məlumatları ayarları"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -93,7 +99,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Paramètres d’information de l’entreprise' is a bit literal and verbose. A more natural and idiomatic translation would be 'Informations entreprise' or 'Paramètres entreprise'.",
+          "suggestion": "Informations entreprise"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -159,7 +171,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Setări Informaţii companie\" is a literal translation, but sounds unnatural in Romanian. A more natural phrasing would be \"Setări informații despre companie\" or \"Setări informații companie\".",
+          "suggestion": "Setări informații despre companie"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -189,13 +207,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Информације о компанији подешавања' is not the most natural or accurate translation of 'Company info settings'. While technically correct, it sounds somewhat clunky in Serbian.",
+          "suggestion": "A more natural translation would be 'Подешавања информација о компанији' or 'Поставке информација о компанији'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Informacije o kompaniji podešavanja\" is not the most natural or accurate translation of \"Company info settings.\" \"Podešavanja\" refers to settings, but \"Informacije o kompaniji\" is a bit clunky. A better phrasing would be closer to \"Podešavanja kompanije\" or \"Postavke kompanije\".",
+          "suggestion": "Podešavanja kompanije"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -207,7 +237,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Параметри інформації про компанію' is too literal and a bit clunky. While technically correct, it doesn't flow naturally in Ukrainian. 'Налаштування інформації про компанію' or 'Інформація про компанію: налаштування' would be more common and readable.",
+          "suggestion": "Налаштування інформації про компанію"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

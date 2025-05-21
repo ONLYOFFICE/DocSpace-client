@@ -3,7 +3,7 @@
   "content": "Automatically switch between light and dark themes depending on the current theme of Desktop Editors.",
   "content_en_sha1_hash": "f22c34003047b47698610a16f3357dd63749f1ba",
   "created_at": "2025-05-19T21:30:53.350Z",
-  "updated_at": "2025-05-20T09:43:54.620Z",
+  "updated_at": "2025-05-21T05:45:07.897Z",
   "comment": {
     "text": "This translation key is used to describe the automatically switching theme feature between light and dark themes on Desktop Editors. The text appears in a system settings or preferences section, likely as part of the interface that controls this feature. Translators should focus on conveying the idea of automatic theme adaptation for desktop editors.",
     "is_auto": true,
@@ -27,13 +27,30 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'القالب الحالي لمحرري سطح المكتب' doesn't accurately convey the meaning of 'current theme of Desktop Editors'. 'Theme' is better translated as 'السمة' (al-simah) rather than 'القالب' (al-qalib) which means 'template' or 'mold'.",
+          "suggestion": "قم بالتبديل تلقائيًا بين السمات الفاتحة والداكنة وفقًا للسمة الحالية لمحرري سطح المكتب."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is a bit literal and doesn't flow naturally in Azerbaijani. 'Asılı olaraq' (depending on) can be slightly awkward in this context. A more idiomatic translation would be more natural.",
+          "suggestion": "Masa üstü redaktorların mövzusuna uyğun olaraq açıq və qaranlıq mövzular arasında avtomatik keçid edin."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the sentence structure could be slightly improved for readability in Azerbaijani. Using a more common phrasing can enhance flow.",
+          "suggestion": "Masa üstü redaktorların mövzusuna uyğun olaraq açıq və qaranlıq mövzular arasında avtomatik keçid edilir."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -45,31 +62,76 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'editorů plochy' (editors of the desktop) is not the most natural or precise way to translate 'Desktop Editors'. It lacks clarity and might confuse users. 'Desktop Editors' likely refers to the application itself, not the editors who use it.",
+          "suggestion": "Automatické přepínání mezi světlými a tmavými motivy v závislosti na aktuálním motivu Desktop Editorů."
+        },
+        {
+          "type": "formatting",
+          "description": "Using the English term 'Desktop Editorů' might clash with the Czech translation's consistency. It's more appropriate to Czechize the term.",
+          "suggestion": "Automatické přepínání mezi světlými a tmavými motivy v závislosti na aktuálním motivu stolních editorů."
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing 'je nach dem aktuellen Thema der Desktop-Editoren' is slightly awkward and could be improved for better flow in German. A more natural phrasing might be 'abhängig vom aktuellen Thema der Desktop-Editoren' or 'basierend auf dem aktuellen Thema der Desktop-Editoren'.",
+          "suggestion": "Automatisches Umschalten zwischen hellen und dunklen Themen abhängig vom aktuellen Thema der Desktop-Editoren."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Desktop Editors' is not accurately translated. 'Desktop Editors' refers to software used for desktop environments. The translation 'επεξεργαστών για σταθερούς υπολογιστές' literally translates to 'editors for desktop computers', which is not precise.",
+          "suggestion": "Αυτόματη εναλλαγή μεταξύ ανοιχτού και σκοτεινού θέματος ανάλογα με το τρέχον θέμα των εφαρμογών για σταθερούς υπολογιστές."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'επεξεργαστών για σταθερούς υπολογιστές' is a bit clunky. While technically correct, it could be more natural-sounding.",
+          "suggestion": "Αυτόματη εναλλαγή μεταξύ ανοιχτού και σκοτεινού θέματος ανάλογα με το τρέχον θέμα των εφαρμογών του συστήματος."
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The verb 'Cambie' (imperative form) suggests a command to the user, whereas the English uses 'Automatically switches' indicating an automatic process. The translation implies the user is performing the action.",
+          "suggestion": "Cambia automáticamente entre temas claros y oscuros según el tema actual de los editores de escritorio."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Vaihda automaattisesti vaaleiden ja tummien teemojen välillä työpöytäeditorien nykyisen teeman mukaan' is a bit literal and could be more natural. 'Desktop Editors' likely refers to applications used for editing desktop content, not just the visual theme of the desktop.",
+          "suggestion": "Vaihda automaattisesti vaaleiden ja tummien teemojen välillä sen mukaan, mitä teemaa käytetään työpöytäohjelmissa."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'työpöytäeditorien nykyisen teeman mukaan' is verbose and not the most accurate way to convey 'depending on the current theme of Desktop Editors'. The intended meaning is likely 'matching the theme used in Desktop Editors'.",
+          "suggestion": "The suggestion in the prior issue includes an improved phrasing for this."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,13 +143,25 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Ավտոմատ կերպով անցում կատարեք բաց և մուգ թեմաների միջև՝ կախված աշխատասեղանի խմբագիրների ընթացիկ թեմայից:\" is a bit too literal and sounds unnatural. A more natural phrasing would be to focus on the automatic switching and less on the action of 'transitioning'.",
+          "suggestion": "Ավտոմատ կերպով անցեք բաց և մուգ թեմաների միջև, ըստ աշխատասեղանի խմբագրիչների ընթացիկ թեմայի։ (Avtomat k'erpow anc'ek bac yev mug themaneri mijev, ets ashkhatas'egani khmbagirch'neri ents'ik thema.)"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"tema corrente degli editor desktop\" is somewhat literal and could be improved for naturalness in Italian. 'Desktop Editors' refers to applications, and the phrasing doesn't quite convey that.",
+          "suggestion": "Passa automaticamente dal tema chiaro a quello scuro a seconda del tema utilizzato dalle applicazioni desktop."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -99,49 +173,117 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '데스크탑 편집기의 테마에 따라 라이트 테마와 다크 테마 간을 자동으로 전환합니다' could be interpreted as 'switches between light and dark themes based on the themes *of* Desktop Editors'. The English implies a dependency on the Desktop Editors *current* theme. A more precise translation would reflect this dependency.",
+          "suggestion": "데스크탑 편집기의 현재 테마에 따라 라이트 테마와 다크 테마를 자동으로 전환합니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຕົວແກ້ໄຂເດັສທັອບຂອງທ່ານ' is a literal translation of 'Desktop Editors' and doesn't convey the intended meaning of 'Desktop Editors' referring to the system's theme settings or editor applications.",
+          "suggestion": "ສະຫຼັບລະຫວ່າງຮູບແບບສີສັນແຈ້ງ ແລະມືດໂດຍອັດຕະໂນມັດເມື່ອອີງຕາມການຕັ້ງຄ່າຂອງໂທມັດແກ້ໄຂເດັສທັອບ"
+        },
+        {
+          "type": "grammar",
+          "description": "The wording 'ເມື່ອອີງຕາມການຕັ້ງຄ່າຂອງໂທມັດແກ້ໄຂເດັສທັອບ' can be improved for flow.",
+          "suggestion": "ເມື່ອອີງຕາມໂທມັດແກ້ໄຂເດັສທັອບ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'pārslēdzieties' (you will switch) implies a direct action by the user. The English implies an automatic process, so a more passive voice is needed.",
+          "suggestion": "Automātiski pārslēdzas starp gaišiem un tumšiem dizainiem atkarībā no pašreizējās darbvirsmas redaktoru tēmas."
+        },
+        {
+          "type": "formatting",
+          "description": "The English uses 'light and dark themes', which is more idiomatic than a literal translation of 'gaišiem un tumšiem dizainiem'. While technically correct, it loses some of the natural flow.",
+          "suggestion": "Automātiski pārslēdzas starp gaišu un tumšu tēmu atkarībā no pašreizējās darbvirsmas redaktoru tēmas."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Schakel automatisch tussen lichte en donkere thema's, afhankelijk van het huidige thema van de desktop editors\" could be improved for clarity and flow. While technically correct, it's a bit clunky.  'Desktop editors' is also quite literal and could be improved.",
+          "suggestion": "Schakel automatisch tussen lichte en donkere thema's, gebaseerd op het thema van de desktop applicaties."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"edytorów dla komputerów stacjonarnych\" is overly literal and verbose. \"Desktop Editors\" likely refers to a specific software application, and the phrase is not the best way to convey that in Polish. It suggests all desktop editors are involved, rather than the application.",
+          "suggestion": "Automatycznie przełączaj się między jasnym i ciemnym motywem w zależności od bieżącego motywu edytora."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence could be slightly smoother by rephrasing the verb usage.",
+          "suggestion": "Automatycznie przełączaj motyw między jasnym i ciemnym, w zależności od bieżącego motywu edytora."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Alterne automaticamente entre temas claros e escuros dependendo do tema atual dos editores de desktop' is a bit literal and could be more natural in Portuguese. 'Desktop Editors' could be better translated to 'Editores de Área de Trabalho'.",
+          "suggestion": "Alterne automaticamente entre temas claros e escuros dependendo do tema atual dos editores de área de trabalho."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Desktop Editors' is not well-defined. It's unclear what 'Desktop Editors' refers to. A more specific term or explanation might be needed depending on the context. The direct translation is technically correct, but potentially confusing to the user.",
+          "suggestion": "Consider rephrasing to clarify what 'Desktop Editors' are, such as 'Aplicativos de edição de desktop' or 'Editores de documentos no desktop'. Alternatively, the phrase could be removed if its meaning is obvious from the context."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Comutați automat între tema luminoasă şi întunecată în funcție de tema actuală a editorului pentru desktop' is not a perfect equivalent of 'Automatically switch between light and dark themes depending on the current theme of Desktop Editors'. The word 'editor' is singular, while the original refers to 'Desktop Editors' which implies a collection. It is also a bit literal, lacking the flow of the original.",
+          "suggestion": "Comutați automat între tema luminoasă și întunecată, în funcție de tema curentă a aplicațiilor de desktop."
+        },
+        {
+          "type": "formatting",
+          "description": "The Romanian sentence uses 'și' instead of 'ş' in 'tema luminoasă și întunecată'.",
+          "suggestion": "Comutați automat între tema luminoasă și întunecată în funcție de tema actuală a editorului pentru desktop."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,37 +295,88 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is not entirely accurate. 'Desktop Editors' is being referred to as 'වැඩතල සංස්කරක' which is a literal translation of 'workplace editors' and might not be clear to a Sinhala speaker. It's more appropriate to describe the type of editor being referenced.",
+          "suggestion": "වැඩහරි පරිගණක වැඩසටහන් (Vadehari pariganaka vadasathahan) - This translates to 'desktop applications/programs' and is closer to 'Desktop Editors'."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure could be improved for better flow in Sinhala. The phrase 'දීප්ත සහ අඳුරු තේමා අතර' is somewhat awkward.",
+          "suggestion": "දීප්ත සහ අඳුරු තේමා අතරින් එකක් තෝරාගෙන ස්වයංක්‍රීයව මාරු වන්න (Deeptha saha anduru thema atharkin ekak thoraagena swayamkriyava maru vanna)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Desktop Editors' is translated as 'editorov na počítači'. While technically correct, it's less precise and might confuse users. 'Desktop Editors' refers to a specific application or suite, not just any editor on a computer. A more precise translation might be something like 'aplikácií pre úpravu obsahu' or 'desktopových editoroch'.",
+          "suggestion": "Consider translating 'Desktop Editors' to 'desktopových editoroch' or 'aplikácií pre úpravu obsahu' for better clarity."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Samodejno preklapljajte med svetlimi in temnimi temami glede na trenutno temo namiznih urejevalnikov' doesn't perfectly convey the original meaning of 'Automatically switch between light and dark themes depending on the current theme of Desktop Editors.' The phrase 'glede na trenutno temo' is slightly awkward. A more natural phrasing would be something like 'odvisno od trenutne teme'.",
+          "suggestion": "Samodejno preklapljajte med svetlimi in temnimi temami odvisno od trenutne teme namiznih urejevalnikov."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'светлих' (svetlikh) is a genitive plural. It should be nominative plural 'светле' (svetle) to agree with 'теме' (teme).",
+          "suggestion": "светле"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Desktop Editors' is directly translated. A more natural Serbian phrasing would be to describe the functionality instead of directly translating the English term. It implies a specific application which might not be obvious to the user.",
+          "suggestion": "Automatski menjaj između svetlih i tamnih tema u zavisnosti od trenutne podešavanja teme u aplikaciji za uređivanje."
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, the phrase 'u zavisnosti od trenutne teme' can be slightly improved for flow.",
+          "suggestion": "u zavisnosti od trenutne teme koju koristi"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Masaüstü düzenleyicilerin mevcut temasına bağlı olarak açık ve koyu temalar arasında otomatik olarak geçiş yap' is a bit literal and could be more natural. 'Açık ve koyu temalar' translates to 'light and dark themes' but a more fluent phrasing would be something like 'açık ve karanlık temalar' or simply 'temalar'.",
+          "suggestion": "Masaüstü düzenleyicilerin mevcut temasına bağlı olarak otomatik olarak temalar arasında geçiş yap."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English content says 'depending on the current theme of Desktop Editors'. The Turkish translation is slightly awkward. It could be phrased more elegantly.",
+          "suggestion": "Masaüstü düzenleyicilerin geçerli temasına göre otomatik olarak temalar arasında geçiş yap."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -195,7 +388,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"hình nền hiện tại của trình chỉnh sửa máy tính để bàn\" (current wallpaper of desktop editors) is not an accurate translation of \"current theme of Desktop Editors.\" The original refers to the visual style, not the wallpaper image.",
+          "suggestion": "Tự động chuyển đổi giữa chế độ nền sáng và tối tùy thuộc vào chủ đề hiện tại của trình chỉnh sửa máy tính để bàn."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

@@ -3,7 +3,7 @@
   "content": "This user account is loaded from SSO. If you need to change the user name and email address, refer to the SSO server.",
   "content_en_sha1_hash": "1d49453415a6a5acd60e0631a6a68b712b362f82",
   "created_at": "2025-05-19T21:30:53.515Z",
-  "updated_at": "2025-05-20T09:43:34.983Z",
+  "updated_at": "2025-05-21T05:56:02.477Z",
   "comment": {
     "text": "This translation key displays a message explaining that the user account is loaded from Single Sign-On (SSO) and provides instructions on how to update the username and email address. It appears in tooltips next to badges indicating SSO-loaded accounts, likely on profile or information pages. The text helps users understand their account's origin and provides context for changing their details.",
     "is_auto": true,
@@ -39,7 +39,18 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"İstifadəçi adı və e-poçt ünvanını dəyişmək lazımdırsa\" literally translates to 'If it is necessary to change the username and email address'. A more natural phrasing in Azerbaijani would be 'If you need to change the username and email address'.",
+          "suggestion": "If you need to change the username and email address."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"yoxlayın\" is a valid translation for \"refer to\", in this context a more appropriate term would be \"əldə edin\" or \"müraciət edin\". \"Yoxlayın\" implies checking rather than accessing/consulting.",
+          "suggestion": "əldə edin"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -105,13 +116,25 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation includes \"SSO\" without proper spacing around it. It should be separated from the surrounding words with spaces.",
+          "suggestion": "이 사용자 계정은 SSO 에서 로드되었습니다. 사용자명과 이메일 주소를 변경해야 하는 경우 SSO 서버를 참고하세요."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ຄູ່ມືການໃຊ້ງານ\" (manual) is too literal. A more natural translation for \"refer to the SSO server\" would be something like \"ຕິດຕໍ່ບໍລິການຂອງເຄື່ອງແມ່ຂ່າຍ SSO\" or \"ອີງຕາມການຕັ້ງຄ່າຂອງເຄື່ອງແມ່ຂ່າຍ SSO\".",
+          "suggestion": "ອີງຕາມການຕັ້ງຄ່າຂອງເຄື່ອງແມ່ຂ່າຍ SSO"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -129,7 +152,23 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Polish translation uses the masculine singular form 'Dane konto' (data account) which is grammatically incorrect. It should be the neuter form 'Dane konta' (data of the account) or the feminine singular 'Dane konta użytkownika' (data of the user account).",
+          "suggestion": "Dane konta użytkownika jest ładowane z SSO."
+        },
+        {
+          "type": "grammar",
+          "description": "The verb 'jest' (is) doesn't match the subject 'Dane konta użytkownika'. The verb should be in the singular form.",
+          "suggestion": "Dane konta użytkownika jest ładowane z SSO."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'należy odwołać się' (one should refer) is somewhat formal and less natural in this context. A more direct and user-friendly translation would be better.",
+          "suggestion": "Aby zmienić nazwę użytkownika i adres e-mail, proszę skontaktować się z administratorem serwera SSO."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -147,7 +186,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'utilizator' is repeated unnecessarily. While grammatically correct, it's stylistically awkward.",
+          "suggestion": "Contul acestui utilizator este încărcat prin SSO. Dacă doriți să schimbați numele și adresa de e-mail, accesați serverul SSO."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -159,7 +204,23 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'perishilaka' (පරිශීලක) is a less common or potentially incorrect term for 'user'. 'Gevogaya' (ගෙවෝගයා) is also slightly awkward. Consider 'Vartthakaya' (වෘත්තិកයා) or a more general term.",
+          "suggestion": "Consider using a more common term for 'user' like 'Vartthakaya' (වෘත්තិកයා) or a more general term.  Investigate if 'perishilaka' is a valid term in this context."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'මෙම පරිශීලක ගිණුම SSO වෙතින් පැටවිනි' can be improved for clarity and natural flow. It sounds slightly unnatural.",
+          "suggestion": "Consider rephrasing the sentence to 'මෙම පරිශීලක ගිණුම SSO වෙතින් ලබාගෙන ඇත.' (This user account is obtained from SSO)."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the overall flow and formality of the translation could be improved to better align with the English source.",
+          "suggestion": "Review the sentence structure and word choice to ensure a natural and professional tone, aligning closer to the English source in terms of formality."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +238,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'email' is transliterated as 'емаил'. The correct Serbian word is 'е-маил'.",
+          "suggestion": "емаил -> е-маил"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

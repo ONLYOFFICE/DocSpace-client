@@ -3,7 +3,7 @@
   "content": "Webhook configuration edited successfully",
   "content_en_sha1_hash": "7dd5195411b7f7442a0ee6ded6f503de931fd1a6",
   "created_at": "2025-05-19T21:30:49.874Z",
-  "updated_at": "2025-05-20T09:46:46.464Z",
+  "updated_at": "2025-05-21T00:50:55.734Z",
   "comment": {
     "text": "This translation key is used to display a success message when a webhook configuration is edited successfully. It is typically shown in a dialog or confirmation modal after submitting changes, providing feedback to the user that the update was successful.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The hyphen in \"Webhook-ի\" appears unnecessary and disrupts readability. While technically acceptable in Armenian, it's more common and preferred to omit it for this context.",
+          "suggestion": "Webhook-ի should be Webhook-ի or Webhookի"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,7 +105,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation 'Webhooks:WebhookEditedSuccessfully' is not a meaningful translation of 'Webhook configuration edited successfully'. It appears to be the key name itself, not a translated sentence.",
+          "suggestion": "웹훅 설정이 성공적으로 편집되었습니다"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -111,13 +123,25 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Tīmekļa aizķeres konfigurācija ir veiksmīgi rediģēta' uses 'aizķere' which translates to 'obstacle' or 'snag' rather than 'webhook'. 'Webhook' should ideally be translated more directly or left as 'webhook'.",
+          "suggestion": "Consider 'Webhook konfigurācija ir veiksmīgi rediģēta' or a more contextually appropriate term for 'webhook' in Latvian."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Webhook configuratie succesvol bewerkt' is not the most natural phrasing in Dutch. 'bewerkt' implies an action being performed *on* the configuration, rather than the configuration itself being edited.",
+          "suggestion": "Webhook configuratie succesvol aangepast"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -153,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Webhook වින්‍යාසය සංශෝධනය කෙරිණි' is a literal translation and doesn't flow naturally in Sinhala. 'Sanśodhana' implies a more formal or significant revision. A more natural phrasing would convey the message of successful editing.",
+          "suggestion": "Webhook සැකසුම සාර්ථකව සංශෝධනය කෙරිණි"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +201,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The word 'конфигурација' is in Latin script instead of Cyrillic.",
+          "suggestion": "Webhook конфигурација успешно уређена"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

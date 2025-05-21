@@ -3,7 +3,7 @@
   "content": "Copy selected items to the clipboard",
   "content_en_sha1_hash": "f91d242fd5ba33f8f48574cde08a714e19791317",
   "created_at": "2025-05-19T21:30:55.032Z",
-  "updated_at": "2025-05-20T09:40:38.200Z",
+  "updated_at": "2025-05-21T10:35:36.120Z",
   "comment": {
     "text": "This translation key is used to display the text \"Copy selected items to the clipboard\" in the application's UI. It appears in a hotkeys panel, providing context to users about the function of pressing Ctrl+Shift+c.",
     "is_auto": true,
@@ -33,7 +33,18 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Seçilmiş elementləri mübadilə buferinə nüsxələyin' is not a direct or natural translation of 'Copy selected items to the clipboard'. \"Mübadilə buferi\" translates to 'swap buffer', not 'clipboard'. \"Nüsxələyin\" is technically 'copy' but doesn't flow naturally.",
+          "suggestion": "Seçilmiş elementləri məclisə (clipboard) köçürün"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, using parenthesis around 'clipboard' would clarify what 'məclisə' refers to for users who might be unfamiliar with the term.",
+          "suggestion": "Seçilmiş elementləri məclisə (clipboard) köçürün"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -81,7 +92,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'սեղմատախտակում' is the correct Armenian word for 'clipboard' but in this context, 'մատյան' (matyan) which means 'notebook' or 'pad' might be more natural and understandable to Armenian users, especially if the software uses a notebook-like interface for hotkeys.",
+          "suggestion": "Պատճենեք ընտրված տարրերը մատյանում"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, the translation 'Պատճենեք ընտրված տարրերը սեղմատախտակում' is somewhat literal. It could be more naturally phrased in Armenian to improve readability and user experience. The use of 'սեղմատախտակում' implies a specific type of clipboard, rather than the general concept.",
+          "suggestion": "Պատճենեք ընտրված տարրերը պանակում"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -123,7 +145,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Kopiuj zaznaczone pliki do schowka' implies copying files. The original English refers to 'items' which is more general. 'Pliki' (files) is too specific.",
+          "suggestion": "Kopiuj zaznaczone elementy do schowka"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,7 +169,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Copiere elemente selectate în clipboard' is a literal translation and doesn't flow naturally in Romanian. 'Clipboard' is a loanword and could be replaced with a more natural equivalent.",
+          "suggestion": "Copierea elementelor selectate în agrafa"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "Using 'în clipboard' sounds clunky. While 'clipboard' is understood, using a more standard Romanian equivalent would improve fluency.",
+          "suggestion": "în agrafa"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +192,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"තෝරාගත් අථක පසුරු පුවරුවට පිටපත් කරන්න\" is not an accurate translation of \"Copy selected items to the clipboard\". \"අථක\" (athaka) doesn't fit the context of 'items' or 'selection'. It translates more literally to 'physical' or 'material'.",
+          "suggestion": "තෝරාගත් වස්තුවල/අයිතමයන් ක්ලිප්බෝඩ් වෙත පිටපත් කරන්න"
+        },
+        {
+          "type": "grammar",
+          "description": "While understandable, the phrasing 'පසුරු පුවරුවට' (pasuru puwaruwata) which translates to 'to the clipboard' is somewhat stiff. A more natural phrasing might be preferable.",
+          "suggestion": " ක්ලිප්බෝඩ් වෙත පිටපත් කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +221,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'привремену меморију' (privremenu memoriju) translates to 'temporary memory' or 'scratchpad'. While technically the clipboard *is* a type of temporary storage, 'clipboard' is the more accurate and idiomatic term in this context. The English phrase 'clipboard' is commonly understood and used, even by those not fluent in English, when referring to this functionality.",
+          "suggestion": "Копирај одабране ставке у одељак за копирање (or Копирај одабране ставке на имењач)"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"clipboard\" is best translated as \"smeđište\" in Serbian (Latin) in this context. \"Privremena memorija\" is more general and less specific to the clipboard functionality.",
+          "suggestion": "Kopiraj odabrane stavke na smeđište"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,7 +257,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"bộ nhớ tạm\" is a more literal and slightly less natural translation of 'clipboard' in this context. A more idiomatic translation would use a more common term for clipboard in Vietnamese.",
+          "suggestion": "Sao chép các mục đã chọn vào bảng nhớ"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

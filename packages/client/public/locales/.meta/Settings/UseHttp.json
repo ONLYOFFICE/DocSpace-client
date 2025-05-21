@@ -3,7 +3,7 @@
   "content": "Use Http",
   "content_en_sha1_hash": "a4ed8cbde9503b55d14f45b94b48f75e0a869a86",
   "created_at": "2025-05-19T21:30:53.100Z",
-  "updated_at": "2025-05-20T09:44:11.066Z",
+  "updated_at": "2025-05-21T02:32:38.823Z",
   "comment": {
     "text": "\"This key is used as a translation placeholder for the phrase 'Use Http' in Amazon settings pages, likely appearing on a toggle or radio button option.\"",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Http istifadə edin' is a literal translation and doesn't convey the intended meaning of 'Use Http' in a settings context. It sounds like a direct command rather than an option setting.",
+          "suggestion": "Consider a more natural phrasing such as 'HTTP istifadə et' or 'HTTP protokolunu istifadə et' depending on the desired level of formality and clarity. Alternatively, 'HTTP aktiv edin' might be suitable if it's an enable/disable setting."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -69,7 +75,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Sisällettävä Http\" does not accurately convey the meaning of \"Use Http\". \"Sisällettävä\" means 'containing' or 'including', which is not the intended meaning. The English phrase indicates enabling or utilizing HTTP.",
+          "suggestion": "Käytä Http"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -141,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Utilizare Http' is too literal. 'Utilizare' translates to 'Usage' or 'Use', but the English phrase 'Use Http' implies enabling or employing HTTP. A more natural Romanian translation would be something like 'Folosire HTTP' or 'Activează HTTP'.",
+          "suggestion": "Folosire HTTP"
+        }
+      ],
       "approved_at": null
     },
     "ru": {

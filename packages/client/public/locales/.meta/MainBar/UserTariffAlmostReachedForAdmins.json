@@ -3,7 +3,7 @@
   "content": "Once the limit is reached, all users will be added with User permissions only. To be able to add further admins, <1>click here</1> to upgrade your tariff plan.",
   "content_en_sha1_hash": "52c715d42baa413af54dfa8152ca9ede9bd3fb76",
   "created_at": "2025-05-19T21:30:54.148Z",
-  "updated_at": "2025-05-20T09:42:18.776Z",
+  "updated_at": "2025-05-21T07:40:41.711Z",
   "comment": {
     "text": "This translation key is used to display a message when a user's tariff plan is almost reached its limit, informing them that their permissions will be changed to \"User\" and instructing them to upgrade to add admins. The message appears as a button in the QuotasBar component.",
     "is_auto": true,
@@ -27,25 +27,74 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"User permissions only\" is not accurately translated. The Arabic translation doesn't convey the nuance of restricting permissions to a basic user level.",
+          "suggestion": "عند الوصول إلى الحد، سيتم إضافة جميع المستخدمين بصلاحيات مستخدم عادية فقط."
+        },
+        {
+          "type": "formatting",
+          "description": "The angle brackets `<1>` and `</1>` are present in the Arabic translation, mirroring the English, but they don't have a standard meaning in Arabic and are likely unnecessary. They also look like HTML tags.",
+          "suggestion": "Remove the angle brackets entirely: لتتمكن من إضافة المزيد من المشرفين، أنقر هنا لترقية خطتك التعريفية."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'plan' in 'tariff plan' isn't perfectly translated. 'خطة' (khatta) can be used, but in this context, the meaning of 'tariff' implies a specific pricing structure or package. A more precise term might be better, but requires more domain knowledge.",
+          "suggestion": "Consider if a different word is more appropriate depending on the exact meaning of 'tariff' in this context. For example: لتتمكن من إضافة المزيد من المشرفين، أنقر هنا لترقية باقتك."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"To be able to add further admins\" is not accurately translated. \"Daha çox administrator əlavə etmək üçün\" is a literal translation but sounds awkward. A more natural phrasing would be something like \"Daha çox administrator əlavə etmək istəyirsinizsə\" or \"Əlavə administratorlar üçün\".",
+          "suggestion": "Daha çox administrator əlavə etmək istəyirsinizsə"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"click here\" is translated literally as \"buraya klikləyin\". While understandable, a more user-friendly and common phrasing in Azerbaijani would be \"və ya\" (or) or something similar that encourages the user to take action rather than just clicking.",
+          "suggestion": "və ya tarif planınızı təkmilləşdirin"
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<1>` and `</1>` are not standard and may cause issues with rendering.  It's unclear what their purpose is.",
+          "suggestion": "Remove the surrounding `<1>` and `</1>` tags. Consider using appropriate link styling instead."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag `<1>` is inconsistent between the English and Bulgarian content. The English uses a different tag that is not replicated in the Bulgarian translation.",
+          "suggestion": "Ensure the HTML tags are consistent with the English source, or remove the tag if it is not necessary."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation 'aktualizujte svůj tarifní plán' (update your tariff plan) doesn't perfectly align with the English \"to upgrade your tariff plan.\" 'Upgrade' implies a move to a higher tier, whereas 'aktualizovat' is a more general term for updating. While not entirely wrong, it loses some of the nuance.",
+          "suggestion": "Consider using a more specific term for 'upgrade' like 'zvýšit svůj tarifní plán' (increase your tariff plan) or 'přejít na vyšší tarifní plán' (switch to a higher tariff plan)."
+        },
+        {
+          "type": "formatting",
+          "description": "The formatting tags `<1>click here</1>` are retained in the Czech translation.  This is generally not desirable.",
+          "suggestion": "Remove the `<1>click here</1>` tags and directly integrate the 'klikněte zde' text into the sentence."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -69,7 +118,23 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Voidaksesi lisätä pääkäyttäjiä\" is not the most natural or accurate translation of \"To be able to add further admins.\" A more fluent translation would be something like \"Lisääksesi pääkäyttäjiä\" or \"Jotta voit lisätä pääkäyttäjiä\".",
+          "suggestion": "Lisääksesi pääkäyttäjiä"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"päivittääksesi\" (to update) is used after \"klikkaa tästä\" (click here), which makes the sentence sound clunky.  It's not immediately clear what is being updated. The original English sentence implies upgrading the tariff plan.",
+          "suggestion": "päivittää tilauksesi"
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<1>` and `</1>` are inconsistent. They appear to be trying to mark the clickable link, but should be a consistent HTML tag (e.g. `<a>` and `</a>`).  While not a translation error, they should be standardized to maintain visual consistency.",
+          "suggestion": "Use consistent HTML tags for the clickable link, like `<a href=\"link_url\">Click Here</a>"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,19 +146,47 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"To be able to add further admins\" is translated as \"Այլ ադմիններ ավելացնելու համար\". While technically correct, it's a bit clunky. A more natural translation would be something like \"ավելին ադմիններ ավելացնելու համար\" or \"եւս ադմիններ ավելացնելու համար\".",
+          "suggestion": "ավելին ադմիններ ավելացնելու համար"
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<1>...</1>` appear to be used for highlighting. Ensure this formatting is consistent with the rest of the application’s HTML structure and styling, and is semantically correct (e.g., consider using a CSS class instead of raw HTML for better maintainability).",
+          "suggestion": "Verify the purpose and implementation of the HTML tags and consider using CSS classes for styling."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'to upgrade your tariff plan' is a bit literal. A more natural Italian phrasing would be 'per aggiornare il tuo piano tariffario' or 'per passare a un piano tariffario superiore'.",
+          "suggestion": "per aggiornare il tuo piano tariffario"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"To be able to add further admins\" is not accurately translated. \"管理者を追加できるようにするには\" (To be able to add admins) is close but slightly awkward. A more natural phrasing would emphasize the reason *why* they need to upgrade.",
+          "suggestion": "管理者を追加するためには、料金プランをアップグレードするために、<1>ここ</1>をクリックしてください。"
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tag `<1>` is used as a placeholder in both the English and Japanese content. It's important to verify the intended styling/functionality associated with this tag. The tag itself isn't inherently incorrect, but its usage should be consistent and appropriate.",
+          "suggestion": "Verify that the <1> tags render correctly in the target platform and that the link functionality is preserved."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -105,7 +198,28 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ເມື່ອບັນຫາຂีดຈຳກັດຖືກບັນລຸແລ້ວ\" is a bit awkward. A more natural translation of \"Once the limit is reached\" might be \"ເມື່ອເຕີມຂີດຈຳກັດເຕັມແລ້ວ\" or \"ເມື່ອບັນລຸຂີດຈຳກັດແລ້ວ\".",
+          "suggestion": "ເມື່ອເຕີມຂີດຈຳກັດເຕັມແລ້ວ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ສິດການໃຊ້ງານຜູ້ໃຊ້\" translates literally as \"user usage rights\". A more appropriate translation of 'User permissions' would be 'ສິດຂອງຜູ້ໃຊ້'.",
+          "suggestion": "ສິດຂອງຜູ້ໃຊ້"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ແຜນການສິນຄ່າຂອງເຈົ້າ' translates to 'your tariff plan'.  A more colloquial and natural way to say it in Lao might be 'ແຜນການຂອງເຈົ້າ'.",
+          "suggestion": "ແຜນການຂອງເຈົ້າ"
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<1>click here</1>` are consistent between English and Lao, which is good, but it's worth noting they may need to be reviewed by a Lao-specific formatting expert for full appropriateness within the overall design.",
+          "suggestion": "No change needed, but review for overall design compatibility."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -123,7 +237,18 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag `<1>` is inconsistent. It should be consistently used to wrap the hyperlink text.",
+          "suggestion": "Ensure the `<1>` tags consistently wrap the clickable text for the hyperlink."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'uaktualnij swój plan cenowy' translates more accurately to 'upgrade your tariff plan' or 'update your tariff plan' rather than literally 'update your price plan'.",
+          "suggestion": "Replace 'uaktualnij swój plan cenowy' with 'zaktualizuj swój plan taryfowy' or 'podnieś swój plan taryfowy'."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,7 +266,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag `<1>` is inconsistent with standard HTML and might not render correctly. It seems intended to highlight the 'click here' link. A standard `<a>` tag would be more appropriate.",
+          "suggestion": "Replace `<1>apăsați aici</1>` with `<a href=\"#\">apăsați aici</a>"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'apăsați aici' is a literal translation of 'click here', a more natural and idiomatic Romanian phrasing for UI would be 'dați clic aici' or 'faceți clic aici'.",
+          "suggestion": "Replace 'apăsați aici' with 'dați clic aici' or 'faceți clic aici'."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,25 +289,64 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'User permissions only' is translated as 'පරිශීලක අවසර සහිතව පමණක්'. While technically correct, it's slightly awkward in Sinhala. A more natural phrasing would be 'සාමාන්‍ය පරිශීලක අවසරයකින් පමණක්'.",
+          "suggestion": "Change 'පරිශීලක අවසර සහිතව පමණක්' to 'සාමාන්‍ය පරිශීලක අවසරයකින් පමණක්'"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'To be able to add further admins' is translated as 'තවදුරටු පරිපාලකයන් එකතු කිරීමට'. 'තවදුරටු' is a bit formal and less common. A simpler and more natural way to phrase this would be 'ඉතාදුර පරිපාලකයන් යොදා ගැනීමට'.",
+          "suggestion": "Change 'තවදුරටු පරිපාලකයන් එකතු කිරීමට' to 'ඉතාදුර පරිපාලකයන් යොදා ගැනීමට'"
+        },
+        {
+          "type": "formatting",
+          "description": "The `<1>` tags seem to be unnecessary. The original English also uses these. Consider removing them to match a more standard practice.",
+          "suggestion": "Remove the `<1>` tags around 'මෙතැන ක්ලික් කරන්න'"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"to upgrade your tariff plan\" is translated as \"a aktualizujte svoj tarifný plán\". A more natural and accurate translation would be \"zmodernizujte svoj tarifný plán\" or \"zvýšte svoj tarifný plán\". The current translation sounds slightly awkward.",
+          "suggestion": "zmodernizujte svoj tarifný plán"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<1>` and `</1>` are inconsistent. The opening tag uses `<1>` while the closing tag uses `</1>`. This is likely a copy-paste error.",
+          "suggestion": "Ensure consistent HTML tag usage. Either change `<1>` to `<1>` or `<1>` to `<1>`."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<1>` and `</1>` are inconsistent with the English version. The English version uses `<1>click here</1>`. The Serbian translation uses the same tags without any content, making them superfluous.",
+          "suggestion": "Remove the empty HTML tags `<1>` and `</1>`."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Корисничким дозволама' is a valid translation for 'User permissions,' it's more accurate and natural to use a phrasing like 'права корисника' or 'потребе корисника' depending on the specific context of user permissions.",
+          "suggestion": "Consider using 'права корисника' or 'потребе корисника' for 'User permissions' to improve naturalness."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -183,13 +358,30 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"To be able to add further admins\" is translated as \"Daha fazla yönetici ekleyebilmek için\". While grammatically correct, a more natural Turkish phrasing would be \"Daha fazla yönetici eklemek için\".",
+          "suggestion": "Daha fazla yönetici eklemek için"
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are not standard and might not render correctly depending on the system displaying the text. They seem to be placeholders for a specific formatting action, but without context, they are problematic.",
+          "suggestion": "Re-evaluate the intended formatting and use the appropriate tags or styling. If the intention is bolding, use <b>...</b> or <strong>...</strong>. If italics, use <i>...</i> or <em>...</em>. If no specific styling is intended, remove the tags."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The `<1>click here</1>` tag is not standard HTML and may not render correctly. It's likely intended to be a link. The Ukrainian translation has `<1>натисніть тут</1>` which follows the same structure. It should be changed to an actual link.",
+          "suggestion": "Replace `<1>натисніть тут</1>` with `<a href=\"[link to upgrade page]\">натисніть тут</a>` where [link to upgrade page] is the actual URL."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -201,7 +393,18 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The original English states \"Once the limit is reached, all users will be added with User permissions only.\" The Chinese translation, \"一旦达到限制，所有新添加用户将仅具有用户权限,\" translates to \"Once the limit is reached, all *newly added* users will only have user permissions.\"  The English implies that all users (not just newly added ones) will be affected.",
+          "suggestion": "一旦达到限制，所有用户都将被设置为仅具有用户权限。"
+        },
+        {
+          "type": "formatting",
+          "description": "The formatting tags <1>click here</1> are inconsistent with the English.  The English uses `<a>` tags, not `<1>`. While the intent is clear, the tag is unusual.",
+          "suggestion": "Consider standardizing the link tag to <a>click here</a>"
+        }
+      ],
       "approved_at": null
     }
   }

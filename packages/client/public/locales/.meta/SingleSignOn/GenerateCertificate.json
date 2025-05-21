@@ -3,7 +3,7 @@
   "content": "Generate New Self-Signed Certificate",
   "content_en_sha1_hash": "f8c8d1050f78ee5b1b7950f3eb401a6f5e677f78",
   "created_at": "2025-05-19T21:30:50.081Z",
-  "updated_at": "2025-05-20T09:46:16.920Z",
+  "updated_at": "2025-05-21T02:13:04.801Z",
   "comment": {
     "text": "This translation key is used to display the label for a button that generates a new self-signed certificate. It appears in an action component and prompts users to open or generate a certificate.",
     "is_auto": true,
@@ -27,13 +27,30 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"إنشاء شهادة جديدة موقعة ذاتيًا\" is a literal translation and doesn't convey the full meaning of 'Generate New Self-Signed Certificate' in a natural way for a Saudi Arabian user. A more natural translation would be something along the lines of 'إنشاء شهادة رقمية ذاتية التوقيع جديدة'.",
+          "suggestion": "إنشاء شهادة رقمية ذاتية التوقيع جديدة"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly an error, consider adding a space after the Arabic prefix 'إنشاء'.",
+          "suggestion": "إنشاء  شهادة رقمية ذاتية التوقيع جديدة"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Yeni İmzalı Sertifikat yaradın' implies 'you created' instead of 'generate'. The original meaning is to produce or create a new certificate.",
+          "suggestion": "Yeni Öz-İmzalı Sertifikat yarat"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -141,7 +158,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Generează certificat cu semnătură automată\" is a literal translation that doesn't fully capture the meaning of 'self-signed'. A more natural Romanian phrasing would convey that the certificate is created and signed by the same entity.",
+          "suggestion": "Generează certificat auto-semnat"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +176,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ස්වයං' (swayaṁ) is technically correct but might be less commonly understood in a general user context. While it means 'self', a simpler term might be preferred for clarity.",
+          "suggestion": "නව ස්වයං-සකස්වන සහතිකයක් උත්පාදනය කරන්න"
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the phrasing is a bit formal for a user-facing UI element. A more conversational tone might be preferable.",
+          "suggestion": "නව සහතිකයක් උත්පාදනය කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +211,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'sertifikat' is often spelled 'sertifikat'.",
+          "suggestion": "Generiši novi samopotpisani sertifikat"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

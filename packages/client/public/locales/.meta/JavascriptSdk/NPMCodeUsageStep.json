@@ -3,7 +3,7 @@
   "content": "Use SDK init method to create SDK frame:",
   "content_en_sha1_hash": "f918dd606674c0e23eb21baaf22bc89c54ee4049",
   "created_at": "2025-05-19T21:30:54.611Z",
-  "updated_at": "2025-05-20T09:41:28.343Z",
+  "updated_at": "2025-05-21T08:51:43.576Z",
   "comment": {
     "text": "\"Describe how to initialize an SDK frame using its init method. This description is used on a text area in the 'developer tools' section of Portal settings.\"",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation includes quotes around 'SDK'. While technically correct, it's more common and natural to omit the quotes in this context in Arabic. It reads slightly awkward.",
+          "suggestion": "استخدموا طريقة \"init\" في الـ SDK لإنشاء الإطار:"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -39,13 +45,30 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Използвайте SDK init метод за създаване на SDK рамка:' is a literal translation and doesn't flow naturally in Bulgarian. 'SDK init method' sounds awkward. A more natural phrasing would be something like 'Използвайте метод за инициализация на SDK за създаване на SDK рамка:' or 'Инициализирайте SDK с init метод за създаване на SDK рамка:'.",
+          "suggestion": "Използвайте метод за инициализация на SDK за създаване на SDK рамка:"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"K vytvoření rámce SDK použijte metodu SDK init:\" is a literal translation and sounds unnatural in Czech. It's more common to say something like \"Pro vytvoření rámce SDK použijte inicializační metodu...\" or \"Použijte inicializační metodu pro vytvoření rámce SDK...\"",
+          "suggestion": "Použijte inicializační metodu pro vytvoření rámce SDK."
+        },
+        {
+          "type": "formatting",
+          "description": "The colon at the end feels abrupt and stylistically awkward in this context. It's better to rephrase to avoid it.",
+          "suggestion": "Použijte inicializační metodu pro vytvoření rámce SDK."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -63,7 +86,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Use el método de inicialización del SDK para crear el marco SDK:' is a literal translation and doesn't convey the intended meaning naturally in Spanish. 'Marco SDK' is awkward. It would be better to express the meaning of 'SDK frame' as the SDK structure or foundation.",
+          "suggestion": "Use el método de inicialización del SDK para crear la estructura SDK:"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -75,25 +104,59 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"cadre SDK\" is not a natural or accurate translation of \"SDK frame.\"  \"Frame\" in this context likely refers to the SDK's initialization or setup, not a literal frame.",
+          "suggestion": "Utilisez la méthode SDK init pour initialiser le SDK :"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The term 'SDK' is consistently transliterated as 'SDK' in Armenian, which is standard. However, it might be beneficial to confirm this is the preferred usage in the target audience's context.",
+          "suggestion": "Confirm preferred transliteration of 'SDK' with stakeholders."
+        },
+        {
+          "type": "grammar",
+          "description": "The use of 'համար՝' at the end of the sentence feels slightly awkward. While grammatically correct, it disrupts the flow. A more natural phrasing might be preferable.",
+          "suggestion": "Consider rephrasing to a more fluid construction, e.g., 'SDK շրջանակ ստեղծելու համար օգտագործել SDK-ի init մեթոդը։' or 'Օգտագործել SDK-ի init մեթոդը՝ SDK շրջանակ ստեղծելու համար։'"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The colon after \"frame SDK\" feels slightly awkward in Italian. It's not standard practice to follow a noun with a colon like that.",
+          "suggestion": "Usa il metodo init dell’SDK per creare il frame dell'SDK."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"SDK初期化メソッドを使用:\" is a bit literal and doesn't flow naturally in Japanese. A more natural phrasing would emphasize the *purpose* of using the method.",
+          "suggestion": "SDKフレームを作成するには、SDKの初期化メソッドを利用してください。"
+        },
+        {
+          "type": "formatting",
+          "description": "The colon (:) at the end of the Japanese translation makes it sound like a direct instruction rather than a helpful explanation.  It's more common to omit it in this context.",
+          "suggestion": "SDKフレームを作成するには、SDKの初期化メソッドを利用してください"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -105,7 +168,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'ກອບ' (gop) translates more accurately to 'framework' rather than just 'frame'. While 'frame' isn't entirely wrong, 'framework' conveys a more accurate meaning in the context of an SDK.",
+          "suggestion": "ນໍາໃຊ້ວິທີການເລີ່ມຕົ້ນ SDK ເພື່ອສ້າງຕົວແບບກອບ SDK:"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -117,25 +186,59 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'SDK frame' is not idiomatic in Dutch. 'SDK frame' directly translates something but lacks the specific meaning in the English original. It's unclear what 'frame' refers to here. A more accurate translation depends on the intended meaning.",
+          "suggestion": "Consider rephrasing to something like 'Gebruik SDK init methode om de SDK te initialiseren:' (Use SDK init method to initialize the SDK) or 'Gebruik SDK init methode om het SDK-framework te maken:' (Use SDK init method to create the SDK framework) depending on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Wywołaj metodę init SDK\" is too literal and doesn't convey the intended meaning of 'use SDK init method'. It sounds awkward in Polish.  The English implies an action of employing or calling the init method, not just invoking it.",
+          "suggestion": "Użyj metody init SDK, aby utworzyć ramkę SDK."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'SDK' is repeated frequently. While common in English technical documentation, in Polish, it might benefit from slightly more natural phrasing to avoid sounding overly technical.",
+          "suggestion": "Użyj metody init SDK, aby utworzyć ramkę."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Utilize o método SDK init para criar a moldura SDK:\" is not the most natural or accurate translation of 'Use SDK init method to create SDK frame:'. 'Moldura' implies a frame in the artistic sense, not a software development framework.  A better translation would convey the meaning of creating or initializing a software framework.",
+          "suggestion": "Utilize o método init do SDK para criar o framework SDK:"
+        },
+        {
+          "type": "formatting",
+          "description": "The colon after the Portuguese translation makes it feel like it's completing a sentence or phrase that doesn't exist. It's stylistically awkward.",
+          "suggestion": "Remove the colon at the end of the translated text."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'quadro' (frame) doesn't quite capture the intended meaning of 'SDK frame' in this context. It implies a literal frame, whereas the SDK frame likely refers to the SDK instance or environment.",
+          "suggestion": "Use o método init do SDK para criar a instância do SDK:"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -147,37 +250,93 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'SDK frame' is awkward in Russian. 'SDK frame' doesn't have a direct, natural equivalent in Russian in this context. It's likely referring to an SDK instance or a setup.",
+          "suggestion": "Используйте метод инициализации SDK для создания экземпляра SDK:"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the colon at the end of the sentence can make the translation sound slightly less natural. It is a stylistic choice, but removing it might improve readability.",
+          "suggestion": "Используйте метод инициализации SDK для создания экземпляра SDK"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"SDK ආරම්භ කිරීමේ ක්‍රමයෙන් SDK රාමුව නිර්මාණය කරන්න:\" is a bit literal and could be improved for natural flow in Sinhala. 'ආරම්භ කිරීමේ ක්‍රමයෙන්' translates to 'by the method of initialization,' which is verbose. A more natural phrasing would convey the intention of using the initialization method to create the framework.",
+          "suggestion": "SDK ආරම්භ කිරීමේ ක්‍රමය භාවිතයෙන් SDK රාමුව නිර්මාණය කරන්න:"
+        },
+        {
+          "type": "formatting",
+          "description": "The colon at the end of the Sinhala sentence feels a bit abrupt.  While colons are used in Sinhala, they are not always used in this way. Consider if removing the colon would improve flow.",
+          "suggestion": "SDK ආරම්භ කිරීමේ ක්‍රමය භාවිතයෙන් SDK රාමුව නිර්මාණය කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Na vytvorenie rámca SDK použite metódu SDK init:' is a literal translation but doesn't flow naturally in Slovak. 'SDK frame' can be interpreted as the SDK itself or the structure around it. The phrasing is slightly awkward.",
+          "suggestion": "Consider a more natural phrasing like 'Na inicializáciu SDK použite metódu init:' or 'Použite metódu init na vytvorenie SDK štruktúry:'"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Za ustvarjanje okvirja SDK uporabite metodo init SDK:' is somewhat literal and could be improved for naturalness in Slovenian. 'Okvirja SDK' is grammatically correct but sounds clunky. It would be more natural to say something like 'Za inicializacijo SDK uporabite metodo init'.",
+          "suggestion": "Za inicializacijo SDK uporabite metodo init."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'metodo init SDK' is a mix of English and Slovenian.  Ideally, the entire phrase would be in Slovenian if possible.",
+          "suggestion": "metodo inicializacije"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Користи SDK инит метод за креирање SDK оквира:' is not the most accurate or natural-sounding translation of 'Use SDK init method to create SDK frame:'.  'Инит' is an English transliteration. A more appropriate translation would use a Serbian equivalent.",
+          "suggestion": "Користи SDK метод иницијализације за креирање SDK оквира:"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'инит' is used, it's a transliteration and not a proper Serbian term. It can confuse native speakers.",
+          "suggestion": "Consider replacing 'инит' with 'иницијализације' (initialization) for better clarity."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'SDK frame' is not the most natural translation of 'SDK frame' in Serbian. It's too literal. A better translation would convey the idea of creating an SDK instance or SDK environment.",
+          "suggestion": "Koristi SDK init metodu za kreiranje SDK instance/okolina:"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -189,13 +348,30 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"фрейму\" (frame) is grammatically incorrect in this context. It should be in the genitive case, as it's modifying \"SDK\".",
+          "suggestion": "Використовуйте метод ініціалізації SDK для створення SDK-фрейму:"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'SDK init method' is awkward and less natural in Vietnamese. 'Init method' should be translated to reflect the action of initializing, not just a literal translation.",
+          "suggestion": "Sử dụng phương thức khởi tạo SDK để tạo khung SDK:"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the colon at the end of the translated sentence is unusual in Vietnamese. It's often omitted.",
+          "suggestion": "Sử dụng phương thức khởi tạo SDK để tạo khung SDK"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

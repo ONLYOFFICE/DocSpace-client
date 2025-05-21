@@ -3,7 +3,7 @@
   "content": "License activated",
   "content_en_sha1_hash": "576ed3bc179267c56642a371e93bad575e13aa61",
   "created_at": "2025-05-19T21:30:53.572Z",
-  "updated_at": "2025-05-20T09:43:29.464Z",
+  "updated_at": "2025-05-21T06:24:40.990Z",
   "comment": {
     "text": "The translation key \"ActivateLicenseActivated\" represents the localized text \"License activated\", used to display a success message when a license is successfully activated in the payment process. This text appears as part of a toast notification when the user's license has been activated, providing confirmation of the action taken.",
     "is_auto": true,
@@ -93,7 +93,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation \"ライセンス認証済み\" while technically correct, can be improved to better reflect the nuance of 'License activated'. \"ライセンス認証済み\" implies a process of authentication has already occurred and is now complete, whereas 'License activated' suggests the action of activation itself. A more appropriate translation might focus on the 'activation' itself.",
+          "suggestion": "ライセンスアクティベート済み (RaisenSU Akutibēto Zumi) - This translates closer to 'License Activated' focusing on the action itself. Alternatively, ライセンス有効化されました (Raisen Yūkōka Saremashita) – 'License has been enabled' is also a good option."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -171,7 +177,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Лиценца активирана\" is grammatically correct, but a more natural and accurate translation of \"License activated\" would be \"Активирана лиценца\". The original translation puts the possessive before the noun, which is less common in Serbian.",
+          "suggestion": "Активирана лиценца"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

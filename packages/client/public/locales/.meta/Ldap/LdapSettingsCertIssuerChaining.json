@@ -3,7 +3,7 @@
   "content": "No certificate issuer chain was provided",
   "content_en_sha1_hash": "362bdebaba2764008973ff8dde1c3c667374aef1",
   "created_at": "2025-05-19T21:30:54.281Z",
-  "updated_at": "2025-05-20T09:42:02.085Z",
+  "updated_at": "2025-05-21T08:06:43.044Z",
   "comment": {
     "text": "This translation key is used as a message to display when an LDAP certificate issue occurs due to missing information about the certificate issuer chain. It helps inform users about a specific problem related to their certificate settings in the LDAP integration process.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'emitent' is misspelled. The correct word is 'verəni'",
+          "suggestion": "Sertifikat verəni zənciri təmin edilməyib"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -57,7 +63,18 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Δεν δόθηκε αλυσίδα έκδοσης πιστοποιητικού' is a literal translation and not the most natural or clear way to express 'No certificate issuer chain was provided' in Greek. It emphasizes the 'issuing' aspect unnecessarily.",
+          "suggestion": "Δεν έχει καθοριστεί αλυσίδα πιστοποιητικών ή δεν έχει παρασχεθεί."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'αλυσίδα έκδοσης πιστοποιητικού' is a bit clunky. 'Αλυσίδα πιστοποιητικών' is more concise and generally understood.",
+          "suggestion": "Replace 'αλυσίδα έκδοσης πιστοποιητικού' with 'αλυσίδα πιστοποιητικών'."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -87,13 +104,25 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Non sono stati forniti emittenti di certificati' doesn't accurately convey the meaning of 'No certificate issuer chain was provided'. It translates to 'No certificate issuers were provided', which is a different concept.  An issuer chain refers to a sequence of certificates, not just the issuer itself.",
+          "suggestion": "A more accurate translation would be something like: 'Non è stata fornita una catena di certificati' or 'Nessuna catena di certificati è stata fornita'."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation contains an unexpected character 'Е' which is not part of the Japanese language. It seems to be a character from another language, likely Cyrillic. The phrase \"証明書の発行者チェーンが提供されていません\" is a reasonable translation of 'No certificate issuer chain was provided', but the extraneous character makes it incorrect.",
+          "suggestion": "証明書の発行者チェーンが提供されていません"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -117,7 +146,18 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Er is geen certificaatverstrekker keten verstrekt' is not the most natural or accurate translation of 'No certificate issuer chain was provided'. 'Verstrekker' implies a provider, while 'issuer' refers to the entity that signs the certificate. The phrasing is also a bit formal and indirect.",
+          "suggestion": "Geen certificaatuitgeverketen is opgegeven"
+        },
+        {
+          "type": "formatting",
+          "description": "The term 'certificaatuitgeverketen' is a compound word and should be written as one word without spaces. Although the Dutch language allows for some flexibility, it's better for clarity.",
+          "suggestion": "Geen certificaatuitgeverketen is opgegeven"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -141,19 +181,47 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Lanțul de certifacare al emitentului de certificat nu a fost furnizat' is a very literal and somewhat awkward translation. While technically correct, it's not the most natural way to express this in Romanian. The phrase 'certificate issuer chain' is complex and can be simplified.",
+          "suggestion": "A more natural translation would be 'Nu a fost furnizată lanțul de emitere a certificatului' or 'Lanțul de emitere a certificatului nu a fost furnizat'."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation is a complete sentence. The key name suggests a more concise phrase might be preferable for a settings label.",
+          "suggestion": "Consider a shorter phrasing like 'Lanțul de emitere lipsă' or 'Lanțul de emitere nu a fost furnizat'."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Не предоставлена цепочка эмитента сертификата' is technically correct but could be more natural. 'Эмитента' (emittenta) refers to the issuer, but a more common and easily understood phrase would be 'Не предоставлена цепочка сертификата' or 'Отсутствует цепочка сертификата'.",
+          "suggestion": "Отсутствует цепочка сертификата"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"පහත සහතික නිකාසිකරණ දාමකයක් ලබා කර නැහැ.\" is not the most natural or accurate translation of \"No certificate issuer chain was provided.\" While technically understandable, it sounds overly formal and convoluted for this context.",
+          "suggestion": "A more natural translation would be something like \"සතිකය නිල තුරැණය දාමකයක් ලබා දී නොමැත\" (Sathikaya nilathurayana damakayak hada dee numaetha) or \"නිල තුරැණය දාමකයක් නොවී.\" (Nilathurayana damakawak nawe)."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase \"ලබා කර නැහැ\" is grammatically awkward. While 'ලබා' is correct, 'කර නැහැ' is not commonly used in this context.  It implies an action that was 'made' or 'done' and then negated, which is unnecessary and confusing.",
+          "suggestion": "Remove 'කර' and simplify to just 'ලබා'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +251,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sertifikalayan zinciri sağlanmadı' is not the most natural or accurate translation of 'No certificate issuer chain was provided.' While 'sertifikalayan' relates to issuer, 'sağlanmadı' (was not provided) is a bit too literal. A more natural phrasing would convey the lack of a chain.",
+          "suggestion": "Belirtilen sertifika zinciri bulunamadı"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -201,7 +275,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '未提供证书颁发者链' is technically correct but lacks nuance. While it translates to 'No certificate issuer chain was provided,' it sounds a bit stiff and formal in Chinese. A more natural-sounding translation would convey the same meaning in a less literal way.",
+          "suggestion": "考虑使用更自然的表达方式，例如“未提供证书颁发链” 或 “缺少证书颁发链信息”."
+        }
+      ],
       "approved_at": null
     }
   }

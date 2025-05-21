@@ -3,7 +3,7 @@
   "content": "Invitations sent again:",
   "content_en_sha1_hash": "cbf7c99c124eac8971e3b2796ff08f71fe296890",
   "created_at": "2025-05-19T21:30:54.934Z",
-  "updated_at": "2025-05-20T09:40:46.674Z",
+  "updated_at": "2025-05-21T09:50:10.718Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that invitations have been resent again, likely found on a button or in a confirmation dialog in the room update access section of the InfoPanel.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Կրկին ուղարկված հրավերներ՝' while literally translating to 'Invitations resent:', doesn't quite convey the nuance of 'Invitations sent again:' It feels a bit clunky and formal.  A more natural phrasing might be preferred, depending on the surrounding context within the application.",
+          "suggestion": "Consider 'Վերահրավերներ՝' or 'Կրկնելով ուղարկված հրավերներ՝' for a more natural feel. The best choice will depend on the overall tone of the application."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +99,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Invitations sent again:' implies a confirmation that invitations have been resent. The Japanese translation '招待状を再度送信しました：' literally translates to 'We sent invitations again:' and while understandable, it lacks the direct confirmation implied in the English. A more accurate translation might emphasize the completion and confirmation of the resent action.",
+          "suggestion": "招待状を再送しました："
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -111,7 +123,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Uzaicinājumi, kas ir nosūtīti vēlreiz:' is a bit literal and sounds slightly awkward in Latvian. A more natural phrasing would be something like 'Uzaicinājumi atkārtoti nosūtīti:' or 'Uzaicinājumi nosūtīti atkārtoti:'.",
+          "suggestion": "Uzaicinājumi atkārtoti nosūtīti:"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -153,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ආරාධනා නැවත එවුව:' is a literal translation but sounds awkward in Sinhala. A more natural phrasing would be something like 'ආරාධනා නැවත යවනු ලැබුව:' or 'ආරාධනා නැවත පంపුව:'.",
+          "suggestion": "ආරාධනා නැවත යවනු ලැබුව:"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +195,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Invitations sent again:' implies a repetition of a previous sending action. The Serbian translation 'Позивнице поново послате:' is a literal translation of 'Invitations sent again:' and is technically correct, but it might sound slightly unnatural in Serbian. A more natural phrasing might emphasize the update or re-sending action.",
+          "suggestion": "Consider a phrasing like 'Позивнице поново послате' (Invitations resent) or 'Позивнице су поново послате' (Invitations have been resent again) depending on the intended nuance."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

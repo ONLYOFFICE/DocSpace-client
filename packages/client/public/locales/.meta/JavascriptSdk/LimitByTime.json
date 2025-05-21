@@ -3,7 +3,7 @@
   "content": "Limit by time period",
   "content_en_sha1_hash": "03e40a5e784a8aec64ccc72778ffd126b2588b86",
   "created_at": "2025-05-19T21:30:54.551Z",
-  "updated_at": "2025-05-20T09:41:33.519Z",
+  "updated_at": "2025-05-21T09:00:08.645Z",
   "comment": {
     "text": "The \"LimitByTime\" translation key is used to display the label for a time period limit setting, guiding users to adjust their expiration date in a settings interface. It appears as part of a category in developer tools and is used within a link hint component.",
     "is_auto": true,
@@ -27,13 +27,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'الحد حسب الفترة الزمنية' while conveying a general sense, isn't the most natural or precise translation of 'Limit by time period'. It literally translates to 'The limit according to the time period'. A more idiomatic and accurate translation would convey the meaning of restricting or constraining based on time.",
+          "suggestion": "تقييد بالوقت"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Vaxt dövrü ilə məhdudlaşdırın' is a literal translation but doesn't quite convey the intended meaning of 'Limit by time period'. It sounds awkward in Azerbaijani. A more natural phrasing would be something along the lines of 'Müddət ilə məhdudlaşdırın' or 'Zamanla məhdudlaşdırın'.",
+          "suggestion": "Müddət ilə məhdudlaşdırın"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -81,13 +93,25 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Սահմանափակում ըստ ժամանակաշրջանի\" is a bit literal and formal. A more natural and idiomatic translation might be \"Ժամանակային սահմանափակում\" or \"Սահմանափակել ժամանակով\".",
+          "suggestion": "Ժամանակային սահմանափակում or Սահմանափակել ժամանակով"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Limite per periodo di tempo' is a literal translation but may not be the most natural or idiomatic way to express 'Limit by time period' in Italian. A more natural phrasing might emphasize the restriction imposed by a timeframe.",
+          "suggestion": "Consider alternatives like 'Limitazione temporale' or 'Vincolo temporale'. The best choice depends on the precise context of JavascriptSdk:LimitByTime."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -141,7 +165,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Setare limită de timp\" is understandable, it's not the most natural or accurate translation of \"Limit by time period.\" \"Limit by time period\" implies a constraint or restriction based on time, whereas \"Setare limită de timp\" reads more like a setting of a time limit.",
+          "suggestion": "Consider alternatives like \"Limitare temporală\" or \"Restricție temporală\" which better convey the concept of a time-based limit or restriction."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +183,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"කාල පරාසය අනුව සීමා කරන්න\" (Kala parasa yanu sima kanna) while technically understandable, doesn't capture the nuance of 'Limit by time period' as directly as possible. A more accurate translation would focus on the 'limiting' aspect.",
+          "suggestion": "Consider \"නිශ්චිත කාලයට සීමා කරන්න\" (Nischita kalaya sima kanna) or \"සීමාවල කාලසීමාවකට\" (Simawal kalasima vake)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +219,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Zaman dilimine göre sınırlama\" is understandable, a more natural and precise translation of \"Limit by time period\" would be \"Zaman aralığına göre sınırlama\" or \"Belirli bir zaman aralığına göre sınırlama\". \"Zaman dilimine\" can sometimes imply a specific historical period.",
+          "suggestion": "Zaman aralığına göre sınırlama"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

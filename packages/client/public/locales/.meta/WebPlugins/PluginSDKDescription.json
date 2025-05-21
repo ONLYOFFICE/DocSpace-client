@@ -3,7 +3,7 @@
   "content": "Using Plugin SDK you can extend your {{productName}} functionality, connect the third-party services or enhance the existing user experience. Here you can find the plugin samples with code source available on GitHub.",
   "content_en_sha1_hash": "a9a940596b57d8d9f4be6ec87ad72687245e94ad",
   "created_at": "2025-05-19T21:30:49.921Z",
-  "updated_at": "2025-05-20T09:46:40.396Z",
+  "updated_at": "2025-05-21T00:41:28.353Z",
   "comment": {
     "text": "This translation key describes the text that explains how to use the Plugin SDK, which is used to extend the functionality of {{productName}} and enhance user experience. It appears in a descriptive text element on the Portal Settings page, providing context for developers.",
     "is_auto": true,
@@ -27,13 +27,30 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Plugin' is translated as 'إضافة'. While technically correct, 'Plugin' is often used directly in Arabic in a technical context. A more natural translation might be 'مكوِّن إضافي' or leaving 'Plugin' as is, depending on the target audience's familiarity with the English term.",
+          "suggestion": "Consider using 'مكوِّن إضافي' or keeping 'Plugin' to maintain technical accuracy."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'Here you can find the plugin samples with code source available on GitHub' could be restructured for better flow in Arabic. The placement of 'with code source available on GitHub' feels slightly awkward.",
+          "suggestion": "Consider restructuring to something like: 'هنا يمكنك العثور على نماذج المكونات الإضافية مع توفر مصدر التعليمات البرمجية على GitHub.'"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The use of 'plaginlərin' appears to be a slightly unconventional pluralization. While understandable, 'pluginləri' would be a more standard and formal Azerbaijani plural.",
+          "suggestion": "Consider changing 'plaginlərin' to 'pluginləri'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -57,7 +74,18 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The repetition of 'πρόσθετων' (plugins) is awkward. While technically correct, it sounds unnatural in Greek. It would be more idiomatic to use a different word or phrase to avoid the repetition.",
+          "suggestion": "Χρησιμοποιώντας το Plugin SDK μπορείτε να επεκτείνετε τη λειτουργικότητα του {{productName}}, να συνδέσετε τις υπηρεσίες τρίτων ή να βελτιώσετε την υπάρχουσα εμπειρία χρήστη. Εδώ μπορείτε να βρείτε δείγματα plugins με τον πηγαίο κώδικα που είναι διαθέσιμα στο GitHub."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence 'Εδώ μπορείτε να βρείτε τα δείγματα πρόσθετων πρόσθετων με τον πηγαίο κώδικα που είναι διαθέσιμα στο GitHub' is a bit long and complex. Splitting it into two sentences could improve readability.",
+          "suggestion": "Εδώ μπορείτε να βρείτε δείγματα plugins με τον πηγαίο κώδικα. Αυτά είναι διαθέσιμα στο GitHub."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,7 +97,18 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Plugin SDK' is translated as 'SDK-laajennusta'. While technically correct, 'Plugin SDK' itself might be more recognizable and understandable to a Finnish audience familiar with software development terminology. A more literal translation, or retaining the English term, could improve clarity.",
+          "suggestion": "Consider using 'Plugin SDK:n' or even just 'Plugin SDK' depending on the target audience's familiarity with English terms."
+        },
+        {
+          "type": "formatting",
+          "description": "There is a space missing before the colon after 'Plugin SDK' in the translated text.  While not critical, consistent spacing improves readability.",
+          "suggestion": "Change 'SDK-laajennusta:' to 'SDK-laajennusta:'"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +120,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"connect the third-party services\" is translated as \"միացնել երրորդ կողմի ծառայությունները\". While technically correct, a more natural and idiomatic translation in Armenian would be something along the lines of \"միավորել երրորդ կողմի ծառայությունները\" or \"ուղարկել երրորդ կողմի ծառայությունները\" depending on the precise meaning intended. \"Միացնել\" can sometimes imply a simple connection, not integration.",
+          "suggestion": "Consider 'միավորել երրորդ կողմի ծառայությունները' or 'ուղարկել երրորդ կողմի ծառայությունները'."
+        },
+        {
+          "type": "formatting",
+          "description": "The Armenian translation includes a hyphen in \"GitHub-ում\", which might be more stylistically appropriate as \"GitHubում\" in a more modern context, although both are understandable.",
+          "suggestion": "Consider changing \"GitHub-ում\" to \"GitHubում\"."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,13 +149,40 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation uses a passive voice where the English uses an active voice. While grammatically correct, it sounds less direct in Korean. Consider rephrasing for better flow.",
+          "suggestion": "플러그인 SDK를 사용하면 {{productName}} 기능 확장을 통해, 제3자 서비스 연결, 기존 사용자 경험 향상이 가능합니다. 여기에서 GitHub에서 코드 소스와 함께 제공되는 플러그인 샘플을 확인하세요."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'Here you can find' is translated a bit literally. A more natural Korean phrasing would be something like '여기에서 확인하세요' which is already present, but could be subtly improved.",
+          "suggestion": "여기에서 GitHub에서 코드 소스와 함께 제공되는 플러그인 샘플을 확인하실 수 있습니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ການເຮັດວຽກ {{productName}} ຂອງທ່ານ\" is not the most natural translation of \"your {{productName}} functionality\". A more accurate translation would focus on functionality or capabilities.",
+          "suggestion": "ການເຮັດວຽກ ຫຼື ຄວາມສາມາດຂອງ {{productName}}"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ເຊື່ອມຕໍ່ການບໍລິການພາກສ່ວນທີສາມ\" is technically correct, a more natural phrasing for 'connect to third-party services' would be to emphasize integration or linking.",
+          "suggestion": "ເຊື່ອມໂອນກັບການບໍລິການພາກສ່ວນທີສາມ"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of capitalization in Lao can be nuanced. While generally correct, it might benefit from review by a Lao language expert to ensure proper capitalization for technical documents.",
+          "suggestion": "Review capitalization for consistency and formality."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -123,7 +200,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"poprawić komfort obsługi dla swoich bieżących użytkowników\" is not the most natural or accurate translation of \"enhance the existing user experience.\" It's a bit clunky. A better translation would convey a sense of improvement or making the experience better.",
+          "suggestion": "Dzięki zestawowi SDK do tworzenia wtyczek możesz rozszerzyć funkcjonalność swojego obszaru {{productName}}, podłączyć usługi podmiotów trzecich lub ulepszyć doświadczenie użytkownika."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,7 +224,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'pligin-urilor' is a misspelling of 'plugin-urilor'.",
+          "suggestion": "plugin-urilor"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,13 +242,45 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'පේනු' appears to be a misspelling of 'ප්ලගින්' (Plugin).",
+          "suggestion": "ප්ලගින්"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ක්‍රියාකාරීත්‍වය' (kriyā kāratvaya) is a less common and slightly awkward way to say 'functionality.' A more natural translation would be 'කාර‍ය්‍යන්' or 'පණිවිවරයන්'.",
+          "suggestion": "කාර‍ය්‍යන්"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'වත්මන් පරිශ්‍රීලක අත්දැකීම' (vathman parishreelaka athdaxīma) translates to 'current user experience,' but 'අpresent පරිශ්‍රීලක අත්දැකීම' would sound more natural. Alternatively 'පරිශ්‍රීලක අත්දැකීම' alone is acceptable.",
+          "suggestion": "පරිශ්‍රීලක අත්දැකීම"
+        },
+        {
+          "type": "formatting",
+          "description": "The template variable '{{productName}}' remains consistent across both English and Sinhala content. It is advisable to double check the rendering of this variable.",
+          "suggestion": "Confirm variable rendering in Sinhala context."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'pluginu' in \"Pomocou pluginu SDK\" sounds a bit unnatural. It's technically correct, but 'Pomocou Plugin SDK' or 'Pomocou SDK pluginu' would be more common and flow better in Slovak.",
+          "suggestion": "Pomocou Plugin SDK or Pomocou SDK pluginu"
+        },
+        {
+          "type": "formatting",
+          "description": "The text uses a mixed capitalization of 'Plugin' and 'SDK'. While not strictly incorrect, consistency would be preferable. Following English, 'Plugin SDK' is appropriate.",
+          "suggestion": "Plugin SDK"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,31 +292,71 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase \"Plugin SDK-а (SDK за додатке)\" is a bit clunky. While the clarification is helpful for Serbian speakers, it interrupts the flow.",
+          "suggestion": "Помоћу Plugin SDK-а можете проширити функционалност вашег {{productName}}-а..."
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, 'додатака' might be slightly more formal than needed. Consider a more casual alternative.",
+          "suggestion": "Помоћу Plugin SDK-а можете проширити функционалност вашег {{productName}}-а, повезати треће стране услуге или унапредити постојеће корисничко искуство. Овде можете пронаћи примере додатака са доступним изворним кодом на GitHub-у."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The term 'Plugin SDK' is followed by a parenthetical explanation '(SDK za dodatke)'. While the explanation is helpful, it disrupts the flow and potentially introduces redundancy. Consider if this is necessary for the target audience.",
+          "suggestion": "Consider removing the parenthetical explanation '(SDK za dodatke)' if the term 'Plugin SDK' is adequately understood by the Serbian audience."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Plugin SDK' is translated as 'Eklenti SDK'sını'. While understandable, it's more natural and grammatically correct to translate it as 'Eklenti SDK'sı'. The possessive suffix '-sını' is unnecessary and makes the sentence slightly awkward.",
+          "suggestion": "Eklenti SDK'sı"
+        },
+        {
+          "type": "formatting",
+          "description": "The Turkish translation maintains the English formatting where the variable {{productName}} is used.  This is appropriate.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a lowercase 'п' in 'плагінів'. It should be capitalized as 'Плагінів' to match the capitalization used in similar contexts and to be consistent with Ukrainian grammar.",
+          "suggestion": "Використовуючи SDK Плагінів, можна розширити функціональність {{productName}}, під'єднати сторонні служби або покращити поточний досвід користувача. Тут можна знайти зразки плагінів із вихідним кодом, доступним на GitHub."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The placeholder {{productName}} is present in the English content and should be preserved in the Vietnamese translation.",
+          "suggestion": "Ensure the placeholder {{productName}} remains untouched in the Vietnamese translation."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

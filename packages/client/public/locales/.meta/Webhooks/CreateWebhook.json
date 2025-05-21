@@ -3,7 +3,7 @@
   "content": "Create webhook",
   "content_en_sha1_hash": "0c6fc5026d56d964ea66aa3957a3688c0381fd3a",
   "created_at": "2025-05-19T21:30:49.678Z",
-  "updated_at": "2025-05-20T09:47:09.314Z",
+  "updated_at": "2025-05-21T01:18:25.952Z",
   "comment": {
     "text": "\"CreateWebhook\" is used to display a button label on mobile devices, prompting users to create a webhook in developer tools. The translation of this key will be displayed on the main wrapper element within the PortalSettings page's Webhooks component when viewed on smaller screens.",
     "is_auto": true,
@@ -45,13 +45,25 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Webhook yaradın' translates to 'You created a webhook' rather than 'Create webhook'. The intended meaning is a command or action, not a statement of fact.",
+          "suggestion": "Webhook düzəlt"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Създайте уеб кука' is not the most accurate or natural translation of 'Create webhook'. While 'уеб кука' is a literal translation of 'webhook', it's not commonly used. A better translation would be 'Създаване на уебхук' or 'Изграждане на уебхук'.",
+          "suggestion": "Създаване на уебхук"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -69,7 +81,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Δημιουργία webhook' is a literal translation of 'Create webhook'. While understandable, a more natural Greek phrasing for a UI element would be something like 'Δημιουργία webhook' or 'Νέο webhook'.",
+          "suggestion": "Εναλλακτικές προτάσεις: 'Δημιουργία webhook', 'Νέο webhook'"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -93,7 +111,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Ստեղծեք վեբ կեռիկ\" is a literal translation, \"վեբ կեռիկ\" is not the standard term for \"webhook\" in Armenian. It sounds awkward and potentially confusing.",
+          "suggestion": "Consider using a more established term for \"webhook\" like \"վեբհուկ\" (transliteration of 'webhook'), or a descriptive phrase like \"վեբծառայության հետազդու\" (webhook for web service)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -123,7 +147,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Izveidojiet tīmekļa aizķeri' is not an accurate translation of 'Create webhook'. 'Tīmekļa aizķeri' translates to 'web snag' or 'web obstruction', not 'webhook'.",
+          "suggestion": "Izveidot webhook"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -165,7 +195,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'webhook සාදන්න' while understandable, isn't the most natural or precise translation of 'Create webhook'.  'සාදන්න' implies creating something from scratch.  A more appropriate translation would convey the act of setting up or configuring a webhook.",
+          "suggestion": "webhook සැකසීම (webhook sakisima) or webhook ක්‍රියාත්මක කිරීම (webhook kriyathamakama) might be more accurate, depending on the exact nuance intended."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +219,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation directly transliterates 'webhook' instead of providing a Serbian equivalent or a more natural phrasing. While 'webhook' is becoming more common, a more accessible translation might be preferable depending on the target audience.",
+          "suggestion": "Consider alternatives like 'webhook' (if the audience is technically proficient), or a phrase describing the function, such as 'Примање порука са веб-сајта' (Receiving messages from a website) or 'Примање обавештења са веб-сајта' (Receiving notifications from a website)."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -3,7 +3,7 @@
   "content": "Read more",
   "content_en_sha1_hash": "ad086cf55b834c375e209972840f1342401d8c41",
   "created_at": "2025-05-19T21:30:49.786Z",
-  "updated_at": "2025-05-20T09:46:58.314Z",
+  "updated_at": "2025-05-21T01:04:49.811Z",
   "comment": {
     "text": "This translation key is used to display a label for a link that indicates users should \"Read more\" when viewing content. It typically appears as a button or hyperlink in UI contexts where more information is available but not displayed by default, such as in documentation or settings pages.",
     "is_auto": true,
@@ -129,13 +129,25 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Consulte Mais informação' is a functional equivalent but not a direct translation of \"Read more\". A more natural translation might be 'Leia mais' or 'Saiba mais'. 'Consulte Mais informação' sounds somewhat formal and doesn't perfectly convey the purpose of a 'Read more' link.",
+          "suggestion": "Leia mais"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Consulte Mais informação' is a literal translation but sounds unnatural in Brazilian Portuguese. It lacks the fluidity and common phrasing used for 'Read more'.",
+          "suggestion": "Consider 'Saiba Mais' or 'Leia Mais' as more natural and idiomatic alternatives."
+        }
+      ],
       "approved_at": null
     },
     "ro": {

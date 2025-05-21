@@ -3,7 +3,7 @@
   "content": "{{organizationName}} Documents",
   "content_en_sha1_hash": "db01b8765ec0bbda9628a90d2f7c09d5e66f8c63",
   "created_at": "2025-05-19T21:30:50.041Z",
-  "updated_at": "2025-05-20T09:46:21.364Z",
+  "updated_at": "2025-05-21T01:37:35.164Z",
   "comment": {
     "text": "This translation key is used to display the title of a smart banner component on mobile devices. It will be translated as \"{{organizationName}} Documents\" and appears in the banner's title field when displayed on touch-enabled devices.",
     "is_auto": true,
@@ -63,7 +63,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Documentos {{organizationName}}\" is not the most natural or accurate translation of \"{{organizationName}} Documents\". A more suitable translation would be something like \"Documentos de {{organizationName}}\" or \"Documentos {{organizationName}}\" (with a slightly more formal tone).",
+          "suggestion": "Documentos de {{organizationName}}"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -75,7 +81,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The French translation lacks a colon and space after 'Documents' as present in the English version.",
+          "suggestion": "Documents : {{organizationName}}"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -87,7 +99,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"{{organizationName}} Documents\" is best translated as something like \"Documenti di {{organizationName}}\" or \"Documenti relativi a {{organizationName}}\".  Simply placing \"Documenti {{organizationName}}\" creates an awkward and less natural phrasing in Italian.",
+          "suggestion": "Documenti di {{organizationName}}"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -117,7 +135,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Dutch translation uses a hyphen to connect 'organizationName' and 'documenten'. While not inherently incorrect, a space is generally preferred in Dutch for compound nouns, especially in UI text.  A hyphen may make it feel less natural.",
+          "suggestion": "{{organizationName}} documenten"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -129,13 +153,25 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation lacks an article ('os' or 'as') before 'Documentos'.  While technically understandable, it sounds incomplete in Portuguese.",
+          "suggestion": "Documentos os/as {{organizationName}}"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content '{{organizationName}} Documents' is not accurately translated. A more natural Portuguese translation would include the article 'dos' before 'Documentos'.",
+          "suggestion": "Documentos dos {{organizationName}}"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -189,7 +225,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Документи {{organizationName}}\" is technically correct but lacks a more natural phrasing. \"{{organizationName}} Documents\" implies a collection or portfolio of documents *belonging to* or *related to* the organization. A more idiomatic Ukrainian translation might be \"Документи від {{organizationName}}\" (Documents from {{organizationName}}) or \"Документи компанії {{organizationName}}\" (Documents of company {{organizationName}}).",
+          "suggestion": "Consider \"Документи від {{organizationName}}\" or \"Документи компанії {{organizationName}}\""
+        }
+      ],
       "approved_at": null
     },
     "vi": {

@@ -3,7 +3,7 @@
   "content": "Choose user attributes which you want to be synchronized with your LDAP server.",
   "content_en_sha1_hash": "dec832695169557933b47b02e558945a055dace1",
   "created_at": "2025-05-19T21:30:54.165Z",
-  "updated_at": "2025-05-20T09:42:16.802Z",
+  "updated_at": "2025-05-21T08:29:21.735Z",
   "comment": {
     "text": "Choose user attributes which you want to be synchronized with your LDAP server. This tooltip appears on a component in the PortalSettings page, providing context for users configuring attribute mapping for their LDAP integration.",
     "is_auto": true,
@@ -27,13 +27,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"اختر ميزات المستخدم التي تريد مزامنتها مع خادم LDAP الخاص بك.\" is a literal translation of 'Choose user features that you want to synchronize with your LDAP server'. The word 'features' (ميزات) is not the most accurate term here. A more appropriate translation for 'attributes' in this context would be 'خصائص' (khasa'is).",
+          "suggestion": "اختر خصائص المستخدم التي تريد مزامنتها مع خادم LDAP الخاص بك."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'sınxronizasiya' is commonly misspelled. The correct spelling is 'sinkronizasiya'.",
+          "suggestion": "sinkronizasiya"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -81,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'սինխրոնիզացնել' is a transliteration from English 'synchronize'. While understandable, the preferred Armenian equivalent is 'կազմել'.",
+          "suggestion": "կազմել"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,13 +117,25 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'LDAP 서버와 동기화하려는 사용자 속성을 선택합니다.' is a literal translation but lacks the nuance of the English 'Choose user attributes which you want to be synchronized with your LDAP server.' It sounds slightly unnatural in Korean.",
+          "suggestion": "LDAP 서버와 동기화할 사용자 속성을 선택하세요."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຊິງໂຄນ' is likely a misspelling. It should be 'ສີງໂຄນ' or possibly 'ເຊິ່ງ'.",
+          "suggestion": "ເລືອກຄຸນລັກສະນະຂອງຜູ້ໃຊ້ທີ່ທ່ານຕ້ອງການໃຫ້ເຊິ່ງຖືກສີງໂຄນກັບເຄື່ອງແມ່ຂ່າຍ LDAP ຂອງທ່ານ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -153,7 +183,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'පරිශීලක' (parishiilaka) is a less common and potentially archaic term for 'user'. It might be perceived as overly formal or unclear to some users. Consider a more common synonym.",
+          "suggestion": "පරිශීලක වෙනුවට 'භාවිතර' (bhavitara) or 'පරිශීලකයා' (parishiilakayaa) භාවිතා කරන්න."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the phrasing 'ඔබේ LDAP සේවක සමඟ සමමුහුර්ත කිරීමට අවශ්‍ය' can be slightly improved for flow. It could be made more natural.",
+          "suggestion": "ඔබේ LDAP සේවකාරිය සමඟ සමමුහුර්ත කරගත යුතු පරිශීලක ගුණාංග තෝරන්න."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

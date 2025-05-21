@@ -3,7 +3,7 @@
   "content": "Enter domain",
   "content_en_sha1_hash": "9eff7ed921a9f0545c57d5b06e9e53be925a95f4",
   "created_at": "2025-05-19T21:30:53.295Z",
-  "updated_at": "2025-05-20T09:44:01.566Z",
+  "updated_at": "2025-05-21T01:36:07.896Z",
   "comment": {
     "text": "This translation key is used to display a placeholder text in a form field when entering a domain. It appears as a prompt within an input field, guiding users to enter their domain information.",
     "is_auto": true,
@@ -153,7 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'වසම යොදන්න' (vasama yodanna) does not accurately convey the meaning of 'Enter domain'. 'වසම' (vasama) translates to 'grace' or 'blessing', which is unrelated to 'domain'. 'යොදන්න' (yodanna) means 'to add' or 'to apply'. The correct translation should be something along the lines of 'ප්‍රදේශය ඇතුළත් කරන්න' (pradeshiya athulatha karnataka) or 'අඩෝමෙන් ඇතුළත් කරන්න' (adomem athulatha karnataka).",
+          "suggestion": "ප්‍රදේශය ඇතුළත් කරන්න (pradeshiya athulatha karnataka) or අඩෝමෙන් ඇතුළත් කරන්න (adomem athulatha karnataka)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +183,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Unesi domen' implies 'Enter domain' as in, 'input domain'. A more natural translation for a label prompting the user to enter a domain would be 'Uneti domen'. The difference lies in the verb conjugation to agree with the implied subject.",
+          "suggestion": "Uneti domen"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

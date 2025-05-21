@@ -3,7 +3,7 @@
   "content": "Files shared by other users will be imported into {{sectionName}} > Recently accessible via link. Please note: some access rights may get lost during import.",
   "content_en_sha1_hash": "446ebeabb21e73dbb8be3a550abd4bd8e3c4a641",
   "created_at": "2025-05-19T21:30:52.698Z",
-  "updated_at": "2025-05-20T09:44:27.482Z",
+  "updated_at": "2025-05-21T03:03:13.143Z",
   "comment": {
     "text": "This translation key is used to display a message explaining that shared files will be imported into a specific section and may lose some access rights during import. It appears in a data-import component, likely on a button or dialog related to importing file categories, such as \"Import Shared Files\" in the Portal Settings page.",
     "is_auto": true,
@@ -27,13 +27,35 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation uses an ellipsis (…), which isn't standard for this type of notice. It disrupts the flow.",
+          "suggestion": "Replace the ellipsis with a more standard conjunction or phrasing. For example, remove it completely or replace it with 'و' (wa - and)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'يمكن الوصول إليها مؤخرًا عبر الرابط' (can be accessed recently via link) isn't the most natural way to express 'Recently accessible via link'. It sounds slightly awkward.",
+          "suggestion": "Consider rephrasing to something more natural like: 'ستكون متاحة مؤخرًا عبر رابط' (will be available recently via link) or 'يمكن الوصول إليها حديثًا عبر رابط' (can be accessed recently via link)."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Azerbaijani translation includes an ellipsis (…) after 'paylaşılan'. This is not present in the English version and is unnecessary.  It disrupts the flow and readability.",
+          "suggestion": "Remove the ellipsis after 'paylaşılan'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Link vasitəsilə son zamanlarda əldə edilənlər\" is understandable, it's a rather literal and slightly awkward translation of 'Recently accessible via link'.  A more natural phrasing would improve the fluency.",
+          "suggestion": "Consider 'Keçmişdə açılmış fayllar' or 'Əvvəlki açılışlar' as alternatives for 'Recently accessible via link'. A full revised suggestion could be: 'Digər istifadəçilər tərəfindən paylaşılan fayllar {{sectionName}} > Keçmişdə açılmış fayllar bölməsinə idxal ediləcək.'"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -45,19 +67,42 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Czech translation includes a non-breaking space (&#x20;) before the section name '{{sectionName}}'. While not strictly incorrect, it's unusual and might not render well depending on the context. It's generally preferable to avoid such spaces in this kind of text.",
+          "suggestion": "Remove the non-breaking space before '{{sectionName}}'."
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Zuletzt über Link aufgerufen importiert\" is awkward and doesn't accurately convey the meaning of \"Recently accessible via link.\" A more natural translation would be something like \"zuletzt über Link abrufbar\".",
+          "suggestion": "Von anderen Benutzern freigegebene Dateien werden in {{sectionName}} > Zuletzt über Link abrufbar importiert."
+        },
+        {
+          "type": "formatting",
+          "description": "The structure 'importiert' at the end of the sentence feels disconnected. It would flow better to integrate it more naturally within the sentence.",
+          "suggestion": "Von anderen Benutzern freigegebene Dateien werden importiert und sind in {{sectionName}} > Zuletzt über Link abrufbar."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The ellipsis (… or …) is missing after the `{{sectionName}}` variable, creating an abrupt transition.",
+          "suggestion": "Τα αρχεία που κοινοποιούνται από άλλους χρήστες θα εισαχθούν στο {{sectionName}} > Πρόσφατα προσβάσιμα μέσω συνδέσμου… Σημείωση: ορισμένα δικαιώματα πρόσβασης μπορεί να χαθούν κατά την εισαγωγή."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,79 +114,177 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The non-breaking space before 'osioon' in the Finnish translation looks unusual and might be a formatting artifact. It should be checked if it's intentional or should be removed.",
+          "suggestion": "Review the space before 'osioon' and remove it if it's unnecessary."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Recently accessible via link' is not the most natural or accurate translation of 'Recently accessible via link.' A more idiomatic French translation would be something like 'Récemment accessibles via un lien' or 'Récemment accessibles par lien'.",
+          "suggestion": "Récemment accessibles via un lien"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation lacks the bolding applied to 'Recently accessible via link' as it appears in the English content. While not strictly an error, it impacts consistency.",
+          "suggestion": "Consider adding emphasis (e.g., bolding) to the equivalent Armenian phrase corresponding to 'Recently accessible via link' within the translation. This would require knowing the intended visual style."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Files shared by other users\" is better translated as 'File condivisi da altri utenti' instead of 'I file condivisi da altri utenti'. The initial 'I' is redundant in Italian in this context.",
+          "suggestion": "File condivisi da altri utenti verranno importati in {{sectionName}} > Accessibili di recente tramite link. Nota: alcuni diritti di accesso potrebbero andare persi durante l'importazione."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Recently accessible via link' is somewhat ambiguous. While 'Accessibili di recente tramite link' is not incorrect, it might be improved to more closely reflect the intended meaning. Consider a more explicit phrasing indicating files accessed via link.",
+          "suggestion": "File condivisi da altri utenti verranno importati in {{sectionName}} > Recentemente accessibili tramite link. Nota: alcuni diritti di accesso potrebbero andare persi durante l'importazione."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation includes 「リンク経由で最近アクセスしたファイル」 which translates to \"Files recently accessed via link.\" This phrasing deviates from the original English \"Recently accessible via link.\"  It's slightly more verbose and changes the nuance slightly.",
+          "suggestion": "Consider revising to something closer to the original: 例えば、「リンク経由で最近アクセスしたファイル」を「リンク経由で最近利用可能なファイル」など。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The spacing before '링크로' is unusual and may look awkward in Korean. A single space is more standard.",
+          "suggestion": "다른 사용자가 공유한 파일은 {{sectionName}} > 링크로 최근 액세스 가능으로 가져오기됩니다."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation is understandable, the phrase '최근 액세스 가능으로 가져오기됩니다' (translated as 'imported into Recently accessible via link') is a bit clunky.  A more natural phrasing for 'Recently accessible via link' might be '최근 접근 가능한 곳' or '최근 접근 위치'.",
+          "suggestion": "다른 사용자가 공유한 파일은 {{sectionName}} > 최근 접근 가능한 곳으로 가져오기됩니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation uses 'ເມື່ອບໍ່ດົນມາ​ນີ້' which translates to 'recently'. While accurate in meaning, consider a more concise phrasing for better flow, especially in UI text.  The original English uses 'Recently accessible via link', which is more streamlined.",
+          "suggestion": "ເອກະສານທີ່ແບ່ງປັນໂດຍຜູ້ໃຊ້ຄົນອື່ນຈະຖືກນໍາເຂົ້າມາໃນ {{sectionName}} > ທີ່ເຂົ້າເຖິງໄດ້ຜ່ານລິ້ງ. ກະລຸນາສັງເກດວ່າ: ສິດໃນການເຂົ້າເຖິງບາງຢ່າງອາດສູນເສຍໃນລະຫວ່າງການນໍາເຂົ້າມາ."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The space before the '>' in 'Nesen pieejami caur saiti' is unnecessary and disrupts the flow.",
+          "suggestion": "Nesen pieejami caur saiti"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The non-breaking space before 'Recent' is unnecessary and potentially disrupts the flow of the sentence. It also might not render correctly depending on the UI.",
+          "suggestion": "Remove the non-breaking space before 'Recent'."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The non-breaking space character (Unicode character U+00A0) is used instead of a regular space before '>'. While visually subtle, using a regular space improves readability and consistency.",
+          "suggestion": "Replace U+00A0 with a regular space."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Portuguese translation includes a non-breaking space before '{{sectionName}}'. This might not render correctly depending on the context.",
+          "suggestion": "Remove the non-breaking space before '{{sectionName}}'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Recently accessible via link' is translated as 'Acessados recentemente via link'. While understandable, a more natural Portuguese equivalent for 'Recently accessible' would be 'Acessados recentemente' or 'Recentes'.",
+          "suggestion": "Consider translating 'Recently accessible via link' as 'Acessados recentemente via link' or 'Recentes via link'."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Recently accessible via link' translates more accurately as 'Acessados recentemente via link' or 'Acessíveis recentemente via link'. 'Recentemente acessível' is grammatically awkward in Portuguese.",
+          "suggestion": "Os arquivos compartilhados por outros usuários serão importados para {{sectionName}} > Acessados recentemente via link."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Recente sunt accesibile prin link' is an awkward translation of 'Recently accessible via link'. It literally translates to 'Recent are accessible via link', which isn't natural Romanian.",
+          "suggestion": "Fișierele partajate de alți utilizatori vor fi importate în {{sectionName}} > Fișiere recente accesibile prin link."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'Rețineți: este posibil ca unele drepturi de acces să se piardă în timpul importului' could be improved for better flow.",
+          "suggestion": "Rețineți: este posibil ca unele drepturi de acces să fie pierdute în timpul importului."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,13 +296,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation appears to be Slovenian, not Sinhala. The phrase 'Datoteke, ki jih delijo drugi uporabniki...' is Slovenian for 'Files that are shared by other users...'.",
+          "suggestion": "The translation needs to be completely redone in Sinhala.  A placeholder suggestion would be something like: \" අනෙකුත් පරිශීලකයින් බෙදාගත් ගොනっていない, {{sectionName}} > සබැඳිය හරහා πρόσφατα அணுகිය හැකි වෙතට ආනයනය කෙරේ. කරුණාකර සටකන්න: ආනයන අතරතුර සමහර ප්‍රවේශ අයිතිවාසිකම් verloren gehen හැකියාවක් ఉంది.\""
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The non-breaking space before 'Nedávno' is unnecessary and might cause layout issues. It should be removed.",
+          "suggestion": "Nedávno"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,37 +326,73 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Serbian translation does not follow the same formatting as the English content. Specifically, the 'Recently accessible via link' portion lacks the '>'.",
+          "suggestion": "Фајлови које деле други корисници биће увезени у {{sectionName}} > Недавно доступно преко везе."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Recently accessible via link' is not accurately translated. 'Nedavno dostupno preko veze' sounds a bit awkward. A more natural translation would be something like 'Nedavno pristupačno putem linka' or 'Nedavno otvoreno putem linka'.",
+          "suggestion": "Nedavno pristupačno putem linka"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Turkish translation uses an ellipsis (…), which isn't consistent with the English version's use of 'Bağlantı ile son erişilenler'. While not strictly incorrect, it deviates from the original formatting.",
+          "suggestion": "Consider replacing '…' with a more direct phrase like 'Bağlantıyla Ulaşılabilir Son Erişim' or simply removing it."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The non-breaking space before 'Нещодавно' is unnecessary and disrupts readability. It's also not consistent with typical UI text formatting.",
+          "suggestion": "Remove the non-breaking space before 'Нещодавно'."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The non-breaking space before 'Truy cập' is unnecessary and disrupts readability.",
+          "suggestion": "Các tệp được chia sẻ bởi người dùng khác sẽ được nhập vào {{sectionName}} > Truy cập gần đây qua liên kết. Lưu ý: Một số quyền truy cập có thể bị mất trong quá trình nhập."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Chinese translation maintains the English structure with '>', which might not be the most natural flow in Chinese. Consider using a more idiomatic way to indicate a hierarchical relationship.",
+          "suggestion": "其他用户共享的文件将导入{{sectionName}}，最近可通过链接访问。请注意：导入过程中可能会丢失部分访问权限。"
+        }
+      ],
       "approved_at": null
     }
   }

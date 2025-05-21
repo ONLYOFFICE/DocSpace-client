@@ -3,7 +3,7 @@
   "content": "Delete application",
   "content_en_sha1_hash": "62dfa2a86c09f3b9db6276cb5ae7e819355cc43f",
   "created_at": "2025-05-19T21:30:53.847Z",
-  "updated_at": "2025-05-20T09:42:53.133Z",
+  "updated_at": "2025-05-21T07:22:40.334Z",
   "comment": {
     "text": "This translation key is used for \"Delete Application\", a label that appears in an OAuth settings dialog when deleting an application. Its purpose is to inform users about the action being performed, and it is translated based on the context of whether multiple applications are being deleted (in which case \"DeleteApplications\" is used) or only one application (where \"DeleteApplication\" is used).",
     "is_auto": true,
@@ -93,7 +93,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"申請を削除する\" (shinkō o sakujo suru) translates to 'delete application', it's a somewhat formal and potentially ambiguous translation. 'Application' in the context of OAuth likely refers to a registered application within a developer platform. A more natural and accurate translation would emphasize that aspect.",
+          "suggestion": "アプリを削除する (apuri o sakujo suru) - 'Delete application' (referring to a software application)"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -105,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ລົບການໃຊ້ງານ\" translates to something like \"delete usage\" or \"disable usage\", a more direct and accurate translation of \"Delete application\" would be \"ລົບແອັບພິເຄຊັນ\" (Lop application).",
+          "suggestion": "ລົບແອັບພິເຄຊັນ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {

@@ -3,7 +3,7 @@
   "content": "This user has access to payment details and is the only user who can adjust the quota and make payments. The {{productName}} owner, as well as the paying manager themselves, can reassign the paying manager role using the Stripe customer portal.",
   "content_en_sha1_hash": "ae643c9dcf9e1481962468ae67c14eb82395ec04",
   "created_at": "2025-05-19T21:30:53.719Z",
-  "updated_at": "2025-05-20T09:43:07.169Z",
+  "updated_at": "2025-05-21T06:31:34.528Z",
   "comment": {
     "text": "This translation key is used to display a detailed description of access permissions for payment and quota adjustments. It appears in the UI as a tooltip when users interact with payment-related settings, providing context on who has access to these sensitive features.",
     "is_auto": true,
@@ -27,13 +27,30 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation does not maintain the same formatting as the English version. The phrase 'The {{productName}} owner' is presented as 'مالك {{productName}}' without a comma before the variable.",
+          "suggestion": "مالك ,{{productName}}"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'بالإضافة إلى مدير الدفع نفسه' is a bit awkward in Arabic. It literally translates to 'in addition to the paying manager himself'. It could be phrased more naturally.",
+          "suggestion": "وبإمكان مدير الدفع نفسه"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation retains the English sentence structure, which can feel slightly unnatural in Azerbaijani. While not incorrect, a more idiomatic phrasing might improve readability.",
+          "suggestion": "Consider rephrasing to improve flow and naturalness. For example: 'Bu istifadəçinin ödənişlərin təfərrüatlarına daxil olmaq, kvota dəyişmək və ödənişləri həyata keçirmək hüququ vardır. {{productName}} sahibi və ödəniş meneceri, Stripe müştəri portalı vasitəsilə ödəniş meneceri rolunu yenidən təyin edə bilərlər.'"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -45,7 +62,18 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Czech translation maintains the double curly braces `{{productName}}`, which should ideally be handled with a proper localization solution to replace the placeholder with the actual product name.",
+          "suggestion": "Ensure that the `{{productName}}` placeholder is dynamically replaced with the correct product name during localization."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'zákaznického prostoru Stripe' translates to 'Stripe customer space' which is not idiomatic. A more accurate translation reflecting the intended meaning of 'Stripe customer portal' would be 'Stripe zákaznického portálu'.",
+          "suggestion": "Replace 'zákaznického prostoru Stripe' with 'Stripe zákaznického portálu'."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -57,7 +85,18 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"προσαρμόσει την ποσόστωση\" (adjust the quota) might not be the best translation for \"adjust the quota\" in this context. It implies adjusting a quota system, which might not be the intended meaning.  'adjust' here likely means modifying or changing the payment settings or limits.",
+          "suggestion": "Consider alternatives like \"να τροποποιήσει\" (to modify) or \"να αλλάξει\" (to change) instead of \"να προσαρμόσει\"."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of double quotes around product name `{{productName}}` isn't standard Greek punctuation.",
+          "suggestion": "Replace double quotes with single quotes for the product name `{{productName}}`."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,7 +108,18 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"suorittaa maksuja\" (perform payments) is slightly awkward. A more natural Finnish phrasing would be \"maksaa maksuja\" or simply \"maksaa\".",
+          "suggestion": "muokata kiintiötä ja maksaa maksuja"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the repeated use of 'rooliin' is a bit clunky.  It could be made more fluid.",
+          "suggestion": "Tällä käyttäjällä on pääsy maksutietoihin ja on ainoa käyttäjä, joka voi muokata kiintiötä ja maksaa maksuja. {{productName}}-n omistaja ja maksava johtaja voivat määrätä maksavan johtajan uudelleen käyttäen Stripe-asiakasportaalia."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +131,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The colon after 'user' is missing in the Armenian translation.  It should be present to follow the English structure.",
+          "suggestion": "Այս օգտվողին: հասանելի են վճարման մանրամասները"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'The {{productName}} owner' is translated literally, but it might be more natural to use a more common Armenian equivalent for 'owner' in this context, such as 'ստեղծողը' (creator) or 'պատվիրատուի' (the client).  The best choice depends on the specific meaning intended.",
+          "suggestion": "Այս օգտվողին: հասանելի են վճարման մանրամասները և միակ օգտվողն է, ով կարող է կարգավորել քվոտան և կատարել վճարումներ: {{productName}}-ի ստեղծողը, ինչպես նաև իրենք՝ վճարող կառավարիչը, կարող են վերահանձնել վճարող մենեջերի դերը՝ օգտագործելով Stripe հաճախորդների պորտալը:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,7 +166,18 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"paying manager\" is translated as \"ຜູ້ຈັດການການຊໍາລະດ້ວຍຕົນເອງ\" which is not the most natural or accurate translation. A better translation would convey the meaning of a manager responsible for making payments.",
+          "suggestion": "Consider translating \"paying manager\" as \"ຜູ້ຈັດການຮັບຊໍາລະເງິນ\" or \"ຜູ້ຈັດການທີ່ຮັບຜິດຊອບການຈ່າຍເງິນ\"."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of \"ເຊັ່ນດຽວກັນກັບ\" (as well as) might sound a bit formal. While not incorrect, it could be slightly improved for a more conversational tone.",
+          "suggestion": "Consider revising to \"ແລະ\" (and) or a more natural phrasing depending on the overall tone desired."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -123,7 +195,18 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'make payments' is translated as 'dokonać płatności'. While technically correct, it sounds overly formal and less natural in Polish. A more natural phrasing would be 'wykonać płatności' or simply 'płacić'.",
+          "suggestion": "Dany użytkownik ma dostęp do szczegółów płatności i jest jedynym użytkownikiem, który może dostosować limit oraz wykonać płatności."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'reassign the paying manager role' is translated as 'przypisać lub przekazać rolę płacącego menedżera'. 'Przekazać' implies handing over completely, while 'reassign' can mean a shift within responsibilities. A more accurate translation reflecting the nuance of 'reassign' might be 'ponownie przydzielić'.",
+          "suggestion": "Właściciel {{productName}} i sam płacący menedżer mogą ponownie przydzielić rolę płacącego menedżera za pomocą portalu klienta Stripe."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,43 +224,130 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "“mesagerul plătitor” is an unusual and potentially incorrect translation of \"paying manager\". It doesn't convey the intended meaning of someone responsible for handling payments.",
+          "suggestion": "Consider using a more accurate translation for \"paying manager,\" such as \"administratorul plătitor\" or \"persoana care face plățile\"."
+        },
+        {
+          "type": "formatting",
+          "description": "The Romanian translation retains the English \"{{productName}}\". While this is common in some contexts, it's better to ensure consistent localization and potentially replace it with a localized equivalent if available.",
+          "suggestion": "If a localized term for '{{productName}}' exists, replace it. Otherwise, consider adding a note for translators to localize it consistently."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'This user has access to payment details' is not accurately reflected in the Russian translation 'Данный пользователь осуществляет оплату за тарифный план'. The English implies access and ability, while the Russian implies only payment execution.  It misses the 'access' part.",
+          "suggestion": "Данный пользователь имеет доступ к данным об оплате."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'The {{productName}} owner, as well as the paying manager themselves' is slightly awkward in the Russian translation. The Russian reads as if they are separate actions.",
+          "suggestion": "Владелец {{productName}} и сам плательщик"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'Сменить плательщика может владелец {{productName}}, а также сам плательщик через клиентский портал Stripe' could be improved for readability. A comma or conjunction would help.",
+          "suggestion": "Владелец {{productName}} и сам плательщик могут сменить плательщика через клиентский портал Stripe."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'adjust the quota' is not accurately translated. 'සකස් කර' (sakas kara) generally means 'to arrange' or 'to fix', but in this context it should convey the meaning of 'adjusting a limit or allowance'.",
+          "suggestion": "මෙම පරිශ්‍රීලකයාට ගෙවීමේ විස්තර වෙත ප්‍රවේශය තිබෙන අතර මාත්‍රාව සකස් කිරීමට හැකි එකම පුද්ගලයා වේ."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of the Sinhala word order feels slightly unnatural. While understandable, it might benefit from restructuring for a more fluent reading experience. Specifically, 'සැලාකය සකස් කර' could be improved.",
+          "suggestion": "මෙම පරිශ්‍රීලකයාට ගෙවීමේ විස්තර වෙත ප්‍රවේශය තිබෙන අතර, මාත්‍රාව සකස් කිරීමට හැකි එකම පුද්ගලයයා වේ."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'භූමිකාව' (bhūmikavā) is correctly spelled, but its use might be a little formal for a user-facing description. While not technically an error, it's worth considering a more approachable synonym depending on the brand's voice.",
+          "suggestion": "Consider using a less formal synonym for 'භූමිකාව' if the brand tone allows. For example, ‘කටයුතු’ or ‘ජවබතාවය’."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'adjust the quota' is translated as 'nastaviť kvótu'. While technically correct, a more natural Slovak translation would be 'upraviť kvótu' or 'zmeniť kvótu'. 'Nastaviť' implies an initial setting, while 'adjust' refers to a modification.",
+          "suggestion": "upraviť kvótu"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'reassign the paying manager role' is translated as 'zmeniť rolu správcu platieb'. While 'zmeniť' is not incorrect, 'preradiť rolu správcu platieb' or 'povoľovať/odpovedať za rolu správcu platieb' might convey the meaning of reassigning more accurately.",
+          "suggestion": "preradiť rolu správcu platieb"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'account' (račun) in \"...prilagaja račun...\" is not an accurate translation of 'quota'. 'Quota' refers to a limit or allocation, not an account.",
+          "suggestion": "Ta uporabnik ima dostop do podrobnosti plačila in je edini uporabnik, ki lahko prilagaja **kvoto** in izvaja plačila."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of bold text in the suggested correction might disrupt the overall formatting of the translated content. Consider maintaining the original formatting or adopting a consistent style throughout the translation.",
+          "suggestion": "Remove or adjust bold text to match the existing style."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Cyrillic text contains a stray non-breaking space before 'плац́ања' in multiple instances.",
+          "suggestion": "Remove the extra space before 'плац́ања'."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'корисц́и' is likely a typo. It should be 'користећи'.",
+          "suggestion": "Change 'корисц́и' to 'користећи'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'plaća' is used inconsistently. It should be consistently 'plaćanja' throughout the sentence.",
+          "suggestion": "Replace 'plaća' with 'plaćanja' where it appears."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'koristeć́i portal za korisnike Stripe' can be improved for better flow. 'koristeći Stripe korisnički portal' is more natural.",
+          "suggestion": "Replace 'koristeć́i portal za korisnike Stripe' with 'koristeći Stripe korisnički portal'."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -189,7 +359,23 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'adjust the quota' is translated as 'регулювати квоту'. A more accurate and common translation would be 'змінювати квоту' or 'коригувати квоту'. 'Регулювати' implies a more formal or complex adjustment.",
+          "suggestion": "змінювати квоту"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'make payments' is translated as 'здійснювати платежі'. While technically correct, a more natural and concise translation would be 'виконувати платежі' or simply 'оплачувати'.",
+          "suggestion": "оплачувати"
+        },
+        {
+          "type": "formatting",
+          "description": "The variable `{{productName}}` is formatted correctly but it would be beneficial to ensure that the rendering engine uses the correct Ukrainian locale when substituting this variable, to ensure proper character encoding if the product name contains special characters.",
+          "suggestion": "Ensure proper locale rendering for `{{productName}}`."
+        }
+      ],
       "approved_at": null
     },
     "vi": {

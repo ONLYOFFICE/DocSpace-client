@@ -3,7 +3,7 @@
   "content": "ID",
   "content_en_sha1_hash": "89f89c02cf47e091e726a4e07b88af0966806897",
   "created_at": "2025-05-19T21:30:53.908Z",
-  "updated_at": "2025-05-20T09:42:45.516Z",
+  "updated_at": "2025-05-21T07:10:22.917Z",
   "comment": {
     "text": "The \"ID\" translation key is used to display a label for an input field, likely in a form or fields section. It appears as a simple text label, and its purpose is to provide a clear indication of what user input is required (in this case, the ID).",
     "is_auto": true,
@@ -153,7 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"අංකය\" (ankaya) translates to 'number' or 'figure,' which isn't the most accurate translation for 'ID' in the context of OAuth. While 'ID' can sometimes represent a number, it often refers to an identifier, which is a more general concept.",
+          "suggestion": "Consider a translation like \"గుర్తింపు\" (gurthimpu), which means 'identification' or 'identifier,' or \"සංඛ්‍යාත්මක හඳුනාගැනීම\" (sankhyamatika hadunaganeyima) for a more literal 'numerical identification'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +189,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'Kimlik' while generally meaning 'Identity,' might be too broad for the context of an 'ID' in OAuth. A more precise translation like 'Tanımlayıcı' (Identifier) or 'Numara' (Number) might be more appropriate depending on the specific purpose of the ID.",
+          "suggestion": "Consider 'Tanımlayıcı' or 'Numara' for a more accurate translation depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

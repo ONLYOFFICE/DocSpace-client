@@ -3,7 +3,7 @@
   "content": "Read news and events from your {{productName}} in a daily digest.",
   "content_en_sha1_hash": "a9ed216609c917d83442a4d0c7262c2c42631a37",
   "created_at": "2025-05-19T21:30:54.081Z",
-  "updated_at": "2025-05-20T09:42:29.800Z",
+  "updated_at": "2025-05-21T07:35:25.837Z",
   "comment": {
     "text": "This translation key is used to display a notification message that invites users to read news and events from their product in a daily digest. The text appears on a UI component related to notifications.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Azerbaijani translation retains the double curly braces '{{productName}}'. This is a formatting issue, as the English uses single curly braces.",
+          "suggestion": "Replace '{{productName}}' with '{productName}'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -69,19 +75,42 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Lue uutiset ja tapahtumat {{productName}}-si päivittäisistä uutisista' is not a natural or accurate translation of \"Read news and events from your {{productName}} in a daily digest.\" The phrasing 'päivittäisistä uutisista' (from daily news) is redundant and awkward.",
+          "suggestion": "Lue uutiset ja tapahtumat {{productName}}-palvelustasi päivittäisessä tiivistelmässä."
+        },
+        {
+          "type": "formatting",
+          "description": "The possessive suffix '-si' attached to '{{productName}}' might not be the most natural way to express ownership in Finnish in this context. It depends on the nuance desired, but a simpler phrasing may be preferable.",
+          "suggestion": "Consider alternatives like '{{productName}}-palvelusta' or '{{productName}}'-palvelusta', or potentially restructuring the sentence to avoid possessives altogether."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'daily digest' is better translated as 'résumé quotidien' or 'compilation quotidienne' rather than 'rapport quotidien'. 'Rapport' implies a formal report, while 'digest' refers to a summary or compilation.",
+          "suggestion": "Lisez les nouvelles et les événements de votre {{productName}} dans un résumé quotidien."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'ամենօրյա ակնարկով' (amennorya aknarkov) translates more literally to 'with a daily overview' rather than 'in a daily digest.' While understandable, 'digest' implies a curated and summarized collection, which may be more accurate.",
+          "suggestion": "Կարդացեք նորություններ և իրադարձություններ ձեր {{productName}}-ից ամենօրյա ընտրությամբ:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,7 +128,18 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '일일 다이제스트에서 {{productName}}의 뉴스 및 이벤트 읽기' literally translates to 'Read news and events of {{productName}} in a daily digest'. This isn't the most natural phrasing in Korean. A more natural translation would emphasize receiving or viewing the digest itself.",
+          "suggestion": "일일 다이제스트에서 {{productName}}의 뉴스 및 이벤트 확인하기."
+        },
+        {
+          "type": "formatting",
+          "description": "While the variable {{productName}} is correctly preserved, consider whether the Korean sentence structure benefits from a slightly different placement of this variable for flow.",
+          "suggestion": "{{productName}}의 일일 다이제스트에서 뉴스 및 이벤트를 읽어보세요."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -141,7 +181,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'Read' is not the most natural. 'Citiţi' implies a formal reading. A more natural translation would be 'Vezi' or 'Verifică'.",
+          "suggestion": "Vezi ştirile şi evenimentele din spațiul dvs {{productName}} într-un rezumat zilnic."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'din spațiul dvs' could be more accurately translated to reflect 'from your [product name]'.",
+          "suggestion": "din {{productName}} într-un rezumat zilnic."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +204,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඔබගේ {{productName}} වෙතින් පුවත් සහ සිදුවීම් දිනපතා සඟරාවකින් කියවන්න' is a bit literal and doesn't fully capture the meaning of 'daily digest.' 'සඟරාවකින්' (from a magazine) isn't the best way to express a digest.",
+          "suggestion": "ඔබගේ {{productName}} වෙතින් ලැබෙන දෛනික පුවත් සහ සිද්ධීන් දැනුවම්."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of the variable {{productName}} is consistent across both the English and Sinhala versions, which is good.",
+          "suggestion": "N/A"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -165,19 +227,42 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'prostor' (space) doesn't accurately convey the meaning of '{{productName}}'. It implies a physical location rather than the platform or service.",
+          "suggestion": "Preberi novice in dogodke iz svojega {{productName}} v dnevnem povzetku."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Читајте' (Chitajte) translates to 'Read' in the imperative form (formal 'you' plural). The original English uses a more general invitation.  A more appropriate translation might be 'Прочитајте' (Prochitajte - read through) or 'Погледајте' (Pogledajte - view).",
+          "suggestion": "Прочитајте вести и догађаје из вашег {{productName}}-а у дневном прегледу."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of the genitive case '-а' after '{{productName}}' might sound unnatural. Depending on the context and 'productName', using the dative case could be more natural (e.g., 'у вашем {{productName}}-у').",
+          "suggestion": "Читајте вести и догађаје из вашег {{productName}}-у у дневном прегледу."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Serbian translation includes a hyphenated possessive form '-a' after '{{productName}}'. While grammatically correct, it's more natural to use a possessive particle 'svog' for this context, particularly when referring to a digital product or service.",
+          "suggestion": "Čitajte vesti i događaje iz vašeg {{productName}} svoga u dnevnom pregledu."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

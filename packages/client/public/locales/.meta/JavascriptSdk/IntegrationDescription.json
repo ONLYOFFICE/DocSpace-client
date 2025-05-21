@@ -3,7 +3,7 @@
   "content": "Check ready-to-use {{productName}} integrations",
   "content_en_sha1_hash": "f87add241b0df885895ab3a4a735efef0979ff99",
   "created_at": "2025-05-19T21:30:54.530Z",
-  "updated_at": "2025-05-20T09:41:35.555Z",
+  "updated_at": "2025-05-21T09:03:06.566Z",
   "comment": {
     "text": "This translation key is used to display a descriptive text next to examples of ready-to-use integrations of a specific product. It appears on a UI element in the developer tools section, likely as a header or caption, and provides context for users to understand the content of the integration examples.",
     "is_auto": true,
@@ -93,7 +93,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"すぐに使える{{productName}}の統合機能を確認する\" is technically correct but a more natural phrasing would be \"{{productName}}の統合機能を確認します\" or \"{{productName}}の統合機能が利用可能か確認する\". The current phrasing 'すぐに使える' (sugu ni tsukaeru - immediately usable) is a bit too literal and slightly awkward in this context.",
+          "suggestion": "{{productName}}の統合機能を確認します"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -105,7 +111,18 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ກວດ​ສອບ\" (guatสอบ) can be interpreted as 'inspect' or 'examine' rather than 'check'. 'Check' implies a verification process, which is more accurate for the intended meaning.",
+          "suggestion": "Consider using \"ກວດແກ້\" (guat gae) or \"ຕ້ອນກວດ\" (ton guat) for a closer equivalent of 'check' in this context."
+        },
+        {
+          "type": "formatting",
+          "description": "While the use of \"{{productName}}\" is technically correct, it might be more natural in Lao to insert the product name directly into the translated text if the context allows. This can improve readability.",
+          "suggestion": "If possible, replace \"{{productName}}\" with the actual product name. Example: 'ກວດ​ສອບ​ການ​ເຊື່ອມຕໍ່ [Product Name] ທີ່​ພ້ອມ​ສໍາລັບ​ການ​ນໍາ​ໃຊ້'"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -129,7 +146,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'prontas a usar' is a literal translation of 'ready-to-use' and sounds slightly awkward in Portuguese. A more natural phrasing would be 'prontas para usar'.",
+          "suggestion": "Verifique as integrações {{productName}} prontas para usar"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,7 +164,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'soluții' (solutions) doesn't quite capture the meaning of 'integrations' in this context. While it's related, 'integrări' would be a more direct and accurate translation.",
+          "suggestion": "Verificați integrări {{productName}} gata de utilizare"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +182,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'භාවිතයට' is potentially incorrect. It seems to be a combination of 'භාවිත' (use) and the dative suffix '-යට'. A more natural phrasing might be 'භාවිත කළ හැකි'.",
+          "suggestion": "භාවිත කළ හැකි"
+        },
+        {
+          "type": "grammatical",
+          "description": "The sentence structure feels slightly awkward. A more fluent phrasing might be achieved by reordering the words.",
+          "suggestion": "භාවිතයට සූදානම් {{productName}} ඒකාබද්ධ කිරීම් පරීක්ෂා කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +211,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Проверите готове интеграције {{productName}}' while understandable, doesn't perfectly convey the nuance of 'Check ready-to-use {{productName}} integrations'. A more natural translation would emphasize the 'ready-to-use' aspect. The current translation simply says 'Check ready integrations'.",
+          "suggestion": "Проверите спремне интеграције {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'gotove' should ideally be 'pripremljene' for a more natural flow. While 'gotove' isn't *incorrect*, 'pripremljene' implies readiness more directly in this context.",
+          "suggestion": "Proverite pripremljene integracije {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,7 +247,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Kiểm tra các tích hợp {{productName}} có sẵn để sử dụng' is a bit wordy and not as concise as the English 'Check ready-to-use {{productName}} integrations'. While technically correct, it can be improved for flow.",
+          "suggestion": "Kiểm tra tích hợp {{productName}} sẵn có"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

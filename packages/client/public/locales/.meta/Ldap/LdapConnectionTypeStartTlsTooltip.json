@@ -3,7 +3,7 @@
   "content": "StartTLS offers a way to upgrade a plain text connection to an encrypted (TLS or SSL) connection instead of using a separate port for encrypted communication.",
   "content_en_sha1_hash": "85d8ba579364ce5a906c8a5f3d2798fa83eb7374",
   "created_at": "2025-05-19T21:30:54.194Z",
-  "updated_at": "2025-05-20T09:42:13.415Z",
+  "updated_at": "2025-05-21T08:25:16.206Z",
   "comment": {
     "text": "The translation key \"LdapConnectionTypeStartTlsTooltip\" is used to display a tooltip explaining how StartTLS works in LDAP connections. This message provides context for users who are unsure about the encryption process. It appears on a checkbox component in the PortalSettings categories integration.",
     "is_auto": true,
@@ -27,13 +27,30 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'بوابة' (bawwābah) translates to 'gateway' and isn't the most accurate term here. It's better to use a word that signifies a separate 'port' or 'channel'.",
+          "suggestion": "يوفر StartTLS طريقة لترقية اتصال النص العادي إلى اتصال مشفر (TLS أو SSL) بدلاً من استخدام منفذ منفصل للاتصال المشفر."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'şifrələnmiş' is repeated and could be simplified.",
+          "suggestion": "StartTLS, şifrələnmiş (TLS və ya SSL) əlaqəyə keçid etmək üçün bir yol təqdim edir, ayrıca portdan istifadə etməyinə alternativ olaraq."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'keçid etmək' flows better than 'yüksəltmək' in this context.",
+          "suggestion": "StartTLS, şifrələnmiş (TLS və ya SSL) əlaqəyə keçid etmək üçün bir yol təqdim edir, ayrıca portdan istifadə etməyinə alternativ olaraq."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -81,7 +98,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"կոդավորված հաղորդակցության համար\" translates to \"for encoded communication\" which isn't the most accurate representation of \"encrypted communication.\" It should convey the concept of encryption, not just encoding.",
+          "suggestion": "կոդային հաղորդակցության համար"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of a hyphen in \"StartTLS-ն\" is slightly awkward. It's not incorrect but a more natural phrasing might be preferable.",
+          "suggestion": "StartTLS-ը"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +121,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"暗号化通信用に別のポートを使用する代わりに\" (for encrypted communication instead of using a separate port) is slightly awkward. While technically correct, it could be phrased more naturally in Japanese.",
+          "suggestion": "暗号化通信用に別のポートを使用せずに、プレーンテキスト接続を暗号化（TLSまたはSSL）接続にアップグレードする方法を提供します。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -105,7 +139,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ແບ່ງກັນ' is used in the Lao translation. While technically correct, it might be more natural to use 'ໃຊ້' or 'ເປີດ' in this context to describe using a port.",
+          "suggestion": "StartTLS ໃຫ້ວິທີການຍົກລະດັບເຊື່ອມຕໍ່ຂໍ້ຄວາມຊາບັດໃຫ້ເປັນການເຊື່ອມຕໍ່ທີ່เข้ารຫັດ (TLS ຫຼື SSL) ແທນທີ່ຈະໃຊ້ພອດເປີດສໍາລັບການສື່ສານທີ່เข้ารຫັດ."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +181,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'înlocuiește folosirea unui port separat pentru asigurarea conexiunii criptate' doesn't perfectly convey the meaning of 'instead of using a separate port'.  It implies a replacement rather than an alternative way of doing things. A more accurate translation would reflect that StartTLS *avoids* needing a separate port.",
+          "suggestion": "StartTLS evită necesitatea utilizării unui port separat pentru asigurarea conexiunii criptate."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'pentru asigurarea conexiunii criptate' is a bit clunky. It can be simplified.",
+          "suggestion": "pentru o conexiune criptată"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,13 +204,35 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"තොටක් භාවිතා කිරීම\" (thotak upayogathama kiriw) literally translates to 'using a port', which, while technically correct, is a less natural phrasing in Sinhala. A more fluent phrasing would be something like 'විශේෂිත පෝර්ට් එකක් භාවිතා කිරීම් වෙනුවට' (visheshitha porth ekak upayogathama kiriw venvata) or simply 'වෙනත් පෝර්ට් එකක් භාවිතා කිරීම් වෙනුවට' (venath porth ekak upayogathama kiriw venvata).",
+          "suggestion": "Consider rephrasing 'තොටක් භාවිතා කිරීම' to a more natural Sinhala phrasing, such as 'විශේෂිත පෝර්ට් එකක් භාවිතා කිරීම් වෙනුවට' or 'වෙනත් පෝර්ට් එකක් භාවිතා කිරීම් වෙනුවට'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'උත්ශ්‍රේණි' (uthshrenii) is not commonly used in this context. A more common and understandable word would be 'දියුණු' (diyunu) meaning 'to upgrade' or 'to enhance'.",
+          "suggestion": "Replace 'උත්ශ්‍රේණි' with 'දියුණු'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"StartTLS offers a way to upgrade a plain text connection\" is somewhat awkward. 'vylepšiť obyčajné textové pripojenie' translates to 'upgrade a plain text connection', but the phrasing in Slovak could be improved for clarity and naturalness. A more suitable translation might be 'umožňuje prechod z nešifrovaného textového pripojenia'.",
+          "suggestion": "umožňuje prechod z nešifrovaného textového pripojenia"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"na šifrovanie komunikácie\" is a bit literal and could be improved. It's more natural to say something like \"na šifrovanú komunikáciu\" or simply omit the explicit mention of encryption.",
+          "suggestion": "na šifrovanú komunikáciu"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -177,13 +250,25 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'nudi' is likely a typo. It should probably be 'nudi je', meaning 'is a'.",
+          "suggestion": "StartTLS je nudi način da se obična tekstualna veza nadogradi..."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'bağlantı' is repeated multiple times and can be slightly clunky in Turkish. While technically correct, it might benefit from variation for readability.",
+          "suggestion": "Consider using synonyms for 'bağlantı' like 'iletişim', 'kanal' or restructuring the sentence for better flow. For example, 'StartTLS, şifreli iletişim için ayrı bir bağlantı noktası kullanmak yerine, mevcut düz metin iletişimini şifreli (TLS veya SSL) bir kanala yükseltmenin bir yoludur.'"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

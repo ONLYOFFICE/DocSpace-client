@@ -3,7 +3,7 @@
   "content": "Key lifetime",
   "content_en_sha1_hash": "4542cdd571d747286d9eef72438ab8529c366c75",
   "created_at": "2025-05-19T21:30:51.751Z",
-  "updated_at": "2025-05-20T09:45:02.330Z",
+  "updated_at": "2025-05-21T04:02:26.434Z",
   "comment": {
     "text": "The translation key \"KeyLifetime\" is used to display the lifetime of an API key. It appears in a dialog when creating or editing an API key, providing users with information about the key's validity period.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Açarın istifadə müddəti' is a literal translation, 'Key lifetime' generally refers to the duration for which a cryptographic key is valid or usable. A more accurate translation focusing on validity/expiry would be preferable.",
+          "suggestion": "Açarın etibarlılıq müddəti"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Բանալու ժամկետ\" (Banalu jamket) is a literal translation of \"Key lifetime\", it might sound slightly awkward in Armenian. A more natural phrasing would convey the intended meaning of how long a key is valid.",
+          "suggestion": "Consider alternatives like \"Աջակալման ժամանակաշրջան\" (Ajakalman zamanakert, meaning 'Validity period') or \"Ժամանակահատվածը\" (Zamanakhatverdy, meaning 'Duration'). The best choice depends on the specific context of the setting."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,19 +117,37 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຊີວິດການຂອງຄີ' literally translates to 'life of key' which isn't an accurate translation of 'Key lifetime'. It lacks the sense of duration.",
+          "suggestion": "ອາຍຸການຂອງຄີ (Ayu kan khong khi) - which translates to 'Key Age' or 'Key Duration'"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation \"Atslēgas lietderīgās lietošanas laiks\" is a literal translation and not idiomatic for 'Key lifetime'. It's overly verbose and doesn't convey the intended meaning accurately.  'Key lifetime' typically refers to the duration a cryptographic key is valid for.",
+          "suggestion": "Consider a more concise and accurate translation such as \"Atslēgas derīguma termiņš\" or \"Atslēgas darbības laiks\"."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Levensduur key\" is understandable, a more natural Dutch translation of \"Key lifetime\" would be \"Sleutelduur\" or \"Levensduur van de sleutel\". \"Levensduur key\" sounds somewhat literal and slightly awkward.",
+          "suggestion": "Sleutelduur"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -129,7 +159,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Vida útil chave' is not the most natural or accurate translation of 'Key lifetime'. While technically correct, it's a literal translation that sounds awkward in Portuguese. A more common and idiomatic translation would be 'Tempo de vida da chave' or 'Validade da chave'.",
+          "suggestion": "Tempo de vida da chave"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -153,7 +189,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"ඉතිරි කාලය\" (ithiri kaalaya) translates to 'remaining time' or 'residual time', not 'key lifetime'.  'Key lifetime' refers to the duration a cryptographic key is valid for.",
+          "suggestion": "A more accurate translation would be something like \"දුරkeys කාලසීමාව\" (dur keys kaalasimaava) which means 'key duration' or \"විධාන කලමණාපන కాలము\" (vidhdha kalama napana kalamu) which means 'key validity period'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +213,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Век трајања кључа' is understandable, a more accurate and commonly used translation for 'Key lifetime' in a technical context would be 'Валабилитет кључа' or 'Рок важења кључа'. 'Век' typically refers to an era or century, not a duration of time in a technical sense.",
+          "suggestion": "Валабилитет кључа"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -195,7 +243,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Thời gian tồn tại của khóa\" is understandable, a more natural and common translation for \"Key lifetime\" in a technical context would be \"Thời hạn sử dụng khóa\" or \"Thời lượng tồn tại của khóa\". \"Thời gian tồn tại của khóa\" sounds slightly awkward.",
+          "suggestion": "Thời hạn sử dụng khóa"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

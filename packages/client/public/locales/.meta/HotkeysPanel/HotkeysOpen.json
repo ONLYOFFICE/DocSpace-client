@@ -3,7 +3,7 @@
   "content": "Open selected item/Confirm action",
   "content_en_sha1_hash": "b8c0bea4ca2d610ff6487bd0c2c17bc9f412f3b5",
   "created_at": "2025-05-19T21:30:55.069Z",
-  "updated_at": "2025-05-20T09:40:31.910Z",
+  "updated_at": "2025-05-21T10:28:47.323Z",
   "comment": {
     "text": "The translation key \"HotkeysOpen\" is used to display the label for a button or action that opens a selected item or confirms an action. In the UI, it appears as part of a hotkey panel. It should be translated to convey the purpose of this action in different languages.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Seçilmiş elementi açın/Hərəkəti təsdiqləyin\" is a bit too literal. \"Open selected item\" could be better conveyed with a phrase like \"Seçilmiş xətti açın\" or \"Seçilmiş xətti göstərin\" depending on the UI element. \"Confirm action\" is correctly translated.",
+          "suggestion": "Consider using \"Seçilmiş xətti açın/Hərəkəti təsdiqləyin\" or \"Seçilmiş xətti göstərin/Hərəkəti təsdiqləyin\"."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -57,7 +63,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Άνοιγμα επιλεγμένου στοιχείου/Επιβεβαίωση ενέργειας\" is a literal translation but doesn't fully capture the meaning of 'Confirm action'. 'Confirm action' implies a positive affirmation or execution. A more accurate translation would convey that.",
+          "suggestion": "Επιβεβαίωση/Εκτέλεση (Confirmation/Execution)"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -81,19 +93,37 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Open selected item/Confirm action\" is a bit ambiguous and the Armenian translation might not fully capture the dual function. \"Բացել ընտրված միավորը/հաստատել գործողությունը\" literally translates to 'Open selected item/Confirm action'. However, in a hotkey context, 'Confirm action' could be better expressed as something like 'Հաստատել ընտրությունը' (Confirm selection) to be clearer. Depending on the exact functionality, a more context-aware translation might be beneficial.",
+          "suggestion": "Consider alternative translations that better reflect the dual purpose. Examples: \"Բացել ընտրված միավորը/Հաստատել ընտրությունը\" or \"Բացել/Հաստատել ընտրությունը\""
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Open selected item/Confirm action\" is a bit ambiguous and combined functionality. The Italian translation \"Aprire elemento selezionato/Confermare azione\" maintains that combined meaning. However, depending on the specific UI context, it might be better to split these into two separate actions for clarity. \"Aprire elemento selezionato\" is accurate, but \"Confermare azione\" is a very general term and might not be the best translation without knowing what 'action' refers to. It could be more specific.",
+          "suggestion": "Consider whether splitting the translation into two separate lines or phrases would be more appropriate, depending on the UI. For example: 'Apri elemento selezionato' and 'Conferma azione'."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Confirm action\" doesn't perfectly align with \"アクションを確認\". While \"確認\" can mean \"confirm\", it's more literally \"check\" or \"verify.\"  \"Confirm action\" implies a definitive approval, which \"確認\" lacks. A stronger translation for \"Confirm action\" would be something like 「アクションを確定する」 or 「アクションを承認する」.",
+          "suggestion": "アクションを確定する / アクションを承認する"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -111,7 +141,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Confirm action\" is not accurately reflected by \"Apstiprināt darbību\". A more accurate translation would be \"Apstiprināt rīciju\" or \"Apstiprināt izvēli\". \"Darbību\" implies actions generally, while the English suggests confirming a specific action.",
+          "suggestion": "Apstiprināt rīciju"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -123,25 +159,54 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Otwórz zaznaczone elementy/Potwierdź akcję' doesn't perfectly capture the nuance of 'Open selected item/Confirm action'. 'Open selected item' is often used to open a menu or panel, while 'Otwórz zaznaczone elementy' implies opening multiple items. 'Confirm action' is accurate, but the first part could be more precise.",
+          "suggestion": "Rozwiń panel wybranej akcji/Potwierdź akcję"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Abrir item selecionado/Confirmar ação' is not a direct or ideal translation of 'Open selected item/Confirm action'. 'Abrir item selecionado' can be too literal. A more natural translation for 'Open selected item' might be something like 'Abrir seleção' or 'Abrir o item escolhido'.",
+          "suggestion": "Consider 'Abrir seleção/Confirmar ação' or 'Abrir o item escolhido/Confirmar ação'"
+        },
+        {
+          "type": "formatting",
+          "description": "The Portuguese translation uses a slash (/) to separate the two actions, mirroring the English. While not inherently wrong, it's worth considering if a more idiomatic Portuguese conjunction or other linking phrase might be more natural.",
+          "suggestion": "Evaluate if a conjunction or linking phrase would be more natural than a slash.  Examples: 'Abrir item selecionado e Confirmar ação' or 'Abrir item selecionado ou Confirmar ação'"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Confirm action' is better translated as 'Confirmar ação' rather than 'Confirmar ação' in this context. While 'Confirmar ação' is grammatically correct, 'Confirmar ação' is more common and idiomatic in Brazilian Portuguese for this type of interface element.",
+          "suggestion": "Confirmar ação"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Deschide elementul selectat/Confirmă acțiunea' is not an accurate representation of 'Open selected item/Confirm action'. 'Deschide' implies opening something physical, while 'Open' in this context refers to selecting an option or activating a function. 'Confirmă acțiunea' is acceptable for 'Confirm action', but the first part is inaccurate.",
+          "suggestion": "A more accurate translation might be 'Selectează elementul/Confirmă acțiunea' or 'Activează elementul/Confirmă acțiunea', depending on the specific functionality."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +218,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'තේරූ අථකය අරින්න/ක්‍රියාමාර්ගය තහවුරු කරන්න' is not a direct or natural translation of 'Open selected item/Confirm action'. 'අථකය' is not the typical word for 'item' in this context.  'අරින්න' while meaning 'to open' feels abrupt and not in line with a UI context.",
+          "suggestion": "A better translation would focus on clarity and user experience. Consider something like 'තේරපු එකතුව අරින්න/ ක්‍රියාව සිදු කරන්න' (Teripu ekathuwa arinna/kriyawa sadu karanna) which means 'Open selected item/Perform action'."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of '/' to separate the two actions is appropriate for Sinhala, but the flow could be improved by phrasing them as more related concepts.",
+          "suggestion": "Consider restructuring the sentence to imply the actions are linked.  For example, a more integrated phrasing could be preferred."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -165,25 +241,59 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Odpri izbrani predmet/Potrdi dejanje' doesn't fully capture the meaning of 'Open selected item/Confirm action'. 'Odpri' implies opening a file or application, while 'Open' in this context likely refers to opening a submenu or selection within a UI. 'Potrdi' is correct for 'Confirm', but 'Predmet' for 'item' is a bit too literal and might not be the most natural way to describe it in a UI context.",
+          "suggestion": "Consider alternatives like 'Izberem/Potrdi dejanje' or 'Odpre izbiro/Potrdi dejanje' to better convey the intended meaning within a UI."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'Open' as 'Отвори' is not ideal in this context. 'Open' often implies opening a panel or window. A more appropriate translation might be 'Прикажи' (Show) or 'Изабери' (Select). 'Отвори' has a more general meaning of opening something physical.",
+          "suggestion": "Прикажи одабране ставке/Потврди радњу"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Confirm action' can be less clear to the user. 'Потврди радњу' is technically correct but somewhat formal. Depending on the user interface, a simpler wording may be better. Consider translating it as 'Изврши' (Execute) or 'Примени' (Apply).",
+          "suggestion": "Прикажи одабране ставке/Примени"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Open selected item/Confirm action\" doesn't have a direct equivalent in Serbian that maintains both meanings. \"Otvori odabrane stavke\" primarily translates to 'Open selected items,' while \"Potvrdi radnju\" translates to 'Confirm action.' Combining them feels disjointed in Serbian. A more natural phrasing would combine the concepts, potentially implying that opening the item confirms the action.",
+          "suggestion": "Consider a rephrasing that integrates both concepts more naturally, such as \"Otvoriti i potvrditi\" or \"Otvoriti i aktivirati\" depending on the intended functionality."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a slash (/) to separate the two actions, which mirrors the English. While understandable, Serbian often prefers conjunctions or alternative phrasing to avoid consecutive nouns.",
+          "suggestion": "Explore alternatives to the slash, such as using a conjunction like 'i' (and) or rephrasing to avoid the split."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Confirm action\" doesn't directly translate to \"İşlemi onayla\". A more accurate translation might be \"Eylemi onayla\" or \"Onayla\". \"İşlemi onayla\" can be interpreted as confirming an action on a specific operation.",
+          "suggestion": "Seçili öğeyi aç/Eylemi onayla"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

@@ -3,7 +3,7 @@
   "content": "No OAuth applications",
   "content_en_sha1_hash": "028f0e7642805c7f7a4b4c084907a60307bacd55",
   "created_at": "2025-05-19T21:30:53.921Z",
-  "updated_at": "2025-05-20T09:42:43.956Z",
+  "updated_at": "2025-05-21T07:09:26.648Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"No OAuth applications\" in a UI component. It is likely used as a title or heading on an empty screen where no OAuth apps are available, found in developer tools within Portal Settings.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'OAuth հավելվածներ չկան' is a literal translation but doesn't quite convey the intended meaning of 'No OAuth applications' in a natural Armenian way. It sounds somewhat clunky. A more idiomatic translation would be more appropriate.",
+          "suggestion": "Consider alternatives like 'OAuth հավելվածներ առկա չեն' or 'Հասանելի OAuth հավելվածներ չկան' which are more natural-sounding."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation is understandable, a more natural and accurate translation would be 'ບໍ່ມີແອັບຯທີ່ໃຊ້ OAuth' or 'ບໍ່ມີແອັບຯ OAuth ໃດໆ'. The current translation 'ບໍມີແອັບພລິເຄຊັນ OAuth' sounds slightly awkward in Lao.",
+          "suggestion": "ບໍມີແອັບຯທີ່ໃຊ້ OAuth"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Nicio aplicație OAuth \" is missing the word 'OAuth' after 'aplicație'. It should be \"Nicio aplicație OAuth\".",
+          "suggestion": "Nicio aplicație OAuth"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'OAuth යෙදුම් නැත.' is a literal translation but might not be the most natural phrasing in Sinhala. While technically correct, a more idiomatic translation could be considered.",
+          "suggestion": "Possible alternatives include: 'OAuth යෙදුම් නොමැත', 'OAuth යෙදුම් කිසිවක් නොමැත' or 'OAuth යෙදුම් පවතින්නේ නැත'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +207,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"OAuth uygulaması yok\" is a literal translation but doesn't fully capture the nuance of \"No OAuth applications\". A more natural and accurate translation would consider the context, potentially implying the absence of registered or valid OAuth apps.",
+          "suggestion": "Consider alternatives like \"Geçerli OAuth uygulaması bulunamadı\" or \"Kayıtlı OAuth uygulaması yok\" depending on the specific meaning intended."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

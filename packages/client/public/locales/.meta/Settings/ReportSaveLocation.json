@@ -3,7 +3,7 @@
   "content": "The report will be saved to {{sectionName}}",
   "content_en_sha1_hash": "55671fe19ba077a1c4e0ef79f837de41f87ae103",
   "created_at": "2025-05-19T21:30:52.387Z",
-  "updated_at": "2025-05-20T09:44:39.687Z",
+  "updated_at": "2025-05-21T03:30:07.641Z",
   "comment": {
     "text": "The \"ReportSaveLocation\" translation key is used to display a section name where reports will be saved. It appears in UI elements related to report download, providing context for users about the location of their files.",
     "is_auto": true,
@@ -39,7 +39,18 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Hesabat {{sectionName}} bölməsində qeyd ediləcək' doesn't accurately convey the meaning of 'The report will be saved to {{sectionName}}'. 'Qeyd ediləcək' means 'will be noted' or 'will be recorded', not 'will be saved'.",
+          "suggestion": "Hesabat {{sectionName}} bölməsinə saxlanılacaq"
+        },
+        {
+          "type": "formatting",
+          "description": "The word 'bölməsində' and 'bölməsinə' use slightly different case conventions. Maintaining consistent formatting is recommended.",
+          "suggestion": "Review the existing localization style guide for casing conventions and apply them consistently."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -75,7 +86,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Raportti tallennetaan {{sectionName}}-osioon' is a bit too literal. A more natural Finnish phrasing would be something like 'Raportti tallennetaan {{sectionName}}-kohtaan' or 'Raportti tallennetaan osioon {{sectionName}}'. Using '-osioon' sounds awkward.",
+          "suggestion": "Raportti tallennetaan {{sectionName}}-kohtaan"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -105,7 +122,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The parenthesis '(으)로' is a grammatical marker indicating the object being acted upon. While not strictly incorrect, it can sound slightly unnatural in this context. A more natural phrasing would remove one of the parentheses.",
+          "suggestion": "보고서가 {{sectionName}}로 저장됩니다"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -117,7 +140,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Latvian translation uses a non-breaking space ( ) instead of a regular space before '{{sectionName}}'. This can lead to display issues.",
+          "suggestion": "Replace ' ' with a regular space (' ')."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -159,7 +188,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'Poročilo bo shranjeno v {{sectionName}}' appears to be Slovenian, not Sinhala. It translates to 'The report will be saved in {{sectionName}}'.",
+          "suggestion": "The Sinhala translation needs to be provided. A possible translation could be: నివేదిక {{sectionName}} లో సేవ్ చేయబడుతుంది (Niveḍika {{sectionName}} lō savā baḍunaṭi)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -189,7 +224,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The word 'bölümüne' sounds slightly awkward in this context. While technically correct, it's more natural to use a more direct phrasing indicating location.",
+          "suggestion": "Rapor {{sectionName}} konumuna kaydedilecektir"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

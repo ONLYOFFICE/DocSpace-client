@@ -3,7 +3,7 @@
   "content": "Linked account already in use by another user",
   "content_en_sha1_hash": "4e4c39c9fbea715e2732c4ecb8ffabab1dba1fed",
   "created_at": "2025-05-19T21:30:53.356Z",
-  "updated_at": "2025-05-20T09:43:53.640Z",
+  "updated_at": "2025-05-21T05:43:34.042Z",
   "comment": {
     "text": "This translation key is used to display an error message when a user tries to link an account that is already in use by another user. It appears in the client-side UI, likely on a social networking page or profile section.",
     "is_auto": true,
@@ -33,7 +33,18 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Keçid olunan hesab artıq başqa istifadəçi tərəfindən istifadə olunur' is a literal translation but lacks the nuance of 'linked account'.  A more natural and accurate rendering would convey that the account is already associated with a profile.",
+          "suggestion": "Artıq başqa istifadəçinin profili ilə bağlı hesabdır."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Keçid olunan' is not the most appropriate way to describe a linked or associated account. It translates to 'transitioned' or 'passed' which is not the intended meaning.",
+          "suggestion": "Əlaqəli hesab"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -51,7 +62,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is technically correct but lacks natural flow. 'Verknüpftes Konto, das bereits von einem anderen Benutzer verwendet wird' is a bit clunky. A more natural phrasing would be preferable.",
+          "suggestion": "Verknüpftes Konto wird bereits von einem anderen Benutzer verwendet."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -93,13 +110,30 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '他のユーザーが使用中のリンクアカウント' is a literal translation but doesn't convey the full meaning of 'Linked account already in use by another user'. It sounds somewhat awkward in Japanese and doesn't naturally express the intended meaning.",
+          "suggestion": "考えられる修正案：\n* 「このリンクアカウントは別のユーザーが利用しています。」 (Kono rinku akunto wa betsu no yūzā ga riyō shite imasu.) - 'This linked account is being used by another user.'\n* 「別のユーザーが既にこのアカウントと連携済みです。」 (Betsu no yūzā ga sude ni kono akunto to renkei shite imasu.) - 'Another user is already linked to this account.'\n* 「このアカウントは、別のユーザーによって既に登録済みです。」(Kono akunto wa, betsu no yūzā ni yori sude ni tōroku sarete imasu.) - 'This account is already registered by another user.'"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is technically correct but sounds unnatural and overly formal for a user-facing error message. It's too literal.",
+          "suggestion": "연결된 계정은 이미 사용 중입니다."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the translation uses a full sentence structure where a shorter, more concise phrasing would be preferable for an error message.",
+          "suggestion": "연결된 계정은 이미 사용 중입니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -153,7 +187,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'හැඬි' (haṇḍi) is misspelled. It should be 'සබැඳි' (sabaṇḍi).",
+          "suggestion": "සබැඳි"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +211,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Повезани налог већ користи други корисник' is a functional translation but doesn't quite capture the nuance of 'Linked account already in use by another user'. 'Повезани налог' is accurate for 'Linked account', but 'користи' is a bit generic for 'in use'. A more accurate phrasing might emphasize the account's state of being actively associated with another user.",
+          "suggestion": "Повезани налог је већ повезан са другим корисником"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

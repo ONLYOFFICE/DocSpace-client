@@ -3,7 +3,7 @@
   "content": "HTTPS required",
   "content_en_sha1_hash": "61b83d2d44a85c0926a570851f3a01e8ab6c10aa",
   "created_at": "2025-05-19T21:30:54.424Z",
-  "updated_at": "2025-05-20T09:41:46.036Z",
+  "updated_at": "2025-05-21T09:18:06.384Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that HTTPS is required. It appears as a header in a UI component related to content security policies (CSP) and is used to notify users about this specific requirement.",
     "is_auto": true,
@@ -171,7 +171,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation 'HTTPS потребан' is a literal translation but doesn't convey the intended meaning naturally in Serbian. It would be more idiomatic to say something like 'Потребан је HTTPS' or 'HTTPS је обавезан'.",
+          "suggestion": "HTTPS је обавезан"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -195,7 +201,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Yêu cầu HTTPS ' is technically correct but lacks the nuance of a full sentence. It reads more like a label than a complete message. A more natural translation would incorporate a verb.",
+          "suggestion": "Yêu cầu phải sử dụng HTTPS"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

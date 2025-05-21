@@ -3,7 +3,7 @@
   "content": "Revoke consent",
   "content_en_sha1_hash": "13255b407052cfd4a359f6e8e175137b48388a31",
   "created_at": "2025-05-19T21:30:54.007Z",
-  "updated_at": "2025-05-20T09:42:38.662Z",
+  "updated_at": "2025-05-21T07:00:53.543Z",
   "comment": {
     "text": "This translation key is used to display a message when revoking consent in an authorized app. The text will be shown in a Revoke Dialog, prompting users to confirm their decision. Translators should consider conveying this action's significance and potential implications for user access and data security.",
     "is_auto": true,
@@ -171,7 +171,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Опозови пристанак' is a literal translation and doesn't convey the intended meaning of 'Revoke consent' in a natural and user-friendly way. 'Опозови' implies to disgrace or shame, which is not the purpose of revoking consent.",
+          "suggestion": "A more appropriate translation would be 'Упореди пристанак' (Uporodi pristanak) which more accurately conveys the action of withdrawing or revoking consent.  Alternatively, 'Повуци пристанак' (Povuci pristanak) could also be used."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -183,7 +189,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"İzni iptal et\" is a possible translation, \"Revoke consent\" implies a more formal process. A more accurate translation would convey the idea of formally withdrawing agreement.",
+          "suggestion": "Farklı bir ifade düşünülebilir. Örneğin: 'Onayını geri çek', 'Onayı iptal et', 'Rızayı iptal et'."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

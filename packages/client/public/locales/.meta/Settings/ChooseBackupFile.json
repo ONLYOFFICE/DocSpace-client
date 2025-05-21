@@ -3,7 +3,7 @@
   "content": "Choose the backup file",
   "content_en_sha1_hash": "813a6a6a5479025ab20127d56506502802337776",
   "created_at": "2025-05-19T21:30:50.904Z",
-  "updated_at": "2025-05-20T09:45:32.679Z",
+  "updated_at": "2025-05-21T04:50:22.472Z",
   "comment": {
     "text": "\"Choose a backup file to upload. This text is used as a label on a file input field in a data import component, guiding users to select a backup file.\"",
     "is_auto": true,
@@ -93,7 +93,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"バックアップファイルの選択\" (bakkuappu fairu no sentaku) is a very literal translation and sounds slightly unnatural in Japanese for a user interface element. It translates to 'selection of backup file'. A more natural phrasing would be something like \"バックアップファイルを選択\" (bakkuappu fairu o sentaku).",
+          "suggestion": "バックアップファイルを選択"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'උපස්ථ' is potentially a misspelling. It should be 'ආපසු'.",
+          "suggestion": "ආපසු"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Изабери резервну датотеку' is understandable, a more natural and accurate translation of 'Choose the backup file' would be 'Одаберите резервну датотеку'. 'Изабери' is more common in Croatian and can sound slightly out of place in Serbian.",
+          "suggestion": "Одаберите резервну датотеку"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

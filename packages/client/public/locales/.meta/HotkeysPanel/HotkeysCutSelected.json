@@ -3,7 +3,7 @@
   "content": "Cut selected items to the clipboard",
   "content_en_sha1_hash": "2b46ae0e2c45573aa85c440a68410db94e8fafb3",
   "created_at": "2025-05-19T21:30:55.047Z",
-  "updated_at": "2025-05-20T09:40:35.561Z",
+  "updated_at": "2025-05-21T10:33:26.601Z",
   "comment": {
     "text": "This translation key is used to describe the action of cutting selected items to the clipboard when a shortcut key combination (Ctrl + v) is pressed. It appears in a UI component indicating available hotkeys. The goal is to provide clear instructions for users.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Cut selected items to the clipboard\" implies removing the items from their original location and storing them. The Azerbaijani translation \"Seçilmiş elementləri mübadilə buferinə kopyalayın\" literally translates to \"Copy selected items to the clipboard\", which implies only copying, not cutting.",
+          "suggestion": "Seçilmiş elementləri kəsərək mübadilə buferinə köçürün"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -45,7 +51,18 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Vyjmutí vybraných položek do schránky' is a literal translation of 'Cut selected items to the clipboard' but doesn't sound natural in Czech. 'Vyjmutí' implies a forceful removal, which might not be the intended meaning of 'Cut' in this context. A more accurate and natural-sounding translation would be related to copying and moving the selected items.",
+          "suggestion": "Přesunout vybrané položky do schránky"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the use of 'Vyjmutí' can sound a bit formal and technical in this context.",
+          "suggestion": "Consider using a more common and less formal verb if possible."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -81,19 +98,37 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Կտրեք ընտրված տարրերը սեղմատախտակի վրա' is a literal translation but doesn't quite convey the nuance of 'Cut to clipboard' in a user interface context.  It sounds a bit clunky and formal. The term 'սեղմատախտակի վրա' (on the clipboard) is not typically used in this context.  A more natural phrasing would focus on the action of copying.",
+          "suggestion": "Consider alternatives like 'Պահպանեք ընտրված տարրերը սեղմատախտակի վրա' (Save selected items to the clipboard) or 'Տեղափոխեք ընտրված տարրերը սեղմատախտակի վրա' (Move selected items to the clipboard), although 'Պահպանեք' is preferable."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Tagliare gli elementi selezionati negli appunti' is too literal and doesn't convey the intended meaning of 'Cut to the clipboard'. A more natural Italian phrasing would be needed.",
+          "suggestion": "Sposta gli elementi selezionati negli appunti"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'カット' (kat) which is the direct transliteration of 'cut', is not the most natural way to express 'cut' in the context of moving items to the clipboard in Japanese. While understandable, it can sound slightly awkward.",
+          "suggestion": "選択した項目をクリップボードに移動"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -123,7 +158,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Wytnij zaznaczone pliki do schowka' is not entirely accurate. 'Wytnij' (Cut) is correct, but 'pliki' (files) is inaccurate. The English refers to 'items', which is more general. The context of 'hotkeys' suggests something like text or objects within a program, not necessarily files.",
+          "suggestion": "Wytnij zaznaczone elementy do schowka"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,7 +182,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Decupare elemente selectate în clipboard\" is not the most natural way to express \"Cut selected items to the clipboard.\" \"Decupare\" is correct for 'cut', but the phrasing is slightly awkward.",
+          "suggestion": "Tăierea elementelor selectate în clipboard"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, using a more common phrasing would improve clarity and consistency with other UI text.",
+          "suggestion": "Consider options like \"Mutarea elementelor selectate în clipboard\" if the intention is not to delete but to move."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +205,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'තෝරාගත් අථක කපන්න' doesn't accurately convey the meaning of \"Cut selected items to the clipboard.\" 'අථක' (athaka) is not the correct word for 'items' in this context. It seems to be a mistranslation or an incorrect word choice.  'අයිතමය' (ayithamaya) or 'ද්‍රව්‍ය' (dravyaya) would be more appropriate depending on the specific context of what's being 'cut'.",
+          "suggestion": "තෝරාගත් අයිතමය/ද්‍රව්‍ය කපන්න (Thora gath ayithamaya/dravyaya kapanna)"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically passable, the phrasing could be more natural in Sinhala. A more natural flow would be to emphasize the action of cutting *to* the clipboard.",
+          "suggestion": "තෝරාගත් අයිතමය/ද්‍රව්‍ය ක්ලිප්බෝඩ්ට කපන්න (Thora gath ayithamaya/dravyaya klippobdta kapanna)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,31 +234,66 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Исеци одабране ставке на привремену меморију' is a literal translation but doesn't convey the meaning of 'Cut to the clipboard' naturally in Serbian. 'Привремену меморију' is a very technical term for 'clipboard'. A more natural phrasing would be more akin to 'Пресеци одабране ставке у меморију' or 'Исеци одабране ставке у ишчу' (isho is closer to clipboard).",
+          "suggestion": "Пресеци одабране ставке у меморију"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Iseci odabrane stavke na privremenu memoriju' is not the most natural or accurate translation of 'Cut selected items to the clipboard'. 'Iseći' means 'to cut' in the sense of physically cutting something. The more appropriate verb for copying to the clipboard is 'kopirati' or 'premijestiti'.",
+          "suggestion": "Kopiraj odabrane stavke na privremenu memoriju"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'privremena memorija' is technically correct, 'privremeni memorija' or 'privremeni skladište' would be more common usage.",
+          "suggestion": "privremeni memorija"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Seçilen öğeleri panoya kes' is a literal translation but doesn't quite capture the nuance of 'Cut to the clipboard.' A more natural Turkish phrasing would be something along the lines of 'Seçilen öğeleri kopyala ve sil' or 'Seçilen öğeleri kesip panoya al'.",
+          "suggestion": "Seçilen öğeleri kesip panoya al"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Вирізати вибрані елементи до буфера обміну' is a literal translation and sounds unnatural in Ukrainian. While technically correct, a more idiomatic phrasing would be preferred.",
+          "suggestion": "Вирізати вибрані елементи в буфер обміну"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Cắt các mục đã chọn vào bộ nhớ tạm' is a literal translation, but it doesn't convey the intended meaning of 'Cut selected items to the clipboard' perfectly. 'Bộ nhớ tạm' literally means 'temporary memory,' which is not the common understanding of a clipboard. A more natural translation would use a term closer to 'clipboard'.",
+          "suggestion": "Cắt các mục đã chọn vào bảng nhớ"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

@@ -3,7 +3,7 @@
   "content": "Delete applications",
   "content_en_sha1_hash": "dfbb810cbf214804913369cb14f202553260d0fa",
   "created_at": "2025-05-19T21:30:53.852Z",
-  "updated_at": "2025-05-20T09:42:52.255Z",
+  "updated_at": "2025-05-21T07:21:09.259Z",
   "comment": {
     "text": "This translation key is used for the text displayed in a delete application button or dialog. It indicates the action of deleting applications and provides context for the user. In this case, it appears as a header in a modal dialog.",
     "is_auto": true,
@@ -105,7 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ການນໍາໃຊ້' (kan nam sai) is technically correct but can be overly formal and slightly verbose in this context. A more concise and natural option exists.",
+          "suggestion": "ລົບແອບພລິເຄຊັນ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -171,7 +177,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Обриши апликације' while literally meaning 'Delete applications', might sound a bit abrupt or informal in this context. 'Delete' often implies a more formal or technical operation. A more appropriate and natural-sounding translation might consider alternatives that convey the action of removing or uninstalling.",
+          "suggestion": "Consider alternatives like 'Избриши апликације' (Izbriši aplikacije - Erase applications) or 'Уклони апликације' (Ukloni aplikacije - Remove applications)."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -201,7 +213,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"删除多个应用\" (delete multiple applications) is more specific than the English \"Delete applications\". The English phrase refers to the general action of deleting applications, not necessarily multiple ones. It's overly specific.",
+          "suggestion": "删除应用"
+        }
+      ],
       "approved_at": null
     }
   }

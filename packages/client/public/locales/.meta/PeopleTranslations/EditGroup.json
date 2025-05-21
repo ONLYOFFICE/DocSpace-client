@@ -3,7 +3,7 @@
   "content": "Edit group",
   "content_en_sha1_hash": "edb57d8eeff83c091697eab4d31079c72abcd3d1",
   "created_at": "2025-05-19T21:30:53.468Z",
-  "updated_at": "2025-05-20T09:43:42.204Z",
+  "updated_at": "2025-05-21T06:02:54.875Z",
   "comment": {
     "text": "EditGroup is used as a label in a modal dialog, appearing on a button to indicate editing of a group. It translates to \"Edit group\" and should be visible when allowing users to modify group settings.",
     "is_auto": true,
@@ -165,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"සමූහය සංස්කරණය\" is a literal translation, it's not the most natural phrasing in Sinhala. A more common and fluent way to say 'Edit group' would be something like 'විධාන සංස්කරණය' (Vidhana Sanskaranya) or 'කොන්දේ සංස්කරණය' (Kondae Sanskaranya).",
+          "suggestion": "Consider 'විධාන සංස්කරණය' or 'කොන්දේ සංස්කරණය' for a more natural-sounding translation."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -189,7 +195,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The singular 'group' in English is translated as the plural 'grupe' in Serbian. While technically acceptable, 'Uredi grupu' would be more accurate, implying editing a single group.",
+          "suggestion": "Uredi grupu"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

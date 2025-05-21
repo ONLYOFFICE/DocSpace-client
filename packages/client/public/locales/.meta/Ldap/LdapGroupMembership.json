@@ -3,7 +3,7 @@
   "content": "Group Membership",
   "content_en_sha1_hash": "55e2f520df1da58560087151c9a25a57b1f4e8ff",
   "created_at": "2025-05-19T21:30:54.216Z",
-  "updated_at": "2025-05-20T09:42:10.441Z",
+  "updated_at": "2025-05-21T08:19:30.041Z",
   "comment": {
     "text": "Group Membership is a toggle button that enables or disables group membership for LDAP connections. When clicked, it controls visibility and interaction in the Portal Settings categories integration section.",
     "is_auto": true,
@@ -135,13 +135,25 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Associação ao grupo' is understandable, it's a more literal and slightly less natural translation of 'Group Membership'. A more idiomatic translation would convey the concept of belonging or being part of a group.",
+          "suggestion": "Consider alternatives like 'Filiação ao grupo' or 'Membro do grupo'."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Membrii grupului' is technically correct, it's a very literal translation. A more natural and idiomatic translation for 'Group Membership' in a technical context might be 'Afiilierea la grup' or 'Apartenența la grup'.",
+          "suggestion": "Consider 'Afiilierea la grup' or 'Apartenența la grup'."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -171,13 +183,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation 'Чланство Групе' is not the most accurate or natural translation of 'Group Membership'. 'Групе' implies membership *in* a group, but 'Чланство' is a more formal term for membership. A more accurate and natural translation would be 'Припадност групи' or 'Чланство у групи'.",
+          "suggestion": "Припадност групи"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Članstvo Grupe' is understandable, a more accurate and idiomatic translation of 'Group Membership' would be 'Pripadnost Grupi'. 'Članstvo' often implies individual membership, whereas 'Pripadnost' better conveys the collective aspect of group membership.",
+          "suggestion": "Pripadnost Grupi"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -189,7 +213,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Участь у групі\" is a possible translation, it's quite literal and doesn't convey the nuance of \"Group Membership\" in the context of LDAP. A more natural and commonly used translation for this context would be something like 'Членство в групі' or 'Приналежність до групи'.",
+          "suggestion": "Consider 'Членство в групі' or 'Приналежність до групи'."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -201,7 +231,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"组成员资格\" (zuò chéng yuán zì gé) while technically meaning 'membership', doesn't quite capture the nuance of 'Group Membership' which implies membership within a specific group context. It's a bit too literal.",
+          "suggestion": "Consider a more contextually appropriate translation like \"群组成员\" (qún zuò chéng yuán) which directly means 'group member' or \"组群成员\" (zǔ qún chéng yuán) for 'group membership'."
+        }
+      ],
       "approved_at": null
     }
   }

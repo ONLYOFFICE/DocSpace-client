@@ -3,7 +3,7 @@
   "content": "Create folder",
   "content_en_sha1_hash": "e59f63fa517890d45d5ab20a380fe68f2302ef67",
   "created_at": "2025-05-19T21:30:55.036Z",
-  "updated_at": "2025-05-20T09:40:37.576Z",
+  "updated_at": "2025-05-21T10:35:02.167Z",
   "comment": {
     "text": "This translation key describes the text displayed on a UI element that prompts users to create a folder, specifically in a Hotkeys panel. It is used for accessibility purposes to provide alternative text for keyboard navigation.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Qovluq yaradın' literally translates to 'You created a folder'. The original English is an instruction 'Create folder', which should be in the imperative mood.",
+          "suggestion": "Yenı qovluq yarat"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -117,7 +123,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Map maken\" is technically correct, \"Map\" can be ambiguous in this context. It's generally understood as \"folder\" in a directory structure. \"Map maken\" implies creating a geographic map.",
+          "suggestion": "Maak map"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -141,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Crează un director\" is understandable, \"Crează\" is a colloquial and potentially less formal way of saying 'create'.  A more standard and formal translation would be 'Creează un director'.  In UI contexts, formal language is generally preferred.",
+          "suggestion": "Creează un director"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'බහාලුමක් සාදන්න' is understandable, a more natural and precise translation of 'Create folder' in Sinhala would be 'මතෘකා සාදා ගන්න' (mathruka sada gana). 'බහාලුමක්' literally means 'a basket' or 'a container', which doesn't accurately reflect the meaning of a 'folder' in a digital context.",
+          "suggestion": "මතෘකා සාදා ගන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

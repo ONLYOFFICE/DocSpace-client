@@ -3,7 +3,7 @@
   "content": "Start setting up",
   "content_en_sha1_hash": "68e48268020a3f2798df84f3bd36e4a12273da4c",
   "created_at": "2025-05-19T21:30:54.689Z",
-  "updated_at": "2025-05-20T09:41:19.525Z",
+  "updated_at": "2025-05-21T08:34:01.944Z",
   "comment": {
     "text": "This translation key is used to display a button label that triggers setting up a development environment. It appears in a small navigation button on a Portal Settings page, prompting users to start the setup process.",
     "is_auto": true,
@@ -75,7 +75,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Commencer le réglage' is understandable, it's not the most natural or idiomatic translation for 'Start setting up'.  It literally translates to 'Start the adjustment'. A better option would convey the action of beginning the setup process.",
+          "suggestion": "Démarrer la configuration"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -93,7 +99,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"設定開始\" while technically correct, is a very literal translation. A more natural and user-friendly translation for \"Start setting up\" would convey a sense of initiation or beginning the setup process. \"設定を開始する\" (Setting o kaishiru) would be a more common and fluent option.",
+          "suggestion": "設定を開始する"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -141,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Setare Start' is not a natural or accurate translation of 'Start setting up'. 'Setare' translates to 'Setup' and 'Start' is just 'Start'. Combining them like this is awkward.",
+          "suggestion": "A more accurate and natural translation would be 'Începe configurarea' or 'Configurare inițială'."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +171,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ආරම්භය පිහිටුවමින්' while containing elements of the English meaning, isn't the most natural or accurate translation of 'Start setting up'.  'ආරම්භය' means 'beginning' or 'start', and 'පිහිටුවමින්' implies 'while establishing/setting up', which is a bit wordy and indirect. It's technically correct but lacks fluency.",
+          "suggestion": "A more natural translation would be something like 'ආරම්භ කරමින්' (Aarambha karamin) which means 'starting/commencing'."
+        },
+        {
+          "type": "grammar",
+          "description": "While technically grammatical, the 'මින්' suffix ('-ming') creates a continuous action, implying the setup is ongoing. 'Start setting up' can simply refer to initiating the setup process, not necessarily a continuous action.",
+          "suggestion": "Consider removing 'මින්' if the intention is to describe the initiation of the setup, not the process itself.  'ආරම්භ කර' would convey the beginning."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

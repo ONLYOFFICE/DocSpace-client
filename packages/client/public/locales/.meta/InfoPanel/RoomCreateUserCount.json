@@ -3,7 +3,7 @@
   "content": "Users added ({{count}}).",
   "content_en_sha1_hash": "8c7b1ab7b60a1cc8856412fa9c57d6d974a69ffb",
   "created_at": "2025-05-19T21:30:54.905Z",
-  "updated_at": "2025-05-20T09:40:50.978Z",
+  "updated_at": "2025-05-21T09:56:37.325Z",
   "comment": {
     "text": "This translation key is used to display a count of users added to a room. It appears on a history view and is likely part of a button or label that displays this information to the user.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Czech translation uses the masculine plural form \"přidáni\" when referring to users. Since \"uživatelé\" (users) is masculine plural, it should be \"přidaní\".",
+          "suggestion": "Uživatelé přidáni ({{count}}.) -> Uživatelé přidáni ({{count}})."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -57,7 +63,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Προσθήκη χρηστών ({{count}}).' is a literal translation of \"Users added ({{count}}).\" but it could be improved for natural Greek. A more natural phrasing would be something like 'Αριθμός χρηστών: {{count}}.' or 'Χρήστες: {{count}}'.",
+          "suggestion": "Χρήστες: {{count}}."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -141,7 +153,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Utilizatorul a fost adăugat ({{count}})\" translates to \"The user was added ({{count}}).\" while the English content indicates a count of users added, not a single user. The correct translation should reflect the plural.",
+          "suggestion": "Utilizatori adăugați ({{count}})."
+        },
+        {
+          "type": "formatting",
+          "description": "The Romanian translation lacks consistency in capitalization. 'Utilizatorul' should be 'Utilizatori' to match the plural context.",
+          "suggestion": "Utilizatori adăugați ({{count}})."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +176,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'පරිශීලකයින්' (parashīlakayin) is a less common and somewhat formal way to say 'users'. A more natural and commonly used term would be 'භාවිතරයන්' (bhavitakarayan).",
+          "suggestion": "පරිශීලකයින් → භාවිතරයන්"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +200,30 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Додати корисници ({{count}}).' is not the most natural or accurate translation of 'Users added ({{count}}).'. A more accurate translation would be 'Додато корисника ({{count}}).' or 'Придодато корисника ({{count}}).'",
+          "suggestion": "Додато корисника ({{count}})."
+        },
+        {
+          "type": "grammar",
+          "description": "The Serbian translation uses the masculine plural form 'корисници'. While grammatically correct, the context implies a number of users, which could be masculine, feminine, or mixed.  For greater accuracy and inclusiveness, the form should change based on the expected user population.",
+          "suggestion": "The translation should consider the gender of the users. If the users are known to be all male, 'Додато корисника ({{count}}).' is appropriate. If the gender is unknown or mixed, it would be safer to consider alternatives, though there are no direct equivalents that perfectly capture the English meaning."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Serbian word 'Dodati' is misspelled. The correct spelling is 'Dodato'.",
+          "suggestion": "Dodato korisnici ({{count}})."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

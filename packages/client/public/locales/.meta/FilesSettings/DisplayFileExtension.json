@@ -3,7 +3,7 @@
   "content": "Display file extension next to file name",
   "content_en_sha1_hash": "5aca0949443f945850e45a5d1a5def5c80406042",
   "created_at": "2025-05-19T21:30:55.177Z",
-  "updated_at": "2025-05-20T09:40:16.642Z",
+  "updated_at": "2025-05-21T10:52:20.873Z",
   "comment": {
     "text": "\"This text is used to display a file extension next to its name. It is likely found on a file management UI component such as a file list or upload preview, where it helps users quickly identify file types.\"",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Zobrazení přípony souboru vedle názvu souboru' is overly literal and slightly awkward. While technically correct, it doesn't flow naturally in Czech. A more idiomatic translation would be better.",
+          "suggestion": "Možná 'Zobrazit příponu u souboru' or 'Zobrazit přípony souborů'"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ֆայլի' appears multiple times. While technically correct, it could be improved for readability. Specifically, the repetition of 'ֆայլի' makes it slightly awkward.",
+          "suggestion": "Consider rephrasing to avoid repeated use of 'ֆայլի'. For example, 'Ցուցադրել ֆայլի ընդլայնումը ֆայլի անվան կողքին' could become 'Ցուցադրել ֆայլի ընդլայնումը ֆայլի անվանց կողքին' or a completely different phrasing depending on the desired nuance."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ගොනු නාමයට අමතරව ගොනු ආකාරයද පෙන්වන්න' translates to 'Show file type along with the file name'. While not entirely wrong, it's slightly less natural than a more direct translation. 'Display file extension' refers specifically to the '.txt', '.pdf', etc. part of the filename. The current translation is too general ('file type').",
+          "suggestion": "ගොනු නාමය සමඟ ගොනු పొදියද පෙන්වන්න (Gonu namaya samaga gonu podiyada penvann)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +189,18 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Приказ екстензије фајла поред имена фајла' is not the most natural or accurate translation of 'Display file extension next to file name'. A more idiomatic translation would be something along the lines of 'Показ екстензије датотеке уз име датотеке' or 'Прикажи екстензију датотеке поред имена'.",
+          "suggestion": "Показ екстензије датотеке уз име датотеке"
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, 'фајла' is less common than 'датотеке' when referring to a digital file in modern Serbian.  'фајла' is more often used for physical files.",
+          "suggestion": "датотеке"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -3,7 +3,7 @@
   "content": "Folder deleted",
   "content_en_sha1_hash": "80fa7315b0ebe24ae6902123622edb0e1f4c01f3",
   "created_at": "2025-05-19T21:30:49.752Z",
-  "updated_at": "2025-05-19T21:30:49.752Z",
+  "updated_at": "2025-05-21T01:09:58.412Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -146,7 +146,33 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ෆෝල්ඩරය' is a correct transliteration of 'Folder'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'මකන' is a correct transliteration of 'deleted'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ලදි' is a correct suffix for the past tense in Sinhala, though it may sound a bit informal depending on the context. ",
+          "suggestion": null
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the phrasing 'ෆෝල්ඩරය මකන ලදි' is a more literal translation. A more natural-sounding translation could be 'ෆෝල්ඩරය ඉවත් කරන ලදි' (Folder removed).",
+          "suggestion": "ෆෝල්ඩරය ඉවත් කරන ලදි"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'මකන' means 'delete', in many contexts 'ඉවත් කරන' (remove) is preferred to express deletion of a folder, particularly in a technical/UI context.",
+          "suggestion": "ෆෝල්ඩරය ඉවත් කරන ලදි"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -164,13 +190,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Фасцикла обрисана\" uses the word \"фасцикла\" (fascikla) which translates to 'folder' but implies a more formal or bound collection of documents. The more common and natural translation for 'folder' in this context would be 'папка'.",
+          "suggestion": "Папка обрисана"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Fascikla' is misspelled. The correct spelling is 'Fasikla'.",
+          "suggestion": "Fasikla"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

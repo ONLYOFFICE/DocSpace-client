@@ -3,7 +3,7 @@
   "content": "Webhook removed",
   "content_en_sha1_hash": "80509c5a189f693eee965d8eb57cef6201a59d6e",
   "created_at": "2025-05-19T21:30:49.885Z",
-  "updated_at": "2025-05-20T09:46:44.814Z",
+  "updated_at": "2025-05-21T00:49:25.848Z",
   "comment": {
     "text": "The \"WebhookRemoved\" translation key is used to display a success message when a webhook is removed in the Portal Settings. This message is typically shown after a button or action that deletes a webhook, and it indicates that the removal process has been completed successfully.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation 'Webhook تمت إزالة' is not the most natural or accurate translation of 'Webhook removed'. While it conveys the general meaning, a more idiomatic translation would be more appropriate.",
+          "suggestion": "Webhook تم حذفه"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -39,7 +45,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Премахната уеб кука\" is not the most natural or accurate translation of \"Webhook removed.\" While technically correct, \"уеб кука\" is a literal translation of \"webhook\" and can sound awkward. A more natural translation would be something like \"Премахнат уебхук\" or \"Премахната връзка за уебхук\".",
+          "suggestion": "Премахнат уебхук"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -81,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Webhook-ը հեռացվել է\" is grammatically correct, but a more natural and common way to express 'Webhook removed' in Armenian would be \"Հեռացվել է webhook\". The current phrasing places the hyphenated 'Webhook' awkwardly.",
+          "suggestion": "Հեռացվել է webhook"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +111,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ウェブフック削除\" is a literal translation of \"Webhook removed\", it sounds a bit stiff and unnatural in Japanese. A more natural phrasing would be something like \"ウェブフックが削除されました\" or \"ウェブフックを削除しました\".",
+          "suggestion": "ウェブフックが削除されました"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -105,13 +129,25 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ເອົາອອກ\" literally means 'taken out' or 'removed', a more natural and commonly used translation for 'removed' in the context of webhooks would be something more akin to 'ຖືກລົບອອກ' (thuk lop ok) which means 'deleted' or 'removed'.",
+          "suggestion": "Webhook ຖືກລົບອອກ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation \"Tīmekļa aizķere ir noņemta\" translates to \"The web traffic is removed.\" This is not an accurate translation of \"Webhook removed.\" A webhook is not web traffic.",
+          "suggestion": "A more accurate translation would be something like \"Atcelts tīmekļa atspēkošanas rīks\" or \"Webhook atcelts\" or simply \"Webhook noņemts\"."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,7 +177,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Eliminare Webhook' is a literal translation of 'Remove Webhook' but doesn't convey the same meaning as 'Webhook removed'. A more natural Romanian translation for 'Webhook removed' would be 'Webhook șters' or 'Webhook eliminat'.",
+          "suggestion": "Webhook șters"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +195,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Webhook ඉවත් කෙරිණි\" while technically conveying the meaning of 'Webhook removed,' is overly formal and archaic. The verb form 'කෙරිණි' is rarely used in modern Sinhala in this context.",
+          "suggestion": "Webhook එක ඉවත් වුණා"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, using the informal 'Webhook එක' (Webhook ek) is more common and natural in casual communication.",
+          "suggestion": "Consider using 'Webhook එක' instead of 'Webhook'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +224,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Webhook уклоњен' doesn't accurately convey the meaning of 'Webhook removed.' 'Уклоњен' implies something was evaded or steered away, not removed. A more accurate translation would reflect the removal process.",
+          "suggestion": "Webhook је уклоњен"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

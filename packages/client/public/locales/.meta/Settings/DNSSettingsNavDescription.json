@@ -3,7 +3,7 @@
   "content": "DNS Settings is a way to set an alternative URL for your portal.",
   "content_en_sha1_hash": "3c82bb84a093eda60d3d1f18ddb01ff28bb6e063",
   "created_at": "2025-05-19T21:30:51.243Z",
-  "updated_at": "2025-05-20T09:45:19.390Z",
+  "updated_at": "2025-05-21T04:27:50.720Z",
   "comment": {
     "text": "The translation key \"DNSSettingsNavDescription\" is used to describe DNS Settings as an alternative URL option for a portal. It appears in a navigation bar, providing context for users interacting with the DNS Settings category on PortalSettings.",
     "is_auto": true,
@@ -27,13 +27,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"إعدادات DNS هي طريقة لتعيين رابط بديل لبوابتك.\" is a literal translation and doesn't convey the intended meaning effectively. While technically correct, it sounds awkward in Arabic. \"بوابتك\" (your portal) can sound too formal or possessive in this context. A more natural phrasing would be needed.",
+          "suggestion": "إعدادات DNS تسمح لك بتعيين عنوان URL بديل لبوابتك."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'DNS Parametrləri portalınız üçün alternativ URL təyin etməyin bir yoludur' is not the most natural or accurate rendering of 'DNS Settings is a way to set an alternative URL for your portal.' A more direct and common translation for 'DNS Settings' would be 'DNS Tənzimləmələri'. 'Təyin etməyin bir yoludur' is a bit wordy. It can be simplified.",
+          "suggestion": "DNS Tənzimləmələri portalınız üçün alternativ URL ünvanını göstərməyin bir yoludur."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -69,7 +81,18 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"on tapa asettaa\" is somewhat awkward in Finnish. It literally translates to 'is a way to set'. A more natural phrasing would be something like 'mahdollistaa portaalillesi' (allows your portal) or 'antaa asettaa portaalillesi' (allows you to set your portal).",
+          "suggestion": "DNS-asetukset mahdollistaa portaalillesi vaihtoehtoisen URL:n."
+        },
+        {
+          "type": "formatting",
+          "description": "URL should be followed by a colon and a space.",
+          "suggestion": "DNS-asetukset mahdollistaa portaalillesi vaihtoehtoisen URL:n."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -105,13 +128,25 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'your portal' is not accurately translated. 'ປະຕູ' literally means 'door' and doesn't convey the meaning of a web portal. It needs to be translated to something more appropriate like 'ເວັບໄຊ້ຂອງທ່ານ' (your website) or 'ລະບົບຂອງທ່ານ' (your system).",
+          "suggestion": "ການຕັ້ງຄ່າ DNS ແມ່ນວິທີການກໍານົດ URL ທາງເລືອກສໍາລັບເວັບໄຊ້ຂອງທ່ານ."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'vietrādi URL' is not a standard or accurate translation of 'alternative URL'. 'Alternatīvais URL' or 'citāds URL' would be more appropriate.",
+          "suggestion": "DNS iestatījumi ir veids, kā savam portālam iestatīt alternatīvo URL."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -129,7 +164,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Configurações de DNS' is technically correct but somewhat literal. A more natural phrasing might be 'As configurações de DNS...', or 'A configuração de DNS...'. While 'Configurações de DNS' isn't *wrong*, it's not idiomatic.",
+          "suggestion": "As configurações de DNS é uma forma de definir uma URL alternativa para o seu portal."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,7 +182,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Setări DNS este o modalitate de setare a adresei URL alternative pentru portalul dvs.\" is a literal translation but doesn't flow naturally in Romanian. 'Setări DNS' implies it's already DNS settings, so saying 'is a way to set' is redundant.",
+          "suggestion": "DNS Settings can be translated to something like: 'DNS Settings permite configurarea unei adrese URL alternative pentru portalul dvs.' or 'Cu DNS Settings puteți configura o adresă URL alternativă pentru portalul dvs.'"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +200,23 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ව.නා.ප. සැකසුම්' seems to be an abbreviation or a corrupted version of 'වෙනස්වන ආකාරය'. 'DNS Settings' likely refers to a way to change or configure something, not just 'settings'.",
+          "suggestion": "වෙනස්වන ආකාරය (Venāsavanā ākarmaya)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "'ඒ.ස.නි.' is an abbreviation of 'URL' in English, but it's not commonly used in Sinhala and doesn't convey the meaning accurately. The word 'URL' or a more descriptive term would be better.",
+          "suggestion": "URL (U.R.L.) or අඩවිය (Adaviya) – meaning 'website'"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The overall translation is too literal and doesn't flow naturally in Sinhala. The sentence structure could be improved.",
+          "suggestion": "DNS සැකසුම් හරහා ඔබේ අඩවිය සඳහා වෙනත් URL සැකසිය හැකිය (DNS Saekasum haratha obage adaviya sahaaga venatha URL saekesiya kadiya)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +234,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'подешавања' is spelled correctly but might be more naturally phrased as 'ДНС подешавања'. While technically correct, 'DNS подешавања' is clearer.",
+          "suggestion": "ДНС подешавања су начин да поставите алтернативни URL за ваш портал."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation uses 'podešavanja' which is typically used for adjustable settings or parameters. It would be more accurate to use a word like 'postavke' or 'način' to convey the meaning of 'settings'. The phrase 'način da postavite' is also a bit clunky. A more natural phrasing would be 'Postavke DNS-a omogućavaju postavljanje...' or 'DNS podešavanja omogućavaju...'",
+          "suggestion": "DNS podešavanja omogućavaju postavljanje alternativne adrese URL za vaš portal."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,13 +270,30 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Cài đặt DNS là một cách để thiết lập một URL thay thế cho cổng thông tin của bạn' is a literal translation and a bit clunky in Vietnamese. 'Cài đặt DNS' is correct, but 'thiết lập một URL thay thế cho cổng thông tin của bạn' could be more natural.",
+          "suggestion": "Cài đặt DNS cho phép bạn sử dụng một URL khác cho cổng thông tin của bạn."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '可通过 DNS 设置为门户网站设置替代 URL' is a bit literal and slightly awkward. It doesn't flow naturally in Chinese.  '为门户网站设置替代 URL' is redundant as 'DNS 设置' already implies setting something for the portal.",
+          "suggestion": "DNS 设置可用于为门户网站指定备用 URL。"
+        },
+        {
+          "type": "formatting",
+          "description": "The term '替代 URL' is acceptable but slightly less common than '备用 URL' in this context. Using '备用 URL' enhances readability and naturalness.",
+          "suggestion": "Use '备用 URL' instead of '替代 URL'."
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "File trashed",
   "content_en_sha1_hash": "bedee664942f52192279d02ef2992a1711bbe474",
   "created_at": "2025-05-19T21:30:49.733Z",
-  "updated_at": "2025-05-20T09:47:03.390Z",
+  "updated_at": "2025-05-21T01:11:48.798Z",
   "comment": {
     "text": "This translation key is used to display the message \"File trashed\" when a file's status changes due to being marked as trashed or deleted in a web application. It appears in the UI as part of a notification system for developers. Translators should ensure the translated phrase accurately conveys this action in their respective languages.",
     "is_auto": true,
@@ -27,109 +27,227 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"تم نقل الملف إلى المهملات\" literally translates to \"The file has been moved to the trash\". While conceptually close to \"File trashed\", it’s not the most accurate or idiomatic translation for \"File trashed\". A more direct and common translation would be \"تم حذف الملف\" or \"الملف في سلة المهملات\".",
+          "suggestion": "تم حذف الملف"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Fayl zibil qutusuna göndərildi\" literally translates to \"File sent to the trash can.\" While conveying a similar meaning, \"trashed\" implies a more permanent deletion. A more accurate translation would reflect this.",
+          "suggestion": "Fayl silindi"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Файлът е изхвърлен\" carries a stronger connotation of being discarded as waste. \"Trashed\" in this context implies deletion or removal, not necessarily discarding. A more accurate translation would convey the act of deletion.",
+          "suggestion": "Файлът е изтрит"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Soubor zlikvidován' is technically correct, it carries a connotation of permanent deletion and destruction, which might be too strong for a 'File trashed' event. 'Trashed' often implies a temporary state or a recycle bin.",
+          "suggestion": "Soubor přesunut do koše"
+        },
+        {
+          "type": "cultural",
+          "description": "The term 'zlikvidován' has a negative connotation that might not align with the user experience of a file being moved to a trash or recycle bin. It suggests complete removal.",
+          "suggestion": "Soubor přesunut do koše"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Datei gelöscht' is understandable, 'File trashed' implies a deletion from a specific location (like a trash bin). 'Datei gelöscht' simply means 'file deleted'. A more accurate translation would reflect the 'trashed' nuance.",
+          "suggestion": "Datei in den Papierkorb verschoben"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Το αρχείο μεταφέρθηκε στα σκουπίδια\" is a literal translation of 'File moved to the trash'. While understandable, 'File trashed' implies a more direct action of deletion, and the Greek phrase is less precise.",
+          "suggestion": "Consider a more direct translation like \"Το αρχείο διαγράφηκε\" (The file was deleted) or \"Το αρχείο μεταφέρθηκε στον κάδο ανακύκλωσης\" (The file was moved to the recycle bin), depending on the specific system behavior."
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Archivo movido a la papelera\" means 'File moved to the trash'. The English phrase 'File trashed' implies a deletion action, not just a movement to the trash. While functionally similar, the nuance is different.",
+          "suggestion": "Archivo eliminado"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Tiedosto siirretty roskakoriin' while technically correct, doesn't fully capture the meaning of 'File trashed'. 'Trashed' implies deletion or irreversible removal, whereas 'siirretty roskakoriin' means 'moved to the trash bin', which suggests it can be recovered. A more accurate translation would convey the finality of 'trashed'.",
+          "suggestion": "Consider 'Tiedosto poistettu' (File deleted) or 'Tiedosto tyhjennetty' (File emptied) to better reflect 'trashed'."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Fichier déplacé dans la poubelle' is a literal translation of 'File moved to the trash'. While understandable, 'File trashed' usually implies a more direct term for 'trash' or 'deleted'.",
+          "suggestion": "Fichier supprimé"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Ֆայլը տեղափոխվել է աղբաման\" translates to \"The file has been moved to the trash.\" While functionally similar, \"File trashed\" more accurately conveys the action of being deleted and moved to the trash. \"Trashed\" specifically implies deletion.",
+          "suggestion": "Ֆայլը ջնջվել է"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"File nel cestino\" is understandable, a more precise translation of 'File trashed' would be \"File eliminato\" or \"File cestinato\". \"File nel cestino\" translates to \"File in the trash\" which implies it's currently in the trash, not that it *was* trashed.",
+          "suggestion": "File eliminato"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ファイルがゴミ箱に移動されました\" (fairu ga gomibako ni idou saremashita) translates to 'File moved to trash'. While functionally similar, the English phrase 'File trashed' implies a more decisive action. '移動されました' suggests a movement, not necessarily a deletion.",
+          "suggestion": "ファイルが削除されました (Fairu ga sakujo saremashita) - 'File deleted'"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"파일이 휴지통으로 이동되었습니다\" literally translates to \"The file has moved to the trash can.\" While understandable, it's a more verbose and slightly less direct translation of \"File trashed.\" A more concise and natural translation would be more appropriate for a webhook event.",
+          "suggestion": "파일 삭제됨"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ໄຟລ໌ຖືກໂຍນຂີ້ເຫຍື້ອ\" literally translates to \"file thrown trash\". While it conveys the general idea of a file being deleted, \"trashed\" in the context of webhooks usually implies a permanent deletion, and a more accurate translation would reflect this. \"ຖືກລຶບ\" or \"ຖືກຖິ້ມ\" might be more appropriate depending on the nuance desired.",
+          "suggestion": "ໄຟລ໌ຖືກລຶບ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Fails pārvietots uz atkritni' literally translates to 'File moved to trash'. While conveying a similar concept, 'trashed' implies deletion or marking for deletion, which isn't perfectly captured by 'moved to trash'. A more accurate translation might be 'Fail izdzēsts' or 'Fails izmests'.",
+          "suggestion": "Fail izdzēsts"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Bestand naar prullenbak gedaan\" is understandable, it's a bit verbose and not the most natural phrasing for \"File trashed.\" A more common and concise translation would be \"Bestand in prullenbak\" or \"Bestand verwijderd\".",
+          "suggestion": "Bestand in prullenbak"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Plik został przeniesiony do kosza\" is technically correct, it's a bit verbose for the meaning of 'File trashed'. A more direct and natural translation would be something like \"Usunięto plik\" or \"Plik usunięto\".",
+          "suggestion": "Usunięto plik"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'destruído' can mean destroyed, 'trashed' in this context implies deletion, not necessarily destruction. A more accurate translation would convey that.",
+          "suggestion": "Ficheiro removido"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'destruído' carries a stronger connotation than 'trashed'. 'Trashed' is a more informal term for deletion.",
+          "suggestion": "Ficheiro eliminado"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,67 +259,143 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Fișierul a fost mutat în Coșul de gunoi\" is not a direct translation of \"File trashed\". While it conveys a similar meaning (moved to trash), it's more verbose and less accurate.",
+          "suggestion": "Fișier șters"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"Coșul de gunoi\" is a literal translation of \"trash can\" which is often a software-specific term. While understandable, a more accurate term might improve clarity.",
+          "suggestion": "Fișierul a fost șters"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"File trashed\" implies the file has been moved to the trash/recycle bin, not permanently deleted. \"Файл удален\" translates to \"File deleted\", which suggests permanent removal.",
+          "suggestion": "Consider \"Файл перемещен в корзину\" (File moved to trash) for a more accurate translation."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ගොනුව නිෂ්ප්‍රභව කර ඇත' while technically conveying a similar meaning, is overly formal and doesn't reflect the casual nature of a notification like \"File trashed\". 'නිශ්ප්‍රභව කර ඇත' is a more literary/formal way to express 'deleted' or 'removed'.",
+          "suggestion": "Consider a more common and less formal translation, such as 'ගොනුව ඉවත් කර ඇත' (Gonuwa Iwaat Kara Aetha - File removed) or 'ගොනුව අයින් කර ඇත' (Gonuwa Ayeen Kara Aetha - File gone)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Súbor zničený\" while literally meaning \"File destroyed\", does not accurately convey the meaning of 'File trashed'. 'Trashed' implies deletion or removal from a system, but 'zničený' implies damage or destruction.",
+          "suggestion": "Consider alternatives like \"Súbor odstránený\" (File removed) or \"Súbor vymazaný\" (File deleted)."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovenian translation \"Datoteka premaknjena v koš\" translates to \"File moved to trash\" rather than \"File trashed\". While functionally similar, it's not a direct translation of the original English.",
+          "suggestion": "Datoteka izbrisana"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Фајл избачен у корпу\" literally translates to \"File thrown into trash\". While conceptually similar to \"File trashed\", \"избачен\" (izbacen) implies a forceful ejection rather than the neutral act of trashing. A more appropriate translation would convey the intended meaning of deletion or archival.",
+          "suggestion": "Фајл обрисан"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Fajl izbačen u korpu\" literally translates to 'File thrown into the bin/basket'. While understandable, 'trashed' typically implies deletion or removal from a system, not necessarily physical disposal in a bin. A more accurate translation would convey the meaning of file deletion.",
+          "suggestion": "Fajl obrisan"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'Fajl' is acceptable as a transliteration of 'File', it might be slightly less common than 'Datoteka' which is the established Serbian word for file. This isn't a critical error, but 'Datoteka' could improve readability.",
+          "suggestion": "Datoteka izbačen u korpu"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation \"Dosya çöp kutusuna taşındı\" literally translates to \"File moved to the trash bin\". While conveying a similar meaning, the English phrase \"File trashed\" implies deletion and a more permanent action. \"taşındı\" suggests a movement which is not entirely accurate.",
+          "suggestion": "Dosya silindi"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Ukrainian translation \"Файл переміщено до кошика\" translates to \"File moved to the trash\" instead of \"File trashed.\" While functionally similar, it's not a direct equivalent.",
+          "suggestion": "Файл видалено до кошика"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Đã chuyển tập tin vào thùng rác\" is a bit too literal. A more natural translation for 'File trashed' would be something like 'Tệp tin đã bị xóa' or 'Tệp tin đã vào thùng rác'.",
+          "suggestion": "Tệp tin đã bị xóa"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"文件已移至回收站\" is a reasonable interpretation, \"File trashed\" more directly translates to \"文件已删除\" or \"文件已被清空\". \"文件已移至回收站\" implies a recovery option exists, which isn't always the case when a file is trashed.",
+          "suggestion": "文件已删除"
+        }
+      ],
       "approved_at": null
     }
   }

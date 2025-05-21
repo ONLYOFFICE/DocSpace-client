@@ -3,7 +3,7 @@
   "content": "If you have {{organizationName}} Desktop Editors installed but can't open it from this page, your browser might be blocking it.",
   "content_en_sha1_hash": "d9258c1a3c6e75e660f390ca72096a82073c7955",
   "created_at": "2025-05-19T21:30:53.427Z",
-  "updated_at": "2025-05-20T09:43:46.957Z",
+  "updated_at": "2025-05-21T05:50:00.385Z",
   "comment": {
     "text": "This translation key is used to display a warning message to users who cannot open the Desktop Editors of an organization due to browser blocking. The text appears in a privacy room page and informs users to check their browser settings.",
     "is_auto": true,
@@ -27,19 +27,42 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'يحظره' (yahaDarahu) literally translates to 'is prohibiting it'. While understandable, a more natural and accurate translation of 'blocking it' in this context would be something like 'يعيقه' (yu'iqahu) which means 'is hindering it' or 'is preventing it'. It conveys the browser preventing access more accurately.",
+          "suggestion": "إذا قمت بتثبيت {{organizationName}} محرري سطح المكتب ولكن لا يمكنك فتحه من هذه الصفحة، فقد يكون متصفحك يعيقه."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'proqramı' is a valid word but sounds slightly awkward in this context. A more natural word would be 'proqramı' or 'proqram'.",
+          "suggestion": "Əgər sizdə {{organizationName}} Desktop Editors proqramı/tətbiqi mövcuddursa və açılmırsa, çox güman brauzer tərəfindən bloklanılır."
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, 'çox güman brauzer tərəfindən bloklanılır' is a bit clunky.  A more fluent phrasing would be 'brauzer tərəfindən bloklanılıb'.",
+          "suggestion": "Əgər sizdə {{organizationName}} Desktop Editors proqramı mövcuddursa və açılmırsa, çox güman brauzer tərəfindən bloklanılıb."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Настолен' is likely a transcription of 'Desktop' and might be better represented as something closer to 'Десктопен' to maintain consistency with English terms commonly used in technical contexts. However, this is a stylistic preference and 'Настолен' is not strictly incorrect.",
+          "suggestion": "Consider 'Десктопен' as an alternative for 'Настолен'."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -51,7 +74,18 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence \"Wenn Sie {{organizationName}} Desktop Editoren installiert haben, können aber sie auf dieser Seite nicht öffnen\" is grammatically awkward. The 'aber sie' construction is incorrect. It should be 'können Sie sie aber nicht...'",
+          "suggestion": "Wenn Sie {{organizationName}} Desktop Editoren installiert haben, können Sie sie aber auf dieser Seite nicht öffnen."
+        },
+        {
+          "type": "formatting",
+          "description": "The word 'App' is capitalized, but it's likely referring to an application and should be lowercase.",
+          "suggestion": "Wenn Sie {{organizationName}} Desktop Editoren installiert haben, können Sie sie aber auf dieser Seite nicht öffnen, blockiert Ihr Browser die app."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -63,7 +97,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"If you have ... installed\" is better translated as \"Si tiene instalada...\" instead of \"Si usted tiene instalada...\"  Using 'usted' can sound overly formal in many Spanish-speaking contexts.",
+          "suggestion": "Si tiene instalada la app {{organizationName}} Desktop Editors..."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -81,13 +121,30 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Armenian translation uses a somewhat awkward phrasing. The structure \"Եթե ​​ունեք ... տեղադրված, բայց չեք կարող բացել\" is less natural than simply stating 'If you have installed...' The use of the passive voice is also slightly unnatural.",
+          "suggestion": "Եթե ձեր աշխատասեղանի համակարգչի վրա տեղադրված է {{organizationName}} խմբագրիչը, բայց չեք կարող բացել այն այս էջից, Ձեր զննիչը կարող է արգելափակել այն:"
+        },
+        {
+          "type": "formatting",
+          "description": "The word 'աշխատասեղանի հավելվածի խմբագրիչները' (desktop application editors) is a bit long and could be simplified.  While technically correct, it's less concise than directly referring to the editor.",
+          "suggestion": "աշխատասեղանի խմբագրիչ (desktop editor)"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English says \"Desktop Editors\" while the Italian translation uses \"Desktop Editor\". It should be plural to match the English.",
+          "suggestion": "Se hai installato {{organizationName}} Desktop Editors ma non riesci ad aprirlo da questa pagina, può essere che il tuo browser lo sta bloccando."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -105,7 +162,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຖ້າວ່າ' (thaa waa) can be simplified to 'ຖ້າ' (thaa) which is more common and natural in Lao.",
+          "suggestion": "ຖ້າຕິດຕັ້ງ {{organizationName}} Desktop Editors ແລ້ວບໍ່ສາມາດເປີດໄດ້ browser ຂອງທ່ານອາດກຳລັງຖືກ block ຢູ່."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -129,7 +192,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The use of 'o' before 'conseguir' feels slightly awkward. While grammatically correct, a more natural phrasing might improve readability.",
+          "suggestion": "Se tiver instalado o {{organizationName}} Desktop Editors, mas não conseguir abri-lo a partir desta página, o seu navegador pode estar a bloqueá-lo."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,19 +210,37 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Romanian translation uses the masculine pronoun 'l' to refer to 'Desktop Editors'. Desktop Editors is a plural noun, and should be referred to with feminine plural pronouns/agreement.",
+          "suggestion": "Dacă ați instalat {{organizationName}} Desktop Editors dar nu le puteți deschide de aici, este posibil că este blocat din browserul dvs."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Russian translation 'блокируется браузером' (is blocked by the browser) implies a direct action by the browser. A more accurate translation would convey the possibility of the browser preventing the application from opening.",
+          "suggestion": "Если у вас установлены {{organizationName}} Desktop Editors, но не открываются с этой страницы, возможно, браузер препятствует их открытию."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'විවෘත' is used for 'open'. While technically correct, 'ආරම්භ' might be a more natural and common way to express 'open' in the context of software applications.",
+          "suggestion": "ඔබ {{organizationName}} Desktop Editors ස්ථාපිත කර තිබුණත්, මෙම පිටුවෙන් එය ආරම්භ කළ නොහැකි නම්, ඔබේ බ්‍රව්සරය එය අවහිර කර තිබිය හැකිය."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +258,18 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence structure is a bit awkward. 'Ако имате {{organizationName}} Desktop Editors инсталиран али не можете да га отворите са ове странице' could be improved.",
+          "suggestion": "Ако имате инсталиран {{organizationName}} Desktop Editors, али не можете да га отворите са ове странице, ваш прегледач га можда блокира."
+        },
+        {
+          "type": "grammar",
+          "description": "The use of 'али' is somewhat less common and slightly less natural than alternatives.",
+          "suggestion": "Ако имате инсталиран {{organizationName}} Desktop Editors, али не можете да га отворите са ове странице, можда ваш прегледач блокира приступ."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -189,19 +287,37 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"блокування відбувається в браузері\" is a bit awkward. A more natural Ukrainian phrasing would convey that the browser is blocking the application.",
+          "suggestion": "Якщо у вас інстальовані настільні редактори {{organizationName}}, але ви не можете відкрити з цієї сторінки, можливо, ваш браузер блокує їх."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Máy tính tính\" is grammatically incorrect. It should be \"Máy tính\".",
+          "suggestion": "Nếu bạn đã cài đặt Trình chỉnh sửa {{organizationName}} cho Máy tính nhưng không thể mở nó từ trang này thì có thể trình duyệt của bạn đang chặn nó."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"从此页将其打开\" is somewhat awkward. A more natural phrasing would be \"从本页面打开\" or \"从该页面打开\". The original English implies the application is being opened *from* the page, which this phrasing captures more directly.",
+          "suggestion": "如果您已安装{{organizationName}}桌面编辑器但无法从本页面打开，则可能是其已被浏览器阻止。"
+        }
+      ],
       "approved_at": null
     }
   }

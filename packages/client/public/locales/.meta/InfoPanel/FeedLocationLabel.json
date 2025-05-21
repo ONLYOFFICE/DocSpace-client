@@ -3,7 +3,7 @@
   "content": "Folder «{{folderTitle}}»",
   "content_en_sha1_hash": "eec9f9820b33c08ccac5b304980df7ffbeef680e",
   "created_at": "2025-05-19T21:30:54.780Z",
-  "updated_at": "2025-05-20T09:41:09.579Z",
+  "updated_at": "2025-05-21T10:16:28.208Z",
   "comment": {
     "text": "The FeedLocationLabel translation key is used to display a descriptive text for folder information on the HistoryBlockContent component. The text refers to the folder title and appears in a main text area when reorder folders are enabled or section views are selected.",
     "is_auto": true,
@@ -93,7 +93,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation uses a full-width space before フォルダ. While technically acceptable, it's more common to omit the space, especially in UI contexts.",
+          "suggestion": "«{{folderTitle}}»フォルダ"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -117,7 +123,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Dutch word 'Map' ('Kaart') is not the most natural or expected translation for 'Folder'. 'Folder' generally refers to a container for files and documents. A more appropriate translation would be 'Map' in the sense of a directory or a container.",
+          "suggestion": "Map"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -153,7 +165,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"බහාලුම\" (bahaluma) generally refers to a container or receptacle, not a folder. While it could be interpreted in a broader sense, it's not the most accurate translation for \"Folder\".",
+          "suggestion": "«{{folderTitle}}» ෆෝල්ඩර්"
+        },
+        {
+          "type": "formatting",
+          "description": "The surrounding quotes « » are maintained in Sinhala, but consistency is needed. If they are meant to be displayed as part of the UI, ensure they are correctly rendered.",
+          "suggestion": "Maintain consistent quotation marks as per design specifications. Consider alternative UI rendering methods if required."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +194,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"Folder\" should be translated to Serbian as \"Mapa\" or \"Часовник\", not transliterated as \"Фолдер\". While understandable, it's not a natural-sounding translation.",
+          "suggestion": "Mapa «{{folderTitle}}»"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

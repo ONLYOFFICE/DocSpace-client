@@ -3,7 +3,7 @@
   "content": "View usage per API key on the",
   "content_en_sha1_hash": "7fb63f56b0f710797397bac7b4ab4ee84d6c2d62",
   "created_at": "2025-05-19T21:30:50.560Z",
-  "updated_at": "2025-05-20T09:45:46.546Z",
+  "updated_at": "2025-05-21T05:12:08.236Z",
   "comment": {
     "text": "The translation key \"ApiKeyViewUsage\" is used to describe the functionality of viewing API key usage. It appears in a link on the PortalSettings page, informing users that clicking on it will display usage details for each API key. This text helps to explain the purpose of the link and provides context for translators.",
     "is_auto": true,
@@ -27,49 +27,107 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'عرض الاستخدام لكل مفتاح \"API\" في' is not a complete or accurate translation of 'View usage per API key on the'. It translates to 'View usage for each \"API\" key in'. It is missing the final part of the English phrase ('on the').",
+          "suggestion": "عرض استخدام كل مفتاح API في"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of quotation marks around 'API' is not standard Arabic formatting. While understandable, it's not the typical approach.",
+          "suggestion": "عرض استخدام كل مفتاح API في"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'View usage per API key on the' implies viewing usage *related to* or *associated with* each API key, not just 'View usage of each API key'. The Azerbaijani translation 'Hər API açarının istifadəsinə baxın' is a direct translation and lacks the nuance of 'per'.",
+          "suggestion": "Consider a more nuanced translation like 'Hər API açarı ilə bağlı istifadəyə baxın' or 'Hər API açarı üzrə istifadəyə baxın'."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase lacks context. It's likely part of a larger sentence or heading. 'on the' is missing its object in the English. This can be confusing for the user.",
+          "suggestion": "Ideally, the phrase would be incorporated into a complete sentence or clear heading for better user comprehension. For example, 'View usage per API key on the dashboard'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Вижте използването на API ключ в\" is a literal translation and doesn't quite convey the intended meaning of \"View usage per API key on the...\" A more natural Bulgarian phrasing would be needed. It lacks context indicating where the usage is being viewed.",
+          "suggestion": "Вижте използването на API ключ в [context - e.g., таблото за управление] / or Вижте потреблението на API ключ за..."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Zobrazení využití jednotlivých klíčů API na' is not a perfect translation of 'View usage per API key on the'. While understandable, it could be more natural. A more direct and fluent translation might be 'Zobrazení využití pro každý API klíč na' or 'Přehled využití API klíčů'.",
+          "suggestion": "Zobrazení využití pro každý API klíč na"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The German translation ends with a colon, which might be unnecessary and might not align with the UI context. Consider removing it for consistency.",
+          "suggestion": "Verwendung pro API-Schlüssel anzeigen"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Προβολή της χρήσης ανά κλειδί API στο' is a literal translation and could be improved for natural Greek phrasing. It translates to 'View of the usage per API key in the...' which is not the best way to express this in Greek.",
+          "suggestion": "Δυνατότητες προβολής χρήσης ανά κλειδί API"
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Consulte el uso por clave de la API en\" is a literal translation but doesn't flow naturally in Spanish. \"Consulte\" is overly formal. A more natural phrasing would convey the idea of reviewing or checking usage.",
+          "suggestion": "Revise el uso por clave de la API en"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"per API-avain\" is not the most natural or accurate translation of \"per API key\". A better translation would be something like \"API-avainkohtaisesti\" or \"API-avaimen mukaan\".",
+          "suggestion": "Näytä käyttö API-avainkohtaisesti"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +139,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'API բանալու օգտագործման վիճակագրությունը դիտելու համար այցելեք՝' translates to 'To view the usage statistics per API key, visit...' which is more verbose than the English 'View usage per API key on the'. It's adding an unnecessary phrase. The English implies a specific location or interface.",
+          "suggestion": "API բանալի օգտագործման վիճակագրություն դիտելու համար"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,7 +163,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"API 키별 사용량 확인\" focuses on confirming usage. The English 'View usage per API key on the' implies a context, specifically on a platform or dashboard. The Korean translation lacks this contextual element.",
+          "suggestion": "API 키별 사용량 확인 (플랫폼에서)"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -111,13 +181,25 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'API atslēgas izmantošanu var skatīt' doesn't fully convey the meaning of 'View usage per API key on the'. It's missing the 'on the' portion and doesn't specify what the usage is being viewed on (e.g., a dashboard, a report).",
+          "suggestion": "API atslēgas izmantošanu var skatīt ziņojumā/datorvaldes panelī"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Bekijk het gebruik per API sleutel op de' is not a natural or accurate translation of 'View usage per API key on the'. It's a literal translation that doesn't flow well in Dutch. 'on the' is also incomplete.",
+          "suggestion": "A more natural and complete translation could be 'Bekijk het gebruik per API-sleutel' or 'Bekijk het gebruik per API sleutel'."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -129,19 +211,37 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'View usage per API key on the' is incomplete. It's missing the destination/platform where the usage is viewed. A more accurate translation would need to account for this context. Simply translating 'on the' doesn't convey the intended meaning.",
+          "suggestion": "Consider adding context. For example, if the platform is a dashboard, the translation might be: 'Veja a utilização por chave API no painel' (View usage per API key on the dashboard)."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Visualizar o uso por chave de API em\" is not as natural-sounding as it could be. While technically correct, \"em\" implies a location, which isn't quite the intended meaning. A more appropriate preposition would be \"para\".",
+          "suggestion": "Visualizar o uso por chave de API para"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Vizualizați utilizarea fiecărei chei\" is incomplete. It's missing the rest of the English phrase \"on the [platform/dashboard/etc.]\". The translation only captures 'View usage per API key'.",
+          "suggestion": "Vizualizați utilizarea fiecărei chei pe [platformă/panou/etc.]"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,25 +253,54 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'API යතුර අනුව භාවිතය බලන්න' is a literal translation and doesn't flow naturally in Sinhala. A more natural phrasing would convey 'View usage for each API key' or 'View API key usage'.",
+          "suggestion": "API යතුර අනුව භාවිතය දැකගන්න."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'on the' is missing from the Sinhala translation. While not strictly required, adding a more contextually appropriate connector would improve readability.",
+          "suggestion": "API යතුර අනුව භාවිතය බලන්න."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation \"Zobraziť využitie jednotlivých kľúčov API na\" is not a natural or precise translation of \"View usage per API key on the\". While technically correct, it sounds awkward. A better translation would convey the sense of 'viewing usage *for* each API key'.",
+          "suggestion": "Zobraziť využitie pre jednotlivé kľúče API na"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Oglejte si uporabo po ključu API na' is not the most natural or precise translation of 'View usage per API key on the'. 'Per' implies 'for each', which isn't directly conveyed. 'Na' at the end is also slightly awkward and incomplete. It seems like the sentence is missing the object or location where the usage is viewed.",
+          "suggestion": "Consider alternatives like: 'Poglejte poročilo o uporabi za vsak ključ API' (View usage report for each API key) or 'Ogled porabe za vsak ključ API' (View consumption per API key)."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Прегледајте употребу по API кључу на' while understandable, is slightly awkward. A more natural phrasing in Serbian would be 'Преглед употребе по API кључу на'. The addition of 'у' after 'употребе' improves the flow.",
+          "suggestion": "Преглед употребе по API кључу на"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -183,19 +312,42 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"üzerinde her bir API anahtarının kullanımını görüntüleyin\" is not the most natural or accurate rendering of \"View usage per API key on the...\". 'Üzerinde' (on) doesn't quite capture the intended meaning. It implies 'on top of' which isn't relevant. A better translation would convey 'for each API key'.",
+          "suggestion": "Her bir API anahtarı için kullanımı görüntüleyin"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase lacks context from the English version. The 'the' at the end of 'on the' suggests it's part of a larger phrase.",
+          "suggestion": "Her bir API anahtarı için kullanımı görüntüleyin (platform/dashboard/etc.)"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Перегляньте використання кожного ключа API на\" is slightly awkward. A more natural phrasing would convey the meaning more clearly.",
+          "suggestion": "Перегляньте використання API ключів"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Xem mức sử dụng cho mỗi khóa API trên' is not the most natural or accurate translation of 'View usage per API key on the'. A more common and natural phrasing would be 'Xem mức sử dụng của mỗi khóa API'.",
+          "suggestion": "Xem mức sử dụng của mỗi khóa API"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

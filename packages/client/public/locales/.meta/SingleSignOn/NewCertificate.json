@@ -3,7 +3,7 @@
   "content": "New Certificate",
   "content_en_sha1_hash": "f90a564cc3dc5f0e1b0e2896c28acb669529af25",
   "created_at": "2025-05-19T21:30:50.114Z",
-  "updated_at": "2025-05-20T09:46:12.694Z",
+  "updated_at": "2025-05-21T02:03:59.157Z",
   "comment": {
     "text": "The translation key \"NewCertificate\" is used to display the label \"New Certificate\" in a modal dialog, indicating that the user can create or generate a new certificate. This text appears as the header of two separate modals: AddIdpCertificateModal and AddSpCertificateModal, both related to Single Sign On integration settings.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "Some users have already been added",
   "content_en_sha1_hash": "11ba705efbb4050c93a4d4827ad25f4eb90bb39d",
   "created_at": "2025-05-19T21:30:54.741Z",
-  "updated_at": "2025-05-20T09:41:13.255Z",
+  "updated_at": "2025-05-21T09:34:33.041Z",
   "comment": {
     "text": "\"This translation key is used to display a message when a user has already been added to a group or panel, indicating that they cannot be added again. It appears in warning notifications and dialog boxes, typically triggered by actions such as adding users to a group or editing invite panels.\"",
     "is_auto": true,
@@ -171,7 +171,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Romanian translation uses the feminine plural 'adăugate' while 'utilizatori' is masculine plural.  It should agree in gender.",
+          "suggestion": "Anumite utilizatori sunt deja adăugați."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -183,7 +189,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ඇතැම් අය දැනටමත් එක් කර ඇත\" is not the most natural or idiomatic way to say \"Some users have already been added\" in Sinhala. While technically correct, it sounds a bit formal.",
+          "suggestion": "A more natural translation would be \"కొంతమంది యూజర్లు ఇప్పటికే చేర్చబడ్డారు\" (konthamanḍi yūjaru ikiḍalai cer̄cabaddārū) or \"కొంతమంది యూజర్లు ఇప్పటికే జోడించబడ్డారు\" (konthamanḍi yūjaru ikiḍalai jōḍiñcabaddārū)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

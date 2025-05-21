@@ -3,7 +3,7 @@
   "content": "File unlocked",
   "content_en_sha1_hash": "c60e9fe76b848fe79d0d3970f5c0c61d094278c2",
   "created_at": "2025-05-19T21:30:49.968Z",
-  "updated_at": "2025-05-20T09:46:34.927Z",
+  "updated_at": "2025-05-21T01:30:43.364Z",
   "comment": {
     "text": "The \"FileUnlocked\" translation key is used to display a success message when a file is unlocked. It appears in various UI elements, including buttons and tooltips, such as on a button that unlocks a file or in an info panel displaying file history. The text should indicate that the file has been successfully unlocked, providing feedback to users about the outcome of the action.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ملف مفتوح' literally translates to 'file open', which isn't the most natural or accurate equivalent of 'File unlocked'. While understandable, it doesn't convey the sense of being released or accessible.",
+          "suggestion": "ملف تم فك قفله (Malaf tam fak qifluhu) - This translates to 'File has been unlocked' and is a more accurate reflection of the original meaning. Alternatively,  ملف متاح (Malaf mutah) - 'File Available' could also work, depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -63,7 +69,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation 'Datei nicht gesperrt' literally translates to 'File not locked'. While technically correct, 'Datei entsperrt' would be the more natural and idiomatic translation for 'File unlocked' in a context suggesting a previous locked state.",
+          "suggestion": "Datei entsperrt"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -81,7 +93,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Asiakirjat. Lukitus poistettu' includes 'Asiakirjat' (Documents), which is not present in the English original 'File unlocked'. It implies a plural and broader context.",
+          "suggestion": "Tiedoston lukitus poistettu"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -105,19 +123,37 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ロック削除されたファイル' literally translates to 'File deletion was performed'. While conveying a similar concept, it's not the most natural or accurate translation of 'File unlocked'.",
+          "suggestion": "ファイル解除 (Fairu kaizai) - 'File released/unlocked' or ファイルロック解除 (Fairu rokku kaizai) - 'File lock released' are more accurate and commonly used translations."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '파일이 잠금 해제되었습니다' while understandable, is a more formal and literal translation of 'File unlocked'. A more natural and common Korean phrase for 'File unlocked' would be '파일 잠금 해제됨' or '파일이 열렸습니다'.",
+          "suggestion": "파일 잠금 해제됨"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ໄຟລ໌ ປົດລັອກ' is understandable, a more natural and accurate translation of 'File unlocked' in Lao might be 'ເອກະສານປົດລັອກ' or 'ໄຟລ໌ໄຂແລ້ວ'.  'ປົດລັອກ' directly translates to 'unlock' but it's not the most idiomatic phrasing in Lao in this context.",
+          "suggestion": "ເອກະສານປົດລັອກ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -129,7 +165,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Bestand Van Slot Af\" is a literal translation but doesn't quite convey the meaning of 'File unlocked' in a natural Dutch way. It's a bit clunky.",
+          "suggestion": "A more natural translation would be \"Bestand is ontgrendeld\" or \"Bestand ontgrendeld\"."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -159,7 +201,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Разблокирован файл' is technically correct but sounds unnatural. A more common and natural phrasing would be 'Файл разблокирован'.",
+          "suggestion": "Файл разблокирован"
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -171,7 +219,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Súbor odomknutý' is a literal translation and doesn't flow naturally. A more idiomatic translation would be 'Odomknutý súbor' or 'Súbor je odomknutý'.",
+          "suggestion": "Odomknutý súbor"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -183,7 +237,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Serbian (Cyrillic) translation contains a spelling error. The word 'Датотека' should be 'Датотека'.",
+          "suggestion": "Датотека откључана"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -207,7 +267,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Đã mở khóa File' is not the most natural way to say 'File unlocked' in Vietnamese. While technically correct, it's a bit literal.",
+          "suggestion": "Tập tin đã mở"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

@@ -3,7 +3,7 @@
   "content": "<1>«{{roomTitle}}»</1> room created",
   "content_en_sha1_hash": "1730e3bd2fac6570d2cc51d49c0b449d6a7f5d92",
   "created_at": "2025-05-19T21:30:54.880Z",
-  "updated_at": "2025-05-20T09:40:55.009Z",
+  "updated_at": "2025-05-21T10:01:12.205Z",
   "comment": {
     "text": "The \"HistoryRoomCreated\" translation key is used to display a specific message when a room is created in the application. This message will be displayed as part of a UI component located at /packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx, likely on a button or similar action trigger. The message will include the title of the newly created room.",
     "is_auto": true,
@@ -27,91 +27,211 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation \"تم إنشاء غرفة <1>«{{roomTitle}}»</1>\" is a literal translation but sounds unnatural. A more natural phrasing would be something like \"أُنشئت غرفة «{{roomTitle}}»\" or \"تم إنشاء الغرفة «{{roomTitle}}»\".  The current phrasing emphasizes 'room' unnecessarily.",
+          "suggestion": "أُنشئت غرفة «{{roomTitle}}»"
+        },
+        {
+          "type": "formatting",
+          "description": "The tags `<1>` are not standard and seem to be an attempt at capturing placeholders. These tags should be removed as they'll likely cause issues in the target system.",
+          "suggestion": "تم إنشاء الغرفة «{{roomTitle}}»"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'room created' is better translated as 'yaranıb' rather than 'yaradıldı' to accurately convey the action of creation.",
+          "suggestion": "«{{roomTitle}}» otaq yaranıb"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'created' is best translated as 'създадена'. The current translation 'е създадена' adds an unnecessary 'е', which translates to 'is'.",
+          "suggestion": "Стаята <1>«{{roomTitle}}»</1> създадена"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation 'Vytvořena místnost <1>«{{roomTitle}}»</1> ' is not a natural way to express that a room was created.  The English 'room created' implies a past tense action.  A more natural Czech translation would convey the same meaning in a more active voice.",
+          "suggestion": "Vytvořena místnost s názvem «{{roomTitle}}»"
+        },
+        {
+          "type": "formatting",
+          "description": "The Czech translation includes the opening tag '<1>'. This tag is not necessary and disrupts the flow of the sentence.",
+          "suggestion": "Remove the '<1>' tag from the Czech translation."
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'room created' is more accurately translated as 'Raum angelegt' or 'Raum wurde erstellt' in German, rather than just 'Raum erstellt'. The current translation is grammatically correct but lacks the full meaning and flow of the original.",
+          "suggestion": "Raum angelegt"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tag '<1>' is not properly closed in the Greek translation. It should be properly escaped as `&lt;1&gt;` to be rendered correctly in HTML or similar contexts.",
+          "suggestion": "Replace `<1>` with `&lt;1&gt;`."
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The opening tag <1> is not closed correctly in the Spanish translation. It should be 'La sala <1>«{{roomTitle}}»</1> se ha creado'.",
+          "suggestion": "Correct the opening tag to match the English: 'La sala <1>«{{roomTitle}}»</1> se ha creado'"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While not strictly incorrect, \"se ha creado\" is more passive than the English \"created\". A more direct translation might improve clarity, although it depends on the desired tone.",
+          "suggestion": "Consider using a more active construction like \"La sala <1>«{{roomTitle}}»</1> fue creada\" or \"La sala <1>«{{roomTitle}}»</1> ha sido creada\"."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'room' is translated as 'huone', which is generally correct but can sound slightly formal. A more natural translation might be 'tila'.",
+          "suggestion": "«{{roomTitle}}» tila luotu"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The French translation includes an extra space before 'créée'.",
+          "suggestion": "Salle «{{roomTitle}}» créée"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"ստեղծված սենյակ\" literally translates to 'created room'. It lacks the crucial verb 'was created' or a similar construction to accurately reflect the English sentence's meaning. It implies the room exists but doesn't convey that it was just created.",
+          "suggestion": "«{{roomTitle}}» սենյակը ստեղծվեց"
+        },
+        {
+          "type": "formatting",
+          "description": "The Armenian translation doesn't include the same surrounding tags (<1> and </1>) as the English. This might cause rendering issues in the UI.",
+          "suggestion": "<1>«{{roomTitle}}»</1> ստեղծված սենյակ"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "Missing space after the opening angle bracket '<1>'.",
+          "suggestion": " <1> «{{roomTitle}}» </1> stanza creata"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation uses 「」 for quoting, while the English uses «».",
+          "suggestion": "Consider using «» to match the English source or ensure 「」 is the intended quoting style."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English content uses 'room created', while the Japanese translation uses 'ルームが作成されました' which translates more accurately to 'room was created'. While technically correct, it's slightly more formal than the original.",
+          "suggestion": "Consider a translation closer to 'A room titled «{{roomTitle}}» has been created' or 'The room «{{roomTitle}}» has been created' for a closer match in tone."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'room created' is not accurately translated to '룸이 생성되었습니다'. A more natural translation would be '방이 생성되었습니다' or '이 방이 생성되었습니다'.",
+          "suggestion": "방이 생성되었습니다"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ຫ້ອງຖືກສ້າງແລ້ວ\" (hong thuk sang laeo) translates to \"room was created\". The English says \"room created\". While not entirely wrong, the passive voice in Lao doesn't quite match the active voice in the English source. It implies a slightly different nuance.",
+          "suggestion": "ຫ້ອງສ້າງແລ້ວ (hong sang laeo) - This translates to 'room created' and maintains the active voice consistency with the English."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"room created\" is better translated as something more active or indicative of creation, rather than just a state of being. \"ir izveidota\" implies a passive state (has been created) rather than the act of creation.",
+          "suggestion": "«{{roomTitle}}» telpa ir tapusi"
+        },
+        {
+          "type": "formatting",
+          "description": "The format of the English and Latvian content is inconsistent. The English content includes '<1>' tags around the room title, while the Latvian translation only includes them. It's preferable to maintain consistency.",
+          "suggestion": "<1>«{{roomTitle}}»</1> telpa ir tapusi"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -123,19 +243,37 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Polish translation retains the `<1>` tag from the English source, which is unnecessary and disrupts the flow of the sentence.",
+          "suggestion": "Remove the `<1>` tag from the Polish translation."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'room' was not translated. It should be translated to 'quarto' or 'sala' depending on the context. 'Sala' seems more appropriate in this case, representing a room for meetings or events.",
+          "suggestion": "<1>«{{roomTitle}}»</1> sala criada"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English \"room created\" is best translated as \"sala criada\". However, a more natural and idiomatic Portuguese translation would be \"sala foi criada\" or \"uma sala foi criada\".",
+          "suggestion": "sala foi criada"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -147,61 +285,136 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The `<1>` tag is present in both the English and Russian versions. It might be unnecessary and should be checked for intended purpose.",
+          "suggestion": "Review the purpose of the `<1>` tags and remove if they are not required for the UI rendering."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"කාමරය සාදා ගන්නා ලදි\" implies a continuous or ongoing action (being created). The English \"room created\" indicates a completed action. A better translation would convey a completed action.",
+          "suggestion": "කාමරය සාදා ඇත"
+        },
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation retains the '<1>' and '</1>' tags. These should be consistent with the English content but their purpose isn't entirely clear without further context. Assuming they represent a specific HTML tag, they should be checked to ensure consistency across the application.",
+          "suggestion": "Consider whether to retain the tags and ensure consistency with English tags.  If the tags are unnecessary, remove them."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Miestnosť <1>«{{roomTitle}}»</1> vytvorená' does not accurately convey the meaning of 'room created'. It literally translates to 'Room <1>«{{roomTitle}}»</1> created'. It needs to include a verb indicating creation, such as 'bola' (was) or a more descriptive verb.",
+          "suggestion": "Miestnosť <1>«{{roomTitle}}»</1> bola vytvorená"
+        },
+        {
+          "type": "formatting",
+          "description": "The opening and closing tags <1> and </1> seem unnecessary and disrupt the flow of the sentence in Slovak. These are present in both the source and translation, but should be reviewed for their actual purpose.",
+          "suggestion": "Remove the <1> and </1> tags unless they serve a specific technical purpose in the application."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The English content has angle brackets around the entire phrase, while the Slovenian translation only has them around the room title placeholder. The original brackets should also enclose the entire Slovenian phrase.",
+          "suggestion": "<1>«{{roomTitle}}»</1> soba ustvarjena"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'room created' is translated as 'просторија је креирана'. While technically correct, a more natural and common Serbian (Cyrillic) phrasing would be 'собија је креирана' or 'настала је соба'. 'Просторија' is a more formal term and less commonly used in this context.",
+          "suggestion": "«{{roomTitle}}» соба је креирана"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word \"room\" is translated as \"prostorija\", which is a more formal or general term for \"space\" or \"room\". A more natural and direct translation of \"room\" would be \"soba\".",
+          "suggestion": "«{{roomTitle}}»</1> soba je kreirana"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'room' is translated as 'odası'. While 'odası' means 'room (possessive)', the original sentence simply describes the creation of a room. A more accurate translation would be 'oda' (room) or 'alan' (space).",
+          "suggestion": "«{{roomTitle}}» oda oluşturuldu"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets <1> are present in the Ukrainian translation but not inherently necessary and are likely a carryover from the English source.  They are disrupting the natural flow of the Ukrainian sentence.",
+          "suggestion": "Remove the <1> tags.  The sentence should read: \"Кімнату «{{roomTitle}}» створено\"."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Vietnamese translation \"Đã tạo phòng <1>«{{roomTitle}}»</1> \" doesn't accurately convey the meaning of \"<1>«{{roomTitle}}»</1> room created\". The English indicates that the room title itself is within the tag, while the Vietnamese places the tag *after* \"phòng\". The phrase \"Đã tạo phòng\" should be followed immediately by the room title within its tags, not separated by a space.",
+          "suggestion": "Đã tạo phòng «{{roomTitle}}»"
+        },
+        {
+          "type": "formatting",
+          "description": "The trailing tag `</1>` in the Vietnamese translation is unnecessary and doesn't match the English source. It's likely a leftover from the extraction process and should be removed.",
+          "suggestion": "Remove the trailing tag `</1>`"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"room created\" is better translated as something more natural in Chinese. \"已创建\" is grammatically correct, but sounds a bit stiff. A more natural phrasing would be something like \"已创建房间\" or \"创建了房间\".",
+          "suggestion": "«{{roomTitle}}»房间创建了"
+        }
+      ],
       "approved_at": null
     }
   }

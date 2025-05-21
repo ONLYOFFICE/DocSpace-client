@@ -3,7 +3,7 @@
   "content": "Dropbox directory",
   "content_en_sha1_hash": "1a991dfb32e8cd8808fd95385917355bc689cb86",
   "created_at": "2025-05-19T21:30:49.974Z",
-  "updated_at": "2025-05-20T09:46:33.847Z",
+  "updated_at": "2025-05-21T01:29:32.808Z",
   "comment": {
     "text": "This translation key is used to display the title of a Dropbox directory. It appears as part of file names or folder labels in the application, and its value will be translated by users based on their language settings.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Adresář\" technically translates to 'directory', it's a more formal and less commonly used term in Czech for user interfaces. \"Složka Dropbox\" or \"Dropbox složka\" would be more natural and user-friendly.",
+          "suggestion": "Složka Dropbox"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Dropbox գրացուցակ' literally translates to 'Dropbox list'. While understandable, 'directory' implies a more structured folder system than just a 'list'. A more accurate translation might convey the concept of a folder structure.",
+          "suggestion": "Dropbox պանակներ (Dropbox panakers)"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,7 +117,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ໄດເລກະທໍລີ Dropbox\" is a direct transliteration of 'directory' and 'Dropbox' rather than a natural Lao equivalent. A more accurate and idiomatic translation would be something like 'ໂຟນເອກະໂຕຂອງ Dropbox' (phone directory of Dropbox) or 'ບ່ອນເກັບຂໍ້ມູນ Dropbox' (Dropbox storage).",
+          "suggestion": "ໂຟນເອກະໂຕຂອງ Dropbox"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -135,13 +153,25 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Dropbox' is a proper noun and should not be translated. The translation currently includes 'da Dropbox,' which is grammatically incorrect and changes the meaning.",
+          "suggestion": "Diretório Dropbox"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Director Dropbox' does not accurately convey the meaning of 'Dropbox directory'. 'Director' implies a person, not a directory. A more accurate translation would include a word indicating a folder or location.",
+          "suggestion": "Posible suggestions include: 'Dosar Dropbox', 'Folder Dropbox', 'Locație Dropbox' or 'Directorul Dropbox' (if the intention is to explicitly state it's a directory)."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +183,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ඩ්‍රොප්බොක්ස් නාමාවලිය\" (DropBox Namavaliya) is understandable, it literally translates to 'Dropbox list'. 'Directory' implies a collection of files and folders, and a more accurate translation would be something like \"ඩ්‍රොප්බොක්ස් ෆෝල්ඩර්\" (DropBox Folder) or \"ඩ්‍රොප්බොක්ස් ලිපිගබඩාව\" (DropBox Repository).",
+          "suggestion": "ඩ්‍රොප්බොක්ස් ෆෝල්ඩර්"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +207,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'директоријум' is less common and sounds slightly formal/technical for a folder title in a user interface. A more natural and common term would be 'фасцикула'.",
+          "suggestion": "Dropbox фасцикула"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

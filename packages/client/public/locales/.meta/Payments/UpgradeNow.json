@@ -3,7 +3,7 @@
   "content": "Upgrade now",
   "content_en_sha1_hash": "09a80c7a63cdefe5e5c7bccdc6bf4b894b15c07c",
   "created_at": "2025-05-19T21:30:53.741Z",
-  "updated_at": "2025-05-20T09:43:04.176Z",
+  "updated_at": "2025-05-21T06:27:02.137Z",
   "comment": {
     "text": "This translation key \"UpgradeNow\" is used to display a button label that encourages users to upgrade their plan. It appears on a payment-related button in the PortalSettings page and should be translated to prompt users to take action, such as paying for an upgraded service.",
     "is_auto": true,
@@ -123,7 +123,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Atjaunot' translates to 'Restore' or 'Renew', not 'Upgrade'. While 'Upgrade' can sometimes be understood as 'atjaunot', it's not the most accurate translation in this context.",
+          "suggestion": "Upgrade - Augšupēt"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,7 +147,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Aumentar agora' doesn't perfectly convey the meaning of 'Upgrade now'. 'Upgrade' implies an improvement or advancement, while 'aumentar' primarily means 'to increase'.",
+          "suggestion": "Consider 'Atualizar agora' or 'Melhorar agora' to better reflect the meaning of 'Upgrade now'."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -165,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'උත්ශ්‍රේණි කරන්න' doesn't perfectly convey the meaning of 'Upgrade now'. 'Upgrade' can refer to improving something, not just ranking or classifying.  A more accurate translation might focus on improvement or enhancement.",
+          "suggestion": "Consider alternatives like 'නැග්‍රාදිය යාවත්කාලීකරණය කරන්න' (Nägradiya yāvatkālikaraṇa karanna - Upgrade/Update) or 'වැඩිදියුණු කරන්න' (Vadidiyaḷu karaṇa - Improve)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,25 +201,49 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation 'Надогради сада' is not a correct translation of 'Upgrade now'. It seems to be a combination of words and doesn't accurately convey the meaning of an upgrade.",
+          "suggestion": "The correct translation would be 'Надгради сада' (Nadgradi sada)."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Nadogradi sada\" while understandable, isn't the most natural or idiomatic translation of \"Upgrade now.\" It implies making something better rather than initiating an upgrade process.",
+          "suggestion": "Consider 'Ažuriraj sada' or 'Nadgradite sada' for a more accurate and common translation, depending on the specific context. 'Ažuriraj sada' is generally the preferred option."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'Şimdi Yükselt' doesn't perfectly capture the nuance of 'Upgrade now'. 'Yükselt' implies an elevation or increase, while 'Upgrade' refers to a software or product enhancement. A more accurate translation would convey the action of improving or updating.",
+          "suggestion": "Şimdi Güncelle"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Підвищити зараз' doesn't accurately convey the meaning of 'Upgrade now'. 'Підвищити' implies increasing or elevating something, not upgrading.",
+          "suggestion": "Оновити зараз"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

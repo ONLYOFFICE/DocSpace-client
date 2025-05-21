@@ -3,7 +3,7 @@
   "content": "To upload and create new files and folders, please free up disk space, or contact the {{productName}} administrator to increase the storage quota.",
   "content_en_sha1_hash": "bd82f05265948b22a11ff3c25bdeb0f4e8cda1c7",
   "created_at": "2025-05-19T21:30:54.115Z",
-  "updated_at": "2025-05-20T09:42:24.733Z",
+  "updated_at": "2025-05-21T07:50:11.763Z",
   "comment": {
     "text": "This translation key is used for a message that displays when a user attempts to create new files or folders but does not have sufficient disk space. It prompts the user to free up space or contact an administrator to increase their storage quota.",
     "is_auto": true,
@@ -27,19 +27,47 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'To upload and create new files and folders' is not accurately reflected in the Arabic translation. While it conveys the general idea, a more literal and natural translation would improve clarity.",
+          "suggestion": "لرفع وإنشاء ملفات ومجلدات جديدة"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'free up disk space' is a bit vague. A more specific translation would clarify the action required.",
+          "suggestion": "تفريغ مساحة تخزين"
+        },
+        {
+          "type": "formatting",
+          "description": "The variable {{productName}} should be checked to ensure correct rendering and localization within the application.",
+          "suggestion": "Verify correct rendering of {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Azerbaijani translation uses a conjunction ('və' meaning 'and') between \"diskdə yer boşaldın\" and \"yaddaş kvotasını artırmaq üçün {{productName}} administratorla əlaqə saxlayın\".  In English, the sentence uses a comma. While not strictly incorrect, a semicolon or comma would flow better in Azerbaijani.",
+          "suggestion": "Yeni fayl və qovluqları yükləmək və yaratmaq üçün diskdə yer boşaldın; yaddaş kvotasını artırmaq üçün {{productName}} administratorla əlaqə saxlayın."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The variable {{productName}} is not properly formatted within the Bulgarian translation. While it's present, the surrounding spaces might need adjustment to ensure proper rendering in the target language's context.",
+          "suggestion": "Review spacing around {{productName}} within the Bulgarian text to ensure it renders correctly (e.g., 'с администратора {{productName}}' might be better as 'с администратора на {{productName}}' depending on the platform)."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -57,7 +85,18 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"αποθ\" is an abbreviation and might not be easily understood by all users. It's likely a shortened form of \"αποθηκευτικού χώρου\" (storage space).",
+          "suggestion": "ελευθερώστε χώρο στον δίσκο ή επικοινωνήστε με τον διαχειριστή {{productName}} για να αυξήσετε την ποσόστωση αποθηκευτικού χώρου."
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the sentence structure could be slightly improved for better flow in Greek. The phrase \"ελευθερώστε χώρο στον δίσκο\" feels a bit abrupt.",
+          "suggestion": "Για να ανεβάσετε και να δημιουργήσετε νέα αρχεία και φακέλους, ελευθερώστε χώρο στον δίσκο σας ή επικοινωνήστε με τον διαχειριστή {{productName}} για να αυξήσετε την ποσόστωση αποθηκευτικού χώρου."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,7 +108,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"muistin kiintiötä\" (memory quota) doesn't accurately reflect \"storage quota\". The original English refers to disk space, which is storage.",
+          "suggestion": "Ole hyvä ja vapauta levytilaa ladataksesi ja luodaksesi tiedostoja ja kansioita tai ota yhteyttä {{productName}}-järjestelmänvalvojaan lisätäksesi tallennustilan kiintiötä."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +126,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation uses a colon after 'ադմինիստրատորի հետ' which may not be standard Armenian punctuation. Consider removing it.",
+          "suggestion": "կապվեք {{productName}} ադմինիստրատորի հետ պահեստավորման քվոտան մեծացնելու համար:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +144,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"storage quota\" is translated as \"ストレージの容量制限\" which literally means \"storage capacity limit\". While not entirely wrong, \"storage quota\" implies a defined allowance, which is a more accurate representation of the original meaning. A more suitable translation would be something like \"ストレージの割り当て\" (storage allocation).",
+          "suggestion": "新しいファイルやフォルダをアップロードしたり作成したりするには、ディスクの空き容量を確保するか、{{productName}}の管理者に連絡してストレージの割り当てを増やしてください。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -105,7 +162,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation includes a space before the curly braces around {{productName}}, which isn't present in the English source and may appear visually incorrect.",
+          "suggestion": "Remove the space before '{{productName}}'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +204,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'capacităţile de stocare' is a literal translation of 'storage quota' but sounds awkward in Romanian. A more natural phrasing would be 'spațiul de stocare'.",
+          "suggestion": "Pentru a încărca și a crea fișiere și dosare noi, eliberați spațiu de stocare sau contactați administratorul {{productName}} pentru a majora spațiul de stocare."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,13 +222,30 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ආචයක සලාකය වැඩි කර ගැනීමට\" is an awkward and potentially incorrect translation of \"contact the {{productName}} administrator to increase the storage quota.\" 'සලාකය' (salakaya) doesn't accurately convey 'administrator' in this context. It's closer to 'salary' or 'payment'.",
+          "suggestion": " කරුණාකර {{productName}} පරිපාලකය අමතන්නතැමියා වැඩි කර ගැනීමට (karunakaran {{productName}} paripalakaya amatanna thamiaya wedikara gannewa)"
+        },
+        {
+          "type": "spelling",
+          "description": "There's a potential issue with the consistency of the word 'තැමියා' (thamiaya). While understandable, it might be better to use a more standardized Sinhala term for 'space' or 'quota' if the target audience is familiar with specific terminology.",
+          "suggestion": "Consider using a more established term like 'ඉඩ' (ida) or 'කොටා' (kota) if appropriate within the context and target audience."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing \"aby zvýšil kvótu úložiska\" (so that he increases the storage quota) is a bit awkward. A more natural phrasing would indicate 'to increase the storage quota.'",
+          "suggestion": "Ak chcete nahrávať a vytvárať nové súbory a priečinky, uvoľnite miesto na disku alebo kontaktujte administrátora {{productName}} a požiadajte o zvýšenie kvóty úložiska."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,25 +257,59 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Serbian translation includes a Latin letter 'с' where Cyrillic 'с' should be used in 'складиштење'.",
+          "suggestion": "Replace 'складиштење' with 'складиштење'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The verb 'poveća' is in the imperative mood but is not fully conjugated to match the politeness level required. It would be more appropriate to use a conditional form.",
+          "suggestion": "Da biste otpremili i kreirali nove datoteke i fascikle, oslobodite prostor na disku ili kontaktirajte administratora {{productName}} da bi povećao/povećala kvotu za skladištenje."
+        },
+        {
+          "type": "grammar",
+          "description": "The Serbian translation uses the imperfective aspect of the verb 'poveća', which can imply an ongoing or habitual increase, while the English suggests a one-time increase. Using the aorist/perfective form would be more accurate.",
+          "suggestion": "Da biste otpremili i kreirali nove datoteke i fascikle, oslobodite prostor na disku ili kontaktirajte administratora {{productName}} da poveća kvotu za skladištenje."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"free up disk space\" is not accurately reflected in the Turkish translation. \"Disk alanını boşaltın\" translates to 'empty disk space', which implies completely clearing the disk, not just freeing up space. A more accurate translation would emphasize creating space.",
+          "suggestion": "Yeni dosya ve klasörler yüklemek ve oluşturmak için lütfen yeterli disk alanı bırakın veya depolama kotasını artırmak için {{productName}} yöneticiyle iletişime geçin."
+        },
+        {
+          "type": "formatting",
+          "description": "The Turkish translation retains the English phrasing of \"{{productName}}\". While technically correct, it might be more natural to rephrase depending on the context within the Turkish user interface.",
+          "suggestion": "Depolama kotasını artırmak için {{productName}} yöneticisiyle iletişime geçin."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Ukrainian translation includes an unnecessary comma after '{{productName}}'. It disrupts the flow of the sentence.",
+          "suggestion": "Щоб вивантажити та створити нові файли й папки, звільніть місце на диску або зверніться до адміністратора {{productName}} аби збільшити квоту сховища."
+        }
+      ],
       "approved_at": null
     },
     "vi": {

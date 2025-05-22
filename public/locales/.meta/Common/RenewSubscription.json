@@ -3,13 +3,20 @@
   "content": "Renew subscription?",
   "content_en_sha1_hash": "1c5271e3535f317ee7b560fe34ef6e9a6978b7ba",
   "created_at": "2025-05-19T21:30:47.854Z",
-  "updated_at": "2025-05-20T22:06:54.067Z",
+  "updated_at": "2025-05-22T11:57:20.550Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used for a notification that prompts users to renew their subscription. It appears as a suggestion on a payment page, likely in a dialog or alert box, asking users if they want to continue their current plan.",
+    "is_auto": true,
+    "updated_at": "2025-05-22T11:57:20.550Z"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\payments\\SaaS\\PaymentContainer.js",
+      "line_number": 237,
+      "context": "noSelect\n fontSize=\"16px\"\n isBold\n className=\"payment-info_suggestion\"\n >\n <Trans t={t} i18nKey=\"RenewSubscription\" ns=\"Payments\">\n {{ planName: tariffPlanTitle }}\n </Trans>\n </Text>\n );\n }",
+      "module": "\\packages\\client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

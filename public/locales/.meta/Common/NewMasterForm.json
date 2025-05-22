@@ -3,7 +3,7 @@
   "content": "New form template",
   "content_en_sha1_hash": "dd33fb07a6cc6e1d3265f06284317a86321d5d53",
   "created_at": "2025-05-19T21:30:46.754Z",
-  "updated_at": "2025-05-20T22:40:47.289Z",
+  "updated_at": "2025-05-22T11:56:37.811Z",
   "comment": {
     "text": "NewMasterForm is used as a label for creating a new master form in certain file types. It appears on an editor interface likely used to create or edit documents.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "/packages/doceditor/src/hooks/useEditorEvents.ts",
+      "file_path": "\\packages\\doceditor\\src\\hooks\\useEditorEvents.ts",
       "line_number": 340,
       "context": "break;\n case \"pptx\":\n fileName = t(\"Common:NewPresentation\");\n break;\n case \"docxf\":\n fileName = t(\"Common:NewMasterForm\");\n break;\n default:\n break;\n }",
-      "module": "/packages/doceditor"
+      "module": "\\packages\\doceditor"
     }
   ],
   "languages": {

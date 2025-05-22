@@ -55,11 +55,26 @@
 
   &:hover:not(.isDragging),
   &:hover:not(.isEdit),
+  &.isActive {
+    .content {
+      a {
+        text-decoration: var(--link-hover-page-text-decoration);
+      }
+    }
+  }
+
+  &:hover:not(.isDragging),
+  &:hover:not(.isEdit),
   &.checked,
   &.isActive {
     .fileTileBottom {
       background: var(--tile-checked-background);
-      border-top: var(--tile-border);
+    }
+  }
+
+  &.checked {
+    .fileTileTop {
+      background: var(--tile-checked-background);
     }
   }
 
@@ -101,40 +116,26 @@
   }
 
   .isQuickButtons {
-    inset-inline-end: 9px;
+    inset-inline-start: 8px;
 
     :global(.badges) {
       display: grid;
       grid-template-columns: 32px;
       grid-template-rows: repeat(3, 32px);
-      grid-gap: 7px;
+      grid-gap: 4px;
     }
   }
 
   .isBadges {
-    inset-inline-start: 9px;
+    inset-inline-end: 8px;
 
     :global(.badges) {
-      display: grid;
-      grid-template-columns: repeat(3, fit-content(60px));
-      grid-template-rows: 32px;
-      grid-gap: 7px;
+      display: flex;
+      height: 32px;
+      gap: 4px;
 
-      .badge-new-version {
-        order: 1;
-
-        &:hover {
-          cursor: pointer;
-        }
-      }
-
-      .badge-version-current {
-        order: 2;
-      }
-
-      .is-editing,
-      .can-convert {
-        order: 3;
+      .badge {
+        height: 32px;
       }
     }
   }
@@ -149,9 +150,28 @@
       .icon {
         display: none;
       }
+
       .checkbox {
         opacity: 1;
         display: flex;
+      }
+    }
+
+    &:hover:not(.isDragging, .inProgress),
+    &.checked {
+      background: var(--tile-background-color);
+      border-radius: 6px;
+    }
+
+    .checkbox,
+    .checkbox:active {
+      padding-top: 8px;
+      padding-inline-start: 8px;
+
+      svg {
+        margin: -8px;
+        padding: 8px;
+        margin-inline-end: 4px;
       }
     }
   }
@@ -202,6 +222,9 @@
       text-overflow: ellipsis;
       white-space: normal;
       word-break: break-word;
+
+      font-size: var(--tile-font-size);
+      line-height: var(--tile-line-height);
     }
 
     .badges {
@@ -243,7 +266,7 @@
 
     .expandButton > div:first-child {
       padding-block: 8px;
-      padding-inline: 12px 21px;
+      padding-inline: 8px 16px;
     }
   }
 
@@ -255,7 +278,8 @@
     align-items: baseline;
     height: 156px;
     position: relative;
-    border-radius: 6px 6px 0 0;
+    border-radius: 12px 12px 0 0;
+    transition: background 0.2s;
 
     &:hover {
       cursor: pointer;
@@ -269,7 +293,7 @@
       object-fit: cover;
       object-position: top;
       z-index: 0;
-      border-radius: 6px 6px 0 0;
+      border-radius: 12px 12px 0 0;
 
       .isImageOrMedia {
         object-position: center;
@@ -289,9 +313,9 @@
     border-top: 1px solid transparent;
 
     background: var(--tile-background-color);
-    border-radius: 0 0 6px 6px;
+    border-radius: 0 0 12px 12px;
 
-    padding: 9px 0;
+    padding: 16px 0;
     height: 62px;
     box-sizing: border-box;
 

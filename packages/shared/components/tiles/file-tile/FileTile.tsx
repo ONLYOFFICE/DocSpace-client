@@ -251,6 +251,7 @@ const FileTile = ({
   const iconContainerClassNames = classNames(styles.iconContainer, {
     [styles.isDragging]: isDragging,
     [styles.inProgress]: inProgress,
+    [styles.checked]: checked,
   });
 
   const checkboxClassNames = classNames(styles.checkbox, {
@@ -265,6 +266,8 @@ const FileTile = ({
     [styles.isHighlight]: isHighlight,
   });
 
+  console.log("badges", badges);
+
   return (
     <div
       {...rest}
@@ -277,12 +280,12 @@ const FileTile = ({
         {icon}
       </div>
 
-      <div className={classNames(styles.icons, styles.isBadges)}>{badges}</div>
       {contentElement ? (
         <div className={classNames(styles.icons, styles.isQuickButtons)}>
           {contentElement}
         </div>
       ) : null}
+      <div className={classNames(styles.icons, styles.isBadges)}>{badges}</div>
 
       <div className={fileTileBottomClassNames}>
         {element && !isEdit ? (

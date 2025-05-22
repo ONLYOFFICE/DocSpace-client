@@ -13,5 +13,6 @@
   "LinkCopySuccess": "Linkki on kopioitu",
   "SendInvitation": "Lähetä kutsu",
   "UserMaxAvailableRoleWarning": "Vieraita ja käyttäjiä ei voida asettaa huoneen johtajiksi. Vain huoneen ja {{productName}} pääkäyttäjät ovat sopivia tähän rooliin.",
-  "UsersAlreadyAdded": "Jotkut käyttäjät on jo lisätty."
+  "UsersAlreadyAdded": "Jotkut käyttäjät on jo lisätty.",
+  "UsersCannotBeAdded": "Poistetut yhteystiedot ei voi lisätä huoneeseen"
 }

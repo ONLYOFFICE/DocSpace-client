@@ -714,5 +714,8 @@
   "Yes": "是",
   "Yesterday": "昨天",
   "You": "您",
-  "YourTurn": "轮到您了"
+  "YourTurn": "轮到您了",
+  "MobileStartFillingPdfNotAvailableInfo": "当前操作不受支持。请切换到桌面模式填写 PDF 表单。",
+  "BlockFile": "锁定",
+  "UnblockFile": "解锁"
 }

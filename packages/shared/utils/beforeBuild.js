@@ -95,7 +95,9 @@ const beforeBuild = async (
       }
     }
 
-    return files.filter((f) => !f.path.endsWith(".DS_Store"));
+    return files.filter(
+      (f) => !f.path.endsWith(".DS_Store") && !f.path.includes("locales/.meta"),
+    );
   };
 
   const localesFiles = await getLocalesFiles();

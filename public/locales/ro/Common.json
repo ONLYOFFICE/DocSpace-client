@@ -714,5 +714,8 @@
   "Yes": "Da",
   "Yesterday": "Ieri",
   "You": "Dvs",
-  "YourTurn": "Acum e rândul dvs."
+  "YourTurn": "Acum e rândul dvs.",
+  "BlockFile": "Blocare",
+  "MobileStartFillingPdfNotAvailableInfo": "Acțiunea nu este acceptată. Treceți la modul desktop pentru a putea completa formulare PDF.\n",
+  "UnblockFile": "Deblocare"
 }

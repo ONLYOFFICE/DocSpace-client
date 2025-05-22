@@ -28,7 +28,7 @@
   "ArchivedRoomAction": "La stanza '{{name}}' è archiviata",
   "Archives": "Archivi",
   "ArchivingData": "Archiviazione dei dati",
-  "Assign": " Assegna",
+  "Assign": "Assegna",
   "AssignRoles": " Assegnare ruoli?",
   "AssignRolesDescription": " Il modulo è stato inviato con successo a {{roomName}}. Assegna ruoli agli utenti selezionati per abilitare la compilazione del modulo. Vuoi procedere ora o tornarci più tardi?",
   "AssignToRole": "Assegna a un ruolo",
@@ -714,5 +714,8 @@
   "Yes": "Sì",
   "Yesterday": "Ieri",
   "You": "Tu",
-  "YourTurn": "Il tuo turno"
+  "YourTurn": "Il tuo turno",
+  "MobileStartFillingPdfNotAvailableInfo": "Azione non supportata. Passa alla modalità desktop per compilare i moduli PDF.",
+  "BlockFile": "Blocca",
+  "UnblockFile": "Sblocca"
 }

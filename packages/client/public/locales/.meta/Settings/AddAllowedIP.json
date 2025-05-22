@@ -1,0 +1,262 @@
+{
+  "key_path": "AddAllowedIP",
+  "content": "Add allowed IP address",
+  "content_en_sha1_hash": "af9c05a9deff4df886dbc45b353bc08a5f221460",
+  "created_at": "2025-05-19T21:30:50.310Z",
+  "updated_at": "2025-05-21T05:26:51.120Z",
+  "comment": {
+    "text": "\"This translation key is used for the 'Add Allowed IP address' label in the access portal settings, which appears as a button label.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:56.633Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
+      "line_number": 287,
+      "context": "{enable ? (\n <UserFields\n className=\"user-fields\"\n inputs={ips}\n buttonLabel={t(\"AddAllowedIP\")}\n onChangeInput={onChangeInput}\n onDeleteInput={onDeleteInput}\n onClickAdd={onClickAdd}\n regexp={regexp}\n classNameAdditional=\"add-allowed-ip-address\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Czech translation uses the plural form 'adresy' (IP addresses) while the English refers to a single IP address. The correct form should be singular.",
+          "suggestion": "Přidat povolenou IP adresu"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Armenian word 'Ավելացնել' (Avelatsnel) is correctly spelled and means 'Add'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The Armenian word 'թույլատրված' (tuylatrvadz) is correctly spelled and means 'allowed'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The Armenian word 'IP' is correctly used.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The Armenian word 'հասցե' (hasce) is correctly spelled and means 'address'.",
+          "suggestion": null
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, a more natural phrasing in Armenian might be 'Добавить разрешенный IP-адрес' or 'Ավելացնել IP հասցեի թույլտվություն' (Avelatsnel IP hasceei tuylt’vut'yun).  The current translation, while understandable, sounds slightly literal.",
+          "suggestion": "Consider using 'Ավելացնել IP հասցեի թույլտվություն' or a similar more idiomatic phrase."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Pievienot atļauto interneta protokola (IP) adresi' is overly literal and technical. 'Interneta protokola' is unnecessarily detailed. A more natural and user-friendly translation would avoid this technical jargon.",
+          "suggestion": "Pievienot atļauto IP adresi"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the inclusion of the acronym '(IP)' after 'interneta protokola' disrupts the flow and reads awkwardly. Unless it's absolutely necessary for clarity within the specific UI context, it should be omitted.",
+          "suggestion": "Remove the acronym (IP)."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ඉඩදෙන අ.ජා.කෙ. (IP) ලිපින යොදන්න\" is not the most natural or clear way to say \"Add allowed IP address\" in Sinhala. The abbreviation අ.ජා.කෙ. (A.J.A.Ke.) is not commonly understood and feels overly technical for a settings menu. 'අ.ජා.කෙ.' stands for 'ඉන්ටර්නෙට් ප්‍රොටෝකොල්'.",
+          "suggestion": "Consider a more user-friendly translation like \"ඉඩ ලබාගත් IP ලිපිනය එක් කරන්න\" or \"අනුමැත IP ලිපිනය එක් කරන්න\"."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of abbreviation (අ.ජා.කෙ.) within the phrase might disrupt the readability for users who are not familiar with the full term.",
+          "suggestion": "Avoid abbreviations unless absolutely necessary for brevity and clarity. If the full term is crucial, consider providing a tooltip or explanation on a separate help screen."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

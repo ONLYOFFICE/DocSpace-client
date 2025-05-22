@@ -1,0 +1,238 @@
+{
+  "key_path": "DontShowAgain",
+  "content": "Don't show again",
+  "content_en_sha1_hash": "d9afd5ec9a8d44ccb7cfd4b31bdf9df2fd16916d",
+  "created_at": "2025-05-19T21:30:44.626Z",
+  "updated_at": "2025-05-22T11:56:37.355Z",
+  "comment": {
+    "text": "This translation key is used to display the text \"Don't show again\" which is a label on a checkbox in a dialog box, indicating that the user has chosen not to be prompted about this option again. The text appears on a button and checkbox within a modal dialog component in a PDF form creation interface.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:37.884Z"
+  },
+  "usage": [
+    {
+      "file_path": "\\packages\\client\\src\\components\\dialogs\\CreatedPDFFormDialog\\CreatedPDFFormDialog.tsx",
+      "line_number": 95,
+      "context": "{theme.isBase ? <HeaderIcon /> : <HeaderDarkIcon />}\n <span>{description}</span>\n <Checkbox\n className=\"created-pdf__checkbox\"\n onChange={handleChangeCheckbox}\n label={t(\"Common:DontShowAgain\")}\n />\n </Wrapper>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "module": "\\packages\\client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Bir daha göstərməyin\" is a rather formal and direct translation. A more natural and user-friendly translation would be something like \"Xilas et\" or \"Daha göstərmə\" which convey the intended meaning in a more conversational tone.",
+          "suggestion": "Consider alternatives like \"Xilas et\" or \"Daha göstərmə\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"再表示しない\" (saishouhi shinai) is a valid Japanese phrase, it literally translates to \"do not show again\" or \"do not display again.\" It's not as natural a translation of \"Don't show again\" as other options. A more natural translation would be \"もう表示しない\" (mou saishou shinai) or \"非表示にする\" (hishou ni suru).",
+          "suggestion": "Consider using \"もう表示しない\" (mou saishou shinai) or \"非表示にする\" (hishou ni suru) for a more natural feel."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'නැවත පෙන්වන්න එපා' while technically conveying 'Don't show again,' isn't the most natural or common phrasing in Sinhala for this context. A more idiomatic translation would be something like 'ඉවසන්න එපා' (iwāsanna epā) meaning 'Don't bother' or 'Leave it'. The current translation is quite literal.",
+          "suggestion": "Consider 'ඉවසන්න එපා' (iwāsanna epā) or a similar phrasing that feels more natural in Sinhala for this type of user interface text."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Nezobrazovať znova' is not the most natural Slovak translation for 'Don't show again.' A more common and idiomatic phrasing would be 'Neukazovať znova' or 'Zrušiť upozornenie'.",
+          "suggestion": "Neukazovať znova"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Не приказуј поново\" is a literal translation but doesn't convey the intended meaning of \"Don't show again\" in a natural way for user interface elements. It sounds somewhat formal and unusual in this context.",
+          "suggestion": "A more natural and common translation for a button or option that dismisses a notification or pop-up would be \"Не понови\" or \"Не приказуј више\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

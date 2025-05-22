@@ -260,7 +260,7 @@
   "FilesWillAppearHere": "Les fichiers et dossiers ajoutés à la salle apparaissent ici.",
   "FileWillBeDeletedPermanently": "Le fichier sera supprimé définitivement {{date}}",
   "FileWillBeMovedToTrash": "Le fichier sera déplacé dans la corbeille {{date}}",
-  "FillFormButton": "Remplissez le formulaire",
+  "FillFormButton": "Remplir le formulaire",
   "FillingFormRooms": "Salles de remplissages de formulaires",
   "FillingStatus": "Statut de remplissage",
   "FillingStatusBarDescription": "Dans ce panneau, vous pouvez suivre le remplissage du formulaire auquel vous participez ou pour lequel vous êtes l'organisateur du remplissage",
@@ -331,7 +331,7 @@
   "InviteAsGuest": "inviter en tant qu'invité",
   "InviteContacts": "Inviter des contacts",
   "Invited": "Invité",
-  "Inviter": "Inviter",
+  "Inviter": "Invitant",
   "ItemsSuccessfullyUploaded": "Éléments téléchargés : {{count}}",
   "Kilobyte": "Ko",
   "Label": "Nom",
@@ -702,7 +702,7 @@
   "View": "Afficher",
   "ViewOnly": "lecture seule",
   "ViewOnlyRooms": "Lecture seule",
-  "VirtualDataRoom": "Salles de données virtuelle",
+  "VirtualDataRoom": "Salle de données virtuelle",
   "VirtualDataRoomDescription": "Utilisez une salle de données virtuelle pour une sécurité et une transparence avancées des fichiers. Définissez des filigranes, indexez et suivez automatiquement tout le contenu, limitez le téléchargement et la copie.",
   "WantToContinue": "Voulez-vous vraiment continuer?",
   "Warning": "Attention",
@@ -714,5 +714,8 @@
   "Yes": "Oui",
   "Yesterday": "Hier",
   "You": "Vous",
-  "YourTurn": "Votre tour"
+  "YourTurn": "Votre tour",
+  "BlockFile": "Bloquer",
+  "MobileStartFillingPdfNotAvailableInfo": "Action non prise en charge. Veuillez passer en mode bureau pour remplir les formulaires PDF.\n",
+  "UnblockFile": "Débloquer"
 }

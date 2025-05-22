@@ -13,5 +13,6 @@
   "LinkCopySuccess": "Link is gekopieerd",
   "SendInvitation": "Stuur uitnodiging",
   "UserMaxAvailableRoleWarning": "Gasten en Gebruikers kunnen niet worden toegewezen als Kamerbeheerders. Alleen Kamer en {{productName}} beheerders kunnen de opgegeven rol vervullen.",
-  "UsersAlreadyAdded": "Sommige gebruikers zijn al toegevoegd"
+  "UsersAlreadyAdded": "Sommige gebruikers zijn al toegevoegd",
+  "UsersCannotBeAdded": "Uitgeschakelde contacten kunnen niet aan een kamer worden toegevoegd."
 }

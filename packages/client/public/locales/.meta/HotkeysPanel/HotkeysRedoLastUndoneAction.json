@@ -1,0 +1,356 @@
+{
+  "key_path": "HotkeysRedoLastUndoneAction",
+  "content": "Redo the last undone action",
+  "content_en_sha1_hash": "58482ac07336f2f8bcecfd37e693e26f63436630",
+  "created_at": "2025-05-19T21:30:55.076Z",
+  "updated_at": "2025-05-21T10:27:08.585Z",
+  "comment": {
+    "text": "The translation key \"HotkeysRedoLastUndoneAction\" is used to display the text \"Redo the last undone action\" in a user interface. This text appears as a label on hotkey buttons, providing context for users who want to repeat their most recent undone action using the Ctrl+Shift+z shortcut.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:30.955Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/HotkeysPanel/ActionsBlock.js",
+      "line_number": 54,
+      "context": "<Text {...keyTextStyles}>{CtrlKey}+z</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysRedoLastUndoneAction\")}</Text>\n <Text {...keyTextStyles}>{CtrlKey}+Shift+z</Text>\n </>\n </Row> */}\n <Row className=\"hotkeys_row\">\n <>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'أعد آخر إجراء تم التراجع عنه' literally translates to 'Redo the last undone action,' which is slightly awkward in Arabic. A more natural phrasing would be 'تكرار آخر عملية تم عكسها' or 'إعادة آخر إجراء معاكس'.",
+          "suggestion": "تكرار آخر عملية تم عكسها"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sonuncu yerinə yetirilməyən hərəkəti təkrarlayın' is a very literal and slightly awkward translation of 'Redo the last undone action.' A more natural phrasing would be more akin to 'Son geri əldə etməyinizə baxılmağa geri dönün' or 'Son geri alınmış hərəkəti təkrar edin'.",
+          "suggestion": "Son geri alınmış hərəkəti təkrar edin"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Повторете последното неизвършено действие\" is a literal translation but doesn't quite convey the intended meaning of 'redo'. 'Неизвършено действие' refers to an undone action, but 'redo' implies reverting a previous undo. A more accurate translation would be closer to 'Върнете последното отменено действие'.",
+          "suggestion": "Върнете последното отменено действие"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Wiederholen\" is too short and doesn't accurately convey the meaning of \"Redo the last undone action\". \"Wiederholen\" simply means \"repeat\". It doesn't specify that the action is a previously undone one.",
+          "suggestion": "A more accurate translation would be something like \"Die letzte rückgängig gemachte Aktion wiederherstellen\" or \"Letzte Rückgängigmachung wiederholen\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Επαναλάβετε την τελευταία ενέργεια που αναιρέθηκε' is a literal translation that sounds unnatural in Greek. A more idiomatic translation would be 'Ξανακάνετε την τελευταία ακυρωμένη ενέργεια' or 'Επαναφέρετε την τελευταία ακυρωμένη ενέργεια'.",
+          "suggestion": "Ξανακάνετε την τελευταία ακυρωμένη ενέργεια"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Tee edellinen kumottu toiminto uudelleen\" is not the most natural or accurate translation of \"Redo the last undone action\". 'Kumottu' implies something has already been undone. A more accurate translation would focus on redoing a previously undone action.",
+          "suggestion": "Tee viimeisin kumottu toiminto uudelleen"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Tee viimeisin kumottu toiminto uudelleen' is better, it's still a bit verbose.  A more concise and natural option exists.",
+          "suggestion": "Kumoa edellinen toiminto"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Redo the last undone action\" is best translated as \"Annuler la dernière action annulée\" or \"Refaire la dernière action annulée\" depending on the desired nuance. \"Refaire la dernière action non effectuée\" is not a natural phrasing in French. \"Non effectuée\" sounds awkward and is not commonly used in this context.",
+          "suggestion": "Refaire la dernière action annulée"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Վերարկել վերջին չեղարկված գործողությունը\" is not the most natural or accurate translation of 'Redo the last undone action'. While technically correct, it sounds somewhat clunky in Armenian. 'Վերականգնել վերջին չեղարկված գործողությունը' or 'Վերականգնել վերջին չեղծված գործողությունը' would be more idiomatic.",
+          "suggestion": "Վերականգնել վերջին չեղարկված գործողությունը"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Redo the last undone action' implies reverting the last action that was undone. The Italian 'Ripetere l'ultima azione annullata' translates more literally to 'Repeat the last canceled action,' which isn't quite the same. A more accurate translation would better reflect the 'redo' function.",
+          "suggestion": "Rifare l'ultima azione annullata"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '元に戻したアクションをやり直す' literally translates to \"Redo the action that was undone\". While understandable, it's slightly awkward and doesn't directly convey the meaning of \"redo the last undone action\" as clearly as possible.  A more natural phrasing would emphasize 'the last' action.",
+          "suggestion": "元に戻した最後の操作をやり直す"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '마지막으로 실행 취소한 작업 다시 실행' is a literal translation but doesn't quite capture the nuance of 'Redo'. 'Redo' implies reverting an 'undo' action, and the current translation describes the action rather than conveying that concept.",
+          "suggestion": "Consider a phrasing like '이전 실행 취소 되돌리기' (Ieon silhaeng chukiso deoligi) or '실행 취소 되돌리기' (Silhaeng chukiso deoligi) which more accurately represent 'Redo the last undone action'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ເຮັດຄືນການກະທຳທີ່ບໍ່ໄດ້ເຮັດຄັ້ງສຸດທ້າຍ' is a literal translation and doesn't quite capture the meaning of 'Redo the last undone action'. It's a bit verbose and awkward in Lao. A more natural phrasing would be closer to 'ເຮັດຄືນການກະທຳທີ່ຖືກຍົກເລີກຄັ້ງສຸດທ້າຍ' or 'ເຮັດຄືນການກະທຳທີ່ຖືກຍົກເລີກ'.",
+          "suggestion": "ເຮັດຄືນການກະທຳທີ່ຖືກຍົກເລີກຄັ້ງສຸດທ້າຍ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Refazer a última ação anulada' is not the most natural or precise way to express \"Redo the last undone action.\"  'Anulada' directly translates to 'cancelled' or 'voided', which isn't the intended meaning.  'Redo' implies reversing a previous 'undo'.",
+          "suggestion": "Refazer a última ação desfeita"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Refazer a última ação desfeita\" is understandable, it's a slightly awkward phrasing. A more natural translation would be \"Refazer a última ação desfeita\" or \"Refazer a última ação desfeita\". The original English uses \"undone\" which accurately reflects the concept of reversing an undo action.",
+          "suggestion": "Refazer a última ação desfeita"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Reface ultima acțiune care a fost anulată' doesn't accurately convey the meaning of 'Redo the last undone action'. 'Reface' generally means 'to remake' or 'to redo something entirely'. 'Redo' implies reverting a previous undo operation.",
+          "suggestion": "An improved translation could be 'Reîntoarce ultima acțiune anulată' or 'Anulează ultima anulare'."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically understandable, the phrase 'care a fost anulată' is a bit verbose. It can be simplified.",
+          "suggestion": "Consider removing 'care a fost anulată' and using a more concise phrasing."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ආපසු හැරවීම තිබුණු පරිදි තබන්න\" doesn't accurately convey the meaning of \"Redo the last undone action.\" It translates closer to \"Put it as it was after reverting.\" The English phrase refers to redoing an action that was previously undone.",
+          "suggestion": "A more accurate translation would be something like \"පසු පූර්ව ක්‍රියාව නැවත කරන්න\" (pasu purava kriyawa naewatha kanna) which translates to 'Repeat the previous action' or “අවසන් ක්‍රියාව නැවත කරන්න” (awasana kriyawa naewatha kanna) - 'Repeat the last action'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Znova vykonať poslednú vrátenú akciu' doesn't directly convey the meaning of 'Redo the last undone action'. 'Vrátenú akciu' implies an action that was reverted, while 'redo' typically means to reverse an undo.",
+          "suggestion": "Zopakovať poslednú zrušenú akciu"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Ponovi zadnje razveljavljeno dejanje\" is understandable, a more natural and accurate translation of \"Redo the last undone action\" would be \"Ponovi zadnjo neopravljeno dejanje\" or \"Ponovi zadnjo storno dejanje\". \"Razveljavljeno dejanje\" refers to an action that has been undone, and 'redo' implies reversing the undo action, which isn't directly captured by 'razveljavljeno'.",
+          "suggestion": "Ponovi zadnjo neopravljeno dejanje"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Понови последњу поништену радњу' is a literal translation but could be more natural. 'Redo' implies reversing an undo action, but 'Понови' simply means 'Repeat'.",
+          "suggestion": "Поврати последњу поништену радњу"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ponovi poslednju poništenu radnju' is not the most natural or precise translation of 'Redo the last undone action'. While understandable, it's a bit clunky.",
+          "suggestion": "Ponovi poslednju poništenu akciju"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Geri alınan son eylemi yeniden yap' doesn't perfectly capture the meaning of 'Redo the last undone action'. While 'Geri alınan' means 'undone' or 'retracted', 'yeniden yap' is a bit too literal. 'Redo' implies reversing a previous action.",
+          "suggestion": "Geri alınan son işlemi geri al"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Thực hiện lại hành động cuối cùng\" is a literal translation but doesn't fully capture the nuance of 'redo the last undone action'. It's accurate but could be improved for clarity and natural flow in Vietnamese, especially within a UI context.",
+          "suggestion": "Consider \"Hoàn tác lần cuối\" or \"Làm lại hành động đã hoàn tác\" for a more natural-sounding translation. Alternatively, \"Redo hành động vừa hoàn tác\" is also acceptable, borrowing the English term for consistency."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '重做上次撤销的行动' is a bit awkward and not the most natural way to express \"Redo the last undone action.\" The phrasing '撤销的行动' (undone action) is overly literal and less common.",
+          "suggestion": "重做上一步操作"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

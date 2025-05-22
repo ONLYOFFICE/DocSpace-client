@@ -714,5 +714,8 @@
   "Yes": "はい",
   "Yesterday": "昨日",
   "You": "あなた",
-  "YourTurn": "あなたの番です"
+  "YourTurn": "あなたの番です",
+  "BlockFile": "ブロック",
+  "MobileStartFillingPdfNotAvailableInfo": "サポートされていない操作です。PDFフォームに記入するには、デスクトップモードに切り替えてください。",
+  "UnblockFile": "ブロック解除"
 }

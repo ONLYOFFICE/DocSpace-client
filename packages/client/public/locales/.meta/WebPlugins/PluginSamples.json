@@ -1,0 +1,249 @@
+{
+  "key_path": "PluginSamples",
+  "content": "Plugin samples",
+  "content_en_sha1_hash": "52548adb731eeeda86b2df3c051c254dd28ffc5b",
+  "created_at": "2025-05-19T21:30:49.918Z",
+  "updated_at": "2025-05-21T00:42:09.465Z",
+  "comment": {
+    "text": "This translation key is used to display \"Plugin samples\" as a heading in the developer tools section of the Portal Settings page. It appears as a bold title above a list of plugin SDK-related content when the user clicks on a link or navigates to this page.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:41.117Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/PluginSDK/index.js",
+      "line_number": 152,
+      "context": "onClick={() => window.open(apiPluginSDKLink, \"_blank\")}\n />\n {!isEmptyList && list.length > 0 ? (\n <>\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"PluginSamples\")}\n </Text>\n <div className=\"plugin-list\">{list}</div>\n </>\n ) : null}\n </StyledContainer>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'عينات الاضافات' while understandable, isn't the most natural or precise translation of \"Plugin samples\". 'عينات' (ayyinat) means 'samples', but 'الاضافات' (al-idaafaat) translates to 'the additions' which is close but not exactly 'plugins'. A more accurate translation might use a term that specifically refers to plugins.",
+          "suggestion": "Consider using 'نماذج الإضافات' (namazij al-idaafaat) which translates to 'Plugin Models/Examples' or 'عينات المكونات الإضافية' (ayyinat al-mukawwinat al-idaafiyya) - 'Samples of Additional Components'."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "Missing period at the end of the sentence.",
+          "suggestion": "Ejemplos de plugins."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Laajennusmallit' is a possible translation, 'Plugin samples' generally refers to example plugins, not just extensions/add-ons in general. A more accurate translation could consider the context of 'samples' as example implementations.",
+          "suggestion": "Esimerkkilaajennukset"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Exemple de plugin-uri' is understandable, a more natural and accurate translation of 'Plugin samples' would be 'Mostre de plugin-uri' or 'Plugin-uri de exemplu'. 'Exemple' refers to examples in a broader sense, while 'samples' implies a representative selection.",
+          "suggestion": "Mostre de plugin-uri"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ආදර්ශ පේනු' doesn't accurately convey the meaning of 'Plugin samples'. 'ආදර්ශ' means 'model' or 'example,' and 'පේනු' is a less common word for 'plugins'. A more accurate translation would focus on conveying 'examples' or 'sample' plugins, potentially using a phrasing closer to 'ප්ලගින් උදාහරණ' or 'ප්ලගින් నమూనా'.",
+          "suggestion": "ප්ලගින් උදාහරණ"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'පේනු' isn't strictly incorrect, it's not the most common or preferred word for 'plugins' in Sinhala in this context. It can be perceived as slightly unnatural.",
+          "suggestion": "ප්ලගින්"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Узорци додатака\" is understandable, a more accurate and idiomatic translation of \"Plugin samples\" would be \"Примери додатка/а\". \"Узорци\" implies patterns or designs, which isn't the intended meaning.",
+          "suggestion": "Примери додатка/а"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

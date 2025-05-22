@@ -466,7 +466,7 @@
   "People": "Људи",
   "Permissions": "Дозволе",
   "PerUserMonth": "<1>{{currencySymbol}}</1><1> {{price}}</1> по администратору/месец",
-  "PerUserYear": "<1>{{currencySymbol}}</1><1>{{ price }}</1> по администратору/годишње",
+  "PerUserYear": "<1>{{currencySymbol}}</1><1>{{price}}</1> по администратору/годишње",
   "Petabyte": "ПБ",
   "Phone": "Телефон",
   "PluginDisabled": "Додатак је онемогућен",
@@ -714,5 +714,8 @@
   "Yes": "Да",
   "Yesterday": "Јуче",
   "You": "Ви",
-  "YourTurn": "Ваш ред"
+  "YourTurn": "Ваш ред",
+  "MobileStartFillingPdfNotAvailableInfo": "Неподржана радња. Молимо пређите на десктоп режим како бисте попунили PDF обрасце.",
+  "BlockFile": "Блокирај",
+  "UnblockFile": "Одблокирај"
 }

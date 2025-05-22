@@ -1,0 +1,238 @@
+{
+  "key_path": "FolderRenamed",
+  "content": "Folder renamed.",
+  "content_en_sha1_hash": "106f93b1f9c254b0d77c693dcc0bb3343f16fc1b",
+  "created_at": "2025-05-19T21:30:54.858Z",
+  "updated_at": "2025-05-22T11:56:37.588Z",
+  "comment": {
+    "text": "The translation key \"FolderRenamed\" is used to display a message indicating that a folder has been renamed. It appears in the UI when a user navigates to a folder's history or view, providing context for users who may need to locate a previously named folder.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:58.222Z"
+  },
+  "usage": [
+    {
+      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\History\\useFeedTranslation.tsx",
+      "line_number": 107,
+      "context": "case \"FolderIndexReordered\":\n return t(\"InfoPanel:FolderIndexReordered\");\n case \"FolderCreated\":\n return t(\"InfoPanel:FolderCreated\");\n case \"FolderRenamed\":\n return t(\"InfoPanel:FolderRenamed\");\n case \"FolderMoved\":\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderMovedCount\", {\n count,\n });",
+      "module": "\\packages\\client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Folder renamed' implies a single folder. The Czech translation 'Složky přejmenovány' translates to 'Folders renamed' (plural). This is a potential mismatch in the scope of the message.",
+          "suggestion": "Consider translating to 'Složka přejmenována' to match the singular English content, if the context always refers to a single folder."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Lao word 'ຖືກ' (thuk) is correctly used, but the use of 'ປ່ຽນຊື່' (pian suu) is a more common and natural way to say 'renamed' in Lao. While technically correct, 'ຖືກປ່ຽນຊື່' implies something *was done to* the folder, rather than the folder being actively renamed.",
+          "suggestion": "Consider 'ໂຟນເດີປ່ຽນຊື່.' (Folder renamed.) This more directly translates the meaning."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Map hernoemd\" is understandable, a more natural and accurate translation of \"Folder renamed\" in Dutch would be \"Map hernoemd\" or \"Folder hernoemd\". Using the English word 'Folder' isn't incorrect, and maintains clarity for users familiar with English terminology.",
+          "suggestion": "Map hernoemd"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Nazwa katalogu została zmieniona.' is a literal translation but sounds slightly unnatural in Polish. A more common and idiomatic phrasing would be 'Katalog został przemianowany.'",
+          "suggestion": "Katalog został przemianowany."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ෆෝල්ඩරය නැවත නම් කරන ලදී.' is a literal translation of 'renamed'. A more natural Sinhala phrasing would be something like 'ෆෝල්ඩරය పేరు बदल' (Folder-a pena badu).",
+          "suggestion": "ෆෝල්ඩරය పేరు बदल"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

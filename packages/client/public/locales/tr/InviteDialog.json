@@ -13,5 +13,6 @@
   "LinkCopySuccess": "Bağlantı kopyalandı",
   "SendInvitation": "Davetiye gönder",
   "UserMaxAvailableRoleWarning": "Konuklar ve Kullanıcılar Oda yöneticisi olarak atanamaz. Belirtilen rol için yalnızca Oda ve {{productName}} yöneticileri uygundur.",
-  "UsersAlreadyAdded": "Bazı kullanıcılar zaten eklenmiş"
+  "UsersAlreadyAdded": "Bazı kullanıcılar zaten eklenmiş",
+  "UsersCannotBeAdded": "Devre dışı bırakılmış kişiler bir odaya eklenemez."
 }

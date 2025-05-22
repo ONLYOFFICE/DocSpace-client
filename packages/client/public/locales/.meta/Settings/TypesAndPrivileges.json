@@ -1,0 +1,552 @@
+{
+  "key_path": "TypesAndPrivileges",
+  "content": "<1>Admin account types and their privileges</1> <br> <br> <2>{{productName}} admin</2> <br> {{productName}} configuration, room creation and administration, ability to invite and manage users in {{productName}} and in virtual rooms, ability to manage access rights. <br> <br> <3>Room admin</3> <br> Room administration and archiving, user invitation and management. Several admins can be assigned to a room. <br> <br> <4>User</4> <br> Users can create and edit files in the room, but can't create rooms, manage users, or access settings.",
+  "content_en_sha1_hash": "a5f8e3f05414f4551551d409b8f3a24e8f1a73bc",
+  "created_at": "2025-05-19T21:30:53.036Z",
+  "updated_at": "2025-05-21T02:37:26.472Z",
+  "comment": {
+    "text": "This translation key is used for a tooltip that describes user roles and their corresponding privileges in a workspace configuration. It appears as a tooltip on a settings page, providing an overview of available roles (Admin, Room Admin, User) and their respective access rights.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:13.656Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
+      "line_number": 98,
+      "context": "place=\"bottom\"\n offsetRight={0}\n tooltipContent={\n <Text>\n <Trans\n i18nKey=\"TypesAndPrivileges\"\n ns=\"Settings\"\n t={t}\n values={{ productName: t(\"Common:ProductName\") }}\n components={{\n 1: <b />,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
+      "line_number": 106,
+      "context": "place=\"bottom\"\n offsetRight={0}\n tooltipContent={\n <Text>\n <Trans\n i18nKey=\"TypesAndPrivileges\"\n ns=\"Settings\"\n t={t}\n values={{ productName: t(\"Common:ProductName\") }}\n components={{\n 1: <b />,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
+      "line_number": 98,
+      "context": "place=\"bottom\"\n offsetRight={0}\n tooltipContent={\n <Text>\n <Trans\n i18nKey=\"TypesAndPrivileges\"\n ns=\"Settings\"\n t={t}\n values={{ productName: t(\"Common:ProductName\") }}\n components={{\n 1: <b />,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ability to invite and manage users' is translated as 'dəvət etmək imkanı {{productName}} və virtual otaqlarda istifadəçiləri və giriş hüquqlarını idarə etmək imkanı'. This is a bit convoluted. A more direct translation would improve readability.",
+          "suggestion": "dəvət etmək və istifadəçiləri idarə etmək imkanı"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'menecer' is used for 'admin'. While understandable, 'administrator' would be more formal and accurate.",
+          "suggestion": "administrator"
+        },
+        {
+          "type": "formatting",
+          "description": "Inconsistent use of capitalization after `<br>` tags.  'Otağın' should start with a lowercase letter.",
+          "suggestion": "otağın"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'access settings' is translated as 'parametrlərə daxil ola bilməzlər'. While understandable, 'parametrələrə giriş' would be more direct and clearer.",
+          "suggestion": "parametrələrə giriş"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"vitruálních\" should be \"virtuálních\".",
+          "suggestion": "virtuálních"
+        },
+        {
+          "type": "formatting",
+          "description": "The Czech translation maintains the <1>, <2>, <3>, and <4> tags. While not inherently wrong, maintaining the original English tags might confuse some users or tools.",
+          "suggestion": "Consider removing or changing these tags to something more contextually relevant for the Czech language (e.g., numbering or different HTML tags)."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word \"User\" is translated as \"ισχύος\" in Greek. This is incorrect. \"User\" should be translated to something along the lines of \"Χρήστης\".",
+          "suggestion": "Replace \"ισχύος\" with \"Χρήστης\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'User' is translated as 'Avanzado' in Spanish. 'Avanzado' means 'Advanced' and doesn't accurately reflect the English meaning of a standard user account.",
+          "suggestion": "Consider using 'Usuario' or 'Miembro' instead of 'Avanzado'. 'Usuario' is a direct translation of 'User' and 'Miembro' implies a room member."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Admin account types and their privileges\" is translated as \"Järjestelmänvalvojatilityypit ja niiden edut\". While understandable, a more direct translation of 'privileges' would be 'oikeudet', which is already used later in the text. Using it consistently improves clarity.",
+          "suggestion": "Järjestelmänvalvojatilit tyypit ja niiden oikeudet"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The repeated use of 'oikeus' (right) for 'ability' feels slightly unnatural. While technically correct, it could be rephrased for smoother reading.",
+          "suggestion": "Järjestelmänvalvoja voi konfiguroida {{productName}}, luoda ja hallita huoneita, kutsua ja hallita käyttäjiä {{productName}}-ssa ja virtuaalisissa huoneissa, ja hallita käyttöoikeuksia."
+        },
+        {
+          "type": "formatting",
+          "description": "There's an unnecessary space before the period in the sentence \"{{productName}} kokoonpano, huoneiden luonti ja hallinto, oikeus kutsua ja hallita käyttäjiä {{productName}}-ssa ja virtuaalisissa huoneissa, oikeus hallita oikeuksia. .\"",
+          "suggestion": "Remove the extra space before the period."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The sentence \"Käyttäjä voivat luoda ja muokata huoneen tiedostoja, mutta eivät voi luoda tiedostoja, hallita käyttäjiä tai asetuksia.\" uses the plural 'voivat' where 'voi' (singular) should likely be used to match 'käyttäjä' (user), as it refers to what a single user *can* do. It’s likely that individual user actions are described here.",
+          "suggestion": "Käyttäjä voi luoda ja muokata huoneen tiedostoja, mutta ei voi luoda huoneita, hallita käyttäjiä tai asetuksia."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'User' is translated as 'Avancé' which doesn't accurately reflect the meaning of a standard user account. 'Utilisateur' would be a more appropriate translation.",
+          "suggestion": "Change 'Avancé' to 'Utilisateur'"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Il es possible' should be 'Il est possible'.",
+          "suggestion": "Change 'Il es possible' to 'Il est possible'"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'Avancés' in the last paragraph should be 'Utilisateurs' to maintain consistency with the previous translation of 'User'.",
+          "suggestion": "Change 'Avancés' to 'Utilisateurs'"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'օգտատեր' is a less common and potentially less clear term for 'user'. 'Օգտագործող' is a more standard and widely understood term.",
+          "suggestion": "Replace 'օգտատեր' with 'օգտագործող'."
+        },
+        {
+          "type": "grammar",
+          "description": "In the Armenian translation of 'Users can create and edit files in the room...', the phrase 'Օգտատերերը կարող են սենյակում ստեղծել և խմբագրել ֆայլեր...' could be slightly improved for flow. The inclusion of 'կարող են' after 'Օգտատերերը' is repetitive and can be removed.",
+          "suggestion": "Օգտատերերը կարող են սենյակում ստեղծել և խմբագրել ֆայլեր:"
+        },
+        {
+          "type": "grammar",
+          "description": "In the Armenian translation of 'Users can create and edit files in the room, but can't create rooms, manage users, or access settings', the wording 'չեն կարող մուտք գործել կարգավորումներ' is somewhat clunky. It could be more naturally expressed.",
+          "suggestion": "չեն կարող մուտք գործել կարգավորումներին"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'User' is translated as 'Esperto'. While 'Esperto' can mean expert, in this context 'User' refers to a regular user with limited permissions, not an expert. A more appropriate translation might be 'Utente'.",
+          "suggestion": "Change 'Esperto' to 'Utente'."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation maintains the <br> <br> tags, which is fine, but consider if a more natural flow could be achieved without them for readability in the final UI.",
+          "suggestion": "Review the use of <br> <br> tags for better readability in the UI."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The line breaks after each heading (<1>, <2>, <3>, <4>) are preserved in the Lao translation, which is consistent with the English content. No change needed.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ເອກະສານ' (ekasarn) is used consistently for 'files' and 'documents'. It's a reasonable translation, but consider if a more specific term for 'files' might be beneficial depending on the context.",
+          "suggestion": null
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ຄວາມສາມາດໃນການເຊື້ອເຊີນ ແລະຈັດການຜູ້ໃຊ້ໃນ {{productName}} ແລະໃນຫ້ອງດິຈິຕອນ' could be rephrased for better flow and clarity. 'ຫ້ອງດິຈິຕອນ' (digital room) is correct, but the sentence could be restructured.  Consider 'ຄວາມສາມາດໃນການເຊື້ອເຊີນ ແລະຈັດການຜູ້ໃຊ້ໃນ {{productName}} ແລະໃນຫ້ອງຂອງຕົນ' (ability to invite and manage users in {{productName}} and in their own rooms).",
+          "suggestion": "ຄວາມສາມາດໃນການເຊື້ອເຊີນ ແລະຈັດການຜູ້ໃຊ້ໃນ {{productName}} ແລະໃນຫ້ອງຂອງຕົນ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ຄວາມສາມາດໃນການຈັດການສິດການເຂົ້າໃຊ້' could be more accurately translated to 'ຄວາມສາມາດໃນການຈັດການສິດລະການເຂົ້າໃຊ້' (ability to manage access rights).",
+          "suggestion": "ຄວາມສາມາດໃນການຈັດການສິດລະການເຂົ້າໃຊ້"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "Line break issue in the second paragraph. The original English has <br> <br> and the Latvian translation has >.",
+          "suggestion": "Correct the line break to match the English version: <br> <br>"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Dutch translation uses \"Kamerbeheer\" for \"Room admin\" which isn't a direct translation. It's more descriptive, but loses the direct correlation with the English title.",
+          "suggestion": "Consider using \"Kamersbeheer\" to more closely align with the original English."
+        },
+        {
+          "type": "spelling",
+          "description": "In the fourth paragraph, \"openen\" (open) should probably be \"toegang krijgen tot\" (access) for 'access settings'.",
+          "suggestion": "Users kunnen bestanden aanmaken en bewerken in de kamer, maar kunnen geen kamers aanmaken, gebruikers beheren of toegang krijgen tot instellingen."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'ability to manage access rights' is not fully captured in the Polish translation. The Polish text emphasizes managing 'rights', but the broader concept of 'access rights' might be lost.",
+          "suggestion": "Consider rephrasing the Polish text to explicitly mention 'prawa dostępu' to reflect the original meaning more accurately. For example: 'możliwość zarządzania prawami dostępu i uprawnieniami.'"
+        },
+        {
+          "type": "formatting",
+          "description": "The final sentence in the User description has an abrupt ending. The phrase 'Nie ma również dostępu do ustawień' seems cut off.",
+          "suggestion": "Add a connecting phrase to make the sentence flow better, such as 'Nie ma również dostępu do ustawień systemu' or 'Nie ma dostępu do ustawień.'"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'Users can create and edit files in the room, but can't create rooms, manage users, or access settings' is slightly altered in the Polish. The sentence 'Nie może tworzyć pokoi oraz zarządzać użytkownikami' removes the 'or access settings' portion. This changes the meaning.",
+          "suggestion": "Add 'or access settings' to the Polish translation. For example: 'Nie może tworzyć pokoi oraz zarządzać użytkownikami ani uzyskiwać dostępu do ustawień.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'User' is translated as 'Avançados' in Portuguese. 'Avançados' means 'advanced users' which doesn't accurately reflect the intended meaning of a standard user with limited privileges. A more suitable translation would be 'Utilizadores' or 'Participantes'.",
+          "suggestion": "Utilizadores"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "In the second paragraph, 'in virtual salas' should be 'em salas virtuais'.",
+          "suggestion": "em salas virtuais"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content uses 'Admin account types and their privileges' while the Portuguese translation uses 'Tipos de conta de administrador e seus privilégios'. While not strictly incorrect, 'Tipos de contas de administrador e seus privilégios' would be more natural and accurate.",
+          "suggestion": "Tipos de contas de administrador e seus privilégios"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'in virtual rooms' is translated as 'in vitrual salas'. It's a misspelling.",
+          "suggestion": "em salas virtuais"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'User' is translated as 'Avançados'. This is an incorrect translation. 'User' refers to a standard user account, whereas 'Avançados' implies advanced users or power users.",
+          "suggestion": "Usuário"
+        },
+        {
+          "type": "spelling",
+          "description": "The translation contains a misspelling: 'vitrual' should be 'virtual'.",
+          "suggestion": "virtual"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Romanian translation maintains the <1>, <2>, <3>, and <4> tags from the English content. These tags are not necessary and should be removed for clean output.",
+          "suggestion": "Remove the <1>, <2>, <3>, and <4> tags from the Romanian translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'වර්ග' in the first line, while technically correct, could be replaced with a more natural sounding alternative depending on the intended meaning.  'වර්ග' implies categories or types, but 'භූමික' (bhoomika) or 'භාවයන්' (bhavaayan) might be more suitable depending on whether it refers to roles or characteristics.",
+          "suggestion": "පරිපාලක ගණක භූමික/භාවයන්"
+        },
+        {
+          "type": "grammar",
+          "description": "In the second line, the phrase '{{productName}} පරිපාලක' sounds slightly awkward. The adjective order is unusual in Sinhala. It would flow better if structured differently.",
+          "suggestion": "{{productName}} පරිපාලකයා"
+        },
+        {
+          "type": "grammar",
+          "description": "In the second line, the sentence “{{productName}} වින්‍යාසය, කාමර නිර්මාණය සහ පරිපාලනය...” is a bit long and could be broken down for better readability in Sinhala. It's a string of nouns without proper connecting words.",
+          "suggestion": "{{productName}} වින්‍යාසය කිරීම, කාමර නිර්මාණය සහ පරිපාලනය කිරීම..."
+        },
+        {
+          "type": "formatting",
+          "description": "The line breaks between the descriptions are inconsistent and could be more uniform. While the `<br>` tags preserve the line breaks, the overall visual flow could be improved with more consistent spacing.",
+          "suggestion": "Review and standardize spacing between descriptions for improved readability."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The original English uses `<br><br>` to separate sections. The Slovenian translation also uses `<br><br>`, which is consistent but could be evaluated for more modern formatting approaches depending on the target platform.",
+          "suggestion": "Consider alternative formatting options like paragraphs or more subtle spacing, if appropriate for the intended display environment."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“Privileges” in the original English is translated as “privilegiji”. While technically correct, a more natural and commonly used term in Slovenian might be “pooblastila”.",
+          "suggestion": "Replace 'privilegiji' with 'pooblastila' in the first line."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“virtual rooms” is translated as “vitrualne sobe”.  The correct term should be 'virtualne sobe'.",
+          "suggestion": "Replace 'vitrualne sobe' with 'virtualne sobe'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"Admin account types and their privileges\" is overly literal. A more natural phrasing in Serbian would be \"Tipovi administratorskih računa i njihove ovlašćenja\" or \"Vrste administratorskih naloga i njihove privilegije\".",
+          "suggestion": "Tipovi administratorskih računa i njihove ovlašćenja"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Admin {{productName}}-а\" is awkward. It's a grammatical construct that doesn't sound natural in Serbian.  It literally translates to 'Admin of {{productName}}'.",
+          "suggestion": "{{productName}} administrator"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'способност' is used to translate 'ability'. While technically correct, a more common and natural wording in this context would be 'mogućnost'.",
+          "suggestion": "mogućnost"
+        },
+        {
+          "type": "formatting",
+          "description": "There is a space missing before the opening tag of the second element (Админ {{productName}}-а).",
+          "suggestion": "Add a space before the opening tag:  <2> Админ {{productName}}-а"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Admin account types' is translated as 'Tipovi administratorskih naloga', which is accurate. However, the broader context of describing the different levels of admin access isn't fully conveyed. It's a bit literal.",
+          "suggestion": "Consider rephrasing to something like 'Nalozi administratora i njihove odgovornosti' to better reflect the scope of the section."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Admin {{productName}}' in the English content is translated to 'Admin {{productName}}-a'. While grammatically correct, it feels slightly awkward.  It implies ownership rather than just denoting the role.",
+          "suggestion": "Consider '{{productName}} administrator' or 'Administrator {{productName}}' for a more natural flow."
+        },
+        {
+          "type": "formatting",
+          "description": "The paragraph breaks in the translated text are the same as the English, but the flow could be improved by breaking up longer sentences.",
+          "suggestion": "Review paragraph breaks and sentence structure to enhance readability in Serbian. For example, the sentence about access rights could be split."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ability to manage access rights' is translated to 'sposobnost upravljanja pravima pristupa'. While technically correct, it's a bit formal and dense for this context. ",
+          "suggestion": "Consider a simpler phrasing like 'upravljanje pristupnim pravima' or 'mogućnost upravljanja pristupima'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Users can create and edit files in the room' is accurately translated. However, the lack of a more specific wording for \"room\" (e.g., virtual room) might create ambiguity.",
+          "suggestion": "Consider explicitly mentioning 'virtualnim sobama' even in this section for clarity."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Admin account types' is translated as 'Типи облікових записів адміністраторів'. While technically correct, a more natural translation might be 'Типи адміністраторів' or 'Ролі адміністраторів'.",
+          "suggestion": "Типи адміністраторів"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'ability to manage access rights' is translated as 'можливість керувати правами доступу'. This is correct, but could be more concise.",
+          "suggestion": "можливість керування правами доступу"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'User' is translated as 'Користувач'. The English definition is more detailed than just user, it implies limited access. The translation does not reflect that.",
+          "suggestion": "Учасник"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'access settings' is translated as 'отримувати доступ до параметрів'. This doesn't convey the meaning of managing or modifying settings, rather simply accessing them. ",
+          "suggestion": "доступ до налаштувань"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The `<1>` and `<4>` tags seem unnecessary and disrupt the flow. They don't appear to serve a purpose in the translation or the original English content.",
+          "suggestion": "Remove the `<1>` and `<4>` tags. The text should flow naturally without them."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Admin account types' is translated as 'Các loại tài khoản quản trị'. While technically correct, a more natural translation might be 'Loại tài khoản quản trị' (dropping 'Các').",
+          "suggestion": "Change 'Các loại tài khoản quản trị' to 'Loại tài khoản quản trị'."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Admin account types and their privileges' is translated as '管理员账户类型及其权限'. While generally accurate, '及其' can sound a bit formal and less natural in this context. A more conversational translation might be '管理员账户类型和权限'.",
+          "suggestion": "管理员账户类型和权限"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ability to invite and manage users in {{productName}} and in virtual rooms' translates to '邀请和管理{{productName}}及虚拟房间中的用户'. While understandable, it could be improved for flow.  '在 {{productName}} 和虚拟房间中' might be more natural.",
+          "suggestion": "在 {{productName}} 和虚拟房间中邀请和管理用户"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'manage access rights' is translated as '管理访问权限'. This is accurate, but could be more specific depending on the product. Considering '管理权限设置' could add more clarity.",
+          "suggestion": "管理权限设置"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

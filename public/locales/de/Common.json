@@ -714,5 +714,8 @@
   "Yes": "Ja",
   "Yesterday": "Gestern",
   "You": "Sie",
-  "YourTurn": "Jetzt sind Sie dran"
+  "YourTurn": "Jetzt sind Sie dran",
+  "BlockFile": "Blockieren",
+  "MobileStartFillingPdfNotAvailableInfo": "Nicht unterstützte Aktion. Bitte wechseln Sie in den Desktopmodus, um PDF-Formulare auszufüllen.\n",
+  "UnblockFile": "Entsperren"
 }

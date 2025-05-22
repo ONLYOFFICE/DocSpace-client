@@ -2203,6 +2203,7 @@
   --preparation-portal-progress-color-percent-small: #{$black};
   --preparation-portal-progress-line-bg: var(--accent-main);
   --preparation-portal-description-text-color: #{$gray};
+  --preparation-portal-progress-error-text-color: #{$light-error-status};
 }
 
 .dark {
@@ -2211,6 +2212,7 @@
   --preparation-portal-progress-color-percent-small: #{$white};
   --preparation-portal-progress-line-bg: #{$white};
   --preparation-portal-description-text-color: #{$gray-dark};
+  --preparation-portal-progress-error-text-color: #{$dark-error-status};
 }
 
 .light {

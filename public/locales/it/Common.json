@@ -715,5 +715,7 @@
   "Yesterday": "Ieri",
   "You": "Tu",
   "YourTurn": "Il tuo turno",
-  "MobileStartFillingPdfNotAvailableInfo": ""
+  "MobileStartFillingPdfNotAvailableInfo": "Azione non supportata. Passa alla modalità desktop per compilare i moduli PDF.",
+  "BlockFile": "Blocca",
+  "UnblockFile": "Sblocca"
 }

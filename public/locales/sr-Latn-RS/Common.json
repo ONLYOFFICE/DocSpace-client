@@ -714,5 +714,8 @@
   "Yes": "Da",
   "Yesterday": "Juče",
   "You": "Vi",
-  "YourTurn": "Vaš red"
+  "YourTurn": "Vaš red",
+  "BlockFile": "Blokiraj",
+  "MobileStartFillingPdfNotAvailableInfo": "Nepodržana radnja. Molimo pređite na desktop režim kako biste popunili PDF obrasce.",
+  "UnblockFile": "Odblokiraj"
 }

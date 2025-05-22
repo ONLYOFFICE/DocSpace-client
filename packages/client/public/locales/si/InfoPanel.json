@@ -82,7 +82,7 @@
   "RoomLifeTimeSet": "සියලු ගොනු සඳහා <1>{{data}}</1> හි කාලායතනය සකසන්න",
   "RoomLogoChanged": "අයිකනය වෙනස් විය",
   "RoomRemoveUser": "පරිශීලකයා ඉවත් කර ඇත.",
-  "RoomRenamed": "කාමරය <1>«{{oldRoomTitle}}»</1>«{{roomTitle}}»</2> ලෙස නැවත නම් කරන ලදී",
+  "RoomRenamed": "කාමරය <1>«{{oldRoomTitle}}»</1> <2>«{{roomTitle}}»</2> ලෙස නැවත නම් කරන ලදී",
   "RoomsEmptyScreenTent": "කාමරයේ විස්තර මෙතැන බලන්න",
   "RoomUnarchived": "කාමරය ආර්කයිව් වෙතින් ලබා ගන්නා ලදී.",
   "RoomUpdateAccess": "හාඩ් පත්වී ඇත කාර්යභාරය",

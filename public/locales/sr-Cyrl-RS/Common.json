@@ -715,5 +715,7 @@
   "Yesterday": "Јуче",
   "You": "Ви",
   "YourTurn": "Ваш ред",
-  "MobileStartFillingPdfNotAvailableInfo": ""
+  "MobileStartFillingPdfNotAvailableInfo": "Неподржана радња. Молимо пређите на десктоп режим како бисте попунили PDF обрасце.",
+  "BlockFile": "Блокирај",
+  "UnblockFile": "Одблокирај"
 }

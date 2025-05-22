@@ -116,7 +116,7 @@ import("./logger.mjs").then(({ logger }) => {
         transform: "next/dist/server/web/exports/{{ kebabCase member }}",
       },
     },
-    serverExternalPackages: ["pino", "pino-pretty", "date-and-time"],
+    serverExternalPackages: ["pino", "pino-pretty", "date-and-time", "nconf"],
     experimental: {
       windowHistorySupport: false,
       serverMinification: true,

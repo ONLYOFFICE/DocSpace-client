@@ -171,22 +171,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               />
             </>
           ) : null}
-
-          {isAvailableLockFile ? (
-            <ColorTheme
-              themeId={ThemeId.IconButton}
-              iconNode={<IconLock />}
-              className="badge lock-file icons-group"
-              size={sizeQuickButton}
-              data-id={id}
-              data-locked={!!locked}
-              onClick={onClickLock}
-              color={colorLock}
-              isDisabled={isDisabled}
-              hoverColor={theme.filesQuickButtons.sharedColor}
-              title={locked ? t("Common:UnblockFile") : t("Common:BlockFile")}
-            />
-          ) : null}
           {isAvailableDownloadFile ? (
             <ColorTheme
               themeId={ThemeId.IconButton}
@@ -239,6 +223,21 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               isDisabled={isDisabled}
               hoverColor={theme.filesQuickButtons.sharedColor}
               title={t("Common:CopySharedLink")}
+            />
+          ) : null}
+          {isAvailableLockFile ? (
+            <ColorTheme
+              themeId={ThemeId.IconButton}
+              iconNode={<IconLock />}
+              className="badge lock-file icons-group"
+              size={sizeQuickButton}
+              data-id={id}
+              data-locked={!!locked}
+              onClick={onClickLock}
+              color={colorLock}
+              isDisabled={isDisabled}
+              hoverColor={theme.filesQuickButtons.sharedColor}
+              title={locked ? t("Common:UnblockFile") : t("Common:BlockFile")}
             />
           ) : null}
           {/* {fileExst && !isTrashFolder && displayBadges && (

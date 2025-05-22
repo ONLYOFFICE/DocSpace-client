@@ -96,7 +96,10 @@ const beforeBuild = async (
     }
 
     return files.filter(
-      (f) => !f.path.endsWith(".DS_Store") && !f.path.includes("locales/.meta"),
+      (f) =>
+        !f.path.endsWith(".DS_Store") &&
+        !f.path.includes("locales/.meta") &&
+        !f.path.includes("locales\\.meta"),
     );
   };
 

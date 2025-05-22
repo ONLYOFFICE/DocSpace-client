@@ -2018,7 +2018,7 @@ class ContextOptionsStore {
       {
         id: "option_block-unblock-version",
         key: "block-unblock-version",
-        label: t("Common:UnblockVersion"),
+        label: item.locked ? t("Common:UnblockFile") : t("Common:BlockFile"),
         icon: LockedReactSvgUrl,
         onClick: () => this.lockFile(item, t),
         disabled: false,

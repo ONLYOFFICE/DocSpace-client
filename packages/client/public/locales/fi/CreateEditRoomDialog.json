@@ -1,5 +1,4 @@
 {
-  "ActivationRequired": "aktivointi vaaditaan",
   "AddStaticText": "Lisää staattista tekstiä",
   "AddWatermarkElements": "Lisää vesileimaelementit",
   "AddWatermarksToDocuments": "Lisää vesileimat asiakirjoihin",
@@ -33,7 +32,6 @@
   "StorageDescription": "Muistin kiintiö asetettu per huone. Voit muuttaa tätä arvoa tai poistaa muistin rajan pois käytöstä.",
   "TagsPlaceholder": "Lisää tunniste",
   "ThirdPartyStorageComboBoxPlaceholder": "Valitse muisti",
-  "ThirdPartyStorageDescription": "Käytä kolmannen osapuolen palveluita tallennustilana tälle huoneelle. Yhdistettyyn tallennustilaan luodaan uusi kansio tämän huoneen tietojen tallentamista varten.",
   "ThirdPartyStorageNoStorageAlert": "Sitä ennen, sinun tulee yhdistää vastaavaan palveluun \"Liittäminen\"-osiossa. Muuten, yhteys ei ole mahdollinen.",
   "ThirdPartyStoragePermanentSettingDescription": "Tiedostot on säilötty kolmannen osapuolen {{thirdpartyTitle}} muistiin \"{{thirdpartyFolderName}}\" -kansioon.\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "Yhdistääksesi kolmannen osapuolen tallennustilan, sinun täytyy lisätä vastaava palvelu {{productName}}-n asetusten Ingtegraatio-osiossa. Ota yhteyttä {{productName}}-n omistajaan tai järjestelmänvalvojaan ottaaksesi integraation käyttöön.",

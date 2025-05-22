@@ -147,7 +147,7 @@ const TwoFactorAuth = (props) => {
       setShowReminder(false);
       saveToSessionStorage("defaultTfaSettings", type);
       saveToSessionStorage("currentTfaSettings", type);
-      toastr.success(t("SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
 
       if (res) {
         setIsInit(false);

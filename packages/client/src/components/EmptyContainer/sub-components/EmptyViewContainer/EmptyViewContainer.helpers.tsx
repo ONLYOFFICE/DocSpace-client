@@ -205,7 +205,7 @@ export const getOptions = (
     }),
     t("EmptyView:SectionsUploadDescription", {
       sectionNameFirst: t("Common:MyFilesSection"),
-      sectionNameSecond: t("Common:TrashSection"),
+      sectionNameSecond: t("Common:Rooms"),
     }),
     // TODO: need fix selector
     FilesSelectorFilterTypes.ALL,

@@ -64,9 +64,14 @@
   font-weight: 600;
 }
 
+.pdfIcon {
+  flex-shrink: 0;
+}
+
 .fileStatus {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 
   height: 16px;
   padding: 2px 5px;

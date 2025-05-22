@@ -95,7 +95,7 @@ const DeleteVersionDialogComponent: React.FC<DeleteVersionDialogProps> = (
       <ModalDialog.Footer>
         <Button
           id="delete-version-modal_submit"
-          key="OkButton"
+          key="OKButton"
           label={t("Common:Delete")}
           size={ButtonSize.normal}
           primary

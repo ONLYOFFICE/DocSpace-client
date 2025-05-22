@@ -157,7 +157,7 @@ const DeleteLinkDialogComponent = (props) => {
       <ModalDialog.Footer>
         <Button
           id="delete-file-modal_submit"
-          key="OkButton"
+          key="OKButton"
           label={
             link.sharedTo.primary && (isPublicRoomType || isFormRoom)
               ? t("Files:RevokeLink")

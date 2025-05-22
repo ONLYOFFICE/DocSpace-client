@@ -78,7 +78,7 @@ const BackupToPublicRoomComponent = (props) => {
       <ModalDialog.Footer>
         <Button
           id="delete-file-modal_submit"
-          key="OkButton"
+          key="OKButton"
           label={t("Common:OKButton")}
           size="normal"
           primary

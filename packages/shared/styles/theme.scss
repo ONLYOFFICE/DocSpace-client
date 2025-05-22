@@ -1960,7 +1960,7 @@
   --settings-arrow-fill: #{$white};
 }
 
-.light{
+.light {
   --icon-cropper-grid-color: #{$gray-strong};
   --icon-cropper-delete-button-bg: #{$gray-light};
   --icon-cropper-delete-button-hover-bg: #{$light-gray-hover};
@@ -2010,7 +2010,8 @@
 
 .light {
   --tile-background-color: #{$white};
-  --tile-border: 1px solid #{$gray-strong};
+  --tile-room-border: 1px solid #{$gray-strong};
+  --tile-border: 1px solid #{$gray-light-mid};
   --tile-checked-background: #{$light-gray-hover};
   --tile-icon-button-color: #{$gray};
   --tile-background-badge-color: #{$white};
@@ -2028,9 +2029,12 @@
   --tile-container-hover-background: #{$gray-light};
 
   --tile-show-hotkey-border: #{$light-second-main};
-  --tile-border-radius: 6px;
+  --tile-border-radius: 12px;
   --tile-room-border-radius: 12px;
   --tile-badge-shadow: 0px 2px 4px #{$badge-shadow};
+
+  --tile-font-size: 14px;
+  --tile-line-height: 16px;
 
   --tile-icon-button-color: #{$gray};
   --tile-icon-button-hover-color: #{$light-blue-main};
@@ -2059,6 +2063,9 @@
   --tile-border-radius: 6px;
   --tile-room-border-radius: 12px;
   --tile-badge-shadow: 0px 2px 4px #{$badge-shadow};
+
+  --tile-font-size: 14px;
+  --tile-line-height: 16px;
 
   --tile-icon-button-color: #{$gray};
   --tile-icon-button-hover-color: #{$light-blue-main};

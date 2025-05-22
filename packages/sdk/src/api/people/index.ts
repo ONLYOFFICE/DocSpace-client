@@ -35,12 +35,12 @@ import { selfHandler } from "@docspace/shared/__mocks__/e2e";
 const IS_TEST = process.env.E2E_TEST;
 
 export async function getSelf(): Promise<TUser | undefined> {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const authToken = cookieStore.get("asc_auth_key");
 
   if (!authToken) return;
 
-  const [req] = createRequest([`/people/@self`], [["", ""]], "GET");
+  const [req] = await createRequest([`/people/@self`], [["", ""]], "GET");
   const res = IS_TEST
     ? selfHandler()
     : await fetch(req, { next: { revalidate: 300 } });

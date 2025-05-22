@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useContext } from "react";
+import React, { use } from "react";
 
 import { useTranslation } from "react-i18next";
 
@@ -90,10 +90,9 @@ const useFilesHelper = ({
     setIsFirstLoad,
     setIsNextPageLoading,
     setIsBreadCrumbsLoading,
-  } = useContext(LoadersContext);
+  } = use(LoadersContext);
 
-  const { getIcon, extsWebEdited, filesSettingsLoading } =
-    useContext(SettingsContext);
+  const { getIcon, extsWebEdited, filesSettingsLoading } = use(SettingsContext);
 
   const { addInputItem } = useInputItemHelper({
     withCreate,

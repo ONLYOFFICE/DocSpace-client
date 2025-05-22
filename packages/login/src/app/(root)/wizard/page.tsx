@@ -74,7 +74,7 @@ async function Page() {
   const commonResources = objectSettings?.externalResources.common.entries;
   const forumLinkUrl = objectSettings?.externalResources.forum.domain;
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const timezoneCookie = cookieStore.get(TIMEZONE);
   const userTimezone = timezoneCookie
     ? timezoneCookie.value

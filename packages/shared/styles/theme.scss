@@ -1960,7 +1960,7 @@
   --settings-arrow-fill: #{$white};
 }
 
-.light{
+.light {
   --icon-cropper-grid-color: #{$gray-strong};
   --icon-cropper-delete-button-bg: #{$gray-light};
   --icon-cropper-delete-button-hover-bg: #{$light-gray-hover};
@@ -2137,4 +2137,16 @@
 
   --selector-navigation-lifetime-fill: #{$dark-gray-dark};
   --selector-navigation-lifetime-stroke: #{$gray};
+}
+
+.light {
+  --encryption-portal-text: #{$gray};
+  --encryption-portal-error: #{$light-error-status};
+  --encryption-portal-body-text: #{$gray};
+}
+
+.dark {
+  --encryption-portal-text: #{$gray};
+  --encryption-portal-error: #{$dark-error-status};
+  --encryption-portal-body-text: #{$gray-dark};
 }

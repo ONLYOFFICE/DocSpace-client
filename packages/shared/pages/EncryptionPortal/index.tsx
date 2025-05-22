@@ -28,6 +28,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
+import classNames from "classnames";
 import ErrorContainer from "../../components/error-container/ErrorContainer";
 import { Text } from "../../components/text";
 import { ColorTheme, ThemeId } from "../../components/color-theme";
@@ -37,7 +38,7 @@ import SocketHelper, { SocketEvents } from "../../utils/socket";
 import { getEncryptionProgress } from "../../api/settings";
 
 import { returnToPortal } from "./EncryptionPortal.utils";
-import { StyledEncryptionPortal } from "./EncryptionPortal.styled";
+import styles from "./EncryptionPortal.module.scss";
 
 let requestsCount = 0;
 
@@ -128,7 +129,7 @@ export const EncryptionPortal = () => {
   const headerText = errorMessage ? t("Error") : t("EncryptionPortalTitle");
 
   const componentBody = errorMessage ? (
-    <Text className="encryption-portal_error">{`${errorMessage}`}</Text>
+    <Text className={styles.encryptionPortalError}>{`${errorMessage}`}</Text>
   ) : (
     <ColorTheme theme={theme} themeId={ThemeId.Progress} percent={percent}>
       <div className="preparation-portal_progress">
@@ -137,23 +138,27 @@ export const EncryptionPortal = () => {
         </div>
         <Text className="preparation-portal_percent">{`${percent} %`}</Text>
       </div>
-      <Text className="preparation-portal_text">
+      <Text className={styles.encryptionPortalText}>
         {t("EncryptionPortalSubtitle")}
       </Text>
     </ColorTheme>
   );
 
+  const classes = classNames(styles.encryptionPortal, {
+    [styles.error]: !!errorMessage,
+  });
+
   return (
-    <StyledEncryptionPortal errorMessage={!!errorMessage}>
+    <div className={classes}>
       <ErrorContainer
         headerText={headerText}
         className="encryption-portal"
         hideLogo
       >
-        <div className="encryption-portal_body-wrapper">
+        <div className={styles.encryptionPortalBodyWrapper}>
           {!ready ? <PreparationPortalLoader /> : componentBody}
         </div>
       </ErrorContainer>
-    </StyledEncryptionPortal>
+    </div>
   );
 };

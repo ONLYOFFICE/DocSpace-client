@@ -132,7 +132,9 @@ const RowContent = observer(
           <Text fontSize="12px" fontWeight={400} className="row_update-text">
             {mainInfo}
           </Text>
-        ) : null}
+        ) : (
+          <></>
+        )}
       </SimpleFilesRowContent>
     );
   },

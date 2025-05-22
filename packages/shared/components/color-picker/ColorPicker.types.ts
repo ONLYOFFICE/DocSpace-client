@@ -72,5 +72,5 @@ export type ColorPickerProps = {
   hexCodeLabel?: string;
 
   /** React ref object for the component's root div element */
-  forwardedRef?: React.RefObject<HTMLDivElement>;
+  forwardedRef?: React.RefObject<HTMLDivElement | null>;
 };

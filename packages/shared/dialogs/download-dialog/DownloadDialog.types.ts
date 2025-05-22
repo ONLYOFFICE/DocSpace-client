@@ -26,6 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import type { JSX } from "react";
 import type { TTranslation } from "../../types";
 import type { TFile, TFolder } from "../../api/files/types";
 import type { LinkWithDropDownProps } from "../../components/link-with-dropdown";

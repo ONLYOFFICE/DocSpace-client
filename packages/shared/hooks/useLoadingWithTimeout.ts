@@ -40,7 +40,7 @@ function useLoadingWithTimeout<S extends boolean | undefined = undefined>(
   initialState?: S,
 ) {
   const [state, setState] = useState<S | undefined>(initialState);
-  const timerRef = useRef<number>();
+  const timerRef = useRef<number>(undefined);
 
   const cleanTimer = useCallback(() => {
     clearTimeout(timerRef.current);

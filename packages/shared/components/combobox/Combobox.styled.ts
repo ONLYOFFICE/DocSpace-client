@@ -86,7 +86,7 @@ const StyledComboBox = styled.div.attrs(injectDefaultTheme)<{
   "data-testid"?: string;
   title?: string;
   className?: string;
-  ref?: React.RefObject<HTMLDivElement>;
+  ref?: React.RefObject<HTMLDivElement | null>;
 }>`
   width: ${(props) =>
     (props.scaled && "100%") ||

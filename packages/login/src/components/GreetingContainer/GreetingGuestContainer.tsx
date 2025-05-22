@@ -72,7 +72,14 @@ export const GreetingGuestContainer = ({
               displayName,
             }}
             components={{
-              1: <Text fontWeight={600} as="strong" fontSize="16px" />,
+              1: (
+                <Text
+                  key="component_key"
+                  fontWeight={600}
+                  as="strong"
+                  fontSize="16px"
+                />
+              ),
             }}
           />
         </Text>

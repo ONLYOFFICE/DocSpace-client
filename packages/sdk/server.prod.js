@@ -113,8 +113,8 @@ const nextConfig = {
       transform: "next/dist/server/web/exports/{{ kebabCase member }}",
     },
   },
+  serverExternalPackages: ["pino", "pino-pretty", "date-and-time"],
   experimental: {
-    serverComponentsExternalPackages: ["pino", "pino-pretty", "date-and-time"],
     windowHistorySupport: false,
     serverMinification: true,
     serverSourceMaps: false,
@@ -148,7 +148,6 @@ const nextConfig = {
     adjustFontFallbacks: false,
     adjustFontFallbacksWithSizeAdjust: false,
     typedRoutes: false,
-    instrumentationHook: true,
     bundlePagesExternals: false,
     ppr: false,
     webpackBuildWorker: false,

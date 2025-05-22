@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useContext, useEffect } from "react";
+import { use, useEffect } from "react";
 import { useSearchParams } from "react-router";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -101,7 +101,7 @@ const Members = ({
   const withoutTitlesAndLinks = !!searchValue;
   const membersHelper = new MembersHelper({ t });
 
-  const scrollContext = useContext(ScrollbarContext);
+  const scrollContext = use(ScrollbarContext);
   const [, setSearchParams] = useSearchParams();
 
   useEffect(() => {

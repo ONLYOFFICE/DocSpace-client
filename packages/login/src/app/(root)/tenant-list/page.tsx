@@ -8,11 +8,12 @@ import { getSettings } from "@/utils/actions";
 
 import TenantList from "./page.client";
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string };
-}) {
+export default async function Page(
+  props: {
+    searchParams: Promise<{ [key: string]: string }>;
+  }
+) {
+  const searchParams = await props.searchParams;
   const settings = await getSettings();
 
   // const { portals } = JSON.parse(searchParams.portals);
@@ -24,7 +25,7 @@ export default async function Page({
   const settingsCulture =
     typeof settings === "string" ? undefined : settings?.culture;
 
-  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
+  const culture = (await cookies()).get(LANGUAGE)?.value ?? settingsCulture;
   return (
     <>
       {settings && typeof settings !== "string" && (

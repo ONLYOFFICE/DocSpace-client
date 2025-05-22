@@ -86,7 +86,7 @@ describe("EncryptionPortal", () => {
       },
       { timeout: 3000 },
     );
-    
+
     const progressBar = screen.getByTestId("encryption-progress-bar");
 
     expect(screen.getByText("EncryptionPortalSubtitle")).toBeInTheDocument();

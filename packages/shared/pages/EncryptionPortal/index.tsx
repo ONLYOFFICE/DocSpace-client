@@ -24,43 +24,54 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
-
 import classNames from "classnames";
-import ErrorContainer from "../../components/error-container/ErrorContainer";
+
 import { Text } from "../../components/text";
 import { ColorTheme, ThemeId } from "../../components/color-theme";
+import ErrorContainer from "../../components/error-container/ErrorContainer";
 import PreparationPortalLoader from "../../skeletons/preparation-portal";
 
-import SocketHelper, { SocketEvents } from "../../utils/socket";
 import { getEncryptionProgress } from "../../api/settings";
-
+import SocketHelper, { SocketEvents } from "../../utils/socket";
 import { returnToPortal } from "./EncryptionPortal.utils";
+import {
+  EncryptionPortalProps,
+  StorybookProps,
+} from "./EncryptionPortal.types";
+
 import styles from "./EncryptionPortal.module.scss";
 
 let requestsCount = 0;
 
-export const EncryptionPortal = () => {
+export const EncryptionPortal: React.FC<EncryptionPortalProps> = (props) => {
+  // Extract storybook props if they exist
+  const storybook = (
+    props as EncryptionPortalProps & { storybook?: StorybookProps | undefined }
+  )?.storybook;
+
   const theme = useTheme();
 
   const { t, ready } = useTranslation("Common");
 
   const errorInternalServer = t("Common:ErrorInternalServer");
 
-  const [percent, setPercent] = useState(0);
+  const [percent, setPercent] = useState(50);
   const [errorMessage, setErrorMessage] = useState("");
 
   const getProgress = useCallback(async () => {
+    // Use mockAPI for Storybook if available
+    const encryptionProgressFn =
+      storybook?.mockAPI?.getEncryptionProgress || getEncryptionProgress;
     const setMessage = (error?: unknown) => {
       const errorText = error ?? errorInternalServer;
-
       setErrorMessage(errorText);
     };
 
     try {
-      const percentage = (await getEncryptionProgress()) as number;
+      const percentage = (await encryptionProgressFn()) as number;
       const roundedPercentage = Math.round(percentage);
 
       if (!roundedPercentage) {
@@ -122,23 +133,68 @@ export const EncryptionPortal = () => {
   }, [getProgress]);
 
   useEffect(() => {
+    // For Storybook, use provided values if available
+    if (storybook) {
+      if (storybook.error) {
+        setErrorMessage(storybook.error);
+      } else if (storybook.progress !== undefined) {
+        setPercent(storybook.progress);
+
+        if (storybook.progress === 100) {
+          returnToPortal();
+        }
+      }
+      return;
+    }
+
+    // Normal behavior for actual app
     if (!ready) return;
     getProgress();
-  }, [ready, getProgress]);
+  }, [ready, getProgress, storybook]);
 
   const headerText = errorMessage ? t("Error") : t("EncryptionPortalTitle");
 
   const componentBody = errorMessage ? (
-    <Text className={styles.encryptionPortalError}>{`${errorMessage}`}</Text>
+    <Text
+      className={styles.encryptionPortalError}
+      data-testid="encryption-portal-error"
+      data-error="true"
+      aria-live="assertive"
+    >
+      {`${errorMessage}`}
+    </Text>
   ) : (
     <ColorTheme theme={theme} themeId={ThemeId.Progress} percent={percent}>
-      <div className="preparation-portal_progress">
+      <div
+        className="preparation-portal_progress"
+        data-testid="encryption-progress"
+        aria-label={`Encryption progress: ${percent}%`}
+        id="encryption-progress-container"
+      >
         <div className="preparation-portal_progress-bar">
-          <div className="preparation-portal_progress-line" />
+          <div
+            className="preparation-portal_progress-line"
+            data-testid="encryption-progress-bar"
+            data-percent={percent}
+            aria-valuenow={percent}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            role="progressbar"
+            aria-labelledby="encryption-progress-label"
+          />
         </div>
-        <Text className="preparation-portal_percent">{`${percent} %`}</Text>
+        <Text
+          className="preparation-portal_percent"
+          aria-live="polite"
+          id="encryption-progress-label"
+        >
+          {`${percent} %`}
+        </Text>
       </div>
-      <Text className={styles.encryptionPortalText}>
+      <Text
+        className={styles.encryptionPortalText}
+        data-testid="encryption-portal-subtitle"
+      >
         {t("EncryptionPortalSubtitle")}
       </Text>
     </ColorTheme>
@@ -149,14 +205,22 @@ export const EncryptionPortal = () => {
   });
 
   return (
-    <div className={classes}>
+    <div className={classes} data-testid="encryption-portal" aria-busy={!ready}>
       <ErrorContainer
         headerText={headerText}
         className="encryption-portal"
         hideLogo
+        data-testid="encryption-portal-container"
       >
-        <div className={styles.encryptionPortalBodyWrapper}>
-          {!ready ? <PreparationPortalLoader /> : componentBody}
+        <div
+          className={styles.encryptionPortalBodyWrapper}
+          data-testid="encryption-portal-body"
+        >
+          {(!ready && !storybook) || storybook?.isLoading ? (
+            <PreparationPortalLoader data-testid="preparation-portal-loader" />
+          ) : (
+            componentBody
+          )}
         </div>
       </ErrorContainer>
     </div>

@@ -35,8 +35,8 @@ export const mockLogos: ILogo[] = [
       isEmpty: false,
     },
     path: {
-      light: "/images/logo/lightsmall.svg",
-      dark: "/images/logo/dark_lightsmall.svg",
+      light: "lightsmall.svg",
+      dark: "dark_lightsmall.svg",
     },
   },
   {
@@ -47,8 +47,8 @@ export const mockLogos: ILogo[] = [
       isEmpty: false,
     },
     path: {
-      light: "/images/logo/loginpage.svg",
-      dark: "/images/logo/dark_loginpage.svg",
+      light: "loginpage.svg",
+      dark: "dark_loginpage.svg",
     },
   },
   {
@@ -59,7 +59,7 @@ export const mockLogos: ILogo[] = [
       isEmpty: false,
     },
     path: {
-      light: "/images/logo/favicon.ico",
+      light: "favicon.ico",
       dark: "",
     },
   },
@@ -71,7 +71,7 @@ export const mockLogos: ILogo[] = [
       isEmpty: false,
     },
     path: {
-      light: "/images/logo/docseditor.svg",
+      light: "docseditor.svg",
       dark: "",
     },
   },
@@ -83,7 +83,7 @@ export const mockLogos: ILogo[] = [
       isEmpty: false,
     },
     path: {
-      light: "/images/logo/docseditorembed.svg",
+      light: "docseditorembed.svg",
       dark: "",
     },
   },
@@ -95,8 +95,8 @@ export const mockLogos: ILogo[] = [
       isEmpty: false,
     },
     path: {
-      light: "/images/logo/leftmenu.svg",
-      dark: "/images/logo/dark_leftmenu.svg",
+      light: "leftmenu.svg",
+      dark: "dark_leftmenu.svg",
     },
   },
   {
@@ -107,8 +107,8 @@ export const mockLogos: ILogo[] = [
       isEmpty: false,
     },
     path: {
-      light: "/images/logo/aboutpage.svg",
-      dark: "/images/logo/dark_aboutpage.svg",
+      light: "aboutpage.svg",
+      dark: "dark_aboutpage.svg",
     },
   },
 ];

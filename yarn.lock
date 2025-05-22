@@ -3180,7 +3180,7 @@ __metadata:
     react-syntax-highlighter: "npm:^15.6.1"
     react-text-mask: "npm:5.5.0"
     react-toastify: "npm:10.0.6"
-    react-tooltip: "npm:5.28.0"
+    react-tooltip: "npm:5.28.1"
     react-transition-group: "npm:4.4.5"
     react-values: "npm:0.3.3"
     react-viewer: "npm:3.2.2"
@@ -24749,16 +24749,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-tooltip@npm:5.28.0":
-  version: 5.28.0
-  resolution: "react-tooltip@npm:5.28.0"
+"react-tooltip@npm:5.28.1":
+  version: 5.28.1
+  resolution: "react-tooltip@npm:5.28.1"
   dependencies:
     "@floating-ui/dom": "npm:^1.6.1"
     classnames: "npm:^2.3.0"
   peerDependencies:
     react: ">=16.14.0"
     react-dom: ">=16.14.0"
-  checksum: 10/ec13ad0fafcae51c9c1193c6f0bccba4e7047e9d02eaf77231474cefd1a3d05254e76f27229808e79dad4c0a8c47b8e5cafdad47920e34a11d7a2703adf5f998
+  checksum: 10/64f89b6ed00fa19868c3ca813a807f6201e252d5ba91d651583a858a528444636b7c357ed31cc3a703b76c42789201ca047326ac1ceddd5bc19b340a1b0982a3
   languageName: node
   linkType: hard
 

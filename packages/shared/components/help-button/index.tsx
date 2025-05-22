@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import uniqueId from "lodash/uniqueId";
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg";
 import { classNames } from "../../utils";
 import { IconButton } from "../icon-button";
@@ -55,11 +54,15 @@ const HelpButton = (props: HelpButtonProps) => {
     noUserSelect,
   } = props;
 
-  const currentId = id || uniqueId();
+  const uniqueId = React.useId();
   const ref = React.useRef(null);
+
+  const currentId = id || uniqueId;
+
   const anchorSelect = children
     ? `div[id='${currentId}']`
     : `div[id='${currentId}'] svg`;
+
   const componentClass = classNames(className, "help-icon");
 
   const tooltipProps = {

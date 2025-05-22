@@ -146,6 +146,7 @@ export const CompanyInfo = ({
               components={{
                 1: (
                   <Link
+                    key="component_key"
                     className={classNames(styles.link, "link")}
                     onClick={showExample}
                     noHover
@@ -160,7 +161,12 @@ export const CompanyInfo = ({
               ns="Common"
               values={{ link }}
               components={{
-                1: <span className={classNames(styles.link, "link")} />,
+                1: (
+                  <span
+                    key="component_key"
+                    className={classNames(styles.link, "link")}
+                  />
+                ),
               }}
             />
           )}

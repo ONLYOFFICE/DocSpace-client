@@ -33,10 +33,11 @@ import { getStringFromSearchParams } from "@/utils";
 import PasswordChangeForm from "./page.client";
 
 type PasswordChangeProps = {
-  searchParams: { [key: string]: string };
+  searchParams: Promise<{ [key: string]: string }>;
 };
 
-async function Page({ searchParams }: PasswordChangeProps) {
+async function Page(props: PasswordChangeProps) {
+  const searchParams = await props.searchParams;
   const confirmKey = getStringFromSearchParams(searchParams);
 
   const [settings, passwordSettings] = await Promise.all([

@@ -41,9 +41,5 @@ export const SelectAllProvider = ({
   CheckboxProps & {
     children: ReactNode;
   }) => {
-  return (
-    <SelectAllContext.Provider value={rest}>
-      {children}
-    </SelectAllContext.Provider>
-  );
+  return <SelectAllContext value={rest}>{children}</SelectAllContext>;
 };

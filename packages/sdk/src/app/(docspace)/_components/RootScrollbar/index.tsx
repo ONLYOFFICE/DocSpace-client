@@ -32,12 +32,11 @@ import { observer } from "mobx-react";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { DeviceType } from "@docspace/shared/enums";
 
-import { useSettingsStore } from "../../_store/SettingsStore";
-
 import styles from "./RootScrollbar.module.scss";
+import useDeviceType from "@/hooks/useDeviceType";
 
 const RootScrollbar = ({ children }: React.PropsWithChildren) => {
-  const { currentDeviceType } = useSettingsStore();
+  const { currentDeviceType } = useDeviceType();
 
   return (
     <Scrollbar

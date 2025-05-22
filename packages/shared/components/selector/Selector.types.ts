@@ -69,6 +69,7 @@ export type TInfoBar = {
 };
 
 export type InfoBarProps = {
+  ref?: React.RefObject<HTMLDivElement | null>;
   visible: boolean;
   className?: string;
 };
@@ -316,7 +317,7 @@ export type AccessSelectorProps = Omit<
   TWithAccessRightsProps,
   "withAccessRights"
 > & {
-  footerRef: React.RefObject<HTMLDivElement>;
+  footerRef: React.RefObject<HTMLDivElement | null>;
 };
 
 // footer input

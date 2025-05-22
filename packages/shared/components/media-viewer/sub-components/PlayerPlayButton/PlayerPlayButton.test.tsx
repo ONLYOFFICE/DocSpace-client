@@ -31,19 +31,23 @@ import { PlayerPlayButton } from "./index";
 
 // Mock SVG components
 jest.mock("PUBLIC_DIR/images/videoplayer.play.react.svg", () => {
-  const DummyPlayIcon = React.forwardRef<
-    HTMLDivElement,
-    React.HTMLAttributes<HTMLDivElement>
-  >((props, ref) => <div {...props} ref={ref} />);
+  const DummyPlayIcon = ({
+    ref,
+    ...props
+  }: React.HTMLAttributes<HTMLDivElement> & {
+    ref: React.RefObject<HTMLDivElement>;
+  }) => <div {...props} ref={ref} />;
   DummyPlayIcon.displayName = "IconPlay";
   return DummyPlayIcon;
 });
 
 jest.mock("PUBLIC_DIR/images/videoplayer.stop.react.svg", () => {
-  const DummyStopIcon = React.forwardRef<
-    HTMLDivElement,
-    React.HTMLAttributes<HTMLDivElement>
-  >((props, ref) => <div {...props} ref={ref} />);
+  const DummyStopIcon = ({
+    ref,
+    ...props
+  }: React.HTMLAttributes<HTMLDivElement> & {
+    ref: React.RefObject<HTMLDivElement>;
+  }) => <div {...props} ref={ref} />;
   DummyStopIcon.displayName = "IconStop";
   return DummyStopIcon;
 });

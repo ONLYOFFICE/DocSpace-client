@@ -134,6 +134,7 @@ const RegistrationForm = ({
           components={{
             1: (
               <Link
+                key="component_key"
                 tag="a"
                 href={licenseUrl}
                 target={LinkTarget.blank}
@@ -143,6 +144,7 @@ const RegistrationForm = ({
             ),
             2: (
               <Link
+                key="second_component_key"
                 tag="a"
                 href={legalTerms}
                 target={LinkTarget.blank}

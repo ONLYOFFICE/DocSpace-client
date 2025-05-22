@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { permanentRedirect, redirect, RedirectType } from "next/navigation";
-import dynamic from "next/dynamic";
 import { headers } from "next/headers";
 
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
@@ -33,13 +32,8 @@ import { EditorConfigErrorType } from "@docspace/shared/enums";
 
 import { createFile, fileCopyAs, getEditorUrl } from "@/utils/actions";
 import { logger } from "@/../logger.mjs";
-
-const Editor = dynamic(() => import("@/components/Editor"), {
-  ssr: false,
-});
-const CreateFileError = dynamic(() => import("@/components/CreateFileError"), {
-  ssr: false,
-});
+import Editor from "@/components/Editor";
+import CreateFileError from "@/components/CreateFileError";
 
 const log = logger.child({ module: "Create page" });
 
@@ -58,8 +52,9 @@ type TSearchParams = {
   toForm?: string;
 };
 
-async function Page({ searchParams }: { searchParams: TSearchParams }) {
-  const baseURL = getBaseUrl();
+async function Page(props: { searchParams: Promise<TSearchParams> }) {
+  const searchParams = await props.searchParams;
+  const baseURL = await getBaseUrl();
 
   if (!searchParams) {
     log.debug("Empty search params at create file");
@@ -95,7 +90,7 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
     password,
   };
 
-  const hdrs = headers();
+  const hdrs = await headers();
 
   const hostname = hdrs.get("x-forwarded-host");
 

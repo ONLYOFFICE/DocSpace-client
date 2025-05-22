@@ -44,7 +44,7 @@ export type TModel = { label: string; icon: string } & (
     }
   | {
       key: "upload";
-      onClick: (ref?: React.MutableRefObject<Nullable<HTMLDivElement>>) => void;
+      onClick: (ref?: React.RefObject<Nullable<HTMLDivElement>>) => void;
     }
 );
 

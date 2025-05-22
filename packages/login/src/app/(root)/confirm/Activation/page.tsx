@@ -34,14 +34,15 @@ import { getStringFromSearchParams } from "@/utils";
 import ActivateUserForm from "./page.client";
 
 type ActivationProps = {
-  searchParams: { [key: string]: string };
+  searchParams: Promise<{ [key: string]: string }>;
 };
 
-async function Page({ searchParams }: ActivationProps) {
+async function Page(props: ActivationProps) {
+  const searchParams = await props.searchParams;
   const type = searchParams.type;
   const confirmKey = getStringFromSearchParams(searchParams);
 
-  const headersList = headers();
+  const headersList = await headers();
   const hostName = headersList.get("x-forwarded-host") ?? "";
 
   const [settings, passwordSettings] = await Promise.all([

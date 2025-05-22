@@ -5,11 +5,15 @@ import ThemeWrapper from "./globals/theme-wrapper";
 import { DocsContainer } from "./DocsContainer";
 import globalTypes from "./globals";
 import { useDarkMode } from "storybook-dark-mode";
+import { initialize, mswLoader } from "msw-storybook-addon";
 // import "../index";
 
 import lightTheme from "./lightTheme";
 import darkTheme from "./darkTheme";
 import StorybookGlobalStyles from "./styles/StorybookGlobalStyles";
+import i18nextStoryDecorator from "./decorators/i18nextStoryDecorator";
+
+initialize();
 
 const preview = {
   globalTypes,
@@ -46,6 +50,7 @@ const preview = {
       );
     },
   ],
+  loaders: [mswLoader],
 };
 
 export default preview;

@@ -27,6 +27,8 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
+import { createGetRestoreProgressHandler } from "../../__mocks__/storybook/handlers/portal/getRestoreProgress";
+
 import { PreparationPortal } from ".";
 
 const meta = {
@@ -37,6 +39,7 @@ const meta = {
       description: {
         component: `The PreparationPortal component displays a progress indicator during portal restoration or preparation processes.`,
       },
+      disable: true,
     },
   },
   argTypes: {
@@ -70,30 +73,27 @@ export const Default: Story = {
   render: (args) => {
     return <PreparationPortal {...args} />;
   },
-  args: {},
+  parameters: {
+    docs: { disable: false },
+    msw: {
+      handlers: [createGetRestoreProgressHandler({ progress: 70 })],
+    },
+  },
 };
 
 export const WithError: Story = {
   render: (args) => {
     return <PreparationPortal {...args} />;
   },
-  args: {},
-};
-
-export const InProgress: Story = {
-  render: (args) => {
-    return <PreparationPortal {...args} />;
-  },
-  args: {},
-};
-
-export const AsDialog: Story = {
-  render: (args) => {
-    return <PreparationPortal {...args} />;
-  },
-  args: {
-    isDialog: true,
-    withoutHeader: false,
+  parameters: {
+    msw: {
+      handlers: [
+        createGetRestoreProgressHandler({
+          progress: 0,
+          error: "Something went wrong",
+        }),
+      ],
+    },
   },
 };
 
@@ -104,11 +104,9 @@ export const WithoutHeader: Story = {
   args: {
     withoutHeader: true,
   },
-};
-
-export const Complete: Story = {
-  render: (args) => {
-    return <PreparationPortal {...args} />;
+  parameters: {
+    msw: {
+      handlers: [createGetRestoreProgressHandler({ progress: 20 })],
+    },
   },
-  args: {},
 };

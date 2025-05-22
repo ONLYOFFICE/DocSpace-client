@@ -88,49 +88,53 @@ export const AboutContent = ({
           <Text className="row-el" fontSize="13px">
             {t("DocumentManagement")}:
           </Text>
-          <ColorTheme
-            tag="a"
-            themeId={ThemeId.Link}
-            className="row-el"
-            fontSize="13px"
-            fontWeight="600"
-            href={linkRepo}
-            target={LinkTarget.blank}
-            enableUserSelect
-          >
-            &nbsp;{logoText} {t("Common:ProductName")}&nbsp;
-          </ColorTheme>
+          <div className="program-with-version">
+            <ColorTheme
+              tag="a"
+              themeId={ThemeId.Link}
+              className="row-el"
+              fontSize="13px"
+              fontWeight="600"
+              href={linkRepo}
+              target={LinkTarget.blank}
+              enableUserSelect
+            >
+              &nbsp;{logoText} {t("Common:ProductName")}&nbsp;
+            </ColorTheme>
 
-          <Text className="row-el select-el" fontSize="13px" fontWeight="600">
-            v.
-            <span className="version-document-management">
-              {buildVersionInfo.docSpace}
-            </span>
-          </Text>
+            <Text className="row-el select-el" fontSize="13px" fontWeight="600">
+              v.
+              <span className="version-document-management">
+                {buildVersionInfo.docSpace}&nbsp;
+              </span>
+            </Text>
+          </div>
         </div>
 
         <div className="row">
           <Text className="row-el" fontSize="13px">
             {t("OnlineEditors")}:
           </Text>
-          <ColorTheme
-            tag="a"
-            themeId={ThemeId.Link}
-            className="row-el"
-            fontSize="13px"
-            fontWeight="600"
-            href={linkDocs}
-            target={LinkTarget.blank}
-            enableUserSelect
-          >
-            &nbsp;{logoText} {t("Common:ProductEditorsName")}&nbsp;
-          </ColorTheme>
-          <Text className="row-el select-el" fontSize="13px" fontWeight="600">
-            v.
-            <span className="version-online-editors">
-              {buildVersionInfo.documentServer}
-            </span>
-          </Text>
+          <div className="program-with-version">
+            <ColorTheme
+              tag="a"
+              themeId={ThemeId.Link}
+              className="row-el"
+              fontSize="13px"
+              fontWeight="600"
+              href={linkDocs}
+              target={LinkTarget.blank}
+              enableUserSelect
+            >
+              &nbsp;{logoText} {t("Common:ProductEditorsName")}&nbsp;
+            </ColorTheme>
+            <Text className="row-el select-el" fontSize="13px" fontWeight="600">
+              v.
+              <span className="version-online-editors">
+                {buildVersionInfo.documentServer}&nbsp;
+              </span>
+            </Text>
+          </div>
         </div>
 
         <div className="row">

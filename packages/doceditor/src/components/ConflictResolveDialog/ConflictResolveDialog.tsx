@@ -54,7 +54,7 @@ function ConflictResolveDialog({
           ns="Common"
           i18nKey="FileActionRequired"
           values={{ fileName }}
-          components={{ 1: <strong className="bold" /> }}
+          components={{ 1: <strong key="component_key" className="bold" /> }}
         />
       }
       selectActionText={t("ConflictResolveSelectAction")}

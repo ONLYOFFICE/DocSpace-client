@@ -34,7 +34,7 @@ import styles from "@/app/(no-layout)/public-room/password/PasswordPage.module.s
 import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 
 export default async function PublicRoomPasswordPage() {
-  const hdrs = headers();
+  const hdrs = await headers();
   const roomTitle = hdrs.get(PUBLIC_ROOM_TITLE_HEADER);
 
   return (

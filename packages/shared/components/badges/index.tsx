@@ -79,7 +79,9 @@ const BadgeWrapper = ({
     setIsHovered(false);
   };
 
-  const newBadge = React.cloneElement(badge, { isHovered });
+  const badgeProps = { isHovered };
+
+  const newBadge = React.cloneElement(badge, badgeProps);
 
   return (
     <div

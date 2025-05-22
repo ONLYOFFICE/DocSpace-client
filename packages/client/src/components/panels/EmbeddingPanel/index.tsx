@@ -337,7 +337,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   }, [itemId, getLinks]);
 
   const usePrevious = (value: LinkParamsLinkType | null) => {
-    const ref = useRef<LinkParamsLinkType | null>();
+    const ref = useRef<LinkParamsLinkType | null>(undefined);
     useEffect(() => {
       ref.current = value;
     });

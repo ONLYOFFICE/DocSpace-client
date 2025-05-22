@@ -145,7 +145,7 @@ const InviteQuotaWarningDialog = (props) => {
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
-          key="OkButton"
+          key="OKButton"
           label={
             isPaymentPageAvailable ? t("UpgradePlan") : t("Common:OKButton")
           }

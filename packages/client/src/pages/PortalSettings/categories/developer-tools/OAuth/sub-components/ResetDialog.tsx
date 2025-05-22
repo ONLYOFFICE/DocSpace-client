@@ -81,7 +81,7 @@ const ResetDialog = (props: ResetDialogProps) => {
         <Button
           className="delete-button"
           key="DeletePortalBtn"
-          label={t("Common:OkButton")}
+          label={t("Common:OKButton")}
           size={ButtonSize.normal}
           scale
           primary

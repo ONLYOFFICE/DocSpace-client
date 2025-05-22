@@ -48,5 +48,8 @@ export type MainButtonProps = {
   /** Data model menu */
   model: ContextMenuModel[];
   /** Function to set reference map */
-  setRefMap?: (key: GuidanceRefKey, ref: RefObject<HTMLDivElement>) => void;
+  setRefMap?: (
+    key: GuidanceRefKey,
+    ref: RefObject<HTMLDivElement | null>,
+  ) => void;
 };

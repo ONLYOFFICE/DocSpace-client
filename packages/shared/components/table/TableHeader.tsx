@@ -55,7 +55,7 @@ class TableHeaderComponent extends React.Component<
     minWidthsIndex: number[];
   }
 > {
-  headerRef: null | React.RefObject<HTMLDivElement> = null;
+  headerRef: null | React.RefObject<HTMLDivElement | null> = null;
 
   throttledResize: null | DebouncedFunc<() => void> = null;
 

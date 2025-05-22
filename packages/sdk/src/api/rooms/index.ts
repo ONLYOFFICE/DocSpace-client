@@ -51,7 +51,7 @@ export async function getRooms(
     params = `?${filter.toApiUrlParams()}`;
   }
 
-  const [req] = createRequest(
+  const [req] = await createRequest(
     [`/files/rooms${params}`],
     [["", ""]],
     "GET",
@@ -61,7 +61,7 @@ export async function getRooms(
   );
 
   const res = IS_TEST
-    ? roomListHandler(headers())
+    ? roomListHandler(await headers())
     : await fetch(req, { next: { revalidate: 300 } });
 
   if (!res.ok) return;
@@ -75,7 +75,7 @@ export async function validatePublicRoomKey(key: string): Promise<{
   response: TValidateShareRoom;
   anonymousSessionKeyCookie?: string;
 }> {
-  const [req] = createRequest([`/files/share/${key}`], [["", ""]], "GET");
+  const [req] = await createRequest([`/files/share/${key}`], [["", ""]], "GET");
 
   const res = IS_TEST ? validatePublicRoomKeyHandler() : await fetch(req);
 

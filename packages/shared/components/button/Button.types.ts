@@ -28,6 +28,8 @@ import { TColorScheme } from "../../themes";
 import { ButtonSize } from "./Button.enums";
 
 type BaseButtonProps = {
+  /** Ref to access the DOM element or React component instance */
+  ref?: React.RefObject<HTMLButtonElement>;
   /** Button text */
   label: string;
   /** Optional title attribute */
@@ -79,6 +81,6 @@ export type ButtonProps = BaseButtonProps & {
 
 /** Props for the styled ButtonTheme component */
 export type ButtonThemeProps = ButtonProps & {
-  ref: React.LegacyRef<HTMLButtonElement>;
+  ref?: React.RefObject<HTMLButtonElement | null>;
   $currentColorScheme?: TColorScheme;
 };

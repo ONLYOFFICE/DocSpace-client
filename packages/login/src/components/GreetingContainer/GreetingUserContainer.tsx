@@ -79,7 +79,7 @@ export const GreetingUserContainer = ({
             productName: t("Common:ProductName"),
           }}
           components={{
-            1: <Link tag="a" isHovered={false} color="accent" />,
+            1: <Link key="component_key" tag="a" isHovered={false} color="accent" />,
           }}
         />
       </Text>

@@ -50,6 +50,7 @@
   "BetaBadgeFeedback": "Ja esat atradis kļūdu, lūdzu, iesniedziet to, izmantojot <1>forumu</1>, vai sazinieties ar mums pa e-pastu <3>{{supportEmail}}</3>.",
   "BetaBadgeTitle": "RTL interfeiss",
   "BetaLabel": "BETA",
+  "BlockFile": "Bloķēt",
   "Bonus": "Bonuss",
   "BookTraining": "Rezervēt apmācību",
   "Button": "Poga",
@@ -386,6 +387,7 @@
   "MobileIos": "Lejupielādēt {{organizationName}} dokumentus no App Store",
   "MobileLinux": "Lejupielādēt {{organizationName}} darbvirsmas redaktorus operētājsistēmai Linux",
   "MobileMac": "Lejupielādēt {{organizationName}} darbvirsmas redaktorus operētājsistēmai macOS",
+  "MobileStartFillingPdfNotAvailableInfo": "Atbalstīts rīcības veids nav pieejams. Lūdzu, pārslēdzieties uz darbvietas režīmu, lai aizpildītu PDF veidlapas.",
   "MobileWin": "Lejupielādēt {{organizationName}} darbvirsmas redaktorus operētājsistēmai Windows",
   "Months": "Mēneši",
   "More": "Vairāk",
@@ -685,6 +687,7 @@
   "TryBusiness": "Izmēģināt uzņēmumumdarbību",
   "TurnOffDiskSpaceLimit": "Izslēdziet diska vietas ierobežojumu šim {{productName}}.",
   "Type": "Tips",
+  "UnblockFile": "Atbloķēt",
   "UnexpectedError": "Radās neparedzēta kļūda. Vēlāk mēģiniet vēlreiz vai sazinieties ar atbalsta dienestu.",
   "Unknown": "Nezināms",
   "UnknownError": "Nezināma kļūda",
@@ -714,8 +717,5 @@
   "Yes": "Jā",
   "Yesterday": "어제",
   "You": "Jūs",
-  "YourTurn": "Jūsu kārta",
-  "BlockFile": "Bloķēt",
-  "MobileStartFillingPdfNotAvailableInfo": "Atbalstīts rīcības veids nav pieejams. Lūdzu, pārslēdzieties uz darbvietas režīmu, lai aizpildītu PDF veidlapas.",
-  "UnblockFile": "Atbloķēt"
+  "YourTurn": "Jūsu kārta"
 }

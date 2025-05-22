@@ -50,6 +50,7 @@
   "BetaBadgeFeedback": "Ako ste pronašli grešku, molimo vas da je prijavite putem <1>forum</1> ili nas kontaktirate na <3>{{supportEmail}}</3>.",
   "BetaBadgeTitle": "RTL interfejs",
   "BetaLabel": "BETA",
+  "BlockFile": "Blokiraj",
   "Bonus": "Bonus",
   "BookTraining": "Rezerviši obuku",
   "Button": "Dugme",
@@ -386,6 +387,7 @@
   "MobileIos": "Preuzmi {{organizationName}} Dokumenta na App Store-u",
   "MobileLinux": "Preuzmi {{organizationName}} Desktop Uređivače za Linux",
   "MobileMac": "Preuzmi {{organizationName}} Desktop Uređivače za macOS",
+  "MobileStartFillingPdfNotAvailableInfo": "Nepodržana radnja. Molimo pređite na desktop režim kako biste popunili PDF obrasce.",
   "MobileWin": "Preuzmi {{organizationName}} Desktop Uređivače za Windows",
   "Months": "Meseci",
   "More": "Više",
@@ -685,6 +687,7 @@
   "TryBusiness": "Isprobaj Poslovni plan",
   "TurnOffDiskSpaceLimit": "Isključite ograničenje prostora na disku za ovaj {{productName}}.",
   "Type": "Tip",
+  "UnblockFile": "Odblokiraj",
   "UnexpectedError": "Pojavila se neočekivana greška. Probajte ponovo kasnije ili kontaktirajte podršku.",
   "Unknown": "Nepoznato",
   "UnknownError": "Nepoznata greška",
@@ -714,8 +717,5 @@
   "Yes": "Da",
   "Yesterday": "Juče",
   "You": "Vi",
-  "YourTurn": "Vaš red",
-  "BlockFile": "Blokiraj",
-  "MobileStartFillingPdfNotAvailableInfo": "Nepodržana radnja. Molimo pređite na desktop režim kako biste popunili PDF obrasce.",
-  "UnblockFile": "Odblokiraj"
+  "YourTurn": "Vaš red"
 }

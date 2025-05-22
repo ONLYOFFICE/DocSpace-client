@@ -50,6 +50,7 @@
   "BetaBadgeFeedback": "Ако сте пронашли грешку, молимо вас да је пријавите путем <1>форум</1> или нас контактирате на <3>{{supportEmail}}</3>.",
   "BetaBadgeTitle": "RTL интерфејс",
   "BetaLabel": "BETA",
+  "BlockFile": "Блокирај",
   "Bonus": "Бонус",
   "BookTraining": "Резервиши обуку",
   "Button": "Дугме",
@@ -386,6 +387,7 @@
   "MobileIos": "Преузми {{organizationName}} Документа на App Store-у",
   "MobileLinux": "Преузми {{organizationName}} Десктоп Уређиваче за Linux",
   "MobileMac": "Преузми {{organizationName}} Десктоп Уређиваче за macOS",
+  "MobileStartFillingPdfNotAvailableInfo": "Неподржана радња. Молимо пређите на десктоп режим како бисте попунили PDF обрасце.",
   "MobileWin": "Преузми {{organizationName}} Десктоп Уређиваче за Windows",
   "Months": "Месеци",
   "More": "Више",
@@ -685,6 +687,7 @@
   "TryBusiness": "Испробај Пословни план",
   "TurnOffDiskSpaceLimit": "Искључите ограничење простора на диску за овај {{productName}}.",
   "Type": "Тип",
+  "UnblockFile": "Одблокирај",
   "UnexpectedError": "Појавила се неочекивана грешка. Пробајте поново касније или контактирајте подршку.",
   "Unknown": "Непознато",
   "UnknownError": "Непозната грешка",
@@ -714,8 +717,5 @@
   "Yes": "Да",
   "Yesterday": "Јуче",
   "You": "Ви",
-  "YourTurn": "Ваш ред",
-  "MobileStartFillingPdfNotAvailableInfo": "Неподржана радња. Молимо пређите на десктоп режим како бисте попунили PDF обрасце.",
-  "BlockFile": "Блокирај",
-  "UnblockFile": "Одблокирај"
+  "YourTurn": "Ваш ред"
 }

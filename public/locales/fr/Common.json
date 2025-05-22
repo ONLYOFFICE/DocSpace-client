@@ -50,6 +50,7 @@
   "BetaBadgeFeedback": "Si vous avez trouvé un bogue, veuillez le soumettre via le <1>forum</1> ou nous contacter à <3>{{supportEmail}}</3>.",
   "BetaBadgeTitle": "Interface RTL",
   "BetaLabel": "BETA",
+  "BlockFile": "Bloquer",
   "Bonus": "Bonus",
   "BookTraining": "Réservez un cours de formation",
   "Button": "Bouton",
@@ -386,6 +387,7 @@
   "MobileIos": "Télécharger {{organizationName}} Documents sur App Store",
   "MobileLinux": "Télécharger les applications de bureau {{organizationName}} pour Linux",
   "MobileMac": "Télécharger les applications de bureau {{organizationName}} pour macOS",
+  "MobileStartFillingPdfNotAvailableInfo": "Action non prise en charge. Veuillez passer en mode bureau pour remplir les formulaires PDF.\n",
   "MobileWin": "Télécharger les applications de bureau {{organizationName}} pour Windows",
   "Months": "Mois",
   "More": "Plus",
@@ -685,6 +687,7 @@
   "TryBusiness": "Essayer le plan Business",
   "TurnOffDiskSpaceLimit": "Désactiver la limite d'espace de stockage pour ce {{productName}}.",
   "Type": "Type",
+  "UnblockFile": "Débloquer",
   "UnexpectedError": "Une erreur inattendue s’est produite. Réessayez plus tard ou contactez l’équipe de support.",
   "Unknown": "Inconnu",
   "UnknownError": "Erreur inconnue",
@@ -714,8 +717,5 @@
   "Yes": "Oui",
   "Yesterday": "Hier",
   "You": "Vous",
-  "YourTurn": "Votre tour",
-  "BlockFile": "Bloquer",
-  "MobileStartFillingPdfNotAvailableInfo": "Action non prise en charge. Veuillez passer en mode bureau pour remplir les formulaires PDF.\n",
-  "UnblockFile": "Débloquer"
+  "YourTurn": "Votre tour"
 }

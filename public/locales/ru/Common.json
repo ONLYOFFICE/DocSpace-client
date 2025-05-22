@@ -50,6 +50,7 @@
   "BetaBadgeFeedback": "Если вы обнаружили ошибку, пожалуйста, сообщите о ней на <1>форуме</1> или напишите нам по адресу: <3>{{supportEmail}}</3>.",
   "BetaBadgeTitle": "Интерфейс RTL",
   "BetaLabel": "BETA",
+  "BlockFile": "Блокировать",
   "Bonus": "Бонус",
   "BookTraining": "Заказать обучающее занятие",
   "Button": "Кнопка",
@@ -386,6 +387,7 @@
   "MobileIos": "Скачать {{organizationName}} Документы в App Store",
   "MobileLinux": "Скачать десктопные редакторы {{organizationName}} для Linux",
   "MobileMac": "Скачать десктопные редакторы {{organizationName}} для macOS",
+  "MobileStartFillingPdfNotAvailableInfo": "Действие не поддерживается. Переключитесь на десктопный режим, чтобы заполнить PDF-формы.",
   "MobileWin": "Скачать десктопные редакторы {{organizationName}} для Windows",
   "Months": "Месяцев",
   "More": "Еще",
@@ -685,6 +687,7 @@
   "TryBusiness": "Попробуйте Business",
   "TurnOffDiskSpaceLimit": "Отключить ограничение дискового пространства для этого {{productName}}.",
   "Type": "Тип",
+  "UnblockFile": "Разблокировать",
   "UnexpectedError": "Произошла непредвиденная ошибка. Попробуйте еще раз позднее или обратитесь в поддержку.",
   "Unknown": "Неизвестный",
   "UnknownError": "Неизвестная ошибка",
@@ -714,8 +717,5 @@
   "Yes": "Да",
   "Yesterday": "Вчера",
   "You": "Вы",
-  "YourTurn": "Ваша очередь",
-  "BlockFile": "Блокировать",
-  "MobileStartFillingPdfNotAvailableInfo": "Действие не поддерживается. Переключитесь на десктопный режим, чтобы заполнить PDF-формы.",
-  "UnblockFile": "Разблокировать"
+  "YourTurn": "Ваша очередь"
 }

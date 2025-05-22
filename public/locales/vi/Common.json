@@ -50,6 +50,7 @@
   "BetaBadgeFeedback": "Nếu bạn phát hiện thấy lỗi, vui lòng gửi lỗi qua <1>diễn đàn</1> hoặc liên hệ với chúng tôi theo địa chỉ <3>{{supportEmail}}</3>.",
   "BetaBadgeTitle": "Giao diện RTL",
   "BetaLabel": "BETA",
+  "BlockFile": "Chặn",
   "Bonus": "Thưởng",
   "BookTraining": "Đặt lịch buổi đào tạo",
   "Button": "Nút",
@@ -386,6 +387,7 @@
   "MobileIos": "Tải xuống {{organizationName}} Documents trên App Store",
   "MobileLinux": "Tải xuống Trình chỉnh sửa {{organizationName}} cho máy tính Linux",
   "MobileMac": "Tải xuống Trình chỉnh sửa {{organizationName}} cho máy tính macOS",
+  "MobileStartFillingPdfNotAvailableInfo": "Hành động không được hỗ trợ. Vui lòng chuyển sang chế độ desktop để điền vào các biểu mẫu PDF.",
   "MobileWin": "Tải xuống Trình chỉnh sửa {{organizationName}} cho máy tính Windows",
   "Months": "Tháng",
   "More": "Khác",
@@ -685,6 +687,7 @@
   "TryBusiness": "Thử gói Doanh Nghiệp Business",
   "TurnOffDiskSpaceLimit": "Tắt giới hạn dung lượng ổ đĩa cho {{productName}} này.",
   "Type": "Kiểu",
+  "UnblockFile": "Khôi phục",
   "UnexpectedError": "Gặp lỗi bất thường. Hãy thử lại sau hoặc liên hệ với bộ phận hỗ trợ.",
   "Unknown": "Không xác định",
   "UnknownError": "Lỗi không xác định",
@@ -714,8 +717,5 @@
   "Yes": "Có",
   "Yesterday": "Hôm qua",
   "You": "Bạn",
-  "YourTurn": "Phiên của bạn",
-  "BlockFile": "Chặn",
-  "MobileStartFillingPdfNotAvailableInfo": "Hành động không được hỗ trợ. Vui lòng chuyển sang chế độ desktop để điền vào các biểu mẫu PDF.",
-  "UnblockFile": "Khôi phục"
+  "YourTurn": "Phiên của bạn"
 }

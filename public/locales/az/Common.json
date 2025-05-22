@@ -50,6 +50,7 @@
   "BetaBadgeFeedback": "Əgər səhv tapmısınızsa, onu <1>forum</1> vasitəsilə göndərin və ya <3>{{supportEmail}}</3> vasitəsilə bizimlə əlaqə saxlayın.",
   "BetaBadgeTitle": "RTL interfeysi",
   "BetaLabel": "BETA",
+  "BlockFile": "Blok",
   "Bonus": "Bonus",
   "BookTraining": "Təlim rezerv edin",
   "Button": "Düymə",
@@ -386,6 +387,7 @@
   "MobileIos": "App Store-da {{organizationName}} Sənədləri endirin",
   "MobileLinux": "Linux üçün {{organizationName}} Masaüstü Redaktorları endirin",
   "MobileMac": "macOS üçün {{organizationName}} Masaüstü Redaktorları endirin",
+  "MobileStartFillingPdfNotAvailableInfo": "Dəstəklənməyən əməliyyat. Xahiş edirəm, PDF formalarını doldurmaq üçün masaüstü rejimə keçin.",
   "MobileWin": "Windows üçün {{organizationName}} Masaüstü Redaktorları endirin",
   "Months": "Aylar",
   "More": "Daha çox",
@@ -685,6 +687,7 @@
   "TryBusiness": "Biznesi yoxlayın",
   "TurnOffDiskSpaceLimit": "Bu {{productName}} üçün disk sahəsi limitini söndürün.",
   "Type": "Növ",
+  "UnblockFile": "Blokdan çıxarın",
   "UnexpectedError": "Gözlənilməz xəta baş verdi. Daha sonra yenidən cəhd edin və ya dəstək xidməti ilə əlaqə saxlayın.",
   "Unknown": "Bilinməyən",
   "UnknownError": "Bilinməyən xəta",
@@ -714,8 +717,5 @@
   "Yes": "Bəli",
   "Yesterday": "Dünən",
   "You": "Siz",
-  "YourTurn": "Sizin növbəniz",
-  "BlockFile": "Blok",
-  "MobileStartFillingPdfNotAvailableInfo": "Dəstəklənməyən əməliyyat. Xahiş edirəm, PDF formalarını doldurmaq üçün masaüstü rejimə keçin.",
-  "UnblockFile": "Blokdan çıxarın"
+  "YourTurn": "Sizin növbəniz"
 }

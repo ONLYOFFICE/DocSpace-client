@@ -50,6 +50,7 @@
   "BetaBadgeFeedback": "Jeśli znalazłeś błąd, prześlij go za pośrednictwem <1>forum</1> lub skontaktuj się z nami pod adresem <3>{{supportEmail}}</3>.",
   "BetaBadgeTitle": "Interfejs RTL",
   "BetaLabel": "BETA",
+  "BlockFile": "Zablokować",
   "Bonus": "Bonus",
   "BookTraining": "Zarezerwuj szkolenie",
   "Button": "Przycisk",
@@ -386,6 +387,7 @@
   "MobileIos": "Pobierz {{organizationName}} Documents z App Store",
   "MobileLinux": "Pobierz {{organizationName}} Desktop Editors dla Linux",
   "MobileMac": "Pobierz {{organizationName}} Desktop Editors dla macOS",
+  "MobileStartFillingPdfNotAvailableInfo": "Nieobsługiwane działanie. Aby wypełniać formularze PDF, przejdź do trybu desktopowego.",
   "MobileWin": "Pobierz {{organizationName}} Desktop Editors dla Windows",
   "Months": "Miesiące",
   "More": "Więcej",
@@ -685,6 +687,7 @@
   "TryBusiness": "Wypróbuj plan Biznes",
   "TurnOffDiskSpaceLimit": "Wyłącz limit pamięci dla tego {{productName}}.",
   "Type": "Rodzaj",
+  "UnblockFile": "Odblokuj",
   "UnexpectedError": "Wystąpił nieoczekiwany błąd. Spróbuj ponownie później lub skontaktuj się z działem obsługi.",
   "Unknown": "Nieznany",
   "UnknownError": "Nieznany błąd",
@@ -714,8 +717,5 @@
   "Yes": "Tak",
   "Yesterday": "Wczoraj",
   "You": "Ty",
-  "YourTurn": "Twoja kolej",
-  "BlockFile": "Zablokować",
-  "MobileStartFillingPdfNotAvailableInfo": "Nieobsługiwane działanie. Aby wypełniać formularze PDF, przejdź do trybu desktopowego.",
-  "UnblockFile": "Odblokuj"
+  "YourTurn": "Twoja kolej"
 }

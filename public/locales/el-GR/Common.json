@@ -50,6 +50,7 @@
   "BetaBadgeFeedback": "Εάν έχετε βρει κάποιο σφάλμα, υποβάλετέ το μέσω <1>φόρουμ</1> ή επικοινωνήστε μαζί μας στο <3>{{supportEmail}}</3>.",
   "BetaBadgeTitle": "Διασύνδεση RTL",
   "BetaLabel": "BETA",
+  "BlockFile": "Μπλοκ",
   "Bonus": "Μπόνους",
   "BookTraining": "Κάντε κράτηση για εκπαίδευση",
   "Button": "Κουμπί",
@@ -386,6 +387,7 @@
   "MobileIos": "Λήψη {{organizationName}} Documents από App Store",
   "MobileLinux": "Λήψη {{organizationName}} Desktop Editors για Linux",
   "MobileMac": "Λήψη {{organizationName}} Desktop Editors για macOS",
+  "MobileStartFillingPdfNotAvailableInfo": "Μη υποστηριζόμενη ενέργεια. Παρακαλώ μεταβείτε στην επιφάνεια εργασίας για να συμπληρώσετε φόρμες PDF.",
   "MobileWin": "Λήψη {{organizationName}} Desktop Editors για Windows",
   "Months": "Μήνες",
   "More": "Περισσότερα",
@@ -685,6 +687,7 @@
   "TryBusiness": "Δοκιμή Business",
   "TurnOffDiskSpaceLimit": "Απενεργοποιήστε το όριο χώρου στον δίσκο για αυτό το {{productName}}.",
   "Type": "Τύπος",
+  "UnblockFile": "Ξεμπλόκαρε",
   "UnexpectedError": "Εμφανίστηκε ένα απροσδόκητο σφάλμα. Δοκιμάστε ξανά αργότερα ή επικοινωνήστε με την υποστήριξη.",
   "Unknown": "Άγνωστο",
   "UnknownError": "Άγνωστο σφάλμα",
@@ -714,8 +717,5 @@
   "Yes": "Ναι",
   "Yesterday": "Χθες",
   "You": "Εσείς",
-  "YourTurn": "Η σειρά σας",
-  "BlockFile": "Μπλοκ",
-  "MobileStartFillingPdfNotAvailableInfo": "Μη υποστηριζόμενη ενέργεια. Παρακαλώ μεταβείτε στην επιφάνεια εργασίας για να συμπληρώσετε φόρμες PDF.",
-  "UnblockFile": "Ξεμπλόκαρε"
+  "YourTurn": "Η σειρά σας"
 }

@@ -50,6 +50,7 @@
   "BetaBadgeFeedback": "Ако сте открили грешка, моля, изпратете я чрез <1>форум</1> или се свържете с нас на <3>{{supportEmail}}</3>.",
   "BetaBadgeTitle": "RTL интерфейс",
   "BetaLabel": "BETA",
+  "BlockFile": "Блокирайте",
   "Bonus": "Бонус",
   "BookTraining": "Резервирайте обучение",
   "Button": "Бутон",
@@ -386,6 +387,7 @@
   "MobileIos": "Изтеглете {{organizationName}} Documents от App Store",
   "MobileLinux": "Изтеглете {{organizationName}} настолни редактори за Linux",
   "MobileMac": "Изтеглете {{organizationName}} настолни редактори за macOS",
+  "MobileStartFillingPdfNotAvailableInfo": "Неподдържана операция. Моля, преминете в настолен режим, за да попълвате PDF формуляри.",
   "MobileWin": "Изтеглете {{organizationName}} настолни редактори за Windows",
   "Months": "Месеци",
   "More": "Още",
@@ -685,6 +687,7 @@
   "TryBusiness": "Опитайте Бизнес",
   "TurnOffDiskSpaceLimit": "Изключете ограничението на дисковото пространство за този {{productName}}.",
   "Type": "Закачи",
+  "UnblockFile": "Разблокирай",
   "UnexpectedError": "Възникна неочаквана грешка. Опитайте отново по-късно или се свържете с поддръжката.",
   "Unknown": "Неизвестен",
   "UnknownError": "Непозната грешка",
@@ -714,8 +717,5 @@
   "Yes": "Да",
   "Yesterday": "Вчера",
   "You": "Вие",
-  "YourTurn": "Ваш ред",
-  "BlockFile": "Блокирайте",
-  "MobileStartFillingPdfNotAvailableInfo": "Неподдържана операция. Моля, преминете в настолен режим, за да попълвате PDF формуляри.",
-  "UnblockFile": "Разблокирай"
+  "YourTurn": "Ваш ред"
 }

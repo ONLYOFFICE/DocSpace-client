@@ -50,6 +50,7 @@
   "BetaBadgeFeedback": "ඔබට දෝෂයක් හමු වූයේ නම්, කරුණාකර <1>සංසදය</1> හෝ <3>{{supportEmail}}</3> වෙත දන්වන්න.",
   "BetaBadgeTitle": "RTL අතුරුමුහුණත",
   "BetaLabel": "බීටා",
+  "BlockFile": "ලිහිණිය",
   "Bonus": "දීමනා",
   "BookTraining": "පුහුණුවක් වෙන් කරන්න",
   "Button": "බොත්තම",
@@ -386,6 +387,7 @@
   "MobileIos": "{{organizationName}} ලේඛන ඇප් ස්ටෝర్‌లో බාගන්නන්න",
   "MobileLinux": "Linux සඳහා {{organizationName}} Desktop Editors බාගන්න",
   "MobileMac": "macOS සඳහා {{organizationName}} Desktop Editors බාගන්න.",
+  "MobileStartFillingPdfNotAvailableInfo": "ක්‍රියාව අනුග්‍රහණය කරන්නේ නැහැ. PDF පෝරම් පිරවීමට ඩෙස්ක්ටොප් පරිසරයට මාරු කරන්න.",
   "MobileWin": "{{organizationName}} Desktop Editors Windows සඳහා බාගත කරන්න",
   "Months": "මාස",
   "More": "තවත්",
@@ -685,6 +687,7 @@
   "TryBusiness": "ව්‍යාපාර සැලසුම බලන්න",
   "TurnOffDiskSpaceLimit": "මෙම {{productName}} සඳහා තැටියේ ඉඩ සීමාව අක්‍රිය කරන්න.",
   "Type": "වර්ගය",
+  "UnblockFile": "අනවහිර කරන්න",
   "UnexpectedError": "අනපේක්‍ෂිත දෝෂයක් සිදු විය. නැවත උත්සාහ කරන්න හෝ සහාය අමතන්න.",
   "Unknown": "නොදන්නා",
   "UnknownError": "නොදන්නා දෝෂයකි",
@@ -714,8 +717,5 @@
   "Yes": "ඔව්",
   "Yesterday": "ඊයේ",
   "You": "ඔබ",
-  "YourTurn": "ඔබේ වාරය.",
-  "BlockFile": "ලිහිණිය",
-  "MobileStartFillingPdfNotAvailableInfo": "ක්‍රියාව අනුග්‍රහණය කරන්නේ නැහැ. PDF පෝරම් පිරවීමට ඩෙස්ක්ටොප් පරිසරයට මාරු කරන්න.",
-  "UnblockFile": "අනවහිර කරන්න"
+  "YourTurn": "ඔබේ වාරය."
 }

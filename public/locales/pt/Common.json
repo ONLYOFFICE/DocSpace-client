@@ -50,6 +50,7 @@
   "BetaBadgeFeedback": "Se você encontrou um bug, envie-o através do <1>fórum</1> ou entre em contato conosco em <3>{{supportEmail}}</3>.",
   "BetaBadgeTitle": "Interface RTL",
   "BetaLabel": "BETA",
+  "BlockFile": "Bloco",
   "Bonus": "Bónus",
   "BookTraining": "Agende uma formação",
   "Button": "Botão",
@@ -386,6 +387,7 @@
   "MobileIos": "Faça o download do {{organizationName}} Documents na  App Store",
   "MobileLinux": "Faça o download do {{organizationName}} Desktop Editors para Linux",
   "MobileMac": "Faça o download do {{organizationName}} Desktop Editors para macOS",
+  "MobileStartFillingPdfNotAvailableInfo": "Ação não suportada. Por favor, altere para o modo desktop para preencher formulários PDF.",
   "MobileWin": "Faça o download do {{organizationName}} Desktop Editors para Windows",
   "Months": "Meses",
   "More": "Mais",
@@ -685,6 +687,7 @@
   "TryBusiness": "Experimente negócios",
   "TurnOffDiskSpaceLimit": "Desative o limite de espaço em disco para este {{productName}}.",
   "Type": "Tipo",
+  "UnblockFile": "Desbloquear",
   "UnexpectedError": "Ocorreu um erro inesperado. Tente novamente mais tarde ou contacte o apoio.",
   "Unknown": "Desconhecido",
   "UnknownError": "Erro desconhecido",
@@ -714,8 +717,5 @@
   "Yes": "Sim",
   "Yesterday": "Ontem",
   "You": "Você",
-  "YourTurn": "A sua vez",
-  "BlockFile": "Bloco",
-  "MobileStartFillingPdfNotAvailableInfo": "Ação não suportada. Por favor, altere para o modo desktop para preencher formulários PDF.",
-  "UnblockFile": "Desbloquear"
+  "YourTurn": "A sua vez"
 }

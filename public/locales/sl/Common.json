@@ -50,6 +50,7 @@
   "BetaBadgeFeedback": "Če ste našli napako, jo pošljite prek <1>foruma</1> ali nas kontaktirajte na <3>{{supportEmail}}</3>.",
   "BetaBadgeTitle": "RTL vmesnik",
   "BetaLabel": "BETA",
+  "BlockFile": "Blokiraj",
   "Bonus": "Bonus",
   "BookTraining": "Rezervirajte trening",
   "Button": "Gumb",
@@ -386,6 +387,7 @@
   "MobileIos": "Prenesi {{organizationName}} dokumente na App Store",
   "MobileLinux": "Prenesi {{organizationName}} namizne urejevalnike za Linux",
   "MobileMac": "Prenesi {{organizationName}} namizne urejevalnike za macOS",
+  "MobileStartFillingPdfNotAvailableInfo": "Neuspešna izvedba dejanja. Za izpolnjevanje obrazcev PDF preklopite na namizni način.",
   "MobileWin": "Prenesi {{organizationName}} namizne urejevalnike za Windows",
   "Months": "Mesecev",
   "More": "Več",
@@ -685,6 +687,7 @@
   "TryBusiness": "Preizkusi Poslovno",
   "TurnOffDiskSpaceLimit": "Izklopite omejitev prostora na disku za ta prostor {{productName}}.",
   "Type": "Tip",
+  "UnblockFile": "Odpri",
   "UnexpectedError": "Prišlo je do nepričakovane napake. Poskusite znova pozneje ali se obrnite na podporo.",
   "Unknown": "Neznano",
   "UnknownError": "Neznana napaka",
@@ -714,8 +717,5 @@
   "Yes": "Da",
   "Yesterday": "Včeraj",
   "You": "Vi",
-  "YourTurn": "Vi ste na vrsti",
-  "BlockFile": "Blokiraj",
-  "MobileStartFillingPdfNotAvailableInfo": "Neuspešna izvedba dejanja. Za izpolnjevanje obrazcev PDF preklopite na namizni način.",
-  "UnblockFile": "Odpri"
+  "YourTurn": "Vi ste na vrsti"
 }

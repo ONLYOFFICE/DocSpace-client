@@ -50,6 +50,7 @@
   "BetaBadgeFeedback": "Bir hata bulduysanız lütfen bunu <1>forum</1> aracılığıyla gönderin veya <3>{{supportEmail}}</3> adresinden bizimle iletişime geçin.",
   "BetaBadgeTitle": "RTL arayüzü",
   "BetaLabel": "BETA",
+  "BlockFile": "Blok",
   "Bonus": "Bonus",
   "BookTraining": "Eğitim rezervasyonu yapın",
   "Button": "Buton",
@@ -386,6 +387,7 @@
   "MobileIos": "{{organizationName}} Belgelerini App Store'dan İndirin",
   "MobileLinux": "Linux için {{organizationName}} Masaüstü Düzenleyicilerini İndirin",
   "MobileMac": "macOS için {{organizationName}} Masaüstü Düzenleyicilerini İndirin",
+  "MobileStartFillingPdfNotAvailableInfo": "Desteklenmeyen işlem. Lütfen PDF formlarını doldurmak için masaüstü moduna geçin.",
   "MobileWin": "Windows için {{organizationName}} Masaüstü Düzenleyicilerini İndirin",
   "Months": "Ay",
   "More": "Daha",
@@ -685,6 +687,7 @@
   "TryBusiness": "Business Deneyin",
   "TurnOffDiskSpaceLimit": "Bu {{productName}} için disk alanı sınırını kapatın.",
   "Type": "Tür",
+  "UnblockFile": "Engellemeyi Kaldır",
   "UnexpectedError": "Beklenmedik bir hata oluştu. Daha sonra tekrar deneyin veya destekle iletişime geçin.",
   "Unknown": "Bilinmeyen",
   "UnknownError": "Bilinmeyen hata",
@@ -714,8 +717,5 @@
   "Yes": "Evet",
   "Yesterday": "Dün",
   "You": "Siz",
-  "YourTurn": "Sıra sizde",
-  "BlockFile": "Blok",
-  "MobileStartFillingPdfNotAvailableInfo": "Desteklenmeyen işlem. Lütfen PDF formlarını doldurmak için masaüstü moduna geçin.",
-  "UnblockFile": "Engellemeyi Kaldır"
+  "YourTurn": "Sıra sizde"
 }

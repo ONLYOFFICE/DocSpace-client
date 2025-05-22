@@ -50,6 +50,7 @@
   "BetaBadgeFeedback": "Als u een bug heeft gevonden, kunt u deze indienen via het <1>forum</1> of contact met ons opnemen via <3>{{supportEmail}}</3>.",
   "BetaBadgeTitle": "RTL-interface",
   "BetaLabel": "BETA",
+  "BlockFile": "Blok",
   "Bonus": "Bonus",
   "BookTraining": "Boek een training",
   "Button": "Knop",
@@ -386,6 +387,7 @@
   "MobileIos": "Download {{organizationName}} Documents in de App Store",
   "MobileLinux": "Download {{organizationName}} Desktop Editors voor Linux",
   "MobileMac": "Download {{organizationName}} Desktop Editors voor macOS",
+  "MobileStartFillingPdfNotAvailableInfo": "Onondersteunde actie. Schakel over naar de desktopmodus om PDF-formulieren in te vullen.",
   "MobileWin": "Download {{organizationName}} Desktop Editors voor Windows",
   "Months": "Maanden",
   "More": "Meer",
@@ -685,6 +687,7 @@
   "TryBusiness": "Probeer Zakelijk",
   "TurnOffDiskSpaceLimit": "Schakel de schijfruimtebeperking voor deze {{productName}} uit.",
   "Type": "Type",
+  "UnblockFile": "Ontgrendelen",
   "UnexpectedError": "Er is een onverwachte fout opgetreden. Probeer het later nog eens of neem contact op met de ondersteuning.",
   "Unknown": "Onbekend",
   "UnknownError": "Onbekende fout",
@@ -714,8 +717,5 @@
   "Yes": "Ja",
   "Yesterday": "Gisteren",
   "You": "U",
-  "YourTurn": "Uw beurt",
-  "BlockFile": "Blok",
-  "MobileStartFillingPdfNotAvailableInfo": "Onondersteunde actie. Schakel over naar de desktopmodus om PDF-formulieren in te vullen.",
-  "UnblockFile": "Ontgrendelen"
+  "YourTurn": "Uw beurt"
 }

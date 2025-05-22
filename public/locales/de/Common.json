@@ -50,6 +50,7 @@
   "BetaBadgeFeedback": "Wenn Sie einen Fehler gefunden haben, melden Sie ihn bitte im <1>Forum</1> oder kontaktieren Sie uns unter <3>{{supportEmail}}</3>.",
   "BetaBadgeTitle": "RTL-Benutzeroberfläche",
   "BetaLabel": "BETA",
+  "BlockFile": "Blockieren",
   "Bonus": "Bonus",
   "BookTraining": "Training buchen",
   "Button": "Schaltfläche",
@@ -386,6 +387,7 @@
   "MobileIos": "Laden Sie {{organizationName}} Documents im AppStore herunter",
   "MobileLinux": "Laden Sie {{organizationName}} Desktop Editors für Linux herunter",
   "MobileMac": "Laden Sie {{organizationName}} Desktop Editors für macOS herunter",
+  "MobileStartFillingPdfNotAvailableInfo": "Nicht unterstützte Aktion. Bitte wechseln Sie in den Desktopmodus, um PDF-Formulare auszufüllen.\n",
   "MobileWin": "Laden Sie {{organizationName}} Desktop Editors für Windows herunter",
   "Months": "Monate",
   "More": "Mehr",
@@ -685,6 +687,7 @@
   "TryBusiness": "Mit Business testieren",
   "TurnOffDiskSpaceLimit": "Die Speicherplatzbeschränkung für diesen {{productName}} deaktivieren",
   "Type": "Typ",
+  "UnblockFile": "Entsperren",
   "UnexpectedError": "Es ist ein unerwarteter Fehler aufgetreten. Versuchen Sie es später noch einmal oder kontaktieren Sie den Support.",
   "Unknown": "Unbekannt",
   "UnknownError": "Unbekannter Fehler",
@@ -714,8 +717,5 @@
   "Yes": "Ja",
   "Yesterday": "Gestern",
   "You": "Sie",
-  "YourTurn": "Jetzt sind Sie dran",
-  "BlockFile": "Blockieren",
-  "MobileStartFillingPdfNotAvailableInfo": "Nicht unterstützte Aktion. Bitte wechseln Sie in den Desktopmodus, um PDF-Formulare auszufüllen.\n",
-  "UnblockFile": "Entsperren"
+  "YourTurn": "Jetzt sind Sie dran"
 }

@@ -50,6 +50,7 @@
   "BetaBadgeFeedback": "Jos olet löytänyt virheen, lähetä se <1>foorumin</1> kautta tai ota meihin yhteyttä osoitteessa <3>{{supportEmail}}</3>.",
   "BetaBadgeTitle": "RTL-liitäntä",
   "BetaLabel": "BETA",
+  "BlockFile": "Lohko",
   "Bonus": "Bonus",
   "BookTraining": "Varaa koulutus",
   "Button": "Painike",
@@ -386,6 +387,7 @@
   "MobileIos": "Lataa {{organizationName}}-asiakirjat App Storesta",
   "MobileLinux": "Lataa {{organizationName}} Desktop Editors Linuxille",
   "MobileMac": "Lataa {{organizationName}} Desktop Editors macOS:ille",
+  "MobileStartFillingPdfNotAvailableInfo": "Tuntematon toiminto. Ole hyvä ja vaihda työpöytätilaan täyttääksesi PDF-lomakkeet.",
   "MobileWin": "Lataa {{organizationName}} Desktop Editors Windowsille",
   "Months": "Kuukaudet ",
   "More": "Enemmmän",
@@ -685,6 +687,7 @@
   "TryBusiness": "Kokeile Businesstä",
   "TurnOffDiskSpaceLimit": "Ota levytilaraja pois käytöstä tämän {{productName}} osalta.",
   "Type": "Tyyppi",
+  "UnblockFile": "Avaa tukos",
   "UnexpectedError": "Odottamaton virhe tapahtui. Yritä uudelleen myöhemmin tai ota yhteyttä tukeen.",
   "Unknown": "Tuntematon",
   "UnknownError": "Tuntematon virhe",
@@ -714,8 +717,5 @@
   "Yes": "Kyllä",
   "Yesterday": "Eilen",
   "You": "Sinä",
-  "YourTurn": "Sinun vuorosi",
-  "BlockFile": "Lohko",
-  "MobileStartFillingPdfNotAvailableInfo": "Tuntematon toiminto. Ole hyvä ja vaihda työpöytätilaan täyttääksesi PDF-lomakkeet.",
-  "UnblockFile": "Avaa tukos"
+  "YourTurn": "Sinun vuorosi"
 }

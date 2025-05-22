@@ -50,6 +50,7 @@
   "BetaBadgeFeedback": "إذا عثرت على خطأ، فضلًا أرسله عبر <1>المنتدى</1> أو تواصل معنا عبر الإيميل <3>{{supportEmail}}</3>.",
   "BetaBadgeTitle": "واجهة مكتوبة من اليمين إلى اليسار",
   "BetaLabel": "BETA",
+  "BlockFile": "كتلة",
   "Bonus": "مكافأة",
   "BookTraining": "احجز تدريب",
   "Button": "زر",
@@ -386,6 +387,7 @@
   "MobileIos": "حمّل {{organizationName}} Documents من المتجر",
   "MobileLinux": "حمّل {{organizationName}} Desktop Editors لنظام لينوكس",
   "MobileMac": "حمّل {{organizationName}} Desktop Editors لنظام ماك",
+  "MobileStartFillingPdfNotAvailableInfo": "إجراء غير مدعوم. يرجى الانتقال إلى وضع سطح المكتب لملء نماذج PDF.",
   "MobileWin": "حمّل {{organizationName}} Desktop Editors لنظام ويندوز",
   "Months": "الأشهر",
   "More": "المزيد",
@@ -685,6 +687,7 @@
   "TryBusiness": "جرب حساب الأعمال",
   "TurnOffDiskSpaceLimit": "قم بإيقاف تشغيل حد مساحة القرص لـ {{productName}}.",
   "Type": "النوع",
+  "UnblockFile": "فَكَّ الحِجَار",
   "UnexpectedError": "حدث خطأ غير متوقع. حاول مرة أخرى لاحقًا أو اتصل بالدعم.",
   "Unknown": "غير معروف.",
   "UnknownError": "خطأ غير معروف",
@@ -714,8 +717,5 @@
   "Yes": "نعم",
   "Yesterday": "أمس",
   "You": "أنت",
-  "YourTurn": "دوركم الآن",
-  "BlockFile": "كتلة",
-  "MobileStartFillingPdfNotAvailableInfo": "إجراء غير مدعوم. يرجى الانتقال إلى وضع سطح المكتب لملء نماذج PDF.",
-  "UnblockFile": "فَكَّ الحِجَار"
+  "YourTurn": "دوركم الآن"
 }

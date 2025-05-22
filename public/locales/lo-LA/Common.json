@@ -50,6 +50,7 @@
   "BetaBadgeFeedback": "ຖ້າ​ຫາກ​ທ່ານ​ໄດ້​ພົບ​ເຫັນ​ຂໍ້​ຜິດ​ພາດ​, ກະ​ລຸ​ນາ​ສົ່ງ​ມັນ​ຜ່ານ <1>forum</1> ຫຼື​ຕິດ​ຕໍ່​ຫາ​ພວກ​ເຮົາ​ທີ່ <3>{{supportEmail}}</3>.",
   "BetaBadgeTitle": "ການໂຕ້ຕອບ RTL",
   "BetaLabel": "BETA",
+  "BlockFile": "ບລອກ",
   "Bonus": "ໂບນັດ",
   "BookTraining": "ຈອງການຝຶກອົບຮົມ",
   "Button": "ປຸ່ມ",
@@ -386,6 +387,7 @@
   "MobileIos": "ດາວໂຫລດ ເອກະສານ {{organizationName}} ໃນ App Store",
   "MobileLinux": "ດາວໂຫລດ {{organizationName}} Desktop Editors ສໍາລັບ Linux",
   "MobileMac": "ດາວໂຫລດ {{organizationName}} Desktop Editors ສໍາລັບ macOS",
+  "MobileStartFillingPdfNotAvailableInfo": "ການກະທຳແບບນີ້ບໍ່ສາມາດສະຫຼັບໄດ້ ກະລຸນາປ່ຽນເປັນໂໝດຄອມພິວເຕີ້ເພື່ອຕື່ມແບບຟອມ PDF ໄດ້។",
   "MobileWin": "ດາວໂຫລດ {{organizationName}} Desktop Editors ສໍາລັບ Windows",
   "Months": "ເດືອນໆ",
   "More": "ຫຼາຍ​ຂຶ້ນ",
@@ -685,6 +687,7 @@
   "TryBusiness": "ລອງທຸລະກິດ (Business)",
   "TurnOffDiskSpaceLimit": "ປິດຈໍາກັດເນື້ອທີ່ໂຕ້ຫນາສໍາລັບ {{productName}} ນີ້.",
   "Type": "ປະເພດ",
+  "UnblockFile": "ປົດລອກ",
   "UnexpectedError": "ເກີດຄວາມຜິດພາດທີ່ບໍ່ຄາດຄິດຂຶ້ນ. ກະລຸນາລອງໃໝ່ໃນພາຍຫຼັງ ຫຼືຕິດຕໍ່ຝ່າຍຊ່ວຍເຫຼືອ.",
   "Unknown": "ບໍ່ຊາບ",
   "UnknownError": "ບໍ່ຊາບຂໍ້ຜິດພາດ",
@@ -714,8 +717,5 @@
   "Yes": "ຍາ",
   "Yesterday": "ມື້ວານນີ້",
   "You": "ເຈົ້າ",
-  "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ",
-  "BlockFile": "ບລອກ",
-  "MobileStartFillingPdfNotAvailableInfo": "ການກະທຳແບບນີ້ບໍ່ສາມາດສະຫຼັບໄດ້ ກະລຸນາປ່ຽນເປັນໂໝດຄອມພິວເຕີ້ເພື່ອຕື່ມແບບຟອມ PDF ໄດ້។",
-  "UnblockFile": "ປົດລອກ"
+  "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ"
 }

@@ -50,6 +50,7 @@
   "BetaBadgeFeedback": "Pokud jste našli chybu, odešlete ji prosím prostřednictvím <1>fóra</1> nebo nás kontaktujte na <3>{{supportEmail}}</3>.",
   "BetaBadgeTitle": "Rozhraní RTL",
   "BetaLabel": "BETA",
+  "BlockFile": "Blokovat",
   "Bonus": "Bonus",
   "BookTraining": "Rezervujte si školení",
   "Button": "Tlačítko",
@@ -386,6 +387,7 @@
   "MobileIos": "Stáhnout {{organizationName}} Documents v App Store",
   "MobileLinux": "Stáhnout {{organizationName}} Desktop Editors pro Linux",
   "MobileMac": "Stáhnout {{organizationName}} Desktop Editors pro macOS",
+  "MobileStartFillingPdfNotAvailableInfo": "Nepodporovaná akce. Přejděte do režimu stolního počítače pro vyplňování formulářů PDF.",
   "MobileWin": "Stáhnout {{organizationName}} Desktop Editors pro Windows",
   "Months": "Měsíce",
   "More": "Více na",
@@ -685,6 +687,7 @@
   "TryBusiness": "Zkuste podnikat",
   "TurnOffDiskSpaceLimit": "Vypnutí limitu místa na disku pro tento prostor {{productName}}.",
   "Type": "Typ",
+  "UnblockFile": "Odblokovat",
   "UnexpectedError": "Došlo k neočekávané chybě. Zkuste to později nebo kontaktujte podporu.",
   "Unknown": "Neznámý",
   "UnknownError": "Neznámá chyba",
@@ -714,8 +717,5 @@
   "Yes": "Ano",
   "Yesterday": "Včera",
   "You": "Vy",
-  "YourTurn": "Jste na řadě",
-  "BlockFile": "Blokovat",
-  "MobileStartFillingPdfNotAvailableInfo": "Nepodporovaná akce. Přejděte do režimu stolního počítače pro vyplňování formulářů PDF.",
-  "UnblockFile": "Odblokovat"
+  "YourTurn": "Jste na řadě"
 }

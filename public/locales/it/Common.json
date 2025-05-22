@@ -50,6 +50,7 @@
   "BetaBadgeFeedback": "Se hai trovato un bug, segnalalo tramite il <1>forum</1> o contattaci all'indirizzo <3>{{supportEmail}}</3>.",
   "BetaBadgeTitle": "Interfaccia RTL",
   "BetaLabel": "BETA",
+  "BlockFile": "Blocca",
   "Bonus": "Bonus",
   "BookTraining": "Prenota una sessione di formazione",
   "Button": "Pulsante",
@@ -386,6 +387,7 @@
   "MobileIos": "Scarica {{organizationName}} Documents dall'App Store",
   "MobileLinux": "Scarica {{organizationName}} Desktop Editors per Linux",
   "MobileMac": "Scarica {{organizationName}} Desktop Editors per macOS",
+  "MobileStartFillingPdfNotAvailableInfo": "Azione non supportata. Passa alla modalità desktop per compilare i moduli PDF.",
   "MobileWin": "Scarica {{organizationName}} Desktop Editors per Windows",
   "Months": "Mesi",
   "More": "Di più",
@@ -685,6 +687,7 @@
   "TryBusiness": "Prova il piano Business",
   "TurnOffDiskSpaceLimit": "Disattiva il limite dello spazio su disco per questo {{productName}}.",
   "Type": "Tipo",
+  "UnblockFile": "Sblocca",
   "UnexpectedError": "Si è verificato un errore imprevisto. Riprova più tardi o contatta l&apos;assistenza.",
   "Unknown": "Sconosciuto",
   "UnknownError": "Errore sconosciuto",
@@ -714,8 +717,5 @@
   "Yes": "Sì",
   "Yesterday": "Ieri",
   "You": "Tu",
-  "YourTurn": "Il tuo turno",
-  "MobileStartFillingPdfNotAvailableInfo": "Azione non supportata. Passa alla modalità desktop per compilare i moduli PDF.",
-  "BlockFile": "Blocca",
-  "UnblockFile": "Sblocca"
+  "YourTurn": "Il tuo turno"
 }

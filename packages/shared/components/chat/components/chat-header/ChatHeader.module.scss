@@ -62,6 +62,8 @@
     width: 32px;
     height: 32px;
 
+    min-width: 32px;
+
     box-sizing: border-box;
 
     border-radius: 50%;
@@ -83,6 +85,7 @@
 
   .createChat {
     width: fit-content;
+    min-width: fit-content;
     height: 32px;
 
     box-sizing: border-box;
@@ -114,4 +117,10 @@
   color: var(--chat-header-select-session-date-color);
 
   cursor: default;
+}
+
+.dropDownItemTruncate {
+  span {
+    @include truncate;
+  }
 }

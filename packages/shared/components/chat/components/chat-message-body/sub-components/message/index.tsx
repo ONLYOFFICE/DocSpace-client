@@ -64,6 +64,8 @@ const Message = ({
         .filter(Boolean) as TFile[])
     : [];
 
+  console.log(message);
+
   return (
     <div
       className={classNames(styles.message, {
@@ -88,6 +90,7 @@ const Message = ({
             {
               [styles.chatMessageUser]: message.isSend,
               [styles.chatMessageAI]: !message.isSend,
+              [styles.chatMessageError]: message.category === "error",
             },
           )}
         >

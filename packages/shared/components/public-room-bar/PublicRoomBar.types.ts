@@ -27,6 +27,7 @@
 import React from "react";
 
 export interface PublicRoomBarProps {
+  ref?: React.RefObject<HTMLDivElement | null>;
   headerText: string | React.ReactNode;
   bodyText: string | React.ReactNode;
   iconName?: string;

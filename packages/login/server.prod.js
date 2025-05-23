@@ -143,7 +143,6 @@ const nextConfig = {
     adjustFontFallbacks: false,
     adjustFontFallbacksWithSizeAdjust: false,
     typedRoutes: false,
-    instrumentationHook: false,
     bundlePagesExternals: false,
     ppr: false,
     webpackBuildWorker: false,

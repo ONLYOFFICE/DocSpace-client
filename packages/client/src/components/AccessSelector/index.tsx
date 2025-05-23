@@ -39,7 +39,7 @@ interface AccessSelectorProps {
   t: TTranslation;
   roomType: RoomsType;
   onSelectAccess: (access: any) => void;
-  containerRef: React.RefObject<HTMLDivElement>;
+  containerRef: React.RefObject<HTMLDivElement | null>;
   defaultAccess: number;
   isOwner: boolean;
   isAdmin: boolean;

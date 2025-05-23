@@ -124,10 +124,12 @@ jest.mock("../PlayerPlayButton", () => ({
 }));
 
 jest.mock("../PlayerTimeline", () => ({
-  PlayerTimeline: React.forwardRef(function PlayerTimelineMock(
-    { onChange }: { onChange: (value: number) => void },
-    ref: React.Ref<HTMLDivElement>,
-  ) {
+  PlayerTimeline: function PlayerTimelineMock({
+    ref,
+    onChange,
+  }: { onChange: (value: number) => void } & {
+    ref: React.RefObject<HTMLDivElement>;
+  }) {
     React.useImperativeHandle(
       ref,
       () =>
@@ -141,7 +143,7 @@ jest.mock("../PlayerTimeline", () => ({
         Timeline
       </div>
     );
-  }),
+  },
 }));
 
 jest.mock("../PlayerVolumeControl", () => ({

@@ -26,6 +26,8 @@ export const EmptyViewItem = ({
     contextRef.current?.show(event);
   };
 
+  const elementProps = { className: styles.itemIcon };
+
   return (
     <div
       id={id}
@@ -36,7 +38,7 @@ export const EmptyViewItem = ({
       className={styles.itemWrapper}
     >
       <ContextMenu ref={contextRef} model={model ?? []} />
-      {React.cloneElement(icon, { className: styles.itemIcon })}
+      {React.cloneElement(icon, elementProps)}
       <div className={styles.itemBody}>
         <Text
           as="h4"

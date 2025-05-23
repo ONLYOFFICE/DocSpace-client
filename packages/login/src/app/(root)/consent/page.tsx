@@ -42,11 +42,12 @@ import { GreetingLoginContainer } from "@/components/GreetingContainer";
 
 import Consent from "./page.client";
 
-async function Page({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string };
-}) {
+async function Page(
+  props: {
+    searchParams: Promise<{ [key: string]: string }>;
+  }
+) {
+  const searchParams = await props.searchParams;
   const clientId = searchParams.clientId ?? searchParams.client_id;
 
   const [user, settings, config] = await Promise.all([
@@ -55,7 +56,7 @@ async function Page({
     getConfig(),
   ]);
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
 
   let token = cookieStore.get(`x-signature-${user!.id}`)?.value;
   let new_token = "";

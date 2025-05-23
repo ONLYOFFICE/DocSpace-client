@@ -59,7 +59,7 @@ const Cron = ({
 
   const didMountRef = useRef<boolean>(false);
   const cronRef = useRef<string>(value);
-  const errorRef = useRef<Error>();
+  const errorRef = useRef<Error>(undefined);
 
   const [error, setError] = useState<Error>();
   const [cron, setCron] = useState<string>(value);

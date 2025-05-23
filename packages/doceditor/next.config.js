@@ -75,8 +75,6 @@ const getBuildYear = () => {
 
 module.exports = {
   webpack(config) {
-    console.log("ENV", { env: process.env });
-
     config.devtool = "source-map";
 
     if (config.mode === "production") {

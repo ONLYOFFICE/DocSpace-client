@@ -37,7 +37,6 @@ import type { TRoom } from "@docspace/shared/api/rooms/types";
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import PluginStore from "SRC_DIR/store/PluginStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
-import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 
 import { TInfoPanelSelection } from "../InfoPanel.types";
 
@@ -57,9 +56,6 @@ type InfoPanelHeaderContentProps = {
   infoPanelItemsList: PluginStore["infoPanelItemsList"];
 
   enablePlugins: SettingsStore["enablePlugins"];
-
-  selectedId: SelectedFolderStore["id"];
-  selectedRoomType: SelectedFolderStore["roomType"];
 };
 
 const InfoPanelHeaderContent = ({
@@ -73,8 +69,6 @@ const InfoPanelHeaderContent = ({
   getIsTrash,
   infoPanelItemsList,
   enablePlugins,
-  selectedId,
-  selectedRoomType,
 }: InfoPanelHeaderContentProps) => {
   const { t } = useTranslation(["Common", "InfoPanel"]);
 
@@ -173,15 +167,19 @@ const InfoPanelHeaderContent = ({
 
     infoPanelItemsList.forEach((item) => {
       const onClick = async () => {
-        setView(`info_plugin`);
+        setView(`info_plugin-${item.key}`);
 
-        if (item.value.subMenu.onClick) {
-          item.value.subMenu.onClick(selectedId ? +selectedId : 0);
-        }
+        // if (
+        //   item.value.subMenu.onClick &&
+        //   selection &&
+        //   !Array.isArray(selection)
+        // ) {
+        //   item.value.subMenu.onClick(selection.id ? +selection.id : 0);
+        // }
       };
 
       const tabsItem = {
-        id: `info_plugin`,
+        id: `info_plugin-${item.key}`,
         name: item.value.subMenu.name,
         onClick,
         content: null,

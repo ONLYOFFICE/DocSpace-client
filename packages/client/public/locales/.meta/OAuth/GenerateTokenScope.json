@@ -1,0 +1,346 @@
+{
+  "key_path": "GenerateTokenScope",
+  "content": "For scoped apps, the token will have the same scope as the app.",
+  "content_en_sha1_hash": "c99abbfd78d662b9c6c319d114b282bc5c831aab",
+  "created_at": "2025-05-19T21:30:53.900Z",
+  "updated_at": "2025-05-22T11:56:37.718Z",
+  "comment": {
+    "text": "\"For scoped apps, the token will have the same scope as the app.\" This translation key is used to describe the scope of tokens generated in a GenerateTokenDialog, explaining that they match the app's scope.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:46.381Z"
+  },
+  "usage": [
+    {
+      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\OAuth\\sub-components\\GenerateDeveloperTokenDialog.tsx",
+      "line_number": 187,
+      "context": "<>\n <Text style={{ marginBottom: \"16px\" }} noSelect>\n {t(\"OAuth:GenerateTokenDescription\")}\n </Text>\n <Text style={{ marginBottom: \"16px\" }} noSelect>\n {t(\"OAuth:GenerateTokenScope\")}\n </Text>{\" \"}\n <Text noSelect>\n <Trans t={t} i18nKey=\"GenerateTokenNote\" ns=\"OAuth\" />\n </Text>\n </>",
+      "module": "\\packages\\client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'بالنسبة للتطبيقات المحددة، سيكون للرمز نفس نطاق التطبيق' while understandable, doesn't fully capture the nuance of 'scoped apps'. A more accurate translation would convey the idea that the scope is *inherent* to the application's configuration, not just that it's 'defined'.",
+          "suggestion": "بالنسبة للتطبيقات ذات النطاقات المحددة، سيكون نطاق الرمز مطابقًا لنطاق التطبيق."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Əhatə dairəsi məhdudlaşdırılmış tətbiqlər üçün token tətbiqlə eyni əhatə dairəsinə malik olacaq' isn't the most natural or precise translation of 'For scoped apps, the token will have the same scope as the app.' The phrasing 'tətbiqlə eyni əhatə dairəsinə malik olacaq' is somewhat convoluted. A more direct translation would improve clarity.",
+          "suggestion": "Scoped tətbiqlər üçün token, tətbiqin ehtiyacına uyğun səviyyəyə malik olacaq."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the phrasing 'Əhatə dairəsi məhdudlaşdırılmış tətbiqlər' is a bit wordy. 'Scoped tətbiqlər' is more concise and common in technical contexts.",
+          "suggestion": "Using 'Scoped tətbiqlər' throughout the translation would enhance readability."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'begrenzte Apps' is not the correct translation for 'scoped apps'. 'Scoped' refers to a defined set of permissions or capabilities, not a limitation on the app itself. A better translation would convey the concept of permissions or defined scope.",
+          "suggestion": "Bei Apps mit definiertem Bereich hat das Token den gleichen Bereich wie die App."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Umfang' while technically correct, might not be the best choice. While it translates to 'scope', in the context of OAuth tokens, 'Bereich' is generally preferred in German technical documentation.",
+          "suggestion": "Bei Apps mit definiertem Bereich hat das Token den gleichen Bereich wie die App."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Soveltamisalaan kuuluvissa sovelluksissa tunnuksilla on sama soveltamisala kuin sovelluksella' is a bit verbose and doesn't quite capture the concise meaning of the English sentence. 'Soveltamisalaan kuuluvissa' translates to 'in applications belonging to a scope' which isn't the most natural phrasing.",
+          "suggestion": "Oletetaan, että sovelluksilla on sovellusalueet, tunnusten sovellusalue on sama kuin sovelluksen."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The repetition of 'sovellamisala' (scope) makes the sentence sound clunky in Finnish. While technically accurate, it's not the most elegant way to express the concept.",
+          "suggestion": "A more natural phrasing could use a synonym or rephrase to avoid repetition."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'portée' in the French translation can have multiple meanings. In this context, it refers to 'scope' in the OAuth sense. While 'portée' isn't technically wrong, it's not the most precise or common translation. 'Domaine' or 'étendue' might be more suitable for clarity, especially for a technical document.",
+          "suggestion": "Consider 'Pour les applications à domaine, le jeton aura le même domaine que l'application.' or 'Pour les applications à étendue, le jeton aura la même étendue que l'application.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'scoped' is translated as 'Սահմանափակ'. While understandable, a more accurate and common translation for 'scoped' in the context of OAuth would be 'ժողովածված' or 'սահմանափակված'.",
+          "suggestion": "Սահմանափակված տարածք ունեցող հավելվածների համար token-ը կունենա նույն տարածքը, ինչ հավելվածը:"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'տարածքը' is a valid translation for 'scope', in a technical context, 'իրավունակությունները' might be more precise and clear for the user.",
+          "suggestion": "Սահմանափակված տարածք ունեցող հավելվածների համար token-ը կունենա նույն իրավունակությունները, ինչ հավելվածը:"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Tvēruma lietotnēm marķierim būs tāds pats tvērums kā lietotnei\" is not the most natural or accurate translation of 'For scoped apps, the token will have the same scope as the app.'  'Tvērums' is a direct translation of 'scope' but doesn't flow well.  It also repeats the word 'scope/tvērums'.",
+          "suggestion": "Piemēram, 'Lietotnēm ar ierobežotu darbības jomu, marķierim būs tāda pati darbības joma kā lietotnei.' or 'Lai lietotnēm, kurām ir noteikta darbības joma, marķieris atspoguļos šo pašu darbības jomu.'"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'marķieris' is technically correct, the more commonly used and preferred term in a technical context might be 'taisnības zīme'.",
+          "suggestion": "Replace 'marķieris' with 'taisnības zīme'."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'domeniu de aplicare' is a literal translation of 'scope' but doesn't convey the intended meaning in this context. It's overly technical and might confuse users. A more natural Romanian phrasing is needed.",
+          "suggestion": "Pentru aplicații cu permisiuni definite, token-ul va avea aceleași permisiuni ca și aplicația."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'aceleași permisiuni ca și aplicația' is a refinement of the original translation, making it more understandable. It correctly conveys the concept of 'scope' as permissions.",
+          "suggestion": null
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'තදබරිත යෙදුම්' for 'scoped apps' is not the most accurate. 'Scoped' implies a defined or limited scope, which isn't directly conveyed by 'තදබරිත'. A better translation would focus on the meaning of 'scoped' rather than a literal translation of the word.",
+          "suggestion": "Consider 'வரையறுக்கப்பட்ட යෙදුම්' (varayaruwaththa yeduum - defined apps) or 'කොන්දේසි සහිත යෙදුම්' (kondesee sihiththa yeduum - conditional apps)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'පරිధిක්' (paridhek) for 'scope' is acceptable, but could be made more fluent. While technically correct, it’s slightly awkward in this context. ",
+          "suggestion": "Consider rephrasing to use a more natural sounding alternative like 'අයිතතිය' (aithathiya - authority/permission) or 'අවසරය' (awasareeya - authorization)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The overall sentence structure feels slightly unnatural. The translation could benefit from restructuring for better flow in Sinhala.",
+          "suggestion": "Consider restructuring to something like: 'வரையறுக்கப்பட்ட යෙදුම් සඳහා, ටෝකනය යෙදුම්‍ට හිමිවන බලතතියි.' (varayaruwaththa yeduum satha, token yeduum thiimiwatha balathathiyi - For defined apps, the token has the authority/permission that the app has)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Za aplikacije v okvirju' doesn't accurately convey the meaning of 'For scoped apps'. 'V okvirju' literally means 'in frame' which is not the intended meaning. A more accurate translation would convey the concept of 'scoped' applications.",
+          "suggestion": "Za aplikacije z obsegom/omejitvami"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'žeton' is technically correct for 'token', but 'dostopna/avtorizacijska iskanje' (access/authorization token) might be more natural in this context, depending on the overall documentation style.",
+          "suggestion": "Za aplikacije z obsegom/omejitvami bo imel dostopna/avtorizacijska iskanje enak obseg kot aplikacija."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"За апликације са обимом\" is not the most natural or accurate rendering of 'For scoped apps'.  'Obim' translates to 'scope' but sounds awkward in this context. A more appropriate phrasing would convey the concept of apps *having* scopes, rather than being *with* scopes.  The phrase 'scoped apps' implies apps designed to request specific permissions, so the translation needs to reflect that.",
+          "suggestion": "За апликације које имају обим, токен ће имати исти обим као и апликација."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'обим' (obim) is not the most common or easily understood Serbian equivalent of 'scope' in the context of OAuth tokens and permissions. A better choice might be 'права' (prava), meaning 'permissions' or 'rights'.",
+          "suggestion": "За апликације које имају обим, токен ће имати исте праве као и апликација."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Za aplikacije sa obimom' is slightly awkward. While technically correct, it doesn't flow naturally. 'Sa obimom' implies a characteristic, not the fact that it's a scoped app.",
+          "suggestion": "Za aplikacije sa definisanim obimom, token će imati isti obim kao i aplikacija."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of 'obim' in both 'aplikacije sa obimom' and 'token će imati isti obim' can be confusing. While 'obim' does mean scope, in this context, it's better to use a term that specifically implies a defined set of permissions.",
+          "suggestion": "Za aplikacije sa definisanim opsegom, token će imati isti opseg kao i aplikacija."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"scoped\" is not accurate. \"Ділянковий\" implies a fenced-off or delimited area, which isn't the intended meaning of \"scoped\" in the context of OAuth. \"Scoped\" refers to having a limited or defined set of permissions.",
+          "suggestion": "Для застосунків з обмеженими правами, токен матиме такі ж права, як застосунок."
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, \"ділянку\" is a less precise term in this context. It refers to a plot of land. A better term would be 'права'.",
+          "suggestion": "Use 'права' instead of 'ділянку'."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -50,7 +50,7 @@ import {
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { StyledVersionRow } from "./StyledVersionHistory";
-import VersionBadge from "./VersionBadge";
+import VersionBadge from "./VersionBadge/VersionBadge";
 
 const VersionRow = (props) => {
   const {

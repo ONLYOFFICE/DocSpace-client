@@ -599,8 +599,8 @@ class CreateEditRoomStore {
               ? [bufferSelection]
               : [];
 
-        preparingDataForCopyingToRoom(room.id, selections).catch((error) =>
-          console.error(error),
+        preparingDataForCopyingToRoom(room.id, selections, room).catch(
+          (error) => console.error(error),
         );
       }
 

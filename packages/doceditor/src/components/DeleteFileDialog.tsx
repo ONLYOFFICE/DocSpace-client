@@ -52,7 +52,7 @@ const DeleteFileDialog = ({ onSubmit, onClose }: DeleteFileDialogProps) => {
       <ModalDialog.Footer>
         <Button
           id="delete-file-button_submit"
-          key="OkButton"
+          key="OKButton"
           label={t("Common:MoveToTrash")}
           size={ButtonSize.normal}
           primary

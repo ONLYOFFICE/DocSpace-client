@@ -1,5 +1,5 @@
-@import "../../styles/variables/index.scss";
-@import "../../styles/_mixins.scss";
+@use "../../styles/variables";
+@use "../../styles/mixins";
 
 .link {
   text-decoration: var(--link-text-decoration);
@@ -22,7 +22,7 @@
   }
 
   &:not(.enableUserSelect) {
-    @include no-user-select;
+    @include mixins.no-user-select;
   }
 
   &:hover:not(.noHover) {

@@ -1,0 +1,393 @@
+{
+  "key_path": "spSignExitRequest",
+  "content": "Sign Logout Requests",
+  "content_en_sha1_hash": "fd1f4f7fefacb45ef56a56caa93e85ad86fd41e8",
+  "created_at": "2025-05-19T21:30:50.172Z",
+  "updated_at": "2025-05-21T01:46:18.045Z",
+  "comment": {
+    "text": "The \"spSignExitRequest\" translation key is used to display the label for a checkbox related to Single Sign-On (SSO) requests in a portal settings page. It is translated as \"Sign Logout Requests\" and appears in a checkbox set component.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:04.366Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/CheckboxSet.js",
+      "line_number": 103,
+      "context": "}\n className=\"checkbox-input\"\n isDisabled={isDisabled}\n onChange={setCheckbox}\n label={\n prefix === \"idp\" ? t(\"idpSignExitRequest\") : t(\"spSignExitRequest\")\n }\n name={checkboxesNames[prefix][1]}\n tabIndex={11}\n isChecked={\n prefix === \"idp\" ? idpVerifyLogoutRequestsSign : spSignLogoutRequests",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"طلبات تسجيل الخروج\" (Talabat Tasjeel Al-Khoroj) is a literal translation of 'Logout Requests' which, while understandable, doesn't convey the meaning of 'Sign Logout Requests' as effectively. It lacks the nuance of the English phrasing, which implies a request being sent or initiated.",
+          "suggestion": "أوامر تسجيل الخروج (Awamer Tasjeel Al-Khoroj) - This suggests 'Logout Commands' which more closely aligns with the 'Sign' aspect of the original."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Çıxış Sorğularını imzalayın\" is a literal translation of 'Sign Logout Requests' and doesn't convey the intended meaning. 'Sign' in this context implies authentication or encryption, not a literal signature.",
+          "suggestion": "A more accurate translation would be something like \"Çıxış Sorğularını Təsdiqləyin\" (Verify Logout Requests) or \"Çıxış Sorğularının Əlavəsinə İmza Qoyun\" (Sign the addition to Logout Requests), but the former is more natural."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Заявки за упълномощен изход\" does not accurately convey the meaning of \"Sign Logout Requests.\" \"Упълномощен\" (authorized/empowered) isn't the best fit. A more accurate translation would focus on the action of requesting a logout.",
+          "suggestion": "Заявки за изход"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Žádosti o odhlášení' translates to 'Logout Requests' which is a description of the requests themselves, not the action of 'Signing Logout Requests'.  A more accurate translation would convey the action of sending or processing those requests.",
+          "suggestion": "Odesílání odhlášení"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Logout-Anforderungen unterschreiben\" is not the best equivalent for \"Sign Logout Requests.\"  'Sign' in this context likely refers to digitally signing the request, implying authentication and security. \"Unterschreiben\" means to physically sign. A better translation would capture the digital signature aspect.",
+          "suggestion": "Abhängige Logout-Anforderungen digital signieren"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Υπογραφή αιτήσεων αποσύνδεσης\" literally translates to \"Signature of disconnection requests.\" While understandable, it's not the most natural or idiomatic way to express \"Sign Logout Requests.\" It implies a signature *on* the requests, rather than the action of signing them.",
+          "suggestion": "Αίτηση αποσύνδεσης (Sign Out Request) or Αποσύνδεση (Sign Out)"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Firmar solicitudes de cierre de sesión\" uses 'Firmar' which translates to 'Sign' in the sense of 'to sign a document.' It doesn't accurately convey 'Sign Logout Requests' which refers to the process of digitally signing the logout request for security purposes. A better translation would focus on the 'signing' process in a cryptographic sense.",
+          "suggestion": "Consider translating 'Sign Logout Requests' as 'Cifrar solicitudes de cierre de sesión' (Encrypt Logout Requests) or 'Generar firmas digitales para solicitudes de cierre de sesión' (Generate digital signatures for logout requests)."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Allekirjoita uloskirjauspyynnöt\" is too literal. \"Sign Logout Requests\" implies the signing of a request to initiate logout, not the act of signing the request itself. A more natural Finnish translation would convey the action of initiating a logout.",
+          "suggestion": "Consider a phrase like \"Aloita uloskirjaus\" or \"Uloskirjauspyyntö\" depending on the exact meaning intended in the English."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Signer des demandes de déconnexion\" is a literal translation of 'Sign Logout Requests' and doesn't accurately convey the intended meaning. 'Sign' in this context refers to sending or initiating, not signing a document. A better translation would focus on 'sending' or 'initiating' the logout requests.",
+          "suggestion": "Envoyer des requêtes de déconnexion"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ստորագրեք Դուրս գալու հայտերը\" (Storagreq Durs galu hayteru) literally translates to 'Sign Outgoing Requests'. While understandable, it's not the most natural or accurate translation of 'Sign Logout Requests'. It lacks the nuance of a logout *process* or *request* being signed.",
+          "suggestion": "Consider a translation that more accurately conveys the meaning of a signed logout request, such as \"Կնիքեք Դուրս գալու հայտը\" (Knigek Durs galu hayte) - 'Stamp/Sign the Logout Request' or \"Ստորագրեք ելքի հայտը\" (Storagrek elki hayte) - 'Sign the Exit Request'."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Sign Logout Requests\" implies an action - signing or authorizing logout requests. The Italian translation \"Firma le richieste di Logout\" literally translates to \"Sign the logout requests,\" which could imply physically signing them. A more accurate translation would convey the action of authorizing or processing logout requests.",
+          "suggestion": "Elabora le richieste di Logout"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ログアウトリクエストに署名する' (log-out request ni shomei suru) literally translates to 'Sign Logout Requests'. While understandable, it's not the most natural way to express the concept.  It sounds somewhat technical and awkward. A more natural phrasing might imply signing a request *to* log out.",
+          "suggestion": "ログアウトリクエストの送信"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '로그아웃 요청에 서명' literally translates to 'Sign Logout Requests'. While understandable, it's not the most natural or idiomatic way to express 'Sign Logout Requests' in Korean. It sounds slightly awkward.",
+          "suggestion": "Consider '로그아웃 요청 서명' or '로그아웃 요청에 대한 서명' for a more natural-sounding translation. A more context-aware translation might be '로그아웃 요청 확인' (Verify Logout Request) depending on the intended meaning."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ການຮ້ອງຂໍອອກຈາກລະບົບ' (kaan hoong kho oak jaak lab bop) translates to 'Logout Requests' or 'System Logout Requests'. While not entirely wrong, it doesn't capture the nuance of 'Sign Logout Requests'. The 'Sign' aspect is lost. A more accurate translation considering the context would convey the action of *submitting* a logout request.",
+          "suggestion": "Consider 'ການສົ່ງຄຳຮ້ອງຂໍອອກຈາກລະບົບ' (kaan song kham hoong kho oak jaak lab bop) which translates to 'Sending Logout Requests' or 'Submitting Logout Requests'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Parakstīt izrakstīšanās pieprasījumus\" is a rather literal and stiff translation of \"Sign Logout Requests.\" A more natural and user-friendly translation would be preferable. The word 'Parakstīt' implies a digital signature, whereas 'Sign' often implies a more general action of initiating.",
+          "suggestion": "Izrakstīšanās pieprasījumu apstiprināšana"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'Sign' implies signing a request, which doesn't directly translate to the Dutch 'Sign'. 'Sign' in this context likely refers to 'Initiate' or 'Send'. 'Verzoeken' is correct for 'Requests'.",
+          "suggestion": "Afmelden Verzoeken"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Podpisz żądania wylogowania\" literally translates to 'Sign Logout Requests'. While understandable, 'Sign' in this context likely refers to a technical action (e.g., digitally signing) rather than a general action. A more accurate translation would convey the technical meaning.",
+          "suggestion": "Autoryzuj żądania wylogowania"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Assinar Pedidos de Término de Sessão' is a literal translation of 'Sign Logout Requests' but doesn't accurately convey the intended meaning. 'Sign' in this context likely refers to 'Initiate' or 'Generate'.  'Assinar' (to sign) implies a physical signature, which is incorrect.",
+          "suggestion": "Consider 'Iniciar Pedidos de Término de Sessão' or 'Gerar Pedidos de Término de Sessão'.  A more natural phrasing might be 'Solicitar Término de Sessão'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Solicitações de logout de assinatura' is not the most natural or accurate translation of 'Sign Logout Requests'. While technically correct, it's a bit literal and could be improved.",
+          "suggestion": "Solicitações de deslogar / Solicitações de saída da assinatura"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Semnează solicitarea de deconectare\" implies signing the request, which is not the intended meaning of 'Sign Logout Requests'. It's about enabling/managing the functionality, not literally signing it.",
+          "suggestion": "Solicitările de deconectare"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Подписывать запросы выхода\" literally translates to 'Sign Logout Requests'. While understandable, it doesn't convey the nuance of 'Sign Logout Requests' in the context of Single Sign-On. It might suggest the user is actively signing individual requests, which isn't the intended meaning. A more accurate translation would emphasize the process of digitally signing or securing these requests.",
+          "suggestion": "Распошифровывать запросы выхода"
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'නික්මීමේ ඉල්ලීම් අත්සන් තබන්න' literally translates to 'Sign Logout Requests'. While understandable, it's not the most natural or idiomatic way to express 'Sign Logout Requests' in Sinhala within a technical context. A more natural phrasing would focus on the action of initiating or sending the logout request.",
+          "suggestion": "Consider alternatives like 'නික්මීමේ ඉල්ලුමක් යවන්න' (Send a logout request) or 'නික්මීමට ඉල්ලුම ක්‍රියාත්මක කරන්න' (Activate a logout request)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Podpísať žiadosti o odhlásenie\" is not the most natural or accurate translation of \"Sign Logout Requests\". While technically correct, it's a bit literal. A more idiomatic translation would convey the meaning of digitally signing or verifying the logout requests, rather than simply 'signing' them.",
+          "suggestion": "Overenie žiadostí o odhlásenie"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Prijava zahtev za odjavo' is a literal translation of 'Sign Logout Requests' and doesn't quite convey the intended meaning. 'Sign' in this context refers to the authentication process, not the act of signing something.",
+          "suggestion": "Odjava iz sistema"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Prijava' means 'Login/Sign-in', in the context of 'Sign Logout Requests,' it's misapplied. It's referring to the *request* for logout.",
+          "suggestion": "Zahteva za odjavo"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Потпиши захтеве за одјављивање\" directly translates to \"Sign Logout Requests,\" but \"Sign\" in this context implies an action on the request itself, not the act of sending it. A more accurate translation would convey the sending of the logout requests.",
+          "suggestion": "Изврши захтеве за одјављивање"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Potpiši zahteve za odjavljivanje\" literally translates to 'Sign requests for logout'.  'Sign' in this context refers to a process of digitally signing a request, not just physically signing. A more accurate translation reflecting the technical meaning would be 'Potvrdi zahteve za odjavljivanje' (Confirm logout requests) or 'Generiši zahteve za odjavljivanje' (Generate logout requests).",
+          "suggestion": "Potvrdi zahteve za odjavljivanje"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Çıkış İsteklerini İmzala\" literally translates to \"Sign Logout Requests\" which, while technically correct, doesn't convey the intended meaning of \"Sign Logout Requests\" in the context of Single Sign-On. It sounds awkward and might confuse users. A more natural and accurate translation would be something that implies signing or encrypting the request.",
+          "suggestion": "Consider a more contextually appropriate translation such as \"Çıkış İsteklerini Güvenle İmzala\" (Securely Sign Logout Requests) or \"Çıkış İsteklerini Şifrele\" (Encrypt Logout Requests)."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Підписувати запити виходу' literally translates to 'Sign Logout Requests', which while understandable, isn't the most natural or idiomatic way to express 'Sign Logout Requests' in Ukrainian. A more accurate and natural translation would focus on authorizing or validating the requests rather than just 'signing'.",
+          "suggestion": "Авторизувати запити виходу"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Yêu cầu Đăng xuất Ký tên\" is not an accurate translation of \"Sign Logout Requests\". \"Ký tên\" translates to \"Sign\" and doesn't fit the context of a logout request. It sounds awkward and unnatural.",
+          "suggestion": "Yêu cầu Thoát hoặc Yêu cầu Đăng xuất"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"签署登出请求\" (qiān shǔ dēng chū qǐng qíu) doesn't accurately convey the meaning of 'Sign Logout Requests'. '签署' (qiān shǔ) implies signing a document, which isn't the intended meaning in this context.  'Sign' in this case likely refers to triggering or initiating the logout process.",
+          "suggestion": "退出请求确认"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

@@ -232,6 +232,8 @@ const config = {
               },
             },
           },
+          // Fix relative url() in fonts.css
+          "resolve-url-loader",
           {
             loader: "sass-loader",
             options: {
@@ -256,6 +258,8 @@ const config = {
               importLoaders: 2,
             },
           },
+          // Fix relative url() in fonts.css
+          "resolve-url-loader",
           {
             loader: "sass-loader",
             options: {

@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/mixins.scss";
-@import "../../styles/variables/_colors.scss";
+@use "../../styles/mixins";
+@use "../../styles/variables/colors";
 
 :global {
   .p-contextmenu {
@@ -47,7 +47,7 @@
 }
 
 .mainButton {
-  @include no-user-select();
+  @include mixins.no-user-select();
 
   -webkit-tap-highlight-color: var(--tap-highlight-color);
   position: relative;

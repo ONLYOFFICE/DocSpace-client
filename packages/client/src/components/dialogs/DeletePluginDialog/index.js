@@ -66,7 +66,7 @@ const DeletePluginDialog = (props) => {
         <Button
           className="delete-button"
           key="DeletePortalBtn"
-          label={t("Common:OkButton")}
+          label={t("Common:OKButton")}
           size="normal"
           scale
           primary

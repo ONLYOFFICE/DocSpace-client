@@ -86,7 +86,7 @@
   "DataBackup": "数据备份",
   "DataImport": "数据导入",
   "DataImportComplete": "数据导入完成",
-  "DataImportDescription": "将数据从第三方服务导入 {{organizationName}}{{productName}}。数据导入允许传输数据，例如所有用户、他们的个人和共享文档。",
+  "DataImportDescription": "支持从第三方服务迁移数据至 {{organizationName}} {{productName}}，包括完整的用户账户信息、个人文档及团队共享文件，确保数据资产无缝衔接。​",
   "DataImportProcessing": "数据导入处理",
   "DeactivateOrDeletePortal": "停用或删除空间。",
   "DefaultSettings": "默认设置",

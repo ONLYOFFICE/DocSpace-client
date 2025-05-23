@@ -1,0 +1,267 @@
+{
+  "key_path": "RequestPostHeader",
+  "content": "POST request header",
+  "content_en_sha1_hash": "dd2a90902b9d8063cee3aafe29d727b91766a655",
+  "created_at": "2025-05-19T21:30:49.798Z",
+  "updated_at": "2025-05-21T01:02:59.528Z",
+  "comment": {
+    "text": "\"This translation key is used for the label of a form field displaying request post headers, appearing on a UI component for detailing webhook event settings.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:56.698Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/RequestDetails.js",
+      "line_number": 66,
+      "context": "<DetailsWrapper>\n {eventDetails.status === 0 ? (\n <StatusMessage message={t(\"FailedToConnect\")} />\n ) : null}\n <Text as=\"h3\" fontWeight={600} className=\"mb-4 mt-7\">\n {t(\"RequestPostHeader\")}\n </Text>\n {!eventDetails.requestHeaders ? (\n <Textarea isDisabled />\n ) : (\n <Textarea",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ترويسة' (tarwisa) can mean 'header,' in the context of webhooks and technical documentation, a more precise translation would be 'رأسية' (ra'siya) or 'عنوان' (unwan). 'ترويسة' is more commonly used for letterhead or a decorative header.",
+          "suggestion": "Consider using 'رأسية طلب POST' or 'عنوان طلب POST'."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'sorğu başlığı' is a literal translation of 'request header', a more natural and common phrasing in Azerbaijani would be 'HTTP sorğusunun başlığı' or 'Sorğu başlığı'. 'POST' being a specific HTTP method, it doesn't strictly need to be included in the translation unless specifically requested for technical accuracy.",
+          "suggestion": "HTTP sorğusunun başlığı"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Κεφαλίδα αίτησης POST\" is a very literal translation and sounds unnatural in Greek. A more common and natural phrasing would emphasize the 'webhook' context.",
+          "suggestion": "Κεφαλίδα POST για Webhooks"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"POST հարցման վերնագիր\" is a literal translation but doesn't quite capture the technical meaning of \"POST request header.\" \"Հարցման վերնագիր\" translates to 'request header' but it lacks the 'POST' specificity.",
+          "suggestion": "Consider a more contextually accurate translation like \"POST հարցման գլխավորում\" or \"POST հարցման վերնագրային մաս\" which conveys the 'POST' aspect more clearly."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ສ່ວນຫົວຄຳຮ້ອງຂໍ POST' is technically correct but could be more natural. 'ສ່ວນຫົວ' literally means 'part head'. A more common phrasing would use a term like 'ຫົວຂໍ້' for 'header'.",
+          "suggestion": "ຫົວຂໍ້ POST"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Antetul solicitării POST\" is understandable, a more natural and accurate translation would be \"Antet de cerere POST\" or \"Antet HTTP pentru cererea POST\". \"Solicitării\" implies a request *to* something, which isn't precisely what a header represents.",
+          "suggestion": "Antet de cerere POST"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'POST ඉල්ලීමේ ශ්‍රීර්ෂකය' is a literal translation of 'POST request header' but isn't the most natural or common way to express it in Sinhala. 'ඉල්ලීම' implies a 'request' being *made* which isn't necessarily the focus. A more accurate and natural translation would focus on the 'header' itself being related to a POST request.",
+          "suggestion": "POST ඉල්ලුමේදී ලැබෙන සිරසාව (POST illumede lebewena sirasawa) - This translates to 'Header received during a POST request'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While grammatically correct, 'ඉල්ලීමේ' is a somewhat formal construction.  Depending on the target audience, a simpler term might be preferable.",
+          "suggestion": "Consider using a less formal term, depending on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'POST glava zahteve' is not the most natural or accurate translation of 'POST request header'. 'Glava' translates to 'header' but using it in this context is awkward. A more natural translation would incorporate the term 'naslov'.",
+          "suggestion": "POST zahteva naslov"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Заглавље POST захтева' is a very literal translation. A more natural Serbian translation for 'POST request header' would be something like 'Назив заголовке POST захтева' or 'Заголовка POST захтева'.",
+          "suggestion": "Назив заголовке POST захтева"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,320 @@
+{
+  "key_path": "ImportSectionDescription",
+  "content": "Select sections for import. They will appear in the corresponding sections of {{productName}}.",
+  "content_en_sha1_hash": "fdb4147ce80c84acaac01c116f234f42d5e0b2a7",
+  "created_at": "2025-05-19T21:30:51.687Z",
+  "updated_at": "2025-05-22T11:56:37.674Z",
+  "comment": {
+    "text": "This translation key is used to describe the action of selecting sections for import in various data import steps. It explains that selected sections will appear in corresponding sections of {{productName}} and is typically displayed as part of a button label or dialog description.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:04.718Z"
+  },
+  "usage": [
+    {
+      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\GoogleWorkspace\\Stepper\\index.tsx",
+      "line_number": 124,
+      "context": "),\n component: <SelectUsersTypeStep t={t} />,\n },\n {\n title: t(\"Settings:DataImport\"),\n description: t(\"Settings:ImportSectionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n component: (\n <ImportStep\n t={t}",
+      "module": "\\packages\\client"
+    },
+    {
+      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\NextcloudWorkspace\\Stepper\\index.tsx",
+      "line_number": 132,
+      "context": "),\n component: <SelectUsersTypeStep t={t} />,\n },\n {\n title: t(\"Settings:DataImport\"),\n description: t(\"Settings:ImportSectionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n component: (\n <ImportStep\n t={t}",
+      "module": "\\packages\\client"
+    },
+    {
+      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\OnlyofficeWorkspace\\Stepper\\index.tsx",
+      "line_number": 124,
+      "context": "),\n component: <SelectUsersTypeStep t={t} />,\n },\n {\n title: t(\"Settings:DataImport\"),\n description: t(\"Settings:ImportSectionDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: (\n <ImportStep",
+      "module": "\\packages\\client"
+    },
+    {
+      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\utils\\getStepDescription.js",
+      "line_number": 66,
+      "context": "/>\n {renderTooltip}\n </>\n );\n case 4:\n return t(\"Settings:ImportSectionDescription\", {\n productName: t(\"Common:ProductName\"),\n });\n case 5:\n return t(\"Settings:ImportProcessingDescription\");\n case 6:",
+      "module": "\\packages\\client"
+    },
+    {
+      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\utils\\getStepDescription.js",
+      "line_number": 66,
+      "context": "/>\n {renderTooltip}\n </>\n );\n case 4:\n return t(\"Settings:ImportSectionDescription\", {\n productName: t(\"Common:ProductName\"),\n });\n case 5:\n return t(\"Settings:ImportProcessingDescription\");\n case 6:",
+      "module": "\\packages\\client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'входиране' (vhodirane) is not the most natural or accurate translation of 'import' in this context. A better term would be 'вносване' (vnosvane) or 'внос' (vnos).",
+          "suggestion": "Изберете секции за вносване. Те ще се появят в съответните секции на {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Ne ilmestyvät vastaaviin {{productName}}-n osioihin\" is awkward and not a natural Finnish construction. The '-n' suffix after {{productName}} is unnecessary and grammatically incorrect in this context.",
+          "suggestion": "Valitse tuotavat osiot. Ne ilmestyvät {{productName}}-osiossa."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The original English \"They will appear in the corresponding sections of {{productName}}\" implies a specific section within the application. The Finnish translation doesn't quite convey that clarity, translating more literally as 'corresponding sections'.",
+          "suggestion": "Valitse tuotavat osiot. Ne ilmestyvät {{productName}}-osiossa."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'appropriate sections' could be more accurately translated as 'sections concernées' or 'sections correspondantes' to better convey the intended meaning of 'corresponding sections'. 'Appropriées' can imply suitability rather than direct correspondence.",
+          "suggestion": "Sélectionnez les sections à importer. Ces sections apparaîtront dans les sections concernées/correspondantes de l'espace {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation includes a full stop (。) at the end of the first sentence. While grammatically correct, it might be more natural to omit it in this context, as it's followed by a second sentence.",
+          "suggestion": "インポートするセクションを選択してください。このセクションは、{{productName}}の対応するセクションに表示されます。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"가져오기할 섹션을 선택하세요\" is a bit awkward. A more natural phrasing for \"Select sections for import\" would be \"가져올 섹션을 선택하세요\" or \"섹션을 가져올 부분을 선택하세요\".",
+          "suggestion": "섹션을 가져올 부분을 선택하세요"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The pronoun 'Eles' (They) doesn't agree in gender with 'seções' (sections). 'Seções' is feminine plural, so the pronoun should be 'Elas'.",
+          "suggestion": "Selecione seções para importação. Elas aparecerão nas seções correspondentes do {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'import' is misspelled as 'imoprt'.",
+          "suggestion": "import"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'spațiului {{productName}}' is grammatically awkward. It implies a 'space' of the product, which may not be the intended meaning. A more accurate translation would depend on the context of 'productName'.",
+          "suggestion": "produsului {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'උචිත කොටස්වල' (uchita kotaswala) doesn't perfectly convey the meaning of 'corresponding sections'. A more accurate translation would emphasize that the sections will be imported *into* the existing sections of the product, not just be visible in them. 'පාර්ශ්වික කොටස්' (parshavika kotas) or 'සම්බන්ධිත කොටස්' (sambandhita kotas) might be more appropriate.",
+          "suggestion": "ආයාත කිරීමට කොටස් තෝරන්න. ඒවා {{productName}} හි පාර්ශ්වික කොටස්වලට යොදා දෙනු ඇත."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Slovak translation retains the placeholder {{productName}}, which should be checked if it's appropriate for the Slovak context and whether the placeholder itself is correctly formatted.",
+          "suggestion": "Verify that the placeholder {{productName}} is correctly formatted and appropriate for the Slovak target audience. Consider if it needs localization."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'They will appear' is a bit clunky in Slovenian. A more natural phrasing would be 'They will be displayed' or 'They will show up'.",
+          "suggestion": "Izberite razdelke za uvoz. Prikazani bodo v ustreznih razdelkih {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The possessive suffix '-а' is attached to productName. While grammatically correct, it might be preferable to use a more neutral phrasing for a software interface. Depending on the product's brand voice, this might feel overly formal or awkward.",
+          "suggestion": "Изаберите секције за увоз. Оне ће се појавити у одговарајућим секцијама {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The possessive suffix '-a' is attached to '{{productName}}' which might look awkward and isn't strictly necessary. It is better to use a more general wording.",
+          "suggestion": "Izaberite sekcije za uvoz. One će se pojaviti u odgovarajućim sekcijama {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'простору' (prostoru) translates to 'space' and doesn't accurately convey the meaning of 'corresponding sections' in the context of a software product.  It implies a physical space rather than logical sections within the application.",
+          "suggestion": "Виберіть розділи для імпорту. Вони з’являться у відповідних секціях {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

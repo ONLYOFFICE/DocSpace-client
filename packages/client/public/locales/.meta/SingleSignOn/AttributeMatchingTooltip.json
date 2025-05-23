@@ -1,0 +1,408 @@
+{
+  "key_path": "AttributeMatchingTooltip",
+  "content": "The correspondence of the Single Sign-On attributes to the entries of the 'Accounts' section.",
+  "content_en_sha1_hash": "c7591a0a501267c1ec099b33a718569ff4884c4e",
+  "created_at": "2025-05-19T21:30:50.065Z",
+  "updated_at": "2025-05-21T02:17:22.868Z",
+  "comment": {
+    "text": "This translation key is used for a tooltip that describes the purpose of matching Single Sign-On attributes to account entries in the 'Accounts' section. It appears as an icon button next to a form field on a settings page. Translators should provide a clear and concise explanation of this process for internationalization purposes.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:19.251Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/FieldMapping.js",
+      "line_number": 74,
+      "context": "<HelpButton\n className=\"attribute-matching-tooltip icon-button\"\n offsetRight={0}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"AttributeMatchingTooltip\")}</Text>\n }\n />\n </div>\n \n <SsoFormField",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"مطابقة سمات Single Sign-On مع إدخالات قسم \"الحسابات\"\" is a literal translation but doesn't fully convey the meaning of 'correspondence'. A more accurate phrasing would better reflect the relationship being described.",
+          "suggestion": "يمكن إعادة صياغة الجملة لتكون \"تطابق خصائص Single Sign-On مع إدخالات قسم \"الحسابات\"\" or \"تتوافق سمات Single Sign-On مع إدخالات قسم \"الحسابات\"\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Birdəfəlik Giriş Atributları \"Hesablar\" bölməsindəki qeydlərə uyğundur' isn't the most natural or precise rendering of 'The correspondence of the Single Sign-On attributes to the entries of the 'Accounts' section.'. It's a bit literal and could be improved for clarity and flow.",
+          "suggestion": "Single Sign-On atributları \"Hesablar\" bölməsinin qeydləri ilə üst-üstə düşür."
+        },
+        {
+          "type": "spelling",
+          "description": "The word \"üst-üstə\" is used without a space between the hyphens.",
+          "suggestion": "Single Sign-On atributları \"Hesablar\" bölməsinin qeydləri ilə üst üstə düşür."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"The correspondence of...\" is a bit formal and could be more naturally translated. 'Shoda' is correct for 'correspondence' but the overall phrasing feels stiff.",
+          "suggestion": "Vztah mezi atributy jednotného přihlášení a záznamy v sekci 'Účty'."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, using single quotes around \"Účty\" might be more consistent with other UI elements and signal that it's a specific section name.",
+          "suggestion": "Vztah mezi atributy jednotného přihlášení a záznamy v sekci 'Účty'."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Kertakirjautumisattribuuttien viestintä Tilit-osion merkintöjen kanssa\" doesn't accurately convey the meaning of 'correspondence'. 'Viestintä' translates to 'communication' which is not the intended meaning. It implies a two-way interaction, whereas 'correspondence' signifies a matching or alignment.",
+          "suggestion": "Consider a translation that emphasizes matching or alignment, such as 'Kertakirjautumisattribuuttien vastaavuus Tilit-osion merkintöjen kanssa' (Correspondence of Single Sign-On attributes with the entries in the 'Accounts' section) or 'Kertakirjautumisattribuuttien ja Tilit-osion merkintöjen yhdenmukaisuus' (Consistency of Single Sign-On attributes with the entries in the 'Accounts' section)."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'Tilit' is likely a misspelling of 'Tilien'.",
+          "suggestion": "Change 'Tilit' to 'Tilien'."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Single Sign-On-ի համապատասխանությունը վերագրվում է «Հաշիվներ» բաժնի գրառումներին:\" implies that the correspondence *is attributed to* the entries, not that it *matches* them. The original English says the attributes *correspond to* the entries.",
+          "suggestion": "Single Sign-On-ի համապատասխանությունը «Հաշիվներ» բաժնի գրառումներին:"
+        },
+        {
+          "type": "formatting",
+          "description": "The hyphen in \"Single Sign-On-ի\" might not be the preferred style in Armenian. Consider alternatives.",
+          "suggestion": "Single Sign On-ի or Single Sign-On ի (check for preferred style)"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Account' is singular. The English 'Accounts' is plural. The translation should reflect the plural form.",
+          "suggestion": "La corrispondenza degli attributi Single Sign-On con le voci della sezione 'Account'."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content refers to 'correspondence' which implies a mapping or relationship. The Japanese translation, while technically correct, doesn't convey the same nuance of a defined mapping or association that 'correspondence' suggests.  '対応関係' is a general term for 'relationship' or 'correspondence' and could be improved to specifically indicate a predefined or expected mapping.",
+          "suggestion": "シングルサインオンの属性と「アカウント」セクションの項目との**紐付け**。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '싱글 사인온 속성의 대응' is a literal translation of 'Single Sign-On attributes' but doesn't flow naturally in Korean. It lacks a clear subject and sounds awkward.",
+          "suggestion": "'계정' 섹션 항목과의 싱글 사인온 속성 연결"
+        },
+        {
+          "type": "grammar",
+          "description": "The use of '에 대한' can be improved for better flow. It sounds slightly stiff.",
+          "suggestion": "Consider revising '에 대한' to a more natural Korean equivalent depending on the specific nuance desired. For example, '과' or '와의' might be more appropriate."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure feels somewhat fragmented. Combining phrases could improve readability.",
+          "suggestion": "Consider restructuring the sentence for a more natural flow in Korean. The suggestion in the 'incorrect_translation' issue addresses this."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ການຕອບສະ ໜອງ ຂອງຄຸນລັກສະນະການເຂົ້າສູ່ລະບົບດຽວຕໍ່ກັບລາຍການຂອງພາກສ່ວນ 'ບັນຊີ'\" is a literal translation but not the most natural phrasing in Lao. 'ການຕອບສະ ໜອງ' (kan dtap sả nung) is a bit formal and could be simplified.",
+          "suggestion": "Consider a phrasing like: 'ການຈໍາແນ່ງຄຸນນະພາບການເຂົ້າສູ່ລະບົບດຽວກັບລາຍການຂອງພາກສ່ວນ 'ບັນຊີ' (Kan jam naeng kun na lap kan kao su lap rab diew gap laii gan khong phak suan 'ban see')"
+        },
+        {
+          "type": "formatting",
+          "description": "The single quotes around 'ບັນຊີ' are unnecessary and potentially confusing in Lao. Double quotes are more common for section titles.",
+          "suggestion": "Remove the single quotes: 'ບັນຊີ' -> ບັນຊີ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'atbilstība' is correctly spelled, but its usage might be slightly formal for a tooltip. A more casual phrasing might be considered.",
+          "suggestion": "Consider 'sakritība' as a slightly more informal alternative, but 'atbilstība' is technically correct."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'items' ('items') doesn't quite capture the nuance of 'entries' in this context. 'Entries' implies a list or collection of specific records. 'Items' is more generic.",
+          "suggestion": "De correspondentie van de Single Sign-On attributen met de gegevens in de \"Accounts\" sectie."
+        },
+        {
+          "type": "formatting",
+          "description": "The quotation marks are correct, but it's good practice to ensure consistency in quotation mark usage throughout the entire project (e.g., using all single or all double quotes).",
+          "suggestion": "Consider whether all quotation marks should be consistently single or double quotes, aligning with project style guidelines."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'A correspondência dos atributos do Início de Sessão Único às entradas da secção \"Contas”' doesn't fully capture the meaning of 'Single Sign-On attributes to the entries'. A more accurate translation would emphasize the mapping or alignment.",
+          "suggestion": "A correspondência/mapeamento dos atributos do Início de Sessão Único com as entradas da secção \"Contas”."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of quotes around \"Contas\" might be unnecessary or inconsistent with other UI elements in Portuguese. Consider aligning with existing conventions.",
+          "suggestion": "Consider removing the quotes around \"Contas\" if it's not consistent with the broader UI."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Single Sign-On attributes\" is better translated as \"atributele de autentificare unică\" to maintain accuracy and clarity. \"atributele SSO\" is understandable but less precise.",
+          "suggestion": "atributele de autentificare unică"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Corespondența' is technically correct, 'Asocierea' might be a more natural and common term to describe a connection or mapping in this context.",
+          "suggestion": "Asocierea atributelor de autentificare unică cu intrările din secțiunea Conturi."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'ආරෝපණය කරයි' (arōpaṇayā karai) implies a charge or debit, which doesn't accurately convey the meaning of 'correspondence' or 'matching' in this context. It suggests a financial transaction rather than a mapping or alignment.",
+          "suggestion": "තනි පිවිසුම් අනුරූපතා 'ගිණුම්' කොටසේ නිවේශිත වලට ගැmatch කරයි"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'match' is an English word and should be translated into Sinhala. The best equivalent might be 'ගැmatch' is an English word and should be translated into Sinhala. The best equivalent might be 'සමනය කරයි'.",
+          "suggestion": "තනි පිවිසුම් අනුරූපතා 'ගිණුම්' කොටසේ නිවේශිත වලට සමනය කරයි"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure could be improved for better flow in Sinhala.",
+          "suggestion": "ගිණුම් කොටසේ ඇති නිවේශිත වලට තනි පිවිසුම් අනුරූපතා සමනය කරයි."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Zhoda atribútov jednotného prihlásenia so záznamami v sekcii „Účty“' doesn't fully capture the nuance of 'The correspondence of the Single Sign-On attributes to the entries of the 'Accounts' section.' It’s not *wrong*, but it loses the sense of a matching or mapping relationship. A better translation would emphasize that relationship.",
+          "suggestion": "Vzájomné zhodnotenie atribútov jednotného prihlásenia so záznamami v sekcii „Účty“."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'The correspondence of...' is not perfectly captured by 'Ujemanje...'. A more accurate translation might be 'Razmerje med...' or 'Povezava med...'. 'Ujemanje' suggests a perfect match, while 'correspondence' implies a mapping or relationship, which can be less strict.",
+          "suggestion": "Razmerje med atributi enotne prijave in vnosi v razdelku 'Računi'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Одговарајуће Single Sign-On атрибута са уносима одељка 'Налози'' is not an accurate representation of 'The correspondence of the Single Sign-On attributes to the entries of the 'Accounts' section.'. It lacks the nuance of 'correspondence'.",
+          "suggestion": "A more accurate translation might be 'Усклађење Single Sign-On атрибута са уносима одељка 'Налози'' or 'Single Sign-On атрибути усклађени са уносима одељка 'Налози''."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'Single Sign-On' appears in English within the Serbian translation. While common in technical contexts, it's preferable to use the Serbian equivalent if available or consistently apply the same treatment.",
+          "suggestion": "Consider translating 'Single Sign-On' to its Serbian equivalent, if it exists and is widely understood, or consistently use English. If keeping it in English, ensure consistent application throughout the project."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Odgovarajuće Single Sign-On atributa sa unosima odeljka 'Nalozi'' is not a natural or accurate representation of 'The correspondence of the Single Sign-On attributes to the entries of the 'Accounts' section.' It suggests a matching process rather than a correspondence or mapping. 'Odgovarajuće' means 'corresponding' but used in this context, it's awkward. The sentence structure is also a bit off.",
+          "suggestion": "A better translation would be something like: 'Povezivanje Single Sign-On atributa sa unosima u odeljak 'Nalozi'' or 'Single Sign-On atributi povezani sa unosima u odeljak 'Nalozi''."
+        },
+        {
+          "type": "formatting",
+          "description": "The single quotes around 'Nalozi' should be consistent with the English content's single quotes around 'Accounts'.",
+          "suggestion": "Ensure single quotes are consistently used around 'Nalozi' throughout the translated content."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Single Sign-On attributes' is not perfectly conveyed by 'атрибутів єдиного входу'. While understandable, a more precise translation might be 'атрибути одноразового входу' or 'атрибути одноразової автентифікації'.",
+          "suggestion": "атрибути одноразового входу"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Відповідність атрибутів' is grammatically correct, but sounds slightly formal for a tooltip. A slightly more conversational phrasing might improve readability.",
+          "suggestion": "Збіг атрибутів"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sự tương ứng của các thuộc tính Đăng nhập một lần với các mục nhập của phần 'Tài khoản' is a bit literal and can be improved for natural flow. 'Đăng nhập một lần' is correct for 'Single Sign-On', but the overall phrasing could be more concise and user-friendly.",
+          "suggestion": "Sự tương ứng giữa các thuộc tính Đăng nhập một lần và các mục trong phần 'Tài khoản'."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of single quotes around 'Tài khoản' is not standard in Vietnamese. Double quotes or no quotes would be more appropriate.",
+          "suggestion": "Sự tương ứng giữa các thuộc tính Đăng nhập một lần và các mục trong phần 'Tài khoản' or Sự tương ứng giữa các thuộc tính Đăng nhập một lần và các mục trong phần Tài khoản."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

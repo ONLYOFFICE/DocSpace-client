@@ -1,0 +1,254 @@
+{
+  "key_path": "WebhooksGuide",
+  "content": "Webhooks Guide",
+  "content_en_sha1_hash": "426d1aa73a91fb4aa937d1af4f1bdc8b411b5146",
+  "created_at": "2025-05-19T21:30:49.890Z",
+  "updated_at": "2025-05-21T00:48:41.789Z",
+  "comment": {
+    "text": "The \"WebhooksGuide\" translation key is used to display a title for a webpage or section related to webhooks, which appears as a clickable link on a portal settings page.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:44.167Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhookInfo.js",
+      "line_number": 74,
+      "context": "href={webhooksGuideUrl}\n target={LinkTarget.blank}\n type={LinkType.page}\n isHovered\n >\n {t(\"WebhooksGuide\")}\n </ColorTheme>\n ) : null}\n </InfoWrapper>\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Webhook-ların Bələdçisi' is a somewhat literal and less natural-sounding translation. 'Webhook-lar' is grammatically correct but 'Webhooks' is often treated as a singular concept, especially in a guide.",
+          "suggestion": "Consider 'Webhooks Bələdçisi' or 'Webhook Bələdçisi' to sound more idiomatic. Another option could be 'Webhooks haqqında Bələdçisi'."
+        },
+        {
+          "type": "formatting",
+          "description": "The hyphen in 'Webhook-ların' might be unnecessary and stylistically awkward in Azerbaijani. It's better to use a space or modify the wording.",
+          "suggestion": "Remove the hyphen and consider using 'Webhookların' or, preferably, adjust the wording as suggested above."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ръководство на уеб кука' is not the most natural or accurate translation of 'Webhooks Guide'. 'Уеб кука' is a literal translation of 'web hook' and sounds awkward in Bulgarian. A more appropriate translation would be 'Ръководство за уебхукове' or 'Ръководство за уеб куки'.",
+          "suggestion": "Ръководство за уебхукове"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The term 'háčky' while technically meaning 'hooks' in the context of programming, might be confusing or less commonly understood than other alternatives for 'webhooks' in Czech.",
+          "suggestion": "Consider using a more common or direct translation like 'Webhooky' or 'Webové hovory' to enhance clarity for the Czech audience."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ուղեցույց' (ughecuyc) generally means 'guide', in the context of webhooks, a more accurate and common translation might be 'վեբհուկների գործունեա գլուխ' (vebhooknery gorcunéa glukh) or a simpler 'վեբհուքի ձեռնարկ' (vebhooki dzer’nark). 'Ուղեցույց' is too generic and might not convey the technical nature of the content.",
+          "suggestion": "Consider 'վեբհուքի ձեռնարկ' (vebhooki dzer’nark) or 'վեբհուքների գործունեա գլուխ' (vebhooknery gorcunéa glukh)."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Webhooks' is often left untranslated in technical contexts. 'Tīmekļa aizķeru rokasgrāmata' is a literal translation of 'Webhooks Guide' and might confuse users. A more common and understandable approach would be to keep 'Webhooks' in the title and translate 'Guide'.",
+          "suggestion": "Webhooks rokasgrāmata"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'aizķeru' is a valid word, in this context it is likely an error. It means 'hooks' in a more trapping sense.",
+          "suggestion": "Aizķeros is incorrect. The correct form for this context would be 'webhooks'."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"Webhooks\" is often left untranslated in technical contexts, mirroring English usage. Translating it as \"Webhook\" would be more accurate and maintain consistency with common industry practices in Slovenian.",
+          "suggestion": "Navodila za Webhook"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

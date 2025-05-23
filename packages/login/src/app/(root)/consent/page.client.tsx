@@ -119,7 +119,8 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
 
     deleteCookie("x-redirect-authorization-uri");
     const splitedURL = decodedRedirectUrl.split("&scope=");
-    setCookie("x-scopes", splitedURL[1].split("%20").join(";"));
+    if (splitedURL[1])
+      setCookie("x-scopes", splitedURL[1].split("%20").join(";"));
     setCookie("x-url", splitedURL[0]);
   }, []);
 

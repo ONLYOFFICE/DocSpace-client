@@ -37,7 +37,7 @@ import { TGroup } from "@docspace/shared/api/groups/types";
 import {
   MIN_LOADER_TIMER,
   SHOW_LOADER_TIMER,
-} from "@docspace/shared/selectors/Files/FilesSelector.constants";
+} from "@docspace/shared/selectors/utils/constants";
 import EditGroupStore from "SRC_DIR/store/EditGroupStore";
 
 import { StyledBodyContent } from "./CreateEditGroupDialog.styled";

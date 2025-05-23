@@ -2,7 +2,7 @@ import * as React from "react";
 import { MINIMAL_VIEWPORTS } from "@storybook/addon-viewport";
 import { useDarkMode } from "storybook-dark-mode";
 import { Base, Dark } from "../themes/index";
-import "../../../public/css/fonts.css";
+import "PUBLIC_DIR/css/fonts.css";
 import ThemeWrapper from "./globals/theme-wrapper";
 import { DocsContainer } from "./DocsContainer";
 import globalTypes from "./globals";

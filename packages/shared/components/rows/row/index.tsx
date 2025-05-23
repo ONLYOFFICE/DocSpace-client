@@ -27,22 +27,21 @@
 "use client";
 
 import React, { useRef } from "react";
-import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow2.react.svg?url";
 import { isMobile } from "react-device-detect"; // TODO: isDesktop=true for IOS(Firefox & Safari)
 import classNames from "classnames";
-import { IconSizeType } from "../../../utils";
 
 import { VDRIndexingAction } from "../../../enums";
 import { isMobile as isMobileUtils } from "../../../utils/device";
 
 import { Checkbox } from "../../checkbox";
-import { ColorTheme, ThemeId } from "../../color-theme";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
 } from "../../context-menu-button";
 import { ContextMenu, ContextMenuRefType } from "../../context-menu";
 import { Loader, LoaderTypes } from "../../loader";
+import { IndexIconButtons } from "../../index-icon-buttons";
+
 import { RowProps } from "./Row.types";
 import { hasOwnProperty } from "../../../utils/object";
 import styles from "./Row.module.scss";
@@ -258,26 +257,14 @@ const Row = (props: RowProps) => {
           <div className={styles.contentElement}>{contentElement}</div>
         ) : null}
         {isIndexEditingMode ? (
-          <>
-            <ColorTheme
-              themeId={ThemeId.IndexIconButton}
-              iconName={ArrowReactSvgUrl}
-              className="index-up-icon"
-              size={IconSizeType.small}
-              onClick={(e: React.MouseEvent<HTMLElement>) =>
-                changeIndex(e, VDRIndexingAction.HigherIndex)
-              }
-            />
-            <ColorTheme
-              themeId={ThemeId.IndexIconButton}
-              iconName={ArrowReactSvgUrl}
-              className="index-down-icon"
-              size={IconSizeType.small}
-              onClick={(e: React.MouseEvent<HTMLElement>) =>
-                changeIndex(e, VDRIndexingAction.LowerIndex)
-              }
-            />
-          </>
+          <IndexIconButtons
+            onUpIndexClick={(e: React.MouseEvent<HTMLElement>) =>
+              changeIndex(e, VDRIndexingAction.HigherIndex)
+            }
+            onDownIndexClick={(e: React.MouseEvent<HTMLElement>) =>
+              changeIndex(e, VDRIndexingAction.LowerIndex)
+            }
+          />
         ) : (
           <>
             {renderContext ? (

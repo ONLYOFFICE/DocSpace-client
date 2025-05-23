@@ -811,19 +811,6 @@ export const getBaseTheme = () => {
       hoverIconColor: grayStrong,
     },
 
-    inputPhone: {
-      activeBorderColor: lightSecondMain,
-      inactiveBorderColor: grayStrong,
-      errorBorderColor: lightErrorStatus,
-      backgroundColor: white,
-      color: black,
-      scrollBackground: gray,
-      placeholderColor: gray,
-      dialCodeColor: gray,
-      width: "320px",
-      height: "44px",
-    },
-
     textInput: {
       fontWeight: "normal",
       placeholderColor: gray,
@@ -3077,17 +3064,6 @@ export const getBaseTheme = () => {
       colorPercentBig: white,
       errorTextColor: lightErrorStatus,
       descriptionTextColor: gray,
-    },
-
-    codeInput: {
-      background: white,
-      border: `1px solid ${grayStrong}`,
-      color: black,
-      lineColor: grayStrong,
-      disabledBackground: grayLight,
-      disabledBorder: `1px solid ${grayLightMid}`,
-      disabledColor: gray,
-      focusBorder: `1px solid ${lightSecondMain}`,
     },
 
     accessRightSelect: {

@@ -24,21 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables/_colors.scss";
+@use "../../styles/variables/colors";
 
 :global(.dark) {
   :local {
     .tooltip {
-      --tooltip-bg-color: #{$black};
-      --tooltip-text-color: #{$white};
+      --tooltip-bg-color: #{colors.$black};
+      --tooltip-text-color: #{colors.$white};
       --tooltip-max-width: 320px;
     }
   }
 }
 
 .tooltip {
-  --tooltip-bg-color: #{$white};
-  --tooltip-text-color: #{$black};
+  --tooltip-bg-color: #{colors.$white};
+  --tooltip-text-color: #{colors.$black};
   --tooltip-max-width: 320px;
 
   &.noUserSelect {

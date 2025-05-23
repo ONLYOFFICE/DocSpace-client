@@ -28,9 +28,9 @@
 
 $font-family-base: "Open Sans", sans-serif;
 
-@import "../../../../public/css/fonts.css";
-@import "../../../shared/styles/variables/_colors.scss";
-@import "../../../shared/styles/theme.scss";
+@use "../../../../public/css/fonts.css";
+@use "../../../shared/styles/variables/colors";
+@use "../../../shared/styles/theme.scss";
 
 html,
 body {

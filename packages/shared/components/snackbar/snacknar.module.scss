@@ -24,17 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables/devices.scss";
-@import "../../styles/_mixins.scss";
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/common-icons-style.scss";
+@use "../../styles/mixins";
+@use "../../styles/variables/colors";
+@use "../../styles/common-icons-style";
 
 .iframe {
   border: none;
   height: 60px;
   width: 100%;
 
-  @include tablet {
+  @include mixins.tablet {
     min-width: var(--section-width) + 40px;
   }
 }
@@ -47,7 +46,7 @@
   position: relative;
   display: flex;
   align-items: flex-start;
-  color: #{$white};
+  color: #{colors.$white};
   line-height: 16px;
   margin: 0;
   opacity: var(--opacity, 0);
@@ -108,7 +107,7 @@
   display: inline-block;
   border: none;
   font-size: inherit;
-  color: #{$black};
+  color: #{colors.$black};
   margin-block: 0 4px;
   margin-inline: 12px 4px;
 
@@ -124,7 +123,7 @@
   background: inherit;
   border: none;
   font-size: 13px !important;
-  color: #{$dark-black};
+  color: #{colors.$dark-black};
   cursor: pointer;
   line-height: 14px;
 
@@ -140,26 +139,26 @@
   display: inline-block;
   border: none;
   font-size: inherit;
-  color: #{$dark-black};
+  color: #{colors.$dark-black};
   cursor: pointer;
   text-decoration: underline;
 
-  @include tablet {
+  @include mixins.tablet {
     // doesn't require mirroring for RTL
     right: 14px;
   }
 }
 
 .crossIcon {
-  @include common-icons-style;
+  @include common-icons-style.common-icons-style;
 
   path {
-    fill: #{$gray};
+    fill: #{colors.$gray};
   }
 }
 
 .infoIcon {
-  @include common-icons-style;
+  @include common-icons-style.common-icons-style;
 
   path {
     fill: var(--color);

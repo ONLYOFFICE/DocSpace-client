@@ -26,7 +26,7 @@
 
 import { toastr } from "@docspace/shared/components/toast";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { Link } from "@docspace/shared/components/link";
 
 import { makeAutoObservable } from "mobx";
 import { Trans } from "react-i18next";
@@ -107,12 +107,12 @@ class SecondaryProgressDataStore {
 
     const commonComponents = {
       1: (
-        <ColorTheme
+        <Link
           tag="a"
-          themeId={ThemeId.Link}
           onClick={onClickLocation}
           target="_blank"
-          $isUnderline
+          textDecoration="underline"
+          color="accent"
         />
       ),
       2: <span style={{ fontWeight: "600" }} />,

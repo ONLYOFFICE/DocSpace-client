@@ -62,4 +62,8 @@ export type LinkProps = TextProps & {
   tabIndex?: number;
   /** Used as HTML `title` property */
   title?: string;
+  /** CSS text-decoration */
+  textDecoration?: string;
+  /** CSS color or accent theme color */
+  color?: "accent" | (string & {});
 };

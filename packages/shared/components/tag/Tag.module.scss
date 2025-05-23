@@ -1,4 +1,4 @@
-@import "../../styles/variables/_colors.scss";
+@use "../../styles/variables/colors";
 
 .tag {
   position: relative;
@@ -33,11 +33,11 @@
     [data-theme="dark"] & {
       svg {
         path[fill] {
-          fill: $white;
+          fill: colors.$white;
         }
 
         path[stroke] {
-          stroke: $white;
+          stroke: colors.$white;
         }
       }
     }

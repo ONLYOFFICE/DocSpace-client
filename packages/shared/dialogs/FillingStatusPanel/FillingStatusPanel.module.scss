@@ -23,13 +23,13 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-@import "../../styles/variables/_colors";
-@import "../../styles/_mixins.scss";
+@use "../../styles/variables/colors";
+@use "../../styles/mixins";
 
 :global(.dark) {
   :local {
     .fileStatus {
-      --file-status-color: #{$dark-gray-light};
+      --file-status-color: #{colors.$dark-gray-light};
     }
   }
 }
@@ -37,7 +37,7 @@
 :global(.light) {
   :local {
     .fileStatus {
-      --file-status-color: #{$white};
+      --file-status-color: #{colors.$white};
     }
   }
 }
@@ -53,11 +53,11 @@
 
   margin-top: 16px;
 
-  @include no-user-select;
+  @include mixins.no-user-select;
 }
 
 .infoBar {
-  @include no-user-select;
+  @include mixins.no-user-select;
 }
 
 .fileName {
@@ -97,7 +97,7 @@
   margin-top: 16px;
   padding-top: 8px;
 
-  @include no-user-select;
+  @include mixins.no-user-select;
 }
 
 .processTitle {

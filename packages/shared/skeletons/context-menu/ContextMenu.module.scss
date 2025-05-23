@@ -1,5 +1,5 @@
-@import "../../styles/mixins";
-@import "../../styles/variables";
+@use "../../styles/mixins";
+@use "../../styles/variables";
 
 .container {
   width: 100%;
@@ -10,7 +10,7 @@
   justify-items: center;
   align-items: center;
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     padding-block: 4px;
     padding-inline: 16px 12px;
     grid-column-gap: 0;

@@ -26,7 +26,7 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
+
 import classNames from "classnames";
 
 import { Text } from "../../components/text";
@@ -51,8 +51,6 @@ export const EncryptionPortal: React.FC<EncryptionPortalProps> = (props) => {
   const storybook = (
     props as EncryptionPortalProps & { storybook?: StorybookProps | undefined }
   )?.storybook;
-
-  const theme = useTheme();
 
   const { t, ready } = useTranslation("Common");
 

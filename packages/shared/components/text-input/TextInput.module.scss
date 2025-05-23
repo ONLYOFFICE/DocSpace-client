@@ -1,8 +1,8 @@
-@import "../../styles/common-input-styles.scss";
-@import "../../styles/variables/_colors.scss";
+@use "../../styles/common-input-styles";
+@use "../../styles/variables/colors";
 
 .textInput {
-  @include common-input-styles;
+  @include common-input-styles.common-input-styles;
 
   &[type="search"]::-webkit-search-decoration,
   &[type="search"]::-webkit-search-cancel-button,

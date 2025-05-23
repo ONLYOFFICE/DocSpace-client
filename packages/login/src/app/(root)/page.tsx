@@ -39,8 +39,8 @@ import ThirdParty from "@/components/ThirdParty";
 import RecoverAccess from "@/components/RecoverAccess";
 import Register from "@/components/Register";
 import { GreetingLoginContainer } from "@/components/GreetingContainer";
+import { LoginContainer } from "@/components/LoginContainer";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { cookies } from "next/headers";
 
 async function Page(props: {
@@ -83,10 +83,7 @@ async function Page(props: {
   return (
     <>
       {settings && typeof settings !== "string" && (
-        <ColorTheme
-          themeId={ThemeId.LinkForgotPassword}
-          isRegisterContainerVisible={isRegisterContainerVisible}
-        >
+        <LoginContainer isRegisterContainerVisible={isRegisterContainerVisible}>
           <>
             <GreetingLoginContainer
               greetingSettings={settings.greetingSettings}
@@ -129,7 +126,7 @@ async function Page(props: {
               </Login>
             </FormWrapper>
           </>
-        </ColorTheme>
+        </LoginContainer>
       )}
     </>
   );

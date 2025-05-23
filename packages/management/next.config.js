@@ -39,6 +39,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  serverExternalPackages: ["nconf"],
   compiler: {
     styledComponents: true,
   },
@@ -160,4 +161,3 @@ module.exports = {
   },
   ...nextConfig,
 };
-

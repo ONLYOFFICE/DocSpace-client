@@ -8,20 +8,26 @@
     "start-prod": "NODE_ENV=production node server.js",
     "lint": "next lint",
     "clean": "shx rm -rf .next",
-    "deploy": "shx --silent mkdir -p ../../../publish/web/management && shx --silent mkdir -p ../../../publish/web/management/.next && shx --silent mkdir -p ../../../publish/web/management/config && shx cp -r config/* ../../../publish/web/management/config && shx --silent mkdir -p ../../../publish/web/management/node_modules && shx --silent mkdir -p ../../../publish/web/management/.next/static && shx cp -r .next/standalone/node_modules/* ../../../publish/web/management/node_modules && shx cp -r .next/static/* ../../../publish/web/management/.next/static    && shx cp -r .next/standalone/packages/management/.next/* ../../../publish/web/management/.next &&  shx cp -f server.prod.js ../../../publish/web/management/server.js"
+    "deploy": "shx --silent mkdir -p ../../../publish/web/management && shx --silent mkdir -p ../../../publish/web/management/.next && shx --silent mkdir -p ../../../publish/web/management/config && shx cp -r config/* ../../../publish/web/management/config && shx --silent mkdir -p ../../../publish/web/management/node_modules && shx --silent mkdir -p ../../../publish/web/management/.next/static && shx cp -r .next/standalone/node_modules/* ../../../publish/web/management/node_modules && shx cp -r .next/static/* ../../../publish/web/management/.next/static    && shx cp -r .next/standalone/packages/management/.next/* ../../../publish/web/management/.next &&  shx cp -f server.prod.js ../../../publish/web/management/server.js &&  shx cp -f logger.mjs ../../../publish/web/login/logger.mjs"
   },
   "dependencies": {
+    "@aws-sdk/client-cloudwatch-logs": "3.816.0",
     "i18next": "20.6.1",
+    "nconf": "0.12.1",
     "next": "15.3.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-i18next": "13.5.0",
     "sass": "1.79.5",
     "socket.io-client": "^4.8.0",
-    "styled-components": "5.3.11"
+    "styled-components": "5.3.11",
+    "winston": "3.17.0",
+    "winston-cloudwatch": "6.3.0",
+    "winston-daily-rotate-file": "5.0.0"
   },
   "devDependencies": {
     "@svgr/webpack": "8.1.0",
+    "@types/nconf": "^0",
     "@types/node": "22.7.5",
     "@types/react": "19.1.4",
     "@types/react-dom": "19.1.5",

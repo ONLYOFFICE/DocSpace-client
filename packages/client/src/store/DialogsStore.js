@@ -268,7 +268,7 @@ class DialogsStore {
 
   downloadItems = [];
 
-  fillingStatusPanel = false;
+  fillingStatusPanelVisible = false;
 
   stopFillingDialogData = {
     visible: false,
@@ -996,7 +996,7 @@ class DialogsStore {
   };
 
   setFillingStatusPanelVisible = (visible) => {
-    this.fillingStatusPanel = visible;
+    this.fillingStatusPanelVisible = visible;
   };
 
   /**

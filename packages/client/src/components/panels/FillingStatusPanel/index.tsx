@@ -35,7 +35,7 @@ import type { TUser } from "@docspace/shared/api/people/types";
 import type { TTranslation } from "@docspace/shared/types";
 
 export interface FillingStatusPanelWrapperProps {
-  fillingStatusPanel: boolean;
+  fillingStatusPanelVisible: boolean;
   setFillingStatusPanelVisible: (visible: boolean) => void;
   file: TFile | null;
   user: TUser | null;
@@ -46,7 +46,7 @@ export interface FillingStatusPanelWrapperProps {
 }
 
 const FillingStatusPanelWrapper = ({
-  fillingStatusPanel,
+  fillingStatusPanelVisible,
   setFillingStatusPanelVisible,
   file,
   user,
@@ -81,13 +81,13 @@ const FillingStatusPanelWrapper = ({
     onClose();
   };
 
-  if (!file || !user || !fillingStatusPanel) return null;
+  if (!file || !user || !fillingStatusPanelVisible) return null;
 
   return (
     <FillingStatusPanel
       user={user}
       file={file}
-      visible={fillingStatusPanel}
+      visible={fillingStatusPanelVisible}
       onClose={onClose}
       onFill={handleFill}
       onStopFilling={handleStopFilling}
@@ -100,7 +100,7 @@ const FillingStatusPanelWrapper = ({
 export default inject<TStore, React.FC, FillingStatusPanelWrapperProps>(
   ({ dialogsStore, filesStore, userStore, contextOptionsStore }) => {
     const {
-      fillingStatusPanel,
+      fillingStatusPanelVisible,
       setFillingStatusPanelVisible,
       setStopFillingDialogVisible,
     } = dialogsStore;
@@ -114,7 +114,7 @@ export default inject<TStore, React.FC, FillingStatusPanelWrapperProps>(
     const file = bufferSelection as TFile | null;
 
     return {
-      fillingStatusPanel,
+      fillingStatusPanelVisible,
       setFillingStatusPanelVisible,
       file,
       user,

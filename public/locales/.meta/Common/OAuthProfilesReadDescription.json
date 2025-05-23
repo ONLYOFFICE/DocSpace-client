@@ -1,0 +1,232 @@
+{
+  "key_path": "OAuthProfilesReadDescription",
+  "content": "View basic information about your profile",
+  "content_en_sha1_hash": "88d333b1826774dd3af1c211ba7693458c814b5f",
+  "created_at": "2025-05-19T21:30:47.046Z",
+  "updated_at": "2025-05-22T11:56:37.910Z",
+  "comment": {
+    "text": "This translation key is used to display a message indicating that the user's profile information can be viewed. It appears in UI elements related to OAuth profiles and is likely used on buttons or screens where users can view their account details.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:12.227Z"
+  },
+  "usage": [
+    {
+      "file_path": "\\packages\\shared\\utils\\oauth\\index.ts",
+      "line_number": 125,
+      "context": "if (type === ScopeType.read)\n return t(\"Common:OAuthAccountsReadDescription\");\n return t(\"Common:OAuthAccountsWriteDescription\");\n case ScopeGroup.profiles:\n if (type === ScopeType.read)\n return t(\"Common:OAuthProfilesReadDescription\");\n return t(\"Common:OAuthProfilesWriteDescription\");\n case ScopeGroup.rooms:\n if (type === ScopeType.read) return t(\"Common:OAuthRoomsReadDescription\");\n return t(\"Common:OAuthRoomsWriteDescription\");\n case ScopeGroup.openid:",
+      "module": "\\packages\\shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'プロフィールに関する基本情報を確認する' is technically correct but could be improved for naturalness and clarity in this context. '確認する' (kakunin suru - to confirm) implies a verification process, which might be more than just 'viewing'.",
+          "suggestion": "プロフィールに関する基本情報を閲覧する"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Romanian translation uses a possessive pronoun ('dvs.') which might be overly formal for a user interface. Consider a more informal alternative.",
+          "suggestion": "Vizualizarea informațiilor de bază despre profilul tău."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Прикажи основне информације о свом профилу\" is a literal translation that doesn't quite capture the intended meaning of 'View basic information about your profile'. It's grammatically correct but sounds a bit formal and less natural in Serbian. 'View' can also imply access and not just displaying information.",
+          "suggestion": "Погледај основне информације о свом профилу"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '查看您个人资料的基础信息' is too literal and not idiomatic. While technically correct, it sounds awkward in Chinese. '个人资料' directly translates to 'personal profile'.",
+          "suggestion": "查看您的个人资料基本信息"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,237 @@
+{
+  "key_path": "HotkeysRenameSelected",
+  "content": "Rename selected item",
+  "content_en_sha1_hash": "4968d8519450b72f33c8442c325a291da546392f",
+  "created_at": "2025-05-19T21:30:55.081Z",
+  "updated_at": "2025-05-21T10:25:57.794Z",
+  "comment": {
+    "text": "This translation key is used to display the action \"Rename selected item\" as a tooltip or button label in the application's hotkeys panel. It appears next to the keyboard shortcut for renaming an item when multiple items are selected. Translators should provide a phrase that conveys this idea in the local language.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:30.244Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/HotkeysPanel/ActionsBlock.js",
+      "line_number": 78,
+      "context": "<Text {...keyTextStyles}>{`${CtrlKey} + x`}</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysRenameSelected\")}</Text>\n <Text {...keyTextStyles}>F2</Text>\n </>\n </Row>\n </>\n );",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'إعادة تسمية العنصر' literally translates to 'Re-naming the item.' While understandable, a more natural and direct translation of 'Rename selected item' would be something like 'تسمية العنصر المحدد' (Tasmiyat al-'Unsur al-Muhaddad).",
+          "suggestion": "تسمية العنصر المحدد"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Seçilmiş elementin adını dəyişdirin' is a literal translation that doesn't quite capture the natural phrasing for renaming an item in a hotkey context.  It's overly formal and verbose.",
+          "suggestion": "Consider alternatives like 'Seçilmiş düymənin adını dəyiş' (Change the name of the selected button) or 'Seçimi yenidən adlandır' (Rename selection)."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'පහත තෝරාගත් අයිතමයේ නම වෙනස් කරන්න' is too literal and sounds unnatural in Sinhala. 'පහත' (pahaata) means 'below' and doesn't fit the context of renaming a selected item. The phrase 'අයිතමයේ නම' (ayitamaye nama) is also a bit clunky.",
+          "suggestion": "තෝරාගත් අයිතමයෙහි නම වෙනස් කරන්න"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically understandable, the suggested translation could be slightly improved for flow.",
+          "suggestion": "තෝරාගත් අයිතමය වෙනස් කරන්න"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Preimenuj odabranu stavku\" is not the most accurate or natural translation of \"Rename selected item.\" \"Stavka\" typically refers to an item on a list or a menu item. A better translation would convey the meaning of renaming a hotkey or assigned action.",
+          "suggestion": "Preimenuj izabrani unos"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

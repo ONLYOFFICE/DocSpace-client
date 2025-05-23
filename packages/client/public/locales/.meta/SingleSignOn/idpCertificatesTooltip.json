@@ -1,0 +1,343 @@
+{
+  "key_path": "idpCertificatesTooltip",
+  "content": "The Identity provider public certificates used for either verification or decryption (or both) of the requests and responses from the IdP.",
+  "content_en_sha1_hash": "7846c6461388c273f52adc2c6ee4a3e2120da395",
+  "created_at": "2025-05-19T21:30:50.096Z",
+  "updated_at": "2025-05-21T02:10:30.665Z",
+  "comment": {
+    "text": "This translation key is used to display a tooltip describing identity provider public certificates in the portal settings page. It provides context on the certificates' purpose and usage in single sign-on processes.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:15.125Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/Certificates.js",
+      "line_number": 119,
+      "context": "<HelpButton\n offsetRight={0}\n tooltipContent={\n prefix === \"idp\" ? (\n <Text fontSize=\"12px\">{t(\"idpCertificatesTooltip\")}</Text>\n ) : (\n <Text fontSize=\"12px\">{t(\"spCertificatesTooltip\")}</Text>\n )\n }\n className={",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"verification\" is technically correct, but in the context of security and identity providers, a more precise and commonly used term would be 'التحقق من الهوية' (Tahqquq al-Hawiyya) or 'التحقق من صحة' (Tahqquq as-Siha).  'التحقق' alone is too general.",
+          "suggestion": "شهادات مزود الهوية العامة تستخدم إما للتحقق من الهوية أو فك التشفير (أو كلاهما) للطلبات والاستجابات من مزود الهوية."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'فك التشفير' is correct, but could be potentially simplified for better readability, depending on the target audience. Consider 'إلغاء التشفير' which is equally valid and more common in some contexts.",
+          "suggestion": "شهادات مزود الهوية العامة تستخدم إما للتحقق من الهوية أو إلغاء التشفير (أو كلاهما) للطلبات والاستجابات من مزود الهوية."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit awkward and could be improved for better readability in Azerbaijani. Specifically, the phrase 'doğrulanması və ya şifrəsinin açılması' could be restructured.",
+          "suggestion": "IdP-dən gələn sorğuların və cavabların doğrulanması və ya şifrə dəşifrə edilməsi (və ya hər ikisi) üçün istifadə edilən identifikasiya provayderinin ictimai sertifikatları."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"Հարցումների և պատասխանների\" (requests and responses) is a bit clunky and less common in Armenian technical contexts. A more natural phrasing could be 'տրված տեղեկությունների' (provided information) or 'ուղարկված եւ ստացված տվյալների' (sent and received data).",
+          "suggestion": "Ինքնության մատակարարի հանրային հավաստագրերը, որոնք օգտագործվում են IdP-ից ստացված տեղեկությունների ստուգման կամ վերծանման համար (կամ երկուսն էլ):"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, using parentheses for the (or both) part can be slightly improved for flow.",
+          "suggestion": "Ինքնության մատակարարի հանրային հավաստագրերը, որոնք օգտագործվում են IdP-ից ստացված տեղեկությունների ստուգման կամ վերծանման համար, կամ երկուսն էլ:"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation doesn't fully capture the nuance of 'Identity provider' being a specific entity. While 'ID プロバイダ' is technically correct, it lacks the sense of a distinct provider.",
+          "suggestion": "ID プロバイダの公開証明書 (ID プロバイダの公開証明書) - This adds emphasis to the 'provider' aspect, making it clearer."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term '復号' (fukō) for 'decryption' is accurate, but slightly formal for this context. A more approachable term might be better.",
+          "suggestion": "IDP からのリクエストとレスポンスの検証または暗号化（またはその両方）に使用される ID プロバイダの公開証明書。 (Using 暗号化 (angōka) instead of 復号 (fukō) for decryption makes it sound more natural)"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation lacks proper spacing after the colon in 'SingleSignOn:idpCertificatesTooltip'. While not strictly incorrect, it's unusual in Korean to omit the space.",
+          "suggestion": "IdP의 요청 및 응답의 확인 또는 암호 해독(또는 둘 다)에 사용되는 ID 공급자 공용 인증서."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While '확인' (hwagin) can mean verification, a more natural and common term for 'verification' in this context might be '검증' (geomjeong). '확인' often implies simple confirmation, whereas '검증' implies a more thorough validation.",
+          "suggestion": "IdP의 요청 및 응답의 검증 또는 암호 해독(또는 둘 다)에 사용되는 ID 공급자 공용 인증서."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The term 'ສາທາລະນະ' (sathalana) which translates to 'public' is technically correct but could be improved for clarity. In this context, 'ສາທາລະນະ' might not be the most easily understood word for a broader audience.",
+          "suggestion": "ໃບຮັບຮອງສາທາລະນະຂອງຜູ້ໃຫ້ບໍລິການລະບຸຕົວຕົນ (baip rop rop sathalana khong phu hai borikan rabu tua mon)"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrasing 'ການຢັ້ງຢືນຫຼືການຖອດລະຫັດ (ຫຼືທັງສອງ)' can be slightly improved for better flow in Lao. While grammatically correct, it's a bit clunky.",
+          "suggestion": "ສໍາລັບການຢັ້ງຢືນຫຼືຖອດລະຫັດ (ຫຼືທັງສອງຢ່າງ)"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'atšifrēšanai' is missing an accent mark. It should be 'atšifrēšanai'.",
+          "suggestion": "atšifrēšanai"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The use of 'bądź' instead of 'lub' after 'weryfikacji' is slightly awkward. While grammatically correct, 'lub' would be more natural in this context.",
+          "suggestion": "Publiczne certyfikaty dostawcy tożsamości używane do weryfikacji lub odszyfrowania (lub obu) żądań i odpowiedzi od IdP."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'desencriptação' (decryption) is technically correct, but 'descriptografia' is the more commonly used and preferred term in Portuguese within a technical context.",
+          "suggestion": "Os certificados públicos utilizados pelo fornecedor de Identidade para verificação ou descriptografia (ou ambos) dos pedidos e respostas do IdP."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'solicitărilor şi răspunsurilor' uses 'şi' which is usually replaced with 'și' in modern Romanian. While 'şi' is technically correct, 'și' is preferred.",
+          "suggestion": "solicitărilor și răspunsurilor"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'расшифровки (или для того и другого)' is a bit awkward and verbose. 'или для проверки, или для расшифровки (или для того и другого)' is more complex than the English equivalent suggests. A simpler phrasing would be better.",
+          "suggestion": "Открытые сертификаты поставщика учетных записей, используемые для проверки или расшифровки запросов и ответов от поставщика учетных записей."
+        },
+        {
+          "type": "formatting",
+          "description": "While not incorrect, the parentheses add unnecessary complexity. Removing them aligns the sentence structure more closely with the English version.",
+          "suggestion": "Открытые сертификаты поставщика учетных записей, используемые для проверки или расшифровки запросов и ответов от поставщика учетных записей."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'අනන්‍යතා ප්‍රතිපාදකයාගේ' (ananyaatatha prathipathakaayaage) translates to 'of the identity provider's'. While technically correct, it sounds slightly awkward in Sinhala. A more natural phrasing might be 'අනන්‍යතා සපයුම්කරුගේ' (ananyaatha sapayumakaruge), which means 'of the identity supplier's'.",
+          "suggestion": "අනන්‍යතා සපයුම්කරුගේ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'හෝ දෙකම' (ho dekaam) translates to 'or both', which is accurate, but could be rephrased for a more fluid sentence structure.  A better option might be 'හෝ kedua'.",
+          "suggestion": "හෝ kedua"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure could be improved for better readability in Sinhala.  The current phrasing feels slightly unnatural.",
+          "suggestion": "IdP වෙතින් ලැබෙන ඉල්ලීම් සහ ප්‍රතිචාර සත්‍යාපනය හෝ විසංකේතනය (හෝ kedua) සඳහා අනන්‍යතා සපයුම්කරුගේ ප්‍රසිද්ධ සහතික භාවිතා කරයි."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'şifresinin çözülmesi' (decryption) is a bit awkward. 'Şifrelenmesi' is a more natural and concise way to express decryption in this context.",
+          "suggestion": "IdP'den gelen isteklerin ve yanıtların doğrulanması veya şifrelenmesi (veya her ikisi) için kullanılan Kimlik sağlayıcı genel sertifikaları."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Загальнодоступні' (Zahal'nodostupni) is a literal translation of 'public' but might not be the most natural or accurate term in this context. 'Публічні' (Publichni) or a more descriptive term like 'Відкриті' (Vidkryti - Open) might be more appropriate depending on the nuance desired.",
+          "suggestion": "Consider replacing 'Загальнодоступні' with 'Публічні' or 'Відкриті' depending on the precise meaning to convey."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, the phrase '(або і для того, і для іншого)' is a bit clunky. It's a very literal rendering of '(or both)'.",
+          "suggestion": "Consider rephrasing to something more concise, such as '(або одночасно)' which means 'or simultaneously'."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"信息\" (information) is redundant. The English 'responses' already implies information.  The Chinese could be more concise.",
+          "suggestion": "用于对来自 IdP 的请求和响应进行验证或解密（或两者皆有）的身份供应商公共证书。"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

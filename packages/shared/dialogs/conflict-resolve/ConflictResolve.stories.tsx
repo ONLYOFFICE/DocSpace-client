@@ -105,7 +105,9 @@ export default meta;
 
 const Template = ({ ...args }: ConflictResolveProps) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [selectedType, setSelectedType] = useState<ConflictResolveType | null>(null);
+  const [selectedType, setSelectedType] = useState<ConflictResolveType | null>(
+    null,
+  );
 
   const openDialog = () => setIsVisible(true);
   const closeDialog = () => setIsVisible(false);
@@ -115,14 +117,20 @@ const Template = ({ ...args }: ConflictResolveProps) => {
     closeDialog();
   };
 
+  const conflictResolveTypes = {
+    [ConflictResolveType.Overwrite]: "Overwrite",
+    [ConflictResolveType.Duplicate]: "Duplicate",
+    [ConflictResolveType.Skip]: "Skip",
+  };
+
   return (
     <div>
       <Button label="Show Conflict Dialog" onClick={openDialog} />
-      {selectedType !== null && (
+      {selectedType !== null ? (
         <div style={{ marginTop: "20px" }}>
-          <p>Selected action: {ConflictResolveType[selectedType]}</p>
+          <p>Selected action: {conflictResolveTypes[selectedType]}</p>
         </div>
-      )}
+      ) : null}
       <ConflictResolve
         {...args}
         visible={isVisible}
@@ -137,6 +145,9 @@ export const Default: Story = {
   render: (args) => <Template {...args} />,
   args: {
     isLoading: false,
+    visible: true,
+    onClose: () => {},
+    onSubmit: () => {},
     messageText: "document.docx",
     selectActionText: "Select an action:",
     submitButtonLabel: "OK",
@@ -163,6 +174,7 @@ export const LongFilename: Story = {
   render: (args) => <Template {...args} />,
   args: {
     ...Default.args,
-    messageText: "very-long-filename-with-a-lot-of-characters-that-might-overflow-the-container.docx",
+    messageText:
+      "very-long-filename-with-a-lot-of-characters-that-might-overflow-the-container.docx",
   },
 };

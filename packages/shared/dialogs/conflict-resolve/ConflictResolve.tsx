@@ -115,14 +115,30 @@ const ConflictResolve = (props: ConflictResolveProps) => {
       visible={visible}
       isLoading={isLoading}
       displayType={ModalDialogType.modal}
+      data-test-id="conflict-resolve-dialog"
+      aria-labelledby="conflict-resolve-header"
     >
-      <ModalDialog.Header>{headerLabel}</ModalDialog.Header>
+      <ModalDialog.Header data-test-id="conflict-resolve-header">
+        {headerLabel}
+      </ModalDialog.Header>
       <ModalDialog.Body>
-        <div className={styles.conflictResolveBodyContent}>
-          <Text truncate className={styles.conflictResolveFileName}>
+        <div
+          className={styles.conflictResolveBodyContent}
+          data-test-id="conflict-resolve-body"
+        >
+          <Text
+            truncate
+            className={styles.conflictResolveFileName}
+            data-test-id="conflict-resolve-filename"
+          >
             {messageText}
           </Text>
-          <Text className={styles.selectAction}>{selectActionText}</Text>
+          <Text
+            className={styles.selectAction}
+            data-test-id="conflict-resolve-select-action"
+          >
+            {selectActionText}
+          </Text>
           <RadioButtonGroup
             className={styles.conflictResolveRadioButton}
             orientation="vertical"
@@ -131,11 +147,13 @@ const ConflictResolve = (props: ConflictResolveProps) => {
             name="group"
             onClick={onSelectResolveType}
             options={radioOptions}
-            selected={ConflictResolveType.Overwrite as unknown as string}
+            selected={resolveType as unknown as string}
+            data-test-id="conflict-resolve-options"
+            aria-label="Conflict resolution options"
           />
         </div>
       </ModalDialog.Body>
-      <ModalDialog.Footer>
+      <ModalDialog.Footer data-test-id="conflict-resolve-footer">
         <Button
           key="OkButton"
           label={submitButtonLabel}
@@ -143,12 +161,16 @@ const ConflictResolve = (props: ConflictResolveProps) => {
           primary
           type="submit"
           onClick={onSubmitAction}
+          data-test-id="conflict-resolve-submit-button"
+          aria-label={submitButtonLabel}
         />
         <Button
           key="CancelButton"
           label={cancelButtonLabel}
           size={ButtonSize.normal}
           onClick={onClose}
+          data-test-id="conflict-resolve-cancel-button"
+          aria-label={cancelButtonLabel}
         />
       </ModalDialog.Footer>
     </ModalDialog>

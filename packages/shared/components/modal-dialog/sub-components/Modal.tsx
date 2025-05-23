@@ -76,16 +76,19 @@ const Modal = ({
   const contentRef = React.useRef<null | HTMLDivElement>(null);
 
   const headerComponent = React.isValidElement(header)
-    ? header.props.children
+    ? (header as React.ReactElement<{ children: React.ReactNode }>).props
+        .children
     : null;
   const bodyComponent = React.isValidElement(body)
-    ? (body.props.children as React.ReactNode)
+    ? (body as React.ReactElement<{ children: React.ReactNode }>).props.children
     : null;
   const footerComponent = React.isValidElement(footer)
-    ? footer.props.children
+    ? (footer as React.ReactElement<{ children: React.ReactNode }>).props
+        .children
     : null;
   const containerComponent = React.isValidElement(container)
-    ? container.props.children
+    ? (container as React.ReactElement<{ children: React.ReactNode }>).props
+        .children
     : null;
 
   const validateOnMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {

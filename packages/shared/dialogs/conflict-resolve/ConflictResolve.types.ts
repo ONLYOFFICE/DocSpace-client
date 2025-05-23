@@ -26,7 +26,7 @@
 
 import { ConflictResolveType } from "../../enums";
 
-export interface ConflictResolveProps {
+export type ConflictResolveProps = {
   isLoading: boolean;
   visible: boolean;
   onClose: () => void;
@@ -42,4 +42,4 @@ export interface ConflictResolveProps {
   skipTitle: string;
   skipDescription: string;
   headerLabel: string;
-}
+};

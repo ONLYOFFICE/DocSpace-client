@@ -11,5 +11,6 @@
   "LinkCopySuccess": "Il link di collegamento è stato copiato",
   "SendInvitation": "Invia invito",
   "UserMaxAvailableRoleWarning": "Gli ospiti e gli utenti non possono essere assegnati come gestori di stanze. Solo gli amministratori della Stanza e di {{productName}} sono adatti al ruolo specificato.",
-  "UsersAlreadyAdded": "Sono già stati aggiunti alcuni utenti"
+  "UsersAlreadyAdded": "Sono già stati aggiunti alcuni utenti",
+  "UsersCannotBeAdded": "I contatti disabilitati non possono essere aggiunti a una stanza."
 }

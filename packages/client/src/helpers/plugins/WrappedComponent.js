@@ -105,7 +105,7 @@ export const PluginComponent = inject(({ pluginStore }) => {
         isRequestRunning,
         setIsRequestRunning,
         setModalRequestRunning,
-      } = React.useContext(PropsContext);
+      } = React.use(PropsContext);
 
       React.useEffect(() => {
         if (
@@ -468,9 +468,9 @@ const WrappedComponent = ({
   );
 
   return (
-    <PropsContext.Provider value={contextValue}>
+    <PropsContext value={contextValue}>
       <PluginComponent component={component} pluginName={pluginName} />
-    </PropsContext.Provider>
+    </PropsContext>
   );
 };
 

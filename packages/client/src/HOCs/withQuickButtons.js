@@ -175,7 +175,6 @@ export default function withQuickButtons(WrappedComponent) {
         isIndexEditingMode,
         currentDeviceType,
         roomLifetime,
-        currentColorScheme,
         isTemplatesFolder,
       } = this.props;
 
@@ -207,7 +206,6 @@ export default function withQuickButtons(WrappedComponent) {
           showLifetimeIcon={showLifetimeIcon}
           expiredDate={expiredDate}
           roomLifetime={roomLifetime}
-          currentColorScheme={currentColorScheme}
           onCreateRoom={this.onCreateRoom}
           isTemplatesFolder={isTemplatesFolder}
         />
@@ -283,7 +281,6 @@ export default function withQuickButtons(WrappedComponent) {
         isIndexEditingMode,
         roomLifetime: infoPanelRoom?.lifetime ?? selectedFolderStore?.lifetime,
         getManageLinkOptions,
-        currentColorScheme: settingsStore.currentColorScheme,
         isTemplatesFolder,
         onCreateRoomFromTemplate,
         setBufferSelection: filesStore.setBufferSelection,

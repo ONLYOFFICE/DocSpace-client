@@ -25,25 +25,22 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React, { useEffect, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 
 import ErrorContainer from "../../components/error-container/ErrorContainer";
 
 import { StyledPreparationPortal } from "./PreparationPortal.styled";
 import { Text } from "../../components/text";
 import SocketHelper, { SocketEvents } from "../../utils/socket";
-import { ColorTheme, ThemeId } from "../../components/color-theme";
 import { IPreparationPortal } from "./PreparationPortal.types";
 import { getRestoreProgress } from "../../api/portal";
 import { clearLocalStorage, returnToPortal } from "./PreparationPortal.utils";
 import PreparationPortalLoader from "../../skeletons/preparation-portal";
+import { PreparationPortalProgress } from "../../components/preparation-portal-progress";
 
 let requestsCount = 0;
 
 export const PreparationPortal = (props: IPreparationPortal) => {
   const { withoutHeader, isDialog, style } = props;
-
-  const theme = useTheme();
 
   const { t, ready } = useTranslation(["PreparationPortal", "Common"]);
 
@@ -141,19 +138,12 @@ export const PreparationPortal = (props: IPreparationPortal) => {
   const componentBody = errorMessage ? (
     <Text className="preparation-portal_error">{`${errorMessage}`}</Text>
   ) : (
-    <ColorTheme theme={theme} themeId={ThemeId.Progress} percent={percent}>
-      <div className="preparation-portal_progress">
-        <div className="preparation-portal_progress-bar">
-          <div className="preparation-portal_progress-line" />
-        </div>
-        <Text className="preparation-portal_percent">{`${percent} %`}</Text>
-      </div>
-      <Text className="preparation-portal_text">
-        {t("PreparationPortalDescription", {
-          productName: t("Common:ProductName"),
-        })}
-      </Text>
-    </ColorTheme>
+    <PreparationPortalProgress
+      text={t("PreparationPortalDescription", {
+        productName: t("Common:ProductName"),
+      })}
+      percent={percent}
+    />
   );
   return (
     <StyledPreparationPortal errorMessage={!!errorMessage} isDialog={isDialog}>

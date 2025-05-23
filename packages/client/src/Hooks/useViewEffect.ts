@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useContext } from "react";
+import { useEffect, use } from "react";
 import { isMobile as isMobileDevice } from "react-device-detect";
 
 import { DeviceType } from "@docspace/shared/enums";
@@ -46,7 +46,7 @@ const useViewEffect = ({
   setView,
   currentDeviceType,
 }: UseViewEffectProps) => {
-  const { sectionWidth } = useContext<ContextType>(Context);
+  const { sectionWidth } = use<ContextType>(Context);
 
   useEffect(() => {
     const isNotRowView = view !== "row";

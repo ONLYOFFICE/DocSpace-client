@@ -1,0 +1,286 @@
+{
+  "key_path": "TerminateAllSessions",
+  "content": "Terminate all sessions except the current one",
+  "content_en_sha1_hash": "c059d767d7c4c6bc1ac08a5982e1fa39f7014da7",
+  "created_at": "2025-05-19T21:30:53.400Z",
+  "updated_at": "2025-05-22T11:56:37.757Z",
+  "comment": {
+    "text": "\"Used in a button within the 'Logout All' dialog to display the label for terminating all sessions except the current one.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:48.259Z"
+  },
+  "usage": [
+    {
+      "file_path": "\\packages\\client\\src\\pages\\Profile\\Section\\Body\\sub-components\\active-session\\index.js",
+      "line_number": 171,
+      "context": "className=\"terminate-all-sessions\"\n type=\"action\"\n isHovered\n onClick={() => setLogoutAllDialogVisible(true)}\n >\n {t(\"Profile:TerminateAllSessions\")}\n </Link>\n <HelpButton\n offsetRight={0}\n iconName={InfoReactSvgUrl}\n tooltipContent={tooltipContent}",
+      "module": "\\packages\\client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'إنهاء جميع الجلسات باستثناء الجلسات الحالية' literally translates to 'End all sessions except the current sessions'. While understandable, it's slightly clunky. A more natural phrasing in Arabic would convey the meaning more smoothly. The word 'sessions' is repeated unnecessarily.",
+          "suggestion": "إنهاء جميع الجلسات باستثناء الجلسة الحالية"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Cari sessiyadan başqa bütün sessiyaları dayandırın' is a literal translation but could be improved for natural flow. 'Terminate' implies a forceful end, and while 'dayandırın' (stop) is acceptable, a more precise verb might enhance clarity.",
+          "suggestion": "Cari sessiyadan başqa bütün aktiv sessiyaları pozun"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Прекратете всички сесии освен текущата' while generally conveying the meaning, could be more precise. 'Terminate' implies a forceful ending, which might be too strong. A softer phrasing might be more appropriate depending on the context.",
+          "suggestion": "Прекратете всички сесии, с изключение на текущата (Prekratete vsichki sesii, s izkluchenie na tekuщata)"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ukončení všech relací kromě aktuální' while understandable, doesn't perfectly capture the nuance of 'Terminate all sessions except the current one'. 'Ukončení' implies a definitive termination, whereas the English implies a more general action.",
+          "suggestion": "Consider 'Ukončit všechny relace kromě aktuální' or 'Konec všech relací kromě aktuální'"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Τερματισμός όλων των περιόδων λειτουργίας εκτός από την τρέχουσα' is a literal translation but doesn't fully capture the nuance of 'terminate'. A more natural phrasing in Greek would be something along the lines of 'Διακοπή όλων των συνεδριών εκτός από την τρέχουσα'. 'Συνεδρίες' (Synedries) is a more common term for sessions in this context.",
+          "suggestion": "Διακοπή όλων των συνεδριών εκτός από την τρέχουσα"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Päätä kaikki paitsi nykyinen istunto' implies 'start' rather than 'terminate'. 'Terminate' is closer to 'lopeta' or 'katkaise'.",
+          "suggestion": "Lopeta kaikki istunnot paitsi nykyinen"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Դադարեցնել բոլոր սեանսները, բացի ընթացիկից' translates literally to 'Terminate all sessions, except the current one'. While functionally similar, a more natural and precise translation for 'Terminate all sessions except the current one' in this context might use a phrasing that emphasizes the exclusion of the current session. This could imply the user is still logged in.",
+          "suggestion": "Consider a phrasing like 'Դադարեցնել բոլոր սեանսները, բացառությամբ ընթացիկ սեանսի' which translates to 'Terminate all sessions, excluding the current session'."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ດຶບມື້ຍຸ່ງງານທັງໝົດ ທີ່ບໍ່ແມ່ນຊຸດປະຈຸບັນ\" doesn't accurately convey the meaning of \"Terminate all sessions except the current one.\"  \"ດຶບມື້ຍຸ່ງງານ\" literally translates to \"pull/take work\", which is not relevant to session termination. \"ຊຸດປະຈຸບັນ\" means \"current set/batch\", which isn't the right terminology for a session.",
+          "suggestion": "A more accurate translation would focus on termination and exclusion of the current session.  Possible alternatives include:  \"ຢຸດເຊັດຊຸດທັງໝົດ ນອກຈາກຊຸດປະຈຸບັນ\" (Stop all sessions except the current one) or \"ລົບຊຸດທັງໝົດ ທີ່ບໍ່ແມ່ນຊຸດປັດຈຸບັນ\" (Delete all sessions that are not the current session)."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'හැර' (her) is not the most natural way to say 'except' in this context. While technically correct, it sounds a bit awkward.",
+          "suggestion": "Replace 'හැර' with 'නອກ.'  The sentence would then become: 'වත්මන් සැසිය හැර අනෙකුත් සියළු සැසියන් අවසන් කරන්න.' becomes 'වත්මන් සැසිය හැර අනෙකුත් සියළු සැසියන් අවසන් කරන්න'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ukončenie všetkých relácií okrem aktuálnej' is a literal translation and lacks nuance. 'Terminate' implies a more forceful action than simply ending something. It's a bit stiff and doesn't quite capture the original meaning in a natural Slovak way.",
+          "suggestion": "Zrušenie všetkých relácií okrem aktuálnej"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Прекини све сесије осим тренутне' translates literally to 'Terminate all sessions except the current one'. While technically correct, 'Прекини' implies a forceful termination. A more user-friendly and potentially more accurate translation might use a word like 'Затвори' (Close) or 'Укини' (Cancel).",
+          "suggestion": "Consider 'Затвори све сесије осим тренутне' or 'Укини све сесије осим тренутне'"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Prekini sve sesije osim trenutne' while understandable, doesn't perfectly capture the nuance of 'Terminate'. 'Prekini' implies a more forceful or abrupt termination. A more accurate translation might consider 'Završi' or 'Ukinuti'.",
+          "suggestion": "Consider using 'Završi sve sesije osim trenutne' or 'Ukinuti sve sesije osim trenutne'."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Terminate all sessions except the current one\" implies a more active and forceful termination than the Ukrainian translation suggests. \"Завершити всі сеанси, крім поточного\" translates to 'Finish all sessions except the current one', which is less forceful.  A more accurate translation would convey the termination aspect.",
+          "suggestion": "Consider a translation closer to 'Припинити всі сеанси, крім поточного' (Prypynyty vsi sesanyi, kрім поточного) which translates to 'Stop all sessions except the current one'."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

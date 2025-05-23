@@ -1,4 +1,4 @@
-@import "./variables/_colors.scss";
+@use "./variables/colors" as *;
 
 .light {
   --row-side-color: #{$gray};
@@ -2137,6 +2137,94 @@
 
   --selector-navigation-lifetime-fill: #{$dark-gray-dark};
   --selector-navigation-lifetime-stroke: #{$gray};
+}
+
+.light {
+  --index-bg-button-hover: #{$light-blue-hover};
+  --index-arrow-button-hover: #{$light-blue-main};
+}
+
+.dark {
+  --index-bg-button-hover: #{$dark-grey-hover};
+  --index-arrow-button-hover: #{$white};
+}
+
+.light {
+  --mute-badge-color: var(--accent-main);
+}
+
+.dark {
+  --mute-badge-color: #{$white};
+}
+
+.light {
+  --indicator-loader-bg-color: var(--accent-main);
+}
+
+.dark {
+  --indicator-loader-bg-color: #{$white};
+}
+
+.light {
+  --login-or-text-color: #{$gray};
+  --login-or-line-color: #{$gray-light-mid};
+  --login-header-color: #{$black};
+  --login-help-btn: #{$gray};
+  --login-title-color: #{$black};
+  --login-text-color: #{$gray};
+}
+
+.dark {
+  --login-or-text-color: #{$gray-dark};
+  --login-or-line-color: #{$gray-dark-strong};
+  --login-header-color: #{$white};
+  --login-help-btn: #{$gray-dark};
+  --login-title-color: #{$white};
+  --login-text-color: #{$gray-dark};
+}
+
+.light {
+  --loading-button-default-bg: #{$gray};
+  --loading-button-hover-color: #{$light-gray-dark};
+  --loading-button-color: #{$light-second-main};
+  --loading-button-bg: #{$white};
+}
+
+.dark {
+  --loading-button-default-bg: #{$gray-dark};
+  --loading-button-hover-color: #{$white};
+  --loading-button-color: #{$white};
+  --loading-button-bg: #{$black};
+}
+
+.light {
+  --preparation-portal-progress-bg: #{$light-gray-hover};
+  --preparation-portal-progress-color-percent-big: #{$white};
+  --preparation-portal-progress-color-percent-small: #{$black};
+  --preparation-portal-progress-line-bg: var(--accent-main);
+  --preparation-portal-description-text-color: #{$gray};
+}
+
+.dark {
+  --preparation-portal-progress-bg: #{$dark-gray-light};
+  --preparation-portal-progress-color-percent-big: #{$black};
+  --preparation-portal-progress-color-percent-small: #{$white};
+  --preparation-portal-progress-line-bg: #{$white};
+  --preparation-portal-description-text-color: #{$gray-dark};
+}
+
+.light {
+  --files-version-history-badge-default-fill: #{$white};
+  --files-version-history-badge-first-fill: #{$gray};
+  --files-version-history-badge-fill: #{$light-status-warning};
+  --files-version-history-badge-stroke: #{$gray};
+}
+
+.dark {
+  --files-version-history-badge-default-fill: #{$black};
+  --files-version-history-badge-first-fill: #{$gray-dark};
+  --files-version-history-badge-fill: #{$main-orange};
+  --files-version-history-badge-stroke: #{$gray-dark};
 }
 
 .light {

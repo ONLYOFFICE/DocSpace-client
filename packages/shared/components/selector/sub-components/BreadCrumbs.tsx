@@ -160,8 +160,8 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
     breadCrumbsLoader,
     isBreadCrumbsLoading,
     onSelectBreadCrumb,
-  } = React.useContext(BreadCrumbsContext);
-  const setIsSearch = React.useContext(SearchDispatchContext);
+  } = React.use(BreadCrumbsContext);
+  const setIsSearch = React.use(SearchDispatchContext);
 
   const { isRTL } = useInterfaceDirection();
 

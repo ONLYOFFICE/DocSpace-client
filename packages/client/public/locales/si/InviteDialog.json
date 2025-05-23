@@ -5,7 +5,6 @@
   "InvitationLanguage": "ආරාධන භාෂාව",
   "InviteMembersManuallyDescription": "ඊමේල් ඔස්සේ {{productName}} වෙත නව සාමාජිකයන් පෞද්ගලිකව ආරාධනා කරන්න.",
   "InviteMembersSearchPlaceholder": "ඊමේල් ඔස්සේ සාමාජිකයන්ට ආරාධනා කරන්න",
-  "InviteToRoomManuallyInfo": "පවතින {{productName}} සම්බන්ධතා එක් කරන්න. නැතහොත්, නව ආරාධිතයන්ට විද්‍යුත් තැපෑල හරහා පෞද්ගලිකව ආරාධනා කරන්න. නව ආරාධිතයන් ඔබේ ආරාධිත ලැයිස්තුවට එක් කරනු ලැබේ.",
   "InviteToRoomSearchPlaceholder": "නම හෝ විද්‍යුත් ලිපිනයෙන් සොයා සහ ආරාධනා කරන්න",
   "InviteViaLink": "සබැඳියකින් ආරාධනය",
   "InviteViaLinkDescriptionAccounts": "{{productName}} වෙත ඉබේම පිවිසීමට විශ්ව සබැඳියක් සාදන්න",

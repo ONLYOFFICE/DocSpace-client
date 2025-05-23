@@ -14,7 +14,6 @@
   "CannotRestoreRoom": "Huonetta ei voi palauttaa",
   "ChooseNewPayer": "Valitse uusi Maksaja",
   "ChooseNewPlan": "Haluaisitko valita uuden hinnoitteluohjelman?",
-  "ContactUs": "Myyntiin liittyviin kysymyksiin liittyen, ota meihin yhteyttä osoitteessa",
   "DelayedPayment": "{{planName}} maksu myöhässä ohjelman päiväys {{date}}",
   "DowngradeNow": "Alenna ohjelman tasoa nyt",
   "ErrorNotification": "Tariffisuunnitelman päivittäminen epäonnistui. Yritä myöhemmin uudelleen tai ota yhteyttä myyntiosastoon.",

@@ -1,7 +1,8 @@
 import { dirname, join } from "path";
 import remarkGfm from "remark-gfm";
 
-module.exports = {
+/** @type { import('@storybook/react-webpack5').StorybookConfig } */
+export default {
   stories: [
     // "../all/all.stories.js",
     // default page
@@ -16,7 +17,6 @@ module.exports = {
     getAbsolutePath("@storybook/addon-actions"),
     getAbsolutePath("@storybook/addon-controls"),
     getAbsolutePath("@storybook/addon-viewport"),
-    getAbsolutePath("@storybook/addon-contexts"),
     getAbsolutePath("@storybook/addon-designs"),
     {
       name: "@storybook/addon-docs",
@@ -40,14 +40,28 @@ module.exports = {
       },
     },
     getAbsolutePath("storybook-dark-mode"),
+    getAbsolutePath("@storybook/addon-webpack5-compiler-babel"),
   ],
 
   framework: {
     name: getAbsolutePath("@storybook/react-webpack5"),
     options: {},
   },
-  docs: {
-    autodocs: true,
+  docs: {},
+
+  babel: async (options) => {
+    const presets = Array.isArray(options.presets) ? [...options.presets] : [];
+    presets.push([
+      "@babel/preset-react",
+      {
+        runtime: "automatic",
+      },
+    ]);
+
+    return {
+      ...options,
+      presets,
+    };
   },
   typescript: {
     check: false,

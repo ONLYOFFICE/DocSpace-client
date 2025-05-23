@@ -135,6 +135,7 @@ const RegistrationForm = ({
           components={{
             1: (
               <ColorTheme
+                key="component_key"
                 tag="a"
                 themeId={ThemeId.Link}
                 href={licenseUrl}
@@ -144,6 +145,7 @@ const RegistrationForm = ({
             ),
             2: (
               <ColorTheme
+                key="second_component_key"
                 tag="a"
                 themeId={ThemeId.Link}
                 href={legalTerms}

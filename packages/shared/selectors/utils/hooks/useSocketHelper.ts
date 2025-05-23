@@ -56,7 +56,7 @@ const useSocketHelper = ({
   setTotal,
 }: UseSocketHelperProps) => {
   const { t } = useTranslation(["Common"]);
-  const { getIcon } = React.useContext(SettingsContext);
+  const { getIcon } = React.use(SettingsContext);
 
   const folderSubscribers = React.useRef(new Set<string>());
 

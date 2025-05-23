@@ -33,10 +33,11 @@ import { getSettings, getUserFromConfirm } from "@/utils/actions";
 import ChangeOwnerForm from "./page.client";
 
 type PortalOwnerChangeProps = {
-  searchParams: { [key: string]: string };
+  searchParams: Promise<{ [key: string]: string }>;
 };
 
-async function Page({ searchParams }: PortalOwnerChangeProps) {
+async function Page(props: PortalOwnerChangeProps) {
+  const searchParams = await props.searchParams;
   const uid = searchParams.uid;
   const confirmKey = getStringFromSearchParams(searchParams);
 

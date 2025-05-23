@@ -49,6 +49,7 @@ export interface IStartFillingPanelProps {
 }
 
 export interface HeaderProps {
+  ref?: React.RefObject<HTMLDivElement>;
   className?: string;
   roleName: string;
   t: TTranslation;

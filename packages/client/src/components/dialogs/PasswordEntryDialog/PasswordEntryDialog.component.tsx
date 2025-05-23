@@ -56,7 +56,7 @@ const PasswordEntryDialog = ({
   onClickDownload,
 }: PasswordEntryDialogProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const abortControllerRef = useRef<AbortController>();
+  const abortControllerRef = useRef<AbortController>(undefined);
 
   const { t } = useTranslation(["UploadPanel", "Common"]);
 

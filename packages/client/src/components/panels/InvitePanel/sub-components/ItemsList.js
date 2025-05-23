@@ -37,13 +37,13 @@ import { ScrollList } from "../StyledInvitePanel";
 
 const USER_ITEM_HEIGHT = 48;
 
-const VirtualScroll = React.forwardRef((props, ref) => (
+const VirtualScroll = ({ ref, ...props }) => (
   <CustomScrollbarsVirtualList
     {...props}
     ref={ref}
     paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
   />
-));
+);
 
 VirtualScroll.displayName = "VirtualScroll";
 

@@ -43,11 +43,13 @@ import {
 import CreateUserForm from "./page.client";
 
 type LinkInviteProps = {
-  searchParams: { [key: string]: string };
-  params: { Invite: string };
+  searchParams: Promise<{ [key: string]: string }>;
+  params: Promise<{ Invite: string }>;
 };
 
-async function Page({ searchParams, params }: LinkInviteProps) {
+async function Page(props: LinkInviteProps) {
+  const params = await props.params;
+  const searchParams = await props.searchParams;
   if (params.Invite !== "LinkInvite" && params.Invite !== "EmpInvite")
     return notFound();
 
@@ -55,7 +57,7 @@ async function Page({ searchParams, params }: LinkInviteProps) {
   const uid = searchParams.uid;
   const confirmKey = getStringFromSearchParams(searchParams);
 
-  const headersList = headers();
+  const headersList = await headers();
   const hostName = headersList.get("x-forwarded-host") ?? "";
 
   const [
@@ -77,7 +79,7 @@ async function Page({ searchParams, params }: LinkInviteProps) {
   const settingsCulture =
     typeof settings === "string" ? undefined : settings?.culture;
 
-  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
+  const culture = (await cookies()).get(LANGUAGE)?.value ?? settingsCulture;
 
   return (
     <>

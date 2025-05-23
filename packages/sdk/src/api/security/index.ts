@@ -30,7 +30,7 @@ import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import { TGetCSPSettings } from "@docspace/shared/api/settings/types";
 
 export async function getCSP(): Promise<TGetCSPSettings | undefined> {
-  const [req] = createRequest([`/security/csp`], [["", ""]], "GET");
+  const [req] = await createRequest([`/security/csp`], [["", ""]], "GET");
 
   const res = await fetch(req, { next: { revalidate: 300 } });
 

@@ -76,9 +76,13 @@ import {
   invitationSettingsHandler,
 } from "@docspace/shared/__mocks__/e2e";
 
+import { logger } from "@/../logger.mjs";
+
 const IS_TEST = process.env.E2E_TEST;
 
 export const checkIsAuthenticated = async () => {
+  logger.debug(`Start GET /authentication`);
+
   const [request] = await createRequest(["/authentication"], [["", ""]], "GET");
 
   const res = await fetch(request);
@@ -91,6 +95,8 @@ export const checkIsAuthenticated = async () => {
 };
 
 export async function getSettings() {
+  logger.debug(`Start GET /settings?withPassword=true`);
+
   const [getSettings] = await createRequest(
     [`/settings?withPassword=true`],
     [["", ""]],
@@ -113,6 +119,8 @@ export async function getSettings() {
 }
 
 export async function getVersionBuild() {
+  logger.debug(`Start GET /settings/version/build`);
+
   const [getSettings] = await createRequest(
     [`/settings/version/build`],
     [["", ""]],
@@ -129,6 +137,8 @@ export async function getVersionBuild() {
 }
 
 export async function getColorTheme() {
+  logger.debug(`Start GET /settings/colortheme`);
+
   const [getColorTheme] = await createRequest(
     [`/settings/colortheme`],
     [["", ""]],
@@ -145,6 +155,10 @@ export async function getColorTheme() {
 }
 
 export async function getThirdPartyProviders(inviteView: boolean = false) {
+  logger.debug(
+    `Start GET /people/thirdparty/providers?inviteView=${inviteView}`,
+  );
+
   const [getThirdParty] = await createRequest(
     [`/people/thirdparty/providers?inviteView=${inviteView}`],
     [["", ""]],
@@ -163,6 +177,8 @@ export async function getThirdPartyProviders(inviteView: boolean = false) {
 }
 
 export async function getCapabilities() {
+  logger.debug(`Start GET /capabilities`);
+
   const [getCapabilities] = await createRequest(
     [`/capabilities`],
     [["", ""]],
@@ -181,6 +197,8 @@ export async function getCapabilities() {
 }
 
 export async function getSSO() {
+  logger.debug(`Start GET /settings/ssov2`);
+
   const [getSSO] = await createRequest([`/settings/ssov2`], [["", ""]], "GET");
 
   const res = IS_TEST ? ssoHandler() : await fetch(getSSO);
@@ -193,6 +211,8 @@ export async function getSSO() {
 }
 
 export async function getUser() {
+  logger.debug(`Start GET /people/@self`);
+
   const hdrs = await headers();
   const cookie = hdrs.get("cookie");
 
@@ -211,6 +231,8 @@ export async function getUser() {
 }
 
 export async function getUserByName() {
+  logger.debug(`Start GET /people/firstname.lastname`);
+
   const hdrs = await headers();
   const cookie = hdrs.get("cookie");
 
@@ -236,6 +258,8 @@ export async function getUserByEmail(
   userEmail: string,
   confirmKey: string | null = null,
 ) {
+  logger.debug(`Start GET /people/email?email=${userEmail}`);
+
   const [getUserByEmai] = await createRequest(
     [`/people/email?email=${userEmail}`],
     [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
@@ -258,6 +282,8 @@ export async function getUserByEmail(
 }
 
 export async function getScopeList(token?: string, userId?: string) {
+  logger.debug(`Start GET /scopes`);
+
   const headers: [string, string][] = token
     ? [["Cookie", `x-signature=${token}`]]
     : [["", ""]];
@@ -274,6 +300,8 @@ export async function getScopeList(token?: string, userId?: string) {
 }
 
 export async function getOAuthClient(clientId: string) {
+  logger.debug(`Start GET /clients/${clientId}/public/info`);
+
   try {
     const route = `/clients/${clientId}/public/info`;
 
@@ -287,11 +315,14 @@ export async function getOAuthClient(clientId: string) {
 
     return { client: transformToClientProps(client) };
   } catch (e) {
+    logger.error(`error: ${e} getOAuthClient`);
     console.log(e);
   }
 }
 
 export async function getPortalCultures() {
+  logger.debug(`Start GET /settings/cultures`);
+
   const [getPortalCultures] = await createRequest(
     [`/settings/cultures`],
     [["", ""]],
@@ -311,6 +342,7 @@ export async function getPortalCultures() {
 
 export async function getConfig() {
   const baseUrl = getBaseUrl();
+  logger.debug(`Start GET ${baseUrl}/static/scripts/config.json`);
 
   const config = IS_TEST
     ? new Response(JSON.stringify({}))
@@ -320,6 +352,8 @@ export async function getConfig() {
 }
 
 export async function getCompanyInfoSettings() {
+  logger.debug(`Start GET /settings/rebranding/company`);
+
   const [getCompanyInfoSettings] = await createRequest(
     [`/settings/rebranding/company`],
     [["", ""]],
@@ -340,6 +374,8 @@ export async function getCompanyInfoSettings() {
 export async function getPortalPasswordSettings(
   confirmKey: string | null = null,
 ) {
+  logger.debug(`Start GET /settings/security/password`);
+
   const [getPortalPasswordSettings] = await createRequest(
     [`/settings/security/password`],
     [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
@@ -360,6 +396,8 @@ export async function getUserFromConfirm(
   userId: string,
   confirmKey: string | null = null,
 ) {
+  logger.debug(`Start GET /people/${userId}`);
+
   const [getUserFromConfirm] = await createRequest(
     [`/people/${userId}`],
     [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
@@ -382,6 +420,8 @@ export async function getUserFromConfirm(
 }
 
 export async function getMachineName(confirmKey: string | null = null) {
+  logger.debug(`Start GET /settings/machine`);
+
   const [getMachineName] = await createRequest(
     [`/settings/machine`],
     [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
@@ -398,6 +438,8 @@ export async function getMachineName(confirmKey: string | null = null) {
 }
 
 export async function getIsLicenseRequired() {
+  logger.debug(`Start GET /settings/license/required`);
+
   const [getIsLicenseRequired] = await createRequest(
     [`/settings/license/required`],
     [["", ""]],
@@ -416,6 +458,8 @@ export async function getIsLicenseRequired() {
 }
 
 export async function getPortalTimeZones(confirmKey: string | null = null) {
+  logger.debug(`Start GET /settings/timezones`);
+
   const [getPortalTimeZones] = await createRequest(
     [`/settings/timezones`],
     [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
@@ -434,6 +478,8 @@ export async function getPortalTimeZones(confirmKey: string | null = null) {
 }
 
 export async function getPortal() {
+  logger.debug(`Start GET /portal`);
+
   const [getPortal] = await createRequest([`/portal`], [["", ""]], "GET");
 
   const res = IS_TEST ? portalTimeZoneHandler() : await fetch(getPortal);
@@ -446,6 +492,8 @@ export async function getPortal() {
 }
 
 export async function getTfaSecretKeyAndQR(confirmKey: string | null = null) {
+  logger.debug(`Start GET /settings/tfaapp/setup`);
+
   const [getTfaSecretKeyAndQR] = await createRequest(
     [`/settings/tfaapp/setup`],
     [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
@@ -462,6 +510,8 @@ export async function getTfaSecretKeyAndQR(confirmKey: string | null = null) {
 }
 
 export async function checkConfirmLink(data: TConfirmLinkParams) {
+  logger.debug(`Start POST /authentication/confirm`);
+
   const [checkConfirmLink] = await createRequest(
     [`/authentication/confirm`],
     [["Content-Type", "application/json"]],
@@ -486,6 +536,8 @@ export async function getAvailablePortals(data: {
   recaptchaResponse?: string | null | undefined;
   recaptchaType?: unknown | undefined;
 }) {
+  logger.debug(`Start POST /portal/signin`);
+
   const path = `/portal/signin`;
   const request = await createRequest(
     [path],
@@ -505,6 +557,8 @@ export async function getAvailablePortals(data: {
 }
 
 export async function getOauthJWTToken() {
+  logger.debug(`Start GET /security/oauth2/token`);
+
   const [getJWTToken] = await createRequest(
     [`/security/oauth2/token`],
     [["", ""]],
@@ -523,6 +577,8 @@ export async function getOauthJWTToken() {
 }
 
 export async function getInvitationSettings() {
+  logger.debug(`Start GET /settings/invitationsettings`);
+
   const [getInvitationSettings] = await createRequest(
     [`/settings/invitationsettings`],
     [["", ""]],

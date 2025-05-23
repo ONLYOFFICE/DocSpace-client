@@ -1,0 +1,365 @@
+{
+  "key_path": "HotkeysSelectDown",
+  "content": "Select next item down",
+  "content_en_sha1_hash": "bb74dae23e93155d173004c8a3dd0a678725b39d",
+  "created_at": "2025-05-19T21:30:55.084Z",
+  "updated_at": "2025-05-21T10:25:21.852Z",
+  "comment": {
+    "text": "This translation key is used for the text that describes a keyboard shortcut to select the next item down. It appears in a UI element that displays available shortcuts and their corresponding actions.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:29.501Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/HotkeysPanel/SelectionBlock.js",
+      "line_number": 42,
+      "context": "<Text {...keyTextStyles}>x</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectDown\")}</Text>\n <Text {...keyTextStyles}>j {t(\"Common:Or\")} ↓</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Επιλέξτε το επόμενο στοιχείο κάτω\" is a literal translation and doesn't convey the intended meaning of 'Select next item down' in the context of a hotkey panel. It sounds awkward.",
+          "suggestion": "Επιλέξτε το επόμενο στοιχείο προς τα κάτω"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'κάτω' is technically 'down', in the context of a list/panel, 'προς τα κάτω' or 'ακόμα' (further down) would be more natural and understandable.",
+          "suggestion": "Επιλέξτε το επόμενο στοιχείο ακόμα"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Valitse seuraava kohde alhaalta' is not the most natural or accurate translation of 'Select next item down'. While understandable, it's a bit literal and could be improved for flow and idiomatic Finnish.",
+          "suggestion": "Valitse alempi kohde"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sélectionner l'élément suivant vers le bas' is overly literal and doesn't flow naturally in French. 'Vers le bas' is redundant.",
+          "suggestion": "Sélectionner l'élément suivant"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ներքևում ընտրել հաջորդ միավորը\" is a literal translation that doesn't quite convey the intended meaning of 'Select next item down' in a UI context. It sounds awkward and less natural. A more idiomatic translation would be preferable.",
+          "suggestion": "Consider something like \"Ընտրել ցույցի հաջորդ տարրը\" or \"Ընտրել ցանկի հաջորդ տարրը\" which better captures the idea of selecting the next item in a list or display."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Selezionare l'elemento successivo in basso' is a literal translation and doesn't convey the intended meaning of 'Select next item down' within a hotkey context. It's a bit clunky and formal.",
+          "suggestion": "Seleziona elemento successivo"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '次のアイテムを選択（下）' while understandable, isn't the most natural or precise translation of 'Select next item down'. The (下) feels tacked on and isn't necessary. A more accurate translation would convey the 'down' action in a more integrated way.",
+          "suggestion": "次の項目を下へ選択する"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '아래쪽으로 다음 항목 선택' is a literal translation that isn't idiomatic Korean for a UI element describing navigating down a list. It sounds clunky and unnatural.",
+          "suggestion": "Consider a more natural phrasing like '다음 항목 아래로' or '아래 항목 선택'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ເລືອກລາຍການຕໍ່ໄປລົງ' while generally understandable, doesn't precisely convey the meaning of 'Select next item down'. 'Down' implies a hierarchical or list-based selection, which is not explicitly captured.",
+          "suggestion": "ເລືອກລາຍການຕໍ່ໄປລຸ່ມ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Izvēlēties nākamo vienumu uz lej' isn't the most natural or accurate translation of 'Select next item down'. 'Uz lej' is not the standard way to express 'down' in this context. It sounds awkward.",
+          "suggestion": "Izvēlēties nākamo vienumu uz leju"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Kies het volgende item naar beneden' is not the most natural or accurate translation of 'Select next item down'. 'Kies' implies a choice, while 'Select' is more about navigation. A better translation would convey the action of moving to the next item.",
+          "suggestion": "Selecteer het volgende item omlaag"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'naar beneden' is slightly awkward. It's better to use a more direct equivalent.",
+          "suggestion": "Omlaag is a more natural alternative to 'naar beneden' in this context."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Selecionar o próximo item abaixo' while understandable, isn't the most natural or precise translation for 'Select next item down'. It literally translates to 'Select the next item below'. A better translation would convey the concept of navigating downwards in a list or menu.",
+          "suggestion": "Consider 'Selecionar o item seguinte para baixo' or 'Selecionar item inferior' depending on the specific UI context.  'Selecionar item seguinte' is also a reasonable option."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Selecionar o próximo item abaixo' isn't the most natural or precise translation of 'Select next item down.' 'Abaixo' implies below in a vertical sense. The intended meaning is 'next' in a list or sequence.",
+          "suggestion": "Selecionar o próximo item"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Selectează următorul element de dedesubt' isn't the most natural or accurate translation of 'Select next item down'. 'De dedesubt' implies physically below, not in a list or order. A more accurate translation would reflect moving to the next item in a sequence or list.",
+          "suggestion": "Selectează elementul următor"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Выделить следующий объект снизу' is too literal and doesn't convey the intended meaning of 'Select next item down' in the context of hotkeys. 'Выделить' means 'to select' or 'highlight', which is accurate, but 'объект снизу' is not the best way to express 'next item down' in a list or panel.",
+          "suggestion": "Consider alternatives like 'Выбрать следующий пункт вниз' or 'Выбрать следующий элемент ниже'."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'පහළ ඊළඟ අථකය තෝරන්න' does not accurately convey the meaning of 'Select next item down'. 'අථකය' (athakaya) translates to 'object' or 'matter' and is not the correct terminology for an item in a list or panel.  The correct terminology would be 'ආයිතමය' (aithamaya) or a more general term like 'අයිත්තුව' (aiththuwa).",
+          "suggestion": "පහළ ඊළඟ ආයිතමය තෝරන්න"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'ඊළඟ' (eelaga) for 'next' is acceptable, it can be slightly improved for a more natural flow in this context. While 'ඊළඟ' isn't strictly wrong, 'ඊවූ' or 'ඊනට' are often preferred for a smoother read.",
+          "suggestion": "පහළ ඊවූ ආයිතමය තෝරන්න"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Izberi naslednji predmet spodaj\" is a literal translation and doesn't quite capture the nuance of 'Select next item down' in a user interface context. It sounds clunky.",
+          "suggestion": "Izberi naslednjo možnost navzdol"
+        },
+        {
+          "type": "spelling",
+          "description": "While not technically incorrect, 'spodaj' can sound a bit formal in this context.  'navzdol' more naturally implies downward movement in a UI.",
+          "suggestion": "Consider using 'navzdol' instead of 'spodaj'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Одабери следећу ставку доле\" doesn't accurately convey the meaning of \"Select next item down.\" \"Одабери\" means 'choose', but the English implies a selection within a list or menu using directional keys. A more accurate translation would reflect the 'move down' aspect.",
+          "suggestion": "Избери ставку испод (Izberi stavku ispod)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Odaberi sledeću stavku dole\" is not the most natural or accurate translation of \"Select next item down\". \"Odaberi\" means \"select\" which is fine, but \"stavku\" (sentence/paragraph) doesn't quite capture the concept of an item in a list. It implies a textual element rather than a generic selectable item.",
+          "suggestion": "Odaberi sledeću opciju dole"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sıradaki öğeyi aşağı doğru seç' is a literal translation but doesn't quite convey the intended meaning of 'Select next item down' in a user interface context. It's a bit verbose and not as intuitive.",
+          "suggestion": "Sıradaki öğe"
+        },
+        {
+          "type": "formatting",
+          "description": "The Turkish translation includes unnecessary words 'aşağı doğru' which add complexity.",
+          "suggestion": "Remove 'aşağı doğru'."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Вибрати наступний елемент унизу\" doesn't accurately convey the meaning of \"Select next item down.\" \"Унизу\" means 'at the bottom'. The correct meaning is 'next in the list/order'.",
+          "suggestion": "Вибрати наступний елемент в списку"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Chọn mục tiếp theo bên dưới\" is not the most natural or accurate translation of \"Select next item down\". It literally translates to \"Select next item below\". A more appropriate translation would convey the meaning of navigating a list or selection.",
+          "suggestion": "Chọn mục tiếp theo"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '向下选择下一个项目' is too literal. 'Select next item down' implies moving to the next item in a list or sequence using a downward control (like arrow keys). A more natural translation would better convey this action.",
+          "suggestion": "考虑使用“向下移动选择”或“选择下方项目”来更准确地表达原意。"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

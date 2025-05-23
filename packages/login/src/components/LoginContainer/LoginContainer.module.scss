@@ -1,0 +1,302 @@
+/*!
+ * (c) Copyright Ascensio System SIA 2009-2025
+ *
+ * This program is a free software product.
+ * You can redistribute it and/or modify it under the terms
+ * of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+ * Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+ * to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+ * any third-party rights.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+ * the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+ *
+ * The  interactive user interfaces in modified source and object code versions of the Program must
+ * display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+ *
+ * Pursuant to Section 7(b) of the License you must retain the original Product logo when
+ * distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+ * trademark law for use of our trademarks.
+ *
+ * All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+ * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+ * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+ */
+
+@use "@docspace/shared/styles/mixins";
+
+.loginContainer {
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 960px;
+  z-index: 0;
+
+  margin-top: 56px;
+  margin-bottom: 56px;
+
+  &.isRegisterContainerVisible {
+    margin-bottom: 100px;
+  }
+
+  &.invitationType :global(.logo-wrapper) {
+    height: 26.56px;
+    padding-bottom: 16px;
+  }
+
+  @include mixins.tablet-and-below {
+    max-width: 480px;
+  }
+
+  @include mixins.mobile {
+    margin-inline: auto;
+    max-width: 100%;
+    width: calc(100% - 24px);
+    padding-inline: 16px 8px;
+
+    margin: 0 auto;
+  }
+
+  // ========= global classes ===========
+  :global {
+    .login-link {
+      color: var(--accent-main);
+    }
+
+    .remember-wrapper {
+      max-width: 170px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .buttonWrapper {
+      margin-bottom: 8px;
+      width: 100%;
+    }
+
+    .socialButton {
+      min-height: 40px;
+    }
+
+    .or-label,
+    .login-or-access-text {
+      min-height: 18px;
+    }
+
+    .login-or-access-text {
+      text-transform: lowercase;
+      color: var(--login-or-text-color);
+    }
+
+    .recover-link {
+      min-height: 20px;
+      margin-top: 27px;
+      line-height: 15px;
+    }
+
+    .greeting-title {
+      display: flex;
+      justify-content: center;
+
+      width: 100%;
+      max-width: 480px;
+      padding-bottom: 29px;
+      min-height: 32px;
+      line-height: 28px;
+      color: var(--login-header-color);
+
+      @include mixins.mobile {
+        overflow: hidden;
+        display: block;
+        text-overflow: ellipsis;
+
+        padding-top: 32px;
+        padding-bottom: 32px;
+      }
+    }
+
+    .more-label {
+      padding-top: 18px;
+    }
+
+    .or-label {
+      color: var(--login-or-text-color);
+      margin: 0 8px;
+    }
+
+    .line {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      color: var(--login-or-line-color);
+      padding: 32px 0;
+
+      p {
+        line-height: 20px;
+      }
+    }
+
+    .line:before,
+    .line:after {
+      content: "";
+      flex-grow: 1;
+      background: var(--login-or-line-color);
+      height: 1px;
+      font-size: 0;
+      line-height: 0;
+      margin: 0;
+    }
+
+    .code-input-container {
+      margin-top: 32px;
+      text-align: center;
+    }
+
+    .not-found-code {
+      margin-top: 32px;
+    }
+
+    .auth-form-container {
+      width: 100%;
+
+      .field-body {
+        input,
+        .password-input > div {
+          background: var(--input-bg);
+          color: var(--input-color);
+        }
+      }
+
+      .login-forgot-wrapper {
+        margin-bottom: 14px;
+        .login-checkbox-wrapper {
+          display: flex;
+
+          .login-checkbox {
+            display: flex;
+            align-items: flex-start;
+
+            svg {
+              padding-top: 2px;
+              margin-inline-end: 8px !important;
+              rect {
+                fill: var(--checkbox-fill-color);
+                stroke: var(--checkbox-border-color);
+              }
+
+              path {
+                fill: var(--checkbox-arrow-color);
+              }
+            }
+
+            .help-button {
+              margin-inline-start: 2px;
+              margin-top: 1px;
+
+              svg {
+                path {
+                  fill: var(--login-help-btn);
+                }
+              }
+            }
+
+            .checkbox-text {
+              color: var(--checkbox-arrow-color);
+              line-height: 20px;
+            }
+
+            label {
+              justify-content: center;
+            }
+          }
+
+          .remember-helper-wrapper {
+            display: flex;
+            gap: 4px;
+          }
+        }
+
+        .login-link {
+          line-height: 20px;
+          margin-inline-start: auto;
+        }
+      }
+
+      .login-button {
+        margin-top: 10px;
+      }
+
+      .login-button-dialog {
+        margin-inline-end: 8px;
+      }
+
+      .login-bottom-border {
+        width: 100%;
+        height: 1px;
+        background: var(--login-or-line-color);
+      }
+
+      .login-bottom-text {
+        margin: 0 8px;
+      }
+
+      @keyframes autofill {
+        from {
+        }
+        to {
+        }
+      }
+
+      input:-webkit-autofill {
+        animation-name: autofill;
+        animation-duration: 1ms;
+      }
+    }
+
+    .logo-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 386px;
+      height: 44px;
+      padding-bottom: 40px;
+
+      svg {
+        path:last-child {
+          fill: var(--article-client-home-logo-color);
+        }
+      }
+
+      @include mixins.mobile {
+        display: none;
+      }
+    }
+
+    .workspace-title {
+      color: var(--login-title-color);
+      margin-bottom: 16px;
+
+      @include mixins.mobile {
+        margin-top: 32px;
+      }
+    }
+
+    .code-description {
+      color: var(--login-text-colors);
+    }
+
+    .input-block-icon {
+      padding-inline-end: 12px;
+    }
+
+    .wrapper {
+      height: 20px;
+    }
+  }
+}

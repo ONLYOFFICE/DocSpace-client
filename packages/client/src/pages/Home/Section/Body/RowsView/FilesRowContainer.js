@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useMemo, useContext } from "react";
+import { useMemo, use } from "react";
 import { inject, observer } from "mobx-react";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
@@ -55,7 +55,7 @@ const FilesRowContainer = ({
   setRefMap,
   deleteRefMap,
 }) => {
-  const { sectionWidth } = useContext(Context);
+  const { sectionWidth } = use(Context);
 
   useViewEffect({
     view: viewAs,

@@ -74,17 +74,19 @@ export type SdkSearchParams = {
 };
 
 export type RootPageProps = {
-  searchParams: Partial<{
-    fileId: string;
-    fileid: string;
-    version: string;
-    doc: string;
-    action: ActionType;
-    share: string;
-    editorType: string;
-    error?: string;
-  }> &
-    SdkSearchParams;
+  searchParams: Promise<
+    Partial<{
+      fileId: string;
+      fileid: string;
+      version: string;
+      doc: string;
+      action: ActionType;
+      share: string;
+      editorType: string;
+      error?: string;
+    }> &
+      SdkSearchParams
+  >;
 };
 export type TDocumentInfo = {
   favorite: boolean;

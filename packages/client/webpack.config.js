@@ -232,6 +232,8 @@ const config = {
               },
             },
           },
+          // Fix relative url() in fonts.css
+          "resolve-url-loader",
           {
             loader: "sass-loader",
             options: {
@@ -256,6 +258,8 @@ const config = {
               importLoaders: 2,
             },
           },
+          // Fix relative url() in fonts.css
+          "resolve-url-loader",
           {
             loader: "sass-loader",
             options: {
@@ -330,8 +334,6 @@ const getBuildYear = () => {
 };
 
 module.exports = (env, argv) => {
-  console.log("ENV", { env });
-
   config.devtool = "source-map";
 
   const isProduction = argv.mode === "production";

@@ -23,18 +23,18 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-@import "../../../../styles/variables/_colors.scss";
+@use "../../../../styles/variables/colors";
 
 :global(.dark) {
   :local {
     .roleHistory {
-      --role-histories-border-color: #{$gray-dark};
+      --role-histories-border-color: #{colors.$gray-dark};
     }
     .action {
-      --history-action-color: #{$white};
+      --history-action-color: #{colors.$white};
     }
     .date {
-      --history-date-color: #{$dark-gray-dark};
+      --history-date-color: #{colors.$dark-gray-dark};
     }
   }
 }
@@ -42,14 +42,14 @@
 :global(.light) {
   :local {
     .roleHistory {
-      --role-histories-border-color: #{$gray};
+      --role-histories-border-color: #{colors.$gray};
     }
     .action {
-      --history-action-color: #{$black};
+      --history-action-color: #{colors.$black};
     }
 
     .date {
-      --history-date-color: #{$light-gray-dark};
+      --history-date-color: #{colors.$light-gray-dark};
     }
   }
 }

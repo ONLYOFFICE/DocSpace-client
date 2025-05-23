@@ -64,7 +64,7 @@ const ArticleProfile = (props: ArticleProfileProps) => {
   const toggle = (
     e: React.MouseEvent,
     open: boolean,
-    currentRef: React.MutableRefObject<Nullable<ContextMenuRefType>>,
+    currentRef: React.RefObject<Nullable<ContextMenuRefType>>,
   ) => {
     if (!currentRef?.current) return;
     if (open) currentRef.current.show(e);

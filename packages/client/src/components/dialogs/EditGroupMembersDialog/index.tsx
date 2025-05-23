@@ -39,7 +39,7 @@ import {
   TGroup,
   TGroupMemberInvitedInRoom,
 } from "@docspace/shared/api/groups/types";
-import { MIN_LOADER_TIMER } from "@docspace/shared/selectors/Files/FilesSelector.constants";
+import { MIN_LOADER_TIMER } from "@docspace/shared/selectors/utils/constants";
 
 import EmptyContainer from "./EmptyContainer";
 import GroupMembersList from "./sub-components/GroupMembersList/GroupMembersList";

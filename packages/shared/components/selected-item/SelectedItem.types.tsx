@@ -60,7 +60,7 @@ export interface SelectedItemProps {
   /** Accepts group key to remove item */
   group?: string;
   /** Passes ref to component */
-  forwardedRef?: React.RefObject<HTMLDivElement>;
+  forwardedRef?: React.RefObject<HTMLDivElement | null>;
   classNameCloseButton?: string;
   hideCross?: boolean;
   title?: string;

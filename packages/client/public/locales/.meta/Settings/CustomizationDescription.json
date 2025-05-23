@@ -1,0 +1,408 @@
+{
+  "key_path": "CustomizationDescription",
+  "content": "This subsection allows you to change the look and feel of your space. You can use your own company logo, name and text to match your organization brand.",
+  "content_en_sha1_hash": "3ed304aa4cbda2d1fbc3a0c1d04d2decae6a4ba6",
+  "created_at": "2025-05-19T21:30:51.011Z",
+  "updated_at": "2025-05-22T11:56:37.649Z",
+  "comment": {
+    "text": "This translation key is used to display a description of customization options in the Portal Settings page. It provides context about changing the look and feel of your space to match an organization's brand. The translated content will appear as a label for this section.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:28.580Z"
+  },
+  "usage": [
+    {
+      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\common\\customization.js",
+      "line_number": 128,
+      "context": "<StyledComponent>\n {!isLoadedPage ? (\n <LoaderDescriptionCustomization />\n ) : (\n <div className=\"category-description\">\n {t(\"Settings:CustomizationDescription\")}\n </div>\n )}\n <LanguageAndTimeZoneSettings isMobileView={viewMobile} />\n <StyledSettingsSeparator />\n <WelcomePageSettings isMobileView={viewMobile} />",
+      "module": "\\packages\\client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'look and feel' is not accurately translated. 'شكل ومظهر' (shape and appearance) is a literal translation but doesn't fully capture the intended meaning of 'look and feel' which implies aesthetics and overall impression.",
+          "suggestion": "Consider using a more nuanced translation such as 'الشكل العام والتصميم' (general appearance and design) or 'المظهر الجمالي' (aesthetic appearance)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'match your organization brand' is overly literal. 'مطابقة العلامة التجارية لمؤسستك' (matching the brand of your organization) is grammatically correct but can be improved for natural flow.",
+          "suggestion": "Consider using 'لتعكس هوية مؤسستك' (to reflect the identity of your organization) or 'لتتوافق مع هوية علامتكم التجارية' (to align with your brand identity)."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ümumi təəssüratını\" (general impression) doesn't fully capture the meaning of \"look and feel\". While it's close, a more accurate translation might convey a broader sense of visual design and user experience.",
+          "suggestion": "Bu bölmə sizə sahənin görünüşünü və dizaynını dəyişməyə imkan verir."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'space' in the English content is translated as 'портал' (portal) in Bulgarian. While 'portal' isn't necessarily wrong, 'пространство' (prostranstvo) might be a more accurate and natural translation, especially if the 'space' refers to a customizable area within a larger platform.",
+          "suggestion": "Consider translating 'space' as 'пространство'."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses 'Вашия' (Vashiya) which is the formal possessive 'your'. While grammatically correct, a more conversational tone might use 'твоя' (tvoya) depending on the target audience and overall brand voice.",
+          "suggestion": "Consider using 'твоя' instead of 'твоя' for a more conversational tone (e.g., 'Вашето пространство'). This is a stylistic choice and depends on the brand voice."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"sodass Ihr Bereich zum Design Ihres Produkts passt\" does not accurately convey the meaning of \"to match your organization brand.\" It suggests the space should match the design of a product, not the company's branding.",
+          "suggestion": "sodass Ihr Bereich zu Ihrer Unternehmenskultur passt\" or \"um Ihr Unternehmen zu repräsentieren\""
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'εμπορικό' (emporiko) is a bit ambiguous. While it can mean 'brand', it is more accurately 'commercial'.",
+          "suggestion": "Consider using 'σήμα' (sema) which directly translates to 'mark' or 'brand' or 'όνομα' (onoma) which translates to 'name'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'σήμα' (sema) is a possibility, a more natural translation of 'brand' in this context could be 'σήμα' (sign/mark), 'φιρμάκι' (firmaki) or a more descriptive phrase.",
+          "suggestion": "Consider alternatives like 'σήμα' (sign/mark), 'φιρμάκι' (small brand) or 'την εταιρική σας ταυτότητα' (your corporate identity)"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'conviviality' (convivialité) doesn't accurately translate 'feel' in this context. It implies a social or friendly atmosphere, rather than the visual design or aesthetic.",
+          "suggestion": "Replace 'convivialité' with a term like 'apparence' or 'esthétique' to better convey the visual design aspect."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'pour qu'ils correspondent à la marque de votre entreprise' is a bit redundant. The word 'entreprise' is repeated.",
+          "suggestion": "Replace 'pour qu'ils correspondent à la marque de votre entreprise' with 'pour correspondre à la marque de votre entreprise' or 'afin de correspondre à votre image de marque.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'space' is not accurately translated. 'Կայքէջի' translates to 'website' which isn't a perfect equivalent to 'space' in this context. 'Space' refers to the user's customized environment or interface, not just the website itself.",
+          "suggestion": "Consider a translation like 'աշխատանքային միջավայրի' (work environment) or 'հարթակի' (platform) to better reflect the intended meaning of 'space'."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses formal possessive 'Ձեր' throughout. While grammatically correct, it might sound overly formal depending on the target audience. Using a more informal possessive pronoun might be more approachable.",
+          "suggestion": "Consider using a more informal possessive pronoun (e.g., 'քո' instead of 'Ձեր') for a more approachable tone, although this would need to be carefully considered in relation to the overall tone of the application."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation uses katakana for 'look and feel' (ルック＆フィール). While common, it's preferable to use a more natural Japanese equivalent for better readability, especially in a technical setting. 'ルック＆フィール' can feel somewhat abrupt.",
+          "suggestion": "Consider using a phrase like 「外観と操作性」 (gaikan to sousatei) or a similar expression that accurately conveys the meaning of 'look and feel'."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"look and feel\" is not directly translated. While \"외관\" (oegwan) refers to appearance, it doesn't fully capture the nuance of 'look and feel'. A more comprehensive translation might be considered.",
+          "suggestion": "이 하위 섹션에서는 스페이스의 디자인과 분위기를 변경할 수 있습니다."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English sentence uses the imperative \"You can use...\" which is translated as \"사용하세요\" (sayongsayo). While grammatically correct, it sounds somewhat formal and less natural. A softer, more encouraging tone might be preferable.",
+          "suggestion": "이 하위 섹션에서는 스페이스의 디자인과 분위기를 변경할 수 있습니다. 회사 로고, 이름, 그리고 텍스트를 사용하여 조직의 브랜드와 일치시키세요."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation of \"space\" is inaccurate. \"ປະຕູ\" (patu) means 'door' and doesn't convey the meaning of a digital space or environment.",
+          "suggestion": "Consider using a term like \"ສະຖານທີ່” (sathan thi) which means 'place' or 'location' to better represent 'space'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ຍີ່ຫໍ້ອົງການຂອງເຈົ້າ” (yi ho ong kan khong chao) is a somewhat literal and less natural way to say 'your organization's brand'.",
+          "suggestion": "Consider a phrasing like \"ຍີ່ຫໍ້ຂອງອົງການເຈົ້າ” (yi ho khong ong kan chao) or simply \"ຍີ່ຫໍ້ຂອງອົງການ” (yi ho khong ong kan) for a more fluent expression."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'look and feel' is translated as 'izskatu un darbību'. 'Darbību' (functionality/operation) doesn't accurately convey the intended meaning of 'feel' in this context. It should relate to aesthetics and overall user experience, not functionality.",
+          "suggestion": "Šī apakšsadaļa ļauj mainīt jūsu portāla izskatu un sajūtu. (This subsection allows you to change the look and feel of your portal.) or Šī apakšsadaļa ļauj mainīt jūsu portāla vizuālo stilu un atmosfēru."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'space' in the English content is translated as 'portalu'. 'Portal' isn't a direct equivalent to 'space' in this context. 'Space' refers to a customizable area or interface. A more accurate translation might be something like 'środowiska' (environment), 'aplikacji' (application), or 'interfejsu' (interface).",
+          "suggestion": "Dana sekcja umożliwia zmianę wyglądu Twojego środowiska/aplikacji/interfejsu. Możesz dodać logo swojej firmy, nazwę oraz tekst, które będą pasować do Twojej marki."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'match your organization brand' is translated as 'będą pasować do Twojej marki'. While technically correct, it's a bit clunky. A more natural Polish phrasing might be 'odzwierciedlają Twoją markę' or 'wzmocnią Twoją markę'.",
+          "suggestion": "Dana sekcja umożliwia zmianę wyglądu Twojego środowiska/aplikacji/interfejsu. Możesz dodać logo swojej firmy, nazwę oraz tekst, które będą odzwierciedlały/wzmocnią Twoją markę."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"look and feel\" is not accurately translated. 'Aspeto' is a literal translation of 'appearance' but doesn't fully capture the nuanced meaning of 'look and feel' in this context, which refers to aesthetics and overall design.",
+          "suggestion": "Consider a phrase like 'aparência e estilo' or 'design e aparência' to better convey the intended meaning of 'look and feel'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"para que se encaixe com a marca\" is a bit clunky. It translates to 'so that it fits with the brand', but in this context, a more natural phrasing would be better.",
+          "suggestion": "Replace \"para que se encaixe com a marca\" with something like \"para corresponder à marca\" (to match the brand) or \"para alinhar com a marca\" (to align with the brand)."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Ace' appears at the beginning of the Romanian translation and is likely a typo. It doesn't contribute to the meaning and should be removed.",
+          "suggestion": "Remove 'Ace'."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure could be improved for better flow. 'Denumirea și textul care se potrivesc cu imaginea de marcă a companiei dvs.' is a bit clunky.  A more natural phrasing is possible.",
+          "suggestion": "Consider rephrasing to something like: 'Puteți utiliza sigla, denumirea și textul companiei dvs. pentru a corespunde identității vizuale a acesteia.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"look and feel\" is not accurately captured by \"оформление портала\" (design of the portal). It implies a more holistic sense of visual presentation and customization. While \"оформление\" isn't wrong, it's not the most precise equivalent.",
+          "suggestion": "Consider \"внешний вид и функциональность\" (appearance and functionality) or \"дизайн и атмосфера\" (design and atmosphere) to better reflect 'look and feel'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'slogan' is translated as 'слоган'. While technically correct, it might be too literal and not universally understood. In the context of branding, a more general term might be more appropriate.",
+          "suggestion": "Consider a more general term like 'девиз' (motto) or rephrase to describe the purpose, e.g., 'описание компании' (company description)."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'look and feel' is not accurately translated. 'පෙනුම සහ රටාව' (penuma saha ratava) translates to 'appearance and pattern' which doesn't fully capture the intended meaning of 'look and feel'.",
+          "suggestion": "Consider a translation closer to 'පෙනුම හා හැඟීම' (penuma haa heegim) which attempts to convey a similar sense of aesthetic and feel, or a rephrasing like 'පෙනුම හා ආකර්ෂණය' (penuma haa akarsayana) meaning 'appearance and attraction'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'match your organization brand' is not accurately translated by 'ඔබගේ වෙළඳ නාමයට ගැළපීම සඳහා'. While it conveys the general idea, it could be improved for clarity and naturalness. 'ගැළපීම සඳහා' is a bit clunky.",
+          "suggestion": "Consider 'ඔබේ සංවිධානයේ වෙළඳ ලකුණට සමානය' (obae sanvidhanaye welanda lakunata samanya) which means 'to be similar to your organization’s brand' or 'ඔබේ සංවිධානයේ ඊළඟ ලකුණට ඍජුව ගැළවිය' (obae sanvidhanaye eelagana lakunata rujuva galaviya) which translates to 'to directly match your organization's brand'."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure could be improved for better flow. The Sinhala translation is grammatically correct but sounds a bit convoluted.",
+          "suggestion": "Reorder the sentence to improve readability, for example: 'මෙම අනුකොටස තුළින්, ඔබගේ අවකාශයේ පෙනුම සහ රටාව වෙනස් කිරීමට, ඔබේ සමාගමේ ලාංඡනය, නම සහ විස්තරය යෙදවිය හැකිය.' (Mema anukotasa thulen, obage awaksayaye penuma saha ratava venas kirimata, obae samagame langchanaya, nama saha wistharaya yedaviyakataha meyya.)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"dojem, ktorý vyvoláva\" (the impression it evokes) is an awkward and less direct translation of \"feel\". A more natural Slovak phrasing would be closer to \"vzhľad a atmosféru\" or simply \"vzhľad\".",
+          "suggestion": "Tu môžete zmeniť vzhľad a atmosféru vášho priestoru. / Tu môžete zmeniť vzhľad vášho priestoru."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'look and feel' is not accurately translated. 'Зовнішній вигляд' primarily refers to visual appearance, not the overall feel or experience.",
+          "suggestion": "У цьому підрозділі можна змінити зовнішній вигляд та загальну атмосферу порталу."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'space' isn't accurately translated. While 'порталу' is correct for 'portal', the English 'space' implies a customized environment, which is not fully conveyed.",
+          "suggestion": "У цьому підрозділі можна змінити зовнішній вигляд та загальну атмосферу вашого порталу."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"không gian của mình\" (your space) is slightly awkward and could be more natural. It implies a very personal space.",
+          "suggestion": "Phần phụ này cho phép bạn thay đổi giao diện của hệ thống/ứng dụng/nền tảng của mình. (This subsection allows you to change the look and feel of your system/application/platform.)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"tổ chức của bạn\" is redundant.  'Organization' and 'company' are closely related concepts here. The translation feels clunky.",
+          "suggestion": "Phần phụ này cho phép bạn thay đổi giao diện của không gian của mình. Bạn có thể sử dụng logo, tên và văn bản của công ty để phù hợp với thương hiệu của bạn."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"改变网站的外观\" (Change the appearance of the website) is too narrow. The English content refers to customizing the look and feel of a 'space', which could be a platform, application, or other interface, not just a website. It misses the broader scope of customization.",
+          "suggestion": "可以使用更广泛的词语来表示空间，例如“自定义您的工作区的外观” (Customize the appearance of your workspace) 或者“调整您的界面” (Adjust your interface)."
+        },
+        {
+          "type": "missing_content",
+          "description": "The English content mentions using company 'name' and text. The Chinese translation only mentions '标志' (logo).",
+          "suggestion": "在翻译中包含公司名称和文字，例如“使用您的公司标志、名称和文字来打造品牌形象” (Use your company logo, name, and text to create a brand image)."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

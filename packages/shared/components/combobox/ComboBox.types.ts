@@ -34,7 +34,7 @@ export type TCombobox = null | "badge" | "onlyIcon" | "descriptive";
 
 export type TBaseOption = {
   key: string | number;
-  icon?: string | React.ReactElement | React.ElementType;
+  icon?: string | React.ElementType | React.ReactElement;
   label?: string;
   color?: string;
   backgroundColor?: string;
@@ -67,7 +67,7 @@ export type TOption = TRegularOption | TSeparatorOption;
 
 export type TComboboxProps = {
   /** Displays advanced options */
-  advancedOptions?: React.ReactNode;
+  advancedOptions?: React.ReactElement<{ children?: React.ReactNode }>;
   /** Number of advanced options */
   advancedOptionsCount?: number;
   /** Children elements */

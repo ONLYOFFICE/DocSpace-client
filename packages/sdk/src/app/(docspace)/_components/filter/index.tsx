@@ -38,12 +38,14 @@ import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 
 import type { FilterProps } from "./Filter.types";
 import useFilesFilter from "./useFilesFilter";
+import useDeviceType from "@/hooks/useDeviceType";
 
 export type { FilterProps };
 
 export const Filter = observer(({ filesFilter, shareKey }: FilterProps) => {
   const { t } = useTranslation(["Common"]);
-  const { filesViewAs, setFilesViewAs, currentDeviceType } = useSettingsStore();
+  const { filesViewAs, setFilesViewAs } = useSettingsStore();
+  const { currentDeviceType } = useDeviceType();
 
   const {
     getFilterData,

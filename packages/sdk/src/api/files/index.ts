@@ -53,7 +53,7 @@ import {
 const IS_TEST = process.env.E2E_TEST;
 
 export async function getFilesSettings(): Promise<TFilesSettings | undefined> {
-  const [req] = createRequest([`/files/settings`], [["", ""]], "GET");
+  const [req] = await createRequest([`/files/settings`], [["", ""]], "GET");
 
   const res = IS_TEST ? filesSettingsHandler() : await fetch(req);
 
@@ -65,7 +65,7 @@ export async function getFilesSettings(): Promise<TFilesSettings | undefined> {
 }
 
 export async function getFoldersTree(): Promise<TFolder[]> {
-  const [req] = createRequest(
+  const [req] = await createRequest(
     [`/files/@root?filterType=2&count=1`],
     [["", ""]],
     "GET",
@@ -126,7 +126,7 @@ export async function getFolder(
   signal?: AbortSignal,
   share?: string,
 ): Promise<TGetFolder> {
-  const hdrs = headers();
+  const hdrs = await headers();
 
   const shareKey = hdrs.get(SHARE_KEY_HEADER);
 
@@ -148,7 +148,7 @@ export async function getFolder(
       ? ["Request-Token", shareKey || shareKey || ""]
       : ["", ""];
 
-  const [req] = createRequest(
+  const [req] = await createRequest(
     [`/files/${params}`],
     [shareHeader],
     "GET",
@@ -158,7 +158,7 @@ export async function getFolder(
   );
 
   const res = IS_TEST
-    ? folderHandler(headers())
+    ? folderHandler(await headers())
     : await fetch(req, { next: { revalidate: 300 } });
 
   if (!res.ok) {
@@ -183,7 +183,11 @@ export async function validateShareFolder(share: string) {
     ? ["Request-Token", share]
     : ["", ""];
 
-  const [req] = createRequest([`/files/share/${share}`], [shareHeader], "GET");
+  const [req] = await createRequest(
+    [`/files/share/${share}`],
+    [shareHeader],
+    "GET",
+  );
 
   const res = await fetch(req, { next: { revalidate: 300 } });
 

@@ -45,7 +45,7 @@ export const getIconBySize = (path: string, size: number = 32) => {
     const publicIndex = iconPath.indexOf("/public");
 
     if (publicIndex !== -1) {
-      return iconPath.substring(publicIndex);
+      return iconPath.substring(publicIndex).replace("/public", "/static");
     }
 
     return iconPath;

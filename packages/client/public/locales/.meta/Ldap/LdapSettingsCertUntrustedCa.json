@@ -1,0 +1,272 @@
+{
+  "key_path": "LdapSettingsCertUntrustedCa",
+  "content": "Certificate Authority who issued the certificate is not trusted",
+  "content_en_sha1_hash": "6078238aac04c61650578d328250ffb239e3e9c8",
+  "created_at": "2025-05-19T21:30:54.288Z",
+  "updated_at": "2025-05-21T08:05:49.339Z",
+  "comment": {
+    "text": "This translation key is used to describe a certificate issue where the Certificate Authority that issued the certificate is not trusted. It appears in a dialog or settings page related to LDAP (Lightweight Directory Access Protocol) integration, likely indicating an error when verifying the certificate's issuer chain.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:01.088Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/CertificateDialog.js",
+      "line_number": 74,
+      "context": "case LDAPCertificateProblem.CertCnNoMatch:\n return t(\"LdapSettingsCertCnNoMatch\");\n case LDAPCertificateProblem.CertIssuerChaining:\n return t(\"LdapSettingsCertIssuerChaining\");\n case LDAPCertificateProblem.CertUntrustedCa:\n return t(\"LdapSettingsCertUntrustedCa\");\n case LDAPCertificateProblem.CertUntrustedRoot:\n return t(\"LdapSettingsCertUntrustedRoot\");\n case LDAPCertificateProblem.CertMalformed:\n return t(\"LdapSettingsCertMalformed\");\n case LDAPCertificateProblem.CertUnrecognizedError:",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sertifikat verən Sertifikat Orqanına etibar edilmir' is a literal translation but doesn't flow naturally in Azerbaijani. It's unnecessarily repetitive with 'Sertifikat'.",
+          "suggestion": "A more natural translation would be something like: 'Etibar olunmayan Sertifikat Orqanı tərəfindən verilən sertifikat' or 'Sertifikatın verən Sertifikat Orqanı etibarəlayiq deyil' or simply 'Etibar olunmayan Sertifikat Orqanı tərəfindən verilən sertifikat.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Վկայագրող մարմինը, որը տվել է վկայականը, վստահելի չէ\" is a literal translation and a bit verbose. A more natural and concise Armenian translation for \"Certificate Authority who issued the certificate is not trusted\" would be something like \"Մերժված վկայագրող մարմին\" (Rejected Certificate Authority) or \"Վկայագիրը չի վստահելի\" (The certificate is not trusted).",
+          "suggestion": "Վկայագիրը չի վստահելի"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is overly literal and somewhat awkward. 'ໜ່ວຍງານອອກໃບຮັບຮອງຄວາມຖືກຕ້ອງ' is a very direct translation of 'Certificate Authority' and can be simplified for better readability in Lao. While technically correct, it doesn't flow naturally.",
+          "suggestion": "ຫົວໜ່ວຍອອກໃບຮັບຮອງ (Huang Nong Ok Lai Rub Hong) - This translates to 'Certificate Issuing Authority' and is a more common and natural phrasing."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'ໝູ່ທີ່ອອກໃບຮັບຮອງນີ້' doesn't quite capture the nuance of 'who issued the certificate.' It reads a bit conversational.",
+          "suggestion": "ທີ່ອອກໃບຮັບຮອງນີ້ (Ti ok lai rub hong ni) - This is a more concise and formal way to say 'that issued this certificate'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Certificate Authority\" is best translated as \"Sertifikātu iestāde\" in Latvian, rather than just \"Sertifikāta izdevēja iestāde\". While technically correct, the latter is overly verbose and less common in technical Latvian.",
+          "suggestion": "Sertifikātu iestāde nav uzticama"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ප්‍රමාණපත්‍රය නිකුත් කළ බලධාරීහු විශ්වාසවන්ත නොවේ.' while conveying a similar meaning, is a more formal and literal translation. A more natural and idiomatic Sinhala rendering of 'Certificate Authority who issued the certificate is not trusted' would be 'ප්‍රමාණපත්‍රය මුද්‍රා තැබූ ආයතය විශ්වාස නොවේ.'",
+          "suggestion": "ප්‍රමාණපත්‍රය මුද්‍රා තැබූ ආයතය විශ්වාස නොවේ."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Overitelj certifikata, ki je izdal certifikat, ni zaupanja vreden' is a very literal and somewhat awkward translation of 'Certificate Authority who issued the certificate is not trusted'. It sounds unnatural in Slovenian. A more natural translation would convey the same meaning in a clearer way.",
+          "suggestion": "A better translation would be something like 'Certifikatni organ, ki je izdal certifikat, ni zaupan' or 'Izdača certifikata ni zaupanja vredna'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'сертификат' (certificate) is repeated. While technically correct, it can be slightly awkward in Serbian. Replacing the second instance with 'сертификат' in a different grammatical form might improve flow.",
+          "suggestion": "Ауторитет Сертификата који је издао неповјерљив сертификат"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'sertifikat' appears twice and is a misspelling of 'sertifikat'.",
+          "suggestion": "Replace 'sertifikat' with 'sertifikat' (correct spelling)."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence could be slightly more fluent. While grammatically correct, it's a bit clunky.",
+          "suggestion": "Consider rephrasing to: 'Autoritet za izdavanje sertifikata nije pouzdan.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Cơ quan cấp đã cấp chứng chỉ này không đáng tin cậy\" is technically correct but sounds a bit verbose and unnatural in Vietnamese. A more fluent translation would emphasize that the CA itself is not trusted, rather than the act of issuing.",
+          "suggestion": "Cơ quan chứng thực không được tin cậy"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

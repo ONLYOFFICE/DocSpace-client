@@ -1,0 +1,244 @@
+{
+  "key_path": "WebhookDisabled",
+  "content": "Webhook disabled",
+  "content_en_sha1_hash": "a207e115d41b80aa7eba032b14687ed66099830b",
+  "created_at": "2025-05-19T21:30:49.872Z",
+  "updated_at": "2025-05-21T00:51:11.731Z",
+  "comment": {
+    "text": "The translation key \"WebhookDisabled\" is used to display a message indicating that a webhook is currently disabled. It appears in a success notification after enabling or disabling a webhook in the UI, providing feedback to the user about the current state of their webhook settings.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:46.795Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/WebhooksStore.js",
+      "line_number": 146,
+      "context": ");\n this.webhooks[index].enabled = !this.webhooks[index].enabled;\n toastr.success(\n this.webhooks[index].enabled\n ? t(\"WebhookEnabled\")\n : t(\"WebhookDisabled\"),\n );\n } catch (error) {\n toastr.error(error);\n }\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "Leading space before 'Webhook' in the Italian translation.",
+          "suggestion": "Webhook disabilitato"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ウェブフック無効\" is understandable, a more natural and common translation of \"Webhook disabled\" would be \"ウェブフックが無効化されました\" or \"ウェブフックを無効にしました\". \"ウェブフック無効\" is grammatically correct but sounds abrupt and less user-friendly in this context.",
+          "suggestion": "ウェブフックが無効化されました"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Tīmekļa aizķere ir atspējota\" is not an accurate translation of \"Webhook disabled.\" \"Aizķere\" translates to 'congestion' or 'blockage,' which is not the intended meaning. The word 'Webhook' should be translated or transliterated.",
+          "suggestion": "Consider translating 'Webhook' as 'Tīmekļa atbalsts' (Web Support) or transliterating it as 'Vebhuks'.  A more accurate translation would be something like \"Tīmekļa atbalsts ir atspējots\" or \"Vebhuks ir atspējots\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'අක්‍රිය' (akriya) is a valid term for 'disabled', but 'අක්‍රීයකරණය' (akriyakarana) would be a more accurate and natural translation of 'disabled' in this context, indicating the action of disabling.",
+          "suggestion": "වෙබ්හුක් අක්‍රීයකරණය කරන ලදි"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Serbian (Cyrillic) translation uses 'онемогућен' which is the passive form of 'disable' but might not be the most natural wording in this context. While grammatically correct, 'isključeno' (turned off) or 'онемогућено' (disabled) could be more common and sound more natural.",
+          "suggestion": "Webhook искључено"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"onemogućen\" is a valid Serbian word, a more natural and commonly used translation for \"disabled\" in the context of a webhook would be \"isključen\". \"Onemogućen\" implies a state of being rendered impossible, which is not the intended meaning here.",
+          "suggestion": "Webhook isključen"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

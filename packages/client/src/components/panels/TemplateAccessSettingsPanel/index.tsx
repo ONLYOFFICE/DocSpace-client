@@ -132,7 +132,7 @@ const TemplateAccessSettingsPanel = ({
 
   const templateId = templateItem?.id;
 
-  const prevIsAvailable = useRef<boolean>();
+  const prevIsAvailable = useRef<boolean>(undefined);
 
   const setAccessItemsAction = (items) => {
     if (isContainer) setInviteItems(items);

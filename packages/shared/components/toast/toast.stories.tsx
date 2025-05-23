@@ -98,7 +98,7 @@ const ToastTemplate = ({
     if (typeof data === "string") {
       message = data;
     } else if (React.isValidElement(data)) {
-      message = data.props.children;
+      message = (data as React.ReactElement).props.children;
     } else if (Array.isArray(data)) {
       message = data
         .map((child) => {

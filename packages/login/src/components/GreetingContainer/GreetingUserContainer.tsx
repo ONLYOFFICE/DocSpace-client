@@ -79,7 +79,14 @@ export const GreetingUserContainer = ({
             productName: t("Common:ProductName"),
           }}
           components={{
-            1: <ColorTheme tag="a" themeId={ThemeId.Link} isHovered={false} />,
+            1: (
+              <ColorTheme
+                key="component_key"
+                tag="a"
+                themeId={ThemeId.Link}
+                isHovered={false}
+              />
+            ),
           }}
         />
       </Text>

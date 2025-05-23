@@ -31,7 +31,7 @@
 import { DependencyList, RefObject, useEffect } from "react";
 
 export const useClickOutside = <T extends HTMLElement>(
-  ref: RefObject<T>,
+  ref: RefObject<T | null>,
   handler: VoidFunction,
   ...deps: DependencyList
 ) => {

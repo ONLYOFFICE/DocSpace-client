@@ -51,7 +51,5 @@ export const LoadersContextProvider = ({
 }) => {
   const value = useLoadersHelper({ withInit });
 
-  return (
-    <LoadersContext.Provider value={value}>{children}</LoadersContext.Provider>
-  );
+  return <LoadersContext value={value}>{children}</LoadersContext>;
 };

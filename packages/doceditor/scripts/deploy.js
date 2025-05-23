@@ -50,7 +50,6 @@ const rootNodeModulesPath = path.join(
 );
 
 const libsToCopy = [
-  "pino-roll",
   "date-fns",
   "@serdnam",
   "nconf",

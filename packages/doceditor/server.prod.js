@@ -31,8 +31,6 @@ import("./logger.mjs").then(({ logger }) => {
   process.env.NODE_ENV = process.env.NODE_ENV ?? "production";
   process.chdir(__dirname);
 
-  const log = logger.child({ module: "server" });
-
   const dir = path.join(__dirname);
 
   const dev = process.env.NODE_ENV === "development";
@@ -116,7 +114,7 @@ import("./logger.mjs").then(({ logger }) => {
         transform: "next/dist/server/web/exports/{{ kebabCase member }}",
       },
     },
-    serverExternalPackages: ["pino", "pino-pretty", "date-and-time", "nconf"],
+    serverExternalPackages: ["date-and-time", "nconf"],
     experimental: {
       windowHistorySupport: false,
       serverMinification: true,
@@ -234,11 +232,13 @@ import("./logger.mjs").then(({ logger }) => {
   }
 
   process.on("unhandledRejection", (reason, process) => {
-    log.error({ process, reason }, "Unhandled rejection at");
+    logger.error(
+      `process: ${process}, reason: ${reason} Unhandled rejection at`,
+    );
   });
 
   process.on("uncaughtException", (error) => {
-    log.error({ error, stack: error.stack }, `Unhandled exception`);
+    logger.error(`error: ${error}, stack: ${error.stack} Unhandled exception`);
   });
 
   startServer({
@@ -250,7 +250,7 @@ import("./logger.mjs").then(({ logger }) => {
     allowRetry: false,
     keepAliveTimeout,
   }).catch((err) => {
-    log.error({ error: err }, "Error occurred handling");
+    logger.error(`error: ${err}, Error occurred handling`);
     process.exit(1);
   });
 });

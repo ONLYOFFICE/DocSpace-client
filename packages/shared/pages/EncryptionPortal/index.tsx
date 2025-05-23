@@ -30,7 +30,7 @@ import { useTheme } from "styled-components";
 import classNames from "classnames";
 
 import { Text } from "../../components/text";
-import { ColorTheme, ThemeId } from "../../components/color-theme";
+import { PreparationPortalProgress } from "../../components/preparation-portal-progress";
 import ErrorContainer from "../../components/error-container/ErrorContainer";
 import PreparationPortalLoader from "../../skeletons/preparation-portal";
 
@@ -164,40 +164,10 @@ export const EncryptionPortal: React.FC<EncryptionPortalProps> = (props) => {
       {`${errorMessage}`}
     </Text>
   ) : (
-    <ColorTheme theme={theme} themeId={ThemeId.Progress} percent={percent}>
-      <div
-        className="preparation-portal_progress"
-        data-testid="encryption-progress"
-        aria-label={`Encryption progress: ${percent}%`}
-        id="encryption-progress-container"
-      >
-        <div className="preparation-portal_progress-bar">
-          <div
-            className="preparation-portal_progress-line"
-            data-testid="encryption-progress-bar"
-            data-percent={percent}
-            aria-valuenow={percent}
-            aria-valuemin={0}
-            aria-valuemax={100}
-            role="progressbar"
-            aria-labelledby="encryption-progress-label"
-          />
-        </div>
-        <Text
-          className="preparation-portal_percent"
-          aria-live="polite"
-          id="encryption-progress-label"
-        >
-          {`${percent} %`}
-        </Text>
-      </div>
-      <Text
-        className={styles.encryptionPortalText}
-        data-testid="encryption-portal-subtitle"
-      >
-        {t("EncryptionPortalSubtitle")}
-      </Text>
-    </ColorTheme>
+    <PreparationPortalProgress
+      text={t("EncryptionPortalSubtitle")}
+      percent={percent}
+    />
   );
 
   const classes = classNames(styles.encryptionPortal, {

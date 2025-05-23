@@ -1,0 +1,338 @@
+{
+  "key_path": "NameIDFormat",
+  "content": "NameId Format",
+  "content_en_sha1_hash": "09c33ee71511c0a8e0cba56fd26679f490c998fe",
+  "created_at": "2025-05-19T21:30:50.112Z",
+  "updated_at": "2025-05-21T02:04:44.092Z",
+  "comment": {
+    "text": "This translation key is used for the label of a dropdown menu in a user interface, specifically related to Single Sign-On settings. It will appear as \"NameId Format\" in the application, and its purpose is to provide a clear indication of the option being selected from a list.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:13.041Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/IdpSettings.js",
+      "line_number": 190,
+      "context": "/>\n </div>\n </SsoFormField>\n \n <SsoComboBox\n labelText={t(\"NameIDFormat\")}\n value={nameIdFormat}\n name=\"nameIdFormat\"\n options={nameIdOptions}\n tabIndex={8}\n />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"تنسيق تعريف الهوية\" is a literal translation of \"NameId Format\", it might sound a bit formal and technical for some contexts. A more natural-sounding translation, while retaining accuracy, could be considered.",
+          "suggestion": "هوية المستخدم"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation \"Ad ID Format\" directly translates 'Name' as 'Ad', which isn't the best equivalent in this context. 'NameId' refers to a unique identifier, and a more accurate translation would consider that meaning. While 'Ad' is understandable, it lacks precision.",
+          "suggestion": "Consider 'Istifadəçi Kimliyi Formatı' (User Identity Format) or 'Unikal Kimlik Formatı' (Unique Identifier Format) for a more accurate representation."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Formát NameId\" is too literal. While it preserves the words, it doesn't convey the meaning naturally in Czech.  'NameId' is a specific technical term that may be best kept as is, or explained. A more natural translation would consider the context in which this label appears.",
+          "suggestion": "Consider alternatives like 'Formát ID uživatele' or 'Formát identifikátoru uživatele', or leave 'NameId' as is if the target audience is technically savvy. The best choice depends on the broader context."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Μορφή NameId' is a literal translation and doesn't accurately convey the meaning of 'NameId Format' in a technical context. It's clunky and may not be understood by Greek-speaking users familiar with Single Sign-On concepts.",
+          "suggestion": "A better translation would consider the purpose of 'NameId Format', which is a technical specification. Possible alternatives include: 'Τύπος NameId', 'Μορφή Ταυτοποίησης NameId', or 'Πρότυπο NameId'."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Formato NameId' is a literal translation but lacks clarity for a Spanish-speaking audience. 'NameId' is a technical term and might not be understood. A more understandable translation would explain the purpose or type of format.",
+          "suggestion": "Formato de Identificador de Nombre (or more contextually appropriate depending on the platform, such as 'Formato del ID de Usuario')"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Format NameID' doesn't accurately convey the meaning of 'NameId Format'. A more accurate translation would be 'Format d'identifiant de nom' or 'Format NameID'. The current translation reverses the order and lacks the prepositional phrase needed for grammatical correctness in French.",
+          "suggestion": "Format d'identifiant de nom"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ձևաչափ' (devachap) is a valid word for 'format', it lacks the specific nuance of 'NameId' which refers to a standardized format. A more precise translation might consider using a more technical term or rephrasing to convey the concept of a standardized identifier format.",
+          "suggestion": "Consider alternatives like 'անձնագույնչափ' (anznaguyinchap) - potentially with a footnote explaining the technical term - or 'չափանիշ ձևաչափ' (chapanish devachap) - 'standard format'."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Formato NameId' is a literal translation but doesn't quite convey the meaning in a natural Italian way. 'NameId' is an English term and directly translating it might sound awkward to an Italian speaker. A more suitable translation would consider the purpose of 'NameId Format'.",
+          "suggestion": "Consider 'Formato Identificativo' or 'Tipo di Identificativo' depending on the broader context. Alternatively, if maintaining the English term is necessary, a descriptive phrase like 'Formato del NameID' might be better."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"이름 ID 형식\" is a literal translation and might not be the most natural or accurate rendering of \"NameId Format\" in a Korean technical context. \"NameId\" is a specific term and translating 'Name' as just '이름' can be too simplistic. A more accurate translation would consider the technical meaning of 'NameId'.",
+          "suggestion": "Consider a more technical translation like \"이름 식별자 형식\" or \"이름 ID 형식 (기술적 용어 사용) \".  A consultation with a technical Korean speaker would be ideal."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຮູບແບບ NameId' is a literal transliteration and doesn't convey the meaning of 'NameId Format'.  'ຮູບແບບ' simply means 'format' and leaves the 'NameId' untranslated and potentially meaningless to a Lao speaker unfamiliar with the technical term.",
+          "suggestion": "Consider a translation that explains the purpose of the format. A potential suggestion could be 'ຮູບແບບຊື່ຜູ້ໃຊ້' (Format of User Name) or 'ຮູບແບບລະບົບຊື່' (Format of Identification System), but a deeper understanding of the context is needed for a truly accurate translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation \"Format NameID\" does not accurately convey the meaning of \"NameId Format\". It reverses the order and lacks a connecting word.",
+          "suggestion": "Format identyfikatora nazwy (Format NameID)"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation \"Format NameID\" might be too literal and not idiomatic for Polish technical documentation. It should ideally use a more integrated approach.",
+          "suggestion": "Format identyfikatora nazwy (Format NameID)"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Formato de ID\" is understandable, a more precise translation of \"NameId Format\" would be \"Formato do NomeID\" or \"Formato do Identificador de Nome\". \"Formato de ID\" is a bit too generic.",
+          "suggestion": "Formato do NomeID"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Formato do ID do nome' is not the most natural or accurate translation of 'NameId Format'. It's a literal translation, but could be improved.",
+          "suggestion": "Formato do Nome"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Format NameId' is a literal word-for-word translation and does not flow naturally in Romanian. It reverses the order and doesn't conform to standard Romanian phrasing for technical terms.",
+          "suggestion": "Identificator Nume Format"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Формат NameID:' is technically correct but could be improved for clarity and consistency. 'NameId Format' is a specific technical term, and a more literal translation focusing on that technical nature would be preferable.",
+          "suggestion": "Формат NameID"
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"නම/හැඳු. ආකෘතිය\" is not an accurate translation of \"NameId Format\". \"NameId\" is a compound term and should be translated more comprehensively, rather than separating into 'name' and 'identifier'.",
+          "suggestion": "Possible suggestions include: \"නම හැඳුම් ආකෘතිය\" (Nama Hadum Akrutiya - Name Identifier Format) or \"හැඳුම් ආකෘතිය\" (Hadum Akrutiya - Identifier Format), depending on the desired level of detail."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of periods within the Sinhala translation \"නම/හැඳු. ආකෘතිය\" appears unconventional and disrupts readability. Periods are typically not used within compound words like this in Sinhala.",
+          "suggestion": "Remove the periods: \"නම/හැඳු ආකෘතිය\""
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Formát NameId' is not a natural or accurate translation of 'NameId Format'. It is a direct transliteration that lacks proper grammatical structure in Slovak. The word 'Formát' is a loanword from English and its usage in this context is awkward.",
+          "suggestion": "Preferable translations would be something like 'Formát identifikátora' or 'Formát ID používateľa' (depending on the specific meaning and context of 'NameId Format'). A more context-aware translation is needed for accuracy and naturalness."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'NameId формат' uses the Cyrillic word 'формат' which directly translates to 'format'. While understandable, it's a transliteration rather than a true translation. A more accurate translation would consider the context, possibly 'Format ID imena' or 'ID formata imena'.",
+          "suggestion": "Consider 'Format ID imena' or 'ID formata imena' for a more accurate translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'NameId format' is a direct transliteration of the English 'NameId Format'. While technically understandable, it lacks proper Serbian capitalization and grammatical correctness for a label or configuration setting. It should ideally be 'NameID format' or 'Format ID-a korisnika' depending on the desired formality and context.",
+          "suggestion": "NameID format"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Формат NameId' is a literal translation and might not be the most natural or understandable way to express 'NameId Format' in Ukrainian. A more fluent translation would incorporate the meaning of 'format' in Ukrainian.",
+          "suggestion": "Формат ідентифікатора"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

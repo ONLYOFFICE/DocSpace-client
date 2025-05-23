@@ -48,7 +48,7 @@ const Item = ({ portal, baseDomain }: ItemProps) => {
     : `${portal.portalName}.${baseDomain}`;
 
   const onClick = () => {
-    const redirectUrl = getRedirectURL().replace(window.location.origin, name);
+    const redirectUrl = getRedirectURL()!.replace(window.location.origin, name);
 
     sessionStorage.removeItem("tenant-list");
 

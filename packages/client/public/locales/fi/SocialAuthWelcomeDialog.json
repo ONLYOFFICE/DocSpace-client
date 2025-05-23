@@ -1,0 +1,8 @@
+{
+  "ChangeData": "Vaihda tiedot ja salasana",
+  "ClickButtonBelow": "Jos haluat kirjautua sisään sähköpostiosoitteellasi, aseta ensin oma salasanasi. <br /> Kun olet valmis, klikkaa alla olevaa painiketta.",
+  "ContinueToProduct": "Jatka {{productName}} -tuotteeseen",
+  "GeneratedPassword": "Luotu salasana",
+  "ProductNameDetail": "{{productName}} nimi",
+  "ReviewAccountDetails": "Ole hyvä ja tarkista tilisi tiedot hetken ajan:"
+}

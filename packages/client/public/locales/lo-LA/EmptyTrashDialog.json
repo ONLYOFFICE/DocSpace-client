@@ -1,4 +1,6 @@
 {
   "DeleteForeverButton": "ລືບອອກເລີຍ",
-  "DeleteForeverTitle": "ລືບອອກ？"
+  "DeleteForeverNote": "ສິ່ງຂອງທັງໝົດຈາກພາກສ່ວນ {{sectionName}} ຈະຖືກລົບອອກຢ່າງຖາວອນ ແລະທ່ານຈະບໍ່ສາມາດຟື້ນຕົວພວກມັນໄດ້.",
+  "DeleteForeverTitle": "ລືບອອກ？",
+  "SuccessEmptyAction": "ພາກສ່ວນ {{sectionName}} ເຊື່ອມໂຍງອອກແລ້ວ"
 }

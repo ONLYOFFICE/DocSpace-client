@@ -1,0 +1,316 @@
+{
+  "key_path": "DeleteVersionDescription",
+  "content": "You are about to delete a file version. It will be no possible to see or restore it anymore. Are you sure you want to continue?",
+  "content_en_sha1_hash": "dc5e1b687bf6879d5fbaab0918c52db128223479",
+  "created_at": "2025-05-19T21:30:49.935Z",
+  "updated_at": "2025-05-22T11:56:37.396Z",
+  "comment": {
+    "text": "This translation key is used to display a confirmation message before deleting a file version, warning users that they will lose access to the deleted version. It appears in a dialog box, specifically in a modal dialog header and body. Translators should provide a message that conveys this important information in a clear and concise manner.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:39.185Z"
+  },
+  "usage": [
+    {
+      "file_path": "\\packages\\client\\src\\components\\dialogs\\DeleteVersionDialog\\index.tsx",
+      "line_number": 91,
+      "context": "{t(\"VersionHistory:DeleteVersion\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className=\"modal-dialog-content-body\">\n <Text lineHeight=\"20px\" noSelect>\n {t(\"VersionHistory:DeleteVersionDescription\")}\n </Text>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "module": "\\packages\\client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"أنتم على وشك حذف\" could be improved to convey the sense of 'You are about to delete'. While technically correct, it sounds slightly awkward. A more natural phrasing would be something like \"ستقوم بحذف\".",
+          "suggestion": "ستقوم بحذف نسخة من الملف."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Está a punto de eliminar una versión de archivo' could be improved to better reflect the original 'You are about to delete a file version'. A more natural phrasing might be 'Va a eliminar una versión de archivo'.",
+          "suggestion": "Va a eliminar una versión de archivo."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Ya no será posible verla ni restaurarla' is grammatically correct, it's a bit stiff. A more natural phrasing would be 'No será posible verla ni restaurarla'.",
+          "suggestion": "No será posible verla ni restaurarla."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"It will be no possible\" is grammatically incorrect. The Armenian translation 'Այն այլևս հնարավոր չի լինի' reflects this incorrect phrasing instead of conveying the meaning of 'it will not be possible'.",
+          "suggestion": "Այն այլևս հնարավոր չի լինի դիտել կամ վերականգնելուց։"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'Are you sure you want to continue?' is translated as 'Հավատո՞ւմ եք, որ ցանկանում եք շարունակել։' which literally translates to 'Do you believe that you want to continue?'. While understandable, it's less direct and natural than a simple confirmation.",
+          "suggestion": "Դուք համոզված եք, որ շարունակելու եք։"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"これ以上見ることや復元することはできません\" is a bit clunky and overly formal. A more natural Japanese phrasing for 'It will be no possible to see or restore it anymore' would be something like \"これからは見ることも復元することもできません\" or \"これからは見ることも復元することもできなくなります\".",
+          "suggestion": "ファイルのバージョンを削除しようとしています。これからは見ることも復元することもできなくなります。本当に続行してもよろしいですか？"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'no possible' in the English text is not accurately translated. 'no possible' is grammatically incorrect in English, and the Korean translation of the intended meaning ('cannot be seen or restored') is slightly awkward.",
+          "suggestion": "파일 버전을 삭제하려고 합니다. 삭제하면 더 이상 볼 수 없거나 복원할 수 없습니다. 그래도 계속하시겠습니까?"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ມັນຈະບໍ່ສາມາດເບິ່ງຫຼືກູ້ຄືນໄດ້ອີກຕໍ່ໄປ\" is a bit wordy and could be simplified. While technically correct, it's not the most natural Lao phrasing for this context.",
+          "suggestion": "ມັນຈະບໍ່ສາມາດເບິ່ງຫຼືກູ້ຄືນໄດ້ແລ້ວ."
+        },
+        {
+          "type": "formatting",
+          "description": "The question mark at the end of the sentence feels a little abrupt in Lao. While grammatically not incorrect, a slightly softer ending might be more appropriate.",
+          "suggestion": "ແນ່ໃຈບໍທ່ານຕ້ອງການດໍາເນີນການຕໍ່ບໍ?"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Weet u zeker dat u door wilt gaan?\" is a somewhat formal and slightly less natural way to say \"Are you sure you want to continue?\" in this context. A more conversational and natural phrasing would be better.",
+          "suggestion": "Bent u zeker dat u verder wilt?"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"It will be no possible\" is grammatically incorrect and doesn't accurately reflect the English meaning. It should be 'It will not be possible'.",
+          "suggestion": "It will not be possible"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'vê-lo' is grammatically awkward in this context. While technically correct, it sounds less natural than 'visualizá-lo' or simply 'acessá-lo'.",
+          "suggestion": "visualizá-lo"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'fișierului' should be 'fișier'. It's using the genitive case incorrectly here.",
+          "suggestion": "Sunteţi pe cale să ştergeţi o versiune a fișier. Va fi imposibil să o vizualizați sau recuperați. Sigur doriţi să continuați?"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ඔබ පැරණි ගොනුවක් මකා දැමීමට සුදානමින් සිටී\" is a bit verbose and doesn't perfectly capture the directness of \"You are about to delete a file version.\" A more direct translation would be better.",
+          "suggestion": "ඔබ දැන් ගොනුවක අනුවාදය මකා දමන්නන්නු."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While understandable, \"ප්‍රතිෂ්ඨාපනය කිරීමට හැකියාවක් නොවනු ඇත\" is a slightly awkward way to express \"It will be no possible to see or restore it anymore.\" It's a bit too literal and formal.",
+          "suggestion": "ඒවා නැවත ලබා ගැනීමට බැරිවනු ඇත."
+        },
+        {
+          "type": "formatting",
+          "description": "The punctuation feels a little abrupt. A more conversational tone could be achieved with a slightly different sentence structure.",
+          "suggestion": "ඔබ දැන් ගොනුවක අනුවාදය මකා දමන්නන්නු. ඒවා නැවත ලබා ගැනීමට බැරිවනු ඇත. ඔබට ඉදිරියට යාමට අවශ්‍යද?"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'обришете' could be improved. While technically correct, 'избришете' is more commonly used and sounds more natural in this context.",
+          "suggestion": "Избрисати верзију фајла."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'spremlate' is a misspelling of 'spreman'.",
+          "suggestion": "Spreman ste da obrišete verziju fajla."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"khôi phục nó lại\" is redundant. \"Khôi phục nó\" is sufficient and more natural in Vietnamese.",
+          "suggestion": "Bạn sắp xóa một phiên bản tập tin. Sẽ không thể xem hoặc khôi phục nó. Bạn có chắc chắn muốn tiếp tục không?"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

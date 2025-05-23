@@ -1,6 +1,6 @@
-@import "../../styles/mixins";
-@import "../../styles/variables/devices";
-@import "../../styles/variables/colors";
+@use "../../styles/mixins";
+
+@use "../../styles/variables/colors";
 
 .wrapper {
   display: flex;
@@ -13,12 +13,12 @@
   max-width: 320px;
   min-width: 320px;
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     max-width: 416px;
     min-width: 416px;
   }
 
-  @include mobile {
+  @include mixins.mobile {
     padding: 0;
     border-radius: 0;
     box-shadow: none !important;

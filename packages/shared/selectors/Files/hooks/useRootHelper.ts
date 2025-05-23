@@ -32,10 +32,10 @@ import { getFoldersTree } from "../../../api/files";
 import { TFolder } from "../../../api/files/types";
 import { getCatalogIconUrlByType } from "../../../utils/catalogIconHelper";
 import { TSelectorItem } from "../../../components/selector";
+import { getDefaultBreadCrumb } from "../../utils";
+import { LoadersContext } from "../../utils/contexts/Loaders";
 
 import { UseRootHelperProps } from "../FilesSelector.types";
-import { getDefaultBreadCrumb } from "../FilesSelector.utils";
-import { LoadersContext } from "../contexts/Loaders";
 
 const useRootHelper = ({
   setBreadCrumbs,

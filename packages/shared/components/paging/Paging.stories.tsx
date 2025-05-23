@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 
 import { Meta, StoryObj } from "@storybook/react";
 
@@ -93,12 +93,12 @@ const Template = ({
   onSelectCount,
   ...args
 }: PagingProps) => {
-  const pageItems = createPageItems(200);
+  const pageItems = useMemo(() => createPageItems(200), []);
   const [selectedPageItem, setSelectedPageItems] = useState(pageItems[0]);
 
   useEffect(() => {
     setSelectedPageItems(pageItems[0]);
-  }, [pageItems]);
+  }, []);
 
   const onSelectPageNextHandler = () => {
     const currentPage = pageItems.filter(

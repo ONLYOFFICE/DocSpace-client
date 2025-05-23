@@ -11,7 +11,6 @@
     "deploy": "shx --silent mkdir -p ../../../publish/web/management && shx --silent mkdir -p ../../../publish/web/management/.next && shx --silent mkdir -p ../../../publish/web/management/config && shx cp -r config/* ../../../publish/web/management/config && shx --silent mkdir -p ../../../publish/web/management/node_modules && shx --silent mkdir -p ../../../publish/web/management/.next/static && shx cp -r .next/standalone/node_modules/* ../../../publish/web/management/node_modules && shx cp -r .next/static/* ../../../publish/web/management/.next/static    && shx cp -r .next/standalone/packages/management/.next/* ../../../publish/web/management/.next &&  shx cp -f server.prod.js ../../../publish/web/management/server.js &&  shx cp -f logger.mjs ../../../publish/web/login/logger.mjs"
   },
   "dependencies": {
-    "@aws-sdk/client-cloudwatch-logs": "3.816.0",
     "i18next": "20.6.1",
     "nconf": "0.12.1",
     "next": "15.3.2",
@@ -26,6 +25,7 @@
     "winston-daily-rotate-file": "5.0.0"
   },
   "devDependencies": {
+    "@aws-sdk/client-cloudwatch-logs": "3.816.0",
     "@svgr/webpack": "8.1.0",
     "@types/nconf": "^0",
     "@types/node": "22.7.5",

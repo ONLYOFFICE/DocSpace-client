@@ -58,7 +58,7 @@ export const EncryptionPortal: React.FC<EncryptionPortalProps> = (props) => {
 
   const errorInternalServer = t("Common:ErrorInternalServer");
 
-  const [percent, setPercent] = useState(50);
+  const [percent, setPercent] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
 
   const getProgress = useCallback(async () => {

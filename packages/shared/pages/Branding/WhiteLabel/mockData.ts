@@ -24,6 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import LightSmallSvgUrl from "PUBLIC_DIR/images/logo/lightsmall.svg?url";
+import DarkLightSmallSvgUrl from "PUBLIC_DIR/images/logo/dark_lightsmall.svg?url";
+import LoginPageSvgUrl from "PUBLIC_DIR/images/logo/loginpage.svg?url";
+import DarkLoginPageSvgUrl from "PUBLIC_DIR/images/logo/dark_loginpage.svg?url";
+import FaviconUrl from "PUBLIC_DIR/images/logo/favicon.ico";
+import DocsEditorSvgUrl from "PUBLIC_DIR/images/logo/docseditor.svg?url";
+import DocsEditorEmbedSvgUrl from "PUBLIC_DIR/images/logo/docseditorembed.svg?url";
+import LeftMenuSvgUrl from "PUBLIC_DIR/images/logo/leftmenu.svg?url";
+import DarkLeftMenuSvgUrl from "PUBLIC_DIR/images/logo/dark_leftmenu.svg?url";
+import AboutPageSvgUrl from "PUBLIC_DIR/images/logo/aboutpage.svg?url";
+import DarkAboutPageSvgUrl from "PUBLIC_DIR/images/logo/dark_aboutpage.svg?url";
+
 import { ILogo } from "./WhiteLabel.types";
 
 export const mockLogos: ILogo[] = [
@@ -35,8 +47,8 @@ export const mockLogos: ILogo[] = [
       isEmpty: false,
     },
     path: {
-      light: "lightsmall.svg",
-      dark: "dark_lightsmall.svg",
+      light: LightSmallSvgUrl,
+      dark: DarkLightSmallSvgUrl,
     },
   },
   {
@@ -47,8 +59,8 @@ export const mockLogos: ILogo[] = [
       isEmpty: false,
     },
     path: {
-      light: "loginpage.svg",
-      dark: "dark_loginpage.svg",
+      light: LoginPageSvgUrl,
+      dark: DarkLoginPageSvgUrl,
     },
   },
   {
@@ -59,7 +71,7 @@ export const mockLogos: ILogo[] = [
       isEmpty: false,
     },
     path: {
-      light: "favicon.ico",
+      light: FaviconUrl,
       dark: "",
     },
   },
@@ -71,7 +83,7 @@ export const mockLogos: ILogo[] = [
       isEmpty: false,
     },
     path: {
-      light: "docseditor.svg",
+      light: DocsEditorSvgUrl,
       dark: "",
     },
   },
@@ -83,7 +95,7 @@ export const mockLogos: ILogo[] = [
       isEmpty: false,
     },
     path: {
-      light: "docseditorembed.svg",
+      light: DocsEditorEmbedSvgUrl,
       dark: "",
     },
   },
@@ -95,8 +107,8 @@ export const mockLogos: ILogo[] = [
       isEmpty: false,
     },
     path: {
-      light: "leftmenu.svg",
-      dark: "dark_leftmenu.svg",
+      light: LeftMenuSvgUrl,
+      dark: DarkLeftMenuSvgUrl,
     },
   },
   {
@@ -107,8 +119,8 @@ export const mockLogos: ILogo[] = [
       isEmpty: false,
     },
     path: {
-      light: "aboutpage.svg",
-      dark: "dark_aboutpage.svg",
+      light: AboutPageSvgUrl,
+      dark: DarkAboutPageSvgUrl,
     },
   },
 ];

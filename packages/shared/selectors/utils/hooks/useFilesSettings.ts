@@ -34,7 +34,7 @@ import { HTML_EXST, EBOOK_EXST } from "../../../constants";
 import { toastr } from "../../../components/toast";
 import { TData } from "../../../components/toast/Toast.type";
 
-import { TGetIcon } from "../FilesSelector.types";
+import { TGetIcon } from "../types";
 
 const useFilesSettings = (
   getIconProp?: TGetIcon,

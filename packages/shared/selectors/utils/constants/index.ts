@@ -27,6 +27,6 @@
 export const SHOW_LOADER_TIMER = 200;
 export const MIN_LOADER_TIMER = 500;
 
-export const DEFAULT_FILE_EXTS = "file";
-
 export const PAGE_COUNT = 100;
+
+export const DEFAULT_FILE_EXTS = "file";

@@ -36,7 +36,7 @@ import AccountsFilter from "@docspace/shared/api/people/filter";
 import {
   MIN_LOADER_TIMER,
   SHOW_LOADER_TIMER,
-} from "@docspace/shared/selectors/Files/FilesSelector.constants";
+} from "@docspace/shared/selectors/utils/constants";
 
 import GroupMember from "./GroupMember";
 import * as Styled from "../../styles/groups.styled";

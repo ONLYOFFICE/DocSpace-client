@@ -72,36 +72,38 @@ const Paging = (props: PagingProps) => {
       className={classNames(styles.paging, className)}
       style={style}
     >
-      <Button
-        className={classNames(styles.prevButton, "not-selectable")}
-        size={ButtonSize.small}
-        scale
-        label={previousLabel}
-        onClick={previousAction}
-        isDisabled={disablePrevious}
-      />
-      {pageItems ? (
-        <div className={styles.page}>
-          <ComboBox
-            isDisabled={disablePrevious ? disableNext : false}
-            className="manualWidth"
-            directionY={openDirection}
-            options={pageItems}
-            onSelect={onSelectPageAction}
-            scaledOptions={pageItems.length < 6}
-            selectedOption={selectedPageItem}
-            {...setDropDownMaxHeight}
-          />
-        </div>
-      ) : null}
-      <Button
-        className={classNames(styles.nextButton, "not-selectable")}
-        size={ButtonSize.small}
-        scale
-        label={nextLabel}
-        onClick={nextAction}
-        isDisabled={disableNext}
-      />
+      <div className={styles.leftButtonsContainer}>
+        <Button
+          className={classNames(styles.prevButton, "not-selectable")}
+          size={ButtonSize.small}
+          scale
+          label={previousLabel}
+          onClick={previousAction}
+          isDisabled={disablePrevious}
+        />
+        {pageItems ? (
+          <div className={styles.page}>
+            <ComboBox
+              isDisabled={disablePrevious ? disableNext : false}
+              className={styles.manualWidth}
+              directionY={openDirection}
+              options={pageItems}
+              onSelect={onSelectPageAction}
+              scaledOptions={pageItems.length < 6}
+              selectedOption={selectedPageItem}
+              {...setDropDownMaxHeight}
+            />
+          </div>
+        ) : null}
+        <Button
+          className={classNames(styles.nextButton, "not-selectable")}
+          size={ButtonSize.small}
+          scale
+          label={nextLabel}
+          onClick={nextAction}
+          isDisabled={disableNext}
+        />
+      </div>
       {showCountItem
         ? countItems && (
             <div className={styles.onPage}>

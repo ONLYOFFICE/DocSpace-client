@@ -36,7 +36,6 @@ const StyledPaging = styled(Paging)`
   display: flex;
   margin-bottom: 30px;
   align-items: center;
-  justify-content: center;
 `;
 
 const AccountsPaging = (props: AccountsPagingProps) => {

@@ -30,112 +30,130 @@
 
 .paging {
   display: flex;
-  flex-direction: row;
   justify-content: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
 
-  & > button {
-    margin-inline-end: 8px;
-  }
-}
-
-.prevButton,
-.nextButton {
-  font-size: 13px;
-  line-height: 20px;
-  padding: 6px 28px;
-
-  @include mixins.tablet-and-below {
-    font-size: 14px;
-  }
-}
-
-.prevButton {
-  max-width: 111px;
-
-  @include mixins.tablet-and-below {
-    max-width: 115px;
-    height: 40px;
-  }
-}
-
-.nextButton {
-  max-width: 86px;
-
-  @include mixins.tablet-and-below {
-    max-width: 89px;
-    height: 40px;
-  }
-}
-
-.onPage {
-  width: 125px;
-  margin-inline: auto 0;
-
-  @include mixins.tablet-and-below {
-    height: 40px;
+  @include mixins.mobile {
+    flex-direction: column;
+    gap: 20px;
   }
 
-  .hideDisabled {
-    padding: 0;
+  .leftButtonsContainer {
+    display: flex;
+    margin-inline-end: auto;
 
     @include mixins.mobile {
-      display: none;
+      width: 100%;
     }
 
-    :global(.combo-button) {
-      padding-inline-start: 14px;
+    > button:not(:last-child) {
+      margin-inline-end: 8px;
+    }
+  }
 
-      @include mixins.tablet-and-below {
-        height: 40px;
-      }
+  .prevButton,
+  .nextButton {
+    font-size: 13px;
+    line-height: 20px;
+    padding: 6px 28px;
 
-      :global(.combo-button-label) {
-        margin-inline-end: 0;
+    @include mixins.tablet-and-below {
+      font-size: 14px;
+    }
+  }
+
+  .prevButton {
+    max-width: 111px;
+
+    @include mixins.tablet-and-below {
+      max-width: 115px;
+      height: 40px;
+    }
+  }
+
+  .nextButton {
+    max-width: 86px;
+
+    @include mixins.tablet-and-below {
+      max-width: 89px;
+      height: 40px;
+    }
+  }
+
+  .page {
+    margin-inline-end: 8px;
+
+    @include mixins.mobile {
+      flex-grow: 1;
+    }
+
+    .manualWidth {
+      padding: 0;
+
+      :global(.combo-button) {
+        padding-inline: 16px;
 
         @include mixins.tablet-and-below {
-          font-size: 14px;
+          height: 40px;
+        }
+
+        :global(.combo-button-label) {
+          margin-inline-end: 8px;
+
+          @include mixins.tablet-and-below {
+            font-size: 14px;
+          }
+        }
+
+        :global(.combo-buttons_arrow-icon) {
+          margin-inline-end: 0;
         }
       }
 
-      :global(.combo-buttons_arrow-icon) {
-        margin-inline-end: 4px;
-      }
-
-      div[disabled] {
-        display: none;
+      :global(.dropdown-container) {
+        width: 110%;
       }
     }
   }
-}
 
-.page {
-  margin-inline-end: 8px;
+  .onPage {
+    width: 125px;
 
-  .manualWidth {
-    padding: 0;
-
-    :global(.combo-button) {
-      padding-inline-start: 14px;
-
-      @include mixins.tablet-and-below {
-        height: 40px;
-      }
-
-      :global(.combo-button-label) {
-        margin-inline-end: 0;
-
-        @include mixins.tablet-and-below {
-          font-size: 14px;
-        }
-      }
-
-      :global(.combo-buttons_arrow-icon) {
-        margin-inline-end: 4px;
-      }
+    @include mixins.tablet-and-below {
+      height: 40px;
     }
 
-    :global(.dropdown-container) {
-      width: 110%;
+    @include mixins.mobile {
+      width: 100%;
+    }
+
+    .hideDisabled {
+      padding: 0;
+
+      :global(.combo-button) {
+        padding-inline: 16px;
+
+        @include mixins.tablet-and-below {
+          height: 40px;
+        }
+
+        :global(.combo-button-label) {
+          margin-inline-end: 8px;
+
+          @include mixins.tablet-and-below {
+            font-size: 14px;
+          }
+        }
+
+        :global(.combo-buttons_arrow-icon) {
+          margin-inline-end: 0;
+        }
+
+        div[disabled] {
+          display: none;
+        }
+      }
     }
   }
 }

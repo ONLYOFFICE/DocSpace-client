@@ -1,0 +1,334 @@
+{
+  "key_path": "LdapLoginAttributeTooltip",
+  "content": "Enter the object attribute corresponding to the user login.",
+  "content_en_sha1_hash": "1fcfc09b860a14aaac8739b5a87b9c5db38ea390",
+  "created_at": "2025-05-19T21:30:54.233Z",
+  "updated_at": "2025-05-21T08:15:41.268Z",
+  "comment": {
+    "text": "This translation key is used to display a tooltip that explains the purpose of entering an object attribute corresponding to a user's login when configuring LDAP connection settings. It appears as part of the connection settings form and aims to provide context for users setting up their LDAP login attribute.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:08.223Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ConnectionSettings.js",
+      "line_number": 138,
+      "context": "isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.loginAttribute}\n labelText={t(\"LdapLoginAttribute\")}\n tooltipContent={t(\"LdapLoginAttributeTooltip\")}\n inlineHelpButton\n isRequired\n >\n <LdapFieldComponent\n name={LOGIN_ATTRIBUTE}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'أدخل ميزة الهدف المناسبة لتسجيل دخول المستخدم' is not a perfect translation of 'Enter the object attribute corresponding to the user login'.  'ميزة الهدف' (target feature) isn't the most accurate term for 'object attribute' in this context. It’s more about a property or characteristic.",
+          "suggestion": "أدخل الخاصية أو السمة المستخدمة لتسجيل دخول المستخدم."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the phrasing could be more natural. The current phrasing sounds slightly stiff.",
+          "suggestion": "أدخل الخاصية المستخدمة لتسجيل دخول المستخدم."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Въведете атрибута на обекта, съответстващ на потребителското име' is a literal translation but doesn't fully capture the meaning of 'login attribute'.  'Потребителското име' means username, while the English refers to the attribute *used* for login, which could be something like 'uid' or 'email'.",
+          "suggestion": "Въведете атрибута на обекта, който се използва за вход."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Εισαγάγετε το χαρακτηριστικό αντικείμενο που αντιστοιχεί στη σύνδεση του χρήστη.\" is a literal translation and doesn't flow naturally in Greek. 'χαρακτηριστικό αντικείμενο' is overly formal and not commonly used in this context. 'σύνδεση του χρήστη' is also a bit clunky.",
+          "suggestion": "Εισαγάγετε το χαρακτηριστικό που χρησιμοποιείται για τη σύνδεση του χρήστη."
+        },
+        {
+          "type": "grammatical",
+          "description": "While not strictly incorrect, the phrase 'που αντιστοιχεί στη σύνδεση' can be improved for clarity and flow.",
+          "suggestion": "Χρησιμοποιήστε το χαρακτηριστικό για τη σύνδεση"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Introduzca el atributo del objeto correspondiente al inicio de sesión del usuario' is overly literal and slightly awkward. 'Inicio de sesión' is a direct translation of 'login' but in Spanish, it's more common to use 'inicio de sesión de usuario' or simply 'inicio de sesión'.",
+          "suggestion": "Introduzca el atributo del objeto correspondiente al inicio de sesión de usuario."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Syötä objektiattribuutti, joka vastaa käyttäjätunnusta' is a bit literal and could be improved for naturalness in Finnish. 'Käyttäjätunnus' (username) is not the same as 'login attribute'.",
+          "suggestion": "Syötä käyttäjätunnuksen attribuutti."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"օգտատիրոջ\" (user's) is spelled correctly, but might be slightly verbose for a tooltip. Consider if a more concise option exists.",
+          "suggestion": "Consider using a shorter form if possible, although the current spelling is accurate."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase \"Մուտքագրել...Համապատասխան\" reads a little stiffly. It may benefit from slightly more natural phrasing for a tooltip.",
+          "suggestion": "Consider rephrasing to something like \"Մուտքագրեք օգտատիրոջ մուտքի համար օբյեկտի հատկանիշը:\" (Enter the object attribute for the user's login:)"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The term 'login dell'utente' is slightly redundant. 'Login' alone is sufficient in this context.",
+          "suggestion": "Inserisci l'attributo dell'oggetto corrispondente al login."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation is technically correct but lacks nuance. 'ກ່ຽວຂ້ອງກັບ' (related to) is a bit clunky in this context. A more natural phrasing might emphasize the attribute *used* for login.",
+          "suggestion": "ໃສ່ຄຸນລັກສະນະຂອງວັດຖຸທີ່ໃຊ້ເຂົ້າສູ່ລະບົບຂອງຜູ້ໃຊ້."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ievadiet objekta atribūtu, kas atbilst lietotāja pieteikšanās datiem' is a literal translation but could be more naturally phrased in Latvian. 'Pieteikšanās datiem' is a bit awkward here. A more fluent translation would convey the attribute used for login.",
+          "suggestion": "Ievadiet lietotāja pieteikšanās atribūtu."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Introduceți atributul de obiect care corespunde numelui de utilizator' is not a direct or ideal translation of 'Enter the object attribute corresponding to the user login.' 'Numele de utilizator' (username) is not the same as 'user login'. The intention is to specify an attribute used *for* login, not just a username.",
+          "suggestion": "Introduceți atributul obiectului folosit pentru autentificare."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ලොග්ඉන්' (log in) is a transliteration and might be less clear to some Sinhala speakers. Consider using a more commonly understood term.",
+          "suggestion": "පරිශීලක ලාගිනය සඳහා අදාළ වස්තුවෙහි ගුණාංගය ඇතුළත් කරන්න."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure could be slightly improved for better flow. While understandable, it's a bit clunky.",
+          "suggestion": "පරිශීලක ලාගිනය සඳහා භාවිතා වන වස්තුවෙහි ගුණාංගය ඇතුළත් කරන්න."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Zadajte atribút objektu zodpovedajúci prihlasovaciemu menu používateľa' is not an accurate translation of 'Enter the object attribute corresponding to the user login.' The term 'prihlasovaciemu menu' translates to 'login menu,' which isn't the intended meaning. The attribute *used for* login is meant, not a menu.",
+          "suggestion": "Zadajte atribút objektu, ktorý sa používa na prihlásenie používateľa."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Vnesi atribut objekta, ki ustreza uporabniški prijavi' is a bit literal and could be improved for clarity and flow. 'Ustreza' (corresponds) might not be the most natural choice in this context.",
+          "suggestion": "Vnesi atribut objekta za uporabniško prijavo."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the phrase 'uporabniški prijavi' is in the dative case.  Using the nominative 'uporabniška prijava' might read more naturally.",
+          "suggestion": "Vnesi atribut objekta za uporabniško prijavo."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Унесите атрибут објекта који одговара корисничкој пријави.' is a literal translation but sounds unnatural in Serbian. 'Корисничкој пријави' isn't the most common phrasing for 'user login' in this context. A more natural phrasing would use a term related to 'user identification' or 'login ID'.",
+          "suggestion": "Унесите атрибут објекта који одговара корисничкој идентификацији."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the sentence is grammatically correct, 'који одговара' is a bit clunky. A simpler phrasing would improve readability.",
+          "suggestion": "Унесите атрибут објекта за корисникову пријаву."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Unesite atribut objekta koji odgovara korisničkoj prijavi.\" is a bit literal and could be improved for better flow and clarity in Serbian. 'Prijavi' is less commonly used than 'prijavi' (dative case) in this context.",
+          "suggestion": "Unesite atribut objekta koji odgovara korisničkoj priavi."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content \"Enter the object attribute corresponding to the user login\" implies a specific LDAP attribute used for login. The Vietnamese translation \"Nhập thuộc tính đối tượng tương ứng với thông tin đăng nhập của người dùng\" is too general and doesn't convey the same nuance. It translates to 'Enter the object attribute corresponding to user login information'.",
+          "suggestion": "Nhập thuộc tính đối tượng được sử dụng để đăng nhập của người dùng."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

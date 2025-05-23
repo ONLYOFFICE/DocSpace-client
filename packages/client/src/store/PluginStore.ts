@@ -551,7 +551,9 @@ class PluginStore {
               : true;
 
             const correctSecurity = item.security
-              ? item.security.every((key: string) => security?.[key])
+              ? item.security.every(
+                  (key: string) => security?.[key as keyof typeof security],
+                )
               : true;
 
             if (
@@ -578,7 +580,9 @@ class PluginStore {
               : true;
 
             const correctSecurity = item.security
-              ? item.security.every((key: string) => security?.[key])
+              ? item.security.every(
+                  (key: string) => security?.[key as keyof typeof security],
+                )
               : true;
 
             if (correctUserType && correctDevice && correctSecurity)
@@ -600,7 +604,9 @@ class PluginStore {
               : true;
 
             const correctSecurity = item.security
-              ? item.security.every((key: string) => security?.[key])
+              ? item.security.every(
+                  (key: string) => security?.[key as keyof typeof security],
+                )
               : true;
 
             if (correctUserType && correctDevice && correctSecurity)
@@ -626,7 +632,9 @@ class PluginStore {
               : true;
 
             const correctSecurity = item.security
-              ? item.security.every((key: string) => security?.[key])
+              ? item.security.every(
+                  (key: string) => security?.[key as keyof typeof security],
+                )
               : true;
 
             if (
@@ -653,7 +661,9 @@ class PluginStore {
               : true;
 
             const correctSecurity = item.security
-              ? item.security.every((key: string) => security?.[key])
+              ? item.security.every(
+                  (key: string) => security?.[key as keyof typeof security],
+                )
               : true;
 
             if (correctUserType && correctDevice && correctSecurity)
@@ -675,7 +685,9 @@ class PluginStore {
             : true;
 
           const correctSecurity = item.security
-            ? item.security.every((key: string) => security?.[key])
+            ? item.security.every(
+                (key: string) => security?.[key as keyof typeof security],
+              )
             : true;
 
           if (correctUserType && correctDevice && correctSecurity)

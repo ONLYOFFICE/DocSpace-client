@@ -48,6 +48,7 @@ const StyledBody = styled.div`
 
   .portal-unavailable_container {
     .portal-unavailable_contact-text {
+      display: block;
       text-decoration: underline;
       cursor: pointer;
       margin-top: 26px;

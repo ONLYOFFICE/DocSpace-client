@@ -1,0 +1,256 @@
+{
+  "key_path": "RepeatInvitation",
+  "content": "Repeat invitation",
+  "content_en_sha1_hash": "478aa7782da483f4ed5158c15cf5ef9cae159576",
+  "created_at": "2025-05-19T21:30:47.863Z",
+  "updated_at": "2025-05-22T11:56:37.612Z",
+  "comment": {
+    "text": "This translation key is used to display a repeated invitation message. It appears on a button icon that can be clicked to send another invitation to a user when an existing one has been sent. Translators should provide a phrase that conveys the idea of sending a repeat request.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:43.534Z"
+  },
+  "usage": [
+    {
+      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\Members\\User.js",
+      "line_number": 267,
+      "context": "<Text className=\"title\">{user.displayName}</Text>\n \n {showInviteIcon ? (\n <IconButton\n className=\"icon\"\n title={t(\"Common:RepeatInvitation\")}\n iconName={EmailPlusReactSvgUrl}\n isFill\n onClick={onRepeatInvitation}\n size={16}\n />",
+      "module": "\\packages\\client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Dəvəti təkrarlayın\" literally translates to 'Repeat the invitation.' While understandable, it's not the most natural way to express 'Repeat invitation' in Azerbaijani. A more appropriate translation would convey the meaning of sending the invitation again.",
+          "suggestion": "Consider 'Zəhmət olmasa, dəvəti yenidən göndərin' (Please resend the invitation) or 'Dəvəti təkrar edin' (Repeat the invitation - slightly more formal and less literal)."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Повторете поканата\" is technically a possible translation of \"Repeat invitation,\" it implies a command ('Repeat the invitation'). A more accurate and natural translation might convey the meaning of a repeated invitation, rather than instructing someone to repeat it.",
+          "suggestion": "Повторна покана"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Toista kutsu\" is technically a literal translation of 'Repeat invitation', it's not the most natural or idiomatic way to express this in Finnish. It sounds slightly awkward.",
+          "suggestion": "A more natural translation would be 'Uusi kutsu' (New invitation) or 'Toinen kutsu' (Second invitation), depending on the exact nuance desired."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Renouveler l’invitation\" is a valid translation, it implies *renewing* an invitation, rather than a simple *repeat* invitation. A more direct translation for 'Repeat invitation' would be 'Invitation répétée'.",
+          "suggestion": "Invitation répétée"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'もう一度招待する' (mou ichido shoutai suru) literally translates to 'invite again'. While close to 'repeat invitation', it lacks the nuance of implying a previous, failed invitation. A more accurate translation, considering the context of a repeated invitation, might be something like '再招待' (sai shoutai) which means 're-invitation', or '再度のご招待' (sadaigo no go shoutai) which means 'a second invitation'.",
+          "suggestion": "Consider '再招待' (sai shoutai) or '再度のご招待' (sadaigo no go shoutai)"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ආරාධනය නැවතත්' while literally meaning 'Invitation again,' doesn't quite convey the nuance of 'Repeat invitation.' A better translation would emphasize the repeated nature of the invitation.",
+          "suggestion": "Consider alternatives like 'නැවත ආරාධනය කිරීම' (Repeat invitation making) or 'ආරාධනාවේ නැවතීම' (Reiteration of the invitation)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Понови позивницу' translates more closely to 'Renew invitation' or 'Re-send invitation' rather than 'Repeat invitation'. While 'repeat' can be interpreted as 'renew' or 're-send' in some contexts, it's not the most natural translation.",
+          "suggestion": "Consider alternatives like 'Поновите позивницу' (Repeat the invitation - more literal, but less idiomatic), or 'Пошаљите још једном позивницу' (Send the invitation again) which convey the intended meaning more accurately depending on the specific function."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Daveti tekrarla\" literally translates to \"Repeat the invitation.\" While understandable, it's not the most natural way to express \"Repeat invitation\" in Turkish. It implies an instruction, rather than the concept of an invitation being repeated.",
+          "suggestion": "Consider alternatives like \"Tekrarlayan davet\" (Repeating invitation) or \"Davet tekrarı\" (Invitation repetition)."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

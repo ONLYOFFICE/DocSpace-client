@@ -1,4 +1,5 @@
 {
+  "ChangePasswordSuccess": "Şifre başarıyla değiştirildi",
   "CodeTitle": "Kod tarafınıza e-posta olarak gönderildi",
   "ErrorInvalidText": "10 saniye içinde <1>{{productName}}</1> yönlendirileceksiniz",
   "ForgotPassword": "Şifrenizi mi unuttunuz?",
@@ -18,6 +19,5 @@
   "RememberHelper": "Varsayılan oturum ömrü 20 dakikadır. 1 yıla ayarlamak için bu seçeneği işaretleyin. Kendi sürenizi ayarlamak için Ayarlar'a gidin.",
   "SignInLDAP": "Şurada oturum açın: {{ldap_domain}}",
   "SignInLdapHelper": "Kurumsal alan için kimlik bilgilerini kullanın",
-  "UserIsAlreadyRegistered": "Kullanıcı <1>{{email}}</1> bu {{productName}}'e zaten kayıtlı, şifrenizi girin veya başka bir e-posta ile devam etmek için geri dönün.",
-  "ChangePasswordSuccess": "Şifre başarıyla değiştirildi"
+  "UserIsAlreadyRegistered": "Kullanıcı <1>{{email}}</1> bu {{productName}}'e zaten kayıtlı, şifrenizi girin veya başka bir e-posta ile devam etmek için geri dönün."
 }

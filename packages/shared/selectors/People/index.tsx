@@ -57,7 +57,7 @@ import { globalColors } from "../../themes";
 import { isNextImage } from "../../utils/typeGuards";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
-import { StyledSendClockIcon } from "./PeopleSelector.styled";
+import StyledSendClockIcon from "./components/SendClockIcon";
 
 const PEOPLE_TAB_ID = "0";
 const GROUP_TAB_ID = "1";

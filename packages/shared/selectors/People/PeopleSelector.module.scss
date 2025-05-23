@@ -24,17 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+@import "../../styles/variables/devices.scss";
+@import "../../styles/variables/_colors.scss";
+@import "../../styles/_mixins.scss";
 
-import SendClockIcon from "PUBLIC_DIR/images/send.clock.react.svg";
+:root {
+  --accounts-badges-pending-color: #{$gray};
+}
 
-import { commonIconsStyles } from "../../utils";
+:root[data-theme="dark"] {
+  --accounts-badges-pending-color: #{$gray-dark};
+}
 
-export const StyledSendClockIcon = styled(SendClockIcon)`
+.sendClockIcon {
   min-width: 12px;
+  overflow: hidden;
+  vertical-align: middle;
 
-  ${commonIconsStyles}
   path {
-    fill: ${(props) => props.theme.accountsBadges.pendingColor};
+    fill: var(--accounts-badges-pending-color);
   }
-`;
+}

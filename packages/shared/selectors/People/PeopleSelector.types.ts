@@ -43,6 +43,7 @@ export interface UserTooltipProps {
   label: string;
   email: string;
   position: string;
+  className?: string;
 }
 
 export type ContactsSelectorGroups =

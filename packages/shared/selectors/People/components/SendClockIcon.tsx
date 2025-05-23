@@ -25,53 +25,18 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTheme } from "styled-components";
-import { Avatar, AvatarRole, AvatarSize } from "../../../components/avatar";
-import { Text } from "../../../components/text";
+import classNames from "classnames";
+import SendClockIcon from "PUBLIC_DIR/images/send.clock.react.svg";
+import styles from "../PeopleSelector.module.scss";
 
-import StyledUserTooltip from "../PeopleSelector.styled";
-import { UserTooltipProps } from "../PeopleSelector.types";
+interface SendClockIconProps {
+  className?: string;
+}
 
-const UserTooltip = ({
-  avatarUrl,
-  label,
-  email,
-  position,
-}: UserTooltipProps) => {
-  const theme = useTheme();
-
+const StyledSendClockIcon: React.FC<SendClockIconProps> = ({ className }) => {
   return (
-    <StyledUserTooltip>
-      <div className="block-avatar">
-        <Avatar
-          className="user-avatar"
-          size={AvatarSize.min}
-          role={AvatarRole.user}
-          source={avatarUrl}
-          userName=""
-          editing={false}
-        />
-      </div>
-
-      <div className="block-info">
-        <Text isBold fontSize="13px" fontWeight={600} truncate title={label}>
-          {label}
-        </Text>
-        <Text
-          color={theme.peopleSelector.textColor}
-          fontSize="13px"
-          className="email-text"
-          truncate
-          title={email}
-        >
-          {email}
-        </Text>
-        <Text fontSize="13px" fontWeight={600} truncate title={position}>
-          {position}
-        </Text>
-      </div>
-    </StyledUserTooltip>
+    <SendClockIcon className={classNames(styles.sendClockIcon, className)} />
   );
 };
 
-export default UserTooltip;
+export default StyledSendClockIcon;

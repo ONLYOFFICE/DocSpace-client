@@ -51,6 +51,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: process.env.TS_ERRORS_IGNORE === "true",
   },
+  serverExternalPackages: ["nconf"],
   compiler: {
     styledComponents: true,
   },

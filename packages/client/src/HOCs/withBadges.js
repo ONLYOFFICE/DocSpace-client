@@ -172,6 +172,7 @@ export default function withBadges(WrappedComponent) {
         isTemplatesFolder,
         isExtsCustomFilter,
         docspaceManagingRoomsHelpUrl,
+        onFillingStatus,
       } = this.props;
       const { fileStatus, access, mute } = item;
 
@@ -217,6 +218,7 @@ export default function withBadges(WrappedComponent) {
           isTemplatesFolder={isTemplatesFolder}
           isExtsCustomFilter={isExtsCustomFilter}
           customFilterExternalLink={docspaceManagingRoomsHelpUrl}
+          openFillingStatus={onFillingStatus}
           newFilesBadge={
             <NewFilesBadge
               className="tablet-badge"
@@ -248,6 +250,7 @@ export default function withBadges(WrappedComponent) {
         userStore,
         settingsStore,
         filesSettingsStore,
+        contextOptionsStore,
       },
       { item },
     ) => {
@@ -266,6 +269,9 @@ export default function withBadges(WrappedComponent) {
         checkAndOpenLocationAction,
         onCreateRoomFromTemplate,
       } = filesActionsStore;
+
+      const { onFillingStatus } = contextOptionsStore;
+
       const {
         isTabletView,
         isDesktopClient,
@@ -315,6 +321,7 @@ export default function withBadges(WrappedComponent) {
         onCreateRoomFromTemplate,
         isExtsCustomFilter,
         docspaceManagingRoomsHelpUrl,
+        onFillingStatus,
       };
     },
   )(observer(WithBadges));

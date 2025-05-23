@@ -110,3 +110,13 @@
   border-radius: 11px;
   border: var(--files-badges-border);
 }
+
+.openFillingStatus {
+  cursor: pointer;
+  text-decoration: underline dotted;
+  text-underline-offset: 2px;
+}
+
+.errorAbsentPerson svg path {
+  fill: var(--warning-color) !important;
+}

@@ -87,6 +87,7 @@ export type BadgesProps = {
   className?: string;
   isExtsCustomFilter?: boolean;
   customFilterExternalLink?: string;
+  openFillingStatus?: (item: ItemData) => void;
 };
 
 export type BadgeWrapperProps = {

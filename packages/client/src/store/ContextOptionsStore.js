@@ -698,7 +698,7 @@ class ContextOptionsStore {
   };
 
   onFillingStatus = (item) => {
-    console.log(item);
+    this.filesStore.setBufferSelection(item);
     this.dialogsStore.setFillingStatusPanelVisible(true);
   };
 

@@ -1,5 +1,6 @@
 {
   "About": "About",
+  "AbsentPersonTooltip": "Absent person's turn in the room",
   "AboutCompanyTitle": "About this program",
   "AccessDenied": "Access denied",
   "Accesses": "Accesses",
@@ -463,6 +464,7 @@
   "OverwriteDescription": "The new file will replace the existing one as a new version.",
   "OverwriteTitle": "Overwrite with version update",
   "Owner": "Owner",
+  "OpenFillingStatus": "Open Filling status",
   "PageOfTotalPage": "{{page}} of {{totalPage}}",
   "Paid": "Paid",
   "Password": "Password",

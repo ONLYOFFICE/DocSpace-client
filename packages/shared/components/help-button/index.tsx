@@ -24,87 +24,96 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { forwardRef } from "react";
+import type { TooltipRefProps } from "react-tooltip";
+
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg";
+
 import { classNames } from "../../utils";
 import { IconButton } from "../icon-button";
 import { Tooltip } from "../tooltip";
-import { HelpButtonProps } from "./HelpButton.types";
 
-const HelpButton = (props: HelpButtonProps) => {
-  const {
-    id,
-    className = "icon-button",
-    iconName,
-    size = 12,
-    color,
-    dataTip,
-    getContent,
-    place,
-    offset,
-    style,
-    afterShow,
-    afterHide,
-    tooltipMaxWidth,
-    tooltipContent,
-    openOnClick = true,
-    isClickable = true,
-    children,
-    isOpen,
-    noUserSelect,
-  } = props;
+import type { HelpButtonProps } from "./HelpButton.types";
 
-  const uniqueId = React.useId();
-  const ref = React.useRef(null);
+const HelpButton = forwardRef<TooltipRefProps, HelpButtonProps>(
+  (props, ref) => {
+    const {
+      id,
+      className = "icon-button",
+      iconName,
+      size = 12,
+      color,
+      dataTip,
+      getContent,
+      place,
+      offset,
+      style,
+      afterShow,
+      afterHide,
+      tooltipMaxWidth,
+      tooltipContent,
+      openOnClick = true,
+      isClickable = true,
+      children,
+      isOpen,
+      noUserSelect,
+    } = props;
 
-  const currentId = id || uniqueId;
+    const uniqueId = React.useId();
 
-  const anchorSelect = children
-    ? `div[id='${currentId}']`
-    : `div[id='${currentId}'] svg`;
+    const currentId = id || uniqueId;
 
-  const componentClass = classNames(className, "help-icon");
+    const anchorSelect = children
+      ? `div[id='${currentId}']`
+      : `div[id='${currentId}'] svg`;
 
-  const tooltipProps = {
-    clickable: true,
-    openOnClick,
-    place: place || "top",
-    offset,
-    afterShow,
-    afterHide,
-    maxWidth: tooltipMaxWidth,
-    anchorSelect,
-    isOpen,
-    noUserSelect,
-  };
+    const componentClass = classNames(className, "help-icon");
 
-  return (
-    <div ref={ref} style={style} data-testid="help-button">
-      {children ? (
-        <div id={currentId} className={componentClass}>
-          {children}
-        </div>
-      ) : (
-        <IconButton
-          id={currentId}
-          className={componentClass}
-          isClickable={isClickable}
-          iconName={iconName}
-          iconNode={<InfoReactSvgUrl />}
-          size={size}
-          color={color}
-          data-for={currentId}
-          dataTip={dataTip}
-        />
-      )}
+    const tooltipProps = {
+      clickable: true,
+      openOnClick,
+      place: place || "top",
+      offset,
+      afterShow,
+      afterHide,
+      maxWidth: tooltipMaxWidth,
+      anchorSelect,
+      isOpen,
+      noUserSelect,
+    };
 
-      {getContent ? (
-        <Tooltip {...tooltipProps} getContent={getContent} />
-      ) : tooltipContent ? (
-        <Tooltip {...tooltipProps}>{tooltipContent}</Tooltip>
-      ) : null}
-    </div>
-  );
-};
+    return (
+      <div style={style} data-testid="help-button">
+        {children ? (
+          <div id={currentId} className={componentClass}>
+            {children}
+          </div>
+        ) : (
+          <IconButton
+            id={currentId}
+            className={componentClass}
+            isClickable={isClickable}
+            iconName={iconName}
+            iconNode={<InfoReactSvgUrl />}
+            size={size}
+            color={color}
+            data-for={currentId}
+            dataTip={dataTip}
+          />
+        )}
+
+        {getContent ? (
+          <Tooltip ref={ref} {...tooltipProps} getContent={getContent} />
+        ) : tooltipContent ? (
+          <Tooltip ref={ref} {...tooltipProps}>
+            {tooltipContent}
+          </Tooltip>
+        ) : null}
+      </div>
+    );
+  },
+);
+
+HelpButton.displayName = "HelpButton";
 
 export { HelpButton };

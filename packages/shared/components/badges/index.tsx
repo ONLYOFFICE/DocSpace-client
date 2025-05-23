@@ -26,7 +26,8 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React, { useMemo, useState } from "react";
+import type { TooltipRefProps } from "react-tooltip";
+import React, { useMemo, useRef, useState } from "react";
 
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
@@ -42,6 +43,7 @@ import CustomFilter16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.
 
 import { isMobile as isMobileDevice } from "react-device-detect";
 
+import { HelpButton } from "@docspace/shared/components/help-button";
 import { FILLING_FORM_STATUS_COLORS } from "@docspace/shared/constants";
 import {
   classNames,
@@ -116,6 +118,8 @@ const Badges = ({
   isTemplatesFolder,
   onCreateRoom,
   newFilesBadge,
+  openFillingStatus,
+
   className,
   isExtsCustomFilter,
   customFilterExternalLink,
@@ -135,6 +139,8 @@ const Badges = ({
     security,
     // startFilling,
   } = item;
+
+  const tooltipRef = useRef<TooltipRefProps>(null);
 
   const isTile = viewAs === "tile";
 
@@ -167,6 +173,8 @@ const Badges = ({
     sizeBadge === "medium"
       ? CustomFilter16ReactSvgUrl
       : CustomFilter12ReactSvgUrl;
+
+  const helpButtonSize = sizeBadge === "medium" ? 16 : 12;
 
   const unpinIconProps = {
     "data-id": id,
@@ -256,6 +264,12 @@ const Badges = ({
     [styles.tileView]: viewAs === "tile",
   });
 
+  const onOpenFillingStatus = (event: React.MouseEvent<Element>) => {
+    event.stopPropagation();
+    openFillingStatus?.(item);
+    tooltipRef.current?.close();
+  };
+
   return fileExst ? (
     <div
       className={classNames(
@@ -290,6 +304,34 @@ const Badges = ({
           />
         </BadgeWrapper>
       ) : null}
+
+      <BadgeWrapper isTile={isTile}>
+        <HelpButton
+          ref={tooltipRef}
+          size={helpButtonSize}
+          className={classNames("badge", styles.errorAbsentPerson)}
+          tooltipContent={
+            <>
+              <Text fontSize="12px" lineHeight="16px" fontWeight={400} noSelect>
+                {t("Common:AbsentPersonTooltip")}
+              </Text>
+              <Text
+                onClick={onOpenFillingStatus}
+                className={styles.openFillingStatus}
+                fontSize="13px"
+                lineHeight="15px"
+                isBold
+                fontWeight={400}
+                noSelect
+              >
+                {t("Common:OpenFillingStatus")}
+              </Text>
+            </>
+          }
+          place="right"
+          offset={8}
+        />
+      </BadgeWrapper>
 
       {hasDraft ? (
         <BadgeWrapper isTile={isTile}>

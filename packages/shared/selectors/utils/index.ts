@@ -134,8 +134,6 @@ const isDisableFolder = (
   disabledItems: (number | string)[],
   filterParam?: string | number,
 ) => {
-  if (!folder.security.Create) return true;
-
   return filterParam ? false : disabledItems?.includes(folder.id);
 };
 

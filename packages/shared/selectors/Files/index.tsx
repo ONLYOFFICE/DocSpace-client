@@ -40,17 +40,21 @@ import { Portal } from "../../components/portal";
 import { toastr } from "../../components/toast";
 import { TBreadCrumb } from "../../components/selector/Selector.types";
 
+import useRoomsHelper from "../utils/hooks/useRoomsHelper";
+import useSocketHelper from "../utils/hooks/useSocketHelper";
+
 import useFilesHelper from "./hooks/useFilesHelper";
-import useRoomsHelper from "./hooks/useRoomsHelper";
 import useRootHelper from "./hooks/useRootHelper";
-import useSocketHelper from "./hooks/useSocketHelper";
 import useSelectorBody from "./hooks/useSelectorBody";
 import useSelectorState from "./hooks/useSelectorState";
 
 import { FilesSelectorProps } from "./FilesSelector.types";
-import { SettingsContextProvider } from "./contexts/Settings";
-import { LoadersContext, LoadersContextProvider } from "./contexts/Loaders";
-import { getDefaultBreadCrumb } from "./FilesSelector.utils";
+import { SettingsContextProvider } from "../utils/contexts/Settings";
+import {
+  LoadersContext,
+  LoadersContextProvider,
+} from "../utils/contexts/Loaders";
+import { getDefaultBreadCrumb } from "../utils";
 
 const FilesSelectorComponent = (props: FilesSelectorProps) => {
   const {
@@ -59,6 +63,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
 
     treeFolders,
     onSetBaseFolderPath,
+    roomType,
     isUserOnly,
     isRoomsOnly,
     openRoot,
@@ -190,6 +195,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     setSelectedItemSecurity,
 
     searchValue,
+    roomType,
     isRoomsOnly,
     isInit,
     withCreate,

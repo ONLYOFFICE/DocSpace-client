@@ -70,7 +70,7 @@ const StopFillingDialog = ({
       <ModalDialog.Footer>
         <Button
           id="stop-filling-dialog_submit"
-          key="OkButton"
+          key="OKButton"
           label={t("Common:StopFilling")}
           size={ButtonSize.normal}
           primary

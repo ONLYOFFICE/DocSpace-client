@@ -7,7 +7,7 @@
   "ChangeGuestsTypeToManager": "Vieras <strong>{{userName}}</strong> siirretään {{membersSection}} osioon ja hänelle määrätään <strong>'{{ secondType }}'</strong> tyyppi. Huoneen pääkäyttäjät voivat luoda ja hallita heille määrättyjä huoneita, kutsua uusia käyttäjiä ja määrätä huoneen pääkäyttäjän ja sen alla olevia rooleja. Huoneen pääkäyttäjillä on pääsy {{documentsSection}} -osioon.",
   "ChangeGuestsTypeToManagerMulti": "Valitut vieraat siirretään {{membersSection}}-osioon ja heille määrätään <strong>'{{ secondType }}'</strong> tyyppi. Huoneen pääkäyttäjät voivat luoda ja hallita heille määrättyjä huoneita, kutsua uusia käyttäjiä ja määrätä huoneen pääkäyttäjän ja sen alla olevia rooleja. Huoneen pääkäyttäjillä on pääsy {{documentsSection}} -osioon.",
   "ChangeUserTypeButton": "Vaihda tyyppiä",
-  "ChangeUserTypeMessage": "Käyttäjät, joiden tyyppi on <strong>’{{firstType}}’</strong>, siirretään tyypiksi <strong>’{{secondType}}’</strong>.",
+  "ChangeUserTypeMessage": "Käyttäjät, joiden tyyppi on <strong>’{{ firstType }}’</strong>, siirretään tyypiksi <strong>’{{ secondType }}’</strong>.",
   "ChangeUserTypeNote": "<1>Huom:</1> et voi muuttaa {{productName}} :n pääkäyttäjän ja omaa tyyppiäsi.",
   "DataReassignmentInfo": "Tämän käyttäjän luomat huoneet määrätään automaattisesti sinulle. Määrätäksesi huoneet uudelleen, klikkaa alla olevaa linkkiä.",
   "DataReassignmentWithFilesDeletion": "Kaikki tämän yhteyden luomat jaetut tiedostot <1>määrätään automaattisesti sinulle 30 päivän kuluessa</1>. Määrätäksesi huoneet/jaetut tiedostot toiselle henkilölle, klikkaa alla olevaa linkkiä. ",

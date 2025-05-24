@@ -1,0 +1,450 @@
+{
+  "key_path": "LdapUserQuotaTooltip",
+  "content": "To set a storage quota for user, add an attribute in the LDAP directory (for example, UsersQuotaLimit) and enter an integer value for this attribute. It will display the quota value in bytes. Here, specify the attribute name only. This attribute will be applied only during the first setup and can be later changed manually in the {{contactsName}} section.",
+  "content_en_sha1_hash": "7daa3230a2e4d6ba298be6e8080a39fae3c263a7",
+  "created_at": "2025-05-19T21:30:54.335Z",
+  "updated_at": "2025-05-21T07:57:10.554Z",
+  "comment": {
+    "text": "This translation key is used to provide a tooltip explaining how to set a storage quota for a user in an LDAP directory. It appears as part of a form element where users can input an attribute value, and it helps clarify the purpose of this action.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:55.269Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
+      "line_number": 212,
+      "context": "style={FIELD_STYLE}\n isVertical\n labelVisible\n hasError={errors.userQuotaLimit}\n labelText={t(\"LdapQuota\")}\n tooltipContent={t(\"LdapUserQuotaTooltip\", {\n contactsName: t(\"Common:Contacts\"),\n })}\n inlineHelpButton\n >\n <TextInput",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation includes parentheses around 'UsersQuotaLimit' similar to the English. While technically correct, it might be stylistically better to remove the parentheses if the local style guide prefers a more direct phrasing.",
+          "suggestion": "Consider removing parentheses: ...خاصية (على سبيل المثال، UsersQuotaLimit) -> ...خاصية على سبيل المثال، UsersQuotaLimit"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'بايتات' (bytes) is technically correct, it's preferable to use the more commonly used 'بايت' for a singular form in this context, as it's referring to a value. Although the correct usage of bytes is important, the local dialect might prefer a more streamlined expression.",
+          "suggestion": "Replace 'بايتات' with 'بايت' in 'سيتم عرض قيمة الحصة بالبايتات' to read 'سيتم عرض قيمة الحصة بالبايت'."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Bu funksiya yalnız ilkin quraşdırma zamanı həyata keçiriləcək\" translates literally to 'This function will be implemented only during initial setup'. A more accurate and natural translation would be something like \"Bu xüsusiyyət yalnız ilkin quraşdırma zamanı tətbiq ediləcək\" or \"Bu parametr yalnız ilkin quraşdırma zamanı tətbiq edilir\". The original English indicates the *attribute* is applied, not the function itself.",
+          "suggestion": "Bu xüsusiyyət yalnız ilkin quraşdırma zamanı tətbiq ediləcək."
+        },
+        {
+          "type": "formatting",
+          "description": "The term 'funksiya' is somewhat technical and might be better replaced with a more accessible term like 'xüsusiyyət' (feature) or 'parametr' (parameter) to align with the technical context.",
+          "suggestion": "Consider using 'xüsusiyyət' or 'parametr' instead of 'funksiya'."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Bulgarian translation includes parenthesis and example 'UsersQuotaLimit' within the sentence. This is acceptable but could be improved for better flow and readability by rephrasing. Consider making it a separate sentence.",
+          "suggestion": "За да зададете потребителска квота за съхранение, добавете атрибут в LDAP директорията. Например, UsersQuotaLimit. Въведете цяло число за този атрибут."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Той ще покаже стойността на квотата в байтове' is a bit awkward. It's technically correct, but 'Той' (He/It) isn't clear what 'It' refers to.",
+          "suggestion": "Това ще покаже стойността на квотата в байтове."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Czech translation maintains the English phrasing of including examples within parentheses. While not incorrect, it might feel slightly unnatural in Czech. Consider if rephrasing would improve readability.",
+          "suggestion": "Consider rephrasing to avoid the parenthetical example, such as: 'Chcete-li nastavit kvótu úložiště pro uživatele, přidejte atribut do adresáře LDAP a zadejte pro tento atribut celočíselnou hodnotu...'"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Zde zadejte pouze název atributu' could be slightly improved for flow. 'Zde uveďte pouze název atributu' sounds more natural.",
+          "suggestion": "Change 'Zde zadejte pouze název atributu' to 'Zde uveďte pouze název atributu'."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The word \"Quo­te\" is unnecessarily hyphenated. It should be \"Quote\".",
+          "suggestion": "Quote"
+        },
+        {
+          "type": "formatting",
+          "description": "The word \"Quote\" is unnecessarily hyphenated again. It should be \"Quote\".",
+          "suggestion": "Quote"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"μη αυτόματα\" (literally \"non-automatically\") in \"...μπορεί να αλλάξει αργότερα μη αυτόματα στην ενότητα…\" is awkward and doesn't accurately convey the meaning of 'manually'. It suggests something is actively preventing automatic changes, which isn't the intent.",
+          "suggestion": "Replace \"μη αυτόματα\" with \"με το χέρι\" (literally \"by hand\") or rephrase the sentence to something like \"...μπορεί να αλλάξει αργότερα με μη αυτόματο τρόπο στην ενότητα…\" although the former is clearer."
+        },
+        {
+          "type": "formatting",
+          "description": "The Greek translation includes the variable `{{contactsName}}` similar to the English, but it's unclear if this needs to be maintained as a variable in the Greek version for localization purposes. It needs confirmation if this variable exists in the Greek localization files.",
+          "suggestion": "Verify if `{{contactsName}}` is a valid and localized variable in the Greek version. If not, replace it with the Greek equivalent of the 'contacts' section name."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"bytes\" is translated as \"biteinä\" which is incorrect. \"Bytes\" should be translated to \"tavuina\".",
+          "suggestion": "Change \"biteinä\" to \"tavuina\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation uses Armenian script (Հայերեն) which is correct. However, consistent formatting with English (e.g., bolding, italics) is difficult to assess without knowing the context of where this tooltip will be displayed. It's recommended to ensure consistent formatting based on the UI design.",
+          "suggestion": "Review and ensure consistent formatting with the English version in the UI."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Here, specify the attribute name only\" is quite direct and slightly awkward. The Armenian translation “Այստեղ նշեք միայն հատկանիշի անունը” translates directly but could be more naturally phrased. It's a minor point, but a more fluent translation might improve the user experience.",
+          "suggestion": "Consider rephrasing \"Այստեղ նշեք միայն հատկանիշի անունը\" to a more fluent Armenian equivalent, such as “Միայն այստեղ նշեք հատկանիշի անունը” or a more context-appropriate phrasing depending on the UI flow."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase \"この属性は最初のセットアップ時にのみ適用され\" is slightly awkward. It could be rephrased for better flow.",
+          "suggestion": "この属性は初期設定時にのみ適用され"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While '初期設定' can be understood, the English \"first setup\" is more precisely translated as \"initial setup\" or \"first-time setup\".",
+          "suggestion": "この属性は初回設定時にのみ適用され"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase \"이 속성에 대한 정수 값을 입력하세요\" is slightly awkward and could be improved for flow. It directly translates to 'enter an integer value for this attribute,' which feels stiff in Korean.",
+          "suggestion": "이 속성에 정수 값을 입력하세요 (Enter an integer value for this attribute)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase '할당량이 바이트 단위로 표시됩니다' translates literally to 'the quota is displayed in bytes'.  While technically correct, a more natural and user-friendly phrasing would be \"할당량은 바이트 단위로 표시됩니다.\" (The quota is displayed in bytes). The omission of the particle '은' makes it sound less natural.",
+          "suggestion": "할당량은 바이트 단위로 표시됩니다."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ບຸລິມູນຄຸນນະພາບ' (burimun khunnaphap) is not the correct translation for 'directory'. It's more like 'properties' or 'attributes'.",
+          "suggestion": "ບຸລິມູນຄຸນນະພາບຄວນຖືກແກ້ໄຂເປັນ 'ສາ director ເອກະ' ຫຼື 'ເອກະສາ director' (sakha director / ekasath director) "
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'ມັນຈະສະແດງຄ່າຈຳນວນທີ່ກ່ຽວຂ້ອງໃນໄບต์' feels slightly awkward.  The word 'ທີ່ກ່ຽວຂ້ອງ' (thi kiao khong) doesn't flow naturally.",
+          "suggestion": "ມັນຈະສະແດງຄ່າຈຳນວນໃນໄບต์"
+        },
+        {
+          "type": "formatting",
+          "description": "The variable {{contactsName}} is not surrounded by correct Laotian punctuation. While technically not incorrect, it can be improved for consistency.",
+          "suggestion": "ພາກສ່ວນ {{contactsName}} ຕໍ່ມາ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'baitoš' should be 'baitos'. It's a grammatical error, the correct plural form in this context is 'baitos'.",
+          "suggestion": "baitos"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'Geef hier alleen de naam van het attribuut op' is a bit abrupt and could be phrased more smoothly. It could be perceived as demanding.",
+          "suggestion": "Geef hier alleen de naam van het attribuut op, bijvoorbeeld UsersQuotaLimit."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'eerste installatie' is a somewhat clunky translation of 'first setup'.  It implies a complete system installation, not just the initial configuration of a feature.",
+          "suggestion": "eerste configuratie"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Polish translation includes \"dany atrybut\" which is a bit repetitive. It's better to simplify the phrasing.",
+          "suggestion": "Aby skonfigurować limit pamięci dla użytkownika, dodaj atrybut w katalogu LDAP (np. UsersQuotaLimit) i wpisz wartość całkowitą dla tego atrybutu. Wartość limitu zostanie wyświetlona w bajtach. Tutaj określ wyłącznie nazwę atrybutu. Atrybut zostanie zastosowany tylko podczas pierwszej konfiguracji i może później zostać zmieniony ręcznie w ustawieniach {{contactsName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'To set a storage quota for user' is translated as 'Pentru stabilirea cotei de stocare pentru acest utilizator'. While understandable, it's slightly less natural. A more idiomatic translation would be 'Pentru a stabili cota de stocare pentru utilizator'.",
+          "suggestion": "Pentru a stabili cota de stocare pentru utilizator"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'It will display the quota value in bytes' is translated as 'Cota va fi afișată în octeți'. 'Octeți' is technically correct, but 'bytes' could be more accessible to a broader audience. Consider adding a clarifying note for non-technical users or using a more common term.",
+          "suggestion": "Cota va fi afișată în bytes (octeți)."
+        },
+        {
+          "type": "formatting",
+          "description": "The original English uses a double curly brace for the variable `{{contactsName}}`. The Romanian translation also uses double curly braces. Maintain consistency.",
+          "suggestion": "No change needed, maintain double curly braces."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'පරිශීලකයෙකු' (parishiilakayeku) is a bit formal. A more common and approachable term for 'user' could be used.",
+          "suggestion": "පරිශීලකයා (parishiilakayaa) or යොජකයෙකු (yojakayeku)"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence 'මෙහි, ගුණාංගයේ නම පමණක් සඳහන් කරන්න' sounds a bit abrupt. Adding a connecting phrase would improve flow.",
+          "suggestion": "මෙම කොටසේ, ගුණාංගයේ නම පමණක් සඳහන් කරන්න."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly an error, consistent use of punctuation would enhance readability. Specifically, a full stop or comma could be added after the word 'උදාහරණයක්' (udaharayanak).",
+          "suggestion": "LDAP නාමාවලියේ (උදාහරණයක් ලෙස, UsersQuotaLimit), ගුණාංගයක් එක් කරන්න."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation includes Cyrillic characters, which may not be rendered correctly in all systems. Consider providing a Latin transliteration if broader compatibility is needed.",
+          "suggestion": "Consider providing a Latin transliteration alongside the Cyrillic version."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase \"Да бисте поставили складишну квоту за корисника\" could be slightly improved for better flow. 'Da biste podesili...' might be more natural.",
+          "suggestion": "Да бисте подесили складишну квоту за корисника"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'direktorijum' is a less common spelling. 'Репозиторијум' or 'фолдер' would be more understandable in this context.",
+          "suggestion": "direktorijum -> repozitorijum or folder"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence 'Kvota će se prikazivati u bajtovima' is grammatically correct but slightly awkward. A more natural phrasing would be 'Kvota će biti prikazana u bajtovima.'",
+          "suggestion": "Kvota će se prikazivati u bajtovima -> Kvota će biti prikazana u bajtovima"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'özellik' is repeated multiple times. While grammatically correct, it could be slightly improved for readability.",
+          "suggestion": "Consider using synonyms like 'nitelik' or rephrasing to avoid repetition. For example: 'Kullanıcı için bir depolama kotası ayarlamak için, LDAP dizinine bir nitelik ekleyin (örneğin, UsersQuotaLimit) ve bu nitelik için bir tamsayı değeri girin.'"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'Kota değerini bayt cinsinden gösterecektir' is slightly awkward.  It is passive voice and could be more direct.",
+          "suggestion": "Rephrase to something like: 'Kota değeri bayt cinsinden gösterilecektir.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"лиши ім'я атрибута\" is an awkward and inaccurate translation of \"Here, specify the attribute name only.\" It should be more natural-sounding Ukrainian.",
+          "suggestion": "Тут вкажіть лише назву атрибута."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a space before the quote marks surrounding the section name \"{{contactsName}}\". This might be inconsistent with other localized content. While not strictly wrong, it's a detail to consider.",
+          "suggestion": "Remove the space before the quote marks: розділі «{{contactsName}}» becomes розділі{{contactsName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'Ở đây, chỉ cần chỉ ra tên thuộc tính.' is slightly awkward and could be improved for better flow.",
+          "suggestion": "Ở đây, vui lòng chỉ định tên thuộc tính."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"要为用户设置存储配额\" is a bit formal. A more natural phrasing might be \"要为用户设定存储空间限制\".",
+          "suggestion": "要为用户设定存储空间限制"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'attribute' is translated as '属性'. While technically correct, in this context a more accessible and natural term could be considered.",
+          "suggestion": "属性 (consider using a more colloquial term depending on the target audience)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase '请在此处仅指定属性名称' is somewhat stiff. A more natural way to phrase this would be '只在此处填写属性名称'.",
+          "suggestion": "只在此处填写属性名称"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

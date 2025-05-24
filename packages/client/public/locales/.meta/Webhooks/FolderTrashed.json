@@ -1,0 +1,391 @@
+{
+  "key_path": "FolderTrashed",
+  "content": "Folder trashed",
+  "content_en_sha1_hash": "8f9289c570fcc54441a426d4c6463fd539e340a6",
+  "created_at": "2025-05-19T21:30:49.759Z",
+  "updated_at": "2025-05-21T01:09:16.306Z",
+  "comment": {
+    "text": "The translation key \"FolderTrashed\" is used to display a message indicating that a folder has been trashed or deleted in the portal settings UI.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:02.236Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
+      "line_number": 66,
+      "context": "return t(\"FileMoved\");\n case WebhookTriggers.FolderCreated:\n return t(\"FolderCreated\");\n case WebhookTriggers.FolderUpdated:\n return t(\"FolderUpdated\");\n case WebhookTriggers.FolderTrashed:\n return t(\"FolderTrashed\");\n case WebhookTriggers.FolderDeleted:\n return t(\"FolderDeleted\");\n case WebhookTriggers.FolderRestored:\n return t(\"FolderRestored\");",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"تم نقل المجلد إلى المهملات\" literally translates to \"The folder was moved to the trash\". While functionally similar, the English phrase \"Folder trashed\" implies deletion, whereas the translation implies a simple movement to a trash/recycle bin.",
+          "suggestion": "مُحذَف المجلد"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Qovluq zibil qutusuna göndərildi\" is a literal translation of 'Folder sent to trash'. A more natural and accurate translation for 'Folder trashed' would be something like 'Qovluq silindi' or 'Qovluq tərk edildi'.",
+          "suggestion": "Qovluq silindi"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'služka zlikvidována' is technically correct, it implies a more permanent and decisive action (like destruction). 'Trashed' in this context implies deletion, which can be undone or recovered. A more suitable translation would convey that.",
+          "suggestion": "Složka smazána"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'zlikvidována' sounds formal and potentially negative in this context. It might sound more like a disposal of waste rather than a folder being deleted from a system.",
+          "suggestion": "Složka odstraněna"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'gelöscht' can mean 'deleted', 'trashed' implies a move to a trash/recycle bin. 'gelöscht' implies permanent deletion. A more accurate translation would be 'Ordner in den Papierkorb verschoben' or 'Ordner zur Löschung verschoben'.",
+          "suggestion": "Ordner in den Papierkorb verschoben"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ο φάκελος μεταφέρθηκε στα σκουπίδια\" (O fakerlos metaferthike sta skoupidia) literally translates to 'The folder was moved to the trash'. While functionally similar, 'trashed' implies a more definitive action. A more accurate translation would convey that meaning.",
+          "suggestion": "Ο φάκελος διαγράφηκε"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Carpeta movida a la papelera' translates to 'Folder moved to the trash' instead of 'Folder trashed'. While functionally similar, it's not a direct translation and could be misleading.",
+          "suggestion": "Carpeta eliminada"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Folder trashed' implies the folder has been moved to the trash or deleted. 'Kansio siirretty roskakoriin' translates to 'Folder moved to the trash'. While similar, 'trashed' can also imply deletion, and 'siirretty' implies a movement, not necessarily a deletion.",
+          "suggestion": "Consider a more accurate translation such as 'Kansion poisto' (Folder deletion) or 'Kansio on poistettu' (Folder has been deleted)."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Dossier déplacé dans la poubelle\" literally translates to \"Folder moved to the trash.\" While functionally similar, \"trashed\" implies deletion, which isn't explicitly conveyed. A more accurate translation would reflect the deletion aspect.",
+          "suggestion": "Dossier supprimé"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Պանակը տեղափոխվել է աղբաման' translates to 'The folder has been moved to the trash'. The English phrase 'Folder trashed' implies deletion, not just movement to the trash. A more accurate translation would convey the deletion aspect.",
+          "suggestion": "Պանակը ջնջվել է (Panakə jnǰվել է) - 'The folder has been deleted'"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Italian translation 'Cartella nel cestino' literally translates to 'Folder in the trash'. While understandable, it doesn't convey the meaning of 'Folder trashed' as an action. A more accurate translation would indicate the action of trashing.",
+          "suggestion": "Cartella eliminata"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'フォルダーがゴミ箱に移動されました' literally translates to 'Folder moved to trash'. While functionally similar, 'trashed' implies a more permanent action. A more accurate translation would convey the concept of deletion or irreversible movement to the trash.",
+          "suggestion": "フォルダーが削除されました"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"폴더가 휴지통으로 이동되었습니다\" (Folder moved to trash) doesn't perfectly capture the meaning of 'Folder trashed'. 'Trashed' implies permanent deletion, while the translation suggests it's merely moved to the trash bin, which might be recoverable. A more accurate translation would reflect a permanent deletion.",
+          "suggestion": "폴더가 삭제되었습니다"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ໂຟນເດີຖືກຖິ້ມຂີ້ເຫຍື້ອ\" (fon der thip thim khi yeu) literally translates to 'folder thrown garbage'. While conveying a similar concept, 'trashed' implies deletion or archiving, not necessarily being thrown out as garbage. A more accurate translation would imply deletion or archival.",
+          "suggestion": "ໂຟນເດີຖືກລົບອອກ (fon der thip lob ok) - meaning 'folder deleted' or ໂຟນເດີຖືກຍ້າຍ (fon der thip yai) - meaning 'folder archived'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Mape pārvietota uz atkritni' literally translates to 'Folder moved to trash'. While functionally similar, 'trashed' implies deletion or removal, which isn't perfectly captured by 'moved to trash'. A more accurate translation would reflect the deletion aspect.",
+          "suggestion": "Mape izdzēsta"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Map naar prullenbak gedaan' is a literal translation and doesn't accurately convey the meaning of 'Folder trashed'. 'Trashed' implies deletion, and the Dutch phrase indicates moving to the trash bin.",
+          "suggestion": "Verwijderde map"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While understandable, 'Map naar prullenbak gedaan' is not the most natural phrasing in Dutch.",
+          "suggestion": "Map verwijderd"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation 'Katalog został przeniesiony do kosza' translates to 'Folder moved to trash'. While technically accurate, it's not the most common or idiomatic way to express 'Folder trashed' in Polish. A more direct translation would better reflect the original meaning.",
+          "suggestion": "Katalog usunięto do kosza"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Pasta lixeira' literally translates to 'Trash folder' which isn't quite the same as 'Folder trashed'. While technically it conveys a similar meaning, it doesn't accurately reflect the original wording. A more appropriate translation would emphasize the action of trashing.",
+          "suggestion": "Pasta removida"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Folderul a fost mutat în Coșul de gunoi\" literally translates to \"The folder was moved to the Trash\". While technically not wrong, it's not the most accurate translation of \"Folder trashed\". A more direct and common translation would be \"Folder șters\" or \"Folder șters din sistem\".",
+          "suggestion": "Folder șters"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Папка перемещена в Корзину\" (Folder moved to Recycle Bin) doesn't accurately reflect the English \"Folder trashed\". 'Trashed' implies deletion, whereas the Russian translation implies a movement to the recycle bin.",
+          "suggestion": "Папка удалена"
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ෆෝල්ඩරය කුණු කූඩයට දමන ලදී\" (Folder was thrown into the trash) is too literal and doesn't convey the intended meaning of 'Folder trashed'. It implies a physical action.",
+          "suggestion": "A more appropriate translation would be \"ෆෝල්ඩරය ඉවත් කරන ලදී\" (Folder was removed) or \"ෆෝල්ඩරය මකා දමන ලදී\" (Folder was deleted)."
+        },
+        {
+          "type": "grammatical",
+          "description": "While not strictly incorrect, \"දමන ලදී\" (was thrown) feels a bit formal and less natural in modern Sinhala for this context. \"ඉවත් කරන ලදී\" or \"මකා දමන ලදී\" are more commonly used for digital actions.",
+          "suggestion": "Consider using \"ඉවත් කරන ලදී\" or \"මකා දමන ලදී\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Priečinok zlikvidovaný' doesn't accurately convey the meaning of 'Folder trashed'. 'Zlikvidovaný' implies destruction or disposal, which isn't necessarily what 'trashed' means in this context (it could be archived or moved).",
+          "suggestion": "A more accurate translation might be 'Priečinok odstránený' (Folder removed) or 'Priečinok vymazaný' (Folder deleted), depending on the intended nuance."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Mapa premaknjena v koš' translates to 'Folder moved to trash', not 'Folder trashed'. While functionally similar, it's not a direct translation of the original English.",
+          "suggestion": "Mapa izbrisana"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Фасцикла избачена у корпу\" is not an accurate translation of \"Folder trashed.\" \"Корпу\" translates to \"corpus\" which doesn't fit the context of a folder being deleted.",
+          "suggestion": "A more accurate translation would be \"Папка избрисана\" or \"Фолдр избрисан\" (using a transliteration of 'folder').  'Избрисана' means 'deleted'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Fascikla izbačena u korpu' literally translates to 'Folder emptied into the trash'. While conveying the general meaning of 'trashed,' it's not the most accurate or idiomatic Serbian translation for 'trashed' in the context of webhooks. A more accurate translation would be something closer to 'Fascikla obrisana' or 'Fascikla izbrisana'.",
+          "suggestion": "Fascikla obrisana"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation \"Klasör çöp kutusuna taşındı\" translates to \"Folder moved to trash\" which is not an exact match for \"Folder trashed\". While functionally similar, \"trashed\" implies a more definitive action than \"moved to trash\".",
+          "suggestion": "Klasör silindi (Folder deleted) or Klasör çöpe atıldı (Folder thrown into trash)."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Папку переміщено до кошика\" translates to 'Folder moved to the trash'. The English phrase 'Folder trashed' means 'Folder deleted and placed in the trash' or 'Folder is in the trash'. 'Moved to the trash' implies it can be retrieved, whereas 'trashed' implies it's a more permanent action.",
+          "suggestion": "Папка видалена"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Đã chuyển thư mục vào thùng rác\" literally translates to \"Moved folder to trash\". The English phrase \"Folder trashed\" implies the folder was deleted into the trash, not simply moved. A more accurate translation would reflect the action of deleting.",
+          "suggestion": "Đã xóa thư mục"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"文件夹已移至回收站\" (Folder moved to Recycle Bin) doesn't perfectly capture the meaning of \"Folder trashed\". \"Trashed\" implies deletion, while the translation implies a move to the recycle bin, which isn't always the case.  A more accurate translation might convey the action of being deleted, or permanently removed.",
+          "suggestion": "文件夹已删除 (Folder deleted)"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,226 @@
+{
+  "key_path": "ApiPageHeader",
+  "content": "Build your own collaboration platform",
+  "content_en_sha1_hash": "cc0e3a6c783cc264d4401ef99086b4395c343b97",
+  "created_at": "2025-05-19T21:30:50.576Z",
+  "updated_at": "2025-05-21T05:10:52.003Z",
+  "comment": {
+    "text": "The translation key \"ApiPageHeader\" is used to display a header text that describes the purpose of a collaboration platform, appearing in a confirmation dialog. It's translated as \"Build your own collaboration platform\".",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:45.882Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Api/index.js",
+      "line_number": 88,
+      "context": "}\n descriptionText={t(\"ApiPageDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n headerText={t(\"ApiPageHeader\")}\n imageAlt={t(\"ApiPageHeader\")}\n imageSrc={imgSrc}\n />\n </ConfirmWrapper>\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Api/index.js",
+      "line_number": 88,
+      "context": "}\n descriptionText={t(\"ApiPageDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n headerText={t(\"ApiPageHeader\")}\n imageAlt={t(\"ApiPageHeader\")}\n imageSrc={imgSrc}\n />\n </ConfirmWrapper>\n );",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Öz əməkdaşlıq platformanızı yaradın' while understandable, isn't the most natural or idiomatic way to translate 'Build your own collaboration platform'. A more common phrasing might emphasize creation and customization.",
+          "suggestion": "Consider alternatives like: 'Kəndinizlə öz işbirliyi platformanızı yaratın' (Create your own collaboration platform with your own customizations) or 'Öz işbirliyi platformanızı hazırlayın' (Prepare your own collaboration platform)."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ඔබගේම සහයෝගිත්‍ව වේදිකාව තනන්න\" is a literal translation and might not be the most natural or idiomatic way to convey \"Build your own collaboration platform\" in Sinhala. A more fluent translation might be preferable depending on the context. While technically correct, it sounds somewhat formal.",
+          "suggestion": "Consider alternatives like \"ඔබේම වැඩබෙහෙසුම් වේදිකාව සාදා ගන්න\" or \"ඔබට අවශ්‍ය සහයෝගිතව වේදිකාව තමාටම සාදා ගන්න\" depending on the desired tone and audience."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

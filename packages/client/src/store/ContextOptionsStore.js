@@ -702,7 +702,10 @@ class ContextOptionsStore {
     this.dialogsStore.setFillingStatusPanelVisible(true);
   };
 
-  onClickStartFilling = (item) => {
+  onClickStartFilling = (item, t) => {
+    if (isMobile)
+      return toastr.info(t("Common:MobileStartFillingPdfNotAvailableInfo"));
+
     const refPage = this.filesStore.openDocEditor(
       item.id,
       false,
@@ -1842,7 +1845,7 @@ class ContextOptionsStore {
         key: "start-filling",
         label: t("Common:StartFilling"),
         icon: FormFillRectSvgUrl,
-        onClick: () => this.onClickStartFilling(item),
+        onClick: () => this.onClickStartFilling(item, t),
         disabled: false,
       },
       {
@@ -2069,7 +2072,7 @@ class ContextOptionsStore {
       {
         id: "option_block-unblock-version",
         key: "block-unblock-version",
-        label: t("Common:UnblockVersion"),
+        label: item.locked ? t("Common:UnblockFile") : t("Common:BlockFile"),
         icon: LockedReactSvgUrl,
         onClick: () => this.lockFile(item, t),
         disabled: false,

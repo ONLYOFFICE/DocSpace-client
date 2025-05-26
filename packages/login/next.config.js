@@ -67,8 +67,6 @@ const nextConfig = {
     },
   },
   webpack: (config) => {
-    console.log("ENV", { env: process.env });
-
     config.devtool = "source-map";
 
     if (config.mode === "production") {

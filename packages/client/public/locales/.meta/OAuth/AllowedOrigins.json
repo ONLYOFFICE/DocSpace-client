@@ -1,0 +1,262 @@
+{
+  "key_path": "AllowedOrigins",
+  "content": "Allowed origins",
+  "content_en_sha1_hash": "fe1d6712594c177e32843258d1f35382f602ab1a",
+  "created_at": "2025-05-19T21:30:53.781Z",
+  "updated_at": "2025-05-21T07:31:17.844Z",
+  "comment": {
+    "text": "This translation key is used to display the label for a select input field where users can enter allowed origins. It appears in a form component within the OAuth settings section and helps users understand what values are expected as input.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:00.814Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/OAuthBlock.tsx",
+      "line_number": 79,
+      "context": "isDisabled={isEdit}\n hasError={requiredErrorFields.includes(\"redirect_uris\")}\n />\n <MultiInputGroup\n t={t}\n label={t(\"AllowedOrigins\")}\n placeholder={t(\"EnterURL\")}\n name=\"allowed_origins\"\n onAdd={changeValue}\n currentValue={allowedOriginsValue}\n helpButtonText={t(\"AllowedOriginsHelpButton\")}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Povolený původ\" is technically correct, it's not the most natural or commonly used translation for \"Allowed origins\" in the context of OAuth. It sounds somewhat literal and could be misinterpreted.",
+          "suggestion": "A more natural translation would be \"Povolene zdroje\" or \"Povolene domeny\" depending on the precise meaning intended within the OAuth context. \"Povolene oblasti\" could also be considered."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Թույլատրված աղբյուր\" (Tuyłatrvadz aghbyur) while literally translating to 'Allowed source', doesn't quite capture the nuanced meaning of 'Allowed origins'. 'Origins' implies a list or a range of origins, whereas the Armenian translation suggests a single source. A more accurate translation might include a pluralization or a more encompassing term.",
+          "suggestion": "Consider \"Թույլատրված ծագումներ\" (Tuyłatrvadz tsagumner) which translates to 'Allowed origins' (plural) or \"Թույլատրելի ծագումների դաշտ\" (Tuyłatrveli tsagumneri dashd) meaning 'Allowed origins field'."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation \"許可された項目\" (Kyoka sareta item) translates to \"permitted items\" or \"allowed items\" which is not an accurate translation of \"Allowed origins\". The term 'origins' refers to websites or domains.",
+          "suggestion": "許可されたオリジン (Kyoka sareta orijin) - This is a transliteration of 'origins' and would be more accurate in the context of OAuth."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ຕົ້ນກຳເນີດທີ່ອະນຸຍາດ\" is a literal translation of \"allowed origins\", it might not be the most natural or idiomatic Lao phrasing for a technical context. A more suitable translation might consider the specific meaning of 'origin' in OAuth (e.g., the domain where the application is hosted).",
+          "suggestion": "Consider a phrase like \"ຕົ້ນສະບັບທີ່ອະນຸຍາດ\" or \"ໂດເມນທີ່ອະນຸຍາດ\" depending on the intended nuance.  Research common Lao terminology used in technical documentation related to web development."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Surse autorizate\" is understandable, a more accurate and common translation of \"Allowed origins\" in a technical context (like OAuth) would be \"Origini permise\" or \"Origini autorizate\". \"Surse autorizate\" implies a source of something, which isn't the intended meaning.",
+          "suggestion": "Origini permise"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඉඩකඩ සහිත සම්භවයන්' is a literal translation that doesn't quite convey the meaning of 'Allowed origins' in the context of OAuth. 'Origins' refers to the domain from which a request originates. A more appropriate translation would convey this technical meaning.",
+          "suggestion": "Possible alternatives: 'අනුමැත ලද සම්භවයන්' (Anumathalad sambhavayan - Approved origins), 'අනුමැතිය ලද යෙදුම් ප්‍රදේශ' (Anumathiya lak denudu pradesha - Approved application domains), or a more descriptive phrase depending on the specific OAuth implementation."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Дозвољена порекла\" while technically meaning \"allowed origins\", doesn't sound natural in the context of OAuth. 'Порекла' is plural and often used for more abstract origins. A more common and natural phrasing would be 'Дозвољени извори'.",
+          "suggestion": "Дозвољени извори"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Дозволені оригінали\" is not the correct translation for \"Allowed origins\". \"Оригінали\" translates to \"originals\", while the intended meaning refers to permitted source locations or domains.",
+          "suggestion": "Дозволені початкові джерела"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Nguồn gốc được phép\" is a literal translation that doesn't accurately convey the meaning of \"Allowed origins\" in the context of OAuth. OAuth 'origins' refers to the domains or URLs that are permitted to access a resource server.  \"Nguồn gốc\" implies the origin or source of something, which isn't the correct meaning here.",
+          "suggestion": "A more accurate translation would be something like \"Nguồn được phép\" or \"Miền được phép\" (if referring specifically to domains)."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

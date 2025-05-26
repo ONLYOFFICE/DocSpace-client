@@ -298,6 +298,8 @@ class DialogsStore {
     file: null,
   };
 
+  socialAuthWelcomeDialogVisible = false;
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -1028,6 +1030,10 @@ class DialogsStore {
    */
   setAssignRolesDialogData = (visible, roomName = "", file = null) => {
     this.assignRolesDialogData = { visible, roomName, file };
+  };
+
+  setSocialAuthWelcomeDialogVisible = (visible) => {
+    this.socialAuthWelcomeDialogVisible = visible;
   };
 }
 

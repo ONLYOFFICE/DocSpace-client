@@ -1,0 +1,238 @@
+{
+  "key_path": "UseSpecialChar",
+  "content": "Use special characters",
+  "content_en_sha1_hash": "4fd46a4ca880394c20ea7a80b64f2c6478a48924",
+  "created_at": "2025-05-19T21:30:53.176Z",
+  "updated_at": "2025-05-21T02:27:38.207Z",
+  "comment": {
+    "text": "This translation key is used to display a checkbox label that enables users to select \"Use special characters\" in password strength settings. The checkbox appears on a form in a portal settings page, allowing users to toggle this feature on or off.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:07.866Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/passwordStrength.js",
+      "line_number": 304,
+      "context": "value=\"digits\"\n />\n <Checkbox\n className=\"use-special-char second-checkbox\"\n onChange={onClickCheckbox}\n label={t(\"UseSpecialChar\")}\n isChecked={useSpecialSymbols}\n value=\"special\"\n />\n </div>\n <SaveCancelButtons",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sisällettävä erikoismerkkejä' doesn't accurately convey the meaning of 'Use special characters'. 'Sisällettävä' implies 'containing', which isn't the intended functionality. It should indicate the *usage* of special characters, not that the setting *contains* them.",
+          "suggestion": "Käytä erikoismerkkejä"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '특수 문자를 사용하여' (teuksu munjeul sayo해서) literally translates to 'Using special characters'. While understandable, a more natural and idiomatic translation for a settings option like 'Use special characters' would be something closer to '특수 문자 허용' (teuksu munja heoyong) meaning 'Allow special characters', or '특수 문자 사용' (teuksu munja sayong) meaning 'Use special characters'. The original translation sounds a bit awkward.",
+          "suggestion": "특수 문자 허용 (teuksu munja heoyong) or 특수 문자 사용 (teuksu munja sayong)"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ໃຊ້ ພິເສດ ຕົວອັກສອນ\" doesn't fully capture the meaning of 'Use special characters'. 'ໃຊ້' means 'use', 'ພິເສດ' means 'special' and 'ຕົວອັກສອນ' means 'characters'. While technically correct, a more natural and common phrasing might be desired for user interface text. It sounds slightly robotic.",
+          "suggestion": "Consider alternatives like \"ອະນຸຍາດໃຊ້ຕົວອັກສອນພິເສດ\" (Allow use of special characters) or \"ໃຊ້ຕົວອັກສອນພິເສດໄດ້\" (Can use special characters)."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'karakters' is technically correct for 'characters', in the context of settings related to text input, 'tekens' would be a more natural and commonly used translation for 'characters' or 'special characters'. 'Karakters' is more often used for character roles in a play or book.",
+          "suggestion": "Gebruik speciale tekens"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '必须包含特殊字符' (bì xū bāo hán tè shuāng zì fù) translates to 'Must include special characters'. The original English 'Use special characters' implies allowing or enabling the use, not mandating inclusion. It's a more permissive statement than the translation suggests.",
+          "suggestion": "考虑使用更适当的翻译，例如 '允许使用特殊字符' (yǔnxǔ shǐyòng tèshuāng zìfù) - 'Allow the use of special characters' or '可以使用特殊字符' (kěyǐ shǐyòng tèshuāng zìfù) - 'Can use special characters'."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

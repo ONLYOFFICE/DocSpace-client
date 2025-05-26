@@ -1,0 +1,253 @@
+{
+  "key_path": "GenerateTokenNote",
+  "content": "<strong>Note:</strong> If you generate a new token, the previous one will no longer be valid.",
+  "content_en_sha1_hash": "f521006595ab27df60cadaa644588ccfca4ed058",
+  "created_at": "2025-05-19T21:30:53.897Z",
+  "updated_at": "2025-05-21T07:12:34.809Z",
+  "comment": {
+    "text": "This translation key is used to display a note that informs users about the implications of generating a new token, explaining that the previous one will become invalid. It appears in a dialog component, specifically below a button related to OAuth token generation. The goal is to provide context for translators to ensure that this message accurately communicates its meaning and purpose in different languages.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:46.827Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/GenerateDeveloperTokenDialog.tsx",
+      "line_number": 190,
+      "context": "</Text>\n <Text style={{ marginBottom: \"16px\" }} noSelect>\n {t(\"OAuth:GenerateTokenScope\")}\n </Text>{\" \"}\n <Text noSelect>\n <Trans t={t} i18nKey=\"GenerateTokenNote\" ns=\"OAuth\" />\n </Text>\n </>\n ) : (\n <>\n <Text style={{ marginBottom: \"16px\" }}>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/GenerateDeveloperTokenDialog.tsx",
+      "line_number": 190,
+      "context": "</Text>\n <Text style={{ marginBottom: \"16px\" }} noSelect>\n {t(\"OAuth:GenerateTokenScope\")}\n </Text>{\" \"}\n <Text noSelect>\n <Trans t={t} i18nKey=\"GenerateTokenNote\" ns=\"OAuth\" />\n </Text>\n </>\n ) : (\n <>\n <Text style={{ marginBottom: \"16px\" }}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"ໂຕ໊ກເກີ້ນ\" is potentially misspelled. It seems to be trying to convey 'token', but the spelling is unusual. It's possible it's a dialectal variation, but confirmation would be needed.",
+          "suggestion": "Investigate if \"ໂຕ໊ກເກີ້ນ\" is the correct spelling in the target dialect, or use a more standard Lao equivalent like \"ໂຕ໊ກເຄັນ\" or \"ໂທເຄັນ\"."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the general meaning is conveyed, \"ຈະບໍ່ຖືກຕ້ອງອີກຕໍ່ໄປ\" can be improved for a more natural Lao flow.  It's a bit literal.",
+          "suggestion": "Consider alternatives like \"ມັນຈະໝົດອາຍຸ\" (it will expire) or \"ມັນຈະໃຊ້ງານບໍ່ໄດ້ອີກ\" (it will no longer work)."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of strong tags is replicated from the English. While acceptable, ensuring consistency with the overall Lao style guide is advised.",
+          "suggestion": "Review the Lao style guide to determine the appropriate way to handle emphasis in translated content.  Consider alternatives to the strong tag if applicable."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"marķieri\" is a generic term for a marker, not a token. \"Token\" should be translated more accurately to something like 'atslēga' (key) or 'norīkošanas kods' (authorization code).",
+          "suggestion": "Consider using 'atslēga' or 'norīkošanas kods' instead of 'marķieri'."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word ' වලංගු නොවනු ඇත' (valangu novanu ath) is a bit too formal and literal for a user-facing note. A more natural and user-friendly translation for 'no longer be valid' would be something like 'අවලංගු වනු ඇත' (avalangu vanu ath) or 'ඉක්මතු නොවනු ඇත' (ikmathu novanu ath).",
+          "suggestion": "Replace 'වලංගු නොවනු ඇත' with 'අවලංගු වනු ඇත' or 'ඉක්මතු නොවනු ඇත'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'token' is transliterated as 'токеn' instead of the more commonly used Serbian word for token, 'решавање аутентификације'.",
+          "suggestion": "Consider using 'решавање аутентификације' or a similar, more natural Serbian term for 'token'. Alternatively, if 'token' is intended to be an Anglicism, consider retaining the transliteration but ensuring consistency throughout the application."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'will no longer be valid' is translated as 'више неће бити валидан'. A more natural translation might be 'неће бити важећи'.",
+          "suggestion": "Consider using 'неће бити важећи' instead of 'више неће бити валидан'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

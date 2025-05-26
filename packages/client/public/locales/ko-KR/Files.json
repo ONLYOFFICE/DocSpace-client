@@ -40,6 +40,7 @@
   "CreateNewFolderInStorage": "스토리지에 새 폴더 생성",
   "CreateNewLink": "새 링크 생성",
   "CreateTemplate": "템플릿 생성",
+  "CustomFilterDisable": "사용자 지정 필터 사용 안 함",
   "CustomFilterDisabled": "선택한 파일에 대한 사용자 지정 필터 비활성화됨",
   "CustomFilterEnable": "사용자 지정 필터 활성화",
   "CustomFilterEnabled": "선택한 파일에 대한 사용자 지정 필터 활성화됨",

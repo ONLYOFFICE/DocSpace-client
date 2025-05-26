@@ -3,7 +3,7 @@
   "content": "Enter domain name",
   "content_en_sha1_hash": "4aad4fadabc0049631d44b1adfbfcc29e2437e12",
   "created_at": "2025-05-19T21:30:57.452Z",
-  "updated_at": "2025-05-24T15:42:43.335Z",
+  "updated_at": "2025-05-26T07:57:33.003Z",
   "comment": {
     "text": "This translation key is used to display a message prompting users to enter a domain name. It appears as a placeholder text in UI components that accept domain names, such as input fields and dialog boxes.",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/management/src/categories/spaces/sub-components/ConfigurationSection.tsx",
-      "line_number": 152,
-      "context": "type={InputType.text}\n size={InputSize.base}\n hasError={!!(domainNameError || checkDomainError)}\n onChange={onHandleDomain}\n value={domain}\n placeholder={t(\"EnterDomain\")}\n className=\"spaces-input\"\n tabIndex={1}\n />\n <div style={{ marginTop: \"5px\" }}>\n {domainNameError",
+      "file_path": "/packages/management/src/app/spaces/configuration/body.tsx",
+      "line_number": 148,
+      "context": "errorMessage={domainErrorMessage}\n >\n <TextInput\n type={InputType.text}\n size={InputSize.base}\n placeholder={t(\"EnterDomain\")}\n value={domain}\n onChange={onChangeDomain}\n tabIndex={1}\n scale\n />",
       "module": "/packages/management"
     },
     {
-      "file_path": "/packages/management/src/categories/spaces/sub-components/dialogs/ChangeDomainDialog/index.tsx",
-      "line_number": 138,
-      "context": "size={InputSize.base}\n hasError={!!domainNameError}\n onChange={onHandleDomain}\n onKeyDown={onKeyDown}\n value={domain}\n placeholder={t(\"EnterDomain\")}\n className=\"create-portal-input\"\n />\n <div>\n {domainNameError\n ? domainNameError.map((err) => (",
+      "file_path": "/packages/management/src/dialogs/change-domain/index.tsx",
+      "line_number": 131,
+      "context": "type={InputType.text}\n size={InputSize.base}\n hasError={!!domainNameError}\n onChange={onHandleDomain}\n value={domain}\n placeholder={t(\"EnterDomain\")}\n className=\"create-portal-input\"\n />\n <div>\n {domainNameError &&\n domainNameError.map((err, index) => (",
       "module": "/packages/management"
     }
   ],

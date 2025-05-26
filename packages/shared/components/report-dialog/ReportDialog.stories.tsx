@@ -35,7 +35,7 @@ import type { ReportDialogProps } from "./ReportDialog.types";
 import FirebaseHelper from "../../utils/firebase";
 
 const meta: Meta<typeof ReportDialog> = {
-  title: "Components/ReportDialog",
+  title: "Dialogs/ReportDialog",
   component: ReportDialog,
   tags: ["autodocs"],
   parameters: {

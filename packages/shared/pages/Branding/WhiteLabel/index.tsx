@@ -113,7 +113,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
       return logo;
     });
     setLogoUrls(newLogos);
-    setLogoTextWhiteLabel("");
+    clearLogoText();
   };
 
   const onChangeLogo = async (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -138,7 +138,7 @@ const Branding = ({
       {showSettings ? (
         <>
           <hr />
-          {displayAbout ? <CompanyInfoSettings /> : null}
+          <CompanyInfoSettings />
           <hr />
           <AdditionalResources />
         </>

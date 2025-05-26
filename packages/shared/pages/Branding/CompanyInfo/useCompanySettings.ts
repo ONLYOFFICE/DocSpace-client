@@ -27,6 +27,7 @@
 import React, { useReducer, useCallback, useEffect } from "react";
 
 import { ICompanySettings, IUseCompanySettings } from "./CompanyInfo.types";
+import { isEqual } from "lodash";
 
 const defaultCompanySettingsError = {
   hasErrorAddress: false,
@@ -36,15 +37,17 @@ const defaultCompanySettingsError = {
   hasErrorSite: false,
 };
 
+type TFields = Pick<
+  ICompanySettings,
+  "address" | "companyName" | "email" | "phone" | "site" | "hideAbout"
+>;
 type TValidators = "site" | "email" | "phone" | "companyName" | "address";
 type TBooleanFields = keyof Pick<ICompanySettings, "hideAbout">;
 
 interface IState {
-  fields: Pick<
-    ICompanySettings,
-    "address" | "companyName" | "email" | "phone" | "site" | "hideAbout"
-  >;
+  fields: TFields;
   errors: typeof defaultCompanySettingsError;
+  initialFields: TFields;
   hasChanges: boolean;
 }
 
@@ -55,7 +58,7 @@ type Action =
       field: TBooleanFields;
       value: boolean;
     }
-  | { type: "RESET"; values: ICompanySettings };
+  | { type: "RESET"; values: TFields };
 
 const validators: Record<TValidators, (v: string) => boolean> = {
   site: (v) => /^(ftp|http|https):\/\/[^ "]+$/.test(v),
@@ -70,6 +73,10 @@ function reducer(state: IState, action: Action): IState {
     case "SET_FIELD": {
       const newFields = { ...state.fields, [action.field]: action.value };
       const isValid = validators[action.field](action.value);
+      const hasChanges = !isEqual(
+        state.initialFields[action.field],
+        action.value,
+      );
 
       return {
         fields: newFields,
@@ -78,27 +85,24 @@ function reducer(state: IState, action: Action): IState {
           [`hasError${action.field.charAt(0).toUpperCase() + action.field.slice(1)}`]:
             !isValid,
         },
-        hasChanges: true,
+        initialFields: state.initialFields,
+        hasChanges,
       };
     }
     case "SET_BOOLEAN_FIELD": {
       const newFields = { ...state.fields, [action.field]: action.value };
+
       return {
         fields: newFields,
         errors: state.errors,
+        initialFields: state.fields,
         hasChanges: true,
       };
     }
     case "RESET":
       return {
-        fields: {
-          address: action.values.address,
-          companyName: action.values.companyName,
-          email: action.values.email,
-          phone: action.values.phone,
-          site: action.values.site,
-          hideAbout: action.values.hideAbout,
-        },
+        fields: action.values,
+        initialFields: action.values,
         errors: defaultCompanySettingsError,
         hasChanges: false,
       };
@@ -111,15 +115,18 @@ export const useCompanySettings = ({
   companySettings,
   displayAbout,
 }: IUseCompanySettings) => {
+  const initialSettings = {
+    address: companySettings.address,
+    companyName: companySettings.companyName,
+    email: companySettings.email,
+    phone: companySettings.phone,
+    site: companySettings.site,
+    hideAbout: !displayAbout,
+  };
+
   const [state, dispatch] = useReducer(reducer, {
-    fields: {
-      address: companySettings.address,
-      companyName: companySettings.companyName,
-      email: companySettings.email,
-      phone: companySettings.phone,
-      site: companySettings.site,
-      hideAbout: !displayAbout,
-    },
+    fields: initialSettings,
+    initialFields: initialSettings,
     errors: defaultCompanySettingsError,
     hasChanges: false,
   });
@@ -139,7 +146,17 @@ export const useCompanySettings = ({
   );
 
   useEffect(() => {
-    dispatch({ type: "RESET", values: companySettings });
+    dispatch({
+      type: "RESET",
+      values: {
+        address: companySettings.address,
+        companyName: companySettings.companyName,
+        email: companySettings.email,
+        phone: companySettings.phone,
+        site: companySettings.site,
+        hideAbout: companySettings.hideAbout,
+      },
+    });
   }, [companySettings]);
 
   return {

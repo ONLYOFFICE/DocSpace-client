@@ -31,7 +31,7 @@ import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDe
 import { BrandName } from ".";
 
 const meta = {
-  title: "Branding/BrandName",
+  title: "Pages/Branding/BrandName",
   component: BrandName,
   parameters: {
     docs: {

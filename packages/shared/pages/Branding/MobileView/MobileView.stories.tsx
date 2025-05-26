@@ -33,7 +33,7 @@ import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDe
 import { MobileView } from ".";
 
 const meta = {
-  title: "Branding/MobileView",
+  title: "Pages/Branding/MobileView",
   component: MobileView,
   parameters: {
     docs: {

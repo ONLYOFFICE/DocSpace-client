@@ -31,7 +31,7 @@ import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDe
 import { AdditionalResources } from ".";
 
 const meta = {
-  title: "Branding/AdditionalResources",
+  title: "Pages/Branding/AdditionalResources",
   component: AdditionalResources,
   parameters: {
     docs: {

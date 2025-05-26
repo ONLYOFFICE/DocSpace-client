@@ -32,7 +32,7 @@ import { WhiteLabel } from ".";
 import { mockLogos } from "./mockData";
 
 const meta = {
-  title: "Branding/WhiteLabel",
+  title: "Pages/Branding/WhiteLabel",
   component: WhiteLabel,
   parameters: {
     docs: {

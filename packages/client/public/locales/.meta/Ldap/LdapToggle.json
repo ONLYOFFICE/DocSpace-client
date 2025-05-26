@@ -3,7 +3,7 @@
   "content": "LDAP Authentication",
   "content_en_sha1_hash": "d11fef55a0f4f7f77f5a743808a9e2af4cfab644",
   "created_at": "2025-05-19T21:30:54.318Z",
-  "updated_at": "2025-05-21T08:01:10.798Z",
+  "updated_at": "2025-05-24T08:15:02.094Z",
   "comment": {
     "text": "The translation key \"LdapToggle\" describes the label for a toggle button used to indicate whether LDAP authentication is available or not. It is likely displayed on a Portal Settings page in an integration section. Translators should provide an equivalent phrase that conveys the same meaning and context.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"LDAP Удостоверяване\" is a literal translation, it might not be the most natural or clear phrasing for Bulgarian users. \"Удостоверяване\" is a more formal term. A more user-friendly alternative could be considered.",
+          "suggestion": "LDAP удостоверяване може да се преведе като \"LDAP автентикация\" или \"LDAP автентифициране\" за по-лесно разбиране."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -84,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"LDAP Նույնականացում\" is a literal translation of 'LDAP Identification' rather than 'LDAP Authentication'.  'Authentication' carries the specific meaning of verifying identity, which is the intent of the English phrase.",
-          "suggestion": "LDAP ճանապարհագրություն (LDAP chkanaparhakrut'yun) - This translates to 'LDAP Authentication' more accurately."
+          "description": "The Armenian translation \"LDAP Նույնականացում\" literally translates to \"LDAP Identification\". While close, \"Authentication\" (the intended meaning of \"LDAP Authentication\") is better conveyed by \"LDAP ճանապարհագրություն\" or \"LDAP վավերացում\".",
+          "suggestion": "LDAP ճանապարհագրություն"
         }
       ],
       "approved_at": null
@@ -114,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ການກວດສອບຕົວຕົນລະບົບ LDAP\" (kan gwad sop tua ton rabop LDAP) translates to 'LDAP Identity Verification System' which isn't a direct or accurate translation of \"LDAP Authentication\". The word 'authentication' implies verifying credentials, not just verifying identity.",
-          "suggestion": "Consider \"ການຮັບການກວດສອບຕົວຕົນຜ່ານ LDAP\" (kan rap kan gwad sop tua ton phan LDAP) which translates to 'Accepting Identity Verification via LDAP' or a more concise option like \"ການຢັ້ງຢືນຕົວຕົນ LDAP\" (kan yang yeun tua ton LDAP) which translates to 'LDAP Identity Verification'."
+          "description": "The Lao translation \"ການກວດສອບຕົວຕົນລະບົບ LDAP\" (Kan kwat sop tua ton rabop LDAP) translates to 'LDAP Identity Verification System'. While related, it's not a direct or natural translation of 'LDAP Authentication'. 'Authentication' implies verification *and* authorization.  A more accurate translation would be closer to 'ການຢັ້ງຢືນຕົວຕົນ LDAP' (Kan yang yeun tua ton LDAP) which means 'LDAP Identity Verification'.",
+          "suggestion": "ການຢັ້ງຢືນຕົວຕົນ LDAP (Kan yang yeun tua ton LDAP)"
         }
       ],
       "approved_at": null
@@ -167,9 +173,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "While \"LDAP සත්‍යාපනය\" is a possible translation, it's quite literal. A more natural and idiomatic translation of \"LDAP Authentication\" in Sinhala might be \"LDAP හරහා පරිශීලනය\" or \"LDAP පරිශීලන ක්‍රියාවලිය\". The current translation might sound stilted in a user interface.",
-          "suggestion": "LDAP හරහා පරිශීලනය (LDAP Authentication via)"
+          "type": "spelling",
+          "description": "The term 'සත්‍යාපනය' is a valid Sinhala word for 'authentication' but could be improved for clarity in this context. It is more literally 'verification' and 'authentication' implies a slightly different process.",
+          "suggestion": "LDAP ඇAuthentication (LDAP ඇAuthentication) - this would retain the English term within the Sinhala text, clarifying the specific type of authentication."
         }
       ],
       "approved_at": null

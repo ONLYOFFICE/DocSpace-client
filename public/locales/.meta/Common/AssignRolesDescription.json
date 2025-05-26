@@ -3,7 +3,7 @@
   "content": "The form was successfully submitted to {{roomName}}. Assign roles to the chosen users to enable form filling. Do you want to proceed now or get back to it later?",
   "content_en_sha1_hash": "2ac6175352c41bee5c815d56f22b8b48128553ea",
   "created_at": "2025-05-19T21:30:43.110Z",
-  "updated_at": "2025-05-22T11:56:37.869Z",
+  "updated_at": "2025-05-24T01:45:37.550Z",
   "comment": {
     "text": "This translation key is used for a confirmation message that asks users to assign roles to chosen users after submitting a form in a specific room. It appears as a dialog box footer button and provides context for the user's next steps.",
     "is_auto": true,
@@ -36,13 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"vasitəsilə\" (via) doesn't quite fit the context. It implies the form was submitted *using* a specific tool, rather than simply *to* a room. A more accurate translation would be something like '{{roomName}}'-ə.",
-          "suggestion": "Form {{roomName}}-ə uğurla göndərildi."
+          "description": "The phrase \"vasitəsilə\" is not the most natural way to express 'to' or 'via' in this context. It feels overly literal.",
+          "suggestion": "Form {{roomName}} vasitəsi ilə göndərildi. (Although, consider rephrasing the whole sentence for better flow. See alternative suggestion below)"
         },
         {
-          "type": "grammar",
-          "description": "The sentence 'Formu doldurmaq üçün seçilmiş istifadəçilərə rollar təyin edin' could be phrased more naturally. The word order isn't ideal.",
-          "suggestion": "Seçilmiş istifadəçilərə formanı doldurmaq üçün rollar təyin edin."
+          "type": "incorrect_translation",
+          "description": "The whole sentence structure is a bit awkward. A more natural phrasing would be preferred.",
+          "suggestion": "Form {{roomName}} istifadə edərək uğurla göndərildi. Seçilmiş istifadəçilərə formanı doldurmaq üçün rollar təyin edin. İndi davam etmək istəyirsiniz, yoxsa daha sonra geri dönmək?"
         }
       ],
       "approved_at": null
@@ -95,13 +95,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Assign roles\" is not the most natural translation. While \"Նշանակեք դերեր\" is literal, it can sound a bit awkward. A more natural phrasing might be \"ձևացրեք դերեր\" or \"տրամադրեք դերեր\".",
-          "suggestion": "Ձևացրեք դերեր ընտրված օգտատերերին"
+          "description": "The phrase \"Assign roles\" is a standard translation term in this context. While the Armenian translation \"Նշանակեք դերեր\" is technically correct, it could be more accurately translated to something like \"กำหนดบทบาท\" or a similar term commonly used in user management interfaces.",
+          "suggestion": "Consider using a more idiomatic Armenian translation for 'Assign roles' commonly used in user management interfaces.  A possible alternative is 'กำหนดบทบาท' or a functionally equivalent phrase."
         },
         {
           "type": "formatting",
-          "description": "The colon after 'հասցեին' could be replaced with a comma for improved readability.",
-          "suggestion": "Ձևը հաջողությամբ ուղարկվել է {{roomName}},"
+          "description": "The capitalization of the question mark at the end of the sentence is inconsistent with standard Armenian punctuation. It should be lowercase.",
+          "suggestion": "Change ավելի ուշ: to ավելի ուշ։"
         }
       ],
       "approved_at": null
@@ -115,7 +115,18 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation uses katakana for \"フォーム\" (form). While acceptable, hiragana (フォーム) would be more natural and common in this context for a user-facing message.",
+          "suggestion": "フォーム → フォーム"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"役割を割り当てて、フォーム記入を有効にします\" is a bit awkward.  '有効にします' (yuusei ni shimasu) typically applies to functions or systems, not directly to enabling form filling. It's overly technical.",
+          "suggestion": "選択したユーザーにフォームへのアクセス権を付与します。(Sentakushita yuusaa ni fo-mu e no accessu ken o fuyo shimasu.) - 'Grant access rights to the chosen users for the form.'"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -129,9 +140,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ເຮັດໃຫ້ສາມາດຕື່ມແບບຟອມໄດ້\" is a bit awkward. A more natural translation for \"to enable form filling\" would be something like \"ເພື່ອໃຫ້ສາມາດຕື່ມແບບຟອມໄດ້\" or \"ເພື່ອຕື່ມແບບຟອມໄດ້\".",
-          "suggestion": "ປ່ຽນເປັນ: ເພື່ອໃຫ້ສາມາດຕື່ມແບບຟອມໄດ້ / ເພື່ອຕື່ມແບບຟອມໄດ້"
+          "type": "spelling",
+          "description": "The word 'ຮັບ' (receive) is missing after 'ຖືກສົ່ງໃຫ້' which makes the sentence awkward.  A more natural phrasing would involve the word 'ຮັບ' (receive) to indicate the form was received.",
+          "suggestion": "ແບບຟອມຖືກສົ່ງໃຫ້ ແລະ ຮັບຈາກ {{roomName}} ຢ່າງສໍາເລັດແລ້ວ"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'ເຮັດໃຫ້ສາມາດຕື່ມແບບຟອມໄດ້' is a bit wordy.  A more concise way to express this is to say something like 'ເພື່ອໃຫ້ສາມາດຕື່ມແບບຟອມ' or 'ເພື່ອຕື່ມແບບຟອມໄດ້'.",
+          "suggestion": "ແບບຟອມຖືກສົ່ງໃຫ້ {{roomName}} ຢ່າງສໍາເລັດແລ້ວ ໃຫ້ກໍານົດບົດບາດໃຫ້ຜູ້ໃຊ້ທີ່ເລືອກ ເພື່ອຕື່ມແບບຟອມໄດ້ ທ່ານຕ້ອງການດໍາເນີນການຕໍ່ໄປໃນປັດຈຸບັນ ຫຼື ກັບຄືນມາເຮັດຫຼ້າສຸດ?"
         }
       ],
       "approved_at": null
@@ -145,7 +161,18 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Dutch translation uses 'het' instead of 'de' before 'formulier'. While 'het' is acceptable, 'de' is more common and generally preferred for 'formulier'.",
+          "suggestion": "Wijs rollen toe aan de gekozen gebruikers om de invulling van het formulier mogelijk te maken."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Do you want to proceed now or get back to it later?' is translated as 'Wilt u nu verdergaan of het later nog eens bekijken?' which is a little too literal. A more natural Dutch phrasing for this context would be 'Wilt u nu verdergaan of dit later herbekijken?' or 'Wilt u nu verdergaan of dit later nog eens bekijken?'",
+          "suggestion": "Wilt u nu verdergaan of dit later nog eens bekijken?"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -184,18 +211,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'ආන්දෝලනය කරන ලද' (aandalayanakaraa) is unusual and doesn't accurately convey 'submitted'. A more appropriate translation would be something like 'ඉදිරිපත් කරන ලද' (idiripathakaran lada) or simply 'ගැසට් කරන ලද' (gasath karan lada).",
-          "suggestion": "Replace 'ආන්දෝලනය කරන ලද' with 'ඉදිරිපත් කරන ලද' or 'ගැසට් කරන ලද'."
+          "description": "The word 'ආන්දෝලනය' (aandalayanaya) which translates to 'agitation' or 'disturbance' is used instead of a more appropriate term for 'submitted'. The original English implies successful completion of submission, not agitation. It is confusing.",
+          "suggestion": "Replace 'ආන්දෝලනය කරන ලද' with a word or phrase that accurately conveys 'submitted' or 'sent' such as 'ගොඩබෑම' (godabāma) or 'යවනු ලැබීය' (yavanu lebiya) in a more natural flow."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'පෝරම පුරවා ගැනීමට' (porama puravaa ganneetak) is a bit awkward. A more natural phrasing would be 'පෝරම ඉටුරා දැමීමට' (porama ituraa daemito) or 'පෝරම පිරවීමට' (porama pirivamee).",
-          "suggestion": "Replace 'පෝරම පුරවා ගැනීමට' with 'පෝරම ඉටුරා දැමීමට' or 'පෝරම පිරවීමට'."
+          "description": "The phrase 'පෝරම පුරවා ගැනීමට' (porama purava getuwatak) could be improved for clarity. It literally translates to 'to fill the form'.",
+          "suggestion": "Consider rephrasing to 'පෝරම පුරවා ගැනීමට' (porama purava gatuka) or 'පෝරමය පුරවා ගැනීමට' (poramayas purava gatuka) for a more natural flow."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'භූමිකා' (bhoomikaa) generally means 'role' in a theatrical sense.  A more appropriate translation for user roles in a form-filling context is 'පරිශීලක භූමිකා' (parishilaka bhoomikaa) or simply 'භූමිකාව' (bhoomikaawa).",
-          "suggestion": "Replace 'භූමිකා' with 'පරිශීලක භූමිකා' or 'භූමිකාව'."
+          "description": "The word 'භූමිකා' (bhoomikaa) translates to 'role' which is accurate, but the phrasing 'පිරිනැමන්න' (pirinaamanna) which means 'to grant' or 'to bestow' can sound formal and less natural in this context. It might be too strong a word for simply 'assigning' roles.",
+          "suggestion": "Replace 'පිරිනැමන්න' with 'අනුassign කරන්න' (anu assign karanna) or ‘දිඝනය කරන්න’ (dighnaya karanna)."
         }
       ],
       "approved_at": null
@@ -203,7 +230,18 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ktorých ste vybrali\" (who you selected) is a bit awkward in this context. While technically correct, it's not the most natural way to phrase it in Slovak. It implies the user actively chose those specific users, which may not be the case.",
+          "suggestion": "Priraďte používateľom, aby ste umožnili vyplňovanie formulára. Chcete teraz pokračovať alebo sa k nemu vrátiť neskôr?"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure could be slightly improved for better readability.  The current sentence is a bit long.",
+          "suggestion": "Priraďte používateľom role, aby ste umožnili vyplňovanie formulára. Chcete teraz pokračovať alebo sa k nemu vrátiť neskôr?"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -217,9 +255,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'Образац' is likely a typo and should be 'Обрасац'. It refers to a 'form' and 'Обрасац' is the correct spelling in this context.",
-          "suggestion": "Обрасац"
+          "type": "incorrect_translation",
+          "description": "The word 'Образац' (Obrazac) is a general term for 'form'. In this context, 'form' refers to a specific, submitted form. A more accurate translation would be 'обрасац' (obrazac) in the accusative case, or 'податак' (podatak), which refers to data and would be more appropriate when referring to a submitted form and its data.",
+          "suggestion": "Обрасац је успешно послат у {{roomName}}. Доделите улоге изабраним корисницима како бисте омогућили попуњавање образаца. Желите ли то сада да урадите или да се вратите касније?"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence 'Доделите улоге изабраним корисницима како бисте омогућили попуњавање образаца' could be more fluid. A slight reordering might improve readability.",
+          "suggestion": "Доделите улоге изабраним корисницима да бисте омогућили попуњавање образаца."
         }
       ],
       "approved_at": null
@@ -229,19 +272,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The word 'Obrazac' (Form) is a direct translation but might sound less natural than using a more conversational equivalent like 'Prijava' or 'Unos' in this context. While not strictly incorrect, it lacks fluency.",
-          "suggestion": "Consider 'Prijava je uspešno poslat u {{roomName}}' or 'Unos je uspešno poslat u {{roomName}}'"
+          "type": "spelling",
+          "description": "The word 'Obrazac' is a direct transliteration and might not be the most natural or commonly used term. 'Formular' or 'Prijava' might be more appropriate depending on the context. However, 'Obrazac' is understandable.",
+          "suggestion": "Consider 'Formular' or 'Prijava' instead of 'Obrazac' if the target audience prefers a more familiar term."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Dodelite uloge' is a correct translation of 'Assign roles', but depending on the specific context and user understanding, 'Dodelite prava pristupa' might be more clear and understandable.",
-          "suggestion": "Consider 'Dodelite prava pristupa izabranim korisnicima'"
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, using lowercase 'u' in 'u {{roomName}}' might be improved for readability and consistency.",
-          "suggestion": "Change 'u {{roomName}}' to 'u {{roomName}}'"
+          "type": "grammar",
+          "description": "The phrase 'Dodelite uloge izabranim korisnicima kako biste omogućili popunjavanje obrasca' could be slightly improved for flow. The 'kako biste' construction is grammatically correct but sounds a bit formal.",
+          "suggestion": "Consider 'Dodelite uloge izabranim korisnicima da bi omogućili popunjavanje obrasca' or 'Dodelite uloge izabranim korisnicima da bi mogli popunjavati obrazac'."
         }
       ],
       "approved_at": null
@@ -267,7 +305,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a full stop (。) after '功能'. While grammatically correct, it might be more natural in a user interface context to omit it.",
+          "suggestion": "表单已成功提交至{{roomName}}。请为选定用户分配角色以启用表单填写。是否立即执行，或稍后处理？"
+        }
+      ],
       "approved_at": null
     }
   }

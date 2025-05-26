@@ -3,7 +3,7 @@
   "content": "Folders moved to Trash ({{count}}).",
   "content_en_sha1_hash": "267d2ac40458179c2156cadd670795bed34d4f64",
   "created_at": "2025-05-19T21:30:54.856Z",
-  "updated_at": "2025-05-22T11:56:37.589Z",
+  "updated_at": "2025-05-24T10:15:22.860Z",
   "comment": {
     "text": "This translation key is used to display a count of folders that have been moved to the trash. It is typically displayed in a UI element, such as an info panel or a history view, where users can see how many files have been moved to the trash. The exact wording may vary depending on the specific use case and context.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation uses a non-breaking space ( ) instead of a regular space before 'سلة المحذوفات'. This might cause layout issues.",
+          "suggestion": "Replace the non-breaking space with a regular space: \"تم نقل المجلدات إلى سلة المحذوفات ({{count}}).\""
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -36,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses a space before the parenthesis, which doesn't match the English format. The English version has no space before the parenthesis.",
+          "description": "The word 'Zibil' is followed by a space and then 'qutusuna'. It should be 'qutusuna'.",
           "suggestion": "Qovluqlar Zibil qutusuna köçürüldü ({{count}})."
         }
       ],
@@ -66,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The space before the opening parenthesis in the Greek translation is unnecessary and should be removed for consistency and readability.",
-          "suggestion": "Μετακίνηση φακέλων στον Κάδο ανακύκλωσης ({{count}})."
+          "description": "The Greek translation uses a non-breaking space ( ) instead of a regular space before 'Κάδο ανακύκλωσης'.",
+          "suggestion": "Replace the non-breaking space with a regular space: \"Μετακίνηση φακέλων στον Κάδο ανακύκλωσης ({{count}}).\""
         }
       ],
       "approved_at": null
@@ -78,7 +84,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"Carpetas\" (carpets) is used instead of \"Carpetas\" (folders).",
+          "description": "The word 'Carpetas' (carpets) is used instead of 'Carpetas' (folders). This is a significant translation error.",
           "suggestion": "Carpetas movidas a la papelera ({{count}})."
         }
       ],
@@ -87,7 +93,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Finnish translation uses a non-breaking space ( ) between 'roskakoriin' and '({{count}})', which might cause layout issues. It's preferable to use a regular space.",
+          "suggestion": "Kansiot siirretty roskakoriin ({{count}})."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -102,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Թղթապանակները տեղափոխվեցին աղբարկղ ({{count}}):\" literally translates to 'The folders were moved to trash'. While technically correct, a more natural Armenian phrasing for a UI element indicating a count of folders moved to trash might be something along the lines of \"աղբարկղում ենք տեղափոխել Թղթապանակներ ({{count}})\" or a more concise 'աղբարկղում Թղթապանակներ ({{count}})' depending on the desired tone and style.  The current phrasing is a bit too literal.",
-          "suggestion": "Consider alternative translations like \"աղբարկղում Թղթապանակներ ({{count}}):\" or \"աղբարկղում ենք տեղափոխել Թղթապանակներ ({{count}}):\""
+          "description": "The translation 'Թղթապանակները տեղափոխվեցին աղբարկղ ({{count}}):' is a bit too literal. 'աղբարկղ' directly translates to 'trash bin'. A more natural Armenian phrasing would be something like 'Մաքրման ցուցանակի փոխարեն փոխադրվեցին ({{count}})' or 'Ջնջվեցին ({{count}})' which implies items were moved to the trash/deleted.",
+          "suggestion": "Consider alternatives like 'Մաքրման ցուցանակի փոխարեն փոխադրվեցին ({{count}})' or 'Ջնջվեցին ({{count}})' to better reflect the intended meaning of 'Folders moved to Trash'."
         }
       ],
       "approved_at": null
@@ -123,7 +135,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation includes a space before the parenthesis. This is generally not preferred in Korean and breaks the expected formatting pattern for UI elements.",
+          "suggestion": "폴더가 휴지통으로 이동됨({{count}})."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -132,13 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ໂຟນເດີຍັງຖືກຍ້າຍໄປສູ່ກະດິ່ງຂີ້ກໍາຈັດ ({{count}}).' is not the most accurate rendering of 'Folders moved to Trash ({{count}}).'  'ຍັງ' implies 'still' or 'yet', which isn't relevant in this context. 'ກະດິ່ງຂີ້ກໍາຈັດ' is a literal translation for 'Trash' but might be too formal or lengthy. A more natural translation would be something like 'ເອກະບອກເດັ່ຶບ' or 'ຖັງລິດ'.",
-          "suggestion": "ໂຟນເດີຍ້າຍໄປສູ່ຖັງລິດ ({{count}})."
-        },
-        {
-          "type": "formatting",
-          "description": "The placement of parentheses around '{{count}}' seems correct, but consistency across translations should be verified.",
-          "suggestion": "No change needed, verify consistency with other translations."
+          "description": "The Lao translation \"ໂຟນເດີຍັງຖືກຍ້າຍໄປສູ່ກະດິ່ງຂີ້ກໍາຈັດ ({{count}}).\" is not the most natural or accurate translation of \"Folders moved to Trash ({{count}}).\" The word 'ຍັງ' (yang) which means 'still' or 'yet' is unnecessary and creates an awkward phrasing. 'ກະດິ່ງຂີ້ກໍາຈັດ' is a literal translation of 'Trash' and while understandable, 'ກະດິ່ງຂີ້ເສື້ອ' is more commonly used to mean 'Trash'.",
+          "suggestion": "ໂຟນເດີຍ້າຍໄປສູ່ກະດິ່ງຂີ້ເສື້ອ ({{count}})."
         }
       ],
       "approved_at": null
@@ -149,7 +162,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The non-breaking space before '({{count}})' should be a regular space.",
+          "description": "The space before the opening parenthesis in the Latvian translation is unnecessary and affects readability. It should be removed.",
           "suggestion": "Mapes pārvietotas uz Atkritni ({{count}})."
         }
       ],
@@ -161,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The word 'Prullenbak' is not directly equivalent to 'Trash' and should ideally have a more natural flow in Dutch. While technically correct, it can sound slightly awkward.",
-          "suggestion": "Consider alternatives like 'Afvalbak' or rephrasing the sentence completely to sound more idiomatic. For example, '{{count}} mappen naar de afvalbak verplaatst' or '{{count}} mappen in de afvalbak geplaatst'."
+          "description": "The space after 'Prullenbak' is unnecessary. It should be a single word.",
+          "suggestion": "Mappen naar Prullenbak verplaatst ({{count}})."
         }
       ],
       "approved_at": null
@@ -209,13 +222,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ෆෝල්ඩර කුණු කූඩයට ({{count}}) ගෙන යන ලදී' is a bit literal and not the most natural way to express the meaning of 'Folders moved to Trash ({{count}})'. A more natural phrasing would convey the sense of being *in* the trash.",
-          "suggestion": "ෆෝල්ඩර කුණු කූඩයට යවන ලදී ({{count}}) or ෆෝල්ඩර කුණු කූඩයට ළඟ තබන ලදී ({{count}})"
+          "description": "The translation \"ෆෝල්ඩර කුණු කූඩයට ({{count}}) ගෙන යන ලදී.\" is a literal translation but sounds awkward in Sinhala. A more natural phrasing would be \"ෆෝල්ඩර ({{count}}) කුණු කූඩයට යවන ලදී.\" or \"ෆෝල්ඩර ({{count}}) කුණු කූඩයට වීසි කරන ලදී.\"",
+          "suggestion": "ෆෝල්ඩර ({{count}}) කුණු කූඩයට යවන ලදී."
         },
         {
-          "type": "formatting",
-          "description": "While the use of parentheses is correct to correspond with the count, consider adding a space after the parenthesis to improve readability.",
-          "suggestion": "ෆෝල්ඩර කුණු කූඩයට යවන ලදී ({{count}}). or ෆෝල්ඩර කුණු කූඩයට ළඟ තබන ලදී ({{count}})."
+          "type": "grammar",
+          "description": "The word order in \"ෆෝල්ඩර කුණු කූඩයට ({{count}}) ගෙන යන ලදී.\" is not the most natural in Sinhala. While understandable, it feels slightly stilted. Putting the number after the object being moved makes more sense.",
+          "suggestion": "ෆෝල්ඩර ({{count}}) කුණු කූඩයට යවන ලදී."
         }
       ],
       "approved_at": null
@@ -232,8 +245,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The use of a non-breaking space ( ) before the parenthesis is unusual and might disrupt layout.",
-          "suggestion": "Remove the non-breaking space before the parenthesis, or ensure its use is consistent with other UI elements. Consider simply using a regular space: \"Mape premaknjene v koš ({{count}})\""
+          "description": "The use of a non-breaking space ( ) between 'koš' and the opening parenthesis is unusual and may not render correctly in all contexts. It's best to use a regular space.",
+          "suggestion": "Mape premaknjene v koš ({{count}})"
         }
       ],
       "approved_at": null
@@ -244,8 +257,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'корпу' (korpu) is an informal and slightly awkward translation for 'Trash'. A more appropriate term would be 'печепатос' (pečeatos).",
-          "suggestion": "Фолдери су пребачени у печепатос ({{count}})."
+          "description": "The term 'корпу' is not the most natural or accurate translation of 'Trash'. A more common and understandable term would be 'пејпер кош' (paper basket) or simply 'смеће' (garbage). While 'корпу' is technically correct, it's less frequently used in this context.",
+          "suggestion": "Фолдери су пребачени у пејпер кош ({{count}})."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, consistently using Serbian Latin script might improve readability for a broader audience. Consider providing a Latin script option alongside the Cyrillic.",
+          "suggestion": "Фолдери су пребачени у пејпер кош ({{count}})."
         }
       ],
       "approved_at": null
@@ -255,9 +273,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Folderi su prebačeni u korpu ({{count}})' translates to 'Folders were moved to trash ({{count}}).'. While technically correct, 'Folderi' (folders) should be singular as it refers to the number of folders moved. A more accurate translation would use the singular form to match the English meaning of the key, which refers to a count of items.",
-          "suggestion": "Folder je prebačen u korpu ({{count}})."
+          "type": "formatting",
+          "description": "The Serbian translation uses the plural form 'Folderi' (Folders) instead of the singular 'Folder' to match the English 'Folders'. Since the English uses the plural, the Serbian should too.",
+          "suggestion": "Folderi su prebačeni u korpu ({{count}})."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, 'su prebačeni' sounds slightly awkward in this context. A more natural phrasing would be 'bačeni'.",
+          "suggestion": "Folderi su bačeni u korpu ({{count}})."
         }
       ],
       "approved_at": null
@@ -268,8 +291,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Turkish translation uses a non-breaking space ( ) instead of a regular space. This can cause display issues in some contexts.",
-          "suggestion": "Replace ' ' with a regular space."
+          "description": "The ellipsis in the English content is not present in the Turkish translation. While not strictly required, it's a common practice to maintain consistency in formatting.",
+          "suggestion": "Consider adding an ellipsis after 'Çöp Kutusu'na taşındı', e.g., 'Klasörler Çöp Kutusu'na taşındı... ({{count}})'."
         }
       ],
       "approved_at": null
@@ -286,7 +309,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The space before the parenthesis in 'Thùng rác ({{count}})' is unnecessary and should be removed for consistency with the English format.",
+          "description": "The space before the opening parenthesis in '({{count}})' is unnecessary and disrupts readability in Vietnamese.",
           "suggestion": "Đã di chuyển thư mục vào Thùng rác ({{count}})."
         }
       ],

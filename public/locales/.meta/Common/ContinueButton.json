@@ -3,7 +3,7 @@
   "content": "Continue",
   "content_en_sha1_hash": "2e02623966f9391facf6eaefc8b079ed5b630bee",
   "created_at": "2025-05-19T21:30:43.691Z",
-  "updated_at": "2025-05-22T11:56:37.337Z",
+  "updated_at": "2025-05-24T01:27:04.864Z",
   "comment": {
     "text": "This translation key is used as a label for a \"Continue\" button that appears in various dialogs and confirms user actions. It provides a clear and consistent text to be translated, allowing users to proceed after completing a task or operation.",
     "is_auto": true,
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation \"続ける\" (tsuzukeru) means \"to continue\" as a verb. While technically correct, it's not the most natural or common translation for a button labeled 'Continue'.  It implies an action *to* continue, rather than just 'Continue'.",
-          "suggestion": "考慮する (kouryo suru) - Consider, or 進む (susumu) - Proceed would be more natural for a button that progresses to the next step."
+          "description": "The Japanese translation \"続ける\" (tsuzukeru) literally means \"to continue\" or \"to proceed,\" but in the context of a button labeled \"Continue,\" a more natural and common translation would be \"次へ\" (tsugi e) which means \"Next\". \"続ける\" is grammatically correct but sounds unnatural in this UI element.",
+          "suggestion": "次へ"
         }
       ],
       "approved_at": null
@@ -246,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'ඉදිරියට' (idiriyata) translates to 'forward' or 'onward', not directly 'Continue'. While it conveys a similar meaning, it's not the most accurate translation for a 'Continue' button.",
-          "suggestion": "Consider 'ගෙනໄປන්න' (gena pinnna) or 'වැඩිහිට්ට' (waddehitto), or a more context-specific translation that accurately reflects the button's function."
+          "description": "While 'ඉදිරියට' (idiriyata) can mean 'forward' or 'onward,' it doesn't directly translate to 'Continue' in the context of a button. It can be understood, but a more accurate translation might be needed depending on the surrounding UI elements and overall functionality.",
+          "suggestion": "Consider using a translation that more closely aligns with the action of proceeding, such as 'కొనసాగించు' (Konasaaginu - if aiming for a more formal feel) or a phrase that emphasizes continuation."
         }
       ],
       "approved_at": null
@@ -270,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Настави\" is the imperative form (command) of the verb \"наставити\" (to continue). For a button labeled \"Continue\", a more appropriate translation would be a noun form, indicating the action of continuing. A better option is \"Наставити\" (Nastaviti), which is the infinitive.",
-          "suggestion": "Наставити"
+          "description": "The translation \"Настави\" is an imperative form of the verb \"наставити\" (to continue), but it doesn't agree in number or politeness with the implied subject (the button). It sounds abrupt and informal.  A more appropriate translation for a button label would be a noun or a more polite imperative.",
+          "suggestion": "Consider alternatives like \"Наставити\" (Nastaviti - infinitive form, more formal and neutral), \"Наставите\" (Nastavite - polite imperative form), or a noun like \"Настављање\" (Nastavljanje - continuation)."
         }
       ],
       "approved_at": null

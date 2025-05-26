@@ -3,7 +3,7 @@
   "content": "Copy public link",
   "content_en_sha1_hash": "a06b066cea1096a0cf9ea23b4ac87cb7383239a1",
   "created_at": "2025-05-19T21:30:43.800Z",
-  "updated_at": "2025-05-22T11:56:37.354Z",
+  "updated_at": "2025-05-24T01:22:41.869Z",
   "comment": {
     "text": "This translation key is used for a button that copies a public link when clicked. In the context of a file upload process, this link can be shared publicly to provide quick access to the uploaded content. It appears as a primary button in a dialog box, allowing users to easily share their files.",
     "is_auto": true,
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ກ໊ອບລິ້ງສາທາລະນະ\" is a literal transliteration and doesn't convey the intended meaning of 'Copy public link' in a natural Lao way. While it's understandable, it sounds awkward.",
-          "suggestion": "ສາທາລະນະລິ້ງຄັດລອກ (Sathalan link kat lok) - This translates to 'Public link copy' and sounds more natural in Lao."
+          "description": "The Lao translation 'ກ໊ອບລິ້ງສາທາລະນະ' is a literal transliteration and doesn't convey the meaning of 'Copy public link' naturally in Lao. While understandable, it's not the most idiomatic way to express the concept.",
+          "suggestion": "A more natural translation would be something like 'ສ້າງລິ້ງສາທາລະນະ' (saang link saathalaan), meaning 'create public link', or 'ຖ່າຍລິ້ງສາທາລະນະ' (thaai link saathalaan) meaning 'share/copy public link'."
         }
       ],
       "approved_at": null
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'Copiere link public' is not the most natural Romanian phrasing. 'Copiere link public' translates literally as 'Copy public link.' A more idiomatic translation would be 'Copiere link-ul public'.  The use of the definite article 'ul' sounds more natural.",
-          "suggestion": "Copiere link-ul public"
+          "description": "While technically correct, 'Copiere link public' is a very literal translation and sounds unnatural in Romanian. A more idiomatic translation would be 'Copiază link-ul public' or 'Copiere link publică'.",
+          "suggestion": "Copiază link-ul public"
         }
       ],
       "approved_at": null
@@ -165,18 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'සබැඳියක්' (sabandiyak) is slightly awkward. While technically correct, a more natural phrasing could improve readability.",
-          "suggestion": "පොදු සබැඳුම පිටපත් කරන්න (pudu sabanduma pitapata karanna)"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation conveys the meaning, a more literal translation of 'public link' is ' පොදු සබැඳිය' (pudu sabandiya).  The suffix '-ak' on 'සබැඳියක්' implies a single instance, which isn't necessarily what is intended.",
-          "suggestion": "පොදු සබැඳුම පිටපත් කරන්න (pudu sabanduma pitapata karanna)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -197,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Копирај јавни линк' is not the most natural or idiomatic way to say 'Copy public link' in Serbian (Cyrillic). While technically correct, it sounds slightly awkward.",
-          "suggestion": "A more natural translation would be 'Копирај линк за јавност' or 'Копирај линк за дељење'."
+          "description": "While 'Копирај јавни линк' is understandable, a more natural and accurate translation of 'Copy public link' would be 'Прекопирај јавни линк' or 'Копирај линк за јавност'. 'Копирај' is a literal translation but 'Прекопирај' conveys the action of copying something to share.",
+          "suggestion": "Прекопирај јавни линк"
         }
       ],
       "approved_at": null

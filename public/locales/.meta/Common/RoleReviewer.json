@@ -3,7 +3,7 @@
   "content": "Reviewer",
   "content_en_sha1_hash": "a74f16c11792da6a36979a58a1ba2b4333632f57",
   "created_at": "2025-05-19T21:30:48.086Z",
-  "updated_at": "2025-05-22T11:56:37.571Z",
+  "updated_at": "2025-05-23T23:08:40.773Z",
   "comment": {
     "text": "This translation key is used to display the role \"Reviewer\" in various contexts within the UI, including information panels and share helpers. It appears as a label or title, likely in buttons, dialogs, or form inputs, where it helps users understand their access level (Review) and role responsibilities.",
     "is_auto": true,
@@ -105,13 +105,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Գրախոս' (Grakhos) is a valid Armenian word and can sometimes be used to mean 'reviewer,' it primarily translates to 'critic' or 'reciter.' 'Reviewer' in the context of a role often implies someone assessing something, not necessarily criticizing it. A more suitable translation would depend on the specific nuance required.",
-          "suggestion": "Consider alternatives like 'ձևացուցող' (devatsutsog - evaluator) or 'անդրադարձող' (andradardzog - commenter/assessor) depending on the specific role's responsibilities. Further context is needed to select the most accurate equivalent."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -126,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"レビュー用\" doesn't accurately convey the meaning of \"Reviewer.\" It translates to \"for review\" or \"intended for review,\" which is a purpose, not the role itself. It doesn't represent someone who *is* a reviewer.",
-          "suggestion": "レビュー担当者 (Rebyū tantōsha) - Reviewer, or レビュー担当 (Rebyū tantō) - Review personnel"
+          "description": "The translation \"レビュー用\" literally translates to \"for review\" or \"review-use\". It doesn't directly convey the meaning of \"Reviewer\". A more appropriate translation would depend on the context, but options like \"レビュアー\" (loanword) or \"審査担当者\" (shinsa tantosha - reviewer/examiner) might be better.",
+          "suggestion": "Consider using \"レビュアー\" or \"審査担当者\" depending on the desired level of formality and naturalness."
         }
       ],
       "approved_at": null
@@ -150,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Pārskatītājs (-a)' is a possible translation for 'Reviewer', it is quite literal and may not be the most natural or appropriate translation depending on the context. A more fitting translation might depend on the specific type of review being performed. For example, 'Skatītājs' (viewer) might be suitable if the review is of a visual work, or 'Valdzinātājs' (judge) if the review is of a competition.",
-          "suggestion": "Consider context. Possible alternatives include: Skatītājs, Valdzinātājs, or a more contextually relevant term."
+          "description": "While \"Pārskatītājs (-a)\" is a possible translation for 'Reviewer', it leans towards a more general 'inspector' or 'examiner'. It doesn't quite capture the specific role of a 'Reviewer' which implies feedback and assessment. A more precise translation might be needed depending on the context.",
+          "suggestion": "Consider 'Recenzents' (for a more formal review) or 'Novērtētājs' (for an assessor) depending on the specific nuance of the 'Reviewer' role."
         }
       ],
       "approved_at": null
@@ -228,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'İnceleyen' is a valid Turkish word meaning 'reviewer' or 'examiner,' it's a quite formal and less common choice for the simple term 'Reviewer.' A more natural and commonly used translation would be 'Değerlendiren' or 'Gözden Geçiren'. 'İnceleyen' implies a very detailed and analytical examination, which might not be the intended nuance.",
-          "suggestion": "Consider using 'Değerlendiren' or 'Gözden Geçiren'."
+          "description": "While \"İnceleyen\" is a valid Turkish word meaning 'reviewer' or 'examiner', it's a rather literal translation and might not be the most natural or commonly used term in this context.  'Değerlendiren' would be a more idiomatic and accurate translation of 'Reviewer' in many scenarios, especially if the review involves assessment or evaluation.",
+          "suggestion": "Değerlendiren"
         }
       ],
       "approved_at": null
@@ -246,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Người phê duyệt' is a valid translation, it leans towards 'approver' rather than 'reviewer'. 'Reviewer' implies a more thorough examination and feedback process. A more accurate translation considering the context would be closer to 'người đánh giá'.",
-          "suggestion": "Người đánh giá"
+          "description": "While \"Người phê duyệt\" is a possible translation for \"Reviewer\", it carries a slightly different connotation. \"Phê duyệt\" implies approval, whereas \"Reviewer\" can simply mean someone who assesses something. A more accurate translation might be \"Người đánh giá\" or \"Người xem xét\".",
+          "suggestion": "Người đánh giá or Người xem xét"
         }
       ],
       "approved_at": null
@@ -258,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '可审阅' (ke shen yue) doesn't fully capture the meaning of 'Reviewer'. While it conveys the ability to review, it lacks the sense of responsibility and assigned role implied by 'Reviewer'. A more suitable translation would be something like '审核员' (shen he yuan) or '评审员' (ping shen yuan).",
-          "suggestion": "审核员 (shen he yuan) or 评审员 (ping shen yuan)"
+          "description": "The translation \"可审阅\" (ke shen yue) doesn't fully capture the nuance of \"Reviewer.\" It translates to \"can review\" or \"able to review,\" implying capability rather than the role itself. A more accurate translation would convey the concept of a person performing reviews.",
+          "suggestion": "考虑使用更贴切的翻译，例如“审核员”、“复核人”或“审查员”，根据上下文选择最合适的。"
         }
       ],
       "approved_at": null

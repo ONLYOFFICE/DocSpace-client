@@ -3,7 +3,7 @@
   "content": "Root Certificate Authority who issued the certificate is not trusted",
   "content_en_sha1_hash": "591f01c592520b8d76eb3bb5b584f34888ec1123",
   "created_at": "2025-05-19T21:30:54.291Z",
-  "updated_at": "2025-05-21T08:05:23.444Z",
+  "updated_at": "2025-05-24T08:19:12.423Z",
   "comment": {
     "text": "This translation key is used in a certificate-related dialog to describe an untrusted root certificate authority. It is displayed when a user encounters an issue due to an untrusted root CA in their LDAP certificate.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'السلطة الجذرية المُصدِّقة التي أصدرت الشهادة غير موثوق بها' is a literal translation and sounds slightly awkward in Arabic. While technically correct, a more natural phrasing would improve readability.",
-          "suggestion": "السلطة المصدِرة للشهادة غير موثوقة"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -42,13 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Sertifikat verən Əsas Sertifikatlaşdırma Orqanına etibar edilmir' is a literal translation but lacks the nuance of 'not trusted'. A more natural Azerbaijani phrasing would better convey the meaning.",
-          "suggestion": "Sertifikatı verən Əsas Sertifikatlaşdırma Orqanı etibarə layiq deyil"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Orqanına' could be simplified to 'Orqanı' for better readability and flow.",
-          "suggestion": "Sertifikat verən Əsas Sertifikatlaşdırma Orqanı etibarə layiq deyil"
+          "description": "The translation \"Sertifikat verən Əsas Sertifikatlaşdırma Orqanına etibar edilmir\" is a literal translation but lacks the nuance of 'not trusted'. A more accurate and natural phrasing would convey the lack of trust more clearly.",
+          "suggestion": "Sertifikatın verən Əsas Sertifikatlaşdırma Orqanı etibarə layiq deyil or Sertifikatın verən Əsas Sertifikatlaşdırma Orqanına inamı yoxdur."
         }
       ],
       "approved_at": null
@@ -59,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Основният сертифициращ орган, издал сертификата, не е надежден\" is a literal translation and sounds somewhat awkward in Bulgarian. A more natural phrasing would be \"Сертификатният орган, издал сертификата, не се доверява\" or \"Сертификатният орган, издал сертификата, не е признат\".",
-          "suggestion": "Сертификатният орган, издал сертификата, не се доверява"
+          "description": "The translation 'Основният сертифициращ орган, издал сертификата, не е надежден' is a literal translation that, while understandable, isn't the most natural way to express the meaning in Bulgarian.  'Надежден' implies trustworthiness which isn't the core issue here; the issue is that it's 'untrusted'.",
+          "suggestion": "A better translation might be: 'Сертификатният орган, издал сертификата, не се признава/приема/е ненадежден (in a more technical context).'  'Не се признава' (not recognized) or 'не се приема' (not accepted) would be more precise."
         }
       ],
       "approved_at": null
@@ -107,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Արմատային վկայականի մարմինը, որը տվել է վկայագիրը, վստահելի չէ' is a literal translation and doesn't fully convey the meaning of \"Root Certificate Authority who issued the certificate is not trusted.\" It's a bit clunky and verbose in Armenian. A more natural translation would be something like \"Արմատային վկայքարանը, որը տվել է վկայագիրը, չի վստահվում\" or \"չվստահվող արմատային վկայքարանը\" which conveys the meaning more concisely and naturally.",
-          "suggestion": "Արմատային վկայքարանը, որը տվել է վկայագիրը, չի վստահվում"
+          "description": "The translation 'Արմատային վկայականի մարմինը, որը տվել է վկայագիրը, վստահելի չէ' is a bit literal and clunky. 'Մարմինը' (body) isn't the most accurate translation of 'authority' in this context.",
+          "suggestion": "Consider a more natural translation like 'Վստահելի չէ արմատային վկայակետի իշխանությունը, որը տվել է վկայագիրը' or 'Արմատային վկայակետի վկայագիրը վստահելի չէ' which more closely convey the meaning of 'Root Certificate Authority' and 'is not trusted'."
         }
       ],
       "approved_at": null
@@ -136,14 +125,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The term 'ໜ່ວຍງານ' can be ambiguous. While it means 'unit' or 'authority', in this context, 'ອົງການ' might be a more precise and natural choice, implying an organization or body.",
-          "suggestion": "ໜ່ວຍງານຮັບຮອງລັກເຊັນໃບຮັບຮອງ → ອົງການຮັບຮອງລັກເຊັນໃບຮັບຮອງ"
-        },
-        {
-          "type": "grammar",
-          "description": "While not strictly incorrect, the phrasing 'ທີ່ອອກໃບຮັບຮອງນີ້' is slightly verbose. It could be more concisely phrased.",
-          "suggestion": "ທີ່ອອກໃບຮັບຮອງນີ້ → ທີ່ອອກໃບນີ້"
+          "type": "formatting",
+          "description": "The Lao translation is a long sentence and might be difficult to read. Consider breaking it into smaller sentences for better readability. For example: 'ໜ່ວຍງານຮັບຮອງລັກເຊັນໃບຮັບຮອງ (Root Certificate Authority) ອອກໃບຮັບຮອງນີ້ ບໍ່ໄດ້ຮັບຄວາມໄວ້ເນື້ອເຊື່ອຖື.'",
+          "suggestion": "Consider splitting the sentence for better readability."
         }
       ],
       "approved_at": null
@@ -154,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Saknes sertifikāta iestāde, kas izdeva sertifikātu, nav uzticama\" is a literal translation and sounds slightly awkward in Latvian. A more natural phrasing would be \"Uzticamais saknes sertifikāta iestāde, kas izdeva sertifikātu, nav uzticama\" or \"Saknes sertifikāta iestāde, kas izdeva sertifikātu, netiek uzticama\".",
-          "suggestion": "Netiek uzticama saknes sertifikāta iestāde, kas izdeva sertifikātu"
+          "description": "The translation 'Saknes sertifikāta iestāde, kas izdeva sertifikātu, nav uzticama' is a bit literal and could be improved for better flow in Latvian. While technically correct, it sounds slightly awkward.",
+          "suggestion": "A more natural-sounding translation could be: 'Nav uzticama sertifikāta iestāde, kas izdeva sertifikātu' or 'Sertifikāta iestāde, kas izdeva sertifikātu, nav uzticama.'"
         }
       ],
       "approved_at": null
@@ -165,14 +149,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'Certificaatautoriteit' is a compound word that could be improved for readability. While technically correct, it's a bit clunky in Dutch.",
-          "suggestion": "Certificaatautoriteit"
-        },
-        {
-          "type": "grammar",
-          "description": "While 'wordt niet vertrouwd' is grammatically correct, a more natural phrasing in this context might be 'is niet vertrouwd'.",
-          "suggestion": "is niet vertrouwd"
+          "type": "formatting",
+          "description": "The Dutch translation uses 'Certificaatautoriteit' which is a direct transliteration. While understandable, it's less natural Dutch. A more common and understandable term would be 'Certificaatautoriteit'.",
+          "suggestion": "Certificaatautoriteit die het certificaat heeft uitgegeven wordt niet vertrouwd"
         }
       ],
       "approved_at": null
@@ -183,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Główny urząd certyfikacji, który wydał certyfikat nie jest zaufany' is technically correct but sounds awkward and overly literal. A more natural Polish phrasing would improve readability.",
-          "suggestion": "Trusted Root Certificate Authority"
+          "description": "The translation 'Główny urząd certyfikacji, który wydał certyfikat nie jest zaufany' is a literal translation but sounds unnatural in Polish. A more natural phrasing would emphasize the lack of trust directly.",
+          "suggestion": "Urząd certyfikacji, który wydał certyfikat, nie jest zaufany."
         }
       ],
       "approved_at": null
@@ -218,9 +197,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'ප්‍රමාණපත්‍රය නිකුත් කළ මුල් සහතික බලධාරියා විශ්වාස කර නැහැ' is a bit literal and doesn't flow naturally in Sinhala. A more natural translation would convey the meaning of 'untrusted root certificate authority'.",
-          "suggestion": "A better translation could be: 'නිකුත් කළ සහතික බලධාරියා විශ්වාසයට සුදුචියි.' (Nikutha kala sahathika baladhariya vishvasaya sudhichi.) or 'මුල් සහතික බලධාරියා විශ්වාසයට සුදුචියි.' (Mul sahathika baladhariya vishvasaya sudhichi.) depending on the specific nuance desired."
+          "type": "spelling",
+          "description": "The word 'හඳුනා' (hunna) is missing after 'විශ්වාස' (vishvasa). It's needed for grammatical correctness.",
+          "suggestion": "ප්‍රමාණපත්‍රය නිකුත් කළ මුල් සහතික බලධාරියා විශ්වාස කර නැහැ හඳුනා."
         }
       ],
       "approved_at": null
@@ -237,13 +216,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Korenski overitelj certifikata, ki je izdal certifikat, ni zaupanja vreden' is overly literal and a bit awkward. 'Overitelj' is a technically correct term for 'Certificate Authority,' but can be clunky in this context. It doesn't flow naturally.",
-          "suggestion": "Potencialno boljše prevajanje bi bilo: 'Certifikatni organ, ki je izdal certifikat, ni zaupanja vreden' or 'Izdača certifikata ni zaupanja vredna'."
+          "description": "The translation 'Korenski overitelj certifikata, ki je izdal certifikat, ni zaupanja vreden' is overly literal and slightly awkward in Slovenian. 'Overitelj' isn't the most common term for 'Certificate Authority' in a technical context. A more natural phrasing would be preferred.",
+          "suggestion": "Certifikatni organ, ki je izdal certifikat, ni zaupanja vreden"
         },
         {
-          "type": "formatting",
-          "description": "The sentence is a bit long and could benefit from being broken up for better readability. While not strictly incorrect, it reduces clarity.",
-          "suggestion": "Consider splitting the sentence: 'Certifikatni organ, ki je izdal certifikat, ni zaupanja vreden.' could be split into 'Certifikatni organ, ki je izdal certifikat, ni zaupanja vreden.'"
+          "type": "spelling",
+          "description": "While technically correct, 'zaupanja vreden' is a more formal and less common phrasing in modern Slovenian. A more conversational option might be more appropriate.",
+          "suggestion": "ni zaupan"
         }
       ],
       "approved_at": null
@@ -254,8 +233,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Serbian translation includes the English term 'Root Certificate Authority' within parentheses. While understandable, it's preferable to translate it consistently throughout the entire text, even if slightly more verbose.",
-          "suggestion": "Consider translating 'Root Certificate Authority' fully into Serbian and using it throughout. For example: 'Орган за издавање сертификата (Комплетна ауторитативна организација)'"
+          "description": "The phrase \"Root Certificate Authority\" is repeated. While acceptable, it could be more concise.",
+          "suggestion": "Орган издавања сертификата (поуздани издавач) који је издао сертификат није поуздан"
         }
       ],
       "approved_at": null
@@ -266,8 +245,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation includes parentheses around \"Root Certificate Authority\". While not inherently incorrect, it disrupts the flow and readability. Consider integrating it more naturally.",
-          "suggestion": "Consider rephrasing to avoid parentheses, e.g., 'Organ izdavanja sertifikata, poznat i kao Root Certificate Authority, koji je izdao sertifikat nije pouzdan' or 'Organ izdavanja sertifikata koji je izdao sertifikat nije pouzdan (Root Certificate Authority)'"
+          "description": "The translation includes parenthetical explanation 'Root Certificate Authority' which disrupts flow. While technically correct, it reads slightly awkwardly in Serbian.",
+          "suggestion": "Consider removing the parenthetical explanation if space is a concern, or rephrasing to integrate the meaning more naturally. For example: 'Organ izdavanja sertifikata koji je izdao sertifikat nije pouzdan' or 'Organ izdavanja sertifikata nije pouzdan.'"
         }
       ],
       "approved_at": null
@@ -281,25 +260,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Кореневий центр сертифікації, який видав сертифікат, не є надійним' is a literal translation and a bit awkward in Ukrainian. 'Надійний' implies reliability, not necessarily trust.  A better translation would convey a lack of trust.",
-          "suggestion": "Кореневий центр сертифікації, який видав сертифікат, не викликає довіри"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Cơ quan cấp chứng chỉ gốc đã cấp chứng chỉ không đáng tin cậy' is somewhat literal and could be improved for naturalness in Vietnamese. A more natural phrasing would convey the meaning that the root CA itself isn't trusted.",
-          "suggestion": "Cơ quan cấp chứng chỉ gốc không được tin cậy."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

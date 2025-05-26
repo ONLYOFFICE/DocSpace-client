@@ -3,7 +3,7 @@
   "content": "View and manage all files and folders",
   "content_en_sha1_hash": "07c9e42a035928c689645c2bb99f9e8490d45a8b",
   "created_at": "2025-05-19T21:30:47.010Z",
-  "updated_at": "2025-05-22T11:56:37.909Z",
+  "updated_at": "2025-05-23T23:45:50.091Z",
   "comment": {
     "text": "This translation key is used to display a description for managing files and folders. It appears on a settings page or similar UI element within an OAuth application, allowing users to view and manage all files and folders associated with their accounts.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'manage' is not fully captured by 'idarə edin'. 'Idarə edin' implies more of a control or administration, whereas 'manage' suggests organization and handling. A more nuanced translation might consider a term encompassing both.",
+          "suggestion": "Consider a translation like 'Bütün fayl və qovluqlara baxın və düzəldin/təşkil edin' (View and organize all files and folders)."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -105,13 +111,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ເບິ່ງແລະຈັດການເອກະສານ ແລະ ໂຟນເດີທັງໝົດ' is a literal translation but might not be the most natural phrasing for user interface text. 'ເອກະສານ' strictly means 'documents'. While files can be documents, 'files' is broader. 'ໂຟນເດີ' is correct for 'folders'.",
-          "suggestion": "Consider 'ເບິ່ງແລະຈັດການເອກະສານທັງໝົດ ແລະໄຟລ໌ທັງໝົດ' or 'ເບິ່ງແລະຈັດການໄຟລ໌ທັງໝົດ ແລະໂຟນເດີທັງໝົດ' for a more fluid and encompassing translation, depending on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Wyświetl wszystkie pliki i katalogi oraz zarządzaj nimi' is slightly more verbose than the English 'View and manage all files and folders'. The 'oraz zarządzaj nimi' part is redundant as 'manage' is implied by 'view'.",
-          "suggestion": "Wyświetl wszystkie pliki i katalogi"
+          "description": "The English content 'View and manage all files and folders' is not entirely captured by the Polish translation 'Wyświetl wszystkie pliki i katalogi oraz zarządzaj nimi'. While 'Wyświetl wszystkie pliki i katalogi' is accurate for 'View all files and folders', the 'manage' aspect isn't as clearly conveyed. 'Zarządzaj nimi' implies managing *them* (the files and folders), but the original English refers to the act of managing. A more precise translation might include a more explicit phrase for 'manage'.",
+          "suggestion": "Wyświetl wszystkie pliki i katalogi oraz zarządzaj nimi (or potentially: Wyświetl i zarządzaj wszystkimi plikami i katalogami)"
         }
       ],
       "approved_at": null
@@ -153,13 +153,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Vizualizarea și gestionarea fișierelor și folderelor' is a bit literal and could be improved for natural Romanian. 'Vizualizarea' is correct, but 'gestionarea' is slightly formal. A more natural phrasing would use a verb that encompasses both viewing and managing.",
-          "suggestion": "Previzualizarea și administrarea fișierelor și folderelor"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -168,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Просмотреть все файлы и папки и управлять ими' is a bit verbose and not as concise as the English 'View and manage all files and folders'. While technically correct, it's not ideal.",
-          "suggestion": "Просмотр и управление файлами и папками"
+          "description": "The translation 'Просмотреть все файлы и папки и управлять ими' is too literal and slightly awkward. While technically correct, it doesn't flow naturally in Russian. The 'и управлять ими' part is redundant.",
+          "suggestion": "Просмотреть и управлять всеми файлами и папками"
         }
       ],
       "approved_at": null
@@ -180,8 +174,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ලේඛන හා ෆෝල්ඩර් සියල්ලම බලන්න, පාලනය කරන්න' is a bit literal and could be improved for natural flow in Sinhala. While technically correct, it's not the most elegant phrasing.",
-          "suggestion": "Consider a more natural phrasing like: 'ලේඛන හා ෆෝල්ඩර් සියල්ල පරීක්ෂා කර, ඒවා කළමණාකරණය කරන්න' (Inspect and manage all files and folders) or 'ලේඛන හා ෆෝල්ඩර් සියල්ලම පරීක්ෂා කිරීම හා කළමණාකරණය' (Inspecting and managing all files and folders)."
+          "description": "The phrase \"manage\" is not accurately conveyed by \"පාලනය කරන්න\". A more precise translation might include actions like create, delete, modify, etc.  \"පාලනය කරන්න\" is quite broad.",
+          "suggestion": "ලේඛන හා ෆෝල්ඩර් සියල්ලම බලන්න, සැකසීම් කරන්න (or ලේඛන හා ෆෝල්ඩර් සියල්ලම බලන්න, වෙනස් කරන්න)"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the comma and space used between \" බලන්න\" and \"පාලනය කරන්න\" feel slightly awkward in Sinhala. It might be more natural to remove the comma.",
+          "suggestion": "ලේඛන හා ෆෝල්ඩර් සියල්ලම බලන්න පාලනය කරන්න"
         }
       ],
       "approved_at": null
@@ -203,19 +202,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"Прикажи и управљај свим фајловима и фасциклама\" is a literal translation but not the most natural phrasing. \"Прикажи\" (Prikazi) translates to 'Show', which is less common than 'View' in this context. 'Управљај' (Upravljaj) is correct for 'manage'.",
-          "suggestion": "Прегледај и управљај свим датотекама и фолдерима"
+          "type": "spelling",
+          "description": "The word 'фајловима' is a genitive plural, but 'фајловима' should be 'фајловима' because it refers to the files being managed. 'Фасциклама' is correct as the genitive plural of 'фасцикла'.",
+          "suggestion": "Прикажи и управљај свим фајловима и фасциклама"
         },
         {
           "type": "incorrect_translation",
-          "description": "The term 'фасциклама' (fasciklama) is a slightly formal term and 'фолдерима' (folderima) is more common and generally preferred for 'folders' in this user interface context.",
-          "suggestion": "Replace 'фасциклама' with 'фолдерима'"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'фајловима' (fajlovima) translates to 'files', but 'датотекама' (datotekama) is more accurate for 'files' in a technical context.",
-          "suggestion": "Replace 'фајловима' with 'датотекама'"
+          "description": "The Serbian translation uses 'Прикажи' (Show/Display) instead of a more suitable verb for 'manage'. While 'прикажи' isn't incorrect, a verb such as 'уреди' (edit) or 'контролиши' (control) might better convey the intended meaning of 'manage'.",
+          "suggestion": "Управљај свим фајловима и фасциклама"
         }
       ],
       "approved_at": null
@@ -223,13 +217,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'fajlovima' should be 'fajlovima'. The translation used 'fajlovima' which is the dative plural form. 'fajlovima' is the correct nominative plural.",
-          "suggestion": "Prikaži i upravljaj svim fajlovima i fasciklama"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -244,13 +232,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Переглянути всі файли та папки й керувати ними\" is a bit literal and clunky. A more natural Ukrainian translation for 'View and manage all files and folders' would focus on conveying the core meaning of access and administration.",
-          "suggestion": "Перегляд та адміністрування всіх файлів та папок"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of 'й' to connect verbs feels slightly unnatural in modern Ukrainian. While grammatically correct, it makes the sentence feel more verbose.",
-          "suggestion": "Перегляд та адміністрування всіх файлів та папок"
+          "description": "The translation \"Переглянути всі файли та папки й керувати ними\" is slightly too verbose and doesn't fully capture the brevity of the English \"View and manage all files and folders\". While technically correct, it's not ideal.",
+          "suggestion": "Перегляд та керування всіма файлами та папками"
         }
       ],
       "approved_at": null

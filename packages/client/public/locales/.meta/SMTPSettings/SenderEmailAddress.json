@@ -3,7 +3,7 @@
   "content": "Sender Email Address",
   "content_en_sha1_hash": "6024d73decdbc08c243c279344fce41f143a2909",
   "created_at": "2025-05-19T21:30:53.309Z",
-  "updated_at": "2025-05-21T01:32:40.807Z",
+  "updated_at": "2025-05-24T02:46:14.310Z",
   "comment": {
     "text": "This translation key represents the label for an email address input field in a user interface, likely found within settings or configuration pages. It is used to display the prompt \"Sender Email Address\" on-screen, guiding users to enter their sender's email address.",
     "is_auto": true,
@@ -63,13 +63,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Dirección de email de remitente\" is a bit verbose and not the most natural-sounding translation. A more common and concise translation would be \"Correo electrónico del remitente\" or \"Dirección de correo electrónico del remitente\".",
-          "suggestion": "Correo electrónico del remitente"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -99,25 +93,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"送信者の電子メールアドレス\" is a very literal and somewhat verbose translation of \"Sender Email Address.\" A more natural and common translation would be something like \"送信元メールアドレス\" or \"送信メールアドレス\".",
-          "suggestion": "送信元メールアドレス"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"보내는 사람 이메일 주소\" is understandable, a more natural and commonly used Korean translation for \"Sender Email Address\" would be \"발신자 이메일 주소\".",
-          "suggestion": "발신자 이메일 주소"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -125,9 +107,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "While \"ທີ່ຢູ່ອີເມວຂອງຜູ້ສົ່ງ\" is understandable, a more natural and precise translation of \"Sender Email Address\" would be \"ທີ່ຊັດເຊີ້ບອີເມວຂອງຜູ້ສົ່ງ\" or simply \"ທີ່ຢູ່ອີເມວສົ່ງ\". The current translation is a bit literal and clunky.",
-          "suggestion": "ທີ່ຊັດເຊີ້ບອີເມວຂອງຜູ້ສົ່ງ"
+          "type": "spelling",
+          "description": "The word 'ອີເມວ' (imeow) is a transliteration and might be less common or less clear to Lao speakers. While understandable, a more native term for 'email' might improve clarity.",
+          "suggestion": "Consider using a more common Lao term for 'email' if one exists. If 'ອີເມວ' is the most widely understood term, it's acceptable but a note about potential alternatives might be useful."
         }
       ],
       "approved_at": null
@@ -144,8 +126,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'E-mailadres Zender' is a literal translation and doesn't flow naturally in Dutch. While technically correct, it's not idiomatic. The term 'Zender' feels awkward in this context.",
-          "suggestion": "Verzendadres Email"
+          "description": "The translation 'E-mailadres Zender' is not the most natural or accurate translation of 'Sender Email Address'. 'Zender' literally translates to 'sender' but it's not the standard way to refer to a sender's email address in Dutch. A more natural translation would use terms indicating the email address *of* the sender.",
+          "suggestion": "E-mailadres van de afzender"
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct (with the suggested correction), the suggested translation still sounds somewhat literal. The space after 'E-mailadres' is appropriate, but the overall phrasing could be more fluent.",
+          "suggestion": "E-mailadres afzender"
         }
       ],
       "approved_at": null
@@ -173,9 +160,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Adresa e-mail expeditor' is not the most natural or accurate translation of 'Sender Email Address'. While technically correct, it's a bit literal. A more common and natural Romanian translation would be 'Adresa de e-mail a expeditorului' or 'Adresa de e-mail a expeditor'.",
-          "suggestion": "Adresa de e-mail a expeditorului"
+          "type": "spelling",
+          "description": "The word 'expeditor' is a less common and potentially confusing term. A more common and accurate translation for 'Sender' would be 'trimițător'.",
+          "suggestion": "Adresa e-mail a trimițătorului"
         }
       ],
       "approved_at": null
@@ -183,7 +170,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Адрес email отправителя\" is a very literal translation and sounds unnatural in Russian. A more idiomatic translation would be something like \"Электронная почта отправителя\" or \"Почтовый адрес отправителя\".",
+          "suggestion": "Электронная почта отправителя"
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -192,8 +185,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"යවන්නාගේ වි-තැපැල් ලිපිනය\" is a literal translation of 'Sender's Email Address'. While understandable, it's not the most natural or idiomatic way to express this in Sinhala. A more common and natural phrasing would be 'වි-තැපැල් යවන්නකුගේ ලිපිනය' or 'එ-තැපැල් යවන්නකුගේ ලිපිනය'.",
-          "suggestion": "වි-තැපැල් යවන්නකුගේ ලිපිනය"
+          "description": "The translation \"යවන්නාගේ වි-තැපැල් ලිපිනය\" is a literal translation of \"Sender's Email Address\" and while understandable, it's not the most natural phrasing in Sinhala.  A more common and fluent translation would be something like \"එකතුකරන්නාගේ විද්‍යුත් ලිපිනය\" or \"එකතුකරන්නන්ගේ විද්‍යුත් ලිපිනය\".",
+          "suggestion": "එකතුකරන්නාගේ විද්‍යුත් ලිපිනය"
+        },
+        {
+          "type": "spelling",
+          "description": "While not a glaring error, 'වි-තැපැල්' can be considered slightly archaic. Using 'විද්‍යුත් ලිපිනය' is more common in modern Sinhala usage.",
+          "suggestion": "විද්‍යුත් ලිපිනය"
         }
       ],
       "approved_at": null
@@ -216,13 +214,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Емаил адреса пошаљиоца\" is not the most natural or idiomatic translation of \"Sender Email Address\" in Serbian. While technically correct, it sounds somewhat awkward.",
-          "suggestion": "A more natural translation would be \"Емаил адреса пошиљаоца\" or \"Адреса е-поште пошиљаоца\"."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'пошаљиоца' is technically correct, but 'пошиљаоца' is more commonly used in this context.",
-          "suggestion": "Change 'пошаљиоца' to 'пошиљаоца'."
+          "description": "The translation \"Емаил адреса пошаљиоца\" is not the most natural or idiomatic translation of \"Sender Email Address\". While technically correct, it sounds somewhat awkward in Serbian.",
+          "suggestion": "АДРЕСА ЕМАИЛА ПОШАЉАОЦА or Е-МАИЛ АДРЕСА ПОШАЉАОЦА"
         }
       ],
       "approved_at": null
@@ -233,8 +226,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'Email adresa pošaljioca' is a bit literal and clunky. A more natural-sounding translation would use a more common phrasing.",
-          "suggestion": "Email adresa saljilaca"
+          "description": "The translation 'Email adresa pošaljioca' is not the most natural or accurate translation of 'Sender Email Address'. While technically correct, it sounds somewhat stiff in Serbian.",
+          "suggestion": "A more natural translation would be 'Adresa e-pošte pošiljaoca' or 'E-mail adresa pošiljaoca'."
         }
       ],
       "approved_at": null
@@ -248,13 +241,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Адреса електронної пошти відправника\" is a very literal and slightly cumbersome translation. A more natural and common phrasing in Ukrainian would be something like \"Електронна адреса відправника\" or \"Адреса відправника\".",
-          "suggestion": "Електронна адреса відправника"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -266,7 +253,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"发件人电邮地址\" is understandable, a more natural and common translation for \"Sender Email Address\" would be \"发件邮箱地址\" or \"发件人邮箱\". \"电邮\" is becoming less common in some regions.",
+          "suggestion": "发件邮箱地址"
+        }
+      ],
       "approved_at": null
     }
   }

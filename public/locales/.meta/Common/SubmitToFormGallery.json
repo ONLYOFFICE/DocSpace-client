@@ -3,7 +3,7 @@
   "content": "Submit to Form Gallery",
   "content_en_sha1_hash": "66ff599553fb39661692837e8fdd73d746451d5d",
   "created_at": "2025-05-19T21:30:49.146Z",
-  "updated_at": "2025-05-22T11:56:37.434Z",
+  "updated_at": "2025-05-23T22:27:42.928Z",
   "comment": {
     "text": "The translation key \"SubmitToFormGallery\" is used to display the phrase \"Submit to Form Gallery\" in various UI elements, such as a modal dialog and a button. It appears on-screen when interacting with form galleries or submitting forms to gallery views, helping users understand their options.",
     "is_auto": true,
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While the Arabic translation 'تسليم إلى نموذج المعرض' is understandable, it's not the most natural or idiomatic way to convey 'Submit to Form Gallery.' It's quite literal.",
-          "suggestion": "Consider a more natural phrasing like 'إرسال إلى معرض النماذج' (Irsal ila ma'rid an-namathij) which translates to 'Send to Form Gallery' or 'إضافة إلى معرض النماذج' (Idafa ila ma'rid an-namathij) which translates to 'Add to Form Gallery'."
+          "description": "The translation \"تسليم إلى نموذج المعرض\" is a literal translation that doesn't quite capture the nuance of 'Submit to Form Gallery'. A more natural phrasing would emphasize the act of publishing or sharing the form.",
+          "suggestion": "تقديم إلى معرض النماذج (Taqdeem ila ma'rid an-namaathij) - This implies 'Present/Offer to Form Gallery' which is more contextually accurate."
         }
       ],
       "approved_at": null
@@ -75,13 +75,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"An die Formulargalerie senden\" is a very literal translation and sounds somewhat awkward in German. A more natural phrasing would be something like \"Absenden an die Formulargalerie\" or \"Zur Formulargalerie senden\". \"Absenden\" is more commonly used for submission.",
-          "suggestion": "Absenden an die Formulargalerie"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -114,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ներկայացնել ձևերի պատկերասրահի \" is a literal translation and doesn't quite capture the intended meaning of \"Submit to Form Gallery\". It sounds a bit clunky and formal. A more natural translation would convey the action of adding a form to a gallery.",
-          "suggestion": "Consider alternatives like \"Ավելացնել ձևերի պատկերասրահին\" (Add to Form Gallery) or \"Տեղադրել ձևերի պատկերասրահում\" (Place in Form Gallery)"
+          "description": "The translation \"Ներկայացնել ձևերի պատկերասրահի \" is a literal translation but lacks the full meaning of \"Submit to Form Gallery.\" It implies \"to present to the gallery\", rather than actively submitting for inclusion. A better translation would convey the action of submission.",
+          "suggestion": "Consider a translation that more accurately conveys the action of submitting, such as \"Տեղադրել ձևերի պատկերասրահում\" (Place in Form Gallery) or \"Ցուցադրել ձևերի պատկերասրահում\" (Show in Form Gallery), though the best option depends on the specific nuance desired."
         }
       ],
       "approved_at": null
@@ -123,7 +117,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Invia alla Galleria dei moduli' is understandable, a more natural and accurate translation of 'Submit to Form Gallery' would be something like 'Pubblica nella Galleria dei moduli' or 'Aggiungi alla Galleria dei moduli'. 'Invia' implies sending, while 'Submit' in this context refers to publishing or adding.",
+          "suggestion": "Pubblica nella Galleria dei moduli"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -131,9 +131,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation lacks a particle to connect 'フォームギャラリー' and 'に投稿'. While understandable, it's more natural to include a particle.",
-          "suggestion": "フォームギャラリーに投稿する"
+          "type": "incorrect_translation",
+          "description": "The translation \"フォームギャラリーに投稿\" is a literal translation and might not be the most natural or idiomatic way to express \"Submit to Form Gallery\" in Japanese.  While technically correct, it can sound slightly awkward.",
+          "suggestion": "Consider a more natural phrasing like \"フォームギャラリーへの投稿\" (Form Gallery submission) or \"フォームギャラリーに送信\" (Send to Form Gallery)."
         }
       ],
       "approved_at": null
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ສະເບີກສະບັບສົ່ງໄປທີ່ຫ້ອງສະໝຸດແບບຟອມ\" is not the most natural or accurate translation of \"Submit to Form Gallery.\" \"ສະເບີກສະບັບ\" (seub saeub) literally means \"prepare document\" which doesn't fully convey the meaning of submitting something. While understandable, it's a bit awkward.",
-          "suggestion": "Consider alternatives like \"ສົ່ງໄປໄວ້ຫ້ອງສະໝຸດແບບຟອມ\" (song pai wai hong samut baep form) or \"ຖິ້ມເຂົ້າຫ້ອງສະໝຸດແບບຟອມ\" (thim khao hong samut baep form).  \"ສົ່ງ\" (song) meaning 'send' is a more direct translation."
+          "description": "The Lao translation \"ສະເບີກສະບັບສົ່ງໄປທີ່ຫ້ອງສະໝຸດແບບຟອມ\" doesn't accurately convey the meaning of \"Submit to Form Gallery.\" \"ສະເບີກສະບັບ\" implies 'extract/prepare a version,' which is not the intended action.  'ຫ້ອງສະໝຸດແບບຟອມ' literally translates to 'form library', which is not the direct equivalent of 'Form Gallery'.",
+          "suggestion": "A more accurate translation might be something like \"ສົ່ງໄປທີ່ຫ້ອງສະໝຸດແບບຟອມ\" (Song pai thi hong samut baep form) which translates to 'Send to Form Gallery' or a rephrased version that accurately represents the action of submitting to a gallery. Further context might be required for a precise rendering."
         }
       ],
       "approved_at": null
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ආකෘතිපත්‍ර එකතුවට යොමන්න' while conveying a similar meaning, isn't the most natural or precise translation of 'Submit to Form Gallery'. 'යොමන්න' implies 'go to' or 'proceed to', which isn't the best fit for 'submit'.",
-          "suggestion": "A better translation would focus on the action of submitting, such as 'ආකෘතිපත්‍ර ගැලරියට ඉදිරිපත් කරන්න' (Akruthipatra Galeriyaata Idhipatisanta Kanna) - 'Submit to the Form Gallery'."
+          "description": "The translation 'ආකෘතිපත්‍ර එකතුවට යොමන්න' while understandable, doesn't perfectly capture the nuance of 'Submit to Form Gallery'. 'යොමන්න' implies a more active movement or direction, while 'Submit' is more about offering or presenting.",
+          "suggestion": "Consider alternatives like 'ආකෘතිපත්‍ර ගැලරියට ඉදිරිපත් කරන්න' (Akrutipathra Galariya Tha Epiripath Karna) which translates to 'Present to Form Gallery' or 'ආකෘතිපත්‍ර ගැලරියට පంపන්න' (Akrutipathra Galariya Tha Paminna) meaning 'Send to Form Gallery'."
         }
       ],
       "approved_at": null
@@ -222,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Fgalerijo' appears to be a typo. It should likely be 'Galerijo'.",
-          "suggestion": "Oddaj v Galerijo obrazcev"
+          "description": "“Fgalerijo” is a misspelling and doesn't accurately translate 'Gallery'. It should be 'Galerijo'.",
+          "suggestion": "Galerijo"
         }
       ],
       "approved_at": null
@@ -234,13 +234,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Поднеси у Форм Галерију\" doesn't fully capture the meaning of \"Submit to Form Gallery.\" \"Поднети\" implies a physical offering, which doesn't align with the digital action of submitting a form.",
-          "suggestion": "Пошаљи у Форм Галерију"
+          "description": "The translation \"Поднеси у Форм Галерију\" isn't the most natural or accurate rendering of \"Submit to Form Gallery.\" \"Поднети\" implies submitting a document or item. A more appropriate verb would be something like 'додај' (add) or 'објави' (publish/post). \"Галерија\" is correct.",
+          "suggestion": "Додај у Форм Галерију"
         },
         {
           "type": "formatting",
-          "description": "The phrase 'Форм Галерију' is a transliteration and should ideally be adjusted to a more natural Serbian term if a direct equivalent exists or adjusted for clarity.",
-          "suggestion": "Пошаљи у Галерију обрасца"
+          "description": "The preposition 'у' before 'Форм Галерију' is grammatically correct, but depending on the context, a slightly more flexible phrasing might be better. The context of a user interface might warrant a slightly different choice.",
+          "suggestion": "Додај Форм Галерији"
         }
       ],
       "approved_at": null
@@ -251,8 +251,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Podnesi u Form Galeriju' doesn't accurately convey the meaning of 'Submit to Form Gallery'. 'Podnesi' implies 'submit' in a more formal or official sense, whereas 'Submit' often implies making something available or contributing. A more accurate translation would be something like 'Dodaj u Form Galeriju' or 'Objavi u Form Galeriju'.",
-          "suggestion": "Dodaj u Form Galeriju"
+          "description": "The translation \"Podnesi u Form Galeriju\" doesn't quite capture the meaning of \"Submit to Form Gallery.\" \"Podnesi\" implies submitting something physical or a formal petition. \"Submit\" in this context means to make available or offer for inclusion.",
+          "suggestion": "Predaj u Form Galeriju"
         }
       ],
       "approved_at": null
@@ -275,8 +275,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Gửi đến Bộ Sưu Tập Biểu Mẫu\" is a literal translation, it's not the most natural or common phrasing in Vietnamese for submitting something to a gallery. 'Submit' in this context implies adding to or publishing in a gallery, rather than simply sending something to it.",
-          "suggestion": "Consider \"Đăng lên Thư Viện Biểu Mẫu\" or \"Thêm vào Thư Viện Biểu Mẫu\" which conveys the intended meaning of adding a form to a gallery for others to see and use.  A more concise option could be \"Chia sẻ lên Thư Viện Biểu Mẫu\" (Share to Form Gallery)."
+          "description": "While 'Gửi đến' is a valid way to say 'Submit to', 'Bộ Sưu Tập Biểu Mẫu' is a very literal and somewhat awkward translation of 'Form Gallery'. A more natural and concise translation would be 'Thư Viện Mẫu' or 'Mẫu Bảng'.",
+          "suggestion": "Thư Viện Mẫu"
         }
       ],
       "approved_at": null

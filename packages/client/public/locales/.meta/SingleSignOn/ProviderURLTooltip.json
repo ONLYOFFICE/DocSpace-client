@@ -3,7 +3,7 @@
   "content": "Identity Provider Entity Id (Issuer URL)",
   "content_en_sha1_hash": "76ee57556703e4be7173bf6ab9458305b3c58297",
   "created_at": "2025-05-19T21:30:50.125Z",
-  "updated_at": "2025-05-21T02:02:06.771Z",
+  "updated_at": "2025-05-24T03:15:19.602Z",
   "comment": {
     "text": "The translation key \"ProviderURLTooltip\" is used to display a tooltip for the \"Issuer URL\" label in the Single Sign On settings page, helping users understand the purpose of entering an entity ID. This tooltip appears next to a field where users can enter a provider's URL.",
     "is_auto": true,
@@ -29,14 +29,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The term 'Entity Id' is not accurately reflected in the Arabic translation. 'معرف كيان' is a literal translation of 'Entity Id' but might not be readily understood by all users. A more user-friendly equivalent explaining the purpose of the ID would improve clarity.",
-          "suggestion": "Consider a phrase like 'معرف الهوية الرقمية لمزود الخدمة' (Digital Identity Identifier for the Service Provider) or 'رقم تعريف مزود الهوية' (Identity Provider Identification Number)."
+          "type": "spelling",
+          "description": "The word 'مزود' can be written as 'مُزَوِّد' with diacritics to clearly indicate the vowel sounds. While understandable without them, it's best practice for accuracy.",
+          "suggestion": "مُزَوِّد"
         },
         {
-          "type": "formatting",
-          "description": "While technically correct, the parenthetical '(رابط جهة الإصدار)' after the main phrase creates a slight disconnect. It would be more natural to integrate the 'Issuer URL' concept more smoothly.",
-          "suggestion": "Rephrase as 'معرف كيان مزود الهوية (جهة الإصدار)' or even better, incorporate it into the preceding phrase as suggested in the 'incorrect_translation' issue."
+          "type": "spelling",
+          "description": "The word 'جهة' can be written as 'جِهَة' with diacritics.",
+          "suggestion": "جِهَة"
         }
       ],
       "approved_at": null
@@ -47,13 +47,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'İdentifikasiya Provayderi Müəssisə ID-si (URL verən)' is not a precise equivalent of 'Identity Provider Entity Id (Issuer URL)'. 'Müəssisə ID-si' translates more to 'Establishment ID' rather than 'Entity ID'. 'URL verən' which means 'URL provider' is an awkward phrasing for 'Issuer URL'.",
-          "suggestion": "Consider 'Kimlik Təkrarı Xidməti Müəssisə ID-si (Verici URL)' or 'Kimlik Təkrarı Xidməti Varlığı ID-si (Verici URL)'."
+          "description": "The translation \"İdentifikasiya Provayderi Müəssisə ID-si (URL verən)\" doesn't accurately convey the meaning of \"Identity Provider Entity Id (Issuer URL)\". \"Müəssisə ID-si\" translates to \"Establishment ID\" which isn't the intended meaning. \"URL verən\" is a literal translation of 'URL provider', and isn't idiomatic.",
+          "suggestion": "Consider a more accurate translation such as \"Tək Giriş İdentifikasiya Provayderi Vəziyyət ID-si (Buraxan URL)\" or \"Tək Giriş İdentifikasiya Provayderi Müəssisəsinin ID-si (Buraxan URL)\". The most important thing is to convey the concept of 'Issuer' or 'Entity ID'."
         },
         {
           "type": "formatting",
-          "description": "The Azerbaijani translation uses a mix of capitalization. Consistency in capitalization would be preferred.",
-          "suggestion": "Consider capitalizing the first letter of each major word, e.g., 'Kimlik Təkrarı Xidməti Müəssisə ID-si (Verici URL)'."
+          "description": "The parentheses are unnecessarily disruptive. A more fluid sentence structure would improve readability.",
+          "suggestion": "Remove or rework the parentheses to create a smoother sentence."
         }
       ],
       "approved_at": null
@@ -64,13 +64,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Идентификация на обекта на доставчика на самоличност (URL адрес на издателя)\" is a bit literal and doesn't quite capture the nuance of 'Identity Provider Entity Id (Issuer URL)'.  'Entity Id' can be better translated to something like 'Идентификатор на обект' or 'ИД на обект'.  'Issuer URL' could be simplified to 'URL на издателя'.",
-          "suggestion": "Идентификатор на обект на доставчика на самоличност (URL на издателя)"
+          "description": "The translation \"Идентификация на обекта на доставчика на самоличност (URL адрес на издателя)\" is a bit literal and slightly awkward. \"Entity Id\" is a specific technical term that doesn't always translate directly. While technically correct, it might not be the most natural phrasing for a tooltip.",
+          "suggestion": "Препоръчвам нещо по-просто като: \"ИД на доставчика на самоличност (URL на издателя)\" or \"URL на доставчика на самоличност (Издател)\""
         },
         {
           "type": "formatting",
-          "description": "The parentheses are fine, but consider adding a hyphen for better readability.",
-          "suggestion": "Идентификатор на обект на доставчика на самоличност (URL на издателя)"
+          "description": "The parentheses around \"(URL адрес на издателя)\" are a little clunky in Bulgarian.  Consider how tooltips are formatted in the application and match that style.",
+          "suggestion": "Consider removing the parentheses or adjusting their placement to improve readability. Example: \"Идентификация на обекта на доставчика на самоличност – URL адрес на издателя\""
         }
       ],
       "approved_at": null
@@ -81,13 +81,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Identita subjektu poskytovatele identit (adresa URL vydavatele)\" is a bit too literal and complex. \"Entity Id\" doesn't directly translate to \"Identita subjektu\". A more natural translation would convey the meaning of 'Issuer' more effectively.",
-          "suggestion": "Identifikátor vydavatele (URL adresa)"
+          "description": "The translation 'Identita subjektu poskytovatele identit (adresa URL vydavatele)' is a bit literal and could be improved for clarity and naturalness in Czech. 'Identita subjektu' is overly technical and 'vydavatele' (issuer) is understandable but not the most common phrasing.",
+          "suggestion": "Provider identity (Issuer URL)"
         },
         {
           "type": "formatting",
-          "description": "The parentheses around \"adresa URL vydavatele\" are unnecessary and break the flow. While technically correct, it's not the typical phrasing in Czech UI text.",
-          "suggestion": "Identifikátor vydavatele (URL adresa)"
+          "description": "The use of parentheses is not ideal and can be simplified. Consistent phrasing would improve readability.",
+          "suggestion": "Provider identity (Issuer URL) – or even better, 'URL poskytovatele identity'"
         }
       ],
       "approved_at": null
@@ -95,7 +95,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ID des Identitätsanbieters (URL des Ausstellers)' doesn't fully capture the meaning of 'Identity Provider Entity Id (Issuer URL)'. While 'ID des Identitätsanbieters' is accurate for 'Identity Provider Entity Id', '(URL des Ausstellers)' is a less common and potentially confusing way to translate 'Issuer URL'.  'Aussteller' can imply a broader concept.",
+          "suggestion": "ID des Identitätsanbieters (URL des Herausgebers)"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -104,13 +110,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Entity Id' is best translated as 'Αναγνωριστικό Οντότητας' instead of just 'Οντότητα'.  'Αναγνωριστικό' clarifies that it's the identifier.",
-          "suggestion": "Αναγνωριστικό οντότητας παρόχου ταυτότητας (URL εκδότη)"
+          "description": "The term 'Entity Id' is not accurately translated. 'Οντότητας' (Ontotitas) is correct for 'Entity,' but 'Αναγνωριστικό' (Anagnoristikó) is a bit formal and literal for 'Id' in this context. A more natural translation for 'Entity Id' would be 'Αναγνωριστικό Οντότητας'.",
+          "suggestion": "Αναγνωριστικό Οντότητας"
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'εκδότη' is technically correct for 'Issuer', it might be perceived as too literal and less common in a technical context. A more natural phrasing might be 'πηγή' or 'παροχέας'.",
-          "suggestion": "Αναγνωριστικό οντότητας παρόχου ταυτότητας (URL πηγής)"
+          "description": "The term 'Issuer URL' is literally translated as 'URL εκδότη' which is understandable but slightly awkward. 'Issuer' implies a source or provider. A more fluent option would be to convey this meaning.",
+          "suggestion": "URL παρόχου"
         }
       ],
       "approved_at": null
@@ -127,8 +133,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Identiteetin tarjoajan entiteetti Id (Myöntäjän URL)' is a literal translation and could be improved for naturalness in Finnish. 'Entity Id' is best translated to 'entiteetti-tunnus' in this context. 'Issuer URL' could be 'myöntäjän osoite'.",
-          "suggestion": "Identiteetin tarjoajan entiteetti-tunnus (myöntäjän osoite)"
+          "description": "The translation 'Identiteetin tarjoajan entiteetti Id (Myöntäjän URL)' is a literal translation and doesn't fully capture the meaning of 'Identity Provider Entity Id (Issuer URL)'.  'Entiteetti Id' is overly technical for a tooltip. 'Myöntäjän URL' is a reasonable translation for 'Issuer URL' but the whole phrase is clunky.",
+          "suggestion": "Tarkempi käännös voisi olla 'Tunnistuspalvelimen osoite' or 'Tunnistuspalvelun URL'."
+        },
+        {
+          "type": "formatting",
+          "description": "The inclusion of the English term 'Entity Id' within the Finnish translation disrupts the natural flow and readability. It's better to avoid mixing languages, especially in tooltips.",
+          "suggestion": "Remove 'Entity Id' and only use the Finnish translation."
         }
       ],
       "approved_at": null
@@ -145,13 +156,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"Identity Provider Entity Id\" is not accurately translated. \"Ինքնության տրամադրող միավորների Id\" is overly literal and might not be understandable to the target audience. A more natural translation for 'Identity Provider Entity Id' would be something like \"էլեկտրոնային ինքնության ապրանքագիրի համարանիշ\".",
-          "suggestion": "Consider using \"էլեկտրոնային ինքնության ապրանքագիրի համարանիշ\" or a similar more natural phrasing for \"Identity Provider Entity Id\"."
+          "description": "The term \"Identity Provider Entity Id\" is not directly equivalent to \"Ինքնության տրամադրող միավորների Id\". A more accurate translation would convey the meaning of 'Identity Provider' as a service or organization, rather than just the 'units' or 'elements'.",
+          "suggestion": "Consider \"Համակայության ծառայողության ԲՀՄ (էմիտենտի URL)\" or \"Համակայության ծառայողության ԲՀՄ (ներկայացուցչի URL)\" . The abbreviations BHM and emitent/nerqayutsich are commonly used."
         },
         {
-          "type": "incorrect_translation",
-          "description": "While \"Թողարկողի URL\" is technically correct for \"Issuer URL\", it could be slightly improved for clarity and fluency. It might be preferable to use a more widely understood term.",
-          "suggestion": "Consider using a more common term for \"Issuer URL\" like \"հատուկանշման URL\" or something similar, depending on the technical context and target audience's familiarity with technical terms."
+          "type": "formatting",
+          "description": "The use of parentheses around \"(Թողարկողի URL)\" feels slightly awkward in Armenian. It could be more naturally integrated into the sentence.",
+          "suggestion": "Consider integrating the URL directly into the sentence: \"Ինքնության տրամադրող միավորների Id, Թողարկողի URL\" or \"Ինքնության տրամադրող միավորների Id - Թողարկողի URL\"."
         }
       ],
       "approved_at": null
@@ -161,14 +172,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The term 'emittente' (issuer) while technically correct, isn't the most natural or commonly used term in Italian for 'issuer' in the context of identity providers. A more standard and clearer translation would be 'fornitore' or 'emittente di identità'.",
-          "suggestion": "ID entità del provider di identità (URL del fornitore) or ID entità del provider di identità (URL dell’emittente di identità)"
-        },
-        {
           "type": "formatting",
-          "description": "While grammatically correct, a more fluent Italian translation might benefit from a slightly adjusted phrasing to improve readability. The current phrasing sounds a bit literal.",
-          "suggestion": "ID entità del provider di identità – URL dell’emittente"
+          "description": "The translation includes parentheses and the abbreviation 'URL' without prior explanation or consistent formatting with the English version. While 'URL' is understandable, it might benefit from a more formal Italian equivalent or maintaining the English abbreviation consistently.",
+          "suggestion": "Consider using a full Italian equivalent for 'URL' (e.g., 'indirizzo web') or consistently use the English abbreviation if brevity is desired. For example, 'ID entità del provider di identità (indirizzo web dell’emittente)'."
         }
       ],
       "approved_at": null
@@ -182,30 +188,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ID 제공자 엔터티 ID(발급자 URL)' is a literal translation of 'Identity Provider Entity Id (Issuer URL)'. While understandable, '발급자 URL' (Issuer URL) might be too technical for a tooltip and could be simplified. 'ID 제공자 엔터티 ID' is accurate but lengthy.",
-          "suggestion": "Consider a more user-friendly translation such as 'ID 제공자 엔터티 ID' or '엔터티 ID (발급 URL)' depending on the target audience."
-        },
-        {
-          "type": "formatting",
-          "description": "Parentheses usage: While not strictly wrong, the placement of the parentheses around '발급자 URL' might feel slightly awkward in Korean. It's a direct translation of the English formatting.",
-          "suggestion": "Consider rephrasing to integrate the URL information more naturally into the sentence, potentially using a dash or a different phrasing."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation is identical to the English content. It needs to be translated into Lao, not simply copied.",
-          "suggestion": "This requires a proper Lao translation of \"Identity Provider Entity Id (Issuer URL)\".  A possible translation could be something like \"ລະຫັດຕົວຕົນຜູ້ອອກສາບສຽງ (URL ຂອງຜູ້ອອກສາບສຽງ)\" (Ra-hat tua-ton phuu ok saap-siang (URL khong phuu ok saap-siang)).  A more precise translation may require consulting with a Lao language expert."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -213,14 +202,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'vietrādis' appears to be a mistranslation of 'tooltip'. It literally translates to 'weather vane'.",
-          "suggestion": "Identitātes nodrošinātāja entītijas ID (izdevēja URL padoms)"
+          "type": "incorrect_translation",
+          "description": "The term 'Entity Id' is not accurately translated. 'Vietrādis' implies a broadcast or distribution point, which doesn't align with the technical meaning of 'Entity Id'.",
+          "suggestion": "Identitātes nodrošinātāja identifikators (izdevēja URL)"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The overall translation loses the meaning of 'tooltip' which is a short explanatory text.",
-          "suggestion": "Identitātes nodrošinātāja entītijas ID (izdevēja URL palīdzība)"
+          "type": "spelling",
+          "description": "The word 'entītijas' has a spelling error. It should be 'identifikators'.",
+          "suggestion": "identifikators"
         }
       ],
       "approved_at": null
@@ -231,8 +220,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Uitgever' is a direct translation of 'Publisher', not 'Issuer'. The correct term for 'Issuer' in a technical context in Dutch would be 'Uitgevende partij' or a more concise alternative.",
-          "suggestion": "Identity Provider Entity Id (Uitgevende partij URL)"
+          "description": "'Uitgever' is a direct translation of 'Publisher', not 'Issuer'. The intended meaning of 'Issuer URL' is a provider that authenticates users.",
+          "suggestion": "Identity Provider Entity Id (Emitter URL)"
         }
       ],
       "approved_at": null
@@ -240,18 +229,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ID podmiotu dostawcy tożsamości (adres URL wystawcy)' is a bit literal and could be improved for naturalness. 'Entity Id' doesn't translate directly to 'podmiotu'. While technically correct, it’s not the most user-friendly way to express it in Polish.",
-          "suggestion": "Identyfikator dostawcy tożsamości (adres URL wystawcy)"
-        },
-        {
-          "type": "formatting",
-          "description": "Parentheses are used consistently, which is good. However, consider adding a space after the parentheses for improved readability.",
-          "suggestion": "Identyfikator dostawcy tożsamości ( adres URL wystawcy)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -269,13 +247,30 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Adresa URL a emitentului' is a literal translation of 'Issuer URL' and might be confusing for users. 'Emitent' doesn't fully capture the technical meaning of 'Issuer' in this context. A more accurate term would be 'Autoritate de Emitere' or 'Furnizor de Certificate'.",
+          "suggestion": "ID-ul de entitate al furnizorului de identitate (Autoritatea de Emitere)"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Entity Id' is not accurately translated. 'Идентификатор сущности' is a literal translation that might not be immediately clear to a Russian-speaking user. A more user-friendly translation might be 'Уникальный идентификатор' or 'Идентификатор'.",
+          "suggestion": "Уникальный идентификатор поставщика учетных записей (URL-адрес поставщика)"
+        },
+        {
+          "type": "formatting",
+          "description": "The parentheses around 'URL-адрес поставщика' are not consistently applied in the entire product's terminology. It's recommended to ensure consistency.",
+          "suggestion": "Consider if parentheses are needed around 'URL-адрес поставщика' throughout the product and maintain consistency."
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -284,13 +279,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"අනන්‍යතා ප්‍රතිපාදකයාගේ හැඳු. (නිකුත්කරුගේ ඒ.ස.නි.).\" is not a precise translation of 'Identity Provider Entity Id (Issuer URL)'.  'Entity Id' is not directly conveyed and 'Issuer URL' is only partially translated.",
-          "suggestion": "අනන්‍යතා සේවාකරුගේ අනන්‍ය හැඳුනුරුව (නිකුත්කරුගේ URL)."
+          "description": "The translation 'අනන්‍යතා ප්‍රතිපාදකයාගේ හැඳු. (නිකුත්කරුගේ ඒ.ස.නි.).' is not a fully accurate translation of 'Identity Provider Entity Id (Issuer URL)'. While 'අනන්‍යතා ප්‍රතිපාදකයාගේ හැඳු.' correctly translates 'Identity Provider Entity Id', the '(නිකුත්කරුගේ ඒ.ස.නි.)' is a literal translation of 'Issuer URL' that might be confusing or not easily understood by a Sinhala speaker. A more natural translation of 'Issuer URL' in this context would be something more descriptive, like 'නිකුත්කරු ලිපිනය'.",
+          "suggestion": "Consider revising '(නිකුත්කරුගේ ඒ.ස.නි.)' to something like 'නිකුත්කරු ලිපිනය' or a similar phrasing that clarifies it is the URL."
         },
         {
           "type": "formatting",
-          "description": "The use of parentheses to explain \"(නිකුත්කරුගේ ඒ.ස.නි.)\" feels slightly awkward and potentially confusing for the target audience.",
-          "suggestion": "Remove the parentheses and potentially rephrase the explanation as a separate sentence or expand the initial translation to be more understandable without needing an explanation."
+          "description": "The use of parentheses around 'නිකුත්කරුගේ ඒ.ස.නි.' feels abrupt and disrupts the flow of the sentence.  While parentheses are sometimes used, they aren't necessary here and reduce readability.",
+          "suggestion": "Remove the parentheses around '(නිකුත්කරුගේ ඒ.ස.නි.)' and integrate the term more naturally within the sentence, if the 'නිකුත්කරු ලිපිනය' suggestion is adopted."
         }
       ],
       "approved_at": null
@@ -301,8 +296,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Issuer URL' is better translated as 'URL zdroja identity' rather than 'URL vydavateľa'. 'Vydavateľ' implies a publisher, while 'zdroj' accurately reflects the origin of identity information.",
-          "suggestion": "Identifikátor entity poskytovateľa identity (URL zdroja identity)"
+          "description": "The translation of \"Issuer URL\" as \"URL vydavateľa\" is technically correct but not idiomatic. 'Vydavateľa' directly translates to 'issuer', but in this context, a more common and natural phrasing would be 'URL zdroja identity' or 'URL poskytovateľa identity'.",
+          "suggestion": "Consider revising to 'URL zdroja identity' or 'URL poskytovateľa identity'."
         }
       ],
       "approved_at": null
@@ -313,8 +308,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Issuer URL' is best translated as 'URL izdajatelja' rather than 'URL izdajatelja'.  While 'izdajatelja' is technically correct, 'ponudnika' (provider) fits the context better for Identity Provider.",
-          "suggestion": "ID subjekta ponudnika identitete (URL ponudnika)"
+          "description": "The term \"Issuer URL\" is not accurately translated. \"Izdajatelja\" implies 'issuer' in a financial sense, while 'Issuer URL' refers to the Entity ID of the Identity Provider.",
+          "suggestion": "ID ponudnika identitete (URL entitete)"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the term \"ID ponudnika identitete\" is a long phrase. Consider whether a shorter, more natural Slovenian alternative exists, if context allows. Otherwise, keeping the term consistent with other translations is more important.",
+          "suggestion": "Consider alternatives like 'Identitete ponudnika' or 'ID ponudnika' depending on the broader context and existing terminology."
         }
       ],
       "approved_at": null
@@ -325,13 +325,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Entitet IdP-а (URL издаваоца)' doesn't fully capture the meaning of 'Identity Provider Entity Id (Issuer URL)'. While 'Entitet' is acceptable for 'Entity', the rest is less clear and could be misinterpreted. 'Issuer URL' is a technical term and the translation doesn't convey that.",
-          "suggestion": "Identifikacioni ID Davalaca Identiteta (URL izdavaoca)"
+          "description": "The translation 'Entitet IdP-а (URL издаваоца)' is not the most natural or accurate translation of \"Identity Provider Entity Id (Issuer URL)\". While it conveys the meaning, 'Entitet' is not the most common term for 'Entity' in this context. 'Издаваоца' is correct for 'Issuer' but the entire phrasing feels a bit clunky.",
+          "suggestion": "ИДП ентитет (URL издаваоца)"
         },
         {
           "type": "formatting",
-          "description": "The term 'IdP-а' uses a hyphen which, while understandable, is not the standard way of writing in Serbian. A space would be more appropriate.",
-          "suggestion": "IdP a"
+          "description": "The use of 'IdP-а' suggests an abbreviation but the original uses 'Identity Provider' spelled out. While abbreviation is acceptable, consistency is key.",
+          "suggestion": "Consider maintaining consistency with 'ИДП ентитет' if abbreviations are acceptable, or using 'Идентитет Провајдера' for greater clarity."
         }
       ],
       "approved_at": null
@@ -342,13 +342,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Entitet IdP-a (URL izdavaoca)\" isn't the most natural or accurate translation of \"Identity Provider Entity Id (Issuer URL)\". While technically correct, it's a bit clunky. 'Entitet' can be interpreted as 'entity,' but a more common term would be 'Davalac' or 'Pružalac' for 'Provider.' Also 'URL izdavaoca' is less idiomatic than 'URL davalca identiteta'.",
-          "suggestion": "Davalac identiteta (URL izdavaoca)"
+          "description": "The translation 'Entitet IdP-a (URL izdavaoca)' doesn't fully convey the meaning of 'Identity Provider Entity Id (Issuer URL)'. 'Entitet' is a vague term. 'Issuer URL' specifically refers to the entity identifier used for authentication.",
+          "suggestion": "Identifikacioni ID Davalca Identiteta (URL Davalca)"
         },
         {
           "type": "formatting",
-          "description": "Using 'IdP-a' is acceptable, but could be improved for readability. It's an abbreviation and might not be immediately clear to all users.",
-          "suggestion": "IdP (URL izdavaoca)"
+          "description": "The use of 'IdP-a' is unconventional. It's preferable to use a more standardized term or clarify the abbreviation.",
+          "suggestion": "IdP (URL Davalca)"
         }
       ],
       "approved_at": null
@@ -359,8 +359,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Kimlik Sağlayıcı Varlık Kimliği (Sağlayıcı URL)' is a literal translation and doesn't fully convey the meaning of 'Identity Provider Entity Id (Issuer URL)'. The term 'Entity Id' can be tricky to translate directly. A more natural Turkish phrasing would be needed.",
-          "suggestion": "Kimlik Sağlayıcı Tanımlayıcısı (Yayıncı URL)"
+          "description": "The translation 'Kimlik Sağlayıcı Varlık Kimliği (Sağlayıcı URL)' is a literal translation and might not be the most natural or understandable phrasing for a tooltip. 'Entity Id' and 'Issuer URL' are technical terms that might benefit from a more user-friendly explanation.",
+          "suggestion": "Kimlik Sağlayıcı Adresi (Yayıncı URL)"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, including both 'Kimlik Sağlayıcı' and 'Sağlayıcı' might be redundant. It could be simplified.",
+          "suggestion": "Kimlik Sağlayıcı Varlık Kimliği (URL)"
         }
       ],
       "approved_at": null
@@ -377,13 +382,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Id nhà cung cấp thực thể (IdP) (URL nhà phát hành)' isn't a completely accurate or natural translation of \"Identity Provider Entity Id (Issuer URL)\". 'Nhà phát hành' literally means 'issuer', but in this context, it's less common or clear to use.",
-          "suggestion": "Một số gợi ý: 'ID nhà cung cấp danh tính (Issuer URL)', 'ID thực thể nhà cung cấp dịch vụ xác thực (Issuer URL)', or 'ID nhà cung cấp dịch vụ xác thực (Issuer URL)'."
+          "description": "The translation 'Id nhà cung cấp thực thể (IdP) (URL nhà phát hành)' is not a precise translation of 'Identity Provider Entity Id (Issuer URL)'. 'Nhà phát hành' translates more accurately to 'Issuer', not 'Publisher'.",
+          "suggestion": "Id thực thể nhà cung cấp danh tính (IdP) (URL nhà phát hành)"
         },
         {
           "type": "formatting",
-          "description": "The parentheses are a bit awkward. Using a more common pattern of explanation/translation might be better.",
-          "suggestion": "Consider changing the formatting to something like: 'ID thực thể nhà cung cấp dịch vụ xác thực (Issuer URL)' or 'ID nhà cung cấp dịch vụ xác thực (Issuer URL)'."
+          "description": "The addition of 'IdP' in parentheses is unnecessary and disrupts the flow of the translation.  The English does not include an abbreviation in the tooltip.",
+          "suggestion": "Id thực thể nhà cung cấp danh tính (URL nhà phát hành)"
         }
       ],
       "approved_at": null
@@ -394,8 +399,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"发布者 URL\" (fabu zhe URL) is a literal translation of \"Issuer URL\" and might not be the most natural or understandable way to express it in Chinese.  '发布者' implies a publisher, which isn't the intended meaning. A better term to convey 'Issuer' in this context is '签发者' (qiansha zhe) which means 'Issuer' or 'Signer'.",
-          "suggestion": "身份供应商实体 ID（签发者 URL）"
+          "description": "The translation '发布者 URL' for 'Issuer URL' is not the most accurate or common rendering in Chinese IT contexts. '发布者' directly translates to 'publisher', which isn't the standard terminology for 'Issuer' in the context of Identity Providers. A more appropriate translation would be '颁发者 URL'.",
+          "suggestion": "颁发者 URL"
         }
       ],
       "approved_at": null

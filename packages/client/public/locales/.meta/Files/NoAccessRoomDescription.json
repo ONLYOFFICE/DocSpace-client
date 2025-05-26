@@ -3,7 +3,7 @@
   "content": "You will be redirected to the My Rooms automatically in 5 seconds.",
   "content_en_sha1_hash": "171ac8d31e39e1163ac57939319353ba0b855824",
   "created_at": "2025-05-19T21:30:55.899Z",
-  "updated_at": "2025-05-21T11:40:09.513Z",
+  "updated_at": "2025-05-24T11:49:00.490Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a user will be automatically redirected to their My Rooms page. It appears on a room access denied screen and can be translated to provide localized content.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'My Rooms' is translated as 'غرفتي' (my rooms). However, the intended meaning seems to be 'Rooms' in a general sense, not 'my rooms'. The translation should reflect a broader, more generic context.",
-          "suggestion": "سيتم إعادة توجيهك إلى غرفي تلقائيًا خلال 5 ثوانٍ."
+          "description": "The English phrase 'My Rooms' is translated as 'غرفتي' (my rooms), which implies possession. The intended meaning likely refers to a list or section named 'My Rooms', not literally the user's rooms. A more appropriate translation might be something like 'قسمي' (my section/area) or a more general term for 'Rooms'.",
+          "suggestion": "Consider using a more general term for 'Rooms' or a term indicating a section or area, such as 'قسمي' (my section) or a more suitable equivalent based on context."
         }
       ],
       "approved_at": null
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Azerbaijani translation uses a somewhat formal tone. While grammatically correct, a slightly more conversational tone might be preferable for a user redirect message. Consider alternatives.",
+          "suggestion": "Consider '5 saniyədən sonra Otaqlarım bölməsinə yönləndiriləcəksiniz' or 'Otaqlarım bölməsinə 5 saniyədən sonra yönləndiriləcəksiniz'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -54,13 +60,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'My Rooms' is translated as 'Moje prostory'. While 'prostory' is a valid translation for 'rooms,' 'Moje Rooms' is likely intended to be a direct reference to a specific section or page named 'My Rooms' within the application. A more accurate translation might be 'Moje pokoje' (My rooms) or retaining the English 'My Rooms' if the application uses that term.",
-          "suggestion": "Consider 'Moje pokoje' or keeping 'My Rooms' to maintain consistency with the English application."
+          "description": "The English phrase 'My Rooms' is translated as 'Moje prostory'. While 'prostory' can mean rooms, 'Moje pokoje' would be a more accurate and natural translation of 'My Rooms' in this context, implying personal rooms or spaces.",
+          "suggestion": "Moje pokoje"
         },
         {
           "type": "formatting",
-          "description": "The use of 'sekce' (section) might be too formal depending on the application's overall tone. While technically correct, it could be slightly awkward.",
-          "suggestion": "Evaluate the formality of 'sekce' within the overall application and consider alternatives like a more casual word if appropriate. For example, if the app frequently uses more informal language, a different word may improve the overall flow."
+          "description": "While not strictly incorrect, the Czech translation could benefit from punctuation. Adding a period at the end improves readability.",
+          "suggestion": "Moje pokoje. Do 5 sekund budete automaticky přesměrováni."
         }
       ],
       "approved_at": null
@@ -80,18 +86,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The Spanish sentence uses the passive voice ('será redirigido'), which might sound less natural than an active voice. While not strictly incorrect, it's a slightly less idiomatic way to phrase it in Spanish.",
-          "suggestion": "Será redirigido automáticamente a Mis salas. -> Te redirigiremos automáticamente a Mis salas."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of \"My Rooms\" as \"Mis salas\" is technically correct but might not be the most natural or common way to refer to a user's rooms in a digital context. It translates literally as \"My rooms\" instead of something that might imply a dashboard or personal space.",
-          "suggestion": "Consider using a more contextually appropriate term, such as 'Mi espacio' or 'Mis habitaciones' depending on the application's terminology."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -109,13 +104,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses a semicolon (;) at the end of the sentence. Armenian typically uses a period (.) to end sentences.",
-          "suggestion": "Replace the semicolon (;) with a period (.) at the end of the sentence."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -124,8 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The article 'a' is unnecessary before 'Le mie stanze'.  'Le mie stanze' is a defined location and doesn't require an article.",
-          "suggestion": "Verrai reindirizzato automaticamente a Le mie stanze in 5 secondi."
+          "description": "The Italian translation 'a Le mie stanze' is grammatically incorrect. 'Le mie stanze' should be 'alle mie stanze' to correctly use the preposition 'a' in this context.",
+          "suggestion": "Verrai reindirizzato automaticamente alle mie stanze in 5 secondi."
         }
       ],
       "approved_at": null
@@ -135,14 +124,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation '5秒後に自動的に「私のルーム」に遷移します' while technically correct, sounds slightly formal and robotic for a redirect message.  '遷移します' implies a formal system transition. A more natural and user-friendly phrasing would be preferable.",
-          "suggestion": "5秒後に「私のルーム」に自動で移動します。"
-        },
-        {
           "type": "formatting",
-          "description": "The use of 「私のルーム」 as a direct translation of \"My Rooms\" should be checked to ensure consistency with existing naming conventions within the application. While acceptable, verify it aligns with how the Japanese name is typically displayed.",
-          "suggestion": "Verify consistency with established Japanese naming conventions for 'My Rooms'."
+          "description": "The Japanese translation uses katakana for \"My Rooms\" (「私のルーム」). While technically correct, it deviates from typical Japanese UI conventions where romanized or hiragana/katakana versions of English terms are often preferred to provide a more natural feel. Consider using a more conventional term like 「マイルーム」 or 「マイページ」 for better user experience.",
+          "suggestion": "Consider using 「マイルーム」 or 「マイページ」 instead of 「私のルーム」."
         }
       ],
       "approved_at": null
@@ -153,13 +137,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"리디렉션됩니다\" is a direct transliteration of \"redirected.\" While understandable, it's not the most natural or common way to express this in Korean. A more natural phrasing would be \"자동으로 이동됩니다\" or \"자동으로 연결됩니다.\"",
-          "suggestion": "5초 후에 내 방으로 자동으로 이동됩니다."
+          "description": "The word '리디렉션됩니다' (rideurekseun 됩니다) is a direct transliteration of 'redirected' and while understandable, it's not the most natural phrasing in Korean. It sounds technical and somewhat awkward.",
+          "suggestion": "5초 후에 내 방으로 자동으로 이동합니다."
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the phrasing '5초 후에 내 방으로' is a bit abrupt. Adding a particle like '에' would improve flow.",
-          "suggestion": "5초 후에 내 방으로 자동 이동됩니다."
+          "description": "While technically correct, using a more common and fluent phrasing would improve the user experience. '이동합니다' is more natural than the transliterated '리디렉션됩니다'.",
+          "suggestion": "5초 후에 내 방으로 자동으로 이동합니다."
         }
       ],
       "approved_at": null
@@ -170,8 +154,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຫ້ອງຂອງຂ້ອຍ' (hong khong khoi) translates to \"my rooms\" literally, but the English implies a single room or a personalized rooms section. It might be better to convey the idea of a personalized rooms area.",
-          "suggestion": "Consider a more accurate translation that conveys the idea of a personalized rooms section, such as 'ບັນຊີຂອງຂ້ອຍ' (bansi khong khoi) which means \"my account\" or similar phrasing depending on the context of 'My Rooms'."
+          "description": "The Lao translation 'ຫ້ອງຂອງຂ້ອຍ' (hong khong khoy) translates to 'my room(s)' which might not be the intended meaning. Given the context ('You will be redirected to My Rooms'), a more appropriate translation would imply redirection to a list or section of rooms, not just a single room.",
+          "suggestion": "Consider a translation that implies redirection to a room list or section, such as 'ທ່ານຈະຖືກສົ່ງໄປຫາບັນຊີລາຍຊື່ຫ້ອງຂອງຂ້ອຍໂດຍອັດຕະໂນມັດໃນ 5 ວິນາທີ.' (You will be redirected to the list of my rooms automatically in 5 seconds.) or something similar depending on the precise UI."
         }
       ],
       "approved_at": null
@@ -194,8 +178,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Polish translation uses a slightly more formal tone than the English original. While grammatically correct, 'nastąpi' sounds less natural in a user-facing message. Consider a more conversational alternative.",
-          "suggestion": "Automatycznie zostaniesz przekierowany do sekcji Moje pokoje za 5 sekund."
+          "description": "The Polish translation uses a slightly formal tone. While technically correct, it might be more user-friendly to use a more conversational tone, similar to the English original.",
+          "suggestion": "Automatycznie zostaniesz przekierowany/a do sekcji Moje pokoje za 5 sekund."
         }
       ],
       "approved_at": null
@@ -206,8 +190,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'My Rooms' is translated as 'As Minhas Salas'. While technically correct, 'Minhas Salas' would be more natural and commonly used in Portuguese.",
-          "suggestion": "Será redirecionado para Minhas Salas automaticamente em 5 segundos."
+          "description": "The translation 'As Minhas Salas' is a literal translation of 'My Rooms'. A more natural and common Portuguese phrasing would be 'Meus Quartos'.",
+          "suggestion": "Meus Quartos"
         }
       ],
       "approved_at": null
@@ -218,8 +202,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Meus quartos' is technically correct but 'My Rooms' in English often refers to a dedicated section or page, not necessarily just the rooms themselves. A more accurate translation might be 'Minha área de quartos' or 'Minha seção de quartos' to convey the intended meaning of a dedicated area/page.",
-          "suggestion": "Minha área de quartos"
+          "description": "The term 'My Rooms' should be translated to 'Meus Quartos' instead of just 'Meus quartos'. 'Quartos' requires capitalization in Portuguese.",
+          "suggestion": "Você será redirecionado para Meus Quartos automaticamente em 5 segundos."
         }
       ],
       "approved_at": null
@@ -230,8 +214,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Veţi fi redirecţionat automat către Sălile mele în 5 secunde' is overly formal for a redirect message. The use of 'Veţi' (formal 'you') feels stiff. A more natural and user-friendly translation would use a less formal 'vei'.",
-          "suggestion": "Vei fi redirecţionat automat către Sălile mele în 5 secunde."
+          "description": "The word 'My Rooms' is translated as 'Sălile mele'. While technically correct, a more natural and user-friendly translation might be 'Camerele mele' or 'Secţiunea Camerele mele'. The current translation sounds a bit formal.",
+          "suggestion": "Camerele mele"
         }
       ],
       "approved_at": null
@@ -245,7 +229,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'තත්පර 𑇥 (5) කින් ඔබව ස්වයංක්‍රීයව මාගේ කාමර වෙත හරවා යවනු ලැබේ' doesn't accurately convey the English meaning 'You will be redirected to the My Rooms automatically in 5 seconds.'. The word 'තත්පර 𑇥' is unusual and doesn't clearly mean 'seconds'. 'හරවා යවනු ලැබේ' is also quite formal and potentially confusing.",
+          "suggestion": "තත්පර 5 කින් ඔබව ස්වයංක්‍රීයව මාගේ කාමර වෙත යවා දමනු ලැබේ."
+        },
+        {
+          "type": "formatting",
+          "description": "The number '5' in the Sinhala translation is not consistently formatted with the Sinhala numbering system. While it includes a Sinhala number, the numeral does not consistently apply.",
+          "suggestion": "Replace the '5' with the appropriate Sinhala numeral representation (පහ)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -269,13 +264,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'You will be redirected' is better translated as 'Preusmereni ćete biti' to maintain the formal tone of the original English. The current translation, while understandable, feels slightly less natural in Serbian.",
-          "suggestion": "Preusmereni ćete biti automatski u Moje sobe za 5 sekundi."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -290,7 +279,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb 'будете' (budete) implies a future action that is less appropriate in this context. A more natural and direct translation would use a form indicating a certainty or automated process.",
+          "description": "The verb form 'будете' is not the most natural way to express future passive voice in this context. It sounds overly formal and slightly awkward.",
           "suggestion": "Вас автоматично перенаправлять до розділу «Мої кімнати» через 5 секунд."
         }
       ],
@@ -299,18 +288,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"My Rooms\" is singular in this context, implying the user's personal rooms. The Vietnamese translation \"Phòng của tôi\" also uses the singular form. However, a more natural translation might consider the user having multiple rooms or spaces.",
-          "suggestion": "Consider 'Phòng của bạn' (your rooms) if the system manages multiple rooms for the user. If it's definitely the user's singular room, 'Phòng của tôi' is acceptable."
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'Bạn sẽ được tự động chuyển hướng đến' is a bit formal for a redirection message. Consider a more conversational tone.",
-          "suggestion": "Consider 'Bạn sẽ tự động được chuyển đến...' or 'Bạn sẽ tự động điều hướng đến...'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -318,9 +296,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Chinese translation includes quotation marks around \"我的房间\" (My Rooms). While not strictly incorrect, it's unusual in this context and might be better without them, depending on the UI style.",
-          "suggestion": "您将在5秒内自动转到我的房间。"
+          "type": "incorrect_translation",
+          "description": "The translation '您将在5秒内自动转到“我的房间”。' while conveying the general meaning, doesn't quite capture the 'redirected to' aspect. It's more of a 'will automatically go to' which is less precise than being redirected.",
+          "suggestion": "您将在5秒内自动跳转到“我的房间”。"
         }
       ],
       "approved_at": null

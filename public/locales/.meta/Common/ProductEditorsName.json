@@ -3,7 +3,7 @@
   "content": "Docs",
   "content_en_sha1_hash": "68a4194227be4ab74bc3d32363417c0fc1f30055",
   "created_at": "2025-05-19T21:30:47.495Z",
-  "updated_at": "2025-05-22T11:56:37.552Z",
+  "updated_at": "2025-05-23T23:30:55.570Z",
   "comment": {
     "text": "The \"ProductEditorsName\" translation key is used to translate the display name of a product editor logo. It appears as part of a link to documentation and is visible in the UI as \"Docs\". The translation should reflect the product editor's name, such as \"Product Docs\".",
     "is_auto": true,

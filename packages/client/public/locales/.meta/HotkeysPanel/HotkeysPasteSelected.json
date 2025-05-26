@@ -3,7 +3,7 @@
   "content": "Paste selected items from the clipboard",
   "content_en_sha1_hash": "9fa447fab1680aa915559441757d74035e810b43",
   "created_at": "2025-05-19T21:30:55.071Z",
-  "updated_at": "2025-05-21T10:28:01.539Z",
+  "updated_at": "2025-05-24T10:37:45.700Z",
   "comment": {
     "text": "This translation key is used to display the text \"Paste selected items from the clipboard\" in various parts of the UI. It appears on a hotkeys panel, indicating the action that can be performed by pressing Ctrl + V.",
     "is_auto": true,
@@ -36,8 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Seçilmiş elementləri mübadilə buferindən yapışdırın' is a literal translation but doesn't quite convey the intended meaning of 'paste selected items from the clipboard' in a natural and user-friendly way for Azerbaijani users. 'Mübadilə buferindən' (swap buffer) is a more technical term. A more natural phrasing would be closer to 'Klipbardan seçilmişləri yapışdırın'.",
-          "suggestion": "Klipbardan seçilmişləri yapışdırın"
+          "description": "The translation 'Seçilmiş elementləri mübadilə buferindən yapışdırın' is a literal translation and doesn't quite convey the natural phrasing for 'Paste selected items from the clipboard' in Azerbaijani. 'Mübadilə buferindən' (exchange buffer) is a more technical term and 'yapışdırın' is a more formal command. A more natural phrasing would be closer to 'Seçilmişləri kopyadan yapışdır'.",
+          "suggestion": "Seçilmişləri kopyadan yapışdır"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the translated phrase sounds a bit formal for a hotkey label.  Consider simplifying further if the target audience prefers a more casual tone.",
+          "suggestion": "Seçilmişləri yapışdır"
         }
       ],
       "approved_at": null
@@ -48,7 +53,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Постави избраните елементи в клипборда' is a literal translation that doesn't accurately convey the meaning of 'Paste selected items from the clipboard'. It implies placing items *into* the clipboard, rather than retrieving them. A better translation would imply pasting from the clipboard.",
+          "description": "The translation 'Постави избраните елементи в клипборда' doesn't quite capture the nuance of 'Paste selected items from the clipboard'. While technically correct, it implies *placing* items *into* the clipboard, rather than retrieving and applying them from it. A more accurate translation would emphasize the action of pasting.",
           "suggestion": "Постави избраните елементи от клипборда"
         }
       ],
@@ -87,7 +92,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Coller les éléments sélectionnés dans le presse-papiers' is too literal and doesn't convey the intended meaning of 'Paste selected items from the clipboard' in a natural way for a software context. It implies the items are being *placed* in the clipboard, rather than pasted *from* it.",
+          "suggestion": "Coller les éléments sélectionnés"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -96,8 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Տեղադրեք ընտրված տարրերը սեղմատախտակից' is a literal translation and could be improved for natural flow in Armenian. While technically correct, it sounds somewhat robotic.",
-          "suggestion": "Consider a more idiomatic phrasing like 'Սեղմատախտակից ներմուծեք ընտրված տարրերը' or 'Տեղադրել սեղմատախտակի ընտրված տարրերը'."
+          "description": "The translation 'Տեղադրեք ընտրված տարրերը սեղմատախտակից' is a literal translation and might not be the most natural phrasing in Armenian. It emphasizes 'from the clipboard' which isn't always necessary in a user interface context. A more idiomatic translation would focus on the action of pasting.",
+          "suggestion": "Consider a phrasing like 'Ետքի դնել ընտրված տարրերը' (Get selected items) or 'Ապանակել ընտրված տարրերը' (Paste selected items - more closely aligned with the original but potentially less natural)."
         }
       ],
       "approved_at": null
@@ -114,8 +125,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"選択した項目をクリップボードにペースト\" is a literal translation but sounds unnatural in Japanese. A more natural phrasing would be \"クリップボードから選択した項目を貼り付け\" or \"クリップボードの内容を、選択した項目に貼り付け\". The current phrasing places the focus on the items being pasted *to* the clipboard, which isn't the intended meaning.",
-          "suggestion": "クリップボードから選択した項目を貼り付け"
+          "description": "The translation \"選択した項目をクリップボードにペースト\" literally translates to 'Paste selected items to the clipboard'. The English says 'from the clipboard'. While understandable, using 'から' (kara) would be more accurate and natural.",
+          "suggestion": "選択した項目をクリップボードからペースト"
         }
       ],
       "approved_at": null
@@ -129,7 +140,33 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຄລິບບອດ' (clipboard) is correctly spelled.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ວາງ' (paste) is correctly spelled.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ລາຍການ' (items) is correctly spelled.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ທີ່ເລືອກ' (selected) is correctly spelled.",
+          "suggestion": null
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While grammatically correct, the translation 'ວາງລາຍການທີ່ເລືອກຈາກຄລິບບອດ' is a very literal translation. A more natural Lao phrasing for 'Paste selected items' might be 'ໃສ່ລາຍການທີ່ເລືອກ' or 'ນໍາລາຍການທີ່ເລືອກເຂົ້າມາ'.",
+          "suggestion": "ໃສ່ລາຍການທີ່ເລືອກ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -150,7 +187,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Wklej zaznaczone pliki ze schowka\" suggests the items being pasted are files. The English indicates 'items' in a more general sense, not specifically files.",
+          "description": "The translation 'Wklej zaznaczone pliki ze schowka' implies that only files can be pasted, while the English source refers to 'items'. 'Items' is more general and could include text, images, etc.",
           "suggestion": "Wklej zaznaczone elementy ze schowka"
         }
       ],
@@ -174,13 +211,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Lipire elemente selectate în clipboard' is a literal translation but sounds unnatural in Romanian. 'Lipire' implies gluing or sticking, which isn't the meaning of pasting. A more natural translation would involve 'inserare' or 'lipire'.",
+          "description": "The Romanian translation 'Lipire elemente selectate în clipboard' is not the most natural or precise translation of 'Paste selected items from the clipboard'. 'Lipire' can imply sticking or gluing, which isn't the intended meaning of 'paste'.",
           "suggestion": "Inserare elemente selectate din clipboard"
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, the use of 'din clipboard' could be improved. 'Clipboard' is often used directly in Romanian.",
-          "suggestion": "Inserare elemente selectate în clipboard"
         }
       ],
       "approved_at": null
@@ -197,13 +229,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"පසුරු පුවරුවෙන් තෝරාගත් අථක අලවන්න\" does not accurately convey the meaning of \"Paste selected items from the clipboard\". \"අථක\" (athaka) doesn't fit the context of 'items' and 'paste'.",
-          "suggestion": "A more accurate translation might be something like \"පසුරු පුවරුවෙන් තෝරාගත් දේ ඇලවන්න\" (pasuru puwaruwen thora gat de awathunna) or \"පසුරු පුවරුවෙන් තෝරාගත් කොටස් ඇලවන්න\" (pasuru puwaruwen thora gat kotas awathunna)."
+          "description": "The translation \"පසුරු පුවරුවෙන් තෝරාගත් අථක අලවන්න\" does not accurately convey the meaning of \"Paste selected items from the clipboard\". The word 'අථක' (athaka) is not appropriate in this context. It generally refers to something like 'immaterial' or 'intangible'.",
+          "suggestion": "A more accurate translation would be something like \"පසුරු පුවරුවෙන් තෝරාගත් දෑ අලවන්න\" (Pasuru puwaruwen thoragatha de aalawanna) or \"පසුරු පුවරුවෙන් තෝරාගත් අයිතමයි අලවන්න\" (Pasuru puwaruwen thoragatha aithamayie aalawanna)."
         },
         {
           "type": "spelling",
-          "description": "While the individual words might be spelled correctly, the overall phrase doesn't feel natural in Sinhala and may contain unintended word choices or grammatical errors. Further review by a native speaker is recommended.",
-          "suggestion": "Consult with a native Sinhala speaker familiar with technical terminology for a more natural and accurate translation."
+          "description": "While not strictly incorrect, the transliteration of 'clipboard' could be refined. Using a more common Sinhala equivalent of 'clipboard' would enhance readability for a wider audience.",
+          "suggestion": "Consider incorporating a commonly understood Sinhala term for 'clipboard', possibly researching how it's typically rendered in software interfaces."
         }
       ],
       "approved_at": null
@@ -226,13 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Налепи одабране ставке са привремене меморије' doesn't accurately convey the meaning of 'Paste selected items from the clipboard.' 'Налепи' translates to 'stick' or 'paste' in the sense of applying something, which isn't the primary action of pasting from the clipboard. 'Привремене меморије' translates to 'temporary memory', which is a less common and more technical term for the clipboard in this context.",
-          "suggestion": "Лепите одабране ставке са клипборда"
-        },
-        {
-          "type": "formatting",
-          "description": "The verb 'Лепите' should be in the imperative mood, aligning with the action of a hotkey.",
-          "suggestion": "No change needed if 'Лепите' is already deemed appropriate for the context."
+          "description": "The translation 'Налепи одабране ставке са привремене меморије' doesn't accurately convey the meaning of 'Paste selected items from the clipboard'. 'Налепи' translates to 'stick' or 'paste' in the sense of gluing, which is not what's intended. 'Привремене меморије' translates to 'temporary memory,' which is a less accurate representation of 'clipboard'.",
+          "suggestion": "A more accurate translation would be something along the lines of 'Лепите одабране ставке са клипборда' or 'Улепите одабране ставке са клипборда'. Both 'Лепите' and 'Улепите' are more aligned with 'paste' in the context of digital content."
         }
       ],
       "approved_at": null
@@ -243,13 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Nalepi odabrane stavke sa privremene memorije\" doesn't accurately convey the meaning of 'Paste selected items from the clipboard'. 'Nalepi' means 'to stick' or 'to glue', which isn't the intended action of pasting data. A more accurate translation would use a term related to 'pasting' or 'copying'.",
-          "suggestion": "Insert odabrane stavke iz isečeka"
-        },
-        {
-          "type": "spelling",
-          "description": "The translation contains the word 'isečeka'. It appears to be a typo and should be 'clipboards'",
-          "suggestion": "Insert odabrane stavke iz isečeka"
+          "description": "The translation 'Nalepi odabrane stavke sa privremene memorije' is a literal translation that doesn't quite capture the nuance of 'Paste selected items from the clipboard'. 'Nalepi' generally means 'stick' or 'glue', whereas 'paste' in this context refers to moving data from the clipboard. The phrase 'privremene memorije' is technically correct for 'clipboard', but sounds clunky in this context.",
+          "suggestion": "A better translation would be something like 'Umetni odabrane stavke iz isečnja' or 'Postavi odabrane stavke iz isečnja'.  'Umetni' and 'Postavi' are closer equivalents to 'paste'."
         }
       ],
       "approved_at": null
@@ -272,8 +294,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Dán các mục đã chọn từ bộ nhớ tạm' is a literal translation but doesn't fully capture the intended meaning of 'Paste selected items from the clipboard'. The phrase 'bộ nhớ tạm' (temporary memory) is not the standard term for 'clipboard' in Vietnamese in this context. It's more commonly referred to as 'bảng nhớ' or 'clipboard'.",
-          "suggestion": "Dán các mục đã chọn từ bảng nhớ"
+          "description": "The translation 'Dán các mục đã chọn từ bộ nhớ tạm' is a literal translation but doesn't flow naturally in Vietnamese. 'Bộ nhớ tạm' is correct, but the overall phrasing is a bit awkward.",
+          "suggestion": "Dán các mục đã chọn vào bộ nhớ tạm"
         }
       ],
       "approved_at": null
@@ -284,8 +306,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"粘贴剪贴板中选定的项目\" is a literal translation that sounds unnatural in Chinese. 'Select' implies an action of choosing from a list. In the context of pasting, it’s better to focus on the pasted items being specifically those that were previously selected.",
-          "suggestion": "粘贴选中的剪贴板内容"
+          "description": "The translation '粘贴剪贴板中选定的项目' is a literal translation that is a bit awkward in Chinese. While technically correct, it doesn't flow naturally.",
+          "suggestion": "粘贴选中的项目"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The original English phrase emphasizes pasting 'selected items'. The current translation adds '中' (in) which is not strictly necessary and makes it sound more formal than the original.",
+          "suggestion": "粘贴选中的项目"
         }
       ],
       "approved_at": null

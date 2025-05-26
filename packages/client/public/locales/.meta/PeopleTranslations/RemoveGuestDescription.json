@@ -3,7 +3,7 @@
   "content": "Guest <strong>{{userName}}</strong> will be removed from all rooms you have invited them to. This action cannot be undone.",
   "content_en_sha1_hash": "1aa3095c4f093f8431203e278a7c1d2e7897b457",
   "created_at": "2025-05-19T21:30:53.499Z",
-  "updated_at": "2025-05-21T05:58:23.141Z",
+  "updated_at": "2025-05-24T06:27:40.506Z",
   "comment": {
     "text": "This translation key is used for a confirmation message that explains why a guest is being removed from invited rooms. It appears in a modal dialog and provides context to the user about the action they are about to take. The translator should provide a message that accurately conveys this information, ensuring consistency across different languages and regions.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"onları dəvət etdiyiniz bütün otaqlardan\" (they are invited to all rooms) doesn't accurately convey the meaning of 'rooms you have invited them to'. It implies the guest invited the rooms, which is incorrect. It should reflect that the user invited the guest to the rooms.",
-          "suggestion": "Qonaq <strong>{{userName}}</strong> siz onları dəvət etdiyiniz bütün otaqlardan silinəcək."
+          "description": "The phrase \"onları dəvət etdiyiniz bütün otaqlardan\" is not a perfect translation of \"all rooms you have invited them to\". A more accurate translation would reflect the plural form of rooms more directly.",
+          "suggestion": "Qonaq <strong>{{userName}}</strong> siz onları dəvət etdiyiniz bütün otaqlardan silinəcək. or Qonaq <strong>{{userName}}</strong> siz dəvət etdiyiniz bütün otaqlardan silinəcək."
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Host' (Host) is a less appropriate translation for 'Guest' in this context. 'Guest' refers to a person invited, and 'Host' implies they are the organizer or owner, which is not the meaning.",
-          "suggestion": "Pozvaný host <strong>{{userName}}</strong>"
+          "description": "The word 'Guest' is translated as 'Host' ('Host'). While 'Host' can sometimes be used interchangeably, in this context, 'Guest' more accurately describes the person being removed.",
+          "suggestion": "Consider translating 'Guest' as 'Pozvaný' (invited person) or re-evaluate the intended meaning and context."
         }
       ],
       "approved_at": null
@@ -107,9 +107,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"すべてのルームから削除されます\" (sarubetoru ruum kara sakujou saremasu) is a bit formal and potentially clunky for this context. A more natural phrasing would be something like \"招待した全ての部屋から削除されます\" (shoutai shita subete no heya kara sakujou saremasu) or \"招待した部屋すべてから削除されます\" (shoutai shita heya subete kara sakujou saremasu).",
-          "suggestion": "招待した全ての部屋から削除されます (shoutai shita subete no heya kara sakujou saremasu) or 招待した部屋すべてから削除されます (shoutai shita heya subete kara sakujou saremasu)"
+          "type": "formatting",
+          "description": "The strong tag is incorrectly applied in the Japanese translation. It should be used consistently with the English version.",
+          "suggestion": "ゲストの**<strong>{{userName}}</strong>**は、あなたが招待したすべてのルームから削除されます。"
         }
       ],
       "approved_at": null
@@ -120,13 +120,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"초대한\" (choedahaneun) implies the user *invited* the guest. The English states the guest is *being removed* from rooms *you* invited them to. \"초대한 모든 룸에서\" could be misinterpreted as the user invited the guest to all rooms, instead of the guest being in rooms the user invited them to.",
-          "suggestion": "<strong>{{userName}}</strong> 게스트가 사용자가 초대한 모든 룸에서 제거됩니다."
+          "description": "The phrase '초대한 모든 룸' is not the most natural way to express 'all rooms you have invited them to'. It literally translates to 'all rooms invited by' which isn't quite right.",
+          "suggestion": "초대하신 모든 룸에서 or 초대하신 모든 방에서"
         },
         {
           "type": "formatting",
-          "description": "The English uses `<strong>` for emphasis. The Korean translation also uses `<strong/>`, which is appropriate.",
-          "suggestion": null
+          "description": "The strong tag is correctly used, but the Korean sentence flow could be improved for better readability.",
+          "suggestion": "<strong >{{userName}}</strong> 게스트는 초대하신 모든 룸에서 제거됩니다. 이 작업은 취소할 수 없습니다."
         }
       ],
       "approved_at": null
@@ -136,9 +136,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "spelling",
+          "description": "The word 'ກະ' is incorrect and appears to be a typo. It should likely be 'ດຳ'",
+          "suggestion": "แขກ <strong>{{userName}}</strong> ຈະຖືກຖອນອອກຈາກຫ້ອງທັງຫມົດທີ່ທ່ານເຊີນພວກເຂົາເຂົ້າຮ່ວມ ການກະ ດຳ ນີ້ບໍ່ສາມາດຍົກເລີກໄດ້"
+        },
+        {
           "type": "formatting",
-          "description": "The Lao translation includes a space before the Lao word 'ກະ' which is unnecessary and disrupts the flow.",
-          "suggestion": "แขກ <strong>{{userName}}</strong> ຈະຖືກຖອນອອກຈາກຫ້ອງທັງຫມົດທີ່ທ່ານເຊີນພວກເຂົາເຂົ້າຮ່ວມ ການກະ ທຳ ນີ້ບໍ່ສາມາດຍົກເລີກໄດ້"
+          "description": "There is an extra space between 'ກະ' and 'ດຳ' in the Lao translation.",
+          "suggestion": "แขກ <strong>{{userName}}</strong> ຈະຖືກຖອນອອກຈາກຫ້ອງທັງຫມົດທີ່ທ່ານເຊີນພວກເຂົາເຂົ້າຮ່ວມ ກະດຳ ນີ້ບໍ່ສາມາດຍົກເລີກໄດ້"
         }
       ],
       "approved_at": null
@@ -149,8 +154,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"uz kurām to uzaicinājāt\" is a bit awkward and could be improved. It literally translates to 'to which you invited it.' A more natural phrasing would be 'kuras jūs uzaicinājāt' (which you invited).",
-          "suggestion": "Viesis <strong>{{userName}}</strong> tiks noņemts no visām telpām, kuras jūs uzaicinājāt. Šo darbību nevarēs atsaukt."
+          "description": "The phrase \"uz kurām to uzaicinājāt\" is awkward and doesn't perfectly convey the meaning of \"you have invited them to\". A more natural phrasing would be something like \"uz kurām jūs viņu uzaicinājāt\" or \"kurās jūs viņus uzaicinājāt\".  The direct translation is technically correct but sounds stilted.",
+          "suggestion": "Viesis <strong>{{userName}}</strong> tiks noņemts no visām telpām, kurās jūs viņus uzaicinājāt."
         }
       ],
       "approved_at": null
@@ -197,13 +202,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ආරාධිත සියලු කාමරවලිනුත්\" is awkward and doesn't accurately convey \"all rooms you have invited them to\". A more natural translation would be something like \"ඔයා ආරාධනා කල සියලුම කාමරවලිනුත්\".",
-          "suggestion": "ඔයා ආරාධනා කල සියලුම කාමරවලිනුත්"
+          "description": "The phrase \"ආරාධිත සියලු කාමරවලිනුත්\" is awkward and doesn't accurately reflect \"all rooms you have invited them to\". It translates literally to 'from all rooms you have invited'.",
+          "suggestion": "ආරාධිත කාමර සියල්ලෙන්ම අමුත්තෙකු වන"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'අහෝසි' (ahosi) translates to 'cancelled' or 'abolished', whereas in this context, 'undoable' or 'irreversible' would be more appropriate. A better translation would be 'එවැනි ක්‍රියාවක් කළ නොහැක'.",
-          "suggestion": "එවැනි ක්‍රියාවක් කළ නොහැක"
+          "description": "The word 'අහෝසි' (ahosi) used for 'undone' can have a stronger connotation. A more appropriate word reflecting 'cannot be undone' in this context could be softer.",
+          "suggestion": "ආපසු නොකළ හැකි වනු ඇත"
         }
       ],
       "approved_at": null
@@ -223,13 +228,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'позвали' is likely a typo. The correct form should be 'позвао/позвала/позвало/позвали', depending on the subject (you).",
-          "suggestion": "позвао/позвао/позвало/позвали (depending on the subject)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -237,9 +236,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'prostorija' (room) could be improved to 'soba' which is a more common and natural term for 'room' in this context.",
-          "suggestion": "Gost <strong>{{userName}}</strong> biće uklonjen iz svih soba u koje ste ga pozvali. Ova radnja se ne može opozvati."
+          "type": "formatting",
+          "description": "The strong tag is not consistently applied. The English version uses `<strong>`, while the Serbian translation uses `<strong`. This creates an inconsistency.",
+          "suggestion": "Use consistent formatting: change `<strong` to `<strong>`."
         }
       ],
       "approved_at": null
@@ -250,8 +249,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'davet ettiğiniz tüm odalardan' (from those rooms you invited) is not the most natural way to express 'all rooms you have invited them to'. A more accurate translation would be something along the lines of 'tüm davet ettiğiniz odalarda' or 'tüm odalarda size davet ettikleri'.",
-          "suggestion": "Konuk <strong>{{userName}}</strong> tüm davet ettiğiniz odalardan kaldırılacak. Bu işlem geri alınamaz."
+          "description": "The translation of 'invited them to' is not accurate. 'Davet ettiğiniz' implies the user invited the guest, but the English implies the user invited the guest *to rooms*. A more accurate translation would reflect this nuance.",
+          "suggestion": "Konuk <strong>{{userName}}</strong>, sizi davet ettiğiniz odalardan kaldırılacak."
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Contacts",
   "content_en_sha1_hash": "b0dd615cbbdcbf21ffb72115599ca915634fcb85",
   "created_at": "2025-05-19T21:30:43.662Z",
-  "updated_at": "2025-05-22T11:56:37.291Z",
+  "updated_at": "2025-05-24T01:27:25.964Z",
   "comment": {
     "text": "The translation key \"Contacts\" is used to display a title for a list or directory of contacts, appearing as a header in various UI elements such as articles, template access selectors, and invite panels. This text provides context and helps distinguish this section from others, guiding the user's understanding of what they are viewing.",
     "is_auto": true,
@@ -276,8 +276,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Liên lạc\" can mean \"contact\" or \"communication,\" it's not the most common or natural translation for \"Contacts\" in the context of a contact list or address book. \"Liên hệ\" is a more accurate and widely understood translation for 'Contacts' in this context.",
-          "suggestion": "Liên hệ"
+          "description": "While 'Liên lạc' can mean 'contact' or 'communication', in the context of 'Contacts' (as in, a list of contact information), a more accurate and commonly used translation would be 'Danh bạ'. 'Liên lạc' is more general and might be misinterpreted.",
+          "suggestion": "Danh bạ"
         }
       ],
       "approved_at": null
@@ -288,7 +288,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '联系人信息' (liánxì rén xìnxī) is understandable and often used, a more direct and common translation of 'Contacts' is '联系人' (liánxì rén). '联系人信息' emphasizes the information *about* contacts, whereas '联系人' simply refers to the contacts themselves. Given the key name 'Common:Contacts', the simpler translation is preferred.",
+          "description": "The translation \"联系人信息\" (liánxì rén xìnxī) literally translates to \"Contact Information\". While close, \"Contacts\" is a more direct and often preferred translation for the English term, especially in UI contexts. \"联系人\" (liánxì rén) on its own would be a better direct translation of 'Contacts'.",
           "suggestion": "联系人"
         }
       ],

@@ -3,7 +3,7 @@
   "content": "Create room",
   "content_en_sha1_hash": "bc487b9d588a5f906e3f1cf66e5d6096e1b21ed5",
   "created_at": "2025-05-19T21:30:43.921Z",
-  "updated_at": "2025-05-22T11:56:37.359Z",
+  "updated_at": "2025-05-24T01:19:12.526Z",
   "comment": {
     "text": "This translation key is used for the \"Create room\" button label in various UI components, such as buttons and dialog headers. It appears when a user clicks on the \"Create room\" link or button to initiate the creation of a new room.",
     "is_auto": true,
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Otaq yaradın\" directly translates to \"You created a room.\" The English phrase \"Create room\" is an imperative and more accurately translates to \"Yaradın otaq\" or \"Otaq yaradın!\" (Create a room!). The current translation implies that the user *has* already created a room.",
-          "suggestion": "Yaradın otaq"
+          "description": "The translation \"Otaq yaradın\" literally translates to \"You created a room.\" While technically correct, it's less natural than a more direct translation for a button or action label. A more suitable translation would convey 'Create Room' as a command or instruction.",
+          "suggestion": "Otaq yarat"
         }
       ],
       "approved_at": null
@@ -225,7 +225,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'කාමරය සාදන්න' (kaamaraya saadan’na) is a literal translation of 'create room'. A more natural and common translation would be 'මමගෙම කාමරයක් සාදන්න' (mama gemo kaamaraayak saadan'na) meaning 'create my own room' or 'create a room'. Or simply 'කාමරයක් සාදා ගන්න' (kaamarayak saada gana) meaning 'to create a room'.",
+          "suggestion": "කාමරයක් සාදා ගන්න (kaamarayak saada gana)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -246,7 +252,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Креирај собу\" is understandable, a more natural and commonly used translation of \"Create room\" in Serbian (Cyrillic) would be \"Направи собу\" or \"Отвори собу\". \"Креирај\" is more formal and less frequently used in this context.",
+          "description": "While 'Креирај собу' is understandable, a more natural and common Serbian (Cyrillic) translation for 'Create room' would be 'Направи собу'. 'Креирај' has a more formal or technical connotation.",
           "suggestion": "Направи собу"
         }
       ],

@@ -3,7 +3,7 @@
   "content": "To upload and create new files and folders, please free up disk space, or contact the {{productName}} administrator to increase the storage quota.",
   "content_en_sha1_hash": "bd82f05265948b22a11ff3c25bdeb0f4e8cda1c7",
   "created_at": "2025-05-19T21:30:54.115Z",
-  "updated_at": "2025-05-21T07:50:11.763Z",
+  "updated_at": "2025-05-24T08:04:26.259Z",
   "comment": {
     "text": "This translation key is used for a message that displays when a user attempts to create new files or folders but does not have sufficient disk space. It prompts the user to free up space or contact an administrator to increase their storage quota.",
     "is_auto": true,
@@ -27,23 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'To upload and create new files and folders' is not accurately reflected in the Arabic translation. While it conveys the general idea, a more literal and natural translation would improve clarity.",
-          "suggestion": "لرفع وإنشاء ملفات ومجلدات جديدة"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'free up disk space' is a bit vague. A more specific translation would clarify the action required.",
-          "suggestion": "تفريغ مساحة تخزين"
-        },
-        {
-          "type": "formatting",
-          "description": "The variable {{productName}} should be checked to ensure correct rendering and localization within the application.",
-          "suggestion": "Verify correct rendering of {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -51,9 +35,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase \"yaddaş kvotasını artırmaq\" (memory quota) is not a direct translation of \"storage quota\".  It's not necessarily incorrect, but it's not as accurate.  'Saxtələşdirilmiş saxlama kvotasını artırmaq' would be more precise.",
+          "suggestion": "Saxtələşdirilmiş saxlama kvotasını artırmaq"
+        },
+        {
           "type": "formatting",
-          "description": "The Azerbaijani translation uses a conjunction ('və' meaning 'and') between \"diskdə yer boşaldın\" and \"yaddaş kvotasını artırmaq üçün {{productName}} administratorla əlaqə saxlayın\".  In English, the sentence uses a comma. While not strictly incorrect, a semicolon or comma would flow better in Azerbaijani.",
-          "suggestion": "Yeni fayl və qovluqları yükləmək və yaratmaq üçün diskdə yer boşaldın; yaddaş kvotasını artırmaq üçün {{productName}} administratorla əlaqə saxlayın."
+          "description": "The variable {{productName}} is correctly placed, but consistency in capitalization and punctuation should be ensured throughout all translations of similar phrases.",
+          "suggestion": "Ensure consistent use of variable formatting in all related translations."
         }
       ],
       "approved_at": null
@@ -63,9 +52,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The variable {{productName}} is not properly formatted within the Bulgarian translation. While it's present, the surrounding spaces might need adjustment to ensure proper rendering in the target language's context.",
-          "suggestion": "Review spacing around {{productName}} within the Bulgarian text to ensure it renders correctly (e.g., 'с администратора {{productName}}' might be better as 'с администратора на {{productName}}' depending on the platform)."
+          "type": "incorrect_translation",
+          "description": "The phrase 'contact the {{productName}} administrator' is translated as 'свържете се с администратора {{productName}}'. While technically correct, it reads slightly awkwardly in Bulgarian. A more natural phrasing would be 'свържете се с администратора на {{productName}}'.",
+          "suggestion": "свържете се с администратора на {{productName}}"
         }
       ],
       "approved_at": null
@@ -88,13 +77,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word \"αποθ\" is an abbreviation and might not be easily understood by all users. It's likely a shortened form of \"αποθηκευτικού χώρου\" (storage space).",
+          "description": "The word 'αποθ' is an abbreviation and not a proper word. It's likely a shortened version of 'αποθηκευτικού' (storage).",
           "suggestion": "ελευθερώστε χώρο στον δίσκο ή επικοινωνήστε με τον διαχειριστή {{productName}} για να αυξήσετε την ποσόστωση αποθηκευτικού χώρου."
         },
         {
-          "type": "formatting",
-          "description": "While grammatically correct, the sentence structure could be slightly improved for better flow in Greek. The phrase \"ελευθερώστε χώρο στον δίσκο\" feels a bit abrupt.",
-          "suggestion": "Για να ανεβάσετε και να δημιουργήσετε νέα αρχεία και φακέλους, ελευθερώστε χώρο στον δίσκο σας ή επικοινωνήστε με τον διαχειριστή {{productName}} για να αυξήσετε την ποσόστωση αποθηκευτικού χώρου."
+          "type": "grammar",
+          "description": "While technically not incorrect, 'ποσόστωση αποθηκευτικού χώρου' sounds slightly awkward. A more natural phrasing might be preferable. ",
+          "suggestion": "ελευθερώστε χώρο στον δίσκο ή επικοινωνήστε με τον διαχειριστή {{productName}} για να αυξήσετε τον διαθέσιμο χώρο."
         }
       ],
       "approved_at": null
@@ -111,8 +100,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"muistin kiintiötä\" (memory quota) doesn't accurately reflect \"storage quota\". The original English refers to disk space, which is storage.",
-          "suggestion": "Ole hyvä ja vapauta levytilaa ladataksesi ja luodaksesi tiedostoja ja kansioita tai ota yhteyttä {{productName}}-järjestelmänvalvojaan lisätäksesi tallennustilan kiintiötä."
+          "description": "The phrase \"vapauta levytilaa\" (free up disk space) is accurate but slightly formal for a user-facing message. While technically correct, it can feel abrupt. A softer phrasing might improve user experience.",
+          "suggestion": "Consider a more user-friendly phrasing like \"Tee tilaa\" (Make space) or \"Vapauta tilaa\" (Release space) for a slightly less formal tone. The original translation isn't *incorrect*, but potentially could be improved."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"muistin kiintiötä\" is a more literal translation of \"storage quota\" and may be less clear to the average user. While technically accurate, a more accessible term could be used.",
+          "suggestion": "Consider translating 'storage quota' as 'tallennustilaa' (storage space) for better user understanding. This changes the sentence to: \"...otta yhteyttä {{productName}}-järjestelmänvalvojaan lisätäksesi tallennustilaa.\""
         }
       ],
       "approved_at": null
@@ -126,13 +120,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Armenian translation uses a colon after 'ադմինիստրատորի հետ' which may not be standard Armenian punctuation. Consider removing it.",
-          "suggestion": "կապվեք {{productName}} ադմինիստրատորի հետ պահեստավորման քվոտան մեծացնելու համար:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -144,19 +132,19 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"storage quota\" is translated as \"ストレージの容量制限\" which literally means \"storage capacity limit\". While not entirely wrong, \"storage quota\" implies a defined allowance, which is a more accurate representation of the original meaning. A more suitable translation would be something like \"ストレージの割り当て\" (storage allocation).",
-          "suggestion": "新しいファイルやフォルダをアップロードしたり作成したりするには、ディスクの空き容量を確保するか、{{productName}}の管理者に連絡してストレージの割り当てを増やしてください。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"스토리지 할당량을 늘리세요\" (storage allocation increase) is slightly awkward. A more natural phrasing would be \"저장 공간을 늘리세요\" (increase storage space).",
+          "suggestion": "저장 공간을 늘리세요"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -164,9 +152,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Lao translation includes a space before the curly braces around {{productName}}, which isn't present in the English source and may appear visually incorrect.",
-          "suggestion": "Remove the space before '{{productName}}'."
+          "type": "incorrect_translation",
+          "description": "The phrase \"ສ້າງພື້ນທີ່ຫວ່າງໃນດິສກ໌\" translates more accurately to 'create space on the disk' or 'free up disk space', not just 'create space'. The original English emphasizes freeing up space. While understandable, the current translation is not a perfect match.",
+          "suggestion": "ປ່ອຍພື້ນທີ່ຫວ່າງໃນດິສກ໌"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“ຜູ້ເບິ່ງແຍງລະບົບ” could be more directly translated to 'system administrator' to more closely mirror the original English phrase 'administrator'.",
+          "suggestion": "ຜູ້ບໍ່ງານລະບົບ"
         }
       ],
       "approved_at": null
@@ -186,7 +179,18 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'storage quota' is translated as 'limit pamięci', which is accurate but could be improved to more closely match the original meaning of a defined limit on disk space. 'limit przestrzeni dyskowej' would be a more precise and natural translation.",
+          "suggestion": "limit przestrzeni dyskowej"
+        },
+        {
+          "type": "formatting",
+          "description": "The English uses {{productName}} to indicate a variable. This formatting should be preserved in the Polish translation for consistency.",
+          "suggestion": "Ensure {{productName}} remains unchanged in the Polish translation."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -207,8 +211,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'capacităţile de stocare' is a literal translation of 'storage quota' but sounds awkward in Romanian. A more natural phrasing would be 'spațiul de stocare'.",
-          "suggestion": "Pentru a încărca și a crea fișiere și dosare noi, eliberați spațiu de stocare sau contactați administratorul {{productName}} pentru a majora spațiul de stocare."
+          "description": "The word 'capacităţile' is a somewhat awkward translation for 'storage quota'. It implies capabilities rather than the amount of storage available.",
+          "suggestion": "Pentru a încărca și a crea fișiere și dosare noi, eliberați spațiu de stocare sau contactați administratorul {{productName}} pentru a crește cota de stocare."
         }
       ],
       "approved_at": null
@@ -225,13 +229,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ආචයක සලාකය වැඩි කර ගැනීමට\" is an awkward and potentially incorrect translation of \"contact the {{productName}} administrator to increase the storage quota.\" 'සලාකය' (salakaya) doesn't accurately convey 'administrator' in this context. It's closer to 'salary' or 'payment'.",
-          "suggestion": " කරුණාකර {{productName}} පරිපාලකය අමතන්නතැමියා වැඩි කර ගැනීමට (karunakaran {{productName}} paripalakaya amatanna thamiaya wedikara gannewa)"
+          "description": "The phrase \"ආචයක සලාකය වැඩි කර ගැනීමට\" is not the correct or natural way to express \"to increase the storage quota.\" It's a literal translation that sounds awkward. A more natural phrasing would focus on increasing the storage limit or capacity.",
+          "suggestion": "කාර්ය සලකය වැඩි කර ගැනීමට (Kaarya salakayaa vaddi karayak) - meaning 'to increase the work quota/capacity' or 'තැටි බෝගය වැඩි කර ගැනීමට (Thathi bogayaa vaddi karayak) - meaning 'to increase the disk space'."
         },
         {
           "type": "spelling",
-          "description": "There's a potential issue with the consistency of the word 'තැමියා' (thamiaya). While understandable, it might be better to use a more standardized Sinhala term for 'space' or 'quota' if the target audience is familiar with specific terminology.",
-          "suggestion": "Consider using a more established term like 'ඉඩ' (ida) or 'කොටා' (kota) if appropriate within the context and target audience."
+          "description": "The word \"තැටියේ\" (thathiye) should be \"තැටි\" (thathi).",
+          "suggestion": "තැටි"
         }
       ],
       "approved_at": null
@@ -242,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrasing \"aby zvýšil kvótu úložiska\" (so that he increases the storage quota) is a bit awkward. A more natural phrasing would indicate 'to increase the storage quota.'",
-          "suggestion": "Ak chcete nahrávať a vytvárať nové súbory a priečinky, uvoľnite miesto na disku alebo kontaktujte administrátora {{productName}} a požiadajte o zvýšenie kvóty úložiska."
+          "description": "The phrase \"aby zvýšil kvótu úložiska\" (to increase the storage quota) is slightly awkward. A more natural phrasing would be \"aby zvýšil úložný priestor\" (to increase storage space). While technically correct, it feels less fluent in Slovak.",
+          "suggestion": "Ak chcete nahrávať a vytvárať nové súbory a priečinky, uvoľnite miesto na disku alebo kontaktujte administrátora {{productName}}, aby zvýšil úložný priestor."
         }
       ],
       "approved_at": null
@@ -259,9 +263,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "spelling",
+          "description": "The word 'фасцикле' (fascikle) is a less common or potentially outdated term for 'folders'. It's better to use a more standard term.",
+          "suggestion": "Use 'чајанци' or 'фолдери' instead of 'фасцикле'."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence structure 'Да бисте отпремили и креирали нове датотеке и фасцикле...' is a bit formal and clunky. A more natural phrasing might improve readability.",
+          "suggestion": "Consider restructuring to something like: 'За отпремање и креирање нових датотека и фасцикли...'"
+        },
+        {
           "type": "formatting",
-          "description": "The Serbian translation includes a Latin letter 'с' where Cyrillic 'с' should be used in 'складиштење'.",
-          "suggestion": "Replace 'складиштење' with 'складиштење'."
+          "description": "The variable '{{productName}}' is correctly formatted, but ensure it's consistently used across all translations and integrates smoothly within the surrounding text.",
+          "suggestion": "Verify the variable renders correctly within the user interface and that the product name is appropriately displayed."
         }
       ],
       "approved_at": null
@@ -272,12 +286,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb 'poveća' is in the imperative mood but is not fully conjugated to match the politeness level required. It would be more appropriate to use a conditional form.",
-          "suggestion": "Da biste otpremili i kreirali nove datoteke i fascikle, oslobodite prostor na disku ili kontaktirajte administratora {{productName}} da bi povećao/povećala kvotu za skladištenje."
-        },
-        {
-          "type": "grammar",
-          "description": "The Serbian translation uses the imperfective aspect of the verb 'poveća', which can imply an ongoing or habitual increase, while the English suggests a one-time increase. Using the aorist/perfective form would be more accurate.",
+          "description": "The phrase \"da poveća\" is grammatically incorrect. It should be \"da poveća\" to agree with the verb 'kontaktirajte'.",
           "suggestion": "Da biste otpremili i kreirali nove datoteke i fascikle, oslobodite prostor na disku ili kontaktirajte administratora {{productName}} da poveća kvotu za skladištenje."
         }
       ],
@@ -289,13 +298,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"free up disk space\" is not accurately reflected in the Turkish translation. \"Disk alanını boşaltın\" translates to 'empty disk space', which implies completely clearing the disk, not just freeing up space. A more accurate translation would emphasize creating space.",
-          "suggestion": "Yeni dosya ve klasörler yüklemek ve oluşturmak için lütfen yeterli disk alanı bırakın veya depolama kotasını artırmak için {{productName}} yöneticiyle iletişime geçin."
+          "description": "The phrase \"to upload and create new files and folders\" is somewhat awkwardly translated as \"Yeni dosya ve klasörler yüklemek ve oluşturmak\". A more natural Turkish phrasing would be \"dosya ve klasör yükleme ve oluşturma\".",
+          "suggestion": "Yeni dosya ve klasör yükleme ve oluşturma için lütfen disk alanını boşaltın veya depolama kotasını artırmak için {{productName}} yöneticiyle iletişime geçin."
         },
         {
-          "type": "formatting",
-          "description": "The Turkish translation retains the English phrasing of \"{{productName}}\". While technically correct, it might be more natural to rephrase depending on the context within the Turkish user interface.",
-          "suggestion": "Depolama kotasını artırmak için {{productName}} yöneticisiyle iletişime geçin."
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"depolama kotasını artırmak için\" is slightly less fluent than other options. It could be improved.",
+          "suggestion": "depolama alanınızı artırmak için"
         }
       ],
       "approved_at": null
@@ -305,9 +314,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Ukrainian translation includes an unnecessary comma after '{{productName}}'. It disrupts the flow of the sentence.",
-          "suggestion": "Щоб вивантажити та створити нові файли й папки, звільніть місце на диску або зверніться до адміністратора {{productName}} аби збільшити квоту сховища."
+          "type": "incorrect_translation",
+          "description": "The phrase 'вивантажити' (vyvantagezhity) is an unusual and potentially incorrect translation for 'upload'. A more common and appropriate translation for 'upload' would be 'завантажити' (zavantazhyty).",
+          "suggestion": "Щоб завантажити та створити нові файли й папки..."
         }
       ],
       "approved_at": null

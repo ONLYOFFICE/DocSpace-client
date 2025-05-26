@@ -3,7 +3,7 @@
   "content": "Start setting up",
   "content_en_sha1_hash": "68e48268020a3f2798df84f3bd36e4a12273da4c",
   "created_at": "2025-05-19T21:30:54.689Z",
-  "updated_at": "2025-05-21T08:34:01.944Z",
+  "updated_at": "2025-05-24T08:46:55.990Z",
   "comment": {
     "text": "This translation key is used to display a button label that triggers setting up a development environment. It appears in a small navigation button on a Portal Settings page, prompting users to start the setup process.",
     "is_auto": true,
@@ -57,7 +57,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation \"Έναρξη ρύθμισης\" while literally meaning 'Start of configuration/adjustment,' doesn't quite capture the nuance of 'Start setting up'. It sounds a bit formal and technical for the implied context of a Javascript SDK. A more natural phrasing would convey a sense of initiation or beginning the setup process.",
+          "suggestion": "Εκκίνηση ρύθμισης"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -78,7 +84,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Commencer le réglage' is understandable, it's not the most natural or idiomatic translation for 'Start setting up'.  It literally translates to 'Start the adjustment'. A better option would convey the action of beginning the setup process.",
+          "description": "While \"Commencer le réglage\" is understandable, a more idiomatic and accurate translation of \"Start setting up\" would be \"Démarrer la configuration\" or \"Lancer la configuration\". \"Réglage\" often implies adjustment rather than initial setup.",
           "suggestion": "Démarrer la configuration"
         }
       ],
@@ -102,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"設定開始\" while technically correct, is a very literal translation. A more natural and user-friendly translation for \"Start setting up\" would convey a sense of initiation or beginning the setup process. \"設定を開始する\" (Setting o kaishiru) would be a more common and fluent option.",
-          "suggestion": "設定を開始する"
+          "description": "While \"設定開始\" (settei kaishi) is understandable, a more natural and accurate translation of \"Start setting up\" would be something like \"設定を開始する\" (settei o kaishi suru) or \"セットアップを開始する\" (settapu o kaishi suru). \"設定開始\" feels abrupt and less idiomatic.",
+          "suggestion": "設定を開始する (settei o kaishi suru) or セットアップを開始する (settapu o kaishi suru)"
         }
       ],
       "approved_at": null
@@ -111,7 +117,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"설정 시작\" is understandable, a more natural and accurate translation of \"Start setting up\" would be \"설정 시작하기\" or \"설정하기 시작\".  \"설정 시작\" feels slightly abrupt and doesn't fully convey the ongoing action implied by \"Start setting up\".",
+          "suggestion": "설정 시작하기"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -156,8 +168,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Setare Start' is not a natural or accurate translation of 'Start setting up'. 'Setare' translates to 'Setup' and 'Start' is just 'Start'. Combining them like this is awkward.",
-          "suggestion": "A more accurate and natural translation would be 'Începe configurarea' or 'Configurare inițială'."
+          "description": "The translation \"Setare Start\" is not a natural or accurate translation of \"Start setting up.\" \"Setare\" means 'setting' or 'configuration,' and 'Start' is just 'Start.' This doesn't convey the meaning of initiating a setup process.",
+          "suggestion": "Începe configurarea"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses two separate words instead of a single phrase. A more fluid translation would improve readability.",
+          "suggestion": "A more integrated phrase would be better than two separate words."
         }
       ],
       "approved_at": null
@@ -174,13 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ආරම්භය පිහිටුවමින්' while containing elements of the English meaning, isn't the most natural or accurate translation of 'Start setting up'.  'ආරම්භය' means 'beginning' or 'start', and 'පිහිටුවමින්' implies 'while establishing/setting up', which is a bit wordy and indirect. It's technically correct but lacks fluency.",
-          "suggestion": "A more natural translation would be something like 'ආරම්භ කරමින්' (Aarambha karamin) which means 'starting/commencing'."
-        },
-        {
-          "type": "grammar",
-          "description": "While technically grammatical, the 'මින්' suffix ('-ming') creates a continuous action, implying the setup is ongoing. 'Start setting up' can simply refer to initiating the setup process, not necessarily a continuous action.",
-          "suggestion": "Consider removing 'මින්' if the intention is to describe the initiation of the setup, not the process itself.  'ආරම්භ කර' would convey the beginning."
+          "description": "The Sinhala translation 'ආරම්භය පිහිටුවමින්' doesn't accurately convey the meaning of 'Start setting up'. 'ආරම්භය' means 'beginning' or 'start', and 'පහිටුවමින්' suggests 'installing' or 'establishing'. The translation focuses on the process of establishing, rather than the action of starting the setup.",
+          "suggestion": "Consider a more direct translation like 'පිහිටුවීම ආරම්භ කරන්න' (pihita uvima arambakara naa) which means 'Start the setup' or 'ආරම්භ කිරීම' (arambha karama) which means 'to begin'."
         }
       ],
       "approved_at": null

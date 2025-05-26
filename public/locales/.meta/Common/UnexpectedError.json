@@ -3,7 +3,7 @@
   "content": "An unexpected error occurred. Try again later or contact support.",
   "content_en_sha1_hash": "25ad5a8afd50db67da636bee026c36dbe54b15d6",
   "created_at": "2025-05-19T21:30:49.388Z",
-  "updated_at": "2025-05-22T11:56:37.533Z",
+  "updated_at": "2025-05-23T22:20:17.455Z",
   "comment": {
     "text": "This translation key is used to display an error message when an unexpected issue occurs while performing a specific action, such as opening a link or sending a test email. It appears in a notification dialog, typically triggered by user interaction, and informs the user that they should try again later or contact support for assistance.",
     "is_auto": true,
@@ -198,7 +198,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'apoio' is a somewhat informal term for 'support'. While not incorrect, 'suporte' is generally preferred in more formal contexts.",
+          "description": "The word 'apoio' is a less formal term for 'support'. While understandable, 'suporte' is a more common and professional term in this context.",
           "suggestion": "Ocorreu um erro inesperado. Tente novamente mais tarde ou contacte o suporte."
         }
       ],

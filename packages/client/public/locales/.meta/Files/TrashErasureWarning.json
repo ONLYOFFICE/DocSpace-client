@@ -3,7 +3,7 @@
   "content": "Items in Trash are automatically deleted after 30 days.",
   "content_en_sha1_hash": "efb29be1a65077ab83e127bff8d6e583328edadd",
   "created_at": "2025-05-19T21:30:56.270Z",
-  "updated_at": "2025-05-21T11:05:12.159Z",
+  "updated_at": "2025-05-24T11:14:49.283Z",
   "comment": {
     "text": "The TrashErasureWarning translation key is used to display a notification that files in the trash will be automatically deleted after 30 days. This message appears on desktop devices as part of a warning section, reminding users of this retention policy. The translator should ensure the wording accurately conveys this automated deletion process.",
     "is_auto": true,
@@ -89,9 +89,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The sentence structure is slightly awkward. While technically correct, it could be more natural Armenian. The phrase '30 օր հետո' can be improved.",
-          "suggestion": "Աղբարկղում գտնվող տարրերը ավտոմատ կերպով ջնջվում են 30 օր անց:"
+          "type": "spelling",
+          "description": "The word 'օր' (or) is used incorrectly. It should be 'օրվա' (orva) to properly indicate 'days'.",
+          "suggestion": "Աղբարկղում գտնվող տարրերն ավտոմատ կերպով ջնջվում են 30 օրվա հետո:"
         }
       ],
       "approved_at": null
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'eliminados' (eliminated) is a bit strong for 'deleted' in the context of a trash/recycle bin. 'Apagados' or 'removidos' would be more appropriate.",
-          "suggestion": "Os Itens no Lixo serão automaticamente apagados após 30 dias."
+          "description": "The word 'eliminados' (eliminated) might be too strong. 'Apagados' (deleted) or 'removidos' (removed) would be more appropriate in this context, as it refers to a system's automatic action, not a destructive one.",
+          "suggestion": "Os Itens no Lixo serão automaticamente apagados/removidos após 30 dias."
         }
       ],
       "approved_at": null
@@ -173,19 +173,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The Sinhala word 'කුණු' (kunu) meaning 'dirty' or 'bad' is used for 'Trash'. While not technically incorrect, 'ගබඩා කිරීමෙන් ඉවතලන ලද' (gabadakaramakaramen ivatalana lad) or simply 'පාවිලි කළ' (pavilike kala) might be more appropriate and less colloquial for 'Trash' in this context. 'කුණු' can imply something is rotting or offensive.",
-          "suggestion": "Consider replacing 'කුණු' with 'ගබඩා කිරීමෙන් ඉවතලන ලද' or 'පාවිලි කළ'."
-        },
-        {
           "type": "formatting",
-          "description": "The number 30 is written in Sinhala numerals 𑇬, which might be less clear to some users. It would be best to include both Sinhala and Arabic numerals for clarity.",
-          "suggestion": "Replace 𑇬 with (30)."
+          "description": "The Sinhala translation includes a Sinhala number (𑇬) within the English number '30'. This is unconventional and may confuse users. It's better to keep the English number.",
+          "suggestion": "Replace 𑇬 with 30."
         },
         {
-          "type": "grammar",
-          "description": "While understandable, the sentence structure 'කුණු කූඩයේ තිබෙන ගොනු දවස් 𑇬 (30) කට පසු ස්වයංක්‍රීයව මකනු ලැබේ' could be improved for better flow. The emphasis seems slightly off.  It might be more natural to state that items *will be* automatically deleted.",
-          "suggestion": "Consider rephrasing to something like: 'කුණු කූඩයේ තිබෙන ගොනු ස්වයංක්‍රීයව දවස් 𑇬 (30) කට පසු මකනු ලැබේ.' or 'දවස් 𑇬 (30) කට පසු කුණු කූඩයේ තිබෙන ගොනු ස්වයංක්‍රීයව මකනු ලැබේ.'"
+          "type": "spelling",
+          "description": "The word 'ᱢᱚකනු' (makananū) is a less common way to express 'deleted' and might be confusing. A more commonly used term would be more accessible.",
+          "suggestion": "Replace 'ᱢᱚකනු' with 'ᱢᱚට්ටᱩ' or 'ᱦեռացᱩ'"
         }
       ],
       "approved_at": null
@@ -199,13 +194,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The verb 'izbrišejo' (are deleted) doesn't agree in number with 'Elementi' (Items). It should be 'izbriše' to agree with the plural subject.",
-          "suggestion": "Elementi v košu se samodejno izbrišejo po 30 dneh."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -214,13 +203,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Ставке у Отпаду су аутоматски обрисане након 30 дана' translates to 'Items in Trash are automatically deleted after 30 days,' but the verb tense is incorrect. It implies the items *have already* been deleted, rather than the process of automatic deletion occurring after 30 days.",
-          "suggestion": "Ставке у Отпаду аутоматски се бришу након 30 дана."
+          "description": "The translation 'Ставке у Отпаду су аутоматски обрисане након 30 дана' is not accurate. 'Ставке' means 'items' but in this context, 'items' is better translated as 'elements' or 'predmeti'.  'Обрисане' is passive voice, which doesn't quite convey the automatic nature of the action. The correct translation should imply that the items *will be* automatically deleted.",
+          "suggestion": "Предмети у Кош за отпад ће бити аутоматски избрисани након 30 дана."
         },
         {
-          "type": "spelling",
-          "description": "While 'Отпад' is technically correct, 'Коша за отпатке' is more common and idiomatic when referring to a trash bin or recycle bin.",
-          "suggestion": "Consider using 'Коша за отпатке' for better clarity and natural language."
+          "type": "formatting",
+          "description": "The use of 'Кош за отпад' is preferable to 'Отпад' to clarify the term 'Trash'.",
+          "suggestion": "Use 'Кош за отпад' instead of 'Отпад'."
         }
       ],
       "approved_at": null
@@ -231,13 +220,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'obrisane' (deleted) is in the past tense, while the English implies a future action (automatic deletion). The Serbian should reflect the automatic, ongoing nature of the deletion.",
+          "description": "The translation \"Stavke u Otpadu su automatski obrisane nakon 30 dana\" implies the items *have already* been deleted. The English says they *will be* deleted.",
           "suggestion": "Stavke u Otpadu će biti automatski obrisane nakon 30 dana."
-        },
-        {
-          "type": "spelling",
-          "description": "While technically correct, 'Otpadu' might be perceived as slightly less formal than appropriate for a user interface. 'Koru' or 'Međukorpu' are more common terms for 'Trash'.",
-          "suggestion": "Stavke u Koru/Međukorpu će biti automatski obrisane nakon 30 dana."
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Share & collect",
   "content_en_sha1_hash": "39376ae6d9b8a7366e97fa2bb58d1d646af34823",
   "created_at": "2025-05-19T21:30:48.624Z",
-  "updated_at": "2025-05-22T11:56:37.399Z",
+  "updated_at": "2025-05-23T22:47:14.101Z",
   "comment": {
     "text": "The translation key \"ShareAndCollect\" is used to describe a feature that allows users to share and collect files. It appears in a header component of a file explorer, typically seen on buttons or labels, prompting users to select files for sharing or collecting.",
     "is_auto": true,
@@ -113,9 +113,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "While '共有' (kyouyuu) means 'share' and '収集' (shuushuu) means 'collect', the ampersand (&) is not commonly used in Japanese for joining concepts like this. It would be more natural to use 'および' (oshi) or simply separate the words with a space.",
+          "suggestion": "共有および収集"
+        },
+        {
           "type": "formatting",
-          "description": "The use of '&' in the Japanese translation is unusual. While not technically incorrect, it's not the standard way to represent 'and' in Japanese. A more natural phrasing would be preferable.",
-          "suggestion": "共有と収集 (Kyōyū to shūshū)"
+          "description": "The ampersand (&) is unusual in Japanese text. Using 'および' or a space is more standard for combining words.",
+          "suggestion": "共有 および 収集"
         }
       ],
       "approved_at": null
@@ -198,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Подели и прикупи\" doesn't accurately convey the meaning of \"Share & collect\". \"Прикупи\" implies buying or acquiring something, which isn't the intended meaning of \"collect\" in this context. \"Подели\" is a reasonable translation of \"Share\".",
-          "suggestion": "A more accurate translation would depend on the specific nuance of 'collect' intended. Some options include: 'Подели и сабери' (Share and gather/collect), 'Подели и скупи' (Share and acquire - but less desirable), or 'Подели и чувај' (Share and keep)."
+          "description": "The translation \"Подели и прикупи\" doesn't accurately convey the meaning of \"Share & collect\". \"Прикупи\" implies purchasing or acquiring something in addition to sharing. \"Share & collect\" suggests sharing something and then gathering or amassing it.",
+          "suggestion": "A more accurate translation would be something like \"Подели и сабери\" (Podeli i saberī) or \"Подели и скупи\" (Podeli i skupī), which better represent the act of sharing and collecting."
         }
       ],
       "approved_at": null
@@ -207,13 +212,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Podeli i prikupi' while technically correct, doesn't fully capture the nuanced meaning of 'Share & collect'. 'Share' implies distribution and 'collect' implies aggregation. A more appropriate translation might consider a combination of verbs that better conveys both actions.",
-          "suggestion": "Consider 'Deli i sakupljaj' or 'Podeli i skupi' depending on the desired level of formality and emphasis. 'Deli i sakupljaj' might be slightly better as 'sakupljaj' is a more direct translation of 'collect' than 'prikupi'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -240,8 +239,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"共享和收集\" (Gongxiang he shouji) is a literal translation, it lacks the concise and impactful nature of \"Share & collect\". \"共享\" often implies a broader sharing concept than just sharing for the purpose of collecting.",
-          "suggestion": "Consider alternatives that better convey the dual action of sharing *in order to* collect. Examples: \"分享与收集\" (Fēnxiǎng yǔ shōují), \"分享并收集\" (Fēnxiǎng bìng shōují), or a more contextually relevant option depending on the product/feature."
+          "description": "While \"共享和收集\" is a literal translation of \"Share & collect\", it doesn't fully capture the brevity and conciseness of the original. It sounds somewhat formal and clunky in Chinese.",
+          "suggestion": "Consider alternatives like \"分享与收集\" (fenxiang yu shouji) or “分享收集” (fenxiang shouji) which are more natural and compact, retaining the original meaning."
         }
       ],
       "approved_at": null

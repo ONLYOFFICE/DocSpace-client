@@ -137,8 +137,12 @@ const Branding = ({
       <WhiteLabel />
       {showSettings ? (
         <>
-          <hr />
-          {displayAbout ? <CompanyInfoSettings /> : null}
+          {displayAbout ? (
+            <>
+              <hr />
+              <CompanyInfoSettings />
+            </>
+          ) : null}
           <hr />
           <AdditionalResources />
         </>

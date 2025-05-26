@@ -3,7 +3,7 @@
   "content": "Room updated",
   "content_en_sha1_hash": "831d437138d4e39d56fb62d26301330ae97589b1",
   "created_at": "2025-05-19T21:30:49.825Z",
-  "updated_at": "2025-05-21T00:59:14.061Z",
+  "updated_at": "2025-05-24T02:13:10.613Z",
   "comment": {
     "text": "The \"RoomUpdated\" translation key is used to display a notification message when a room's status has been updated. This message appears on the portal settings page, likely in a webhook notifications section, informing users of changes made to their rooms.",
     "is_auto": true,
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කාමරය යාවත්කාලීන කරන ලදි.' while technically correct, is a bit formal and verbose for a webhook event. A more natural and concise translation would be better.",
-          "suggestion": "කාමරය යාවදුන."
+          "description": "The translation 'කාමරය යාවත්කාලීන කරන ලදි.' is a literal translation of 'Room updated' but sounds slightly awkward in Sinhala. A more natural phrasing would convey the same meaning.",
+          "suggestion": "කාමරය පෙරහුම් කර ඇත."
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Соба ажурирана\" translates to \"Room updated\" but the word 'soba' means 'room' and not 'space' or 'area'. It's a literal but inaccurate translation of the intended meaning of 'Room'.",
-          "suggestion": "Собија ажурирана"
+          "description": "The Serbian translation \"Соба ажурирана\" translates to \"Room updated\" but uses the word \"soba\" which means 'room' as in a physical room, while the English phrase 'Room updated' likely refers to a chat room or virtual space within a platform. It's a semantic mismatch.",
+          "suggestion": "Измењена соба (Izmenjena soba) - meaning 'Modified room' or Соба ажурирана (Soba azurirana) if the context is specifically a physical room.  Alternatively, depending on the platform, a more appropriate translation might be something like 'Ажуриран простор' (Azuriran prostor - Updated space)."
         }
       ],
       "approved_at": null
@@ -189,7 +189,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Soba ažurirana' is understandable, a more natural and accurate translation of 'Room updated' would be 'Prostorija ažurirana' or 'Soa izmenjena'. 'Ažurirana' is technically correct, but feels a bit formal or less common in this context.",
+          "suggestion": "Prostorija ažurirana"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

@@ -3,7 +3,7 @@
   "content": "Restore",
   "content_en_sha1_hash": "3cbe6d6b9a8d1596bb5bca12e14d81c9e108a1a3",
   "created_at": "2025-05-19T21:30:47.901Z",
-  "updated_at": "2025-05-22T11:56:37.421Z",
+  "updated_at": "2025-05-23T23:19:06.423Z",
   "comment": {
     "text": "The translation key \"Restore\" is used to display a button label or header in various UI elements, such as buttons and dialogs. It indicates an action of recovering or returning a file or room to its original state. This translation key appears on screens like Restore Room Dialogs where users can restore a room.",
     "is_auto": true,
@@ -246,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'ප්‍රත්‍යර්පණය' (pratyarpanaya) is a valid Sinhala word, it primarily means 'repayment', 'offering', or 'dedication'.  'Restore' in the context of data or a system usually implies returning something to a previous state, which is better translated as ' නැවත ස්ථානගත කිරීම' (naewath sthaanagath karuma) or ' නැවත පහසකිරීම' (naewath pahasakareema).",
-          "suggestion": "Consider 'නැවත ස්ථානගත කිරීම' (naewath sthaanagath karuma) or 'නැවත පහසකිරීම' (naewath pahasakareema)"
+          "description": "While 'ප්‍රත්‍යර්පණය' (Pratyarpanaya) can mean 'restoration' or 'recovery,' it's a formal and somewhat uncommon term. For a common word like 'Restore,' a simpler and more widely understood translation might be preferable. Alternatives could include ' නැවත ගොඩ ඒraise' (naewatha goda e raise) which means 'rebuild' or 'recover'.",
+          "suggestion": "Consider alternatives such as ' නැවත ගොඩ ඒraise' (naewatha goda e raise) for a more accessible translation."
         }
       ],
       "approved_at": null
@@ -270,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Поврати\" can mean \"return\" or \"restore\" in some contexts, it's not the most common or natural translation of \"Restore\" in this context. A more accurate and common translation would be \"Врати\" or potentially \"Обнови\" depending on the precise nuance intended.",
-          "suggestion": "Врати"
+          "description": "While \"Поврати\" can mean 'return' or 'bring back,' in the context of 'Restore,' a more accurate translation would be 'Врати' or 'Обнови'. 'Поврати' implies a return to a previous location, whereas 'Restore' refers to bringing something back to a former state.",
+          "suggestion": "Врати or Обнови"
         }
       ],
       "approved_at": null
@@ -285,7 +285,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Onar' can mean 'repair', 'Restore' in this context implies a return to a previous state or condition, which is not perfectly captured by 'Onar'. A more accurate translation might consider options like 'Geri yükle' (re-upload/re-load) or 'Düzelt' (correct).",
+          "suggestion": "Consider 'Geri yükle' or 'Düzelt' for a more accurate reflection of 'Restore'."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

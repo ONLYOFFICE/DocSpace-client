@@ -3,7 +3,7 @@
   "content": "PDF form",
   "content_en_sha1_hash": "3ca9af6a134077a287add11f88e394868153a2c0",
   "created_at": "2025-05-19T21:30:53.760Z",
-  "updated_at": "2025-05-21T06:09:33.854Z",
+  "updated_at": "2025-05-24T06:38:48.448Z",
   "comment": {
     "text": "The translation key \"PDFform\" is used to display the label for a PDF form element in a modal dialog. It appears on a dialog's header and is typically translated to \"PDF form\".",
     "is_auto": true,
@@ -36,7 +36,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"PDF forması\" is technically a valid word, it more accurately translates to \"PDF form/uniform\". The standard and most accurate translation of \"PDF form\" in Azerbaijani is \"PDF forması\". However, given the context of software labels, 'PDF forması' is acceptable and understandable and the difference is subtle.",
+          "description": "While 'PDF forması' is technically a correct word, it literally translates to 'PDF form/uniform'. A more natural and accurate translation for 'PDF form' in Azerbaijani would be 'PDF forması' or 'PDF doldurulabilən forması'.",
           "suggestion": "PDF forması"
         }
       ],
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Formular PDF\" is understandable, a more accurate and idiomatic translation of \"PDF form\" would be \"Formular PDF-ului\" or \"Formular în format PDF\". The current translation lacks the possessive aspect inherent in the English phrase.",
-          "suggestion": "Formular PDF-ului"
+          "description": "While \"Formular PDF\" is understandable, a more accurate and natural Romanian translation of \"PDF form\" would be \"Formular PDF-ului\" (PDF form) or \"Model PDF\". \"Formular PDF\" can be interpreted as \"PDF Formular\" which is the inverse of what's intended.",
+          "suggestion": "Formular PDF-ului or Model PDF"
         }
       ],
       "approved_at": null
@@ -174,7 +174,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Formulár PDF' is understandable, a more natural and idiomatic Slovak translation for 'PDF form' would be 'PDF formulár'. The placement of 'PDF' is unusual.",
+          "description": "While 'Formulár PDF' is understandable, a more natural and accurate translation of 'PDF form' in Slovak would be 'PDF formulár'. The word order is typically reversed in Slovak when combining a file type with a noun.",
           "suggestion": "PDF formulár"
         }
       ],
@@ -189,19 +189,19 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Serbian word 'образац' is technically correct, but in the context of a PDF form, 'образац' (obrasac) is better than 'образац' (obrazac). While both are valid, 'obrasac' aligns more closely with the common usage and understanding of 'form' in this digital context.",
+          "suggestion": "PDF образац (PDF obrasac)"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"PDF obrazac\" is a generally acceptable translation of \"PDF form\", it lacks a certain formality that might be expected in a software interface or documentation. A more precise and potentially preferred translation would depend on the specific context, but \"PDF formular\" or \"PDF obrazac\" with a more descriptive explanation might be considered.",
-          "suggestion": "Consider \"PDF formular\" or \"PDF obrazac (PDF forma)\" for improved accuracy and formality."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

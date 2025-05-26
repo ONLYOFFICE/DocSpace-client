@@ -3,7 +3,7 @@
   "content": "Users type",
   "content_en_sha1_hash": "06f3eb37b8e067964f5ab9325f6a9fcdb96ba946",
   "created_at": "2025-05-19T21:30:54.338Z",
-  "updated_at": "2025-05-21T07:55:55.814Z",
+  "updated_at": "2025-05-24T08:10:01.389Z",
   "comment": {
     "text": "The LdapUsersType translation key is used to display the label \"Users type\" in UI elements, such as title sections and input fields, related to LDAP user management settings. It appears in various contexts, including a settings page for portal integration and single sign-on configurations.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Вид потребители' while understandable, is a more literal translation of 'type of users' rather than the more natural 'потребителски тип' or 'тип на потребителите'. It doesn't quite capture the nuance of 'Users type' within the context of LDAP configuration.",
+          "suggestion": "потребителски тип"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -78,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Käyttäjät-tyyppi' is overly literal and not the most natural Finnish phrasing. While technically correct, a more fluent translation would be preferred.",
-          "suggestion": "Käyttäjätyypit"
+          "description": "The translation 'Käyttäjät-tyyppi' is a literal translation but sounds awkward in Finnish. A more natural phrasing would be 'Käyttäjätyyppi'.",
+          "suggestion": "Käyttäjätyyppi"
         }
       ],
       "approved_at": null
@@ -96,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Օգտատիրոջ տեսակ\" (Ogatoroj tesak) translates more literally to \"User's type\" rather than \"Users type\". While understandable, it's not the most natural way to express the English phrase, especially in a technical context. A more appropriate translation might consider using a plural form or a more generalized term.",
-          "suggestion": "Consider alternative translations like \"Օգտատերերի տեսակ\" (Ogatereri tesak - Users' type) or a more descriptive phrase depending on the specific meaning intended within the LDAP configuration."
+          "description": "While \"Օգտատիրոջ տեսակ\" is a literal translation of \"Users type,\" it's not the most natural or idiomatic phrasing in Armenian. A more natural translation might be \"Մեկինյաց տեսակ\" (Menyanac tesak) or \"Օգտագործողների տեսակ\" (Otagorgnerik tesak).",
+          "suggestion": "Consider 'Մեկինյաց տեսակ' or 'Օգտագործողների տեսակ'."
         }
       ],
       "approved_at": null
@@ -126,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ນຳໃຊ້ພິມ\" does not accurately convey the meaning of \"Users type\". \"ນຳໃຊ້\" generally means \"use\" or \"usage\", and \"ພິມ\" means \"print\". The intended meaning is likely a category or classification of users.",
-          "suggestion": "A more accurate translation might be \"ປະເພດຜູ້ໃຊ້\" (pradepp phuu chai), which means \"user type\" or \"user category\". Alternatively, \"ຊະນິດຜູ້ໃຊ້\" (chanit phuu chai) could also work, meaning 'type of user'."
+          "description": "The Lao translation \"ນຳໃຊ້ພິມ\" does not accurately convey the meaning of \"Users type.\" \"ນຳໃຊ້\" means 'use' or 'utilized' and 'ພິມ' means 'print'. This is not the correct translation for 'Users type'.",
+          "suggestion": "A more accurate translation would be something like \"ປະເພດຜູ້ໃຊ້\" (prajat phu sai) which means 'user type' or \"ລັກສະນະຜູ້ໃຊ້\" (laksana phu sai) which means 'user characteristics'."
         }
       ],
       "approved_at": null
@@ -144,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Type gebruiker\" is understandable, a more accurate and natural Dutch translation of \"Users type\" would be \"Gebruikerscategorie\" or \"Soort gebruiker\". \"Type gebruiker\" implies the type *of* user, rather than the category of users.",
-          "suggestion": "Gebruikerscategorie"
+          "description": "The translation 'Type gebruiker' while understandable, is not the most natural or precise translation of 'Users type'. A more accurate translation would be 'Gebruikers type'.",
+          "suggestion": "Gebruikers type"
         }
       ],
       "approved_at": null
@@ -186,8 +192,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'පරිශීලකයෝ ටයිප් කරයි' translates to 'Users type'. This is not an accurate translation of 'Users type'. It's a literal translation of the words, not the intended meaning which refers to the *type* of users.",
-          "suggestion": "The correct translation should convey the meaning of 'type' in relation to users. A better translation would be something like 'පරිශීලක වර්ගය' (Parishilaka Vargaaya), which means 'User Type'."
+          "description": "The Sinhala translation 'පරිශීලකයෝ ටයිප් කරයි' literally translates to 'Users type'. This doesn't accurately convey the meaning of 'Users type' as a descriptor or category.",
+          "suggestion": "A more appropriate translation would be 'භාවිතරයා වර්ගය' (pavitaraya vargaaya) or 'පරිශීලක වර්ග' (parishilaka varga) depending on the specific context. It's crucial to understand the intended meaning within the larger LDAP schema."
+        },
+        {
+          "type": "grammar",
+          "description": "While not strictly incorrect, 'පරිශීලකයෝ ටයිප් කරයි' uses a verb ('type') that isn't necessary for a descriptive label. The translation is too active.",
+          "suggestion": "Avoid using verbs. A noun phrase like 'භාවිතරයා වර්ගය' is more suitable for describing a user type."
         }
       ],
       "approved_at": null

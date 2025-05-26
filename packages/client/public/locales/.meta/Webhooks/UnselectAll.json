@@ -3,7 +3,7 @@
   "content": "Unselect all",
   "content_en_sha1_hash": "c55f9b18f2854856aaed64b21f23d1e5eaa94128",
   "created_at": "2025-05-19T21:30:49.851Z",
-  "updated_at": "2025-05-21T00:54:28.813Z",
+  "updated_at": "2025-05-24T02:08:26.878Z",
   "comment": {
     "text": "This translation key is used to display the text \"Unselect all\" on a dropdown menu within a web application, likely in a portal settings or developer tool context. When clicked, this button empties selected IDs, providing a way to reset selections in the UI.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Hamısı seçimini ləğv edin\" is a literal translation and sounds unnatural in Azerbaijani. A more natural phrasing would be something like \"Seçimləri sil\" or \"Hamısı seçimi götür\".",
-          "suggestion": "Seçimləri sil"
+          "description": "The translation \"Hamısı seçimini ləğv edin\" is a literal translation that isn't the most natural way to express \"Unselect all\" in Azerbaijani. It sounds clunky.",
+          "suggestion": "A more natural translation would be something like \"Çərçivəni təmizlə\" or \"Seçimləri sil\" or \"Hamısını sil\" depending on the context.  \"Hamısını sil\" is likely the closest in meaning and sound."
         }
       ],
       "approved_at": null
@@ -45,19 +45,19 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Откажи всички\" is grammatically correct, it doesn't perfectly capture the nuance of 'Unselect all'. 'Unselect' implies removing a selection, whereas 'Откажи всички' translates more literally to 'Reject all' or 'Decline all'. A more accurate translation might be 'Премахни всички избрани' (Remove all selected) or 'Разчисти всички' (Clear all).",
+          "suggestion": "Премахни всички избрани"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Zrušit výběr všech\" is understandable, a more natural and common Czech translation for \"Unselect all\" would be \"Odznotkovat vše\" or \"Zrušit výběr\". \"Zrušit výběr všech\" is a bit clunky.",
-          "suggestion": "Odznotkovat vše"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ապաընտրել բոլորը' doesn't accurately convey the meaning of 'Unselect all'. 'Ապաընտրել' means 'to unchoose' or 'to undo a choice', but the combination with 'բոլորը' (all) is awkward and doesn't naturally express the concept of undoing a selection.",
-          "suggestion": "A more accurate translation might be something like 'Ջնջել ընտրվածը' (Jgnjel enkrvac) which means 'Delete the selected' or 'Remove selection', or 'Հեռացնել ընտրվածը' (Heracnel enkrvac) which means 'Remove the selected'."
+          "description": "The translation 'Ապաընտրել բոլորը' doesn't accurately convey the meaning of 'Unselect all'. A more accurate translation would be something like 'Ջնջել ընտրված բոլորը' or 'Հեռացնել ընտրված բոլորը'. The current translation literally means 'Undo select all', which is not the intended meaning.",
+          "suggestion": "Ջնջել ընտրված բոլորը"
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"すべて選択解除\" is understandable, a more natural and precise translation of \"Unselect all\" would be \"全件選択解除\" or \"選択解除すべて\". \"すべて選択解除\" implies unselecting *everything* which might not be the intended meaning.",
-          "suggestion": "全件選択解除"
+          "description": "While \"すべて選択解除\" is understandable, a more natural and precise translation of \"Unselect all\" would be \"全件選択解除\" or \"選択解除すべて\". \"すべて選択解除\" implies unselecting *everything* regardless of selection state, which isn't precisely what 'Unselect all' typically means.",
+          "suggestion": "全件選択解除 or 選択解除すべて"
         }
       ],
       "approved_at": null
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '모두 선택 해제' while literally meaning 'deselect all', doesn't fully capture the nuance of 'Unselect all'. It implies a previous selection needs to be removed. 'Unselect all' can also simply mean to ensure nothing is currently selected.",
-          "suggestion": "While '모두 선택 해제' is acceptable, consider alternatives like '선택 해제' (deselect) or '선택 없음' (no selection) depending on the precise intended meaning within the context of the webhook functionality."
+          "description": "While '모두 선택 해제' is understandable, a more natural and common translation of \"Unselect all\" in Korean would be '전체 선택 해제'. \"모두\" can imply 'all of something' while '전체' specifically refers to a complete set or collection.",
+          "suggestion": "전체 선택 해제"
         }
       ],
       "approved_at": null
@@ -144,7 +144,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Noņemt visu atlasi\" is technically correct, it's a bit literal and clunky. A more natural and user-friendly translation for \"Unselect all\" would be something like \"Atcelt atlasi\" or \"Notīrīt atlasi\".",
+          "description": "While technically correct, \"Noņemt visu atlasi\" sounds a bit formal and clunky for a UI element like 'Unselect all'. A more natural phrasing would be better.",
           "suggestion": "Atcelt atlasi"
         }
       ],
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Отменить выбор для всех\" is a bit verbose and not the most natural translation for \"Unselect all\". A more concise and common phrasing would be better.",
-          "suggestion": "Снять выделение со всех"
+          "description": "While technically correct, \"Отменить выбор для всех\" is a bit verbose and not the most natural phrasing for a UI element like 'Unselect all'. A more concise and common translation would be \"Снять выделение\" or \"Удалить выделение\".",
+          "suggestion": "Снять выделение"
         }
       ],
       "approved_at": null
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"සියල්ල නොතෝරන්න\" while literally meaning 'do not select all,' doesn't convey the same meaning as 'Unselect all'. It implies an action of not selecting, rather than reversing a previous selection.",
-          "suggestion": "A more appropriate translation would be something along the lines of \"මැකන්න සියල්ල\" (makanna siyalla) which means 'remove all' or \"ප්‍රතිස්ථානය සියල්ල\" (pratisthana siyalla) which means 'reset all', depending on the function's purpose.  Without more context, it is difficult to provide a perfect translation."
+          "description": "The translation 'සියල්ල නොතෝරන්න' while technically correct, is a bit literal and might not be the most natural way to express 'Unselect all' in Sinhala, particularly in a UI context. It implies a deliberate action of *not* selecting, rather than the action of unselecting a pre-existing selection.",
+          "suggestion": "Consider alternatives like 'අනතුරුව තෝරාගැනීම අවලංගු කරන්න' (anaturuwa thoragenaema avalangu karanne - 'Cancel previous selections') or 'ප්‍රිවර්තනය කරගන්න' (privearthanaya karaganne - 'revert' or 'undo'). The best option would depend on the specific context of the UI."
         }
       ],
       "approved_at": null
@@ -210,13 +210,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Zrušiť výber všetko' is not the most natural or accurate translation of 'Unselect all'. While technically understandable, it sounds awkward.",
+          "description": "The translation 'Zrušiť výber všetko' is not the most natural or accurate translation of 'Unselect all'. It literally translates to 'Cancel selection everything'.",
           "suggestion": "A better translation would be 'Odstrániť všetky položky' or 'Zrušiť všetky výbery'."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'všetko' after 'výber' is grammatically slightly unusual. While not strictly incorrect, it's not idiomatic.",
-          "suggestion": "The addition of 'všetko' is unnecessary; the verb 'Zrušiť' implies totality."
+          "description": "While grammatically understandable, the word order in 'Zrušiť výber všetko' is slightly awkward in Slovak.",
+          "suggestion": "Reordering the phrase as 'Všetko zrušiť výber' is more natural, though still not ideal. The suggested alternatives above resolve this issue."
         }
       ],
       "approved_at": null
@@ -233,8 +233,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Одзначи све\" literally translates to \"Mark all\" or \"Check all\". It's the opposite of \"Unselect all\".",
-          "suggestion": "Одузми све избора"
+          "description": "The Serbian translation \"Одзначи све\" literally translates to \"Mark all\".  The English phrase \"Unselect all\" implies the removal of selections, which is the opposite of \"Mark all\".",
+          "suggestion": "Одузми селекције"
         }
       ],
       "approved_at": null
@@ -251,7 +251,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Tümünün seçimini kaldır' is technically correct but sounds overly formal and slightly awkward in Turkish. A more natural and common phrasing would be 'Seçimi kaldır' or 'Seçimi iptal et'.",
+          "description": "The Turkish translation \"Tümünün seçimini kaldır\" is a literal translation that doesn't sound natural in Turkish for a UI element like 'Unselect all'. A more natural phrasing would be closer to 'Seçimi kaldır' or 'Seçimi iptal et'.",
           "suggestion": "Seçimi kaldır"
         }
       ],

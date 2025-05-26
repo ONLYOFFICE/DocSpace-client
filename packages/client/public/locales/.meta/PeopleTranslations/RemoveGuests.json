@@ -3,7 +3,7 @@
   "content": "Remove guests",
   "content_en_sha1_hash": "1bc076269975c2b2351348b46ceb6faca2bc7ec4",
   "created_at": "2025-05-19T21:30:53.504Z",
-  "updated_at": "2025-05-21T05:57:55.072Z",
+  "updated_at": "2025-05-24T06:27:15.532Z",
   "comment": {
     "text": "This translation key is used for a \"Remove guests\" label that appears on a modal dialog button. It's intended to be displayed when multiple users are being removed and should display the plural form of \"Remove\". This translation appears in a modal window with an option to remove multiple guests.",
     "is_auto": true,
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Уклони госте\" does not accurately convey the meaning of \"Remove guests.\" The correct translation should imply a removal action, rather than a passive state.",
-          "suggestion": "Уклони госте should be \"Избриши госте\" or \"Удаљи госте\" to better represent 'Remove guests'."
+          "description": "The Serbian (Cyrillic) translation 'Уклони госте' doesn't accurately convey the meaning of 'Remove guests'. 'Уклони' is a verb meaning 'to remove' or 'to eliminate', but in this context, it sounds unnatural and abrupt. A more appropriate translation would imply a gentle removal or dismissal.",
+          "suggestion": "Одабаци госте"
         }
       ],
       "approved_at": null
@@ -186,7 +186,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ukloni goste\" does not accurately convey the meaning of \"Remove guests.\" \"Ukloni\" means \"remove\" in the sense of \"eliminate\" or \"delete,\" and is not the appropriate verb for removing guests from a list or system.",
+          "description": "The Serbian translation 'Ukloni goste' doesn't accurately convey the meaning of 'Remove guests'. 'Ukloni' means 'Remove' in the sense of 'eliminate' or 'eradicate'. A more appropriate translation would convey the idea of taking someone off a list or deleting them.",
           "suggestion": "Izbriši goste"
         }
       ],
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Konukları kaldır' while literally meaning 'Remove guests', sounds unnatural in Turkish. A more common and natural phrasing would be 'Konukları sil' or 'Misafirleri kaldır/sil'.",
-          "suggestion": "Konukları sil"
+          "description": "While \"Konukları kaldır\" is technically correct, it's not the most natural or idiomatic way to say \"Remove guests\" in Turkish. \"Kaldırmak\" can imply a forceful removal, which might not be the intended meaning.",
+          "suggestion": "Consider using \"Konukları sil\" or \"Konukları çıkart\" for a more common and softer tone. \"Sil\" translates to delete and \"çıkart\" translates to remove/take out, both more appropriate in this context."
         }
       ],
       "approved_at": null
@@ -222,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"移除多个访客\" (Yíchú duōgè fǎngkè) literally translates to \"Remove multiple guests.\" While not entirely wrong, it's more verbose than the English \"Remove guests.\" A more concise and natural translation would be \"移除访客\" (Yíchú fǎngkè).",
-          "suggestion": "移除访客"
+          "description": "The translation '移除多个访客' (yíchú duō gè fǎng kè) translates to 'remove multiple guests'. While technically correct, it's more literal than the simple 'Remove guests'. A more natural and concise translation would be closer to '删除访客' or '移除访客'.",
+          "suggestion": "移除访客 or 删除访客"
         }
       ],
       "approved_at": null

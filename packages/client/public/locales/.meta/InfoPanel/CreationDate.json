@@ -3,7 +3,7 @@
   "content": "Creation date",
   "content_en_sha1_hash": "c175379b0389b2d6057b0b7db996720f1fb92fc7",
   "created_at": "2025-05-19T21:30:54.766Z",
-  "updated_at": "2025-05-21T10:18:04.633Z",
+  "updated_at": "2025-05-24T10:27:19.905Z",
   "comment": {
     "text": "The \"CreationDate\" translation key is used to display the creation date of a file. It appears in an info panel on the Home page, providing users with information about a specific file's history. Translators should provide a clear and concise date format as needed for the intended language.",
     "is_auto": true,
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Датум израде\" is a literal translation of 'Creation date' but doesn't flow naturally in Serbian.  'Израде' (izrade) implies a process of creation, while 'Creation date' refers to the date when something was created.",
-          "suggestion": "Премиса датума"
+          "description": "The translation 'Датум израде' is not the most natural or accurate translation of 'Creation date' in Serbian (Cyrillic). While 'израде' (izrade) relates to creation, 'датум' (datum) is correct for 'date'. A more idiomatic and accurate translation would be 'Датум креирања'.",
+          "suggestion": "Датум креирања"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "No rooms match this filter. Try a different one or clear filter to view all rooms.",
   "content_en_sha1_hash": "f23a94b4f404fdc1101c69caa60118df9f3d9514",
   "created_at": "2025-05-19T21:30:48.337Z",
-  "updated_at": "2025-05-22T11:56:37.886Z",
+  "updated_at": "2025-05-23T22:57:58.218Z",
   "comment": {
     "text": "\"No rooms match this filter. This message is displayed when a user searches for rooms that don't meet their criteria and is typically shown on an empty screen after clearing filters or changing search parameters.\"",
     "is_auto": true,
@@ -36,7 +36,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'təmiz filtri sınayın' is grammatically awkward. 'Təmizləyin' (clear) would be more natural.",
+          "description": "The phrase 'təmiz filtri sınayın' is slightly awkward. 'Təmizləyin' (clear) would be more natural than 'sınayın' (try).",
           "suggestion": "Bütün otaqlara baxmaq üçün fərqli filtri və ya filtri təmizləyin."
         }
       ],
@@ -90,8 +90,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation uses a colon (:) after the first sentence, which creates an unnatural pause.  In this context, a conjunction or a comma might be more appropriate.",
-          "suggestion": "Consider replacing the colon with a comma or a conjunction like 'և' (and)."
+          "description": "The translation uses a colon (:) after the first sentence, which is not typical in Armenian. It's more natural to use a period (.) or a conjunction.",
+          "suggestion": "Ոչ մի սենյակ չի համապատասխանում այս ֆիլտրին։ Փորձեք մեկ այլ կամ մաքրեք զտիչը՝ բոլոր սենյակները դիտելու համար։"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrasing 'մեկ այլ կամ մաքուր զտիչ' can be improved for better flow.  'կամ' (or) implies a choice, but cleaning *one* filter is not a choice. It's better to suggest clearing all filters or trying a different one.",
+          "suggestion": "Փորձեք մեկ այլ ֆիլտր կամ մաքրեք բոլոր զտիչները"
         }
       ],
       "approved_at": null
@@ -120,8 +125,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ຕົວກັ່ນຕອງ' is misspelled. It should be 'ຕົວກັ່ນຕອງ'.",
+          "description": "The word 'ຕົວກັ່ນຕອງ' appears to have a typo. It should likely be 'ຕົວກັ່ນຕອງ'.",
           "suggestion": "ຕົວກັ່ນຕອງ"
+        },
+        {
+          "type": "grammar",
+          "description": "While understandable, the phrasing 'ຕົວກັ່ນຕອງທີ່ຈະແຈ້ງ' could be more natural. It's a bit literal translation of 'clear filter'.",
+          "suggestion": "ລົບຕົວກັ່ນຕອງ"
         }
       ],
       "approved_at": null
@@ -150,8 +160,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'clear filter' is not ideal. 'Limpar os filtros' is technically correct but sounds a bit clunky. A more natural phrasing would be 'remover os filtros'.",
-          "suggestion": "Nenhum quarto corresponde a este filtro. Tente um filtro diferente ou remova os filtros para ver todas as salas."
+          "description": "The phrase \"escolha limpar os filtros\" is slightly awkward. A more natural phrasing would be \"limpar os filtros\".",
+          "suggestion": "Nenhum quarto corresponde a este filtro. Tente um filtro diferente ou limpar os filtros para ver todas as salas."
         }
       ],
       "approved_at": null
@@ -168,13 +178,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Filtru de sală nu a produs rezultate\" is a literal and slightly awkward translation of 'No rooms match this filter.' A more natural Romanian phrasing would convey the meaning better.",
-          "suggestion": "Nici o sală nu corespunde filtrului ales. Încercați un alt filtru sau ștergeți filtrul pentru a vedea toate sălile."
+          "description": "The translation 'Filtru de sală nu a produs rezultate' is a literal translation of 'Room filter did not produce results'. A more natural Romanian phrasing would be 'Nici o sală nu se potrivește cu acest filtru' or 'Nici o cameră nu se potrivește cu acest filtru'.",
+          "suggestion": "Nici o sală nu se potrivește cu acest filtru."
         },
         {
-          "type": "spelling",
-          "description": "The word 'sală' appears multiple times. While technically correct, in this context 'cameră' might be more appropriate.",
-          "suggestion": "Consider replacing 'sală' with 'cameră' for greater naturalness, especially if the rooms being referred to are smaller or private."
+          "type": "incorrect_translation",
+          "description": "The phrase 'ştergeţi filtrul' is grammatically correct but sounds a bit formal. A more casual and user-friendly alternative would be 'curățați filtrul'.",
+          "suggestion": "curățați filtrul"
         }
       ],
       "approved_at": null
@@ -191,13 +201,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පෙරහන' is repeated unnecessarily. While technically correct, it's a bit clunky.",
-          "suggestion": "මෙම පෙරහන් වලට ගැළපෙන කාමර නැත. වෙනත් පෙරහන් යොදා ගන්න හෝ සියලුම කාමර බැලීමට හිස් කරන්න."
+          "description": "The word 'පෙරහන' is repeated and while technically correct, it feels slightly repetitive. Consider rephrasing for better flow.",
+          "suggestion": "මෙම පෙරහන් වලට ගැළපෙන කාමර නැත. වෙනත් පෙරහන් යොදා ගන්නා, හෝ සියලුම කාමර බැලීමට හිස් කරන්න."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'හෝ සියලුම කාමර බැලීමට හිස් කරන්න' is a bit awkward. A more natural phrasing would improve readability.",
-          "suggestion": "හෝ සියලුම කාමර බැලීමට පෙරහන් ඉවත් කරන්න."
+          "description": "The phrase 'හෝ සියලුම කාමර බැලීමට හිස් කරන්න' could be improved for natural flow. While grammatically not incorrect, it's slightly clunky.",
+          "suggestion": "හෝ සියලුම කාමර බැලීමට පෙරහන් හිස් කරන්න."
         }
       ],
       "approved_at": null
@@ -205,7 +215,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"zrušte ho\" is a slightly awkward translation of \"clear filter\". A more natural Slovak phrasing would be \"vymažte filter\" or \"vynulujte filter\".",
+          "suggestion": "Tomuto filtru nezodpovedá žiadna miestnosť. Ak chcete zobraziť všetky miestnosti, skúste iný filter alebo ho vymažte."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -220,13 +236,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'филтер' is often written as 'филтер'.",
+          "description": "The word 'филтер' is consistently used. The correct spelling is 'филтер'.",
           "suggestion": "филтер"
         },
         {
           "type": "grammar",
-          "description": "While grammatically correct, the phrasing 'Пробајте други или обришите филтер' is slightly less natural.  A more common phrasing would be 'Изаберите други филтер или обришите га'.",
-          "suggestion": "Изаберите други филтер или обришите га"
+          "description": "The sentence \"Ниједна соба се не поклапа са овим филтером\" could be slightly improved for a more natural flow. While grammatically correct, it sounds a little stilted.",
+          "suggestion": "Није пронађено ниједне собе које одговарају овом филтеру."
         }
       ],
       "approved_at": null
@@ -237,13 +253,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Nijedna soba se ne poklapa sa ovim filterom' is a literal translation and sounds slightly unnatural. A more idiomatic phrasing would be preferred.",
-          "suggestion": "Nijedna soba ne odgovara ovom filteru."
+          "description": "The phrase \"se ne poklapa\" is slightly awkward. A more natural phrasing would be \"ne odgovara\" or \"ne odgovara uslovima filtera\".",
+          "suggestion": "Ne odgovara uslovima filtera."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'obrišite filter da biste pregledali sve sobe' is grammatically correct but a bit verbose. It can be shortened for better flow.",
-          "suggestion": "obrišite filter da vidite sve sobe."
+          "description": "The word 'obrišite' (delete) isn't the best fit for 'clear' in this context. 'Pobrišite' or 'Uklonite' would be more suitable.",
+          "suggestion": "Uklonite filter"
         }
       ],
       "approved_at": null

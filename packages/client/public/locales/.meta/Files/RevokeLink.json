@@ -3,7 +3,7 @@
   "content": "Revoke link",
   "content_en_sha1_hash": "60f184b7c84ca59ba034898a93f823c5c9571552",
   "created_at": "2025-05-19T21:30:56.054Z",
-  "updated_at": "2025-05-22T11:56:37.393Z",
+  "updated_at": "2025-05-24T11:35:22.423Z",
   "comment": {
     "text": "\"This translation key is used as a label for a button that allows users to revoke a link, particularly in contexts related to deleting or managing links within files or room settings.\"",
     "is_auto": true,
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Keçidi ləğv edin\" is a literal translation of \"Revoke link\", it might sound slightly awkward or overly formal in Azerbaijani. A more natural phrasing could be considered.",
-          "suggestion": "Consider alternatives like \"Linki silin\" (Delete the link) or \"Linki etkinsizləşdirin\" (Disable the link)."
+          "description": "While \"Keçidi ləğv edin\" is technically correct, a more natural and common phrasing for 'Revoke link' in Azerbaijani would be \"Bağlantını silin\" or \"Bağlantını etkinsizləşdirin\". \"Ləğv edin\" implies a more formal or complex cancellation.",
+          "suggestion": "Consider using \"Bağlantını silin\" or \"Bağlantını etkinsizləşdirin\"."
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Опозови линк' doesn't accurately convey the meaning of 'Revoke link.' 'Опозови' means 'disgrace' or 'humiliate,' which is not the intended meaning. The correct meaning of 'Revoke' in this context is 'cancel' or 'withdraw.'",
-          "suggestion": "Укини линк"
+          "description": "The Serbian translation \"Опозови линк\" is not the correct translation for \"Revoke link.\" \"Опозови\" means \"to shame\" or \"to disgrace.\" The correct translation should convey the meaning of invalidating or canceling a link.",
+          "suggestion": "Укини линк\" (Ukinni link) - which translates to 'Cancel link' or \"Одузими линк\" (Odzimi link) - which translates to 'Remove link'."
         }
       ],
       "approved_at": null

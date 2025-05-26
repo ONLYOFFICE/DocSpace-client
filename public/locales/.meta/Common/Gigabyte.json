@@ -3,7 +3,7 @@
   "content": "GB",
   "content_en_sha1_hash": "505a44facaa3e758845f6e101f4e21f9d99acf63",
   "created_at": "2025-05-19T21:30:45.623Z",
-  "updated_at": "2025-05-22T11:56:37.512Z",
+  "updated_at": "2025-05-24T00:29:57.337Z",
   "comment": {
     "text": "This translation key is used to display the unit \"Gigabyte\" (GB) in a file quota form. It appears on a dropdown menu where users can select their preferred size unit for displaying and managing files. Translators should note that this term will be used as an option within a larger list of units, including Bytes, Kilobytes, Megabytes, Terabytes, Petabytes, Exabytes, and others.",
     "is_auto": true,
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The French translation 'Go' does not accurately represent the English content 'GB' (Gigabyte). 'Go' is unrelated to the meaning of 'GB'.",
-          "suggestion": "The correct translation should be 'Go' (pronounced 'go') or 'Go octets'."
+          "description": "The French translation \"Go\" is an incorrect translation of \"GB\". \"GB\" stands for Gigabyte, which is a unit of data storage. The correct French translation should reflect this.",
+          "suggestion": "The appropriate French translation is \"Go\" (pronounced 'gio'). While 'Go' is sometimes used colloquially, a more precise and common translation would be \"Go\". To maintain consistency and clarity, ensure a standardized translation is used for 'GB'."
         }
       ],
       "approved_at": null
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'GO' is not the correct translation for 'GB' (Gigabyte). The correct translation is 'GB'.",
-          "suggestion": "Change 'GO' to 'GB'."
+          "description": "The Romanian translation \"GO\" is not the correct translation of \"GB\" (Gigabyte). The correct translation is \"GB\".",
+          "suggestion": "Correct the translation to \"GB\"."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ගි.බ.' is an abbreviation, but doesn't directly translate 'GB'. It's a representation of Gigabyte but lacks the full meaning. A more descriptive translation might be beneficial depending on the context.  'ගිගාබයිට්' (Gigabyte) would be a full translation.",
-          "suggestion": "Consider 'ගිගාබයිට්' for a full translation, or retain 'ගි.බ.' if abbreviation is required and understood within the target audience."
+          "description": "The Sinhala translation 'ගි.බ.' is an abbreviation and doesn't fully convey the meaning of 'GB'. While understandable, it's not a complete or ideal translation. A more literal translation might be 'ගිගාබයිට්' (Gigabyte).",
+          "suggestion": "ගිගාබයිට්"
         }
       ],
       "approved_at": null

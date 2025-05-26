@@ -3,7 +3,7 @@
   "content": "Form",
   "content_en_sha1_hash": "80446347ede53cf9ce56b3d59fda4b5c96dc25c4",
   "created_at": "2025-05-19T21:30:45.461Z",
-  "updated_at": "2025-05-22T11:56:37.903Z",
+  "updated_at": "2025-05-24T00:37:23.559Z",
   "comment": {
     "text": "This translation key is used for the title of a form or document in a PDF file. It appears as the label on a button or input field to indicate its purpose.",
     "is_auto": true,
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Образац' translates to 'Paragraph' or 'Form (as in a document)' but not simply 'Form' as in the English key. This is a semantic mismatch.",
-          "suggestion": "Consider using 'Форма' which is a more direct translation of 'Form' in Serbian (Cyrillic)."
+          "description": "The Serbian (Cyrillic) translation \"Образац\" typically means \"paragraph\" or \"template\", not \"form\" in the sense of a document with fields to fill out.  It's a semantic mismatch.",
+          "suggestion": "Consider using \"Образац\" if the context is specifically referring to a paragraph or template. If it means a form, more suitable translations could include: 'Формулар', 'Образац' (in some contexts, depending on the type of form), or 'Пријава' (application)."
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Serbian translation \"Obrazac\" uses Cyrillic script instead of the requested Latin script.",
-          "suggestion": "Obrazac (Latin script)"
+          "description": "The Serbian translation 'Obrazac' is spelled correctly but might be an Cyrillic word when Latin is requested.  It is critical to confirm the context requires Latin script.",
+          "suggestion": "Verify if the target language is explicitly Latin script. If so, 'Obrazac' is acceptable.  If Cyrillic is desired, a Cyrillic equivalent would be required."
         }
       ],
       "approved_at": null

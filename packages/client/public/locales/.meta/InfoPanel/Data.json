@@ -3,7 +3,7 @@
   "content": "Data",
   "content_en_sha1_hash": "e5e429bcc9c2e4a41a3c7a4d96203be6cb273b11",
   "created_at": "2025-05-19T21:30:54.768Z",
-  "updated_at": "2025-05-22T11:56:37.617Z",
+  "updated_at": "2025-05-24T10:27:12.949Z",
   "comment": {
     "text": "This translation key is used to display the label \"Data\" in various contexts within the InfoPanel page, primarily on a header and in a list of fields. The translation will vary depending on the selected role or user selection, providing a contextualized experience for users.",
     "is_auto": true,
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Date\" translates to \"Date\" in English, which is not the intended meaning of \"Data\". \"Data\" refers to facts and statistics collected together for reference or analysis.",
-          "suggestion": "Consider alternatives like \"Date\" (if referring to a calendar date, which is unlikely in this context), \"Date\" (more common in this context), or a more descriptive term like \"Informații\" or \"Date\"."
+          "description": "The Romanian translation \"Date\" is incorrect. \"Data\" in English (plural) translates to \"Date\" in Romanian, which refers to a specific point in time. \"Data\" (plural) in Romanian means 'date' as in information or facts.",
+          "suggestion": "The correct Romanian translation should be \"Date\" (as in plural of 'datum'). However, given the context of \"InfoPanel\", a more appropriate translation might be \"Informații\" or \"Date\" (as in facts/information)."
         }
       ],
       "approved_at": null

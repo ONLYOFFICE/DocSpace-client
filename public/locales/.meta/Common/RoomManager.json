@@ -3,7 +3,7 @@
   "content": "Room manager",
   "content_en_sha1_hash": "609082b01c00bb9850dc11687f7204de4f4b10da",
   "created_at": "2025-05-19T21:30:48.209Z",
-  "updated_at": "2025-05-22T11:56:37.567Z",
+  "updated_at": "2025-05-23T23:03:03.123Z",
   "comment": {
     "text": "This translation key is used to display the label \"Room Manager\" for room management permissions. It appears in a dropdown or select field within a UI component related to sharing access rights, likely on a settings page or permission dialog.",
     "is_auto": true,
@@ -59,9 +59,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation 'Raum-Manager' uses a hyphen where a space might be more natural in German. While not incorrect, it might appear slightly less fluent.",
-          "suggestion": "Raum Manager"
+          "type": "incorrect_translation",
+          "description": "While 'Raum-Manager' is technically a literal translation, it doesn't sound natural in German. 'Raummanager' (compound word) is the preferred and more idiomatic form.",
+          "suggestion": "Raummanager"
         }
       ],
       "approved_at": null
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Huoneen johtaja\" is a literal translation of 'Room manager', it implies a person who manages a room, rather than a system or role managing rooms. A more accurate translation would depend on the context.  If referring to a person, 'Huoneenhoitaja' might be more appropriate.  If referring to a system or software, 'Huonejärjestelmän hallinta' or 'Huoneiden hallinta' would be better.",
-          "suggestion": "Consider 'Huonejärjestelmän hallinta' or 'Huoneiden hallinta' (for a system) or 'Huoneenhoitaja' (for a person)."
+          "description": "While \"Huoneen johtaja\" is a literal translation, \"Room manager\" often refers to a system or process, not a person. A more accurate translation might be \"Huoneen hallinta\" or \"Huoneiden hallinta\" depending on the specific context.",
+          "suggestion": "Consider \"Huoneen hallinta\" or \"Huoneiden hallinta\" for a more contextually appropriate translation."
         }
       ],
       "approved_at": null
@@ -99,13 +99,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Սենյակի մենեջեր\" is a literal translation, it might sound slightly unnatural in Armenian. A more natural phrasing would be \"Ժամանակաշրջի կառավարիչ\" (Jamanakashri karavarič) for 'room manager' depending on context, or a more specific term if the role's responsibilities are well-defined.",
-          "suggestion": "Consider \"Ժամանակաշրջի կառավարիչ\" (Jamanakashri karavarič) or a more context-specific term."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -114,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Manager della stanza\" is literally \"Room Manager\", a more natural and idiomatic translation for \"Room Manager\" in Italian might be \"Responsabile delle camere\" or \"Gestore delle camere\". \"Manager\" is often used in Italian without direct translation, but \"Responsabile\" or \"Gestore\" are clearer.",
-          "suggestion": "Responsabile delle camere"
+          "description": "While \"Manager della stanza\" is a literal translation, it's not the most natural or idiomatic way to say \"Room manager\" in Italian. It implies a manager *of* a single room, which isn't usually the meaning.",
+          "suggestion": "Consider alternatives like \"Responsabile delle camere,\" \"Gestore delle camere,\" or \"Addetto alle camere,\" depending on the specific role."
         }
       ],
       "approved_at": null
@@ -147,13 +141,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Kamer Beheerder\" is a literal translation, \"Manager\" often implies a more strategic or supervisory role. A more accurate and natural Dutch translation for 'Room Manager' might be 'Zaalbeheerder' or 'Ruimtebeheerder'. 'Kamer Beheerder' sounds somewhat awkward.",
-          "suggestion": "Zaalbeheerder"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -174,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Gerente da sala' is technically correct, it's not the most natural or idiomatic translation for 'Room manager' in a business/management context in Brazil. 'Gerente de salas' or 'Administrador de salas' would be more common.",
-          "suggestion": "Gerente de salas"
+          "description": "While \"Gerente da sala\" is a literal translation of \"Room manager\", it's not the most natural or commonly used term in Portuguese (Brazil). A more appropriate translation would depend on the specific context, but \"Responsável pela sala\" or \"Administrador da sala\" would be better options.",
+          "suggestion": "Consider alternatives like \"Responsável pela sala\" or \"Administrador da sala\" depending on context."
         }
       ],
       "approved_at": null
@@ -216,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Соба није доступна\" translates to \"The room is not available.\" This is not an accurate translation of \"Room manager\".",
-          "suggestion": "The correct translation should be something like \"Менаџер собе\" or \"Управник собе\"."
+          "description": "The Serbian (Cyrillic) translation 'Соба није доступна' translates to 'Room is not available'. This is not an accurate translation of 'Room manager'.",
+          "suggestion": "The correct translation should be something along the lines of 'Надзорник собе' or 'Управник собе'."
         }
       ],
       "approved_at": null
@@ -228,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Soba nije dostupna\" translates to \"The room is not available.\" This does not accurately reflect the English term \"Room manager,\" which refers to a person or role managing rooms, not the status of a room.",
-          "suggestion": "A more accurate translation would be something like \"Menadžer soba\" or \"Upravnik soba\"."
+          "description": "The Serbian translation 'Soba nije dostupna' translates to 'The room is not available'. This is not an accurate translation of 'Room manager'.",
+          "suggestion": "A more accurate translation would be 'Menadžer sobe' or 'Upravnik sobe'."
         }
       ],
       "approved_at": null

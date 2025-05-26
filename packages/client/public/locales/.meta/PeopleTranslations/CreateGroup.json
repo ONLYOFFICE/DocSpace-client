@@ -3,7 +3,7 @@
   "content": "Create group",
   "content_en_sha1_hash": "5a0b1c170fd55ab07e5656625be963d20baa107a",
   "created_at": "2025-05-19T21:30:53.461Z",
-  "updated_at": "2025-05-22T11:56:37.356Z",
+  "updated_at": "2025-05-24T06:33:46.847Z",
   "comment": {
     "text": "\"This translation key is used to display the text 'Create group' in various UI elements, such as a modal dialog header and a button. It appears when users interact with options related to creating or managing groups, and its purpose is to provide a clear label for this action.\"",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Qrup yaradın' is a direct translation of 'Create group' but conveys the action of *having* created a group, not the act of creating one. A more accurate translation would be something like 'Qrup yarat' or 'Yeni qrup yaradın'.",
+          "suggestion": "Qrup yarat"
+        }
+      ],
       "approved_at": null
     },
     "bg": {

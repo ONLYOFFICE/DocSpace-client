@@ -3,7 +3,7 @@
   "content": "Previous",
   "content_en_sha1_hash": "50f94286ba30706a19070d3ec0a0c8d34d6cf6eb",
   "created_at": "2025-05-19T21:30:47.476Z",
-  "updated_at": "2025-05-22T11:56:37.684Z",
+  "updated_at": "2025-05-23T23:31:16.162Z",
   "comment": {
     "text": "This translation key is used to display the label \"Previous\" in a pagination component, typically found on a page of accounts or data, where it serves as a navigation button to proceed to a previous set of results. It is usually displayed as a clickable element.",
     "is_auto": true,
@@ -87,13 +87,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Italian translation 'Indietro' while meaning 'back' or 'behind,' doesn't perfectly capture the nuance of 'Previous' in this context. 'Precedente' would be a more accurate translation depending on the intended meaning (e.g., 'Previous Page,' 'Previous Item').",
-          "suggestion": "Consider 'Precedente' if referring to a preceding item or page. If 'back' is sufficient, 'Indietro' is acceptable but less precise."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {

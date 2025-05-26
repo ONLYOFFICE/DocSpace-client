@@ -3,7 +3,7 @@
   "content": "Custom",
   "content_en_sha1_hash": "081ae3fdc403609cf6e760849ebb14117b7a50cb",
   "created_at": "2025-05-19T21:30:44.262Z",
-  "updated_at": "2025-05-22T11:56:37.646Z",
+  "updated_at": "2025-05-24T01:16:15.409Z",
   "comment": {
     "text": "This translation key is used for \"Custom\" labels and descriptions in the Portal Settings page, particularly in the categories and developer tools sections. It appears as a title or heading, indicating custom themes or settings. Translators should provide an equivalent label that accurately reflects the UI context.",
     "is_auto": true,
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Greek translation \"Προσαρμοσμένα\" (Prosarmozmena) translates more closely to 'Customized' or 'Adapted' rather than simply 'Custom'. While related, it doesn't perfectly capture the meaning of 'Custom'.",
-          "suggestion": "Consider alternatives like \"Εξατομικευμένο\" (Exatomikeymeno) which translates to 'Personalized' or 'Custom', or a more literal translation depending on the context."
+          "description": "The Greek translation \"Προσαρμοσμένα\" (Prosarmosmena) translates more closely to \"Customized\" or \"Adapted\" rather than the English \"Custom\". While related, it's not a direct equivalent. A more accurate translation, depending on the specific context, might be \"Εξατομικευμένα\" (Exatomikeymena) or simply \"Προσαρμοσμένα\" if describing a specific set of customizations.",
+          "suggestion": "Consider alternatives like \"Εξατομικευμένα\" or re-evaluate context to see if 'Προσαρμοσμένα' is sufficiently accurate."
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Personnalisées\" is acceptable, but \"Personnalisé\" (singular) might be more appropriate depending on the context. \"Personnalisées\" implies a plural meaning, while \"Custom\" can often refer to a single customized item.",
-          "suggestion": "Consider 'Personnalisé' if the context suggests a single custom item."
+          "description": "The French translation \"Personnalisées\" is a plural form, while the English term \"Custom\" in this context (likely referring to a single custom option or feature) should ideally be the singular form.",
+          "suggestion": "Personnalisée"
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Հարմարեցնել\" (Harmartsetnel) translates to 'to adapt' or 'to customize', but it's a verb. \"Custom\" is an adjective or noun and requires a different translation to accurately convey its meaning.",
-          "suggestion": "Consider using a noun like \"Մարմնավորում\" (Marmnavorum - embodiment/customization) or \"Անհատականություն\" (Anhatakanut'yun - individuality/customization) depending on the context."
+          "description": "The Armenian translation \"Հարմարեցնել\" (Harmartsnel) translates to 'to customize' or 'to adapt'. While 'custom' can involve adaptation, it's more directly related to something being made or designed to a specific need. A more direct translation of 'Custom' might be something like 'Տարանցված' (Tarantzvad) or 'Պատվերով' (Patverov), though these aren't perfect.",
+          "suggestion": "Consider alternative translations like 'Տարանցված' (Tarantzvad) or 'Պատվերով' (Patverov) to more closely reflect the meaning of 'Custom'."
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Particularizat' can sometimes be appropriate, it doesn't accurately convey the meaning of 'Custom' in most contexts. 'Custom' often refers to personalized, bespoke, or tailored options. 'Particularizat' implies something that has been categorized or made specific.",
-          "suggestion": "Consider alternatives like 'Personalizat', 'Modificat', 'Individualizat', or 'Specializat', depending on the intended context."
+          "description": "While \"Particularizat\" can mean \"customized\" or \"specialized,\" it doesn't directly translate the meaning of \"Custom\" in this context, which often refers to something unique or tailored. A more accurate translation might be \"Personalizat\" or \"Modificat\".",
+          "suggestion": "Consider \"Personalizat\" or \"Modificat\"."
         }
       ],
       "approved_at": null
@@ -222,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Прилагођени' while technically meaning 'adapted' or 'adjusted', isn't the most accurate or natural translation of 'Custom'. It implies a modification rather than something created or designed specifically.",
-          "suggestion": "Consider 'Примерски' (Primerski) which directly translates to 'custom' or 'bespoke', or 'Направљен по мери' (Napračen po meri) which means 'made to measure'."
+          "description": "The Serbian (Cyrillic) translation 'Прилагођени' while meaning 'customized' or 'adjusted', is not the most common or direct translation of 'Custom' in this context. 'Прилагођени' implies something has been altered or adapted. A more direct and often preferred translation would be 'Примерни'.",
+          "suggestion": "Примерни"
         }
       ],
       "approved_at": null
@@ -234,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Prilagođeni' can be a valid translation for 'Custom,' it implies 'adjusted' or 'adapted'. 'Custom' often refers to something made or designed specifically, and a more accurate translation might be 'Posebno izrađeni' (specially made) or 'Individualni' (individual).",
-          "suggestion": "Consider 'Posebno izrađeni' or 'Individualni' for a more precise translation of 'Custom'."
+          "description": "The Serbian (Latin) translation \"Prilagođeni\" while technically meaning 'adapted' or 'adjusted', isn't the most direct or natural translation of 'Custom' in this context. 'Custom' often implies something made or designed for a specific purpose. A more appropriate translation might be 'Posebno' or 'Individualno', depending on the specific nuance intended.",
+          "suggestion": "Consider 'Posebno' or 'Individualno' for a more accurate translation."
         }
       ],
       "approved_at": null
@@ -252,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Налаштовуваний\" is a possible translation for \"Custom,\" it's quite formal and potentially less suitable depending on the context. A more common and often better translation, especially for UI elements, would be \"Власноруч\" or \"Змінюваний\".  \"Налаштовуваний\" implies a complex, detailed customization process.",
-          "suggestion": "Consider \"Власноруч\" or \"Змінюваний\" depending on the specific context."
+          "description": "While \"Налаштовуваний\" is a valid Ukrainian word, it doesn't perfectly capture the meaning of \"Custom\" in this context. \"Custom\" often refers to a personalized or unique setting or option. \"Налаштовуваний\" leans more towards something that *can* be adjusted, rather than something already personalized. Other options like \"Кастомний\" (a transliteration) or \"Спеціальний\" (special) might be more appropriate depending on the specific context.",
+          "suggestion": "Consider alternatives such as \"Кастомний\" or \"Спеціальний\" depending on the context."
         }
       ],
       "approved_at": null

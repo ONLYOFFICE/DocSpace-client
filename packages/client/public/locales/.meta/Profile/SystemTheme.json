@@ -3,7 +3,7 @@
   "content": "Use system theme",
   "content_en_sha1_hash": "b416b727b7b81cc355879b99623709aaf02f49bb",
   "created_at": "2025-05-19T21:30:53.388Z",
-  "updated_at": "2025-05-21T05:37:42.295Z",
+  "updated_at": "2025-05-24T06:07:20.397Z",
   "comment": {
     "text": "This translation key is used for the \"Use system theme\" option on a user preference interface. It instructs users to apply the system's default theme settings.",
     "is_auto": true,
@@ -30,7 +30,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"استخدم قالب النظام\" while understandable, isn't the most natural or accurate rendering of \"Use system theme.\" \"قالب\" (template) doesn't fully capture the concept of a 'system theme' which implies an overarching aesthetic and color scheme.",
+          "description": "The translation \"استخدم قالب النظام\" while understandable, is not the most natural or precise translation of 'Use system theme'. 'قالب' typically refers to a template or mold, rather than the system's overall visual theme. A more accurate translation would convey the idea of adopting the system's appearance.",
           "suggestion": "استخدم مظهر النظام"
         }
       ],
@@ -60,7 +60,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Wie im System\" does not accurately convey the meaning of \"Use system theme\". It literally translates to \"Like in the system\", which is not idiomatic or understandable in this context. A more accurate translation would emphasize adoption of the system's theme.",
+          "description": "The translation 'Wie im System' doesn't accurately convey the meaning of 'Use system theme'. It translates to 'Like in the system' which implies following the system's appearance rather than utilizing it. A more appropriate translation would emphasize adopting the system's theme.",
           "suggestion": "Systemthema verwenden"
         }
       ],
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"システムテーマのように\" (Shisutemu teema no you ni) does not accurately convey the meaning of \"Use system theme\". It literally translates to \"Like system theme\". This implies imitation rather than utilizing the system's theme. A more accurate translation would be something like \"システムのテーマを使用する\" (Shisutemu no teema o shiyou suru) or \"システムテーマ適用\" (Shisutemu teema kyouka).",
-          "suggestion": "Consider \"システムのテーマを使用する\" (Shisutemu no teema o shiyou suru) or \"システムテーマ適用\" (Shisutemu teema kyouka)."
+          "description": "The Japanese translation 'システムテーマのように' translates to 'like system theme' which doesn't accurately convey the meaning of 'Use system theme'. It implies a comparison rather than a directive to adopt the system theme.",
+          "suggestion": "システムテーマを使用する (Shisutemu teema o shiyou suru) - This translates to 'Use system theme'."
         }
       ],
       "approved_at": null
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While the Lao characters are correctly rendered, the translation 'ໃຊ້ ລະບົບ ຫົວຂໍ້' isn't the most natural or accurate translation of 'Use system theme'. 'ໃຊ້' means 'use,' 'ລະບົບ' means 'system,' and 'ຫົວຂໍ້' means 'header' or 'topic'. A more suitable translation would convey the idea of adopting the system's appearance or theme.",
-          "suggestion": "Consider 'ນໍາໃຊ້ຮູບແບບຂອງລະບົບ' (Nam sai roop phaeng khong rabop) which translates to 'Use the system's appearance/theme'."
+          "description": "The Lao translation 'ໃຊ້ ລະບົບ ຫົວຂໍ້' while containing the correct words, doesn't quite capture the nuance of 'Use system theme'. A more accurate translation would convey the action of adopting or utilizing the system's theme.",
+          "suggestion": "ນໍາໃຊ້ ຫົວຂໍ້ ລະບົບ (Nam sai hua tho rabop)"
         }
       ],
       "approved_at": null
@@ -138,7 +138,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Izmantot sistēmas dizainu\" is understandable, \"dizains\" (design) isn't the most accurate translation of \"theme.\" \"Tēma\" would be a more direct and suitable translation.",
+          "description": "While \"Izmantot sistēmas dizainu\" is understandable, \"dizains\" (design) isn't the most accurate translation of \"theme\" in this context. A better translation would convey the idea of a visual appearance or style.",
           "suggestion": "Izmantot sistēmas tēmu"
         }
       ],
@@ -174,7 +174,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Utilizare temă de sistem' is technically correct but sounds unnatural and overly literal in Romanian. A more natural phrasing would be 'Aplică tema sistemului' or 'Folosește tema sistemului'.",
+          "description": "The translation \"Utilizare temă de sistem\" is a literal translation but sounds unnatural in Romanian. A more natural phrasing would be 'Folosește tema sistemului' or 'Aplică tema sistemului'.",
           "suggestion": "Folosește tema sistemului"
         }
       ],

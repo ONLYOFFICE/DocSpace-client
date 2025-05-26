@@ -3,7 +3,7 @@
   "content": "Target ID",
   "content_en_sha1_hash": "00960a1596223da245b50ed57203e5563a5ae5a5",
   "created_at": "2025-05-19T21:30:49.849Z",
-  "updated_at": "2025-05-21T00:54:41.810Z",
+  "updated_at": "2025-05-24T02:08:44.013Z",
   "comment": {
     "text": "This translation key is used for \"Target ID\" to provide a label for an input field where users can enter or select a target ID. It appears in a labeled input component within a dialog, and its purpose is to guide users in entering the required information.",
     "is_auto": true,
@@ -63,13 +63,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"ID de objetivo\" is technically correct, it's not the most natural or common translation for \"Target ID\" in a technical context, especially related to webhooks. It can be perceived as overly literal.",
-          "suggestion": "Consider \"ID de destino\" or \"ID del objetivo\" for a more idiomatic translation. 'Destino' is frequently used for a target in technical documentation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -87,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Նպատակի ID\" is a literal translation of \"Target ID\", it might sound slightly awkward or technical in Armenian depending on the context. A more natural translation might be \"Լուրջ ունակների ID\" or \"Վերգրաբերողների ID\" depending on what the 'target' refers to in this webhook context.",
+          "suggestion": "Consider alternatives like \"Լուրջ ունակների ID\" or \"Վերգրաբերողների ID\" for better readability, or confirm the intended meaning of 'Target ID' to select the most appropriate translation."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'ID-ul de destinație' is understandable, it's a bit verbose for 'Target ID'. A more direct and common translation would be 'ID țintă'.",
-          "suggestion": "ID țintă"
+          "description": "While 'ID-ul de destinație' is understandable, it's a slightly literal translation and can be improved for natural Romanian. 'Target ID' often refers to a specific identifier, and a more common Romanian equivalent would be 'ID-ul țintă' or 'ID-ul obiectiv'.",
+          "suggestion": "ID-ul țintă"
         }
       ],
       "approved_at": null
@@ -159,7 +159,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ID цели\" while technically correct, is not the most natural or commonly used translation for \"Target ID\" in a technical context. \"ID цели\" translates literally to \"Target ID\". A more common and idiomatic translation would be something like \"Идентификатор цели\" or simply \"Целевой ID\".",
+          "suggestion": "Consider using \"Идентификатор цели\" or \"Целевой ID\" as a more natural and widely accepted translation."
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -168,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'ලකුණු' (lakunu) translates to 'points' or 'scores', not 'target'. 'Target ID' refers to an identifier for a target, not a score or point.",
-          "suggestion": "Consider 'අණු ID' (anu ID) or 'ඉලක්ක ID' (ilakka ID) which are closer in meaning to 'Target ID'."
+          "description": "The Sinhala translation 'ලකුණු ID' literally translates to 'Score ID'. While 'Target ID' can sometimes relate to a score or point in certain contexts, it's not the standard or most accurate translation of 'Target ID'. It could be misinterpreted.",
+          "suggestion": "A more accurate translation would depend on the specific context. Possible alternatives include: 'අඩිතාල ID' (Adithala ID - Foundation ID), 'අනුශිඛ්ෂණ ID' (Anushikshana ID - Target ID), or simply 'ලක්ෂිත ID' (Lakshita ID - Targeted ID). Further context would be needed for the best translation."
         }
       ],
       "approved_at": null
@@ -192,7 +198,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Циљани ID\" while understandable, isn't the most natural or precise translation of \"Target ID.\" \"Циљани\" implies 'targeted' rather than 'target'.",
+          "description": "The translation \"Циљани ID\" while understandable, isn't the most natural or accurate translation of 'Target ID' in Serbian (Cyrillic). 'Циљани' implies 'targeted' as an adjective, but 'Target ID' refers to a specific identifier.",
           "suggestion": "ИД циља"
         }
       ],
@@ -222,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ID đích\" is understandable, it's not the most natural or accurate translation of \"Target ID.\" \"ID đích\" implies a destination ID, rather than a target identifier.",
-          "suggestion": "Consider alternatives like \"ID mục tiêu\" or \"ID đối tượng\"."
+          "description": "While \"ID đích\" is understandable, it's not the most natural or precise translation of \"Target ID\". \"ID mục tiêu\" is a more common and accurate translation in Vietnamese.",
+          "suggestion": "ID mục tiêu"
         }
       ],
       "approved_at": null

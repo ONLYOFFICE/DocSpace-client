@@ -3,7 +3,7 @@
   "content": "Trial expired",
   "content_en_sha1_hash": "b4420c2f63be184a11970f1c2fdeaa3108ec551c",
   "created_at": "2025-05-19T21:30:49.343Z",
-  "updated_at": "2025-05-22T11:56:37.521Z",
+  "updated_at": "2025-05-23T22:22:12.093Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a trial period has expired. It appears on screen when an account's trial period is over, typically in a UI component related to billing or subscription settings. The translator should consider the context of a \"trial period\" to provide an accurate translation.",
     "is_auto": true,
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Դատավարության ժամկետն ավարտվել է\" translates to 'The duration of the proceedings has expired.' While not entirely wrong, it's a more formal and technical phrasing than the simple and direct 'Trial expired.'  For a UI element indicating a trial expiration, a more concise and user-friendly translation would be better.",
-          "suggestion": "Consider a more direct translation like \"Արդեն ավարտվել է փորձային ժամանակահատվածը\" (The trial period has already ended) or \"Փորձային ժամկետը ավարտվել է\" (The trial period has ended)."
+          "description": "The translation \"Դատավարության ժամկետն ավարտվել է\" literally translates to 'The term of the trial has ended'. While close, it's more formal than the English \"Trial expired.\" A more natural and accurate translation would convey the concept of a trial period ending.",
+          "suggestion": "Consider alternatives like \"Փորձային ժամանակաշրջանն ավարտվել է\" (The trial period has ended) or \"Փորձնաշրջանն ավարտվել է\" (The trial period has ended)."
         }
       ],
       "approved_at": null
@@ -99,7 +99,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Scaduto il periodo di prova' is a literal translation but could be improved for naturalness. While technically correct, it sounds slightly formal. A more common and natural phrasing would be 'Periodo di prova scaduto'.",
+          "suggestion": "Periodo di prova scaduto"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -141,7 +147,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'O período de avaliação expirou' is a generally acceptable translation, 'Trial expired' is more concise and direct. The Portuguese translation is slightly more verbose.",
+          "suggestion": "Consider a more direct translation like 'Teste expirado' or 'Período de teste expirado'."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -168,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'නැහැසුම ඉකුත් වී ඇත' while technically meaning 'expiry has occurred', doesn't accurately convey the nuance of 'Trial expired'. It sounds more like a general expiry rather than a trial period ending.",
-          "suggestion": "Consider a translation more directly conveying 'trial' or 'trial period'. Possible suggestions include: 'පරීක්ෂණ කාලය අවසන්' (Parikshana kaalaya avasan) - 'Trial period ended', or 'නැහැසුම් කාලය ඉකුත්' (Nahasum kaalaya ikut) - 'Trial time expired'."
+          "description": "The Sinhala translation 'නැහැසුම ඉකුත් වී ඇත' (nahesuma ikut ve ath) translates to 'exclusion has expired' or 'subscription has expired', which isn't a direct or accurate translation of 'Trial expired'. A better translation would focus on the trial period ending.",
+          "suggestion": "පරීක්ෂණ කාලය අවසන් වී ඇත (parīkṣaṇa kālaya avasan ve ath) - 'Trial period has ended' or කාල තුල නිමා වී ඇත (kāla tuḷa nimā ve ath) - 'Period has ended'"
         }
       ],
       "approved_at": null

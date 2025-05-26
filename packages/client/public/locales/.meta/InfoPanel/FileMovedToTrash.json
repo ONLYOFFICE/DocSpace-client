@@ -3,7 +3,7 @@
   "content": "Files moved to Trash.",
   "content_en_sha1_hash": "c7ec7ba45de56532e027b659c2fbe9751033e907",
   "created_at": "2025-05-19T21:30:54.818Z",
-  "updated_at": "2025-05-22T11:56:37.583Z",
+  "updated_at": "2025-05-24T10:21:07.212Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a file has been moved to the trash. It appears in the UI as part of an info panel, likely when viewing file history, and is related to tracking deleted files.",
     "is_auto": true,
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ֆայլերը տեղափոխվեցին աղբարկղ:' is a literal translation and may not be the most natural or idiomatic way to express 'Files moved to Trash' in Armenian. A more natural phrasing might include a possessive or other clarifying word. It also lacks a definite article.",
-          "suggestion": "Ֆայլերը տեղափոխվեցին զբաղվածության աղբարկղ:"
+          "description": "The translation 'Ֆայլերը տեղափոխվեցին աղբարկղ:' is technically correct but could be improved for naturalness in Armenian. A more natural phrasing would be 'Ֆայլերը տեղափոխվեցին զրպանակ:' or 'Ֆայլերը տեղափոխվեցին ջրաղբ:'",
+          "suggestion": "Consider 'Ֆայլերը տեղափոխվեցին զրպանակ:' or 'Ֆայլերը տեղափոխվեցին ջրաղբ:'"
         }
       ],
       "approved_at": null
@@ -95,9 +95,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The translation 'File spostati nel cestino' uses the plural form 'File' (Files) while the English content refers to 'Files' (plural). However, 'File' is singular. While understandable, 'File' should be 'File' or changed to use the singular form of the English phrase.",
-          "suggestion": "File spostato nel cestino."
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Files moved to Trash' implies a plural ('Files'). The Italian translation 'File spostati nel cestino' uses the singular 'File' suggesting only one file was moved. While not strictly wrong, it doesn't accurately reflect the original meaning, which usually implies multiple files.",
+          "suggestion": "File spostati nel cestino."
         }
       ],
       "approved_at": null
@@ -120,13 +120,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ກໍາຈັດ' (kam-jat) could be replaced with a more appropriate term for 'trash' or 'recycling bin' in Lao. 'ກໍາຈັດ' primarily means 'to eliminate' or 'to destroy'.",
-          "suggestion": "ເອກະສານຖືກຍ້າຍໄປສູ່ກະດໍ້ຂີ້ເຫຍື້ອ or ເອກະສານຖືກຍ້າຍໄປສູ່ກະດໍ້ລຶບ"
+          "description": "The word 'ກະດໍ້' is misspelled. The correct spelling is 'ກະດານ'.",
+          "suggestion": "ກະດານ"
         },
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, the translation feels somewhat literal and lacks the natural flow of Lao phrasing for this context. The word order and choice of words don't fully capture the intended meaning of 'moved to Trash'.",
-          "suggestion": "ເອກະສານຖືກລຶບເຂົ້າກະດໍ້."
+          "description": "While 'ກະດໍ້ຂີ້ກໍາຈັດ' technically translates to 'trash can,' 'Trash' is commonly understood as a system/folder name, not just the physical container. A more accurate translation considering the context of a system notification would be something like 'ຖິ້ມຂີ້ກໍາຈັດ' (discarded to trash) or 'ເຊັນເອກະສານຖືກຍ້າຍໄປໄວ້ໃນກະດານຖິ້ມ'.",
+          "suggestion": "ເຊັນເອກະສານຖືກຍ້າຍໄປໄວ້ໃນກະດານຖິ້ມ"
         }
       ],
       "approved_at": null
@@ -134,7 +134,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Atkritni\" (Trash) is a general term. The more accurate and commonly used term for a trash/recycle bin in a computer context would be \"Papildu datu krātuve\" or simply \"Papildu datu\" to reflect the more digital context.",
+          "suggestion": "Faili ir pārvietoti uz Papildu datu."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -167,13 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Fișiere au fost mutale în coșul de gunoi' is grammatically incorrect and doesn't accurately convey the meaning of 'Files moved to Trash.' The verb 'mutale' is not the correct past participle form.",
+          "description": "The Romanian translation 'Fișiere au fost mutale în coșul de gunoi' is grammatically incorrect. The verb 'a muta' (to move) requires agreement with the subject 'fișiere' (files). The past participle needs to agree in gender and number.",
           "suggestion": "Fișierele au fost mutate în coșul de gunoi."
-        },
-        {
-          "type": "grammar",
-          "description": "The definite article 'Fișierele' is preferred in this context for a more natural Romanian phrasing.",
-          "suggestion": "Use 'Fișierele' instead of 'Fișiere'."
         }
       ],
       "approved_at": null
@@ -190,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ගොනු කුණු කූඩයට ගෙන යන ලදී' is a literal translation but sounds awkward and overly formal in Sinhala. A more natural and idiomatic translation would be preferred.",
-          "suggestion": "Consider 'ගොනු කුණු කූඩයට යවා ඇත' or 'ගොනු අත්හැරීම් බඳුනා'."
+          "description": "The translation 'ගොනු කුණු කූඩයට ගෙන යන ලදී' is a literal translation and sounds somewhat unnatural in Sinhala. A more natural phrasing would be something like 'ගොනු කුණු කූඩයට යවා ඇත' or 'ගොනු කසළගාට යවා ඇත'.",
+          "suggestion": "Consider 'ගොනු කුණු කූඩයට යවා ඇත' or 'ගොනු කසළගාට යවා ඇත'."
         }
       ],
       "approved_at": null
@@ -214,13 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Датотеке су пребачене у корпу' is not the most natural or accurate translation of 'Files moved to Trash'. 'Корпа' means 'basket', while 'Trash' implies a dedicated system for discarded files. A more accurate translation would reflect this nuance.",
-          "suggestion": "Датотеке су пребачене у Отпад."
-        },
-        {
-          "type": "spelling",
-          "description": "While 'корпа' is a valid word, 'Отпад' is generally used in a computing context to denote a 'Trash' or 'Recycle Bin'. Using 'корпа' can be confusing for users.",
-          "suggestion": "Replace 'корпа' with 'Отпад' for better clarity and alignment with standard terminology."
+          "description": "The translation 'Датотеке су пребачене у корпу' is not the most natural or accurate translation of 'Files moved to Trash.' While technically correct, it sounds awkward in Serbian. 'Датотеке су померене у корпу' or 'Пребачене су датотеке у корпу' would be better alternatives.",
+          "suggestion": "Датотеке су померене у корпу"
         }
       ],
       "approved_at": null
@@ -228,13 +224,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'korpa' translates more literally to 'basket' or 'bin'. 'Međukorpa' or 'Smeće' would be more accurate translations of 'Trash' in a computing context. 'Korpa' has a more general meaning.",
-          "suggestion": "Datoteke su prebačene u međukorpu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -249,7 +239,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb conjugation is incorrect. 'Переміщено' (moved) should agree with the plural subject 'Файли' (Files).",
+          "description": "The Ukrainian translation \"Файли переміщено до Кошика\" uses the neuter plural past passive verb form (\"переміщено\"). Given the English phrase \"Files moved to Trash\" implies a plural subject, the verb form should agree. While technically correct in a specific context, it's more natural to use the plural past passive form.",
           "suggestion": "Файли переміщено до Кошика."
         }
       ],

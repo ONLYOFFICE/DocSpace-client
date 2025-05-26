@@ -3,7 +3,7 @@
   "content": "General",
   "content_en_sha1_hash": "9239ee2cda84eca4c3440e2a7b50148af67da3d4",
   "created_at": "2025-05-19T21:30:48.597Z",
-  "updated_at": "2025-05-22T11:56:37.650Z",
+  "updated_at": "2025-05-23T22:48:03.318Z",
   "comment": {
     "text": "This translation key is used to display the general settings title in the Portal Settings page. It appears as a label on the top level of the settings tree and is also referenced in a data object that lists categories of settings. Translators should provide a clear and concise translation for this key, which will be displayed in the user interface.",
     "is_auto": true,
@@ -165,13 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation \"සාමාන්‍ය\" (saamānya) while technically meaning 'general' or 'ordinary', doesn't perfectly capture the nuance of 'General' as a section title or category setting. It can be perceived as slightly formal or bland in this context.",
-          "suggestion": "Consider alternatives like \"ගොනාලු\" (gonālu) which more closely represents a settings/configuration section or \"පො allgemeine නෑම\" (pō allgemeine nēma) which might better suit the intent. However, 'සාමාන්‍ය' isn't incorrect, just potentially not the best fit."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -192,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Опште' is not the most accurate translation of 'General'. While it's understandable, a more appropriate and commonly used translation would be 'Опште подешавања' or simply 'Опције'. 'Опште' lacks the specificity of 'General' in this context, which typically refers to general settings.",
-          "suggestion": "Consider using 'Опште подешавања' or 'Опције'."
+          "description": "The Serbian (Cyrillic) translation \"Опште\" is not the standard or most accurate translation of \"General\". While technically understandable, it carries a more general meaning and isn't the typical equivalent in this context (settings).",
+          "suggestion": "По general, a better translation would be \"Опције\" or \"Основно\" depending on the specific context of the settings menu."
         }
       ],
       "approved_at": null
@@ -222,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Cài đặt chung\" is understandable, it directly translates to \"Common Settings\" and isn't the most natural or idiomatic translation for \"General\" in a settings menu. \"Chung\" implies settings that apply broadly, not just a general section.",
-          "suggestion": "Consider \"Tổng quan\" or \"Bao quát\" which better convey the meaning of 'General' as a top-level category in settings."
+          "description": "The translation \"Cài đặt chung\" literally translates to \"Common Settings\" or \"General Settings.\" While understandable, \"General\" in this context (likely referring to a section of settings) is better conveyed with a more concise and commonly used term.",
+          "suggestion": "Cài đặt"
         }
       ],
       "approved_at": null

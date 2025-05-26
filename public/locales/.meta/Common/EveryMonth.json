@@ -3,7 +3,7 @@
   "content": "Every month",
   "content_en_sha1_hash": "7f3932f9cb96cb99072771c992c0ce3c0b342bfb",
   "created_at": "2025-05-19T21:30:45.176Z",
-  "updated_at": "2025-05-22T11:56:37.688Z",
+  "updated_at": "2025-05-24T00:49:01.659Z",
   "comment": {
     "text": "This translation key \"EveryMonth\" is used as a placeholder text for calendar-based scheduling systems. It will display \"Every month\" in the user interface, likely on a select or dropdown field, where users can choose a recurring frequency for tasks or events.",
     "is_auto": true,

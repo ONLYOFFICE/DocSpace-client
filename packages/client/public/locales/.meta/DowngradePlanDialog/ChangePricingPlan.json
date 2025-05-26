@@ -3,7 +3,7 @@
   "content": "Change pricing plan",
   "content_en_sha1_hash": "45b92d09374c0e5e5e6e57dae357f87761b85ef3",
   "created_at": "2025-05-19T21:30:56.598Z",
-  "updated_at": "2025-05-20T09:38:34.373Z",
+  "updated_at": "2025-05-24T13:10:59.259Z",
   "comment": {
     "text": "The translation key \"ChangePricingPlan\" is used to display the text \"Change pricing plan\" in a dialog. This text is likely part of a button or confirmation prompt within the ChangePricingPlanDialog component, where users can update their pricing plan settings.",
     "is_auto": true,
@@ -105,7 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ປ່ຽນແປງ ລາຄາ ແຜນການ\" is a literal translation, it's not the most natural phrasing in Lao.  'Change pricing plan' implies a switch or modification, not just a general change in price and plan.",
+          "suggestion": "Consider a phrasing like \"ປ່ຽນແຜນ ລາຄາ\" (Pian plan ra-kha) which translates to 'Change plan price' or \"ປ່ຽນຮູບແບບແຜນການລາຄາ\" (Pian hoop-baep plan kan ra-kha) which translates to 'Change plan format price'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Schimbare abonament\" is understandable, it's not the most accurate translation of \"Change pricing plan.\" \"Abonament\" translates to \"subscription.\" \"Pricing plan\" refers to the structure of the pricing, not just the subscription itself. A more accurate translation would convey the change in the plan's details, not just the subscription.",
+          "suggestion": "Schimbarea planului tarifar"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'මිලකරණ සැලසුම සංශෝධනය' while literally translating to 'price plan modification' doesn't convey the meaning of 'Change pricing plan' as effectively. A more natural and commonly used translation would be something like 'මිල ගෙවුම් සැලසුම වෙනස් කරන්න' or 'මිලකරණ සැලසුම මාරුවන්න'.",
+          "suggestion": "මිල ගෙවුම් සැලසුම වෙනස් කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +189,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Промени план тарифирања' is a literal translation but doesn't flow naturally in Serbian. 'Тарифирање' is a technical term and sounds awkward in this context.",
+          "suggestion": "Измени план накнада"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Promeni plan tarifiranja' is understandable, a more natural and accurate translation of 'Change pricing plan' would be 'Izmeni plan cena' or 'Promena plana cena'. 'Tarifiranja' isn't commonly used in this context in Serbian.",
+          "suggestion": "Izmeni plan cena"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,7 +225,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Đổi gói dịch vụ có mức phí khác\" is a literal translation but doesn't quite capture the succinctness and directness of \"Change pricing plan.\" It's a bit verbose.",
+          "suggestion": "Đổi gói cước"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

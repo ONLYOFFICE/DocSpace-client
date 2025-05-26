@@ -32,6 +32,8 @@ import { useTranslation } from "react-i18next";
 
 import type { TPublicRoomPassword } from "../../../api/rooms/types";
 
+import { createGetLogoHandler } from "../../../__mocks__/storybook/handlers/logo/getLogo";
+
 import PublicRoomPassword, { type PublicRoomPasswordProps } from ".";
 
 const PublicRoomPasswordWithTranslation = (
@@ -80,5 +82,10 @@ export const Default: Story = {
     roomTitle: "Sample Public Room",
     onSuccessValidationCallback: (res: TPublicRoomPassword) =>
       console.log("Success validation", res),
+  },
+  parameters: {
+    msw: {
+      handlers: [createGetLogoHandler()],
+    },
   },
 };

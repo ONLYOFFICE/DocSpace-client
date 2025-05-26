@@ -24,41 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useReducer, useCallback, useEffect } from "react";
+import React, { useCallback, useState } from "react";
 
 import { ICompanySettings, IUseCompanySettings } from "./CompanyInfo.types";
 import { isEqual } from "lodash";
 
-const defaultCompanySettingsError = {
-  hasErrorAddress: false,
-  hasErrorCompanyName: false,
-  hasErrorEmail: false,
-  hasErrorPhone: false,
-  hasErrorSite: false,
+const errors = {
+  site: false,
+  email: false,
+  phone: false,
+  companyName: false,
+  address: false,
 };
 
 type TFields = Pick<
   ICompanySettings,
-  "address" | "companyName" | "email" | "phone" | "site" | "hideAbout"
->;
+  "address" | "companyName" | "email" | "phone" | "site"
+> & { displayAbout: boolean };
+
 type TValidators = "site" | "email" | "phone" | "companyName" | "address";
-type TBooleanFields = keyof Pick<ICompanySettings, "hideAbout">;
-
-interface IState {
-  fields: TFields;
-  errors: typeof defaultCompanySettingsError;
-  initialFields: TFields;
-  hasChanges: boolean;
-}
-
-type Action =
-  | { type: "SET_FIELD"; field: TValidators; value: string }
-  | {
-      type: "SET_BOOLEAN_FIELD";
-      field: TBooleanFields;
-      value: boolean;
-    }
-  | { type: "RESET"; values: TFields };
 
 const validators: Record<TValidators, (v: string) => boolean> = {
   site: (v) => /^(ftp|http|https):\/\/[^ "]+$/.test(v),
@@ -68,106 +52,60 @@ const validators: Record<TValidators, (v: string) => boolean> = {
   address: (v) => v.trim() !== "",
 };
 
-function reducer(state: IState, action: Action): IState {
-  switch (action.type) {
-    case "SET_FIELD": {
-      const newFields = { ...state.fields, [action.field]: action.value };
-      const isValid = validators[action.field](action.value);
-      const hasChanges = !isEqual(
-        state.initialFields[action.field],
-        action.value,
-      );
-
-      return {
-        fields: newFields,
-        errors: {
-          ...state.errors,
-          [`hasError${action.field.charAt(0).toUpperCase() + action.field.slice(1)}`]:
-            !isValid,
-        },
-        initialFields: state.initialFields,
-        hasChanges,
-      };
-    }
-    case "SET_BOOLEAN_FIELD": {
-      const newFields = { ...state.fields, [action.field]: action.value };
-
-      return {
-        fields: newFields,
-        errors: state.errors,
-        initialFields: state.fields,
-        hasChanges: true,
-      };
-    }
-    case "RESET":
-      return {
-        fields: action.values,
-        initialFields: action.values,
-        errors: defaultCompanySettingsError,
-        hasChanges: false,
-      };
-    default:
-      return state;
-  }
-}
-
 export const useCompanySettings = ({
   companySettings,
   displayAbout,
 }: IUseCompanySettings) => {
-  const initialSettings = {
+  const settingsData = {
     address: companySettings.address,
     companyName: companySettings.companyName,
     email: companySettings.email,
     phone: companySettings.phone,
     site: companySettings.site,
-    hideAbout: !displayAbout,
+    displayAbout: displayAbout,
   };
 
-  const [state, dispatch] = useReducer(reducer, {
-    fields: initialSettings,
-    initialFields: initialSettings,
-    errors: defaultCompanySettingsError,
-    hasChanges: false,
-  });
+  const [settingsFormData, setSettingsFormData] = useState<Partial<TFields>>(
+    {},
+  );
+
+  const formData = {
+    ...settingsData, // from backend
+    ...settingsFormData, // user input
+  };
+
+  const isDirty = !isEqual(formData, settingsData);
+
+  const validate = () => {
+    Object.keys(validators).forEach((key) => {
+      const validatorKey = key as TValidators;
+      const isValid = validators[validatorKey](formData[validatorKey]);
+      errors[validatorKey] = !isValid;
+    });
+    return errors;
+  };
 
   const createChangeHandler = useCallback(
-    (field: TValidators) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      dispatch({ type: "SET_FIELD", field, value: e.target.value });
+    (field: keyof TFields) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value =
+        e.target.type === "checkbox" ? e.target.checked : e.target.value;
+      setSettingsFormData((prev) => ({ ...prev, [field]: value }));
     },
     [],
   );
 
-  const createChangeBooleanHandler = useCallback(
-    (field: TBooleanFields) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      dispatch({ type: "SET_BOOLEAN_FIELD", field, value: e.target.checked });
-    },
-    [],
-  );
-
-  useEffect(() => {
-    dispatch({
-      type: "RESET",
-      values: {
-        address: companySettings.address,
-        companyName: companySettings.companyName,
-        email: companySettings.email,
-        phone: companySettings.phone,
-        site: companySettings.site,
-        hideAbout: companySettings.hideAbout,
-      },
-    });
-  }, [companySettings]);
+  const reset = () => setSettingsFormData({});
 
   return {
-    ...state.fields,
-    companySettingsError: state.errors,
-    hasChanges: state.hasChanges,
+    ...formData,
+    reset,
+    companySettingsError: validate(),
+    hasChanges: isDirty,
     onChangeAddress: createChangeHandler("address"),
     onChangeCompanyName: createChangeHandler("companyName"),
     onChangeEmail: createChangeHandler("email"),
     onChangePhone: createChangeHandler("phone"),
     onChangeSite: createChangeHandler("site"),
-    onChangeHideAbout: createChangeBooleanHandler("hideAbout"),
+    onChangeDisplayAbout: createChangeHandler("displayAbout"),
   };
 };

@@ -68,7 +68,7 @@ export const CompanyInfo = ({
     email,
     phone,
     site,
-    hideAbout,
+    displayAbout: showAbout,
     companySettingsError,
     hasChanges,
     onChangeAddress,
@@ -76,28 +76,30 @@ export const CompanyInfo = ({
     onChangeEmail,
     onChangePhone,
     onChangeSite,
-    onChangeHideAbout,
+    onChangeDisplayAbout,
+    reset,
   } = useCompanySettings({
     companySettings,
     displayAbout,
   });
 
   const onSaveAction = () => {
-    onSave(address, companyName, email, phone, site, hideAbout);
+    onSave(address, companyName, email, phone, site, !showAbout);
   };
 
-  const onChangeHideAboutAction = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.target.checked = !e.target.checked;
-    onChangeHideAbout(e);
+  const onRestoreAction = () => {
+    reset();
+    onRestore();
   };
 
   const {
-    hasErrorAddress,
-    hasErrorCompanyName,
-    hasErrorEmail,
-    hasErrorPhone,
-    hasErrorSite,
+    address: hasErrorAddress,
+    companyName: hasErrorCompanyName,
+    email: hasErrorEmail,
+    phone: hasErrorPhone,
+    site: hasErrorSite,
   } = companySettingsError;
+
   const isDisabled =
     hasErrorAddress ||
     hasErrorCompanyName ||
@@ -159,8 +161,8 @@ export const CompanyInfo = ({
           <FieldContainer>
             <Checkbox
               isDisabled={!isBrandingAvailable}
-              isChecked={!hideAbout}
-              onChange={onChangeHideAboutAction}
+              isChecked={showAbout || !isBrandingAvailable}
+              onChange={onChangeDisplayAbout}
               data-testid="show-about-window-checkbox"
               label={t("Settings:ShowAboutWindow")}
             />
@@ -260,7 +262,7 @@ export const CompanyInfo = ({
         <SaveCancelButtons
           className="save-cancel-buttons"
           onSaveClick={onSaveAction}
-          onCancelClick={onRestore}
+          onCancelClick={onRestoreAction}
           saveButtonLabel={t("Common:SaveButton")}
           cancelButtonLabel={t("Common:Restore")}
           reminderText={t("YouHaveUnsavedChanges")}

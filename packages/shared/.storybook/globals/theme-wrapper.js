@@ -1,3 +1,4 @@
+import React from "react";
 import PropTypes from "prop-types";
 import { ThemeProvider } from "../../components/theme-provider";
 import { globalColors } from "../../themes";

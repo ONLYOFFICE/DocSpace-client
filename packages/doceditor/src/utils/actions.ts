@@ -63,7 +63,7 @@ export async function getFillingSession(
 ) {
   log.debug("Start GET /files/file/fillresult");
 
-  const [request] = createRequest(
+  const [request] = await createRequest(
     [`/files/file/fillresult?fillingSessionId=${fillingSessionId}`],
     [
       ["Content-Type", "application/json;charset=utf-8"],
@@ -81,7 +81,7 @@ export async function getFillingSession(
       cause: await response.json(),
     });
   } catch (error) {
-    const hdrs = headers();
+    const hdrs = await headers();
 
     const hostname = hdrs.get("x-forwarded-host");
     log.error(
@@ -117,7 +117,7 @@ export async function fileCopyAs(
   try {
     log.debug(`Start POST /files/file/${fileId}/copyas`);
 
-    const [createFile] = createRequest(
+    const [createFile] = await createRequest(
       [`/files/file/${fileId}/copyas`],
       [["Content-Type", "application/json;charset=utf-8"]],
       "POST",
@@ -143,7 +143,7 @@ export async function fileCopyAs(
 
     const file = await fileRes.json();
 
-    const hdrs = headers();
+    const hdrs = await headers();
 
     const hostname = hdrs.get("x-forwarded-host");
 
@@ -177,7 +177,7 @@ export async function fileCopyAs(
         : undefined,
     };
   } catch (e: any) {
-    const hdrs = headers();
+    const hdrs = await headers();
 
     const hostname = hdrs.get("x-forwarded-host");
 
@@ -224,7 +224,7 @@ export async function createFile(
   try {
     log.debug(`Start POST /files/${parentId}/file`);
 
-    const [createFile] = createRequest(
+    const [createFile] = await createRequest(
       [`/files/${parentId}/file`],
       [["Content-Type", "application/json;charset=utf-8"]],
       "POST",
@@ -249,7 +249,7 @@ export async function createFile(
     const file = await fileRes.json();
 
     if (file.error) {
-      const hdrs = headers();
+      const hdrs = await headers();
 
       const hostname = hdrs.get("x-forwarded-host");
 
@@ -273,7 +273,7 @@ export async function createFile(
         : undefined,
     };
   } catch (e: any) {
-    const hdrs = headers();
+    const hdrs = await headers();
 
     const hostname = hdrs.get("x-forwarded-host");
     log.error(
@@ -423,10 +423,10 @@ export async function getData(
 export async function getUser(share?: string) {
   log.debug("Start GET /people/@self");
 
-  const hdrs = headers();
+  const hdrs = await headers();
   const cookie = hdrs.get("cookie");
 
-  const [getUser] = createRequest(
+  const [getUser] = await createRequest(
     [`/people/@self`],
     [share ? ["Request-Token", share] : ["", ""]],
     "GET",
@@ -439,7 +439,7 @@ export async function getUser(share?: string) {
   if (userRes.status === 401) return undefined;
 
   if (!userRes.ok) {
-    const hdrs = headers();
+    const hdrs = await headers();
 
     const hostname = hdrs.get("x-forwarded-host");
 
@@ -457,10 +457,10 @@ export async function getUser(share?: string) {
 export async function getSettings(share?: string) {
   log.debug("Start GET /settings");
 
-  const hdrs = headers();
+  const hdrs = await headers();
   const cookie = hdrs.get("cookie");
 
-  const [getSettings] = createRequest(
+  const [getSettings] = await createRequest(
     [
       `/settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"}`,
     ],
@@ -474,7 +474,7 @@ export async function getSettings(share?: string) {
   if (settingsRes.status === 403) return `access-restricted`;
 
   if (!settingsRes.ok) {
-    const hdrs = headers();
+    const hdrs = await headers();
 
     const hostname = hdrs.get("x-forwarded-host");
 
@@ -491,12 +491,12 @@ export async function getSettings(share?: string) {
 export const checkIsAuthenticated = async () => {
   log.debug("Start GET /authentication");
 
-  const [request] = createRequest(["/authentication"], [["", ""]], "GET");
+  const [request] = await createRequest(["/authentication"], [["", ""]], "GET");
 
   const res = await fetch(request);
 
   if (!res.ok) {
-    const hdrs = headers();
+    const hdrs = await headers();
 
     const hostname = hdrs.get("x-forwarded-host");
 
@@ -513,7 +513,7 @@ export const checkIsAuthenticated = async () => {
 export async function validatePublicRoomKey(key: string, fileId?: string) {
   log.debug("Start GET /files/share");
 
-  const [validatePublicRoomKey] = createRequest(
+  const [validatePublicRoomKey] = await createRequest(
     [`/files/share/${key}?fileid=${fileId}`],
     [key ? ["Request-Token", key] : ["", ""]],
     "GET",
@@ -522,7 +522,7 @@ export async function validatePublicRoomKey(key: string, fileId?: string) {
   const res = await fetch(validatePublicRoomKey);
   if (res.status === 401) return undefined;
   if (!res.ok) {
-    const hdrs = headers();
+    const hdrs = await headers();
 
     const hostname = hdrs.get("x-forwarded-host");
 
@@ -540,7 +540,7 @@ export async function validatePublicRoomKey(key: string, fileId?: string) {
 //   templateFileId: number,
 //   share?: string,
 // ) {
-//   const [checkFillFormDraft] = createRequest(
+//   const [checkFillFormDraft] = await createRequest(
 //     [`/files/masterform/${templateFileId}/checkfillformdraft`],
 //     [
 //       share ? ["Request-Token", share] : ["", ""],
@@ -566,10 +566,10 @@ export async function openEdit(
 ) {
   log.debug(`Start GET /files/file/${fileId}/openedit`);
 
-  const hdrs = headers();
+  const hdrs = await headers();
   const cookie = hdrs.get("cookie");
 
-  const [getConfig] = createRequest(
+  const [getConfig] = await createRequest(
     [`/files/file/${fileId}/openedit?${searchParams}`],
     [share ? ["Request-Token", share] : ["", ""]],
     "GET",
@@ -641,7 +641,7 @@ export async function getEditorUrl(
 ) {
   log.debug(`Start GET /files/docservice`);
 
-  const [request] = createRequest(
+  const [request] = await createRequest(
     [`/files/docservice?${editorSearchParams ? editorSearchParams : ""}`],
     [share ? ["Request-Token", share] : ["", ""]],
     "GET",
@@ -651,7 +651,7 @@ export async function getEditorUrl(
   const res = await fetch(request);
 
   if (!res.ok) {
-    const hdrs = headers();
+    const hdrs = await headers();
 
     const hostname = hdrs.get("x-forwarded-host");
 
@@ -668,7 +668,7 @@ export async function getEditorUrl(
 export async function getColorTheme() {
   log.debug(`Start GET /settings/colortheme`);
 
-  const [getSettings] = createRequest(
+  const [getSettings] = await createRequest(
     [`/settings/colortheme`],
     [["", ""]],
     "GET",
@@ -677,7 +677,7 @@ export async function getColorTheme() {
   const res = await fetch(getSettings);
 
   if (!res.ok) {
-    const hdrs = headers();
+    const hdrs = await headers();
 
     const hostname = hdrs.get("x-forwarded-host");
 
@@ -693,7 +693,7 @@ export async function getColorTheme() {
 export async function getDeepLinkSettings() {
   log.debug(`Start GET /settings/deeplink`);
 
-  const [getSettings] = createRequest(
+  const [getSettings] = await createRequest(
     [`/settings/deeplink`],
     [["", ""]],
     "GET",
@@ -702,7 +702,7 @@ export async function getDeepLinkSettings() {
   const res = await fetch(getSettings);
 
   if (!res.ok) {
-    const hdrs = headers();
+    const hdrs = await headers();
 
     const hostname = hdrs.get("x-forwarded-host");
 
@@ -718,7 +718,7 @@ export async function getDeepLinkSettings() {
 export async function getFormFillingStatus(formId: string | number) {
   log.debug(`Start GET /files/file/${formId}/formroles`);
 
-  const [getFormFillingStatus] = createRequest(
+  const [getFormFillingStatus] = await createRequest(
     [`/files/file/${formId}/formroles`],
     [["", ""]],
     "GET",
@@ -729,7 +729,7 @@ export async function getFormFillingStatus(formId: string | number) {
   if (response.ok)
     return (await response.json()).response as TFileFillingFormStatus[];
 
-  const hdrs = headers();
+  const hdrs = await headers();
 
   const hostname = hdrs.get("x-forwarded-host");
 
@@ -744,13 +744,17 @@ export async function getFormFillingStatus(formId: string | number) {
 export async function getFileById(fileId: number | string) {
   log.debug(`Start GET /files/file/${fileId}`);
 
-  const [getFile] = createRequest([`/files/file/${fileId}`], [["", ""]], "GET");
+  const [getFile] = await createRequest(
+    [`/files/file/${fileId}`],
+    [["", ""]],
+    "GET",
+  );
 
   const response = await fetch(getFile);
 
   if (response.ok) return (await response.json()).response as TFile;
 
-  const hdrs = headers();
+  const hdrs = await headers();
 
   const hostname = hdrs.get("x-forwarded-host");
 
@@ -765,7 +769,7 @@ export async function getFileById(fileId: number | string) {
 export async function getFileLink(fileId: number | string) {
   log.debug(`Start GET /files/file/${fileId}/link`);
 
-  const [getFileLink] = createRequest(
+  const [getFileLink] = await createRequest(
     [`/files/file/${fileId}/link`],
     [["", ""]],
     "GET",
@@ -775,7 +779,7 @@ export async function getFileLink(fileId: number | string) {
 
   if (response.ok) return (await response.json()) as TFileLink;
 
-  const hdrs = headers();
+  const hdrs = await headers();
 
   const hostname = hdrs.get("x-forwarded-host");
 

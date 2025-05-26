@@ -1,0 +1,284 @@
+{
+  "key_path": "EncryptionPortalSubtitle",
+  "content": "As soon as the process is over, the portal data will be available for work.",
+  "content_en_sha1_hash": "9dc827af60a7e18ab06fd2e27fc9a6f421715c3b",
+  "created_at": "2025-05-19T21:30:44.971Z",
+  "updated_at": "2025-05-22T11:56:37.882Z",
+  "comment": {
+    "text": "This translation key is used to display a subtitle that indicates when data will be available after completing a process. It appears on an Encryption Portal component, providing a message of progression and hinting at the availability of portal data.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:25.432Z"
+  },
+  "usage": [
+    {
+      "file_path": "\\packages\\shared\\pages\\EncryptionPortal\\index.tsx",
+      "line_number": 141,
+      "context": "<div className=\"preparation-portal_progress-line\" />\n </div>\n <Text className=\"preparation-portal_percent\">{`${percent} %`}</Text>\n </div>\n <Text className=\"preparation-portal_text\">\n {t(\"EncryptionPortalSubtitle\")}\n </Text>\n </ColorTheme>\n );\n \n return (",
+      "module": "\\packages\\shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"بمجرد انتهاء العملية، ستكون بيانات البوابة متاحة للاستخدام.\" while conveying the general meaning, doesn't perfectly capture the nuance of \"for work.\" \"للاستخدام\" (for use) is a bit broader than the English implies. It doesn't convey the specific context of data being available *to do work with*.",
+          "suggestion": "بمجرد انتهاء العملية، ستكون بيانات البوابة متاحة للعمل."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'for work' is too literal and doesn't flow naturally in Greek. 'For work' implies a specific task or activity. A more natural translation would imply availability for use or processing.",
+          "suggestion": "Μόλις ολοκληρωθεί η διαδικασία, τα δεδομένα πύλης θα είναι διαθέσιμα για χρήση."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Kun prosessi on ohi, voit työskennellä portaalin datan kanssa.' while conveying a similar idea, is not a direct or natural translation of 'As soon as the process is over, the portal data will be available for work.' It implies the user *can* work with the data, rather than stating the data *will be available*. A more accurate translation would reflect availability.",
+          "suggestion": "Kun prosessi on valmis, portaalin data on käytettävissä."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"pour travailler\" is an awkward translation of \"for work.\" It implies that the data is available *to* work, rather than *for* work. A more natural translation would convey that the data is ready to be used.",
+          "suggestion": "Dès que le processus est terminé, les données du portail sont disponibles pour être utilisées."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'for work' is not perfectly conveyed by 'per l'uso'. While 'per l'uso' means 'for use,' 'for work' implies a more active and professional context. A better translation would reflect this intention.",
+          "suggestion": "Non appena il processo sarà terminato, i dati del portale saranno disponibili per essere utilizzati."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'ປະຕູ' (door) doesn't accurately convey the meaning of 'portal' in this context. It implies a physical door instead of a digital access point.",
+          "suggestion": "Consider using a term like 'ເວັບໄຊ້' (website) or a more descriptive phrase that accurately represents a digital portal, such as 'ເຂດນອກ' (external area) or 'ລະບົບຂໍ້ມູນ' (data system) depending on the intended nuance."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ປະສົມປະດົນ' might not be the best fit. While it can mean a process, it often implies a mixing or blending. It is likely not the best choice to describe a process in this technical context.",
+          "suggestion": "Consider using 'ດຳເນີນ' (proceed), 'ສິ້ນສຸດ' (end) or a more descriptive term depending on the specific nature of the process."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Romanian translation 'Odată procesul încheiat, datele din portalul vor deveni disponibile' is grammatically awkward. A more natural phrasing would be 'Odată când procesul este încheiat...' or 'Când procesul este încheiat...'",
+          "suggestion": "Când procesul este încheiat, datele din portal vor deveni disponibile."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ද්වාර දත්ත\" (dvara data) literally translates to 'portal data'. While technically correct, it sounds unnatural in Sinhala. A more natural phrasing would be \"වේදාන්ත දත්ත\" (wedaantha data) which refers to the portal's data or 'data of the portal'.",
+          "suggestion": "ක්‍රියාවලිය අවසන් වූ වහාම, වේදාන්ත දත්ත වැඩ සඳහා ලබා ගත හැකි වනු ඇත"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"වැඩ සඳහා\" (weda sahasa) translates to 'for work', but in this context, a better translation would be 'for use' or 'to be utilized'.",
+          "suggestion": "ක්‍රියාවලිය අවසන් වූ වහාම, වේදාන්ත දත්ත වැඩ සඳහා භාවිතා කිරීමට හැකි වනු ඇත"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Чим процес заврши, подаци у порталу биће доступни за рад' doesn't accurately convey the meaning of the English sentence. 'Чим' (chim) translates to 'as soon as' but implies an immediate action. The original sentence implies availability *after* completion, not necessarily immediately upon completion. The construction is also a bit awkward.",
+          "suggestion": "Када процес буде завршен, подаци у порталу биће доступни за рад."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Čim proces završi, podaci u portalu biće dostupni za rad' is functionally correct but lacks the nuance and flow of the English original. 'As soon as the process is over' is more immediate and slightly more natural-sounding than 'Čim proces završi'.",
+          "suggestion": "Čim proces bude završen, podaci u portalu će biti dostupni za rad."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"进程结束后，门户数据将可供使用。\" is a literal translation but could be improved for naturalness. '可供使用' is slightly formal and less common in this context. A more natural phrasing would emphasize availability for work.",
+          "suggestion": "进程结束后，门户数据即可用于工作。"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

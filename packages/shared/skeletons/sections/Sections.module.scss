@@ -1,5 +1,4 @@
-@import "../../styles/mixins";
-@import "../../styles/variables/devices";
+@use "../../styles/mixins";
 
 .headerContainer {
   width: 100%;
@@ -11,13 +10,13 @@
   margin-bottom: 23px;
   align-items: center;
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     margin-top: 16px;
     margin-bottom: 25px;
     grid-template-columns: 163px 1fr 17px;
   }
 
-  @include mobile {
+  @include mixins.mobile {
     margin-top: 14px;
     margin-bottom: 23px;
     grid-template-columns: 140px 1fr 17px;
@@ -28,12 +27,12 @@
   width: 140px;
   height: 24px;
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     width: 163px;
     height: 28px;
   }
 
-  @include mobile {
+  @include mixins.mobile {
     width: 140px;
     height: 24px;
   }

@@ -24,16 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../styles/variables/index.scss";
-@import "../../../styles/variables/_colors.scss";
-@import "../../../styles/_mixins.scss";
+@use "../../../styles/variables";
+@use "../../../styles/variables/colors";
+@use "../../../styles/mixins";
 
 .tileContainer {
   position: relative;
   height: 100%;
   user-select: none;
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     margin-top: 16px;
     margin-inline-end: -3px;
   }
@@ -68,12 +68,12 @@
     margin-bottom: 0;
   }
 
-  @include desktop {
+  @include mixins.desktop {
     margin-inline-start: 1px;
     padding-inline-end: 0;
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     margin-inline-start: -1px;
   }
 }

@@ -29,7 +29,6 @@ import { globalColors } from "../../themes";
 import { injectDefaultTheme, mobile, tablet } from "../../utils";
 import { IconButton } from "../icon-button";
 import { Scrollbar } from "../scrollbar";
-import { ColorTheme } from "../color-theme";
 
 const reactWindowContainerStyles = css`
   height: 100%;
@@ -232,7 +231,7 @@ const StyledTableGroupMenu = styled.div.attrs(injectDefaultTheme)<{
   }
 `;
 
-const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme).attrs(
+const StyledInfoPanelToggleColorThemeWrapper = styled.div.attrs(
   injectDefaultTheme,
 )<{
   isInfoPanelVisible?: boolean;

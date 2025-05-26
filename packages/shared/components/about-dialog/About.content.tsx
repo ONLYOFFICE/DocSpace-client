@@ -29,8 +29,7 @@ import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "../text";
-import { LinkTarget } from "../link";
-import { ColorTheme, ThemeId } from "../color-theme";
+import { Link, LinkTarget } from "../link";
 
 import { getLogoUrl } from "../../utils";
 import { WhiteLabelLogoType } from "../../enums";
@@ -89,18 +88,18 @@ export const AboutContent = ({
             {t("DocumentManagement")}:
           </Text>
           <div className="program-with-version">
-            <ColorTheme
+            <Link
               tag="a"
-              themeId={ThemeId.Link}
               className="row-el"
               fontSize="13px"
               fontWeight="600"
               href={linkRepo}
               target={LinkTarget.blank}
               enableUserSelect
+              color="accent"
             >
               &nbsp;{logoText} {t("Common:ProductName")}&nbsp;
-            </ColorTheme>
+            </Link>
 
             <Text className="row-el select-el" fontSize="13px" fontWeight="600">
               v.
@@ -116,18 +115,18 @@ export const AboutContent = ({
             {t("OnlineEditors")}:
           </Text>
           <div className="program-with-version">
-            <ColorTheme
+            <Link
               tag="a"
-              themeId={ThemeId.Link}
               className="row-el"
               fontSize="13px"
               fontWeight="600"
               href={linkDocs}
               target={LinkTarget.blank}
               enableUserSelect
+              color="accent"
             >
               &nbsp;{logoText} {t("Common:ProductEditorsName")}&nbsp;
-            </ColorTheme>
+            </Link>
             <Text className="row-el select-el" fontSize="13px" fontWeight="600">
               v.
               <span className="version-online-editors">
@@ -142,18 +141,18 @@ export const AboutContent = ({
             {t("SoftwareLicense")}:{" "}
           </Text>
           {isCommercial ? (
-            <ColorTheme
+            <Link
               tag="a"
-              themeId={ThemeId.Link}
               className="row-el"
               fontSize="13px"
               fontWeight="600"
               href={licenseAgreementsUrl}
               target={LinkTarget.blank}
               enableUserSelect
+              color="accent"
             >
               &nbsp;{license}
-            </ColorTheme>
+            </Link>
           ) : (
             <Text className="row-el" fontSize="13px" fontWeight="600">
               &nbsp;{license}
@@ -188,17 +187,17 @@ export const AboutContent = ({
             {t("AboutCompanyEmailTitle")}:
           </Text>
 
-          <ColorTheme
+          <Link
             tag="a"
-            themeId={ThemeId.Link}
             className="row-el"
             fontSize="13px"
             fontWeight="600"
             href={`mailto:${companyInfoSettingsData.email}`}
             enableUserSelect
+            color="accent"
           >
             &nbsp;{email}
-          </ColorTheme>
+          </Link>
         </div>
 
         <div className="row">
@@ -206,18 +205,18 @@ export const AboutContent = ({
             {t("Site")}:
           </Text>
 
-          <ColorTheme
+          <Link
             tag="a"
-            themeId={ThemeId.Link}
             className="row-el"
             fontSize="13px"
             fontWeight="600"
             target={LinkTarget.blank}
             href={site}
             enableUserSelect
+            color="accent"
           >
             &nbsp;{site?.replace(/^https?\:\/\//i, "")}
-          </ColorTheme>
+          </Link>
         </div>
       </StyledAboutContent>
     )

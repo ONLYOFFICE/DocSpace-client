@@ -1,0 +1,346 @@
+{
+  "key_path": "DeletePortalInfo",
+  "content": "Before you delete the space, please make sure that automatic billing is turned off. You may check the status of automatic billing in <1>your Stripe customer portal</1>.",
+  "content_en_sha1_hash": "dc639bafcacea9cc342c82a0e94c2353a9bf2d96",
+  "created_at": "2025-05-19T21:30:51.120Z",
+  "updated_at": "2025-05-21T04:36:07.919Z",
+  "comment": {
+    "text": "This translation key is used to display a message reminding users to turn off automatic billing before deleting their portal. The message appears in a dialog box when the user attempts to delete their space.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:24.151Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeletePortalDialog/index.js",
+      "line_number": 61,
+      "context": ">\n <ModalDialog.Header>\n {t(\"DeletePortal\", { productName: t(\"Common:ProductName\") })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Trans t={t} i18nKey=\"DeletePortalInfo\" ns=\"Settings\">\n Before you delete the portal, please make sure that automatic billing\n is turned off. You may check the status of automatic billing in\n <ColorTheme\n className=\"stripe-url-link\"\n tag=\"a\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets `<1>` and `</1>` are not correctly formatted. They are intended to highlight a link or important term, and the closing tag has an extra space.",
+          "suggestion": "Correct the formatting of the angle brackets: `<1> بوابة عملاء Stripe الخاصة بك</1>` should be `<1>بوابة عملاء Stripe الخاصة بك</1>`"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The `<1>` tags are not consistently applied. They should be consistent with the English content.",
+          "suggestion": "Ensure consistent use of tags. In this case, it appears the formatting should be `<1>Stripe müştəri portalınızda</1>."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"avtomatik fakturanın statusunu\" translates more accurately as \"avtomatik ödənişin vəziyyətini\" or similar, as it's referring to the billing status, not the invoice itself.",
+          "suggestion": "Consider using \"avtomatik ödənişin vəziyyətini\" or a similar phrasing that conveys the billing status."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag `<1>` is inconsistent. In the English content it reads 'your Stripe customer portal', while in the Bulgarian translation it reads 'Stripe портала за клиенти.'",
+          "suggestion": "Maintain consistency in the HTML tag usage. If the intention is to highlight 'Stripe портала за клиенти', ensure the tag is applied consistently across all similar phrases."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tag <1>svém zákaznickém portálu Stripe</1> appears to be correctly preserved, maintaining the formatting of the original English content.",
+          "suggestion": null
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Greek translation uses “Πύλη πελατών Stripe” for '<1>your Stripe customer portal</1>”. The original English includes 'your', which implies possession. The Greek doesn't have that possessive element. It's functionally correct, but consider adjusting to reflect the original intent if 'your' is crucial.",
+          "suggestion": "Consider revising to something like 'Η Πύλη πελατών Stripe σας' to reflect the possessive 'your' (assuming that's intentional)."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag <1> is consistent with the English version. However, it might be better to use a more standard HTML tag like <a> or <span> depending on the intended behavior.",
+          "suggestion": "Consider using <a> or <span> based on intended behavior. For example: <a href=\"[Stripe Customer Portal Link]\">Stripeカスタマーポータル</a>"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag `<1>` is not consistently applied. The English content uses `your Stripe customer portal` within the tag, while the Korean translation just has `Stripe 고객 포털`.",
+          "suggestion": "Ensure consistent HTML tag application. Consider translating 'your' if it's important to preserve the emphasis."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ອອກ​ໃບ​ບິນ\" is a more literal translation of 'billing' and might not be the most natural phrasing in Lao. A more natural phrasing could be \"ການ​ກວດ​ກາ​ການ​ຈ່າຍ​ເງິນ\" or similar.",
+          "suggestion": "ກ່ອນ​ທີ່​ທ່ານ​ຈະ​ລຶບ​ພື້ນ​ທີ່​, ກະ​ລຸ​ນາ​ເຮັດ​ໃຫ້​ແນ່​ໃຈວ່​າ​ການ​ຈ່າຍ​ເງິນ​ອັດ​ຕະ​ໂນ​ມັດ​ໄດ້​ປິດ​. ທ່ານ​ອາດ​ຈະ​ກວດ​ເບິ່ງ​ສະ​ຖາ​ນະ​ການ​ຂອງ​ການ​ຈ່າຍ​ເງິນ​ອັດ​ຕະ​ໂນ​ມັດ​ໃນ <1>ແຜງບໍລິຫານ​ລູກ​ຄ້າ Stripe ຂອງ​ທ່ານ.</1>"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "\"ແຜງບໍລິານ\" is a direct translation of 'panel' and might sound a little formal or awkward.  A more common term for the customer portal would be \"ເວັບ​ໄຊ້\" (website) or \"ລະບົບ\" (system).",
+          "suggestion": "ກ່ອນ​ທີ່​ທ່ານ​ຈະ​ລຶບ​ພື້ນ​ທີ່​, ກະ​ລຸ​ນາ​ເຮັດ​ໃຫ້​ແນ່​ໃຈວ່​າ​ການ​ຈ່າຍ​ເງິນ​ອັດ​ຕະ​ໂນ​ມັດ​ໄດ້​ປິດ​. ທ່ານ​ອາດ​ຈະ​ກວດ​ເບິ່ງ​ສະ​ຖາ​ນະ​ການ​ຂອງ​ການ​ຈ່າຍ​ເງິນ​ອັດ​ຕະ​ໂນ​ມັດ​ໃນ <1>ເວັບ​ໄຊ້​ຂອງ​ລູກ​ຄ້າ Stripe ຂອງ​ທ່ານ.</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The formatting of the link in the English content is not perfectly replicated in the Latvian translation. The English uses <1> and </1>, while the Latvian uses the same tags but needs to be ensured they are consistent with the platform's HTML rendering for links.  It’s possible that the platform utilizes a different tag format for link wrapping.",
+          "suggestion": "Verify that the <1> and </1> tags are compatible with the rendering engine used by the platform. Consider using a standardized link tag if the platform requires it (e.g., <a></a> or a custom tag)."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag <1> is inconsistent with the English version. The English version uses 'your' before the portal name, while the Polish translation omits it.",
+          "suggestion": "Change \"portalu klienta Stripe\" to \"portalu klienta Stripe Twojego\" to match the original context and HTML tag usage, or remove <1> tags altogether if the 'your' is not essential."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"Stripe\" as \"Faixas\" is inaccurate. \"Faixas\" means \"stripes\" or \"bands\". Stripe is the name of the payment platform.",
+          "suggestion": "seu portal de cliente da Stripe"
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tag `<1>` and `</1>` are not standard and need to be corrected or replaced with standard HTML tags (e.g., <a> or <strong>).",
+          "suggestion": "seu portal de cliente da Stripe"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The formatting of the link tag in the Romanian translation is inconsistent with the English original. The English uses `<1>...</1>`, while the Romanian uses the same format, but Romanian link tags should be using `<1>...</1>` just like English.",
+          "suggestion": "Change `<1>portalul dvs de client Stripe</1>` to `<1>portalul dvs. de client Stripe</1>."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"portalul dvs de client Stripe\" is a literal translation of \"your Stripe customer portal\". A more natural and idiomatic translation might be more appropriate.  While understandable, it sounds slightly robotic.",
+          "suggestion": "Consider \"portalul de clienți Stripe\" or \"panoul dvs. de clienți Stripe\" for a more natural flow."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"удалением портала\" (deletion of the portal) is a less natural phrasing in Russian compared to something like \"удалением пространства\" (deletion of the space) to match the English \"delete the space\".",
+          "suggestion": "Перед удалением пространства, пожалуйста, убедитесь, что автоматическое выставление счетов отключено."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"your Stripe customer portal\" is too literal. A more natural sounding translation would be something along the lines of \"Stripe-портале\" or a slightly rephrased sentence.",
+          "suggestion": "Вы можете проверить статус автоматического выставления счетов в <1>Stripe-портале</1>."
+        },
+        {
+          "type": "formatting",
+          "description": "The tags <1>...</1> are not standard for displaying hyperlinks or emphasis in Russian. They are more common in English translations.",
+          "suggestion": "Consider using italics or bolding to achieve the same effect, or rephrase the sentence to avoid the need for such tags."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The formatting of the link in the English content (<1>your Stripe customer portal</1>) is not perfectly replicated in the Sinhala translation. The Sinhala translation uses the same tags, but the English tags include 'your' while the Sinhala ones don't. This might break rendering in some systems.",
+          "suggestion": "Ensure the formatting tags and content within them accurately reflect the English version: `<1>ඔබගේ ස්ට්‍රයිප් පාරිභෝගික ද්වාරය</1>."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag `<1>` is correctly used in both the English and Slovenian versions, indicating a link. However, ensure the link itself is accurate in the Slovenian version.",
+          "suggestion": "Verify the link within `<1>vašem portalu za stranke Stripe</1>` points to the correct Stripe customer portal URL for Slovenian users."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The bolding/HTML tags in the English content are not consistently replicated in the Serbian translation.",
+          "suggestion": "Ensure the bolding/HTML tags are applied identically to the Serbian translation: \"Pre nego što izbrišete prostor, uverite se da je automatski obračun isključen. Status automatskog obračuna možete da proverite na <1><b>vašem Stripe korisničkom portalu</b></1>.\""
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tag `<1>` is inconsistent. The English uses `your Stripe customer portal` while the Ukrainian uses `клієнтському порталі Stripe.`. The translation should use 'ваш клієнтський портал Stripe' for better consistency with the English.  Also, 'ваш' (your) is more appropriate here.",
+          "suggestion": "Replace `<1>клієнтському порталі Stripe.</1>` with `<1>вашому клієнтському порталі Stripe.</1>`"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tag `<1>` is preserved in the translation, which is not ideal. It should be removed.",
+          "suggestion": "Remove the `<1>` tags and integrate the linked text naturally into the sentence. Consider rephrasing for better flow."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

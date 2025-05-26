@@ -1,40 +1,9 @@
 /* eslint-disable react/no-array-index-key */
 import React from "react";
 import { Meta, Story } from "@storybook/react";
-import styled from "styled-components";
 import { SelectionArea } from "./SelectionArea";
 import { SelectionAreaProps } from "./SelectionArea.types";
-
-const Container = styled.div`
-  width: 800px;
-  height: 600px;
-  position: relative;
-  padding: 20px;
-  overflow: auto;
-`;
-
-const ItemsContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  padding: 16px;
-`;
-
-const Item = styled.div`
-  width: 150px;
-  height: 150px;
-  background-color: #f5f5f5;
-  border: 1px solid #ddd;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-
-  &.selected {
-    background-color: #e3f2fd;
-    border-color: #2196f3;
-  }
-`;
+import styles from "./SelectionArea.stories.module.scss";
 
 export default {
   title: "Layout components/SelectionArea",
@@ -49,9 +18,9 @@ export default {
   },
   decorators: [
     (S) => (
-      <Container>
+      <div id="sectionScroll" className={styles.container}>
         <S />
-      </Container>
+      </div>
     ),
   ],
 } as Meta;
@@ -89,16 +58,15 @@ const Template: Story<SelectionAreaProps> = (args) => {
 
   return (
     <>
-      {" "}
-      <ItemsContainer className="items-container">
+      <div className={`${styles.itemsContainer} items-container`}>
         {Array.from({ length: 12 }).map((_, index) => (
-          <Item
+          <div
             key={`${index}test`}
             data-id={`item-${index}`}
-            className={`selectable-item ${selectedItems.includes(`item-${index}`) ? "selected" : ""}`}
+            className={`${styles.item} selectable-item ${selectedItems.includes(`item-${index}`) ? "selected" : ""}`}
           >
             Item {index + 1}
-          </Item>
+          </div>
         ))}
         <SelectionArea
           {...args}
@@ -108,7 +76,7 @@ const Template: Story<SelectionAreaProps> = (args) => {
           selectableClass="selectable-item"
           scrollClass="scroll-container"
         />
-      </ItemsContainer>
+      </div>
     </>
   );
 };

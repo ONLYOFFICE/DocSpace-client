@@ -24,8 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/mixins";
-@import "../../styles/variables/devices.scss";
+@use "../../styles/mixins";
 
 .row {
   width: 688px;
@@ -43,7 +42,7 @@
     justify-items: center;
     align-items: center;
 
-    @include tablet-and-below {
+    @include mixins.tablet-and-below {
       height: 67px;
       width: 100%;
 

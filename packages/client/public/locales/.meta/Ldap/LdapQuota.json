@@ -1,0 +1,244 @@
+{
+  "key_path": "LdapQuota",
+  "content": "User quota",
+  "content_en_sha1_hash": "e848c684e600a150cf50f9258ca8622add08c8f9",
+  "created_at": "2025-05-19T21:30:54.255Z",
+  "updated_at": "2025-05-21T08:10:17.807Z",
+  "comment": {
+    "text": "The \"User quota\" translation key is used to display a label in UI elements, such as field labels and tooltips. It provides a clear and concise description of the quota setting being configured or edited within the LDAP integration settings.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:05.462Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
+      "line_number": 211,
+      "context": "<FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n hasError={errors.userQuotaLimit}\n labelText={t(\"LdapQuota\")}\n tooltipContent={t(\"LdapUserQuotaTooltip\", {\n contactsName: t(\"Common:Contacts\"),\n })}\n inlineHelpButton\n >",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ποσοστό χρήστη\" while literally meaning \"User percentage\" doesn't fully capture the meaning of \"User quota\". A quota refers to a limit or allowance, not just a percentage. It's a slightly less accurate representation.",
+          "suggestion": "Χώρος χρήστη"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ユーザーのストレージ容量\" (user no storage capacity) is a literal translation of 'storage capacity'. While related to 'user quota', it doesn't directly convey the meaning of a quota limit or entitlement. A quota is a defined limit, not just the amount of storage available.",
+          "suggestion": "ユーザーの割り当て容量 (user no allokate youryō) - This more accurately conveys the idea of a user's allocated or assigned capacity."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ກຳນົດສູງສຸດຂອງຜູ້ໃຊ້' translates to 'maximum limit of user'. While not entirely wrong, it's a bit literal and doesn't convey the meaning of 'user quota' as effectively. 'Quota' implies an allocated amount or limit, and 'ກຳນົດສູງສຸດ' emphasizes the upper bound, which isn't the core idea of a quota.",
+          "suggestion": "Consider a more idiomatic translation like 'ຈຳນວນທີ່ອະນຸຍາດໃຫ້ຜູ້ໃຊ້' (amount allowed for user) or 'ຂະໜາດກໍານົດຂອງຜູ້ໃຊ້' (defined size of user)."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation \"Limit użytkowników\" translates to \"User limit\" rather than \"User quota\". While related, 'quota' implies a specific, defined allowance, which 'limit' doesn't necessarily convey.",
+          "suggestion": "Limit zasobów użytkownika"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Cotă de utilizatori' literally translates to 'Quota of users'. While understandable, 'Cotă utilizator' (without 'de') would be more natural and accurate for describing a user quota in a technical context.  'Cotă utilizator' implies a quota *per user*.",
+          "suggestion": "Cotă utilizator"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'පරිශීලක' (parashīlaka) is technically correct but might be perceived as overly formal or less common in everyday language when referring to 'user'. A more commonly understood term might be better.",
+          "suggestion": "Consider using 'ගොස්ඨි' (goshti) or 'භාවිතකරු' (bhavitakaru) for 'user' depending on the overall tone and context."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

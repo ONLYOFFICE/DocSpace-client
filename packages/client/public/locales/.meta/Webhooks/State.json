@@ -1,0 +1,244 @@
+{
+  "key_path": "State",
+  "content": "State",
+  "content_en_sha1_hash": "a72502067518684f9deeec70cf119fd26326cd33",
+  "created_at": "2025-05-19T21:30:49.847Z",
+  "updated_at": "2025-05-22T11:56:37.720Z",
+  "comment": {
+    "text": "This translation key represents the label for a table header column that displays information about API keys or webhooks in a developer tool. The key is used to render the English word \"State\" as displayed on-screen in various UI components.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:50.302Z"
+  },
+  "usage": [
+    {
+      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\OAuth\\sub-components\\List\\TableView\\sub-components\\Header.tsx",
+      "line_number": 71,
+      "context": "withTagRef: true,\n minWidth: 150,\n },\n {\n key: \"State\",\n title: t(\"Webhooks:State\"),\n enable: true,\n resizable: false,\n defaultSize: 64,\n },\n ];",
+      "module": "\\packages\\client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech word 'Stát' translates to 'State' or 'Country' in English, not 'State' (referring to the status or condition of a webhook). This translation is inaccurate in the context of webhooks.",
+          "suggestion": "Consider using 'Stav' for 'State' in the context of webhook status or condition. A more accurate translation would depend on the precise meaning intended within the broader documentation."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Պետություն\" (Petut'yun) is a valid Armenian word meaning 'state' or 'country', in the context of \"Webhooks:State\", it implies a technical state (e.g., 'enabled', 'disabled', 'pending'). A more appropriate translation would be something like \"Ցուցման վիճակ\" (Tsughanayin vichak) or \"Վիճակ\" (Vichak) to align with the technical meaning.",
+          "suggestion": "Consider \"Ցուցման վիճակ\" (Tsughanayin vichak) or \"Վիճակ\" (Vichak)"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation 'Valsts' typically refers to 'state' in a political or national sense (e.g., the state of Latvia). The English term 'State' in this context (Webhooks:State) likely refers to the status or condition of a webhook, such as 'enabled', 'disabled', 'pending', etc. 'Valsts' is therefore an inaccurate translation.",
+          "suggestion": "Consider translations like 'Stāvoklis', 'Status', or 'Nosacījums' depending on the specific technical context. 'Status' is a common loanword and might be appropriate."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation \"Województwo\" translates to 'Province' or 'Voivodeship' which is not an accurate translation of 'State' in the context of webhooks. 'State' here likely refers to the status or condition of a webhook (e.g., active, inactive, pending).",
+          "suggestion": "Consider translations like \"Status\", \"Stan\", or \"Pozycja\" depending on the specific nuance required."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'තත්‍වය' (tathvaya) translates to 'reality' or 'essence', not 'state'. The English word 'State' in the context of webhooks likely refers to a status or condition (e.g., 'pending', 'delivered', 'failed').",
+          "suggestion": "Consider alternatives such as 'స్థితి' (sithivu) for 'state', 'වියත්' (viyath) for 'condition', or 'තත්වය' (tathvathvaya) if a closer semantic match is needed but acknowledge potential ambiguity."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovenian translation \"Država\" translates to \"Country\" or \"State\" (as in a nation) in English, not the technical meaning of \"State\" as in the status or condition of a webhook. This is likely an inaccurate translation.",
+          "suggestion": "Consider alternatives like \"Stanje\", \"Status\", or \"Način\" depending on the specific context of the webhook functionality. Further context is needed to determine the best option."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

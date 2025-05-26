@@ -82,5 +82,21 @@ export type FolderTileProps = {
   isActive?: boolean;
   /** Flag for edit mode */
   isEdit?: boolean;
-  forwardRef?: React.RefObject<HTMLDivElement>;
+  forwardRef?: React.RefObject<HTMLDivElement | null>;
+};
+
+export type FolderChildProps = {
+  item: {
+    title?: string;
+    icon?: string;
+    logo?: {
+      original?: string;
+      large?: string;
+      medium?: string;
+      small?: string;
+      color?: string;
+      cover?: string | { data: string; id: string };
+    };
+    displayName?: string;
+  };
 };

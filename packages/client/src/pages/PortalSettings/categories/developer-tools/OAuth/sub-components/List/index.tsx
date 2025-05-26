@@ -30,8 +30,7 @@ import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import { Text } from "@docspace/shared/components/text";
 import { DeviceType } from "@docspace/shared/enums";
 import { Consumer } from "@docspace/shared/utils/context";
-import { LinkTarget, LinkType } from "@docspace/shared/components/link";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";
 import { EmptyServerErrorContainer } from "SRC_DIR/components/EmptyContainer/EmptyServerErrorContainer";
@@ -88,18 +87,18 @@ const List = ({
         {descText}
       </Text>
       {apiOAuthLink ? (
-        <ColorTheme
+        <Link
           target={LinkTarget.blank}
           type={LinkType.page}
           fontWeight={600}
           isHovered
           href={apiOAuthLink}
           tag="a"
-          themeId={ThemeId.Link}
           style={isError ? undefined : { marginBottom: "20px" }}
+          color="accent"
         >
           {t("OAuth:OAuth")} {t("Common:Guide")}
-        </ColorTheme>
+        </Link>
       ) : null}
 
       {isError ? (

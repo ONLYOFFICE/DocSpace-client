@@ -109,7 +109,7 @@ export const EncryptionPortal: React.FC<EncryptionPortalProps> = (props) => {
 
       setMessage(message);
     }
-  }, [errorInternalServer]);
+  }, [errorInternalServer, storybook?.mockAPI?.getEncryptionProgress]);
 
   useEffect(() => {
     SocketHelper?.on(SocketEvents.EncryptionProgress, (opt) => {
@@ -165,6 +165,13 @@ export const EncryptionPortal: React.FC<EncryptionPortalProps> = (props) => {
     <PreparationPortalProgress
       text={t("EncryptionPortalSubtitle")}
       percent={percent}
+      data-testid="encryption-progress-bar"
+      role="progressbar"
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={percent}
+      aria-label="Encryption Progress"
+      data-percent={percent}
     />
   );
 
@@ -183,9 +190,14 @@ export const EncryptionPortal: React.FC<EncryptionPortalProps> = (props) => {
         <div
           className={styles.encryptionPortalBodyWrapper}
           data-testid="encryption-portal-body"
+          data-error={errorMessage ? "true" : undefined}
+          data-progress={!errorMessage && ready ? "true" : undefined}
+          data-socket-error={
+            errorMessage && percent >= 100 ? "true" : undefined
+          }
         >
           {(!ready && !storybook) || storybook?.isLoading ? (
-            <PreparationPortalLoader data-testid="preparation-portal-loader" />
+            <PreparationPortalLoader />
           ) : (
             componentBody
           )}

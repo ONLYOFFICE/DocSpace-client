@@ -29,7 +29,7 @@ import { screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { EncryptionPortal } from "./index";
-import { EncryptionProgressSocketEvent } from "./EncryptionPortal.types";
+
 import { renderWithTheme } from "../../utils/render-with-theme";
 import SocketHelper, { SocketEvents } from "../../utils/socket";
 import * as settingsApi from "../../api/settings";
@@ -64,6 +64,34 @@ jest.mock("react-i18next", () => ({
 }));
 
 describe("EncryptionPortal", () => {
+  // Add a test for the loader state
+  test("renders loader when not ready", () => {
+    // Mock the useTranslation hook to return ready: false
+    jest
+      // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
+      .spyOn(require("react-i18next"), "useTranslation")
+      .mockImplementation(() => ({
+        t: (key: string) => key,
+        ready: false,
+      }));
+
+    renderWithTheme(<EncryptionPortal />);
+
+    expect(screen.getByTestId("preparation-portal-loader")).toBeInTheDocument();
+    expect(screen.getByTestId("encryption-portal")).toHaveAttribute(
+      "aria-busy",
+      "true",
+    );
+
+    // Restore the original mock
+    jest
+      // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
+      .spyOn(require("react-i18next"), "useTranslation")
+      .mockImplementation(() => ({
+        t: (key: string) => key,
+        ready: true,
+      }));
+  });
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -71,7 +99,8 @@ describe("EncryptionPortal", () => {
   test("renders state initially", () => {
     renderWithTheme(<EncryptionPortal />);
 
-    expect(screen.getByTestId("encryption-portal")).toBeInTheDocument();
+    const portalElement = screen.getByTestId("encryption-portal");
+    expect(portalElement).toBeInTheDocument();
   });
 
   test("renders progress bar when encryption is in progress", async () => {
@@ -88,13 +117,23 @@ describe("EncryptionPortal", () => {
     );
 
     const progressBar = screen.getByTestId("encryption-progress-bar");
+    const portalElement = screen.getByTestId("encryption-portal");
+    const portalBody = screen.getByTestId("encryption-portal-body");
 
     expect(screen.getByText("EncryptionPortalSubtitle")).toBeInTheDocument();
     expect(screen.getByText("EncryptionPortalTitle")).toBeInTheDocument();
 
+    expect(portalElement).toHaveAttribute("aria-busy", "false");
+    expect(portalBody).toBeInTheDocument();
+    expect(portalBody).toHaveAttribute("data-progress", "true");
+
     expect(progressBar).toBeInTheDocument();
     expect(progressBar).toHaveAttribute("aria-valuenow", "50");
     expect(progressBar).toHaveAttribute("data-percent", "50");
+    expect(progressBar).toHaveAttribute("role", "progressbar");
+    expect(progressBar).toHaveAttribute("aria-valuemin", "0");
+    expect(progressBar).toHaveAttribute("aria-valuemax", "100");
+    expect(progressBar).toHaveAttribute("aria-label", "Encryption Progress");
   });
 
   test("renders error message when API call fails", async () => {
@@ -120,8 +159,16 @@ describe("EncryptionPortal", () => {
     );
 
     const errorContainer = screen.getByTestId("encryption-portal-error");
+    const portalElement = screen.getByTestId("encryption-portal");
+    const portalBody = screen.getByTestId("encryption-portal-body");
+
     expect(errorContainer).toBeInTheDocument();
     expect(errorContainer).toHaveAttribute("data-error", "true");
+    expect(errorContainer).toHaveAttribute("aria-live", "assertive");
+    expect(portalElement).toHaveAttribute("aria-busy", "false");
+    expect(portalElement).toHaveClass("encryptionPortal");
+    expect(portalElement).toHaveClass("error");
+    expect(portalBody).toHaveAttribute("data-error", "true");
   });
 
   test("updates progress via socket events", async () => {
@@ -129,7 +176,7 @@ describe("EncryptionPortal", () => {
 
     // Capture the socket callback
     let socketCallback:
-      | ((data: EncryptionProgressSocketEvent) => void)
+      | ((data: { percentage: number; error: string | null }) => void)
       | undefined;
     (SocketHelper.on as jest.Mock).mockImplementation((event, callback) => {
       if (event === SocketEvents.EncryptionProgress) {
@@ -161,9 +208,15 @@ describe("EncryptionPortal", () => {
       );
 
       const progressBar = screen.getByTestId("encryption-progress-bar");
+      const portalBody = screen.getByTestId("encryption-portal-body");
+
       expect(progressBar).toBeInTheDocument();
       expect(progressBar).toHaveAttribute("aria-valuenow", "75");
       expect(progressBar).toHaveAttribute("data-percent", "75");
+      expect(progressBar).toHaveAttribute("role", "progressbar");
+      expect(progressBar).toHaveAttribute("aria-valuemin", "0");
+      expect(progressBar).toHaveAttribute("aria-valuemax", "100");
+      expect(portalBody).toHaveAttribute("data-progress", "true");
     }
   });
 
@@ -172,7 +225,7 @@ describe("EncryptionPortal", () => {
 
     // Capture the socket callback
     let socketCallback:
-      | ((data: EncryptionProgressSocketEvent) => void)
+      | ((data: { percentage: number; error: string | null }) => void)
       | undefined;
     (SocketHelper.on as jest.Mock).mockImplementation((event, callback) => {
       if (event === SocketEvents.EncryptionProgress) {
@@ -205,8 +258,17 @@ describe("EncryptionPortal", () => {
       );
 
       const errorContainer = screen.getByTestId("encryption-portal-error");
+      const portalElement = screen.getByTestId("encryption-portal");
+      const portalBody = screen.getByTestId("encryption-portal-body");
+
       expect(errorContainer).toBeInTheDocument();
       expect(errorContainer).toHaveAttribute("data-error", "true");
+      expect(errorContainer).toHaveAttribute("aria-live", "assertive");
+      expect(portalElement).toHaveAttribute("aria-busy", "false");
+      expect(portalElement).toHaveClass("encryptionPortal");
+      expect(portalElement).toHaveClass("error");
+      expect(portalBody).toHaveAttribute("data-error", "true");
+      expect(portalBody).toHaveAttribute("data-socket-error", "true");
     }
   });
 });

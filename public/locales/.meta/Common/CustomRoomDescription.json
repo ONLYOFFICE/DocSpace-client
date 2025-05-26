@@ -1,0 +1,383 @@
+{
+  "key_path": "CustomRoomDescription",
+  "content": "Apply your own settings to use this room for any custom purpose.",
+  "content_en_sha1_hash": "2e2225d6e3f84acd6c2f9e2cd4deb6c09ea5f37e",
+  "created_at": "2025-05-19T21:30:44.367Z",
+  "updated_at": "2025-05-26T07:57:32.919Z",
+  "comment": {
+    "text": "This translation key is used to display a custom room description that can be tailored to suit specific purposes. It appears on a button or similar UI element where users can customize their room settings.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:47.937Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
+      "line_number": 40,
+      "context": "case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomDescription\");\n case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoomDescription\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomDescription\");\n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoomInfo\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomInfo\");\n default:",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is technically correct, but the phrasing is a bit awkward and not as natural-sounding in Azerbaijani. 'Öz parametrlərinizi tətbiq edin' is overly literal and formal for this context. A more natural phrasing would convey the same meaning in a more user-friendly way.",
+          "suggestion": "Bu otağı istəyinizə uyğun olaraq, hər hansı məqsəd üçün istifadə edə bilərsiniz."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"custom purpose\" is not accurately reflected in the Bulgarian translation. \"Лична цел\" (lichna cel) translates to 'personal purpose' rather than the broader 'custom purpose' implied in the original. While not completely wrong, it narrows the meaning.",
+          "suggestion": "Consider a more general term for 'purpose' that conveys the flexibility implied by 'custom'.  Something like 'специализирана цел' (specializirana cel) or 'собствена цел' (obstvena cel) might be more appropriate, depending on the desired nuance."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Použijte vlastní nastavení a použijte tuto místnost pro libovolný účel' is a bit redundant. The repeated use of 'použijte' (use) makes the sentence awkward in Czech.",
+          "suggestion": "Použijte vlastní nastavení a nastavte tuto místnost pro libovolný účel."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrasing 'Apply your own settings' is best conveyed with 'nastavte' (set up) rather than 'použijte' (use) in the Czech translation.",
+          "suggestion": "Použijte vlastní nastavení a nastavte tuto místnost pro libovolný účel."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Aplique sus propios ajustes para utilizar esta sala según sus necesidades' doesn't perfectly capture the nuance of 'Apply your own settings to use this room for any custom purpose'. While understandable, it's a bit literal and doesn't convey the 'any custom purpose' aspect as clearly.",
+          "suggestion": "Consider a more nuanced translation like 'Personalice la configuración de esta sala para adaptarla a sus necesidades específicas' or 'Configure esta sala a su gusto para adaptarla a cualquier uso personalizado'."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Aseta omat asetuksesti käyttääksesi tätä huonetta mihin tahansa mukautettuun tarkoitukseen' is a bit literal and could be improved for naturalness in Finnish. The phrase 'omiat asetuksesti' is slightly awkward.",
+          "suggestion": "Käytä tätä huonetta vapaasti omien asetustesi mukaan."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Կիրառեք ձեր սեփական կարգավորումները՝ այս սենյակը ցանկացած նպատակով օգտագործելու համար\" is a bit literal and could be improved for natural flow. While technically correct, it sounds somewhat awkward in Armenian.",
+          "suggestion": "Consider a more fluent phrasing like: \"Օգտագործեք այս սենյակը ցանկացած նպատակով՝ ձեր սեփական կարգավորումներով\" or \"Այս սենյակը օգտագործեք ձեր սեփական կարգավորումներով՝ ցանկացած նպատակի համար\""
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is overly literal and sounds unnatural in Japanese. 'Apply your own settings' is not directly translatable this way. The flow of the sentence is awkward.",
+          "suggestion": "独自のカスタマイズ設定を適用して、このルームを自由に利用してください。"
+        },
+        {
+          "type": "grammar",
+          "description": "The particle 'に' after 'このルーム' is unnecessary and slightly disrupts the flow. It creates an implied location that isn't crucial here.",
+          "suggestion": "任意のカスタム目的のためにこのルームを使用する独自の設定を適用する。"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase '独自のカスタマイズ設定' is too verbose and technical for the intended user.  It's translating 'your own settings' too literally.",
+          "suggestion": "自由な設定を適用して"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '사용자 지정 목적으로 이 방을 사용하려면 원하는 설정을 적용하세요' is a bit literal and could be more natural-sounding. 'Apply your own settings' isn't directly conveyed in a concise way.",
+          "suggestion": "사용자 지정 용도로 이 방을 사용하려면 설정을 변경하세요."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing '원하는 설정을 적용하세요' (apply your desired settings) is grammatically correct but could be improved for a more natural flow in Korean. It's slightly clunky.",
+          "suggestion": "필요에 따라 설정을 조절하세요."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ນຳໃຊ້ການຕັ້ງຄ່າຂອງທ່ານເອງເພື່ອໃຊ້ຫ້ອງນີ້ເພື່ອຈຸດປະສົງທີ່ກຳນົດເອງ\" is a literal translation and doesn't fully capture the meaning of \"Apply your own settings to use this room for any custom purpose.\" It sounds somewhat awkward in Lao.",
+          "suggestion": "Consider a more natural-sounding translation like: \"ປັບການຕັ້ງຄ່າຕາມໃຈຕ້ອງການຂອງທ່ານເພື່ອໃຊ້ຫ້ອງນີ້ໃນຈຸດປະສົງໃດກໍຕາມທີ່ທ່ານຕ້ອງການ\" or \"ທ່ານສາມາດປັບການຕັ້ງຄ່າຕາມຄວາມຕ້ອງການຂອງທ່ານເພື່ອໃຊ້ຫ້ອງນີ້ໃນຈຸດປະສົງໃດກໍຕາມທີ່ຕ້ອງການໄດ້\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'jebkādam pielāgotam mērķiem' is a slightly awkward and less natural way to express 'any custom purpose'. It's technically correct but could be improved.",
+          "suggestion": "Lietojiet savus iestatījumus, lai izmantotu šo telpu jebkuriem pielāgojamiem mērķiem."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Aplicaţi setările dvs proprii pentru a utiliza această sală în orice scop personal' isn't the most natural or accurate rendering of 'Apply your own settings to use this room for any custom purpose.' The word 'personal' feels out of place.",
+          "suggestion": "Aplicaţi-vă propriile setări pentru a folosi această sală în orice scop personalizat."
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, 'Aplicaţi-vă propriile setări' sounds slightly more formal than the English original. A less formal option might be preferable.",
+          "suggestion": "Folosește-ți propriile setări pentru a folosi această sală în orice scop personalizat."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඕනෑම අභිරුචි අරමුණකට මෙම කාමරය භාවිතයට ඔබගේම සැකසුම් යොදන්න' while understandable, doesn't perfectly capture the nuance of 'Apply your own settings to use this room for any custom purpose'. A more direct and natural-sounding translation could be explored.",
+          "suggestion": "අභිරුචි අවශ්‍යතාවන්ට අනුව මෙම කාමරය භාවිතා කිරීමට ඔබේ සැකසුම් යොදා ගන්න."
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, 'අභිරුචි' can sometimes sound formal. Depending on the target audience, a simpler word might be more appropriate.",
+          "suggestion": "Consider using a more accessible word for 'අභිරුචි' if the intended audience is less formal."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Zadajte svoje nastavenia na použitie tejto miestnosti na akýkoľvek vlastný účel' is a bit literal and doesn't flow naturally in Slovak. A more idiomatic translation would convey the intended meaning more effectively.",
+          "suggestion": "Použite túto miestnosť pre vaše vlastné nastavenia a účel."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Uporabite svoje lastne nastavitve za uporabo te sobe za kateri koli namen po vaši meri' is overly literal and somewhat awkward in Slovenian. The phrase 'po vaši meri' is technically correct but sounds clunky in this context.",
+          "suggestion": "Uporabite svoje nastavitve, da uporabite sobo za poljubne, individualne namene."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation contains unnecessary repetition of 'uporabite'.",
+          "suggestion": "Uporabite svoje nastavitve, da uporabite sobo za poljubne, individualne namene."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'сопствена' (sopstvena) is misspelled. The correct spelling is 'сопствену' (sopstvenu).",
+          "suggestion": "сопствену"
+        },
+        {
+          "type": "grammar",
+          "description": "The case of 'собу' (sobu) is incorrect. It should be in the accusative case, 'собу' because it is the direct object of the verb 'користили'.",
+          "suggestion": "собу"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While understandable, 'прилагођену сврху' (prilagodjenu svrhu) can be interpreted as 'adjusted purpose.' A more natural translation would be 'posebnu svrhu' (special purpose) or 'ličnu svrhu' (personal purpose).",
+          "suggestion": "posebnu svrhu"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'primenite' is a less common or potentially incorrect spelling. 'Postavite' would be more natural and common for 'apply' in this context.",
+          "suggestion": "Postavite sopstvena podešavanja da biste ovu sobu koristili za bilo koju prilagođenu svrhu."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'Bu odayı herhangi bir özel amaç için kullanmak için kendi ayarlarınızı uygulayın' is a literal translation that doesn't quite convey the intended meaning of applying settings for a custom purpose. It sounds awkward.",
+          "suggestion": "Kendi ayarlarınızla bu odayı istediğiniz özel amaç için kullanabilirsiniz."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Застосуйте власні параметри, щоб використовувати цю кімнату з особливою метою' is a bit literal and doesn't quite capture the intended meaning of 'for any custom purpose'. It sounds overly formal and specific.",
+          "suggestion": "Розміщуйте свої налаштування, щоб використати цю кімнату для будь-яких потреб."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Áp dụng cài đặt của riêng bạn để sử dụng trong phòng này cho bất kỳ mục đích nào theo yêu cầu\" doesn't fully capture the meaning of \"Apply your own settings to use this room for any custom purpose.\" The phrase 'theo yêu cầu' (upon request) is unnecessary and shifts the meaning.",
+          "suggestion": "Áp dụng cài đặt của riêng bạn để sử dụng phòng này cho bất kỳ mục đích tùy chỉnh nào."
+        },
+        {
+          "type": "formatting",
+          "description": "The Vietnamese translation has a slightly awkward phrasing. Adding 'của riêng bạn' is a bit redundant.",
+          "suggestion": "Áp dụng cài đặt của bạn để sử dụng phòng này cho bất kỳ mục đích tùy chỉnh nào."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '根据不同目的和用途对房间进行自定义设置' is too literal and doesn't capture the nuance of the English sentence. 'Apply your own settings to use this room for any custom purpose' implies flexibility and personalization. The Chinese translation sounds overly formal and technical.",
+          "suggestion": "根据您的需求，自定义房间设置。"
+        },
+        {
+          "type": "formatting",
+          "description": "The Chinese translation uses a somewhat formal tone which may not align with the overall product tone. Consider a more conversational and approachable phrasing.",
+          "suggestion": "您可以根据自己的需求来设置房间。"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

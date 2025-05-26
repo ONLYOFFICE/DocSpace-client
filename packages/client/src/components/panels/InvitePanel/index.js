@@ -43,11 +43,11 @@ import api from "@docspace/shared/api";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import { Link } from "@docspace/shared/components/link";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
@@ -289,11 +289,11 @@ const InvitePanel = ({
         ns="Common"
         components={{
           1: (
-            <ColorTheme
+            <Link
               tag="a"
-              themeId={ThemeId.Link}
               onClick={onClickPayments}
               target="_blank"
+              color="accent"
             />
           ),
         }}

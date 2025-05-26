@@ -1,0 +1,259 @@
+{
+  "key_path": "CannotChangePlan",
+  "content": "You cannot change your plan because the used storage volume or the number of admins exceeds the limitations of the selected plan:",
+  "content_en_sha1_hash": "4bdb41a36f148f1de76272d60696b987b70a76a0",
+  "created_at": "2025-05-19T21:30:56.593Z",
+  "updated_at": "2025-05-24T13:11:19.194Z",
+  "comment": {
+    "text": "\"This translation key is used for a message that indicates users cannot change their pricing plan due to storage or admin limitations. It appears in a modal dialog header, informing users about the reason for the restriction. Translators should provide an equivalent message that conveys this same limitation.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:34.722Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangePricingPlanDialog/index.js",
+      "line_number": 102,
+      "context": ">\n <ModalDialog.Header>{t(\"ChangePricingPlan\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBodyContent>\n <Text fontSize=\"13px\" isBold className=\"cannot-downgrade-plan\">\n {t(\"CannotChangePlan\")}\n </Text>\n {planUsersLimitations}\n <br />\n {storagePlanLimitations}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'хранилището' (storage) could be slightly ambiguous. While technically correct, 'паметта' (memory) might be more commonly understood in this context.",
+          "suggestion": "Не може да промените плана си, защото броят използвано пространство в паметта или броя администратори надвишава лимита на избрания план:"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, 'надвишава лимита' can sound a bit formal. A more conversational option might be better.",
+          "suggestion": "Не може да промените плана си, защото броят използвано пространство в паметта или броя администратори е над лимита на избрания план:"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Admins' is capitalized but should be lowercase.",
+          "suggestion": "admins"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'DowngradePlanDialog:CannotChangePlan' implies a restriction on *downgrading* a plan. The Finnish translation 'Et voi muuttaa ohjelmaasi' literally translates to 'You cannot change your program', which is too general and doesn't convey the specific downgrade restriction. A more accurate translation would focus on changing to a less feature-rich plan.",
+          "suggestion": "Et voi vaihtaa ohjelmaasi alempaan tasoon, koska käytetyn muistin määrä tai ylläpitäjien määrä ylittää valitun ohjelman rajoitukset:"
+        },
+        {
+          "type": "formatting",
+          "description": "The colon at the end of the English sentence is missing in the Finnish translation. This makes the Finnish sentence feel incomplete.",
+          "suggestion": "Add a colon at the end of the Finnish translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The colon at the end of the sentence is slightly unusual in French. While not strictly incorrect, it's less common and can make the sentence feel less natural.",
+          "suggestion": "Consider removing the colon, or replacing it with a period. For example: 'Vous ne pouvez pas changer de plan tarifaire, car le volume de stockage utilisé ou le nombre d'administrateurs dépasse les limites du plan sélectionné.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ադմինիստրատորների' is a direct transliteration of 'administrators'. While understandable, a more natural Armenian phrasing might be preferable.",
+          "suggestion": "ադմինիստրատորների թիվը is acceptable, but consider alternatives like 'գործակալների թիվը' or 'վարչարների թիվը' depending on the specific context."
+        },
+        {
+          "type": "formatting",
+          "description": "The colon (:) at the end of the Armenian sentence appears to be a direct translation of the English colon. While not incorrect, it might be more natural to restructure the sentence to avoid it, or use a more Armenian equivalent (e.g., a dash).",
+          "suggestion": "Consider rephrasing to avoid the colon, or replacing it with a dash (—) if appropriate."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'коришц́ени' has an incorrect diacritic. It should be 'коришћени'.",
+          "suggestion": "коришћени"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

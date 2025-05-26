@@ -1,0 +1,280 @@
+{
+  "key_path": "Reviewing",
+  "content": "reviewing",
+  "content_en_sha1_hash": "7cd4341e2d7a4899e6abe3e3fb0ef1034064bdc6",
+  "created_at": "2025-05-19T21:30:47.947Z",
+  "updated_at": "2025-05-26T07:57:32.811Z",
+  "comment": {
+    "text": "This translation key is used to display a label for the \"Reviewing\" state when sharing access rights in the Public Room page. It appears as a tooltip or label next to a button, indicating that the user has review permission. The translator should provide a phrase that conveys the idea of reviewing a file or document.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:40.428Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PublicRoom/PublicRoomPage.js",
+      "line_number": 97,
+      "context": "case ShareAccessRights.ReadOnly:\n return t(\"Common:ViewOnly\");\n case ShareAccessRights.Comment:\n return t(\"Common:Commenting\");\n case ShareAccessRights.Review:\n return t(\"Common:Reviewing\");\n case ShareAccessRights.Editing:\n return t(\"Common:Editor\");\n default:\n return t(\"Common:ViewOnly\");\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Nəzərdən keçirilir' is a possible translation of 'reviewing', it implies a passive voice ('being reviewed'). 'Reviewing' can also mean 'to review'. A more versatile translation would depend on the context. For a general translation, a more active form might be preferred.",
+          "suggestion": "Consider 'yoxlama' (checking), 'ödənişə baxma' (reviewing - paying), or 'dəyərləndirmə' (assessment) depending on the intended meaning."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation \"Přezkoumání stránek\" translates to 'Review of pages' which is not a direct equivalent to the English 'reviewing'. 'Reviewing' implies the process of reviewing, not the result of a review.",
+          "suggestion": "A more accurate translation might be \"prověřování\", \"zkoumání\", or \"přezkoumávání\" depending on the specific context."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Γίνεται έλεγχος\" (Ginetai eleγχos) translates to \"A check is being done\" or \"An inspection is being done.\" While related to 'reviewing,' it lacks the nuance of a review process. 'Reviewing' implies a more detailed and critical assessment.",
+          "suggestion": "Consider translations like \"Επανεξέταση\" (Epanexetasi - Re-examination), \"Αξιολόγηση\" (Axiológesi - Evaluation), or \"Εξέταση\" (Exetasi - Examination), depending on the specific context of 'reviewing'."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The French translation 'révision' translates more closely to 'revision' or 'reviewing' in a more formal context. While not entirely incorrect, 'examen' or 'vérification' might be more appropriate depending on the specific nuance intended by 'reviewing'. 'Révision' often implies a process of correction and improvement, whereas 'reviewing' can be a more general assessment.",
+          "suggestion": "Consider 'examen' or 'vérification' depending on the specific context of 'reviewing'."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"レビューの追加\" (review no tsuika) literally translates to \"addition of review\" or \"adding a review.\" While it conveys the general idea of reviewing, it's not a direct or accurate translation of \"reviewing.\" A more accurate translation would be something like \"レビュー\" (review) or \"レビュー中\" (reviewing).",
+          "suggestion": "レビュー (review) or レビュー中 (reviewing)"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While '검토 중' can mean 'reviewing', it more accurately translates to 'under review' or 'in review'. 'Reviewing' implies the active process of reviewing, whereas '검토 중' emphasizes the state of being reviewed.",
+          "suggestion": "Consider alternatives like '검토하고 있습니다' (reviewing - present continuous) or '검토' (review) depending on the desired nuance."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'revizuire' is a noun, while the English 'reviewing' is a gerund (verb form acting as a noun). A more accurate translation would be a verb form like 'revizuind'.",
+          "suggestion": "revizuind"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'සමාලෝචනය කරමින්' while generally meaning 'reviewing', might be too literal and formal for common usage. It implies an ongoing, active review. 'reviewing' can also mean 'looking over' or 'examining'.",
+          "suggestion": "Consider alternatives like 'පරීක්ෂා කිරීම' (parīkshā kirim) for 'examining' or 'බලා ගැනීම' (balā gānim) for 'looking over', depending on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'prehliadanie' can mean 'reviewing' in some contexts, it primarily translates to 'browsing' or 'scanning'. 'Reviewing' implies a more critical and detailed examination, which 'prehliadanie' doesn't fully convey.",
+          "suggestion": "Consider alternatives like 'prehĺžanie' (thorough examination), 'hodnotenie' (assessment/evaluation), or 'revidovanie' (revision/review), depending on the specific nuance of 'reviewing' intended."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"преглед\" is a valid word, but it doesn't fully capture the nuance of 'reviewing' in English. It translates more closely to 'overview' or 'examination.' 'Reviewing' often implies a more in-depth process of evaluating or critiquing, which 'преглед' doesn't necessarily convey.",
+          "suggestion": "Consider alternatives like 'испитивање' (investigation), 'провера' (checking/verification), or 'анализа' (analysis) depending on the specific context of 'reviewing'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'pregled' can be a suitable translation for 'reviewing' in some contexts, but it doesn't always capture the nuance of 'reviewing' as in a process of evaluation or critique. It leans more towards 'overview' or 'scan'.",
+          "suggestion": "Consider 'ispitivanje', 'ocena', or 'pregledavanje' depending on the intended meaning of 'reviewing'."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"审阅中\" doesn't perfectly capture the nuance of \"reviewing.\" While it conveys a sense of being under review, \"reviewing\" often implies an active process of examining something. \"审阅中\" sounds more like a static state. A more accurate translation would depend on the context.",
+          "suggestion": "Consider alternatives like \"正在审核\" (zhèngzài shěnhé) - 'currently reviewing' or \"审核进行中\" (shěnhé jìnxíng zhōng) - 'reviewing process in progress'."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,274 @@
+{
+  "key_path": "LdapSettingsValidFrom",
+  "content": "Valid from",
+  "content_en_sha1_hash": "160fdedf5c4e86942b5000450c3a0ca95b3784f6",
+  "created_at": "2025-05-19T21:30:54.303Z",
+  "updated_at": "2025-05-24T08:17:25.518Z",
+  "comment": {
+    "text": "The \"LdapSettingsValidFrom\" translation key is used to display the valid from date of an LDAP certificate in a user interface. It appears in a certificate details dialog and is part of a list of dates related to certificate validity.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:59.072Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/CertificateDialog.js",
+      "line_number": 131,
+      "context": "<Text as=\"p\">\n {t(\"LdapSettingsSubjectName\")}: {cerficateIssue.subjectName}\n </Text>\n \n <Text as=\"p\">\n {t(\"LdapSettingsValidFrom\")}: {cerficateIssue.validFrom}\n </Text>\n \n <Text as=\"p\">\n {t(\"LdapSettingsValidUntil\")}: {cerficateIssue.validUntil}\n </Text>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'صالح من تاريخ' is a literal translation and while understandable, it's not the most natural phrasing for this context. 'Valid from' implies a starting date, and the Arabic translation focuses on 'valid from a date' which isn't quite the same.",
+          "suggestion": "Consider 'اعتبارًا من تاريخ' (I'tibaran min tareekh) or 'ابتداءً من تاريخ' (Ibtida'an min tareekh) which are more natural ways to express 'valid from' in this context, implying a start date for validity."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '-dan etibarlıdır' while generally understandable, doesn't perfectly capture the nuance of 'Valid from'. It's more literal and less idiomatic. A more natural translation would convey the sense of 'Starting from' or 'Effective from'.",
+          "suggestion": "başlayır"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Վավերական է -ից\" doesn't accurately convey the meaning of \"Valid from\". It literally translates to \"Valid from -\" which is incomplete and doesn't express the intended meaning of a starting date or period.",
+          "suggestion": "A more accurate translation would depend on the context. Some options include: \"գործող է սկսած\", \"կարող է օգտագործել սկսած\", or simply \"սկսած\" (starting)."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation \"有効期間\" (yuukou kikan) translates to \"valid period\" or \"term of validity\" rather than the literal \"Valid from\". While it conveys a similar meaning in a UI context, it's not a direct translation.",
+          "suggestion": "Consider \"有効開始日\" (yuukou kaishi bi) for a more literal translation of 'Valid from', although its suitability depends on the surrounding UI elements."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '유효 기간 시작' literally translates to 'valid period start'. While understandable, it's not the most natural or precise rendering of 'Valid from' in the context of LDAP settings. It lacks the nuance of indicating a starting point for validity.",
+          "suggestion": "Consider alternatives like '시작일' (sijakil - start date) or '유효 시작일' (yuhyo sijakil - valid start date) which more closely align with the original meaning."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ໃຊ້ໄດ້ແລ້ວ\" translates to \"usable\" or \"available\" rather than \"valid from\". While it might convey a similar meaning in some contexts, it doesn't directly translate the English phrase.",
+          "suggestion": "ອະນຸໂອມຕັ້ງແຕ່"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'වලංගු වූ දින සිට' while grammatically correct, might not be the most natural or precise translation of 'Valid from'. It's more literal. A more common and perhaps more accurate translation could be 'သက်တ validity කාලం ආරම්භ වූ දින සිට' or 'පහ başlayan දින සිට'.",
+          "suggestion": "පහ başlayan දින සිට"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Валидно од\" is a literal translation of \"Valid from\" but doesn't flow naturally in Serbian. While understandable, it's not the most common or idiomatic way to express this concept in Serbian. A more natural phrasing might be something like 'Важи од' or 'Од' (depending on the context).",
+          "suggestion": "Consider 'Важи од' or 'Од' for a more natural phrasing. The best option depends on the surrounding text and intended meaning."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Validno od' doesn't accurately convey the meaning of 'Valid from' in the context of LDAP settings. It literally translates to 'Valid from' but in this context, a more idiomatic translation would be preferred.",
+          "suggestion": "Važeći od"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation \"Şu tarihten itibaren geçerlidir\" is a literal translation but not the most natural or concise way to express \"Valid from\" in this context. It's a bit verbose.",
+          "suggestion": "Geçerlilik tarihi"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'有效期自' (Validity from) is a literal translation but might not be the most natural or idiomatic way to express 'Valid from' in a Chinese configuration setting. It's somewhat clunky.",
+          "suggestion": "Consider '生效日期' (Effective Date) or '起始日期' (Start Date) for a more fluent and standard phrasing in a configuration context. Alternatively, '有效起始日期' could also be considered."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

@@ -1,4 +1,5 @@
 {
+  "ChangePasswordSuccess": "Le mot de passe a bien été modifié",
   "CodeTitle": "Le code vous a été envoyé par e-mail",
   "ErrorInvalidText": "En 10 secondes, vous serez redirigé vers <1>{{productName}}</1>",
   "ForgotPassword": "Mot de passe oublié ?",
@@ -18,6 +19,5 @@
   "RememberHelper": "Par défaut, la durée de validité de la session est de 20 minutes. Cochez cette option pour la définir sur 1 an. Vous pouvez définir votre propre valeur en accédant aux paramètres.",
   "SignInLDAP": "Se connecter à : {{ldap_domain}}",
   "SignInLdapHelper": "Utiliser les informations d'identification du domaine de l'entreprise",
-  "UserIsAlreadyRegistered": "L'utilisateur <1>{{email}}</1> est déjà enregistré dans ce {{productName}}, saisissez votre mot de passe ou revenez en arrière pour continuer avec un autre e-mail.",
-  "ChangePasswordSuccess": "Le mot de passe a bien été modifié"
+  "UserIsAlreadyRegistered": "L'utilisateur <1>{{email}}</1> est déjà enregistré dans ce {{productName}}, saisissez votre mot de passe ou revenez en arrière pour continuer avec un autre e-mail."
 }

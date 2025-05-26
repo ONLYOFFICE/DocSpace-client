@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables/_colors";
-@import "../../styles/variables/devices.scss";
-@import "../../styles/_mixins";
+@use "../../styles/variables/colors";
+
+@use "../../styles/mixins";
 
 .elementWrapper {
   display: flex;
@@ -137,7 +137,7 @@
 }
 
 .dropDownItem {
-  @include truncate;
+  @include mixins.truncate;
 
   display: flex;
   width: 100%;
@@ -159,7 +159,7 @@
   font-weight: 600;
   color: var(--drop-down-item-icon-color);
 
-  -webkit-tap-highlight-color: #{$tap-highlight};
+  -webkit-tap-highlight-color: #{colors.$tap-highlight};
   text-transform: none;
 
   &:hover:not(.separator) {
@@ -170,7 +170,7 @@
     background-color: var(--drop-down-item-hover-color);
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     line-height: 36px;
     padding: 0 16px;
   }

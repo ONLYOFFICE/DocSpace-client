@@ -3,6 +3,19 @@
   "problemMatcher": [],
   "tasks": [
     {
+      "label": "Build DocEditor Translations",
+      "type": "shell",
+      "command": "node ./scripts/buildTranslations.js",
+      "options": {
+        "cwd": "${workspaceFolder}/packages/doceditor"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      }
+    },
+    {
       "label": "Backend | build CE",
       "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py",
       "type": "shell",

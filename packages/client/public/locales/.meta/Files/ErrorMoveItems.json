@@ -1,0 +1,382 @@
+{
+  "key_path": "ErrorMoveItems",
+  "content": "Error moving <2>{{qty}} elements</2> to <1>{{folderName}}</1>",
+  "content_en_sha1_hash": "f57b2e50b89ebc8f80cde06a1b1da22b4c759a34",
+  "created_at": "2025-05-19T21:30:55.628Z",
+  "updated_at": "2025-05-24T12:12:17.091Z",
+  "comment": {
+    "text": "This translation key is used to display an error message when attempting to move a specified quantity of items into a folder. It typically appears as a notification or alert in the UI, providing information on the number of elements being moved and the destination folder name. The text indicates that there has been an error moving these items.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:47.549Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/SecondaryProgressDataStore.js",
+      "line_number": 233,
+      "context": "values={commonProps}\n />\n ) : (\n <Trans\n t={t}\n i18nKey=\"ErrorMoveItems\"\n components={commonComponents}\n values={commonProps}\n />\n );\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'element' should be pluralized correctly based on the quantity. The translation uses the singular form 'عنصرًا' regardless of the value of {{qty}}.",
+          "suggestion": "Modify the translation to dynamically adjust the word 'عنصرًا' to 'عناصر' when {{qty}} is greater than 1. A more accurate translation would dynamically change the form of the noun based on the quantity."
+        },
+        {
+          "type": "formatting",
+          "description": "The original English uses <2> and <1> for wrapping the content. The Arabic translation follows this structure. However, this could be inconsistent with other localized strings. It is recommended to check whether this wrapping style aligns with the broader localization strategy.",
+          "suggestion": "Verify if the wrapping with <1> and <2> is consistent with other localized strings. If not, adapt the wrapping to the standard being used."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'qovluğuna köçürülmə xətası' is too literal and doesn't flow naturally in Azerbaijani. A more natural phrasing would be 'qovluğuna köçürməyə xətə var'.",
+          "suggestion": "qovluğuna köçürməyə xətə var"
+        },
+        {
+          "type": "grammar",
+          "description": "The word 'elementlər' is in the plural form. Since the English content uses '<2>{{qty}} elements</2>', it should reflect the quantity. If qty is 1, the word should be 'element'.",
+          "suggestion": "The word should dynamically change to 'element' if qty is 1, and remain 'elementlər' for other values."
+        },
+        {
+          "type": "formatting",
+          "description": "The tags <2> and <1> are reversed in the Azerbaijani translation compared to the English. This needs to be corrected to maintain consistency.",
+          "suggestion": "<1>{{qty}} elementlər</1>-nin <2>{{folderName}}</2>"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The order of the placeholders is incorrect. The English version uses <2> for quantity and <1> for folder name, while the Bulgarian version reverses this.",
+          "suggestion": "Change <1>{{folderName}}</1> to <2>{{folderName}}</2> and <2>{{qty}}</2> to <1>{{qty}}</1> to match the English order."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets are inconsistent. English uses <1> and <2>, while Greek uses <2> and <1>.",
+          "suggestion": "Change the Greek translation to: \"Σφάλμα μετακίνησης <1>{{qty}} στοιχείων</1> στον φάκελο <2>{{folderName}}</2>\""
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'elements' is not translated. It should ideally be translated to Finnish.",
+          "suggestion": "Virhe siirrettäessä <2>{{qty}} elementtiä</2> kohteeseen <1>{{folderName}}</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"to\" in \"Error moving... to...\" is incorrectly translated as \"dans\" (in) in French. \"To\" implies movement towards a destination, which is better conveyed by a preposition like \"vers\".",
+          "suggestion": "Erreur de déplacement de <2>{{qty}} éléments</2> vers <1>{{folderName}}</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'չհաջողվեց տեղափոխել' doesn't directly translate to \"Error moving\". A more accurate translation of 'Error moving' would be something like 'Տեղափոխելու սխալ'.",
+          "suggestion": "Տեղափոխելու սխալ <2>{{qty}} տարրերը</2> to <1>{{folderName}}</1>"
+        },
+        {
+          "type": "formatting",
+          "description": "The Armenian translation incorrectly places the 'to' before the folder name. It should match the English format.",
+          "suggestion": "<2>{{qty}} տարրերը</2> չհաջողվեց տեղափոխել to <1>{{folderName}}</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Error moving' is translated as '移動中にエラーが発生しました (Ido chuu ni error ga hassha shimashita)'. While technically correct, a more natural and direct translation of 'Error moving' would be '移動できませんでした (Ido dekimasen deshita)' or '移動に失敗しました (Ido ni shippai shimashita)'. The current translation is a bit wordy and less conversational.",
+          "suggestion": "移動できませんでした (Ido dekimasen deshita)"
+        },
+        {
+          "type": "formatting",
+          "description": "The order of the tags in the Japanese translation is reversed compared to the English: `<2>{{qty}} 要素</2>を<1>{{folderName}}</1>に移動中にエラーが発生しました`. The English uses `<2>{{qty}} elements</2> to <1>{{folderName}}</1>`, suggesting the folders should come after the elements.  This reversal makes the Japanese read slightly awkwardly.",
+          "suggestion": "<1>{{folderName}}</1>に<2>{{qty}} 要素</2>を移動中にエラーが発生しました"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The order of the placeholders is reversed. English has <2>{{qty}}</2> to <1>{{folderName}}</1>, while Korean has <2>{{qty}}개 요소</2>를 <1>{{folderName}}</1> 폴더로 이동하는 중 오류가 발생했습니다. The numbers should be in the same order as the English version.",
+          "suggestion": "<2>{{qty}}개 요소</2>를 <1>{{folderName}}</1> 폴더로 이동하는 중 오류가 발생했습니다"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ຢ່າງ' (yang) in the Lao translation feels awkward and doesn't quite convey the meaning of 'elements'. It's being used to indicate quantity but could be better phrased.",
+          "suggestion": "ຜິດ​ໃນ​ການ​ຍ້າຍ <2>{{qty}} ໂຕ</2> ໄປ​ສູ່ <1>{{folderName}}</1> (Using 'ໂຕ' which is a more common way to denote items/objects)"
+        },
+        {
+          "type": "formatting",
+          "description": "The tags <2> and <1> might not be used as intended, consider if they are intended to be used to tag variables or are there formatting considerations.",
+          "suggestion": "Ensure that the tags are used consistently and correctly based on the surrounding context. Verify their purpose."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation 'Kļūda, pārvietojot' is a literal translation of 'Error moving' which can sound awkward in Latvian. A more natural phrasing would be 'Radās kļūda, pārvietojot' or 'Parādoties kļūdai, pārvietojot'.",
+          "suggestion": "Radās kļūda, pārvietojot"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The preposition 'a' is unnecessary after 'przenoszeni'. It should be 'Błąd podczas przenoszenia'.",
+          "suggestion": "Błąd podczas przenoszenia"
+        },
+        {
+          "type": "grammar",
+          "description": "The ending of 'elementu(-tów)' is incorrect for the context. It should agree with the quantity.  It's difficult to determine the correct form without more context (singular or plural).  If qty is 1, use 'elementu'. If qty is greater than 1, use 'elementów'.  Without knowing the value of qty, the translation is not optimal.",
+          "suggestion": "Błąd podczas przenoszenia <2>{{qty}} elementu/elementów</2> do <1>{{folderName}}</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Romanian translation uses 'Eroare la deplasare a'. It should be 'Eroare la mutarea a' or 'Eroare la deplasarea'.",
+          "suggestion": "Eroare la mutarea a"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Error moving\" is not accurately translated.  \"Error moving\" implies a failure to move something.  The Sinhala translation simply states \"moving\" without indicating an error occurred.",
+          "suggestion": "Error moving should be translated to something like \"Error occurred while moving\" or \"Failed to move\".  A possible suggestion is: \"<2>{{qty}} මූලද්‍රව්‍ය</2> <1>{{folderName}}</1> වෙත ගෙන යාමට වරදක් සිදු විය\""
+        },
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation includes `<1>` and `<2>` tags, which might disrupt the intended rendering if not properly interpreted by the system. The original English has the same format, so this is likely intentional. However, it's worth noting for potential rendering issues.",
+          "suggestion": "Ensure the system correctly interprets the `<1>` and `<2>` tags for correct rendering."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The XML-like tags `<2>` and `</2>` are present in both the English and Serbian translations. This suggests they are meant to be placeholders for formatting, but their purpose isn't clear without context. While technically not an error in the translation itself, they should be verified for proper rendering within the application.",
+          "suggestion": "Verify the function of the tags <2> and </2> within the application to ensure correct display of the quantity. Consider if these tags are truly necessary and, if so, whether a more standard format (e.g., variables or placeholders specific to the application) is preferred."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Error moving...\" is translated as \"...taşınırken hata oluştu\". While technically correct, a more natural Turkish translation for \"Error moving\" would be \"Taşınırken bir hata oluştu\" or \"Taşınırken bir sorun oluştu\".",
+          "suggestion": "Taşınırken bir hata oluştu"
+        },
+        {
+          "type": "formatting",
+          "description": "The XML tags `<2>` and `<1>` are not standard and should ideally match the original format, but the Turkish translation's usage isn't directly mirroring the English. This might create inconsistencies.",
+          "suggestion": "Maintain the same tags as the English version, but consider whether the tags are truly necessary for correct rendering."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The opening tag `<2>` is not properly closed within the translated sentence. It should be `<2>`, not `<2>.",
+          "suggestion": "Correct the opening tag to `<2>`."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"в кількості {{qty}}\" is a literal translation of \"of quantity {{qty}}\". A more natural Ukrainian phrasing would be \"кількості {{qty}}\"",
+          "suggestion": "Change \"в кількості {{qty}}\" to \"кількості {{qty}}\""
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"phần\" (part) doesn't accurately convey the meaning of \"elements\" in this context. \"elements\" refers to files or items. A better translation would use a word like \"tệp\" (file) or \"đồ vật\" (objects).",
+          "suggestion": "Lỗi khi di chuyển <2>{{qty}} tệp</2> đến <1>{{folderName}}</1>"
+        },
+        {
+          "type": "formatting",
+          "description": "The angle bracket placement around the placeholders `{{qty}}` and `{{folderName}}` is inconsistent with the English version.  The English version is `<2>{{qty}}</2>` and `<1>{{folderName}}</1>`.  The Vietnamese uses the same structure.",
+          "suggestion": "Lỗi khi di chuyển <1>{{qty}} tệp</1> đến <2>{{folderName}}</2>"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Error moving\" is not directly and naturally translated by \"将...移动到...时出错\". A more accurate translation would be something like \"移动...时发生错误\" or \"移动...失败\".",
+          "suggestion": "移动<2>{{qty}}个元素</2>到<1>{{folderName}}</1>时发生错误"
+        },
+        {
+          "type": "formatting",
+          "description": "The Chinese translation uses the Chinese order of tags. The English content has <2> before <1>. Ideally, the translated version should also respect this order.",
+          "suggestion": "将<2>{{qty}}个元素</2>移动到<1>{{folderName}}</1>时出错"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

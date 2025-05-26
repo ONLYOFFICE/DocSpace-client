@@ -1,0 +1,291 @@
+{
+  "key_path": "SubmitToFormGallery",
+  "content": "Submit to Form Gallery",
+  "content_en_sha1_hash": "66ff599553fb39661692837e8fdd73d746451d5d",
+  "created_at": "2025-05-19T21:30:49.146Z",
+  "updated_at": "2025-05-26T07:57:32.338Z",
+  "comment": {
+    "text": "The translation key \"SubmitToFormGallery\" is used to display the phrase \"Submit to Form Gallery\" in various UI elements, such as a modal dialog and a button. It appears on-screen when interacting with form galleries or submitting forms to gallery views, helping users understand their options.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T08:38:18.191Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/SubmitToFormGallery/index.js",
+      "line_number": 150,
+      "context": "console.log(formItem);\n \n return (\n <ModalDialog visible={visible} onClose={onClose} autoMaxHeight>\n <ModalDialog.Header>{t(\"Common:SubmitToFormGallery\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div>{t(\"FormGallery:SubmitToGalleryDialogMainInfo\")}</div>\n <div>\n <Trans\n t={t}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/FormGallery/Header.js",
+      "line_number": 122,
+      "context": "{!oformsLoadError && canSubmitToFormGallery() ? (\n <StyledSubmitToGalleryButton\n primary\n size=\"small\"\n onClick={onOpenSubmitToGalleryDialog}\n label={t(\"Common:SubmitToFormGallery\")}\n />\n ) : null}\n \n {!oformsLoadError ? (\n <StyledInfoPanelToggleWrapper isInfoPanelVisible={isInfoPanelVisible}>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/FormGallery/TilesView/sub-components/SubmitToGalleryTile.js",
+      "line_number": 126,
+      "context": "</div>\n \n <Button\n onClick={onSubmitToGallery}\n size=\"small\"\n label={t(\"Common:SubmitToFormGallery\")}\n scale\n />\n </StyledSubmitToGalleryTile>\n );\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 1810,
+      "context": "},\n separator0,\n {\n id: \"option_submit-to-gallery\",\n key: \"submit-to-gallery\",\n label: t(\"Common:SubmitToFormGallery\"),\n icon: FormFileReactSvgUrl,\n onClick: () => this.onClickSubmitToFormGallery(item),\n isOutsideLink: true,\n disabled: !item.security?.SubmitToFormGallery,\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"تسليم إلى نموذج المعرض\" is a literal translation that doesn't quite capture the nuance of 'Submit to Form Gallery'. A more natural phrasing would emphasize the act of publishing or sharing the form.",
+          "suggestion": "تقديم إلى معرض النماذج (Taqdeem ila ma'rid an-namaathij) - This implies 'Present/Offer to Form Gallery' which is more contextually accurate."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ներկայացնել ձևերի պատկերասրահի \" is a literal translation but lacks the full meaning of \"Submit to Form Gallery.\" It implies \"to present to the gallery\", rather than actively submitting for inclusion. A better translation would convey the action of submission.",
+          "suggestion": "Consider a translation that more accurately conveys the action of submitting, such as \"Տեղադրել ձևերի պատկերասրահում\" (Place in Form Gallery) or \"Ցուցադրել ձևերի պատկերասրահում\" (Show in Form Gallery), though the best option depends on the specific nuance desired."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Invia alla Galleria dei moduli' is understandable, a more natural and accurate translation of 'Submit to Form Gallery' would be something like 'Pubblica nella Galleria dei moduli' or 'Aggiungi alla Galleria dei moduli'. 'Invia' implies sending, while 'Submit' in this context refers to publishing or adding.",
+          "suggestion": "Pubblica nella Galleria dei moduli"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"フォームギャラリーに投稿\" is a literal translation and might not be the most natural or idiomatic way to express \"Submit to Form Gallery\" in Japanese.  While technically correct, it can sound slightly awkward.",
+          "suggestion": "Consider a more natural phrasing like \"フォームギャラリーへの投稿\" (Form Gallery submission) or \"フォームギャラリーに送信\" (Send to Form Gallery)."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ສະເບີກສະບັບສົ່ງໄປທີ່ຫ້ອງສະໝຸດແບບຟອມ\" doesn't accurately convey the meaning of \"Submit to Form Gallery.\" \"ສະເບີກສະບັບ\" implies 'extract/prepare a version,' which is not the intended action.  'ຫ້ອງສະໝຸດແບບຟອມ' literally translates to 'form library', which is not the direct equivalent of 'Form Gallery'.",
+          "suggestion": "A more accurate translation might be something like \"ສົ່ງໄປທີ່ຫ້ອງສະໝຸດແບບຟອມ\" (Song pai thi hong samut baep form) which translates to 'Send to Form Gallery' or a rephrased version that accurately represents the action of submitting to a gallery. Further context might be required for a precise rendering."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ආකෘතිපත්‍ර එකතුවට යොමන්න' while understandable, doesn't perfectly capture the nuance of 'Submit to Form Gallery'. 'යොමන්න' implies a more active movement or direction, while 'Submit' is more about offering or presenting.",
+          "suggestion": "Consider alternatives like 'ආකෘතිපත්‍ර ගැලරියට ඉදිරිපත් කරන්න' (Akrutipathra Galariya Tha Epiripath Karna) which translates to 'Present to Form Gallery' or 'ආකෘතිපත්‍ර ගැලරියට පంపන්න' (Akrutipathra Galariya Tha Paminna) meaning 'Send to Form Gallery'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "“Fgalerijo” is a misspelling and doesn't accurately translate 'Gallery'. It should be 'Galerijo'.",
+          "suggestion": "Galerijo"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Поднеси у Форм Галерију\" isn't the most natural or accurate rendering of \"Submit to Form Gallery.\" \"Поднети\" implies submitting a document or item. A more appropriate verb would be something like 'додај' (add) or 'објави' (publish/post). \"Галерија\" is correct.",
+          "suggestion": "Додај у Форм Галерију"
+        },
+        {
+          "type": "formatting",
+          "description": "The preposition 'у' before 'Форм Галерију' is grammatically correct, but depending on the context, a slightly more flexible phrasing might be better. The context of a user interface might warrant a slightly different choice.",
+          "suggestion": "Додај Форм Галерији"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Podnesi u Form Galeriju\" doesn't quite capture the meaning of \"Submit to Form Gallery.\" \"Podnesi\" implies submitting something physical or a formal petition. \"Submit\" in this context means to make available or offer for inclusion.",
+          "suggestion": "Predaj u Form Galeriju"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Gửi đến' is a valid way to say 'Submit to', 'Bộ Sưu Tập Biểu Mẫu' is a very literal and somewhat awkward translation of 'Form Gallery'. A more natural and concise translation would be 'Thư Viện Mẫu' or 'Mẫu Bảng'.",
+          "suggestion": "Thư Viện Mẫu"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

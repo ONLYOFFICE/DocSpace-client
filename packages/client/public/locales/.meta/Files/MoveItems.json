@@ -1,0 +1,386 @@
+{
+  "key_path": "MoveItems",
+  "content": "<2>{{qty}} elements</2> successfully moved to <1>{{folderName}}</1>",
+  "content_en_sha1_hash": "8d45a4b7ed28e83552a5814b1fc3c815140bbab7",
+  "created_at": "2025-05-19T21:30:55.856Z",
+  "updated_at": "2025-05-24T11:52:59.030Z",
+  "comment": {
+    "text": "This translation key is used to display a success message after moving items to a folder. It appears in a toast notification and indicates the number of elements successfully moved to the specified folder. Translators should focus on conveying a positive outcome for this action.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:31.362Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/SecondaryProgressDataStore.js",
+      "line_number": 226,
+      "context": "operation === OPERATIONS_NAME.trash\n ) {\n toastTranslation = isSuccess ? (\n <Trans\n t={t}\n i18nKey=\"MoveItems\"\n components={commonComponents}\n values={commonProps}\n />\n ) : (\n <Trans",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'عنصرًا' (element) should agree in gender with the quantity '{{qty}}'. Since we don't know the gender of the items being moved, assuming the singular is masculine is problematic. If '{{qty}}' can be feminine, the word should be 'عناصر'.",
+          "suggestion": "Consider using 'عناصر' if the elements can be feminine or adding logic to select the correct form based on the gender of the items."
+        },
+        {
+          "type": "formatting",
+          "description": "The angle brackets are not consistent with the English source. The English uses <2> and <1>. The Arabic translation uses the same. This should be checked with the larger translation style guide. If the numbering style is consistent, it is okay. If not, a consistent style should be used.",
+          "suggestion": "Verify the intended angle bracket format with the project's translation style guide and correct accordingly."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'elements' (elements) is incorrectly translated as 'elementlər'. It should be pluralized correctly in Azerbaijani.",
+          "suggestion": "elementlər"
+        },
+        {
+          "type": "grammar",
+          "description": "The verb 'moved' is translated as 'köçürüldü', which is passive voice and correct in this context. However, the sentence flow might be improved by rephrasing for better clarity.  While grammatically correct, it might be slightly less natural than an active construction.",
+          "suggestion": "elementlər <1>{{folderName}}</1> qovluğuna köçürüldü"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"successfully moved\" is translated as \"бяха успешно преместени\". While not technically incorrect, a more natural Bulgarian phrasing would be closer to \"са преместени успешно\" or \"успешно преместени\". \"Бяха\" implies a past completed action, but in this context, it's a reported status, not a specific event.",
+          "suggestion": "Successfully moved -> успешно преместени"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Czech translation has a syntax error in the folder name tag. It should be `{{folderName}}` not `{{{folderName}}`.",
+          "suggestion": "{{folderName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The German translation preserves the original XML-like structure with the `</2>` and `</1>` tags. While technically valid, this is unusual for user-facing text and could be improved for readability.",
+          "suggestion": "Consider removing the surrounding tags if they are not essential for the application's rendering logic. For example: \"{{qty}} Elemente erfolgreich nach {{folderName}} verschoben\""
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The original English content uses `<2>` and `<1>` for tags. The Greek translation follows this structure, which is consistent and maintains the original formatting.",
+          "suggestion": null
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"μετακινήθηκαν\" is a valid translation for \"moved\", in the context of file management, a more natural and common phrasing would be \"μεταφέρθηκαν\". \"Μετακινήθηκαν\" implies more of a repositioning rather than a transfer.",
+          "suggestion": "<2>{{qty}} στοιχεία</2> μεταφέρθηκαν επιτυχώς στον φάκελο <1>{{folderName}}</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"successfully moved\" is translated as \"se han movido correctamente\". While technically correct, a more natural and idiomatic translation in Spanish would be \"movidos con éxito\" or simply \"movidos\".  'Correctamente' is a bit redundant.",
+          "suggestion": "<2>{{qty}} elementos</2> se han movido con éxito a <1>{{folderName}}</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'successfully moved' is not perfectly translated to 'onnistuneesti siirretty'. While 'siirretty' means 'moved', 'onnistuneesti' implies successful completion, which is a bit too formal for a notification. A more natural translation would be something like 'siirretty' or 'siirtyi'.",
+          "suggestion": "siirretty <1>{{folderName}}</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English \"moved to\" is translated as \"spostati con successo in\". A more accurate translation would be \"trasferiti in\" or \"spostati in\". \"Spostati con successo in\" is slightly awkward and doesn't directly convey the action of moving.",
+          "suggestion": "Consider translating \"moved to\" as \"trasferiti in\" or simply \"spostati in\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"successfully moved\" is translated as \"正常に (seijou ni)\", which means \"normally\" or \"properly.\" While not *wrong*, it's a less natural and less impactful way to convey success. A better translation might be something like \"完了しました (kanryou shimashita)\" which means \"completed\" or \"finished.\" Alternatively, \"うまく (umaku)\" meaning \"smoothly\" could also work depending on the intended nuance.",
+          "suggestion": "正常に (seijou ni) -> 完了しました (kanryou shimashita) or うまく (umaku)"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'successfully moved' is not accurately reflected in the Korean translation. '이동되었습니다' implies a passive voice and lacks the emphasis on success.",
+          "suggestion": "Consider using a more active and emphatic translation of 'successfully moved,' such as '<1>{{folderName}}</1> 폴더로 이동 완료되었습니다' or '<1>{{folderName}}</1> 폴더로 문제없이 이동되었습니다'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ຢ່າງສໍາເລັດແລ້ວ\" (yang samlat leo) translates to \"successfully\" but it's a bit too formal for this context. A more natural and common phrasing would be better.",
+          "suggestion": "Consider replacing \"ຢ່າງສໍາເລັດແລ້ວ\" with a more conversational alternative like \"ໝົດແລ້ວ\" (mot leo) or a simplified phrasing that conveys completion."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The pluralization of 'element' is incorrect. 'elementen' is correct for multiple elements, but the English uses 'elements'.",
+          "suggestion": "<2>{{qty}} elementen</2> successfully moved to <1>{{folderName}}</1>"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'successfully' is not directly translated, but it's implied by 'met succes'.  A more direct translation might improve clarity, but it depends on the desired tone.",
+          "suggestion": "<2>{{qty}} elementen</2> zijn succesvol verplaatst naar <1>{{folderName}}</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Polish translation uses a plural form that might be incorrect depending on the value of 'qty'. It includes both singular and plural endings '-y/-ów'.",
+          "suggestion": "To ensure grammatical correctness, the plural form needs to dynamically adjust based on the value of 'qty'. A more accurate translation might use a conditional pluralization rule, or provide a separate translation for singular and plural cases."
+        },
+        {
+          "type": "formatting",
+          "description": "The `<1>` and `<2>` tags do not consistently match the original English placement within the translated string. The `<2>` tags surrounding the `{{qty}}` values are appropriately placed, but the placement of `<1>` around `{{folderName}}` is consistent, which is good.",
+          "suggestion": "Verify tag placement against the original string to guarantee consistency in dynamic content replacement."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'successfully moved' is best translated as 'movidos com sucesso' or simply 'movidos'. The current translation is slightly awkward and less natural in Portuguese.",
+          "suggestion": "<2>{{qty}} elementos</2> movidos com sucesso para <1>{{folderName}}</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'moved' has been translated as 'copiate' (copied) in Romanian. 'Moved' implies relocation, while 'copiate' implies duplication. This changes the meaning of the original sentence.",
+          "suggestion": "Use 'mutate' or 'relocalizate' to accurately convey the meaning of 'moved'."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'elemente' should be 'elemente' (plural).",
+          "suggestion": "elemente"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'elements' is translated as 'අංග' which, while technically correct, isn't the most natural or idiomatic translation in this context.  'අංග' often refers to limbs or body parts. A better translation would be something like 'items' or 'files'.",
+          "suggestion": "Consider using a term like 'ගොනෙකු' (gonaku) for 'items' or 'files', which is more common in a file management context."
+        },
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation has inconsistent spacing within the HTML tags. The English uses `<1>{{folderName}}</1>` but the Sinhala uses `<1>{{folderName}}</1>`, missing a space.",
+          "suggestion": "Ensure consistent spacing within the HTML tags. It should be `<1> {{folderName}} </1>`."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Slovenian translation uses the plural form 'elementov' but the English uses 'elements'. While grammatically correct, it might be more accurate to use the singular form 'element' to match the English singular form when referring to each item moved.",
+          "suggestion": "<2>{{qty}} elementa</2> je bil uspešno premaknjen v <1>{{folderName}}</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Serbian translation uses the plural form 'елемената' (elementa) which is incorrect. It should agree with the quantity '{{qty}}'. If 'qty' is singular, it should be 'елемент' (element). If it's plural and the noun is masculine, it should be 'елементи'.  Assuming 'qty' can be singular or plural, the most appropriate translation would depend on the value of 'qty'.",
+          "suggestion": "Consider dynamic translation based on the value of '{{qty}}'. If qty is singular: '<2>{{qty}} елемент</2> успешно премештено у <1>{{folderName}}</1>'. If qty is plural and the elements are masculine: '<2>{{qty}} елементи</2> успешно премештено у <1>{{folderName}}</1>'"
+        },
+        {
+          "type": "grammar",
+          "description": "The verb 'премештено' (premešteno) is in the passive voice, which is grammatically correct, but in some contexts, active voice might sound more natural.",
+          "suggestion": "Consider revising to an active voice, although this may significantly change the wording. This is a stylistic choice, and the passive voice is not necessarily wrong."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The verb 'premešteno' (moved) should agree with the quantity 'elementa'. Since 'elementa' is plural, the verb should also be plural.",
+          "suggestion": "<2>{{qty}} elementa</2> uspešno premešteni u <1>{{folderName}}</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Turkish translation includes an extra comma before \"başarıyla taşındı\". It disrupts the flow of the sentence.",
+          "suggestion": "<2>{{qty}} öğeleri</2>, <1>{{folderName}}</1> konumuna başarıyla taşındı."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The verb agreement is incorrect. 'elements' is plural, so the verb should be in the plural form as well. The current translation uses singular form 'переміщено'.",
+          "suggestion": "<2>Елементи в кількості {{qty}} успішно переміщено<b>ні</b> до <1>{{folderName}}</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"elements\" is translated as \"phần\". While \"phần\" can sometimes mean \"part\" or \"element,\" in this context, a more accurate translation would be something like \"đồ vật\" (objects) or \"tài liệu\" (documents), depending on what the 'elements' represent.",
+          "suggestion": "Consider translating \"elements\" as \"đồ vật\" or \"tài liệu\" depending on the context.  For example: \"<2>{{qty}} đồ vật</2> đã được di chuyển thành công đến <1>{{folderName}}</1>\" or \"<2>{{qty}} tài liệu</2> đã được di chuyển thành công đến <1>{{folderName}}</1>\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

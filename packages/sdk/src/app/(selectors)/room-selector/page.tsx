@@ -35,10 +35,10 @@ import RoomSelector from "./page.client";
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { [key: string]: string };
+  searchParams: Promise<{ [key: string]: string }>;
 }) {
   const baseConfig = Object.fromEntries(
-    Object.entries(searchParams).map(([k, v]) => [
+    Object.entries(await searchParams).map(([k, v]) => [
       k,
       v === "true" ? true : v === "false" ? false : v,
     ]),

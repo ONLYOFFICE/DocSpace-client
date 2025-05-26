@@ -52,12 +52,6 @@ export const StyledEncryptionPortal = styled.div<{
       text-align: center;
       color: ${(props) => props.theme.preparationPortalProgress.errorTextColor};
     }
-
-    .preparation-portal_text {
-      text-align: center;
-      color: ${(props) =>
-        props.theme.preparationPortalProgress.descriptionTextColor};
-    }
   }
 
   .restoring-portal {

@@ -1028,10 +1028,10 @@ export class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
       style: styles.content,
       children: createContext ? (
         // eslint-disable-next-line react/jsx-no-constructed-context-values
-        <ScrollbarContext.Provider value={{ parentScrollbar: this }}>
+        <ScrollbarContext value={{ parentScrollbar: this }}>
           {/* @ts-expect-error error from custom scrollbar */}
           {children}
-        </ScrollbarContext.Provider>
+        </ScrollbarContext>
       ) : (
         children
       ),

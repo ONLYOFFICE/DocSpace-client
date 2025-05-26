@@ -46,6 +46,8 @@ export const convertToItems = (folders: TRoom[]) => {
       indexing,
       lifetime,
       watermark,
+      tags,
+      quotaLimit,
     } = folder;
 
     const icon = logo.medium;
@@ -77,6 +79,8 @@ export const convertToItems = (folders: TRoom[]) => {
       indexing,
       lifetime,
       watermark,
+      tags,
+      quotaLimit,
     };
   });
 

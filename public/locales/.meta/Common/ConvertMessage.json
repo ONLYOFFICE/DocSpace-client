@@ -1,0 +1,242 @@
+{
+  "key_path": "ConvertMessage",
+  "content": "If you choose to convert the file to a format different from the original, some data might be lost.",
+  "content_en_sha1_hash": "289264301ed3356fa949a02e3ff83466c5f9d7be",
+  "created_at": "2025-05-19T21:30:43.710Z",
+  "updated_at": "2025-05-26T07:57:32.940Z",
+  "comment": {
+    "text": "This translation key is used to display a warning message when converting a file, indicating that some data might be lost. It appears in a download dialog box and serves as an explanation of the potential consequences of changing the file format.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:58.424Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
+      "line_number": 512,
+      "context": "title={t(\"Common:Other\")}\n />\n ) : null}\n \n <div className={styles.downloadDialogConvertMessage}>\n <Text noSelect>{t(\"Common:ConvertMessage\")}</Text>\n </div>\n </>\n );\n \n if (isOnePasswordFile) {",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Wenn Sie das Dateiformat ändern, können Sie möglicherweise einige Daten verloren.' doesn't fully convey the meaning of 'If you choose to convert the file to a format different from the original, some data might be lost.'. It implies that the user *might* lose data, whereas the original implies a potential consequence of the conversion choice.",
+          "suggestion": "Wenn Sie das Dateiformat in ein anderes ändern, könnten Daten verloren gehen."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'können Sie möglicherweise' is a bit wordy. While grammatically correct, it's not the most natural phrasing in German for this context.",
+          "suggestion": "könnten"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrasing \"Als u ervoor kiest het bestand om te zetten\" is a bit awkward. A more natural phrasing would be \"Als u ervoor kiest het bestand te converteren\".",
+          "suggestion": "Als u ervoor kiest het bestand te converteren"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation uses 'ryzykujesz utratę' which translates to 'you risk losing'. While not technically wrong, it introduces a stronger implication of risk than the English 'might be lost'. A more direct translation reflecting the possibility would be better.",
+          "suggestion": "Jeśli zdecydujesz się na konwersję pliku do innego formatu, niż oryginalny, część danych może zostać utracona."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඇතැම් දත්ත නැති වීමට ඉඩ තිබේ' (aththam datta nethi vimita idai thibey) translates to 'there is a chance that some data might be lost'. While not entirely wrong, it's a less direct and slightly less clear phrasing compared to the English 'some data might be lost'. A more accurate and natural translation would be 'දත්ත verloren විය හැකිය' (datta verloren viyaa kayathaa) - 'data may be lost'.",
+          "suggestion": "Replace 'ඇතැම් දත්ත නැති වීමට ඉඩ තිබේ' with 'දත්ත verloren විය හැකිය'."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'විට' is often used but 'යට' is more suitable in this context.",
+          "suggestion": "Replace 'විට' with 'යට'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

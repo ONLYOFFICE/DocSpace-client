@@ -85,6 +85,7 @@ const LoginForm = ({
 }: LoginFormProps) => {
   const { isLoading, isModalOpen } = useContext(LoginValueContext);
   const { setIsLoading } = useContext(LoginDispatchContext);
+
   const emailConfirmedToastShown = useRef<boolean>(false);
   const passwordChangedToastShown = useRef<boolean>(false);
   const authToastId = useRef<Id>("");

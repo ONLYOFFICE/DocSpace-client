@@ -30,7 +30,6 @@ import { Trans, useTranslation } from "react-i18next";
 import { RoomsType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import { CREATED_FORM_KEY, EDITOR_ID } from "@docspace/shared/constants";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { getFileInfo } from "@docspace/shared/api/files";
 
 import type {
@@ -46,7 +45,7 @@ import type { TData } from "@docspace/shared/components/toast/Toast.type";
 
 import { saveAs } from "@/utils";
 import type { ConflictStateType } from "@/types";
-import { LinkTarget } from "@docspace/shared/components/link";
+import { Link, LinkTarget } from "@docspace/shared/components/link";
 
 type SuccessResponseType = {
   form: TFile;
@@ -84,7 +83,7 @@ const useStartFillingSelectDialog = (
   openAssignRolesDialog: (form: TFile, roomName: string) => void,
 ) => {
   const { t } = useTranslation(["Common"]);
-  const resolveRef = useRef<(value: string | PromiseLike<string>) => void>();
+  const resolveRef = useRef<(value: string | PromiseLike<string>) => void>(undefined);
 
   const [createDefineRoomType, setCreateDefineRoomType] = useState<RoomsType>(
     RoomsType.FormRoom,
@@ -186,12 +185,12 @@ const useStartFillingSelectDialog = (
 
                 const components = {
                   1: (
-                    <ColorTheme
+                    <Link
                       tag="a"
                       href={url.toString()}
-                      themeId={ThemeId.Link}
                       target={LinkTarget.blank}
-                      $isUnderline
+                      textDecoration="underline"
+                      color="accent"
                     />
                   ),
                   2: <strong />,

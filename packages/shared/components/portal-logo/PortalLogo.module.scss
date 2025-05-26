@@ -1,9 +1,9 @@
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/variables/devices.scss";
-@import "../../styles/mixins.scss";
+@use "../../styles/variables/colors";
+
+@use "../../styles/mixins";
 
 .wrapper {
-  @include mobile {
+  @include mixins.mobile {
     &:not(.resizable) {
       display: none;
     }

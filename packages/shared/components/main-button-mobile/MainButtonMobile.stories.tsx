@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useState } from "react";
-import styled, { css } from "styled-components";
 import { Meta, StoryObj } from "@storybook/react";
+import classNames from "classnames";
 
 import MobileActionsDocumentReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
 import MobileActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
@@ -35,6 +35,7 @@ import MobileActionsFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.f
 import MobileUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 
 import { MainButtonMobile } from ".";
+import styles from "./MainButtonMobile.stories.module.scss";
 
 const meta = {
   title: "Interactive Elements/MainButtonMobile",
@@ -73,22 +74,6 @@ const meta = {
 type Story = StoryObj<typeof meta>;
 
 export default meta;
-
-const StyledWrapper = styled.div<{ isAutoDocs: boolean; isMobile?: boolean }>`
-  width: 500px;
-  height: 600px;
-  position: relative;
-
-  ${(props) =>
-    props.isAutoDocs &&
-    css`
-      width: calc(100% + 40px);
-      height: 500px;
-      position: relative;
-      margin-block: 0 -20px;
-      margin-inline: -20px 0;
-    `}
-`;
 
 const actionOptions = [
   {
@@ -171,7 +156,11 @@ const Template = ({ ...args }) => {
     typeof window !== "undefined" && window?.location?.href.includes("docs");
 
   return (
-    <StyledWrapper isAutoDocs={isAutoDocs}>
+    <div
+      className={classNames(styles.wrapper, {
+        [styles.isAutoDocs]: isAutoDocs,
+      })}
+    >
       <MainButtonMobile
         {...args}
         style={{
@@ -190,7 +179,7 @@ const Template = ({ ...args }) => {
         isOpenButton={isOpenButton}
         opened={false}
       />
-    </StyledWrapper>
+    </div>
   );
 };
 

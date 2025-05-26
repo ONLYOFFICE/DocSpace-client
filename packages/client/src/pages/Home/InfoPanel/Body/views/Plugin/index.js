@@ -30,7 +30,13 @@ import { inject, observer } from "mobx-react";
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
 
-const Plugin = ({ boxProps, pluginName }) => {
+const Plugin = ({ boxProps, pluginName, plugin, selection }) => {
+  React.useEffect(() => {
+    if (!selection) return;
+
+    plugin.subMenu.onClick(selection.id ? +selection.id : 0);
+  }, [selection.id]);
+
   return (
     <WrappedComponent
       pluginName={pluginName}
@@ -39,18 +45,25 @@ const Plugin = ({ boxProps, pluginName }) => {
   );
 };
 
-export default inject(({ pluginStore }, { isRooms, fileView, roomsView }) => {
-  const { infoPanelItemsList } = pluginStore;
+export default inject(
+  ({ pluginStore, infoPanelStore }, { isRooms, fileView, roomsView }) => {
+    const { infoPanelItemsList } = pluginStore;
 
-  const currentView = isRooms ? roomsView : fileView;
+    const currentView = isRooms ? roomsView : fileView;
 
-  const itemKey = currentView.replace("info_plugin-", "");
+    const itemKey = currentView.replace("info_plugin-", "");
 
-  const { value } = infoPanelItemsList.find((i) => i.key === itemKey);
+    const { value } = infoPanelItemsList.find((i) => i.key === itemKey);
 
-  return {
-    boxProps: value.body,
+    const { infoPanelSelection } = infoPanelStore;
 
-    pluginName: value.name,
-  };
-})(observer(Plugin));
+    return {
+      boxProps: value.body,
+
+      pluginName: value.name,
+
+      plugin: value,
+      selection: infoPanelSelection,
+    };
+  },
+)(observer(Plugin));

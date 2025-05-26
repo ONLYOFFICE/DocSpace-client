@@ -1,0 +1,348 @@
+{
+  "key_path": "SendInviteAgainDialog",
+  "content": "The invitation will be sent again to the selected users with the 'Pending' status.",
+  "content_en_sha1_hash": "55886668778f3f617d123dd0f693ab2a77946f58",
+  "created_at": "2025-05-19T21:30:53.268Z",
+  "updated_at": "2025-05-24T06:01:06.885Z",
+  "comment": {
+    "text": "\"This translation key is used for a modal dialog's header, displaying 'The invitation will be sent again to the selected users with the 'Pending' status'. It appears on the footer of a send invite dialog.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:04.317Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/SendInviteDialog/index.js",
+      "line_number": 88,
+      "context": ">\n <ModalDialog.Header>\n {t(\"PeopleTranslations:SendInviteAgain\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"SendInviteAgainDialog\")}</Text>\n <Text>{t(\"SendInviteAgainDialogMessage\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"send-inite-again-modal_submit\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Pending' is not accurately reflected by 'معلقة'. 'معلقة' generally means 'suspended' or 'hanging,' not 'pending'. A more accurate translation for 'Pending' in this context would be something like 'في الانتظار' (fi al-intizar) or 'قيد الانتظار' (qayd al-intizar).",
+          "suggestion": "سيتم إرسال الدعوة مرة أخرى إلى المستخدمين الذين حالتهم 'في الانتظار'."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English sentence uses the future tense ('will be sent again'). The Azerbaijani translation uses the past tense ('göndərildi'). While conveying the action, it doesn't perfectly match the English's future intention.",
+          "suggestion": "'Gözləmə' statusunda olan istifadəçilərə dəvətnamə yenidən göndəriləcək."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'очакване' is sometimes translated as 'waiting' but in this context 'pending' is more accurate.",
+          "suggestion": "Поканите ще бъдат изпратени отново на избраните потребители със статус 'Под очакване'."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Der Einladungslink wird erneut an ausgewählten Benutzern mit dem Status 'Ausstehend' gesendet' is not a perfect match for the English sentence. While it conveys a similar meaning, 'SendInviteDialog:SendInviteAgainDialog' suggests an invitation *process* rather than just the link being sent again. The sentence also implies the users are already invited, and we're resending the invitation.",
+          "suggestion": "Der Einladungsprozess wird erneut an die ausgewählten Benutzer mit dem Status 'Ausstehend' gestartet."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ausgewählten Benutzern' could be improved. It implies a specific selection has been made, which might not be the intended meaning. 'Ausgewählte Benutzer' is gramatically correct, but might not fit the context.  A more general phrasing might be better.",
+          "suggestion": "Die Einladung wird erneut an die Benutzer mit dem Status 'Ausstehend' gesendet."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Pending' is translated as 'Odottaa', which is a literal translation meaning 'Waiting'. While understandable, a more natural and common Finnish equivalent for 'Pending' in this context (referring to an invitation status) would be 'Odottamassa' or 'Avoinna'.",
+          "suggestion": "Kutsu lähetetään uudelleen valituille käyttäjille, joiden tila on 'Odottamassa'."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses single quotes around the status 'Odottaa'. It's more standard in Finnish to use double quotes or no quotes at all when referring to status names within a system.",
+          "suggestion": "Kutsu lähetetään uudelleen valituille käyttäjille, joiden tila on \"Odottaa\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'Pending' is translated as 'Սպասող' which literally means 'waiting'. While not incorrect, a more accurate and commonly used translation in this context would be 'պահուստ' (pahusht) which means 'reserved' or 'in reserve', implying a state before acceptance.",
+          "suggestion": "Հրավերը կրկին կուղարկվի ընտրված օգտատերերին  'պահուստ' կարգավիճակով."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'The invitation will be sent again' is not fully captured by '초대장이 다시 전송됩니다.' While technically correct, a more natural and precise translation would include a more active voice to reflect the 'will be sent again' aspect.",
+          "suggestion": "'선택된 사용자에게 초대장이 다시 발송됩니다.' or '선택된 사용자에게 다시 초대장을 보냅니다.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ລໍຖ້າ' (lor-tha) which means 'wait' is not the most accurate translation of 'Pending' in this context. It suggests a passive state rather than an active 'pending' status.",
+          "suggestion": "Consider using a term that more closely reflects the 'pending' status, such as 'ຢູ່ໃນລະຫວ່າງ' (yuu nai ra-whang) meaning 'in progress' or 'being processed', or a more technical term if applicable to the system's terminology."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Pending' is not directly translated. While 'Gaida' implies waiting, it doesn't convey the specific meaning of 'Pending' in the context of an invitation status. A more accurate translation might be something like 'Pagaidām' or 'Apstādināts'.",
+          "suggestion": "Uzaicinājums atkal tiks nosūtīts atlasītajiem lietotājiem ar statusu Pagaidām."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Pending' is best translated as 'Czeka' or 'W oczekiwaniu' in this context, not 'Oczekuje'. 'Oczekuje' implies a more proactive expectation, while 'Pending' signifies a waiting state.",
+          "suggestion": "Zaproszenie zostanie wysłane ponownie do wybranych użytkowników o statusie 'Czeka' or 'W oczekiwaniu'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'selected' is translated as 'selectate'. It should be 'selectați' because it refers to a group of users (masculine plural).",
+          "suggestion": "Invitația va fi trimisă din nou utilizatorilor selectați cu statutul 'În așteptare'."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Pending' is translated as 'Ожидание'. While technically correct, it's not the most natural or common way to represent 'Pending' in this context. A more suitable translation would be 'В ожидании'.",
+          "suggestion": "Приглашение на портал будет отправлено еще раз выбранным пользователям со статусом 'В ожидании', которые не заблокированы."
+        },
+        {
+          "type": "missing_content",
+          "description": "The original English sentence mentions users with 'Pending' status. The Russian translation includes the additional clause 'которые не заблокированы' (who are not blocked). This addition is not present in the original English and adds information not originally stated. This may lead to confusion.",
+          "suggestion": "Consider whether the blocking status is important to convey. If not, remove 'которые не заблокированы' to match the English original. If it is relevant, make sure the English sentence is updated to include the blocking information."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'පොරොත්තු' (porotthu) doesn't accurately translate 'Pending' in this context. It generally means 'promise' or 'pledge'. A more appropriate translation for 'Pending' would be something like 'බලාපොරොත්තු' (balaporohtthu) or 'ඇතුවන' (athewana), or a phrase that describes the state of waiting for acceptance.",
+          "suggestion": "Replace 'පොරොත්තු' with 'බලාපොරොත්තු' or 'ඇතුවන' or rephrase to convey the 'Pending' status more accurately. For example: 'ඉල්ලාබගත් පරිශ්‍රීලකයින් වෙත ආරාධනය නැවත යවනු ලැබේ, ඔවුන්ගේ පිළිගැනීම බලාපොරොත්තු වෙති.' (The invitation will be sent again to the selected users, who are awaiting acceptance.)"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure could be improved for better flow in Sinhala. While grammatically correct, it sounds slightly awkward.",
+          "suggestion": "Consider restructuring the sentence for improved flow. For example, 'තෝරාගත් පරිශ්‍රීලකයින් වෙත, 'බලාපොරොත්තු' තත්‍වයේ ඇති ආරාධනය නැවත යවනු ලැබේ' (The invitation to the selected users who are in the 'Pending' state will be sent again.)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'znova' is a colloquial shortening of 'znovu'. While understandable, it's not ideal for a formal context like a user interface. It's better to use the full form.",
+          "suggestion": "Pozvánka bude opäť odoslaná vybraným používateľom so stavom 'Nevybavené'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Pending' is best translated as 'Čaka odobritve' or 'Nepotrjeno' rather than 'V teku'. 'V teku' implies the invitation is already being processed, whereas 'Pending' signifies it's awaiting action.",
+          "suggestion": "Vabilo bo znova poslano izbranim uporabnikom s statusom 'Čaka odobritve' or 'Nepotrjeno'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'Pending' is translated as ‘На чекању’ which is correct, but the English original is in single quotes. Maintaining the single quotes in the Serbian translation for consistency would be preferable.",
+          "suggestion": "Позивница ће бити послата поново одабраним корисницима са статусом ‘На чекању’."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Pending' is translated as 'Na čekanju', which is accurate but less common and slightly less natural in this context. A more natural translation would be 'U toku' or 'Čeka potvrdu'.",
+          "suggestion": "Pozivnica će biti poslata ponovo odabranim korisnicima sa statusom ‘U toku’."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Pending' is best translated as 'Beklemede' in this context, which is already present in the Turkish translation. However, the overall phrasing could be slightly more natural.",
+          "suggestion": "Davet, 'beklemede' durumundaki seçilen kullanıcılara tekrar gönderilecektir."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Pending' is translated as 'Đang chờ xử lý', which is a bit verbose. While technically correct, a more natural translation for 'Pending' in this context would be 'Chờ xác nhận' or 'Chưa xác nhận'. 'Đang chờ xử lý' implies an action is being processed, which isn't necessarily the meaning of 'Pending' in the invitation context.",
+          "suggestion": "Lời mời sẽ được gửi lại đến những người dùng đã chọn có trạng thái 'Chờ xác nhận'."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Pending' is best translated as '未处理' (wei chu li) or '待处理' (dai chu li) rather than '待定' (dai ding). '待定' implies a decision is pending, whereas 'Pending' in this context refers to a status awaiting action.",
+          "suggestion": "邀请将再次发送给带有‘未处理’或‘待处理’状态的已选用户。"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

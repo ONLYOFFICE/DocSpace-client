@@ -1,0 +1,302 @@
+{
+  "key_path": "HotkeysClose",
+  "content": "Close/Undo action",
+  "content_en_sha1_hash": "f35d7016328d50eb3048f8ac879c03bc5d042b61",
+  "created_at": "2025-05-19T21:30:55.031Z",
+  "updated_at": "2025-05-24T10:46:11.947Z",
+  "comment": {
+    "text": "This translation key is used to display the label \"Close/Undo action\" and its purpose is to indicate that pressing a hotkey or button will undo an action, likely in a file editing application. The text appears in a hotkeys panel on the preview actions block.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:38.538Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/HotkeysPanel/PreviewActionsBlock.js",
+      "line_number": 36,
+      "context": "const PreviewActionsBlock = ({ t, textStyles, keyTextStyles }) => {\n return (\n <>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysClose\")}</Text>\n <Text {...keyTextStyles}>Esc</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Close/Undo action\" is more accurately translated as 'Bağlayın/Əməliyyatı geri alın'. \"Hərəkəti sonlandırın/Ləğv edin\" translates to 'End/Cancel action' which isn't a perfect match for 'Close/Undo'.",
+          "suggestion": "Bağlayın/Əməliyyatı geri alın"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Handlung schließen/rückgängig machen\" doesn't perfectly capture the meaning of \"Close/Undo action\". While \"Handlung schließen\" is accurate for 'Close', \"rückgängig machen\" is more accurately 'undo'. A more precise translation would consider the combined functionality.",
+          "suggestion": "Consider alternatives like \"Aktion schließen/rückgängig machen\" or \"Schließen/Rückgängig machen\" (if context allows)."
+        },
+        {
+          "type": "formatting",
+          "description": "The slash '/' used for separation between 'Close' and 'Undo' in the English source is mirrored in the German translation. While common, it can be stylistically jarring depending on the UI conventions.",
+          "suggestion": "Evaluate if using a hyphen ('-') or a comma (',') would be a more appropriate separator for the German UI to match intended styling or conventions."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Κλείσιμο/Αναίρεση ενέργειας\" is not a direct or natural translation of \"Close/Undo action\". \"Κλείσιμο\" is fine for 'Close', but \"Αναίρεση ενέργειας\" is a bit clunky.  'Undo action' is often translated more simply.",
+          "suggestion": "Κλείσιμο/Ακύρωση"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Close/Undo action\" is slightly ambiguous. \"Close\" implies closing a panel or window, while \"Undo\" implies reverting a previous action.  The Armenian translation \"Փակել/հետարկել գործողությունը\" translates literally as \"Close/Revert action.\" While understandable, it might be beneficial to clarify the \"Close\" portion, which might better be translated as \"Закрыть/Отменить действие\" in a parallel context, although it does require further understanding of the HotkeysPanel's functionality.",
+          "suggestion": "Consider re-evaluating the exact function of this hotkey. If it's primarily for closing a panel, a translation like \"Փակել պանելը/Հետարկել գործողությունը\" (Close panel/Revert action) might be more accurate. If it can close other types of things, then the current translation may be appropriate."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Close/Undo action' is not accurately translated. 'Undo action' implies reversing a previous action. 'Close' suggests closing a panel or window. The Japanese translation '閉じる/アクションを元に戻す' directly translates to 'Close/Undo action,' but the nuance is slightly off. A more accurate translation for 'Close' in this context might be '閉じる' (close panel) or '終了' (exit).",
+          "suggestion": "Consider '閉じる/アンドゥ' or '閉じる/元に戻す' depending on the intended action."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '닫기/작업 실행 취소' doesn't perfectly capture the nuance of 'Close/Undo action'. While '닫기' (close) is accurate, '작업 실행 취소' is a more literal translation of 'Undo action'. A more natural Korean phrasing for 'Undo action' in this context might be '실행 취소'.",
+          "suggestion": "닫기/실행 취소"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Close/Undo action' implies closing a panel/window or reverting an action. The Lao translation 'ປິດ/ຍົກເລີກການກະທຳ' literally translates to 'Close/Undo action' which is acceptable but lacks the nuance of specifically referring to closing a panel or window, which might be the intended meaning in the UI context. A more precise translation, depending on the context, might be 'ປິດແຜນວົງ/ຍົກເລີກການກະທຳ' (Close panel/Undo action).",
+          "suggestion": "Consider 'ປິດແຜນວົງ/ຍົກເລີກການກະທຳ' or a more context-specific alternative if 'Close panel' is the intended meaning."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Close/Undo action' implies two distinct actions that can be performed. 'Aizvērt' means 'Close', which is accurate. However, 'atsaukt darbību' translates more closely to 'undo action' or 'revert action', not 'undo'. While functionally similar in some contexts, the nuances are slightly different. A more direct translation of 'Close/Undo action' might include a word that encompasses both closing and reversing the action.",
+          "suggestion": "Consider a more comprehensive term encompassing 'Close' and 'Undo', such as 'Aizvērt/atcelt darbību' (where 'atcelt' is closer to 'cancel' or 'revoke').  Alternatively, it might be better to clarify the intended meaning of 'Close/Undo' in the English context to determine the best Latvian equivalent."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'වසන්න/පෙරසේ ක්‍රියාමාර්ග' doesn't accurately convey the meaning of 'Close/Undo action'. 'වසන්න' means 'to stay/remain', which is not related to closing. 'පෙරසේ' means 'to do/act', but 'ක්‍රියාමාර්ග' means 'actions' which is too general.",
+          "suggestion": "A more accurate translation might be 'වසන්න/අහෝසිය' (vasanna/ohosiya), where 'අහෝසිය' means 'undo/cancel'. Alternatively, 'වසන්න/ඉවත් කරන්න' (vasanna/iwath karanna) - 'stay/remove' could also be considered, but 'ඉවත් කරන්න' is more suitable for 'close' than 'undo'."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of '/' to separate the two actions ('වසන්න/පෙරසේ') is a direct transliteration of the English '/' which isn't standard Sinhala formatting. A more natural phrasing would involve conjunctions or separate sentences.",
+          "suggestion": "Consider separating the actions into two distinct phrases: 'වසන්න සහ පෙරසේ ක්‍රියාමාර්ග' (vasanna saha perasea kriyamaarga) or 'වසන්න, පෙරසේ ක්‍රියාමාර්ග' (vasanna, perasea kriyamaarga)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Zatvoriť\" is a valid translation for \"Close\", \"Vrátiť akciu späť\" is a very literal and clunky translation of \"Undo action\". A more natural Slovak equivalent for \"Undo action\" would be something like \"Zrušiť akciu\" or \"Stornovať akciu\".",
+          "suggestion": "Zatvoriť/Zrušiť akciu"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Close/Undo action\" is not perfectly captured by \"Затвори /Поништи радња\". \"Close\" often implies closing a panel or window, while \"Undo\" refers to reversing a previous action. The Serbian translation doesn't distinguish these nuances. \"Поништи радња\" is correct for 'Undo action', but 'Затвори' is not a direct translation of 'Close' in this context; it could be 'Zaglaviti' or simply 'Затвори панел' for better accuracy.",
+          "suggestion": "Consider 'Затвори панел / Поништи радња' or 'Затвори / Радикал' if the context allows for the broader term of cancellation."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Close/Undo action\" implies closing a panel and potentially undoing a previous action. \"Zatvori/Poništi radnja\" is a literal translation but doesn't fully convey the 'undo' function in the context of a hotkey. \"Poništi\" typically refers to undoing a specific change, not a general action.",
+          "suggestion": "Consider alternatives like \"Zatvori/Odustani\" or \"Zatvori/Ponovi prethodnu akciju\" to better reflect the dual function of closing and undoing."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Close/Undo action' is not accurately reflected in the Turkish translation 'Kapat/Eylemi geri al'. 'Close' is contextually referring to a panel or window being closed. 'Kapat' is correct for 'Close' but 'Undo action' should be translated more precisely to reflect that it's a cancellation of a previous action within the panel itself, not just a general undo functionality.",
+          "suggestion": "Kapat/İptal et"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Close/Undo action\" doesn't have a perfect direct translation to Vietnamese. \"Đóng\" is a good translation for \"Close\", but \"Hoàn tác\" is a broader term meaning \"Undo\" or \"Cancel.\" The nuance of \"action\" is lost. A more accurate translation might consider the specific action being undone.",
+          "suggestion": "Consider a more context-specific translation, possibly \"Đóng/Hủy\" (Close/Cancel) or \"Đóng/Phục hồi\" (Close/Restore), depending on the precise action being undone."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -27,7 +27,6 @@
 import { cookies } from "next/headers";
 
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { LANGUAGE } from "@docspace/shared/constants";
 
 import {
@@ -39,14 +38,16 @@ import {
   getUser,
 } from "@/utils/actions";
 import { GreetingLoginContainer } from "@/components/GreetingContainer";
+import { LoginContainer } from "@/components/LoginContainer";
 
 import Consent from "./page.client";
 
-async function Page({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string };
-}) {
+async function Page(
+  props: {
+    searchParams: Promise<{ [key: string]: string }>;
+  }
+) {
+  const searchParams = await props.searchParams;
   const clientId = searchParams.clientId ?? searchParams.client_id;
 
   const [user, settings, config] = await Promise.all([
@@ -55,7 +56,7 @@ async function Page({
     getConfig(),
   ]);
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
 
   let token = cookieStore.get(`x-signature-${user!.id}`)?.value;
   let new_token = "";
@@ -85,10 +86,7 @@ async function Page({
   return (
     <>
       {settings && typeof settings !== "string" && (
-        <ColorTheme
-          themeId={ThemeId.LinkForgotPassword}
-          isRegisterContainerVisible={isRegisterContainerVisible}
-        >
+        <LoginContainer isRegisterContainerVisible={isRegisterContainerVisible}>
           <>
             <GreetingLoginContainer
               greetingSettings={settings?.greetingSettings}
@@ -101,7 +99,7 @@ async function Page({
               baseUrl={config?.oauth2?.origin}
             />
           </>
-        </ColorTheme>
+        </LoginContainer>
       )}
     </>
   );

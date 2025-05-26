@@ -1,0 +1,232 @@
+{
+  "key_path": "Request",
+  "content": "Request",
+  "content_en_sha1_hash": "4aed03cac49d5e43da4e855a967286931a4d621a",
+  "created_at": "2025-05-19T21:30:49.789Z",
+  "updated_at": "2025-05-24T02:18:47.175Z",
+  "comment": {
+    "text": "The \"Request\" translation key is used to display the label for a request-related component, likely in a portal settings page or event details view. It appears as the title of a sub-component within the MessagesDetails, providing context for users interacting with webhooks. The translator should focus on providing a clear and concise description that accurately reflects this UI element's purpose.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:57.972Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/MessagesDetails.js",
+      "line_number": 35,
+      "context": "import { useTranslation } from \"react-i18next\";\n import { isMobile } from \"@docspace/shared/utils\";\n import { inject, observer } from \"mobx-react\";\n import ResponseDetails from \"./ResponseDetails\";\n import RequestDetails from \"./RequestDetails\";\n \n const TabsWrapper = styled.div`\n .sticky {\n z-index: 3;",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Հայց\" translates to \"claim\" or \"suit\" in English, which doesn't accurately represent the English word \"Request\" in the context of webhooks. \"Request\" refers to a data transmission.",
+          "suggestion": "Consider alternatives like \"ներմուծություն\" (nermuts'ut'yun - import/request), \"դիմում\" (dimum - application/request), or a more descriptive phrase depending on the specific technical meaning intended."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ຮ້ອງຂໍ' (hong kho) is a valid Lao word, it translates to 'request' or 'ask for'. However, in the context of 'Webhooks:Request', 'Request' likely refers to the HTTP request object. 'ຮ້ອງຂໍ' is too literal and doesn't convey the technical meaning.",
+          "suggestion": "Consider 'ການຮ້ອງຂໍ' (kaan hong kho - 'the request') or potentially a more technical term depending on the overall terminology being used.  Consulting with a technical expert familiar with webhooks in Lao would be highly recommended."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Pieprasīt' is a valid Latvian word, it generally translates to 'to request' or 'to demand'. 'Request' in the context of webhooks often refers to the incoming HTTP request itself, not the act of requesting something. A more accurate translation might be 'Ienākošais pieprasījums' (Incoming Request) or 'Pieprasījuma dati' (Request Data), depending on the exact intended meaning within the webhooks documentation.",
+          "suggestion": "Consider 'Ienākošais pieprasījums' or 'Pieprasījuma dati' for better accuracy."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Solicitar' can mean 'request', it's a more formal term. For 'Webhooks:Request' which likely implies an action or interaction, 'Requisição' would be a more natural and commonly used translation in Brazilian Portuguese. 'Solicitar' implies a request being made *to* someone, whereas 'Requisição' denotes a request itself, as in a webhook request.",
+          "suggestion": "Requisição"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

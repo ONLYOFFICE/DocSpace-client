@@ -71,12 +71,14 @@ const arrayItems: TTabItem[] = [
 
 describe("Tabs", () => {
   it("renders without errors", () => {
-    const { container } = renderWithTheme(<Tabs items={arrayItems} />);
+    const { container } = renderWithTheme(
+      <Tabs items={arrayItems} selectedItemId="tab1" />,
+    );
     expect(container).toBeInTheDocument();
   });
 
   it("renders all tab items", () => {
-    renderWithTheme(<Tabs items={arrayItems} />);
+    renderWithTheme(<Tabs items={arrayItems} selectedItemId="tab1" />);
     expect(screen.getByText("Title1")).toBeInTheDocument();
     expect(screen.getByText("Title2")).toBeInTheDocument();
   });
@@ -89,26 +91,34 @@ describe("Tabs", () => {
 
   it("applies correct styles for primary tabs", () => {
     const { container } = renderWithTheme(
-      <Tabs items={arrayItems} type={TabsTypes.Primary} />,
+      <Tabs
+        items={arrayItems}
+        type={TabsTypes.Primary}
+        selectedItemId="tab1"
+      />,
     );
     expect(container.querySelector(".primary")).toBeInTheDocument();
   });
 
   it("applies correct styles for secondary tabs", () => {
     const { container } = renderWithTheme(
-      <Tabs items={arrayItems} type={TabsTypes.Secondary} />,
+      <Tabs
+        items={arrayItems}
+        type={TabsTypes.Secondary}
+        selectedItemId="tab1"
+      />,
     );
     expect(container.querySelector(".secondary")).toBeInTheDocument();
   });
   it("shows badge when provided", () => {
     const itemsWithBadge = [{ ...arrayItems[0], badge: "New" }, arrayItems[1]];
-    renderWithTheme(<Tabs items={itemsWithBadge} />);
+    renderWithTheme(<Tabs items={itemsWithBadge} selectedItemId="tab1" />);
     expect(screen.getByText("New")).toBeInTheDocument();
   });
 
   it("applies sticky styles when stickyTop is provided", () => {
     const { container } = renderWithTheme(
-      <Tabs items={arrayItems} stickyTop="50px" />,
+      <Tabs items={arrayItems} stickyTop="50px" selectedItemId="tab1" />,
     );
     const stickyElement = container.querySelector(".sticky");
     expect(stickyElement).toHaveStyle({ top: "50px" });

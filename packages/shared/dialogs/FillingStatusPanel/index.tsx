@@ -132,8 +132,10 @@ export const FillingStatusPanel = ({
           />
         ) : null}
         <div className={styles.fileInfo}>
-          <PDFIcon />
-          <Text className={styles.fileName}>{fileName}</Text>
+          <PDFIcon className={styles.pdfIcon} />
+          <Text title={fileName} truncate className={styles.fileName}>
+            {fileName}
+          </Text>
           {fillingStatus ? (
             <div
               title={fileStatusTitle}

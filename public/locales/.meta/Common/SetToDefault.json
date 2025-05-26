@@ -1,0 +1,296 @@
+{
+  "key_path": "SetToDefault",
+  "content": "Set to default",
+  "content_en_sha1_hash": "e0512dbd102921703bbdd2a1da2632a0ca371f46",
+  "created_at": "2025-05-19T21:30:48.606Z",
+  "updated_at": "2025-05-26T07:57:32.202Z",
+  "comment": {
+    "text": "This translation key \"SetToDefault\" is used to display a label that indicates setting the quota to its default value. It is typically displayed in UI elements such as menus or buttons, prompting users to reset their quota to the default configuration. The exact wording and appearance may vary depending on the context in which it appears, but its purpose remains consistent.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T08:41:38.558Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/SpaceQuota/index.js",
+      "line_number": 70,
+      "context": "if (item.isCustomQuota)\n items?.splice(1, 0, {\n id: \"info-account-quota_no-quota\",\n key: \"default-quota\",\n label: t(\"Common:SetToDefault\"),\n action: \"default\",\n });\n \n return items;\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 2301,
+      "context": "case \"default-quota\":\n if (!this.isAvailableOption(\"default-quota\")) return null;\n return {\n id: \"menu-default-quota\",\n key: \"default-quota\",\n label: t(\"Common:SetToDefault\"),\n iconUrl: DefaultQuotaReactSvgUrl,\n onClick: () => this.resetRoomQuota(selection, t),\n disabled: !showStorageInfo,\n };\n case \"disable-quota\":",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contacts/HeaderMenuStore.ts",
+      "line_number": 238,
+      "context": "onClick: () => changeUserQuota(selection as unknown as TUser[]),\n },\n {\n id: \"menu-default-quota\",\n key: \"default-quota\",\n label: t(\"Common:SetToDefault\"),\n disabled: !hasUsersToResetQuota || isGuests,\n iconUrl: DefaultQuotaReactSvgUrl,\n onClick: () => this.resetUserQuota(selection as unknown as TUser[], t),\n },\n {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'تعيين الاعدادات الافتراضية' is too literal and verbose for the short English phrase 'Set to default'. It translates to 'Setting the default settings'. A more concise and natural translation would be preferred.",
+          "suggestion": "إعادة الضبط"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Defolta ayarlayın' is understandable, a more natural and accurate translation of 'Set to default' in Azerbaijani would be 'Sıfıra qaytar' or 'Varsayılan olara qoy'. 'Ayarlayın' implies an adjustment, whereas 'Set to default' usually means returning to a predefined state.",
+          "suggestion": "Sıfıra qaytar"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Nastavení na výchozí hodnotu' is a bit verbose for a simple 'Set to default'. A more concise and natural translation would be better.",
+          "suggestion": "Obnovení na výchozí"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The current translation is quite literal. A more natural phrasing would be preferable for a user interface element.",
+          "suggestion": "Výchozí nastavení"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, the translation 'Ορισμός σε προεπιλεγμένη τιμή' is a bit literal and verbose for a simple 'Set to default'. It sounds overly formal for most user interface contexts.",
+          "suggestion": "Αναφορά σε προεπιλογή"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation is a full sentence. User interface labels are usually shorter and more concise.",
+          "suggestion": "Consider shortening to a more label-like phrase."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Սահմանել լռելյայն\" while technically correct, is overly formal and not the most natural way to express \"Set to default\" in Armenian. It sounds stilted and might confuse users.",
+          "suggestion": "Consider a more common and user-friendly translation such as \"Դնել լռելյայն\" or \"Վերականգնել լռելյայն\".  The best option depends on the specific context and desired tone."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation 'Ustawiono wartość domyślną' translates to 'The default value was set'. While not entirely wrong, it's more literal than the English 'Set to default'. A more natural translation would be 'Przywróć domyślne ustawienia' or 'Domyślne ustawienia'.",
+          "suggestion": "Przywróć domyślne ustawienia"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Setează valorile prestabilite' is a literal translation and doesn't convey the intended meaning of 'Set to default' as naturally in Romanian. It's a bit too formal and verbose.",
+          "suggestion": "Consider alternatives like 'Resetează la valoarea implicită' or 'Restabilește valorile implicite'. 'Resetează la implicit' is also a good, concise option."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'පෙරනිමියට සකසන්න' while technically conveying a meaning related to 'set to default,' isn't the most natural or idiomatic way to express it in Sinhala. A more common and clear translation would be something like 'ලක්ෂණික අගයයන් සකසන්න' (Lakshanika agayān sakasannā) or 'පොඩි තට්ටුවට ගන්න' (Podī taṭṭuwata gaṇnā).",
+          "suggestion": "Consider 'ලක්ෂණික අගයයන් සකසන්න' or 'පොඩි තට්ටුවට ගන්න' for a more natural and commonly used translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Nastaviť na predvolené nastavenia' is a bit verbose and literal. A more natural Slovak translation would be shorter and more idiomatic.",
+          "suggestion": "Nastaviť na štandardné nastavenia"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Постави на подразумевано' while understandable, isn't the most natural or precise translation of 'Set to default'. 'Подразумевано' refers more to a 'default value' rather than the action of setting something to the default.",
+          "suggestion": "Поврати на подразумеване (Povrati na podrazumevano) or Подеси на подразумевано (Podesi na podrazumevano) would be more accurate and idiomatic translations."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Postavi na podrazumevano\" is understandable, a more accurate and natural translation of \"Set to default\" would be \"Podesi na podrazumevane\" or \"Postavi na početne vrednosti\". \"Postavi\" implies a more forceful action of placing something, while \"podesi\" implies adjusting it to a default state. \"Postavi na početne vrednosti\" is also common and conveys the meaning precisely.",
+          "suggestion": "Podesi na podrazumevane"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

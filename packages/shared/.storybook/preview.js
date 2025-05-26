@@ -15,7 +15,18 @@ import darkTheme from "./darkTheme";
 import StorybookGlobalStyles from "./styles/StorybookGlobalStyles";
 import i18n from "./i18n";
 
-initialize();
+initialize({
+  onUnhandledRequest: (req, print) => {
+    const url = new URL(req.url);
+
+    // Ignore requests to fetch static images.
+    if (url.pathname.includes("/images/")) {
+      return;
+    }
+
+    print.warning();
+  },
+});
 
 const preview = {
   globalTypes,

@@ -120,6 +120,7 @@
   }
 
   @include common-input-styles.common-input-styles;
+  -webkit-background-clip: unset !important;
 
   &:focus-within {
     border-color: var(--input-block-border-color);

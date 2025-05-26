@@ -28,6 +28,7 @@ import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { isMobile } from "react-device-detect";
+import { ReactSVG } from "react-svg";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import {
   ContextMenuButton,
@@ -37,6 +38,7 @@ import {
   ContextMenu,
   ContextMenuRefType,
 } from "@docspace/shared/components/context-menu";
+import { Link, LinkType } from "@docspace/shared/components/link";
 import { FolderTileProps } from "./FolderTile.types";
 import { hasOwnProperty } from "../../../utils/object";
 import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
@@ -44,6 +46,8 @@ import { HeaderType } from "../../context-menu/ContextMenu.types";
 import { Loader, LoaderTypes } from "../../loader";
 
 import styles from "./FolderTile.module.scss";
+
+const svgLoader = () => <div style={{ width: "96px" }} />;
 
 export const FolderTile = ({
   item,
@@ -66,6 +70,8 @@ export const FolderTile = ({
   isActive,
   isEdit,
   forwardRef,
+  isBigFolder,
+  temporaryIcon,
 }: FolderTileProps) => {
   const childrenArray = React.Children.toArray(children);
   const [FolderTileContent] = childrenArray;
@@ -178,11 +184,13 @@ export const FolderTile = ({
     [styles.isDragging]: isDragging,
     [styles.isActive]: isActive,
     [styles.isEdit]: isEdit,
+    [styles.isBig]: isBigFolder,
   });
 
   const iconContainerClassNames = classNames(styles.iconContainer, {
     [styles.isDragging]: isDragging,
     [styles.inProgress]: inProgress,
+    [styles.checked]: checked,
   });
 
   const iconClassNames = classNames(styles.icon, {
@@ -193,6 +201,24 @@ export const FolderTile = ({
     [styles.checked]: checked,
   });
 
+  const fileTileTopClassNames = classNames(styles.fileTileTop);
+
+  const fileTileBottomClassNames = classNames(styles.fileTileBottom, {
+    [styles.isBig]: isBigFolder,
+    [styles.checked]: checked,
+  });
+
+  const iconFolder = (
+    <Link type={LinkType.page}>
+      <ReactSVG
+        className={styles.temporaryIcon}
+        src={temporaryIcon ?? ""}
+        loading={svgLoader}
+        data-testid="file-thumbnail"
+      />
+    </Link>
+  );
+
   return (
     <div
       className={folderTileClassNames}
@@ -200,59 +226,70 @@ export const FolderTile = ({
       ref={forwardRef}
       onContextMenu={onContextMenu}
     >
-      {element && !isEdit ? (
-        !inProgress ? (
-          <div className={iconContainerClassNames}>
-            <div className={iconClassNames} onClick={onFolderIconClick}>
-              {element}
-            </div>
-            <Checkbox
-              isChecked={checked}
-              onChange={changeCheckbox}
-              className={checkboxClassNames}
-              isIndeterminate={indeterminate}
-            />
+      {isBigFolder ? (
+        <>
+          <div className={fileTileTopClassNames}>{iconFolder}</div>
+          <div className={classNames(styles.icons, styles.isBadges)}>
+            {badges}
           </div>
-        ) : (
-          <Loader
-            className={styles.loader}
-            color=""
-            size="20px"
-            type={LoaderTypes.track}
-          />
-        )
+        </>
       ) : null}
 
-      <div className={styles.content}>
-        {FolderTileContent}
-        {badges}
-      </div>
+      <div className={fileTileBottomClassNames}>
+        {element && !isEdit ? (
+          !inProgress ? (
+            <div className={iconContainerClassNames}>
+              <div className={iconClassNames} onClick={onFolderIconClick}>
+                {element}
+              </div>
+              <Checkbox
+                isChecked={checked}
+                onChange={changeCheckbox}
+                className={checkboxClassNames}
+                isIndeterminate={indeterminate}
+              />
+            </div>
+          ) : (
+            <Loader
+              className={styles.loader}
+              color=""
+              size="20px"
+              type={LoaderTypes.track}
+            />
+          )
+        ) : null}
 
-      <div className={styles.optionButton}>
-        {renderContext ? (
-          <ContextMenuButton
-            isFill
-            className={classNames(styles.expandButton, "expandButton")}
-            directionX={contextMenuDirection}
-            getData={getOptions}
-            displayType={ContextMenuButtonDisplayType.toggle}
-            onClick={(e) => {
-              e.stopPropagation();
-              onContextMenu(e);
-            }}
-            title={t("Translations:TitleShowActions")}
+        <div className={styles.content}>
+          {FolderTileContent}
+          {isBigFolder ? null : badges}
+        </div>
+
+        <div className={styles.optionButton}>
+          {renderContext ? (
+            <ContextMenuButton
+              isFill
+              className={classNames(styles.expandButton, "expandButton")}
+              directionX={contextMenuDirection}
+              getData={getOptions}
+              displayType={ContextMenuButtonDisplayType.toggle}
+              onClick={(e) => {
+                e.stopPropagation();
+                onContextMenu(e);
+              }}
+              title={t("Translations:TitleShowActions")}
+            />
+          ) : (
+            <div className="expandButton" />
+          )}
+          <ContextMenu
+            model={contextOptions}
+            onHide={hideContextMenu}
+            getContextModel={getContextModel}
+            ref={cmRef}
+            header={contextMenuHeader}
+            withBackdrop
           />
-        ) : (
-          <div className="expandButton" />
-        )}
-        <ContextMenu
-          model={contextOptions}
-          onHide={hideContextMenu}
-          getContextModel={getContextModel}
-          ref={cmRef}
-          header={contextMenuHeader}
-          withBackdrop
-        />
+        </div>
       </div>
     </div>
   );

@@ -36,6 +36,8 @@ import { FolderTile } from "./FolderTile";
 import { FolderTileProps } from "./FolderTile.types";
 import { TileContent } from "../tile-content/TileContent";
 
+import ImageReactSvgUrl from "PUBLIC_DIR/images/icons/96/folder.svg?url";
+
 const element = (
   <ReactSVG
     className="folder-icon"
@@ -140,6 +142,35 @@ export const Default: Story = {
     docs: {
       description: {
         story: "Basic folder tile with selection functionality",
+      },
+    },
+  },
+};
+
+export const Big: Story = {
+  render: Template,
+  args: {
+    item: {
+      id: "folder-1",
+      title: "My Folder",
+      isFolder: true,
+      contextOptions: ["copy-to", "move-to"],
+    },
+    element,
+    contextOptions,
+    badges,
+    isBigFolder: true,
+    temporaryIcon: ImageReactSvgUrl,
+    onSelect: () => {},
+    setSelection: () => {},
+    withCtrlSelect: () => {},
+    withShiftSelect: () => {},
+    getContextModel: () => contextOptions,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Big folder tile with selection functionality",
       },
     },
   },

@@ -3,7 +3,7 @@
   "content": "Room moved to Archive",
   "content_en_sha1_hash": "be399613d005b2149a0e55debe139aa519ff168c",
   "created_at": "2025-05-19T21:30:54.901Z",
-  "updated_at": "2025-05-22T11:56:37.600Z",
+  "updated_at": "2025-05-26T07:57:32.432Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a room has been moved to an archive state in the app's information panel and portal settings. It appears on buttons or dialogs related to managing rooms and is likely used for notifications or confirmation prompts. Translators should aim to provide a clear and concise description of this action in different languages.",
     "is_auto": true,
@@ -11,10 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\History\\useFeedTranslation.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 285,
       "context": "case \"RoomDenyDownloadEnabled\":\n return t(\"InfoPanel:RoomDenyDownloadEnabled\");\n case \"RoomDenyDownloadDisabled\":\n return t(\"InfoPanel:RoomDenyDownloadDisabled\");\n case \"RoomArchived\":\n return t(\"InfoPanel:RoomArchived\");\n case \"RoomUnarchived\":\n return t(\"InfoPanel:RoomUnarchived\");\n case \"RoomIndexExportLocation\":\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
+      "line_number": 80,
+      "context": "return t(\"FolderMoved\");\n case WebhookTriggers.RoomCreated:\n return t(\"Files:RoomCreated\");\n case WebhookTriggers.RoomUpdated:\n return t(\"RoomUpdated\");\n case WebhookTriggers.RoomArchived:\n return t(\"RoomArchived\");\n case WebhookTriggers.RoomDeleted:\n return t(\"RoomDeleted\");\n case WebhookTriggers.RoomRestored:\n return t(\"RoomRestored\");",
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -96,7 +102,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ルームをアーカイブに移動されました' is technically correct but sounds overly formal and passive for a UI message. It implies someone *moved* the room, rather than the room being moved *to* the archive. A more natural and common phrasing would convey the action as the room automatically being archived.",
+          "description": "The translation \"ルームをアーカイブに移動されました\" literally translates to \"The room was moved to the archive.\" While not entirely wrong, it sounds passive and slightly unnatural in this context. A more natural phrasing would convey that the action has been taken by someone.",
+          "suggestion": "ルームをアーカイブしました"
+        },
+        {
+          "type": "grammar",
+          "description": "The passive voice \"移動されました\" (was moved) is grammatically correct but doesn't sound natural in a UI message. A more direct statement is preferred.",
           "suggestion": "ルームをアーカイブしました"
         }
       ],
@@ -147,7 +158,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sala este mutată în Arhivă' is a literal translation and doesn't quite convey the meaning of 'Room moved to Archive' in a user-friendly way. 'Mutată' implies an action performed *on* the room, whereas 'Archive' typically suggests the room is *being* archived, or has been archived.",
+          "suggestion": "Sala a fost arhivată"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -162,13 +179,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"කාමරය සංරක්ෂිතයට ගෙන යන ලදී\" is a bit too literal and verbose. It translates to \"The room is taken to archive.\" A more natural and concise translation would be better.",
-          "suggestion": "කාමරය සංරක්ෂිතයට යවා ඇත"
+          "description": "The translation 'කාමරය සංරක්ෂිතයට ගෙන යන ලදී' literally translates to 'The room is being taken to archive.' While understandable, it's a bit verbose and awkward for a UI message. A more natural and concise translation would be better.",
+          "suggestion": "කාමරය සංරක්ෂිත කරන ලදී (Kamara sanskrshitha karana ladi) - The room has been archived."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The word 'ගෙන යන' (gena yan) which means 'taken' or 'taken to' sounds somewhat awkward in this context. It's more like a process description, while 'moved' in the English implies a final state.",
-          "suggestion": "කාමරය සංරක්ෂිතයට යවා ඇත"
+          "type": "formatting",
+          "description": "The passive voice ('is being taken') is less common in Sinhala UI translations. A more direct active voice would be preferred.",
+          "suggestion": "කාමරය සංරක්ෂිත කරන ලදී (Kamara sanskrshitha karana ladi)"
         }
       ],
       "approved_at": null
@@ -191,8 +208,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Соба премјештена у Архиву\" is not an accurate translation of \"Room moved to Archive.\" The verb \"premještena\" (moved) implies a more permanent or official transfer than the English implies. A better translation would convey the temporary or archival nature of the action.",
+          "description": "The Serbian translation \"Соба премјештена у Архиву\" is not an accurate translation of \"Room moved to Archive.\"  \"Премјештена\" implies a forceful movement. A more appropriate translation would convey the idea of being moved or archived.",
           "suggestion": "Соба пребачена у архиву"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'Архиву' is technically correct (locative case), 'Архиви' is more commonly used and sounds more natural in this context.",
+          "suggestion": "Соба пребачена у Архиви"
         }
       ],
       "approved_at": null
@@ -203,8 +225,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Soba premještena u Arhivu\" is not entirely accurate. While 'premještena' correctly implies movement, 'Arhivu' is in the dative case. The correct case should be nominative, as it's the subject of the statement.",
-          "suggestion": "Soba je premještena u Arhiv."
+          "description": "The translation 'Soba premještena u Arhivu' is not ideal. 'Premještena' implies a physical movement. 'Room moved to Archive' implies the room's status has changed, not necessarily that it was physically moved. 'Arhivu' is in the dative case, which isn't necessary here. A more accurate translation would convey the change in status.",
+          "suggestion": "Soba arhivirana"
+        },
+        {
+          "type": "grammar",
+          "description": "The word 'Arhivu' is in the dative case which is not required in this context.  It suggests movement *to* the archive.",
+          "suggestion": "Arhiv"
         }
       ],
       "approved_at": null
@@ -233,7 +260,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"房间已移动到存档\" is not the most natural or accurate rendering of \"Room moved to Archive.\" \"移动\" (move) implies an action performed *by* someone. \"存档\" (archive) is correct but a more natural translation would suggest a change in status or location.",
+          "description": "The translation \"房间已移动到存档\" implies the room was physically moved. The English 'Room moved to Archive' signifies it's been archived, not physically relocated.  \"存档\" focuses on the archiving process, not the movement itself.",
           "suggestion": "房间已存档"
         }
       ],

@@ -24,46 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { globalColors } from "../../themes";
+import { http, HttpResponse } from "msw";
 
-const StyledPreparationPortal = styled.div<{
-  errorMessage?: boolean;
-  isDialog?: boolean;
-}>`
-  width: 100%;
+import { BASE_URL } from "../../utils";
 
-  #header {
-    font-size: 23px;
-  }
-  #text {
-    color: ${globalColors.gray};
-    font-size: 13px;
-    line-height: 20px;
-    max-width: 480px;
-  }
-  .logo-wrapper {
-    ${(props) => props.isDialog && "display: none"};
-  }
+const url = `${BASE_URL}/portal/getrestoreprogress`;
 
-  #container {
-    ${(props) => props.isDialog && "margin-top:0"};
-  }
-  .preparation-portal_body-wrapper {
-    margin-bottom: 24px;
-    width: 100%;
-    max-width: ${(props) => (props.errorMessage ? "560px" : "480px")};
-    box-sizing: border-box;
-    align-items: center;
-    .preparation-portal_error {
-      text-align: center;
-      color: ${(props) => props.theme.preparationPortalProgress.errorTextColor};
+export const createGetRestoreProgressHandler = ({
+  progress = 0,
+  error,
+}: {
+  progress?: number;
+  error?: string;
+}) =>
+  http.get(url, () => {
+    const response: { progress: number; error?: string } = { progress };
+
+    if (error) {
+      response.error = error;
     }
-  }
 
-  .restoring-portal {
-    height: 100%;
-  }
-`;
-
-export { StyledPreparationPortal };
+    return HttpResponse.json({ response });
+  });

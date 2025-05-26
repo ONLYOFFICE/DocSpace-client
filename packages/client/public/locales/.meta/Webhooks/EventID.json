@@ -3,7 +3,7 @@
   "content": "Event ID",
   "content_en_sha1_hash": "894b1c749d25e8c3e7119c9df315a6b3f7fc899a",
   "created_at": "2025-05-19T21:30:49.709Z",
-  "updated_at": "2025-05-21T01:14:42.596Z",
+  "updated_at": "2025-05-24T02:28:39.219Z",
   "comment": {
     "text": "This translation key is used to display the \"Event ID\" label in various UI elements, such as the Portal Settings page and Webhook History table. The key provides the English content of this label, which is used to help users understand the purpose of an event identifier.",
     "is_auto": true,
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Hadisə\" can mean \"event\", \"ID\" is more accurately translated as \"Kimlik\" or \"Rezvə\" in Azerbaijani when referring to an identifier. \"Hadisə ID\" is a literal translation that may not be idiomatic.",
-          "suggestion": "Consider \"Hadisə Kimlik\" or \"Hadisə Rezvə\"."
+          "description": "While \"Hadisə\" can mean \"event,\" \"ID\" is better translated as \"İD\" to maintain consistency with English terminology and common usage in technical contexts. \"Hadisə ID\" is understandable but less precise.",
+          "suggestion": "Hadisə İD"
         }
       ],
       "approved_at": null
@@ -54,7 +54,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Идентификация на събитие\" is a literal translation of 'Identification of Event' which is not the most natural or accurate way to translate 'Event ID'. A more idiomatic translation would be 'ИД на събитие' or 'Номер на събитие'.",
+          "description": "While \"Идентификация на събитие\" is technically correct, it's a bit formal and literal for \"Event ID.\" A more natural and common translation would be something like \"ИД на събитие\" or \"Номер на събитие\". \"Идентификация\" implies a process of identification, while \"Event ID\" simply refers to a unique identifier.",
           "suggestion": "ИД на събитие"
         }
       ],
@@ -87,7 +87,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Tapahtuma\" correctly translates to \"Event,\" the direct translation of \"ID\" as \"ID\" is not ideal in Finnish. A more natural and idiomatic translation would be \"Tunnus\".",
+          "suggestion": "Tunnus"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -102,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Միջոցառման' translates to 'Event', the term 'ID' should be translated as 'Համազարկային ծածկույց' or a more common equivalent like 'նույնացուցչային համար' for better understanding in the context of a webhook.",
-          "suggestion": "Միջոցառման Համազարկային ծածկույց"
+          "description": "While 'Միջոցառման ID' is a literal translation of 'Event ID', it may not be the most natural or idiomatic way to express it in Armenian, especially in a technical context like webhooks. A more suitable translation might consider the context and common terminology.",
+          "suggestion": "Consider alternatives like 'Դեպքի ID' or 'Իրադարձության ID' depending on the specific nuance intended. 'Դեպք' is often used for events in a technical sense."
         }
       ],
       "approved_at": null
@@ -129,7 +135,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Lao translation 'ID ເຫດການ' uses the common abbreviation 'ID' which might be confusing for users unfamiliar with English technical terminology. While understandable, it's technically a transliteration of the English 'ID'.",
+          "suggestion": "Consider using a fully translated term like 'ລະຫັດເຫດການ' (rahat hetkan) if appropriate for the context, or if retaining the abbreviation is necessary, ensure it is introduced and explained elsewhere."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -168,7 +180,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ID-ul eveniment\" is understandable, a more natural Romanian translation for 'Event ID' would be 'ID eveniment'. The use of the definite article 'ul' implies a specific event ID, which might not always be the case.",
+          "description": "The translation 'ID-ul eveniment' is not the most natural or accurate translation of 'Event ID'. While technically correct, it sounds somewhat awkward in Romanian. A more natural translation would be 'ID eveniment' or 'Identificator eveniment'.",
           "suggestion": "ID eveniment"
         }
       ],
@@ -186,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"සිදුවීමේ හැඳු.\" while understandable, isn't the most natural or accurate translation of \"Event ID.\" \" හැඳුම\" (haduma) translates to 'identity' or 'identification'. While it conveys a related concept, \"Event ID\" usually refers to a unique identifier. A more accurate translation would consider terms related to 'identifier' or 'code'.",
-          "suggestion": "සිදුවීමේ හැඳුම්getNumber (Siduvime hadumgetNumber)"
+          "description": "The translation 'සිදුවීමේ හැඳු.' while literally meaning 'occurrence identifier', doesn't fully capture the meaning of 'Event ID' in the context of webhooks. 'Event ID' typically refers to a unique identifier for a specific event.",
+          "suggestion": "සිදුවීමේ අංකය (Sidhuwimē Ankamaya) - This more closely conveys the meaning of a unique event number or identifier."
         }
       ],
       "approved_at": null
@@ -210,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'ID догађаја' is understandable, a more precise and idiomatic translation of 'Event ID' in Serbian (Cyrillic) would be 'Идентификациони број догађаја' or simply 'Број догађаја'. 'ID догађаја' feels like a direct transliteration and not a natural Serbian phrasing.",
-          "suggestion": "Идентификациони број догађаја"
+          "description": "The translation 'ID догађаја' while understandable, isn't the most natural or accurate translation of 'Event ID' in Serbian (Cyrillic). A more common and idiomatic translation would be 'Број догађаја' or 'Идентификациони број догађаја'.",
+          "suggestion": "Број догађаја"
         }
       ],
       "approved_at": null

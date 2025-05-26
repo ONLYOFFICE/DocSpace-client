@@ -3,7 +3,7 @@
   "content": "Folder deleted",
   "content_en_sha1_hash": "80fa7315b0ebe24ae6902123622edb0e1f4c01f3",
   "created_at": "2025-05-19T21:30:49.752Z",
-  "updated_at": "2025-05-21T01:09:58.412Z",
+  "updated_at": "2025-05-24T02:24:05.363Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -149,28 +149,28 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ෆෝල්ඩරය' is a correct transliteration of 'Folder'.",
+          "description": "The word 'ෆෝල්ඩරය' (folder) is spelled correctly.",
           "suggestion": null
         },
         {
           "type": "spelling",
-          "description": "The word 'මකන' is a correct transliteration of 'deleted'.",
+          "description": "The word 'මකන' (deleted) is spelled correctly.",
           "suggestion": null
         },
         {
           "type": "spelling",
-          "description": "The word 'ලදි' is a correct suffix for the past tense in Sinhala, though it may sound a bit informal depending on the context. ",
+          "description": "The word 'ලදි' (past tense marker) is spelled correctly.",
           "suggestion": null
         },
         {
           "type": "grammar",
-          "description": "While grammatically correct, the phrasing 'ෆෝල්ඩරය මකන ලදි' is a more literal translation. A more natural-sounding translation could be 'ෆෝල්ඩරය ඉවත් කරන ලදි' (Folder removed).",
-          "suggestion": "ෆෝල්ඩරය ඉවත් කරන ලදි"
+          "description": "While grammatically correct, the phrasing 'ෆෝල්ඩරය මකන ලදි' can sound slightly awkward. A more natural phrasing might be 'ෆෝල්ඩරය මකවූ' or 'ෆෝල්ඩරය මකාලා'.",
+          "suggestion": "ෆෝල්ඩරය මකවූ"
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'මකන' means 'delete', in many contexts 'ඉවත් කරන' (remove) is preferred to express deletion of a folder, particularly in a technical/UI context.",
-          "suggestion": "ෆෝල්ඩරය ඉවත් කරන ලදි"
+          "description": "The English 'Folder deleted' is a simple statement of fact. The Sinhala translation 'ෆෝල්ඩරය මකන ලදි' (Folder was deleted) implies an ongoing or incomplete action, which is not the intended meaning. A more accurate translation would be a simple declarative statement.",
+          "suggestion": "ෆෝල්ඩරය මකලා"
         }
       ],
       "approved_at": null
@@ -193,8 +193,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Фасцикла обрисана\" uses the word \"фасцикла\" (fascikla) which translates to 'folder' but implies a more formal or bound collection of documents. The more common and natural translation for 'folder' in this context would be 'папка'.",
-          "suggestion": "Папка обрисана"
+          "description": "The Serbian translation 'Фасцикла обрисана' is not the most natural or accurate translation of 'Folder deleted'. 'Фасцикла' is an archaic or formal term for folder, and 'обирисана' while technically correct, sounds stiff. A more common and natural translation would use 'mapa' for folder.",
+          "suggestion": "Мапа обрисана"
         }
       ],
       "approved_at": null

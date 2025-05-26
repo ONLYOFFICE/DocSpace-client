@@ -3,7 +3,7 @@
   "content": "Please specify the object attribute that corresponds to the group name.",
   "content_en_sha1_hash": "62b46deb9193ad40e2be2bff4f213d28f12d1419",
   "created_at": "2025-05-19T21:30:54.223Z",
-  "updated_at": "2025-05-21T08:17:57.039Z",
+  "updated_at": "2025-05-24T08:30:48.326Z",
   "comment": {
     "text": "This translation key is used to display a tooltip that informs users about the required attribute for LDAP group name input. It appears as a tooltip when the \"LDAP Group Name Attribute\" field has an error and needs user attention. Translators should provide a clear explanation of this concept in their native language to assist users with LDAP configuration.",
     "is_auto": true,
@@ -30,8 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"الرجاء تحديد ميزة الهدف التي تتوافق مع اسم المجموعة.\" is not the most natural or accurate translation of 'Please specify the object attribute that corresponds to the group name.' While technically correct, 'ميزة الهدف' (objective feature) is a somewhat awkward phrasing. A more natural translation would focus on 'attribute' directly.",
-          "suggestion": "الرجاء تحديد سمة الكائن التي تتوافق مع اسم المجموعة."
+          "description": "The translation 'الرجاء تحديد ميزة الهدف التي تتوافق مع اسم المجموعة.' is a literal translation that doesn't quite capture the intended meaning. 'ميزة الهدف' (mazehdif) can be interpreted as 'target feature' which is not accurate in this context. The user is being asked to specify an attribute, not a target feature.",
+          "suggestion": "الرجاء تحديد السمة التي تتوافق مع اسم المجموعة."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the phrase 'ميزة الهدف' sounds slightly awkward and less natural in this context. A more fluent phrasing would improve the user experience.",
+          "suggestion": "الرجاء تحديد السمة التي تتوافق مع اسم المجموعة."
         }
       ],
       "approved_at": null
@@ -77,9 +82,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'joska' is a rare and somewhat archaic form. 'Joka' is the more common and preferred form.",
-          "suggestion": "Ole hyvä ja määrittele objektiattribuutti, joka vastaa ryhmän nimeä."
+          "type": "grammar",
+          "description": "The phrase 'joska vastaa' is grammatically awkward. 'Jos' would be a more natural fit.",
+          "suggestion": "Ole hyvä ja määrittele objektiattribuutti, jos vastaa ryhmän nimeä."
         }
       ],
       "approved_at": null
@@ -102,7 +107,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase \"Ti preghiamo di specificare\" is a somewhat formal way of saying 'Please specify'. While not incorrect, a more natural and common phrasing in modern Italian would be 'Specifica' or 'Per favore, specifica'.",
+          "description": "The phrase 'Ti preghiamo di specificare' is a bit formal and could be softened for better user experience. While grammatically correct, it sounds somewhat stiff.",
           "suggestion": "Specifica l'attributo dell'oggetto che corrisponde al nome del gruppo."
         }
       ],
@@ -162,8 +167,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Indicați atributul obiectului de grup care corespunde numelui de grup.' is a bit literal and could be more natural in Romanian. It translates to 'Indicate the group object attribute that corresponds to the group name.'",
-          "suggestion": "Vă rugăm să specificați atributul obiectului care corespunde numelui grupului."
+          "description": "The translation 'Indicați atributul obiectului de grup care corespunde numelui de grup' is a bit literal and clunky. While technically correct, it doesn't flow naturally in Romanian. A more natural phrasing would emphasize the attribute used *for* the group name.",
+          "suggestion": "Specificați atributul obiectului care conține numele grupului."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'de grup' is repeated. While not technically incorrect, it feels slightly redundant.",
+          "suggestion": "Consider restructuring to avoid repetition, e.g., 'Specificați atributul obiectului care reprezintă numele grupului.'"
         }
       ],
       "approved_at": null
@@ -179,14 +189,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The sentence structure is a bit awkward. 'කරුණාකරලා' (karunaakaralaa) is overly emphatic and not typically used in this context. The sentence reads as slightly unnatural.",
-          "suggestion": "කරුණාවන්තව, සමූහයේ නාමයට අනුරූප වස්තුවෙහි ගුණාංගය දක්වන්න."
+          "type": "spelling",
+          "description": "The word 'කරුවා' is unnecessary and makes the sentence sound awkward.  The intended verb is 'කරන්න'.",
+          "suggestion": "කරුණාකරලා -> කරුණාකරන්න"
         },
         {
-          "type": "spelling",
-          "description": "While technically correct, 'ගුණාංගය' (gunanganaya) can be replaced with a more common and natural term in this context.",
-          "suggestion": "කරුණාවන්තව, සමූහයේ නාමයට අනුරූප වස්තුවෙහි ලක්ෂණය දක්වන්න."
+          "type": "grammar",
+          "description": "The phrase 'වසතුවෙහි' is grammatically awkward. 'වස්තුවෙහි' is slightly better, but 'වස්තුව' is more natural in this context.",
+          "suggestion": "වසතුවෙහි -> වස්තුව"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'අනුරූප වස්තුවෙහි' feels too literal and stiff. A more natural translation of 'corresponds to' would be something like 'පාට'.",
+          "suggestion": "අනුරූප වස්තුවෙහි -> පාට"
         }
       ],
       "approved_at": null
@@ -209,8 +224,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'одговара' could be improved. While technically correct, 'пресликава' or 'одговара' (a slightly different usage) might be a better fit in this context, emphasizing the mapping or correspondence.",
-          "suggestion": "Молимо наведите атрибут објекта који пресликава име групе."
+          "description": "The word 'одговара' could be improved. While technically correct, it sounds a bit formal in this context. A more natural phrasing might be better.",
+          "suggestion": "Молимо наведите атрибут објекта који представља име групе."
         }
       ],
       "approved_at": null
@@ -230,13 +245,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'відповідає' is technically correct, but a more natural and slightly more accurate translation in this context might use 'що відповідає' to clarify that the attribute *corresponds* to the group name.",
-          "suggestion": "Вкажіть атрибут об'єкта, що відповідає імені групи."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

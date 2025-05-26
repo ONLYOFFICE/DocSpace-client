@@ -3,7 +3,7 @@
   "content": "{{productName}} configuration, room creation and administration, ability to invite and manage users in {{productName}} and in virtual rooms, ability to manage access rights.",
   "content_en_sha1_hash": "fb75adc08ce94edbe31a57607ff6d19a3e2d996d",
   "created_at": "2025-05-19T21:30:53.648Z",
-  "updated_at": "2025-05-21T06:48:14.316Z",
+  "updated_at": "2025-05-24T07:02:07.273Z",
   "comment": {
     "text": "This translation key is used to describe the administrator's role and responsibilities in managing {{productName}} settings, user access, and virtual room administration. It appears on a portal admin page or settings dialog.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation includes a comma after 'تكوين {{productName}}'. This is grammatically acceptable but could be adjusted for stylistic preference. Consider removing it for consistency with similar sentences.",
-          "suggestion": "تكوين {{productName}} وإنشاء الغرفة وإدارتها"
+          "description": "The Arabic translation maintains the use of \"{{productName}}\" as in the English content, which might not be the standard way to handle dynamic content placeholders in Arabic localization. It's best to review if a localized placeholder is more appropriate.",
+          "suggestion": "Review the use of \"{{productName}}\" and consider a localized placeholder or a more descriptive Arabic term."
         }
       ],
       "approved_at": null
@@ -41,9 +41,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ability to manage access rights\" is a bit awkward in Azerbaijani. It's more naturally expressed as 'giriş imkanlarını idarə etmək' or 'girişləri idarə etmək'.",
-          "suggestion": "{{productName}} tənzimləməsi, otağın yaradılması və idarə edilməsi, {{productName}} və virtual otaqlarda istifadəçiləri dəvət etmək və idarə etmək bacarığı, girişləri idarə etmək bacarığı."
+          "type": "formatting",
+          "description": "The translation retains the double curly braces, which are likely meant for placeholders in the original English.  These should be removed or handled appropriately based on the target platform.",
+          "suggestion": "Remove the double curly braces around productName and other placeholders. E.g., {{productName}} becomes [productName] or simply productName depending on the system."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'giriş hüquqlarını idarə etmək bacarığı' is slightly verbose and could be more concise.",
+          "suggestion": "Consider simplifying to 'giriş haqlarını idarə etmək'."
         }
       ],
       "approved_at": null
@@ -51,7 +56,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Bulgarian translation uses double curly braces '{{' and '}}' which are consistent with the English. This might need to be adjusted depending on the platform's rendering requirements.  It's important to confirm if this is intentional and if the platform correctly interprets it.",
+          "suggestion": "Verify if double curly braces are required for variable substitution in the target platform. If not, consider removing the extra braces."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -63,7 +74,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The German translation retains the double curly braces '{{productName}}'. While technically correct, it's generally better to align with the English source by checking if the template engine handles this correctly in the target system.  It might be preferable to remove the braces if the context doesn't require them.",
+          "suggestion": "Consider removing the extra double curly braces if the context allows.  Check how the template engine handles these."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -72,8 +89,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Greek translation retains the variable {{productName}} which should ideally be handled consistently with the English source.  While acceptable, it's best to check if this is the desired behavior in the application/UI context.",
-          "suggestion": "Verify the application's handling of {{productName}} and ensure consistency with the English source. Consider replacing with the actual product name or using a placeholder if needed."
+          "description": "The variable {{productName}} is not consistently formatted. It's enclosed in double quotes, which might be incorrect depending on the platform or localization system.",
+          "suggestion": "Ensure consistent formatting of variables, possibly removing the surrounding quotes if the platform handles them automatically."
         }
       ],
       "approved_at": null
@@ -89,9 +106,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Finnish translation maintains the double curly braces like the English, which is not standard Finnish sentence structure. It's likely intended to be directly translated, but using double curly braces in Finnish content is uncommon and may look strange.",
-          "suggestion": "Consider removing the extra curly braces around 'productName' to read more naturally.  For example, '{{productName}}-kokoonpano' could become 'productName-kokoonpano'."
+          "type": "incorrect_translation",
+          "description": "The phrase \"ability to invite and manage users\" is a bit awkward in the Finnish translation. \"Kyky kutsua ja hallita käyttäjiä\" literally translates to 'ability to invite and manage users'. A more natural Finnish phrasing would be 'mahdollisuus kutsua ja hallita käyttäjiä'.",
+          "suggestion": "mahdollisuus kutsua ja hallita käyttäjiä"
         }
       ],
       "approved_at": null
@@ -108,8 +125,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation retains the double curly braces `{{productName}}` which should be reviewed for consistency with the platform's rendering capabilities. It's possible these need to be removed or adjusted.",
-          "suggestion": "Review and adjust the curly braces if they are not intended for direct rendering in the Armenian context. Consider removing them or replacing with the actual product name based on the platform's requirements."
+          "description": "The Armenian translation includes double curly braces '{{ }}' around productName, mirroring the English. While not technically incorrect, it's unusual for Armenian translation and suggests a possible artifact from the original template.",
+          "suggestion": "Remove the unnecessary double curly braces around 'productName' in the Armenian translation. Assuming the system will handle the variable replacement correctly."
         }
       ],
       "approved_at": null
@@ -126,8 +143,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Japanese translation retains the double curly braces '{{productName}}'. While technically correct to represent a variable, it might be more natural to handle the variable substitution outside of the text itself depending on the platform.  Consider if this is desired.",
-          "suggestion": "Review the platform requirements for variable substitution. If the system can handle it separately, consider removing the braces."
+          "description": "The Japanese translation maintains the double curly braces {{productName}}, which is likely not desired in the final output. The English uses single braces. Should be reviewed to ensure consistency with the intended rendering.",
+          "suggestion": "Review rendering requirements and adjust the double braces to single braces if necessary."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"アクセス権の管理機能\" (access right management function) is a bit verbose. While technically correct, it could be simplified to just \"アクセス権の管理\" (access right management) for better flow and clarity in Japanese.",
+          "suggestion": "Change \"アクセス権の管理機能\" to \"アクセス権の管理\"."
         }
       ],
       "approved_at": null
@@ -138,8 +160,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Korean translation includes repetitive phrasing '기능'.  It's used multiple times to describe abilities. This makes the sentence feel clunky.",
-          "suggestion": "Refactor the sentence to remove the repetitive '기능' and streamline the wording. For example: '{{productName}} 구성, 방 생성 및 관리, {{productName}} 및 가상 방에서 사용자 초대 및 관리, 액세스 권한 관리'"
+          "description": "The Korean translation uses repetitive phrasing. The phrase \"기능\" (function) is repeated multiple times. It makes the text sound less natural.",
+          "suggestion": "Consider rephrasing to avoid repetition. For example: \"{{productName}} 구성, 방 생성 및 관리, {{productName}} 및 가상 방에서 사용자 초대 및 관리, 접근 권한 관리\"."
         }
       ],
       "approved_at": null
@@ -150,18 +172,18 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Lao translation uses a mix of Lao script and English variables. The English variable {{productName}} should ideally be integrated into the Lao text more seamlessly. Consider translating the variable itself if possible and appropriate for the context.",
-          "suggestion": "Consider translating {{productName}} into Lao or providing a more natural flow within the Lao sentence structure."
+          "description": "The Lao translation maintains the English structure of listing capabilities separated by commas, which can feel less natural in Lao. Consider rephrasing for better flow.",
+          "suggestion": "ການຄັອນຟິກ {{productName}}, ສ້າງ ແລະ ບໍລິຫານຫ້ອງ, ສາມາດເຊີນ ແລະ ຈັດການຜູ້ໃຊ້ໃນ {{productName}} ແລະ ຫ້ອງ virtual, ແລະ ຈັດການສິດການເຂົ້າເຖິງ."
         },
         {
           "type": "incorrect_translation",
-          "description": "“ຄວາມສາມາດໃນການເຊີນ ແລະຈັດການຜູ້ໃຊ້” can be interpreted as 'ability to invite and manage users'. While accurate, it's a slightly verbose translation. A more concise phrasing might be better.",
-          "suggestion": "Consider 'ການເຊີນ ແລະຈັດການຜູ້ໃຊ້' or a similar, shorter phrasing."
+          "description": "“configuration” translates to “ການຄັອນຟິກ” which is a transliteration and might not be fully understood. A more appropriate translation might be needed depending on the context of the product.",
+          "suggestion": "ການຕັ້ງຄ່າ {{productName}}"
         },
         {
-          "type": "incorrect_translation",
-          "description": "“ຫ້ອງ virtual” is a direct translation of 'virtual rooms'. While understandable, it sounds a little unnatural. The term 'Virtual Room' is often used in Lao as well.",
-          "suggestion": "Consider using 'ຫ້ອງ Virtual' or rewording the sentence to be more natural in Lao."
+          "type": "spelling",
+          "description": "“virtual” is transliterated and might be better translated to clarify it means 'digital'.",
+          "suggestion": "ຫ້ອງດິຈິຕອນ"
         }
       ],
       "approved_at": null
@@ -184,13 +206,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Polish translation lacks the surrounding double curly braces like the English version.  This is important for template variables.",
-          "suggestion": "Ensure the text inside {{productName}} is also enclosed in double curly braces in the Polish translation, for example: {{productName}}"
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'administrowanie nimi' is slightly awkward. While grammatically correct, it can be improved for flow.",
-          "suggestion": "Consider rewording 'administrowanie nimi' to 'zarządzanie nimi' for better readability and a more natural feel."
+          "description": "The Polish translation includes 'pokojach wirtualnych'. It would be more natural and consistent with the English to omit the 'wirtualnych' and simply use 'pokojach'.",
+          "suggestion": "Konfiguracja {{productName}}, tworzenie pokoi i administrowanie nimi, możliwość zapraszania użytkowników oraz zarządzania nimi w {{productName}} i pokojach."
         }
       ],
       "approved_at": null
@@ -198,13 +215,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Portuguese translation maintains the variable placeholders {{productName}} which are present in the English version. Ensure consistency in variable usage across all locales.",
-          "suggestion": "Verify that the variable {{productName}} is correctly implemented and displayed in the Portuguese user interface."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -231,18 +242,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'වින්‍යාසගත කිරීමට' might be unnecessarily complex. Consider a simpler term for 'configuration'.",
-          "suggestion": "වින්‍යාස කිරීම්"
+          "description": "The word 'අතථ්‍ය' (aththaya) is a bit archaic and could be replaced with a more common synonym for 'virtual'.",
+          "suggestion": "Consider using 'ඩිජිටල්' (digital) or 'වर्चুয়াল' (vachchual) instead of 'අතථ්‍ය'."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'අතථ්‍ය කාමර තුළට පරිශ්‍රීලකයින්ට' is a bit convoluted. It could be rephrased for clarity.",
-          "suggestion": "අතථ්‍ය කාමර තුළ පරිශ්‍රමිකයන්"
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, the sentence structure is long and could benefit from splitting into shorter, more readable sentences.",
-          "suggestion": "Consider breaking the sentence down: '{{productName}} වින්‍යාසගත කිරීම, කාමර සෑදීම සහ පරිපාලනය කිරීම. {{productName}} සහ අතථ්‍ය කාමර තුළ පරිශ්‍රීලකයින්ට ආරාධනය සහ කළමනාකරණයට හැකිය. ප්‍රවේශ අයිතීන් කළමනාකරණයට හැකිය.'"
+          "description": "The sentence structure regarding user management can be slightly improved for better readability.",
+          "suggestion": "Instead of '{{productName}} සහ අතථ්‍ය කාමර තුළට පරිශ්‍රීලකයින්ට ආරාධනය සහ කළමනාකරණයට', consider '{{productName}} සහ අතථ්‍ය කාමර තුළ පරිශ්‍රීලකයින්ට ආරාධනය කර කළමනාකරණය කිරීමට'."
         }
       ],
       "approved_at": null
@@ -259,13 +265,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Slovenian translation retains the double curly braces '{{productName}}'. While technically correct, it's standard practice to remove them in the translated text unless they are explicitly intended to remain as part of the user interface.",
-          "suggestion": "Remove the double curly braces: 'Konfiguracija productName, ustvarjanje in upravljanje sob, možnost vabljenja in upravljanja uporabnikov v productName in v virtualnih sobah, možnost upravljanja pravic za dostop.'"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'ability to manage access rights' is translated as 'možnost upravljanja pravic za dostop'. While understandable, a more precise translation might be 'upravljanje pravic dostopa' or 'možnost upravljanja pravic dostopa' for better flow and common usage.",
-          "suggestion": "Consider 'upravljanje pravic dostopa' or 'možnost upravljanja pravic dostopa'."
+          "description": "The Slovenian translation uses a comma (,) to separate list items, while English uses a comma and 'and'. This creates a slightly unnatural flow in Slovenian. While not strictly incorrect, it's less idiomatic.",
+          "suggestion": "Consider rephrasing to create a more natural flow, perhaps using 'in' or a more fluid sentence structure.  For example: 'Konfiguracija {{productName}}, ustvarjanje sob in upravljanje, možnost vabljenja in upravljanja uporabnikov v {{productName}} ter v virtualnih sobah, ter možnost upravljanja pravic za dostop.'"
         }
       ],
       "approved_at": null
@@ -276,18 +277,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The use of a single quote (') instead of double quotes (\"\") for the template placeholder {{productName}} is inconsistent with the English source.",
-          "suggestion": "Replace the single quote with a double quote: \"{{productName}}\""
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'соба' (soba) is grammatically incorrect. It should be in the genitive case to agree with 'администрација'.",
-          "suggestion": "Change 'соба' to 'собама'."
+          "description": "Inconsistent use of possessive case. The Serbian translation uses \"{{productName}}-а\" and \"{{productName}}-у\".  It should be consistent.",
+          "suggestion": "Consider using a consistent possessive case throughout the translation. Depending on the specific noun rules, it could be either \"{{productName}}-а\" or \"{{productName}}-е\"."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'позивања' translates more accurately as 'inviting' rather than 'calling'.",
-          "suggestion": "Replace 'позивања' with 'позва' (inviting)."
+          "description": "The Serbian word for 'room' is 'soba'. While technically correct, the context implies a 'virtual room'. A more appropriate translation might use a word that specifically conveys 'virtual' or 'online' room.",
+          "suggestion": "Consider translating 'room' as 'виртуелна соба' (virtual room) or 'онлајн соба' (online room) for better clarity."
         }
       ],
       "approved_at": null
@@ -298,13 +294,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "Inconsistent use of hyphens with productName. The English content uses curly braces {{productName}}, while the Serbian translation uses a hyphen.",
-          "suggestion": "Consider using curly braces {{productName}} in the Serbian translation to match the English original, or adjust the English source to be consistent with the Serbian format."
+          "description": "The repetition of 'mogućnost' (ability) makes the sentence sound awkward. Consider rephrasing.",
+          "suggestion": "Konfiguracija {{productName}}-a, kreiranje i administracija soba, mogućnost pozivanja i upravljanja korisnicima u {{productName}}-u i virtuelnim sobama, kao i upravljanje pravima pristupa."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'mogućnost pozivanja i upravljanja korisnicima' could be slightly improved for better flow. 'Pozivanje' literally means 'inviting'.",
-          "suggestion": "Consider rephrasing to 'mogućnost dodeljivanja i upravljanja korisnicima' (ability to assign and manage users) or 'mogućnost dodavanja i upravljanja korisnicima' (ability to add and manage users)."
+          "description": "The phrase 'u {{productName}}-u' sounds a little clunky. Consider using a slightly more natural phrasing.",
+          "suggestion": "u {{productName}} ili u virtuelnim sobama"
         }
       ],
       "approved_at": null
@@ -315,8 +311,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation includes double curly braces around 'productName' which matches the English, but might not be the desired formatting for the Turkish context. It depends on the application using this translation.",
-          "suggestion": "Check if double curly braces are needed in the Turkish context. If not, remove one set."
+          "description": "The translation maintains the double curly braces for product name placeholders, which aligns with the English source. This is acceptable.",
+          "suggestion": null
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'erişim haklarını yönetme yeteneği' is slightly awkward. A more natural phrasing would be 'erişim haklarını yönetebilme' or 'erişim haklarını yönetme olanağı'.",
+          "suggestion": "erişim haklarını yönetebilme"
         }
       ],
       "approved_at": null
@@ -327,8 +328,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'manage users' is translated as 'керувати ними'. While technically correct, 'керувати користувачами' would be more natural and precise in this context. Using 'керувати ними' is slightly ambiguous, as 'ними' could refer to something other than the users.",
-          "suggestion": "керувати користувачами"
+          "description": "The phrase 'manage them' (керувати ними) is slightly ambiguous and could be interpreted as managing the users themselves, rather than managing their access. A more precise translation might focus on managing user permissions.",
+          "suggestion": "керувати правами користувачів"
+        },
+        {
+          "type": "formatting",
+          "description": "The repetition of 'можливість' can sound clunky in Ukrainian. It could be rephrased to avoid redundancy.",
+          "suggestion": "створення та адміністрування кімнат, а також можливість запрошувати користувачів та керувати ними в {{productName}} та віртуальних кімнатах, і керувати правами доступу."
         }
       ],
       "approved_at": null
@@ -338,9 +344,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ability to manage access rights' is a bit stiff in Vietnamese. While technically correct, it lacks natural flow.",
-          "suggestion": "Consider rephrasing 'khả năng quản lý quyền truy cập' to something like 'khả năng kiểm soát quyền truy cập' or 'khả năng điều chỉnh quyền truy cập'. 'Kiểm soát' implies control, which aligns better with 'manage', while 'điều chỉnh' suggests adjustment, which is also a valid interpretation of 'manage access rights'."
+          "type": "formatting",
+          "description": "The translation maintains the double curly braces around {{productName}} which might not be desirable in Vietnamese. It's best to remove them unless they are explicitly required for the target platform's rendering.",
+          "suggestion": "Remove the double curly braces around {{productName}} if the platform doesn't require them: \"Đặt cấu hình {{productName}}, tạo phòng và quản trị, khả năng mời và quản lý người dùng trong {{productName}} và trong phòng ảo, khả năng quản lý quyền truy cập.\""
         }
       ],
       "approved_at": null
@@ -351,8 +357,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses a comma (、) to separate clauses, which can feel slightly less fluent in Chinese. Using a semicolon (；) or rephrasing the sentence for better flow would be preferable.",
-          "suggestion": "Consider rephrasing for better flow, e.g., '{{productName}}配置、房间创建和管理；在{{productName}}和虚拟房间中邀请和管理用户；管理访问权限。' or '{{productName}}配置，可进行房间创建和管理，在{{productName}}和虚拟房间中邀请和管理用户，并管理访问权限。'"
+          "description": "The translation uses repeated phrases '能力' (ability). While grammatically correct, it can sound redundant in Chinese. It's more natural to consolidate the phrases.",
+          "suggestion": "“{{productName}}配置、房间创建和管理、在{{productName}}和虚拟房间中邀请和管理用户，并管理访问权限。” ({{productName}} configuration, room creation and management, ability to invite and manage users in {{productName}} and virtual rooms, and manage access rights.)"
         }
       ],
       "approved_at": null

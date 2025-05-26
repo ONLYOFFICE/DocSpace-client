@@ -3,7 +3,7 @@
   "content": "Enter the user object attribute used to determine whether this user is a member of the groups.",
   "content_en_sha1_hash": "bfa3ad99e6bf224eef7059ceb7179482fd4d1859",
   "created_at": "2025-05-19T21:30:54.226Z",
-  "updated_at": "2025-05-21T08:17:38.232Z",
+  "updated_at": "2025-05-24T08:30:28.923Z",
   "comment": {
     "text": "This translation key describes a tooltip that will be displayed when users are entering an LDAP user attribute to determine group membership. The tooltip is used in the \"LdapUserAttribute\" field on the Portal Settings page, providing context for users as they enter their LDAP user attribute values.",
     "is_auto": true,
@@ -30,13 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'أدخل ميزة هدف المستخدم لتحديد ما إذا كان هذا المستخدم عضوًا في المجموعات' is not the most natural or accurate rendering of 'Enter the user object attribute used to determine whether this user is a member of the groups.' The term 'ميزة هدف' (feature target) is unusual and doesn't quite capture the meaning of 'attribute'.",
-          "suggestion": "أدخل سمة كائن المستخدم لتحديد ما إذا كان هذا المستخدم عضوًا في المجموعات."
+          "description": "The translation 'أدخل ميزة هدف المستخدم لتحديد ما إذا كان هذا المستخدم عضوًا في المجموعات.' is not the most natural or accurate translation. 'ميزة هدف' (feature target) is not the standard terminology for 'attribute' in this context. The word 'attribute' should be translated to something more suitable for describing LDAP attributes.",
+          "suggestion": "أدخل سمة المستخدم التي تحدد ما إذا كان هذا المستخدم عضوًا في المجموعات."
         },
         {
           "type": "spelling",
-          "description": "While 'عضوًا' is a valid word, in this context, 'عضواً' would be more commonly used. Although the difference is minimal, it's important for consistency and perceived accuracy.",
-          "suggestion": "أدخل سمة كائن المستخدم لتحديد ما إذا كان هذا المستخدم عضواً في المجموعات."
+          "description": "While technically correct, 'عضواً' is a less common and slightly more formal way to say 'member' in this context. A more common and natural word would be 'عضْوًا'.",
+          "suggestion": "عضوًا"
         }
       ],
       "approved_at": null
@@ -47,8 +47,18 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'istifadəçinin' is repeated and can be slightly improved for readability. While grammatically correct, it sounds a little clunky.",
-          "suggestion": "Bu istifadəçi qrupların üzvü olub-olmadığını müəyyən etmək üçün istifadə olunan istifadəçi obyekti xüsusiyyətini daxil edin."
+          "description": "The word 'istifadəçinin' should be 'istifadəçinin'",
+          "suggestion": "istifadəçinin"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'Bu istifadəçinin qrupların üzvü olub-olmadığını müəyyən etmək üçün...' is slightly awkward. A more natural phrasing might be 'Bu qrupların üzvü olub-olmadığını müəyyən etmək üçün istifadəçinin...'",
+          "suggestion": "Bu qrupların üzvü olub-olmadığını müəyyən etmək üçün istifadəçinin..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'user object attribute' is translated as 'istifadəçi obyekti xüsusiyyəti'. While technically correct, it might be more accurately translated as 'istifadəçi obyektinin xüsusiyyəti' to reflect possessive form.",
+          "suggestion": "istifadəçi obyektinin xüsusiyyəti"
         }
       ],
       "approved_at": null
@@ -74,7 +84,18 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Πληκτρολογήστε' could be improved for clarity in this context. While technically correct, 'Καθορίστε' or 'Εισάγετε' might be more natural.",
+          "suggestion": "Καθορίστε"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'που χρησιμοποιείται για να καθοριστεί' is a bit clunky. It could be more elegantly phrased.",
+          "suggestion": "που καθορίζει"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -101,13 +122,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'արդյոք' is archaic and not commonly used in modern Armenian. It implies a formal or literary tone that might be jarring in a technical tooltip.",
-          "suggestion": "Replace 'արդյոք' with 'եթե' or 'թե'."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'որն օգտագործվում է որոշելու համար' is a bit lengthy and could be simplified for clarity.",
-          "suggestion": "Consider rephrasing to 'այնպիսի օբյեկտի հատկանիշը, որն օգտագործվում է խմբի անդամությանը ստուգելու համար' or similar, though retaining the overall meaning."
+          "description": "The word 'արդյոք' is archaic and less common in modern Armenian. It's not incorrect, but less natural.",
+          "suggestion": "Consider using a more common equivalent like 'եթե' or 'թե'."
         }
       ],
       "approved_at": null
@@ -123,14 +139,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "spelling",
+          "description": "The word 'ユー ザ' is a misspelling of 'ユーザ'.",
+          "suggestion": "ユーザ"
+        },
+        {
           "type": "formatting",
-          "description": "There's an unnecessary space between 'ユー' and 'ザ' in 'ユー ザオブジェクト属性'.",
-          "suggestion": "ユーユーザオブジェクト属性"
+          "description": "There is an unnecessary space before 'ユーザ'.",
+          "suggestion": "このユーザがグループのメンバであるかどうかを判断するために使用されるユーザオブジェクト属性を入力してください。"
         },
         {
           "type": "grammar",
-          "description": "The phrasing 'このユーザがグループのメンバであるかどうかを判断するために使用される' is a bit long and could be more concise. While grammatically correct, it’s not the most natural flow.",
-          "suggestion": "このユーザがグループのメンバかどうかを判断するために使用するユーザオブジェクト属性を入力してください。"
+          "description": "While technically correct, the phrasing 'このユーザがグループのメンバであるかどうかを判断するために使用される' is a bit convoluted. A more natural phrasing could be used.",
+          "suggestion": "このユーザがどのグループのメンバーであるかを判断するために使用するユーザオブジェクト属性を入力してください。"
         }
       ],
       "approved_at": null
@@ -138,7 +159,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase \"해당 그룹의 멤버인지 여부를 확인하는 데\" is slightly awkward. A more natural phrasing would be \"해당 그룹의 구성원 여부를 확인하는 데\".",
+          "suggestion": "이 사용자가 해당 그룹의 구성원 여부를 확인하는 데 사용되는 사용자 개체 속성을 입력하세요."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -147,13 +174,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ໃສ່ຄຸນລັກສະນະຂອງຕົວແກ້ໄຂຜູ້ໃຊ້ທີ່ໃຊ້ກຳນົດວ່າຜູ້ໃຊ້ນີ້ເປັນສະມາຊິກຂອງກຸ່ມຫຼືບໍ່.' is overly literal and awkward. 'ຕົວແກ້ໄຂຜູ້ໃຊ້' (user editor) isn't the correct terminology. The English phrase 'user object attribute' implies an attribute *of* the user object, not a tool used to edit it.",
-          "suggestion": "ໃສ່ຄຸນລັກສະນະຂອງຕົວຊີ້ບອກຜູ້ໃຊ້ທີ່ໃຊ້ກຳນົດວ່າຜູ້ໃຊ້ນີ້ເປັນສະມາຊິກຂອງກຸ່ມຫຼືບໍ່."
+          "description": "The Lao translation's wording is overly complex and doesn't accurately reflect the simple meaning of the English content. \"ຕົວແກ້ໄຂຜູ້ໃຊ້\" (tua-gae pheu-chai) translates to 'user editor' which is not the intended meaning. The attribute is associated with a user account, not a user editor.",
+          "suggestion": "ໃສ່ຄຸນນະພາບຂອງບັນຊີຜູ້ໃຊ້ທີ່ໃຊ້ກຳນົດວ່າຜູ້ໃຊ້ນີ້ເປັນສະມາຊິກຂອງກຸ່ມຫຼືບໍ່."
         },
         {
-          "type": "spelling",
-          "description": "While 'ສະມາຊິກ' is correct, consider if 'ສືາມາຊິກ' might be more widely understood, though both are acceptable.",
-          "suggestion": "ໃສ່ຄຸນລັກສະນະຂອງຕົວຊີ້ບອກຜູ້ໃຊ້ທີ່ໃຊ້ກຳນົດວ່າຜູ້ໃຊ້ນີ້ເປັນສືາມາຊິກຂອງກຸ່ມຫຼືບໍ່."
+          "type": "grammar",
+          "description": "While not strictly incorrect, the use of 'ຫຼືບໍ່' at the end of the sentence is slightly awkward. It's common in Lao to avoid repetition.",
+          "suggestion": "ໃສ່ຄຸນນະພາບຂອງບັນຊີຜູ້ໃຊ້ທີ່ໃຊ້ກຳນົດວ່າຜູ້ໃຊ້ນີ້ເປັນສະມາຊິກຂອງກຸ່ມ."
         }
       ],
       "approved_at": null
@@ -194,13 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Introduceți atributul obiectului de utilizator pentru a determina dacă utilizatorul este membru al acestui grup.\" is not a perfect match for the original English. A more natural and accurate translation would emphasize 'groups' in the plural.",
-          "suggestion": "Introduceți atributul obiectului de utilizator pentru a determina dacă utilizatorul este membru al grupurilor."
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, 'acestui grup' feels a bit clunky. It could be improved.",
-          "suggestion": "Introduceți atributul obiectului de utilizator pentru a determina dacă utilizatorul este membru al grupurilor."
+          "description": "The translation \"Introduceți atributul obiectului de utilizator pentru a determina dacă utilizatorul este membru al acestui grup\" is a bit literal and could be improved for clarity and naturalness in Romanian. 'Acestui grup' sounds awkward. A better phrasing would clarify it's about groups defined by this configuration.",
+          "suggestion": "Introduceți atributul obiectului de utilizator care determină dacă utilizatorul este membru al grupurilor."
         }
       ],
       "approved_at": null
@@ -217,13 +239,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'පහත පරිශීලක වස්තුවෙහි ගුණාංගය ඇතුළත් කරන්න' is overly literal and doesn't flow naturally. 'පරිශීලක වස්තුවෙහි' translates to 'user object' but can be simplified. The phrase 'ඇතුළත් කරන්න' (enter/include) is a bit awkward in this context.",
-          "suggestion": "පරිශීලකයා කණ්ඩායම්වල සාමාජිකයා වන්නේ නම්, එම පරිශීලකයාගේ ගුණාංගය මෙහි ඇතුළත් කරන්න."
+          "description": "The translation 'පහත පරිශීලක වස්තුවෙහි ගුණාංගය ඇතුළත් කරන්න' is overly formal and doesn't accurately convey the meaning of 'Enter the user object attribute'. A more natural phrasing would be 'පරිශීලකයා කණ්ඩායම්වල සාමාජිකයා වන්නේ නම්, එම පරිශීලක වස්තුවෙහි ගුණාංගය ඇතුළත් කරන්න.'",
+          "suggestion": "පරිශීලකයා කණ්ඩායම්වල සාමාජිකයා වන්නේ නම්, එම පරිශීලක වස්තුවෙහි ගුණාංගය ඇතුළත් කරන්න."
         },
         {
-          "type": "grammar",
-          "description": "While technically correct, the sentence structure can be improved for better readability in Sinhala.",
-          "suggestion": "පරිශීලකයා කණ්ඩායම්වල සාමාජිකයා වන්නේ නම්, එම පරිශීලකයාගේ ගුණාංගය මෙහි ඇතුළත් කරන්න."
+          "type": "spelling",
+          "description": "The word 'පරිශීලක' is used multiple times. While technically correct, it might sound repetitive. Consider using 'පරිශීලකයා' consistently or using a more concise term if possible.",
+          "suggestion": "Explore using alternative wording to avoid repetition. For instance, consider 'භාවිතරයා' as a potential substitute in some contexts, but verify its accurate representation of 'user object' in the given scenario."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'දෙස memutuskan' is not needed or appropriate in this context. It's a literal translation that doesn't make sense in Sinhala.",
+          "suggestion": "Remove the phrase 'දෙස memutuskan' completely. The translation should focus on describing how to input the attribute value."
         }
       ],
       "approved_at": null
@@ -240,13 +267,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Slovenian translation uses 'Vnesi' which implies a direct instruction.  A more natural phrasing for a tooltip would be descriptive. 'Enter' is a tooltip, so it should describe what the attribute *is*, not instruct the user to enter it.",
-          "suggestion": "Description: 'Atribut uporabniškega objekta, ki se uporablja za ugotavljanje članstva uporabnika v skupinah.'"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'ugotavljanje' technically means 'determining', 'določitev' is a more commonly used and natural fit within this context, mirroring the English 'determine'.",
-          "suggestion": "Replace 'ugotavljanje' with 'določitev'."
+          "description": "The phrase 'če je ta uporabnik član skupin' could be slightly more natural. While grammatically correct, it's a bit verbose.",
+          "suggestion": "če je uporabnik član skupin"
         }
       ],
       "approved_at": null
@@ -257,13 +279,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'објекта' could be more accurately translated as 'објекта' if it refers to the user object. It currently reads as 'object' rather than 'user object'.",
-          "suggestion": "Унесите кориснички атрибут објекта корисника коришћен да одреди да ли је овај корисник члан група."
+          "description": "The word 'објекта' might be more accurately represented as 'објекта'. While technically correct, it's a less common phrasing and 'објекта' sounds more natural in this context.",
+          "suggestion": "Унесите кориснички атрибут објекта коришћен да одреди да ли је овај корисник члан група."
         },
         {
           "type": "grammar",
-          "description": "The sentence structure could be improved for better readability.  The phrase 'коришћен да одреди' can be rephrased to flow better.",
-          "suggestion": "Унесите кориснички атрибут објекта корисника који се користи за одређивање да ли је овај корисник члан група."
+          "description": "The sentence 'Унесите кориснички атрибут објекта коришћен да одреди да ли је овај корисник члан група' is grammatically correct but sounds slightly clunky.  A more fluent phrasing might involve restructuring the sentence.",
+          "suggestion": "Унесите атрибут објекта корисника који се користи за утврђивање да ли је овај корисник члан група."
         }
       ],
       "approved_at": null
@@ -274,13 +296,18 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The sentence structure is a bit awkward. 'korišćen da odredi' could be improved for better flow.",
-          "suggestion": "Unesite korisnički atribut objekta koji se koristi za utvrđivanje da li je korisnik član grupa."
+          "description": "The phrase 'korišćen da odredi' is grammatically awkward. It should be more naturally phrased.",
+          "suggestion": "korišćen za određivanje"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'determine' is more accurately translated as 'utvrđivanje' or 'proveravanje' rather than 'odredi' in this context, implying verification rather than simple identification.",
-          "suggestion": "Unesite korisnički atribut objekta koji se koristi za utvrđivanje da li je korisnik član grupa."
+          "description": "The Serbian translation doesn't fully capture the meaning of 'determine whether this user is a member of the groups'.  'Odrediti' implies a singular determination, whereas the English suggests a continuous assessment based on the attribute.",
+          "suggestion": "korišćen za proveru da li je korisnik član grupa"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence is a bit long and could benefit from restructuring for better readability.",
+          "suggestion": "Unesite atribut objekta korisnika koji se koristi za proveru da li je korisnik član grupa."
         }
       ],
       "approved_at": null
@@ -309,13 +336,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '输入用于确定此用户是否为组成员的用户对象属性' is a literal translation that doesn't flow naturally in Chinese. It sounds slightly awkward and technical. The phrasing '是否为组成员' is a bit verbose.",
-          "suggestion": "输入用于确定此用户是否属于组的用户对象属性。"
+          "description": "The translation \"输入用于确定此用户是否为组成员的用户对象属性\" is not the most natural or precise rendering of the English meaning. The phrase \"组成员\" (member of a composition) is unusual. A more accurate and natural translation would convey the meaning of belonging to groups.",
+          "suggestion": "输入用于确定此用户是否属于这些组的用户对象属性。"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The term '组成员' (member of a group) is less common than '属于组' (belongs to a group) in this context.  '属于组' is more concise and natural-sounding.",
-          "suggestion": "使用 '属于组' instead of '组成员'."
+          "type": "formatting",
+          "description": "The translation uses a full stop at the end, which might not be consistent with the overall style guide for UI elements. Consider removing it for better consistency.",
+          "suggestion": "输入用于确定此用户是否属于这些组的用户对象属性"
         }
       ],
       "approved_at": null

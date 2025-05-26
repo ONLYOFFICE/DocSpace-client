@@ -3,7 +3,7 @@
   "content": "Used: {{size}}",
   "content_en_sha1_hash": "a1f147a74895697927042157e570c03e8d3e41f3",
   "created_at": "2025-05-19T21:30:53.093Z",
-  "updated_at": "2025-05-21T02:32:49.603Z",
+  "updated_at": "2025-05-26T07:57:32.791Z",
   "comment": {
     "text": "This translation key is used to display the amount of used storage space in a clear and concise manner. It appears on a Storage Space Used page, showing the total size of used storage.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/StorageSpaceUsed.js",
-      "line_number": 127,
-      "context": "size: totalSize,\n })}\n </Text>\n ) : null}\n <Text fontWeight={400} fontSize=\"14px\" className=\"disk-space_title\">\n {t(\"UsedStorage\", {\n size: usedSize,\n })}\n </Text>\n {standalone && !isTenantCustomQuotaSet ? (\n <ColorTheme",
+      "line_number": 128,
+      "context": "size: totalSize,\n })}\n </Text>\n ) : null}\n <Text fontWeight={400} fontSize=\"14px\" className=\"disk-space_title\">\n {t(\"UsedStorage\", {\n size: usedSize,\n })}\n </Text>\n {standalone && !isTenantCustomQuotaSet ? (\n <Link",
       "module": "/packages/client"
     }
   ],
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'مستخدم: {{size}}' is a literal translation of 'Used: {{size}}'. A more natural and accurate translation for 'Used' in the context of storage would be 'مساحة مستخدمة' (masaHa mustakhDaMa).",
-          "suggestion": "مساحة مستخدمة: {{size}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -72,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Usado\" for \"Used\" in this context (referring to storage space) isn't the most natural or accurate. \"Usado\" generally implies something has been utilized or consumed, but in this case, 'Used' refers to the amount of storage being occupied.",
-          "suggestion": "Consider using \"Ocupado: {{size}}\" or \"Espacio utilizado: {{size}}\" for a more accurate translation."
+          "description": "The translation 'Usado' for 'Used' isn't the most natural or common translation in this context. While grammatically correct, 'Utilizado' or 'Ocupado' would be more appropriate for describing storage usage in a settings menu.",
+          "suggestion": "Utilizado: {{size}}"
         }
       ],
       "approved_at": null
@@ -141,7 +135,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Usado\" is not the best fit for \"Used\" in this context. \"Usado\" typically implies something has been used before. A more accurate translation would be something like \"Utilizado\" or \"Ocupado\".",
+          "suggestion": "Utilizado: {{size}}"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The direct translation of \"Used\" as \"Usado\" is technically correct, but in the context of storage usage in settings, a more natural and commonly used term would be \"Utilizado\".",
-          "suggestion": "Utilizado: {{size}}"
+          "description": "The translation \"Usado: {{size}}\" is a literal translation of 'Used: {{size}}'. A more natural and contextually accurate translation for 'Used Storage' in Portuguese (Brazil) would be 'Armazenamento Utilizado: {{size}}'.  'Usado' implies something that was used and might be discarded, while 'Armazenamento Utilizado' accurately refers to storage space being utilized.",
+          "suggestion": "Armazenamento Utilizado: {{size}}"
         }
       ],
       "approved_at": null

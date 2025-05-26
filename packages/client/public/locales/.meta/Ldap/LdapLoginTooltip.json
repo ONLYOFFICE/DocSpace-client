@@ -3,7 +3,7 @@
   "content": "Please specify Login user who has LDAP server read access rights.",
   "content_en_sha1_hash": "e0e6fc23986211c42f1627a05c9e78c2a42ef429",
   "created_at": "2025-05-19T21:30:54.236Z",
-  "updated_at": "2025-05-21T08:14:58.859Z",
+  "updated_at": "2025-05-24T08:28:38.574Z",
   "comment": {
     "text": "This translation key is used as a tooltip to inform users about the requirements for authenticating via LDAP. It appears in an input field within an authentication container, prompting users to specify a login user with read access rights to the LDAP server.",
     "is_auto": true,
@@ -30,18 +30,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"يرجى تحديد دخول للمستخدم الذي لديه حقوق الوصول لقراءة دليل LDAP\" is not an accurate translation of \"Please specify Login user who has LDAP server read access rights.\" The word 'دخول' (dukhool) means 'entry' or 'login' and is redundant. It doesn't convey the intended meaning of specifying a user.",
-          "suggestion": "يرجى تحديد المستخدم الذي لديه صلاحية قراءة دليل LDAP."
+          "description": "The translation doesn't fully capture the meaning of 'Login user'. It's translated literally as 'dخول للمستخدم' which is awkward. 'Login user' refers to the user account used for login.",
+          "suggestion": "يرجى تحديد اسم المستخدم الذي لديه صلاحية قراءة من خادم دليل LDAP."
         },
         {
           "type": "grammar",
-          "description": "The phrase \"لديه حقوق الوصول لقراءة\" can be improved for better flow and naturalness.",
-          "suggestion": "لديه صلاحية قراءة"
+          "description": "The phrase 'لديه حقوق الوصول لقراءة' can be improved for smoother flow.  Using 'صلاحية قراءة' (permission to read) is more natural in this context.",
+          "suggestion": "Use 'صلاحية قراءة' instead of 'حقوق الوصول لقراءة'."
         },
         {
           "type": "formatting",
-          "description": "The phrasing could be more concise and direct.",
-          "suggestion": "يرجى تحديد المستخدم المصرح له بقراءة دليل LDAP."
+          "description": "The Arabic phrase structure could be more idiomatic. Reordering might improve readability.",
+          "suggestion": "Consider 'يرجى تحديد اسم المستخدم الذي لديه صلاحية قراءة من خادم دليل LDAP.'"
         }
       ],
       "approved_at": null
@@ -52,8 +52,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Giriş istifadəçisini' is a literal translation of 'Login user'. A more natural phrasing in Azerbaijani would be something like 'LDAP server oxumaq hüququna malik istifadəçi' or 'LDAP server oxumaq hüquqları olan istifadəçi'.",
-          "suggestion": "Lütfən, LDAP server oxumaq hüququna malik istifadəçi göstərin."
+          "description": "The translation 'Giriş istifadəçisini' is a bit too literal. 'Login user' should be translated to something more natural like 'daxilolma istifadəçisi' or simply 'istifadəçi'.",
+          "suggestion": "Lütfən, LDAP server oxumaq hüququna malik olan daxilolma istifadəçisini göstərin."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'LDAP server' might be better formatted with a hyphen: 'LDAP serveri'.",
+          "suggestion": "Lütfən, LDAP serveri oxumaq hüququna malik olan daxilolma istifadəçisini göstərin."
         }
       ],
       "approved_at": null
@@ -64,13 +69,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is not entirely accurate. While understandable, 'Молим да посочите потребител за влизане' is a bit verbose. A more natural phrasing would be 'Моля, посочете потребител...', or even 'Посочете потребител...', depending on the desired level of formality.",
-          "suggestion": "Посочете потребител..."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'четене' (reading) is technically correct, but 'достъп' (access) might be a more precise translation of 'access rights' in this context, reflecting the technical nature of the instruction.",
-          "suggestion": "Моля, посочете потребител, който има права за достъп до LDAP сървър."
+          "description": "The translation 'Молим да посочите потребител за влизане, който има права за четене на LDAP сървър.' is a bit literal and could be improved for better flow and clarity in Bulgarian. 'Потребител за влизане' is redundant. It's understood the user is for login.",
+          "suggestion": "Молим да посочите потребител с права за четене на LDAP сървър."
         }
       ],
       "approved_at": null
@@ -81,13 +81,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Zadejte prosím Přihlášení uživatele, který má práva ke čtení serveru LDAP.\" is not an accurate translation of \"Please specify Login user who has LDAP server read access rights.\" The phrase 'Přihlášení uživatele' is too literal and clunky. It doesn't convey the intended meaning effectively.",
-          "suggestion": "Zadejte uživatelské jméno pro přihlášení, které má práva pro čtení z LDAP serveru."
+          "description": "The translation 'Zadejte prosím Přihlášení uživatele, který má práva ke čtení serveru LDAP.' is not a natural or accurate translation of \"Please specify Login user who has LDAP server read access rights.\" The word 'Přihlášení' (Login) is redundant and awkward in this context. Also, the sentence structure could be improved.",
+          "suggestion": "Zadejte uživatele s právy ke čtení z LDAP serveru."
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, the direct translation feels unnatural and lacks the fluidity of idiomatic Czech. The phrase \"ke čtení serveru LDAP\" is also slightly awkward.",
-          "suggestion": "Consider restructuring the sentence for better readability in Czech. For example, 'Uveďte uživatelské jméno pro přihlášení s právy ke čtení z LDAP serveru.'"
+          "description": "The translated sentence is a bit long and could be broken down for better readability. While not strictly incorrect, shorter sentences generally work better in UI elements.",
+          "suggestion": "Zadejte uživatele. Musí mít práva ke čtení z LDAP serveru."
         }
       ],
       "approved_at": null
@@ -104,13 +104,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Καθορίστε τον χρήστη Σύνδεσης...' is not the most natural or accurate way to convey the meaning of 'Please specify Login user...'. 'Login user' implies a specific user involved in the login process, which might be better conveyed with a more explicit term like 'τον χρήστη που χρησιμοποιεί για σύνδεση' (the user who uses for login) or 'τον χρήστη που κάνει σύνδεση' (the user who is logging in).",
-          "suggestion": "Καθορίστε τον χρήστη που κάνει σύνδεση..."
+          "description": "The translation 'Καθορίστε τον χρήστη Σύνδεσης' is a bit awkward. 'Login user' is not directly translated well.  It implies a specific role. A better phrasing would focus on the user account.",
+          "suggestion": "Καθορίστε τον λογαριασμό χρήστη"
         },
         {
-          "type": "formatting",
-          "description": "While grammatically correct, the phrase 'δικαιώματα πρόσβασης ανάγνωσης' could be simplified for better readability. It's a bit verbose.",
-          "suggestion": "δικαιώματα ανάγνωσης"
+          "type": "incorrect_translation",
+          "description": "The term 'διακομιστή LDAP' is technically correct, but a more common phrasing would be 'LDAP διακομιστή'.",
+          "suggestion": "LDAP διακομιστή"
         }
       ],
       "approved_at": null
@@ -118,7 +118,18 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is overly literal and doesn't flow naturally in Spanish. 'Login user' is awkward. A more natural phrasing would be 'usuario para iniciar sesión' or 'usuario de acceso'.",
+          "suggestion": "Por favor, especifique el usuario para iniciar sesión que tenga derechos de acceso de lectura al servidor LDAP."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly wrong, using 'para iniciar sesión' rather than 'de inicio de sesión' improves readability.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -127,13 +138,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ole hyvä ja määrittele Käyttäjätunnus, jolla on LDAP-palvelimen lukuoikeudet' is a bit literal and could be improved for naturalness in Finnish. The phrasing 'Please specify Login user' is directly translated, which isn't standard practice. 'Login user' is not a common Finnish term in this context.",
-          "suggestion": "Määrittele käyttäjätunnus, jolla on LDAP-palvelimen lukuoikeudet."
+          "description": "The translation 'Ole hyvä ja määrittele Käyttäjätunnus, jolla on LDAP-palvelimen lukuoikeudet.' is not a direct or natural translation of 'Please specify Login user who has LDAP server read access rights.'  'Login user' is not accurately conveyed. 'Käyttäjätunnus' translates to 'username', but the context suggests a specific login user.",
+          "suggestion": "A more accurate translation would be something along the lines of 'Ole hyvä ja määrittele käyttäjä, jolla on LDAP-palvelimen lukuoikeudet kirjautumista varten.' or 'Määrittele käyttäjä, jolla on LDAP-palvelimen lukuoikeudet.'"
         },
         {
           "type": "formatting",
-          "description": "While technically not incorrect, the translation doesn't include a direct equivalent of 'Tooltip'. This might be implied in context but including something like 'Ilmoitus:', 'Vihje:' would be more explicit.",
-          "suggestion": "Ilmoitus: Määrittele käyttäjätunnus, jolla on LDAP-palvelimen lukuoikeudet."
+          "description": "While not a major issue, 'Ole hyvä ja' is slightly formal for a tooltip.  Consider a less formal opening.",
+          "suggestion": "Consider replacing 'Ole hyvä ja' with a more concise phrase like 'Määrittele' or 'Anna'."
         }
       ],
       "approved_at": null
@@ -144,13 +155,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Veuillez spécifier le login de l'utilisateur qui a les droits d'accès en lecture au serveur LDAP' is a bit verbose and could be improved for clarity and conciseness. 'Login' is somewhat redundant as 'utilisateur' already implies a user account.",
-          "suggestion": "Veuillez spécifier l'utilisateur disposant des droits de lecture sur le serveur LDAP."
+          "description": "The translation is overly literal and could be improved for naturalness in French. The phrase 'qui a les droits d'accès en lecture' is a bit clunky.",
+          "suggestion": "Veuillez spécifier le nom d'utilisateur disposant des droits de lecture sur le serveur LDAP."
         },
         {
-          "type": "formatting",
-          "description": "While not incorrect, the translation maintains the English phrasing, 'Login'. It's more natural in French to use a more direct translation or implied meaning.",
-          "suggestion": "Consider replacing 'Login' with 'nom d'utilisateur' or simply omitting it and using 'l'utilisateur'."
+          "type": "incorrect_translation",
+          "description": "The English uses 'Login user'.  The translation uses 'nom d'utilisateur' which is a more appropriate translation for 'user' in this context. The original literal translation of 'Login user' is not a natural phrasing in French.",
+          "suggestion": "N/A - Corrected in previous suggestion"
         }
       ],
       "approved_at": null
@@ -161,13 +172,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and doesn't flow naturally in Armenian. 'Please specify Login user' is awkward. It would be better to convey the meaning of 'specify the user account used for LDAP login'.",
-          "suggestion": "Խնդրում ենք նշել օգտատերերի հաշվեկանոն, որն օգտագործվում է LDAP մուտքի համար:"
+          "description": "The translation is overly literal and doesn't flow naturally in Armenian. 'Login user' is clunky; a more natural phrasing is needed. 'Read access rights' is also a bit awkward.",
+          "suggestion": "Խնդրում ենք նշել օգտատեր, ով ունի LDAP սերվերի մուտքի իրավունք:"
         },
         {
-          "type": "grammar",
-          "description": "While technically correct, the phrase 'ունի LDAP սերվեր կարդալու մուտքի իրավունքներ' (has LDAP server read access rights) is cumbersome. It's more common to say 'ունի լրատվական մուտքի իրավունքներ' (has read access rights).",
-          "suggestion": "ունի լրատվական մուտքի իրավունքներ"
+          "type": "grammatical",
+          "description": "The phrase 'Մուտքի օգտատեր' is somewhat ambiguous and can be interpreted in multiple ways. It's not entirely incorrect, but a more precise term would be better.",
+          "suggestion": "Օգտատեր"
         }
       ],
       "approved_at": null
@@ -178,13 +189,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation includes the English term 'Login user' in parentheses. This is unnecessary and disrupts the flow of the Italian sentence. It's better to simply use a more natural Italian equivalent.",
-          "suggestion": "Specificare l'utente con i diritti di accesso in lettura al server LDAP."
+          "description": "The translation 'Specificare l'utente di accesso (Login user) con diritti di accesso in lettura al server LDAP' is overly literal and verbose. The phrase 'utente di accesso (Login user)' is redundant.  'Login user' is already clear from the context.  Also, 'diritti di accesso in lettura' can be simplified.",
+          "suggestion": "Specificare l'utente con i permessi di lettura sul server LDAP."
         },
         {
           "type": "formatting",
-          "description": "The use of parentheses around 'Login user' is visually jarring in Italian.  It's generally not standard practice in this type of phrasing.",
-          "suggestion": "Remove the parentheses around 'Login user'."
+          "description": "The inclusion of '(Login user)' feels awkward and unnecessary in the Italian translation, especially since the English original uses the term.",
+          "suggestion": "Remove '(Login user)' from the translation."
         }
       ],
       "approved_at": null
@@ -207,8 +218,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is technically correct but slightly awkward and doesn't fully capture the nuance of the English. 'Login user' is a bit clunky in Lao. A more natural phrasing would be 'ຜູ້ໃຊ້ເຂົ້າສູ່ລະບົບ' meaning 'user who logs in'.",
-          "suggestion": "ກະລຸນາລະบุຜູ້ໃຊ້ທີ່ເຂົ້າສູ່ລະບົບທີ່ມີສິດອ່ານຂໍ້ມູນຈາກເຊີບເວີ LDAP."
+          "description": "The Lao translation 'ກະລຸນາລະບຸຜູ້ໃຊ້ເຂົ້າສູ່ລະບົບທີ່ມີສິດອ່ານຂໍ້ມູນຈາກເຊີບເວີ LDAP' is a literal translation that might be too formal and complex for a tooltip. It's important to maintain clarity and conciseness in tooltips.",
+          "suggestion": "Consider a more concise and user-friendly phrasing like 'ກະລຸນາລະບຸຜູ້ໃຊ້ທີ່ມີສິດອ່ານຂໍ້ມູນ LDAP' or 'ໃສ່ຊື່ຜູ້ໃຊ້ທີ່ມີສິດອ່ານຂໍ້ມູນ LDAP'"
+        },
+        {
+          "type": "formatting",
+          "description": "While not a critical error, the Lao translation might benefit from breaking the sentence into shorter phrases for better readability within a tooltip format. Long sentences can be overwhelming.",
+          "suggestion": "Consider splitting the sentence into two shorter phrases, such as 'ກະລຸນາລະບຸຜູ້ໃຊ້. ຜູ້ໃຊ້ນີ້ຕ້ອງມີສິດອ່ານຂໍ້ມູນຈາກເຊີບເວີ LDAP.'"
         }
       ],
       "approved_at": null
@@ -216,18 +232,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is technically correct but sounds awkward and overly formal for a tooltip. \"Norādiet pieteikšanās lietotāju\" is verbose. A more natural phrasing would be better.",
-          "suggestion": "Norādiet LDAP lietotāju ar lasīšanas tiesībām."
-        },
-        {
-          "type": "formatting",
-          "description": "The English uses the singular 'user'. While the Latvian technically translates the plural, it could be improved to match the singular aspect of the original.",
-          "suggestion": "Norādiet LDAP lietotāju ar lasīšanas tiesībām."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -236,8 +241,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Geef een Login gebruiker op die leestoegang heeft tot de LDAP server.\" is a literal translation but lacks nuance. \"Login gebruiker\" is somewhat awkward in Dutch. A more natural phrasing would be something like 'Geef de gebruikersnaam op die leesrechten heeft tot de LDAP server' or 'Geef een gebruikersnaam op met leesrechten voor de LDAP server'.",
-          "suggestion": "Geef de gebruikersnaam op die leesrechten heeft tot de LDAP server."
+          "description": "The translation 'Geef een Login gebruiker op die leestoegang heeft tot de LDAP server.' is technically correct but could be improved for naturalness in Dutch. 'Login gebruiker' is somewhat awkward. A more natural phrasing would be 'Geef een gebruikersnaam op...' or 'Geef de gebruikersnaam op...'",
+          "suggestion": "Geef een gebruikersnaam op die leestoegang heeft tot de LDAP server."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a lowercase 'l' in 'leestoegang', which might be preferred as 'Leestoegang' to align with proper noun style in formal Dutch.",
+          "suggestion": "Geef een gebruikersnaam op die LEESTOEGANG heeft tot de LDAP server."
         }
       ],
       "approved_at": null
@@ -248,13 +258,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Określ użytkownika loginu, który ma uprawnienia dostępu do odczytu serwera LDAP\" is not the most natural or accurate translation of 'Please specify Login user who has LDAP server read access rights.' The phrase 'użytkownika loginu' is redundant and awkward. 'Login user' is better translated as 'użytkownika do logowania' or simply 'użytkownika'.",
-          "suggestion": "Określ użytkownika do logowania, który ma uprawnienia dostępu do odczytu serwera LDAP."
+          "description": "The translation \"Określ użytkownika loginu, który ma uprawnienia dostępu do odczytu serwera LDAP\" is somewhat literal and could be improved for natural Polish. The phrase 'Login user' is awkward.",
+          "suggestion": "Określ użytkownika, który ma uprawnienia do odczytu z serwera LDAP."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'uprawnienia dostępu do odczytu' is a bit clunky. A more fluent translation would be 'uprawnienia do odczytu' or 'dostęp do odczytu'.",
-          "suggestion": "Określ użytkownika do logowania, który ma uprawnienia do odczytu serwera LDAP."
+          "type": "spelling",
+          "description": "While 'LDAP' is common, ideally it would be localized if the entire application is in Polish. While technically correct, it might feel jarring.",
+          "suggestion": "If applicable, consider a localized term for 'LDAP', although this is a lower priority."
         }
       ],
       "approved_at": null
@@ -265,8 +275,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and doesn't flow naturally in Portuguese. A more natural phrasing would emphasize the user's role in accessing the LDAP server.",
-          "suggestion": "Por favor, especifique o usuário de login com permissões de leitura no servidor LDAP."
+          "description": "The translation is technically correct but lacks the natural flow and precision of the English original. 'Please specify' isn't well represented by 'Especifique'. It sounds overly formal and direct in Portuguese in this context.",
+          "suggestion": "Por favor, especifique o usuário de login..."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly wrong, 'Login' should be 'login' to maintain consistency with English capitalization (as it's a technical term).",
+          "suggestion": "Por favor, especifique o usuário de login que possui direitos de acesso de leitura do servidor LDAP."
         }
       ],
       "approved_at": null
@@ -283,13 +298,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Indicați nume de utilizator cu permisiuni de citire pentru serverul LDAP' is a literal translation but doesn't fully capture the nuance of the English sentence. It's a bit clunky and not how a native Romanian speaker would naturally phrase this instruction.",
-          "suggestion": "Vă rugăm să specificați utilizatorul care are drepturi de acces în citire pentru serverul LDAP."
+          "description": "The translation 'Indicați nume de utilizator cu permisiuni de citire pentru serverul LDAP' is a literal translation and doesn't convey the intended meaning as clearly as it could. It's a bit awkward. The English emphasizes 'Login user'.",
+          "suggestion": "Specificați utilizatorul de autentificare care are drepturi de citire pe serverul LDAP."
         },
         {
           "type": "formatting",
-          "description": "The translation uses 'LDAP server', which could be better translated to 'server LDAP' for consistency with Romanian word order.",
-          "suggestion": "Vă rugăm să specificați utilizatorul care are drepturi de acces în citire pentru server LDAP."
+          "description": "While not a major issue, consider adding a comma after 'utilizator' for better readability in Romanian. It would be 'utilizator, cu...' ",
+          "suggestion": "Specificați utilizatorul de autentificare, cu permisiuni de citire pe serverul LDAP."
         }
       ],
       "approved_at": null
@@ -300,13 +315,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Укажите логин пользователя, который имеет права доступа на чтение сервера LDAP' is a bit literal and could be improved for natural flow in Russian. The phrasing 'права доступа на чтение' is overly formal for a tooltip.",
+          "description": "The translation is technically correct but sounds a bit clunky and overly literal. 'Укажите логин пользователя, который имеет права доступа на чтение сервера LDAP' is grammatically sound, but not the most natural phrasing in Russian for a tooltip.",
           "suggestion": "Укажите логин пользователя с правами чтения LDAP-сервера."
         },
         {
           "type": "formatting",
-          "description": "While not a major issue, hyphens in 'LDAP-сервера' can be omitted. While common in technical contexts, avoiding them makes it slightly more readable in general.",
-          "suggestion": "Укажите логин пользователя с правами чтения LDAP сервера."
+          "description": "While not strictly incorrect, using a hyphen to connect 'LDAP' and 'сервера' improves readability and is a common practice in technical Russian.",
+          "suggestion": "Replace 'LDAP сервера' with 'LDAP-сервера'."
         }
       ],
       "approved_at": null
@@ -317,13 +332,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is not a natural or accurate rendering of the English meaning. The English phrase 'Login user' is not well translated. 'Login user' refers to the user account used for logging in, which has LDAP read access.",
-          "suggestion": "පරිශීලකයින් පිවිසුමට LDAP සේවාදායකය කියවීමේ අයිතිය ඇති ගිණුමක් සඳහාවි."
+          "description": "The translation \"පරිශීලකයින් පිවිසුම් සඳහා LDAP සේවාදායකය කියවීමේ අයිතියක් ඇති පරිශීලකයෙකු සඳහාවි.\" is not a precise translation of \"Please specify Login user who has LDAP server read access rights.\" It's a bit convoluted and doesn't clearly convey the request for a specific user.",
+          "suggestion": "Please specify a user with read access to the LDAP server."
         },
         {
           "type": "grammar",
-          "description": "The sentence structure could be improved for better readability.  'පරිශීලකයින් පිවිසුම් සඳහා' can be rephrased to sound more natural.",
-          "suggestion": "පරිශීලකයින් පිවිසීමට භාවිතා කරන ගිණුමක් LDAP සේවාදායකය කියවීමේ අයිතියක් ඇතිවිය යුතුය."
+          "description": "The phrase 'පරිශීලකයින් පිවිසුම් සඳහා' is slightly awkward. It would be better to rephrase the sentence for clarity.",
+          "suggestion": "Consider using a more direct phrase like 'LDAP සේවාදායකය කියවීමේ අයිතියක් ඇති එක් පරිශීලකයෙකු'."
+        },
+        {
+          "type": "spelling",
+          "description": "While 'පරිශීලකයෙකු' (parishilakayak) is technically correct, it's more common and natural to use 'පරිශීලකයා' (parishilakayaa) in this context, as it indicates a specific person.",
+          "suggestion": "Replace 'පරිශීලකයෙකු' with 'පරිශීලකයා'."
         }
       ],
       "approved_at": null
@@ -334,13 +354,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Zadajte prihlasovacie meno používateľa, ktorý má prístupové práva na čítanie zo servera LDAP' is a bit verbose and could be more concise. While technically correct, it doesn't capture the nuance of the English tooltip.",
-          "suggestion": "Zadajte používateľské meno s prístupom na čítanie zo servera LDAP."
+          "description": "The translation is overly literal and sounds unnatural in Slovak. \"Prihlasovacie meno\" is a bit awkward. It would be more natural to say something like \"Používateľské meno\" or simply \"Meno používateľa\".",
+          "suggestion": "Meno používateľa, ktorý má prístupové práva na čítanie zo servera LDAP."
         },
         {
           "type": "formatting",
-          "description": "The Slovak translation uses a comma after 'používateľa' which might not be the most natural flow in this context. Removing the comma could improve readability.",
-          "suggestion": "Zadajte prihlasovacie meno používateľa, ktorý má prístupové práva na čítanie zo servera LDAP."
+          "description": "While not strictly incorrect, using a semicolon at the end of the sentence is less common and formal in everyday Slovak. A period is generally preferred.",
+          "suggestion": "Meno používateľa, ktorý má prístupové práva na čítanie zo servera LDAP."
         }
       ],
       "approved_at": null
@@ -351,13 +371,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Določi uporabnika za prijavo, ki ima pravice za branje strežnika LDAP\" is a bit literal and could be improved for naturalness. While technically correct, it's not the most idiomatic way to phrase it in Slovenian. It emphasizes 'login user' which isn't the core message.",
-          "suggestion": "Izberite uporabnika s pravicami za branje LDAP strežnika."
+          "description": "The translation 'Določi uporabnika za prijavo, ki ima pravice za branje strežnika LDAP' is a bit literal and not the most natural phrasing in Slovenian. While technically correct, it's not as fluent as it could be. 'Login user' is also translated literally instead of conveying the meaning more naturally.",
+          "suggestion": "Izberite uporabniški račun za prijavo, ki ima dovoljenja za branje LDAP strežnika."
         },
         {
           "type": "formatting",
-          "description": "While not a critical issue, the use of 'strežnika' is grammatically correct (genitive case), but slightly less common than 'strežnika' when referring to a server in this context. It might be perceived as overly formal.",
-          "suggestion": "Izberite uporabnika s pravicami za branje LDAP strežnika."
+          "description": "The phrase 'strežnika LDAP' could be improved to match standard Slovenian capitalization.",
+          "suggestion": "strežnika LDAP"
         }
       ],
       "approved_at": null
@@ -368,13 +388,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is not entirely accurate. \"Login user\" is a bit awkward. It should be clearer about who needs the access.",
-          "suggestion": "Молимо наведите корисника за пријаву који има права за читање са LDAP сервера."
+          "description": "The translation is not idiomatic and doesn't accurately convey the meaning of the English sentence. The phrasing 'корисника за Пријаву' is awkward.  It's unclear if 'Пријаву' refers to the login action or something else.",
+          "suggestion": "Молимо наведите корисника за пријаву који има права приступа за читање са LDAP сервера."
         },
         {
           "type": "formatting",
-          "description": "The sentence structure is a bit clunky. A more natural flow would improve readability.",
-          "suggestion": "Молимо наведите корисника за пријаву који има права за читање са LDAP сервера."
+          "description": "The word 'са' is missing before 'LDAP сервера'. This makes the sentence feel incomplete.",
+          "suggestion": "Молимо наведите корисника за пријаву који има права приступа за читање са LDAP сервера"
         }
       ],
       "approved_at": null
@@ -385,13 +405,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Molimo navedite korisnika za Prijavu koji ima prava pristupa za čitanje LDAP servera' is a bit awkward and doesn't flow naturally. 'Prijavu' seems unnecessary and 'prava pristupa za čitanje' is verbose.",
-          "suggestion": "Molimo navedite korisnika za prijavu koji ima prava čitanja na LDAP serveru."
+          "description": "The translation is overly literal and doesn't flow naturally in Serbian. 'Login user' is clunky.",
+          "suggestion": "Molimo navedite korisnika za ulazak koji ima prava pristupa za čitanje LDAP servera."
         },
         {
           "type": "formatting",
-          "description": "The Serbian translation uses lowercase 'prijava' where 'Prijavu' in the English might imply a more important or formal designation. Although subtle, it could be adjusted.",
-          "suggestion": "Molimo navedite korisnika za Prijavu koji ima prava čitanja na LDAP serveru."
+          "description": "The sentence structure is a bit long and complex. Consider breaking it down.",
+          "suggestion": "Molimo navedite korisnika za ulazak. On/Ona mora imati prava pristupa za čitanje LDAP servera."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing 'koji ima prava pristupa za čitanje' can be improved for clarity and brevity.",
+          "suggestion": "koji ima dozvole za čitanje LDAP servera"
         }
       ],
       "approved_at": null
@@ -402,13 +427,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and doesn't flow naturally in Turkish. \"Login kullanıcısını\" is not the most common or idiomatic way to refer to a login user in this context.",
-          "suggestion": "Lütfen LDAP sunucusunu okuma erişim yetkisine sahip kullanıcı adını belirtin."
+          "description": "The translation is technically correct but sounds unnatural in Turkish. 'Login kullanıcısını' is awkward. It's better to refer to the user as 'LDAP sunucusuna erişim yetkisi olan kullanıcı'.",
+          "suggestion": "Lütfen LDAP sunucusuna okuma erişim yetkisi olan kullanıcıyı belirtin."
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, the translation uses a full stop at the end which is less common in tooltips. Consider omitting it for better consistency with other UI elements.",
-          "suggestion": "Lütfen LDAP sunucusunu okuma erişim yetkisine sahip kullanıcı adını belirtin"
+          "description": "While not strictly incorrect, using a more formal tone might be preferable for a tooltip.  Consider a more direct instruction.",
+          "suggestion": "Lütfen LDAP sunucusuna erişim yetkisine sahip kullanıcı adını girin."
         }
       ],
       "approved_at": null
@@ -418,9 +443,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation \"Вкажіть логін користувача, який має права доступу для читання з сервера LDAP\" is a literal translation but could be more natural and user-friendly. \"Login\" isn't the most common term in Ukrainian.  A more common phrasing would use 'ім'я користувача'.  The phrase 'права доступу для читання' is also a bit verbose; 'права на читання' is more common.",
-          "suggestion": "Вкажіть ім'я користувача, який має права на читання з сервера LDAP."
+          "type": "spelling",
+          "description": "The word 'читання' (reading) is technically correct but 'доступу' (access) sounds more natural in this context.",
+          "suggestion": "Вкажіть логін користувача, який має права доступу до сервера LDAP."
         }
       ],
       "approved_at": null
@@ -431,13 +456,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is technically correct but sounds unnatural and overly formal for a tooltip. \"Đăng nhập\" is redundant as it's already implied in the context. The phrase \"có quyền truy cập đọc\" can be simplified.",
-          "suggestion": "Xin hãy chỉ định người dùng có quyền đọc trên máy chủ LDAP."
+          "description": "The translation is not quite natural and doesn't fully convey the original meaning. 'Login user' is awkward; it should imply the user account used to access LDAP.",
+          "suggestion": "Xin hãy chỉ định người dùng có quyền truy cập đọc máy chủ LDAP."
         },
         {
           "type": "formatting",
-          "description": "The translation is a single sentence. Tooltips often benefit from brevity.",
-          "suggestion": "Xin hãy chỉ định người dùng có quyền đọc LDAP."
+          "description": "The phrase 'Đăng nhập' could be ambiguous. While it means login, in this context, referring to the user account is more accurate.",
+          "suggestion": "Xin hãy chỉ định người dùng có quyền truy cập đọc máy chủ LDAP."
         }
       ],
       "approved_at": null

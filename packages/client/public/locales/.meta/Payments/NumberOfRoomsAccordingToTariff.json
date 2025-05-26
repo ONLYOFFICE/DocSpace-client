@@ -3,7 +3,7 @@
   "content": "Number of rooms according to your tariff plan: {{currentValue}}/{{maxValue}}",
   "content_en_sha1_hash": "50c21689104208a689abc871f03f39356411633c",
   "created_at": "2025-05-19T21:30:53.710Z",
-  "updated_at": "2025-05-21T06:32:53.040Z",
+  "updated_at": "2025-05-24T06:47:31.029Z",
   "comment": {
     "text": "This translation key displays the number of rooms available according to a user's tariff plan. It is used in an invite quota warning dialog to show the current room count and maximum available rooms by quota.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"خطة التعريف الخاصة بك\" (khitat al-ta'rif al-khassa bik) literally translates to 'your private tariff plan.' While understandable, a more natural and common phrasing for 'tariff plan' in this context would be \"خطة التسعير\" (khitat al-tas'eer) or simply \"التعريفة\" (al-ta'rifa).",
+          "suggestion": "عدد الغرف وفقًا للتعريفة الخاصة بك: {{currentValue}}/{{maxValue}}"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -45,18 +51,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Počet místností podle vašeho tarifního plánu' is not the most natural or common way to express 'Number of rooms according to your tariff plan' in Czech. 'Tarifní plán' sounds a bit formal in this context.",
-          "suggestion": "Počet pokojů podle vašeho tarifu: {{currentValue}}/{{maxValue}}"
-        },
-        {
-          "type": "formatting",
-          "description": "The Czech translation preserves the placeholder format '{{currentValue}}/{{maxValue}}'. While technically correct, it might be better to align with the overall application's placeholder format.",
-          "suggestion": "No change needed, but consider if the application uses a different placeholder format."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -92,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'tariff' is translated as 'սակագնային պլանի'. While technically correct, a more common and natural translation might be 'ծառայության պլան' (service plan) or simply 'ծառայությանը' (the service).",
-          "suggestion": "Consider 'Ծառայության պլան' or 'Ծառայությանը'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -161,13 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Limita de săli permisă conform planului dvs tarifar' is too literal and not natural-sounding. 'Limita' implies a hard limit, whereas the English suggests a permissible number. A more accurate translation would convey 'allowed' or 'permitted' in a more flowing way.",
-          "suggestion": "Numărul de camere permis conform planului dvs. tarifar: {{currentValue}}/{{maxValue}}"
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, the translation lacks the direct mirroring of the English structure ('Number of...'). Keeping 'Numărul de camere' would improve consistency.",
-          "suggestion": "Numărul de camere permis conform planului dvs. tarifar: {{currentValue}}/{{maxValue}}"
+          "description": "The term 'Limita' (limit) doesn't perfectly convey the meaning of 'Number'. While it's related, 'Număr' would be a more direct and accurate translation of 'Number'.",
+          "suggestion": "Număr de săli permis conform planului dvs tarifar: {{currentValue}}/{{maxValue}}"
         }
       ],
       "approved_at": null
@@ -183,9 +167,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The colon after 'ඔබේ ගාමි සැලැස්මට අනුව' should be followed by a space.",
-          "suggestion": "ඔබේ ගාමි සැලැස්මට අනුව කාමර සංඛ්‍යාව: "
+          "type": "spelling",
+          "description": "The word 'ඔබේ' (oba'e) should be 'ඔබගේ' (obage) for grammatical correctness when referring to 'your'.",
+          "suggestion": "ඔබගේ ගාමි සැලැස්මට අනුව"
         }
       ],
       "approved_at": null
@@ -205,7 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"тарифном\" should be spelled as \"тарифном\".",
+          "suggestion": "тарифном"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -238,8 +228,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"费用版本\" (fèi yòng bǎn běn) is not the best translation for \"tariff plan\". It implies a version of fees, rather than the plan itself. A more appropriate term would be \"费率计划\" (fèi lǜ jì huà) or simply \"套餐\" (tāo cān).",
-          "suggestion": "您的费率计划的房间数量为：{{currentValue}}/{{maxValue}}"
+          "description": "The translation of \"tariff plan\" is inaccurate. \"费用版本\" (feiyong banben) literally translates to \"fee version\" which isn't the intended meaning of \"tariff plan.\" A more accurate translation would convey the concept of a pricing tier or rate plan.",
+          "suggestion": "您的套餐价格中包含的房间数量为：{{currentValue}}/{{maxValue}}"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the colon after '您的套餐价格中包含的房间数量为' may feel slightly abrupt in Chinese. A softer transition might improve flow.",
+          "suggestion": "您的套餐价格中包含的房间数量是：{{currentValue}}/{{maxValue}}"
         }
       ],
       "approved_at": null

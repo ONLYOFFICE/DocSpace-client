@@ -3,7 +3,7 @@
   "content": "Manually configure the parameters for embedding your {{productName}}.",
   "content_en_sha1_hash": "19a15a534fcbbf259ce618528c67b5214076972a",
   "created_at": "2025-05-19T21:30:54.436Z",
-  "updated_at": "2025-05-21T09:16:47.025Z",
+  "updated_at": "2025-05-24T09:28:56.211Z",
   "comment": {
     "text": "Manually configure parameters for embedding {{productName}}. This description is used to inform users about customizing their {{productName}} integration settings in the Portal Settings page.",
     "is_auto": true,
@@ -36,13 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"قم بتشكيل الإعدادات يدويا لتضمين {{productName}} الخاص بك.\" is not the most accurate translation of \"Manually configure the parameters for embedding your {{productName}}.\"",
-          "suggestion": "قم بتكوين الإعدادات يدويًا لتضمين {{productName}} الخاص بك."
-        },
-        {
-          "type": "grammar",
-          "description": "While technically correct, using 'تشكيل' (tashkeel - to shape/form) is less common and slightly awkward in this context. 'تكوين' (takween - to configure/compose) is a more natural choice.",
-          "suggestion": "Use 'تكوين' instead of 'تشكيل'."
+          "description": "The phrase \"قم بتشكيل الإعدادات يدويا\" is not the best translation for \"Manually configure the parameters\". \"تشكيل\" implies shaping or molding, which doesn't accurately convey the meaning of configuration.  A more appropriate verb would be \"تكوين\" (takween) which means to configure or compose.",
+          "suggestion": "قم بتكوين الإعدادات يدويا لتضمين {{productName}} الخاص بك."
         }
       ],
       "approved_at": null
@@ -52,9 +47,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'konfiqurasiya' is a transliteration of 'configure' and not a native Azerbaijani word. A more appropriate word would be 'tənzimlə'",
-          "suggestion": "tənzimlə"
+          "type": "incorrect_translation",
+          "description": "The translation 'əlçəkmək' is not the best choice for 'configure' in this context. It implies drawing or measuring, not setting up parameters.  'Konfiqurasiya etmək' or 'parametrləri düzəltmək' would be more accurate.",
+          "suggestion": "Use 'konfiqurasiya etmək' or 'parametrləri düzəltmək' instead of 'ələlçəkmək'."
         }
       ],
       "approved_at": null
@@ -71,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'prostor' (space) doesn't accurately convey the meaning of 'embedding' in this context. It implies a physical space rather than embedding code or functionality.",
-          "suggestion": "Ručně nakonfigurujte parametry pro implementaci {{productName}}."
+          "description": "The word 'prostor' (space) doesn't accurately convey the meaning of 'embedding'. The English 'embedding' refers to integrating or including something within another context, not a physical space.",
+          "suggestion": "Ručně nakonfigurujte parametry pro integraci {{productName}}."
         }
       ],
       "approved_at": null
@@ -89,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'manually' is not accurately conveyed by 'μη αυτόματα'. While technically correct, it sounds clunky and less natural in Greek. A more appropriate translation might be 'με το χέρι' or 'χειροκίνητα'.",
-          "suggestion": "Ρυθμίστε χειροκίνητα τις παραμέτρους για την ενσωμάτωση του {{productName}} σας."
+          "description": "The translation 'Ρυθμίστε μη αυτόματα τις παραμέτρους για την ενσωμάτωση του {{productName}} σας.' is a bit awkward. 'Μη αυτόματα' translates to 'manually' but can sound a bit formal or stiff in Greek. A more natural phrasing would emphasize 'manual configuration'.",
+          "suggestion": "Χειροκίνητη διαμόρφωση των παραμέτρων για την ενσωμάτωση του {{productName}} σας."
         }
       ],
       "approved_at": null
@@ -106,9 +101,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"upottamista varten\" is a literal translation of \"for embedding\" and while technically correct, it's not the most natural phrasing in Finnish. A more idiomatic way to express 'for embedding' would be 'integrointia varten' or 'käyttöä varten'.",
-          "suggestion": "Määritä parametrit manuaalisesti {{productName}}-integrointia varten."
+          "type": "formatting",
+          "description": "The Finnish translation includes a hyphenated word 'upottamista' where a space might be more natural in this context. While technically correct, it might feel slightly awkward for a native Finnish speaker.",
+          "suggestion": "Määritä parametrit manuaalisesti {{productName}}-upotusta varten."
         }
       ],
       "approved_at": null
@@ -124,14 +119,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word \"ներկառուցման\" (nerkaruts'man) is technically correct but might be overly formal or technical for a user-facing description. Consider a more accessible term.",
-          "suggestion": "ձեր {{productName}}-ի միացման պարամետրերը:"
-        },
-        {
-          "type": "formatting",
-          "description": "The colon at the end of the sentence feels abrupt. It would be more natural to end with a period.",
-          "suggestion": "Ձեռքով կարգավորեք ձեր {{productName}}-ի միացման պարամետրերը։"
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Ձեռքով կարգավորեք ձեր {{productName}}-ի ներկառուցման պարամետրերը:\" is a literal translation and could be improved for naturalness in Armenian. The word 'ներկառուցման' (nerkaruts'man) is quite formal and 'embedding' might be better conveyed with a more accessible term depending on the context. It also lacks some of the nuance of 'manually configure'.",
+          "suggestion": "Consider alternatives like: 'Ձեռքով ավելացրեք ձեր {{productName}} պարամետրերը:' (Manually add your {{productName}} parameters) or 'Ձեռքով ծրագրավորեք ձեր {{productName}} ներդրման պարամետրերը:' (Manually program your {{productName}} integration parameters)."
         }
       ],
       "approved_at": null
@@ -145,7 +135,18 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation doesn't accurately convey the meaning of the English content. The English text refers to manually configuring *parameters* for embedding, whereas the Japanese translation focuses on inputting the domain name without URL path or additional characters. This is a significant shift in meaning.",
+          "suggestion": "Consider a translation that reflects the configuration of parameters, such as \"{{productName}}の埋め込みに必要なパラメータを手動で設定してください。\" or \"{{productName}}の埋め込み設定を行うために、パラメータを直接入力してください。\""
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'ドメイン名をURLパスや付加文字を入れずに入力してください' is quite long and potentially awkward in Japanese. While technically correct, it can be improved for clarity and flow.",
+          "suggestion": "Break down the sentence or rephrase it for better readability, for example, \"{{productName}}のドメイン名を、URLパスや追加文字を含めずに直接入力してください。\""
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -160,8 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ຝັງ' (fang) could be interpreted as 'bury' or 'embed'. While 'embed' is likely the intended meaning, ensuring clarity for the Lao audience is important.  Consider alternatives depending on the context.",
-          "suggestion": "Consider alternatives like 'ເຊື່ອມໂອນ' (seuam non) which means 'integrate', or 'ປະກອບ' (krap) which means 'incorporate' to ensure the intended meaning of 'embed' is accurately conveyed."
+          "description": "The word 'ຝັງ' (fang) is a bit awkward in this context. While it technically means 'embed,' a more natural phrasing might be desirable.",
+          "suggestion": "Consider using a word like 'ເຊື່ອມຕໍ່' (sueam toi) which means 'connect' or 'integrate' depending on the specific meaning you wish to convey."
         }
       ],
       "approved_at": null
@@ -178,8 +179,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Configureer de parameters voor het insluiten van uw {{productName}} handmatig' is overly literal. A more natural Dutch phrasing would be 'Configureer handmatig de parameters voor het integreren van uw {{productName}}' or 'Configureer handmatig de parameters om uw {{productName}} in te voegen'. 'Insluiten' is technically correct, but sounds awkward in this context.",
-          "suggestion": "Configureer handmatig de parameters voor het integreren van uw {{productName}}"
+          "description": "The translation \"Configureer de parameters voor het insluiten van uw {{productName}} handmatig.\" is a bit awkward. 'Insluiten' is a direct translation of 'embedding' and might not be the most natural Dutch phrasing. A more natural phrasing might focus on integration or incorporation.",
+          "suggestion": "Configureer de parameters voor het integreren van uw {{productName}} handmatig."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'handmatig' at the end feels a little clunky. In Dutch, it's often more natural to place the adverb closer to the verb it modifies.",
+          "suggestion": "Configureer de parameters handmatig voor het integreren van uw {{productName}}."
         }
       ],
       "approved_at": null
@@ -208,8 +214,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'spațiul' (space) doesn't accurately convey the meaning of 'embedding'. 'Embedding' implies integrating or including something within something else. A better translation would be something that reflects this concept, like 'implementarea' or 'încorporarea'.",
-          "suggestion": "Configurați manual parametrii pentru implementarea {{productName}}."
+          "description": "The term \"spațiul\" doesn't accurately convey the meaning of \"embedding\" in this context. It translates to 'space' which isn't what's being described.",
+          "suggestion": "Configurați manual parametrii pentru integrarea {{productName}}."
         }
       ],
       "approved_at": null
@@ -226,13 +232,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ඔබගේ {{productName}} කාවැද්දීම සඳහා පරාමිති අතින් වින්‍යාස කරන්න.\" doesn't accurately convey the meaning of 'Manually configure the parameters for embedding your {{productName}}'. 'කාවැද්දීම' (kavaddim) translates to 'embedding' but the overall sentence structure is awkward and not idiomatic Sinhala. It implies a continuous process of embedding rather than a one-time configuration.",
-          "suggestion": "ඔබගේ {{productName}} නිෂ්පාදනය යෙදවීමට අවශ්‍ය පරාමිති අතින් සැකසීමට."
+          "description": "The translation \"ඔබගේ {{productName}} කාවැද්දීම සඳහා පරාමිති අතින් වින්‍යාස කරන්න.\" doesn't accurately convey the meaning of \"Manually configure the parameters for embedding your {{productName}}.\" 'කාවැද්දීම' (kavaddim) translates to 'embedding' in a more abstract or figurative sense (like a feeling or impression). A more accurate translation would focus on the technical aspect of embedding.",
+          "suggestion": "ඔබගේ {{productName}} යහපත් ආකාරයෙන් ස්ථාපිත කිරීම සඳහා පරාමිති අතින් වින්‍යාස කරන්න. (Obage {{productName}} yāpatha ākāraman sthāpitan kirimata paraṃti athin vinyāsa karan)"
         },
         {
           "type": "formatting",
-          "description": "The Sinhala translation does not maintain the variable placeholder `{{productName}}` in the same format as the English source.  It should ideally be identical.",
-          "suggestion": "Ensure the variable placeholder `{{productName}}` remains consistent in formatting (e.g., braces and capitalization) with the English source."
+          "description": "The placement of the {{productName}} variable is consistent between the English and Sinhala sentences, which is good.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -255,13 +261,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Ручно конфигуриши параметре за уграђивање вашег {{productName}}-а' is not a precise translation of 'Manually configure the parameters for embedding your {{productName}}'.  'Ручно конфигуриши' implies a direct command or instruction ('You manually configure'). A more accurate translation would convey the *possibility* of manual configuration.",
-          "suggestion": "Ручна конфигурација параметара за уграђивање вашег {{productName}}-а."
+          "description": "The word 'уграђивање' (ugrađivanje) translates more closely to 'embedding' or 'integration' rather than a direct 'configuring'. It's a functional equivalent but may not be the most natural wording. A more accurate translation of 'configuring' might involve words like 'подешавање' (podešavanje).",
+          "suggestion": "Ручно подесите параметре за уграђивање вашег {{productName}}-а."
         },
         {
           "type": "grammar",
-          "description": "While not strictly incorrect, the phrase 'Ручно конфигуриши' sounds slightly informal and directive.  A more formal tone would be more appropriate for documentation.",
-          "suggestion": "Ручна конфигурација"
+          "description": "While grammatically understandable, the sentence could be improved for flow and naturalness in Serbian. The direct translation structure can feel clunky.",
+          "suggestion": "Ручно конфигуришите параметре за уграђивање вашег {{productName}}-а."
         }
       ],
       "approved_at": null
@@ -271,9 +277,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The Serbian translation uses 'vašeg' which implies possession. The English original is a general instruction, not referring to someone's specific product. It's more appropriate to use a form indicating a general product.",
-          "suggestion": "Ručno konfiguriši parametre za ugrađivanje {{productName}}."
+          "type": "formatting",
+          "description": "The Serbian translation includes an unnecessary hyphen after 'productName'.",
+          "suggestion": "Ručno konfiguriši parametre za ugrađivanje vašeg {{productName}}."
         }
       ],
       "approved_at": null
@@ -290,7 +296,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'space' (простору) doesn't accurately convey the meaning of 'embedding'. It implies a physical location rather than the integration of the product.",
+          "description": "The word 'простору' (prostoru) which translates to 'space' doesn't accurately reflect the intended meaning of 'embedding' in this context. The English phrase 'embedding your {{productName}}' implies integrating or including it, not referring to it as a space.",
           "suggestion": "Вручну налаштуйте параметри для інтеграції вашого {{productName}}."
         }
       ],

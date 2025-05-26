@@ -3,7 +3,7 @@
   "content": "Group Filter",
   "content_en_sha1_hash": "e1f78e43cf6dc41a94e534219681eca85818c211",
   "created_at": "2025-05-19T21:30:54.211Z",
-  "updated_at": "2025-05-21T08:20:30.324Z",
+  "updated_at": "2025-05-24T08:33:13.473Z",
   "comment": {
     "text": "The \"LdapGroupFilter\" translation key is used to describe a filter field for LDAP group membership in the PortalSettings page. It appears as a label above a text input field and helps users understand the purpose of this field.",
     "is_auto": true,
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Խմբի զտիչ\" doesn't accurately convey the meaning of \"Group Filter.\" \"Զտիչ\" translates more closely to 'strainer' or 'filter' in a literal sense, not the contextual meaning of a filter applied to groups. A more accurate translation would reflect the concept of a filter used to define or select a group.",
-          "suggestion": "Consider a translation like \"Խմբի ընտրիչ\" (Khumbi entrich) which means 'Group Selector' or \"Խմբի ստեղծիչ\" (Khumbi stegtich) meaning 'Group Creator/Definer', depending on the intended function. Further context may be required for the most appropriate choice."
+          "description": "The Armenian translation 'Խմբի զտիչ' is a literal translation of 'filter' and doesn't accurately convey the meaning of 'Group Filter' in this context. It sounds awkward and technical.",
+          "suggestion": "A better translation would be something like 'Խմբի դիրքորոշիչ' (Khombi dirtqoroshich - Group Qualifier/Criteria) or 'Խմբի ընտրիչ' (Khombi entrich - Group Selector)."
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ກຸ່ມ ບັງຄັບໃຊ້\" doesn't accurately convey the meaning of \"Group Filter\". \"ບັງຄັບໃຊ້\" translates to 'enforce' or 'implement,' which isn't the intended meaning. A filter implies selection or criteria.",
-          "suggestion": "A more appropriate translation might be something like \"ຕົວເລືອກກຸ່ມ\" (tua leuak gum - Group Selection) or \"ການກັ່ນຕອນກຸ່ມ\" (gaan gan ton gum - Group Filtering)."
+          "description": "The Lao translation 'ກຸ່ມ ບັງຄັບໃຊ້' translates to 'Group Enforcement' which doesn't accurately convey the meaning of 'Group Filter'. 'Filter' implies a selection or restriction, whereas 'Enforcement' implies application or imposition.",
+          "suggestion": "Consider alternatives like 'ກຸ່ມ ກັ່ນຕອນ' (Group Filtered) or 'ກຸ່ມ ຕໍາແຫນ່ງ' (Group Criteria) depending on the specific context and intended meaning."
         }
       ],
       "approved_at": null
@@ -162,7 +162,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Фильтр групп' is literal but could be improved for clarity and naturalness. 'Групп' implies a filter *of* groups, which might not be the intended meaning. The original 'Group Filter' is a filter *for* groups, not a filter *of* groups.",
+          "description": "While technically correct, \"Фильтр групп\" is a slightly awkward phrasing in Russian. It literally translates to \"Filter of groups.\" A more natural translation would be \"Фильтр для групп\" or \"Групповой фильтр\".",
           "suggestion": "Фильтр для групп"
         }
       ],
@@ -173,9 +173,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The Sinhala word 'පෙරහන' (perahana) is a transliteration of 'filter' and while understandable, 'පෙරහුද' (perahuda) or 'ගැටයුම් පෙරහන' (getyuma perahana) might be a more natural and common translation for 'filter' in this context of LDAP groups.",
-          "suggestion": "Consider 'පෙරහුද' or 'ගැටයුම් පෙරහන' for a more natural and common translation."
+          "type": "incorrect_translation",
+          "description": "While 'කණ්ඩායම් පෙරහන' is understandable, a more accurate and natural translation of 'Group Filter' in Sinhala might be 'සෑදුම් කණ්ඩායම්' or 'මණ්ඩල පෙරහන'. 'කණ්ඩායම් පෙරහන' sounds a bit literal and doesn't quite capture the intended meaning in a user-facing context within LDAP configuration.",
+          "suggestion": "Consider 'සෑදුම් කණ්ඩායම්' or 'මණ්ඩල පෙරහන'."
         }
       ],
       "approved_at": null
@@ -195,7 +195,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Групни филтер\" is understandable, a more accurate and natural-sounding translation of \"Group Filter\" in Serbian (Cyrillic) would be \"Филтер група\" or \"Филтрирање група\". \"Групни филтер\" literally translates to 'Group-y filter' which isn't idiomatic.",
+          "suggestion": "Филтер група"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

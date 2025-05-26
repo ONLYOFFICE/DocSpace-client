@@ -3,7 +3,7 @@
   "content": "Collaboration room",
   "content_en_sha1_hash": "020e5e753e7a2509b4e791bcc1a8abc08bb1e51d",
   "created_at": "2025-05-19T21:30:43.513Z",
-  "updated_at": "2025-05-22T11:56:37.712Z",
+  "updated_at": "2025-05-26T07:57:32.588Z",
   "comment": {
     "text": "The \"CollaborationRoomTitle\" translation key is used to display the label for collaboration rooms in a portal settings interface. This text appears on screens where users select or filter room types, and it provides clarity about the purpose of each room category. Translators should focus on accurately conveying the meaning of this text to support internationalization efforts.",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\presets\\RoomSelector.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
       "line_number": 87,
       "context": "label: t(\"Common:FormFilingRoomTitle\"),\n roomType: RoomsType.FormRoom,\n },\n {\n key: \"room-type-collaboration\",\n label: t(\"Common:CollaborationRoomTitle\"),\n roomType: RoomsType.EditingRoom,\n },\n {\n key: \"room-type-public\",\n label: t(\"Common:PublicRoom\"),",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\sub-components\\FilterBlock.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
       "line_number": 120,
       "context": "label: t(\"Common:FormFilingRoomTitle\"),\n roomType: RoomsType.FormRoom,\n },\n {\n key: \"room-type-collaboration\",\n label: t(\"Common:CollaborationRoomTitle\"),\n roomType: RoomsType.EditingRoom,\n },\n {\n key: \"room-type-public\",\n label: t(\"Common:PublicRoom\"),",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\shared\\components\\room-type\\RoomType.utils.ts",
+      "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
       "line_number": 13,
       "context": ") => {\n if (isTemplate) return t(\"Common:FromTemplate\");\n \n switch (roomType) {\n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomTitle\");\n case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoom\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomTitle\");\n case RoomsType.PublicRoom:",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Комната для совместного редактирования\" is a very literal and somewhat clunky translation of \"Collaboration room\". It's a functional description but lacks the conciseness and natural flow of a good translation for a user interface label.",
-          "suggestion": "Consider alternatives like \"Комната для совместной работы\" (Room for collaborative work) or \"Общая комната\" (Shared room) which are more common and natural."
+          "description": "While technically correct, \"Комната для совместного редактирования\" is a very literal and somewhat clunky translation. A more natural and common translation for 'Collaboration room' would be something like 'Комната для сотрудничества' or 'Совместная комната'.",
+          "suggestion": "Consider \"Комната для сотрудничества\" or \"Совместная комната\"."
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Соба за сарадњу\" is not an accurate translation of \"Collaboration room\".  \"Соба\" means \"room\", \"за\" means \"for\", and \"сарадњу\" is in the accusative case meaning \"collaboration\". A more appropriate translation would be \"Простор за сарадњу\" (Prostor za saradnju) which translates to 'Space for collaboration' or 'Collaboration space'.",
-          "suggestion": "Простор за сарадњу"
+          "description": "The Serbian (Cyrillic) translation 'Соба за сарадњу' is a literal translation that doesn't quite capture the natural meaning of 'Collaboration room'. It translates to 'Room for cooperation'.",
+          "suggestion": "A more natural translation would be 'Простор за сарадњу' (Prostor za saradnju) which translates to 'Collaboration space' or 'Радна просторија за сарадњу' (Radna prostorija za saradnju) which translates to 'Workspace for collaboration'."
         }
       ],
       "approved_at": null

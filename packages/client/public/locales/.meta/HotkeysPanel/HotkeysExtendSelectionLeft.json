@@ -3,7 +3,7 @@
   "content": "Extend selection left",
   "content_en_sha1_hash": "c040981a3b185557e1f6d4a19f1f5dda8f680e5c",
   "created_at": "2025-05-19T21:30:55.051Z",
-  "updated_at": "2025-05-21T10:32:23.944Z",
+  "updated_at": "2025-05-24T10:42:13.230Z",
   "comment": {
     "text": "This translation key is used to display the text \"Extend selection left\" in a keyboard shortcut label within an on-screen interface. It appears as part of hotkey indications in a UI component displaying keyboard shortcuts for interacting with selections.",
     "is_auto": true,
@@ -45,13 +45,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Разширяване на избора вляво' is a literal translation but sounds somewhat formal and less natural in this context. A more natural phrasing for a hotkey label would be 'Избиране наляво' or 'Преместване наляво'.",
-          "suggestion": "Избиране наляво"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -96,13 +90,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ընդարձակում է ընտրարկումը ձախ\" is not the most natural or accurate translation of \"Extend selection left.\"  It literally translates to \"Extends the selection left.\" A more accurate and idiomatic translation would convey the action of extending the selection.",
-          "suggestion": "Ընտրությունը ձախ ավելացնել (Entarkut'yun dxax avelelcnel)"
+          "description": "The translation 'Ընդարձակում է ընտրարկումը ձախ' is a literal translation and doesn't convey the intended meaning of 'Extend selection left' in a natural way for Armenian users.  'Ընդարձակում է' implies a continuous action, while 'Extend selection' implies a single action.  Also, 'ընտրարկումը' is somewhat awkward.",
+          "suggestion": "A more natural translation would be something like 'Ձախ ընտրումը ընդարձակել' or 'Ընտրումը ձախ ընդարձակել'. Another option might be 'Ձախ կողմ ընտրումը ընդարձակել' to specifically refer to extending the selection to the left."
         },
         {
           "type": "grammar",
-          "description": "The phrase \"Ընդարձակում է ընտրարկումը\" is a bit awkward in Armenian.  The verb conjugation and noun usage are not the most common way to express this action.",
-          "suggestion": "Ընտրությունը ձախ ավելացնել (Entarkut'yun dxax avelelcnel)"
+          "description": "The word order 'Ընդարձակում է ընտրարկումը ձախ' is grammatically a bit clunky in Armenian.",
+          "suggestion": "Reordering the words as suggested in the 'incorrect_translation' issue would improve the flow."
         }
       ],
       "approved_at": null
@@ -119,8 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '選択範囲の拡大（左）' while understandable, is a bit literal and could be improved for naturalness. '拡大（左）' is technically correct, but '左へ' or '左方向へ' might flow better depending on the context of hotkeys.",
-          "suggestion": "選択範囲を左へ拡張"
+          "description": "While \"選択範囲の拡大（左）\" is understandable, it's a somewhat literal translation and could be improved for naturalness. \"Extend selection left\" implies expanding an existing selection towards the left, which isn't perfectly conveyed.",
+          "suggestion": "候補：選択範囲を左に拡張"
         }
       ],
       "approved_at": null
@@ -131,8 +125,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '왼쪽으로 선택 확장' is a literal translation and doesn't flow naturally in Korean for a user interface element. It's too technical and clunky.",
-          "suggestion": "Consider a more natural phrasing like '왼쪽으로 선택 늘리기' or '왼쪽 선택 확장'."
+          "description": "The translation '왼쪽으로 선택 확장' while conveying the general idea, is a bit literal and could be improved for naturalness in Korean UI. '선택 확장' sounds slightly awkward in this context.",
+          "suggestion": "Consider '왼쪽 선택 늘리기' or '왼쪽으로 선택 영역 확장하기' for a more natural feel.  '늘리기' emphasizes expansion, and the latter is more formal and precise, suitable if the UI requires it."
         }
       ],
       "approved_at": null
@@ -140,13 +134,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ຂະຫຍາຍ' (khahnyai) can also be written as 'ຂยาย' (khayai) for brevity and it is more commonly used in this context.",
-          "suggestion": "ຂະຫຍາຍ -> ຂະຫຍາຍ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -173,7 +161,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Expandir a seleção para a esquerda\" is understandable, \"Extend selection left\" implies expanding the selection *towards* the left. A more precise translation would be \"Estender a seleção para a esquerda\" or \"Alargar a seleção para a esquerda\". \"Expandir\" often implies a volume change, not a positional shift.",
+          "description": "While 'Expandir a seleção para a esquerda' is understandable, a more accurate and idiomatic translation of 'Extend selection left' would be 'Estender a seleção para a esquerda'. 'Expandir' implies making something larger, while 'extend' implies reaching further.",
           "suggestion": "Estender a seleção para a esquerda"
         }
       ],
@@ -203,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'තේරීම වමට පතුරුවන්න' while conveying a general idea, isn't the most accurate translation of 'Extend selection left'. 'පතුරුවන්න' implies spreading or scattering, which doesn't quite capture the action of extending a selection. A more accurate translation would emphasize 'move' or 'shift'.",
-          "suggestion": "තේරීම වමට දමන්න (Tērima vama dammaṇa) - Move selection left"
+          "description": "The translation 'තේරීම වමට පතුරුවන්න' while conveying a general idea of extending selection left, isn't the most natural or precise translation. 'පතුරුවන්න' (patuurawanna) means 'to spread' which doesn't perfectly align with the action of extending a selection.",
+          "suggestion": "Consider a more direct translation like 'මැද මාරුවට දකුණට' (made maaruwata dakunata) which translates to 'move to the left' or 'shift to the left'."
         }
       ],
       "approved_at": null
@@ -221,7 +209,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Premakni izbiro na levo' is a functional translation but not the most natural or precise for 'Extend selection left'. 'Extend' implies expanding the selection, whereas 'Premakni' implies moving it. A more appropriate translation would better convey the action of extending.",
+          "description": "The translation 'Premakni izbiro na levo' translates to 'Move selection to the left'. While close, 'Extend selection left' implies an expansion of the selection, not just a movement. A more accurate translation would capture this nuance.",
           "suggestion": "Razširi izbiro na levo"
         }
       ],
@@ -233,8 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Прошири селекцију лево\" doesn't fully capture the nuance of \"Extend selection left.\" A more accurate translation might emphasize the action of extending, not just the direction.",
-          "suggestion": "Раширење селекције лево"
+          "description": "The translation 'Прошири селекцију лево' is a literal translation but might not be the most natural phrasing for a software interface. 'Прошири селекцију на лево' or 'Прошири избор лево' could be better alternatives.",
+          "suggestion": "Прошири избор лево"
         }
       ],
       "approved_at": null

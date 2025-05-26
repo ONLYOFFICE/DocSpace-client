@@ -3,7 +3,7 @@
   "content": "Port",
   "content_en_sha1_hash": "fe035157cda20b361ce30613e29b5d6f1a46b5fc",
   "created_at": "2025-05-19T21:30:53.306Z",
-  "updated_at": "2025-05-21T01:33:19.034Z",
+  "updated_at": "2025-05-24T02:46:51.741Z",
   "comment": {
     "text": "This translation key is used to display \"Port\" in a user interface, typically appearing as part of a settings or configuration section. It likely corresponds to an SMTP port number setting, guiding the user to input a valid port value (0-65535).",
     "is_auto": true,
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຜອດຶ\" does not accurately translate \"Port\" in the context of SMTPSettings. \"ຜອດຶ\" appears to be a misspelling or unrelated term.",
-          "suggestion": "The correct Lao translation for \"Port\" in this context would likely be something like \"ຕຳ ແຜ່ນປະຕູ\" (tam paen pratu) or a similar term related to a network connection point, depending on the desired level of formality and technical accuracy. A more direct, yet potentially less clear, translation could be \"ຂອດ\" (khot)."
+          "description": "The Lao translation \"ຜອດຶ\" is not the correct translation for \"Port\" in the context of SMTPSettings. It appears to be a misspelling or an unrelated word. The correct translation would likely be \"ປະຕູ\" (pratu) which means 'door' or 'gateway', often used in a technical context.",
+          "suggestion": "ປ່ຽນເປັນ \"ປະຕູ\""
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"තොට\" does not accurately translate \"Port\" in the context of SMTPSettings. \"තොට\" generally means 'well' or 'pit'.  The correct translation should relate to a network port number.",
-          "suggestion": "Possible suggestions include: \"රක්ෂිත වරාය\" (rakshita varaya - secured port), \"විධාන වරාය\" (vidhana varaya - connection port), or a more direct transliteration/explanation of 'port' depending on the desired level of technical accuracy."
+          "description": "The Sinhala translation \"තොට\" does not accurately translate \"Port\" in the context of SMTPSettings. \"තොට\" generally refers to a harbor or a small pond. The correct translation should be something related to a network port number.",
+          "suggestion": "Consider using a more accurate translation like \"අන්තර්ජාල බොරුව\" (antharjala boruwa - internet port) or \"වියුඅන්තර් මුඛය\" (viyu antharamukha - network interface) or consult a technical translator for the best equivalent."
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Enter the LDAP server without the port number.",
   "content_en_sha1_hash": "680c834775f4c15824cec517ae01ba2229a60c4e",
   "created_at": "2025-05-19T21:30:54.271Z",
-  "updated_at": "2025-05-21T08:07:53.181Z",
+  "updated_at": "2025-05-24T08:21:34.787Z",
   "comment": {
     "text": "The \"LdapServerTooltip\" translation key is used to provide a tooltip when the user types into the LDAP server field, explaining that the port number should not be included. This appears as an inline help message next to the label for the LDAP server input field in the Connection Settings section of the Portal Settings page.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Arabic word 'المنفذ' (al-munfadh) is generally used for 'port' in a technical context. While acceptable, 'المنفذ' can also mean 'exit'. A more precise term might be preferred.",
+          "suggestion": "أدخل خادم LDAP بدون رقم البوابة."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -45,13 +51,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Zadejte server LDAP bez čísla portu' is a literal translation and doesn't flow naturally in Czech. A more natural phrasing would be 'Zadejte adresu LDAP serveru bez čísla portu.' or 'Zadejte LDAP server bez čísla portu.'",
-          "suggestion": "Zadejte adresu LDAP serveru bez čísla portu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Մուտք գործեք LDAP սերվեր առանց պորտի համարի:' is a literal translation and could be improved for naturalness.  'Մուտք գործեք' (Enter) is correct, but the phrase 'առանց պորտի համարի' (without port number) sounds slightly awkward in Armenian. A more natural phrasing would convey the same meaning.",
-          "suggestion": "Մուտքագրեք LDAP սերվերի հասցեն, պորտի համարը չներառեք:"
+          "description": "The translation 'Մուտք գործեք LDAP սերվեր առանց պորտի համարի:' is a literal translation and sounds somewhat unnatural in Armenian. A more natural phrasing would be closer to 'Նշեք LDAP սերվերի հասցեն պորտի համարը չներառելով:' or 'Մուտքագրեք LDAP սերվերի հասցեն, պորտի համարը միացնել չէք պետք:'",
+          "suggestion": "Նշեք LDAP սերվերի հասցեն պորտի համարը չներառելով:"
         }
       ],
       "approved_at": null
@@ -120,13 +120,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation is a bit literal and could be more natural. 'ເລກທີ່ຢູ່ຂອງພອດ' is a complex way of saying 'port number'.",
-          "suggestion": "ໃສ່ຊື່ອານຸລັກຂໍ້ມູນ LDAP ໂດຍບໍ່ຕ້ອງໃສ່ໝາຍເລກພອດ."
+          "description": "The Lao translation 'ໃສ່ຊື່ອານຸລັກຂໍ້ມູນ LDAP ໂດຍບໍ່ຕ້ອງໃສ່ເລກທີ່ຢູ່ຂອງພອດ' is a literal translation that doesn't quite convey the intended meaning of 'Enter the LDAP server without the port number'.  'ຊື່ອານຸລັກຂໍ້ມູນ' (name of the data) is redundant.  It would be better to simply say 'ໃສ່ຊິບເຊີບລ້າບ' (enter ldap server).",
+          "suggestion": "ໃສ່ຊິບເຊີບລ້າບໂດຍບໍ່ໃສ່ເລກທີ່ຢູ່ຂອງພອດ"
         },
         {
-          "type": "formatting",
-          "description": "The phrasing 'ໂດຍບໍ່ຕ້ອງໃສ່' is a bit long. Using a shorter alternative would improve readability.",
-          "suggestion": "ໃສ່ຊື່ອານຸລັກຂໍ້ມູນ LDAP ໂດຍບໍ່ຕ້ອງໃສ່ພອດ."
+          "type": "spelling",
+          "description": "While technically correct, 'ພອດ' might be replaced with a more commonly used term depending on the context. It's recommended to check the established terminology within the software/documentation.",
+          "suggestion": "ໃສ່ຊິບເຊີບລ້າບໂດຍບໍ່ໃສ່ເລກທີ່ຢູ່ຂອງພອດ (Consider using a more common term for 'port' if applicable)."
         }
       ],
       "approved_at": null
@@ -179,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"LDAP සේවකයගේ ලිපිනය, පෝට් අංකය නොමැතිව ඇතුළත් කරන්න.\" is a bit literal. A more natural phrasing would be \"LDAP සේවක ලිපිනය, පෝට් අංකම හැර ඇතුළත් කරන්න.\" or \"LDAP සේවක ලිපිනය, පෝට් අංකය ඉවත දී ඇතුළත් කරන්න\".",
-          "suggestion": "LDAP සේවක ලිපිනය, පෝට් අංකම හැර ඇතුළත් කරන්න."
+          "description": "The translation \"LDAP සේවකයගේ ලිපිනය, පෝට් අංකය නොමැතිව ඇතුළත් කරන්න.\" is too literal. A more natural phrasing would convey the same meaning. 'LDAP සේවක ලිපිනය පෝට් අංකය හැර ඇතුළත් කරන්න' or 'LDAP සේවක ලිපිනය, පෝට් අංකය හැර, මෙහි ඇතුළත් කරන්න' would be better.",
+          "suggestion": "LDAP සේවක ලිපිනය පෝට් අංකය හැර ඇතුළත් කරන්න."
         }
       ],
       "approved_at": null
@@ -194,13 +194,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Vnesite strežnik LDAP brez številke vrat' is a literal translation, but 'port number' might be better conveyed as 'število vrat' or 'vrata' in this context. 'Številka vrat' is technically correct but feels slightly awkward.",
-          "suggestion": "Vnesite strežnik LDAP brez vrat."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -208,9 +202,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Унесите LDAP сервер без броја порта' is a literal translation and doesn't flow naturally in Serbian. A more idiomatic translation would be better.",
-          "suggestion": "Унесите адресу LDAP сервера без дефинисања порта."
+          "type": "spelling",
+          "description": "The word 'броја' should be 'броја'.",
+          "suggestion": "Унесите LDAP сервер без броја порта."
         }
       ],
       "approved_at": null
@@ -221,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Unesite LDAP server bez broja porta' is a literal translation and, while understandable, isn't the most natural way to express the meaning in Serbian. 'Enter' implies a specific action, and a more idiomatic translation would be 'Odredite' or 'Navedite'.",
-          "suggestion": "Odredite LDAP server bez broja porta."
+          "description": "The translation 'Unesite LDAP server bez broja porta' is technically correct but sounds slightly unnatural. A more natural phrasing would be 'Unesite adresu LDAP servera bez broja porta.' The current phrasing lacks the Serbian word for 'address' when referring to a server address.",
+          "suggestion": "Unesite adresu LDAP servera bez broja porta."
         }
       ],
       "approved_at": null
@@ -245,8 +239,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Nhập máy chủ LDAP mà không có số cổng\" is a literal translation and sounds awkward in Vietnamese. A more natural phrasing would be 'Nhập địa chỉ máy chủ LDAP.'",
-          "suggestion": "Nhập địa chỉ máy chủ LDAP."
+          "description": "The translation 'Nhập máy chủ LDAP mà không có số cổng' is a literal translation and sounds unnatural in Vietnamese. A more natural phrasing would convey the same meaning.",
+          "suggestion": "Nhập địa chỉ máy chủ LDAP (không bao gồm số cổng)."
         }
       ],
       "approved_at": null

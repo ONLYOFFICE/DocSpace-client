@@ -3,7 +3,7 @@
   "content": "Play/Pause",
   "content_en_sha1_hash": "ebb1e1e891810d856a734c1b4498ff9b6f11d59c",
   "created_at": "2025-05-19T21:30:55.074Z",
-  "updated_at": "2025-05-21T10:27:29.193Z",
+  "updated_at": "2025-05-24T10:37:07.112Z",
   "comment": {
     "text": "This translation key is used to display the text \"Play/Pause\" in various hotkeys contexts within the application, likely on a panel or settings screen where users can customize shortcut keys. It appears alongside other hotkey inputs and controls.",
     "is_auto": true,
@@ -36,8 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Başladın/Dayandırın\" is not an accurate translation of \"Play/Pause\". \"Başladın\" means \"You started\" and \"Dayandırın\" means \"Stop/Halt\". It doesn't convey the intended meaning of pausing and resuming playback.",
-          "suggestion": "A more accurate translation would be something like \"Çal/Saxla\" (Play/Hold) or \"Qoş/Dayandır\" (Start/Stop), depending on the desired nuance."
+          "description": "The translation \"Başladın/Dayandırın\" directly translates to \"Started/Stopped\". While functionally close to \"Play/Pause\", it's not the most natural or common way to express this in Azerbaijani. 'Play' is more accurately conveyed by 'Çal' or 'Reproduksiya et'. 'Pause' can be 'Saxla'.",
+          "suggestion": "Consider \"Çal/Saxla\" or \"Reproduksiya et/Saxla\""
+        },
+        {
+          "type": "formatting",
+          "description": "The use of '/' is not ideal for separating two distinct actions in Azerbaijani. A more common separator would be a space.",
+          "suggestion": "Consider using a space between the two words, e.g., \"Çal Saxla\""
         }
       ],
       "approved_at": null
@@ -81,7 +86,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Lecture' is a valid translation for 'Play,' it might be too formal or not the most common phrasing for a hotkey label. 'Jouer/Pause' might be more natural.",
+          "suggestion": "Consider 'Jouer/Pause'"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -150,8 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Redare' can mean 'Play', it's a more formal term. 'Pauză' is the correct translation for 'Pause'. However, 'Play/Pause' is often better translated as a single concept. A more common and natural Romanian equivalent for 'Play/Pause' would be 'Redare/Oprire'.",
-          "suggestion": "Redare/Oprire"
+          "description": "While 'Redare' can mean 'playback' or 'rendering', 'Play' is better translated as 'Redare'. 'Pauză' is a correct translation for 'Pause'. However, the overall phrasing feels slightly unnatural.",
+          "suggestion": "Redare/Pauză is technically correct, but a more natural translation might be 'Redare/Oprire'."
         }
       ],
       "approved_at": null
@@ -159,13 +170,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Воспроизвести/Пауза' is understandable, 'Воспроизвести' is more accurately 'Resume' or 'Play' in this context, considering it's paired with 'Pause'. A more precise translation would consider the specific functionality of a 'Play' button, not just general playback.",
-          "suggestion": "Воспроизвести/Приостановить"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -174,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"වාදනය/විරාමය\" doesn't perfectly convey the meaning of \"Play/Pause\". \"වාදනය\" (vaadanaya) translates to 'discussion' or 'debate', not 'play'. \"විරාමය\" (viraamaya) is correct for 'pause'.",
-          "suggestion": "වාදන/විරාමය or වාද්‍යය/විරාමය. 'වාදන' (vaadan) can be used to represent 'playing' in this context."
+          "description": "The Sinhala translation \"වාදනය/විරාමය\" doesn't perfectly capture the meaning of \"Play/Pause\". \"වාදනය\" generally means \"discussion\" or \"debate\", not \"play\". \"විරාමය\" is correct for \"pause\".",
+          "suggestion": "වාදන/විරාමය could be considered, though 'වාදන' isn't ideal. A more appropriate translation might require a more complex phrase depending on the specific context.  Consider looking for alternative phrasing that accurately represents the 'play' function."
         }
       ],
       "approved_at": null
@@ -192,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Predvajaj\" is a valid translation for 'Play', \"Pavza\" is a direct transliteration of 'Pause' and might not be the most natural or commonly used term in Slovenian. A more idiomatic translation for 'Pause' in this context might be 'Zavrti' or 'Ustavi'.",
-          "suggestion": "Consider using 'Zavrti/Ustavi' instead of 'Predvajaj/Pavza'."
+          "description": "While 'Predvajaj' is a valid translation for 'Play', 'Pavza' is a direct transliteration of 'Pause' and might not be the most natural-sounding term for a user interface. A more idiomatic Slovenian equivalent of 'Pause' in this context would be 'Ustavi' or 'Zavrti'.",
+          "suggestion": "Consider using 'Ustavi/Zavrti' instead of 'Predvajaj/Pavza'."
         }
       ],
       "approved_at": null
@@ -204,8 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Пусти/Паузирај\" is understandable, a more accurate and natural translation of \"Play/Pause\" in Serbian (Cyrillic) would be \"Репродукуј/Паузирај\" or \"Пуштај/Паузирај\". \"Пусти\" is more akin to 'release' or 'let go'.",
-          "suggestion": "Репродукуј/Паузирај"
+          "description": "While technically correct, 'Пусти/Паузирај' doesn't quite capture the nuance of 'Play/Pause'. 'Пусти' is more like 'Start' or 'Release' rather than a general 'Play' command. A more natural translation might be 'Пуштање/Пауза'.",
+          "suggestion": "Пуштање/Пауза"
         }
       ],
       "approved_at": null
@@ -216,8 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Pusti' can mean 'Play', 'Pauziraj' is a verb form of 'pause'. It's better to use a noun or a more direct equivalent for 'Pause'. Consider 'Pauza' as a noun for 'Pause'.",
-          "suggestion": "Pusti/Pauza"
+          "description": "While 'Pusti' can mean 'Play', 'Pauziraj' is a more direct translation for 'Pause'. A more natural phrasing might be 'Reprodukcija/Pauza'.",
+          "suggestion": "Reprodukcija/Pauza"
         }
       ],
       "approved_at": null
@@ -240,7 +245,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Phát\" is a correct translation for 'Play', \"Tạm Dừng\" is a more literal translation of 'Temporary Stop'. 'Pause' generally implies a more functional pause, not just a temporary one. A more direct translation would be 'Tạm Ngừng' or 'Dừng'.",
+          "description": "While 'Phát' accurately translates 'Play', 'Tạm Dừng' is a more literal translation of 'Pause' and may not be the most natural phrasing in this context. A more common and concise translation for 'Pause' in a user interface would be 'Dừng'.",
           "suggestion": "Phát/Dừng"
         }
       ],

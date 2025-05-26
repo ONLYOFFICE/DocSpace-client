@@ -3,7 +3,7 @@
   "content": "Quotas",
   "content_en_sha1_hash": "34ed58657019e0ff061ea2eef787a27a97813fe2",
   "created_at": "2025-05-19T21:30:52.354Z",
-  "updated_at": "2025-05-21T03:31:19.140Z",
+  "updated_at": "2025-05-26T07:57:32.789Z",
   "comment": {
     "text": "The translation key \"Quotas\" corresponds to a title that displays storage management quotas. It is used in the \"Storage Management\" category of the Portal Settings page, appearing as a main title on screen, likely in a section header or button label.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/Quotas.js",
       "line_number": 40,
-      "context": "import { globalColors } from \"@docspace/shared/themes\";\n \n import { StyledBaseQuotaComponent, StyledMainTitle } from \"./StyledComponent\";\n import { QuotaPerRoomComponentSection } from \"./sub-components/QuotaPerRoom\";\n import { QuotaPerUserComponentSection } from \"./sub-components/QuotaPerUser\";\n import MobileQuotasComponent from \"./sub-components/MobileQuotas\";\n \n const QuotaPerItemsComponent = ({ isStatisticsAvailable }) => {\n if (isMobile())\n return <MobileQuotasComponent isDisabled={!isStatisticsAvailable} />;",
+      "context": "import { Link } from \"@docspace/shared/components/link\";\n \n import { StyledBaseQuotaComponent, StyledMainTitle } from \"./StyledComponent\";\n import { QuotaPerRoomComponentSection } from \"./sub-components/QuotaPerRoom\";\n import { QuotaPerUserComponentSection } from \"./sub-components/QuotaPerUser\";\n import MobileQuotasComponent from \"./sub-components/MobileQuotas\";\n \n const QuotaPerItemsComponent = ({ isStatisticsAvailable }) => {\n if (isMobile())\n return <MobileQuotasComponent isDisabled={!isStatisticsAvailable} />;",
       "module": "/packages/client"
     }
   ],
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Italian translation \"Quote\" does not accurately convey the meaning of \"Quotas.\" \"Quotas\" refers to limits or restrictions, whereas \"Quote\" means quotation or price.",
-          "suggestion": "Consider alternatives such as \"Limiti,\" \"Quote,\" or \"Massime\" depending on the specific context. \"Limiti\" is likely the most appropriate general translation."
+          "description": "The Italian translation \"Quote\" is not an accurate translation of \"Quotas\". \"Quotas\" refers to limits or restrictions, while \"Quote\" means quotation or price.",
+          "suggestion": "Consider translations like \"Limiti\", \"Quote\", or \"Massimi\" depending on the specific context within the settings."
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '容量制限' (ryou gen shigen) can be interpreted as 'limit', a more accurate translation for 'Quotas' in a settings context would be something closer to '制限' (seigen) or '割り当て' (wariate). '容量制限' implies a limit on capacity, which is not necessarily the meaning of 'Quotas'.",
-          "suggestion": "制限 (seigen) or 割り当て (wariate)"
+          "description": "While \"容量制限\" (ryou gen-shou) can sometimes translate to \"quota,\" it's more accurately \"capacity limit\" or \"storage limit.\" \"Quota\" often implies a defined allowance or entitlement, which isn't directly conveyed by this translation.",
+          "suggestion": "Consider alternatives like \"割り当て量\" (wari-ate-ryou - allocated amount) or \"利用制限\" (riyo-shigen - usage limit) depending on the specific context of 'Quotas'."
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English word \"Quotas\" (plural) is translated as \"Quota\" (singular) in Dutch. This implies a single quota rather than multiple quotas.",
-          "suggestion": "Consider translating to \"Quota's\" or \"Quoten\" to reflect the plural nature of the English term."
+          "description": "The English word \"Quotas\" (plural) has been translated to \"Quota\" (singular) in Dutch. This doesn't reflect the original meaning.",
+          "suggestion": "Quota's"
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Cote\" is not an accurate translation of \"Quotas\". \"Quotas\" refers to limits or restrictions, and \"Cote\" generally means 'odds' in a betting context. A more appropriate translation would depend on the specific context of \"Quotas\" within the Settings.",
-          "suggestion": "Consider alternatives like 'Limite', 'Cote', 'Restricții', or 'Alocări', depending on the intended meaning."
+          "description": "The translation 'Cote' does not accurately convey the meaning of 'Quotas'. 'Quotas' refers to limits or restrictions, while 'Cote' primarily means 'side' or 'corner'.",
+          "suggestion": "Consider translations like 'Limite', 'Cote', 'Restricții', or 'Limite de utilizare', depending on the specific context of the 'Settings:Quotas' key."
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"සලාක\" does not accurately convey the meaning of \"Quotas.\" It doesn't have a direct or commonly understood equivalent in Sinhala relating to resource limits or restrictions.",
-          "suggestion": "Possible suggestions include: \"කොටා\" (kōṭā), \"අවසර ප්‍රමාණය\" (awasara pramāṇaya), or \"ដែමුම්\" (ḍamūm), depending on the specific context.  Further clarification of the usage of 'Quotas' would help determine the best translation."
+          "description": "The Sinhala translation \"සලාක\" does not accurately convey the meaning of \"Quotas\". \"Quotas\" refers to limits or restrictions, and \"සලාක\" has a different connotation.",
+          "suggestion": "A more appropriate translation might be \"කොටා\" (kota) or \"අධිකාරණ සීමාව\" (adhikaarana seemawa) depending on the specific context."
         }
       ],
       "approved_at": null
@@ -204,7 +204,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Квоте' is not the standard or most accurate translation of 'Quotas' in Serbian (Cyrillic). It is in the dative singular form, which doesn't fit the context of a plural noun 'Quotas'.",
+          "description": "The Serbian (Cyrillic) translation \"Квоте\" is the correct plural form of 'Quotas'. \"Квоте\" is the appropriate translation for the English term \"Quotas\". \"Квоте\" is a more accurate translation than \"Квоте\".",
           "suggestion": "Квоте"
         }
       ],
@@ -237,13 +237,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'Quotas' can have multiple meanings depending on the context. '分配额度' (fēn pèi é dù) leans towards allocation or assigned limits. While potentially accurate, it might not be the best fit for general 'Quotas' in settings. It could imply a distribution or allocation which isn't necessarily what 'Quotas' means in this context. A more neutral or general translation like '配额' (péi é) might be more appropriate.",
-          "suggestion": "Consider '配额' (péi é) as a potentially more accurate translation, or clarify the context to determine the most suitable equivalent."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

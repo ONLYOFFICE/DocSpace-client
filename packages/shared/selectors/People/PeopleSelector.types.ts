@@ -38,13 +38,19 @@ import {
 
 import type Filter from "../../api/people/filter";
 
-export interface UserTooltipProps {
+export type UserTooltipProps = {
   avatarUrl: string;
   label: string;
   email: string;
   position: string;
   className?: string;
-}
+
+  // Accessibility attributes
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+  "data-user-email"?: string;
+  "data-user-position"?: string;
+};
 
 export type ContactsSelectorGroups =
   | { withGroups: true; isGroupsOnly?: boolean }
@@ -87,5 +93,16 @@ export type PeopleSelectorProps = TSelectorHeader &
     injectedElement?: React.ReactElement;
     alwaysShowFooter?: boolean;
     onlyRoomMembers?: boolean;
+    disableSubmitButton?: boolean;
+    withSearch?: boolean;
+    searchPlaceholder?: string;
+    onSearch?: (searchTerm: string) => void;
+
+    // Accessibility attributes
+    "aria-label"?: string;
+    "aria-labelledby"?: string;
+    "aria-describedby"?: string;
+    "data-selector-type"?: string;
+    "data-test-id"?: string;
   } & ContactsSelectorGroups &
   ContactsSelectorGuests;

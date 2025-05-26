@@ -176,6 +176,13 @@ const PeopleSelector = ({
 
   filterUserId,
   currentUserId,
+
+  // Accessibility attributes
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledby,
+  "aria-describedby": ariaDescribedby,
+  "data-selector-type": dataSelectorType,
+  "data-test-id": dataTestId,
   withOutCurrentAuthorizedUser,
 
   withFooterCheckbox,
@@ -498,6 +505,11 @@ const PeopleSelector = ({
     return (
       <div
         style={{ width: "100%", overflow: "hidden", marginInlineEnd: "16px" }}
+        data-user-type={userType}
+        data-user-email={email}
+        data-user-status={status}
+        data-is-group={isGroup ? "true" : "false"}
+        aria-label={`${isGroup ? "Group" : "User"}: ${label}${email ? `, ${email}` : ""}`}
       >
         <div
           style={{
@@ -513,6 +525,8 @@ const PeopleSelector = ({
             fontSize="14px"
             noSelect
             truncate
+            title={label}
+            aria-label={label}
             dir="auto"
           >
             {label}
@@ -614,6 +628,11 @@ const PeopleSelector = ({
       className={className}
       style={style}
       renderCustomItem={renderCustomItem}
+      aria-label={ariaLabel || "People Selector"}
+      aria-labelledby={ariaLabelledby}
+      aria-describedby={ariaDescribedby}
+      data-selector-type={dataSelectorType || "people"}
+      data-test-id={dataTestId || "people-selector"}
       items={itemsList}
       submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
       onSubmit={onSubmit}

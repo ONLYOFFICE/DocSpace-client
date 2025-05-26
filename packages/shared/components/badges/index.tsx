@@ -476,10 +476,11 @@ const Badges = ({
           title={t("Common:CreateRoom")}
         />
       ) : null}
-      {showNew && !isTile && isRoom ? newFilesBadge : null}
+      {showNew && !isTile ? newFilesBadge : null}
       {showNew && isTile && isRoom ? (
         <div className={styles.badgeWrapperNewBadge}>{newFilesBadge}</div>
       ) : null}
+      {showNew && isTile && !isRoom ? newFilesBadge : null}
     </div>
   );
 };

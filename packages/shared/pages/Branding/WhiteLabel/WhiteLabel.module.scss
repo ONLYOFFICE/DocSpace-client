@@ -46,7 +46,7 @@
     margin-top: 16px;
     margin-bottom: 16px;
     line-height: 20px;
-    color: var(--settings-common-description-color);
+    color: var(--settings-common-branding-description-color);
 
     @include mixins.mobile {
       margin-top: 0;
@@ -163,7 +163,7 @@
 
   .subtitle {
     margin-bottom: 20px;
-    color: var(--settings-common-description-color);
+    color: var(--settings-common-branding-description-color);
   }
 
   .input {

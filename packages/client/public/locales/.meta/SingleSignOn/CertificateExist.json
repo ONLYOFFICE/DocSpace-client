@@ -3,7 +3,7 @@
   "content": "Certificate with same action type already exists",
   "content_en_sha1_hash": "9973f20d2024018f1ead9a6896ef807f27346f7c",
   "created_at": "2025-05-19T21:30:50.070Z",
-  "updated_at": "2025-05-21T02:16:04.398Z",
+  "updated_at": "2025-05-24T03:29:05.993Z",
   "comment": {
     "text": "\"This translation key is used to display an error message when a certificate with the same action type already exists. It appears in forms or UI elements that allow users to create or edit certificates, such as the SSO form store.\"",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'شهادة بنفس نوع الإجراء موجودة بالفعل.' while understandable, is a slightly literal and less natural-sounding translation of \"Certificate with same action type already exists.\" A more idiomatic Arabic phrasing would be preferable.",
-          "suggestion": "شهادة أخرى بنفس نوع الإجراء موجودة بالفعل. (Shahadat ukhra binafs naw' al-ijra' mawjuda bilfil). - This translates to 'Another certificate with the same action type already exists.'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -72,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Υπάρχει ήδη πιστοποιητικό με τον ίδιο τύπο ενέργειας\" is a literal translation, but could be improved for clarity and naturalness in Greek. The phrase \"τύπος ενέργειας\" (type of energy) might not be the most suitable phrasing in this context. A certificate typically represents an action or purpose, not an energy type.",
-          "suggestion": "Consider a more contextually accurate translation like: \"Υπάρχει ήδη πιστοποιητικό με τον ίδιο σκοπό\" (There is already a certificate with the same purpose) or \"Υπάρχει ήδη πιστοποιητικό με την ίδια λειτουργία\" (There is already a certificate with the same function)."
+          "description": "The translation 'Υπάρχει ήδη πιστοποιητικό με τον ίδιο τύπο ενέργειας' is a literal translation but doesn't flow naturally in Greek. 'Τύπο ενέργειας' (type of action) is somewhat awkward.",
+          "suggestion": "Consider a more natural phrasing like 'Υπάρχει ήδη πιστοποιητικό με τον ίδιο τύπο δράσης' or 'Υπάρχει ήδη πιστοποιητικό με παρόμοια δράση'."
         }
       ],
       "approved_at": null
@@ -123,19 +117,19 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is technically correct but could be more natural and user-friendly. 'ປະເພດການປະຕິບັດ' (type of execution) is a bit technical. A simpler phrasing would improve clarity for the user.",
-          "suggestion": "ໃບຢັ້ງຢືນທີ່ມີຄືນແບບດຽວກັນມີຢູ່ແລ້ວ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sertifikāts ar tādu pašu darbības tipu jau pastāv' is a literal translation and could be improved for clarity and naturalness in Latvian. 'Darbības tipu' is a bit clunky. A more fluent option would be to use a phrase like 'ar tādu pašu darbību' or 'ar tādu pašu veidu'.",
+          "suggestion": "Sertifikāts ar tādu pašu darbību jau pastāv"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -156,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Já existe um certificado com o mesmo tipo de acção\" is a literal translation and could be improved for naturalness in Portuguese. A more idiomatic phrasing would be 'Um certificado com o mesmo tipo de ação já existe' or 'Já existe um certificado com o mesmo tipo de ação'.",
-          "suggestion": "Um certificado com o mesmo tipo de ação já existe"
+          "description": "The translation 'Já existe um certificado com o mesmo tipo de acção' is a literal translation and sounds slightly awkward in Portuguese. While technically correct, it doesn't flow naturally. A more idiomatic translation would be preferable.",
+          "suggestion": "Um certificado com o mesmo tipo de ação já existe."
         }
       ],
       "approved_at": null
@@ -174,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Es gibt bereits ein Zertifikat mit gleichem Aktionstyp' is in German, not Romanian. It translates to 'There is already a certificate with the same action type'.",
-          "suggestion": "The correct Romanian translation should be something like: 'Există deja un certificat cu același tip de acțiune' or 'Un certificat cu același tip de acțiune există deja'."
+          "description": "The Romanian translation 'Es gibt bereits ein Zertifikat mit gleichem Aktionstyp' is German, not Romanian. It translates to 'There is already a certificate with the same action type' in English.",
+          "suggestion": "The translation should be in Romanian. A possible translation could be: 'Există deja un certificat cu același tip de acțiune' or 'Un certificat cu același tip de acțiune există deja'."
         }
       ],
       "approved_at": null
@@ -192,8 +186,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'සමාන ක්‍රියාමාර්ග වර්ගයක සහතිකයක් දැනටමත් පවතී' is a literal translation but may not be the most natural or clear way to express the intended meaning in Sinhala. A more user-friendly translation would better convey the message.",
-          "suggestion": "A better translation might be something like 'මේ ක්‍රියාකාරීත්වයකට සමාන සහතිකයක් දැනටමත් තිබේ' or 'මේ ආකාරයේ ක්‍රියාවකට සමාන සහතිකයක් දැනටමත් පවතී'. The best option depends on the specific context of the application."
+          "description": "The translation 'සමාන ක්‍රියාමාර්ග වර්ගයක සහතිකයක් දැනටමත් පවතී' while conveying the general idea, could be more accurately translated to emphasize the 'certificate' aspect. The phrase 'සමාන ක්‍රියාමාර්ග වර්ගයේ සහතිකයක්' could be improved to something like 'සමාන ක්‍රියාවලියකට අයත් සහතිකයක්'.",
+          "suggestion": "සමාන ක්‍රියාවලියකට අයත් සහතිකයක් දැනටමත් පවතී"
+        },
+        {
+          "type": "grammar",
+          "description": "While understandable, the sentence structure is slightly awkward in Sinhala. It lacks a more natural flow. A more fluent construction would improve readability.",
+          "suggestion": "සමාන ක්‍රියාවලියකට අයත් සහතිකයක් දැනටමත් පවතී"
         }
       ],
       "approved_at": null

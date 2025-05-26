@@ -3,7 +3,7 @@
   "content": "Clear all",
   "content_en_sha1_hash": "c043160a89ba0acd714977735d49455f662b1c79",
   "created_at": "2025-05-19T21:30:43.466Z",
-  "updated_at": "2025-05-22T11:56:37.847Z",
+  "updated_at": "2025-05-24T01:32:00.758Z",
   "comment": {
     "text": "This translation key is used to display a button label in a filter component that clears all filters. It appears as a link within a filter control element. Translators should provide an alternative text that conveys the action of clearing all filters.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Hamısını silin\" while literally meaning \"Delete all\", is not the best equivalent for \"Clear all.\" \"Clear all\" implies removing selections or resetting a state, not necessarily deletion. \"Silin\" strongly implies deletion.",
-          "suggestion": "Consider \"Hamlını təmizlə\" (Remove all) or \"Hamlını boşalt\" (Empty all) depending on the specific context."
+          "description": "While \"Hamısını silin\" is understandable, a more accurate and natural translation of \"Clear all\" in Azerbaijani would be \"Hamlını sil\". The verb \"silin\" is the imperative form and is less commonly used than the more direct \"sil\".",
+          "suggestion": "Hamlını sil"
         }
       ],
       "approved_at": null
@@ -48,7 +48,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Изчистване на всичко' (Izchistvane na vsichko) literally translates to 'Cleaning of everything'. While it conveys a similar concept, 'Clear all' implies more of a removal or deletion, not just cleaning. A more accurate translation would convey this action.",
+          "description": "The translation 'Изчистване на всичко' is a literal translation of 'clearing everything' rather than the idiomatic 'Clear all'. It lacks the conciseness and directness of the original.",
           "suggestion": "Почистване на всичко"
         }
       ],
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Εκκαθάριση όλων\" is a literal translation of \"Clear all\", it's not the most natural or commonly used phrasing in Greek. It sounds quite formal and perhaps a bit technical. \"Clear all\" often implies a quick, simple action.",
-          "suggestion": "Consider alternatives like \"Διαγραφή όλων\" (Delete all), \"Καθαρισμός όλων\" (Clean all - though this has slightly different connotations), or simply \"Όλα\" (All) if the context allows."
+          "description": "While \"Εκκαθάριση όλων\" is technically correct, it's a rather formal and less common way to say \"Clear all.\" It implies a more thorough or official clearing out. A more natural and common translation would be something like \"Διαγραφή όλων\" or \"Καθαρισμός όλων\".",
+          "suggestion": "Consider using \"Διαγραφή όλων\" or \"Καθαρισμός όλων\" instead."
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Մաքրել բոլորը\" (Makrel bolory) is a literal translation of \"Clear all\", it doesn't convey the intended meaning effectively in Armenian. It sounds awkward and not idiomatic. 'Clear all' often implies deleting or removing all items.",
-          "suggestion": "Consider alternatives like \"Ջնջել բոլորը\" (Jgnjel bolory) which translates to \"Delete all\" or \"Արձակել բոլորը\" (Ardakel bolory) which could mean 'Release all', depending on the specific context."
+          "description": "While \"Մաքրել բոլորը\" (Macerel boloru) is a literal translation of \"Clear all,\" it might sound awkward or unnatural in Armenian. A more natural phrasing might be \"Ջնջել բոլորը\" (Jgnjel boloru) or \"Մաքրել ամեն ինչ\" (Macerel amen inch).",
+          "suggestion": "Consider using \"Ջնջել բոլորը\" or \"Մաքրել ամեն ինչ\"."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"すべてクリア\" (subete kuriia) is understandable, it's a more literal translation of 'Clear all' and doesn't convey the precise nuance. 'Clear all' often implies a reset or removal of all items/progress. A more accurate translation might depend on the context, but options like 'すべて削除' (subete sakujo - delete all) or 'すべてリセット' (subete risetto - reset all) could be more appropriate depending on the specific action being performed.",
-          "suggestion": "Consider alternative translations like 'すべて削除' or 'すべてリセット', depending on the intended meaning."
+          "description": "While \"すべてクリア\" (subete kuriia) is a reasonable translation of \"Clear all,\" it leans towards 'complete all' or 'clear everything' rather than a direct equivalent of 'Clear all' as in a button or action. A more literal translation might consider \"すべて消去\" (subete shoujyo) for 'clear all' in the context of deleting or removing items.",
+          "suggestion": "Consider \"すべて消去\" (subete shoujyo) or a more context-specific alternative depending on the function of 'Clear all'."
         }
       ],
       "approved_at": null
@@ -129,7 +129,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'모두 삭제' is a literal translation of 'Clear all' but might not convey the intended nuance depending on the context. 'Clear all' often implies removing selections or resetting a state, whereas '모두 삭제' strongly suggests permanent deletion. A more context-appropriate translation might be '초기화' (initialize) or '선택 해제' (deselect) depending on the function.",
+          "suggestion": "Consider '초기화' or '선택 해제' based on the specific function.  If permanent deletion is intended, '모두 삭제' is acceptable."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -141,7 +147,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Notīrīt visu' is a literal translation of 'Clear all', it lacks the conciseness and common usage of the English phrase. 'Clear all' often implies a complete removal or reset. 'Notīrīt visu' is more descriptive but less idiomatic.",
+          "suggestion": "Dzēst visu"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -174,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Golire totală\" translates to 'Total emptying' or 'Complete emptying', which isn't the most natural or accurate rendering of \"Clear all\". A more suitable translation would convey the meaning of 'erase' or 'delete all'.",
-          "suggestion": "Șterge totul"
+          "description": "The Romanian translation \"Golire totală\" is a literal translation of 'emptying completely' and doesn't convey the meaning of 'Clear all' in the context of user interface elements (e.g., clearing a list, deleting selected items). It sounds unnatural and technical.",
+          "suggestion": "Consider translations like \"Șterge tot\", \"Curăță tot\", or \"Elimină tot\".  The best option depends on the specific context where this phrase is used."
         }
       ],
       "approved_at": null
@@ -189,13 +201,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'සියල්ල හිස් කරන්න' is understandable, a more accurate and natural translation of \"Clear all\" would be something like \"සියල්ල ඉවත් කරන්න\" (siyalla ival karna). \" හිස් කරන්න\" implies emptying, which isn't always the intended meaning of 'Clear all'.",
-          "suggestion": "සියල්ල ඉවත් කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -216,7 +222,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Обриши све\" is understandable, a more precise translation of 'Clear all' in a user interface context would be something like 'Избриши све' (Izbriši sve). 'Обриши' (Obriši) implies wiping or erasing with a cloth, whereas 'Избриши' directly translates to 'delete'.",
+          "description": "While 'Обриши све' is understandable, a more accurate and natural translation of 'Clear all' in Serbian (Cyrillic) would be 'Избриши све' or 'Очисти све'. 'Обриши' implies wiping or scrubbing, which isn't the intended meaning of 'Clear'.",
           "suggestion": "Избриши све"
         }
       ],

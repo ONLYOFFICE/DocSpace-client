@@ -3,7 +3,7 @@
   "content": "Too many email addresses parsed",
   "content_en_sha1_hash": "7531bc36e27ca0a753d1abb3356083e66a1e9e71",
   "created_at": "2025-05-19T21:30:46.366Z",
-  "updated_at": "2025-05-22T11:56:37.319Z",
+  "updated_at": "2025-05-24T00:05:59.681Z",
   "comment": {
     "text": "This translation key is used to display an error message when too many email addresses are parsed. It appears in a dialog box, specifically when the user attempts to change their email address and exceeds the maximum allowed limit.",
     "is_auto": true,
@@ -30,13 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'تم تحليل العديد من عناوين البريد الالكتروني' is a literal translation and doesn't capture the nuance of 'Too many email addresses parsed.' It implies an action was performed, whereas the original implies a state. A more appropriate translation would convey the meaning of exceeding a limit.",
-          "suggestion": "قد تم تجاوز الحد المسموح لعدد عناوين البريد الإلكتروني"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'العديد' (al-adeed) while meaning 'many', is a bit formal.  A more natural phrasing would be better.",
-          "suggestion": "قد تم استخراج عدد كبير من عناوين البريد الإلكتروني"
+          "description": "The translation 'تم تحليل العديد من عناوين البريد الالكتروني' doesn't fully capture the nuance of 'Too many email addresses parsed.' While technically correct, it's a bit verbose and lacks the implication of a problem. A more accurate and concise translation would better convey the original meaning.",
+          "suggestion": "قد تم استخراج عدد كبير من عناوين البريد الإلكتروني."
         }
       ],
       "approved_at": null
@@ -47,13 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Xanada xeyli elektron poçt qeyd olunub' doesn't perfectly capture the nuance of 'Too many email addresses parsed.' 'Xanada' implies a container or area, which isn't directly related to the parsing process. A more accurate translation would focus on the excess quantity of email addresses.",
+          "description": "The translation 'Xanada xeyli elektron poçt qeyd olunub' doesn't fully capture the meaning of 'Too many email addresses parsed'. 'Xeyli' implies 'a lot' but doesn't convey the sense of an excessive or problematic number. A more accurate translation would emphasize the 'too many' aspect.",
           "suggestion": "Çox sayda elektron poçt ünvanı aşkarlanıb"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The word 'qeyd olunub' (recorded/noted) doesn't quite convey the active sense of 'parsed'.",
-          "suggestion": "Aşkar edilib"
+          "type": "spelling",
+          "description": "The term 'elektron poçt' is generally understood, but 'elektron poçt ünvanı' is more precise for 'email address'.",
+          "suggestion": "elektron poçt ünvanı"
         }
       ],
       "approved_at": null
@@ -64,8 +59,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Анализирани са твърде много имейли' while conveying a similar meaning, doesn't perfectly capture the original meaning of 'Too many email addresses parsed'. 'Parsed' implies a process of analysis or extraction.  'Анализирани' (Analyzed) is closer but still not quite the right nuance. A better translation might emphasize the processing aspect.",
-          "suggestion": "Прекалено много имейли бяха обработени"
+          "description": "The translation 'Анализирани са твърде много имейли' while understandable, doesn't directly convey the meaning of 'parsed'. 'Parsed' implies a process of extracting information. 'Анализирани' means 'analyzed', which is close but not exact. A better translation would be something that indicates extraction or processing.",
+          "suggestion": "Consider 'Извлечени са твърде много имейли' (Izvecheni sa tvrde mnogo imejli) which means 'Too many emails extracted' or 'Обработени са твърде много имейли' (Obraboteni sa tvrde mnogo imejli) which means 'Too many emails processed'."
         }
       ],
       "approved_at": null
@@ -76,13 +71,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Příliš mnoho e-mailů analyzovaných' is a literal translation and doesn't quite capture the meaning of \"Too many email addresses parsed.\"  'Analyzovaných' implies a deeper analysis than simply extracting them. A more natural translation would focus on the quantity of emails.",
-          "suggestion": "Příliš mnoho e-mailových adres"
+          "description": "The translation \"Příliš mnoho e-mailů analyzovaných\" is not the most natural or accurate translation of \"Too many email addresses parsed.\" The word 'analyzovaných' (analyzed) implies a deeper processing than simply parsing. It would be more accurate to use a verb that indicates a simple extraction or collection.",
+          "suggestion": "Příliš mnoho e-mailových adres zpracovaných"
         },
         {
-          "type": "incorrect_translation",
-          "description": "While 'e-mailů' is technically correct, 'e-mailových adres' is more common and flows better in Czech when referring to email addresses.",
-          "suggestion": "e-mailových adres"
+          "type": "formatting",
+          "description": "While not strictly incorrect, using \"e-mailů\" instead of \"e-mailových adres\" (email addresses) creates a slightly awkward phrasing. Although understandable, it's not the most common way to express the concept.",
+          "suggestion": "Příliš mnoho e-mailových adres zpracovaných"
         }
       ],
       "approved_at": null
@@ -93,8 +88,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Mehrere E-Mails im Feld\" doesn't accurately convey the meaning of \"Too many email addresses parsed.\" It literally translates to \"Several emails in the field.\"  The original phrase implies a problem with the number of email addresses, not just their presence in a field.",
-          "suggestion": "A more accurate translation would be something like \"Zu viele E-Mail-Adressen gefunden\" or \"Zu viele E-Mail-Adressen extrahiert\" (depending on the technical context)."
+          "description": "The translation 'Mehrere E-Mails im Feld' doesn't accurately convey the meaning of 'Too many email addresses parsed'. It translates to 'Several emails in the field' which is a different concept. It doesn't express the idea of an excessive number.",
+          "suggestion": "Eine zu große Anzahl von E-Mail-Adressen wurde gefunden."
         }
       ],
       "approved_at": null
@@ -111,8 +106,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'El campo contiene más de un email' does not accurately convey the meaning of 'Too many email addresses parsed'. It translates to 'The field contains more than one email', implying only two emails are present, while the English phrase indicates a higher, unspecified number.",
-          "suggestion": "Consider a translation like 'Se han encontrado demasiados registros de correo electrónico' or 'Se han detectado múltiples direcciones de correo electrónico'."
+          "description": "The translation 'El campo contiene más de un email' does not accurately convey the meaning of 'Too many email addresses parsed'. It translates to 'The field contains more than one email', which is not the original intent.",
+          "suggestion": "A more accurate translation would be something like 'Se han detectado demasiados correos electrónicos' or 'Se encontraron demasiadas direcciones de correo electrónico'."
         }
       ],
       "approved_at": null
@@ -123,7 +118,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Liian monta jäsenneltyä sähköpostia\" doesn't accurately convey the meaning of \"Too many email addresses parsed.\" \"Jäsenneltyä\" (structured) isn't the core issue. The phrase describes an excess of email addresses, not their structure.",
+          "description": "The translation 'Liian monta jäsenneltyä sähköpostia' doesn't fully capture the meaning of 'Too many email addresses parsed'. 'Jäsennelty' implies structured, which isn't the core issue. It’s about the *number* of emails, not their structure.",
           "suggestion": "Liian monta sähköpostiosoitetta"
         }
       ],
@@ -135,8 +130,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Trop d'e-mails à analyser' doesn't perfectly capture the original meaning of 'Too many email addresses parsed'. While 'à analyser' implies analysis, the original conveys the idea of an excessive number of email addresses *already* processed, which is more about volume or a parsing error.",
-          "suggestion": "Trop d'adresses e-mail traitées"
+          "description": "While the translation captures the general idea, 'Trop d'e-mails à analyser' is more literal and doesn't convey the urgency or error state of 'Too many email addresses parsed'. A better translation would highlight the problem of having too many addresses.",
+          "suggestion": "Possible suggestions include: 'Nombre excessif d'adresses e-mail détectées', 'Un trop grand nombre d'adresses e-mail ont été trouvées', or 'Trop d'adresses e-mail ont été extraites'."
         }
       ],
       "approved_at": null
@@ -144,13 +139,25 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'էլփոստի' (elposti) is a transliteration of 'email' and while understandable, a more commonly used term might be preferred. 'Էլեկտրոնային փոստի' (elektronayini posti) - 'electronic mail' - might be a better fit for wider understanding.",
+          "suggestion": "Էլեկտրոնային փոստի"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ci sono troppe email da analizzare\" literally translates to \"There are too many emails to analyze.\" While conveying a similar meaning to \"Too many email addresses parsed,\" it doesn't capture the nuance of 'parsed.' A more accurate translation might consider alternatives that reflect processing or extraction.",
+          "suggestion": "Consider \"Troppe email estratte\" or \"Sono state estratte troppe email\"."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -165,7 +172,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"너무 많은 이메일이 파싱되었습니다\" is technically correct but sounds somewhat unnatural and overly formal in Korean. '파싱되었습니다' is a direct transliteration of 'parsed' and not commonly used in everyday Korean.",
+          "description": "The word \"파싱되었습니다\" (parsingdeusimyeonseo) is a very technical term and might not be appropriate for a general audience. While technically correct, it sounds overly formal and jargon-laden. A simpler phrasing would be better.",
           "suggestion": "너무 많은 이메일 주소가 발견되었습니다"
         }
       ],
@@ -177,8 +184,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ແບ່ງແຍກອີເມວຫຼາຍເກີນໄປ' translates to 'Too many emails separated'. While it conveys a similar idea, it's not the most natural or accurate translation of 'Too many email addresses parsed'. The word 'separated' (ແບ່ງແຍກ) doesn't accurately reflect the 'parsed' action.",
-          "suggestion": "Consider a translation that reflects the meaning of 'parsed,' such as 'ພົບອີເມວຫຼາຍເກີນໂຕ' (found too many emails) or 'ມີອີເມວຫຼາຍເກີນໂຕ' (there are too many emails)."
+          "description": "The Lao translation \"ແບ່ງແຍກອີເມວຫຼາຍເກີນໄປ\" translates to \"too many emails separated\". While close, it doesn't directly convey the meaning of \"parsed\" which implies processing or extracting information. A more accurate translation should reflect this.",
+          "suggestion": "Consider alternatives like \"ກວດພົບອີເມວຫຼາຍເກີນໄປ\" (found too many emails), \"ມີຈຳນວນອີເມວຫຼາຍເກີນໄປ\" (there are too many emails), or \"ຖືກແກ້ໄຂອີເມວຫຼາຍເກີນໄປ\" (too many emails were processed/modified). The best option will depend on the specific context."
         }
       ],
       "approved_at": null
@@ -189,8 +196,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'e-pasta ziņojumu' (email messages) doesn't quite capture the meaning of 'email addresses'. The original refers to addresses, not the messages themselves.",
-          "suggestion": "Pārāk daudz e-pastu adrešu parsēts"
+          "description": "The English phrase 'email addresses' is translated as 'e-pasta ziņojumu'. While 'e-pasta ziņojumu' can refer to email messages, 'email addresses' refers specifically to the address itself. A more accurate translation would be something like 'e-pasta adreses'.",
+          "suggestion": "e-pasta adreses"
         }
       ],
       "approved_at": null
@@ -219,8 +226,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Muitos e-mails analisados' doesn't fully capture the meaning of 'Too many email addresses parsed'. 'Analisados' implies analysis, whereas the original conveys exceeding a limit. A more accurate translation would include the sense of 'too many' being excessive or problematic.",
-          "suggestion": "Excesso de endereços de e-mail encontrados"
+          "description": "The translation 'Muitos e-mails analisados' while generally correct, doesn't fully capture the original meaning of 'Too many email addresses parsed'. 'Parsed' implies a processing action. 'Analisados' (analyzed) is a weaker synonym. A better translation would convey the idea of a system detecting an excessive number of email addresses.",
+          "suggestion": "Consider alternatives like 'Excesso de endereços de e-mail detectado' or 'Número excessivo de endereços de e-mail encontrado' to better reflect the parsing aspect."
         }
       ],
       "approved_at": null
@@ -237,8 +244,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Поле содержит больше одного email' (The field contains more than one email) doesn't fully capture the meaning of 'Too many email addresses parsed.' It focuses on the field containing multiple emails, while the original implies an error due to an excessive number of email addresses being processed.",
-          "suggestion": "Consider a translation like 'Обнаружено слишком много email адресов' (Too many email addresses found) or 'Слишком много email адресов обработано' (Too many email addresses processed)."
+          "description": "The translation \"Поле содержит больше одного email\" (The field contains more than one email) doesn't fully capture the meaning of \"Too many email addresses parsed\". It focuses on the field containing multiple emails, while the original refers to an error state related to parsing.",
+          "suggestion": "Поле содержит слишком много email адресов"
         }
       ],
       "approved_at": null
@@ -249,13 +256,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"බොහෝ වි-තැපැල් ලිපින විග්‍රහ කර ඇත\" while generally conveying the meaning, is a slightly awkward phrasing.  'වි-තැපැල්' is a compound word, but often 'විද්‍යාත්මක' (vidhyātinam) is preferred for 'scientific' in modern Sinhala. 'ලිපින' feels a little formal here.",
-          "suggestion": "Possible better translations include:  \"ඉlebihan විද්‍යාත්මක තැපැල් ලිපි සංග්‍රහණය කර ඇත\" or \"ඉතාමත් විශාල සංඛ්යාවක තැපැල් ලිපි සංග්‍රහණය කර ඇත\" (Itāmat visālā sankhyāvak tāpael lipi sangrahāṇaya kara ata - A very large number of email addresses parsed)."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of compound words like 'වි-තැපැල්' might be considered less natural in modern Sinhala writing. While understandable, breaking it down could improve readability.",
-          "suggestion": "Consider using a more descriptive phrase, like 'විද්‍යාත්මක තැපැල්' (vidhyātinam tāpael) instead of 'වි-තැපැල්'."
+          "description": "The translation 'බොහෝ වි-තැපැල් ලිපින විග්‍රහ කර ඇත' doesn't fully capture the meaning of 'Too many email addresses parsed'. While 'බොහෝ' (boho - many) and 'ලිපින' (lipina - addresses) are correct, 'විග්‍රහ කර ඇත' (vigrahakaara ata - parsed/analyzed) is overly technical and doesn't convey the warning tone. A more natural and contextually appropriate translation is needed.",
+          "suggestion": "A better translation might be 'ඉ-මේල් ලිපිනයන් අධික වශයෙන් ඇත' (i-meel lipinayan adhikvasenaa athaa) which translates to 'Too many email addresses exist' or 'There are too many email addresses'."
         }
       ],
       "approved_at": null
@@ -266,13 +268,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Analyzovalo sa príliš veľa e -mailov' doesn't fully capture the meaning of 'Too many email addresses parsed'. It translates to 'Too many emails were analyzed'. While similar, 'parsed' implies a processing action, which isn't explicitly conveyed.",
-          "suggestion": "Consider a translation like 'Spracovalo sa príliš veľa e-mailových adries' or 'Zanalyzovalo sa príliš veľa e-mailových adries', which more closely reflects the 'parsed' action."
+          "description": "The translation 'Analyzovalo sa príliš veľa e -mailov' doesn't quite capture the meaning of 'Too many email addresses parsed'. 'Analyzovalo sa' implies an analysis was performed, which isn't directly stated in the English. A more accurate translation would convey the feeling of an excess.",
+          "suggestion": "Príliš mnoho e-mailových adries bolo spracovaných"
         },
         {
           "type": "formatting",
-          "description": "There's a space between 'e' and '-' in 'e -mailov'.  This is incorrect for Slovak.",
-          "suggestion": "Change 'e -mailov' to 'e-mailov'."
+          "description": "There's a space before the hyphen in 'e -mailov'.",
+          "suggestion": "e-mailov"
         }
       ],
       "approved_at": null
@@ -289,8 +291,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'email' is anglicized. While understood, using the Serbian equivalent 'elektronska pošta' would be more appropriate for a localized application.",
-          "suggestion": "Превише обрађених електронских пошта"
+          "description": "The word 'email' is written as 'емаил'. The correct spelling in Serbian (Cyrillic) is 'емаил адреса'.",
+          "suggestion": "емаил адреса"
         }
       ],
       "approved_at": null
@@ -298,18 +300,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Previše obrađenih email adresa' is a literal translation of 'Too many email addresses parsed' but doesn't fully convey the intended meaning. 'Parsed' implies processing or extracting. A better translation would highlight the problem of excessive email addresses.",
-          "suggestion": "Previše prikupljenih email adresa"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'obrađenih' suggests that the email addresses have been processed in a specific way. While technically correct, it's not the most natural phrasing in this context.",
-          "suggestion": "Previše email adresa pronađeno"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -336,8 +327,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '解析的邮件过多' while understandable, doesn't fully capture the nuance of 'Too many email addresses parsed'. '解析' (parsing) implies a process, which isn't explicitly stated in the English. A more accurate translation might emphasize the excessive number itself.",
-          "suggestion": "邮件地址过多 (Youjian dizhi guo duo) - 'Too many email addresses'"
+          "description": "The translation \"解析的邮件过多\" (Parsing too many emails) doesn't quite capture the original meaning of \"Too many email addresses parsed.\" It focuses on the parsing action rather than the excessive number of email addresses. While not entirely wrong, it's not the best representation.",
+          "suggestion": "考虑更准确的翻译，例如: \"解析的电子邮件地址过多\" (Too many email addresses parsed) or \"电子邮件地址解析数量过多\" (Too many email addresses are being parsed)."
         }
       ],
       "approved_at": null

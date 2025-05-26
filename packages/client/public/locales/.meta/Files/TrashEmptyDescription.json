@@ -3,7 +3,7 @@
   "content": "All deleted files are moved to 'Trash'. Restore files deleted by mistake or delete them permanently. Files in 'Trash' are automatically deleted after 30 days. Please note, that the files deleted from the 'Trash' cannot be restored any longer.",
   "content_en_sha1_hash": "d12a0fa3b99e06e5e55bddcdcc00c776e229ced6",
   "created_at": "2025-05-19T21:30:56.266Z",
-  "updated_at": "2025-05-22T11:56:37.463Z",
+  "updated_at": "2025-05-24T11:17:15.687Z",
   "comment": {
     "text": "This translation key is used to display a message when a file or folder has been moved to the \"Trash\", informing users that deleted files cannot be restored and will be automatically deleted after 30 days. It appears in the UI as part of an empty screen for archive folders, specifically on the header.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The English content uses single quotes for 'Trash', while the Arabic translation uses Arabic script within double quotes. This inconsistency in quotation marks can be jarring for users.",
-          "suggestion": "Change the Arabic translation to use single quotes around 'المهملات' to match the English original: \"يتم نقل جميع الملفات المحذوفة إلى 'المهملات'.\""
+          "description": "The Arabic translation uses quotes around \"المهملات\" (Trash) which may not be consistent with the overall UI style. Consider whether single quotes or no quotes are preferred.",
+          "suggestion": "Review UI guidelines for the proper use of quotes or ensure consistency with other UI elements."
         }
       ],
       "approved_at": null
@@ -41,24 +41,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"All deleted files are moved to 'Trash'\" is translated as \"'Səbət' bölməsinə bütün silinmiş fayllar yerləşdirilirlər.\". While technically correct, it's a bit clunky. A more natural translation would be something like \"Bütün silinmiş fayllar 'Səbət'ə köçürülür.\"",
-          "suggestion": "Bütün silinmiş fayllar 'Səbət'ə köçürülür."
+          "type": "formatting",
+          "description": "Inconsistent use of capitalization for 'Trash'. Should be consistently 'Səbət' or consistently capitalized.",
+          "suggestion": "'Səbət' should be used consistently throughout the translation, or capitalized as 'SƏBƏT' to match the English 'Trash'."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Siz onları bərpa edə bilərsiniz, və ya onları ömürlük silə bilərsiniz' is slightly awkward. The repetition of 'onları' can be improved.",
+          "suggestion": "Consider rephrasing to: 'Siz onları bərpa edə bilərsiniz və ya tam şəkildə silə bilərsiniz.' or 'Onları bərpa edə və ya tam şəkildə silə bilərsiniz.'"
         },
         {
           "type": "incorrect_translation",
-          "description": "The English \"Restore files deleted by mistake or delete them permanently\" is translated as \"Əgər onlar səhvən siliniblərsə, Siz onları bərpa edə bilərsiniz, və ya onları ömürlük silə bilərsiniz.\". 'Ömürlük' is a bit strong and could be replaced with a more common term for permanent deletion.",
-          "suggestion": "Əgər onlar səhvən siliniblərsə, Siz onları bərpa edə bilərsiniz, və ya onları tam silə bilərsiniz."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English \"Files in 'Trash' are automatically deleted after 30 days\" is translated as \"'Səbətdən' fayllar 30 gündən sonra avtomatik silinir.\".  Using the possessive 'Səbətdən' can be slightly ambiguous.  It is better to use a more general phrasing.",
-          "suggestion": "'Səbət'dəki fayllar 30 gün sonra avtomatik silinir."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English \"Please note that the files deleted from the 'Trash' cannot be restored any longer\" is translated as \"Lütfən, nəzərə alın ki, 'Səbətdən' silinən fayllar bir də bərpa oluna bilməyəcəklər.\". Similar to previous issues, 'Səbətdən' is not the most natural wording. The phrasing 'bir də' (anymore) can be simplified.",
-          "suggestion": "Lütfən, nəzərə alın ki, 'Səbət'dən silinən fayllar daha sonra bərpa edilməyəcək."
+          "description": "The English phrase 'permanently delete' is translated as 'ömürlük silə bilərsiniz'. While 'ömürlük' means 'lifelong', it doesn't accurately convey the meaning of permanent deletion of data in this context. It sounds more like an action that lasts a lifetime.",
+          "suggestion": "Replace 'ömürlük silə bilərsiniz' with 'tam şəkildə silə bilərsiniz' (completely delete) or 'mütləq silə bilərsiniz' (absolutely delete)."
         }
       ],
       "approved_at": null
@@ -69,18 +64,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Files:TrashEmptyDescription' implies the description is related to emptying the trash. The translation starts by describing the 'Trash' as a place where deleted files are moved, which is accurate but doesn't directly address emptying it.  A more focused translation for emptying the trash might begin by referencing the action of emptying.",
-          "suggestion": "Consider a phrasing like: 'When you empty the 'Trash', all files within are permanently deleted.'"
-        },
-        {
-          "type": "formatting",
-          "description": "The original English uses single quotes for 'Trash'. The Bulgarian translation also uses single quotes, which is correct, but consistent style should be maintained.",
-          "suggestion": "Ensure consistent use of single quotes around 'Кошче' throughout the text."
+          "description": "The phrase 'Restore files deleted by mistake' is translated as 'Можете или да ги възстановите, в случай че бъдат изтрити по погрешка'. While technically correct, it's a bit verbose and less natural in Bulgarian. A more fluent translation would be something like 'Можете да ги възстановите, ако бъдат изтрити по погрешка' or 'Можете да ги възстановите, ако сте ги изтрили по погрешка'.",
+          "suggestion": "Можете да ги възстановите, ако сте ги изтрили по погрешка"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'restore them by mistake' is translated as 'които бъдат изтрити по погрешка'. While understandable, it's slightly awkward. It implies the files are being deleted again.",
-          "suggestion": "Consider a more natural phrasing like: 'които сте изтрили по погрешка' (which you deleted by mistake)"
+          "description": "The phrase 'Files in 'Trash' are automatically deleted after 30 days' is translated as 'Файловете в 'Кошчето' се изтриват автоматично след 30 дни.'. The addition of the definite article ('the') before 'Trash' makes it slightly unnatural. A better translation would be 'Файловете в 'Кошче' се изтриват автоматично след 30 дни.'",
+          "suggestion": "Файловете в 'Кошче' се изтриват автоматично след 30 дни."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Please note, that the files deleted from the 'Trash' cannot be restored any longer' is translated as 'Моля, обърнете внимание, че когато изтриете файловете от 'Кошчето', те вече не могат да бъдат възстановени.'. The structure is a bit clumsy. 'когато изтриете файловете от 'Кошчето'' can be shortened to 'при изтриване на файловете от 'Кошчето''.",
+          "suggestion": "Моля, обърнете внимание, че при изтриване на файловете от 'Кошчето', те вече не могат да бъдат възстановени."
         }
       ],
       "approved_at": null
@@ -90,14 +85,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Czech translation consistently uses quotation marks ('Koš') around \"Trash\". While acceptable, it might be more consistent to use italics or bolding for emphasis, or to avoid quotation marks entirely.",
-          "suggestion": "Consider using italics (e.g., *Koš*) or bolding (e.g., **Koš**) for 'Trash' throughout the text, or removing the quotation marks. Consistent styling is preferred."
+          "type": "incorrect_translation",
+          "description": "The phrase 'Sekce 'Koš' je místo, kam jsou všechny smazané soubory přemístěny' is a bit literal and could be more naturally phrased. It translates to 'The 'Trash' section is a place where all deleted files are moved'. A more natural phrasing would emphasize the 'Trash' functionality.",
+          "suggestion": "Všechny smazané soubory jsou uloženy do 'Koše'. (All deleted files are stored in 'Trash')"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Prosím berte v úvahu' is a somewhat formal and slightly awkward translation of 'Please note'.",
-          "suggestion": "Replace 'Prosím berte v úvahu' with a more natural phrasing like 'Upozorňujeme', 'Důležité je', or 'Vezměte prosím na vědomí'."
+          "description": "The phrase 'Prosím berte v úvahu, že pokud vymažete Vaše soubory z 'Koše', již je nemůžete znovu obnovit' is a bit formal and could be simplified. 'Prosím berte v úvahu' translates to 'Please consider'.",
+          "suggestion": "Po vymazání souborů z 'Koše' je nelze obnovit. (After deleting files from 'Trash', they cannot be restored.)"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'Vaše' (your) is consistent, but might be more accessible to replace with a more general form (like 'své').",
+          "suggestion": "Consider replacing all instances of 'Vaše' with 'své' for broader accessibility. While technically correct, it's slightly more formal."
         }
       ],
       "approved_at": null
@@ -108,23 +108,23 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'restore files deleted by mistake' is translated as 'wiederherstellen, wenn sie versehentlich gelöscht wurden'. A more natural and precise translation would be 'Sie können Dateien, die versehentlich gelöscht wurden, wiederherstellen' or 'Sie können Dateien wiederherstellen, falls sie versehentlich gelöscht wurden'.",
-          "suggestion": "Sie können Dateien, die versehentlich gelöscht wurden, wiederherstellen"
+          "description": "The phrase 'restore files deleted by mistake' is translated as 'wiederherstellen, wenn sie versehentlich gelöscht wurden'. While technically correct, it's a bit clunky. A more natural German phrasing would be 'Dateien wiederherstellen, falls sie versehentlich gelöscht wurden' or 'Dateien wiederherstellen, falls diese versehentlich gelöscht wurden'.",
+          "suggestion": "Dateien wiederherstellen, falls diese versehentlich gelöscht wurden"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'delete them permanently' is translated as 'unwiderruflich entfernen'. While correct, 'dauerhaft löschen' might be more common and clearer in this context.",
+          "description": "The English phrase 'delete them permanently' is translated as 'unwiderruflich entfernen'.  While understandable, 'dauerhaft löschen' or 'dauerhaft entfernen' are more common and idiomatic for permanently deleting files in German.",
           "suggestion": "dauerhaft löschen"
         },
         {
           "type": "incorrect_translation",
-          "description": "The sentence 'Please note, that the files deleted from the 'Trash' cannot be restored any longer' is translated as 'Bitte beachten Sie, wenn Sie die Dateien aus dem 'Papierkorb' entfernen, können diese nicht mehr wiederhergestellt werden.' This is grammatically awkward. It implies the user deleting from the trash prevents restoration. A better translation would focus on the deletion process itself.",
-          "suggestion": "Bitte beachten Sie, dass Dateien, die aus dem 'Papierkorb' gelöscht wurden, nicht mehr wiederhergestellt werden können."
+          "description": "The English phrase 'Please note, that...' is translated as 'Bitte beachten Sie, wenn...'.  'Bitte beachten Sie, dass...' is a more appropriate translation for 'Please note that...'",
+          "suggestion": "Bitte beachten Sie, dass..."
         },
         {
-          "type": "formatting",
-          "description": "The sentence structure feels a bit clunky. Separating the sentences with a period and more consistent flow will improve readability.",
-          "suggestion": "Die Sektion 'Papierkorb' enthält alle gelöschten Dateien. Sie können diese Dokumente entweder wiederherstellen, wenn sie versehentlich gelöscht wurden, oder dauerhaft löschen. Dateien im 'Papierkorb' werden nach 30 Tagen automatisch gelöscht. Bitte beachten Sie, dass Dateien, die aus dem 'Papierkorb' gelöscht wurden, nicht mehr wiederhergestellt werden können."
+          "type": "incorrect_translation",
+          "description": "The phrase 'cannot be restored any longer' is translated as 'können diese nicht mehr wiederhergestellt werden.'  A more concise and natural translation would be 'können nicht mehr wiederhergestellt werden'.",
+          "suggestion": "können nicht mehr wiederhergestellt werden"
         }
       ],
       "approved_at": null
@@ -135,13 +135,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Trash' is consistently translated as 'Κάδος ανακύκλωσης' and 'Κάδος απορριμμάτων'. While 'Κάδος ανακύκλωσης' is acceptable, the original English uses 'Trash,' which is a very specific term in computing.  Using 'Κάδος απορριμμάτων' is a more literal translation of 'waste bin' and less accurate to the intended meaning.",
-          "suggestion": "Consider using a more consistent and technically accurate translation for 'Trash' such as 'Φάκελος Αντιμετώπισης Προβλημάτων' or a more commonly understood term for the recycle bin/trash folder used in computing within the Greek context, after researching local usage."
+          "description": "The phrase 'Files in 'Trash'' is translated as 'Τα αρχεία στον Κάδος απορριμμάτων'. While technically correct, 'Κάδος ανακύκλωσης' is the more standard and accurate translation for 'Trash' in a computing context within Greek.",
+          "suggestion": "Change 'Κάδος απορριμμάτων' to 'Κάδο ανακύκλωσης'."
         },
         {
-          "type": "grammar",
-          "description": "The phrase 'Τα αρχεία στον Κάδος απορριμμάτων διαγράφονται αυτόματα μετά από 30 ημέρες' could be improved for clarity and flow. The phrasing feels slightly awkward.",
-          "suggestion": "Consider rephrasing to 'Τα αρχεία στον Κάδο ανακύκλωσης διαγράφονται αυτόματα μετά από 30 ημέρες.' (matching the earlier term) or 'Τα αρχεία στον Κάδο ανακύκλωσης διαγράφονται αυτόματα μετά από 30 ημέρες.' – perhaps 'Αυτόματα διαγράφονται μετά από 30 ημέρες.'"
+          "type": "incorrect_translation",
+          "description": "The phrase 'cannot be restored any longer' is translated as 'δεν μπορούν πλέον να ανακτηθούν'. A more natural and idiomatic translation would be 'δεν μπορούν να ανακτηθούν ξανά'.",
+          "suggestion": "Change 'δεν μπορούν πλέον να ανακτηθούν' to 'δεν μπορούν να ανακτηθούν ξανά'."
         }
       ],
       "approved_at": null
@@ -152,18 +152,23 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'Usted puede restaurarlos en el caso si ellos fueron eliminados por error' is grammatically awkward. 'En el caso si' is redundant and unnecessarily formal.",
-          "suggestion": "Usted puede restaurarlos si fueron eliminados por error / Puede restaurarlos si fueron eliminados por error"
+          "description": "The phrase \"Usted puede restaurarlos en el caso si ellos fueron eliminados por error\" is grammatically awkward. The 'en el caso si' is redundant.",
+          "suggestion": "Usted puede restaurarlos si fueron eliminados por error."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'cuando usted elimina los archivos de la 'Papelera de reciclaje' ellos no pueden ser recuperados' is a bit clunky.  'Ellos' is redundant.",
-          "suggestion": "cuando usted elimina los archivos de la 'Papelera de reciclaje', no pueden ser recuperados."
+          "description": "The sentence \"Tenga en cuenta, que cuando usted elimina los archivos de la 'Papelera de reciclaje' ellos no pueden ser recuperados.\" is grammatically awkward and can be improved.",
+          "suggestion": "Tenga en cuenta que los archivos eliminados de la 'Papelera de reciclaje' no pueden ser recuperados."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'restore them' is translated as 'restaurarlos'. While technically correct, a more natural and clear translation might be 'recuperarlos'.",
+          "suggestion": "Consider changing 'restaurarlos' to 'recuperarlos' for better flow."
         },
         {
           "type": "formatting",
-          "description": "Inconsistency in capitalization of 'Papelera de reciclaje'. It's not consistently in lower case.",
-          "suggestion": "Ensure consistent use of lowercase 'papelera de reciclaje' throughout the text, unless specific brand guidelines dictate otherwise."
+          "description": "Inconsistency in the capitalization of 'Papelera de reciclaje'. It's capitalized throughout the translation but should be consistent with the English 'Trash'.",
+          "suggestion": "Ensure consistent capitalization, either capitalizing 'Papelera de reciclaje' throughout or not."
         }
       ],
       "approved_at": null
@@ -171,7 +176,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The English content uses single quotes for 'Trash', while the Finnish translation uses double quotes for 'Roskakori'. This inconsistency should be resolved to maintain visual consistency.",
+          "suggestion": "Change all instances of 'Roskakori' to use single quotes: 'Roskakori'."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -180,18 +191,28 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Restore files deleted by mistake' is translated as 'Vous pouvez les restaurer s'ils ont été supprimés par erreur'. While technically correct, it's a bit awkward. A more natural phrasing would be 'Vous pouvez restaurer les fichiers supprimés par erreur'.",
-          "suggestion": "Vous pouvez restaurer les fichiers supprimés par erreur"
+          "description": "The phrase \"All deleted files are moved to 'Trash'\" is not accurately translated. 'La section 'Corbeille' contient les fichiers supprimés' literally translates to 'The 'Trash' section contains the deleted files,' which is not as clear as the English version.",
+          "suggestion": "Consider a translation like 'Tous les fichiers supprimés sont déplacés vers la 'Corbeille'' or 'Les fichiers supprimés sont stockés dans la 'Corbeille''."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'delete them permanently' is translated as 'les éliminer de manière permanente'. While not incorrect, 'les supprimer définitivement' is a more common and natural phrasing.",
-          "suggestion": "les supprimer définitivement"
+          "description": "The phrase 'restore them by mistake' is not fully conveyed. 's'ils ont été supprimés par erreur' implies they were deleted by someone, not by mistake itself.",
+          "suggestion": "Consider using 'si vous les avez supprimés par erreur' or 'si vous les avez supprimés involontairement'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Please note, that the files deleted from the 'Trash' cannot be restored any longer' is translated as 'Il est à noter que quand vous supprimez les fichiers de la 'Corbeille' ils ne peuvent pas être restaurés.'. This is a bit convoluted. A clearer translation would be 'Veuillez noter que les fichiers supprimés de la 'Corbeille' ne peuvent plus être restaurés.'.",
-          "suggestion": "Veuillez noter que les fichiers supprimés de la 'Corbeille' ne peuvent plus être restaurés."
+          "description": "The phrase 'delete them permanently' is not perfectly captured. 'les éliminer de manière permanente' is a bit formal and could be more conversational.",
+          "suggestion": "Consider using 'les supprimer définitivement' or 'les supprimer complètement'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Please note that' is translated as 'Il est à noter que'. This is grammatically correct but very formal for user-facing text. It could be simplified.",
+          "suggestion": "Consider using 'Attention' or 'Veuillez noter que'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'when you delete the files from the 'Trash'' is translated as 'quand vous supprimez les fichiers de la 'Corbeille''. This is correct but slightly awkward.  A more natural phrasing might be preferred.",
+          "suggestion": "Consider 'lorsque vous supprimez les fichiers de la 'Corbeille'' or simply 'en supprimant les fichiers de la 'Corbeille''."
         }
       ],
       "approved_at": null
@@ -202,8 +223,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "Inconsistent use of single quotes. The English version uses single quotes for 'Trash', while the Armenian translation sometimes uses them and sometimes doesn't. This should be consistent.",
-          "suggestion": "Ensure consistent use of single quotes for 'Trash' throughout the Armenian translation. For example, consistently use `'Աղբարկղ'`."
+          "description": "The phrase 'Files in 'Trash' are automatically deleted after 30 days' could benefit from a slightly smoother flow in Armenian. While technically correct, it sounds a little abrupt. Consider rephrasing for better readability.",
+          "suggestion": "'Աղբարկղ'-ում պահվող ֆայլերը ավտոմատ կերպով ջնջվում են 30 օր հետո։"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'restore them permanently' is not fully captured by 'մշտապես ջնջել դրանք'. A more accurate translation would convey the idea of deleting them irreversibly. ",
+          "suggestion": "մշտապես ջնջել դրանք կամ ամբողջությամբ ջնջել"
         }
       ],
       "approved_at": null
@@ -214,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "Inconsistent use of single vs. double quotes around 'Trash'/'Cestino'. English uses single quotes, Italian uses double quotes. While not incorrect, consistency is preferred.",
-          "suggestion": "Maintain consistent use of double quotes around 'Cestino' throughout the translation."
+          "description": "Inconsistent use of single and double quotes around 'Trash'/'Cestino'. While generally consistent, maintaining one style is preferred.",
+          "suggestion": "Use consistent quotes, either all single quotes ('Cestino') or all double quotes (\"Cestino\")."
         }
       ],
       "approved_at": null
@@ -226,13 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ファイルをを復元する\" is grammatically incorrect. The particle 'を' should only appear once after the verb.",
-          "suggestion": "ファイルを復元する"
-        },
-        {
-          "type": "formatting",
-          "description": "There's an unnecessary particle 'を' after 'ファイルを復元するか'. It disrupts the flow and accuracy of the sentence.",
-          "suggestion": "ファイルを復元するか、完全に削除することができます。"
+          "description": "The phrase \"ファイルをを復元するか\" is grammatically incorrect. The particle 'を' is duplicated.",
+          "suggestion": "ファイルを復元するか"
         }
       ],
       "approved_at": null
@@ -242,24 +263,29 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The sentence '실수로 삭제된 경우, 복원하거나 완전삭제를 할수있습니다' is grammatically awkward. '할수있습니다' is a less formal phrasing and doesn't flow naturally.",
-          "suggestion": "실수로 삭제된 경우, 복원하거나 영구 삭제할 수 있습니다."
+          "type": "spelling",
+          "description": "The word '삭제' (delete) is repeated unnecessarily. It's redundant.",
+          "suggestion": "모든 삭제된 파일은 '휴지통'섹션으로 이동됩니다. 실수로 삭제된 경우, 복원하거나 영구 삭제할 수 있습니다. '휴지통'에 있는 파일은 30일 후에 자동으로 삭제됩니다. '휴지통'에서 파일을 삭제하면 더 이상 복구할 수 없습니다."
         },
         {
           "type": "grammar",
-          "description": "The phrase '삭제하변' is a grammatical error. It should be '삭제하면'.",
-          "suggestion": "삭제하면 더 이상 복원 할수없습니다."
-        },
-        {
-          "type": "formatting",
-          "description": "The repeated use of '할수있습니다' makes the text sound monotonous. It should be varied for better readability.",
-          "suggestion": "Consider varying the phrasing. For example, change the second instance to '영구 삭제가 가능합니다' or similar."
+          "description": "The phrase '삭제하변' is grammatically incorrect.  It should be '삭제하면'.",
+          "suggestion": "'휴지통'에서 파일을 삭제하면 더 이상 복구할 수 없습니다."
         },
         {
           "type": "incorrect_translation",
-          "description": "While the general meaning is conveyed, '휴지통' being directly translated as 'Trash' might be confusing. A more idiomatic translation might be better.",
-          "suggestion": "Consider using a more commonly used term for 'Trash' in Korean, such as '쓰레기통' (although this is very literal) or a more natural phrasing that implies a trash folder."
+          "description": "The English 'permanently delete' is loosely translated as '영구 삭제'. While understandable, '완전삭제' is less common and less natural.  '영구 삭제' or '무조건 삭제' would be better.",
+          "suggestion": "복원하거나 영구 삭제할 수 있습니다."
+        },
+        {
+          "type": "formatting",
+          "description": "Inconsistent use of spacing around punctuation.",
+          "suggestion": "Ensure consistent spacing throughout the translated text."
+        },
+        {
+          "type": "cultural",
+          "description": "The English term 'Trash' is directly translated, which is acceptable. However, consider whether 'Recycle Bin' is more widely understood and culturally appropriate for the Korean audience.",
+          "suggestion": "Consider using '재활용함' (jae-hwal-yong-ham) as an alternative translation for 'Trash' if it's more readily understood."
         }
       ],
       "approved_at": null
@@ -270,18 +296,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"restore files deleted by mistake\" is not accurately translated. 'ຟື້ນ​ຟູ​ໄຟລ​໌​ທີ່​ຖືກ​ລົບ​ໂດຍ​ຄວາມ​ຜິດ​ພາດ' literally translates to 'restore files that were deleted by mistake'. While technically correct, it could be improved for clarity and natural flow in Lao.",
-          "suggestion": "Consider rewording to something like 'ຟື້ນ​ຟູ​ໄຟລ​໌​ທີ່​ຖືກ​ລົບ​ໂດຍ​ເຈົ້າ​ໂດຍ​ບໍ່​ໄດ້​ຕັ້ງໃຈ' (restore files that you deleted unintentionally) or 'ຟື້ນ​ຟູ​ໄຟລ​໌​ທີ່​ຖືກ​ລົບ​ດ້ວຍ​ຄວາມ​ผิด​ພາດ' (restore files deleted with a mistake)."
+          "description": "The phrase 'Restore files deleted by mistake' is a bit awkward. A more natural translation might focus on recovering or retrieving the files.",
+          "suggestion": "ຟື້ນ​ຟູ​ໄຟລ​໌​ທີ່​ຖືກ​ລົບ​ໂດຍ​ຄວາມ​ຜິດ​ພາດ → ກູ້​ຄືນ​ໄຟລ໌​ທີ່​ຖືກ​ລົບ​ໂດຍ​ຄວາມ​ຜິດ​ພາດ (Recover files deleted by mistake)"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"delete them permanently\" is translated as 'ລຶບ​ມັນ​ຢ່າງ​ຖາ​ວອນ'. While technically accurate, 'ຢ່າງ​ຖາ​ວອນ' (permanently) can sound overly formal or slightly awkward in this context. A more natural phrasing might be preferable.",
-          "suggestion": "Consider rewording to 'ລຶບ​ມັນ​ຖາວອນ' or 'ລຶບ​ມັນ​ຢ່າງ​ບໍ​ສາມາດ​ກູ້​ຄືນ​ໄດ້' (delete it so it cannot be recovered)."
+          "description": "The phrase 'delete them permanently' is overly literal. A more natural phrasing would focus on 'permanent deletion'.",
+          "suggestion": "ລຶບ​ມັນ​ຢ່າງ​ຖາ​ວອນ → ລຶບ​ຖາວອນ (Delete permanently)"
         },
         {
-          "type": "formatting",
-          "description": "Inconsistency in quotation marks. English uses single quotes, Lao uses Lao quotes. This isn't a significant error, but maintaining consistency would improve readability.",
-          "suggestion": "Consider consistently using Lao quotation marks throughout the text, or English single quotes if the application/system dictates it."
+          "type": "incorrect_translation",
+          "description": "The phrase 'Please note, that the files deleted from the 'Trash' cannot be restored any longer' is a bit wordy. It can be simplified.",
+          "suggestion": "ກະ​ລຸ​ນາ​ບັນ​ທຶກ​ວ່າ​ໄຟລ​໌​ທີ່​ຖືກ​ລົບ​ຈາກ 'ຖັງ​ຂີ້​ເຫຍື້ອ​' ບໍ່​ສາ​ມາດ​ໄດ້​ຮັບ​ການ​ຟື້ນ​ຟູ​ໄດ້​ອີກ​ຕໍ່​ໄປ → ກະ​ລຸ​ນາ​ບັນ​ທຶກ​ວ່າ​ໄຟລ໌​ທີ່​ຖືກ​ລົບ​ຈາກ 'ຖັງ​ຂີ້​ເຫຍື້ອ' ບໍ່​ສາ​ມາດ​ຟື້ນ​ຟູ​ໄດ້​ອີກ (Please note that files deleted from 'Trash' cannot be recovered)"
         }
       ],
       "approved_at": null
@@ -291,19 +317,24 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "spelling",
+          "description": "The word 'miskastē' appears to be a misspelling. It should likely be 'Atkritne'.",
+          "suggestion": "'Atkritne'"
+        },
+        {
           "type": "grammar",
-          "description": "The phrase 'Faili miskastē tiek automātiski izdzēsti' is grammatically awkward. 'Miskastē' isn't standard Latvian for 'Trash'.",
-          "suggestion": "Faili 'Atkritnē' tiek automātiski izdzēsti"
+          "description": "The phrase 'tās vairs nevar būt atjaunoti' is grammatically incorrect. It should be in the form of 'tās vairs nevar atjaunot'.",
+          "suggestion": "'tās vairs nevar atjaunot'"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'tās vairs nevar būt atjaunoti' is an incorrect translation of 'cannot be restored any longer'. It's word-for-word translation, but doesn't read naturally in Latvian.",
-          "suggestion": "tās vairs nevar atjaunot"
+          "description": "The English phrase 'Restore files deleted by mistake' is translated as 'Jūs varat vai nu atjaunot tos, ja tie tiek izdzēsti kļūdas dēļ'.  While understandable, it could be more directly translated as 'Jūs varat atjaunot failus, kas izdzēsti kļūdas dēļ'.",
+          "suggestion": "'Jūs varat atjaunot failus, kas izdzēsti kļūdas dēļ'"
         },
         {
           "type": "formatting",
-          "description": "Inconsistent use of quotation marks around 'Trash'/'Atkritne'.",
-          "suggestion": "Ensure consistent use of quotation marks throughout the text."
+          "description": "The word 'Atkritne' should be consistently used instead of the mix of 'Atkritne' and 'miskastē'.",
+          "suggestion": "Use 'Atkritne' consistently."
         }
       ],
       "approved_at": null
@@ -313,19 +344,24 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Restore files deleted by mistake' is translated as 'Je kan deze terugzetten als ze per ongeluk verwijderd zijn'. While technically correct, it's less natural in Dutch. A more natural phrasing would be 'Je kunt bestanden die per ongeluk verwijderd zijn, terugzetten'.",
-          "suggestion": "Je kunt bestanden die per ongeluk verwijderd zijn, terugzetten."
+          "type": "grammar",
+          "description": "The sentence 'Je kan deze terugzetten als ze per ongeluk verwijderd zijn of je kan ze permanent verwijderen' is grammatically awkward. The use of 'je kan' is repetitive and the structure is not ideal.",
+          "suggestion": "Je kunt deze terugzetten als ze per ongeluk verwijderd zijn, of je kunt ze permanent verwijderen."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'cannot be restored any longer' is translated as 'deze niet meer terug te krijgen zijn'.  While understandable, a more idiomatic translation would be 'kunnen worden hersteld'.",
-          "suggestion": "kunnen worden hersteld."
+          "description": "The English phrase 'Restore files deleted by mistake' is translated as 'Je kan deze terugzetten als ze per ongeluk verwijderd zijn'. While understandable, a more direct and natural translation would be 'Je kunt verwijderde bestanden terugzetten als ze per ongeluk verwijderd zijn' or 'U kunt verwijderde bestanden terugzetten als ze per ongeluk verwijderd zijn'. The current translation implies that 'deze' refers to the entire trash folder instead of the files.",
+          "suggestion": "Je kunt verwijderde bestanden terugzetten als ze per ongeluk verwijderd zijn."
         },
         {
-          "type": "formatting",
-          "description": "The word 'Wees ervan bewust' is quite formal for this context. A more conversational tone would be preferable.",
-          "suggestion": "Let op"
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Files in 'Trash' are automatically deleted after 30 days' is translated as 'Bestanden in de 'Prullenbak' worden na 30 dagen automatisch verwijderd'. It's accurate, but slightly less natural.  A more idiomatic translation might be 'Bestanden in de 'Prullenbak' worden automatisch na 30 dagen verwijderd'.",
+          "suggestion": "Bestanden in de 'Prullenbak' worden automatisch na 30 dagen verwijderd."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Please note, that the files deleted from the 'Trash' cannot be restored any longer' is translated as 'Wees ervan bewust dat als de bestanden eenmaal uit de Prullenbak zijn verwijderd deze niet meer terug te krijgen zijn'. The phrasing is a bit convoluted and less direct. A better translation would emphasize the finality.",
+          "suggestion": "Houd er rekening mee dat bestanden die eenmaal uit de 'Prullenbak' zijn verwijderd, niet meer terug te krijgen zijn."
         }
       ],
       "approved_at": null
@@ -336,13 +372,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'delete them permanently' is translated as 'usunąć ostatecznie'. While technically correct, it's a bit formal and doesn't quite convey the intended meaning of permanent deletion in a user-friendly context. A better alternative would be 'usunięcie ich na stałe'.",
-          "suggestion": "usunięcie ich na stałe"
+          "description": "The phrase 'delete them permanently' is translated as 'usunąć ostatecznie'. While technically correct, 'usunąć bezpowrotnie' would better convey the meaning of permanent deletion, emphasizing irreversibility.",
+          "suggestion": "Możesz przywrócić pliki jeśli zostały one usunięte przez pomyłkę lub usunąć je bezpowrotnie."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'cannot be restored any longer' is translated as 'przywrócenie już nie będzie możliwe'. This is grammatically correct but slightly awkward. A more natural and direct translation would be 'nie będzie można ich przywrócić'.",
-          "suggestion": "nie będzie można ich przywrócić"
+          "description": "The phrase 'cannot be restored any longer' is translated as 'przywrócenie już nie będzie możliwe'. A more natural and fluent Polish phrasing would be 'nie da się ich już przywrócić'.",
+          "suggestion": "Po usunięciu ostatecznym nie da się ich już przywrócić."
         }
       ],
       "approved_at": null
@@ -353,23 +389,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'A secção 'Lixo'' is a literal translation of 'The 'Trash'' which isn't the most natural wording in Portuguese. A better phrasing would be 'A pasta 'Lixo'' or 'Os seus ficheiros na 'Lixo''.",
-          "suggestion": "A pasta 'Lixo' or Os seus ficheiros na 'Lixo'"
+          "description": "The phrase 'A secção 'Lixo' é para onde todos os arquivos eliminados são movidos' is a bit awkward. A more natural translation would be 'Todos os arquivos eliminados são movidos para a pasta 'Lixo''.",
+          "suggestion": "Todos os arquivos eliminados são movidos para a pasta 'Lixo'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Pode recuperá-los no caso de terem sido eliminados por engano' is a bit clunky.  A more natural phrasing would be 'Pode restaurá-los caso tenham sido eliminados por engano'.",
-          "suggestion": "Pode restaurá-los caso tenham sido eliminados por engano"
+          "description": "The phrase 'Pode recuperá-los no caso de terem sido eliminados por engano ou excluí-los permanentemente' could be improved for clarity. 'Você pode restaurá-los caso tenham sido eliminados por engano ou excluí-los permanentemente' is a better phrasing.",
+          "suggestion": "Você pode restaurá-los caso tenham sido eliminados por engano ou excluí-los permanentemente."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'eliminar os ficheiros do 'Lixo'' is grammatically correct, but 'esvaziar o 'Lixo'' would be more common and idiomatic for emptying the trash.",
-          "suggestion": "esvaziar o 'Lixo'"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The use of 'no futuro' at the end is a bit redundant. The implication of 'once deleted' is sufficient.",
-          "suggestion": "Remove 'no futuro'."
+          "description": "The phrase 'quando eliminar os ficheiros do 'Lixo' não podem ser recuperados no futuro' is not ideal. A more accurate and natural translation would be 'Quando os arquivos são eliminados da 'Lixo', eles não podem ser recuperados.'.",
+          "suggestion": "Quando os arquivos são eliminados da 'Lixo', eles não podem ser recuperados."
         }
       ],
       "approved_at": null
@@ -380,18 +411,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'A sessão 'Lixeira' é o lugar para o qual todos os arquivos excluídos serão movidos' is a somewhat literal and slightly awkward translation of 'All deleted files are moved to 'Trash''. A more natural phrasing would be something like 'Todos os arquivos excluídos são movidos para a 'Lixeira''.",
+          "description": "The phrase 'A sessão 'Lixeira' é o lugar para o qual todos os arquivos excluídos serão movidos' is a bit clunky. A more natural phrasing would be something like 'Todos os arquivos excluídos são movidos para a 'Lixeira''.",
           "suggestion": "Todos os arquivos excluídos são movidos para a 'Lixeira'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The sentence 'Você pode restaurá-los caso tenha excluído por engano ou permanentemente' is overly formal. A more casual and understandable phrasing would be 'Você pode restaurá-los se os excluiu por engano ou excluí-los permanentemente'.",
-          "suggestion": "Você pode restaurá-los se os excluiu por engano ou excluí-los permanentemente."
+          "description": "The phrase 'Você pode restaurá-los caso tenha excluído por engano ou permanentemente' is not the most fluid. 'Você pode restaurá-los se excluiu por engano ou excluí-los permanentemente' is preferable.",
+          "suggestion": "Você pode restaurá-los se excluiu por engano ou excluí-los permanentemente."
         },
         {
           "type": "formatting",
-          "description": "Inconsistency in the use of single vs. double quotes around 'Lixeira'.",
-          "suggestion": "Maintain consistent use of either single or double quotes throughout the translation for 'Lixeira'."
+          "description": "The use of single quotes ('Lixeira') for the Trash folder name should be consistent with the English content, which uses double quotes. Using double quotes makes the text more consistent with the original English version. ",
+          "suggestion": "“Lixeira”"
         }
       ],
       "approved_at": null
@@ -402,13 +433,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The English content uses single quotes for 'Trash'. The Romanian translation uses both single ('Coșul') and double quotes. Inconsistency in quotation marks should be corrected.",
-          "suggestion": "Use consistent quotation marks throughout the Romanian translation. Either use single quotes like the English version ('Coșul') or use double quotes consistently."
+          "description": "The single quotes around 'Trash' in the English version are not consistently applied in the Romanian translation. While 'Coșul' is in quotes initially, it's not consistently used throughout.",
+          "suggestion": "Consistently use quotes around 'Coșul' to mirror the English version: \"Toate fișierele eliminate sunt mutate în 'Coșul' de gunoi...\""
         },
         {
           "type": "incorrect_translation",
-          "description": "The term 'restore' is translated as 'restabiliți', which is technically correct but could be improved for clarity and naturalness.  'Recupera' is often preferred for 'restore' in a digital context.",
-          "suggestion": "Consider using 'recuperați' instead of 'restabiliți' for improved clarity."
+          "description": "The English phrase 'restore files deleted by mistake' is translated as 'restabiliți fișierele pe care le-ați mutat din greșeală'. 'Mutat' (moved) doesn't perfectly capture the meaning of restoring. It implies a relocation rather than recovery.",
+          "suggestion": "Consider a more accurate translation of 'restore files deleted by mistake', such as 'puteți să recuperați fișierele pe care le-ați șters din greșeală' (you can recover files deleted by mistake)."
         }
       ],
       "approved_at": null
@@ -424,14 +455,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The Sinhala word 'දවස් 𑇬 (30) කට' is an unconventional way to write '30 days'. While understandable, it's not standard Sinhala usage.",
-          "suggestion": "Replace 'දවස් 𑇬 (30) කට' with 'දවස් තිහකට' (davas tihakata)."
+          "type": "formatting",
+          "description": "The number '30' is represented as '𑇬 (30)'. While technically accurate, it's visually jarring and inconsistent with the rest of the text. The number should be consistent.",
+          "suggestion": "Replace '𑇬 (30)' with '30'."
         },
         {
-          "type": "formatting",
-          "description": "The inclusion of the number 30 within the Sinhala text using a non-standard Sinhala character set ('𑇬') makes the text look visually disjointed and inconsistent.  It is best to use the standard Sinhala number.",
-          "suggestion": "Replace the unusual number character with the Sinhala numeral '30'."
+          "type": "cultural",
+          "description": "The term 'කුණු කූඩය' (kunu koodaya) directly translates to 'dirty bin' or 'filthy bin'. While it's the literal translation of 'Trash', it might be perceived as negative or unprofessional in Sinhala. A more culturally appropriate term would be 'ඉවතලන පෙට්ටි' (iwatala peraetti) meaning 'discarded box/container'.",
+          "suggestion": "Replace 'කුණු කූඩය' with 'ඉවතලන පෙට්ටි'."
         }
       ],
       "approved_at": null
@@ -442,18 +473,23 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Restore files deleted by mistake\" is not accurately reflected in the Slovak translation. \"V prípade chyby ich môžete obnoviť\" is too general. A more accurate translation would convey the idea of restoring files *mistakenly* deleted.",
-          "suggestion": "V prípade chyby ich môžete obnoviť, ak ste ich zmazali omylom."
+          "description": "The phrase \"Restore files deleted by mistake\" is translated as \"V prípade chyby ich môžete obnoviť.\" While not entirely wrong, it's not as clear. A more accurate translation would convey the 'by mistake' element more directly.",
+          "suggestion": "V prípade omylu ich môžete obnoviť."
         },
         {
           "type": "formatting",
-          "description": "The English content uses single quotes for 'Trash'. While the Slovak translation uses single quotes as well for 'Kôš', consistency is important. Consider using double quotes or consistent single quotes throughout the entire translation if it aligns with Slovak conventions.",
-          "suggestion": "Consider using double quotes (''Kôš'') for consistency with other instances of this term if standard practice dictates."
+          "description": "The original English text consistently uses single quotes for 'Trash'. The Slovak translation uses double quotes. This should be consistent.",
+          "suggestion": "Replace all instances of \"Kôš\" with 'Kôš'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Please note, that the files deleted from the 'Trash' cannot be restored any longer' is somewhat awkwardly translated as 'Ak zmažete súbory zo sekcie 'Kôš', tak ich nebudete vedieť obnoviť.' It lacks the emphasis and tone of the original English.",
-          "suggestion": "Zmazané súbory zo sekcie 'Kôš' už nie je možné obnoviť."
+          "description": "The phrase \"Files in 'Trash' are automatically deleted after 30 days\" is translated as \"Súbory v 'Koši' sa automaticky vymažú po 30 dňoch.\" 'Vymažú' is a bit too forceful. A more appropriate term would suggest a removal or deletion, but not necessarily a 'wipe'.",
+          "suggestion": "Súbory v 'Koši' sa automaticky odstránia po 30 dňoch."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The last sentence, \"Please note, that the files deleted from the 'Trash' cannot be restored any longer.\" is translated as \"Ak zmažete súbory zo sekcie 'Kôš', tak ich nebudete vedieť obnoviť.\" While conveying the general meaning, the phrasing is a little awkward and lacks the formal tone of the original. The 'Please note' is lost.",
+          "suggestion": "Upozorňujeme, že po zmazaní súborov z 'Koša' ich nie je možné obnoviť."
         }
       ],
       "approved_at": null
@@ -464,18 +500,18 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "Inconsistency in capitalization. 'Koš' is lowercase in some instances and capitalized in others.",
-          "suggestion": "Maintain consistent capitalization throughout, either always 'Koš' or 'koš'."
+          "description": "Inconsistent capitalization of 'koš'. The initial mention uses 'Koš' (uppercase), while subsequent mentions use 'koša' (lowercase).",
+          "suggestion": "Maintain consistent capitalization throughout the translation. Consider using 'Koš' for all mentions."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Restore files deleted by mistake' is translated as 'Če ste jih izbrisali po pomoti jih lahko obnovite'. While understandable, a more direct translation of 'restore' might be clearer. The sentence could be rephrased.",
-          "suggestion": "Consider 'Lahko jih obnovite, če ste jih izbrisali po pomoti.' or 'Lahko obnovite datoteke, če ste jih izbrisali po pomoti.'"
+          "description": "The English phrase 'Restore files deleted by mistake' is translated as 'Če ste jih izbrisali po pomoti jih lahko obnovite'. While technically correct, it's a bit awkward and literal. A more natural phrasing in Slovenian might be 'Če ste jih izbrisali po pomoti, jih lahko obnovite'.",
+          "suggestion": "Change 'Če ste jih izbrisali po pomoti jih lahko obnovite' to 'Če ste jih izbrisali po pomoti, jih lahko obnovite'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'delete them permanently' is translated as 'pa jih popolnoma izbrišete'. 'Popolnoma' (completely) is redundant.  While not strictly wrong, it adds unnecessary emphasis.",
-          "suggestion": "Simply use 'izbrišete' for 'delete'."
+          "description": "The phrase 'delete them permanently' is translated as 'jih popolnoma izbrišete'. While correct, 'trajno izbrišete' might be slightly more aligned with the original's meaning of 'permanently'.",
+          "suggestion": "Consider changing 'jih popolnoma izbrišete' to 'jih trajno izbrišete'."
         }
       ],
       "approved_at": null
@@ -486,18 +522,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The single quotes around 'Trash' and 'Отпад' should be consistent. The Serbian translation uses Cyrillic characters within single quotes.",
-          "suggestion": "Ensure consistent use of single quotes. Consider using Unicode characters for 'Отпад' if the platform supports it."
+          "description": "The use of single quotes around 'Trash' and 'Отпад' is inconsistent. The English uses single quotes, while the Serbian uses single quotes as well. It's recommended to maintain consistency.",
+          "suggestion": "Ensure consistent use of quotation marks (single or double) throughout the translated text."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Restore files deleted by mistake' is translated as 'Повратите датотеке обрисане грешком'. While technically correct, a more natural and idiomatic translation could be 'Вратите датотеке обрисане грешком'.",
-          "suggestion": "Change 'Повратите датотеке обрисане грешком' to 'Вратите датотеке обрисане грешком'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'delete them permanently' is translated as 'трајно обришите'. While accurate, 'делетно обришите' can sound more natural in Serbian.",
-          "suggestion": "Change 'трајно обришите' to 'делетно обришите'."
+          "type": "grammar",
+          "description": "The phrase 'или их трајно обришите' could be slightly improved for flow. It sounds a bit abrupt.",
+          "suggestion": "Consider rephrasing to 'или трајно избришите датотеке' (or a similar construction that flows more naturally in Serbian)."
         }
       ],
       "approved_at": null
@@ -508,8 +539,18 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "Inconsistent use of single quotes around 'Trash'. The English uses single quotes, but the Serbian translation uses single quotes as well. It might be better to use double quotes or no quotes at all for consistency with Serbian conventions for UI elements.",
-          "suggestion": "Consider changing all instances of single quotes around 'Otpad' to double quotes or removing them entirely for greater consistency with Serbian UI design."
+          "description": "The use of single quotes around 'Trash' and 'Otpad' is inconsistent. English uses single quotes, while Serbian appears to be consistent. Maintaining consistency improves readability.",
+          "suggestion": "Ensure both 'Trash' and 'Otpad' consistently use double quotes or single quotes throughout the text, aligning with Serbian convention."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'premeštaju' (moved) isn't the most natural translation of 'moved' in this context.  'Slože' or 'pomeraju se' would be more fitting to imply relocation.",
+          "suggestion": "Replace 'premeštaju' with 'složene' or 'pomeraju se' to more accurately reflect the intended meaning."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'trajno' (permanently) could be replaced with 'konačno' for a more natural flow. While 'trajno' is not incorrect, 'konačno' often sounds better in this context.",
+          "suggestion": "Replace 'trajno' with 'konačno'."
         }
       ],
       "approved_at": null
@@ -519,24 +560,24 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Restore files deleted by mistake' is translated as 'Yanlışlıkla sildiyseniz geri alabilir'. While understandable, a more accurate translation would be 'Yanlışlıkla silerseniz geri alabilirsiniz' or 'Yanlışlıkla silmişseniz geri alabilirsiniz'.  The current translation implies the user *already* deleted the files.",
+          "suggestion": "Yanlışlıkla silerseniz geri alabilirsiniz."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'delete them permanently' is translated as 'kalıcı olarak silebilirsiniz'. This is understandable, but 'kesin olarak silebilirsiniz' or 'tamamen silebilirsiniz' is more natural in Turkish.",
+          "suggestion": "kesin olarak silebilirsiniz"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Please note, that the files deleted from the 'Trash' cannot be restored any longer' is translated as 'Lütfen unutmayın, 'Çöp kutusundan' dosyaları sildiğiniz zaman artık bir daha geri alamazsınız.'. While conveys the meaning, a more natural translation would be 'Lütfen unutmayın, 'Çöp Kutusu'ndan sildiğiniz dosyaları artık geri alamazsınız.'",
+          "suggestion": "Lütfen unutmayın, 'Çöp Kutusu'ndan sildiğiniz dosyaları artık geri alamazsınız."
+        },
+        {
           "type": "formatting",
-          "description": "The translation uses a mix of uppercase and lowercase for 'Çöp Kutusu'. It should be consistent.",
-          "suggestion": "'Çöp Kutusu' should consistently be either all lowercase ('çöp kutusu') or all uppercase ('ÇÖP KUTUSU')."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'yada kalıcı olarak silebilirsiniz' is slightly awkward. 'Veya' is more natural than 'yada' in this context.",
-          "suggestion": "Change 'yada kalıcı olarak silebilirsiniz' to 'veya kalıcı olarak silebilirsiniz'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Restore files deleted by mistake' is translated as 'Yanlışlıkla sildiyseniz geri alabilir'.  'Geri alabilir' is more like 'undo'. A more accurate translation would convey 'restore'.",
-          "suggestion": "Replace 'Yanlışlıkla sildiyseniz geri alabilir' with 'Yanlışlıkla sildiyseniz geri yükleyebilirsiniz' or 'Yanlışlıkla sildiyseniz geri getirebilirsiniz'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'cannot be restored any longer' is translated as 'artık bir daha geri alamazsınız'. While understandable, a more precise translation would capture the permanence.",
-          "suggestion": "Replace 'artık bir daha geri alamazsınız' with 'artık geri getirilemezler' or 'artık geri alınamazlar'."
+          "description": "Inconsistent capitalization of 'Çöp Kutusu'. It appears sometimes with a lowercase 'ç' and sometimes with an uppercase 'Ç'.",
+          "suggestion": "Maintain consistent capitalization throughout (e.g., always 'Çöp Kutusu' or always 'çöp kutusu')."
         }
       ],
       "approved_at": null
@@ -547,18 +588,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Restore files deleted by mistake' is translated as 'Ви можете або відновити їх, якщо вони віддалені помилково'. 'Віддалені' is passive voice and a slightly awkward phrasing in Ukrainian. A more natural translation would be 'Ви можете або відновити їх, якщо вони видалені помилково'.",
-          "suggestion": "Ви можете або відновити їх, якщо вони видалені помилково"
+          "description": "The phrase 'deleted by mistake' is translated as 'якщо вони віддалені помилково'. While understandable, a more natural translation would be 'якщо вони видалені випадково'.",
+          "suggestion": "Change 'якщо вони віддалені помилково' to 'якщо вони видалені випадково'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'delete them permanently' is translated as 'видалити їх остаточно'. While 'остаточно' is correct, 'безповоротно' is more frequently used in this context when referring to permanent deletion.",
-          "suggestion": "видалити їх безповоротно"
+          "description": "The phrase 'restore files' is translated as 'відновити їх'. While technically correct, a more natural phrasing would be 'відновити файли'.",
+          "suggestion": "Change 'відновити їх' to 'відновити файли'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Please note, that the files deleted from the 'Trash' cannot be restored any longer' is translated as 'Будь ласка, зверніть увагу, що при видаленні файлів з 'Кошика' їх вже не можна буде відновити.'. The phrasing 'їх вже не можна буде відновити' sounds a bit clumsy. A more fluent version would be 'їх не буде можливо відновити'.",
-          "suggestion": "Будь ласка, зверніть увагу, що при видаленні файлів з 'Кошика' їх не буде можливо відновити."
+          "description": "The phrase 'delete them permanently' is translated as 'видалити їх остаточно'. A more common and natural translation would be 'видалити назавжди'.",
+          "suggestion": "Change 'видалити їх остаточно' to 'видалити назавжди'."
         }
       ],
       "approved_at": null
@@ -569,18 +610,23 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Restore files deleted by mistake' is awkwardly translated as 'Bạn có thể khôi phục chúng nếu là do xóa nhầm'. A more natural translation would be something like 'Bạn có thể khôi phục các file bị xóa nhầm' or 'Bạn có thể khôi phục các file đã xóa nhầm'.",
-          "suggestion": "Bạn có thể khôi phục các file bị xóa nhầm"
+          "description": "The phrase 'restore them if they were deleted by mistake' is translated as 'Bạn có thể khôi phục chúng nếu là do xóa nhầm'. While understandable, a more natural translation would be 'Bạn có thể khôi phục chúng nếu vô tình xóa nhầm'.",
+          "suggestion": "Bạn có thể khôi phục chúng nếu vô tình xóa nhầm"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'delete them permanently' is translated as 'xóa bỏ chúng vĩnh viễn'. While technically correct, a more common and natural phrasing in Vietnamese would be 'xóa chúng vĩnh viễn' or 'xóa chúng hoàn toàn'.",
-          "suggestion": "xóa chúng vĩnh viễn"
+          "description": "The phrase 'delete them permanently' is translated as 'xóa bỏ chúng vĩnh viễn'. While accurate, 'xóa vĩnh viễn' is more concise and common.",
+          "suggestion": "xóa vĩnh viễn"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'cannot be restored any longer' is translated as 'chúng sẽ không thể được khôi phục lại'. It's a bit redundant. A cleaner translation would be 'chúng sẽ không thể khôi phục được' or simply 'chúng không thể khôi phục được'.",
-          "suggestion": "chúng sẽ không thể khôi phục được"
+          "description": "The phrase 'files deleted from the 'Trash'' is translated as 'khi bạn xóa các file từ 'Thùng rác''. It should be 'khi bạn xóa file khỏi 'Thùng rác'' for better flow and grammatically correct.",
+          "suggestion": "khi bạn xóa file khỏi 'Thùng rác'"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'cannot be restored any longer' is translated as 'chúng sẽ không thể được khôi phục lại'. A more natural translation would be 'chúng sẽ không thể khôi phục được nữa'.",
+          "suggestion": "chúng sẽ không thể khôi phục được nữa"
         }
       ],
       "approved_at": null
@@ -591,18 +637,23 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Files:TrashEmptyDescription' seems to suggest this is a label or description related to emptying the trash. The Chinese translation focuses more on general trash management (restore or permanently delete). It doesn't specifically address the 'emptying' action.  Consider whether the translation needs to explicitly mention the emptying of the trash bin.",
-          "suggestion": "Consider revising to more closely reflect the action of emptying the trash bin, e.g.,  “清空回收站中的文件。您可以选择还原或永久删除回收站中的文件。回收站中的文件将在 30 天后自动删除。请注意：被永久删除的文档将无法再恢复。”"
-        },
-        {
-          "type": "formatting",
-          "description": "The opening quotation mark is misplaced and creates an unnecessary leading space.",
-          "suggestion": "Remove the leading space after the initial quotation mark.  Start the sentence directly with “回收站”."
+          "description": "The English phrase 'Files:TrashEmptyDescription' is not directly translated into the Chinese version. It’s implied by the overall description. While not strictly incorrect, it's missing a direct mapping for clarity.",
+          "suggestion": "Consider adding a more direct reference to the 'Files:TrashEmptyDescription' key within the Chinese translation, perhaps as an introductory sentence.  For example: '本页面描述了“回收站”的清理内容。（This page describes the contents of the 'Trash'）'"
         },
         {
           "type": "incorrect_translation",
-          "description": "The term '还原' is a reasonable translation for 'restore' but '永久删除' is a little generic for 'permanently delete'. It could be more descriptive.",
-          "suggestion": "Consider using a more specific term for 'permanently delete,' such as '彻底删除' (completely delete) or '无恢复删除' (unrecoverable delete)."
+          "description": "The English 'Restore files deleted by mistake' is translated as '您可以选择“还原”回收站中的文件'. This is accurate but less direct. 'Restore' is more literally '还原'.",
+          "suggestion": "Replace '您可以选择“还原”回收站中的文件' with '您可以还原回收站中的文件' for a more direct translation of 'Restore files'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Files in 'Trash' are automatically deleted after 30 days' is translated as '“回收站”中的文件将在 30 天后自动删除'. While functionally correct, 'files' isn't explicitly mentioned, which could lead to ambiguity.",
+          "suggestion": "Consider rephrasing to: '“回收站”中的文件将在 30 天后自动删除。' (using a slightly different sentence structure to be more naturally Chinese)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'cannot be restored any longer' is translated as '将无法再恢复'. While technically correct, it could be smoother. The repeated use of '无法' (unable) can sound stilted in Chinese.",
+          "suggestion": "Replace '将无法再恢复' with '不再能恢复' for a slightly more natural and less repetitive phrasing."
         }
       ],
       "approved_at": null

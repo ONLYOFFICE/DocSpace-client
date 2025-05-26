@@ -3,7 +3,7 @@
   "content": "Subscription expired",
   "content_en_sha1_hash": "310acecb5306e8088502cf4b53539a4c5b3657be",
   "created_at": "2025-05-19T21:30:49.193Z",
-  "updated_at": "2025-05-22T11:56:37.522Z",
+  "updated_at": "2025-05-23T22:25:53.974Z",
   "comment": {
     "text": "This translation key is used to display a message when a subscription has expired. It appears as a label on a UI element and indicates that a subscription has ended its term, often prompting the user to renew or manage their subscription. Translators should focus on conveying a clear and concise meaning of \"subscription has expired\" in different languages.",
     "is_auto": true,
@@ -108,13 +108,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ການສັນຈອງສູບສະຄຣິບລາຍໝົດອາຍຸ\" is overly literal and doesn't flow naturally in Lao. 'Subscription' is a specific concept that might be better conveyed with a more understandable term.",
-          "suggestion": "Consider alternatives like \"ເວລາຈົດຊື້ມົດຫມົດໄລຍະ\" (Time for subscription ended) or \"ການເປັນສະມາຊິກຫມົດອາຍຸ\" (Membership expired) depending on the specific context."
+          "description": "The Lao translation \"ການສັນຈອງສູບສະຄຣິບລາຍໝົດອາຍຸ\" is a literal translation and doesn't convey the meaning of 'Subscription expired' naturally in Lao.  'ການສັນຈອງ' (kan san chong) typically refers to a journey or transit. The term 'subscription' is not accurately represented.",
+          "suggestion": "ອາຍຸການສັ່ງຊື້ສິ້ນສຸດ"
         },
         {
           "type": "spelling",
-          "description": "While technically correct, 'ສູບສະຄຣິບ' seems like a direct transliteration of 'subscription' and might be confusing for Lao speakers. It could be ambiguous.",
-          "suggestion": "Re-evaluate the best Lao term to represent 'subscription' to ensure clarity and cultural appropriateness.  Possibly use a different phrasing if a single word isn't readily available."
+          "description": "While technically not incorrect, the usage of 'ສູບສະຄຣິບ' is unusual. It appears to be a direct transliteration of 'script' which isn't relevant to 'subscription' in this context.",
+          "suggestion": "Remove 'ສູບສະຄຣິບ' or use a more appropriate term if possible, but prioritizing clarity and natural Lao phrasing."
         }
       ],
       "approved_at": null
@@ -122,13 +122,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Abonementa derīguma termiņš ir beidzies' is a very literal and lengthy translation of 'Subscription expired'. While technically correct, it sounds awkward and overly formal in Latvian. A more natural and concise translation would be preferred.",
-          "suggestion": "Abonements ir beidzies"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

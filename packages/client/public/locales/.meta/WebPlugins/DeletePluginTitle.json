@@ -3,7 +3,7 @@
   "content": "Delete plugin?",
   "content_en_sha1_hash": "a78a1d27084eed85ce0fe4dd762e6fc445100979",
   "created_at": "2025-05-19T21:30:49.906Z",
-  "updated_at": "2025-05-21T00:45:37.592Z",
+  "updated_at": "2025-05-24T01:59:36.221Z",
   "comment": {
     "text": "This translation key is used for the \"Delete plugin?\" message displayed as the header of a confirmation modal dialog in an application. It prompts the user to confirm deleting a plugin.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"هل تريد حذف هذا المكون الاضافي؟\" literally translates to \"Do you want to delete this add-on?\" While understandable, it's slightly more verbose than the English \"Delete plugin?\" A more direct and concise translation would be better aligned with the original meaning.",
-          "suggestion": "حذف المكون الاضافي؟"
+          "description": "The translation 'هل تريد حذف هذا المكون الاضافي؟' is overly verbose and doesn't accurately reflect the brevity of the English 'Delete plugin?'. A more direct translation would be better.",
+          "suggestion": "هل تريد حذف المكون الإضافي؟"
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Plagin silinsin?' is a question implying an order to delete the plugin. A more appropriate translation would express a question seeking confirmation.",
-          "suggestion": "Plagini silinsinmi?"
+          "description": "The translation \"Plagin silinsin?\" is not the most natural or accurate translation of \"Delete plugin?\". While technically understandable, it sounds somewhat awkward. A more natural phrasing would be something like \"Plugin silinsinmi?\" or \"Pluginu silmək istəyirsiniz?\"",
+          "suggestion": "Plugin silinsinmi?"
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ລຶບປລັກອິນບໍ?' translates more closely to 'Delete plugin, right?' or 'Delete plugin, huh?'. The intended meaning of 'Delete plugin?' is a direct question, and the 'ບໍ?' adds a questioning tag that alters the meaning slightly.",
-          "suggestion": "ລຶບປລັກອິນແດ່?"
+          "description": "The Lao translation 'ລຶບປລັກອິນບໍ?' is a literal translation that is grammatically awkward in Lao. While understandable, it's not the most natural way to phrase the question. The 'ບໍ?' makes it sound like a leading question.",
+          "suggestion": "Consider a more natural phrasing like 'ຕ້ອງການລຶບປລັກອິນບໍ?' or 'ລຶບປລັກອິນແດ່ບໍ?' Both convey the question 'Delete plugin?' more naturally."
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Doriți să ștergeți pluginul?' is too formal for a confirmation prompt like 'Delete plugin?'. A more appropriate and user-friendly translation would be 'Vreți să ștergeți pluginul?' or 'Ștergeți pluginul?'",
-          "suggestion": "Vreți să ștergeți pluginul?"
+          "description": "The translation 'Doriți să ștergeți pluginul?' literally translates to 'Do you want to delete the plugin?'. While understandable, it's less direct and slightly more formal than the English 'Delete plugin?'. A more natural and concise Romanian translation would be something like 'Ștergeți pluginul?' or 'Vreți să ștergeți pluginul?'",
+          "suggestion": "Ștergeți pluginul?"
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"පේනුව මකන්නද?\" is a literal translation of 'Delete plugin?' but lacks the natural flow of Sinhala questions. A more natural phrasing would be something like \"ප්ලගින් එක මකාදම?» or «ප්ලගින් එක අයින් කරන්නද?»",
-          "suggestion": "ප්ලගින් එක මකාදම?» or «ප්ලගින් එක අයින් කරන්නද?»"
+          "description": "The translation \"පේනුව මකන්නද?\" literally translates to \"Do you want to erase the plugin?\" which is not as natural as a more direct question like \"Delete the plugin?\" or \"Should we delete the plugin?\"",
+          "suggestion": "Consider a more natural phrasing like \"ප්ලගින් ඉවත් කරන්නද?\" (Plugin remove?) or \"ප්ලගින් නිශ්චල කරන්නද?\" (Plugin disable?). The best option depends on the exact functionality intended."
         }
       ],
       "approved_at": null
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation \"Izbrišem vtičnik?\" uses the conditional form (\"would delete\"). While grammatically correct, a more direct and natural translation for a confirmation prompt like \"Delete plugin?\" would be a declarative question using the present tense.  It implies a suggestion, not a confirmation.",
-          "suggestion": "Izbrišem plugin? (While still conditional, closer to original meaning. Ideal: Izbrišeš plugin? or simply Izbrišem plugin?)"
+          "description": "The translation 'Izbrišem vtičnik?' is a question implying the user is being asked if *they* want to delete the plugin. The English 'Delete plugin?' is a direct question confirming the action. The Slovenian translation should be a direct question using the imperative form.",
+          "suggestion": "Izbriši vtičnik?"
         }
       ],
       "approved_at": null
@@ -210,7 +210,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Обриши додатак?' while understandable, is not the most natural or common way to ask 'Delete plugin?' in Serbian. 'Избриши додатак?' would be more accurate and idiomatic.",
+          "description": "The translation 'Обриши додатак?' while understandable, is not the most natural or precise translation of 'Delete plugin?'.  'Обриши' implies a forceful deletion, whereas a confirmation prompt often implies a request for confirmation.",
           "suggestion": "Избриши додатак?"
         }
       ],
@@ -222,7 +222,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Obriši dodatak?' is a literal translation of 'Delete plugin?' but sounds slightly unnatural in Serbian. A more natural phrasing would be 'Izbriši dodatak?'",
+          "description": "The translation 'Obriši dodatak?' while grammatically correct, doesn't quite capture the directness and simple question of \"Delete plugin?\".  A more literal and common translation would be 'Izbriši dodatak?'",
           "suggestion": "Izbriši dodatak?"
         }
       ],
@@ -246,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Bạn muốn xóa plugin?\" is too literal. While grammatically correct, a more natural and concise phrasing would be better for a confirmation dialog. \"Bạn có chắc muốn xóa plugin này?\" (Do you want to delete this plugin?) would be more appropriate.",
-          "suggestion": "Bạn có chắc muốn xóa plugin này?"
+          "description": "The English phrase 'Delete plugin?' is a question seeking confirmation. 'Bạn muốn xóa plugin?' translates to 'Do you want to delete plugin?' while 'Delete plugin?' implies a more direct confirmation request. A more accurate translation would be 'Xóa plugin?' or 'Bạn có muốn xóa plugin?'",
+          "suggestion": "Xóa plugin?"
         }
       ],
       "approved_at": null
@@ -255,13 +255,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'remove' (移除) implies a less permanent action than 'delete'. 'Delete' suggests a complete removal, which is likely the intended meaning in the context of plugin management.",
-          "suggestion": "删除插件？"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Website",
   "content_en_sha1_hash": "2e8a57cc5c472f4ac3b071979a38e80db7e59e87",
   "created_at": "2025-05-19T21:30:49.594Z",
-  "updated_at": "2025-05-22T11:56:37.718Z",
+  "updated_at": "2025-05-23T22:13:08.524Z",
   "comment": {
     "text": "This translation key is used for displaying the website label on various UI components, such as headers and input fields, in a portal settings section. It appears as a title or label, indicating which field is related to the website.",
     "is_auto": true,

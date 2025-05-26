@@ -3,7 +3,7 @@
   "content": "Daily {{productName}} feed",
   "content_en_sha1_hash": "86616eb49388f5f6bbcafaecd812e76ec70ed24b",
   "created_at": "2025-05-19T21:30:54.080Z",
-  "updated_at": "2025-05-21T07:35:57.646Z",
+  "updated_at": "2025-05-24T07:49:59.549Z",
   "comment": {
     "text": "\"Used to display the daily feed title for a specific product on a user's profile page.\"",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'أخبار {{productName}} اليومية' literally translates to 'News of {{productName}} Daily'. While understandable, 'Daily {{productName}} feed' implies a curated or provided feed, not just news. A more accurate translation capturing the 'feed' aspect might be 'تحديثات {{productName}} اليومية' (Daily {{productName}} updates) or 'ملخص {{productName}} اليومي' (Daily {{productName}} summary).",
-          "suggestion": "تحديثات {{productName}} اليومية"
+          "description": "The translation 'أخبار {{productName}} اليومية' translates to 'News of {{productName}} Daily' which doesn't accurately convey 'Daily {{productName}} feed'. 'Feed' implies a stream of content, which is not represented in the translation.",
+          "suggestion": "Consider a translation that better reflects the concept of a 'feed', such as 'تغذية {{productName}} اليومية' (taġhdiyat {{productName}} al-yawmiyyah) or 'محتوى {{productName}} اليومي' (muhtawa {{productName}} al-yawmi)."
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'feed' in this context refers to a regular update or stream of information. 'Kanál' in Czech translates to 'channel,' which isn't the most accurate representation of a 'feed'. A better translation would convey the sense of a daily update or a regular stream of content.",
-          "suggestion": "Denní aktualizace {{productName}}"
+          "description": "The word 'feed' is not accurately translated. 'Kanál' implies a channel or stream, whereas 'feed' in this context refers to a regular update or collection of information. A better translation might be 'Denní přehled' or 'Denní dávka'.",
+          "suggestion": "Denní přehled"
         }
       ],
       "approved_at": null
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Fuente diaria de {{productName}}' is technically correct, 'feed' often translates better as 'Alimentación' or 'Actualización' in the context of a daily update or stream of information. 'Fuente' is more akin to 'source'.",
-          "suggestion": "Alimentación diaria de {{productName}}"
+          "description": "The translation \"Fuente diaria de {{productName}}\" is a literal translation of 'feed' as 'source'. 'Feed' in this context (referring to a daily update or stream of information) is better translated as 'noticias diarias' or 'actualizaciones diarias'. 'Fuente' implies a physical source.",
+          "suggestion": "noticias diarias de {{productName}}"
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English \"feed\" is better translated as \"ուղարկում\" or \"լուրեր\" instead of \"թարմացում\" in this context. \"Թարմացում\" means 'update', while 'feed' implies a stream of content being delivered.",
-          "suggestion": "{{productName}}-ի ամենօրյա ուղարկում"
+          "description": "The English phrase 'Daily feed' is better translated as 'արժանավորում' (feed/supply) rather than 'թարմացում' (update). While 'թարմացում' isn't *wrong*, 'արժանավորում' is a more accurate and common translation in this context.",
+          "suggestion": "{{productName}}-ի ամենօրյա արժանավորում"
         }
       ],
       "approved_at": null
@@ -117,7 +117,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Daily\" is best translated as \"毎日の\" (mainichi no) rather than just \"の\".  While \"毎日\" is correct, it lacks the possessive connection to the feed.",
+          "suggestion": "{{productName}}の毎日のフィード"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -150,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Codzienne aktualności {{productName}}' is not a direct or ideal translation of 'Daily {{productName}} feed'. 'Aktualności' implies news or updates, which might not accurately reflect the content of the 'feed'. A more accurate translation could be something like 'Dzienne powiadomienia {{productName}}' or 'Dzienna dawka {{productName}}'.",
-          "suggestion": "Dzienne powiadomienia {{productName}}"
+          "description": "The translation 'Codzienne aktualności {{productName}}' doesn't accurately convey the meaning of 'Daily {{productName}} feed'. 'Aktualności' translates to 'news' or 'updates', which is not necessarily the same as a 'feed'. A more accurate translation would depend on the specific type of 'feed' being referred to.",
+          "suggestion": "Consider alternatives like 'Codzienny kanał {{productName}}' (daily channel) or 'Dzienne powiadomienia {{productName}}' (daily notifications) depending on the intended meaning."
         }
       ],
       "approved_at": null
@@ -162,7 +168,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Portuguese translation 'Feed diário do {{productName}}' is not the most natural or common way to express 'Daily {{productName}} feed'. A more typical and fluent translation would be 'Feed diário de {{productName}}'. The preposition 'de' is generally preferred over 'do' in this context.",
+          "description": "The translation 'Feed diário do {{productName}}' is a literal translation. A more natural Portuguese phrasing would be 'Feed diário de {{productName}}' or 'Alimentação diária de {{productName}}'. Using 'do' creates a slightly awkward construction.",
           "suggestion": "Feed diário de {{productName}}"
         }
       ],
@@ -192,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'feed' (as used in the English context of a daily update or summary) isn't perfectly captured by 'සංග්‍රහය'. 'සංග්‍රහය' often implies a collection or compilation, which isn't quite the nuance of a daily feed. A more accurate translation might consider options like 'දෛනික යාවත්කාලීන කිරීම්' (daily updates) or 'දෛනික සාරාංශය' (daily summary).",
-          "suggestion": "Consider 'දෛනික යාවත්කාලීන කිරීම්' or 'දෛනික සාරාංශය'."
+          "description": "The word 'feed' is best translated as 'පෝෂණය' (poshanaya) or 'ආපන මාර්ගය' (aapana margaya) rather than 'සංග්‍රහය' (sangrahaya), which means 'collection' or 'compilation'. 'සංග්‍රහය' doesn't accurately convey the meaning of a daily feed of information.",
+          "suggestion": "දෛනික {{productName}} පෝෂණය"
         }
       ],
       "approved_at": null
@@ -204,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "“Denný informačný kanál” doesn't accurately convey the meaning of “Daily feed”.  'Feed' in this context refers to a regularly updated stream of information, not necessarily a 'channel'.",
-          "suggestion": "Denný prehľad {{productName}}"
+          "description": "The Slovak translation 'Denný informačný kanál {{productName}}' doesn't perfectly convey the meaning of 'Daily {{productName}} feed'. 'Feed' implies a stream or regularly updated collection, while 'informačný kanál' is more like an information channel. A better translation would emphasize the regular, updated nature of the feed.",
+          "suggestion": "Consider alternatives like 'Denný prehľad {{productName}}' (Daily overview), 'Denná dávka {{productName}}' (Daily dose/batch), or 'Denný zdroj {{productName}}' (Daily source)."
         }
       ],
       "approved_at": null
@@ -216,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Dnevni vir {{productName}}' doesn't accurately convey 'Daily {{productName}} feed'. 'Vir' translates to 'source' or 'resource', whereas 'feed' implies a regularly updated stream of information. A more appropriate translation would consider terms like 'novice', 'prehranjevanje', or 'tok'.",
-          "suggestion": "Consider alternatives like 'Dnevne novice {{productName}}' (Daily {{productName}} news) or 'Dnevno prehranjevanje {{productName}}' (Daily feed of {{productName}})"
+          "description": "The term \"vir\" (source) doesn't quite capture the meaning of \"feed\" in this context. \"Feed\" implies a stream of updates or content, which \"vir\" doesn't convey. A more appropriate translation might be something like \"naročilo\" or \"novice\" depending on the specific type of feed.",
+          "suggestion": "Consider using \"Dnevno naročilo {{productName}}\" or \"Dnevne novice {{productName}}\""
         }
       ],
       "approved_at": null
@@ -228,13 +234,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Дневни садржај {{productName}}-а' doesn't fully capture the meaning of 'Daily feed'. 'Садржај' translates to 'content' but 'feed' implies a continuous stream of updates or information, which 'садржај' doesn't convey. A more accurate translation would include a word indicating 'stream' or 'updates'.",
-          "suggestion": "Дневно ажурирање {{productName}}-а"
+          "description": "The translation 'Дневни садржај {{productName}}-а' isn't the most natural or accurate translation of 'Daily {{productName}} feed'. 'Садржај' (content) might not be the best word choice. A more suitable translation for 'feed' in this context could be 'навод' or 'фреед' (loanword).",
+          "suggestion": "Consider 'Дневни навод {{productName}}-а' or 'Дневни {{productName}} фреед'."
         },
         {
           "type": "grammar",
-          "description": "The genitive case ending '-а' on '{{productName}}-а' is correct, but whether it is the best choice depends on the product name's gender.  Without knowing the gender of the product name, it is difficult to determine if this is the most natural construction.  It's crucial to ensure the product name aligns correctly with the genitive case.",
-          "suggestion": "Ensure '{{productName}}' is grammatically consistent with the genitive case ending '-а'."
+          "description": "The possessive suffix '-а' on '{{productName}}-а' is correct for masculine nouns. However, it is important to ensure that the product name always aligns with the correct grammatical gender. If the product name is feminine, the suffix would be '-е'.",
+          "suggestion": "Verify the grammatical gender of '{{productName}}' and adjust the possessive suffix accordingly."
         }
       ],
       "approved_at": null
@@ -245,13 +251,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"feed\" is not accurately translated. \"Sadržaj\" (content) is a possible, but not ideal translation, as 'feed' implies a continuous stream of information or updates. A better translation would convey that meaning.",
-          "suggestion": "Dnevno ažuriranje {{productName}}-a"
+          "description": "The translation \"Dnevni sadržaj {{productName}}-a\" doesn't accurately convey the meaning of \"Daily {{productName}} feed\".  'Sadržaj' means 'content', while 'feed' implies a stream or collection of information. A more accurate translation would reflect the latter.",
+          "suggestion": "Dnevni {{productName}} narez"
         },
         {
           "type": "grammar",
-          "description": "The possessive suffix '-a' is grammatically correct, but its use might be overly formal. Consider alternatives depending on the tone of the overall product.",
-          "suggestion": "Dnevni {{productName}}-ovi"
+          "description": "The possessive suffix '-a' attached to {{productName}} might be incorrect depending on the gender of the product name. It needs to be adjusted to match the grammatical gender.",
+          "suggestion": "Consider using gender-specific possessive suffixes (e.g., '-e' for feminine, '-a' for masculine, '-i' for neuter) based on the product name."
         }
       ],
       "approved_at": null
@@ -280,8 +286,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '每日{{productName}}信息' while understandable, doesn't fully capture the meaning of 'Daily {{productName}} feed'. 'Feed' implies a continuous stream of updates or content, which '信息' (information) doesn't convey as effectively. A more accurate translation would consider terms like '推送' (tuīshēng - push) or '动态' (dòngtài - updates).",
-          "suggestion": "每日{{productName}}推送 or 每日{{productName}}动态"
+          "description": "The translation \"{{productName}}每日动态\" doesn't perfectly capture the meaning of 'Daily {{productName}} feed'. '动态' primarily means 'updates' or 'activity'. A more accurate translation for 'feed' in this context might be '推送' (tuīshī - push) or '信息流' (xìnxī liú - information stream).",
+          "suggestion": "{{productName}}每日推送"
         }
       ],
       "approved_at": null

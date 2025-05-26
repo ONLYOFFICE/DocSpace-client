@@ -3,7 +3,7 @@
   "content": "Documents",
   "content_en_sha1_hash": "687c82861c956e47456186f6522cfc8dbadb8ef6",
   "created_at": "2025-05-19T21:30:46.695Z",
-  "updated_at": "2025-05-22T11:56:37.333Z",
+  "updated_at": "2025-05-23T23:55:47.918Z",
   "comment": {
     "text": "This translation key is used to display the text \"Documents\" in a button within a file management component. It appears as part of a link that navigates to a personal section of documents, and its purpose is to provide a clear label for users.",
     "is_auto": true,
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Greek translation 'Τα έγγραφά' is incomplete. It translates to 'The documents' but lacks the necessary article for a proper translation of 'Documents' in this context.",
-          "suggestion": "Έγγραφα"
+          "description": "The Greek translation 'Τα έγγραφά' is incomplete. It translates to 'The documents' (nominative case) but lacks a definitive article for clarity depending on the context. The best translation depends on the intended meaning. 'Έγγραφα' (documents) or 'Τα έγγραφα' (the documents) are more complete options.",
+          "suggestion": "Consider 'Έγγραφα' or 'Τα έγγραφα' depending on the context."
         }
       ],
       "approved_at": null
@@ -276,8 +276,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Documentele' is the plural form of 'Document'. The English content 'Documents' is already plural. The singular form 'Documentul' would be more appropriate to match the singular English original.",
-          "suggestion": "Documentul"
+          "description": "The translation 'Documentele' is grammatically correct but may not be the best choice depending on the context. 'Documentele' is the plural form, but the English 'Documents' can be either singular or plural. If 'Documents' refers to a single section or folder, a singular translation ('Documentul') might be more appropriate. Without more context, it's impossible to definitively say if this is incorrect, but it's a potential area for improvement.",
+          "suggestion": "Consider whether 'Documentul' is more appropriate based on the context of 'MyFilesSection'."
         }
       ],
       "approved_at": null
@@ -291,13 +291,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'ලේඛන' (lekhana) can translate to 'documents,' it's a more formal or general term. 'Documents' in the context of a file section often implies a collection of files, so a more appropriate translation might be something like 'ගොණු' (gonu) which specifically refers to files, or a more descriptive phrase.",
-          "suggestion": "Consider 'ගොණු' (gonu) or 'ලේඛන ගොණු' (lekhana gonu) for a more accurate translation depending on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

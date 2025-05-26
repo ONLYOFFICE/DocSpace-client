@@ -3,7 +3,7 @@
   "content": "Request new",
   "content_en_sha1_hash": "dcd6607ffe7ae11855f513bef49e00ebee86c9db",
   "created_at": "2025-05-19T21:30:57.039Z",
-  "updated_at": "2025-05-20T09:37:35.151Z",
+  "updated_at": "2025-05-24T14:28:11.569Z",
   "comment": {
     "text": "This translation key is used to display the label \"Request new\" on a button that triggers an action in a backup codes dialog. The button is likely located at the footer of a modal dialog component, and its purpose is to prompt the user to request new backup codes.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Yenisini sorğula\" is a literal translation but doesn't convey the meaning of \"Request new\" in a natural way in Azerbaijani. It sounds slightly awkward.",
+          "suggestion": "A more natural translation would be something like \"Yeni kodlar əldə et\" or \"Yeni kodlar istəyin\"."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -57,7 +63,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Αίτημα νέου' doesn't fully capture the meaning of 'Request new'. While 'Αίτημα' means 'request,' 'νέου' is in the genitive case and implies 'of new,' which isn't quite what's intended. A more natural and accurate translation would convey the action of requesting something new.",
+          "suggestion": "Ζητήστε νέο (Zitíste néo) - 'Request new' or Δημιουργία νέου (Dimiourgía néou) - 'Create new'"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -75,31 +87,66 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Demander de nouvelles' is grammatically correct, but not the most natural or idiomatic translation for 'Request new' in this context. It's overly literal. A better translation would capture the action of generating new backup codes.",
+          "suggestion": "Générer de nouvelles"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Պահանջել նորը\" is a literal translation of 'Request new' but might not be the most natural or idiomatic way to express this in Armenian in a UI context. It's a bit clunky. A more natural phrasing might emphasize generating or obtaining new codes.",
+          "suggestion": "Consider alternatives like \"Ստեղծել նորերը\" (Shtegtsel norery - Generate new ones) or \"Ստանալ նորերը\" (Stanal norery - Obtain new ones)"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Richiedere nuovo' is technically correct but lacks the natural flow of a button label in Italian. 'Richiedere nuovo' sounds a bit clunky. A more idiomatic and user-friendly translation would be 'Nuovi codici' or 'Genera nuovi'.",
+          "suggestion": "Nuovi codici"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '新規リクエスト' (shinki riquest) is a literal translation of 'Request new', but it doesn't convey the intended meaning of requesting new backup codes. It sounds clunky and unnatural in Japanese.",
+          "suggestion": "新しいコードを要求する (Atarashii kōdo o yōbō suru) - This translates to 'Request new codes'.  Alternatively, '新しいコードを取得 (Atarashii kōdo o shutsuaku suru)' - 'Obtain new codes' could be suitable depending on the UI context."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '새로 요청' is not the most natural or accurate translation of 'Request new'. While understandable, it lacks the idiomatic flow of Korean.",
+          "suggestion": "새로 발급 (sae-ro bal-lyup) - which translates to 'issue new' or 'reissue'."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, '새로 요청' can feel slightly abrupt. Adding a particle or softening the phrase could improve flow in the UI.",
+          "suggestion": "새로 요청하기 (sae-ro yocheong-hagi) - 'Request new' with a particle to mark it as an action."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -123,7 +170,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Wygeneruj nowe' is a literal translation of 'Generate new' rather than 'Request new'. While functionally similar, 'Request new' implies a process initiated by the user, while 'Wygeneruj nowe' implies the system generating them. A more accurate translation would reflect the user's action of requesting.",
+          "suggestion": "Poproś o nowe"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,7 +194,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Solicitare unui nou' is not a natural or accurate translation of 'Request new'. It's grammatically awkward.",
+          "suggestion": "A more accurate and natural translation would be 'Solicită unul nou' or 'Cere unul nou'."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +212,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'නැවත ඉල්ලන්න' (naa-we-ta il-lan-na) is understandable, a more accurate and natural translation of 'Request new' in this context would be 'නවය ඉල්ලන්න' (nawa-ya il-lan-na). 'නවය' specifically means 'new' and fits the button’s function better than 'නැවත' which implies repeating a previous request.",
+          "suggestion": "නවය ඉල්ලන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,19 +236,37 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Затражи нови\" doesn't perfectly convey the meaning of \"Request new.\" While \"Затражи\" can mean \"request,\" it's somewhat formal and less common in this context. A more natural and common phrasing would be \"Набави нове\" or \"Добави нове.\" \"Request new\" implies initiating a process, and \"Набави\" or \"Добави\" are closer to that.",
+          "suggestion": "Набави нове"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Zatraži novi' translates to 'Request new' but lacks proper grammatical agreement with the implied subject (backup codes). It should be 'Naruči novi' or 'Generiši novi' to be more accurate in the context of requesting new backup codes.",
+          "suggestion": "Naruči novi"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Yeni talep et' is not the most natural or idiomatic way to say 'Request new' in Turkish. It's technically correct but sounds slightly awkward.",
+          "suggestion": "Consider 'Yeni talep oluştur' or 'Yeni istek gönder' for a more natural feel.  'Yeni al' could also work depending on context."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

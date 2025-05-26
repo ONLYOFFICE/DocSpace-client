@@ -3,7 +3,7 @@
   "content": "Last used",
   "content_en_sha1_hash": "f1109d3dbc3c686fb22a4ca9f0bf7f89031acec7",
   "created_at": "2025-05-19T21:30:46.074Z",
-  "updated_at": "2025-05-22T11:56:37.704Z",
+  "updated_at": "2025-05-24T00:14:52.541Z",
   "comment": {
     "text": "This translation key is used for a table header label that displays \"Last used\" in a UI component, likely in a settings or configuration page where users can manage API keys. The text will be translated based on the value of this key and should reflect the desired wording for the user interface.",
     "is_auto": true,
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"最後に使用した項目\" is too literal and verbose for a key name like 'Last used'. It translates to 'Item last used'. This doesn't convey the meaning of 'Last used' as referring to the last time something was used.",
-          "suggestion": "Consider a more concise translation such as \"最終使用日\" (saishū shiyōbi - Last used date) or \"最終使用\" (saishū shiyō - Last use)."
+          "description": "The translation \"最後に使用した項目\" is a literal translation of \"Last used\" and might be overly formal or verbose for the context. It translates to 'Item last used'. A more natural and concise translation would be better.",
+          "suggestion": "考慮すべき代替案: 最終使用日 (Saishuu shiyoubi - Last used date), 最終利用 (Saishuu riyo - Last used), 最後に利用した (Saishuu ni riyo shita - Last used)"
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຄັ້ງສຸດທະຍ້າຍ\" while meaning 'last time' or 'last occurrence', doesn't directly translate to the English phrase \"Last used\".  A more accurate translation would convey the meaning of 'last time used' or 'most recent use'.",
-          "suggestion": "Consider alternatives like \"ຄັ້ງໃຊ້ສຸດທະຍ້າຍ\" (Kang sai sutthayai - Last time used) or \"ການໃຊ້ຄັ້ງສຸດທະຍ້າຍ\" (Kan sai kang sutthayai - The last use)."
+          "description": "The Lao translation 'ຄັ້ງສຸດທະຍ້າຍ' while potentially understandable, is not the most natural or precise translation of 'Last used'. It literally translates to 'last time'.",
+          "suggestion": "Consider alternatives like 'ໃຊ້ຄັ້ງສຸດທະຍ້າຍ' (used last time) or 'ການໃຊ້ຄັ້ງສຸດທະຍ້າຍ' (the last time used) for greater accuracy and natural flow."
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'අවසන් වරට භාවිතා කළේ' is a literal translation and not the most natural way to express 'Last used' in Sinhala. It implies 'last time it was used by someone'. A more natural translation would depend on the context, but a simpler and more generally appropriate option would be better.",
-          "suggestion": "Consider alternatives like 'උපයෝගීතාවය terakhir' (most recently used) or a phrase that fits the specific context where 'Last used' appears. A more general alternative is 'පසු lần භාවිතා කළේ'."
+          "description": "The Sinhala translation \"අවසන් වරට භාවිතා කළේ\" while technically correct, is a bit verbose and not the most natural way to say \"Last used\". It translates to something like 'Last time used'. A more concise and common translation would be better.",
+          "suggestion": "Consider \"පසු lần භාවිතා කළේ\" or \"අවසන් භාවිතය\"."
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Последњи пут коришћено\" is technically correct, it's a bit verbose and less idiomatic for the meaning of \"Last used.\" A more natural translation would be \"Последњи пут употребљено\" or \"Последња употреба\".",
-          "suggestion": "Последњи пут употребљено"
+          "description": "While technically correct, \"Последњи пут коришћено\" is a very literal and somewhat awkward translation of \"Last used.\" It sounds overly formal for a common UI element. A more natural and idiomatic translation might be better.",
+          "suggestion": "Consider alternatives like \"Последњи пут\", \"Најновија употреба\", or \"Кориштено последњи пут\", depending on the specific context of the UI."
         }
       ],
       "approved_at": null
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Son kullanıldığı zaman\" literally translates to \"Time of last use\". While understandable, it's not the most natural or accurate translation of \"Last used\". It sounds somewhat formal and less user-friendly.",
-          "suggestion": "A more natural and concise translation would be \"Son kullanılan\" or \"Son kullanma\". "
+          "description": "The translation \"Son kullanıldığı zaman\" is a literal translation of \"Last used\" but doesn't convey the intended meaning in Turkish. It implies the last time something was used before it expires, which is not what 'Last used' typically refers to in a software or settings context.  'Last used' generally means the last time an item was accessed or employed.",
+          "suggestion": "A more appropriate translation would depend on the context, but possibilities include: 'Son erişim', 'Son kullanım', 'En son kullanılan', or 'Son açılan'."
         }
       ],
       "approved_at": null

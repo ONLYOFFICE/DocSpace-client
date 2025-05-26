@@ -3,7 +3,7 @@
   "content": "Delete",
   "content_en_sha1_hash": "f6fdbe48dc54dd86f63097a03bd24094dedd713a",
   "created_at": "2025-05-19T21:30:44.452Z",
-  "updated_at": "2025-05-22T11:56:37.307Z",
+  "updated_at": "2025-05-24T01:12:45.336Z",
   "comment": {
     "text": "This translation key is used to display the text \"Delete\" on a button in a file editor component, specifically within an avatar cropper. It appears as a button's text and title, allowing users to confirm deletion of an image.",
     "is_auto": true,
@@ -414,8 +414,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Обриши' can mean 'delete' in some contexts (primarily when referring to erasing something), it's more commonly used for 'wipe' or 'erase'. 'Delete' implies a more permanent removal, which 'Обриши' doesn't always convey. A more precise translation depending on the context would be 'Избриши' (Izbriši).",
-          "suggestion": "Избриши"
+          "description": "The Serbian translation 'Обриши' translates to 'Erase' or 'Wipe' rather than 'Delete'. While conveying a similar action, 'Delete' implies removal from a system or database, which 'Обриши' doesn't necessarily capture.",
+          "suggestion": "Consider 'Избриши' (Izbriši) which more accurately translates to 'Delete'."
         }
       ],
       "approved_at": null
@@ -426,7 +426,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Obriši' is the imperative form (you delete) and might not be appropriate depending on the context. 'Delete' can also refer to the action of deleting, not a command to delete. A more neutral translation might be 'Brisanje'.",
+          "description": "The translation \"Obriši\" is the imperative form of \"obrisati\" (to delete) and is appropriate when addressing someone directly. For a general label meaning 'Delete', a noun form would be more suitable. \"Brisanje\" would be a better translation.",
           "suggestion": "Brisanje"
         }
       ],

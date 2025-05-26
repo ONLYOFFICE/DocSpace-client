@@ -3,7 +3,7 @@
   "content": "Once approved, the shared guest will be added to your Guests list in Contacts.",
   "content_en_sha1_hash": "8c0d60976d9e71ec3211957933393f018e76c9aa",
   "created_at": "2025-05-19T21:30:45.705Z",
-  "updated_at": "2025-05-22T11:56:37.814Z",
+  "updated_at": "2025-05-24T00:27:47.351Z",
   "comment": {
     "text": "This translation key is used to display a message that informs users about what will happen after sharing their contact information with someone else. It appears in a button and form dialog as part of the confirmation process for sharing a guest link. The translated text should indicate the outcome of adding the shared guest to the user's Contacts list.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'След като бъде одобрен, споделеният гост ще бъде добавен към вашия Списък с гости в Контакти' is a literal translation that doesn't flow naturally in Bulgarian. 'Shared guest' might be better conveyed as 'поканеният гост' or 'гостът, с когото сте го поканили'.  'Guests list in Contacts' is somewhat awkward. A more natural phrasing would be 'вашия списък с контакти' or 'вашия списък с гости в контактите'.",
+          "suggestion": "След като бъде одобрен, поканеният гост ще бъде добавен към вашия списък с контакти."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -60,13 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'κοινός καλεσμένος' (common guest) is not the best translation for 'shared guest'. It implies a guest that is shared between multiple hosts, which isn't the intended meaning. 'Κοινή πρόσκληση' or 'ο κοινός προσκεκλημένος' would be more accurate in conveying the idea of a guest added through a sharing feature.",
-          "suggestion": "Consider using 'ο κοινός προσκεκλημένος' or 'ο προσκεκλημένος που μοιράστηκες' to more accurately reflect 'shared guest'."
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure is slightly awkward. While grammatically correct, it can be improved for better flow and naturalness in Greek.",
-          "suggestion": "Consider rephrasing to 'Μόλις εγκριθεί, ο προσκεκλημένος θα προστεθεί στη λίστα σας στις Επαφές.' or 'Μετά την έγκριση, ο προσκεκλημένος θα προστεθεί στη λίστα σας στις Επαφές.'"
+          "description": "The term 'κοινός καλεσμένος' (common guest) doesn't accurately convey the meaning of 'shared guest'. 'Shared guest' implies the guest is being shared by multiple hosts or users, which isn't explicitly captured by 'κοινός'.",
+          "suggestion": "Consider using a term like 'ο κοινοποιημένος καλεσμένος' (o koinopoiimenos kalemenos) or 'ο καλεσμένος που μοιράστηκε' (o kalemenos pou moirastike) to better reflect the 'shared' aspect."
         }
       ],
       "approved_at": null
@@ -74,13 +75,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'shared guest' is not perfectly translated. 'Compartido' implies something jointly owned or accessed, which might not be the intended meaning. A more accurate translation might focus on the action of sharing the invitation.",
-          "suggestion": "Una vez aprobado, el invitado al que compartió se añadirá a su lista de Invitados en Contactos."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -89,13 +84,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'shared guest' isn't directly represented. 'Jaettu vieras' implies a guest that has been shared *from* someone else, which isn't the intended meaning. It should indicate a guest who has been invited or added by another user, and now appears in the user's guest list.",
-          "suggestion": "Consider alternatives like 'Kun vieras on hyväksytty, hän lisätään vieraslistallesi Yhteystiedoissasi.' or 'Hyväksytyn vieraaseen liittyen, vieras lisätään Yhteystiedoissasi olevaan vieraslistallesi.'"
+          "description": "The phrase 'shared guest' is not accurately translated. 'Jaettu vieras' implies a guest who is shared among multiple hosts, which might not be the intended meaning. It's more likely referring to a guest added by another user.",
+          "suggestion": "A more accurate translation for 'shared guest' would depend on the exact context. Possible alternatives include: 'toisen käyttäjän lisäämä vieras' (guest added by another user) or 'vieras, jonka toinen on kutsunut' (guest who has been invited by someone else)."
         },
         {
           "type": "formatting",
-          "description": "The sentence structure can be slightly more natural. The placement of 'Yhteystiedoissasi' feels a bit clunky.",
-          "suggestion": "Consider revising the sentence structure to improve flow, for example: 'Hyväksymisen jälkeen jaettu vieras lisätään Yhteystiedoissasi olevalla vieraslistalla.' or 'Jaettu vieras lisätään Yhteystiedoissasi olevaan vieraslistaan, kun se on hyväksytty.'"
+          "description": "The phrasing 'Yhteystiedoissasi' feels a little clunky and less natural in Finnish. While technically correct, it sounds slightly unnatural.",
+          "suggestion": "Consider rewording to 'Yhteysten Vieraslistassa' which is more concise and idiomatic.  Alternatively, 'Omien Yhteystietojen Vieraslistassa' is even more specific, if appropriate."
         }
       ],
       "approved_at": null
@@ -106,13 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'l'invité partagé' is a literal translation of 'shared guest' but might not be the most natural way to express this in French. It sounds a bit awkward.",
-          "suggestion": "Consider phrasing like 'l'invité avec lequel vous avez partagé' or 'l'invité que vous avez partagé' depending on the context and desired nuance. Another option is 'l'invité que vous avez invité'."
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, the sentence structure can be improved for better flow in French. The passive voice 'sera ajouté' is functional but slightly less elegant than an active construction.",
-          "suggestion": "Consider rephrasing to something like 'Vous ajouterez l'invité partagé à votre liste d'invités dans Contacts' (You will add the shared guest...). However, maintain consistency with other content if passive voice is preferred."
+          "description": "The word 'shared' doesn't have a direct equivalent that fits naturally in the French translation. 'Partagé' implies a sharing of responsibility or ownership, which isn't the intended meaning here.  The context implies the guest is being added to the host's guest list.",
+          "suggestion": "Une fois approuvé, l'invité commun sera ajouté à votre liste d'invités dans Contacts."
         }
       ],
       "approved_at": null
@@ -123,8 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation includes the word \"ձեր\" (your) which might feel overly informal depending on the desired tone.  While grammatically correct, a more formal option like \"Ваші\" (Ваш) might be preferable for a professional context.",
-          "suggestion": "Consider replacing \"Ձեր\" with \"Ваші\" (if a more formal tone is desired)."
+          "description": "The Armenian translation includes quotation marks around \"Հյուրեր\" (Guests). While technically acceptable, it's stylistically unusual in this context and may look awkward. It's generally better to omit them.",
+          "suggestion": "Remove the quotation marks around «Հյուրեր»."
         }
       ],
       "approved_at": null
@@ -147,13 +137,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'Guests list' is not accurate. '고객님의 게스트 목록' literally translates to 'Customer's Guest List,' which is incorrect. It should refer to the user's guest list.",
+          "description": "The Korean translation uses '고객님의 게스트 목록' which translates to 'Your Guest List'. The English implies the list belongs to the user who approved the guest. The translation should reflect that.",
           "suggestion": "승인하면 공유된 게스트가 연락처의 게스트 목록에 추가됩니다."
         },
         {
           "type": "grammar",
-          "description": "The sentence structure is slightly awkward. While grammatically correct, it doesn't flow naturally in Korean.",
-          "suggestion": "승인되면 공유된 게스트가 연락처의 게스트 목록에 추가됩니다."
+          "description": "The phrase '고객님의' feels slightly awkward and overly formal in this context. While technically correct, it could be simplified.",
+          "suggestion": "승인하면 공유된 게스트가 연락처의 게스트 목록에 추가됩니다."
         }
       ],
       "approved_at": null
@@ -164,8 +154,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ຕິດຕໍ່' (contacts) should be 'ຜູ້ຕິດຕໍ່' (contact persons) for better clarity and accuracy in this context.",
-          "suggestion": "ເມື່ອຮັບອະນຸມັດແລ້ວ, ແຂກທີ່ແບ່ງປັນຈະຖືກເພີ່ມເຂົ້າໃນບັນຊີແຂກຂອງທ່ານໃນຜູ້ຕິດຕໍ່."
+          "description": "The word 'ຕິດຕໍ່' (contacts) is likely intended to mean 'ຕິດຕໍ່ຜູ້ຕິດຂ້ອງ' (contact person/people) or 'ຕິດຕໍ່ພົວພັນ' (contact/relationship). While 'ຕິດຕໍ່' can mean 'contact' generally, it's not quite specific enough for this context.",
+          "suggestion": "ຕິດຕໍ່ພົວພັນ or ຕິດຕໍ່ຜູ້ຕິດຂ້ອງ"
         }
       ],
       "approved_at": null
@@ -191,18 +181,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'partilhado' (shared) implies the guest is being shared *by* the user, which isn't the intended meaning. It should convey that the guest is being *added* to the user's list.",
-          "suggestion": "Uma vez aprovado, o convidado será adicionado à sua lista de convidados nos Contactos."
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'nos Contactos' is slightly less natural than simply 'em Contactos'.",
-          "suggestion": "Uma vez aprovado, o convidado será adicionado à sua lista de convidados em Contactos."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -217,8 +196,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Guests list' is translated as 'Lista de invitați'. While technically correct, 'Lista de oaspeți' would be more natural and idiomatic in Romanian when referring to a list of guests in a contacts section.",
-          "suggestion": "Lista de oaspeți"
+          "description": "The term 'Guests list' is awkwardly translated as 'Lista de invitați'. 'Guests list' refers to a list of contacts that are guests. A more accurate translation would be 'Lista de Contacte (Oaspeți)' or 'Lista de Persoane Invitate'.",
+          "suggestion": "Lista de Contacte (Oaspeți)"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation includes 'din secțiunea Contacte'. This is redundant and makes the sentence unnecessarily long. The context implies it's already in the Contacts section.",
+          "suggestion": "Odată aprobat, invitatul partajat va fi adăugat la Lista de Contacte (Oaspeți)."
         }
       ],
       "approved_at": null
@@ -229,13 +213,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and doesn't flow naturally in Russian. \"Гость, чьим контактом с вами поделились\" is clunky. A more natural phrasing would convey the essence of a shared guest.",
-          "suggestion": "После утверждения, ваш общий гость будет добавлен в список гостей в разделе Контакты."
+          "description": "The translation 'гость, чьим контактом с вами поделились' is overly verbose and awkward. A more natural translation would convey the meaning more concisely.",
+          "suggestion": "гость, которого вы пригласили"
         },
         {
-          "type": "formatting",
-          "description": "The phrase \"в разделе Контакты\" is slightly more formal than necessary. While technically correct, it could be slightly adjusted to feel more integrated into everyday language.",
-          "suggestion": "в списке гостей в Контактах"
+          "type": "incorrect_translation",
+          "description": "The phrase 'поделились с вами' implies a specific direction of sharing that isn't perfectly aligned with the English 'shared with you'.",
+          "suggestion": "пригласили"
         }
       ],
       "approved_at": null
@@ -246,13 +230,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අනුමත වූ පසු, බෙදාගත් අමුත්තා සම්බන්ධතා තුළ ඔබගේ අමුත්තන්ගේ ලැයිස්තුවට එක් කරනු ලැබේ.' is a bit literal and doesn't flow naturally in Sinhala. ' බෙදාගත් අමුත්තා' (shared guest) is awkward. A more natural phrasing would convey the meaning of 'the guest you shared the invitation with'.",
-          "suggestion": "අනුමත වූ පසු, ඔබ බෙදාගත් අමුත්තා ඔබේ සම්බන්ධතා තුළ ඇති අමුත්තන්ගේ ලැයිස්තුවට එක් කරනු ලැබේ."
+          "description": "The translation 'අනුමත වූ පසු, බෙදාගත් අමුත්තා සම්බන්ධතා තුළ ඔබගේ අමුත්තන්ගේ ලැයිස්තුවට එක් කරනු ලැබේ' is a bit literal and could be improved for naturalness.  ' බෙදාගත් අමුත්තා' (shared guest) feels awkward. 'අනුමත වූ පසු' is also slightly verbose.",
+          "suggestion": "අනුමත වූවිට, එම අමුත්තා ඔබගේ සම්බන්ධතා ලැයිස්තුවට එක් වනු ඇත."
         },
         {
           "type": "formatting",
-          "description": "The phrasing 'ඔබගේ අමුත්තන්ගේ ලැයිස්තුවට' is a bit lengthy. Shortening it might improve readability.",
-          "suggestion": "ඔබේ අමුත්තන් ලැයිස්තුවට"
+          "description": "The translation uses a passive voice ('එක් කරනු ලැබේ'). While acceptable, a more active voice might improve flow and clarity in Sinhala.",
+          "suggestion": "Consider rephrasing to use an active voice where appropriate, although this is a stylistic choice."
         }
       ],
       "approved_at": null
@@ -263,13 +247,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'zdieľaný kontakt na hosťa' is a literal translation of 'shared guest' but doesn't quite capture the intended meaning. 'Shared guest' refers to a guest invited by another person and added to your list. A more accurate translation would convey the idea of a guest being added to your guest list through a sharing action.",
-          "suggestion": "Po schválení bude hosť, ktorého ste zdieľali, pridaný do vášho zoznamu hostí v časti Kontakty."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'v časti Kontakty' is a bit clunky. It explicitly mentions the 'Contacts' section. The user likely understands the context already.",
-          "suggestion": "Po schválení bude hosť, ktorého ste zdieľali, pridaný do vášho zoznamu hostí."
+          "description": "The translation 'zdieľaný kontakt na hosťa' (shared contact on guest) is slightly awkward. It doesn't directly convey the meaning of 'shared guest'. A more accurate translation would focus on the 'guest' aspect, not the 'contact'.",
+          "suggestion": "Po schválení bude zdieľaný hosť pridaný do vášho zoznamu hostí v časti Kontakty."
         }
       ],
       "approved_at": null
@@ -286,18 +265,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'shared guest' is not accurately translated. 'Подељени гост' literally translates to 'shared guest' which doesn't convey the intended meaning in this context. It implies the guest was shared *from* someone else, not invited *by* someone else.",
-          "suggestion": "A more accurate translation for 'shared guest' in this context would be something along the lines of 'гост кога сте поделили' (guest you shared) or 'пријаћени гост' (invited guest) depending on the precise nuance desired. However, restructuring the sentence might be more impactful; see suggestion below."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The overall sentence structure could be improved for better readability and clarity in Serbian. The literal translation feels a bit clunky.",
-          "suggestion": "Consider restructuring the sentence to something like: 'Након одобравања, гост ће бити додат на вашу листу гостију у контактима.' (After approval, the guest will be added to your guest list in contacts.)"
+          "description": "The phrase \"подељени гост\" (shared guest) feels awkward in Serbian. A more natural phrasing would convey the action of being invited or added.",
+          "suggestion": "Consider alternatives like \"позивани гост\" (invited guest) or \"додати гост\" (added guest - more literal but potentially clearer depending on context)."
         },
         {
           "type": "formatting",
-          "description": "The word 'гостију' is genitive plural. While grammatically correct, it might be more user-friendly to use the nominative plural 'гости' for a list of guests.",
-          "suggestion": "Change 'Гостију' to 'Гости' if the list displays the names of guests."
+          "description": "The Serbian translation does not match the capitalization style of the English source. 'Гости' should likely be 'гости' unless it's specifically a title or proper noun.",
+          "suggestion": "Change 'Гости' to 'гости'."
         }
       ],
       "approved_at": null
@@ -308,13 +282,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"shared guest\" is not perfectly captured by \"podeljeni gost\". A more natural translation might be \"pozvani gost\" or \"gost kojeg ste pozvali\". \"Podeljeni gost\" implies the guest is being divided or split, which isn't the intended meaning.",
-          "suggestion": "Pozvani gost or Gost kojeg ste pozvali"
-        },
-        {
-          "type": "formatting",
-          "description": "The Serbian translation consistently uses lowercase for the first letter of each word, which is standard in Serbian, but \"Contacts\" should ideally be capitalized (Kontakti) to match the English original and maintain consistency.",
-          "suggestion": "Kada bude odobreno, podeljeni gost će biti dodat na vašu listu Gostiju u Kontaktima."
+          "description": "The word 'podeljeni' (shared) sounds a bit awkward in this context. A more natural translation for 'shared' would be 'dijeljeni'.",
+          "suggestion": "Kada bude odobreno, dijeljeni gost će biti dodat na vašu listu Gostiju u kontaktima."
         }
       ],
       "approved_at": null
@@ -331,13 +300,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"запропонованого гостя\" (proposed guest) implies that the guest was suggested by someone else. The original English suggests the guest is being shared by the user. A more accurate translation would convey that the guest is simply being shared.",
-          "suggestion": "Після схвалення спільний гість буде додано до ваших гостей у Контактах."
+          "description": "The translation 'запропонованого гостя' (proposed guest) implies the guest was explicitly proposed. The English implies simply being approved.",
+          "suggestion": "Після схвалення гостя буде додано до ваших гостей у Контактах."
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the translated sentence is slightly less natural sounding than it could be. The word order could be improved.",
-          "suggestion": "Після схвалення спільний гість буде доданий до вашого списку гостей у Контактах."
+          "description": "While not strictly incorrect, using lowercase 'контактах' is unusual in Ukrainian. It should likely be capitalized.",
+          "suggestion": "Після схвалення гостя буде додано до ваших гостей у Контактах."
         }
       ],
       "approved_at": null
@@ -345,18 +314,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'shared guest' is not accurately translated. 'Chia sẻ' (shared) can be understood, but the context might be lost. A more precise translation might capture the nuance of a guest added via a sharing function.",
-          "suggestion": "Sau khi được chấp thuận, khách được mời chung sẽ được thêm vào danh sách Khách của bạn trong Danh Bạ."
-        },
-        {
-          "type": "formatting",
-          "description": "While not incorrect, 'Danh Bạ' is a more formal term for 'Contacts.' Depending on the target audience and overall tone, a less formal term might be preferred.",
-          "suggestion": "Sau khi được chấp thuận, khách được mời chung sẽ được thêm vào danh sách Khách của bạn trong Liên hệ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -365,13 +323,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "“联系人信息” is too literal and doesn't accurately convey the meaning of 'Contacts'. It translates to 'Contact Information' rather than 'Contacts'.",
-          "suggestion": "更改为“通讯录” (Tongxunlu) which is the standard term for 'Contacts' in Chinese."
+          "description": "The translation of \"Contacts\" is too literal. \"联系人信息“ (lianxi ren xinxi) means contact information, but the target is a list of contacts. A more natural translation would be something like “通讯录” (tongxunlu) which means address book/contact list.",
+          "suggestion": "同意后，即可将该访客添加至您的“通讯录”中的“访客”列表。"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The term “访客” (fangke) for 'guest' is acceptable, but might be overly formal depending on the tone of the application. Consider alternatives like “客人” (kechen) for a slightly less formal tone.",
-          "suggestion": "Consider replacing “访客” with “客人” if a less formal tone is desired."
+          "type": "formatting",
+          "description": "The quotation marks around “联系人信息” and “访客” are unusual. Typically, Chinese uses half-width quotation marks (＂) or no quotation marks at all, especially in technical documentation. The full-width quotation marks ＂ are more common for direct quotes.",
+          "suggestion": "同意后，即可将该访客添加至您的通讯录中的访客列表。"
         }
       ],
       "approved_at": null

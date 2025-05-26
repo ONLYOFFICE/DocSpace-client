@@ -3,7 +3,7 @@
   "content": "go to the room",
   "content_en_sha1_hash": "e087b030e250e614a8cebdc0ce324509efe97e0d",
   "created_at": "2025-05-19T21:30:45.650Z",
-  "updated_at": "2025-05-22T11:56:37.714Z",
+  "updated_at": "2025-05-24T00:29:21.794Z",
   "comment": {
     "text": "This translation key is used to display a button label that instructs users to \"go to the room\" in a portal settings page and completed VDR form. It appears as a secondary button with different labels depending on the context, such as \"Copy Link\" or another variant of this phrase.",
     "is_auto": true,
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'otağa keçid edin' is overly formal and doesn't accurately convey the simple instruction 'go to the room'. 'keçid edin' implies a request or command to proceed, rather than a simple direction. A more appropriate translation would be something like 'otağa get' or 'otağa bax'.",
-          "suggestion": "otağa get"
+          "description": "The translation \"otağa keçid edin\" implies 'proceed to the room' or 'go to the room' in an official or commanding tone. \"Go to the room\" is a more natural and neutral instruction. \"Keçid edin\" is formal and not usually used in this context.",
+          "suggestion": "Getmək otağa"
         }
       ],
       "approved_at": null
@@ -69,19 +69,19 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Zum Raum gehen\" is technically correct, it sounds a bit clunky and unnatural. A more idiomatic translation would be \"Gehe in den Raum\" or \"Geh in den Raum\". \"Zum Raum gehen\" implies movement *towards* the room, but \"in den Raum gehen\" explicitly means *into* the room.",
-          "suggestion": "Gehe in den Raum"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'μετάβαση στο δωμάτιο' is grammatically correct, it's a rather formal way to say 'go to the room'. A more natural and common translation would be something like 'πήγαινε στο δωμάτιο' or 'πάνε στο δωμάτιο' depending on the context (singular/plural). 'Μετάβαση' implies a deliberate, possibly planned, movement.",
+          "suggestion": "πήγαινε στο δωμάτιο"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -102,7 +102,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'passer à la salle' is not the most natural or accurate translation of 'go to the room.' 'Passer à' implies passing *through* something, not necessarily going *to* it.",
+          "description": "While 'passer à la salle' is understandable, it's not the most natural or accurate translation of 'go to the room'. 'Aller à la salle' is a more common and direct translation.",
           "suggestion": "aller à la salle"
         }
       ],
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'գնալ սենյակ' translates literally to 'go room'. It is missing the correct verb conjugation to form a complete sentence.",
-          "suggestion": "գնալ դեպի սենյակ (gnal depi senyak) - go to the room, or պետք է գնալ սենյակ (petq e gnal senyak) - I need to go to the room."
+          "description": "The translation 'գնալ սենյակ' is a literal translation of 'go room' and lacks the necessary verb conjugation to accurately convey 'go to the room'.",
+          "suggestion": "գնալ դեպի սենյակ (gnal depi senyak) or ընթանալ դեպի սենյակ (entanal depi senyak)"
         }
       ],
       "approved_at": null
@@ -168,7 +168,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Portuguese translation 'vá para o sala' is not grammatically correct and does not accurately translate 'go to the room'. 'Sala' is feminine, so it needs the article 'a'.",
+          "description": "The Portuguese translation \"vá para o sala\" is not the correct translation of \"go to the room\". The correct translation should be \"vá para a sala\". 'Sala' is feminine, so it requires the feminine article 'a'.",
           "suggestion": "vá para a sala"
         }
       ],
@@ -180,7 +180,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'vá para o sala' is not grammatically correct or the most natural phrasing for 'go to the room'. 'Sala' is feminine, so it needs the definite article 'a'. The verb 'ir' should also agree in number.",
+          "description": "The translation 'vá para o sala' is not entirely accurate. 'Sala' is feminine, so the correct preposition and article would be 'vá para a sala'.",
           "suggestion": "vá para a sala"
         }
       ],
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"accesare sala\" is not the most natural or accurate translation of \"go to the room\". \"Accesare\" implies accessing something, which isn't the core meaning of going to a room. A more appropriate translation would convey the action of going or entering.",
-          "suggestion": "mergi în cameră"
+          "description": "The translation \"accesare sala\" doesn't accurately convey the meaning of \"go to the room\". \"Accesare\" implies accessing something, not necessarily going to it. A more appropriate translation would emphasize movement or direction.",
+          "suggestion": "mergi în sală"
         }
       ],
       "approved_at": null
@@ -228,13 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'иди у собу' is not an accurate translation of 'go to the room'. 'Собу' is accusative case, implying 'to the room' could be a destination. It doesn't directly translate the action of 'going'.",
-          "suggestion": "A more accurate translation would be 'иди у просторију' (idi u prostoriju) or 'уђи у просторију' (udji u prostoriju), depending on the desired nuance of 'going to' or 'entering'.  'иди' is sufficient if the context implies a simple direction."
-        },
-        {
-          "type": "spelling",
-          "description": "While not technically incorrect, 'собу' is less common and might be perceived as slightly awkward. 'просторију' is more standard.",
-          "suggestion": "Consider using 'просторију' instead of 'собу' for a more natural-sounding translation."
+          "description": "The Serbian translation \"иди у собу\" is not an accurate translation of \"go to the room\".  \"соба\" means 'room' but \"у собу\" translates to 'into the room'.  A more accurate translation would be something like 'иди у просторију' or 'иди у собау'.",
+          "suggestion": "иди у просторију"
         }
       ],
       "approved_at": null
@@ -245,13 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'idi u sobu' is not the most natural or accurate translation of 'go to the room'. 'Idi' is a conjugated form of 'ići' (to go) and while grammatically correct, it's a bit abrupt. A more natural phrasing would include a preposition. 'U' means 'into' or 'in,' which doesn't quite convey 'to' in the sense of 'go to'.",
-          "suggestion": "Kreni u sobu"
-        },
-        {
-          "type": "grammar",
-          "description": "While 'idi u sobu' is not grammatically *incorrect*, it is a less formal and slightly abrupt way to say 'go to the room'.",
-          "suggestion": "Consider a more polite or formal phrasing, such as 'kreni u sobu' (start to the room) or 'odlazim u sobu' (I am going to the room)."
+          "description": "The translation 'idi u sobu' is not the most natural or accurate translation of 'go to the room'. While it's understandable, it lacks nuance and flow.",
+          "suggestion": "A better translation would be 'udji u sobu' or 'kreni u sobu' depending on the context."
         }
       ],
       "approved_at": null
@@ -262,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'odaya git' implies 'go to the room' with the dative case ('odaya'), suggesting movement *into* the room.  A more direct translation of 'go to the room' without implying entry would be 'odaya git.' While technically understandable, 'odaya git' might be slightly less accurate in all contexts.",
-          "suggestion": "odaya git"
+          "description": "The translation 'odaya git' while technically correct, implies 'to the room' which is more specific than the original 'go to the room'. A more general and accurate translation would be 'odasına git' or simply 'git'.",
+          "suggestion": "odasına git"
         }
       ],
       "approved_at": null

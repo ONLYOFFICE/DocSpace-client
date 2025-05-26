@@ -3,7 +3,7 @@
   "content": "Generate",
   "content_en_sha1_hash": "fc45f9b7a9a6e8b48f0e28821ec1981804dd1eb6",
   "created_at": "2025-05-19T21:30:49.766Z",
-  "updated_at": "2025-05-22T11:56:37.702Z",
+  "updated_at": "2025-05-24T02:21:49.862Z",
   "comment": {
     "text": "The translation key \"Generate\" is used to display a button label that enables users to create a new API key or generate a developer token. It appears in various UI components, such as buttons and dialogues, where it prompts users to perform these actions. The exact context can vary between \"EditButton\" (a standard edit action) and \"Generate\" (a specific button for creating an API key).",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Yaradın' can mean 'generate,' it's more commonly used for 'create' or 'produce.' 'Generate' in the context of webhooks often implies the automatic creation of events or data. A more accurate translation might be 'Təhvil et' or 'Oluştur'.",
+          "suggestion": "Consider 'Təhvil et' or 'Oluştur' for a more accurate translation in this context."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -162,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'උත්පාදනය' (uthpaadanaya) while technically meaning 'generation' or 'production', isn't the most natural or common translation for 'Generate' in the context of webhooks. It's a more formal and technical term.",
-          "suggestion": "Consider alternatives like 'ස້າງ' (saang) meaning 'create' or 'උඩුගත කිරීම' (udugatha kirima) meaning 'upload/trigger' depending on the specific function of the webhook."
+          "description": "While \"උත්පාදනය\" (uthpaadanaya) is a valid Sinhala word, it's a formal term meaning 'production' or 'generation' and might be overly formal or technical for the context of a simple 'Generate' button or action. A more natural and common translation would be simpler.",
+          "suggestion": "Consider \"ස້າງ\" (saang) which means 'create' or 'make', or \"ගenerate කරන්න\" (generate karanna) which is a transliteration and widely understood."
         }
       ],
       "approved_at": null
@@ -186,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Генериши' is an imperative form (command form) of the verb 'generisati' (to generate).  'Generate' in this context likely refers to a button or option to create something, not a direct command. A more appropriate translation would be a noun or a verb in the infinitive form.",
+          "description": "The translation 'Генериши' is an imperative form of the verb 'generisati' (to generate). 'Generate' is a noun or a verb in the infinitive/present simple form. A more appropriate translation would depend on the intended use within the broader context of the webhook functionality. Options include 'Креирање' (creation), 'Израда' (production), or 'Генерисање' (generating). Without further context, a neutral noun 'Генерисање' is a safer bet.",
           "suggestion": "Генерисање"
         }
       ],
@@ -198,7 +204,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Generiši' while phonetically similar to 'Generate', doesn't directly convey the meaning of generating something. It's closer to 'Generate' in the imperative form, but a more neutral translation might be more appropriate depending on the context.",
+          "description": "The translation 'Generiši' while containing a correct root, isn't the most natural or commonly used term for 'Generate' in a technical context in Serbian (Latin). It's a command form that's potentially ambiguous. 'Kreiraj' or 'Napravi' are often more suitable.",
           "suggestion": "Kreiraj"
         }
       ],
@@ -219,13 +225,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Tạo\" is a valid translation for \"Generate\", it's a very general term. In the context of webhooks, a more specific term like 'Sinh' (create/produce) or 'Tạo mới' (create new) might be more accurate, depending on the exact functionality.",
-          "suggestion": "Consider 'Sinh' or 'Tạo mới' for a more contextually accurate translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

@@ -3,7 +3,7 @@
   "content": "Delete plugin",
   "content_en_sha1_hash": "78509ae90f9433b054c76f9f8003b75eef79307f",
   "created_at": "2025-05-19T21:30:49.895Z",
-  "updated_at": "2025-05-21T00:46:32.310Z",
+  "updated_at": "2025-05-24T02:00:17.639Z",
   "comment": {
     "text": "This translation key is used to display the text \"Delete plugin\" on a button within a settings plugin dialog. It is intended to be translated by users who want to customize the UI of their application, and it appears in the button label when deleting an option has been selected.",
     "is_auto": true,
@@ -27,25 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation \"حذف المكون الإضافي \" is a literal translation of 'Delete plugin'. While understandable, a more natural and common phrasing in a UI context could be 'إزالة المكون الإضافي' (Removal of the plugin) or 'تطبيق حذف المكون الإضافي' (Delete plugin application).",
-          "suggestion": "إزالة المكون الإضافي"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Plagini silin' is a literal translation and while understandable, it's not the most natural way to express 'Delete plugin' in Azerbaijani.  It implies deleting a specific plugin in the accusative case, while the English phrase is more general.",
-          "suggestion": "Consider using 'Plugin sil' or 'Pluginı sil' depending on the desired level of formality and grammatical accuracy.  'Plugin sil' is more common and generally preferred."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -87,13 +75,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Supprimer' is correct for 'Delete', 'module complémentaire' is a more formal and less common translation for 'plugin' in this context. 'Plugin' is often used directly in French, or a more colloquial term like 'extension' might be more appropriate.",
-          "suggestion": "Consider using 'Plugin' directly, or 'extension' (e.g., 'Supprimer l'extension')"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -162,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Ștergere plugin\" is understandable, a more natural and accurate translation would be \"Șterge plugin\" or \"Eliminarea pluginului\". \"Ștergere\" implies a process or action of deleting, not the action itself. \"Eliminarea pluginului\" is more formal but also accurate.",
-          "suggestion": "Șterge plugin"
+          "description": "The translation 'Ștergere plugin' is a literal translation and might not be the most natural or clear way to express 'Delete plugin' in Romanian. 'Ștergere' implies deletion, but a more user-friendly term might be preferable.",
+          "suggestion": "Consider using 'Șterge plugin' or 'Elimină plugin' for a more natural flow. 'Dezinstalează plugin' is also possible if it refers to the plugin uninstalling process."
         }
       ],
       "approved_at": null
@@ -180,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'පේනුව මකන්න' literally translates to 'erase plugin'. While understandable, 'Delete plugin' generally implies a more formal removal process. 'පේනුව ඉවත් කරන්න' would be a more accurate and commonly used translation for 'Delete plugin'.",
-          "suggestion": "පේනුව ඉවත් කරන්න"
+          "description": "The translation 'පේනුව මකන්න' while technically meaning 'delete plugin', isn't the most natural or commonly used phrasing in Sinhala. A more idiomatic translation would be 'plugin එක මකා දමන්න' or 'plugin මකා දමන්න'.",
+          "suggestion": "plugin එක මකා දමන්න"
         }
       ],
       "approved_at": null
@@ -204,7 +186,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Обриши додатак\" is understandable, a more accurate and natural translation for \"Delete plugin\" would be \"Избриши додатак\".  'Обриши' implies wiping or cleaning, whereas 'Избриши' specifically refers to deletion.",
+          "description": "While \"Обриши додатак\" is understandable, a more accurate and commonly used translation for 'Delete plugin' would be \"Избриши додатак\". \"Обриши\" implies wiping or erasing, whereas \"Избриши\" specifically denotes deletion.",
           "suggestion": "Избриши додатак"
         }
       ],
@@ -213,13 +195,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Obriši dodatak\" is understandable, a more accurate and natural-sounding translation for 'Delete plugin' in Serbian (Latin) would be \"Izbriši dodatak\".  'Obriši' implies wiping or erasing completely, while 'Izbriši' is the standard verb for deletion in this context.",
-          "suggestion": "Izbriši dodatak"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

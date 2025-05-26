@@ -3,7 +3,7 @@
   "content": "The caption for the button used to login into the space with the Single Sign-On service",
   "content_en_sha1_hash": "30b2a8cb8d27655e6b1304797109f48d75f5f655",
   "created_at": "2025-05-19T21:30:50.075Z",
-  "updated_at": "2025-05-21T02:15:07.561Z",
+  "updated_at": "2025-05-24T03:28:09.659Z",
   "comment": {
     "text": "The CustomEntryTooltip translation key is used to display a tooltip message that describes the purpose of the custom entry button in the Single Sign-On service, providing users with an explanation when hovering over or focusing on the button. This tooltip appears above a button for logging into a space using Single Sign-On. Translators should provide a clear and concise description that accurately reflects this functionality.",
     "is_auto": true,
@@ -30,13 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and verbose. It doesn't capture the natural phrasing for a tooltip caption.",
+          "description": "The translation is overly literal and verbose. The English content describes the *purpose* of the tooltip, while the Arabic translation simply states what the caption *is*. A more natural translation would focus on the function of the button.",
           "suggestion": "تسجيل الدخول الموحد"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"يُستخدم لتسجيل الدخول\" is redundant. The tooltip should just describe the button's purpose, not the process of using it.",
-          "suggestion": "تسجيل الدخول الموحد"
+          "type": "spelling",
+          "description": "While technically correct, 'تسجيل الدخول الموحد' can be more concisely written as 'تسجيل الدخول الأحادي'.",
+          "suggestion": "تسجيل الدخول الأحادي"
         }
       ],
       "approved_at": null
@@ -47,13 +47,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Birdəfəlik Giriş xidməti ilə domenə daxil olmaq üçün istifadə edilən düymənin adı\" is a very literal and verbose translation of the English content. It doesn't capture the brevity and clarity of the original. \"The caption for the button...\" is less about *how* it's used, and more about what the caption *is*.",
-          "suggestion": "Dərhal Giriş düyməsi yazısı"
+          "description": "The translation 'Birdəfəlik Giriş xidməti ilə domenə daxil olmaq üçün istifadə edilən düymənin adı' is a very literal and verbose translation of 'The caption for the button used to login into the space with the Single Sign-On service'. It's not natural-sounding Azerbaijani. The term 'domenə daxil olmaq' is technically correct but less common and a bit clunky in this context.",
+          "suggestion": "Tək Giriş Xidməti ilə giriş düyməsi (Single Sign-On button caption)"
         },
         {
-          "type": "grammar",
-          "description": "While grammatically correct, the sentence structure is a bit clunky. The phrase \"istifadə edilən düymənin adı\" is not the most natural way to phrase it.",
-          "suggestion": "Dərhal Giriş düyməsinin adı"
+          "type": "formatting",
+          "description": "The translation is very long. While not inherently incorrect, longer translations can be difficult to display properly in user interfaces.",
+          "suggestion": "Consider shortening the translation as much as possible while preserving meaning."
         }
       ],
       "approved_at": null
@@ -64,13 +64,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Надписът за бутона, използван за вписване в пространството с услугата за единично вписване' is a literal translation and a bit awkward. It doesn't flow naturally in Bulgarian. The phrase 'единично вписване' is acceptable but can sound technical. A more natural phrasing would convey the action of logging in.",
-          "suggestion": "Надписът за бутона за вход с единично вписване"
+          "description": "The translation \"Надписът за бутона, използван за вписване в пространството с услугата за единично вписване\" is a bit literal and could be more natural. 'Вписване' can feel a bit formal in this context.",
+          "suggestion": "Надписът за бутона за вход в пространството чрез Single Sign-On"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The English text describes the caption *for* the button. The Bulgarian translation directly translates 'for the button' which is not necessary and makes the sentence clunky.",
-          "suggestion": "Надписът за бутона за вход със Single Sign-On"
+          "type": "formatting",
+          "description": "While not strictly incorrect, including the English term 'Single Sign-On' can improve clarity, especially if the target audience may be familiar with the English term. Consider preserving the original term or providing a brief explanation.",
+          "suggestion": "Надписът за бутона за вход в пространството чрез Single Sign-On (Единично вписване)"
         }
       ],
       "approved_at": null
@@ -80,9 +80,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English description mentions a 'button' but the Czech translation uses 'tlačítka' (plural). While technically correct, it's slightly less precise. The English refers to a single button.",
-          "suggestion": "Titulek tlačítka pro přihlášení do prostoru pomocí služby jednotného přihlášení"
+          "type": "spelling",
+          "description": "The word 'prostor' can be ambiguous. In this context, 'prostor' translates more accurately to 'workspace' or 'area'.",
+          "suggestion": "Titulek tlačítka pro přihlášení do pracovního prostoru pomocí služby jednotného přihlášení"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence is a bit long and could be simplified for better readability.  Consider splitting it or rephrasing.",
+          "suggestion": "Titulek tlačítka pro přihlášení do pracovního prostoru pomocí jednotného přihlášení."
         }
       ],
       "approved_at": null
@@ -92,14 +97,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation is overly literal and sounds awkward in German. 'Die Schaltfläche, die für die Anmeldung verwendet wird' is verbose. A more natural phrasing would be something like 'Die Beschriftung für den SSO-Login-Button' or 'Die Beschriftung für den Single Sign-On Login-Button'.",
-          "suggestion": "Die Beschriftung für den SSO-Login-Button"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Single Sign-On' is unnecessarily translated, as the English term is often used directly in German contexts, especially in technical settings. Keeping it as 'Single Sign-On' would improve clarity and reduce unnecessary complexity.",
-          "suggestion": "Die Beschriftung für den Login-Button für Single Sign-On"
+          "type": "formatting",
+          "description": "The translation uses a slightly verbose phrasing that could be more concise for a tooltip. While grammatically correct, it's a bit long for a tooltip.",
+          "suggestion": "Die Beschriftung für den Single Sign-On-Anmeldebutton."
         }
       ],
       "approved_at": null
@@ -107,7 +107,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content describes the caption *for* a button. The Greek translation, while technically correct, sounds slightly awkward. A more natural phrasing would be something along the lines of 'Η λεζάντα του κουμπιού για σύνδεση στον χώρο μέσω της υπηρεσίας ενιαίας σύνδεσης.'",
+          "suggestion": "Η λεζάντα του κουμπιού για σύνδεση στον χώρο μέσω της υπηρεσίας ενιαίας σύνδεσης"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -116,13 +122,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is too literal and doesn't flow naturally in Spanish. 'The caption for the button used to login...' is clunky. A more natural phrasing would be 'Texto del botón para iniciar sesión...'",
-          "suggestion": "Texto del botón para iniciar sesión en el espacio con el servicio de inicio de sesión único."
-        },
-        {
-          "type": "spelling",
-          "description": "While 'inicio de sesión único' is technically correct, 'autenticación única' is the more common and accepted term for Single Sign-On in Spanish.",
-          "suggestion": "Texto del botón para iniciar sesión en el espacio con el servicio de autenticación única."
+          "description": "The English content describes the caption *for* a button. The Spanish translation literally translates it as 'legend of the button', which is not quite the same meaning. 'Caption' implies a label or text displayed on the button.",
+          "suggestion": "Etiqueta del botón utilizado para iniciar sesión en el espacio con el servicio de inicio de sesión único."
         }
       ],
       "approved_at": null
@@ -130,7 +131,18 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content describes the *caption* of a button. The Finnish translation literally translates to 'The caption of the button, which is used to log into the space using the single sign-on service'. While not strictly incorrect, it's a bit verbose and awkward. A more natural Finnish phrasing for a tooltip would be more concise.",
+          "suggestion": "Kertakirjautumispainikkeen kuvaus"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the phrasing 'jota käytetään tilaan sisäänkirjautumiseen kertakirjautumispalvelun avulla' is quite long. A tooltip should be brief.  Consider breaking this down.",
+          "suggestion": "Consider alternative phrasing for brevity. For example: 'Sisäänkirjautuminen kertakirjautumisella'."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -139,13 +151,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English content describes the caption for a login button. The French translation 'Légende du bouton utilisé pour se connecter à l’espace avec le service d’authentification unique (Single Sign-On)' is a bit verbose. 'Légende' implies a label or title, which is accurate, but the rest of the sentence is a little wordy. A more concise translation would improve readability.",
-          "suggestion": "Légende du bouton de connexion via l'authentification unique (Single Sign-On)"
-        },
-        {
-          "type": "formatting",
-          "description": "The inclusion of 'Single Sign-On' in parentheses after the French translation could be inconsistent with other similar labels. It's preferable to maintain a consistent approach regarding the presence and placement of the English term.",
-          "suggestion": "Consider whether 'Single Sign-On' should be included in parentheses consistently with other translated labels."
+          "description": "The English description mentions 'login into the space', while the French translation uses 'se connecter à l’espace'. While both are acceptable, 'se connecter dans l’espace' might be slightly more natural in French.",
+          "suggestion": "Légende du bouton utilisé pour se connecter dans l’espace avec le service d’authentification unique (Single Sign-On)"
         }
       ],
       "approved_at": null
@@ -156,8 +163,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English content describes the caption *for* a button, whereas the Armenian translation uses a more general 'վերնագիր' (heading/title). This doesn't fully capture the specific meaning of a button caption.",
-          "suggestion": "Consider using a more specific term for 'caption' like 'բանալիքային գրություն' (key text) or rephrasing to be more direct like 'Մուտք գործելու համար կոճակի գրություն Single Sign-On ծառայության միջոցով'"
+          "description": "The translation 'Կոճակի վերնագիր, որն օգտագործվում է Single Sign-On ծառայության միջոցով տարածք մուտք գործելու համար' is a bit verbose and literal. A more natural phrasing would be something like 'Մուտքագրման համար Single Sign-On ծառայության կոճակ' or 'Single Sign-On մուտքի կոճակ'.",
+          "suggestion": "Մուտքագրման համար Single Sign-On ծառայության կոճակ"
         }
       ],
       "approved_at": null
@@ -165,13 +172,25 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content describes the caption *for* a button, while the Italian translation uses 'del pulsante utilizzato per...'. A more direct translation of 'caption' would be 'didascalia del pulsante'.",
+          "suggestion": "Didascalia del pulsante utilizzato per accedere allo spazio con il servizio Single Sign-On"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is overly literal and could be more natural. 'The caption for the button used to login...' is cumbersome. A more natural phrasing would be something like 'シングルサインオンサービスでログインするためのボタンのラベル' or 'シングルサインオンサービスを利用してログインするボタンの表示文'",
+          "suggestion": "シングルサインオンサービスでログインするためのボタンのラベル"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -180,13 +199,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is too literal and doesn't flow naturally in Korean. \"The caption for the button used to login into the space with the Single Sign-On service\" is overly verbose. A more natural phrasing would focus on the button's purpose in relation to SSO.",
-          "suggestion": "싱글 사인온으로 공간에 로그인 버튼 설명"
+          "description": "The translation is overly literal and doesn't flow naturally in Korean. \"The caption for the button used to login into the space with the Single Sign-On service\" is clunky when directly translated.",
+          "suggestion": "싱글 사인온 서비스를 통해 공간에 로그인하는 버튼에 대한 설명"
         },
         {
           "type": "formatting",
-          "description": "The translation uses Hanja (Chinese characters) for '서비스' which is standard, but consider whether '공간' also benefits from Hanja representation based on the target audience and brand voice. Consistency is key.",
-          "suggestion": "Evaluate consistency in Hanja usage. If '공간' is usually written in Hangul, leave it as is."
+          "description": "The use of \"에 대한 설명\" (about the description) at the end is somewhat awkward and not common in typical UI text. It's overly explanatory.",
+          "suggestion": "싱글 사인온 서비스를 통해 공간에 로그인하는 버튼 설명"
         }
       ],
       "approved_at": null
@@ -197,13 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is somewhat literal and doesn't flow naturally in Lao. 'ເຂົ້າສູ່ລະບົບຊ່ອງ' could be more accurately translated as 'ເຂົ້າສູ່ສະຖານທີ່' or 'ເຂົ້າສູ່ເຂດ' depending on the context of 'space'. The phrase 'ການບໍລິການເຂົ້າສູ່ລະບົບຄັ້ງດຽວ' is a literal translation of 'Single Sign-On' and could be simplified to 'ການເຂົ້າສູ່ລະບົບແບບດຽວ' or similar.",
-          "suggestion": "ຄຳບັນຍາຍສຳລັບປຸ່ມທີ່ໃຊ້ເພື່ອເຂົ້າສູ່ສະຖານທີ່ດ້ວຍການບໍລິການເຂົ້າສູ່ລະບົບແບບດຽວ"
-        },
-        {
-          "type": "formatting",
-          "description": "The Lao translation contains quite a long sentence. While grammatically correct, it might be more user-friendly to break it down into two sentences or rephrase it to be more concise.",
-          "suggestion": "ນີ້ແມ່ນຄຳບັນຍາຍສຳລັບປຸ່ມທີ່ໃຊ້ເພື່ອເຂົ້າສູ່ສະຖານທີ່. ມັນໃຊ້ງານກັບການບໍລິການເຂົ້າສູ່ລະບົບແບບດຽວ."
+          "description": "The phrase 'Single Sign-On service' is translated as 'ການບໍລິການເຂົ້າສູ່ລະບົບຄັ້ງດຽວ'. While technically correct, a more natural and commonly used term in Lao for Single Sign-On would be 'ການເຂົ້າສູ່ລະບົບແບບດຽວ' or 'ການຢັ້ງຢືນຕົວຕົນແບບດຽວ'.",
+          "suggestion": "ຄຳບັນຍາຍສຳລັບປຸ່ມທີ່ໃຊ້ເພື່ອເຂົ້າສູ່ລະບົບຊ່ອງດ້ວຍການບໍລິການການເຂົ້າສູ່ລະບົບແບບດຽວ"
         }
       ],
       "approved_at": null
@@ -213,14 +227,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation is overly literal and doesn't flow naturally in Latvian. 'The caption for the button used to login...' is awkward. A more natural phrasing would focus on the button's purpose.",
-          "suggestion": "Poga ievades vienotās pierakstīšanās pakalpojuma iespēju"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ieteiktos telpā' sounds less natural than a more direct translation relating to accessing the space.",
-          "suggestion": "lai piekļūtu telpai"
+          "type": "spelling",
+          "description": "The word 'ieteiktos' should be 'ieteikties'. 'Ieteiktos' is in the plural form but the context needs a singular form.",
+          "suggestion": "ieteikties"
         }
       ],
       "approved_at": null
@@ -231,13 +240,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and doesn't flow naturally in Dutch. 'Het bijschrift voor de knop die wordt gebruikt om in te loggen' is clunky. A more natural phrasing would focus on the button's purpose.",
-          "suggestion": "De tekst op de knop voor Single Sign-On"
+          "description": "The translation 'Het bijschrift voor de knop die wordt gebruikt om in te loggen in de ruimte met de Single Sign-On dienst' is a bit verbose and doesn't fully capture the brevity of the English equivalent. 'Bijschrift' is not the most natural word choice for a button caption.",
+          "suggestion": "Een kortere formulering zou beter passen. Bijvoorbeeld: 'Onderschrift voor de Single Sign-On inlogknop' of 'Tekst voor de Single Sign-On inlogknop'."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The original English uses 'space'. While 'ruimte' is a direct translation, it might be better to use a term more aligned with the platform or application the SSO integrates with. If the context is a 'workspace' or 'portal', a more specific term might be better. Without more context, this is a minor issue.",
-          "suggestion": "Consider context and potential alternative translation for 'ruimte'. If it's a workspace, 'werkruimte' might be better. If a portal, 'portal' or a similar term is a possibility."
+          "type": "grammar",
+          "description": "While grammatically correct, the phrasing 'die wordt gebruikt' is slightly awkward. A more direct approach would improve readability.",
+          "suggestion": "Replace 'die wordt gebruikt' with a more concise construction like 'voor'."
         }
       ],
       "approved_at": null
@@ -247,14 +256,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'pojedynczego' should be 'pojedynczego'.",
-          "suggestion": "pojedynczego"
-        },
-        {
           "type": "grammar",
-          "description": "The sentence structure could be improved for better flow.  The phrase 'służącego do logowania się' is a bit clunky.",
-          "suggestion": "Podpis dla przycisku umożliwiającego logowanie się w obszarze roboczym za pomocą usługi pojedynczego logowania."
+          "description": "The phrase 'służącego do logowania się' is a bit clunky.  A more natural phrasing would be 'umożliwiającego logowanie się'.",
+          "suggestion": "Podpis dla przycisku umożliwiającego logowanie się w obszarze roboczym za pomocą usługi pojedynczego logowania"
         }
       ],
       "approved_at": null
@@ -265,13 +269,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English content describes the button's caption used for Single Sign-On login. The Portuguese translation, while understandable, isn't a direct translation of 'caption.' 'Legenda' is more akin to 'legend' or 'label.' A more accurate translation for 'caption' would be 'rótulo' or 'texto do botão'.",
-          "suggestion": "The caption for the button used to login into the space with the Single Sign-On service -> O rótulo do botão utilizado para aceder ao espaço com o serviço de Início de Sessão Único"
+          "description": "The English content describes the caption for a login button, while the Portuguese translation refers to \"aceder ao espaço\" which implies accessing a space, not specifically logging in. \"Acesso\" or \"Entrar\" would be more accurate.",
+          "suggestion": "A legenda do botão utilizado para entrar no espaço com o serviço de Início de Sessão Único"
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'aceder' is a valid translation for 'access', in this context 'entrar' (to enter) might be more natural and commonly used when describing logging into a space.",
-          "suggestion": "A legenda do botão utilizado para aceder ao espaço com o serviço de Início de Sessão Único -> A legenda do botão utilizado para entrar no espaço com o serviço de Início de Sessão Único"
+          "description": "While \"Início de Sessão Único\" is a literal translation of \"Single Sign-On,\" it might be overly technical. A more user-friendly alternative could improve comprehension.",
+          "suggestion": "A legenda do botão utilizado para entrar no espaço com o serviço de Autenticação Única"
         }
       ],
       "approved_at": null
@@ -288,8 +292,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Eticheta butonului pentru conectarea la spaţiul cu sistem de autentificare unică (SSO)' is technically correct but somewhat verbose and not the most natural way to phrase it in Romanian. It literally translates 'The label of the button for connecting to the space with a single authentication system (SSO)'. A more idiomatic translation would be something like 'Textul butonului pentru autentificare unică (SSO)' or 'Descrierea butonului de autentificare unică (SSO)'.",
-          "suggestion": "Textul butonului pentru autentificare unică (SSO)"
+          "description": "The English content describes the button used for Single Sign-On. The Romanian translation, 'Eticheta butonului pentru conectarea la spaţiul cu sistem de autentificare unică (SSO)', literally translates to 'The label of the button for connecting to the space with a single authentication system (SSO)'. While technically correct, it's a bit verbose and doesn't capture the nuance of a tooltip. A more natural phrasing might focus on the action of logging in.",
+          "suggestion": "Etichetă pentru autentificare SSO"
+        },
+        {
+          "type": "formatting",
+          "description": "The acronym 'SSO' is in parentheses. While including it is good for clarity, the format is not consistently used in Romanian UI/UX translations.  It would be more common to see it without parentheses or with a hyphen.",
+          "suggestion": "Etichetă pentru autentificare SSO sau SSO-ul"
         }
       ],
       "approved_at": null
@@ -300,13 +309,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Надпись для кнопки, которая используется для входа на портал с помощью сервиса Single Sign-on' is a bit verbose and not the most natural phrasing. 'портал' (portal) might not be the most accurate term depending on the context of the space. It's a bit too literal.",
-          "suggestion": "Надпись для кнопки входа через Single Sign-on"
+          "description": "The translation \"Надпись для кнопки, которая используется для входа на портал с помощью сервиса Single Sign-on\" is a bit verbose and doesn't quite capture the brevity of the English original. 'Надпись' (caption) is accurate, but the phrasing is awkward. \"портал\" (portal) isn't explicitly mentioned in the English.",
+          "suggestion": "Надпись для кнопки входа через Single Sign-On"
         },
         {
           "type": "formatting",
-          "description": "The phrase 'Single Sign-on' is used without translation. While acceptable in some contexts, it would be more consistent to translate or transliterate it, depending on the overall project style.",
-          "suggestion": "Single Sign-On (or the transliterated version: Си́нгл Сaйн-Он, if the project standard dictates transliteration)."
+          "description": "The English uses the proper noun \"Single Sign-On\" without translation. The Russian translation should maintain this consistency.",
+          "suggestion": "Maintain 'Single Sign-On' in the Russian translation. For example: 'Надпись для кнопки входа через Single Sign-On'"
         }
       ],
       "approved_at": null
@@ -317,13 +326,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ශ්‍රීර්ෂය' (shreeshay) is a bit formal for a tooltip caption. A more common and approachable term might be better.",
-          "suggestion": "consider using 'ලේබල්' (leebal) which means 'label' or 'description'"
+          "description": "The word 'ශ්‍රීර්ෂය' (shreershay) is more accurately translated as 'ලේබල්' (lebaL) or 'අඩවිය' (adawiya) in this context. 'ශ්‍රීර්ෂය' generally refers to a heading or title of a document.",
+          "suggestion": "ලේබල්"
         },
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, the translation is quite literal and lengthy for a tooltip. Tooltips should be concise.",
-          "suggestion": "Consider a shorter, more user-friendly translation like 'තනි පිවිසුම් සේවය' (Thani Piveesum Sewaya) which means 'Single Sign-On' directly.  Or, 'පිවිසුම් බොත්තම' (Piveesum bottama) meaning 'Login Button'."
+          "description": "The overall phrasing could be more natural in Sinhala. The current translation sounds a bit literal and clunky.",
+          "suggestion": "තනි පිවිසුම් සේවාව භාවිතයෙන් අවකාශයට පිවිසෙන බොත්තමේ ලේබල්"
         }
       ],
       "approved_at": null
@@ -334,13 +343,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Popis tlačidla, ktoré sa používa na prihlásenie do priestoru so službou jednotného prihlásenia' is a bit verbose and doesn't fully capture the brevity of the English original. 'Caption' isn't directly translated, and the wording is more descriptive than necessary.",
-          "suggestion": "Popis tlačidla na prihlásenie cez Single Sign-On."
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence is grammatically correct, but slightly wordy. It can be improved for readability.",
-          "suggestion": "Popis tlačidla na prihlásenie cez Single Sign-On."
+          "description": "The translation is overly literal and doesn't flow naturally. 'Popis tlačidla, ktoré sa používa na prihlásenie do priestoru so službou jednotného prihlásenia' is clunky. A more natural translation would be something like 'Text pre tlačidlo na prihlásenie pomocou Single Sign-On.' or 'Popis tlačidla na prihlásenie cez Single Sign-On'.",
+          "suggestion": "Text pre tlačidlo na prihlásenie pomocou Single Sign-On."
         }
       ],
       "approved_at": null
@@ -348,7 +352,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'prijavo' is misspelled. The correct spelling is 'prijava'.",
+          "suggestion": "prijava"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -357,8 +367,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ознака дугмета за пријављивање у простор помоћу услуге Single Sign-On\" is a bit literal and doesn't flow naturally in Serbian. 'Ознака' (designation/label) isn't the most appropriate word for 'caption'.  It implies more of a technical label rather than the visible text on the button.",
-          "suggestion": "A more natural translation might be something like 'Текст на дугмету за пријаву у простор путем Single Sign-On' or 'Опис дугмета за пријаву у простор путем Single Sign-On'."
+          "description": "The translation 'Ознака дугмета за пријављивање у простор помоћу услуге Single Sign-On' is a literal translation and doesn't quite capture the meaning of 'caption for the button'. A more natural Serbian translation would be something like 'Текст на дугмету за пријаву у простор преко Single Sign-On' or 'Натпис на дугмету за пријаву преко Single Sign-On'.",
+          "suggestion": "Текст на дугмету за пријаву у простор преко Single Sign-On"
         }
       ],
       "approved_at": null
@@ -369,13 +379,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'prijavljivanje' is correctly spelled, but 'prijavite se' might be more natural phrasing for 'login'.",
-          "suggestion": "Oznaka dugmeta za prijavu (or prijavite se) u prostor pomoću usluge Single Sign-On"
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, 'pomoću usluge' can sound a bit formal. A more conversational phrasing might improve readability.",
-          "suggestion": "Oznaka dugmeta za prijavu (or prijavite se) u prostor preko usluge Single Sign-On"
+          "description": "The word 'prijavljivanje' is correctly spelled, but could be slightly more precise. 'Prijava' is more commonly used for 'login'.",
+          "suggestion": "Prijava"
         }
       ],
       "approved_at": null
@@ -386,13 +391,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English content describes the caption for a button used for Single Sign-On login. The Turkish translation, while generally understandable, is a bit literal and verbose. 'Başlık' is accurate for 'caption' but the overall phrasing can be improved for clarity and naturalness.",
-          "suggestion": "Tek oturum açma hizmeti ile alana giriş için kullanılan butonun açıklaması."
-        },
-        {
-          "type": "formatting",
-          "description": "While not technically incorrect, the translation could benefit from better flow. The current phrasing sounds a little stiff.",
-          "suggestion": "Tek oturum açma hizmetiyle alana giriş yapabilmeniz için kullanılan butonun açıklaması."
+          "description": "The English content describes the caption *for* a button. The Turkish translation focuses on the button's purpose, rather than directly stating it's the button's caption. A more direct translation would be closer to 'The caption of the button used to log in to the space with the Single Sign-On service'.",
+          "suggestion": "Tek Oturum Açma hizmetiyle alana giriş yapmak için kullanılan düğmenin başlığı."
         }
       ],
       "approved_at": null
@@ -403,8 +403,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Надпис для кнопки, яка використовується для входу до простору за допомогою служби єдиного входу' is a bit verbose and literal. It could be more concise and natural. 'Напис для кнопки входу за допомогою єдиного входу' is a better alternative.",
-          "suggestion": "Напис для кнопки входу за допомогою єдиного входу"
+          "description": "The English content describes the caption of a button for Single Sign-On login. The Ukrainian translation, while understandable, is a bit too literal. 'Надпис для кнопки, яка використовується для входу до простору за допомогою служби єдиного входу' sounds clunky. A more natural phrasing would focus on the purpose of the button.",
+          "suggestion": "Підпис кнопки для входу через єдиний вхід"
         }
       ],
       "approved_at": null
@@ -415,8 +415,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Đăng nhập một lần' directly translates to 'one-time login,' which, while technically correct, isn't the most natural or easily understood way to refer to Single Sign-On in Vietnamese. A more common and understandable phrasing would be something like 'Đăng nhập duy nhất' or 'Đăng nhập bằng một lần xác thực'.",
-          "suggestion": "Consider using 'Đăng nhập duy nhất' or 'Đăng nhập bằng một lần xác thực' instead of 'Đăng nhập một lần'."
+          "description": "The English content describes the caption for a button used for Single Sign-On. The Vietnamese translation, 'Chú thích cho nút được sử dụng để đăng nhập vào không gian với dịch vụ Đăng nhập một lần,' is a bit too literal and verbose. 'Không gian' (space) isn't the most natural way to describe the area being accessed.",
+          "suggestion": "Chú thích cho nút đăng nhập bằng dịch vụ Đăng nhập một lần"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, 'Đăng nhập một lần' could be more naturally written as 'Đăng nhập duy nhất' for better flow.",
+          "suggestion": "Chú thích cho nút đăng nhập bằng dịch vụ Đăng nhập duy nhất"
         }
       ],
       "approved_at": null
@@ -427,13 +432,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation focuses on 'button text' which is too literal. The English describes the *caption* for the button. A more accurate translation would convey the purpose or function of the caption, not just its form.",
-          "suggestion": "用于通过单点登录服务登录空间的说明文字"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation lacks clarity regarding the 'space'. It's unclear if this refers to a specific workspace or a more general concept. While likely understood in context, a slight adjustment could improve readability.",
-          "suggestion": "用于通过单点登录服务登录特定空间的说明文字"
+          "description": "The English content describes the caption *for* a button, while the Chinese translation describes the button's *text*. The translation is functionally inaccurate.",
+          "suggestion": "用于单点登录服务登录空间的按钮的标题"
         }
       ],
       "approved_at": null

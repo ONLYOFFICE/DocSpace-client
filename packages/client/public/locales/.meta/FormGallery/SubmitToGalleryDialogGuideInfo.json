@@ -3,7 +3,7 @@
   "content": "Learn how to create perfect forms and increase your chance to get approval in our <1>guide</1>.",
   "content_en_sha1_hash": "4bdcbe15b3c9fffaed89e278b6ff9dd1d4acecbc",
   "created_at": "2025-05-19T21:30:55.119Z",
-  "updated_at": "2025-05-21T10:40:39.966Z",
+  "updated_at": "2025-05-24T10:50:26.208Z",
   "comment": {
     "text": "This translation key is used to display a guide introduction encouraging users to learn how to create perfect forms and increase their approval chances in a form gallery submission process. It appears in a modal dialog body, likely as part of an in-app tutorial or guidance prompt.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The tag <1> is not correctly rendered in the Arabic translation. It appears as <1> instead of being integrated into the text.",
-          "suggestion": "Ensure the tag <1> is properly incorporated into the Arabic text, likely using a special character or formatting to represent it as intended in the English source."
+          "description": "The tag <1> is present in both the English and Arabic text, but it's important to verify if the formatting/styling associated with this tag is correctly applied in the Arabic rendering environment.  It's assumed to be a placeholder for a link or other visual emphasis.",
+          "suggestion": "Confirm the <1> tag is rendered correctly and applies the intended styling in the Arabic UI."
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The tag `<1>` is present in both the English and Azerbaijani content. It's a formatting tag and should be verified for consistent application by the localization team.",
-          "suggestion": "Ensure the `<1>` tag is applied correctly in the final delivered content. Confirm its purpose and functionality within the application."
+          "description": "The HTML tag `<1>` is present in both the English and Azerbaijani text. It should be consistent or removed.",
+          "suggestion": "Ensure consistent formatting or remove the HTML tag `<1>` from the Azerbaijani translation."
         }
       ],
       "approved_at": null
@@ -57,7 +57,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tag `<1>` is present in both the English and Czech content, indicating it should be preserved. It's important to ensure this formatting consistency is maintained in the final delivered translation.",
+          "suggestion": "Ensure the `<1>` tag is retained as is."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -66,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tag <1> is present in both the English and German text. This should be verified and potentially adjusted based on the intended purpose. While consistent, it's important to ensure it's handled correctly in the UI.",
-          "suggestion": "Confirm the purpose of the <1> tag and ensure consistent handling in the UI/rendering engine.  If it is for highlighting, ensure the highlighting style is appropriate for the German language and target audience."
+          "description": "The tag `<1>` is present in both the English and German text. It should be consistent.",
+          "suggestion": "Ensure consistent use of tags or remove if not required for display."
         }
       ],
       "approved_at": null
@@ -90,8 +96,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The tag '<1>guide</1>' is not translated in the Finnish version. It should ideally be translated or replaced with a relevant Finnish term, or the tag itself could be retained if maintaining the original English reference is desired.",
-          "suggestion": "Consider translating '<1>guide</1>' to a Finnish equivalent (e.g., 'oppaasta', 'ohjeesta') or retaining the tag if the English term is intended."
+          "description": "The `<1>guide</1>` tag is not translated, and its formatting remains in English.",
+          "suggestion": "Replace `<1>guide</1>` with a Finnish translation of 'guide', such as `<1>opas</1>."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'guide' is maintained, the context implies a guide *to* creating forms. A more accurate translation might be 'oppaaseen' (into the guide) or a more descriptive phrase.",
+          "suggestion": "Consider replacing `<1>guide</1>` with `<1>oppaaseen</1> or a phrase like `<1>ohjeeseen</1> (into the instructions)."
         }
       ],
       "approved_at": null
@@ -120,8 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags <1> and </1> are not consistently applied between the English and Japanese versions. The English uses `<1>guide</1>` while the Japanese uses `<1>ガイド</1>.",
-          "suggestion": "Ensure consistent formatting of HTML tags. Either use `<1>guide</1>` in Japanese or adjust the English to match the Japanese `<1>ガイド</1>."
+          "description": "The HTML tags <1> and </1> are not consistently applied in the Japanese translation. They should be consistent with the English source.",
+          "suggestion": "Ensure the HTML tags <1> and </1> are consistently applied around \"ガイド\" to match the English source."
         }
       ],
       "approved_at": null
@@ -132,13 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"increase your chance to get approval\" is not accurately reflected in the Korean translation. \"승인 가능성을 높이는 방법\" literally translates to \"methods to increase the possibility of approval,\" which is a more complex phrasing than the original.",
-          "suggestion": "Consider a more direct translation like \"승인받을 가능성을 높이는 방법을 알아보세요.\" (Learn how to increase your chances of getting approved.)"
-        },
-        {
-          "type": "formatting",
-          "description": "The `<1>guide</1>` tag is retained in the Korean translation. This suggests a formatting issue where the tag wasn't properly handled or rendered.",
-          "suggestion": "Remove the `<1>guide</1>` tag from the Korean translation. It should simply be \"guide\" or an equivalent Korean term."
+          "description": "The English phrase \"increase your chance to get approval\" is not accurately translated. \"승인 가능성을 높이는 방법\" (how to increase the possibility of approval) is a literal translation, but doesn't convey the same nuance as 'increase your chance to get approval'. A better translation would focus on '확인받을 가능성을 높이는 방법' (how to increase the chance of getting approved).",
+          "suggestion": "저희의 <1>guide</1>에서 완벽한 양식 작성 방법 및 확인받을 가능성을 높이는 방법에 대해 알아보세요."
         }
       ],
       "approved_at": null
@@ -146,13 +152,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The tag <1> is not properly closed in the Lao translation. It should be `<1>ຄູ່​ມື</1>`.",
-          "suggestion": "Ensure the closing tag matches the opening tag: `<1>ຄູ່​ມື</1>`"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -160,9 +160,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The English content uses angle brackets `<1>guide</1>` to indicate a specific term. This formatting is not consistently applied in the Latvian translation. It should be `<1>guide</1>.",
-          "suggestion": "Change the Latvian translation to: \"Mūsu <1>guide</1> uzziniet, kā izveidot ideālas formas un palielināt iespēju saņemt apstiprinājumu.\""
+          "type": "incorrect_translation",
+          "description": "The word 'guide' is not translated. It should ideally be translated to Latvian as 'ceļvedis' or a similar term depending on the context.",
+          "suggestion": "Mūsu <1>ceļvedis</1> uzziniet, kā izveidot ideālas formas un palielināt iespēju saņemt apstiprinājumu."
         }
       ],
       "approved_at": null
@@ -191,7 +191,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'guide' was not translated. It should be translated to Portuguese.",
+          "description": "The English word 'guide' was directly translated to 'guide' in Portuguese. While technically correct, it's unusual and doesn't flow naturally in Brazilian Portuguese. A more common and natural translation would be 'guia'.",
           "suggestion": "Aprenda como criar formulários perfeitos e aumente suas chances de obter aprovação em nosso <1>guia</1>."
         }
       ],
@@ -203,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The tag `<1>` is not properly closed in the Romanian translation. It should be `</1>`.",
-          "suggestion": "Ensure the closing tag `</1>` is present and correctly placed after \"ghidul\"."
+          "description": "The tag `<1>` is not correctly rendered in the Romanian translation. The tag should match the English tag.",
+          "suggestion": "Change `<1>` to `<1>`."
         }
       ],
       "approved_at": null
@@ -221,8 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Sinhala translation uses `<1>...</1>` tags, mirroring the English source. This is likely an artifact of the translation process and should be removed.",
-          "suggestion": "Remove the `<1>...</1>` tags from the Sinhala text.  The text should be: අපගේ මාර්ගෝපදේශයෙන් කදිම ආකෘතිපත්‍ර සාදන ආකාරය සහ අනුමැතිය ලබන අවස්ථා වැඩි කර ගන්නේ කෙසේදැයි දැන ගන්න."
+          "description": "The Sinhala translation includes `<1>...</1>` tags, mirroring the English content. These tags are not standard in Sinhala and should be removed.",
+          "suggestion": "Remove the `<1>...</1>` tags from the Sinhala translation."
         }
       ],
       "approved_at": null
@@ -233,8 +233,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The tag `<1>` is not translated or adapted in the Slovak version. It should be handled consistently with the English version, likely by using a similar tag or leaving it untranslated.",
-          "suggestion": "Consider adapting the tag or leaving it as `<1>` in the Slovak version to maintain consistency."
+          "description": "The tag <1> is not properly handled in the Slovak translation. It should either be preserved or replaced with equivalent Slovak formatting.",
+          "suggestion": "Consider preserving the <1> tag as is, or replacing it with a Slovak equivalent (e.g., if it's a link, use HTML link tags)."
         }
       ],
       "approved_at": null
@@ -246,7 +246,7 @@
         {
           "type": "incorrect_translation",
           "description": "The word 'guide' is untranslated. It should be translated to Slovenian.",
-          "suggestion": "Naučite se ustvariti popolne oblike in povečajte svojo možnost, da dobite odobritev v našem <1>vodniku</1>."
+          "suggestion": "Naučite se ustvariti popolne oblike in povečajte svojo možnost, da dobite odobritev v našem <1>priročniku</1>."
         }
       ],
       "approved_at": null
@@ -268,14 +268,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'increase your chance to get approval' is not accurately translated. 'Şansınızı nasıl artıracağınızı' literally translates to 'how to increase your chance,' but it's a bit awkward in Turkish. A more natural phrasing would be something like 'onay alma olasılığınızı artırmayı' (to increase your approval probability) or 'onay alma şansınızı yükseltmeyi' (to elevate your approval chance).",
-          "suggestion": "Consider revising to: '<1>guide</1> mükemmel formlar oluşturmayı ve onay alma olasılığınızı artırmayı öğrenin.' or '<1>guide</1> mükemmel formlar oluşturmayı ve onay alma şansınızı yükseltmeyi öğrenin.'"
-        },
-        {
           "type": "formatting",
-          "description": "The tags `<1>guide</1>` are present in both the English and Turkish text, which suggests they are meant to be preserved for formatting purposes. Ensure these tags are used consistently and correctly in the application where this text is displayed.",
-          "suggestion": "Verify the correct application of the `<1>guide</1>` tags in the rendering environment."
+          "description": "The `<1>guide</1>` tags are not consistently applied. The English has closing tags, and the Turkish translation should mirror that.",
+          "suggestion": "<1>guide</1> mükemmel formlar oluşturmayı ve onay alma şansınızı nasıl artıracağınızı öğrenin."
         }
       ],
       "approved_at": null
@@ -286,8 +281,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tag <1>guide</1> is present in both the English and Ukrainian texts, indicating it should be maintained. This appears to be a placeholder for a specific type of link or emphasis. Confirm the intended purpose and styling of this tag.",
-          "suggestion": "Verify the HTML tag's intended purpose and ensure it is correctly applied in the Ukrainian version, maintaining the same formatting and functionality."
+          "description": "The HTML tag `<1>guide</1>` is inconsistent with the English content. The English uses `<1>guide</1>`, while the Ukrainian translation uses the same tag.",
+          "suggestion": "Ensure consistency in HTML tags. Consider whether the tag is necessary at all. If so, keep it consistent: `<1>guide</1>."
         }
       ],
       "approved_at": null
@@ -298,7 +293,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"guide\" is left in English. It should be translated to Vietnamese.",
+          "description": "The word \"guide\" is left untranslated. It should be translated to Vietnamese.",
           "suggestion": "Tìm hiểu cách tạo các biểu mẫu hoàn hảo và tăng cơ hội nhận được sự chấp thuận trong <1>hướng dẫn</1> của chúng tôi."
         }
       ],
@@ -310,13 +305,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle brackets (<1> guide </1>) are not consistently formatted. The English uses <1> guide </1>, while the Chinese uses <1>指南</1>. The tag should be consistent.",
-          "suggestion": "Change `<1>指南</1>` to `<1>guide</1>`"
+          "description": "The angle brackets (<1>guide</1>) are not consistently rendered. The English uses <1>guide</1> and the Chinese uses <1>指南</1>. This needs to be consistent.",
+          "suggestion": "Ensure consistent formatting of angle brackets across both languages. Either use <1>指南</1> or <1>guide</1>."
         },
         {
           "type": "incorrect_translation",
-          "description": "“完备的表单” translates to 'complete forms', which isn't a direct or ideal translation of 'perfect forms'. 'Perfect forms' implies high quality, well-designed, and effective forms. '完备的' focuses on completeness. While not incorrect, it loses nuance.",
-          "suggestion": "Consider a translation like '高质量的表单' (high-quality forms) or '精美的表单' (beautiful/refined forms)."
+          "description": "The English phrase \"create perfect forms\" is translated as \"创建完备的表单\" which while technically correct, loses some of the original nuance. 'Perfect' implies a high standard of quality and completeness, whereas '完备的' (complete) is less emphatic. A stronger translation might capture the aspirational element of 'perfect'.",
+          "suggestion": "Consider a translation that more closely conveys the intent of 'perfect' forms, potentially using phrases like \"创建高质量的表单\" (create high-quality forms) or “创建无缺点的表单” (create flawless forms)."
         }
       ],
       "approved_at": null

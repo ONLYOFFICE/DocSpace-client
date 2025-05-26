@@ -3,7 +3,7 @@
   "content": "Type",
   "content_en_sha1_hash": "3deb7456519697ecf4eefc455516c969a3681bae",
   "created_at": "2025-05-19T21:30:49.370Z",
-  "updated_at": "2025-05-22T11:56:37.561Z",
+  "updated_at": "2025-05-23T22:20:46.448Z",
   "comment": {
     "text": "This translation key is used to display a label indicating the type of an item or entity. It appears in various UI elements, such as titles, labels, and field headers, where it provides a brief description of the item's classification (e.g., \"Type\" for a data entry field).",
     "is_auto": true,
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Bulgarian translation \"Закачи\" (Zakachi) means \"attach\" or \"hang\". It is not an accurate translation of \"Type\".",
-          "suggestion": "A more appropriate translation for \"Type\" in this context could be \"Тип\" (Tip)."
+          "description": "The Bulgarian translation \"Закачи\" (Zakachi) translates to \"Attach\" or \"Hang\" and does not accurately reflect the meaning of \"Type\".",
+          "suggestion": "The correct translation for \"Type\" in Bulgarian would likely be \"Тип\" (Tip)."
         }
       ],
       "approved_at": null

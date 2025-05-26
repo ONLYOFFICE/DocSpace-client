@@ -3,7 +3,7 @@
   "content": "Here, you can view the detailed storage usage data in this {{productName}}.",
   "content_en_sha1_hash": "c25e93f04d549177e51dc81450d226b9b0dfe235",
   "created_at": "2025-05-19T21:30:52.761Z",
-  "updated_at": "2025-05-21T02:57:55.654Z",
+  "updated_at": "2025-05-24T04:01:54.514Z",
   "comment": {
     "text": "This translation key is used to display a general description of storage usage data in the product. It appears on a page within the Portal Settings categories and is rendered as a text label next to an icon indicating availability. The product name is used for contextualization.",
     "is_auto": true,
@@ -36,7 +36,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The placement of the product name variable {{productName}} seems correct, maintaining readability in the Azerbaijani translation.",
+          "description": "The variable '{{productName}}' is placed correctly in the translated sentence.",
           "suggestion": null
         }
       ],
@@ -54,7 +54,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'prostoru' (space) doesn't accurately convey the meaning of 'in this {{productName}}'. It implies a designated area rather than the platform or service itself.",
+          "description": "The word 'prostoru' (space) doesn't quite capture the meaning of 'in this {{productName}}'. It implies a defined space, whereas the English suggests a specific instance or product.",
           "suggestion": "Zde si můžete zobrazit podrobné údaje o využití úložiště v tomto {{productName}}."
         }
       ],
@@ -72,7 +72,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'storage' is best translated as 'αποθηκευτικός χώρος' (apothikeftikos choros) instead of just 'αποθ. χώρου'. While 'αποθ. χώρου' is understandable, it's a more abbreviated and less professional phrasing.",
+          "description": "The word 'αποθ. χώρου' (apoth. chorou) is a shortened form of 'αποθηκευτικού χώρου' (apothikeutikou chorou), which translates to 'storage space'. While understandable, the full form is more formal and preferred in technical documentation.",
           "suggestion": "Εδώ, μπορείτε να δείτε τα λεπτομερή δεδομένα χρήσης του αποθηκευτικού χώρου σε αυτό το {{productName}}."
         }
       ],
@@ -87,13 +87,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The sentence starts with 'Tässä voit katsella...' which is grammatically correct but stylistically slightly less fluent. A more natural phrasing might be 'Täällä voit tarkastella...' or 'Voit tarkastella...'",
-          "suggestion": "Voit tarkastella yksityiskohtaisesti tämän {{productName}}-n tallennustilan käyttötietoja."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -102,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'view the detailed storage usage data' is not perfectly captured by 'consulter l'utilisation de l'espace de stockage'. 'Consulter' implies more of a review or consultation, whereas 'view' implies seeing a detailed presentation. A more accurate translation might include words like 'visualiser' or 'examiner' to convey the 'detailed' aspect.",
-          "suggestion": "Ici, vous pouvez visualiser les données détaillées d'utilisation de l'espace de stockage dans {{productName}}."
+          "description": "The English phrase \"view the detailed storage usage data\" is better translated as something more natural in French. 'Consulter' is correct but 'l'utilisation de l'espace de stockage' could be improved for clarity and flow. A more natural translation might be something along the lines of 'consulter les détails de l'utilisation de l'espace de stockage'.",
+          "suggestion": "consulter les détails de l'utilisation de l'espace de stockage"
         }
       ],
       "approved_at": null
@@ -114,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The colon after the Armenian sentence is unnecessary and inconsistent with standard English formatting.",
-          "suggestion": "Remove the colon at the end of the sentence: Այստեղ դուք կարող եք դիտել պահեստավորման օգտագործման մանրամասն տվյալները այս {{productName}}-ում:"
+          "description": "The Armenian translation uses a colon (:) after 'տվյալները' which might not be the standard formatting for this type of descriptive text.  A period (.) would be more common.",
+          "suggestion": "Այստեղ դուք կարող եք դիտել պահեստավորման օգտագործման մանրամասն տվյալները այս {{productName}}-ում։"
         }
       ],
       "approved_at": null
@@ -192,13 +186,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'ආචයන' (aachayana) is not the correct term for 'storage' in this context. It refers to rites or ceremonies.",
-          "suggestion": "මෙතැන ඔබට මෙම {{productName}} හි ගබඩා භාවිතය සවිස්තරාත්මක දැකීමට හැකිය."
+          "description": "The word 'ආචයන' (aachayana) is not the correct translation for 'storage usage'. It generally refers to rites or ceremonies. A more accurate translation for 'storage usage' would be 'ගබඩා භාවිතය' (gabada vaipaya) or 'භණ්ඩාගාර භාවිතය' (bhandaaragara vaipaya).",
+          "suggestion": "Replace 'ආචයන භාවිතය' with 'ගබඩා භාවිතය' or 'භණ්ඩාගාර භාවිතය'."
         },
         {
-          "type": "spelling",
-          "description": "While not strictly incorrect, 'ආචයන' is not commonly used. 'ගබඩා' is more natural.",
-          "suggestion": "Use 'ගබඩා' instead of 'ආචයන'."
+          "type": "grammar",
+          "description": "The sentence structure could be improved for better flow and naturalness in Sinhala.  While grammatically understandable, it feels a bit stiff.",
+          "suggestion": "Consider rephrasing the sentence to something like: 'මෙතැනදී ඔබට මෙම {{productName}} හි ගබඩා භාවිතය පිළිබඳව වඩාත් සවිස්තරාත්මක තොරතුරු දැකීමට හැකිය.' (Methandee obaa nimatha {{productName}} hi gabada vaipaya pelives vadaatha savistharaatmakatha thorathuru dekimita hathiya.)"
         }
       ],
       "approved_at": null
@@ -209,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'v tomto priestore' (in this space) doesn't accurately translate 'in this {{productName}}'. '{{productName}}' likely refers to a product name, and the Slovak translation implies a physical space.",
-          "suggestion": "Tu si môžete pozrieť podrobné údaje o využití úložiska v tomto {{productName}}."
+          "description": "The Slovak translation uses 'priestore' which translates to 'space' or 'area' and doesn't accurately convey 'this {{productName}}'. It's likely the intention was to say 'v tomto produkte' (in this product) or 'v tejto aplikácii' (in this application), depending on the context of productName.",
+          "suggestion": "Tu si môžete pozrieť podrobné údaje o využití úložiska v tomto produkte {{productName}}."
         }
       ],
       "approved_at": null
@@ -221,8 +215,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"v tem prostoru\" (in this space) doesn't accurately convey the meaning of 'in this {{productName}}'. It implies a physical space rather than the product itself.",
+          "description": "The term 'prostoru' (space) doesn't accurately reflect the meaning of 'Here, you can view the detailed storage usage data in this {{productName}}'. It implies a physical space rather than the product itself.",
           "suggestion": "Tukaj si lahko ogledate podrobne podatke o uporabi prostora za shranjevanje v tem izdelku {{productName}}."
+        },
+        {
+          "type": "formatting",
+          "description": "While the use of '{{productName}}' is consistent with the English, consider if it's the preferred method for placeholders in the Slovene context. It might be more natural to use a different placeholder system.",
+          "suggestion": "Consider reviewing the product’s terminology guidelines for preferred placeholder style in Slovenian. For example, it may be more natural to use a variable name like 'izdelekIme' instead of '{{productName}}'."
         }
       ],
       "approved_at": null
@@ -233,8 +232,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The word 'овом' appears twice, the second one is not needed in this context. It should be 'у овом {{productName}}'.",
-          "suggestion": "Овде можете видети детаљне податке о коришћењу складишта у {{productName}}."
+          "description": "The Serbian translation includes an extra hyphen after 'productName'. This is grammatically incorrect in this context.",
+          "suggestion": "Remove the hyphen after 'productName'. The correct translation would be: 'Овде можете видети детаљне податке о коришћењу складишта у овом {{productName}}.'"
         }
       ],
       "approved_at": null
@@ -245,7 +244,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The hyphen in 'productName'-u' should be a space. Serbian typically uses a space before the preposition 'u' when referring to an entity.",
+          "description": "The hyphen in 'productName'-u' is unnecessary and makes the sentence slightly awkward. The 'u' should be directly adjacent to the variable.",
           "suggestion": "Ovde možete videti detaljne podatke o korišćenju skladišta u ovom {{productName}}."
         }
       ],
@@ -263,8 +262,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"просторі\" (prostori) doesn't accurately convey the meaning of \"this {{productName}}\". It translates to 'space' or 'area,' which isn't suitable in this context. It needs to be closer to 'in this product/application'.",
-          "suggestion": "Тут ви можете переглянути докладні дані про використання сховища в цьому продукті {{productName}}."
+          "description": "The word 'просторі' (prostori) which translates to 'space' doesn't quite fit the context. 'Сховище' refers to storage, and a better translation would imply the storage location or environment, not just a space.",
+          "suggestion": "Тут ви можете переглянути докладні дані про використання сховища в цьому {{productName}}."
         }
       ],
       "approved_at": null

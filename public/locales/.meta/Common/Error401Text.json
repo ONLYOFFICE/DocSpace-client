@@ -3,7 +3,7 @@
   "content": "Sorry, the resource is not currently accessible.",
   "content_en_sha1_hash": "065f25ed2401162e3d223ed9109f147adad74795",
   "created_at": "2025-05-19T21:30:45.036Z",
-  "updated_at": "2025-05-22T11:56:37.842Z",
+  "updated_at": "2025-05-24T00:52:48.841Z",
   "comment": {
     "text": "This translation key is used to display an error message when a user lacks access to a resource. It appears in the ErrorContainer component as the header text. Translators should focus on conveying a sense of permission denial or restricted access in their translated version.",
     "is_auto": true,
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Извините, страница недоступна' while understandable, is not the most accurate rendering of 'Sorry, the resource is not currently accessible.' 'Страница' specifically refers to a page, whereas the English refers to a general resource. A better translation would reflect this broader meaning.",
-          "suggestion": "Извините, ресурс временно недоступен."
+          "description": "The translation 'Извините, страница недоступна.' is a literal translation of 'Sorry, the page is inaccessible.' However, 'resource' in the English content implies a more general concept than just a 'page'. A more accurate translation would convey that the resource (whatever it is) is unavailable.",
+          "suggestion": "Извините, ресурс недоступен."
         }
       ],
       "approved_at": null
@@ -159,7 +159,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'සම්පත' (sampatha) is technically correct but might be perceived as overly formal or literary for a standard error message. A more common and understandable term for 'resource' might be preferable.",
+          "suggestion": "Consider using 'දත්ත' (datha) or a more conversational synonym for 'resource' depending on the specific context."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ප්‍රවේශ වීමට නොහැකිය' (praveSha vaeminu nohakiyA) is grammatically correct, it's a bit literal translation. It could be made more natural sounding.",
+          "suggestion": "Consider phrasing it as 'ලබා ගත නොහැකිය' (laba gata nohakiyA) which means 'not available'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -192,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Üzgünüz, kaynak şu anda ulaşılabilir değil.' is not the most natural or accurate rendering of 'Sorry, the resource is not currently accessible.' While technically correct, it sounds awkward in Turkish. A more natural translation would emphasize unavailability rather than a state of 'not accessible'.",
-          "suggestion": "Üzgünüz, kaynak şu anda kullanılamıyor."
+          "description": "The Turkish translation 'Üzgünüz, kaynak şu anda ulaşılabilir değil' is a literal translation that doesn't flow naturally in Turkish. It implies the resource *can* be reached, just not right now, which is not the intended meaning of \"Sorry, the resource is not currently accessible.\"",
+          "suggestion": "A more natural translation would be something like: 'Üzgünüz, kaynağa şu anda erişilemiyor.' or 'Üzgünüz, kaynak şu anda kullanılamıyor.'"
         }
       ],
       "approved_at": null

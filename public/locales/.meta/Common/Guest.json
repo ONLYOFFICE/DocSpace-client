@@ -3,7 +3,7 @@
   "content": "Guest",
   "content_en_sha1_hash": "face83ee3014bdc8f98203cc94e2e89222452e90",
   "created_at": "2025-05-19T21:30:45.686Z",
-  "updated_at": "2025-05-22T11:56:37.395Z",
+  "updated_at": "2025-05-24T00:28:24.957Z",
   "comment": {
     "text": "The translation key \"Common:Guest\" is used to display a text indicating that the user being referred to is a guest. This text is typically displayed in a dialog or UI element, such as an icon badge, to provide context for users.",
     "is_auto": true,
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation \"Host\" does not accurately convey the meaning of \"Guest\". \"Guest\" refers to someone who is visiting or being entertained, while \"Host\" refers to the person doing the entertaining.",
-          "suggestion": "Consider \"Ubytovaný\" (lodging guest), \"Návštěvník\" (visitor), or \"Host\" if the context is specifically about someone hosting an event."
+          "description": "The Czech translation \"Host\" is not the most accurate translation of \"Guest\". While \"Host\" can sometimes be a suitable translation, \"Guest\" more commonly translates to \"Host\" (as in the person receiving guests) or \"Návštěvník\" (visitor).",
+          "suggestion": "Consider \"Návštěvník\" or \"Host\" (depending on context)."
         }
       ],
       "approved_at": null

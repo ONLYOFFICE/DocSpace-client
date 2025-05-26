@@ -3,7 +3,7 @@
   "content": "This document is encrypted",
   "content_en_sha1_hash": "bcb0db122a3fba433a7d7bc8a1f4b05a5bcac4ca",
   "created_at": "2025-05-19T21:30:53.431Z",
-  "updated_at": "2025-05-21T05:48:15.922Z",
+  "updated_at": "2025-05-24T06:17:28.623Z",
   "comment": {
     "text": "This translation key is used for a header that displays a warning about encryption when viewing private rooms. It appears in a prominent center-aligned text on the Private Rooms page.",
     "is_auto": true,
@@ -132,7 +132,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"This document is encrypted\" is better translated as \"Este documento está criptografado\" in Portuguese. \"Encriptado\" is a less common and slightly less accurate term in this context.",
+          "description": "The phrase 'is encrypted' is best translated as 'criptografado' in Portuguese, not 'encriptado'. While 'encriptado' is sometimes used, 'criptografado' is the more standard and accurate term.",
           "suggestion": "Este documento está criptografado"
         }
       ],

@@ -3,7 +3,7 @@
   "content": "Files and folder will not be copied",
   "content_en_sha1_hash": "66648e8a0c6d0b325af25f71b0d660b44211a56d",
   "created_at": "2025-05-19T21:30:45.297Z",
-  "updated_at": "2025-05-22T11:56:37.346Z",
+  "updated_at": "2025-05-24T00:45:22.454Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that files and folders will not be copied when certain actions are performed in a file management context. It appears as part of a dialog box or component where users can resolve conflicts or cancel uploads.",
     "is_auto": true,
@@ -87,7 +87,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The verb conjugation 'verranno' is correct in this context, but the noun-adjective agreement is incorrect. 'File' and 'cartelle' are plural, so the adjective 'copiati' should be plural.",
+          "suggestion": "File e cartelle non verranno copiati."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -105,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ໂຟນເດີ' (folder) is a loanword from English and may not be the most natural or easily understood term for Lao speakers. While understandable, consider a more localized equivalent.",
+          "suggestion": "Consider using a more Lao equivalent for 'folder,' such as 'ໄຟລ໌ ແລະ ສໍາເອກະສານ' (files and documents) or a similar phrasing based on context."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -155,9 +167,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ෆෝල්ඩරය' (folder) is technically correct, but 'ෆෝල්ඩර්' would be more commonly used and reads more naturally in modern Sinhala.",
-          "suggestion": "ගොනු සහ ෆෝල්ඩර් නොපිටපත්කෙරේ"
+          "type": "incorrect_translation",
+          "description": "The translation 'ගොනු සහ ෆෝල්ඩරය පිටපත් නොකෙරේ' is a literal translation but may not be the most natural or idiomatic way to express 'Files and folder will not be copied' in Sinhala. It sounds somewhat clunky.",
+          "suggestion": "Consider alternatives like 'ගොනු සහ ෆෝල්ඩරය අනුරූපණය නොවනු ඇත' (Gonu saha folderaya anurupaneeyanava nuu ath) which translates to 'Files and folders will not be duplicated' or 'ගොනු සහ ෆෝල්ඩරය පිටපත් නොවනු ඇත' (Gonu saha folderaya pitakaruu ath) which translates to 'Files and folders will not be copied.'"
         }
       ],
       "approved_at": null
@@ -179,9 +191,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The Serbian translation 'Датотеке и фолдер неће бити копирани' is grammatically incorrect. The verb conjugation doesn't agree with the plural subject ('files and folder'). It sounds awkward and is not standard Serbian.",
-          "suggestion": "Датотеке и фолдере неће бити копиране"
+          "type": "incorrect_translation",
+          "description": "The translation 'Датотеке и фолдер неће бити копирани' is a literal translation that doesn't quite convey the intended meaning in a natural way in Serbian. It implies the files and folders *will* be done something *to* them - copied. A more natural phrasing would focus on the action *not* happening.",
+          "suggestion": "Фолдре и датотеке неће бити копиране."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of the English loanword 'фолдер' is less common and sounds less professional than using a Serbian equivalent. While understood, it's not ideal.",
+          "suggestion": "Use a more established Serbian term for 'folder'.  A possible replacement could be 'чајанци' or 'папке'."
         }
       ],
       "approved_at": null
@@ -204,8 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Ukrainian translation uses the impersonal passive voice ('буде скопійовано'). While grammatically correct, it sounds slightly unnatural and could be more direct depending on the context. A more common phrasing would be 'будуть скопійовані'.",
-          "suggestion": "Файли й папку будуть скопійовані"
+          "description": "The Ukrainian translation uses the singular form 'папку' (papkú) instead of the plural 'папки' (pápky) to agree with 'файли' (fayly - files).",
+          "suggestion": "Файли й папки не буде скопійовано"
         }
       ],
       "approved_at": null
@@ -219,7 +236,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '文件和文件夹将不会被复制' is overly literal and sounds unnatural in Chinese. While technically correct, it's not the most fluent way to express the meaning.",
+          "suggestion": "文件和文件夹不会被复制 (Wénjiàn hé zàngjià bù huì bèi fùzhì) - This is a more natural and common way to say 'Files and folder will not be copied'."
+        }
+      ],
       "approved_at": null
     }
   }

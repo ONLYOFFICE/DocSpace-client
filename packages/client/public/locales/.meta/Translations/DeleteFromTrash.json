@@ -3,7 +3,7 @@
   "content": "Selected elements were successfully deleted from Trash",
   "content_en_sha1_hash": "b6c08a9f5c3e7891c0f5473a6111ef1f9a96855a",
   "created_at": "2025-05-19T21:30:49.962Z",
-  "updated_at": "2025-05-22T11:56:37.293Z",
+  "updated_at": "2025-05-24T02:43:57.749Z",
   "comment": {
     "text": "This translation key is used for a confirmation message that appears when a user attempts to delete items from the Trash. If confirmed, the selected elements are deleted successfully and this message is displayed. It is used in various contexts, including file removal dialogs and action buttons.",
     "is_auto": true,
@@ -63,7 +63,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Selected elements\" is better translated as \"Seçilmiş maddələr\" rather than \"Seçilmiş elementlər\". While 'elementlər' isn't incorrect, 'maddələr' is more natural in this context.",
+          "suggestion": "Seçilmiş maddələr zibil qutusundan silindi"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -138,8 +144,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ຢ່າງ' (yang) is used unnecessarily and makes the sentence sound slightly awkward. While technically not incorrect, it's not the most natural phrasing.",
-          "suggestion": "ຂໍ້ມູນທີ່ເລືອກໄດ້ຖືກລຶບອອກຈາກຂີ້ເຫຍື້ອສໍາເລັດຜົນ"
+          "description": "The word 'ຂໍ້ມູນ' (khomun) is technically correct for 'data' but in this context 'ລາຍການ' (laay gaan) which means 'items' or 'elements' would be more natural and align better with 'Selected elements'.",
+          "suggestion": "ລາຍການທີ່ເລືອກໄດ້ຖືກລຶບອອກຈາກຂີ້ເຫຍື້ອຢ່າງສໍາເລັດຜົນ"
+        },
+        {
+          "type": "grammar",
+          "description": "While not strictly incorrect, 'ຖືກລຶບອອກ' (thuk lueb ok) can be simplified to just 'ລຶບ' (lueb) - 'deleted'.",
+          "suggestion": "ລາຍການທີ່ເລືອກໄດ້ຖືກລຶບຈາກຂີ້ເຫຍື້ອຢ່າງສໍາເລັດຜົນ"
         }
       ],
       "approved_at": null
@@ -191,9 +202,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'තේරූ අංග කුණු කූඩයෙන් සාර්ථකව මකා ඇත' is a literal translation that doesn't flow naturally in Sinhala. A more natural phrasing would focus on the action of deleting rather than the state of being deleted. 'තේරූ අංග කුණු කූඩයෙන් මකා දමන ලදී' is a possible improvement.",
-          "suggestion": "තේරූ අංග කුණු කූඩයෙන් මකා දමන ලදී"
+          "type": "spelling",
+          "description": "The word 'කුණු' (kunu) literally translates to 'dirty' or 'filthy' and while it can be used in the context of a trash bin, it might sound slightly informal or negative. A more neutral term might be preferred.",
+          "suggestion": "Consider using a more neutral word for 'dirty' or 'filthy' in the context of trash, such as 'ප්‍රතික්ෂේපිත' (pratikshepita - rejected) or a more generic term."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence structure can be improved for better flow in Sinhala. The phrasing 'තේරූ අංග කුණු කූඩයෙන් සාර්ථකව මකා ඇත' (Selected elements were successfully deleted from Trash) is a bit literal and can be slightly awkward.",
+          "suggestion": "Consider restructuring the sentence to 'කුණු කූඩයෙන් තේරූ අංග සාර්ථකව මකා ඇත' (Elements selected from Trash were successfully deleted) or 'තේරූ අංග කුණු කූඩය මගින් සාර්ථකව මකා ඇත' (Selected elements were successfully deleted via Trash)."
         }
       ],
       "approved_at": null
@@ -215,9 +231,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "formatting",
+          "description": "The Serbian translation uses a mix of Cyrillic and Latin script within the word 'Отпада'. 'Отпада' should be consistently Cyrillic. The correct term should be 'Кош'.",
+          "suggestion": "Одабрани елементи су успешно обрисани из Коша"
+        },
+        {
           "type": "incorrect_translation",
-          "description": "The translation 'Одабрани елементи су успешно обрисани из Отпада' is a literal translation but doesn't quite flow naturally in Serbian. 'Отпада' is technically correct for 'Trash' but sounds a bit formal and archaic in this context.",
-          "suggestion": "Одабрани елементи су успешно обрисани из корпе."
+          "description": "While 'Отпада' is a valid translation for 'Trash', 'Кош' (Kosh) is a more common and natural-sounding term for a trash bin or wastebasket in Serbian.",
+          "suggestion": "Одабрани елементи су успешно обрисани из Коша"
         }
       ],
       "approved_at": null

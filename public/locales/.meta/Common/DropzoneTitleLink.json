@@ -3,7 +3,7 @@
   "content": "Select new image",
   "content_en_sha1_hash": "0cfab96c757b48543e5dee1d93361135769c716e",
   "created_at": "2025-05-19T21:30:44.709Z",
-  "updated_at": "2025-05-22T11:56:37.847Z",
+  "updated_at": "2025-05-24T01:05:16.519Z",
   "comment": {
     "text": "The \"Select new image\" translation key is used to provide a descriptive text for a button that allows users to upload or select a new image in an image editor component. This text appears as the label for a dropzone area where files can be uploaded.",
     "is_auto": true,
@@ -155,14 +155,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The Sinhala word 'නව' (nawa) is correctly spelled but might benefit from context to confirm it's the most appropriate word for 'new'.",
-          "suggestion": "Consider if 'අලුත්' (alut) might be more suitable depending on the specific nuance of 'new' intended."
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure is grammatically correct, but the tone might be slightly informal.  'නව රූපයක් තෝරන්න' is direct.  A slightly more polite or formal phrasing might be preferable depending on the application's overall tone.",
-          "suggestion": "Consider 'නව රූපයක් තෝරා ගන්න' (nawa rupayak thora gana) which is slightly more formal."
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Select new image' implies a replacement of an existing image. The Sinhala translation 'නව රූපයක් තෝරන්න' translates literally to 'Select a new image' which lacks the nuance of replacement. While not strictly incorrect, it's not the most natural phrasing for the context of replacing an image.",
+          "suggestion": "Consider 'නව රූපය තෝරන්න' (New image select) which more directly implies selecting a replacement."
         }
       ],
       "approved_at": null
@@ -197,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Yeni resim seç\" while understandable, is slightly less formal than the English 'Select new image'. A more appropriate translation would be \"Yeni bir resim seç\".",
-          "suggestion": "Yeni bir resim seç"
+          "description": "The Turkish translation 'Yeni resim seç' is grammatically correct but doesn't quite convey the nuanced meaning of 'Select new image'. A more appropriate translation would emphasize the act of choosing something from a set of options. 'Yeni bir resim seçin' is a more accurate translation.",
+          "suggestion": "Yeni bir resim seçin"
         }
       ],
       "approved_at": null

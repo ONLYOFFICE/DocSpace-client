@@ -20,6 +20,7 @@
   "dependencies": {
     "@hcaptcha/react-hcaptcha": "1.11.0",
     "csvjson-json_beautifier": "^5.0.4",
+    "date-and-time": "3.6.0",
     "i18next": "20.6.1",
     "nconf": "0.12.1",
     "next": "15.3.2",

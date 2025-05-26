@@ -11,6 +11,7 @@
     "deploy": "shx --silent mkdir -p ../../../publish/web/management && shx --silent mkdir -p ../../../publish/web/management/.next && shx --silent mkdir -p ../../../publish/web/management/config && shx cp -r config/* ../../../publish/web/management/config && shx --silent mkdir -p ../../../publish/web/management/node_modules && shx --silent mkdir -p ../../../publish/web/management/.next/static && shx cp -r .next/standalone/node_modules/* ../../../publish/web/management/node_modules && shx cp -r .next/static/* ../../../publish/web/management/.next/static    && shx cp -r .next/standalone/packages/management/.next/* ../../../publish/web/management/.next &&  shx cp -f server.prod.js ../../../publish/web/management/server.js &&  shx cp -f logger.mjs ../../../publish/web/login/logger.mjs"
   },
   "dependencies": {
+    "date-and-time": "3.6.0",
     "i18next": "20.6.1",
     "nconf": "0.12.1",
     "next": "15.3.2",

@@ -3,7 +3,7 @@
   "content": "Top 5 rooms by storage usage:",
   "content_en_sha1_hash": "800ff672a507fc931c2e9ea57c1cf8454972e65d",
   "created_at": "2025-05-19T21:30:52.959Z",
-  "updated_at": "2025-05-21T02:44:46.301Z",
+  "updated_at": "2025-05-24T03:51:21.982Z",
   "comment": {
     "text": "This translation key is used to display a label for a list of rooms sorted by storage usage. It appears in the \"Rooms List\" component and is shown when the user selects more than 5 rooms to view.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Yaddaş istifadəsinə görə ilk 5 otaq:' is a literal translation and doesn't quite capture the nuance of 'Top 5 rooms by storage usage:'  A more natural phrasing would convey the ranking based on storage usage.",
-          "suggestion": "Yaddaş istifadə həddinə görə ən çox istifadə edilən ilk 5 otaq:"
+          "description": "The translation \"Yaddaş istifadəsinə görə ilk 5 otaq:\" is a literal translation but may not be the most natural phrasing in Azerbaijani. A more idiomatic translation would convey the meaning 'Top 5 rooms based on storage usage'.",
+          "suggestion": "Yaddaş istifadəsinə əsasən ən çox olan 5 otaq:"
         }
       ],
       "approved_at": null
@@ -47,9 +47,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Топ 5 стаи по употреба на хранилището:' is a literal translation and sounds unnatural in Bulgarian. A more natural phrasing would focus on 'storage space' rather than 'usage of storage'.",
-          "suggestion": "Топ 5 стаи с най-много заето място:"
+          "type": "spelling",
+          "description": "The word \"хранилището\" (hranilishteto) is a bit too formal for this context. A more natural and commonly used term would be better.",
+          "suggestion": "Consider using \"памет\" (pamet) which translates to 'memory' or 'storage space' - \"Топ 5 стаи по използване на паметта:\""
         }
       ],
       "approved_at": null
@@ -57,7 +57,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '5 nejpoužívanějších místností podle využití úložného prostoru:' is a bit literal and doesn't flow as naturally as it could. While technically correct, a more idiomatic phrasing would be better.",
+          "suggestion": "Consider alternatives like '5 místností s největší spotřebou místa:' or '5 místností, které nejvíce využívají úložný prostor:'"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -72,8 +78,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'αποθ. χώρου' is an abbreviation and might be confusing to some users. While technically correct, it's less clear than the full term.",
-          "suggestion": "Τα 5 κορυφαία δωμάτια με βάση τη χρήση αποθηκευτικού χώρου:"
+          "description": "The word 'αποθ.' is an abbreviation for 'αποθηκευτικού χώρου'. While understandable, it's less formal and could be improved for a settings menu.",
+          "suggestion": "αποθηκευτικού χώρου"
+        },
+        {
+          "type": "formatting",
+          "description": "The colon at the end of the sentence might be unnecessarily formal in a UI context.",
+          "suggestion": "Remove the colon or replace with a less formal punctuation (e.g., a period)."
         }
       ],
       "approved_at": null
@@ -96,8 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Cinq salles qui utilisent le plus d'espace de stockage:' is not the most natural or concise way to say \"Top 5 rooms by storage usage:\" in French. While technically correct, it's a bit verbose. A more idiomatic translation would prioritize brevity and clarity.",
-          "suggestion": "Les 5 salles avec le plus d'espace utilisé:"
+          "description": "The translation 'Cinq salles qui utilisent le plus d'espace de stockage:' is a literal translation and doesn't flow naturally in French for this context. It's awkward phrasing.",
+          "suggestion": "Les 5 salles utilisant le plus d'espace de stockage:"
         }
       ],
       "approved_at": null
@@ -108,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Լավագույն 5 սենյակները ըստ պահեստի օգտագործման:\" literally translates to 'Top 5 rooms according to storage usage:'. While understandable, a more natural and idiomatic translation might be 'Top 5 rooms with the most storage usage' or 'Top 5 rooms by storage consumption'.",
-          "suggestion": "Consider alternatives like \"Ամենաշատ պահեստ ունեցող 5 սենյակները\" (5 rooms with the most storage) or \"5 սենյակներ պահեստի ծավալով\" (5 rooms by storage volume)."
+          "description": "The translation 'Լավագույն 5 սենյակները ըստ պահեստի օգտագործման՝' doesn't fully convey the meaning of 'Top 5 rooms by storage usage:'. 'Լավագույն' (lavaguy'n) means 'best,' but the English phrase implies ranking by usage, not necessarily 'best'. A more accurate translation would emphasize ranking.",
+          "suggestion": "Consider a phrase like 'Շարահարակ 5 սենյակները պահեստի օգտագործման ըստ' (Sharaharak 5 senyaknerə pahesti ogutagormani ast) which means 'Top/Ranked 5 rooms by storage usage'."
         }
       ],
       "approved_at": null
@@ -129,13 +140,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"스토리지 사용량 기준 상위 5개의 방:\" is a literal translation and can sound slightly awkward in Korean. A more natural phrasing would be something like \"스토리지 사용량 순위 상위 5개 방\" or \"스토리지 사용량 기준 상위 5개 방\".",
-          "suggestion": "스토리지 사용량 순위 상위 5개 방"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -144,8 +149,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"5 ຫ້ອງສູງສຸດໂດຍການໃຊ້ບ່ອນຈັດເກັບຂໍ້ມູນ:\" doesn't fully convey the meaning of 'Top 5 rooms by storage usage:'. The phrasing 'ໂດຍການໃຊ້' (by using) is a bit clunky. A more natural translation might use a different structure.",
-          "suggestion": "5 ຫ້ອງທີ່ໃຊ້ບ່ອນຈັດເກັບຂໍ້ມູນຫຼາຍສຸດ:"
+          "description": "The Lao translation \"5 ຫ້ອງສູງສຸດໂດຍການໃຊ້ບ່ອນຈັດເກັບຂໍ້ມູນ:\" doesn't perfectly convey the meaning of \"Top 5 rooms by storage usage:\". While understandable, a more natural phrasing might be preferred. The current phrasing literally translates \"highest 5 rooms by usage of storage space\".",
+          "suggestion": "Consider a more natural phrasing like \"5 ຫ້ອງທີ່ມີການໃຊ້ບ່ອນຈັດເກັບຂໍ້ມູນຫຼາຍສຸດ:\" or \"5 ຫ້ອງທີ່ໃຊ້ບ່ອນຈັດເກັບຂໍ້ມູນຫຼາຍທີ່ສຸດ:\""
         }
       ],
       "approved_at": null
@@ -165,19 +170,19 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '5 pokoi wykorzystujących najwięcej pamięci:' is a literal translation but could be improved for naturalness in Polish. A more idiomatic translation would emphasize the ranking or order.",
+          "suggestion": "5 pokoi z największym zużyciem pamięci:"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'As 5 principais salas por uso de armazenamento' is understandable, a more natural and accurate translation of \"Top 5 rooms by storage usage\" would be something like \"As 5 salas com maior uso de armazenamento\" or \"As 5 salas que mais utilizam armazenamento\". 'Por uso de armazenamento' is a bit clunky.",
-          "suggestion": "As 5 salas com maior uso de armazenamento"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -186,7 +191,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'As 5 principais salas por uso de armazenamento:' is not the most natural or idiomatic translation of 'Top 5 rooms by storage usage:'. While technically correct, it sounds a bit stiff. A more natural translation would be something like 'As 5 salas com maior uso de armazenamento:' or 'Top 5 salas em uso de armazenamento:'.",
+          "description": "The translation 'As 5 principais salas por uso de armazenamento:' is a literal translation that doesn't sound natural in Portuguese. A more idiomatic translation would be 'As 5 salas com maior uso de armazenamento:' or 'As 5 salas que mais usam armazenamento:'",
           "suggestion": "As 5 salas com maior uso de armazenamento:"
         }
       ],
@@ -198,8 +203,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'utilizarea' is a valid word, but in this context, 'consumul' might be more natural and readable.",
-          "suggestion": "Top 5 săli după consumul spațiului de stocare:"
+          "description": "The Romanian word 'Top' is used as-is, which is not grammatically correct in this context. While understood, it's better to use a Romanian equivalent.",
+          "suggestion": "Cel mai bun 5 săli"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrasing 'după utilizarea spațiului de stocare' could be slightly improved for more natural Romanian.",
+          "suggestion": "în funcție de utilizarea spațiului de stocare"
         }
       ],
       "approved_at": null
@@ -210,7 +220,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"использованию хранилища\" is a very literal translation of 'storage usage'. A more natural and common phrasing in Russian would be \"по объему хранилища\" or \"по использованию памяти\".",
+          "description": "While technically correct, \"использованию хранилища\" is a bit clunky. A more natural phrasing for this context would be \"по объему хранилища\" or \"по использованному объему\".",
           "suggestion": "Топ-5 комнат по объему хранилища:"
         }
       ],
@@ -222,8 +232,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ආචයන භාවිතය වැඩිම කාමර 5:' is not an accurate translation of 'Top 5 rooms by storage usage:'. 'ආචයන භාවිතය' (Achanaya Vapaya) translates to 'device usage' and doesn't convey 'storage usage'.",
-          "suggestion": "භදාරණය භාවිතය වැඩිම කාමර 5:"
+          "description": "The translation 'ආචයන භාවිතය වැඩිම කාමර 5:' doesn't accurately convey the meaning of \"Top 5 rooms by storage usage:\". 'ආචයන භාවිතය' translates to 'device usage' which is not the intended meaning.  It should reflect storage usage.",
+          "suggestion": "Perhaps something like 'භදාරණ භාවිතය වැඩිම කාමර 5:' (bhadaarana vaipthiyata wadimata kaamara 5:) which translates to 'Top 5 rooms with the highest storage usage:' or 'භදාරණ ඉඩවසමේ වැඩිම කාමර 5:' (bhadaarana idawaasame vadimata kaamara 5:) which translates to 'Top 5 rooms with the most storage space:'"
         }
       ],
       "approved_at": null
@@ -246,8 +256,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'употреби складишта' is not the most natural or accurate translation of 'storage usage'.  'Storage usage' typically translates to 'коришћење складишног простора' or 'потреба за складишним простором'.",
-          "suggestion": "Топ 5 соба по потреби за складишним простором:"
+          "description": "The word 'rooms' should be translated as 'просторије' (prostorije) or 'собе' (sobe) depending on the specific context. 'Соба' (soba) is more common for individual rooms, but 'просторије' is more appropriate if referring to storage areas within a building.",
+          "suggestion": "Топ 5 просторија по употреби складишта:"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'употреби' is grammatically correct but may not be the most natural-sounding translation for 'usage' in this context. A more common phrasing would be 'по коришћењу' (po korišćenju).",
+          "suggestion": "Топ 5 просторија по коришћењу складишта:"
         }
       ],
       "approved_at": null
@@ -258,13 +273,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'po upotrebi skladišta' doesn't accurately convey 'by storage usage'. A more accurate translation would indicate a ranking or ordering based on storage.",
-          "suggestion": "Top 5 soba prema korišćenju prostora za skladištenje:"
+          "description": "The phrase 'by storage usage' is not accurately translated. 'Po upotrebi skladišta' is a literal translation but doesn't convey the intended meaning of 'based on' or 'ordered by' storage usage.",
+          "suggestion": "Top 5 soba prema korišćenju skladišta:"
         },
         {
           "type": "grammar",
-          "description": "While grammatically passable, 'po upotrebi skladišta' is a less natural phrasing in Serbian.  'Prema' is a more common and appropriate preposition in this context.",
-          "suggestion": "Using 'prema' instead of 'po' would improve flow."
+          "description": "While technically grammatically correct, the use of 'po' might sound slightly awkward in this context. 'Prema' would be a more natural choice to indicate 'according to' or 'based on'.",
+          "suggestion": "Top 5 soba prema korišćenju skladišta:"
         }
       ],
       "approved_at": null
@@ -275,8 +290,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Depolama kullanımına göre ilk 5 oda:' is a literal translation but sounds unnatural in Turkish. A more natural phrasing would emphasize ranking or listing.",
-          "suggestion": "Depolama kullanımına göre en çok kullanılan ilk 5 oda:"
+          "description": "While technically correct, \"Depolama kullanımına göre ilk 5 oda\" is a bit stiff and not the most natural way to express 'Top 5 rooms by storage usage' in Turkish. A more idiomatic translation would be something like \"Depolama kullanımı en yüksek ilk 5 oda\".",
+          "suggestion": "Depolama kullanımı en yüksek ilk 5 oda:"
         }
       ],
       "approved_at": null

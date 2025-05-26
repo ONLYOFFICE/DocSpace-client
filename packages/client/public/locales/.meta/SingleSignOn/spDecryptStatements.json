@@ -3,7 +3,7 @@
   "content": "Decrypt Assertions",
   "content_en_sha1_hash": "eaebd6a20f344646b8d0e78e11449954b24a719a",
   "created_at": "2025-05-19T21:30:50.160Z",
-  "updated_at": "2025-05-21T01:51:12.353Z",
+  "updated_at": "2025-05-24T03:04:56.602Z",
   "comment": {
     "text": "Decrypt statements are presented as a checkbox label to enable or disable encryption of assertions during single sign-on integration. This key is used in UI components, such as checkboxes, where users can toggle this setting.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'فك تشفير التأكيدات' while literally meaning 'decrypt the confirmations/assertions', doesn't fully capture the nuance of 'Decrypt Assertions' in a technical context. It implies a manual decryption process rather than a system functionality.",
-          "suggestion": "تشفير البيانات المسجلة (Tashfeer al-bayanat al-musajjalah) - This translates to 'Encrypt Recorded Data' which more accurately reflects the function of decrypting assertions in a Single Sign-On system."
+          "description": "While 'فك تشفير التأكيدات' is a literal translation, a more natural and technically accurate rendering of 'Decrypt Assertions' in an Arabic IT context might be 'إلغاء تشفير التأكيدات' or 'فك ترميز التأكيدات'. The term 'فك تشفير' leans more towards breaking encryption for security reasons, whereas 'Decrypt Assertions' implies a technical process.",
+          "suggestion": "إلغاء تشفير التأكيدات"
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"İddiaların Şifrəsini Açın\" is literally \"Decrypt Assertions,\" a more natural and precise translation in Azerbaijani might be \"Təqdirləri deşifrə et\" or \"Təqdirləri aç\". \"Şifrəsini açın\" is more common for passwords and similar secrets, not assertions in a technical context.",
-          "suggestion": "Təqdirləri deşifrə et"
+          "description": "The translation 'İddiaların Şifrəsini Açın' while literally meaning 'Unlock the cipher of assertions', doesn't accurately convey the meaning of 'Decrypt Assertions'. 'Decrypt' implies a specific cryptographic process. A more accurate translation would involve terminology closer to 'Şifrəni Çözün' (Decrypt) or 'Şifrələməni Başqa etin' (Decryption).",
+          "suggestion": "Şifrələməni Çözün"
         }
       ],
       "approved_at": null
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Behauptungen entschlüsseln\" is technically correct, it doesn't fully capture the nuance of 'Decrypt Assertions' in a technical context. 'Assertions' in this context likely refers to security tokens or statements, not just general claims. A more accurate translation would consider the context of Single Sign-On.",
-          "suggestion": "Consider alternatives like 'Sicherheitsanweisungen entschlüsseln' or 'Authentifizierungsdaten entschlüsseln' depending on the specific meaning of 'Assertions' in this context. If the context is well-defined as security tokens, 'Sicherheitstoken entschlüsseln' might also be suitable."
+          "description": "While \"Behauptungen entschlüsseln\" is technically correct, it's not the most natural or idiomatic translation for \"Decrypt Assertions\" in this context. 'Assertions' often refers to statements of fact, and 'decrypt' implies a technical process.  A better translation would convey the technical nature of the decryption.",
+          "suggestion": "An alternative translation could be \"Verschlüsselte Aussagen entschlüsseln\" or \"Aussagen entschlüsseln\" depending on the context's need for specifying the statements are encrypted."
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Pura väitteiden salaus\" is understandable, a more precise translation of \"Decrypt Assertions\" would be something along the lines of \"Puretaan väitteiden salaus\" or \"Salattujen väitteiden purkaminen\". \"Pura\" can sometimes imply a more forceful or incomplete action.",
-          "suggestion": "Puretaan väitteiden salaus"
+          "description": "While \"Pura väitteiden salaus\" is a literal translation, a more natural and technically accurate translation of 'Decrypt Assertions' in a Single Sign-On context might be 'Avaa väitteiden salaus' or 'Salauksen purkaminen väitteille'. 'Pura' can imply disassembling or taking apart, which isn't the intended meaning of decryption.",
+          "suggestion": "Avaa väitteiden salaus"
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"アサーションの復号化\" is technically correct, it's quite formal and potentially difficult for a non-technical user to understand. A more natural and user-friendly translation might be preferable depending on the target audience. \"アサーションの暗号解読\" or simply \"アサーションの復号\" could be considered.",
-          "suggestion": "Consider \"アサーションの暗号解読\" or \"アサーションの復号\" for improved readability and user-friendliness."
+          "description": "While \"アサーションの復号化\" is technically correct, it's a very literal and somewhat technical translation. A more natural and user-friendly translation might be preferred for a user interface.",
+          "suggestion": "Consider alternatives like \"アサーションの暗号解読\" or \"アサーションの復号\" depending on the context. \"復号\" is shorter and often preferred."
         }
       ],
       "approved_at": null
@@ -132,13 +132,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"해독 어설션\" is a literal translation of \"Decrypt Assertions\" but doesn't convey the intended meaning accurately in Korean. \"어설션\" (assertion) isn't commonly used or easily understood in this context.",
-          "suggestion": "A more appropriate translation would be something like \"암호 해독\" (amho haedok - cryptographic decryption) or \"인증 정보 복호화\" (injeung jeongbo bokhohwa - authentication information decryption), depending on the specific technical context."
+          "description": "The Korean translation \"해독 어설션\" is a literal translation of \"Decrypt Assertions\" but doesn't convey the intended meaning effectively in a technical context. \"어설션\" is an English loanword and may not be readily understood by all Korean speakers. It also lacks nuance.",
+          "suggestion": "Consider a more accurate and natural translation such as \"암호 해독\" (amho haedok - decryption) or \"인증 정보 해독\" (incheung jeongbo haedok - decryption of authentication information)."
         },
         {
           "type": "cultural",
-          "description": "Using the transliteration '어설션' (assertion) makes the text sound awkward and technical.  While understandable to some, it's not a natural phrasing in Korean in this context.",
-          "suggestion": "Avoid direct transliterations unless absolutely necessary for highly technical terms that don't have a good Korean equivalent."
+          "description": "Using the English loanword \"어설션\" without explanation or with a more contextually appropriate Korean term may alienate users unfamiliar with the English term. It's generally best to use clear, understandable Korean when possible.",
+          "suggestion": "Replace \"어설션\" with a more suitable Korean equivalent as suggested in the incorrect translation issue."
         }
       ],
       "approved_at": null
@@ -149,8 +149,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ຖອດລະຫັດການຢືນຢັນ\" is technically correct (decrypt assertion), it doesn't fully capture the nuance of 'Decrypt Assertions' in the context of Single Sign-On. It sounds overly technical and might be confusing for users. A more user-friendly translation would be beneficial.",
-          "suggestion": "Consider alternatives like \"ປົດລອກການຢັ້ງຢືນ\" (unlock assertion) or \"ດຶງຂໍ້ມູນການຢັ້ງຢືນ\" (retrieve assertion data) depending on the specific functionality."
+          "description": "The Lao translation \"ຖອດລະຫັດການຢືນຢັນ\" while technically correct (decrypting verification), doesn't fully capture the nuance of \"Decrypt Assertions\" in a technical context. \"Assertions\" often refers to statements made by a system, not strictly 'verifications'. A more accurate translation might consider this.",
+          "suggestion": "ຖອດລະຫັດຖະແຫຼ່ງຂໍ້ມູນ (Thot lahad thalaeng khomun)"
         }
       ],
       "approved_at": null
@@ -164,13 +164,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Ontsleutelen' technically means 'to decrypt', it's quite formal and technical. A more natural and common Dutch translation for 'Decrypt Assertions' in a user-facing context might be 'Versleutelingsbreuk' (decryption) or 'Ontcijferen' (decipher).",
-          "suggestion": "Consider 'Ontcijferen' or 'Versleutelingsbreuk' for a more natural feel."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -197,7 +191,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Decriptare' is a misspelling of 'Decriptare'.",
+          "description": "The Romanian word 'Decriptare' is a misspelling of 'Decriptare'.",
           "suggestion": "Decriptare"
         }
       ],
@@ -214,9 +208,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'ප්‍රකාශන විසංකේතනය' while technically correct (meaning 'statements decryption') doesn't fully capture the nuance of 'Assertions' in the context of Single Sign-On. 'Assertions' in this scenario refers to security tokens or declarations of authentication, rather than general statements.",
-          "suggestion": "Consider a more contextually accurate translation such as 'අනຸමැතියි ඔප්පු විසංකේතනය' (Anumathiyi oppu visankethanaya) which translates to 'Authorization Proof Decryption' or 'Authentication Token Decryption'. Alternatively, 'අනුමැති පත්‍ර විසංකේතනය' (Anumathi pathraya visankethanaya) which means 'Authorization Certificate Decryption'."
+          "type": "spelling",
+          "description": "The word 'ප්‍රකාශන' (Prakashana) is a valid word, but in this context, 'දත්ත ප්‍රකාශන' (Data Prakashana) might be more accurate, although 'ප්‍රකාශන' is understandable.",
+          "suggestion": "Consider 'දත්ත ප්‍රකාශන' for greater clarity, though 'ප්‍රකාශන' is acceptable."
         }
       ],
       "approved_at": null
@@ -236,7 +230,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Декрипција тврдњи\" is a literal translation of \"Decrypt Assertions\", \"Decrypt\" usually refers to cryptographic decryption. \"Assertations\" typically refers to claims or statements. A more accurate translation might convey the concept of processing or validating statements, not necessarily decryption in the cryptographic sense.  Without context, \"Декрипција тврдњи\" is misleading.",
+          "suggestion": "Consider a more context-aware translation like \"Обрада тврдњи\" (Processing Statements) or \"Валидација тврдњи\" (Validation of Statements), depending on the exact function being described."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -245,7 +245,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Assertions' is best translated as 'Izjava/e' in Serbian. 'Tvrdnje' carries a stronger connotation of claims or assertions, which isn't the intended meaning in this context. 'Izjava/e' is more neutral and accurate.",
+          "description": "The English term 'Assertions' is best translated as 'Izjava/e' in Serbian (Latin). 'Tvrdnje' implies a claim or statement of fact, which isn't precisely what 'Assertions' refers to in this context (likely security tokens or statements).",
           "suggestion": "Izjava/e"
         }
       ],
@@ -257,8 +257,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Bildirimlerde Kripto Çöz\" is technically correct, it's not the most natural or idiomatic translation of \"Decrypt Assertions.\" It sounds somewhat literal and clunky.",
-          "suggestion": "Consider alternatives like \"Bildirimleri Şifre Çöz\" or \"Bildirimleri Çözümle\" for a more fluent translation.  \"Bildirim Şifrelemesi'ni Geri Çöz\" is also possible, though slightly more verbose."
+          "description": "The Turkish translation \"Bildirimlerde Kripto Çöz\" while technically meaning 'Decrypt in Assertions', doesn't fully capture the nuance of 'Decrypt Assertions'. It sounds a bit literal and awkward. A more natural translation would consider the context of a Single Sign-On system.",
+          "suggestion": "Consider 'İfade Şifresini Çöz' or 'İfadeyi Şifre Çözme' which are more common and natural ways to express decrypting assertions in a technical context."
         }
       ],
       "approved_at": null
@@ -272,13 +272,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Giải mã xác nhận\" is technically correct, it might sound a bit clunky in Vietnamese. \"Xác nhận\" refers to assertions/affirmations. \"Giải mã\" is correct for decrypt, but a more natural translation might be \"Giải mã tuyên bố\" or \"Giải mã lời khai\" depending on the precise context.",
-          "suggestion": "Consider alternatives like \"Giải mã tuyên bố\" or \"Giải mã lời khai\" for a more natural-sounding translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -287,8 +281,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '解密' (jiemi) translates to 'decrypt', '断言' (duanyan) translates to 'assertion' or 'statement'. The English 'Assertions' refers to claims or declarations, not just statements in a purely logical sense. '解密断言' implies decrypting an assertion, which is not the intended meaning. A more accurate translation would capture the general meaning of 'Claims' or 'Declarations'.",
-          "suggestion": "解密声明 (jiemi shengming) - Decrypt Claims or 解密申明 (jiemi shenming) - Decrypt Declarations"
+          "description": "'断言' (duàn yán) while literally translates to 'assertion', it doesn't convey the meaning of 'decrypt assertions' in the context of SingleSignOn. A more appropriate translation would capture the process of decryption, not just the noun 'assertion'.",
+          "suggestion": "解密声明 (jiě mì shēngmíng) - 'Decrypt Statements' or 解密认证信息 (jiě mì rènzhèng xìnxī) - 'Decrypt Authentication Information'"
         }
       ],
       "approved_at": null

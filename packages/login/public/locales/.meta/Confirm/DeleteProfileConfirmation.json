@@ -3,7 +3,7 @@
   "content": "Attention! You are about to disable your account.",
   "content_en_sha1_hash": "cf6022cb690fff733a9eba621fab246a7b9af3ac",
   "created_at": "2025-05-19T21:30:57.346Z",
-  "updated_at": "2025-05-20T09:47:30.471Z",
+  "updated_at": "2025-05-24T15:34:26.520Z",
   "comment": {
     "text": "This translation key is used to display a warning message when confirming account deletion, alerting users of the implications of disabling their account. It appears in the UI as part of a confirmation dialog or button.",
     "is_auto": true,
@@ -27,121 +27,251 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'disable your account' has been translated as 'delete your account' ('حذف حسابك'). 'Disable' implies temporary deactivation, while 'delete' suggests permanent removal. This could be a significant difference in user understanding.",
+          "suggestion": "Consider translating 'disable your account' as 'تعطيل حسابك' (ta'til hisaabak) which means 'deactivate your account'."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content states \"You are about to disable your account,\" while the Azerbaijani translation \"Hesabınızı silmək üzrəsiniz\" translates to \"You are about to delete your account.\" Disabling and deleting are not the same thing.",
+          "suggestion": "Diqqət! Hesabınızı deaktiv etmək üzrəsiniz."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content states the account will be 'disabled,' while the Bulgarian translation uses 'изтриете' which means 'delete'. These are not equivalent actions.",
+          "suggestion": "Consider using a translation closer to 'deактивирате' (deactivate) to match the intended meaning of 'disable'."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'disable your account' translates more accurately as 'delete your account' rather than 'smazat svůj účet', which literally means 'erase your account'. While deletion implies removal, 'disable' is closer in meaning to temporary deactivation which isn't reflected in the translation.",
+          "suggestion": "Pozor! Chystáte se zrušit svůj účet."
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation 'Dies wird Ihr Konto löschen' translates to 'This will delete your account'. The original English says the account is being 'disabled', not deleted.  'Löschen' implies permanent deletion, while 'deaktivieren' would be more accurate for 'disable'.",
+          "suggestion": "Achtung! Dies wird Ihr Konto deaktivieren."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'disable your account' is better translated as 'delete your account' to match the intent of the key name 'Confirm:DeleteProfileConfirmation'. The Greek translation uses 'διαγράψετε' which means 'delete'.",
+          "suggestion": "Προσοχή! Πρόκειται να διαγράψετε τον λογαριασμό σας."
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'disable your account' is translated as 'eliminar su cuenta' (delete your account) in Spanish. 'Disable' implies a temporary action, while 'delete' is permanent. A more accurate translation would convey the meaning of deactivating or suspending the account.",
+          "suggestion": "¡Atención! Usted va a desactivar su cuenta."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content states 'disable your account,' while the Finnish translation 'Olet poistamassa tilisi' translates to 'You are deleting your account.' 'Disable' implies a temporary action, while 'delete' is permanent. This is a significant difference in meaning.",
+          "suggestion": "Huomio! Olet poistamassa tilisi käytöstä."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text refers to 'disabling' an account, while the French translation says 'supprimer' (to delete). These are not synonymous; disabling implies a temporary state, while deleting is permanent. The translation misrepresents the original meaning.",
+          "suggestion": "Attention ! Vous êtes sur le point de désactiver votre compte."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content states the account is being 'disabled', while the Armenian translation uses ' ջնջել' (djnjel) which means 'delete'. This is a significant difference in meaning.",
+          "suggestion": "Consider using a term in Armenian that more accurately reflects 'disable' or 'deactivate,' such as 'անվերաշխարհացնել' (anverashxarhacnel) or 'չեղծել' (cheglcel)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content indicates disabling the account, while the Italian translation says 'eliminare' (delete). These are not equivalent actions. Disabling is temporary, while deleting is permanent.",
+          "suggestion": "Attenzione! Stai per disabilitare il tuo account."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'disable your account' translates more accurately to 'アカウントを無効にします' or 'アカウントを停止します' rather than 'アカウントを削除しようとしています' which translates to 'you are trying to delete your account'.  While deletion implies disablement, it's a stronger term and could be misleading.",
+          "suggestion": "アカウントを無効にします"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '고객님께서는 계정을 삭제하려고 하십니다' implies the user is attempting to *delete* the account, while the English says the account is being *disabled*. '삭제' means 'delete' and '비활성화' would be more accurate for 'disable'.",
+          "suggestion": "주목해주세요! 고객님께서는 계정을 비활성화하려고 하십니다."
+        },
+        {
+          "type": "cultural",
+          "description": "While '주목해주세요!' is a valid translation for 'Attention!', it might sound overly formal or abrupt in a typical user experience. A softer approach might be preferred.",
+          "suggestion": "알려주세요! 고객님께서는 계정을 비활성화하려고 하십니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຮຽນທ່ານ!ກ່ຽວກັບການລຶບບັນຊີຂອງທ່ານ' does not accurately convey the meaning of 'Attention! You are about to disable your account.' It translates to something like 'Dear you! About deleting your account.' which is not equivalent.",
+          "suggestion": "A more accurate translation would be something like 'ຂໍແນະນໍາ! ທ່ານກໍາລັງຈະປິດບັນຊີຂອງທ່ານ' (Kho naenam! Thann kamlang cha pit banchee khong thoun) or 'ລະວັງ! ທ່ານຈະປິດບັນຊີຂອງທ່ານ' (Rawang! Thann cha pit banchee khong thoun)."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content states 'disable your account', while the Latvian translation says 'delete your account'. These are not equivalent. Disabling implies a temporary action, while deleting implies permanent removal.",
+          "suggestion": "Consider a translation that more accurately reflects 'disable', such as 'Jūs gatavojaties atspējot savu kontu.'"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'disable your account' implies temporarily suspending access. The Dutch translation 'verwijderen' means 'to delete'. This implies permanent account deletion, which might be a stronger action than intended. A more accurate translation for 'disable' might be 'uitschakelen' or 'deactiveren'.",
+          "suggestion": "Consider using 'Let op! U staat op het punt uw account uit te schakelen.' or 'Let op! U staat op het punt uw account te deactiveren.'"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content uses 'disable' while the Polish translation uses 'usunąć' (delete). 'Disable' is a less permanent action than 'delete'.",
+          "suggestion": "Consider 'Uwaga! Zamierzasz dezaktywować swoje konto.' (Attention! You are about to deactivate your account.) or 'Uwaga! Zamierzasz wyłączyć swoje konto.' (Attention! You are about to turn off your account.)"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'disable your account' has a stronger connotation than the Portuguese 'eliminar a sua conta'. 'Eliminar' implies complete deletion, whereas 'disable' suggests a temporary state. 'Desativar a sua conta' would be a closer translation.",
+          "suggestion": "Atenção! Está prestes a desativar a sua conta."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'disable your account' implies temporarily suspending access, whereas the Portuguese translation 'apagar sua conta' means 'delete your account'. This represents a significant difference in meaning.",
+          "suggestion": "Consider translating 'disable your account' to something closer in meaning to its English counterpart, such as 'desativar sua conta' or 'suspender sua conta'."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Dumneavoastră sunteți pe cale de a șterge contul dvs.' is not an accurate translation of 'You are about to disable your account.'. It literally translates to 'You are about to delete your account'. 'Disable' implies a temporary action, whereas 'șterge' (delete) implies a permanent one. The word 'disable' should be conveyed more accurately.",
+          "suggestion": "Atenție! Dumneavoastră sunteți pe cale de a dezactiva contul dvs."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of 'Dumneavoastră' is overly formal and might not be the most appropriate for a user interface. While grammatically correct, it makes the message sound stiff.",
+          "suggestion": "Atenție! Ești pe cale de a dezactiva contul tău."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,55 +283,109 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'You are about to disable your account' is translated as 'You are preparing to delete your account'. While deletion and disabling are related, 'disable' has a more specific meaning in this context.  ' මැකීමට සැරසෙමින් සිටියි' (preparing to delete) implies a complete and irreversible action. Disabling suggests a temporary suspension or a state that can be reversed.",
+          "suggestion": "අවධානය! ඔබගේ ගිණුම අක්‍රිය කිරීමට සැරසෙමින් සිටියි. (Attention! You are preparing to deactivate your account.)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'disable your account' is more accurately translated as 'delete your account' to maintain the intended meaning of permanent account removal. 'Zmazať' implies deletion, whereas the English 'disable' could suggest a temporary state.",
+          "suggestion": "Pozor! Idete si zrušiť účet."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content states 'disable your account', while the Slovenian translation 'Izbrisali boste svoj račun' translates to 'You will delete your account'. 'Disable' and 'delete' are not synonymous in this context. 'Disable' implies temporarily suspending functionality, whereas 'delete' implies permanent removal.",
+          "suggestion": "Consider a more accurate translation like 'Pozor! Onemogočili boste svoj račun.' which translates to 'Attention! You will disable your account.'"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content indicates disabling an account, while the Serbian translation indicates deleting an account. These are different actions with potentially significant differences in user experience.",
+          "suggestion": "Consider translating 'disable' more accurately, perhaps as 'онедачавање' (онедачавање) or 'затварање' (zatvaranje) to reflect the intended action of disabling rather than deleting."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"disable your account\" is translated as \"obrišete svoj nalog\" which means \"delete your account\". While the concepts are related, 'disable' implies a temporary action, whereas 'delete' is permanent. This misrepresents the original meaning.",
+          "suggestion": "Pažnja! Spremate se da isključite svoj nalog."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'disable your account' is translated as 'silmek üzeresiniz' which means 'about to delete'. 'Disable' implies a temporary state, while 'silmek' implies permanent deletion. This might lead to user confusion.",
+          "suggestion": "Consider a more accurate translation like 'Hesabınızı devre dışı bırakmak üzeresiniz' (about to deactivate) or 'Hesabınızı kapatmak üzeresiniz' (about to close)."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content states \"disable your account,\" while the Ukrainian translation uses \"delete your account.\" These are not synonymous. Disabling typically implies a temporary action, while deleting is permanent. The translation doesn't accurately reflect the original meaning.",
+          "suggestion": "Увага! Ви збираєтеся деактивувати свій обліковий запис."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content states 'disable', but the Vietnamese translation uses 'xóa' which means 'delete'. 'Disable' implies a temporary state, while 'delete' implies permanent removal. This misrepresents the intended meaning.",
+          "suggestion": "Chú ý! Bạn sắp vô hiệu hóa tài khoản của mình."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content states 'disable your account', while the Chinese translation says 'delete account'. 'Disable' and 'delete' have different connotations and impacts. Disabling suggests a temporary state, whereas deleting implies permanent removal.",
+          "suggestion": "注意！您即将禁用账户。"
+        }
+      ],
       "approved_at": null
     }
   }

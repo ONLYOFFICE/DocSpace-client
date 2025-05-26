@@ -3,7 +3,7 @@
   "content": "Connection Type",
   "content_en_sha1_hash": "1d86d4c525b2780f86aa92b4d0a80e3b7d211f2f",
   "created_at": "2025-05-19T21:30:54.183Z",
-  "updated_at": "2025-05-21T08:26:12.146Z",
+  "updated_at": "2025-05-24T08:38:42.497Z",
   "comment": {
     "text": "The \"LdapConnectionType\" translation key describes a heading label that identifies the connection type of an LDAP integration, appearing as a checkbox option in a settings portal. It provides context for users to understand the different connection types available.",
     "is_auto": true,
@@ -132,7 +132,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Tipo de Ligação' is technically correct, it's not the most natural or commonly used translation for 'Connection Type' in the context of LDAP configuration. A more common and idiomatic translation would be 'Tipo de Conexão'.",
+          "description": "While 'Tipo de Ligação' is understandable, a more standard and accurate translation of 'Connection Type' in a technical context (like LDAP configuration) would be 'Tipo de Conexão'. 'Ligação' can imply a physical connection, whereas 'conexão' is more general and suitable for network connections.",
           "suggestion": "Tipo de Conexão"
         }
       ],
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Тип везе' is a literal translation of 'Connection Type' but doesn't quite convey the intended meaning in a technical context. 'Veza' means 'connection' in general. A more accurate translation that implies a specific configuration would be better.",
-          "suggestion": "Тип везе са сервером"
+          "description": "The Serbian (Cyrillic) translation \"Тип везе\" is not the most accurate translation of \"Connection Type.\" While \"веза\" (veza) does mean 'connection,' \"Тип везе\" literally translates to 'Type of Connection' and is a bit clunky. A more natural translation would be something like \"Тип повезивања\" or \"Врста везе\".",
+          "suggestion": "Consider \"Тип повезивања\" or \"Врста везе\" for a more natural and accurate translation."
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Tip veze\" is understandable, it's not the most natural or accurate translation of \"Connection Type\" in a technical context like LDAP configuration. \"Tip veze\" literally means \"Tip of connection\" which isn't what's intended.",
-          "suggestion": "Consider \"Tip povezivanja\" or \"Tip konekcije\" for a more precise translation."
+          "description": "While \"Tip veze\" is understandable, it's not the most natural or accurate translation of \"Connection Type\" in the context of LDAP configuration. \"Tip veze\" literally translates to \"Connection Tip,\" which doesn't convey the intended meaning. A more accurate and idiomatic translation would be \"Tip spajanja\" or \"Vrsta veze\".",
+          "suggestion": "Tip spajanja or Vrsta veze"
         }
       ],
       "approved_at": null

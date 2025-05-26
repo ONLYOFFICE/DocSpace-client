@@ -3,7 +3,7 @@
   "content": "Trash",
   "content_en_sha1_hash": "e3bf62bb7f5af7ba291b2df1a11d573bdb55d7e9",
   "created_at": "2025-05-19T21:30:49.325Z",
-  "updated_at": "2025-05-22T11:56:37.394Z",
+  "updated_at": "2025-05-26T07:57:32.300Z",
   "comment": {
     "text": "This translation key is used to display \"Trash\" as a label for a section in the file system and in a delete profile dialog. It appears in an empty view container and a body component of a delete profile ever dialog, providing context for users navigating file systems or managing profiles.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\DeleteProfileEverDialog\\sub-components\\BodyComponent.tsx",
+      "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
       "line_number": 61,
       "context": "onlyOneUser,\n onlyGuests,\n }: BodyComponentProps) => {\n const warningMessageMyDocuments = t(\"UserFilesRemovalScope\", {\n sectionNameFirst: t(\"Common:MyFilesSection\"),\n sectionNameSecond: t(\"Common:TrashSection\"),\n });\n \n const warningMessageReassign = onlyGuests ? (\n t(\"DeleteReqassignDescriptionGuest\", {\n userCaption: onlyOneUser",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\DeleteProfileEverDialog\\sub-components\\BodyComponent.tsx",
+      "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
       "line_number": 61,
       "context": "onlyOneUser,\n onlyGuests,\n }: BodyComponentProps) => {\n const warningMessageMyDocuments = t(\"UserFilesRemovalScope\", {\n sectionNameFirst: t(\"Common:MyFilesSection\"),\n sectionNameSecond: t(\"Common:TrashSection\"),\n });\n \n const warningMessageReassign = onlyGuests ? (\n t(\"DeleteReqassignDescriptionGuest\", {\n userCaption: onlyOneUser",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Greek translation 'Κάδος απορριμάτων' translates to 'Waste Bin' or 'Trash Can'. While acceptable, it's more literal than the concise English term 'Trash'. A more natural and equivalent translation, depending on context, could be something like 'Σκουπίδια'.",
-          "suggestion": "Consider 'Σκουπίδια' for a more natural equivalent, or retain 'Κάδος απορριμάτων' if a more literal translation is required."
+          "description": "The Greek translation \"Κάδος απορριμάτων\" translates to \"Trash Bin\" or \"Waste Container\", which is a more descriptive phrase than the simple English word \"Trash\". While not *incorrect*, it's significantly more verbose and may not be the best choice for a key like 'Common:TrashSection'.",
+          "suggestion": "Consider a more direct translation like \"Σκουπίδια\" (Skoupídia) which means 'Trash'."
         }
       ],
       "approved_at": null
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Papelera de reciclaje' is a literal translation, it's overly verbose and doesn't convey the simple meaning of 'Trash'. It implies a recycling bin, not just a trash receptacle.",
-          "suggestion": "Consider more concise and common translations such as 'Basura', 'Residuos', or 'Vertedero'."
+          "description": "The translation \"Papelera de reciclaje\" (recycling bin) is not an accurate translation of \"Trash.\" \"Trash\" refers to general waste, not specifically recyclable materials.",
+          "suggestion": "Consider a more general term for trash, such as \"Basura\" or \"Residuos\"."
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation \"ごみ箱\" (gomibako) means \"trash can\" or \"garbage box\", not simply \"trash\". While related, it's not a direct translation of \"Trash\".",
-          "suggestion": "Consider a more direct translation such as \"ゴミ\" (gomi) which means 'trash' or 'garbage'."
+          "description": "While 'ごみ箱' (gomibako) literally translates to 'trash box' or 'garbage bin', simply 'Trash' is often translated more directly as 'ゴミ' (gomi) in Japanese, especially in UI elements or labels.",
+          "suggestion": "Consider using 'ゴミ' (gomi) for a more direct and potentially more appropriate translation in this context."
         }
       ],
       "approved_at": null
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Akritne\" does not accurately convey the meaning of \"Trash.\" \"Akritne\" translates to \"ashes\" or \"cinders.\" A more appropriate translation for \"Trash\" would be \"Atkritumi\".",
-          "suggestion": "Atkritumi"
+          "description": "The Latvian translation \"Akritne\" is not the most accurate or common translation of \"Trash\". While \"akrits\" (masculine form) can mean waste or debris, \"akritne\" (feminine form) is less frequently used in this context and may not be easily understood by Latvian speakers. A more suitable translation might be \"Atkritumi\".",
+          "suggestion": "Consider using \"Atkritumi\" instead of \"Akritne\"."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Recycle Bin\" is a functional equivalent, \"Trash\" more accurately represents the English term. \"Recycle Bin\" implies a container for recyclable materials, whereas \"Trash\" refers to general waste.",
-          "suggestion": "Gunoi"
+          "description": "The Romanian translation \"Recycle Bin\" doesn't perfectly capture the meaning of \"Trash\". While a recycle bin holds items for potential reuse, \"Trash\" refers to items discarded as waste.",
+          "suggestion": "Consider \"Gunoi\" or \"Deșeuri\" for a more accurate translation of 'Trash'."
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කුණුකූඩයට' (kunu koodaya) literally translates to 'to the trash bin'. While 'Trash' refers to the concept of refuse or waste, not necessarily a bin. A more accurate translation would depend on the context, but 'ගබර' (gabara) or 'දුල්ල' (dulla) might be more suitable in many situations. 'කුණු' (kunu) is often used, but 'කුණුකූඩයට' is overly specific.",
-          "suggestion": "Consider 'ගබර' (gabara) or 'දුල්ල' (dulla) or 'කුණු' (kunu) depending on the specific context. If referring directly to a trash receptacle, 'කුණුකූඩය' (kunu koodaya) is more precise than 'කුණුකූඩයට'."
+          "description": "The translation 'කුණුකූඩයට' (kunukudayata) literally translates to 'to the garbage bin'. While conceptually related, 'Trash' is better translated to a more general term for 'garbage' or 'rubbish'.",
+          "suggestion": "Consider alternatives like 'ගබරැදු' (gabaradu), 'රකා' (raka), or 'කසදාහය' (kasadahaya)."
         }
       ],
       "approved_at": null
@@ -234,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Кошик\" (Koshik) directly translates to \"Basket\", while the English term \"Trash\" refers to a waste container or the act of discarding something. \"Кошик\" doesn't fully capture the intended meaning.",
-          "suggestion": "Consider alternatives like \"Смітник\" (Smittnyk - garbage can) or \"Відходи\" (Vidkhody - waste) to better reflect the meaning of \"Trash\"."
+          "description": "While 'Кошик' can mean 'basket,' in the context of a website or application section labeled 'Trash,' a more accurate translation would be 'Сміття' (Smittya) or 'Відходи' (Vidkhody). 'Кошик' implies a container, not the concept of discarded items.",
+          "suggestion": "Сміття"
         }
       ],
       "approved_at": null
@@ -246,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Thùng rác\" translates to 'Trash Can', the English content is simply \"Trash\".  'Thùng rác' is a more specific term than the English word.",
-          "suggestion": "Consider a more direct translation like \"Rác\" or \"Vật bỏ đi\" to better match the simplicity of the English term."
+          "description": "While \"Thùng rác\" is a literal translation of \"Trash\", it specifically refers to a 'Trash Can' or 'Waste Bin'. \"Trash\" in English can also refer to unwanted or discarded items in general, not just the container they are in. A more general translation, or context-dependent translation may be more appropriate.",
+          "suggestion": "Consider alternatives like 'Rác thải' (waste) or 'Vật bỏ đi' (discarded items) depending on the intended meaning within the application."
         }
       ],
       "approved_at": null
@@ -258,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '回收站' (Huíshōu zhàn) typically refers to a recycling center, not a trash can or trash section. While recycling is a form of waste management, it's not a direct equivalent of 'Trash'.",
-          "suggestion": "Consider '垃圾' (Lājī) for 'Trash' which directly translates to garbage or waste. Alternatively, '垃圾桶' (Lājī tǒng) could be used if referring to a trash can."
+          "description": "The translation '回收站' (Huíshou zhàn) generally means 'recycling center' or 'recycling bin,' not 'Trash'. While recycling often involves trash, the terms are not directly equivalent.",
+          "suggestion": "Consider a more direct translation of 'Trash' like '垃圾' (Lājī) or '废弃物' (Fèiqìwù)."
         }
       ],
       "approved_at": null

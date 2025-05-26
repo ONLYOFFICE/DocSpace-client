@@ -3,7 +3,7 @@
   "content": "Head of group",
   "content_en_sha1_hash": "b90a369c4ac1fd6c6e346e3e7ad26070e42c2ccc",
   "created_at": "2025-05-19T21:30:45.746Z",
-  "updated_at": "2025-05-22T11:56:37.358Z",
+  "updated_at": "2025-05-26T07:57:32.252Z",
   "comment": {
     "text": "The translation key \"HeadOfGroup\" is used to display the English content \"Head of group\". It appears in a header component within a dialogue window, indicating who the user is managing groups. Translators should provide an equivalent phrase that accurately conveys this meaning in their respective language.",
     "is_auto": true,
@@ -11,28 +11,28 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\CreateEditGroupDialog\\sub-components\\HeadOfGroupParam\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/sub-components/HeadOfGroupParam/index.tsx",
       "line_number": 51,
       "context": "}: HeadOfGroupProps) => {\n const { t } = useTranslation([\"Common\"]);\n \n return (\n <div>\n <Styled.Header>{t(\"Common:HeadOfGroup\")}</Styled.Header>\n \n {!groupManager ? (\n <Styled.SelectGroupManager onClick={onShowSelectGroupManagerPanel}>\n <SelectorAddButton\n iconName={PlusSvgUrl}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\Groups\\GroupMember.js",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Groups/GroupMember.js",
       "line_number": 93,
       "context": "</div>\n </div>\n \n <div className=\"context-btn-wrapper\">\n {isManager ? (\n <div className=\"group-manager-tag\">{t(\"Common:HeadOfGroup\")}</div>\n ) : null}\n \n {/* {!groupMember.isLDAP && (\n <div className=\"context-btn\" ref={iconRef}>\n <ContextMenuButton",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Filter\\useContacts.tsx",
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
       "line_number": 471,
       "context": "label,\n selectedLabel: \"\",\n };\n \n if (groupsFilter.searchByManager) {\n memberFilterValue.selectedLabel = `${t(\"Common:HeadOfGroup\")}: ${label}`;\n }\n \n filterValues.push(memberFilterValue);\n }",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Filter\\useContacts.tsx",
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
       "line_number": 471,
       "context": "label,\n selectedLabel: \"\",\n };\n \n if (groupsFilter.searchByManager) {\n memberFilterValue.selectedLabel = `${t(\"Common:HeadOfGroup\")}: ${label}`;\n }\n \n filterValues.push(memberFilterValue);\n }",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -111,7 +111,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation 'グループ代表' (group daihyo) translates to 'group representative' or 'group leader', not directly 'Head of group'. While close in meaning, it lacks the nuance of 'Head'.",
+          "suggestion": "Consider 'グループ長' (group chou) which more closely aligns with 'Head of group' signifying the person in charge."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -192,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Лидер групе' is a literal translation of 'Leader group'. 'Head of group' implies a leadership role, which isn't fully conveyed. A more accurate translation would emphasize the leadership aspect.",
-          "suggestion": "Вођа групе"
+          "description": "The translation \"Лидер групе\" while containing the correct concepts, is not the most natural or idiomatic translation of \"Head of group\" in Serbian. \"Лидер групе\" implies the leader *of* a group, but doesn't perfectly capture the directness of 'Head of group'. A more accurate translation would consider alternatives.",
+          "suggestion": "Consider alternatives like \"Вођа групе\" or \"Начелник групе\" depending on the specific context and desired formality."
         }
       ],
       "approved_at": null
@@ -204,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Lider grupe\" is understandable, a more accurate and natural Serbian translation of \"Head of group\" would be \"Predsednik grupe\" or \"Vođa grupe\". \"Lider grupe\" is a loanword and while increasingly common, it's not the most precise or preferred translation in all contexts.",
-          "suggestion": "Predsednik grupe"
+          "description": "While 'Lider grupe' is understandable, a more accurate and idiomatic translation of 'Head of group' in Serbian (Latin) would be 'Vođa grupe'. 'Lider' is a loanword and might not be the most natural choice.",
+          "suggestion": "Vođa grupe"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Send your request to our support team, and our specialists will help you with the settings.",
   "content_en_sha1_hash": "0e740861bfbbd6e22357a4b0271cb635490e5af2",
   "created_at": "2025-05-19T21:30:51.235Z",
-  "updated_at": "2025-05-21T04:28:41.712Z",
+  "updated_at": "2025-05-24T05:13:37.607Z",
   "comment": {
     "text": "This translation key is used for a message displayed when sending a request for DNS settings support, guiding users to contact specialists for assistance. It appears in the Portal Settings page on a mobile device and is intended to inform users about the next steps to resolve their issue.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Send your request\" is translated as \"أرسل طلبك\" which is generally correct, but a more natural and user-friendly phrasing in this context might be \"قم بإرسال طلبك\" (Qum bi irsal talabak) - 'Please send your request'.",
-          "suggestion": "قم بإرسال طلبك إلى فريق الدعم لدينا"
+          "description": "The phrase \"Send your request\" can be more naturally translated as \"قدم طلبك\" (Qaddim talabak) or \"أرسل طلبك\" (Arsal talabak) to convey a more natural flow in Arabic.",
+          "suggestion": "أرسل طلبك إلى فريق الدعم لدينا ، وسيساعدك المتخصصون لدينا في الإعدادات."
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'settings' (DNSSettingsMobile) is translated as 'parametrler'. While 'parametrler' can mean parameters or settings, it's not the most natural or direct translation of 'settings' in this context. A more accurate translation would be 'parametrleri' or 'qurğulama'.",
-          "suggestion": "Sorğunuzu dəstək komandamıza göndərin və mütəxəssislərimiz sizə parametrleri/qurğulama kömək edəcəklər."
+          "description": "The English phrase 'settings' is translated as 'parametrler'. While technically correct, 'parametrler' is a more formal and less common term for 'settings' in this context. A more natural translation might be 'parametrlər' or 'ayarlar'.",
+          "suggestion": "Consider using 'parametrlər' or 'ayarlar' for a more natural flow."
         }
       ],
       "approved_at": null
@@ -51,13 +51,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'support team' is translated as 'екип за обслужване на клиенти'. While accurate, a more direct translation of 'support team' could be 'екип за поддръжка', which may sound more natural in this context. 'Обслужване на клиенти' implies a broader scope of customer service, not just technical support.",
-          "suggestion": "Consider translating 'support team' as 'екип за поддръжка'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -90,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"with the settings\" in the English content implies assistance *regarding* the settings, not necessarily *with* the settings themselves. While \"asetusten kanssa\" is grammatically correct, it's not the most natural translation for this context.",
-          "suggestion": "Lähetä pyyntösi tukitiimillemme ja asiantuntijamme auttavat sinua asetuksissa."
+          "description": "The phrase 'with the settings' ('asetusten kanssa') is not the most natural or accurate translation of 'with the settings' in this context. It implies the specialists are helping *regarding* the settings, rather than *configuring* them.",
+          "suggestion": "Lähetä pyyntösi tukitiimillemme ja asiantuntijamme auttavat sinua asetusten kanssa tai asioiden kanssa."
         }
       ],
       "approved_at": null
@@ -102,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'help you with the settings' is not accurately reflected by 'vous aideront à définir les paramètres'. While 'aider' is correct, 'définir les paramètres' implies setting up the parameters which isn't precisely what the English implies (assistance with existing settings). A more accurate translation would focus on assisting with the settings.",
-          "suggestion": "Envoyez votre demande à notre équipe de support et nos spécialistes vous aideront avec les paramètres."
+          "description": "The English phrase 'help you with the settings' is better translated as 'configurer les paramètres' or 'paramétrer les paramètres' rather than 'définir les paramètres' to be more precise regarding settings configuration.",
+          "suggestion": "Envoyez votre demande à notre équipe de support et nos spécialistes vous aideront à configurer les paramètres."
         }
       ],
       "approved_at": null
@@ -114,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"կարգավորումներում\" (kargavorumnerum) implies 'in settings' rather than 'with settings'. A more accurate translation would reflect helping *with* the settings, not just being *in* them.",
-          "suggestion": "Ուղարկեք ձեր հարցումը մեր աջակցման թիմին, և մեր մասնագետները կօգնեն ձեզ կարգավորումների հետ:"
+          "description": "The phrase \"settings\" is translated as \"կարգավորումներում\" which literally translates to \"in settings\" and implies a location. A more accurate translation would be \"կարգավորումների հետ կապված\" (related to settings) or simply \"կարգավորումներում օգնելու համար\" (to help with settings).",
+          "suggestion": "Ուղարկեք ձեր հարցումը մեր աջակցման թիմին, և մեր մասնագետները կօգնեն ձեզ կարգավորումների հետ կապված:"
         }
       ],
       "approved_at": null
@@ -129,7 +123,18 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Send your request to our support team\" is translated as \"弊社サポートチームまでご連絡いただければ\". While technically correct, it's a bit formal for a user-facing setting. A more natural phrasing would be something like \"サポートチームにご連絡ください\" (Support team, please contact).",
+          "suggestion": "サポートチームにご連絡ください"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"our specialists will help you with the settings\" is translated as \"専門スタッフが設定をお手伝いさせていただきます\". The verb \"お手伝いさせていただきます\" (ote tsudai sasete itadakimasu) is extremely polite and sounds overly formal for this context. A more appropriate phrasing might be \"設定についてサポートいたします\" (setting ni tsuite support itashimasu) or simply \"設定をサポートします\" (setting o support shimasu).",
+          "suggestion": "設定をサポートします"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -138,13 +143,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Send your request' is not accurately conveyed. '요청을 보내면' (yo cheong eul boe myeon) literally translates to 'if you send a request'. A more accurate translation would imply a proactive offering of help.",
-          "suggestion": "지원팀에 문의하시면 저희측 전문가가 설정을 도와드리겠습니다."
+          "description": "The English phrase 'Send your request to our support team' is translated as '지원팀에 요청을 보내면'. While technically correct, a more natural and common phrasing in Korean would be '지원팀으로 문의하시면'. The current translation feels slightly stiff and less conversational.",
+          "suggestion": "지원팀으로 문의하시면"
         },
         {
-          "type": "formatting",
-          "description": "While not a critical error, '저희측 전문가' sounds slightly formal and could be simplified. The phrase can be shortened while retaining the meaning.",
-          "suggestion": "저희 전문가가"
+          "type": "incorrect_translation",
+          "description": "The English phrase 'our specialists will help you with the settings' is translated as '저희측 전문가가 설정을 도와드릴 것입니다'. While accurate, a more natural phrasing for a support context would be '저희 전문가들이 설정을 도와드리겠습니다'. The addition of '드리겠습니다' makes it more polite and professional, common in Korean customer service.",
+          "suggestion": "저희 전문가들이 설정을 도와드리겠습니다"
         }
       ],
       "approved_at": null
@@ -152,13 +157,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ຕັ້ງຄ່າ' (settings) is correctly spelled, but should be consistent with the English term 'settings'.",
-          "suggestion": "Consider if 'ການຕັ້ງຄ່າ' (the setting) might be more appropriate depending on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -179,7 +178,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"settings\" is translated as \"konfiguracji\" in Polish. While \"konfiguracja\" can mean settings, it implies a more technical configuration. \"Ustawienia\" would be a more direct and natural translation of \"settings\" in this context.",
+          "description": "The English phrase \"settings\" is translated as \"konfiguracji\". While \"konfiguracja\" can mean configuration, in this context, \"ustawienia\" would be a more accurate translation of \"settings\". \"Konfiguracja\" implies a broader configuration process, while \"ustawienia\" specifically refers to settings.",
           "suggestion": "Wyślij prośbę do naszego zespołu obsługi klienta, a nasi specjaliści pomogą Ci w ustawieniach."
         }
       ],
@@ -191,13 +190,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'equipa de apoio ao cliente' is a bit verbose and not a direct translation of 'support team.' A more concise and natural translation would be 'equipa de suporte'.",
-          "suggestion": "Equipa de suporte"
+          "description": "The term 'Settings:DNSSettingsMobile' implies mobile device DNS settings. The translation 'configurações' is a generic term for settings. While not strictly incorrect, it loses some specificity.",
+          "suggestion": "Consider a more specific translation like 'configurações de DNS móvel' or 'configurações de rede móvel' to align with the key name."
         },
         {
           "type": "incorrect_translation",
-          "description": "While '(a)' is grammatically correct for gender neutrality, it can appear slightly awkward. Depending on the brand voice, removing it might read more naturally.",
-          "suggestion": "Envie o seu pedido para a nossa equipa de apoio ao cliente, e os nossos especialistas vão ajudá-lo com as configurações."
+          "description": "While 'apoio ao cliente' is a valid translation of 'support team,' a more direct translation of 'support' might be 'suporte'.",
+          "suggestion": "Replace 'apoio ao cliente' with 'suporte'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of '(a)' in 'ajudá-lo(a)' is a gender-inclusive construction, which is increasingly common but might feel overly formal or awkward depending on the target audience and brand voice. It’s generally accepted but should be a deliberate choice.",
+          "suggestion": "Consider if a gender-neutral option like 'ajudá-lo' would be more suitable, or simply use a more conversational tone."
         }
       ],
       "approved_at": null
@@ -214,13 +218,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'care este gata să vă ajute cu setarea' is slightly awkward. 'Setarea' is singular and implies one setting. The English refers to 'the settings' implying multiple settings.",
+          "description": "The translation of 'settings' is not accurate. 'Setarea' translates to 'the setting' or 'the configuration', but the English refers to 'settings' in plural form. A more accurate translation would be 'setărilor'.",
           "suggestion": "Trimiteţi solicitarea către echipa noastră de asistenţă, care este gata să vă ajute cu setările."
         },
         {
-          "type": "spelling",
-          "description": "While technically correct, 'Trimiteţi' is formal. 'Trimite' would be more conversational, which might be more appropriate depending on the tone desired.",
-          "suggestion": "Trimite solicitarea către echipa noastră de asistenţă, care este gata să vă ajute cu setările."
+          "type": "grammar",
+          "description": "While grammatically correct, 'care este gata să vă ajute' is a bit verbose and can be improved for a more natural flow. A simpler phrasing is preferred.",
+          "suggestion": "Trimiteţi solicitarea către echipa noastră de asistenţă, care vă va ajuta cu setările."
         }
       ],
       "approved_at": null
@@ -237,13 +241,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ඔවුන් මෙය සැකසීමට උපකාර කරනු ඇත' doesn't accurately convey the meaning of 'our specialists will help you with the settings'. 'මෙය' (this) is vague and doesn't specify what 'they' will help with. A more accurate translation of 'help you with the settings' is needed.",
-          "suggestion": "ඔවුන් ඔබේ සැකසීම් වලට උදව් කරනු ඇත. (They will help with your settings.)"
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically acceptable, the sentence structure 'ඔවුන් ඔබේ සැකසීම් වලට උදව් කරනු ඇත' could be slightly improved for better flow.",
-          "suggestion": "ඔවුන් ඔබේ සැකසීම් සඳහා උදව් කරනු ඇත. (They will help with your settings.)"
+          "description": "The translation 'ඔවුන් මෙය සැකසීමට උපකාර කරනු ඇත' (They will help to arrange this) doesn't accurately reflect the English \"help you with the settings\". It implies a general arrangement rather than assistance with configuration.",
+          "suggestion": "ඔවුන් ඔබට සැකසීම්වලට උදව් කරනු ඇත (They will help you with the settings)."
         }
       ],
       "approved_at": null
@@ -260,13 +259,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'support team' is translated as 'skupini za podporo' which, while understandable, isn't the most natural phrasing in Slovenian. 'Ekipa za podporo' would be a more common and fluent translation.",
-          "suggestion": "Ekipa za podporo"
+          "description": "The translation 'Pošlji zahtevo naši skupini za podporo' is a bit awkward. 'Naši skupini' is not the most natural way to refer to the support team. It implies a group of people, not necessarily the support *team*.",
+          "suggestion": "Pošlji zahtevo naši podpori"
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'strokovnjaki bodo pomagali pri nastavitvah' is technically correct, it sounds slightly formal for the context. A more conversational and natural translation would be 'strokovnjaki vam bomo pomagali z nastavitvami' or 'strokovnjaki vam bomo pomagali pri reševanju nastavitve'.",
-          "suggestion": "strokovnjaki vam bomo pomagali z nastavitvami"
+          "description": "While technically correct, 'pomagali pri nastavitvah' could be more natural. It directly translates to 'help with settings'.",
+          "suggestion": "vam bomo pomagali z nastavitvami"
         }
       ],
       "approved_at": null
@@ -277,8 +276,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"са подешавањима\" literally translates to \"with settings\". It's more natural in Serbian to use a construction implying \"regarding settings\" or \"for the settings\".",
-          "suggestion": "Пошаљите ваш захтев нашем тиму за подршку, и наши специјалисти ће вам помоћи око подешавања."
+          "description": "The phrase \"са подешавањима\" is not the best translation for \"with the settings.\" While technically correct, it's a bit clunky. A more natural phrasing would be \"у подешавањима\" or \"за подешавања\".",
+          "suggestion": "Пошаљите ваш захтев нашем тиму за подршку, и наши специјалисти ће вам помоћи у подешавањима."
         }
       ],
       "approved_at": null
@@ -289,8 +288,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'with the settings' is not accurately translated. 'Podešavanjima' implies adjustment or modification, not simply assistance with the settings themselves. A more accurate translation would convey 'regarding the settings' or 'for the settings'.",
-          "suggestion": "Pošaljite vaš zahtev našem timu za podršku, i naši specijalisti će vam pomoći sa podešavanjima."
+          "description": "The phrase \"sa podešavanjima\" is not the most natural way to say \"with the settings\" in this context. It implies 'with adjustments' rather than 'regarding the settings'.",
+          "suggestion": "Pošaljite vaš zahtev našem timu za podršku, i naši specijalisti će vam pomoći u vezi sa podešavanjima."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While grammatically correct, the translation \"u vezi sa podešavanjima\" can sound a bit formal. A more conversational option could be considered.",
+          "suggestion": "Pošaljite vaš zahtev našem timu za podršku, i naši specijalisti će vam pomoći oko podešavanja."
         }
       ],
       "approved_at": null
@@ -298,13 +302,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"with the settings\" is somewhat vague. While \"ayarlar konusunda\" can translate to \"regarding settings,\" it doesn't fully capture the nuance of assistance *with* the settings. A more accurate translation would imply help *in configuring* the settings.",
-          "suggestion": "İsteğinizi destek ekibimize gönderin, uzmanlarımız ayarlarınızı yapılandırmanıza yardımcı olacaktır."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -312,8 +310,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'параметрами' (parametry) is a less common and slightly formal term. 'Налаштуваннями' (nalashtuvamy) would be more natural in this context.",
+          "type": "incorrect_translation",
+          "description": "The term 'параметрами' (parametrami) is a more technical translation of 'settings' and might be too formal or unclear for a general user in this context. 'Налаштуваннями' (nalashtuvannyamy) would be a more natural and user-friendly translation for 'settings'.",
           "suggestion": "Надішліть запит до нашої служби підтримки, і наші спеціалісти допоможуть вам із налаштуваннями."
         }
       ],
@@ -325,7 +323,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"settings\" is not accurately translated. \"cài đặt\" typically means 'installation' or 'to install', not 'settings'. The translation misses the nuance of configuring settings.",
+          "description": "The English phrase \"settings\" is translated as \"cài đặt\" which primarily means \"installation\". While \"cài đặt\" can sometimes encompass settings, it's not the most accurate translation in this context. \"Cài đặt\" implies a more complex process than just adjusting settings.",
           "suggestion": "Gửi yêu cầu của bạn đến nhóm hỗ trợ của chúng tôi và các chuyên gia của chúng tôi sẽ giúp bạn với các thiết lập."
         }
       ],
@@ -337,8 +335,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"help you with the settings\" is translated as \"帮助您进行设置\". While technically correct, it sounds slightly awkward in Chinese. A more natural phrasing would be \"协助您配置设置\" or \"协助您设置\".",
-          "suggestion": "协助您配置设置"
+          "description": "While generally accurate, \"进行设置\" (jìn xíng shè zhì) is a bit formal and literal for 'help you with the settings.' A more natural phrasing would be closer to '协助您配置设置' (xié zhù nín pèi zhì shè zhì) or '帮助您调整设置' (bāng zhù nín tiáo zhěng shè zhì).",
+          "suggestion": "您可向我们的支持团队发送请求，我们将有专员帮助您配置设置。"
         }
       ],
       "approved_at": null

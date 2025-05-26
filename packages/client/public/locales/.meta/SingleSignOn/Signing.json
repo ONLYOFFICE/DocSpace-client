@@ -3,7 +3,7 @@
   "content": "Signing",
   "content_en_sha1_hash": "1ebd45fcbe2837672e92a8172de64997e3e4c97f",
   "created_at": "2025-05-19T21:30:50.140Z",
-  "updated_at": "2025-05-21T01:59:05.740Z",
+  "updated_at": "2025-05-24T03:12:16.231Z",
   "comment": {
     "text": "The translation key \"Signing\" is used as a label for an option in a modal combo box. It displays the English content \"Signing\", which corresponds to the usage of signing certificates in a Single Sign-On (SSO) process.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'İmzalanma' doesn't accurately convey the meaning of 'Signing' in the context of Single Sign-On. It implies a passive action of being signed, rather than the act of signing itself.",
-          "suggestion": "Consider alternatives like 'Təhlil', 'Rəsmi', or 'Onaylanma', depending on the specific function within Single Sign-On."
+          "description": "While \"İmzalanma\" is a technically correct translation of \"Signing\" in some contexts, it doesn't convey the intended meaning in a Single Sign-On context. It implies something is being signed, rather than the act of signing itself.",
+          "suggestion": "Consider using \"Rəsmiyyət\" or \"Təsdiqlənmə\" depending on the precise nuance intended. \"Rəsmiyyət\" is a more general term for process or formality, while \"Təsdiqlənmə\" suggests confirmation or approval."
         }
       ],
       "approved_at": null
@@ -57,7 +57,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Unterzeichnung\" is a valid translation for \"Signing\", it leans more towards the legal/formal act of signing. Depending on the context of 'SingleSignOn:Signing', a more general term like \"Anmeldung\" (login) or \"Bestätigung\" (confirmation) might be more appropriate. \"Unterzeichnung\" implies a signature.",
+          "suggestion": "Consider 'Anmeldung' or 'Bestätigung' for broader applicability, or clarify the context to confirm 'Unterzeichnung' is the best fit."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -99,7 +105,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"署名\" (shomei) can mean signature, in the context of Single Sign-On, \"認証\" (shōnin) or \"サインイン\" (sain-in) might be more accurate and convey the intended meaning of 'Signing' in a technical setting.",
+          "suggestion": "Consider \"認証\" (shōnin) or \"サインイン\" (sain-in) for a more technically accurate translation of 'Signing'."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -114,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເຊັນຊື່\" literally translates to 'sign name'. While related to signing, it's not the most accurate translation of 'Signing' in the context of Single Sign-On. It implies a more literal act of signing a name rather than the concept of authorizing access.",
-          "suggestion": "A more accurate translation might be something like \"ການຢັ້ງຢືນໂຕຕົນ\" (kan yang yeun ton) which means 'authentication' or 'verification'."
+          "description": "The Lao translation \"ເຊັນຊື່\" literally translates to \"sign name\". While related to signing, it's not the most accurate translation for \"Signing\" in the context of Single Sign-On. \"ເຊັນຊື່\" implies a manual signing of a name, not the process of digitally signing authentication.",
+          "suggestion": "Consider using \"ການເຊັນຊື່\" (gan sen sue) which translates to \"the act of signing\", or a more context-specific term depending on the SSO implementation (e.g., \"ການຢັ້ງຢືນຕົວຕົນ\" - gan yang yeun tua ton - \"identity verification\")."
         }
       ],
       "approved_at": null
@@ -186,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Signing' in the context of Single Sign-On typically refers to the authentication or authorization process, not just the act of signing. 'Пријављивање' translates more accurately to 'Login' or 'Authentication'.",
-          "suggestion": "Consider using 'Аутентификација' or 'Потврђивање идентитета' as a more accurate translation."
+          "description": "The Serbian (Cyrillic) translation \"Пријављивање\" translates to 'Login' or 'Registration', not 'Signing'. 'Signing' implies the act of signing a document or agreement. A more accurate translation might depend on the context of 'SingleSignOn:Signing'.",
+          "suggestion": "Consider alternatives such as 'Потписивање' (Potpisivanje - Signing), or a more context-specific translation if 'Signing' refers to a particular function within Single Sign-On."
         }
       ],
       "approved_at": null
@@ -198,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Prijavljivanje' translates more accurately to 'Login' or 'Authentication' rather than 'Signing'. 'Signing' implies a signature or agreement, which is not the intended meaning in this context.",
-          "suggestion": "Consider using 'Prijava' or 'Autentifikacija' for a more accurate translation of 'Signing' in the context of Single Sign-On."
+          "description": "'Prijavljivanje' translates to 'Login' or 'Sign-in', not 'Signing'. 'Signing' implies the act of signing a document or a similar action, which isn't the intended meaning in the context of Single Sign-On.",
+          "suggestion": "Potvrđivanje"
         }
       ],
       "approved_at": null
@@ -222,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Đang ký tên' is a literal translation of 'Signing', it doesn't convey the intended meaning in the context of Single Sign-On. It implies a physical signature rather than the process of digitally signing or authenticating.",
-          "suggestion": "Consider alternatives like 'Xác thực', 'Ký điện tử', or 'Đăng ký' depending on the exact nuance needed for Single Sign-On.  A more contextually appropriate translation would be needed to accurately reflect the 'Signing' functionality."
+          "description": "The translation \"Đang ký tên\" is too literal and doesn't accurately convey the meaning of \"Signing\" in the context of Single Sign-On. It implies a physical signature.",
+          "suggestion": "Consider a more appropriate translation like \"Ký\" or \"Xác thực\" which are commonly used for digital signatures or authentication in the context of Single Sign-On."
         }
       ],
       "approved_at": null
@@ -234,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"签署中\" (qiān shǔ zhōng) translates to \"signing in progress\" or \"currently signing.\" While related to \"Signing,\" it's not a direct or universally appropriate translation for the English word 'Signing' in the context of a key name like 'SingleSignOn:Signing'. It implies an ongoing process, while 'Signing' likely refers to the act or capability of signing.",
-          "suggestion": "Consider translations like \"签名\" (qiān shū), \"签署\" (qiān shǔ), or \"签名功能\" (qiān shū gōng néng) depending on the precise intended meaning within the SingleSignOn context.  Further context would be needed to select the best option."
+          "description": "While \"签署中\" is a valid translation, it implies an ongoing action (signing in progress). \"Signing\" typically refers to the act of signing itself, not necessarily the process. A more direct translation could be \"签名\" (qiān míng), which means 'signature' or 'signing'.",
+          "suggestion": "签名 (qiān míng)"
         }
       ],
       "approved_at": null

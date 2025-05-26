@@ -3,7 +3,7 @@
   "content": "{{date}} will be moved to Trash",
   "content_en_sha1_hash": "0bb98daee115a455a9598161919d09023911e8c5",
   "created_at": "2025-05-19T21:30:56.355Z",
-  "updated_at": "2025-05-22T11:56:37.566Z",
+  "updated_at": "2025-05-26T07:57:32.407Z",
   "comment": {
     "text": "This translation key is used to display a notification message indicating that a file will be moved to the trash on a specified date. It appears in the UI as a text element, typically in a dialog or information panel. The message informs users of an impending action related to expired files.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\helpers\\DetailsHelper.js",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/DetailsHelper.js",
       "line_number": 331,
       "context": "this.t(\"Files:WillBeDeletedPermanently\", {\n date: parseAndFormatDate(this.item.expired, this.culture),\n }),\n )\n : text(\n this.t(\"Files:WillBeMovedToTrash\", {\n date: parseAndFormatDate(this.item.expired, this.culture),\n }),\n );\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'köçürüləcək' (will be moved) is not the most natural way to express 'moved to trash' in Azerbaijani. A more common and idiomatic phrasing would use a verb that directly relates to trash or garbage.",
+          "suggestion": "{{date}} Ziblərə göndəriləcək"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -57,13 +63,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'will be moved to Trash' is not translated idiomatically in Greek. A more natural translation would be 'θα μεταφερθεί στον κάδο ανακύκλωσης' (tha metaferthei ston kado anakyklowsis) which means 'will be moved to the recycling bin'. While 'Κάδος Απορριμμάτων' (Kados Aporrimmaton) technically translates to 'Trash Can', it's not the standard terminology for the trash/recycle bin.",
-          "suggestion": "Θα μεταφερθεί στον κάδο ανακύκλωσης"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'déplacé' (moved) is masculine. Since 'date' is feminine, the adjective should agree in gender. 'déplacée' would be more accurate.",
-          "suggestion": "{{date}} sera déplacée dans la corbeille"
+          "description": "The word 'déplacé' (moved) doesn't quite capture the automatic nature of moving files to trash. A better translation would imply the files are being automatically moved.",
+          "suggestion": "{{date}} sera mis dans la corbeille"
         }
       ],
       "approved_at": null
@@ -123,7 +123,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'tiks pārvietots uz Atkritni' isn't the most natural or precise translation of 'will be moved to Trash'. 'Atkritni' generally refers to a physical trash can. A more accurate and common phrasing would be something like 'tiks izmests atkritumos' (will be thrown away in the trash) or 'tiks ievietots atkritumu kaudzē' (will be placed in the waste bin).",
+          "suggestion": "tiks izmests atkritumos"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -138,8 +144,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'nastąpi przeniesienie do Kosza' is a bit awkward and literal. A more natural Polish phrasing would be something along the lines of 'zostaną przeniesione do Kosza' or 'przeniesione do Kosza'.",
-          "suggestion": "zostaną przeniesione do Kosza"
+          "description": "The Polish translation '{{date}} nastąpi przeniesienie do Kosza' is a literal translation that doesn't sound natural in Polish. It implies an action *will happen* instead of stating that the files *will be* moved.",
+          "suggestion": "{{date}} zostaną przeniesione do Kosza"
+        },
+        {
+          "type": "grammar",
+          "description": "The verb 'nastąpi' requires a subject. 'Zostaną' is the correct auxiliary verb to agree with the plural subject 'pliki' (files), although it's implied and not explicitly stated.  Using 'nastąpi' without a subject is grammatically awkward.",
+          "suggestion": "Correct verb conjugation for plurality."
         }
       ],
       "approved_at": null
@@ -159,7 +170,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Romanian translation uses the masculine singular form 'mutat' which implies the files being moved are masculine. Since 'files' is a collective noun and gender is not always clear, a more neutral phrasing would be better.",
+          "suggestion": "{{date}} va fi mutată în Coșul de gunoi"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -174,7 +191,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '{{date}} කසළට යවා ඇත' directly translates to '{{date}} has been sent to trash'. While conveying a similar meaning, it lacks the nuance of 'will be moved to trash'. A more accurate translation would emphasize the future action.",
+          "description": "The Sinhala translation \"{{date}} කසළට යවා ඇත\" literally translates to \"{{date}} has been sent to trash.\" While understandable, a more natural phrasing for indicating a future action (as suggested by the English 'will be') would be \"{{date}} කසළට යවනු ලැබේ\" ({{date}} will be sent to trash). The present perfect tense used in the translation implies a completed action which doesn't match the English.",
           "suggestion": "{{date}} කසළට යවනු ලැබේ"
         }
       ],

@@ -3,7 +3,7 @@
   "content": "Main element parameter",
   "content_en_sha1_hash": "c5bab9a4d7f1c666a30b691a0abeaa6824947c9a",
   "created_at": "2025-05-19T21:30:54.566Z",
-  "updated_at": "2025-05-21T08:57:13.152Z",
+  "updated_at": "2025-05-24T09:09:39.856Z",
   "comment": {
     "text": "\"Main element parameter text, used to control a component that displays and manages an application's main element.\"",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"إعدادات  العنصر الرئيسي\" literally translates to \"Settings of the main element.\" While not entirely wrong, \"parameter\" often implies a value or configuration setting rather than a general setting. A more accurate translation might capture the sense of a specific parameter.",
-          "suggestion": "معامل العنصر الرئيسي"
+          "description": "The translation 'إعدادات العنصر الرئيسي' is a functional equivalent, but 'Main element parameter' implies a more direct specification or configuration, whereas the translation leans towards 'settings'. While not strictly wrong, it’s a slightly less accurate representation.",
+          "suggestion": "Consider 'معامل العنصر الرئيسي' which more directly translates to 'main element parameter'."
         }
       ],
       "approved_at": null
@@ -87,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Հիմնական տարրի պարամետրը\" is a literal translation, it sounds awkward in Armenian. A more natural translation would emphasize that it's *of* the main element.",
+          "suggestion": "Հիմնական տարրի պարամետր"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,25 +105,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While '主要素パラメータ' (Shuyoso Parameta) is a literal translation, it's not the most natural or idiomatic way to express 'Main element parameter' in Japanese within a technical context. '主要パラメータ' (Shuyo Parameta) would likely be more appropriate, as '主要' can apply to a parameter directly. The nuance of 'element' might be unnecessary in this context, depending on the specific use case of the parameter.",
-          "suggestion": "主要パラメータ (Shuyo Parameta)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While '주요 요소 매개변수' is a literal translation, it might sound slightly awkward in Korean. A more natural phrasing might be '주요 엘리먼트 파라미터' or '주요 컴포넌트 파라미터' depending on the context of 'Main element'.",
-          "suggestion": "Consider '주요 엘리먼트 파라미터' or '주요 컴포넌트 파라미터' for a more natural feel."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -126,13 +120,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The term 'ຕົວກໍານົດ' is technically correct, but can sound slightly formal or awkward in this context. A more natural phrasing might be preferred.",
-          "suggestion": "Consider using 'ວິທີການ' or 'ລັກສະນະ' instead of 'ຕົວກໍານົດ'."
+          "description": "The word 'ຕົວກໍານົດ' might be better written as 'ຕົວຊີ້ບອກ' or 'ຕົວລະบุ'. While 'ຕົວກໍານົດ' isn't strictly incorrect, it sounds slightly awkward in this context.",
+          "suggestion": "ຕົວຊີ້ບອກ"
         },
         {
           "type": "incorrect_translation",
-          "description": "While technically a correct translation, 'ຕົວກໍານົດການອົງປະກອບຕົ້ນຕໍ' is a very literal translation that might not convey the intended meaning as naturally as a more idiomatic expression. 'Main element parameter' often refers to settings or attributes associated with a primary element.",
-          "suggestion": "Explore alternatives like 'ຄ່າຕັ້ງຕົ້ນຂອງອົງປະກອບຕົ້ນຕໍ' or 'ລັກສະນະຂອງອົງປະກອບຕົ້ນຕໍ'."
+          "description": "While technically correct, 'ຕົວກໍານົດການ' is a slightly verbose and formal way to translate 'parameter'. A more natural translation might consider alternative phrasing.",
+          "suggestion": "ຄຸນນະສົມບັດຕົ້ນຕໍ"
         }
       ],
       "approved_at": null
@@ -146,13 +140,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Hoofdelement parameter' sounds slightly awkward in Dutch. A more natural phrasing would be 'Parameter van het hoofdelement'.",
-          "suggestion": "Parameter van het hoofdelement"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -179,8 +167,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Parametru element principal\" is technically correct, it's not the most natural-sounding Romanian translation for \"Main element parameter.\" It sounds a bit clunky.",
-          "suggestion": "Consider \"Parametru principal al elementului\" or \"Parametrul elementului principal\" for a more fluent translation."
+          "description": "While technically correct, \"Parametru element principal\" sounds slightly awkward in Romanian. A more natural phrasing would emphasize the 'main' aspect.",
+          "suggestion": "Parametrul principal al elementului"
         }
       ],
       "approved_at": null
@@ -209,7 +197,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Glavni parameter elementa' is a literal translation and doesn't flow naturally in Slovenian. While technically correct, it sounds awkward. A more natural phrasing might be 'Parameter glavnega elementa' or 'Glavni elementov parameter'.",
+          "description": "The translation \"Glavni parameter elementa\" is not the most natural or accurate translation of \"Main element parameter\". A more idiomatic translation would be \"Parameter glavnega elementa\" or \"Glavni parameter elementov\". \"Elementa\" implies a singular element, while \"elementov\" can refer to multiple elements.",
           "suggestion": "Parameter glavnega elementa"
         }
       ],
@@ -221,8 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Главни елемент параметар' is a literal translation and doesn't fully capture the nuance of 'Main element parameter' in a technical context. It sounds somewhat awkward.",
-          "suggestion": "Consider a more idiomatic translation like 'Параметар главног елемента' or 'Главни параметар елемента', depending on the specific usage."
+          "description": "The Serbian (Cyrillic) translation \"Главни елемент параметар\" is a literal translation but may not be the most natural or idiomatic way to express \"Main element parameter\" in a technical context. While understandable, it might be improved.",
+          "suggestion": "Consider alternatives like \"Параметар главног елемента\" or \"Главни параметар елемента\", depending on the specific usage and context."
         }
       ],
       "approved_at": null
@@ -233,8 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Glavni element parametar' is a literal translation and sounds unnatural in Serbian. A more idiomatic translation would be 'Parametar glavnog elementa'.",
-          "suggestion": "Parametar glavnog elementa"
+          "description": "The translation 'Glavni element parametar' is a literal translation but doesn't flow naturally in Serbian. 'Parametar' is borrowed from English and often sounds awkward when used directly in Serbian sentences where a native alternative could be used.",
+          "suggestion": "Razmotrite upotrebu izraza 'Parametar glavnog elementa' or 'Parametar za glavni element' for a more natural-sounding translation. Alternatively, a more specific term depending on the context might be preferred, like 'Vrednost glavnog elementa'."
         }
       ],
       "approved_at": null

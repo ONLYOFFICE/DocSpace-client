@@ -25,15 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { ButtonSize, Button } from "../button";
 import { ComboBox, TOption } from "../combobox";
 
-import { StyledPage, StyledOnPage, StyledPaging } from "./Paging.styled";
 import { PagingProps } from "./Paging.types";
+import styles from "./Paging.module.scss";
 
 const Paging = (props: PagingProps) => {
-  // console.log("Paging render");
   const {
     previousLabel,
     nextLabel,
@@ -44,7 +44,6 @@ const Paging = (props: PagingProps) => {
     openDirection,
     disablePrevious = false,
     disableNext = false,
-    disableHover = false,
     selectedPageItem,
     selectedCountItem,
     id,
@@ -67,44 +66,49 @@ const Paging = (props: PagingProps) => {
     pageItems && pageItems.length > 6 ? { dropDownMaxHeight: 200 } : {};
 
   return (
-    <StyledPaging id={id} className={className} style={style}>
-      <Button
-        className="prev-button not-selectable"
-        size={ButtonSize.small}
-        scale
-        label={previousLabel}
-        onClick={previousAction}
-        isDisabled={disablePrevious}
-        disableHover={disableHover}
-      />
-      {pageItems ? (
-        <StyledPage>
-          <ComboBox
-            isDisabled={disablePrevious ? disableNext : false}
-            className="manualWidth"
-            directionY={openDirection}
-            options={pageItems}
-            onSelect={onSelectPageAction}
-            scaledOptions={pageItems.length < 6}
-            selectedOption={selectedPageItem}
-            {...setDropDownMaxHeight}
-          />
-        </StyledPage>
-      ) : null}
-      <Button
-        className="next-button not-selectable"
-        size={ButtonSize.small}
-        scale
-        label={nextLabel}
-        onClick={nextAction}
-        isDisabled={disableNext}
-        disableHover={disableHover}
-      />
+    <div
+      data-testid="paging"
+      id={id}
+      className={classNames(styles.paging, className)}
+      style={style}
+    >
+      <div className={styles.leftButtonsContainer}>
+        <Button
+          className={classNames(styles.prevButton, "not-selectable")}
+          size={ButtonSize.small}
+          scale
+          label={previousLabel}
+          onClick={previousAction}
+          isDisabled={disablePrevious}
+        />
+        {pageItems ? (
+          <div className={styles.page}>
+            <ComboBox
+              isDisabled={disablePrevious ? disableNext : false}
+              className={styles.manualWidth}
+              directionY={openDirection}
+              options={pageItems}
+              onSelect={onSelectPageAction}
+              scaledOptions={pageItems.length < 6}
+              selectedOption={selectedPageItem}
+              {...setDropDownMaxHeight}
+            />
+          </div>
+        ) : null}
+        <Button
+          className={classNames(styles.nextButton, "not-selectable")}
+          size={ButtonSize.small}
+          scale
+          label={nextLabel}
+          onClick={nextAction}
+          isDisabled={disableNext}
+        />
+      </div>
       {showCountItem
         ? countItems && (
-            <StyledOnPage>
+            <div className={styles.onPage}>
               <ComboBox
-                className="hideDisabled"
+                className={styles.hideDisabled}
                 directionY={openDirection}
                 directionX="right"
                 options={countItems}
@@ -112,10 +116,10 @@ const Paging = (props: PagingProps) => {
                 onSelect={onSelectCountAction}
                 selectedOption={selectedCountItem}
               />
-            </StyledOnPage>
+            </div>
           )
         : null}
-    </StyledPaging>
+    </div>
   );
 };
 

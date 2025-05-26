@@ -3,7 +3,7 @@
   "content": "ພາສາລາວ",
   "content_en_sha1_hash": "f51aae059fcd85b0d0149d60b817049a4bbd3660",
   "created_at": "2025-05-19T21:30:44.097Z",
-  "updated_at": "2025-05-21T00:04:02.449Z",
+  "updated_at": "2025-05-24T01:17:37.857Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -26,13 +26,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'ພາສາລາວ' is identical to the Lao source text. It does not represent a translation into Azerbaijani.",
-          "suggestion": "The correct Azerbaijani translation of 'ພາສາລາວ' (Lao language) is 'ləöz dil'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -134,7 +128,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese (Brazil) translation 'ພາສາລາວ' is identical to the Lao original. It is not a valid translation of 'Language of Laos' in Portuguese.",
+          "suggestion": "Língua Lao"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -191,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Ukrainian translation 'ພາສາລາວ' is identical to the Lao source text. It does not represent a Ukrainian translation of 'Lao language'.",
-          "suggestion": "The correct Ukrainian translation of 'ພາສາລາວ' (Lao language) should be 'Лаоська мова'."
+          "description": "The Ukrainian translation 'ພາສາລາວ' is identical to the Lao source text. It should be a Ukrainian translation of 'Lao language'.",
+          "suggestion": "Laoska mova"
         }
       ],
       "approved_at": null

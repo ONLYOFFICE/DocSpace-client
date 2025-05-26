@@ -3,7 +3,7 @@
   "content": "Got any problems? Contact our <2>Support Team.</2>",
   "content_en_sha1_hash": "b32f368f23a2f7b36d83a5c446ed8e499d7ca8cf",
   "created_at": "2025-05-19T21:30:52.888Z",
-  "updated_at": "2025-05-21T02:51:44.273Z",
+  "updated_at": "2025-05-24T03:56:47.002Z",
   "comment": {
     "text": "This translation key is used for a support contact message that appears on a consumer modal dialog. It provides an invitation to users who still have questions about connecting a third-party service or need technical assistance.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags `<2>` are not correctly rendered in the Arabic translation. They should be preserved.",
-          "suggestion": "Ensure the HTML tags `<2>` are maintained exactly as they are in the English content: \"هل لديك أي مشاكل؟ اتصل بـ <2>فريق الدعم.</2>\""
+          "description": "The HTML tags `<2>` and `</2>` are not standard. They seem intended to indicate a specific formatting or styling instruction. They should be reviewed and corrected to the appropriate formatting tags.",
+          "suggestion": "Review the intended formatting and replace the tags accordingly. For example, if meant to be bold, use `<b>` and `</b>`."
         }
       ],
       "approved_at": null
@@ -42,13 +42,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Got any problems?\" is more naturally translated as something like \"Do you need help?\" or \"Need help?\"  \"Kömək lazımdır?\" is closer to 'Is help needed?' which is slightly unnatural in this context.",
-          "suggestion": "Kömək lazımdır? or Ehtiyacınız var?"
+          "description": "The English phrase \"Got any problems?\" is translated as \"Kömək lazımdır?\" which means \"Do you need help?\" It doesn't directly translate the question about problems. A more accurate translation would be something like \"Hər hansı problemlər var?</2>",
+          "suggestion": "Hər hansı problemlər var?</2>"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Support Team\" is translated as \"Dəstək Komandası.\" While technically correct, a slightly more natural translation in Azerbaijani might be \"Kömək Komandası\".",
+          "suggestion": "Kömək Komandası"
         },
         {
           "type": "formatting",
-          "description": "The HTML tags (<2> and </2>) are not standard and may cause issues. It's unclear what they are supposed to do. They are likely meant to apply some kind of emphasis, but their effect will depend on the rendering engine.",
-          "suggestion": "Investigate the purpose of the <2> tags and ensure equivalent formatting is applied in Azerbaijani if needed.  Consider using standard HTML like <strong> or <em>."
+          "description": "The HTML tags <2> and </2> appear to be intended for some kind of styling or highlighting. These tags should be checked to ensure they're rendered correctly in the target environment. Although not strictly an error in the translation itself, it's important to ensure consistency with the original.",
+          "suggestion": "Verify that the <2> tags are rendering correctly in the target system and are consistent with the English version. If these tags have a specific purpose, ensure that purpose is replicated in the rendering."
         }
       ],
       "approved_at": null
@@ -59,13 +64,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Got any problems?' is more casually translated as 'Трябва Ви помощ?'. While understandable, it's a less direct equivalent and might not convey the intended tone. A closer translation would be something like 'Имате ли проблеми?'",
-          "suggestion": "Имате ли проблеми?"
-        },
-        {
-          "type": "formatting",
-          "description": "The HTML tags <2> and </2> appear to indicate emphasis. Ensure this formatting is consistent with Bulgarian conventions and best practices for the platform where this text will be displayed. Consider if a different emphasis tag or style is more appropriate.",
-          "suggestion": "Review the intended purpose of the <2> tags and ensure their implementation aligns with Bulgarian web development standards. If bolding is intended, consider using <b> or <strong>."
+          "description": "The English phrase \"Got any problems?\" is translated as \"Трябва Ви помощ?\" which means \"Do you need help?\". While related, it doesn't directly convey the original meaning of inquiring about problems. A more accurate translation might be something along the lines of \"Имате ли проблеми?\" or \"Сблъскали ли сте се с проблем?\"",
+          "suggestion": "Имате ли проблеми? / Сблъскали ли сте се с проблем?"
         }
       ],
       "approved_at": null
@@ -73,13 +73,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags <2> are preserved in both the English and Czech versions. While not inherently incorrect, it's important to verify if this is the intended behavior and whether the styling applied to these tags is consistent across platforms and languages.",
-          "suggestion": "Check if the <2> tags are necessary and if the styling they apply is appropriate for the Czech language context. Consider removing them or adjusting the styling if needed."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -87,14 +81,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The HTML tag <2> is not standard and should be consistent with the source. Assuming it's meant to indicate bold or emphasis, use <strong> or <em> instead, or investigate the original intent.",
-          "suggestion": "Investigate the purpose of the <2> tag and replace with appropriate HTML (e.g., <strong>Support-Team</strong> or <em>Support-Team</em>)."
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Got any problems?\" is translated as \"Brauchen Sie Hilfe?\" which is a more formal and less conversational equivalent. A more direct translation might be \"Haben Sie Probleme?\"",
+          "suggestion": "Haben Sie Probleme?"
         },
         {
-          "type": "incorrect_translation",
-          "description": "While \"Brauchen Sie Hilfe?\" is a valid translation for 'Got any problems?', it might be perceived as slightly less direct than the original English phrase. A more equivalent translation could be something like 'Haben Sie Probleme?' or 'Falls Sie Probleme haben...'",
-          "suggestion": "Consider translating 'Got any problems?' as 'Haben Sie Probleme?' or 'Falls Sie Probleme haben...'"
+          "type": "formatting",
+          "description": "The HTML tags `<2>` and `</2>` are inconsistent with standard HTML tag syntax. It's unclear what they are intended to represent. Assuming it's meant to represent a hyperlink, the syntax should be `<a href=\"url\"></a>",
+          "suggestion": "Assuming the intent is to create a hyperlink, replace `<2>` with `<a href=\"url\">` and `</2>` with `</a>`."
         }
       ],
       "approved_at": null
@@ -105,8 +99,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags `<2>` are not standard and may not be rendered correctly.  They appear to be intended for styling or special formatting, but their purpose isn't clear from the context. The Greek translation preserves the tags.",
-          "suggestion": "Determine the intended purpose of the `<2>` tags. If they're for styling, consider using CSS classes instead. If they're for a specific rendering requirement, ensure the Greek rendering system handles them appropriately. If they are unnecessary, remove them."
+          "description": "The HTML tags `<2>` are not properly rendered in the Greek translation. They should be `<2>` tags.",
+          "suggestion": "Ensure the HTML tags are correctly formatted as `<2>`."
         }
       ],
       "approved_at": null
@@ -117,13 +111,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Got any problems?\" is more casually translated as \"¿Necesita ayuda?\" while maintaining the intent of seeking assistance. A more literal translation could be \"¿Tiene algún problema?\" but \"¿Necesita ayuda?\" is more conversational and friendly, which aligns with the tone of the English.",
-          "suggestion": null
+          "description": "The English phrase \"Got any problems?\" has been translated as \"¿Necesita ayuda?\" which is a more formal and less conversational equivalent. A more direct translation, maintaining the conversational tone, could be \"¿Tiene algún problema?\".",
+          "suggestion": "¿Tiene algún problema?"
         },
         {
           "type": "formatting",
-          "description": "The HTML tags <2> and </2> seem to be markup specific to the platform. It's important to confirm if these tags are correctly rendered in the Spanish version and if there are equivalent tags in the Spanish implementation.  While the tags are present in the translation, their functionality should be checked.",
-          "suggestion": null
+          "description": "The HTML tags `<2>` and `</2>` appear to be intended for some kind of specific formatting or highlighting. It's crucial to ensure this formatting is correctly rendered in the target environment and if the intent is simply bolding, standard HTML tags should be used.",
+          "suggestion": "Confirm HTML tags are handled appropriately. If for bolding: <b>equipo de soporte técnico</b>"
         }
       ],
       "approved_at": null
@@ -134,8 +128,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags `<2>` and `</2>` are inconsistent. The English uses `<2>` and `</2>`, while the Finnish uses `<2>` and `</2>`. This creates an inconsistency in the code.",
-          "suggestion": "Correct the closing tag to `</2>` to match the opening tag and the English original."
+          "description": "The HTML tag `<2>` is not consistently used in both the English and Finnish versions. The English uses `<2>` while the Finnish uses `<2>.",
+          "suggestion": "Ensure consistent HTML tagging. Either use `<2>` in both or a different consistent format."
         }
       ],
       "approved_at": null
@@ -146,13 +140,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Support Team' is translated as 'support'. While 'support' is understandable, 'Support Team' implies a dedicated team, which is important for conveying the assistance available. A more accurate translation would be 'équipe de support' or 'service d'assistance'.",
-          "suggestion": "équipe de support"
+          "description": "The English phrase 'Got any problems? Contact our Support Team.' has been translated as 'Besoin d'aide ? Contactez notre support.'. While 'Besoin d'aide?' is a reasonable translation of 'Got any problems?', 'Support Team' is simply translated as 'support', losing the team aspect.  A better translation would be 'Équipe de support' or 'Service d'assistance'.",
+          "suggestion": "Besoin d'aide ? Contactez notre équipe de support."
         },
         {
           "type": "formatting",
-          "description": "The HTML tags `<2>` are present in both the English and French translations. While replicating the HTML is technically correct, it's important to consider the purpose of the tags and whether they're truly necessary for the French version. The tags seem to be used for styling, and the styling should be applied consistently, rather than replicating the HTML.",
-          "suggestion": "Review and ensure consistent styling in the application. If the HTML tags represent a specific styling action, apply that style to the French text directly."
+          "description": "The HTML tags '<2>' are inconsistent.  The English version uses '<2>', while the French version also uses '<2>'. It's unclear what purpose the tag serves, but consistency is important.",
+          "suggestion": "Ensure the HTML tags used are consistent between languages. If they're meant to denote a specific style, confirm the style is also available and applied consistently in the French interface."
         }
       ],
       "approved_at": null
@@ -160,7 +154,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<2>` are not properly translated. They should ideally be replicated or mapped to equivalent Armenian formatting tags if applicable. Assuming these tags are for bolding or highlighting, the equivalent in Armenian would require further investigation based on the platform's support.",
+          "suggestion": "Investigate the purpose of the `<2>` tags and replicate the functionality using appropriate Armenian HTML or platform-specific formatting. For example, if `<2>` represents `<b>`, the Armenian translation would need a corresponding tag. Alternatively, if these are placeholders for dynamic content, ensure the Armenian system handles them correctly."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Աջակցող թիմ-ի հետ\" is a literal translation of \"Support Team\", it sounds slightly unnatural in Armenian. A more natural phrasing would be \"մեր աջակցության թիմի հետ\" or \"մեր աջակցության ծառայության հետ\".",
+          "suggestion": "Consider using \"մեր աջակցության թիմի հետ\" or \"մեր աջակցության ծառայության հետ\" for a more natural and idiomatic Armenian phrasing."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -169,13 +174,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Got any problems?' is best translated as 'Hai bisogno di aiuto?' or 'Se hai problemi...' instead of 'Ho bisogno di aiuto?'. The current translation implies the user needs help, not that they have a problem.",
-          "suggestion": "Se hai problemi? oppure Hai bisogno di aiuto?"
+          "description": "The English phrase \"Got any problems?\" is translated as \"Ho bisogno di aiuto?\" which means \"Do I need help?\". A more accurate translation for \"Got any problems?\" would be something like \"Hai problemi?\" or \"Ci sono problemi?\".",
+          "suggestion": "Hai problemi? or Ci sono problemi?"
         },
         {
           "type": "formatting",
-          "description": "The formatting tags `<2>...</2>` are present in both the English and Italian content.  It's important to verify if these tags serve a specific purpose (e.g., HTML, Markdown, etc.). If they are HTML tags, ensure they are valid and appropriate for the target platform.",
-          "suggestion": "Verify the intended purpose and validity of the `<2>...</2>` tags within the Italian context. If they represent a specific styling or formatting instruction, ensure the intended formatting is correctly applied."
+          "description": "The HTML tags <2> and </2> are not standard and should be verified against the platform's actual tagging format for highlighting or other special formatting. Assuming they represent highlighting, ensure this is consistent with the original.",
+          "suggestion": "Verify and correct HTML tags based on the platform's requirements."
         }
       ],
       "approved_at": null
@@ -186,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags <2>...</2> are not properly translated. They should be maintained in the Japanese translation to preserve the intended formatting.",
-          "suggestion": "ヘルプが必要でしょうか？<2>サポートチーム</2>にご連絡ください。"
+          "description": "The HTML tag `<2>` is present in both the English and Japanese content. However, its purpose is unclear without additional context. While the Japanese translation retains the tag, its functionality and visual representation within the application are unknown and should be verified for consistency.",
+          "suggestion": "Verify the purpose of the `<2>` tag and ensure its behavior/rendering is consistent between English and Japanese versions.  If it's merely for highlighting, consider alternative styling methods that may be better suited for Japanese text."
         }
       ],
       "approved_at": null
@@ -198,13 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tag <2> is not consistently represented in the Korean translation. The original English uses <2> to signify a specific formatting (likely bolding or a specific link). The Korean translation uses <2> as well, which is acceptable, but it's important to ensure this formatting is applied correctly in the target locale.",
-          "suggestion": "Verify that the <2> tag is rendered correctly in the Korean UI and applies the intended formatting (likely bolding or a specific link)."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While '도움이 필요하세요?' (do-um-i pil-yo-ha-se-yo?) translates to 'Do you need help?', a more natural and direct translation of 'Got any problems?' would be '문제가 있으신가요? (mun-je-ga is-su-sin-ga-yo?)'.  The current translation shifts the meaning slightly.",
-          "suggestion": "Consider translating 'Got any problems?' as '문제가 있으신가요? (mun-je-ga is-su-sin-ga-yo?)' for a more accurate and natural rendering."
+          "description": "The HTML tag '<2>' is not consistent between the English and Korean versions. The English uses '<2>', while the Korean uses '<2>'.",
+          "suggestion": "Ensure consistent HTML tag usage. Consider using '<2>' in both versions, or investigate why the tags differ and correct accordingly."
         }
       ],
       "approved_at": null
@@ -215,13 +215,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Got any problems?\" has been translated as \"ຕ້ອງການໃຫ້ຊ່ວຍ?\" which means \"Do you need help?\" rather than \"Do you have any problems?\" This shifts the meaning slightly.",
-          "suggestion": "Consider a translation more aligned with \"ເຈ້ົ້າກວດຫົນທາງບໍ?\" (Do you have any issues?) or a similar phrasing that directly addresses problems."
+          "description": "The phrase 'Got any problems?' is not accurately translated. 'ຕ້ອງການໃຫ້ຊ່ວຍ?' is closer to 'Do you need help?' or 'Need help?'. It doesn't convey the meaning of 'Got any problems?'",
+          "suggestion": "ຕ້ອງການບັນຫາຫຍັງບໍ່? (Kang yan banhang niy ngob?)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ພວກຮົາ' (puak ha) which translates to 'our group' or 'us' is not appropriate in this context. It's too informal and implies a level of familiarity not suitable for customer support.",
+          "suggestion": "ທີມງານສະຫນັບສະຫນູນ (Team ngan sap sap nuan) - Support Team"
         },
         {
           "type": "formatting",
-          "description": "The HTML tags `<2>Support Team.</2>` are present in both the English and Lao content. While consistency isn't inherently wrong, it's worth considering whether these tags are necessary or if a simpler markup or styling would be preferable in the Lao context.",
-          "suggestion": "Evaluate whether the `<2>` tags are essential for the Lao version.  Consider alternative styling methods if possible."
+          "description": "The HTML tags <2> and </2> are not standard and should be confirmed with the style guide. Assuming they represent bolding, standard HTML tags should be used.",
+          "suggestion": "Use <b>Support Team</b> or <strong>Support Team</strong> instead of <2>Support Team.</2>"
         }
       ],
       "approved_at": null
@@ -232,13 +237,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Got any problems?\" is translated as \"Vajadzīga palīdzība?\" which means \"Need help?\" While semantically similar, it's not a direct translation of the original question. A more literal translation might be \"Vai ir kādas problēmas?\"",
-          "suggestion": "Vai ir kādas problēmas?"
+          "description": "The English phrase \"Got any problems?\" is more informal than the Latvian \"Vajadzīga palīdzība?\". While both convey a similar meaning, the tone doesn't perfectly match. A more direct translation of \"Got any problems?\" would be \"Ir kādas problēmas?\".",
+          "suggestion": "Consider using \"Ir kādas problēmas?\" for a closer match in tone."
         },
         {
           "type": "formatting",
-          "description": "The HTML tags '<2>' are preserved in the Latvian translation. This might need to be adjusted based on the platform's requirements.",
-          "suggestion": "Review and adjust the HTML tags based on the platform requirements. They might need to be different or removed entirely."
+          "description": "The HTML tags <2> and </2> appear to be placeholders for some formatting, such as bolding or italics.  Ensure these are handled correctly in the final product, preserving the formatting intended by the original English.",
+          "suggestion": "Verify the purpose of the <2> tags and ensure the formatting is applied correctly."
         }
       ],
       "approved_at": null
@@ -249,8 +254,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags `<2>` are not standard and may not be interpreted correctly by all systems. While they match the English, a more standard HTML tag (e.g., `<b>` or `<strong>`) would be preferable for consistency and wider compatibility.",
-          "suggestion": "Consider replacing `<2>` with `<b>` or `<strong>` for broader compatibility. Example: `<b>Ondersteuningsteam</b>`"
+          "description": "The HTML tags `<2>` are not standard and should be evaluated for consistency across all translations and potentially replaced with a more appropriate format (e.g., using span tags with a specific class).",
+          "suggestion": "Review and standardize HTML tag usage. Consider replacing `<2>` with a standard HTML tag like `<span>` with a defined class."
         }
       ],
       "approved_at": null
@@ -261,8 +266,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags <2> are preserved in the Polish translation, which might not be desired or consistent with the platform's formatting conventions. It's important to verify if this is intentional and if the tags are rendered correctly in the target environment.",
-          "suggestion": "Review the intended use of the <2> tags and consider removing or replacing them with the platform's preferred formatting method."
+          "description": "The HTML tags <2> and </2> are present in both the English and Polish versions. While technically correct, they seem to be used for styling and their purpose isn't clear from the context.  Consider if this styling should be adapted for Polish formatting or removed entirely depending on the target platform.",
+          "suggestion": "Review the intended purpose of the <2> tags and apply appropriate styling in Polish or remove them if not needed."
         }
       ],
       "approved_at": null
@@ -273,13 +278,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Got any problems?\" is a more casual and conversational way to offer assistance than the Portuguese \"Precisa de ajuda?\". While both convey the same general meaning, the latter is more formal.",
-          "suggestion": "Consider using a more colloquial equivalent of \"Got any problems?\" in Portuguese, such as \"Algum problema?\" or \"Está com algum problema?\" to better match the tone of the original English."
+          "description": "'Got any problems?' is better translated as 'Tem algum problema?' or 'Precisa de ajuda?' rather than directly translating as 'Tem algum problema?'. The current translation 'Precisa de ajuda?' is more natural and common in Portuguese in this context.",
+          "suggestion": "Precisa de ajuda?"
         },
         {
           "type": "formatting",
-          "description": "The HTML tags <2> and </2> appear in both the English and Portuguese versions.  These tags are likely a placeholder for some styling or functionality. Verify that these tags are correctly interpreted and rendered in the context where the translated text will be displayed.",
-          "suggestion": "Ensure that the HTML tags <2> and </2> are properly recognized and applied during rendering, or update them to a more standard HTML tag (e.g., <i>, <strong>, <span>) if necessary."
+          "description": "The HTML tags `<2>` and `</2>` are not standard and may cause rendering issues. They seem intended to indicate a specific style or emphasis, but their meaning is unclear without further context. It's best to understand the intended style and apply the proper formatting or consider removing these tags if they aren't necessary.",
+          "suggestion": "Investigate the purpose of the `<2>` and `</2>` tags and apply correct formatting or remove them if unnecessary."
         }
       ],
       "approved_at": null
@@ -290,13 +295,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English 'Got any problems?' is more conversational and less direct than 'Precisa de ajuda?' which translates to 'Need help?'. While 'Precisa de ajuda?' is acceptable, a closer equivalent would be something like 'Having problems?' or 'Any questions?' to maintain the original tone.",
-          "suggestion": "Consider alternatives like 'Tendo problemas?' or 'Alguma dúvida?' to better capture the original conversational tone."
+          "description": "'Got any problems?' is not accurately translated. 'Precisa de ajuda?' is a more appropriate translation for offering assistance.",
+          "suggestion": "Precisa de ajuda?"
         },
         {
           "type": "formatting",
-          "description": "The HTML tags `<2>` are present in both the English and Portuguese translations. Ensure these tags are handled consistently within the application's rendering logic.",
-          "suggestion": "Verify the purpose of the `<2>` tags and ensure they are correctly interpreted and rendered in the application."
+          "description": "The HTML tags <2> and </2> seem to be used for a specific styling purpose in the English version. The Portuguese translation maintains them, but it is unclear if the styling is applied correctly. The tags should be verified for consistency in styling.",
+          "suggestion": "Verify HTML tag usage and styling consistency."
         }
       ],
       "approved_at": null
@@ -307,13 +312,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Got any problems?' is more casually translated as 'Aveți nevoie de ajutor?'. While 'Aveți nevoie de ajutor?' is technically correct, it loses the original's informal tone. A closer equivalent considering tone might be 'Aveți probleme?' or a similar phrasing that conveys the same casual inquiry.",
-          "suggestion": "Consider 'Aveți probleme?' or a similar phrasing to maintain the casual tone of the original."
+          "description": "'Got any problems?' is best translated as 'Aveți probleme?' or 'Aveți nevoie de ajutor?' 'Aveți nevoie de ajutor?' is acceptable but less direct.  The existing translation 'Aveți nevoie de ajutor?' is a bit verbose for this context. 'Got any problems?' focuses on a problem, which is not directly reflected in the current translation.",
+          "suggestion": "Aveți probleme? Contactați <2>Echipa de asistență.</2>"
         },
         {
           "type": "formatting",
-          "description": "The HTML tags '<2>' are preserved in the Romanian translation. These tags are likely meant to indicate some kind of formatting or highlighting, and should be evaluated for consistency in application across the codebase. If they are intended as HTML tags, they should be validated to ensure they are properly encoded and render correctly in the target environment.",
-          "suggestion": "Verify the intended purpose and implementation of the '<2>' tags and ensure consistent application in the Romanian version."
+          "description": "The HTML tags <2> and </2> appear to be intended for a specific styling purpose. These tags should be verified to ensure they are used consistently and correctly within the application's design.  For this verification alone, the presence of the tags is noted but not a core translation issue.",
+          "suggestion": "Verify consistency of <2> tags and content formatting with the application's styling guide."
         }
       ],
       "approved_at": null
@@ -324,13 +329,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The original English text focuses on problems and offers support. The Russian translation shifts the focus to connection issues and assistance, which is a broader meaning. It doesn't directly address 'problems'.",
-          "suggestion": "Возникли проблемы? Обратитесь в нашу <2>Службу поддержки</2>."
+          "description": "The English content implies a direct contact for problems. The Russian translation is more general, referring to questions about connection and needing help, rather than general problems. The original meaning is lost.",
+          "suggestion": "Если у вас возникли проблемы, обратитесь в нашу <2>Службу поддержки</2>."
         },
         {
           "type": "formatting",
-          "description": "The HTML tag `<2>` is not standard and likely represents a specific formatting instruction. It's important to ensure this is correctly translated to the Russian equivalent or removed if not applicable.",
-          "suggestion": "Verify that `<2>` corresponds to the intended formatting in the Russian version. If it's a placeholder for bolding or another style, ensure the appropriate tag is used."
+          "description": "The HTML tag `<2>` is not a standard HTML tag. It's likely intended to indicate some kind of formatting or emphasis. The Russian translation maintains the same tag, but the intended meaning is unclear and potentially not rendered correctly. It's recommended to clarify the purpose of the tag and use a suitable alternative.",
+          "suggestion": "Clarify the purpose of the `<2>` tag. If it's for bolding, use `<b>`. If it's for linking, use `<a>`. If it's for some other formatting, use the appropriate HTML tag. If no specific formatting is needed, remove the tag."
         }
       ],
       "approved_at": null
@@ -341,8 +346,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags <2> are not correctly rendered in the Sinhala translation. They should be reflected in the Sinhala output as well to preserve the intended styling.",
-          "suggestion": "Ensure the HTML tags <2> are properly displayed or interpreted in the Sinhala rendering environment.  Consider using a method to preserve the formatting, or if the environment doesn't support it, analyze why and address the underlying issue."
+          "description": "The HTML tags <2> are not properly rendered or understood in Sinhala contexts. While the English uses HTML tags, Sinhala typically doesn't use such tags for emphasis in this manner. It's best to remove them or replace them with a more appropriate Sinhala style of emphasis, if needed.",
+          "suggestion": "Remove the HTML tags: ගැටළුවක් තිබේද? අපගේ සහය කණ්ඩායම අමතන්න."
         }
       ],
       "approved_at": null
@@ -353,8 +358,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English \"Support Team\" is better translated as \"Zákerný tím\" or \"Tím podpory\" instead of \"Podporný tím\". \"Podporný tím\" sounds slightly awkward and doesn't fully convey the meaning of a team offering assistance.",
-          "suggestion": "Kontaktujte náš <2>Zákerný tím.</2> or Kontaktujte náš <2>Tím podpory.</2>"
+          "description": "'Got any problems?' is better translated as 'Máte problémy?' or 'Máte nejaké problémy?' rather than 'Potrebujete pomoc?'. The Slovak translation changes the meaning slightly.",
+          "suggestion": "Máte problémy? or Máte nejaké problémy?"
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags <2> and </2> appear to be used for styling or some specific function. It is important to ensure the Slovak translation also preserves these tags to maintain the original formatting.",
+          "suggestion": "Verify that the tags <2> and </2> function as expected in the Slovak context. If they are meant to be preserved, ensure they are encoded correctly."
         }
       ],
       "approved_at": null
@@ -364,9 +374,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Got any problems?' is a colloquial way of asking if someone needs help. The Slovenian 'Potrebujete pomoč?' is a more formal and direct translation of 'Do you need help?' while 'Got any problems?' implies a more casual inquiry. While not strictly incorrect, it doesn't capture the original tone as well.",
+          "suggestion": "Consider a more colloquial Slovenian equivalent of 'Got any problems?', such as 'Imate težave?' or 'Kaj je narobe?' to better reflect the original tone."
+        },
+        {
           "type": "formatting",
-          "description": "The HTML tags `<2>` are not properly translated or adapted. The Slovenian translation maintains the same HTML tag which might not be consistent with the application’s formatting conventions.",
-          "suggestion": "Review the application’s HTML tag conventions and adjust accordingly. If the tags are meant to be preserved, ensure consistency across all translations."
+          "description": "The HTML tags '<2>...</2>' are inconsistent with standard HTML. The numbering '2' is unusual for simple bolding or emphasis.",
+          "suggestion": "Standardize HTML tags to use either <strong>...</strong> or <b>...</b> for bolding, or potentially remove the tags entirely if the emphasis is not strictly necessary."
         }
       ],
       "approved_at": null
@@ -377,13 +392,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Got any problems?' is better translated as 'Imate problema?' or 'Ako imate problema...'. 'Imate problem?' is grammatically correct but sounds less natural in Serbian.",
-          "suggestion": "Imate problema? / Ako imate problema..."
+          "description": "The English phrase 'Got any problems?' is translated as 'Имате проблем?'. While technically correct, a more natural and common phrasing in Serbian would be something like 'Појавио се проблем?' or 'Имате ли проблем?'",
+          "suggestion": "Имате ли проблем?"
         },
         {
-          "type": "formatting",
-          "description": "The HTML tags '<2>...</2>' appear to be intended for styling. The Cyrillic translation needs to have the same HTML tags to ensure correct styling.",
-          "suggestion": "Имате проблем? Контактирајте наш <2>Тим за подршку.</2>"
+          "type": "incorrect_translation",
+          "description": "'Support Team' is translated as 'Тим за подршку'. While acceptable, 'Одсек за подршку' or 'Екипа за подршку' could be more professional in this context.",
+          "suggestion": "Екипа за подршку"
         }
       ],
       "approved_at": null
@@ -394,8 +409,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags <2> are present in both the English and Serbian content. While technically not an error, it's unusual to have the same formatting tags unless specifically required by the system displaying the content. They may need to be reviewed or removed depending on the application.",
-          "suggestion": "Review the purpose of the <2> tags and either remove them or ensure they are intended and function correctly in the Serbian context."
+          "description": "The HTML tags '<2>' are not consistently formatted.  They appear as opening tags only in the English content but are present in the Serbian translation.",
+          "suggestion": "Ensure consistent HTML tag formatting across both languages.  If the intention is to emphasize 'Support Team', consider using a standardized emphasis tag or ensure proper closing tags."
         }
       ],
       "approved_at": null
@@ -406,8 +421,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags `<2>` are not standard and might not render correctly in all contexts. They are used in the English original as well, but should be verified for consistent behavior.",
-          "suggestion": "Verify the intended purpose and proper rendering of the `<2>` tags across platforms and systems. If it's meant to be bold, consider using `<b>` or `<strong>` tags. If it is meant to just be formatting, ensure the platform supports `<2>` tags."
+          "description": "The HTML tags <2> and </2> are present in both the English and Turkish content. Verify these tags are intended and correctly rendered in the UI.",
+          "suggestion": "Confirm that the <2> and </2> tags are needed and function as intended in the user interface. If they are meant to represent a specific formatting style (e.g., bold, italics), ensure that styling is correctly applied in Turkish as well."
         }
       ],
       "approved_at": null
@@ -418,8 +433,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags `<2>` are not standard and may not render correctly in all systems. They seem intended to signify some styling or emphasis. This needs to be addressed by the implementation team or localization engineers, not the translator.",
-          "suggestion": "Investigate the purpose of the `<2>` tags and ensure the Ukrainian translation renders the intended styling or emphasis correctly. If they are simply meant to represent bold, replace with `<b>` and `</b>` tags."
+          "description": "The HTML tags `<2>` are not standard and may cause rendering issues. They need to be consistent with the system's formatting requirements.  While the translation itself appears correct, the tag usage needs review.",
+          "suggestion": "Check the expected tag format (e.g., <b>, <strong>, <i>, <em> or custom tags) and adjust accordingly.  It's likely this is a system-specific tag and needs to be replicated accurately."
         }
       ],
       "approved_at": null
@@ -430,13 +445,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Got any problems?' is translated as 'Bạn cần trợ giúp?', which means 'Do you need help?'. While conveying a similar meaning, it's not a direct translation of the original phrase. A more literal translation would be something like 'Bạn có vấn đề gì?'",
-          "suggestion": "Bạn có vấn đề gì?"
+          "description": "The phrase \"Support Team\" is translated as \"Nhóm Hỗ Trợ\", which is a literal translation. A more natural and common phrasing in Vietnamese for a support team would be something like \"Đội ngũ hỗ trợ\".",
+          "suggestion": "Bạn cần trợ giúp? Hãy liên hệ với Đội ngũ hỗ trợ <2>của chúng tôi.</2>"
         },
         {
           "type": "formatting",
-          "description": "The HTML tags `<2>` and `</2>` are present in both the English and Vietnamese content. It's important to understand what these tags represent and ensure consistency in their application. Assuming they indicate a specific formatting style (e.g., bolding, italics), it’s crucial to verify that the Vietnamese rendering matches the intended effect.",
-          "suggestion": "Verify the intended formatting associated with the `<2>` and `</2>` tags and ensure they are rendered correctly in Vietnamese."
+          "description": "The `<2>` tags are preserved in the translation. While not inherently incorrect, it's unusual to carry over formatting tags directly unless they serve a specific purpose.",
+          "suggestion": "Consider removing or adapting the tags to align with Vietnamese formatting conventions (if they are intended for HTML/Markdown)"
         }
       ],
       "approved_at": null
@@ -447,8 +462,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tag `<2>` is present in both the English and Chinese versions. This appears to be a placeholder for styling or other dynamic content. It should be verified if the styling is correctly applied in the Chinese version or if it needs to be adapted.",
-          "suggestion": "Verify the intended styling/functionality associated with the `<2>` tag and ensure it is implemented correctly for the Chinese version.  If it's a placeholder, confirm its proper use."
+          "description": "The HTML tags `<2>` and `</2>` are present in both the English and Chinese content, but their purpose is unclear without further context. It's essential to ensure these tags are correctly interpreted and rendered in the target platform. If they are intended to indicate a specific styling or action, this should be consistent across both languages.",
+          "suggestion": "Verify the intended functionality of the `<2>` and `</2>` tags and ensure consistency in rendering across both English and Chinese versions.  Consider whether these are placeholders for a style tag or have another specific meaning."
         }
       ],
       "approved_at": null

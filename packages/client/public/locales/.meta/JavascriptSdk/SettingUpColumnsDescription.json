@@ -3,7 +3,7 @@
   "content": "You can disable the ability for users to manage and customize file information columns in list view.",
   "content_en_sha1_hash": "76868dd0a3859dca5c680f703c78401724009d5e",
   "created_at": "2025-05-19T21:30:54.686Z",
-  "updated_at": "2025-05-21T08:34:54.222Z",
+  "updated_at": "2025-05-24T08:47:53.845Z",
   "comment": {
     "text": "You can disable the ability for users to manage and customize file information columns in list view. This setting is typically found on a portal settings page or similar configuration option.",
     "is_auto": true,
@@ -30,13 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'manage file information columns' could be more accurately translated to reflect the concept of customizing display columns. 'إدارة أعمدة معلومات الملف' focuses on management, while the English implies customization of what's *shown*.",
-          "suggestion": "يمكنك تعطيل قدرة المستخدمين على تخصيص أعمدة عرض معلومات الملف في طريقة عرض القائمة."
-        },
-        {
-          "type": "grammar",
-          "description": "While not strictly incorrect, the sentence structure 'يمكنك تعطيل قدرة المستخدمين...' is a bit wordy. A more concise phrasing would improve readability.",
-          "suggestion": "يمكنك تعطيل تخصيص أعمدة معلومات الملف في طريقة عرض القائمة."
+          "description": "The phrase 'manage and customize' is not fully captured by 'إدارة وتخصيص'. 'إدارة' implies management, but 'تخصيص' focuses solely on customization. A more accurate translation for 'manage' could include options for sorting, filtering, or reordering, which are all forms of management in this context.",
+          "suggestion": "يمكنك تعطيل قدرة المستخدمين على إدارة (مثل الترتيب والتصفية) وتخصيص أعمدة معلومات الملف في طريقة عرض القائمة."
         }
       ],
       "approved_at": null
@@ -44,19 +39,19 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'fərdiləşdirmək' is a less common and potentially awkward phrasing for 'customize'.",
+          "suggestion": "İstifadəçilərin siyahı görünüşündə fayl məlumatı sütunlarını idarə etmək və özelleştirmək imkanını söndürə bilərsiniz."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Можете да деактивирате възможността на потребителите да управляват и персонализират колони с информация за файлове в изгледа на списъка.' is a bit verbose and could be more concise while retaining the meaning. A more natural phrasing might be 'Можете да забраните на потребителите да управляват и персонализират колони във изгледа на списъка'.",
-          "suggestion": "Можете да забраните на потребителите да управляват и персонализират колони във изгледа на списъка."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -68,19 +63,37 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'anpassen' (customize) is correctly spelled but could be slightly more precise. While 'anpassen' means 'to adapt' or 'to customize', in a technical context, 'konfigurieren' (to configure) might be a better fit to convey the ability to set up and manage columns.",
+          "suggestion": "Sie können die Möglichkeit für Benutzer deaktivieren, Dateiinformationsspalten in der Listenansicht zu verwalten und zu konfigurieren."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"να προσαρμόζουν\" (to customize) could be more accurately translated as \"να τροποποιούν\" (to modify) in this context. While 'customize' can be translated as 'προσαρμόζουν,' 'τροποποιούν' is more commonly used for describing adjustments to existing system features.",
+          "suggestion": "Μπορείτε να απενεργοποιήσετε τη δυνατότητα των χρηστών να διαχειρίζονται και να τροποποιούν τις στήλες πληροφοριών αρχείων στην προβολή λίστας."
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"file information columns\" is a bit clunky in Spanish. A more natural phrasing would be \"columnas de información de los archivos\" or simply \"columnas de información\".",
+          "suggestion": "Puede desactivar la capacidad de los usuarios para administrar y personalizar las columnas de información de los archivos en la vista de lista."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -89,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"luottelonäkymässä\" translates to 'in a ledger view' which is not the intended meaning of 'list view'. It should be closer to 'listanäkymässä'.",
-          "suggestion": "Voit ottaa pois käytöstä käyttäjien mahdollisuuden hallita ja mukauttaa tiedoston tietosarakkeita listanäkymässä."
+          "description": "The term 'luottelonäkymässä' is not the most accurate translation of 'list view'. 'Luettelonäkymässä' would be more appropriate.",
+          "suggestion": "Voit ottaa pois käytöstä käyttäjien mahdollisuuden hallita ja mukauttaa tiedoston tietosarakkeita luettelonäkymässä."
         }
       ],
       "approved_at": null
@@ -107,8 +120,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word \"ֆայլերի\" (fayleri) should likely be \"ֆայլերի մասին\" (fayleri masin) to more accurately reflect 'file information'.",
-          "suggestion": "Դուք կարող եք անջատել օգտատերերի՝ ցանկի տեսքով ֆայլերի մասին տեղեկատվության սյունակները կառավարելու և հարմարեցնելու հնարավորությունը:"
+          "description": "The word 'ցանկի' (tsanki) is a slightly awkward wording. While technically correct, it implies 'list' as a specific entity, which isn't the intended meaning. It's better to use a more general term related to views or interfaces.",
+          "suggestion": "Consider replacing 'ցանկի' with 'լուրջ' (lurj) or a similar term that refers to the view itself."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure is slightly complex for Armenian.  The repeated use of 'կառավարելու և հարմարեցնելու հնարավորությունը' creates a cumbersome flow.",
+          "suggestion": "Restructure the sentence to make it more readable. For example: 'Դուք կարող եք անջատել օգտատերերին թույլտվություն տալու ֆայլերի տեղեկատվության սյունակները կառավարելու և հարմարեցնելու ֆունկցիան:' (You can disable the function that allows users to manage and customize file information columns.)"
         }
       ],
       "approved_at": null
@@ -116,13 +134,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'elenco' might be more accurately translated as 'lista' in this context, as 'elenco' often refers to a more detailed listing.",
-          "suggestion": "Puoi disattivare la possibilità per gli utenti di gestire e personalizzare le colonne di informazioni sui file nella visualizzazione lista."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -131,8 +143,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation, while understandable, doesn't perfectly capture the nuance of 'disable the ability.' It's a bit verbose. A more direct translation of 'disable' might be preferable.",
-          "suggestion": "リストビューのファイル情報列のユーザーによる管理およびカスタマイズ機能を無効にすることができます。"
+          "description": "The translation, while generally understandable, doesn't perfectly capture the nuance of 'disable the ability.' It sounds a bit clunky. A more natural phrasing might emphasize preventing users from doing something.",
+          "suggestion": "リストビューのファイル情報列をユーザーが管理およびカスタマイズするのを禁止することができます。(Risuto byū no fairu jōhō retsu o yūzā ga kanri oyobi kasutaimuzu suru no o kinshi suru koto ga dekimasu.)"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'および' (oyobi) feels slightly formal for this context. While not incorrect, a more conversational alternative might improve readability.",
+          "suggestion": "リストビューのファイル情報列をユーザーが管理したり、カスタマイズしたりする機能を無効にすることができます。(Risuto byū no fairu jōhō retsu o yūzā ga kanri shitari, kasutaimuzu shitari suru kō na o mēi ni suru koto ga dekimasu.)"
         }
       ],
       "approved_at": null
@@ -149,13 +166,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and doesn't flow naturally in Lao. \"ຄວາມສາມາດສໍາລັບຜູ້ໃຊ້ໃນການຄຸ້ມຄອງແລະປັບ\" is cumbersome. It should be simplified.",
-          "suggestion": "ທ່ານ​ສາ​ມາດ​ປິດ​ຄວາມ​ສາ​ມາດ​ໃຫ້​ຜູ້​ໃຊ້​ບໍ່​ສາ​ມາດ​ຄຸ້ມ​ຄອງ​ແລະ​ປັບ​ຄໍ​ລໍາ​ຂໍ້​ມູນ​ໄຟລ​໌​ໃນ​ການ​ເບິ່ງ​ລາຍ​ການ​."
+          "description": "The translation 'ຄວາມສາມາດສໍາລັບຜູ້ໃຊ້ໃນການຄຸ້ມຄອງ' is a bit awkward and doesn't directly convey the meaning of 'ability for users to manage'. A more natural phrasing would be 'ສິດໃນການຄຸ້ມຄອງ' or 'ການຄຸ້ມຄອງຂອງຜູ້ໃຊ້'.",
+          "suggestion": "ທ່ານ​ສາ​ມາດ​ປິດ​ການ​ທໍາ​ງານ​ສິດ​ສໍາ​ລັບ​ຜູ້​ໃຊ້​ໃນ​ການ​ຄຸ້ມ​ຄອງ​ແລະ​ປັບ​ຄໍ​ລໍາ​ຂໍ້​ມູນ​ໄຟລ​໌​ໃນ​ການ​ເບິ່ງ​ລາຍ​ການ​."
         },
         {
           "type": "spelling",
-          "description": "While likely not an error, consider if 'ເບິ່ງລາຍການ' is the most appropriate term. It literally means 'view list'. Depending on the context, a more concise phrase may be better.",
-          "suggestion": "Consider replacing 'ເບິ່ງລາຍການ' with a more concise term if applicable to the user interface."
+          "description": "The word 'ປິດ' (pid) is generally accurate, but in this context 'ບິດ' (bit) could arguably be considered a better fit, implying the disabling of a feature or setting. However, 'ປິດ' is still acceptable.",
+          "suggestion": "No change needed, 'ປິດ' is acceptable."
         }
       ],
       "approved_at": null
@@ -166,13 +183,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"pārvaldīt un pielāgot\" (manage and customize) is a bit stiff and could be improved. While technically correct, it doesn't flow as naturally in Latvian.",
-          "suggestion": "Consider 'pielāgot un saglabāt' or 'pielāgot un konfigurēt' which convey a similar meaning but read more smoothly in Latvian. Alternatively, 'mainīt' (change) is a more simple option."
-        },
-        {
-          "type": "formatting",
-          "description": "While not a critical error, the phrasing 'failu informācijas kolonnas saraksta skatā' is a little verbose. It would benefit from slight restructuring for better readability.",
-          "suggestion": "Consider 'failu kolonnas saraksta skatā' which is more concise while maintaining accuracy."
+          "description": "The translation \"Varat atspējot lietotāju iespēju pārvaldīt un pielāgot failu informācijas kolonnas saraksta skatā.\" is a bit verbose and could be more concise. While technically correct, it's not as natural-sounding as it could be.",
+          "suggestion": "Varat atspējot lietotāju iespēju pārvaldīt un pielāgot failu kolonnas saraksta skatā."
         }
       ],
       "approved_at": null
@@ -189,8 +201,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'dostosowywania ich przez użytkowników' is a bit clunky. A more natural phrasing would be something like 'ich dostosowywania przez użytkowników' or simply 'ich dostosowania'.",
-          "suggestion": "Możesz wyłączyć możliwość zarządzania kolumnami z informacjami o plikach i ich dostosowania przez użytkowników w widoku listy."
+          "description": "The translation 'dostosowywania ich przez użytkowników' is slightly awkward. While technically correct, it's more natural to rephrase.",
+          "suggestion": "Możesz wyłączyć możliwość zarządzania kolumnami z informacjami o plikach i umożliwienia użytkownikom ich dostosowywania w widoku listy."
         }
       ],
       "approved_at": null
@@ -198,7 +210,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Você pode desativar a capacidade dos usuários de gerenciar e personalizar colunas de informações de arquivo na exibição de lista' is a bit wordy and could be more concise. 'Capacidade dos usuários' is a lengthy phrasing.",
+          "suggestion": "Você pode desativar a capacidade dos usuários gerenciar e personalizar colunas de informações de arquivo na exibição de lista."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -213,13 +231,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"coloanele, care conțin informații despre fișiere\" is a bit wordy and doesn't quite capture the simplicity of \"file information columns.\" A more direct translation would improve clarity.",
-          "suggestion": "Puteți dezactiva posibilitatea utilizatorilor de a gestiona și de a personaliza coloanele cu informații despre fișiere în vizualizare listă."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the comma separating the two actions (gestionat și de a personaliza) creates a slight pause that may feel unnatural in Romanian. Rephrasing to remove the comma can improve flow.",
-          "suggestion": "Puteți dezactiva posibilitatea utilizatorilor de a gestiona și personaliza coloanele cu informații despre fișiere în vizualizare listă."
+          "description": "The translation is overly verbose and doesn't capture the conciseness of the English original. \"care conțin informații despre fișiere\" is redundant.",
+          "suggestion": "Puteți dezactiva posibilitatea utilizatorilor de a gestiona și de a personaliza coloanele în vizualizare listă."
         }
       ],
       "approved_at": null
@@ -230,8 +243,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Вы можете отключить для пользователей возможность управлять и настраивать столбцы с информацией о файле в виде списка' is a bit literal and not the most natural way to express the intended meaning in Russian. A better phrasing would emphasize *allowing* users to disable the feature, rather than the users being affected by the disabling action.",
-          "suggestion": "Вы можете разрешить пользователям отключить возможность управления и настройки столбцов с информацией о файле в представлении списка."
+          "description": "The phrase \"отключить для пользователей\" is slightly awkward. It translates literally to \"disable for users,\" which isn't the most natural way to express the intended meaning. A more natural phrasing would be something like \"запретить пользователям\" or \"лишить пользователей возможности\".",
+          "suggestion": "Вы можете запретить пользователям управлять и настраивать столбцы с информацией о файле в виде списка."
         }
       ],
       "approved_at": null
@@ -242,18 +255,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අබල කිරීමට හැකිය' (abal karamita hækiyä) doesn't perfectly capture the meaning of 'disable'. A more accurate translation for 'disable' in this context would be 'අයින් කිරීමට' (ain karamita) or 'අවලංගු කිරීමට' (awalangu karamita).",
-          "suggestion": "Replace 'අබල කිරීමට හැකිය' with 'අයින් කිරීමට හැකිය' or 'අවලංගු කිරීමට හැකිය'."
+          "description": "The translation \"අබල කිරීමට\" (abal karamita) is an awkward and somewhat uncommon way to express 'disable'. A more natural and common phrasing would be 'අවනතට දැමීමට' (avanata damima) or simply 'නවත්වා දැමීමට' (navathva damima).",
+          "suggestion": "Replace \"අබල කිරීමට\" with \"අවනතට දැමීමට\" or \"නවත්වා දැමීමට\"."
         },
         {
-          "type": "grammar",
-          "description": "The sentence structure 'ලැයිස්තු දැක්ම තුළ පරිශ්‍රීලකයින්ට' could be improved for better flow. It's a bit clunky. Consider reordering the sentence.",
-          "suggestion": "Consider restructuring the sentence, perhaps starting with 'ඔබට ලැයිස්තු දැක්මට...' (You can to list view...)"
-        },
-        {
-          "type": "formatting",
-          "description": "While not critical, the translation could benefit from slightly improved readability. Breaking the longer sentence into two shorter sentences could enhance clarity.",
-          "suggestion": "Split the sentence: 'ඔබට ලැයිස්තු දැක්ම තුළ ගොනු තොරතුරු තීරු කළමනාකරණ පහසුකම අයින් කිරීමට හැකිය. පරිශ්‍රීලකයින්ට අභිරුචිකරණ පහසුකමද ඔබට අයින් කිරීමට හැකිය.' (You can disable file information column management. You can also disable customization options for users.)"
+          "type": "grammatical",
+          "description": "The phrase \"ගොනු තොරතුරු තීරු කළමනාකරණ සහ අභිරුචිකරණ පහසුකම\" is a bit complex and could be simplified for better readability. The word order might be improved.",
+          "suggestion": "Consider restructuring the phrase to something like \"ගොනු තොරතුරු කළමනාකරණය සහ අභිරුචිකරණ පහසුකම\" or \"ගොනු තොරතුරු තීරු කිරීමේ සහ අභිරුචිකරණ පහසුකම\"."
         }
       ],
       "approved_at": null
@@ -263,14 +271,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation \"Používateľom môžete zakázať možnosť spravovať a prispôsobovať stĺpce s informáciami o súboroch pri zobrazení v podobe zoznamu\" is a bit verbose and could be more concise. While technically correct, it doesn't convey the meaning as naturally as possible in Slovak.",
-          "suggestion": "Používateľom môžete zakázať správu a prispôsobovanie stĺpcov s informáciami o súboroch v zobrazení zoznamu."
-        },
-        {
           "type": "formatting",
-          "description": "The phrase \"pri zobrazení v podobe zoznamu\" is slightly awkward. While not incorrect, it's less fluent than alternatives.",
-          "suggestion": "in zobrazení zoznamu"
+          "description": "The Slovak translation is a bit long and could benefit from slightly improved phrasing for readability. While grammatically correct, it's somewhat clunky.",
+          "suggestion": "Používateľom môžete zakázať správu a prispôsobovanie stĺpcov s informáciami o súboroch v zobrazení zoznamu."
         }
       ],
       "approved_at": null
@@ -287,13 +290,18 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'онемогуц́ити' (onemogućiti) is a less common and slightly awkward word choice in this context. A more natural option would be 'онемогућити' (onemogučiti).",
-          "suggestion": "Можете онемогућити могуц́ност корисницима да управљају и прилагођавају колоне са информацијама о датотеци у приказу листе."
+          "description": "The word 'онемогуц́ити' is a less common and potentially awkward phrasing. While technically correct, it could be improved for better readability.",
+          "suggestion": "Можете искључити могућност..."
         },
         {
           "type": "grammar",
-          "description": "The sentence structure is a bit convoluted. While grammatically correct, it could be improved for readability.",
-          "suggestion": "Можете онемогућити могућност за кориснике да управљају и прилагођавају информационе колоне у приказу листе."
+          "description": "The sentence structure 'Можете искључити могућност корисницима да управљају и прилагођавају...' is slightly cumbersome. It can be improved for flow.",
+          "suggestion": "Можете искључити могућност корисницима да управљају и прилагођавају своје колоне..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'прилагођавају' is translated as 'customize', which is a reasonable translation, but 'своје' (their own) would provide better clarity. The original implies users are customizing *their own* columns.",
+          "suggestion": "Можете искључити могућност корисницима да управљају и прилагођавају своје колоне са информацијама о датотеци у приказу листе."
         }
       ],
       "approved_at": null
@@ -304,13 +312,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'mogućnost' appears twice and while technically correct, it's somewhat verbose. 'Mogućnost' is also acceptable, and using it consistently would improve readability.",
-          "suggestion": "Consider replacing the first 'mogućnost' with 'da' or simply rephrasing to avoid repetition."
+          "description": "The word 'mogućnost' is repeated and can be simplified.",
+          "suggestion": "Možete onemogućiti korisnicima da upravljaju i prilagođavaju kolone sa informacijama o datoteci u prikazu liste."
         },
         {
           "type": "grammar",
-          "description": "The sentence structure is a bit clunky. The phrase 'kolone sa informacijama o datoteci' could be improved for better flow.",
-          "suggestion": "Consider rephrasing to 'kolone za informacije o datotekama' or 'kolone sa podacima o datotekama'."
+          "description": "The sentence structure can be improved for better flow and readability. 'Možete onemogućiti mogućnost korisnicima' sounds slightly awkward.",
+          "suggestion": "Možete onemogućiti korisnicima upravljanje i prilagođavanje kolona sa informacijama o datoteci u prikazu liste."
         }
       ],
       "approved_at": null
@@ -327,8 +335,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'налаштовувати їх' is a bit clunky and doesn't fully capture the nuance of 'customize'. A more accurate translation for 'customize' in this context would be 'персоналізувати'.",
+          "description": "The translation 'налаштовувати їх' is a bit awkward. 'Налаштовувати' implies more complex configuration than 'customize'. A more accurate translation of 'customize' would be 'персоналізувати' or 'налаштовувати на власний розсуд'.",
           "suggestion": "Ви можете вимкнути можливість для користувачів керувати стовпцями інформації про файл та персоналізувати їх у поданні списку."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence is a bit long and could be broken down for better readability. While grammatically correct, it can feel dense.",
+          "suggestion": "Ви можете вимкнути можливість для користувачів керувати стовпцями інформації про файл. Також, ви можете завадити їм налаштовувати їх у поданні списку."
         }
       ],
       "approved_at": null
@@ -345,8 +358,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"您可以为用户停用在列表视图中管理和自定义文件信息列的功能\" is overly formal and somewhat awkward. '停用' (tingyong) implies a more permanent disabling than 'disable' suggests. A more natural translation would convey the ability to prevent users from doing something, not necessarily to permanently shut down the function.",
-          "suggestion": "您可以禁止用户在列表视图中管理和自定义文件信息列。"
+          "description": "The translation \"您可以为用户停用在列表视图中管理和自定义文件信息列的功能\" is slightly awkward. '停用' (tingyong) implies a more complete disabling, while the English suggests more of an option to disable the *ability* to manage and customize. A more accurate phrasing would better reflect the nuance.",
+          "suggestion": "您可以禁用用户在列表视图中管理和自定义文件信息列的功能。"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Invalid email address",
   "content_en_sha1_hash": "9e4ee6d718da29c791cb6499ae1de88bbd71758c",
   "created_at": "2025-05-19T21:30:57.210Z",
-  "updated_at": "2025-05-20T09:47:51.573Z",
+  "updated_at": "2025-05-24T14:55:28.302Z",
   "comment": {
     "text": "This translation key is used to display an error message when an invalid email address is entered into a form field. It appears in a form validation error message typically seen in login or registration forms.",
     "is_auto": true,
@@ -81,7 +81,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Անվավեր էլ․ հասցե' is a literal translation but not the most natural or idiomatic way to express 'Invalid email address' in Armenian. While understandable, it's quite technical.",
+          "suggestion": "Մեղսողական էլ․ հասցե"
+        },
+        {
+          "type": "formatting",
+          "description": "The ellipsis (․) seems a bit out of place and interrupts the flow. It isn't necessary in this context.",
+          "suggestion": "Անվավեր էլեկտրոնային հասցե"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -141,7 +152,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Adresa e-mail invalidă' is a literal translation of 'Invalid email address' but sounds unnatural in Romanian. A more natural and common phrasing would be something like 'Adresă de e-mail invalidă' or 'Adresa de e-mail este invalidă'.",
+          "suggestion": "Adresă de e-mail invalidă"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +170,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'වලංගු නොවන වි-තැපෑලකි' while conveying the general idea of 'invalid email address', isn't the most natural or accurate rendering in Sinhala. A more standard and clear translation would be something like 'අවලංගු තැපැල් ලිපිනයකි' or 'ᱵᱟᱹᱲᱤᱡ තැපැල් ලිපිනයකි'.",
+          "suggestion": "අවලංගු තැපැල් ලිපිනයකි"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'වි-තැපෑලකි' contains a hyphen that's not commonly used in this context. While understandable, it's slightly awkward.",
+          "suggestion": "තැපෑලකි"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +199,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'емаил' is a transliteration from English 'email' and isn't a standard Serbian word. The correct Serbian word is 'email'.",
+          "suggestion": "email"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Nevažeća email adresa' is not the most natural or idiomatic Serbian (Latin) translation for 'Invalid email address'. While technically correct, it sounds slightly awkward.",
+          "suggestion": "Neispravna email adresa"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

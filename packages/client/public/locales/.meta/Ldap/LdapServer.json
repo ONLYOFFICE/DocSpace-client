@@ -3,7 +3,7 @@
   "content": "Server",
   "content_en_sha1_hash": "cb0cb170d106f8e8d5af1e05bbdbd3a96a7de197",
   "created_at": "2025-05-19T21:30:54.268Z",
-  "updated_at": "2025-05-21T08:08:01.940Z",
+  "updated_at": "2025-05-24T08:21:43.485Z",
   "comment": {
     "text": "The \"LdapServer\" translation key is used to display the label for a field related to LDAP server settings in a connection settings component. It appears as a required input field and provides a tooltip for users when hovering over the field. The translation will be displayed in PortalSettings categories, specifically in the integration section of the Connection Settings page.",
     "is_auto": true,
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English word \"Server\" is singular. The Latvian translation \"Servers\" is plural. This suggests an incorrect translation. \"Serveris\" would be the correct singular translation.",
-          "suggestion": "Serveris"
+          "description": "The English word 'Server' is singular, but the Latvian translation 'Servers' is plural. This suggests an incorrect translation as it doesn't match the singular nature of the English key.",
+          "suggestion": "Servers (if the intent is a list of servers) or 'Serveris' (if referring to a single server)."
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"සේවකය\" (sēwakaya) translates to \"employee\" or \"servant,\" not \"server.\" The correct translation for \"Server\" in this context (LDAP server) should convey the meaning of a computing server.",
-          "suggestion": "වස්තුව\" (vasthu) - which means 'object' or 'thing' - could be a more suitable translation depending on the specific LDAP context. Alternatively, a more technical term like 'ප්ලේට්ෆෝම්' (pṭēṭfōm) meaning 'platform' or a transliteration of 'Server' might be appropriate, but would require more context to determine the best option."
+          "description": "The Sinhala translation \"සේවකය\" (sevaakaya) translates to \"employee\" or \"servant\", not \"server\". The intended meaning of \"Server\" in the context of LDAP is a computing server.",
+          "suggestion": "The correct translation should be something along the lines of \"ගණකාගාරය\" (ganakaagaraya) which means \"server\" or a more technical term depending on the context, or \"සේවාදgetServer\" (sevaada server) to clarify it’s a server."
         }
       ],
       "approved_at": null

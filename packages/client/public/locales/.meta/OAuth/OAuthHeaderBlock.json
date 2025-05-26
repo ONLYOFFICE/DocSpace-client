@@ -3,7 +3,7 @@
   "content": "OAuth URLs",
   "content_en_sha1_hash": "10052a758cb15640d31b764178fe5d223c38a090",
   "created_at": "2025-05-19T21:30:53.961Z",
-  "updated_at": "2025-05-21T07:07:19.050Z",
+  "updated_at": "2025-05-24T07:21:24.260Z",
   "comment": {
     "text": "This translation key is used to display a heading for an OAuth-related block in a user interface, likely a form or settings page. It prompts users to enter \"OAuth URLs\" and appears on-screen as part of the ClientForm component.",
     "is_auto": true,
@@ -42,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"OAuth url адреси\" is not the most natural or accurate translation of \"OAuth URLs\". While technically correct, it's a bit clunky. \"url\" is already an English word and using the Bulgarian word 'адреси' (addresses) after it creates an unnecessary duplication and isn't how native speakers typically express this.",
+          "description": "The translation 'OAuth url адреси' is not the most natural or accurate translation of 'OAuth URLs'. While technically correct, 'url адреси' is a bit clunky in Bulgarian. A more idiomatic translation would be 'OAuth URL-и' or 'OAuth URL адреси' (with a less formal tone).",
           "suggestion": "OAuth URL-и"
         }
       ],
@@ -57,13 +57,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses a hyphenated form where it may be preferable to avoid it for better readability in German. While technically correct, 'OAuth-URLs' can feel less natural.",
-          "suggestion": "OAuth URLs"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -72,8 +66,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"URL OAuth\" reverses the order and doesn't accurately convey the meaning of \"OAuth URLs.\" It sounds awkward and doesn't follow standard Greek phrasing for compound nouns or phrases related to technology.",
+          "description": "The translation \"URL OAuth\" reverses the expected order and doesn't accurately convey the meaning of \"OAuth URLs.\" The term 'OAuth' is an adjective describing 'URLs' in the English content.",
           "suggestion": "Διευθύνσεις URL OAuth"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation appears to be a direct word-for-word reversal without considering natural Greek word order.",
+          "suggestion": "Consider restructuring the phrase to sound more natural in Greek, like 'OAuth διευθύνσεις' or 'OAuth URL' (although the latter is less preferred)."
         }
       ],
       "approved_at": null
@@ -81,13 +80,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"URL de OAuth\" is understandable, a more natural and common translation for \"OAuth URLs\" in Spanish would be \"URLs de OAuth\". The word order in Spanish often places the noun before the modifying word.",
-          "suggestion": "URLs de OAuth"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -96,7 +89,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'OAuth urlit' is not grammatically correct or a natural Finnish translation for 'OAuth URLs'. 'URLs' is plural and needs to be properly translated.",
+          "description": "The translation 'OAuth urlit' is not grammatically correct or a natural Finnish expression. 'urlit' is not a standard pluralization of 'url'.",
           "suggestion": "OAuth-osoitteet"
         }
       ],
@@ -108,8 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Adresses URL d'OAuth' is understandable, a more accurate and idiomatic translation of 'OAuth URLs' would be 'URL OAuth' or 'Adresses OAuth'. The current translation places 'URL' before 'OAuth', which isn't the typical order in French for this context. Using 'URL OAuth' also aligns better with how terms are commonly structured in French technical documentation.",
-          "suggestion": "URL OAuth"
+          "description": "While \"Adresses URL d'OAuth\" is understandable, a more accurate and natural translation of \"OAuth URLs\" would be \"URLs OAuth\" or \"URL OAuth\". The current translation places \"Adresses\" unnecessarily.",
+          "suggestion": "URLs OAuth"
         }
       ],
       "approved_at": null
@@ -126,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'URL OAuth' reverses the order of the terms. 'OAuth URLs' refers to URLs related to OAuth, and should be translated in a way that reflects this relationship. The direct translation 'URL OAuth' implies OAuth is a type of URL, which is incorrect.",
-          "suggestion": "OAuth URL"
+          "description": "The Italian translation \"URL OAuth\" reverses the order of the terms. The correct order, mirroring the English \"OAuth URLs\", should be \"URL OAuth\" is incorrect. The correct translation should put 'OAuth' first.",
+          "suggestion": "OAuth URLs"
         }
       ],
       "approved_at": null
@@ -138,8 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'OAuthのURL' is technically correct but lacks the nuance of 'OAuth URLs'. It translates to 'OAuth URL' which implies a single URL. 'OAuth URLs' implies a collection or list of URLs.",
-          "suggestion": "OAuthのURLリスト (OAuth URL list) or OAuthのURL群 (OAuth URL group)"
+          "description": "The translation 'OAuthのURL' is too literal. A more natural Japanese translation for \"OAuth URLs\" would be something like \"OAuth関連URL」 or \"OAuth URLリスト\". The current translation lacks clarity and might be confusing to a Japanese speaker.",
+          "suggestion": "OAuth関連URL (OAuth-kanren URL) or OAuth URLリスト (OAuth URL risuto)"
         }
       ],
       "approved_at": null
@@ -150,8 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"OAuth URLs\" (plural) has been translated to \"OAuth URL\" (singular). The translation should reflect the plural form.",
-          "suggestion": "OAuth URL 목록"
+          "description": "The English phrase \"OAuth URLs\" is plural, while the Korean translation \"OAuth URL\" is singular. This suggests an inaccurate translation as it doesn't reflect the plural nature of the original content.",
+          "suggestion": "OAuth URL 목록 (OAuth URL List)"
         }
       ],
       "approved_at": null
@@ -168,8 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"vietrāži\" is typically used for fireflies, not URLs. It's an incorrect translation for 'URLs'.",
-          "suggestion": "OAuth URL-i or OAuth adrešu URL-i"
+          "description": "The translation \"OAuth vietrāži URL\" is not an accurate translation of \"OAuth URLs.\" \"Vietrāži\" translates to \"windmills.\" The correct translation should convey the meaning of URLs related to OAuth.",
+          "suggestion": "OAuth URL"
         }
       ],
       "approved_at": null
@@ -192,8 +185,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'URLs OAuth' reverses the expected order and doesn't accurately convey the meaning of 'OAuth URLs'. The phrase should place 'OAuth' before 'URLs' to maintain the proper structure and understanding.",
-          "suggestion": "OAuth URLs"
+          "description": "The Portuguese translation 'URLs OAuth' reverses the order of the terms. In Portuguese, it's more natural to place the qualifier ('OAuth') after the subject ('URLs').",
+          "suggestion": "URLs OAuth should be 'URLs OAuth' (URLs do OAuth) or 'URLs OAuth' (URLs OAuth)."
         }
       ],
       "approved_at": null
@@ -204,7 +197,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"URLs OAuth\" reverses the order of the English phrase \"OAuth URLs.\" The correct order is \"OAuth URLs.\" The translation should maintain the original phrasing.",
+          "description": "The Portuguese translation \"URLs OAuth\" reverses the order of the terms. The standard practice would be to place 'OAuth' before 'URLs' to maintain consistency and readability. It reads awkwardly.",
           "suggestion": "OAuth URLs"
         }
       ],
@@ -222,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"URL-адреса OAuth \" is too literal. A more natural Russian translation would be \"OAuth URL-адреса\" or simply \"OAuth URL-ы\". While technically correct, the current translation sounds somewhat awkward in Russian.",
-          "suggestion": "OAuth URL-адреса"
+          "description": "The translation \"URL-адреса OAuth\" is a literal translation but lacks clarity. A more natural Russian phrasing would be something like \"OAuth URL-ы\" or \"Адреса OAuth\". While understandable, the current translation isn't idiomatic.",
+          "suggestion": "OAuth URL-ы"
         }
       ],
       "approved_at": null
@@ -234,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"OAuth URL න්\" is not a complete or accurate translation of \"OAuth URLs.\" The suffix \"න්\" implies a plural possessive or a derived noun, which doesn't directly convey the meaning of 'URLs'.",
-          "suggestion": "OAuth URLs, OAuth සබැඳි (OAuth sabandhi), or OAuth සබැඳිය (OAuth sabandiya) might be more appropriate depending on the desired level of formality and specificity."
+          "description": "The translation \"OAuth URL න්\" is not a natural or accurate translation of \"OAuth URLs\". The suffix \"න්\" implies a plural possessive, which isn't the intended meaning. A more accurate translation would convey the general concept of OAuth URLs.",
+          "suggestion": "OAuth URLs or OAuth වෙබ් ලිපිනයා"
         }
       ],
       "approved_at": null
@@ -252,7 +245,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"OAuth URL-ji\" while technically conveying 'OAuth URLs', is not the most natural or idiomatic Slovenian. The plural form 'URL-ji' is acceptable, but the more common and preferred construction would be 'OAuth spletne naslove'.",
+          "description": "The translation 'OAuth URL-ji' is grammatically correct but might sound unnatural in Slovenian. While 'URL-ji' is the plural form of 'URL', a more natural phrasing might be 'OAuth spletne naslove' or 'OAuth naslove'.",
           "suggestion": "OAuth spletne naslove"
         }
       ],
@@ -264,8 +257,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"OAuth URL-ови\" is not the most accurate or natural way to translate \"OAuth URLs\". While technically correct, the pluralization using the suffix '-ови' is more commonly used for entities or things, not for a list of URLs. A more natural translation would be 'OAuth URL-ovi' (with the shorter plural suffix) or 'OAuth URL adrese' (OAuth URL addresses).",
-          "suggestion": "OAuth URL-ovi or OAuth URL adrese"
+          "description": "The translation \"OAuth URL-ови\" is a plural form, but \"OAuth URLs\" likely refers to a general concept or a list, not a specific collection. The singular form is more appropriate.",
+          "suggestion": "OAuth URL-ови (if referring to a list) or OAuth URL (if referring to the concept)"
         }
       ],
       "approved_at": null
@@ -276,8 +269,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"OAuth URL-ovi\" is grammatically correct but may not be the most natural or preferred translation of \"OAuth URLs.\" A more natural translation might be \"OAuth URL adrese\" or \"OAuth URL-ovi\" depending on the desired level of formality. 'Adrese' implies locations or addresses, which is often what 'URLs' represent in this context.",
-          "suggestion": "Consider using \"OAuth URL adrese\" for a more natural feel."
+          "description": "The Serbian translation 'OAuth URL-ovi' isn't the most natural or accurate translation of 'OAuth URLs'. While grammatically correct, it sounds somewhat awkward. A more natural translation would be 'OAuth URL adrese'.",
+          "suggestion": "OAuth URL adrese"
         }
       ],
       "approved_at": null
@@ -288,7 +281,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"OAuth bağlantıları\" while technically correct, doesn't fully capture the meaning of \"OAuth URLs\". \"Bağlantıları\" implies links, whereas \"URLs\" refers to the addresses themselves. A more accurate translation would reflect that.",
+          "description": "The translation 'OAuth bağlantıları' while technically correct, doesn't fully capture the meaning of 'OAuth URLs'. 'Bağlantıları' translates to 'connections' or 'links', but 'URLs' specifically refers to web addresses. A more accurate translation would convey this specificity.",
           "suggestion": "OAuth URL'leri"
         }
       ],
@@ -306,8 +299,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Vietnamese translation 'URLs OAuth' reverses the order of the English phrase 'OAuth URLs'. The standard order is 'OAuth' followed by the noun it modifies.",
-          "suggestion": "OAuth URLs should be translated as 'OAuth URLs' or 'URL OAuth' depending on the desired emphasis. A more natural translation might be 'Các URL OAuth' (The OAuth URLs)."
+          "description": "The translation \"URLs OAuth\" reverses the natural order and doesn't accurately convey the meaning of \"OAuth URLs\". The term \"OAuth\" describes the URLs, not the other way around.",
+          "suggestion": "OAuth URLs should be translated as \"Các URL OAuth\" or \"URL OAuth\" (depending on the desired level of formality and flow within the broader context)."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation places \"OAuth\" after \"URLs\". While technically not wrong, it's unusual in Vietnamese and disrupts the flow and expected structure.",
+          "suggestion": "Rearrange the words to follow a more natural order, like \"Các URL OAuth\" or \"URL OAuth\"."
         }
       ],
       "approved_at": null

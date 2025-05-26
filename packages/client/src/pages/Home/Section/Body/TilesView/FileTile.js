@@ -205,7 +205,9 @@ const FileTile = (props) => {
     />
   );
 
-  const folderTile = <FolderTile {...commonProps} />;
+  const folderTile = (
+    <FolderTile {...commonProps} temporaryIcon={temporaryIcon} />
+  );
 
   const roomTile = (
     <RoomTile

@@ -507,4 +507,5 @@ export type TFileFillingFormStatus = {
   sequence: number;
   submitted: boolean;
   history?: Record<FillingFormStatusHistory, string>;
+  isTurnOfAbsentUser: boolean;
 };

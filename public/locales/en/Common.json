@@ -1,6 +1,6 @@
 {
   "About": "About",
-  "AbsentPersonTooltip": "Absent person's turn in the room",
+  "AbsentPerson": "Absent person's turn in the room",
   "AboutCompanyTitle": "About this program",
   "AccessDenied": "Access denied",
   "Accesses": "Accesses",
@@ -619,6 +619,7 @@
   "Settings": "Settings",
   "SettingsGeneral": "General",
   "SetToDefault": "Set to default",
+  "SendInvitationAgain": "Send invitation again",
   "Share": "Share",
   "ShareAndCollect": "Share & collect",
   "SharedLinks": "Shared links",

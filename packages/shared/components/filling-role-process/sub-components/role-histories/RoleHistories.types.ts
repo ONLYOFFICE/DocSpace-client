@@ -30,4 +30,5 @@ export interface RoleHistoryProps {
   histories: [string, string][];
   className?: string;
   stoppedBy?: TUser;
+  isTurnOfAbsentUser?: boolean;
 }

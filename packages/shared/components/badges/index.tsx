@@ -313,7 +313,7 @@ const Badges = ({
           tooltipContent={
             <>
               <Text fontSize="12px" lineHeight="16px" fontWeight={400} noSelect>
-                {t("Common:AbsentPersonTooltip")}
+                {t("Common:AbsentPerson")}
               </Text>
               <Text
                 onClick={onOpenFillingStatus}

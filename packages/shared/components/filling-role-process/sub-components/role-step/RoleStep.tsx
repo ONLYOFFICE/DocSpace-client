@@ -27,14 +27,18 @@
 import { decode } from "he";
 import { useState } from "react";
 import classNames from "classnames";
+import { match } from "ts-pattern";
 import { useTranslation } from "react-i18next";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg";
+import EmailIcon from "PUBLIC_DIR/images/email.react.svg";
+
 import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
 import AvatarDarkReactSvgUrl from "PUBLIC_DIR/images/avatar.dark.react.svg?url";
 
 import RoleHistories from "../role-histories/RoleHistories";
 import { useTheme } from "../../../../hooks/useTheme";
+import { ShareAccessRights } from "../../../../enums";
 
 import styles from "./RoleStep.module.scss";
 import type { RoleStepProps } from "./RoleStep.types";
@@ -47,6 +51,8 @@ const RoleStep = ({
   currentUserId,
   stoppedBy,
   withHistory = true,
+  isTurnOfAbsentUser = false,
+  onInviteUser,
 }: RoleStepProps) => {
   const [collapsed, setCollapsed] = useState(true);
   const { isBase } = useTheme();
@@ -94,20 +100,43 @@ const RoleStep = ({
           {userName}{" "}
           {currentUserId === user.id ? `(${t("Common:MeLabel")})` : null}
         </p>
-        {hasMoreThanOneHistory ? (
-          <ArrowIcon
-            onClick={toggleCollapse}
-            className={classNames(styles.arrow, {
-              [styles.rotated]: collapsed,
-            })}
-          />
-        ) : null}
+
+        {match(false)
+          .when(
+            () => isTurnOfAbsentUser && withHistory,
+            () => (
+              <button
+                type="button"
+                onClick={() =>
+                  onInviteUser(user.id, ShareAccessRights.FormFilling)
+                }
+                className={styles.sendInvitationAgain}
+                aria-label={t("Common:SendInvitationAgain")}
+              >
+                <EmailIcon />
+                <span>{t("Common:SendInvitationAgain")}</span>
+              </button>
+            ),
+          )
+          .when(
+            () => hasMoreThanOneHistory && withHistory,
+            () => (
+              <ArrowIcon
+                onClick={toggleCollapse}
+                className={classNames(styles.arrow, {
+                  [styles.rotated]: collapsed,
+                })}
+              />
+            ),
+          )
+          .otherwise(() => null)}
       </div>
       {withHistory ? (
         <RoleHistories
           className={styles.roleHistories}
           histories={history}
           stoppedBy={stoppedBy}
+          isTurnOfAbsentUser={isTurnOfAbsentUser}
         />
       ) : null}
     </div>

@@ -25,7 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TUser } from "../../../../api/people/types";
-import type { FileFillingFormStatus } from "../../../../enums";
+import type {
+  FileFillingFormStatus,
+  ShareAccessRights,
+} from "../../../../enums";
 
 export interface RoleStepProps {
   user: TUser;
@@ -35,4 +38,6 @@ export interface RoleStepProps {
   currentUserId: string;
   withHistory?: boolean;
   stoppedBy?: TUser;
+  isTurnOfAbsentUser?: boolean;
+  onInviteUser: (userId: string, access: ShareAccessRights) => void;
 }

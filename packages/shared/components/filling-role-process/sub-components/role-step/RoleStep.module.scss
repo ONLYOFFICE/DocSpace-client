@@ -163,6 +163,38 @@
   font-weight: 400;
 }
 
+.sendInvitationAgain {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  grid-area: arrow;
+
+  padding: 0px;
+  border: none;
+  cursor: pointer;
+  background: none;
+
+  span {
+    text-decoration: underline dashed;
+    text-underline-offset: 2px;
+
+    font-size: 13px;
+    line-height: 15px;
+    font-weight: 600;
+    color: $light-blue-main;
+  }
+
+  svg {
+    width: 12px;
+    height: 12px;
+    fill: $light-blue-main;
+    path {
+      fill: inherit;
+    }
+  }
+}
+
 .roleContainer[data-process-status="0"],
 .roleContainer[data-process-status="1"] {
   .avatarContainer {

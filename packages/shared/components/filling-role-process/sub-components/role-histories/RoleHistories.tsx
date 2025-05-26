@@ -38,6 +38,7 @@ const RoleHistories = ({
   histories,
   className,
   stoppedBy,
+  isTurnOfAbsentUser = false,
 }: RoleHistoryProps) => {
   const { t, i18n } = useTranslation("Common");
 
@@ -62,6 +63,13 @@ const RoleHistories = ({
       ),
     };
   }, [t, stoppedByUserName]);
+
+  if (isTurnOfAbsentUser)
+    return (
+      <ul className={classNames(styles.roleHistory, className)}>
+        <li className={styles.absentUserError}>{t("Common:AbsentPerson")}</li>
+      </ul>
+    );
 
   return (
     <ul className={classNames(styles.roleHistory, className)}>

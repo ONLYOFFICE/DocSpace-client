@@ -40,7 +40,7 @@ import {
 } from "../../utils";
 import { FILLING_FORM_STATUS_COLORS } from "../../constants";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
-import { FileFillingFormStatus } from "../../enums";
+import { FileFillingFormStatus, ShareAccessRights } from "../../enums";
 
 import { Text } from "../../components/text";
 import { toastr } from "../../components/toast";
@@ -107,6 +107,13 @@ export const FillingStatusPanel = ({
     endLoader(() => setIsLoading(false));
   }, [file.id]);
 
+  const onInviteUser = useCallback(
+    (userId: string, access: ShareAccessRights) => {
+      // TODO: add implementation
+    },
+    [],
+  );
+
   useEffect(() => {
     getFormFillingStatus();
   }, [getFormFillingStatus]);
@@ -158,6 +165,7 @@ export const FillingStatusPanel = ({
             fileStatus={fillingStatus}
             processDetails={formFillingStatus}
             currentUserId={user.id}
+            onInviteUser={onInviteUser}
           />
         </div>
       </ModalDialog.Body>

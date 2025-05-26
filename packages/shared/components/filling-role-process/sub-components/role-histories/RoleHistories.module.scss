@@ -36,6 +36,11 @@
     .date {
       --history-date-color: #{$dark-gray-dark};
     }
+
+    .absentUserError {
+      --absent-user-error-color: #{rgba($dark-error-status, 0.3)};
+      --absent-user-error-color-text: #{$dark-error-status};
+    }
   }
 }
 
@@ -50,6 +55,11 @@
 
     .date {
       --history-date-color: #{$light-gray-dark};
+    }
+
+    .absentUserError {
+      --absent-user-error-color: #{rgba($main-red, 0.09)};
+      --absent-user-error-color-text: #{$gray-text};
     }
   }
 }
@@ -85,4 +95,15 @@
 .date {
   flex-shrink: 0;
   color: var(--history-date-color);
+}
+
+.absentUserError {
+  border-radius: 6px;
+  padding: 12px 16px;
+  background-color: var(--absent-user-error-color);
+
+  color: var(--absent-user-error-color-text);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
 }

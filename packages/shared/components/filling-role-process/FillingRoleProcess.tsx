@@ -34,10 +34,11 @@ const FillingRoleProcess = ({
   processDetails,
   fileStatus,
   currentUserId,
+  onInviteUser,
 }: FillingRoleProcessProps) => {
   return (
     <section className={styles.fillingRoleProcess}>
-      {processDetails.map((detail) => {
+      {processDetails.map((detail, index) => {
         const histories = detail.history ? Object.entries(detail.history) : [];
 
         return (
@@ -49,6 +50,8 @@ const FillingRoleProcess = ({
             roleName={detail.roleName}
             histories={histories}
             stoppedBy={detail.stopedBy}
+            isTurnOfAbsentUser={index === 0}
+            onInviteUser={onInviteUser}
           />
         );
       })}

@@ -28,17 +28,17 @@ import type { TUser } from "../../api/people/types";
 import type { TFile } from "../../api/files/types";
 
 export type FillingStatusPanelProps = {
-  visible: boolean;
-  onClose: VoidFunction;
-
   user: TUser;
   file: TFile;
+  visible: boolean;
 
-  onFill?: (item: TFile) => void;
+  onClose: VoidFunction;
   onStopFilling: (item: TFile) => void;
+
+  withBorder?: boolean;
+  onFill?: (item: TFile) => void;
   onDelete?: (item: TFile) => void;
   onResetFilling: (item: TFile) => void;
-  withBorder?: boolean;
 };
 
 export type FillingStatusPanelBodyProps = {

@@ -51,7 +51,7 @@ import type { TPublicRoomPassword } from "../../../api/rooms/types";
 
 import styles from "./PublicRoomPasswordForm.module.scss";
 
-type PublicRoomPasswordProps = {
+export type PublicRoomPasswordProps = {
   t: TTranslation;
   roomKey: string;
   roomTitle: string;

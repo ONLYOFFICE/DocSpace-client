@@ -28,27 +28,23 @@
 
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
+import { useTranslation } from "react-i18next";
 
-import PublicRoomPassword from "./index";
 import type { TPublicRoomPassword } from "../../../api/rooms/types";
-import type { TTranslation } from "../../../types";
 
-const mockT: TTranslation = (key: string) => {
-  const translations: Record<string, string> = {
-    "Common:EnterPassword": "Enter password",
-    "Common:NeedPassword": "You need a password to access",
-    "Common:Password": "Password",
-    "Common:ContinueButton": "Continue",
-    "Common:RequiredField": "This field is required",
-    "Common:IncorrectPassword": "Incorrect password",
-  };
+import PublicRoomPassword, { type PublicRoomPasswordProps } from ".";
 
-  return translations[key] || key;
+const PublicRoomPasswordWithTranslation = (
+  props: Omit<PublicRoomPasswordProps, "t">,
+) => {
+  const { t } = useTranslation("Common");
+
+  return <PublicRoomPassword {...props} t={t} />;
 };
 
 const meta = {
   title: "Pages/PublicRoom/PublicRoomPasswordForm",
-  component: PublicRoomPassword,
+  component: PublicRoomPasswordWithTranslation,
   parameters: {
     docs: {
       description: {
@@ -58,7 +54,6 @@ const meta = {
     layout: "fullscreen",
   },
   argTypes: {
-    t: { table: { disable: true } },
     roomKey: { control: "text" },
     roomTitle: { control: "text" },
     onSuccessValidationCallback: { action: "onSuccessValidation" },
@@ -74,14 +69,13 @@ const meta = {
       );
     },
   ],
-} satisfies Meta<typeof PublicRoomPassword>;
+} satisfies Meta<typeof PublicRoomPasswordWithTranslation>;
 
-type Story = StoryObj<typeof PublicRoomPassword>;
+type Story = StoryObj<typeof PublicRoomPasswordWithTranslation>;
 export default meta;
 
 export const Default: Story = {
   args: {
-    t: mockT,
     roomKey: "sample-room-key",
     roomTitle: "Sample Public Room",
     onSuccessValidationCallback: (res: TPublicRoomPassword) =>

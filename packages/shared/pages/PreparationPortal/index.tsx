@@ -25,17 +25,18 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React, { useEffect, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import ErrorContainer from "../../components/error-container/ErrorContainer";
-
-import { StyledPreparationPortal } from "./PreparationPortal.styled";
 import { Text } from "../../components/text";
 import SocketHelper, { SocketEvents } from "../../utils/socket";
-import { IPreparationPortal } from "./PreparationPortal.types";
 import { getRestoreProgress } from "../../api/portal";
-import { clearLocalStorage, returnToPortal } from "./PreparationPortal.utils";
 import PreparationPortalLoader from "../../skeletons/preparation-portal";
 import { PreparationPortalProgress } from "../../components/preparation-portal-progress";
+
+import { clearLocalStorage, returnToPortal } from "./PreparationPortal.utils";
+import { IPreparationPortal } from "./PreparationPortal.types";
+import styles from "./PreparationPortal.module.scss";
 
 let requestsCount = 0;
 
@@ -136,7 +137,7 @@ export const PreparationPortal = (props: IPreparationPortal) => {
     : t("Common:PreparationPortalTitle");
 
   const componentBody = errorMessage ? (
-    <Text className="preparation-portal_error">{`${errorMessage}`}</Text>
+    <Text className={styles.preparationPortalError}>{`${errorMessage}`}</Text>
   ) : (
     <PreparationPortalProgress
       text={t("PreparationPortalDescription", {
@@ -146,17 +147,22 @@ export const PreparationPortal = (props: IPreparationPortal) => {
     />
   );
   return (
-    <StyledPreparationPortal errorMessage={!!errorMessage} isDialog={isDialog}>
+    <div
+      className={classNames(styles.preparationPortal, {
+        [styles.isDialog]: isDialog,
+        [styles.errorMessage]: !!errorMessage,
+      })}
+    >
       <ErrorContainer
         {...(ready && { headerText: withoutHeader ? "" : headerText })}
         style={style}
-        className="restoring-portal"
+        className={styles.restoringPortal}
         hideLogo
       >
-        <div className="preparation-portal_body-wrapper">
+        <div className={styles.preparationPortalBodyWrapper}>
           {!ready ? <PreparationPortalLoader /> : componentBody}
         </div>
       </ErrorContainer>
-    </StyledPreparationPortal>
+    </div>
   );
 };

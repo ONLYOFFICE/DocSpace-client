@@ -3,7 +3,7 @@
   "content": "This section is unavailable in mobile version",
   "content_en_sha1_hash": "85213c9da217597acc63825e72d40de59cb758e1",
   "created_at": "2025-05-19T21:30:50.774Z",
-  "updated_at": "2025-05-21T04:58:41.854Z",
+  "updated_at": "2025-05-24T05:42:35.228Z",
   "comment": {
     "text": "\"This translation key is used for a warning message that indicates a section is unavailable on mobile devices. It is applied when the user navigates to a breakpoint warning component and the 'isMobileUnavailableOnly' condition is true.\"",
     "is_auto": true,
@@ -33,7 +33,18 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Bu bölmə mobil versiyada əlçatan deyil\" while conveying the general meaning, isn't the most natural or idiomatic way to express 'This section is unavailable in mobile version' in Azerbaijani. 'Alçatan' implies accessibility, but 'unavailable' suggests a restriction.",
+          "suggestion": "Bu bölmə mobil versiyada istifadəyə açıq deyil"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'istifadəyə açıq' translates more accurately to 'available for use' or 'accessible for use,' which aligns better with the meaning of 'unavailable.'",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -126,7 +137,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Dana sekcja jest niedostępna w wersji mobilnej' is not the most natural or accurate translation of 'This section is unavailable in mobile version.' 'Dana' is archaic and unusual in this context. A more natural translation would use 'Ta'.",
+          "description": "The translation 'Dana sekcja jest niedostępna w wersji mobilnej' isn't the most natural-sounding Polish. 'Dana' is grammatically correct, but 'ta' or 'niniejsza' would be more common and idiomatic for 'this'.",
           "suggestion": "Ta sekcja jest niedostępna w wersji mobilnej"
         }
       ],
@@ -162,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'මෙම කොටස ජංගම අනුවර්තනයේ නොමැත.' is a literal translation but doesn't convey the meaning naturally in Sinhala. A more natural and user-friendly translation would be something like 'මෙම කොටස ජංගම දුරකථනය හරහා ලබාගත නොහැක.' or 'ජංගම දුරකථන ක්‍රියේ මෙකී කොටස ක්‍රියාත්මක නොවේ.'",
-          "suggestion": "Consider 'මෙම කොටස ජංගම දුරකථනය හරහා ලබාගත නොහැක.' or 'ජංගම දුරකථන ක්‍රියේ මෙකී කොටස ක්‍රියාත්මක නොවේ.'"
+          "description": "The translation 'මෙම කොටස ජංගම අනුවර්තනයේ නොමැත.' while understandable, isn't the most natural phrasing. A more common and fluent way to express 'This section is unavailable in mobile version' in Sinhala would be 'මෙම කොටස ජංගම අනුවාදයේ అందుబాటులో లేదు' or 'ජංගම අනුවාදයේ දී මෙය ලබාගත නොහැක.'",
+          "suggestion": "Consider 'මෙම කොටස ජංගම අනුවාදයේ అందుబాటులో లేదు' or 'ජංගම අනුවාදයේ දී මෙය ලබාගත නොහැක.'"
         }
       ],
       "approved_at": null
@@ -207,7 +218,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, the translation 'Phần này không khả dụng ở phiên bản cho di động' is a bit clunky. A more natural-sounding translation would convey the meaning better.",
+          "suggestion": "Phần này không hỗ trợ trên thiết bị di động"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

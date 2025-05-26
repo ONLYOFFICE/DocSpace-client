@@ -3,7 +3,7 @@
   "content": "All users will be added with User permissions only. To be able to add further admins, contact the {{productName}} administrator to upgrade the tariff plan.",
   "content_en_sha1_hash": "dc98fe9d4b0ef6846be4b6f4320e9c8ae82ef9d8",
   "created_at": "2025-05-19T21:30:54.152Z",
-  "updated_at": "2025-05-21T07:39:06.067Z",
+  "updated_at": "2025-05-24T07:53:08.283Z",
   "comment": {
     "text": "This translation key is used to display a message when a user reaches their tariff limit, informing them that they only have User permissions and need to upgrade to add further admins. The message appears in a quota management interface, likely as an alert or notice, prompting the user to contact the administrator for assistance.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'To be able to add further admins' is translated as 'للتمكن من إضافة مسؤولين إضافيين'. While technically correct, a more natural and common phrasing in Arabic would be 'لإضافة المزيد من المسؤولين'.",
+          "suggestion": "لإضافة المزيد من المسؤولين"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -36,13 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'To be able to add further admins' is translated as 'Daha çox idarəçi əlavə etmək'. While technically correct, a more natural and idiomatic translation would be 'Daha çox administrator əlavə etmək' or 'Administratorların sayını artırmaq'.",
-          "suggestion": "Daha çox administrator əlavə etmək"
+          "description": "The phrase \"To be able to add further admins\" is not accurately translated. \"Daha çox idarəçi əlavə etmək üçün\" is a literal translation but sounds awkward. A more natural phrasing would be something like \"Daha çox administrator əlavə etmək istəyirsinizsə\" or \"Administratorların sayını artırmaq üçün\".",
+          "suggestion": "Administratorların sayını artırmaq üçün"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'contact the {{productName}} administrator' is translated as '{{productName}} administratoru ilə əlaqə saxlayın'.  'Administratoru ilə' sounds slightly unnatural. A more natural flow would be '{{productName}} administratorı ilə əlaqə saxlayın' or simply '{{productName}} administratorla əlaqə saxlayın'.",
-          "suggestion": "{{productName}} administratorla əlaqə saxlayın"
+          "description": "The phrase \"upgrade the tariff plan\" is a bit literal. While technically correct, it might be better conveyed in a way that's more common in Azerbaijani business language. \"tarif planını təkmilləşdirmək\" isn't incorrect, but a more fluent option might exist.",
+          "suggestion": "tarif paketini yüksəltmək"
         }
       ],
       "approved_at": null
@@ -50,7 +56,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Потребителски' (User) should ideally be 'Потребителски права' (User rights) for better clarity. While 'Потребителски' is technically correct, it sounds incomplete in this context.",
+          "suggestion": "Потребителски права"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -59,13 +71,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'přidáni pouze s oprávněním Uživatel' is grammatically awkward. 'Přidáni' should agree with 'uživatelé' as 'přidáni' is the past participle of 'přidat'. It should be 'přidáni s oprávněním Uživatel'.",
-          "suggestion": "Všichni uživatelé budou přidáni s oprávněním Uživatel."
+          "description": "The phrase 'Všichni uživatelé budou přidáni' is grammatically awkward. The correct passive voice construction would be 'Všichni uživatelé budou přidáni'.",
+          "suggestion": "Všichni uživatelé budou přidáni"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The English text implies a request to upgrade the tariff plan. The Czech translation simply suggests contacting the administrator and 'upgradujte tarifní plán'. It's more natural to convey the request. 'Kontaktujte administrátora {{productName}} a zažádejte o upgrade tarifního plánu' would be more accurate.",
-          "suggestion": "Všichni uživatelé budou přidáni s oprávněním Uživatel. Chcete-li mít možnost přidávat další administrátory, kontaktujte administrátora {{productName}} a zažádejte o upgrade tarifního plánu."
+          "type": "grammar",
+          "description": "The use of 'a upgradujte' is slightly unnatural in Czech. It's better to use a conjunction.",
+          "suggestion": "a upgradujte tarifní plán."
         }
       ],
       "approved_at": null
@@ -82,13 +94,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Για να μπορέσετε να προσθέσετε\" translates literally to \"In order for you to be able to add\". This is overly formal and slightly awkward in Greek. It's better to use a more direct phrasing.",
+          "description": "The phrase \"Για να μπορέσετε να προσθέσετε\" is overly formal and indirect. A more natural and direct translation of \"To be able to add\" would be \"Για να προσθέσετε\".",
           "suggestion": "Για να προσθέσετε"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"τιμολογιακό σχέδιο\" is a correct translation of \"tariff plan\" but can be a bit formal depending on the context. A simpler and more common term might be better.",
-          "suggestion": "πακέτο"
+          "description": "The translation of 'tariff plan' as 'τιμολογιακό σχέδιο' is technically correct but a bit clunky. 'Σχέδιο συνδρομής' or 'πακέτο' might sound more natural in this context.",
+          "suggestion": "Σχέδιο συνδρομής"
         }
       ],
       "approved_at": null
@@ -105,18 +117,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'User permissions only' is translated as 'Käyttäjäoikeude'. This is grammatically incorrect in Finnish. 'Oikeudet' is needed to denote 'permissions'.",
+          "description": "The phrase \"Käyttäjäoikeude\" is not grammatically correct. It should be \"Käyttäjäoikeudet\" (User Permissions).",
           "suggestion": "Käyttäjäoikeudet"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'to upgrade the tariff plan' is translated as 'päivittääksesi tilauksesi'. While 'tilaus' can mean subscription or order, 'tariff plan' is better conveyed by 'tarjouspaketti' or 'hinnoittelusuunnitelma'.",
-          "suggestion": "päivittääksesi tarjouspakettisi"
+          "description": "The translation of \"admins\" as \"pääkäyttäjiä\" is technically correct, but may not fully convey the administrative role implied by 'admins'. A more precise translation might depend on the specific context of the application.",
+          "suggestion": "valvojia"
         },
         {
-          "type": "grammatical",
-          "description": "The phrase 'Voidaksesi lisätä' is grammatically awkward. It lacks the necessary verb conjugation for a more natural flow.  'Jotta voit lisätä' would be better.",
-          "suggestion": "Jotta voit lisätä"
+          "type": "incorrect_translation",
+          "description": "The phrase \"tilauksesi\" (your subscription) isn't quite equivalent to \"tariff plan.\" While related, \"tariff plan\" in this context is about the level of service/features.",
+          "suggestion": "palvelusopimuksesi"
         }
       ],
       "approved_at": null
@@ -132,14 +144,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"To be able to add further admins\" is awkwardly translated as \"Այլ ադմիններ ավելացնելու համար\". A more natural translation would be something like \"եւս ադմիններ ավելացնելու համար\" or \"զույգ ադմիններ ավելացնելու համար\".",
-          "suggestion": "եւս ադմիններ ավելացնելու համար"
-        },
-        {
           "type": "formatting",
-          "description": "The use of 'եւս' or 'զույգ' is stylistic and might slightly change the meaning. However, it would improve flow and readability.",
-          "suggestion": "Consider a stylistic adjustment to improve readability. For example: «Բոլոր օգտատերերը կավելացվեն միայն Օգտատիրոջ թույլտվություններով: Եւս ադմիններ ավելացնելու համար կապվեք {{productName}} ադմինիստրատորի հետ՝ սակագնային պլանը թարմացնելու համար:»"
+          "description": "The colon after \"User permissions\" is missing in the Armenian translation. It should be present to match the English structure.",
+          "suggestion": "Բոլոր օգտատերերը կավելացվեն միայն Օգտատիրոջ թույլտվություններով: "
         }
       ],
       "approved_at": null
@@ -156,13 +163,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"To be able to add further admins\" is translated as \"管理者を追加できるようにするには\". While technically correct, it's a bit verbose and formal for typical user-facing language. A more natural and concise translation would be something like \"さらに管理者を追加するには\" or \"追加の管理者を追加するには\".",
-          "suggestion": "さらに管理者を追加するには"
+          "description": "The phrase \"To be able to add further admins\" is not accurately translated. The current translation \"管理者を追加できるようにするには\" is a bit convoluted. It's better to convey the meaning of enabling the addition of admins.",
+          "suggestion": "管理者を追加できるようにするには、"
         },
         {
           "type": "incorrect_translation",
-          "description": "The sentence structure \"料金プランをアップグレードするために、{{productName}}管理者に連絡してください\" is grammatically correct, but sounds slightly awkward. A more natural phrasing would be \"{{productName}}管理者にご連絡いただき、料金プランをアップグレードしてください.\" or \"{{productName}}管理者にお問い合わせの上、料金プランをアップグレードしてください.\" which emphasizes the action of contacting.",
-          "suggestion": "料金プランをアップグレードするために、{{productName}}管理者にお問い合わせください。"
+          "description": "The phrase 'contact the {{productName}} administrator' is technically correct but could be more natural-sounding in Japanese. It's a bit direct.",
+          "suggestion": "料金プランをアップグレードするために、{{productName}}の担当者にお問い合わせください。"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a little long and might benefit from splitting into two for better readability. The current structure feels a bit clunky in Japanese.",
+          "suggestion": "すべてのユーザーはユーザー権限のみで追加されます。管理者を追加できるようにするには、料金プランをアップグレードするために、{{productName}}の担当者にお問い合わせください。"
         }
       ],
       "approved_at": null
@@ -215,13 +227,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'To be able to add further admins' is not accurately translated. 'Pentru a adăuga administratori în continuare' implies 'to continue adding administrators,' which isn't the original meaning. It should convey the meaning of needing to upgrade to *allow* adding admins.",
-          "suggestion": "Pentru a putea adăuga administratori, contactați administratorul {{productName}} pentru a schimba planul tarifar."
+          "description": "The phrase \"To be able to add further admins\" is translated as \"Pentru a adăuga administratori în continuare\". While understandable, a more natural Romanian phrasing would be \"Pentru a putea adăuga și administratori\" or \"Pentru a adăuga administratori suplimentari\".",
+          "suggestion": "Pentru a putea adăuga și administratori"
         },
         {
-          "type": "formatting",
-          "description": "The placement of the product name variable {{productName}} feels slightly awkward in the Romanian sentence. While technically correct, it doesn't flow as naturally as it might in English.",
-          "suggestion": "Pentru a putea adăuga administratori, contactați administratorul {{productName}} pentru a actualiza planul tarifar."
+          "type": "incorrect_translation",
+          "description": "The phrase 'contact the {{productName}} administrator to upgrade the tariff plan' is translated as 'contactați administratorul {{productName}} pentru a schimba planul tarifar'.  'Upgrade' is better conveyed with a word indicating an increase in plan level, not just a change. 'Schimba' (change) doesn't fully capture the meaning of 'upgrade'.",
+          "suggestion": "contactați administratorul {{productName}} pentru a actualiza planul tarifar."
         }
       ],
       "approved_at": null
@@ -238,18 +250,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"To be able to add further admins\" is awkward. \"To be able to add further admins\" should be translated more naturally in Sinhala.",
-          "suggestion": "ඔවුන් වැඩිපුර පරිපාලකයන් එක් කිරීමට, "
+          "description": "The phrase \"To be able to add further admins\" is translated as \"තවදුරටු පරිපාලකයන් එකතු කිරීමට\". A more natural translation would be something like \"අතරමැදි පරිපාලකයින් යෙදවීමට\".",
+          "suggestion": "අතරමැදි පරිපාලකයින් යෙදවීමට"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'ගාස්තුව' (gasthuwa) translates to 'tariff' or 'fee' but in this context, 'වැඩසchema' (wedasa schema) would be more appropriate for a 'plan'.",
-          "suggestion": "ඔවුන් වැඩිපුර පරිපාලකයන් එක් කිරීමට, {{productName}} පරිපාලකයාගෙන් වැඩසchema වැඩි කර ගන්න."
+          "description": "The phrase 'contact the {{productName}} administrator' is translated as '{{productName}} පරිපාලකයාගෙන් අමත වී'.  A more accurate and natural translation would be '{{productName}} පරිපාලකවරයාගෙන්'.",
+          "suggestion": "{{productName}} පරිපාලකවරයාගෙන්"
         },
         {
-          "type": "spelling",
-          "description": "The use of 'අමත වී' is incorrect. It should be 'අමතන්න' (amathanna).",
-          "suggestion": "ඔවුන් වැඩිපුර පරිපාලකයන් එක් කිරීමට, {{productName}} පරිපාලකයාගෙන් අමතන්න වැඩසchema වැඩි කර ගන්න."
+          "type": "incorrect_translation",
+          "description": "The phrase 'upgrade the tariff plan' is translated as 'ගාස්තුව වැඩි කර ගන්න'. A more precise translation would be 'ගාස්තුව උසස් කර ගන්න' or 'ගාස්තුව ඉහසු කර ගන්න'.",
+          "suggestion": "ගාස්තුව උසස් කර ගන්න"
         }
       ],
       "approved_at": null
@@ -257,7 +269,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Slovak translation lacks the double curly braces around 'productName' as present in the English version.  This indicates a potential placeholder that needs to be preserved.",
+          "suggestion": "Change \"administrátora {{productName}}\" to \"administrátora {{productName}}\""
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -265,14 +283,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"To be able to add further admins\" is not perfectly translated. \"Če želite dodati nadaljnje skrbnike\" is grammatically correct, but a more natural translation might be something like \"Za dodajanje dodatnih skrbnikov...\" or \"Če želite dodeliti dodatne skrbnike...\"",
-          "suggestion": "Za dodajanje dodatnih skrbnikov..."
-        },
-        {
           "type": "formatting",
-          "description": "The use of \"{{productName}}\" is consistent between the English and Slovenian content. Ensure that this variable is properly handled in the final implementation for accurate display.",
-          "suggestion": "No change needed, but confirm implementation handles variable correctly."
+          "description": "The translation uses \"skrbnika\" twice. It should be consistent, perhaps using a pronoun or rephrasing.",
+          "suggestion": "Uporabniki bodo dodani samo z uporabniškimi dovoljenji. Če želite dodati nadaljnje skrbnike, obrnite se na upravitelja {{productName}} za nadgradnjo tarifnega načrta."
         }
       ],
       "approved_at": null
@@ -283,13 +296,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word \"админе\" is likely a shortened form. While understood colloquially, in a formal setting like a user interface, the full word 'администратори' should be used.",
-          "suggestion": "администратори"
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, the phrasing \"Да бисте могли даље да додајете админе\" can be slightly improved for better flow and clarity. Consider rephrasing to something like \"Да бисте могли да додајете више администратора...\"",
-          "suggestion": "Да бисте могли да додате више администратора..."
+          "description": "The word 'админе' is likely a misspelling of 'администраторе'.",
+          "suggestion": "администраторе"
         }
       ],
       "approved_at": null
@@ -299,14 +307,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Da biste mogli dalje da dodajete admine\" is a bit clunky. A more natural translation of 'To be able to add further admins' would be 'Da biste mogli da dodate dodatne administratore'.",
-          "suggestion": "Da biste mogli da dodate dodatne administratore"
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'administatore' is missing the accent on the 'e'.",
-          "suggestion": "administratore"
+          "type": "formatting",
+          "description": "The phrase 'Da biste mogli dalje da dodajete admine' could be improved for readability. The repetition of 'da biste' makes it slightly awkward.",
+          "suggestion": "Da biste mogli dodavati dalje admine"
         }
       ],
       "approved_at": null
@@ -314,7 +317,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"To be able to add further admins\" is not the most natural way to express this in Turkish. A more common phrasing would emphasize the *ability* to add admins.",
+          "suggestion": "Daha fazla yönetici ekleyebilmek için (to be able to add more admins) could be improved to 'Daha fazla yönetici eklemek için' (to add more admins) or 'Daha fazla yönetici ekleyebilme imkanı için' (for the possibility to add more admins)."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -323,7 +332,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'To be able to add further admins' is translated as 'Щоб мати можливість далі додавати адміністраторів'. While understandable, a more natural Ukrainian phrasing would be 'Щоб мати можливість додавати адміністраторів'. 'Далі' is a bit clunky in this context.",
+          "description": "The phrase 'To be able to add further admins' is translated as 'Щоб мати можливість далі додавати адміністраторів'. While understandable, a more natural Ukrainian phrasing would be 'Щоб мати можливість додавати адміністраторів'.",
           "suggestion": "Щоб мати можливість додавати адміністраторів"
         }
       ],
@@ -335,13 +344,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"User permissions only\" is translated as \"Người dùng bình thường\". While understandable, a more precise translation might be \"quyền Người dùng\" or \"chỉ với quyền Người dùng\" to maintain the nuance of the original meaning regarding access levels.",
-          "suggestion": "Tất cả người dùng sẽ chỉ được thêm với quyền Người dùng. "
+          "description": "The English phrase 'User permissions only' is not accurately translated. 'Người dùng bình thường' translates more to 'Normal User' and doesn't convey the nuance of limited permissions. A better translation would capture the restricted access.",
+          "suggestion": "Tất cả người dùng sẽ chỉ được thêm với quyền Người dùng cơ bản."
         },
         {
-          "type": "formatting",
-          "description": "The phrase 'contact the {{productName}} administrator' is technically correct, but could be improved for clarity and naturalness in Vietnamese.  While the variable is handled correctly, consider rephrasing for smoother reading.",
-          "suggestion": "Tất cả người dùng sẽ chỉ được thêm với quyền Người dùng. Để có thể thêm quản trị viên, vui lòng liên hệ với bộ phận quản trị viên {{productName}} để nâng cấp gói dịch vụ."
+          "type": "incorrect_translation",
+          "description": "The English phrase 'To be able to add further admins' is somewhat clunky. The Vietnamese translation is also a little verbose. The phrase could be streamlined.",
+          "suggestion": "Để có thể thêm người quản trị viên khác, "
         }
       ],
       "approved_at": null

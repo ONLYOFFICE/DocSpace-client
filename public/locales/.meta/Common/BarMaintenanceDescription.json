@@ -3,7 +3,7 @@
   "content": "We apologize for any short-term technical issues in service functioning that may appear on {{targetDate}} during the update of {{productName}}.",
   "content_en_sha1_hash": "eb03d1adcd417e295fcdd7ba6656cd2c333a4f16",
   "created_at": "2025-05-19T21:30:43.244Z",
-  "updated_at": "2025-05-22T11:56:37.766Z",
+  "updated_at": "2025-05-26T07:57:32.131Z",
   "comment": {
     "text": "This translation key is used to display a message apologizing for technical issues during an update of a product. It typically appears in a notification or alert component and informs users about potential short-term disruptions on a specific date.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\Shell.jsx",
-      "line_number": 316,
+      "file_path": "/packages/client/src/Shell.jsx",
+      "line_number": 315,
       "context": "const targetDate = to.locale(language).format(\"LL\");\n \n const barConfig = {\n parentElementId: \"main-bar\",\n headerText: t(\"Attention\"),\n text: `${t(\"BarMaintenanceDescription\", {\n targetDate,\n productName: `${logoText} ${t(\"Common:ProductName\")}`,\n })} ${t(\"BarMaintenanceDisclaimer\")}`,\n isMaintenance: true,\n onAction: () => {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The template variables {{productName}} and {{targetDate}} are present in the Azerbaijani translation, which is good, but it's important to ensure the platform rendering the translation handles these variables correctly.",
+          "suggestion": "Confirm the rendering engine supports and correctly substitutes the template variables."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -54,13 +60,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Unannehmlichkeiten beim Funktionieren des Dienstes\" is a somewhat literal and clunky translation of 'technical issues in service functioning'. A more natural German phrasing would be something like 'technische Probleme bei der Leistung des Dienstes' or 'Störungen im Dienstbetrieb'.",
-          "suggestion": "Consider alternatives like 'technische Probleme bei der Leistung des Dienstes' or 'Störungen im Dienstbetrieb' instead of 'Unannehmlichkeiten beim Funktionieren des Dienstes'."
+          "description": "The phrase \"Unannehmlichkeiten beim Funktionieren des Dienstes\" is a somewhat literal translation of \"short-term technical issues in service functioning.\" A more natural-sounding German equivalent might be \"vorübergehende technische Probleme bei der Leistung des Dienstes\" or \"vorübergehende Störungen im Dienstbetrieb\".",
+          "suggestion": "vorübergehende technische Probleme bei der Leistung des Dienstes"
         },
         {
           "type": "grammar",
-          "description": "While grammatically correct, the sentence structure is a bit verbose and formal for a customer-facing apology. German often prefers shorter, more direct phrasing.",
-          "suggestion": "Consider restructuring the sentence for better flow. For example, 'Wir entschuldigen uns für mögliche kurzfristige Probleme beim Dienstbetrieb am {{targetDate}} während des Updates von {{productName}}.'"
+          "description": "The phrasing \"die am {{targetDate}} während des Updates von {{productName}} erscheinen können\" is grammatically correct but a bit clunky. A more fluent construction could use a subordinate clause.",
+          "suggestion": "die während des Updates von {{productName}} am {{targetDate}} auftreten können."
         }
       ],
       "approved_at": null
@@ -82,14 +88,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase 'palvelun toiminnassa ilmenevien' is a bit clunky and could be improved for flow. While grammatically correct, it's not the most natural Finnish.",
-          "suggestion": "Pahoittelemme mahdollisia lyhyen aikavälin teknisiä ongelmia palvelussa, jotka saattavat näkyä..."
+          "type": "incorrect_translation",
+          "description": "The phrase \"päivityksen aikana\" (during the update) is a bit clunky and less natural in this context. It implies a continuous action, whereas 'update' is more of a discrete event.",
+          "suggestion": "Consider rephrasing to something like '{{productName}}-päivityksen yhteydessä' (in connection with the {{productName}} update) or '{{productName}}-päivityksen aikana' (during the {{productName}} update - but this is slightly better than 'päivityksen aikana')"
         },
         {
-          "type": "formatting",
-          "description": "The use of '{{productName}} päivityksen aikana' creates a slightly awkward phrasing. It's a direct translation and could benefit from a more idiomatic Finnish structure.",
-          "suggestion": "…{{productName}} päivityksen yhteydessä."
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Pahoittelemme palvelun toiminnassa ilmenevien lyhyen aikavälin teknisiä ongelmia\" is quite long and complex. It can be simplified for better readability.",
+          "suggestion": "Consider 'Olemme pahoillamme mahdollisista lyhytaikaisista teknisistä ongelmista palvelussa...' (We apologize for any short-term technical issues in the service...)"
         }
       ],
       "approved_at": null
@@ -97,18 +103,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'We apologize' is translated as 'Nous vous prions de bien vouloir nous excuser'. While grammatically correct, it's a bit formal and sounds awkward in this context. A more natural and common translation would be 'Nous sommes désolés' or 'Veuillez nous excuser'.",
-          "suggestion": "Nous sommes désolés pour tout problème technique de courte durée..."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'service functioning' is translated as 'fonctionnement du service'. While technically correct, it's redundant. 'Fonctionnement' already implies the service is functioning.",
-          "suggestion": "tout problème technique de courte durée qui pourrait apparaître..."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -123,13 +118,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'nel funzionamento di servizio' is a bit awkward in Italian. It translates literally to 'in the functioning of service' which is not the most natural way to express this.",
-          "suggestion": "Consider rephrasing to 'nel servizio' or 'nel funzionamento del servizio'.  A more fluid option might be 'nel funzionamento del sistema'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The use of 'che possono apparire' is a bit formal and slightly changes the meaning. The English implies that the issues *might* appear.  'Che possono apparire' suggests it's highly likely.",
-          "suggestion": "Consider 'che potrebbero apparire' to better reflect the conditional nature of the English. Alternatively, 'che potrebbero verificarsi' is also a suitable option."
+          "description": "The phrase 'nel funzionamento di servizio' is slightly awkward. 'Nel funzionamento del servizio' would be more natural and grammatically correct.",
+          "suggestion": "Nel funzionamento del servizio"
         }
       ],
       "approved_at": null
@@ -139,14 +129,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The phrase 「この度は」is overly formal and may sound unnatural in this context. While grammatically correct, it's more suited for a formal apology letter than a brief service announcement.",
-          "suggestion": "Consider a more direct phrasing like 「{{productName}}のアップデートに伴い、」or simply 「{{productName}}のアップデートにより、」"
+          "type": "incorrect_translation",
+          "description": "The phrase \"We apologize\" is translated as \"この度は、お詫び申し上げます\" which is a very formal and somewhat stiff apology. While not *incorrect*, it may sound overly formal for a service announcement and could be softened for better user experience. A more natural phrasing might be closer to \"ご迷惑をおかけして申し訳ございません.\" or \"申し訳ございません\".",
+          "suggestion": "Consider revising to a less formal apology like \"申し訳ございません\" or \"ご迷惑をおかけして申し訳ございません\"."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'short-term technical issues' is translated as '短期的な技術的問題' which is technically correct but can be slightly softened for better user experience. The direct translation might sound harsher than intended.",
-          "suggestion": "Consider using a less direct phrase like '一時的な不具合' (temporary issues) or '一時的な影響' (temporary impact)."
+          "type": "grammatical",
+          "description": "The sentence structure \"この度は、{{productName}}のアップデートに伴い、{{targetDate}}にサービス機能の短期的な技術的問題が発生する可能性がありますことを\" is a bit long and can be improved for readability. The \"ことを\" at the end is somewhat redundant and can be omitted.",
+          "suggestion": "Rephrase to something like \"{{productName}}のアップデートに伴い、{{targetDate}}にサービス機能に短期的な技術的問題が発生する可能性があります。」"
         }
       ],
       "approved_at": null
@@ -157,13 +147,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'may appear' is translated as '나타날 수 있는' which directly translates to 'can appear'. A more natural Korean phrasing for 'may appear' in this context would be something like '발생할 수 있는' (can occur) or '일어날 수 있는' (can happen).",
-          "suggestion": "{{productName}} 업데이트 중 {{targetDate}}에 발생할 수 있는 서비스 기능의 단기적 기술 문제에 대해 사과 드립니다."
+          "description": "The phrase \"We apologize for any...\" is somewhat stiff in Korean. While accurate, a more natural and common phrasing would be more appropriate.",
+          "suggestion": "서비스 기능의 단기적 기술 문제로 불편을 드려 죄송합니다."
         },
         {
           "type": "formatting",
-          "description": "The translation includes a direct mirroring of the English template variables. While functional, a slightly adjusted phrasing might read more naturally in Korean.",
-          "suggestion": "{{productName}} 업데이트 과정에서 {{targetDate}}에 서비스 기능에 일시적인 기술 문제가 발생할 수 있습니다. 이에 대해 사과드립니다."
+          "description": "The use of quotation marks around {{productName}} and {{targetDate}} is correct, but consistency is key. Ensure these are consistently used across all translations.",
+          "suggestion": "No change, but maintain consistency."
         }
       ],
       "approved_at": null
@@ -171,33 +161,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ໄລຍະສັ້ນ' (lai sahn) which translates to 'short-term' is correctly spelled.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ການບໍລິການ' (kaan borisarn) which translates to 'service' is correctly spelled.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ອັບເດດ' (apdet) which translates to 'update' is correctly spelled.",
-          "suggestion": null
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure is somewhat convoluted.  A more natural Lao phrasing might improve readability.",
-          "suggestion": "Consider restructuring for clarity, potentially breaking it into two sentences or rephrasing the introductory clause."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'ບັນຫາດ້ານວິຊາການ' (bannhaa daan visaakan) translates to 'technical issues'.  It might be more accurately and naturally phrased as 'ຄວາມບໍ່ສະຫງົບທາງເຕັກນິກ' (khwaam bo sapngop thaang tekniik) or a similar phrasing emphasizing disruption.",
-          "suggestion": "Consider using 'ຄວາມບໍ່ສະຫງົບທາງເຕັກນິກ' or a similar phrase for 'technical issues'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -206,13 +170,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"in service functioning\" is translated as \"pakalpojuma darbībā\". While technically correct, it sounds slightly awkward in Latvian. A more natural phrasing would be \"pakalpojuma darbē\".",
-          "suggestion": "Mēs atvainojamies par jebkādām īslaicīgām tehniskām problēmām pakalpojuma darbē, kas var būt šajā datumā: {{targetDate}} {{productName}} atjaunināšanas laikā."
+          "description": "The phrase \"in service functioning\" is not accurately translated. \"Pakalpojuma darbībā\" is more literal and less natural than a more idiomatic equivalent.",
+          "suggestion": "Consider a more natural phrasing like \"pakalpojumā\" or \"pakalpojuma darbībā\" adjusted to the specific context."
         },
         {
           "type": "incorrect_translation",
-          "description": "The direct translation of \"during the update of {{productName}}\" is a bit clunky. \"{{productName}} atjaunināšanas laikā\" could be improved to sound more natural.",
-          "suggestion": "Mēs atvainojamies par jebkādām īslaicīgām tehniskām problēmām pakalpojuma darbē, kas var būt šajā datumā: {{targetDate}} {{productName}} atjaunināšanas procesā."
+          "description": "The colon after 'datumā' is grammatically awkward.  It breaks the flow of the sentence.",
+          "suggestion": "Remove the colon after 'datumā' and rephrase to '{{targetDate}} atjaunināšanas laikā'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'atjaunināšanas laikā' feels slightly clunky. While technically correct, it can be improved for better readability.",
+          "suggestion": "Consider rephrasing to something like '{{productName}} atjauninājuma laikā' or simply '{{productName}} atjauninājumā'."
         }
       ],
       "approved_at": null
@@ -226,13 +195,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"które mogą zaistnieć\" (which may occur) sounds slightly formal and less natural in this context. A more common and natural phrasing would be \"które mogą wystąpić\".",
-          "suggestion": "które mogą wystąpić"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -241,23 +204,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"short-term technical issues in service functioning\" is not accurately translated. \"Problemas de curta duração\" is a general term and doesn't convey the technical nature of the issues.",
-          "suggestion": "Pedimos desculpa por quaisquer problemas técnicos de curta duração que possam surgir..."
+          "description": "The phrase \"service functioning\" is not accurately translated. \"Manutenção da nossa plataforma\" is a functional equivalent but lacks the specific nuance of service functioning.  A more accurate translation might consider a phrase like \"funcionamento do serviço\".",
+          "suggestion": "Consider using \"funcionamento do serviço\" to better reflect the original meaning."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrasing \"eles poderão surgir a {{targetDate}}\" is awkward. It's not natural to say 'they may appear on'.",
-          "suggestion": "eles poderão surgir em {{targetDate}}"
+          "type": "grammar",
+          "description": "The sentence structure is slightly awkward. \"Eles poderão surgir a {{targetDate}}\" feels disconnected from the preceding clause. It implies the problems themselves will appear on the date, rather than the potential for them to occur.",
+          "suggestion": "Rephrase to something like \"podem ocorrer a {{targetDate}}\" or \"podem aparecer a {{targetDate}}\" to better connect the timing of the issues with the date."
         },
         {
           "type": "formatting",
-          "description": "The original English uses double curly braces for variables. The Portuguese translation should maintain this consistency.",
-          "suggestion": "Maintain the '{{...}}' format consistently throughout the translation."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'plataforma' is used instead of 'product'. While 'plataforma' can sometimes be used, in this context, the intended meaning of 'product' is lost.",
-          "suggestion": "Pedimos desculpa por quaisquer problemas de curta duração que possam surgir durante a manutenção do nosso {{productName}}..."
+          "description": "The placement of 'a' before the target date is slightly unusual and could be improved for smoother reading.",
+          "suggestion": "Consider removing 'a' and just placing the target date directly after the verb."
         }
       ],
       "approved_at": null
@@ -274,13 +232,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Ne cerem scuze' translates more accurately to 'We apologize' but carries a slightly more formal and almost apologetic tone. While not necessarily wrong, it might be too strong for a notification about a planned update. A more neutral phrasing might be preferred.",
-          "suggestion": "Consider 'Vă informăm că' or 'Ne pare rău pentru' as alternatives, depending on the desired level of formality."
+          "description": "The phrase \"Ne cerem scuze\" is a bit formal and less natural in this context. A more appropriate translation would be something like \"Ne pare rău\" or \"Îmi pare rău\".",
+          "suggestion": "Îmi pare rău pentru orice problemă tehnică pe termen scurt care poate apărea în funcționarea serviciului la data de {{targetDate}} pe parcursul actualizării {{productName}}."
         },
         {
-          "type": "grammar",
-          "description": "The phrase 'pe parcursul actualizării {{productName}}' is grammatically correct but sounds a bit clunky. A more natural phrasing might improve readability.",
-          "suggestion": "Consider 'în timpul actualizării {{productName}}' or 'în cadrul actualizării {{productName}}'."
+          "type": "incorrect_translation",
+          "description": "The inclusion of 'pe parcursul actualizării' is a little clunky. It's not entirely wrong, but could be more concise.",
+          "suggestion": "Îmi pare rău pentru orice problemă tehnică pe termen scurt care poate apărea în funcționarea serviciului la data de {{targetDate}} în timpul actualizării {{productName}}."
         }
       ],
       "approved_at": null
@@ -291,8 +249,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'облачного решения' (cloud solution) is added, which isn't explicitly stated in the English content. While 'cloud solution' is often implied for product updates, it's an addition and might not be accurate depending on the product.",
-          "suggestion": "Consider if 'облачного решения' is necessary. If so, confirm it aligns with the product's specific nature. Alternatively, a more literal translation without this addition might be better, e.g., 'Приносим свои извинения за временные неполадки в работе сервиса, которые могут возникнуть {{targetDate}} в процессе обновления {{productName}}.'"
+          "description": "The phrase \"облачного решения\" (cloud solution) is a bit too literal and formal for the context. While not incorrect, it doesn't flow as naturally as a more general term. It might be perceived as overly technical.",
+          "suggestion": "Consider alternatives like \"сервиса\" (service) or a more concise phrasing that implies a cloud-based nature without explicitly stating it, such as 'в процессе обновления системы {{productName}}'."
+        },
+        {
+          "type": "formatting",
+          "description": "While the `{{targetDate}}` and `{{productName}}` variables are present in both versions, it's important to ensure that the translation maintains the same variable placement and uses the same variable names if possible. Confirm compatibility with the templating system.",
+          "suggestion": "Verify that the variables are correctly parsed and rendered in the target environment using the original variable names. No change to the variable names is suggested if they work."
         }
       ],
       "approved_at": null
@@ -302,14 +265,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ඉවසා සිටින්න\" (ivasā sitinnā) translates to \"endure\" or \"tolerate.\"  While it's not *wrong*, it has a negative connotation. A more appropriate phrasing would convey understanding and minimizing disruption.  A gentler translation would be more suitable for a customer-facing apology.",
-          "suggestion": "Replace \"ඉවසා සිටින්න\" with a phrase like \"සම අවසර දෙන්න\" (sama avasar denna - please excuse us) or a similar expression conveying understanding and minimal inconvenience."
+          "type": "formatting",
+          "description": "The Sinhala translation uses double curly braces `{{...}}` which mirrors the English format. While not strictly incorrect, it's unusual in Sinhala and might be better represented with single curly braces or a different formatting approach to match common Sinhala conventions for variable placeholders.",
+          "suggestion": "Consider using single curly braces `{...}` or a Sinhala-specific variable placeholder format."
         },
         {
-          "type": "formatting",
-          "description": "The Sinhala translation maintains the {{productName}} and {{targetDate}} placeholders. Ensure these placeholders are correctly handled during implementation to dynamically insert the appropriate values in Sinhala.",
-          "suggestion": "Verify that the system integrating the translation correctly handles the Sinhala characters within the placeholders and substitutes them with the appropriate dynamic values."
+          "type": "grammar",
+          "description": "The phrase 'ඉවසා සිටින්න' (iwasa sitinna) literally translates to 'tolerate' or 'bear with'. While conveying the meaning of apology, it might sound less empathetic in Sinhala.  A more natural phrasing expressing apology might be preferable.",
+          "suggestion": "Consider replacing 'ඉවසා සිටින්න' with a more apologetic phrase like 'క్షమించండి' (kṣamāviṇḍā) or a similar expression that expresses regret and asks for understanding."
         }
       ],
       "approved_at": null
@@ -317,7 +280,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Slovak translation retains the double curly braces {{ }} which are not needed in the target language and are likely a leftover from the source template.",
+          "suggestion": "Remove the double curly braces around targetDate and productName.  For example, change 'na{{targetDate}}' to 'na {{targetDate}}' and '{{productName}}' to '{{productName}}'."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -329,7 +298,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Serbian translation maintains the English template variables {{targetDate}} and {{productName}}. While technically correct, it might be more natural to integrate these into the sentence structure for a smoother flow. Consider rephrasing to avoid the abrupt appearance of the variables.",
+          "suggestion": "Извињавамо се због евентуалних краткотрајних техничких проблема у функционисању услуге који се могу појавити током ажурирања {{productName}} на {{targetDate}}."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -356,13 +331,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'service functioning' is too literal and clunky in Vietnamese. A more natural translation would be 'hoạt động dịch vụ' or 'dịch vụ'.",
-          "suggestion": "Chúng tôi xin lỗi vì bất kỳ vấn đề kỹ thuật ngắn hạn nào có thể xảy ra trên {{targetDate}} trong quá trình cập nhật {{productName}}."
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'trong hoạt động của dịch vụ' is redundant. The 'hoạt động' can be implied by 'dịch vụ'.",
-          "suggestion": "Chúng tôi xin lỗi vì bất kỳ vấn đề kỹ thuật ngắn hạn nào có thể xảy ra trên {{targetDate}} trong quá trình cập nhật {{productName}}."
+          "description": "The phrase 'service functioning' is translated as 'hoạt động của dịch vụ', which is literal but not the most natural phrasing in Vietnamese. A better translation would be something like 'hoạt động dịch vụ' or 'hiệu suất dịch vụ'.",
+          "suggestion": "hoạt động dịch vụ or hiệu suất dịch vụ"
         }
       ],
       "approved_at": null
@@ -372,14 +342,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Chinese translation maintains the placeholders {{targetDate}} and {{productName}}, which is consistent with the English source. No change needed here.",
-          "suggestion": null
-        },
-        {
           "type": "incorrect_translation",
-          "description": "The phrase '深表歉意' (shen biao qian yi) is a more formal and emphatic way of saying 'we apologize'. While not incorrect, it might be slightly too formal for a casual service update notification. A more conversational option could be considered.",
-          "suggestion": "对于在{{targetDate}}时{{productName}}更新期间可能出现的服务运行短期技术问题，我们很抱歉。"
+          "description": "The phrase \"深表歉意\" (shen biao qian yi) translates to \"deeply apologize\" which is a bit formal for this context. A more natural and common way to express apology would be \"很抱歉\" (hen bao qian) or “抱歉” (bao qian).",
+          "suggestion": "Replace \"深表歉意\" with \"很抱歉\" or “抱歉”."
         }
       ],
       "approved_at": null

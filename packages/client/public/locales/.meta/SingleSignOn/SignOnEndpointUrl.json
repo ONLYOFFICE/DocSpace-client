@@ -3,7 +3,7 @@
   "content": "IdP Single Sign-On Endpoint URL",
   "content_en_sha1_hash": "a1e3d72c09933def1425afc0eedb3892df293ce0",
   "created_at": "2025-05-19T21:30:50.145Z",
-  "updated_at": "2025-05-21T01:58:35.393Z",
+  "updated_at": "2025-05-24T03:11:43.602Z",
   "comment": {
     "text": "The SignOnEndpointUrl translation key is used to display the URL for Single Sign-On endpoint configuration, typically found in portal settings or integration settings. This value appears as a placeholder text when setting up an Identity Provider (IdP) integration, prompting users to enter their actual SSO endpoint URL.",
     "is_auto": true,
@@ -29,14 +29,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'مزوِّد' (mazawwid) is often used for provider, but in this context, 'جهة' (jiha) or a more direct translation might be more appropriate for 'Identity Provider'.",
-          "suggestion": "عنوان رابط نقطة نهاية تسجيل الدخول الموحد لجهة الهوية."
+          "type": "incorrect_translation",
+          "description": "The translation \"عنوان رابط نقطة نهاية تسجيل الدخول الموحد لمزود الهوية.\" is a literal translation but not the most natural phrasing in Arabic. While technically correct, it's a bit clunky.",
+          "suggestion": "عنوان URL لنقطة نهاية تسجيل الدخول الموحد لمزود الهوية (Identity Provider SSO Endpoint URL)"
         },
         {
-          "type": "grammar",
-          "description": "While technically correct, the phrasing 'نقطة نهاية تسجيل الدخول الموحد لـ' feels a little clunky. It could be improved for better flow.",
-          "suggestion": "عنوان رابط نقطة نهاية تسجيل الدخول الموحد لهوية."
+          "type": "formatting",
+          "description": "The translation contains a long phrase which can make it difficult to read and understand.  Consider splitting it into shorter sentences or using a more concise phrasing.",
+          "suggestion": "Can be more concise and readable."
         }
       ],
       "approved_at": null
@@ -47,13 +47,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'IdP Birdəfəlik Giriş nöqtəsi URL' is not the most accurate or natural-sounding translation for 'IdP Single Sign-On Endpoint URL'. While 'Birdəfəlik Giriş' translates to 'Single Sign-On,' the phrasing is slightly awkward. 'Nöqtəsi' (point) is a bit literal.",
-          "suggestion": "IdP Tək Giriş URL"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly wrong, using a space between 'IdP' and 'Tək Giriş URL' in the suggested correction would improve readability, as is common in Azerbaijani.",
-          "suggestion": "IdP Tək Giriş URL"
+          "description": "The translation 'IdP Birdəfəlik Giriş nöqtəsi URL' is not a precise translation of 'IdP Single Sign-On Endpoint URL'. 'Birdəfəlik Giriş' translates to 'Single Entry' or 'One-time Entry', which isn't the intended meaning of 'Single Sign-On'. It should convey the idea of a unified login.",
+          "suggestion": "IdP Yenicə bir Giriş URL"
         }
       ],
       "approved_at": null
@@ -64,13 +59,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"URL адрес на крайна точка за единично влизане на доставчика на самоличност\" is a bit verbose and literal. A more natural and concise translation would be better.",
-          "suggestion": "URL за единично влизане (IdP)"
+          "description": "The translation 'URL адрес на крайна точка за единично влизане на доставчика на самоличност' is a bit verbose and potentially confusing. 'Доставчика на самоличност' (Identity Provider) can be shortened or rephrased for better readability. A more direct translation of 'IdP' would be helpful.",
+          "suggestion": "URL адрес на крайна точка за единично влизане (IdP)"
         },
         {
           "type": "formatting",
-          "description": "The translation includes \"URL адрес\".  It's more common to simply use \"URL\" in Bulgarian, especially in technical contexts. Including both is redundant.",
-          "suggestion": "Remove \"адрес\" and use just \"URL\""
+          "description": "While grammatically correct, the translation could benefit from a slightly more natural phrasing and flow. The word order is a bit stiff.",
+          "suggestion": "URL адрес на точка за единично влизане от доставчик на самоличност"
         }
       ],
       "approved_at": null
@@ -78,18 +73,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Adresa URL koncového bodu jednotného přihlášení IdP' is a very literal and somewhat clunky translation.  'IdP' is an abbreviation that might not be widely understood by all Czech users. A more natural and understandable translation would better convey the meaning.",
-          "suggestion": "Možnosti: 'URL adresa pro jednotné přihlášení (IdP)' or 'Adresa URL pro přihlášení přes IdP'"
-        },
-        {
-          "type": "formatting",
-          "description": "The Czech translation uses a space before punctuation which can be perceived as inconsistent with common Czech style guides.  Although not incorrect, consistency is preferred.",
-          "suggestion": "Remove the space before the colon. 'Adresa URL koncového bodu jednotného přihlášení IdP:'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -98,7 +82,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'URL des Single Sign-On Endpunkts vom IdP' is not the most natural or precise translation of 'IdP Single Sign-On Endpoint URL'. 'vom IdP' implies ownership, which isn't accurate.  It should be more accurately represented as belonging to the IdP.",
+          "description": "The translation 'URL des Single Sign-On Endpunkts vom IdP' is not the most natural or accurate rendering of 'IdP Single Sign-On Endpoint URL'. The phrase 'vom IdP' is awkward. It would be better to express the relationship more clearly.",
           "suggestion": "URL des Single Sign-On Endpunkts des IdP"
         }
       ],
@@ -110,13 +94,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation uses German terminology (\"IdP\", \"Endpunkts\") instead of Greek. It doesn't accurately convey the meaning of 'IdP Single Sign-On Endpoint URL' in Greek.",
-          "suggestion": "A more appropriate Greek translation would be something like: \"Διεύθυνση URL σημείου εισόδου ενιαίας διαχείρισης ταυτότητας (IdP)\" or \"URL σημείου εισόδου ενιαίας σύνδεσης (IdP)\" depending on the desired level of formality."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of German words in a Greek translation creates a formatting inconsistency.",
-          "suggestion": "Replace German terms with appropriate Greek equivalents."
+          "description": "The Greek translation \"URL des Single Sign-On Endpunkts vom IdP\" is a direct transliteration of the English and uses German terminology. It doesn't provide a proper Greek translation.",
+          "suggestion": "A more accurate Greek translation would be something like \"Διεύθυνση URL για το σημείο εισόδου ενιαίας διαχείρισης ταυτότητας (IdP)\" or \"URL σημείου εισόδου ενιαίας σύνδεσης (IdP)\"."
         }
       ],
       "approved_at": null
@@ -127,13 +106,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'URL del punto de conexión de inicio de sesión único IdP' is overly literal and a bit awkward in Spanish. While technically correct, a more natural phrasing would improve readability.",
-          "suggestion": "URL de inicio de sesión único IdP"
+          "description": "The translation 'URL del punto de conexión de inicio de sesión único IdP' is overly literal and could be improved for better readability in Spanish. 'Inicio de sesión único' is correct, but the overall phrasing is clunky.",
+          "suggestion": "URL del punto de inicio de sesión único de IdP"
         },
         {
           "type": "formatting",
-          "description": "The translation retains the abbreviation 'IdP'. While common in technical contexts, it may not be immediately understandable to all Spanish-speaking users. A more user-friendly version might consider adding an explanation or using a more descriptive term.",
-          "suggestion": "URL de inicio de sesión único del proveedor de identidad (IdP)"
+          "description": "While not strictly incorrect, 'IdP' is an abbreviation and might be better explained or translated if the target audience is not familiar with the term. Consider adding a brief explanation or using the full term 'proveedor de identidad' if appropriate.",
+          "suggestion": "Consider adding a parenthetical explanation after 'IdP' for clarity: 'URL del punto de inicio de sesión único de IdP (proveedor de identidad)'"
         }
       ],
       "approved_at": null
@@ -144,13 +123,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'IdP yksittäisen sisäänkirjautumisen päätepiste URL' is overly literal and not idiomatic Finnish. 'yksittäisen sisäänkirjautumisen' is a cumbersome way to say 'Single Sign-On'.",
-          "suggestion": "IdP sisäänkirjautumispäätepisteen URL"
+          "description": "The translation 'IdP yksittäisen sisäänkirjautumisen päätepiste URL' is overly literal and doesn't flow naturally in Finnish. 'yksittäisen sisäänkirjautumisen' is a cumbersome phrasing.",
+          "suggestion": "IdP:n kirjautumispäätepisteen URL"
         },
         {
           "type": "formatting",
-          "description": "The translation includes a space between 'päätepisteen' and 'URL'. It's more common to omit the space.",
-          "suggestion": "IdP sisäänkirjautumispäätepisteenURL"
+          "description": "The colon in 'IdP:n' improves readability and consistency with Finnish sentence structure.",
+          "suggestion": "Ensure the colon is present after 'IdP'."
         }
       ],
       "approved_at": null
@@ -158,18 +137,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"URL du point d’accès à l’authentification unique IdP\" is a bit verbose and could be more concise. 'Point d'accès' is a literal translation of 'Endpoint' but might not be the most natural phrasing in French for a technical context.",
-          "suggestion": "URL du point de connexion unique IdP"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation includes a space before 'IdP', which might not be consistent with other instances of 'IdP' in the software.",
-          "suggestion": "URL du point de connexion unique IdP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -178,13 +146,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"IdP Միակ մուտքագրման վերջնական կետ URL\" is not the most natural or accurate translation of \"IdP Single Sign-On Endpoint URL\". While understandable, it's a bit literal and clunky. \"Միակ մուտքագրման\" (single entry) is correct, but could be improved.",
-          "suggestion": "Consider a more concise and idiomatic translation like \"IdP Անվճար մուտքի վայրի URL\" or \"IdP Միասնական մուտքի վայրի URL\"."
-        },
-        {
-          "type": "formatting",
-          "description": "The Armenian translation includes \"URL\" at the end. While technically correct, it might be stylistically preferable to avoid repetition if 'URL' is already understood in the context.",
-          "suggestion": "Consider removing 'URL' if the context already implies it.  Alternatively, explore Armenian equivalents for 'URL' if they exist and are commonly used."
+          "description": "The translation 'Միակ մուտքագրման վերջնական կետ URL' is not a direct and accurate translation of 'IdP Single Sign-On Endpoint URL'. It translates to 'Single Entry Final Point URL'. It doesn't convey the 'IdP' or the specific nature of Single Sign-On.",
+          "suggestion": "A more accurate translation might be something like: 'IdP Ազգային մուտքագրման վերջնական URL' or 'IdP Միասնական մուտքագրման վերջնական URL'."
         }
       ],
       "approved_at": null
@@ -195,13 +158,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"URL dell’endpoint Single Sign-On IdP\" is technically correct but not the most natural or idiomatic Italian. \"IdP\" is often kept as is, but the phrasing could be improved for clarity.",
-          "suggestion": "URL dell’endpoint Single Sign-On (IdP)"
+          "description": "The translation 'URL dell’endpoint Single Sign-On IdP' is not the most natural or accurate rendering of 'IdP Single Sign-On Endpoint URL'. While technically correct, it sounds a bit awkward in Italian. The term 'IdP' is generally understood, but the flow is not ideal.",
+          "suggestion": "URL endpoint Single Sign-On (IdP)"
         },
         {
           "type": "formatting",
-          "description": "The abbreviation 'IdP' might benefit from parentheses for better readability, especially if the target audience isn't familiar with the abbreviation.",
-          "suggestion": "URL dell’endpoint Single Sign-On (IdP)"
+          "description": "The use of 'dell’' is correct but placing it within the phrase disrupts the flow.  A more common construction would place it after 'URL'.",
+          "suggestion": "URL dell'endpoint Single Sign-On IdP"
         }
       ],
       "approved_at": null
@@ -224,13 +187,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'IdP Single Sign-On URL ຈຸດສິ້ນສຸດ' is a literal translation but doesn't fully capture the meaning of 'Endpoint URL'.  'ຈຸດສິ້ນສຸດ' translates to 'endpoint' but doesn't convey the URL aspect. A more accurate translation would incorporate the concept of a web address.",
-          "suggestion": "IdP Single Sign-On URL ທີ່ປາຍທາງ"
+          "description": "The Lao translation 'IdP Single Sign-On URL ຈຸດສິ້ນສຸດ' is a literal translation but lacks the nuance of 'Endpoint'. 'ຈຸດສິ້ນສຸດ' means 'end point' which is accurate but might not be the most natural phrasing in Lao for a technical context.  A more accurate and natural phrasing would incorporate the concept of 'endpoint'.",
+          "suggestion": "IdP Single Sign-On URL ປາຍທາງ"
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the spacing between 'URL' and 'ຈຸດສິ້ນສຸດ' could be improved for readability. A space is needed.",
-          "suggestion": "IdP Single Sign-On URL ຈຸດສິ້ນສຸດ "
+          "description": "While not strictly incorrect, the formatting lacks spacing around the Lao word. It would be more readable with a space before and after.",
+          "suggestion": "IdP Single Sign-On URL ຈຸດ ສິ້ນສຸດ"
         }
       ],
       "approved_at": null
@@ -241,13 +204,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'IdP vienotās pierakstīšanās galapunkta vietrādis URL' is not the most natural or precise translation of 'IdP Single Sign-On Endpoint URL'. 'Vietrādis' implies a 'location' or 'address' which isn't quite accurate in this context. It's more about the endpoint itself.",
-          "suggestion": "IdP vienotās pierakstīšanās galapunkts URL"
+          "description": "The translation \"IdP vienotās pierakstīšanās galapunkta vietrādis URL\" is overly literal and somewhat awkward in Latvian. \"Vietrādis\" typically refers to a radio beacon or a signal; it doesn't quite fit the context of a URL.",
+          "suggestion": "IdP vienotās pierakstīšanās galapunkta adrese URL"
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, maintaining capitalization consistency with English is often preferred for technical terms. 'URL' is capitalized in English and should be capitalized in Latvian for consistency.",
-          "suggestion": "IdP vienotās pierakstīšanās galapunkts URL"
+          "description": "While not strictly an error, the direct translation makes the phrase longer and less natural than the English. Consider restructuring for better readability.",
+          "suggestion": "IdP vienotās pierakstīšanās URL adrese"
         }
       ],
       "approved_at": null
@@ -255,13 +218,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'IdP Single Sign-On Eindpunt URL' is a direct transliteration of the English, but 'Eindpunt' could be improved. A more natural Dutch phrasing would be 'Inlogpunt' or 'Authenticatie-eindpunt'.",
-          "suggestion": "IdP Single Sign-On Inlogpunt URL"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -270,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'IdP' is often left untranslated in technical Polish contexts, or translated as 'IdP'. Translating it as 'pojedynczego logowania IdP' is unusual and might be confusing.",
-          "suggestion": "Adres URL punktu końcowego pojedynczego logowania IdP (IdP)"
+          "description": "While technically correct, \"pojedynczego logowania\" is a bit clunky. A more natural Polish phrasing for \"Single Sign-On\" would be \"logowania pojedynczego\" or simply \"logowania\".",
+          "suggestion": "Adres URL punktu końcowego logowania pojedynczego IdP"
         }
       ],
       "approved_at": null
@@ -282,13 +239,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'IdP URL do Ponto Final do Início de Sessão Único' is overly literal and clunky. 'Ponto Final do Início de Sessão Único' is a complex way to say 'Single Sign-On Endpoint'.",
-          "suggestion": "IdP URL do Endpoint de Acesso Único"
+          "description": "The translation 'IdP URL do Ponto Final do Início de Sessão Único' is overly verbose and doesn't flow naturally. 'Ponto Final do Início de Sessão Único' is a literal and clunky translation of 'Endpoint'. A more natural Portuguese equivalent would be 'URL de Endpoint de SSO' or 'URL do Endpoint de Sign-On'.",
+          "suggestion": "IdP URL de Endpoint de SSO"
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the Portuguese translation uses a long and complex phrasing. A more concise and natural translation would improve readability.",
-          "suggestion": "IdP URL do Endpoint de Acesso Único"
+          "description": "While grammatically correct, the phrase 'IdP URL' could benefit from consistent spacing. While acceptable as is, a space after 'IdP' would improve readability.",
+          "suggestion": "IdP URL de Endpoint de SSO"
         }
       ],
       "approved_at": null
@@ -299,13 +256,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'URL do ponto final de logon único IdP' is a literal translation and sounds awkward in Portuguese. 'Logon único' should be 'Single Sign-On' or 'autenticação única'.",
-          "suggestion": "URL do ponto final de Single Sign-On (SSO) IdP"
-        },
-        {
-          "type": "formatting",
-          "description": "Acronyms like 'SSO' are often included in parentheses after the full term for clarity, especially for a more technical audience.",
-          "suggestion": "URL do ponto final de Single Sign-On (SSO) IdP"
+          "description": "The translation 'URL do ponto final de logon único IdP' is technically correct but could be more natural. 'Logon único' is a bit clunky. 'Autenticação única' is a more commonly used term for Single Sign-On in Brazilian Portuguese.",
+          "suggestion": "URL do ponto final de autenticação única IdP"
         }
       ],
       "approved_at": null
@@ -316,8 +268,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"URL punct final de autentificare unică al furnizorului de identitate (IdP)\" is overly literal and somewhat awkward in Romanian. While technically correct, it's not the most natural phrasing.",
-          "suggestion": "Consider a more natural phrasing such as \"URL-ul punctului final de autentificare unică (SSO) al furnizorului de identitate (IdP)\" or \"URL-ul punctului final SSO al furnizorului de identitate (IdP)\".  Replacing 'autentificare unică' with the abbreviation 'SSO' makes it more concise and common in Romanian technical contexts."
+          "description": "The translation \"URL punct final de autentificare unică al furnizorului de identitate (IdP)\" is a bit verbose and could be simplified. While technically correct, it's not the most natural Romanian phrasing for a URL label.",
+          "suggestion": "URL autentificare unică (IdP)"
+        },
+        {
+          "type": "formatting",
+          "description": "The inclusion of \"(IdP)\" in parentheses after the primary description breaks readability. While clarifying, it's better to provide a more concise description and offer a tooltip or separate explanation for \"IdP\" if necessary.",
+          "suggestion": "Remove the parentheses and consider a tooltip or alternative explanation for 'IdP'."
         }
       ],
       "approved_at": null
@@ -328,13 +285,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and could be improved for better flow in Russian. 'IdP Single Sign-On Endpoint URL' is quite technical, and the direct translation can sound clunky.",
-          "suggestion": "Consider a more natural phrasing like 'URL единого входа IdP' or 'Адрес единого входа IdP'."
-        },
-        {
-          "type": "formatting",
-          "description": "The colon at the end of the translation might be unnecessary or stylistically awkward depending on the context where this key is used.",
-          "suggestion": "Evaluate whether the colon is needed based on surrounding text. If not, remove it."
+          "description": "The translation \"URL-адрес конечной точки единого входа IdP:\" is a literal translation but sounds unnatural in Russian. 'IdP' is an acronym that is commonly used in Russian IT contexts, but explicitly stating 'единого входа IdP:' is slightly verbose. A more natural phrasing would be 'URL единого входа IdP'.",
+          "suggestion": "URL единого входа IdP"
         }
       ],
       "approved_at": null
@@ -345,18 +297,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'IdP තනි පිවිසුම් අන්තයේ ඒ.ස.නි.' is not an accurate translation of 'IdP Single Sign-On Endpoint URL'. 'ඒ.ස.නි.' translates to 'A.S.N.' which is an abbreviation and doesn't clearly convey the meaning of 'URL'.",
+          "description": "The translation 'IdP තනි පිවිසුම් අන්තයේ ඒ.ස.නි.' is not an accurate translation of 'IdP Single Sign-On Endpoint URL'. 'ඒ.ස.නි.' is an abbreviation for 'URL' (as in, 'URL එක'), but the entire phrase isn't well-translated.  'තනි පිවිසුම්' is acceptable for 'Single Sign-On', but the rest is awkward.",
           "suggestion": "IdP තනි පිවිසුම් URL"
         },
         {
-          "type": "spelling",
-          "description": "While technically the words are spelled correctly based on Sinhala orthography, the combination 'තනි පිවිසුම් අන්තයේ' is a bit clunky. A more natural phrasing could improve readability.",
-          "suggestion": "තනි පිවිසුම් ස්ථානයේ"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'URL' isn't directly translated. While understandable, including a Sinhala equivalent or explanation might improve comprehension for a wider audience.",
-          "suggestion": "IdP තනි පිවිසුම් ස්ථානය (URL)"
+          "type": "formatting",
+          "description": "The use of abbreviation 'ඒ.ස.නි.' might not be readily understood by all Sinhala speakers, especially those less familiar with technical terminology.",
+          "suggestion": "Consider avoiding abbreviations or explaining them briefly if used."
         }
       ],
       "approved_at": null
@@ -364,18 +311,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'URL koncového bodu jednotného prihlásenia IdP' is overly literal and less natural-sounding in Slovak. While technically correct, it can be improved for better readability.",
-          "suggestion": "URL jednotného prihlásenia IdP"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation is missing a space after 'URL' and before 'jednotného'.",
-          "suggestion": "URL jednotného prihlásenia IdP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -384,13 +320,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'končna točka URL enkratne prijave' is not the most natural or accurate rendering of 'IdP Single Sign-On Endpoint URL'. 'Enkratne prijave' literally translates to 'single login', but a more idiomatic translation would involve conveying the concept of 'Single Sign-On'.",
-          "suggestion": "IdP URL končne točke za enotno prijavo"
+          "description": "The translation 'končna točka URL enkratne prijave' is a literal translation and not idiomatic Slovenian. 'Enkratna prijava' directly translates to 'single sign-on,' which is already present in 'Single Sign-On' in the English content. It is redundant and awkward.",
+          "suggestion": "IdP URL končne točke za prijavo"
         },
         {
           "type": "formatting",
-          "description": "The translation 'IdP URL končne točke za enotno prijavo' would be more readable if the order of elements were changed to improve flow.",
-          "suggestion": "URL končne točke za enotno prijavo IdP"
+          "description": "The translation mixes English and Slovenian terms, which is not ideal for consistency.",
+          "suggestion": "Use full Slovenian phrasing for better readability. For example: 'IdP URL končne točke za prijavo'."
         }
       ],
       "approved_at": null
@@ -401,18 +337,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"URL крајње тачке за једнострану пријаву на страни Идентитетског пружаоца\" is overly literal and verbose. \"SignOnEndpointUrl\" specifically refers to the endpoint used for Single Sign-On (SSO). The term 'страни Идентитетског пружаоца' is not the most natural way to convey 'IdP'.",
-          "suggestion": "URL крајње тачке за једнократну пријаву (SSO) добављача идентитета"
+          "description": "The translation \"URL крајње тачке за једнострану пријаву на страни Идентитетског пружаоца\" is overly verbose and literal. A more natural and concise translation would be better. \"URL крајње тачке за једнократну пријаву (SSO) пружаоца идентитета\" or \"URL крајње тачке за SSO пружаоца идентитета\" are more appropriate.",
+          "suggestion": "URL крајње тачке за SSO пружаоца идентитета"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The term 'једнострану пријаву' should be 'једнократну пријаву' to accurately reflect the English 'Single Sign-On'.",
-          "suggestion": "једнократну пријаву"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian term \"добављача идентитета\" is a valid translation for \"IdP\", but it's long and potentially confusing for users.  A more concise and commonly used alternative exists.",
-          "suggestion": "Идентитетског провајдера"
+          "type": "formatting",
+          "description": "The term \"SSO\" is an abbreviation that might not be universally understood by Serbian speakers. Including a brief explanation or keeping the full term might improve clarity, especially for less technical audiences.  If keeping \"SSO\", it's helpful to indicate that it's an acronym.",
+          "suggestion": "URL крајње тачке за једнократну пријаву (SSO) пружаоца идентитета"
         }
       ],
       "approved_at": null
@@ -423,13 +354,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"URL krajnje tačke za jednostranu prijavu na strani Identitetskog pružaoca\" is overly literal and verbose. A more natural and concise translation would improve readability. \"URL za jednokratnu prijavu (SSO) Identitetskog pružaoca\" or \"URL za jednokratnu prijavu Identitetskog pružaoca\" would be better.",
-          "suggestion": "URL za jednokratnu prijavu (SSO) Identitetskog pružaoca"
+          "description": "The translation is overly literal and verbose. 'IdP Single Sign-On Endpoint URL' is better conveyed with a more natural and concise Serbian phrase.",
+          "suggestion": "URL za SSO (Single Sign-On) Identiteta"
         },
         {
           "type": "formatting",
-          "description": "The phrase \"jednostranu prijavu\" is slightly awkward in Serbian.  Using \"jednokratnu prijavu\" (single sign-on) is more idiomatic and commonly understood.",
-          "suggestion": "jednokratnu prijavu"
+          "description": "The translation uses spaces before punctuation, which is not standard Serbian style.",
+          "suggestion": "Remove the space before the colon and parentheses."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Identitetskog pružaoca' is technically correct, it's a bit formal. The term 'Identiteta' is more commonly used in this context.",
+          "suggestion": "Replace 'Identitetskog pružaoca' with 'Identiteta'."
         }
       ],
       "approved_at": null
@@ -446,13 +382,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"URL-адреса кінцевої точки єдиного входу постачальника посвідчень\" is overly literal and a bit clunky in Ukrainian. While technically correct, it lacks natural flow.",
-          "suggestion": "Розгляньте альтернативні варіанти, наприклад: \"URL-адреса входу через єдиний логін (IdP)\" або \"URL-адреса точки входу для єдиного входу постачальника ідентифікації\"."
+          "description": "The translation \"URL-адреса кінцевої точки єдиного входу постачальника посвідчень\" is a literal translation and could be more natural in Ukrainian. \"Постачальника посвідчень\" (certificate provider) is slightly awkward. A more common phrasing for 'IdP' would be 'Ідентифікатора'.",
+          "suggestion": "URL-адреса точки входу єдиного входу Ідентифікатора (or URL-адреса точки входу єдиного входу)"
         },
         {
           "type": "formatting",
-          "description": "The phrase \"єдиного входу постачальника посвідчень\" could be shortened for better readability.  Consider removing 'постачальника' or 'ідентифікації' depending on context.",
-          "suggestion": "Simplify the phrase, potentially using just \"єдиного входу\" or \"єдиного входу (IdP)\"."
+          "description": "While not strictly incorrect, consider breaking up the long phrase into two lines for better readability, especially in UI contexts. This is a stylistic preference but improves readability.",
+          "suggestion": "URL-адреса\nточки входу єдиного входу\nІдентифікатора"
         }
       ],
       "approved_at": null
@@ -463,12 +399,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'URL điểm cuối đăng nhập một lần IdP' is a literal translation and sounds awkward in Vietnamese. 'Điểm cuối' is technically correct, but 'địa chỉ' (address) would be more natural for 'Endpoint' in this context.",
-          "suggestion": "URL đăng nhập một lần của IdP"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the order of 'một lần' (once) sounds slightly less fluent. It's more natural to place it closer to 'đăng nhập'.",
+          "description": "The translation 'URL điểm cuối đăng nhập một lần IdP' is technically correct but could be more natural and user-friendly. 'Điểm cuối' is a bit technical for a general audience. Also, 'một lần' is redundant as 'single sign-on' implies 'one time'.",
           "suggestion": "URL đăng nhập một lần của IdP"
         }
       ],

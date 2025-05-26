@@ -3,7 +3,7 @@
   "content": "Disable",
   "content_en_sha1_hash": "9a7d4e0687b14e2b7cda406900b802782cd50a62",
   "created_at": "2025-05-19T21:30:44.526Z",
-  "updated_at": "2025-05-22T11:56:37.331Z",
+  "updated_at": "2025-05-26T07:57:32.231Z",
   "comment": {
     "text": "This translation key is used to display a label that enables users to disable guest access. In the \"ChangeUserStatusDialog\", it will be displayed as part of a button's label depending on the user type. It appears in a dialog for changing user status.",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\ChangeUserStatusDialog\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
       "line_number": 190,
       "context": "bodyText += isGuests\n ? t(\"DisableGuestsGeneralDescription\")\n : t(\"DisableGeneralDescription\");\n \n buttonLabelSave = isGuests\n ? t(\"Common:Disable\")\n : t(\"PeopleTranslations:DisableUserButton\");\n } else {\n header = onlyOneUser\n ? isGuests\n ? t(\"EnableGuest\")",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\OAuthStore.ts",
+      "file_path": "/packages/client/src/store/OAuthStore.ts",
       "line_number": 753,
       "context": "};\n \n const disableOption = {\n key: \"disable\",\n icon: RemoveReactSvgUrl,\n label: t(\"Common:Disable\"),\n onClick: () => this.onDisable(clientId),\n };\n \n const generateDeveloperTokenOption = {\n key: \"generate-token\",",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\OAuthStore.ts",
+      "file_path": "/packages/client/src/store/OAuthStore.ts",
       "line_number": 753,
       "context": "};\n \n const disableOption = {\n key: \"disable\",\n icon: RemoveReactSvgUrl,\n label: t(\"Common:Disable\"),\n onClick: () => this.onDisable(clientId),\n };\n \n const generateDeveloperTokenOption = {\n key: \"generate-token\",",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Deaktiv edin\" is a command form (imperative) of 'disable'. The English word 'Disable' functions as a noun or adjective in this context (e.g., 'Common:Disable' - likely a setting). A more appropriate translation would be a noun or an adjective in its base form.",
-          "suggestion": "İləsiz et"
+          "description": "The English word 'Disable' has a more literal translation of 'Əməliyyatdan çıxar' or 'Xətlərin kəsilməsi' in Azerbaijani, depending on context. 'Deaktiv edin' is more akin to 'Deactivate,' implying a process rather than a simple disabling action. While understandable, it's not the most accurate or direct translation.",
+          "suggestion": "Consider 'Əməliyyatdan çıxar' or 'Xətlərin kəsilməsi' for a more precise translation, or investigate the specific context to determine the best equivalent."
         }
       ],
       "approved_at": null
@@ -111,13 +111,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"無効にする\" is a valid translation for 'Disable', it's a rather formal and technical term. A more common and natural translation, depending on the context, might be \"オフにする\" or simply \"無効\". '無効にする' implies an action being performed to disable something.",
-          "suggestion": "Consider \"オフにする\" or \"無効\" depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -180,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අබල කරන්න' while literally meaning 'to disable', is a more active or forceful way to disable something. A more accurate and neutral translation of 'Disable' would be 'නො ක්‍රියාත්මක කරන්න' (no kriya thmakthak kanna) or 'අවලංගු කරන්න' (awalangu karanna).",
-          "suggestion": "Replace 'අබල කරන්න' with 'නො ක්‍රියාත්මක කරන්න' or 'අවලංගු කරන්න'."
+          "description": "While 'අබල කරන්න' (abala kāranna) can mean 'disable', it's a very literal and sometimes clumsy translation for 'Disable' in this context (likely referring to a feature or option). A more natural and common translation would be 'නවත්වා දැමන්න' (navaṭavā dammaṇna) or 'අවහන් කරන්න' (avahan karanna).",
+          "suggestion": "Consider using 'නවත්වා දැමන්න' (navaṭavā dammaṇna) or 'අවහන් කරන්න' (avahan karanna)."
         }
       ],
       "approved_at": null
@@ -210,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Onemogući\" is a valid verb meaning 'disable,' but it doesn't directly map to the English word 'Disable' which functions as a noun or adjective (e.g., 'Disable feature', 'Disabled'). A more appropriate translation, depending on the context, could be 'Isključi' or 'Onemogućavanje'.  'Onemogući' is an imperative form (command).",
-          "suggestion": "Consider 'Isključi' or 'Onemogućavanje' as alternatives, depending on the desired meaning. For a noun, 'Onemogućavanje' is the closest option."
+          "description": "The Serbian translation \"Onemogući\" is a valid word, but not the most natural or common translation of \"Disable\" in this context. While it technically means 'to make impossible,' a more standard translation would be 'isključi'.",
+          "suggestion": "Isključi"
         }
       ],
       "approved_at": null
@@ -222,7 +216,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Devre dışı bırak\" is a literal translation of \"Disable,\" it's often too verbose for UI elements or short labels. A more common and concise translation would be \"Kapalı\" or \"Devre Dışı\".",
+          "description": "While \"Devre dışı bırak\" is a literal translation of \"Disable,\" it's a bit formal and verbose for a common setting. A more natural and concise translation would be better.",
           "suggestion": "Kapalı"
         }
       ],

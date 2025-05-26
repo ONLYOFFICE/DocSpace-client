@@ -3,7 +3,7 @@
   "content": "Unrecognized Error",
   "content_en_sha1_hash": "cdf46b187ce1d45ffbf838adecf1a4aecd46b5da",
   "created_at": "2025-05-19T21:30:54.285Z",
-  "updated_at": "2025-05-21T08:05:58.943Z",
+  "updated_at": "2025-05-24T08:19:53.434Z",
   "comment": {
     "text": "This translation key is used to display an error message when an LDAP certificate is encountered that cannot be trusted due to an unrecognized root certificate. It appears in a Certificate dialog box where users can view and manage their LDAP certificates. Translators should consider equivalent phrases for \"unrecognized\" or \"unknown\" roots.",
     "is_auto": true,
@@ -155,9 +155,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'නොපසඳුනුගත වූ දෝෂය' is a literal translation of 'Unrecognized Error' but sounds overly formal and verbose for a user-facing error message in Sinhala. A more natural and concise phrasing would be preferable.",
-          "suggestion": "Consider alternatives like 'గుర్తించలేని లోపం' (gurthinaలేని లోపం) or 'గుర్తించని లోపం' (gurthina లోపం). A more idiomatic translation is needed, focusing on clarity and user understanding rather than a word-for-word correspondence."
+          "type": "spelling",
+          "description": "The word 'නොපසඳුනුගත' contains a potential spelling error. While technically correct, it's a complex form and may be perceived as slightly awkward or overly formal.",
+          "suggestion": "Consider a simpler alternative like 'නොදනිත ලදError' (Unfamiliar Error) or 'ඇඳුම්Error' (Unrecognized Error) for better readability and comprehension."
         }
       ],
       "approved_at": null
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Lỗi không xác\" is incomplete. It's missing the word 'recognized'. A more accurate translation would include that concept.",
-          "suggestion": "Lỗi không được nhận dạng"
+          "description": "The translation 'Lỗi không xác' is incomplete and doesn't accurately convey the meaning of 'Unrecognized Error'. It's missing the word 'nhận' which is crucial for conveying the concept of 'unrecognized'.",
+          "suggestion": "Lỗi không nhận ra"
         }
       ],
       "approved_at": null

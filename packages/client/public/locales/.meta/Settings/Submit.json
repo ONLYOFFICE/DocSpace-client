@@ -3,7 +3,7 @@
   "content": "Submit",
   "content_en_sha1_hash": "2dacf65959849884a011f36f76a04eebea94c5ea",
   "created_at": "2025-05-19T21:30:52.819Z",
-  "updated_at": "2025-05-21T02:55:49.997Z",
+  "updated_at": "2025-05-26T07:57:32.763Z",
   "comment": {
     "text": "This translation key is used to display the label \"Submit\" on a button in various UI contexts, such as a portal settings page and a delete portal dialog. Its purpose is to provide a clear and consistent action label for users to confirm their actions. The translation key is used on buttons that trigger specific actions, like submitting requests or deleting portals.",
     "is_auto": true,
@@ -15,12 +15,6 @@
       "line_number": 234,
       "context": "productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n </Text>\n <Button\n label={t(\"Submit\")}\n primary\n size=\"normal\"\n minWidth=\"138px\"\n onClick={submitRequest}\n scale={isMobile()}",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/management/src/categories/spaces/sub-components/dialogs/DeletePortalDialog/index.tsx",
-      "line_number": 149,
-      "context": ")}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"CreateButton\"\n label={isWizardCompleted ? t(\"Settings:Submit\") : t(\"Common:Delete\")}\n size={ButtonSize.normal}\n scale\n primary\n onClick={onDelete}\n isLoading={isLoading}",
-      "module": "/packages/management"
     }
   ],
   "languages": {
@@ -114,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ສົ່ງອອກ\" (song ok) typically means 'export' or 'release'. It doesn't accurately convey the meaning of 'Submit' which implies submitting something for approval or processing.",
-          "suggestion": "A more accurate translation for 'Submit' in this context might be something like 'ຖ້າສົ່ງ' (tha song) which means 'to send' or 'ຍື່ນສະເໜີ' (yeun sanee) which means 'to present/submit'."
+          "description": "The Lao translation \"ສົ່ງອອກ\" (song ok) translates to \"export\" or \"release\" which doesn't align with the English word \"Submit\". \"Submit\" implies sending or presenting something for consideration or approval.",
+          "suggestion": "Consider alternatives like \"ສົ່ງຕໍ່\" (song to - forward/send), \"ຖ້າອກ\" (tha ok - present/offer), or \"ຕົກລົງ\" (tok long - agree/confirm), depending on the specific context of the 'Settings' section."
         }
       ],
       "approved_at": null
@@ -156,7 +150,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Remitere\" does not accurately convey the meaning of \"Submit\" in the context of settings. \"Remitere\" typically means 'surrender' or 'handover'. A more suitable translation would be 'Trimite' or 'Înregistrează'.",
+          "description": "The Romanian translation \"Remitere\" doesn't accurately convey the meaning of \"Submit\" in the context of a settings button. \"Remitere\" translates more closely to 'surrender' or 'relinquish'.  A more appropriate translation would be something like \"Trimite\" or \"Înaintează\".",
           "suggestion": "Trimite"
         }
       ],
@@ -174,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'යොමන්න' while generally acceptable, isn't the most natural or precise translation for 'Submit' in a settings context. It carries a stronger connotation of 'dispatch' or 'send away'.",
-          "suggestion": "Consider 'ඉන්​දී​ෆර්​න්' (infern) or 'ගොඩ ගැටි' (godageṭi) for a more contextually appropriate translation of 'Submit' in settings."
+          "description": "The Sinhala translation 'යොමන්න' doesn't perfectly convey the meaning of 'Submit'. While it can imply 'send' or 'deliver', 'Submit' in a settings context typically means to finalize and send data, often with confirmation. 'යොමන්න' can be more general.",
+          "suggestion": "Consider alternatives like 'ඉرسත් කරන්න' (irsath kannela) or 'ගැළපෙනවා' (galapenawa) depending on the specific functionality."
         }
       ],
       "approved_at": null
@@ -198,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Поднеси\" does not accurately convey the meaning of \"Submit\". \"Поднеси\" translates to \"present\" or \"submit (a document)\", but not the general action of submitting something (like a form or a request).",
-          "suggestion": "A more accurate translation would be \"Пошаљи\" (Posalji) which means 'Send' or \"Изнеси\" (Iznesi) which means 'Submit' in a more general sense."
+          "description": "The Serbian (Cyrillic) translation \"Поднеси\" does not accurately convey the meaning of \"Submit\" in the context of settings. \"Поднеси\" typically means \"bring\" or \"present\". A more appropriate translation would be something like \"Pošalji\" (Send) or \"Proslijedi\" (Forward).",
+          "suggestion": "Pošalji"
         }
       ],
       "approved_at": null
@@ -210,7 +204,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Podnesi\" while technically meaning \"submit\" or \"present\", doesn't align with the typical usage of 'Submit' in a user interface context, where 'Pošalji' is the preferred translation.",
+          "description": "While 'Podnesi' is a valid Serbian word, it's not the most common or natural translation for 'Submit' in a settings context. It often implies presenting or handing something over formally. A more typical and user-friendly translation would be 'Pošalji' or 'Izvrši'.",
           "suggestion": "Pošalji"
         }
       ],
@@ -219,7 +213,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Kaydet' can mean 'Save', 'Submit' has a more specific meaning in a settings context. 'Kaydet' is acceptable, but not the most precise translation.",
+          "suggestion": "Consider 'Gönder' or 'Tamamla' for a more accurate translation depending on the specific function of the 'Submit' button."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

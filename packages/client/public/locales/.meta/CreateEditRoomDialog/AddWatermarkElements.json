@@ -3,7 +3,7 @@
   "content": "Add watermark elements",
   "content_en_sha1_hash": "94abb53514ef98225a4845be5d8c3af77e687253",
   "created_at": "2025-05-19T21:30:56.773Z",
-  "updated_at": "2025-05-20T09:38:12.762Z",
+  "updated_at": "2025-05-24T13:56:01.753Z",
   "comment": {
     "text": "This translation key is used for the \"Add Watermark Elements\" title in a dialog component, appearing as the header of a watermark viewer section. It provides context for users when adding watermarks to their room.",
     "is_auto": true,
@@ -51,7 +51,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Wassermarkelemente' appears to be a misspelling. It should likely be 'Wassermarkelemente'.",
+          "suggestion": "Wassermarkelemente"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -105,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ເພີ່ມຄຳ້ຳນຶກລົງໄປ\" is understandable, a more accurate and natural translation of \"Add watermark elements\" would be something along the lines of \"ເພີ່ມອົງປະກອບຄຳ້ຳນຶກ\" or \"ເພີ່ມລັກສະນະຄຳ້ຳນຶກ\". The current translation literally means 'add a remembrance down', which isn't the intended meaning.",
+          "suggestion": "ເພີ່ມອົງປະກອບຄຳ້ຳນຶກ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,19 +153,37 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Adăugare elemente de incripționare\" translates to 'Add elements of encryption,' which is not the intended meaning of 'Add watermark elements'. 'Incripționare' refers to encryption, not watermarking.",
+          "suggestion": "Adăugare elemente de filigranare"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "Extra space before 'элементы'.",
+          "suggestion": "Добавьте элементы водяного знака"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ජල' is a transliteration of 'jala' which means 'water'. While technically correct, a more natural Sinhala phrasing might use a word reflecting the concept of a watermark more directly. However, without further context, this isn't necessarily an incorrect translation.",
+          "suggestion": "Consider alternatives to 'ජල' that better convey the 'watermark' concept if applicable within the UI."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +207,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'watermark elements' is better translated as 'elementi za voden znak' or 'voden znak elementi' rather than 'elemente vodenih žigova'. The current translation sounds awkward and overly literal.",
+          "suggestion": "elementi za voden znak"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,7 +231,18 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Thêm các phần watermark \" is not accurate. The word \"watermark\" is borrowed directly from English and should be incorporated more naturally. \"Phần\" (parts) isn't the best descriptor for watermark elements.",
+          "suggestion": "Thêm hiệu ứng watermark"
+        },
+        {
+          "type": "formatting",
+          "description": "The term \"watermark\" should ideally be italicized or enclosed in quotes to indicate it's a loanword, especially in more formal contexts.",
+          "suggestion": "Thêm hiệu ứng *watermark*"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

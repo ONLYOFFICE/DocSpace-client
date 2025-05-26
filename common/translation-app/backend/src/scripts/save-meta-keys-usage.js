@@ -287,10 +287,10 @@ javascripts.forEach(({ workspace, files }) => {
 
       // Create usage object with all the required information
       const usage = {
-        file_path: filePath.replace(BASE_DIR, ""),
+        file_path: filePath.replace(BASE_DIR, "").replace(/\\/g, "/"),
         line_number: lineNumber,
         context: codeFragment,
-        module: workspace.replace(BASE_DIR, ""),
+        module: workspace.replace(BASE_DIR, "").replace(/\\/g, "/"),
       };
 
       if (!usagesData[metaPath]) {
@@ -299,17 +299,16 @@ javascripts.forEach(({ workspace, files }) => {
 
       usagesData[metaPath].push(usage);
     });
-
-    const jsFile = {
-      path: filePath,
-      translationKeys: translationKeys,
-    };
-
-    javascriptFiles.push(jsFile);
   });
 });
 
-console.log(`Found javascriptFiles = ${javascriptFiles.length}.`);
+console.log(`Found usages = ${Object.keys(usagesData).length}.`);
+
+console.log(`Found parseJsonErrors = ${parseJsonErrors.length}.`);
+
+console.log(`Found translationFiles = ${translationFiles.length}.`);
+
+console.log(`Found javascripts = ${javascripts.length}.`);
 
 Object.entries(usagesData).forEach(([metaPath, usages]) => {
   try {
@@ -322,6 +321,11 @@ Object.entries(usagesData).forEach(([metaPath, usages]) => {
     const metaData = fs.readFileSync(metaPath, "utf8");
 
     const meta = JSON.parse(metaData);
+
+    //todo: compare usages with meta.usage skip update if no changes
+    if (JSON.stringify(meta.usage) === JSON.stringify(usages)) {
+      return;
+    }
 
     meta.usage = usages;
     meta.updated_at = new Date().toISOString();

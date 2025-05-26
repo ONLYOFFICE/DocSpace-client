@@ -3,7 +3,7 @@
   "content": "The destination already contains folders with the same name.",
   "content_en_sha1_hash": "211b5f07618651e79a94b58f1d8a0324638ed564",
   "created_at": "2025-05-19T21:30:45.443Z",
-  "updated_at": "2025-05-22T11:56:37.339Z",
+  "updated_at": "2025-05-26T07:57:32.240Z",
   "comment": {
     "text": "\"This translation key is used to display a message when a user tries to add a folder that already exists in the destination. It typically appears in a conflict resolution dialog and notifies the user that folders with the same name are present. The exact wording may vary depending on the specific context.\"",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\ConflictResolveDialog\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
       "line_number": 265,
       "context": "? singleFileMessage\n : t(\"Common:FilesAlreadyContains\")\n : isFolderDialog\n ? items.length === 1\n ? singleFolderMessage\n : t(\"Common:FoldersAlreadyContains\")\n : t(\"Common:FilesAndFoldersAlreadyContains\");\n };\n \n const getOverwriteTitle = () => {\n return isFileDialog",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'الوجهة تحتوي بالفعل على مجلدات بنفس الاسم.' is a literal translation but doesn't flow naturally in Arabic. A more idiomatic translation would be preferred.",
-          "suggestion": "قد تحتوي الوجهة بالفعل على مجلدات بنفس الاسم."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -99,19 +93,19 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'コピー先に同じ名前のフォルダが既に存在します。' while understandable, doesn't directly translate 'The destination already contains folders with the same name.' A more accurate rendering would emphasize 'folders' directly. The current translation implies existence but doesn't strongly communicate the presence of multiple folders.",
+          "suggestion": "コピー先に同じ名前のフォルダがすでに存在します。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '목표에 이미 같은 이름의 폴더가 있습니다' while understandable, is not the most natural or common phrasing in Korean. '목표' (mokjo) translates to 'goal' or 'target,' which isn't the best fit for 'destination' in this context. A more appropriate term would be '대상' (daesang) which means 'object' or 'destination.'",
-          "suggestion": "대상에 이미 같은 이름의 폴더가 있습니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -120,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ປາຍທາງ' is spelled correctly, but the correct usage in this context might be 'ເປົ້າໝາຍປາຍທາງ' to be more specific about the destination being a target location.",
-          "suggestion": "ປາຍທາງ → ເປົ້າໝາຍປາຍທາງ"
+          "description": "The word 'ກ່ອນ' is technically correct but reads slightly awkwardly in this context. It implies 'already' in a more extended timeline.",
+          "suggestion": "ປາຍທາງມີໂຟນເດີທີ່ມີຊື່ດຽວກັນຢູ່ແລ້ວ."
         }
       ],
       "approved_at": null
@@ -162,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Foldere cu acelaşi nume există deja la destinație' is a literal translation but sounds slightly unnatural in Romanian. A more natural phrasing would emphasize the existence of folders.",
-          "suggestion": "Foldere cu acelaşi nume se află deja în destinație."
+          "description": "The translation 'Foldere cu acelaşi nume există deja la destinație' is a literal translation but lacks the nuance of the original. A more natural Romanian phrasing would convey the destination 'already has' these folders. The current phrasing implies the destination is actively creating them.",
+          "suggestion": "Destinația conține deja foldere cu același nume."
         }
       ],
       "approved_at": null
@@ -180,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ගමනාන්තයේ දැනටමත් එකම නම සහිත ෆෝල්ඩර අඩංගු වේ.\" is a literal translation and doesn't flow naturally in Sinhala. It sounds somewhat formal and awkward.",
-          "suggestion": "Consider a more natural phrasing like \"ගමනාන්තයේ එවැනි නම් සහිත ෆෝල්ඩරක් දැනටමත් පවතී\" or \"ගමනාන්තයේ එවැනි ෆෝල්ඩරක් දැනටමත් ඇත.\" (Gamanaanthaye evathiya naam sahitha folderak dhenathmath paththa/yathu.)"
+          "description": "The translation 'ගමනාන්තයේ දැනටමත් එකම නම සහිත ෆෝල්ඩර අඩංගු වේ' while conveying a similar meaning, isn't the most natural or accurate way to express 'The destination already contains folders with the same name' in Sinhala. A more idiomatic translation would be preferable.",
+          "suggestion": "A better translation would be something like: 'ගමනාන්තයෙහි දැනටමත් එවැනි නම් සහිත ෆෝල්ඩර් ඇත' or 'ගමනාන්තයේ එවැනි නම් ඇති ෆෝල්ඩර් දැනටමත් තිබේ.'"
         }
       ],
       "approved_at": null
@@ -213,7 +207,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Hedef zaten aynı ada sahip klasörler içeriyor' is a literal translation but can be improved for naturalness in Turkish. While technically correct, it's a bit clunky. A more natural phrasing would be 'Hedefte aynı isimli klasörler zaten mevcut.'",
+          "suggestion": "Hedefte aynı isimli klasörler zaten mevcut."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

@@ -3,7 +3,7 @@
   "content": "Sign up with Facebook",
   "content_en_sha1_hash": "9c6f5693773ae10faca829552be51c00d4561dba",
   "created_at": "2025-05-19T21:30:48.826Z",
-  "updated_at": "2025-05-22T11:56:37.889Z",
+  "updated_at": "2025-05-26T07:57:32.978Z",
   "comment": {
     "text": "The \"Sign up with Facebook\" translation key is used to display a button label that invites users to sign up for an account using their Facebook credentials. It appears in UI elements where registration or sign-up functionality is available, such as a sign-up form or onboarding process.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\utils\\common.ts",
-      "line_number": 389,
+      "file_path": "/packages/shared/utils/common.ts",
+      "line_number": 393,
       "context": "return signUp\n ? t(\"Common:SignUpWithGoogle\")\n : t(\"Common:SignInWithGoogle\");\n case \"facebook\":\n return signUp\n ? t(\"Common:SignUpWithFacebook\")\n : t(\"Common:SignInWithFacebook\");\n case \"twitter\":\n return signUp\n ? t(\"Common:SignUpWithTwitter\")\n : t(\"Common:SignInWithTwitter\");",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Влезте чрез Facebook\" literally translates to \"Log in with Facebook.\" The original English phrase \"Sign up with Facebook\" means to create a new account using Facebook credentials. \"Влезте\" implies an existing account.",
-          "suggestion": "Регистрирайте се с Facebook"
+          "description": "The translation \"Влезте чрез Facebook\" literally translates to \"Log in with Facebook.\" The English phrase \"Sign up with Facebook\" implies creating an account, not logging into an existing one. This is a significant difference in meaning.",
+          "suggestion": "Регистрирайте се чрез Facebook"
         }
       ],
       "approved_at": null
@@ -57,7 +57,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Anmeldung bei Facebook\" is understandable, a more natural and common translation of \"Sign up with Facebook\" in German would be \"Registrierung mit Facebook\". \"Anmeldung\" implies logging in, not creating an account.",
+          "suggestion": "Registrierung mit Facebook"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -114,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ເຂົ້າສູ່ລະບົບດ້ວຍ Facebook' translates to 'Log in with Facebook', not 'Sign up with Facebook'. While related, 'sign up' implies creating a new account, whereas 'log in' suggests accessing an existing one.",
-          "suggestion": "ສົມທຽກສາທິດດ້ວຍ Facebook"
+          "description": "The Lao translation 'ເຂົ້າສູ່ລະບົບດ້ວຍ Facebook' translates to 'Log in with Facebook', not 'Sign up with Facebook'. 'Sign up' implies creating a new account, while 'Log in' implies accessing an existing one.",
+          "suggestion": "ສາ້ຽນບະນິດດ້ວຍ Facebook (Sǎen banit dūai Facebook)"
         }
       ],
       "approved_at": null
@@ -141,7 +147,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Inscreva-se no Facebook' is understandable, a more natural and commonly used translation of 'Sign up with Facebook' in Portuguese would be 'Cadastre-se com o Facebook'. 'Inscreva-se' implies enrollment or registration for a course or event, not a social media account.",
+          "suggestion": "Cadastre-se com o Facebook"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -150,7 +162,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Cadastre-se com Facebook\" is understandable, a more natural and accurate translation of \"Sign up with Facebook\" in Brazilian Portuguese would be \"Inscreva-se com Facebook\". \"Cadastre-se\" implies registering data, while \"Inscreva-se\" better conveys the action of creating an account.",
+          "description": "While \"Cadastre-se com Facebook\" is understandable, \"Sign up with Facebook\" typically translates better to \"Inscreva-se com Facebook\" or \"Crie sua conta com Facebook\". \"Cadastre-se\" implies a more complex registration process.",
           "suggestion": "Inscreva-se com Facebook"
         }
       ],
@@ -162,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Conectare prin Facebook\" is understandable, it's a more literal translation of 'Connect with Facebook'. A more natural Romanian phrasing for 'Sign up with Facebook' would be something like 'Înscrie-te cu Facebook' or 'Creează cont cu Facebook'.",
-          "suggestion": "Înscrie-te cu Facebook"
+          "description": "The translation \"Conectare prin Facebook\" while understandable, is not the most natural or idiomatic way to say \"Sign up with Facebook\" in Romanian. 'Conectare' implies connecting an existing account, whereas 'Sign up' suggests creating a new one.",
+          "suggestion": "Înregistrează-te prin Facebook"
         }
       ],
       "approved_at": null
@@ -177,7 +189,28 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ෆේස්බුක්' (Facebook) is spelled correctly. No spelling error.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ලියාපදිංචිය' (registration) is spelled correctly. No spelling error.",
+          "suggestion": null
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'ෆේස්බුක් සමඟ ලියාපදිංචිය' (Facebook with registration) is grammatically correct, but could potentially be more natural-sounding depending on the overall design. 'ෆේස්බුක් ඔස්සේ ලියාපදිංචිය' (Registration via Facebook) might be slightly better in some contexts, but both are understandable.",
+          "suggestion": "ෆේස්බුක් ඔස්සේ ලියාපදිංචිය"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ලියාපදිංචිය' accurately translates to 'registration', 'Sign up' often implies a more active process. A more nuanced translation considering the implied action might be preferable.",
+          "suggestion": "ෆේස්බුක් ඔස්සේ සාමාජිකත්වය ලබාගන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -192,8 +225,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vpiši se s Facebook' is not the most natural or accurate translation of 'Sign up with Facebook'. While technically correct, it's a bit literal. A more idiomatic translation would be 'Prijavi se z Facebook' or 'Registriraj se z Facebook'.",
-          "suggestion": "Prijavi se z Facebook"
+          "description": "The translation 'Vpiši se s Facebook' is not the most natural or accurate translation of 'Sign up with Facebook'. A more common and idiomatic translation would be 'Prijavi se s Facebook' or 'Registriraj se s Facebook'. 'Vpiši se' is less frequently used in this context.",
+          "suggestion": "Prijavi se s Facebook"
         }
       ],
       "approved_at": null
@@ -204,8 +237,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Региструј се путем Facebook-а' is technically correct but sounds slightly unnatural. A more common and idiomatic phrasing would be preferred.",
-          "suggestion": "Пријави се преко Facebook-а"
+          "description": "The translation 'Региструј се путем Facebook-а' while understandable, is a literal translation and not the most natural phrasing. 'Sign up with Facebook' often implies a more direct integration or action.",
+          "suggestion": "Повежи се са Facebook-ом"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the use of the preposition 'путем' is a bit formal for a signup flow. A more conversational tone would improve user experience.",
+          "suggestion": "Consider using a more direct phrasing or omitting the preposition entirely for a smoother user experience."
         }
       ],
       "approved_at": null
@@ -213,7 +251,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Registruj se putem Facebook-a' is technically correct but slightly awkward. A more natural translation would be 'Prijavi se preko Facebook-a'. 'Registruj' implies registration, whereas 'Prijavi' implies logging in or signing up.",
+          "suggestion": "Prijavi se preko Facebook-a"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -240,8 +284,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"用 Facebook 帐号注册\" is understandable, a more direct and common translation of \"Sign up with Facebook\" would be something like \"使用 Facebook 注册\" or \"通过 Facebook 注册\". The current translation emphasizes the account aspect slightly more than the act of signing up.",
-          "suggestion": "使用 Facebook 注册"
+          "description": "The translation '用 Facebook 帐号注册' while understandable, doesn't perfectly capture the nuance of 'Sign up with Facebook'. It emphasizes registering *using* a Facebook account, rather than the action of signing up *through* Facebook.",
+          "suggestion": "Consider '通过 Facebook 注册' or '使用 Facebook 注册' for a more direct translation, although '用 Facebook 帐号注册' is still acceptable."
         }
       ],
       "approved_at": null

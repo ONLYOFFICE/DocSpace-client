@@ -3,7 +3,7 @@
   "content": "Shared folders will be imported into the Rooms section as rooms with users who were granted access. Please note: some access rights may get lost during import",
   "content_en_sha1_hash": "7509526cb45a495f2c7c974a169ea44dbb437957",
   "created_at": "2025-05-19T21:30:52.713Z",
-  "updated_at": "2025-05-22T11:56:37.662Z",
+  "updated_at": "2025-05-26T07:57:32.528Z",
   "comment": {
     "text": "Shared folders will be imported into the Rooms section as rooms with users who were granted access. Some access rights may get lost during import. This message appears in the Import Shared Folders settings section, informing users about the process of importing shared folders and potential loss of access rights.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\components\\ImportStep.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
       "line_number": 179,
       "context": "/>\n <ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:SharedFoldersDescription\")}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,\n }}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -35,14 +35,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The phrase 'Zəhmət olmasa, nəzərə alın:' is overly formal and doesn't quite fit the tone of the English original. It's a slightly awkward phrasing.",
-          "suggestion": "Simply use 'Nəzərə alın:' or rephrase to something more natural like 'Xahiş edirik, nəzərə alın:'"
+          "type": "incorrect_translation",
+          "description": "The word 'köçürüləcək' (will be migrated) doesn't fully capture the meaning of 'imported'. 'İdxal ediləcək' would be a more accurate translation of 'imported' in this context, relating to the data import process.",
+          "suggestion": "Paylaşılan qovluqlar istifadəçilərə giriş icazəsi verilmiş otaqlar kimi Otaqlar bölməsinə idxal ediləcək."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The use of 'köçürüləcək' (will be moved) isn't the most accurate representation of 'imported'. It implies a simple relocation, whereas 'imported' suggests a process of bringing data into a new system.",
-          "suggestion": "Consider using a term like 'idxal ediləcək' (will be imported) or 'əldə ediləcək' (will be obtained/added) to more accurately convey the meaning of 'imported'."
+          "type": "formatting",
+          "description": "The sentence structure 'Zəhmət olmasa, nəzərə alın:' is a bit formal and could be softened for better user experience. While grammatically correct, it creates a slightly abrupt tone.",
+          "suggestion": "Xahiş edirik, nəzərə alın:"
         }
       ],
       "approved_at": null
@@ -53,8 +53,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"входирани\" (vhodini) is not the best translation for \"imported\". It's more akin to 'brought in' or 'entered' and doesn't accurately convey the meaning of importing data.",
-          "suggestion": "Споделените папки ще бъдат импортирани в секцията Стаи като стаи с потребители, на които е предоставен достъп. Моля, обърнете внимание: някои права за достъп може да се загубят по време на импортирането."
+          "description": "The word 'входирани' (vhodirani) is not the standard or most accurate translation for 'imported' in this context. It implies a more formal or bureaucratic import process.",
+          "suggestion": "Споделените папки ще бъдат импортирани в секцията Стаи като стаи с потребители, на които е предоставен достъп."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Моля, обърнете внимание:' could be more naturally expressed as 'Имайте предвид:' or simply incorporated into the sentence.",
+          "suggestion": "Имайте предвид: някои права за достъп може да се загубят по време на импортиране."
         }
       ],
       "approved_at": null
@@ -89,8 +94,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'some access rights may get lost' is translated as 'Jotkin käyttöoikeudet saattavat hävitä'. While technically correct, 'saattavat hävitä' implies a higher probability of loss than the original English phrasing ('may get lost'). A more accurate translation would convey the potential for loss without implying certainty.",
-          "suggestion": "Jotkin käyttöoikeudet voivat kadota tuonnin aikana"
+          "description": "The phrase \"some access rights may get lost\" is translated as \"Jotkin käyttöoikeudet saattavat hävitä\". While technically correct, it sounds slightly awkward in Finnish. A more natural phrasing would be something along the lines of 'Osa käyttöoikeuksista saattaa kadota' or 'Käyttöoikeuksista osa saattaa hävitä'.",
+          "suggestion": "Käyttöoikeuksista osa saattaa hävitä"
         }
       ],
       "approved_at": null
@@ -98,7 +103,23 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase \"Dossiers partagés sont importés\" is grammatically awkward. 'Sont importés' is a passive construction that doesn't flow naturally. A more natural phrasing would use the active voice.",
+          "suggestion": "Dossiers partagés sont importés dans la section Salles, et apparaissent comme des salles avec les utilisateurs auxquels on a accordé l'accès."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"autorisations d'accès\" is understandable, it’s a bit clunky. The original English uses \"access rights\", a more common phrasing.  A more direct and natural translation would be 'droits d'accès'.",
+          "suggestion": "Remarque: il se peut que certains droits d'accès soient perdus lors de l'importation."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'Remarque:' followed by a colon can feel a bit formal and less friendly for user-facing text. A slightly less formal approach might improve the user experience.",
+          "suggestion": "Attention : il se peut que certains droits d'accès soient perdus lors de l'importation."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -107,18 +128,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Համօգտագործվող թղթապանակները\" (hamogtavorvogh tghtapanakner) translates more accurately to 'shared folders' but sounds slightly awkward. A more natural Armenian phrasing might be \"բաժանված թղթապանակները\" (bajanvad tghtapanakner) or simply 'բաժանված պանակները' (bajanvad panakner) which sounds more conversational.",
-          "suggestion": "բաժանված թղթապանակները"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of 'users who were granted access' is a bit literal. While technically correct, it can be improved for flow.  A more idiomatic translation would be closer to 'օգտվողներ, ունեցող մուտքի իրավունք' (ogtvor, unecogh mut'gi iravunk).",
-          "suggestion": "օգտվողներ, ունեցող մուտքի իրավունք"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'some access rights may get lost' could be more naturally expressed in Armenian as 'մուտքի որոշ իրավունքները կարող են չպահպանվել' (mut'gi qorosh iravunkner karogh en chpahpanvel) which better conveys the meaning of 'not being preserved'.",
-          "suggestion": "մուտքի որոշ իրավունքները կարող են չպահպանվել"
+          "description": "The phrase \"Համօգտագործվող թղթապանակները\" (Hamogtorstvogh tghtapanakner) doesn't perfectly capture the meaning of 'Shared folders'. A more accurate translation might be something like 'Ընդհանուր թղթապանակները' (Endhanur tghtapanakner) or 'Բաժանված թղթապանակները' (Bajanvad tghtapanakner).",
+          "suggestion": "Ընդհանուր թղթապանակները կներմուծվեն «Սենյակներ» բաժին՝ որպես սենյակներ, որոնց մուտքի թույլտվություն է տրվել օգտվողներին: Խնդրում ենք նկատի ունենալ՝ մուտքի որոշ իրավունքներ կարող են կորել ներմուծման ընթացքում"
         }
       ],
       "approved_at": null
@@ -132,7 +143,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The colon after \"注意\" (note) feels a little abrupt in Japanese. It might read better with a slightly softer transition.",
+          "suggestion": "共有フォルダは、アクセス権が付与されたユーザーのルームとして「ルーム」セクションにインポートされます。なお、一部のアクセス権は、インポート中に失われる場合があります。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -141,13 +158,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"공유된 폴더는 방 섹션에 액세스 권한이 부여된 사용자가 있는 방으로 가져오기됩니다\" is a bit convoluted. A more natural and accurate translation would clarify that the shared folders become rooms *containing* the users who had access.",
-          "suggestion": "공유된 폴더는 액세스 권한이 부여된 사용자를 포함하는 방으로 방 섹션에 가져오기됩니다."
+          "description": "The phrase \"방 섹션에 액세스 권한이 부여된 사용자가 있는 방으로\" is slightly awkward. While technically correct, it's repetitive and could be more naturally phrased.",
+          "suggestion": "공유된 폴더는 방 섹션에 사용자별로 방으로 가져오기됩니다."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"참고: 가져오기하는 동안 일부 액세스 권한이 손실될 수 있습니다\" is grammatically correct but could be more concise and flow better. The term '가져오기하는 동안' is repetitive and slightly awkward.",
-          "suggestion": "참고: 가져오기 과정에서 일부 액세스 권한이 손실될 수 있습니다."
+          "type": "formatting",
+          "description": "The translation uses a full stop at the end of the first sentence and a colon before '참고:'. This is technically acceptable, but a full stop at the end of the '참고' section would be more consistent with typical Korean writing style.",
+          "suggestion": "공유된 폴더는 방 섹션에 사용자별로 방으로 가져오기됩니다. 참고: 가져오기하는 동안 일부 액세스 권한이 손실될 수 있습니다."
         }
       ],
       "approved_at": null
@@ -155,7 +172,18 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ກະ​ລຸ​ນາ​ບັນ​ທຶກ​' (Please note) is a bit awkward in this context. While grammatically correct, it's a very formal way of saying 'Please note.'",
+          "suggestion": "ກະ​ລຸ​ນາ​ສັງ​ເກດ​ (Please observe/notice)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ສິດ​ໃນ​ການ​ເຂົ້າ​ເຖິງ​ບາງ​ຢ່າງ' (some access rights) is a bit literal and could be improved for natural Lao flow.",
+          "suggestion": "ສິດ​ໃນ​ການ​ເຂົ້າ​ເຖິງ​ບາງ​ອັນ (some access rights - slightly more natural phrasing)"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -185,7 +213,18 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'granted access' is overly literal. A more natural translation in Portuguese would be 'que tiveram acesso' or 'com acesso'.",
+          "suggestion": "As pastas compartilhadas serão importadas para a seção salas como salas com usuários que tiveram acesso."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'some access rights' can be better translated to convey the meaning. The current translation is acceptable but a more natural phrasing exists.",
+          "suggestion": "Observação: alguns direitos de acesso podem ser perdidos durante a importação. Alternatively, 'alguns direitos de acesso podem não ser mantidos durante a importação'."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -194,13 +233,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ca sălile cu utilizatorii\" is awkward and doesn't accurately convey the meaning of \"as rooms with users.\" A more natural phrasing would be needed.",
-          "suggestion": "Folderele partajate vor fi importate în secțiunea Săli ca niște săli cu utilizatorii cărora li s-a acordat accesul."
+          "description": "The phrase \"ca sălile cu utilizatorii\" is awkward and doesn't accurately convey the meaning of \"as rooms with users\". It's literally translated as \"as the rooms with the users\" which is not natural Romanian.",
+          "suggestion": "Folderele partajate vor fi importate în secțiunea Săli, creând săli cu utilizatorii cărora li s-a acordat accesul."
         },
         {
-          "type": "formatting",
-          "description": "The repetition of \"sălile\" makes the sentence slightly clunky. While not technically incorrect, it could be improved for readability.",
+          "type": "incorrect_translation",
+          "description": "The word 'Săli' (rooms) should be capitalized properly.",
           "suggestion": "Folderele partajate vor fi importate în secțiunea Săli, creând săli cu utilizatorii cărora li s-a acordat accesul."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While not strictly incorrect, 'drepturi de acces' is a bit formal. A more natural phrasing might be better for a settings description.",
+          "suggestion": "este posibil ca unele permisiuni să se piardă în timpul importului"
         }
       ],
       "approved_at": null
@@ -217,18 +261,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"බෙදාගත් බහාලුම්\" (bedagath bahaluum) literally translates to 'shared boxes' or 'shared packages'. 'Shared folders' is more accurate.  A better translation would incorporate a word like 'ගොණු' (gonu) which means 'files' or 'documents'.",
-          "suggestion": "බෙදාගත් ගොණු (bedagath gonu) ප්‍රවේශය ලබා දී ඇති පරිශ්‍රීලකයින් සමඟ කාමර ලෙස කාමර කොටසට ආයාත කෙරේ."
+          "description": "The term \"බෙදාගත් බහාලුම්\" (bedagath bahaluum) translates to 'shared containers' or 'shared packages' which isn't the best fit for 'shared folders'. A more appropriate term for 'shared folders' would be 'බෙදාගත් ෆෝල්ඩර්' (bedagath folder) or 'කොටස්' (kotas - meaning sections/shares).",
+          "suggestion": "Replace 'බෙදාගත් බහාලුම්' with 'බෙදාගත් ෆෝල්ඩර්' or 'කොටස්'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The use of 'පරිශ්‍රීලකයින්' (pariseelayakayin) for 'users' is a bit formal and unusual. A more common and natural word for 'users' would be 'භාවිතකරන්නන්' (bhavitakaraannnan).",
-          "suggestion": "බෙදාගත් ගොණු ප්‍රවේශය ලබා දී ඇති භාවිතකරන්නන් සමඟ කාමර ලෙස කාමර කොටසට ආයාත කෙරේ."
+          "description": "The phrase \"ප්‍රවේශය ලබා දී ඇති පරිශ්‍රීලකයින්\" (pravechaya laba dee athi pariseelakayin) translates to 'users to whom access has been given', which is grammatically correct but a bit verbose. A more natural translation would be 'permissions have been given to users' or similar. This makes the sentence flow better.",
+          "suggestion": "Consider rephrasing 'ප්‍රවේශය ලබා දී ඇති පරිශ්‍රීලකයින්' to something more concise like 'permissions have been given to users' or similar."
         },
         {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'අහිමි වීමට ඉඩ තිබේ' (ahimi vimo id thibe) is a bit verbose for 'may be lost'. A simpler phrasing would improve readability.  Consider 'තියවීමට හැකි' (thiyavetaki).",
-          "suggestion": "බෙදාගත් ගොණු ප්‍රවේශය ලබා දී ඇති භාවිතකරන්නන් සමඟ කාමර ලෙස කාමර කොටසට ආයාත කෙරේ. සටහන: ආයාතය අතරතුර ඇතැම් ප්‍රවේශ අයිතීන් තියවීමට හැකි."
+          "type": "formatting",
+          "description": "While grammatically correct, the sentence structure is a bit clunky. Consider breaking it up for better readability.",
+          "suggestion": "Consider restructuring the sentence for improved flow and readability. For example: 'බෙදාගත් ෆෝල්ඩර් ප්‍රවේශය ලබා දී ඇති පරිශ්‍රීලකයින් සමඟ කාමර කොටසට ආයාත කෙරේ. ඇතැම් අවස්ථාවලදී, ආයාතය අතරතුර ප්‍රවේශ අයිතීන් අහිමි විය හැකියි.'"
         }
       ],
       "approved_at": null
@@ -236,7 +280,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Slovak translation uses a colon (':') after 'Upozornenie:'. While grammatically correct, it might be more natural in this context to use a dash (–) or no punctuation at all, to mirror the original English phrasing.",
+          "suggestion": "Consider replacing ':' with '–' or removing it entirely (e.g., 'Upozornenie – počas importu sa môžu stratiť niektoré prístupové práva.' or 'Upozornenie počas importu sa môžu stratiť niektoré prístupové práva.')"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -245,13 +295,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Mape v skupni rabi\" is a literal translation of \"Shared folders\" and while technically correct, it's not the most natural phrasing in Slovenian. A more idiomatic translation would be something like \"Datoteke in mape v skupni rabi\" or simply \"Datoteke v skupni rabi\" if the context makes it clear that both folders and files are included.",
-          "suggestion": "Datoteke in mape v skupni rabi"
+          "description": "The phrase \"Mape v skupni rabi\" is a literal translation of \"Shared folders\" but might not be the most natural phrasing in Slovenian. A more common and understandable translation might be \"Skupne mape\" or potentially \"Datotečne mape v skupni rabi\" depending on the context.",
+          "suggestion": "Skupne mape"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Upoštevajte: med uvozom se lahko nekatere pravice dostopa izgubijo\" is grammatically correct, but sounds somewhat formal. A more conversational and approachable translation could be used.",
-          "suggestion": "Pozor: med uvozom lahko nekatere pravice dostopa izpadejo."
+          "description": "The phrase \"Upoštevajte: med uvozom se lahko nekatere pravice dostopa izgubijo\" is grammatically correct but could be phrased more naturally. The word 'lahko' makes it sound like a possibility and not a certainty. Given the warning aspect of the content, a more definite phrase is preferable.",
+          "suggestion": "Pozor: med uvozom lahko nekatere pravice dostopa izpadejo"
         }
       ],
       "approved_at": null
@@ -261,14 +311,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'granted access' is translated as 'којима је дат приступ'. While technically correct, a more natural and idiomatic translation for this context might be 'који су имали приступ' or 'којима је био омогућен приступ'.",
-          "suggestion": "који су имали приступ"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'access rights' is translated as 'права приступа'.  While understandable, a more precise translation in this context would be 'права' or 'права коришћења'.",
-          "suggestion": "права"
+          "type": "spelling",
+          "description": "The word 'приступ' (access) is used repeatedly. While technically correct, it sounds a little repetitive. Consider varying the wording slightly to improve readability.",
+          "suggestion": "Consider replacing one or more instances of 'приступ' with synonyms like 'права' (rights) or 'дозволе' (permissions)."
         }
       ],
       "approved_at": null
@@ -279,13 +324,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"granted access\" is translated as \"kojima je dat pristup\". While technically correct, a more natural and common phrasing in Serbian would be \"sa korisnicima koji imaju pristup\" or \"sa korisnicima kojima je omogućen pristup\".",
-          "suggestion": "Deljeni folderi će biti uvezeni u odeljak Sobe kao sobe sa korisnicima koji imaju pristup."
+          "description": "The phrase 'granted access' is translated as 'kojima je dat pristup'. A more natural translation would be 'koji imaju pristup' or 'za koje je obezbeđen pristup'.",
+          "suggestion": "koji imaju pristup"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"some access rights\" is translated as \"neka prava pristupa\". It is better to use a more specific term to convey the nuance of the original meaning.",
-          "suggestion": "Deljeni folderi će biti uvezeni u odeljak Sobe kao sobe sa korisnicima koji imaju pristup. Molimo vas da imate na umu: neki podaci o pravima pristupa mogu biti izgubljeni tokom uvoza."
+          "type": "formatting",
+          "description": "The colon after 'Molimo vas' is slightly formal and could be replaced with a comma for a more conversational tone.",
+          "suggestion": "Molimo vas, imate na umu:"
         }
       ],
       "approved_at": null
@@ -293,18 +338,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Rooms section\" could be more naturally translated to \"Oda’lar bölümü\" or \"Oda'lar kısmı\" for better flow in Turkish.  While \"Oda bölümü\" is technically correct, it's less common in this context.",
-          "suggestion": "Paylaşılan klasörler, erişim hakkı verilen kullanıcıların bulunduğu Oda'lar kısmı olarak Odalar bölümüne aktarılacaktır."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'içe aktarma' for 'import' is technically correct, but 'aktarım' or 'yükleme' might be more common and understandable in this context, especially for a broader audience.",
-          "suggestion": "Paylaşılan klasörler, erişim hakkı verilen kullanıcıların bulunduğu Oda'lar kısmı olarak Odalar bölümüne aktarılacaktır. Lütfen dikkat: aktarım sırasında bazı erişim hakları kaybedilebilir."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -325,8 +359,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"有被授予访问权限的用户的房间\" (yǒu bèi shòu yǔ fǎng wèn quán xiàn de yòng hù de fáng jiān) is a very literal and somewhat awkward translation of \"rooms with users who were granted access.\" It's grammatically correct but sounds unnatural in Chinese. A more natural phrasing would be something like \"包含有访问权限用户的房间\" (bāo hán yǒu fǎng wèn quán xiàn yòng hù de fáng jiān) or \"拥有访问权限用户的房间\" (yōng yǒu fǎng wèn quán xiàn yòng hù de fáng jiān).",
-          "suggestion": "改为“包含有访问权限用户的房间”或“拥有访问权限用户的房间”"
+          "description": "The phrase \"被授予访问权限的用户的房间\" (rooms of users who were granted access) is a bit awkward and literal. It doesn't flow naturally in Chinese. A more natural phrasing would focus on the imported folders being treated as rooms.",
+          "suggestion": "共享文件夹会被导入至“房间”部分，作为用户已访问的房间，或 共享文件夹会被导入至“房间”部分，并将这些文件夹以用户已访问的房间形式呈现。"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation is a single, long sentence. Breaking it into two sentences would improve readability.",
+          "suggestion": "共享文件夹会被导入至“房间”部分，作为用户已访问的房间。请注意：导入过程中某些访问权限可能会丢失。"
         }
       ],
       "approved_at": null

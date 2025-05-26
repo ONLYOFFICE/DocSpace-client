@@ -3,7 +3,7 @@
   "content": "<2>{{title}}</2> successfully moved to <1>{{folderName}}</1>",
   "content_en_sha1_hash": "3e67377215ab5e99d2c2536c2bbab4da1d59180f",
   "created_at": "2025-05-19T21:30:55.852Z",
-  "updated_at": "2025-05-21T11:45:10.678Z",
+  "updated_at": "2025-05-24T11:53:23.461Z",
   "comment": {
     "text": "This translation key is used to display a success message when an item has been moved to a new location. The message includes the title of the moved item and the name of its destination folder. It appears as a pop-up or toast notification after completing a file move operation in the application.",
     "is_auto": true,
@@ -36,13 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'uğurla' translates to 'successfully' but the sentence structure feels slightly unnatural in Azerbaijani. While technically correct, a more natural phrasing might be preferred for user experience.",
-          "suggestion": "<2>{{title}}</2> <1>{{folderName}}</1> qovluğuna köçürüldü."
-        },
-        {
-          "type": "formatting",
-          "description": "The original English uses a specific tag order (<2>{{title}}</2> <1>{{folderName}}</1>). The Azerbaijani translation mirrors this, which may not be optimal for Azerbaijani readability. Consider switching the tag order to match common Azerbaijani sentence structure.",
-          "suggestion": "<2>{{title}}</2> <1>{{folderName}}</1>"
+          "description": "The word 'uğurla' (successfully) is placed awkwardly in the sentence. A more natural phrasing would be to place it before 'köçürüldü'.",
+          "suggestion": "<2>{{title}}</2> uğurla <1>{{folderName}}</1> qovluğuna köçürüldü should be <2>{{title}}</2> <1>{{folderName}}</1> qovluğuna uğurla köçürüldü."
         }
       ],
       "approved_at": null
@@ -59,7 +54,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb 'přesunuto' (moved) should agree with the noun 'title' which is masculine. It needs to be 'přesunuto' not 'přesunuto'.",
+          "description": "The verb \"přesunuto\" (moved) should agree in gender with the noun \"title\". Since \"title\" is masculine, the past participle should be \"přesunuto\".",
           "suggestion": "<2>{{title}}</2> úspěšně přesunuto do <1>{{folderName}}</1>"
         }
       ],
@@ -95,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The verb 'moved' is translated as 'déplacé'. While technically correct, a more natural translation would be 'a été déplacé' or simply 'est déplacé' to maintain the passive voice and flow better in French.  'Déplacé' implies an action being done *by* something, whereas the English sentence describes a result.",
-          "suggestion": "<2>{{title}}</2> a été déplacé avec succès dans <1>{{folderName}}</1>"
+          "description": "The word 'moved' should be translated as 'déplacé' or 'transféré'. 'Déplacé' is more common in this context.",
+          "suggestion": "<2>{{title}}</2> déplacé(e) avec succès dans <1>{{folderName}}</1>"
         }
       ],
       "approved_at": null
@@ -110,7 +105,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The verb 'moved' should be in the past tense. 'spostato' (moved) is correct, but the sentence structure implies an ongoing action. A better phrasing would be 'è stato spostato' (has been moved) to clearly indicate a completed action.",
+          "suggestion": "<2>{{title}}</2> è stato spostato con successo in <1>{{folderName}}</1>"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -118,9 +119,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"successfully moved\" is translated as \"正常に移動されました\" which is accurate but can be improved for naturalness in Japanese. A more common and fluent way to express this would be \"移動されました\" or \"移動完了しました\".",
-          "suggestion": "<2>{{title}}</2> は <1>{{folderName}}</1> に移動されました"
+          "type": "formatting",
+          "description": "The Japanese translation includes the particle 'は' after the title, which might make the sentence sound slightly less natural in this context. While grammatically correct, it's less common in system messages.",
+          "suggestion": "<2>{{title}}</2> を <1>{{folderName}}</1> に正常に移動されました"
         }
       ],
       "approved_at": null
@@ -131,13 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The particle '이/가' is ambiguous. It needs to agree with the noun '{{title}}' in gender and number. Without knowing the gender/number of '{{title}}', it's impossible to choose the correct particle. It should be either '이' or '가'.",
-          "suggestion": "Determine the gender/number of '{{title}}'. If it's a noun ending with a consonant, use '이'. If it ends with a vowel, use '가'."
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase '폴더로' is slightly awkward.  A more natural phrasing would be '폴더로 이동되었습니다' -> '폴더로 옮겨졌습니다'.",
-          "suggestion": "Change '폴더로 이동되었습니다' to '폴더로 옮겨졌습니다'"
+          "description": "The use of 이/가 is ambiguous and grammatically awkward in this context. It should be replaced with a more appropriate particle.",
+          "suggestion": "<2>{{title}}</2>이/가 <1>{{folderName}}</1> 폴더로 이동되었습니다 -> <2>{{title}}</2>이 <1>{{folderName}}</1> 폴더로 이동되었습니다"
         }
       ],
       "approved_at": null
@@ -148,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ຢ່າງສໍາເລັດແລ້ວ\" translates to \"successfully\" but could be more naturally expressed as \"ກັບ” (kap) meaning 'to' or 'into' to better convey the action of moving. While technically correct, it sounds slightly formal and less fluid in Lao.",
-          "suggestion": "<2>{{title}}</2> ຍ້າຍໄປສູ່ <1>{{folderName}}</1> ແລ້ວ"
+          "description": "The phrase \"ຢ່າງສໍາເລັດແລ້ວ\" translates to \"successfully\" but might sound slightly formal or overly emphatic in this context. A more natural phrasing for \"successfully moved\" could be considered.",
+          "suggestion": "Consider alternatives like \"ໄດ້ລຽງການໂຍກຍ້າຍໄປສູ່\" or simply removing the phrase altogether if the action implies success."
         }
       ],
       "approved_at": null
@@ -172,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The order of the placeholders in the English and Polish text is reversed. English has <2> first then <1>, while Polish has <1> then <2>.",
-          "suggestion": "Reverse the order of the placeholders to match the English version: \"Pomyślnie przeniesiono <1>{{title}}</1> do katalogu <2>{{folderName}}</2>\""
+          "description": "The placement of the angle brackets in the Polish translation doesn't match the English source. The numbering is reversed.",
+          "suggestion": "Pomyślnie przeniesiono <1>{{title}}</1> do katalogu <2>{{folderName}}</2>"
         }
       ],
       "approved_at": null
@@ -181,13 +177,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'movido com sucesso' is a bit clunky. A more natural Portuguese translation for 'successfully moved' would be 'movido com êxito' or simply 'movido'.",
-          "suggestion": "<2>{{title}}</2> movido com êxito para <1>{{folderName}}</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -214,13 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word ' සාර්ථකව ' (saarthakava) which means 'successfully' is placed awkwardly in the sentence. A more natural flow would be to move it before ' වෙත'.",
-          "suggestion": "<2>{{title}}</2> වෙත සාර්ථකව <1>{{folderName}}</1> ගෙනයන ලදී."
-        },
-        {
-          "type": "formatting",
-          "description": "The Sinhala translation retains the same HTML tags as the English, which is unusual and might not be needed for display purposes.",
-          "suggestion": "Consider removing the HTML tags if they' are not required for rendering, and displaying the text directly: {{title}} සාර්ථකව {{folderName}} වෙත ගෙනයන ලදී."
+          "description": "The translation ' සාර්ථකව <1>{{folderName}}</1> වෙත ගෙනයන ලදී.' is a bit awkward. A more natural phrasing would be something like ' <1>{{folderName}}</1> වෙත යවා ඇත'.  'ගෙන යන ලදී' implies 'being carried' which isn't ideal for a digital file movement.",
+          "suggestion": "<2>{{title}}</2> සාර්ථකව <1>{{folderName}}</1> වෙත යවා ඇත."
         }
       ],
       "approved_at": null
@@ -236,9 +221,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The verb \"premaknjeno\" (moved) should agree in gender with the noun \"title\". Since \"title\" is masculine, the past participle should be \"premaknjeno\".",
-          "suggestion": "<2>{{title}}</2> uspešno premaknjeno v <1>{{folderName}}</1>"
+          "type": "incorrect_translation",
+          "description": "The passive voice \"uspešno premaknjeno\" is grammatically correct, but may sound less natural in this context. A more active voice, like 'uspešno prestavljeno' (successfully moved) might be more appropriate depending on the tone.",
+          "suggestion": "<2>{{title}}</2> uspešno prestavljeno v <1>{{folderName}}</1>"
         }
       ],
       "approved_at": null
@@ -246,13 +231,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation uses \"премештен\" which implies a more formal or technical movement. A more natural translation for a user interface context would be something like \"пребачен\" or \"премештен у\".",
-          "suggestion": "<2>{{title}}</2> успешно пребачен у <1>{{folderName}}</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -267,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'successfully moved' is translated as 'başarıyla taşındı'. While technically correct, 'başarıyla taşınmış' would be a more natural and accurate rendering of 'successfully moved' in Turkish, conveying the completed action.",
-          "suggestion": "<2>{{title}}</2>, <1>{{folderName}}</1> konumuna başarıyla taşınmış"
+          "description": "The English phrase 'successfully moved to' is not perfectly translated. 'başarıyla taşındı' is a literal translation and while understandable, it could be more naturally phrased. A better option would be '... konumuna taşındı'.",
+          "suggestion": "<2>{{title}}</2>, <1>{{folderName}}</1> konumuna taşındı."
         }
       ],
       "approved_at": null

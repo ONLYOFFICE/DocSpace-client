@@ -3,7 +3,7 @@
   "content": "File moved",
   "content_en_sha1_hash": "4e4b376cb841b13d111316ba24598b32fe7b1dbd",
   "created_at": "2025-05-19T21:30:49.728Z",
-  "updated_at": "2025-05-21T01:12:12.391Z",
+  "updated_at": "2025-05-24T02:26:12.880Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -149,8 +149,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"ප්‍රතිලේඛනය ගෙනයන ලදී\" doesn't accurately convey the meaning of \"File moved.\" It literally translates to something like \"The record is taken/carried.\" A more accurate translation would describe the action of the file being moved.",
-          "suggestion": "Possible alternatives: ගොනුව යාවත්තු කරන ලදී (Gonuwa yavatthu karan ladee - File updated/moved), ගොනුව වෙනස් කරන ලදී (Gonuwa venasan karan ladee - File changed/moved), or a simpler phrasing depending on the context. Further context would help determine the most appropriate translation."
+          "description": "The Sinhala translation \"ප්‍රතිලේඛනය ගෙනයන ලදී\" does not accurately convey the meaning of \"File moved.\" \"ප්‍රතිලේඛනය\" refers to a record or document. \"File moved\" implies a physical or digital file has changed location.",
+          "suggestion": "A more accurate translation could be \"ගොනුව යන්තානය කර ඇත\" (Gonuw yanthanaya kara athe) which means 'File was moved' or \"ගොනුව ගෙනයන ලදී\" (Gonuw genaya ladee) which is closer in structure to the original but might still be slightly ambiguous."
         }
       ],
       "approved_at": null
@@ -173,7 +173,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Фајл премештен\" is understandable, a more natural and commonly used translation for \"File moved\" in Serbian (Cyrillic) would be \"Премештена датотека\" or \"Премештена фајл\". \"Фајл премештен\" sounds slightly awkward and less idiomatic.",
+          "description": "While \"Фајл премештен\" is a grammatically correct Serbian (Cyrillic) sentence, a more natural and commonly used translation for 'File moved' in this context (especially for a technical setting like webhooks) would be 'Премештена датотека' or 'Померена датотека'.  'Фајл' is a direct transliteration of the English word 'file' and is often avoided in more formal or technical Serbian.",
           "suggestion": "Премештена датотека"
         }
       ],
@@ -184,9 +184,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "While \"Fajl premešten\" is understandable, a more accurate and common translation of \"File moved\" in Serbian (Latin) would be \"Premještena datoteka\" or \"Datoteka premještena\". \"Fajl\" is a transliteration of 'File' and sounds less natural in this context. Using 'datoteka' for 'file' is standard.",
-          "suggestion": "Premještena datoteka"
+          "type": "spelling",
+          "description": "The word 'Fajl' is a transliteration and should ideally be adapted to a more natural Serbian equivalent. While understandable, it might not be the most fluent option.",
+          "suggestion": "Datoteka"
         }
       ],
       "approved_at": null

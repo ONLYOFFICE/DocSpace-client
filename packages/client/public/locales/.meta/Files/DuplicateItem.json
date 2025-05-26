@@ -3,7 +3,7 @@
   "content": "<2>{{title}}</2> successfully duplicated",
   "content_en_sha1_hash": "8a51a5c2e6e662b6e710cdc4cbeae1917462284b",
   "created_at": "2025-05-19T21:30:55.489Z",
-  "updated_at": "2025-05-20T09:39:56.626Z",
+  "updated_at": "2025-05-24T12:23:37.190Z",
   "comment": {
     "text": "This translation key is used to display a success message when an item is successfully duplicated. The message is expected to appear in a UI component, possibly as part of a dialog or action confirmation. It should be translated from \"DuplicateItem\" and use the \"{{title}}\" placeholder to indicate that the title of the duplicated item will be inserted.",
     "is_auto": true,
@@ -39,19 +39,37 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'duplicated' is better translated as 'копиран' (kopiran) rather than 'дублиран' (dubliran) in this context. 'Дублиран' implies a precise, identical copy, while 'копиран' is more general and suitable for a file duplication process.",
+          "suggestion": "<2>{{title}}</2> беше успешно копиран"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"úspěšně duplikováno\" implies that the item itself was duplicated, rather than the action of duplication being successful. A more accurate translation would indicate the success of the duplication process.",
+          "suggestion": "Consider alternatives like \"Duplikace <2>{{title}}</2> byla úspěšná\" or \"<2>{{title}}</2> bylo úspěšně zkopírováno\"."
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'erfolgreich dupliziert' is not the most natural or common way to say 'successfully duplicated' in German. While technically correct, it sounds somewhat awkward. A more natural phrasing would be 'erfolgreich kopiert' or 'erfolgreich angelegt'.",
+          "suggestion": "erfolgreich kopiert"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -75,7 +93,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'dupliqué avec succès' is a literal translation of 'duplicated successfully'. A more natural and idiomatic French translation would be 'a été dupliqué avec succès' or 'a été copié avec succès'.",
+          "suggestion": "a été dupliqué avec succès"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -99,7 +123,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Korean translation uses 이/가 which indicates subject marking particles. While technically correct, it's slightly awkward in this context. A more natural phrasing would remove it or choose one based on the title's noun class. Using only '이' or '가' would be more idiomatic, but without knowing the noun class of 'title', it's hard to definitively say which is better.",
+          "suggestion": "Consider revising to either '<2>{{title}}</2>이 복제되었습니다' or '<2>{{title}}</2>가 복제되었습니다' depending on the noun class of 'title'."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -123,19 +153,37 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Pomyślnie zduplikowano <2>{{title}}</2>' is a literal translation and sounds unnatural in Polish. A more natural phrasing would be 'Zduplikowano <2>{{title}}</2>'.",
+          "suggestion": "Zduplikowano <2>{{title}}</2>"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The direct translation of \"successfully duplicated\" is not the most natural phrasing in Portuguese. \"Duplicado com sucesso\" is technically correct but sounds slightly awkward. A more fluent option would be \"duplicado(s) com êxito\" or \"duplicado(s) com sucesso\". The choice depends on the context and the type of item being duplicated (singular vs. plural).",
+          "suggestion": "Consider using \"duplicado(s) com êxito\" or \"duplicado(s) com sucesso\" for a more natural-sounding translation."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'duplicated' in English translates more accurately to 'copiado' in Portuguese (Brazil) rather than 'duplicado'. While 'duplicado' isn't *wrong*, 'copiado' better reflects the original meaning of a successful duplication.",
+          "suggestion": "<2>{{title}}</2> copiado com sucesso"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -147,19 +195,42 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text refers to a duplicated item. 'duplicated' should agree in gender with the item being duplicated. The Russian translation 'успешно продублирована' is feminine, implying the duplicated item is feminine.",
+          "suggestion": "If the item being duplicated is masculine, the translation should be 'успешно продублирован'. If the item is feminine, the current translation is acceptable.  Context is needed to determine the correct translation."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'සාර්ථකව ප්‍රති duplicates කරන ලදී' doesn't accurately convey the meaning of 'successfully duplicated'. 'ප්‍රති duplicates' is not a standard or accurate translation for 'duplicated'. It seems to imply a reverse duplication, which isn't what's intended.",
+          "suggestion": "සාර්ථකව නැවත කරන ලදී"
+        },
+        {
+          "type": "spelling",
+          "description": "While technically not a misspelling, 'ප්‍රති duplicates' is not a recognized term in Sinhala. It appears to be a literal transliteration of 'duplicates' which is not the correct approach.",
+          "suggestion": "While a direct spelling correction isn't possible, the phrase should be re-examined for accurate meaning as suggested above."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'úspešne duplikovaný' literally translates to 'successfully duplicated'. However, it lacks the subject. A more natural and grammatically correct translation would include the subject being duplicated. For example, 'The item <2>{{title}}</2> was successfully duplicated' translates to '<2>{{title}}</2> bol úspešne duplikovaný'.",
+          "suggestion": "<2>{{title}}</2> bol úspešne duplikovaný"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,13 +242,30 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'успешно дуплиран' lacks the subject pronoun indicating what was duplicated. It should be 'успешно дуплиран(а/о)' depending on the gender of 'title'.",
+          "suggestion": "успешно дуплиран(а/о)"
+        },
+        {
+          "type": "grammar",
+          "description": "The verb 'дуплиран' is in the masculine singular form. To be grammatically correct, it needs to agree with the gender of the 'title' variable.  The appropriate form depends on the gender of the title.",
+          "suggestion": "The verb form needs to be adjusted based on the gender of the 'title' variable."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'uspešno dupliran' implies that the 'title' itself was duplicated, rather than an item associated with it. The English implies the duplication was successful. A more accurate translation would reflect that the *item* was duplicated.",
+          "suggestion": "<2>{{title}}</2> uspešno replikiran"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -201,7 +289,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'successfully duplicated' is better translated as '已成功复制' (yi cheng gong fu zhi) instead of '已成功创建副本' (yi cheng gong chuang jian fu ben). While '创建副本' is not wrong, '复制' more accurately reflects the action of duplication.",
+          "suggestion": "<2>{{title}}</2>已成功复制"
+        }
+      ],
       "approved_at": null
     }
   }

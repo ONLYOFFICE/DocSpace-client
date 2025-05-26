@@ -3,7 +3,7 @@
   "content": "File management",
   "content_en_sha1_hash": "5cdd155bb48d903d911fae98b21437d3fcd9e39d",
   "created_at": "2025-05-19T21:30:53.358Z",
-  "updated_at": "2025-05-21T05:43:14.120Z",
+  "updated_at": "2025-05-24T06:12:47.974Z",
   "comment": {
     "text": "This translation key is used to display \"File management\" as a label on a profile section, likely in a file upload or download process. It appears in the \"/packages/client/src/pages/Profile/Section/Body/index.js\" file at line 42.",
     "is_auto": true,

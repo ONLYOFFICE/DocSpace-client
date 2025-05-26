@@ -3,7 +3,7 @@
   "content": "Sign up with Zoom",
   "content_en_sha1_hash": "2596473d7776e251c5ee2d75c7cf026af02ce2c9",
   "created_at": "2025-05-19T21:30:48.880Z",
-  "updated_at": "2025-05-22T11:56:37.893Z",
+  "updated_at": "2025-05-26T07:57:32.981Z",
   "comment": {
     "text": "The \"SignUpWithZoom\" translation key is used to display the label for a button that allows users to sign up using Zoom. This text is typically displayed on a sign-up or registration form and may appear in a dialog or modal window. Its purpose is to provide clarity to users about how they can complete the sign-up process with their Zoom account.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\utils\\common.ts",
-      "line_number": 406,
+      "file_path": "/packages/shared/utils/common.ts",
+      "line_number": 410,
       "context": "? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":\n return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");\n default:\n return \"\";\n }\n }\n export function getProviderLabel(provider: string, t: (key: string) => string) {",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -42,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Bulgarian translation \"Влезте чрез Zoom\" translates to \"Log in with Zoom\", while the English \"Sign up with Zoom\" means to create a new account. \"Влезте\" implies an existing account.",
+          "description": "The Bulgarian translation \"Влезте чрез Zoom\" translates to 'Log in with Zoom', not 'Sign up with Zoom'. While similar, 'Sign up' and 'Log in' have distinct meanings.",
           "suggestion": "Регистрирайте се чрез Zoom"
         }
       ],
@@ -57,7 +57,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Mit Zoom anmelden\" is understandable, a more precise and idiomatic translation of 'Sign up with Zoom' would be 'Registrieren Sie sich mit Zoom'. 'Anmelden' implies logging in, whereas 'Registrieren' implies creating a new account.",
+          "suggestion": "Registrieren Sie sich mit Zoom"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -114,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເຂົ້າສູ່ລະບົບດ້ວຍ Zoom\" translates to 'Log in with Zoom'. The original English phrase 'Sign up with Zoom' means to create a new account.",
-          "suggestion": "ສາທິດການສ້າງບັນຊີດ້ວຍ Zoom"
+          "description": "The translation \"ເຂົ້າສູ່ລະບົບດ້ວຍ Zoom\" literally translates to \"Log in with Zoom.\" The English phrase \"Sign up with Zoom\" implies creating a new account or registering, not logging into an existing one. While 'sign up' can sometimes be 'log in' depending on context, this is likely incorrect without further information.",
+          "suggestion": "ແລກການເຂົ້າສູ່ລະບົບດ້ວຍ Zoom ດ້ວຍການລົງທະບຽນດ້ວຍ Zoom"
         }
       ],
       "approved_at": null
@@ -147,13 +153,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Cadastre-se com Zoom' is understandable, 'Sign up with Zoom' often translates better to 'Inscreva-se com Zoom' or 'Crie sua conta com Zoom'. 'Cadastre-se' implies a more extensive registration process.",
-          "suggestion": "Inscreva-se com Zoom"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -162,7 +162,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Conectare prin Zoom' doesn't accurately convey the meaning of 'Sign up with Zoom'. 'Conectare' means 'Connect', while 'Sign up' implies registration or creating an account. A more appropriate translation would be something along the lines of 'Înregistrare cu Zoom' or 'Creare cont cu Zoom'.",
+          "description": "The translation \"Conectare prin Zoom\" while conveying a similar idea, isn't the most natural or accurate translation of \"Sign up with Zoom.\" 'Conectare' means 'Connect,' but 'Sign up' implies a registration process. A more accurate translation would be something like 'Înregistrare cu Zoom' or 'Creează cont cu Zoom'.",
           "suggestion": "Înregistrare cu Zoom"
         }
       ],
@@ -171,13 +171,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Зарегистрируйтесь с помощью Zoom' is functionally correct but not the most natural or common phrasing in Russian. A more idiomatic translation would emphasize 'using' or 'via' Zoom.",
-          "suggestion": "Зарегистрироваться через Zoom"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -198,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Vpiši se z Zoom\" is not the most natural or accurate translation of \"Sign up with Zoom\". While technically correct, a better phrasing would convey the intended meaning more clearly.",
-          "suggestion": "Prijavi se z Zoom"
+          "description": "The translation 'Vpiši se z Zoom' doesn't fully capture the meaning of 'Sign up with Zoom'. 'Vpiši se' translates to 'Enter' or 'Type in', implying inputting information rather than creating an account using Zoom. A more accurate translation would convey the action of creating an account or logging in.",
+          "suggestion": "Prijava z Zoom"
         }
       ],
       "approved_at": null
@@ -210,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Региструј се путем Zoom-а\" is understandable, a more natural and accurate translation of \"Sign up with Zoom\" would be \"Пријави се са Zoom-ом\" or \"Региструј се преко Zoom-а\". \"Путем\" implies a route or method, while \"са\" or \"преко\" better convey the action of using Zoom for registration.",
-          "suggestion": "Пријави се са Zoom-ом"
+          "description": "While understandable, 'Региструј се путем Zoom-а' is a bit literal and not the most natural way to say 'Sign up with Zoom' in Serbian.  'Путем' (putem) implies 'via' or 'through,' which isn't the most fluent phrasing. A more natural phrasing would connect 'региструј се' (register) directly with 'Zoom'.",
+          "suggestion": "Региструј се са Zoom-ом"
         }
       ],
       "approved_at": null
@@ -222,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Registruj se putem Zoom-a' is not the most natural or preferred way to say 'Sign up with Zoom' in Serbian (Latin). A more common and accurate translation would be 'Prijavi se preko Zoom-a' or 'Registruj se uz Zoom'. 'Putem' is grammatically correct but sounds a bit formal and clunky in this context.",
-          "suggestion": "Prijavi se preko Zoom-a"
+          "description": "The translation 'Registruj se putem Zoom-a' while understandable, isn't the most natural or idiomatic way to say 'Sign up with Zoom' in Serbian. 'Registruj se uz Zoom' or 'Prijavi se preko Zoom-a' are more common and flow better.",
+          "suggestion": "Registruj se uz Zoom"
         }
       ],
       "approved_at": null
@@ -252,8 +246,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"用 Zoom 帐号注册\" while understandable, doesn't precisely convey the meaning of 'Sign up with Zoom'. It translates to 'Register with a Zoom account'.  'Sign up' implies a process of creating an account, which is a slightly broader meaning than just registration. A more accurate translation might include an action indicating account creation.",
-          "suggestion": "用 Zoom 注册"
+          "description": "The translation '用 Zoom 帐号注册' is too literal. A more natural and user-friendly translation would emphasize the ease of using Zoom credentials for signup.",
+          "suggestion": "使用 Zoom 登录"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, '用 Zoom 帐号注册' implies the user is creating a new account using Zoom credentials, rather than simply signing in.",
+          "suggestion": "用 Zoom 账号快速注册"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Email has been changed successfully",
   "content_en_sha1_hash": "c9f64b92cdcc8dbb99c4d7477364723c4d131410",
   "created_at": "2025-05-19T21:30:53.339Z",
-  "updated_at": "2025-05-21T05:47:17.548Z",
+  "updated_at": "2025-05-24T06:16:28.812Z",
   "comment": {
     "text": "This translation key displays a success message when an email address is successfully updated on the profile page. It appears as a toast notification after clicking a submit button related to changing the email address. The intent is to inform the user that the operation has been completed successfully.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation is understandable, a more natural and idiomatic phrasing would be 'E-poçt ünvanı uğurla dəyişdirildi'.",
-          "suggestion": "E-poçt ünvanı uğurla dəyişdirildi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -51,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Czech word 'E-mail' should be 'Email' to maintain consistency with common Czech usage and match the original English.",
+          "suggestion": "Email"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Finnish translation includes a trailing space.",
-          "suggestion": "Sähköpostin vaihtaminen onnistui"
+          "description": "The Finnish translation lacks a period at the end of the sentence.",
+          "suggestion": "Sähköpostin vaihtaminen onnistui."
         }
       ],
       "approved_at": null
@@ -117,13 +117,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ອີເມວໄດ້ຖືກປ່ຽນແປງແລ້ວ' is a literal translation that sounds slightly awkward in Lao. A more natural phrasing would be preferred.",
-          "suggestion": "ອີເມວປ່ຽນແກ້ມີແລ້ວ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -138,13 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The sentence structure 'E-mail is met succes gewijzigd' is grammatically awkward in Dutch. The verb 'gewijzigd' is a past participle and requires a helping verb. The phrase 'met succes' can be improved.",
+          "description": "The phrase \"E-mail is met succes gewijzigd\" is grammatically awkward in Dutch. The correct phrasing would typically use a passive construction with 'geworden'.",
           "suggestion": "E-mail is succesvol gewijzigd"
-        },
-        {
-          "type": "formatting",
-          "description": "While 'E-mail' is commonly used, 'E-mailadres' or just 'E-mail' would be more natural in a formal context.",
-          "suggestion": "Email is succesvol gewijzigd"
         }
       ],
       "approved_at": null
@@ -185,8 +174,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'වි-තැපෑල සාර්ථකව වෙනස් කර ඇත' is a literal translation and sounds unnatural in Sinhala. A more natural phrasing would convey the success of the email change.",
-          "suggestion": "විද්යුත් ලිපිනය සාර්ථකව වෙනස් කරන ලදි (Vidhyut lipinaya saarthaakava venasa karan ladi) or විද්‍යුත් ලිපිනය වෙනස් කිරීම සාර්ථක විය (Vidhyut lipinaya venasa kirima saarthaaka viya)."
+          "description": "The translation 'වි-තැපෑල සාර්ථකව වෙනස් කර ඇත' is a literal translation of 'E-mail has been changed successfully'. A more natural and idiomatic Sinhala translation would be 'විද්යුත් ලිපිනය සාර්ථකව වෙනස් කර ඇත' or 'විද්යුත් ලිපිනය දැන් වෙනස් වී ඇත'.",
+          "suggestion": "විද්යුත් ලිපිනය සාර්ථකව වෙනස් කර ඇත"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'වි-තැපෑල' is understandable, 'විද්යුත් ලිපිනය' is the more accurate and commonly used term for 'email' in Sinhala.",
+          "suggestion": "විද්යුත් ලිපිනය"
         }
       ],
       "approved_at": null
@@ -203,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation includes a space before the first quotation mark and after the last.  These should be removed.",
-          "suggestion": "E-mail naslov je bil uspešno spremenjen"
+          "description": "The translation includes a space before the quotation marks. This is not standard Slovenian style.",
+          "suggestion": "Remove the space before the quotation marks: \"E-mail naslov je bil uspešno spremenjen\""
         }
       ],
       "approved_at": null
@@ -233,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Ukrainian translation has a trailing space at the end of the string.",
-          "suggestion": "Електронну пошту успішно змінено"
+          "description": "The translation lacks a period at the end of the sentence.",
+          "suggestion": "Електронну пошту успішно змінено ."
         }
       ],
       "approved_at": null

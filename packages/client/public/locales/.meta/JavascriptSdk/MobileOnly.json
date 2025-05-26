@@ -3,7 +3,7 @@
   "content": "only mobile devices",
   "content_en_sha1_hash": "7517ad30f4b31030335e3f7b842b0ebe28b803ca",
   "created_at": "2025-05-19T21:30:54.585Z",
-  "updated_at": "2025-05-21T08:54:57.324Z",
+  "updated_at": "2025-05-24T09:07:35.674Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"only mobile devices\" in a checkbox label on a Portal Settings page. It indicates that the checkbox's state affects the visibility of a specific feature, which only works on mobile devices.",
     "is_auto": true,

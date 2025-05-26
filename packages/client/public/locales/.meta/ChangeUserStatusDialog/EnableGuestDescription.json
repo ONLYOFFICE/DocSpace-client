@@ -3,7 +3,7 @@
   "content": "If you enable this guest, they will be able to log in to {{productName}} again.",
   "content_en_sha1_hash": "40d29b7770b25502992afe7db84af1b6cf72f9e2",
   "created_at": "2025-05-19T21:30:56.964Z",
-  "updated_at": "2025-05-20T09:37:44.907Z",
+  "updated_at": "2025-05-24T14:15:27.406Z",
   "comment": {
     "text": "This translation key is used to describe a guest's ability to log into {{productName}} after enabling their guest status. It appears in a change user status dialog and provides context for users enabling guest access. Translators should replace \"ProductName\" with the actual product name.",
     "is_auto": true,
@@ -63,7 +63,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'este podrá' is a slightly awkward construction. A more natural phrasing in Spanish would be 'podrá'.",
+          "suggestion": "Si activa este invitado, podrá volver a iniciar sesión en {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -105,13 +111,25 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'guest' is translated as 'ຜູ້ລ້ຽງແຂກ' which literally means 'guest caretaker'. A more appropriate translation for 'guest' in this context would be 'ຜູ້ໃຊ້ແຂກ' (guest user) or simply 'ແຂກ' (guest).",
+          "suggestion": "ຖ້າທ່ານເປີດໃຊ້ແຂກນີ້, ພວກເຂົາຈະສາມາດເຂົ້າສູ່ລະບົບ {{productName}} ໄດ້ອີກຄັ້ງ."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Latvian translation uses \"viņš (-a)\" which is a clunky way to refer to a guest of unknown gender.  It's better to avoid specifying gender unless it's essential.  While grammatically correct, it reads awkwardly.",
+          "suggestion": "Ja iespējosiet šo viesi, viņš varēs pieteikties {{productName}} vēlreiz."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -123,7 +141,18 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'gościa' (guest) sounds awkward and informal in this context. It implies a casual or even slightly disrespectful tone. It's better to use a more neutral term.",
+          "suggestion": "Jeśli włączysz tego użytkownika, będzie mógł/mogła ponownie zalogować się na {{productName}}."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure is a bit clunky. While technically correct, it's not the most natural way to phrase it in Polish.",
+          "suggestion": "Po włączeniu tego użytkownika będzie mógł/mogła ponownie zalogować się na {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,19 +170,42 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"log in\" is inaccurate. \"Conecta\" implies a connection, not the action of logging in. The correct term would be \"să se autentifice\".",
+          "suggestion": "Dacă activați un invitat, acesta va putea să se autentifice din nou la {{productName}}."
+        },
+        {
+          "type": "grammar",
+          "description": "While not strictly incorrect, 'acesta va putea' is a little clunky. A more natural flow would be 'va putea'.",
+          "suggestion": "Dacă activați un invitat, acesta va putea să se autentifice din nou la {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The verb \"подключите\" (podklyuchite) implies connecting or linking, which doesn't accurately convey the meaning of 'enable' in this context. 'Enable' means to allow or make possible. A better translation would be something along the lines of 'разрешите' (razreshite) which means 'allow'.",
+          "suggestion": "Если вы разрешите этого гостя, он снова сможет войти в {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ඔබ' (oba) meaning 'you' is unnecessary and grammatically awkward in this context. It's better to omit it.",
+          "suggestion": "මෙම ආගන්තුකයා සක්‍රීය කළහොත්, ඔවුන්ට නැවත {{productName}} වෙත පිවිසිය හැකි වනු ඇත."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +235,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'will be able to log in' is too literal. A more natural Turkish phrasing would be 'yine giriş yapabilecekler'.",
+          "suggestion": "Bu konuğu etkinleştirirseniz, {{productName}} üzerinden yeniden giriş yapabilecekler."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -195,7 +253,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'đăng nhập lại' can be ambiguous. While it can mean 'log in again', it might be better to clarify that they can log in *to* the product.",
+          "suggestion": "Nếu bạn kích hoạt khách này, họ sẽ có thể đăng nhập lại vào {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

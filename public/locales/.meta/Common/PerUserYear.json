@@ -3,7 +3,7 @@
   "content": "<1>{{currencySymbol}}</1><1>{{price}}</1> per admin/year",
   "content_en_sha1_hash": "67fcddb76f5e3b0864ae431f9cc3b3bd17c40431",
   "created_at": "2025-05-19T21:30:47.352Z",
-  "updated_at": "2025-05-22T11:56:37.742Z",
+  "updated_at": "2025-05-26T07:57:32.769Z",
   "comment": {
     "text": "This translation key is used to display the price per admin/user per year in a user interface. It typically appears as part of a payment or pricing information section, and its value will be determined by either `startValue` or `priceManagerPerMonth`, depending on the context.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\payments\\SaaS\\PaymentContainer.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PaymentContainer.js",
       "line_number": 337,
       "context": "className=\"payment-info_managers-price\"\n >\n {isYearTariff ? (\n <Trans\n t={t}\n i18nKey=\"PerUserYear\"\n ns=\"Common\"\n values={{ currencySymbol, price: startValue }}\n components={{ 1: <span /> }}\n />\n ) : (",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\payments\\SaaS\\PriceCalculation.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PriceCalculation.js",
       "line_number": 142,
       "context": "}\n >\n {isYearTariff ? (\n <Trans\n t={t}\n i18nKey=\"PerUserYear\"\n ns=\"Common\"\n values={{ currencySymbol, price: priceManagerPerMonth }}\n components={{ 1: <strong style={{ fontSize: \"16px\" }} /> }}\n />\n ) : (",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'admin' is translated as 'مشرف' (mushref). While 'مشرف' can mean supervisor, 'admin' in this context refers to an administrator account. A more precise translation might consider a term closer to 'حساب إداري' (hisab idari) or a more contextual equivalent, depending on the specific audience.",
-          "suggestion": "Consider 'حساب إداري' (hisab idari) or a similarly contextually appropriate translation for 'admin'."
+          "description": "The phrase 'per admin' is not accurately translated. 'مشرف' (mushref) means 'supervisor' or 'administrator', but the nuance of 'per admin' (meaning 'per user with administrative privileges') is lost. A more accurate translation might consider using a phrase conveying 'per user with admin rights' or similar.",
+          "suggestion": "Consider alternatives like 'لكل مستخدم يتمتع بصلاحيات إدارية' (likulli mustakhdim yatamaata'a bisalaahiyat idariyya) - 'per user with administrative privileges'."
         }
       ],
       "approved_at": null
@@ -48,13 +48,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"per admin/year\" is not accurately translated. \"administrator/il başına\" is too literal and doesn't convey the intended meaning of 'per administrator per year'.",
-          "suggestion": "Consider using a phrase like \"hər administratora/il üçün\" or \"hər il bir administrator üçün\" to better reflect 'per admin/year'."
+          "description": "The phrase \"per admin/year\" is not accurately translated. \"Per admin/year\" implies a cost per administrator per year. The Azerbaijani translation, \"administrator/il başına,\" is more literal and doesn't convey the intended meaning of 'per administrator per year'.",
+          "suggestion": "administrator başına/il"
         },
         {
           "type": "formatting",
-          "description": "The placement of the tags <1>{{currencySymbol}}</1><1>{{price}}</1> seems awkward and doesn't follow common formatting practices for Azerbaijani. They are in the middle of the phrase.",
-          "suggestion": "Consider moving the tags to the end of the phrase or re-wording the phrase to integrate them more naturally, e.g., 'administrator/il başına {{price}} <1>{{currencySymbol}}</1>'"
+          "description": "The original English text uses double tags <1>...</1> around the variables. The Azerbaijani translation mirrors this formatting. It's unclear if this is necessary or if a different format should be used for Azerbaijani.",
+          "suggestion": "Review the intended use of the tags and adjust accordingly. It might be simpler to remove them or use a different tag format."
         }
       ],
       "approved_at": null
@@ -65,8 +65,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'per admin/year' is not accurately translated to 'за админ/годишно'. A more appropriate translation would be 'на администратор/година'. 'Админ' is an informal shortening.",
-          "suggestion": "на администратор/година"
+          "description": "The English phrase 'per admin/year' is not accurately translated. 'admin' should be translated to 'администратор' instead of 'админ'. Using 'админ' sounds informal and unprofessional.",
+          "suggestion": "Replace 'админ' with 'администратор'."
         }
       ],
       "approved_at": null
@@ -77,13 +77,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'admin' is not accurately translated. 'Správce' is a literal translation of 'manager' and might not convey the intended meaning of a user with administrative privileges.",
-          "suggestion": "Consider a translation that reflects the meaning of 'admin' in the context of user roles, such as 'uživatel s administrátorskými právy' or a more idiomatic equivalent if available."
+          "description": "The English phrase 'admin' is not directly translated. 'Správce' is a suitable translation, but a more natural phrasing might be 'uživatele s administrátorskými právy' or a similar construct to more clearly indicate user role.",
+          "suggestion": "<1>{{currencySymbol}}</1><1>{{price}}</1> na uživatele s administrátorskými právy/rok"
         },
         {
           "type": "formatting",
-          "description": "The original English text uses specific tags <1>{{currencySymbol}}</1><1>{{price}}</1>. The Czech translation preserves the same tags. It's important to confirm if these tags are necessary in the context where the translation will be used.",
-          "suggestion": "Verify the necessity of the tags. If they are not required, remove them to improve readability."
+          "description": "The English source includes tags <1> and </1>. The Czech translation mirrors this formatting exactly. While not incorrect, it's worth checking if this formatting is necessary or whether it should be simplified or removed to match the intended display.",
+          "suggestion": "Consider removing the <1> and </1> tags if they are not essential for display.  If they are, ensure consistency with the English version."
         }
       ],
       "approved_at": null
@@ -94,8 +94,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'per admin/year' is not accurately translated. 'Administrator' is a more appropriate translation of 'admin' in this context.",
-          "suggestion": "pro Administrator/Jahr"
+          "description": "The English phrase 'per admin/year' has been translated to 'pro Administrator/Jahr'. While technically correct, 'pro Admin/Jahr' would be a more natural and concise translation in German, maintaining a similar brevity and flow as the original English.",
+          "suggestion": "pro Admin/Jahr"
         }
       ],
       "approved_at": null
@@ -112,8 +112,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"per admin/year\" is not the most natural Spanish translation for \"per admin/year\". It's a literal translation that sounds awkward. A better phrasing would convey the same meaning in a more fluent way.",
-          "suggestion": "por administrador/año"
+          "description": "The phrase 'per admin/year' should be translated to convey 'per usuario/año' or 'por usuario/año' to accurately reflect 'per user/year'. The current translation 'por administrador/año' focuses on the admin role and not the user.",
+          "suggestion": "por usuario/año"
         }
       ],
       "approved_at": null
@@ -124,8 +124,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'admin' has been translated to 'pääkäyttäjä'. While 'pääkäyttäjä' can mean administrator, it's a more formal term. Depending on the context, a more common or casual translation like 'ylläpitäjä' or a more literal translation might be more appropriate.  'Pääkäyttäjä' implies a very high level of privilege, and may not be what is intended.",
-          "suggestion": "Consider using 'ylläpitäjä' or exploring other options based on the intended nuance."
+          "description": "The Finnish translation uses 'pääkäyttäjä' which translates to 'main user' or 'super user'. The English content refers to 'admin', which could also be translated as 'ylläpitäjä' or a more general 'käyttäjä'. 'Pääkäyttäjä' implies a higher level of access than simply an 'admin'.",
+          "suggestion": "Consider using 'ylläpitäjä' or 'käyttäjä' to more accurately reflect 'admin'."
         }
       ],
       "approved_at": null
@@ -136,7 +136,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"per admin/year\" is not the most natural or accurate translation of \"per admin/year\". It should reflect a per-user annual fee.",
+          "description": "The phrase 'per admin/year' should be translated to reflect the French equivalent of 'per user/year'. 'Admin' is a direct borrowing and may not be the most natural phrasing.",
           "suggestion": "par utilisateur/année"
         }
       ],
@@ -148,8 +148,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"յուրաքանչյուր ադմինի/տարվա համար\" is a literal translation of \"per admin/year\" and might not be the most natural or clear way to express this in Armenian. A more idiomatic translation might be preferable.",
-          "suggestion": "Consider a phrasing like \"մեկ ադմինի համար/տարվա մեջ\" or \"յուրաքանչյուր ադմինի համար տարվա մեջ\" to improve clarity and flow."
+          "description": "The phrase \"յուրաքանչյուր ադմինի/տարվա համար\" is a literal translation of \"per admin/year\". A more natural and idiomatic Armenian translation for \"per admin/year\" would be something like \"մեկ ադմին/տարվա համար\" or \"յուրաքանչյուր տարվա համար մեկ ադմին\".",
+          "suggestion": "մեկ ադմին/տարվա համար"
         }
       ],
       "approved_at": null
@@ -160,8 +160,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'admin' is directly transliterated as 'amministratore'. While understandable, a more natural Italian phrasing would be 'utente' or 'utente amministratore' depending on the context. Using 'amministratore' feels too literal and formal.",
-          "suggestion": "Consider translating 'admin' as 'utente' or 'utente amministratore'."
+          "description": "The translation 'per amministratore/anno' is too literal. A more natural Italian phrasing would be 'per utente/anno' or 'a utente/anno'. 'Amministratore' implies a person actively managing something, while 'utente' (user) is more suitable in this context.",
+          "suggestion": "per utente/anno"
         }
       ],
       "approved_at": null
@@ -172,13 +172,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"管理者/年あたり\" is a literal translation of \"per admin/year\" but doesn't flow naturally in Japanese. A more natural phrasing would be \"管理者1人あたり年間\" or \"年間あたりの管理者数\".",
+          "description": "The phrase \"管理者/年あたり\" is a literal translation of \"per admin/year\" but sounds unnatural in Japanese. A more natural phrasing would be something like \"管理者1人あたり年間\" or \"年間あたりの管理者数\".",
           "suggestion": "管理者1人あたり年間 or 年間の管理者数"
-        },
-        {
-          "type": "formatting",
-          "description": "The Japanese translation retains the XML-like tags `<1>...</1>`, which may not be appropriate for the target audience or context. These tags are present in the English content but should be considered for removal if they aren't integral to the application's rendering.",
-          "suggestion": "Remove the `<1>...</1>` tags if they are not required."
         }
       ],
       "approved_at": null
@@ -189,13 +184,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"per admin/year\" is not accurately translated. \"관리자 한 명당\" correctly conveys \"per admin,\" but the slash and \"year\" are awkwardly placed. It should be more integrated into the sentence.",
-          "suggestion": "관리자 한 명당 <1>{{currencySymbol}}</1><1>{{price}}</1>/년 입니다"
+          "description": "The English phrase \"per admin/year\" is not perfectly translated. While \"관리자 한 명당\" correctly conveys \"per admin\", the addition of \"/년\" at the end is slightly awkward. A more natural Korean phrasing might integrate the 'year' element more smoothly.",
+          "suggestion": "관리자 1인당 <1>{{currencySymbol}}</1><1>{{price}}</1>/년 or 관리자 1인당 <1>{{currencySymbol}}</1><1>{{price}}</1> 연간"
         },
         {
           "type": "formatting",
-          "description": "The placement of the slash before \"년\" is a stylistic issue and doesn't flow naturally in Korean. It's more common to have a space before the unit of time.",
-          "suggestion": "관리자 한 명당 <1>{{currencySymbol}}</1><1>{{price}}</1> /년"
+          "description": "The placement of the tags <1>{{currencySymbol}}</1> and <1>{{price}}</1> seem a little awkward due to their placement relative to the Korean phrasing. They interrupt the flow of the sentence slightly.",
+          "suggestion": "Consider re-evaluating the placement of the tags to maintain readability in the translated context. Ideally, they should be positioned to feel more natural within the Korean sentence structure."
         }
       ],
       "approved_at": null
@@ -206,8 +201,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'per admin/year' is not accurately translated. 'ຜູ້ບໍລິຫານ' means 'administrator', but the original implies a per-user license. A more accurate translation would be something along the lines of 'ຕໍ່ຜູ້ໃຊ້ແຕ່ລະປີ' (per user per year).",
-          "suggestion": "ຕໍ່ປີສໍາລັບຜູ້ໃຊ້"
+          "description": "The Lao translation 'ຕໍ່ປີສໍາລັບຜູ້ບໍລິຫານ' directly translates to 'per year for administrator'. While technically correct, it lacks the nuance of 'admin' which implies a role or user type. A more natural phrasing would be something along the lines of 'ຕໍ່ປີສໍາລັບຜູ້ໃຊ້ບໍລິຫານ' (per year for administrator user) or 'ຕໍ່ປີສໍາລັບບັນຊີຜູ້ບໍລິຫານ' (per year for administrator account).",
+          "suggestion": "ຕໍ່ປີສໍາລັບຜູ້ໃຊ້ບໍລິຫານ"
         }
       ],
       "approved_at": null
@@ -218,8 +213,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation 'per beheerder/jaar' appears to be a mix of Dutch and not a proper Latvian translation. 'beheerder' is Dutch for administrator, and 'jaar' is Dutch for year. The translation should accurately convey 'per admin/year' in Latvian.",
-          "suggestion": "per lietotāju/gads"
+          "description": "The Latvian translation \"beheerder/jaar\" appears to be a mix of Dutch and a potential misinterpretation of \"admin/year\". It doesn't accurately translate 'admin/year' into Latvian.",
+          "suggestion": "Consider translating 'admin/year' to something like 'lietotājs/gads' or 'administratora/gads' depending on the intended meaning and context."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of \"beheerder/jaar\" suggests a combined word which might be problematic for parsing or display. It's more standard to have distinct words.",
+          "suggestion": "Separate 'beheerder' and 'jaar' and potentially add a space between them."
         }
       ],
       "approved_at": null
@@ -230,8 +230,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'admin' was translated as 'beheerder'. While 'beheerder' can mean administrator, it's a more general term. A more precise translation for 'admin' in this context (referring to a user role) might be 'gebruiker' or 'administrator'.",
-          "suggestion": "Consider using 'gebruiker' or 'administrator' instead of 'beheerder'."
+          "description": "The word 'admin' was translated as 'beheerder'. While 'beheerder' is a valid translation, it might not be the most natural or common way to refer to an administrator in this context. 'Administrator' or a more specific term depending on the application might be preferable.",
+          "suggestion": "Consider using 'administrator' or researching the most common term for 'admin' within the target Dutch-speaking user base."
         }
       ],
       "approved_at": null
@@ -242,13 +242,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'per admin/year' has been translated as 'za admina/rok'. While understandable, a more accurate and natural Polish translation would be 'na administratora/rok' or 'za administratora/rok'. The current translation doesn't quite capture the intended meaning.",
-          "suggestion": "za administratora/rok"
+          "description": "The English phrase 'per admin/year' is not accurately translated. 'admin' should be 'użytkownika' or 'administratora' in Polish to maintain the intended meaning of 'per user/year'.",
+          "suggestion": "<1>{{price}}</1><1>{{currencySymbol}}</1> za użytkownika/rok"
         },
         {
           "type": "formatting",
-          "description": "The order of the currency symbol and price has been swapped between the English and Polish versions. In English it's currency symbol first, in Polish it's price first.",
-          "suggestion": "Reorder to match the English version: <1>{{currencySymbol}}</1><1>{{price}}</1>"
+          "description": "The order of the currency symbol and price is reversed compared to the English version.",
+          "suggestion": "<1>{{currencySymbol}}</1><1>{{price}}</1> za użytkownika/rok"
         }
       ],
       "approved_at": null
@@ -259,7 +259,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'per admin/year' is not accurately translated. It should be 'por usuário/ano' to maintain the meaning of 'per user/year'.",
+          "description": "The phrase 'per admin/year' is not the most natural way to express this in Portuguese. It's a literal translation from English and feels awkward. A more natural phrasing would be 'por usuário/ano' or 'por usuário por ano'.",
           "suggestion": "por usuário/ano"
         }
       ],
@@ -268,7 +268,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"per admin/year\" is not the most natural way to express this in Portuguese.  'Por administrador/ano' is a literal translation, but a more natural phrasing would be 'por usuário/ano' or 'por usuário, anualmente'.",
+          "suggestion": "por usuário/ano"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -277,8 +283,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'per admin/year' is not accurately translated. 'admin' should be 'administrator' in Romanian to maintain consistency and clarity. While 'administrator' is a valid translation of 'admin', the original English phrasing is slightly more informal.",
-          "suggestion": "pe administrator/an"
+          "description": "The English phrase 'per admin/year' has been translated as 'pe administrator/an'. While understandable, 'per administrator/an' is not the most natural Romanian phrasing. A more accurate and fluent translation would be 'per administrator/an' or 'pe administrator pe an'.",
+          "suggestion": "Consider revising to 'pe administrator/an' or 'pe administrator pe an'."
         }
       ],
       "approved_at": null
@@ -289,8 +295,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"per admin/year\" is not accurately translated. \"Per admin/year\" implies \"per administrator per year\". The Russian translation \"на администратора в год\" is technically correct but lacks the clarity and flow of the original. It's too literal.",
-          "suggestion": "Consider a more natural phrasing like \"на одного администратора в год\" or \"в год на администратора\" to better convey the original meaning."
+          "description": "The English phrase 'per admin/year' is not accurately translated. 'Per admin/year' implies 'per administrator per year'. The Russian translation 'на администратора в год' directly translates to 'per administrator in year', which is correct but potentially reads slightly awkwardly in Russian. A more natural phrasing would be 'на администратора в год' or 'на одного администратора в год'.",
+          "suggestion": "Consider rephrasing to 'на одного администратора в год' for improved clarity and flow."
         }
       ],
       "approved_at": null
@@ -301,13 +307,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'පරිපාලකයාට' translates to 'to an administrator'. The English phrase 'per admin/year' implies 'per administrator per year,' suggesting a rate or fee applied to each administrator. A more accurate translation might convey this meaning, for example, 'පරිපාලකයෙකුට වසරකට' (per administrator per year) or 'පරිපාලකයන් සඳහා වසරකට' (for administrators per year).",
-          "suggestion": "පරිපාලකයෙකුට වසරකට"
+          "description": "The Sinhala translation \"පරිපාලකයාට\" translates to \"to an administrator\". It should convey \"per administrator\" or something equivalent to match the English phrase \"per admin\".",
+          "suggestion": "පරිපාලකයා බැගෙයි"
         },
         {
           "type": "formatting",
-          "description": "The Sinhala translation maintains the same HTML tags as the English, which might not be necessary or aesthetically pleasing in a Sinhala context. It's best to evaluate whether these tags are needed for display purposes in the Sinhala version.  They may be redundant if the rendering engine handles formatting automatically.",
-          "suggestion": "Consider removing the <1></1> tags if they are not functionally required for correct display."
+          "description": "The Sinhala translation preserves the <1> tags from the original English. These tags are not necessary in Sinhala and should be removed or adapted to the Sinhala translation’s structure if required.",
+          "suggestion": "Remove the <1> tags from the translation."
         }
       ],
       "approved_at": null
@@ -318,8 +324,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'admin' is incorrectly translated. 'admin' should be 'správca' in Slovak.",
-          "suggestion": "Replace 'administrátor' with 'správca'."
+          "description": "The Slovak translation 'za administrátor/rok' is grammatically incorrect and doesn't accurately convey \"per admin/year\". The correct Slovak would be 'na administrátora/rok' or 'na používateľa/rok' depending on the intended meaning.",
+          "suggestion": "na administrátora/rok"
         }
       ],
       "approved_at": null
@@ -330,13 +336,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"admin\" is translated as \"skrbnika/leto\". While \"skrbnik\" can mean administrator, the context of per user/year suggests a more direct translation of 'user' might be more appropriate, or potentially clarifying the role further depending on the specific meaning intended.",
-          "suggestion": "Consider translating 'admin' as 'uporabnik' (user) or a more specific term that accurately reflects the user's role. For example, 'račun' (account) if referring to a user account."
-        },
-        {
-          "type": "formatting",
-          "description": "The Slovenian translation preserves the same HTML tags as the English original (<1> and </1>). It's important to verify if this is the intended behavior or if the HTML tags should be adapted to the Slovenian context.",
-          "suggestion": "Review and potentially adjust the HTML tags to align with the Slovenian localization conventions or remove them if they're not necessary."
+          "description": "The English phrase \"admin\" is not accurately translated to \"skrbnika/leto\". \"Skrbnika\" translates to 'caretaker/guardian' which doesn't fully convey the meaning of 'admin' in a software context. A more accurate translation might be \"administratorja/leto\" or a descriptive phrase depending on the specific context.",
+          "suggestion": "Consider \"administratorja/leto\" or a contextually appropriate alternative to 'admin'."
         }
       ],
       "approved_at": null
@@ -347,8 +348,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'по администратору/годишње' is not the most natural or accurate translation of 'per admin/year'. 'Po administratoru' is correct, but 'годишње' is a bit stiff. A more natural phrasing would be something like 'по кориснику годишње' or 'по кориснику сваке године'.",
-          "suggestion": "по кориснику годишње"
+          "description": "The Serbian translation 'по администратору/годишње' doesn't accurately reflect the English phrase 'per admin/year'.  'по администратору' translates to 'per administrator' which is functionally correct, but 'годишње' should be more naturally translated as 'годишње'.",
+          "suggestion": "<1>{{currencySymbol}}</1><1>{{price}}</1> по администратору/годишње"
         }
       ],
       "approved_at": null
@@ -359,8 +360,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'per admin/year' is translated as 'po administratoru/godišnje'. While technically correct, 'po korisniku/godišnje' would be a more natural and common phrasing in Serbian when referring to a 'per user' pricing model.",
-          "suggestion": "po korisniku/godišnje"
+          "description": "The term 'per admin' should be translated more naturally into Serbian. 'Po administratoru' is literal but sounds awkward. A better phrasing would be 'za administratora' or 'na administratora'.",
+          "suggestion": "po administratoru -> za administratora or na administratora"
         }
       ],
       "approved_at": null
@@ -371,8 +372,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The order of `<1>{{price}}</1>` and `<1>{{currencySymbol}}</1>` is reversed in the Turkish translation compared to the English content. The English version places the currency symbol first, which is more common and readable.  Reversing them makes the Turkish translation sound awkward.",
-          "suggestion": "Yıl başına yönetici <1>{{currencySymbol}}</1><1>{{price}}</1>"
+          "description": "The order of the placeholders `{{price}}` and `{{currencySymbol}}` is reversed compared to the English version. The English version has the currency symbol first, then the price. The Turkish version has the price first, then the currency symbol. This change could be confusing to users.",
+          "suggestion": "Reorder the placeholders to match the English version: \"Yıl başına yönetici <1>{{currencySymbol}}</1><1>{{price}}</1>\""
         }
       ],
       "approved_at": null
@@ -383,8 +384,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'per admin' is not directly translated. 'Per admin' should be translated as 'на користувача'.",
-          "suggestion": "за користувача"
+          "description": "The English phrase 'per admin' is not accurately reflected in the Ukrainian translation. 'На адміністратора' directly translates to 'per admin,' but a more natural Ukrainian phrasing would be something like 'на одного адміністратора' (per one admin) or 'для адміністратора' (for an admin).",
+          "suggestion": "за одного адміністратора"
         }
       ],
       "approved_at": null
@@ -395,13 +396,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Vietnamese translation retains the XML-like tags `<1>` and `</1>` from the English content. These are likely meant to be removed or handled differently.",
-          "suggestion": "Remove the tags `<1>` and `</1>` from the translation. The content should be: \"{{currencySymbol}} {{price}} mỗi quản trị viên/năm\""
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While not strictly incorrect, \"mỗi quản trị viên\" can be slightly improved for a more natural flow.",
-          "suggestion": "Consider using \"trên mỗi người dùng\" or \"cho mỗi người dùng\" instead of \"mỗi quản trị viên\" to better convey \"per admin/year\" in a more culturally appropriate way."
+          "description": "The Vietnamese translation contains extra spaces after the closing tag </1>. These spaces should be removed to match the formatting of the original English content.",
+          "suggestion": "Remove the extra spaces after the closing tag </1>. The translation should be: <1>{{currencySymbol}}</1><1>{{price}}</1> mỗi quản trị viên/năm"
         }
       ],
       "approved_at": null
@@ -412,8 +408,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"per admin\" should be translated as \"每位管理员\" instead of just omitting the 'per'.  While understandable, the direct translation provides better clarity and accuracy.",
-          "suggestion": "<1>{{currencySymbol}}</1><1>{{price}}</1> 每位管理员/年"
+          "description": "The phrase \"admin/year\" is not accurately translated. \"每位管理员/年\" literally translates to \"per administrator/year\". While understandable, it lacks the nuance of the English 'admin'. Using a more common industry term for 'admin' would be preferable.",
+          "suggestion": "每位管理員/年 (using the more common term for 'admin' in Chinese)"
         }
       ],
       "approved_at": null

@@ -52,6 +52,8 @@ export type TBaseOption = {
   title?: string;
   action?: unknown;
   onClick?: (opt: TContextMenuValueTypeOnClick) => void;
+  pageNumber?: number;
+  count?: number;
 };
 
 export type TRegularOption = TBaseOption & {

@@ -3,7 +3,7 @@
   "content": "You are using free {{planName}} plan",
   "content_en_sha1_hash": "afd91c8f7e34a3940572441cec8d07d4eee8863c",
   "created_at": "2025-05-19T21:30:53.732Z",
-  "updated_at": "2025-05-21T06:28:04.290Z",
+  "updated_at": "2025-05-24T06:42:22.640Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that the user is using a free plan. It appears in a UI element related to payment or subscription settings and needs to be translated into the target language.",
     "is_auto": true,
@@ -108,13 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'You are using' is not accurately conveyed by 'ທ່ານກຳລັງໃຊ້'. A more accurate translation would be something closer to 'ທ່ານໃຊ້' or 'ເຈົ້າກຳລັງໃຊ້'.",
-          "suggestion": "ທ່ານໃຊ້ແພັກເກດ {{planName}} ຟຣີ"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'ແພັກເກດ' is understandable, in this context, 'ແຜນ' (plan) might be a more appropriate translation for 'plan'.",
-          "suggestion": "ທ່ານໃຊ້ແຜນ {{planName}} ຟຣີ"
+          "description": "The Lao translation \"ທ່ານກຳລັງໃຊ້ແພັກເກດ {{planName}} ຟຣີ\" directly translates to 'You are using package {{planName}} free'. While understandable, a more natural Lao phrasing for 'You are using free {{planName}} plan' would be something like 'ທ່ານກຳລັງໃຊ້ແຜນຟຣີ {{planName}}' or 'ທ່ານກຳລັງໃຊ້ແຜນ {{planName}} ຟຣີ'. The word 'package' (ແພັກເກດ) isn't necessarily the best fit here.",
+          "suggestion": "Consider revising to 'ທ່ານກຳລັງໃຊ້ແຜນຟຣີ {{planName}}' or 'ທ່ານກຳລັງໃຊ້ແຜນ {{planName}} ຟຣີ'."
         }
       ],
       "approved_at": null
@@ -152,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Utilizaţi abonamentul gratuit {{planName}}\" is a literal translation but might not be the most natural way to express the meaning in Romanian. \"Utilizați\" is the formal \"you\" form. A more common and natural phrasing might be \"Folosiți abonamentul gratuit {{planName}}\" or \"Aveți abonamentul gratuit {{planName}}\".",
+          "suggestion": "Folosiți abonamentul gratuit {{planName}}"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -161,7 +162,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English 'plan' is best translated as 'план' (plan) or 'тарифный план' (tariff plan) in Russian, not just 'тариф'. 'Тариф' alone means 'tariff'. While understandable in context, 'тариф' is less precise than 'план'.",
+          "description": "The word 'тариф' (tarif) translates to 'rate' or 'rate plan', which isn't as accurate as conveying the idea of a 'plan' as in the English original. While understandable, it slightly alters the intended meaning.",
           "suggestion": "Вы используете бесплатный {{planName}} план"
         }
       ],
@@ -190,9 +191,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Serbian translation 'Користите бесплатни {{planName}} план' uses 'план' instead of 'план'. It's more natural to say 'план' (plan) without the extra 'н'.",
-          "suggestion": "Користите бесплатни {{planName}} план"
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Користите бесплатни {{planName}} план' literally translates to 'You are using free {{planName}} plan' which is accurate, but could be more natural. A more natural phrasing would emphasize the 'free' aspect more prominently.",
+          "suggestion": "Користите бесплатан {{planName}} план"
         }
       ],
       "approved_at": null
@@ -218,7 +219,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Bạn đang sử dụng gói dịch vụ {{planName}} miễn phí' is a literal translation and sounds a bit formal for a startup context. A more natural phrasing would be something along the lines of 'Bạn đang dùng gói {{planName}} miễn phí'.",
+          "suggestion": "Bạn đang dùng gói {{planName}} miễn phí"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
@@ -227,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"You are using free {{planName}} plan\" is better conveyed as \"您正在使用免费{{planName}}方案\" instead of \"您正在使用免费{{planName}}版本\". '方案' (fāng'àn) implies a plan or scheme, while '版本' (bǎn běn) means version.  'Plan' in this context refers to a subscription level.",
-          "suggestion": "您正在使用免费{{planName}}方案"
+          "description": "The English phrase \"plan\" is not accurately translated to \"版本\". While \"版本\" can mean 'version,' in this context, \"计划\" (jihua) would be a more accurate translation of \"plan\" as it refers to a service plan or offering.",
+          "suggestion": "您正在使用免费{{planName}}计划"
         }
       ],
       "approved_at": null

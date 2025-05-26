@@ -3,7 +3,7 @@
   "content": "Last name",
   "content_en_sha1_hash": "adec36a821f81a6990b1e65d9e4ac5fb8ee2a205",
   "created_at": "2025-05-19T21:30:46.065Z",
-  "updated_at": "2025-05-22T11:56:37.323Z",
+  "updated_at": "2025-05-24T00:15:04.928Z",
   "comment": {
     "text": "The translation key \"LastName\" is used to display the label for a surname field in various UI components, such as dialogs and form fields. It appears on screens where user name information is being edited or inputted, typically on a line below or next to the first name field.",
     "is_auto": true,
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Nom' is a valid translation for 'name', it doesn't specifically convey the meaning of 'Last name'. It's a more general term.",
-          "suggestion": "Prenom, Nom de famille, or Nom (if context makes it clear)"
+          "description": "While 'Nom' is a valid French word, it's a very general term. 'Last name' requires a more specific translation that captures the concept of a family name or surname.",
+          "suggestion": "Prenom de famille"
         }
       ],
       "approved_at": null
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"姓\" (mei) is a valid translation for 'last name', but it's a formal term and might not be suitable for all contexts. A more general and common translation could be \"苗字\" (namae).",
-          "suggestion": "Consider using \"苗字\" (namae) for a more general and common translation of 'last name'."
+          "description": "While \"姓\" (seii) is a valid translation for \"last name\", it can be overly formal depending on the context. A more common and versatile translation might be \"苗字\" (myoji).",
+          "suggestion": "Consider using \"苗字\" (myoji) for a more general and user-friendly translation, unless the context specifically requires a formal tone."
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Numele\" is not a complete translation of \"Last name\". \"Numele de familie\" would be more accurate.",
-          "suggestion": "Numele de familie"
+          "description": "'Numele' translates to 'The name' rather than 'Last name'. While 'nume' can sometimes refer to last name, it's not the direct translation and can be ambiguous.",
+          "suggestion": "Prenumele de familie"
         }
       ],
       "approved_at": null
@@ -213,7 +213,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Презиме\" translates to \"middle name\" or \"surname\", not \"last name\". While commonly used interchangeably in some contexts, \"last name\" specifically refers to the family name.",
+          "suggestion": "Потсређе"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -246,7 +252,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"姓氏\" (xìngshì) is a technically correct translation for \"last name\", it's more formal and often used in official documents or genealogical contexts. A more common and natural translation for a form field label would be \"姓\" (xìng).",
+          "description": "While '姓氏' (xìngshì) is a generally acceptable translation for 'Last name,' it can sound overly formal in many contexts. A more natural and common translation would be '姓' (xìng).",
           "suggestion": "姓"
         }
       ],

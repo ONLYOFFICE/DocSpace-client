@@ -3,7 +3,7 @@
   "content": "Select a mode for embedding your {{productName}}",
   "content_en_sha1_hash": "379fede62ac678c5ffa83c05d3da29cc8cf5f887",
   "created_at": "2025-05-19T21:30:54.673Z",
-  "updated_at": "2025-05-21T08:38:04.791Z",
+  "updated_at": "2025-05-24T08:51:09.486Z",
   "comment": {
     "text": "SelectModeEmbedding is used to prompt users to choose an embedding mode for their product name. It appears in a category header on a settings page, providing context for users as they navigate developer tools.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'حدد وضعا لتضمين {{productName}} الخاص بك' is technically correct but sounds slightly awkward and could be improved for naturalness. 'تضمين' is a valid translation for embedding, but the phrasing feels a bit stiff. A more natural phrasing might use 'إضافة' or 'دمج'.",
-          "suggestion": "حدد طريقة لإضافة {{productName}} أو دمج {{productName}}"
+          "description": "The phrase 'تضمين' (tadmeen) while technically meaning 'embedding' can sound overly formal or technical for a user-facing message. A more natural and understandable phrasing might be 'إضافة' (idafa) which means 'adding' or 'incorporating'.",
+          "suggestion": "حدد وضعا لإضافة {{productName}} الخاص بك"
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '{{productName}}-i yerləşdirmək üçün rejimi seçin' is not the most natural or accurate way to convey 'Select a mode for embedding your {{productName}}'. 'Yerləşdirmək' translates to 'to place' or 'to embed', but the sentence structure is awkward. A more natural phrasing would be something like '{{productName}}-i daxil etmək üçün rejim seçin' or '{{productName}}-in yerləşdirilməsi üçün rejim seçin'.",
-          "suggestion": "Consider alternatives like '{{productName}}-i daxil etmək üçün rejim seçin' or '{{productName}}-in yerləşdirilməsi üçün rejim seçin'."
+          "description": "The translation \"{{productName}}-i yerləşdirmək üçün rejimi seçin\" is not the most natural way to say \"Select a mode for embedding your {{productName}}\". While technically correct, it's a bit literal. A more idiomatic translation would be something like \"{{productName}}-i daxil etmək üçün bir rejim seçin\" or \"{{productName}}-i yerləşdirməyin rejimini seçin\".",
+          "suggestion": "{{productName}}-i daxil etmək üçün bir rejim seçin"
         }
       ],
       "approved_at": null
@@ -60,13 +60,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"vložení prostoru\" is not an accurate translation of \"embedding.\" \"Embedding\" in this context refers to integrating or including something (in this case, a mode) into something else, not necessarily creating a space.",
-          "suggestion": "Zvolte režim pro začlenění {{productName}}"
+          "description": "The translation 'Zvolte režim pro vložení prostoru {{productName}}' doesn't accurately convey the meaning of 'Select a mode for embedding your {{productName}}'. 'Vložení prostoru' translates to 'embedding space' which is not the intended meaning. It should convey a mode or setting for embedding, not the embedded object itself.",
+          "suggestion": "Zvolte režim pro vložení {{productName}}"
         },
         {
-          "type": "incorrect_translation",
-          "description": "While \"začlenění\" is better than \"vložení prostoru,\" a simpler and more natural translation might be preferred. The goal is clarity for the end-user.",
-          "suggestion": "Zvolte režim pro integraci {{productName}}"
+          "type": "formatting",
+          "description": "The variable {{productName}} is present in both the English and Czech versions, which is good for consistency. However, ensure that the surrounding context and any necessary punctuation are handled correctly when the variable is dynamically inserted into the text.",
+          "suggestion": "No change needed, but verify dynamic insertion functionality."
         }
       ],
       "approved_at": null
@@ -77,12 +77,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Modus zum Einbetten Ihres {{productName}} wählen' is not the most natural or accurate translation of 'Select a mode for embedding your {{productName}}'. While understandable, it's a bit clunky.",
-          "suggestion": "Wählen Sie einen Modus zum Einbetten Ihres {{productName}}."
-        },
-        {
-          "type": "grammar",
-          "description": "The word order is slightly awkward. While not strictly incorrect, it could be improved for better flow in German.",
+          "description": "The translation 'Modus zum Einbetten Ihres {{productName}} wählen' is not the most natural or idiomatic German. A better translation would convey the action of *choosing* a mode.",
           "suggestion": "Wählen Sie einen Modus zum Einbetten Ihres {{productName}}."
         }
       ],
@@ -94,8 +89,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'mode' is not ideal. 'Λειτουργία' (leitourgía) translates to 'function' or 'operation', which doesn't quite capture the meaning of 'mode' in this context. A more accurate translation would convey a selectable option or setting.",
-          "suggestion": "Επιλέξτε μια επιλογή για την ενσωμάτωση του {{productName}} σας"
+          "description": "The word 'λειτουργία' (leitourgía) translates to 'function' or 'operation', which isn't the best fit for 'mode' in this context. 'Mode' implies a setting or option.",
+          "suggestion": "Επιλέξτε μια ρύθμιση για την ενσωμάτωση του {{productName}} σας"
         }
       ],
       "approved_at": null
@@ -112,12 +107,17 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Valitse tila upottaaksesi {{productName}}:n' isn't the most natural or accurate translation of 'Select a mode for embedding your {{productName}}'.  'Tila' (mode/state) isn't the ideal word choice. It's a bit ambiguous. A better translation would convey 'way' or 'method'.",
-          "suggestion": "Valitse tapa upottaaksesi {{productName}}:n."
+          "description": "The translation 'Valitse tila upottaaksesi {{productName}}:n.' is not the most natural or accurate translation of 'Select a mode for embedding your {{productName}}'.  'Tila' translates to 'mode' or 'state', but the phrasing 'upottaaksesi' (to embed) coupled with ':n' (the possessive suffix) makes the sentence sound awkward in Finnish. It implies embedding *of* the product, rather than embedding *the product*.  'Upottaaksesi' is also more commonly used for physically embedding something (like an object in something else), not a software setting or process.",
+          "suggestion": "Valitse tapa upottaaksesi {{productName}}."
         },
         {
-          "type": "grammar",
-          "description": "The colon after 'upottaaksesi' is unusual and potentially incorrect in this context. It creates a slightly awkward sentence structure.",
+          "type": "formatting",
+          "description": "The possessive suffix ':n' is attached to the product name. While grammatically correct in some contexts, in user interface text, it is often better to avoid possessive suffixes unless essential for clarity.",
+          "suggestion": "Valitse tapa upottaaksesi {{productName}}."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'tila' can mean 'mode', 'tapa' is generally a better fit when referring to a way or method of performing an action, as in 'a mode for embedding'.",
           "suggestion": "Valitse tapa upottaaksesi {{productName}}."
         }
       ],
@@ -129,13 +129,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Choisissez le mode d'intégration de votre espace {{productName}}' doesn't accurately reflect the original meaning 'Select a mode for embedding your {{productName}}'. 'Intégration' implies a more complex integration process than 'embedding' suggests. A more accurate translation would convey the action of embedding rather than the process of integration.",
-          "suggestion": "Choisissez le mode d'insertion de votre {{productName}}"
+          "description": "The translation \"Choisissez le mode d'intégration de votre espace {{productName}}\" isn't a direct or natural translation of \"Select a mode for embedding your {{productName}}\". 'Mode' is generally understood in English in this context to refer to a specific configuration or setting. 'Mode d'intégration' translates to 'integration mode' which isn't quite the same. A better translation would focus on the 'mode' of embedding itself, not just the 'integration mode'.",
+          "suggestion": "Choisissez le mode d'intégration de votre {{productName}}"
         },
         {
-          "type": "spelling",
-          "description": "While 'insertion' is a plausible alternative, 'intégration' is common for software. If retaining it, consider if it's the best option given the technical context.",
-          "suggestion": null
+          "type": "incorrect_translation",
+          "description": "While the current translation isn't terrible, it leans toward a technical translation. A more user-friendly translation might be considered. \"Choisissez un mode pour intégrer votre {{productName}}\" is another option, depending on the desired tone.",
+          "suggestion": "Choisissez un mode pour intégrer votre {{productName}}"
         }
       ],
       "approved_at": null
@@ -146,8 +146,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ընտրեք ռեժիմ ձեր {{productName}}-ի ներկառուցման համար\" is a bit literal and doesn't flow naturally in Armenian. 'ներկառուցման համար' translates to 'for embedding' which is technically correct, but sounds awkward. A more natural phrasing would be something along the lines of 'ձեր {{productName}}-ի համար ընտրեք ռեժիմ' or 'ընտրեք ձեր {{productName}}-ի ռեժիմ'.",
-          "suggestion": "Ընտրեք ձեր {{productName}}-ի ռեժիմ"
+          "description": "The translation \"Ընտրեք ռեժիմ ձեր {{productName}}-ի ներկառուցման համար\" is a bit literal and clunky. \"ռեժիմ ձեր {{productName}}-ի ներկառուցման համար\" translates to 'mode for the incorporation of your {{productName}}', which isn't the most natural way to express embedding in Armenian. It lacks the nuance of 'embedding' or 'integration'.",
+          "suggestion": "Ընտրեք ռեժիմ ձեր {{productName}}-ի ինտեգրման համար (Select a mode for integrating your {{productName}})"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'incorporation' (ներկառուցման) doesn't fully capture the concept of 'embedding' in the context of a Javascript SDK. A more appropriate term would convey the idea of integrating or embedding the product.",
+          "suggestion": "Consider using terms like 'ինտեգրման' (integration) or a more contextually relevant term depending on the specific type of embedding."
         }
       ],
       "approved_at": null
@@ -170,13 +175,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"{{productName}} 임베딩 모드 선택\" is a literal translation but might not flow naturally in Korean. '임베딩' is a direct transliteration and might be better conveyed with a more descriptive term depending on the target audience. '선택' is correct, but the sentence structure could be improved.",
+          "description": "The translation \"{{productName}} 임베딩 모드 선택\" is a literal translation of \"Select a mode for embedding your {{productName}}\". While understandable, it sounds slightly awkward in Korean. A more natural phrasing would be something like \"{{productName}} 임베딩 방식 선택\" or \"{{productName}} 임베딩 모드 설정\".",
           "suggestion": "{{productName}} 임베딩 방식 선택"
-        },
-        {
-          "type": "formatting",
-          "description": "The Korean translation maintains the placeholder {{productName}}. This is fine, but it's important to ensure the application consuming the translation correctly handles this placeholder.",
-          "suggestion": "N/A - Placeholder usage is acceptable, but ensure application compatibility."
         }
       ],
       "approved_at": null
@@ -193,8 +193,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Atlasīt režīmu {{productName}} iegulšanai\" is not the most natural or idiomatic way to say 'Select a mode for embedding your {{productName}}' in Latvian. The word 'iegulšanai' (for embedding) is a bit awkward in this context.",
-          "suggestion": "Consider alternatives like: 'Izvēlieties režīmu {{productName}} ievietošanai' or 'Izvēlieties režīmu, lai ievietotu {{productName}}'"
+          "description": "The phrase 'iegulšanai' (for embedding) is grammatically correct, but sounds slightly awkward and overly formal in this context. A more natural phrasing would be related to 'izveidošanai' or 'pielāgošanai' depending on the specific embedding functionality.",
+          "suggestion": "Atlasīt režīmu {{productName}} izveidošanai/pielāgošanai"
         }
       ],
       "approved_at": null
@@ -205,8 +205,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'insluiten' doesn't quite capture the nuance of 'embedding' in this context. 'Embedding' in software often refers to integrating or including something within a larger system.  'Insluiten' implies a more literal enclosure.",
-          "suggestion": "Selecteer een methode om uw {{productName}} te integreren."
+          "description": "The term 'insluiten' (to enclose) doesn't quite capture the meaning of 'embedding' in a technical context. 'Embedding' in this case refers to integrating or incorporating data.",
+          "suggestion": "Selecteer een modus om uw {{productName}} in te bedden"
         }
       ],
       "approved_at": null
@@ -214,13 +214,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Wybierz tryb osadzania {{productName}}' is technically correct but could be more natural. 'Osadzania' refers to the process of embedding, not the mode itself. A better translation would convey 'Select a mode *for* embedding'.",
-          "suggestion": "Wybierz tryb, aby osadzić {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -232,13 +226,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Selecione um modo para incorporar seu {{productName}}' is not the most natural or accurate translation of 'Select a mode for embedding your {{productName}}'. 'Incorporar' suggests including something within something else, whereas 'embedding' implies a more technical integration.",
-          "suggestion": "Selecione um modo para integrar seu {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -247,13 +235,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Selectare mod de incorporare spațiului dvs' is not a natural or accurate translation of 'Select a mode for embedding your {{productName}}'. 'Incorporare spațiului dvs' is awkward. A better phrasing would convey the action of embedding within the product.",
+          "description": "The translation 'Selectare mod de incorporare spațiului dvs {{productName}}' doesn't accurately convey the meaning of 'Select a mode for embedding your {{productName}}'. 'Incorporare spațiului dvs' implies embedding into a space, which isn't necessarily the intended meaning. It's a literal, but not ideal, translation.",
           "suggestion": "Selectați modul de a integra {{productName}}"
         },
         {
           "type": "grammar",
-          "description": "The use of 'Selectare' is slightly awkward. 'Selectați' is a more standard and natural form of the imperative.",
-          "suggestion": "Selectați"
+          "description": "The phrase 'Selectare mod' is grammatically awkward in Romanian. 'Selectare' is a noun form related to selecting, while 'mod' (mode) needs a more natural verb construction.",
+          "suggestion": "Selectați modul"
         }
       ],
       "approved_at": null
@@ -270,13 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ඔබගේ {{productName}} කාවැද්දීමට ප්‍රකාරයක් තෝරන්න' is not the most natural or accurate translation of 'Select a mode for embedding your {{productName}}'. 'කාවැද්දීමට' (to embed) sounds awkward in this context. A more natural translation of 'embedding' in this scenario would focus on integration or a method of use.",
-          "suggestion": "ඔබගේ {{productName}} ක්‍රියාත්මක කිරීමට ක්‍රමයක් තෝරන්න (Obage {{productName}} kriyathamakaruvenakramayek thoranna) - 'Select a method to activate/implement your {{productName}}'"
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, the use of 'ඔබගේ' feels a bit formal for a user-facing interface. It directly translates to 'your'.",
-          "suggestion": "Consider alternatives like using a more inclusive phrasing if appropriate for the product."
+          "description": "The translation \"ඔබගේ {{productName}} කාවැද්දීමට ප්‍රකාරයක් තෝරන්න\" doesn't accurately convey the meaning of 'Select a mode for embedding your {{productName}}'. 'කාවැද්දීමට' (to embed) is a bit too literal and might not be the most natural phrasing in Sinhala in this context.  It's also not clear whether 'ප්‍රකාරයක්' is the best word for 'mode'.",
+          "suggestion": "A better translation might be something like \"ඔබගේ {{productName}} සඳහා ක්‍රමයක් තෝරන්න\" (Obage {{productName}} satha Kramayak Thoranna) - 'Select a method/way for your {{productName}}'."
         }
       ],
       "approved_at": null
@@ -287,13 +270,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Vybrať režim na vloženie vášho priestoru {{productName}}' doesn't accurately convey the meaning of 'Select a mode for embedding your {{productName}}'. The word 'priestoru' (space) is not the correct term for embedding. It suggests a physical space, not the embedding process itself.",
-          "suggestion": "Vybrať režim pre vloženie vášho {{productName}}"
+          "description": "The translation 'Vybrať režim na vloženie vášho priestoru {{productName}}' doesn't accurately convey the meaning of 'Select a mode for embedding your {{productName}}'. 'Režim' translates to 'mode', but 'vloženie vášho priestoru' implies inserting a space, which is not the intended meaning. The translation should convey the selection of a mode for the embedding process itself.",
+          "suggestion": "Vybrať režim pre vloženie {{productName}}"
         },
         {
           "type": "grammar",
-          "description": "The sentence structure 'Vybrať režim pre vloženie vášho {{productName}}' is technically correct, but could be improved for smoother reading.",
-          "suggestion": "Zvoľte režim na vloženie vášho {{productName}}"
+          "description": "While technically correct, 'Vybrať režim pre vloženie {{productName}}' could be slightly improved for flow. Slovak often prefers the instrumental case after 'Vybrať'.",
+          "suggestion": "Vybrať režim na vloženie {{productName}}"
         }
       ],
       "approved_at": null
@@ -304,8 +287,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Izberi način za vdelavo {{productName}}' is not the most natural or accurate rendering of 'Select a mode for embedding your {{productName}}'. 'Vdelavo' isn't the best fit for 'embedding'. A more appropriate term would be 'vgrajevanje' or 'prilagajanje'.",
-          "suggestion": "Izberi način za vgrajevanje {{productName}}"
+          "description": "The translation 'Izberi način za vdelavo {{productName}}' is not the most natural or accurate translation of 'Select a mode for embedding your {{productName}}'. 'Vdelavo' is a somewhat technical term and might not be immediately understandable to all users. A more natural translation would focus on the purpose of selecting the mode.",
+          "suggestion": "Izberi način za integracijo {{productName}}"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'način' is a valid translation of 'mode', a slightly more descriptive translation might improve clarity depending on the specific use case.",
+          "suggestion": "Izberi format za vdelavo {{productName}}"
         }
       ],
       "approved_at": null
@@ -315,14 +303,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The Serbian translation uses the genitive case ('вашег') which might not be the most natural phrasing. While technically correct, it sounds a bit formal and could be improved for better flow.",
-          "suggestion": "Изаберите режим за уграђивање {{productName}}-а (Consider alternatives like 'за уграђивање у ваш {{productName}}-а' or 'за уграђивање {{productName}}-а у')"
+          "type": "incorrect_translation",
+          "description": "The translation 'Изаберите режим за уграђивање вашег {{productName}}-а' is not the most natural or idiomatic way to express 'Select a mode for embedding your {{productName}}'. The word 'уграђивање' (embedding) is technically correct, but can sound overly formal or technical for a user interface.",
+          "suggestion": "Consider a more user-friendly alternative like 'Изаберите начин за уграђивање вашег {{productName}}-а' (Select a way/method for embedding...) or 'Изаберите опцију за уграђивање вашег {{productName}}-а' (Select an option for embedding...)."
         },
         {
           "type": "formatting",
-          "description": "The dash in '{{productName}}-а' might need to be a soft hyphen or no hyphen at all, depending on the rendering context of the translated text. A solid hyphen could cause breaking issues.",
-          "suggestion": "Review and adjust hyphenation based on rendering requirements. Consider using a soft hyphen or no hyphen."
+          "description": "The addition of the '-а' at the end of '{{productName}}-а' is grammatically correct for Serbian noun declension, but might look slightly awkward or not match the tone of the English original, depending on the style guide.",
+          "suggestion": "Evaluate if the '-а' is necessary based on the broader context and preferred tone. Sometimes the '-а' can be omitted to achieve a more modern/informal feel."
         }
       ],
       "approved_at": null
@@ -333,13 +321,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'režim' translates more accurately to 'mode' or 'method' rather than 'regime'. 'Režim' carries connotations of political systems or routines which is not appropriate in this context.",
-          "suggestion": "Izaberite način za ugrađivanje vašeg {{productName}}-a"
+          "description": "The Serbian translation \"Izaberite režim za ugrađivanje vašeg {{productName}}-a\" is not the most natural or accurate translation of 'Select a mode for embedding your {{productName}}'. 'Ugrađivanje' implies embedding something *into* something else, which might not be the intended meaning. A more accurate and natural translation would focus on 'izbor načina' or 'odabir načina' for 'Select a mode'.",
+          "suggestion": "Izaberite način za implementaciju vašeg {{productName}}"
         },
         {
           "type": "formatting",
-          "description": "The hyphen in 'productName'-a is potentially unnecessary and makes the sentence slightly awkward. The best solution depends on whether 'productName' is a proper noun or a description. Removing it may improve readability.",
-          "suggestion": "Izaberite način za ugrađivanje vašeg {{productName}} -a"
+          "description": "The addition of the hyphen and 'a' at the end of '{{productName}}-a' is not standard Serbian grammar and is awkward.",
+          "suggestion": "Remove the hyphen and 'a' from '{{productName}}-a' to simply use '{{productName}}'."
         }
       ],
       "approved_at": null
@@ -350,7 +338,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '{{productName}}’inizi yerleştirmek için bir mod seç' is not the most natural way to say 'Select a mode for embedding your {{productName}}'. 'Yerleştirmek' (to embed) is technically correct, but the phrasing is a bit clunky. A more natural phrasing would be '{{productName}}'inizi gömmek için bir mod seçin' or '{{productName}}'inizi entegre etmek için bir mod seçin'.",
+          "description": "The translation '{{productName}}’inizi yerleştirmek için bir mod seç' doesn't accurately convey the meaning of 'Select a mode for embedding your {{productName}}'. 'Yerleştirmek' (to embed/place) isn't the best choice for 'embedding' in this context. A more accurate translation would imply choosing a mode *for* the embedding process.",
+          "suggestion": "{{productName}}'inizi gömmek için bir mod seçin"
+        },
+        {
+          "type": "formatting",
+          "description": "While the single quotes around 'productName' are technically valid, it's more common and visually consistent to use double quotes, mirroring the English content.",
           "suggestion": "{{productName}}’inizi gömmek için bir mod seçin"
         }
       ],
@@ -362,8 +355,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'embedding your {{productName}}' is not accurately translated. 'Вбудовування вашого простору' implies embedding a 'space,' while the English suggests embedding the product itself. A more accurate translation would depend on the exact meaning of 'embedding' in this context, but it should be closer to 'інтеграції вашого {{productName}}' (integration) or 'включення вашого {{productName}}' (inclusion).",
-          "suggestion": "Consider translating 'embedding' as 'інтеграції' or 'включення' depending on the specific functionality. For example: 'Виберіть режим для інтеграції вашого {{productName}}' or 'Виберіть режим для включення вашого {{productName}}'"
+          "description": "The translation 'Виберіть режим для вбудовування вашого простору {{productName}}' is not a direct and accurate translation of 'Select a mode for embedding your {{productName}}'. 'Режим' (mode) is accurate, but 'вбудовування вашого простору' (embedding your space) doesn't accurately convey the action of embedding a product. It implies embedding a 'space' which isn't the intended meaning.",
+          "suggestion": "Виберіть режим для інтеграції вашого {{productName}}"
         }
       ],
       "approved_at": null
@@ -380,8 +373,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '选择嵌入{{productName}}的模式' is technically correct but could be more natural and user-friendly. '嵌入' (embedding) sounds a bit technical for a general user.  A more common and understandable phrasing would be closer to '选择用于{{productName}}的模式' (Select the mode for {{productName}}).",
-          "suggestion": "选择用于{{productName}}的模式"
+          "description": "The translation '选择嵌入{{productName}}的模式' is a literal translation that doesn't flow naturally in Chinese. A more natural phrasing would be something like '选择{{productName}}的嵌入方式' or '选择用于嵌入{{productName}}的方式'.",
+          "suggestion": "选择{{productName}}的嵌入方式"
         }
       ],
       "approved_at": null

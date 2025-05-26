@@ -3,7 +3,7 @@
   "content": "Access",
   "content_en_sha1_hash": "2f81a22de0af5e9eab19326e19693f86ce612518",
   "created_at": "2025-05-19T21:30:53.771Z",
-  "updated_at": "2025-05-21T07:31:56.989Z",
+  "updated_at": "2025-05-24T07:46:03.851Z",
   "comment": {
     "text": "This translation key is used for a UI element displaying the text \"Access\" in a portal settings category. It appears as part of an InfoDialog component and is styled to be displayed prominently. Translators should provide a localized version of this word.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Giriş\" can mean \"access\", in the context of OAuth, it's not the most accurate translation. \"Daxilolma\" or \"İstifadə\" would be more fitting for 'Access' in this specific technical context.",
-          "suggestion": "Consider using \"Daxilolma\" or \"İstifadə\"."
+          "description": "'Giriş' translates to 'entry' or 'entrance', not 'access'. 'Access' in the context of OAuth refers to authorization or permission to use a resource.",
+          "suggestion": "Consider using 'İstifadə' or 'Rəsmiyyət' which better reflects the meaning of 'access' in an OAuth context."
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation \"Přístup na\" is not an accurate translation of \"Access\" in the context of OAuth. It implies access *to* something, while \"Access\" itself denotes the ability to access.",
-          "suggestion": "A more appropriate translation might be \"Přístup\" (Access) or \"Autorizace\" (Authorization), depending on the specific context. Without more information, \"Přístup\" is a safer option, although \"Autorizace\" might be even more suitable."
+          "description": "The Czech translation 'Přístup na' is not an accurate translation of 'Access' in the context of OAuth. It implies access *to* something, while 'Access' in this context refers to the access itself (e.g., an access token).",
+          "suggestion": "Consider 'Přístup' or 'Oprávnění' which are more general and contextually appropriate.  A more precise translation would require understanding the broader OAuth context."
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Մուտք\" generally means \"entrance\" or \"entry,\" not \"access.\" While related, it doesn't accurately convey the technical meaning of 'access' in the context of OAuth.",
-          "suggestion": "Consider alternatives such as \"Պատճառավրաց“ (Patsharach'r) which is closer to \"access\" or a more context-specific term if available."
+          "description": "The Armenian translation \"Մուտք\" translates to 'Entrance' or 'Entry', not 'Access'. While related, it doesn't convey the specific meaning of 'Access' in an OAuth context, which refers to permissions and authorization.",
+          "suggestion": "Consider alternatives like \"Մուտքի իրավունք\" (Access Right), \"Առանձնացում\" (Authorization), or \"Համատեղում\" (Permission) depending on the precise context."
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Приступ\" does not accurately convey the meaning of \"Access\" in the context of OAuth. \"Access\" in this context refers to access rights or permissions, not the act of approaching or getting something. \"Приступ\" implies 'approach' or 'accession'.",
-          "suggestion": "A more appropriate translation would be \"ПравоПриступа\" (Right of Access), \"Доступ\" (Access - a more general term), or \"Поступак Приступа\" (Procedure for Access)."
+          "description": "The Serbian (Cyrillic) translation \"Приступ\" does not accurately convey the meaning of \"Access\" in the context of OAuth. \"Access\" refers to authorization or the ability to use a resource. \"Приступ\" primarily means 'approach' or 'access' in the physical sense, not digital authorization.",
+          "suggestion": "A more appropriate translation would be \"Приступ\" (with correct usage of the word in the specific OAuth context - which can vary depending on nuance needed) or potentially something like \"Право Приступа\" (Right of Access), or a phrase more accurately reflecting the authorization aspect."
         }
       ],
       "approved_at": null
@@ -225,7 +225,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"访问\" (fǎngwèn) can sometimes be used to mean 'access', it's a broader term. In the context of OAuth, a more precise translation might be '授权访问' (shòuquán fǎngwèn) or simply '授权' (shòuquán), depending on the specific usage and surrounding text. \"访问\" alone lacks the nuance of granting permission.",
+          "suggestion": "Consider '授权访问' (shòuquán fǎngwèn) or '授权' (shòuquán) for greater accuracy."
+        }
+      ],
       "approved_at": null
     }
   }

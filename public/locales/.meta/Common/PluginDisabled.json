@@ -3,7 +3,7 @@
   "content": "Plugin disabled",
   "content_en_sha1_hash": "8e970c1c58b98cecd2d9a7629625b1d70321a419",
   "created_at": "2025-05-19T21:30:47.380Z",
-  "updated_at": "2025-05-22T11:56:37.792Z",
+  "updated_at": "2025-05-23T23:34:29.685Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a plugin has been disabled. It appears in the UI when a plugin's status is false, typically after clicking a button or deactivating a plugin. Translators should provide a clear and concise phrase that accurately conveys this information.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"تفاصيل العملية\" (Tafasil al-'Amaliyya) translates to 'Process Details', which is not equivalent to the English 'Plugin disabled'.",
-          "suggestion": "A more accurate translation would be something like \"الإضافة معطلة\" (Al-Idaafa Mu'attala) or \"تم تعطيل الإضافة\" (Tam Ta'til Al-Idaafa)."
+          "description": "The Arabic translation \"تفاصيل العملية\" (Tafaseel al-Amaliyya) translates to \"Process details\". This is not an accurate translation of \"Plugin disabled\".",
+          "suggestion": "A more accurate translation would be something like \"تم تعطيل المكون الإضافي\" (Tumma ta'teel al-mukawwin al-idaafi) which means \"Plugin disabled\"."
         }
       ],
       "approved_at": null
@@ -42,13 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The word \"Plagin\" contains a non-breaking space character (&#8201;). This is likely unintended and may cause rendering issues.",
-          "suggestion": "Replace \"Plagin\" with \"Plugin\"."
+          "description": "The word 'Plagin' contains a non-breaking space, which might cause display issues.",
+          "suggestion": "Replace 'Plagin ' with 'Plagin'"
         },
         {
           "type": "incorrect_translation",
-          "description": "While \"deaktiv edildi\" is a valid translation for 'disabled', it's slightly less common and more formal than other options. A more natural and widely used translation would be 'bağlanıldı' or 'sonda alındı'.",
-          "suggestion": "Consider using 'Plugin bağlanıldı' or 'Plugin sonda alındı'."
+          "description": "While \"deaktiv edildi\" is a valid translation for 'disabled', \"bağlandı\" might be more fitting depending on the specific context of 'plugin disabled'. 'deaktiv edildi' implies a previous active state.",
+          "suggestion": "Consider 'bağlandı' or 'dayandırıldı' depending on the context."
         }
       ],
       "approved_at": null
@@ -56,7 +56,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Приставка деактивирана\" is understandable, a more accurate and common translation of \"Plugin disabled\" in a technical context would be \"Деактивиран плъгин\" or \"Изключен плъгин\". \"Приставка деактивирана\" sounds less precise and might be misinterpreted.",
+          "suggestion": "Деактивиран плъгин"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -74,7 +80,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Απενεργοποιημένο πρόσθετο\" is a literal translation of 'Plugin disabled', a more natural and commonly used term in Greek for 'disabled' in the context of software or plugins would be 'απενεργοποιημένο'. 'Πρόσθετο' is correct for 'plugin'. The combination sounds slightly formal or technical.",
+          "suggestion": "Απενεργοποιημένο πρόσθετο"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -113,7 +125,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"プラグイン無効\" is a possible translation, it's somewhat technical. A more natural and user-friendly translation for \"Plugin disabled\" might be \"プラグインが無効になっています\" or \"プラグインを無効にしました\". \"プラグイン無効\" sounds abrupt.",
+          "description": "While 'プラグイン無効' is technically correct, a more natural and commonly used translation for 'Plugin disabled' would be 'プラグインが無効になっています' or 'プラグインが無効にされました'. The current translation is a bit abrupt.",
           "suggestion": "プラグインが無効になっています"
         }
       ],
@@ -125,8 +137,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"프로세스 세부 정보\" (prose-seu se-bu jeong-bo) translates to \"Process Details\" which is not equivalent to the English \"Plugin disabled\".",
-          "suggestion": "The translation should accurately reflect the meaning of \"Plugin disabled\". A possible suggestion could be \"플러그인 사용 중지\" (peul-leog-in sa-yong jung-ji) which means \"Plugin disabled\" or \"Plugin deactivated\"."
+          "description": "The Korean translation '프로세스 세부 정보' (Process Details) does not accurately reflect the English meaning of 'Plugin disabled'.",
+          "suggestion": "A more appropriate translation would be something like '플러그인 비활성화됨' (Plugin deactivated) or '플러그인 사용 중지됨' (Plugin disabled)."
         }
       ],
       "approved_at": null
@@ -137,8 +149,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ໂພ້ໂລຄຳ ຖືກປິດການໃຊ້ງານ' literally translates to 'Pokloam is disabled.' 'Pokloam' doesn't have a clear meaning in this context.  The intended meaning is 'plugin,' which should be translated appropriately. 'Plugin' doesn't have a direct Lao equivalent, so a descriptive translation or transliteration is needed.",
-          "suggestion": "Consider a more descriptive translation like 'ໂພ້ໂລຄຳເສริมຖືກປິດການໃຊ້ງານ' (plugin extension is disabled) or a transliteration 'ພລັກອິນຖືກປິດການໃຊ້ງານ' (plag-in is disabled).  The best choice will depend on the user's familiarity with English terminology."
+          "description": "The Lao translation 'ໂພ້ໂລຄຳ ຖືກປິດການໃຊ້ງານ' is a literal translation and doesn't quite convey the intended meaning of 'Plugin disabled' in a user-friendly way. 'ໂພ້ໂລຄຳ' seems to be translating 'plugin' directly, but a more natural phrasing might be more appropriate.",
+          "suggestion": "Consider a more idiomatic translation. Perhaps something like 'ການເຮັດງານເສັ້ນທາງຖືກປິດ' (meaning 'Functionality blocked') or 'ບໍ່ສາມາດໃຊ້ງານເສັ້ນທາງນີ້' (meaning 'This functionality is unavailable') depending on the specific context within the application. Without more context, it's difficult to give a perfect suggestion, but the current translation feels too literal."
         }
       ],
       "approved_at": null
@@ -146,13 +158,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Spraudnis deaktivēts\" is understandable, a more natural and accurate translation of \"Plugin disabled\" would be \"Atspējots papildinājums\". \"Spraudnis\" technically means 'plug' or 'connector', and while sometimes used for 'plugin,' \"papildinājums\" is more common and precise in the context of software plugins.",
-          "suggestion": "Atspējots papildinājums"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -197,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"Vtičnik onemogočen\" appears to be Slovenian, not Sinhala. It translates to \"Plugin disabled\" in Slovenian.",
-          "suggestion": "The translation should be in Sinhala. A possible translation is \"ආප්ලගින් ඈකරණය කරන ලදී\" (Aplagin aakarayanayā karanayā labedī) or something similar, depending on the intended tone and context."
+          "description": "The Sinhala translation \"Vtičnik onemogočen\" appears to be Slovenian, not Sinhala. It translates to \"Plugin disabled\" in Slovenian.",
+          "suggestion": "This translation needs to be replaced with the correct Sinhala equivalent for \"Plugin disabled\". A potential translation could be \"Plugin අයින් කරල\" (Plugin ain karala) or \"Plugin නිශ්චලයි\" (Plugin nischalayi), but a Sinhala speaker should be consulted for the most accurate and natural translation."
         }
       ],
       "approved_at": null
@@ -209,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Slovak translation contains a non-breaking space (nbsp) between 'deaktivovaný' and the end of the string. This can cause layout issues.",
-          "suggestion": "Remove the non-breaking space. Use a regular space instead."
+          "description": "The Slovak translation contains a non-breaking space \"\\u00a0\" after \"deaktivovaný\". This might cause display issues.",
+          "suggestion": "Remove the non-breaking space: \"Doplnok deaktivovaný\""
         }
       ],
       "approved_at": null
@@ -221,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation \"Podrobnosti procesa\" does not accurately translate the English phrase \"Plugin disabled\". It translates to \"Process details\".",
-          "suggestion": "A more accurate translation would be something like \"Vtičnik onemogočen\" or \"Onemogočen vtičnik\"."
+          "description": "The Slovenian translation \"Podrobnosti procesa\" (Process details) does not accurately translate \"Plugin disabled\". It describes a process, not a disabled plugin.",
+          "suggestion": "A more accurate translation would be something like \"Vtičnik onemogočen\" or \"Plugin onemogočen\"."
         }
       ],
       "approved_at": null
@@ -233,8 +239,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Додатак је онемогућен\" is understandable, a more direct and common translation of \"Plugin disabled\" would be \"Искључен додатак\" or \"Онемогућен додатак\". \"Додатак је онемогућен\" is a bit more verbose and less concise.",
-          "suggestion": "Искључен додатак"
+          "description": "The translation 'Додатак је онемогућен' while generally correct, might be a bit too formal for a plugin status message. 'Додатак је искључен' might be a more natural and commonly used alternative in this context.",
+          "suggestion": "Додатак је искључен"
         }
       ],
       "approved_at": null
@@ -251,8 +257,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation 'İşlem ayrıntıları' translates to 'Transaction details', which is not equivalent to the English 'Plugin disabled'.",
-          "suggestion": "The translation should accurately reflect the meaning of 'Plugin disabled'. A possible suggestion is 'Eklenti devre dışı'."
+          "description": "The Turkish translation 'İşlem ayrıntıları' (Transaction details) does not accurately reflect the meaning of 'Plugin disabled'. It is a completely different concept.",
+          "suggestion": "The correct translation should be something like 'Eklenti devre dışı' or 'Eklenti kapatıldı'."
         }
       ],
       "approved_at": null
@@ -263,8 +269,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Ukrainian translation \"Деталі процесу\" does not accurately translate \"Plugin disabled\". It translates to \"Process details\".",
-          "suggestion": "The correct translation should be something like \"Плагін вимкнено\" or \"Плагін відключено\"."
+          "description": "The Ukrainian translation \"Деталі процесу\" does not accurately convey the meaning of \"Plugin disabled\". It translates to \"Process details\" which is unrelated.",
+          "suggestion": "A more accurate translation would be something like \"Плагін вимкнено\" (Plugin disabled) or \"Відключено плагін\" (Plugin disconnected)."
         }
       ],
       "approved_at": null
@@ -275,8 +281,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Vietnamese translation \"Chi tiết về Quy trình\" (Details about the process) does not accurately convey the meaning of \"Plugin disabled\". It's a completely different topic.",
-          "suggestion": "A more accurate translation would be something like \"Bật plugin bị vô hiệu hóa\" or \"Plugin đã bị tắt\"."
+          "description": "The Vietnamese translation \"Chi tiết về Quy trình\" translates to \"Details about the process\". This is not an accurate translation of \"Plugin disabled\".",
+          "suggestion": "A more accurate translation would be something like \"Bật Plugin\" (Plugin enabled) or \"Tắt Plugin\" (Plugin disabled), or \"Plugin đã tắt\" (Plugin is disabled)."
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Link has been copied",
   "content_en_sha1_hash": "b29783ff2b06b710de4d4249e71d99046a2715d7",
   "created_at": "2025-05-19T21:30:54.735Z",
-  "updated_at": "2025-05-21T09:35:52.689Z",
+  "updated_at": "2025-05-24T09:47:53.739Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -83,7 +83,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Il link di collegamento è stato copiato' is overly literal. 'Link' is commonly understood in Italian, and 'di collegamento' is redundant. It sounds unnatural.",
+          "description": "The translation \"Il link di collegamento è stato copiato\" is overly literal. A more natural Italian translation for 'Link has been copied' would be something like \"Il link è stato copiato\" or \"Copiato il link\". The phrase 'di collegamento' is redundant.",
           "suggestion": "Il link è stato copiato"
         }
       ],
@@ -131,7 +131,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'A ligação foi copiada' literally translates to 'The link was copied'. While understandable, a more natural and idiomatic translation for 'Link has been copied' in Portuguese would be 'O link foi copiado' or 'O endereço foi copiado'. Using 'ligação' implies a connection or phone call.",
+          "description": "The translation 'A ligação foi copiada' is not the most natural or accurate translation of 'Link has been copied'. 'Ligação' translates to 'connection' or 'link' in a general sense, but 'link' is more specific to a URL. A better translation would emphasize the URL aspect.",
           "suggestion": "O link foi copiado"
         }
       ],
@@ -158,7 +158,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'සබැඳිය පිටපත් විය' while understandable, is not the most natural or idiomatic way to convey 'Link has been copied'. A more common and fluent phrasing would be preferred.",
+          "suggestion": "සබැඳිය ප්‍රකාශිතවිය"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

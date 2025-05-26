@@ -3,7 +3,7 @@
   "content": "Invite",
   "content_en_sha1_hash": "b136609f068403340f94e46a0174da273bfbce30",
   "created_at": "2025-05-19T21:30:45.964Z",
-  "updated_at": "2025-05-22T11:56:37.303Z",
+  "updated_at": "2025-05-24T00:17:23.887Z",
   "comment": {
     "text": "This translation key is used for the label \"Invite\" in UI elements such as buttons and dialogs. It appears on a main button where user actions are displayed, as well as a modal dialog inviting users to join a room. Translators should focus on providing a consistent invite-related message across various contexts.",
     "is_auto": true,
@@ -60,7 +60,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"Dəvət edin\" is a command form (\"Invite\" - imperative). The English \"Invite\" can also function as a noun (an invitation). This translation doesn't account for that possibility. A more versatile translation might be \"Dəvət\" (Invitation).",
+          "description": "The Azerbaijani translation \"Dəvət edin\" translates to \"Invite (imperative)\" rather than simply \"Invite\". It implies a direct command to invite someone. A more neutral translation would be \"Dəvət\" or \"Qeydli\" depending on the context.",
           "suggestion": "Dəvət"
         }
       ],
@@ -117,7 +117,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Italian translation \"Invita\" is the third-person singular present indicative form of the verb 'invitare' (to invite). 'Invite' in English functions as a noun (an invitation) or a verb (to invite). The translation should be a noun form like 'Invito' or a more appropriate verb form depending on the context. Without more context, 'Invito' is the most likely correct translation.",
+          "suggestion": "Invito"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -126,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation \"招待する\" (shōtaisu suru) means \"to invite\" (as a verb). The English \"Invite\" is a noun. A more appropriate translation might be \"招待\" (shōtai) which is the noun form of invite.",
-          "suggestion": "招待 (shōtai)"
+          "description": "The Japanese translation \"招待する\" means \"to invite\" or \"to request attendance\". While related to 'Invite', it's not a direct translation of the English word 'Invite' which functions as a noun.  A more direct noun translation might be \"招待\" (shoutai).",
+          "suggestion": "Consider \"招待\" (shoutai) as a more direct noun translation."
         }
       ],
       "approved_at": null
@@ -207,13 +213,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Позови\" translates to \"Invite\" but is more accurately \"Call\" or \"Invite (imperative)\". It's a command form. While it can be used in some contexts to mean invite, it's not a direct translation of \"Invite\" as a noun or general term.",
-          "suggestion": "Consider 'Позвати' for a more accurate translation of 'Invite' as a general term, or 'Позови' is acceptable if the intended meaning is an imperative 'Invite!'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -222,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Pozovi' translates to 'Call' or 'Invite' in an imperative form. While it can be used in the context of inviting someone, it's a more direct and less nuanced translation of 'Invite'. A more appropriate translation might depend on the specific context of 'Invite'.",
-          "suggestion": "Consider alternatives like 'Pozvati' (infinitive - to invite), or a more descriptive phrase depending on the application."
+          "description": "The Serbian translation 'Pozovi' is a command form (imperative) meaning 'Call'. 'Invite' typically implies a request to join something, not a direct call. A more appropriate translation would depend on the context, but options like 'Poziv' (invite, noun), 'Upozorenje' (invitation, slightly formal), or 'Pozvati' (to invite, infinitive) might be better.",
+          "suggestion": "Consider 'Poziv' or 'Pozvati' depending on the intended meaning."
         }
       ],
       "approved_at": null
@@ -234,7 +234,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Davet et\" is a verb phrase (invite), but the English content is a noun (\"Invite\"). A more accurate translation would be a noun form.",
+          "description": "The Turkish translation \"Davet et\" translates to \"Invite (something/someone)\" or \"Invite (to do something)\", but \"Invite\" as a noun (e.g., an invitation) is not accurately conveyed.  A better translation would be \"Davet\".",
           "suggestion": "Davet"
         }
       ],

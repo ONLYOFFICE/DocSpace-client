@@ -3,7 +3,7 @@
   "content": "Subtitle",
   "content_en_sha1_hash": "e159d05a124cfbe60229903bf1f8e6a61682bee5",
   "created_at": "2025-05-19T21:30:54.697Z",
-  "updated_at": "2025-05-21T08:32:56.784Z",
+  "updated_at": "2025-05-24T08:45:51.242Z",
   "comment": {
     "text": "\"This is a general subtitle used throughout the application. It will appear as the title of certain settings pages and dialogs, providing context to users navigating developer tools.\"",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'الترجمة' while meaning 'translation', does not accurately reflect the English term 'Subtitle'. 'Subtitle' refers to the text displayed at the bottom of a video or film.",
-          "suggestion": "Consider alternatives like 'شرح' (sharḥ) which can mean explanation or description, or 'نص ترجمة' (naṣṣ tarjama) which directly means 'subtitle text'."
+          "description": "The Arabic translation 'الترجمة' (Al-Tarjama) translates to 'Translation', not 'Subtitle'. While related, it's not the direct equivalent.",
+          "suggestion": "Consider using a more accurate translation for 'Subtitle', such as 'عنوان ثانوي' (Unwan Thanawi) or 'شرح' (Sharh), depending on the specific context."
         }
       ],
       "approved_at": null
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation \"Podnadpis\" translates to 'Subheading', not 'Subtitle'. 'Subtitle' would be better rendered as 'Titulky' or 'Popisky'.",
-          "suggestion": "Titulky"
+          "description": "The Czech translation 'Podnadpis' typically translates to 'Subheading' rather than 'Subtitle'. While semantically related, 'Subtitle' refers to text appearing beneath a video or audio, whereas 'Podnadpis' refers to a heading under a main heading.",
+          "suggestion": "Consider 'Titulky' or 'Popisky' for a more accurate translation of 'Subtitle'."
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Титл\" is a valid word, but it translates to \"Title\" rather than \"Subtitle\". While 'title' can sometimes be used as a general term, 'subtitle' has a more specific meaning.",
-          "suggestion": "Consider using \"Натпис испод наслова\" or a similar phrase that more accurately reflects the meaning of 'Subtitle'."
+          "description": "The Serbian (Cyrillic) translation 'Титл' is not the most accurate translation of 'Subtitle'. While it's related to 'title,' 'subtitle' specifically refers to text displayed beneath a main title.",
+          "suggestion": "Consider using 'Натпис испод наслова' (Natpis ispod naslova) which translates to 'Caption below the title' or 'Subtitle' more accurately. 'Легенда' (Legenda) could also be suitable in certain contexts, referring to captions or text explanations."
         }
       ],
       "approved_at": null
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Latin) translation 'Titl' is a valid word but may not be the most accurate or common translation for 'Subtitle'. A more common and accurate translation might be 'Napis'.",
-          "suggestion": "Napis"
+          "description": "The Serbian (Latin) translation 'Titl' is a valid word but doesn't fully capture the meaning of 'Subtitle'. 'Subtitle' refers to the text displayed at the bottom of a screen, typically in movies or videos. 'Titl' in Serbian can mean 'title' which isn't the same.",
+          "suggestion": "Consider 'Napis pod tekstom' or 'Tekst ispod' for a more accurate translation. A more precise single word translation might require more context."
         }
       ],
       "approved_at": null

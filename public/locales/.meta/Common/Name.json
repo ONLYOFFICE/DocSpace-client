@@ -3,7 +3,7 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.705Z",
-  "updated_at": "2025-05-22T11:56:37.431Z",
+  "updated_at": "2025-05-23T23:55:38.639Z",
   "comment": {
     "text": "This translation key displays the user's full name, typically their first and last names. It is used in a social authentication welcome dialog to provide user information. Translators should note that the name may be truncated or displayed as an alias if not available.",
     "is_auto": true,
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ルーム名\" (Room Name) doesn't perfectly convey the meaning of \"Name\" in this context. While it could be acceptable depending on the context where this key is used (e.g., a room naming feature), a more general and accurate translation of \"Name\" would be just \"名前\" (namae).",
-          "suggestion": "名前"
+          "description": "The translation \"ルーム名\" (Room Name) doesn't accurately convey the simple meaning of \"Name\". It implies a name *of a room*, whereas the English term is generic.",
+          "suggestion": "名前 (Namae)"
         }
       ],
       "approved_at": null
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Imagem\" (Image) does not accurately represent the English word \"Name\". \"Name\" refers to a designation or label, while \"Imagem\" means \"Image\".",
-          "suggestion": "A more appropriate translation for \"Name\" would be \"Nome\"."
+          "description": "The Portuguese (Brazil) translation \"Imagem\" translates to \"Image\" in English, not \"Name\". This is an incorrect translation of the key 'Common:Name'.",
+          "suggestion": "The correct translation for \"Name\" in Portuguese (Brazil) is \"Nome\"."
         }
       ],
       "approved_at": null
@@ -237,7 +237,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"නම\" is a transliteration of 'Naam' and while understandable, 'Name' is best translated as \"නම්\" (Nam). \"නම\" implies a more formal or religious context.",
+          "suggestion": "නම්"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

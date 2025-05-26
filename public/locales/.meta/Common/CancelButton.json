@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2025-05-22T11:56:37.306Z",
+  "updated_at": "2025-05-24T01:35:13.184Z",
   "comment": {
     "text": "This translation key is used for the \"Cancel\" button in various UI elements such as dialogs and form buttons. It provides the text to be displayed when a user clicks the cancel action, allowing them to terminate an operation or return to their previous state. This key appears in files such as Dialog.js, QuotaForm, and ShareCollectSelector.",
     "is_auto": true,
@@ -852,7 +852,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"الغاء\" (Ilgha') is a valid word meaning 'cancellation' or 'cancel', but it's a more formal term. A more common and user-friendly translation for a 'Cancel' button would be \"إلغاء\" (Ilg'aa').",
+          "description": "While 'الغاء' (Ilgha') is a valid Arabic word for 'Cancel', it's more formal and often used in written contexts. A more common and natural-sounding translation for a button label might be 'إلغاء' (Ilgā').",
           "suggestion": "إلغاء"
         }
       ],
@@ -864,8 +864,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Ləğv edin\" is a possible translation for 'Cancel', it is more accurately \"Delete\" or \"Remove\". \"Cancel\" typically implies stopping an action in progress, and \"Ləğv edin\" has a more final connotation.",
-          "suggestion": "Consider alternatives like \"Saxla\" (Hold), \"Dayandır\" (Stop), or a more context-specific translation."
+          "description": "While \"Ləğv edin\" can mean 'cancel,' it's a more formal and less common way to say 'Cancel' in the context of a button label. A more natural and user-friendly translation would be \"İmtina et\" or \"Xasabi\" for a button label.",
+          "suggestion": "Consider using \"İmtina et\" or \"Xasabi\" instead."
         }
       ],
       "approved_at": null
@@ -990,8 +990,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"අවලංගු\" (awalangu) doesn't accurately convey the meaning of \"Cancel\". It translates to 'invalid' or 'illegitimate' which is not the intended meaning of a cancel button. A more appropriate translation would be something like \"ඉවතලන්න\" (iwatalanna) or \"రద్దు කරන්න\" (raddu karanna).",
-          "suggestion": "Consider using \"ඉවතලන්න\" (iwatalanna) or \"රద్దు කරන්න\" (raddu karanna)"
+          "description": "The Sinhala translation \"අවලංගු\" (awalangu) doesn't directly translate to 'Cancel'. It means 'invalid' or 'void'. A more accurate translation for 'Cancel' would be something like \"අත්පත්ල කිරීම නැවතාලන්න\" (athpathala kirimath nethalananna) or simply \"අත්පත්ල කිරීම නැවතාලන්න\".",
+          "suggestion": "Consider using \"අත්පත්ල කිරීම නැවතාලන්න\" (athpathala kirimath nethalananna) or \"අවලංගු කිරීම\" (awalangu kirima) or \"තියුණු කිරීම\" (thiyunu kirima) depending on the context."
         }
       ],
       "approved_at": null
@@ -1014,8 +1014,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Откажи' is a valid Serbian word related to cancellation, 'Cancel' typically implies a button action. 'Откажи' is an imperative form and might sound abrupt for a button label. A more appropriate translation, considering the context, would be 'Otkaži' (Otkaži) or 'Ponisti' (Reset).",
-          "suggestion": "Consider 'Otkaži' or 'Ponisti' for a more user-friendly button label."
+          "description": "While \"Откажи\" can be a valid translation for \"Cancel,\" it's an imperative form (command). For a button label, a more appropriate translation would be a noun or a more polite/neutral option. \"Отказ\" (Otraz) would be a better option as it translates to 'Cancellation'.",
+          "suggestion": "Отказ"
         }
       ],
       "approved_at": null

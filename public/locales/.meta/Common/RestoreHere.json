@@ -3,7 +3,7 @@
   "content": "Restore here",
   "content_en_sha1_hash": "71ccf96c4fbf9923c575cab181655fa2cc1d83d0",
   "created_at": "2025-05-19T21:30:47.910Z",
-  "updated_at": "2025-05-22T11:56:37.475Z",
+  "updated_at": "2025-05-23T23:18:54.882Z",
   "comment": {
     "text": "This translation key is used to display a message when restoring a file. It appears as a button or label in the UI and indicates that an action will be performed on the selected file. The exact wording may vary depending on the context, but its purpose remains consistent: to provide clear instructions for users.",
     "is_auto": true,
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"여기에 복원\" is technically correct, it sounds awkward and isn't the most natural way to say \"Restore here\" in Korean. A more idiomatic translation would be something like \"여기에서 복원하세요\" (yorieoseo bokwonhaseyo) or \"여기에서 복원\" (yorieoseo bokwon) depending on the context and level of formality.",
-          "suggestion": "Consider \"여기에서 복원하세요\" (yorieoseo bokwonhaseyo) or \"여기에서 복원\" (yorieoseo bokwon)."
+          "description": "While \"여기에 복원\" is a literal translation of \"Restore here\", it doesn't convey the intended meaning effectively in Korean. \"복원\" generally refers to restoring data or systems, not a physical location. The phrase is awkward and could be misinterpreted.",
+          "suggestion": "Consider alternative translations like \"여기에서 복구\" (Here to recover/fix) or \"복원 위치\" (Restoration location) depending on the specific context."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຟື້ນຟູ ນີ້\" is a literal translation of \"Restore here\" but doesn't convey the intended meaning effectively.  'ຟື້ນຟູ' means 'restore' but 'ນີ້' (this) is not an idiomatic way to indicate a location to restore something. A more natural phrasing would depend on the context (e.g., 'ນີ້ແມ່ນບ່ອນຟື້ນຟູ' - 'This is the restoration place').",
-          "suggestion": "Requires more context to provide an accurate translation. Possible suggestions include: 'ນີ້ແມ່ນບ່ອນຟື້ນຟູ' (This is the restoration place), or a phrasing that better reflects the original English's intended meaning in context."
+          "description": "The Lao translation \"ຟື້ນຟູ ນີ້\" literally translates to \"restore this.\" While it conveys a similar meaning to \"Restore here,\" it's not the most natural or idiomatic way to express it in Lao. A more appropriate translation might depend on the context.  'Restore here' often implies a designated location for restoration, so a phrase indicating 'location' or 'point' might be preferable.",
+          "suggestion": "Consider alternatives like \"ຈຸດຟື້ນຟູ\" (jut fuen fu - restoration point) or \"ບ່ອນຟື້ນຟູ\" (bon fuen fu - restoration location) depending on the specific context."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"මෙතැනට ප්‍රත්‍යර්පණය\" while technically meaning \"restore here,\" is a very formal and somewhat unnatural phrasing for everyday use. 'Restore' is a technical term, and 'pratyarpanaya' isn't the most common or natural way to express it in Sinhala in this context.",
-          "suggestion": "A more natural translation would be something like \" නැවත ස්ථානගත කරන්න\" (naewatha sthaanagath karanna - 'reposition/relocate') or \" නැවත ගෙනත් හැදුවට ස්ථානය\" (naewatha genaath haaduwata sthaanaya - 'place where it's rebuilt'). The best choice depends on the specific context of where 'Restore here' is used."
+          "description": "The translation \"මෙතැනට ප්‍රත්‍යර්පණය\" while technically meaning 'restore here', is a very formal and potentially unnatural phrasing for the simple English 'Restore here'.  'ප්‍රත්‍යර්පණය' is a complex word often used in technical contexts.",
+          "suggestion": "A more natural translation might be \"මෙහි ප්‍රතිස්ථානය කරන්න\" or \"මෙහි නැවත ස්ථානගත කරන්න\" depending on the precise context of 'restore'."
         }
       ],
       "approved_at": null
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Поврати овде\" is understandable, a more accurate and common translation of \"Restore here\" would be \"Врати се овде\" or \"Поврати се овде\". \"Поврати овде\" implies returning something to a location rather than returning *yourself* to a location.",
-          "suggestion": "Врати се овде"
+          "description": "The translation \"Поврати овде\" while literally meaning \"Return here\", doesn't fully capture the nuance of 'Restore here'. 'Restore' implies bringing something back to a previous, functional state. A more accurate translation would convey that.",
+          "suggestion": "Врати на претходну позицију"
         }
       ],
       "approved_at": null
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Buraya restore et\" is not the most natural or accurate translation of \"Restore here.\" While technically understandable, it's a literal translation that doesn't convey the intended meaning in a standard Turkish context. \"Restore here\" usually implies a location for restoration, not an action to perform.",
-          "suggestion": "Consider alternatives like \"Burada geri yükle\" (Restore here - implies uploading/recovering data) or \"Geri yükleme yeri burasıdır\" (The restore location is here). The best option depends on the specific context of the key."
+          "description": "The Turkish translation \"Buraya restore et\" is a literal translation that doesn't accurately convey the meaning of \"Restore here\". \"Restore\" in this context likely refers to a backup or system recovery.  A more appropriate translation would depend on the specific context, but something like \"Buradan geri yükle\" (Restore from here) or \"Buraya geri yükle\" (Restore here) would be better.",
+          "suggestion": "Consider \"Buradan geri yükle\" or \"Buraya geri yükle\" depending on the intended meaning."
         }
       ],
       "approved_at": null

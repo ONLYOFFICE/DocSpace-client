@@ -3,7 +3,7 @@
   "content": "days",
   "content_en_sha1_hash": "5548ae4f34cbb6e30414532924e2088d915b460f",
   "created_at": "2025-05-19T21:30:44.423Z",
-  "updated_at": "2025-05-22T11:56:37.363Z",
+  "updated_at": "2025-05-24T01:13:16.916Z",
   "comment": {
     "text": "The translation key \"Days\" is used to display the label for a file lifetime option in a dialog. It is typically displayed as a button or menu item, allowing users to select whether their files are valid for a specified number of days. This option can be used in various contexts within the application.",
     "is_auto": true,

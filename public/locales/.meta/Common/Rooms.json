@@ -3,7 +3,7 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2025-05-19T21:30:48.236Z",
-  "updated_at": "2025-05-22T11:56:37.382Z",
+  "updated_at": "2025-05-23T23:02:24.675Z",
   "comment": {
     "text": "The \"Rooms\" translation key is used to display the content \"Rooms\" in various parts of the user interface. This includes a file selector and a dialog box where it appears as a section title, providing context for users navigating room templates or reassigning data. It appears in UI elements such as buttons, text labels, and progress indicators.",
     "is_auto": true,
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Miestností' is a valid Slovak word, it's the genitive plural form. 'Rooms' in English typically translates to 'izby' (nominative plural) or 'miestnosti' (locative plural) in Slovak, depending on the context. Without more context, 'miestnosti' is likely the more appropriate translation.",
-          "suggestion": "Consider using 'miestnosti' as a more contextually accurate translation."
+          "description": "While 'Miestností' is a valid Slovak word, it's the genitive plural form. 'Rooms' in English typically translates to 'izby' (nominative plural) or 'miestnosti' (nominative plural). The genitive form implies possession or relationship, which isn't suitable for a simple label like 'Rooms'.",
+          "suggestion": "miestnosti"
         }
       ],
       "approved_at": null
@@ -222,7 +222,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The provided Slovenian translation 'Săli' is incorrect. It appears to be a mix of Romanian and Slovenian. The correct translation for 'Rooms' in Slovenian is 'Sobě'.",
+          "description": "The Slovenian translation 'Săli' is incorrect for 'Rooms'. The correct translation should be 'Sobě'. 'Săli' translates to 'Halls' or 'Rooms (as in meeting rooms)', whereas 'Sobě' is the general term for rooms.",
           "suggestion": "Sobě"
         }
       ],
@@ -234,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Собе\" is not an accurate translation of \"Rooms\". \"Собе\" translates to \"Rooms\" but in a more informal or diminutive sense, and doesn't fully capture the intended meaning of 'Rooms' as a general term for enclosed spaces within a building.",
-          "suggestion": "Consider using \"Просторије\" (Prostorije) which is a more formal and accurate translation of 'Rooms' in this context. Alternatively, \"Соби\" (Sobi) could work if the context implies a more specific set of rooms."
+          "description": "The Serbian (Cyrillic) translation \"Собе\" is not an accurate translation of \"Rooms\". \"Собе\" translates to \"Rooms\" in the plural, but the English term \"Rooms\" can also be singular. A more accurate translation, depending on context, might be \"Соба\" (singular) or \"Комнате\" (plural, more formal).",
+          "suggestion": "Consider \"Соба\" (singular) or \"Комнате\" (plural) depending on context."
         }
       ],
       "approved_at": null

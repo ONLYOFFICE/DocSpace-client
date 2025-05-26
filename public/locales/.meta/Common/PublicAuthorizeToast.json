@@ -3,7 +3,7 @@
   "content": "This room is opened in the <1>{{roomMode}}</1> mode. To be able to work on documents, please authorize.",
   "content_en_sha1_hash": "ffb27f98fd85e2ce3613b4df4c2d7cfd23dd5320",
   "created_at": "2025-05-19T21:30:47.633Z",
-  "updated_at": "2025-05-22T11:56:37.763Z",
+  "updated_at": "2025-05-23T23:28:56.076Z",
   "comment": {
     "text": "This translation key is used for a toast message that informs users about the room mode and asks them to authorize access to work on documents. It appears in a public room page when entering a specific mode.",
     "is_auto": true,
@@ -30,8 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'تسجيل الدخول' (login) doesn't accurately convey the meaning of 'authorize' in this context. 'Authorize' implies granting permission, not necessarily logging in. A better translation would be something along the lines of 'منح الإذن' (grant permission) or 'الموافقة' (approval).",
-          "suggestion": "تم فتح هذه الغرفة في وضع <1>{{roomMode}}</1> . لتتمكن من العمل على المستندات، يُرجى منح الإذن."
+          "description": "The phrase \"لتتمكن من العمل على المستندات، يُرجى تسجيل الدخول\" translates to 'To be able to work on documents, please log in'. The original English says 'To be able to work on documents, please authorize.' 'Authorize' and 'log in' have different meanings in this context.  'Authorize' implies granting permission, while 'log in' implies authentication.",
+          "suggestion": "تم فتح هذه الغرفة في وضع <1>{{roomMode}}</1> . لتتمكن من العمل على المستندات، يُرجى التفويض."
+        },
+        {
+          "type": "formatting",
+          "description": "The Arabic translation includes a full stop (.) at the end of the first sentence, but the English does not. Consistency in punctuation would improve readability.",
+          "suggestion": "تم فتح هذه الغرفة في وضع <1>{{roomMode}}</1> . لتتمكن من العمل على المستندات، يُرجى التفويض."
         }
       ],
       "approved_at": null
@@ -42,8 +47,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"icazə verin\" (let me) doesn't accurately convey the meaning of 'authorize' in this context. It implies giving permission to the speaker, rather than the user authorizing the application or service.",
-          "suggestion": "The correct translation should convey the meaning of user authorization. A more appropriate phrase would be something like \"icazə verin\" (give permission/authorize) or \"təsdiqləyin\" (confirm/validate) or \"məni icazə et\" (allow me - but in a user context)."
+          "description": "The word 'icazə verin' translates to 'allow' or 'give permission'. While technically correct, a more natural phrasing for prompting authorization would be 'icazə verin' or 'rüxsət edin'.",
+          "suggestion": "Bu otaq <1>{{roomMode}}</1> rejimində açılıb. Sənədlər üzərində işləmək üçün rüxsət edin."
         }
       ],
       "approved_at": null
@@ -63,7 +68,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets `<1>` and `</1>` are inconsistent with German capitalization conventions. The opening tag should be `<1>`, and the closing tag should be `</1>`.",
+          "suggestion": "Change `<1>` to `<1>` and `</1>` to `</1>`."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -72,8 +83,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"εξουσιοδοτήστε την πρόσβαση\" (authorize access) is a bit too literal and doesn't flow naturally in Greek. A more natural phrasing would be closer to 'παρακαλούμε εξουσιοδοτήστε' or simply 'εξουσιοδοτήστε'.",
-          "suggestion": "Εξουσιοδοτήστε."
+          "description": "The phrase \"εξουσιοδοτήστε την πρόσβαση\" (authorize access) is not the most natural or direct translation of \"authorize.\" A more natural translation would be something like \"εξουσιοδοτήστε\" or \"παρακαλούμε εξουσιοδοτήστε\".",
+          "suggestion": "Αυτό το δωμάτιο έχει ανοίξει στη λειτουργία <1>{{roomMode}}</1>. Για να μπορέσετε να εργαστείτε σε έγγραφα, εξουσιοδοτήστε."
         }
       ],
       "approved_at": null
@@ -84,8 +95,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The verb 'autorícese' is used, which is a reflexive command form ('authorize yourself'). A more natural and direct translation for 'authorize' in this context would be 'permita' (allow) or 'autoriza' (authorize).",
-          "suggestion": "Esta sala está abierta en el modo <1>{{roomMode}}</1>. Para poder trabajar con documentos, por favor, permítale o autorízale."
+          "description": "The word 'autorícese' is a formal command form and may sound overly polite or awkward in this context. A more natural phrasing would be 'autorízate'.",
+          "suggestion": "autorízate"
         }
       ],
       "approved_at": null
@@ -96,8 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"pystyäksesi muokkaamaan asiakirjoja\" translates to 'to be able to edit documents'. The English implies 'to be able to work on documents', which is slightly broader. A more accurate translation might be something like 'voidaksesi työskennellä asiakirjojen kanssa'.",
-          "suggestion": "voidaksesi työskennellä asiakirjojen kanssa"
+          "description": "The phrase \"pystyäksesi muokkaamaan asiakirjoja\" is a bit awkward. While grammatically correct, it's not the most natural way to say \"to be able to work on documents\". A more fluent translation would be something like \"voidaksesi muokata asiakirjoja\" or \"jotta voit muokata asiakirjoja\".",
+          "suggestion": "Voidaksesi muokata asiakirjoja."
         }
       ],
       "approved_at": null
@@ -108,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'authorize' is translated as 'connecter' which doesn't accurately convey the meaning of authorization. 'Authorize' implies granting permission or access. 'Connecter' implies establishing a connection, which is different.",
-          "suggestion": "The correct translation for 'authorize' should be something like 'autoriser' or 'valider' depending on the specific nuance required.  Consider 'veuillez vous authentifier' to be more accurate."
+          "description": "The English 'authorize' is translated as 'connecter' (vous connecter). While 'connect' can imply authorization in some contexts, 'authorize' has a more specific meaning of granting permission. A more accurate translation might be 'autoriser' or 'valider'.",
+          "suggestion": "Replace 'vous connecter' with 'autoriser' or 'valider'."
         }
       ],
       "approved_at": null
@@ -120,13 +131,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"To be able to work on documents\" is translated as \"Փաստաթղթերի վրա աշխատելու համար\". While technically correct, a more natural and fluent translation in Armenian would be something like \"պետք է լիազորել\" (petk e liaxorvel) or \"աշխատելու համար անհրաժեշտ է լիազորել\" (ashxatelu hamar anhrazhesht e liaxorvel). The current translation feels a bit awkward.",
-          "suggestion": " փաստաթղթերի վրա աշխատելու համար պետք է լիազորել "
+          "description": "The translation of \"To be able to work on documents, please authorize\" is a bit literal and awkward. \"Authorize\" doesn't directly translate to a readily understood action in this context in Armenian. It sounds more like a formal authorization process than a simple permission to work.",
+          "suggestion": "Consider a more natural phrasing like: \"Փաստաթղթերով աշխատելու համար, խնդրում ենք յանձնել լիազորություն\" (For working with documents, please grant permission) or \"Փաստաթղթերով աշխատելու համար, թույլատրեք\" (For working with documents, please allow)."
         },
         {
           "type": "formatting",
-          "description": "The `<1>{{roomMode}}</1>` tags are correctly reproduced in the Armenian translation.",
-          "suggestion": "No change needed."
+          "description": "The HTML tags `<1>` and `</1>` are inconsistent. They should be `<1>` and `</1>`.",
+          "suggestion": "Correct the HTML tag to `<1>` and `</1>`."
         }
       ],
       "approved_at": null
@@ -137,13 +148,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"To be able to work on documents\" is translated as \"Per poter lavorare con i documenti\". A more natural and accurate translation would be \"Per poter lavorare sui documenti\" or \"Per poter modificare i documenti\". The use of 'con' implies working *with* documents, rather than *on* them.",
+          "description": "The English phrase 'To be able to work on documents' is not accurately translated. 'Per poter lavorare con i documenti' is a bit clunky. A more natural Italian phrasing would be 'Per poter lavorare sui documenti'.",
           "suggestion": "Per poter lavorare sui documenti"
         },
         {
           "type": "formatting",
-          "description": "The formatting tags <1>{{roomMode}}</1> are correctly reproduced in the Italian translation, indicating proper handling of the dynamic content.",
-          "suggestion": null
+          "description": "The HTML tags <1> and </1> are inconsistent with the English version. While the Italian version is valid, it’s best to maintain consistency with the source.",
+          "suggestion": "Consider standardizing HTML tags (e.g., using <span> or <div>) across both languages for maintainability."
         }
       ],
       "approved_at": null
@@ -151,7 +162,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are not consistently used in the Japanese translation, and should be identical to the English. While the opening tag is present, the closing tag is not correctly formatted.",
+          "suggestion": "Replace the closing tag with </1> to match the opening tag. The complete sentence should read: 「このルームは、<1>{{roomMode}}</1>モードで開かれます。ドキュメントで作業できるようにするには、認証してください。」"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -175,13 +192,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The tag `<1>` is present in both the English and Dutch content. Verify if this tag is used consistently in the application and if it's intended to be displayed as is or needs special handling.",
-          "suggestion": "Review application rendering of `<1>` tags. If it's intended to be displayed literally, it should be handled appropriately in the user interface. If not, consider removing or modifying the tag."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -208,8 +219,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'authorize' is translated as 'autentificați'. While 'autentificați' can mean authorize, in this context 'permiteți' would be more appropriate as it directly relates to granting permission to work on documents.",
-          "suggestion": "Această sală este deschisă în modul <1>{{roomMode}}</1>. Vă rugăm să ne permiteți pentru a putea lucra cu documente."
+          "description": "The English word 'authorize' is better translated as 'permiteți' or 'acordați permisiunea' rather than 'autentificați'. 'Autentificați' implies verifying identity, while 'authorize' in this context means giving permission to work on documents.",
+          "suggestion": "Această sală este deschisă în modul <1>{{roomMode}}</1>. Vă rugăm să ne acordați permisiunea pentru a putea lucra cu documente."
         }
       ],
       "approved_at": null
@@ -225,9 +236,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'opened in the <1>{{roomMode}}</1> mode' is not accurately reflected in the Sinhala translation. 'ආකාරයේ දී' (aakarayede) is a less natural way to express 'in mode' in this context. A more accurate translation would convey the mode as a state of being, rather than an action of being 'in'.",
+          "suggestion": "මෙම කාමරය <1>{{roomMode}}</1> ආකාරයේ වැඩ කිරීම සඳහා විවෘත වී ඇත. (Mēma kamarayā <1>{{roomMode}}</1> ākarayāde vēdika karimata sadaha vivruta ve ath.)"
+        },
+        {
           "type": "formatting",
-          "description": "The Sinhala translation does not include the <1> and </1> tags around the {{roomMode}} placeholder, as present in the English content. This might cause rendering issues.",
-          "suggestion": "Ensure the Sinhala translation includes the proper HTML tags: \"මෙම කාමරය <1>{{roomMode}}</1> ආකාරයේ දී විවෘත වී ඇත.\""
+          "description": "The Sinhala translation retains the HTML-like tags `<1>` and `</1>`. These tags are unnecessary and should be removed if they are not intended for display.",
+          "suggestion": "Remove the `<1>` and `</1>` tags."
         }
       ],
       "approved_at": null
@@ -241,7 +257,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Uredite pooblastilo\" is a bit clunky and doesn't fully capture the meaning of \"authorize.\" A more natural translation would be \"potrdite pooblastilo\" or \"odobrite pooblastilo\".",
+          "suggestion": "Ta soba je odprta v načinu <1>{{roomMode}}</1>. Za delo na dokumentih potrdite pooblastilo."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -250,8 +272,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'authorize' (English) is translated as 'пријавите' (Serbian Cyrillic), which translates to 'log in' or 'sign in'.  'Authorize' implies granting permission, not necessarily logging in. A more accurate translation would be 'овластите' (ovlastite) which means 'authorize'.",
-          "suggestion": "Ова соба је отворена у <1>{{roomMode}}</1> режиму. Да бисте могли да радите на документима, молимо вас да се овластите."
+          "description": "The English phrase \"authorize\" is not accurately translated by \"пријавите се\" (prijavite se) in Serbian. 'Authorize' implies granting permission, while 'пријавите се' means 'log in' or 'sign in'. A more accurate translation for 'authorize' would be 'овластите се' (ovlastite se) or 'дајте дозволу' (dajte dozvolu).",
+          "suggestion": "Replace 'пријавите се' with 'овластите се' or 'дајте дозволу'."
         }
       ],
       "approved_at": null
@@ -262,13 +284,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'prijavite' (log in/sign up) doesn't accurately convey the meaning of 'authorize' in this context. 'Authorize' implies granting permission, not necessarily creating an account.",
-          "suggestion": "Consider using 'odobrite' (approve) or 'dajte dozvolu' (give permission) instead of 'prijavite'."
-        },
-        {
-          "type": "formatting",
-          "description": "The `<1>{{roomMode}}</1>` tag is consistent with the English. It should be maintained in the translation.",
-          "suggestion": "Ensure that the formatting remains consistent with the source."
+          "description": "The word 'authorize' is translated as 'prijavite'. While 'prijavite' can mean 'log in', in the context of granting permissions to access documents, a more accurate translation would be 'autorizujte' or 'dajte dozvolu'. 'Prijavite' implies logging into an account, which isn't the intended meaning.",
+          "suggestion": "Ova soba je otvorena u <1>{{roomMode}}</1> režimu. Da biste mogli da radite na dokumentima, molimo vas da autorizujete."
         }
       ],
       "approved_at": null
@@ -278,9 +295,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The XML tags <1> and </1> are present in both the English and Turkish versions. While technically correct, they are unusual for a toast message and might indicate an artifact of the original content creation process. Consider removing them for cleaner presentation.",
-          "suggestion": "Remove the <1> and </1> tags from the Turkish translation, resulting in: \"Bu oda {{roomMode}} modunda açılmıştır. Belgeler üzerinde çalışabilmek için lütfen yetkilendirin.\""
+          "type": "incorrect_translation",
+          "description": "The translation of \"To be able to work on documents\" is too literal. A more natural Turkish phrasing would be \"Belgeler üzerinde çalışmak için\".",
+          "suggestion": "Belgeler üzerinde çalışmak için lütfen yetkilendirin."
         }
       ],
       "approved_at": null
@@ -302,9 +319,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'To be able to work on documents' is better translated as '以便编辑文档' or '为了编辑文档' instead of '请授权以编辑文档'. The latter implies authorization is *for* editing, rather than a prerequisite.",
-          "suggestion": "此房间以<1>{{roomMode}}</1>模式打开。为了编辑文档，请授权。"
+          "type": "formatting",
+          "description": "The angle brackets <1> and </1> are present in both the English and Chinese versions. It's crucial to ensure consistency in formatting across all translations to avoid rendering issues within the application.",
+          "suggestion": "Verify that the formatting tags are correctly interpreted and rendered in the Chinese interface. If not, consider adapting the tag or removing if unnecessary."
         }
       ],
       "approved_at": null

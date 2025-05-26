@@ -3,7 +3,7 @@
   "content": "Operations with existing files: viewing, form filling, reviewing, commenting.",
   "content_en_sha1_hash": "3474de7fd9cdc6860caeafd949a5852e84fd6ac8",
   "created_at": "2025-05-19T21:30:48.039Z",
-  "updated_at": "2025-05-22T11:56:37.903Z",
+  "updated_at": "2025-05-23T23:12:37.004Z",
   "comment": {
     "text": "This translation key provides a description of operations related to existing files, including viewing, form filling, reviewing, and commenting. It is used in UI elements where file management options are displayed, such as buttons or dialogs. Translators should focus on conveying a comprehensive overview of these file-related actions in different languages.",
     "is_auto": true,
@@ -30,7 +30,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'form filling' is translated as 'ملء النماذج' which literally means 'filling forms'. While understandable, a more natural translation for a user interface context might be 'إدخال البيانات في النماذج' (entering data into forms) or 'تعبئة النماذج' (completing forms).",
+          "description": "The phrase 'form filling' is not accurately conveyed by 'ملء النماذج'. A more precise translation would be 'تعبئة النماذج' which implies filling out a form.",
           "suggestion": "تعبئة النماذج"
         }
       ],
@@ -39,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'form filling' is translated as 'formaları doldurmaq'. While technically correct, a more natural and idiomatic translation in Azerbaijani might be 'formu doldurma'. The plural 'formaları' implies multiple forms, while the English doesn't specify that.",
-          "suggestion": "formu doldurma"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -54,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'ревю' is not a standard term for 'review' in Bulgarian. It's more commonly used in a fashion or film review context.",
-          "suggestion": "Преглед"
+          "description": "The English term 'review' is translated as 'ревю'. While 'ревю' exists in Bulgarian, it's more commonly associated with fashion shows or product launches. A more appropriate translation for 'reviewing' in this context (referring to document review) would be 'преразглеждане' or 'проверка'.",
+          "suggestion": "Replace 'ревю' with 'преразглеждане' or 'проверка'."
         }
       ],
       "approved_at": null
@@ -66,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'prohlížení' appears twice. The English content uses 'viewing' only once, but the Czech translation repeats it. This is likely a redundant translation.",
-          "suggestion": "Remove the second instance of 'prohlížení' to match the English content more accurately. A more concise option would be: 'Operace s existujícími soubory: prohlížení, vyplňování formulářů, revize, komentování.'"
+          "description": "The word 'prohlížení' is repeated. It translates to 'viewing' and is present twice in the Czech translation, while it only appears once in the English.",
+          "suggestion": "Operace s existujícími soubory: prohlížení, vyplňování formulářů, revize, komentování."
         }
       ],
       "approved_at": null
@@ -96,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"lomakkeen arkistointi\" is an awkward translation of \"form filling.\" \"Arkistointi\" means archiving, not filling out a form.",
-          "suggestion": "lomakkeen täyttö"
+          "description": "The phrase \"lomakkeen arkistointi\" translates more closely to 'form archiving' rather than 'form filling'.",
+          "suggestion": "lomakkeen täyttäminen"
         }
       ],
       "approved_at": null
@@ -114,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation uses a hyphen (-) to separate phrases within the list, which is not idiomatic Armenian for this context. A comma (,) or a more natural phrasing would be preferred.",
-          "suggestion": "Consider replacing the hyphens with commas or rephrasing the sentence for better flow. For example, 'Գործողություններ գոյություն ունեցող ֆայլերով. Դիտում, ձևի լրացում, վերանայում և մեկնաբանում:'"
+          "description": "The Armenian translation uses a hyphenated list with '՝' which can be slightly awkward in this context. A simple comma-separated list might read better.",
+          "suggestion": "Գործողություններ գոյություն ունեցող ֆայլերով՝ դիտում, ձևի լրացում, վերանայում, մեկնաբանում:  -> Գործողություններ գոյություն ունեցող ֆայլերով՝ դիտում, ձևի լրացում, վերանայում և մեկնաբանում:"
         }
       ],
       "approved_at": null
@@ -156,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'bekijken' is repeated. The English 'reviewing' translates to 'controleren' or 'nazien', not 'bekijken'.",
-          "suggestion": "Bewerkingen met bestaande bestanden: bekijken, formulieren invullen, controleren/nazien, opmerkingen plaatsen."
+          "description": "The word \"bekijken\" is repeated. It translates to \"viewing\" in English, and should only appear once.",
+          "suggestion": "Bewerkingen met bestaande bestanden: bekijken, formulieren invullen, beoordelen, opmerkingen plaatsen."
         }
       ],
       "approved_at": null
@@ -192,7 +186,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'reviewing' is repeated in the Russian translation. It appears as 'просмотр' twice, which is redundant. It should reflect the intended meaning of 'reviewing' (examining, assessing) and not just 'viewing'.",
+          "description": "The Russian translation repeats 'просмотр' (viewing). It should only appear once, as it's redundant.",
           "suggestion": "Операции с существующими файлами: просмотр, заполнение форм, рецензирование, комментирование."
         }
       ],
@@ -204,13 +198,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ආකෘතිපත්‍ර' (aakruthipathra) is a valid word but could be more clearly expressed as 'ගොනුව පිරවීම' (gonuwa pirivamu) to better convey 'form filling'.",
-          "suggestion": "පවතින ගොනුවල මෙහෙයුම්: බැලීම්, ගොනුව පිරවීම, සමාලෝචන, අදහස් දැක්වීම්."
+          "description": "The word 'ආකෘතිපත්‍ර' (aakruthipatra) is a direct transliteration of 'form' and might be slightly less natural. While understandable, a more idiomatic Sinhala word for 'form' in this context could be considered.",
+          "suggestion": "Consider using a more contextually appropriate term for 'form' in Sinhala, perhaps something like 'පත්‍රපත්‍ර' (pathrapatra) or a more specific term depending on the intended meaning. Research common terminology in this specific domain."
         },
         {
           "type": "grammar",
-          "description": "The word 'පිරවීම්' (pirivamu) is in plural form, but 'form filling' is a single action. While not incorrect, using the singular 'පිරවීම' is more grammatically aligned with the English.",
-          "suggestion": "පවතින ගොනුවල මෙහෙයුම්: බැලීම්, ගොනුව පිරවීම, සමාලෝචන, අදහස් දැක්වීම්."
+          "description": "The use of 'පිරවීම්' (piravimvim) is grammatically correct but slightly verbose. A more concise phrasing might improve readability.",
+          "suggestion": "Consider rephrasing 'ආකෘතිපත්‍ර පිරවීම්' to something like 'ආකෘතිපත්‍ර පිරීම' or 'පත්‍ර පිරීම' for a more natural flow."
         }
       ],
       "approved_at": null
@@ -233,13 +227,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Операције' is transliterated from 'Operations' and is spelled correctly, but in this context, a more common and natural-sounding equivalent might be 'Рад' or 'Задаци'.",
+          "description": "The word 'Операције' (Operacije) is technically correct, but a more natural phrasing in this context might be 'Рад са' (Rad sa - Work with).",
           "suggestion": "Рад са постојећим датотекама: прегледање, попуњавање образаца, рецензирање, коментарисање."
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'рецензирање' is technically correct for 'reviewing,' it carries a more formal connotation of critical review. A more general and appropriate translation for the context of form filling might be 'провера'.",
-          "suggestion": "Операције са постојећим датотекама: прегледање, попуњавање образаца, провера, коментарисање."
+          "description": "While 'прегледање' (pregledanje) is a valid translation for 'viewing', 'отварање' (otvaranje - opening) or 'гледање' (gledanje - looking) might be more appropriate depending on the context of the file.",
+          "suggestion": "Рад са постојећим датотекама: отварање, попуњавање образаца, рецензирање, коментарисање."
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Cannot add new users and create new rooms. {{planName}} plan payment overdue.",
   "content_en_sha1_hash": "fa9bae2b30f00fea469d3bfc47d892abbfb2ab10",
   "created_at": "2025-05-19T21:30:53.657Z",
-  "updated_at": "2025-05-21T06:45:48.098Z",
+  "updated_at": "2025-05-24T06:59:47.114Z",
   "comment": {
     "text": "This translation key is used to display a message when a business plan's payment is overdue, informing users that they cannot add new users or create new rooms. The message appears in a dialog box (specifically, an Invite Quota Warning Dialog) and provides context about the specific business plan that is due for payment.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'create new rooms' is a bit awkward in Arabic. A more natural phrasing would be 'إنشاء غرف جديدة' instead of just 'إنشاء غرف جديدة'. Although technically correct, it sounds slightly robotic.",
-          "suggestion": "لا يمكن إضافة مستخدمين جدد وإنشاء غرف جديدة."
+          "description": "The English phrase \"Cannot add new users and create new rooms\" is not perfectly conveyed. \"لا يمكن إضافة مستخدمين جدد وإنشاء غرف جديدة\" is a literal translation that is grammatically correct but a bit clunky in Arabic. A more natural phrasing would emphasize the inability to perform those actions.",
+          "suggestion": "لا يمكنك إضافة مستخدمين جدد أو إنشاء غرف جديدة."
         }
       ],
       "approved_at": null
@@ -45,7 +45,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Cannot add new users and create new rooms' is accurately translated as 'Не могат да се добавят нови потребители и да се създават нови стаи'. However, a more natural and common phrasing in Bulgarian might be to combine the actions into a single sentence, for better flow. While technically correct, it feels slightly robotic.",
+          "suggestion": "Не могат да се добавят нови потребители или да се създават нови стаи."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -54,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'is overdue' in the English content is better translated as something conveying a state of being past the due date, rather than just stating 'is overdue'. While 'je po splatnosti' is technically correct, it doesn't fully capture the urgency implied by 'overdue'.",
-          "suggestion": "Consider using 'je prošlá' or 'má zaplacení po splatnosti' to better convey the meaning of 'overdue'."
+          "description": "The English phrase 'plan' is best translated as 'tarif' in this context. While 'plán' is a valid Czech word, 'tarif' is more commonly used for subscription plans.",
+          "suggestion": "Nelze přidávat nové uživatele a vytvářet nové místnosti. Platba za tarif {{planName}} je po splatnosti."
         }
       ],
       "approved_at": null
@@ -71,9 +77,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Greek translation includes a space before the `{{planName}}` placeholder, which may not be consistent with the English version.",
-          "suggestion": "Remove the space before `{{planName}}`."
+          "type": "spelling",
+          "description": "The word 'προγράμματος' should be 'σχεδίου'. While 'προγράμματος' can sometimes be used, 'σχεδίου' is more appropriate in this context referring to a business plan.",
+          "suggestion": "Δεν είναι δυνατή η προσθήκη νέων χρηστών και η δημιουργία νέων δωματίων. Η πληρωμή του σχεδίου {{planName}} έχει καθυστερήσει"
         }
       ],
       "approved_at": null
@@ -90,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'ohjelman maksu' (program's payment) is not the most natural way to express 'plan payment' in this context. A more accurate and idiomatic translation would be something like 'tilaus maksun' (subscription payment) or 'suunnitelman maksun' (plan's payment).",
-          "suggestion": "Et voi lisätä uusia käyttäjiä tai luoda uusia huoneita. {{planName}} tilaus maksun/suunnitelman maksun on myöhässä."
+          "description": "The term 'ohjelman' is a bit vague. It translates to 'program' but in the context of a plan, 'suunnitelman' would be more accurate and natural. 'Ohjelman' implies a structured program rather than a payment plan.",
+          "suggestion": "Et voi lisätä uusia käyttäjiä tai luoda uusia huoneita. {{planName}} suunnitelman maksu myöhässä"
         }
       ],
       "approved_at": null
@@ -102,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'plan payment overdue' is not the most natural way to express that the plan payment is overdue in French. A more common and fluent phrasing would be 'paiement du plan échue' or 'paiement du plan impayé'.",
-          "suggestion": "Impossible d’ajouter de nouveaux utilisateurs et de créer de nouvelles salles. {{planName}} paiement du plan échue."
+          "description": "The phrase 'plan payment overdue' is not the most natural way to express this in French. A more idiomatic translation would be 'paiement du plan échue' or 'paiement du plan impayé'.",
+          "suggestion": "paiement du plan impayé"
         }
       ],
       "approved_at": null
@@ -111,13 +117,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Հնարավոր չէ ավելացնել նոր օգտվողներ և ստեղծել նոր սենյակներ' is a correct translation of 'Cannot add new users and create new rooms', but it lacks the nuance of conveying a restriction due to overdue payment. A more accurate translation might convey that the inability to add users/rooms *is a direct result* of the overdue payment.",
-          "suggestion": "Հնարավոր չէ ավելացնել նոր օգտվողներ և ստեղծել նոր սենյակներ՝ քանի որ {{planName}} պլանի վճարումը ժամկետանց է։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Italian translation 'Pagamento del piano {{planName}} è scaduto' sounds slightly awkward. A more natural phrasing would be 'Il pagamento del piano {{planName}} è scaduto.'",
-          "suggestion": "Il pagamento del piano {{planName}} è scaduto."
+          "description": "The phrase 'Pagamento del piano {{planName}} è scaduto' could be improved for better flow and naturalness. The use of 'è scaduto' is technically correct but sounds slightly awkward.",
+          "suggestion": "Pagamento del piano {{planName}} non è stato effettuato."
         }
       ],
       "approved_at": null
@@ -141,7 +141,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"새 방을 만들 수 없습니다\" could be improved for clarity. While technically correct, it's a bit stiff. A more natural phrasing would better convey the meaning of 'create new rooms'.",
+          "suggestion": "새 방을 생성할 수 없습니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -149,9 +155,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ເກີນກຳນົດ' (gern kamnod) can be slightly improved. While technically correct, 'ໝົດກຳນົດ' (mod kamnod) or 'ສິ້ນສຸດກຳນົດ' (sin sut kamnod) might be more natural and common for 'overdue' in this context. It sounds more urgent and direct.",
-          "suggestion": "ປ່ຽນ 'ເກີນກຳນົດ' ເປັນ 'ໝົດກຳນົດ' ຫຼື 'ສິ້ນສຸດກຳນົດ'."
+          "type": "incorrect_translation",
+          "description": "The phrase \"plan payment overdue\" is not the most natural translation for the English content. A more idiomatic Lao translation would convey the urgency and meaning of overdue payment more accurately.",
+          "suggestion": "Consider: \"ການຈ່າຍເງິນແຜນການໝົດເວລາ\" or \"ການຈ່າຍເງິນແຜນການຄ້າງຊໍາລະ\""
+        },
+        {
+          "type": "formatting",
+          "description": "While the {{planName}} placeholder is correctly maintained, ensuring consistent use of Lao punctuation and spacing (if any) in the final rendered version is recommended for overall text appearance.",
+          "suggestion": "Review the overall style guide for Lao text formatting."
         }
       ],
       "approved_at": null
@@ -162,13 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'plānojiet' (plan) doesn't fit the context. It should be related to the payment being overdue, not a general plan.",
-          "suggestion": "Nevar pievienot jaunus lietotājus un izveidot jaunas telpas. {{planName}} maksājums kavējas."
-        },
-        {
-          "type": "formatting",
-          "description": "The space before 'maksājums' in the suggested translation needs to be consistent with other sentences.",
-          "suggestion": "Nevar pievienot jaunus lietotājus un izveidot jaunas telpas. {{planName}} maksājums kavējas."
+          "description": "The phrase 'plānojiet nokavēto maksājumu' is not the most natural way to express \"plan payment overdue\". It translates to something like 'plan the overdue payment'. A more accurate translation would be something like '{{planName}} plāna maksājums kavējas' or '{{planName}} plāna maksājums ir kavēts'.",
+          "suggestion": "Consider alternatives such as '{{planName}} plāna maksājums kavējas' or '{{planName}} plāna maksājums ir kavēts'."
         }
       ],
       "approved_at": null
@@ -179,8 +185,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'is te laat' is a literal translation of 'is overdue' and doesn't flow naturally in Dutch. A better translation would convey the meaning of being past the due date.",
-          "suggestion": "The translation should be revised to something like 'achterstallige betaling' (outstanding payment) or 'betaling is niet op tijd' (payment is not on time)."
+          "description": "The phrase 'is te laat' (is too late) doesn't perfectly convey the urgency or seriousness of a payment overdue. A more accurate translation would emphasize the overdue status, such as 'is achterstallig' (is in arrears) or 'is niet betaald' (is unpaid).",
+          "suggestion": "Kan geen nieuwe gebruikers toevoegen en nieuwe kamers aanmaken. {{planName}} plan betaling is achterstallig."
         }
       ],
       "approved_at": null
@@ -188,13 +194,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Cannot add new users and create new rooms' translates more accurately as 'Brak możliwości dodawania nowych użytkowników i tworzenia nowych pokoi.' or 'Nie można dodawać nowych użytkowników ani tworzyć nowych pokoi.' The current translation 'Nie można dodać nowych użytkowników ani utworzyć nowych pokoi.' uses the incorrect verb tense and a slightly awkward wording.",
-          "suggestion": "Nie można dodawać nowych użytkowników ani tworzyć nowych pokoi."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -203,7 +203,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'o prazo de pagamento para o seu plano expirou' is a literal translation of 'plan payment overdue' but doesn't convey the meaning as naturally in Portuguese. It sounds overly formal and technical. A more natural phrasing would be something along the lines of 'o pagamento do seu plano está em atraso'.",
+          "description": "The phrase 'plan payment overdue' is translated as 'o prazo de pagamento para o seu plano expirou'. While technically correct, it's more naturally translated as 'o pagamento do seu plano está em atraso' or 'seu plano está com o pagamento atrasado'. The current translation is a bit clunky and less conversational.",
           "suggestion": "o pagamento do seu plano está em atraso"
         }
       ],
@@ -220,9 +220,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase \"create new rooms\" is better translated as \"crearea de camere noi\" or \"creare camere noi\" to sound more natural in Romanian. While \"de creat săli noi\" is grammatically correct, it's less common and slightly awkward.",
+          "suggestion": "Imposibil de adăugat utilizatori noi şi de creat camere noi. Restanță de plată abonament {{planName}}."
+        },
+        {
           "type": "formatting",
-          "description": "The sentence structure in Romanian is a bit clunky. It could be improved for better flow.",
-          "suggestion": "Imposibil de adăugat utilizatori noi sau de creat săli noi. Restanță de plată pentru abonamentul {{planName}}."
+          "description": "While technically correct, the Romanian translation uses a conjunction ('şi') that might be slightly less fluid. Consider rephrasing for a smoother flow.",
+          "suggestion": "Imposibil de adăugat utilizatori noi şi de creat camere noi. Restanță de plată abonament {{planName}}."
         }
       ],
       "approved_at": null
@@ -233,7 +238,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb 'create' ('создавать') should agree in tense with 'add' ('добавить'). Both verbs should be in the present tense.",
+          "description": "The verb 'create' is in the infinitive form 'create'. It should be conjugated to match the subject (we/they/etc.). Considering this is a system message, a more appropriate verb form might be 'создавать' (sozdavat').",
           "suggestion": "Невозможно добавить новых пользователей и создавать новые комнаты. Просрочена оплата {{planName}} плана."
         }
       ],
@@ -244,14 +249,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Cannot add new users and create new rooms\" is not accurately reflected in the Sinhala translation. While the general meaning is conveyed, the sentence structure and word choice feel awkward and less natural in Sinhala. A more natural rendering would consider separating the two actions into distinct clauses or using a different phrasing to improve readability.",
-          "suggestion": "Possible suggestions include: \"නව පරිශ්‍රීලකයින් එක් කිරීමටවත්, නව කාමර සාදා ගැනීමටවත් නොහැකිය. {{planName}} සැලසුමට ගෙවීම ප්‍රමාද බැවින්.\" or \"{{planName}} සැලසුමට ගෙවීම ප්‍රමාද බැවින්, ඔබට නව පරිශ්‍රීලකයින් එක් කිරීමට හෝ නව කාමර සාදා ගැනීමට නොහැකිය.\" "
-        },
-        {
           "type": "formatting",
-          "description": "The use of \"{{planName}}\" is consistent, but consider if this variable name should be localized for Sinhala contexts if applicable.",
-          "suggestion": "Check if the variable name 'planName' is appropriate for Sinhala localization."
+          "description": "The Sinhala translation includes a double space before 'නව'.",
+          "suggestion": "Remove the extra space before 'නව'."
         }
       ],
       "approved_at": null
@@ -262,8 +262,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'payment overdue' is better translated as 'nezaplatená' or 'oprávnenie je nezaplatené' rather than 'je po splatnosti'. 'Je po splatnosti' implies a scheduled payment, while 'overdue' indicates a missed payment.",
-          "suggestion": "Nie je možné pridávať nových používateľov a vytvárať nové miestnosti. Splátka plánu {{planName}} je nezaplatená."
+          "description": "The English phrase \"planName\" is correctly represented as \"planName\" in the Slovak translation. However, the English phrase 'overdue' is not accurately translated. 'Po splatnosti' implies 'after the due date', but a more accurate term to convey the 'overdue' state might be 'nesplatená' (unpaid).",
+          "suggestion": "Nie je možné pridávať nových používateľov a vytvárať nové miestnosti. Splátka plánu {{planName}} je nesplatená."
         }
       ],
       "approved_at": null
@@ -274,13 +274,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'planName' is translated as 'naročniškega paketa'. While technically correct, 'naročniškega paketa' is quite formal. A more natural and common translation for 'plan' in this context would be 'račun'.",
-          "suggestion": "Ni mogoče dodati novih uporabnikov in ustvariti novih sob. Zapadlo plačilo {{planName}} računa."
-        },
-        {
-          "type": "formatting",
-          "description": "The Slovenian translation contains a slightly awkward phrasing. While not incorrect, restructuring the sentence for better flow could improve readability. Specifically, 'Zapadlo plačilo {{planName}} računa' could be improved.",
-          "suggestion": "Ni mogoče dodati novih uporabnikov in ustvariti novih sob. Plačilo za {{planName}} račun je zapadlo."
+          "description": "The phrase \"Zapadlo plačilo naročniškega paketa\" is a literal translation of 'plan payment overdue' and could be improved for natural Slovenian. A more natural phrasing would be 'Zaradi zamika pri plačilu naročniškega paketa' or 'Plačilo naročniškega paketa je zamaknjeno'.",
+          "suggestion": "Plačilo naročniškega paketa je zamaknjeno."
         }
       ],
       "approved_at": null
@@ -291,13 +286,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Наплата за план {{planName}} је каснила\" is a somewhat literal and slightly awkward translation of '{{planName}} plan payment overdue'. A more natural translation would convey the overdue status more directly.",
-          "suggestion": "Наплата за план {{planName}} је доспела/затекла."
-        },
-        {
-          "type": "formatting",
-          "description": "The Serbian translation uses a full stop at the end of the sentence, while the English original does not.",
-          "suggestion": "Remove the full stop at the end of the translated text."
+          "description": "The phrase 'payment overdue' is not accurately translated. 'Je kasnila' implies the payment was late, but doesn't convey the sense of being overdue and preventing actions. A more accurate translation would convey the consequence of the overdue payment.",
+          "suggestion": "Није могуће додати нове кориснике и креирати нове собе. Плаћање за план {{planName}} је зачечено/протекло рока."
         }
       ],
       "approved_at": null
@@ -308,8 +298,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Naplata za plan {{planName}} je kasnila\" is not the most natural or accurate translation of \"plan payment overdue\". A more direct and common way to express this in Serbian would be \"Dug za plan {{planName}} nije plaćen\" or \"Plaćanje za plan {{planName}} je neplaćeno\".",
-          "suggestion": "Dug za plan {{planName}} nije plaćen."
+          "description": "The phrase 'payment overdue' is translated as 'Naplata za plan ... je kasnila.' which literally means 'The payment for plan ... has been late'. A more accurate translation would convey the idea that the payment *is* overdue, not just that it has been late at some point.",
+          "suggestion": "Nije moguće dodati nove korisnike i kreirati nove sobe. Ispraznjen je račun za plan {{planName}}."
         }
       ],
       "approved_at": null
@@ -338,7 +328,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'plan' is translated as '版本' (version) which isn't the best fit. 'plan' refers to a business plan or subscription level. A more appropriate translation would be something like '套餐' (套餐 - package/plan) or '会员计划' (会员计划 - membership plan).",
+          "description": "The English phrase 'plan' is translated as '版本' (version). While technically not incorrect, '版本' can imply a software version, not a subscription plan. A more accurate translation would be '套餐' (táozhān) for 'plan' in this context.",
           "suggestion": "无法添加新用户并新建房间。{{planName}}套餐付款已逾期。"
         }
       ],

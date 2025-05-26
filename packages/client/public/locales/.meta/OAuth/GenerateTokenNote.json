@@ -3,7 +3,7 @@
   "content": "<strong>Note:</strong> If you generate a new token, the previous one will no longer be valid.",
   "content_en_sha1_hash": "f521006595ab27df60cadaa644588ccfca4ed058",
   "created_at": "2025-05-19T21:30:53.897Z",
-  "updated_at": "2025-05-21T07:12:34.809Z",
+  "updated_at": "2025-05-24T07:26:43.327Z",
   "comment": {
     "text": "This translation key is used to display a note that informs users about the implications of generating a new token, explaining that the previous one will become invalid. It appears in a dialog component, specifically below a button related to OAuth token generation. The goal is to provide context for translators to ensure that this message accurately communicates its meaning and purpose in different languages.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"will no longer be valid\" is a bit literal and could be improved for naturalness in Azerbaijani. A more idiomatic translation might convey the idea that the old token will be deactivated or unusable.",
+          "suggestion": "Yeni token yaratdıqda, əvvəlki token keçəriliyi itirəcək."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -87,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag is missing before \"Նշում.\" to match the English version's use of strong tags.",
+          "suggestion": "Add a strong tag around Նշում: <strong>Նշում.</strong>"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -111,23 +123,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word \"ໂຕ໊ກເກີ້ນ\" is potentially misspelled. It seems to be trying to convey 'token', but the spelling is unusual. It's possible it's a dialectal variation, but confirmation would be needed.",
-          "suggestion": "Investigate if \"ໂຕ໊ກເກີ້ນ\" is the correct spelling in the target dialect, or use a more standard Lao equivalent like \"ໂຕ໊ກເຄັນ\" or \"ໂທເຄັນ\"."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While the general meaning is conveyed, \"ຈະບໍ່ຖືກຕ້ອງອີກຕໍ່ໄປ\" can be improved for a more natural Lao flow.  It's a bit literal.",
-          "suggestion": "Consider alternatives like \"ມັນຈະໝົດອາຍຸ\" (it will expire) or \"ມັນຈະໃຊ້ງານບໍ່ໄດ້ອີກ\" (it will no longer work)."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of strong tags is replicated from the English. While acceptable, ensuring consistency with the overall Lao style guide is advised.",
-          "suggestion": "Review the Lao style guide to determine the appropriate way to handle emphasis in translated content.  Consider alternatives to the strong tag if applicable."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -136,8 +132,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"marķieri\" is a generic term for a marker, not a token. \"Token\" should be translated more accurately to something like 'atslēga' (key) or 'norīkošanas kods' (authorization code).",
-          "suggestion": "Consider using 'atslēga' or 'norīkošanas kods' instead of 'marķieri'."
+          "description": "The word 'marķieri' is a less precise translation of 'token' in this context. While it can mean a token or mark, it's not the standard term for an OAuth token.",
+          "suggestion": "Consider using 'atzekmes kods' or 'atzekmes ziņa' for a more accurate translation of 'token'."
+        },
+        {
+          "type": "formatting",
+          "description": "The Latvian translation maintains the strong tag, which is appropriate, but ensure consistency with other similar notes in the application.",
+          "suggestion": "Verify consistent use of strong tags for similar notes."
         }
       ],
       "approved_at": null
@@ -184,8 +185,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word ' වලංගු නොවනු ඇත' (valangu novanu ath) is a bit too formal and literal for a user-facing note. A more natural and user-friendly translation for 'no longer be valid' would be something like 'අවලංගු වනු ඇත' (avalangu vanu ath) or 'ඉක්මතු නොවනු ඇත' (ikmathu novanu ath).",
-          "suggestion": "Replace 'වලංගු නොවනු ඇත' with 'අවලංගු වනු ඇත' or 'ඉක්මතු නොවනු ඇත'."
+          "description": "The phrase \"පෙර ටොකන් එක\" (pera token eka) is a literal translation of 'previous token'. While understandable, a more natural Sinhala phrasing would be something like \"පසු වූ ටොකන්\" (pasuwo token) or \"පරණ ටොකන්\" (parana token).",
+          "suggestion": "Consider replacing \"පෙර ටොකන් එක\" with \"පසු වූ ටොකන්\" or \"පරණ ටොකන්\"."
         }
       ],
       "approved_at": null
@@ -207,14 +208,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The word 'token' is transliterated as 'токеn' instead of the more commonly used Serbian word for token, 'решавање аутентификације'.",
-          "suggestion": "Consider using 'решавање аутентификације' or a similar, more natural Serbian term for 'token'. Alternatively, if 'token' is intended to be an Anglicism, consider retaining the transliteration but ensuring consistency throughout the application."
+          "type": "spelling",
+          "description": "The word 'token' is misspelled in the Serbian translation. It should be 'токен' (token).",
+          "suggestion": "токен"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'will no longer be valid' is translated as 'више неће бити валидан'. A more natural translation might be 'неће бити важећи'.",
-          "suggestion": "Consider using 'неће бити важећи' instead of 'више неће бити валидан'."
+          "type": "grammar",
+          "description": "The phrase 'претходни више неће бити валидан' could be improved for a more natural flow. A better phrasing would incorporate the passive voice more smoothly.",
+          "suggestion": "претходни токени више неће бити валидни."
         }
       ],
       "approved_at": null
@@ -234,7 +235,18 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'marker' (маркер) is not the standard translation for 'token' in this context. 'Токен' is the preferred term for OAuth tokens.",
+          "suggestion": "Replace 'маркер' with 'токен'."
+        },
+        {
+          "type": "formatting",
+          "description": "The Ukrainian translation maintains the strong tag. It should be verified if this is the intended formatting in the UI.",
+          "suggestion": "Review the use of the 'strong' tag in the Ukrainian UI to ensure consistency with English."
+        }
+      ],
       "approved_at": null
     },
     "vi": {

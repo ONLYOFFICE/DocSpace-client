@@ -52,7 +52,7 @@ const Footer = ({
               isAbortTransfer && percent !== 100
                 ? t("DataReassignmentDialog:StartTransferAgain")
                 : percent === 100
-                  ? t("Common:OkButton")
+                  ? t("Common:OKButton")
                   : t("DataReassignmentDialog:AbortTransfer")
             }
             size="normal"

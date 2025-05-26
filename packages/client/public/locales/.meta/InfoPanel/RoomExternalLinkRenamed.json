@@ -1,0 +1,260 @@
+{
+  "key_path": "RoomExternalLinkRenamed",
+  "content": "Link <1>«{{oldLinkTitle}}»</1> renamed to <1>«{{linkTitle}}»</1>",
+  "content_en_sha1_hash": "21f8bbe2e723f0d28d57598de084970a742352cf",
+  "created_at": "2025-05-19T21:30:54.916Z",
+  "updated_at": "2025-05-21T09:54:05.349Z",
+  "comment": {
+    "text": "This translation key is used to display a notification when a room's external link has been renamed. The notification will show a before-and-after comparison of the old and new link titles. It appears in the UI for the \"Room External Link\" feature.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:49.333Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
+      "line_number": 180,
+      "context": "return t(\"InfoPanel:RoomLogoChanged\");\n case \"RoomLogoDeleted\":\n return t(\"InfoPanel:RoomLogoChanged\");\n case \"RoomExternalLinkCreated\":\n return t(\"InfoPanel:RoomExternalLinkCreated\");\n case \"RoomExternalLinkRenamed\":\n return (\n <Trans\n t={t}\n ns=\"InfoPanel\"\n i18nKey=\"RoomExternalLinkRenamed\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'renamed to' is not directly translated. 'olaraq dəyişdirildi' translates to 'was changed to', which doesn't convey the meaning of renaming as clearly as a more direct equivalent.",
+          "suggestion": "Consider a more direct translation of 'renamed to', such as 'yenidən adlandırıldı' or 'adını dəyişdirərək'."
+        },
+        {
+          "type": "formatting",
+          "description": "The English content uses <1>«{{...}}</1> consistently for the link titles. The Azerbaijani translation lacks the opening <1> for the second occurrence of the link title.",
+          "suggestion": "Add the opening <1> tag before «{{linkTitle}}» to match the English format:  <1>«{{linkTitle}}»</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The verb 'renamed' should be translated as 'rinominato' rather than 'rinominato <1>«{{linkTitle}}»</1>'. The repetition is unnecessary and grammatically incorrect.",
+          "suggestion": "Link <1>«{{oldLinkTitle}}»</1> è stato rinominato <1>«{{linkTitle}}»</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The closing angle bracket `>` is missing a closing quotation mark. It should be `</1>」",
+          "suggestion": "Change `</1>` to `</1>」"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"이름이 ... 로 변경되었습니다\" (im-i ...-ro byeon-gyeong-doeot-seumnida) literally translates to \"... has been changed to...\" which while understandable, sounds a bit formal and indirect for a notification about a link renaming. A more natural and concise phrasing would be preferable.  Consider something like \"... 로 변경되었습니다\" or \"로 바뀌었습니다\" (bwa-gyeot-seumnida).",
+          "suggestion": "Consider replacing \"링크의 이름이 ... 로 변경되었습니다\" with a more natural phrasing like \"... 로 변경되었습니다\" or \"로 바뀌었습니다\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Link... renamed to...\" is not perfectly captured by \"Nazwa linku... została zmieniona na...\".  \"Nazwa linku\" translates to \"Name of the link\", while the original emphasizes a *link* being renamed.  A more accurate translation would emphasize the link itself being renamed.",
+          "suggestion": "Link <1>«{{oldLinkTitle}}»</1> został przemianowany na <1>«{{linkTitle}}»</1>"
+        },
+        {
+          "type": "formatting",
+          "description": "The formatting with <1> and «...» is maintained correctly in both languages.",
+          "suggestion": null
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"renamed to\" is not accurately conveyed. \"ලෙස\" (lesa) literally means 'as' and doesn't directly translate the concept of renaming. A better translation for 'renamed to' would involve expressing the change in naming more explicitly.",
+          "suggestion": "Consider replacing \"ලෙස\" with a phrase like \"නම් කරන ලදී\" (naam karan ladi) or a more contextually appropriate synonym for 'renamed'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Bağlantı <1>«{{oldLinkTitle}}»</1> <1>«{{linkTitle}}»</1> olarak yeniden adlandırıldı' literally translates to 'Link <1>«{{oldLinkTitle}}»</1> <1>«{{linkTitle}}»</1> was renamed'.  A more natural Turkish phrasing would be something like 'Bağlantı <1>«{{oldLinkTitle}}»</1>, <1>«{{linkTitle}}»</1> olarak yeniden adlandırıldı' or 'Bağlantı <1>«{{oldLinkTitle}}»</1> yeniden <1>«{{linkTitle}}»</1> olarak adlandırıldı'.",
+          "suggestion": "Bağlantı <1>«{{oldLinkTitle}}»</1>, <1>«{{linkTitle}}»</1> olarak yeniden adlandırıldı"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

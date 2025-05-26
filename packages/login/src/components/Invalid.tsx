@@ -89,6 +89,7 @@ const InvalidError = ({ match }: InvalidErrorProps) => {
           components={{
             1: (
               <Link
+                key="component_key"
                 className="error_description_link"
                 href={proxyHomepageUrl}
               />

@@ -1,0 +1,244 @@
+{
+  "key_path": "BusinessExpired",
+  "content": "Your {{planName}} plan has expired on {{date}}",
+  "content_en_sha1_hash": "6c8025a25cfabe6bab942a3aef22352d0c2445c0",
+  "created_at": "2025-05-19T21:30:53.652Z",
+  "updated_at": "2025-05-21T06:47:15.421Z",
+  "comment": {
+    "text": "This translation key is used to display a message when a Business plan has expired. It appears in a payment-related setting on a client's account page, indicating that a specific plan has ended and must be reevaluated. The exact wording may vary based on the specific plan details.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:17.179Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PaymentContainer.js",
+      "line_number": 191,
+      "context": "noSelect\n fontSize=\"16px\"\n isBold\n color={theme.client.settings.payment.warningColor}\n >\n <Trans t={t} i18nKey=\"BusinessExpired\" ns=\"Payments\">\n {{ date: gracePeriodEndDate }} {{ planName: tariffPlanTitle }}\n </Trans>\n </Text>\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'انتهت صلاحية' is a literal translation of 'expired'. A more natural phrasing for a subscription or plan expiration in Saudi Arabic might be 'تم انتهاء صلاحية' or 'انتهت مدة اشتراكك'.",
+          "suggestion": "انتهت مدة اشتراكك {{planName}} في {{date}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'plan' is better translated as 'план' (plan) rather than 'абонаментен план'. While 'абонаментен план' isn't incorrect, it's more verbose and less common in this context. 'план' is a more direct and natural translation.",
+          "suggestion": "Вашият план {{planName}} е изтекъл на {{date}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Czech translation uses 'dne' which implies a specific date format. It's recommended to check if this aligns with the expected date format in the user interface or application using this text. While grammatically correct, it might introduce confusion if the date is displayed in a different format.",
+          "suggestion": "Consider if the date format is consistent with the application/UI. If not, adjust the phrasing accordingly, potentially removing 'dne' and simply including the date."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ඔබගේ {{planName}} සැලසුම {{date}} දී ඉකුත් වී ඇත\" is a literal translation and may not be the most natural way to express the meaning in Sinhala. A more natural phrasing would emphasize the expiry and its impact.",
+          "suggestion": "ඔබගේ {{planName}} සැලසුම {{date}} වන විට අවසන් වී ඇත. (Obage {{planName}} selusuma {{date}} wana wita awasan wi etha.) - Your {{planName}} plan ended on {{date}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Ваш {{planName}} план је истекао {{date}}' literally translates to 'Your {{planName}} plan has expired {{date}}'. While understandable, a more natural and idiomatic phrasing in Serbian would be 'Ваш {{planName}} план је истекао {{date}}' or 'Истекао је Ваш {{planName}} план {{date}}'.",
+          "suggestion": "Consider 'Истекао је Ваш {{planName}} план {{date}}' or 'Ваш {{planName}} план је истекао {{date}}' for a more natural flow."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word '版本' (banben - version) might not be the best translation for 'plan' in this context. It implies a software version rather than a subscription plan. A more suitable translation might be '订阅计划' (zudong jihua - subscription plan) or simply '计划' (jihua - plan).",
+          "suggestion": "Consider using '订阅计划' (zudong jihua) or '计划' (jihua) instead of '版本' (banben)."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

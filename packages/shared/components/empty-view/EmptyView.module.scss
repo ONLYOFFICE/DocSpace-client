@@ -1,6 +1,6 @@
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/variables/devices.scss";
-@import "../../styles/mixins.scss";
+@use "../../styles/variables/colors";
+
+@use "../../styles/mixins";
 
 .wrapper {
   margin-inline: auto;
@@ -15,7 +15,7 @@
 
   padding-top: 61px;
 
-  @include mobile {
+  @include mixins.mobile {
     padding-top: 40px;
   }
 }
@@ -26,7 +26,7 @@
   align-items: center;
   justify-content: center;
 
-  @include mobile {
+  @include mixins.mobile {
     > svg {
       height: 105px;
       width: 150px;
@@ -127,34 +127,34 @@
 
   &:nth-child(1) .itemIcon {
     rect {
-      color: $light-second-main;
+      color: colors.$light-second-main;
     }
     path {
-      color: $light-blue-main;
+      color: colors.$light-blue-main;
     }
   }
   &:nth-child(2) .itemIcon {
     rect {
-      color: $main-green;
+      color: colors.$main-green;
     }
     path {
-      color: $main-green;
+      color: colors.$main-green;
     }
   }
   &:nth-child(3) .itemIcon {
     rect {
-      color: $main-orange;
+      color: colors.$main-orange;
     }
     path {
-      color: $main-orange;
+      color: colors.$main-orange;
     }
   }
   &:nth-child(4) .itemIcon {
     rect {
-      color: $purple;
+      color: colors.$purple;
     }
     path {
-      color: $purple;
+      color: colors.$purple;
     }
   }
 

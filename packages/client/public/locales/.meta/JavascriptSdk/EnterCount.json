@@ -1,0 +1,280 @@
+{
+  "key_path": "EnterCount",
+  "content": "Enter count",
+  "content_en_sha1_hash": "5b8f4704ee28ce808517489f31e27c09500a5144",
+  "created_at": "2025-05-19T21:30:54.470Z",
+  "updated_at": "2025-05-21T09:11:52.558Z",
+  "comment": {
+    "text": "The translation key \"EnterCount\" is used to display a placeholder text for a count input field in a user interface. This text will be replaced by a numeric value entered by the user. It appears as a label for a text input field in the PortalSettings categories page.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:41.719Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/ItemsCountBlock.js",
+      "line_number": 69,
+      "context": "/>\n </LabelGroup>\n <TextInput\n scale\n onChange={onChangeCount}\n placeholder={t(\"EnterCount\")}\n value={value}\n tabIndex={6}\n />\n </ControlsGroup>\n );",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Sayı daxil edin\" is a literal translation but doesn't quite capture the nuance of 'Enter count' in a UI context. It sounds more like a direct instruction rather than a label.",
+          "suggestion": "Consider alternatives like \"Rəqəm daxil edin\" or \"Miqdar daxil edin\" which might be more appropriate depending on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Въведете броят' is not grammatically correct. 'Броят' is in the nominative case, but it needs to be in the accusative case to agree with the verb 'Въведете'.",
+          "suggestion": "Въведете броя"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Especificar\" is a valid verb, \"Enter count\" implies providing a numerical value. \"Especificar recuento\" feels more like specifying what constitutes a count, rather than inputting the count itself. A more accurate translation might be \"Introducir cantidad\" or \"Ingresar cantidad\".",
+          "suggestion": "Introducir cantidad"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Մուտքագրել հաշվարկը\" doesn't accurately convey the meaning of \"Enter count.\" \"Մուտքագրել\" implies inputting or typing something.  \"Enter count\" refers to specifying a numerical value representing a quantity.",
+          "suggestion": "Հաշվարկի քանակը"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Inserisci\" is correct for 'enter', \"conteggio\" is a more formal word for 'count' and might not be the most natural translation in this context. A more colloquial and possibly more appropriate translation would be 'Numero' or 'Quantità'.",
+          "suggestion": "Inserisci numero"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"数を入力\" while technically correct (meaning 'enter number'), lacks the nuance of 'count' in this context. It feels more generic.",
+          "suggestion": "Consider a more specific translation like \"個数を入力\" (kazu o nyūryoku) which explicitly refers to a quantity or count."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"개수 입력\" is technically correct, \"입력하세요\" would provide a more natural and complete instruction. \"개수 입력\" simply states 'count input,' which isn't as helpful as 'enter the count'.",
+          "suggestion": "개수 입력하세요"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ເຂົ້ານັບ\" literally translates to \"enter count\" but may not be the most natural or accurate translation of \"Enter count\" in context. It depends on the intended meaning. A more accurate translation, depending on context, could be something like \"ຈໍານວນເຂົ້າ\" (amount entered) or a more contextual phrase.",
+          "suggestion": "Consider alternatives like \"ຈໍານວນເຂົ້າ\" or a phrase that better reflects the intended meaning within the JavascriptSdk's functionality."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Introduzir' can mean 'enter,' in the context of a Javascript SDK property name like 'EnterCount,' a more accurate translation would be 'Contagem' or 'Número de itens.' 'Introduzir' implies an action of inputting, whereas 'EnterCount' likely refers to the count itself.",
+          "suggestion": "Contagem"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Introduceţi numărul\" is a literal translation, but doesn't convey the intended meaning of 'Enter count' in a user interface context. It's overly formal. A more appropriate translation would be something like 'Introduceți cantitatea' or 'Introduceți numărul de...'.",
+          "suggestion": "Introduceți cantitatea"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ගණන යොදන්න' translates more accurately to 'Enter the number' or 'Add the count' rather than simply 'Enter count'. It lacks the possessive or article that makes it a natural phrase in Sinhala when referring to an input field.",
+          "suggestion": "ගණන ඇතුළත් කරන්න (Gannata atulath karanna) - Enter the number / Enter the count"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Unesi broj' literally translates to 'Enter number', while the original English phrase is 'Enter count'. While related, 'count' implies a quantity or number of items, not just any number. 'Unesi količinu' would be a more accurate translation.",
+          "suggestion": "Unesi količinu"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

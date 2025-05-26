@@ -167,6 +167,8 @@ const CreateRoomDialog = ({
       }));
       return;
     }
+
+    if (isScrollLocked) setIsScrollLocked(false);
     setRoomParams({ ...startRoomParams });
   };
 

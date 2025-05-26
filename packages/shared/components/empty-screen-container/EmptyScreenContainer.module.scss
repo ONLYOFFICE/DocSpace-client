@@ -1,6 +1,7 @@
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/mixins.scss";
-@import "../../styles/variables/devices.scss";
+@use "../../styles/variables/colors";
+@use "../../styles/mixins";
+
+@use "../../styles/common-icons-style";
 
 .body {
   margin: 0 auto;
@@ -37,7 +38,7 @@
     height: 100px;
     width: 100px;
     margin-bottom: 32px;
-    @include no-user-select;
+    @include mixins.no-user-select;
     background: no-repeat 0 0 transparent;
   }
 
@@ -78,12 +79,12 @@
     }
   }
 
-  @include transitional-screen-size {
+  @include mixins.transitional-screen-size {
     width: fit-content;
     max-width: 640px;
   }
 
-  @include tablet {
+  @include mixins.tablet {
     &.withoutFilter {
       padding-top: 109px;
     }
@@ -94,7 +95,7 @@
     max-width: 480px;
   }
 
-  @include mobile {
+  @include mixins.mobile {
     &.withoutFilter {
       padding-top: 69px;
     }

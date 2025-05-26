@@ -1,9 +1,9 @@
-@import "../../styles/variables/colors";
+@use "../../styles/variables/colors";
 
 .container {
   display: flex;
   background-color: var(--info-block-background);
-  color: #{$black};
+  color: #{colors.$black};
   font-size: 12px;
   padding: 12px 16px;
   border-radius: 6px;

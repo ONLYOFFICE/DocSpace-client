@@ -548,7 +548,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   const createFooter = (
     <>
       <Button
-        key="OkButton"
+        key="OKButton"
         label={isEdit ? t("Common:EditButton") : t("Webhooks:Generate")}
         size={ButtonSize.normal}
         primary
@@ -568,7 +568,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
 
   const keyFooter = (
     <Button
-      key="OkButton"
+      key="OKButton"
       label={t("Common:Done")}
       size={ButtonSize.normal}
       primary

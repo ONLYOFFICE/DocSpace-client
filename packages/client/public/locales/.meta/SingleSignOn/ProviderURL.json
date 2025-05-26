@@ -1,0 +1,414 @@
+{
+  "key_path": "ProviderURL",
+  "content": "IdP Entity Id",
+  "content_en_sha1_hash": "ec80bd1846e6613c32d80934518fd3cfe3e05f8e",
+  "created_at": "2025-05-19T21:30:50.123Z",
+  "updated_at": "2025-05-21T02:03:11.944Z",
+  "comment": {
+    "text": "The translation key \"ProviderURL\" is used to translate the label for a field that displays the IDP entity URL in an identity provider settings page. It appears as part of a form field and requires a translated value for display purposes.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:11.286Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/IdpSettings.js",
+      "line_number": 103,
+      "context": "value={spLoginLabel}\n hasError={spLoginLabelHasError}\n />\n \n <SsoFormField\n labelText={t(\"ProviderURL\")}\n name=\"entityId\"\n placeholder={PROVIDER_URL}\n tabIndex={5}\n tooltipContent={<Text fontSize=\"12px\">{t(\"ProviderURLTooltip\")}</Text>}\n tooltipClass=\"provider-url-tooltip icon-button\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"IdP Müəssisə ID\" isn't the most natural or accurate translation of \"IdP Entity Id\". 'Müəssisə' translates to 'enterprise' or 'establishment', which doesn't directly convey the meaning of 'Entity Id' in this context. A better translation would focus on the 'identification' aspect.",
+          "suggestion": "IdP Vahid ID"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Идентификация на обекта на доставчика на самоличност' is overly literal and doesn't accurately convey the meaning of 'IdP Entity Id'. 'Entity ID' often refers to a unique identifier, not a 'subject of identification'.",
+          "suggestion": "A more accurate translation would be something like 'ИД на доставчика на самоличност' or 'Идентификатор на доставчика на самоличност'. 'ИД' is a common abbreviation for 'identifier' in Bulgarian IT contexts."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'IdP Id subjektu' is not the most accurate or natural translation of 'IdP Entity Id'. 'Entity Id' refers to a unique identifier. A more accurate translation would convey this specific meaning.",
+          "suggestion": "IdP identifikátor subjektu"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ID des Identitätsanbieters (IdP)' is technically correct but somewhat verbose for a key name. 'ID des Identitätsanbieters' is a literal translation of 'IdP Entity Id', but 'IdP' already implies an identity provider. A more concise and natural-sounding translation might be preferred for a key.",
+          "suggestion": "IdP-Kennung"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation is technically correct, \"Αναγνωριστικό οντότητας παρόχου ταυτότητας\" is quite verbose and formal for a user interface element. A more user-friendly translation would improve the overall experience.",
+          "suggestion": "Consider a simpler translation like \"Αναγνωριστικό παρόχου\" or \"ID παρόχου\" which retain the core meaning and are more easily understood."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Id. de entidad IdP' is not the most natural or accurate rendering of 'IdP Entity Id' in Spanish. It's a literal translation that might be confusing to some users. 'IdP' is an acronym and is commonly used in Spanish technical contexts, so the best translation would incorporate that understanding.",
+          "suggestion": "Id de entidad IdP"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the period after 'Id' is visually disjointed and could be improved for readability. Using a space provides a more modern and cleaner look, and is typical for acronyms and abbreviations in Spanish.",
+          "suggestion": "Id de entidad IdP"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'IdP Entiteetti Id' is a direct transliteration and doesn't accurately convey the meaning of 'IdP Entity Id' in Finnish. 'Entity' should be translated to something more fitting in context, perhaps 'Yksikkö' or 'Tunnus'.",
+          "suggestion": "IdP Yksikkö Tunnus"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ID de l’entité IdP\" is understandable, it's a very literal translation. A more natural and idiomatic French translation would be 'Identifiant de l'entité IdP' or 'ID de l'entité fournisseur d'identité'.",
+          "suggestion": "Identifiant de l’entité IdP"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"IdP թողարկողի Id\" is a literal translation that doesn't convey the intended meaning of \"IdP Entity Id\". ' թողարկողի ' (tokharkoghi) translates to 'issuer' which is not precisely the meaning of 'Entity Id'. The term 'Entity ID' refers to a unique identifier.",
+          "suggestion": "A more accurate translation might be something like \"IdP-ի հայտնաբերող ծածկագիր\" (IdP-i haytnaberogh tsagkagir) or \"IdP-ի ինքնության ծածկագիր\" (IdP-i inkutyunyutsi tsagkagir). It's crucial to consult with an expert familiar with Identity Provider terminology in Armenian."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly an error, a hyphen might improve readability. Consider using \"IdP-ի հայտնաբերող ծածկագիր\" or similar.",
+          "suggestion": "Consider using a hyphen after 'IdP' for better readability."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ID entità IdP\" is a literal translation and doesn't convey the intended meaning of \"IdP Entity Id\". It's technically correct but awkward and unnatural in Italian. It's unclear to the user what this refers to.",
+          "suggestion": "A more natural and understandable translation would be something like \"Identificativo entità IdP\" or \"ID entità fornitore di identità\"."
+        },
+        {
+          "type": "formatting",
+          "description": "The abbreviation \"IdP\" should ideally be explained or consistently translated. While it's common, it's better practice for clarity.",
+          "suggestion": "Consider translating \"IdP\" as \"fornitore di identità\" or adding a parenthetical explanation like \"(Identity Provider)\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'IdP 엔터티 Id' is a direct transliteration of 'IdP Entity Id' and doesn't convey the meaning naturally in Korean. While understandable, it is not idiomatic.",
+          "suggestion": "IdP 엔티티 ID or IdP 식별자"
+        },
+        {
+          "type": "formatting",
+          "description": "The mixed use of Romanized 'IdP' and Korean '엔터티'/'식별자' is a formatting inconsistency.",
+          "suggestion": "Maintain consistent terminology (either entirely Romanized or entirely Korean)"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'IdP Entity ID' is a direct transliteration of the English, not a true translation. It doesn't convey the meaning to a Lao speaker. It's likely meant to represent 'Identity Provider Entity ID'.",
+          "suggestion": "Investigate the intended meaning and provide a translation that accurately conveys 'Identity Provider Entity ID' in Lao. For example, something like 'ລະບົບບຸລະສັກການຍົກສູງຕົວຕົນ' (rabop burasak kan yok sung tua ton), although a more accurate translation may require deeper understanding of the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"IdP entītijas ID\" is a literal transliteration of \"IdP Entity Id\" and doesn't convey the intended meaning accurately in Latvian. 'Entity' should be translated to reflect its meaning in the context of an identity provider.",
+          "suggestion": "IdP identitātes piegādātāja ID"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'ID' is in English. It should ideally be translated or consistently used in English throughout the application.",
+          "suggestion": "IdP identitātes piegādātāja identifikators"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'IdP Entiteit Id' while technically understandable, isn't the most natural Dutch rendering of \"IdP Entity Id\".  'Entiteit' is correct, but a more fluent translation would consider the context and typical phrasing used in Dutch technical documentation.",
+          "suggestion": "IdP Entiteits-ID"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ID podmiotu IdP' is a literal translation and may not be the most natural or understandable way to express 'IdP Entity Id' in Polish. 'IdP' is a technical term that is often used directly in Polish IT contexts.  A more idiomatic translation might incorporate the concept of an entity identifier.",
+          "suggestion": "Consider a translation like 'Identyfikator podmiotu IdP' or 'Identyfikator IdP'."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the mix of English abbreviation (IdP) with Polish words ('podmiotu') might be jarring to some readers. Consistency in terminology is ideal.",
+          "suggestion": "If possible, try to find an equivalent term in Polish for 'Entity' or consistently use the English term 'IdP'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ID da entidade IdP' is a literal translation and doesn't convey the intended meaning in a natural way for Portuguese speakers. 'IdP' is an abbreviation that is not commonly understood in Brazilian Portuguese. A more appropriate translation would be something like 'Identificador da Entidade de Provedor de Identidade' or 'Identificador da Entidade Provedora de Identidade'.",
+          "suggestion": "Identificador da Entidade Provedora de Identidade"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is too literal and verbose. While technically correct, \"ID-ul de entitate al furnizorului de identitate (IdP)\" is cumbersome and not how this term is typically used in Romanian technical contexts. The term 'Entity ID' is often used directly, or translated more simply.",
+          "suggestion": "ID-ul entității (IdP)"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of parentheses around 'IdP' is unnecessary and disrupts the flow.  While providing the acronym is helpful, it doesn't require parentheses.",
+          "suggestion": "ID-ul entității IdP"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Идентификатор сущности поставщика учетных записей:' is overly literal and not the standard terminology for 'IdP Entity Id'. It's verbose and potentially confusing for Russian speakers familiar with identity provider concepts. A more natural translation would be something like 'Идентификатор поставщика удостоверений' or 'Entity ID поставщика удостоверений'.",
+          "suggestion": "Consider 'Идентификатор поставщика удостоверений' or 'Entity ID поставщика удостоверений'."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"IdP හැඳු.\" does not accurately convey the meaning of \"IdP Entity Id\". \"හැඳු.\" translates to \"ID\" or \"identity\", but it misses the \"Entity\" part which is crucial for understanding the context.",
+          "suggestion": "A more accurate translation would need to incorporate the concept of an 'entity'. Possible suggestions include: \"IdP ආයතEntity Id\" (IdP Entity Id) or \"IdP අනන්‍යතාවය\" (IdP Identity), though the best option might require further context to ensure full accuracy."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'IdP Entity Id' is identical to the English content. This indicates a missing or incomplete translation.",
+          "suggestion": "A proper Slovak translation of 'IdP Entity Id' should be provided. Consider 'ID dodávateľa identity' or a similar phrasing based on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'IdP ID entitete' is not an accurate translation of 'IdP Entity Id'. The term 'entitete' is a direct transliteration and doesn't convey the meaning of 'Entity Id'. It should be translated as something like 'ID entitete' or 'Identiteta ponudnika' (depending on context and desired formality).",
+          "suggestion": "ID entitete"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation 'IdP ID entitete' unnecessarily repeats 'ID'.",
+          "suggestion": "IdP entitete"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation 'IdP Entity Id' is identical to the English source. It should be a proper translation, not a transliteration. 'IdP Entity Id' is likely an identifier and would need a Serbian equivalent if possible. If a direct translation isn't readily available, a more descriptive phrase may be needed.",
+          "suggestion": "Consider a Serbian translation that explains what 'IdP Entity Id' refers to, such as 'Identifikator entiteta IdP' or 'ID entiteta davalca usluga autentifikacije' (depending on the context and desired level of formality)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Latin) translation 'IdP Entity Id' is identical to the English source. This suggests the translation was not performed or is incorrect as it doesn't convey the meaning in Serbian.",
+          "suggestion": "The translation should be 'ID entiteta davalca identiteta' or a similar Serbian equivalent for 'IdP Entity Id'."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ідентифікатор сутності постачальника посвідчень\" is overly literal and complex for 'IdP Entity Id'. It's not the most natural way a Ukrainian speaker would express this concept in a technical context.",
+          "suggestion": "Consider a more concise and understandable translation, such as \"Ідентифікатор постачальника ідентичності\" or \"Ідентифікатор ідентифікатора постачальника\"."
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, the repeated use of 'ідентифікатор' can sound clunky. Consider synonyms if possible within a revised translation.",
+          "suggestion": "Explore options to reduce repetition, such as 'ідентифікаційний код' or similar depending on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Id thực thể IdP\" is a literal translation and not idiomatic Vietnamese. It doesn't convey the meaning of 'IdP Entity Id' naturally. The term 'Entity Id' isn't typically translated directly.",
+          "suggestion": "Mã định danh IdP"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While understandable, \"Mã định danh IdP\" is still somewhat technical. Depending on the target audience, a simpler phrasing might be preferable.",
+          "suggestion": "ID thực thể IdP"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"IdP 实体 ID\" is a literal translation of 'IdP Entity ID'. While understandable, a more natural and accurate Chinese translation would be something like \"身份提供者实体ID\" or \"IdP 实体标识\".",
+          "suggestion": "身份提供者实体ID"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

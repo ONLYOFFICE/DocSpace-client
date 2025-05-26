@@ -38,6 +38,7 @@
   "CreateNewFolderInStorage": "Depolama alanında yeni bir klasör oluştur",
   "CreateNewLink": "Yeni bağlantı oluştur",
   "CreateTemplate": "Şablon oluştur",
+  "CustomFilterDisable": "Özel filtreyi devre dışı bırak",
   "CustomFilterDisabled": "Seçili dosya için Özel Filtre devre dışı",
   "CustomFilterEnable": "Özel Filtre'yi etkinleştir",
   "CustomFilterEnabled": "Seçili dosya için Özel Filtre etkin",

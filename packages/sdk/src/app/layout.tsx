@@ -49,13 +49,13 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const hdrs = headers();
+  const hdrs = await headers();
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
     return <></>;
   }
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
 
   const [self, portalSettings, colorTheme, portalCultures] = await Promise.all([
     getSelf(),

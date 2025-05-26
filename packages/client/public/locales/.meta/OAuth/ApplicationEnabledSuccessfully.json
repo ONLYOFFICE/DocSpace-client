@@ -1,0 +1,232 @@
+{
+  "key_path": "ApplicationEnabledSuccessfully",
+  "content": "Application enabled successfully",
+  "content_en_sha1_hash": "ba6d9da6509e049ffeba047e305893200bfe34eb",
+  "created_at": "2025-05-19T21:30:53.801Z",
+  "updated_at": "2025-05-22T11:56:37.790Z",
+  "comment": {
+    "text": "The \"ApplicationEnabledSuccessfully\" translation key is used to display a success message when an application's status is updated from disabled to enabled in the OAuth settings. It appears in the UI as a toast notification after changing an application's status, typically triggered by enabling or disabling an application in the portal settings.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:58.511Z"
+  },
+  "usage": [
+    {
+      "file_path": "\\packages\\client\\src\\store\\OAuthStore.ts",
+      "line_number": 528,
+      "context": "this.setSelection(\"\");\n if (this.selectionToEnable.length > 1)\n toastr.success(t(\"OAuth:ApplicationsEnabledSuccessfully\"));\n else {\n toastr.success(t(\"OAuth:ApplicationEnabledSuccessfully\"));\n }\n } catch (e) {\n const err = e as TData;\n toastr.error(err);\n }",
+      "module": "\\packages\\client"
+    },
+    {
+      "file_path": "\\packages\\client\\src\\store\\OAuthStore.ts",
+      "line_number": 528,
+      "context": "this.setSelection(\"\");\n if (this.selectionToEnable.length > 1)\n toastr.success(t(\"OAuth:ApplicationsEnabledSuccessfully\"));\n else {\n toastr.success(t(\"OAuth:ApplicationEnabledSuccessfully\"));\n }\n } catch (e) {\n const err = e as TData;\n toastr.error(err);\n }",
+      "module": "\\packages\\client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Հավելվածը հաջողությամբ միացված է\" uses the word 'միացված' which translates to 'connected' or 'joined'. 'Enabled' implies an activation, which is better conveyed with a different verb. While 'միացված' isn't *wrong*, it's not the most accurate reflection of 'enabled'.",
+          "suggestion": "Consider using a verb that better reflects 'enabled,' such as 'ակտիվացվել է' (aktivatsvel e) which means 'activated'."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຢ່າງ' (yang) is used correctly, but it is often considered overly formal in this context. It adds a degree of emphasis that might not be necessary.",
+          "suggestion": "Consider removing 'ຢ່າງ' for a more natural tone. Possible alternatives include 'ສຳເລັດ' (samlet) or simply omitting it."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'යෙදුම සාර්ථකව ක්‍රියාත්මක කරන ලදි.' while generally conveying the meaning of 'Application enabled successfully', is a bit literal. A more natural phrasing in Sinhala would be 'යෙදුම සාර්ථකව සක්‍රීය කරන ලදි.' (Yeduma saarthakava sakriyakarana ladhi). 'ක්‍රියාත්මක' (kriyathmaka) means 'to operate' or 'to function', while 'සක්‍රීය' (sakriya) is a more direct translation of 'enabled' or 'activated'.",
+          "suggestion": "යෙදුම සාර්ථකව සක්‍රීය කරන ලදි."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

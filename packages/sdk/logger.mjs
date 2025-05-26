@@ -39,7 +39,7 @@ const getLogger = () => {
 
   const winstonTransports = [
     new transports.DailyRotateFile({
-      filename: `${logPath}/web.sdk`,
+      filename: `${logPath}/web.sdk.%DATE%.log`,
       level: logLevel,
       datePattern: "MM-DD",
       handleExceptions: true,

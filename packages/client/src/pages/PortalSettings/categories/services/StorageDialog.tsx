@@ -34,6 +34,8 @@ import { Text } from "@docspace/shared/components/text";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
 import { buyStorage } from "@docspace/shared/api/portal";
+import QuantityPicker from "@docspace/shared/components/select-count-container";
+
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -80,6 +82,10 @@ const StorageDialog: React.FC<StorageDialogProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [isVisibleContainer, setIsVisible] = useState(false);
 
+  const maxValue = 9999;
+  const moreThanLimit = amount > maxValue;
+  const isUpgrade = amount >= currentStoragePlanSize;
+
   const onBuy = async () => {
     const timerId = setTimeout(() => {
       setIsLoading(true);
@@ -98,7 +104,6 @@ const StorageDialog: React.FC<StorageDialogProps> = ({
       }
 
       await Promise.all([fetchPortalTariff!(), fetchBalance!()]);
-      onClose();
     } catch (e) {
       const errorMessage = e instanceof Error ? e.message : String(e);
       toastr.error(errorMessage);
@@ -132,15 +137,10 @@ const StorageDialog: React.FC<StorageDialogProps> = ({
     />
   );
 
-  const currency = isTariffExist
-    ? formatCurrencyValue(
-        language!,
-        parseFloat(currentPrice()),
-        isoCurrencySymbol || "",
-        2,
-        2,
-      )
-    : 0;
+  const onChangeNumber = (value: number) => {
+    setAmount(value);
+  };
+
 
   return (
     <ModalDialog
@@ -169,20 +169,19 @@ const StorageDialog: React.FC<StorageDialogProps> = ({
               </Text>
             </Text>
           </div>
-          {isTariffExist ? (
-            <div className={styles.currentPaymentWrapper}>
-              <Text fontSize="16px" isBold className={styles.currentPayment}>
-                {t("YourCurrentPayment")}
-              </Text>
-              <Text isBold fontSize="28px">
-                {t("CurrencyPerMonth", { currency })}
-              </Text>
-            </div>
-          ) : null}
-          <Text className={styles.moreStorage}>{t("MoreStorage")}</Text>
-          <Amount setAmount={setAmount} amount={amount} />
 
-          {amount ? (
+          <QuantityPicker
+            className="select-users-count-container"
+            value={amount}
+            minValue={0}
+            maxValue={maxValue}
+            step={1}
+            title={"Additional storage (GB)"}
+            showPlusSign
+            onChange={onChangeNumber}
+          />
+
+          {amount || hasStorageSubscription ? (
             <div className={styles.totalContainer}>
               <Total
                 amount={amount}

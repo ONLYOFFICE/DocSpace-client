@@ -24,25 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
+import { http, HttpResponse } from "msw";
 
-import React from "react";
-import { ReactSVG } from "react-svg";
-import { useTranslation } from "react-i18next";
+import { BASE_URL } from "../../utils";
 
-import { Text } from "../../../components/text";
+const url = `${BASE_URL}/portal/getrestoreprogress`;
 
-import styles from "./WhiteLabel.module.scss";
+export const createGetRestoreProgressHandler = ({
+  progress = 0,
+  error,
+}: {
+  progress?: number;
+  error?: string;
+}) =>
+  http.get(url, () => {
+    const response: { progress: number; error?: string } = { progress };
 
-export const NotAvailable = () => {
-  const { t } = useTranslation("Common");
+    if (error) {
+      response.error = error;
+    }
 
-  return (
-    <div className={styles.notAvailableWrapper}>
-      <ReactSVG className={styles.lockIcon} src={LockedReactSvgUrl} />
-      <Text fontSize="12px" fontWeight="600">
-        {t("NotAvailableUnderLicense")}
-      </Text>
-    </div>
-  );
-};
+    return HttpResponse.json({ response });
+  });

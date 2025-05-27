@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import classNames from "classnames";
+
 import DocumentSample from "PUBLIC_DIR/images/logo/document_sample.svg?url";
 import PdfFormSample from "PUBLIC_DIR/images/logo/pdf_form_sample.svg?url";
 import SpreadsheetSample from "PUBLIC_DIR/images/logo/spreadsheet_sample.svg?url";
@@ -35,6 +37,7 @@ import { Link, LinkType } from "../../../components/link";
 import { getLogoFromPath, isMobile } from "../../../utils";
 
 import { ILogoProps } from "./WhiteLabel.types";
+import styles from "./WhiteLabel.module.scss";
 
 export const Logo = (props: ILogoProps) => {
   const {
@@ -60,7 +63,7 @@ export const Logo = (props: ILogoProps) => {
 
   return (
     <div>
-      <div className="logo-item">
+      <div className={styles.logoItem}>
         {title ? (
           <Text
             fontSize="13px"
@@ -71,47 +74,59 @@ export const Logo = (props: ILogoProps) => {
           </Text>
         ) : null}
         {isEditor ? (
-          <div className="logos-editor-wrapper" onClick={onLogoClick}>
-            <div className="logos-editor-container">
+          <div className={styles.logosEditorWrapper} onClick={onLogoClick}>
+            <div className={styles.logosEditorContainer}>
               <img
                 alt=""
-                className="logo-docs-editor background-blue"
+                className={classNames(
+                  styles.logoDocsEditor,
+                  styles.backgroundBlue,
+                )}
                 src={currentLogo}
               />
               <img alt="" src={DocumentSample} />
             </div>
-            <div className="logos-editor-container">
+            <div className={styles.logosEditorContainer}>
               <img
                 alt=""
-                className="logo-docs-editor background-orange"
+                className={classNames(
+                  styles.logoDocsEditor,
+                  styles.backgroundOrange,
+                )}
                 src={currentLogo}
               />
               <img alt="" src={PresentationSample} />
             </div>
 
-            <div className="logos-editor-container">
+            <div className={styles.logosEditorContainer}>
               <img
                 alt=""
-                className="logo-docs-editor background-green"
+                className={classNames(
+                  styles.logoDocsEditor,
+                  styles.backgroundGreen,
+                )}
                 src={currentLogo}
               />
               <img alt="" src={SpreadsheetSample} />
             </div>
 
-            <div className="logos-editor-container">
+            <div className={styles.logosEditorContainer}>
               <img
                 alt=""
-                className="logo-docs-editor background-red"
+                className={classNames(
+                  styles.logoDocsEditor,
+                  styles.backgroundRed,
+                )}
                 src={currentLogo}
               />
               <img alt="" src={PdfFormSample} />
             </div>
           </div>
         ) : isEditorHeader ? (
-          <div className="editor-header-container">
+          <div className={styles.editorHeaderContainer}>
             <img
               alt=""
-              className={`${imageClass} editor-logo-header`}
+              className={classNames(imageClass, styles.editorLogoHeader)}
               src={currentLogo}
               onClick={onLogoClick}
             />
@@ -133,7 +148,7 @@ export const Logo = (props: ILogoProps) => {
           id={inputId}
           type="file"
           accept=".png, .jpg, .jpeg, .svg"
-          className="hidden"
+          className={styles.hidden}
           onChange={onChange}
           disabled={!isSettingPaid}
         />

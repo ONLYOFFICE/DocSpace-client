@@ -25,15 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { MouseEvent } from "react";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
-import { MobileCategoryWrapper } from "../../components/mobile-category-wrapper";
+import { MobileCategoryWrapper } from "../../../components/mobile-category-wrapper";
 
-const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+import styles from "./MobileView.module.scss";
 
 export const MobileView = ({
   isSettingPaid,
@@ -51,13 +47,13 @@ export const MobileView = ({
   const { t } = useTranslation("Common");
 
   return (
-    <StyledWrapper>
+    <div className={styles.mobileView}>
       <MobileCategoryWrapper
         title={t("BrandName")}
         subtitle={t("BrandNameSubtitleMobile")}
         url={`${baseUrl}/branding/brand-name`}
         withPaidBadge={!isSettingPaid}
-        badgeLabel={t("Common:Paid")}
+        badgeLabel={t("Paid")}
         onClickLink={onClickLink}
       />
       <MobileCategoryWrapper
@@ -90,6 +86,6 @@ export const MobileView = ({
           onClickLink={onClickLink}
         />
       ) : null}
-    </StyledWrapper>
+    </div>
   );
 };

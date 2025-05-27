@@ -24,36 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { mobile } from "../../../utils";
+import { Meta, StoryObj } from "@storybook/react";
 
-export const StyledAdditionalResources = styled.div`
-  @media ${mobile} {
-    .header {
-      display: none;
-    }
-  }
+import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDecorator";
 
-  .branding-checkbox {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    margin-bottom: 24px;
-  }
+import { AdditionalResources } from ".";
 
-  .additional-header {
-    padding-bottom: 2px;
-  }
+const meta = {
+  title: "Pages/Branding/AdditionalResources",
+  component: AdditionalResources,
+  parameters: {
+    docs: {
+      description: {
+        component: "Settings for displaying additional support/help links.",
+      },
+    },
+  },
+  tags: ["autodocs"],
+  decorators: [i18nextStoryDecorator],
+} satisfies Meta<typeof AdditionalResources>;
 
-  .additional-description {
-    padding-bottom: 18px;
-  }
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-  .save-cancel-buttons {
-    margin-top: 24px;
-  }
-
-  .checkbox {
-    margin-inline-end: 9px;
-  }
-`;
+export const Default: Story = {
+  args: {
+    isSettingPaid: true,
+    feedbackAndSupportEnabled: true,
+    helpCenterEnabled: false,
+    isLoading: false,
+    additionalResourcesIsDefault: false,
+    onSave: (feedback, help) =>
+      console.log("Save clicked. Feedback:", feedback, "Help:", help),
+    onRestore: () => console.log("Restore clicked"),
+  },
+};

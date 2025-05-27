@@ -55,10 +55,10 @@ export const convertRoomsToItems: (
       lifetime,
     } = room;
 
-    const icon = logo.medium || "";
+    const icon = logo?.medium || "";
     const cover = logo?.cover;
 
-    const iconProp = icon ? { icon } : { color: logo.color as string };
+    const iconProp = icon ? { icon } : { color: logo?.color as string };
 
     const lifetimeTooltip = lifetime
       ? t("Files:RoomFilesLifetime", {

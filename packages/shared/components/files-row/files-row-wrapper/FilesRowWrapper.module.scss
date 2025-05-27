@@ -26,5 +26,118 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+@use "../../../styles/mixins";
+@use "../../../styles/variables";
+
+@mixin marginStyles {
+  margin-inline: -24px;
+  padding-inline: 24px;
+
+  @include mixins.tablet-and-below {
+    margin-inline: -16px;
+    padding-inline: 16px;
+  }
+}
+
+@mixin checkedStyle {
+  background: var(--files-section-row-view-checked-background);
+}
+
 .filesRowWrapper {
+  :global(.files-item) {
+    border-inline: none;
+    margin-inline-start: 0;
+  }
+
+  height: 59px;
+  box-sizing: border-box;
+
+  border-bottom: 1px var(--files-section-table-view-row-border-color) solid;
+  border-top: 1px var(--files-section-table-view-row-border-color) solid;
+  margin-top: -1px;
+
+  &.checked:not(.isIndexEditingMode),
+  &.isActive:not(.isIndexEditingMode) {
+    @include checkedStyle;
+  }
+
+  &.checked.isFirstElem,
+  &.isActive.isFirstElem {
+    border-top-color: var(
+      --files-section-table-view-row-border-color
+    ) !important;
+  }
+
+  &.isIndexUpdated {
+    background: var(--files-section-row-view-checked-background) !important;
+
+    &.isIndexEditingMode {
+      background: var(--files-section-table-view-row-index-update) !important;
+    }
+
+    &:hover {
+      background: var(--files-section-table-view-row-index-active) !important;
+    }
+
+    @include marginStyles;
+  }
+
+  &:not(.isDragging):not(.isIndexEditingMode) {
+    @include mixins.can-hover {
+      &:hover {
+        cursor: pointer;
+
+        @include checkedStyle;
+      }
+    }
+  }
+
+  &.isIndexEditingMode {
+    @include mixins.can-hover {
+      cursor: pointer;
+      background: var(--files-section-table-view-row-index-active);
+
+      @include marginStyles;
+    }
+  }
+
+  &.showHotkeyBorder {
+    border-color: variables.$light-second-main !important;
+    z-index: 1;
+    position: relative;
+
+    margin-inline: -24px;
+    padding-inline: 24px;
+  }
+
+  &.isHighlight {
+    animation: Highlight 2s 1;
+
+    @include marginStyles;
+
+    @keyframes Highlight {
+      0% {
+        background: variables.$light-second-main;
+      }
+
+      100% {
+        background: none;
+      }
+    }
+  }
+
+  &.isFirstElem {
+    height: 57px;
+
+    margin-top: 1px;
+    border-top: 1px solid transparent;
+
+    :global(.styled-checkbox-container) {
+      padding-bottom: 5px;
+    }
+
+    :global(.row_content) {
+      padding-bottom: 5px;
+    }
+  }
 }

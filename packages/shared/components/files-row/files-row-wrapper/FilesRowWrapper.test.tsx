@@ -25,12 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
+
 import { FilesRowWrapper } from ".";
 
 describe("FilesRowWrapper", () => {
   it("renders correctly", () => {
-    const { container } = render(<FilesRowWrapper />);
-    expect(container.firstChild).toBeInTheDocument();
+    render(<FilesRowWrapper />);
+
+    expect(screen.getByTestId("files-row-wrapper")).toBeInTheDocument();
   });
 });

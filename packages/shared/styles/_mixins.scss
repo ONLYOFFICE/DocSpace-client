@@ -58,3 +58,9 @@
     @content;
   }
 }
+
+@mixin can-hover {
+  @media (hover: hover) and (pointer: fine) {
+    @content;
+  }
+}

@@ -24,10 +24,42 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { type PropsWithChildren } from "react";
+import classNames from "classnames";
+
 import { FilesRowWrapperProps } from "./FilesRowWrapper.types";
 import styles from "./FilesRowWrapper.module.scss";
 
-export const FilesRowWrapper: React.FC<FilesRowWrapperProps> = () => {
-  return <div className={styles.filesRowWrapper}></div>;
+export const FilesRowWrapper = (
+  props: PropsWithChildren<FilesRowWrapperProps>,
+) => {
+  const {
+    className,
+    checked,
+    isActive,
+    isIndexEditingMode,
+    isDragging,
+    isFirstElem,
+    isHighlight,
+    isIndexUpdated,
+    showHotkeyBorder,
+    children,
+  } = props;
+
+  const classes = classNames(styles.filesRowWrapper, className, {
+    [styles.checked]: checked,
+    [styles.isActive]: isActive,
+    [styles.isIndexEditingMode]: isIndexEditingMode,
+    [styles.isFirstElem]: isFirstElem,
+    [styles.isIndexUpdated]: isIndexUpdated,
+    [styles.isDragging]: isDragging,
+    [styles.showHotkeyBorder]: showHotkeyBorder,
+    [styles.isHighlight]: isHighlight,
+  });
+
+  return (
+    <div data-testid="files-row-wrapper" className={classes}>
+      {children}
+    </div>
+  );
 };

@@ -24,8 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
+
 import { FilesRowWrapper } from ".";
+
+const RowContent = ({ children }: { children: React.ReactNode }) => (
+  <div
+    style={{
+      padding: "16px",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    }}
+  >
+    {children}
+  </div>
+);
 
 const meta = {
   title: "Components/FilesRow/FilesRowWrapper",
@@ -33,9 +48,22 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: "FilesRowWrapper component",
+        component:
+          "FilesRowWrapper component that provides styling and behavior for file rows",
       },
     },
+  },
+  argTypes: {
+    checked: { control: "boolean" },
+    isActive: { control: "boolean" },
+    isIndexEditingMode: { control: "boolean" },
+    isFirstElem: { control: "boolean" },
+    isIndexUpdated: { control: "boolean" },
+    isDragging: { control: "boolean" },
+    showHotkeyBorder: { control: "boolean" },
+    isHighlight: { control: "boolean" },
+    className: { table: { disable: true } },
+    children: { table: { disable: true } },
   },
 } satisfies Meta<typeof FilesRowWrapper>;
 
@@ -43,5 +71,63 @@ type Story = StoryObj<typeof FilesRowWrapper>;
 export default meta;
 
 export const Default: Story = {
-  args: {},
+  args: {
+    children: <RowContent>Files Row Content</RowContent>,
+  },
+};
+
+export const Checked: Story = {
+  args: {
+    checked: true,
+    children: <RowContent>Checked Row</RowContent>,
+  },
+};
+
+export const Active: Story = {
+  args: {
+    isActive: true,
+    children: <RowContent>Active Row</RowContent>,
+  },
+};
+
+export const IndexEditing: Story = {
+  args: {
+    isIndexEditingMode: true,
+    children: <RowContent>Index Editing Mode</RowContent>,
+  },
+};
+
+export const FirstElement: Story = {
+  args: {
+    isFirstElem: true,
+    children: <RowContent>First Element Row</RowContent>,
+  },
+};
+
+export const IndexUpdated: Story = {
+  args: {
+    isIndexUpdated: true,
+    children: <RowContent>Index Updated Row</RowContent>,
+  },
+};
+
+export const Dragging: Story = {
+  args: {
+    isDragging: true,
+    children: <RowContent>Dragging Row</RowContent>,
+  },
+};
+
+export const HotkeyBorder: Story = {
+  args: {
+    showHotkeyBorder: true,
+    children: <RowContent>Row with Hotkey Border</RowContent>,
+  },
+};
+
+export const Highlight: Story = {
+  args: {
+    isHighlight: true,
+    children: <RowContent>Highlighted Row</RowContent>,
+  },
 };

@@ -7,12 +7,26 @@ import "PUBLIC_DIR/css/fonts.css";
 import ThemeWrapper from "./globals/theme-wrapper";
 import { DocsContainer } from "./DocsContainer";
 import globalTypes from "./globals";
+import { initialize, mswLoader } from "msw-storybook-addon";
 // import "../index";
 
 import lightTheme from "./lightTheme";
 import darkTheme from "./darkTheme";
 import StorybookGlobalStyles from "./styles/StorybookGlobalStyles";
 import i18n from "./i18n";
+
+initialize({
+  onUnhandledRequest: (req, print) => {
+    const url = new URL(req.url);
+
+    // Ignore requests to fetch static images.
+    if (url.pathname.includes("/images/")) {
+      return;
+    }
+
+    print.warning();
+  },
+});
 
 const preview = {
   globalTypes,
@@ -55,6 +69,7 @@ const preview = {
     },
   ],
   tags: ["autodocs"],
+  loaders: [mswLoader],
 };
 
 export default preview;

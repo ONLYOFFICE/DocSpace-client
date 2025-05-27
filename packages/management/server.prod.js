@@ -32,8 +32,17 @@ import("./logger.mjs").then(({ logger }) => {
 
   const dev = process.env.NODE_ENV === "development";
 
-  const currentPort = config.PORT ?? 5015;
-  const hostname = config.HOSTNAME ?? "localhost";
+  const argv = (key) => {
+    if (process.argv.includes(`--${key}`)) return true;
+
+    return (
+      process.argv.find((arg) => arg.startsWith(`--${key}=`))?.split("=")[1] ||
+      null
+    );
+  };
+
+  const currentPort = (argv("app.port") || config.PORT) ?? 5015;
+  const hostname = config.HOSTNAME ?? "0.0.0.0";
 
   process.env.NODE_ENV = "production" || process.env.NODE_ENV;
   process.chdir(__dirname);

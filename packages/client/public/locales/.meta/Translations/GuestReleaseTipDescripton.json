@@ -3,7 +3,7 @@
   "content": "All previously added Users became Guests and now available in the Contacts list of the {{productName}} administrators only. Guests are no longer part of any groups. You can always change their type and add them to a group, if necessary.",
   "content_en_sha1_hash": "de15dd23e864c862abd1d9c2273ed11ebd43e2c3",
   "created_at": "2025-05-19T21:30:49.987Z",
-  "updated_at": "2025-05-24T02:40:06.164Z",
+  "updated_at": "2025-05-26T07:57:32.310Z",
   "comment": {
     "text": "This translation key is used to describe a change in user roles within a product. It explains that users who were previously added are now guests and only visible to administrators in the Contacts list. The text aims to inform users about this change.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/GuestReleaseTip/index.tsx",
-      "line_number": 134,
-      "context": "<StyledBody>\n <Text fontSize=\"12px\" fontWeight={400} lineHeight=\"16px\" noSelect>\n <Trans\n t={t}\n ns=\"Translations\"\n i18nKey=\"GuestReleaseTipDescripton\"\n values={{ productName: t(\"Common:ProductName\") }}\n />\n </Text>\n {accessRightsLink ? (\n <ColorTheme",
+      "line_number": 133,
+      "context": "<StyledBody>\n <Text fontSize=\"12px\" fontWeight={400} lineHeight=\"16px\" noSelect>\n <Trans\n t={t}\n ns=\"Translations\"\n i18nKey=\"GuestReleaseTipDescripton\"\n values={{ productName: t(\"Common:ProductName\") }}\n />\n </Text>\n {accessRightsLink ? (\n <Link",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "New space",
   "content_en_sha1_hash": "89f3d523d25760ac054c8911723ac46a60384838",
   "created_at": "2025-05-19T21:30:57.459Z",
-  "updated_at": "2025-05-24T15:41:45.973Z",
+  "updated_at": "2025-05-26T07:57:33.005Z",
   "comment": {
     "text": "This translation key is used for the label \"New space\" which appears on a button in the MultipleSpaces component, likely triggering the creation of a new portal when clicked.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/management/src/categories/spaces/sub-components/MultipleSpaces.tsx",
-      "line_number": 66,
-      "context": "return (\n <StyledMultipleSpaces>\n <div className=\"multiple-spaces-section\">\n <Button\n size={buttonSize}\n label={t(\"NewSpace\")}\n className=\"spaces-button\"\n primary\n onClick={() => setCreatePortalDialogVisible(true)}\n />\n <SpacesRowContainer portals={portals} />",
+      "file_path": "/packages/management/src/app/spaces/multiple/header.tsx",
+      "line_number": 43,
+      "context": "const { t } = useTranslation([\"Management\"]);\n const { currentDeviceType } = useDeviceType();\n const { spacesStore } = useStores();\n const { setCreatePortalDialogVisible } = spacesStore;\n \n const onNewSpaceClick = () => {\n setCreatePortalDialogVisible(true);\n };\n \n return (\n <>",
       "module": "/packages/management"
     }
   ],

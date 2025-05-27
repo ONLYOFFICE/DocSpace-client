@@ -3,7 +3,7 @@
   "content": "Malformed certificate",
   "content_en_sha1_hash": "51d0691fdc1e1d9d5bf3868178f3e0d016f3250f",
   "created_at": "2025-05-19T21:30:54.283Z",
-  "updated_at": "2025-05-21T08:06:09.774Z",
+  "updated_at": "2025-05-24T08:20:05.127Z",
   "comment": {
     "text": "The \"Malformed certificate\" translation key is used to display an error message when a user attempts to import a malformed LDAP certificate. This text appears in a Certificate dialog, indicating that the certificate is not valid or has been corrupted during the import process.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Деформиран сертификат\" is a literal translation of \"Malformed certificate\", it doesn't convey the technical meaning accurately in Bulgarian. \"Деформиран\" implies physical deformation, not an error in the certificate's structure.",
+          "suggestion": "Повреден сертификат\" (Povredен sertifikat) is a more accurate translation, signifying a damaged or corrupted certificate."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -108,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ໃບປະກາສັ່ງບໍ່ຖືກຕ້ອງ' while understandable, isn't the most precise equivalent of 'Malformed certificate'. 'ໃບປະກາສັ່ງ' translates to 'certificate,' and 'ບໍ່ຖືກຕ້ອງ' means 'incorrect' or 'not correct'. A more accurate translation considering the technical context would be something along the lines of 'ໃບຢັ້ງຢືນບໍ່ຖືກຕ້ອງຮູບແບບ' (bai yang yeun bai thug thong roop phaap) - 'invalid certificate format'.",
-          "suggestion": "ໃບຢັ້ງຢືນບໍ່ຖືກຕ້ອງຮູບແບບ (bai yang yeun bai thug thong roop phaap)"
+          "description": "The translation 'ໃບປະກາສັ່ງບໍ່ຖືກຕ້ອງ' while generally conveying the meaning of 'malformed certificate', could be improved for accuracy and naturalness in Lao. 'ປະກາສັ່ງ' refers to a certificate but 'ບໍ່ຖືກຕ້ອງ' is a generic term for 'not correct' and doesn't specifically convey 'malformed'. A more accurate and common translation for 'malformed' would emphasize the structure or format being incorrect.",
+          "suggestion": "Consider 'ໃບປະກາສັ່ງມີຮູບແບບບໍ່ຖືກຕ້ອງ' (Bai prakasong mi roopbaan mot thukthong) - which translates to 'Certificate has an incorrect format'."
         }
       ],
       "approved_at": null
@@ -162,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'වැරදි ලෙස සකස් කරන ලද සහතිකය' while literally meaning 'certificate improperly constructed,' doesn't perfectly capture the nuance of 'Malformed certificate.' 'Malformed' implies a structural problem, not just incorrect construction. A more accurate translation could be something like 'ආකෘතිය වැරදි සහතිකය' (aakruthaya weredi sahatikaya) which means 'certificate with incorrect format'.",
-          "suggestion": "ආකෘතිය වැරදි සහතිකය (aakruthaya weredi sahatikaya)"
+          "description": "The translation 'වැරදි ලෙස සකස් කරන ලද සහතිකය' is a bit verbose and less natural for this context. While technically correct, a more concise and idiomatic translation would improve clarity.",
+          "suggestion": "වැරදි සහතිකය (Weradi Sahathikaya - Incorrect Certificate)"
         }
       ],
       "approved_at": null

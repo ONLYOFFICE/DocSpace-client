@@ -3,7 +3,7 @@
   "content": "Your window is too small to display all page contents",
   "content_en_sha1_hash": "53e0d19e2b95ce530a76a84a4792c15e1e6dcbb8",
   "created_at": "2025-05-19T21:30:50.790Z",
-  "updated_at": "2025-05-21T04:57:37.393Z",
+  "updated_at": "2025-05-24T05:41:23.224Z",
   "comment": {
     "text": "This translation key is used to display a warning message when the window size is too small to display all page contents. It appears on the Breakpoint Warning component and is intended to inform users about this limitation. Translators should provide a clear and concise message that communicates this issue in various languages.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is technically correct but sounds awkward and unnatural in Azerbaijani. A more idiomatic way to express this would be to focus on the content being cut off rather than the window being too small.",
-          "suggestion": "Səhifənin bir hissəsi görünmür."
+          "description": "The translation is technically correct but sounds unnatural and overly literal. A more natural phrasing would improve the user experience.",
+          "suggestion": "Pəncərənin ölçüsü səhifənin hamısını göstərmək üçün kifayət etmir"
         }
       ],
       "approved_at": null
@@ -75,13 +75,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ikkunasi on liian pieni näyttämään koko sivun sisällön' is a bit literal and sounds unnatural in Finnish. A more natural phrasing would express the idea that the window size prevents the content from being fully visible.",
-          "suggestion": "Ikkunasi on liian pieni, ettei koko sivun sisältö mahdu näkyviin."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -96,13 +90,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and sounds unnatural in Armenian. A more natural phrasing would better convey the meaning.",
-          "suggestion": "Ձեր պատուհանը այնքան փոքր է, որ չի կարողացել ցուցադրել էջի բոլոր բովանդակությունը"
+          "description": "The translation is too literal and sounds awkward in Armenian. A more natural phrasing would be better.",
+          "suggestion": "Ձեր պատուհանը շատ է փոքր էջի բոլոր բովանդակությունը ցուցադրելու համար"
         },
         {
           "type": "grammar",
-          "description": "While grammatically correct, the phrase 'էջի բոլոր բովանդակությունը ցուցադրելու համար' is a bit clunky. It could be more concise.",
-          "suggestion": "Ձեր պատուհանը այնքան փոքր է, որ չի կարողացել ցուցադրել էջի ամբողջությունը"
+          "description": "The phrase 'էջի բոլոր բովանդակությունը' is a bit clunky. It can be simplified.",
+          "suggestion": "Ձեր պատուհանը շատ է փոքր էջի բոլորովին ցուցադրելու համար"
         }
       ],
       "approved_at": null
@@ -119,13 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ウィンドウが小さいため、すべてのコンテンツが表示されない場合があります\" is a bit too verbose and formal for a user-facing message in a settings panel. It uses \"場合があります\" (may not be displayed) which is less direct than needed.",
-          "suggestion": "ウィンドウが小さいため、コンテンツの一部が表示されないことがあります"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The suggestion above alters the nuance slightly. A more direct translation while retaining clarity could be considered.",
-          "suggestion": "ウィンドウが小さいため、コンテンツ全体を表示できません"
+          "description": "The translation 'ウィンドウが小さいため、すべてのコンテンツが表示されない場合があります' is a bit too formal and implies a possibility rather than a certainty. The English suggests the window *is* too small, preventing display. A more direct translation would be more accurate.",
+          "suggestion": "ウィンドウが小さいため、ページ全体の内容が表示できません"
         }
       ],
       "approved_at": null
@@ -139,43 +128,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ໜ້າຈໍ' (screen) is correctly translated.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ເກີນໄປ' (too) is correctly translated.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ທີ່ຈະ' (to) is correctly translated.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ສະແດງ' (display) is correctly translated.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ເນື້ອຫາໜ້າທັງໝົດ' (all page contents) is correctly translated.",
-          "suggestion": null
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure is grammatically correct and flows naturally in Lao.",
-          "suggestion": null
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation is accurate, it could be slightly more concise.  'Your window is too small to display all page contents' implies a restriction on the browser window itself. The Lao translation is more generic about 'screen'.",
-          "suggestion": "ໜ້າຈໍຂອງທ່ານນ້ອຍເກີນໄປທີ່ຈະເບິ່ງເນື້ອຫາໜ້າທັງໝົດ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -226,13 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"සියළුම පිටුවල අන්තර්ගත පෙන්වීමට ඔබගේ කවුළුව ඉතා කුඩාය\" is a literal translation and sounds unnatural in Sinhala. A more natural phrasing would convey the same meaning.",
-          "suggestion": "ඔබේ කවුළුව ඉතා කුඩා නිසා පිටුවල සියළුම අන්තර්ගත පෙන්විය නොහැක (Obae kawuluva athi kude nae piwela siyaluya anthargatha penviya nahake)"
-        },
-        {
-          "type": "grammar",
-          "description": "The word order in the translation is slightly awkward. Sinhala typically places the subject before the verb.",
-          "suggestion": "See suggestion above for corrected phrasing."
+          "description": "The translation \"සියළුම පිටුවල අන්තර්ගත පෙන්වීමට ඔබගේ කවුළුව ඉතා කුඩාය\" is not a natural or accurate translation of \"Your window is too small to display all page contents\". The structure is awkward. 'සියළුම පිටුවල' (siyalum pituwala) literally means 'in all pages', which doesn't quite convey the intended meaning.  It sounds overly literal.",
+          "suggestion": "A more natural and accurate translation would be something like: \"ඔබගේ ජනෙලාව ඉතා කුඩා නිසා පිටුවල ඇති සියළු දෑ පෙන්වීමට බැරි විය හැකිය\" (Obage janelawa ithama kudaya nisa pituwala athi siyalu da penvimita bari viya haduwa) - 'Your window is too small, so it may not be possible to display all contents of the page'."
         }
       ],
       "approved_at": null
@@ -254,14 +202,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ваш прозор је превише мали да прикаже сав садржај страница' is a literal translation and doesn't convey the intended meaning clearly in Serbian. 'Prozor' directly translates to 'window,' which is not the relevant component here. The intended meaning is about the browser viewport or screen size.",
-          "suggestion": "Ваш екран је премали за приказивање свих садржаја странице."
+          "type": "spelling",
+          "description": "The word 'прозор' (window) is correctly spelled, but may not be the most natural phrasing in this context. While technically correct, 'прозор' typically refers to a physical window.",
+          "suggestion": "Consider using a more general term like 'приказ' (display) or rephrasing the sentence to clarify the context. For example: 'Приказ странице је ограничена због величине прозора' (The display of the page is limited due to the window size)."
         },
         {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the translation uses a more formal tone than might be appropriate for settings text. Consider a more conversational approach.",
-          "suggestion": "Ваш екран је мали за приказивање свих садржаја странице."
+          "type": "incorrect_translation",
+          "description": "While the translation conveys the general meaning, the literal translation isn't the most natural phrasing in Serbian. The English phrasing is more descriptive and emphasizes the inability to display all content. The Serbian translation emphasizes the size of the window being the limiting factor.",
+          "suggestion": "Consider: 'Не можете видети цео садржај странице због величине прозора.' (You cannot see the entire page content due to the window size.) or 'Потребан је већи прозор за приказивање целог садржаја странице.' (A larger window is needed to display the entire page content.)"
         }
       ],
       "approved_at": null
@@ -269,13 +217,25 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Vaš prozor je previše mali da prikaže sav sadržaj stranica' is a bit literal and could be improved for clarity and naturalness. While technically correct, it's not how a native speaker would typically phrase it.",
+          "suggestion": "Vaš prozor je premali za prikazivanje celog sadržaja stranice."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Pencereniz tüm sayfa içeriğini görüntülemek için çok küçük' is not a perfect match for the English 'Your window is too small to display all page contents'. A more natural and accurate translation would emphasize the inability to see the entire page.",
+          "suggestion": "Sayfa içeriğinin tamamını görüntülemek için pencereniz çok küçük."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

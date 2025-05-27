@@ -3,7 +3,7 @@
   "content": "No files or folders match this filter. Try another or remove the filter to view all files.",
   "content_en_sha1_hash": "f2861dacb0262bcf7db8f51e73d24b3a7e422750",
   "created_at": "2025-05-19T21:30:44.832Z",
-  "updated_at": "2025-05-22T11:56:37.441Z",
+  "updated_at": "2025-05-26T07:57:32.147Z",
   "comment": {
     "text": "\"No files or folders match this filter. Try another or remove the filter to view all files.\" This translation key is used in a UI element to display a message when a file filter does not return any results, prompting the user to adjust their search or remove the filter. It appears in an empty filter container component.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\EmptyContainer\\EmptyFilterContainer.js",
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyFilterContainer.js",
       "line_number": 64,
       "context": "const navigate = useNavigate();\n const location = useLocation();\n \n const descriptionText = isRooms\n ? t(\"Common:EmptyFilterRoomsDescription\")\n : t(\"Common:EmptyFilterFilesDescription\");\n \n const getIconURL = () => {\n if (isRooms)\n return theme.isBase ? (\n <EmptyFilterRoomsLightIcon />",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Azerbaijani translation uses a semicolon (;) instead of a period (.) at the end of the first sentence. While semicolons are acceptable in some contexts, a period is generally preferred for this type of descriptive text.",
-          "suggestion": "Replace ';' with '.' at the end of the first sentence: 'Bu filtrə uyğun heç bir fayl və ya qovluq yoxdur. '"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -51,13 +45,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Try another' is a bit awkward in Czech. A more natural translation would be 'Zkuste jiný' or 'Vyzkoušejte jiný'.",
-          "suggestion": "Zkuste jiný filtr nebo filtr odstraňte a zobrazte všechny soubory."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -84,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"filter\" is translated as \"hakuehdot\" which is more accurately 'search criteria' rather than 'filter'. While understandable in context, a more direct translation of 'filter' would improve accuracy.",
-          "suggestion": "Consider translating 'filter' as 'suodatin' or rephrasing the sentence to avoid a direct translation of 'filter'."
+          "description": "The term 'hakuehtoja' (search conditions) is a bit too formal and technical for the intended meaning of 'filter'. A more natural phrasing would be 'suodatinta' or 'suodattimia'.",
+          "suggestion": "Mikään tiedosto tai kansio ei vastaa suodatinta. Kokeile toista tai poista suodatin nähdäksesi kaikki tiedostot."
         }
       ],
       "approved_at": null
@@ -102,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word \"զտիչը\" (ztiĉə) is archaic or less common for \"filter\" in modern Armenian. \"ֆիլտրը\" (filtrə) is more widely used.",
-          "suggestion": "Փորձեք մեկ այլ կամ հեռացրեք ֆիլտրը՝ բոլոր ֆայլերը դիտելու համար:"
+          "description": "The word 'զտիչը' (ztičը) is slightly awkward and less common in modern Armenian. While technically correct, 'ֆիլտրը' (filtrը) would be a more natural and widely understood equivalent for 'filter'.",
+          "suggestion": "Replace 'զտիչը' with 'ֆիլտրը'."
         }
       ],
       "approved_at": null
@@ -120,13 +108,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Try another\" is too literal. A more natural phrasing would be \"別のものを試してください\" or simply \"別のフィルタをお試しください\". The current phrasing, \"別のフィルタを適用するか\", is a bit clunky.",
-          "suggestion": "別のものを試してください or 別のフィルタをお試しください"
+          "description": "The phrase \"別のフィルタを適用するか\" could be improved. While technically correct, it's a bit formal and clunky for a user interface. A more natural phrasing would be more user-friendly.",
+          "suggestion": "別のフィルタを試すか、フィルタを解除してすべてのファイルを表示してください。"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"フィルタを解除してすべてのファイルを表示してください\" is slightly formal and verbose. A more conversational alternative would be \"フィルタを解除してすべてのファイルを表示できます\" or \"フィルタを解除するとすべてのファイルが表示されます\".",
-          "suggestion": "フィルタを解除するとすべてのファイルが表示されます"
+          "type": "formatting",
+          "description": "The sentence structure is a bit long and could be broken into two shorter sentences for better readability in a UI.",
+          "suggestion": "このフィルタに一致するファイルやフォルダはありません。別のフィルタを試すか、フィルタを解除してすべてのファイルを表示してください。"
         }
       ],
       "approved_at": null
@@ -143,13 +131,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ເອກະສານ' (documents) is used repeatedly. While correct, it may sound repetitive. Consider using synonyms for variety.",
-          "suggestion": "Consider replacing some instances of 'ເອກະສານ' with 'ຂໍ້ມູນ' or 'ໄຟລ໌' for variation."
+          "description": "The word 'ຕົວກັ່ນຕອງ' is potentially a misspelling. It seems like a combination of 'ຕົວ' and 'ກັ່ນຕອງ', but the correct word is likely 'ຕົວກັ່ນຕອງ' with the combining character.",
+          "suggestion": "ຕົວກັ່ນຕອງ"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'ຂໍຈົ່ງລອງໃຊ້ອື່ນ' (please try another) sounds slightly formal. While not incorrect, it may be softened for better user experience.",
-          "suggestion": "Consider replacing 'ຂໍຈົ່ງລອງໃຊ້ອື່ນ' with 'ລອງໃຊ້ອື່ນ' or 'ຈົ່ງລອງໃຊ້ອື່ນ'."
+          "description": "The phrase 'ຂໍຈົ່ງລອງໃຊ້ອື່ນ' is a bit formal and could be simplified for a more natural flow. It's technically correct but sounds somewhat stiff.",
+          "suggestion": "ລອງໃຊ້ອື່ນ"
         }
       ],
       "approved_at": null
@@ -190,13 +178,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Filtru de fișier sau folder nu a produs rezultate\" is not a natural Romanian phrasing. It literally translates to 'File or folder filter did not produce results.' A more natural way to express this is 'Niciun fișier sau folder nu corespunde acestui filtru'.",
+          "description": "The translation \"Filtru de fișier sau folder nu a produs rezultate\" is a bit awkward. A more natural Romanian phrasing would be 'Niciun fișier sau folder nu corespunde acestui filtru'. The current phrasing feels overly literal and slightly unnatural.",
           "suggestion": "Niciun fișier sau folder nu corespunde acestui filtru."
         },
         {
           "type": "grammar",
-          "description": "While technically correct, 'Încercați un alt filtru sau eliminați filtrul' could be improved for flow. A more common construction is 'Încercați un alt filtru sau ștergeți-l'.",
-          "suggestion": "Încercați un alt filtru sau ștergeți-l."
+          "description": "While not strictly incorrect, using \"Încercați\" instead of the more common \"Încearcă\" (informal) or \"Încercați\" (formal) for 'Try' might feel a little too formal in this context.",
+          "suggestion": "Încearcă un alt filtru sau elimină filtrul pentru a afișa toate fișierele."
         }
       ],
       "approved_at": null
@@ -212,19 +200,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ෆෝල්ඩර' is misspelled. The correct spelling is 'ෆෝල්ඩර්'.",
-          "suggestion": "ෆෝල්ඩර්"
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure 'මෙම පෙරහනට ගැලපෙන ගොනු හෝ ෆෝල්ඩර නොමැත' can be improved for better flow. It's a bit clunky.",
-          "suggestion": "මෙම පෙරහනට ගැලපෙන ගොනු හෝ ෆෝල්ඩර් කිසිවක් නොමැත."
-        },
-        {
           "type": "incorrect_translation",
-          "description": "The phrase 'remove the filter' is literally translated. While understandable, a more natural phrasing might improve readability.",
-          "suggestion": "පෙරහන අවලංගු කරන්න."
+          "description": "The phrase \"සියලු ගොනු බැලීමට\" (siyallu gonu balemita) literally translates to \"to view all files\". While understandable, it's slightly awkward in Sinhala. A more natural phrasing would be \"සියලු ගොනු දැකීමට\" (siyallu gonu dekimaata) or \"සියලු ගොනු පරීක්ෂා කිරීමට\" (siyallu gonu parikshaakemaata).",
+          "suggestion": "සියලු ගොනු දැකීමට (siyallu gonu dekimaata) or සියලු ගොනු පරීක්ෂා කිරීමට (siyallu gonu parikshaakemaata)"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure could be improved for better flow.  Combining the two sentences into one, while maintaining clarity, would enhance readability.",
+          "suggestion": "මෙම පෙරහනට ගැලපෙන ගොනු හෝ ෆෝල්ඩර නොමැත. සියලු ගොනු දැකීමට වෙනත් පෙරහනක් උත්සාහ කරන්න, නැත්නම් පෙරහන ඉවත් කරන්න."
         }
       ],
       "approved_at": null
@@ -244,7 +227,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'фасцикла' is often misspelled. The correct spelling is 'фасцикле'.",
+          "suggestion": "фасцикле"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -253,8 +242,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Pokušajte sa drugim\" is awkward. A more natural translation of \"Try another\" would be \"Pokušajte drugi\" or \"Isprobajte drugi\".",
-          "suggestion": "Pokušajte drugi"
+          "description": "The phrase 'Pokušajte sa drugim' is a bit awkward. A more natural translation for 'Try another' would be 'Pokušajte sa drugim filterom' or simply 'Pokušajte drugi filter'.",
+          "suggestion": "Pokušajte sa drugim filterom"
         }
       ],
       "approved_at": null

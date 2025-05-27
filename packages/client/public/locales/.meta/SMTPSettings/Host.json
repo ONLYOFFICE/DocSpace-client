@@ -3,7 +3,7 @@
   "content": "Host",
   "content_en_sha1_hash": "3960ec4ca5fb5e5d8cdb2cc1c5121c003e426517",
   "created_at": "2025-05-19T21:30:53.301Z",
-  "updated_at": "2025-05-21T01:34:40.629Z",
+  "updated_at": "2025-05-24T02:48:21.164Z",
   "comment": {
     "text": "This translation key represents the label for a \"Host\" authentication method in an SMTP settings section of a portal's login interface. It is used to display the term \"Host\" in the UI.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Ev sahibi' literally translates to 'Host', in the context of SMTPSettings, 'Host' refers to the server address. A more accurate translation would be 'Server' or 'Xidmətçi' (formal). 'Ev sahibi' implies a homeowner, which is not the intended meaning.",
-          "suggestion": "Server"
+          "description": "The translation \"Ev sahibi\" literally means \"House owner.\" While it can sometimes be used metaphorically, in the context of SMTPSettings:Host, it's not the correct translation for \"Host.\" It implies a physical house, not a server or email server.",
+          "suggestion": "The correct translation for \"Host\" in this context is likely \"Server\" or \"Qonaq\".  Depending on the specific use case (email server vs. general server), one may be more appropriate than the other.  If a more generic term is needed, \"Xidmət\" (Service) could also be considered."
         }
       ],
       "approved_at": null
@@ -51,7 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Hostitel' is a valid Czech word, it doesn't perfectly capture the meaning of 'Host' in the context of SMTPSettings. 'Host' in this context refers to the server address.",
+          "suggestion": "Considering the context of SMTPSettings, 'Server' or 'Hostname' might be more accurate translations. Alternatively, keeping 'Host' is acceptable if users are familiar with the English term."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -66,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Greek translation \"Κεντρικός υπολογιστής\" translates to \"Main Computer\". While technically related, it doesn't accurately represent the English term \"Host\" in the context of SMTPSettings. \"Host\" refers to the server address, not the computer itself.",
-          "suggestion": "A more accurate translation would be something along the lines of \"Διακομιστής\" (Server) or \"Διεύθυνση διακομιστή\" (Server Address)."
+          "description": "The Greek translation \"Κεντρικός υπολογιστής\" (Kentrikós ypologistís) translates to 'Main Computer'. While technically related to a server, it's not the direct equivalent of 'Host' in the context of SMTPSettings. 'Host' in this context refers to the server name or address.",
+          "suggestion": "A more accurate translation would be something like \"Διακομιστής\" (Diakomistís) which translates to 'Server', or \"Φιλοξενητής\" (Filoxenitís) which translates to 'Host'."
         }
       ],
       "approved_at": null
@@ -96,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Հյուրընկալող' (Hyurunkalogh) is a general term for 'host' and doesn't specifically refer to an SMTP host. A more accurate translation would be something like 'արծանագրիչ' (ardzanagrich) or 'դյուրավառ' (dyuravarr), depending on the intended nuance and technical context. 'Host' in this context typically refers to the server address.",
-          "suggestion": "Consider 'արծանագրիչ' (ardzanagrich) or 'դյուրավառ' (dyuravarr) or a more context-specific term for 'SMTP host'."
+          "description": "The Armenian translation \"Հյուրընկալող\" (Hyurənkaloġ) translates to 'host' or 'entertainer', but in the context of SMTPSettings:Host, it's referring to the hostname or server address. A more accurate translation would be something like 'արտոնություն' (artonəut’yun) which means 'permission' or 'authority', or a direct transliteration like 'Հոսթ' (Host).",
+          "suggestion": "արտոնություն (artonəut’yun) or Հոսթ (Host)"
         }
       ],
       "approved_at": null
@@ -108,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Dominio' can sometimes be used in the context of a host, it's not the most accurate translation of 'Host' in the context of SMTPSettings. 'Host' refers to the server address. A more accurate translation would be 'Server' or 'Indirizzo del server'. 'Dominio' refers more specifically to the domain name.",
-          "suggestion": "Server"
+          "description": "The translation \"Dominio\" for \"Host\" in the context of SMTPSettings is not ideal. While \"Dominio\" can mean domain, \"Host\" in this context refers to the server hostname.",
+          "suggestion": "Consider \"Server\" or \"Hostname\" as a more accurate translation depending on the desired level of technicality."
         }
       ],
       "approved_at": null
@@ -138,7 +144,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Hosts\" is a plural form, while the English \"Host\" is a singular noun referring to a server. The translation should reflect this singular nature.",
+          "description": "The Latvian translation 'Hosts' is the plural form. The English 'Host' refers to a single server. The translation should reflect this.",
           "suggestion": "Serveris"
         }
       ],
@@ -234,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'主机' (zhuji) generally translates to 'host' in the context of a server or system. However, in the specific context of SMTPSettings, 'Host' refers to the hostname or server address. A more appropriate translation might be '服务器地址' (fuwuyuan dizhi) or '主机名' (zhuji ming). '主机' is too general.",
-          "suggestion": "服务器地址 (fuwuyuan dizhi) or 主机名 (zhuji ming)"
+          "description": "'主机' (zhuji) generally translates to 'host' in the context of a server or computing environment. While it can sometimes be used for 'host' in other contexts, '主机' might be overly technical for configuration settings. A more appropriate translation might be '服务器地址' (fuwuyuan dizhi) for 'Host' in this SMTPSettings context, or simply '服务器' (fuwuyuan).",
+          "suggestion": "Consider '服务器地址' (fuwuyuan dizhi) or '服务器' (fuwuyuan) for a more accurate and less technical translation depending on the target audience and surrounding context."
         }
       ],
       "approved_at": null

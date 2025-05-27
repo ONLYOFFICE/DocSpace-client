@@ -3,7 +3,7 @@
   "content": "Do you want to cancel uploading?",
   "content_en_sha1_hash": "a28e82059854ba65308fed5a353ef5e666701889",
   "created_at": "2025-05-19T21:30:43.388Z",
-  "updated_at": "2025-05-22T11:56:37.311Z",
+  "updated_at": "2025-05-26T07:57:32.212Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message when cancelling an uploading process. It appears in a cancel operation dialog and prompts the user to confirm cancellation of the upload process.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\CancelOperationDialog\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/CancelOperationDialog/index.tsx",
       "line_number": 85,
       "context": "const onChangeCheckbox = () => {\n setIsChecked(!isChecked);\n };\n \n const bodyText = isSecondaryProgressVisbile\n ? t(\"Common:CancelUploadingProcess\")\n : t(\"Common:CancelCurrentProcess\");\n \n return (\n <ModalDialog visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"Common:Confirmation\")}</ModalDialog.Header>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Möchten Sie den aktuellen Vorgang abbrechen?\" is a literal translation but doesn't perfectly capture the nuance of 'Do you want to cancel uploading?'. While understandable, it's a bit formal and verbose for a confirmation prompt.",
-          "suggestion": "A more natural and concise translation might be \"Möchten Sie den Upload abbrechen?\" or \"Upload abbrechen?\""
+          "description": "While the translation conveys the general meaning, it's a bit formal for a confirmation prompt. 'Möchten Sie den aktuellen Vorgang abbrechen?' translates to 'Would you like to cancel the current process?'. A more natural and user-friendly translation for a confirmation prompt like 'Do you want to cancel uploading?' would be something like 'Möchten Sie das Hochladen abbrechen?' or 'Soll das Hochladen abgebrochen werden?'",
+          "suggestion": "Möchten Sie das Hochladen abbrechen?"
         }
       ],
       "approved_at": null
@@ -90,12 +90,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ցանկանու՞մ եք ընդհատել բեռնել\" while understandable, is not the most natural or accurate translation of \"Do you want to cancel uploading?\". \"Ընդհատել\" (to interrupt) doesn't perfectly capture the meaning of \"cancel\".",
-          "suggestion": "Ցանկանու՞մ եք չեղարկել բեռնումը?"
-        },
-        {
-          "type": "formatting",
-          "description": "The Armenian translation lacks the definite article before the noun 'բեռնումը'.",
+          "description": "The translation 'Ցանկանու՞մ եք ընդհատել բեռնել' doesn't perfectly capture the nuance of 'Do you want to cancel uploading?'. 'Ընդհատել բեռնել' literally translates to 'interrupt loading' which is slightly different from 'cancel uploading'.",
           "suggestion": "Ցանկանու՞մ եք չեղարկել բեռնումը?"
         }
       ],
@@ -110,13 +105,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"アップロードをキャンセルしますか？\" translates more accurately to \"Will you cancel the upload?\" or \"Are you sure you want to cancel the upload?\" rather than directly mirroring \"Do you want to cancel uploading?\". While understandable, it's not the most natural phrasing in Japanese.",
-          "suggestion": "アップロードをキャンセルしますか？"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -179,23 +168,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'අවලංගු' is spelled correctly. It means 'cancel' or 'terminate'.",
-          "suggestion": null
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure is grammatically correct and natural in Sinhala. The question format is appropriate.",
-          "suggestion": null
+          "description": "The word 'අවලංගු' (awalangu) is correctly spelled, but a more common and natural phrasing for 'cancel' in this context might be 'හලන්න' (halanna).",
+          "suggestion": "උඩුගත කිරීම හලන්න ඔබට අවශ්‍යද?"
         },
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, the English phrase 'Do you want to cancel uploading?' is often shortened to 'Cancel uploading?' in user interfaces. A more concise Sinhala equivalent would improve the user experience. The current translation is a little wordy.",
-          "suggestion": "උඩුගත කිරීම අවලංගු කරන්න? (Udugath kirimawa avalangu karanna?)"
-        },
-        {
-          "type": "formatting",
-          "description": "Consider using a question mark instead of a full stop, to be more aligned with standard UI practices in Sinhala.",
-          "suggestion": null
+          "description": "While 'අවලංගු කිරීමට ඔබට අවශ්‍යද?' is grammatically correct, it's a somewhat formal phrasing. A more conversational and natural translation would be a more direct question.",
+          "suggestion": "උඩුගත කිරීමේ ක්‍රියාවලිය හලන්නද?"
         }
       ],
       "approved_at": null
@@ -218,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Да ли желите да откажете отпремање?' while grammatically correct, doesn't perfectly capture the nuance of 'cancel uploading.' 'Отпремање' generally means 'shipping' or 'sending,' not specifically uploading files. A more accurate translation for 'cancel uploading' would be something closer to 'Да ли желите да прекинете отпремање?' (Do you want to interrupt uploading?) or 'Да ли желите да откажете слање?' (Do you want to cancel sending?).",
-          "suggestion": "Да ли желите да прекинете отпремање?"
+          "description": "The Serbian translation \"Да ли желите да откажете отпремање?\" doesn't accurately convey the meaning of \"Do you want to cancel uploading?\". 'Отпремање' translates more closely to 'shipping' or 'dispatching', not 'uploading'.",
+          "suggestion": "Да ли желите да откажете упутство?"
         }
       ],
       "approved_at": null
@@ -227,13 +206,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'otkažete otpremanje' sounds slightly formal and less natural in this context. A more conversational translation for 'cancel uploading' would be preferable.",
-          "suggestion": "Da li želite da prekinete otpremanje?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -248,8 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Хочете скасувати передавання?' is not the most natural or precise translation of 'Do you want to cancel uploading?'. While understandable, 'передавання' implies a broader sense of transferring, not specifically canceling an upload process.",
-          "suggestion": "Хочете скасувати завантаження?"
+          "description": "While \"Хочете скасувати передавання?\" is understandable, a more accurate and natural translation of \"Do you want to cancel uploading?\" would be \"Бажаєте скасувати завантаження?\" or \"Чи бажаєте скасувати завантаження?\"",
+          "suggestion": "Бажаєте скасувати завантаження?"
         }
       ],
       "approved_at": null

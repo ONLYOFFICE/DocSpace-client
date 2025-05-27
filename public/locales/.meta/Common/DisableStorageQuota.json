@@ -3,7 +3,7 @@
   "content": "Disable storage quota",
   "content_en_sha1_hash": "3b4a7e113bbb04b61f398d2dac4ffe348435c9a0",
   "created_at": "2025-05-19T21:30:44.553Z",
-  "updated_at": "2025-05-22T11:56:37.328Z",
+  "updated_at": "2025-05-26T07:57:32.934Z",
   "comment": {
     "text": "This translation key is used to display the text \"Disable storage quota\" in a modal dialog when the user has opted to disable storage quota. It appears as the header of a modal dialog that allows users to manage their storage quotas.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\ChangeStorageQuotaDialog\\index.js",
-      "line_number": 117,
-      "context": "return (\n <ModalDialog visible={isVisible} onClose={onCloseClick}>\n <ModalDialog.Header>\n {isDisableQuota\n ? t(\"Common:DisableStorageQuota\")\n : t(\"Common:ManageStorageQuota\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBodyContent>\n <Text noSelect>",
-      "module": "\\packages\\client"
+      "file_path": "/packages/shared/dialogs/change-storage-quota/index.tsx",
+      "line_number": 132,
+      "context": "visible={isVisible}\n onClose={onCloseClick}\n >\n <ModalDialog.Header>\n {isDisableQuota\n ? t(\"Common:DisableStorageQuota\")\n : t(\"Common:ManageStorageQuota\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text noSelect>\n {isDisableQuota",
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -36,8 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Yaddaş kvotasını deaktiv edin\" is a somewhat literal and less natural-sounding translation. A more common phrasing would be \"Yaddaş kvotasını söndürün\" or \"Yaddaş kvotasını ləğv edin\". \"Deaktiv edin\" sounds very formal and technical.",
-          "suggestion": "Consider \"Yaddaş kvotasını söndürün\" or \"Yaddaş kvotasını ləğv edin\"."
+          "description": "The translation 'Yaddaş kvotasını deaktiv edin' is a literal translation and doesn't convey the intended meaning as naturally in Azerbaijani. 'Kvotasını' is a direct transliteration of 'quota,' which can sound awkward.",
+          "suggestion": "Consider a more natural phrasing like 'Saxta yerinə aid məhdudiyyəti ləğv edin' or 'Yaddaş yerinin məhdudiyyətini söndürün.'"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'kvotasını' is understandable, it's a transliteration. Azerbaijani typically wouldn't use this directly.",
+          "suggestion": "Avoid direct transliteration and use an Azerbaijani equivalent or rephrase."
         }
       ],
       "approved_at": null
@@ -65,14 +70,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'αποθ. χώρου' is an abbreviation. While understandable, it's less formal and might be better written out.",
-          "suggestion": "Αποθήκευσης χώρου"
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Απενεργοποίηση ποσόστωσης αποθ. χώρου\" is a bit clunky and formal. A more natural-sounding translation would be more appropriate.",
+          "suggestion": "Απενεργοποίηση περιορισμού χώρου"
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, using the full word 'αποθήκευσης' instead of the abbreviation 'αποθ.' improves readability and professionalism. This aligns better with typical terminology in software or configuration settings.",
-          "suggestion": "Consider using the full term for clarity."
+          "description": "The abbreviation 'αποθ. χώρου' could be improved for readability. While understandable, it's a bit abrupt.",
+          "suggestion": "αποθηκευτικού χώρου"
         }
       ],
       "approved_at": null
@@ -140,7 +145,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Wyłącz limit pamięci\" is understandable, a more precise and natural translation of \"Disable storage quota\" would be \"Wyłącz limit na magazyn danych\" or \"Wyłącz ograniczenie przestrzeni dyskowej\". \"Pamięć\" typically refers to RAM, not storage quota.",
+          "suggestion": "Wyłącz limit na magazyn danych"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -158,13 +169,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Dezactivare cotă spațiu de stocare' is understandable, a more natural and commonly used translation for 'Disable storage quota' would be 'Dezactivarea limitei de stocare' or 'Eliminarea limitei de stocare'. 'Cota' is technically correct, but 'limită' conveys the meaning better in this context.",
-          "suggestion": "Dezactivarea limitei de stocare"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -179,8 +184,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ආචයන සලාකය අබල කරන්න\" does not accurately convey the meaning of \"Disable storage quota.\" The word 'ආචයන' (aachayana) doesn't fit the context and 'සලාකය' (salaakaya) isn't a commonly used term related to storage. The overall phrasing is awkward and doesn't read naturally.",
-          "suggestion": "A more accurate translation would be something like \"ගබඩාවේ ප්‍රමාණය සීමාව අයින් කරන්න\" (gabadaawaa premaanyaa seemaawa aain kanna) or \"ගබඩාවේ සීමාව අයින් කරන්න\" (gabadaawaa seemaawa aain kanna)."
+          "description": "The Sinhala translation \"ආචයන සලාකය අබල කරන්න\" doesn't accurately convey the meaning of \"Disable storage quota\". \"ආචයන\" (aachayana) seems unrelated, and \"සලාකය\" (salaakaya) doesn't directly translate to 'quota'.",
+          "suggestion": "A more accurate translation would be something like \"ගබඩාවේ ඉඩ ප්රමාණය සීමාව අයින් කරන්න\" (gabadaawe idaa pramaaNa seemaawaa ein karanna) or \"ගබඩාවේ සීමාව අයින් කරන්න\" (gabadaawe seemaawaa ein karanna)."
         }
       ],
       "approved_at": null
@@ -209,8 +214,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Onemogući kvotu skladišta' while technically understandable, doesn't perfectly capture the meaning of 'Disable'. 'Onemogući' implies 'disable' or 'make impossible', but a more precise translation might consider a phrasing that more directly conveys the act of removing or deactivating a storage quota.",
-          "suggestion": "Consider 'Ukloni kvotu skladišta' (Remove storage quota) or 'Isključi kvotu skladišta' (Deactivate storage quota)."
+          "description": "The translation 'Onemogući kvotu skladišta' while understandable, is not the most natural or common way to express 'Disable storage quota' in Serbian. A more common and direct translation would be something like 'Isključi kvotu skladišta'.",
+          "suggestion": "Isključi kvotu skladišta"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Enable this option if the current user does not have rights to read from LDAP server, and enter the credentials of another user with the read rights.",
   "content_en_sha1_hash": "78fee709167a8eddb8558437576502d931eb861f",
   "created_at": "2025-05-19T21:30:54.171Z",
-  "updated_at": "2025-05-21T08:28:46.350Z",
+  "updated_at": "2025-05-24T08:41:30.809Z",
   "comment": {
     "text": "This translation key is used for a tooltip that explains the purpose of enabling LDAP authentication when another user has read rights. It provides context for users setting up LDAP authentication and appears in a UI component as a help button.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word \"məlumatlarını\" (information) is slightly awkward in this context. It implies personal details rather than authentication credentials.",
-          "suggestion": "Consider replacing \"məlumatlarını\" with a more specific term like \"parol və istifadəçi adını\" (password and username) or a more general term like \"daxil etmələri\" (entries)."
+          "description": "The word 'məlumatlarını' might be better as 'parol və məlumatlarını' or something similar to clarify it refers to credentials. While 'məlumatlarını' can mean information, in this context, it's unclear whether it refers to username and password.",
+          "suggestion": "Cari istifadəçisinin LDAP server oxumaq hüququ yoxdursa, bu seçimi aktivləşdirin və oxumaq hüququ olan başqa istifadəçinin parol və məlumatlarını daxil edin."
         }
       ],
       "approved_at": null
@@ -72,13 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The sentence structure is awkward. The phrase 'e introduzca' is not grammatically correct after 'si'. It should be 'y introduzca' or better yet, rephrase to avoid the imperative.",
-          "suggestion": "Active esta opción si el usuario actual no tiene derechos de lectura del servidor LDAP y proporcione las credenciales de otro usuario con derechos de lectura."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'introduzca' is a possible translation for 'enter', it's overly formal and direct for a tooltip. A more natural phrasing would be 'ingrese'.",
-          "suggestion": "Active esta opción si el usuario actual no tiene derechos de lectura del servidor LDAP y proporcione las credenciales de otro usuario con derechos de lectura."
+          "description": "The sentence structure is slightly awkward. 'e introduzca' should be 'y introduzca'.",
+          "suggestion": "Active esta opción si el usuario actual no tiene derechos de lectura del servidor LDAP y introduzca las credenciales de otro usuario con derechos de lectura."
         }
       ],
       "approved_at": null
@@ -101,8 +96,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"մուտքագրեք ընթերցման իրավունք ունեցող մեկ այլ օգտատիրոջ հավատարմագրերը\" is a bit literal and could be improved for clarity and naturalness in Armenian. \"Enter the credentials of another user with read rights\" is somewhat stilted.",
-          "suggestion": "Մուտքագրեք մեկ այլ օգտատիրոջ հավատարմագրերը, ով ունի ընթերցման իրավունք։"
+          "description": "The phrase \"Միացրեք այս տարբերակը\" (Activate this option) is a bit literal and doesn't flow as naturally as it could. A more idiomatic translation would be something like \"Ապահովեք այս տարբերակը\" (Ensure this option) or \"Լրացրեք այս տարբերակը\" (Complete this option).",
+          "suggestion": "Լրացրեք այս տարբերակը, եթե ընթացիկ օգտատերը իրավունք չունի կարդալու LDAP սերվերից և մուտքագրեք ընթերցման իրավունք ունեցող մեկ այլ օգտատիրոջ հավատարմագրերը:"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"մուտքագրեք\" (enter) is a bit formal and might be replaced with a more conversational term. \"ներմուծեք\" (import) would be more suited.",
+          "suggestion": "Միացրեք այս տարբերակը, եթե ընթացիկ օգտատերը իրավունք չունի կարդալու LDAP սերվերից և ներմուծեք ընթերցման իրավունք ունեցող մեկ այլ օգտատիրոջ հավատարմագրերը:"
         }
       ],
       "approved_at": null
@@ -112,9 +112,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'immetti' is not the most natural or idiomatic way to express 'enter' in this context. It sounds somewhat formal.",
-          "suggestion": "Inserisci"
+          "type": "grammar",
+          "description": "The phrase 'Abilita questa opzione se l'utente corrente non dispone dei diritti di lettura dal server LDAP' is grammatically awkward. The use of 'dispone' is correct, but the sentence structure is not as fluid as it could be.",
+          "suggestion": "Abilita questa opzione se l'utente corrente non ha i diritti di lettura dal server LDAP"
+        },
+        {
+          "type": "grammar",
+          "description": "The use of 'e immetti' is a bit abrupt. It's more natural to use a conjunction to connect the two clauses.",
+          "suggestion": "Abilita questa opzione se l'utente corrente non ha i diritti di lettura dal server LDAP e inserisci le credenziali di un altro utente con i diritti di lettura."
         }
       ],
       "approved_at": null
@@ -137,13 +142,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ເຄື່ອງແມ່ຂ່າຍ' (machine/server) is technically correct but could be more accurately translated to 'ເຄື່ອງແມ່ຂ່າຍ LDAP' to specify that it's the LDAP server being referenced. While understood, it lacks precision.",
-          "suggestion": "ເຄື່ອງແມ່ຂ່າຍ LDAP"
+          "description": "The word 'ເຄື່ອງແມ່ຂ່າຍ' (keung mae khai) is a bit formal and technical. It could be simplified to 'ເຄື່ອງແມ່ຂ່າຍ' or a more direct term for server depending on the target audience.",
+          "suggestion": "Consider 'ເຄື່ອງແມ່ຂ່າຍ LDAP' or a more simplified term based on the context."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'ໃສ່ຂໍ້ມູນການເຂົ້າສູ່ລະບົບ' (enter login information) is a bit wordy. A more concise phrasing would improve readability.",
-          "suggestion": "ໃສ່ຊື່ຜູ້ໃຊ້ ແລະລະຫັດຜ່ານ"
+          "description": "The phrase 'ໃສ່ຂໍ້ມູນການເຂົ້າສູ່ລະບົບ' (sai khomun kan khao su rabop) is a bit verbose. While technically correct, it can be shortened.",
+          "suggestion": "Consider 'ໃສ່ຊື່ຜູ້ໃຊ້ແລະລະຫັດຜ່ານ' (sai suu phu sai lae rahat phon) for a more concise phrasing meaning 'enter username and password'."
         }
       ],
       "approved_at": null
@@ -151,13 +156,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ievadīt cita lietotāja akreditācijas datus' is a bit clunky and less natural in Latvian.  A more fluent translation would be 'norādiet cita lietotāja datus' or 'norādiet cita lietotāja autentifikācijas datus'.",
-          "suggestion": "norādiet cita lietotāja datus"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -189,9 +188,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The sentence structure 'introduceți datele de identificare' is slightly awkward in Romanian. A more natural phrasing would be 'introduceți acreditările'.",
-          "suggestion": "Activați această opțiune dacă utilizatorul actual nu are permisiuni de citire de pe serverul LDAP și introduceți acreditările unui alt utilizator cu permisiuni de citire."
+          "type": "incorrect_translation",
+          "description": "The translation 'introduceți' for 'enter' is grammatically correct, but stylistically awkward in this context. A more natural phrasing would be 'furnizați'.",
+          "suggestion": "Activați această opțiune dacă utilizatorul actual nu are permisiuni de citire de pe serverul LDAP și furnizați datele de identificare ale unui alt utilizator cu permisiuni de citire."
         }
       ],
       "approved_at": null
@@ -208,18 +207,28 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"වත්මන් පරිශාර්තකයාට\" (vathman parishaarthakayaata) which translates to \"current user to\" is awkward. A more natural phrasing would be something along the lines of \"මوجود පරිශාර්තකයාට\" (mooj parishaarthakayaata) or \"වත්මන් පරිශාර්තකයා\".",
-          "suggestion": "Replace \"වත්මන් පරිශාර්තකයාට\" with \"මوجود පරිශාර්තකයාට\" or \"වත්මන් පරිශාර්තකයා\"."
+          "description": "The translation of \"Enable this option\" is not accurate. \"සක්‍රීය කරන්න\" (Sakriya kāranna) directly translates to 'activate' which isn't the best fit. A more natural phrasing would be something like \"මෙම හැකියාව සක්‍රීය කරන්න\" (Heme hayadiya sakriya kāranna) or \"මෙම සවිස්තරාත්මක හැකියාවන් සක්‍රීය කරන්න\" (Heme savisthara thamayathwa sakriya kāranna).",
+          "suggestion": "මෙම හැකියාව සක්‍රීය කරන්න"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word \"අයිතියක්\" (aithiyak) which means \"right\" is used twice in close proximity, making it slightly repetitive.  The second instance could be rephrased to avoid this.",
-          "suggestion": "Consider rephrasing the second instance of \"අයිතියක්\" (aithiyak) to something like \"මැතිවාරයෙකුගේ accès\" or a similar construct to avoid repetition."
+          "description": "The phrase \"වත්මන් පරිශාර්තකයාට\" (vathman parisharthakayaata) translates to 'current user to'. While technically correct, it can be improved for clarity.  Consider a phrase like \"වත්මන් පරිශීලකයාට\" (vathman pariseelakayaata) or a rephrasing to simplify the sentence structure.",
+          "suggestion": "වත්මන් පරිශීලකයාට"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word \"පරිශාර්තකයාගේ සහතික ප්‍රදානය කරන්න\" (parishaarthakayaage sahathik pradaanaya kardanawa) while technically correct, is a somewhat formal way of saying \"enter the credentials of\". A more user-friendly translation would improve clarity.",
-          "suggestion": "Replace \"පරිශාර්තකයාගේ සහතික ප්‍රදානය කරන්න\" with something like \"පරිශාර්තකයාගේ තොරතුරු ඇතුළත් කරන්න\" (parishaarthakayaage thora thuru athulath karanna)."
+          "description": "The term \"පරිශාර්තකයා\" (parisharthakaya) is slightly awkward.  It's a more technical/formal term.  \"පරිශීලකයා\" (pariseelakaya) is a more common and natural term for 'user' in this context.",
+          "suggestion": "පරිශීලකයා"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase “කියවීමේ අයිතිය ඇති වෙනත් පරිශාර්තකයාගේ සහතික ප්‍රදානය කරන්න” is overly complex and not natural Sinhala.  It's a direct translation which loses nuance. A more accurate and flowing translation would convey the intent to provide credentials, not the act of granting.",
+          "suggestion": "කියවීමේ අයිතිය ඇති වෙනත් පරිශීලකයාගේ තොරතුරු ලබා දෙන්න"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure is a bit convoluted. Breaking it down into shorter sentences would improve readability.",
+          "suggestion": "මෙම හැකියාව සක්‍රීය කරන්න. වත්මන් පරිශීලකයාට LDAP සේවාදායකයෙන් කියවීමට අයිතියක් නොමැති නම්, කියවීමේ අයිතිය ඇති වෙනත් පරිශීලකයාගේ තොරතුරු ලබා දෙන්න."
         }
       ],
       "approved_at": null
@@ -239,7 +248,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"Омогуц́ите\" is potentially misspelled. It should be \"Омогућите\".",
+          "suggestion": "Омогућите"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -248,18 +263,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Omogućite' should be capitalized as it begins the sentence.",
-          "suggestion": "Omogućite"
+          "description": "The word 'Omogućite' should be 'Omogući'. The correct form for addressing a single 'this option' is singular.",
+          "suggestion": "Omogući"
         },
         {
           "type": "grammar",
-          "description": "The sentence structure can be improved for better flow. 'i unesite akreditive drugog korisnika sa pravima čitanja' sounds a little clunky. Consider rephrasing.",
-          "suggestion": "i unesite podatke drugog korisnika koji ima prava pristupa."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'akreditive' is a valid word, 'podatke' (data/credentials) might be a more natural and clearer translation of 'credentials' in this context for a Serbian audience.  'Akreditive' is more formal and technical.",
-          "suggestion": "podatke"
+          "description": "The verb tense in the second part of the sentence should be adjusted for better flow. Instead of 'unesite akreditive', 'unesite podatke' or 'unesite vjerodostojnosti' would sound more natural.",
+          "suggestion": "unesite podatke"
         }
       ],
       "approved_at": null
@@ -270,13 +280,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'Geçerli kullanıcısının' is grammatically awkward. It translates to 'The current user's', but sounds unnatural in Turkish in this context. It implies possession where it's not required.",
-          "suggestion": "Kullanıcının LDAP sunucusu okuma hakları yoksa..."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'kimlik bilgileri' (credentials) is a direct translation but feels a bit formal and technical for a tooltip. A more conversational alternative might be better.",
-          "suggestion": "okuma haklarına sahip başka bir kullanıcının bilgilerini"
+          "description": "The phrase 'Geçerli kullanıcısının' is grammatically awkward. 'Geçerli kullanıcının' or 'Mevcut kullanıcının' would be more natural.",
+          "suggestion": "Geçerli kullanıcının LDAP sunucusu okuma hakları yoksa bu seçeneği etkinleştirin ve okuma haklarına sahip başka bir kullanıcının kimlik bilgilerini girin."
         }
       ],
       "approved_at": null
@@ -290,7 +295,18 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Enable this option\" is better translated as a more direct command like \"Kích hoạt tùy chọn này\" rather than just \"Bật tùy chọn này\". \"Bật\" is accurate, but \"Kích hoạt\" is more common in technical contexts.",
+          "suggestion": "Kích hoạt tùy chọn này nếu người dùng hiện tại không có quyền đọc từ máy chủ LDAP và nhập thông tin đăng nhập của người dùng khác có quyền đọc."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"nhập thông tin đăng nhập\" is correct, it's a bit verbose. A more concise and natural phrasing would be 'nhập tên đăng nhập' or 'nhập thông tin xác thực'.",
+          "suggestion": "Bật tùy chọn này nếu người dùng hiện tại không có quyền đọc từ máy chủ LDAP và nhập tên đăng nhập của người dùng khác có quyền đọc."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

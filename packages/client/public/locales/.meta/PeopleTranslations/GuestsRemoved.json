@@ -3,7 +3,7 @@
   "content": "Guest(s) successfully removed",
   "content_en_sha1_hash": "433324512f83f2caa8ae66c28ba9aab1e864f8f8",
   "created_at": "2025-05-19T21:30:53.474Z",
-  "updated_at": "2025-05-21T06:02:14.136Z",
+  "updated_at": "2025-05-24T06:31:27.943Z",
   "comment": {
     "text": "The \"GuestsRemoved\" translation key is used to display a success message when guests are successfully removed from a system. It appears in a dialogue box after removing guest(s) and is displayed using a toast notification component.",
     "is_auto": true,
@@ -42,13 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Успешно премахнат(и) гост(и)' is a bit awkward and doesn't flow naturally. It directly translates \"Successfully removed guest(s)\" but sounds stilted in Bulgarian. A more natural translation would emphasize the action being performed *on* the guest(s).",
+          "description": "The Bulgarian translation \"Успешно премахнат(и) гост(и)\" is a literal translation that doesn't flow naturally in Bulgarian. It implies a passive voice construction (\"successfully removed by someone\").  A more natural translation would focus on the action of removing the guests.",
           "suggestion": "Успешно премахнати гости"
         },
         {
           "type": "formatting",
-          "description": "The use of parentheses for pluralization '(и)' is not the most common or elegant approach in Bulgarian. While grammatically correct, it can appear a little clunky in a user interface.",
-          "suggestion": "The suggestion in the 'incorrect_translation' addresses this as well. A natural plural form would be preferred."
+          "description": "The use of parentheses in \"премахнат(и)\" is unusual and stylistically awkward in Bulgarian. The correct plural form should be used directly.",
+          "suggestion": "Remove the parentheses and use the correct plural form consistently."
         }
       ],
       "approved_at": null
@@ -58,14 +58,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The Czech translation uses the masculine singular form \"odstraněn\" while the English says \"Guest(s)\" which is plural. The gender agreement is incorrect.  It should agree with the number of guests.",
-          "suggestion": "Host(é) úspěšně odstraněn(i)"
+          "type": "incorrect_translation",
+          "description": "The translation 'Host(é) úspěšně odstraněn(i)' uses 'Host(é)' which translates to 'Host(s)' rather than 'Guest(s)'. 'Guest' is more appropriate in this context.",
+          "suggestion": "Host(é) should be replaced with 'Světi(é)' or 'Ubytování(a)' depending on the context. Alternatively, use the generic 'Uživatel(é)'. For example: 'Světi(é) úspěšně odstraněn(i)' or 'Ubytování(a) úspěšně odstraněn(i)'."
         },
         {
-          "type": "incorrect_translation",
-          "description": "While \"odstraněn\" means removed, a more natural translation for the context of removing a guest from a list might be \"smazen(i)\" or \"vymazán(i)\". \"Odstraněn\" implies a more deliberate removal, perhaps from a system or record.",
-          "suggestion": "Host(é) úspěšně smazán(i)"
+          "type": "grammar",
+          "description": "The agreement between the noun 'Host(é)' or its alternative and the adjective 'odstraněn(i)' is incorrect. It should match the number of guests removed. If there's one guest, it should be 'Host úspěšně odstraněn'. If multiple, it would be 'Hosté úspěšně odstraněni'. The same logic needs to be applied to the suggested alternatives.",
+          "suggestion": "Ensure proper agreement between the noun and adjective based on the number of guests removed. Example: 'Světi úspěšně odstraněn' or 'Světi úspěšně odstraněni'."
         }
       ],
       "approved_at": null
@@ -82,13 +82,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Έγινε επιτυχής απομάκρυνση επισκέπτη (επισκεπτών)' is a bit literal and clunky.  'Επισκέπτη (επισκεπτών)' awkwardly handles the singular/plural. A more natural Greek phrasing would be preferable.",
-          "suggestion": "Consider 'Αφαιρέθηκε/Απεμακρύνθηκε με επιτυχία ο/οι επισκέπτης/ές' or 'Ο/Οι επισκέπτης/ές αφαιρέθηκε/απεμακρύνθηκε με επιτυχία'."
+          "description": "The translation 'Έγινε επιτυχής απομάκρυνση επισκέπτη (επισκεπτών)' is a bit literal and could be improved for a more natural Greek phrasing.  The use of 'Έγινε' (It was done) is common but can sound slightly formal or indirect.",
+          "suggestion": "Επιτυχής αφαίρεση επισκέπτη (επισκεπτών)"
         },
         {
           "type": "formatting",
-          "description": "The use of parentheses to indicate plural 'επισκεπτών' within the main sentence disrupts the flow and isn't the most elegant way to handle the plural form in Greek.",
-          "suggestion": "As suggested above, incorporate the singular/plural directly into the verb form or phrase."
+          "description": "The use of parentheses to indicate the plural form '(επισκεπτών)' is acceptable, but could be improved to be more concise and commonly used in UI text.",
+          "suggestion": "Επιτυχής αφαίρεση επισκέπτη/επισκεπτών"
         }
       ],
       "approved_at": null
@@ -96,7 +96,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'eliminado(s) correctamente' sounds slightly unnatural in Spanish. A more natural phrasing would be 'eliminado(s) con éxito'.",
+          "suggestion": "Invitado(s) eliminado(s) con éxito"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -105,18 +111,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vieras(vieraat) onnistuneesti poistettu' is a literal translation and doesn't flow naturally in Finnish. It implies a passive voice and sounds awkward.",
-          "suggestion": "A more natural translation would be something like 'Vieras on poistettu' or 'Vieraat on poistettu' depending on the context (singular or plural)."
-        },
-        {
-          "type": "grammar",
-          "description": "The use of 'onistuneesti' (successfully) is somewhat redundant. It's often implied that an action like removal is successful.",
-          "suggestion": "Consider removing 'onnistuneesti' for a more concise and natural-sounding translation."
+          "description": "The translation 'Vieras(vieraat) onnistuneesti poistettu' is grammatically correct but doesn't fully capture the meaning of 'Guest(s) successfully removed'. A more natural translation would be 'Vieras/Vieraita poistettu onnistuneesti' or 'Vieraita poistettu onnistuneesti'. The current phrasing sounds somewhat awkward in Finnish.",
+          "suggestion": "Vieraita poistettu onnistuneesti"
         },
         {
           "type": "formatting",
-          "description": "The presence of both singular ('Vieras') and plural ('vieraat') within the same translation is grammatically correct but may be confusing for users. The correct form should be determined by the context of the English content.",
-          "suggestion": "Choose either 'Vieras' or 'Vieraat' based on whether the English content refers to a single guest or multiple guests."
+          "description": "The parentheses around 'vieraat' indicate a choice between singular and plural. While technically correct, it’s not the most common or elegant way to handle this in Finnish. It's better to imply the possibility of multiple guests through the context or by using a plural form directly.",
+          "suggestion": "Vieraita poistettu onnistuneesti"
         }
       ],
       "approved_at": null
@@ -133,8 +134,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Հյուր(եր)ը հաջողությամբ հեռացվեց' translates literally to 'The guest(s) were successfully removed'. While understandable, it's a bit formal and less natural than alternatives for a confirmation message.  It lacks the feeling of direct action taken by the user.",
-          "suggestion": "Consider a more active and user-friendly phrasing like 'Հյուր(եր)ը հաջողությամբ ջնջվեց' (Hyur(er)ը hachogutyamb dznjvets) which translates to 'The guest(s) were successfully deleted/removed' or 'Հյուր(եր)ը հաջողությամբ ջնջվեց(անել)' (Hyur(er)ը hachogutyamb dznjvets(anel) - 'The guest(s) were successfully removed/deleted'). The added '(անել)' is optional and emphasizes user action."
+          "description": "The Armenian translation \"Հյուր(եր)ը հաջողությամբ հեռացվեց\" translates to 'The guest(s) were successfully removed.' While understandable, it's less natural than a construction that conveys successful removal *by* the system. The English implies an action performed *on* the guests, which is the removal.",
+          "suggestion": "Հյուր(եր)ը հաջողությամբ ջնջվեց։ (Hyur(er)ը հաջողությամբ ջնջվեց։) - 'The guest(s) were successfully deleted.'"
         }
       ],
       "approved_at": null
@@ -154,13 +155,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '게스트가 제거되었습니다' is a literal translation but lacks the nuance of 'successfully'. It could be interpreted as simply 'Guests were removed,' without conveying the positive outcome.",
-          "suggestion": "게스트(들)가 성공적으로 제거되었습니다"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -175,7 +170,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Latvian translation 'Viesis(-i) ir veiksmīgi noņemts (-i)' has grammatical agreement issues. 'Viesis' (guest) is singular, but 'noņemts' (removed) is also singular. When referring to multiple guests, both need to be plural. The parentheses are also confusing here.",
+          "description": "The Latvian translation \"Viesis(-i) ir veiksmīgi noņemts (-i)\" has a grammatical issue. The verb 'noņemts' (removed) should agree in number with the noun 'viesis(-i)' (guest). Since the English states 'Guest(s)', the verb should be in plural form.",
           "suggestion": "Viesi ir veiksmīgi noņemti"
         }
       ],
@@ -211,18 +206,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Invitat (Invitații) sunt eliminate cu succes' is not an accurate translation of 'Guest(s) successfully removed'. The verb 'eliminate' (eliminate) implies a forceful or negative action, whereas 'removed' implies a simple removal. A better translation would be 'Invitat(ați) a fost/au fost eliminat(ți) cu succes' or 'Oaspeți eliminați cu succes'.",
-          "suggestion": "Invitat(ați) a fost/au fost eliminat(ți) cu succes' or 'Oaspeți eliminați cu succes'"
+          "description": "The translation 'Invitat (Invitații) sunt eliminate cu succes' is not the most natural or accurate rendering of 'Guest(s) successfully removed'. The verb 'eliminate' (eliminate) doesn't quite capture the meaning of 'removed' in this context. A more appropriate translation would imply a gentle removal or deletion.",
+          "suggestion": "Invitat(i) au fost eliminat(i) cu succes"
         },
         {
           "type": "grammar",
-          "description": "The Romanian translation uses both singular and plural forms of 'invitat' (Invitat/Invitații). The correct form depends on whether a single guest or multiple guests were removed. The use of both forms is grammatically awkward.",
-          "suggestion": "Use either 'Invitat' for a single guest or 'Invitați' for multiple guests consistently."
-        },
-        {
-          "type": "formatting",
-          "description": "The inclusion of both the singular and plural forms of 'invitat' in parentheses is visually cluttered and not standard practice in translation.",
-          "suggestion": "If clarification is necessary, add a footnote or comment separately, rather than embedding multiple forms in the translation itself."
+          "description": "The use of both singular and plural forms of 'invitat' in parenthesis is slightly awkward. It's preferable to use a construction that accounts for both cases naturally.",
+          "suggestion": "Invitat(i) a(u) fost eliminat(i) cu succes"
         }
       ],
       "approved_at": null
@@ -239,13 +229,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ආගන්තුකයින්/ආගන්තුකියාවන් සාර්ථකව ඉවත් කර ඇත' is overly literal and a bit awkward. The 'ආගන්තුකයින්/ආගන්තුකියාවන්' part (Guests) is redundant, as the singular and plural forms are presented. A more natural translation would consider the context and might omit the literal 'Guests' and use a more concise phrase.",
-          "suggestion": "සාර්ථකව ඉවත් කරන ලදී"
-        },
-        {
-          "type": "spelling",
-          "description": "While 'ආගන්තුකයින්' and 'ආගන්තුකියාවන්' are technically correct representations for 'Guests', they are clunky together. It suggests either 'Guest' (singular) or 'Guests' (plural) have been removed but the combined usage is unusual.",
-          "suggestion": "Consider using only 'ආගන්තුකයින්' (plural) or revising the sentence structure."
+          "description": "The Sinhala translation \"ආගන්තුකයින්/ආගන්තුකියාවන් සාර්ථකව ඉවත් කර ඇත\" is a bit awkward and overly formal for a success message. The use of both singular and plural forms ('ආගන්තුකයින්/ආගන්තුකියාවන්') is not ideal. It implies a potential ambiguity that isn't present in the English.",
+          "suggestion": "Consider a more concise and natural translation like \"ආගන්තුකයින් విజయవంతமாக ඉවත් කර ඇත\" (Āgantukayin vijayavanta sama iwath kara ațā) - 'Guests successfully removed', or \"ආගන්තුකයින් ඉවත් කර ඇත\" (Āgantukayin iwath kara ațā) - 'Guests removed'."
         }
       ],
       "approved_at": null
@@ -256,8 +241,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Slovak translation 'Hosť(i) úspešne odstránený(í)' has a grammatical issue. The agreement between the noun 'Hosť(i)' (Guest(s)) and the participle 'odstránený(í)' (removed) is incorrect. It should agree in gender and number. Since 'Hosť' is masculine, the participle needs to be masculine too.",
-          "suggestion": "Hosť(i) úspešne odstránený(í) should be corrected to 'Hosť(i) úspešne odstránili'."
+          "description": "The Slovak translation 'Hosť(i) úspešne odstránený(í)' has a grammatical error. The verb 'odstránený(í)' needs to agree in number and case with the noun 'Hosť(i)'. Because 'Hosť(i)' is plural, the verb form should be 'odstránení'.",
+          "suggestion": "Hosť(i) úspešne odstránení"
         }
       ],
       "approved_at": null
@@ -274,8 +259,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'уклоњени' (uklonjeni) implies 'removed' in the sense of 'eliminated' or 'obliterated'. While technically correct, it's a stronger term than 'removed' in the context of managing a guest list. A softer and more natural translation would be 'брисани' (brisani) meaning 'deleted'.",
-          "suggestion": "Гост(и) су успешно брисани"
+          "description": "The word 'уклоњени' (uklonjeni) translates to 'removed' or 'eliminated', but 'removed' in this context implies a more gentle removal, like from a list. 'Отворени' (otvoreni) or 'брисани' (brisani) might be more accurate for 'removed' in this software context.",
+          "suggestion": "Consider using 'Отворени' or 'брисани' instead of 'уклоњени'."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of parentheses around 'и' in 'Гост(и)' looks awkward in Serbian Cyrillic. It's unnecessary and disrupts readability.",
+          "suggestion": "Remove the parentheses: 'Гости су успешно уклоњени'"
         }
       ],
       "approved_at": null
@@ -292,7 +282,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'kaldırıldı' (removed/lifted) doesn't quite capture the nuance of 'removed' in this context. It implies physically lifting something rather than removing it from a list or system. A more appropriate term would be 'silindi' or 'çıkarıldı'.",
+          "description": "The word 'kaldırıldı' (removed/lifted) is not the most natural way to express 'removed' in the context of guests. It implies physically lifting something.",
           "suggestion": "Konuk(lar) başarıyla silindi"
         }
       ],
@@ -303,9 +293,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The Ukrainian translation uses the plural form 'Гостя(ей)' which implies multiple guests were removed. The English uses 'Guest(s)' indicating either one or multiple. While not strictly incorrect, it lacks precision. The Ukrainian could be more precise.",
-          "suggestion": "Consider using 'Гостя успішно видалено' to indicate one guest, or 'Гостей успішно видалено' to better reflect the 'Guests' plural in the English."
+          "type": "incorrect_translation",
+          "description": "The translation 'Гостя(ей) успішно видалено' is grammatically correct, but it's a very literal and somewhat awkward translation. A more natural Ukrainian phrasing would be needed to convey the same meaning.",
+          "suggestion": "Успішно видалено гостя/гостей (Depending on the number of guests removed, adjust accordingly)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of \"Гостя(ей)\" is somewhat unnatural. It's a combined form trying to cover both singular and plural, which isn't the most elegant solution in Ukrainian.  It would be better to handle the singular/plural distinction more clearly.",
+          "suggestion": "Consider separating the singular and plural versions in the UI or using a dynamic translation that adjusts based on the number of guests removed."
         }
       ],
       "approved_at": null
@@ -316,8 +311,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '(Các) Khách đã được xóa thành công' is a literal translation but sounds slightly awkward in Vietnamese. 'Đã được xóa' implies a passive voice. A more natural phrasing would be 'Khách đã xóa' or 'Đã xóa khách'.",
-          "suggestion": "Khách đã xóa"
+          "description": "The Vietnamese translation '(Các) Khách đã được xóa thành công' is a literal translation and sounds unnatural in Vietnamese. A more natural phrasing would emphasize the successful removal.",
+          "suggestion": "Khách đã xóa thành công"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of '(Các)' is unnecessary and slightly awkward. It implies both singular and plural forms are acceptable, but it's more concise to omit it.",
+          "suggestion": "Remove '(Các)'"
         }
       ],
       "approved_at": null
@@ -328,8 +328,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '成功移除访客' is a literal translation but lacks nuance. 'Guest(s) successfully removed' implies a completed action. '成功移除访客' simply states 'successfully removed guest(s)'. It doesn't explicitly confirm the action has finished.",
-          "suggestion": "成功移除访客(们)"
+          "description": "The translation \"成功移除访客\" while technically correct, lacks the pluralization indicated by \"Guest(s)\" in the original English. It translates to \"successfully removed guest(s)\" which doesn't fully capture the original meaning.",
+          "suggestion": "成功移除访客们 (Cheng gong yichu fangke men) - This explicitly indicates multiple guests were removed."
         }
       ],
       "approved_at": null

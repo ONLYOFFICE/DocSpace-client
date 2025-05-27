@@ -3,7 +3,7 @@
   "content": "Go to repository",
   "content_en_sha1_hash": "7cec9604549289db044b7db17751318a97d2170a",
   "created_at": "2025-05-19T21:30:49.909Z",
-  "updated_at": "2025-05-21T00:44:50.742Z",
+  "updated_at": "2025-05-24T01:58:47.898Z",
   "comment": {
     "text": "The translation key \"GoToRepo\" represents the English content \"Go to repository\", used as a button label in a portal settings page, prompting users to open a repository in their default browser.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Anbara gedin\" is grammatically correct, it's a literal translation of \"go to warehouse.\" The more appropriate translation for \"repository\" in a software/development context would be something like \"Eklərə keçid\" (Go to plugins) or \"Depo\" (Repository - loanword).",
-          "suggestion": "Consider \"Eklərə keçid\" or \"Depo\"."
+          "description": "The translation \"Anbara gedin\" is a literal translation of 'Go to warehouse', while the context implies 'Go to repository' (likely referring to a code repository).  'Anbar' refers to a storage warehouse, not a software repository.",
+          "suggestion": "Consider translations like \"Ekrana keçid\" (Go to screen), \"Kod ehanəsinə keçid\" (Go to code repository), or \"Depoğa keçid\" (Go to depot/repository) depending on the precise desired nuance."
         }
       ],
       "approved_at": null
@@ -60,13 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While understandable, \"Zum Repository gehen\" is not the most natural-sounding translation. 'Repository' is a borrowed word and often used in its English form in German technical contexts. A more natural translation would use 'Repository' directly or restructure the sentence.",
-          "suggestion": "Go to Repository"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses a lowercase 'r' in 'Repository'. While technically not incorrect, capitalizing the 'R' would align with common capitalization practices for borrowed terms, especially in technical contexts.",
-          "suggestion": "Go to Repository"
+          "description": "The translation 'Zum Repository gehen' is not the most natural or preferred way to say 'Go to repository' in German. 'Repository' is an Anglicism, and while understandable, it's better to use a German equivalent or a more fluent phrasing.",
+          "suggestion": "Gehe zum Repository / Gehe in das Repository / Navigiere zum Repository"
         }
       ],
       "approved_at": null
@@ -89,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Siirry\" is correct for 'Go to', \"arkistoon\" translates to 'archive' or 'archives'. The intended meaning of 'repository' (likely referring to a software repository like GitHub) is not accurately conveyed. A better translation would depend on the specific context, but something like 'Siirry varastoon' (repository) or 'Siirry lähdekoodin arkistoon' (source code archive) might be more appropriate.",
-          "suggestion": "Consider 'Siirry varastoon' or 'Siirry lähdekoodin arkistoon' depending on context."
+          "description": "While \"Siirry\" correctly means \"Go to\", \"arkistoon\" can have multiple meanings and \"repository\" is more specifically \"varasto\" or \"arkisto\". However, 'arkisto' is closer in meaning.",
+          "suggestion": "Siirry arkistoon is acceptable but a more direct translation could be 'Siirry varastoon' or 'Siirry säilöön' if a more literal meaning is intended."
         }
       ],
       "approved_at": null
@@ -107,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Գնալ պահեստ' is a literal translation of 'Go to warehouse,' not 'Go to repository.' 'Repository' in this context refers to a software repository, like on GitHub.",
-          "suggestion": "A more accurate translation would be something along the lines of 'Բազայի վրա գնալ' (Bazada vra gnal) - 'Go to the base' or 'Տեղադրման վայր գնալ' (Tegadrani vrayr gnal) - 'Go to the placement location'. The best option would depend on the specific audience and preferred terminology."
+          "description": "The Armenian translation 'Գնալ պահեստ' translates literally to 'Go to warehouse'.  'Repository' typically refers to a software repository or code repository, not a warehouse. A more accurate translation would reflect that.",
+          "suggestion": "Consider 'Մեկնել դեպոսիտ' (Menkel depotisit) which translates closer to 'Go to repository' or 'Go to codebase' depending on the context. Another option is 'Բացել պահեստը' (Bacel pahresti) which would mean 'Open the repository'."
         }
       ],
       "approved_at": null
@@ -119,7 +114,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Vai su GitHub\" is not an accurate translation of \"Go to repository.\" It specifically mentions GitHub, while the original phrase is more general. It implies that all repositories are on GitHub.",
+          "description": "The translation 'Vai su GitHub' is too specific. It directly mentions GitHub. The English phrase 'Go to repository' should refer to the repository in general, not a specific platform.",
           "suggestion": "Vai al repository"
         }
       ],
@@ -155,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ga naar repository' is a literal translation and doesn't quite capture the intended meaning of 'Go to repository' in a technical context. While understandable, it sounds slightly unnatural.",
-          "suggestion": "Ga naar de repository"
+          "description": "The translation 'Ga naar repository' is too literal. 'Repository' is often used in English software development contexts and it's more natural to translate it to a more familiar Dutch equivalent, especially for non-technical users. A more suitable translation might be 'Ga naar de codeopslag' or 'Ga naar het project'.",
+          "suggestion": "Ga naar de codeopslag"
         }
       ],
       "approved_at": null
@@ -185,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Acces depozit' does not accurately convey the meaning of 'Go to repository'. 'Acces' means 'access' which is not the intended action. 'Depozit' refers to a deposit, not a repository.",
-          "suggestion": "Mergi la depozit' or 'Du-te la depozit' would be closer to 'Go to repository', although 'depozit' isn't the ideal term. A better translation would incorporate 'repository' itself, if possible. Consider 'Mergi la depozitar' or 'Du-te la depozitar' (if 'depozitar' is the appropriate term for 'repository' in the context)."
+          "description": "“Acces depozit” is a literal translation but doesn't quite convey the intended meaning of 'Go to repository.' It translates to 'Access deposit,' which is not the same as navigating to a repository.",
+          "suggestion": "Mergi la depozit"
         }
       ],
       "approved_at": null
@@ -203,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කෝෂ්ඨය වෙත යන්න' while literally translating to 'go to kernel/core', doesn't accurately convey the meaning of 'Go to repository'. 'Repository' refers to a code repository, usually on platforms like GitHub or GitLab. A more appropriate translation would be something along the lines of 'repository වෙත යන්න' or 'repository ට යන්න'.",
-          "suggestion": "repository වෙත යන්න"
+          "description": "The translation 'කෝෂ්ඨය වෙත යන්න' literally translates to 'to the cluster/node/mass go'. While understandable, it's not the most natural or common way to say 'Go to repository' in Sinhala. A more accurate and natural translation would convey the meaning of accessing or navigating to a code repository.",
+          "suggestion": "Consider using a translation like 'repository වෙත යන්න' (repository vetha yanna) or 'repository පෙන්වා' (repository penwa - pointing to the repository)."
         }
       ],
       "approved_at": null
@@ -227,13 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Иди у репозиторијум' is not the most natural or accurate translation of 'Go to repository'. While technically understandable, it's not idiomatic Serbian.",
+          "description": "The translation 'Иди у репозиторијум' is not the most natural or accurate translation of 'Go to repository'. While it is understandable, it's a literal translation and sounds awkward. A more common and idiomatic way to say 'Go to repository' in Serbian (Cyrillic) would be 'Пређи у репозиторијум' or 'Оди у репозиторијум'.",
           "suggestion": "Пређи у репозиторијум"
-        },
-        {
-          "type": "grammar",
-          "description": "The verb 'Иди' (Idi) implies movement or going somewhere. 'Пређи' (Pređi) better conveys the action of navigating to a repository, which is more in line with the intended meaning.",
-          "suggestion": null
         }
       ],
       "approved_at": null
@@ -241,7 +231,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'repozitorijum' is spelled incorrectly. The correct spelling is 'repOzitorijum'.",
+          "suggestion": "repOzitorijum"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -268,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"转到仓库\" is technically correct, it's not the most natural or idiomatic translation for \"Go to repository.\"  \"仓库\" refers to a warehouse or storage facility.  A more appropriate translation would emphasize the code repository context.",
-          "suggestion": "前往仓库 (Qiánwǎng cāngkù) - This translates to 'Proceed to repository' or 'Navigate to repository' and is more aligned with the intended meaning."
+          "description": "While \"转到仓库\" (zhuǎn dào cāngkù) is understandable, it's not the most natural or idiomatic translation of \"Go to repository.\" \"转到\" (zhuǎn dào) implies a turning or redirection, which isn't the primary meaning here.  \"Go to\" often implies navigation or access.",
+          "suggestion": "前往仓库 (qiánwǎng cāngkù) or 访问仓库 (fǎngwèn cāngkù) would be more appropriate.  \"前往\" (qiánwǎng) means 'to go to', and '访问' (fǎngwèn) means 'to visit' or 'access'."
         }
       ],
       "approved_at": null

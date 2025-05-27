@@ -3,7 +3,7 @@
   "content": "This section is empty",
   "content_en_sha1_hash": "2b06a278224aa9ce04d45d59105ba0394f86ef15",
   "created_at": "2025-05-19T21:30:49.289Z",
-  "updated_at": "2025-05-22T11:56:37.629Z",
+  "updated_at": "2025-05-26T07:57:32.456Z",
   "comment": {
     "text": "This translation key is used to display a message when a section is empty or not found. It appears on an empty screen in the \"ContactsBody\" component, informing the user that the expected data is missing.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\ContactsBody\\EmptyScreenGroups.tsx",
+      "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreenGroups.tsx",
       "line_number": 97,
       "context": "};\n \n const getDescription = () => {\n if (groupsIsFiltered) return t(\"Common:GroupsNotFoundDescription\");\n \n return t(\"Common:ThisSectionIsEmpty\");\n };\n \n const getOptions = () => {\n if (groupsIsFiltered) {\n return [",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -123,7 +123,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation \"Dana sekcja jest pusta\" is not the most natural or idiomatic way to say \"This section is empty.\" While technically correct, it sounds somewhat stilted.",
+          "suggestion": "Consider using \"Ta sekcja jest pusta\" or \"Sekcja jest pusta\" which are more common and natural-sounding Polish translations."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -144,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Secțiunea nu conține niciun element' translates to 'The section does not contain any elements,' which is a more literal and less natural translation of 'This section is empty.' A more natural translation would be 'Această secțiune este goală.' or 'Secțiunea este goală.'",
-          "suggestion": "Secțiunea este goală."
+          "description": "The translation 'Secțiunea nu conține niciun element' is a literal translation of 'This section is empty' but doesn't quite convey the intended meaning in Romanian. While technically correct, it sounds slightly formal and less natural than alternative phrasing.",
+          "suggestion": "Consider a more natural phrasing like 'Secțiunea aceasta este goală' or 'Secțiunea este goală'."
         }
       ],
       "approved_at": null

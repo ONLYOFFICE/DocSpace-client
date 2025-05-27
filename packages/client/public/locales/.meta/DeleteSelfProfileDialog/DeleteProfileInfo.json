@@ -3,7 +3,7 @@
   "content": "Send the instructions for account disabling to the email address",
   "content_en_sha1_hash": "4774d3558c23bbee4e9e30a20c80b0bfe5b421fd",
   "created_at": "2025-05-19T21:30:56.636Z",
-  "updated_at": "2025-05-20T09:38:31.829Z",
+  "updated_at": "2025-05-26T07:57:32.304Z",
   "comment": {
     "text": "This translation key is used to display instructions for disabling an account, which are sent to the email address associated with the account. It appears in a modal dialog prompt. The text should be translated to encourage users to confirm their decision to disable their profile and prevent unauthorized access.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteSelfProfileDialog/index.js",
       "line_number": 78,
-      "context": "return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"DeleteProfileTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">\n {t(\"DeleteProfileInfo\")}{\" \"}\n <ColorTheme\n type=\"page\"\n href={`mailto:${email}`}\n noHover\n themeId={ThemeId.Link}",
+      "context": "return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"DeleteProfileTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\">\n {t(\"DeleteProfileInfo\")}{\" \"}\n <Link\n type=\"page\"\n href={`mailto:${email}`}\n noHover\n title={email}",
       "module": "/packages/client"
     }
   ],
@@ -33,25 +33,54 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Elektron poçt ünvanına profilin silinməsi haqqında təlimatını göndər\" is not a precise translation of \"Send the instructions for account disabling to the email address\".  It literally translates to \"Send the instructions about the profile deletion to the email address.\" It doesn't explicitly mention *account* disabling, which is crucial.",
+          "suggestion": "Elektron poçt ünvanına hesabın silinməsi haqqında təlimat göndər"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the placement of \"haqqında\" feels slightly unnatural in this context.  A more natural flow might improve readability.",
+          "suggestion": "Elektron poçt ünvanına hesab silinməsi təlimatını göndər"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Изпратете инструкциите за изтриване на профила на имейл адреса' literally translates to 'Send the instructions for deleting the profile to the email address'.  The English 'Send the instructions for account disabling to the email address' implies sending instructions *regarding* disabling the account, not the instructions themselves *being* the email address. A more accurate translation would reflect the instructions being sent *to* an email address.",
+          "suggestion": "Изпратете инструкциите за изтриване на профила на посочения имейл адрес"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Send the instructions for account disabling' is not accurately reflected in the Czech translation. 'Smazání profilu' translates to 'profile deletion,' while the English refers to 'account disabling'.",
+          "suggestion": "Odeslat pokyny ke zrušení účtu na e-mailovou adresu"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Send the instructions for account disabling\" is not accurately reflected in the German translation \"Hinweise zum Löschen des Profils\". 'Löschen' implies deletion, whereas the English suggests a temporary disabling. 'Deaktivieren' would be more accurate.",
+          "suggestion": "Hinweise zum Deaktivieren des Profils per E-Mail verschicken"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -63,13 +92,25 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Send the instructions for account disabling\" is better translated as \"Enviar las instrucciones para desactivar la cuenta\" instead of \"Enviar las instrucciones para eliminar el perfil\". While 'eliminar el perfil' isn't incorrect, 'desactivar la cuenta' more accurately reflects the action of disabling an account.",
+          "suggestion": "Enviar las instrucciones para desactivar la cuenta"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Send the instructions for account disabling' is not perfectly captured by 'Lähetä profiilin poistamisohjeet'. 'Account disabling' implies a process of temporarily preventing access, while 'profiilin poistamisohjeet' translates more closely to 'profile deletion instructions'. The nuance is lost.",
+          "suggestion": "Lähetä tilin sulkemisohjeet sähköpostiosoitteeseen"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,13 +122,25 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Send the instructions for account disabling\" is more accurately translated as \"Send the instructions for deleting the profile\" rather than \"Send the instructions for account disabling\". While 'account disabling' is understandable, 'profile deleting' aligns better with the key name and intended meaning.",
+          "suggestion": "Ուղարկեք պրոֆիլի ջնջման հրահանգները էլփոստի հասցեին"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"account disabling\" is better translated as \"eliminazione dell'account\" rather than \"eliminazione del profilo\". While 'profilo' can refer to an account, 'account' is more precise in this context.",
+          "suggestion": "Invia le istruzioni per l'eliminazione dell'account all'indirizzo email"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -99,13 +152,25 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"해당 이메일 주소로 프로필 삭제 방법을 전송합니다\" literally translates to 'Send the profile deletion method to the email address'. The original English implies sending *instructions* for disabling the account.  The Korean phrasing is too literal and doesn't capture the nuance of 'disabling'.",
+          "suggestion": "해당 이메일 주소로 계정 삭제 안내를 전송합니다"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ສົ່ງຄຳແນະນຳກ່ຽວກັບການລົບຂໍ້ມູນໄປທີ່ອີເມວ \" is a literal translation but doesn't quite capture the intended meaning of 'Send instructions for account disabling'.  It implies sending instructions *about* deleting data, rather than the instructions for the disabling process itself.  A more accurate translation would convey the action of sending the disabling process.",
+          "suggestion": "ສົ່ງຄຳແນະນຳກ່ຽວກັບການຍົກເລີກບັນຊີໄປທີ່ອີເມວ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -117,7 +182,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'account disabling' is better translated as 'account verwijderen' or 'profiel verwijderen' rather than 'verwijderen van het profiel'. While the current translation isn't *wrong*, it's slightly awkward and less natural in Dutch.",
+          "suggestion": "Stuur de instructies voor account verwijderen/profiel verwijderen naar het emailadres"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -129,7 +200,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Send the instructions for account disabling\" is better translated as 'Enviar as instruções para desativar a conta' rather than 'Enviar as instruções de eliminação de perfil'. While 'eliminação de perfil' isn't wrong, 'desativar a conta' more accurately reflects account disabling.",
+          "suggestion": "Enviar as instruções para desativar a conta"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,7 +218,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"account disabling\" is better translated as \"ștergerea contului\" instead of \"ștergerea profilului.\" While 'ștergerea profilului' isn't strictly wrong, it's more accurate to refer to disabling the entire account.",
+          "suggestion": "Trimiteți instrucțiunile pentru ștergerea contului la adresa e-mail"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,37 +236,78 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'පැතිකඩ මකා දැමීමේ උපදෙස් වි-තැපැල් ලිපිනයට යවන්න' while technically conveying the meaning, isn't the most natural or precise translation of 'Send the instructions for account disabling to the email address'.  'Account disabling' can be better conveyed with 'ගණනයාත්මක ගිණුම අයින් කිරීම' or similar.",
+          "suggestion": "පැතිකඩ අයින් කිරීමේ උපදෙස් වි-තැපැල් ලිපිනයට යවන්න"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'වි-තැපැල්' is a direct transliteration of 'e-mail'. It's better to use a Sinhala equivalent, even though 'e-mail' is understood by many.",
+          "suggestion": "විද්‍යුත් ලිපිනය"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Send the instructions for account disabling' is not accurately conveyed by 'Odošlite pokyny na odstránenie profilu'. 'Disable account' is closer to 'zakázať účet' rather than 'odstránenie profilu' (delete profile). The English refers to a temporary disabling, while the Slovak implies deletion.",
+          "suggestion": "Odošlite pokyny na dočasné zablokovanie účtu na e-mail."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Send the instructions for account disabling\" is more accurately translated as 'Pošljite navodila za onemogočanje računa'. The current translation, 'Pošljite navodila za brisanje profila' (Send instructions for deleting the profile) is not a precise equivalent, as 'account disabling' implies a temporary action, while 'deleting the profile' suggests permanent removal.",
+          "suggestion": "Pošljite navodila za onemogočanje računa"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Send the instructions for account disabling' is better translated as 'Пошаљите инструкције за деактивацију профила' or 'Пошаљите инструкције за угасавање профила'. 'Брисање профила' implies permanent deletion, which may not be the intended action (disabling or deactivation).",
+          "suggestion": "Пошаљите инструкције за деактивацију профила"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Send the instructions for account disabling\" is better translated as \"Pošaljite uputstva za deaktivaciju naloga\" rather than \"Pošaljite instrukcije za brisanje profila\". While \"brisanje profila\" (deleting profile) is a possible interpretation, \"deaktivacija naloga\" (account deactivation) is more precise given the context of account disabling.",
+          "suggestion": "Pošaljite uputstva za deaktivaciju naloga"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Profil silme yönergelerini e-posta adresine gönderin\" while technically correct, doesn't fully capture the nuance of 'account disabling'. 'Profil silme' (profile deletion) is close but could be misinterpreted. A more accurate translation would convey the complete account termination.",
+          "suggestion": "Hesap devre dışı bırakma talimatlarını e-posta adresine gönderin"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -195,13 +319,25 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Send the instructions for account disabling' is better translated as 'Gửi hướng dẫn về cách vô hiệu hóa tài khoản' rather than 'Gửi hướng dẫn xóa hồ sơ'. 'Xóa hồ sơ' implies deleting the entire profile, whereas 'vô hiệu hóa tài khoản' more accurately reflects account disabling.",
+          "suggestion": "Gửi hướng dẫn về cách vô hiệu hóa tài khoản"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Send the instructions for account disabling' is not accurately reflected in the Chinese translation. '档案删除' (dān'àn shānchú) translates more directly to 'profile deletion' rather than 'account disabling'. While functionally similar in this context, it introduces a nuance that slightly alters the meaning. The intended meaning of 'account disabling' is broader than just profile deletion.",
+          "suggestion": "将账户禁用指示发送至邮件地址"
+        }
+      ],
       "approved_at": null
     }
   }

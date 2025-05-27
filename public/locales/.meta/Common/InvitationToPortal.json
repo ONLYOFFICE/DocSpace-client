@@ -3,7 +3,7 @@
   "content": "<1>{{displayName}}</1> invites you to join the {{productName}} <1>{{spaceAddress}}</1> for secure document collaboration.",
   "content_en_sha1_hash": "516f637e20928aaf05537ea5e25558d4c52dc3d1",
   "created_at": "2025-05-19T21:30:45.945Z",
-  "updated_at": "2025-05-22T11:56:37.819Z",
+  "updated_at": "2025-05-26T07:57:32.873Z",
   "comment": {
     "text": "This translation key is used to display a welcome message when an invitation is sent to join a secure document collaboration space. It includes placeholders for the user's name and the product name, making it adaptable to different users and products. The text appears in a greeting component after a successful file upload or invitation creation.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\login\\src\\components\\GreetingContainer\\GreetingCreateUserContainer\\index.tsx",
-      "line_number": 87,
+      "file_path": "/packages/login/src/components/GreetingContainer/GreetingCreateUserContainer/index.tsx",
+      "line_number": 94,
       "context": "}}\n />\n ) : (\n <Trans\n t={t}\n i18nKey=\"InvitationToPortal\"\n ns=\"Common\"\n defaults={DEFAULT_PORTAL_TEXT}\n values={{\n displayName,\n productName: t(\"Common:ProductName\"),",
-      "module": "\\packages\\login"
+      "module": "/packages/login"
     }
   ],
   "languages": {
@@ -29,9 +29,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase \"يدعوك للانضمام الى\" (yad'uka lil-indimam ila) translates to 'invites you to join'. While not incorrect, it sounds slightly formal for a typical invitation. A more natural phrasing might be 'يدعوك لزيارة' (yad'uka li-ziyara) meaning 'invites you to visit' or 'يدعوك للدخول الى' (yad'uka lil-dukhul ila) meaning 'invites you to enter'.",
+          "suggestion": "Consider alternative phrasings like 'يدعوك لزيارة' or 'يدعوك للدخول الى' to sound more inviting and less formal."
+        },
+        {
           "type": "formatting",
-          "description": "The Arabic translation maintains the HTML tags <1> and </1> which are unnecessary and disrupt the natural flow of the text. They should be removed.",
-          "suggestion": "Remove the <1> and </1> tags from the Arabic translation. The translated text should read: \"{{displayName}} يدعوك للانضمام الى {{productName}} {{spaceAddress}} للتعاون الآمن في المستندات.\""
+          "description": "The Arabic text uses space before and after the tags (<1> and </1>), which may not be necessary and might affect rendering in certain systems.",
+          "suggestion": "Remove the unnecessary spaces before and after the tags: `<1>{{displayName}}</1>` becomes `<1>{{displayName}}</1>`."
         }
       ],
       "approved_at": null
@@ -41,14 +46,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'təhlükəsiz' is a slightly awkward translation of 'secure.' While technically correct, it could be improved.",
-          "suggestion": "Consider 'güvenli' instead of 'təhlükəsiz'."
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure 'sizi qoşulmağa dəvət edir' is grammatically correct but could be more natural. The placement of 'sizi' feels a bit clunky.",
-          "suggestion": "Consider 'sizi {{productName}} <1>{{spaceAddress}}</1>-ə qoşulmağınıza dəvət edir'."
+          "type": "incorrect_translation",
+          "description": "The phrase \"secure document collaboration\" is not accurately conveyed by \"təhlükəsiz sənəd əməkdaşlığı\". A more accurate translation might focus on the purpose of the space, such as 'güvənli sənəd paylaşımı' or 'müştəri sənədləri ilə işləmək' depending on the specific product.",
+          "suggestion": "Consider translating \"secure document collaboration\" as 'güvənli sənəd paylaşımı' or 'müştəri sənədləri ilə işləmək'."
         }
       ],
       "approved_at": null
@@ -98,13 +98,25 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation uses `<1>` tags, mirroring the English. While technically correct, it's not standard practice in Armenian and should be removed for better readability and maintainability.  These tags don't serve a purpose in the translated text itself.",
+          "suggestion": "Remove the `<1>` tags from the Armenian translation."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'join' is translated as 'unirti a'. While grammatically correct, 'partecipare a' might be a more natural and idiomatic translation in this context, conveying the sense of joining a space or platform.",
+          "suggestion": "Consider replacing 'unirti a' with 'partecipare a'."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -113,8 +125,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"安全なドキュメント共同作業をするように\" (anzennna dokyumento kyoudou sagyousuru youni) translates more literally to \"so that you can do secure document collaboration\" which isn't the most natural way to express an invitation.  A more natural phrasing would be something like \"安全なドキュメント共同作業のために\" (anzennna dokyumento kyoudou sagyousaku no tame ni) which means \"for secure document collaboration\".",
-          "suggestion": "安全なドキュメント共同作業のためにあなたを{{productName}} <1>{{spaceAddress}}</1>に招待しています。"
+          "description": "The phrase \"安全なドキュメント共同作業をするように\" is a bit awkward. It literally translates to 'to do secure document collaboration'. A more natural phrasing would be something like '安全なドキュメント共同作業のために' (for secure document collaboration) or '安全なドキュメント共有のために' (for secure document sharing).",
+          "suggestion": "安全なドキュメント共有のために"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of 'あなたを' (anata o) feels slightly formal for an invitation. A more casual and natural phrasing would be to simply omit it.",
+          "suggestion": "あなたをを削除する"
         }
       ],
       "approved_at": null
@@ -125,8 +142,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"invites you to join\" is translated as \"초대했습니다 (invited)\". While technically correct, it loses the active invitation feel of the English. A more accurate translation might be something like \"초대합니다 (invites)\" or \"초대하고 싶습니다 (would like to invite)\".",
-          "suggestion": "초대합니다"
+          "description": "The phrase 'invites you to join' is translated as '초대했습니다' which translates to 'invited you'. While conveying the meaning, a more direct translation of 'invites you to join' might be preferable depending on the desired tone. Consider '초대합니다' for a more active invite.",
+          "suggestion": "Consider using '초대합니다' instead of '초대했습니다' for a more active invite."
         }
       ],
       "approved_at": null
@@ -136,9 +153,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Laotian translation retains the <1> and </1> tags, which are unnecessary and should be removed. These tags appear to be remnants of the original English formatting and don't have meaning in Lao.",
-          "suggestion": "Remove the <1> and </1> tags from the Laotian translation: '{{displayName}} ຂໍເຊີນທ່ານເຂົ້າຮ່ວມ {{productName}} {{spaceAddress}} ເພື່ອການຮ່ວມມືເອກະສານຢ່າງປອດໄພ.'"
+          "type": "spelling",
+          "description": "The word 'ຢ່າງ' is used but it is redundant here. It's unnecessary and doesn't improve the clarity of the sentence.",
+          "suggestion": "Remove 'ຢ່າງ' from the translation."
         }
       ],
       "approved_at": null
@@ -179,8 +196,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'asociați' (associate) doesn't quite convey the meaning of 'join' in this context. It implies joining a group or organization, while 'join' here means access/participate in a collaboration space.",
-          "suggestion": "Consider 'să vă alăturați' or 'să accesați' instead of 'să vă alăturați'. 'Să vă alăturați' is closer, but 'să accesați' might be more accurate depending on the exact intent."
+          "description": "The word 'asociați' (associate) doesn't quite capture the nuance of 'join' in this context. It implies a more formal association than simply joining a space.",
+          "suggestion": "Consider using a more natural Romanian equivalent for 'join', such as 'să vă alăturați' or 'să vă conectați'."
         }
       ],
       "approved_at": null
@@ -197,13 +214,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ආරාධනා කර ඇත\" (aaradanaa karaa geta) translates to 'has invited'. A more natural and active voice in Sinhala would be something like 'ආරාධනා කරයි' (aaradanaa karai), meaning 'invites'.",
-          "suggestion": "<1>{{displayName}}</1> ඔබට ආරක්‍ෂිතව සහයෝගයෙන් ලේඛන වල වැඩ කිරීමට <1>{{spaceAddress}}</1> {{productName}} වෙත ආරාධනා කරයි."
+          "description": "The phrase 'ආරාධනා කර ඇත' (aaradanaa karaa geta) translates to 'has invited', which is slightly awkward in this context. A more natural phrasing would suggest a direct invitation.",
+          "suggestion": "ආරාධනා කරයි (aaradanaa karayaa) - invites"
         },
         {
-          "type": "spelling",
-          "description": "While technically correct, 'සහයෝගයෙන්' (sahayōgayen) is a somewhat formal way to say 'with collaboration'. Consider alternatives depending on the target audience.",
-          "suggestion": "<1>{{displayName}}</1> ඔබට ආරක්‍ෂිතව දෙසැවිරැල්ලේ ලේඛන වල වැඩ කිරීමට <1>{{spaceAddress}}</1> {{productName}} වෙත ආරාධනා කරයි."
+          "type": "formatting",
+          "description": "The Sinhala translation uses a different order for the tags compared to the English original. <1> tags are not consistently placed around the elements.",
+          "suggestion": "Ensure tag placement matches the English original, consistently surrounding elements with <1> and </1>."
         }
       ],
       "approved_at": null
@@ -226,13 +243,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'приступите' (priступите) doesn't perfectly convey the meaning of 'join' in this context. A more natural translation would be something along the lines of 'уђите у' (uђите у) or 'придружите се' (pridruжite se).",
-          "suggestion": "Уместо 'приступите', предложим 'уђите у' или 'придружите се'."
+          "description": "The word 'posiva' (invites) is somewhat formal for a portal invitation. A more natural phrasing might be 'poziva' or 'долази'.",
+          "suggestion": "<1>{{displayName}}</1> вас позива/позива да приступите {{productName}}-у <1>{{spaceAddress}}</1> за сигурну документ сарадњу."
         },
         {
           "type": "formatting",
-          "description": "The Cyrillic text uses '{{productName}}-у'. While understandable, the hyphen is unnecessary and can be improved for readability. The possessive suffix '-у' is technically correct but stylistically less common with product names in this context.",
-          "suggestion": "Уместо '{{productName}}-у', предложим '{{productName}}'."
+          "description": "The Cyrillic text uses a hyphen ('-') before 'у' in '{{productName}}-у'. While grammatically correct, it might be visually jarring or inconsistent depending on the overall style guide. Consider removing it.",
+          "suggestion": "<1>{{displayName}}</1> вас позива да приступите {{productName}} <1>{{spaceAddress}}</1> за сигурну документ сарадњу."
         }
       ],
       "approved_at": null
@@ -242,9 +259,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Serbian translation uses a hyphen to connect 'productName' which might not be the desired formatting. It's possible the product name should remain separate.",
-          "suggestion": "Consider whether 'productName' should be presented as 'productName' instead of 'productName-u'."
+          "type": "grammar",
+          "description": "The preposition 'u' is used after 'productName' but it's typically used for masculine nouns.  'productName' might be feminine or neuter and requires a different preposition (e.g., 'a' or no preposition).  Without knowing the grammatical gender of 'productName', it's impossible to definitively correct it.",
+          "suggestion": "Re-evaluate the grammatical gender of 'productName' and adjust the preposition accordingly. If 'productName' is feminine use 'productName-a'. If it is neuter, omit the preposition."
         }
       ],
       "approved_at": null
@@ -264,7 +281,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Vietnamese translation uses an unnecessary space after the closing tag <1/>.  It should be removed for consistency with the English version.",
+          "suggestion": "Remove the space after <1/>. The corrected translation would be: <1>{{displayName}}</1> mời bạn tham gia {{productName}} <1>{{spaceAddress}}</1> để cùng làm việc trên tài liệu một cách an toàn."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

@@ -3,7 +3,7 @@
   "content": "Action button",
   "content_en_sha1_hash": "81156442640c6af1ec3dd4728dd68a78bc720a31",
   "created_at": "2025-05-19T21:30:54.343Z",
-  "updated_at": "2025-05-21T09:34:02.221Z",
+  "updated_at": "2025-05-24T09:46:07.522Z",
   "comment": {
     "text": "The translation key \"ActionButton\" is used to describe an action button that triggers specific functionality in a Developer Tools preset, appearing on the Manager page. The exact wording may vary depending on the UI component it's part of (e.g., dialog title, button label).",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"زر التشغيل\" (Zir at-Tashghil) literally translates to 'Operation Button' or 'Running Button', which isn't an accurate representation of 'Action button'. It implies a button that initiates an operation, while 'Action button' is more general.",
-          "suggestion": "زر الإجراء (Zir al-Ijraa) - This translates to 'Action Button' more directly. Alternatively, زر عمل (Zir 'Amal) which means 'Action Button' is also a possible translation."
+          "description": "The translation \"زر التشغيل\" (zir at-tashgheel) literally translates to 'operation button' or 'running button'. While it's close, 'action button' implies a button that triggers a specific action, which isn't directly conveyed by \"زر التشغيل\".",
+          "suggestion": "زر إجراء (zir 'ijraa) - This translates to 'action button' more accurately."
         }
       ],
       "approved_at": null
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Κουμπί ενέργειας\" (Koubi energias) is technically 'energy button', it doesn't accurately convey the meaning of 'Action button'. It implies a button that performs an energetic action, which isn't the intended meaning.",
-          "suggestion": "A more accurate translation would be something like \"Κουμπί Δράσης\" (Koupi Draseis), which translates to 'Action Button', or \"Κουμπί Λειτουργίας\" (Koupi λειτουργias) which means 'Function Button' or 'Operation Button'."
+          "description": "While 'Κουμπί' correctly translates to 'Button', 'ενέργειας' (energeias) translates to 'of energy' or 'action' in a more abstract sense. It doesn't accurately convey the meaning of 'Action button'. A more direct translation would be needed.",
+          "suggestion": "Consider 'Κουμπί δράσης' (Koupi drasis) which translates to 'Action button' or 'Button of action'."
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Գործողությունների կոճակ\" translates literally to 'Actions buttons', 'Action button' implies a single button representing an action.  A more accurate translation, depending on the context, might be something like \"գործողության կոճակ\" (gorgogutyan kochak) - 'action button' (singular) or \"գործողությունների կոճակ\" could be acceptable if it's always referring to multiple action buttons.",
-          "suggestion": "Consider \"գործողության կոճակ\" (gorgogutyan kochak) for a singular 'action button' or review context to determine if the plural is correct."
+          "description": "The translation \"Գործողությունների կոճակ\" (Gorgut'yut'yuner k'ochak) literally translates to 'buttons of actions'.  'Action button' implies a single button triggering an action, not a collection of action buttons.",
+          "suggestion": "Consider alternatives like \"գործողության կոճակ\" (gorgut'yutian k'ochak) which translates to 'action button', or a more descriptive phrase if context dictates."
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ປຸ່ມປະຕິບັດ\" (pùm pà-tì-bàt) is a technically correct translation for \"action button\", it can sound somewhat formal or technical. A more natural and commonly used translation might be \"ປຸ່ມການເຮັດງານ\" (pùm gaan hèt ngaan).",
-          "suggestion": "ປຸ່ມການເຮັດງານ"
+          "description": "While 'ປຸ່ມປະຕິບັດ' is a literal translation of 'action button', it might not be the most natural or commonly used term in Lao for a button that performs an action. A more common or clearer translation might be better depending on the context.",
+          "suggestion": "Consider alternatives like 'ກະແດັນການເຄື່ອນໄຫວ' (kadean kan khuan hai) or 'ປຸ່ມເຮັດງານ' (poum het ngan) depending on the specific functionality of the button."
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Кнопка Действие' is a literal translation and doesn't convey the intended meaning of 'Action button' in a natural Russian way. 'Действие' is just 'action,' not a button's action.  It's clunky.",
-          "suggestion": "Consider 'Кнопка действия' or 'Функциональная кнопка'. The best translation depends on the context."
+          "description": "The translation 'Кнопка Действие' is too literal and doesn't sound natural in Russian. It translates to 'Button Action' instead of 'Action button'.",
+          "suggestion": "Кнопка действия"
         }
       ],
       "approved_at": null
@@ -189,7 +189,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ක්‍රියාමාර්ග බොත්තම' is a literal translation, it might sound slightly formal or clunky in common usage. A more natural phrasing could be considered.",
+          "suggestion": "Consider alternatives like 'අ‍යදුරු බොත්තම' (Ayaduru bottama - 'Apply button') or 'ක්‍රියාව සඳහා බොත්තම' (Kriyawa saha gamana bottama - 'Button for action') depending on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -198,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Tlačidlo Akcia\" is a literal translation and doesn't accurately convey the meaning of \"Action button\" in a software context. It's too literal and sounds awkward.",
-          "suggestion": "Consider alternatives like \"Akčné tlačidlo\", \"Tlačidlo pre akciu\", or \"Tlačidlo s akciou\", depending on the specific usage within the application."
+          "description": "The translation 'Tlačidlo Akcia' is a literal translation and doesn't flow naturally in Slovak. 'Akcia' in this context implies an action itself, not a button performing an action.",
+          "suggestion": "Consider alternatives like 'Akčné tlačidlo' or 'Tlačidlo pre akciu'."
         }
       ],
       "approved_at": null
@@ -216,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Дугме за акцију\" is a literal translation of \"Action button,\" it might sound a bit clunky or not as natural in Serbian. A more idiomatic translation would be preferable.",
-          "suggestion": "Радни дугме"
+          "description": "While 'Дугме за акцију' is a literal translation, a more natural and commonly used term in Serbian (Cyrillic) for 'Action button' in a UI context would be 'Тампон дугме' or 'Дугме за радње'. 'Дугме за акцију' sounds somewhat awkward.",
+          "suggestion": "Consider using 'Тампон дугме' or 'Дугме за радње'."
         }
       ],
       "approved_at": null

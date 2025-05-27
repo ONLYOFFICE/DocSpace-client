@@ -3,7 +3,7 @@
   "content": "Move to Trash",
   "content_en_sha1_hash": "dffd3b9a8af6c5f81130b3b3e75c9ab26f670bfa",
   "created_at": "2025-05-19T21:30:56.718Z",
-  "updated_at": "2025-05-20T09:38:20.237Z",
+  "updated_at": "2025-05-24T13:23:55.018Z",
   "comment": {
     "text": "This translation key is used for a button that allows users to move files to the trash when deleting or unsubscribing. In the UI, it appears as a \"Move to Trash\" button in a delete dialog modal. It should be translated to provide the correct action label in different languages.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Zibil qutusuna yerləşdir\" is a literal translation of \"Move to Trash\", it's not the most natural or commonly used phrasing in Azerbaijani for a trash/recycle bin action. A more natural translation would be 'Zibilə sil' or 'Çərəz səbətinə köçür'.",
+          "suggestion": "Consider using 'Zibilə sil' or 'Çərəz səbətinə köçür'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -111,7 +117,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Pārvietot uz miskasti' is a literal translation, 'Move to Trash' is more commonly rendered as 'Dzēst' or 'Ievietot atkritumu kastē' in Latvian for user interface elements. 'Pārvietot uz miskasti' sounds less natural in this context.",
+          "suggestion": "Consider 'Dzēst' or 'Ievietot atkritumu kastē'."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Mutare la Coșul de gunoi\" is a very literal translation. A more natural and common Romanian phrasing for \"Move to Trash\" would be \"Ștergere în Coșul de gunoi\" or simply \"În Coșul de gunoi\".",
+          "suggestion": "În Coșul de gunoi"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'කුණු කූඩයට දමන්න' while literally meaning 'put into the garbage bin', isn't the standard or most natural way to say 'Move to Trash' in Sinhala. 'Delete' or 'ඉවත් කරන්න' is often preferred in a digital context.",
+          "suggestion": "ඉවත් කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,19 +195,42 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Помери у Отпад' does not accurately reflect the meaning of 'Move to Trash'. 'Помери' means 'move', but 'у Отпад' is not the standard way to say 'to trash' in Serbian. The correct translation should be 'Пребаци у Кошиницу' or 'Премести у Кошиницу'.",
+          "suggestion": "Пребаци у Кошиницу"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Pomeri u Otpad\" is not an accurate translation of \"Move to Trash.\" \"Pomeri\" implies moving something towards, not into. \"Otpad\" translates to waste or garbage.",
+          "suggestion": "Prebaci u Koru za Otpad"
+        },
+        {
+          "type": "spelling",
+          "description": "While \"Otpad\" is a valid word, it's a more formal term. A more natural translation would use a simpler term for 'trash'.",
+          "suggestion": "Consider alternatives like 'među otpad' or 'u otpad' for a more conversational tone, but a more direct 'u korpu za smeće' or 'u kantu za smeće' might be preferred."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'Çöp Kutusuna Taşı' is not the most natural or accurate translation of 'Move to Trash'. A more common and natural translation would be 'Çöp Kutusu'na Gönder'.",
+          "suggestion": "Çöp Kutusu'na Gönder"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

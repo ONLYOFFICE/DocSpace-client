@@ -3,7 +3,7 @@
   "content": "URL",
   "content_en_sha1_hash": "0e2d9b0777a485c1276de0803c12a7d76fbc5c39",
   "created_at": "2025-05-19T21:30:49.854Z",
-  "updated_at": "2025-05-21T00:54:02.930Z",
+  "updated_at": "2025-05-24T02:08:00.399Z",
   "comment": {
     "text": "This translation key is used to display the label for a column header in a table, specifically related to webhooks. It appears as \"URL\" and is intended to be displayed next to a column that shows URL values.",
     "is_auto": true,
@@ -42,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'URL адрес' is understandable, it's a more verbose and less common translation of 'URL' in Bulgarian.  'URL' is frequently used directly, especially in technical contexts.",
+          "description": "While 'URL адрес' is a literal translation ('URL address'), it's unnecessarily verbose and not the standard terminology in Bulgarian. 'URL' is commonly used and understood.",
           "suggestion": "URL"
         }
       ],
@@ -120,7 +120,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"Vietrādis\" is not the correct translation for \"URL\". \"Vietrādis\" refers to a router or gateway. The appropriate translation for URL is simply \"URL\".",
+          "description": "The Latvian translation \"Vietrādis URL\" is not an accurate translation of \"URL.\" \"Vietrādis\" refers to a router or gateway and doesn't convey the meaning of a URL (Uniform Resource Locator).",
           "suggestion": "URL"
         }
       ],
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ඒ.ස.නි.' is an abbreviation for 'ඒකීනත සීමිත වාරයකි' (Ekina Sathimitha Varayaki) which means 'Unique Limited Period'. It doesn't accurately translate 'URL' (Uniform Resource Locator).",
-          "suggestion": "A more accurate translation of 'URL' in Sinhala would be 'විශේෂිත වෙබ් ලිපිනය' (Visheshitha Web Lipinaya) or a transliteration like 'යුආර්එල්' (Yuarel)."
+          "description": "The Sinhala translation 'ඒ.ස.නි.' is an abbreviation for 'අතුරුසැණිලි සංදේශය' which translates to 'Intermediary Message' or 'Notification'. It is not a direct or appropriate translation of 'URL'.",
+          "suggestion": "A more accurate translation would be something like 'විමසුම් පත්‍ර ලිපිනය' (Vimsum Pathra Lipinaya - URL Address) or simply 'ලිපිනය' (Lipinaya - Address) depending on the context."
         }
       ],
       "approved_at": null
@@ -210,7 +210,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'URL-адреса' is a valid translation, 'URL' is often used directly in Ukrainian, especially in technical contexts. 'URL-адреса' is more literal and can sound slightly clunky.",
+          "description": "While 'URL-адреса' is a valid translation, 'URL' is often used directly in Ukrainian, especially in technical contexts. 'URL-адреса' is more literal but might sound slightly less natural.",
           "suggestion": "URL"
         }
       ],

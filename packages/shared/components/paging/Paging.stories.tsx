@@ -24,18 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 
 import { Meta, StoryObj } from "@storybook/react";
 
 import { Paging } from "./Paging";
 import { PagingProps } from "./Paging.types";
-
-// const disable = {
-//   table: {
-//     disable: true,
-//   },
-// };
 
 const meta = {
   title: "Components/Paging",
@@ -51,11 +45,6 @@ const meta = {
     onSelectPage: { action: "onSelectPage" },
     onSelectCount: { action: "onSelectCount" },
     previousAction: { action: "onPrevious" },
-    // nextAction: { action: "onNext" },
-    // selectedCount: disable,
-    // pageCount: disable,
-    // displayItems: disable,
-    // displayCount: disable,
   },
 } satisfies Meta<typeof Paging>;
 type Story = StoryObj<typeof Paging>;
@@ -98,22 +87,18 @@ const selectedCountPageHandler = (count: number) => {
 };
 
 const Template = ({
-  // pageCount,
-  // displayItems,
-  // displayCount,
   nextAction,
   previousAction,
   onSelectPage,
   onSelectCount,
-  // selectedCount,
   ...args
 }: PagingProps) => {
-  const pageItems = createPageItems(200);
+  const pageItems = useMemo(() => createPageItems(200), []);
   const [selectedPageItem, setSelectedPageItems] = useState(pageItems[0]);
 
   useEffect(() => {
     setSelectedPageItems(pageItems[0]);
-  }, [pageItems]);
+  }, []);
 
   const onSelectPageNextHandler = () => {
     const currentPage = pageItems.filter(
@@ -130,7 +115,7 @@ const Template = ({
   };
 
   return (
-    <div style={{ height: "100px" }}>
+    <div style={{ height: "100%" }}>
       <Paging
         {...args}
         pageItems={pageItems}
@@ -144,8 +129,8 @@ const Template = ({
           onSelectPageNextHandler();
           nextAction();
         }}
-        onSelectPage={(a) => onSelectPage(a)}
-        onSelectCount={(a) => onSelectCount(a)}
+        onSelectPage={(a) => onSelectPage?.(a)}
+        onSelectCount={(a) => onSelectCount?.(a)}
         selectedPageItem={selectedPageItem}
         selectedCountItem={selectedCountPageHandler(25)[0]}
       />

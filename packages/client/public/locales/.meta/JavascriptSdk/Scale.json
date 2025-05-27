@@ -3,7 +3,7 @@
   "content": "Scale",
   "content_en_sha1_hash": "a29f0256272e79ca91a1c4e608f09a6264397d12",
   "created_at": "2025-05-19T21:30:54.645Z",
-  "updated_at": "2025-05-21T08:45:16.126Z",
+  "updated_at": "2025-05-24T08:58:05.274Z",
   "comment": {
     "text": "This translation key is used to display a scale value in the Image Watermark component. It appears as a label next to a watermark image, allowing users to select a scale level. Translators should provide a unit of measurement for this value.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"حجم\" (hajm) translates to 'volume' or 'size,' it doesn't perfectly capture the nuance of 'Scale' in the context of a Javascript SDK. 'Scale' often implies a range or level of magnitude. A more precise translation might be something like 'نطاق' (nitaq) which means 'range' or 'scope,' or 'مقياس' (miqyas) which means 'measure' or 'scale'.",
+          "suggestion": "Consider using 'نطاق' (nitaq) or 'مقياس' (miqyas) for a more accurate translation depending on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -72,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation \"Mittakaavassa\" translates to \"at scale\" or \"in scale\" and doesn't directly correspond to the English word \"Scale\". It implies a context that isn't present in the original English.",
-          "suggestion": "A more accurate translation could be \"Skaala\" (scale) or \"Laajuus\" (extent/scope), depending on the intended meaning. Further context is needed to determine the best option."
+          "description": "The translation \"Mittakaavassa\" (in scale) is not the most appropriate translation for \"Scale\" in this context. It implies a location or state of being *in* a scale, rather than simply the concept of scale itself.  A more direct translation, or a more contextually appropriate word, is needed depending on the intended meaning of \"Scale\" within the JavascriptSdk.",
+          "suggestion": "Consider alternatives like \"Skaala\" (a more common borrowing from Swedish/German) or a more descriptive term based on the JavascriptSdk's use of 'Scale'. Without more context, it's difficult to suggest a perfect replacement."
         }
       ],
       "approved_at": null
@@ -81,13 +87,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Mise à l'échelle\" is a valid translation for 'Scale' in certain contexts (like cloud computing), it's a more technical term. For a general context, a simpler translation like \"Échelle\" might be more appropriate.",
-          "suggestion": "Échelle"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Սանդղակ\" (Sandghak) typically refers to a small ladder or staircase, not the English word \"Scale\" which can refer to measurement, size, or scope. A more appropriate translation depends on the intended meaning of 'Scale' in the JavascriptSdk context.",
-          "suggestion": "Requires further context to determine the correct Armenian translation. Possible alternatives include: \"չափ\" (chap) for measurement/size, \"զույգ\" (zuyg) for scope, or other terms depending on the specific use."
+          "description": "The Armenian translation 'Սանդղակ' (sandghak) generally refers to a small ladder or a scale for weighing, not the English term 'Scale' which can refer to a range, proportion, or a measuring instrument (like a weighing scale).  The best translation would depend on the context of the JavascriptSdk.",
+          "suggestion": "Consider alternative translations like \"զսպող ծավալ\" (zspogh dvaval - adjustable range), \"ծավալային\" (dvavalayin - proportional), or a direct translation related to a weighing scale if that is the intended meaning."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"확대\" (hwakdae) primarily means 'enlarge' or 'zoom in'. While 'scale' can sometimes imply enlargement, it also refers to proportion, size, and range, which '확대' doesn't fully capture. A more accurate translation would depend on the context of how 'Scale' is being used within the JavascriptSdk.",
-          "suggestion": "Consider alternative translations like '척도' (cheokdo - scale), '범위' (beomi - range), or '크기' (keugi - size) depending on the specific meaning of 'Scale' in the JavascriptSdk context."
+          "description": "The Korean translation \"확대\" (hwakdae) generally means 'zoom' or 'enlarge'. While it can be related to scale, it doesn't accurately convey the English word 'Scale' in the context of a Javascript SDK key name. 'Scale' often refers to a measurement or range.",
+          "suggestion": "Consider alternatives like '척도' (cheokdo - scale/measure) or '범위' (beomwi - range) depending on the specific context of the Javascript SDK."
         }
       ],
       "approved_at": null
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Mērogot' can mean 'scale,' it more accurately translates to 'to scale' or 'to enlarge.' 'Scale' as a noun, referring to a range or measurement, might be better represented with a different term in Latvian, such as 'mērogs' or 'svara mērs,' depending on the specific context. 'Mērogot' implies an action.",
-          "suggestion": "Consider alternatives like 'mērogs' (scale as a measuring device), 'svara mērs' (range/measurement) or investigate the specific context to find the most accurate Latvian equivalent of 'Scale'."
+          "description": "While \"Mērogot\" can mean 'scale' in some contexts, it primarily means 'to scale' or 'to enlarge'.  For a product key name like 'Scale', a more appropriate translation might be 'Apjoms' (volume) or 'Dzenes' (range) to better reflect the meaning of a scaling capability or feature. 'Mērogot' implies an action, not a characteristic.",
+          "suggestion": "Consider 'Apjoms' or 'Dzenes' as alternatives."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Scalare\" is not the most accurate or common translation of \"Scale\" in this context (likely referring to scaling or sizing).",
-          "suggestion": "Consider using \"Scara\" or \"Dimensiune\" depending on the exact meaning intended. 'Scara' implies a scale or ladder, while 'Dimensiune' refers to size or dimension. Without further context, 'Scara' is potentially the best choice."
+          "description": "The Romanian translation 'Scalare' is a direct transliteration of 'Scale' and doesn't accurately convey the intended meaning within a technical context related to Javascript SDK. It's likely not the correct term for 'scale' in this context.",
+          "suggestion": "Consider alternatives like 'Scalabilitate' (Scalability), 'Dimensiune' (Size/Dimension), or 'Volum' (Volume), depending on the specific context where 'Scale' is used in the Javascript SDK."
         }
       ],
       "approved_at": null
@@ -189,13 +189,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'පරිමාණනය' (parimānanya) is a valid Sinhala word, it primarily means 'measurement' or 'quantification'. 'Scale' in the context of JavascriptSdk likely refers to something more like 'size', 'scope', or a system of 'scaling' (increasing in size or extent).  'පරිමාණනය' doesn't fully capture this meaning.",
-          "suggestion": "Consider alternatives like 'විශාලත්වය' (vishālathvaya - size/magnitude), 'ප්‍රමාණය' (pramāṇaya - extent/amount), or 'මානය' (mānaya - scale, in the sense of measurement/proportion, but potentially usable depending on context)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -204,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation \"Zmeniť rozmer\" is a literal translation of 'change size' which doesn't fully capture the meaning of 'Scale' in the context of a Javascript SDK. 'Scale' often implies adjusting or modifying something, not just changing its size. A more appropriate translation might depend on the specific function of the Javascript SDK.",
-          "suggestion": "Consider alternatives like \"Nastaviť rozsahu\", \"Prispôsobiť\", or \"Upraviť\" depending on the context."
+          "description": "The Slovak translation \"Zmeniť rozmer\" (Change dimension) doesn't accurately reflect the English word 'Scale' in the context of a Javascript SDK. 'Scale' often refers to adjustment, resizing, or proportion, not necessarily a dimensional change. A more accurate translation might be 'Nastaviť rozsahu' or 'Upraviť rozsahu' (Set range/Adjust range).",
+          "suggestion": "Nastaviť rozsahu"
         }
       ],
       "approved_at": null
@@ -216,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Spremeni merilo' is a literal translation of 'Scale', it doesn't accurately convey the meaning in the context of a Javascript SDK. 'Scale' in this context likely refers to zoom level or scaling factor, not a general change of measurement. A more accurate translation would depend on the SDK's intended functionality.",
-          "suggestion": "Consider 'Povečaj merilo' (Zoom in), 'Zmanjšaj merilo' (Zoom out), or 'Merilo' (Scale) if it's referring to a specific value. Further context is needed for a precise translation."
+          "description": "While \"Spremeni merilo\" is a literal translation of 'Scale,' it doesn't accurately convey the intended meaning in a software context. 'Scale' often refers to zooming or adjusting the size of something, not a general measurement.",
+          "suggestion": "Consider alternatives like 'Povečaj/Zmanjšaj merilo' (Zoom in/Zoom out), 'Prilagodi merilo' (Adjust scale), or 'Velikost' (Size), depending on the specific functionality."
         }
       ],
       "approved_at": null
@@ -228,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Скалирај' translates to 'Scale' or 'Scale up' as a verb. However, 'Scale' as a key name likely refers to the concept of scaling, not the act of scaling. A noun form would be more appropriate.",
-          "suggestion": "Consider 'Скалирање' which translates to 'Scaling' as a noun."
+          "description": "The Serbian translation \"Скалирај\" is a verb meaning \"scale\" (as in, to perform the action of scaling). The English word \"Scale\" in this context is likely referring to the feature or property itself, not the act of scaling. A noun form would be more appropriate.",
+          "suggestion": "Consider alternatives like \"Масштаб\", \"Опсег\", or \"Размера\", depending on the specific context of 'Scale'."
         }
       ],
       "approved_at": null
@@ -240,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Skaliraj\" can be related to 'Scale', it's a verb form (imperative - 'Scale!'). The English 'Scale' is a noun. A better translation would depend on the context.  Without more context, 'Skala' (noun) is arguably a closer translation.",
-          "suggestion": "Consider 'Skala' if referring to the noun form of 'Scale'."
+          "description": "While 'Skaliraj' is a valid Serbian word related to scaling, it's an imperative verb form ('scale!' or 'do scale!'). 'Scale' as a noun (referring to a scale of measurement or a system of scaling) typically requires a noun form or a more descriptive translation.",
+          "suggestion": "Consider alternatives like 'Skala' (scale, as in measurement), 'Proširivost' (scalability), or 'Veličina' (size) depending on the intended context."
         }
       ],
       "approved_at": null
@@ -258,7 +252,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Масштабувати\" technically means \"to scale\", it's an action. \"Scale\" as a key name likely refers to the measurement of scale, not the act of scaling. A more appropriate translation would be \"Масштаб\".",
+          "description": "The Ukrainian translation \"Масштабувати\" (Masshtabuваты) is a verb meaning \"to scale\" or \"to scale up.\" The English key \"Scale\" is a noun. A more appropriate translation would be \"Масштаб\" (Mashtab), which means \"scale\" as a noun.",
           "suggestion": "Масштаб"
         }
       ],

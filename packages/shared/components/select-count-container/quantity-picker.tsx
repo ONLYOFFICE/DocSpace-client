@@ -27,15 +27,15 @@
 import React, { ChangeEvent, MouseEvent } from "react";
 import classNames from "classnames";
 
-import PlusIcon from "@docspace/shared/public/images/plus.react.svg";
-import MinusIcon from "@docspace/shared/public/images/minus.react.svg";
+import PlusIcon from "PUBLIC_DIR/images/payment.plus.react.svg";
+import MinusIcon from "PUBLIC_DIR/images/minus.react.svg";
 
 import { Text } from "../text";
 import { Slider } from "../slider";
 import { TextInput } from "../text-input";
 import { InputType } from "../text-input/TextInput.enums";
 
-import styles from "./select-count-container.module.scss";
+import styles from "./quantity-picker.module.scss";
 
 interface QuantityPickerProps {
   value: number;

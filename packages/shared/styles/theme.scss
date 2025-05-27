@@ -2211,3 +2211,20 @@
   --selector-navigation-lifetime-fill: #{$dark-gray-dark};
   --selector-navigation-lifetime-stroke: #{$gray};
 }
+
+.light {
+  --payment-price-container-disable-color: #{$light-gray-hover};
+  --payment-rectangle-color: #{$light-gray-hover};
+  --payment-price-container-track-number-color: #{$gray};
+  --payment-price-container-disable-color: #{$gray};
+  --payment-price-container-disable-background: #{$gray-light};
+  --payment-price-container-feature-text-color: #{$gray};
+}
+.dark {
+  --payment-price-container-disable-color: #{$light-dark-gray-hover};
+  --payment-rectangle-color: #{$light-dark-gray-hover};
+  --payment-price-container-track-number-color: #{$gray-dark};
+  --payment-price-container-disable-color: #{$gray-dark};
+  --payment-price-container-disable-background: #{$dark-gray-light};
+  --payment-price-container-feature-text-color: #{$gray-dark};
+}

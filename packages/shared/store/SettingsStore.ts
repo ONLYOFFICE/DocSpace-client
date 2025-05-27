@@ -1072,7 +1072,6 @@ class SettingsStore {
   };
 
   getCompanyInfoSettings = async () => {
-    console.log("getCompanyInfoSettings");
     const res = await api.settings.getCompanyInfoSettings();
 
     this.setCompanyInfoSettingsData(res);

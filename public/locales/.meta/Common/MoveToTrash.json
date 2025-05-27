@@ -3,7 +3,7 @@
   "content": "Move to Trash",
   "content_en_sha1_hash": "dffd3b9a8af6c5f81130b3b3e75c9ab26f670bfa",
   "created_at": "2025-05-19T21:30:46.659Z",
-  "updated_at": "2025-05-22T11:56:37.364Z",
+  "updated_at": "2025-05-26T07:57:32.256Z",
   "comment": {
     "text": "This translation key \"MoveToTrash\" is used to display the label for a button or option that moves an item to the trash. In a delete confirmation dialog, it appears as the title of the modal header, prompting the user to move the selected item to the trash instead of deleting it permanently.",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\CreateEditRoomDialog\\sub-components\\FileLifetime.js",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/FileLifetime.js",
       "line_number": 79,
       "context": "];\n \n const deleteOptions = [\n {\n key: 1,\n label: t(\"Common:MoveToTrash\"),\n value: false,\n },\n {\n key: 2,\n label: t(\"Common:DeletePermanently\"),",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\DeleteFileDialog.tsx",
+      "file_path": "/packages/doceditor/src/components/DeleteFileDialog.tsx",
       "line_number": 44,
       "context": "const DeleteFileDialog = ({ onSubmit, onClose }: DeleteFileDialogProps) => {\n const { t } = useTranslation([\"Common\"]);\n \n return (\n <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>\n <ModalDialog.Header>{t(\"Common:MoveToTrashTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <span>\n <>{t(\"Common:DeleteFile\")} </>\n <>{t(\"Common:FilePermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     },
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\DeleteFileDialog.tsx",
+      "file_path": "/packages/doceditor/src/components/DeleteFileDialog.tsx",
       "line_number": 44,
       "context": "const DeleteFileDialog = ({ onSubmit, onClose }: DeleteFileDialogProps) => {\n const { t } = useTranslation([\"Common\"]);\n \n return (\n <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>\n <ModalDialog.Header>{t(\"Common:MoveToTrashTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <span>\n <>{t(\"Common:DeleteFile\")} </>\n <>{t(\"Common:FilePermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {
@@ -45,13 +45,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Zibil qutusuna köçürün\" is understandable, a more idiomatic and accurate translation of \"Move to Trash\" would be something like \"Çöplərə göndərin\" or \"Zibilə daşıyın\". \"Köçürün\" implies a more general 'move' rather than specifically 'move to trash'.",
-          "suggestion": "Çöplərə göndərin"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -126,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ກະບະຕຸກ' (kabatuk) is the correct Lao word for 'trash' or 'rubbish'. However, 'ກະບະ' (kaba) more specifically means 'basket' or 'bin', so while technically not incorrect, it can be slightly misleading. A more natural and concise translation might be better.",
-          "suggestion": "Consider using a more general term for 'trash' if possible. Alternatives could be researched to improve the naturalness of the translation."
+          "description": "The Lao word 'ກະບະຕຸກ' (kabatuk) is generally understood as 'trash bin' or 'rubbish bin', but 'ກະບະ' (kaba) alone often means 'basket' or 'container'. While not strictly incorrect, 'ກະບະຕຸກ' might be perceived as slightly awkward or overly literal.",
+          "suggestion": "Consider using a more common and natural phrasing like 'ຖິ້ມສູ່ກະບະຂີ້ເຫຍື້ອ' (thim su kabakhiuea) which translates to 'move to rubbish bin'."
         }
       ],
       "approved_at": null
@@ -168,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Mutare în coșul de gunoi\" is understandable, a more natural and common Romanian translation for \"Move to Trash\" would be \"Ștergere în coșul de gunoi\" or simply \"În coșul de gunoi\". \"Mutare\" (move) is not the most idiomatic choice in this context.",
-          "suggestion": "Ștergere în coșul de gunoi"
+          "description": "The Romanian translation \"Mutare în coșul de gunoi\" is a literal translation but not the most natural phrasing. \"Move to Trash\" is typically translated as \"Ștergere în coșul de gunoi\" or simply \"Mutare la gunoi\" in Romanian user interfaces.",
+          "suggestion": "Consider using \"Ștergere în coșul de gunoi\" or \"Mutare la gunoi\"."
         }
       ],
       "approved_at": null
@@ -186,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"හැලලි කූඩයට යවන්න\" while literally meaning \"Send to trash heap\", is not the standard or most natural way to say \"Move to Trash\" in Sinhala. It sounds a bit awkward and overly literal.",
-          "suggestion": "A more natural translation would be \"දුල්ලේට යවන්න\" (dullae ta yavanna) or \"කසළයට යවන්න\" (kasalaye ta yavanna)."
+          "description": "The translation 'හැලලි කූඩයට යවන්න' is a literal translation of 'Send to junk box' rather than 'Move to Trash'. It doesn't accurately convey the meaning of the English phrase.",
+          "suggestion": "A more accurate translation would be 'දුල්ලකට යවන්න' (dullaka yavanna) or 'ගබඩා කුඩාට යවන්න' (gabada kudata yavanna)."
         }
       ],
       "approved_at": null
@@ -210,7 +204,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Премести у корпу' is not the most natural or accurate translation of 'Move to Trash'. While technically understandable, 'корпу' refers to a basket or container, not a trash bin or recycling bin. A more accurate and common translation would be 'Премести у отпад' or 'Премести у смеће'.",
+          "description": "The Serbian (Cyrillic) translation 'Премести у корпу' doesn't perfectly capture the meaning of 'Move to Trash'. 'Корпу' refers to a container or basket, while 'Trash' implies a designated area for discarded items. A more accurate translation would better reflect this.",
           "suggestion": "Премести у отпад"
         }
       ],
@@ -222,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Premesti u korpu' is a literal translation that isn't idiomatic. 'Move to Trash' generally implies moving something to a designated 'Trash' or 'Bin' folder/location. A more natural Serbian translation would convey that meaning.",
-          "suggestion": "Izbrisi u korpu"
+          "description": "The Serbian translation 'Premesti u korpu' literally translates to 'Move to bin'. While 'bin' and 'trash' are sometimes used interchangeably, 'trash' is more common and conveys the intended meaning more accurately.",
+          "suggestion": "Premesti u kantu za otpad"
         }
       ],
       "approved_at": null
@@ -234,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Çöpe taşı\" is not the most natural or accurate translation of \"Move to Trash.\" While it literally means \"Carry to trash,\" it doesn't convey the action of moving something *into* the trash bin.",
-          "suggestion": "Sil"
+          "description": "The Turkish translation \"Çöpe taşı\" translates literally to \"Carry to trash\". While understandable, a more idiomatic and common translation for \"Move to Trash\" would be \"Çöpe taşı\".",
+          "suggestion": "Çöpe taşı"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "You can add new team members manually or invite them via link.",
   "content_en_sha1_hash": "8d1483c6747adb57fb17e14f1933ba8edb40934a",
   "created_at": "2025-05-19T21:30:55.212Z",
-  "updated_at": "2025-05-20T09:40:13.856Z",
+  "updated_at": "2025-05-24T12:43:45.364Z",
   "comment": {
     "text": "This translation key is used to display a description for a button that allows users to add new team members. It will appear in an Empty Container component as a link or tooltip. Translators should provide a phrase explaining how to add new members, such as inviting them via a link or adding them manually.",
     "is_auto": true,
@@ -57,7 +57,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'manually' is not accurately conveyed by 'μη αυτόματα'. A more appropriate translation would be 'με το χέρι' or 'χειροκίνητα'.",
+          "suggestion": "Μπορείτε να προσθέσετε νέα μέλη της ομάδας με το χέρι ή να τα προσκαλέσετε μέσω συνδέσμου."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'via link' is translated as 'සබැඳියකින්'. While technically correct, a more natural and commonly used phrasing in Sinhala would be 'සබැඳියක් භාවිතා කර'.",
+          "suggestion": "කණ්ඩායමට නව සාමාජිකයින් අතින් එක් කිරීමට හෝ සබැඳියක් භාවිතා කර ආරාධනා කිරීමට හැකිය."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +183,18 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'додати' (dodati) is not the best translation for 'add' in this context. It's more commonly used for adding numbers or quantities. A better translation would be 'додати' (dodati) or 'укључити' (uključiti).",
+          "suggestion": "Можете додати нове чланове тима ручно или их позвати путем линка."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'позвати' (pozvati) could be more accurately translated as 'позивати' (pozivati) or 'углавити' (uglaviti) when referring to an invitation via a link in a digital context.",
+          "suggestion": "Можете додати нове чланове тима ручно или их позивати путем линка."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

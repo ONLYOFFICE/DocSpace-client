@@ -3,7 +3,7 @@
   "content": "Fill",
   "content_en_sha1_hash": "7adb6736cf2c9ae017b128f98738ffbae0e58655",
   "created_at": "2025-05-19T21:30:45.342Z",
-  "updated_at": "2025-05-22T11:56:37.779Z",
+  "updated_at": "2025-05-26T07:57:32.821Z",
   "comment": {
     "text": "The translation key \"FillFormButton\" is used to display a button that invites users to fill a file. This phrase appears on a button in various UI elements, such as a filling status panel and a form context options store. It's part of a broader set of translations related to file operations and user interactions.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\store\\ContextOptionsStore.js",
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
       "line_number": 1731,
       "context": "disabled: Boolean(item.external && item.expired),\n },\n {\n id: \"option_fill-form\",\n key: \"fill-form\",\n label: t(\"Common:FillFormButton\"),\n icon: FormFillRectSvgUrl,\n onClick: () => this.onClickLinkFillForm(item),\n disabled: false,\n },\n {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\shared\\dialogs\\FillingStatusPanel\\index.tsx",
+      "file_path": "/packages/shared/dialogs/FillingStatusPanel/index.tsx",
       "line_number": 178,
       "context": "scale\n primary\n onClick={() => onFill?.(file)}\n id=\"panel_button_fill\"\n key=\"panel_button_fill\"\n label={t(\"Common:FillFormButton\")}\n size={ButtonSize.normal}\n />\n ) : null}\n {file.security.StopFilling ? (\n <Button",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"إملأ النموذج\" literally translates to \"Fill the form\". The English content is simply \"Fill\", suggesting a more concise translation is preferred.",
-          "suggestion": "ملء (Mal')"
+          "description": "The translation \"إملأ النموذج\" literally translates to \"Fill the form\". While functionally correct, it's less concise and idiomatic than a simpler translation for a button label like \"Fill\".  For a button, a more suitable translation might be something shorter and more direct.",
+          "suggestion": "ملء (Mil' - Fill)"
         }
       ],
       "approved_at": null
@@ -48,7 +48,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Formu doldurun\" is too literal and doesn't accurately convey the meaning of \"Fill\" in the context of a button labeled 'Fill'. It translates to 'Fill the form', which is not the intended action.",
+          "description": "The translation \"Formu doldurun\" translates to \"Fill the form\" instead of just \"Fill\". The original English is a short, imperative verb, and the Azerbaijani translation includes the object of the verb.",
           "suggestion": "Doldur"
         }
       ],
@@ -60,7 +60,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Попълнете формуляра\" (Popŭlnete formulqrata) translates to \"Fill out the form\". While related to \"Fill\", it's more verbose than the English \"Fill\". A more direct and concise translation would be more appropriate.",
+          "description": "The translation \"Попълнете формуляра\" (Popълnete formulqrata) is too literal and lengthy for a button label. It translates to \"Fill in the form\". A more concise and user-friendly translation would be closer to just \"Попълни\" (Popъlni) or \"Запълни\" (Zapъlni).",
           "suggestion": "Попълни"
         }
       ],
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation \"Vyplňte formulář\" translates to \"Fill out the form\", which is more verbose than the English \"Fill\". While technically correct, it doesn't match the brevity of the original.",
-          "suggestion": "Consider a shorter translation like \"Vyplnit\" or \"Naplnit\" to better match the brevity of 'Fill'."
+          "description": "The Czech translation \"Vyplňte formulář\" translates to \"Fill out the form\". While related to 'Fill', it's more verbose than the concise English 'Fill'. The translation doesn't convey the exact meaning of the English term, which is likely a call to action on a button.",
+          "suggestion": "Consider a more concise translation such as \"Vyplnit\" or \"Odeslat\" (Submit) depending on the context of the button."
         }
       ],
       "approved_at": null
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Formular ausfüllen\" literally translates to \"Fill out form\". While functionally similar to the English \"Fill\", it's more verbose and less concise. A more direct translation, keeping the brevity of the English, would be more suitable.",
-          "suggestion": "Ausfüllen"
+          "description": "The German translation 'Formular ausfüllen' is too literal and lengthy for a button label. 'Fill' implies a concise action, and 'Formular ausfüllen' means 'fill out form'.",
+          "suggestion": "Consider a shorter, more action-oriented translation like 'Ausfüllen' or 'Füllen'."
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Συμπληρώστε τη φόρμα\" literally translates to \"Fill in the form\". While understandable, it's more verbose than the English \"Fill\". A more concise and accurate translation, reflecting the brevity of the original, would be better.",
-          "suggestion": "Γεμίστε"
+          "description": "The Greek translation \"Συμπληρώστε τη φόρμα\" (Symplíróste tí forma) translates to \"Fill out the form\". The English \"Fill\" is much more concise and likely intended to mean simply \"Fill\".  The Greek translation is too verbose.",
+          "suggestion": "Συμπλήρωση"
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Spanish translation \"Rellenar el formulario\" is too literal and verbose for a button label. \"Fill\" typically implies a more concise action.",
-          "suggestion": "Consider a more concise and user-friendly option such as \"Completar\" or \"Llenar\"."
+          "description": "The translation \"Rellenar el formulario\" is too literal and lengthy for a button label. It translates to \"Fill the form\" rather than just \"Fill\".",
+          "suggestion": "Llenar"
         }
       ],
       "approved_at": null
@@ -120,7 +120,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Täytä lomake' literally translates to 'Fill form'. While functional, it's a more verbose translation than the English 'Fill'.  A more concise and natural translation would be more appropriate for a button label.",
+          "description": "The translation \"Täytä lomake\" is too literal. While technically correct (Fill Form), it's not idiomatic for a button label. A shorter, more user-friendly option would be better.",
           "suggestion": "Täytä"
         }
       ],
@@ -132,7 +132,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The French translation 'Remplissez le formulaire' translates to 'Fill out the form', which is more verbose than the English 'Fill'. It's an over-translation and doesn't match the succinctness of the source text.",
+          "description": "The French translation \"Remplir le formulaire\" translates to \"Fill the form\" rather than just \"Fill\". The original English is a short, concise label, and the translation is more verbose.",
           "suggestion": "Remplir"
         }
       ],
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Լրացրեք ձևը\" literally translates to \"Fill out the form\". While functionally similar to 'Fill', it's more verbose and doesn't convey the concise nature of the English term 'Fill' often used in UI elements. It's also in the imperative mood, which might be too direct for some UI contexts.",
-          "suggestion": "Consider a more concise translation like \"Լրացնել\" (Lracnel) or a more contextually appropriate term depending on the specific button's function."
+          "description": "The translation 'Լրացրեք ձևը' (Lracrek tvevm) literally translates to 'Fill the form'. While understandable, it's more verbose than the English 'Fill'. A more concise and appropriate translation would be closer to 'Լրացնել' (Lracnel) which means 'to fill' or 'fill in'.",
+          "suggestion": "Լրացնել"
         }
       ],
       "approved_at": null
@@ -156,7 +156,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Italian translation \"Compilare il modulo\" (Fill the form) is too literal and verbose for a button label. \"Fill\" typically implies a simple action.",
+          "description": "The Italian translation \"Compilare il modulo\" translates to \"Fill out the form\". While close to the English \"Fill\", it's more verbose and less concise. For a button label, a shorter, more direct translation would be better.",
           "suggestion": "Compila"
         }
       ],
@@ -168,13 +168,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'フォームへの入力' (Fōmu e no nyūryoku) is too literal and verbose for a button label like 'Fill'. It translates to 'Input into the form'.",
-          "suggestion": "A more natural and concise translation would be '入力' (Nyūryoku - Input) or '送信' (Sōshin - Submit), depending on the button's functionality."
+          "description": "The translation \"フォームへの入力\" (fōmu e no nyūryoku) literally translates to \"input to the form.\" While understandable, it's not a concise or natural translation of \"Fill.\" A more appropriate translation would be something like \"入力\" (nyūryoku - input), \"送信\" (soshin - submit), or a more colloquial term depending on the specific context of the button.",
+          "suggestion": "入力 (nyūryoku)"
         },
         {
           "type": "formatting",
-          "description": "The translation is too long for a typical button label.  Long labels can be truncated or display poorly on various devices and resolutions.",
-          "suggestion": "Choose a shorter, more concise option as suggested above."
+          "description": "The translation is quite verbose for a button label. Button labels are typically short and action-oriented.",
+          "suggestion": "Consider a shorter alternative like \"入力 (nyūryoku)\" or simply \"送信 (soshin)\" depending on the button's action."
         }
       ],
       "approved_at": null
@@ -185,8 +185,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '양식을 작성해주세요' is overly formal and verbose for a button labeled 'Fill'. A more appropriate translation would be something shorter and more action-oriented.",
-          "suggestion": "채우기"
+          "description": "The Korean translation \"양식을 작성해주세요\" is a complete sentence meaning \"Please fill out the form.\" The English content \"Fill\" is a short, imperative verb. The translation is too verbose and doesn't match the tone of the original.",
+          "suggestion": "작성"
         }
       ],
       "approved_at": null
@@ -203,7 +203,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Aizpildiet veidlapu\" translates to \"Fill in the form\". While functionally related to the English \"Fill\", it's more verbose and less concise than the original. A more direct and concise translation would be preferable, like \"Aizpildīt\" or \"Piepildīt\".",
+          "description": "The translation 'Aizpildiet veidlapu' translates to 'Fill in the form'. While conveying the general meaning, it's more verbose than the English 'Fill'. A more concise and direct translation would be more appropriate for a button label.",
           "suggestion": "Aizpildīt"
         }
       ],
@@ -215,7 +215,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Dutch translation \"Vul het formulier in\" is too literal and verbose for a button label. \"Fill\" implies a concise action. The translation means 'Fill in the form'.",
+          "description": "The Dutch translation \"Vul het formulier in\" is a full sentence, while the English \"Fill\" is a short, action-oriented label. It's too verbose for a button label.",
           "suggestion": "Invullen"
         }
       ],
@@ -227,7 +227,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation \"Wypełnij formularz\" translates to \"Fill out the form\", which is more verbose than the English \"Fill\". A more concise and direct translation would be better aligned with the original meaning.",
+          "description": "The translation 'Wypełnij formularz' is too literal. While grammatically correct, it's not the typical wording for a button label. It translates to 'Fill out the form'. A more concise and user-friendly translation would be simply 'Wypełnij' or 'Uzupełnij'.",
           "suggestion": "Wypełnij"
         }
       ],
@@ -239,7 +239,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Preencha o formulário\" is too literal and verbose for a button label. 'Fill' typically implies a short, action-oriented phrase. 'Preencha o formulário' translates to 'Fill the form'.",
+          "description": "The translation 'Preencha o formulário' is too literal and verbose for a button label. 'Fill' implies a concise action. 'Preencha o formulário' translates to 'Fill out the form'.",
           "suggestion": "Preencher"
         }
       ],
@@ -251,7 +251,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Preencher o formulário\" is too literal and lengthy for a button label. \"Preencher\" or \"Completar\" would be more appropriate for a button labeled \"Fill\".",
+          "description": "The translation 'Preencher o formulário' is too literal and verbose for a button label. It translates to 'Fill the form,' while the English 'Fill' is a concise imperative.",
           "suggestion": "Preencher"
         }
       ],
@@ -263,7 +263,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Completați formularul' translates to 'Complete the form' which is a more literal translation than the single word 'Fill'. While not strictly incorrect, it's less concise and doesn't capture the intended meaning as well. A more direct and appropriate translation for 'Fill' would be 'Umple'.",
+          "description": "The Romanian translation 'Completați formularul' translates to 'Complete the form'. While not entirely wrong, it's more literal than the concise English 'Fill'. A more natural Romanian translation for 'Fill' in this context (a button on a form) would be more closely aligned with the English meaning, emphasizing action and immediacy.",
           "suggestion": "Umple"
         }
       ],
@@ -275,7 +275,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Заполнить форму' (Zapolnit' formu) translates to 'Fill out the form,' which is more verbose than the English 'Fill'. A more concise and accurate translation would be 'Заполнить' (Zapolnit').",
+          "description": "The translation \"Заполнить форму\" (Zapolnit' formu) literally translates to \"Fill out the form\". While not entirely incorrect, it's more verbose than the English 'Fill'. A shorter, more direct translation would be better suited to maintain consistency with the original brevity.",
           "suggestion": "Заполнить"
         }
       ],
@@ -287,8 +287,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'පුරවන්න' (puravanna) literally translates to 'fill', it's not the most natural or idiomatic translation for a 'Fill' button. It sounds more like an instruction rather than a button label. A more suitable translation might be something like 'ගබඩිය' (gabadiya - meaning 'form' or 'application' in this context) or a shorter alternative like 'ඉටුරා' (itūrā - meaning 'enter').",
-          "suggestion": "Consider 'ගබඩිය' (gabadiya) or 'ඉටුරා' (itūrā) for a more natural button label."
+          "description": "The Sinhala translation 'පුරවන්න' (purawanna) while technically meaning 'to fill', doesn't accurately convey the intended meaning of a 'Fill' button. It's more of an action verb. A more appropriate translation would be something like 'ඉටුන් ගන්න' (itun ganne - submit) or 'ගබඩිය' (gadeey - button).",
+          "suggestion": "Consider 'ඉටුන් ගන්න' (itun ganne) or 'ගබඩිය' (gadeey)."
         }
       ],
       "approved_at": null
@@ -299,8 +299,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Vyplň formu' is too literal and lengthy for a button label. It translates to 'Fill the form' instead of just 'Fill'. The English 'Fill' is a single word representing the action, and the Slovak equivalent should be more concise.",
-          "suggestion": "Napln"
+          "description": "The Slovak translation \"Vyplň formu\" literally translates to 'Fill the form'. The English 'Fill' in this context (as a button label) should be more concise and action-oriented. 'Vyplň formu' is too verbose.",
+          "suggestion": "Doplniť"
         }
       ],
       "approved_at": null
@@ -311,7 +311,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Izpolni obrazec\" is too literal and lengthy for a button label. A more concise and user-friendly translation is needed. \"Izpolni\" is a better option.",
+          "description": "The translation \"Izpolni obrazec\" (Fill form) is too literal and verbose for a button label. A more concise and user-friendly translation for a 'Fill' button would be more appropriate.",
           "suggestion": "Izpolni"
         }
       ],
@@ -323,8 +323,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Попуните\" is a valid Serbian (Cyrillic) verb meaning \"to fill in\" or \"to complete,\" it might be too literal for a button labeled \"Fill.\"  A more natural and concise translation for a button like this would be something like \"Испуни\" (Ispuni), which translates to \"Fill\" and is commonly used for actions like filling out a form.",
-          "suggestion": "Consider using \"Испуни\" (Ispuni) instead of \"Попуните\" (Popunite)."
+          "description": "While 'Попуните' is grammatically correct, it translates to 'Fill in' or 'Complete', rather than simply 'Fill' as the original English content. It's a more verbose translation and might not be the best fit for a button label.",
+          "suggestion": "Consider 'Напуните' which more closely aligns with the brevity of 'Fill'."
         }
       ],
       "approved_at": null
@@ -335,8 +335,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Popunite' is a valid Serbian word, it translates more closely to 'Fill in' or 'Complete' rather than simply 'Fill'. It's a bit more verbose than the English 'Fill'.",
-          "suggestion": "Consider 'Ispuni' or a shorter alternative depending on the context and desired nuance. 'Popunite' is acceptable but slightly more formal."
+          "description": "While \"Popunite\" can be a valid translation for 'Fill' in certain contexts (like filling a form), it's not the most natural or direct translation for a button labeled 'Fill' in a user interface.  'Ispuni' might be a more suitable option for a button indicating action completion.",
+          "suggestion": "Consider 'Ispuni' as a more accurate translation, depending on the exact context of the button's function. If it truly means 'fill' as in adding content, then 'Popunite' is acceptable, but less common."
         }
       ],
       "approved_at": null
@@ -347,7 +347,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Formu doldurun\" is a complete sentence meaning \"Fill the form.\" The key \"Common:FillFormButton\" should be a short, concise label for a button, which \"Fill\" represents. The Turkish translation should reflect this by being a more concise imperative.",
+          "description": "The Turkish translation 'Formu doldurun' translates to 'Fill the form' rather than just 'Fill'. The English content 'Fill' is a short, imperative verb, while the translation adds 'the form'.",
           "suggestion": "Doldur"
         }
       ],
@@ -359,7 +359,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Ukrainian translation 'Заповнити форму' translates to 'Fill out the form', which is more verbose than the English 'Fill'. While technically correct, it's not a direct and concise equivalent.",
+          "description": "The translation \"Заповнити форму\" (Zapovnyty formu) literally translates to \"Fill form\". While understandable, it's more natural to use a shorter, more common term for a button label.",
           "suggestion": "Заповнити"
         }
       ],
@@ -371,8 +371,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Điền vào mẫu\" is too literal and verbose for a button label. It translates to \"Fill in the form\" which is not concise enough. A shorter, more natural option would be better.",
-          "suggestion": "Tối ưu hóa lại thành \"Điền\" or \"OK\" or \"Xác nhận\""
+          "description": "The translation 'Điền vào mẫu' is too literal and long for a button label. 'Điền' is a more concise and natural translation for 'Fill' in this context.",
+          "suggestion": "Điền"
         }
       ],
       "approved_at": null
@@ -383,8 +383,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"填写表单\" literally means \"Fill in the form\". While it conveys a similar meaning to \"Fill\", it's more verbose than the English 'Fill' and doesn't capture the brevity and conciseness of the original. A more appropriate translation for a button label would be something more direct like \"提交\" (Submit) or simply \"填写\" (Fill).",
-          "suggestion": "Consider \"提交\" (Submit) or \"填写\" (Fill)."
+          "description": "While \"填写\" (tiánxiě) is a valid Chinese word, it translates more closely to 'to fill out' or 'to complete' rather than simply 'Fill'.  'Fill' implies an action of adding content, while '填写' implies filling out a form.",
+          "suggestion": "Consider \"填充\" (tiánchōng) which more directly translates to 'Fill', or retain \"填写\" if the context is clearly a form."
         }
       ],
       "approved_at": null

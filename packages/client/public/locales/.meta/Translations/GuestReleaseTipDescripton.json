@@ -3,7 +3,7 @@
   "content": "All previously added Users became Guests and now available in the Contacts list of the {{productName}} administrators only. Guests are no longer part of any groups. You can always change their type and add them to a group, if necessary.",
   "content_en_sha1_hash": "de15dd23e864c862abd1d9c2273ed11ebd43e2c3",
   "created_at": "2025-05-19T21:30:49.987Z",
-  "updated_at": "2025-05-21T01:27:25.481Z",
+  "updated_at": "2025-05-26T07:57:32.310Z",
   "comment": {
     "text": "This translation key is used to describe a change in user roles within a product. It explains that users who were previously added are now guests and only visible to administrators in the Contacts list. The text aims to inform users about this change.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/GuestReleaseTip/index.tsx",
-      "line_number": 134,
-      "context": "<StyledBody>\n <Text fontSize=\"12px\" fontWeight={400} lineHeight=\"16px\" noSelect>\n <Trans\n t={t}\n ns=\"Translations\"\n i18nKey=\"GuestReleaseTipDescripton\"\n values={{ productName: t(\"Common:ProductName\") }}\n />\n </Text>\n {accessRightsLink ? (\n <ColorTheme",
+      "line_number": 133,
+      "context": "<StyledBody>\n <Text fontSize=\"12px\" fontWeight={400} lineHeight=\"16px\" noSelect>\n <Trans\n t={t}\n ns=\"Translations\"\n i18nKey=\"GuestReleaseTipDescripton\"\n values={{ productName: t(\"Common:ProductName\") }}\n />\n </Text>\n {accessRightsLink ? (\n <Link",
       "module": "/packages/client"
     }
   ],
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses the English variable {{productName}} without proper localization. It should be replaced with the localized equivalent in Arabic (Saudi Arabia).",
-          "suggestion": "Replace {{productName}} with the appropriate Arabic term for 'product name'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -41,19 +35,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"All previously added Users\" is slightly awkward in Azerbaijani. A more natural phrasing would be \"Böyükdür əvvəllər əlavə edilmiş İstifadəçilər\" or a variation that emphasizes the previously added status.",
-          "suggestion": "Böyükdür əvvəllər əlavə edilmiş İstifadəçilər"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"became Guests\" is translated literally. A more idiomatic translation might convey the sense of reassignment or change of status.",
-          "suggestion": "Qonaq hesabına keçmişlər"
-        },
-        {
           "type": "formatting",
-          "description": "Consistency in the use of quotation marks. Ensure all quotation marks are using the correct Azerbaijani style.",
-          "suggestion": "Check and correct any inconsistencies in quotation mark usage according to Azerbaijani standards."
+          "description": "The use of \"{{productName}}\" in the Azerbaijani translation is correct, but consistency with the English source should be maintained throughout all translations. Ensure this placeholder is always used in the same way.",
+          "suggestion": "No change needed, but ensure consistent application across all translations."
         }
       ],
       "approved_at": null
@@ -67,13 +51,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Czech translation includes \"{{productName}}\" which should be handled consistently with the English. It's unclear whether this should be a placeholder or a localized term. Assuming it's a placeholder, it should be handled by the translation system, not directly translated.",
-          "suggestion": "Review the system's handling of placeholders like {{productName}}. If it's a placeholder, ensure it's correctly rendered in the Czech version without translation. If it's a localized term, it should be translated and used instead."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -85,7 +63,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Greek translation retains the English formatting using {{productName}}. While acceptable, it might be more natural to replace it with the localized product name if available.",
+          "suggestion": "Ideally, replace {{productName}} with the localized name of the product. If no localized name is available, keeping it as is is acceptable, but consider localizing it for future updates."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -100,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The colon after {{productName}} in the Finnish translation should have a space before it. It currently reads '{{productName}}:' which is stylistically incorrect.",
-          "suggestion": "Change '{{productName}}:' to '{{productName}} :'"
+          "description": "The colon in '{{productName}} :n' is unnecessary and breaks the flow of the sentence. It appears to be an artifact of the original template insertion.",
+          "suggestion": "Remove the colon after '{{productName}}' to read '{{productName}}:n'."
         }
       ],
       "approved_at": null
@@ -117,14 +101,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Armenian translation lacks proper punctuation. A colon (:) is missing after 'Ցանկում' (list).",
-          "suggestion": "Նախկինում ավելացված բոլոր Օգտատերերը դարձել են Հյուրեր և այժմ հասանելի են միայն {{productName}} ադմինիստրատորների Կոնտակտների ցանկում։ Հյուրերն այլևս որևէ խմբի անդամ չեն: Դուք միշտ կարող եք փոխել  տեսակը և անհրաժեշտության դեպքում նրանց ավելացնել խմբին:"
+          "type": "incorrect_translation",
+          "description": "The phrase 'change their type' is awkward. A more natural translation for 'type' in this context might be 'status' or 'role'.",
+          "suggestion": "Դուք միշտ կարող եք փոխել նրանց կարգավիճակը կամ դերակարգը և անհրաժեշտության դեպքում նրանց ավելացնել խմբին:"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'change their type' is somewhat ambiguous. 'տեսակը' directly translates to 'the type,' but in this context, it's likely referring to their user role or status. A more accurate translation might clarify this.",
-          "suggestion": "Նախկինում ավելացված բոլոր Օգտատերերը դարձել են Հյուրեր և այժմ հասանելի են միայն {{productName}} ադմինիստրատորների Կոնտակտների ցանկում։ Հյուրերն այլևս որևէ խմբի անդամ չեն: Դուք միշտ կարող եք փոխել  ամբաստանությունները և անհրաժեշտության դեպքում նրանց ավելացնել խմբին:"
+          "type": "formatting",
+          "description": "The last phrase 'add them to a group' is slightly separated from the previous clause. There should be a conjunction.",
+          "suggestion": "Դուք միշտ կարող եք փոխել նրանց կարգավիճակը կամ դերակարգը, և անհրաժեշտության դեպքում նրանց ավելացնել խմբին:"
         }
       ],
       "approved_at": null
@@ -138,29 +122,24 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"以前に追加されたユーザーはすべてゲストとなり\" could be interpreted as 'All previously added users have become guests'. A more accurate translation might be 'Users who were previously added have become guests' to clarify the change in status.",
-          "suggestion": "以前に追加されたユーザーはすべてゲストに**なりました**"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ゲストは、もはやどのグループにも属していません' is grammatically correct but sounds slightly awkward. A more natural phrasing might emphasize the lack of group membership.",
-          "suggestion": "ゲストはもはやどのグループにも所属していません。"
-        },
-        {
-          "type": "formatting",
-          "description": "The phrasing '必要に応じて、ゲストのタイプを変更し、グループに追加することができます' is correct but reads slightly formal. Consider shortening it for better flow.",
-          "suggestion": "必要に応じて、ゲストのタイプを変更し、グループに追加できます。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'available in the Contacts list' is not accurately translated. '사용할 수 있습니다' (usable) doesn't convey the meaning of being visible or listed. It implies functionality, not visibility.",
+          "suggestion": "이전에 추가한 모든 사용자는 게스트가 되었으며 이제 {{productName}} 관리자의 연락처 목록에 표시됩니다."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Guests are no longer part of any groups' is slightly awkward in Korean. While technically correct, it lacks natural flow.",
+          "suggestion": "게스트는 더 이상 그룹에 포함되지 않습니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -168,19 +147,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ແຂກ' (guest) is repeated multiple times. While correct, consider varying the language slightly for readability.",
-          "suggestion": "Consider using synonyms or rephrasing sentences to avoid repetition of 'ແຂກ'. For example, use 'ຜູ້ທີ່ເຄີຍເປັນຜູ້ໃຊ້' or 'ບັນຊີແຂກ' in some instances."
+          "type": "formatting",
+          "description": "The Lao translation includes multiple instances of spacing before punctuation marks (e.g., before 'ຂອງ'). This is not standard Lao formatting.",
+          "suggestion": "Remove the extra spaces before punctuation marks throughout the text. For example, change 'ຂອງຜູ້ບໍລິຫານ' to 'ຂອງຜູ້ບໍລິຫານ'."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'ຜູ້ດຽວເທົ່ານັ້ນ' is grammatically correct, but it can sound slightly formal or stiff in this context.",
-          "suggestion": "Consider rephrasing to something like 'ຜູ້ບໍລິຫານ {{productName}} ຜູ້ດຽວ' or 'ສະເພາະຜູ້ບໍລິຫານ {{productName}}'"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of '{{productName}}' seems correct and is consistent with the English source.  However, verify the Laotian product name is displayed correctly when rendered.",
-          "suggestion": "Ensure that the variable '{{productName}}' is correctly rendered and displays the product's name in Lao script.  Check for any display issues."
+          "description": "The phrase 'ເຂົາເຈົ້າ' is used for 'them' referring to the guests. While not strictly incorrect, it's slightly informal and less precise in this context. 'ພວກເຂົາ' might be a more appropriate pronoun for a formal document.",
+          "suggestion": "Consider replacing 'ເຂົາເຈົ້າ' with 'ພວກເຂົາ' for increased formality."
         }
       ],
       "approved_at": null
@@ -190,14 +164,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'Lietotāji' (Users) is capitalized. It should be lowercase.",
-          "suggestion": "lietošanā pievienotie lietotāji"
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Guests\" is consistently translated as \"Viesi\". While technically correct, \"Viesi\" can sometimes imply a less formal or temporary status than intended. Consider if a more formal term like \"Viesi lietotāji\" might be more appropriate to convey the intended meaning of users who have lost their original permissions.",
+          "suggestion": "Consider using \"Viesi lietotāji\" for greater clarity and formality."
         },
         {
-          "type": "grammar",
-          "description": "The phrase 'jebkurā laikā' is a bit awkward. A more natural phrasing would be 'jebkurā brīdī'.",
-          "suggestion": "jebkurā brīdī"
+          "type": "formatting",
+          "description": "The phrase 'as necessary' in the English version is translated as 'Ja nepieciešams'. While correct, 'ja nepieciešams' can sound a bit abrupt in Latvian. A softer phrasing could improve readability.",
+          "suggestion": "Consider rephrasing 'Ja nepieciešams' to 'vadzītu' or 'ja nepieciešams, lai'."
         }
       ],
       "approved_at": null
@@ -220,18 +194,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Guest Release Tip Description' doesn't translate directly. The translation focuses on the result (Guests) rather than the process of becoming Guests. A more accurate translation would need more context to accurately convey the purpose of the tip.",
-          "suggestion": "Context is needed. Possible suggestions depending on context: 'Informação sobre Usuários convertidos em Convidados' or 'Aviso: Usuários convertidos em Convidados'."
+          "description": "The phrase 'hóspedes' (guests) should ideally be translated as 'Convidados' to align better with the original 'Guests'. While 'hóspedes' can mean guests, 'convidados' is more commonly used in a formal or administrative context, like the one described.",
+          "suggestion": "Todos os Usuários adicionados anteriormente tornaram-se Convidados e agora estão disponíveis apenas na lista de Contatos dos administradores {{productName}}."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The word 'hóspedes' (guests) feels slightly off. While technically correct, it implies overnight guests. 'Convidados' might be a better choice to describe Users converted to a Guest status within the application.",
-          "suggestion": "Consider using 'Convidados' instead of 'hóspedes' to align with the system context."
+          "type": "spelling",
+          "description": "The word 'Usuários' might be better as 'Utilizadores' depending on the specific Portuguese variant being used (Brazilian vs. European Portuguese). It's a matter of regional preference.",
+          "suggestion": "Todos os Utilizadores adicionados anteriormente tornaram-se Convidados e agora estão disponíveis apenas na lista de Contatos dos administradores {{productName}}."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'já não fazem parte' (are no longer part of) is grammatically correct but sounds slightly unnatural in this context. A more natural phrasing might be 'não fazem parte'.",
-          "suggestion": "Change 'já não fazem parte' to 'não fazem parte'."
+          "type": "grammar",
+          "description": "The phrase 'Os hóspedes já não fazem parte de nenhum grupo' can be slightly improved for clarity and flow.",
+          "suggestion": "Os Convidados não fazem mais parte de nenhum grupo."
         }
       ],
       "approved_at": null
@@ -248,13 +222,18 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Romanian translation includes an unnecessary space before the product name placeholder {{productName}}.",
-          "suggestion": "Remove the space before {{productName}}. The correct phrasing should be 'administratorilor{{productName}}'."
+          "description": "The Romanian translation includes \"{{productName}}\" without the closing brace. This indicates a formatting issue that needs to be addressed to ensure proper rendering in the application.",
+          "suggestion": "Change \"administratorilor{{productName}}\" to \"administratorilor{{productName}}\""
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Persoane de contact' translates to 'Contacts', but it's slightly awkward in Romanian. A more natural phrasing would be 'Lista de Contacte'.",
+          "suggestion": "Change 'lista Persoane de contact' to 'lista de contacte'"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'Puteți schimba tipul și să le adăugați' is grammatically awkward.  It lacks a connector to smoothly transition between the two actions.",
-          "suggestion": "Change the phrase to 'Puteți schimba tipul lor și să-i adăugați' or 'Puteți schimba tipul și să-i adăugați'."
+          "description": "The phrase 'Puteți schimba tipul și să le adăugați în orice grup oricând este necesar' is grammatically correct but stylistically could be improved. It sounds a bit verbose. A more concise and elegant way to express it is 'Puteți oricând să le schimbați tipul și să le adăugați în orice grup'.",
+          "suggestion": "Change 'Puteți schimba tipul și să le adăugați în orice grup oricând este necesar' to 'Puteți oricând să le schimbați tipul și să le adăugați în orice grup'"
         }
       ],
       "approved_at": null
@@ -270,19 +249,29 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "spelling",
+          "description": "The word 'පරිශීලකයින්' (parishiilakayin) is a less common and potentially inaccurate translation for 'Users' in this context. It's more formal and doesn't convey the casual user.",
+          "suggestion": "Consider using 'භාවිතරයන්' (bhavittharayan) or 'පරිශීලකයන්' (parishiilakayan) - depending on the desired level of formality."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'සියලු පෙරදී එකතු කළ' (siyallu peradi ekathu kala) is grammatically correct, but slightly verbose. It could be more concise.",
+          "suggestion": "Consider 'පහු dulu එකතු කළ සියලු' (pahu dulu ekathu kala) or a more direct phrasing like 'මුලින් එකතු කළ සියලු' (mulin ekathu kala)."
+        },
+        {
           "type": "formatting",
-          "description": "The Sinhala translation retains the English double curly braces '{{productName}}'. This is a formatting issue as it's not standard practice in Sinhala.",
-          "suggestion": "Replace '{{productName}}' with the actual product name or remove if it's meant to be a placeholder that will be replaced during rendering."
+          "description": "The placement of the variable {{productName}} is consistent with the English version, which is good.",
+          "suggestion": "No change needed. Ensure consistency across all translations using this variable."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'perishilakayin' (පරිශීලකයින්) used for 'Users' is somewhat technical and might not be the most natural or easily understood term for the general audience. A more accessible word might improve clarity.",
-          "suggestion": "Consider using a more common term for 'Users' like 'vydyanin' (වියද්‍යානි) or a more descriptive phrase depending on the context and target audience."
+          "description": "The phrase 'ආරාධිතයන් කිසිදු සමූහයකට අයත් නොවේ' (Aaradhithayan kisidu samuhayakata ayatha nowe) translates literally as 'Guests do not belong to any group'. While technically correct, it doesn't fully convey the nuance of being *removed* from groups. A more expressive translation might be better.",
+          "suggestion": "Consider 'ආරාධිතයන් දැන් කිසිදු සමූහයකට ඇතුළත් නොවී' (Aaradhithayan dan kiidu samuhayakata ethulaath novii) - 'Guests are no longer included in any group'."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The word 'samuhayaka' (සමූහයකට) translates to 'to a group' and while grammatically correct, it might sound a bit awkward. A more natural phrasing might improve the flow.",
-          "suggestion": "Consider rephrasing the sentence to ' කිසිදු සමූහයට අයත් නොවේ' which translates to 'not belonging to any group'."
+          "type": "spelling",
+          "description": "The term 'සමූහයක' (samuhayakata) is repeated several times. While grammatically correct, it might feel slightly repetitive and could be varied for better readability.",
+          "suggestion": "Consider using synonyms for 'group' (if appropriate) in subsequent instances to improve flow (e.g., 'මණ්ඩලයක')."
         }
       ],
       "approved_at": null
@@ -290,13 +279,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Slovak translation doesn't consistently maintain the bracketed variable `{{productName}}` as it appears in the English content. While present, its integration could be more seamless.",
-          "suggestion": "Ensure `{{productName}}` is integrated naturally within the sentence. Consider slight rephrasing if necessary to maintain flow."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -311,8 +294,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Serbian translation includes a space before the curly brackets `{{productName}}`, which should be removed for consistency with the English source.",
-          "suggestion": "Remove the space before the curly brackets: `{{productName}}`"
+          "description": "The translation uses a Cyrillic character (Љ) which is incorrect for \"Lj\". The English text uses {{productName}} which should also be implemented in the Serbian translation to indicate a variable.",
+          "suggestion": "Сви претходно додани корисници постали су гости и сада су доступни само у контакт листи администратора {{productName}}. Гости више нису део ниједне групе. Увек можете променити њихов тип и додати их у групу, ако је потребно."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Contacts list' is translated as 'контакт листи'. A more accurate translation would be 'списку контаката' or 'адресар'.",
+          "suggestion": "Сви претходно додани корисници постали су гости и сада су доступни само у списку контаката администратора {{productName}}. Гости више нису део ниједне групе. Увек можете променити њихов тип и додати их у групу, ако је потребно."
         }
       ],
       "approved_at": null
@@ -322,9 +310,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The variable `{{productName}}` is present in the English content and should be consistently included in the Serbian translation.",
-          "suggestion": "Ensure `{{productName}}` is present and correctly formatted in the Serbian translation."
+          "type": "incorrect_translation",
+          "description": "The phrase \"Svi prethodno dodani korisnici postali su gosti\" is a slightly awkward translation. A more natural phrasing would be 'Prethodno dodani korisnici sada su gosti'.",
+          "suggestion": "Prethodno dodani korisnici sada su gosti"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'kontakt' is used for 'contacts'. While understandable, 'kontaktná lista' or 'lista kontakata' would be more precise and commonly used in this context.",
+          "suggestion": "kontaktná lista"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'njihov tip' is a bit vague and potentially ambiguous. It's not clear what 'tip' refers to in this context.",
+          "suggestion": "njihov status"
         }
       ],
       "approved_at": null
@@ -332,7 +330,18 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Konuk statüsüne geldi' (became Guest status) is not the most natural way to express the change. While technically correct, it's slightly awkward. A more fluid translation would be something like 'Konuk olarak yeniden sınıflandırıldı' (reclassified as Guests).",
+          "suggestion": "Konuk olarak yeniden sınıflandırıldı"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'türlerini değiştirebilir' is a bit literal. A more natural phrasing would be 'tipini değiştirebilirsiniz'.",
+          "suggestion": "tipini değiştirebilirsiniz"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -341,13 +350,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The use of 'й' instead of 'і' after 'стають' is slightly awkward. While not strictly incorrect, it feels less natural in modern Ukrainian.",
-          "suggestion": "Всі раніше додані користувачі стають гостями..."
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'в списку контактів лише в адміністраторів' is a bit clunky. A more natural phrasing would improve readability.",
-          "suggestion": "в контактному списку адміністраторів {{productName}}"
+          "description": "The Ukrainian translation includes 'й' instead of 'і' after 'стають'. This creates an unnatural flow.",
+          "suggestion": "Всі раніше додані користувачі стають гостями і тепер доступні..."
         }
       ],
       "approved_at": null
@@ -357,14 +361,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The variable {{productName}} is not consistently formatted. While present, there's no explanation of how it should be rendered in the translated context.",
-          "suggestion": "Ensure the variable {{productName}} is properly handled in the rendering process and is displayed correctly in the translated text. Provide context on how the variable should be formatted (e.g., replaced with the actual product name)."
+          "type": "incorrect_translation",
+          "description": "The phrase 'became Guests' is not accurately reflected. 'Khách' translates to 'Guest' but the implication of changing status isn't fully conveyed. A more accurate translation would emphasize the change in user status.",
+          "suggestion": "Tất cả Người dùng đã thêm trước đó đã được chuyển thành Khách"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'become Guests' is translated as 'đã trở thành Khách'. While technically correct, it might be more natural to use a more descriptive phrase like 'đã được chuyển thành khách' (converted to guests) to better convey the change in user status.",
-          "suggestion": "Consider translating 'become Guests' as 'đã được chuyển thành khách'."
+          "description": "The phrase 'type' is translated literally as 'loại'. While technically correct, it might be better to use a more natural-sounding phrase in this context.",
+          "suggestion": "Tất cả Người dùng đã thêm trước đó đã được chuyển thành Khách. Khách không còn thuộc bất kỳ nhóm nào nữa. Bạn luôn có thể thay đổi vai trò của họ và thêm họ vào một nhóm, nếu cần."
         }
       ],
       "approved_at": null
@@ -375,13 +379,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"所有之前添加的用户都已成为访客\" is a bit clunky. A more natural translation for 'All previously added Users became Guests' would be something like '之前添加的所有用户都已变为访客' or '之前添加的用户现在都为访客'.",
-          "suggestion": "之前添加的用户现在都为访客"
+          "description": "The phrase \"所有之前添加的用户都已成为访客\" is a bit literal and could be improved for naturalness.  A more idiomatic translation might be something like \"之前添加的用户现在都变成了访客\" or \"之前添加的用户现在都已变为访客\".",
+          "suggestion": "之前添加的用户现在都变成了访客"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase '不再属于任何群组' is technically correct, but '不再属于任何组' sounds more natural in this context.",
-          "suggestion": "不再属于任何组"
+          "description": "The term \"群组\" could be more accurately translated to \"组\" or \"团队\" depending on the context of the product. \"群组\" implies a large, potentially disorganized group.",
+          "suggestion": "组"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrasing \"如有必要\" is grammatically correct but could be more naturally expressed. ",
+          "suggestion": "必要时"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Delete guests",
   "content_en_sha1_hash": "fd88f6bb7d2f3efadaf159eedf20c2a5daab777c",
   "created_at": "2025-05-19T21:30:56.659Z",
-  "updated_at": "2025-05-20T09:38:29.421Z",
+  "updated_at": "2025-05-24T13:20:09.417Z",
   "comment": {
     "text": "This translation key \"DeleteGuests\" is used to display a message when deleting guests from user profiles in a delete profile ever dialog. The message appears as part of a button label and should be translated accordingly.",
     "is_auto": true,
@@ -105,7 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ລົບລ້າງແຂກ\" (loplaang khaek) literally translates to \"cancel guests\" or \"revoke guests\" rather than \"delete guests.\" While 'loplaang' can sometimes imply removal, it's not the most natural or accurate translation for 'delete'.",
+          "suggestion": "Consider using \"ລົບຖິ້ມແຂກ\" (lop thim khaek) which more accurately conveys the meaning of 'delete' or 'remove'. Another option could be \"ລົບລ້າງບັນຊີແຂກ\" (loplaang bansii khaek) - 'remove guest accounts'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -171,7 +177,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation 'Обриши госте' is grammatically incorrect and doesn't accurately convey the meaning of 'Delete guests'. The correct form would require a plural verb form to match the plural noun.",
+          "suggestion": "Избриши госте"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -201,7 +213,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"删除多个访客\" (delete multiple guests) is too literal and broader than the English \"Delete guests.\" It implies deleting multiple guests at once, whereas the English phrase could refer to deleting a single guest or a group of guests.",
+          "suggestion": "删除访客"
+        }
+      ],
       "approved_at": null
     }
   }

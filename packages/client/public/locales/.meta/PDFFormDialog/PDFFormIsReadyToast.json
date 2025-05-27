@@ -3,7 +3,7 @@
   "content": "PDF form <1>{{filename}}</1> is ready to be filled out.",
   "content_en_sha1_hash": "d99ebd71967eb9504b7a963b948e8e633fa45c97",
   "created_at": "2025-05-19T21:30:53.768Z",
-  "updated_at": "2025-05-21T06:09:21.751Z",
+  "updated_at": "2025-05-24T06:38:36.389Z",
   "comment": {
     "text": "This translation key is used to display a success message when a PDF form is ready to be filled out. The message includes the title of the form file. It appears in a toast notification in the GlobalEvents component's button context.",
     "is_auto": true,
@@ -30,8 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle brackets `<1>` and `</1>` are present in the Arabic translation, mirroring the English. These are likely meant to be placeholder tags, but their inclusion is unusual in a user-facing message and should be removed.",
-          "suggestion": "Remove the angle brackets and their closing tags. The translation should read: 'نموذج PDF {{filename}} جاهز للتعبئة.'"
+          "description": "The angle brackets '<1>{{filename}}</1>' appear to be incorrectly formatted and might interfere with rendering or processing.  They seem to be intended for placeholder identification but aren't standard.",
+          "suggestion": "Remove the angle brackets and just have {{filename}}."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"جاهز للتعبئة\" (jaahiz lil-ta'bi'ah) translates to 'ready to be filled out', a more natural and common phrasing in Arabic (Saudi Arabia) for a PDF form would be \"جاهز للتعبئة\" (jaahiz lil-ta'bi'ah). The slight change improves readability and naturalness.",
+          "suggestion": "Change \"جاهز للتعبئة\" to \"جاهز للتعبئة\"."
         }
       ],
       "approved_at": null
@@ -42,8 +47,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb 'doldurulmağa' is archaic and less common in modern Azerbaijani. It should be replaced with a more natural equivalent.",
-          "suggestion": "<1>{{filename}}</1> PDF forması doldurulmaya hazırdır."
+          "description": "The verb conjugation 'doldurulmağa' is archaic and sounds unnatural. A more common and modern form would be 'doldurulmaqdadır'.",
+          "suggestion": "<1>{{filename}}</1> PDF forması doldurulmaqdadır."
         }
       ],
       "approved_at": null
@@ -54,8 +59,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle brackets <1> and </1> appear to be unnecessary and might cause rendering issues in the application. They don't seem to serve a purpose and should be removed.",
-          "suggestion": "Remove the angle brackets <1> and </1> around {{filename}}."
+          "description": "The XML-like tags <1> and </1> are present in both the English and Bulgarian versions. These are likely placeholders intended to be removed during implementation and shouldn't be part of the translated text itself.",
+          "suggestion": "Remove the tags <1> and </1> from the Bulgarian translation. The correct translation should be: 'PDF формуляр {{filename}} е готов за попълване.'"
         }
       ],
       "approved_at": null
@@ -63,31 +68,25 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The angle brackets around {{filename}} are identical in both the English and Czech versions. This may be unintentional and should be reviewed for consistency with the application's formatting conventions.",
-          "suggestion": "Check application formatting guidelines. If these brackets are used for specific styling or marking, ensure consistency. Otherwise, consider removing them."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The XML-like tags <1> and </1> are present in both the English and German versions. These likely represent placeholder or formatting instructions and should be removed from the final translated output for user presentation.",
-          "suggestion": "Remove the tags <1> and </1> from the translated text. The final translated string should be: 'Das PDF-Formular {{filename}} ist bereit zum Ausfüllen.'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets `<1>` and `</1>` are present in the Greek translation, mirroring the English. This might not be necessary or stylistically correct in Greek UI text. Consider removing them or adjusting to a more natural Greek formatting.",
+          "suggestion": "Remove the angle brackets. The translated text should be 'Η φόρμα PDF {{filename}} είναι έτοιμη να συμπληρωθεί.'"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -114,8 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle brackets `<1>` and `</1>` are present in both the English and Armenian versions, which may not be necessary or aesthetically pleasing in the Armenian context. They appear to be placeholders for the filename, but this should be handled by the application rather than in the translated string itself.",
-          "suggestion": "Remove the angle brackets `<1>` and `</1>` from the Armenian translation. The application should handle the filename insertion."
+          "description": "The angle brackets <1> and </1> are present in the Armenian translation, mirroring the English. While technically correct, it's unusual to maintain the formatting tags in the translated text. These tags are likely for internal processing and should be removed.",
+          "suggestion": "Remove the angle brackets <1> and </1> from the Armenian translation.  The translation should simply be: \"PDF ձև {{filename}} պատրաստ է լրացման։\""
         }
       ],
       "approved_at": null
@@ -129,13 +128,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The angle brackets `<1>` and `</1>` are inconsistent with the English content. The English uses `<b>` and `</b>`, while the Japanese uses `<1>` and `</1>`. This likely indicates a formatting issue and should be aligned.",
-          "suggestion": "Confirm the correct HTML tags to be used with the template variable. If aligning with the English, change `<1>` and `</1>` to `<b>` and `</b>` respectively. If the Japanese tags are intended, ensure consistency across all translations."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -144,8 +137,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle brackets <1> and </1> are present in the Korean translation, mirroring the English, but their purpose isn't clear and might be unnecessary for the user experience in Korean. Consider removing them or replacing them with a more natural Korean equivalent for emphasis or formatting if the original intention was a specific styling.",
-          "suggestion": "Consider removing the angle brackets: \"{{filename}} PDF 양식을 작성할 준비가 되었습니다.\""
+          "description": "The angle brackets `<1>` and `</1>` are present in the Korean translation, mirroring the English. While technically not incorrect, they are unnecessary and visually disrupt the Korean text. These tags are likely intended for placeholders in a UI framework and should be removed for a natural-sounding translation.",
+          "suggestion": "PDF 양식을 작성할 준비가 되었습니다."
         }
       ],
       "approved_at": null
@@ -155,9 +148,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Lao translation retains the HTML-like tags `<1>{{filename}}</1>`. These tags are not standard in Lao and should be removed.",
-          "suggestion": "ແບບຟອມ PDF {{filename}} ພ້ອມແລ້ວທີ່ຈະຕື່ມຂໍ້ມູນ."
+          "type": "incorrect_translation",
+          "description": "The phrase 'to be filled out' is not the most natural translation in Lao. A more common phrasing would be 'ສາມາດຕື່ມຂໍ້ມູນໄດ້' (can fill out data) or 'ໃຊ້ຕື່ມຂໍ້ມູນໄດ້' (can use to fill data).",
+          "suggestion": "ແບບຟອມ PDF <1>{{filename}}</1> ພ້ອມແລ້ວທີ່ຈະສາມາດຕື່ມຂໍ້ມູນໄດ້."
         }
       ],
       "approved_at": null
@@ -168,8 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The `<1>` and `</1>` tags are present in both the English and Latvian translations, indicating they are likely placeholders intended to be handled programmatically. While technically correct, this isn't a translation issue but a note for development.",
-          "suggestion": "Confirm with developers if these tags are necessary and handle them appropriately in the application."
+          "description": "The tag `<1>` and `</1>` are unnecessary and should be removed, as they don't seem to serve a purpose in the Latvian translation context. They appear to be remnants of the English template.",
+          "suggestion": "Remove the tags `<1>` and `</1>` from the Latvian translation."
         }
       ],
       "approved_at": null
@@ -186,8 +179,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"Formularz\" (Form) is technically correct but a more natural phrasing would be \"W formularzu PDF...\" (In the PDF form...).",
-          "suggestion": "W formularzu PDF <1>{{filename}}</1> jest gotowy do wypełnienia."
+          "description": "The word 'Formularz' directly translates to 'Form' which can sound too informal or abrupt in Polish. 'PDF Formularz' would be more natural and professional.",
+          "suggestion": "PDF Formularz"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'jest gotowy do wypełnienia' is grammatically correct, a more idiomatic and natural phrasing in Polish would be 'można go wypełnić' (can be filled out).",
+          "suggestion": "jest gotowy do wypełniania"
         }
       ],
       "approved_at": null
@@ -207,13 +205,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The angle brackets `<1>` and `</1>` are present in both the English and Romanian versions. These tags likely represent a variable insertion point and should be maintained consistently. It is important to confirm with the development team if these should be kept as is.",
-          "suggestion": "Confirm the purpose of the angle brackets and whether they should be kept as-is. If they are placeholders, ensure they are correctly integrated into the application's rendering process."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -228,13 +220,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle brackets <1> and </1> are present in the Sinhala translation, mirroring the English. This might not be necessary or aesthetically pleasing in Sinhala UI.",
-          "suggestion": "Consider removing the angle brackets: \"PDF ආකෘතිය {{filename}} දැන් පිරවීම සඳහා සූදානම්ය.\""
-        },
-        {
-          "type": "spelling",
-          "description": "While 'සූදානම්ය' is a valid word, it can be slightly improved for better flow. It technically means 'ready' but could be more naturally expressed.",
-          "suggestion": "Consider using 'ඉ tersedia' or 'පිරවීමට හැකි' which might sound more natural in the context."
+          "description": "The angle brackets `<1>` and `</1>` are present in the Sinhala translation, mirroring the English. This might not be necessary or appropriate for Sinhala formatting and could be removed.",
+          "suggestion": "Remove the angle brackets: \"PDF ආකෘතිය {{filename}} දැන් පිරවීම සඳහා සූදානම්ය.\""
         }
       ],
       "approved_at": null
@@ -242,13 +229,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The angle brackets <1> and </1> are present in the Slovak translation, matching the English, but should be handled consistently. Verify if this is intentional for the UI or if they should be removed.",
-          "suggestion": "Confirm if the angle brackets are necessary for the UI. If not, remove them."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -257,8 +238,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle brackets '<1>{{filename}}</1>' are repeated and appear unnecessary. It's likely a formatting artifact from the original content.",
-          "suggestion": "Remove the repeated '<1>' and '</1>' tags. The content should be '<{{filename}}>'"
+          "description": "The angle brackets <1> and </1> are present in the Slovenian translation, mirroring the English. While this isn't inherently incorrect, it's unusual in UI text and might be better to remove or handle in the UI rendering to insert the filename. Consider if this is a required formatting element.",
+          "suggestion": "Consider removing the angle brackets or adjusting the UI to handle the variable insertion."
         }
       ],
       "approved_at": null
@@ -269,13 +250,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'формулар' is a direct transliteration of 'form' and is not the common or natural way to refer to a PDF form in Serbian. A more appropriate term would be 'образац'.",
+          "description": "The word \"формулар\" is a transliteration of 'form' and not a standard Serbian word for form. A more appropriate translation would be 'образац'.",
           "suggestion": "PDF образац <1>{{filename}}</1> је спреман да буде попуњен."
         },
         {
           "type": "formatting",
-          "description": "The angle brackets <1> and </1> are retained from the English content. While they may indicate a placeholder, they shouldn't be directly carried over to the Serbian translation unless specifically requested.",
-          "suggestion": "Remove the angle brackets entirely. PDF образац {{filename}} је спреман да буде попуњен."
+          "description": "The opening and closing tags `<1>` and `</1>` appear to be unnecessary and potentially incorrect in this context. They might be remnants from a specific formatting system and don't translate naturally into Serbian.",
+          "suggestion": "Remove the tags entirely. The sentence can be translated as 'PDF образац {{filename}} је спреман да буде попуњен.'"
         }
       ],
       "approved_at": null
@@ -286,13 +267,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'formular' is a direct borrowing from German and isn't the typical Serbian term for 'form'. The correct Serbian word for 'form' is 'obrazac'.",
+          "description": "The word 'formular' is not the correct Serbian translation for 'form'. The correct term is 'obrazac'.",
           "suggestion": "PDF obrazac <1>{{filename}}</1> je spreman da bude popunjen."
         },
         {
-          "type": "grammar",
-          "description": "While grammatically correct, the phrasing 'da bude popunjen' (to be filled out) is a bit clunky. A more natural phrasing would be 'za popunjavanje'.",
-          "suggestion": "PDF obrazac <1>{{filename}}</1> je spreman za popunjavanje."
+          "type": "formatting",
+          "description": "The spacing around the `<1>` and `</1>` tags is inconsistent.",
+          "suggestion": "PDF obrazac <1>{{filename}}</1> je spreman da bude popunjen."
         }
       ],
       "approved_at": null
@@ -303,8 +284,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The tags `<1>` and `</1>` are present in both the English and Turkish content. These should be consistent and likely represent placeholders for dynamic content. While not inherently incorrect, they should be validated against the intended system usage.",
-          "suggestion": "Verify the intended usage of the `<1>` and `</1>` tags and ensure consistency with the system's formatting requirements. If they are meant to denote a specific formatting element, ensure it's correctly rendered in the Turkish locale."
+          "description": "The tags <1> and </1> appear to be intended for formatting or placeholders but are unnecessary in Turkish. They are just copying the English format without considering Turkish conventions. While technically valid, they'll cause issues with rendering and potentially confusion.",
+          "suggestion": "Remove the <1> and </1> tags. The translation should be \"PDF formu {{filename}} doldurulmaya hazır.\""
         }
       ],
       "approved_at": null
@@ -312,7 +293,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets `<1>` and `</1>` are present in the Ukrainian translation and should be consistent with the English. While they indicate placeholders, they are redundant and might cause issues with the rendering.",
+          "suggestion": "Remove the angle brackets `<1>` and `</1>`."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -321,8 +308,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"đã sẵn sàng để được điền\" is a bit awkward. A more natural translation for 'to be filled out' would be 'có thể điền' or 'có thể điền vào'.",
-          "suggestion": "Biểu mẫu PDF <1>{{filename}} </1> đã sẵn sàng để có thể điền."
+          "description": "The phrase \"để được điền\" is a bit awkward and not the most natural way to say \"to be filled out\" in Vietnamese. It implies someone is *allowed* to fill it out, rather than simply stating it's ready for filling.",
+          "suggestion": "Biểu mẫu PDF <1>{{filename}} </1> đã sẵn sàng để điền."
         }
       ],
       "approved_at": null
@@ -333,8 +320,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation includes the HTML tags <1>{{filename}}</1> which match the English version. This might not be necessary or desirable in the Chinese version depending on the context and intended rendering. It's likely the tags should be removed.",
-          "suggestion": "PDF 表单{{filename}} 已准备好填写。"
+          "description": "The angle brackets (<1> and </1>) are present in the Chinese translation, mirroring the English content. While technically correct as they're likely placeholders, it's unusual and potentially confusing for Chinese users to see these. They should likely be removed or handled differently within the UI.",
+          "suggestion": "Remove the angle brackets.  The UI should handle the `{{filename}}` placeholder correctly."
         }
       ],
       "approved_at": null

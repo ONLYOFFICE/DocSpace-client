@@ -3,7 +3,7 @@
   "content": "Taking action on selected items",
   "content_en_sha1_hash": "45dda63bf26b13600eb31afb2880f16481f932bb",
   "created_at": "2025-05-19T21:30:54.981Z",
-  "updated_at": "2025-05-21T10:38:14.535Z",
+  "updated_at": "2025-05-24T10:48:06.807Z",
   "comment": {
     "text": "This translation key is used to display the action label \"HotkeysActions\" as a heading in a UI component. The text will be displayed above an actions block, guiding users on what they can expect to see when taking action on selected items.",
     "is_auto": true,
@@ -36,13 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Seçilmiş elementlər üzrə addımın atılması\" is a literal translation and sounds awkward in Azerbaijani. A more natural phrasing would be needed to convey the meaning of 'Taking action on selected items'.",
-          "suggestion": "Consider alternatives like \"Seçilmiş elementlərlə əməliyyat aparılması\" or \"Seçilmiş elementlərdən fəaliyyət göstərilməsi\"."
+          "description": "The translation 'Seçilmiş elementlər üzrə addımın atılması' is a literal translation and doesn't quite capture the natural flow of 'Taking action on selected items.' It sounds slightly awkward in Azerbaijani. A more natural phrasing would better convey the meaning.",
+          "suggestion": "Seçilmişlərlə hərəkət etmə"
         },
         {
-          "type": "formatting",
-          "description": "The phrase 'üzrə' can be a bit clunky in this context. Using 'lə' is more common and flows better.",
-          "suggestion": "Replace 'üzrə' with 'lə'."
+          "type": "incorrect_translation",
+          "description": "While 'Seçilmiş elementlər' is understandable, 'Seçilmişlər' is often preferred for a more concise and idiomatic expression when referring to selected items in a user interface context.",
+          "suggestion": "Seçilmişlərlə hərəkət etmə"
         }
       ],
       "approved_at": null
@@ -65,8 +65,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation \"Durchführung von Handlungen zu ausgewählten Elementen\" is not a natural or accurate translation of \"Taking action on selected items.\" It sounds somewhat awkward and overly literal. The phrase \"zu ausgewählten Elementen\" implies an action *towards* the items, rather than *on* them.",
-          "suggestion": "A more natural translation would be something like \"Aktionen für ausgewählte Elemente\" or \"Bearbeitung ausgewählter Elemente\" or \"Operationen für ausgewählte Elemente\"."
+          "description": "The translation \"Durchführung von Handlungen zu ausgewählten Elementen\" is a literal translation and doesn't quite capture the intended meaning of 'Taking action on selected items'. It sounds overly formal and slightly awkward.",
+          "suggestion": "A more natural translation might be \"Aktionen für ausgewählte Elemente ausführen\" or \"Ausgewählten Elementen Aktionen zuweisen\" or simply \"Aktionen für ausgewählte Elemente\"."
         }
       ],
       "approved_at": null
@@ -89,13 +89,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Toimintojen suoritus valituille kohteille' is a literal translation that doesn't flow naturally in Finnish. It sounds clunky and technical. A more natural Finnish phrasing would be preferred.",
-          "suggestion": "Valittujen kohteiden toiminnot"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While not strictly wrong, 'toimintojen suoritus' is a bit formal for a UI element. A more conversational alternative would be better.",
-          "suggestion": "Valittujen kohteiden toiminnot"
+          "description": "The translation 'Toimintojen suoritus valituille kohteille' is a literal translation and doesn't convey the natural meaning of 'Taking action on selected items' in Finnish. It sounds overly formal and technical.",
+          "suggestion": "A more natural and accurate translation would be something like 'Toimenpiteet valituille kohteille' or 'Valittujen kohteiden toiminnot'."
         }
       ],
       "approved_at": null
@@ -106,8 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Prise de mesures sur les éléments sélectionnés' is not the most natural or accurate translation of 'Taking action on selected items'. 'Prise de mesures' implies a more formal or potentially reactive action. A more accurate and natural translation would be 'Actions sur les éléments sélectionnés' or 'Effectuer des actions sur les éléments sélectionnés'.",
-          "suggestion": "Actions sur les éléments sélectionnés"
+          "description": "The translation 'Prise de mesures sur les éléments sélectionnés' is a literal translation and doesn't convey the intended meaning of 'Taking action on selected items' in the context of hotkeys. It sounds overly formal and technical. A more natural translation would be something like 'Effectuer une action sur les éléments sélectionnés' or 'Agir sur les éléments sélectionnés'.",
+          "suggestion": "Effectuer une action sur les éléments sélectionnés"
         }
       ],
       "approved_at": null
@@ -118,8 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ընտրված միավորների նկատմամբ միջոցներ ձեռք առնել\" is a rather literal and slightly awkward translation of 'Taking action on selected items'. It doesn't flow naturally in Armenian.  ' միջոցներ ձեռք առնել' implies actively *taking* measures, while 'taking action' can be more passive.",
-          "suggestion": "Consider alternatives like:  \"Ընտրված բաների հետ գործել\" (Working with selected items), \"Ընտրված բաների համար գործողություն իրականացնել\" (Performing actions for selected items), or simply \"Ընտրված բաները կառավարել\" (Managing selected items)."
+          "description": "The translation \"Ընտրված միավորների նկատմամբ միջոցներ ձեռք առնել\" is a very literal and somewhat awkward translation of \"Taking action on selected items.\" It's not idiomatic Armenian. \" միավորների\" could be interpreted as 'units' instead of 'items'. The phrase \"ձեռք առնել\" (to take/assume) feels overly formal for this context.",
+          "suggestion": "A more natural and idiomatic translation might be something like \"Ընտրված իրերի վրա գործել\" (Gorgel vrac edgnir ireri) which translates to 'Act on selected items'. Or \"Ընտրված իրերի հետ գործել\" (Edgnir ireri het gorgel) - 'Act with selected items'."
         }
       ],
       "approved_at": null
@@ -139,7 +134,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"선택된 항목에 작업 실행하기\" is technically correct, but it's a bit verbose and formal for a hotkey panel action. A more natural and concise translation would be more appropriate.",
+          "suggestion": "선택 항목 작업"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -148,8 +149,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ປະຕິບັດລາຍການທີ່ເລືອກ' while literal, doesn't fully capture the nuance of 'Taking action on selected items.' It emphasizes execution of items rather than the action itself. A more accurate translation might convey the action *being taken* on selected items.",
-          "suggestion": "Consider 'ປະຕິບັດການຕໍ່ກັບລາຍການທີ່ເລືອກ' (Performing actions on selected items) or 'ການກະກອນລາຍການທີ່ເລືອກ' (Activating/Initiating selected items)"
+          "description": "The translation 'ປະຕິບັດລາຍການທີ່ເລືອກ' while technically understandable, doesn't fully capture the nuance of 'Taking action on selected items'. 'ປະຕິບັດ' implies execution or performing a task *on* the items, whereas 'Taking action' is more general and can include various forms of interaction.",
+          "suggestion": "Consider a translation like 'ດໍາເນີນການກັບລາຍການທີ່ເລືອກ' (dam-nern-gaan gap lai-gaan tee leuaak) which more closely reflects 'Taking action on selected items' or 'ກະດໍາການກັບລາຍການທີ່ເລືອກ' (ka-dam-gaan gap lai-gaan tee leuaak)."
         }
       ],
       "approved_at": null
@@ -160,8 +161,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Notiek darbību veikšana ar atlasītajiem vienumiem\" is a literal translation that doesn't quite convey the intended meaning of \"Taking action on selected items.\" It sounds awkward and verbose in Latvian. A more natural phrasing would be needed.",
-          "suggestion": "Consider alternatives like \"Veikt darbības ar atlasītajiem vienumiem\" or \"Darbības ar atlasītajiem vienumiem\"."
+          "description": "The translation 'Notiek darbību veikšana ar atlasītajiem vienumiem' is a literal translation and doesn't convey the intended meaning of 'Taking action on selected items' naturally in Latvian. It's awkward and verbose.",
+          "suggestion": "Izvēlēto vienumu darbības"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'Izvēlēto vienumu darbības' is missing the colon that is present in the English version after 'HotkeysPanel:HotkeysActions'.",
+          "suggestion": "Izvēlēto vienumu darbības:"
         }
       ],
       "approved_at": null
@@ -184,8 +190,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'A atuar sobre os itens selecionados' doesn't accurately convey the meaning of 'Taking action on selected items.' 'Atuar' implies acting as an actor or performing a role, not taking action on something. A more accurate translation would focus on the 'action' aspect.",
-          "suggestion": "Consider alternatives like 'Realizar ações nos itens selecionados', 'Executar ações nos itens selecionados', or 'Agir sobre os itens selecionados'."
+          "description": "The translation \"A atuar sobre os itens selecionados\" doesn't accurately convey the meaning of \"Taking action on selected items.\" 'Atuar' implies acting as a character or performing a role, not taking action *on* items.",
+          "suggestion": "A sugestão é reformular a tradução para algo como \"Realizar ações nos itens selecionados\" ou \"Executar ações nos itens selecionados\"."
         }
       ],
       "approved_at": null
@@ -214,13 +220,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"තේරූ අථක සඳහා ක්‍රියාමාර්ගයක් ගැනීම\" is not the most natural or accurate rendering of \"Taking action on selected items\". \"අථක\" is not a standard term. The translation leans too literally.",
-          "suggestion": "Consider \"තේරීම් මත ක්‍රියාමාර්ග ගැනීම\" or \"තෝරාගත් අයිතීත මත ක්‍රියාමාර්ග ගැනීම\" (more formal)."
+          "description": "The translation \"තේරූ අථක සඳහා ක්‍රියාමාර්ගයක් ගැනීම\" is not the most natural or accurate translation of \"Taking action on selected items\". \"අථක\" isn't the standard term for 'items' in this context. It can be perceived as slightly archaic or unusual.",
+          "suggestion": "A more natural translation would be something like \"තේරීම් මත ක්‍රියාමාර්ග ගැනීම\" or \"මැුselect කළ අයිතෙම මත ක්‍රියාමාර්ග ගැනීම\"."
         },
         {
-          "type": "grammar",
-          "description": "While technically correct, the sentence structure is a bit clunky in Sinhala. It can be improved for better flow.",
-          "suggestion": "Rephrasing to \"තේරීම් මත ක්‍රියාමාර්ග ගැනීම\" or \"තෝරාගත් අයිතීත මත ක්‍රියාමාර්ග ගැනීම\" will improve flow."
+          "type": "spelling",
+          "description": "While \"අථක\" isn't strictly incorrect, it’s uncommon in modern Sinhala usage. \"අයිතෙම\" (aitema) is a more common transliteration for 'items' and might be more suitable depending on the desired level of formality.",
+          "suggestion": "Consider using \"අයිතෙම\" (aitema) instead of \"අථක\" if a more accessible term is desired."
         }
       ],
       "approved_at": null
@@ -234,13 +240,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ukrepanje za izbrane predmete' is too literal and doesn't quite capture the meaning of 'Taking action on selected items' in a user interface context. It sounds somewhat awkward.",
-          "suggestion": "Consider 'Dejanja nad izbranimi predmeti' or 'Obdelava izbranih predmetov'.  The best option depends on the overall tone of the UI."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -249,8 +249,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Предузимање радње на одабране предмете\" is a literal translation but doesn't quite capture the nuance of 'Taking action on selected items'. It sounds somewhat formal and clunky.",
-          "suggestion": "Consider a more natural phrasing like \"Извођење радње на изабраним елементима\" or \"Обрада изабраних елемената\"."
+          "description": "The translation 'Предузимање радње на одабране предмете' is a bit literal and could be improved for naturalness. 'Preuzimanje akcije' would be a more common and natural phrasing for 'Taking action'.",
+          "suggestion": "Преузимање акције на одабране предмете"
         }
       ],
       "approved_at": null
@@ -261,8 +261,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Preduzimanje radnje na odabrane predmete' doesn't accurately convey the meaning of 'Taking action on selected items'. 'Preduzimanje radnje' is more akin to 'undertaking an action' rather than 'taking action'.",
-          "suggestion": "Radnje na odabranim stavkama / Akcija na odabranim stavkama / Izvršavanje akcije na odabranim stavkama"
+          "description": "The translation 'Preduzimanje radnje na odabrane predmete' is a literal translation but doesn't quite capture the natural English phrasing of 'Taking action on selected items'. It sounds a bit clunky in Serbian.",
+          "suggestion": "Consider 'Izvršavanje akcije na odabranim predmetima' or 'Akcija na odabranim predmetima' for a more fluent and idiomatic Serbian translation."
         }
       ],
       "approved_at": null
@@ -273,8 +273,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Seçilen öğeler üzerinde işlem yapılıyor' is a literal translation that sounds unnatural in Turkish. It translates to 'An action is being performed on selected items'. A more natural phrasing would convey the same meaning in a more idiomatic way.",
-          "suggestion": "Seçili öğelerle işlem yapma"
+          "description": "The translation 'Seçilen öğeler üzerinde işlem yapılıyor' is a literal translation of 'Taking action on selected items' and doesn't convey the same meaning in a natural Turkish way. It implies the action is currently happening, whereas the English phrase refers to the functionality of a panel or option.",
+          "suggestion": "Seçili öğelerle işlem yap"
         }
       ],
       "approved_at": null
@@ -297,8 +297,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"对选定的项目采取操作\" is a literal translation but lacks natural flow and clarity in Chinese. 'Taking action' is not always directly translated as '采取操作'. It's too formal and robotic for a hotkey panel.",
-          "suggestion": "考虑更自然的表达，例如：'执行选定操作' 或 '处理选定项目' (Xingcheng xuandingsuo caozuoyu o' or 'Chulifxuangding xiangmu')"
+          "description": "The translation \"对选定的项目采取操作\" is technically correct but lacks the nuance and flow of the English phrase \"Taking action on selected items.\" It sounds slightly formal and less natural in Chinese.  A more idiomatic translation would better convey the intended meaning.",
+          "suggestion": "考虑使用更自然的表达，例如“对所选项目执行操作” or “对选中的项目进行操作”。"
         }
       ],
       "approved_at": null

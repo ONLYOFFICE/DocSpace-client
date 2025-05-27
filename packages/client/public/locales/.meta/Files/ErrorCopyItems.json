@@ -3,7 +3,7 @@
   "content": "Error copying <2>{{qty}} elements</2> to <1>{{folderName}}</1>",
   "content_en_sha1_hash": "2f42869536ed9db62df42cfdc57eae62a922a9d7",
   "created_at": "2025-05-19T21:30:55.614Z",
-  "updated_at": "2025-05-20T09:39:48.560Z",
+  "updated_at": "2025-05-24T12:14:44.517Z",
   "comment": {
     "text": "This translation key is used for error messages that occur when copying items fail. It appears in a modal or alert dialog, displaying the number of elements that could not be copied to a specified folder. The error message includes placeholders for quantity and folder name.",
     "is_auto": true,
@@ -27,19 +27,52 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Error copying' is translated as 'حدث خطأ أثناء نسخ' which literally means 'An error occurred during copying'.  A more direct translation of 'Error copying' would be something like 'خطأ في النسخ' (Khata' fi al-naskh). While the current translation is understandable, it's not a direct equivalent and might not convey the precise meaning in all contexts.",
+          "suggestion": "خطأ في النسخ"
+        },
+        {
+          "type": "grammar",
+          "description": "The word 'عنصرًا' (element) is in the accusative case, which is correct in this context (direct object of the copying verb). However, ensuring consistency in grammatical case throughout the application's localization is important.",
+          "suggestion": "No specific correction needed, but maintain consistency."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Azerbaijani translation uses incorrect tag order. The English uses <2> before {{qty}} and <1> before {{folderName}}, while the Azerbaijani uses <1> before {{folderName}} and <2> before {{qty}}.",
+          "suggestion": "Change the tag order to match the English: <2>{{qty}} elementlər</2>-ni <1>{{folderName}}</1> qovluğuna kopyalama xətası"
+        },
+        {
+          "type": "grammar",
+          "description": "The word 'elementlər' is in the plural form, but it is unclear if the intended meaning is plural or singular.  It is more likely that the English '<2>{{qty}} elements</2>' refers to a quantity of elements, so the Azerbaijani would need to maintain this plural meaning.  While not strictly wrong, it depends on the context.",
+          "suggestion": "Consider whether a singular form would be more accurate, and if so, change 'elementlər' to 'element' or another appropriate singular form."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Error copying\" is translated as \"Грешка при обработка на\". While \"обработка\" (processing) isn't entirely wrong, \"Error copying\" implies a direct copying failure, which \"обработка\" doesn't fully convey. A more accurate translation would be something like \"Грешка при копиране на...\"",
+          "suggestion": "Грешка при копиране на"
+        },
+        {
+          "type": "formatting",
+          "description": "The English template uses <1> and <2> for folder name and quantity respectively. The Bulgarian translation uses the same, but the order is reversed. This is a potential consistency issue.",
+          "suggestion": "Ensure the tag order matches the English template (<1> for folder name, <2> for quantity)."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -57,7 +90,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The order of the placeholders is incorrect. The English content has <2> before <1>, while the Greek translation has <1> before <2>. This will likely cause display issues.",
+          "suggestion": "Change the Greek translation to: \"Σφάλμα αντιγραφής <2>{{qty}} στοιχείων</2> στον φάκελο <1>{{folderName}}</1>\""
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,19 +108,47 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'kopioitaessa' (when copying) is not the most natural way to express \"Error copying\" in Finnish. It implies the error occurred *during* the copying process, rather than being a statement of the error itself. A more direct translation would be 'Virhe kopioinnissa' (Error in copying) or 'Virhe tiedostojen kopioinnissa' (Error in file copying).",
+          "suggestion": "Virhe tiedostojen kopioinnissa <2>{{qty}} elements</2> kohteeseen <1>{{folderName}}</1>"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'elements' isn't translated and should be considered for localization. Keeping the English word 'elements' might confuse the user.",
+          "suggestion": "Virhe tiedostojen kopioinnissa <2>{{qty}} tiedostoa</2> kohteeseen <1>{{folderName}}</1>"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The preposition 'to' in the English content ('Error copying ... to <1>{{folderName}}</1>') is translated as 'dans' in French ('Erreur de copie de ... dans <1>{{folderName}}</1>'). While 'dans' can mean 'in' or 'into', in this context, 'to' implies the destination. A more accurate translation might use 'vers'.",
+          "suggestion": "Erreur de copie de <2>{{qty}} éléments</2> vers <1>{{folderName}}</1>"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'to' in the Armenian translation seems misplaced and doesn't align with the English sentence structure. It's unclear what it's meant to connect.",
+          "suggestion": "Consider removing 'to' or rephrasing the sentence. A more accurate translation might be: \"Պատճենման սխալ <2>{{qty}} տարրերի</2> <1>{{folderName}}</1>\" (Error copying <2>{{qty}} elements</2> <1>{{folderName}}</1>)"
+        },
+        {
+          "type": "formatting",
+          "description": "The XML tags (<1> and <2>) are preserved in the Armenian translation. While preserving the tags might be necessary depending on the context, it's worth confirming this is the intended behavior.",
+          "suggestion": "Verify whether the XML tags need to be preserved in the Armenian translation. If not, they should be removed."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,25 +160,59 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Error copying\" is translated as \"コピー中にエラーが発生しました\" which translates to \"An error occurred while copying\". While technically accurate, a more direct and natural translation for a localized error message would be something like \"コピーエラー\" (Copy Error).",
+          "suggestion": "コピーエラー"
+        },
+        {
+          "type": "formatting",
+          "description": "The English content uses <1> and <2> for the placeholders. The Japanese translation also follows the same format, which is good for consistency.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Error copying\" is translated as \"복사하는 중 오류가 발생했습니다\" which translates back to \"An error occurred while copying.\" While not entirely wrong, a more direct and natural translation of \"Error copying\" would be \"복사 오류\" or \"복사 시 오류\".",
+          "suggestion": "복사 오류가 발생했습니다"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"ຜົນບົດບົກພະຍາດ\" (pon bot bok phayad) translates to 'disease diagnosis' or 'medical examination' which is incorrect in the context of file copying. It should convey the idea of an error or failure.",
+          "suggestion": "ຜົນບົກປະຫຼັດໃນການສໍາເນົາ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ຢ່າງ' (yang) meaning 'piece' or 'unit' is unnecessary and doesn't fit the context. It would be better to omit it.",
+          "suggestion": "ຜົນບົກປະຫຼັດໃນການສໍາເນົາ <2>{{qty}} ຢ່າງຕໍ່ໄປສູ່ <1>{{folderName}}</1>"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets in the Latvian translation match the English, which might not be the standard way to format this in Latvian UI elements. It's possible Latvian UI prefers different styling.",
+          "suggestion": "Review the standard UI formatting for error messages in Latvian. It might be more appropriate to use a different style of formatting, or remove the angle brackets entirely."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -123,7 +224,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Polish translation uses 'elementu(-tów)' which is grammatically correct but slightly awkward. The choice between singular and plural depends on the value of `{{qty}}`.  While technically correct, it would be more natural to dynamically adjust the noun based on the quantity.",
+          "suggestion": "Consider implementing a dynamic solution that uses 'element' when `{{qty}}` is 1 and 'elementów' when `{{qty}}` is greater than 1. If that's not possible, 'elementy' could be a safer, albeit less precise, alternative."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,7 +248,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'elemente' (elements) is feminine plural, but depending on the context, it might be better to use a masculine form. It's likely the intended meaning is 'items' or 'files'.",
+          "suggestion": "Consider using 'fișiere' (files) or 'articole' (items) instead of 'elemente'. The best choice depends on the specific content being copied."
+        },
+        {
+          "type": "formatting",
+          "description": "The formatting tags `<1>` and `<2>` are not standard. They appear to be placeholders intended for dynamic content.  Ensure these are correctly processed in the application displaying the message.",
+          "suggestion": "Verify the application correctly interprets and replaces these tags with the appropriate values for 'folderName' and 'qty'."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +271,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"<2>{{qty}} මූලද්‍රව්‍ය</2> <1>{{folderName}}</1> වෙත පිටපත් කිරීමේදී දෝෂයකි\" doesn't accurately convey the meaning of \"Error copying <2>{{qty}} elements</2> to <1>{{folderName}}</1>.\nSpecifically, it's missing the word 'error' in Sinhala.  A more accurate translation would indicate that it's an error.",
+          "suggestion": "<2>{{qty}} මූලද්‍රව්‍ය</2> <1>{{folderName}}</1> වෙත පිටපත් කිරීමේදී වැරැද්දකි"
+        },
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation preserves the `<1>` and `<2>` tags, which is unexpected and likely incorrect. These tags should be removed or replaced with appropriate Sinhala formatting if needed.",
+          "suggestion": "Remove the `<1>` and `<2>` tags. The correct placement of these elements should be considered based on the context and the Sinhala language rules"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +300,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets are not correctly placed or balanced with respect to the variables.",
+          "suggestion": "Ensure correct placement and balancing of angle brackets. Consider if the variables are intended to be within the brackets, or if the entire string should be enclosed.  Example: 'Грешка при копирању <2>{{qty}} елемената</2> у <1>{{folderName}}</1>'"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -183,25 +318,64 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Error copying\" is not accurately translated. \"Error copying\" implies an active process that failed. The Turkish translation \"kopyalanırken hata oluştu\" translates to 'an error occurred while copying'. While functionally similar, it lacks the immediacy and active sense of the original.",
+          "suggestion": "Consider a translation like \"<2>{{qty}} öğe</2>, <1>{{folderName}}</1> konumuna kopyalanamadı\" which translates to \"<2>{{qty}} elements</2>, could not be copied to <1>{{folderName}}</1>\"."
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags '<2>' and '<1>' are reversed in the Turkish translation compared to the English. This indicates a potential formatting error and could cause display issues.",
+          "suggestion": "Reverse the order of the HTML tags to match the English: \"<1>{{qty}} öğe</1>, <2>{{folderName}}</2> konumuna kopyalanırken hata oluştu\" or, better, align with the suggested translation and correct tag order."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The opening and closing tags <2> and </2> are misplaced. They should enclose only the 'elements' part.",
+          "suggestion": "Помилка копіювання {{qty}} елементів в <2> до <1>{{folderName}}</1>"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'кількості' (quantity) is unnecessary and doesn't align well with the English phrase 'elements'.",
+          "suggestion": "Помилка копіювання {{qty}} елементів до <1>{{folderName}}</1>"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tags `<2>` and `<1>` are reversed in the Vietnamese translation compared to the English content.",
+          "suggestion": "Correct the tag order to match the English: Đã xảy ra lỗi khi sao chép <1>{{qty}} phần</1> vào <2>{{folderName}}</2>"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Error copying' is translated as '复制到...时出错' which literally means 'Error occurred when copying to...'. A more direct and natural translation would be '复制失败' or '复制出错'.",
+          "suggestion": "复制失败"
+        },
+        {
+          "type": "formatting",
+          "description": "The tags <1> and <2> are reversed compared to the English source. The English source has <2> preceding <1>. The Chinese translation has <1> preceding <2>.",
+          "suggestion": "将<2>{{qty}}个元素</2>复制到<1>{{folderName}}</1>时, 复制失败"
+        }
+      ],
       "approved_at": null
     }
   }

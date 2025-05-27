@@ -3,7 +3,7 @@
   "content": "Your PDF form is ready to be filled out. Copy public link to start the form filling process or Invite other users to this room.",
   "content_en_sha1_hash": "e0b80d168f5e86028d159e7def09f956b8f49d39",
   "created_at": "2025-05-19T21:30:53.769Z",
-  "updated_at": "2025-05-21T06:08:39.770Z",
+  "updated_at": "2025-05-24T06:37:58.227Z",
   "comment": {
     "text": "This translation key contains a message used when a user creates and successfully downloads a PDF form. It appears as a description in a modal dialog after creating or downloading a form, informing users about the next steps.",
     "is_auto": true,
@@ -36,18 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb 'doldurulmağa' is slightly awkward. While grammatically correct, a more natural phrasing would improve readability.",
+          "description": "The phrase 'doldurulmağa' is grammatically awkward. While technically not incorrect, it sounds unnatural in modern Azerbaijani. A more natural phrasing would use a verb ending in '-maq'.",
           "suggestion": "PDF formanız doldurulmaq üçün hazırdır."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'forma doldurma prosesinə başlamaq üçün' is a bit verbose and could be simplified. It literally translates to 'to start the form filling process for'.",
-          "suggestion": "forma doldurmağa başlamaq üçün"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Invite other users to this room' doesn't perfectly align with inviting users to 'fill out the form'. The room metaphor might not translate well.",
-          "suggestion": "Digər istifadəçiləri forma doldurmağa dəvət edin."
+          "description": "The sentence structure 'və ya forma doldurma prosesinə başlamaq üçün digər istifadəçiləri bu otağa dəvət edin' is a bit long and complex. It could be rephrased for better readability.",
+          "suggestion": "Və ya forma doldurma prosesinə başlamak üçün digər istifadəçiləri dəvət edin."
         }
       ],
       "approved_at": null
@@ -99,14 +94,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation uses a colon (:) after \"Ձեր PDF ձևը պատրաստ է լրացման:\" which might interrupt the flow. It's more common to use a period (.) or a dash (—) in this context.",
-          "suggestion": "Ձեր PDF ձևը պատրաստ է լրացման։ / Ձեր PDF ձևը պատրաստ է լրացման—"
+          "type": "incorrect_translation",
+          "description": "The phrase \"ձևաթղթի լրացման գործընթացը սկսելու համար\" is a bit verbose and could be simplified. It translates to 'to start the form filling process'.",
+          "suggestion": "Պատճենեք հանրային հղումը ձևը լրացելու համար"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ձևաթղթի լրացման գործընթացը սկսելու համար' is quite verbose. A more natural translation for 'to start the form filling process' might be shorter and more direct.",
-          "suggestion": "Ձեր PDF ձևը լրացելու համար պատճենեք հանրային հղումը կամ հրավիրեք այլ օգտվողների այս սենյակ:"
+          "type": "formatting",
+          "description": "The Armenian translation lacks proper punctuation and spacing for readability.  Specifically a colon (:) after the first sentence would improve clarity.",
+          "suggestion": "Ձեր PDF ձևը պատրաստ է լրացման: Պատճենեք հանրային հղումը ձևը լրացելու համար կամ հրավիրեք այլ օգտվողների այս սենյակ:"
         }
       ],
       "approved_at": null
@@ -122,9 +117,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Copy public link to start the form filling process' is translated as 'フォーム記入プロセスを開始するために公開リンクをコピーするか'. While technically correct, it sounds slightly awkward in Japanese. A more natural phrasing would be something like 'フォーム記入を開始するには公開リンクをコピーしてください' (Fo-mu kijun o kaishi suru ni wa koukai rinku o kopi shite kudasai).",
+          "suggestion": "フォーム記入を開始するには公開リンクをコピーしてください"
+        },
+        {
           "type": "formatting",
-          "description": "The Japanese translation uses a formal tone. For a PDF form, a slightly less formal tone might be more approachable. While not strictly incorrect, it could be adjusted.",
-          "suggestion": "PDFフォームは入力可能です。公開リンクをコピーしてフォーム記入を開始するか、他のユーザーを招待できます。"
+          "description": "The original English uses a conjunction 'or'. The Japanese translation maintains a similar structure but could be slightly improved for flow. While grammatically correct, a more polished feel might involve adjusting the sentence structure.",
+          "suggestion": "フォーム記入プロセスを開始するには公開リンクをコピーするか、この部屋に他のユーザーを招待することもできます。"
         }
       ],
       "approved_at": null
@@ -132,7 +132,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation uses a slightly informal tone. While acceptable, a more formal tone might be preferred for a professional PDF form creation context. Using '작성하세요' instead of '시작하거나' in the second part would improve flow and formality.",
+          "suggestion": "PDF 양식을 작성할 준비가 되었습니다. 공개 링크를 복사하여 양식 작성 프로세스를 시작하거나 다른 사용자를 이 룸에 초대하여 작성하세요."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -141,13 +147,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Copy public link\" is awkwardly translated as \"ຖ່າຍລິ້ງສາທາລະນະ\". A more natural translation would be something like \"ຄັດລອກລິ້ງສາທາລະນະ\" or \"ນຳລອກລິ້ງສາທາລະນະ\". \"ຖ່າຍ\" typically means 'photograph'.",
+          "description": "The phrase \"Copy public link\" is translated as \"ຖ່າຍລິ້ງສາທາລະນະ\". While technically correct, a more natural and user-friendly phrasing would be \"ຄັດລອກລິ້ງສາທາລະນະ\" (khat lop link satthalanan) which means 'copy public link'.",
           "suggestion": "ຄັດລອກລິ້ງສາທາລະນະ"
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'ທີ່ຈະເຕີມຂໍ້ມູນໄດ້' is somewhat convoluted. It could be simplified.",
-          "suggestion": "ສຳລັບເຕີມຂໍ້ມູນ"
         }
       ],
       "approved_at": null
@@ -164,8 +165,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Invite other users uit voor deze kamer\" is not the best translation for 'Invite other users to this room'. It literally translates to 'Invite other users out for this room'.",
-          "suggestion": "Invite andere gebruikers naar deze kamer."
+          "description": "The phrase \"Invite other users uit voor deze kamer\" is awkward and doesn't accurately convey the intended meaning of inviting users to the room. The preposition 'voor' is not appropriate here.",
+          "suggestion": "Invite other users naar deze kamer"
         }
       ],
       "approved_at": null
@@ -193,14 +194,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Copy public link to start the form filling process' is not accurately translated. 'To start the form filling process' is a bit clunky. A more natural Romanian phrasing would be something like 'pentru a începe completarea formularului'.",
-          "suggestion": "Formularul dvs PDF este gata să fie completat. Copiați linkul public pentru a începe completarea formularului sau invitați alți utilizatori în sala."
+          "type": "formatting",
+          "description": "The Romanian translation uses a period (.) after 'completat' which is not consistent with the English sentence structure. It should be a comma (,) to connect it to the subsequent phrase.",
+          "suggestion": "Formularul dvs PDF este gata să fie completat, copiați linkul public..."
         },
         {
-          "type": "formatting",
-          "description": "The translation uses a period (.) after 'sala' which creates a somewhat abrupt end to the sentence. A more natural flow might benefit from a conjunction or a slightly rephrased sentence.",
-          "suggestion": "Formularul dvs PDF este gata să fie completat. Copiați linkul public pentru a începe completarea formularului sau invitați alți utilizatori în această sală."
+          "type": "incorrect_translation",
+          "description": "“Sala” translates to “room”, but in the context of collaborative form filling, “spațiu” or “mediu” would be more appropriate. 'Sala' implies a physical room.",
+          "suggestion": "Formularul dvs PDF este gata să fie completat. Copiați linkul public pentru a începe completarea formularului sau invitați alți utilizatori în acest spațiu/mediu."
         }
       ],
       "approved_at": null
@@ -211,8 +212,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Russian translation 'Начните собирать копии заполненных форм от других пользователей' does not accurately reflect the original English meaning. It implies collecting filled-in forms *from* other users, whereas the original text suggests inviting others to *fill out* the form.",
-          "suggestion": "Ваша PDF-форма готова к заполнению. Чтобы начать заполнение формы, скопируйте общедоступную ссылку или пригласите других пользователей в эту комнату."
+          "description": "The translation 'Начните собирать копии заполненных форм от других пользователей' doesn't accurately convey the original meaning of 'Copy public link to start the form filling process or Invite other users to this room.'. It implies collecting copies of completed forms, not starting the filling process or inviting users.",
+          "suggestion": "Ваша PDF-форма готова к заполнению. Скопируйте публичную ссылку для начала заполнения формы или пригласите других пользователей в эту комнату."
         }
       ],
       "approved_at": null
@@ -223,13 +224,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Copy public link\" is not accurate. \"පොදු සම්බන්ධතාවය පිටපත් කරන්න\" literally translates to 'copy the public connection'. A more natural and accurate translation would be something like 'පොදු සබැඳිය පිටපත් කරන්න' (copy the public link).",
+          "description": "The phrase \"Copy public link\" is translated as \"පොදු සම්බන්ධතාවය පිටපත් කරන්න\". While technically correct, a more natural and common translation for 'link' in this context would be 'සබැඳිය'.",
           "suggestion": "පොදු සබැඳිය පිටපත් කරන්න"
         },
         {
-          "type": "formatting",
-          "description": "While grammatically correct, the structure of the Sinhala sentence 'ආකෘතිය පිරවීම ආරම්භ කිරීමට පොදු සම්බන්ධතාවය පිටපත් කරන්න' can be slightly improved for better flow. Adding a conjunction (and) after 'ආකෘතිය පිරවීම ආරම්භ කිරීමට' would improve readability.",
-          "suggestion": "ආකෘතිය පිරවීම ආරම්භ කිරීමට පොදු සම්බන්ධතාවය පිටපත් කරන්න, නැතිනම්..."
+          "type": "incorrect_translation",
+          "description": "The word 'Invite' is translated as 'ආරාධනා කරන්න'. While correct, it's a bit formal. A more conversational alternative would be 'අම Invitation කරන්න' or 'දුන්නන්න' depending on the desired tone.",
+          "suggestion": "මෙම කාමරයට අනෙකුත් පරිශීලකයින්ට ද Invitation කරන්න."
         }
       ],
       "approved_at": null
@@ -243,18 +244,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"to start the form filling process\" is not the most natural way to phrase this in Slovenian. While technically correct, it sounds slightly awkward.",
-          "suggestion": "to začnete z izpolnjevanjem obrazca"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of 'ali' (or) could be improved with a more elegant phrasing to separate the two options.",
-          "suggestion": "ali pa povabi druge uporabnike v to sobo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -263,18 +253,23 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'формулар' is a misspelling. It should be 'образац'.",
-          "suggestion": "Ваш PDF образац је спреман да буде попуњен."
+          "description": "The word 'формулар' is a misspelling of 'форма'.",
+          "suggestion": "форма"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'да започнете процес попуњавања формулара' is slightly awkward. A more natural phrasing would be 'да бисте попунили образац'.",
-          "suggestion": "да бисте попунили образац"
+          "description": "The sentence 'Ваш PDF формулар је спреман да буде попуњен' could be improved for clarity and flow. While grammatically correct, it's slightly awkward.",
+          "suggestion": "Ваш PDF образац је спреман за попуну."
         },
         {
-          "type": "formatting",
-          "description": "The original English uses 'Copy public link to start the form filling process'. The translation uses a more formal tone with 'да започнете процес попуњавања'.  While technically correct, it loses some of the more conversational tone. Maintaining a more direct translation might improve flow.",
-          "suggestion": "Копирајте јавни линк да бисте започели попуњавање образаца."
+          "type": "incorrect_translation",
+          "description": "While 'Копирајте јавни линк' is understandable, a more natural translation of 'Copy public link' would be 'Копирајте јавни излазни линк' or 'Копирајте линк за приступ'.",
+          "suggestion": "Копирајте линк за приступ"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'просторију' is generally used for a large room. A more appropriate word for a digital 'room' or space would be 'простор' or 'собу'",
+          "suggestion": "простор"
         }
       ],
       "approved_at": null
@@ -285,8 +280,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses a period after 'formular' in both instances. While grammatically correct, the English uses the abbreviation 'form' without a period. Maintaining consistency would improve the user experience.",
-          "suggestion": "Consider using 'PDF obrazac' instead of 'PDF formular' to match the English 'PDF form' and avoid the period."
+          "description": "The Serbian translation uses a period (.) after 'popunjen' which is grammatically correct, but the English version uses a period after 'out'. Maintaining consistency would be preferable.",
+          "suggestion": "Consider adding a period after 'out' in the English source, or removing it from the Serbian translation."
         }
       ],
       "approved_at": null
@@ -309,8 +304,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"được điền\" is slightly awkward. A more natural phrasing would be \"để bạn điền\" or simply \"để điền\".",
-          "suggestion": "Biểu mẫu PDF của bạn đã sẵn sàng để bạn điền. Hãy sao chép liên kết công khai để bắt đầu quá trình điền biểu mẫu hoặc Mời người dùng khác vào phòng này."
+          "description": "The phrase \"được điền\" sounds a bit awkward. While technically correct, it's not the most natural way to express \"to be filled out\" in Vietnamese. A more natural phrasing would be \"để điền\".",
+          "suggestion": "Biểu mẫu PDF của bạn đã sẵn sàng để điền. Hãy sao chép liên kết công khai để bắt đầu quá trình điền biểu mẫu hoặc Mời người dùng khác vào phòng này."
         }
       ],
       "approved_at": null

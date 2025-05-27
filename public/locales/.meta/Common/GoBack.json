@@ -3,7 +3,7 @@
   "content": "Go back",
   "content_en_sha1_hash": "e84712fbf4eee89d1d896d75da5b5b9ceca43eac",
   "created_at": "2025-05-19T21:30:45.632Z",
-  "updated_at": "2025-05-22T11:56:37.556Z",
+  "updated_at": "2025-05-26T07:57:32.400Z",
   "comment": {
     "text": "The translation key \"GoBack\" is used to display a button label that prompts users to return to the previous page or view. In this specific use case, it appears as part of an error message dialog on a form gallery page, inviting users to navigate back after encountering an error.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\FormGallery\\ErrorView\\index.js",
+      "file_path": "/packages/client/src/pages/FormGallery/ErrorView/index.js",
       "line_number": 77,
       "context": "headerText={t(\"FormGallery:ErrorViewHeader\")}\n descriptionText={t(\"FormGallery:ErrorViewDescription\")}\n buttons={\n <Button\n primary\n label={t(\"Common:GoBack\")}\n scale={isMobile}\n size={!isMobile ? \"small\" : \"normal\"}\n onClick={onGoBack}\n />\n }",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Geriyə qayıdın\" is a valid translation, it's more formal than a simple \"Go back\". A more common and natural translation would be \"Geri\".",
+          "suggestion": "Geri"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -54,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Zurück\" can mean 'back', it's too literal and doesn't fully capture the nuance of 'Go back' in a UI context.  It's more like 'return' or 'retreat'.",
-          "suggestion": "Consider \"Zurückgehen\" or a more context-specific translation like \"Abbrechen\" (Cancel) or \"Vorherige Ansicht\" (Previous View), depending on the UI flow."
+          "description": "While 'Zurück' can mean 'back', it's a more general term. For a button labeled 'Go back', a more specific translation like 'Zurück' or 'Zur vorherigen Seite' (Back to previous page) would be more appropriate to clearly indicate navigation.",
+          "suggestion": "Consider 'Zurück' or 'Zur vorherigen Seite'."
         }
       ],
       "approved_at": null
@@ -72,7 +78,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Spanish translation includes a trailing space.",
+          "description": "The Spanish translation 'Volver ' has a trailing space.",
           "suggestion": "Volver"
         }
       ],
@@ -81,7 +87,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation 'Palaa' while technically meaning 'return' or 'burn', doesn't quite capture the nuance of 'Go back' which implies navigating to a previous state or page. It could be misinterpreted.",
+          "suggestion": "Consider 'Takaisin' which more directly translates to 'back' or 'return' in the context of navigation."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -90,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The French translation \"Retourner\" translates to \"to return\" or \"to send back,\" not \"Go back.\" It doesn't accurately convey the meaning of the English phrase.",
-          "suggestion": "Recommanded translation : \"Revenir en arrière\" or simply \"Retour\""
+          "description": "The French translation 'Retourner' while technically meaning 'to return' or 'to go back', doesn't convey the idiomatic meaning of 'Go back' in the context of a user interface element. It's too literal and sounds awkward.",
+          "suggestion": "Revoir' or 'Revenir' would be more appropriate translations depending on the specific context (e.g., 'Revoir' for reviewing something, 'Revenir' for returning to a previous state)."
         }
       ],
       "approved_at": null
@@ -105,13 +117,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Italian translation ' Torna indietro' has a leading space.",
-          "suggestion": "Torna indietro"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -156,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Volte\" is the imperative form of \"voltar\" (to return), but \"Go back\" implies a navigation action, not just returning to a previous location. A more appropriate translation would be \"Retornar\" or \"Voltar\". \"Volte\" implies a direct command, which might not be the desired tone.",
-          "suggestion": "Consider using \"Retornar\" or \"Voltar\" for a more accurate translation that reflects a navigation action."
+          "description": "While \"Volte\" can mean \"go back,\" it's an imperative form and doesn't directly translate the English \"Go back.\"  A more natural and direct translation would be \"Retorne\" or \"Voltar\". \"Volte\" implies a direct command to someone.",
+          "suggestion": "Consider using \"Retorne\" or \"Voltar\" for a more accurate and less directive translation."
         }
       ],
       "approved_at": null
@@ -204,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Иди назад\" literally translates to \"Go back\" but may not be the most natural or idiomatic way to express \"Go back\" in a UI context. While technically correct, it might feel abrupt or less user-friendly compared to alternatives.",
-          "suggestion": "Consider alternatives like \"Назад\" (just \"Back\") or \"Врати се\" (Vrati se - meaning 'Return') which are more commonly used in UI elements."
+          "description": "While 'Иди назад' is a literal translation of 'Go back', it can sound a bit abrupt or commanding in some contexts. A more natural and common translation for a button or UI element would be something like 'Назад'.",
+          "suggestion": "Назад"
         }
       ],
       "approved_at": null
@@ -216,7 +222,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Idi nazad' while literally meaning 'Go back', is a less common and slightly more abrupt way to express 'Go back' in a user interface. A more natural and user-friendly translation would be 'Vrati se'.",
+          "description": "While \"Idi nazad\" is a literal translation of 'Go back,' it can sound abrupt or impolite in Serbian. A more natural and polite phrasing would be \"Vrati se\" or \"Povratak\".",
           "suggestion": "Vrati se"
         }
       ],

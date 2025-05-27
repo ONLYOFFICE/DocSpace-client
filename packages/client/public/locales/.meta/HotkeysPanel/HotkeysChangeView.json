@@ -3,7 +3,7 @@
   "content": "Switch between grid and list view",
   "content_en_sha1_hash": "c39a42b801f274dceda7d6bfeb6790fb987f2268",
   "created_at": "2025-05-19T21:30:54.994Z",
-  "updated_at": "2025-05-21T10:37:08.579Z",
+  "updated_at": "2025-05-24T10:47:00.845Z",
   "comment": {
     "text": "The translation key \"HotkeysChangeView\" is used to display the text \"Switch between grid and list view\". This text is displayed in a hotkey row within an interface component, allowing users to toggle between different view types.",
     "is_auto": true,
@@ -72,13 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Siirtyminen ruudukko- ja luettelonäkymän välillä' is a bit too literal and verbose. While technically correct, it's not the most natural way to express 'Switch between grid and list view' in Finnish. It implies a movement *into* the views, rather than a simple switching action.",
-          "suggestion": "Vaihda ruudukko- ja luettelonäkymien välillä"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, using hyphens in 'ruudukko- ja luettelonäkymien' makes it a compound noun. A slightly more readable option, considering the context is likely a user interface, is to separate with a space. Although the hyphen is grammatically acceptable.",
-          "suggestion": "Vaihda ruudukko ja luettelonäkymien välillä"
+          "description": "The translation 'Siirtyminen ruudukko- ja luettelonäkymän välillä' is a bit too literal and doesn't flow naturally in Finnish. It translates to 'Moving between grid and list view'. A more natural phrasing would convey the action of switching.",
+          "suggestion": "Vaihda ruudukko- ja luettelonäkymän välillä"
         }
       ],
       "approved_at": null
@@ -95,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Անցում ցանցի և ցանկի տեսքի միջև\" is not an accurate translation of \"Switch between grid and list view.\"  'Ցանցի տեսք' (network view) doesn't directly correspond to 'grid view'.",
-          "suggestion": "Անցում ցրցքային և ցանկային տեսքերի միջև"
+          "description": "The translation \"Անցում ցանցի և ցանկի տեսքի միջև\" literally translates to 'Transition between network and list view'.  'Network' (ցանցի) doesn't accurately reflect 'grid view'.  It should be something that conveys a grid-like display.",
+          "suggestion": "Consider alternatives like \"Փոխել ցանցային և ցանկի տեսքի միջև\" (Changing between grid and list view - using 'ցանցային' which implies a grid/network layout) or \"Անցում ցրված և ցանկի տեսքի միջև\" (Transition between scattered/grid and list view)."
         }
       ],
       "approved_at": null
@@ -125,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ສະຫຼັບລະຫວ່າງຕາຂ່າຍແລະລາຍການເບິ່ງ' is not the most natural or accurate translation of 'Switch between grid and list view'. 'ຕາຂ່າຍ' translates to 'grid' but may not convey the intended visual representation in a list view. 'ລາຍການເບິ່ງ' translates to 'view of items' but is a bit clunky. A better translation would incorporate a more natural Lao phrasing.",
-          "suggestion": "ສະຫຼັບລະຫວ່າງວິວແບບຕາໜ່າງ ແລະ ລາຍການ"
+          "description": "The translation 'ສະຫຼັບລະຫວ່າງຕາຂ່າຍແລະລາຍການເບິ່ງ' is a literal translation and may not accurately convey the meaning of 'Switch between grid and list view'. 'ຕາຂ່າຍ' (takhai) literally means 'net' or 'grid' and 'ລາຍການເບິ່ງ' (raikan bing) is 'list view'. While technically correct, it might be too literal and not flow naturally in Lao.",
+          "suggestion": "Consider a more natural phrasing that conveys the concept of switching between different display options. For example, 'ປ່ຽນຮູບແບບການເບິ່ງເປັນແບບຕາຕະລາງຫຼືແບບລາຍການ' (bian hup maen kan bing pen baep ta talang lu baep raikan) which translates to 'Change the viewing format to grid or list format'."
         }
       ],
       "approved_at": null
@@ -179,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ජාලක හා ලැයිස්තු දැක්ම අතර මාරුව\" is a literal translation but doesn't fully convey the meaning of \"Switch between grid and list view\" in a natural Sinhala way. It's a bit clunky.",
-          "suggestion": "Consider a more natural phrasing like \"ජාලක දැක්ම හා ලැයිස්තුව දැක්ම අතරින් Select කරන්න\" (Select between grid view and list view) or \"ජාලක හා ලැයිස්තුව දැක්මක් ලෙස ප່ຽරන්න\" (Change between grid and list view)."
+          "description": "The translation \"ජාලක හා ලැයිස්තු දැක්ම අතර මාරුව\" while literally translating to 'Switch between grid and list view', doesn't quite capture the nuance of 'Switch between grid and list view'. 'ජාලක' (jalaka) generally refers to a network, not a grid in a UI context. A better translation would convey the user switching between two different visual representations of data.",
+          "suggestion": "Consider translating it as \"පත්‍රිකා හා ලැයිස්තුව අතර දැක්ම මාරුව\" (pathrika ha laistuva athara dekma maaruwa) - which more accurately depicts switching between 'table' (as in a grid) and a list."
         }
       ],
       "approved_at": null
@@ -188,7 +183,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses 'vo vzhľade' twice, which is somewhat redundant. While not strictly incorrect, it's not the most elegant phrasing.",
+          "suggestion": "Prepnúť medzi mriežkovým a zoznamovým zobrazením"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -221,13 +222,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Переключання між поданням сітки та поданням списку' is not the most natural or accurate rendering of 'Switch between grid and list view'. 'Подання' is somewhat formal and doesn't fully capture the meaning of 'view' in this context. 'Перемикання' would be a more common and idiomatic choice for 'switch'.",
-          "suggestion": "Перемикання між видом сітки та видом списку"
+          "description": "The translation 'Переключання між поданням сітки та поданням списку' is not the most natural or accurate translation of 'Switch between grid and list view'. 'Подання' isn't the best fit for 'view' in this context.",
+          "suggestion": "Перемикання між виглядом сітки та виглядом списку"
         },
         {
-          "type": "formatting",
-          "description": "While not strictly incorrect, consider using a more fluent phrasing. 'вид сітки та вид списку' could be improved.",
-          "suggestion": "Перемикання між переглядом сітки та переглядом списку"
+          "type": "incorrect_translation",
+          "description": "The word 'подання' doesn't perfectly convey the meaning of 'view' when referring to a user interface element. It implies a submission or presentation of something, not the visual arrangement.",
+          "suggestion": "Використання слова 'вигляд' замість 'подання' буде більш точним."
         }
       ],
       "approved_at": null

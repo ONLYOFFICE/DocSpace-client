@@ -3,7 +3,7 @@
   "content": "Metadata file not transferred",
   "content_en_sha1_hash": "cda5ccce62dbf3d4f7635fc868380764681ac8cb",
   "created_at": "2025-05-19T21:30:50.110Z",
-  "updated_at": "2025-05-21T02:04:54.491Z",
+  "updated_at": "2025-05-24T03:17:51.561Z",
   "comment": {
     "text": "This translation key is used to display an error message when a metadata file fails to transfer, typically appearing in an application that handles XML uploads. The text should be localized for use in UI elements such as tooltips or error notifications.",
     "is_auto": true,
@@ -54,7 +54,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Datei mit Metadaten nicht überwiesen' isn't the most natural way to express \"Metadata file not transferred\" in German. 'Überwiesen' implies a transfer of responsibility or payment, which doesn't fit the context.",
+          "description": "The translation 'Datei mit Metadaten nicht überwiesen' doesn't accurately convey the meaning of 'Metadata file not transferred'. 'Überwiesen' implies a transfer of responsibility or a burden, which isn't the intended meaning.  A more accurate translation would focus on the action of transferring a file.",
           "suggestion": "Datei mit Metadaten nicht übertragen"
         }
       ],
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation includes a space before the colon. This may not be standard formatting for error messages and can be visually jarring.",
-          "suggestion": "Remove the space before the colon: «Մետատվյալների ֆայլը չի փոխանցվել:»"
+          "description": "There is an extra space before the colon in the Armenian translation.",
+          "suggestion": "Մետատվյալների ֆայլը չի փոխանցվել:"
         }
       ],
       "approved_at": null
@@ -119,9 +119,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "While the Lao translation conveys the general meaning, a more accurate and natural translation might be \"ຂໍ້ມູນ metadata ບໍ່ສາມາດໂອນໄດ້\" (khomun metadata bor samat hon dai).  The current translation uses a direct transliteration of 'metadata file' which is less common in Lao usage.",
-          "suggestion": "ຂໍ້ມູນ metadata ບໍ່ສາມາດໂອນໄດ້"
+          "type": "spelling",
+          "description": "The Lao word 'ໄຟລ໌' is often transliterated as 'file' and would improve readability. Using 'ໄຟລ໌' directly might be less familiar to Lao speakers.",
+          "suggestion": "ໄຟລ໌ metadata"
         }
       ],
       "approved_at": null
@@ -183,7 +183,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The verb 'prenesen' (transferred) should agree with the subject 'Datoteka' (file). It should be in the feminine singular past participle.",
+          "suggestion": "Datoteka z metapodatki ni bila prenesena"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

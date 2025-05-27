@@ -3,7 +3,7 @@
   "content": "Move left without changing selection",
   "content_en_sha1_hash": "90a8ae66f3aa3e461e904b9b3fffc63904d4d5f2",
   "created_at": "2025-05-19T21:30:55.061Z",
-  "updated_at": "2025-05-21T10:29:54.974Z",
+  "updated_at": "2025-05-24T10:39:45.094Z",
   "comment": {
     "text": "This translation key is used for the text \"Move left without changing selection\" and appears on a hotkeys panel in the application, providing context for users to understand the action triggered by the keyboard shortcut Ctrl + ←.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Seçimi dəyişmədən sola hərəkət edin' is too literal. A more natural and concise translation would be better. The English phrase 'without changing selection' implies a direct movement without affecting the focus.",
-          "suggestion": "Seçimi dəyişmədən sola get"
+          "description": "The translation \"Seçimi dəyişmədən sola hərəkət edin\" is a literal translation and doesn't fully capture the nuance of \"Move left without changing selection.\" It could be interpreted as a direct command rather than a description of a feature's action.",
+          "suggestion": "Consider alternatives like \"Seçimi dəyişmədən sola ötür\" or \"Seçimi qoruyaraq sola hərəkət edin\" which convey the functionality more naturally."
         }
       ],
       "approved_at": null
@@ -101,9 +101,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation '選択を変えずに移動（左）' is not a direct or optimal translation of \"Move left without changing selection\". While it conveys the core idea, it's a bit literal and could be more natural-sounding in Japanese. '選択を変えずに' means 'without changing selection', which is correct, but '移動（左）' is a functional notation, not necessarily a common phrasing for a user interface label. It lacks the implied 'move' action. It's clunky and less intuitive for a Japanese user.",
-          "suggestion": "Consider something like: '選択を維持して左へ移動' (Senzaku o iji shite hidari e idou) - which translates to 'Move left while maintaining selection' or '選択を保って左へ' (Senzaku o tamotte hidari e) - 'Move left while keeping selection'."
+          "type": "formatting",
+          "description": "The Japanese translation includes \"(左)\" which translates to '(left)'. While not incorrect, it's a bit clunky and may not be necessary. It's more common to simply state 'left' implicitly if the context already indicates movement.",
+          "suggestion": "選択を変えずに移動"
         }
       ],
       "approved_at": null
@@ -123,7 +123,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Move left without changing selection\" implies an action initiated by the user. The Latvian translation \"Pārvietojieties pa kreisi, nemainot atlasi\" is more of a descriptive statement rather than an instruction. A more accurate translation might be something like \"Move selection left\" or \"Move the selection left\".",
+          "suggestion": "Move selection left"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -162,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Move left without changing selection' implies moving the focus or view left, but 'area of selection' (области выделения) suggests moving a selected area. The current translation is too literal and doesn't convey the intended meaning of moving the focus/view.",
-          "suggestion": "Перейти влево, не меняя фокуса"
+          "description": "The English phrase \"without changing selection\" is not perfectly conveyed by \"без изменения области выделения\". While technically correct, it's a bit formal and verbose for a hotkey description. \"selection\" can be translated more simply as \"выделения\" which is sufficient.",
+          "suggestion": "Перейти влево без изменения выделения"
         }
       ],
       "approved_at": null
@@ -174,13 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'තේරීම වෙනස් නොකර වමට යන්න' while understandable, doesn't fully capture the nuance of 'Move left without changing selection'. A more accurate translation would emphasize the action of moving.",
-          "suggestion": "තේරීම නොවෙනස්ව වමට ගමන් කරන්න"
-        },
-        {
-          "type": "spelling",
-          "description": "While 'වමට' is generally correct for 'left', 'වමට' in this context creates a slightly awkward reading. Removing the 'ට' creates a more natural flow.",
-          "suggestion": "වම"
+          "description": "The translation \"තේරීම වෙනස් නොකර වමට යන්න\" while conveying a similar idea, doesn't perfectly capture the nuance of \"Move left without changing selection.\"  A more accurate translation would emphasize the 'move' action explicitly.",
+          "suggestion": "තේරීම නොවෙනස්ව වමට ගෙනයන්න"
         }
       ],
       "approved_at": null
@@ -215,7 +216,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Seçimi değiştirmeden sola git' is a literal translation but doesn't quite capture the nuance of 'Move left without changing selection'. It's understandable, but could be improved for clarity and flow.",
+          "description": "The translation 'Seçimi değiştirmeden sola git' while conveying the general idea, isn't the most natural or idiomatic way to express 'Move left without changing selection' in Turkish. A more fluent translation would consider the nuances of UI terminology.",
           "suggestion": "Seçimi koruyarak sola hareket et"
         }
       ],
@@ -227,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Перейти ліворуч, не змінюючи вибір' is a literal translation but doesn't fully capture the nuance of 'Move left without changing selection' in a UI context. It sounds slightly awkward. A more natural phrasing might emphasize the *action* of moving rather than the act of 'going' somewhere.",
-          "suggestion": "Перемістити ліворуч, не змінюючи вибір"
+          "description": "The translation 'Перейти ліворуч, не змінюючи вибір' is a bit literal and doesn't fully capture the nuance of 'Move left without changing selection'. It sounds more like a command than a description of functionality. The 'Move' aspect isn't conveyed as effectively.",
+          "suggestion": "Розмістити елемент ліворуч, не змінюючи вибір"
         }
       ],
       "approved_at": null
@@ -245,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '向左移动而不改变选定' doesn't fully capture the meaning of 'Move left without changing selection'. While '向左移动' correctly conveys 'Move left', '而不改变选定' is a bit literal and could be improved for naturalness in Chinese.",
-          "suggestion": "向左移动，不改变选中项"
+          "description": "The translation '向左移动而不改变选定' doesn't fully capture the nuance of 'Move left without changing selection'. '选定' refers to a selection, but the English implies moving a highlighted item without deselecting it. A better translation would convey the idea of maintaining the current selection.",
+          "suggestion": "向左移动，保持当前选中"
         }
       ],
       "approved_at": null

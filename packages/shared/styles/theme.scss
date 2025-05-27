@@ -2203,6 +2203,7 @@
   --preparation-portal-progress-color-percent-small: #{$black};
   --preparation-portal-progress-line-bg: var(--accent-main);
   --preparation-portal-description-text-color: #{$gray};
+  --preparation-portal-progress-error-text-color: #{$light-error-status};
 }
 
 .dark {
@@ -2211,6 +2212,7 @@
   --preparation-portal-progress-color-percent-small: #{$white};
   --preparation-portal-progress-line-bg: #{$white};
   --preparation-portal-description-text-color: #{$gray-dark};
+  --preparation-portal-progress-error-text-color: #{$dark-error-status};
 }
 
 .light {
@@ -2225,6 +2227,47 @@
   --files-version-history-badge-first-fill: #{$gray-dark};
   --files-version-history-badge-fill: #{$main-orange};
   --files-version-history-badge-stroke: #{$gray-dark};
+}
+
+.light {
+  --settings-coommon-description-color: #{$light-gray-dark};
+  --settings-common-white-label-paid-badge-bg: #{$favorites-status};
+}
+
+.dark {
+  --settings-coommon-description-color: #{$gray-dark};
+  --settings-common-white-label-paid-badge-bg: #{$favorite-status-dark};
+}
+
+.light {
+  --settings-common-company-info-border: 1px dashed #{$black};
+  --settings-common-company-info-color: #{$gray};
+  --settings-common-branding-description-color: #{$light-gray-dark};
+}
+
+.dark {
+  --settings-common-company-info-border: 1px dashed #{$white};
+  --settings-common-company-info-color: #{$gray-dark};
+  --settings-common-branding-description-color: #{$gray-dark};
+}
+
+.light {
+  --files-editing-wrapper-fill: #{$gray};
+  --files-panels-invite-border: 1px solid #{$gray-strong};
+  --input-block-border-color: #{$light-second-main};
+  --settings-common-white-label-border-img: 1px solid #{$gray-strong};
+  --settings-common-white-label-green-bg-color: 1px solid #{$gray-strong};
+  --settings-common-white-label-not-available-background: #{$gray-light};
+  --settings-common-white-label-text-color: #{$black};
+}
+
+.dark {
+  --files-editing-wrapper-fill: #{$gray-dark};
+  --files-panels-invite-border: 1px solid #{$gray-dark-strong};
+  --input-block-border-color: #{$white};
+  --settings-common-white-label-border-img: 1px solid #{$gray-dark-strong};
+  --settings-common-white-label-not-available-background: #{$gray-dark};
+  --settings-common-white-label-text-color: #{$white};
 }
 
 .light {

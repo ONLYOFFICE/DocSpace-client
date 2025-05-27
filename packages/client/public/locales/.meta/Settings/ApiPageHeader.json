@@ -3,7 +3,7 @@
   "content": "Build your own collaboration platform",
   "content_en_sha1_hash": "cc0e3a6c783cc264d4401ef99086b4395c343b97",
   "created_at": "2025-05-19T21:30:50.576Z",
-  "updated_at": "2025-05-21T05:10:52.003Z",
+  "updated_at": "2025-05-24T05:46:13.481Z",
   "comment": {
     "text": "The translation key \"ApiPageHeader\" is used to display a header text that describes the purpose of a collaboration platform, appearing in a confirmation dialog. It's translated as \"Build your own collaboration platform\".",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Öz əməkdaşlıq platformanızı yaradın' while understandable, isn't the most natural or idiomatic way to translate 'Build your own collaboration platform'. A more common phrasing might emphasize creation and customization.",
-          "suggestion": "Consider alternatives like: 'Kəndinizlə öz işbirliyi platformanızı yaratın' (Create your own collaboration platform with your own customizations) or 'Öz işbirliyi platformanızı hazırlayın' (Prepare your own collaboration platform)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -165,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ඔබගේම සහයෝගිත්‍ව වේදිකාව තනන්න\" is a literal translation and might not be the most natural or idiomatic way to convey \"Build your own collaboration platform\" in Sinhala. A more fluent translation might be preferable depending on the context. While technically correct, it sounds somewhat formal.",
-          "suggestion": "Consider alternatives like \"ඔබේම වැඩබෙහෙසුම් වේදිකාව සාදා ගන්න\" or \"ඔබට අවශ්‍ය සහයෝගිතව වේදිකාව තමාටම සාදා ගන්න\" depending on the desired tone and audience."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

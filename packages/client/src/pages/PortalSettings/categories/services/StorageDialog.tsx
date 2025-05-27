@@ -33,18 +33,15 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
-import { buyStorage } from "@docspace/shared/api/portal";
+import { updateWalletPayment } from "@docspace/shared/api/portal";
 import QuantityPicker from "@docspace/shared/components/select-count-container";
 
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import styles from "./styles/index.module.scss";
-import Amount from "./Amount";
-import Total from "./Total";
+import StorageSummary from "./sub-components/StorageSummary";
 import TopUpModal from "../payments/Wallet/TopUpModal";
-
-import { formatCurrencyValue } from "../payments/Wallet/utils";
 
 type StorageDialogProps = {
   visible: boolean;
@@ -54,12 +51,11 @@ type StorageDialogProps = {
   usedTotalStorageSizeTitle?: string;
   walletBalance?: number;
   stepValue?: number;
-  isTariffExist?: boolean;
-  currentStorageQuantity?: number;
-  isoCurrencySymbol?: string;
-  language?: string;
+  hasStorageSubscription?: boolean;
+  currentStoragePlanSize?: number;
   fetchPortalTariff?: () => void;
   fetchBalance?: () => void;
+  hasScheduledStorageChange?: boolean;
 };
 
 const StorageDialog: React.FC<StorageDialogProps> = ({
@@ -70,29 +66,37 @@ const StorageDialog: React.FC<StorageDialogProps> = ({
   usedTotalStorageSizeTitle,
   walletBalance = 0,
   stepValue = 0,
-  isTariffExist,
-  currentStorageQuantity,
-  isoCurrencySymbol,
-  language,
+  hasStorageSubscription,
+  currentStoragePlanSize,
   fetchPortalTariff,
   fetchBalance,
+  hasScheduledStorageChange,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
-  const [amount, setAmount] = useState<string>("");
+  const [amount, setAmount] = useState<number>(currentStoragePlanSize);
   const [isLoading, setIsLoading] = useState(false);
   const [isVisibleContainer, setIsVisible] = useState(false);
 
-  const maxValue = 9999;
-  const moreThanLimit = amount > maxValue;
-  const isUpgrade = amount >= currentStoragePlanSize;
+  const maxStorageLimit = 9999;
+  const isExceedingStorageLimit = amount > maxStorageLimit;
+  const isStorageUpgrade = amount > currentStoragePlanSize;
+  const calculateTotalStoragePrice = () => {
+    return (amount * stepValue).toFixed(2);
+  };
+  const totalStoragePrice = calculateTotalStoragePrice();
 
-  const onBuy = async () => {
+  const handleStoragePlanChange = async (isCancellation = false) => {
     const timerId = setTimeout(() => {
       setIsLoading(true);
     }, 200);
 
+    const difference = amount ? Math.abs(currentStoragePlanSize - amount) : 0;
+
+    const productType = isStorageUpgrade ? 1 : 0;
+    const value = isCancellation ? null : difference;
+
     try {
-      const res = await buyStorage(amount, 1);
+      const res = await updateWalletPayment(value, productType);
 
       if (res === false) {
         toastr.error(t("Common:UnexpectedError"));
@@ -103,7 +107,17 @@ const StorageDialog: React.FC<StorageDialogProps> = ({
         return;
       }
 
-      await Promise.all([fetchPortalTariff!(), fetchBalance!()]);
+      const requests = [fetchPortalTariff!()];
+
+      if (!isCancellation) requests.push(fetchBalance!());
+
+      await Promise.all(requests);
+
+      if (isCancellation) {
+        setAmount(currentStoragePlanSize);
+
+        fetchBalance!();
+      }
     } catch (e) {
       const errorMessage = e instanceof Error ? e.message : String(e);
       toastr.error(errorMessage);
@@ -113,17 +127,30 @@ const StorageDialog: React.FC<StorageDialogProps> = ({
     setIsLoading(false);
   };
 
-  const totalPrice = () => {
-    return (parseFloat(amount || "0") * stepValue).toFixed(2);
+  const onBuy = () => handleStoragePlanChange();
+  const onCancelChange = () => handleStoragePlanChange(true);
+
+  const onSendRequest = () => {};
+
+  const isCurrentStoragePlan =
+    hasStorageSubscription && amount === currentStoragePlanSize;
+
+  const isWalletBalanceInsufficient =
+    (walletBalance || 0) < parseFloat(totalStoragePrice);
+
+  const onChangeNumber = (value: number) => {
+    setAmount(value);
   };
 
-  const currentPrice = () => {
-    return (currentStorageQuantity! * stepValue).toFixed(2);
-  };
+  const buttonTitle = () => {
+    if (isExceedingStorageLimit) return t("SendRequest");
 
-  const isInsufficientFunds = (walletBalance || 0) < parseFloat(totalPrice());
-  const totalStoragePrice = totalPrice();
-  const isButtonDisabled = !amount || isInsufficientFunds;
+    if (!hasStorageSubscription) return t("Buy");
+
+    if (isStorageUpgrade) return t("Upgrade");
+
+    return t("Downgrade");
+  };
 
   const container = (
     <TopUpModal
@@ -136,11 +163,6 @@ const StorageDialog: React.FC<StorageDialogProps> = ({
       }}
     />
   );
-
-  const onChangeNumber = (value: number) => {
-    setAmount(value);
-  };
-
 
   return (
     <ModalDialog
@@ -174,20 +196,25 @@ const StorageDialog: React.FC<StorageDialogProps> = ({
             className="select-users-count-container"
             value={amount}
             minValue={0}
-            maxValue={maxValue}
+            maxValue={maxStorageLimit}
             step={1}
             title={"Additional storage (GB)"}
             showPlusSign
             onChange={onChangeNumber}
+            isDisabled={hasScheduledStorageChange}
           />
 
           {amount || hasStorageSubscription ? (
             <div className={styles.totalContainer}>
-              <Total
+              <StorageSummary
                 amount={amount}
-                isInsufficientFunds={isInsufficientFunds}
+                isInsufficientFunds={isWalletBalanceInsufficient}
                 totalPrice={parseFloat(totalStoragePrice)}
                 onTopUp={() => setIsVisible(true)}
+                maxValue={maxStorageLimit}
+                moreThanLimit={isExceedingStorageLimit}
+                isCurrentTariff={isCurrentStoragePlan}
+                onCancelChange={onCancelChange}
               />
             </div>
           ) : null}
@@ -196,12 +223,12 @@ const StorageDialog: React.FC<StorageDialogProps> = ({
       <ModalDialog.Footer>
         <Button
           key="OkButton"
-          label={t("Buy")}
+          label={buttonTitle()}
           size={ButtonSize.normal}
           primary
           scale
-          isDisabled={isButtonDisabled}
-          onClick={onBuy}
+          //  isDisabled={isButtonDisabled}
+          onClick={isExceedingStorageLimit ? onSendRequest : onBuy}
           isLoading={isLoading}
         />
         <Button
@@ -228,7 +255,12 @@ export default inject(
       usedTotalStorageSizeTitle,
       maxTotalSizeByQuota,
     } = currentQuotaStore;
-    const { walletQuotas, fetchPortalTariff } = currentTariffStatusStore;
+    const {
+      fetchPortalTariff,
+      hasScheduledStorageChange,
+      hasStorageSubscription,
+      currentStoragePlanSize,
+    } = currentTariffStatusStore;
     const {
       walletCodeCurrency,
       storageQuotaIncrementPrice,
@@ -237,9 +269,6 @@ export default inject(
     } = paymentStore;
     const { value, isoCurrencySymbol } = storageQuotaIncrementPrice;
     const { language } = authStore;
-    const isTariffExist = walletQuotas?.length > 0;
-    const currentStorageQuantity =
-      (isTariffExist && walletQuotas[0]?.quantity) || 0;
 
     return {
       usedTotalStorageSizeCount,
@@ -249,12 +278,14 @@ export default inject(
       storageQuotaIncrementPrice,
       language,
       stepValue: value,
-      isTariffExist,
-      currentStorageQuantity,
+      hasStorageSubscription,
+      currentStoragePlanSize,
       isoCurrencySymbol,
       fetchPortalTariff,
       fetchBalance,
       walletBalance,
+
+      hasScheduledStorageChange,
     };
   },
 )(observer(StorageDialog));

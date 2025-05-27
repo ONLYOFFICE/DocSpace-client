@@ -32,6 +32,7 @@ export type TQuotas = {
   quantity: number;
   wallet?: boolean;
   dueDate?: string;
+  nextQuantity?: number;
 };
 
 export type TPortalTariff = {

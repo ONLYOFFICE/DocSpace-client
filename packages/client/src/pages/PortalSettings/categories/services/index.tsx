@@ -87,7 +87,9 @@ const Services: React.FC<ServicesProps> = ({
   ) : (
     <>
       <AdditionalStorage onClick={onClick} />
-      <StorageDialog visible={isVisible} onClose={onClose} />
+      {isVisible ? (
+        <StorageDialog visible={isVisible} onClose={onClose} />
+      ) : null}
     </>
   );
 };

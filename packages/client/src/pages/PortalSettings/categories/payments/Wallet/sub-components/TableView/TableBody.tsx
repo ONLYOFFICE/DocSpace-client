@@ -70,7 +70,7 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
   const getServiceQuantity = (quantity: number, service: string) => {
     switch (service) {
       case "disk-storage":
-        return `${quantity} ${t(t("Common:Gigabyte"))}`;
+        return `${quantity} ${t("Common:Gigabyte")}`;
       default:
         return "—";
     }

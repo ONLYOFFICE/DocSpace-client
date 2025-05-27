@@ -27,8 +27,42 @@
 .totalWrapper {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  padding: 0;
+  box-sizing: border-box;
+  border-radius: 6px;
+  margin: 0;
+  flex: 0 0 50%;
+  margin-top: 16px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--payment-background-color);
+    border-radius: 6px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  &.withBackground {
+    padding: 16px;
+    &::before {
+      opacity: 1;
+    }
+  }
 }
 
+.warningBlock {
+  background-color: var(--payment-background-color);
+  padding: 16px;
+}
 .planInfoContainer {
   display: flex;
   align-items: flex-start;

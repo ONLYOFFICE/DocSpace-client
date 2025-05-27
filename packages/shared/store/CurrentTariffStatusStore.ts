@@ -93,6 +93,38 @@ class CurrentTariffStatusStore {
     return this.portalTariffStatus ? this.portalTariffStatus.dueDate : null;
   }
 
+  get storageSubscriptionExpiryDate() {
+    return this.walletQuotas[0]?.dueDate;
+  }
+
+  get hasStorageSubscription() {
+    return this.walletQuotas?.length > 0;
+  }
+
+  get currentStoragePlanSize() {
+    if (!this.hasStorageSubscription || !this.walletQuotas[0]) return 0;
+    return this.walletQuotas[0].quantity || 0;
+  }
+
+  get hasScheduledStorageChange() {
+    if (!this.hasStorageSubscription || !this.walletQuotas[0]) return false;
+
+    return (this.walletQuotas[0].nextQuantity ?? -1) >= 0;
+  }
+
+  get nextStoragePlanSize() {
+    if (!this.hasStorageSubscription || !this.walletQuotas[0]) return 0;
+    return this.walletQuotas[0].nextQuantity ?? 0;
+  }
+
+  get storageExpiryDate() {
+    if (!this.storageSubscriptionExpiryDate) return "";
+
+    return moment(this.storageSubscriptionExpiryDate)
+      .tz(window.timezone)
+      .format("LL");
+  }
+
   get delayDueDate() {
     return this.portalTariffStatus
       ? this.portalTariffStatus.delayDueDate

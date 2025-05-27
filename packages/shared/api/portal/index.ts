@@ -364,13 +364,13 @@ export function updatePayment(adminCount, isYearTariff) {
   });
 }
 
-export function buyStorage(amount, productQuantityType) {
+export function updateWalletPayment(amount, productQuantityType) {
   return request({
     method: "put",
-    url: `/portal/payment/update`,
+    url: `/portal/payment/updatewallet`,
     data: {
       quantity: {
-        storage: +amount,
+        storage: amount,
       },
       productQuantityType,
     },

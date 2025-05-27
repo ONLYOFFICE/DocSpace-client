@@ -51,7 +51,7 @@ import ItemIcon from "../../../../../components/ItemIcon";
 import withBadges from "../../../../../HOCs/withBadges";
 
 const StyledDragAndDrop = styled(DragAndDrop)`
-  border-radius: 6px;
+  border-radius: 12px;
 `;
 
 const FileTile = (props) => {

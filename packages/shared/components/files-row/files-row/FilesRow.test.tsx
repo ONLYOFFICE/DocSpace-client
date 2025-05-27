@@ -26,11 +26,13 @@
 
 import React from "react";
 import { render } from "@testing-library/react";
+import "@testing-library/jest-dom";
+
 import { FilesRow } from ".";
 
 describe("FilesRow", () => {
   it("renders correctly", () => {
-    const { container } = render(<FilesRow />);
+    const { container } = render(<FilesRow sectionWidth={300} />);
     expect(container.firstChild).toBeInTheDocument();
   });
 });

@@ -26,5 +26,113 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+@use "../../../styles/mixins";
+@use "../../../styles/variables";
+
 .filesRowContent {
+  :global(.row-main-container-wrapper) {
+    width: 100%;
+    max-width: min-content;
+    min-width: inherit;
+    margin-inline-end: 0;
+
+    @include mixins.desktop {
+      margin-top: 0;
+    }
+  }
+
+  :global(.row_update-text) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  :global(.new-items) {
+    min-width: 12px;
+    width: max-content;
+    margin: 0 -2px -2px;
+  }
+
+  :global(.badge-version) {
+    width: max-content;
+    margin-block: -2px;
+    margin-inline: -2px 6px;
+  }
+
+  :global(.bagde_alert) {
+    margin-inline-end: 8px;
+  }
+
+  :global(.badge-new-version) {
+    width: max-content;
+  }
+
+  :global(.row-content-link) {
+    padding-block: 12px 0;
+    padding-inline: 0 12px;
+    margin-top: -12px;
+
+    [data-dir="rtl"] & {
+      margin-top: -14px;
+    }
+  }
+
+  :global(.item-file-exst) {
+    color: variables.$gray;
+  }
+
+  @include mixins.tablet-and-below {
+    :global(.row-main-container-wrapper) {
+      display: flex;
+      justify-content: space-between;
+      max-width: inherit;
+    }
+
+    :global(.badges) {
+      flex-direction: row-reverse;
+    }
+
+    :global(.tablet-badge) {
+      margin-top: 5px;
+    }
+
+    :global(.tablet-edit),
+    :global(.can-convert) {
+      margin-top: 6px;
+      margin-inline-end: 24px;
+    }
+
+    :global(.badge-version) {
+      margin-inline-end: 22px;
+    }
+
+    :global(.new-items) {
+      min-width: 16px;
+      margin-block: 5px 0;
+      margin-inline: 0 24px;
+    }
+  }
+
+  @include mixins.mobile {
+    :global(.row-main-container-wrapper) {
+      justify-content: flex-start;
+    }
+
+    :global(.additional-badges) {
+      margin-top: 0;
+    }
+
+    :global(.tablet-edit),
+    :global(.new-items),
+    :global(.tablet-badge) {
+      margin: 0;
+    }
+
+    :global(.can-convert) {
+      margin: 0 1px;
+    }
+
+    :global(.row-content-link) {
+      padding: 12px 0 0;
+    }
+  }
 }

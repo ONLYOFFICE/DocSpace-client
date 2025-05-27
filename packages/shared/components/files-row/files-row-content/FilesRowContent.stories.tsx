@@ -24,8 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
+
+import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
+
+import { Link } from "../../link";
+
 import { FilesRowContent } from ".";
+import { IconSizeType } from "../../../utils";
+import { IconButton } from "../../icon-button";
+
+const MainContent = (
+  <Link>
+    File name <span className="item-file-exst">.exst</span>
+  </Link>
+);
+
+const MainIcons = (
+  <IconButton
+    iconName={LinkReactSvgUrl}
+    size={IconSizeType.small}
+    hoverColor="accent"
+  />
+);
+
+const SideElement = <span className="row_update-text">01/01/1970 00:00</span>;
 
 const meta = {
   title: "Components/FilesRow/FilesRowContent",
@@ -33,9 +57,26 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: "FilesRowContent component",
+        component:
+          "FilesRowContent component for displaying file information and badges within a row layout",
       },
     },
+  },
+  argTypes: {
+    disableSideInfo: { control: "boolean" },
+    sideColor: { control: "color" },
+
+    // Disabled controls
+    children: { table: { disable: true } },
+    className: { table: { disable: true } },
+    id: { table: { disable: true } },
+    onClick: { table: { disable: true } },
+    style: { table: { disable: true } },
+    convertSideInfo: { table: { disable: true } },
+    sectionWidth: { table: { disable: true } },
+  },
+  args: {
+    sectionWidth: 100,
   },
 } satisfies Meta<typeof FilesRowContent>;
 
@@ -43,5 +84,21 @@ type Story = StoryObj<typeof FilesRowContent>;
 export default meta;
 
 export const Default: Story = {
-  args: {},
+  args: {
+    children: [MainContent, MainIcons, SideElement],
+  },
+};
+
+export const WithoutSideInfo: Story = {
+  args: {
+    disableSideInfo: true,
+    children: [MainContent, MainIcons, SideElement],
+  },
+};
+
+export const WithCustomSideColor: Story = {
+  args: {
+    sideColor: "#2DA7DB",
+    children: [MainContent, MainIcons, SideElement],
+  },
 };

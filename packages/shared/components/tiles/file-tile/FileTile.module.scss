@@ -43,7 +43,7 @@
   box-sizing: border-box;
   position: relative;
 
-  height: 220px;
+  height: 222px;
 
   background: var(--tile-background-color);
   border: var(--tile-border);
@@ -60,6 +60,29 @@
       a {
         text-decoration: var(--link-hover-page-text-decoration);
       }
+    }
+  }
+
+  &:hover:not(.isDragging),
+  &:hover:not(.isEdit) {
+    :global(.badges) :global(.badge) {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  &:not(:hover) {
+    :global(.badge) {
+      opacity: 0;
+      transition: opacity 0.1s;
+      pointer-events: none;
+    }
+  }
+
+  &.isTouchDevice {
+    :global(.badge) {
+      opacity: 1;
+      pointer-events: auto;
     }
   }
 
@@ -109,7 +132,7 @@
         justify-content: center;
         padding: 8px;
         background: var(--tile-background-badge-color);
-        border-radius: 4px;
+        border-radius: 3px;
         box-shadow: var(--tile-badge-shadow);
       }
     }
@@ -123,6 +146,12 @@
       grid-template-columns: 32px;
       grid-template-rows: repeat(3, 32px);
       grid-gap: 4px;
+
+      :global(.badge.file-locked),
+      :global(.badge.link-shared) {
+        opacity: 1;
+        pointer-events: auto;
+      }
     }
   }
 
@@ -224,6 +253,9 @@
 
       font-size: var(--tile-font-size);
       line-height: var(--tile-line-height);
+
+      text-underline-offset: 2px;
+      text-decoration-thickness: 1px;
     }
 
     .badges {
@@ -309,13 +341,11 @@
   .fileTileBottom {
     @extend .flexBoxStyles;
 
-    border-top: 1px solid transparent;
-
     background: var(--tile-background-color);
     border-radius: 0 0 12px 12px;
 
     padding: 16px 0;
-    height: 62px;
+    height: 64px;
     box-sizing: border-box;
 
     &.isHighlight {

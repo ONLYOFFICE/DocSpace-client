@@ -41,7 +41,7 @@ import { Link, LinkType } from "@docspace/shared/components/link";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 import classNames from "classnames";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
-import { isMobile } from "@docspace/shared/utils";
+import { isMobile, isTablet } from "@docspace/shared/utils";
 
 import { FileTileProps } from "./FileTile.types";
 
@@ -235,6 +235,9 @@ const FileTile = ({
   const isImageOrMedia =
     item?.viewAccessibility?.ImageView || item?.viewAccessibility?.MediaView;
 
+  const isTouchDevice =
+    "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
   const fileTileClassNames = classNames(styles.fileTile, {
     [styles.isBlocked]: isBlockingOperation,
     [styles.showHotkeyBorder]: showHotkeyBorder,
@@ -242,6 +245,7 @@ const FileTile = ({
     [styles.isActive]: isActive,
     [styles.checked]: checked,
     [styles.isEdit]: isEdit,
+    [styles.isTouchDevice]: isTouchDevice || isMobile() || isTablet(),
   });
 
   const iconClassNames = classNames(styles.icon, {
@@ -265,8 +269,6 @@ const FileTile = ({
   const fileTileBottomClassNames = classNames(styles.fileTileBottom, {
     [styles.isHighlight]: isHighlight,
   });
-
-  console.log("badges", badges);
 
   return (
     <div

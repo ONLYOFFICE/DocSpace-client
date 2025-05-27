@@ -153,7 +153,6 @@ import("./logger.mjs").then(({ logger }) => {
       webpackBuildWorker: false,
       optimizePackageImports: [
         "lucide-react",
-        "date-fns",
         "lodash-es",
         "ramda",
         "antd",

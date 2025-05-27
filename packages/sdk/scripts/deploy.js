@@ -50,8 +50,6 @@ const rootNodeModulesPath = path.join(
 );
 
 const libsToCopy = [
-  "date-fns",
-  "@serdnam",
   "nconf",
   "async",
   "y18n",

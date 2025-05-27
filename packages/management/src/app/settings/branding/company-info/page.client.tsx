@@ -49,6 +49,8 @@ import {
   getIsCustomizationAvailable,
   getIsSettingsPaid,
 } from "@/lib";
+import { getSettings } from "@/lib/actions";
+import { TSettings } from "@docspace/shared/api/settings/types";
 
 export const CompanyInfoPage = ({
   portals,
@@ -77,6 +79,7 @@ export const CompanyInfoPage = ({
   const pathname = usePathname();
 
   const [companyData, setCompanyData] = useState(companyInfoSettingsData);
+  const [showAbout, setShowAbout] = useState(displayAbout);
   const [isLoading, startTransition] = useTransition();
 
   const isCustomizationAvailable = getIsCustomizationAvailable(quota);
@@ -90,6 +93,13 @@ export const CompanyInfoPage = ({
     deviceType: currentDeviceType,
     pathname: pathname,
   });
+
+  const getCompanyData = async () => {
+    const companyData = await getCompanyInfoSettings();
+    const settings = (await getSettings()) as TSettings;
+    setShowAbout(settings.displayAbout);
+    setCompanyData(companyData);
+  };
 
   const onSave = async (
     address: string,
@@ -109,8 +119,7 @@ export const CompanyInfoPage = ({
           site,
           hideAbout,
         );
-        const companyData = await getCompanyInfoSettings();
-        setCompanyData(companyData);
+        await getCompanyData();
         toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       } catch (error) {
         toastr.error(error!);
@@ -122,8 +131,7 @@ export const CompanyInfoPage = ({
     startTransition(async () => {
       try {
         await restoreCompanyInfoSettings();
-        const companyData = await getCompanyInfoSettings();
-        setCompanyData(companyData);
+        await getCompanyData();
         toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       } catch (error) {
         toastr.error(error!);
@@ -133,7 +141,7 @@ export const CompanyInfoPage = ({
 
   return (
     <CompanyInfo
-      displayAbout={displayAbout}
+      displayAbout={showAbout}
       isBrandingAvailable={isBrandingAvailable}
       isSettingPaid={isSettingPaid}
       companySettings={companyData}

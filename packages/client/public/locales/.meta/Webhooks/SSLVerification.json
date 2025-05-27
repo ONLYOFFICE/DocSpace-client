@@ -3,7 +3,7 @@
   "content": "SSL verification",
   "content_en_sha1_hash": "2450230a66301a4510305fe23394616284bb507b",
   "created_at": "2025-05-19T21:30:49.844Z",
-  "updated_at": "2025-05-21T00:55:04.334Z",
+  "updated_at": "2025-05-24T02:09:07.463Z",
   "comment": {
     "text": "The \"SSL Verification\" translation key is used to display a confirmation message when verifying an SSL connection. In the PortalSettings page, this translation appears in a UI element related to developer tools, where it likely informs users about the security validation process for webhooks.",
     "is_auto": true,

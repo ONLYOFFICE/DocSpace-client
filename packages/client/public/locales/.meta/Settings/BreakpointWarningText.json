@@ -3,7 +3,7 @@
   "content": "This section is only available in the desktop version",
   "content_en_sha1_hash": "bfb490d729b54b57f73cdf410786c000e9c8e004",
   "created_at": "2025-05-19T21:30:50.805Z",
-  "updated_at": "2025-05-21T04:56:44.379Z",
+  "updated_at": "2025-05-24T05:40:38.791Z",
   "comment": {
     "text": "This translation key is used to display a warning message indicating that certain content is only available in the desktop version. It is displayed on a component (BreakpointWarning) when specific conditions are met, such as being in a small window or having mobile availability disabled.",
     "is_auto": true,
@@ -30,7 +30,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'هذا القسم متاح فقط في إصدار أجهزة الحاسوب' is a literal translation and while understandable, it lacks the natural flow of Arabic. It's a bit clunky and doesn't convey the intended meaning as smoothly as it could.",
+          "description": "The translation \"هذا القسم متاح فقط في إصدار أجهزة الحاسوب\" is a literal translation and could be improved for natural flow in Arabic. While technically correct, it's a bit clunky.",
           "suggestion": "هذا القسم متوفر فقط في تطبيق سطح المكتب."
         }
       ],
@@ -47,9 +47,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Този раздел е наличен само в десктоп версия' is a literal translation that isn't as natural in Bulgarian. While understandable, it's not the most fluent way to convey the meaning.",
-          "suggestion": "Този раздел е достъпен само в настолната версия."
+          "type": "formatting",
+          "description": "The term 'десктоп' is an anglicism and while commonly understood, a more natural Bulgarian equivalent would be preferable.",
+          "suggestion": "Този раздел е наличен само в настолна версия"
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Այս բաժինը հասանելի է միայն աշխատասեղանի տարբերակով\" is a literal translation that doesn't quite convey the intended meaning. It translates to 'This section is available only with the desktop version' which sounds awkward. A more natural Armenian translation would better convey the meaning of 'This feature is only available on the desktop version'.",
-          "suggestion": "Այս հնարավորությունը հասանելի է միայն աշխատասեղանի տարբերակում:"
+          "description": "The translation 'Այս բաժինը հասանելի է միայն աշխատասեղանի տարբերակով' is a literal translation that doesn't fully convey the meaning of 'This section is only available in the desktop version.' A more natural Armenian translation would be something like 'This section is only available on the desktop version' or 'This section can only be used on the desktop version'.",
+          "suggestion": "Consider alternative translations such as 'Այս բաժինը հասանելի է միայն համակարգչային տարբերակով' or 'Այս բաժինը կարող է օգտագործվել միայն համակարգչային տարբերակով։'"
         }
       ],
       "approved_at": null
@@ -123,7 +123,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ພາກສ່ວນນີ້ມີຢູ່ໃນສະບັບ desktop ເທົ່ານັ້ນ' is a literal translation and doesn't flow naturally in Lao. While technically correct, it sounds awkward. A more natural phrasing would convey the meaning that the feature is not available on mobile devices.",
+          "suggestion": "ພາກສ່ວນນີ້ໃຊ້ໄດ້ໃນສະບັບຄອມພິວເຕີ້ເທົ່ານັ້ນ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -144,7 +150,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Dana sekcja jest dostępna wyłącznie w wersji na komputery stacjonarne' while understandable, is not the most natural or idiomatic Polish. 'Dana' is archaic and not commonly used in this context. It translates to 'given' or 'this' but sounds awkward here.",
+          "description": "While the translation is understandable, 'Dana sekcja' is not the most natural phrasing in Polish. 'Ta sekcja' would be more common and idiomatic.",
           "suggestion": "Ta sekcja jest dostępna wyłącznie w wersji na komputery stacjonarne"
         }
       ],
@@ -180,13 +186,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'මෙම කොටස වැඩතල අනුවාදයේ පමණක් තිබේ' doesn't accurately convey the meaning of 'This section is only available in the desktop version'. A more accurate translation would emphasize 'only' or 'exclusively'.",
-          "suggestion": "මෙම කොටස පරිගණක අනුවාදයට පමණක් అందుబాటులో ఉంది (This section is only available for the computer version)."
+          "description": "The translation 'මෙම කොටස වැඩතල අනුවාදයේ පමණක් තිබේ' doesn't accurately convey the meaning of 'This section is only available in the desktop version.' It translates to something like 'This part is only in the desktop version.' The word 'only' is poorly represented and doesn't express restriction.",
+          "suggestion": "මෙම කොටස Desktop අනුවාදය සඳහා පමණක් ලබා ගත හැකිය."
         },
         {
           "type": "grammar",
-          "description": "The phrasing ' වැඩතල අනුවාදයේ පමණක් තිබේ' is slightly awkward in Sinhala. While grammatically understandable, it could be improved for natural flow.",
-          "suggestion": "මෙම කොටස පරිගණක අනුවාදයට පමණක් అందుబాటులో ఉంది."
+          "description": "The use of 'වල' after ' අනුවාදය' is slightly awkward and less natural. While not strictly incorrect, it makes the sentence feel less fluid.",
+          "suggestion": "මෙම කොටස Desktop අනුවාදය පමණක් ලබා ගත හැකිය."
         }
       ],
       "approved_at": null
@@ -239,7 +245,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation includes the redundant phrase '版本'. It's implied by '桌面端'.",
+          "description": "The translation includes '版本' twice. It's redundant and makes the sentence slightly awkward.",
           "suggestion": "该部分仅可在桌面端使用"
         }
       ],

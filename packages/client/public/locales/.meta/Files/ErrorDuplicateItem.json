@@ -3,7 +3,7 @@
   "content": "Error duplicating <2>{{title}}</2>",
   "content_en_sha1_hash": "5de17ae7d7ba73e91d2801acc193fb7840a84318",
   "created_at": "2025-05-19T21:30:55.618Z",
-  "updated_at": "2025-05-20T09:39:48.241Z",
+  "updated_at": "2025-05-24T12:13:43.253Z",
   "comment": {
     "text": "This translation key is used to display an error message when a duplicate item is attempted to be duplicated. The error message indicates that a duplicate item has already been found, likely in a file management or data storage context. It appears as part of an alert or notification component.",
     "is_auto": true,
@@ -27,13 +27,35 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'حدث خطأ أثناء تكرار' is too literal and doesn't convey the natural feel of an error message. A more natural phrasing would be something like 'فشل تكرار' or 'لم يتم تكرار'. The literal translation implies an attempt was made and failed, but 'Error duplicating' often means the process didn't even start.",
+          "suggestion": "فشل تكرار <2>{{title}}</2>"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'أثناء' (during) is unnecessary and adds complexity to the sentence. It's not needed for conveying the meaning of duplication failure.",
+          "suggestion": "فشل تكرار <2>{{title}}</2>"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Error duplicating' is not accurately translated. 'Kopyalama xətası' literally translates to 'copying error', which doesn't convey the specific action of duplicating.",
+          "suggestion": "Duplikatını çəkmə xətası"
+        },
+        {
+          "type": "formatting",
+          "description": "The original English text has a closing tag `</2>`. The Azerbaijani translation also includes this tag. It's unclear if this is intentional and necessary. If it is just for stylistic purposes, it is appropriate to leave as is. Otherwise, it should be removed from the translation.",
+          "suggestion": "If unnecessary, remove the closing tag `</2>`."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -51,7 +73,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Fehler beim Duplizieren von <2>{{title}}</2>' is technically correct but could be more natural-sounding in German. 'Duplizieren' is correct, but a more common phrasing might be 'Beim Kopiieren...'.",
+          "suggestion": "Fehler beim Kopiieren von <2>{{title}}</2>"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -75,43 +103,100 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Erreur de duplication' is not the most natural or accurate rendering of 'Error duplicating'. A better translation would be 'Impossible de dupliquer' or 'Erreur lors de la duplication'. 'Erreur de duplication' sounds somewhat literal and awkward in French.",
+          "suggestion": "Impossible de dupliquer"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"<2>{{title}}</2>ում կրկնօրինակման սխալ\" literally translates to \"Error of duplication in <2>{{title}}</2>\". It doesn't convey the meaning of 'Error duplicating <2>{{title}}</2>' which implies the duplication process failed while attempting to duplicate the title. A more accurate translation would be something like \"Սխալ <2>{{title}}</2> կրկնօրինակելիս\" (Error while duplicating <2>{{title}}</2>) or \"<2>{{title}}</2> կրկնօրինակելուց սխալ առաջացավ\" (<2>{{title}}</2> duplication error occurred).",
+          "suggestion": "<2>{{title}}</2> կրկնօրինակելիս սխալ"
+        },
+        {
+          "type": "formatting",
+          "description": "The placement of the tag <2> and </2> feels awkward within the Armenian sentence and disrupts the flow. Consider if the placement is necessary, or if it should be modified for better readability.",
+          "suggestion": "Review placement of <2> and </2> tags for improved readability. The tags may not even be necessary depending on the UI context."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Errore nella duplicazione di <2>{{title}}</2>' is a literal translation of 'Error duplicating' which isn't the most natural way to express this in Italian. A more natural phrasing would be something like 'Impossibile duplicare' or 'Errore durante la duplicazione di'.",
+          "suggestion": "Impossibile duplicare <2>{{title}}</2>"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"<2>{{title}}</2> の複製中にエラーが発生しました \" doesn't directly convey 'Error duplicating'. It translates to 'An error occurred during the duplication of <2>{{title}}</2>'. While understandable, it’s less direct and less natural for a user-facing error message.",
+          "suggestion": "<2>{{title}}</2> の複製に失敗しました"
+        },
+        {
+          "type": "formatting",
+          "description": "The Japanese translation uses the same tags (<2> and </2>) as the English, which may not be necessary or preferred in the Japanese context. Consider removing or adapting them based on the application's UI requirements.",
+          "suggestion": "Remove the <2> and </2> tags if they are not required for UI formatting in Japanese."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"<2>{{title}}</2>을/를 복제하는 중 오류가 발생했습니다\" is a bit too verbose and formal for an error message. It literally translates to 'An error occurred while duplicating <2>{{title}}</2>'. It's not entirely wrong, but less direct and natural.",
+          "suggestion": "<2>{{title}}</2> 복제 오류"
+        },
+        {
+          "type": "formatting",
+          "description": "The \"을/를\" particle is a grammatical marker that indicates the function of a noun or pronoun in a sentence.  In this case, it's unnecessary and introduces a slight awkwardness. It signifies choice between two particles, which isn't needed here.",
+          "suggestion": "Remove '을/를'. The suggestion above incorporates this change."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຜິດพลาดໃນການກວດຖອນ' doesn't accurately convey the meaning of 'Error duplicating'. 'ກວດຖອນ' means 'review' or 'check', not 'duplicate'. A more accurate translation would involve words related to copying or duplication.",
+          "suggestion": "ຜິດพลาดໃນການຜະລິດສໍາເນົາ <2>{{title}}</2>"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Kļūda, dublējot' is a literal translation of 'Error duplicating'. A more natural-sounding translation in Latvian would be something like 'Kļūda dublējot' or 'Radās kļūda dublējot'. The comma after 'Kļūda' isn't necessary and makes the sentence slightly awkward.",
+          "suggestion": "Kļūda dublējot"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,7 +226,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Eroare la duplicare a <2>{{title}}</2>' is not the most natural or accurate translation of 'Error duplicating <2>{{title}}</2>'. The preposition 'a' is not necessary and makes the sentence sound awkward.",
+          "suggestion": "Eroare la duplicarea <2>{{title}}</2>"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +244,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ප්‍රතිපිටු කිරීමේදී பிழை ஏற்பட்டது' literally translates to 'An error occurred while duplicating'. While understandable, it's a bit verbose and not as concise as the English original. A more natural phrasing would be closer to 'Duplicate error' or 'Error during duplication'.",
+          "suggestion": "Error duplicating {{title}}"
+        },
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation contains the correct XML tags <2> and </2>, which are good, but could be improved to align more closely with the original. Ensure that the formatting maintains the intended structure, preserving the XML tags and their placement.",
+          "suggestion": "Maintain exact XML structure: <2>{{title}}</2> ප්‍රතිපිටු කිරීමේදී பிழை ஏற்பட்டது."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +273,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'дуплирању' is spelled correctly, but its usage might be questionable in this context. 'Дупликација' might be more accurate.",
+          "suggestion": "Consider 'Грешка при дупликацији <2>{{title}}</2>"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -183,7 +291,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"<2>{{title}}</2> çoğaltılırken hata oluştu\" is not the most natural way to express \"Error duplicating <2>{{title}}</2>\". A more accurate and idiomatic translation would be something like \"<2>{{title}}</2>'nin kopyalanmasında hata oluştu\" or \"<2>{{title}}</2>'yi kopyalarken hata oluştu\". The current translation awkwardly places the error at the action of duplicating, rather than stating that the duplication *of* the item resulted in an error.",
+          "suggestion": "<2>{{title}}</2>'nin kopyalanmasında hata oluştu"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -201,7 +315,18 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"创建<2>{{title}}</2>副本时出错\" doesn't accurately convey the meaning of 'Error duplicating'.  '创建副本' means 'create a copy', while the English implies an error occurred during the duplication process.  A better translation would emphasize the error itself.",
+          "suggestion": "复制<2>{{title}}</2>时发生错误"
+        },
+        {
+          "type": "formatting",
+          "description": "The formatting tags (<2> and </2>) are preserved in the translation, which may not be desirable depending on the context of use. They should ideally be handled in the application code rather than directly translated.",
+          "suggestion": "Consider removing the <2> and </2> tags if they are meant to be handled by the application."
+        }
+      ],
       "approved_at": null
     }
   }

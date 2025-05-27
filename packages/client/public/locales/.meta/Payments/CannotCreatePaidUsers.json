@@ -3,7 +3,7 @@
   "content": "Paid users cannot be added",
   "content_en_sha1_hash": "a9bdc82cc4e225814ed08eff124d82dfe042f64c",
   "created_at": "2025-05-19T21:30:53.670Z",
-  "updated_at": "2025-05-21T06:42:53.480Z",
+  "updated_at": "2025-05-24T06:56:59.493Z",
   "comment": {
     "text": "This translation key is used to display an error message when trying to create a paid user. It appears in a quota warning dialog and informs users that they cannot add paid users, explaining that new users will exceed the member limit.",
     "is_auto": true,
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Imposibil de adăugat utilizatori cu plată' is a literal translation but lacks the nuance of 'Paid users cannot be added'. It sounds slightly awkward in Romanian.",
-          "suggestion": "Utilizatori plătitori nu pot fi adăugați."
+          "description": "The translation 'Imposibil de adăugat utilizatori cu plată' is not the most natural Romanian phrasing for 'Paid users cannot be added'. It's literal and a bit clunky.",
+          "suggestion": "Utilizatori cu plată nu pot fi adăugați."
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ගෙවුම් කළ පරිශීලකයින් එකතු කළ නොහැකි' is a literal translation but doesn't quite capture the meaning of \"Paid users cannot be added\" in a natural way in Sinhala. It's a bit clunky.",
-          "suggestion": "Consider a more natural phrasing like 'ගෙවුම් කරන ලද පරිශීලකයින් එක්කරන්න බැහැ' (Gevum karana lada parashilakayin ekkaranna bahe) which translates to 'You cannot add paid users' or 'Paid users cannot be added' in a more idiomatic way."
+          "description": "The translation 'ගෙවුම් කළ පරිශීලකයින් එකතු කළ නොහැකි' is a literal translation but doesn't quite convey the intended meaning. It translates to 'Paid users cannot be added.' While technically correct, it's awkward and less natural in Sinhala. A more natural phrasing would focus on the inability to create paid users.",
+          "suggestion": "Consider 'ගෙවුම් පරිශීලකයින් නිර්මාණය කළ නොහැක' (Gevum parishilakin nirmanaya kala nokahaka) which translates to 'Paid users cannot be created.'"
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation uses the word \"Плаћени\" which translates to 'Paid' as an adjective, but in this context, it should be 'Paying' or 'Those who have paid'. It implies the users are *already* paid, rather than they are being made paid.",
-          "suggestion": "Плаћени корисници не могу бити креирани"
+          "description": "The Serbian (Cyrillic) translation 'Плаћени корисници не могу бити додати' is a literal translation that doesn't flow naturally in Serbian. It's grammatically correct, but sounds awkward.",
+          "suggestion": "Повраћани корисници не могу бити додани."
         }
       ],
       "approved_at": null
@@ -198,13 +198,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Plaćeni korisnici ne mogu biti dodati' is a literal translation and doesn't convey the intended meaning. 'Cannot be added' implies a restriction or inability to create paid users. A more natural and accurate translation would reflect that.",
-          "suggestion": "Plaćeni korisnici ne mogu biti kreirani."
+          "description": "The translation \"Plaćeni korisnici ne mogu biti dodati\" is a literal translation that doesn't flow naturally in Serbian. It implies adding them to a system rather than the inability to create them.",
+          "suggestion": "Plaćene korisnike nije moguće kreirati"
         },
         {
-          "type": "grammatical",
-          "description": "While grammatically correct, 'biti dodati' is a passive construction that sounds awkward in Serbian.  Active voice is preferred.",
-          "suggestion": "Plaćeni korisnici ne mogu biti dodati – although the suggested replacement above is even better."
+          "type": "grammar",
+          "description": "The passive voice 'ne mogu biti dodati' is less common and less clear than an active voice construction in Serbian in this context.",
+          "suggestion": "Plaćene korisnike nije moguće kreirati"
         }
       ],
       "approved_at": null

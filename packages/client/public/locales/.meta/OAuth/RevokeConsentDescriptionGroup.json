@@ -3,7 +3,7 @@
   "content": "Once you revoke the consent to use the {{organizationName}} {{productName}} auth data in the services, {{organizationName}} {{productName}} will automatically stop logging. Your accounts will not be deleted.",
   "content_en_sha1_hash": "151a3ff33cf21b977abeb11b5aecd278537ac65a",
   "created_at": "2025-05-19T21:30:54.013Z",
-  "updated_at": "2025-05-21T06:59:07.311Z",
+  "updated_at": "2025-05-24T07:13:11.584Z",
   "comment": {
     "text": "This translation key is used for the description displayed when revoking consent to use {{organizationName}} {{productName}} auth data. It informs users that their accounts will not be deleted after revocation and explains what happens next. This appears in a dialog related to revoking OAuth permissions.",
     "is_auto": true,
@@ -30,13 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"تفويض\" (tafweedh) translates to 'delegation' or 'authorization,' which isn't the most accurate for 'consent' in this context. A more appropriate term would be 'موافقة' (muwafaqah) which directly translates to consent.",
-          "suggestion": "بمجرد إلغاء الموافقة لاستخدام بيانات {{organizationName}} {{productName}} في الخدمات..."
+          "description": "The term 'تفويض' (tafweedh) for 'auth data' is not the most accurate or common translation in this context. A more suitable term might be 'بيانات الوصول' (bayanat al-wusool) or 'بيانات المصادقة' (bayanat al-musadaqa).",
+          "suggestion": "بمجرد إلغاء الموافقة لاستخدام بيانات الوصول/المصادقة {{organizationName}}  {{productName}} في الخدمات، سيتوقف {{organizationName}} {{productName}} تلقائيًا عن التسجيل. لن يتم حذف حساباتك."
         },
         {
           "type": "formatting",
-          "description": "The variable names {{organizationName}} and {{productName}} are correctly placed but their consistency in both English and Arabic should be ensured throughout all translations to maintain clarity.",
-          "suggestion": "Maintain consistent variable naming conventions across all translations."
+          "description": "The use of variable placeholders '{{organizationName}} {{productName}}' appears consistently in both English and Arabic. While technically correct, ensuring consistent formatting and potential for future localization adjustments within the Arabic translation is important. It would be ideal if the placeholder style matched other internal documentation.",
+          "suggestion": "Maintain consistent placeholder format based on internal documentation standards."
         }
       ],
       "approved_at": null
@@ -47,13 +47,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"automatically stop logging\" is translated as \"avtomatik olaraq girişi dayandıracaq\".  'Giriş' translates to 'access' or 'entry', which doesn't accurately convey the intended meaning of 'logging' (data recording).",
-          "suggestion": "Xidmətlərdə {{organizationName}} {{productName}} autentifikasiya məlumatından istifadə icazəsini ləğv etdikdə, {{organizationName}} {{productName}} avtomatik olaraq qeydləri dayandıracaq."
-        },
-        {
-          "type": "formatting",
-          "description": "The word 'ləğv' translates to 'revoke'. It should be considered whether a less formal word would be better suited for a user-facing message, depending on the target audience.",
-          "suggestion": "Consider using a less formal word for 'ləğv', like 'etmə' or 'saxlama', depending on the desired tone."
+          "description": "The English phrase 'stop logging' is translated as 'girişi dayandıracaq', which literally means 'will stop entry'. A more accurate translation for 'logging' in this context would be 'qeydiyyatı dayandıracaq' or 'ölçümleri dayandıracaq'.",
+          "suggestion": "Xidmətlərdə {{organizationName}} {{productName}} autentifikasiya məlumatından istifadə icazəsini ləğv etdikdə, {{organizationName}} {{productName}} avtomatik olaraq qeydiyyatı dayandıracaq. Hesablarınız silinməyəcək."
         }
       ],
       "approved_at": null
@@ -64,8 +59,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'profiles' (профили) is a less precise translation of 'accounts' (accounts). While not incorrect, 'accounts' would be more accurate in this context, as it refers to user accounts within the services.",
-          "suggestion": "След като отмените съгласието за използване на данните за удостоверяване на {{organizationName}} {{productName}} в услугите, {{organizationName}} {{productName}} автоматично ще спре записването. Вашите акаунти няма да бъдат изтрити."
+          "description": "The term 'profiles' (профили) is a less accurate translation of 'accounts' (accounts) in this context. While not entirely wrong, 'accounts' is more precise and conveys the intended meaning of user accounts accessing services.",
+          "suggestion": "Вашите акаунти няма да бъдат изтрити."
         }
       ],
       "approved_at": null
@@ -76,8 +71,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation of \"logging\" is not accurately conveyed by \"přihlašovat\". \"Přihlašovat\" implies logging in, whereas the English refers to data logging or recording. A more appropriate translation would be something along the lines of \"záznamy\" or \"ukládání dat\".",
-          "suggestion": "Po odvolání souhlasu s použitím {{organizationName}} {{productName}} autorizačních údajů ve službách, {{organizationName}} {{productName}} automaticky přestane *ukládat data*."
+          "description": "The word 'přihlašovat' (in 'automaticky přestane přihlašovat') doesn't accurately convey 'logging' in the context of data usage. It translates more literally to 'log in' or 'register'. A better translation would be 'zaznamenávat'.",
+          "suggestion": "Po odvolání souhlasu s použitím {{organizationName}} {{productName}} autorizačních údajů ve službách, {{organizationName}} {{productName}} automaticky přestane zaznamenávat."
         }
       ],
       "approved_at": null
@@ -88,8 +83,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "“Anmeldung stoppen” is an incorrect translation of \"logging\". \"Anmeldung\" means login/registration. A more accurate translation would be something like \"Datenprotokollierung\" (data logging) or \"Protokollierung\" (logging).",
-          "suggestion": "Sobald Sie die Zustimmung zur Nutzung der Auth-Daten von {{organizationName}} {{productName}} in den Diensten widerrufen, wird {{organizationName}} {{productName}} automatisch die Datenprotokollierung stoppen. Alternatively: Sobald Sie die Zustimmung zur Nutzung der Auth-Daten von {{organizationName}} {{productName}} in den Diensten widerrufen, wird {{organizationName}} {{productName}} automatisch die Protokollierung stoppen."
+          "description": "The word 'Anmeldung' (login) is used instead of 'Protokollierung' (logging). The English text specifically refers to logging, not login.",
+          "suggestion": "Sobald Sie die Zustimmung zur Nutzung der Auth-Daten von {{organizationName}} {{productName}} in den Diensten widerrufen, wird {{organizationName}} {{productName}} automatisch die Protokollierung stoppen."
         }
       ],
       "approved_at": null
@@ -100,13 +95,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'auth data' is not accurately translated. 'Auth data' refers to authorization data, which grants access. A more appropriate translation would be 'δεδομένα εξουσιοδότησης' (data of authorization).",
-          "suggestion": "Μόλις ανακαλέσετε τη συγκατάθεση για τη χρήση των δεδομένων εξουσιοδότησης του {{productName}} της {{organizationName}} στις υπηρεσίες..."
+          "description": "The phrase 'auth data' is translated as 'δεδομένων εξουσιοδότησης'. While technically correct, a more natural translation for 'auth data' in this context would be 'δεδομένων σύνδεσης' or 'δεδομένων εξουσιοδότησης πρόσβασης'.",
+          "suggestion": "Μόλις ανακαλέσετε τη συγκατάθεση για τη χρήση των δεδομένων σύνδεσης του {{productName}} της {{organizationName}} στις υπηρεσίες..."
         },
         {
           "type": "formatting",
-          "description": "The repetition of '{{productName}} της {{organizationName}}' is clunky. While technically correct because it mirrors the English, it sounds unnatural in Greek. Consider rephrasing to improve readability.",
-          "suggestion": "Μόλις ανακαλέσετε τη συγκατάθεση για τη χρήση των δεδομένων εξουσιοδότησης του {{productName}} από την {{organizationName}} στις υπηρεσίες..."
+          "description": "The repetition of '{{productName}} της {{organizationName}}' makes the sentence clunky. It might be better to rephrase to avoid the repetition.",
+          "suggestion": "Μόλις ανακαλέσετε τη συγκατάθεση για τη χρήση των δεδομένων εξουσιοδότησης του {{productName}} της {{organizationName}} στις υπηρεσίες, το {{productName}} θα σταματήσει αυτόματα την καταγραφή..."
         }
       ],
       "approved_at": null
@@ -117,8 +112,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'will automatically stop logging' is an awkward translation of 'will automatically stop logging.' A more natural translation would be 'dejará de registrarse automáticamente' or 'dejará de guardar datos automáticamente'.",
-          "suggestion": "dejará de registrarse automáticamente"
+          "description": "The phrase 'dejará de iniciar sesión automáticamente' is an inaccurate translation of 'automatically stop logging'. 'Iniciar sesión' means 'to log in', while the English refers to the process of data logging. A more accurate translation would reflect the data logging process.",
+          "suggestion": "Una vez revocado el consentimiento para utilizar los datos de autenticación de {{organizationName}} {{productName}} en los servicios, {{organizationName}} {{productName}} dejará de registrar los datos automáticamente."
         }
       ],
       "approved_at": null
@@ -129,13 +124,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Your accounts will not be deleted' is a rather literal translation and could be improved for naturalness in Finnish. It sounds a little stiff.",
-          "suggestion": "Your accounts will not be deleted' could be rephrased as 'Tilisi eivät poistu' or 'Tilisi säilyvät'."
+          "description": "The Finnish translation \"lopettaa automaattisesti\" is not the most natural way to express 'automatically stop logging'. A better phrasing would emphasize the stopping of logging.",
+          "suggestion": "Jos peruutat suostumuksen käyttää {{organizationName}} {{productName}} todennustietoja palveluissa, {{organizationName}} {{productName}} lopettaa automaattisesti lokien keräämisen. (This translates to: If you revoke the consent to use {{organizationName}} {{productName}} authentication data in the services, {{organizationName}} {{productName}} will automatically stop collecting logs.)"
         },
         {
-          "type": "grammar",
-          "description": "The sentence '{{organizationName}} {{productName}} lopettaa automaattisesti' is grammatically correct but could be slightly improved for flow. While technically correct, adding 'kirjaamisen' clarifies what is stopping.",
-          "suggestion": "{{organizationName}} {{productName}} lopettaa automaattisesti kirjaamisen."
+          "type": "incorrect_translation",
+          "description": "The word 'Tilejäsi' is grammatically correct, but 'accounts' is generally translated to 'tilit' in this context, especially in a technical setting. 'Tilejäsi' is more informal.",
+          "suggestion": "Jos peruutat suostumuksen käyttää {{organizationName}} {{productName}} todennustietoja palveluissa, {{organizationName}} {{productName}} lopettaa automaattisesti lokien keräämisen. Tilejäsi ei poisteta. (Keep 'Tilejäsi' if the intended tone is informal; otherwise, use 'Tilisi ei poisteta.')"
         }
       ],
       "approved_at": null
@@ -146,8 +141,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"stop logging\" is translated as \"cessera automatiquement de se connecter\". While technically accurate, \"cessera automatiquement de se connecter\" implies a disconnection, whereas \"stop logging\" refers to stopping the recording of data. A more accurate translation would be \"cessera automatiquement d'enregistrer\".",
-          "suggestion": "cessera automatiquement d'enregistrer"
+          "description": "The English phrase 'logging' is translated as 'se connecter' (to connect). 'Logging' in this context refers to data recording, not connection establishment. A more appropriate translation would be 'enregistrer des données'.",
+          "suggestion": "Replace 'se connecter' with 'enregistrer des données'."
         }
       ],
       "approved_at": null
@@ -157,14 +152,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The sentence \"Երբ չեղարկեք ծառայություններում...\" is grammatically awkward. The verb conjugation is incorrect for the subject implied.",
-          "suggestion": "Երբ դուք չեղարկեք ծառայություններում..."
-        },
-        {
           "type": "formatting",
-          "description": "The placement of the commas and punctuation could be improved for better readability. The repetition of {{organizationName}} {{productName}} feels clunky.",
-          "suggestion": "Երբ դուք չեղարկեք ծառայություններում {{organizationName}} {{productName}} վավերացման տվյալների օգտագործման համաձայնությունը, {{organizationName}} {{productName}} ավտոմատ կերպով կդադարեցնի գրանցումը։ Ձեր հաշիվները չեն ջնջվի։"
+          "description": "The Armenian translation includes unnecessary repetition of '{{organizationName}} {{productName}}' multiple times. It reads awkwardly.",
+          "suggestion": "Consider rephrasing to avoid repetition. For example: 'Երբ չեղարկեք ծառայություններում {{organizationName}} {{productName}} վավերացման տվյալները օգտագործելու համաձայնությունը, {{organizationName}} կդադարեցնի գրանցումը: Ձեր հաշիվները չեն ջնջվի:' (This suggestion removes the redundant name after 'կդադարեցնի'). More context might be needed to make a perfectly natural-sounding alteration."
         }
       ],
       "approved_at": null
@@ -175,8 +165,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'registrare' is used for 'logging' which is not the best translation in this context. 'Registrare' can mean 'to register' or 'to record'.  A more appropriate translation for 'logging' would be 'tracciare' or 'monitorare'.",
-          "suggestion": "Una volta revocato il consenso all'uso del {{organizationName}} {{productName}} nei servizi, {{organizationName}} {{productName}} smetterà automaticamente di tracciare. OR Una volta revocato il consenso all'uso del {{organizationName}} {{productName}} nei servizi, {{organizationName}} {{productName}} smetterà automaticamente di monitorare."
+          "description": "The phrase 'auth data' is not accurately translated. 'auth data' refers to authorization data, and a more appropriate translation would be 'dati di autorizzazione'.",
+          "suggestion": "Una volta revocato il consenso all'uso dei dati di autorizzazione {{organizationName}} {{productName}} nei servizi..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'stop logging' is translated as 'smetterà automaticamente di registrare'. A more natural and accurate translation would be 'cesserà automaticamente di raccogliere dati'.",
+          "suggestion": "Una volta revocato il consenso all'uso dei dati di autorizzazione {{organizationName}} {{productName}} nei servizi, {{organizationName}} {{productName}} cesserà automaticamente di raccogliere dati."
         }
       ],
       "approved_at": null
@@ -193,13 +188,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"로그인하는 것을 중단합니다\" (log in) is inaccurate. The English text says that logging *stops*, not that the system stops letting users log in. The consent revocation should stop *logging* data.",
-          "suggestion": "서비스에서 {{organizationName}} {{productName}} 인증 데이터 사용에 대한 동의를 철회하면 {{organizationName}} {{productName}}에서 자동으로 데이터 로깅을 중단합니다."
+          "description": "The phrase \"로그인하는 것을 중단합니다\" (log in) doesn't directly correspond to \"logging\" in the English content. The English describes stopping the recording of data, not the ability to log in.",
+          "suggestion": "서비스에서 {{organizationName}} {{productName}} 인증 데이터를 사용하는 기능에 대한 동의 철회 시, {{organizationName}} {{productName}}에서 자동으로 데이터 로깅을 중단합니다."
         },
         {
           "type": "formatting",
-          "description": "The translation uses \"로그인하는 것을 중단합니다.\" which is a bit verbose and could be simplified. It's not a natural flow in Korean.",
-          "suggestion": "서비스에서 {{organizationName}} {{productName}} 인증 데이터 사용에 대한 동의를 철회하면 {{organizationName}} {{productName}}에서 데이터 로깅을 자동으로 중단합니다."
+          "description": "The translation uses a slightly different sentence structure compared to the English. Maintaining consistency in sentence flow would enhance readability.",
+          "suggestion": "서비스에서 {{organizationName}} {{productName}} 인증 데이터 사용에 대한 동의를 철회하면, {{organizationName}} {{productName}}에서 자동으로 데이터 로깅을 중단하며, 계정은 삭제되지 않습니다."
         }
       ],
       "approved_at": null
@@ -210,13 +205,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ຮັບຜົນຮັບການອະນຸຍາດ\" (rap phon rap anuyat) doesn't directly translate to \"consent to use.\" A more accurate translation would be something like \"ການຕົກລົງໃຫ້ອະນຸຍາດ” (kan tok ling hai anuyat) or simply “ການຕົກລົງ” (kan tok ling).",
-          "suggestion": "ເມື່ອທ່ານຍົກເລີກການຕົກລົງໃຫ້ອະນຸຍາດໃຊ້ຂໍ້ມູນ {{organizationName}} {{productName}} ຢູ່​ໃນ​ບໍ​ລິ​ການ​ຕ່າງໆ..."
+          "description": "The phrase \"ຮັບຜົນຮັບການອະນຸຍາດ\" (rob phon rob kan anuyat) is an awkward and potentially incorrect translation of \"consent to use\". A more natural translation would focus on giving permission or agreeing to use.",
+          "suggestion": "ເມື່ອທ່ານຍົກເລີກການອະນຸຍາດໃຫ້ໃຊ້ຂໍ້ມູນຂອງ {{organizationName}} {{productName}} ຢູ່​ໃນ​ບໍ​ລິ​ການ​ຕ່າງໆ"
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the use of the Lao word for \"use\" (ໃຊ້) after \"ຕົກລົງໃຫ້ອະນຸຍາດ\" makes it sound slightly awkward. It’s more natural to integrate it into the overall consent phrasing.",
-          "suggestion": "ເມື່ອທ່ານຍົກເລີກການຕົກລົງອະນຸຍາດການໃຊ້ຂໍ້ມູນ {{organizationName}} {{productName}} ຢູ່​ໃນ​ບໍ​ລິ​ການ​ຕ່າງໆ..."
+          "description": "The Lao translation maintains the English variable placeholders \"{{organizationName}} {{productName}}\". While not strictly an error, consider whether these placeholders will be correctly handled in the Lao context and if a more localized representation is appropriate.",
+          "suggestion": "Ideally, determine if these variables need localization and replace if necessary. Otherwise, ensure the rendering system correctly handles them."
         }
       ],
       "approved_at": null
@@ -233,13 +228,18 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The sentence structure is awkward and grammatically incorrect. The phrase \"Zodra u de toestemming voor het gebruik van...\" is overly verbose and cumbersome in Dutch.",
-          "suggestion": "Zodra u de toestemming intrekt voor het gebruik van de {{organizationName}} {{productName}} auth gegevens in de diensten, zal {{organizationName}} {{productName}} automatisch stoppen met loggen. Uw accounts worden niet verwijderd."
+          "description": "The sentence structure is awkward and could be improved for better readability. \"Zodra u de toestemming voor het gebruik van de {{organizationName}} {{productName}} auth gegevens in de diensten\" is a bit clunky.",
+          "suggestion": "Zodra u de toestemming intrekt voor het gebruik van {{organizationName}} {{productName}} auth gegevens in de diensten..."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'automatisch stoppen met loggen' is grammatically correct but sounds less formal and could be improved for a more professional tone.",
+          "suggestion": "stopt {{organizationName}} {{productName}} automatisch met het loggen."
         },
         {
           "type": "formatting",
-          "description": "The repetition of '{{organizationName}} {{productName}}' within the sentence makes it sound unnatural.  While technically correct to mirror the English, a more natural flow would benefit the Dutch version.",
-          "suggestion": "Zodra u de toestemming intrekt voor het gebruik van {{organizationName}} {{productName}} auth gegevens in de diensten, zal {{organizationName}} {{productName}} automatisch stoppen met loggen. Uw accounts worden niet verwijderd."
+          "description": "The repetition of '{{organizationName}} {{productName}}' feels redundant and could potentially be shortened if context allows.",
+          "suggestion": "Consider shortening to just '{{productName}}' or similar, depending on the overall context of the message."
         }
       ],
       "approved_at": null
@@ -250,13 +250,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The repetition of '{{productName}} {{organizationName}}' is awkward and doesn't match the English flow. The placement of organization and product is also reversed compared to the English.",
-          "suggestion": "Po wycofaniu zgody na użycie danych autoryzacji {{organizationName}} dla {{productName}} w usługach, {{organizationName}} {{productName}} automatycznie przestanie się logować."
+          "description": "The translation \"dla {{productName}} w usługach {{productName}} {{organizationName}}\" is awkward and doesn't accurately reflect the English \"to use the {{organizationName}} {{productName}} auth data in the services\". The repetition of {{productName}} is also incorrect.",
+          "suggestion": "Po wycofaniu zgody na użycie danych autoryzacji {{organizationName}} {{productName}} w usługach, {{organizationName}} {{productName}} automatycznie przestanie się logować."
         },
         {
           "type": "formatting",
-          "description": "The translation includes unnecessary repetition which leads to readability issues.",
-          "suggestion": "Consider restructuring to remove the repetition, maintaining clarity and natural flow. For example: 'Po wycofaniu zgody na użycie danych autoryzacji dla {{productName}} {{organizationName}} w usługach, {{organizationName}} przestanie automatycznie logować. Twoje konta nie zostaną usunięte.'"
+          "description": "The phrase \"w usługach\" (in the services) is placed awkwardly after \"danych autoryzacji\". It feels disjointed from the rest of the sentence.",
+          "suggestion": "Po wycofaniu zgody na użycie danych autoryzacji {{organizationName}} {{productName}} w usługach, {{organizationName}} {{productName}} automatycznie przestanie się logować."
         }
       ],
       "approved_at": null
@@ -273,13 +273,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'dados de autenticação' is redundant. 'Autenticação' already implies data.",
+          "description": "The phrase \"dados de autenticação da {{organizationName}} {{productName}} dados de autenticação\" is redundant. It repeats \"dados de autenticação\".",
           "suggestion": "Depois que você revogar o consentimento para usar os dados de autenticação da {{organizationName}} {{productName}} nos serviços, {{organizationName}} {{productName}} interromperá automaticamente o registro. Suas contas não serão excluídas."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The word 'registro' is a somewhat literal translation of 'logging.' A more natural phrasing might be preferred.",
-          "suggestion": "Depois que você revogar o consentimento para usar os dados de autenticação da {{organizationName}} {{productName}} nos serviços, {{organizationName}} {{productName}} interromperá automaticamente o acompanhamento. Suas contas não serão excluídas."
+          "type": "grammar",
+          "description": "The sentence structure 'Depois que você revogar...' could be slightly improved for flow. While grammatically correct, it can feel a bit stiff.",
+          "suggestion": "Assim que você revogar o consentimento para usar os dados de autenticação da {{organizationName}} {{productName}} nos serviços, {{organizationName}} {{productName}} interromperá automaticamente o registro. Suas contas não serão excluídas."
         }
       ],
       "approved_at": null
@@ -290,18 +290,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"auth data\" is inaccurate. \"Date de autentificare\" directly translates to 'authentication data', which is a bit clunky. A more natural phrasing would be 'datele de autentificare'.",
-          "suggestion": "Odată ce ați revocat consimțământul pentru utilizarea datelor de autentificare {{organizationName}} {{productName}} de către serviciu, {{organizationName}} {{productName}} va opri automat autentificarea. Conturile dvs nu vor fi șterse."
+          "description": "The phrase \"de serviciul\" is awkward and doesn't accurately translate \"in the services.\" It implies that the data is being used *by* the service, not *in* the services.",
+          "suggestion": "Odată ce ați revocat consimțământul pentru utilizarea datelor de autentificare {{organizationName}} {{productName}} în serviciile, {{organizationName}} {{productName}} va opri automat autentificarea. Conturile dvs nu vor fi șterse."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"de serviciul\" is grammatically incorrect. It should be \"de către serviciu\" or simply rephrased to avoid the preposition altogether.",
-          "suggestion": "Odată ce ați revocat consimțământul pentru utilizarea datelor de autentificare {{organizationName}} {{productName}}, {{organizationName}} {{productName}} va opri automat autentificarea. Conturile dvs nu vor fi șterse."
+          "description": "“autentificarea” is a direct translation of authentication and feels unnatural in this context. 'logging' is more appropriate.",
+          "suggestion": "Odată ce ați revocat consimțământul pentru utilizarea datelor de autentificare {{organizationName}} {{productName}} în serviciile, {{organizationName}} {{productName}} va opri automat înregistrarea. Conturile dvs nu vor fi șterse."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The word \"autentificare\" is a direct translation of 'authentication'. While technically correct, it sounds overly formal and technical in this context. 'Logarea' (logging) might be more suitable depending on the intended audience.",
-          "suggestion": "Odată ce ați revocat consimțământul pentru utilizarea datelor de autentificare {{organizationName}} {{productName}}, {{organizationName}} {{productName}} va opri automat logarea. Conturile dvs nu vor fi șterse."
+          "type": "spelling",
+          "description": "While technically correct, 'înregistrarea' is often used for registration. 'înregistrare' feels more aligned with 'logging'.",
+          "suggestion": "Odată ce ați revocat consimțământul pentru utilizarea datelor de autentificare {{organizationName}} {{productName}} în serviciile, {{organizationName}} {{productName}} va opri automat înregistrarea. Conturile dvs nu vor fi șterse."
         }
       ],
       "approved_at": null
@@ -318,13 +318,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'revoke' is directly translated as 'revoke' which is not commonly used in Sinhala in this context. A more natural phrasing would be 'අ අවගණනය කිරීම' (ava ganaya karimata) or 'ඉවත් කිරීම' (iwat kirima) which means 'cancellation' or 'removal'.",
-          "suggestion": "සේවා වල {{organizationName}} {{productName}} බලපත්‍ර දත්ත භාවිත කිරීමට ඔබ කැමැත්ත අවගණනය කිරීම / ඉවත් කිරීම කළ පසු"
+          "description": "The word 'revoke' is awkwardly translated as 'අ අව revoke'. The standard way to express 'revoke' in this context would be closer to 'ඉවත් කිරීම'.",
+          "suggestion": "සේවා වල {{organizationName}} {{productName}} බලපත්‍ර දත්ත භාවිත කිරීමට ඔබ කැමැත්ත ඉවත් කිරීම් කළ පසු"
         },
         {
-          "type": "spelling",
-          "description": "The word 'ක්‍රීයව' (kriyawa) is misspelled. It should be 'ක්‍රියාත්මක' (kriyathmak)",
-          "suggestion": "සේවා වල {{organizationName}} {{productName}} බලපත්‍ර දත්ත භාවිත කිරීමට ඔබ කැමැත්ත අවගණනය කිරීම / ඉවත් කිරීම කළ පසු, {{organizationName}} {{productName}} විසින් ලොග් කිරීම ක්‍රියාත්මකව නතර කරනු ලැබේ."
+          "type": "grammar",
+          "description": "The phrase 'ඉවත් කිරීම් කළ පසු' sounds a bit clunky. A more natural flow would be 'ඉවත් කළ පසු'.",
+          "suggestion": "සේවා වල {{organizationName}} {{productName}} බලපත්‍ර දත්ත භාවිත කිරීමට ඔබ කැමැත්ත ඉවත් කළ පසු"
         }
       ],
       "approved_at": null
@@ -335,13 +335,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation of \"logging\" is inaccurate. \"Prihlasovať\" means \"to log in\" or \"to sign in\", not \"to log data.\" The intended meaning of 'logging' in the context of data collection is missing.",
-          "suggestion": "Po odvolaní súhlasu na používanie {{organizationName}} {{productName}} autorizačných údajov, {{organizationName}} {{productName}} sa automaticky prestane zaznamenávať dáta. (or a similar phrasing to indicate data logging)"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation lacks a conjunction or more natural flow after 'automaticky prestane zaznamenávať dáta'.",
-          "suggestion": "Po odvolaní súhlasu na používanie {{organizationName}} {{productName}} autorizačných údajov, {{organizationName}} {{productName}} sa automaticky prestane zaznamenávať dáta, a vaše účty nebudú vymazané."
+          "description": "The Slovak translation of \"logging\" is inaccurate. \"Prihlasovať\" means \"to log in\" (a user action), not \"to log data\". The intended meaning is data logging, recording, or tracking.",
+          "suggestion": "Po odvolaní súhlasu na používanie {{organizationName}} {{productName}} autorizačných údajov, {{organizationName}} {{productName}} sa automaticky prestane zaznamenávať. / Po odvolaní súhlasu na používanie {{organizationName}} {{productName}} autorizačných údajov, {{organizationName}} {{productName}} sa automaticky prestane ukladať."
         }
       ],
       "approved_at": null
@@ -352,13 +347,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'auth data' is translated as 'podatkov v avtorizaciji'. While technically correct, it's a bit clunky. A more natural translation might be 'podatkov za avtorizacijo' or 'avtorizacijskih podatkov'.",
-          "suggestion": "podatkov za avtorizacijo"
+          "description": "The term 'auth data' is not directly translated. 'Avtorizaciji' is a good attempt, but 'avtorizacijskih podatkov' would be more precise for 'auth data'.",
+          "suggestion": "Ko prekličete soglasje za uporabo avtorizacijskih podatkov {{organizationName}} {{productName}} v storitvah..."
         },
         {
           "type": "formatting",
-          "description": "Consistency in variable usage. The English uses double curly braces `{{organizationName}} {{productName}}`. The Slovenian translation should mirror this.",
-          "suggestion": "Ensure consistent use of double curly braces: {{organizationName}} {{productName}}"
+          "description": "Inconsistency in spacing around the variables {{organizationName}} {{productName}}. The English version has a space before and after the variable.",
+          "suggestion": "Ko prekličete soglasje za uporabo avtorizacijskih podatkov {{organizationName}} {{productName}} v storitvah..."
         }
       ],
       "approved_at": null
@@ -369,13 +364,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian word 'опозовете' (opozovete) for 'revoke' sounds somewhat formal and not natural in this context. A more common and user-friendly term would be 'укинете' (ukinete).",
-          "suggestion": "Када укинете пристанак за коришћење {{organizationName}} {{productName}} података за ауторизацију у услугама..."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian word 'пријављује' (prijavljuje) which translates roughly to 'logs in' or 'registers' isn't quite right in the context of logging data. A better translation would reflect 'data logging' or 'collecting data'.",
-          "suggestion": "Када укинете пристанак за коришћење {{organizationName}} {{productName}} података за ауторизацију у услугама, {{organizationName}} {{productName}} ће аутоматски престати да бележи податке."
+          "description": "The word 'пријављује' (prijava) in the Serbian translation implies 'logging in' or 'checking in', not 'logging data'. A more accurate translation for 'logging' in this context would be 'бележи' (beleži).",
+          "suggestion": "Када опозовете пристанак за коришћење {{organizationName}} {{productName}} података за ауторизацију у услугама, {{organizationName}} {{productName}} ће аутоматски престати да бележи. Ваши налози неће бити обрисани."
         }
       ],
       "approved_at": null
@@ -386,8 +376,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"prijavljuje\" (logs in/signs in) doesn't accurately convey the meaning of 'logging' in a technical context. It implies a user action, whereas 'logging' refers to data recording.",
-          "suggestion": "Kada opozovete pristanak za korišćenje {{organizationName}} {{productName}} podataka za autorizaciju u uslugama, {{organizationName}} {{productName}} će automatski prestati da se beleži/evidentira."
+          "description": "The English term \"logging\" is translated as \"prijavljuje\". While \"prijavljuje\" can mean \"logging in\", in the context of data collection and tracking, a more accurate translation would be \"evidentira\" or \"beleži\". \"Prijavljuje\" implies a user action, which is not the intended meaning.",
+          "suggestion": "Kada opozovete pristanak za korišćenje {{organizationName}} {{productName}} podataka za autorizaciju u uslugama, {{organizationName}} {{productName}} će automatski prestati da se evidentira/beleži."
         }
       ],
       "approved_at": null
@@ -395,13 +385,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation does not consistently apply the same formatting for placeholders like `{{organizationName}}` and `{{productName}}`.  In the English content, they are separated by a space, while in the Turkish translation, they are directly joined.",
-          "suggestion": "Change \"{{organizationName}}{{productName}}\" to \"{{organizationName}} {{productName}}\" for consistency with the English source and maintain readability."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -410,8 +394,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"припинить автоматичний вхід\" (will stop automatic login) is an incorrect translation of \"will automatically stop logging.\"  The original English implies stopping data logging, not login.  'Автоматичний вхід' refers to logging *in*, not logging *data*.",
-          "suggestion": "Після того як ви відкликаєте згоду на використання даних аутентифікації {{productName}} {{organizationName}} в службах, {{productName}} {{organizationName}} припинить автоматичне збирання даних."
+          "description": "The phrase 'automatically stop logging' is translated as 'припинить автоматичний вхід' which means 'will automatically log in'. This is the opposite of the intended meaning. It should convey the cessation of data logging.",
+          "suggestion": "Після того як ви відкликаєте згоду на використання даних аутентифікації {{productName}} {{organizationName}} в службах, {{productName}} {{organizationName}} припинить автоматичний збір даних."
         }
       ],
       "approved_at": null
@@ -419,7 +403,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Vietnamese translation maintains the English formatting of `{{productName}} {{organizationName}}`. While technically correct, it may be more natural to rephrase this within the Vietnamese sentence structure for better readability. Consider restructuring for smoother flow.",
+          "suggestion": "Consider rephrasing the occurrences of '{{productName}} {{organizationName}}' to integrate more naturally into the sentence, possibly using a more descriptive phrase or restructuring the sentence order."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
@@ -428,13 +418,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"登录\" (dēnglù) in the translation doesn't accurately convey the meaning of 'logging' in the context of data logging. It's closer to 'login' or 'logging in' as a user action. It should be translated to something that implies data collection and recording.",
-          "suggestion": "Consider using a term like \"记录\" (jìlù) which means 'record' or a phrase like \"数据记录\" (shùjù jìlù) meaning 'data recording'."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation does not use the correct formatting for the placeholders {{organizationName}} and {{productName}}. While the placeholders are present, the context might require more explicit brackets or a specific rendering style.",
-          "suggestion": "Ensure consistent formatting for placeholders across all translated content. Consider adding a space before and after the placeholder, or using a different bracket style depending on the platform's requirements. Example: {{organizationName}} {{productName}}"
+          "description": "The term 'logging' is translated as '登录' (dēnglù), which means 'login' in Chinese. The English 'logging' refers to data logging, a different concept. It should be translated to reflect data logging.",
+          "suggestion": "在您撤销在服务中使用{{organizationName}} {{productName}}身份验证数据的同意后，{{organizationName}} {{productName}}将自动停止数据记录。 (在您撤销在服务中使用{{organizationName}} {{productName}}身份验证数据的同意后，{{organizationName}} {{productName}}将自动停止数据收集。) "
         }
       ],
       "approved_at": null

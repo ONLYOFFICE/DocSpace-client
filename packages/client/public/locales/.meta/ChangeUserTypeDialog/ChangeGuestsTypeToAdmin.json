@@ -3,7 +3,7 @@
   "content": "Guest <strong>{{userName}}</strong> will be moved to the {{membersSection}} section and assigned the <strong>'{{ secondType }}'</strong> type. {{productName}} admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. {{productName}} admins have access to the {{documentsSection}} section.",
   "content_en_sha1_hash": "20ce08c09436c3c194cad585911b27acbc08353b",
   "created_at": "2025-05-19T21:30:56.918Z",
-  "updated_at": "2025-05-20T09:37:52.253Z",
+  "updated_at": "2025-05-24T14:10:19.947Z",
   "comment": {
     "text": "This translation key is used to display a message that explains the consequences of changing a user from \"Guest\" to \"Admin\", indicating access to enhanced features and sections within the application. It appears in a dialog context, informing users about the implications of this change. The translator should consider the tone and clarity required for this message to effectively communicate its purpose.",
     "is_auto": true,
@@ -27,25 +27,69 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation includes a strange character '‏' before '{{ secondType }}'. This is likely a formatting artifact and should be removed.",
+          "suggestion": "Remove the '‏' character before '{{ secondType }}'."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'will be moved to' is translated as 'köçürüləcək', which is correct. However, a more natural phrasing in Azerbaijani might be 'köçürülür' (is being moved) or 'köçürüləcəkdir' (will be moved, more formal). While 'köçürüləcək' isn't *wrong*, it's slightly less idiomatic.",
+          "suggestion": "Consider 'köçürülür' or 'köçürüləcəkdir' for a more natural flow."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'can access' is translated as 'daxil ola'. While technically correct, 'daxil ola' can be interpreted as 'log in'. A more accurate translation that conveys the meaning of 'access' would be 'keçid edə' or 'girə bilərlər'.",
+          "suggestion": "Use 'keçid edə' or 'girə bilərlər' instead of 'daxil ola'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'manage and archive rooms' is translated as 'otaqları idarə edə və arxivləşdirə'. While accurate, it could be more concise. 'Otaqları idarə etmək və arxivləşdirmək' is also acceptable.",
+          "suggestion": "Consider rephrasing as 'otaqları idarə etmək və arxivləşdirmək' if brevity is desired."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'assign roles below their level' is translated as 'səviyyələrindən aşağı rollar təyin edə'. A more accurate and concise translation would be 'onlardan aşağı səviyyəli rollar təyin edə'.",
+          "suggestion": "Use 'onlardan aşağı səviyyəli rollar təyin edə' for clarity and conciseness."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text states \"Guest <strong>{{userName}}</strong> will be moved to the {{membersSection}} section...\", while the Bulgarian translation translates 'section' as 'раздел' (razdel) throughout. Although not strictly incorrect, 'section' could be translated as 'група' (grupa) in some contexts to better convey the meaning of a grouping of members.",
+          "suggestion": "Consider translating 'section' as 'група' in certain instances, like 'Гост <strong>{{userName}}</strong> ще бъде преместен в група {{membersSection}}...'"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Guest' translated to 'Host' loses the nuance of a guest user transitioning to an admin. 'Host' implies ownership or hosting, which is not the intended meaning.  'Guest' should remain, or a more accurate translation like 'Uživatel' (User) could be considered.",
+          "suggestion": "Consider 'Uživatel' or re-evaluate the translation of 'Guest' to better convey the change in user type."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The repetition of 'Administrátoři s názvem {{productName}}' is awkward and redundant. It states 'Administrators with the name {{productName}}'.",
+          "suggestion": "Simplify to 'Administrátoři {{productName}}' ({{productName}} Administrators)."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -57,7 +101,23 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'will be moved' is a bit clunky in Greek. A more natural phrasing would be 'θα μεταφερθεί' (tha metaferthei).",
+          "suggestion": "Ο καλεσμένος <strong>{{userName}}</strong> θα μεταφερθεί στην ενότητα {{membersSection}}..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assigned the type' can be more accurately translated as 'θα έχει τον ρόλο' or 'θα λάβει τον ρόλο'.",
+          "suggestion": "Ο καλεσμένος <strong>{{userName}}</strong> θα μεταφερθεί στην ενότητα {{membersSection}} και θα του αποδοθεί ο ρόλος <strong>'{{ secondType }}'</strong>."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'can access' is a bit literal and could be improved to 'έχουν πρόσβαση' (they have access). Although currently used, it might sound slightly stilted.",
+          "suggestion": "Οι διαχειριστές {{productName}} έχουν πρόσβαση στις ρυθμίσεις {{productName}}..."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,7 +129,23 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'moved to' is translated as 'siirretään'. While technically correct, a more natural phrasing in Finnish would be 'muutetaan'.",
+          "suggestion": "Vieras <strong>{{userName}}</strong> muutetaan {{membersSection}} osioon..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'assigned the' is translated as 'määritään'. A better translation here would be 'saa' (gets).",
+          "suggestion": "Vieras <strong>{{userName}}</strong> muutetaan {{membersSection}} osioon ja saa <strong>'{{ secondType }}'</strong> tyyppiin."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'below their level' is translated as 'alapuolellaan'. It's more accurate and natural to say 'pienempää roolia' which means 'lower role'.",
+          "suggestion": "Vieras <strong>{{userName}}</strong> muutetaan {{membersSection}} osioon ja saa <strong>'{{ secondType }}'</strong> tyyppiin. {{productName}} pääkäyttäjät pääsevät {{productName}} asetuksiin, hallitsemaan ja arkistoimaan huoneita, kutsumaan uusia käyttäjiä ja määräämään pienempää roolia."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +157,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'will be moved' is translated as 'կտեղափոխվի'. While technically correct, a more natural Armenian phrasing would be 'են տեղափոխվի' to reflect the passive voice accurately. The use of 'են' is missing.",
+          "suggestion": "Հյուր <strong>{{userName}}</strong> է տեղափոխվի {{membersSection}} բաժին"
+        },
+        {
+          "type": "formatting",
+          "description": "The English original uses bold tags to emphasize different roles/sections. Ensure these are consistently applied to the Armenian translation, paying close attention to the bolding of 'ադմիններ'.",
+          "suggestion": "Review the use of bold tags to ensure consistency with the original English. Ensure the word 'ադմիններ' is consistently bolded where 'admins' is bolded."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,7 +192,33 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Guest' is translated as 'แขກຮັບເຊີນ'. While technically correct, 'แขກ' alone is more common and natural in this context, implying a guest user.",
+          "suggestion": "แขກ"
+        },
+        {
+          "type": "formatting",
+          "description": "There's a space missing before the comma after 'ຈັດການແລະເກັບມ້ຽນຫ້ອງ'.",
+          "suggestion": "ຈັດການ ແລະ ເກັບມ້ຽນຫ້ອງ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'invite new users' is translated as 'ເຊີນຜູ້ໃຊ້ບໍານານ'.  'ບໍານານ' implies elderly or retired users, which doesn't fit the context.  The correct term is more general for new users.",
+          "suggestion": "ເຊີນຜູ້ໃຊ້ໃໝ່"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'below their level' is translated as 'ຂ້າງລຸ່ມລະດັບຂອງເຂົາເຈົ້າ'. While accurate, a more concise and natural wording would be 'ຂອງເຂົາເຈົ້າ' or 'ຂອງຕົນເອງ'.",
+          "suggestion": "ຂອງເຂົາເຈົ້າ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase '{{productName}} admins' is translated inconsistently. It appears as 'ຄູກູ້ນຂອງ {{productName}}' and 'ຜູ້ບໍລິຫານ {{productName}}'. Consistent terminology is better.",
+          "suggestion": "ຜູ້ບໍລິຫານ {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -117,7 +230,18 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'moved to' is translated as 'verplaatst naar' which is accurate. However, 'assigned the' should ideally be more accurately conveyed, potentially with a slightly different phrasing to better flow in Dutch. A more natural translation might be 'krijgen het' type'.",
+          "suggestion": "Gasten <strong>{{userName}}</strong> worden verplaatst naar de {{membersSection}} sectie en krijgen het <strong>'{{ secondType }}'</strong> type."
+        },
+        {
+          "type": "formatting",
+          "description": "The bolding applied to 'admin' in the English content isn't consistent with the Dutch translation. The Dutch translation doesn't bold 'beheerders' which corresponds to 'admins'.",
+          "suggestion": "Gasten <strong>{{userName}}</strong> worden verplaatst naar de {{membersSection}} sectie en krijgen het <strong>'{{ secondType }}'</strong> type toegewezen. {{productName}} <strong>beheerders</strong> hebben toegang tot {{productName}} instellingen, beheren en archiveren kamers, nodigen nieuwe gebruikers uit en wijzen rollen onder hun niveau toe. {{productName}} <strong>beheerders</strong> hebben toegang tot de {{documentsSection}} sectie."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -141,19 +265,52 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'îi se va stabili tipul' is grammatically awkward. It's better to use a more direct phrasing.",
+          "suggestion": "tipul '{{ secondType }}' îi va fi atribuit"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'în funcție de nivelul lor' translates to 'depending on their level', which isn't the most accurate way to convey the intended meaning. The English suggests assigning roles *below* their level.",
+          "suggestion": "pot atribui roluri inferioare"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assigned the <strong>'{{ secondType }}'</strong> type' is not perfectly translated. A more natural Russian phrasing would be 'будет назначен типом <strong>'{{ secondType }}'</strong>'.",
+          "suggestion": "Гость <strong>{{userName}}</strong> будет перемещен в раздел «{{membersSection}}», и ему будет назначен типом <strong>'{{ secondType }}'</strong>."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'will be moved to' is translated as 'ගෙවා' which means 'paid' or 'spent'. It doesn't convey the meaning of 'moved to'.",
+          "suggestion": "Replace 'ගෙවා' with a more appropriate term like 'බަދවා' (badawa - replaced) or 'සිටුවීමට' (situwimata - to relocate)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assigned the' is translated as 'පත් කරනු ලැබේ'. While technically correct, it's a bit formal for this context. A more natural phrasing might be better.",
+          "suggestion": "Consider using a more colloquial translation like 'ලබා' (laba - to give) or 'ලබයි' (labai - receives) for 'assigned the'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'manage and archive rooms' is translated as 'කාමර කළමනාකරණය හා සංග්‍රහණය කළ හැකි'. While technically accurate, 'සංග්‍රහණය' (sangrahaniya) often refers to a formal archiving process. A simpler term might be better.",
+          "suggestion": "Consider using 'කාමර කළමනාකරණය කිරීම හා නිදහස් කිරීම' (kamara kalamanaakaraṇa kirimu ha nihadas kirimu) for 'manage and archive rooms', which is more understandable."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,37 +328,103 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tags are not properly closed. There's a > character in the middle of the `<strong>` tag for userName.",
+          "suggestion": "Correct the closing of the `<strong>` tag around `userName`: `<strong>` should be `</strong>`."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'will be moved' is translated as 'biće premesten'. While technically correct, a more natural phrasing in Serbian would be 'prebačen' or 'prenađen'. 'Premesten' implies a more significant relocation than likely intended.",
+          "suggestion": "Gost <strong>{{userName}}</strong> biće prebačen u {{membersSection}} sekciju i dodeljen <strong>'{{ secondType }}'</strong> tip."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assign roles below their level' is translated as 'dodeljivati uloge ispod njihovog nivoa'.  A more natural and clearer translation would be 'dodeljivati uloge nižeg nivoa'.",
+          "suggestion": "Gost <strong>{{userName}}</strong> biće prebačen u {{membersSection}} sekciju i dodeljen <strong>'{{ secondType }}'</strong> tip. {{productName}} administratori mogu pristupiti {{productName}} podešavanjima, upravljati i arhivirati sobe, pozivati nove korisnike i dodeljivati uloge nižeg nivoa. {{productName}} administratori imaju pristup {{documentsSection}} sekciji."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English content mentions that 'Guest' will be moved to the 'membersSection' and assigned the '<strong>'{{ secondType }}'</strong> type', but the Turkish translation only mentions being moved to the 'membersSection' and assigned the '<strong>'{{ secondType }}'</strong> type'. The English text contains the word 'and' which is missing from the Turkish translation.",
+          "suggestion": "Konuk <strong>{{userName}}</strong>, {{membersSection}} bölümüne taşınacak **ve** <strong>'{{ secondType }}'</strong> türüne atanacaktır."
+        },
+        {
+          "type": "missing_content",
+          "description": "The English content mentions that '{{productName}} admins have access to the {{documentsSection}} section.' but this part is missing in the Turkish translation.",
+          "suggestion": "Konuk <strong>{{userName}}</strong>, {{membersSection}} bölümüne taşınacak ve <strong>'{{ secondType }}'</strong> türüne atanacaktır. {{productName}} yöneticileri, {{productName}} ayarlarına erişebilir, odaları yönetebilir ve arşivleyebilir, yeni kullanıcılar davet edebilir ve kendi seviyelerinin altındaki rolleri atayabilir. **{{productName}} yöneticileri, {{documentsSection}} bölümüne erişebilir.**"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'will be moved' is translated as 'буде переміщено', which is grammatically correct but could be improved for flow. A more natural phrasing might be 'буде переведено' (will be transferred) or something similar.",
+          "suggestion": "буде переведено"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assign the '{{ secondType }}' type' is a bit awkward. A more natural Ukrainian phrasing would focus on *assigning* a role.",
+          "suggestion": "буде надано тип"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The sentence '{{productName}} admins can access {{productName}} settings...' is slightly redundant.  The implication is that they are accessing *the product's* settings. The repetition is less natural in Ukrainian.",
+          "suggestion": "Адміністратори {{productName}} мають доступ до налаштувань {{productName}}."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing 'assign roles below their level' is literal. A more idiomatic Ukrainian phrasing could be used.",
+          "suggestion": "призначати ролі нижчого рівня"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'below their level' is not accurately translated. 'dưới cấp của họ' implies a hierarchical level which might not be the intended meaning. It's better to convey that they can assign roles to users *lower* than their own.",
+          "suggestion": "dưới quyền của họ"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assign roles below their level' is not accurately translated. '分配其级别以下的权限' implies assigning permissions below their level, which isn't the intended meaning. The original English implies assigning roles *of* lower level.",
+          "suggestion": "访客<strong>{{userName}} </strong>将被移至{{membersSection}}部分，并被分配<strong>'{{ secondType }}'</strong>类型。{{productName}}管理员可以访问{{productName}}设置，管理和归档房间，邀请新用户并为其分配下级权限。"
+        },
+        {
+          "type": "formatting",
+          "description": "The strong tags (`<strong>`) are correctly used in the Chinese translation but should be checked for consistency with other translations.",
+          "suggestion": "Ensure consistent use of strong tags across all translations."
+        }
+      ],
       "approved_at": null
     }
   }

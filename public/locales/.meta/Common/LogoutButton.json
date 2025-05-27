@@ -3,7 +3,7 @@
   "content": "Sign out",
   "content_en_sha1_hash": "dc1649a16c1496db3e4073be6a73faf5121aeae7",
   "created_at": "2025-05-19T21:30:46.319Z",
-  "updated_at": "2025-05-22T11:56:37.409Z",
+  "updated_at": "2025-05-26T07:57:32.316Z",
   "comment": {
     "text": "This translation key is used to display the text \"Sign out\" in various parts of the application, including a logout button in a modal dialog and as the label for a button on the portal unavailable page. Its purpose is to provide a clear instruction for users to log out of their session.",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\LogoutAllSessionDialog\\index.js",
+      "file_path": "/packages/client/src/components/dialogs/LogoutAllSessionDialog/index.js",
       "line_number": 58,
       "context": "visible={visible}\n onClose={onClose}\n displayType=\"modal\"\n autoMaxHeight\n >\n <ModalDialog.Header>{t(\"Common:LogoutButton\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{t(\"Profile:LogoutDescription\")}</Text>\n <Text style={{ margin: \"15px 0\" }}>\n {t(\"Profile:DescriptionForSecurity\")}\n </Text>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalUnavailable\\index.js",
+      "file_path": "/packages/client/src/pages/PortalUnavailable/index.js",
       "line_number": 103,
       "context": "</Text>\n {!window.navigator.userAgent.includes(\"ZoomWebKit\") &&\n !window.navigator.userAgent.includes(\"ZoomApps\") ? (\n <Button\n scale\n label={t(\"Common:LogoutButton\")}\n size=\"medium\"\n onClick={onClick}\n />\n ) : null}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\ProfileActionsStore.js",
-      "line_number": 452,
+      "file_path": "/packages/client/src/store/ProfileActionsStore.js",
+      "line_number": 454,
       "context": "if (showFrameSignOut) {\n actions.push({\n key: \"user-menu-logout\",\n icon: LogoutReactSvgUrl,\n label: t(\"Common:LogoutButton\"),\n onClick: () => this.onLogoutClick(t),\n isButton: true,\n });\n }",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Отписване\" can mean 'unregister' or 'sign off,' it doesn't directly translate to 'Sign out.' A more appropriate translation for 'Sign out' in a user interface context would be something like 'Изписване' or 'Изход'.",
-          "suggestion": "Consider using 'Изписване' or 'Изход' for a more accurate translation of 'Sign out'."
+          "description": "While \"Отписване\" can translate to 'sign out', it primarily means 'unregister' or 'deduct'. A more accurate translation of 'Sign out' in the context of a logout button would be \"Изход\" (Izhod).",
+          "suggestion": "Изход"
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Դուրս գալ' literally translates to 'exit' or 'get out'. While it conveys the general idea of signing out, 'Sign out' often implies a more user-friendly action. A more accurate translation for 'Sign out' would be something like 'Ավարտել գրանցումը' (Avardetel granacumə) or 'Ելք' (Yelk) which means 'Logout'.",
-          "suggestion": "Consider 'Ավարտել գրանցումը' (Avardetel granacumə) or 'Ելք' (Yelk)."
+          "description": "The translation \"Դուրս գալ\" literally translates to \"exit\" or \"go out\", not \"Sign out\".  While it can be used in a similar context, it's not the most accurate or natural translation for a logout button. A more accurate translation would better convey the intended meaning of logging out of a system or account.",
+          "suggestion": "Consider using a more direct translation like \"Ավարտել նիստը\" (Avaretel nisti) which means \"End session\" or \"Log out\" or \"Ելք\" (Yelk) which means 'Exit' but is often used for logout functions."
         }
       ],
       "approved_at": null
@@ -111,13 +111,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Disconnetti\" is a valid Italian word and often used, \"Esci\" or \"Effettua il logout\" are more common and natural translations for \"Sign out\" in a user interface context. \"Disconnetti\" can sound a bit technical.",
-          "suggestion": "Consider using \"Esci\" or \"Effettua il logout\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -162,7 +156,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Terminar Sessão\" is a valid translation for \"Sign out,\" it's a bit formal and less common than other options. A more natural and widely used translation would be \"Sair\".",
+          "description": "'Terminar Sessão' is a literal translation of 'Terminate Session' which isn't the common phrasing for 'Sign out'. A more natural and commonly used translation would be 'Sair' or 'Desconectar'.",
           "suggestion": "Sair"
         }
       ],
@@ -189,7 +183,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"නික්මෙන්න\" (nikemenna) can mean 'leave' or 'go out', it's a very informal and abrupt way to say 'Sign out'. A more appropriate translation for a user interface element like a logout button would be something more polite and formal.",
+          "suggestion": "නිsignOut කරන්න (nisign out karanna) or පිටවන්න (pitawanna) - These options are more formal and commonly used for logout functionality."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

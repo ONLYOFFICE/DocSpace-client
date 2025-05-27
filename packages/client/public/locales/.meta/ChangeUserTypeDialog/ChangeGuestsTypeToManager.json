@@ -3,7 +3,7 @@
   "content": "Guest <strong>{{userName}}</strong> will be moved to the {{membersSection}} section and assigned the <strong>'{{ secondType }}'</strong> type. Room admins can create and manage the assigned rooms, invite new users, and assign roles of Room admin and lower. Room admins have access to the {{documentsSection}} section.",
   "content_en_sha1_hash": "8fa73538c8eb1bc56fc6fe99b61cc6805ef55867",
   "created_at": "2025-05-19T21:30:56.922Z",
-  "updated_at": "2025-05-20T09:37:51.408Z",
+  "updated_at": "2025-05-24T14:07:30.528Z",
   "comment": {
     "text": "This translation key is used to display a message when a user's type is changed to 'Room Admin' in a room management setting. It informs the user of their new role and permissions within the system, providing context for what this change means in terms of access and responsibilities.",
     "is_auto": true,
@@ -27,13 +27,35 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation uses a strange character (‏) before the single quote around '{{ secondType }}'. This doesn't appear in the English and is likely unintended.",
+          "suggestion": "Remove the strange character (‏) before the single quote around '{{ secondType }}'."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Room admins' is translated as 'Otaq administratorları'. While technically correct, it's a bit clunky. A more natural translation might be 'Otaq administrasiyası' or 'Otaq idarəçiləri'.",
+          "suggestion": "Consider using 'Otaq administrasiyası' or 'Otaq idarəçiləri' for 'Room admins'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assign roles of Room admin and lower' is translated as 'Otaq administratoru və aşağı rollar təyin edə bilər'. A more accurate rendering considering the context (assigning roles to others) would be 'başqa istifadəçilərə Otaq administratoru və daha aşağı rollar təyin edə bilər' or a similar phrasing indicating the ability to assign roles *to others*.",
+          "suggestion": "Consider 'başqa istifadəçilərə Otaq administratoru və daha aşağı rollar təyin edə bilər' or a similar phrasing to clarify role assignment to others."
+        },
+        {
+          "type": "formatting",
+          "description": "The strong tags surrounding 'Room admin' are lost in the Azerbaijani translation, creating inconsistent formatting.",
+          "suggestion": "Ensure the formatting consistency by re-applying the strong tags around 'Otaq administratoru' if it's intended to be emphasized like in the original English."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -45,13 +67,25 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Czech translation maintains the strong tags as in the English content. While not strictly an error, it's important to verify if this is the intended behavior and aligns with Czech UI conventions. It might be more appropriate to use Czech equivalent of bolding tags or CSS classes.",
+          "suggestion": "Review whether strong tags are appropriate for UI in Czech and adjust accordingly. Consider using a Czech-specific bolding method if necessary."
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Room admins' is translated as 'Raumadministratoren'. While technically correct, a more natural and common German translation would be 'Raumverwalter' or 'Raumadministratoren' (depending on the desired level of formality).",
+          "suggestion": "Consider using 'Raumverwalter' or 'Raumadministratoren' instead of 'Raumadministratoren'."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -69,7 +103,18 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Room admins' is translated as 'Huoneen pääkäyttäjät'. While technically correct, it's a bit clunky. A more natural Finnish equivalent might be 'Huoneen ylläpitäjät' or simply 'ylläpitäjät' depending on the broader context.",
+          "suggestion": "Consider translating 'Room admins' as 'Huoneen ylläpitäjät' or 'ylläpitäjät'."
+        },
+        {
+          "type": "formatting",
+          "description": "The bolding of 'Room admin' is slightly inconsistent. While the original English uses strong tags, the Finnish translation uses standard bolding.",
+          "suggestion": "Ensure consistency in bolding style; use `<strong/>` tags if mirroring the original English formatting is crucial."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +126,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"assign the '{{ secondType }}' type\" is slightly awkward in Armenian. A more natural phrasing would be something like \"կได้รับ {{ secondType }} կարգավիճակ\" (will receive the {{ secondType }} status).",
+          "suggestion": "Հյուր <strong>{{userName}}</strong> կտեղափոխվի {{membersSection}} բաժին և կստանա <strong>'{{ secondType }}'</strong> կարգավիճակ:"
+        },
+        {
+          "type": "formatting",
+          "description": "The bolding of 'Room admin' is missing in the Armenian translation. It's present in the English version.",
+          "suggestion": "Սենյակի ադմինները կարող են ստեղծել և կառավարել իրենց վերագրված սենյակները, հրավիրել նոր օգտատերեր և նշանակել <strong>Սենյակի ադմին</strong> կամ ավելի ցածր դերեր:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,25 +149,64 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation maintains the strong tag formatting for userName and secondType, which is consistent with the English source. However, the phrase 'ルーム管理者は' (Room admins) should also be bolded as in the English text, to maintain visual consistency in highlighting key roles.",
+          "suggestion": "Add a strong tag around 'ルーム管理者' to match the formatting of the original English text.  e.g., <strong>ルーム管理者</strong>は..."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"will be moved to\" is translated as \"이동되고\" which literally translates to 'and moved'. A more natural and accurate translation would be something along the lines of '로 변경됩니다' (to be changed to) or '로 이동하여' (to move to).",
+          "suggestion": "게스트가 {{membersSection}} 섹션으로 이동하여"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Room admins' is translated as '룸 관리자' which is correct, however the phrasing '룸 관리자는' feels slightly unnatural in this context. A more natural phrasing might be '룸 관리자는 다음과 같이 할 수 있습니다' or simply removing the subject and starting with '할당된 룸을... 할 수 있습니다'.",
+          "suggestion": "룸 관리자는 할당된 룸을 생성 및 관리하고, 새로운 사용자를 초대하고, 룸 관리자 이하의 역할을 할당할 수 있습니다. -> 할당된 룸을 생성 및 관리하고, 새로운 사용자를 초대하고, 룸 관리자 이하의 역할을 할당할 수 있습니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation uses commas (,) instead of periods (.) to separate sentences, which is not standard Lao punctuation.  The original English content uses periods.",
+          "suggestion": "Replace commas with periods. For example, change ',ເຊີນຜູ້ໃຊ້ໃໝ່ ແລະ' to '.ເຊີນຜູ້ໃຊ້ໃໝ່ ແລະ'."
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, 'ຖືກມອບຫມາຍໃຫ້ເປັນປະເພດ' can be slightly improved for readability. 'ຖືກມອບຫມາຍເປັນປະເພດ' is more common.",
+          "suggestion": "Change 'ຖືກມອບຫມາຍໃຫ້ເປັນປະເພດ' to 'ຖືກມອບຫມາຍເປັນປະເພດ'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Room admins' is translated as 'Telpu administratori'. While technically correct, it sounds slightly awkward in Latvian. A more natural translation might be 'Telpas vadītāji' or 'Istabenes vadītāji'.",
+          "suggestion": "Telpas vadītāji"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'lomas' (roles) is used in the phrase 'piešķirt Telpas administratora un zemākas lomas'. A more accurate and natural phrasing might use 'funkcijas' (functions) or simply rephrase the sentence.",
+          "suggestion": "piešķirt Telpas administratora un zemākas funkcijas"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -123,13 +218,35 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Room admins' is translated as 'Administratorzy pokoi'. While technically correct, it might be more natural and consistent with the overall tone to use 'Administratorzy przestrzeni' or 'Administratorzy grup' depending on the actual meaning of 'Room'.",
+          "suggestion": "Consider alternatives like 'Administratorzy przestrzeni' or 'Administratorzy grup' instead of 'Administratorzy pokoi'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assign roles of Room admin and lower' is translated as 'przypisywać im rolę administratora lub niższą'. While accurate, the phrasing 'administratora lub niższą' isn't the most natural in Polish. It would be more common to use 'administratora lub niższego stopnia'.",
+          "suggestion": "Change 'administratora lub niższą' to 'administratora lub niższego stopnia'."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'will be assigned' is translated as 'ser-lhe-á atribuído'. A more natural translation would be 'receberá o tipo' or 'terá o tipo'.",
+          "suggestion": "O convidado <strong>{{userName}}</strong> será movido para a secção {{membersSection}} e receberá o tipo <strong>'{{ secondType }}'</strong>."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Room admins' is translated as 'administradores de salas'. This could be more accurately translated as 'administradores de quartos' or 'administradores da sala' depending on the intended meaning. Since it mentions creating and managing 'salas' (rooms), 'administradores da sala' is probably most appropriate.",
+          "suggestion": "Os administradores da sala podem criar e gerir as salas atribuídas..."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,19 +258,62 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'îi se va stabili' is grammatically awkward. A more natural phrasing would be 'va primi' or 'va avea'.",
+          "suggestion": "va primi tipul"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'assigned rooms' translates better as 'sălile pe care le administrează' or 'sălile lor' instead of just 'sălile atribuite'.",
+          "suggestion": "sălile pe care le administrează"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Administrator sală' should be consistent. It's 'Administrator sală' in one place and 'Administratorii sălii' elsewhere.",
+          "suggestion": "Administratorii sălii"
+        },
+        {
+          "type": "formatting",
+          "description": "The formatting of 'Administrator sală' seems inconsistent with the rest of the bolded types. It's only partially bolded",
+          "suggestion": "'<strong>Administrator sală</strong>'"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Room admins' is translated as 'Администраторы комнат'. While technically correct, it sounds slightly awkward in Russian. A more natural translation would be something like 'Администраторы помещений' or 'Руководители комнат'.",
+          "suggestion": "Consider using 'Администраторы помещений' or 'Руководители комнат' instead of 'Администраторы комнат'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assign roles of Room admin and lower' is translated as 'назначать роли ниже своего уровня'. While conveying the meaning, it's not as precise as a direct translation or a more formal phrase. It lacks the specific reference to 'Room admin'.",
+          "suggestion": "Consider a translation like 'назначать роли, включая роль руководителя комнаты' or 'назначать роли, в том числе роль администратора помещения'."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'move' in the English content 'Guest <strong>{{userName}}</strong> will be moved to the {{membersSection}} section' is translated as 'ගෙවා' (gheva) in Sinhala, which means 'paid' or 'spent'. This doesn't accurately convey the meaning of being moved to a section. A more appropriate translation would be something along the lines of 'භාරයා' (bhariya) meaning 'assigned' or 'transferred'.",
+          "suggestion": "Replace 'ගෙවා' with 'භාරයා' or a similar word conveying assignment/transfer."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Room admins have access to the {{documentsSection}} section' is translated as 'කාමර පරිපාලකවරුන්ට {{documentsSection}} කොටසට ප්‍රවේශය ඇත'. The word 'ඇත' (atha) implies possession, which isn't the intended meaning. A better translation would convey 'access' directly.",
+          "suggestion": "Consider rewording to 'කාමර පරිපාලකවරුන්ට {{documentsSection}} කොටසට ඇක්‍ເຊස් ලැබේ' - meaning 'Room admins receive access to the {{documentsSection}} section'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -165,19 +325,52 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Room admins' is translated as 'Skrbniki sobe'. While technically correct, a more natural and commonly used translation in Slovenian would be 'Administratorji sob' or simply 'Administratorji'.",
+          "suggestion": "Change 'Skrbniki sobe' to 'Administratorji sob'."
+        },
+        {
+          "type": "formatting",
+          "description": "The bolding applied to 'Room admin' in the English text is missing the apostrophe, which is important for accurate meaning. The Slovenian translation retains the apostrophe but doesn's match the english's strong emphasis.",
+          "suggestion": "Consider using stronger emphasis on 'Skrbnik sobe' using formatting like bolding or italics."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Room admins' is translated as 'Администратори собе'. While technically correct, it sounds slightly awkward in Serbian. A more natural phrasing would be 'Администратори просторија' or simply 'Администратори'.",
+          "suggestion": "Администратори просторија"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'and assign roles of Room admin and lower' is translated as 'и додељивати улоге администратора собе и ниже'. The phrase 'ниже' is a bit vague. A more precise translation would clarify what 'lower' roles are.",
+          "suggestion": "и додељивати улоге нижих администратора"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'will be moved' is translated as 'biće premesten', which is grammatically correct but sounds slightly awkward. A more natural translation might be 'prebačen' or 'premešten u'.",
+          "suggestion": "prebačen u"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assign roles' is translated as 'dodeljivati uloge'. While technically correct, a more natural phrasing would be 'imati uloge' or 'dobiti uloge' in this context.",
+          "suggestion": "imati uloge"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -189,13 +382,30 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tags around the variables are inconsistent with the English version, where they are used to emphasize the user name and the second type. In Ukrainian, they seem redundant.",
+          "suggestion": "Consider removing the strong tags around `{{userName}}` and `{{ secondType }}` if they don't serve a specific visual purpose."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Room admins' is translated as 'Quản trị viên phòng'. While technically correct, it lacks the nuance of 'Room administrators' which better reflects the context and level of responsibility. It reads a bit too literal.",
+          "suggestion": "Quản trị viên của phòng"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assign roles of Room admin and lower' is translated as 'chỉ định vai trò từ quản trị viên Phòng trở xuống'. This is understandable but somewhat clunky. A more natural flow could be achieved.",
+          "suggestion": "chỉ định vai trò từ quản trị viên phòng trở xuống hoặc thấp hơn"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

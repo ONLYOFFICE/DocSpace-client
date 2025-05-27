@@ -3,7 +3,7 @@
   "content": "Enter the {{productName}} domain name without URL paths or additional characters.",
   "content_en_sha1_hash": "5dd80292d6e59ef855dfdbdade04af9a0b49d58b",
   "created_at": "2025-05-19T21:30:54.433Z",
-  "updated_at": "2025-05-21T09:17:30.239Z",
+  "updated_at": "2025-05-24T09:29:35.676Z",
   "comment": {
     "text": "The \"CSPUrlHelp\" translation key is used to provide a help message when entering an invalid domain name for Content Security Policy (CSP) in the UI. It guides users to enter only the product name without URL paths or extra characters, appearing in a text component.",
     "is_auto": true,
@@ -29,9 +29,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'مسارات URL' is a direct transliteration of 'URL paths'. While understandable, a more natural Arabic phrasing would be 'مسارات مواقع الويب' or 'مسارات المواقع'.",
-          "suggestion": "أدخل اسم مجال {{productName}} بدون مسارات مواقع الويب أو أحرف إضافية."
+          "type": "formatting",
+          "description": "The curly braces {{productName}} are not properly rendered as placeholders in the Arabic translation. They should be treated as part of the text and not as placeholders to be replaced.",
+          "suggestion": "أدخل اسم مجال {{productName}} بدون مسارات URL أو أحرف إضافية."
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Azerbaijani translation uses a semicolon after 'domen adını' which is not standard practice in this context. It disrupts the flow of the sentence.",
-          "suggestion": "URL yolları və ya əlavə simvollar olmadan {{productName}} domen adını daxil edin."
+          "description": "The Azerbaijani translation uses a mixture of capital and lowercase letters. While not strictly incorrect, it's common practice in Azerbaijani to capitalize the beginning of sentences and proper nouns, but not for general words within a phrase.",
+          "suggestion": "Domen adını URL yolları və ya əlavə simvollar olmadan {{productName}} daxil edin."
         }
       ],
       "approved_at": null
@@ -57,7 +57,18 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Zadejte název domény {{productName}} bez cest URL nebo dalších znaků.' is a literal translation but lacks clarity. A more natural Czech phrasing would be preferable. The phrase 'cest URL' is not idiomatic.",
+          "suggestion": "Zadejte doménu {{productName}} bez URL adres a dalších znaků."
+        },
+        {
+          "type": "formatting",
+          "description": "The word 'URL' appears in English in the Czech translation. It's best to replace it with the Czech equivalent.",
+          "suggestion": "Replace 'URL' with 'URL adres' or 'webových adres'."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -69,13 +80,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Greek translation retains the English formatting of using double curly braces for the variable `{{productName}}`. This is not standard practice in Greek and can be confusing for users.",
-          "suggestion": "Change `{{productName}}` to something more appropriate for Greek, such as `[όνομα προϊόντος]` or simply remove the braces and use `όνομα προϊόντος` if the variable is being populated programmatically."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -90,8 +95,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Enter' is best translated as 'Anna' in this context, as 'Syötä' implies inputting data into a field, while 'Anna' more accurately represents providing or entering a domain name.",
-          "suggestion": "Anna {{productName}} verkkotunnus ilman URL-polkuja tai lisämerkkejä."
+          "description": "While technically correct, 'verkkotunnus' is a more formal term for 'domain name'. A more natural and user-friendly translation might use a more common word.",
+          "suggestion": "Syötä {{productName}} -verkkosivun osoite ilman URL-polkuja tai lisämerkkejä."
         }
       ],
       "approved_at": null
@@ -99,13 +104,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Saisissez le nom de domaine {{productName}} sans les chemins d'URL ni les caractères supplémentaires.' is a literal translation and could be improved for naturalness in French. While technically correct, it sounds slightly awkward.",
-          "suggestion": "Saisissez le nom de domaine {{productName}} sans les URL ni caractères supplémentaires."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -114,13 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word \"տիրույթի\" could be improved for clarity and readability. It literally translates to 'of domain' but may sound slightly awkward in this context. A more natural phrasing might be 'դոմեյնի'.",
-          "suggestion": "Մուտքագրեք {{productName}} դոմեյնի անունը առանց URL ուղիների կամ լրացուցիչ նիշերի:"
-        },
-        {
-          "type": "formatting",
-          "description": "The Armenian translation maintains the English capitalization pattern, specifically capitalizing 'Anun'. While not strictly incorrect, it's generally more natural in Armenian to lowercase titles/nouns unless they have specific significance. Consider lowercasing 'անունը'.",
-          "suggestion": "Մուտքագրեք {{productName}} դոմեյնի անունը առանց URL ուղիների կամ լրացուցիչ նիշերի:"
+          "description": "The word 'տիրույթի' (tiruyti) is technically correct but could be more naturally phrased as 'տիրույթ' (tiruyt) in this context. The addition of '-ի' (i) creates a genitive case, implying possession, which isn't necessary here.",
+          "suggestion": "Մուտքագրեք {{productName}} տիրույթ անունը առանց URL ուղիների կամ լրացուցիչ նիշերի:"
         }
       ],
       "approved_at": null
@@ -134,13 +128,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation, \"{{productName}}のドメイン名をURLパスや付加文字を入れずに入力してください,\" could be improved for clarity and naturalness.  A more natural phrasing would emphasize that the domain name should be entered *directly*.  The phrase '入れずに入力してください' (irezu ni nyūryoku shite kudasai) is technically correct but a bit clunky.",
-          "suggestion": "{{productName}}のドメイン名を、URLパスや追加の文字なしで直接入力してください。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -148,9 +136,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'without URL paths or additional characters' is not perfectly conveyed by 'URL 경로나 추가 문자를 제외한'. While '제외한' means 'excluding', the flow is a bit awkward. A more natural translation might use a phrasing closer to 'URL 경로 및 기타 문자를 제외하고'.",
-          "suggestion": "URL 경로 및 기타 문자를 제외하고"
+          "type": "formatting",
+          "description": "The Korean translation uses a full stop (.) at the end of the sentence. While grammatically correct, in UI/UX contexts, a more common and cleaner approach is to omit the full stop, especially when the text is part of a form or input field instruction.",
+          "suggestion": "URL 경로나 추가 문자를 제외한 {{productName}} 도메인 이름을 입력하세요"
         }
       ],
       "approved_at": null
@@ -160,9 +148,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Lao translation does not properly handle the variable `{{productName}}`. It's simply inserted without proper integration into the sentence structure, which might look awkward or unnatural.",
-          "suggestion": "Consider rephrasing the sentence to more naturally incorporate the `{{productName}}` variable. For example: 'ໃສ່ຊື່ໂດເມນຂອງຜະລິດຕະພັນ {{productName}} ໂດຍບໍ່ມີເສັ້ນທາງ URL ຫຼືຕົວອັກສອນເພີ່ມເຕີມ.' (Enter the domain name of product {{productName}} without URL paths or additional characters.)"
+          "type": "spelling",
+          "description": "The word 'ເສັ້ນທາງ' (sēn thāng) is a bit awkward in this context. While technically correct, a more natural phrasing might be preferred.",
+          "suggestion": "ໃສ່ຊື່ໂດເມນ {{productName}} ໂດຍບໍ່ມີສ່ວນເສັ້ນທາງ URL ຫຼືຕົວອັກສອນເພີ່ມເຕີມ."
         }
       ],
       "approved_at": null
@@ -172,9 +160,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Latvian translation includes a space before the double curly braces in `{{productName}}`. This should be removed to match the English source and ensure proper variable substitution.",
-          "suggestion": "Ievadiet {{productName}} domēna nosaukumu bez vietrāža URL ceļiem vai papildu rakstzīmēm."
+          "type": "spelling",
+          "description": "The word 'vietrāža' is a less common and slightly awkward phrasing in this context. 'URL ceļiem' should likely be simplified.",
+          "suggestion": "Ievadiet {{productName}} domēna nosaukumu bez URL ceļiem vai papildu rakstzīmēm."
         }
       ],
       "approved_at": null
@@ -209,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Introduceți' is a bit formal for this context. A more user-friendly option would be 'Introduceți' or 'Scrieți'.",
-          "suggestion": "Scrieți numele de domeniu {{productName}} fără adrese URL sau caractere suplimentare."
+          "description": "The translation 'Introduceți' is a formal command. For a user interface element like this, a less formal option like 'Introduce' or 'Scrieți' would be more appropriate.",
+          "suggestion": "Introduce or Scrieți"
         }
       ],
       "approved_at": null
@@ -218,7 +206,18 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Enter the {{productName}} domain name' is better translated as 'Specify the {{productName}} domain name' or 'Provide the {{productName}} domain name'. 'Введите' (Vvedite) implies a more direct entry, while 'Specify' or 'Provide' are more suitable for a user input context.",
+          "suggestion": "Укажите доменное имя {{productName}} без URL-адресов и дополнительных символов."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, it's more idiomatic Russian to slightly restructure the sentence. The current order sounds a little less natural.",
+          "suggestion": "Укажите доменное имя {{productName}} без URL-адресов и дополнительных символов."
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -227,18 +226,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'ඒ.ස.නි.' (A.S.N.) is not a standard or understood term in this context. It appears to be an attempt to indicate a domain name, but it's incorrect and confusing. It should be removed or replaced with a more appropriate term.",
-          "suggestion": "Remove 'ඒ.ස.නි.' or replace it with a term like 'අන්තර්ජාල ප්‍රදේශය' (internet area) or 'ඩොමේන්' (domain)."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'වසමේ නම' which directly translates to 'name of the area/region'.  While technically not wrong, it's a bit awkward and less clear than a simpler phrasing.  It would be better to more directly refer to the domain name itself.",
-          "suggestion": "Replace 'වසමේ නම' with 'ඩොමේන්' or 'අන්තර්ජාල ඩොමේන්'."
+          "description": "The translation \"ඒ.ස.නි. හෝ අතිරේක අකුරු රහිතව\" doesn't accurately convey \"without URL paths or additional characters\".  The Sinhala phrase translates more to 'without A.S.N. or additional characters'.  It doesn't cover URL paths.",
+          "suggestion": "ඒ.ස.නි. හෝ වෙනත් අක්ෂరాలు, යpath නොමැතිව {{productName}} වසමේ නම ඇතුල් කරන්න."
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the spacing around the `{{productName}}` might benefit from improvement for readability.  The current spacing is slightly awkward.",
-          "suggestion": "Ensure consistent spacing around `{{productName}}` to match standard Sinhala formatting conventions (e.g., a single space before and after)."
+          "description": "The word 'path' is added in the suggested correction and might need a further clarification on its meaning for the target audience. It may be better to simplify the suggestion to avoid confusion.",
+          "suggestion": "ඒ.ස.නි. හෝ වෙනත් අක්ෂර නොමැතිව {{productName}} වසමේ නම ඇතුල් කරන්න."
         }
       ],
       "approved_at": null
@@ -248,9 +242,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The double curly braces around 'productName' are not consistent with standard Slovak formatting for placeholders. While technically functional, they look out of place and might confuse users.",
-          "suggestion": "Consider using single curly braces: '{productName}'"
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Zadajte názov domény {{productName}} bez určenia cesty URL alebo ďalších znakov.' is a bit literal and could be improved for better flow and clarity in Slovak. The phrase 'určenia cesty URL' is overly formal and could be simplified.",
+          "suggestion": "Zadajte doménu {{productName}} bez URL adresy alebo iných znakov."
         }
       ],
       "approved_at": null
@@ -260,9 +254,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The term 'URL' is an abbreviation and should ideally be translated to its Slovenian equivalent or explained. While understood, keeping it as 'URL' can feel unnatural.",
+          "suggestion": "Vnesite ime domene {{productName}} brez poti URL ali dodatnih znakov."
+        },
+        {
           "type": "formatting",
-          "description": "The translation uses 'URL' which is an English loanword. It would be more appropriate to use the Slovenian equivalent or a more general term.",
-          "suggestion": "Replace 'URL' with 'pot URL-ja' or 'naslov URL-ja'."
+          "description": "While acceptable, using 'poti URL' instead of just 'URL' improves readability and naturalness in Slovenian. It explicitly specifies that we are talking about URL paths.",
+          "suggestion": "No change needed if the target audience understands 'URL' in Slovenian."
         }
       ],
       "approved_at": null
@@ -273,13 +272,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'URL paths' is not accurate. 'URL стаза' literally translates to 'URL track' which is not the intended meaning. The correct translation should be something like 'URL putanja'.",
-          "suggestion": "Унеси {{productName}} домен име без URL путање или додатних знакова."
-        },
-        {
-          "type": "formatting",
-          "description": "There's a space after 'домен' which might be inconsistent with other similar text.",
-          "suggestion": "Унеси {{productName}}домен име без URL путање или додатних знакова."
+          "description": "The translation 'Унеси {{productName}} домен име без URL стаза или додатних знакова' is not a precise translation of 'Enter the {{productName}} domain name without URL paths or additional characters'. 'Стаза' refers to a path or track, not 'paths' in the context of a URL. 'Знакова' is also an unusual choice, 'characters' would be better translated to something like 'карактера'.",
+          "suggestion": "Унеси {{productName}} домен име без URL путева или додатних карактера."
         }
       ],
       "approved_at": null
@@ -289,9 +283,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'URL staza' is technically correct but sounds unnatural in this context. A more natural translation for 'URL paths' would be 'putanja URL-a' or 'URL putanje'.",
-          "suggestion": "Unesi {{productName}} domen ime bez putanje URL-a ili dodatnih znakova."
+          "type": "spelling",
+          "description": "The word 'domen' should be 'domen(a)'. While 'domen' is understandable, 'domen(a)' is the grammatically correct form in Serbian for a domain name, depending on context and whether it's being treated as masculine or feminine.",
+          "suggestion": "Unesi {{productName}} domen(a) ime bez URL staza ili dodatnih znakova."
         }
       ],
       "approved_at": null
@@ -299,25 +293,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'without URL paths or additional characters' is not perfectly conveyed. A more natural Turkish phrasing might be 'URL yolları veya başka karakterler'.",
-          "suggestion": "{{productName}} alan adını URL yolları veya başka karakterler olmadan girin."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Ukrainian translation uses an apostrophe (') for 'im’ya'. The correct form is 'ім'я'.",
-          "suggestion": "Введіть доменне ім’я {{productName}} без URL-шляхів або додаткових символів."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -326,8 +308,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'không có đường dẫn URL hoặc ký tự bổ sung' is a literal translation but doesn't flow naturally in Vietnamese. A more idiomatic translation for 'without URL paths or additional characters' would be something like 'không bao gồm đường dẫn URL hoặc các ký tự khác'.",
-          "suggestion": "Nhập tên miền {{productName}} không bao gồm đường dẫn URL hoặc các ký tự khác."
+          "description": "The translation 'Nhập tên miền {{productName}} không có đường dẫn URL hoặc ký tự bổ sung' is a literal translation. A more natural Vietnamese phrasing would be 'Nhập tên miền {{productName}} mà không có đường dẫn URL hoặc ký tự đặc biệt.'",
+          "suggestion": "Nhập tên miền {{productName}} mà không có đường dẫn URL hoặc ký tự đặc biệt."
+        },
+        {
+          "type": "formatting",
+          "description": "The word 'hoặc' (or) is followed by 'ký tự bổ sung' which is not as natural as 'ký tự đặc biệt'.",
+          "suggestion": "Nhập tên miền {{productName}} mà không có đường dẫn URL hoặc ký tự đặc biệt."
         }
       ],
       "approved_at": null

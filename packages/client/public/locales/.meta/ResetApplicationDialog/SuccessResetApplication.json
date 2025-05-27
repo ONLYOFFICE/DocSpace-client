@@ -3,7 +3,7 @@
   "content": "Application settings for authentication have been successfully reset.",
   "content_en_sha1_hash": "04485034a5d6d72d584937bd147b79bc74b54daa",
   "created_at": "2025-05-19T21:30:53.329Z",
-  "updated_at": "2025-05-21T05:34:19.294Z",
+  "updated_at": "2025-05-24T06:04:08.197Z",
   "comment": {
     "text": "This translation key is used for a success message that is displayed when application authentication settings have been successfully reset. It appears as a toast notification in a Reset Application Dialog.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'تمت إعادة تعيين إعدادات التطبيق المصادقة بنجاح.' is a literal translation and doesn't flow naturally in Arabic. 'المصادقة' (authentication) is a technical term that might not be the best choice here. A more user-friendly translation is needed.",
-          "suggestion": "تمت إعادة تعيين إعدادات التطبيق بنجاح."
+          "description": "The Arabic translation 'تمت إعادة تعيين إعدادات التطبيق المصادقة بنجاح' is a literal translation and doesn't flow naturally in Arabic. The term 'المصادقة' (authentication) is overly technical for this context and can be simplified.",
+          "suggestion": "تم إعادة تعيين إعدادات التطبيق بنجاح."
         }
       ],
       "approved_at": null
@@ -42,8 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Doğrulama üçün proqram parametrləri uğurla sıfırlandı' doesn't fully capture the meaning of 'Application settings for authentication have been successfully reset.' While 'Doğrulama' (authentication) and 'sıfırlandı' (reset) are correct, 'proqram parametrləri' (program parameters) is a bit too literal and not the most natural phrasing in Azerbaijani for 'application settings'.",
-          "suggestion": "A more natural translation would be something like: 'Təsdiqlənmə üçün tətbiq ayarları uğurla sıfırlandı.' or 'Tətbiq olunan təsdiqləmə parametrləri sıfırlandı.'"
+          "description": "The translation 'Doğrulama üçün proqram parametrləri uğurla sıfırlandı' while conveying the general meaning, isn't the most natural or idiomatic way to express 'Application settings for authentication have been successfully reset' in Azerbaijani.  'Parametrləri' (parameters) feels a little technical. 'Tətbiq olunanaylar' (applications) or a more general term would be preferable.",
+          "suggestion": "Consider alternatives like: 'Doğrulama üçün tətbiq olunanayların parametrləri uğurla sıfırlandı.' or 'Doğrulama üçün tətbiq ayarları uğurla sıfırlandı.'"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a lowercase first word. In Azerbaijani, titles and beginnings of sentences typically start with a capital letter.",
+          "suggestion": "Change 'doğrulama' to 'Doğrulama'."
         }
       ],
       "approved_at": null
@@ -72,8 +77,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Η επαναφορά ρυθμίσεων της εφαρμογής για τον έλεγχο ταυτότητας έγινε επιτυχώς' is a literal translation and sounds a bit awkward in Greek. A more natural phrasing would convey the same meaning more effectively.",
-          "suggestion": "Επιτυχής επαναφορά των ρυθμίσεων της εφαρμογής για τον έλεγχο ταυτότητας."
+          "description": "The translation 'Η επαναφορά ρυθμίσεων της εφαρμογής για τον έλεγχο ταυτότητας έγινε επιτυχώς' is a bit literal and could be improved for naturalness. 'Έλεγχος ταυτότητας' is technically correct but 'αυθεντικοποίησης' is more commonly used in a software context for authentication.",
+          "suggestion": "Η επαναφορά των ρυθμίσεων της εφαρμογής για την αυθεντικοποίηση έγινε επιτυχώς."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence uses a passive voice which is less common and less preferred in modern Greek. While grammatically correct, it sounds slightly formal and less natural.",
+          "suggestion": "Οι ρυθμίσεις της εφαρμογής για την αυθεντικοποίηση επαναφέρθηκαν επιτυχώς."
         }
       ],
       "approved_at": null
@@ -102,8 +112,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'successfully reset' is better translated as 'successfully restored' in this context. 'Վերականգնվել են' (verakanvel en) more accurately conveys a return to a previous state or default settings, which aligns with the intent of resetting application authentication settings.",
-          "suggestion": "Հավելվածի նույնականացման կարգավորումները հաջողությամբ վերականգնվել են:"
+          "description": "The English phrase 'successfully reset' is better translated as 'reset' in Armenian to maintain brevity and clarity in a UI context. 'Վերականգնվել են' (restored) implies a return to a previous state, which isn't necessarily what 'reset' means.",
+          "suggestion": "Հավելվածի նույնականացման կարգավորումները հաջողությամբ դարձվել են:"
         }
       ],
       "approved_at": null
@@ -132,13 +142,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ຣີເຊັດ' (reset) appears to be a transliteration and might not be the most natural or preferred term in Lao. While understandable, a more localized term might improve readability.",
-          "suggestion": "Consider using a more common Lao term for 'reset' that aligns with technical vocabulary. Researching common Lao terminology for software resets is recommended."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrasing \"ໄດ້ຖືກຣີເຊັດສຳເລັດແລ້ວ\" is grammatically correct but might feel slightly verbose. A more concise phrasing could improve flow.",
-          "suggestion": "Consider rephrasing to something like \"ຖືກຣີເຊັດແລ້ວ\" or a similar more succinct alternative."
+          "description": "The word 'ຣີເຊັດ' (reset) is misspelled. The correct Lao spelling is 'ຣີເຊັດ'.",
+          "suggestion": "ຣີເຊັດ"
         }
       ],
       "approved_at": null
@@ -167,8 +172,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'As definições da aplicação para autenticação foram repostas com sucesso.' isn't the most natural or precise translation of 'Application settings for authentication have been successfully reset.' The word 'repostas' (replied/answered) is not suitable for 'reset' in this context.",
-          "suggestion": "As configurações da aplicação para autenticação foram redefinidas com sucesso."
+          "description": "The translation 'As definições da aplicação para autenticação foram repostas com sucesso' isn't the most natural or precise way to convey 'Application settings for authentication have been successfully reset.' 'Repostas' implies a reply, not a reset. A more appropriate verb would be 'reiniciadas'.",
+          "suggestion": "As definições da aplicação para autenticação foram reiniciadas com sucesso."
         }
       ],
       "approved_at": null
@@ -194,13 +199,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ද්වි-සාධකය සඳහා යෙදුමේ සැකසුම් සාර්ථකව නැවත සකසා ඇත' literally translates to 'Application settings for two-factor authentication have been successfully reset.' While technically correct, it's more natural and user-friendly to omit the specific reference to 'two-factor authentication' unless it's strictly necessary for context. A more general phrasing would improve clarity.",
-          "suggestion": "ද්වි-සාධකය සඳහා යෙදුමේ සැකසුම් සාර්ථකව නැවත සකසා ඇත. (Consider alternative: යෙදුමේ සැකසුම් සාර්ථකව නැවත සකසා ඇත - 'Application settings have been successfully reset')"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -221,8 +220,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ресетована' should be 'ресетовани' to agree with the masculine noun 'подешавања'.",
-          "suggestion": "Подешавања апликације за аутентификацију су успешно ресетовани."
+          "description": "The word 'ресетована' is a valid word but can be replaced with 'нулирана' for a more natural and clearer meaning in this context, especially concerning application settings.",
+          "suggestion": "Подешавања апликације за аутентификацију су успешно нулирана."
         }
       ],
       "approved_at": null
@@ -239,8 +238,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"sıfırlandı\" can mean 'reset,' in the context of application settings, a more natural and precise translation would be \"yeniden başlatıldı\" or \"temizlendi.\" \"Sıfırlandı\" often implies a return to factory settings, which might not be the intended meaning.",
-          "suggestion": "Kimlik doğrulama için uygulama ayarları başarıyla yeniden başlatıldı."
+          "description": "The English phrase 'successfully reset' is better translated as 'başarıyla sıfırlandı' in Turkish. While 'sıfırlandı' is acceptable, 'kaldırıldı' or 'temizlendi' could also be considered depending on the specific nuance intended.",
+          "suggestion": "Consider alternatives like 'Kimlik doğrulama için uygulama ayarları başarıyla kaldırıldı.' or 'Kimlik doğrulama için uygulama ayarları başarıyla temizlendi.'"
         }
       ],
       "approved_at": null
@@ -251,13 +250,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Параметри застосунку, що використовуються для автентифікації, успішно скинуто' is a literal translation and sounds unnatural in Ukrainian. 'Параметри' (parameters) is a bit technical and 'скинуто' (reset/dumped) isn't the most common phrasing for resetting application settings.",
-          "suggestion": "Налаштування застосунку для автентифікації успішно скинуто."
+          "description": "The translation 'Параметри застосунку, що використовуються для автентифікації, успішно скинуто' is overly literal and slightly awkward. While technically correct, it's not the most natural way to phrase this in Ukrainian. 'Параметри' (parameters) is a bit too technical for a user-facing message.",
+          "suggestion": "Успішно скинуто налаштування автентифікації застосунку."
         },
         {
           "type": "formatting",
-          "description": "While not a severe issue, the sentence could benefit from better flow and conciseness.",
-          "suggestion": "Налаштування автентифікації застосунку успішно скинуто."
+          "description": "The Ukrainian sentence is a bit long and could be broken down for better readability in a UI.",
+          "suggestion": "Скинуто налаштування автентифікації застосунку. Дія виконана успішно."
         }
       ],
       "approved_at": null
@@ -268,8 +267,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Cài đặt ứng dụng cho việc xác thực đã được đặt lại thành công' is a literal translation but doesn't flow naturally in Vietnamese. 'Xác thực' is a very technical term and might be too formal for the context of resetting application settings. It implies a more complex authentication process than a simple reset.",
-          "suggestion": "Cài đặt ứng dụng đã được khôi phục thành công."
+          "description": "The translation 'Cài đặt ứng dụng cho việc xác thực đã được đặt lại thành công' is not the most natural or accurate translation of 'Application settings for authentication have been successfully reset.'. While technically correct, it sounds somewhat clunky in Vietnamese.",
+          "suggestion": "Một số lựa chọn tốt hơn có thể là: \n1. 'Cài đặt xác thực của ứng dụng đã được đặt lại thành công.'\n2. 'Đã khôi phục cài đặt xác thực của ứng dụng.'\n3. 'Cài đặt liên quan đến xác thực của ứng dụng đã được khôi phục thành công.'"
         }
       ],
       "approved_at": null
@@ -277,7 +276,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '已成功重置身份验证应用程序设置' while technically correct, doesn't fully capture the nuance of 'Application settings for authentication'.  '身份验证应用程序设置' is a bit literal. A more natural phrasing might emphasize the reset of the application itself.",
+          "suggestion": "已成功重置身份验证应用。"
+        }
+      ],
       "approved_at": null
     }
   }

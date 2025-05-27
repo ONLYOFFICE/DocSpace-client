@@ -26,11 +26,13 @@
 
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
+
 import { Checkbox } from "../../../components/checkbox";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 
-import { StyledAdditionalResources } from "./AdditionalResources.styled";
 import { IAdditionalResources } from "./AdditionalResources.types";
+import styles from "./AdditionalResources.module.scss";
 
 export const AdditionalResources = ({
   isSettingPaid,
@@ -74,21 +76,34 @@ export const AdditionalResources = ({
   };
 
   return (
-    <StyledAdditionalResources>
-      <div className="header">
-        <div className="additional-header settings_unavailable">
+    <div className={styles.additionalResources}>
+      <div className={classNames(styles.header, "header")}>
+        <div
+          className={classNames(
+            styles.additionalHeader,
+            "settings_unavailable",
+          )}
+        >
           {t("AdditionalResources")}
         </div>
       </div>
-      <div className="settings_unavailable additional-description">
+      <div
+        className={classNames(
+          styles.additionalDescription,
+          "settings_unavailable",
+        )}
+      >
         {t("AdditionalResourcesDescription", {
           productName: t("Common:ProductName"),
         })}
       </div>
-      <div className="branding-checkbox">
+      <div className={classNames(styles.brandingCheckbox)}>
         <Checkbox
           data-testid="show-feedback-support"
-          className="show-feedback-support checkbox"
+          className={classNames(
+            styles.checkbox,
+            "show-feedback-support checkbox",
+          )}
           isDisabled={!isSettingPaid}
           label={t("ShowFeedbackAndSupport")}
           isChecked={feedbackEnabled}
@@ -97,7 +112,7 @@ export const AdditionalResources = ({
 
         <Checkbox
           data-testid="show-help-center"
-          className="show-help-center checkbox"
+          className={classNames(styles.checkbox)}
           isDisabled={!isSettingPaid}
           label={t("ShowHelpCenter")}
           isChecked={helpEnabled}
@@ -116,6 +131,6 @@ export const AdditionalResources = ({
         additionalClassSaveButton="additional-resources-save"
         additionalClassCancelButton="additional-resources-cancel"
       />
-    </StyledAdditionalResources>
+    </div>
   );
 };

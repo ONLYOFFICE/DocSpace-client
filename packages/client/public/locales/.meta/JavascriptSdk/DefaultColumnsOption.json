@@ -3,7 +3,7 @@
   "content": "Default (Quantity depends on screen width)",
   "content_en_sha1_hash": "c9cffe920b3fe39998cc9c0a0c4b442c111c6746",
   "created_at": "2025-05-19T21:30:54.447Z",
-  "updated_at": "2025-05-21T09:15:45.843Z",
+  "updated_at": "2025-05-24T09:27:48.653Z",
   "comment": {
     "text": "This translation key is used to display a label for a preset option that controls the quantity of columns displayed based on screen width. It appears in a dropdown menu or button, likely within settings or configuration pages, where users can select from predefined options.",
     "is_auto": true,
@@ -36,18 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word \"Defolt\" is a misspelling of \"Default\".",
+          "description": "The word 'Default' is misspelled as 'Defolt'.",
           "suggestion": "Default"
         },
         {
-          "type": "spelling",
-          "description": "The word 'genişliyindən' may benefit from checking to ensure the accurate form for 'width' in this context.",
-          "suggestion": "genişliyindən (requires context verification)"
-        },
-        {
           "type": "grammar",
-          "description": "The sentence structure is slightly awkward. Consider rephrasing to improve flow.",
-          "suggestion": "Varsayılan (Miqdarı ekranın genişliyinə görə dəyişir)"
+          "description": "The word order and phrasing 'Say ekranın genişliyindən asılıdır' is somewhat awkward and could be improved for naturalness in Azerbaijani.  It's literally \"Quantity depends on screen width.\"",
+          "suggestion": "Miqdarı ekranın genişliyinə görə dəyişir"
         }
       ],
       "approved_at": null
@@ -97,13 +92,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Default (Quantity depends on screen width)' implies a pre-defined set of columns that adjusts based on screen size. The Armenian translation 'Կանխադրված (Քանակը կախված է էկրանի լայնությունից)' is a literal translation, but 'Քանակը' (quantity) might be misleading. It's not necessarily about the 'quantity' of columns, but about the *number* or *arrangement* of columns.",
-          "suggestion": "Consider a translation that focuses on 'number of columns' or 'arrangement of columns' rather than 'quantity'. For example: 'Նախապես սահմանված (ստորևումը կախված է էկրանի լայնությունից)' or 'Ստանդարտ (ստորևումը կախված է էկրանի լայնությունից)'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -124,8 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '기본값(수량은 화면 너비에 따라 달라짐)' is a literal translation but sounds unnatural in Korean. A more natural phrasing would convey the meaning of 'Default' in the context of JavascriptSdk options.",
-          "suggestion": "기본값 (화면 너비에 따라 자동 설정)"
+          "description": "The translation '기본값(수량은 화면 너비에 따라 달라짐)' is technically correct but could be more natural in Korean. '기본값' is good for 'Default', but the part explaining quantity dependency could be phrased more elegantly.",
+          "suggestion": "기본값(화면 너비에 따라 수량 자동 조절)"
         }
       ],
       "approved_at": null
@@ -133,13 +122,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ໜ້າຈໍ' (naa-joo) is the correct Lao word for 'screen'.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -178,13 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Implicit\" doesn't accurately convey the meaning of \"Default\" in this context. \"Default\" means the standard or pre-set value, not something hidden or implied. \"Implicit\" suggests something that's understood but not explicitly stated.",
-          "suggestion": "Standard (Mărimea depinde de lățimea ecranului)"
-        },
-        {
-          "type": "spelling",
-          "description": "While \"lățimea\" is correct, a more common and slightly more natural phrasing might be beneficial depending on the target audience.",
-          "suggestion": "lățime (Optional - only if it improves readability)"
+          "description": "The word 'Implicit' doesn't accurately convey the meaning of 'Default' in this context. 'Implicit' suggests something that's understood without being stated, while 'Default' means the standard or pre-set value. A better translation would be something like 'Valoare implicită' or 'Standard'.",
+          "suggestion": "Valoare implicită"
         }
       ],
       "approved_at": null
@@ -201,13 +179,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පෙරනිමි' (peranim) is a less common and potentially incorrect spelling of 'පෙරනිමි' (peranimi). It should be 'පෙරනිමි'.",
-          "suggestion": "Replace 'පෙරනිමි' with 'පෙරනිමි'."
+          "description": "The word 'පෙරනිමි' (peranimima) should ideally be 'පෙරනිsetDefault' to more closely match the English 'Default'. While 'පෙරනිමි' is a valid word meaning 'default', it's not the typical terminology used in technical contexts.",
+          "suggestion": "පෙරනිsetDefault"
         },
         {
-          "type": "incorrect_translation",
-          "description": "While understandable, 'පෙරනිමි (තිරයේ පළල මත ප්‍රමාණය රඳා පවතී)' is a bit literal and could be more naturally phrased in Sinhala. 'Quantity depends on screen width' could be expressed more elegantly.",
-          "suggestion": "Consider 'පෙරනිමි (තිර පතෙහි వెడల్ලි අනුව మారుతుంది)' or 'පෙරනිමි (තිර පතේ వెడల్ලි අනුව වෙනස් වේ)'."
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence structure is a bit awkward. It might be improved for better flow in Sinhala. The flow of the meaning could be enhanced.",
+          "suggestion": "තිරයේ පළල අනුව ප්‍රමාණය වෙනස්වේ (Quantity varies depending on screen width)."
         }
       ],
       "approved_at": null
@@ -227,7 +205,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Подразумевано (количина зависи од ширине екрана)' is not the most natural or accurate translation of 'Default (Quantity depends on screen width)'. 'Подразумевано' implies 'implied' or 'assumed', while 'Default' often means 'standard' or 'predefined'.",
+          "suggestion": "Стандардно (количина зависи од ширине екрана)"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

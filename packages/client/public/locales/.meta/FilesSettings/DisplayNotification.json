@@ -3,7 +3,7 @@
   "content": "Display notification when moving items to Trash",
   "content_en_sha1_hash": "09128fbd2346eda0e72d39ced8071e2f31d2f719",
   "created_at": "2025-05-19T21:30:55.179Z",
-  "updated_at": "2025-05-21T10:52:04.650Z",
+  "updated_at": "2025-05-24T11:02:03.859Z",
   "comment": {
     "text": "This translation key describes the notification to be displayed when moving items to Trash. It is used as a placeholder text in a UI component that triggers the action.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Zibil qutusuna atılan zaman bildirişi göstər' is a literal translation but sounds slightly unnatural in Azerbaijani. A more natural phrasing would be closer to 'Zibilə atılan fayllar üçün bildiriş göstər' or 'Zibilə atılan elementlər üçün bildiriş göstər'. The current translation emphasizes the action of *throwing* into the trash, while the English implies the system should notify when items are *moved* to the trash.",
-          "suggestion": "Zibilə atılan fayllar üçün bildiriş göstər"
+          "description": "The translation \"Zibil qutusuna atılan zaman bildirişi göstər\" is a literal translation that doesn't quite capture the natural phrasing in Azerbaijani. It sounds a bit awkward.",
+          "suggestion": "A more natural translation would be something like \"Zibilə atılan fayllar üçün bildiriş göstər\" or \"Zibil qutusuna faylları atdığınızda bildiriş göstər\"."
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ցուցադրել ծանուցումները աղբարկղ տեղափոխելիս\" is a literal translation but doesn't quite capture the intended meaning of 'Display notification when moving items to Trash'. A more natural and accurate translation would focus on informing the user about the item's destination.",
-          "suggestion": "Հաղորդելու ծանուցում, երբ իրեր տեղափոխվում են աղբարկղ:"
+          "description": "The translation \"Ցուցադրել ծանուցումները աղբարկղ տեղափոխելիս\" is too literal. A more natural and accurate translation would be something like \"Ցուցադրել հայտնում ֆայլերը տեղափոխելիս աղբարկղ\" or \"Տեղափոխելուց առաջ ցուցադրել հայտնում աղբարկղ\" to better convey the meaning of displaying a notification when moving items to the trash.",
+          "suggestion": "Ցուցադրել հայտնում ֆայլերը տեղափոխելիս աղբարկղ"
         }
       ],
       "approved_at": null
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Mostrar notificação ao mover itens para a Lixo\" is not the most natural or accurate rendering of 'Display notification when moving items to Trash'. \"Lixo\" is the literal translation of trash, but a more idiomatic expression would be 'a Pasta de Lixo' or 'para a área de Lixo'.",
-          "suggestion": "Mostrar notificação ao mover itens para a Pasta de Lixo"
+          "description": "The translation 'Mostrar notificação ao mover itens para a Lixo' is not the most natural or accurate translation of 'Display notification when moving items to Trash'.  'Lixo' is technically correct for 'Trash', but 'Cesto' is more commonly used in Brazilian Portuguese. The preposition 'ao' is also slightly awkward. A more natural translation would be 'Mostrar notificação ao mover itens para o Cesto'.",
+          "suggestion": "Mostrar notificação ao mover itens para o Cesto"
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Показывать предупреждение при перемещении элемента в корзину' is too literal. 'Display notification' implies a visual notification, while 'предупреждение' translates more closely to 'warning'.",
-          "suggestion": "Показывать уведомление при перемещении элемента в корзину"
+          "description": "The translation 'Показывать предупреждение при перемещении элемента в корзину' is too literal and doesn't convey the intended meaning as accurately as it could. 'Display notification' implies more than just a warning. It suggests a pop-up or visual cue.",
+          "suggestion": "Располагать уведомление при перемещении элемента в корзину"
         }
       ],
       "approved_at": null
@@ -180,13 +180,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අථක කුණුකූඩයට ගෙනයන විට දැනුම්දීමක් පෙන්වන්න' is a literal translation but could be improved for naturalness. 'අථක' might not be the most common or clear word for 'Trash'.",
-          "suggestion": "තැකැළි බඳුනට ගෙනයන විට දැනුම්දීමක් පෙන්වන්න"
+          "description": "The translation 'අථක කුණුකූඩයට ගෙනයන විට දැනුම්දීමක් පෙන්වන්න' while conveying the general meaning, is a bit literal and not the most natural way to express this in Sinhala. 'අථක' (athaka) while meaning 'waste' isn't the most common term used in this context.",
+          "suggestion": "Consider a more natural phrasing like 'දුම්‍බට දමානම් දැනුම්දීමක් පෙන්වන්න' or 'කරපු ද්‍රව්‍යයන් දුම්‍බට දැමුවත් දැනුම්දීමක් පෙන්වන්න'."
         },
         {
           "type": "spelling",
-          "description": "While 'අථක' might be acceptable, 'තැකැළි' or a more common term for 'Trash' would be preferable to avoid potential confusion.",
-          "suggestion": "Consider 'තැකැළි' or 'කසළ' instead of 'අථක'."
+          "description": "While 'දුම්‍බට' is more common, it could potentially be written as 'දුම්බට'. This is a slight variation and depends on regional preference, but consistency is important.  'දුම්‍බට' seems more prevalent.",
+          "suggestion": "Confirm preferred spelling: 'දුම්‍බට' vs 'දුම්බට'."
         }
       ],
       "approved_at": null
@@ -200,7 +200,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Prikažite obvestilo pri premikanju elementov v koš' is not the most natural or idiomatic Slovenian. While technically correct, it's a bit literal and could be improved for better flow. A more common phrasing would involve 'ko'.",
+          "suggestion": "Prikažite obvestilo, ko elemente premaknete v koš."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -209,13 +215,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation uses 'Прикажи' which translates to 'Show' or 'Display'. While technically correct, a more natural and common phrasing for this context in Serbian (Cyrillic) would be 'Покажи' (Pokazi) which also means 'Show'. 'Прикажи' is more formal and less frequently used in user interface contexts.",
-          "suggestion": "Покажи нотификацију када померате ставке у Отпад"
+          "description": "The translation 'Прикажи нотификацију када померате ставке у Отпад' is not a natural or accurate translation of 'Display notification when moving items to Trash.' The word 'померате' implies a continuous action of moving, while the English phrase is more about a one-time notification when an item is moved.",
+          "suggestion": "Прикажи обавештење када померете елементе у Кошиницу"
         },
         {
-          "type": "spelling",
-          "description": "The word 'Отпад' is generally understood as 'Trash', but 'Коша за смеће' (Kosha za smeće) which directly translates to 'Trash Bin' is more common and clearer in this context.",
-          "suggestion": "Покажи нотификацију када померате ставке у Коша за смеће"
+          "type": "formatting",
+          "description": "The word 'Отпад' (Trash) is likely best rendered as 'Кошиница' which is the more standard Serbian term for the trash bin/recycle bin.",
+          "suggestion": "Replace 'Отпад' with 'Кошиница'"
         }
       ],
       "approved_at": null
@@ -226,8 +232,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Prikaži notifikaciju kada pomerate stavke u Otpad' is technically correct but sounds a bit formal and direct. A more natural phrasing would be more common.",
-          "suggestion": "Prikaži obaveštenje kada premeštate datoteke u Koš za smeće"
+          "description": "The phrase \"moving items to Trash\" is better translated as \"premeštate predmete u Koš za smeće\" or \"premeštate datoteke u Koš za smeće\" in Serbian. \"Otpad\" generally means 'waste' and doesn't accurately represent the 'Trash' functionality.",
+          "suggestion": "Prikaži notifikaciju kada premeštate stavke u Koš za smeće"
         }
       ],
       "approved_at": null
@@ -256,8 +262,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"将项目移至回收站时展示消息通知\" is a bit too literal. A more natural and concise translation would be better. The phrase '展示消息通知' is a bit formal and clunky.",
-          "suggestion": "将项目移至回收站时显示通知"
+          "description": "The translation '将项目移至回收站时展示消息通知' is too literal and slightly awkward. '展示消息通知' is not the most natural way to express 'Display notification'.",
+          "suggestion": "考虑使用更自然的表达方式，例如 '将项目移至回收站时显示通知' or '当项目移至回收站时显示通知'."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the phrase '将项目移至回收站时' could be slightly improved for flow. ",
+          "suggestion": "Consider '当项目移动到回收站时' for slightly better flow."
         }
       ],
       "approved_at": null

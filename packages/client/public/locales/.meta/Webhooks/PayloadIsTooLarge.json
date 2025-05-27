@@ -3,7 +3,7 @@
   "content": "Payload is too large to display.",
   "content_en_sha1_hash": "2438fb4af4a1a90475310b4c809c6e49d9f54ebe",
   "created_at": "2025-05-19T21:30:49.782Z",
-  "updated_at": "2025-05-21T01:06:14.997Z",
+  "updated_at": "2025-05-24T02:20:16.746Z",
   "comment": {
     "text": "This translation key is used to display a message when the response payload exceeds a certain size limit. It is intended to be shown as an alternative label in a button. Translators should provide a concise and clear equivalent for this message that can be displayed in various UI contexts, such as buttons or error messages.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation is understandable, a more natural and commonly used phrasing in Saudi Arabic would be preferable. The current translation, 'الحمولة كبيرة جدًا بحيث لا يمكن عرضها,' is a bit literal and clunky.",
-          "suggestion": "الحمولة كبيرة لا يمكن عرضها."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -42,8 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Məlumat yükü göstərilməyəcək qədər böyükdür' is a bit literal and doesn't convey the intended meaning of 'Payload is too large to display' in a natural way. It implies the information load is too big *to be displayed*, rather than the payload itself being too large for processing or transmission.",
-          "suggestion": "Consider a translation like 'Göstərinməsi üçün yük çox böyükdür' or 'Yükun həddi aşdırılmışdır' which more accurately reflects the problem of the payload being too large."
+          "description": "The translation 'Məlumat yükü göstərilməyəcək qədər böyükdür' is too literal and doesn't convey the intended meaning as clearly as it could.  'Göstərilməyəcək qədər böyükdür' translates to 'too large to display' but is a bit clunky.",
+          "suggestion": "Consider a more natural phrasing like 'Yükləmənin həddi çoxdur' or 'Yükləmənin ölçüsü çoxdur' (The load size is too large)."
+        },
+        {
+          "type": "formatting",
+          "description": "While not a major issue, the phrasing could be made more concise and user-friendly.  The current translation is slightly verbose.",
+          "suggestion": "Aim for a more direct and simpler sentence structure."
         }
       ],
       "approved_at": null
@@ -60,13 +59,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Náklad je příliš velký na to, aby se zobrazil' is a literal translation and sounds awkward in Czech. 'Náklad' specifically refers to cargo or shipment, not a payload in a technical context.",
+          "description": "The translation 'Náklad je příliš velký na to, aby se zobrazil' is a literal translation that doesn't flow naturally in Czech. 'Náklad' typically refers to cargo or goods, not data payloads. A more appropriate translation would use a word like 'zpráva' (message) or 'data'.",
           "suggestion": "Zpráva je příliš velká na zobrazení."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'payload' is a technical term. 'Náklad' doesn't accurately represent this meaning.",
-          "suggestion": "The suggested replacement 'Zpráva' (message) is a better fit for 'payload' in this context, assuming the payload is a data message."
         }
       ],
       "approved_at": null
@@ -95,8 +89,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Tietosisältö on liian suuri näytettäväksi' is technically correct but not ideal. 'Tietosisältö' (data content) is a bit formal and verbose for a user-facing error message. A more natural and concise phrasing would be better.",
-          "suggestion": "Liian suuri tiedosto näytettäväksi."
+          "description": "The translation 'Tietosisältö on liian suuri näytettäväksi' is a literal translation and doesn't flow naturally in Finnish. 'Tietosisältö' (content) is overly formal and 'näytettäväksi' (to be displayed) is cumbersome.",
+          "suggestion": "A more natural translation would be 'Viesti on liian suuri näytettäväksi' or 'Kuorma on liian suuri näytettäväksi'."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the punctuation feels slightly off. It's possible the intended meaning requires a different structure.",
+          "suggestion": "Consider re-evaluating the punctuation if clarity or flow are prioritized."
         }
       ],
       "approved_at": null
@@ -113,8 +112,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Օգտակար բեռը չափազանց մեծ է ցուցադրելու համար:' is a literal translation and doesn't quite capture the natural flow of the English phrase 'Payload is too large to display.' It's a bit clunky and verbose.",
-          "suggestion": "Consider a more concise and natural translation like 'Բեռը չափազանց մեծ է' or 'Բեռն անչափ մեծ է' which conveys the same meaning more effectively."
+          "description": "The translation \"Օգտակար բեռը չափազանց մեծ է ցուցադրելու համար:\" is a literal translation and sounds somewhat unnatural in Armenian. A more natural phrasing would convey the idea that the payload exceeds a limit or capacity.",
+          "suggestion": "Բեռը չափազանց մեծ է, չի կարող ցուցադրվել։ (Ber@ chaphazanz medz e, chi karogh cuqadrel.) or Բեռի չափը գերազանցում է սահմանվածի։ (Beri chap@ gerazancum e sahmanvats.)"
         }
       ],
       "approved_at": null
@@ -149,8 +148,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Lietderīgā slodze ir pārāk liela, lai to parādītu' is technically correct but a bit formal and verbose for a user-facing error message. 'Payload' is a technical term that may not be understood by all users. A more user-friendly alternative would be to focus on the problem, not the technical cause.",
-          "suggestion": "Kļūda: datu apjoms ir pārāk liels."
+          "description": "While technically correct, the translation 'Lietderīgā slodze ir pārāk liela, lai to parādītu' is a bit formal and wordy for a user-facing error message. A more natural and concise translation would improve the user experience.",
+          "suggestion": "Slodze ir pārāk liela."
         }
       ],
       "approved_at": null
@@ -167,8 +166,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Dane właściwe są zbyt obszerne, aby je wyświetlić' doesn't fully capture the meaning of 'Payload is too large to display.' 'Dane właściwe' translates to 'proper data' which isn't quite right. 'Payload' refers to the data being sent, not necessarily 'proper' data.",
-          "suggestion": "A better translation would be something like 'Przesyłany plik jest zbyt duży, aby go wyświetlić.' or 'Ładunek jest zbyt duży, aby go wyświetlić.' where 'Przesyłany plik' means 'transmitted file' or 'Ładunek' keeps the more technical term."
+          "description": "The translation 'Dane właściwe są zbyt obszerne, aby je wyświetlić' is a literal translation and sounds unnatural in Polish. 'Dane właściwe' (proper data) isn't the most accurate way to describe a webhook payload. It's too formal and doesn't convey the meaning effectively for a user-facing error message.",
+          "suggestion": "Wiadomość jest zbyt duża, aby ją wyświetlić."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a somewhat complex sentence structure which can make it harder for users to quickly understand the problem. A more direct and simpler construction would improve readability.",
+          "suggestion": "Wiadomość jest zbyt duża, aby ją wyświetlić."
         }
       ],
       "approved_at": null
@@ -203,13 +207,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'මෙම payload පෙන්වීමට විශාල වැඩිය.' doesn't accurately convey the meaning of 'Payload is too large to display.' A more accurate translation would emphasize the size preventing display.",
-          "suggestion": "මෙම payload ප්‍රමාණය පෙන්වා ගැනීමට වැඩී."
+          "description": "The translation 'මෙම payload පෙන්වීමට විශාල වැඩිය' is not the most natural or accurate translation of 'Payload is too large to display.' While understandable, it's a bit literal and clunky. 'Payload' is a technical term and might be better handled with a slightly more idiomatic phrasing.",
+          "suggestion": "Payload ප්‍රමාණය පෙන්වා ගැනීමට වැඩිය."
         },
         {
-          "type": "grammar",
-          "description": "The use of 'වැඩි' is a bit awkward. While technically correct, it's not the most natural wording in Sinhala when describing size limitations.",
-          "suggestion": "මෙම payload ප්‍රමාණය පෙන්වා ගැනීමට වැඩී."
+          "type": "spelling",
+          "description": "While 'payload' is used in English and sometimes adopted directly into Sinhala, it's often better to use a descriptive alternative if the target audience may not be familiar with the term.",
+          "suggestion": "While 'payload' isn't inherently incorrect, consider alternatives like 'දත්ත ප්‍රමාණය' (data size) depending on the target audience."
         }
       ],
       "approved_at": null
@@ -220,13 +224,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Dátový obsah je príliš veľký na to, aby sa mohol zobraziť' is a bit verbose and formal for a user-facing error message. A more concise and natural translation would be better.",
-          "suggestion": "Dáta sú príliš veľké na zobrazenie."
-        },
-        {
-          "type": "spelling",
-          "description": "While technically correct, 'Dáta' is preferred over 'Dátový obsah' in this context. It's more commonly used for 'data' in Slovak.",
-          "suggestion": "Dáta"
+          "description": "The translation 'Dátový obsah je príliš veľký na to, aby sa mohol zobraziť' is a bit verbose and not a direct equivalent of 'Payload is too large to display.' A more natural and concise translation would be better.",
+          "suggestion": "Dátový balík je príliš veľký na zobrazenie."
         }
       ],
       "approved_at": null
@@ -240,13 +239,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'payload' is transliterated as 'Паyлоад'. The correct transliteration is 'Пeyлоад'.",
-          "suggestion": "Пeyлоад"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -258,13 +251,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Payload görüntülenemeyecek kadar büyük.' is a literal translation but doesn't fully capture the nuance of 'Payload is too large to display.' A more natural Turkish phrasing might convey that the payload cannot be processed or shown due to its size.",
-          "suggestion": "Payload çok büyük olduğu için işlenemiyor veya gösterilemiyor."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -273,13 +260,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Корисне навантаження завелике для показу' isn't the most natural or clear way to convey 'Payload is too large to display' in Ukrainian. 'Payload' is a technical term and doesn't always have a direct, easy equivalent. While 'корисне навантаження' is a valid translation, it might be perceived as overly technical for a general user. A more user-friendly translation might be preferred.",
+          "description": "The translation 'Корисне навантаження завелике для показу' is technically correct but sounds unnatural in Ukrainian. 'Payload' is often translated as 'дані' (dany) or 'інформація' (informatsiya).  'Для показу' isn't the most fluent way to express 'to display'.",
           "suggestion": "Розмір даних завеликий для відображення."
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'для показу' can be slightly improved for flow and clarity. 'для відображення' is a more direct and common translation of 'to display' in this context.",
-          "suggestion": "Use 'для відображення' instead of 'для показу'."
         }
       ],
       "approved_at": null
@@ -296,7 +278,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '负载过高，无法显示' while conveying a similar meaning, isn't the most accurate rendering of 'Payload is too large to display.' '负载' primarily refers to load or burden, while 'payload' in a technical context refers to data being sent. A better translation would capture the data aspect.",
+          "description": "The translation \"负载过高，无法显示\" directly translates to \"Payload is too high, cannot display.\" While conveying a similar meaning, \"负载\" (load) isn't the most accurate translation of \"Payload\" in this context. \"Payload\" typically refers to the data being transmitted. A more accurate translation would focus on the size or data volume.",
           "suggestion": "数据过大，无法显示。"
         }
       ],

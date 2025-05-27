@@ -3,7 +3,7 @@
   "content": "Group DN",
   "content_en_sha1_hash": "3397f4fba3474be0c8aa59f505c6e91b1d928406",
   "created_at": "2025-05-19T21:30:54.206Z",
-  "updated_at": "2025-05-21T08:21:46.409Z",
+  "updated_at": "2025-05-24T08:34:37.099Z",
   "comment": {
     "text": "The \"Group DN\" translation key is used to display the LdapGroupDN field label in the Portal Settings integration, which prompts users to enter a Group DN value. This field is required and appears on the LDAP settings page.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'الاسم التعريفي للمجموعة' while understandable, is a bit literal and not the most natural way to express 'Group DN' in Arabic. It translates to 'The identification name of the group'. A more idiomatic translation might be preferred.",
-          "suggestion": "Consider 'معرف المجموعة' (Ma'rif al-Majmu'ah) which directly translates to 'Group Identifier' or 'رابط المجموعة' (Rabit al-Majmu'ah) which means 'Group Link'."
+          "description": "The translation \"الاسم التعريفي للمجموعة\" while technically accurate, is quite literal and formal. A more natural and user-friendly translation for 'Group DN' would be something like 'مسار المجموعة' (Masar Al-Majmooa) which translates to 'Group Path'.",
+          "suggestion": "مسار المجموعة"
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'DN qrupu' while literally correct, doesn't flow naturally in Azerbaijani for a technical context like LDAP. 'DN' is often used directly in Azerbaijani IT terminology, so a more accurate and natural translation would be something like 'DN' or 'Qrup DN'.",
-          "suggestion": "Qrup DN"
+          "description": "While \"DN qrupu\" is a literal translation, it doesn't convey the intended meaning of \"Group DN\" in the context of LDAP configuration. It would be more accurate to use a phrase that indicates it's a Distinguished Name for a group.",
+          "suggestion": "Müsbət ad (DN) qrupu"
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Խումբ DN' is a transliteration of 'Group DN' rather than a true translation. A more appropriate translation would convey the meaning of 'Group Distinguished Name'.",
-          "suggestion": "Խմբի առանձնանշանակ նույնացուցիչ"
+          "description": "The translation 'Խումբ DN' is a direct transliteration of 'Group DN' and doesn't convey the meaning of 'Group Distinguished Name' in Armenian. A more accurate translation would convey the concept of a unique identifier or path for a group.",
+          "suggestion": "Consider a translation like 'Խմբի առանձնայական նույնացուցիչ' (Khumbi aranznayakan noyutsich) which means 'Group Distinguished Identifier', or something similar that reflects the purpose of a DN."
         }
       ],
       "approved_at": null
@@ -105,7 +105,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'DN del gruppo' is understandable, a more accurate and idiomatic translation of 'Group DN' in this context (LDAP) would be 'DN del gruppo LDAP' or 'DN di un gruppo LDAP'. The original English term implies a specific LDAP group DN, and the Italian translation lacks that specificity.",
+          "suggestion": "DN del gruppo LDAP"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -126,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ກຸ່ມ DN' is a direct transliteration of 'Group DN'. While understandable, it doesn't convey the meaning of 'Group DN' in the context of LDAP. A more accurate translation would convey the meaning of 'Distinguished Name' or something equivalent.",
-          "suggestion": "Consider a translation that conveys 'Distinguished Name' or 'ຊື່ແຍກຕ່າງ' (Seu Yaek Tang) for a more accurate representation. The best translation will depend on the target audience and the overall LDAP documentation."
+          "description": "The Lao translation \"ກຸ່ມ DN\" is a transliteration, not a translation. It doesn't convey the meaning of 'Group DN'. A more appropriate translation would convey that it's a distinguished name for a group in LDAP.",
+          "suggestion": "Possible translations could include: ຊື່ກຸ່ມຕັ້ງ (chue koum tang) - 'group distinguished name', or ອອກົກຸ່ມແບບຕັ້ງ (ok gum baeb tang) - 'group identification name'."
         }
       ],
       "approved_at": null
@@ -150,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Nazwa wyróżniająca grupy' is a literal translation, it's overly formal and not commonly used in a technical context. A more natural and user-friendly translation would be more appropriate.",
-          "suggestion": "Grupa DN"
+          "description": "While 'Nazwa wyróżniająca grupy' is a literal translation, 'Group DN' in LDAP contexts usually refers to the Distinguished Name. A more common and understandable translation would be 'DN grupy'.",
+          "suggestion": "DN grupy"
         }
       ],
       "approved_at": null
@@ -174,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nume distinct de grup' is not the most accurate or idiomatic translation of 'Group DN'. 'DN' stands for Distinguished Name and doesn't directly translate to 'distinct name'. A more accurate translation would convey the concept of a distinguished name or group identifier.",
-          "suggestion": "Consider alternatives like 'DN Grup', 'Nume distinctiv al grupului', or 'Identificator Grup'."
+          "description": "The translation 'Nume distinct de grup' is not the most accurate or natural translation of 'Group DN'. 'DN' stands for 'Distinguished Name', and a more accurate translation would reflect this. While 'Nume distinct de grup' conveys a part of the meaning, it's not complete.",
+          "suggestion": "A better translation could be 'Nume Distinctiv de Grup' or 'Nume DN de Grup'. If clarity is paramount, consider using the English acronym 'DN' followed by 'de grup'."
         }
       ],
       "approved_at": null
@@ -192,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කණ්ඩායම් DN' is a direct transliteration of \"Group DN\". While understandable, a more natural Sinhala translation for 'Group DN' might be 'මණ්ඩලයේ DN' or 'මණ්ඩලීය DN'.",
-          "suggestion": "මණ්ඩලයේ DN"
+          "description": "The translation 'කණ්ඩායම් DN' is a direct transliteration of 'Group DN'. While understandable, a more natural Sinhala equivalent for 'Group DN' would be 'මණ්ඩලයේ DN' or 'මණ්ඩලී DN'.  'කණ්ඩායම්' primarily means 'team' and while it can be used for a group, 'මණ්ඩල' is more appropriate in a technical context like LDAP.",
+          "suggestion": "මණ්ඩලී DN"
         }
       ],
       "approved_at": null
@@ -216,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"DN Групе\" is not a proper translation of \"Group DN\". It lacks context and appears to be just 'DN Group'. The correct translation would require consideration of the technical context and likely involve 'DN grupe' or something similar.",
-          "suggestion": "Consider 'DN grupe' or a more contextually appropriate translation that accurately reflects 'Group DN'."
+          "description": "The translation 'DN Групе' doesn't accurately convey the meaning of 'Group DN'. It appears to be a direct transliteration of 'DN' followed by the genitive case of 'group'. A more appropriate translation would consider the context of LDAP and potentially translate 'DN' with a term understood in Serbian LDAP environments, or rephrase to be clearer.",
+          "suggestion": "Possible suggestions include: 'DN Групе' (if 'DN' is commonly understood), 'Група ДН' (Group DN), or a more descriptive phrase depending on the exact usage within the LDAP system."
         }
       ],
       "approved_at": null
@@ -228,13 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"DN Grupe\" doesn't accurately reflect the English meaning of \"Group DN\". \"DN\" is an abbreviation and should likely be retained as such.",
-          "suggestion": "DN Grupe"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word order is unusual. While not grammatically incorrect, it sounds unnatural in Serbian. The term is often used as a descriptor.",
-          "suggestion": "Grupa DN"
+          "description": "The translation \"DN Grupe\" is grammatically incorrect and doesn't accurately convey the meaning of \"Group DN\".  \"Grupe\" is the dative plural form of \"grupa\". \"DN Grupe\" would mean 'to Group DNs'. The correct translation should use the nominative plural form or a more appropriate phrasing.",
+          "suggestion": "DN Grupa (DN Group) or Grupa DN (Group DN)"
         }
       ],
       "approved_at": null
@@ -251,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Унікальне ім'я групи\" (Unique name of group) doesn't accurately reflect the meaning of \"Group DN\" (Group Distinguished Name). It implies uniqueness, which isn't the primary characteristic. 'DN' refers to a specific identifier within the LDAP directory.",
-          "suggestion": "Ідентифікатор групи"
+          "description": "The translation 'Унікальне ім'я групи' (Unique group name) doesn't accurately reflect the English 'Group DN'. 'Group DN' refers to the Distinguished Name of a group in LDAP, which is a specific technical term, not just a 'unique group name'. A more accurate translation would capture the LDAP context.",
+          "suggestion": "Consider a translation like 'Розташування групи' (Group Location) or 'DN групи' (Group DN) to reflect the LDAP context."
         }
       ],
       "approved_at": null

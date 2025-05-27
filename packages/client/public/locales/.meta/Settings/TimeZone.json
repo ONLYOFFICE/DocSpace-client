@@ -3,7 +3,7 @@
   "content": "Time zone",
   "content_en_sha1_hash": "eea79afd832854a3b24153b928ee9c62c7457dbe",
   "created_at": "2025-05-19T21:30:52.951Z",
-  "updated_at": "2025-05-21T02:44:53.022Z",
+  "updated_at": "2025-05-24T03:51:28.883Z",
   "comment": {
     "text": "Time zone description is used to display a time zone option for user selection in the portal settings page. This translation key will appear as a dropdown or list of options within the category settings, allowing users to select their preferred time zone. It should reflect the actual name and value associated with each time zone.",
     "is_auto": true,
@@ -30,7 +30,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'وحدة زمنية' (Wahda Zamaniyah) translates to 'time unit' rather than 'time zone'. While related, it's not the accurate translation of 'Time zone'.",
+          "description": "While 'وحدة زمنية' (Wahda Zamaniyyah) is technically 'time unit', it's not the standard or most natural translation for 'Time zone' in a settings context. 'Time zone' refers to a geographical region with a specific time, not just a unit of time.",
           "suggestion": "النطاق الزمني"
         }
       ],

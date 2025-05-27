@@ -24,8 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
+
 import { FilesRow } from ".";
+
+const RowContent = ({ children }: { children: React.ReactNode }) => (
+  <div style={{ width: "500px" }}>{children}</div>
+);
+
+const contextOptions = [
+  {
+    key: "edit",
+    label: "Edit",
+    icon: "EditIcon",
+  },
+  {
+    key: "delete",
+    label: "Delete",
+    icon: "TrashIcon",
+  },
+];
 
 const meta = {
   title: "Components/FilesRow/FilesRow",
@@ -33,9 +52,59 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: "FilesRow component",
+        component:
+          "FilesRow component for displaying file row content with various states",
       },
     },
+  },
+  argTypes: {
+    checked: { control: "boolean" },
+    isActive: { control: "boolean" },
+    isThirdPartyFolder: { control: "boolean" },
+    isFirstElem: { control: "boolean" },
+    isIndexUpdated: { control: "boolean" },
+    isDragging: { control: "boolean" },
+    showHotkeyBorder: { control: "boolean" },
+    isHighlight: { control: "boolean" },
+    canDrag: { control: "boolean" },
+    isEdit: { control: "boolean" },
+    folderCategory: { control: "boolean" },
+    withAccess: { control: "boolean" },
+    inProgress: { control: "boolean" },
+    sectionWidth: {
+      control: { type: "number", min: 300, max: 1200, step: 100 },
+    },
+    contextButtonSpacerWidth: { control: "text" },
+    indeterminate: { control: "boolean" },
+    isRoom: { control: "boolean" },
+    mode: { control: "select", options: ["modern", "default"] },
+    isIndexEditingMode: { control: "boolean" },
+    withoutBorder: { control: "boolean" },
+    contextTitle: { control: "text" },
+    isArchive: { control: "boolean" },
+    isDisabled: { control: "boolean" },
+
+    // disabled controls
+    contextOptions: { table: { disable: true } },
+    children: { table: { disable: true } },
+    contentElement: { table: { disable: true } },
+    element: { table: { disable: true } },
+    className: { table: { disable: true } },
+    id: { table: { disable: true } },
+    data: { table: { disable: true } },
+    onSelect: { table: { disable: true } },
+    onRowClick: { table: { disable: true } },
+    getContextModel: { table: { disable: true } },
+    style: { table: { disable: true } },
+    badgesComponent: { table: { disable: true } },
+    badgeUrl: { table: { disable: true } },
+    onChangeIndex: { table: { disable: true } },
+    rowContextClose: { table: { disable: true } },
+    item: { table: { disable: true } },
+  },
+  args: {
+    sectionWidth: 300,
+    contextOptions,
   },
 } satisfies Meta<typeof FilesRow>;
 
@@ -43,5 +112,21 @@ type Story = StoryObj<typeof FilesRow>;
 export default meta;
 
 export const Default: Story = {
-  args: {},
+  args: {
+    children: <RowContent>Files Row Content</RowContent>,
+  },
+};
+
+export const Checked: Story = {
+  args: {
+    checked: true,
+    children: <RowContent>Checked Row</RowContent>,
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    inProgress: true,
+    children: <RowContent>Loading Row</RowContent>,
+  },
 };

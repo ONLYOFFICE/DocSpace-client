@@ -2275,3 +2275,11 @@
   --settings-common-white-label-not-available-background: #{$gray-dark};
   --settings-common-white-label-text-color: #{$white};
 }
+
+.light {
+  --icon-button-color: #{$gray};
+}
+
+.dark {
+  --icon-button-color: #{$gray-dark};
+}

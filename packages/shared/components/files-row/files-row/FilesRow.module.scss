@@ -26,5 +26,185 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+@use "../../../styles/variables";
+@use "../../../styles/mixins";
+
 .filesRow {
+  height: 56px;
+  position: unset;
+  margin-top: 0;
+  -webkit-tap-highlight-color: variables.$tap-highlight;
+
+  &.palmCursor {
+    cursor:
+      url(~PUBLIC_DIR/images/cursor.palm.react.svg?url) 8 0,
+      auto;
+  }
+
+  &.inProgress {
+    pointer-events: none;
+  }
+
+  &.hideLastDiv {
+    & > div:last-child {
+      width: 0;
+      overflow: hidden;
+    }
+  }
+
+  :global(.styled-element) {
+    height: 32px;
+    margin-inline-end: 12px;
+  }
+
+  &.sectionWidthMoreThan500 {
+    :global(.row_content) {
+      max-width: fit-content;
+    }
+  }
+
+  :global(.badges) {
+    display: flex;
+    align-items: center;
+
+    :global(.badge-version) {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  :global(.tablet-row-copy-link) {
+    display: none;
+  }
+
+  @include mixins.tablet-and-below {
+    :global(.tablet-row-copy-link) {
+      display: block;
+    }
+
+    :global(.row-copy-link) {
+      display: none;
+    }
+  }
+
+  @include mixins.mobile {
+    :global(.tablet-row-copy-link) {
+      display: none;
+    }
+
+    :global(.row-copy-link) {
+      display: block;
+
+      :hover {
+        svg path {
+          fill: var(--icon-button-color);
+        }
+      }
+    }
+  }
+
+  :global(.favorite) {
+    cursor: pointer;
+    margin-top: 1px;
+  }
+
+  :global(.row_context-menu-wrapper) {
+    width: min-content;
+    justify-content: space-between;
+    flex: 0 1 auto;
+  }
+
+  :global(.row_content) {
+    max-width: none;
+    min-width: 0;
+  }
+
+  :global(.badges) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  :global(.temp-badges) {
+    margin-top: 0;
+  }
+
+  :global(.lock-file) {
+    cursor: default;
+    svg {
+      height: 16px;
+    }
+  }
+
+  &.withAccess {
+    :global(.lock-file) {
+      cursor: pointer;
+    }
+  }
+
+  :global(.expandButton) {
+    margin-inline-start: 17px;
+    padding-top: 0;
+  }
+
+  &.folderCategory {
+    :global(.expandButton) {
+      margin-inline-start: 24px;
+
+      > div:first-child {
+        padding-inline-start: 0 !important;
+      }
+    }
+  }
+
+  :global(.badges) {
+    flex-direction: row-reverse;
+    gap: 24px;
+  }
+
+  :global(.file__badges),
+  :global(.room__badges),
+  :global(.folder__badges) {
+    margin-top: 0;
+
+    > div {
+      margin-top: 0;
+      margin-inline: 0;
+    }
+  }
+
+  @include mixins.mobile {
+    :global(.lock-file) {
+      svg {
+        height: 12px;
+      }
+    }
+
+    :global(.badges) {
+      gap: 8px;
+    }
+
+    :global(.room__badges):empty,
+    :global(.file__badges):empty,
+    :global(.folder__badges):empty,
+    :global(.badges__quickButtons):empty {
+      display: none;
+    }
+
+    :global(.badges),
+    :global(.folder__badges),
+    :global(.room__badges),
+    :global(.file__badges) {
+      margin-top: 0;
+      align-items: center;
+      height: 100%;
+    }
+
+    :global(.room__badges),
+    :global(.folder__badges) {
+      > div {
+        margin-top: 0;
+      }
+    }
+  }
 }

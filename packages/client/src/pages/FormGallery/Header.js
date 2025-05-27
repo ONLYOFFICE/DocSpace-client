@@ -81,12 +81,15 @@ const SectionHeaderContent = ({
 
     setIsLoading();
 
+    const state = { rootFolderType: folderInfo.rootFolderType };
+
     navigate(
       combineUrl(
         window.ClientConfig?.proxy?.url,
         config.homepage,
         `${url}?${filterParamsStr}`,
       ),
+      { state },
     );
   };
 

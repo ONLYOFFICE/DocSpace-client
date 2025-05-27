@@ -26,8 +26,8 @@
 
 import React, { useCallback, useState } from "react";
 
-import { ICompanySettings, IUseCompanySettings } from "./CompanyInfo.types";
 import { isEqual } from "lodash";
+import { ICompanySettings, IUseCompanySettings } from "./CompanyInfo.types";
 
 const errors = {
   site: false,
@@ -62,7 +62,7 @@ export const useCompanySettings = ({
     email: companySettings.email,
     phone: companySettings.phone,
     site: companySettings.site,
-    displayAbout: displayAbout,
+    displayAbout,
   };
 
   const [settingsFormData, setSettingsFormData] = useState<Partial<TFields>>(

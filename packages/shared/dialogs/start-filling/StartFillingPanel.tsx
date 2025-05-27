@@ -326,7 +326,7 @@ const StartFillingPanel = ({
       <ModalDialog.Footer>
         <Button
           id="shared_move-to-archived-modal_submit"
-          key="OkButton"
+          key="OKButton"
           label={t("Common:Start")}
           size={ButtonSize.normal}
           primary

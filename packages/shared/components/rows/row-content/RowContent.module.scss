@@ -1,6 +1,6 @@
-@import "../../../styles/variables/index.scss";
-@import "../../../styles/variables/_colors.scss";
-@import "../../../styles/_mixins.scss";
+@use "../../../styles/variables";
+@use "../../../styles/variables/colors";
+@use "../../../styles/mixins";
 
 .common {
   margin: var(--row-content-margin);
@@ -35,11 +35,11 @@
   max-width: 100%;
   margin-inline-end: 8px;
 
-  @include truncate;
+  @include mixins.truncate;
   max-width: var(--row-content-max-width);
 
-  @include tablet {
-    @include truncate;
+  @include mixins.tablet {
+    @include mixins.truncate;
     max-width: var(--row-content-max-width);
   }
 }
@@ -52,23 +52,22 @@
 
 .sideContainerWrapper {
   @extend .common;
-  @include truncate;
-
-  @include tablet {
-    @include truncate;
-  }
+  @include mixins.truncate;
 
   align-self: center;
   align-items: center;
+  display: none;
+
+  @include mixins.tablet {
+    @include mixins.truncate;
+  }
 
   > a {
     vertical-align: middle;
   }
-
-  display: none;
 }
 
 .tabletSideInfo {
   display: block;
-  @include truncate;
+  @include mixins.truncate;
 }

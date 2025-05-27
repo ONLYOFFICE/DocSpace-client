@@ -26,7 +26,9 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
+import classNames from "classnames";
+
+import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 
 import { globalColors } from "../../../themes";
 
@@ -40,14 +42,11 @@ import {
   InputSize,
 } from "../../../components/text-input";
 import { Button, ButtonSize } from "../../../components/button";
+import { useTheme } from "../../../hooks/useTheme";
 
 import { NotAvailable } from "./NotAvailable";
-import {
-  StyledHeader,
-  StyledWhiteLabelInput,
-  StyledCrossIcon,
-} from "./WhiteLabel.styled";
 import { IHeaderProps } from "./WhiteLabel.types";
+import styles from "./WhiteLabel.module.scss";
 
 export const WhiteLabelHeader = ({
   showNotAvailable,
@@ -60,24 +59,24 @@ export const WhiteLabelHeader = ({
   onClear,
 }: IHeaderProps) => {
   const { t } = useTranslation("Common");
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   return (
-    <StyledHeader>
+    <div className={styles.header}>
       {showNotAvailable ? <NotAvailable /> : null}
-      <div className="header-container">
+      <div className={classNames(styles.headerContainer, "header-container")}>
         <Text fontSize="16px" fontWeight="700">
           {t("WhiteLabel")}
         </Text>
 
         {!isSettingPaid && !standalone ? (
           <Badge
-            className="paid-badge"
+            className={classNames(styles.paidBadge, "paid-badge")}
             fontWeight="700"
             label={t("Common:Paid")}
             isPaidBadge
             backgroundColor={
-              theme.isBase
+              isBase
                 ? globalColors.favoritesStatus
                 : globalColors.favoriteStatusDark
             }
@@ -85,10 +84,14 @@ export const WhiteLabelHeader = ({
         ) : null}
       </div>
 
-      <div className="wl-helper">
+      <div className={classNames(styles.wlHelper, "wl-helper")}>
         <Text
           as="div"
-          className="wl-subtitle wl-helper-label settings_unavailable"
+          className={classNames(
+            styles.wlSubtitle,
+            styles.wlHelperLabel,
+            "wl-helper-label settings_unavailable",
+          )}
           fontSize="13px"
         >
           {t("WhiteLabelSubtitle")}
@@ -111,10 +114,14 @@ export const WhiteLabelHeader = ({
           className="settings_unavailable field-container"
           labelVisible
         >
-          <StyledWhiteLabelInput isShowCross={!!logoTextWhiteLabel}>
+          <div
+            className={classNames(styles.whiteLabelInput, {
+              [styles.showCross]: !!logoTextWhiteLabel,
+            })}
+          >
             <TextInput
               testId="logo-text-input"
-              className="logo-text input"
+              className={classNames(styles.input, "input")}
               placeholder={t("YourLogo")}
               value={logoTextWhiteLabel}
               onChange={onChange}
@@ -127,14 +134,14 @@ export const WhiteLabelHeader = ({
               withBorder={false}
             />
 
-            <div className="append" onClick={onClear}>
-              <StyledCrossIcon />
+            <div className={styles.append} onClick={onClear}>
+              <CrossIcon />
             </div>
-          </StyledWhiteLabelInput>
+          </div>
           <Button
             testId="generate-logo-button"
             id="btnGenerateLogo"
-            className="generate-logo"
+            className={styles.generateLogo}
             size={ButtonSize.small}
             label={t("GenerateLogoButton")}
             onClick={onUseTextAsLogo}
@@ -142,6 +149,6 @@ export const WhiteLabelHeader = ({
           />
         </FieldContainer>
       </div>
-    </StyledHeader>
+    </div>
   );
 };

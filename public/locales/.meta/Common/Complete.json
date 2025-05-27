@@ -1,0 +1,244 @@
+{
+  "key_path": "Complete",
+  "content": "Complete",
+  "content_en_sha1_hash": "1f5a1abf2f08ec18beb2664f458f86e399c233a4",
+  "created_at": "2025-05-19T21:30:43.615Z",
+  "updated_at": "2025-05-26T07:57:32.908Z",
+  "comment": {
+    "text": "This translation key is used to display a status update in the UI, indicating whether a file filling process has completed or stopped. It appears on a status indicator component and is rendered based on the current state of the file filling form status. The translation for this key should reflect the completion of the process.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:01.856Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/filling-role-process/sub-components/status-indicator/StatusIndicator.tsx",
+      "line_number": 56,
+      "context": "<FillingIcon className={styles.fillingIcon} />\n ))}\n <span className={styles.status} data-status={status}>\n {status === FileFillingFormStatus.Stopped\n ? t(\"Common:Stopped\")\n : t(\"Common:Complete\")}\n </span>\n </div>\n );\n };",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/utils/index.ts",
+      "line_number": 274,
+      "context": "case FileFillingFormStatus.InProgress:\n return t(\"Common:InProgress\");\n case FileFillingFormStatus.Stopped:\n return t(\"Common:Stopped\");\n case FileFillingFormStatus.Completed:\n return t(\"Common:Complete\");\n default:\n return \"\";\n }\n };\n export const getFillingStatusTitle = (",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Vervollständigen\" can mean 'to complete,' it primarily translates to 'to complete' in the sense of 'to finish' or 'to fill out.' The English 'Complete' has a broader meaning encompassing 'whole,' 'finished,' or 'total.'  'Fertigstellen' might be a more accurate translation depending on the context.",
+          "suggestion": "Consider 'Fertigstellen' as an alternative translation, or provide more context to determine the most suitable German equivalent."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation \"Ολοκλήρωση\" typically refers to the *process* of completion or the result (completion/accomplishment). The English word \"Complete\" (as an adjective) means finished, whole, or entire. A more accurate translation would depend on the context.  Possible alternatives include:  \"Ολοκληρωμένος\" (completed), \"Πλήρης\" (full/entire), or \"Έτοιμος\" (ready).",
+          "suggestion": "Consider 'Ολοκληρωμένος', 'Πλήρης', or 'Έτοιμος' depending on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Täydennä\" can mean 'complete,' it more accurately translates to 'fill in' or 'supplement'. 'Complete' in the context of a task or project implies finishing it entirely, which isn't perfectly conveyed by 'Täydennä'. A better translation would depend on the specific context, but options like 'Valmis' (ready), 'Viimeistele' (finish), or 'Suorita' (execute) might be more suitable.",
+          "suggestion": "Consider 'Valmis', 'Viimeistele', or 'Suorita' depending on the intended nuance."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Remplir\" can mean \"to fill,\" it doesn't perfectly capture the meaning of \"Complete\" in all contexts. \"Complete\" can imply finishing, finalizing, or bringing something to an end. \"Remplir\" more directly relates to filling something up.",
+          "suggestion": "Consider alternatives like \"Compléter\", \"Finaliser\", \"Terminer\", or \"Achèvement\" depending on the specific context."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Completare\" means \"to complete\" or \"completion\", not \"complete\" as an adjective or noun meaning whole or entire. It's a verb or a noun referring to the act of completing.",
+          "suggestion": "A more accurate translation could be \"Complet\", \"Întreg\", or \"Total\", depending on the intended meaning of \"Complete\" in the original English context."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

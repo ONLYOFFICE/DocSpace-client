@@ -1,0 +1,232 @@
+{
+  "key_path": "RemoveGuests",
+  "content": "Remove guests",
+  "content_en_sha1_hash": "1bc076269975c2b2351348b46ceb6faca2bc7ec4",
+  "created_at": "2025-05-19T21:30:53.504Z",
+  "updated_at": "2025-05-24T06:27:15.532Z",
+  "comment": {
+    "text": "This translation key is used for a \"Remove guests\" label that appears on a modal dialog button. It's intended to be displayed when multiple users are being removed and should display the plural form of \"Remove\". This translation appears in a modal window with an option to remove multiple guests.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:36.984Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/RemoveGuest/index.tsx",
+      "line_number": 116,
+      "context": "onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>\n {isMulti ? t(\"RemoveGuests\") : t(\"RemoveGuest\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {!isMulti ? (\n <Trans",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation 'Уклони госте' doesn't accurately convey the meaning of 'Remove guests'. 'Уклони' is a verb meaning 'to remove' or 'to eliminate', but in this context, it sounds unnatural and abrupt. A more appropriate translation would imply a gentle removal or dismissal.",
+          "suggestion": "Одабаци госте"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Ukloni goste' doesn't accurately convey the meaning of 'Remove guests'. 'Ukloni' means 'Remove' in the sense of 'eliminate' or 'eradicate'. A more appropriate translation would convey the idea of taking someone off a list or deleting them.",
+          "suggestion": "Izbriši goste"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Konukları kaldır\" is technically correct, it's not the most natural or idiomatic way to say \"Remove guests\" in Turkish. \"Kaldırmak\" can imply a forceful removal, which might not be the intended meaning.",
+          "suggestion": "Consider using \"Konukları sil\" or \"Konukları çıkart\" for a more common and softer tone. \"Sil\" translates to delete and \"çıkart\" translates to remove/take out, both more appropriate in this context."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '移除多个访客' (yíchú duō gè fǎng kè) translates to 'remove multiple guests'. While technically correct, it's more literal than the simple 'Remove guests'. A more natural and concise translation would be closer to '删除访客' or '移除访客'.",
+          "suggestion": "移除访客 or 删除访客"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

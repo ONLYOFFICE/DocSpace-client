@@ -1,0 +1,376 @@
+{
+  "key_path": "DeleteProfileBtn",
+  "content": "Disable my account",
+  "content_en_sha1_hash": "0ff5c8ca55e963a44f8d86f3b15705ef6f519d22",
+  "created_at": "2025-05-19T21:30:57.344Z",
+  "updated_at": "2025-05-24T15:35:19.194Z",
+  "comment": {
+    "text": "This translation key is used for the text \"Disable my account\" on a delete profile button. It appears in a confirmation dialog when users attempt to remove their account and provides an option to disable their account instead of permanently deleting it.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:30.756Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/app/(root)/confirm/ProfileRemove/page.client.tsx",
+      "line_number": 151,
+      "context": "<Button\n primary\n scale\n size={ButtonSize.medium}\n label={t(\"DeleteProfileBtn\")}\n tabIndex={1}\n isDisabled={isLoading}\n onClick={onDeleteProfile}\n />\n </FormWrapper>",
+      "module": "/packages/login"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation 'احذف حسابي' translates to 'Delete my account,' while the English content states 'Disable my account.' These have different meanings. 'Disable' implies a temporary state, whereas 'Delete' is permanent.",
+          "suggestion": "تَعطيل حسابي"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" implies temporarily deactivating, not permanent deletion. The Azerbaijani translation \"Hesabımı silin\" means \"Delete my account\", which is a stronger action. The translation does not accurately reflect the original meaning.",
+          "suggestion": "Hesabımı deaktivə et"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" translates to something closer to 'Deactivate my account' or 'Pause my account,' rather than 'Delete my profile.'  'Delete' (Изтрий) implies permanent removal of the profile, while 'Disable' suggests a temporary suspension.",
+          "suggestion": "Consider 'Деактивирай моя профил' (Deaktivirai moya profil) or 'Временно спряй моя профил' (Vremeno spri moya profil)."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Disable my account' implies deactivation or suspension, not deletion. The Czech translation 'Smazat můj účet' means 'Delete my account', which is a stronger action. This could be misleading to the user.",
+          "suggestion": "Consider a translation that reflects 'Disable' or 'Deactivate', such as 'Vypnout můj účet' or 'Deaktivovat můj účet'."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" is translated as \"Mein Konto löschen\" which means \"Delete my account\". While deletion and disabling have similar effects, the original intent of 'disable' implies a temporary state, while 'löschen' implies permanent deletion. This could lead to user confusion or unintended consequences.",
+          "suggestion": "Consider a translation that reflects the temporary nature of disabling, such as \"Mein Konto deaktivieren\" (Disable my account)."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation 'Διαγραφή του λογαριασμού μου' translates to 'Delete my account', while the English content says 'Disable my account'. 'Disable' implies a temporary action, while 'Delete' implies a permanent one.",
+          "suggestion": "Απενεργοποίηση του λογαριασμού μου"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" implies a temporary action, while \"Eliminar mi cuenta\" means \"Delete my account,\" which is a permanent action. These are not equivalent.",
+          "suggestion": "Consider translating to \"Deshabilitar mi cuenta\" to match the intended meaning of temporarily disabling."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" implies a temporary suspension, while \"Poista tilini\" translates to \"Delete my account,\" suggesting permanent removal. These actions are different and could lead to user confusion.",
+          "suggestion": "Consider a translation that conveys the nuance of disabling, such as \"Poista tilini käytöstä\" or \"Estä tilini\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" is more accurately translated as 'Deactivate my account' or 'Անակտիվացնել իմ հաշիվը' rather than 'Ջնջել իմ հաշիվը' which means 'Delete my account'. While both actions affect account visibility, 'disable' typically implies a temporary state, whereas 'delete' is permanent.",
+          "suggestion": "Անակտիվացնել իմ հաշիվը"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Cancella il mio account' is a literal translation, 'Disable my account' implies a temporary suspension, whereas 'Cancella' implies permanent deletion. A more accurate translation would convey the nuance of disabling/suspending.",
+          "suggestion": "Disabilita il mio account"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation \"アカウントの削除\" literally translates to \"account deletion\" which implies a complete deletion, whereas the English \"Disable my account\" suggests a temporary suspension or deactivation.  While 'deletion' is sometimes used metaphorically for disabling, it's not the most accurate reflection of the English meaning in this context.",
+          "suggestion": "アカウントの停止 (Konto no teihi) - Account suspension"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Disable my account' implies deactivation, not complete deletion. The Korean translation '내 계정 삭제' directly translates to 'Delete my account', which is a stronger action and might not accurately reflect the intended meaning.",
+          "suggestion": "Consider a translation that conveys 'deactivate' or 'suspend' instead of 'delete'. For example: '내 계정 비활성화' (nae gyejeong bihwalseonghwa - deactivate my account) or '내 계정 중단' (nae gyejeong jungdan - suspend my account)."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ລຶບບັນຊີຂອງຂ້ອຍ' literally translates to 'Delete my account,' while the English content is 'Disable my account.' These have different connotations. 'Disable' suggests a temporary suspension, while 'Delete' implies permanent removal. The translation doesn't convey the intended meaning.",
+          "suggestion": "ປິດບັນຊີຂອງຂ້ອຍ (Pit banchee khong khoy) - Meaning 'Close my account' or 'Deactivate my account'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Disable my account' is more accurately translated as 'Atspējot manu kontu' rather than 'Dzēst manu kontu'. 'Dzēst' means 'delete', which implies permanent removal, while 'Atspējot' implies a temporary disabling, which is more likely the intended functionality.",
+          "suggestion": "Atspējot manu kontu"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" implies a temporary deactivation, while the Dutch translation \"Verwijder mijn account\" means \"Delete my account\". This is a significant difference in meaning.",
+          "suggestion": "Consider a translation like \"Mijn account uitschakelen\" to align with the English meaning of disabling."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" implies a temporary deactivation, while the Polish \"Usuń moje konto\" translates to \"Delete my account\". This is a significant difference in meaning.",
+          "suggestion": "Consider using \"Wyłącz moje konto\" to more accurately reflect the intended meaning of 'Disable my account'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Eliminar' means 'to delete'. The English phrase 'Disable my account' implies temporarily stopping access, not permanent deletion. A more accurate translation would convey the disabling aspect.",
+          "suggestion": "Desativar a minha conta"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Apagar' translates to 'delete' or 'erase', while 'Disable' implies a temporary action. 'Apagar minha conta' is too direct for a 'disable' action.",
+          "suggestion": "Desativar minha conta"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" implies temporarily suspending an account, while the Romanian translation \"Șterge contul meu\" means \"Delete my account\". These actions have different consequences and the translation doesn't accurately reflect the English meaning.",
+          "suggestion": "Consider translating to \"Dezactivează contul meu\" which more accurately conveys the meaning of disabling or suspending an account."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'මාගේ ගිණුම මකන්න' literally translates to 'Delete my account'. The English 'Disable my account' implies a suspension or deactivation, not a permanent deletion. 'මකන්න' suggests irreversible action.",
+          "suggestion": "මාගේ ගිණුම අයින් කරන්න (Mage ginuma ain karna) - This translates to 'Remove my account' which is closer to 'Disable my account', or මාගේ ගිණුම නිಷ್ක්‍රීය කරන්න (Mage ginuma nishkriya karna) - This translates to 'Deactivate my account' and is more accurate."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation \"Vymazať môj účet\" translates to \"Delete my account\", while the English content is \"Disable my account\". These have different meanings. \"Disable\" implies a temporary suspension, while \"Delete\" implies permanent removal.",
+          "suggestion": "Consider translating it to \"Zablokovať môj účet\" (Block my account) or \"Deaktivovať môj účet\" (Deactivate my account) to more accurately reflect the English meaning of 'Disable'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Disable my account' translates to 'Onemogoči moj račun', not 'Izbriši moj račun'. 'Izbriši moj račun' means 'Delete my account'.",
+          "suggestion": "Onemogoči moj račun"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Обриши мој налог' literally translates to 'Delete my account'. The English phrase 'Disable my account' implies a temporary suspension, not a permanent deletion. 'Обриши' suggests deletion, which isn't the intended meaning.",
+          "suggestion": "Прекинути мој налог (Prekinuti moj nalog) - which means 'Suspend my account', or 'Деактивирај мој налог' (Deaktiviraj moj nalog) - which means 'Deactivate my account'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Obriši moj nalog' translates to 'Delete my account', while the English content is 'Disable my account'. These are not synonymous.",
+          "suggestion": "Consider 'Onemogući moj nalog' or 'Isključim svoj nalog' to more accurately reflect 'Disable my account'."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Disable my account\" translates to something closer to \"Devre dışı bırakın hesabımı\" or \"Hesabımı devre dışı bırakın\" in Turkish. \"Hesabımı sil\" translates to \"Delete my account\". While deletion might be implied, 'disable' has a slightly different nuance.",
+          "suggestion": "Hesabımı devre dışı bırakın"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Видалити мій обліковий запис' translates to 'Delete my account,' while the English source says 'Disable my account.' These are not equivalent actions.",
+          "suggestion": "Відключити мій обліковий запис"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Xóa tài khoản của tôi\" literally means \"Delete my account.\" The English phrase \"Disable my account\" implies temporarily suspending the account, not permanent deletion.  \"Xóa\" (delete) is too strong.",
+          "suggestion": "Vô hiệu hóa tài khoản của tôi"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '删除我的账户' literally translates to 'Delete my account'. The English content 'Disable my account' implies a suspension or deactivation, not a complete deletion.  '删除' carries a stronger connotation than 'disable'.",
+          "suggestion": "禁用我的账户 (Zàiqíng wǒ de zhànghù) - This translates to 'Disable my account' and aligns with the intended meaning."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

@@ -29,8 +29,7 @@ import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 
 import { Text } from "../../../components/text";
-import { ColorTheme, ThemeId } from "../../../components/color-theme";
-import { LinkTarget } from "../../../components/link";
+import { Link, LinkTarget } from "../../../components/link";
 
 import { ButtonContainer } from "./sub-components/ButtonContainer";
 import { TariffTitleContainer } from "./sub-components/TariffTitleContainer";
@@ -96,12 +95,12 @@ export const EnterpriseContainer = ({
             values={{ email: salesEmail }}
             components={{
               1: (
-                <ColorTheme
+                <Link
                   fontWeight="600"
                   target={LinkTarget.blank}
                   tag="a"
                   href={`mailto:${salesEmail}`}
-                  themeId={ThemeId.Link}
+                  color="accent"
                 />
               ),
             }}

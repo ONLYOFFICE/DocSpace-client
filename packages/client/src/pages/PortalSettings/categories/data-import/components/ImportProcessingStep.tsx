@@ -52,7 +52,7 @@ const ImportProcessingStep = (props: ImportProcessingStepProps) => {
   const [isVisibleProgress, setIsVisibleProgress] = useState(false);
   const [failTries, setFailTries] = useState(FAIL_TRIES);
 
-  const uploadInterval = useRef<number>();
+  const uploadInterval = useRef<number>(undefined);
 
   const handleFileMigration = async () => {
     setIsLoading(true);

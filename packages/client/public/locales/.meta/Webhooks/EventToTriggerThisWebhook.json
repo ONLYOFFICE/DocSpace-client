@@ -1,0 +1,300 @@
+{
+  "key_path": "EventToTriggerThisWebhook",
+  "content": "Event to trigger this webhook",
+  "content_en_sha1_hash": "f58b4b66dc1080b09bc03eb2f9a64fdb6deca178",
+  "created_at": "2025-05-19T21:30:49.713Z",
+  "updated_at": "2025-05-24T02:28:09.655Z",
+  "comment": {
+    "text": "\"This translation key is used for a label in a webhooks trigger form, displaying the name of an event that triggers a webhook. The text appears as a bold title next to a radio button group in a UI component, likely used to select or configure the event. Translators should provide a clear and concise equivalent phrase in the target language.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:04.854Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/TriggersForm.tsx",
+      "line_number": 63,
+      "context": "const { t } = useTranslation([\"Webhooks\", \"Files\", \"Common\"]);\n \n return (\n <div style={{ marginTop: \"22px\" }}>\n <Text fontWeight={600} style={{ marginBottom: \"10px\" }}>\n {t(\"EventToTriggerThisWebhook\")}\n </Text>\n <RadioButtonGroup\n fontSize=\"13px\"\n fontWeight=\"400\"\n name=\"ssl\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'حدث لتشغيل هذا الـ webhook' is a literal translation and doesn't flow naturally in Arabic.  'Event to trigger' can be better expressed to convey the purpose of the webhook.",
+          "suggestion": "يمكن استخدام 'الحدث الذي يؤدي إلى تفعيل هذا الـ webhook' or 'الحدث المشغل لهذا الـ webhook' for a more natural and accurate translation."
+        },
+        {
+          "type": "formatting",
+          "description": "The inclusion of 'الـ' before 'webhook' might be too literal. While technically correct, it's often better to just use 'webhook' directly, especially in technical contexts.",
+          "suggestion": "Consider removing 'الـ' and just using 'webhook'."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Bu vebhukunu tetikleyecek hadise' is a literal translation but doesn't convey the natural phrasing in Azerbaijani. 'Hadise' translates to 'incident' or 'event' in a broader sense, whereas the English phrase implies a specific event that will activate the webhook.",
+          "suggestion": "Consider a more contextual translation like 'Bu vebhukunun aktivlaşdırılması üçün hadisə' or 'Bu vebhukunun işə düşməsi üçün hadisə'."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly an error, the use of lowercase 'vebhukunun' might benefit from capitalization to align with standard title casing in Azerbaijani, especially if this is part of a user interface or documentation.",
+          "suggestion": "Consider capitalizing the first word: 'Bu Vebhukunun...'"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Γεγονός που θα ενεργοποιήσει αυτό το webhook' is a literal translation and sounds somewhat unnatural in Greek. A more natural phrasing would be something like 'Συμβάν που ενεργοποιεί αυτό το webhook' or 'Εκδήλωση που ενεργοποιεί αυτό το webhook'.",
+          "suggestion": "Συμβάν που ενεργοποιεί αυτό το webhook"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "Leading space at the beginning of the Italian translation.",
+          "suggestion": "Evento che attiva questo webhook"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '웹훅을 트리거할 이벤트' is a functional translation, but a more natural and idiomatic translation would be '이 웹훅을 실행할 이벤트'. '트리거하다' is frequently used in technical Korean but '실행하다' often sounds more natural in this context.",
+          "suggestion": "이 웹훅을 실행할 이벤트"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ເວັບຮູກ' appears to be a transliteration of 'webhook' and might be difficult for some Lao speakers to understand. While technically correct as a transliteration, a more accessible term might be beneficial depending on the target audience.",
+          "suggestion": "Consider using a more descriptive term if the audience is not familiar with the English term 'webhook.' For example, 'ເຄື່ອງມືເຊື່ອມຕໍ່ເວັບ' (web connection tool)."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Notikums, kas aktivizēs šo tīmekļa āķi' is a bit literal and not the most natural phrasing in Latvian. 'Tīmekļa āķi' is technically correct for 'webhook', but sounds a bit clunky. A more natural translation would prioritize conveying the meaning of 'triggering event'.",
+          "suggestion": "Notikums, kas aktivizēs šo webhooku"
+        },
+        {
+          "type": "formatting",
+          "description": "While 'tīmekļa āķi' is understood, using the English term 'webhooku' maintains consistency if the term is frequently used in the context and avoids potentially introducing confusion.",
+          "suggestion": "Consider using 'webhooku' to maintain consistency and familiarity, especially in technical contexts."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Gebeurtenis om deze webhook te activeren' is a bit literal. A more natural and common Dutch phrasing would be something like 'Gebeurtenis die deze webhook activeert' or 'Gebeurtenis voor deze webhook'.",
+          "suggestion": "Gebeurtenis die deze webhook activeert"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"වේබ්හුක් මෙය ක්‍රියාත්මක කිරීමට සිදුවන සිදුවීම\" is not the most natural or accurate translation of \"Event to trigger this webhook\". It's a bit literal and clunky.",
+          "suggestion": "A better translation would be something like \"මෙම වේබ්හුක් ක්‍රියාත්මක කිරීමට හේතුවන සිද්ධිය\" (Mema webhuk kriyātrimak karamunu hethuwana siddhiya) - 'The event causing this webhook to activate.'"
+        },
+        {
+          "type": "grammatical",
+          "description": "While understandable, the phrasing in the original Sinhala translation could be improved for smoother reading. The direct translation of 'to trigger' isn't the most common phrasing.",
+          "suggestion": "Consider restructuring the sentence for better flow, such as using \"ක්‍රියාත්මක වන සිද්ධිය\" (kriyātrimak vana siddhiya) - 'the event that activates'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Dogodek, ki sproži ta spletni kavelj' is a literal translation of 'Event to trigger this webhook' but sounds awkward in Slovenian. 'Spletni kavelj' is a technically correct term for webhook, but a more natural phrasing would be 'Dogodek, ki sproži ta posrednik' or 'Dogodek, ki aktivira ta posrednik'.",
+          "suggestion": "Consider 'Dogodek, ki sproži ta posrednik' or 'Dogodek, ki aktivira ta posrednik'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'догађај који покреће овај webhook' is a rather literal translation. A more natural and idiomatic Serbian translation would be 'Следећи догађај за овај webhook' or 'Догађај за активирање webhook-а'.",
+          "suggestion": "Следећи догађај за овај webhook"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Подія, яка запускає цей вебхук\" is a literal translation but lacks the nuance of the English phrase \"Event to trigger this webhook\". A more natural Ukrainian phrasing would better convey the intended meaning, implying the event *causes* the webhook to fire.",
+          "suggestion": "Подія, що активує цей вебхук"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

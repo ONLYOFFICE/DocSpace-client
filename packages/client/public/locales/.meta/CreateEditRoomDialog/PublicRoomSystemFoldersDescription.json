@@ -1,0 +1,356 @@
+{
+  "key_path": "PublicRoomSystemFoldersDescription",
+  "content": "System folders store copies of forms at different stages of completion. Forms that are being filled are stored in the In progress folder, and completed forms are stored in the Complete folder.",
+  "content_en_sha1_hash": "f7efc621f4e44f6c9a7111717b6f07066014c1d7",
+  "created_at": "2025-05-19T21:30:56.823Z",
+  "updated_at": "2025-05-26T07:57:32.262Z",
+  "comment": {
+    "text": "The \"PublicRoomSystemFoldersDescription\" translation key describes the purpose of system folders in storing forms at different stages of completion. It is used to display a tooltip or message in a Create/Edit Room dialog, providing context for users about where to find specific form copies.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:05.552Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SystemFolders/SystemFolders.tsx",
+      "line_number": 48,
+      "context": "{t(\"CreateEditRoomDialog:PublicRoomSystemFoldersTitle\")}\n </SystemFoldersTitle>\n <SystemFoldersToggleButton isChecked isDisabled onChange={() => {}} />\n </SystemFoldersHeader>\n <SystemFoldersDescription>\n {t(\"CreateEditRoomDialog:PublicRoomSystemFoldersDescription\")}\n </SystemFoldersDescription>\n </section>\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"being filled\" is not accurately conveyed by \"Doldurulan\". A better translation would be something along the lines of \"doldurulmaqdadır\" or \"hazırlanır\". \"Doldurulan\" implies already filled.",
+          "suggestion": "Sistem qovluqları formaların surətlərini tamamlamanın müxtəlif mərhələlərində saxlayır. Hazırlanmaqdadır formalar Davam edir qovluğunda, doldurulmuş formalar isə Tamamlanmış qovluğunda saxlanılır."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of \"isə\" feels slightly awkward. It's grammatically correct, but a more natural flow might be achieved with a different conjunction.",
+          "suggestion": "Sistem qovluqları formaların surətlərini tamamlamanın müxtəlif mərhələlərində saxlayır. Hazırlanmaqdadır formalar Davam edir qovluğunda, tamamlangan formalar isə Tamamlanmış qovluğunda saxlanılır."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Czech translation uses slightly more verbose phrasing compared to the English. While not technically incorrect, it deviates from the concise style of the English original. The English uses 'In progress folder' and 'Complete folder', while the Czech uses 've složce Rozpracované' and 've složce Kompletní'.",
+          "suggestion": "Consider rephrasing to be more concise, perhaps using 'Rozpracované formuláře' and 'Kompletní formuláře'."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation uses katakana for 'In progress' and 'Complete' folders. While acceptable, consider using a more natural Japanese phrasing like '進行中' (shinkōchū) for 'In progress' and '完了' (kanryō) for 'Complete' to improve readability and flow. Using katakana might imply these are technical terms or specific brand names, which may not be accurate.",
+          "suggestion": "Consider using '進行中' (shinkōchū) for 'In progress' and '完了' (kanryō) for 'Complete' instead of katakana for better readability."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"다양한 완료 단계에서\" (various completion stages) is slightly awkward. It doesn't fully capture the nuance of 'different stages of completion' in the English text. While technically correct, it's not the most natural way to express it in Korean.",
+          "suggestion": "Consider revising to something like \"다양한 진행 단계에서\" (various progress stages) or \"서로 다른 완료 단계에서\" (different completion stages)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word '사본' (sabon - copy) while accurate, can sound a little formal/technical in this context. A more natural phrasing might be preferred.",
+          "suggestion": "Consider revising to something more conversational like \"양식\" (yangsik - forms) alone, implying the copies are implied. The sentence would read, \"시스템 폴더는 다양한 완료 단계에서 양식을 저장합니다.\""
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"In progress folder\" is translated as \"ໂຟນເດີທີ່ກໍາລັງດໍາເນີນ\". While understandable, a more accurate translation would convey the sense of 'ongoing' or 'current' work. \"ໂຟນເດີທີ່ກຳລັງເຮັດ\" or \"ໂຟນເດີໃນລະຫວ່າງການເຮັດ\" would be better.",
+          "suggestion": "ໂຟນເດີທີ່ກຳລັງເຮັດ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Complete folder\" is translated as \"ໂຟນເດີທີ່ສົມບູນ\". While not incorrect, it could be more naturally translated to emphasize completion.",
+          "suggestion": "ໂຟນເດີສໍາເລັດຮູບ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Polish translation uses lowercase for 'W toku' and 'Gotowe' while the English uses capitalized folder names. Maintaining consistency with the English original would improve readability and potentially align with UI expectations.",
+          "suggestion": "Katalogi systemowe przechowują kopie formularzy na różnych etapach ukończenia. Wypełniane formularze są przechowywane w katalogu W ToKu, a wypełnione w katalogu Gotowe."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Copiile formularelor\" (Copies of forms) doesn't accurately convey the meaning of \"System folders store copies of forms\". It implies copies are being stored, whereas the original text describes what system folders *do*.",
+          "suggestion": "Folderele de sistem stochează copii ale formularelor..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"In progress folder\" as \"folderul În curs de completare\" is literal and a bit clunky. While technically correct, it's not the most natural Romanian phrasing.",
+          "suggestion": "folderul În lucru"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"Complete folder\" as \"folderul Formulare competate\" is overly verbose. 'Competate' refers to completion, but the folder itself isn't *completed*.",
+          "suggestion": "folderul Finalizate"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a little awkward in Romanian. It's better to create two separate sentences.",
+          "suggestion": "Folderele de sistem stochează copii ale formularelor la diferite etape de completare. Formularele în curs de completare sunt stocate în folderul În lucru, iar cele finalizate sunt stocate în folderul Finalizate."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'а заполненные формы — в папке Заполненные' contains an unnecessary dash and repetition. The phrase is grammatically correct, but stylistically awkward.",
+          "suggestion": "а заполненные формы в папке Заполненные"
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"System folders\" is not accurately translated. While \"පද්ධති බහාලුම්\" (paddathi bahaluum) literally translates to \"system folders,\" it's a bit clunky and doesn't quite capture the intended meaning of a structured directory. A more natural translation might be something like \"පද්ධති ෆෝල්ඩර්\" (paddathi folder) directly using the English word 'folder'.",
+          "suggestion": "Consider using \"පද්ධති ෆෝල්ඩර්\" (paddathi folder) instead of \"පද්ධති බහාලුම්\" (paddathi bahaluum)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"In progress folder\" is translated as \"පුරවමින් පවතින ආකෘතිපත්‍ර ප්‍රගති බහාලුමේ\". This is overly verbose and potentially confusing. \"In progress\" is better conveyed with a more concise phrase.",
+          "suggestion": "Consider translating \"In progress folder\" as \"වැඩ ලබමින් ඇති ෆෝල්ඩර්\" (waeda labamin athi folder) or similar."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "Similarly, \"Complete folder\" is translated as \"සම්පුර්ණ කරන ලද ආකෘතිපත්‍ර සම්පූර්ණ බහාලුමේ\". This is also too literal and lengthy. A more streamlined translation is preferable.",
+          "suggestion": "Consider translating \"Complete folder\" as \"ඉක්මලු කරන ලද ෆෝල්ඩර්\" (ikmalu karanada folder) or similar."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation maintains a very literal sentence structure. While technically correct, it reads somewhat awkwardly in Sinhala. Rephrasing to align with more natural Sinhala sentence flow would improve readability.",
+          "suggestion": "Reorganize sentence structure for a more natural reading flow. For example, start with a general statement about where forms are stored, then elaborate on the specific folders."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "Inconsistent use of capitalization for 'folder'. 'Фолдер' is used in one instance and 'фолдер' in another. Consistency is preferred.",
+          "suggestion": "Use 'фолдер' consistently throughout the translation."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'In progress' is translated to 'У току', which is accurate. However, 'Complete' is translated as 'Завршен'. While understandable, 'Завршени' would be more grammatically correct in this context to match the plural 'Обрасци'.",
+          "suggestion": "Change 'Завршен фолдеру' to 'Завршени обрасци се чувају у Завршени фолдеру.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Obrazci' should be 'Obrazac'. It's the singular form to agree with 'kopije' (copies).",
+          "suggestion": "Obrazac"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'U toku' should be 'U toku folder'. Adding 'folder' clarifies the context.",
+          "suggestion": "U toku folder"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Završen folder' is understandable, a more natural translation for 'Complete folder' would be 'folder sa završenim obrascima'.  'Završen folder' can be interpreted as a folder *that* is finished, rather than a folder *containing* completed forms.",
+          "suggestion": "folder sa završenim obrascima"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Devam ediyor klasöründe\" is not the most natural or accurate translation of \"In progress folder.\"  \"Devam ediyor\" literally means 'continuing' and while understandable, it doesn't directly convey the concept of a folder for forms currently being filled.",
+          "suggestion": "Consider using a more precise translation like \"İşlemde olan klasöründe\" or \"Sürecin devam ettiği klasöründe\"."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Tamamlandı klasöründe\" is understandable for \"Complete folder,\" a more professional and common term could be used.",
+          "suggestion": "Consider using \"Tamamlanmış klasöründe\" or \"Sonlandırılmış klasöründe\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"不同完成阶段的表单副本\" (copies of forms at different stages of completion) is a bit literal and could be more naturally translated. While technically correct, it's not as fluid as it could be.",
+          "suggestion": "Consider a more natural phrasing like \"系统文件夹用于存储表单的不同版本\" (System folders are used to store different versions of forms)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of quotes around '系统', '处理中', and '完成' seems unnecessary and potentially confusing for Chinese readers. These are folder names and do not require quotation marks unless they are part of a specific UI element.",
+          "suggestion": "Remove the quotation marks around '系统', '处理中', and '完成'. The translation would then be: “系统文件夹用于存储表单的不同版本。正在填写的表单存储在“处理中”文件夹中，填写完成的表单存储在“完成”文件夹中。”"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

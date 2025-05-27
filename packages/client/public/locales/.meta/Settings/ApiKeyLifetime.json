@@ -1,0 +1,274 @@
+{
+  "key_path": "ApiKeyLifetime",
+  "content": "<1>The lifetime is set.</1> The secret key will be deactivated after: {{days}} days",
+  "content_en_sha1_hash": "4c403f0fc49d92c8b92de3d83b42fc2e04c09e28",
+  "created_at": "2025-05-19T21:30:50.522Z",
+  "updated_at": "2025-05-24T05:50:22.976Z",
+  "comment": {
+    "text": "This translation key controls the message displayed to users when setting the lifetime of an API secret key, indicating how long after activation the secret will expire. The value is a count of days and appears in a dialog window where users can set the API key's lifetime.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:48.180Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
+      "line_number": 537,
+      "context": "{lifetimeIsChecked ? (\n <Text fontSize=\"12px\" fontWeight={400}>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"ApiKeyLifetime\"\n values={{ days: expiresInDays }}\n components={{\n 1: <Text fontSize=\"12px\" fontWeight={600} as=\"span\" />,\n }}\n />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'The secret key will be deactivated' is translated as 'Secret key poistuu käytöstä'. While understandable, a more natural and common Finnish phrasing would be 'Salainen avain ei päde enää' or 'Salainen avain vanhenee'.",
+          "suggestion": "Salainen avain ei päde enää: {{days}} päivän jälkeen"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tag <1> appears in both the English and Armenian versions. It likely represents a formatting element that should be consistent across languages, or potentially removed if it's unnecessary.",
+          "suggestion": "Review the purpose of the <1> tag and ensure consistent application in both languages, or remove if not needed."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The numbering '<1>' and '</1>' are inconsistent between the English and Japanese texts. The English uses angle brackets, while the Japanese uses a Japanese enumeration style.",
+          "suggestion": "Ensure consistent formatting. Either use '<1>' and '</1>' in both languages or adopt a Japanese enumeration style like '①' and '⑪' in the Japanese translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"The lifetime is set\" is translated as \"Lietderīgās lietošanas laiks ir iestatīts.\" While technically correct, it's a bit verbose and less natural in Latvian. A more suitable translation would be something like \"Derīguma termiņš ir iestatīts\" or simply \"Termiņš ir iestatīts\".",
+          "suggestion": "Derīguma termiņš ir iestatīts"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Polish translation uses 'dn.' instead of 'dni'. 'dni' is the correct plural form for 'days'.",
+          "suggestion": "Sekretny klucz zostanie dezaktywowany po: {{days}} dni"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The colon after 'depois' in the Portuguese translation should be a period (.).",
+          "suggestion": "O tempo de vida está definido. A chave secreta será desactivada depois. {{days}} dias"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'The lifetime is set' is awkwardly translated as 'Durată de viață este stabilită'. A more natural translation would be 'Durata este setată' or 'Perioada de valabilitate este stabilită'.",
+          "suggestion": "Durata este setată"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"The lifetime is set.\" is not accurately translated. \"කාලාව නියමිතය\" (Kaalawa niyomithaya) translates more closely to 'The duration is fixed/determined' rather than 'The lifetime is set'.",
+          "suggestion": "Consider translating \"The lifetime is set.\" as \"သက် ກໍາຫນ້າເປັນເວລາ\" (Shak kamnā pen vela) or a similar phrasing that more directly conveys the meaning of 'lifetime'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Ukrainian translation uses a non-breaking space ( ) between 'дн' and the period. This is likely unintended and should be a regular space.",
+          "suggestion": "Секретний ключ буде деактивовано через {{days}} днів."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'The lifetime is set' is translated as 'Thời gian tồn tại được thiết lập'. While technically correct, a more natural and idiomatic translation would be 'Độ dài thời gian được thiết lập' or 'Thời hạn được thiết lập'.",
+          "suggestion": "Thời hạn được thiết lập"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The <1> tags are present in both the English and Chinese versions. These tags appear to be markup or placeholder tags that should be removed from the translated content for display purposes.",
+          "suggestion": "Remove the <1> tags from the Chinese translation."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

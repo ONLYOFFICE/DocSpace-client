@@ -1,0 +1,435 @@
+{
+  "key_path": "APIKeyMaxDays",
+  "content": "Days <1>(Max {{days}})</1>",
+  "content_en_sha1_hash": "e102455e2479e62ff35da1d0754ffd280277bfa2",
+  "created_at": "2025-05-19T21:30:50.530Z",
+  "updated_at": "2025-05-24T05:50:00.536Z",
+  "comment": {
+    "text": "This translation key is used to format a maximum days limit value in a UI dialog. It appears as part of a label for an API key settings option, displayed in a dialog box where users can configure API key expiration limits.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:47.843Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
+      "line_number": 490,
+      "context": "/>\n <Text fontSize=\"13px\" fontWeight={600}>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"APIKeyMaxDays\"\n values={{ days: maxKeyLifetimeDays }}\n components={{\n 1: (\n <Text\n fontSize=\"13px\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'Max' is not accurately translated. 'الحد الأقصى' is a more formal and literal translation of 'maximum', while a more user-friendly translation might be 'أقصى عدد' (maximum number) or something similar depending on the context. 'الحد الأقصى' implies a limit or boundary rather than simply the maximum quantity.",
+          "suggestion": "Consider using 'أقصى عدد' or a more contextual equivalent for 'Max' depending on the intended user experience."
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags (<1> and </1>) appear to be replicating the original formatting from the English content. These tags are likely unnecessary and might cause issues with rendering the text in the Arabic UI.",
+          "suggestion": "Remove the HTML tags <1> and </1>. The text should be rendered as plain text: \"الأيام (الحد الأقصى {{days}})\""
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are present in both the English and Azerbaijani versions. They seem to be used for styling or specific layout purposes and should be consistent, but without context, it's difficult to determine if they are correct.  It's recommended to confirm the purpose of these tags with the development team.",
+          "suggestion": "Confirm the purpose of <1> and </1> tags with the development team and verify if they are needed and correctly implemented in the Azerbaijani version. If these are purely for formatting, consider if they can be handled with CSS instead."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation preserves the HTML tags `<1>` and `</1>` from the English content. This suggests a direct copy without considering whether these tags are appropriate or necessary in the Bulgarian context. They likely don't have semantic meaning and should be removed or replaced with something more suitable.",
+          "suggestion": "Remove the HTML tags `<1>` and `</1>`: \"Дни (Макс {{days}})\""
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Czech translation retains the HTML tags from the English content: <1> and </1>. These tags should be removed unless they are specifically required for the UI rendering.",
+          "suggestion": "Remove the <1> and </1> tags. The content should be just 'Dny (Max {{days}})'."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The German translation maintains the HTML tags <1> and </1> which should be consistent with the source. This might be an intentional formatting choice, but should be verified.",
+          "suggestion": "Verify if the HTML tags are necessary and intentional for the user interface."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Max' is translated as 'Max.' in German, the use of the full stop after 'Max' is not idiomatic in this context. It's more commonly used as 'Max' in UI elements.",
+          "suggestion": "Consider changing 'Max.' to 'Max' for a more natural and appropriate phrasing in a UI setting."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Greek translation retains the HTML tags <1> and </1> just like the English, which is likely unnecessary and disrupts the flow. These tags should be removed unless they serve a specific purpose in the UI.",
+          "suggestion": "Remove the <1> and </1> tags: \"Ημέρες (Μέγ {{days}})\""
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“Max” is translated as “Μέγ” which is a correct abbreviation but might not be immediately understood by all users. A more descriptive term might improve clarity.",
+          "suggestion": "Consider using a more explicit term like 'Μέγιστο' (Megisto - Maximum) for better understanding."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Spanish translation is identical to the English content. It doesn't provide a true translation of 'Days (Max {{days}})'",
+          "suggestion": "Días (Máximo {{days}})"
+        },
+        {
+          "type": "formatting",
+          "description": "The angle brackets `<1>` and `</1>` are directly copied from the English content.  They likely don't have a meaningful purpose in Spanish and should be removed or adjusted based on the intended display/markup.",
+          "suggestion": "Remove the angle brackets or adjust to the appropriate Spanish markup if they represent a specific formatting tag."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation uses 'Առ․' which likely represents 'Maximum' or 'At most'. While understandable, it's an abbreviation and might not be the clearest or most professional rendering of 'Max'. A more direct translation of 'Max' would improve clarity.",
+          "suggestion": "Օրեր <1>(Մաքս․ {{days}})</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Days' was not translated. It should be translated to Italian.",
+          "suggestion": "Giorni <1>(Max {{days}})</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation includes the word \"日\" (nich) at the end, which duplicates the meaning of \"日数\" (nissuu - days). While understandable, it's redundant and slightly awkward.",
+          "suggestion": "日数 <1>(最大 {{days}})</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are inconsistent with the English original. The English uses <1> and </1>, while the Korean uses <1> and </1>. This inconsistency should be corrected to ensure proper rendering and maintain parity with the original.",
+          "suggestion": "Change </1> to </1>."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Max' is translated as 'ສູງສຸດ' which means 'highest' or 'ultimate'. While not entirely wrong, 'ສູງສຸດ' doesn't convey the meaning of a maximum limit as effectively as a more direct translation like 'ສູງສຸດທີ່ອະນຸຍາດ' (maximum allowed) or a more fitting alternative.",
+          "suggestion": "Consider using 'ສູງສຸດທີ່ອະນຸຍາດ' or a more contextually appropriate equivalent for 'Max' that emphasizes the limit."
+        },
+        {
+          "type": "formatting",
+          "description": "The original English content includes XML tags <1> and </1>. The Lao translation also includes these tags. Ensure the tags are handled consistently across all translations for this key and that they are rendered correctly in the application’s user interface.",
+          "suggestion": "Verify tag rendering and ensure consistency with the English version. If these tags are for display only, check for correct HTML or XML rendering."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> appear to be unnecessary and might cause rendering issues. They don't seem to serve a specific purpose in the Latvian translation.",
+          "suggestion": "Remove the <1> and </1> tags. The translation should be \"Dienas (Maks. {{days}})\""
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Dutch translation uses \"Max.\" instead of \"Max\". The English original uses \"Max\".",
+          "suggestion": "Change \"Max.\" to \"Max\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are present in both the English and Polish versions. This suggests they are intentionally used for formatting, but their purpose isn't clear and might be unnecessary or require specific styling in the application.",
+          "suggestion": "Review the purpose of the <1> and </1> tags and consider removing them if they are not crucial for rendering."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> appear to be unnecessary and inconsistent with typical UI text formatting. They don't seem to serve a purpose in the translation itself.",
+          "suggestion": "Remove the <1> and </1> tags.  The text should simply be \"Dias (Máx. {{days}})\"."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Máx.' is a common abbreviation for 'Máximo' (Maximum), using the full word 'Máximo' might improve clarity and formality, depending on the target audience and context.",
+          "suggestion": "Consider using 'Máximo' instead of 'Máx.'. The translation could become: 'Dias (Máx. {{days}})' or 'Dias (Máximo {{days}})'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'Max' is translated as 'Máx.' while the preferred translation would be 'Máximo'.",
+          "suggestion": "Dias <1>(Máximo {{days}})</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<1>` are inconsistent with the English content. It appears these tags are meant to enclose the word 'Days' or 'Zile', but their purpose isn't clear based on the context.  Maintaining the same formatting in the translation is crucial.",
+          "suggestion": "Verify the intended purpose of the `<1>` tags and ensure they're applied consistently to 'Zile' as they are in the English version."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'maxim' is a valid translation for 'Max', it's slightly less common and might sound a bit formal in this context. A more natural phrasing might be preferable.",
+          "suggestion": "Consider alternatives like 'până la' (up to) or simply removing the explicit translation and letting the context imply the maximum."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala word 'Maks.' is a direct transliteration of 'Max.' It doesn't accurately convey the meaning of 'Maximum' in Sinhala. A more natural translation would be 'Awathakam'.",
+          "suggestion": "Dnevi <1>(Awathakam {{days}})</1>"
+        },
+        {
+          "type": "formatting",
+          "description": "The original English content includes HTML tags <1> and </1>. These tags should ideally be preserved in the translation to maintain formatting consistency. However, 'Maks.' replaces 'Max' which is fine if intended.",
+          "suggestion": "Dnevi <1>(Awathakam {{days}})</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Slovak translation retains the HTML tags <1> and </1> which were present in the English content. This isn't necessary and may cause issues in the application displaying the translated text.",
+          "suggestion": "Remove the <1> and </1> tags. The translation should be \"Dni (Max. {{days}})\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The original English and Slovenian both contain the tag <1>. This suggests the tag should be preserved in the translation, and is currently correct.",
+          "suggestion": null
+        },
+        {
+          "type": "formatting",
+          "description": "The original English and Slovenian both contain the tag {{days}}. This suggests the tag should be preserved in the translation, and is currently correct.",
+          "suggestion": null
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'maks.' is understandable, 'največ' or 'največji' would be more accurate translations of 'Max' in this context, indicating a maximum value.",
+          "suggestion": "Dnevi <1>(največ {{days}})</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Dana' (given) doesn't accurately translate 'Days'. It should be something that refers to the duration or period, like 'Дани'.",
+          "suggestion": "Дани <1>(Максимално {{days}})</1>"
+        },
+        {
+          "type": "formatting",
+          "description": "The `<1>` and `</1>` tags surrounding the translated content do not appear to have a direct equivalent or need in Serbian. They might be remnants from the original format and should be removed.",
+          "suggestion": "Дани (Максимално {{days}})"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The XML tags <1> and </1> are inconsistent with the English source. They should be removed from the Serbian translation.",
+          "suggestion": "Dana (Maksimalno {{days}})"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Maksimalno' is a valid translation of 'Max', the more common and natural translation for 'Max' in this context would be 'Najveći'.",
+          "suggestion": "Dana (Najveći {{days}})"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Turkish translation includes a non-breaking space (` `) where a regular space is likely intended. This can affect layout and readability.",
+          "suggestion": "Replace ` ` with a regular space."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Maks.' is understandable, 'Maksimum' would be a more accurate and formal translation for 'Max'.",
+          "suggestion": "Change 'Maks.' to 'Maksimum'."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The original English content uses HTML tags <1> and </1> which are replicated in the Ukrainian translation. These tags likely shouldn't be part of the displayed text and should be removed.",
+          "suggestion": "Remove the <1> and </1> tags from the Ukrainian translation. The content should be simply \"Дні (Макс. {{days}})\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are present in both the English and Vietnamese versions. This suggests they are intended to be preserved, but their purpose is unclear without more context.  While the preservation is technically correct, it's worth investigating *why* these tags are there to ensure proper rendering or intended effect.",
+          "suggestion": "Investigate the purpose of the <1> and </1> tags and ensure they are necessary and correctly rendered in the target environment. If they are purely for visual structure and not semantically important, consider removing them for cleaner code."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Chinese translation includes \"天\" after \"最多 {{days}}\". While grammatically correct, it's redundant because \"天数\" already implies days. The English doesn't include a repeating \"天\".",
+          "suggestion": "天数 <1>（最多 {{days}}）</1>"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

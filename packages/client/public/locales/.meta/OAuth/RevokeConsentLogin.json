@@ -1,0 +1,367 @@
+{
+  "key_path": "RevokeConsentLogin",
+  "content": "If you want to renew an automatic login into {{name}} using {{organizationName}} {{productName}}, you will be asked to grant access to your {{productName}} account data.",
+  "content_en_sha1_hash": "80e0baa463c37d74f45ecfd7a35edb8830c07fc3",
+  "created_at": "2025-05-19T21:30:54.015Z",
+  "updated_at": "2025-05-24T07:11:49.797Z",
+  "comment": {
+    "text": "This translation key is used to display a message when a user revokes consent for automatic login to their {{productName}} account data at an organization. The message will appear in a dialog box prompting the user to confirm revocation of access. Translators should provide a clear and concise description that reflects this purpose.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:37.531Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/authorized-apps/sub-components/RevokeDialog.tsx",
+      "line_number": 55,
+      "context": "/>\n );\n const secondDesc = isGroup ? (\n <Trans\n t={t}\n i18nKey=\"RevokeConsentLoginGroup\"\n ns=\"OAuth\"\n values={{\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"avtomatik girişi yeniləmək istəyirsinizsə\" could be more naturally translated as \"avtomatik girişinizi təzələmək istəyirsinizsə\".  \"Yeniləmək\" is technically correct, but \"təzələmək\" is more common in this context.",
+          "suggestion": "avtomatik girişinizi təzələmək istəyirsinizsə"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of spaces around the placeholders (e.g., \"{{name}}\") is inconsistent with common translation practices and may impact rendering in the application.  It's generally better to adhere to the spacing in the original English.",
+          "suggestion": "Remove extra spaces around the placeholders, e.g., {{name}}, {{organizationName}}, {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"данните на профила ви в {{productName}}\" is a less precise translation of \"account data\". \"Данни на профила\" translates to 'profile data' which is not exactly the same as 'account data'. While close, 'account data' is broader and includes more than just profile information.",
+          "suggestion": "Ако искате да подновите автоматичното влизане в {{name}} с помощта на {{organizationName}} {{productName}}, ще трябва да предоставите достъп до данните на вашия {{productName}} акаунт."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'automatic login' is translated as 'αυτόματη είσοδο'. While technically correct, a more natural and common phrasing in Greek might be 'αυτόματη σύνδεση'.",
+          "suggestion": "Εάν θέλετε να ανανεώσετε την αυτόματη σύνδεση στο {{name}} χρησιμοποιώντας το {{productName}} της {{organizationName}}, θα σας ζητηθεί να χορηγήσετε πρόσβαση στα δεδομένα του λογαριασμού σας {{productName}}."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of 'της' before {{organizationName}} can be awkward. It directly translates to 'of' which isn't always necessary in this context. Depending on the intended emphasis, removing it might improve readability.",
+          "suggestion": "Εάν θέλετε να ανανεώσετε την αυτόματη σύνδεση στο {{name}} χρησιμοποιώντας το {{productName}} {{organizationName}}, θα σας ζητηθεί να χορηγήσετε πρόσβαση στα δεδομένα του λογαριασμού σας {{productName}}."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'χορηγήσετε πρόσβαση' is accurate, 'παρέχετε πρόσβαση' could be a more natural phrasing in Greek for granting access.",
+          "suggestion": "Εάν θέλετε να ανανεώσετε την αυτόματη σύνδεση στο {{name}} χρησιμοποιώντας το {{productName}} της {{organizationName}}, θα σας ζητηθεί να παρέχετε πρόσβαση στα δεδομένα του λογαριασμού σας {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"renew\" is not accurate. 'Uusia' implies creating something new rather than renewing an existing one. A more suitable translation would be 'jatkaa' (to continue) or 'päivittää' (to update).",
+          "suggestion": "Jos haluat jatkaa automaattisen kirjautumisen tiliin {{name}} käyttämällä {{organizationName}} {{productName}}, sinua pyydetään myöntämään käyttöoikeus {{productName}} -tilisi tietoihin."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"մուտքի թույլտվություն տալ\" (grant access) is a bit awkward and literal. A more natural phrasing would be something like \"ձեզ կներվենք համաձայնություն\" (you will be asked for consent) or \"ձեզ կքննարկվի համաձայնություն\" (consent will be requested from you).",
+          "suggestion": "Եթե ցանկանում եք թարմացնել ավտոմատ մուտքը {{name}}՝ օգտագործելով {{organizationName}} {{productName}}, ձեզ կներվենք համաձայնություն ձեր {{productName}} հաշվի տվյալներին:"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase \"ձեր {{productName}} հաշվի տվյալներին\" feels slightly less fluent than it could be. While grammatically correct, the structure could be softened.",
+          "suggestion": "Եթե ցանկանում եք թարմացնել ավտոմատ մուտքը {{name}}՝ օգտագործելով {{organizationName}} {{productName}}, ձեզ կներվենք համաձայնություն ձեր {{productName}} հաշվի տվյալների համար:"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"renew an automatic login\" is not accurately translated. \"Rinnovare l'accesso automatico\" implies re-establishing an already existing automatic access, whereas the English suggests refreshing/re-granting it.  A better translation would focus on re-granting access.",
+          "suggestion": "Se vuoi ri-autorizzare l'accesso automatico a {{name}} utilizzando {{organizationName}} {{productName}}, ti verrà chiesto di concedere l'accesso ai dati del tuo account {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses katakana for 'productName' which might be unusual depending on the specific product. Consider whether hiragana or kanji would be more appropriate for clarity and naturalness.",
+          "suggestion": "Evaluate whether hiragana or kanji would be a better choice for {{productName}} based on the specific product name and target audience."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation uses \"을/를\" which suggests uncertainty about the preceding noun being a topic or object marker. Given the context, a definitive object marker (를) is likely more appropriate.",
+          "suggestion": "{{organizationName}} {{productName}}**를** 사용하는 {{name}} 자동 로그인을 갱신하려면..."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ຖືກກໍານົດໃຫ້ລູກຄ້າให้การອະນຸຍາດ\" is an awkward and inaccurate translation of \"you will be asked to grant access.\"  It suggests a forced action, not a request.",
+          "suggestion": "ຖ້າທ່ານຕ້ອງການຕໍ່ອາຍຸການເຂົ້າສູ່ລະບົບອັດຕະໂນມັດເຂົ້າສູ່ {{name}} ໂດຍໃຊ້ {{organizationName}} {{productName}}, ທ່ານຈະຕ້ອງໃຫ້ການອະນຸຍາດເຂົ້າເຖິງຂໍ້ມູນບັນຊີ {{productName}} ຂອງທ່ານ."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ອະນຸຍາດ' is used twice. While correct, consider if a synonym would improve flow.",
+          "suggestion": "ຖ້າທ່ານຕ້ອງການຕໍ່ອາຍຸການເຂົ້າສູ່ລະບົບອັດຕະໂນມັດເຂົ້າສູ່ {{name}} ໂດຍໃຊ້ {{organizationName}} {{productName}}, ທ່ານຈະຕ້ອງໃຫ້ການຕົກລົງເຂົ້າເຖິງຂໍ້ມູນບັນຊີ {{productName}} ຂອງທ່ານ."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"šeit:\" (here:) is unnecessary and disrupts the flow of the sentence. It doesn't accurately convey the meaning of the English 'into'.",
+          "suggestion": "Ja vēlaties atjaunot automātisko pieteikšanos {{name}} izmantojot {{organizationName}} {{productName}}, jums tiks lūgts piešķirt piekļuvi sava {{productName}} konta datiem."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The translation uses \"zostaniesz poproszony(na)\". While grammatically correct, it's a bit clunky. The (na) implies the user could be male or female, and is not essential. It's more natural to just use a gender-neutral form or a more direct phrasing.",
+          "suggestion": "zostaniesz poproszony o przyznanie dostępu"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation's word order for organization and product names feels slightly unnatural in Polish. While understandable, it could be improved for better flow. Polish typically places the organization name *before* the product name in such a context.",
+          "suggestion": "Jeśli chcesz odnowić automatyczne logowanie w {{name}} przy użyciu {{organizationName}} {{productName}}, zostaniesz poproszony o przyznanie dostępu do danych Twojego konta {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"autentificarea automată\" (automatic authentication) is not the best translation for \"automatic login\".  \"Autentificare automată\" refers to the authentication process itself, not the login feature. A more accurate translation would be something like \"logare automat\" or \"conectare automată\".",
+          "suggestion": "Consider using 'logare automat' or 'conectare automată' instead of 'autentificarea automată'."
+        },
+        {
+          "type": "formatting",
+          "description": "The repeated use of curly braces and variable names in the translated text may not be properly handled by the rendering system. This could cause display issues.  It's likely the rendering system expects variable names to be consistent.",
+          "suggestion": "Ensure the variable names used in the translation (name, organizationName, productName) are consistent with the rendering system's requirements. Verify the rendering system correctly handles these variables after translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation retains the English variable names ({{name}}, {{organizationName}}, {{productName}}).  These should ideally be replaced with contextually appropriate Sinhala terms or removed if the variables are handled by a templating engine.",
+          "suggestion": "Evaluate whether these variables need to be replaced with localized equivalents or removed if handled by a templating engine. For example, if '{{name}}' refers to 'user', a localized term like 'භාවිතරයා' (pavitanavya) could be considered."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'ඔබ {{name}} වෙතට ස්වයංක්‍රීයව පිවිසිය යුතු නම්' could be slightly improved for flow. It directly translates to 'If you must enter {{name}} automatically.'",
+          "suggestion": "Consider rephrasing to something like 'ඔබ {{name}} වෙත ස්වයංක්‍රීයව පිවිසිය යුතු විට' (If you need to automatically enter {{name}})"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'පිවිසිය' (pivisiya) translates directly to 'enter.' While technically correct, it might not be the most natural way to describe logging into a service. It sounds somewhat literal.",
+          "suggestion": "Consider using a more natural phrase for 'login' such as 'ඇතුළත් වීමට' (athulath vimo) or a more concise phrase dependent on context."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"renew an automatic login\" is not accurately translated. \"Obnoviti samodejno prijavo\" implies restoring a previous login, but 'renew' suggests creating a new one. A better translation would be 'ponovno omogočiti samodejno prijavo'.",
+          "suggestion": "Če želite ponovno omogočiti samodejno prijavo v {{name}} z uporabo {{organizationName}} {{productName}}, boste morali odobriti dostop do podatkov računa {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'renew an automatic login' is not accurately translated. 'Renew' in this context implies re-establishing or re-authorizing a previously existing login. A better translation would convey the idea of re-authorizing or re-granting access.",
+          "suggestion": "Ако желите да обновите ауторизацију аутоматске пријаве у {{name}} користећи {{organizationName}} {{productName}}, од вас ће се тражити да одобрите приступ подацима вашег {{productName}} налога."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation maintains the placeholder structure, which is good. However, consistency with the English structure (e.g., placement of commas) should be checked for overall document style.",
+          "suggestion": "Review the placement of commas and other punctuation marks to ensure consistency with other translated documents."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"renew\" is not accurate. \"Відновити\" implies restoring something that was previously broken or lost, rather than renewing a permission. A more accurate translation would be something like \"оновлювати\" (onovuvaty) or \"повторно авторизувати\" (povtorno avtorizuvaty).",
+          "suggestion": "Якщо ви захочете оновити автоматичний вхід до {{name}} за допомогою {{productName}} {{organizationName}}, вам буде запропоновано надати доступ до даних вашого облікового запису {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'renew an automatic login' is not accurately translated. 'Gia hạn đăng nhập tự động' implies extending or renewing a subscription, whereas the English implies re-establishing an automatic login flow. A more accurate translation would be 'tái tạo đăng nhập tự động' or 'thiết lập lại đăng nhập tự động'.",
+          "suggestion": "Nếu bạn muốn tái tạo đăng nhập tự động vào {{name}} sử dụng {{productName}} {{organizationName}}, bạn sẽ được yêu cầu cấp quyền truy cập vào dữ liệu tài khoản {{productName}} của mình."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"renew an automatic login\" is not accurately translated. '续订' (xùdìng) implies renewal or extension of a subscription, which doesn't quite fit the context of re-granting login access. A more accurate translation might focus on re-authorizing or re-establishing the automatic login.",
+          "suggestion": "如果您希望重新授权通过{{organizationName}} {{productName}}对{{name}}的自动登录..."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

@@ -26,8 +26,8 @@
 
 "use client";
 import React, { useMemo } from "react";
+import dynamic from "next/dynamic";
 import { useTranslation } from "react-i18next";
-
 import {
   DocumentEditor,
   type IConfig,
@@ -337,4 +337,4 @@ const Editor = ({
   );
 };
 
-export default Editor;
+export default dynamic(() => Promise.resolve(Editor), { ssr: false });

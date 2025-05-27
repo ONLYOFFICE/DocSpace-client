@@ -1,0 +1,250 @@
+{
+  "key_path": "PortalRenamingLabelText",
+  "content": "New space name",
+  "content_en_sha1_hash": "09609f05aae47160f36f4e04d315dc2f8abf446b",
+  "created_at": "2025-05-19T21:30:52.270Z",
+  "updated_at": "2025-05-24T04:31:55.657Z",
+  "comment": {
+    "text": "The translation key \"PortalRenamingLabelText\" is used to display a label for renaming portal names. In the Portal Settings page, this text appears as the label for a form field where users can enter their desired new name for their portal. Translators should provide a clear and concise \"New space name\" that reflects the purpose of this field in the user interface.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:44.405Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
+      "line_number": 302,
+      "context": "const settingsBlock = (\n <div className=\"settings-block\">\n <FieldContainer\n id=\"fieldContainerPortalRenaming\"\n className=\"field-container-width\"\n labelText={`${t(\"PortalRenamingLabelText\")}`}\n isVertical\n >\n <TextInput\n tabIndex={10}\n id=\"textInputContainerPortalRenaming\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Նոր կայքէջի անուն\" literally translates to 'New website name.' While technically understandable, 'New space name' suggests a more general renaming context (like a workspace or area within a platform), which 'website' doesn't fully convey. A more accurate translation would depend on the specific context of 'space' within the application's terminology.",
+          "suggestion": "Consider a more generic term like \"Նոր տարածքի անուն\" (New area name) or \"Նոր վայրի անուն\" (New place name) if 'space' refers to a general area.  If the space *is* consistently a website or page, the current translation is acceptable, but confirmation is needed."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Nome dello spazio nuovo' is a literal translation and doesn't sound natural in Italian. A more idiomatic translation would be 'Nuovo nome dello spazio'.",
+          "suggestion": "Nuovo nome dello spazio"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ໃໝ່ ປະຕູ ຊື່ ' does not accurately translate 'New space name'. 'ປະຕູ' means 'door', which is not relevant to the context of a 'space name'.",
+          "suggestion": "A more accurate translation would be something like 'ຊື່ ສະຖານທີ່ ໃໝ່' (chue satthan thi mai) which translates to 'New place name' or 'New name for space'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Jauns portāla nosaukums' translates to 'New portal name'. The English 'New space name' implies a more general term for a renamed area, while 'portāla nosaukums' specifically refers to a portal's name. It's not a direct equivalent.",
+          "suggestion": "Considering the context, a more appropriate translation might be 'Jauns nosaukums' (New name) or 'Pārdēvētais nosaukums' (Renamed name), but without more context, it's difficult to determine the best option."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'අවකාශයේ නව නම' literally translates to 'New name of space'. While understandable, it's a bit verbose and doesn't directly convey 'New space name' as concisely.  A more direct translation would better match the English intention for a user interface label.",
+          "suggestion": "Consider a more concise translation like 'නව අතථ්වක්ශනය' (Nawa aththawakshanaya) which translates to 'New designation/name'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Novo ime prostora' while grammatically correct, might not be the most natural or precise translation of 'New space name' in this specific context. 'Novo ime prostora' literally translates to 'New name of space'. A more natural translation might be 'Ime novog prostora' or simply 'Novo ime'.",
+          "suggestion": "Ime novog prostora"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"协作空间的新名称\" (Collaboration space's new name) is too literal and doesn't convey the same concise meaning as \"New space name\". While technically correct, it's more verbose than necessary for a label.",
+          "suggestion": "新空间名称 (Xīn kōngjiān míngchēng) - This is a more concise and natural translation meaning 'New space name'."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

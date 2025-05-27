@@ -148,7 +148,6 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
       item={item}
       viewAs="tile"
       currentDeviceType={currentDeviceType}
-      currentColorScheme={theme.currentColorScheme}
       isPublicRoom
       onClickDownload={() => downloadAction(item)}
     />

@@ -11,5 +11,6 @@
   "LinkCopySuccess": "تم نسخ الرابط",
   "SendInvitation": "إرسال دعوة",
   "UserMaxAvailableRoleWarning": "لا يمكن تعيين الضيوف والمستخدمين كمديري غرف. فقط مسؤولو الغرف وإدارة {{productName}} مناسبون لهذا الدور المحدد.",
-  "UsersAlreadyAdded": "تمت إضافة بعض المستخدمين بالفعل"
+  "UsersAlreadyAdded": "تمت إضافة بعض المستخدمين بالفعل",
+  "UsersCannotBeAdded": "لا يمكن إضافة جهات الاتصال المعطلة إلى الغرفة"
 }

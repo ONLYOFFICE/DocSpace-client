@@ -28,8 +28,7 @@ import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
-import { LinkTarget } from "@docspace/shared/components/link";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { Link, LinkTarget } from "@docspace/shared/components/link";
 
 import { StyledBonus } from "./Bonus.styled";
 
@@ -50,44 +49,44 @@ export const OfficialDocumentation = ({
         —
         <Text fontWeight={600}>
           {t("UpgradeToProBannerInstructionItemDocker")}{" "}
-          <ColorTheme
+          <Link
             tag="a"
-            themeId={ThemeId.Link}
             fontSize="13px"
             fontWeight="600"
             href={enterpriseInstallScriptUrl}
             target={LinkTarget.blank}
+            color="accent"
           >
             {t("UpgradeToProBannerInstructionReadNow")}
-          </ColorTheme>
+          </Link>
         </Text>
         —
         <Text fontWeight={600}>
           {t("UpgradeToProBannerInstructionItemLinux")}{" "}
-          <ColorTheme
+          <Link
             tag="a"
-            themeId={ThemeId.Link}
             fontSize="13px"
             fontWeight="600"
             href={enterpriseInstallScriptUrl}
             target={LinkTarget.blank}
+            color="accent"
           >
             {t("UpgradeToProBannerInstructionReadNow")}
-          </ColorTheme>
+          </Link>
         </Text>
         —
         <Text fontWeight={600}>
           {t("UpgradeToProBannerInstructionItemWindows")}{" "}
-          <ColorTheme
+          <Link
             tag="a"
-            themeId={ThemeId.Link}
             fontSize="13px"
             fontWeight="600"
             href={enterpriseInstallWindowsUrl}
             target={LinkTarget.blank}
+            color="accent"
           >
             {t("UpgradeToProBannerInstructionReadNow")}
-          </ColorTheme>
+          </Link>
         </Text>
       </div>
 
@@ -95,15 +94,15 @@ export const OfficialDocumentation = ({
         <Trans i18nKey="UpgradeToProBannerInstructionNote" ns="Common" t={t}>
           Please note that the editors will be unavailable during the upgrade.
           We also recommend to
-          <ColorTheme
+          <Link
             tag="a"
-            themeId={ThemeId.Link}
             fontWeight="600"
             href={dataBackupUrl}
             target={LinkTarget.blank}
+            color="accent"
           >
             backup your data
-          </ColorTheme>
+          </Link>
           before you start.
         </Trans>
       </Text>

@@ -1,0 +1,267 @@
+{
+  "key_path": "SpaceUsersOnly",
+  "content": "{{productName}} users only",
+  "content_en_sha1_hash": "0beea2f05fa9af55a0c63adb5ee8fc835cf3d5e9",
+  "created_at": "2025-05-19T21:30:48.990Z",
+  "updated_at": "2025-05-26T07:57:32.922Z",
+  "comment": {
+    "text": "This translation key is used to display a label indicating that a feature or action is restricted to space users only. It appears in a share component and is triggered by the \"SpaceUsersOnly\" internal property.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T08:39:08.162Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 71,
+      "context": "label: t(\"Common:AnyoneWithLink\"),\n },\n {\n internal: true,\n key: \"users\",\n label: t(\"Common:SpaceUsersOnly\", {\n productName: t(\"Common:ProductName\"),\n }),\n },\n available?.None && {\n key: \"separator\",",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"خاص بمستخدمي {{productName}} فقط\" while understandable, isn't the most natural or idiomatic way to express \"{{productName}} users only\" in Arabic (Saudi Arabia). A more accurate and common phrasing would be something like \"مخصص لمستخدمي {{productName}} فقط\" or \"لأعضاء {{productName}} فقط\".  \"خاص\" implies exclusivity and ownership, whereas \"مخصص\" (dedicated to) or \"لأعضاء\" (for members) better conveys the intended meaning.",
+          "suggestion": "مخصص لمستخدمي {{productName}} فقط"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Nur {{productName}}-Benutzer' is technically correct but lacks naturalness. A more idiomatic translation would use a more appropriate preposition or phrasing.",
+          "suggestion": "Nur Benutzer von {{productName}}"
+        },
+        {
+          "type": "formatting",
+          "description": "The hyphenated structure '-Benutzer' could be improved for readability in German.",
+          "suggestion": "von {{productName}} Benutzer"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Μόνο για χρήστες {{productName}}' is a literal translation of 'users only'. A more natural and idiomatic Greek phrasing would be 'Αποκλειστικά για χρήστες {{productName}}' or 'Διαθέσιμο μόνο για χρήστες {{productName}}'.",
+          "suggestion": "Αποκλειστικά για χρήστες {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"միայն {{productName}}-ի օգտվողների համար\" is a literal translation of 'for {{productName}} users only'. A more natural and accurate Armenian translation would be something like \"միայն {{productName}}-ի մասնակիցների համար\" (only for participants of {{productName}}) or \"միայն {{productName}} գրանցված օգտվողների համար\" (only for registered users of {{productName}}). The current translation sounds slightly awkward.",
+          "suggestion": "Consider using \"միայն {{productName}}-ի մասնակիցների համար\" or \"միայն {{productName}} գրանցված օգտվողների համար\" for a more idiomatic translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Doar utilizatorii {{productName}}' is technically correct but could be improved for a more natural and fluent Romanian expression. A more idiomatic translation would be something like 'Numai utilizatorii {{productName}}' or 'Exclusiv utilizatorii {{productName}}'.",
+          "suggestion": "Numai utilizatorii {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"{{productName}} පරිශ්‍රීලකයින් පමණි\" doesn't accurately convey \"{{productName}} users only\". The word \"පරිශ්‍රීලකයින්\" (parishreelakayin) translates to 'personnel' or 'staff', not 'users'.",
+          "suggestion": "{{productName}} යොජනාවේ පරිශීලකයින් පමණි"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Само {{productName}} корисници' while understandable, is not the most natural or accurate rendering of '{{productName}} users only'. A more idiomatic translation would be 'Само за кориснике {{productName}}' or 'Само корисници {{productName}}'. The current translation directly translates 'users' as 'корисници', but the preposition 'only' isn't reflected in the sentence structure in a natural way.",
+          "suggestion": "Само за кориснике {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Samo {{productName}} korisnici' is a literal translation, but doesn't flow naturally in Serbian. A more appropriate translation would convey exclusivity.",
+          "suggestion": "Ispitivanje je dostupno samo korisnicima {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Chỉ người dùng {{productName}}\" is technically correct but lacks the full meaning of \"{{productName}} users only\". It's more literally \"Only users of {{productName}}\". A better translation might emphasize the exclusivity.",
+          "suggestion": "Chỉ dành cho người dùng {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

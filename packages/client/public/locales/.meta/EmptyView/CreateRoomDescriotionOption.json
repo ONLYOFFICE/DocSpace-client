@@ -1,0 +1,256 @@
+{
+  "key_path": "CreateRoomDescriotionOption",
+  "content": "Start the portal by creating a room",
+  "content_en_sha1_hash": "99cae1f0427752b2aa0b67fb8e7bee1a68325ee2",
+  "created_at": "2025-05-19T21:30:56.461Z",
+  "updated_at": "2025-05-26T07:57:32.160Z",
+  "comment": {
+    "text": "This translation key is used for a button label that prompts users to create a room. It appears on a UI element in an application where users can initiate room creation. The text will be translated by the translator to support different languages and cultures.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:51.229Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
+      "line_number": 281,
+      "context": "disabled: !security?.Create,\n };\n \n const createRoom = {\n title: t(\"EmptyView:CreateRoomTitleOption\"),\n description: t(\"EmptyView:CreateRoomDescriotionOption\"),\n icon: <CreateRoom />,\n key: \"create-room\",\n onClick: actions.onCreateRoom,\n disabled: false,\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Otaq yaradaraq portala başlayın' is a literal translation but sounds slightly unnatural in Azerbaijani. While technically correct, it's not the most idiomatic way to convey the meaning.",
+          "suggestion": "Consider a more natural phrasing like 'Portala başlamak üçün otaq yaradın' or 'Otaq yaradaraq portala daxil olun'."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Start the portal by creating a room' implies a direct action sequence. The Japanese translation 'ルームを作成してポータルを開始しましょう' translates to 'Let's create a room and start the portal'. While not entirely wrong, it loses the 'by' construction, which implies the room creation is the *means* to start the portal. A more accurate translation would emphasize this dependency.",
+          "suggestion": "ルームを作成することでポータルを開始しましょう (Rūmu o sakusei suru koto de pōtaru o kaishi shimashō) - 'Start the portal by creating a room.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '룸을 만들어 포털을 시작하세요' is a literal translation but doesn't convey the intended meaning as naturally in Korean. 'Start the portal by creating a room' implies creation *as a prerequisite* for starting the portal. The current translation doesn't emphasize this prerequisite relationship.",
+          "suggestion": "룸을 만들어서 포털을 시작하세요 (Room-eul mandeureoseo poteoreul sijak haseyo)"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ເລີ່ມຕົ້ນພອດທະລ໌ໂດຍການສ້າງຫ້ອງ' doesn't fully capture the nuance of 'Start the portal by creating a room'. 'ພອດທະລ໌' (port) is a direct transliteration and might not be the most natural way to refer to a portal in Lao. The implication of initiating something (a portal) through room creation could be lost.",
+          "suggestion": "Consider alternatives like 'ເປີດປະຕູພອດໂດຍການສ້າງຫ້ອງ' (Open the portal by creating a room) or 'ເລີ່ມການພາດທະລຸໂດຍການສ້າງຫ້ອງ' (Start the portal opening by creating a room). The best option would depend on the specific context of the portal."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Porniți portalul prin crearea unei săli\" is a literal translation that doesn't quite convey the intended meaning of 'Start the portal by creating a room'.  'Sali' is feminine, while 'room' can be either gender.  A more natural and accurate translation would convey the action of initiation or beginning.",
+          "suggestion": "Consider alternatives like \"Deschideți portalul creând o cameră\" (Open the portal by creating a room) or \"Începeți portalul creând o cameră\" (Start the portal by creating a room)."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'පෝතලය ආරම්භ කිරීමට කාමරයක් සාදන්න' is a literal translation but lacks nuance. A more natural and idiomatic Sinhala phrasing would convey the meaning more effectively. 'ආරම්භ කිරීමට' is correct, but 'කාමරයක් සාදන්න' is a bit clunky.",
+          "suggestion": "Consider a more natural phrasing like 'පෝතලය විවෘත කිරීමට කාමරයක් සාදා ගන්න' or 'පෝතලය ක්‍රියාත්මක කිරීමට කාමරයක් සාදන්න.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Покрените портал креирањем собе\" sounds slightly awkward. A more natural phrasing in Serbian might emphasize initiating or opening the portal.",
+          "suggestion": "Почните портал креирањем собе"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Start the portal by creating a room' implies that room creation is the *method* of starting the portal, not necessarily the sole purpose.  The translation '创建房间以启用门户' ('Create a room to enable the portal') is too literal and doesn't convey the same nuance. It sounds like creating a room *allows* the portal, not *starts* it.",
+          "suggestion": "考虑更流畅的表达方式，例如 '通过创建房间启动门户' (Through creating a room, start the portal) 或者 '创建房间来启动门户' (Create a room to start the portal) 更好。"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

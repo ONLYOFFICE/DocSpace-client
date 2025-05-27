@@ -1025,7 +1025,9 @@ class SettingsStore {
     this.setAdditionalResourcesData(res);
     this.setAdditionalResourcesIsDefault(res.isDefault);
 
-    this.getSettings();
+    if (!this.isFirstLoaded && !this.isLoading) {
+      this.getSettings();
+    }
   };
 
   getPortalCultures = async () => {
@@ -1070,6 +1072,7 @@ class SettingsStore {
   };
 
   getCompanyInfoSettings = async () => {
+    console.log("getCompanyInfoSettings");
     const res = await api.settings.getCompanyInfoSettings();
 
     this.setCompanyInfoSettingsData(res);

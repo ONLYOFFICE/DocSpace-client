@@ -160,11 +160,11 @@ export const CompanyInfo = ({
         <div className="settings-block">
           <FieldContainer>
             <Checkbox
-              isDisabled={!isBrandingAvailable}
+              isDisabled={!isBrandingAvailable || !isSettingPaid}
               isChecked={showAbout || !isBrandingAvailable}
               onChange={onChangeDisplayAbout}
               data-testid="show-about-window-checkbox"
-              label={t("Settings:ShowAboutWindow")}
+              label={t("Common:ShowAboutWindow")}
             />
           </FieldContainer>
 

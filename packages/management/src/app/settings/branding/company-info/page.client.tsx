@@ -44,7 +44,11 @@ import type { TPaymentQuota } from "@docspace/shared/api/portal/types";
 import type { TPortals } from "@docspace/shared/api/management/types";
 
 import useDeviceType from "@/hooks/useDeviceType";
-import { getIsCustomizationAvailable, getIsSettingsPaid } from "@/lib";
+import {
+  getIsBrandingAvailable,
+  getIsCustomizationAvailable,
+  getIsSettingsPaid,
+} from "@/lib";
 
 export const CompanyInfoPage = ({
   portals,
@@ -55,6 +59,7 @@ export const CompanyInfoPage = ({
   buildInfo,
   isEnterprise,
   logoText,
+  displayAbout,
 }: {
   portals?: TPortals[];
   quota?: TPaymentQuota;
@@ -64,6 +69,7 @@ export const CompanyInfoPage = ({
   buildInfo: IBuildInfo;
   isEnterprise: boolean;
   logoText: string;
+  displayAbout: boolean;
 }) => {
   const { t } = useTranslation("Common");
   const { currentDeviceType } = useDeviceType();
@@ -74,6 +80,8 @@ export const CompanyInfoPage = ({
   const [isLoading, startTransition] = useTransition();
 
   const isCustomizationAvailable = getIsCustomizationAvailable(quota);
+  const isBrandingAvailable = getIsBrandingAvailable(quota);
+
   const isSettingPaid = getIsSettingsPaid(isCustomizationAvailable, portals);
 
   useResponsiveNavigation({
@@ -89,10 +97,18 @@ export const CompanyInfoPage = ({
     email: string,
     phone: string,
     site: string,
+    hideAbout: boolean,
   ) => {
     startTransition(async () => {
       try {
-        await setCompanyInfoSettings(address, companyName, email, phone, site);
+        await setCompanyInfoSettings(
+          address,
+          companyName,
+          email,
+          phone,
+          site,
+          hideAbout,
+        );
         const companyData = await getCompanyInfoSettings();
         setCompanyData(companyData);
         toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
@@ -117,6 +133,8 @@ export const CompanyInfoPage = ({
 
   return (
     <CompanyInfo
+      displayAbout={displayAbout}
+      isBrandingAvailable={isBrandingAvailable}
       isSettingPaid={isSettingPaid}
       companySettings={companyData}
       onSave={onSave}
@@ -131,4 +149,3 @@ export const CompanyInfoPage = ({
     />
   );
 };
-

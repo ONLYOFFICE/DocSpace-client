@@ -2042,6 +2042,7 @@
 
 .dark {
   --tile-background-color: #{$black};
+  --tile-room-border: 1px solid #{$gray-dark-strong};
   --tile-border: 1px solid #{$gray-dark-strong};
   --tile-checked-background: #{$light-dark-gray-hover};
   --tile-icon-button-color: #{$gray-dark};
@@ -2060,9 +2061,9 @@
   --tile-container-hover-background: #{$black};
 
   --tile-show-hotkey-border: #{$light-second-main};
-  --tile-border-radius: 6px;
+  --tile-border-radius: 12px;
   --tile-room-border-radius: 12px;
-  --tile-badge-shadow: 0px 2px 4px #{$badge-shadow};
+  --tile-badge-shadow: 0px 2px 4px #{$badge-dark-shadow};
 
   --tile-font-size: 14px;
   --tile-line-height: 16px;

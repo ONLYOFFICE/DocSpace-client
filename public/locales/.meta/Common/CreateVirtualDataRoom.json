@@ -3,7 +3,7 @@
   "content": "Create virtual data room",
   "content_en_sha1_hash": "cffe205b69e44d4beb86299712697b1f2e680fe5",
   "created_at": "2025-05-19T21:30:43.931Z",
-  "updated_at": "2025-05-22T11:56:37.514Z",
+  "updated_at": "2025-05-26T07:57:32.198Z",
   "comment": {
     "text": "This translation key is used to display the label for creating a virtual data room. It appears as a button label in an empty screen form, and its purpose is to provide a clear instruction for the user when they are presented with an option to create a virtual data room. The translated text will be displayed instead of \"CreateVirtualDataRoom\".",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\ShareCollectSelector\\ShareCollectSelector.tsx",
+      "file_path": "/packages/client/src/components/ShareCollectSelector/ShareCollectSelector.tsx",
       "line_number": 262,
       "context": "icon: InfoIcon,\n onClose: onCloseInfoBar,\n };\n \n const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {\n [RoomsType.VirtualDataRoom]: t(\"Common:CreateVirtualDataRoom\"),\n [RoomsType.FormRoom]: t(\"Common:CreateFormFillingRoom\"),\n };\n \n return (\n <FilesSelectorWrapper",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\StartFillingSelectDialog.tsx",
+      "file_path": "/packages/doceditor/src/components/StartFillingSelectDialog.tsx",
       "line_number": 73,
       "context": "icon: InfoIcon,\n onClose: onCloseInfoBar,\n };\n \n const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {\n [RoomsType.VirtualDataRoom]: t(\"Common:CreateVirtualDataRoom\"),\n [RoomsType.FormRoom]: t(\"Common:CreateFormFillingRoom\"),\n };\n \n return (\n <FilesSelectorWrapper",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     },
     {
-      "file_path": "\\packages\\shared\\components\\selector\\sub-components\\EmptySreen\\EmptyScreenFormRoom.tsx",
-      "line_number": 68,
-      "context": ": t(\"Common:SelectorVDREmptyScreenDescription\");\n \n const buttonLabel =\n createDefineRoomType === RoomsType.FormRoom\n ? t(\"Common:CreateFormFillingRoom\")\n : t(\"Common:CreateVirtualDataRoom\");\n \n return (\n <StyledNewEmptyScreen>\n <img\n className=\"empty-image\"",
-      "module": "\\packages\\shared"
+      "file_path": "/packages/shared/components/selector/sub-components/EmptySreen/EmptyScreenFormRoom.tsx",
+      "line_number": 63,
+      "context": ": t(\"Common:SelectorVDREmptyScreenDescription\");\n \n const buttonLabel =\n createDefineRoomType === RoomsType.FormRoom\n ? t(\"Common:CreateFormFillingRoom\")\n : t(\"Common:CreateVirtualDataRoom\");\n \n return (\n <section className={styles.newEmptyScreen}>\n <img\n className=\"empty-image\"",
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Virtual məlumat otağı yaradın\" is in the past tense (\"you created\"). The English \"Create virtual data room\" implies a command or option for creation, and should be in the present tense or infinitive form.",
-          "suggestion": "Virtual məlumat otağı yarat"
+          "description": "The Azerbaijani translation 'Virtual məlumat otağı yaradın' translates to 'You created a virtual data room'. The English phrase 'Create virtual data room' is an instruction or command, not a statement about someone having already created it. It should be translated as an imperative.",
+          "suggestion": "Virtual məlumat otağını yaradın"
         }
       ],
       "approved_at": null
@@ -135,13 +135,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Creëer een virtuele data kamer\" sounds a bit literal and clunky in Dutch. \"Virtuele dataruimte\" is a more common and natural way to refer to a virtual data room.",
-          "suggestion": "Creëer een virtuele dataruimte"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -180,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අතථ්‍ය දත්ත කාමරයක් සාදන්න' while conveying the general idea, is not the most natural or accurate rendering of 'Create virtual data room'. 'අතථ්‍ය' (athathya) implies something unreal or illusory, which might not be the intended nuance. A more suitable translation would emphasize the 'virtual' aspect as being digital or online.",
-          "suggestion": "Consider 'විචිත්‍ර‍්‍රීය දත්ත කාමරයක් සාදන්න' (vichitriy dath kamaraayak sadann) - 'Create a digital data room', or 'සරිව‍්‍රතී‍්‍ර‍ය දත්ත කාමරයක් සාදන්න' (sarivathriy dath kamaraayak sadann) - 'Create a virtual data room' which uses a more commonly understood term for 'virtual' in Sinhala. The best option depends on the target audience."
+          "description": "The translation 'අතථ්‍ය දත්ත කාමරයක් සාදන්න' while conveying the general idea, isn't the most natural or precise rendering of 'Create virtual data room' in Sinhala. 'අතථ්‍ය' (athathya) means 'unreal' or 'imaginary,' which isn't the best fit for 'virtual'.",
+          "suggestion": "Consider using 'විත්‍ථාරණ දත්ත කාමරයක් සාදන්න' (viththaran data kamarak saadinna). 'විත්‍ථාරණ' (viththaran) is closer to 'virtual' or 'digital'."
         }
       ],
       "approved_at": null
@@ -204,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'виртуелну' is misspelled. It should be 'виртуелну собу'.",
-          "suggestion": "виртуелну собу"
+          "description": "The Serbian word 'Креирајте' is spelled correctly, but it might be more appropriate to use the imperative 'Креирај' for a more direct and user-friendly command in a UI context. 'Креирајте' is the formal/polite form, which might feel stiff.",
+          "suggestion": "Креирај виртуелну собу за податке"
         }
       ],
       "approved_at": null

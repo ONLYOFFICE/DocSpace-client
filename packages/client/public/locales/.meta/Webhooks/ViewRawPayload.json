@@ -3,7 +3,7 @@
   "content": "View raw payload",
   "content_en_sha1_hash": "f9816af43fcbbce0fd79cf925d8a03b716aa0802",
   "created_at": "2025-05-19T21:30:49.865Z",
-  "updated_at": "2025-05-21T00:52:27.162Z",
+  "updated_at": "2025-05-24T02:06:16.145Z",
   "comment": {
     "text": "This translation key is used to display a button label that prompts users to view the raw payload of a webhook event. In the UI, this label appears as \"View raw payload\" on a small-sized button within a specific page component, typically accessible when viewing detailed information about webhooks or responses.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Xam mübadilə yükünə baxın\" is not the most natural or accurate translation of \"View raw payload\". \"Xam\" implies 'raw' but the rest of the phrase doesn't convey the meaning of 'view'.",
-          "suggestion": "A better translation would be something like \"Xam yükü görün\" or \"Xam məzmunu baxın\"."
+          "description": "The translation 'Xam mübadilə yükünə baxın' is a literal translation and doesn't convey the intended meaning of 'View raw payload' in a natural way. It sounds awkward. A more accurate and natural translation would be something like 'Əvvəlki yükləməyə bax' or 'Xam məlumatı göstər'.",
+          "suggestion": "Consider using 'Əvvəlki yükləməyə bax' or 'Xam məlumatı göstər' instead."
         }
       ],
       "approved_at": null
@@ -48,13 +48,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Виж необработен полезен товар\" is a literal translation, \"payload\" in this context refers to data transmitted via a webhook. A more accurate and natural translation would consider the technical meaning. \"Полезен товар\" is too general.",
-          "suggestion": "Виж суров полезен товар"
+          "description": "While \"Виж необработен полезен товар\" is a literal translation, \"payload\" in a webhook context usually refers to the data itself. A more natural and accurate translation would emphasize the data aspect.",
+          "suggestion": "Виж сурови данни"
         },
         {
           "type": "incorrect_translation",
-          "description": "The term 'необработен' (unprocessed) doesn't quite capture the nuance of 'raw' in the context of webhook data.  'Суров' (raw, in the sense of natural/unrefined) is a better fit.",
-          "suggestion": "Виж суров полезен товар"
+          "description": "The current translation \"полезен товар\" might imply a shipping container or similar concept, which isn't the intended meaning of 'payload' in a webhook context.",
+          "suggestion": "Виж необработени данни"
         }
       ],
       "approved_at": null
@@ -65,8 +65,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"náklad\" is not the correct translation for \"payload\" in this context. It typically refers to cargo or load. A more appropriate term for a webhook payload would be \"zpráva\" (message) or \"data\" (data).",
-          "suggestion": "Zobrazit nezpracovanou zprávu"
+          "description": "The translation 'Zobrazit nezpracovaný náklad ' is not the best equivalent for 'View raw payload'. 'Náklad' typically refers to cargo or goods. A more appropriate translation would focus on the data aspect of the payload.",
+          "suggestion": "Zobrazit surová data"
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, the word 'nezpracovaný' (unprocessed) might sound slightly awkward in this context. A more natural and direct translation for 'raw' data would be preferable.",
+          "suggestion": "Consider alternatives to 'nezpracovaný', such as 'surová' or 'nedokončená'."
         }
       ],
       "approved_at": null
@@ -89,8 +94,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ver carga útil sin procesar' is not the most natural or accurate translation of 'View raw payload'. While understandable, 'carga útil sin procesar' is a bit literal. A more idiomatic translation would be something like 'Ver carga útil original' or 'Ver payload sin formato'.",
-          "suggestion": "Ver carga útil original"
+          "description": "The translation \"Ver carga útil sin procesar\" is not the most natural or accurate translation of \"View raw payload.\" \"Carga útil sin procesar\" emphasizes the 'unprocessed' aspect. A more direct translation capturing the 'view' aspect would be preferable.",
+          "suggestion": "Ver el payload sin procesar"
         }
       ],
       "approved_at": null
@@ -101,8 +106,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Näytä raaka tietosisältö\" is understandable, it's a somewhat literal and not the most natural translation of \"View raw payload\". \"Payload\" has a specific technical meaning, and simply translating it as \"tietosisältö\" might not fully convey that.",
-          "suggestion": "Consider alternatives like \"Näytä raakadata\" or \"Näytä raakapyyntö\" depending on the specific context. \"Näytä raakaviesti\" could also work."
+          "description": "While 'Näytä raaka tietosisältö' is understandable, it's a slightly literal and less natural translation of 'View raw payload'. 'Payload' implies a data package or content. A more idiomatic translation would be something like 'Näytä raakadata' or 'Näytä raakasisältö'.",
+          "suggestion": "Näytä raakadata"
         }
       ],
       "approved_at": null
@@ -110,7 +115,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Voir les données brutes\" is understandable, a more accurate and common translation for \"View raw payload\" would be \"Afficher le payload brut\" or \"Consulter le payload brut\". \"Données brutes\" usually refers to raw data in a broader sense, not specifically a payload.",
+          "suggestion": "Afficher le payload brut"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -119,8 +130,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Դիտեք չմշակված ծանրաբեռնվածությունը' is a literal translation of 'View raw payload' but doesn't fully capture the intended meaning within a technical context. 'Raw payload' often refers to the unformatted data received via a webhook. A more accurate translation might consider a term that conveys 'unedited data' or 'original data'.",
-          "suggestion": "Consider alternatives such as 'Դիտել բնօրինակ տվյալները' (View the original data) or 'Դիտել չներածված տվյալները' (View unprocessed data)."
+          "description": "The translation \"Դիտեք չմշակված ծանրաբեռնվածությունը\" while technically accurate, isn't the most natural or idiomatic way to express \"View raw payload\" in Armenian. \"Ծանրաբեռնվածություն\" can be a bit heavy-sounding for a payload. A more common and user-friendly translation might be preferable.",
+          "suggestion": "Consider alternatives like \"Դիտել բնօրինակ տվյալները\" (Ditel bnorinag tvyalner) or \"Դիտել ամբողջական տվյալները\" (Ditel amboghjakan tvyalner), which translate to \"View original data\" and \"View complete data\" respectively.  The best option will depend on the overall tone and context."
         }
       ],
       "approved_at": null
@@ -131,12 +142,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Visualizza il carico utile iniziale\" doesn't accurately convey the meaning of 'View raw payload'. 'Carico utile' (payload) is correct, but 'iniziale' (initial) is not the best choice. 'Raw' implies unprocessed or direct data.",
-          "suggestion": "Visualizza payload grezzo"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation includes a space before 'grezzo' which should be removed.",
+          "description": "The Italian translation \"Visualizza il carico utile iniziale\" is not the most accurate translation of \"View raw payload\". \"Carico utile iniziale\" implies a first or initial payload, while \"raw payload\" simply refers to the unparsed payload. A more accurate translation would convey the meaning of seeing the payload in its original, unprocessed form.",
           "suggestion": "Visualizza payload grezzo"
         }
       ],
@@ -160,8 +166,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'ເບິ່ງ payload ດິບ' is understandable, a more accurate and natural translation would consider the meaning of 'raw' in a technical context. 'ດິບ' often refers to uncooked or unprocessed.  A better equivalent for 'raw' in this context might be 'ບໍ່ໄດ້ແກ້ໄຂ' (unedited) or 'ຕົ້ນສະບັບ' (original).",
-          "suggestion": "ເບິ່ງ payload ຕົ້ນສະບັບ"
+          "description": "While \"ເບິ່ງ payload ດິບ\" is understandable, a more precise and natural translation of 'View raw payload' would be something like \"ເບິ່ງຂໍ້ມູນ payload ສະບັບຕົ້ນ\" or \"ເບິ່ງຂໍ້ມູນ payload ທຳມະດົນ\".  'ດິບ' can imply 'uncooked' or 'raw' in a culinary sense, which isn't the intended meaning here.",
+          "suggestion": "ເບິ່ງຂໍ້ມູນ payload ສະບັບຕົ້ນ"
         }
       ],
       "approved_at": null
@@ -172,8 +178,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Skatīt neapstrādātu lietderīgo slodzi\" is understandable, a more natural and accurate translation of \"View raw payload\" would be \"Skatīt izejošo datu slodzi\" or \"Skatīt neapstrādāto datu slodzi\". \"Lietderīgo\" implies usefulness, which isn't the core meaning of 'raw'.",
-          "suggestion": "Skatīt izejošo datu slodzi"
+          "description": "The translation \"Skatīt neapstrādātu lietderīgo slodzi\" is a literal translation and sounds awkward in Latvian. \"Lietderīgo slodzi\" is too formal and doesn't perfectly capture the meaning of 'payload' in a technical context. A more natural phrasing is needed.",
+          "suggestion": "Skatīt ievades datus"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly an error, the translated phrase is lengthy. Consider if a shorter, more concise option exists that conveys the same meaning without being verbose.",
+          "suggestion": "Explore shorter alternatives like \"Skatīt datus\" or \"Skatīt ievades\" depending on the context."
         }
       ],
       "approved_at": null
@@ -190,13 +201,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Zobacz nieprzetworzone dane właściwe' is not the most natural or accurate translation of 'View raw payload'. 'Nieprzetworzone dane właściwe' is quite literal and technical. A more fluent translation would convey the meaning of 'raw' as 'surowe' or 'nieobrobione'. 'Dane właściwe' is also a bit awkward - 'dane' is sufficient.",
+          "description": "The translation \"Zobacz nieprzetworzone dane właściwe\" is not the most natural or accurate translation of \"View raw payload\". \"Dane właściwe\" is overly formal and doesn't fully convey the meaning of 'raw'.",
           "suggestion": "Zobacz surowe dane"
         },
         {
-          "type": "incorrect_translation",
-          "description": "While 'nieobrobione dane' is acceptable, it might sound overly technical for some users. A simpler option could be considered.",
-          "suggestion": "Zobacz nieobrobione dane"
+          "type": "formatting",
+          "description": "While not strictly an error, 'Zobacz surowe dane' is more concise and readable than the current translation.",
+          "suggestion": "Zobacz surowe dane"
         }
       ],
       "approved_at": null
@@ -213,8 +224,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ver carga útil bruta\" is a literal translation but doesn't quite capture the nuance of 'View raw payload' in a technical context. 'Ver' is correct for 'View', but 'carga útil bruta' is a bit awkward. A more natural translation would emphasize the display/access aspect.",
-          "suggestion": "Exibir payload bruto"
+          "description": "The translation 'Ver carga útil bruta' while understandable, isn't the most natural or accurate rendering of 'View raw payload' in Brazilian Portuguese. 'Carga útil' implies a payload with a specific purpose, while 'raw payload' suggests the unprocessed data itself.",
+          "suggestion": "Consider 'Visualizar payload bruto' or 'Ver payload original'."
         }
       ],
       "approved_at": null
@@ -225,13 +236,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Vizualizare sarcina neprelucrată\" is not the most accurate or natural translation of 'View raw payload'. 'Sarcina' translates to 'task' or 'load' in a general sense, while 'payload' in this context refers to the data sent via the webhook.",
-          "suggestion": "Vizualizare payload brut"
+          "description": "The translation \"Vizualizare sarcina neprelucrată\" is not the best fit for \"View raw payload.\" 'Sarcina' translates to 'task' or 'load', which doesn't fully capture the meaning of 'payload' in a webhook context. 'Payload' refers to the data being sent.",
+          "suggestion": "Vizualizare date brute"
         },
         {
           "type": "formatting",
-          "description": "While technically correct, 'Vizualizare payload brut' would read more naturally with a space before 'brut'.",
-          "suggestion": "Vizualizare payload brut "
+          "description": "While not strictly incorrect, 'Vizualizare date brute' could benefit from capitalization consistency. 'Vizualizare' is capitalized, 'date' should also be.",
+          "suggestion": "Vizualizare Date Brute"
         }
       ],
       "approved_at": null
@@ -242,8 +253,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Просмотр исходной полезной нагрузки\" is understandable, a more natural and common translation for \"View raw payload\" in a technical context would be something closer to \"Просмотр необработанной полезной нагрузки\" or \"Просмотр сырых данных полезной нагрузки\". \"Исходной\" can imply the very first payload, whereas \"raw\" means unaltered or unprocessed.",
-          "suggestion": "Просмотр необработанной полезной нагрузки"
+          "description": "While \"Просмотр исходной полезной нагрузки\" is a literal translation, \"payload\" can be less common or understood in Russian user interfaces. A more natural phrasing would be \"Просмотр необработанных данных\" or \"Просмотр сырых данных\".",
+          "suggestion": "Просмотр необработанных данных"
         }
       ],
       "approved_at": null
@@ -254,8 +265,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"අමු payload බලන්න\" is understandable, a more accurate and natural-sounding translation of \"View raw payload\" would be something like \"මුළු payload දෙස බලන්න\" or \"payload පළපුටුවලෙන්ම බලන්න\". \"අමු\" generally refers to unprocessed food and isn't the best fit for a technical context.",
-          "suggestion": "මුළු payload දෙස බලන්න"
+          "description": "The translation \"අමු payload බලන්න\" while understandable, isn't the most natural or precise translation of \"View raw payload.\" \"Payload\" is a technical term and directly translating 'raw' as 'අමු' is slightly awkward. A more natural phrasing would consider the context of viewing, potentially using 'මුළු' (whole) or an equivalent to reflect the 'raw' aspect.",
+          "suggestion": "Consider \"මුළු payload බලන්න\" or a similar phrasing that conveys the meaning of viewing the complete, unprocessed payload."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, in UI strings, it's important to consider casing. It's common to capitalize the first word.",
+          "suggestion": "Consider \"මුළු Payload බලන්න\" or similar casing to match common UI conventions."
         }
       ],
       "approved_at": null
@@ -266,8 +282,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Zobraziť nespracovaný dátový obsah\" is understandable, it's a bit verbose and doesn't directly convey the meaning of \"View raw payload.\" A more accurate and concise translation would be closer to \"Zobraziť surový dáta\" or \"Zobraziť surový payload\".",
-          "suggestion": "Zobraziť surový dáta"
+          "description": "While \"Zobraziť nespracovaný dátový obsah\" is technically correct, it's a bit verbose and formal for a user interface label. \"View raw payload\" implies a more direct and simpler action.",
+          "suggestion": "Zobraziť surový payload"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'dátový obsah' is a little heavy. It could be shortened for better readability in a UI.",
+          "suggestion": "Zobraziť surový payload"
         }
       ],
       "approved_at": null
@@ -278,8 +299,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Poglejte neobdelane uporabne podatke\" is not the most accurate or natural translation of \"View raw payload\". \"Neobdelane uporabne podatke\" is a bit verbose and technical. A more natural translation would be something like \"Poglej surovini podatke\" or \"Ogled surovih podatkov\".",
-          "suggestion": "Poglej surovini podatke"
+          "description": "The translation 'Poglejte neobdelane uporabne podatke' is not the most natural or accurate rendering of 'View raw payload'. 'Uporabne podatke' implies usable data, while 'raw payload' refers to the unprocessed data itself. A better translation would focus on the 'raw' aspect.",
+          "suggestion": "Poglejte surovine podatke"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Poglejte surovine podatke' might be slightly less clear than an alternative that emphasizes the payload's original form.",
+          "suggestion": "Poglejte neobdelane podatke o zahtevah"
         }
       ],
       "approved_at": null
@@ -290,8 +316,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Погледај сирови payload\" is not ideal. While 'сирови' is a valid translation for 'raw', in this context 'необработени' (neobraboteni) would be a more accurate and commonly used term within technical documentation for 'raw payload'. 'Payload' is often used as-is in Serbian technical contexts, rather than translated.",
-          "suggestion": "Погледај необработени payload"
+          "description": "The term \"payload\" is often used in English in a technical context. A more accurate Serbian (Cyrillic) translation would be \"сирови терет\" or \"сирови садржај\", although \"payload\" itself is sometimes adopted directly into technical Serbian.",
+          "suggestion": "Consider using \"сирови терет\" or \"сирови садржај\" for a more accurate translation. Alternatively, if \"payload\" is commonly used in the relevant Serbian technical context, keeping it as \"payload\" might be acceptable."
         }
       ],
       "approved_at": null
@@ -302,8 +328,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Pogledaj sirovi payload\" is understandable, a more accurate and natural translation of \"View raw payload\" would be \"Prikaz sirovog payload-a\" or \"Pregledaj sirovi payload\". \"Pogledaj\" implies a casual look, whereas \"View\" suggests a more formal access or display.",
-          "suggestion": "Prikaz sirovog payload-a"
+          "description": "While 'Pogledaj' is acceptable, 'Pregledaj' would be a more accurate and natural translation of 'View' in this context, suggesting a more formal or detailed examination.",
+          "suggestion": "Pregledaj sirovi payload"
         }
       ],
       "approved_at": null
@@ -320,13 +346,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Подивитися необроблене корисне навантаження\" is a literal translation that doesn't accurately convey the meaning of \"View raw payload\" in a technical context. \"Payload\" can be translated more appropriately to \"дані\" (data) or \"тіло запиту\" (request body). \"Необроблене\" (unprocessed) is correct, but using a more direct term for \"raw\" could improve clarity.",
-          "suggestion": "Подивитися необроблені дані"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'корисне навантаження' (useful load) is less common and more suited for logistics than webhooks. 'Дані' (data) or 'тіло запиту' (request body) better reflects technical terminology.",
-          "suggestion": "Подивитися необроблене тіло запиту"
+          "description": "The translation \"Подивитися необроблене корисне навантаження\" is a literal translation of \"View raw payload\" and is not the most natural or commonly used phrasing in Ukrainian for this context. While technically correct, it sounds overly technical and awkward.",
+          "suggestion": "Consider alternatives like \"Переглянути необроблені дані\" or \"Подивитися вихідні дані\" which are more common and understandable in a user interface context."
         }
       ],
       "approved_at": null

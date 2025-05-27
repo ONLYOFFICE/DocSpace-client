@@ -3,7 +3,7 @@
   "content": "You can make LDAP traffic confidential and secure by using Secure Sockets Layer (SSL)",
   "content_en_sha1_hash": "26f97bbcf06293a2a89bf41d8970fab3287b75f9",
   "created_at": "2025-05-19T21:30:54.189Z",
-  "updated_at": "2025-05-21T08:25:57.616Z",
+  "updated_at": "2025-05-24T08:38:27.016Z",
   "comment": {
     "text": "This translation key is used to describe the Secure Sockets Layer (SSL) option in an LDAP connection settings category. It helps users understand that using SSL makes LDAP traffic confidential and secure. This tooltip appears when the user hovers over a checkbox labeled \"LdapConnectionTypeSSL\".",
     "is_auto": true,
@@ -36,8 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Secure Sockets Layer (SSL) istifadə edərək LDAP trafikini şəxsi və təhlükəsiz edə bilərsiniz\" is not a natural way to express the meaning in Azerbaijani. The phrasing \"şəxsi və təhlükəsiz\" (personal and secure) is a bit awkward. A more natural phrasing would be something like \"etibarlı və təhlükəsiz\" (reliable and secure) or simply \"təhlükəsiz\" (secure) given that confidentiality is implied by security.",
-          "suggestion": "Secure Sockets Layer (SSL) istifadə edərək LDAP trafikini etibarlı və təhlükəsiz edə bilərsiniz. OR Secure Sockets Layer (SSL) istifadə edərək LDAP trafikini təhlükəsiz edə bilərsiniz."
+          "description": "The phrase \"istifadə edərək\" directly translates to 'using'. While technically correct, it sounds slightly unnatural in Azerbaijani in this context. A more fluent phrasing would be preferred.",
+          "suggestion": "Secure Sockets Layer (SSL) ilə LDAP trafikini şəxsi və təhlükəsiz edə bilərsiniz."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation includes the English abbreviation (SSL) without consistent formatting. While acceptable, standardizing this (e.g., always italicizing or always providing the full name) would improve consistency.",
+          "suggestion": "Secure Sockets Layer (SSL) ilə LDAP trafikini şəxsi və təhlükəsiz edə bilərsiniz."
         }
       ],
       "approved_at": null
@@ -81,19 +86,19 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The French translation includes \"(Secure Sockets Layer)\". While technically correct, it's redundant since 'SSL' is already explained. Removing this parenthetical phrase would improve readability and conciseness.",
+          "suggestion": "Vous pouvez rendre le trafic LDAP confidentiel et sécurisé en utilisant le protocole SSL."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses a very literal translation of 'confidential and secure'. A more natural phrasing in Armenian might improve readability. 'Գաղտնի և անվտանգ' is accurate, but not idiomatic.",
-          "suggestion": "Consider rephrasing to something like: 'Դուք կարող եք ապահովել LDAP տրաֆիքի գաղտնիությունը և անվտանգությունը, օգտագործելով Secure Sockets Layer (SSL):' (You can ensure the confidentiality and security of LDAP traffic by using Secure Sockets Layer (SSL):)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -114,8 +119,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '기밀로 유지하고 보안을 유지할 수 있습니다' is slightly redundant. '기밀로 유지하고' already implies security. A more natural phrasing would avoid repetition.",
-          "suggestion": "보안 소켓 계층(SSL)을 사용하여 LDAP 트래픽을 기밀로 유지할 수 있습니다."
+          "description": "The translation \"보안 소켓 계층(SSL)을 사용하여 LDAP 트래픽을 기밀로 유지하고 보안을 유지할 수 있습니다\" is a bit redundant. '기밀로 유지하고 보안을 유지하다' (keep confidential and maintain security) essentially means the same thing.",
+          "suggestion": "보안 소켓 계층(SSL)을 사용하여 LDAP 트래픽을 안전하게 보호할 수 있습니다"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, including the full 'Secure Sockets Layer' name in parentheses alongside the abbreviation SSL is slightly less natural in Korean. It's more common to simply use SSL after it's first introduced.",
+          "suggestion": "보안 소켓 계층(SSL)을 사용하여 LDAP 트래픽을 안전하게 보호할 수 있습니다"
         }
       ],
       "approved_at": null
@@ -126,13 +136,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ທ່ານສາມາດເຮັດໃຫ້ການຈະລາຈອນ LDAP ລັບ ແລະປອດໄພໄດ້ໂດຍການໃຊ້ Secure Sockets Layer (SSL)\" is a literal translation and doesn't flow naturally in Lao.  'ລັບ' means 'secret' and doesn't accurately convey the meaning of 'confidential'.",
-          "suggestion": "ທ່ານສາມາດເຮັດໃຫ້ການຈະລາຈອນ LDAP ເປັນຄວາມລັບ ແລະປອດໄພໄດ້ໂດຍການໃຊ້ Secure Sockets Layer (SSL)"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ປອດໄພ' is generally used for physical safety. A more appropriate term for 'secure' in the context of data security would be something like 'ໜ້າເຊື່ອຖື' (trustworthy) or 'ໜ້າປົກປ້ອງ' (safe/protected).",
-          "suggestion": "ທ່ານສາມາດເຮັດໃຫ້ການຈະລາຈອນ LDAP ເປັນຄວາມລັບ ແລະໜ້າປົກປ້ອງໄດ້ໂດຍການໃຊ້ Secure Sockets Layer (SSL)"
+          "description": "The Lao translation uses \"ລັບ\" which translates to \"secret\" or \"private\" rather than \"confidential.\" While it conveys a similar idea, 'confidential' is more accurate in this context.",
+          "suggestion": "ທ່ານສາມາດເຮັດໃຫ້ການຈະລາຈອນ LDAP ລັບຄວາມລັບແລະປອດໄພໄດ້ໂດຍການໃຊ້ Secure Sockets Layer (SSL)"
         }
       ],
       "approved_at": null
@@ -142,9 +147,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'drošligzdu slāni' is an inaccurate rendering of 'Secure Sockets Layer'. 'Drošligzdu slāni' translates more literally to 'layer of secure pads' or 'layer of safety cushions,' which doesn't accurately convey the meaning of SSL. The standard and most accurate translation for SSL in Latvian is 'drošā ligzdu slāņa'.",
-          "suggestion": "drošā ligzdu slāņa"
+          "type": "spelling",
+          "description": "The word 'drošligzdu' is a misspelling of 'drošības'.",
+          "suggestion": "drošības"
         }
       ],
       "approved_at": null
@@ -161,8 +166,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Zadbaj o bezpieczeństwo i poufność ruchu LDAP za pomocą Secure Sockets Layer (SSL)\" doesn't fully capture the nuance of the original English sentence. \"Zadbaj o...\" implies a directive or instruction, while the English suggests an option. A better translation would convey the possibility of using SSL, rather than a requirement.",
-          "suggestion": "Możesz uczynić ruch LDAP poufnym i bezpiecznym, używając Secure Sockets Layer (SSL)."
+          "description": "The English phrase \"You can make LDAP traffic confidential and secure\" is better conveyed by focusing on the *possibility* of making traffic secure, rather than a command to 'take care of' it. 'Zadbaj o...' implies a responsibility and action that isn't quite the intention of the English.",
+          "suggestion": "Można uczynić ruch LDAP poufnym i bezpiecznym za pomocą Secure Sockets Layer (SSL)"
         }
       ],
       "approved_at": null
@@ -185,13 +190,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Utilizarea protocolului Secure Sockets Layer (SSL) securizează și protejează confidențialitatea procesului de comunicare cu serverul LDAP' is a bit verbose and doesn't fully capture the simplicity of the English original. 'Secure Sockets Layer (SSL) securizează și protejează' is unnecessarily wordy.",
-          "suggestion": "Utilizarea Secure Sockets Layer (SSL) asigură confidențialitatea și securitatea traficului LDAP."
+          "description": "The Romanian translation 'Utilizarea protocolului Secure Sockets Layer (SSL) securizează și protejează confidențialitatea procesului de comunicare cu serverul LDAP' is a bit too literal and verbose compared to the English content. It conveys the same meaning but sounds less natural in Romanian. 'Securizează și protejează' is somewhat redundant.",
+          "suggestion": "Utilizarea Secure Sockets Layer (SSL) asigură confidențialitatea și securitatea comunicării cu serverul LDAP."
         },
         {
           "type": "formatting",
-          "description": "The translation consistently uses 'Secure Sockets Layer (SSL)' instead of just 'SSL' after the first mention. The original English uses 'SSL' after the first use of the full name.",
-          "suggestion": "After the first usage of 'Secure Sockets Layer (SSL)', use 'SSL' for subsequent mentions."
+          "description": "While technically correct, using the full 'Secure Sockets Layer' followed by (SSL) is not the typical style. It would be better to use SSL throughout if the abbreviation is already defined.",
+          "suggestion": "Utilizarea SSL asigură confidențialitatea și securitatea comunicării cu serverul LDAP."
         }
       ],
       "approved_at": null
@@ -208,13 +213,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ආරක්ෂිත' is misspelled. The correct spelling is 'ආරක්ෂිත'.",
-          "suggestion": "ආරක්ෂිත"
+          "description": "The word 'ආරක්ෂිත' (arakshita) is a correct translation of 'secure', however, 'ආරක්ෂිත' is more commonly used in a general sense. In this context, 'වියද්ධ' (viyadha) would be more appropriate for 'secure' as it specifically means confidential or private.",
+          "suggestion": "ආරක්ෂිත --> වියද්ධ"
         },
         {
           "type": "grammar",
-          "description": "The sentence structure could be improved for better flow in Sinhala. The phrase 'ආරක්ෂිත සොකට් ස්ථරය (SSL) භාවිතයෙන්' can be restructured to be more natural.",
-          "suggestion": "ආරක්ෂිත සොකට් ස්ථරය (SSL) භාවිතා කිරීමෙන් ඔබට LDAP ගමනාගමනය රහසිගත සහ ආරක්ෂිත කළ හැකිය."
+          "description": "The sentence structure could be improved for better flow. While technically correct, it sounds slightly awkward. The word order could be changed to be more natural in Sinhala.",
+          "suggestion": "ආරක්ෂිත සොකට් ස්ථරය (SSL) භාවිතයෙන් ඔබට LDAP ගමනාගමනය වියද්ධ සහ ආරක්ෂිත කළ හැකිය. --> ඔබට ආරක්ෂිත සොකට් ස්ථරය (SSL) භාවිතයෙන් LDAP ගමනාගමනය වියද්ධ සහ ආරක්ෂිත කළ හැකිය."
         }
       ],
       "approved_at": null
@@ -231,13 +236,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Zaupen in varen promet LDAP lahko urediš z uporabo Secure Sockets Layer (SSL)\" doesn't accurately convey the meaning of \"You can make LDAP traffic confidential and secure by using Secure Sockets Layer (SSL)\". The verb 'urediš' (you can arrange/manage) implies action on the user's part, while the English suggests a capability offered by the system.",
-          "suggestion": "Z uporabo Secure Sockets Layer (SSL) lahko šifriraš in zaščitiš promet LDAP."
+          "description": "The translation 'urediš' (you can arrange) doesn't quite capture the meaning of 'make...confidential and secure'. A more accurate translation would convey the idea of enabling or implementing SSL.",
+          "suggestion": "Zaupen in varen promet LDAP lahko omogočiš z uporabo Secure Sockets Layer (SSL)"
         },
         {
           "type": "grammar",
-          "description": "The use of 'Z uporabo...' sounds a bit clunky in Slovenian. A more natural phrasing might improve readability.",
-          "suggestion": "S Secure Sockets Layer (SSL) lahko šifriraš in zaščitiš promet LDAP."
+          "description": "While not strictly incorrect, 'Zaupen in varen promet LDAP' reads a bit awkwardly. 'Zaupen in varen LDAP promet' flows better in Slovenian.",
+          "suggestion": "Zaupen in varen LDAP promet lahko omogočiš z uporabo Secure Sockets Layer (SSL)"
         }
       ],
       "approved_at": null
@@ -248,8 +253,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation uses the word 'учинити' which is overly formal and doesn't quite fit the context of a tooltip. A more natural phrasing would be better.",
-          "suggestion": "Можете направити LDAP саобраћај поверљивим и сигурним коришћењем Secure Sockets Layer (SSL)"
+          "description": "The word \"учинити\" (uchiniti) is overly formal and archaic for this context. It translates to 'to make' but sounds stiff and unnatural in modern Serbian. A more natural phrasing would be 'možete zaštititi' (you can protect).",
+          "suggestion": "Можете заштитити LDAP саобраћај поверљивим и сигурним коришћењем Secure Sockets Layer (SSL)"
         }
       ],
       "approved_at": null
@@ -259,9 +264,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'poverljivim' should be 'pouzdljivim'. 'Poverljivim' means 'trustworthy', while 'pouzdljivim' means 'reliable', which is more appropriate in this context regarding security.",
-          "suggestion": "Možete učiniti LDAP saobraćaj pouzdanim i sigurnim korišćenjem Secure Sockets Layer (SSL)"
+          "type": "incorrect_translation",
+          "description": "The phrase \"Možete učiniti LDAP saobraćaj poverljivim i sigurnim\" is a literal translation and slightly awkward in Serbian. A more natural phrasing would emphasize the act of securing the traffic.",
+          "suggestion": "Možete obezbediti poverljivost i sigurnost LDAP saobraćaja korišćenjem Secure Sockets Layer (SSL)"
         }
       ],
       "approved_at": null
@@ -284,13 +289,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"làm cho lưu lượng LDAP được bảo mật và an toàn\" is a bit awkward. 'Bảo mật' and 'an toàn' have overlapping meanings in this context.",
-          "suggestion": "Bạn có thể mã hóa lưu lượng LDAP để đảm bảo tính bảo mật và an toàn bằng cách sử dụng Lớp Cổng Bảo Mật (SSL)"
+          "description": "The term 'Lớp Cổng Bảo Mật' is a literal translation of 'Secure Sockets Layer' and is not commonly used in Vietnamese. It sounds unnatural.",
+          "suggestion": "Use a more natural translation like 'Lớp Mật Mã Ổn Định' or 'SSL' directly, as 'SSL' is frequently used and understood in technical contexts in Vietnam."
         },
         {
           "type": "formatting",
-          "description": "While 'Lớp Cổng Bảo Mật (SSL)' is technically correct, many Vietnamese speakers would understand 'SSL' directly, making it redundant to include the full translation. ",
-          "suggestion": "Bạn có thể mã hóa lưu lượng LDAP để đảm bảo tính bảo mật và an toàn bằng cách sử dụng SSL"
+          "description": "While not strictly incorrect, keeping 'SSL' in English within a Vietnamese sentence might feel a bit jarring to some readers. Consider using the Vietnamese term if you opt for that suggestion.",
+          "suggestion": "If using the Vietnamese translation, ensure consistency throughout the application."
         }
       ],
       "approved_at": null

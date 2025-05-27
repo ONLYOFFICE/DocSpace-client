@@ -3,7 +3,7 @@
   "content": "Import from Nextcloud",
   "content_en_sha1_hash": "404cbbe6db5d9f6a20a347688fdc4598b4e7dce7",
   "created_at": "2025-05-19T21:30:51.664Z",
-  "updated_at": "2025-05-21T04:09:34.862Z",
+  "updated_at": "2025-05-24T04:57:37.238Z",
   "comment": {
     "text": "Import from Nextcloud is used to describe a button or action that allows users to import data from their Nextcloud account. This translation key appears in the Portal Settings UI, specifically on the layout of the header section. It should be translated to provide a clear and descriptive label for users to understand what option they are selecting.",
     "is_auto": true,
@@ -42,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Входирай от Nextcloud' is not accurate. 'Входирай' is not the correct verb for 'import'. It means something closer to 'log in' or 'enter'.",
+          "description": "The translation 'Входирай от Nextcloud' is not an accurate translation of 'Import from Nextcloud'. 'Входирай' means 'Log in' or 'Enter'. The correct translation should convey the action of importing data.",
           "suggestion": "Импортирай от Nextcloud"
         }
       ],
@@ -87,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Ներմուծում Nextcloud-ից\" is a very literal translation. A more natural and idiomatic Armenian translation might be preferable depending on the context. \"Ներմուծում Nextcloud-ից\" reads a bit stiffly.",
-          "suggestion": "Consider alternatives like \"Nextcloud-ից ներմուծում\" or a more contextualized phrasing that better reflects the user experience."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -162,7 +156,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Импортировать из Nextcloud Workspace\" includes the word \"Workspace\", which is not present in the English source. This addition changes the meaning slightly and is not a direct translation.",
+          "description": "The translation \"Импортировать из Nextcloud Workspace\" includes the word \"Workspace\". The original English phrase 'Import from Nextcloud' doesn't specify a Workspace. This addition might not be accurate or relevant to the functionality.",
           "suggestion": "Импортировать из Nextcloud"
         }
       ],
@@ -192,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Увези са Nextcloud-а\" doesn't accurately convey the meaning of \"Import from Nextcloud\". \"Увези\" implies taking something away, while \"Import\" means bringing something in. A more accurate translation would involve the concept of bringing data or settings *into* the current system.",
-          "suggestion": "Увози из Nextcloud-а"
+          "description": "The translation 'Увези са Nextcloud-а' implies 'take from' or 'carry from' rather than 'import from'. A more accurate translation would convey the process of bringing data into the system.",
+          "suggestion": "Увоз из Nextcloud-а"
         }
       ],
       "approved_at": null
@@ -204,7 +198,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Uvezi sa Nextcloud-a' isn't the most natural way to express 'Import from Nextcloud' in Serbian. It literally translates to 'Imports from Nextcloud' which changes the meaning slightly. A more accurate and natural translation would be 'Uvoz iz Nextcloud-a'.",
+          "description": "The translation \"Uvezi sa Nextcloud-a\" is not the most natural or accurate translation of \"Import from Nextcloud.\" A more idiomatic translation would be \"Uvoz iz Nextcloud-a\". The possessive suffix '-a' is unnecessarily attached.",
           "suggestion": "Uvoz iz Nextcloud-a"
         }
       ],

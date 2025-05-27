@@ -3,7 +3,7 @@
   "content": "invite as guest",
   "content_en_sha1_hash": "4af13b83671f74562036c77dedfbc2b8b7a372cd",
   "created_at": "2025-05-19T21:30:45.973Z",
-  "updated_at": "2025-05-22T11:56:37.507Z",
+  "updated_at": "2025-05-26T07:57:32.375Z",
   "comment": {
     "text": "This translation key is used for a button label that invites users to \"invite as guest\" when adding an email. It appears in an invite panel, likely on a website or application where users can send emails to others. The translator should provide a neutral description of this action.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\panels\\InvitePanel\\sub-components\\InviteInput.js",
-      "line_number": 523,
+      "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
+      "line_number": 532,
       "context": "truncate\n fontSize=\"12px\"\n fontWeight={400}\n className=\"email-list_invite-as-guest\"\n >\n {t(\"Common:InviteAsGuest\")}\n </Text>\n </div>\n )}\n </div>{\" \"}\n <div className=\"email-list_add-button\">",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"πρόσκληση ως καλεσμένος\" is technically correct, it's a very literal translation and sounds unnatural in Greek. A more natural phrasing would be something like \"κάλεσε ως καλεσμένος\" or simply \"κάλεσε καλεσμένο\".",
-          "suggestion": "κάλεσε ως καλεσμένος"
+          "description": "While \"πρόσκληση ως καλεσμένος\" is a literal translation, it's not the most natural way to say \"invite as guest\" in Greek. It's quite formal and a bit clunky. A more common and idiomatic translation would be something like \"πρόσκληση ως επισκέπτης\" or even just \"πρόσκληση καλεσμένου\".",
+          "suggestion": "Consider using \"πρόσκληση ως επισκέπτης\" or \"πρόσκληση καλεσμένου\" instead."
         }
       ],
       "approved_at": null
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'convide como convidado' is technically correct, it's a very literal and somewhat awkward translation. A more natural and idiomatic Portuguese phrasing would be 'convidar como convidado' or 'adicionar como convidado'. The verb 'convidar' is generally preferred over 'convide' in this context.",
-          "suggestion": "convidar como convidado"
+          "description": "While 'convide como convidado' is a literal translation, it's not the most natural or idiomatic way to say 'invite as guest' in Portuguese. It sounds a bit clunky.",
+          "suggestion": "Consider alternatives like 'convidar como hóspede' or 'adicionar como convidado', depending on the specific context (e.g., inviting to an event vs. granting access to a system)."
         }
       ],
       "approved_at": null
@@ -147,7 +147,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'convidar como convidado' is a somewhat literal and slightly awkward translation of 'invite as guest'. A more natural phrasing would be 'convidar como visitante' or 'adicionar como convidado'.",
+          "suggestion": "Consider 'convidar como visitante' or 'adicionar como convidado'."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -165,13 +171,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"අමුත්තෙකු ලෙස ආරාධනා කරන්න\" is a bit literal and formal for 'invite as guest'. It translates more directly to 'invite as a guest'. A more natural phrasing would be something closer to 'හමුදෙනෙකු ලෙස ආරාධනය කරන්න' (hamudena ek lesa aaraadhanya karanna), or 'හමුදෙනෙකුට ආරාධනය කරන්න' (hamudena ekta aaraadhanya karanna).",
-          "suggestion": "Consider using a more natural phrasing like 'හමුදෙනෙකුට ආරාධනය කරන්න' or 'හමුදෙනෙකු ලෙස ආරාධනය කරන්න' to better reflect the intended meaning of 'invite as guest'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"mời với tư cách khách\" is not the most natural or accurate rendering of \"invite as guest.\" It's a bit literal and formal. A more common and idiomatic translation would be something like \"mời làm khách\" or \"mời như khách\".",
-          "suggestion": "mời làm khách"
+          "description": "The translation \"mời với tư cách khách\" is not the most natural or accurate translation of \"invite as guest.\" While it conveys the general meaning, it's a bit formal and clunky.",
+          "suggestion": "A more natural translation would be \"mời làm khách\" or \"mời như khách\"."
         }
       ],
       "approved_at": null
@@ -228,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"邀请为访客\" (yāo qǐng wèi fǎng kè) is technically correct, a more natural and common translation of \"invite as guest\" would be \"以访客身份邀请\" (yǐ fǎng kè shēn fù yāo qǐng) or \"作为访客邀请\" (zuò wéi fǎng kè yāo qǐng). The current translation is a bit literal and sounds slightly awkward in Chinese.",
-          "suggestion": "以访客身份邀请 (yǐ fǎng kè shēn fù yāo qǐng) or 作为访客邀请 (zuò wéi fǎng kè yāo qǐng)"
+          "description": "While '邀请为访客' is technically correct, it's not the most natural or idiomatic translation of 'invite as guest' in Chinese. It sounds a bit formal and stiff.",
+          "suggestion": "Consider alternatives like '邀请访客' (invite guest) or '以访客身份邀请' (invite as a guest)."
         }
       ],
       "approved_at": null

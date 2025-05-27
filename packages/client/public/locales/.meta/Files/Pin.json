@@ -3,7 +3,7 @@
   "content": "Pin",
   "content_en_sha1_hash": "9c918414710c579b80732bc369eb7087f0d8c8d1",
   "created_at": "2025-05-19T21:30:55.960Z",
-  "updated_at": "2025-05-21T11:35:23.485Z",
+  "updated_at": "2025-05-24T11:44:42.813Z",
   "comment": {
     "text": "The translation key \"Pin\" represents the label for a pin icon used to mark or highlight files in the FilesActionsStore.js file. It is likely used as a button text or tooltip in a UI element, such as a file management interface.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Sabitləyin\" is a command (imperative) meaning \"Fix it\" or \"Secure it\". \"Pin\" in this context likely refers to a pin used for securing something, or a pinned item in a software interface. A better translation would be something like \"Şəkil\" (Picture/Image, if referring to pinning an image), \"Bəzəyin\" (Decorate/Pin), or a more context-specific term.",
-          "suggestion": "Consider context. Possible alternatives: Şəkil (if referring to an image), Bəzəyin (if referring to attaching something)."
+          "description": "The translation \"Sabitləyin\" while meaning \"Pin\" or \"Fix\" in certain contexts, doesn't accurately convey the specific meaning of \"Pin\" as it relates to files (e.g., pinning a file to the top of a list or making it easily accessible). A more appropriate translation might depend on the specific context. \"Yıxaşdırın\" or a more descriptive phrase might be better.",
+          "suggestion": "Consider \"Yıxaşdırın\" or a context-specific alternative that more accurately represents the function of 'Pinning' a file."
         }
       ],
       "approved_at": null
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation 'Anstecken' is a general term meaning 'to pin' or 'to attach'. While it can be a valid translation depending on the context of 'Pin' (e.g., attaching a badge), it might not be the most accurate or common translation for a 'Pin' button or feature, which often refers to fixing a location on a map. A more appropriate translation might depend on the specific meaning of 'Pin' within the application's context. Consider alternatives like 'Fixieren' (to fix) or 'Markieren' (to mark).",
-          "suggestion": "Consider 'Fixieren' or 'Markieren' depending on the context. If 'Pin' refers to a map pin, 'Markieren' might be preferable."
+          "description": "The German translation 'Anstecken' while literally meaning 'to pin' or 'to attach', might not accurately convey the intended meaning of 'Pin' in the context of 'Files:Pin'. It could imply physically pinning something, whereas 'Pin' in this context likely refers to a bookmark, attachment, or a way to highlight a file. A more appropriate translation would depend on the precise context.",
+          "suggestion": "Consider alternatives like 'Festlegen', 'Markieren', 'Anheften', or 'Speichern' depending on the specific function of 'Pin' within the 'Files' category."
         }
       ],
       "approved_at": null
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Greek translation \"Καρφίτσωμα\" generally refers to a 'fixture' or 'fitting', rather than a 'pin' which is a smaller, pointed fastener. While it could be a *type* of pin in certain contexts, it's not a direct or accurate translation of the English word 'Pin'.",
-          "suggestion": "Consider translations like \"Καρφί\" (Karfi) which directly translates to 'pin' or \"Σφήνα\" (Sphina) which could apply depending on the specific context of the 'Pin' in question."
+          "description": "The Greek translation \"Καρφίτσωμα\" is a more technical term (referring to a clamping or fastening mechanism) and doesn't directly translate the simple meaning of \"Pin\". A more suitable translation would depend on the context, but a simpler equivalent like \"καρφί\" (karfi) or \"μονωτήρας\" (monotirastis - if referring to a pin used for electrical insulation) might be more appropriate.",
+          "suggestion": "Consider alternative translations such as \"καρφί\" or \"μονωτήρας\" depending on the intended meaning."
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Kiinnitä\" is the imperative form of the verb \"kiinnittää\" (to attach, to fasten, to pin).  While \"pin\" can imply fastening, \"Kiinnitä\" is too active. A more appropriate translation would depend on the context of \"Pin\" (e.g., a pin, pinning something).",
-          "suggestion": "Possible suggestions: \"Pinni\" (if referring to a safety pin), \"Kiinnitys\" (if referring to the act of pinning), or a context-specific term."
+          "description": "The Finnish translation \"Kiinnitä\" means \"Attach\" or \"Pin (something)\". It's a verb, while the English \"Pin\" is a noun. The translation doesn't capture the noun sense of 'Pin' as in a fastener or safety pin.",
+          "suggestion": "Consider alternatives like \"Neula\" (needle/pin), \"Kiinnitin\" (fastener), or \"Tappi\" (peg/pin) depending on the context."
         }
       ],
       "approved_at": null
@@ -105,7 +105,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Ամրացնել\" (Amrancnel) translates to \"to strengthen\" or \"to fasten\". While it can conceptually relate to 'Pin' in some contexts (e.g., securing something), it doesn't directly mean 'Pin'. A more accurate translation would depend on the intended meaning of 'Pin' within the application.  It could refer to a pin for fixing, a pin on a map, or a security pin. Without further context, 'Ամրացնել' is not the best fit.",
+          "suggestion": "Consider alternative translations like 'Մալուխ' (Malukh) if referring to a fixing pin, or 'Մարկեր' (Marker) if referring to a map marker. Context is required to provide a more suitable suggestion."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -144,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Dutch translation \"Pinnen\" generally refers to 'to pay by debit card' or 'cash out at an ATM', not simply 'Pin' (as in a pin or fastener). While 'Pin' can sometimes be associated with debit cards in a broader sense, it's an inaccurate direct translation.",
-          "suggestion": "Consider a more context-dependent translation. If referring to a physical pin, 'Spelden' might be appropriate. If related to payment, a more descriptive phrase is needed. Without more context, it's impossible to suggest a perfect alternative."
+          "description": "The Dutch translation \"Pinnen\" typically refers to debit/credit card transactions (paying by card). \"Pin\" in English refers to a physical pin or fastener. The translation does not accurately reflect the English meaning.",
+          "suggestion": "Consider alternatives like \"Speld\" (pin, as in fastener), \"Bevestiging\" (fixing/securing), or providing more context for the intended meaning."
         }
       ],
       "approved_at": null
@@ -186,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"අමුණන්න\" (amunanna) generally means \"to tie\" or \"to fasten\". \"Pin\" in this context (referring to a 'Files:Pin' element) likely refers to a safety pin, a pin for holding papers, or a similar fastening device. \"අමුණන්න\" doesn't accurately convey that meaning.",
-          "suggestion": "Consider alternatives like \"පිනයාන්න\" (pinayanna) - which is a direct transliteration that may be understood, or a more descriptive term depending on the specific context of 'Files:Pin'."
+          "description": "The Sinhala translation \"අමුණන්න\" (amunnanna) translates to 'to tie' or 'to fasten'. While it can conceptually relate to pinning something down, it's not a direct or appropriate translation for 'Pin' in the context of, for example, a file pinning feature.",
+          "suggestion": "A more suitable translation would depend on the specific context of 'Pin'. Possible alternatives include: \"හලන්න\" (halanna) for 'to fix' or 'to attach', or a transliteration like \"පින්\" (pin) if a direct equivalent isn't necessary."
         }
       ],
       "approved_at": null
@@ -198,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Pripnúť' can mean 'to pin', it's a verb. 'Pin' (as in a file pin or security pin) is more accurately translated as a noun. 'Západka' or 'Aretačná pomôcka' might be more suitable depending on the specific context.",
-          "suggestion": "Consider 'Západka' or 'Aretačná pomôcka' depending on context. If 'to pin' is the intended meaning, ensure the context supports that interpretation."
+          "description": "The Slovak translation 'Pripnúť' translates to 'To pin' or 'Pinning', which is a verb. The English 'Pin' is a noun (a small fastener). While 'Pripnúť' *can* be used in contexts related to pinning, it's not a direct translation of the noun 'Pin'. A more suitable translation might depend on the context of how 'Pin' is used (e.g., a 'Pin' in a board game might have a different translation than a safety 'Pin').",
+          "suggestion": "Consider alternatives such as 'Špendlík' (safety pin), 'Kolík' (pin/peg - depending on context), or 'Základňa' (base - if referring to a pin on a board) depending on the specific context."
         }
       ],
       "approved_at": null
@@ -210,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Pripni' doesn't accurately reflect the meaning of 'Pin' in this context. 'Pin' likely refers to a fixed point or an action of pinning something down, whereas 'Pripni' is a verb meaning 'to attach' or 'to pin'. This translation is too specific.",
-          "suggestion": "Possible suggestions depend on context. If referring to a location, 'Fiksna točka' (Fixed point) could be appropriate. If referring to the action of pinning (e.g., pinning a document), 'Zapolni' (to secure) might be better. Without more context, it is difficult to provide a precise alternative."
+          "description": "The Slovenian translation \"Pripni\" is a verb in the imperative form (command). 'Pin' as a noun typically requires a different translation depending on the context.  'Pin' can refer to a fastener, a location on a map, or a fixing device. 'Pripni' implies 'pin it' or 'fasten it'.",
+          "suggestion": "The appropriate translation depends on the context. Possible alternatives include: 'Zatič' (for a fastener), 'Zaponka' (for a clasp), 'lokacija' (for a location) or a more context-specific translation."
         }
       ],
       "approved_at": null
@@ -222,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Закачи\" does not accurately convey the meaning of \"Pin\" in this context (likely referring to pinning a file). \"Закачи\" generally means \"to attach\" or \"to hook\".",
-          "suggestion": "Consider alternatives like \"Фиксирај\" (Fiksiraj - to fix), \"Прикачи\" (Prikachi - to attach), or \"Заштити\" (Zastiti - to secure) depending on the specific function of 'Pin' in the application."
+          "description": "The Serbian (Cyrillic) translation \"Закачи\" does not accurately convey the meaning of \"Pin\" in the context of files. \"Закачи\" typically means \"to attach\" or \"to hang up\".  'Pin' in this context likely refers to fixing a file or pinning it for quick access.",
+          "suggestion": "Consider alternatives like \"Фиксирај\" (Fix), \"Заштити\" (Protect/Secure), or a more descriptive phrase depending on the specific functionality being described."
         }
       ],
       "approved_at": null
@@ -234,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Zakači\" doesn't accurately convey the meaning of \"Pin\" in this context. \"Pin\" referring to a file pin (like a push pin) or a pin in programming usually requires a more specific translation. \"Zakači\" generally means \"to hang\" or \"to hook\", which isn't the intended meaning.",
-          "suggestion": "Consider alternatives like \"Pričvrsti\" (to fasten), \"Zaveži\" (to tie/secure), or if the context allows, a more literal translation like \"Iglica\" (needle, if referring to a push pin)."
+          "description": "'Zakači' while literally meaning 'to hook' or 'to attach', doesn't accurately convey the meaning of 'Pin' in the context of files, which usually refers to fixing a file or attaching it to a location. A more appropriate translation would depend on the specific intended meaning.",
+          "suggestion": "Consider 'Fiksiraj', 'Prikvači', or 'Pridruži' depending on the precise meaning of 'Pin' in this context. More information on how 'Pin' is used would be helpful to select the best translation."
         }
       ],
       "approved_at": null

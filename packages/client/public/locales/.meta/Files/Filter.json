@@ -3,7 +3,7 @@
   "content": "Filter",
   "content_en_sha1_hash": "d7decf1aa22b02ae8abf9a96849ee423eee838e4",
   "created_at": "2025-05-19T21:30:55.685Z",
-  "updated_at": "2025-05-22T11:56:37.726Z",
+  "updated_at": "2025-05-26T07:57:32.462Z",
   "comment": {
     "text": "The translation key \"Filter\" is used to display a button or label in various UI components, typically related to filtering options. In the context of the provided files, it appears as a header title (\"Files:Filter\") in a modal dialog, prompting users to select filter criteria. Translators should provide a clear and concise text that reflects this purpose.",
     "is_auto": true,
@@ -11,10 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\Webhooks\\WebhookHistory\\sub-components\\FilterDialog\\index.js",
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 35,
+      "context": "import { withTranslation } from \"react-i18next\";\n \n import { isMobile, isTablet } from \"@docspace/shared/utils\";\n import { RoomsTypeValues } from \"@docspace/shared/utils/common\";\n import FilterInput from \"@docspace/shared/components/filter\";\n import { withLayoutSize } from \"@docspace/shared/HOC/withLayoutSize\";\n import { getUser } from \"@docspace/shared/api/people\";\n import RoomsFilter from \"@docspace/shared/api/rooms/filter\";\n import FilesFilter from \"@docspace/shared/api/files/filter\";",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/index.js",
       "line_number": 141,
       "context": "filters.deliveryTo === historyFilters.deliveryTo\n : filters.deliveryDate === null && filters.status.length === 0;\n \n return (\n <ModalDialog visible={visible} onClose={closeModal} displayType=\"aside\">\n <ModalDialog.Header>{t(\"Files:Filter\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <DialogBodyWrapper>\n <DeliveryDatePicker\n isApplied={isApplied}\n setIsApplied={setIsApplied}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Զտել\" (Ztel) can mean 'filter', it's a more general term. A more precise translation for 'Filter' in the context of file management (like a filter setting) might be something like \"Ֆիլտրել\" (Filtrvel) or \"Դիրքավորել\" (Dirkavorvel) depending on the nuance desired. \"Զտել\" can imply a more thorough cleansing or purification, which might not be the intended meaning of a file filter.",
+          "suggestion": "Consider \"Ֆիլտրել\" (Filtrvel) or \"Դիրքավորել\" (Dirkavorvel) for a more accurate translation of 'Filter' in this context."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'පෙරහන' (perahana) doesn't accurately convey the meaning of 'Filter' in this context. 'පෙරහන' typically means 'reveal' or 'uncover'. A more appropriate translation would be something along the lines of 'පෙඩී' (pedi) or 'ගැටරැ' (gataraya).",
+          "suggestion": "Consider 'පෙඩී' (pedi) or 'ගැටරැ' (gataraya)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

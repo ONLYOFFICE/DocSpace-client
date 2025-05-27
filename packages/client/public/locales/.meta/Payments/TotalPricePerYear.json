@@ -3,7 +3,7 @@
   "content": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/year</3>",
   "content_en_sha1_hash": "ece1f64d6f7be63b072e1be39583ff7a4520326e",
   "created_at": "2025-05-19T21:30:53.739Z",
-  "updated_at": "2025-05-21T06:27:13.882Z",
+  "updated_at": "2025-05-24T06:41:31.564Z",
   "comment": {
     "text": "This translation key is used to display the total price per year for a payment tariff. It will be displayed as a value, including currency symbol and unit (per year), likely in a settings or configuration page of an SaaS application.",
     "is_auto": true,
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The order of elements has been changed from the English version. The currency symbol is now after the price, whereas in the English version it's before.",
-          "suggestion": "Consider maintaining the original order: <2>{{price}}</2><1>{{currencySymbol}}</1><3>/rok</3>"
+          "description": "The order of elements is incorrect. The English version places the currency symbol before the price, while the Polish version places it after. This change in order may affect readability and visual consistency.",
+          "suggestion": "Consider reordering the elements to match the English version: \"<2>{{price}}</2><1>{{currencySymbol}}</1><3>/rok</3>\""
         }
       ],
       "approved_at": null
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English term \"year\" is translated as \"an\" in Romanian. \"Year\" should be translated as \"an\".",
-          "suggestion": "Change \"/an/3\" to \"/an/3\""
+          "description": "The English term 'year' is translated as 'an' in Romanian. 'Year' should be translated as 'an' is incorrect. The correct translation is 'an'.",
+          "suggestion": "Replace 'an' with 'an'."
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'year' should be translated as 'godina' not 'годишње'. 'годишње' means 'annually' and doesn't accurately convey the meaning of 'year' in this context.",
-          "suggestion": "<3>/година</3>"
+          "description": "The word 'year' was translated as 'годишње' which is 'yearly' or 'annual' in Serbian. While close, 'year' should ideally be translated to something more direct like 'година'. 'годишње' implies a recurring annual event.",
+          "suggestion": "Change '/годишње' to '/година'"
         }
       ],
       "approved_at": null
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The order of tags has been changed. In the English version, the currency symbol precedes the price. In the Turkish translation, the price precedes the currency symbol. This may impact visual presentation and user understanding.",
-          "suggestion": "Revert the tag order to match the English version: <1>{{currencySymbol}}</1><2>{{price}}</2><3>/yıl</3>"
+          "description": "The order of tags is incorrect. The English content places the currency symbol before the price, while the Turkish translation places it after.",
+          "suggestion": "Reorder the tags to match the English content: <2>{{price}}</2><1>{{currencySymbol}}</1><3>/yıl</3>"
         }
       ],
       "approved_at": null

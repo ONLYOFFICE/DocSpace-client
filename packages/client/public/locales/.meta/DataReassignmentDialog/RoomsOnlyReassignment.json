@@ -3,7 +3,7 @@
   "content": "We will transfer rooms created by contact.",
   "content_en_sha1_hash": "ecadc43845f163b0194851cbc47e4b338ba1785e",
   "created_at": "2025-05-19T21:30:56.759Z",
-  "updated_at": "2025-05-20T09:38:14.436Z",
+  "updated_at": "2025-05-24T13:32:37.977Z",
   "comment": {
     "text": "This translation key is used to display a message describing why rooms created by contact are being reassigned. It appears in a data reassignment dialog and informs users of the reason for the transfer. Translators should focus on conveying this context in their translations.",
     "is_auto": true,
@@ -27,19 +27,37 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'سيتم نقل الغرف التي أنشأها هذا المستخدم.' implies 'this user' created the rooms, whereas the English source states 'contact'. The Arabic translation doesn't accurately reflect the original meaning.",
+          "suggestion": "سيتم نقل الغرف التي أنشأها جهة الاتصال."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sizinlə əlaqə saxlayıb yaratdığınız otaqları köçürəcəyik' doesn't fully capture the meaning of 'We will transfer rooms created by contact'. The word 'contact' is vague. It's unclear *who* created the rooms. A more accurate translation should specify that the rooms were created *for* or *by a specific contact*, or by someone acting on their behalf.",
+          "suggestion": "Consider rephrasing to clarify who created the rooms, for example: 'Sizinlə əlaqə saxlayaraq sizin üçün yaratdığınız otaqları köçürəcəyik' (We will transfer the rooms created for you by contact) or 'Sizinlə əlaqə saxlayaraq sizinlə əlaqəli şəxs tərəfindən yaradılmış otaqları köçürəcəyik' (We will transfer the rooms created by a contact person)."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ще прехвърлим стаите, създадени по контакт.\" is not the most natural or accurate translation of 'We will transfer rooms created by contact.' 'По контакт' literally translates to 'by contact' and doesn't convey the intended meaning of rooms created through a specific contact or referral.",
+          "suggestion": "Ще прехвърлим стаите, създадени чрез контакт/по препоръка от контакт."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -63,7 +81,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'transfer' in this context likely refers to a reassignment or moving of rooms, rather than a literal physical transfer. 'Transferir' can be a bit ambiguous in Spanish.",
+          "suggestion": "Consider using 'reubicar' or 'asignar' instead of 'transferir' to more accurately convey the meaning of room reassignment. For example: 'Vamos a reubicar las salas creadas por el contacto.' or 'Vamos a asignar las salas creadas por el contacto.'"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -75,13 +99,30 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Nous transférerons les salles créées par contact' is a literal translation that doesn't convey the intended meaning. 'Transfer' in this context likely means reassignment or allocation. The use of 'transférerons' implies a physical movement.",
+          "suggestion": "Nous réassignerons les salles créées par le contact."
+        },
+        {
+          "type": "grammar",
+          "description": "The verb 'transférerons' should agree in number with the subject 'nous'. While technically correct, it sounds less natural in this context.",
+          "suggestion": "Réassignerons (as suggested above)"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Մենք կփոխանցենք կոնտակտով ստեղծված սենյակները։' is a literal translation but doesn't fully capture the intended meaning of 'We will transfer rooms created by contact.' It sounds a bit awkward in Armenian. A more natural phrasing would emphasize the act of reassignment.",
+          "suggestion": "Մենք կվերաբաշխենք կոնտակտի միջոցով ստեղծված սենյակները։ (We will reassign rooms created by contact)"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,31 +134,76 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'We will transfer rooms created by contact' implies an automated or system-initiated transfer. The Japanese translation 'コンタクトによって作成されたルームを移転します' is a more general statement that simply states rooms created by contact will be transferred. It lacks the nuance of an automated action.",
+          "suggestion": "コンタクトによって作成されたルームを自動的に移転します。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"We will transfer rooms created by contact\" implies an automated or system-initiated transfer. The Korean translation \"연락처가 생성한 룸이 이전될 예정입니다\" can be interpreted as someone (a person) will be transferring rooms created by a contact.  This shifts the meaning.",
+          "suggestion": "Consider a phrasing that better reflects the automated/system initiated transfer. For example: \"연락처에 의해 생성된 룸은 시스템에 의해 이전될 예정입니다.\" (Rooms created by contact will be transferred by the system.)"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'We will transfer rooms created by contact' implies a process initiated by a contact. The Lao translation 'ພວກເຮົາຈະໂອນຫ້ອງທີ່ສ້າງຂຶ້ນໂດຍການຕິດຕໍ່' translates more literally to 'We will transfer rooms that are created by contact,' which doesn't quite capture the intended meaning. It sounds like the contact is the *means* of creation, rather than the initiator of the transfer.",
+          "suggestion": "ພວກເຮົາຈະໂອນຫ້ອງຕາມການຕິດຕໍ່ (We will transfer rooms as per contact) or ພວກເຮົາຈະໂອນຫ້ອງທີ່ຖືກສ້າງຂຶ້ນຕາມການຕິດຕໍ່ (We will transfer rooms that were created per contact)"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the phrase 'ໂດຍການຕິດຕໍ່' (by contact) can sound slightly unnatural in this context.  It's a bit verbose.",
+          "suggestion": "Consider removing 'ໂດຍ' for a more fluent sentence."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Mēs pārvietosim kontakta izveidotās telpas' is a literal translation but doesn't quite convey the intended meaning of 'transfer.' 'Pārvietosim' implies more of a physical movement rather than a reassignment of data or ownership. A better translation would convey the idea of reassigning or transferring ownership.",
+          "suggestion": "Mēs nodosim kontakta izveidotās telpas."
+        },
+        {
+          "type": "spelling",
+          "description": "While 'telpas' is correct for 'rooms,' the context might benefit from a more specific term if 'rooms' refers to a particular type of room in the application. Consider if 'telpas' is the most accurate term or if a more specialized term is appropriate.",
+          "suggestion": "Consider alternative translations for 'rooms' depending on the specific context (e.g., 'telpu dati', 'telpu piešķiršana')."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Wij zullen kamers overdragen die door contact zijn aangemaakt' is not the most natural or accurate translation of 'We will transfer rooms created by contact.'  'Contact' in this context likely refers to a user or system, not a direct person. The phrase 'aangemaakt' (created) implies a more formal creation process than simply 'created'.",
+          "suggestion": "Wij zullen kamers overdragen die door de contactpersoon/gebruiker zijn aangemaakt. Alternatively: Wij zullen kamers overdragen die door de contactpersoon zijn gemaakt."
+        },
+        {
+          "type": "formatting",
+          "description": "The Dutch translation uses a long sentence structure, which can be less readable. Consider breaking it into two shorter sentences.",
+          "suggestion": "Wij zullen kamers overdragen. Deze kamers zijn aangemaakt door contact."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -129,7 +215,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Transferimos as salas criadas por contacto' is not the most natural or precise translation of 'We will transfer rooms created by contact.'  'Transferimos' implies we are already transferring, while the English conveys a future action.  'Contacto' also might not be the best word depending on the context.  'Contact' in English usually refers to a person or a point of contact.",
+          "suggestion": "Consider 'As salas criadas pelo contato serão transferidas' or 'Transferiremos as salas criadas pelo contato'."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,7 +233,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Sălile create de acest utilizator vor fi transferate.\" implies the rooms were created by 'this user' instead of 'contact'. The English 'contact' refers to a specific individual or entity, which is lost in the Romanian translation.",
+          "suggestion": "Sălile create de contact vor fi transferate."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +251,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"We will transfer rooms created by contact\" is not accurately translated. 'Contact' implies a specific person or entity. The Sinhala translation doesn't convey this nuance. It simply states 'rooms created'. A more accurate translation should reflect the origin of the rooms.",
+          "suggestion": "අපි සම්බන්ධතා පුද්ගලයෙකු විසින් සාදන ලද කාමරයන් මාරු කරමු."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase \"අපි සම්බන්ධතාවයෙන් සාදන ලද කාමරයන් මාරු කරමු\" could be improved for flow and clarity. While grammatically correct, it sounds slightly awkward.",
+          "suggestion": "අපි සම්බන්ධතා පුද්ගලයෙකු විසින් සාදන ලද කාමරයන් මාරු කරමු."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -165,43 +274,105 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Prenesli bomo sobe, ki jih je ustvaril kontakt.' implies that the rooms were created *by* the contact, but the original English implies the rooms are being transferred because of contact activity or a process related to the contact. A better translation would convey that the rooms are being transferred as a consequence of something related to the contact.",
+          "suggestion": "Prenesli bomo sobe v povezavi s kontaktom."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Преносимо собе које је креирао контакт' doesn't accurately convey the meaning of 'We will transfer rooms created by contact.' The verb 'преносимо' (we transfer) is a bit too direct. A more natural phrasing would imply a process or action being taken on their behalf.",
+          "suggestion": "Пребацићемо собе креиране од стране контакта."
+        },
+        {
+          "type": "grammar",
+          "description": "The use of 'од стране' is somewhat formal and could be simplified.",
+          "suggestion": "Пребацићемо собе које је креирао контакт."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Prenosimo sobe koje je kreirao kontakt' doesn't fully capture the nuance of 'We will transfer rooms created by contact.' The word 'prenosimo' implies a direct transfer *by* us. A more accurate translation would emphasize that the rooms *were* created by the contact and we are now transferring them.",
+          "suggestion": "Mi ćemo preneti sobe koje je kontakt kreirao."
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, the passive voice ('sobe koje je kreirao kontakt') sounds a bit awkward in Serbian.  An active voice would flow better.",
+          "suggestion": "Sobe koje je kontakt kreirao, mi ćemo preneti."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Konuk tarafından oluşturulan odaları aktaracağız.' is not a natural or accurate rendering of 'We will transfer rooms created by contact.' 'Konuk' translates to 'guest,' which is not the intended meaning of 'contact' in this context. The correct meaning likely refers to a user or someone associated with the system.",
+          "suggestion": "We need to understand the context of 'contact' to provide an accurate translation. Possible suggestions include: 'İlgili kişi tarafından oluşturulan odaları aktaracağız.' (Rooms created by the relevant person/entity will be transferred.) or 'Kişi tarafından oluşturulan odaları aktaracağız.' (Rooms created by the person will be transferred.)."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Будуть передані кімнати, створені контактом' is a literal translation but lacks the nuance of 'transfer'. 'Передані' implies handing over, which might not be the correct connotation for a system-driven room reassignment. It might be better to convey the action of *reassigning* the rooms.",
+          "suggestion": "Розміщення кімнат, створених контактом, буде перепризначено."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Chúng tôi sẽ chuyển các phòng được tạo bởi liên hệ' doesn't quite capture the nuance of 'created by contact'. 'Liên hệ' directly translates to 'contact' but might not be the most natural phrasing in Vietnamese in this context. It sounds slightly awkward and could imply the contact is responsible for creation, which may not be the intended meaning.",
+          "suggestion": "Chúng tôi sẽ chuyển các phòng do người liên hệ tạo ra. or Chúng tôi sẽ chuyển các phòng được liên hệ tạo."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the phrasing 'được tạo bởi liên hệ' could be slightly improved for flow.",
+          "suggestion": "Consider restructuring the sentence for better flow, possibly using a more active voice."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '我们将转由移联系人创建的房间' doesn't accurately convey the meaning of 'We will transfer rooms created by contact'.  '转由移' is awkward and unclear. It doesn't clearly express the transfer action.",
+          "suggestion": "We can suggest options like: '我们将转移联系人创建的房间' (We will transfer rooms created by contact) or '我们将把联系人创建的房间转移' (We will transfer the rooms created by the contact)."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase '转由移' is grammatically awkward and uncommon in Chinese.",
+          "suggestion": "Replace '转由移' with a more natural and direct phrasing like '转移' or '把...转移'."
+        }
+      ],
       "approved_at": null
     }
   }

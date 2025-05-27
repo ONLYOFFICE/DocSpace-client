@@ -3,7 +3,7 @@
   "content": "Unencrypted communication",
   "content_en_sha1_hash": "bc1d8c39d5290a229552fb64a476b343bca25d9c",
   "created_at": "2025-05-19T21:30:54.196Z",
-  "updated_at": "2025-05-21T08:24:43.143Z",
+  "updated_at": "2025-05-24T08:37:19.420Z",
   "comment": {
     "text": "This translation key is used for the label of a checkbox indicating unencrypted LDAP connection type. It appears in a settings page within a file, and its purpose is to display the description of this option to users, allowing them to understand what \"unencrypted communication\" means in the context of LDAP connections.",
     "is_auto": true,
@@ -72,7 +72,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation \"Salattu viestintä\" translates to \"Encrypted communication\", not \"Unencrypted communication\".",
+          "description": "The Finnish translation 'Salattu viestintä' means 'Encrypted communication'. The English content refers to 'Unencrypted communication'.",
           "suggestion": "Salaamaton viestintä"
         }
       ],
@@ -111,13 +111,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'ການສື່ສານທີ່ບໍ່ໄດ້ເຂົ້າລະຫັດ' is a literal translation of 'Unencrypted communication', it might sound a bit formal or technical for some contexts. A more natural phrasing could be considered depending on the intended audience.",
-          "suggestion": "Consider alternatives like 'ການສື່ສານແບບບໍ່ປິດລັບ' or 'ການສົ່ງຂໍ້ມູນແບບບໍ່ປິດລັບ' if a less formal tone is desired."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -168,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ක්‍රීප්ටෝ නොකරන ලද සන්නිවේදනය' uses 'ක්‍රීප්ටෝ' which directly translates to 'crypto'. While it conveys the idea of not being encrypted, it's not the most natural or accurate translation for 'unencrypted'. A more appropriate translation would focus on the absence of encryption rather than directly referencing crypto.",
-          "suggestion": "A better translation would be something like 'අනන්‍යකරණය නොවූ සන්නිවේදනය' (anankaraṇanāvo sanniwēdanaya) which translates to 'unencrypted communication'."
+          "description": "The translation 'ක්‍රීප්ටෝ නොකරන ලද සන්නිවේදනය' literally translates to 'uncrypted communication'. While 'uncrypted' conveys a similar concept to 'unencrypted', it's not a standard term and might be misleading. 'නොමිතිකෘත්‍යාංකිත' (nomithikaŗthankaŗita) would be a more accurate translation for 'unencrypted'.",
+          "suggestion": "ක්‍රීප්ටෝ නොමිතිකෘත්‍යාංකිත සන්නිවේදනය (or a more concise equivalent)"
         }
       ],
       "approved_at": null
@@ -213,7 +207,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Liên lạc không được mã hóa' is technically correct, it's a bit literal and not the most natural phrasing in Vietnamese for 'Unencrypted communication.' A more common and idiomatic translation would be something like 'Truyền thông không mã hóa' or 'Kết nối không mã hóa'.",
+          "suggestion": "Truyền thông không mã hóa"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

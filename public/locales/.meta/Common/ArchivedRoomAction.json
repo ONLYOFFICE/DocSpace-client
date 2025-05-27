@@ -3,7 +3,7 @@
   "content": "The room '{{name}}' is archived",
   "content_en_sha1_hash": "4cf8fde269eac548a2798f4497add90e7c4d0b0a",
   "created_at": "2025-05-19T21:30:43.060Z",
-  "updated_at": "2025-05-22T11:56:37.470Z",
+  "updated_at": "2025-05-26T07:57:32.169Z",
   "comment": {
     "text": "This translation key is used to display a message when a room is archived, indicating that the specific room with the provided name has been archived. It appears in error messages or success notifications related to file actions, such as archiving files or updating folders.",
     "is_auto": true,
@@ -11,28 +11,28 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\FilesSelector\\index.tsx",
+      "file_path": "/packages/client/src/components/FilesSelector/index.tsx",
       "line_number": 183,
       "context": "setSelected(\"none\");\n onCloseAction();\n };\n \n const getFilesArchiveError = React.useCallback(\n (name: string) => t(\"Common:ArchivedRoomAction\", { name }),\n [t],\n );\n \n React.useEffect(() => {\n return () => {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\ShareCollectSelector\\ShareCollectSelector.tsx",
+      "file_path": "/packages/client/src/components/ShareCollectSelector/ShareCollectSelector.tsx",
       "line_number": 243,
       "context": "? !selectedItemSecurity?.CopyTo\n : !selectedItemSecurity.Copy;\n };\n \n const getFilesArchiveError = React.useCallback(\n (name: string) => t(\"Common:ArchivedRoomAction\", { name }),\n [t],\n );\n \n const getIconUrl = (size: number, fileExst: string) => {\n return getIcon(size, fileExst) ?? \"\";",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\FilesActionsStore.js",
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
       "line_number": 1454,
       "context": ".then(() => {\n const successTranslation =\n folders.length !== 1 && Array.isArray(folders)\n ? t(\"ArchivedRoomsAction\")\n : Array.isArray(folders)\n ? t(\"Common:ArchivedRoomAction\", { name: folders[0].title })\n : t(\"Common:ArchivedRoomAction\", { name: folders.title });\n \n toastr.success(successTranslation);\n })\n .then(() => {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\FilesActionsStore.js",
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
       "line_number": 1454,
       "context": ".then(() => {\n const successTranslation =\n folders.length !== 1 && Array.isArray(folders)\n ? t(\"ArchivedRoomsAction\")\n : Array.isArray(folders)\n ? t(\"Common:ArchivedRoomAction\", { name: folders[0].title })\n : t(\"Common:ArchivedRoomAction\", { name: folders.title });\n \n toastr.success(successTranslation);\n })\n .then(() => {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -111,13 +111,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The single quotes around '{{name}}' are unnecessary and deviate from standard Japanese sentence structure. While technically not incorrect, it's stylistically odd.",
-          "suggestion": "ルーム '{{name}}' がアーカイブされました"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -129,7 +123,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'archived' implies a process of moving something to storage or an inactive state. While 'ຖືກເກັບໄວ້' technically means 'is stored,' it doesn't fully convey the meaning of archiving a room, which suggests it's no longer actively used.",
+          "suggestion": "Consider using a phrase like 'ຖືກຍົກອອກຈາກການໃຊ້ງານ' (is removed from use) or 'ຖືກປິດໄວ້' (is closed/inactive) to better represent 'archived' in the context of a room."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -180,13 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'archived' is best translated as 'ආرشفණය කරන ලදී' (areshanaya karanada ladi) or 'හුදගාඩුවන ලදී' (hudagaaduwana ladi) to accurately convey the meaning of being archived, rather than just 'සංරක්‍ෂිතයි' (sanrakshithai) which simply means 'protected'.",
-          "suggestion": "'{{name}}' කාමරය ආرشفණය කරන ලදී"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'සංරක්‍ෂිතයි' isn't *wrong*, it implies protection rather than the action of archiving.  It lacks the nuance of an action being taken.",
-          "suggestion": "'{{name}}' කාමරය හුදගාඩුවන ලදී"
+          "description": "The translation '{{name}}' කාමරය සංරක්‍ෂිතයි' isn't the most natural or accurate translation of 'The room '{{name}}' is archived'. 'ආරක්ෂිතයි' (arakshithai) means 'protected' or 'safe', not 'archived'. A better translation would convey the meaning of archiving, which implies moving the room to storage or making it unavailable.",
+          "suggestion": "'{{name}}' කාමරය ගබඩාවට යවා ඇත"
         }
       ],
       "approved_at": null
@@ -209,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Соба' is incorrect. It should be 'Собарија' or 'Простор'. 'Соба' means 'room' but in this context, 'archived room' implies a space or area, not just a room. 'Собарија' is closer, but 'Простор' might be more appropriate depending on the specific meaning of 'room' in the English content.",
-          "suggestion": "Consider using 'Простор '{{name}}' је архивиран' or 'Собарија '{{name}}' је архивирана'."
+          "description": "The word 'Соба' is incorrect. It should be 'Простор' (Prostor) to accurately translate 'Room'. 'Соба' translates to 'room' as in a bedroom or similar private space, while 'Простор' is more appropriate for a general space.",
+          "suggestion": "Простор '{{name}}' је архивиран"
         }
       ],
       "approved_at": null
@@ -239,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'saoluu' (saoluu) translates to 'backup' or 'copy', not 'archived'. 'Archived' implies a room is moved to a storage area and is no longer actively used, but is still accessible. 'Sao luu' suggests simply creating a copy.",
-          "suggestion": "Phòng '{{name}}' đã được lưu trữ"
+          "description": "'Archived' typically means permanently removed or stored for later retrieval, often implying deletion or long-term storage. 'Sao lưu' means 'backup,' implying a copy was made, not that the room is removed. This is a significant difference in meaning.",
+          "suggestion": "Consider translations like 'Phòng '{{name}}' đã bị xóa' (The room '{{name}}' has been deleted) or 'Phòng '{{name}}' đã được lưu trữ' (The room '{{name}}' has been stored). The best translation depends on the intended functionality."
         }
       ],
       "approved_at": null

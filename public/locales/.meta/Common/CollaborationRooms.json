@@ -3,7 +3,7 @@
   "content": "Collaboration",
   "content_en_sha1_hash": "0a4d7a1ab7027fe1ecc947122932b427b1c9e59b",
   "created_at": "2025-05-19T21:30:43.503Z",
-  "updated_at": "2025-05-22T11:56:37.527Z",
+  "updated_at": "2025-05-26T07:57:32.384Z",
   "comment": {
     "text": "This translation key is used to display the label for a room filter type in the UI. It appears in a filter dropdown menu on the Home page, specifically under the \"Editing Room\" and \"Custom Room\" filters, and provides a clear indication of what rooms are being filtered by collaboration capabilities.",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\helpers\\filesUtils.js",
+      "file_path": "/packages/client/src/helpers/filesUtils.js",
       "line_number": 51,
       "context": "case RoomsType.FillingFormsRoom:\n return t(\"Common:FillingFormRooms\");\n \n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRooms\");\n \n case RoomsType.ReviewRoom:\n return t(\"Common:Review\");\n \n case RoomsType.ReadOnlyRoom:",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Filter\\index.js",
-      "line_number": 836,
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 794,
       "context": "case RoomsType.EditingRoom:\n return {\n id: \"filter_type-collaboration\",\n key: RoomsType.EditingRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:CollaborationRooms\"),\n };\n case RoomsType.ReviewRoom:\n return {\n id: \"filter_type-review\",\n key: RoomsType.ReviewRoom,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\shared\\utils\\index.ts",
-      "line_number": 358,
+      "file_path": "/packages/shared/utils/index.ts",
+      "line_number": 362,
       "context": "return t(\"Common:Files\");\n \n case `room-${RoomsType.CustomRoom}`:\n return t(\"Common:CustomRooms\");\n case `room-${RoomsType.EditingRoom}`:\n return t(\"Common:CollaborationRooms\");\n \n case `room-${RoomsType.FormRoom}`:\n return t(\"Common:FormRoom\");\n \n case `room-${RoomsType.PublicRoom}`:",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Salles de collaboration\" is too literal and doesn't accurately convey the meaning of 'Collaboration' in this context (likely referring to rooms *for* collaboration).  A more natural translation would be something like 'Espaces de collaboration'.",
-          "suggestion": "Espaces de collaboration"
+          "description": "The translation 'Salles de collaboration' is a literal translation of 'Collaboration Rooms'. The English content is just 'Collaboration'. A more natural and concise French translation would be 'Collaboration'.",
+          "suggestion": "Collaboration"
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Совместное редактирование\" (Joint editing) doesn't fully capture the meaning of 'Collaboration'. While it includes a component, it's more specific than the English term.",
-          "suggestion": "Consider \"Сотрудничество\" (Sotrudnichestvo) which more accurately reflects the broader concept of collaboration."
+          "description": "The Russian translation \"Совместное редактирование\" (Joint editing) does not fully capture the meaning of \"Collaboration\". While editing is often a part of collaboration, collaboration encompasses a broader range of cooperative activities.",
+          "suggestion": "Consider alternatives like \"Сотрудничество\" (Cooperation) or \"Совместная работа\" (Joint work) to more accurately represent the English term \"Collaboration\"."
         }
       ],
       "approved_at": null
@@ -225,7 +225,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"协作房间\" (xiézuò fángjiān) translates to 'collaboration rooms', not just 'collaboration'. It includes the word 'rooms' which isn't present in the English source. The English term 'Collaboration' is a general concept, and adding 'rooms' changes the meaning.",
+          "suggestion": "协作"
+        }
+      ],
       "approved_at": null
     }
   }

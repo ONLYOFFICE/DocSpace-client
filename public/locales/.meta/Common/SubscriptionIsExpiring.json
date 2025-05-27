@@ -3,7 +3,7 @@
   "content": "Your subscription is expiring on {{date}}",
   "content_en_sha1_hash": "8188a3ae6c5b0e34b2926ddc70d79038d6e78b7f",
   "created_at": "2025-05-19T21:30:49.205Z",
-  "updated_at": "2025-05-22T11:56:37.522Z",
+  "updated_at": "2025-05-26T07:57:32.204Z",
   "comment": {
     "text": "This translation key is used to display a notification about an expiring subscription on the client's tariff bar. The date of expiration is inserted into the translated string. It appears in the tariff bar component, typically as an orange notification indicator.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\TariffBar\\helpers.js",
+      "file_path": "/packages/client/src/components/TariffBar/helpers.js",
       "line_number": 75,
       "context": "return {\n label: t(\"Common:SubscriptionExpiredTitle\"),\n color: RED,\n };\n return {\n label: t(\"Common:SubscriptionIsExpiring\", { date: paymentDate }),\n color: ORANGE,\n };\n }\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"سوف ينتهي\" (sawfa yantahi) implies a future action that is less direct than 'is expiring.' A more accurate translation would convey a current state of expiration approaching. Consider using a more immediate verb like \"سيتم تجديده\" (sayutamm tijdiduhu - will be renewed) or a phrasing that emphasizes the imminent expiration.",
-          "suggestion": "اشتراكك سينتهي في {{date}}"
+          "description": "The translation \"اشتراكك سوف ينتهي في {{date}}\" is a literal translation and could be improved for naturalness. A more common and natural phrasing would be 'سوف تنتهي صلاحية اشتراكك في {{date}}'.",
+          "suggestion": "سوف تنتهي صلاحية اشتراكك في {{date}}"
         }
       ],
       "approved_at": null
@@ -99,7 +99,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation uses '日' (nich) after the date. While technically correct, it's more natural to omit it in this context, especially in subscription notifications. It sounds slightly formal and potentially overly precise.",
+          "suggestion": "サブスクリプションの有効期限は{{date}}です。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -120,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Jūsu abonementa derīguma termiņš beidzas šajā datumā: {{date}}' is overly literal and slightly awkward in Latvian. A more natural phrasing would be closer to 'Jūsu abonements beidzas {{date}}' or 'Abonements beidzas {{date}}'. The phrase 'derīguma termiņš' (expiration date) is redundant.",
-          "suggestion": "Jūsu abonements beidzas {{date}}"
+          "description": "The translation 'Jūsu abonementa derīguma termiņš beidzas šajā datumā: {{date}}' is a bit verbose and less natural than a direct translation. 'Derīguma termiņš' (expiration term) is more formal than necessary. A more natural translation would be something like 'Jūsu abonements beidzas: {{date}}' or 'Jūsu abonements izbeidzas: {{date}}'.",
+          "suggestion": "Jūsu abonements beidzas: {{date}}"
         }
       ],
       "approved_at": null
@@ -168,13 +174,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Your subscription is expiring on' is not accurately reflected in the Sinhala translation. 'ඉකුත් වේ' (ikuth ve) means 'will end' or 'will expire', but a more natural and precise translation would convey the sense of nearing expiration.",
-          "suggestion": "ඔබේ දායකත්වය {{date}} වන විට අවසන් වනුයේ"
+          "description": "The English phrase 'Your subscription is expiring on' is not accurately translated. 'ඉකුත් වේ' implies ending or finishing, which isn't the best fit. A more accurate translation would convey the idea of the subscription nearing its end.",
+          "suggestion": "ඔබගේ දායකත්වය {{date}} දින අවසන් වීමට ආසන්නය (Obage daakathuwa {{date}} dina awasana wemita asannaaya)"
         },
         {
-          "type": "formatting",
-          "description": "The Sinhala translation maintains the double curly braces `{{date}}` which mirrors the English format. While not strictly incorrect, it's common to omit those in Sinhala when integrating into a system/UI and assumes the system handles the variable substitution.",
-          "suggestion": "{{date}} දී ඔබගේ දායකත්‍වය අවසන් වේ"
+          "type": "grammar",
+          "description": "While grammatically understandable, the sentence structure could be improved for better flow in Sinhala. The phrasing feels slightly unnatural.",
+          "suggestion": "{{date}} දින ඔබේ දායකත්වය අවසන් වනු ඇත ({{date}} dina obage daakathuwa awasana vanu etha)"
         }
       ],
       "approved_at": null
@@ -197,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'subscription' (English) is translated as 'претплата' (Serbian Cyrillic). While technically correct, a more natural translation might be 'претплата истече' for better flow. The original English phrasing indicates a future event, so 'istice' works, but 'isteće' is slightly more aligned.",
-          "suggestion": "Ваша претплата истече {{date}}"
+          "description": "While technically correct, 'претплата' is somewhat formal for 'subscription'. A more common and natural-sounding equivalent would be 'претплата' or 'членство'.",
+          "suggestion": "Consider using 'Ваша претплата или чланство истиче {{date}}'"
         }
       ],
       "approved_at": null

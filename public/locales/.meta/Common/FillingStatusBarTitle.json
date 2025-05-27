@@ -3,7 +3,7 @@
   "content": "Process of filling out the form",
   "content_en_sha1_hash": "36deb08f4df20c19eabe41542bc1e2c97f64a231",
   "created_at": "2025-05-19T21:30:45.378Z",
-  "updated_at": "2025-05-22T11:56:37.875Z",
+  "updated_at": "2025-05-26T07:57:32.931Z",
   "comment": {
     "text": "The translation key \"FillingStatusBarTitle\" is used to display a status bar title indicating that a form is being filled out. It appears in a modal dialog header and also in a start filling panel, providing context for the user about the current process of filling the form.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\dialogs\\FillingStatusPanel\\index.tsx",
+      "file_path": "/packages/shared/dialogs/FillingStatusPanel/index.tsx",
       "line_number": 127,
       "context": ">\n <ModalDialog.Header>{t(\"Common:FillingStatus\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {value ? (\n <PublicRoomBar\n headerText={t(\"Common:FillingStatusBarTitle\")}\n bodyText={t(\"Common:FillingStatusBarDescription\")}\n iconName={InfoSvgUrl}\n onClose={() => setValue(false)}\n className={styles.infoBar}\n />",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\dialogs\\start-filling\\StartFillingPanel.tsx",
+      "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.tsx",
       "line_number": 304,
       "context": "<ModalDialog.Header>{t(\"Common:StartFilling\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {infoBarVisible ? (\n <>\n <PublicRoomBar\n headerText={t(\"Common:FillingStatusBarTitle\")}\n bodyText={t(\"Common:FillingStatusBarDescription\")}\n iconName={InfoSvgUrl}\n onClose={() => setInfoBarVisible(false)}\n />\n <hr className={styles.divider} />",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -39,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Process of filling out the form\" is somewhat verbose. A more natural Azerbaijani translation would be 'Formu doldurma prosesi' or 'Formanın doldurulması'.",
-          "suggestion": "Formu doldurma prosesi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -63,13 +57,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation 'Ablauf des Formularausfüllens' is a bit literal and could be improved for naturalness. 'Ablauf' implies a detailed sequence, which might be more than intended by 'Process of filling out the form'.",
-          "suggestion": "Formularausfüllungsprozess"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -114,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"フォームに記入するプロセス\" is a very literal and slightly awkward translation. It sounds more formal and less natural than necessary for a status bar title.",
-          "suggestion": "フォーム記入中"
+          "description": "The translation 'フォームに記入するプロセス' (fōmu ni kiinyu suru purosesu) is a literal translation and slightly awkward in Japanese. While technically correct, it lacks natural flow. A more natural phrasing would convey the meaning of 'filling out the form' more effectively.",
+          "suggestion": "フォームの入力処理 (fōmu no nyūryoku shori) - 'Form input process' or  フォーム入力 (fōmu nyūryoku) - 'Form input'."
         }
       ],
       "approved_at": null
@@ -129,13 +117,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Lao translation uses 'ເຕີມຂໍ້ມູນໃສ່ແບບຟອມ'. While understandable, a slightly more natural phrasing might be preferable. 'ເຕີມຂໍ້ມູນໃນແບບຟອມ' is commonly used.",
-          "suggestion": "ເຕີມຂໍ້ມູນໃນແບບຟອມ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -185,24 +167,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'පෝරමය' (poramaya) is a correct transliteration of 'form'. No spelling error here.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'පිරවීමේ' (pirawime) is a correct transliteration of 'filling'. No spelling error here.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ක්‍රියාවලිය' (kriyawaliya) is a correct transliteration of 'process'. No spelling error here.",
-          "suggestion": null
-        },
-        {
           "type": "incorrect_translation",
-          "description": "While the translation is technically correct, it sounds a bit formal for a status bar title.  A more concise and natural phrasing might improve the user experience. 'පෝරමය පුරවන්නේ' (poramaya puravane) - 'Filling the form' could be an alternative.",
-          "suggestion": "පෝරමය පුරවන්නේ"
+          "description": "The translation 'පෝරමය පිරවීමේ ක්‍රියාවලිය' while literally meaning 'Process of filling out the form', is slightly verbose and not the most natural way to express this in Sinhala. A more concise and commonly used phrasing would be better.",
+          "suggestion": "පෝරම පිරවීම"
         }
       ],
       "approved_at": null
@@ -222,7 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Процес попуњавања обрасца' is a bit literal and formal. A more natural and user-friendly translation would be something like 'Попуњавање обрасца' or 'Исписивање обрасца'.",
+          "suggestion": "Попуњавање обрасца"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -252,7 +225,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '填写表单的进度' (Tiánxiě biǎo dān de jìndù) literally translates to 'Progress of filling out the form.' While conveying a similar meaning, it's not the most natural or clear way to express 'Process of filling out the form' in Chinese. It emphasizes the 'progress' aspect too strongly.",
+          "suggestion": "Consider a more descriptive phrase like '表单填写流程' (Biǎo dān tiánxiě liúchéng) which means 'Form filling process' or '表单填写过程' (Biǎo dān tiánxiě guòchéng) which means 'Form filling process'."
+        }
+      ],
       "approved_at": null
     }
   }

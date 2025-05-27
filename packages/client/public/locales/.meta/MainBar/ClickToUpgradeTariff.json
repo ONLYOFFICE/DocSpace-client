@@ -3,7 +3,7 @@
   "content": "<1>Click here</1> to upgrade your tariff plan.",
   "content_en_sha1_hash": "05e8679da260d74355c1ac6f0c80db766199b304",
   "created_at": "2025-05-19T21:30:54.102Z",
-  "updated_at": "2025-05-21T07:54:46.682Z",
+  "updated_at": "2025-05-24T08:08:49.396Z",
   "comment": {
     "text": "This translation key is used to display a call-to-action button that encourages users to upgrade their tariff plan. The text will appear as a clickable link within a UI component, likely part of an online quota management system. Translators should provide a clear and actionable message in the user's preferred language.",
     "is_auto": true,
@@ -30,8 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Click here\" (انقر هنا) is accurate, but \"ترقية خطة التعريف الخاصة بك\" could be improved for clarity and natural flow. While technically correct, it's a bit literal. A more natural phrasing might be something like \"لترقية باقتك\" (to upgrade your package/plan).",
-          "suggestion": "لترقية باقتك"
+          "description": "The translation \"لترقية خطة التعريف الخاصة بك\" is not the most natural or accurate way to say 'to upgrade your tariff plan'. While technically correct, it can be improved for fluency.",
+          "suggestion": "انقر هنا لترقية باقتك."
+        },
+        {
+          "type": "formatting",
+          "description": "The tags <1> are inconsistent with standard practices. It's not clear what they are intended to signify.  They should be removed or replaced with a more standard format.",
+          "suggestion": "Remove the <1> tags."
         }
       ],
       "approved_at": null
@@ -42,8 +47,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags <1> and </1> are inconsistent. The English uses <1>...</1>, while the Azerbaijani uses <1>...</1>.",
-          "suggestion": "Ensure consistent HTML tag usage, either <1>...</1> or <1>...</1>."
+          "description": "The HTML tags '<1>' and '</1>' are inconsistent with standard practice. They are likely intended to be a specific marker for the UI but should be reviewed and standardized.",
+          "suggestion": "Review and standardize the HTML tag usage. Consider using a more conventional method for marking the clickable element, or ensure consistency with the rest of the application's markup."
         }
       ],
       "approved_at": null
@@ -54,8 +59,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tag <1> is inconsistent with standard usage. It seems to be an arbitrary marker. It should be reviewed to determine the intended purpose and apply proper HTML or other formatting.",
-          "suggestion": "Review the purpose of <1> and apply appropriate formatting or remove it if unnecessary."
+          "description": "The tag `<1>` is present in both the source and translation. This tag may need to be removed or handled consistently depending on the application's requirements.",
+          "suggestion": "Remove or handle the `<1>` tag consistently with the application's implementation."
         }
       ],
       "approved_at": null
@@ -66,13 +71,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'upgrade tariff plan' is not the most natural way to express an upgrade in Czech. It's a literal translation and sounds slightly awkward. A more fluent translation would use a more common phrasing.",
-          "suggestion": "Klikněte zde pro změnu tarifu."
+          "description": "The phrase 'upgrade your tariff plan' is not ideally translated. 'Upgrade tarifního plánu' is a literal translation but sounds somewhat unnatural in Czech. A more natural phrasing would be 'zvýšení vašeho tarifu' or 'lepšího tarifu'.",
+          "suggestion": "Klikněte zde pro zvýšení vašeho tarifu."
         },
         {
           "type": "formatting",
-          "description": "The tags <1> are inconsistent with typical tag use. They likely indicate a clickable area, but the implementation is not standard.",
-          "suggestion": "Consider standard HTML or UI framework conventions for marking clickable elements.  For example, <span> or other appropriate tags depending on the context."
+          "description": "The `<1>` tags are present in both the English and Czech text. These likely indicate placeholders and should be checked to ensure they are handled correctly in the implementation.  While not strictly incorrect, their presence warrants review.",
+          "suggestion": "Verify how the <1> tags are used and ensure they are handled correctly during integration."
         }
       ],
       "approved_at": null
@@ -101,13 +106,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"tariff plan\" is not accurately translated. \"Tilaus\" generally refers to an order or subscription, not a tariff plan.",
-          "suggestion": "Consider using a more precise translation for \"tariff plan,\" such as \"hinnoittelusuunnitelma\" or \"liittymäsuunnitelma,\" depending on the context."
-        },
-        {
-          "type": "formatting",
-          "description": "The tags are consistent between the English and Finnish versions.",
-          "suggestion": "N/A"
+          "description": "The English phrase \"upgrade your tariff plan\" has been translated as \"päivittääksesi tilauksesi\".  'Tilaus' translates to 'subscription' or 'order', not 'tariff plan'. A more accurate translation of 'tariff plan' would be 'liittymäpaketti' or 'datapaketti', depending on the context. While 'päivittääksesi' (to upgrade) is correct, the noun is incorrect.",
+          "suggestion": "Consider using 'päivittääksesi liittymäpakettisi' or 'päivittääksesi datapakettisi' instead of 'päivittääksesi tilauksesi'."
         }
       ],
       "approved_at": null
@@ -118,8 +118,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"augmenter votre plan tarifaire\" doesn't perfectly capture the nuance of \"upgrade your tariff plan.\"  'Augmenter' implies increasing, whereas 'upgrade' suggests an improvement to a higher tier. A more accurate translation might be 'améliorer votre forfait'.",
-          "suggestion": "Cliquez ici pour améliorer votre forfait."
+          "description": "The English phrase \"upgrade your tariff plan\" is better translated as \"mettre à niveau votre abonnement\" or \"modifier votre offre\". \"Augmenter votre plan tarifaire\" implies increasing the amount, not the tier or features.",
+          "suggestion": "Cliquez ici pour mettre à niveau votre abonnement."
         }
       ],
       "approved_at": null
@@ -130,8 +130,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation retains the HTML tags <1> which were present in the English content. These should ideally be removed or adapted to the Armenian context if they serve a specific purpose.",
-          "suggestion": "Remove the <1> tags or adjust the formatting to align with Armenian UI/UX conventions."
+          "description": "The HTML tags <1> are inconsistent between the English and Armenian versions. The English uses <1>, while the Armenian uses <1>.",
+          "suggestion": "Ensure consistent HTML tagging. Either use <1> or </1> consistently across both versions."
         }
       ],
       "approved_at": null
@@ -142,8 +142,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'per fare l’upgrade' is a bit wordy and not the most natural way to say 'to upgrade' in Italian. A more concise and idiomatic translation would be 'per aggiornare'.",
-          "suggestion": "per aggiornare"
+          "description": "The phrase 'to upgrade your tariff plan' is not ideally translated. 'Fare l’upgrade' is a direct loan translation from English and sounds unnatural in Italian. A more natural phrasing would be 'aggiornare il tuo piano tariffario' or 'passare a un piano tariffario superiore'.",
+          "suggestion": "Clicca qui per aggiornare il tuo piano tariffario."
         }
       ],
       "approved_at": null
@@ -153,14 +153,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The HTML tags <1> are present in both the English and Japanese translations. This is likely unintentional and should be removed for consistency and clean output.  The tags don't seem to serve a functional purpose in either language.",
-          "suggestion": "Remove the <1> tags from both the English and Japanese content."
+          "type": "incorrect_translation",
+          "description": "The translation \"料金プランをアップグレードできます\" (riyou puran o appugureedo dekiru) is a bit too formal and literal. A more natural phrasing would be something like \"料金プランをアップグレードできます\" or \"プランをアップグレードできます\"",
+          "suggestion": "料金プランをアップグレードできます"
         },
         {
-          "type": "incorrect_translation",
-          "description": "While technically correct, the Japanese translation '料金プランをアップグレードできます' (ryōkin puran o appugurēdo dekimasu) is a bit formal and indirect for a button or call to action. It translates to 'You can upgrade your tariff plan.' A more natural and direct phrasing would be more appropriate for a user interface element.",
-          "suggestion": "Consider a more direct phrasing like '料金プランをアップグレード' (ryōkin puran o appugurēdo) or 'プランをアップグレード' (puran o appugurēdo)."
+          "type": "formatting",
+          "description": "The original English uses `<1>` tags for the clickable text. The Japanese translation maintains the same tags, but the use of `<1>` tags is uncommon in Japanese UI design. Consider using more standard UI element or span tags, or removing the tags altogether.",
+          "suggestion": "Remove or replace `<1>` tags with a standard HTML element or remove them entirely. The best approach would depend on the context of the UI."
         }
       ],
       "approved_at": null
@@ -171,8 +171,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags <1> are inconsistent between the English and Korean versions. The English uses <1> while the Korean uses the same.",
-          "suggestion": "Ensure consistent HTML tag usage across all translations. Maintain the same tags as in the English source: <1>여기를 클릭</1>하여 요금제를 업그레이드하세요."
+          "description": "The HTML tags (<1>) are present in both the source and translation. While this may be intentional, it's worth noting and ensuring consistency with the overall system/platform where this text will be used.",
+          "suggestion": "Verify the purpose of the <1> tags and ensure consistency across all translations and the target platform. If they are purely for display, consider removing them if they are not needed."
         }
       ],
       "approved_at": null
@@ -182,9 +182,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"to upgrade your tariff plan\" is not accurately translated. \"ຍົກລະດັບແຜນການຄ່າບໍລິການຂອງທ່ານ\" literally translates to 'upgrade your service plan', but 'tariff plan' has a specific meaning related to pricing tiers that might be lost in translation. A more precise translation might consider using a term more specific to 'tariff' if such a term exists in Lao.",
+          "suggestion": "Consider consulting with a subject matter expert to determine the most appropriate Lao term for 'tariff plan'. Possible alternatives might include researching how similar services are described in Lao and adapting the phrasing accordingly. If a direct equivalent doesn't exist, a more descriptive phrase might be necessary."
+        },
+        {
           "type": "formatting",
-          "description": "The translation maintains the HTML tags (<1> and </1>) which are likely unnecessary and should be removed for cleaner code.",
-          "suggestion": "Remove the HTML tags <1> and </1> from the translation."
+          "description": "The HTML tags <1> are not standard and appear to be placeholders. They should be replaced with appropriate HTML tags if this is intended for display within an HTML environment.",
+          "suggestion": "Replace <1> with standard HTML tags like <span> or <a> if the text is intended for display in HTML."
         }
       ],
       "approved_at": null
@@ -225,8 +230,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Click here\" is translated as \"Apăsați aici\". While technically correct, a more natural translation for a UI element like a button would be \"Dați clic aici\" or \"Faceți clic aici\". \"Apăsați aici\" sounds overly formal.",
-          "suggestion": "Dați clic aici"
+          "description": "'Click here' is translated as 'Apăsați aici'. While technically correct, 'Apăsați aici' is quite formal. A more natural and user-friendly translation might be 'Dați click aici' or 'Click aici'.",
+          "suggestion": "Dați click aici"
         }
       ],
       "approved_at": null
@@ -240,18 +245,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ඔබේ ගාමි සැලැස්ම වැඩිදියුණු කිරීමට මෙතැන ක්ලික් කරන්න' is a literal translation but may not be the most natural phrasing in Sinhala. 'ගාමි සැලැස්ම' (gaami selasma) directly translates to 'tariff plan', but a more conversational translation might be 'ඔබේ ටැරිෆ් සැලැස්ම' or 'ඔබේ ඩේட்டா පැලැනය'.",
-          "suggestion": "Consider using a more natural phrasing like 'ඔබේ ටැරිෆ් සැලැස්ම' or 'ඔබේ ඩේட்டா පැලැනය' to improve readability and user experience."
-        },
-        {
-          "type": "formatting",
-          "description": "The angle brackets '<1>' are present in the Sinhala translation, mirroring the English content. While not strictly incorrect, maintaining consistent formatting is recommended.",
-          "suggestion": "Remove the '<1>' tags from the Sinhala translation if they are not essential for technical reasons."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -259,9 +253,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "'Click here' is translated as 'Kliknite sem'. While accurate, a more natural Slovak phrasing for a UI element in this context might be 'Prejdite na' or 'Zvoliť vyšší tarif'.",
-          "suggestion": "Consider 'Prejdite na' or 'Zvoliť vyšší tarif' for a more natural user experience."
+          "type": "formatting",
+          "description": "The Slovak translation includes 'a' which seems redundant. It's better to remove it for a more natural flow.",
+          "suggestion": "<1>Kliknite sem</1> aktualizujte svoj tarifný plán."
         }
       ],
       "approved_at": null
@@ -278,13 +272,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation of 'Click here' is 'Кликните овде'. While technically correct, a more natural and user-friendly translation would be 'Притисните овде' or 'Кликните'.",
+          "description": "The phrase 'Click here' is translated as 'Кликните овде'. While understandable, a more natural and idiomatic translation would be 'Притисните овде'.",
           "suggestion": "Притисните овде"
         },
         {
           "type": "formatting",
-          "description": "The HTML tags '<1>' are inconsistent with the English content. They seem to be used as a placeholder. The consistent implementation of these tags is important.",
-          "suggestion": "Ensure consistent use of HTML tags across English and Serbian versions, or remove them entirely if they are placeholders."
+          "description": "The HTML tags `<1>` and `</1>` are inconsistent. The opening tag uses `<1>` while the closing tag uses `</1>`. This could cause rendering issues.",
+          "suggestion": "Ensure consistent HTML tag format. Use either `<1>` for both opening and closing tags, or use proper HTML elements."
         }
       ],
       "approved_at": null
@@ -295,8 +289,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The original English content and Serbian translation both use `<1>` and `</1>` tags. It's important to ensure this formatting is consistent and intentional. If these are placeholders or markup, confirm their purpose and ensure they are handled correctly in the target system.  If they are unintended, they should be removed.",
-          "suggestion": "Review and remove or adjust the `<1>` and `</1>` tags if they are unnecessary."
+          "description": "The `<1>` tags are inconsistent between the English and Serbian translations. The English version uses angled brackets, while the Serbian uses a combination of angled brackets and a non-standard tag.",
+          "suggestion": "Ensure consistent formatting of the tag. Either use `<1>` in both languages, or investigate the purpose of the non-standard tag and replicate it appropriately in the English version.  Ideally, remove the tags altogether and rely on standard HTML/CSS styling."
         }
       ],
       "approved_at": null
@@ -312,9 +306,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"upgrade your tariff plan\" is not perfectly conveyed by \"підвищити тарифний план\". \"Підвищити\" implies raising something, whereas \"upgrade\" implies an improvement or enhancement. A more accurate translation would be something like \"оновити тарифний план\" (renew/update tariff plan) or \"перейти на вищий тарифний план\" (switch to a higher tariff plan).",
-          "suggestion": "Consider using \"оновити тарифний план\" or \"перейти на вищий тарифний план\" for a more accurate translation of 'upgrade'."
+          "type": "formatting",
+          "description": "The `<1>` tags are present in both the English and Ukrainian versions. While technically not incorrect, they are likely remnants from a UI/markup system and should be removed for a clean translation.",
+          "suggestion": "Remove the `<1>` tags from the Ukrainian translation. The translation should be 'Натисніть тут, щоб підвищити тарифний план.'"
         }
       ],
       "approved_at": null
@@ -322,13 +316,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags <1> are present in both the English and Vietnamese versions. They should be removed for consistency and to avoid unnecessary markup.",
-          "suggestion": "Remove the <1> tags from the Vietnamese translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -337,13 +325,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"tariff plan\" as \"费用版本\" is not ideal. \"费用版本\" literally translates to \"fee version\" which is not the standard way to refer to a tariff plan. A more accurate translation would be something like \"套餐\" (tāocān) or \"资费计划\" (zīfèi jìhuà).",
-          "suggestion": "Consider using \"套餐\" (tāocān) or \"资费计划\" (zīfèi jìhuà) for \"tariff plan\"."
+          "description": "The phrase \"费用版本\" (feiyong banben) is not the most natural or accurate translation of \"tariff plan.\" It literally means \"fee version.\" A more appropriate translation would be something like \"套餐\" (taocan) or “资费计划” (zifei jihua).",
+          "suggestion": "Consider translating \"tariff plan\" as \"套餐\" (taocan) or “资费计划” (zifei jihua)."
         },
         {
           "type": "formatting",
-          "description": "The `<1>` tags are present in both the English and Chinese content, which may be a formatting artifact. These likely should not be present in the final translated text.",
-          "suggestion": "Remove the `<1>` tags from the Chinese translation."
+          "description": "The `<1>` tags are inconsistent with standard translation handling. They might be intended for highlighting, but should be removed or handled according to established practices. They can also create parsing issues.",
+          "suggestion": "Remove the `<1>` tags and let the surrounding system handle any required highlighting or formatting."
         }
       ],
       "approved_at": null

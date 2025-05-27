@@ -3,7 +3,7 @@
   "content": "Set up the limit of unsuccessful login attempts by the user to protect the space against brute-force attacks. When the limit is reached, attempts coming from the associated IP address will be banned for specified period of time, or captcha will be requested if enabled.",
   "content_en_sha1_hash": "8d779beeb43e299e317c89a6b51492bc342a5d56",
   "created_at": "2025-05-19T21:30:50.827Z",
-  "updated_at": "2025-05-21T04:54:52.332Z",
+  "updated_at": "2025-05-24T05:38:56.671Z",
   "comment": {
     "text": "This translation key describes the description text that appears on a security setting page, explaining how brute-force protection works and its purpose in limiting unsuccessful login attempts to protect against attacks. It informs users about the action taken when the limit is reached (banning or displaying a CAPTCHA).",
     "is_auto": true,
@@ -30,18 +30,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"brute-force attacks\" is too literal. A more natural phrasing in Arabic would convey the meaning of unauthorized intrusion attempts. 'الاختراقات' (al-ikhtiraqat) means 'hacks' or 'breaches,' which is close, but not the most accurate.",
-          "suggestion": "قم بوضع حد لمحاولات تسجيل الدخول غير الناجحة من قبل المستخدم لحماية المساحة من محاولات التسلل أو الاختراق غير المصرح بها."
+          "description": "The phrase \"حماية المساحة من الاختراقات\" (protecting the space from hacking) is not the most accurate translation of \"protect the space against brute-force attacks\". It's too broad. A more precise translation would convey the concept of brute-force specifically.",
+          "suggestion": "قم بوضع حد لمحاولات تسجيل الدخول غير الناجحة من قبل المستخدم لحماية الحساب من هجمات القوة الغاشمة."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"associated IP address\" could be more clearly translated. 'عنوان IP المرتبط' (ʿunwān IP al-murtabiṭ) is accurate, but a more fluent rendering would emphasize the specific IP attempting the attacks.",
-          "suggestion": "سيتم حظر المحاولات الواردة من عنوان IP الذي يحاول التسجيل."
+          "description": "The word \"عنوان IP\" while technically correct, is a very literal translation of \"IP address\". Using a more natural phrasing in Arabic would improve readability.",
+          "suggestion": "سيتم حظر المحاولات الواردة من عنوان الشبكة المرتبط"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The word 'captcha' is a technical term. While using the transliteration 'كلمة التحقق' is understandable, a more accessible Arabic equivalent might improve comprehension for a wider audience. Consider a phrase describing what a CAPTCHA *is*. ",
-          "suggestion": "أو سيتم طلب اختبار التحقق من أنك لست برنامجًا آليًا في حالة تمكينها."
+          "type": "formatting",
+          "description": "The translation uses a complex sentence structure that can be simplified for better readability. Consider breaking it down into shorter, clearer sentences.",
+          "suggestion": "قم بوضع حد لمحاولات تسجيل الدخول غير الناجحة من قبل المستخدم لحماية الحساب. عند الوصول إلى الحد الأقصى، سيتم حظر المحاولات الواردة من عنوان الشبكة المرتبط لفترة زمنية محددة. أو، إذا تم التفعيل، سيتم طلب رمز التحقق."
         }
       ],
       "approved_at": null
@@ -52,18 +52,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'protect the space' is not accurately translated. 'Space' doesn't have a direct equivalent in this context. A better translation would refer to 'account' or 'system'.",
-          "suggestion": "Domeni hesab və ya sistem hesablarından qorumaq üçün istifadəçi uğursuz giriş cəhdlərinin limitini təyin edin."
+          "description": "The English phrase 'Set up the limit' is not accurately reflected in the Azerbaijani translation 'təyin edin'. 'Təyin edin' translates to 'define' or 'assign', whereas 'set up' implies configuration. A more appropriate translation would be 'quruluş edin' or 'məhdudiyyəti yaratmaq'.",
+          "suggestion": "Domeni kobud güc hücumlarından qorumaq üçün istifadəçi uğursuz giriş cəhdlərinin məhdudiyyəti yaratmaq/quruluş edin."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'banned' could be translated more precisely. 'Qadağan ediləcək' implies a complete prohibition, but the context suggests a temporary block.",
-          "suggestion": "Limitə çatdıqdan sonra müvafiq IP ünvanından cəhdlər müəyyən müddətə dayandırılacaq"
-        },
-        {
-          "type": "spelling",
-          "description": "Minor spelling issue. 'kobud güc' is correct, but 'kobud' can be written as 'kaba' for a more common tone.",
-          "suggestion": "Domeni kaba güc hücumlarından qorumaq üçün..."
+          "description": "The word 'associated' is not accurately translated. 'Müvafiq' is close, but doesn't quite convey the meaning of 'associated with' in this context.",
+          "suggestion": "Domeni kobud güc hücumlarından qorumaq üçün istifadəçi uğursuz giriş cəhdlərinin məhdudiyyəti yaratmaq/quruluş edin. Limitə çatdıqdan sonra həmin IP ünvanından cəhdlər müəyyən müddətə qadağan ediləcək və ya aktiv olduqda captcha tələb olunacaq."
         }
       ],
       "approved_at": null
@@ -71,7 +66,18 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"пространството\" (the space) in the Bulgarian translation is a bit vague. It doesn't clearly convey what is being protected. It should be more specific, like \"системата\" (the system) or \"акаунтите\" (the accounts).",
+          "suggestion": "Настройте лимита на неуспешните опити за влизане от потребителя, за да защитите системата/акаунтите срещу атаки с груба сила."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit long and could be improved for readability.  Consider splitting it into two sentences.",
+          "suggestion": "Настройте лимита на неуспешните опити за влизане от потребителя, за да защитите системата/акаунтите срещу атаки с груба сила. Когато лимитът бъде достигнат, опитите, идващи от свързания IP адрес, ще бъдат забранени за определен период от време или ще бъде поискана captcha, ако е активирана."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -80,13 +86,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Czech translation uses a somewhat long sentence structure, making it slightly less readable than the English original. Consider breaking it into two sentences for improved clarity.",
-          "suggestion": "Nastavte limit neúspěšných pokusů o přihlášení ze strany uživatele za účelem ochrany prostoru před útoky hrubou silou. Po dosažení limitu budou pokusy přicházející z přidružené IP adresy zakázány po zadanou dobu, nebo bude vyžadován captcha, je-li povolen."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'prostoru' (space) might be too broad and not the most accurate translation for what is being protected. Considering 'účet' (account) or 'systém' (system) may be more suitable.",
-          "suggestion": "Nastavení limitu neúspěšných pokusů o přihlášení ze strany uživatele za účelem ochrany účtu před útoky hrubou silou. Po dosažení limitu budou pokusy přicházející z přidružené IP adresy zakázány po zadanou dobu, nebo bude vyžadován captcha, je-li povolen."
+          "description": "The Czech translation uses a long sentence structure which can be difficult to parse. Consider breaking it into two shorter sentences for improved readability.",
+          "suggestion": "Nastavte limit neúspěšných pokusů o přihlášení uživatele pro ochranu prostoru před útoky hrubou silou. Po dosažení limitu budou pokusy přicházející z přidružené IP adresy zakázány na zadanou dobu, nebo bude vyžadován captcha, pokud je povolena."
         }
       ],
       "approved_at": null
@@ -102,9 +103,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation uses a semicolon (;) where a period (.) might be more appropriate, especially at the end of the second sentence.  Greek punctuation often follows English patterns, but a period feels more natural here.",
-          "suggestion": "Replace ';' with '.' after 'διάστημα'."
+          "type": "incorrect_translation",
+          "description": "The phrase 'ωμής βίας' (omees vias) translates to 'raw force' which isn't the best fit for 'brute-force attacks'. A more accurate translation would be 'αριθμητική βία' (arithmitiki via) or 'μεθοδική βία' (methodiki via).",
+          "suggestion": "Ρυθμίστε το όριο των ανεπιτυχών προσπαθειών σύνδεσης του χρήστη για την προστασία του χώρου από επιθέσεις αριθμητικής βίας."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'σχετική διεύθυνση IP' (schetiki dieuthynsi IP) is not the most natural way to express 'associated IP address'.",
+          "suggestion": "Ρυθμίστε το όριο των ανεπιτυχών προσπαθειών σύνδεσης του χρήστη για την προστασία του χώρου από επιθέσεις αριθμητικής βίας. Όταν επιτευχθεί το όριο, οι προσπάθειες που προέρχονται από την αντίστοιχη διεύθυνση IP θα απαγορεύονται για καθορισμένο χρονικό διάστημα ή θα ζητείται captcha, εάν είναι ενεργοποιημένο."
         }
       ],
       "approved_at": null
@@ -121,8 +127,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"väsytyshyökkäyksiltä\" is a literal translation of \"brute-force attacks\" and while understandable, it's not the most natural phrasing in Finnish. A more common and fluent phrasing would be something along the lines of \"raakaohjelmahyökkäyksiltä\" or simply \"väkisin murtautumisyrityksiltä\".",
-          "suggestion": "Consider using 'väkisin murtautumisyrityksiltä' or 'raakaohjelmahyökkäyksiltä' instead of 'väsytyshyökkäyksiltä'."
+          "description": "The phrase \"väsytyshyökkäyksiltä\" (fatigue attacks) is not the most common or accurate translation for \"brute-force attacks\". A more suitable term would be \"raaka voimahyökkäykset\" or \"pakotetut hyökkäykset\".",
+          "suggestion": "Aseta epäonnistuneiden sisäänkirjautumisyritysten raja suojautuaksesi raakaa voimaa käyttävillä hyökkäyksillä."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"kyseisistä IP-osoitteista\" could be more natural. \"Näistä IP-osoitteista\" is a better alternative.",
+          "suggestion": "Aseta epäonnistuneiden sisäänkirjautumisyritysten raja suojautuaksesi raakaa voimaa käyttävillä hyökkäyksillä. Kun raja on saavutettu, yritykset, jotka tulevat näistä IP-osoitteista kielletään tietyksi ajaksi tai captcha pyydetään, jos se on käytössä."
         }
       ],
       "approved_at": null
@@ -138,19 +149,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'brute-force attacks' is translated as 'կոպիտ ուժի հարձակումներ'. While technically correct, a more idiomatic translation might be 'խոշնագնաց հարձակումներ' to more closely reflect the technical term's common usage in Armenian.",
-          "suggestion": "Տարածքը խոշնագնաց հարձակումներից պաշտպանելու համար"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'associated IP address' is translated as 'համապատասխան IP հասցե'.  A more natural translation would be 'կցված IP հասցե' or 'կից IP հասցե'.",
-          "suggestion": "Կցված IP հասցեից եկող փորձերը կարգելվեն"
-        },
-        {
           "type": "formatting",
-          "description": "The Armenian translation uses a colon (:) after 'ժամանակահատվածով' which is unusual in this context.  Removing it would improve readability.",
-          "suggestion": "Երբ սահմանաչափը հասնի, համապատասխան IP հասցեից եկող փորձերը կարգելվեն որոշակի ժամանակահատված մուտքի փորձերի սահմանը՝ տարածքը կոպիտ ուժի հարձակումներից պաշտպանելու համար:"
+          "description": "The Armenian translation uses a colon (:) after the introductory phrase 'տարածքը կոպիտ ուժի հարձակումներից պաշտպանելու համար:' which is not consistent with typical English sentence structure and can make the sentence feel slightly awkward. Consider removing it.",
+          "suggestion": "տարածքը կոպիտ ուժի հարձակումներից պաշտպանելու համար տարածքի օգտատիրոջ կողմից մուտքի անհաջող փորձերի սահմանը"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'կարգելվեն որոշակի ժամանակահատվածով' (will be banned for a specific period of time) might be too strong. Depending on the system, a less restrictive term like 'թողարկվեն' (be delayed/temporarily blocked) or 'արգելափակվեն ժամանակավորապես' (be temporarily blocked) might be more accurate.",
+          "suggestion": "արգելափակվեն ժամանակավորապես"
         }
       ],
       "approved_at": null
@@ -164,7 +170,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation uses a full stop at the end of the first sentence. While grammatically correct, it doesn't match the flow and style of similar descriptions, which often omit the full stop in technical documentation.",
+          "suggestion": "Remove the full stop at the end of the first sentence: 「ブルートフォース攻撃からスペースを保護するために、ユーザーによるログイン試行失敗の制限を設定します。」"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -173,13 +185,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"space\" in the English content doesn't have a direct equivalent that maintains the original meaning. 'Space' refers to a digital account or service area. A better translation would convey this.",
-          "suggestion": "공간 (space) 대신 '계정' 또는 '서비스'로 변경하는 것을 고려해 보세요."
+          "description": "The phrase 'space' in the English content is not accurately translated. 'Space' likely refers to an online account or system. '공간' (gonggan) can mean space, but a better translation would be something like '계정' (gyejeong - account) or '시스템' (siseutem - system).",
+          "suggestion": "무차별 대입 공격으로부터 계정/시스템을 보호하기 위해 사용자의 로그인 시도 실패 횟수 제한을 설정하세요."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'associated IP address' is slightly awkward in the Korean translation. While understandable, it could be phrased more naturally.",
-          "suggestion": "“해당 IP 주소에서 비롯된 시도” 대신 “해당 IP 주소에서의 시도” 또는 “해당 IP 주소에서 오는 시도” 로 수정하는 것을 고려해 보세요."
+          "type": "formatting",
+          "description": "While not strictly incorrect, the translation could benefit from more natural Korean phrasing. The sentence structure feels a little clunky when directly translated.",
+          "suggestion": "무차별 대입 공격으로부터 보호하기 위해, 사용자의 로그인 시도 실패 횟수 제한을 설정하세요. 제한에 도달하면 해당 IP 주소에서 비롯된 시도가 지정된 기간 동안 차단되거나, 캡차 활성화 시 캡차가 요청됩니다."
         }
       ],
       "approved_at": null
@@ -190,13 +202,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'brute-force attacks' is translated as 'ການໂຈມຕີດ້ວຍແຮງກ້າ'. While understandable, a more accurate and common translation would be 'ການໂຈມຕີແບບບ້າ ຫຼື ການໂຈມຕີແບບໃຊ້ກຳລັງ'.",
-          "suggestion": "ການໂຈມຕີແບບບ້າ ຫຼື ການໂຈມຕີແບບໃຊ້ກຳລັງ"
+          "description": "The phrase \"brute-force attacks\" is translated as \"ການໂຈມຕີດ້ວຍແຮງກ້າ.\" While understandable, a more accurate and common translation would be \"ການໂຈມຕີແບບໃຊ້ກຳລັງ\" or \"ການໂຈມຕີແບບບັງຄັບ\". \"ແຮງກ້າ\" implies raw strength rather than the repeated automated attempts characteristic of brute-force attacks.",
+          "suggestion": "ການໂຈມຕີແບບໃຊ້ກຳລັງ"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'associated IP address' is translated as 'ທີ່ຢູ່ IP ທີ່ກ່ຽວຂ້ອງ'. A more accurate translation would be 'ທີ່ຢູ່ IP ທີ່ກ່ຽນສົນ'.",
-          "suggestion": "ທີ່ຢູ່ IP ທີ່ກ່ຽນສົນ"
+          "description": "The phrase \"associated IP address\" is translated as \"ທີ່ຢູ່ IP ທີ່ກ່ຽວຂ້ອງ.\"  While technically correct, a more natural and fluent translation would be \"ທີ່ຢູ່ IP ທີ່ກ່ຽນພັນ\" or simply \"ທີ່ຢູ່ IP ນັ້ນ\".",
+          "suggestion": "ທີ່ຢູ່ IP ທີ່ກ່ຽນພັນ"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the use of full stops at the end of each sentence feels somewhat stiff in Lao.  A more natural flow might omit some.",
+          "suggestion": "Consider removing some of the full stops for a more conversational tone."
         }
       ],
       "approved_at": null
@@ -207,13 +224,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'vieta' is used for 'space'. While technically correct, it's a bit awkward in this context. 'Sistēma' or 'platforma' would be more suitable for a digital space.",
-          "suggestion": "Iestatiet lietotāja neveiksmīgo pieteikšanās mēģinājumu ierobežojumu, lai aizsargātu sistēmu/platformu pret rupja spēka uzbrukumiem."
+          "description": "The term 'vieta' (place) in the Latvian translation doesn't accurately convey the meaning of 'space' in the English context. It should refer to the system or account being protected.",
+          "suggestion": "Iestatiet lietotāja neveiksmīgo pieteikšanās mēģinājumu ierobežojumu, lai aizsargātu sistēmu/kontu pret rupja spēka uzbrukumiem."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'interneta protokola (IP) adreses' is overly formal and lengthy. 'IP adreses' is sufficient.",
-          "suggestion": "Iestatiet lietotāja neveiksmīgo pieteikšanās mēģinājumu ierobežojumu, lai aizsargātu sistēmu/platformu pret rupja spēka uzbrukumiem. Kad limits ir sasniegts, mēģinājumi, kas nāk no IP adreses, tiks aizliegti uz noteiktu laiku vai tiks pieprasīts Captcha, ja tas ir iespējots."
+          "description": "The translation of 'internet protocol (IP) address' as 'interneta protokola (IP) adrese' is overly literal and sounds unnatural. A more natural phrasing would improve readability.",
+          "suggestion": "Iestatiet lietotāja neveiksmīgo pieteikšanās mēģinājumu ierobežojumu, lai aizsargātu sistēmu/kontu pret rupja spēka uzbrukumiem. Kad limits ir sasniegts, mēģinājumi, kas nāk no attiecīgās IP adreses, tiks aizliegti uz noteiktu laiku vai tiks pieprasīts Captcha, ja tas ir iespējots."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'attiecīgās IP adreses' is a bit clunky. Consider streamlining.",
+          "suggestion": "Iestatiet lietotāja neveiksmīgo pieteikšanās mēģinājumu ierobežojumu, lai aizsargātu sistēmu/kontu pret rupja spēka uzbrukumiem. Kad limits ir sasniegts, mēģinājumi, kas nāk no IP adreses, tiks aizliegti uz noteiktu laiku vai tiks pieprasīts Captcha, ja tas ir iespējots."
         }
       ],
       "approved_at": null
@@ -224,13 +246,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"de ruimte\" (the space) is not the most natural translation for \"the space\" in this context. It would be more accurate to say \"de toegang\" or \"het systeem\".",
-          "suggestion": "Stel de limiet in van het aantal mislukte aanmeldpogingen door de gebruiker om de toegang te beschermen tegen brute-force aanvallen."
+          "description": "The phrase \"de ruimte\" (the space) is not the best translation for \"the space\" in this context. It implies a physical space rather than an account or system.",
+          "suggestion": "Consider using a more accurate translation like \"het account\" (the account) or \"het systeem\" (the system)."
         },
         {
           "type": "incorrect_translation",
-          "description": "“bijbehorende IP-adres” is slightly awkward. While technically correct, a more fluent Dutch phrasing is needed.",
-          "suggestion": "het bijbehorende IP-adres wordt voor een bepaalde tijd geweigerd."
+          "description": "“bijbehorende IP-adres” could be more naturally phrased. The implication is the IP address associated with the unsuccessful attempts.",
+          "suggestion": "Consider phrasing like “het IP-adres waar de pogingen vandaan komen” or “het IP-adres dat gebruikt wordt voor de pogingen.”"
         }
       ],
       "approved_at": null
@@ -241,8 +263,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Polish translation uses a comma (,) instead of a semicolon (;) to separate sentences, which is more common in Polish writing.",
-          "suggestion": "Replace the comma after 'czas' with a semicolon: '...zostaną zablokowane na określony czas; lub pojawi się kod CAPTCHA, jeśli zostanie włączony.'"
+          "description": "The Polish translation uses a semicolon (';') where a comma (',') might be more common and natural in this context. While a semicolon is grammatically correct, a comma would flow better.",
+          "suggestion": "Ustaw limit nieudanych prób logowania przez użytkownika, aby chronić obszar przed atakami brute force, próby pochodzące z powiązanego adresu IP zostaną zablokowane na określony czas lub pojawi się kod CAPTCHA, jeśli zostanie włączony."
         }
       ],
       "approved_at": null
@@ -264,19 +286,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"prin forță brută\" is a literal translation of \"brute-force\" and while understandable, a more natural Romanian phrasing would be \"atacuri de tip forță brută\" or \"atacuri cu forță brută\".",
-          "suggestion": "atacuri de tip forță brută"
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase \"va solicita validarea de tip captcha\" is grammatically awkward. \"Va solicita un captcha\" or \"va solicita o verificare captcha\" are more natural.",
-          "suggestion": "va solicita un captcha"
-        },
-        {
           "type": "formatting",
-          "description": "The use of \"de tip captcha\" after \"validarea\" is redundant and makes the sentence clunky.  It's better to just say \"captcha\".",
-          "suggestion": "va solicita captcha"
+          "description": "The Romanian translation uses a passive voice construction ('vor fi interzise' - will be banned) which is less direct and potentially less clear than a more active voice. While grammatically correct, it could be improved for clarity.",
+          "suggestion": "Consider rephrasing to a more active voice, such as 'adresa IP asociată va fi blocată' (the associated IP address will be blocked)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'validarea de tip captcha' is a literal translation of 'captcha verification' and is slightly awkward. While understandable, it's not the most natural way to express it in Romanian.",
+          "suggestion": "Replace 'validarea de tip captcha' with 'un test CAPTCHA' or 'un sistem CAPTCHA'."
         }
       ],
       "approved_at": null
@@ -287,13 +304,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"attempts coming from the associated IP address\" is not accurately reflected in the Russian translation. \"Попытки входа с соответствующего IP-адреса\" is a bit clunky. A more natural phrasing would emphasize attempts originating *from* a particular IP.",
-          "suggestion": "Consider rephrasing to something like: \"Попытки входа, идущие с соответствующего IP-адреса\" or \"Попытки входа, совершенные с соответствующего IP-адреса\"."
+          "description": "The phrase \"corresponding IP address\" (\"соответствующего IP-адреса\") is slightly awkward. A more natural phrasing would be \"IP-адрес, с которого поступают попытки\" or similar.",
+          "suggestion": "IP-адрес, с которого поступают попытки"
         },
         {
           "type": "formatting",
-          "description": "The phrase \"if enabled\" is translated as \"если такая функция включена\". While technically correct, \"если включено\" would be a more concise and natural way to say it in this context.",
-          "suggestion": "Change \"если такая функция включена\" to \"если включено\"."
+          "description": "The term 'captcha' is directly transliterated as 'код проверки'. While understandable, it's more common to use the English term 'captcha' in Russian technical contexts or provide a more accurate explanation.",
+          "suggestion": "captcha (код подтверждения)"
         }
       ],
       "approved_at": null
@@ -304,13 +321,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"අදාළ අ.ජා.කෙ. (IP) ලිපිනය\" is a somewhat awkward translation of \"associated IP address\". It's technically correct, but reads less naturally.",
-          "suggestion": "Consider a more natural phrasing like \"අදාළ IP ලිපිනය\" or \"සබැඳි IP ලිපිනය\"."
+          "description": "The phrase 'අදාළ අ.ජා.කෙ. (IP) ලිපිනය' is a somewhat clunky way to refer to the IP address.  While technically correct, it's not the most natural phrasing in Sinhala. The abbreviation 'අ.ජා.කෙ.' is also not commonly understood by all users.",
+          "suggestion": "පරිශ්‍රීලකයා උත්සාහ කරන IP ලිපිනය"
         },
         {
           "type": "formatting",
-          "description": "The inclusion of the abbreviation 'අ.ජා.කෙ.' within parentheses feels disruptive. It's understandable to include it for clarity, but visually breaks the flow of the sentence.",
-          "suggestion": "Consider a footnote or separate explanation for 'IP' instead of including it within parentheses like this. Alternatively, 'IP' can be clarified earlier, or avoided altogether if context implies it."
+          "description": "The parentheses around 'IP' within the Sinhala translation disrupt the flow. It's unnatural to include the abbreviation and English term in parentheses like that.",
+          "suggestion": "පරිශ්‍රීලකයා උත්සාහ කරන IP ලිපිනය"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'වාර' (waar) translates to 'times' or 'rounds' but in this context, 'attempts' is more appropriate. ",
+          "suggestion": "පරිශ්‍රීලකයා උත්සාහ කිරීමට හැකි වාර ගණන සීමා කරන්න."
         }
       ],
       "approved_at": null
@@ -321,13 +343,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'space' in the English content is not accurately translated. 'Space' likely refers to the system or application being protected. 'Priestoru' in Slovak is better translated as 'systému' or 'aplikácie'.",
-          "suggestion": "Nastavenie limitu neúspešných pokusov o prihlásenie používateľa na ochranu systému/aplikácie pred útokmi hrubou silou."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'associated IP address' is translated too literally. While understandable, 'príslušnej IP adresy' could be improved for better flow.",
-          "suggestion": "Nastavenie limitu neúspešných pokusov o prihlásenie používateľa na ochranu systému/aplikácie pred útokmi hrubou silou. Po dosiahnutí limitu budú pokusy prichádzajúce z danej IP adresy na zadaný čas zakázané alebo sa bude vyžadovať captcha, ak je aktivovaná."
+          "description": "The English phrase 'protect the space' is translated as 'na ochranu priestoru'. While technically correct, 'priestor' (space) feels slightly awkward in this context. A more natural Slovak phrasing might be 'na ochranu účtu/systému' (to protect the account/system) or 'na ochranu tohto systému' (to protect this system).",
+          "suggestion": "Nastavenie limitu neúspešných pokusov o prihlásenie používateľa na ochranu účtu/systému."
         }
       ],
       "approved_at": null
@@ -338,13 +355,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'napadi z vdorom' is a literal translation of 'brute-force attacks' and isn't the standard terminology in Slovenian. A more accurate translation would be 'napadi z grobo silo' or 'sile poskusi'.",
-          "suggestion": "Replace 'napadi z vdorom' with 'napadi z grobo silo' or 'sile poskusi'."
+          "description": "The phrase 'brute-force attacks' is translated as 'napadi z vdorom'. While technically correct, a more common and natural translation would be 'brutalne sile' or 'sileva napada'.",
+          "suggestion": "Consider translating 'brute-force attacks' as 'brutalne sile' or 'sileva napada'."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The word 'povezanega' could be improved. While grammatically correct, 'associated' is less commonly used in this context.  'Zadašnji' or 'dotični' might be more suitable.",
-          "suggestion": "Replace 'povezanega' with 'zadašnji' or 'dotični'."
+          "type": "formatting",
+          "description": "The Slovenian translation uses a comma after 'dosežena', which might not be grammatically necessary or typical in this context. It disrupts the flow slightly.",
+          "suggestion": "Remove the comma after 'dosežena' for better readability (Ko je omejitev dosežena, ...)"
         }
       ],
       "approved_at": null
@@ -355,13 +372,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses 'brute-force' in English instead of a Serbian equivalent. While understandable, it's preferable to use a localized term if available.",
-          "suggestion": "Consider using a Serbian equivalent for 'brute-force', such as 'насилни напади' or a more specific term depending on the context."
+          "description": "The term 'brute-force' is not italicized or in any special formatting as it is in the English source.",
+          "suggestion": "Поставите ограничење неуспешних покушаја пријављивања од стране корисника како бисте заштитили простор од напада *brute-force*."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'простор' (prostor) is a rather generic translation of 'space'. In the context of a system or online platform, a more appropriate word might be 'система' (sistema - system) or 'платформа' (platforma).",
-          "suggestion": "Replace 'простор' with 'система' or 'платформа'."
+          "description": "The word 'space' is translated as 'простор'. While technically correct, it might be better to use a more contextually appropriate term depending on what 'space' refers to in the original text. A more accurate rendering might be 'налог' (account) or 'система' (system).",
+          "suggestion": "Поставите ограничење неуспешних покушаја пријављивања од стране корисника како бисте заштитили *налог/система* од напада *brute-force*."
         }
       ],
       "approved_at": null
@@ -371,14 +388,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'associated IP address' is not accurately translated. 'Povezana IP adresa' is technically correct, but could be more natural-sounding. It could imply the IP is directly linked to a user account.",
-          "suggestion": "Consider using 'IP adresa sa koje se pokušava prijavljivanje' or 'IP adresa koja šalje pokušaje prijavljivanja' for a more nuanced and natural translation."
+          "type": "spelling",
+          "description": "The term 'CAPTCHA' is an English loanword and should ideally be transliterated or replaced with a Serbian equivalent, if one exists and is commonly understood. While its use is understandable, maintaining consistency and clarity for all Serbian speakers is beneficial.",
+          "suggestion": "CAPTCHA could be replaced with 'test za proveru da li ste čovek' or a similar explanatory phrase, or kept as 'CAPTCHA' if the audience is familiar with the term."
         },
         {
-          "type": "formatting",
-          "description": "The sentence structure could be improved for better readability.  The first part of the English is quite direct and the Serbian feels a little less so.",
-          "suggestion": "Consider restructuring the first part of the sentence to 'Postavite ograničenje broja neuspešnih pokušaja prijavljivanja korisnika kako biste zaštitili prostor od napada brute-force.'"
+          "type": "grammar",
+          "description": "The phrase 'povezane IP adrese' (associated IP address) might be slightly ambiguous. It's unclear if it refers to the IP address used *during* the login attempt or an IP address assigned to the user.",
+          "suggestion": "Consider rephrasing to 'IP adresa sa koje se vrši pokušaj prijave' (IP address from which the login attempt is made) for improved clarity."
         }
       ],
       "approved_at": null
@@ -388,9 +405,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation uses a colon (:) after 'Alanı brute force saldırılarına karşı korumak' which isn't typical in Turkish sentence structure. It breaks the natural flow.",
-          "suggestion": "Remove the colon after 'korumak'."
+          "type": "incorrect_translation",
+          "description": "The phrase 'specified period of time' is translated as 'belirli bir süre boyunca'. While technically correct, it's a bit clunky and could be improved for better flow in Turkish. A more natural phrasing might be 'belirtilen süre boyunca'.",
+          "suggestion": "belirtilen süre boyunca"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'captcha' is directly transliterated. While understood by some, a more common and clearer equivalent in Turkish might be 'güvenlik doğrulama testi' or a simplified version like 'doğrulama testi'.",
+          "suggestion": "doğrulama testi"
         }
       ],
       "approved_at": null
@@ -401,8 +423,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses a comma (,) where a period (.) might be more appropriate for a formal settings description. Specifically, after 'часу'.",
-          "suggestion": "Установіть ліміт невдалих спроб входу користувача, щоб захистити простір від атак грубою силою. Коли ліміт буде досягнуто, спроби, що надходять із пов’язаної IP-адреси, будуть заблоковані протягом певного періоду часу. або, якщо ввімкнено, запитуватиметься капча."
+          "description": "The translation uses a comma (,) before 'або' which is grammatically incorrect. It should be a period (.)",
+          "suggestion": "Установіть ліміт невдалих спроб входу користувача, щоб захистити простір від атак грубою силою. Коли ліміт буде досягнуто, спроби, що надходять із пов’язаної IP-адреси, будуть заблоковані протягом певного періоду часу. Або, якщо ввімкнено, запитуватиметься капча."
         }
       ],
       "approved_at": null
@@ -410,7 +432,18 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"không gian\" (space) in the translation feels slightly off in this context. While technically correct, \"không gian\" often refers to physical space. A more suitable word would be \"tài khoản\" (account) or \"hệ thống\" (system).",
+          "suggestion": "Thiết lập giới hạn số lần đăng nhập không thành công của người dùng để bảo vệ tài khoản/hệ thống khỏi các cuộc tấn công brute-force."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a period after \"brute-force\". The English source also has this.",
+          "suggestion": "Keep the period after 'brute-force' as it is consistent with the source text."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
@@ -419,23 +452,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase '暴力攻击' (violent attacks) while technically correct, can be overly strong and potentially alarming in this context. A more suitable term emphasizing forceful attempts would be better.",
-          "suggestion": "设置登录失败次数限制，保护空间免受恶意破解尝试。 (Set login failure attempt limit to protect the space from malicious cracking attempts.)"
+          "description": "The phrase '暴力攻击' (violent attack) is a common translation for brute-force attack, but 'brute-force attack' is more precise and maintains terminology consistency.  While understandable, it slightly deviates from the English meaning.",
+          "suggestion": "设置登录失败次数限制，保护空间免遭暴力破解攻击 (Set up the limit of unsuccessful login attempts to protect the space against brute-force attacks)."
         },
         {
           "type": "incorrect_translation",
-          "description": "“关联 IP 地址” (associated IP address) is a bit literal. A more natural phrasing would be '来自该 IP 地址' (from that IP address).",
-          "suggestion": "达到指定限制时，来自该 IP 地址的尝试将在所选时间段内被禁止；"
+          "description": "The translation of 'associated IP address' as '关联 IP 地址' is accurate, but the sentence structure could be improved for clarity and flow in Chinese. '来自关联 IP 地址的尝试' is slightly clunky.",
+          "suggestion": "达到指定限制时，来自相关 IP 地址的尝试将被禁止 (When the limit is reached, attempts from the related IP address will be banned)."
         },
         {
           "type": "incorrect_translation",
-          "description": "“所选时间段内被禁止” (banned within the selected time period) is slightly awkward.  A more fluid translation would be '将被禁止一段时间' (will be banned for a period of time).",
-          "suggestion": "达到指定限制时，来自该 IP 地址的尝试将在一段时间内被禁止；"
-        },
-        {
-          "type": "formatting",
-          "description": "The semicolon after the first sentence creates an unnatural flow. A conjunction or period would improve readability.",
-          "suggestion": "达到指定限制时，来自该 IP 地址的尝试将在一段时间内被禁止，如果启用，则会被请求使用验证码。"
+          "description": "The phrase '所选时间段' (selected time period) is a bit vague and doesn't directly reflect the English phrasing 'specified period of time'. It implies a selectable option rather than a defined period.",
+          "suggestion": "达到指定限制时，来自相关 IP 地址的尝试将被禁止在规定时间内 (When the limit is reached, attempts from the related IP address will be banned for a specified period)."
         }
       ],
       "approved_at": null

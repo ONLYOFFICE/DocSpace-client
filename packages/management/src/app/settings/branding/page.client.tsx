@@ -30,7 +30,7 @@ import React, { MouseEvent } from "react";
 import { useRouter } from "next/navigation";
 
 import { DeviceType } from "@docspace/shared/enums";
-import { MobileView } from "@docspace/shared/pages/Branding/mobile-view";
+import { MobileView } from "@docspace/shared/pages/Branding/MobileView";
 import type { ILogo } from "@docspace/shared/pages/Branding/WhiteLabel/WhiteLabel.types";
 import type { ICompanySettings } from "@docspace/shared/pages/Branding/CompanyInfo/CompanyInfo.types";
 import type { IBuildInfo } from "@docspace/shared/components/about-dialog/About.types";
@@ -145,4 +145,3 @@ const BrandingPage = ({
 };
 
 export default BrandingPage;
-

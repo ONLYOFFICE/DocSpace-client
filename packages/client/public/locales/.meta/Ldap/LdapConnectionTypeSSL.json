@@ -3,7 +3,7 @@
   "content": "SSL",
   "content_en_sha1_hash": "78bb8826fcc2504583e625386c238563e6207595",
   "created_at": "2025-05-19T21:30:54.186Z",
-  "updated_at": "2025-05-21T08:26:01.574Z",
+  "updated_at": "2025-05-24T08:38:30.892Z",
   "comment": {
     "text": "This translation key is used to display \"SSL\" as a label for a checkbox option in a LDAP connection settings page. The checkbox determines whether SSL encryption should be enabled for an LDAP connection.",
     "is_auto": true,

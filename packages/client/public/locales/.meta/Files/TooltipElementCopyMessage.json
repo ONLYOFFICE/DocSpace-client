@@ -3,7 +3,7 @@
   "content": "Copy {{element}}",
   "content_en_sha1_hash": "ed0ee7f92937e2893de3d1552b5c943e15bf62a7",
   "created_at": "2025-05-19T21:30:56.251Z",
-  "updated_at": "2025-05-21T11:08:34.277Z",
+  "updated_at": "2025-05-24T11:18:32.332Z",
   "comment": {
     "text": "This translation key is used to display a tooltip when copying files. The placeholder \"{element}\" should be replaced with a plural form of \"file\" or \"files\", depending on the context. It appears in the UI for file copy operations.",
     "is_auto": true,
@@ -36,8 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Azerbaijani translation uses curly braces around 'element' similar to the English, which might not be standard practice or feel natural in Azerbaijani. Consider removing them for a more idiomatic feel, or using a different formatting style if the surrounding context requires them.",
-          "suggestion": "\"{{element}}\" can be rendered as \"element\" depending on the desired style and context."
+          "description": "The translation uses a literal double curly brace {{ }} which doesn't match standard localization formatting conventions. While it functionally preserves the variable, it's not idiomatic.",
+          "suggestion": "{element}"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'köçür' is a valid translation for 'copy', it's less commonly used and can sound slightly formal or technical in this context. A more natural translation would be 'birlik' or 'surüşdür'.",
+          "suggestion": "{{element}} birlik"
         }
       ],
       "approved_at": null
@@ -141,7 +146,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Cópia {{element}}' is too literal. A more natural Portuguese (Brazil) translation would be 'Copiar {{element}}'.  'Cópia' implies a copy *has* been made, whereas 'Copiar' implies the action of copying.",
+          "suggestion": "Copiar {{element}}"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -162,7 +173,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Copy' is better translated as 'පිටපත්' (pitapat) rather than 'පිටපත් කරන්න' (pitapat karaanña). The latter implies 'to copy,' while the English phrase refers to the result of copying.",
+          "description": "The English phrase 'Copy' is best translated as 'පිටපත්' (pitapat) rather than ' පිටපත් කරන්න' (pitapat kornna). The latter implies 'to copy', while the former is a direct action of copying.",
           "suggestion": "{{element}} පිටපත්"
         }
       ],
@@ -186,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Копирај {{element}}' uses the imperative form 'Копирај' (Copy!).  A more natural and user-friendly translation would use the indicative form or a more polite phrasing, especially considering this is a tooltip.",
-          "suggestion": "Преузми {{element}}"
+          "description": "The translation 'Копирај {{element}}' is a literal transliteration of 'Copy {{element}}' and doesn't reflect the natural Serbian phrasing for a copy command. A more appropriate translation would be something like 'Прекопирај {{element}}' or 'Копирај елемент {{element}}'.",
+          "suggestion": "Прекопирај {{element}}"
         }
       ],
       "approved_at": null

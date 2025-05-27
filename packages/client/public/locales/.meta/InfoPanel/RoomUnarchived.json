@@ -3,7 +3,7 @@
   "content": "Room recovered from Archive",
   "content_en_sha1_hash": "df906b7f69e29c3630918bf077fe4e4d2d56cebb",
   "created_at": "2025-05-19T21:30:54.949Z",
-  "updated_at": "2025-05-22T11:56:37.601Z",
+  "updated_at": "2025-05-26T07:57:32.432Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a room has been recovered from an archive. It appears in the UI as part of an info panel on a history view page, and is displayed when viewing archived rooms or other related information. Translators should provide a description that reflects this context.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\History\\useFeedTranslation.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 287,
       "context": "case \"RoomDenyDownloadDisabled\":\n return t(\"InfoPanel:RoomDenyDownloadDisabled\");\n case \"RoomArchived\":\n return t(\"InfoPanel:RoomArchived\");\n case \"RoomUnarchived\":\n return t(\"InfoPanel:RoomUnarchived\");\n case \"RoomIndexExportLocation\":\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n });\n case \"FormSubmit\":",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Възстановена от Архива стая\" is a literal translation, but \"Room recovered from Archive\" implies a more active restoration. A more natural-sounding Bulgarian translation would be something like \"Стаята е възстановена от архива\" or \"Стаята е върната от архива\".",
-          "suggestion": "Стаята е възстановена от архива"
+          "description": "The translation \"Възстановена от Архива стая\" is a literal translation and doesn't flow naturally in Bulgarian. A more natural phrasing would convey the room being 'brought back' or 'restored'.",
+          "suggestion": "Възстановена стая от архива"
         }
       ],
       "approved_at": null
@@ -60,13 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Aus dem Archiv geborgener Raum' while technically correct, is a bit clunky and not the most natural way to say \"Room recovered from Archive\" in German. 'Geborgen' implies rescue or retrieval, which is a bit too strong for simply recovering a room from an archive.",
-          "suggestion": "Raum aus dem Archiv wiederhergestellt"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "Another possible, more natural and concise alternative would be to use a more direct translation like 'Raum wurde aus dem Archiv freigegeben'.",
-          "suggestion": "Raum wurde aus dem Archiv freigegeben"
+          "description": "While 'Aus dem Archiv geborgener Raum' is technically correct, it's a bit wordy and doesn't convey the simple meaning of 'recovered'. 'Wiederhergestellter Raum' or 'Raum wiederhergestellt' would be more natural and concise for a user-facing message.",
+          "suggestion": "Wiederhergestellter Raum"
         }
       ],
       "approved_at": null
@@ -113,8 +108,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'アーカイブから回復されたルーム' (Archive kara kaifuku sareta ruumu) is technically correct but sounds unnatural in Japanese for a user interface message. '回復' (kaifuku) implies a more complex recovery process than simply restoring a room from an archive. It’s overly formal and technical.",
-          "suggestion": "ルームがアーカイブから復元されました"
+          "description": "The translation 'アーカイブから回復されたルーム' while technically correct, sounds somewhat unnatural in Japanese. A more natural phrasing would emphasize the room's return to a functional state.",
+          "suggestion": "アーカイブから復元されたルーム"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The verb '回復された' (kaifuku sareta) implies recovery from a state of damage or illness. '復元された' (fukugen sareta) is more appropriate for restoring something to its original state or functionality.",
+          "suggestion": "アーカイブから復元されたルーム"
         }
       ],
       "approved_at": null
@@ -131,8 +131,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຫ້ອງຟື້ນຄືນຈາກເອກະສານສະຖອນ' is a literal translation and may not convey the natural meaning of 'Room recovered from Archive' in Lao.  'ຟື້ນຄືນ' implies a recovery to a previous state, but 'ເອກະສານສະຖອນ' (archives) might be too formal or specific. A more natural phrasing might be preferred depending on context.",
-          "suggestion": "Consider a more natural phrase like 'ຫ້ອງຖືກດຶງອອກຈາກເອກະສານ' (Room removed from archives) or 'ຫ້ອງໄດ້ຮັບຄືນ' (Room returned/recovered)."
+          "description": "The translation \"ຫ້ອງຟື້ນຄືນຈາກເອກະສານສະຖອນ\" is not the most natural or accurate translation of \"Room recovered from Archive.\" While technically correct, it's a bit literal and clunky.  'ເອກະສານສະຖອນ' (archives) is correct, but \"ຟື້ນຄືນຈາກ\" can be improved.",
+          "suggestion": "ຫ້ອງໄດ້ຮັບຄືນຈາກເອກະສານສະຖອນ"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, using a more active voice would improve readability. The current phrasing is a bit passive.",
+          "suggestion": "ຫ້ອງໄດ້ຮັບຄືນຈາກເອກະສານສະຖອນ"
         }
       ],
       "approved_at": null
@@ -185,13 +190,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කාමරය ආර්කයිව් වෙතින් ලබා ගන්නා ලදී.' is a bit verbose and not the most natural way to express 'Room recovered from Archive' in Sinhala. It translates to something like 'The room was obtained from the archive.'",
-          "suggestion": "කාමරය ආර්කයිව් සිට නැවත ලැබිණි."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ලැබිණි' implies receipt or delivery, which might not be the most accurate portrayal of recovery. A more fitting term would describe the room being restored or brought back.",
-          "suggestion": "කාමරය ආර්කයිව් සිට නැවත ගෙනාවේ."
+          "description": "The translation 'කාමරය ආර්කයිව් වෙතින් ලබා ගන්නා ලදී.' is a bit literal and awkward. A more natural Sinhala translation for 'Room recovered from Archive' would be something like 'කාමරය ආර්කයිව් වලින් නැවත ලබාගත්.' or 'ආර්කයිව් වලින් කාමරය නැවත ලබාගත්'.",
+          "suggestion": "කාමරය ආර්කයිව් වලින් නැවත ලබාගත්."
         }
       ],
       "approved_at": null
@@ -214,8 +214,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Соба враћена из архиве\" is a literal translation that doesn't quite convey the intended meaning of 'Room recovered from Archive.' The word 'Соба' (Soba) means 'room' in the sense of a physical room, not a digital space or area. The context suggests a digital room or area has been restored.",
-          "suggestion": "Consider a translation that implies restoration from a digital archive, such as \"Простор враћен из архиве\" (Prostor vraćen iz arhive) which means 'Space restored from archive,' or \"Архива враћена\" (Arhiva vraćena) meaning 'Archive restored'."
+          "description": "The Serbian translation \"Соба враћена из архиве\" translates literally to \"Room returned from archive,\" but the English content \"Room recovered from Archive\" implies a restoration or reactivation. \"Враћена\" (vraćena) suggests a return to a previous state, which is closer to 'recovered' in this context than simply 'returned'.",
+          "suggestion": "Соба враћена/активирана из архиве"
         }
       ],
       "approved_at": null
@@ -232,8 +232,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Arşivden geri döndürülen oda' is a bit awkward. While technically correct, it's not the most natural way to express 'Room recovered from Archive' in Turkish. A more common and fluent phrasing would be 'Oda arşivden geri alındı' or 'Oda arşivden kurtarıldı'.",
-          "suggestion": "Oda arşivden geri alındı"
+          "description": "The translation 'Arşivden geri döndürülen oda' is not the most natural or idiomatic way to express \"Room recovered from Archive\". While technically correct, it sounds somewhat clunky in Turkish. A more natural phrasing would be 'Oda arşivden kurtarıldı' or 'Oda arşivden geri yüklendi'.",
+          "suggestion": "Oda arşivden kurtarıldı"
         }
       ],
       "approved_at": null

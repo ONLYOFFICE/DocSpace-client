@@ -3,7 +3,7 @@
   "content": "This image preview roughly shows how the watermark will be displayed in your files.",
   "content_en_sha1_hash": "fc6f64e2436875f68c0eba0f04d86c16cdef48e6",
   "created_at": "2025-05-19T21:30:56.862Z",
-  "updated_at": "2025-05-20T09:37:59.336Z",
+  "updated_at": "2025-05-24T13:38:40.481Z",
   "comment": {
     "text": "\"This translation key is used for the 'Watermark Preview Help' tooltip that explains the purpose of an image preview in a file's watermark settings.\"",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'roughly' isn't directly conveyed in the Arabic translation. While 'تقريبًا' (taqreeban) is the literal translation, it doesn't fully capture the nuance of 'roughly' in this context. It implies an approximation, but not a definitive representation.",
+          "suggestion": "تظهر هذه المعاينة بشكل تقريبي لكيف ستبدو العلامة المائية في ملفاتك."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -69,13 +75,25 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'roughly shows' is better translated as 'likimäärin näyttää' or 'suunnilleen näyttää' rather than 'karkeasti näyttää'. 'Karkeasti' can imply coarseness or roughness in a negative way.",
+          "suggestion": "Tämä esikatselu näyttää likimäärin/suunnilleen kuinka vesileima näytetään tiedostoissasi."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Cet image avec l'aperçu\" is slightly awkward. While technically correct, it's not the most natural way to express 'This image preview'. A more fluent option would be 'L'aperçu de cette image'.",
+          "suggestion": "L'aperçu de cette image montre approximativement comment le filigrane s'affichera dans vos fichiers."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -87,7 +105,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase \"nei tuo i file\" is grammatically incorrect. It should be \"nei tuoi file\". The possessive pronoun needs to agree with the plural noun 'file'.",
+          "suggestion": "nei tuoi file"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -105,7 +129,18 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation uses \"ຕົວໄວກໍ້າ (watermark)\". While technically correct, it's slightly clunky. A more natural phrasing would be to simply use 'watermark' directly, as the English text doesn't explicitly translate the word.",
+          "suggestion": "ຮູບຕົວຢ່າງນີ້ ຈະສະແດງໃຫ້ເຫັນໂດຍປະມານວ່າ watermark ຈະຖືກສະແດງແນວໃດໃນເອກະສານຂອງທ່ານ។"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the inclusion of 'watermark' in parentheses disrupts the flow and might be unnecessary. Lao typically adopts loanwords directly.",
+          "suggestion": "No change needed if parentheses are deliberately intended for initial explanation, otherwise remove them."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +176,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"watermark\" is incorrect. \"Incripționarea\" means \"encryption,\" which is not the intended meaning. \"Watermark\" should be translated to something like \"filigran\".",
+          "suggestion": "Previzualizarea imaginii arată cum aproximativ va fi afișat filigranul în fișierele dvs."
+        },
+        {
+          "type": "grammar",
+          "description": "The word \"aproximativ\" (approximately) is placed awkwardly in the sentence. It disrupts the flow.",
+          "suggestion": "Previzualizarea imaginii arată cum va fi afișat filigranul în fișierele dvs."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +199,23 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'මෙම පෙරබිම් පරිනාමය ඔබට ඇති ෆයිල්වලදී ජල සලකුණු කරාදියි යන්නෙන් පහත දැක්වේ' is not an accurate representation of 'This image preview roughly shows how the watermark will be displayed in your files.'. The phrase 'පරිනාමය' (parinayama) means transformation or evolution and is not appropriate here. 'කරාදියි' (karadiya) means 'appears' but the phrasing is awkward.",
+          "suggestion": "මෙම පෙරදසුන ඔබට ඇති ෆයිල්වල ජල සලකුණු කොහොමද කියලා தோராயமாக காட்டுகிறது."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'පෙරබිම්' (perabim) should ideally be 'පෙරදසුන' (peredasuna) which means 'preview'.",
+          "suggestion": "පෙරදසුන"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is convoluted. A more natural Sinhala sentence order would improve readability.",
+          "suggestion": "මෙම පෙරදසුන ඔබට ඇති ෆයිල්වල ජල සලකුණු කොහොමද කියලා தோராயமாக காட்டுகிறது."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +239,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ova slika prikazuje kako će vodeni žig izgledati u vašim fajlovima.' is a literal translation and could be improved for clarity and naturalness in Serbian. The word 'roughly' in the English source implies an approximate representation, which isn't fully conveyed.",
+          "suggestion": "Ova slika je približan prikaz kako će vodeni žig izgledati u vašim datotekama."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -189,13 +257,25 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Це попередній перегляд того, який вигляд водяний знак буде мати на ваших файлах.' is not a perfect representation of the English content 'This image preview roughly shows how the watermark will be displayed in your files.' It is a bit literal and could be more natural in Ukrainian. The word 'roughly' is missing.",
+          "suggestion": "Це попередній перегляд того, як буде виглядати водяний знак у ваших файлах."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'roughly' is not accurately conveyed in the Vietnamese translation. 'Gần đúng' is a literal translation, but doesn't capture the meaning of 'approximately' or 'a general idea'.",
+          "suggestion": "Bản xem trước hình ảnh này cho thấy cách watermark sẽ được hiển thị gần như thực tế trong các tập tin của bạn."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

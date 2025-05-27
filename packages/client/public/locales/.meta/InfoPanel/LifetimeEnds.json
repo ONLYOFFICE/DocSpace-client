@@ -3,7 +3,7 @@
   "content": "Lifetime ends",
   "content_en_sha1_hash": "5c76ad0e43c3fa8b4dd97bafb684e6e31a365981",
   "created_at": "2025-05-19T21:30:54.892Z",
-  "updated_at": "2025-05-21T09:58:18.494Z",
+  "updated_at": "2025-05-24T10:07:51.362Z",
   "comment": {
     "text": "The \"Lifetime ends\" translation key is used to display a message indicating when a file's lifetime has ended. In the provided UI component, it appears on an InfoPanel and is associated with a specific date and time context. This text should be translated to convey that the file's usage period or validity has expired.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"تنتهي مدة العمر\" (tanatay muddat al-'umr) is a very literal and somewhat awkward translation of \"Lifetime ends.\" It sounds overly formal and doesn't convey the natural tone of the English phrase. A more natural translation would be something like \"تنتهي صلاحية الاشتراك\" (tanatay salahiyat al-ishtirak) for a subscription or \"تنتهي المدة\" (tanatay al-mudda) if the context implies a general duration.",
-          "suggestion": "Consider \"تنتهي صلاحية الاشتراك\" (tanatay salahiyat al-ishtirak) or \"تنتهي المدة\" (tanatay al-mudda) depending on the specific context."
+          "description": "The Arabic translation \"تنتهي مدة العمر\" literally translates to 'the duration of life ends'. While understandable, it's a somewhat literal and slightly awkward translation of 'Lifetime ends'. A more natural phrasing would convey the sense of a lifetime expiring or reaching its conclusion.",
+          "suggestion": "Consider a more idiomatic translation such as \"ينتهي العمر\" (Ya'ntahi al-'Umr) which means 'Life ends' or \"انقضاء العمر\" (Inqidaa' al-'Umr) which means 'Expiration of life'."
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'İstifadə müddəti bitir' while literally meaning 'Usage period ends', doesn't fully capture the nuance of 'Lifetime ends'. 'Lifetime' implies a longer, potentially indefinite period. A more accurate translation might convey that sense.",
-          "suggestion": "Yaşam müddəti bitir"
+          "description": "While 'İstifadə müddəti bitir' is a literal translation, it's not the most natural or idiomatic way to express 'Lifetime ends' in Azerbaijani in this context (likely referring to a subscription or service). A more accurate and common phrasing would emphasize the expiry or termination of the lifetime.",
+          "suggestion": "Consider alternatives like 'Ömrü sona çatır' or 'Təqdimatın sonu' depending on the specific meaning and context of 'Lifetime'."
         }
       ],
       "approved_at": null
@@ -51,13 +51,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Животът приключва' while literally meaning 'Life ends', doesn't quite convey the nuance of 'Lifetime ends' in the context of an expiry or limit. It lacks the sense of a defined period coming to an end. A more accurate translation would depend on the specific context (e.g., subscription, service, etc.).",
-          "suggestion": "Consider alternatives like 'Срокът изтича' (The deadline expires) or 'Валидността изтича' (The validity expires) depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -66,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Konec životnosti\" is a literal translation of 'Lifetime ends' but doesn't convey the intended meaning in a natural way in Czech. It sounds overly technical or formal. A more natural translation would depend on the context (e.g., a product warranty, a subscription, etc.).",
-          "suggestion": "Consider alternative translations such as 'Platnost končí', 'Doba platnosti končí', 'Vyprší platnost', or 'Záruční doba končí' depending on the specific context."
+          "description": "The translation \"Konec životnosti\" is a literal translation of \"Lifetime ends\" but doesn't convey the intended meaning effectively. \"Lifetime ends\" typically refers to an expiration date or the conclusion of a service duration. \"Konec životnosti\" sounds more like the end of a product's operational lifespan.",
+          "suggestion": "Consider alternatives like \"Expiruje\" (Expires), \"Platnost končí\" (Validity expires), or \"Doba trvání končí\" (Duration ends). The best choice depends on the specific context."
         }
       ],
       "approved_at": null
@@ -87,7 +81,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"La vida útil termina\" is a literal translation and may not be the most natural or idiomatic way to express 'Lifetime ends' in Spanish. It sounds somewhat formal and robotic.",
+          "suggestion": "Consider alternatives like \"La duración termina\", \"Finaliza la vigencia\", or \"El período de vida termina\" depending on the context.  \"La vigencia termina\" is often a good option for indicating expiration or validity."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Մշտական լիցենզիան ավարտվում է' literally translates to 'The perpetual license expires'. While conveying a similar meaning to 'Lifetime ends', it's more formal and less concise than a direct translation would be. 'Lifetime ends' implies a broader concept, not just a license.",
-          "suggestion": "Consider a more literal translation such as 'Ժամանակը ավարտվում է' (Zhamanak'e avar tum e), meaning 'Time ends' or 'The lifetime ends'. Alternatively, 'Արժեւժամկետի վերջ' (Arjevzhameki verj) meaning 'End of lifetime' could also work, though it is a more complex phrasing."
+          "description": "The translation \"Մշտական լիցենզիան ավարտվում է\" is a literal translation of 'Permanent license expires'. While understandable, 'Lifetime ends' implies a more finality and could be better conveyed. 'Ամենօրեշկություն վերջանում է' (Amenoreškut'y verjnanum e) or 'Վերջնականապես վերջ' (Verjnakanapes verj) might be more accurate depending on the intended nuance.",
+          "suggestion": "Consider 'Ամենօրեշկություն վերջանում է' or 'Վերջնականապես վերջ' for a more accurate translation."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Italian translation \"La durata sta finendo\" literally translates to \"The duration is ending.\" While not entirely wrong, it lacks the succinctness and naturalness of \"Lifetime ends.\" A more appropriate translation would convey the sense of a lifespan or subscription expiring.",
-          "suggestion": "Consider alternatives like \"Scadenza del periodo\" (Period expiry), \"Fine del periodo\" (End of period), or \"Termine del periodo\" (Term of period)."
+          "description": "The Italian translation \"La durata sta finendo\" does not accurately convey the meaning of \"Lifetime ends\". A more accurate translation would emphasize the expiration or conclusion of a lifetime, rather than just a duration ending.",
+          "suggestion": "Consider alternatives such as \"La durata termina\", \"Scade la durata\", or \"Fine della durata\"."
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation \"有効期限が近づいています\" translates to \"Expiration date is approaching\" or \"Expiration date is near.\" It does not accurately convey the meaning of \"Lifetime ends.\" A more appropriate translation would focus on the end of a lifetime, which is a very different concept.",
-          "suggestion": "Consider translations like \"寿命が尽きます\" (Jyunmei ga tsukiru - 'Lifetime comes to an end') or \"終身にわたって有効ではありません\" (Shuushin ni watatte yuukou dewa arimasen - 'Not valid for a lifetime')."
+          "description": "The translation '有効期限が近づいています' (Yuukou kigen ga chikazuite imasu) translates to 'Expiration date is approaching' or 'The expiration date is getting close'. It doesn't directly translate 'Lifetime ends'. The original phrase 'Lifetime ends' implies a definite endpoint, while the translation suggests an approaching date.",
+          "suggestion": "有効期限:終了 (Yuukou kigen: Shuyou) - Expiration Date: End.  Or, 有効期間は終了しました (Yuukou kikan wa shuyou shimashita) - The validity period has ended."
         }
       ],
       "approved_at": null
@@ -159,13 +159,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Einde levensduur\" is technically correct, \"Lifetime ends\" often implies an expiration date or a specific point in time. A more natural and contextually accurate translation would be \"Vervaldatum\" (expiration date) or \"Looptijd eindigt\".",
-          "suggestion": "Vervaldatum"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -174,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Koniec okresu ważności' is a literal translation, it sounds overly formal and doesn't convey the simple meaning of 'Lifetime ends' in this context. A more natural and appropriate translation would be 'Data ważności kończy się' or 'Ważne do'.",
-          "suggestion": "Data ważności kończy się"
+          "description": "The Polish translation \"Koniec okresu ważności\" translates to \"End of validity period\". While not entirely wrong, it's more literal and less natural than a more concise translation for 'Lifetime ends'. A more appropriate translation would convey the sense of finality and duration implied by 'Lifetime'.",
+          "suggestion": "Koniec życiowej ważności"
         }
       ],
       "approved_at": null
@@ -186,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Fim da vida útil\" is a very literal translation and sounds unnatural in many contexts. A more natural translation for a user interface element like \"Lifetime ends\" would be \"Prazo expirado\" or \"Validade expirada\".",
-          "suggestion": "Prazo expirado"
+          "description": "While \"Fim da vida útil\" is a literal translation of \"Lifetime ends\", it's not the most natural or idiomatic translation in Portuguese for a UI element indicating the expiration of a feature or subscription. It sounds overly technical and somewhat morbid.",
+          "suggestion": "Consider alternatives like \"Prazo expirado\", \"Validade expirada\", or \"Termina em\" depending on the specific context."
         }
       ],
       "approved_at": null
@@ -195,7 +189,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Fim da vida útil\" is a literal translation that doesn't convey the intended meaning of 'Lifetime ends' in the context of a user interface. It sounds overly formal and potentially confusing. A more natural and contextually appropriate translation would be 'Prazo de duração' or 'Validade'.",
+          "suggestion": "Prazo de duração"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Durată de viață se încheie' is a literal translation but sounds awkward in Romanian. A more natural phrasing would convey the meaning of 'Lifetime ends' in a more idiomatic way.",
-          "suggestion": "Sfârșitul duratei de viață"
+          "description": "The Romanian translation \"Durată de viață se încheie\" is a literal translation and doesn't flow naturally in Romanian. A more idiomatic translation would be \"Expira\" or \"Termen de valabilitate expiră\".",
+          "suggestion": "Expira"
         }
       ],
       "approved_at": null
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Russian translation \"Срок действия\" translates to 'Validity period' or 'Expiration date', not 'Lifetime ends'. While related, the nuance is different.",
-          "suggestion": "A more accurate translation might be \"Бессрочный\" (Bessrochnyy) meaning 'Unlimited' or 'Perpetual', depending on the intended meaning of 'Lifetime ends'."
+          "description": "The translation \"Срок действия\" means \"Expiration date\" or \"Term of validity\", not \"Lifetime ends\". While related, it doesn't accurately convey the original meaning.",
+          "suggestion": "Consider alternatives like \"Завершение действия\" (End of action/validity) or \"Окончание срока\" (End of term) to better reflect \"Lifetime ends\"."
         }
       ],
       "approved_at": null
@@ -234,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Doba používania sa končí' is a literal translation that doesn't quite capture the meaning of 'Lifetime ends' in this context. It implies a period of use ending, rather than a lifetime expiring. A more accurate translation would convey the sense of a fixed or predetermined lifespan.",
-          "suggestion": "Consider alternatives like 'Životnosť končí', 'Lehota expiruje', or 'Platnosť končí', depending on the specific nuance intended."
+          "description": "The Slovak translation \"Doba používania sa končí\" is a literal translation but doesn't fully capture the meaning of 'Lifetime ends' in the context of a panel likely referring to a subscription or service. It's overly verbose.",
+          "suggestion": "Consider a more concise and natural translation such as \"Končí platnosť\" or \"Plačná doba končí\"."
         }
       ],
       "approved_at": null
@@ -243,13 +243,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation \"Življenjska doba se je zaključila\" is overly formal and literal for the English phrase \"Lifetime ends\". A more natural and common translation would be something like \"Trajanje poteka\" or \"Izteče rok\".",
-          "suggestion": "Trajanje poteka"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -258,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Век трајања истиче\" is a literal translation that doesn't convey the intended meaning of 'Lifetime ends'. 'Vek' translates to 'age' or 'era', which isn't the best fit. A more accurate translation would emphasize the expiry of a time period.",
-          "suggestion": "Истиче рок важења"
+          "description": "The translation 'Век трајања истиче' literally translates to 'Age of duration expires'. While understandable, it's not the most natural way to convey 'Lifetime ends'. A more accurate and natural translation would be something like 'Истече рок трајања' or 'Завршава се рок трајања'.",
+          "suggestion": "Истече рок трајања"
         }
       ],
       "approved_at": null
@@ -279,13 +273,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Період існування закінчується\" is a literal translation and may not be the most natural or idiomatic way to express 'Lifetime ends' in Ukrainian. It focuses on the period of existence rather than the end of a lifetime.",
-          "suggestion": "Consider alternatives such as \"Кінець терміну дії\" or \"Термін дії закінчився\" depending on the context.  \"Закінчення терміну дії\" could also work."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -294,8 +282,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Thời gian tồn tại kết thúc\" is technically correct, it's a bit literal and doesn't flow naturally in Vietnamese. A more common and natural translation for \"Lifetime ends\" in this context (likely referring to a subscription or service) would be \"Hết hạn\" or \"Kết thúc vòng đời\".",
-          "suggestion": "Hết hạn"
+          "description": "While technically correct, \"Thời gian tồn tại kết thúc\" is a very literal and somewhat awkward translation of \"Lifetime ends.\" It sounds overly formal and not natural in Vietnamese. A more idiomatic translation would be more appropriate.",
+          "suggestion": "Thời hạn kết thúc"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing 'thời gian tồn tại' (time of existence) is not the most natural way to express 'lifetime' in this context. It can sound slightly odd.",
+          "suggestion": "Using a single word like 'thời hạn' or 'kết thúc hạn' conveys the meaning of 'lifetime ends' more concisely and naturally."
         }
       ],
       "approved_at": null

@@ -28,6 +28,7 @@ import React, { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { ReactSVG } from "react-svg";
 import Folder32ReactSvgUrl from "PUBLIC_DIR/images/icons/32/folder.svg?url";
+import ImageReactSvgUrl from "PUBLIC_DIR/images/icons/96/folder.svg?url";
 import { Link } from "../../link";
 import { Badge } from "../../badge";
 import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDecorator";
@@ -35,8 +36,6 @@ import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDe
 import { FolderTile } from "./FolderTile";
 import { FolderTileProps } from "./FolderTile.types";
 import { TileContent } from "../tile-content/TileContent";
-
-import ImageReactSvgUrl from "PUBLIC_DIR/images/icons/96/folder.svg?url";
 
 const element = (
   <ReactSVG

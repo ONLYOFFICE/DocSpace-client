@@ -24,25 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
+import { http, HttpResponse } from "msw";
 
-import React from "react";
-import { ReactSVG } from "react-svg";
-import { useTranslation } from "react-i18next";
+import { BASE_URL } from "../../utils";
+import { ValidationStatus } from "../../../../enums";
 
-import { Text } from "../../../components/text";
+const url = `${BASE_URL}/files/share/*/password`;
 
-import styles from "./WhiteLabel.module.scss";
+export const createValidatePublicRoomPasswordHandler = (
+  wrongPassword: boolean = false,
+) =>
+  http.post(url, () => {
+    const response: { id: string; status: ValidationStatus } = {
+      id: "1",
+      status: ValidationStatus.Ok,
+    };
 
-export const NotAvailable = () => {
-  const { t } = useTranslation("Common");
+    if (wrongPassword) {
+      response.status = ValidationStatus.InvalidPassword;
+    }
 
-  return (
-    <div className={styles.notAvailableWrapper}>
-      <ReactSVG className={styles.lockIcon} src={LockedReactSvgUrl} />
-      <Text fontSize="12px" fontWeight="600">
-        {t("NotAvailableUnderLicense")}
-      </Text>
-    </div>
-  );
-};
+    return HttpResponse.json({ response });
+  });

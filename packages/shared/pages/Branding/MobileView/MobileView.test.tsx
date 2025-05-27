@@ -24,25 +24,49 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
-
 import React from "react";
-import { ReactSVG } from "react-svg";
-import { useTranslation } from "react-i18next";
+import "@testing-library/jest-dom";
+import { render, screen, fireEvent } from "@testing-library/react";
 
-import { Text } from "../../../components/text";
+import { MobileView } from ".";
 
-import styles from "./WhiteLabel.module.scss";
-
-export const NotAvailable = () => {
-  const { t } = useTranslation("Common");
-
-  return (
-    <div className={styles.notAvailableWrapper}>
-      <ReactSVG className={styles.lockIcon} src={LockedReactSvgUrl} />
-      <Text fontSize="12px" fontWeight="600">
-        {t("NotAvailableUnderLicense")}
-      </Text>
-    </div>
-  );
+const baseProps = {
+  isSettingPaid: false,
+  displayAbout: true,
+  displayAdditional: true,
+  baseUrl: "/test-url",
+  onClickLink: jest.fn(),
 };
+
+describe("MobileView", () => {
+  it("renders all sections when displayAbout and displayAdditional are true", () => {
+    render(<MobileView {...baseProps} />);
+
+    expect(screen.getByText("BrandName")).toBeInTheDocument();
+    expect(screen.getByText("WhiteLabel")).toBeInTheDocument();
+    expect(screen.getByText("CompanyInfoSettings")).toBeInTheDocument();
+    expect(screen.getByText("AdditionalResources")).toBeInTheDocument();
+  });
+
+  it("hides 'CompanyInfoSettings' section when displayAbout is false", () => {
+    render(<MobileView {...baseProps} displayAbout={false} />);
+
+    expect(screen.queryByText("CompanyInfoSettings")).not.toBeInTheDocument();
+  });
+
+  it("hides 'AdditionalResources' section when displayAdditional is false", () => {
+    render(<MobileView {...baseProps} displayAdditional={false} />);
+
+    expect(screen.queryByText("AdditionalResources")).not.toBeInTheDocument();
+  });
+
+  it("calls onClickLink when a category is clicked", () => {
+    const onClick = jest.fn();
+    render(<MobileView {...baseProps} onClickLink={onClick} />);
+
+    const firstCategory = screen.getByText("BrandName");
+    fireEvent.click(firstCategory);
+
+    expect(onClick).toHaveBeenCalled();
+  });
+});

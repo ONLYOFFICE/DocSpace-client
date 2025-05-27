@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,53 +24,57 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { mobile } from "../../../utils";
+import { Meta, StoryObj } from "@storybook/react";
 
-export const StyledBrandName = styled.div`
-  .header-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDecorator";
 
-    @media ${mobile} {
-      display: none;
-    }
-  }
+import { WhiteLabel } from ".";
+import { mockLogos } from "./mockData";
 
-  .wl-subtitle {
-    margin-top: 16px;
-    margin-bottom: 16px;
-    line-height: 20px;
-    color: ${(props) => props.theme.client.settings.common.descriptionColor};
+const meta = {
+  title: "Pages/Branding/WhiteLabel",
+  component: WhiteLabel,
+  parameters: {
+    docs: {
+      description: {
+        component: "Settings for customizing logos and white label branding.",
+      },
+    },
+  },
+  tags: ["autodocs"],
+  decorators: [i18nextStoryDecorator],
+} satisfies Meta<typeof WhiteLabel>;
 
-    @media ${mobile} {
-      margin-top: 0;
-    }
-  }
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-  .wl-helper {
-    display: flex;
-    gap: 4px;
-    align-items: center;
+export const Default: Story = {
+  args: {
+    isSettingPaid: true,
+    logoUrls: mockLogos,
+    showAbout: true,
+    showNotAvailable: false,
+    standalone: false,
+    onSave: (data) => console.log("Save clicked with data:", data),
+    onRestoreDefault: () => console.log("Restore default clicked"),
+    isSaving: false,
+    enableRestoreButton: true,
+    setLogoUrls: (logoUrls) => console.log("Logo URLs updated:", logoUrls),
+    isWhiteLabelLoaded: true,
+    defaultWhiteLabelLogoUrls: mockLogos,
+  },
+};
 
-    .wl-helper-label > div {
-      display: inline-flex;
-      margin: 0 4px;
-    }
-  }
+export const Paid: Story = {
+  args: {
+    ...Default.args,
+    isSettingPaid: false,
+  },
+};
 
-  .input {
-    max-width: 350px;
-  }
-
-  .paid-badge {
-    cursor: auto;
-    background-color: ${(props) =>
-      props.theme.client.settings.common.whiteLabel.paidBadgeBackground};
-  }
-
-  .brand-name-buttons {
-    margin-top: 20px;
-  }
-`;
+export const NotAvailable: Story = {
+  args: {
+    ...Default.args,
+    showNotAvailable: true,
+  },
+};

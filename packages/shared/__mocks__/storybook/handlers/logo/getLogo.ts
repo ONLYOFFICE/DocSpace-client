@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,48 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
+import { http, HttpResponse } from "msw";
 
-import React from "react";
-import styled from "styled-components";
-import { ReactSVG } from "react-svg";
-import { Text } from "../../../components/text";
-import { TTranslation } from "../../../types";
+import LoginPageSvgUrl from "PUBLIC_DIR/images/logo/loginpage.svg?url";
+import LoginPageDarkSvgUrl from "PUBLIC_DIR/images/logo/dark_loginpage.svg?url";
 
-const StyledWrapper = styled.div`
-  background: ${(props) =>
-    props.theme.client.settings.common.whiteLabel.notAvailableBackground};
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 16px;
-  border-radius: 6px;
-  margin-bottom: 16px;
+export const createGetLogoHandler = () => {
+  const url = `${window.location.origin}/logo.ashx`;
 
-  .lock-icon {
-    width: 16px;
-    height: 16px;
-    div > svg {
-      path {
-        fill: ${(props) =>
-          props.theme.client.settings.common.whiteLabel.textColor};
-      }
-    }
-  }
-`;
+  return http.get(url, async ({ request }) => {
+    const reqUrl = new URL(request.url);
+    const dark = reqUrl.searchParams.get("dark") === "true";
+    const logoUrl = dark ? LoginPageDarkSvgUrl : LoginPageSvgUrl;
 
-interface IProps {
-  t: TTranslation;
-}
-
-export const NotAvailable = (props: IProps) => {
-  const { t } = props;
-  return (
-    <StyledWrapper>
-      <ReactSVG className="lock-icon" src={LockedReactSvgUrl} />
-      <Text fontSize="12px" fontWeight="600">
-        {t("NotAvailableUnderLicense")}
-      </Text>
-    </StyledWrapper>
-  );
+    return HttpResponse.redirect(logoUrl, 302);
+  });
 };

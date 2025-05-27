@@ -24,57 +24,61 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { mobile } from "../../../utils";
+import { Meta, StoryObj } from "@storybook/react";
 
-export const StyledCompanyInfo = styled.div<{ isSettingPaid: boolean }>`
-  .link {
-    font-weight: 600;
-    border-bottom: ${(props) =>
-      props.theme.client.settings.common.companyInfo.border};
-    border-color: ${(props) =>
-      !props.isSettingPaid &&
-      props.theme.client.settings.common.companyInfo.color};
-  }
+import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDecorator";
 
-  .description,
-  .link {
-    color: ${(props) =>
-      !props.isSettingPaid &&
-      props.theme.client.settings.common.companyInfo.color};
-  }
+import { BrandName } from ".";
 
-  .section-description {
-    color: ${(props) =>
-      props.theme.client.settings.common.brandingDescriptionColor};
-    line-height: 20px;
-    padding-bottom: 20px;
-  }
+const meta = {
+  title: "Pages/Branding/BrandName",
+  component: BrandName,
+  parameters: {
+    docs: {
+      description: {
+        component: "Settings for customizing the product brand name.",
+      },
+    },
+  },
+  tags: ["autodocs"],
+  decorators: [i18nextStoryDecorator],
+} satisfies Meta<typeof BrandName>;
 
-  .settings-block {
-    max-width: 433px;
-  }
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-  .text-input {
-    font-size: 13px;
-  }
+export const Default: Story = {
+  args: {
+    showNotAvailable: false,
+    isSettingPaid: true,
+    standalone: false,
+    isBrandNameLoaded: true,
+    defaultBrandName: "ONLYOFFICE DocSpace",
+    brandName: "ONLYOFFICE DocSpace",
+    onSave: (data) => console.log("Save clicked with data:", data),
+  },
+};
 
-  .save-cancel-buttons {
-    margin-top: 24px;
-    bottom: 0;
-  }
+export const Paid: Story = {
+  args: {
+    showNotAvailable: false,
+    isSettingPaid: false,
+    standalone: false,
+    isBrandNameLoaded: true,
+    defaultBrandName: "ONLYOFFICE DocSpace",
+    brandName: "ONLYOFFICE DocSpace",
+    onSave: (data) => console.log("Save clicked with data:", data),
+  },
+};
 
-  .description {
-    padding-bottom: 16px;
-  }
-
-  @media ${mobile} {
-    .header {
-      display: none;
-    }
-
-    .settings-block {
-      max-width: 100%;
-    }
-  }
-`;
+export const NotAvailable: Story = {
+  args: {
+    showNotAvailable: true,
+    isSettingPaid: false,
+    standalone: false,
+    isBrandNameLoaded: true,
+    defaultBrandName: "ONLYOFFICE DocSpace",
+    brandName: "ONLYOFFICE DocSpace",
+    onSave: (data) => console.log("Save clicked with data:", data),
+  },
+};

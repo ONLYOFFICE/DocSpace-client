@@ -84,12 +84,12 @@ export const QuickButtons = (props: QuickButtonsProps) => {
   const isRow = viewAs === "row";
 
   const IconLock = useMemo(() => {
-    if (isMobile) {
+    if (isMobile && !isTile) {
       return LockedReact12Svg;
     }
 
     return locked ? FileActionsLockedReactSvg : LockedReactSvg;
-  }, [locked, isMobile]);
+  }, [locked, isMobile, isTile]);
 
   const colorLock = locked
     ? theme.filesQuickButtons.sharedColor
@@ -216,6 +216,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               iconName={LinkReactSvgUrl}
               className={classNames("badge copy-link icons-group", {
                 "create-share-link": !item.shared,
+                "link-shared": item.shared,
               })}
               size={sizeQuickButton}
               onClick={onClickShare}
@@ -229,7 +230,9 @@ export const QuickButtons = (props: QuickButtonsProps) => {
             <ColorTheme
               themeId={ThemeId.IconButton}
               iconNode={<IconLock />}
-              className="badge lock-file icons-group"
+              className={classNames("badge lock-file icons-group", {
+                "file-locked": locked,
+              })}
               size={sizeQuickButton}
               data-id={id}
               data-locked={!!locked}

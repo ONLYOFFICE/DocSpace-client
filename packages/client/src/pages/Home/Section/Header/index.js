@@ -170,7 +170,7 @@ const SectionHeaderContent = (props) => {
     setRefMap,
     deleteRefMap,
     isPersonalReadOnly,
-
+    showTemplateBadge,
     aiChatIsVisible,
     setAiChatIsVisible,
     withChat,
@@ -394,7 +394,7 @@ const SectionHeaderContent = (props) => {
   const stateIsShared = location?.state?.isShared;
   const stateIsExternal = location?.state?.isExternal;
   const stateIsLifetimeEnabled = location?.state?.isLifetimeEnabled;
-  const showTemplateBadge =
+  const stateShowTemplateBadge =
     location?.state?.rootFolderType === FolderType.RoomTemplates &&
     !stateIsRoot;
 
@@ -585,7 +585,8 @@ const SectionHeaderContent = (props) => {
     ? { isCloseable: true, onCloseClick: onCloseIndexMenu }
     : {};
 
-  const badgeLabel = showTemplateBadge ? t("Files:Template") : "";
+  const badgeLabel =
+    stateShowTemplateBadge || showTemplateBadge ? t("Files:Template") : "";
 
   const warningText = isRecycleBinFolder
     ? t("TrashErasureWarning")
@@ -912,6 +913,7 @@ export default inject(
         : pathParts?.length === 1;
 
     const isArchive = rootFolderType === FolderType.Archive;
+    const isTemplate = rootFolderType === FolderType.RoomTemplates;
 
     const isShared = shared || navigationPath.find((r) => r.shared);
 
@@ -1030,7 +1032,7 @@ export default inject(
       setGuidAnimationVisible,
       setRefMap,
       deleteRefMap,
-
+      showTemplateBadge: isTemplate && !isRoot,
       aiChatIsVisible,
       setAiChatIsVisible,
       withChat,

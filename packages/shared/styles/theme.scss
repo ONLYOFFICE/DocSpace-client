@@ -2226,3 +2226,11 @@
   --files-version-history-badge-fill: #{$main-orange};
   --files-version-history-badge-stroke: #{$gray-dark};
 }
+
+.light {
+  --accounts-badges-pending-color: #{$gray};
+}
+
+.dark {
+  --accounts-badges-pending-color: #{$gray-dark};
+}

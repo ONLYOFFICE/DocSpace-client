@@ -97,6 +97,10 @@ export type PeopleSelectorProps = TSelectorHeader &
     withSearch?: boolean;
     searchPlaceholder?: string;
     onSearch?: (searchTerm: string) => void;
+    headerProps?: {
+      headerLabel?: string;
+    };
+    items?: unknown[];
 
     // Accessibility attributes
     "aria-label"?: string;

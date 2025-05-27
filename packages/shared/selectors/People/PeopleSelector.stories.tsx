@@ -26,87 +26,43 @@
 
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import { AccountsSearchArea, EmployeeStatus, EmployeeType, ShareAccessRights } from "../../enums";
+import styled from "styled-components";
+
+import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
+import EmptyScreenFilter from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.light.svg";
+import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
+
+import { EmployeeStatus, EmployeeType, ShareAccessRights } from "../../enums";
+import { AvatarRole } from "../../components/avatar";
+import { SelectorAccessRightsMode } from "../../components/selector";
+import { TSelectorItem } from "../../components/selector/Selector.types";
 
 import PeopleSelector from "./index";
-import { SelectorAccessRightsMode } from "../../components/selector";
 
-// Mock API calls for Storybook
-jest.mock("../../api/people", () => ({
-  getUserList: jest.fn().mockResolvedValue({
-    items: [
-      {
-        id: "user1",
-        displayName: "John Doe",
-        email: "john@example.com",
-        avatar: "",
-        hasAvatar: false,
-        isOwner: false,
-        isAdmin: false,
-        isVisitor: false,
-        isCollaborator: true,
-        isRoomAdmin: false,
-        status: EmployeeStatus.Active,
-        userType: EmployeeType.Collaborator,
-        shared: false,
-        groups: [],
-      },
-      {
-        id: "user2",
-        displayName: "Jane Smith",
-        email: "jane@example.com",
-        avatar: "",
-        hasAvatar: false,
-        isOwner: false,
-        isAdmin: true,
-        isVisitor: false,
-        isCollaborator: false,
-        isRoomAdmin: false,
-        status: EmployeeStatus.Active,
-        userType: EmployeeType.Admin,
-        shared: false,
-        groups: [],
-      },
-      {
-        id: "user3",
-        displayName: "Bob Johnson",
-        email: "bob@example.com",
-        avatar: "",
-        hasAvatar: false,
-        isOwner: false,
-        isAdmin: false,
-        isVisitor: true,
-        isCollaborator: false,
-        isRoomAdmin: false,
-        status: EmployeeStatus.Active,
-        userType: EmployeeType.Guest,
-        shared: false,
-        groups: [],
-      },
-    ],
-    total: 3,
-  }),
-  getMembersList: jest.fn().mockResolvedValue({
-    items: [
-      {
-        id: "group1",
-        name: "Marketing",
-        manager: "user1",
-      },
-      {
-        id: "group2",
-        name: "Development",
-        manager: "user2",
-      },
-    ],
-    total: 2,
-  }),
-}));
+const StyledRowLoader = styled.div`
+  width: 100%;
+  height: 48px;
+`;
 
-const meta: Meta<typeof PeopleSelector> = {
+const StyledSearchLoader = styled.div`
+  width: 100%;
+  height: 32px;
+`;
+
+const meta = {
   title: "Components/Selectors/PeopleSelector",
   component: PeopleSelector,
+  argTypes: {
+    withHeader: { control: "boolean" },
+    withSearch: { control: "boolean" },
+    isMultiSelect: { control: "boolean" },
+    withGroups: { control: "boolean" },
+    withGuests: { control: "boolean" },
+    withCancelButton: { control: "boolean" },
+    withAccessRights: { control: "boolean" },
+    withFooterCheckbox: { control: "boolean" },
+    withInfo: { control: "boolean" },
+  },
   parameters: {
     docs: {
       description: {
@@ -114,140 +70,350 @@ const meta: Meta<typeof PeopleSelector> = {
       },
     },
   },
-  argTypes: {
-    withHeader: {
-      control: "boolean",
-      description: "Show header",
-      defaultValue: true,
-    },
-    withSearch: {
-      control: "boolean",
-      description: "Show search",
-      defaultValue: true,
-    },
-    isMultiSelect: {
-      control: "boolean",
-      description: "Allow multiple selection",
-      defaultValue: false,
-    },
-    withGroups: {
-      control: "boolean",
-      description: "Include groups tab",
-      defaultValue: false,
-    },
-    withGuests: {
-      control: "boolean",
-      description: "Include guests tab",
-      defaultValue: false,
-    },
-    withCancelButton: {
-      control: "boolean",
-      description: "Show cancel button",
-      defaultValue: false,
-    },
-    withAccessRights: {
-      control: "boolean",
-      description: "Show access rights selector",
-      defaultValue: false,
-    },
+} satisfies Meta<typeof PeopleSelector>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+// Create users with real names and emails
+const users: TSelectorItem[] = [
+  {
+    id: "user-1",
+    key: "user-1",
+    label: "John Smith",
+    email: "john.smith@example.com",
+    isOwner: true,
+    isAdmin: true,
+    isVisitor: false,
+    isCollaborator: false,
+    isRoomAdmin: true,
+    avatar: "",
+    role: AvatarRole.admin,
+    hasAvatar: false,
+    userType: EmployeeType.Admin,
+    status: EmployeeStatus.Active,
+    "aria-label": "User John Smith",
+    "data-user-id": "user-1",
   },
+  {
+    id: "user-2",
+    key: "user-2",
+    label: "Sarah Johnson",
+    email: "sarah.johnson@example.com",
+    isOwner: false,
+    isAdmin: false,
+    isVisitor: false,
+    isCollaborator: true,
+    isRoomAdmin: false,
+    avatar: "",
+    role: AvatarRole.collaborator,
+    hasAvatar: false,
+    userType: EmployeeType.User,
+    status: EmployeeStatus.Active,
+    "aria-label": "User Sarah Johnson",
+    "data-user-id": "user-2",
+  },
+  {
+    id: "user-3",
+    key: "user-3",
+    label: "Michael Brown",
+    email: "michael.brown@example.com",
+    isOwner: false,
+    isAdmin: false,
+    isVisitor: false,
+    isCollaborator: true,
+    isRoomAdmin: false,
+    avatar: "",
+    role: AvatarRole.collaborator,
+    hasAvatar: false,
+    userType: EmployeeType.User,
+    status: EmployeeStatus.Active,
+    "aria-label": "User Michael Brown",
+    "data-user-id": "user-3",
+  },
+  {
+    id: "user-4",
+    key: "user-4",
+    label: "Emily Davis",
+    email: "emily.davis@example.com",
+    isOwner: false,
+    isAdmin: false,
+    isVisitor: true,
+    isCollaborator: false,
+    isRoomAdmin: false,
+    avatar: "",
+    role: AvatarRole.guest,
+    hasAvatar: false,
+    userType: EmployeeType.Guest,
+    status: EmployeeStatus.Active,
+    "aria-label": "User Emily Davis",
+    "data-user-id": "user-4",
+  },
+  {
+    id: "user-5",
+    key: "user-5",
+    label: "David Wilson",
+    email: "david.wilson@example.com",
+    isOwner: false,
+    isAdmin: true,
+    isVisitor: false,
+    isCollaborator: false,
+    isRoomAdmin: true,
+    avatar: "",
+    role: AvatarRole.admin,
+    hasAvatar: false,
+    userType: EmployeeType.Admin,
+    status: EmployeeStatus.Active,
+    "aria-label": "User David Wilson",
+    "data-user-id": "user-5",
+  },
+];
+
+// Create groups
+const groups: TSelectorItem[] = [
+  {
+    id: "group-1",
+    key: "group-1",
+    label: "Marketing Team",
+    name: "Marketing Team",
+    isGroup: true,
+    "aria-label": "Group Marketing Team",
+    "data-group-id": "group-1",
+  },
+  {
+    id: "group-2",
+    key: "group-2",
+    label: "Development Team",
+    name: "Development Team",
+    isGroup: true,
+    "aria-label": "Group Development Team",
+    "data-group-id": "group-2",
+  },
+  {
+    id: "group-3",
+    key: "group-3",
+    label: "Design Team",
+    name: "Design Team",
+    isGroup: true,
+    "aria-label": "Group Design Team",
+    "data-group-id": "group-3",
+  },
+  {
+    id: "group-4",
+    key: "group-4",
+    label: "Sales Department",
+    name: "Sales Department",
+    isGroup: true,
+    "aria-label": "Group Sales Department",
+    "data-group-id": "group-4",
+  },
+];
+
+// Create access rights
+const accessRights = [
+  {
+    id: ShareAccessRights.FullAccess,
+    key: "fullAccess",
+    label: "Full Access",
+    description: "Can view, edit, and share",
+  },
+  {
+    id: ShareAccessRights.ReadWrite,
+    key: "readWrite",
+    label: "Read & Write",
+    description: "Can view and edit",
+  },
+  {
+    id: ShareAccessRights.Read,
+    key: "readOnly",
+    label: "Read Only",
+    description: "Can only view",
+  },
+  {
+    id: ShareAccessRights.Restrict,
+    key: "restricted",
+    label: "Restricted",
+    description: "No access",
+  },
+];
+
+const selectedUsers = [users[0], users[2]];
+
+const Template = (args) => {
+  const rowLoader = <StyledRowLoader />;
+  const searchLoader = <StyledSearchLoader />;
+
+  return (
+    <div
+      style={{
+        width: "480px",
+        height: "485px",
+        margin: "auto",
+      }}
+    >
+      <PeopleSelector
+        {...args}
+        rowLoader={rowLoader}
+        searchLoader={searchLoader}
+        emptyScreenImage={EmptyScreenPersonsSvgUrl}
+        emptyScreenHeader="No users found"
+        emptyScreenDescription="Try changing your search or filter criteria"
+        searchEmptyScreenImage={EmptyScreenFilter}
+        searchEmptyScreenHeader="No results found"
+        searchEmptyScreenDescription="Try changing your search query"
+        aria-label="People selector"
+        data-selector-type="people"
+        data-test-id="people-selector"
+        isLoading={false}
+      />
+    </div>
+  );
+};
+
+export const Default: Story = {
+  render: (args) => <Template {...args} />,
   args: {
+    items: users,
     withHeader: true,
     headerProps: {
       headerLabel: "Select People",
-      onCloseClick: action("onCloseClick"),
+      onCloseClick: () => {},
     },
-    withSearch: true,
+    withSearch: false,
+    onSearch: () => {},
+    onClearSearch: () => {},
+    onSubmit: () => {},
     searchPlaceholder: "Search users",
-    onSearch: action("onSearch"),
-    onClearSearch: action("onClearSearch"),
     isMultiSelect: false,
     submitButtonLabel: "Select",
-    onSubmit: action("onSubmit"),
+    headerLabel: "Room list",
+    onBackClick: () => {},
+    searchPlaceholder: "Search",
+    searchValue: "",
+
+    onSelect: () => {},
+    isMultiSelect: false,
+    selectedItems: selectedUsers,
+    acceptButtonLabel: "Add",
+    onAccept: () => {},
+    withSelectAll: false,
+    selectAllLabel: "All accounts",
+
+    onSelectAll: () => {},
+    withAccessRights: false,
+    accessRights,
+    selectedAccessRight: accessRights[1],
+    onAccessRightsChange: () => {},
+    withCancelButton: false,
+    cancelButtonLabel: "Cancel",
+    onCancel: () => {},
+    emptyScreenImage: EmptyScreenFilter,
+    emptyScreenHeader: "No other accounts here yet",
+    emptyScreenDescription:
+      "The list of users previously invited to DocSpace or separate rooms will appear here. You will be able to invite these users for collaboration at any time.",
+    searchEmptyScreenImage: EmptyScreenFilter,
+    searchEmptyScreenHeader: "No other accounts here yet search",
+    searchEmptyScreenDescription:
+      " SEARCH !!! The list of users previously invited to DocSpace or separate rooms will appear here. You will be able to invite these users for collaboration at any time.",
+    totalItems: users.length,
+    hasNextPage: true,
+    isNextPageLoading: false,
+    isLoading: false,
+    withBreadCrumbs: false,
+    breadCrumbs: [],
+    onSelectBreadCrumb: () => {},
+    withoutBackButton: false,
+    withSearch: false,
+    isBreadCrumbsLoading: false,
+    alwaysShowFooter: false,
+    disableAcceptButton: false,
+    descriptionText: "",
   },
 };
 
-export default meta;
-type Story = StoryObj<typeof PeopleSelector>;
-
-export const Default: Story = {
-  args: {},
-};
-
 export const WithMultiSelect: Story = {
+  render: (args) => <Template {...args} />,
   args: {
+    ...Default.args,
     isMultiSelect: true,
+    selectedItems: selectedUsers,
   },
 };
 
 export const WithGroups: Story = {
+  render: (args) => <Template {...args} />,
   args: {
+    ...Default.args,
     withGroups: true,
   },
 };
 
 export const WithGuests: Story = {
+  render: (args) => <Template {...args} />,
   args: {
+    ...Default.args,
     withGuests: true,
   },
 };
 
 export const WithAccessRights: Story = {
+  render: (args) => <Template {...args} />,
   args: {
+    ...Default.args,
     withAccessRights: true,
     isMultiSelect: true,
-    accessRights: [
-      {
-        id: ShareAccessRights.FullAccess,
-        label: "Full Access",
-        description: "Can view, edit and share",
-      },
-      {
-        id: ShareAccessRights.ReadWrite,
-        label: "Read & Write",
-        description: "Can view and edit",
-      },
-      {
-        id: ShareAccessRights.Read,
-        label: "Read Only",
-        description: "Can only view",
-      },
-      {
-        id: ShareAccessRights.Restrict,
-        label: "Restrict Access",
-        description: "No access",
-      },
-    ],
-    selectedAccessRight: ShareAccessRights.Read,
-    onAccessRightsChange: action("onAccessRightsChange"),
-    accessRightsMode: SelectorAccessRightsMode.Detailed,
+    accessRights,
+    selectedAccessRight: accessRights[1],
+    accessRightsMode: SelectorAccessRightsMode.Dropdown,
   },
 };
 
 export const WithCancelButton: Story = {
+  render: (args) => <Template {...args} />,
   args: {
+    ...Default.args,
     withCancelButton: true,
     cancelButtonLabel: "Cancel",
-    onCancel: action("onCancel"),
   },
 };
 
-export const WithDisabledUsers: Story = {
+export const WithFooterCheckbox: Story = {
+  render: (args) => <Template {...args} />,
   args: {
-    disableInvitedUsers: ["user1"],
+    ...Default.args,
+    withFooterCheckbox: true,
+    footerCheckboxLabel: "Notify users",
+    isChecked: false,
+  },
+};
+
+export const WithInfo: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    withInfo: true,
+    infoText: "Select users to collaborate with",
   },
 };
 
 export const GroupsOnly: Story = {
+  render: (args) => <Template {...args} />,
   args: {
+    ...Default.args,
+    items: groups,
     withGroups: true,
     isGroupsOnly: true,
+    headerProps: {
+      headerLabel: "Select Groups",
+    },
+    searchPlaceholder: "Search groups",
   },
 };
 
-export const GuestsOnly: Story = {
+export const WithDisabledUsers: Story = {
+  render: (args) => <Template {...args} />,
   args: {
-    withGuests: true,
-    isGuestsOnly: true,
+    ...Default.args,
+    disableInvitedUsers: [users[1].id, users[3].id],
   },
 };

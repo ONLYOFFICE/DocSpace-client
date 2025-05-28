@@ -26,7 +26,7 @@
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 import { AxiosRequestConfig } from "axios";
-import { FilesRoomsApi } from "@onlyoffice/docspace-api-typescript";
+import { RoomsApi } from "@onlyoffice/docspace-api-typescript";
 
 import AxiosClient, {
   TReqOption,
@@ -40,13 +40,13 @@ const { url: proxyURL } = proxyConf;
 
 const client = new AxiosClient();
 
-class EnhancedRoomsApi extends FilesRoomsApi {
+class EnhancedRoomsApi extends RoomsApi {
   constructor() {
     super(dsApiConfiguration);
   }
 
   async makeApiRequest<T>(
-    apiMethod: keyof FilesRoomsApi,
+    apiMethod: keyof RoomsApi,
     args: unknown[] = [],
     options: ApiOptions = {},
     skipRedirect = false,
@@ -217,7 +217,7 @@ export const roomsClient = new Proxy(enhancedRoomsApi, {
         const isOAuth = options.isOAuth || false;
 
         return target.makeApiRequest(
-          prop as keyof FilesRoomsApi,
+          prop as keyof RoomsApi,
           args,
           options,
           skipRedirect,

@@ -394,9 +394,10 @@ export function setCompanyInfoSettings(
   email,
   phone,
   site,
+  hideAbout,
 ) {
   const data = {
-    settings: { address, companyName, email, phone, site },
+    settings: { address, companyName, email, phone, site, hideAbout },
   };
 
   return request({

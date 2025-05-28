@@ -84,6 +84,10 @@ export const getIsCustomizationAvailable = (quota?: TPaymentQuota) => {
     ?.value as boolean;
 };
 
+export const getIsBrandingAvailable = (quota?: TPaymentQuota) => {
+  return quota?.features.find((obj) => obj.id === "branding")?.value as boolean;
+};
+
 export const getIsDefaultWhiteLabel = (
   whiteLabelIsDefault: TDefaultWhiteLabel,
 ) => {

@@ -1025,7 +1025,9 @@ class SettingsStore {
     this.setAdditionalResourcesData(res);
     this.setAdditionalResourcesIsDefault(res.isDefault);
 
-    this.getSettings();
+    if (!this.isFirstLoaded && !this.isLoading) {
+      this.getSettings();
+    }
   };
 
   getPortalCultures = async () => {
@@ -1074,6 +1076,7 @@ class SettingsStore {
 
     this.setCompanyInfoSettingsData(res);
     this.setCompanyInfoSettingsIsDefault(res.isDefault);
+    this.getSettings();
   };
 
   getWhiteLabelLogoUrls = async () => {

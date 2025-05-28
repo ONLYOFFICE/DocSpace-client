@@ -24,73 +24,39 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import styled from "styled-components";
-
-import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
-import { Text } from "../../text";
-
-import { mobile } from "../../../utils";
-import { globalColors } from "../../../themes";
-
-const StyledWrapper = styled.div`
-  width: 100%;
+.buttonDelete {
+  cursor: pointer;
   display: flex;
-  flex-direction: column;
-  gap: 24px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 0;
+  background: var(--button-delete-bg);
+  border: 1px solid var(--button-delete-border);
+  border-radius: 3px;
+  margin-bottom: 12px;
+  margin-top: 4px;
 
-  @media ${mobile} {
-    display: none;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--button-delete-bg-hover);
+    border: 1px solid var(--button-delete-border-hover);
   }
 
-  .avatar {
-    height: 124px;
-    width: 124px;
-    align-self: center;
+  .text {
+    user-select: none;
+    font-weight: 600;
+    line-height: 20px;
+    color: var(--button-delete-text);
   }
 
-  .name-preview {
-    max-width: 198px;
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    padding: 8px;
-    border: 1px solid ${globalColors.grayLightMid};
-    border-radius: 6px;
+  svg {
+    padding-top: 2px;
+    path {
+      fill: var(--button-delete-icon-color);
+    }
   }
-`;
-
-const AvatarPreview = ({
-  avatar,
-  userName,
-}: {
-  avatar: string;
-  userName: string;
-}) => {
-  return (
-    <StyledWrapper>
-      <Avatar
-        className="avatar"
-        size={AvatarSize.max}
-        role={AvatarRole.user}
-        source={avatar}
-        userName={userName}
-        editing={false}
-      />
-      <div className="name-preview">
-        <Avatar
-          size={AvatarSize.min}
-          role={AvatarRole.user}
-          source={avatar}
-          userName={userName}
-          editing={false}
-        />
-        <Text fontWeight={600} fontSize="15px" truncate>
-          {userName}
-        </Text>
-      </div>
-    </StyledWrapper>
-  );
-};
-
-export default AvatarPreview;
+}

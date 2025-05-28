@@ -76,7 +76,6 @@ export async function getUser() {
 }
 
 export async function getSettings(share?: string) {
-  debugger;
   const hdrs = await headers();
   const cookie = hdrs.get("cookie");
 

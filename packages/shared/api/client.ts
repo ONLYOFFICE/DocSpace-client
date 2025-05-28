@@ -44,13 +44,15 @@ interface BaseApiClass {
 }
 
 class EnhancedApiClient<T extends BaseApiClass> {
-  private static readonly DEFAULT_ERROR_MESSAGE = "Request Failed";
-  private static readonly REQUEST_LIMIT_MESSAGE = "Request limit exceeded";
-  private static readonly UNKNOWN_ERROR_MESSAGE = "Unknown error";
-
   public apiInstance: T;
 
-  constructor(ApiClass: new (config: any) => T) {
+  constructor(
+    ApiClass: new (
+      configuration?: typeof dsApiConfiguration,
+      basePath?: string,
+      axios?: any,
+    ) => T,
+  ) {
     this.apiInstance = new ApiClass(dsApiConfiguration);
   }
 
@@ -91,7 +93,10 @@ class EnhancedApiClient<T extends BaseApiClass> {
     return response;
   }
 
-  private handleRedirect(response: any, options: ApiOptions): void {
+  private handleRedirect(
+    response: { headers?: Record<string, string | string[]> },
+    options: ApiOptions,
+  ): void {
     if (response.headers?.["x-redirect-uri"] && options.withRedirect) {
       const redirectUri = response.headers["x-redirect-uri"];
       if (typeof redirectUri === "string" && typeof window !== "undefined") {
@@ -131,12 +136,15 @@ class EnhancedApiClient<T extends BaseApiClass> {
     return response.data.response;
   }
 
-  private isPaginatedResponse(data: any): boolean {
-    return (
+  private isPaginatedResponse(
+    data: unknown,
+  ): data is { total: unknown; response: unknown } {
+    return Boolean(
       data &&
-      typeof data !== "string" &&
-      typeof data === "object" &&
-      "total" in data
+        typeof data !== "string" &&
+        typeof data === "object" &&
+        data !== null &&
+        "total" in (data as Record<string, unknown>),
     );
   }
 
@@ -146,7 +154,7 @@ class EnhancedApiClient<T extends BaseApiClass> {
     skipRedirect: boolean,
   ): Promise<R> {
     const error = errorParam as TError;
-    console.log(EnhancedApiClient.DEFAULT_ERROR_MESSAGE, { error });
+    console.log("Request Failed", { error });
 
     this.handleSSRUnauthorized(error);
     if (typeof window !== "undefined" && !client.isSSR) {
@@ -233,7 +241,7 @@ class EnhancedApiClient<T extends BaseApiClass> {
   }
 
   private handleRateLimitError(error: TError): void {
-    const limitError = new Error(EnhancedApiClient.REQUEST_LIMIT_MESSAGE);
+    const limitError = new Error("Request limit exceeded");
     Object.assign(limitError, error);
     throw limitError;
   }
@@ -269,9 +277,7 @@ class EnhancedApiClient<T extends BaseApiClass> {
       return error;
     }
 
-    const wrappedError = new Error(
-      error?.message || EnhancedApiClient.UNKNOWN_ERROR_MESSAGE,
-    );
+    const wrappedError = new Error(error?.message || "Unknown error");
     Object.assign(wrappedError, error);
     return wrappedError;
   }

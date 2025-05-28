@@ -30,9 +30,17 @@ const next = require("next");
 const config = require("./config/config.json");
 
 const dev = process.env.NODE_ENV === "development";
+const argv = (key) => {
+  if (process.argv.includes(`--${key}`)) return true;
 
-const port = config.PORT ?? 5015;
-const hostname = config.HOSTNAME ?? "localhost";
+  return (
+    process.argv.find((arg) => arg.startsWith(`--${key}=`))?.split("=")[1] ||
+    null
+  );
+};
+
+const port = (argv("app.port") || config.PORT) ?? 5015;
+const hostname = config.HOSTNAME ?? "0.0.0.0";
 
 // when using middleware `hostname` and `port` must be provided below
 const app = next({ dev, hostname, port });
@@ -60,4 +68,3 @@ app.prepare().then(() => {
       console.log(`Server is listening on port ${port}`);
     });
 });
-

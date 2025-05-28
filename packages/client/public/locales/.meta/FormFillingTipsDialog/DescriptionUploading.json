@@ -1,0 +1,387 @@
+{
+  "key_path": "DescriptionUploading",
+  "content": "Create PDF forms in {{productName}}, e.g. in your {{sectionName}}, and upload the ready ones to the room. Make use of the integrated template library and choose among numerous ready PDF templates.",
+  "content_en_sha1_hash": "4b99c1fb674838fdfc525e7511a701d0c391b7dd",
+  "created_at": "2025-05-19T21:30:55.127Z",
+  "updated_at": "2025-05-24T10:58:04.371Z",
+  "comment": {
+    "text": "Create a PDF form in {{productName}}, and upload ready templates from the integrated template library. This instruction is displayed in a guidance component for users to fill out forms.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:22.279Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/guidance/configs/form-filling.ts",
+      "line_number": 85,
+      "context": "],\n },\n {\n id: 5,\n header: t(\"FormFillingTipsDialog:HeaderUploading\"),\n description: t(\"FormFillingTipsDialog:DescriptionUploading\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n }),\n key: \"form-filling-uploading\",\n placement: \"side\",",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Azerbaijani translation uses a colon (:) after 'sectionName' which is unusual in Azerbaijani sentence structure and creates a slightly awkward read. It would be more natural to omit it.",
+          "suggestion": "Remove the colon after {{sectionName}}.  Change '{{sectionName}} bölməsində:' to '{{sectionName}} bölməsində'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'otağa yükləyin' is a valid translation for 'upload to the room', a more natural and commonly used term in this context would be 'yükləyin'. The current phrasing sounds a bit too literal.",
+          "suggestion": "Change 'otağa yükləyin' to 'yükləyin'."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Greek translation uses a space before the colon in \"στο {{productName}}\". This space is unnecessary and breaks the flow of the sentence.",
+          "suggestion": "Remove the space before the colon: στο {{productName}}"
+        },
+        {
+          "type": "formatting",
+          "description": "Similar issue with a space before the colon in \"στο {{sectionName}}\".",
+          "suggestion": "Remove the space before the colon: στο {{sectionName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ready ones' is not accurately translated. 'listos' implies 'ready' but lacks the specific context of PDF forms. A more accurate translation would better convey the meaning.",
+          "suggestion": "Cree formularios PDF en {{productName}}, por ejemplo, en sus {{sectionName}}, y cargue los formularios PDF terminados en la sala."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'listas para usar' is a literal translation of 'ready to use'. While understandable, it's not the most natural phrasing in Spanish. A more fluent expression would improve readability.",
+          "suggestion": "Cree formularios PDF en {{productName}}, por ejemplo, en sus {{sectionName}}, y cargue los formularios PDF terminados en la sala. Haga uso de la biblioteca integrada de plantillas y elija entre numerosas plantillas PDF."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase \"huoneeseen\" (to the room) is a bit ambiguous in this context. It's unclear which room is being referred to. This might be confusing for users.",
+          "suggestion": "Consider clarifying which room the PDF forms are being uploaded to, e.g., 'työtilaan' (to the workspace) or another more specific term."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ready ones' is awkwardly translated as 'les formulaires prêts'. A more natural and accurate translation would be 'les formulaires prêts à l'emploi' or 'les formulaires prêts'.",
+          "suggestion": "les formulaires prêts à l'emploi"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"վերբեռնեք պատրաստի ձևերը սենյակ\" is awkward. 'Room' in this context likely refers to a specific platform or digital space, not a physical room. A more accurate translation would convey this.",
+          "suggestion": "վերբեռնեք պատրաստի ձևերը հարթակում (or the specific platform name if known)."
+        },
+        {
+          "type": "formatting",
+          "description": "The punctuation and sentence structure in the last part of the translation could be improved for better flow. While grammatically correct, it reads slightly choppy.",
+          "suggestion": "Օգտվեք ներկառուցված կաղապարների գրադարանից և ընտրեք բազմաթիվ պատրաստի PDF կաղապարներ։ Բացի այդ, կարող եք ընտրել պատրաստի PDF կաղապարներից։"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation uses the standard sentence structure. Consider adding a slightly more natural flow by rephrasing. The sentence '統合されたテンプレートライブラリを利用し、多数の準備されたPDFテンプレートの中から選択してください' feels a bit stiff.  While technically correct, a more natural phrasing might be preferred.",
+          "suggestion": "統合されたテンプレートライブラリを利用して、豊富なPDFテンプレートの中からお好きなものをお選びください。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase \"완성된 양식을 채팅방에 업로드하세요\" could be slightly smoother. The word '채팅방에' (to the chat room) feels a little abrupt. While technically correct, a more natural flow might be preferred.",
+          "suggestion": "완성된 양식을 방에 업로드하세요."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ຕົວຢ່າງເຊັ່ນ ຢູ່ພາກສ່ວນ {{sectionName}} ຂອງເຈົ້າ\" is a slightly awkward translation of \"e.g. in your {{sectionName}}\". It implies ownership rather than a general location. A more accurate translation would reflect that the section is *within* the user's context.",
+          "suggestion": "ຕົວຢ່າງເຊັ່ນ ພາຍໃນພາກສ່ວນ {{sectionName}} ຂອງເຈົ້າ"
+        },
+        {
+          "type": "formatting",
+          "description": "The Lao translation uses \"ຫໍສະໝຸດແມ່ແບບແບບສຳເລັດຮູບ\" for \"integrated template library\". While technically correct, it's a bit long and complex. Consider a more concise option.",
+          "suggestion": "ຫໍແມ່ແບບສຳເລັດຮູບ (or just ແມ່ແບບສຳເລັດຮູບ)"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The word 'envie' (send) is directly attached to 'prontos' (ready ones) which can sound a bit awkward in Portuguese. A better flow would be to separate them with a preposition.",
+          "suggestion": "Crie formulários PDF no {{productName}}, por exemplo na sua {{sectionName}}, e carregue os prontos para a sala. Utilize a biblioteca de modelos integrada e escolha entre diversos modelos PDF prontos."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Make use of' is overly literal and doesn't flow naturally in Portuguese. It can be simplified.",
+          "suggestion": "Utilize a biblioteca de modelos integrada"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“Numerous” translates to “vários” which is acceptable, but 'countless' or 'inúmeros' might better convey the intended richness of the template library.",
+          "suggestion": "Utilize a biblioteca de modelos integrada e escolha entre inúmeros modelos PDF prontos."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'în sală' (in the room) is an awkward translation of 'to the room'. It doesn't quite convey the intended meaning of uploading to a specific area or platform.",
+          "suggestion": "Consider a more appropriate translation like 'în platformă' (to the platform), 'în spațiul de lucru' (to the workspace), or 'la încărcare' (for uploading)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'disponibile' is used instead of 'ready'. While 'disponibile' means 'available', 'ready' better captures the meaning of completed templates.",
+          "suggestion": "Replace 'disponibile' with 'gata' or 'pregătite'."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ready ones\" is awkwardly translated. While 'sūdadanim vuva' is literal, it doesn't flow naturally in Sinhala. It's unclear what 'ones' refers to.",
+          "suggestion": "Consider rephrasing to something like 'සාදාගත් PDF ආකෘති' (saadagaath PDF aakruthika) which translates to 'created PDF forms'."
+        },
+        {
+          "type": "formatting",
+          "description": "While the original English uses double curly braces for variables, the Sinhala translation only uses single curly braces for {{productName}} and {{sectionName}}. This inconsistency might be confusing for developers/editors.",
+          "suggestion": "Maintain consistency with double curly braces: {{productName}} and {{sectionName}}"
+        },
+        {
+          "type": "grammatical",
+          "description": "The sentence structure 'ඒකාබද්ධ අච්චු පුස්තකාලය භාවිතා කරනු ලබන අතර බොහෝ සූදානම් PDF අච්චු වලින් තෝරා ගන්න' is grammatically correct but could be more fluid. The 'අතර' (atar - and) feels slightly forced.",
+          "suggestion": "Consider rephrasing as 'ඒකාබද්ධ අච්චු පුස්තකාලය භාවිතා කරමින් බොහෝ සූදානම් PDF අච්චු වලින් තෝරා ගන්න' (Using the integrated template library, choose from many ready PDF templates).  This uses a participle to connect the two clauses more smoothly."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Slovenian translation uses a parenthesis after 'productName' and 'sectionName' instead of curly braces. This deviates from the English content's use of curly braces for variable placeholders.",
+          "suggestion": "Change '(npr. v vašem {{sectionName}})' to '(npr. v vašem {{sectionName}})' and '(npr. v vašem {{sectionName}})' to '(npr. v vašem {{sectionName}})'"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'končne' implies 'final' or 'finished'. While accurate, it might be more natural to use a word that implies 'ready-made' or 'prepared' in the context of uploading forms. The focus is on the form's readiness for uploading, not necessarily its finality.",
+          "suggestion": "Consider replacing 'končne' with a more appropriate word like 'pripravljene' or 'narejene' which emphasize the form being ready for upload."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Serbian translation retains the English placeholders {{productName}} and {{sectionName}}. While technically correct, it's preferable to localize these if possible for a more natural feel. Assuming these are meant to be replaced with localized versions, this should be noted for translators.",
+          "suggestion": "Consider localizing {{productName}} and {{sectionName}} with Serbian equivalents if possible. Example: 'Креирајте PDF формуларе у [Локализовано Име Продукта], нпр. у вашим [Локализовано Име Секције]..."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The use of '...' in the Turkish translation appears inconsistent with the English, which uses 'e.g.'. While 'örneğin' is correct, the overall flow could be improved for a more natural feel.",
+          "suggestion": "Consider rephrasing to something like: '{{productName}} içinde, örneğin {{sectionName}} bölümünüzde PDF formları oluşturun...' or '{{productName}}'de, {{sectionName}} gibi bir bölümünde PDF formları oluşturun...'"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'odaya yükleyin' (upload to the room) is a direct translation, but it might not be the clearest or most common phrasing for uploading files in a Turkish context. It's unclear what 'room' refers to.",
+          "suggestion": "Consider a more general term like 'yükleyin' (upload) or a more specific term depending on the context, like 'platforma yükleyin' (upload to the platform) if applicable."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'у кімнату' (into the room) is slightly awkward in this context. It implies a physical room, which might not be the intended meaning. It's likely referring to a digital space or platform.",
+          "suggestion": "у платформу (into the platform) or у простір (into the space)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While not entirely wrong, 'готові' (ready) is used repeatedly. A more nuanced translation might be preferable to avoid repetition and provide a better flow.",
+          "suggestion": "заповнені (filled) or створені (created)"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Vietnamese translation uses a space before \"trong\" which is unconventional and could be improved.",
+          "suggestion": "Tạo biểu mẫu PDF trong {{productName}}, ví dụ: trong mục {{sectionName}} của bạn và tải lên các biểu mẫu đã hoàn thành vào phòng. Sử dụng thư viện mẫu tích hợp và chọn từ nhiều mẫu PDF có sẵn."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"制作好的表单\" (zhizuò hǎo de biǎofáng) is a bit awkward. It literally translates to 'made-ready forms'. A more natural phrasing would be '已制作好的表单' or '已完成的表单'.",
+          "suggestion": "将“制作好的表单”改为“已制作好的表单”或“已完成的表单”"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the phrasing \"房间\" is a little ambiguous. It could refer to a physical room or a virtual space. Consider clarifying if context allows.",
+          "suggestion": "Consider rephrasing \"上传到房间\" based on context. If it's a virtual room, consider \"上传到平台/空间\"."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

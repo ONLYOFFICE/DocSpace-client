@@ -1,0 +1,28 @@
+{
+  "key_path": "LdapIntro",
+  "content": "Import users and groups via LDAP, and enable user authentication through logins/passwords stored on the LDAP server. Users will be imported immediately after the settings are saved. Users added later will be imported during their first authentication. If you want to provide access via LDAP only, disable the option to invite new {{productName}} members via Contacts: <1>{{link}}</1>",
+  "content_en_sha1_hash": "d70711bff0fa71f70bc2eb8a848af294221f7928",
+  "created_at": "2025-05-26T07:15:52.811Z",
+  "updated_at": "2025-05-26T08:09:45.083Z",
+  "comment": {
+    "text": "This translation key is used for a tooltip message that explains the purpose of importing users and groups via LDAP in the Portal Settings. It will be displayed when the user hovers over a setting that enables LDAP authentication. The text helps to provide context for translators about the functionality and its relevance to new users added after the settings are saved.",
+    "is_auto": true,
+    "updated_at": "2025-05-26T08:09:45.083Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/index.js",
+      "line_number": 88,
+      "context": "return (\n <StyledLdapPage isSmallWindow={isSmallWindow}>\n <Text className=\"intro-text settings_unavailable\">\n <Trans\n t={t}\n i18nKey=\"LdapIntro\"\n ns=\"Ldap\"\n values={{ productName: t(\"Common:ProductName\"), link }}\n components={{\n 1: (\n <Link",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

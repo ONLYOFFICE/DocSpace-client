@@ -64,9 +64,7 @@ type GroupsTableHeaderProps = {
   navigate: NavigateFunction;
   location: Location;
 
-  containerRef: React.MutableRefObject<
-    Nullable<React.ForwardedRef<HTMLDivElement>>
-  >;
+  containerRef: React.RefObject<Nullable<React.ForwardedRef<HTMLDivElement>>>;
 };
 
 type GroupTableHeaderState = { columns: TableHeaderColumn[] };

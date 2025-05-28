@@ -1,0 +1,8 @@
+{
+  "ChangeData": "데이터 및 비밀번호 변경",
+  "ClickButtonBelow": "이메일로 로그인하려면, 먼저 사용자 암호를 설정해주세요. <br /> 준비가 되시면 아래 버튼을 클릭해주세요.",
+  "ContinueToProduct": "{{productName}}으로 계속하기",
+  "GeneratedPassword": "생성된 비밀번호",
+  "ProductNameDetail": "{{productName}} 이름",
+  "ReviewAccountDetails": "계정 정보를 검토할 시간을 잠시 내주시기 바랍니다:"
+}

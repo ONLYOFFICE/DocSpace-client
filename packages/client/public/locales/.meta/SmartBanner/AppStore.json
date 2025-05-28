@@ -1,0 +1,268 @@
+{
+  "key_path": "AppStore",
+  "content": "On the App Store",
+  "content_en_sha1_hash": "e31bba1e7988ce96d6a7dc542d32bcfb6bdda2be",
+  "created_at": "2025-05-19T21:30:50.047Z",
+  "updated_at": "2025-05-26T07:57:32.199Z",
+  "comment": {
+    "text": "This translation key is used for displaying a specific banner on mobile apps when accessing the App Store. The text will appear as a notification or prompt, indicating the app's presence on the App Store. It appears in a banner component on iOS devices.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:21.078Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/SmartBanner/index.js",
+      "line_number": 68,
+      "context": "useEffect(() => {\n checkBanner();\n }, [location]);\n \n const storeText = {\n ios: t(\"SmartBanner:AppStore\"),\n android: t(\"SmartBanner:GooglePlay\"),\n windows: \"\",\n kindle: \"\",\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'В App Store' is a direct transliteration and doesn't convey the intended meaning of 'On the App Store' in a natural Bulgarian way. It's technically correct in that it includes 'App Store', but it lacks nuance.",
+          "suggestion": "В App Store-a"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"App Storeから\" is a literal translation of 'from the App Store' but doesn't quite convey the meaning 'On the App Store'. It might be interpreted as 'From the App Store' rather than 'On the App Store'.",
+          "suggestion": "Consider \"App Storeに\" (App Store ni) which translates to 'on the App Store' or \"App Storeで\" (App Store de) which translates to 'at the App Store' depending on the desired nuance."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation 'App Store' is a direct transliteration and doesn't accurately convey the meaning of 'On the App Store'. It's missing the preposition 'On'.",
+          "suggestion": "App Store lietotnē"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"В App Store\" is a literal transliteration and doesn't convey the full meaning of \"On the App Store.\" While technically understandable, it's not the most natural phrasing in Russian. A more appropriate translation would convey the idea of being located or present within the App Store.",
+          "suggestion": "На App Store"
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"ඇප් ස්ටෝර්\" is a transliteration of \"App Store\" and doesn't convey the meaning \"On the App Store\". It simply states 'App Store'.",
+          "suggestion": "ඇප් ස්ටෝර් මත (App Store matha)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"На App Store-у\" is not the most natural or accurate translation of \"On the App Store.\" While technically understandable, the addition of the genitive case ending '-у' is unnecessary and sounds awkward. It implies possession or belonging, which isn't intended.",
+          "suggestion": "На App Store"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation \"Na App Store-u\" includes an unnecessary hyphen and possessive suffix. While understandable, it's not the most natural way to express \"On the App Store\" in Serbian (Latin).",
+          "suggestion": "Na App Store"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'В App Store' is a direct transliteration and doesn't convey the meaning of 'On the App Store' accurately. It simply states 'In App Store' which isn't the intended meaning.",
+          "suggestion": "На App Store"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Vietnamese translation \"Xin hãy đánh giá chúng tôi trên App Store\" translates to \"Please rate us on the App Store\". It's not a direct translation of \"On the App Store\".",
+          "suggestion": "Một cách dịch chính xác hơn có thể là \"Trên App Store\" hoặc \"Trong App Store\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"在App Store 商店\" is redundant. \"商店\" (shop) is unnecessary as 'App Store' inherently implies a shop or store.",
+          "suggestion": "在App Store"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

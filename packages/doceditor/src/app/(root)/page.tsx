@@ -26,7 +26,6 @@
 
 import { cookies, headers } from "next/headers";
 import Script from "next/script";
-import dynamic from "next/dynamic";
 
 import "pino-roll";
 import "pino-pretty";
@@ -44,15 +43,12 @@ import { logger } from "@/../logger.mjs";
 
 import { RootPageProps } from "@/types";
 import Root from "@/components/Root";
+import FilePassword from "@/components/file-password";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
-
-const FilePassword = dynamic(() => import("@/components/file-password"), {
-  ssr: false,
-});
 
 const log = logger.child({ module: "Doceditor page" });
 
-const initialSearchParams: RootPageProps["searchParams"] = {
+const initialSearchParams: Awaited<RootPageProps["searchParams"]> = {
   fileId: undefined,
   fileid: undefined,
   version: undefined,
@@ -62,7 +58,8 @@ const initialSearchParams: RootPageProps["searchParams"] = {
   editorType: undefined,
 };
 
-async function Page({ searchParams }: RootPageProps) {
+async function Page(props: RootPageProps) {
+  const searchParams = await props.searchParams;
   const {
     fileId,
     fileid,
@@ -94,8 +91,8 @@ async function Page({ searchParams }: RootPageProps) {
     isSDK,
   };
 
-  const cookieStore = cookies();
-  const hdrs = headers();
+  const cookieStore = await cookies();
+  const hdrs = await headers();
 
   const hostname = hdrs.get("x-forwarded-host");
 

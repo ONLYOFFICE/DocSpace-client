@@ -1,0 +1,268 @@
+{
+  "key_path": "RemoveFromList",
+  "content": "Remove from list",
+  "content_en_sha1_hash": "23a97691b4e6c4fdf5bb0cb8f8d5ab31d1af9fd4",
+  "created_at": "2025-05-19T21:30:47.827Z",
+  "updated_at": "2025-05-26T07:57:32.827Z",
+  "comment": {
+    "text": "This translation key is used to display the phrase \"Remove from list\" in a user interface, typically on a button or dialog related to managing shared rooms. The text appears when a user has permission to remove items and external data is not expired.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:44.615Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2103,
+      "context": "Boolean(item.external && item.expired),\n },\n {\n id: \"option_remove-shared-room\",\n key: \"remove-shared-room\",\n label: t(\"Common:RemoveFromList\"),\n icon: CircleCrossSvgUrl,\n onClick: () => this.onRemoveSharedRooms([item]),\n disabled: this.userStore?.user?.isAdmin || !item.external,\n },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2103,
+      "context": "Boolean(item.external && item.expired),\n },\n {\n id: \"option_remove-shared-room\",\n key: \"remove-shared-room\",\n label: t(\"Common:RemoveFromList\"),\n icon: CircleCrossSvgUrl,\n onClick: () => this.onRemoveSharedRooms([item]),\n disabled: this.userStore?.user?.isAdmin || !item.external,\n },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2103,
+      "context": "Boolean(item.external && item.expired),\n },\n {\n id: \"option_remove-shared-room\",\n key: \"remove-shared-room\",\n label: t(\"Common:RemoveFromList\"),\n icon: CircleCrossSvgUrl,\n onClick: () => this.onRemoveSharedRooms([item]),\n disabled: this.userStore?.user?.isAdmin || !item.external,\n },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2103,
+      "context": "Boolean(item.external && item.expired),\n },\n {\n id: \"option_remove-shared-room\",\n key: \"remove-shared-room\",\n label: t(\"Common:RemoveFromList\"),\n icon: CircleCrossSvgUrl,\n onClick: () => this.onRemoveSharedRooms([item]),\n disabled: this.userStore?.user?.isAdmin || !item.external,\n },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 2347,
+      "context": "iconUrl: DeleteReactSvgUrl,\n };\n case \"remove-from-recent\":\n return {\n id: \"menu-remove-from-recent\",\n label: t(\"Common:RemoveFromList\"),\n onClick: () => this.onClickRemoveFromRecent(selection),\n iconUrl: RemoveOutlineSvgUrl,\n };\n default:\n break;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 2347,
+      "context": "iconUrl: DeleteReactSvgUrl,\n };\n case \"remove-from-recent\":\n return {\n id: \"menu-remove-from-recent\",\n label: t(\"Common:RemoveFromList\"),\n onClick: () => this.onClickRemoveFromRecent(selection),\n iconUrl: RemoveOutlineSvgUrl,\n };\n default:\n break;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/download-dialog/sub-components/PasswordRow.tsx",
+      "line_number": 135,
+      "context": "});\n \n if (type !== \"remove\") {\n options.push({\n key: \"remove\",\n label: t(\"Common:RemoveFromList\"),\n onClick: removeFromList,\n disabled: false,\n icon: RemoveIcon,\n });\n }",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Κατάργηση από τη λίστα' while technically correct, has a slightly formal tone for a user interface element like 'Remove from list'. It implies a more permanent or severe action. 'Αφαίρεση από τη λίστα' or 'Αφαίρεση από την λίστα' would be more appropriate for a standard 'Remove' function.",
+          "suggestion": "Αφαίρεση από τη λίστα"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"ලැයිස්තුවෙන් ඉවත් කරන්න\" is a very literal translation. A more natural and common phrasing in Sinhala would be \"දුරුවන්න\" (duruwanna) or \"එවත්වන්න\" (evathwanna). \"ඉවත් කරන්න\" is generally used for removing something from a place, rather than a list.",
+          "suggestion": "දුරුවන්න (duruwanna) or එවත්වන්න (evathwanna)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Уклони са листе' literally translates to 'Remove from list', but a more natural and idiomatic Serbian translation would be 'Обавезно уклони' or 'Уклони'. 'Уклони са листе' feels awkward and unnatural.",
+          "suggestion": "Обавезно уклони"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Ukloni sa liste' is not the most natural or accurate translation of 'Remove from list'. 'Ukloni' means 'remove' in a more forceful or permanent sense. A more common and appropriate translation would be 'Izbaci iz liste' or 'Ukloni iz liste'.",
+          "suggestion": "Izbaci iz liste"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

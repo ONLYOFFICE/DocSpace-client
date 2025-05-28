@@ -26,17 +26,12 @@
 
 /* eslint-disable no-console */
 import React from "react";
-import styled from "styled-components";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { ColorInput } from "./ColorInput";
 import { ColorInputProps } from "./ColorInput.types";
 import { InputSize } from "../text-input/TextInput.enums";
 import { globalColors } from "../../themes";
-
-const ColorInputContainer = styled.div`
-  height: 300px;
-`;
 
 const meta = {
   title: "Components/ColorInput",
@@ -87,9 +82,9 @@ export default meta;
 
 const Template = ({ ...args }: ColorInputProps) => {
   return (
-    <ColorInputContainer>
+    <div style={{ height: "300px" }}>
       <ColorInput {...args} />
-    </ColorInputContainer>
+    </div>
   );
 };
 

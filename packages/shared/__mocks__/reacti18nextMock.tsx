@@ -35,7 +35,7 @@ const react_i18next: {
     Component: React.JSXElementConstructor<{
       t: () => string;
     }>,
-  ) => (props: {}) => JSX.Element;
+  ) => (props: {}) => React.JSX.Element;
   useTranslation: (value: string) => {
     t: (key: string) => string;
     i18n: {

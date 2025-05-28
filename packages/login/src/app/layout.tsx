@@ -50,7 +50,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const hdrs = headers();
+  const hdrs = await headers();
   const type = hdrs.get("x-confirm-type") ?? "";
   const searchParams = hdrs.get("x-confirm-query") ?? "";
 
@@ -63,7 +63,7 @@ export default async function RootLayout({
     new URLSearchParams(searchParams.toString()),
   ) as TConfirmLinkParams;
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY);
   const cookieLng = cookieStore.get(LANGUAGE);

@@ -43,10 +43,11 @@ import { CompletedFormEmpty } from "@/components/completed-form/CompletedForm.em
 const log = logger.child({ module: "Create page" });
 
 interface PageProps {
-  searchParams: Record<string, string | undefined>;
+  searchParams: Promise<Record<string, string | undefined>>;
 }
 
-async function Page({ searchParams }: PageProps) {
+async function Page(props: PageProps) {
+  const searchParams = await props.searchParams;
   const { share, fillingSessionId, roomId, is_file, formId, type, isSDK } =
     searchParams;
 

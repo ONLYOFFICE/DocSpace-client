@@ -1,0 +1,244 @@
+{
+  "key_path": "Quotas",
+  "content": "Quotas",
+  "content_en_sha1_hash": "34ed58657019e0ff061ea2eef787a27a97813fe2",
+  "created_at": "2025-05-19T21:30:52.354Z",
+  "updated_at": "2025-05-26T07:57:32.789Z",
+  "comment": {
+    "text": "The translation key \"Quotas\" corresponds to a title that displays storage management quotas. It is used in the \"Storage Management\" category of the Portal Settings page, appearing as a main title on screen, likely in a section header or button label.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:40.917Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/Quotas.js",
+      "line_number": 40,
+      "context": "import { Link } from \"@docspace/shared/components/link\";\n \n import { StyledBaseQuotaComponent, StyledMainTitle } from \"./StyledComponent\";\n import { QuotaPerRoomComponentSection } from \"./sub-components/QuotaPerRoom\";\n import { QuotaPerUserComponentSection } from \"./sub-components/QuotaPerUser\";\n import MobileQuotasComponent from \"./sub-components/MobileQuotas\";\n \n const QuotaPerItemsComponent = ({ isStatisticsAvailable }) => {\n if (isMobile())\n return <MobileQuotasComponent isDisabled={!isStatisticsAvailable} />;",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Italian translation \"Quote\" is not an accurate translation of \"Quotas\". \"Quotas\" refers to limits or restrictions, while \"Quote\" means quotation or price.",
+          "suggestion": "Consider translations like \"Limiti\", \"Quote\", or \"Massimi\" depending on the specific context within the settings."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"容量制限\" (ryou gen-shou) can sometimes translate to \"quota,\" it's more accurately \"capacity limit\" or \"storage limit.\" \"Quota\" often implies a defined allowance or entitlement, which isn't directly conveyed by this translation.",
+          "suggestion": "Consider alternatives like \"割り当て量\" (wari-ate-ryou - allocated amount) or \"利用制限\" (riyo-shigen - usage limit) depending on the specific context of 'Quotas'."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word \"Quotas\" (plural) has been translated to \"Quota\" (singular) in Dutch. This doesn't reflect the original meaning.",
+          "suggestion": "Quota's"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Cote' does not accurately convey the meaning of 'Quotas'. 'Quotas' refers to limits or restrictions, while 'Cote' primarily means 'side' or 'corner'.",
+          "suggestion": "Consider translations like 'Limite', 'Cote', 'Restricții', or 'Limite de utilizare', depending on the specific context of the 'Settings:Quotas' key."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"සලාක\" does not accurately convey the meaning of \"Quotas\". \"Quotas\" refers to limits or restrictions, and \"සලාක\" has a different connotation.",
+          "suggestion": "A more appropriate translation might be \"කොටා\" (kota) or \"අධිකාරණ සීමාව\" (adhikaarana seemawa) depending on the specific context."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Квоте\" is the correct plural form of 'Quotas'. \"Квоте\" is the appropriate translation for the English term \"Quotas\". \"Квоте\" is a more accurate translation than \"Квоте\".",
+          "suggestion": "Квоте"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

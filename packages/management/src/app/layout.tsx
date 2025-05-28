@@ -73,7 +73,7 @@ export default async function RootLayout({
   )
     redirect(`${getBaseUrl()}/error/403`);
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY);
   const cookieLng = cookieStore.get(LANGUAGE);

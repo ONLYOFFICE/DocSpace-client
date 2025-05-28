@@ -1,6 +1,10 @@
 {
+  "PrivacyButton": "{{organizationName}} Desktop Editors തുറන්න",
+  "PrivacyClick": "බ්‍රවුසර සංවාදයේ <1>{{organizationName}} Desktop</1> විවෘත කරන්න ක්ලික් කරන්න, එන්ක්‍රිප්ට් කරන ලද ලේඛන සමඟ වැඩ කිරීම සඳහා.",
   "PrivacyDescriptionConnect": "ඔබගේ මේඝය සම්බන්ධිත විට ඔබට වැඩතල යෙදුමේ අතුරු මුහුණතෙන් මෙම ගොනුව ඇරීමට හැකිය",
+  "PrivacyDescriptionEditors": "ඔබ {{organizationName}} Desktop Editors ස්ථාපිත කර තිබුණත්, මෙම පිටුවෙන් එය විවෘත කළ නොහැකි නම්, ඔබේ බ්‍රව්සරය එය අවහිර කර තිබිය හැකිය.",
   "PrivacyDialog": "ඔබට කවුළුවක් නොපෙනේ නම්, පහත බොත්තම ඔබන්න",
+  "PrivacyEditors": "{{organizationName}} Desktop Editors නැද්ද?",
   "PrivacyHeader": "මෙම ලේඛනය සංකේතිතයි",
   "PrivacyInstall": "ස්ථාපනය කරන්න"
 }

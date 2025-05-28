@@ -24,8 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../../styles/variables/devices";
-@import "../../../../styles/mixins";
+@use "../../../../styles/mixins";
 
 @mixin mobileStyles {
   margin-top: 16px;
@@ -231,7 +230,7 @@
     @include mobileStyles;
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     @include mobileStyles;
   }
 }

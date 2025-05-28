@@ -24,7 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { ContextMenuRefType } from "../../../context-menu";
+
 interface MobileDetailsProps {
+  ref?: React.RefObject<ContextMenuRefType | null>;
   icon: string;
   title: string;
   isError: boolean;

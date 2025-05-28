@@ -39,10 +39,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: process.env.TS_ERRORS_IGNORE === "true",
   },
-  experimental: {
-    instrumentationHook: true,
-    serverComponentsExternalPackages: ["pino", "pino-pretty"],
-  },
+  serverExternalPackages: ["pino", "pino-pretty", "nconf"],
   compiler: {
     styledComponents: true,
   },
@@ -59,6 +56,7 @@ const nextConfig = {
       fullUrl: true,
     },
   },
+  devIndicators: false,
 };
 
 const getBuildDate = () => {
@@ -75,8 +73,6 @@ const getBuildYear = () => {
 
 module.exports = {
   webpack(config) {
-    console.log("ENV", { env: process.env });
-
     config.devtool = "source-map";
 
     if (config.mode === "production") {

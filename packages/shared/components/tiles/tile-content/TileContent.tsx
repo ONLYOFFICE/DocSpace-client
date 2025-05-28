@@ -48,7 +48,7 @@ export const TileContent = ({
           width:
             (React.isValidElement(children) &&
               children.props?.containerWidth) ||
-            null,
+            undefined,
         }}
       >
         <div className={`${styles.mainContainer} row-main-container`}>

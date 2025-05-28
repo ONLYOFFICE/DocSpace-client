@@ -251,6 +251,7 @@
   "ExpiredLink": "Link wygasł",
   "FeedbackAndSupport": "Opinie i wsparcie",
   "FileActionRequired": "Lokalizacja docelowa zawiera już plik o nazwie «<1>{{fileName}}</1>».",
+  "FileName": "Nazwa pliku",
   "FilePermanentlyDeleted": "Plik zostanie trwale usunięty za 30 dni.",
   "FileProtectionMessage": "Pliki te są chronione. Spróbuj wpisać hasło dla wszystkich plików. Jeśli nie pamiętasz hasła, ale potrzebujesz tych plików, możesz je pobrać w oryginalnym formacie lub po prostu usunąć z listy. Następnie będziesz w stanie pobrać resztę plików.",
   "Files": "Pliki",
@@ -444,6 +445,7 @@
   "OAuthRoomsWriteDescription": "Wyświetl wszystkie pokoje i zarządzaj nimi",
   "OFORMsGallery": "Galeria OFORM",
   "OKButton": "OK",
+  "OpenSavedDocument": "Otwórz zapisany dokument w nowej zakładce",
   "Or": "lub",
   "orContinueWith": "lub kontynuuj z",
   "OrganizationName": "ONLYOFFICE",
@@ -717,7 +719,5 @@
   "Yes": "Tak",
   "Yesterday": "Wczoraj",
   "You": "Ty",
-  "YourTurn": "Twoja kolej",
-  "OpenSavedDocument": "Otwórz zapisany dokument w nowej zakładce",
-  "FileName": "Nazwa pliku"
+  "YourTurn": "Twoja kolej"
 }

@@ -251,6 +251,7 @@
   "ExpiredLink": "期限切れリンク",
   "FeedbackAndSupport": "フィードバック＆サポート",
   "FileActionRequired": "保存先に既に「<1>{{fileName}}</1>」という名前のファイルがあります。",
+  "FileName": "ファイル名",
   "FilePermanentlyDeleted": "ファイルは30日で永久に削除されます。",
   "FileProtectionMessage": "これらのファイルは保護されています。すべてのファイルのパスワードを入力してみてください。パスワードを思い出せないが、これらのファイルが必要な場合は、元の形式でダウンロードするか、単にリストから削除してください。そうすれば、残りのファイルをダウンロードできます。",
   "Files": "ファイル",
@@ -444,6 +445,7 @@
   "OAuthRoomsWriteDescription": "すべてのルームを表示して管理する",
   "OFORMsGallery": "フォームギャラリー",
   "OKButton": "大丈夫",
+  "OpenSavedDocument": "保存されたファイルを新しいタブで開く",
   "Or": "または",
   "orContinueWith": "あるいは",
   "OrganizationName": "ONLYOFFICE",
@@ -717,7 +719,5 @@
   "Yes": "はい",
   "Yesterday": "昨日",
   "You": "あなた",
-  "YourTurn": "あなたの番です",
-  "OpenSavedDocument": "保存されたファイルを新しいタブで開く",
-  "FileName": "ファイル名"
+  "YourTurn": "あなたの番です"
 }

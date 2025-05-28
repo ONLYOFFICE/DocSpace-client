@@ -251,6 +251,7 @@
   "ExpiredLink": "Link expirat",
   "FeedbackAndSupport": "Feedback și asistența",
   "FileActionRequired": "Fișierul «<1>{{fileName}}</1>» există deja la destinație.",
+  "FileName": "Numele fișierului",
   "FilePermanentlyDeleted": "Fișierul va fi șters definitiv după 30 de zile.",
   "FileProtectionMessage": "Aceste fișiere sunt protejate. Încercați să introduceți parola pentru toate fișierele. Dacă nu vă amintiți parola, dar aveți nevoie de aceste fișiere, le puteți descărca în formatul lor original sau pur și simplu le puteți elimina din lista. Apoi puteți descărca celelalte fișiere.",
   "Files": "Fișiere",
@@ -444,6 +445,7 @@
   "OAuthRoomsWriteDescription": "Vizualizarea și gestionarea sălilor",
   "OFORMsGallery": "Din Galerie",
   "OKButton": "OK",
+  "OpenSavedDocument": "Deschide documentul salvat într-o filă nouă",
   "Or": "sau",
   "orContinueWith": "sau continuați cu",
   "OrganizationName": "ONLYOFFICE",
@@ -717,7 +719,5 @@
   "Yes": "Da",
   "Yesterday": "Ieri",
   "You": "Dvs",
-  "YourTurn": "Acum e rândul dvs.",
-  "OpenSavedDocument": "Deschide documentul salvat într-o filă nouă",
-  "FileName": "Numele fișierului"
+  "YourTurn": "Acum e rândul dvs."
 }

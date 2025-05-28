@@ -251,6 +251,7 @@
   "ExpiredLink": "Lien expiré",
   "FeedbackAndSupport": "Commentaires & assistance",
   "FileActionRequired": "La destination contient déjà un fichier nommé «<1>{{fileName}}</1>».",
+  "FileName": "Nom du fichier",
   "FilePermanentlyDeleted": "Le fichier sera définitivement supprimé dans les 30 jours.",
   "FileProtectionMessage": "Ces fichiers sont protégés. Veuillez essayer d'entrer le mot de passe pour tous les fichiers. Si vous ne vous souvenez pas du mot de passe, mais que vous avez besoin de ces fichiers, vous pouvez les télécharger dans leur format d'origine ou simplement les supprimer de la liste. Vous pourrez ensuite télécharger le reste des fichiers.",
   "Files": "Fichiers",
@@ -444,6 +445,7 @@
   "OAuthRoomsWriteDescription": "Afficher et gérer toutes les salles",
   "OFORMsGallery": "Galerie de formulaires",
   "OKButton": "OK",
+  "OpenSavedDocument": "Ouvrir le document enregistré dans un nouvel onglet",
   "Or": "ou",
   "orContinueWith": "ou continuez avec",
   "OrganizationName": "ONLYOFFICE",
@@ -717,7 +719,5 @@
   "Yes": "Oui",
   "Yesterday": "Hier",
   "You": "Vous",
-  "YourTurn": "Votre tour",
-  "OpenSavedDocument": "Ouvrir le document enregistré dans un nouvel onglet",
-  "FileName": "Nom du fichier"
+  "YourTurn": "Votre tour"
 }

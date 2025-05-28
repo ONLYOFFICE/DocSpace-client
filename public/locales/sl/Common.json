@@ -251,6 +251,7 @@
   "ExpiredLink": "Iztečena povezava",
   "FeedbackAndSupport": "Povratne informacije & Pomoč",
   "FileActionRequired": "Destinacija že vsebuje datoteko z imenom «<1>{{fileName}}</1>».",
+  "FileName": "Ime datoteke",
   "FilePermanentlyDeleted": "Datoteka bo v 30 dneh trajno izbrisana.",
   "FileProtectionMessage": "Te datoteke so zaščitene. Poskusite vnesti geslo za vse datoteke. Če se ne spomnite gesla, te datoteke pa potrebujete, jih lahko prenesete v izvirni obliki ali preprosto odstranite iz seznama. Nato lahko prenesete preostale datoteke.",
   "Files": "Datoteke",
@@ -444,6 +445,7 @@
   "OAuthRoomsWriteDescription": "Poglej in upravljaj vse sobe",
   "OFORMsGallery": "Galerija OFORM",
   "OKButton": "V redu",
+  "OpenSavedDocument": "Odpri shranjen dokument v novem zavihku",
   "Or": "ali",
   "orContinueWith": "ali nadaljujte z",
   "OrganizationName": "ONLYOFFICE",
@@ -717,7 +719,5 @@
   "Yes": "Da",
   "Yesterday": "Včeraj",
   "You": "Vi",
-  "YourTurn": "Vi ste na vrsti",
-  "OpenSavedDocument": "Odpri shranjen dokument v novem zavihku",
-  "FileName": "Ime datoteke"
+  "YourTurn": "Vi ste na vrsti"
 }

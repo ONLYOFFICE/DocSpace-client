@@ -251,6 +251,7 @@
   "ExpiredLink": "رابط منتهي الصلاحية",
   "FeedbackAndSupport": "التقييم والدعم",
   "FileActionRequired": "الوجهة تحتوي بالفعل على ملف اسمه «</1>{{fileName}}<1>».",
+  "FileName": "اسم الملف",
   "FilePermanentlyDeleted": "سيتم حذف الملف بشكل دائم خلال 30 يوم.",
   "FileProtectionMessage": "هذه الملفات محمية. يُرجى محاولة إدخال كلمة المرور لجميع الملفات. إن لم تتذكروا كلمة المرور وتحتاجون إلى الملفات، يمكنكم تحميلها بصيغتها الأصلية أو حذفها من القائمة ثم تحميل بقية الملفات.",
   "Files": "الملفات",
@@ -444,6 +445,7 @@
   "OAuthRoomsWriteDescription": "عرض وإدارة جميع الغرف",
   "OFORMsGallery": "معرض اوفورم",
   "OKButton": "موافق",
+  "OpenSavedDocument": "افتح المستند المحفوظ في علامة تبويب جديدة",
   "Or": "أو",
   "orContinueWith": "أو الاستمرار مع",
   "OrganizationName": "ONLYOFFICE",
@@ -717,7 +719,5 @@
   "Yes": "نعم",
   "Yesterday": "أمس",
   "You": "أنت",
-  "YourTurn": "دوركم الآن",
-  "OpenSavedDocument": "افتح المستند المحفوظ في علامة تبويب جديدة",
-  "FileName": "اسم الملف"
+  "YourTurn": "دوركم الآن"
 }

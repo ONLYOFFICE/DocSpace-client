@@ -251,6 +251,7 @@
   "ExpiredLink": "Liên kết đã hết hạn",
   "FeedbackAndSupport": "Phản hồi & Hỗ trợ",
   "FileActionRequired": "Đích đến đã chứa một tập tin có tên «<1>{{fileName}}</1>».",
+  "FileName": "Tên file",
   "FilePermanentlyDeleted": "Tập tin sẽ bị xóa vĩnh viễn trong 30 ngày. ",
   "FileProtectionMessage": "Các tập tin này được bảo vệ. Vui lòng thử nhập mật khẩu cho tất cả các tập tin. Nếu bạn không nhớ mật khẩu nhưng cần những tập tin này, bạn có thể tải chúng xuống ở định dạng gốc hoặc chỉ cần xóa chúng khỏi danh sách. Sau đó, bạn có thể tải các tập tin còn lại xuống.",
   "Files": "Tệp",
@@ -444,6 +445,7 @@
   "OAuthRoomsWriteDescription": "Xem và quản lý tất cả các phòng",
   "OFORMsGallery": "Thư viện OFORMs",
   "OKButton": "OK",
+  "OpenSavedDocument": "Mở tài liệu đã lưu trong tab mới",
   "Or": "hoặc",
   "orContinueWith": "hoặc tiếp tục với",
   "OrganizationName": "ONLYOFFICE",
@@ -717,7 +719,5 @@
   "Yes": "Có",
   "Yesterday": "Hôm qua",
   "You": "Bạn",
-  "YourTurn": "Phiên của bạn",
-  "OpenSavedDocument": "Mở tài liệu đã lưu trong tab mới",
-  "FileName": "Tên file"
+  "YourTurn": "Phiên của bạn"
 }

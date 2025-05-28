@@ -27,6 +27,9 @@
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
+import CopyIconSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
+import TrashIconSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
+
 import { FilesRow } from ".";
 
 const RowContent = ({ children }: { children: React.ReactNode }) => (
@@ -35,14 +38,14 @@ const RowContent = ({ children }: { children: React.ReactNode }) => (
 
 const contextOptions = [
   {
-    key: "edit",
-    label: "Edit",
-    icon: "EditIcon",
+    key: "copy",
+    label: "Copy",
+    icon: CopyIconSvgUrl,
   },
   {
     key: "delete",
     label: "Delete",
-    icon: "TrashIcon",
+    icon: TrashIconSvgUrl,
   },
 ];
 
@@ -71,14 +74,11 @@ const meta = {
     folderCategory: { control: "boolean" },
     withAccess: { control: "boolean" },
     inProgress: { control: "boolean" },
-    contextButtonSpacerWidth: { control: "text" },
     indeterminate: { control: "boolean" },
-    isRoom: { control: "boolean" },
     mode: { control: "select", options: ["modern", "default"] },
     isIndexEditingMode: { control: "boolean" },
     withoutBorder: { control: "boolean" },
     contextTitle: { control: "text" },
-    isArchive: { control: "boolean" },
     isDisabled: { control: "boolean" },
 
     // disabled controls
@@ -98,10 +98,25 @@ const meta = {
     onChangeIndex: { table: { disable: true } },
     rowContextClose: { table: { disable: true } },
     item: { table: { disable: true } },
+    isRoom: { table: { disable: true } },
+    isArchive: { table: { disable: true } },
+    onContextClick: { table: { disable: true } },
+    contextButtonSpacerWidth: { table: { disable: true } },
   },
   args: {
     contextOptions,
   },
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          position: "relative",
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
 } satisfies Meta<typeof FilesRow>;
 
 type Story = StoryObj<typeof FilesRow>;

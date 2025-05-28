@@ -37,7 +37,7 @@ import { IconButton } from "../../icon-button";
 
 const MainContent = (
   <Link>
-    File name <span className="item-file-exst">.exst</span>
+    File name<span className="item-file-exst">.exst</span>
   </Link>
 );
 
@@ -73,6 +73,7 @@ const meta = {
     onClick: { table: { disable: true } },
     style: { table: { disable: true } },
     convertSideInfo: { table: { disable: true } },
+    sectionWidth: { table: { disable: true } },
   },
 } satisfies Meta<typeof FilesRowContent>;
 

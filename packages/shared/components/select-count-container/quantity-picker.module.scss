@@ -151,4 +151,10 @@
       color: var(--payment-price-container-disable-color);
     }
   }
+
+  .tabsWrapper {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+  }
 }

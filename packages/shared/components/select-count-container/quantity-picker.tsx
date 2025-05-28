@@ -34,10 +34,16 @@ import { Text } from "../text";
 import { Slider } from "../slider";
 import { TextInput } from "../text-input";
 import { InputType } from "../text-input/TextInput.enums";
+import { Tabs, TabsTypes } from "../tabs";
 
 import styles from "./quantity-picker.module.scss";
 
-interface QuantityPickerProps {
+interface TabItemObject {
+  name: string;
+  value: number;
+}
+
+type QuantityPickerProps = {
   value: number;
   minValue: number;
   maxValue: number;
@@ -49,7 +55,8 @@ interface QuantityPickerProps {
   showSlider?: boolean;
   onChange: (value: number) => void;
   className?: string;
-}
+  items?: Array<number | TabItemObject>;
+};
 
 const QuantityPicker: React.FC<QuantityPickerProps> = ({
   value,
@@ -63,6 +70,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
   showSlider,
   onChange,
   className,
+  items,
 }) => {
   const displayValue = showPlusSign
     ? value > maxValue
@@ -136,6 +144,34 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
   const buttonProps = isDisabled ? {} : { onClick: handleButtonClick };
   const sliderProps = isDisabled ? {} : { onChange: handleSliderChange };
   const inputProps = isDisabled ? {} : { onChange: handleInputChange };
+
+  const createTabItems = () => {
+    if (!items || !items.length) return [];
+
+    return items.map((item) => {
+      if (typeof item === "number") {
+        return {
+          name: `+${item}`,
+          id: item.toString(),
+          value: item,
+          content: null,
+          isDisabled,
+        };
+      }
+
+      return {
+        name: `+${item.name}`,
+        id: item.value.toString(),
+        value: item.value,
+        content: null,
+        isDisabled,
+      };
+    });
+  };
+
+  const onSelectTab = (data) => {
+    onChange(value + data.value);
+  };
 
   return (
     <div className={containerClass}>
@@ -213,6 +249,20 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
               {`${maxValue}+`}
             </Text>
           </div>
+        </div>
+      ) : null}
+
+      {items && items.length > 0 ? (
+        <div className={styles.tabsWrapper}>
+          <Tabs
+            items={createTabItems()}
+            selectedItemId=""
+            onSelect={onSelectTab}
+            type={TabsTypes.Secondary}
+            allowNoSelection
+            withoutStickyIntend
+            withoutScroll
+          />
         </div>
       ) : null}
     </div>

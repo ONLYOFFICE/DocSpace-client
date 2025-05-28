@@ -3,7 +3,7 @@
   "content": "Access granted",
   "content_en_sha1_hash": "2c5e9cb9ebce16b0d8e756cdb2fb8e5bdfd8a78e",
   "created_at": "2025-05-19T21:30:53.778Z",
-  "updated_at": "2025-05-22T11:56:37.758Z",
+  "updated_at": "2025-05-28T09:30:02.602Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Access granted\" in various parts of the application, including an info dialog and a table header. The key appears in contexts where access has been successfully authorized or confirmed, providing feedback to users.",
     "is_auto": true,
@@ -11,10 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Profile\\Section\\Body\\sub-components\\authorized-apps\\sub-components\\TableView\\Header.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/InfoDialog.tsx",
+      "line_number": 289,
+      "context": "lineHeight=\"16px\"\n fontWeight=\"600\"\n noSelect\n truncate\n >\n {t(\"AccessGranted\")}\n </Text>\n \n <Text\n fontSize=\"13px\"\n lineHeight=\"20px\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/authorized-apps/sub-components/TableView/Header.tsx",
       "line_number": 30,
       "context": "enable: true,\n minWidth: 150,\n },\n {\n key: \"Access granted\",\n title: t(\"OAuth:AccessGranted\"),\n resizable: true,\n enable: true,\n minWidth: 150,\n },\n ];",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

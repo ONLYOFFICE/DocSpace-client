@@ -3,7 +3,7 @@
   "content": "Encryption keys must be re-entered",
   "content_en_sha1_hash": "f6c9e7a53732f83f529413953357fb0a3f6c84d3",
   "created_at": "2025-05-19T21:30:44.961Z",
-  "updated_at": "2025-05-22T11:56:37.899Z",
+  "updated_at": "2025-05-28T09:30:02.999Z",
   "comment": {
     "text": "Encryption keys must be re-entered. This message is used to inform users when they need to re-authenticate or update their encryption keys in a login or update process. It typically appears as a notification or confirmation prompt on a desktop application's login page or dialog box.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\utils\\desktop.ts",
+      "file_path": "/packages/shared/utils/desktop.ts",
       "line_number": 99,
       "context": "case \"updateEncryptionKeys\": {\n setEncryptionKeys?.(params);\n break;\n }\n case \"relogin\": {\n // toastr.info(t(\"Common:EncryptionKeysReload\"));\n // relogin();\n break;\n }\n case \"getsharingkeys\":\n if (!isEditor || typeof getEncryptionAccess !== \"function\") {",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

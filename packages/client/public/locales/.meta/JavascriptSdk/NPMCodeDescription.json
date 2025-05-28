@@ -3,7 +3,7 @@
   "content": "NPM package description",
   "content_en_sha1_hash": "0fa961aa09590e50748d50589c48f3ae07b543a8",
   "created_at": "2025-05-19T21:30:54.597Z",
-  "updated_at": "2025-05-21T08:53:06.835Z",
+  "updated_at": "2025-05-28T09:30:02.574Z",
   "comment": {
     "text": "The \"NPMCodeDescription\" translation key provides the text used to display a package description in the JavaScript SDK's CodeToInsert component. It is used to provide a brief explanation of what the NPM code is intended for, helping users understand its purpose and context within the application.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/CodeToInsert.js",
-      "line_number": 64,
+      "line_number": 65,
       "context": "const npm = (\n <CodeWrapper height=\"fit-content\">\n <CategorySubHeader className=\"copy-window-code\">NPM</CategorySubHeader>\n <Text lineHeight=\"20px\" className=\"preview-description\">\n {t(\"NPMCodeDescription\")}\n </Text>\n <Text lineHeight=\"20px\" className=\"preview-description\">\n {t(\"NPMCodeInstallStep\")}\n </Text>\n <Textarea",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "IP Security is used to restrict login to the portal from all IP addresses except certain addresses.",
   "content_en_sha1_hash": "44b0d01c88431b091b71e7fdb311f966b939f203",
   "created_at": "2025-05-19T21:30:51.725Z",
-  "updated_at": "2025-05-21T04:06:19.580Z",
+  "updated_at": "2025-05-28T09:30:02.784Z",
   "comment": {
     "text": "\"Restricted access IP addresses are used to limit portal login from specific IP addresses.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 96,
+      "line_number": 110,
       "context": "onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"IPSecurity\")}\n subtitle={\n <Trans i18nKey=\"IPSecurityMobileDescription\" ns=\"Settings\" t={t} />\n }\n url=\"/portal-settings/security/access-portal/ip\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper",
       "module": "/packages/client"
     }

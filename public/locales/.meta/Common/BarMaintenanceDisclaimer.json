@@ -3,7 +3,7 @@
   "content": "Please, make sure that all the changes are successfully saved during this day.",
   "content_en_sha1_hash": "94b17010eebe5d31f70c32cf7d338a95514a1cfd",
   "created_at": "2025-05-19T21:30:43.253Z",
-  "updated_at": "2025-05-22T11:56:37.766Z",
+  "updated_at": "2025-05-28T09:30:02.075Z",
   "comment": {
     "text": "This translation key is used to display a notice to users when they access a screen indicating planned maintenance on a bar. The message is displayed when the user clicks on a button or opens a dialog with this ID (\"main-bar\"), and informs them that any changes made during this period should be saved successfully.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\Shell.jsx",
-      "line_number": 319,
+      "file_path": "/packages/client/src/Shell.jsx",
+      "line_number": 318,
       "context": "parentElementId: \"main-bar\",\n headerText: t(\"Attention\"),\n text: `${t(\"BarMaintenanceDescription\", {\n targetDate,\n productName: `${logoText} ${t(\"Common:ProductName\")}`,\n })} ${t(\"BarMaintenanceDisclaimer\")}`,\n isMaintenance: true,\n onAction: () => {\n setMaintenanceExist(false);\n setSnackbarExist(false);\n SnackBar.close();",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

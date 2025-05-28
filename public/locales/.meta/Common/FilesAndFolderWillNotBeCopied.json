@@ -3,7 +3,7 @@
   "content": "Files and folder will not be copied",
   "content_en_sha1_hash": "66648e8a0c6d0b325af25f71b0d660b44211a56d",
   "created_at": "2025-05-19T21:30:45.297Z",
-  "updated_at": "2025-05-22T11:56:37.346Z",
+  "updated_at": "2025-05-28T09:30:02.220Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that files and folders will not be copied when certain actions are performed in a file management context. It appears as part of a dialog box or component where users can resolve conflicts or cancel uploads.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\ConflictResolveDialog\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
       "line_number": 304,
       "context": "const getSkipDescription = () => {\n return isFileDialog\n ? t(\"Common:SkipDescription\")\n : isFolderDialog\n ? t(\"Common:SkipFolderDescription\")\n : t(\"Common:FilesAndFolderWillNotBeCopied\");\n };\n \n const onCloseConflictDialog = () => {\n if (isUploadConflict) {\n cancelUploadAction();",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

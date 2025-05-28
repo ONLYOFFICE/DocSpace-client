@@ -3,7 +3,7 @@
   "content": "Skip",
   "content_en_sha1_hash": "3da474537ac378c616d6b301acc1674bc348cecd",
   "created_at": "2025-05-19T21:30:48.925Z",
-  "updated_at": "2025-05-22T11:56:37.348Z",
+  "updated_at": "2025-05-28T09:30:02.221Z",
   "comment": {
     "text": "The translation key \"SkipTitle\" is used to display a label for a \"Skip\" button in various dialogues and forms. It prompts the user to skip or cancel an action, allowing them to move on without making changes.",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\ConflictResolveDialog\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
       "line_number": 336,
       "context": "selectActionText={t(\"Common:ConflictResolveSelectAction\")}\n overwriteTitle={overwriteTitle}\n overwriteDescription={overwriteDescription}\n duplicateTitle={duplicateTitle}\n duplicateDescription={duplicateDescription}\n skipTitle={t(\"Common:SkipTitle\")}\n skipDescription={skipDescription}\n />\n );\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\FormFillingTipsDialog\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/FormFillingTipsDialog/index.tsx",
       "line_number": 150,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"form-filling_tips_skip\"\n key=\"SkipTitle\"\n label={t(\"Common:SkipTitle\")}\n size={ButtonSize.small}\n onClick={onClose}\n scale\n />\n <Button",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\ConflictResolveDialog\\ConflictResolveDialog.tsx",
+      "file_path": "/packages/doceditor/src/components/ConflictResolveDialog/ConflictResolveDialog.tsx",
       "line_number": 65,
       "context": "selectActionText={t(\"ConflictResolveSelectAction\")}\n overwriteTitle={t(\"OverwriteTitle\")}\n overwriteDescription={t(\"OverwriteDescription\")}\n duplicateTitle={t(\"Common:CreateFileCopy\")}\n duplicateDescription={t(\"CreateDescription\")}\n skipTitle={t(\"SkipTitle\")}\n skipDescription={t(\"SkipDescription\")}\n headerLabel={t(\"ActionRequired\")}\n />\n );\n }",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

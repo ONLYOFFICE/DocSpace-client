@@ -3,7 +3,7 @@
   "content": "Your account is disabled",
   "content_en_sha1_hash": "e5e587a0c2d54d58911d54b6bd44b8c707ee3d40",
   "created_at": "2025-05-19T21:30:57.352Z",
-  "updated_at": "2025-05-22T11:56:37.814Z",
+  "updated_at": "2025-05-28T09:30:02.881Z",
   "comment": {
     "text": "This translation key is used to display a message when an account has been successfully disabled. It appears as a confirmation message in a UI component where user actions have led to account deletion or deactivation.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\login\\src\\app\\(root)\\confirm\\ProfileRemove\\page.client.tsx",
+      "file_path": "/packages/login/src/app/(root)/confirm/ProfileRemove/page.client.tsx",
       "line_number": 92,
       "context": "if (isProfileDeleted) {\n return (\n <>\n <GreetingContainer\n greetingText={t(\"Confirm:DeleteProfileSuccessMessage\", {\n productName: t(\"Common:ProductName\"),\n })}\n />\n <FormWrapper>\n <Text>",
-      "module": "\\packages\\login"
+      "module": "/packages/login"
     }
   ],
   "languages": {

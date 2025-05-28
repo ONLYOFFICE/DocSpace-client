@@ -3,7 +3,7 @@
   "content": "Files copied to «{{folderTitle}}»",
   "content_en_sha1_hash": "efc9d1eb35c4eee0ddc64e6c32501869b672aac8",
   "created_at": "2025-05-19T21:30:54.796Z",
-  "updated_at": "2025-05-22T11:56:37.584Z",
+  "updated_at": "2025-05-28T09:30:02.426Z",
   "comment": {
     "text": "This translation key displays a message indicating that files have been successfully copied to a parent folder. It is used in a UI element, likely a notification or confirmation message, and appears when a user copies a file within a hierarchical structure, such as a directory or folder.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\History\\useFeedTranslation.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 74,
       "context": "count,\n });\n return t(\"InfoPanel:FileMovedToTrash\");\n case \"FileCopied\":\n if (feed.data.fromParentTitle) {\n return t(\"InfoPanel:FileCopiedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"InfoPanel:FileCopiedCount\", {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

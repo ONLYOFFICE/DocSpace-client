@@ -3,7 +3,7 @@
   "content": "Accent",
   "content_en_sha1_hash": "233064dd90bda7ca4c1a71b0aa16595cce74a940",
   "created_at": "2025-05-19T21:30:50.279Z",
-  "updated_at": "2025-05-22T11:56:37.650Z",
+  "updated_at": "2025-05-28T09:30:02.499Z",
   "comment": {
     "text": "The \"AccentColor\" translation key defines the text used to display \"Accent\" in a color scheme dialog, likely indicating the current accent color chosen. This text appears on a sub-component of the PortalSettings categories page.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\common\\sub-components\\colorSchemeDialog.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/sub-components/colorSchemeDialog.js",
       "line_number": 156,
       "context": "className=\"new-colors-container\"\n currentColorAccent={currentColorAccent}\n currentColorButtons={currentColorButtons}\n >\n <div className=\"flex relative\">\n <div className=\"name-color\">{t(\"Settings:AccentColor\")}</div>\n <div\n id=\"accent\"\n className=\"modal-add-theme accent-box\"\n onClick={onClickColor}\n />",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

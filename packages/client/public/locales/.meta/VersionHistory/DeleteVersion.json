@@ -3,7 +3,7 @@
   "content": "Delete version",
   "content_en_sha1_hash": "9398dcc860e4a9b586e651d154b9eb533e57b091",
   "created_at": "2025-05-19T21:30:49.927Z",
-  "updated_at": "2025-05-22T11:56:37.396Z",
+  "updated_at": "2025-05-28T09:30:02.267Z",
   "comment": {
     "text": "This translation key is used to display the text \"Delete version\" in a modal dialog. It appears as the header of a confirmation dialog that allows users to delete a version from a version history.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\DeleteVersionDialog\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/DeleteVersionDialog/index.tsx",
       "line_number": 86,
       "context": "}, []);\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>\n {t(\"VersionHistory:DeleteVersion\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className=\"modal-dialog-content-body\">\n <Text lineHeight=\"20px\" noSelect>\n {t(\"VersionHistory:DeleteVersionDescription\")}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

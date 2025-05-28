@@ -3,7 +3,7 @@
   "content": "The link for this file already exists with the Editing permission. Change the access rights to Filling?",
   "content_en_sha1_hash": "b89e8b37040117f7f3a3382105871a15ef1d27ad",
   "created_at": "2025-05-19T21:30:57.193Z",
-  "updated_at": "2025-05-22T11:56:37.797Z",
+  "updated_at": "2025-05-28T09:30:02.865Z",
   "comment": {
     "text": "This translation key is used to display a message that prompts users to change the access rights of an existing link from Editing permission to Filling. It appears in a modal dialog when editing a file and is triggered by clicking \"Submit\".",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\ChangeLinkTypeDialog.tsx",
+      "file_path": "/packages/doceditor/src/components/ChangeLinkTypeDialog.tsx",
       "line_number": 58,
       "context": "onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"ChangeLinkTypeDialog:Title\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {t(\"ChangeLinkTypeDialog:Description\")}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n onClick={onSubmit}\n primary",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

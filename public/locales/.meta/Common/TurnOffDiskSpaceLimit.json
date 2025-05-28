@@ -3,7 +3,7 @@
   "content": "Turn off disk space limit for this {{productName}}.",
   "content_en_sha1_hash": "00f04ca4180774b7c9a26c6f91babcdac9551e23",
   "created_at": "2025-05-19T21:30:49.361Z",
-  "updated_at": "2025-05-22T11:56:37.329Z",
+  "updated_at": "2025-05-28T09:30:02.205Z",
   "comment": {
     "text": "This translation key is used to display a message that allows users to turn off the disk space limit feature in the {{productName}} application. The text appears in a dialog box when users need to change storage quota settings. It provides context for translators to ensure the correct phrase is used in the corresponding language.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\ChangeStorageQuotaDialog\\index.js",
+      "file_path": "/packages/client/src/components/dialogs/ChangeStorageQuotaDialog/index.js",
       "line_number": 124,
       "context": "</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBodyContent>\n <Text noSelect>\n {isDisableQuota\n ? t(\"Common:TurnOffDiskSpaceLimit\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Common:SetDiskSpaceQuota\", {\n productName: t(\"Common:ProductName\"),\n })}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

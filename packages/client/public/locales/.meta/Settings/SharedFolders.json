@@ -3,7 +3,7 @@
   "content": "Shared folders",
   "content_en_sha1_hash": "89815b84dde295d77a537a0bbb8ab594e7418560",
   "created_at": "2025-05-19T21:30:52.705Z",
-  "updated_at": "2025-05-22T11:56:37.662Z",
+  "updated_at": "2025-05-28T09:30:02.505Z",
   "comment": {
     "text": "This translation key is used to display the label \"Shared folders\" in various UI elements. It appears as a section name and description within import steps, allowing users to select shared folders for export.",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\components\\ImportStep.tsx",
-      "line_number": 178,
-      "context": "isDisabled={false}\n />\n <ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:SharedFoldersDescription\")}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
-      "module": "\\packages\\client"
-    },
-    {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\GoogleWorkspace\\Stepper\\index.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
       "line_number": 142,
       "context": "}}\n sharedFilesExportDetails={{\n name: t(\"Settings:SharedFiles\"),\n }}\n sharedFoldersExportDetails={{\n name: t(\"Settings:SharedFolders\"),\n }}\n />\n ),\n },\n {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\NextcloudWorkspace\\Stepper\\index.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
       "line_number": 150,
       "context": "}}\n sharedFilesExportDetails={{\n name: t(\"Settings:SharedFiles\"),\n }}\n sharedFoldersExportDetails={{\n name: t(\"Settings:SharedFolders\"),\n }}\n />\n ),\n },\n {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
+      "line_number": 178,
+      "context": "isDisabled={false}\n />\n <ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:SharedFoldersDescription\")}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
+      "module": "/packages/client"
     }
   ],
   "languages": {

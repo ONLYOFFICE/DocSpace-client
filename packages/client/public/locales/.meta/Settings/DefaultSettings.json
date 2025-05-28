@@ -3,7 +3,7 @@
   "content": "Default settings",
   "content_en_sha1_hash": "57afbebd04d4d02458682eb7fa90339a9d41caac",
   "created_at": "2025-05-19T21:30:51.088Z",
-  "updated_at": "2025-05-22T11:56:37.733Z",
+  "updated_at": "2025-05-28T09:30:02.630Z",
   "comment": {
     "text": "This translation key is used to display a label for a button or dialog that refers to default settings. It appears in various UI components such as buttons and save/cancel dialogs, prompting users to reset to default settings when they have unsaved changes. The exact placement may vary across different files.",
     "is_auto": true,
@@ -11,28 +11,28 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\integration\\DocumentService\\index.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
       "line_number": 410,
       "context": "<SaveCancelButtons\n onSaveClick={onSubmit}\n onCancelClick={onReset}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Settings:DefaultSettings\")}\n reminderText={t(\"Settings:YouHaveUnsavedChanges\")}\n saveButtonDisabled={saveButtonDisabled}\n disableRestoreToDefault={\n isDefaultSettings || isSaveLoading || isResetLoading\n }",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\integration\\LDAP\\sub-components\\ButtonsContainer.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ButtonsContainer.js",
       "line_number": 99,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={openResetModal}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Settings:DefaultSettings\")}\n displaySettings\n hasScroll\n hideBorder\n saveButtonDisabled={saveDisabled}\n disableRestoreToDefault={resetDisabled}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\integration\\SingleSignOn\\SubmitButton.js",
-      "line_number": 59,
-      "context": "className=\"save-cancel-buttons\"\n onSaveClick={() => saveSsoSettings(t)}\n onCancelClick={isSsoEnabled ? openResetModal : resetForm}\n showReminder\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Settings:DefaultSettings\")}\n displaySettings\n hasScroll\n isSaving={isSubmitLoading}\n saveButtonDisabled={isDisabledSaveButton}\n disableRestoreToDefault={",
-      "module": "\\packages\\client"
-    },
-    {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\integration\\SMTPSettings\\sub-components\\ButtonContainer.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/ButtonContainer.js",
       "line_number": 225,
       "context": "isDisabled={isLoading || !isValidForm() || isSMTPInitialSettings}\n isLoading={buttonOperation.save}\n scale={currentDeviceType === DeviceType.mobile}\n />\n <Button\n label={t(\"Settings:DefaultSettings\")}\n size={buttonSize}\n onClick={onClickDefaultSettings}\n isLoading={buttonOperation.reset}\n isDisabled={isLoading || isDefaultSettings}\n scale={currentDeviceType === DeviceType.mobile}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/SubmitButton.js",
+      "line_number": 59,
+      "context": "className=\"save-cancel-buttons\"\n onSaveClick={() => saveSsoSettings(t)}\n onCancelClick={isSsoEnabled ? openResetModal : resetForm}\n showReminder\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Settings:DefaultSettings\")}\n displaySettings\n hasScroll\n isSaving={isSubmitLoading}\n saveButtonDisabled={isDisabledSaveButton}\n disableRestoreToDefault={",
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -3,7 +3,7 @@
   "content": "Applications disabled successfully",
   "content_en_sha1_hash": "3973762d1a46d2cdb20ace836d486fbc344b3913",
   "created_at": "2025-05-19T21:30:53.807Z",
-  "updated_at": "2025-05-22T11:56:37.716Z",
+  "updated_at": "2025-05-28T09:30:02.597Z",
   "comment": {
     "text": "This translation key is used for a success message when an OAuth application is disabled successfully. It is displayed in a dialog window and also shown in a toast notification to confirm that the operation was completed without errors.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\OAuth\\sub-components\\DisableDialog.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/DisableDialog.tsx",
       "line_number": 61,
       "context": "await onDisable?.();\n \n setIsRequestRunning(true);\n toastr.success(\n isGroup\n ? t(\"OAuth:ApplicationsDisabledSuccessfully\")\n : t(\"OAuth:ApplicationDisabledSuccessfully\"),\n );\n onClose?.();\n } catch (error: unknown) {\n const e = error as TData;",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

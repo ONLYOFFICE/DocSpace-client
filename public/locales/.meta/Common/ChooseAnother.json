@@ -3,7 +3,7 @@
   "content": "Choose another",
   "content_en_sha1_hash": "49adb486e24ab06f21e867eaa412afef67f497a6",
   "created_at": "2025-05-19T21:30:43.438Z",
-  "updated_at": "2025-05-22T11:56:37.848Z",
+  "updated_at": "2025-05-28T09:30:02.942Z",
   "comment": {
     "text": "The translation key \"ChooseAnother\" is used to display an instruction that prompts the user to select another file when given the option to choose multiple files. It appears in a button element within the ImageCropper component, indicating the action of selecting an alternative file. This text should be translated to support users with different languages and cultures.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\components\\image-editor\\ImageCropper\\index.tsx",
+      "file_path": "/packages/shared/components/image-editor/ImageCropper/index.tsx",
       "line_number": 154,
       "context": "/>\n </div>\n <div\n className={styles.iconCropperChangeButton}\n onClick={() => inputFilesElement.current?.click()}\n title={t(\"Common:ChooseAnother\")}\n >\n <ReactSVG src={RefreshReactSvgUrl} />\n <div className={styles.iconCropperChangeButtonText}>\n {t(\"Common:ChooseAnother\")}\n </div>",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\components\\image-editor\\ImageCropper\\index.tsx",
+      "file_path": "/packages/shared/components/image-editor/ImageCropper/index.tsx",
       "line_number": 154,
       "context": "/>\n </div>\n <div\n className={styles.iconCropperChangeButton}\n onClick={() => inputFilesElement.current?.click()}\n title={t(\"Common:ChooseAnother\")}\n >\n <ReactSVG src={RefreshReactSvgUrl} />\n <div className={styles.iconCropperChangeButtonText}>\n {t(\"Common:ChooseAnother\")}\n </div>",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

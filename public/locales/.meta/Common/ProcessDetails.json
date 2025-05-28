@@ -3,7 +3,7 @@
   "content": "Process details",
   "content_en_sha1_hash": "4953bc29de892cdbb1d582430dd71fda1ac51f15",
   "created_at": "2025-05-19T21:30:47.485Z",
-  "updated_at": "2025-05-22T11:56:37.876Z",
+  "updated_at": "2025-05-28T09:30:02.961Z",
   "comment": {
     "text": "This translation key is used for displaying process details in a UI. It's displayed as a heading in a filling status panel and related to file information.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\dialogs\\FillingStatusPanel\\index.tsx",
+      "file_path": "/packages/shared/dialogs/FillingStatusPanel/index.tsx",
       "line_number": 155,
       "context": "<Heading\n fontSize=\"14px\"\n className={styles.processTitle}\n level={HeadingLevel.h5}\n >\n {t(\"Common:ProcessDetails\")}\n </Heading>\n <FillingRoleProcess\n fileStatus={fillingStatus}\n processDetails={formFillingStatus}\n currentUserId={user.id}",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

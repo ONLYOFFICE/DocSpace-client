@@ -3,7 +3,7 @@
   "content": "fill in out",
   "content_en_sha1_hash": "fb5d9da8831a6634fe60fa2a638695478b55f6a3",
   "created_at": "2025-05-19T21:30:45.388Z",
-  "updated_at": "2025-05-22T11:56:37.861Z",
+  "updated_at": "2025-05-28T09:30:02.953Z",
   "comment": {
     "text": "This translation key is used to display a comment indicating that a user can fill out a form. It appears in the UI when interacting with share settings, specifically when selecting \"Form Filling\" as a share access right.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\components\\share\\Share.helpers.tsx",
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
       "line_number": 265,
       "context": "case ShareAccessRights.Comment:\n return t(\"Common:Comment\");\n case ShareAccessRights.ReadOnly:\n return t(\"Common:ReadOnly\");\n case ShareAccessRights.FormFilling:\n return t(\"Common:FillInOut\");\n default:\n return \"\";\n }\n };",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

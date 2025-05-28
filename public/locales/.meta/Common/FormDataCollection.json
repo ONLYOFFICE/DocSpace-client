@@ -3,7 +3,7 @@
   "content": "Form data collection",
   "content_en_sha1_hash": "3d5d135c8ecaa49feb2eb2292d2853c68b62d6ea",
   "created_at": "2025-05-19T21:30:45.482Z",
-  "updated_at": "2025-05-22T11:56:37.401Z",
+  "updated_at": "2025-05-28T09:30:02.272Z",
   "comment": {
     "text": "This translation key is used to display the title and description of a \"Form data collection\" option, which likely refers to sharing or exporting form data in various UI contexts such as dialogues, panels, and dialogs. The text appears in button labels, titles, and descriptions, typically related to sharing or collaboration features.",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\FillPDFDialog\\FillPDFDialog.tsx",
+      "file_path": "/packages/client/src/components/dialogs/FillPDFDialog/FillPDFDialog.tsx",
       "line_number": 114,
       "context": "onClick: openEditorFill,\n icon: <FillOutYourselfIcon />,\n },\n {\n id: \"form-data-collection\",\n title: t(\"Common:FormDataCollection\"),\n description: t(\"Common:FormDataCollectionDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: () => openSelector(RoomsType.FormRoom),\n icon: <FormDataCollectionIcon />,\n },",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\panels\\ShareFormPanel\\index.js",
+      "file_path": "/packages/client/src/components/panels/ShareFormPanel/index.js",
       "line_number": 95,
       "context": "onClick: onClickShareFile,\n icon: <ShareSvg />,\n },\n {\n id: \"form-data-collection\",\n title: t(\"Common:FormDataCollection\"),\n description: t(\"Common:FormDataCollectionDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\ShareFormDialog.tsx",
+      "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
       "line_number": 165,
       "context": "icon: <ShareSvg />,\n disabled: !file.canShare,\n },\n {\n id: \"form-room\",\n title: t(\"Common:FormDataCollection\"),\n description: t(\"Common:FormDataCollectionDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

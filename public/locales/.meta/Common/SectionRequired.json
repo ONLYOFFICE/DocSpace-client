@@ -3,7 +3,7 @@
   "content": "This section is required",
   "content_en_sha1_hash": "966ddeb8d027a6ea2fc2fa4163eeb661d2fe085a",
   "created_at": "2025-05-19T21:30:48.346Z",
-  "updated_at": "2025-05-22T11:56:37.715Z",
+  "updated_at": "2025-05-28T09:30:02.594Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a section is required on a form, specifically in the OAuth scopes setup process. The text appears as an error label on a dark or light background depending on the system theme, providing context for translators.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\OAuth\\sub-components\\ClientForm\\components\\ScopesBlock.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/ScopesBlock.tsx",
       "line_number": 271,
       "context": "theme.isBase\n ? globalColors.lightErrorStatus\n : globalColors.darkErrorStatus\n }\n >\n {t(\"Common:SectionRequired\")}\n </Text>\n <span />\n <span />\n </>\n ) : null}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

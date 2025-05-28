@@ -3,7 +3,7 @@
   "content": "Link to form:",
   "content_en_sha1_hash": "50f3f84afe5ad2613a1c1fcafe7a2ba39b7e4ca0",
   "created_at": "2025-05-19T21:30:57.187Z",
-  "updated_at": "2025-05-22T11:56:37.802Z",
+  "updated_at": "2025-05-28T09:30:02.870Z",
   "comment": {
     "text": "This translation key is used to display a label that indicates the user can link to a form. It appears as a button or link in the completed form UI, and its purpose is to provide an option for users to navigate between the current form and another form.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\completed-form\\CompletedVDRForm.tsx",
+      "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
       "line_number": 138,
       "context": "const label = useMemo(() => {\n if (isStartFilling) return t(\"CompletedForm:LinkToFillOutForm\");\n \n if (completed) return t(\"CompletedForm:LinkToViewOnlyForm\");\n \n return t(\"CompletedForm:LinkToForm\");\n }, [t, isStartFilling, completed]);\n \n const header = useMemo(() => {\n if (isStartFilling) {\n return t(\"CompletedForm:FormVDRConfirmationOfStartTitle\");",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

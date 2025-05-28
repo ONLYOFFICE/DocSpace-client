@@ -3,7 +3,7 @@
   "content": "Connect",
   "content_en_sha1_hash": "b65463cb6a42a17de514acc4659f7fd331e0876a",
   "created_at": "2025-05-19T21:30:43.652Z",
-  "updated_at": "2025-05-22T11:56:37.374Z",
+  "updated_at": "2025-05-28T09:30:02.241Z",
   "comment": {
     "text": "This translation key is used for a \"Connect\" button that appears in various UI elements, such as buttons and dialog components. Its purpose is to provide a consistent label for this action across different applications and languages, allowing users to understand what happens when they click on the button.",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\CreateEditRoomDialog\\sub-components\\ThirdPartyStorage\\ThirdPartyComboBox.js",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/ThirdPartyComboBox.js",
       "line_number": 322,
       "context": "!!storageLocation?.thirdpartyAccount ||\n isDisabled\n }\n className=\"set_room_params-thirdparty-connect\"\n size=\"small\"\n label={t(\"Common:Connect\")}\n onClick={onShowService}\n />\n </div>\n </StyledStorageLocation>\n );",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-management\\backup\\common-container\\DirectThirdPartyConnection.js",
-      "line_number": 305,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/common-container/DirectThirdPartyConnection.js",
+      "line_number": 308,
       "context": "{!connectedThirdPartyAccount?.id || !isTheSameThirdPartyAccount ? (\n <Button\n id=\"connect-button\"\n primary\n label={t(\"Common:Connect\")}\n onClick={onConnect}\n size={buttonSize}\n isDisabled={isDisabledComponent}\n />\n ) : (",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\management\\src\\categories\\spaces\\sub-components\\ConfigurationSection.tsx",
+      "file_path": "/packages/management/src/categories/spaces/sub-components/ConfigurationSection.tsx",
       "line_number": 197,
       "context": "<Button\n isLoading={isLoading}\n size={isMobile ? ButtonSize.normal : ButtonSize.small}\n className=\"spaces-button\"\n label={t(\"Common:Connect\")}\n onClick={onConfigurationPortal}\n primary\n style={{ marginTop: \"2px\" }}\n tabIndex={3}\n />",
-      "module": "\\packages\\management"
+      "module": "/packages/management"
     }
   ],
   "languages": {

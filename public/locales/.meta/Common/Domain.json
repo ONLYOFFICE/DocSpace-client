@@ -3,7 +3,7 @@
   "content": "Domain",
   "content_en_sha1_hash": "9b10914d8b0a097ace7176e8973f5c3dee92bb44",
   "created_at": "2025-05-19T21:30:44.590Z",
-  "updated_at": "2025-05-22T11:56:37.816Z",
+  "updated_at": "2025-05-28T09:30:02.887Z",
   "comment": {
     "text": "The translation key \"Domain\" is used to display a user's domain or machine name. It appears in various UI elements such as information sections and input fields within the login wizard and configuration settings, providing context for users about their account or system details.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\login\\src\\app\\(root)\\wizard\\page.client.tsx",
+      "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
       "line_number": 447,
       "context": "</FieldContainer>\n )}\n \n <StyledInfo>\n <Text className=\"text\" fontWeight={400}>\n {t(\"Common:Domain\")}\n </Text>\n <Text fontWeight={600} className=\"machine-name\">\n {machineName}\n </Text>\n </StyledInfo>",
-      "module": "\\packages\\login"
+      "module": "/packages/login"
     },
     {
-      "file_path": "\\packages\\management\\src\\categories\\spaces\\sub-components\\ConfigurationSection.tsx",
+      "file_path": "/packages/management/src/categories/spaces/sub-components/ConfigurationSection.tsx",
       "line_number": 141,
       "context": "<Text\n fontSize=\"13px\"\n fontWeight={600}\n className=\"spaces-domain-text\"\n >\n {t(\"Common:Domain\")}\n </Text>\n <Text className=\"spaces-input-subheader\">(example.com)</Text>\n </div>\n \n <TextInput",
-      "module": "\\packages\\management"
+      "module": "/packages/management"
     }
   ],
   "languages": {

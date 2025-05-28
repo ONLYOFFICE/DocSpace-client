@@ -3,7 +3,7 @@
   "content": "Please try again later",
   "content_en_sha1_hash": "390ef05b923177694865bed8c67a2651f7f261aa",
   "created_at": "2025-05-19T21:30:55.114Z",
-  "updated_at": "2025-05-22T11:56:37.555Z",
+  "updated_at": "2025-05-28T09:30:02.406Z",
   "comment": {
     "text": "This translation key is used for an error message that appears on a form gallery screen, prompting users to try again later. The text \"Please try again later\" is displayed in a specific error view component and is translated using this key.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\FormGallery\\ErrorView\\index.js",
+      "file_path": "/packages/client/src/pages/FormGallery/ErrorView/index.js",
       "line_number": 73,
       "context": "return (\n <Styled.ErrorView\n imageSrc={ErrorImageSvgUrl}\n imageAlt=\"Error Screen Gallery image\"\n headerText={t(\"FormGallery:ErrorViewHeader\")}\n descriptionText={t(\"FormGallery:ErrorViewDescription\")}\n buttons={\n <Button\n primary\n label={t(\"Common:GoBack\")}\n scale={isMobile}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

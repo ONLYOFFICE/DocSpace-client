@@ -3,7 +3,7 @@
   "content": "Trial {{count}} days",
   "content_en_sha1_hash": "9c538da52c03c4af1cda11f0c9a7ecfa5601131f",
   "created_at": "2025-05-19T21:30:49.334Z",
-  "updated_at": "2025-05-22T11:56:37.521Z",
+  "updated_at": "2025-05-28T09:30:02.174Z",
   "comment": {
     "text": "The \"TrialDaysLeft\" translation key is used to display the remaining trial period days in a formatted manner. It appears on the tariff bar component and is displayed when the license date has not expired, indicating the number of days left for a trial period.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\TariffBar\\helpers.js",
+      "file_path": "/packages/client/src/components/TariffBar/helpers.js",
       "line_number": 65,
       "context": ") {\n if (isTrial) {\n if (isLicenseDateExpired)\n return { label: t(\"Common:TrialExpired\"), color: ORANGE };\n return {\n label: t(\"Common:TrialDaysLeft\", { count: trialDaysLeft }),\n color: ORANGE,\n };\n }\n if (isLicenseDateExpired)\n return {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

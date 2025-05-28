@@ -3,7 +3,7 @@
   "content": "<1>{{currencySymbol}}</1><1>{{price}}</1> per admin/month",
   "content_en_sha1_hash": "d3eb0f575626630961e0da29da3a6896ee7cc824",
   "created_at": "2025-05-19T21:30:47.342Z",
-  "updated_at": "2025-05-22T11:56:37.743Z",
+  "updated_at": "2025-05-28T09:30:02.672Z",
   "comment": {
     "text": "This translation key is used to format a price per admin/user/month, displayed in a specific format with currency symbol and value. It appears as part of UI components that calculate or display payment costs, typically in settings or configuration pages. Translators should focus on adapting the price and currency symbol for different languages.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\payments\\SaaS\\PaymentContainer.js",
-      "line_number": 345,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PaymentContainer.js",
+      "line_number": 338,
       "context": "components={{ 1: <span /> }}\n />\n ) : (\n <Trans\n t={t}\n i18nKey=\"PerUserMonth\"\n ns=\"Common\"\n values={{ currencySymbol, price: startValue }}\n components={{ 1: <span /> }}\n />\n )}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\payments\\SaaS\\PriceCalculation.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PriceCalculation.js",
       "line_number": 150,
       "context": "components={{ 1: <strong style={{ fontSize: \"16px\" }} /> }}\n />\n ) : (\n <Trans\n t={t}\n i18nKey=\"PerUserMonth\"\n ns=\"Common\"\n values={{ currencySymbol, price: priceManagerPerMonth }}\n components={{ 1: <strong style={{ fontSize: \"16px\" }} /> }}\n />\n )}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

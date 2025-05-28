@@ -3,7 +3,7 @@
   "content": "or",
   "content_en_sha1_hash": "1758356db21759f7c5a0da9b4dd1db8fd6feab3f",
   "created_at": "2025-05-19T21:30:47.119Z",
-  "updated_at": "2025-05-22T11:56:37.501Z",
+  "updated_at": "2025-05-28T09:30:02.362Z",
   "comment": {
     "text": "\"This translation key is used to display an 'or' operator symbol, typically used in hotkeys or shortcuts, such as Ctrl + / or ?.\"",
     "is_auto": true,
@@ -11,64 +11,64 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\panels\\HotkeysPanel\\ActionsBlock.js",
+      "file_path": "/packages/client/src/components/panels/HotkeysPanel/ActionsBlock.js",
       "line_number": 43,
       "context": "</>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysRemove\")}</Text>\n <Text {...keyTextStyles}>{`# ${t(\"Common:Or\")} Delete`}</Text>\n </>\n </Row>\n {/* <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysUndoLastAction\")}</Text>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\panels\\HotkeysPanel\\ApplicationActionsBlock.js",
+      "file_path": "/packages/client/src/components/panels/HotkeysPanel/ApplicationActionsBlock.js",
       "line_number": 37,
       "context": "return (\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysShortcuts\")}</Text>\n <Text {...keyTextStyles}>\n {CtrlKey} + / {t(\"Common:Or\")} ?\n </Text>\n </>\n </Row>\n );\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\panels\\HotkeysPanel\\PreviewActionsBlock.js",
+      "file_path": "/packages/client/src/components/panels/HotkeysPanel/PreviewActionsBlock.js",
       "line_number": 49,
       "context": "</>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysZoomIn\")}</Text>\n <Text {...keyTextStyles}>+ {t(\"Common:Or\")} =</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysZoomOut\")}</Text>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\panels\\HotkeysPanel\\SelectionBlock.js",
+      "file_path": "/packages/client/src/components/panels/HotkeysPanel/SelectionBlock.js",
       "line_number": 43,
       "context": "</>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectDown\")}</Text>\n <Text {...keyTextStyles}>j {t(\"Common:Or\")} ↓</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectUp\")}</Text>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\panels\\HotkeysPanel\\SelectionBlock.js",
+      "file_path": "/packages/client/src/components/panels/HotkeysPanel/SelectionBlock.js",
       "line_number": 43,
       "context": "</>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectDown\")}</Text>\n <Text {...keyTextStyles}>j {t(\"Common:Or\")} ↓</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectUp\")}</Text>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\panels\\HotkeysPanel\\SelectionBlock.js",
+      "file_path": "/packages/client/src/components/panels/HotkeysPanel/SelectionBlock.js",
       "line_number": 43,
       "context": "</>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectDown\")}</Text>\n <Text {...keyTextStyles}>j {t(\"Common:Or\")} ↓</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectUp\")}</Text>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\panels\\HotkeysPanel\\SelectionBlock.js",
+      "file_path": "/packages/client/src/components/panels/HotkeysPanel/SelectionBlock.js",
       "line_number": 43,
       "context": "</>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectDown\")}</Text>\n <Text {...keyTextStyles}>j {t(\"Common:Or\")} ↓</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectUp\")}</Text>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\panels\\HotkeysPanel\\SelectionBlock.js",
+      "file_path": "/packages/client/src/components/panels/HotkeysPanel/SelectionBlock.js",
       "line_number": 43,
       "context": "</>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectDown\")}</Text>\n <Text {...keyTextStyles}>j {t(\"Common:Or\")} ↓</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectUp\")}</Text>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\panels\\HotkeysPanel\\SelectionBlock.js",
+      "file_path": "/packages/client/src/components/panels/HotkeysPanel/SelectionBlock.js",
       "line_number": 43,
       "context": "</>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectDown\")}</Text>\n <Text {...keyTextStyles}>j {t(\"Common:Or\")} ↓</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"HotkeysSelectUp\")}</Text>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\integration\\SingleSignOn\\sub-components\\UploadXML.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/UploadXML.js",
       "line_number": 173,
       "context": "onClick={onUploadClick}\n tabIndex={2}\n />\n </div>\n <Text className=\"or-text\" noSelect>\n {t(\"Common:Or\")}\n </Text>\n \n <FileInput\n idButton=\"select-file\"\n accept={[\".xml\"]}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -3,7 +3,7 @@
   "content": "Switch to compact view",
   "content_en_sha1_hash": "00089d46aa530f8ca9b4dd1cc4f17fed0a89d0bf",
   "created_at": "2025-05-19T21:30:49.242Z",
-  "updated_at": "2025-05-22T11:56:37.867Z",
+  "updated_at": "2025-05-28T09:30:02.958Z",
   "comment": {
     "text": "This translation key is used to display a label that switches between compact and thumbnail views. It is displayed as an icon in a view selector component, indicating the current mode of operation. The text \"Switch to compact view\" or its alternative, depending on the selected view.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\components\\view-selector\\index.tsx",
+      "file_path": "/packages/shared/components/view-selector/index.tsx",
       "line_number": 85,
       "context": "id={id}\n key={value}\n data-view={value}\n title={\n value === \"row\"\n ? t(\"Common:SwitchViewToCompact\")\n : t(\"Common:SwitchToThumbnails\")\n }\n data-testid=\"view-selector-icon\"\n >\n {typeof icon === \"string\" ? <ReactSVG src={icon} /> : icon}",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\components\\view-selector\\index.tsx",
+      "file_path": "/packages/shared/components/view-selector/index.tsx",
       "line_number": 85,
       "context": "id={id}\n key={value}\n data-view={value}\n title={\n value === \"row\"\n ? t(\"Common:SwitchViewToCompact\")\n : t(\"Common:SwitchToThumbnails\")\n }\n data-testid=\"view-selector-icon\"\n >\n {typeof icon === \"string\" ? <ReactSVG src={icon} /> : icon}",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

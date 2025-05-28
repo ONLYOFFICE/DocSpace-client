@@ -3,7 +3,7 @@
   "content": "Portal restoring is underway",
   "content_en_sha1_hash": "4d21b354c882fba5a868ff44f825eac2c9872eda",
   "created_at": "2025-05-19T21:30:47.439Z",
-  "updated_at": "2025-05-22T11:56:37.811Z",
+  "updated_at": "2025-05-28T09:30:02.877Z",
   "comment": {
     "text": "The \"Portal restoring is underway\" translation key is used to display a message indicating that the preparation portal is being restored, typically in a recovery or error context. This text appears in a dialog box and might be related to a button or a section header. It is part of the UI's recovery process.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\doceditor\\src\\hooks\\useSocketHelper.ts",
+      "file_path": "/packages/doceditor/src/hooks/useSocketHelper.ts",
       "line_number": 72,
       "context": "}, [standalone]);\n \n React.useEffect(() => {\n const callback = async () => {\n try {\n // const message = t(\"Common:PreparationPortalTitle\");\n const message = \"Preparation portal title\";\n \n const docEditor =\n typeof window !== \"undefined\" &&\n window.DocEditor?.instances[EDITOR_ID];",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     },
     {
-      "file_path": "\\packages\\shared\\pages\\PreparationPortal\\index.tsx",
+      "file_path": "/packages/shared/pages/PreparationPortal/index.tsx",
       "line_number": 139,
       "context": "if (!isDialog) getRecoveryProgress();\n }, [ready, getRecoveryProgress, isDialog]);\n \n const headerText = errorMessage\n ? t(\"Common:Error\")\n : t(\"Common:PreparationPortalTitle\");\n \n const componentBody = errorMessage ? (\n <Text className=\"preparation-portal_error\">{`${errorMessage}`}</Text>\n ) : (\n <ColorTheme theme={theme} themeId={ThemeId.Progress} percent={percent}>",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

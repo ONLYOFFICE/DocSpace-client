@@ -3,7 +3,7 @@
   "content": "Filling was stopped by <1>{{userName}}</1>",
   "content_en_sha1_hash": "093cefe1472a16419b884b4d52a6896fc3d841fb",
   "created_at": "2025-05-19T21:30:45.782Z",
-  "updated_at": "2025-05-22T11:56:37.846Z",
+  "updated_at": "2025-05-28T09:30:02.938Z",
   "comment": {
     "text": "This translation key is used to display a message indicating when filling was stopped by a user. It typically appears in a UI element related to filling or process management, such as a history summary or report. The exact appearance depends on the surrounding context and usage in the application.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\components\\filling-role-process\\sub-components\\role-histories\\RoleHistories.tsx",
+      "file_path": "/packages/shared/components/filling-role-process/sub-components/role-histories/RoleHistories.tsx",
       "line_number": 57,
       "context": "\"Common:HistorySubmissionDate\",\n ),\n [FillingFormStatusHistory.StopDate.toString()]: (\n <Trans\n t={t}\n i18nKey=\"HistoryStopDate\"\n ns=\"Common\"\n values={{ userName: stoppedByUserName }}\n components={{ 1: <strong title={stoppedByUserName} /> }}\n />\n ),",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

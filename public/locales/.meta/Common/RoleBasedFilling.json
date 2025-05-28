@@ -3,7 +3,7 @@
   "content": "Role-based filling",
   "content_en_sha1_hash": "13a611456fd9e82242a25e30e2640282094938c7",
   "created_at": "2025-05-19T21:30:47.965Z",
-  "updated_at": "2025-05-22T11:56:37.403Z",
+  "updated_at": "2025-05-28T09:30:02.273Z",
   "comment": {
     "text": "\"Role-based filling is a feature that allows users to share and access PDF files within specific rooms or virtual data rooms. This translation key is used in various UI elements, such as buttons and dialogs, where it appears alongside an icon and a label. Translators should provide a description that accurately conveys the purpose of this feature.\"",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\FillPDFDialog\\FillPDFDialog.tsx",
+      "file_path": "/packages/client/src/components/dialogs/FillPDFDialog/FillPDFDialog.tsx",
       "line_number": 122,
       "context": "onClick: () => openSelector(RoomsType.FormRoom),\n icon: <FormDataCollectionIcon />,\n },\n {\n id: \"role-based-filling\",\n title: t(\"Common:RoleBasedFilling\"),\n description: t(\"Common:RoleBasedFillingDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: () => openSelector(RoomsType.VirtualDataRoom),\n icon: <RoleBasedFillingIcon />,\n },",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\panels\\ShareFormPanel\\index.js",
+      "file_path": "/packages/client/src/components/panels/ShareFormPanel/index.js",
       "line_number": 103,
       "context": "onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },\n {\n id: \"role-based-filling\",\n title: t(\"Common:RoleBasedFilling\"),\n description: t(\"Common:RoleBasedFillingDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickVirtualDataRoom,\n icon: <RoleBasedFillingIcon />,\n },",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\ShareFormDialog.tsx",
+      "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
       "line_number": 173,
       "context": "onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },\n {\n id: \"virtual-data-room\",\n title: t(\"Common:RoleBasedFilling\"),\n description: t(\"Common:RoleBasedFillingDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickVirtualDataRoom,\n icon: <RoleBasedFillingIcon />,\n },",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

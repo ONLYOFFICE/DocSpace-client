@@ -3,7 +3,7 @@
   "content": "Watermark for files in the room enabled",
   "content_en_sha1_hash": "9506b337eecb9b7c7c5901282ebc888da3503049",
   "created_at": "2025-05-19T21:30:54.957Z",
-  "updated_at": "2025-05-22T11:56:37.597Z",
+  "updated_at": "2025-05-28T09:30:02.436Z",
   "comment": {
     "text": "This translation key is used to display the text \"Watermark for files in the room enabled\" when a room's watermark setting has been activated. It appears on the InfoPanel and is likely displayed as a notification or confirmation message indicating the status of the watermark feature.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\History\\useFeedTranslation.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 239,
       "context": "case \"RoomUpdateAccessForGroup\":\n return t(\"InfoPanel:RoomUpdateAccess\");\n case \"RoomGroupRemove\":\n return t(\"InfoPanel:RoomGroupRemove\");\n case \"RoomWatermarkSet\":\n return t(\"InfoPanel:RoomWatermarkSet\");\n case \"RoomWatermarkDisabled\":\n return t(\"InfoPanel:RoomWatermarkDisabled\");\n case \"RoomIndexingEnabled\":\n return t(\"InfoPanel:RoomIndexingEnabled\");\n case \"RoomIndexingDisabled\":",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

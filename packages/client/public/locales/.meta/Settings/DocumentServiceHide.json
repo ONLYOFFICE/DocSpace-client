@@ -3,7 +3,7 @@
   "content": "Hide",
   "content_en_sha1_hash": "34d8b60fe25332f7b98585e82e753eaf502c3e50",
   "created_at": "2025-05-19T21:30:51.369Z",
-  "updated_at": "2025-05-22T11:56:37.731Z",
+  "updated_at": "2025-05-28T09:30:02.628Z",
   "comment": {
     "text": "This translation key is used to display a label indicating whether document service settings are being shown or hidden. It appears in an integrated settings UI element and changes its content based on the state of the setting.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\integration\\DocumentService\\index.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
       "line_number": 324,
       "context": "isHovered\n onClick={onChangeIsShowAdvancedSettings}\n >\n {!isShowAdvancedSettings\n ? t(\"Settings:DocumentServiceShow\")\n : t(\"Settings:DocumentServiceHide\")}\n </Link>\n </Styled.LocationSubheader>\n \n {isShowAdvancedSettings ? (\n <>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -3,7 +3,7 @@
   "content": "Interrupted, some data could not be transferred",
   "content_en_sha1_hash": "349c59e28f97d2eab653eea99278d4df6d2558a5",
   "created_at": "2025-05-19T21:30:56.740Z",
-  "updated_at": "2025-05-22T11:56:37.381Z",
+  "updated_at": "2025-05-28T09:30:02.250Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that some data transfer has been interrupted. It appears in a progress indicator within a Data Reassignment Dialog component, and translates the phrase \"Interrupted\" into various languages.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\DataReassignmentDialog\\sub-components\\Body\\Progress.js",
+      "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Progress.js",
       "line_number": 164,
       "context": ");\n \n const interruptedNode = (\n <div className=\"transfer-information\">\n <InterruptIcon className=\"status-icon\" />\n <Text className=\"status\">{t(\"DataReassignmentDialog:Interrupted\")}</Text>\n </div>\n );\n \n const you = `${`(${t(\"Common:You\")})`}`;",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

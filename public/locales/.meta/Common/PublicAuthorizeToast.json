@@ -3,7 +3,7 @@
   "content": "This room is opened in the <1>{{roomMode}}</1> mode. To be able to work on documents, please authorize.",
   "content_en_sha1_hash": "ffb27f98fd85e2ce3613b4df4c2d7cfd23dd5320",
   "created_at": "2025-05-19T21:30:47.633Z",
-  "updated_at": "2025-05-22T11:56:37.763Z",
+  "updated_at": "2025-05-28T09:30:02.829Z",
   "comment": {
     "text": "This translation key is used for a toast message that informs users about the room mode and asks them to authorize access to work on documents. It appears in a public room page when entering a specific mode.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PublicRoom\\PublicRoomPage.js",
+      "file_path": "/packages/client/src/pages/PublicRoom/PublicRoomPage.js",
       "line_number": 124,
       "context": "t(\"Common:FormAuthorizeToast\", { productName: t(\"Common:ProductName\") })\n ) : (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"PublicAuthorizeToast\"\n values={{ roomMode }}\n components={{\n 1: <Text as=\"span\" fontSize=\"12px\" fontWeight={700} />,\n }}\n />",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

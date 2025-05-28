@@ -3,7 +3,7 @@
   "content": "Link settings",
   "content_en_sha1_hash": "14b50416a42f1b3caddef7006b9b95657e7b4e43",
   "created_at": "2025-05-19T21:30:55.790Z",
-  "updated_at": "2025-05-22T11:56:37.609Z",
+  "updated_at": "2025-05-28T09:30:02.446Z",
   "comment": {
     "text": "This translation key \"LinkSettings\" refers to the settings related to links in a file. It is used as a label in a UI component, likely displayed on a button or in a dialog, to indicate that the user can edit link settings for a specific file.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\Members\\sub-components\\LinkRow.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/LinkRow.tsx",
       "line_number": 172,
       "context": "const getData = () => {\n return [\n {\n key: \"edit-link-key\",\n label: t(\"Files:LinkSettings\"),\n icon: SettingsReactSvgUrl,\n onClick: onEditLink,\n },\n {\n key: \"copy-link-settings-key\",",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -3,7 +3,7 @@
   "content": "The file will be deleted permanently {{date}}",
   "content_en_sha1_hash": "430bd41ec3bbb225ab43c50741aef944921b95dd",
   "created_at": "2025-05-19T21:30:45.324Z",
-  "updated_at": "2025-05-22T11:56:37.849Z",
+  "updated_at": "2025-05-28T09:30:02.945Z",
   "comment": {
     "text": "This translation key is used for a permanent delete confirmation message that appears on a quick button when a file is about to be permanently deleted. It displays the expected date of deletion and is typically shown in a tooltip or dialog box. The message informs the user that the action will result in permanent data loss.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\components\\quick-buttons\\index.tsx",
+      "file_path": "/packages/shared/components/quick-buttons/index.tsx",
       "line_number": 145,
       "context": "!isTile;\n \n const getTooltipContent = () => (\n <Text fontSize=\"12px\" fontWeight={400} noSelect>\n {roomLifetime?.deletePermanently\n ? t(\"Common:FileWillBeDeletedPermanently\", { date: expiredDate || \"\" })\n : t(\"Common:FileWillBeMovedToTrash\", { date: expiredDate || \"\" })}\n </Text>\n );\n \n return (",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

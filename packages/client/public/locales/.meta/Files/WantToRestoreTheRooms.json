@@ -3,7 +3,7 @@
   "content": "All shared links in restored rooms will become active, and their contents will be available to everyone with the room links. Do you want to restore the rooms?",
   "content_en_sha1_hash": "9ffbb14349ec77f9db51e3bc2a6007b6a774efb6",
   "created_at": "2025-05-19T21:30:56.327Z",
-  "updated_at": "2025-05-22T11:56:37.419Z",
+  "updated_at": "2025-05-28T09:30:02.291Z",
   "comment": {
     "text": "This translation key is used for a confirmation prompt in a file restorative dialog, asking users whether they want to restore shared links and their contents to everyone with access. The text appears on a button or similar interactive element within the dialog. It should be translated to ask if the user wants to \"restore\" (plural) rooms, rather than the singular form used in English.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\RestoreRoomDialog\\index.js",
+      "file_path": "/packages/client/src/components/dialogs/RestoreRoomDialog/index.js",
       "line_number": 79,
       "context": "}, []);\n \n const getDescription = () => {\n if (hasPublicRoom) {\n return items.length > 1\n ? t(\"Files:WantToRestoreTheRooms\")\n : t(\"Files:WantToRestoreTheRoom\");\n }\n \n if (restoreAll) return t(\"ArchiveDialog:RestoreAllRooms\");",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

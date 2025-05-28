@@ -3,7 +3,7 @@
   "content": "You have been granted access to the {{itemName}} document",
   "content_en_sha1_hash": "63b9e4bbf777b1c142697c74e24fc94f9f01d505",
   "created_at": "2025-05-19T21:30:50.260Z",
-  "updated_at": "2025-05-22T11:56:37.505Z",
+  "updated_at": "2025-05-28T09:30:02.373Z",
   "comment": {
     "text": "This translation key is used for the subject line of an email invitation to share a document. It appears in a scenario where a user is granted access to a document and can be used as the subject of the email sent to them.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\panels\\InvitePanel\\sub-components\\ExternalLinks.js",
-      "line_number": 190,
+      "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
+      "line_number": 191,
       "context": "// };\n \n // const shareEmail = useCallback(\n //   (link) => {\n //     const { title, shareLink } = link;\n //     const subject = t(\"SharingPanel:ShareEmailSubject\", { title });\n //     const body = t(\"SharingPanel:ShareEmailBody\", { title, shareLink });\n \n //     const mailtoLink = `mailto:${objectToGetParams({\n //       subject,\n //       body,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

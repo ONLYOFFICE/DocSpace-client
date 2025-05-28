@@ -3,7 +3,7 @@
   "content": "Processing of data import",
   "content_en_sha1_hash": "999734d7ec521c34831b73d0c1147ed4ca82180a",
   "created_at": "2025-05-19T21:30:51.073Z",
-  "updated_at": "2025-05-22T11:56:37.675Z",
+  "updated_at": "2025-05-28T09:30:02.505Z",
   "comment": {
     "text": "This translation key is used for the title of a data import processing step in a migration form. It appears as part of a settings or configuration section and provides a descriptive label for the user to understand the current stage of the import process.",
     "is_auto": true,
@@ -11,28 +11,28 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\GoogleWorkspace\\Stepper\\index.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
       "line_number": 148,
       "context": "}}\n />\n ),\n },\n {\n title: t(\"Settings:DataImportProcessing\"),\n description: t(\"Settings:ImportProcessingDescription\"),\n component: <ImportProcessingStep t={t} migratorName=\"GoogleWorkspace\" />,\n },\n {\n title: t(\"Settings:DataImportComplete\"),",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\NextcloudWorkspace\\Stepper\\index.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
       "line_number": 156,
       "context": "}}\n />\n ),\n },\n {\n title: t(\"Settings:DataImportProcessing\"),\n description: t(\"Settings:ImportProcessingDescription\"),\n component: <ImportProcessingStep t={t} migratorName=\"Nextcloud\" />,\n },\n {\n title: t(\"Settings:DataImportComplete\"),",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\OnlyofficeWorkspace\\Stepper\\index.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
       "line_number": 154,
       "context": "hasProjectFiles\n />\n ),\n },\n {\n title: t(\"Settings:DataImportProcessing\"),\n description: t(\"Settings:ImportProcessingDescription\"),\n component: <ImportProcessingStep t={t} migratorName=\"Workspace\" />,\n },\n {\n title: t(\"Settings:DataImportComplete\"),",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\utils\\getStepTitle.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepTitle.js",
       "line_number": 41,
       "context": "case 3:\n return t(\"Settings:SelectUserTypes\");\n case 4:\n return t(\"Settings:DataImport\");\n case 5:\n return t(\"Settings:DataImportProcessing\");\n case 6:\n return t(\"Settings:DataImportComplete\");\n default:\n }\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

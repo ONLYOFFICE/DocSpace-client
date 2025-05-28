@@ -3,7 +3,7 @@
   "content": "Please create the first room in My rooms.",
   "content_en_sha1_hash": "2e074fa0b8a6f1c2c553edbd7e313a8163aa58e1",
   "created_at": "2025-05-19T21:30:44.868Z",
-  "updated_at": "2025-05-22T11:56:37.885Z",
+  "updated_at": "2025-05-28T09:30:02.984Z",
   "comment": {
     "text": "This translation key is used for the description of an empty room screen, appearing on a button or similar interface element. It prompts users to create their first room in \"My rooms\". This message appears when the user has not set up any rooms.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\selectors\\Room\\index.tsx",
+      "file_path": "/packages/shared/selectors/Room/index.tsx",
       "line_number": 263,
       "context": "onSubmit={onSubmit}\n isMultiSelect={isMultiSelect}\n emptyScreenImage={EmptyScreenCorporateSvgUrl}\n emptyScreenHeader={emptyScreenHeader ?? t(\"Common:EmptyRoomsHeader\")}\n emptyScreenDescription={\n emptyScreenDescription ?? t(\"Common:EmptyRoomsDescription\")\n }\n searchEmptyScreenImage={EmptyScreenCorporateSvgUrl}\n searchEmptyScreenHeader={t(\"Common:NotFoundTitle\")}\n searchEmptyScreenDescription={t(\"Common:SearchEmptyRoomsDescription\")}\n totalItems={total}",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

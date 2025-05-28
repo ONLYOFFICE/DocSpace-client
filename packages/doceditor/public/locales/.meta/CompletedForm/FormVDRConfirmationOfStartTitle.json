@@ -3,7 +3,7 @@
   "content": "Form is ready for filling in room",
   "content_en_sha1_hash": "7e7a3ee89a17104067a57c00273fc1efdc5a7071",
   "created_at": "2025-05-19T21:30:57.179Z",
-  "updated_at": "2025-05-22T11:56:37.802Z",
+  "updated_at": "2025-05-28T09:30:02.870Z",
   "comment": {
     "text": "This translation key is used to display a confirmation title when starting to fill in a form. It appears on the screen of a completed form and indicates that it's ready for user input. The exact wording will vary depending on the state of the form (start filling or finalized).",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\completed-form\\CompletedVDRForm.tsx",
+      "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
       "line_number": 143,
       "context": "return t(\"CompletedForm:LinkToForm\");\n }, [t, isStartFilling, completed]);\n \n const header = useMemo(() => {\n if (isStartFilling) {\n return t(\"CompletedForm:FormVDRConfirmationOfStartTitle\");\n }\n \n if (completed) return t(\"CompletedForm:FormFinalized\");\n \n return t(\"CompletedForm:FormSectionCompleted\");",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

@@ -3,7 +3,7 @@
   "content": "No groups here",
   "content_en_sha1_hash": "791d7de61cae4792089d8aaef6c71b9af1483ff3",
   "created_at": "2025-05-19T21:30:46.836Z",
-  "updated_at": "2025-05-22T11:56:37.628Z",
+  "updated_at": "2025-05-28T09:30:02.462Z",
   "comment": {
     "text": "This translation key is used for an empty state message displayed when there are no groups to show. It appears on an empty screen and is typically shown after filtering or searching for groups. The translation can be adjusted to fit the tone and style of the application.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\ContactsBody\\EmptyScreenGroups.tsx",
+      "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreenGroups.tsx",
       "line_number": 80,
       "context": "resetContactsGroupsFilter();\n };\n \n const title = groupsIsFiltered\n ? t(\"Common:NotFoundGroups\")\n : t(\"Common:NoGroupsHere\");\n \n const getIcon = () => {\n if (groupsIsFiltered) {\n return theme.isBase ? (\n <EmptyScreenPersonSvgLight />",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

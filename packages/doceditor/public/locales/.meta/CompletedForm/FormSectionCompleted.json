@@ -3,7 +3,7 @@
   "content": "Form Section Completed",
   "content_en_sha1_hash": "48b6af71d7abdd814d10f4a7d93a2bf85013fb95",
   "created_at": "2025-05-19T21:30:57.173Z",
-  "updated_at": "2025-05-22T11:56:37.803Z",
+  "updated_at": "2025-05-28T09:30:02.870Z",
   "comment": {
     "text": "This translation key \"FormSectionCompleted\" is used to display the text \"Form Section Completed\" in a form section completion indicator. It is likely displayed on a button or dialog related to submitting or finalizing a form, and its purpose is to provide feedback to the user that their form has been completed.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\completed-form\\CompletedVDRForm.tsx",
+      "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
       "line_number": 148,
       "context": "return t(\"CompletedForm:FormVDRConfirmationOfStartTitle\");\n }\n \n if (completed) return t(\"CompletedForm:FormFinalized\");\n \n return t(\"CompletedForm:FormSectionCompleted\");\n }, [t, isStartFilling, completed]);\n \n const headerDescription = useMemo(() => {\n if (isStartFilling) {\n return isYournTurn",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

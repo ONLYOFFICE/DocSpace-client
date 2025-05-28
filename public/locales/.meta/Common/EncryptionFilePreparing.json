@@ -3,7 +3,7 @@
   "content": "Preparing file for encryption",
   "content_en_sha1_hash": "28bc222d1b790617c5f1127bf10b40ca43da20ef",
   "created_at": "2025-05-19T21:30:44.952Z",
-  "updated_at": "2025-05-22T11:56:37.899Z",
+  "updated_at": "2025-05-28T09:30:03.000Z",
   "comment": {
     "text": "Preparing a file for encryption is displayed when an operation type (0: encrypting) is selected. This text is typically used in a message or alert within a UI element, such as a button or dialog, to inform users of the upcoming action.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\utils\\desktop.ts",
+      "file_path": "/packages/shared/utils/desktop.ts",
       "line_number": 123,
       "context": "switch (e.type) {\n case \"operation\":\n if (!message) {\n switch (e.opType) {\n case 0:\n message = t?.(\"Common:EncryptionFilePreparing\");\n break;\n case 1:\n message = t?.(\"Common:EncryptingFile\");\n break;\n default:",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

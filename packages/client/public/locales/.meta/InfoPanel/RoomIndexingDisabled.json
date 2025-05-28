@@ -3,7 +3,7 @@
   "content": "Automatic file indexing disabled in the room",
   "content_en_sha1_hash": "02f93b1ebdc68c686754c44ec9bc719c1dcc705a",
   "created_at": "2025-05-19T21:30:54.930Z",
-  "updated_at": "2025-05-22T11:56:37.598Z",
+  "updated_at": "2025-05-28T09:30:02.437Z",
   "comment": {
     "text": "This translation key is used for the UI message that indicates automatic file indexing is disabled in a room. It appears when the user interacts with settings or options related to file management or room features.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\History\\useFeedTranslation.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 245,
       "context": "case \"RoomWatermarkDisabled\":\n return t(\"InfoPanel:RoomWatermarkDisabled\");\n case \"RoomIndexingEnabled\":\n return t(\"InfoPanel:RoomIndexingEnabled\");\n case \"RoomIndexingDisabled\":\n return t(\"InfoPanel:RoomIndexingDisabled\");\n case \"RoomLifeTimeSet\": {\n const periodLifeTime = feed.data.lifeTime.period;\n const value = feed.data.lifeTime.value;\n const maxValue = 9999;\n const period =",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

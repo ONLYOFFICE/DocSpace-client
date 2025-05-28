@@ -3,7 +3,7 @@
   "content": "Add members",
   "content_en_sha1_hash": "b51503271b7dc41f3719bf2d1720a6d07f6d8ca6",
   "created_at": "2025-05-19T21:30:53.459Z",
-  "updated_at": "2025-05-22T11:56:37.359Z",
+  "updated_at": "2025-05-28T09:30:02.227Z",
   "comment": {
     "text": "Add \"Add members\" button is used to initiate adding new group members in a group edit or creation dialog. It appears as a clickable button next to an icon and is translated from \"PeopleTranslations:AddMembers\".",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\CreateEditGroupDialog\\sub-components\\MembersParam\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/sub-components/MembersParam/index.tsx",
       "line_number": 79,
       "context": "</Styled.Header>\n \n <Styled.AddMembersButton onClick={onShowSelectMembersPanel}>\n <SelectorAddButton\n iconName={PlusSvgUrl}\n label={t(\"PeopleTranslations:AddMembers\")}\n />\n </Styled.AddMembersButton>\n \n {groupMembers ? (\n withInfiniteLoader ? (",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\ContactsBody\\EmptyScreen.tsx",
+      "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreen.tsx",
       "line_number": 121,
       "context": "const getOptions = (): Nullable<EmptyViewOptionsType> => {\n if (isEmptyGroup && currentGroup) {\n return [\n {\n key: \"group-add-user\",\n title: t(\"PeopleTranslations:AddMembers\"),\n description: t(\"EmptyView:EmptyGroupAddedUserOptionDescription\"),\n disabled: isRoomAdmin || currentGroup?.isLDAP,\n icon: <InviteUserIcon />,\n onClick: () => editGroup(currentGroup),\n },",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

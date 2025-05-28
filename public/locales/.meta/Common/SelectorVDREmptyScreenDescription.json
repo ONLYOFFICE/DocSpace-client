@@ -3,7 +3,7 @@
   "content": "To share your form and assign roles to the room participants for filling it out, please create a Virtual Data Room.",
   "content_en_sha1_hash": "7bfa16e48ac3fd715755d7c60f25d71d0451a9d6",
   "created_at": "2025-05-19T21:30:48.496Z",
-  "updated_at": "2025-05-22T11:56:37.854Z",
+  "updated_at": "2025-05-28T09:30:02.949Z",
   "comment": {
     "text": "\"To provide guidance on creating a Virtual Data Room for sharing forms and assigning roles to room participants.\" \n\n(This translation key is used in a button label or dialog related to form creation or assignment of roles.)",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\components\\selector\\sub-components\\EmptySreen\\EmptyScreenFormRoom.tsx",
-      "line_number": 63,
+      "file_path": "/packages/shared/components/selector/sub-components/EmptySreen/EmptyScreenFormRoom.tsx",
+      "line_number": 58,
       "context": ": FormRoomEmptyDarkImageUrl;\n \n const description =\n createDefineRoomType === RoomsType.FormRoom\n ? t(\"Common:SelectorFormRoomEmptyScreenDescription\")\n : t(\"Common:SelectorVDREmptyScreenDescription\");\n \n const buttonLabel =\n createDefineRoomType === RoomsType.FormRoom\n ? t(\"Common:CreateFormFillingRoom\")\n : t(\"Common:CreateVirtualDataRoom\");",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

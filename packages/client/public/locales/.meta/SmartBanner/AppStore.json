@@ -3,7 +3,7 @@
   "content": "On the App Store",
   "content_en_sha1_hash": "e31bba1e7988ce96d6a7dc542d32bcfb6bdda2be",
   "created_at": "2025-05-19T21:30:50.047Z",
-  "updated_at": "2025-05-22T11:56:37.515Z",
+  "updated_at": "2025-05-28T09:30:02.163Z",
   "comment": {
     "text": "This translation key is used for displaying a specific banner on mobile apps when accessing the App Store. The text will appear as a notification or prompt, indicating the app's presence on the App Store. It appears in a banner component on iOS devices.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\SmartBanner\\index.js",
+      "file_path": "/packages/client/src/components/SmartBanner/index.js",
       "line_number": 68,
       "context": "useEffect(() => {\n checkBanner();\n }, [location]);\n \n const storeText = {\n ios: t(\"SmartBanner:AppStore\"),\n android: t(\"SmartBanner:GooglePlay\"),\n windows: \"\",\n kindle: \"\",\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

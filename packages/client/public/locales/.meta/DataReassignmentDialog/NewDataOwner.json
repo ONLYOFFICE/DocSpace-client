@@ -3,7 +3,7 @@
   "content": "New data owner",
   "content_en_sha1_hash": "7ca3235c1bc6aeddbdad6d4a5e5512698930f922",
   "created_at": "2025-05-19T21:30:56.743Z",
-  "updated_at": "2025-05-22T11:56:37.379Z",
+  "updated_at": "2025-05-28T09:30:02.249Z",
   "comment": {
     "text": "The translation key \"NewDataOwner\" is used to display a user's name as the new data owner in a file reassignment dialogue. It appears on a screen where users select and transfer ownership of files, and its content should indicate that this person will be responsible for managing the transferred data. This text helps inform users about their role in the reassignment process.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\DataReassignmentDialog\\sub-components\\Body\\NewOwner.js",
+      "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/NewOwner.js",
       "line_number": 86,
       "context": "}) => {\n return (\n <>\n <StyledPeopleSelectorInfo>\n <Text className=\"new-owner\" noSelect>\n {t(\"DataReassignmentDialog:NewDataOwner\")}\n </Text>\n <Text className=\"description\" noSelect>\n {t(\"DataReassignmentDialog:UserToWhomTheDataWillBeTransferred\")}\n </Text>\n </StyledPeopleSelectorInfo>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

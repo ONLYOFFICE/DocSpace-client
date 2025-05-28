@@ -3,7 +3,7 @@
   "content": "Account",
   "content_en_sha1_hash": "85dfa32c97d8618d1bea083609e2c8a29845abe5",
   "created_at": "2025-05-19T21:30:56.895Z",
-  "updated_at": "2025-05-22T11:56:37.617Z",
+  "updated_at": "2025-05-28T09:30:02.222Z",
   "comment": {
     "text": "This translation key is used to display the account label in a connect dialog, indicating that the user's account information should be saved. It appears as a title and header in a file upload confirmation dialog. Translators can use this context to ensure the label accurately reflects the UI's purpose.",
     "is_auto": true,
@@ -11,16 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\Users\\index.tsx",
-      "line_number": 227,
-      "context": "{t(\"InfoPanel:Data\")}\n </Text>\n </div>\n <div className=\"data__body\">\n <Text className=\"info_field first-row\" noSelect title={t(\"Data\")}>\n {t(\"ConnectDialog:Account\")}\n </Text>\n <Text\n className=\"info_data first-row\"\n fontSize=\"13px\"\n fontWeight={600}",
-      "module": "\\packages\\client"
+      "file_path": "/packages/client/src/components/dialogs/ConnectDialog/index.js",
+      "line_number": 62,
+      "context": "setSaveThirdpartyResponse,\n isConnectDialogReconnect,\n setIsConnectDialogReconnect,\n saveAfterReconnectOAuth,\n setSaveAfterReconnectOAuth,\n setThirdPartyAccountsInfo,\n connectingStorages,\n } = props;\n const { title, link, token, provider_id, provider_key, key } = item;\n \n const connectItem = connectingStorages.find(",
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Filter\\useContacts.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
+      "line_number": 227,
+      "context": "{t(\"InfoPanel:Data\")}\n </Text>\n </div>\n <div className=\"data__body\">\n <Text className=\"info_field first-row\" noSelect title={t(\"Data\")}>\n {t(\"ConnectDialog:Account\")}\n </Text>\n <Text\n className=\"info_data first-row\"\n fontSize=\"13px\"\n fontWeight={600}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
       "line_number": 595,
       "context": "const accountItems = [\n {\n key: \"filter-account\",\n group: \"filter-account\",\n label: t(\"ConnectDialog:Account\"),\n isHeader: true,\n isLast: false,\n },\n {\n key: PaymentsType.Paid,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -3,7 +3,7 @@
   "content": "View all templates",
   "content_en_sha1_hash": "3a859c9aaad47200c7553fa022222df53e96715a",
   "created_at": "2025-05-19T21:30:55.125Z",
-  "updated_at": "2025-05-22T11:56:37.557Z",
+  "updated_at": "2025-05-28T09:30:02.406Z",
   "comment": {
     "text": "The \"ViewAllTemplates\" translation key is used to display a label that shows all templates. It appears as a dropdown item in a category filter on desktop views and mobile view of the same page, allowing users to select all available templates.",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\FormGallery\\Filter\\CategoryFilter\\DesktopView\\index.js",
+      "file_path": "/packages/client/src/pages/FormGallery/Filter/CategoryFilter/DesktopView/index.js",
       "line_number": 98,
       "context": "advancedOptions={\n <>\n <Styled.CategoryFilterItem\n id=\"ViewAllTemplates\"\n key=\"ViewAllTemplates\"\n title={t(\"FormGallery:ViewAllTemplates\")}\n className=\"dropdown-item\"\n label={t(\"FormGallery:ViewAllTemplates\")}\n onClick={onViewAllTemplates}\n onMouseEnter={() => setHoveredSub(null)}\n />",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\FormGallery\\Filter\\CategoryFilter\\DesktopView\\index.js",
+      "file_path": "/packages/client/src/pages/FormGallery/Filter/CategoryFilter/DesktopView/index.js",
       "line_number": 98,
       "context": "advancedOptions={\n <>\n <Styled.CategoryFilterItem\n id=\"ViewAllTemplates\"\n key=\"ViewAllTemplates\"\n title={t(\"FormGallery:ViewAllTemplates\")}\n className=\"dropdown-item\"\n label={t(\"FormGallery:ViewAllTemplates\")}\n onClick={onViewAllTemplates}\n onMouseEnter={() => setHoveredSub(null)}\n />",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\FormGallery\\Filter\\CategoryFilter\\MobileView\\index.js",
+      "file_path": "/packages/client/src/pages/FormGallery/Filter/CategoryFilter/MobileView/index.js",
       "line_number": 143,
       "context": "{!openedMenuItem\n ? [\n <Styled.CategoryFilterItemMobile\n key=\"view-all\"\n className=\"dropdown-item\"\n label={t(\"FormGallery:ViewAllTemplates\")}\n onClick={onViewAllTemplates}\n style={{ paddingLeft: \"0\" }}\n />,\n <DropDownItem\n isSeparator",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

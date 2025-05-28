@@ -3,7 +3,7 @@
   "content": "The form has been fully completed by all roles and is now finalized. It is available in view-only mode.",
   "content_en_sha1_hash": "26749c74f75ad9335d49d1aa931317137dec330d",
   "created_at": "2025-05-19T21:30:57.175Z",
-  "updated_at": "2025-05-22T11:56:37.804Z",
+  "updated_at": "2025-05-28T09:30:02.871Z",
   "comment": {
     "text": "The translation key \"FormVDRCompletedDescription\" is used to display a message when a form has been fully completed and finalized in view-only mode. This text appears on-screen when users access a completed form. Translators should provide a neutral or positive tone that aligns with the application's UI language.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\completed-form\\CompletedVDRForm.tsx",
+      "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
       "line_number": 158,
       "context": "return isYournTurn\n ? t(\"CompletedForm:FormVDRYourTurnDescription\")\n : t(\"CompletedForm:FormVDRConfirmationOfStartDescription\");\n }\n \n if (completed) return t(\"CompletedForm:FormVDRCompletedDescription\");\n \n return t(\"CompletedForm:FormVDRSectionCompletedDescription\");\n }, [t, isStartFilling, completed, isYournTurn]);\n \n const title = useMemo(() => getTitleWithoutExtension(form, false), [form]);",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

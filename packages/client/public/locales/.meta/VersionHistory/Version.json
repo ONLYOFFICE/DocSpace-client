@@ -3,7 +3,7 @@
   "content": "Ver.",
   "content_en_sha1_hash": "ad13edd94b15126ad9e0d50572bd122fefa36cb1",
   "created_at": "2025-05-19T21:30:49.939Z",
-  "updated_at": "2025-05-22T11:56:37.725Z",
+  "updated_at": "2025-05-28T09:30:02.608Z",
   "comment": {
     "text": "This translation key is used for the string \"Ver.\" which will be displayed as the value of a version number in a plugin info container on the PortalSettings page. It appears as part of a larger description of a plugin's version history.",
     "is_auto": true,
@@ -11,10 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\PluginSDK\\index.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/PluginSDK/index.js",
       "line_number": 98,
       "context": "alt=\"Plugin logo\"\n />\n <div className=\"plugin-info-container\">\n <Text>{p.name}</Text>\n <Text className=\"description\">\n {t(\"VersionHistory:Version\")} {p.version}\n </Text>\n </div>\n </div>\n <Text className=\"description-text\" title={p.description}>\n {p.description}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionBadge.js",
+      "line_number": 31,
+      "context": "import React from \"react\";\n import styled, { css } from \"styled-components\";\n import { Text } from \"@docspace/shared/components/text\";\n import { ColorTheme, ThemeId } from \"@docspace/shared/components/color-theme\";\n import VersionSvg from \"PUBLIC_DIR/images/versionrevision_active.react.svg\";\n import { useTranslation } from \"react-i18next\";\n \n const VersionMarkIcon = styled(VersionSvg)`\n path {\n fill: ${(props) =>",
+      "module": "/packages/client"
     }
   ],
   "languages": {

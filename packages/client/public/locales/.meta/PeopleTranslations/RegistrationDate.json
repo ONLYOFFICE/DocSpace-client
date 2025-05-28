@@ -3,7 +3,7 @@
   "content": "Registration date",
   "content_en_sha1_hash": "c498221a5aad95b5674daf56badfb16892c6ed05",
   "created_at": "2025-05-19T21:30:53.492Z",
-  "updated_at": "2025-05-22T11:56:37.618Z",
+  "updated_at": "2025-05-28T09:30:02.453Z",
   "comment": {
     "text": "This translation key is used to display the registration date of a user in the application. It appears as a label on an info panel and is rendered when the user's status is active. Translators should provide a human-readable version of this date in their respective language.",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\Users\\index.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
       "line_number": 266,
       "context": "{infoPanelSelection.status === EmployeeStatus.Active ? (\n <>\n <Text\n className=\"info_field\"\n noSelect\n title={t(\"PeopleTranslations:RegistrationDate\")}\n >\n {t(\"PeopleTranslations:RegistrationDate\")}\n </Text>\n <Text\n className=\"info_data first-row\"",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\Users\\index.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
       "line_number": 266,
       "context": "{infoPanelSelection.status === EmployeeStatus.Active ? (\n <>\n <Text\n className=\"info_field\"\n noSelect\n title={t(\"PeopleTranslations:RegistrationDate\")}\n >\n {t(\"PeopleTranslations:RegistrationDate\")}\n </Text>\n <Text\n className=\"info_data first-row\"",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Filter\\useContacts.tsx",
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
       "line_number": 790,
       "context": "};\n \n const registrationDate = {\n id: \"registration_date\",\n key: \"registrationDate\",\n label: t(\"PeopleTranslations:RegistrationDate\"),\n default: true,\n };\n \n if (isGuests) {\n options.push(firstName, email);",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

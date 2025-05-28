@@ -3,7 +3,7 @@
   "content": "Without icon",
   "content_en_sha1_hash": "e4be945bce935b4bef2b29cc800b01af24c69cf1",
   "created_at": "2025-05-19T21:30:49.603Z",
-  "updated_at": "2025-05-22T11:56:37.423Z",
+  "updated_at": "2025-05-28T09:30:02.293Z",
   "comment": {
     "text": "The translation key \"WithoutIcon\" is used to display the text \"Without icon\" when an icon is not available in a UI component. This text typically appears on a button or dialog related to logos, and it provides context for users about the absence of a visual element.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\RoomLogoCoverDialog\\sub-components\\SelectIcon.tsx",
+      "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/sub-components/SelectIcon.tsx",
       "line_number": 35,
       "context": "import { tablet } from \"@docspace/shared/utils\";\n import { TColorScheme } from \"@docspace/shared/themes\";\n import hexRgb from \"hex-rgb\";\n import { ILogo, SelectIconProps } from \"../RoomLogoCoverDialog.types\";\n \n interface WithoutIconProps {\n isSelected?: boolean;\n }\n \n const StyledWithoutIcon = styled.div<WithoutIconProps>`\n display: flex;",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

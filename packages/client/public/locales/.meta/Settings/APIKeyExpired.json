@@ -3,7 +3,7 @@
   "content": "This API key has expired and is no longer active",
   "content_en_sha1_hash": "5498c70b6165069d2e537997b766fe0372503688",
   "created_at": "2025-05-19T21:30:50.515Z",
-  "updated_at": "2025-05-22T11:56:37.695Z",
+  "updated_at": "2025-05-28T09:30:02.548Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that an API key has expired. It appears as a tooltip in a UI element and provides context for users who need to update or deactivate their API key. The exact appearance may vary depending on the application's design, but its purpose remains consistent: to inform users of their account's current status.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\ApiKeys\\sub-components\\ApiKeysLifetimeIcon\\index.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/ApiKeysLifetimeIcon/index.tsx",
       "line_number": 72,
       "context": "const isExpired = moment().isAfter(moment(expiresAtDate));\n \n const getTooltipContent = () => (\n <Text fontSize=\"12px\" fontWeight={400} noSelect>\n {isExpired\n ? t(\"Settings:APIKeyExpired\")\n : t(\"Settings:APIKeyDeactivated\", { date: expiresAtDate })}\n </Text>\n );\n \n return showLifetimeIcon ? (",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

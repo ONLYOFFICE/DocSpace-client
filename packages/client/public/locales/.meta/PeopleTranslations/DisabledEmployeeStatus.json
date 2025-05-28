@@ -3,7 +3,7 @@
   "content": "Disabled",
   "content_en_sha1_hash": "f4f4473df8cb59f0a369aebee3d1509adc0151c6",
   "created_at": "2025-05-19T21:30:53.465Z",
-  "updated_at": "2025-05-22T11:56:37.524Z",
+  "updated_at": "2025-05-28T09:30:02.381Z",
   "comment": {
     "text": "This translation key represents the text \"Disabled\" used to describe employee status, appearing in various contexts such as info panels and filter options, where it is displayed next to a user's status.",
     "is_auto": true,
@@ -11,28 +11,28 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\helpers\\contacts\\utils.ts",
+      "file_path": "/packages/client/src/helpers/contacts/utils.ts",
       "line_number": 204,
       "context": "case \"active\":\n return t(\"Common:Active\");\n case \"pending\":\n return t(\"PeopleTranslations:PendingInviteTitle\");\n case \"disabled\":\n return t(\"PeopleTranslations:DisabledEmployeeStatus\");\n case \"all\":\n return t(\"All\");\n default:\n return \"\";\n }",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\Users\\index.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
       "line_number": 116,
       "context": "case EmployeeStatus.Pending:\n label = t(\"PeopleTranslations:PendingInviteTitle\");\n break;\n \n case EmployeeStatus.Disabled:\n label = t(\"PeopleTranslations:DisabledEmployeeStatus\");\n break;\n \n case EmployeeStatus.Active:\n default:\n label = t(\"Common:Active\");",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Filter\\useContacts.tsx",
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
       "line_number": 353,
       "context": "break;\n case EmployeeStatus.Pending:\n label = t(\"PeopleTranslations:PendingInviteTitle\");\n break;\n case EmployeeStatus.Disabled:\n label = t(\"PeopleTranslations:DisabledEmployeeStatus\");\n break;\n default:\n break;\n }",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Filter\\useContacts.tsx",
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
       "line_number": 353,
       "context": "break;\n case EmployeeStatus.Pending:\n label = t(\"PeopleTranslations:PendingInviteTitle\");\n break;\n case EmployeeStatus.Disabled:\n label = t(\"PeopleTranslations:DisabledEmployeeStatus\");\n break;\n default:\n break;\n }",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

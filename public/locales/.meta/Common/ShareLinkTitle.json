@@ -3,7 +3,7 @@
   "content": "<1>Anyone</1> with this link can <1>{{access}}</1>.",
   "content_en_sha1_hash": "6d6e1c091aeead5be151a4a71948e11f232ef935",
   "created_at": "2025-05-19T21:30:48.680Z",
-  "updated_at": "2025-05-22T11:56:37.865Z",
+  "updated_at": "2025-05-28T09:30:02.955Z",
   "comment": {
     "text": "This translation key defines a placeholder for a share link title that includes access information. It is used to display a dynamic title in a UI element, indicating what action can be taken when accessing the shared content.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\components\\share\\Share.helpers.tsx",
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
       "line_number": 419,
       "context": "const head = internal ? (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"ShareLinkTitleInternal\"\n values={{ productName: t(\"Common:ProductName\"), access }}\n components={{ 1: <Strong /> }}\n />\n ) : (\n <Trans",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

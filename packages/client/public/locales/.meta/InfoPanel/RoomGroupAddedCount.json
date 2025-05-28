@@ -3,7 +3,7 @@
   "content": "Groups added ({{count}}).",
   "content_en_sha1_hash": "cb7ab7bb6fa0e53d6c5b716aea922f323488eec3",
   "created_at": "2025-05-19T21:30:54.923Z",
-  "updated_at": "2025-05-22T11:56:37.595Z",
+  "updated_at": "2025-05-28T09:30:02.435Z",
   "comment": {
     "text": "This translation key displays the number of groups added to a room, typically shown on an info panel or in a history view. It is used when displaying recent activity related to adding group members, such as a \"Groups added\" count.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\History\\useFeedTranslation.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 230,
       "context": "return t(\"InfoPanel:RoomRemoveUser\");\n case \"RoomInviteResend\":\n return t(\"InfoPanel:RoomInviteResend\");\n case \"RoomGroupAdded\":\n if (hasRelatedItems)\n return t(\"InfoPanel:RoomGroupAddedCount\", {\n count,\n });\n return t(\"InfoPanel:RoomGroupAdded\");\n case \"RoomUpdateAccessForGroup\":\n return t(\"InfoPanel:RoomUpdateAccess\");",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

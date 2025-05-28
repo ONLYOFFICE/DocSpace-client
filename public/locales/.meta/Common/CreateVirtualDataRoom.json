@@ -3,7 +3,7 @@
   "content": "Create virtual data room",
   "content_en_sha1_hash": "cffe205b69e44d4beb86299712697b1f2e680fe5",
   "created_at": "2025-05-19T21:30:43.931Z",
-  "updated_at": "2025-05-22T11:56:37.514Z",
+  "updated_at": "2025-05-28T09:30:02.161Z",
   "comment": {
     "text": "This translation key is used to display the label for creating a virtual data room. It appears as a button label in an empty screen form, and its purpose is to provide a clear instruction for the user when they are presented with an option to create a virtual data room. The translated text will be displayed instead of \"CreateVirtualDataRoom\".",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\ShareCollectSelector\\ShareCollectSelector.tsx",
+      "file_path": "/packages/client/src/components/ShareCollectSelector/ShareCollectSelector.tsx",
       "line_number": 262,
       "context": "icon: InfoIcon,\n onClose: onCloseInfoBar,\n };\n \n const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {\n [RoomsType.VirtualDataRoom]: t(\"Common:CreateVirtualDataRoom\"),\n [RoomsType.FormRoom]: t(\"Common:CreateFormFillingRoom\"),\n };\n \n return (\n <FilesSelectorWrapper",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\StartFillingSelectDialog.tsx",
+      "file_path": "/packages/doceditor/src/components/StartFillingSelectDialog.tsx",
       "line_number": 73,
       "context": "icon: InfoIcon,\n onClose: onCloseInfoBar,\n };\n \n const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {\n [RoomsType.VirtualDataRoom]: t(\"Common:CreateVirtualDataRoom\"),\n [RoomsType.FormRoom]: t(\"Common:CreateFormFillingRoom\"),\n };\n \n return (\n <FilesSelectorWrapper",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     },
     {
-      "file_path": "\\packages\\shared\\components\\selector\\sub-components\\EmptySreen\\EmptyScreenFormRoom.tsx",
-      "line_number": 68,
-      "context": ": t(\"Common:SelectorVDREmptyScreenDescription\");\n \n const buttonLabel =\n createDefineRoomType === RoomsType.FormRoom\n ? t(\"Common:CreateFormFillingRoom\")\n : t(\"Common:CreateVirtualDataRoom\");\n \n return (\n <StyledNewEmptyScreen>\n <img\n className=\"empty-image\"",
-      "module": "\\packages\\shared"
+      "file_path": "/packages/shared/components/selector/sub-components/EmptySreen/EmptyScreenFormRoom.tsx",
+      "line_number": 63,
+      "context": ": t(\"Common:SelectorVDREmptyScreenDescription\");\n \n const buttonLabel =\n createDefineRoomType === RoomsType.FormRoom\n ? t(\"Common:CreateFormFillingRoom\")\n : t(\"Common:CreateVirtualDataRoom\");\n \n return (\n <section className={styles.newEmptyScreen}>\n <img\n className=\"empty-image\"",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

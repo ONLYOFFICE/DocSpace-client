@@ -3,7 +3,7 @@
   "content": "Automatic file indexing enabled in the room",
   "content_en_sha1_hash": "7a847c4f14ff109b1a13c27a8774a3a16f658ac1",
   "created_at": "2025-05-19T21:30:54.932Z",
-  "updated_at": "2025-05-22T11:56:37.598Z",
+  "updated_at": "2025-05-28T09:30:02.437Z",
   "comment": {
     "text": "Automatic file indexing is enabled in the room, allowing users to easily access and manage files within the space. This setting is typically found on a configuration panel or settings screen within the application, where users can toggle its availability.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\History\\useFeedTranslation.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 243,
       "context": "case \"RoomWatermarkSet\":\n return t(\"InfoPanel:RoomWatermarkSet\");\n case \"RoomWatermarkDisabled\":\n return t(\"InfoPanel:RoomWatermarkDisabled\");\n case \"RoomIndexingEnabled\":\n return t(\"InfoPanel:RoomIndexingEnabled\");\n case \"RoomIndexingDisabled\":\n return t(\"InfoPanel:RoomIndexingDisabled\");\n case \"RoomLifeTimeSet\": {\n const periodLifeTime = feed.data.lifeTime.period;\n const value = feed.data.lifeTime.value;",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

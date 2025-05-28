@@ -3,7 +3,7 @@
   "content": "Please note: you can enable RTL languages for the {{productName}} interface in the beta mode. RTL support for the editors will be available soon.",
   "content_en_sha1_hash": "fb20ee1d78cc2f8f9667ecd70cb1b191fa803c61",
   "created_at": "2025-05-19T21:30:43.263Z",
-  "updated_at": "2025-05-22T11:56:37.836Z",
+  "updated_at": "2025-05-28T09:30:02.929Z",
   "comment": {
     "text": "This translation key is used to provide a tooltip message that explains how to enable Right-to-Left (RTL) languages in the {{productName}} interface. The message appears when hovering over the Beta Badge component and is intended to inform users about upcoming RTL support for the editors.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\components\\beta-badge\\index.tsx",
-      "line_number": 50,
+      "file_path": "/packages/shared/components/beta-badge/index.tsx",
+      "line_number": 51,
       "context": "}: BetaBadgeProps) => {\n const { t } = useTranslation([\"Common\", \"Settings\"]);\n \n const tooltipDescription = (\n <>\n {t(\"Common:BetaBadgeDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n {!withOutFeedbackLink ? (\n <Trans\n t={t}",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

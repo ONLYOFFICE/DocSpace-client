@@ -3,7 +3,7 @@
   "content": "You are assigned to fill out the form as the first role. A notification has been sent to your email. You can start filling it out now or copy the filling link and return later.",
   "content_en_sha1_hash": "db2566d6d68d98e8e30beaf2473699a536f81ead",
   "created_at": "2025-05-19T21:30:57.183Z",
-  "updated_at": "2025-05-22T11:56:37.804Z",
+  "updated_at": "2025-05-28T09:30:02.871Z",
   "comment": {
     "text": "This translation key is used for a notification message that explains to the user how to proceed with filling out a form after receiving a notification. It appears in the UI as part of the UI elements related to completing forms.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\completed-form\\CompletedVDRForm.tsx",
+      "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
       "line_number": 154,
       "context": "}, [t, isStartFilling, completed]);\n \n const headerDescription = useMemo(() => {\n if (isStartFilling) {\n return isYournTurn\n ? t(\"CompletedForm:FormVDRYourTurnDescription\")\n : t(\"CompletedForm:FormVDRConfirmationOfStartDescription\");\n }\n \n if (completed) return t(\"CompletedForm:FormVDRCompletedDescription\");",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

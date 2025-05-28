@@ -3,7 +3,7 @@
   "content": "Don't show this message again",
   "content_en_sha1_hash": "61d80c301f09e316dc6777db9a4608b7fca1153a",
   "created_at": "2025-05-19T21:30:44.635Z",
-  "updated_at": "2025-05-22T11:56:37.312Z",
+  "updated_at": "2025-05-28T09:30:02.185Z",
   "comment": {
     "text": "This translation key is used to display a message asking users not to show a confirmation message again. It appears in a cancel operation dialog as a checkbox label and can be translated to provide an alternative way of communicating this request to users.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\CancelOperationDialog\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/CancelOperationDialog/index.tsx",
       "line_number": 102,
       "context": "padding: \"16px 0 0\",\n boxSizing: \"border-box\",\n }}\n >\n <Checkbox\n label={t(\"Common:DontShowMessage\")}\n isChecked={isChecked}\n onChange={onChangeCheckbox}\n />\n </div>\n </ModalDialog.Body>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

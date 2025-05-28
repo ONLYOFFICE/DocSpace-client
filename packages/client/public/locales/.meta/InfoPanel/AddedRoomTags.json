@@ -3,7 +3,7 @@
   "content": "Tags added.",
   "content_en_sha1_hash": "9268951cda48e29cf15ce3ff94de3b2879f6f601",
   "created_at": "2025-05-19T21:30:54.747Z",
-  "updated_at": "2025-05-22T11:56:37.592Z",
+  "updated_at": "2025-05-28T09:30:02.432Z",
   "comment": {
     "text": "This translation key is used to display a brief message indicating that tags have been added in the Info Panel. It appears as a notification or confirmation on the History page, suggesting that a new set of tags has been applied to a room.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\History\\useFeedTranslation.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 169,
       "context": "2: <HistoryText title={feed.data.newTitle} />,\n }}\n />\n );\n case \"AddedRoomTags\":\n return t(\"InfoPanel:AddedRoomTags\");\n case \"DeletedRoomTags\":\n return t(\"InfoPanel:DeletedRoomTags\");\n case \"RoomLogoCreated\":\n case \"RoomColorChanged\":\n case \"RoomCoverChanged\":",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

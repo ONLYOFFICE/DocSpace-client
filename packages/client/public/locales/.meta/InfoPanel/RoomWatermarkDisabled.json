@@ -3,7 +3,7 @@
   "content": "Watermark for files in the room disabled",
   "content_en_sha1_hash": "9f0daf643db9ac09f2c5d26712afdb90fbe2454d",
   "created_at": "2025-05-19T21:30:54.954Z",
-  "updated_at": "2025-05-22T11:56:37.597Z",
+  "updated_at": "2025-05-28T09:30:02.436Z",
   "comment": {
     "text": "This translation key is used to display the message \"Watermark for files in the room disabled\" in a user interface. It likely appears on a settings or configuration page related to file sharing in a room or collaboration environment, such as a button label or tooltip. The translation key provides context for translators regarding the UI element and its purpose.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\History\\useFeedTranslation.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 241,
       "context": "case \"RoomGroupRemove\":\n return t(\"InfoPanel:RoomGroupRemove\");\n case \"RoomWatermarkSet\":\n return t(\"InfoPanel:RoomWatermarkSet\");\n case \"RoomWatermarkDisabled\":\n return t(\"InfoPanel:RoomWatermarkDisabled\");\n case \"RoomIndexingEnabled\":\n return t(\"InfoPanel:RoomIndexingEnabled\");\n case \"RoomIndexingDisabled\":\n return t(\"InfoPanel:RoomIndexingDisabled\");\n case \"RoomLifeTimeSet\": {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

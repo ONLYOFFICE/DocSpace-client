@@ -3,7 +3,7 @@
   "content": "Go back",
   "content_en_sha1_hash": "e84712fbf4eee89d1d896d75da5b5b9ceca43eac",
   "created_at": "2025-05-19T21:30:45.632Z",
-  "updated_at": "2025-05-22T11:56:37.556Z",
+  "updated_at": "2025-05-28T09:30:02.406Z",
   "comment": {
     "text": "The translation key \"GoBack\" is used to display a button label that prompts users to return to the previous page or view. In this specific use case, it appears as part of an error message dialog on a form gallery page, inviting users to navigate back after encountering an error.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\FormGallery\\ErrorView\\index.js",
+      "file_path": "/packages/client/src/pages/FormGallery/ErrorView/index.js",
       "line_number": 77,
       "context": "headerText={t(\"FormGallery:ErrorViewHeader\")}\n descriptionText={t(\"FormGallery:ErrorViewDescription\")}\n buttons={\n <Button\n primary\n label={t(\"Common:GoBack\")}\n scale={isMobile}\n size={!isMobile ? \"small\" : \"normal\"}\n onClick={onGoBack}\n />\n }",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

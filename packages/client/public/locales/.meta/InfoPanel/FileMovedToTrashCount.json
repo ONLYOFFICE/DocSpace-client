@@ -3,7 +3,7 @@
   "content": "Files moved to Trash ({{count}}).",
   "content_en_sha1_hash": "c023c21434431ef659c6b6e643b9d88ff497b188",
   "created_at": "2025-05-19T21:30:54.820Z",
-  "updated_at": "2025-05-22T11:56:37.583Z",
+  "updated_at": "2025-05-28T09:30:02.425Z",
   "comment": {
     "text": "This translation key displays a count of files moved to the trash on a history page, used in an info panel component. It is likely displayed as a message or counter when a specific action (\"FileMovedToTrash\") occurs within a file management context. The exact UI element it appears on is not specified but is related to displaying file movement information.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\History\\useFeedTranslation.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 68,
       "context": "count,\n });\n return t(\"InfoPanel:FileMoved\");\n case \"FileMovedToTrash\":\n if (hasRelatedItems)\n return t(\"InfoPanel:FileMovedToTrashCount\", {\n count,\n });\n return t(\"InfoPanel:FileMovedToTrash\");\n case \"FileCopied\":\n if (feed.data.fromParentTitle) {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

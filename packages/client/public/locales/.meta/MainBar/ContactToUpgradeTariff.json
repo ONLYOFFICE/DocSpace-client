@@ -3,7 +3,7 @@
   "content": "Contact the {{productName}} administrator to upgrade the tariff plan.",
   "content_en_sha1_hash": "73e90a4484889dc6eb26e9a97067dbf1ec7565a6",
   "created_at": "2025-05-19T21:30:54.108Z",
-  "updated_at": "2025-05-22T11:56:37.406Z",
+  "updated_at": "2025-05-28T09:30:02.147Z",
   "comment": {
     "text": "This translation key is used to display a message when users need to contact the administrator to upgrade their tariff plan. It appears in various UI elements, such as a main bar component and dialog warnings, prompting users to reach out for assistance. The phrase \"Product Name\" should be replaced with the actual name of the product being referenced.",
     "is_auto": true,
@@ -11,16 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\InviteQuotaWarningDialog\\sub-components\\RoomsContent.tsx",
-      "line_number": 53,
-      "context": "const chooseNewPlan = (\n <Text>\n {isPaymentPageAvailable\n ? t(\"ChooseNewPlan\")\n : t(\"MainBar:ContactToUpgradeTariff\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n );",
-      "module": "\\packages\\client"
+      "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
+      "line_number": 183,
+      "context": "return t(\"PersonalQuotaHeaderForAdmins\");\n };\n \n const getUpgradeTariffDescription = () => {\n if (!isAdmin)\n return t(\"ContactToUpgradeTariff\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <Trans",
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\InviteQuotaWarningDialog\\sub-components\\UsersContent.tsx",
+      "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/sub-components/RoomsContent.tsx",
+      "line_number": 53,
+      "context": "const chooseNewPlan = (\n <Text>\n {isPaymentPageAvailable\n ? t(\"ChooseNewPlan\")\n : t(\"MainBar:ContactToUpgradeTariff\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/sub-components/UsersContent.tsx",
       "line_number": 77,
       "context": "const chooseNewPlan = (\n <Text>\n {isPaymentPageAvailable\n ? t(\"ChooseNewPlan\")\n : t(\"MainBar:ContactToUpgradeTariff\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n );",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

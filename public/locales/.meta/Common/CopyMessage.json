@@ -1,0 +1,28 @@
+{
+  "key_path": "CopyMessage",
+  "content": "Copy message",
+  "content_en_sha1_hash": "26902efda37d4a30d3f6fd110ba9cc653bae0c8b",
+  "created_at": "2025-05-28T09:32:57.571Z",
+  "updated_at": "2025-05-28T09:33:40.781Z",
+  "comment": {
+    "text": "The \"CopyMessage\" translation key is used to display a message that allows users to copy selected text in the chat application. It appears on a button and informs users after copying has been successful.",
+    "is_auto": true,
+    "updated_at": "2025-05-28T09:33:40.781Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/ButtonsBlock.tsx",
+      "line_number": 59,
+      "context": "const onCopy = () => {\n if (typeof message === \"string\") {\n copy(message);\n \n toastr.success(t(\"Common:CopyMessageSuccess\"));\n }\n };\n \n const onCreateFile = async () => {\n if (typeof message === \"string\") {",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

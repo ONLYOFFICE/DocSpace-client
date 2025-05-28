@@ -3,7 +3,7 @@
   "content": "You are about to delete a file version. It will be no possible to see or restore it anymore. Are you sure you want to continue?",
   "content_en_sha1_hash": "dc5e1b687bf6879d5fbaab0918c52db128223479",
   "created_at": "2025-05-19T21:30:49.935Z",
-  "updated_at": "2025-05-22T11:56:37.396Z",
+  "updated_at": "2025-05-28T09:30:02.267Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message before deleting a file version, warning users that they will lose access to the deleted version. It appears in a dialog box, specifically in a modal dialog header and body. Translators should provide a message that conveys this important information in a clear and concise manner.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\DeleteVersionDialog\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/DeleteVersionDialog/index.tsx",
       "line_number": 91,
       "context": "{t(\"VersionHistory:DeleteVersion\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className=\"modal-dialog-content-body\">\n <Text lineHeight=\"20px\" noSelect>\n {t(\"VersionHistory:DeleteVersionDescription\")}\n </Text>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

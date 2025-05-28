@@ -3,7 +3,7 @@
   "content": "Move to Trash",
   "content_en_sha1_hash": "dffd3b9a8af6c5f81130b3b3e75c9ab26f670bfa",
   "created_at": "2025-05-19T21:30:46.659Z",
-  "updated_at": "2025-05-22T11:56:37.364Z",
+  "updated_at": "2025-05-28T09:30:02.230Z",
   "comment": {
     "text": "This translation key \"MoveToTrash\" is used to display the label for a button or option that moves an item to the trash. In a delete confirmation dialog, it appears as the title of the modal header, prompting the user to move the selected item to the trash instead of deleting it permanently.",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\CreateEditRoomDialog\\sub-components\\FileLifetime.js",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/FileLifetime.js",
       "line_number": 79,
       "context": "];\n \n const deleteOptions = [\n {\n key: 1,\n label: t(\"Common:MoveToTrash\"),\n value: false,\n },\n {\n key: 2,\n label: t(\"Common:DeletePermanently\"),",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\DeleteFileDialog.tsx",
+      "file_path": "/packages/doceditor/src/components/DeleteFileDialog.tsx",
       "line_number": 44,
       "context": "const DeleteFileDialog = ({ onSubmit, onClose }: DeleteFileDialogProps) => {\n const { t } = useTranslation([\"Common\"]);\n \n return (\n <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>\n <ModalDialog.Header>{t(\"Common:MoveToTrashTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <span>\n <>{t(\"Common:DeleteFile\")} </>\n <>{t(\"Common:FilePermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     },
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\DeleteFileDialog.tsx",
+      "file_path": "/packages/doceditor/src/components/DeleteFileDialog.tsx",
       "line_number": 44,
       "context": "const DeleteFileDialog = ({ onSubmit, onClose }: DeleteFileDialogProps) => {\n const { t } = useTranslation([\"Common\"]);\n \n return (\n <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>\n <ModalDialog.Header>{t(\"Common:MoveToTrashTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <span>\n <>{t(\"Common:DeleteFile\")} </>\n <>{t(\"Common:FilePermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

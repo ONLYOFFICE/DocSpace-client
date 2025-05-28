@@ -3,7 +3,7 @@
   "content": "These files are protected. Please try entering the password for all files. If you don't remember the password but need these files, you can download them in their original format or simply remove them from the list. Then you can download the rest of the files.",
   "content_en_sha1_hash": "f5fddb42e87596a64459b490711a116988ce134e",
   "created_at": "2025-05-19T21:30:45.260Z",
-  "updated_at": "2025-05-22T11:56:37.874Z",
+  "updated_at": "2025-05-28T09:30:02.968Z",
   "comment": {
     "text": "\"This translation key is used for a warning message that informs users their files are protected and prompts them to enter a password for download. The text appears in a password input field or related dialog component.\"",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\dialogs\\download-dialog\\sub-components\\PasswordContent.tsx",
+      "file_path": "/packages/shared/dialogs/download-dialog/sub-components/PasswordContent.tsx",
       "line_number": 104,
       "context": "data-testid=\"password-content\"\n >\n {barIsVisible ? (\n <PublicRoomBar\n headerText={t(\"Common:ProtectedFiles\")}\n bodyText={t(\"Common:FileProtectionMessage\")}\n iconName={InfoSvgUrl}\n onClose={onClose}\n />\n ) : null}\n {other && other?.length > 0",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

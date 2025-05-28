@@ -3,7 +3,7 @@
   "content": "Late payment",
   "content_en_sha1_hash": "ef1384780c1411151760b570692633b5fef8f413",
   "created_at": "2025-05-19T21:30:46.083Z",
-  "updated_at": "2025-05-22T11:56:37.521Z",
+  "updated_at": "2025-05-28T09:30:02.173Z",
   "comment": {
     "text": "This translation key is used to display the text \"Late payment\" in a specific UI element, likely as part of an alert or notification on a tariff page when a late payment grace period has expired. The label appears on a red background, indicating its urgent nature. It is intended for use by enterprise users.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\TariffBar\\helpers.js",
+      "file_path": "/packages/client/src/components/TariffBar/helpers.js",
       "line_number": 42,
       "context": "isGracePeriod,\n ) => {\n if (isPaymentPageAvailable) {\n if (isFreeTariff && !isNonProfit)\n return { label: t(\"Common:TryBusiness\"), color: ORANGE };\n if (isGracePeriod) return { label: t(\"Common:LatePayment\"), color: RED };\n }\n };\n \n export const getEnterpriseBar = (\n t,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

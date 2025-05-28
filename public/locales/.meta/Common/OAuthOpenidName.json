@@ -3,7 +3,7 @@
   "content": "Open ID",
   "content_en_sha1_hash": "7e9214361af45339a0429beffb174514a8d73f3e",
   "created_at": "2025-05-19T21:30:47.019Z",
-  "updated_at": "2025-05-22T11:56:37.912Z",
+  "updated_at": "2025-05-28T09:30:03.012Z",
   "comment": {
     "text": "This translation key displays the label \"Open ID\" in the application, likely used as a profile or identity type within OAuth settings. It may appear in UI elements such as profiles or room settings dialogs.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\utils\\oauth\\index.ts",
+      "file_path": "/packages/shared/utils/oauth/index.ts",
       "line_number": 149,
       "context": "case ScopeGroup.profiles:\n return t(\"Common:OAuthProfilesName\");\n case ScopeGroup.rooms:\n return t(\"Common:OAuthRoomsName\");\n case ScopeGroup.openid:\n return t(\"Common:OAuthOpenidName\");\n default:\n return \"\";\n }\n };",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

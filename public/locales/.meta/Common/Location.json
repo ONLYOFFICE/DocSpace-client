@@ -3,7 +3,7 @@
   "content": "Location",
   "content_en_sha1_hash": "d219c68101f532de10add2cf42fb9dbeca73d3be",
   "created_at": "2025-05-19T21:30:46.299Z",
-  "updated_at": "2025-05-22T11:56:37.560Z",
+  "updated_at": "2025-05-28T09:30:02.409Z",
   "comment": {
     "text": "This translation key is used to display a generic \"Location\" label in various UI elements, such as input fields and table headers, typically found in settings or configuration pages. Its purpose is to provide a user-friendly and consistent term for this concept across different applications.",
     "is_auto": true,
@@ -11,28 +11,28 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\helpers\\DetailsHelper.js",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/DetailsHelper.js",
       "line_number": 168,
       "context": "getPropertyTitle = (propertyId) => {\n switch (propertyId) {\n case \"Owner\":\n return this.t(\"Common:Owner\");\n case \"Location\":\n return this.t(\"Common:Location\");\n \n case \"Type\":\n return this.t(\"Common:Type\");\n case \"Storage Type\":\n return this.t(\"InfoPanel:StorageType\");",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\integration\\SingleSignOn\\FieldMapping.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/FieldMapping.js",
       "line_number": 107,
       "context": "value={email}\n hasError={emailHasError}\n />\n \n {/* <SsoFormField\n labelText={t(\"Common:Location\")}\n name=\"location\"\n placeholder={SSO_LOCATION}\n tabIndex={19}\n value={location}\n hasError={locationHasError}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\security\\audit-trail\\TableView\\TableHeader.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/TableView/TableHeader.js",
       "line_number": 61,
       "context": "resizable: true,\n onChange: this.onColumnChange,\n },\n {\n key: \"Room\",\n title: t(\"Common:Location\"),\n enable: true,\n resizable: true,\n onChange: this.onColumnChange,\n },\n {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Profile\\Section\\Body\\sub-components\\active-session\\SessionsTable\\TableView\\SessionsTableHeader.js",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/active-session/SessionsTable/TableView/SessionsTableHeader.js",
       "line_number": 97,
       "context": "resizable: true,\n onChange: onColumnChange,\n },\n {\n key: \"Location\",\n title: t(\"Common:Location\"),\n enable: true,\n resizable: true,\n onChange: onColumnChange,\n },\n ];",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

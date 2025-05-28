@@ -3,7 +3,7 @@
   "content": "Restore to",
   "content_en_sha1_hash": "55a3efe467e20e4698ed5e79684c4b701ff485cb",
   "created_at": "2025-05-19T21:30:47.920Z",
-  "updated_at": "2025-05-22T11:56:37.473Z",
+  "updated_at": "2025-05-28T09:30:02.130Z",
   "comment": {
     "text": "This translation key is used to display a button or dialog title indicating that files can be restored from a previous state. It appears in UI components related to file management and selection, such as the FilesSelector component.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\FilesSelector\\utils.ts",
+      "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
       "line_number": 49,
       "context": "isRestore?: boolean,\n isFormRoom?: boolean,\n isThirdParty?: boolean,\n isSelectFolder?: boolean,\n ) => {\n if (isRestore) return t(\"Common:RestoreTo\");\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

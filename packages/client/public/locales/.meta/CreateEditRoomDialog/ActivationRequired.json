@@ -3,7 +3,7 @@
   "content": "activation required",
   "content_en_sha1_hash": "76f386238b282abadda4b1e1fbd6696b1704ebc9",
   "created_at": "2025-05-19T21:30:56.764Z",
-  "updated_at": "2025-05-22T11:56:37.767Z",
+  "updated_at": "2025-05-28T09:30:02.240Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that activation is required when selecting a third-party storage provider. It appears in a combo box, specifically on the ThirdPartyComboBox component, and will be displayed next to certain third-party storage items if they are not connected or require activation.",
     "is_auto": true,
@@ -11,10 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\store\\BackupStore.js",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/ThirdPartyComboBox.js",
+      "line_number": 253,
+      "context": "const advancedOptions = thirdparties\n .sort((storage) => (storage.isConnected ? -1 : 1))\n ?.map((item) => {\n const disabled = !item.isConnected && !isAdmin;\n const itemLabel =\n item.title + (item.isConnected ? \"\" : ` (${t(\"ActivationRequired\")})`);\n \n const disabledData = disabled\n ? { \"data-tooltip-id\": \"file-links-tooltip\", \"data-tip\": \"tooltip\" }\n : {};",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/BackupStore.js",
       "line_number": 288,
       "context": "getThirdPartyAccount = (provider, t) => {\n const serviceTitle = connectedCloudsTypeTitleTranslation(provider.name, t);\n const serviceLabel = provider.connected\n ? serviceTitle\n : `${serviceTitle} (${t(\"CreateEditRoomDialog:ActivationRequired\")})`;\n \n // const isConnected =\n //   this.connectedThirdPartyAccount?.providerKey === \"WebDav\"\n //     ? serviceTitle === this.connectedThirdPartyAccount?.title\n //     : provider.name === this.connectedThirdPartyAccount?.title;",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

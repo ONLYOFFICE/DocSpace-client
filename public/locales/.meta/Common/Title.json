@@ -3,7 +3,7 @@
   "content": "Title",
   "content_en_sha1_hash": "768e0c1c69573fb588f61f1308a015c11468e05f",
   "created_at": "2025-05-19T21:30:49.298Z",
-  "updated_at": "2025-05-22T11:56:37.498Z",
+  "updated_at": "2025-05-28T09:30:02.359Z",
   "comment": {
     "text": "This translation key is used to display the title of a header or panel element. It appears as a label on buttons, checkboxes, and other UI elements in various applications, such as panels, sections, and settings pages. Translators should focus on translating this content to provide clear and consistent titles throughout the product.",
     "is_auto": true,
@@ -11,58 +11,58 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\panels\\EmbeddingPanel\\index.tsx",
+      "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
       "line_number": 506,
       "context": "{t(\"JavascriptSdk:InterfaceElements\")}\n </Text>\n \n <div className=\"embedding-panel_checkbox-container\">\n <CheckboxElement\n label={t(\"Common:Title\")}\n onChange={onHeaderChange}\n isChecked={embeddingConfig.showTitle}\n img={theme.isBase ? HeaderUrl : HeaderDarkUrl}\n title={t(\"JavascriptSdk:Header\")}\n description={t(\"JavascriptSdk:HeaderDescription\")}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Filter\\useContacts.tsx",
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
       "line_number": 813,
       "context": "const groupsOptions = [];\n \n const title = {\n id: \"sort-by_title\",\n key: \"title\",\n label: t(\"Common:Title\"),\n default: true,\n };\n \n const people = {\n id: \"sort-by_people\",",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\common\\Customization\\welcome-page-settings.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
       "line_number": 326,
       "context": "const settingsBlock = (\n <div className=\"settings-block\">\n <FieldContainer\n id=\"fieldContainerWelcomePage\"\n className=\"field-container-width\"\n labelText={`${t(\"Common:Title\")}`}\n isVertical\n >\n <TextInput\n tabIndex={5}\n id=\"textInputContainerWelcomePage\"",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\presets\\Manager.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
       "line_number": 104,
       "context": "setDocumentTitle(t(\"JavascriptSdk\"));\n \n const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },\n ];",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\presets\\Manager.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
       "line_number": 104,
       "context": "setDocumentTitle(t(\"JavascriptSdk\"));\n \n const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },\n ];",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\presets\\Manager.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
       "line_number": 104,
       "context": "setDocumentTitle(t(\"JavascriptSdk\"));\n \n const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },\n ];",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\presets\\SimpleRoom.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
       "line_number": 383,
       "context": "<CheckboxGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:Title\")}\n onChange={onChangeShowTitle}\n isChecked={config.showTitle}\n />\n <HelpButton\n place=\"right\"",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\presets\\SimpleRoom.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
       "line_number": 383,
       "context": "<CheckboxGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:Title\")}\n onChange={onChangeShowTitle}\n isChecked={config.showTitle}\n />\n <HelpButton\n place=\"right\"",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\integration\\SingleSignOn\\FieldMapping.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/FieldMapping.js",
       "line_number": 116,
       "context": "value={location}\n hasError={locationHasError}\n />\n \n <SsoFormField\n labelText={t(\"Common:Title\")}\n name=\"title\"\n placeholder={SSO_TITLE}\n tabIndex={20}\n value={title}\n hasError={titleHasError}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

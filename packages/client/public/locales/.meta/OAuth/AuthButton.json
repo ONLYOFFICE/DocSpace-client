@@ -3,7 +3,7 @@
   "content": "Auth button",
   "content_en_sha1_hash": "42d86c4f8b922902e61c87c4247787aa5fa197e8",
   "created_at": "2025-05-19T21:30:53.817Z",
-  "updated_at": "2025-05-22T11:56:37.720Z",
+  "updated_at": "2025-05-28T09:30:02.604Z",
   "comment": {
     "text": "The AuthButton translation key refers to the label displayed on an \"Auth button\" component used in OAuth authentication workflows. It appears as a title within a modal dialog, guiding users through the authorization process. Translators should use this key for buttons and dialog titles related to authenticating with external services.",
     "is_auto": true,
@@ -11,10 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\OAuth\\sub-components\\PreviewDialog.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/PreviewDialog.tsx",
       "line_number": 196,
       "context": "visible={visible}\n displayType={ModalDialogType.aside}\n onClose={onClose}\n withBodyScroll\n >\n <ModalDialog.Header>{t(\"OAuth:AuthButton\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledContainer>\n <StyledPreviewContainer>\n <SocialButton\n className=\"social-button\"",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/OAuthStore.ts",
+      "line_number": 738,
+      "context": "};\n \n const authButtonOption = {\n key: \"auth-button\",\n icon: CodeReactSvgUrl,\n label: t(\"AuthButton\"),\n onClick: onShowPreview,\n disabled: !item.enabled,\n };\n \n const enableOption = {",
+      "module": "/packages/client"
     }
   ],
   "languages": {

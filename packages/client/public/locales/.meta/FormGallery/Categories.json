@@ -3,7 +3,7 @@
   "content": "Categories",
   "content_en_sha1_hash": "6ccb60071be8f00760a3824d9f7d0fad57de789f",
   "created_at": "2025-05-19T21:30:55.108Z",
-  "updated_at": "2025-05-22T11:56:37.556Z",
+  "updated_at": "2025-05-28T09:30:02.406Z",
   "comment": {
     "text": "The \"Categories\" translation key is used to display a label for a category filter in a form gallery. It appears as a button title and can also be displayed inside a dropdown list. The translator should provide translations for this text that will be used consistently across different devices and contexts.",
     "is_auto": true,
@@ -11,16 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\FormGallery\\Filter\\CategoryFilter\\DesktopView\\index.js",
+      "file_path": "/packages/client/src/pages/FormGallery/Filter/CategoryFilter/DesktopView/index.js",
       "line_number": 91,
       "context": "fixedDirection\n disableItemClickFirstLevel\n advancedOptionsCount={5}\n selectedOption={{\n label:\n getCategoryTitle(currentCategory) || t(\"FormGallery:Categories\"),\n }}\n advancedOptions={\n <>\n <Styled.CategoryFilterItem\n id=\"ViewAllTemplates\"",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\FormGallery\\Filter\\CategoryFilter\\MobileView\\index.js",
+      "file_path": "/packages/client/src/pages/FormGallery/Filter/CategoryFilter/MobileView/index.js",
       "line_number": 105,
       "context": "<Styled.CategoryFilterMobileWrapper {...rest}>\n <ComboButton\n selectedOption={{\n label:\n getCategoryTitle(currentCategory) || t(\"FormGallery:Categories\"),\n }}\n isOpen={isOpen}\n scaled\n onClick={onToggleDropdown}\n tabIndex={1}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/FormGallery/Filter/CategoryFilter/MobileView/index.js",
+      "line_number": 105,
+      "context": "<Styled.CategoryFilterMobileWrapper {...rest}>\n <ComboButton\n selectedOption={{\n label:\n getCategoryTitle(currentCategory) || t(\"FormGallery:Categories\"),\n }}\n isOpen={isOpen}\n scaled\n onClick={onToggleDropdown}\n tabIndex={1}",
+      "module": "/packages/client"
     }
   ],
   "languages": {

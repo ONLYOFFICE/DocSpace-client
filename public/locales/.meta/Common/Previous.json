@@ -3,7 +3,7 @@
   "content": "Previous",
   "content_en_sha1_hash": "50f94286ba30706a19070d3ec0a0c8d34d6cf6eb",
   "created_at": "2025-05-19T21:30:47.476Z",
-  "updated_at": "2025-05-22T11:56:37.684Z",
+  "updated_at": "2025-05-28T09:30:02.526Z",
   "comment": {
     "text": "This translation key is used to display the label \"Previous\" in a pagination component, typically found on a page of accounts or data, where it serves as a navigation button to proceed to a previous set of results. It is usually displayed as a clickable element.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\sub-components\\AccountsPaging.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/AccountsPaging.tsx",
       "line_number": 126,
       "context": "return (\n <StyledPaging\n className=\"accounts-paging\"\n pageItems={pageItems}\n countItems={countItems}\n previousLabel={t(\"Common:Previous\")}\n nextLabel={t(\"Common:Next\")}\n openDirection=\"top\"\n onSelectPage={onSelectPage}\n onSelectCount={onCountChange}\n previousAction={onSelectPagePrevHandler}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

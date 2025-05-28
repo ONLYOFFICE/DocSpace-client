@@ -3,7 +3,7 @@
   "content": "NO EMAIL",
   "content_en_sha1_hash": "0f557b7a5cc37e08743058f11c9f5c1af82a1a29",
   "created_at": "2025-05-19T21:30:52.016Z",
-  "updated_at": "2025-05-22T11:56:37.653Z",
+  "updated_at": "2025-05-28T09:30:02.511Z",
   "comment": {
     "text": "This translation key is used to display \"NO EMAIL\" in the UI. It appears in a specific table cell within a data import component and serves as a placeholder text when an email address is not set for a user.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\components\\AddEmailsStep\\AccountsTable\\RowView\\UsersRowContent.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/RowView/UsersRowContent.tsx",
       "line_number": 186,
       "context": "className=\"user-email\"\n fontWeight={600}\n fontSize=\"12px\"\n color={globalColors.gray}\n >\n {prevEmail === \"\" ? t(\"Settings:NoEmail\") : prevEmail}\n </Text>\n </div>\n {isEmailOpen ? (\n isMobile() ? (\n <EmailChangeDialog",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\components\\AddEmailsStep\\AccountsTable\\TableView\\UsersTableRow.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/UsersTableRow.tsx",
       "line_number": 235,
       "context": "</EmailInputWrapper>\n ) : (\n <span onClick={openEmail} className=\"user-email\" ref={emailTextRef}>\n <EditSvg />\n <Text color={globalColors.gray} className=\"user-email\" truncate>\n {prevEmail !== \"\" ? prevEmail : t(\"Settings:NoEmail\")}\n </Text>\n </span>\n )}\n </TableCell>\n </StyledTableRow>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

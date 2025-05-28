@@ -3,7 +3,7 @@
   "content": "Developer",
   "content_en_sha1_hash": "7e08ebec5e6f80a136fa4076e041dd0c811a5e70",
   "created_at": "2025-05-19T21:30:44.508Z",
-  "updated_at": "2025-05-22T11:56:37.519Z",
+  "updated_at": "2025-05-28T09:30:02.169Z",
   "comment": {
     "text": "This translation key is used to display the label \"Developer\" in various contexts within the application, typically appearing as a header or title. It appears on standalone components related to benefits and enterprise settings, where it's used to differentiate between developer and enterprise licenses.",
     "is_auto": true,
@@ -11,28 +11,28 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\StandaloneComponents\\BenefitsContainer.js",
+      "file_path": "/packages/client/src/components/StandaloneComponents/BenefitsContainer.js",
       "line_number": 47,
       "context": "const { t } = useTranslation(\"PaymentsEnterprise\");\n \n const title = isEnterprise\n ? t(\"ActivateToProBannerHeaderTrial\", {\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n })\n : t(\"UpgradeToProBannerHeader\");\n \n const features = () => {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\payments\\Standalone\\EnterpriseContainer.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Standalone/EnterpriseContainer.js",
       "line_number": 48,
       "context": "return (\n <StyledEnterpriseComponent>\n <Text fontWeight={700} fontSize=\"16px\">\n {t(\"ActivateRenewSubscriptionHeader\", {\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n })}\n </Text>\n \n <TariffTitleContainer />",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\payments\\Standalone\\sub-components\\TariffTitleContainer.js",
-      "line_number": 103,
-      "context": "<Text fontWeight={600} fontSize=\"14px\" as=\"span\">\n {t(\"ActivateTariffDescr\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n })}\n </Text>{\" \"}\n {!isLicenseDateExpired ? (\n <Text fontSize=\"14px\" as=\"span\">",
-      "module": "\\packages\\client"
-    },
-    {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\payments\\Standalone\\TrialContainer.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Standalone/TrialContainer.js",
       "line_number": 46,
       "context": "return (\n <StyledEnterpriseComponent>\n <Text fontWeight={700} fontSize=\"16px\">\n {t(\"ActivateSwithToProHeader\", {\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n })}\n </Text>\n <TariffTitleContainer t={t} />",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Standalone/sub-components/TariffTitleContainer.js",
+      "line_number": 103,
+      "context": "<Text fontWeight={600} fontSize=\"14px\" as=\"span\">\n {t(\"ActivateTariffDescr\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n })}\n </Text>{\" \"}\n {!isLicenseDateExpired ? (\n <Text fontSize=\"14px\" as=\"span\">",
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -3,7 +3,7 @@
   "content": "State",
   "content_en_sha1_hash": "a72502067518684f9deeec70cf119fd26326cd33",
   "created_at": "2025-05-19T21:30:49.847Z",
-  "updated_at": "2025-05-22T11:56:37.720Z",
+  "updated_at": "2025-05-28T09:30:02.555Z",
   "comment": {
     "text": "This translation key represents the label for a table header column that displays information about API keys or webhooks in a developer tool. The key is used to render the English word \"State\" as displayed on-screen in various UI components.",
     "is_auto": true,
@@ -11,10 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\OAuth\\sub-components\\List\\TableView\\sub-components\\Header.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/TableView/TableHeader.tsx",
+      "line_number": 27,
+      "context": "//\n // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing\n // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0\n // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n \n import { useState } from \"react\";\n import { TableHeader as TableHeaderComponent } from \"@docspace/shared/components/table\";\n \n import { useTranslation } from \"react-i18next\";\n import { inject, observer } from \"mobx-react\";\n import { TableHeaderColumn, TableHeaderProps } from \"../../types\";",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/List/TableView/sub-components/Header.tsx",
       "line_number": 71,
       "context": "withTagRef: true,\n minWidth: 150,\n },\n {\n key: \"State\",\n title: t(\"Webhooks:State\"),\n enable: true,\n resizable: false,\n defaultSize: 64,\n },\n ];",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhooksTable/WebhooksTableView/WebhookTableHeader.js",
+      "line_number": 27,
+      "context": "//\n // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing\n // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0\n // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n \n import { useState, useEffect } from \"react\";\n import { TableHeader } from \"@docspace/shared/components/table\";\n \n import { useTranslation } from \"react-i18next\";\n import { inject, observer } from \"mobx-react\";",
+      "module": "/packages/client"
     }
   ],
   "languages": {

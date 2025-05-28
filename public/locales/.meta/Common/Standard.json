@@ -3,7 +3,7 @@
   "content": "Standard",
   "content_en_sha1_hash": "2dfa66079d9b7229409430972fd5f1567d78a3b6",
   "created_at": "2025-05-19T21:30:49.027Z",
-  "updated_at": "2025-05-22T11:56:37.645Z",
+  "updated_at": "2025-05-28T09:30:02.495Z",
   "comment": {
     "text": "This translation key is used to display the \"Standard\" theme name in a portal settings category. It appears as part of the \"Appearance\" section and is displayed below a button that toggles its visibility.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\common\\appearance.js",
-      "line_number": 695,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
+      "line_number": 697,
       "context": "isShowDeleteButton={isShowDeleteButton}\n >\n <div className=\"header\">{t(\"Common:Color\")}</div>\n \n <div className=\"theme-standard-container\">\n <div className=\"theme-name\">{t(\"Common:Standard\")}</div>\n \n <div className=\"theme-container\">\n {appearanceTheme.map((item) => {\n if (!item.name) return;\n return (",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

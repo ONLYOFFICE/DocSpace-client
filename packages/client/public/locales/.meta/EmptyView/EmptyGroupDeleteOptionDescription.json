@@ -3,7 +3,7 @@
   "content": "If you don't need this group anymore",
   "content_en_sha1_hash": "dec428ad0d9c4eb325b59aad694e50d589cf6317",
   "created_at": "2025-05-19T21:30:56.484Z",
-  "updated_at": "2025-05-22T11:56:37.627Z",
+  "updated_at": "2025-05-28T09:30:02.461Z",
   "comment": {
     "text": "This translation key is used for the description of a delete group option in an empty screen, informing users that they can remove the group if needed. It appears as part of a dialog button and is intended to provide context for deleting a group.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\ContactsBody\\EmptyScreen.tsx",
+      "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreen.tsx",
       "line_number": 130,
       "context": "onClick: () => editGroup(currentGroup),\n },\n {\n key: \"delete-group\",\n title: t(\"DeleteDialog:DeleteGroupTitle\"),\n description: t(\"EmptyView:EmptyGroupDeleteOptionDescription\"),\n disabled: isRoomAdmin || currentGroup?.isLDAP,\n icon: <TrashIcon />,\n onClick: () => deleteGroup!(currentGroup, true),\n },\n ];",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -3,7 +3,7 @@
   "content": "Video",
   "content_en_sha1_hash": "bc17c1f0179a888f2a7e8389f67d4f2cf5cf4531",
   "created_at": "2025-05-19T21:30:49.512Z",
-  "updated_at": "2025-05-22T11:56:37.622Z",
+  "updated_at": "2025-05-28T09:30:02.458Z",
   "comment": {
     "text": "This translation key is used to display the type of a file. It appears as \"Video\" on files categorized as videos in a UI component.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Body\\TableView\\sub-components\\TypeCell.js",
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/TypeCell.js",
       "line_number": 43,
       "context": "case FileType.Unknown:\n return fileTypeName || t(\"Common:Unknown\");\n case FileType.Archive:\n return t(\"Common:Archive\");\n case FileType.Video:\n return t(\"Common:Video\");\n case FileType.Audio:\n return t(\"Common:Audio\");\n case FileType.Image:\n return t(\"Common:Image\");\n case FileType.Spreadsheet:",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\shared\\utils\\getFileType.ts",
+      "file_path": "/packages/shared/utils/getFileType.ts",
       "line_number": 12,
       "context": "case FileType.Unknown:\n return t(\"Common:Unknown\");\n case FileType.Archive:\n return t(\"Common:Archive\");\n case FileType.Video:\n return t(\"Common:Video\");\n case FileType.Audio:\n return t(\"Common:Audio\");\n case FileType.Image:\n return t(\"Common:Image\");\n case FileType.Spreadsheet:",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

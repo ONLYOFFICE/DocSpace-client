@@ -35,7 +35,6 @@ import styles from "./FilesRow.module.scss";
 export const FilesRow = (props: PropsWithChildren<FilesRowProps>) => {
   const {
     className,
-    sectionWidth,
     isThirdPartyFolder,
     checked,
     isActive,
@@ -64,7 +63,6 @@ export const FilesRow = (props: PropsWithChildren<FilesRowProps>) => {
     [styles.isEdit]: isEdit,
     [styles.folderCategory]: folderCategory,
     [styles.withAccess]: withAccess,
-    [styles.sectionWidthMoreThan500]: sectionWidth > 500,
     [styles.inProgress]: inProgress,
     [styles.palmCursor]:
       canDrag && (checked || isActive) && !isThirdPartyFolder,

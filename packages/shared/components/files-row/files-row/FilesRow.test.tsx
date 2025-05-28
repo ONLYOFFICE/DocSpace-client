@@ -32,7 +32,7 @@ import { FilesRow } from ".";
 
 describe("FilesRow", () => {
   it("renders correctly", () => {
-    const { container } = render(<FilesRow sectionWidth={300} />);
+    const { container } = render(<FilesRow />);
     expect(container.firstChild).toBeInTheDocument();
   });
 });

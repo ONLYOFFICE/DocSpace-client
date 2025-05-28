@@ -73,10 +73,6 @@ const meta = {
     onClick: { table: { disable: true } },
     style: { table: { disable: true } },
     convertSideInfo: { table: { disable: true } },
-    sectionWidth: { table: { disable: true } },
-  },
-  args: {
-    sectionWidth: 100,
   },
 } satisfies Meta<typeof FilesRowContent>;
 

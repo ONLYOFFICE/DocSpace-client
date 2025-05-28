@@ -39,7 +39,7 @@ const getLogger = () => {
 
   const winstonTransports = [
     new transports.DailyRotateFile({
-      filename: `${logPath}/web.doceditor.%DATE%.log`,
+      filename: `${logPath}/web.login.%DATE%.log`,
       level: logLevel,
       datePattern: "MM-DD",
       handleExceptions: true,
@@ -70,7 +70,7 @@ const getLogger = () => {
 
     const streamName = logStreamName
       .replace("${hostname}", os.hostname())
-      .replace("${applicationContext}", "Doceditor")
+      .replace("${applicationContext}", "Login")
       .replace("${guid}", randomUUID())
       .replace("${date}", new Date().toLocaleString());
 
@@ -93,7 +93,7 @@ const getLogger = () => {
     const now = new Date();
 
     info.date = date.format(now, "YYYY-MM-DD HH:mm:ss");
-    info.applicationContext = "DocEditor";
+    info.applicationContext = "Login";
     info.level = info.level.toUpperCase();
 
     const hostname = os.hostname();

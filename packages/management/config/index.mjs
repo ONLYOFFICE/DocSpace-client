@@ -24,10 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import AuthHandler from "./page.client";
+import nconf from "nconf";
+import path from "path";
 
-function Page() {
-  return <AuthHandler />;
+nconf
+  .argv()
+  .env()
+  .file("config", path.join(process.cwd(), "config", "config.json"));
+
+let appsettings = nconf.get("app")?.appsettings;
+
+if (!path.isAbsolute(appsettings)) {
+  appsettings = path.join(process.cwd(), appsettings);
 }
 
-export default Page;
+nconf.file("appsettings", path.join(appsettings, "appsettings.json"));
+nconf.file(
+  "appsettingsServices",
+  path.join(appsettings, "appsettings.services.json"),
+);
+
+const logPath = nconf.get("logPath");
+
+if (logPath != null) {
+  if (!path.isAbsolute(logPath)) {
+    nconf.set("logPath", path.join(process.cwd(), "..", logPath));
+  }
+}
+
+export default nconf;

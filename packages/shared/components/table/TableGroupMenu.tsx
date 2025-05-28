@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { useTranslation } from "react-i18next";
 
 import TriangleNavigationDownReactSvgUrl from "PUBLIC_DIR/images/triangle.navigation.down.react.svg?url";
@@ -35,7 +34,6 @@ import { Text } from "../text";
 import { Checkbox } from "../checkbox";
 import { ComboBox, TOption } from "../combobox";
 import { IconButton } from "../icon-button";
-import { ThemeId } from "../color-theme";
 
 import {
   StyledTableGroupMenu,
@@ -71,6 +69,8 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
     onChange?.(!isChecked);
   };
   const { t } = useTranslation("Common");
+
+  const toggleIconColor = isInfoPanelVisible ? "accent" : undefined;
 
   return (
     <StyledTableGroupMenu
@@ -137,7 +137,6 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
       ) : null}
       {!withoutInfoPanelToggler ? (
         <StyledInfoPanelToggleColorThemeWrapper
-          themeId={ThemeId.InfoPanelToggle}
           isInfoPanelVisible={isInfoPanelVisible}
           className="table-header_icon"
         >
@@ -149,6 +148,8 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
               size={16}
               isFill
               onClick={toggleInfoPanel}
+              color={toggleIconColor}
+              hoverColor={toggleIconColor}
             />
           </div>
         </StyledInfoPanelToggleColorThemeWrapper>

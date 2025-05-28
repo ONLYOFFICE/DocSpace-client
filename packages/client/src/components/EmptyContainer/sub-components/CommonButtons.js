@@ -28,12 +28,11 @@ import PlusSvgUrl from "PUBLIC_DIR/images/icons/12/plus.svg?url";
 import UpSvgUrl from "PUBLIC_DIR/images/up.svg?url";
 
 import { inject, observer } from "mobx-react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link } from "@docspace/shared/components/link";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 
 import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
@@ -49,7 +48,7 @@ const OptionsComponent = (props) => {
   return (
     <>
       <div className="empty-folder_container-links">
-        <Box className="flex-wrapper_container">
+        <div className="flex-wrapper_container">
           <div className="first-button">
             <IconButton
               data-format="docx"
@@ -72,7 +71,7 @@ const OptionsComponent = (props) => {
           <Link data-format="pdf" onClick={onCreate} {...linkStyles}>
             {t("Translations:NewForm")}
           </Link>
-        </Box>
+        </div>
       </div>
 
       <div className="empty-folder_container-links">

@@ -59,6 +59,9 @@ class FilesSettingsStore {
 
   settingsStore;
 
+  /**
+   *  @type {import("@docspace/shared/api/files/types").TFilesSettings=}
+   */
   filesSettings = null;
 
   isErrorSettings = null;
@@ -144,6 +147,8 @@ class FilesSettingsStore {
   canSearchByContent = false;
 
   hideConfirmRoomLifetime = false;
+
+  hideConfirmCancelOperation = false;
 
   constructor(
     thirdPartyStore,
@@ -251,6 +256,13 @@ class FilesSettingsStore {
 
   setStoreForcesave = (val) => (this.storeForcesave = val);
 
+  setHideConfirmCancelOperation = (data) => {
+    api.files
+      .changeHideConfirmCancelOperation(data)
+      .then((res) => this.setFilesSetting("hideConfirmCancelOperation", res))
+      .catch((e) => toastr.error(e));
+  };
+
   setKeepNewFileName = (data) => {
     api.files
       .changeKeepNewFileName(data)
@@ -298,11 +310,21 @@ class FilesSettingsStore {
 
   getDocumentServiceLocation = () => api.files.getDocumentServiceLocation();
 
-  changeDocumentServiceLocation = (docServiceUrl, internalUrl, portalUrl) =>
+  changeDocumentServiceLocation = (
+    docServiceUrl,
+    secretKey,
+    authHeader,
+    internalUrl,
+    portalUrl,
+    sslVerification,
+  ) =>
     api.files.changeDocumentServiceLocation(
       docServiceUrl,
+      secretKey,
+      authHeader,
       internalUrl,
       portalUrl,
+      sslVerification,
     );
 
   setForcesave = (val) => (this.forcesave = val);
@@ -368,15 +390,14 @@ class FilesSettingsStore {
     presentInArray(this.extsSpreadsheet, extension);
 
   /**
-   *
-   * @param {number} [size = 24]
-   * @param {string } [fileExst = null]
-   * @param {string} [pproviderKey
+   * @param {number} size
+   * @param {string} fileExst
+   * @param {string} providerKey
    * @param {*} contentLength
-   * @param {RoomsType | null} roomType
-   * @param {boolean | null} isArchive
+   * @param {RoomsType} roomType
+   * @param {boolean } isArchive
    * @param {FolderType} folderType
-   * @returns {string | undefined}
+   * @returns {string}
    */
   getIcon = (
     size = 32,

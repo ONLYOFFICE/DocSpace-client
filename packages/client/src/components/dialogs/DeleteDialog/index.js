@@ -29,7 +29,7 @@ import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
-import { withTranslation } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 
 import { inject, observer } from "mobx-react";
 
@@ -69,6 +69,8 @@ const DeleteDialogComponent = (props) => {
     i++;
   }
 
+  const isTemplate = selection[0]?.isTemplate;
+
   const onClose = () => {
     if (
       selection.length === 1 &&
@@ -88,11 +90,7 @@ const DeleteDialogComponent = (props) => {
     onClose();
 
     const translations = {
-      deleteOperation: t("Translations:DeleteOperation"),
       deleteFromTrash: t("Translations:DeleteFromTrash"),
-      deleteSelectedElem: t("Translations:DeleteSelectedElem"),
-      FileRemoved: t("Files:FileRemoved"),
-      FolderRemoved: t("Files:FolderRemoved"),
     };
 
     if (!selection.length) return;
@@ -116,12 +114,13 @@ const DeleteDialogComponent = (props) => {
 
   const onDeleteRoom = async () => {
     const translations = {
-      deleteOperation: t("Translations:DeleteOperation"),
-      successRemoveFile: t("Files:FileRemoved"),
-      successRemoveFolder: t("Files:FolderRemoved"),
       successRemoveRoom: t("Files:RoomRemoved"),
       successRemoveRooms: t("Files:RoomsRemoved"),
     };
+
+    if (isTemplate) {
+      translations.successRemoveTemplate = t("Files:TemplateRemoved");
+    }
 
     setSelected("none");
     onClose();
@@ -134,7 +133,7 @@ const DeleteDialogComponent = (props) => {
   };
 
   const onDeleteAction = () => {
-    if (isRoomDelete) {
+    if (isRoomDelete || isTemplate) {
       onDeleteRoom();
       return;
     }
@@ -162,13 +161,27 @@ const DeleteDialogComponent = (props) => {
 
   const moveToTrashTitle = () => {
     if (unsubscribe) return t("UnsubscribeTitle");
-    return t("MoveToTrashTitle");
+    return t("Common:MoveToTrashTitle");
   };
 
   const moveToTrashNoteText = () => {
     const isFolder = selection[0]?.isFolder || !!selection[0]?.parentId;
     const isSingle = selection.length === 1;
     const isThirdParty = selection[0]?.providerKey;
+
+    if (isTemplate) {
+      return isSingle ? (
+        <Trans
+          i18nKey="DeleteTemplate"
+          ns="DeleteDialog"
+          t={t}
+          values={{ templateName: selection[0].title }}
+          components={{ 1: <Text fontWeight={600} as="span" /> }}
+        />
+      ) : (
+        t("DeleteTemplates")
+      );
+    }
 
     if (isRoomDelete) {
       return isSingle
@@ -182,8 +195,8 @@ const DeleteDialogComponent = (props) => {
           t("DeleteFolder")
         ) : (
           <>
-            <>{t("DeleteFile")} </>
-            <>{t("FilePermanentlyDeleted")} </>
+            <>{t("Common:DeleteFile")} </>
+            <>{t("Common:FilePermanentlyDeleted")} </>
             <>{t("Common:WantToContinue")}</>
           </>
         )
@@ -206,8 +219,8 @@ const DeleteDialogComponent = (props) => {
           </>
         ) : (
           <>
-            <>{t("DeleteFile")} </>
-            <>{t("FilePermanentlyDeleted")} </>
+            <>{t("Common:DeleteFile")} </>
+            <>{t("Common:FilePermanentlyDeleted")} </>
             <>{t("Common:WantToContinue")}</>
           </>
         )
@@ -231,9 +244,9 @@ const DeleteDialogComponent = (props) => {
           </>
         ) : (
           <>
-            <>{t("DeleteFile")} </>
+            <>{t("Common:DeleteFile")} </>
             <>{t("DeleteSharedNote")} </>
-            {!isThirdParty ? <>{t("FilePermanentlyDeleted")} </> : null}
+            {!isThirdParty ? <>{t("Common:FilePermanentlyDeleted")} </> : null}
             <>{t("Common:WantToContinue")}</>
           </>
         )
@@ -248,8 +261,9 @@ const DeleteDialogComponent = (props) => {
     }
   };
 
-  const title =
-    isRoomDelete || isRecycleBinFolder
+  const title = isTemplate
+    ? t("Files:DeleteTemplate")
+    : isRoomDelete || isRecycleBinFolder
       ? t("EmptyTrashDialog:DeleteForeverTitle")
       : isPrivacyFolder || selection[0]?.providerKey
         ? t("Common:Confirmation")
@@ -257,8 +271,9 @@ const DeleteDialogComponent = (props) => {
 
   const noteText = unsubscribe ? t("UnsubscribeNote") : moveToTrashNoteText();
 
-  const accessButtonLabel =
-    isRoomDelete || isRecycleBinFolder
+  const accessButtonLabel = isTemplate
+    ? t("Common:Delete")
+    : isRoomDelete || isRecycleBinFolder
       ? t("EmptyTrashDialog:DeleteForeverButton")
       : isPrivacyFolder || selection[0]?.providerKey
         ? t("Common:OKButton")
@@ -275,7 +290,7 @@ const DeleteDialogComponent = (props) => {
       <ModalDialog.Footer>
         <Button
           id="delete-file-modal_submit"
-          key="OkButton"
+          key="OKButton"
           label={accessButtonLabel}
           size="normal"
           primary

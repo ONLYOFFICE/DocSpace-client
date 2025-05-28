@@ -141,7 +141,9 @@ const AuditTrail = (props) => {
         setLifetimeAuditSettings={setLifetimeAuditSettings}
         content={getContent()}
         downloadReport={t("DownloadReportBtnText")}
-        downloadReportDescription={t("DownloadReportDescription")}
+        downloadReportDescription={t("ReportSaveLocation", {
+          sectionName: t("Common:MyFilesSection"),
+        })}
         getReport={getAuditTrailReport}
         isSettingNotPaid={!isAuditAvailable}
         isLoadingDownloadReport={isLoadingDownloadReport}

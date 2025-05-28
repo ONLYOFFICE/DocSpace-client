@@ -26,11 +26,10 @@
 
 import React from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import { getUserById } from "@docspace/shared/api/people";
 import { CREATED_FORM_KEY, MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
 import {
@@ -98,10 +97,23 @@ const useFiles = ({
 
     const url = getCategoryUrl(categoryType);
 
-    filter.searchArea =
-      categoryType === CategoryType.Shared
-        ? RoomSearchArea.Active
-        : RoomSearchArea.Archive;
+    let searchArea;
+
+    switch (categoryType) {
+      case CategoryType.Shared:
+        searchArea = RoomSearchArea.Shared;
+        break;
+
+      case CategoryType.Archive:
+        searchArea = RoomSearchArea.Archive;
+        break;
+
+      default:
+        searchArea = RoomSearchArea.Archive;
+        break;
+    }
+
+    filter.searchArea = searchArea;
 
     navigate(`${url}?${filter.toUrlParams()}`);
   };
@@ -123,7 +135,7 @@ const useFiles = ({
         if (f.length > 0) startUpload(f, null, t);
       })
       .catch((err) => {
-        toastr.error(err);
+        toastr.error(err, null, 0, true);
       });
   };
 
@@ -231,17 +243,13 @@ const useFiles = ({
 
     if (!dataObj) return;
 
-    const { filter, itemId, type } = dataObj;
+    const { filter } = dataObj;
     let newFilter = filter
       ? filter.clone()
       : isRooms
         ? RoomsFilter.getDefault(userId, filterObj.searchArea)
         : FilesFilter.getDefault();
     const requests = [Promise.resolve(newFilter)];
-
-    if (type === "user") {
-      requests.push(getUserById(itemId));
-    }
 
     axios
       .all(requests)
@@ -256,29 +264,10 @@ const useFiles = ({
       })
       .then((data) => {
         newFilter = data[0];
-        const result = data[1];
-        if (result) {
-          const newType = result.displayName ? "user" : "group";
-          const selectedItem = {
-            key: result.id,
-            label: newType === "user" ? result.displayName : result.name,
-            type: newType,
-          };
-          if (!isRooms) {
-            newFilter.selectedItem = selectedItem;
-          }
-        }
 
         if (newFilter) {
           if (isRooms) {
-            return fetchRooms(
-              null,
-              newFilter,
-              undefined,
-              undefined,
-              undefined,
-              true,
-            );
+            return fetchRooms(null, newFilter, undefined, undefined, undefined);
           }
           const folderId = newFilter.folder;
           return fetchFiles(folderId, newFilter)?.finally(() => {

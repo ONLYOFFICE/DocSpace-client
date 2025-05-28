@@ -1,16 +1,29 @@
-// Copyright 2024 alexeysafronov
+// (c) Copyright Ascensio System SIA 2009-2025
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
 //
-//     https://www.apache.org/licenses/LICENSE-2.0
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
 //
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
@@ -763,57 +776,62 @@ describe("Locales Tests", () => {
     expect(exists, message).toBe(false);
   });
 
-  const skipBaseLanguagesTest = process.env.SKIP_BASE_LANGUAGES_TEST === 'true';
-  (skipBaseLanguagesTest ? test.skip : test)(`NotTranslatedOnBaseLanguages: Verify that all translation keys in the base languages (${BASE_LANGUAGES.join(",")}) are properly translated.`, () => {
-    let message = `Next keys are not translated in base languages (${BASE_LANGUAGES.join(",")}):\r\n\r\n`;
+  const skipBaseLanguagesTest = process.env.SKIP_BASE_LANGUAGES_TEST === "true";
+  (skipBaseLanguagesTest ? test.skip : test)(
+    `NotTranslatedOnBaseLanguages: Verify that all translation keys in the base languages (${BASE_LANGUAGES.join(",")}) are properly translated.`,
+    () => {
+      let message = `Next keys are not translated in base languages (${BASE_LANGUAGES.join(",")}):\r\n\r\n`;
 
-    let exists = false;
-    let i = 0;
+      let exists = false;
+      let i = 0;
 
-    const enKeys = translationFiles.filter((file) => file.language === "en");
+      const enKeys = translationFiles.filter((file) => file.language === "en");
 
-    const allEnKeys = enKeys
-      .flatMap((item) =>
-        item.translations.map((t) => {
-          return item.fileName + " " + t.key;
-        })
-      )
-      .sort();
-
-    const allBaseLanguages = [];
-
-    for (const lng of BASE_LANGUAGES) {
-      const lngKeys = translationFiles.filter((file) => file.language === lng);
-
-      const keys = lngKeys
+      const allEnKeys = enKeys
         .flatMap((item) =>
-          item.translations
-            .filter((f) => f.value !== "")
-            .map((t) => {
-              return item.fileName + " " + t.key;
-            })
+          item.translations.map((t) => {
+            return item.fileName + " " + t.key;
+          })
         )
         .sort();
 
-      allBaseLanguages.push({ language: lng, keys: keys });
+      const allBaseLanguages = [];
+
+      for (const lng of BASE_LANGUAGES) {
+        const lngKeys = translationFiles.filter(
+          (file) => file.language === lng
+        );
+
+        const keys = lngKeys
+          .flatMap((item) =>
+            item.translations
+              .filter((f) => f.value !== "")
+              .map((t) => {
+                return item.fileName + " " + t.key;
+              })
+          )
+          .sort();
+
+        allBaseLanguages.push({ language: lng, keys: keys });
+      }
+
+      for (const lng of allBaseLanguages) {
+        const notFoundKeys = allEnKeys.filter((k) => !lng.keys.includes(k));
+
+        if (!notFoundKeys.length) continue;
+
+        exists = true;
+
+        message +=
+          `${++i}. Language '${lng.language}' (Count: ${notFoundKeys.length}). ` +
+          `Keys:\r\n\r\n`;
+
+        message += notFoundKeys.join("\r\n") + "\r\n\r\n";
+      }
+
+      expect(exists, message).toBe(false);
     }
-
-    for (const lng of allBaseLanguages) {
-      const notFoundKeys = allEnKeys.filter((k) => !lng.keys.includes(k));
-
-      if (!notFoundKeys.length) continue;
-
-      exists = true;
-
-      message +=
-        `${++i}. Language '${lng.language}' (Count: ${notFoundKeys.length}). ` +
-        `Keys:\r\n\r\n`;
-
-      message += notFoundKeys.join("\r\n") + "\r\n\r\n";
-    }
-
-    expect(exists, message).toBe(false);
-  });
+  );
 
   test("IncorrectNamespaceUsageTest: Verify that translation keys are used with their correct namespace", () => {
     let message = "The following keys are using incorrect namespaces:\r\n\r\n";
@@ -821,31 +839,36 @@ describe("Locales Tests", () => {
 
     // Create a map of all available keys in each namespace
     const namespaceKeys = {};
-    translationFiles.forEach(file => {
-      const namespace = path.basename(file.fileName, ".json");
-      namespaceKeys[namespace] = new Set(file.translations.map(t => t.key));
-    });
+    translationFiles
+      .filter((file) => file.language === "en")
+      .forEach((file) => {
+        const namespace = path.basename(file.fileName, ".json");
+        namespaceKeys[namespace] = new Set(file.translations.map((t) => t.key));
+      });
 
     // Check each JavaScript file for translation key usage
-    javascriptFiles.forEach(jsFile => {
-      jsFile.translationKeys.forEach(key => {
+    javascriptFiles.forEach((jsFile) => {
+      jsFile.translationKeys.forEach((key) => {
         const [namespace, translationKey] = key.split(":");
-        
+
         // Skip if the key doesn't follow namespace:key format
         if (!translationKey) return;
 
         // Check if the key exists in the specified namespace
-        if (namespaceKeys[namespace] && !namespaceKeys[namespace].has(translationKey)) {
+        const namespaceKeySet = namespaceKeys[namespace];
+        if (namespaceKeySet && !namespaceKeySet.has(translationKey)) {
           // Check if the key exists in other namespaces
           const foundInNamespaces = Object.entries(namespaceKeys)
-            .filter(([ns, keys]) => ns !== namespace && keys.has(translationKey))
+            .filter(
+              ([ns, keys]) => ns !== namespace && keys.has(translationKey)
+            )
             .map(([ns]) => ns);
 
           if (foundInNamespaces.length > 0) {
             incorrectUsages.push({
               file: jsFile.path,
               key: key,
-              correctNamespaces: foundInNamespaces
+              correctNamespaces: foundInNamespaces,
             });
           }
         }
@@ -855,7 +878,10 @@ describe("Locales Tests", () => {
     if (incorrectUsages.length > 0) {
       let i = 1;
       message += incorrectUsages
-        .map(usage => `${i++}. File: ${usage.file}\n   Key: ${usage.key}\n   Correct namespace(s): ${usage.correctNamespaces.join(", ")}\n`)
+        .map(
+          (usage) =>
+            `${i++}. File: ${usage.file}\n   Key: ${usage.key}\n   Correct namespace(s): ${usage.correctNamespaces.join(", ")}\n`
+        )
         .join("\n");
 
       console.log(message);

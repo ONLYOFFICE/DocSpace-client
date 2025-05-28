@@ -1,11 +1,17 @@
 {
+  "ChangeContactType": "Kontakttyp ändern",
   "ChangeGuestsTypeMessage": "Gast <strong>{{userName}}</strong> wird in den Bereich \"{{membersSection}}\" verschoben und dem Benutzertyp \"User\" zugewiesen. Benutzer haben ihren eigenen {{documentsSection}} bereich, können Dateien erstellen und bearbeiten, jedoch keine Räume erstellen.",
   "ChangeGuestsTypeMessageMulti": "Die ausgewählten Gäste werden in den Bereich \"{{membersSection}}\" verschoben und dem Benutzertyp \"User\" zugewiesen. Benutzer haben ihren eigenen {{documentsSection}} bereich, können Dateien erstellen und bearbeiten, jedoch keine Räume erstellen.",
+  "ChangeGuestsTypeToAdmin": "Gast <strong>{{userName}}</strong> wird in den Bereich {{membersSection}} verschoben und erhält den Typ <strong>'{{ secondType }}'</strong>. {{productName}}-Administratoren können auf die Einstellungen von {{productName}} zugreifen, Räume verwalten und archivieren, neue Benutzer einladen und Rollen unterhalb ihrer Ebene zuweisen. {{productName}}-Administratoren haben Zugriff auf den Bereich {{documentsSection}}.",
+  "ChangeGuestsTypeToAdminMulti": "Die ausgewählten Gäste werden in den Bereich {{membersSection}} verschoben und erhalten den Typ <strong>'{{ secondType }}'</strong>. {{productName}}-Administratoren können auf die {{productName}}-Einstellungen zugreifen, Räume verwalten und archivieren, neue Benutzer einladen und Rollen unterhalb ihrer Ebene zuweisen. {{productName}}-Administratoren haben Zugriff auf den Bereich {{documentsSection}}.",
+  "ChangeGuestsTypeToManager": "Gast <strong>{{userName}}</strong> wird in den Bereich {{membersSection}} verschoben und erhält den Typ <strong>'{{ secondType }}'</strong>. Raumadministratoren können die zugewiesenen Räume erstellen und verwalten, neue Benutzer einladen und die Rolle \"Raumadministrator\" und niedriger zuweisen. Raumadministratoren haben Zugriff auf den Bereich {{documentsSection}}.",
+  "ChangeGuestsTypeToManagerMulti": "Die ausgewählten Gäste werden in den Bereich {{membersSection}} verschoben und erhalten den Typ <strong>'{{ secondType }}'</strong>. Raumadministratoren können die zugewiesenen Räume erstellen und verwalten, neue Benutzer einladen und die Rolle \"Raumadministrator\" und niedriger zuweisen. Raumadministratoren haben Zugriff auf den Bereich {{documentsSection}}.",
   "ChangeUserTypeButton": "Typ ändern",
-  "ChangeUserTypeHeader": "Benutzertyp ändern",
   "ChangeUserTypeMessage": "Benutzer mit dem Typ <strong>'{{ firstType }}'</strong> bekommen den Typ <strong>'{{ secondType }}'</strong>.",
-  "ChangeUserTypeMessageMulti": "Die ausgewählten Benutzer werden zum Typ <strong>'{{ secondType }}'</strong> verschoben.",
-  "ChangeUserTypeMessageWarning": "Sie können Typ für Sie oder Administratoren von {{productName}} nicht ändern.",
+  "ChangeUserTypeNote": "<1>Hinweis:</1> Sie können den Typ für den {{productName}}-Administrator und für sich selbst nicht ändern.",
+  "DataReassignmentInfo": "Von diesem Benutzer erstellte Räume werden Ihnen automatisch zugewiesen. Um die Räume einer anderen Person zuzuweisen, klicken Sie unten auf den entsprechenden Link.",
+  "DataReassignmentWithFilesDeletion": "Alle von diesem Kontakt erstellten freigegebenen Dateien werden Ihnen <1>nach 30 Tagen automatisch zugewiesen</1>. Um die Räume/freigegebenen Dateien einer anderen Person zuzuweisen, klicken Sie unten auf den entsprechenden Link.",
+  "PersonalDataDeletion": "Alle Dateien und Ordner im Abschnitt {{sectionName}} dieses Kontakts werden <1>innerhalb von 30 Tagen dauerhaft gelöscht</1>.",
   "SuccessChangeGuestType": "Der Gasttyp wurde erfolgreich geändert.",
   "SuccessChangeUserType": "Der Benutzertyp wurde erfolgreich geändert"
 }

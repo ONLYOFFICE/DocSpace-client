@@ -24,160 +24,88 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TSelectorItem } from "../../components/selector";
-import { TFile, TFolder } from "../../api/files/types";
-import { TRoom } from "../../api/rooms/types";
+import type FilesFilter from "../../api/files/filter";
 import {
-  getIconPathByFolderType,
-  getLifetimePeriodTranslation,
-} from "../../utils/common";
-import { iconSize32 } from "../../utils/image-helpers";
-import { DEFAULT_FILE_EXTS } from "./FilesSelector.constants";
-import { getTitleWithoutExtension } from "../../utils";
-import { TTranslation } from "../../types";
+  ApplyFilterOption,
+  FilesSelectorFilterTypes,
+  FilterType,
+} from "../../enums";
 
-const isDisableFolder = (
-  folder: TFolder,
-  disabledItems: (number | string)[],
-  filterParam?: string | number,
+export const configureFilterByFilterParam = (
+  filter: FilesFilter,
+  filterParam: string | number,
+  extsWebEdited: string[],
 ) => {
-  if (!folder.security.Create) return true;
+  filter.applyFilterOption = ApplyFilterOption.Files;
+  switch (filterParam) {
+    case FilesSelectorFilterTypes.DOCX:
+      filter.extension = FilesSelectorFilterTypes.DOCX;
+      break;
 
-  return filterParam ? false : disabledItems?.includes(folder.id);
-};
+    case FilesSelectorFilterTypes.IMG:
+      filter.filterType = FilterType.ImagesOnly;
+      break;
 
-export const convertFoldersToItems: (
-  folders: TFolder[],
-  disabledItems: (number | string)[],
-  filterParam?: string | number,
-) => TSelectorItem[] = (
-  folders: TFolder[],
-  disabledItems: (number | string)[],
-  filterParam?: string | number,
-) => {
-  const items = folders.map((folder: TFolder) => {
-    const {
-      id,
-      title,
-      filesCount,
-      foldersCount,
-      security,
-      parentId,
-      type,
-      rootFolderType,
-    } = folder;
+    case FilesSelectorFilterTypes.BackupOnly:
+      filter.extension = "gz,tar";
+      break;
 
-    const folderIconPath = getIconPathByFolderType(type);
-    const icon = iconSize32.get(folderIconPath) as string;
+    case FilesSelectorFilterTypes.XLSX:
+      filter.filterType = FilterType.SpreadsheetsOnly;
+      break;
 
-    const isDisabled = isDisableFolder(folder, disabledItems, filterParam);
+    case FilesSelectorFilterTypes.PDF:
+    case FilterType.Pdf:
+      filter.filterType = FilterType.Pdf;
+      break;
 
-    return {
-      id,
-      label: title,
-      title,
-      icon,
-      filesCount,
-      foldersCount,
-      security,
-      parentId,
-      rootFolderType,
-      isFolder: true,
-      isDisabled,
-    };
-  });
+    case FilterType.DocumentsOnly:
+      filter.filterType = FilterType.DocumentsOnly;
+      break;
 
-  return items;
-};
+    case FilterType.PDFForm:
+      filter.filterType = FilterType.PDFForm;
+      break;
 
-export const convertFilesToItems: (
-  files: TFile[],
-  getIcon: (fileExst: string) => string,
-  filterParam?: string | number,
-) => TSelectorItem[] = (
-  files: TFile[],
-  getIcon: (fileExst: string) => string,
-  filterParam?: string | number,
-) => {
-  const items = files.map((file) => {
-    const { id, title, security, folderId, rootFolderType, fileExst, viewUrl } =
-      file;
+    case FilterType.PresentationsOnly:
+      filter.filterType = FilterType.PresentationsOnly;
+      break;
 
-    const icon = getIcon(fileExst || DEFAULT_FILE_EXTS);
-    const label = getTitleWithoutExtension(file, false);
+    case FilterType.SpreadsheetsOnly:
+      filter.filterType = FilterType.SpreadsheetsOnly;
+      break;
 
-    return {
-      id,
-      label,
-      title,
-      icon,
-      security,
-      parentId: folderId,
-      rootFolderType,
-      isDisabled: !filterParam,
-      fileExst,
-      viewUrl,
-    };
-  });
-  return items;
-};
+    case FilterType.ImagesOnly:
+      filter.filterType = FilterType.ImagesOnly;
+      break;
 
-export const convertRoomsToItems: (
-  rooms: TRoom[],
-  t: TTranslation,
-) => TSelectorItem[] = (rooms: TRoom[], t: TTranslation) => {
-  const items = rooms.map((room) => {
-    const {
-      id,
-      title,
-      roomType,
-      logo,
-      filesCount,
-      foldersCount,
-      security,
-      parentId,
-      rootFolderType,
-      shared,
-      lifetime,
-    } = room;
+    case FilterType.MediaOnly:
+      filter.filterType = FilterType.MediaOnly;
+      break;
 
-    const icon = logo.medium || "";
-    const cover = logo?.cover;
+    case FilterType.ArchiveOnly:
+      filter.filterType = FilterType.ArchiveOnly;
+      break;
 
-    const iconProp = icon ? { icon } : { color: logo.color as string };
+    case FilterType.FoldersOnly:
+      filter.filterType = FilterType.FoldersOnly;
+      break;
 
-    const lifetimeTooltip = lifetime
-      ? t("Files:RoomFilesLifetime", {
-          days: String(lifetime.value),
-          period: getLifetimePeriodTranslation(lifetime.period, t),
-        })
-      : null;
+    case FilterType.FilesOnly:
+      filter.filterType = FilterType.FilesOnly;
+      break;
 
-    return {
-      id,
-      label: title,
-      title,
-      filesCount,
-      foldersCount,
-      security,
-      parentId,
-      rootFolderType,
-      isFolder: true,
-      roomType,
-      shared,
-      lifetimeTooltip,
-      cover,
-      ...iconProp,
-    };
-  });
+    case FilesSelectorFilterTypes.ALL:
+      filter.applyFilterOption = ApplyFilterOption.All;
+      filter.filterType = FilterType.None;
+      break;
 
-  return items;
-};
+    case "EditorSupportedTypes":
+      filter.extension = extsWebEdited
+        .map((extension) => extension.slice(1))
+        .join(",");
+      break;
 
-export const getDefaultBreadCrumb = (t: TTranslation) => {
-  return {
-    label: t("Common:ProductName"),
-    id: 0,
-    isRoom: false,
-  };
+    default:
+  }
 };

@@ -36,7 +36,7 @@ import Section from "@docspace/shared/components/section";
 import SectionWrapper from "SRC_DIR/components/Section";
 import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
 import { Trans, withTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import { isMobile } from "react-device-detect";
 import { toastr } from "@docspace/shared/components/toast";
 import { checkProtocol } from "../../helpers/files-helpers";
@@ -121,7 +121,7 @@ const StyledPrivacyPage = styled.div.attrs(injectDefaultTheme)`
   }
 `;
 
-const PrivacyPageComponent = ({ t, tReady, logoText }) => {
+const PrivacyPageComponent = ({ t, tReady, logoText, desktopUrl }) => {
   const [isDisabled, setIsDisabled] = useState(false);
 
   const location = useLocation();
@@ -210,7 +210,7 @@ const PrivacyPageComponent = ({ t, tReady, logoText }) => {
             className="privacy-rooms-link privacy-rooms-install-text"
             fontSize="16px"
             isHovered
-            href="https://www.onlyoffice.com/desktop.aspx"
+            href={desktopUrl}
           >
             {t("PrivacyInstall")}
           </Link>
@@ -250,9 +250,10 @@ const PrivacyPage = (props) => {
 };
 
 export default inject(({ settingsStore }) => {
-  const { logoText } = settingsStore;
+  const { logoText, desktopUrl } = settingsStore;
 
   return {
     logoText,
+    desktopUrl,
   };
 })(observer(PrivacyPage));

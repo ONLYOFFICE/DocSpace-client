@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables/colors";
-@import "../../styles/variables/devices";
-@import "../../styles/_mixins";
+@use "../../styles/variables/colors";
+
+@use "../../styles/mixins";
 
 .saveCancelButtons {
   display: flex;
@@ -70,9 +70,10 @@
       font-weight: 600;
       width: calc(100% - 32px);
       bottom: 56px;
+      background-color: var(--background-color);
     }
 
-    @include not-mobile {
+    @include mixins.not-mobile {
       .reminderText {
         border-top: none;
         position: static;
@@ -88,15 +89,19 @@
         width: calc(100% - 16px);
         inset-inline-start: 0;
         padding-inline-start: 16px;
+
+        @include mixins.not-mobile {
+          border-top: none;
+          position: static;
+          padding: 0;
+          margin-bottom: 0;
+          margin-inline-start: 8px;
+        }
       }
     }
   }
 
-  @include mobile {
-    position: fixed;
-    inset-inline: 0;
-    bottom: 0;
-
+  @include mixins.mobile {
     &.showReminder {
       .reminderText {
         padding-top: 30px;
@@ -104,6 +109,11 @@
     }
 
     &.displaySettings {
+      position: fixed;
+      inset-inline: 0;
+      bottom: 0 !important;
+      background-color: var(--background-color);
+
       .buttonsContainer {
         padding: 16px;
         bottom: 0;
@@ -115,7 +125,7 @@
     }
   }
 
-  @include not-mobile {
+  @include mixins.not-mobile {
     &.displaySettings {
       position: static;
       display: flex;
@@ -129,5 +139,19 @@
         width: auto;
       }
     }
+  }
+}
+
+.button {
+  height: 32px !important;
+  font-size: 13px !important;
+  line-height: 20px !important;
+  padding: 0 28px;
+
+  @include mixins.tablet {
+    height: 40px !important;
+    font-size: 14px !important;
+    line-height: 16px !important;
+    padding: 0 28px;
   }
 }

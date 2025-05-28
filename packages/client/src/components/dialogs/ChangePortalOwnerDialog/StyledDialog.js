@@ -141,6 +141,13 @@ const StyledFooterWrapper = styled.div.attrs(injectDefaultTheme)`
 
     gap: 8px;
   }
+
+  .delete-profile-container {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 16px;
+  }
 `;
 
 const StyledSelectedOwnerContainer = styled.div.attrs(injectDefaultTheme)`

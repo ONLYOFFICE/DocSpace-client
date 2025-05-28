@@ -32,8 +32,8 @@ import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
 
 import { ComboButton } from "./sub-components/ComboButton";
-import { StyledComboBox } from "./ComboBox.styled";
-import { ComboBoxSize, ComboBoxDisplayType } from "./ComboBox.enums";
+import { StyledComboBox } from "./Combobox.styled";
+import { ComboBoxSize, ComboBoxDisplayType } from "./Combobox.enums";
 import type { TComboboxProps, TOption } from "./ComboBox.types";
 
 const compare = (prevProps: TComboboxProps, nextProps: TComboboxProps) => {
@@ -240,6 +240,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
     usePortalBackdrop,
     tabIndex,
     onClickSelectedItem,
+    shouldShowBackdrop,
   } = props;
 
   React.useEffect(() => {
@@ -272,6 +273,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
       ? 0
       : 1;
 
+  // Todo: Add support advancedOptions === Array
   const withAdvancedOptions =
     React.isValidElement(advancedOptions) && !!advancedOptions?.props.children;
 
@@ -333,6 +335,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
           isActive={isActive}
           isSelected={isSelected}
           style={optionStyle}
+          isSeparator={option.isSeparator}
         />
       );
     });
@@ -369,6 +372,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
       showDisabledItems,
       isDefaultMode,
       clickOutsideAction: handleClickOutside,
+      shouldShowBackdrop,
     };
 
     const dropDownOptions = advancedOptions || renderOptions();
@@ -387,7 +391,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
   return (
     <StyledComboBox
       ref={ref}
-      size={size}
+      size={size as ComboBoxSize}
       scaled={scaled}
       onClick={comboBoxClick}
       isOpen={isOpen}
@@ -409,7 +413,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
         innerContainer={children}
         innerContainerClassName="optionalBlock"
         isOpen={isOpen}
-        size={size}
+        size={size as ComboBoxSize}
         scaled={scaled}
         comboIcon={comboIcon}
         modernView={modernView}

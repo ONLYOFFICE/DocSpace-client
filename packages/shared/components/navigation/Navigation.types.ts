@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { RefObject } from "react";
 import { DeviceType } from "../../enums";
 import { TGetContextMenuModel } from "../context-menu";
 
@@ -33,7 +34,7 @@ export type TTitles = {
   infoPanel?: string;
   actions?: string;
   contextMenu?: string;
-  trashWarning?: string;
+  warningText?: string;
 };
 
 export type TContextButtonProps = {
@@ -46,6 +47,11 @@ export type TContextButtonProps = {
   title?: string;
   onCloseDropBox?: () => void;
   onContextOptionsClick?: () => void;
+  contextButtonAnimation?: (
+    setAnimationClasses: (classes: string[]) => void,
+  ) => () => void;
+  guidAnimationVisible?: boolean;
+  setGuidAnimationVisible?: (visible: boolean) => void;
 };
 
 export type TPlusButtonProps = {
@@ -57,6 +63,7 @@ export type TPlusButtonProps = {
   onPlusClick?: VoidFunction;
   isFrame?: boolean;
   onCloseDropBox?: () => void;
+  forwardedRef?: React.RefObject<HTMLDivElement | null>;
 };
 
 export type TToggleInfoPanelButtonProps = {
@@ -72,6 +79,12 @@ export type TArrowButtonProps = {
   onBackToParentFolder: TOnBackToParenFolder;
 };
 
+export type TBadgesProps = {
+  titleIcon: string;
+  isRootFolder: boolean;
+  titleIconTooltip?: string;
+};
+
 export type TTextProps = {
   title: string;
   isOpen: boolean;
@@ -79,6 +92,7 @@ export type TTextProps = {
   isRootFolderTitle: boolean;
   onClick: () => void;
   className?: string;
+  badgeLabel?: string;
 };
 
 export type TNavigationLogoProps = {
@@ -91,6 +105,7 @@ export type TNavigationLogoProps = {
 export type TOnNavigationItemClick = (
   id: string | number,
   isRootRoom: boolean,
+  isRootTemplates?: boolean,
 ) => void;
 
 export type TNavigationItemProps = {
@@ -102,15 +117,20 @@ export type TNavigationItemProps = {
   withLogo: boolean | string;
   currentDeviceType: DeviceType;
   style?: React.CSSProperties;
+  isRootTemplates?: boolean;
 };
 
 export type TNavigationItem = {
   id: string | number;
   title: string;
   isRootRoom: boolean;
+  isRootTemplates?: boolean;
 };
 
-export type TRowParam = { withLogo: boolean; currentDeviceType: DeviceType };
+export type TRowParam = {
+  withLogo: boolean | string;
+  currentDeviceType: DeviceType;
+};
 
 export type TRowData = [TNavigationItem[], TOnNavigationItemClick, TRowParam];
 
@@ -143,6 +163,10 @@ export type TControlButtonProps = Omit<TToggleInfoPanelButtonProps, "id"> &
     isEmptyPage?: boolean;
 
     isMobile?: boolean;
+    /** Used for guidance */
+    addButtonRef?: RefObject<HTMLDivElement | null>;
+    buttonRef?: React.RefObject<HTMLButtonElement>;
+    isContextButtonVisible?: boolean;
   };
 
 export type TDropBoxProps = TArrowButtonProps &
@@ -153,10 +177,10 @@ export type TDropBoxProps = TArrowButtonProps &
     | "onNavigationButtonClick"
     | "navigationButtonLabel"
     | "showTitle"
-    | "isPublicRoom"
     | "isMobile"
   > &
   TRowParam & {
+    ref?: React.RefObject<HTMLDivElement | null>;
     sectionHeight: number;
     dropBoxWidth: number;
 

@@ -31,10 +31,14 @@ import {
   injectDefaultTheme,
   mobile,
 } from "@docspace/shared/utils";
-import TrashIcon from "PUBLIC_DIR/images/trash.react.svg";
+import TrashIcon from "PUBLIC_DIR/images/icons/16/trash.react.svg";
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg";
 import { Link } from "@docspace/shared/components/link";
-import { TextInput } from "@docspace/shared/components/text-input";
+import {
+  TextInput,
+  InputSize,
+  InputType,
+} from "@docspace/shared/components/text-input";
 
 const StyledPlusIcon = styled(PlusIcon).attrs(injectDefaultTheme)`
   ${commonIconsStyles}
@@ -143,9 +147,13 @@ const UserFields = (props) => {
             return (
               <StyledInputWrapper key={`user-input-${input}`}>
                 <TextInput
+                  type={InputType.text}
+                  size={InputSize.base}
+                  tabIndex={index}
                   className={`${classNameAdditional}-input`}
                   id={`user-input-${input}`}
                   isAutoFocussed={isAutoFocussed}
+                  keepCharPositions
                   value={input}
                   onChange={(e) => onChangeInput(e, index)}
                   onBlur={() => onBlur(index)}

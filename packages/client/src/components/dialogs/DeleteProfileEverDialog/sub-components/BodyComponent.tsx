@@ -56,7 +56,10 @@ const BodyComponent = ({
   onlyOneUser,
   onlyGuests,
 }: BodyComponentProps) => {
-  const warningMessageMyDocuments = t("DeleteMyDocumentsUser");
+  const warningMessageMyDocuments = t("UserFilesRemovalScope", {
+    sectionNameFirst: t("Common:MyFilesSection"),
+    sectionNameSecond: t("Common:TrashSection"),
+  });
 
   const warningMessageReassign = onlyGuests ? (
     t("DeleteReqassignDescriptionGuest", {
@@ -104,7 +107,11 @@ const BodyComponent = ({
         </Text>
         <Text className="text-warning">{t("PleaseNote")}</Text>
         <Text className="text-delete-description">
-          {t("DeletePersonalData", { productName: t("Common:ProductName") })}
+          {t("PersonalDataDeletionInfo", {
+            productName: t("Common:ProductName"),
+            sectionNameFirst: t("Common:MyFilesSection"),
+            sectionNameSecond: t("Common:TrashSection"),
+          })}
         </Text>
         <Text className="text-delete-description">
           {t("CannotReassignFiles")}

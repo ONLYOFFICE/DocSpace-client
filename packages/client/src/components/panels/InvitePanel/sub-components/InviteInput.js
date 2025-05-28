@@ -54,10 +54,11 @@ import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
+import BackupIcon from "PUBLIC_DIR/images/icons/16/backup.svg?url";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
-import { Box } from "@docspace/shared/components/box";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 import { getUserType } from "@docspace/shared/utils/common";
+import { IconButton } from "@docspace/shared/components/icon-button";
 import {
   StyledSubHeader,
   StyledLink,
@@ -67,11 +68,9 @@ import {
   SearchItemText,
   StyledDescription,
   StyledInviteLanguage,
-  ResetLink,
   StyledCrossIcon,
 } from "../StyledInvitePanel";
 import AccessSelector from "../../../AccessSelector";
-import BetaBadge from "../../../BetaBadgeWrapper";
 import {
   fixAccess,
   getTopFreeRole,
@@ -101,7 +100,6 @@ const InviteInput = ({
   setAddUsersPanelVisible,
   isMobileView,
   cultureNames,
-  i18n,
   setCultureKey,
   isPaidUserAccess,
   isUserTariffLimit,
@@ -110,6 +108,7 @@ const InviteInput = ({
   setInputValue,
   usersList,
   setUsersList,
+  allowInvitingGuests,
 }) => {
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
@@ -132,13 +131,12 @@ const InviteInput = ({
 
   const selectedLanguage = useMemo(
     () =>
-      cultureNames.find((item) => item.key === language) ||
-      cultureNames.find((item) => item.key === culture.key) || {
+      cultureNames.find((item) => item.key === language) || {
         key: language,
         label: "",
         isBeta: isBetaLanguage(language),
       },
-    [cultureNames, language, culture],
+    [cultureNames, language],
   );
 
   const cultureNamesNew = useMemo(
@@ -146,7 +144,6 @@ const InviteInput = ({
       cultureNames.map((item) => ({
         label: item.label,
         key: item.key,
-        isBeta: isBetaLanguage(item.key),
       })),
     [cultureNames],
   );
@@ -164,7 +161,7 @@ const InviteInput = ({
   const onLanguageSelect = (newLanguage) => {
     setInviteLanguage(newLanguage);
     setCultureKey(newLanguage.key);
-    if (newLanguage.key !== i18n.language) setIsChangeLangMail(true);
+    if (newLanguage.key !== selectedLanguage.key) setIsChangeLangMail(true);
     else setIsChangeLangMail(false);
   };
 
@@ -333,10 +330,14 @@ const InviteInput = ({
       status,
     } = item;
 
+    const isDisabled = status === EmployeeStatus.Disabled;
+
     item.access = selectedAccess;
 
     const addUser = () => {
-      if (shared) {
+      if (isDisabled) {
+        toastr.warning(t("UsersCannotBeAdded"));
+      } else if (shared) {
         toastr.warning(t("UsersAlreadyAdded"));
       } else {
         if (isGroup && checkIfAccessPaid(item.access)) {
@@ -380,18 +381,22 @@ const InviteInput = ({
           source={avatar}
           userName={groupName}
           isGroup={isGroup}
+          className={isDisabled ? "avatar-disabled" : ""}
         />
         <div className="list-item_content">
-          <Box displayProp="flex" alignItems="center" gapProp="8px">
-            <SearchItemText primary disabled={shared}>
+          <div className="list-item_content-box">
+            <SearchItemText $primary disabled={shared || isDisabled}>
               {displayName || groupName}
             </SearchItemText>
             {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
-          </Box>
+          </div>
           <SearchItemText>{email}</SearchItemText>
         </div>
         {shared ? (
-          <SearchItemText info>{t("Common:Invited")}</SearchItemText>
+          <SearchItemText $info>{t("Common:Invited")}</SearchItemText>
+        ) : null}
+        {isDisabled ? (
+          <SearchItemText disabled>{t("Common:Disabled")}</SearchItemText>
         ) : null}
       </DropDownItem>
     );
@@ -488,7 +493,15 @@ const InviteInput = ({
       prevDropDownContent.current = usersList.map((user) =>
         getItemContent(user),
       );
-    } else {
+    } else if (roomId !== -1 && !allowInvitingGuests)
+      prevDropDownContent.current = (
+        <DropDownItem disabled className="no-users-list">
+          <Text truncate fontSize="13px" fontWeight={400} lineHeight="20px">
+            {t("Common:NotFoundUsers")}
+          </Text>
+        </DropDownItem>
+      );
+    else {
       prevDropDownContent.current = (
         <DropDownItem
           className="list-item"
@@ -572,64 +585,59 @@ const InviteInput = ({
           </StyledLink>
         ) : null}
       </StyledSubHeader>
-      <StyledDescription noSelect>
+      <StyledDescription
+        noSelect
+        noAllowInvitingGuests={roomId !== -1 ? !allowInvitingGuests : null}
+      >
         {roomId === -1
           ? t("InviteMembersManuallyDescription", {
               productName: t("Common:ProductName"),
             })
-          : t("InviteToRoomManuallyInfo", {
-              productName: t("Common:ProductName"),
-            })}
+          : !allowInvitingGuests
+            ? t("InviteToRoomManuallyInfoMembers", {
+                productName: t("Common:ProductName"),
+              })
+            : t("InviteToRoomManuallyInfoGuest", {
+                productName: t("Common:ProductName"),
+              })}
       </StyledDescription>
-      <StyledInviteLanguage>
-        <Text className="invitation-language" noSelect>
-          {t("InvitationLanguage")}:
-        </Text>
-        <div className="language-combo-box-wrapper">
-          <ComboBox
-            className="language-combo-box"
-            directionY="both"
-            options={cultureNamesNew}
-            selectedOption={culture}
-            onSelect={onLanguageSelect}
-            isDisabled={false}
-            scaled={isMobileView}
-            scaledOptions={false}
-            size="content"
-            manualWidth="280px"
-            showDisabledItems
-            dropDownMaxHeight={364}
-            withBlur={isMobileView}
-            isDefaultMode={!isMobileView}
-            fillIcon={false}
-            modernView
-          />
-          {culture?.isBeta ? (
-            <BetaBadge place="bottom-end" mobilePlace="bottom" />
+      {roomId === -1 || allowInvitingGuests ? (
+        <StyledInviteLanguage>
+          <Text className="invitation-language" noSelect>
+            {t("InvitationLanguage")}:
+          </Text>
+          <div className="language-combo-box-wrapper">
+            <ComboBox
+              className="language-combo-box"
+              directionY="both"
+              options={cultureNamesNew}
+              selectedOption={culture}
+              onSelect={onLanguageSelect}
+              isDisabled={false}
+              scaled={isMobileView}
+              scaledOptions={false}
+              size="content"
+              manualWidth="280px"
+              showDisabledItems
+              dropDownMaxHeight={364}
+              withBlur={isMobileView}
+              isDefaultMode={!isMobileView}
+              fillIcon={false}
+              modernView
+              withBackdrop={isMobileView}
+              withBackground={isMobileView}
+              shouldShowBackdrop={isMobileView}
+            />
+          </div>
+          {isChangeLangMail ? (
+            <IconButton
+              className="list-link"
+              iconName={BackupIcon}
+              onClick={onResetLangMail}
+              size={12}
+            />
           ) : null}
-        </div>
-        {isChangeLangMail && !isMobileView ? (
-          <StyledLink
-            className="list-link"
-            fontWeight="600"
-            type="action"
-            isHovered
-            onClick={onResetLangMail}
-          >
-            {t("ResetChange")}
-          </StyledLink>
-        ) : null}
-      </StyledInviteLanguage>
-      {isChangeLangMail && isMobileView ? (
-        <ResetLink
-          className="reset-link"
-          fontWeight="600"
-          type="action"
-          isHovered
-          onClick={onResetLangMail}
-        >
-          {t("ResetChange")}
-        </ResetLink>
+        </StyledInviteLanguage>
       ) : null}
 
       <StyledInviteInputContainer ref={inputsRef}>
@@ -641,7 +649,9 @@ const InviteInput = ({
             placeholder={
               roomId === -1
                 ? t("InviteMembersSearchPlaceholder")
-                : t("InviteToRoomSearchPlaceholder")
+                : !allowInvitingGuests
+                  ? t("InviteToRoomAddPlaceholder")
+                  : t("InviteToRoomSearchPlaceholder")
             }
             value={inputValue}
             isAutoFocussed
@@ -705,7 +715,7 @@ export default inject(
       isPaidUserAccess,
     } = dialogsStore;
 
-    const { culture: language } = settingsStore;
+    const { culture: language, allowInvitingGuests } = settingsStore;
     const { isUserTariffLimit } = currentQuotaStore;
     return {
       language,
@@ -720,6 +730,7 @@ export default inject(
       isAdmin,
       isPaidUserAccess,
       isUserTariffLimit,
+      allowInvitingGuests,
     };
   },
 )(

@@ -1,0 +1,8 @@
+{
+  "ChangeData": "データとパスワードを変更する",
+  "ClickButtonBelow": "メールアドレスでログインをご希望の場合は、ご自身でパスワードを設定してください。<br />準備ができたら、以下のボタンをクリックしてください。",
+  "ContinueToProduct": "{{productName}} へ引き続き",
+  "GeneratedPassword": "生成されたパスワード",
+  "ProductNameDetail": "{{productName}} の名前",
+  "ReviewAccountDetails": "アカウントの詳細をご確認ください。"
+}

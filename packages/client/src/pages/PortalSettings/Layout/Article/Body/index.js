@@ -27,14 +27,14 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
-import { ArticleItem } from "@docspace/shared/components/article-item";
+import { ArticleItem } from "@docspace/shared/components/article-item/ArticleItemWrapper";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import {
   // getKeyByLink,
@@ -207,7 +207,7 @@ const ArticleBodyContent = (props) => {
       case "Migration":
         return t("Migration");
       case "Backup":
-        return t("Backup");
+        return t("Common:Backup");
       case "Common:PaymentsTitle":
         return t("Common:PaymentsTitle");
       case "ManagementCategoryDataManagement":
@@ -216,8 +216,8 @@ const ArticleBodyContent = (props) => {
         return t("Ldap:LdapSettings");
       case "LdapSyncTitle":
         return t("Ldap:LdapSyncTitle");
-      case "RestoreBackup":
-        return t("RestoreBackup");
+      case "Common:RestoreBackup":
+        return t("Common:RestoreBackup");
       case "PortalDeletion":
         return t("PortalDeletion", { productName: t("Common:ProductName") });
       case "Common:DeveloperTools":
@@ -300,7 +300,7 @@ const ArticleBodyContent = (props) => {
           linkData={linkData}
           folderId={item.id}
           style={{
-            marginTop: `${item.key.includes(9) ? "16px" : "0"}`,
+            margin: `${item.key.includes(9) ? "16px 0px" : "0"}`,
           }}
           $currentColorScheme={currentColorScheme}
         />,

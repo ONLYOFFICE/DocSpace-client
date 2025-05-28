@@ -1,8 +1,6 @@
 {
-  "CancelUpload": "Nalaganje je bilo prekinjeno. Nekatere datoteke niso bile naložene.",
-  "EnterPassword": "Vnesi geslo",
   "HideInput": "Skrij",
   "Ready": "Končano",
-  "UploadAndConvert": "Naloži in pretvori datoteke",
-  "Uploads": "Nalaganja"
+  "UploadingAndConversion": "Nalaganje in pretvorba",
+  "UploadingError": "Napaka pri nalaganju"
 }

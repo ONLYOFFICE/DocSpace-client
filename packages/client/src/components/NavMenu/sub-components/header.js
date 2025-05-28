@@ -28,7 +28,7 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Link as LinkWithoutRedirect, useLocation } from "react-router-dom";
+import { Link as LinkWithoutRedirect, useLocation } from "react-router";
 import {
   isDesktop,
   NoUserSelect,
@@ -178,9 +178,7 @@ const HeaderComponent = ({
         {currentProductId !== "home" && !isFormGallery ? (
           <HeaderCatalogBurger onClick={toggleArticleOpen} />
         ) : null}
-        {customHeader ? (
-          { customHeader }
-        ) : (
+        {customHeader || (
           <LinkWithoutRedirect className="header-logo-wrapper" to={defaultPage}>
             <img alt="logo" src={logo} className="header-logo-icon" />
           </LinkWithoutRedirect>

@@ -35,7 +35,6 @@ import { inject, observer } from "mobx-react";
 import { Avatar } from "@docspace/shared/components/avatar";
 
 import { Text } from "@docspace/shared/components/text";
-import { Box } from "@docspace/shared/components/box";
 import { Link } from "@docspace/shared/components/link";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -64,6 +63,7 @@ import {
   StyledInfo,
   StyledLabel,
   StyledAvatarWrapper,
+  getDropdownHoverRules,
 } from "./styled-main-profile";
 
 const TooltipContent = ({ content }) => <Text fontSize="12px">{content}</Text>;
@@ -75,7 +75,7 @@ const MainProfile = (props) => {
     theme,
     profile,
     culture,
-    helpLink,
+    becometranslatorUrl,
     cultureNames,
 
     setChangeEmailVisible,
@@ -95,6 +95,24 @@ const MainProfile = (props) => {
     image,
     setImage,
   } = props;
+
+  const styleContainerRef = useRef(null);
+
+  useEffect(() => {
+    if (!styleContainerRef.current) return;
+
+    const styleElement = document.createElement("style");
+    styleContainerRef.current.appendChild(styleElement);
+
+    const sheet = styleElement.sheet;
+    const rules = getDropdownHoverRules();
+
+    rules.forEach((rule, index) => {
+      sheet.insertRule(rule, index);
+    });
+
+    return () => styleElement.parentNode?.removeChild(styleElement);
+  }, []);
 
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [dropDownMaxHeight, setDropDownMaxHeight] = useState(352);
@@ -196,17 +214,22 @@ const MainProfile = (props) => {
         </Link>
         to take part in the translation and get up to 1 year free of charge."
       </Trans>
-      <Box displayProp="block" marginProp="10px 0 0">
+      {becometranslatorUrl ? (
         <Link
+          style={{
+            boxSizing: "border-box",
+            display: "block",
+            margin: "10px 0 0",
+          }}
           isHovered
           isBold
           fontSize="13px"
-          href={`${helpLink}/guides/become-translator.aspx`}
+          href={becometranslatorUrl}
           target="_blank"
         >
           {t("Common:LearnMore")}
         </Link>
-      </Box>
+      ) : null}
     </Text>
   );
 
@@ -232,7 +255,7 @@ const MainProfile = (props) => {
   const isBetaLanguage = selectedLanguage?.isBeta;
 
   return (
-    <StyledWrapper>
+    <StyledWrapper ref={styleContainerRef}>
       <StyledAvatarWrapper className="avatar-wrapper">
         <Avatar
           className="avatar"
@@ -261,7 +284,6 @@ const MainProfile = (props) => {
               fontSize="9px"
               fontWeight={800}
               noHover
-              lineHeight="13px"
             />
           </div>
         ) : null}
@@ -279,7 +301,6 @@ const MainProfile = (props) => {
               fontSize="9px"
               fontWeight={800}
               noHover
-              lineHeight="13px"
             />
           </div>
         ) : null}
@@ -309,7 +330,6 @@ const MainProfile = (props) => {
                   fontSize="9px"
                   fontWeight={800}
                   noHover
-                  lineHeight="13px"
                 />
                 <Tooltip anchorSelect={`div[id='sso-badge-profile'] div`}>
                   {t("PeopleTranslations:SSOAccountTooltip")}
@@ -332,7 +352,6 @@ const MainProfile = (props) => {
                   fontSize="9px"
                   fontWeight={800}
                   noHover
-                  lineHeight="13px"
                 />
                 <Tooltip anchorSelect={`div[id='ldap-badge-profile'] div`}>
                   {t("PeopleTranslations:LDAPAccountTooltip")}
@@ -639,8 +658,13 @@ const MainProfile = (props) => {
 export default inject(
   ({ settingsStore, peopleStore, userStore, avatarEditorDialogStore }) => {
     const { withActivationBar, sendActivationLink } = userStore;
-    const { theme, helpLink, culture, currentColorScheme, documentationEmail } =
-      settingsStore;
+    const {
+      theme,
+      becometranslatorUrl,
+      culture,
+      currentColorScheme,
+      documentationEmail,
+    } = settingsStore;
 
     const {
       avatarEditorDialogVisible,
@@ -665,7 +689,7 @@ export default inject(
       theme,
       profile,
       culture,
-      helpLink,
+      becometranslatorUrl,
 
       setChangeEmailVisible,
       setChangePasswordVisible,

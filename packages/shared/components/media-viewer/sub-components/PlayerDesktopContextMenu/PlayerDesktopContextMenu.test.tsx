@@ -30,28 +30,31 @@ import "@testing-library/jest-dom";
 import { PlayerDesktopContextMenu } from ".";
 
 // Mock SVG components
-jest.mock("PUBLIC_DIR/images/download.react.svg", () => {
-  const DummyDownloadIcon = React.forwardRef(
-    (props: React.ComponentProps<"div">, ref: React.Ref<HTMLDivElement>) => (
-      <div {...props} ref={ref}>
-        Download Icon
-      </div>
-    ),
+jest.mock("PUBLIC_DIR/images/icons/16/download.react.svg", () => {
+  const DummyDownloadIcon = ({
+    ref,
+    ...props
+  }: React.ComponentProps<"div"> & {
+    ref: React.RefObject<HTMLDivElement>;
+  }) => (
+    <div {...props} ref={ref}>
+      Download Icon
+    </div>
   );
   DummyDownloadIcon.displayName = "DownloadReactSvgUrl";
   return DummyDownloadIcon;
 });
 
 jest.mock("PUBLIC_DIR/images/icons/16/vertical-dots.react.svg", () => {
-  const DummyMediaContextMenu = React.forwardRef(
-    (
-      props: React.HTMLAttributes<HTMLDivElement>,
-      ref: React.Ref<HTMLDivElement>,
-    ) => (
-      <div {...props} ref={ref}>
-        Media Context Menu
-      </div>
-    ),
+  const DummyMediaContextMenu = ({
+    ref,
+    ...props
+  }: React.HTMLAttributes<HTMLDivElement> & {
+    ref: React.RefObject<HTMLDivElement>;
+  }) => (
+    <div {...props} ref={ref}>
+      Media Context Menu
+    </div>
   );
   DummyMediaContextMenu.displayName = "MediaContextMenu";
   return DummyMediaContextMenu;

@@ -1,8 +1,6 @@
 {
-  "CancelUpload": "Yükləmə dayandırıldı. Bəzi fayllar yüklənmədi.",
-  "EnterPassword": "Şifrəni daxil edin",
   "HideInput": "Gizlət",
   "Ready": "Hazırdır",
-  "UploadAndConvert": "Faylları yükləyin və çevirin",
-  "Uploads": "Yükləmələr"
+  "UploadingAndConversion": "Yükləmə və Dönüşüm",
+  "UploadingError": "Yükləmə xətası"
 }

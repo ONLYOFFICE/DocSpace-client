@@ -33,8 +33,7 @@ import { injectDefaultTheme } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 
 import { useTranslation } from "react-i18next";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import { LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 
 const InfoWrapper = styled.div`
   margin-bottom: 25px;
@@ -60,18 +59,20 @@ const WebhookInfo = (props) => {
           organizationName: logoText,
         })}
       </InfoText>
-      <ColorTheme
-        id="webhooks-info-link"
-        tag="a"
-        themeId={ThemeId.Link}
-        fontWeight={600}
-        href={webhooksGuideUrl}
-        target={LinkTarget.blank}
-        type={LinkType.page}
-        isHovered
-      >
-        {t("WebhooksGuide")}
-      </ColorTheme>
+      {webhooksGuideUrl ? (
+        <Link
+          id="webhooks-info-link"
+          tag="a"
+          fontWeight={600}
+          href={webhooksGuideUrl}
+          target={LinkTarget.blank}
+          type={LinkType.page}
+          isHovered
+          color="accent"
+        >
+          {t("WebhooksGuide")}
+        </Link>
+      ) : null}
     </InfoWrapper>
   );
 };

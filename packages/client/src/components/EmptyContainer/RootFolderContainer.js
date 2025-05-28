@@ -29,12 +29,11 @@ import PersonSvgUrl from "PUBLIC_DIR/images/icons/12/person.svg?url";
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/12/plus.svg?url";
 import RoomsReactSvgUrl from "PUBLIC_DIR/images/rooms.react.svg?url";
 
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import { inject, observer } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 import { Link } from "@docspace/shared/components/link";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
@@ -69,7 +68,7 @@ const RootFolderContainer = (props) => {
     isPrivacyFolder,
     isDesktop,
     isEncryptionSupport,
-    privacyInstructions,
+    privateRoomsUrl,
     title,
     onCreate,
     onCreateRoom,
@@ -98,7 +97,7 @@ const RootFolderContainer = (props) => {
   const location = useLocation();
 
   const personalDescription = t("EmptyFolderDecription");
-  const emptyScreenHeader = t("EmptyScreenFolder");
+  const emptyScreenHeader = t("Common:EmptyScreenFolder");
   const archiveHeader = t("ArchiveEmptyScreenHeader");
   const noFilesHeader = t("NoFilesHereYet");
   const trashDescription = t("TrashEmptyDescription");
@@ -107,8 +106,8 @@ const RootFolderContainer = (props) => {
 
   const roomsDescription = isPublicRoom ? (
     <>
-      <div>{t("RoomEmptyAtTheMoment")}</div>
-      <div>{t("FilesWillAppearHere")}</div>
+      <div>{t("Common:RoomEmptyAtTheMoment")}</div>
+      <div>{t("Common:FilesWillAppearHere")}</div>
     </>
   ) : isVisitor || isCollaborator ? (
     t("RoomEmptyContainerDescriptionUser")
@@ -134,7 +133,7 @@ const RootFolderContainer = (props) => {
     t("PrivateRoomDescriptionUnbreakable"),
   ];
 
-  const roomHeader = t("EmptyRootRoomHeader", {
+  const roomHeader = t("Common:EmptyRootRoomHeader", {
     productName: t("Common:ProductName"),
   });
 
@@ -142,15 +141,18 @@ const RootFolderContainer = (props) => {
     <>
       <Text fontSize="15px" as="div">
         {privateRoomDescTranslations.map((el) => (
-          <Box
-            displayProp="flex"
-            alignItems="center"
-            paddingProp="0 0 13px 0"
+          <div
+            style={{
+              boxSizing: "border-box",
+              display: "flex",
+              alignItems: "center",
+              padding: "0 0 13px 0",
+            }}
             key={el}
           >
-            <Box paddingProp="0 7px 0 0">{privacyIcon}</Box>
-            <Box>{el}</Box>
-          </Box>
+            <div style={{ padding: "0 7px 0 0" }}>{privacyIcon}</div>
+            <div>{el}</div>
+          </div>
         ))}
       </Text>
       {!isDesktop ? (
@@ -162,7 +164,7 @@ const RootFolderContainer = (props) => {
               isBold
               isHovered
               color={theme.filesEmptyContainer.privateRoom.linkColor}
-              href={privacyInstructions}
+              href={privateRoomsUrl}
             >
               Instructions
             </Link>
@@ -212,7 +214,9 @@ const RootFolderContainer = (props) => {
         isFill
       />
       <Link onClick={onGoToPersonal} {...linkStyles}>
-        {t("GoToPersonal")}
+        {t("Files:GoToSection", {
+          sectionName: t("Common:MyFilesSection"),
+        })}
       </Link>
     </div>
   );
@@ -227,7 +231,9 @@ const RootFolderContainer = (props) => {
         isFill
       />
       <Link onClick={onGoToPersonal} {...linkStyles}>
-        {t("GoToPersonal")}
+        {t("Files:GoToSection", {
+          sectionName: t("Common:MyFilesSection"),
+        })}
       </Link>
     </div>
   );
@@ -242,7 +248,7 @@ const RootFolderContainer = (props) => {
         isFill
       />
       <Link onClick={onCreateRoom} {...linkStyles}>
-        {t("CreateRoom")}
+        {t("Common:CreateRoom")}
       </Link>
     </div>
   );
@@ -360,8 +366,13 @@ export default inject(
     userStore,
     publicRoomStore,
   }) => {
-    const { isDesktopClient, isEncryptionSupport, theme, logoText } =
-      settingsStore;
+    const {
+      isDesktopClient,
+      isEncryptionSupport,
+      theme,
+      logoText,
+      privateRoomsUrl,
+    } = settingsStore;
 
     const { setIsSectionBodyLoading } = clientLoadingStore;
 
@@ -369,7 +380,7 @@ export default inject(
       setIsSectionBodyLoading(param);
     };
 
-    const { filter, privacyInstructions, isEmptyPage } = filesStore;
+    const { filter, isEmptyPage } = filesStore;
     const { title, rootFolderType, security } = selectedFolderStore;
     const { isPrivacyFolder, myFolderId, myFolder, roomsFolder } =
       treeFoldersStore;
@@ -384,7 +395,7 @@ export default inject(
       userId: userStore?.user?.id,
       isCollaborator: userStore?.user?.isCollaborator,
       isEncryptionSupport,
-      privacyInstructions,
+      privateRoomsUrl,
       title,
       myFolderId,
       filter,
@@ -402,4 +413,4 @@ export default inject(
       logoText,
     };
   },
-)(withTranslation(["Files"])(observer(RootFolderContainer)));
+)(withTranslation(["Files", "Common"])(observer(RootFolderContainer)));

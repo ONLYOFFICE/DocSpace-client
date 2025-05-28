@@ -28,7 +28,7 @@ import styled from "styled-components";
 import { globalColors } from "@docspace/shared/themes";
 
 const StyledBody = styled.div`
-  padding: 0 16px;
+  padding-left: 16px;
   .embedding-panel_header-link {
     margin: 10px 0 2px;
   }

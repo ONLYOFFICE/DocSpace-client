@@ -24,9 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TTranslation } from "../../../types";
-import { DeviceType } from "../../../enums";
-
 export interface ILogoPath {
   light: string;
   dark: string;
@@ -53,32 +50,27 @@ export interface IWhiteLabelData {
 }
 
 export interface IHeaderProps {
-  t: TTranslation;
   showNotAvailable: boolean;
   isSettingPaid: boolean;
   standalone: boolean;
   onUseTextAsLogo: () => void;
   isEmpty: boolean;
   logoTextWhiteLabel: string;
-  onChangeCompanyName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClear: () => void;
 }
-
 export interface IWhiteLabel {
-  t: TTranslation;
   isSettingPaid: boolean;
   showNotAvailable: boolean;
   standalone: boolean;
   logoUrls: ILogo[];
-  logoText: string;
   showAbout: boolean;
   onSave: (data: IWhiteLabelData) => void;
   onRestoreDefault: () => void;
   isSaving: boolean;
   enableRestoreButton: boolean;
-  deviceType: DeviceType;
   setLogoUrls: (logoUrls: ILogo[]) => void;
   isWhiteLabelLoaded: boolean;
-  defaultLogoText: string;
   defaultWhiteLabelLogoUrls: ILogo[];
 }
 

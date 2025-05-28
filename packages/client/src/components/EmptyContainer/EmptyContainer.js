@@ -34,6 +34,7 @@ const EmptyFolderWrapper = styled.div`
     .empty-folder_container-links {
       display: flex;
       .flex-wrapper_container {
+        box-sizing: border-box;
         display: flex;
         flex-wrap: wrap;
         row-gap: 16px;

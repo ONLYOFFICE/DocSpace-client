@@ -41,10 +41,8 @@ const AuthorizedApps = ({
   }, [fetchConsents, fetchScopes]);
 
   React.useEffect(() => {
-    if (consents?.length) return;
-
     getConsentList();
-  }, [consents?.length, getConsentList]);
+  }, [getConsentList]);
 
   useViewEffect({
     view: viewAs,

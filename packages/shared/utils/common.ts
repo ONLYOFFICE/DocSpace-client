@@ -28,7 +28,7 @@
 /* eslint-disable no-multi-str */
 /* eslint-disable no-plusplus */
 
-import type { Location } from "@remix-run/router";
+import type { Location } from "react-router";
 import find from "lodash/find";
 import moment from "moment-timezone";
 import { findWindows } from "windows-iana";
@@ -67,19 +67,25 @@ import {
   ErrorKeys,
   WhiteLabelLogoType,
   EmployeeType,
+  UrlActionType,
 } from "../enums";
 import {
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
   PUBLIC_MEDIA_VIEW_URL,
   RTL_LANGUAGES,
+  TIMEZONE,
 } from "../constants";
 
 import { TI18n, TTranslation } from "../types";
 import { TUser } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
 import { TRoom } from "../api/rooms/types";
-import { TPasswordHash, TTimeZone } from "../api/settings/types";
+import {
+  TDomainValidator,
+  TPasswordHash,
+  TTimeZone,
+} from "../api/settings/types";
 import TopLoaderService from "../components/top-loading-indicator";
 
 import { Encoder } from "./encoder";
@@ -87,6 +93,7 @@ import { combineUrl } from "./combineUrl";
 import { getCookie, setCookie } from "./cookie";
 import { checkIsSSR } from "./device";
 import { hasOwnProperty } from "./object";
+import { TFrameConfig } from "../types/Frame";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -183,24 +190,24 @@ export const parseDomain = (
 
 export const validatePortalName = (
   value: string,
-  nameValidator: { minLength: number; maxLength: number; regex: RegExp },
+  nameValidator: TDomainValidator,
   setError: Function,
   t: TTranslation,
 ) => {
   const validName = new RegExp(nameValidator.regex);
   switch (true) {
     case value === "":
-      return setError(t("Settings:PortalNameEmpty"));
+      return setError(t("Common:PortalNameEmpty"));
     case value.length < nameValidator.minLength ||
       value.length > nameValidator.maxLength:
       return setError(
-        t("Settings:PortalNameLength", {
+        t("Common:PortalNameLength", {
           minLength: nameValidator.minLength.toString(),
           maxLength: nameValidator.maxLength.toString(),
         }),
       );
     case !validName.test(value):
-      return setError(t("Settings:PortalNameIncorrect"));
+      return setError(t("Common:PortalNameIncorrect"));
 
     default:
       setError(null);
@@ -452,6 +459,10 @@ export const isLanguageRtl = (lng: string) => {
 
   const splittedLng = lng.split("-");
   return RTL_LANGUAGES.includes(splittedLng[0]);
+};
+
+export const getDirectionByLanguage = (lng: string) => {
+  return isLanguageRtl(lng) ? "rtl" : "ltr";
 };
 
 // temporary function needed to replace rtl language in Editor to ltr
@@ -861,7 +872,7 @@ export const decodeDisplayName = <T extends TFile | TFolder | TRoom>(
     if (!item) return item;
 
     if ("updatedBy" in item) {
-      const updatedBy = item.updatedBy as {};
+      const updatedBy = item.updatedBy;
       if (
         updatedBy &&
         "displayName" in updatedBy &&
@@ -872,7 +883,7 @@ export const decodeDisplayName = <T extends TFile | TFolder | TRoom>(
     }
 
     if ("createdBy" in item) {
-      const createdBy = item.createdBy as {};
+      const createdBy = item.createdBy;
       if (
         createdBy &&
         "displayName" in createdBy &&
@@ -1033,17 +1044,18 @@ export const getSystemTheme = () => {
 };
 
 export const getEditorTheme = (theme?: ThemeKeys) => {
+  const systemTheme =
+    getSystemTheme() === ThemeKeys.DarkStr ? "default-dark" : "default-light";
+
   switch (theme) {
     case ThemeKeys.BaseStr:
       return "default-light";
     case ThemeKeys.DarkStr:
       return "default-dark";
-    case ThemeKeys.SystemStr: {
-      const uiTheme = getSystemTheme();
-      return uiTheme === ThemeKeys.DarkStr ? "default-dark" : "default-light";
-    }
+    case ThemeKeys.SystemStr:
+      return systemTheme;
     default:
-      return "default-dark";
+      return systemTheme;
   }
 };
 
@@ -1237,16 +1249,21 @@ export const getUserTypeDescription = (
   t: TTranslation,
 ) => {
   if (isPortalAdmin)
-    return t("Translations:RolePortalAdminDescription", {
+    return t("Common:RolePortalAdminDescription", {
       productName: t("Common:ProductName"),
+      sectionName: t("Common:MyFilesSection"),
     });
 
-  if (isRoomAdmin) return t("Translations:RoleRoomAdminDescription");
+  if (isRoomAdmin)
+    return t("Common:RoleRoomAdminDescription", {
+      sectionName: t("Common:MyFilesSection"),
+    });
 
-  if (isCollaborator) return t("Translations:RoleNewUserDescription");
+  if (isCollaborator) return t("Common:RoleNewUserDescription");
 
   return t("Translations:RoleGuestDescriprion");
 };
+
 export function setLanguageForUnauthorized(culture: string) {
   setCookie(LANGUAGE, culture, {
     "max-age": COOKIE_EXPIRATION_YEAR,
@@ -1260,10 +1277,16 @@ export function setLanguageForUnauthorized(culture: string) {
   if (prevCulture) {
     const newUrl = window.location.href.replace(`&culture=${prevCulture}`, ``);
 
-    window.history.pushState("", "", newUrl);
+    window.history.pushState({}, "", newUrl);
   }
 
   window.location.reload();
+}
+
+export function setTimezoneForUnauthorized(timezone: string) {
+  setCookie(TIMEZONE, timezone, {
+    "max-age": COOKIE_EXPIRATION_YEAR,
+  });
 }
 
 export const imageProcessing = async (file: File, maxSize?: number) => {
@@ -1353,6 +1376,38 @@ export const getBackupProgressInfo = (
       setLink(link);
     }
 
-    return { success: t("Settings:BackupCreatedSuccess") };
+    return { success: t("Common:BackupCreatedSuccess") };
   }
+};
+
+type OpenUrlParams = {
+  url: string;
+  action: UrlActionType;
+  replace?: boolean;
+  isFrame?: boolean;
+  frameConfig?: TFrameConfig | null;
+};
+
+export const openUrl = ({
+  url,
+  action,
+  replace,
+  isFrame,
+  frameConfig,
+}: OpenUrlParams) => {
+  if (action === UrlActionType.Download) {
+    return isFrame &&
+      frameConfig?.downloadToEvent &&
+      frameConfig?.events?.onDownload
+      ? frameCallEvent({ event: "onDownload", data: url })
+      : replace
+        ? (window.location.href = url)
+        : window.open(url, "_self");
+  }
+};
+
+export const getSdkScriptUrl = (version: string) => {
+  return typeof window !== "undefined"
+    ? `${window.location.origin}/static/scripts/sdk/${version}/api.js`
+    : "";
 };

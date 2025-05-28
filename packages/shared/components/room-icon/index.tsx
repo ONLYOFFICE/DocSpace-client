@@ -31,6 +31,7 @@ import classNames from "classnames";
 import EditPenSvgUrl from "PUBLIC_DIR/images/icons/12/pen-edit.react.svg?url";
 import Camera10ReactSvgUrl from "PUBLIC_DIR/images/icons/10/cover.camera.react.svg?url";
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
+import TemplateRoomIcon from "PUBLIC_DIR/images/template-room-icon.react.svg?url";
 
 import { useClickOutside } from "../../utils/useClickOutside";
 import { getTextColor } from "../../utils";
@@ -40,10 +41,11 @@ import { globalColors } from "../../themes/globalColors";
 
 import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
+
 import { Text } from "../text";
 import { IconButton } from "../icon-button";
 
-import { getRoomTitle } from "./RoomIcon.utils";
+import { encodeToBase64, getRoomTitle } from "./RoomIcon.utils";
 import styles from "./RoomIcon.module.scss";
 import type { RoomIconProps } from "./RoomIcon.types";
 import { Tooltip } from "../tooltip";
@@ -58,6 +60,7 @@ const RoomIcon = ({
   imgClassName,
   logo,
   badgeUrl,
+  badgeIconNode,
   onBadgeClick,
   className,
   withEditing,
@@ -68,6 +71,7 @@ const RoomIcon = ({
   dropDownManualX,
   tooltipContent,
   tooltipId,
+  isTemplate = false,
 }: RoomIconProps) => {
   const [correctImage, setCorrectImage] = React.useState(true);
   const [openEditLogo, setOpenLogoEdit] = React.useState(false);
@@ -97,7 +101,7 @@ const RoomIcon = ({
     ? typeof logo === "string"
       ? logo
       : logo.cover
-        ? `data:image/svg+xml;base64, ${window.btoa(logo?.cover?.data)}`
+        ? `data:image/svg+xml;base64, ${encodeToBase64(logo?.cover?.data)}`
         : typeof logo === "object" && logo.medium
           ? logo.medium
           : undefined
@@ -166,6 +170,29 @@ const RoomIcon = ({
     typeof logo !== "string" &&
     !logo?.color;
 
+  const roomTitleText = (
+    <Text
+      className={classNames("room-title", styles.roomTitle)}
+      noSelect
+      data-testid="room-title"
+      style={
+        {
+          "--room-icon-text-color":
+            isBase && isWrongImage
+              ? globalColors.black
+              : !isBase && !isArchive
+                ? `#${color}`
+                : textColor,
+        } as React.CSSProperties
+      }
+    >
+      {roomTitle}
+    </Text>
+  );
+
+  const isImage =
+    typeof logo === "string" || (typeof logo === "object" && logo?.medium);
+
   return (
     <>
       <div
@@ -185,7 +212,7 @@ const RoomIcon = ({
           {
             "--room-icon-size": size,
             "--room-icon-radius": radius,
-            "--room-icon-color": `#${color}`,
+            "--room-icon-color": color ? `#${color}` : null,
             "--room-icon-text-color": textColor,
             "--room-icon-cover-size": coverSize / 20,
           } as React.CSSProperties
@@ -193,10 +220,32 @@ const RoomIcon = ({
         data-testid="room-icon"
         data-is-archive={isArchive}
         data-has-editing={withEditing}
+        data-is-template={isTemplate}
         data-is-empty={isEmptyIcon}
         onClick={onToggleOpenEditLogo}
       >
-        {isEmptyIcon ? (
+        {isTemplate ? (
+          <div className="template-icon-container template-hover">
+            <ReactSVG className="template-icon-svg" src={TemplateRoomIcon} />
+            {showDefault || !correctImage ? (
+              roomTitleText
+            ) : isImage ? (
+              <img
+                className={classNames([imgClassName, "room-image"])}
+                src={imgSrc}
+                alt="room icon"
+              />
+            ) : (
+              <ReactSVG
+                className={classNames(
+                  "room-icon-cover template-icon-svg-icon",
+                  styles.roomIconCover,
+                )}
+                src={imgSrc as string}
+              />
+            )}
+          </div>
+        ) : isEmptyIcon ? (
           <>
             <ReactSVG
               className="room-icon-empty"
@@ -221,23 +270,7 @@ const RoomIcon = ({
         ) : showDefault || !correctImage ? (
           <>
             <div className="room-background hover-class" />
-            <Text
-              className={classNames("room-title", styles.roomTitle)}
-              noSelect
-              data-testid="room-title"
-              style={
-                {
-                  "--room-icon-text-color":
-                    isBase && isWrongImage
-                      ? globalColors.black
-                      : !isBase && !isArchive
-                        ? `#${color}`
-                        : textColor,
-                } as React.CSSProperties
-              }
-            >
-              {roomTitle}
-            </Text>
+            {roomTitleText}
           </>
         ) : logo &&
           typeof logo !== "string" &&
@@ -250,7 +283,7 @@ const RoomIcon = ({
               className={classNames("room-icon-cover", styles.roomIconCover)}
               style={
                 {
-                  "--room-icon--text-color": isBase ? textColor : `#${color}`,
+                  "--room-icon-text-color": isBase ? textColor : `#${color}`,
                 } as React.CSSProperties
               }
               src={imgSrc}
@@ -272,7 +305,7 @@ const RoomIcon = ({
 
         {hoverSrc && !isArchive ? (
           <div
-            className={styles.roomIconContainer}
+            className={classNames(styles.roomIconContainer)}
             onClick={onToggleOpenEditLogo}
             data-testid="hover-container"
           >
@@ -286,7 +319,7 @@ const RoomIcon = ({
           </div>
         ) : null}
 
-        {badgeUrl && !withEditing ? (
+        {(badgeUrl || badgeIconNode) && !withEditing ? (
           <div
             className={classNames(styles.roomIconBadge, {
               [styles.isBig]: isBigSize,
@@ -297,6 +330,7 @@ const RoomIcon = ({
               data-tooltip-id={tooltipId}
               onClick={onBadgeClick}
               iconName={badgeUrl}
+              iconNode={badgeIconNode}
               size={isBigSize ? 28 : 12}
               className={classNames(
                 styles.roomIconButton,
@@ -319,6 +353,7 @@ const RoomIcon = ({
           <div
             className={classNames(styles.editWrapper, styles.size20, {
               [styles.rtl]: isRTL,
+              [styles.isEditIcon]: withEditing,
             })}
           >
             <IconButton

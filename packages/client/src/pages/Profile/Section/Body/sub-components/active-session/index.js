@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
+
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -32,11 +34,9 @@ import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-import { Box } from "@docspace/shared/components/box";
 import { toastr } from "@docspace/shared/components/toast";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { ProfileFooterLoader } from "@docspace/shared/skeletons/profile";
-import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 
 import {
   LogoutSessionDialog,
@@ -53,6 +53,7 @@ const StyledWrapper = styled.div`
     color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
   }
   .terminate-session-container {
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -61,9 +62,7 @@ const StyledWrapper = styled.div`
   .terminate-all-sessions {
     font-size: 13px;
     font-weight: 600;
-  }
-  .icon-button {
-    margin-inline-start: 5px;
+    margin-inline-end: 5px;
   }
 `;
 
@@ -162,7 +161,7 @@ const ActiveSessions = ({
       {/* TODO: Uncomment after fix on backend */}
       {/* <Text className="auto-delete-title">{t("Profile:AutoDeleteTitle")}</Text> */}
 
-      <Box className="terminate-session-container">
+      <div className="terminate-session-container">
         <Link
           className="terminate-all-sessions"
           type="action"
@@ -176,7 +175,7 @@ const ActiveSessions = ({
           iconName={InfoReactSvgUrl}
           tooltipContent={tooltipContent}
         />
-      </Box>
+      </div>
 
       <SessionsTable t={t} sessionsData={sessions} viewAs={viewAs} />
 

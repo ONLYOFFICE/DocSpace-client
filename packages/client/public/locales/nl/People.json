@@ -1,5 +1,7 @@
 {
   "LblInviteAgain": "Opnieuw uitnodigen",
   "MessageEmailActivationInstuctionsSentOnEmail": "De e-mail activatie instructies zijn verzonden naar het <1>{{email}}</1> e-mailadres.",
+  "RemoveUser": "Verwijderen gebruiker",
+  "RemoveUserConfirmationText": "U staat op het punt om een gebruiker uit de kamer te verwijderen. Houd er rekening mee dat deze gebruiker actief deelneemt aan het invullen van formulieren. Als u doorgaat, worden alle formulieren waarbij zij betrokken zijn, bij hun huidige stap gestopt.",
   "UserStatus": "Status"
 }

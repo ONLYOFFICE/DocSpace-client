@@ -28,7 +28,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 
 import { DeviceType, RoomSearchArea } from "@docspace/shared/enums";
 
@@ -164,7 +164,11 @@ const ArticleBodyContent = (props) => {
         }
       }
 
-      path += `?${params}&date=${hashDate}`;
+      const searchParams = new URLSearchParams(params);
+      searchParams.delete("date");
+      const srcParams = searchParams.toString();
+
+      path += `?${srcParams}&date=${hashDate}`;
 
       return { path, state };
     },

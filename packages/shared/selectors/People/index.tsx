@@ -53,8 +53,8 @@ import { TUser } from "../../api/people/types";
 import { TGroup } from "../../api/groups/types";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import { Text } from "../../components/text";
-import { Box } from "../../components/box";
 import { globalColors } from "../../themes";
+import { isNextImage } from "../../utils/typeGuards";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
 import { StyledSendClockIcon } from "./PeopleSelector.styled";
@@ -91,7 +91,11 @@ const toListItem = (
 
     const role = getUserType(item);
 
-    const userAvatar = hasAvatar ? avatar : DefaultUserPhoto;
+    const defaultUserPhotoURL = isNextImage(DefaultUserPhoto)
+      ? DefaultUserPhoto.src
+      : DefaultUserPhoto;
+
+    const userAvatar = hasAvatar ? avatar : defaultUserPhotoURL;
 
     const isInvited = checkIfUserInvited
       ? checkIfUserInvited(item)
@@ -211,6 +215,10 @@ const PeopleSelector = ({
   onClose,
   withoutBackground,
   withBlur,
+  setActiveTab,
+  injectedElement,
+  alwaysShowFooter = false,
+  onlyRoomMembers,
 }: PeopleSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
@@ -225,7 +233,7 @@ const PeopleSelector = ({
   const [total, setTotal] = useState<number>(-1);
   const [hasNextPage, setHasNextPage] = useState(true);
   const [isNextPageLoading, setIsNextPageLoading] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<TSelectorItem | null>(null);
+  const [selectedItems, setSelectedItems] = useState<TSelectorItem[]>([]);
   const isFirstLoadRef = useRef(true);
   const afterSearch = useRef(false);
   const totalRef = useRef(0);
@@ -236,10 +244,14 @@ const PeopleSelector = ({
     isDoubleClick: boolean,
     doubleClickCallback: () => void,
   ) => {
-    setSelectedItem((el) => {
-      if (el?.id === item.id) return null;
+    setSelectedItems((prevItems) => {
+      if (!isMultiSelect) {
+        return item.isSelected ? [] : [item];
+      }
 
-      return item;
+      return item.isSelected
+        ? prevItems.filter((p) => p.id !== item.id)
+        : [...prevItems, item];
     });
     if (isDoubleClick) {
       doubleClickCallback();
@@ -310,6 +322,10 @@ const PeopleSelector = ({
         currentFilter.area = "people";
       }
 
+      if (onlyRoomMembers) {
+        currentFilter.includeShared = true;
+      }
+
       const response = !roomId
         ? await getUserList(currentFilter)
         : await getMembersList(searchArea, roomId, currentFilter);
@@ -350,9 +366,14 @@ const PeopleSelector = ({
         setItemsList((i) => {
           const tempItems = [...i, ...data];
 
+          const ids = new Set();
+          const filteredTempItems = tempItems.filter(
+            (item) => !ids.has(item.id) && ids.add(item.id),
+          );
+
           const newItems = withOutCurrentAuthorizedUser
-            ? removeCurrentUserFromList(tempItems)
-            : moveCurrentUserToTopOfList(tempItems);
+            ? removeCurrentUserFromList(filteredTempItems)
+            : moveCurrentUserToTopOfList(filteredTempItems);
 
           setHasNextPage(newItems.length < newTotal);
 
@@ -381,6 +402,7 @@ const PeopleSelector = ({
       withGroups,
       withGuests,
       withOutCurrentAuthorizedUser,
+      onlyRoomMembers,
     ],
   );
 
@@ -477,9 +499,16 @@ const PeopleSelector = ({
       <div
         style={{ width: "100%", overflow: "hidden", marginInlineEnd: "16px" }}
       >
-        <Box displayProp="flex" alignItems="center" gapProp="8px">
+        <div
+          style={{
+            display: "flex",
+            boxSizing: "border-box",
+            alignItems: "center",
+            gap: "8px",
+          }}
+        >
           <Text
-            className="label"
+            className="selector-item_label"
             fontWeight={600}
             fontSize="14px"
             noSelect
@@ -489,11 +518,11 @@ const PeopleSelector = ({
             {label}
           </Text>
           {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
-        </Box>
+        </div>
         {!isGroup ? (
           <div style={{ display: "flex" }}>
             <Text
-              className="label"
+              className="selector-item_label"
               fontWeight={400}
               fontSize="12px"
               noSelect
@@ -511,11 +540,12 @@ const PeopleSelector = ({
 
   const changeActiveTab = useCallback(
     (tab: number | string) => {
+      if (setActiveTab) setActiveTab(`${tab}`);
       setActiveTabId(`${tab}`);
       onSearch("");
       resetSelectorList();
     },
-    [onSearch, resetSelectorList],
+    [onSearch, resetSelectorList, setActiveTab],
   );
 
   const withTabsProps: TSelectorTabs =
@@ -577,14 +607,18 @@ const PeopleSelector = ({
       {...withAccessRightsProps}
       {...withAside}
       id={id}
-      alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}
+      injectedElement={injectedElement}
+      alwaysShowFooter={
+        itemsList.length !== 0 || Boolean(searchValue) || alwaysShowFooter
+      }
       className={className}
       style={style}
       renderCustomItem={renderCustomItem}
       items={itemsList}
       submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
       onSubmit={onSubmit}
-      disableSubmitButton={disableSubmitButton || !selectedItem}
+      disableSubmitButton={disableSubmitButton || !selectedItems.length}
+      selectedItem={isMultiSelect ? null : selectedItems[0]}
       submitButtonId={submitButtonId}
       emptyScreenImage={emptyScreenImage}
       emptyScreenHeader={

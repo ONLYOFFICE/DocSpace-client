@@ -31,8 +31,9 @@ import { getUserType } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   EmployeeActivationStatus,
-  Events,
   FileType,
+  // Events,
+  // FileType,
   FolderType,
   RoomsType,
   ShareAccessRights,
@@ -40,16 +41,16 @@ import {
 import config from "PACKAGE_FILE";
 import Filter from "@docspace/shared/api/people/filter";
 import {
-  getCreateShareLinkKey,
+  DEFAULT_CREATE_LINK_SETTINGS,
   getExpirationDate,
 } from "@docspace/shared/components/share/Share.helpers";
-import { getRoomInfo } from "@docspace/shared/api/rooms";
+import { getRoomInfo, getTemplateAvailable } from "@docspace/shared/api/rooms";
 import {
   getPrimaryLink,
   getExternalLinks,
   editExternalLink,
   addExternalLink,
-  checkIsPDFForm,
+  // checkIsPDFForm,
   getPrimaryLinkIfNotExistCreate,
 } from "@docspace/shared/api/files";
 import isEqual from "lodash/isEqual";
@@ -112,6 +113,8 @@ class InfoPanelStore {
   publicRoomStore = null;
 
   infoPanelMembers = null;
+
+  templateAvailableToEveryone = false;
 
   infoPanelRoom = null;
 
@@ -379,8 +382,6 @@ class InfoPanelStore {
 
     const newInfoPanelSelection = await getRoomInfo(currentFolderRoomId);
 
-    console.log("newInfoPanelSelection", newInfoPanelSelection);
-
     const roomIndex = this.selectedFolderStore.navigationPath.findIndex(
       (f) => f.id === currentFolderRoomId,
     );
@@ -527,6 +528,10 @@ class InfoPanelStore {
 
   setInfoPanelMembers = (infoPanelMembers) => {
     this.infoPanelMembers = infoPanelMembers;
+  };
+
+  setTemplateAvailableToEveryone = (isAvailable) => {
+    this.templateAvailableToEveryone = isAvailable;
   };
 
   setInfoPanelSelection = (infoPanelSelection) => {
@@ -685,6 +690,7 @@ class InfoPanelStore {
     if (this.membersIsLoading) return;
     const roomId = this.infoPanelSelection.id;
     const roomType = this.infoPanelSelection.roomType;
+    const isTemplate = this.infoPanelSelection.isTemplate;
 
     const isPublicRoomType =
       roomType === RoomsType.PublicRoom ||
@@ -699,7 +705,8 @@ class InfoPanelStore {
       isPublicRoomType &&
       clearFilter &&
       this.withPublicRoomBlock &&
-      !withoutTitlesAndLinks
+      !withoutTitlesAndLinks &&
+      !isTemplate
     ) {
       requests.push(
         api.rooms
@@ -775,6 +782,13 @@ class InfoPanelStore {
     }
 
     this.setIsMembersPanelUpdating(true);
+
+    if (this.infoPanelSelection.isTemplate) {
+      const templateAvailable = await getTemplateAvailable(
+        this.infoPanelSelection.id,
+      );
+      this.setTemplateAvailableToEveryone(templateAvailable);
+    }
 
     const fetchedMembers = await this.fetchMembers(t, true, !!this.searchValue);
     this.setInfoPanelMembers(fetchedMembers);
@@ -938,34 +952,24 @@ class InfoPanelStore {
   getPrimaryFileLink = async (fileId) => {
     const file = this.filesStore.files.find((item) => item.id === fileId);
 
-    if (file && !file.shared && file.fileType === FileType.PDF) {
-      try {
-        this.filesStore.addActiveItems([file.id], null);
-        const result = await checkIsPDFForm(fileId);
-
-        if (result) {
-          const event = new CustomEvent(Events.Share_PDF_Form, {
-            detail: { file },
-          });
-
-          window.dispatchEvent(event);
-          return;
-        }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        this.filesStore.removeActiveItem(file);
-      }
-    }
-
     /**
      *  @type {import("@docspace/shared/components/share/Share.types").DefaultCreatePropsType | null}
      */
-    const value = JSON.parse(
-      localStorage.getItem(
-        getCreateShareLinkKey(this.userStore.user?.id ?? "", file?.fileType),
-      ) ?? "null",
-    );
+    const value = { ...DEFAULT_CREATE_LINK_SETTINGS };
+
+    if (value && file.isForm) {
+      value.access = ShareAccessRights.Editing;
+    }
+
+    if (
+      value &&
+      !file.isForm &&
+      file.fileType === FileType.PDF &&
+      (value.access === ShareAccessRights.Editing ||
+        value.access === ShareAccessRights.FormFilling)
+    ) {
+      value.access = ShareAccessRights.ReadOnly;
+    }
 
     const { getFileInfo } = this.filesStore;
 

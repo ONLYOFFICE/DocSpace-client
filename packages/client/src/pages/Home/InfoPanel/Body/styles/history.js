@@ -76,11 +76,12 @@ const StyledHistoryBlock = styled.div.attrs(injectDefaultTheme)`
       flex-direction: row;
       align-items: center;
       gap: 4px;
-      word-break: break-all;
+
       .name {
         font-weight: 600;
         font-size: 14px;
       }
+
       .date {
         white-space: nowrap;
         display: inline-block;
@@ -202,7 +203,6 @@ const StyledHistoryBlockTagList = styled.div`
   margin-top: 8px;
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
 `;
 
 const StyledHistoryBlockFilesList = styled.div.attrs(injectDefaultTheme)`
@@ -283,6 +283,13 @@ const StyledHistoryBlockFile = styled.div.attrs(injectDefaultTheme)`
       .exst {
         ${strikethroughStyles}
       }
+    }
+  }
+
+  .old-item-title {
+    .name,
+    .exst {
+      ${strikethroughStyles}
     }
   }
 

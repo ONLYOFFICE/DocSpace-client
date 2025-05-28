@@ -1,0 +1,15 @@
+{
+  "DescriptionUploading": "Crie formulários PDF no {{productName}}, por exemplo na sua {{sectionName}}, e envie os prontos para a sala. Utilize a biblioteca de modelos integrada e escolha entre diversos modelos PDF prontos.",
+  "HeaderComplete": "Análise cómoda das respostas recolhidas",
+  "HeaderSharing": "Partilha rápida",
+  "HeaderStarting": "Início do processo de preenchimento do formulário",
+  "HeaderSubmitting": "Submeter as respostas",
+  "HeaderUploading": "Fácil upload de formulários",
+  "TitleComplete": "Verifique os formulários preenchidos e analise os dados recolhidos automaticamente numa folha de cálculo. Tudo - dentro de uma sala.",
+  "TitleSharing": "Convide outros membros {{productName}} para a sala para preencherem os formulários PDF carregados. Copie um link de acesso público para partilhar a sala com utilizadores externos.",
+  "TitleStarting": "Quando um formulário é aberto para preenchimento, é criada automaticamente uma cópia individual para cada respondente e é guardada na pasta Em curso. Significa que o formulário foi iniciado mas ainda não foi concluído.",
+  "TitleSubmitting": "Depois de clicar no botão Concluir & Enviar na cópia do formulário aberto, este é movido para a pasta Concluir.",
+  "WelcomeDescription": "Aqui, pode organizar o preenchimento simples de formulários PDF, recolher e analisar facilmente as respostas. Está pronto para começar?",
+  "WelcomeFillingForm": "Bem-vindo à Sala de Preenchimento de Formulários!",
+  "WelcomeStartTutorial": "Faça uma breve visita guiada"
+}

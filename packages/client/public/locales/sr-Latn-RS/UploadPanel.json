@@ -1,8 +1,6 @@
 {
-  "CancelUpload": "Otpremanje je prekinuto. Neke datoteke nisu otpremljene.",
-  "EnterPassword": "Unesi lozinku",
   "HideInput": "Sakrij",
   "Ready": "Gotovo",
-  "UploadAndConvert": "Otpremi i konvertuj datoteke",
-  "Uploads": "Otpremanja"
+  "UploadingAndConversion": "Otpremanje i konverzija",
+  "UploadingError": "Greška prilikom otpremanja"
 }

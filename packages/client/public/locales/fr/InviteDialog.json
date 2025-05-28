@@ -5,14 +5,12 @@
   "InvitationLanguage": "Langue de l'invitation",
   "InviteMembersManuallyDescription": "Invitez personnellement les nouveaux membres à {{productName}} par e-mail",
   "InviteMembersSearchPlaceholder": "Inviter les membres par e-mail",
-  "InviteToRoomManuallyInfo": "Ajoutez des contacts de {{productName}} existants. Ou invitez personnellement de nouveaux utilisateurs par e-mail. Les nouveaux utilisateurs seront ajoutés à votre liste d'invités.",
   "InviteToRoomSearchPlaceholder": "Rechercher et inviter par nom ou par e-mail",
   "InviteViaLink": "Inviter via le lien",
   "InviteViaLinkDescriptionAccounts": "Créez un lien universel pour l’auto-autorisation dans {{productName}}",
-  "InviteViaLinkDescriptionRoom": "Créer un lien universel pour l’auto-autorisation dans la salle",
   "LinkCopySuccess": "Le lien a été copié",
-  "ResetChange": "Réinitialiser le changement",
   "SendInvitation": "Envoyer une invitation",
   "UserMaxAvailableRoleWarning": "Les invités et les utilisateurs ne peuvent pas être désignés comme gestionnaires de salle. Seuls les administrateurs de salle et de {{productName}} peuvent jouer le rôle spécifié.",
-  "UsersAlreadyAdded": "Certains utilisateurs ont déjà été ajoutés"
+  "UsersAlreadyAdded": "Certains utilisateurs ont déjà été ajoutés",
+  "UsersCannotBeAdded": "Les contacts désactivés ne peuvent pas être ajoutés à une salle."
 }

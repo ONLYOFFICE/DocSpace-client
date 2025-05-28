@@ -36,10 +36,17 @@ const version = pkg.version;
 const nextConfig = {
   basePath: "/doceditor",
   output: "standalone",
-  experimental: {
-    instrumentationHook: true,
-    serverComponentsExternalPackages: ["pino", "pino-pretty"],
+  typescript: {
+    ignoreBuildErrors: process.env.TS_ERRORS_IGNORE === "true",
   },
+  serverExternalPackages: [
+    "nconf",
+    "date-and-time",
+    "winston",
+    "winston-cloudwatch",
+    "winston-daily-rotate-file",
+    "@aws-sdk/client-cloudwatch-logs",
+  ],
   compiler: {
     styledComponents: true,
   },
@@ -56,6 +63,7 @@ const nextConfig = {
       fullUrl: true,
     },
   },
+  devIndicators: false,
 };
 
 const getBuildDate = () => {
@@ -86,6 +94,7 @@ module.exports = {
               },
             },
             extractComments: false,
+            parallel: false,
           }),
         ],
       };

@@ -46,6 +46,13 @@ export enum FeedAction {
   Invite = "invite",
   CHANGE_COLOR = "changeColor",
   CHANGE_COVER = "changeCover",
+  DeleteVersion = "deleteVersion",
+  FormStartedToFill = "formStartedToFill",
+  FormPartiallyFilled = "formPartiallyFilled",
+  FormCompletelyFilled = "formCompletelyFilled",
+  FormStopped = "formStopped",
+  CustomFilterDisabled = "customFilterDisabled",
+  CustomFilterEnabled = "customFilterEnabled",
 }
 
 enum FeedTarget {
@@ -142,6 +149,47 @@ export const feedInfo = [
     key: "FileUnlocked",
     targetType: `${FeedTarget.File}`,
     actionType: `${FeedAction.Unlocked}`,
+  },
+  {
+    key: "FileVersionRemoved",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.DeleteVersion}`,
+  },
+  {
+    key: "FormStartedToFill",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.FormStartedToFill}`,
+  },
+  {
+    key: "FormPartiallyFilled",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.FormPartiallyFilled}`,
+  },
+  {
+    key: "FormCompletelyFilled",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.FormCompletelyFilled}`,
+  },
+  {
+    key: "FormStopped",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.FormStopped}`,
+  },
+
+  // MessageAction.FormStartedToFill,
+  //         MessageAction.FormPartiallyFilled,
+  //         MessageAction.FormCompletelyFilled,
+  //         MessageAction.FormStopped
+
+  {
+    key: "FileCustomFilterDisabled",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.CustomFilterDisabled}`,
+  },
+  {
+    key: "FileCustomFilterEnabled",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.CustomFilterEnabled}`,
   },
   // FOLDER
   {
@@ -252,7 +300,7 @@ export const feedInfo = [
     actionType: `${FeedAction.Unarchived}`,
   },
   {
-    key: "RoomIndexExportSaved",
+    key: "RoomIndexExportLocation",
     targetType: `${FeedTarget.Room}`,
     actionType: `${FeedAction.Export}`,
   },

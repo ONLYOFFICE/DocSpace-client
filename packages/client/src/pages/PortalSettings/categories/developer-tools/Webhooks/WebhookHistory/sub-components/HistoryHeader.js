@@ -27,7 +27,7 @@
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
@@ -192,8 +192,13 @@ const HistoryHeader = (props) => {
     setRetryPendingTrue,
   } = props;
   const navigate = useNavigate();
+  const location = useLocation();
+
   const onBack = () => {
-    navigate("/portal-settings/developer-tools/webhooks");
+    const path = location.pathname.includes("/portal-settings")
+      ? "/portal-settings"
+      : "";
+    navigate(`${path}/developer-tools/webhooks`);
   };
   const { t } = useTranslation(["Webhooks", "Common", "InfoPanel"]);
   const { id } = useParams();

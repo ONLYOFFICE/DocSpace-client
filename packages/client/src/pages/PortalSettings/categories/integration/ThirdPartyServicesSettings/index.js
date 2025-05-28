@@ -35,7 +35,6 @@ import styled from "styled-components";
 
 import { showLoader, hideLoader } from "@docspace/shared/utils/common";
 
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { Badge } from "@docspace/shared/components/badge";
@@ -50,12 +49,17 @@ import ConsumerModalDialog from "./sub-components/consumerModalDialog";
 
 import ThirdPartyLoader from "./sub-components/thirdPartyLoader";
 
-const RootContainer = styled(Box)`
+const RootContainer = styled.div`
+  box-sizing: border-box;
   max-width: 700px;
   width: 100%;
 
   .third-party-link {
     font-weight: 600;
+  }
+
+  .third-party-box {
+    margin: 8px 0 20px 0;
   }
 
   .third-party-description {
@@ -74,6 +78,7 @@ const RootContainer = styled(Box)`
   }
 
   .consumer-item-wrapper {
+    box-sizing: border-box;
     border: ${(props) =>
       props.theme.client.settings.integration.separatorBorder};
 
@@ -198,20 +203,22 @@ class ThirdPartyServices extends React.Component {
       <>
         <RootContainer className="RootContainer">
           <Text className="third-party-description">
-            {t("ThirdPartyTitleDescription")}
+            {t("AuthorizationKeysInfo")}
           </Text>
-          <Box marginProp="8px 0 20px 0">
-            <Link
-              className="third-party-link"
-              color={currentColorScheme.main?.accent}
-              isHovered
-              target="_blank"
-              href={integrationSettingsUrl}
-            >
-              {t("Common:LearnMore")}
-            </Link>
-          </Box>
-          <Box className="consumer-item-wrapper request-block">
+          <div className="third-party-box">
+            {integrationSettingsUrl ? (
+              <Link
+                className="third-party-link"
+                color={currentColorScheme.main?.accent}
+                isHovered
+                target="_blank"
+                href={integrationSettingsUrl}
+              >
+                {t("Common:LearnMore")}
+              </Link>
+            ) : null}
+          </div>
+          <div className="consumer-item-wrapper request-block">
             <img
               className="integration-image"
               src={imgSrc}
@@ -231,13 +238,13 @@ class ThirdPartyServices extends React.Component {
               onClick={submitRequest}
               scale={isMobile()}
             />
-          </Box>
+          </div>
           {!consumers.length ? (
             <ThirdPartyLoader />
           ) : (
             <div className="consumers-list-container">
               {freeConsumers.map((consumer) => (
-                <Box className="consumer-item-wrapper" key={consumer.name}>
+                <div className="consumer-item-wrapper" key={consumer.name}>
                   <ConsumerItem
                     consumer={consumer}
                     dialogVisible={dialogVisible}
@@ -250,7 +257,7 @@ class ThirdPartyServices extends React.Component {
                     t={t}
                     isThirdPartyAvailable={isThirdPartyAvailable}
                   />
-                </Box>
+                </div>
               ))}
               {!isThirdPartyAvailable ? (
                 <div className="business-plan">
@@ -271,7 +278,7 @@ class ThirdPartyServices extends React.Component {
                 </div>
               ) : null}
               {paidConsumers.map((consumer) => (
-                <Box className="consumer-item-wrapper" key={consumer.name}>
+                <div className="consumer-item-wrapper" key={consumer.name}>
                   <ConsumerItem
                     consumer={consumer}
                     dialogVisible={dialogVisible}
@@ -284,7 +291,7 @@ class ThirdPartyServices extends React.Component {
                     t={t}
                     isThirdPartyAvailable={isThirdPartyAvailable}
                   />
-                </Box>
+                </div>
               ))}
             </div>
           )}

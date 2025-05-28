@@ -29,8 +29,6 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 
 import GoogleWorkspaceSvgUrl from "PUBLIC_DIR/images/workspace.google.react.svg?url";
@@ -41,6 +39,7 @@ import NextcloudWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.nextc
 import WorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.onlyoffice.react.svg?url";
 
 import { LinkType } from "@docspace/shared/components/link/Link.enums";
+import { Link } from "@docspace/shared/components/link";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import DataImportLoader from "../sub-components/DataImportLoader";
 import { WorkspacesContainer } from "../StyledDataImport";
@@ -102,28 +101,28 @@ const Providers = (props: ProvidersProps) => {
       </Text>
       <Text className="data-import-subtitle">{t("UploadBackupData")}</Text>
 
-      <Box className="workspace-list">
+      <div className="workspace-list">
         {workspaces.map((workspace) => (
-          <Box
+          <div
             key={workspace.title}
             className="workspace-item"
             onClick={() => setWorkspace(workspace.title)}
           >
             <ReactSVG src={workspace.logo} className="workspace-logo" />
 
-            <ColorTheme
+            <Link
               tag="a"
-              themeId={ThemeId.Link}
               type={LinkType.page}
               fontWeight="600"
               isHovered
               isTextOverflow
+              color="accent"
             >
               {t("Import")}
-            </ColorTheme>
-          </Box>
+            </Link>
+          </div>
         ))}
-      </Box>
+      </div>
     </WorkspacesContainer>
   );
 };

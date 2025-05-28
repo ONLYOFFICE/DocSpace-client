@@ -36,6 +36,8 @@ import {
   TSelectorWithAside,
 } from "../../components/selector/Selector.types";
 
+import type Filter from "../../api/people/filter";
+
 export interface UserTooltipProps {
   avatarUrl: string;
   label: string;
@@ -62,7 +64,7 @@ export type PeopleSelectorProps = TSelectorHeader &
     className?: string;
     style?: React.CSSProperties;
 
-    filter?: PeopleFilter | Function;
+    filter?: PeopleFilter | (() => Filter);
 
     isMultiSelect?: boolean;
 
@@ -78,7 +80,11 @@ export type PeopleSelectorProps = TSelectorHeader &
     emptyScreenDescription?: string;
 
     roomId?: string | number;
+    setActiveTab?: (id: string) => void;
 
     checkIfUserInvited?: (user: TUser) => boolean;
+    injectedElement?: React.ReactElement;
+    alwaysShowFooter?: boolean;
+    onlyRoomMembers?: boolean;
   } & ContactsSelectorGroups &
   ContactsSelectorGuests;

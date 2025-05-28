@@ -69,11 +69,15 @@ const MembersParam = ({
 
   return (
     <div>
-      <Styled.Header>{t("Common:Members")}</Styled.Header>
+      <Styled.Header className="membersHeader">
+        {t("Common:Members")}
+      </Styled.Header>
 
       <Styled.AddMembersButton onClick={onShowSelectMembersPanel}>
-        <SelectorAddButton iconName={PlusSvgUrl} />
-        <div className="label">{t("PeopleTranslations:AddMembers")}</div>
+        <SelectorAddButton
+          iconName={PlusSvgUrl}
+          label={t("PeopleTranslations:AddMembers")}
+        />
       </Styled.AddMembersButton>
 
       {groupMembers ? (

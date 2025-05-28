@@ -28,6 +28,8 @@ import { LoaderTypes } from "./Loader.enums";
 import { TColorScheme } from "../../themes";
 
 export type LoaderProps = {
+  /** Ref to access the DOM element or React component instance */
+  ref?: React.RefObject<SVGSVGElement>;
   /** Custom color for the loader. Can be any valid CSS color value */
   color?: string;
   /**

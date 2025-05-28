@@ -45,6 +45,7 @@ import { DropDown } from "@docspace/shared/components/drop-down";
 import { Text } from "@docspace/shared/components/text";
 
 import { injectDefaultTheme } from "@docspace/shared/utils";
+import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 
 const UserInputContainer = styled.div`
   position: relative;
@@ -134,7 +135,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
   const filterOptions = [
     {
       key: "filter-type-all",
-      label: t("Translations:Files"),
+      label: t("Common:Files"),
       typeKey: FilterType.FilesOnly,
     },
     {
@@ -144,37 +145,42 @@ export const FilterBlock = ({ t, config, setConfig }) => {
     },
     {
       key: "filter-type-folders",
-      label: t("Translations:Folders"),
+      label: t("Common:Folders"),
       typeKey: FilterType.FoldersOnly,
     },
     {
       key: "filter-type-spreadsheets",
-      label: t("Translations:Spreadsheets"),
+      label: t("Common:Spreadsheets"),
       typeKey: FilterType.SpreadsheetsOnly,
     },
     {
       key: "filter-type-archives",
-      label: t("Files:Archives"),
+      label: t("Common:Archives"),
       typeKey: FilterType.ArchiveOnly,
     },
     {
       key: "filter-type-presentations",
-      label: t("Translations:Presentations"),
+      label: t("Common:Presentations"),
       typeKey: FilterType.PresentationsOnly,
     },
     {
       key: "filter-type-images",
-      label: t("Filse:Images"),
+      label: t("Common:Images"),
       typeKey: FilterType.ImagesOnly,
     },
     {
       key: "filter-type-media",
-      label: t("Files:Media"),
+      label: t("Common:Media"),
       typeKey: FilterType.MediaOnly,
     },
     {
       key: "filter-type-forms",
-      label: t("Files:Forms"),
+      label: getManyPDFTitle(t, true),
+      typeKey: FilterType.PDFForm,
+    },
+    {
+      key: "filter-type-pdf",
+      label: getManyPDFTitle(t, false),
       typeKey: FilterType.Pdf,
     },
   ];

@@ -806,18 +806,6 @@ const Dark: TTheme = {
     hoverIconColor: grayDark,
   },
 
-  inputPhone: {
-    activeBorderColor: lightSecondMain,
-    inactiveBorderColor: grayDarkStrong,
-    errorBorderColor: darkErrorStatus,
-    backgroundColor: black,
-    color: white,
-    scrollBackground: grayDark,
-    placeholderColor: grayDark,
-    dialCodeColor: grayDark,
-    width: "320px",
-    height: "44px",
-  },
   textInput: {
     fontWeight: "normal",
     placeholderColor: grayDark,
@@ -1444,25 +1432,7 @@ const Dark: TTheme = {
     marginRight: "2px",
     borderRadius: "50%",
   },
-  rombsLoader: {
-    blue: {
-      colorStep_1: black,
-      colorStep_2: black,
-      colorStep_3: "#323032",
-      colorStep_4: "#323032",
-    },
-    red: {
-      colorStep_1: black,
-      colorStep_2: black,
-      colorStep_3: "#323032",
-    },
-    green: {
-      colorStep_1: black,
-      colorStep_2: black,
-      colorStep_3: "#323032",
-      colorStep_4: "#323032",
-    },
-  },
+
   dialogLoader: {
     borderBottom: `1px solid ${black}`,
   },
@@ -1852,6 +1822,7 @@ const Dark: TTheme = {
       iconColor: grayDark,
       iconErrorColor: darkErrorStatus,
       primaryColor: darkGrayDark,
+      barIconColor: darkGrayDark,
     },
 
     members: {
@@ -2093,10 +2064,10 @@ const Dark: TTheme = {
         draggingColor: dndDarkColor,
         draggingHoverColor: dndDarkHover,
         checkedColor: lightDarkGrayHover,
-        roomsCheckedColor: black,
+        roomsCheckedColor: lightDarkGrayHover,
         border: `1px solid ${grayDarkStrong}`,
         backgroundBadgeColor: black,
-        backgroundColor: darkGrayLight,
+        backgroundColor: black,
         borderRadius: "6px",
         roomsBorderRadius: "12px",
         bottomBorderRadius: "0 0 6px 6px",
@@ -2106,9 +2077,16 @@ const Dark: TTheme = {
         backgroundColorTop: black,
       },
 
+      tag: {
+        backgroundColor: black,
+        hoverBackgroundColor: grayStrong,
+        activeBackgroundColor: grayLight,
+      },
+
       sideColor: white,
       color: white,
       textColor: grayDark,
+      subTextColor: "#858585",
     },
 
     animationColor: lightSecondMain,
@@ -2451,7 +2429,8 @@ const Dark: TTheme = {
       color: white,
       tooltipColor: darkToastInfo,
       iconColor: darkErrorStatus,
-
+      positiveStatusColor: darkStatusPositive,
+      progressColor: grayDark,
       shareButton: {
         color: gray,
         sharedColor: lightGrayDark,
@@ -2460,6 +2439,8 @@ const Dark: TTheme = {
       loadingButton: {
         color: white,
         background: black,
+        defaultBackground: grayDark,
+        hoverColor: white,
       },
     },
     invite: {
@@ -2615,6 +2596,15 @@ const Dark: TTheme = {
       stroke: white,
       color: white,
     },
+
+    versionDisabled: {
+      fillDisabled: grayDarkStrong,
+    },
+
+    versionLink: {
+      color: grayDark,
+    },
+
     commentColor: grayDark,
   },
 
@@ -2914,7 +2904,7 @@ const Dark: TTheme = {
         background: darkGrayLight,
       },
       storageManagement: {
-        grayBackgroundText: grayDark,
+        grayBackgroundText: white,
         descriptionColor: darkGrayDark,
         dividerColor: grayDarkMid,
       },
@@ -2929,7 +2919,7 @@ const Dark: TTheme = {
         color: grayDark,
         linkColor: lightBlueMain,
         spanBackground: lightBlueMain,
-        filterBorder: `1px solid ${black}`,
+        filterBorder: `1px solid ${grayDarkStrong}`,
         background: darkGrayLight,
       },
     },
@@ -3044,17 +3034,6 @@ const Dark: TTheme = {
     colorPercentBig: black,
     errorTextColor: darkErrorStatus,
     descriptionTextColor: grayDark,
-  },
-
-  codeInput: {
-    background: darkGrayLight,
-    border: `1px solid ${grayDarkStrong}`,
-    color: white,
-    lineColor: grayDark,
-    disabledBackground: grayDarkStrong,
-    disabledBorder: `1px solid ${grayDarkStrong}`,
-    disabledColor: grayDark,
-    focusBorder: `1px solid ${lightSecondMain}`,
   },
 
   accessRightSelect: {
@@ -3227,6 +3206,16 @@ const Dark: TTheme = {
     selectedBorderColor: grayDarkMid,
     backgroundColor: black,
     borderColor: grayDarkStrong,
+  },
+
+  formFillingTips: {
+    circleColor: grayDarkMid,
+    selectedColor: black,
+    circleBorder: `3px solid ${lightSecondMain}`,
+  },
+
+  socialAuthDialog: {
+    accountDetailsBackground: lightDarkGrayHover,
   },
 };
 

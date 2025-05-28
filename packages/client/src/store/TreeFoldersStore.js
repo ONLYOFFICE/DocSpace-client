@@ -119,8 +119,7 @@ class TreeFoldersStore {
   setRootFoldersTitles = (treeFolders) => {
     treeFolders.forEach((elem) => {
       this.rootFoldersTitles[elem.rootFolderType] = {
-        id: elem.id,
-        title: elem.title,
+        ...elem,
       };
     });
   };
@@ -182,6 +181,34 @@ class TreeFoldersStore {
     return this.rootFoldersTitles[FolderType.Archive]?.id;
   }
 
+  get trashFolderInfo() {
+    return this.rootFoldersTitles[FolderType.TRASH];
+  }
+
+  get personalFolderId() {
+    return this.rootFoldersTitles[FolderType.USER]?.id;
+  }
+
+  get personalUserFolderTitle() {
+    return this.rootFoldersTitles[FolderType.USER]?.title;
+  }
+
+  get trashFolderTitle() {
+    return this.rootFoldersTitles[FolderType.TRASH]?.title;
+  }
+
+  get archiveFolderTitle() {
+    return this.rootFoldersTitles[FolderType.Archive]?.title;
+  }
+
+  get isPersonalReadOnly() {
+    return (
+      this.isPersonalRoom &&
+      this.rootFoldersTitles[FolderType.USER]?.security?.Read &&
+      !this.rootFoldersTitles[FolderType.USER]?.security?.Create
+    );
+  }
+
   /**
    * @type {import("@docspace/shared/api/files/types").TFolder=}
    */
@@ -213,6 +240,12 @@ class TreeFoldersStore {
   get archiveFolder() {
     return this.treeFolders.find(
       (x) => x.rootFolderType === FolderType.Archive,
+    );
+  }
+
+  get templatesFolder() {
+    return this.treeFolders.find(
+      (x) => x.rootFolderType === FolderType.Templates,
     );
   }
 
@@ -323,6 +356,21 @@ class TreeFoldersStore {
       this.archiveFolder &&
       this.selectedFolderStore.id === this.archiveFolder.id
     );
+  }
+
+  get isTemplatesFolderRoot() {
+    return FolderType.RoomTemplates === this.selectedFolderStore.rootFolderType;
+  }
+
+  get isTemplatesFolder() {
+    return (
+      FolderType.RoomTemplates === this.selectedFolderStore.rootFolderType &&
+      this.selectedFolderStore.isRootFolder
+    );
+  }
+
+  get isRoomsFolderRoot() {
+    return FolderType.Rooms === this.selectedFolderStore.rootFolderType;
   }
 
   get isArchiveFolderRoot() {

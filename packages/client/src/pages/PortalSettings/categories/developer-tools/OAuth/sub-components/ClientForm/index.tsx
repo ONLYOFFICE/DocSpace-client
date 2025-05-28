@@ -26,7 +26,7 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -69,7 +69,8 @@ const ClientForm = ({
   setClientSecretProps,
 
   currentDeviceType,
-  maxImageUploadSize,
+
+  setJwtToken,
 }: ClientFormProps) => {
   const navigate = useNavigate();
 
@@ -119,7 +120,7 @@ const ClientForm = ({
   }, [clientSecretProps, setClientSecretProps]);
 
   const onCancelClick = () => {
-    navigate("/portal-settings/developer-tools/oauth");
+    navigate("/developer-tools/oauth");
   };
 
   const onSaveClick = async () => {
@@ -151,8 +152,12 @@ const ClientForm = ({
 
         setIsRequestRunning(true);
 
+        await setJwtToken!();
+
         await addClient?.(form);
       } else {
+        await setJwtToken!();
+
         await updateClient?.(clientId, form);
       }
 
@@ -202,19 +207,17 @@ const ClientForm = ({
   };
 
   const getClientData = React.useCallback(async () => {
-    if (clientId) return;
-
     const actions = [];
 
-    if (id && !client) {
-      actions.push(getClient(id));
-    }
+    setIsLoading(true);
+
+    await setJwtToken!();
+
+    if (id || clientId) actions.push(getClient(id ?? clientId));
 
     if (scopeList?.length === 0) actions.push(fetchScopes?.());
 
     try {
-      if (actions.length > 0) setIsLoading(true);
-
       const [fetchedClient] = await Promise.all(actions);
 
       const item = fetchedClient ?? client;
@@ -410,7 +413,6 @@ const ClientForm = ({
               errorFields={errorFields}
               requiredErrorFields={requiredErrorFields}
               onBlur={onBlur}
-              maxImageSize={maxImageUploadSize}
             />
             {isEdit ? (
               <ClientBlock
@@ -477,6 +479,8 @@ export default inject(
 
       setClientSecret,
       clientSecret,
+
+      setJwtToken,
     } = oauthStore;
 
     const { currentDeviceType, maxImageUploadSize } = settingsStore;
@@ -492,6 +496,8 @@ export default inject(
       setClientSecretProps: setClientSecret,
       clientSecretProps: clientSecret,
       maxImageUploadSize: maxImageUploadSize ?? undefined,
+
+      setJwtToken,
     };
 
     if (id) {

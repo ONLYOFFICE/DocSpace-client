@@ -27,7 +27,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import { Link } from "@docspace/shared/components/link";
@@ -224,7 +224,7 @@ const Users = ({
       </div>
       <div className="data__body">
         <Text className="info_field first-row" noSelect title={t("Data")}>
-          {t("ConnectDialog:Account")}
+          {t("Common:Account")}
         </Text>
         <Text
           className="info_data first-row"
@@ -258,7 +258,7 @@ const Users = ({
           </>
         ) : null}
 
-        {isGuests && infoPanelSelection.status === EmployeeStatus.Active ? (
+        {infoPanelSelection.status === EmployeeStatus.Active ? (
           <>
             <Text
               className="info_field"

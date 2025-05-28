@@ -1,11 +1,17 @@
 {
+  "ChangeContactType": "Change contact type",
   "ChangeGuestsTypeMessage": "Guest <strong>{{userName}}</strong> will be moved to the {{membersSection}} section and assigned the User type. Users have their own {{documentsSection}} section, are able to create and edit files, but aren't able to create rooms.",
   "ChangeGuestsTypeMessageMulti": "The selected guests will be moved to the {{membersSection}} section and assigned the User type. Users have their own {{documentsSection}} section, are able to create and edit files, but aren't able to create rooms.",
+  "ChangeGuestsTypeToAdmin": "Guest <strong>{{userName}}</strong> will be moved to the {{membersSection}} section and assigned the <strong>'{{ secondType }}'</strong> type. {{productName}} admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. {{productName}} admins have access to the {{documentsSection}} section.",
+  "ChangeGuestsTypeToAdminMulti": "The selected guests will be moved to the {{membersSection}} section and assigned the <strong>'{{ secondType }}'</strong> type. {{productName}} admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. {{productName}} admins have access to the {{documentsSection}} section.",
+  "ChangeGuestsTypeToManager": "Guest <strong>{{userName}}</strong> will be moved to the {{membersSection}} section and assigned the <strong>'{{ secondType }}'</strong> type. Room admins can create and manage the assigned rooms, invite new users, and assign roles of Room admin and lower. Room admins have access to the {{documentsSection}} section.",
+  "ChangeGuestsTypeToManagerMulti": "The selected guests will be moved to the {{membersSection}} section and assigned the <strong>'{{ secondType }}'</strong> type. Room admins can create and manage the assigned rooms, invite new users, and assign roles of Room admin and lower. Room admins have access to the {{documentsSection}} section.",
   "ChangeUserTypeButton": "Change type",
-  "ChangeUserTypeHeader": "Change user type",
   "ChangeUserTypeMessage": "Users with the <strong>'{{ firstType }}'</strong> type will be moved to <strong>'{{ secondType }}'</strong> type.",
-  "ChangeUserTypeMessageMulti": "The selected users will be moved to <strong>'{{ secondType }}'</strong> type.",
-  "ChangeUserTypeMessageWarning": "You can't change the type for the {{productName}} administrators and for yourself.",
+  "ChangeUserTypeNote": "<1>Note:</1> you cannot change the type for the {{productName}} admin and for yourself.",
+  "DataReassignmentInfo": "Rooms created by this user will be automatically assigned to you. To reassign the rooms to another person, click the corresponding link below.",
+  "DataReassignmentWithFilesDeletion": "All shared files created by this contact will be <1>automatically assigned to you in 30 days</1>. To reassign the rooms/shared files to another person, click the corresponding link below.",
+  "PersonalDataDeletion": "All files and folders in the {{sectionName}} section of this contact will be <1>permanently deleted in 30 days</1>.",
   "SuccessChangeGuestType": "The guest type was successfully changed",
   "SuccessChangeUserType": "The user type was successfully changed"
 }

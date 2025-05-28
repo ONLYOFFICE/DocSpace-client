@@ -62,6 +62,7 @@ const RoomsItemHeader = ({
   displayFileExtension,
   getLogoCoverModel,
   onChangeFile,
+  setTemplateAccessSettingsVisible,
 }) => {
   const itemTitleRef = useRef();
 
@@ -72,7 +73,10 @@ const RoomsItemHeader = ({
   const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
   const security = infoPanelSelection ? infoPanelSelection.security : {};
   const canInviteUserInRoomAbility = security?.EditAccess;
-
+  const isTemplate =
+    (selection.isTemplate ||
+      selection?.rootFolderType === FolderType.RoomTemplates) &&
+    selection?.isRoom;
   const isRoomMembersPanel = selection?.isRoom && roomsView === "info_members";
 
   const badgeUrl = getRoomBadgeUrl(selection);
@@ -114,6 +118,10 @@ const RoomsItemHeader = ({
     });
   };
 
+  const onOpenTemplateAccessOptions = () => {
+    setTemplateAccessSettingsVisible(true);
+  };
+
   const onSearchClick = () => setShowSearchBlock(true);
   const hasImage = selection?.logo?.original;
   const model = getLogoCoverModel(t, hasImage);
@@ -124,6 +132,7 @@ const RoomsItemHeader = ({
 
       <div className="item-icon">
         <RoomIcon
+          isTemplate={isTemplate}
           color={selection.logo?.color}
           title={title}
           isArchive={isArchive}
@@ -173,10 +182,16 @@ const RoomsItemHeader = ({
           <IconButton
             id="info_add-user"
             className="icon"
-            title={t("Common:InviteContacts")}
+            title={
+              isTemplate
+                ? t("Files:AccessSettings")
+                : t("Common:InviteContacts")
+            }
             iconName={PersonPlusReactSvgUrl}
             isFill
-            onClick={onClickInviteUsers}
+            onClick={
+              isTemplate ? onOpenTemplateAccessOptions : onClickInviteUsers
+            }
             size={16}
           />
         ) : null}
@@ -224,7 +239,8 @@ export default inject(
 
     const { displayFileExtension } = filesSettingsStore;
     const { externalLinks } = publicRoomStore;
-    const { setCoverSelection } = dialogsStore;
+    const { setCoverSelection, setTemplateAccessSettingsVisible } =
+      dialogsStore;
 
     const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
     const isArchive = selection?.rootFolderType === FolderType.Archive;
@@ -263,6 +279,7 @@ export default inject(
       maxImageUploadSize: settingsStore.maxImageUploadSize,
       updateInfoPanelSelection,
       onChangeFile,
+      setTemplateAccessSettingsVisible,
     };
   },
 )(

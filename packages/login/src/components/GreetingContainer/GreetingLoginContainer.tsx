@@ -52,12 +52,12 @@ export const GreetingLoginContainer = ({
 
   const logoUrl = getLogoUrl(
     WhiteLabelLogoType.LoginPage,
-    !theme.isBase,
+    !theme?.isBase,
     false,
     culture,
   );
   const searchParams = useSearchParams();
-  const loginData = searchParams?.get("loginData");
+  const loginData = searchParams?.get("loginData") || null;
 
   const pathname = usePathname();
 
@@ -65,8 +65,7 @@ export const GreetingLoginContainer = ({
     getInvitationLinkData(loginData) || {
       email: "",
       roomName: "",
-      firstName: "",
-      lastName: "",
+      displayName: "",
       type: "",
       spaceAddress: "",
     },
@@ -82,8 +81,7 @@ export const GreetingLoginContainer = ({
     setInvitationLinkData(queryParams);
   }, [loginData]);
 
-  const { type, roomName, firstName, lastName, spaceAddress } =
-    invitationLinkData;
+  const { type, roomName, displayName, spaceAddress } = invitationLinkData;
 
   return (
     <>
@@ -110,13 +108,19 @@ export const GreetingLoginContainer = ({
               ns="Common"
               defaults={roomName ? DEFAULT_ROOM_TEXT : DEFAULT_PORTAL_TEXT}
               values={{
-                firstName,
-                lastName,
+                displayName,
                 productName: t("Common:ProductName"),
                 ...(roomName ? { roomName } : { spaceAddress }),
               }}
               components={{
-                1: <Text fontWeight={600} as="strong" fontSize="16px" />,
+                1: (
+                  <Text
+                    key="component_key"
+                    fontWeight={600}
+                    as="strong"
+                    fontSize="16px"
+                  />
+                ),
               }}
             />
           </Text>

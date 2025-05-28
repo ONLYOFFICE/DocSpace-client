@@ -37,12 +37,13 @@ import {
 import { getPaymentLink } from "@docspace/shared/api/portal";
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
-import { authStore } from "@docspace/shared/store";
+import { authStore, settingsStore } from "@docspace/shared/store";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { PaymentQuotasStore } from "@docspace/shared/store/PaymentQuotasStore";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TTranslation } from "@docspace/shared/types";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 
@@ -53,14 +54,13 @@ class PaymentStore {
 
   currentQuotaStore: CurrentQuotasStore | null = null;
 
+  settingsStore: SettingsStore | null = null;
+
   paymentQuotasStore: PaymentQuotasStore | null = null;
 
   salesEmail = "";
 
-  helpUrl = "https://helpdesk.onlyoffice.com";
-
-  buyUrl =
-    "https://www.onlyoffice.com/enterprise-edition.aspx?type=buyenterprise";
+  buyUrl = "";
 
   standaloneMode = true;
 
@@ -105,6 +105,7 @@ class PaymentStore {
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.currentQuotaStore = currentQuotaStore;
     this.paymentQuotasStore = paymentQuotasStore;
+    this.settingsStore = settingsStore;
 
     makeAutoObservable(this);
   }
@@ -277,13 +278,11 @@ class PaymentStore {
         salesEmail,
         currentLicense,
         standalone: standaloneMode,
-        feedbackAndSupportUrl: helpUrl,
         max,
       } = newSettings;
 
       this.buyUrl = buyUrl;
       this.salesEmail = salesEmail;
-      this.helpUrl = helpUrl;
       this.standaloneMode = standaloneMode;
       this.maxAvailableManagersCount = max;
 
@@ -330,6 +329,7 @@ class PaymentStore {
       localStorage.removeItem("enterpriseAlertClose");
 
       await getPaymentInfo();
+      await this.settingsStore?.getSettings();
     } catch (e) {
       toastr.error(e as TData);
     }

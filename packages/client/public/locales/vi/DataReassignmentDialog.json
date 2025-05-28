@@ -4,7 +4,6 @@
   "DataReassignment": "Chuyển giao lại dữ liệu",
   "DeleteProfileIsFinished": "Xóa hồ sơ khi việc chuyển giao lại hoàn tất",
   "DescriptionDataReassignment": "Chúng tôi sẽ chuyển các phòng do người dùng tạo và tài liệu được lưu trữ trong phòng của người dùng.",
-  "InProgress": "Đang thực hiện",
   "Interrupted": "Bị gián đoạn, một số dữ liệu không được chuyển",
   "MoreAboutDataTransfer": "Tìm hiểu thêm về chuyển dữ liệu",
   "NewDataOwner": "Chủ sở hữu dữ liệu mới",
@@ -14,6 +13,7 @@
   "ReassignData": "Chuyển giao lại dữ liệu",
   "ReassigningDataToAnother": "Quá trình chuyển giao lại dữ liệu từ người dùng <0>{{fromUser}}</0> sang người dùng <1>{{toUser}}</1> đã bắt đầu. Xin lưu ý rằng có thể mất một thời gian đáng kể.",
   "ReassigningDataToItself": "Quá trình chuyển giao lại dữ liệu từ người dùng <0>{{fromUser}}</0> sang người dùng <1>{{toUser}}</1> <2>{{you}}</2> đã bắt đầu. Xin lưu ý rằng có thể mất một thời gian đáng kể.",
+  "RoomsOnlyReassignment": "Chúng tôi sẽ chuyển các phòng được tạo bởi liên hệ.",
   "StartTransferAgain": "Bắt đầu chuyển lại",
   "UserToWhomTheDataWillBeTransferred": "Người dùng mà dữ liệu sẽ được chuyển đến"
 }

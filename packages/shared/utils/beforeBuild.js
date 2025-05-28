@@ -95,7 +95,12 @@ const beforeBuild = async (
       }
     }
 
-    return files;
+    return files.filter(
+      (f) =>
+        !f.path.endsWith(".DS_Store") &&
+        !f.path.includes("locales/.meta") &&
+        !f.path.includes("locales\\.meta"),
+    );
   };
 
   const localesFiles = await getLocalesFiles();
@@ -124,7 +129,7 @@ const beforeBuild = async (
 
     let language = lng === "en-US" || lng === "en-GB" ? "en" : lng;
 
-    if (cultures.indexOf(language) === -1) {
+    if (cultures.includes(language) === -1) {
       return;
     }
 

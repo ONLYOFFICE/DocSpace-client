@@ -72,6 +72,7 @@ export type CoverDialogProps = RoomLogoCoverProps & {
   createRoomDialogVisible: boolean;
   editRoomDialogPropsVisible: boolean;
   roomLogoCoverDialogVisible: boolean;
+  templateEventVisible: boolean;
 };
 
 export interface CustomLogoProps {

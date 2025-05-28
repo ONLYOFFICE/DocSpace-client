@@ -1,0 +1,15 @@
+{
+  "DescriptionUploading": "Tạo biểu mẫu PDF trong {{productName}}, ví dụ: trong mục {{sectionName}} của bạn và tải lên các biểu mẫu đã hoàn thành vào phòng. Sử dụng thư viện mẫu tích hợp và chọn từ nhiều mẫu PDF có sẵn.",
+  "HeaderComplete": "Phân tích thuận tiện các câu trả lời thu thập được",
+  "HeaderSharing": "Chia sẻ nhanh",
+  "HeaderStarting": "Bắt đầu quá trình điền biểu mẫu",
+  "HeaderSubmitting": "Gửi câu trả lời",
+  "HeaderUploading": "Dễ dàng tải biểu mẫu lên",
+  "TitleComplete": "Kiểm tra các biểu mẫu đã điền và phân tích dữ liệu được thu thập tự động vào một bảng tính. Tất cả mọi thứ – trong một phòng.",
+  "TitleSharing": "Mời các thành viên {{productName}} khác vào phòng để điền vào các biểu mẫu PDF đã tải lên. Sao chép liên kết truy cập công khai để chia sẻ phòng với người dùng bên ngoài.",
+  "TitleStarting": "Khi một biểu mẫu được mở để điền, một bản sao riêng lẻ sẽ tự động được tạo cho mỗi người trả lời và được lưu vào thư mục Đang tiến hành. Điều đó có nghĩa là biểu mẫu đã được bắt đầu điền nhưng chưa được hoàn thành.",
+  "TitleSubmitting": "Khi nút Hoàn thành & Gửi trên bản sao biểu mẫu đã mở được nhấp vào, nó sẽ được chuyển đến thư mục Hoàn thành.",
+  "WelcomeDescription": "Tại đây, bạn có thể tổ chức điền biểu mẫu PDF đơn giản, dễ dàng thu thập và phân tích câu trả lời. Bạn đã sẵn sàng để bắt đầu chưa?",
+  "WelcomeFillingForm": "Chào mừng bạn đến với Phòng Điền Biểu Mẫu!",
+  "WelcomeStartTutorial": "Cùng khám phá nhanh nhé"
+}

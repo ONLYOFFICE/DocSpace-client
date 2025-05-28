@@ -1,5 +1,4 @@
 {
-  "ActivationRequired": "activatie vereist",
   "AddStaticText": "Voeg statische tekst toe",
   "AddWatermarkElements": "Voeg watermerk elementen toe",
   "AddWatermarksToDocuments": "Watermerken toevoegen aan documenten",
@@ -33,7 +32,6 @@
   "StorageDescription": "Opslagquota ingesteld per kamer. U kunt deze waarde wijzigen of de opslaglimiet uitschakelen.",
   "TagsPlaceholder": "Een tag toevoegen",
   "ThirdPartyStorageComboBoxPlaceholder": "Selecteer opslag",
-  "ThirdPartyStorageDescription": "Gebruik diensten van derden als gegevensopslag voor deze ruimte. Een nieuwe map voor het opslaan van de gegevens van deze kamer wordt aangemaakt in de aangesloten opslagruimte.",
   "ThirdPartyStorageNoStorageAlert": "Daarvoor moet u de betreffende dienst aansluiten in de sectie \"Integratie\". Anders is de verbinding niet mogelijk.",
   "ThirdPartyStoragePermanentSettingDescription": "Bestanden worden opgeslagen in een externe opslag {{thirdpartyTitle}} in de map \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "Om een externe opslag aan te sluiten, moet u de overeenkomstige dienst toevoegen in het gedeelte Integratie van de {{productName}} instellingen. Neem contact op met de eigenaar of beheerder van {{productName}} om de integratie in te schakelen.",

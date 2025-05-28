@@ -42,18 +42,33 @@ const EmptyTrashDialogComponent = (props) => {
     emptyArchive,
 
     isArchiveFolder,
+    emptyPersonalRoom,
+    isPersonalReadOnly,
+    personalUserFolderTitle,
+    trashFolderTitle,
+    archiveFolderTitle,
   } = props;
 
   const onClose = () => setEmptyTrashDialogVisible(false);
 
+  const sectionName = isArchiveFolder
+    ? archiveFolderTitle
+    : isPersonalReadOnly
+      ? personalUserFolderTitle
+      : trashFolderTitle;
+
   const onEmptyTrash = () => {
     onClose();
+
     const translations = {
-      deleteOperation: t("Translations:DeleteOperation"),
-      successOperation: isArchiveFolder
-        ? t("SuccessEmptyArchived")
-        : t("SuccessEmptyTrash"),
+      successOperation: t("SuccessEmptyAction", { sectionName }),
     };
+
+    if (isPersonalReadOnly) {
+      emptyPersonalRoom(translations);
+
+      return;
+    }
 
     if (isArchiveFolder) {
       emptyArchive(translations);
@@ -74,6 +89,8 @@ const EmptyTrashDialogComponent = (props) => {
     return () => window.removeEventListener("keydown", onKeyPress);
   }, []);
 
+  const description = t("DeleteForeverNote", { sectionName });
+
   return (
     <ModalDialog
       isLoading={!tReady}
@@ -83,16 +100,12 @@ const EmptyTrashDialogComponent = (props) => {
     >
       <ModalDialog.Header>{t("DeleteForeverTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect>
-          {isArchiveFolder
-            ? t("DeleteForeverNoteArchive")
-            : t("DeleteForeverNote")}
-        </Text>
+        <Text noSelect>{description}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           id="empty-archive_delete-submit"
-          key="OkButton"
+          key="OKButton"
           label={t("DeleteForeverButton")}
           size="normal"
           primary
@@ -123,9 +136,15 @@ const EmptyTrashDialog = withTranslation([
 export default inject(
   ({ filesStore, filesActionsStore, treeFoldersStore, dialogsStore }) => {
     const { isLoading } = filesStore;
-    const { emptyTrash, emptyArchive } = filesActionsStore;
+    const { emptyTrash, emptyArchive, emptyPersonalRoom } = filesActionsStore;
 
-    const { isArchiveFolder } = treeFoldersStore;
+    const {
+      isArchiveFolder,
+      isPersonalReadOnly,
+      personalUserFolderTitle,
+      trashFolderTitle,
+      archiveFolderTitle,
+    } = treeFoldersStore;
 
     const { emptyTrashDialogVisible: visible, setEmptyTrashDialogVisible } =
       dialogsStore;
@@ -140,6 +159,11 @@ export default inject(
       emptyArchive,
 
       isArchiveFolder,
+      isPersonalReadOnly,
+      emptyPersonalRoom,
+      personalUserFolderTitle,
+      trashFolderTitle,
+      archiveFolderTitle,
     };
   },
 )(observer(EmptyTrashDialog));

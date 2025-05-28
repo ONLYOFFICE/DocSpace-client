@@ -14,6 +14,7 @@ jobs:
     steps:
       - name: Dispatch Action
         run: |
+          echo "${GITHUB_REF_NAME}"
           curl \
           -X POST \
           -u "${{ secrets.USERNAME}}:${{secrets.TOKEN}}" \

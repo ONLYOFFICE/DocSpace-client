@@ -41,6 +41,7 @@ import ArticleLiveChat from "./sub-components/LiveChat";
 import ArticleApps from "./sub-components/Apps";
 import ArticleDevToolsBar from "./sub-components/DevToolsBar";
 import HideArticleMenuButton from "./sub-components/HideMenuButton";
+import BackButton from "./sub-components/BackButton";
 
 import styles from "./Article.module.scss";
 import { HEADER_NAME, MAIN_BUTTON_NAME, BODY_NAME } from "./Article.constants";
@@ -108,7 +109,12 @@ const Article = ({
   getActions,
   onProfileClick,
   logoText,
-  ...rest
+
+  limitedAccessDevToolsForUsers,
+
+  downloaddesktopUrl,
+  officeforandroidUrl,
+  officeforiosUrl,
 }: ArticleProps) => {
   const [articleHeaderContent, setArticleHeaderContent] =
     React.useState<null | React.JSX.Element>(null);
@@ -218,10 +224,17 @@ const Article = ({
     };
   }, [onResize]);
 
-  const withDevTools =
-    !window.location.pathname.includes("portal-settings") &&
-    !window.location.pathname.includes("management") &&
-    isAdmin;
+  const hideDevTools =
+    user?.isVisitor ||
+    (user?.isCollaborator && limitedAccessDevToolsForUsers) ||
+    window.location.pathname.includes("portal-settings") ||
+    window.location.pathname.includes("management");
+
+  const pathDevTools = user?.isAdmin
+    ? "/portal-settings/developer-tools"
+    : "/developer-tools";
+
+  const showBackButton = window.location.pathname.includes("portal-settings");
 
   const articleComponent = (
     <>
@@ -230,7 +243,6 @@ const Article = ({
         data-show-text={showText ? "true" : "false"}
         data-open={articleOpen ? "true" : "false"}
         data-with-main-button={withMainButton ? "true" : "false"}
-        {...rest}
         className={styles.article}
         data-testid="article"
       >
@@ -241,6 +253,7 @@ const Article = ({
           withCustomArticleHeader={withCustomArticleHeader}
           isBurgerLoading={isBurgerLoading}
           onIconClick={toggleArticleOpen}
+          showBackButton={showBackButton}
         >
           {articleHeaderContent ? articleHeaderContent.props.children : null}
         </SubArticleHeader>
@@ -248,7 +261,10 @@ const Article = ({
         {articleMainButtonContent &&
         withMainButton &&
         currentDeviceType !== DeviceType.mobile ? (
-          <div className={styles.articleMainButton}>
+          <div
+            className={styles.articleMainButton}
+            data-mobile-article={isMobileArticle ? "true" : "false"}
+          >
             {articleMainButtonContent.props.children}
           </div>
         ) : null}
@@ -257,22 +273,29 @@ const Article = ({
           className="article-body__scrollbar"
           scrollClass="article-scroller"
         >
+          {showBackButton && currentDeviceType !== DeviceType.mobile ? (
+            <BackButton showText={showText} />
+          ) : null}
           {articleBodyContent ? articleBodyContent.props.children : null}
           {!showArticleLoader ? (
             <>
-              {withDevTools ? (
+              {!hideDevTools ? (
                 <ArticleDevToolsBar
                   articleOpen={articleOpen}
                   currentDeviceType={currentDeviceType}
                   toggleArticleOpen={toggleArticleOpen}
                   showText={showText}
+                  path={pathDevTools}
                 />
               ) : null}
               {!hideAppsBlock ? (
                 <ArticleApps
-                  withDevTools={withDevTools}
+                  withDevTools={!hideDevTools}
                   showText={showText}
                   logoText={logoText}
+                  downloaddesktopUrl={downloaddesktopUrl}
+                  officeforandroidUrl={officeforandroidUrl}
+                  officeforiosUrl={officeforiosUrl}
                 />
               ) : null}
               {!isMobile && isLiveChatAvailable ? (
@@ -325,7 +348,10 @@ const Article = ({
       ) : null}
 
       {articleMainButtonContent && currentDeviceType === DeviceType.mobile ? (
-        <div className={styles.articleMainButton}>
+        <div
+          className={styles.articleMainButton}
+          data-mobile-article={isMobileArticle ? "true" : "false"}
+        >
           {articleMainButtonContent.props.children}
         </div>
       ) : null}

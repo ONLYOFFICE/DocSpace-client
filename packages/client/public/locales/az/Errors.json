@@ -1,6 +1,4 @@
 {
   "ErrorEmptyResponse": "Boş cavab",
-  "ErrorUnavailableText": "{{productName}} əlçatan deyil",
-  "LinkDoesNotExist": "Açmağa çalışdığınız keçid mövcud deyil.",
-  "LinkHasExpired": "İzlədiyiniz keçidin vaxtı keçib."
+  "ErrorUnavailableText": "{{productName}} əlçatan deyil"
 }

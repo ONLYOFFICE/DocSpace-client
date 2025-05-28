@@ -24,42 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { useMemo, useContext } from "react";
+import { useMemo, use } from "react";
 import { inject, observer } from "mobx-react";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { Context, injectDefaultTheme } from "@docspace/shared/utils";
+import { Context } from "@docspace/shared/utils";
 import { RowContainer } from "@docspace/shared/components/rows";
+
+import styles from "@docspace/shared/styles/FilesRowContainer.module.scss";
+
+import withContainer from "../../../../../HOCs/withContainer";
 
 import SimpleFilesRow from "./SimpleFilesRow";
 
-const StyledRowContainer = styled(RowContainer).attrs(injectDefaultTheme)`
-  .row-list-item:first-child {
-    .row-wrapper {
-      height: 57px;
-
-      margin-top: 1px;
-      border-top: 1px solid transparent;
-
-      .styled-checkbox-container {
-        padding-bottom: 5px;
-      }
-
-      .row_content {
-        padding-bottom: 5px;
-      }
-    }
-  }
-
-  .row-list-item {
-    margin-top: -1px;
-  }
-`;
-
 const FilesRowContainer = ({
-  filesList,
+  list,
   viewAs,
   setViewAs,
   filterTotal,
@@ -71,10 +51,11 @@ const FilesRowContainer = ({
   currentDeviceType,
   isIndexEditingMode,
   changeIndex,
-  icon,
-  isDownload,
+  isTutorialEnabled,
+  setRefMap,
+  deleteRefMap,
 }) => {
-  const { sectionWidth } = useContext(Context);
+  const { sectionWidth } = use(Context);
 
   useViewEffect({
     view: viewAs,
@@ -83,7 +64,7 @@ const FilesRowContainer = ({
   });
 
   const filesListNode = useMemo(() => {
-    return filesList.map((item, index) => (
+    return list.map((item, index) => (
       <SimpleFilesRow
         id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
         key={
@@ -101,25 +82,25 @@ const FilesRowContainer = ({
             : null
         }
         isIndexEditingMode={isIndexEditingMode}
-        icon={icon}
-        isDownload={isDownload}
+        isTutorialEnabled={isTutorialEnabled}
+        setRefMap={setRefMap}
+        deleteRefMap={deleteRefMap}
       />
     ));
   }, [
-    filesList,
+    list,
     sectionWidth,
     isRooms,
     highlightFile.id,
     highlightFile.isExst,
     isTrashFolder,
-    icon,
-    isDownload,
+    isTutorialEnabled,
   ]);
 
   return (
-    <StyledRowContainer
-      className="files-row-container"
-      filesLength={filesList.length}
+    <RowContainer
+      className={`files-row-container ${styles.filesRowContainer}`}
+      filesLength={list.length}
       itemCount={filterTotal}
       fetchMoreFiles={fetchMoreFiles}
       hasMoreFiles={hasMoreFiles}
@@ -128,7 +109,7 @@ const FilesRowContainer = ({
       itemHeight={58}
     >
       {filesListNode}
-    </StyledRowContainer>
+    </RowContainer>
   );
 };
 
@@ -140,10 +121,9 @@ export default inject(
     treeFoldersStore,
     indexingStore,
     filesActionsStore,
-    uploadDataStore,
+    guidanceStore,
   }) => {
     const {
-      filesList,
       viewAs,
       setViewAs,
       filter,
@@ -152,6 +132,8 @@ export default inject(
       roomsFilter,
       highlightFile,
     } = filesStore;
+
+    const { setRefMap, deleteRefMap } = guidanceStore;
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
     const { currentDeviceType } = settingsStore;
@@ -159,10 +141,7 @@ export default inject(
 
     const isRooms = isRoomsFolder || isArchiveFolder;
 
-    const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
-
     return {
-      filesList,
       viewAs,
       setViewAs,
       infoPanelVisible,
@@ -175,8 +154,8 @@ export default inject(
       currentDeviceType,
       isIndexEditingMode,
       changeIndex: filesActionsStore.changeIndex,
-      icon,
-      isDownload,
+      setRefMap,
+      deleteRefMap,
     };
   },
-)(observer(FilesRowContainer));
+)(withContainer(observer(FilesRowContainer)));

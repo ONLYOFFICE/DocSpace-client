@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useLocation, Outlet } from "react-router-dom";
+import { useLocation, Outlet } from "react-router";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -90,16 +90,9 @@ const PureHome = (props) => {
     dragging,
     createFoldersTree,
     disableDrag,
-    uploaded,
-    converted,
-    setUploadPanelVisible,
     clearPrimaryProgressData,
-    primaryProgressDataVisible,
-    isProgressFinished,
-    secondaryProgressDataStoreIcon,
-    itemsSelectionLength,
-    itemsSelectionTitle,
-    setItemsSelectionTitle,
+    isPrimaryProgressVisbile,
+
     refreshFiles,
 
     setFrameConfig,
@@ -122,15 +115,7 @@ const PureHome = (props) => {
     isErrorRoomNotAvailable,
     isIndexEditingMode,
 
-    primaryProgressDataPercent,
-    primaryProgressDataIcon,
-    primaryProgressDataAlert,
-    clearUploadedFilesHistory,
-
-    secondaryProgressDataStoreVisible,
-    secondaryProgressDataStorePercent,
-
-    secondaryProgressDataStoreAlert,
+    isSecondaryProgressVisbile,
 
     isFrame,
     showFilter,
@@ -159,11 +144,30 @@ const PureHome = (props) => {
     scrollToTop,
     isEmptyGroups,
     wsCreatedPDFForm,
-    disableUploadPanelOpen,
     setContactsTab,
     isUsersEmptyView,
     showGuestReleaseTip,
     setGuestReleaseTipDialogVisible,
+    secondaryOperationsCompleted,
+    primaryOperationsCompleted,
+    secondaryActiveOperations,
+    clearSecondaryProgressData,
+    primaryOperationsArray,
+    cancelUpload,
+    secondaryOperationsAlert,
+    clearUploadData,
+    clearUploadedFiles,
+    mainButtonVisible,
+    primaryOperationsAlert,
+    clearConversionData,
+    isErrorChecking,
+    setOperationCancelVisible,
+    hideConfirmCancelOperation,
+    welcomeFormFillingTipsVisible,
+    formFillingTipsVisible,
+    allowInvitingGuests,
+    checkGuests,
+    hasGuests,
   } = props;
 
   // console.log(t("ComingSoon"))
@@ -174,7 +178,14 @@ const PureHome = (props) => {
     location.pathname.includes("settings") &&
     !location.pathname.includes("settings/plugins");
 
-  const contactsView = getContactsView(location);
+  const view = getContactsView(location);
+  if (allowInvitingGuests === false && view === "guests") checkGuests();
+  const contactsView = allowInvitingGuests
+    ? view
+    : typeof hasGuests === "boolean" && view === "guests" && !hasGuests
+      ? "people"
+      : view;
+
   const isContactsPage = !!contactsView;
   const isContactsEmptyView =
     contactsView === "groups" ? isEmptyGroups : isUsersEmptyView;
@@ -222,20 +233,11 @@ const PureHome = (props) => {
     wsCreatedPDFForm,
   });
 
-  const { showUploadPanel } = useOperations({
-    t,
-    setUploadPanelVisible,
-    primaryProgressDataVisible,
-    uploaded,
-    converted,
-    clearPrimaryProgressData,
-    isProgressFinished,
-    refreshFiles,
-    itemsSelectionTitle,
-    secondaryProgressDataStoreIcon,
-    itemsSelectionLength,
-    disableUploadPanelOpen,
-    setItemsSelectionTitle,
+  useOperations({
+    clearUploadData,
+    clearUploadedFiles,
+    primaryOperationsArray,
+    clearConversionData,
   });
 
   useContacts({
@@ -259,7 +261,6 @@ const PureHome = (props) => {
   useSettings({
     t,
     isSettingsPage,
-
     setIsLoading,
   });
 
@@ -295,6 +296,15 @@ const PureHome = (props) => {
     return getFolderModel(t, true);
   };
 
+  const onCancelUpload = () => {
+    if (hideConfirmCancelOperation) {
+      cancelUpload(t);
+      return;
+    }
+
+    setOperationCancelVisible(true);
+  };
+
   React.useEffect(() => {
     window.addEventListener("popstate", onClickBack);
 
@@ -325,10 +335,9 @@ const PureHome = (props) => {
       sectionProps.onDrop =
         isRecycleBinFolder || isPrivacyFolder ? null : onDrop;
 
-      sectionProps.clearUploadedFilesHistory = clearUploadedFilesHistory;
       sectionProps.viewAs = viewAs;
       sectionProps.hideAside =
-        primaryProgressDataVisible || secondaryProgressDataStoreVisible;
+        isPrimaryProgressVisbile || isSecondaryProgressVisbile;
 
       sectionProps.isEmptyPage = isEmptyPage;
       sectionProps.isTrashFolder = isRecycleBinFolder;
@@ -337,17 +346,34 @@ const PureHome = (props) => {
     }
   }
 
-  sectionProps.onOpenUploadPanel = showUploadPanel;
-  sectionProps.showPrimaryProgressBar = primaryProgressDataVisible;
-  sectionProps.primaryProgressBarValue = primaryProgressDataPercent;
-  sectionProps.primaryProgressBarIcon = primaryProgressDataIcon;
-  sectionProps.showPrimaryButtonAlert = primaryProgressDataAlert;
-  sectionProps.showSecondaryProgressBar = secondaryProgressDataStoreVisible;
-  sectionProps.secondaryProgressBarValue = secondaryProgressDataStorePercent;
-  sectionProps.secondaryProgressBarIcon = secondaryProgressDataStoreIcon;
-  sectionProps.showSecondaryButtonAlert = secondaryProgressDataStoreAlert;
+  // sectionProps.onOpenUploadPanel = showUploadPanel;
+
   sectionProps.getContextModel = getContextModel;
   sectionProps.isIndexEditingMode = isIndexEditingMode;
+
+  sectionProps.secondaryActiveOperations = secondaryActiveOperations;
+  sectionProps.secondaryOperationsCompleted = secondaryOperationsCompleted;
+  sectionProps.clearSecondaryProgressData = clearSecondaryProgressData;
+  sectionProps.primaryOperationsArray = primaryOperationsArray;
+  sectionProps.clearPrimaryProgressData = clearPrimaryProgressData;
+  sectionProps.primaryOperationsCompleted = primaryOperationsCompleted;
+  sectionProps.cancelUpload = onCancelUpload;
+  sectionProps.secondaryOperationsAlert = secondaryOperationsAlert;
+  sectionProps.primaryOperationsAlert = primaryOperationsAlert;
+  sectionProps.needErrorChecking = isErrorChecking;
+  sectionProps.mainButtonVisible = mainButtonVisible;
+
+  const hasVisibleContent =
+    !isEmptyPage ||
+    welcomeFormFillingTipsVisible ||
+    formFillingTipsVisible ||
+    showFilterLoader;
+
+  const isValidMainContent = hasVisibleContent && !isErrorRoomNotAvailable;
+  const isValidContactsContent = !isContactsEmptyView && isContactsPage;
+
+  const shouldRenderSectionFilter =
+    (isValidMainContent || isValidContactsContent) && !isSettingsPage;
 
   return (
     <>
@@ -374,15 +400,11 @@ const PureHome = (props) => {
           <SectionSubmenuContent />
         </Section.SectionSubmenu>
 
-        {isRecycleBinFolder && !isEmptyPage ? (
-          <Section.SectionWarning>
-            <SectionWarningContent />
-          </Section.SectionWarning>
-        ) : null}
+        <Section.SectionWarning>
+          <SectionWarningContent />
+        </Section.SectionWarning>
 
-        {(((!isEmptyPage || showFilterLoader) && !isErrorRoomNotAvailable) ||
-          (!isContactsEmptyView && isContactsPage)) &&
-        !isSettingsPage ? (
+        {shouldRenderSectionFilter ? (
           <Section.SectionFilter>
             {isFrame ? (
               showFilter && <SectionFilterContent />
@@ -407,7 +429,7 @@ const PureHome = (props) => {
   );
 };
 
-const Home = withTranslation(["Files", "People"])(PureHome);
+const Home = withTranslation(["UploadPanel", "Files", "People"])(PureHome);
 
 export const Component = inject(
   ({
@@ -426,12 +448,17 @@ export const Component = inject(
     contextOptionsStore,
     indexingStore,
     dialogsStore,
+    filesSettingsStore,
   }) => {
     const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
     const {
       secondaryProgressDataStore,
       primaryProgressDataStore,
-      clearUploadedFilesHistory,
+
+      cancelUpload,
+      clearUploadData,
+      clearUploadedFiles,
+      clearConversionData,
     } = uploadDataStore;
 
     const {
@@ -476,6 +503,7 @@ export const Component = inject(
       getRooms,
       scrollToTop,
       wsCreatedPDFForm,
+      mainButtonVisible,
     } = filesStore;
 
     const { gallerySelected } = oformsStore;
@@ -491,37 +519,30 @@ export const Component = inject(
     } = treeFoldersStore;
 
     const {
-      visible: primaryProgressDataVisible,
-      percent: primaryProgressDataPercent,
-      icon: primaryProgressDataIcon,
-      alert: primaryProgressDataAlert,
-      disableUploadPanelOpen,
       clearPrimaryProgressData,
+      primaryOperationsArray,
+      primaryOperationsCompleted,
+      primaryOperationsAlert,
+      isErrorChecking,
+      isPrimaryProgressVisbile,
     } = primaryProgressDataStore;
 
     const {
-      visible: secondaryProgressDataStoreVisible,
-      percent: secondaryProgressDataStorePercent,
-      icon: secondaryProgressDataStoreIcon,
-      alert: secondaryProgressDataStoreAlert,
-      isSecondaryProgressFinished: isProgressFinished,
-      itemsSelectionLength,
-      itemsSelectionTitle,
-      setItemsSelectionTitle,
+      isSecondaryProgressVisbile,
+      secondaryOperationsCompleted,
+      clearSecondaryProgressData,
+      secondaryActiveOperations,
+      secondaryOperationsAlert,
     } = secondaryProgressDataStore;
 
-    const { setUploadPanelVisible, startUpload, uploaded, converted } =
-      uploadDataStore;
+    const { startUpload } = uploadDataStore;
 
     const { createFoldersTree, onClickBack } = filesActionsStore;
 
-    const selectionLength = isProgressFinished ? selection.length : null;
-    const selectionTitle = isProgressFinished
-      ? filesStore.selectionTitle
-      : null;
-
     const { setToPreviewFile, playlist } = mediaViewerDataStore;
 
+    const { hideConfirmCancelOperation } = filesSettingsStore;
+    const { setOperationCancelVisible } = dialogsStore;
     const {
       setFrameConfig,
       frameConfig,
@@ -529,6 +550,9 @@ export const Component = inject(
       enablePlugins,
       getSettings,
       showGuestReleaseTip,
+      allowInvitingGuests,
+      checkGuests,
+      hasGuests,
     } = settingsStore;
 
     const {
@@ -546,6 +570,12 @@ export const Component = inject(
     const isEmptyGroups =
       !groupsIsFiltered && ((groups && groups.length === 0) || !groups);
 
+    const {
+      welcomeFormFillingTipsVisible,
+      formFillingTipsVisible,
+      setGuestReleaseTipDialogVisible,
+    } = dialogsStore;
+
     // if (!firstLoad) {
     //   if (isLoading) {
     //     showLoader();
@@ -559,36 +589,19 @@ export const Component = inject(
       firstLoad,
       dragging,
       viewAs,
-      uploaded,
-      converted,
       isRecycleBinFolder,
       isPrivacyFolder,
       isVisitor: userStore.user.isVisitor,
       userId: userStore?.user?.id,
       folderSecurity,
-      primaryProgressDataVisible,
-      primaryProgressDataPercent,
-      primaryProgressDataIcon,
-      primaryProgressDataAlert,
+
       clearPrimaryProgressData,
-      disableUploadPanelOpen,
 
-      clearUploadedFilesHistory,
-
-      secondaryProgressDataStoreVisible,
-      secondaryProgressDataStorePercent,
-      secondaryProgressDataStoreIcon,
-      secondaryProgressDataStoreAlert,
-
-      selectionLength,
-      isProgressFinished,
-      selectionTitle,
+      isSecondaryProgressVisbile,
+      isPrimaryProgressVisbile,
 
       enablePlugins,
 
-      itemsSelectionLength,
-      setItemsSelectionTitle,
-      itemsSelectionTitle,
       isErrorRoomNotAvailable,
       isRoomsFolder,
       isArchiveFolder,
@@ -606,7 +619,6 @@ export const Component = inject(
       fetchFiles,
       fetchRooms,
 
-      setUploadPanelVisible,
       startUpload,
       createFoldersTree,
 
@@ -662,8 +674,28 @@ export const Component = inject(
       updateProfileCulture,
       isUsersEmptyView: isUsersEmptyView && !isFiltered,
       showGuestReleaseTip,
-      setGuestReleaseTipDialogVisible:
-        dialogsStore.setGuestReleaseTipDialogVisible,
+      setGuestReleaseTipDialogVisible,
+      welcomeFormFillingTipsVisible,
+      formFillingTipsVisible,
+
+      secondaryActiveOperations,
+      secondaryOperationsCompleted,
+      clearSecondaryProgressData,
+      secondaryOperationsAlert,
+      primaryOperationsArray,
+      primaryOperationsCompleted,
+      cancelUpload,
+      clearUploadData,
+      clearUploadedFiles,
+      mainButtonVisible,
+      primaryOperationsAlert,
+      clearConversionData,
+      isErrorChecking,
+      setOperationCancelVisible,
+      hideConfirmCancelOperation,
+      allowInvitingGuests,
+      checkGuests,
+      hasGuests,
     };
   },
 )(observer(Home));

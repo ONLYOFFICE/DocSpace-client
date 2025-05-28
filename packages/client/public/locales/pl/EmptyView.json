@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Ostatnio przeglądane lub edytowane dokumenty będą widoczne w tej sekcji.",
   "EmptyRootRoomUserDescription": "Pokój współdzielony pojawi się tutaj.",
   "EmptyRootRoomUserTitle": "Nie ma tu jeszcze żadnych pokoi.",
+  "EmptyTemplatesDescription": "Możesz utworzyć szablon z pokoju w sekcji Pokój",
+  "EmptyTemplatesTitle": "Brak szablonów",
   "FormFolderDefaultDescription": "Upuść formularze PDF tutaj lub prześlij je z {{productName}} bądź urządzenia.",
   "FormFolderDefaultTitle": "Brak formularzy",
   "FormFolderDefaultUserDescription": "Tutaj pojawią się formularze przesłane przez administratorów.",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "Importuj dane do {{productName}} z {{organizationName}} Workspace, Google Workspace lub Nextcloud.",
   "MigrationDataTitle": "Dane migracji",
   "PublicRoomEmptyTitle": "Witaj w pokoju publicznym",
+  "SectionsUploadDescription": "Prześlij pliki dowolnego typu z {{sectionNameFirst}} lub {{sectionNameSecond}}",
   "SendInvitationLetter": "Wyślij zaproszenia, aby dodać nowych członków do portalu",
   "ShareOptionDescription": "Skopiuj link dostępu publicznego lub zaproś innych użytkowników do pokoju, aby rozpocząć proces wypełniania formularza.",
   "ShareOptionTitle": "Udostępnij pokój",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "Prześlij ze swojego urządzenia",
   "UploadDevicePDFFormOptionDescription": "Prześlij gotowy formularz PDF do pokoju ze swojego urządzenia.",
   "UploadDevicePDFFormOptionTitle": "Prześlij z urządzenia",
-  "UploadFromPortalDescription": "Prześlij pliki dowolnego typu z Dokumentów lub Pokoi",
   "UploadFromPortalTitle": "Prześlij z {{productName}}",
   "UploadPDFFormOptionDescription": "Wybierz gotowy formularz PDF dostępny w {{productName}} i prześlij go do pokoju.",
-  "UserEmptyDescription": "Tutaj pojawią się pliki i katalogi przesłane przez administratorów.",
   "VirtualDataRoomEmptyTitle": "Witaj w Wirtualnym pokoju danych"
 }

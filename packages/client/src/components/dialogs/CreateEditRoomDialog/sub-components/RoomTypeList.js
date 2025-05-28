@@ -29,7 +29,7 @@ import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 
 import RoomType from "@docspace/shared/components/room-type";
-import withLoader from "@docspace/client/src/HOCs/withLoader";
+import withLoader from "SRC_DIR/HOCs/withLoader";
 import RoomTypeListLoader from "@docspace/shared/skeletons/create-edit-room/RoomTypeList";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import { RoomsType } from "@docspace/shared/enums";
@@ -45,24 +45,28 @@ const StyledRoomTypeList = styled.div`
   gap: 16px;
 `;
 
-const TooltipContent = ({ t }) => (
-  <Text fontSize="12px" noSelect>
-    {t("Files:WarningCreationFormRoom")}
-  </Text>
-);
-TooltipContent.displayName = "TooltipContent";
-
-const getTooltipContent = (t) => {
-  const TooltipRenderer = () => <TooltipContent t={t} />;
-  TooltipRenderer.displayName = "TooltipRenderer";
-  return TooltipRenderer;
-};
-
-const RoomTypeList = ({ t, setRoomType, disabledFormRoom }) => {
+const RoomTypeList = ({
+  t,
+  setRoomType,
+  disabledFormRoom,
+  setTemplateDialogIsVisible,
+}) => {
   const handleClick = (roomType) => {
     if (disabledFormRoom && roomType === RoomsType.FormRoom) return;
 
+    if (!roomType) {
+      setTemplateDialogIsVisible(true);
+    }
+
     setRoomType(roomType);
+  };
+
+  const getTooltipContent = () => {
+    return (
+      <Text fontSize="12px" noSelect>
+        {t("Files:WarningCreationFormRoom")}
+      </Text>
+    );
   };
 
   return (
@@ -71,7 +75,7 @@ const RoomTypeList = ({ t, setRoomType, disabledFormRoom }) => {
         place="bottom"
         id="create-room-tooltip"
         openOnClick={false}
-        getContent={() => getTooltipContent(t)}
+        getContent={getTooltipContent}
       />
 
       {RoomsTypeValues.map((roomType) => (
@@ -85,6 +89,14 @@ const RoomTypeList = ({ t, setRoomType, disabledFormRoom }) => {
           disabledFormRoom={disabledFormRoom}
         />
       ))}
+      <RoomType
+        id="Template"
+        t={t}
+        isTemplate
+        type="listItem"
+        onClick={() => handleClick()}
+        disabledFormRoom={disabledFormRoom}
+      />
     </StyledRoomTypeList>
   );
 };

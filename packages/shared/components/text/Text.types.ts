@@ -25,6 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export type TextProps = {
+  /** Ref to access the DOM element or React component instance */
+  ref?: React.RefObject<HTMLDivElement>;
   /** Sets the tag through which the component is rendered */
   as?: React.ElementType;
   /** Accepts the tag id */
@@ -77,6 +79,10 @@ export type TextProps = {
   rel?: string;
   /** Used as HTML `tabindex` property */
   tabIndex?: number;
+  /** Used in container component */
+  containerWidth?: string;
+  /** Used in container component */
+  containerMinWidth?: string;
 };
 
 export type StyledTextProps = {

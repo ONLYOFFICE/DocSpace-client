@@ -1,8 +1,6 @@
 {
-  "CancelUpload": "Yükleme kesintiye uğradı. Bazı dosyalar yüklenmedi.",
-  "EnterPassword": "Parola giriniz",
   "HideInput": "Gizle",
   "Ready": "Bitti",
-  "UploadAndConvert": "Dosyaları yükleyin ve dönüştürün",
-  "Uploads": "Yüklemeler"
+  "UploadingAndConversion": "Yükleme ve Dönüştürme",
+  "UploadingError": "Yükleme hatası"
 }

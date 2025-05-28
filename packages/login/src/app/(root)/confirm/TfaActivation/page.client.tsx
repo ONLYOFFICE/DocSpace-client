@@ -35,7 +35,6 @@ import { useTheme } from "styled-components";
 import { Link, LinkTarget } from "@docspace/shared/components/link";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Text } from "@docspace/shared/components/text";
-import { Box } from "@docspace/shared/components/box";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import {
@@ -76,7 +75,7 @@ const TfaActivationForm = ({
 }: TfaActivationFormProps) => {
   const { linkData } = useContext(ConfirmRouteContext);
   const { t } = useTranslation(["Confirm", "Common"]);
-  const { currentColorScheme } = useTheme();
+  const theme = useTheme();
 
   const searchParams = useSearchParams();
 
@@ -86,7 +85,7 @@ const TfaActivationForm = ({
 
   const { confirmHeader = null } = linkData;
 
-  const linkUrlData = searchParams.get("linkData");
+  const linkUrlData = searchParams?.get("linkData");
 
   const proxyBaseUrl = useRef("");
   useEffect(() => {
@@ -137,7 +136,6 @@ const TfaActivationForm = ({
 
       setError(errorMessage);
       toastr.error(errorMessage);
-    } finally {
       setIsLoading(false);
     }
   };
@@ -157,7 +155,7 @@ const TfaActivationForm = ({
 
   return (
     <>
-      <Box className="set-app-description" marginProp="0 0 32px 0">
+      <div className="set-app-description">
         <GreetingContainer />
 
         <Text isBold fontSize="14px" className="set-app-title">
@@ -174,7 +172,7 @@ const TfaActivationForm = ({
           security. Configure your authenticator application to continue work on
           the portal. For example you could use Google Authenticator for
           <Link
-            color={currentColorScheme?.main?.accent}
+            color={theme.currentColorScheme?.main?.accent}
             href={TFA_ANDROID_APP_URL}
             target={LinkTarget.blank}
           >
@@ -182,7 +180,7 @@ const TfaActivationForm = ({
           </Link>
           and{" "}
           <Link
-            color={currentColorScheme?.main?.accent}
+            color={theme.currentColorScheme?.main?.accent}
             href={TFA_IOS_APP_URL}
             target={LinkTarget.blank}
           >
@@ -190,7 +188,7 @@ const TfaActivationForm = ({
           </Link>{" "}
           or Authenticator for{" "}
           <Link
-            color={currentColorScheme?.main?.accent}
+            color={theme.currentColorScheme?.main?.accent}
             href={TFA_WIN_APP_URL}
             target={LinkTarget.blank}
           >
@@ -211,17 +209,13 @@ const TfaActivationForm = ({
             from your application in the field below.
           </Trans>
         </Text>
-      </Box>
+      </div>
       <FormWrapper id="tfa-activation-form">
-        <Box
-          displayProp="flex"
-          flexDirection="column"
-          className="app-code-wrapper"
-        >
+        <div className="app-code-wrapper">
           <div className="qrcode-wrapper">
             <img src={qrCode} height="180px" width="180px" alt="QR-code" />
           </div>
-          <Box className="app-code-input">
+          <div className="app-code-input">
             <FieldContainer
               labelVisible={false}
               hasError={error ? true : false}
@@ -244,8 +238,8 @@ const TfaActivationForm = ({
                 onKeyDown={onKeyPress}
               />
             </FieldContainer>
-          </Box>
-          <Box className="app-code-continue-btn">
+          </div>
+          <div>
             <Button
               scale
               primary
@@ -258,8 +252,8 @@ const TfaActivationForm = ({
               isLoading={isLoading}
               onClick={onSubmit}
             />
-          </Box>
-        </Box>
+          </div>
+        </div>
       </FormWrapper>
     </>
   );

@@ -41,7 +41,7 @@ import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.
 // import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
 // import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { inject, observer } from "mobx-react";
 
@@ -50,7 +50,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { Button } from "@docspace/shared/components/button";
 
 import { withTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import {
   Events,
   DeviceType,
@@ -79,7 +79,8 @@ const StyledButton = styled(Button)`
       $currentColorScheme.main?.accent} !important;
     background: ${({ $currentColorScheme }) =>
       $currentColorScheme.main?.accent};
-    border: ${({ $currentColorScheme }) => $currentColorScheme.main?.accent};
+    border-color: ${({ $currentColorScheme }) =>
+      $currentColorScheme.main?.accent};
 
     ${(props) =>
       !props.isDisabled &&
@@ -90,7 +91,7 @@ const StyledButton = styled(Button)`
           opacity: 0.85;
           background: ${({ $currentColorScheme }) =>
             $currentColorScheme.main?.accent};
-          border: ${({ $currentColorScheme }) =>
+          border-color: ${({ $currentColorScheme }) =>
             $currentColorScheme.main?.accent};
         }
 
@@ -99,8 +100,8 @@ const StyledButton = styled(Button)`
             $currentColorScheme.main?.accent};
           background: ${({ $currentColorScheme }) =>
             $currentColorScheme.main?.accent};
-          border: ${({ $currentColorScheme }) =>
-            $currentColorScheme.main?.accent};
+          border-color: ${({ $currentColorScheme }) =>
+            $currentColorScheme.main?.accent} !important;
           opacity: 1;
           filter: brightness(90%);
           cursor: pointer;
@@ -136,6 +137,7 @@ const ArticleMainButtonContent = (props) => {
     startUpload,
     setAction,
     setSelectFileDialogVisible,
+    setMainButtonVisible,
     selectFileDialogVisible,
     selectFileFormRoomDialogVisible,
     setSelectFileFormRoomDialogVisible,
@@ -180,6 +182,8 @@ const ArticleMainButtonContent = (props) => {
     isWarningRoomsDialog,
     getContactsModel,
     contactsCanCreate,
+    setRefMap,
+    defaultOformLocale,
   } = props;
 
   const navigate = useNavigate();
@@ -206,7 +210,7 @@ const ArticleMainButtonContent = (props) => {
       const isPDF = format === "pdf";
 
       if (isPDF && isMobile) {
-        toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+        toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
         return;
       }
 
@@ -234,7 +238,7 @@ const ArticleMainButtonContent = (props) => {
 
   const onShowSelectFileDialog = React.useCallback(() => {
     if (isMobile) {
-      toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+      toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
       return;
     }
     setSelectFileDialogVisible(true);
@@ -256,7 +260,7 @@ const ArticleMainButtonContent = (props) => {
           if (f.length > 0) startUpload(f, null, t);
         })
         .catch((err) => {
-          toastr.error(err);
+          toastr.error(err, null, 0, true);
         });
     },
     [startUpload, t],
@@ -291,15 +295,18 @@ const ArticleMainButtonContent = (props) => {
 
   const onShowGallery = () => {
     if (isMobile) {
-      toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+      toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
       return;
     }
 
-    const initOformFilter = (
-      oformsFilter || oformsFilter.getDefault()
-    ).toUrlParams();
+    const initOformFilter = oformsFilter || oformsFilter.getDefault();
+    if (!initOformFilter.locale) initOformFilter.locale = defaultOformLocale;
+
     setOformFromFolderId(currentFolderId);
-    navigate(`/form-gallery/${currentFolderId}/filter?${initOformFilter}`);
+
+    navigate(
+      `/form-gallery/${currentFolderId}/filter?${initOformFilter.toUrlParams()}`,
+    );
   };
 
   React.useEffect(() => {
@@ -514,7 +521,7 @@ const ArticleMainButtonContent = (props) => {
       id: "actions_new-document",
       className: "main-button_drop-down",
       icon: ActionsDocumentsReactSvgUrl,
-      label: t("Files:Document"),
+      label: t("Common:Document"),
       onClick: onCreate,
       action: "docx",
       key: "docx",
@@ -524,7 +531,7 @@ const ArticleMainButtonContent = (props) => {
       id: "actions_new-spreadsheet",
       className: "main-button_drop-down",
       icon: SpreadsheetReactSvgUrl,
-      label: t("Files:Spreadsheet"),
+      label: t("Common:Spreadsheet"),
       onClick: onCreate,
       action: "xlsx",
       key: "xlsx",
@@ -534,7 +541,7 @@ const ArticleMainButtonContent = (props) => {
       id: "actions_new-folder",
       className: "main-button_drop-down",
       icon: CatalogFolderReactSvgUrl,
-      label: t("Files:Folder"),
+      label: t("Common:Folder"),
       onClick: onCreate,
       key: "new-folder",
     };
@@ -543,7 +550,7 @@ const ArticleMainButtonContent = (props) => {
       id: "actions_new-presentation",
       className: "main-button_drop-down",
       icon: ActionsPresentationReactSvgUrl,
-      label: t("Files:Presentation"),
+      label: t("Common:Presentation"),
       onClick: onCreate,
       action: "pptx",
       key: "pptx",
@@ -678,37 +685,49 @@ const ArticleMainButtonContent = (props) => {
     isMobileArticle,
   ]);
 
+  const isProfile = location.pathname.includes("/profile");
+
+  const getMainButtonVisible = () => {
+    let visibilityValue = true;
+
+    if (currentDeviceType === DeviceType.mobile) {
+      visibilityValue = !(
+        moveToPanelVisible ||
+        restorePanelVisible ||
+        copyPanelVisible ||
+        selectFileDialogVisible ||
+        selectFileFormRoomDialogVisible ||
+        versionHistoryPanelVisible
+      );
+    }
+
+    if (isProfile || (isAccountsPage && !contactsCanCreate)) {
+      visibilityValue = false;
+    }
+
+    if (!isAccountsPage) visibilityValue = security?.Create;
+
+    if (!isMobileArticle) visibilityValue = false;
+    return visibilityValue;
+  };
+
+  const mainButtonVisible = getMainButtonVisible();
+
+  useEffect(() => {
+    setMainButtonVisible(mainButtonVisible);
+  }, [mainButtonVisible]);
+
   const mainButtonText =
     isRoomAdmin && isAccountsPage ? t("Common:Invite") : t("Common:Actions");
 
   let isDisabled = false;
-  if (isFrame) {
-    isDisabled = disableActionButton;
-  } else if (isSettingsPage) {
+
+  if (isSettingsPage) {
     isDisabled = isSettingsPage;
   } else if (isAccountsPage) {
-    isDisabled = !contactsCanCreate;
+    isDisabled = (isFrame && disableActionButton) || !contactsCanCreate;
   } else {
-    isDisabled = !security?.Create;
-  }
-
-  const isProfile = location.pathname.includes("/profile");
-
-  let mainButtonVisible = true;
-
-  if (currentDeviceType === DeviceType.mobile) {
-    mainButtonVisible = !(
-      moveToPanelVisible ||
-      restorePanelVisible ||
-      copyPanelVisible ||
-      selectFileDialogVisible ||
-      selectFileFormRoomDialogVisible ||
-      versionHistoryPanelVisible
-    );
-  }
-
-  if (isAccountsPage && !contactsCanCreate) {
-    mainButtonVisible = false;
+    isDisabled = (isFrame && disableActionButton) || !security?.Create;
   }
 
   if (showArticleLoader)
@@ -717,21 +736,18 @@ const ArticleMainButtonContent = (props) => {
   return (
     <>
       {isMobileArticle ? (
-        !isProfile &&
-        (security?.Create || isAccountsPage) && (
-          <MobileView
-            t={t}
-            titleProp={t("Upload")}
-            actionOptions={actions}
-            buttonOptions={!isAccountsPage ? uploadActions : null}
-            withoutButton={isRoomsFolder || isAccountsPage}
-            withMenu={!isRoomsFolder}
-            mainButtonMobileVisible={
-              mainButtonMobileVisible ? mainButtonVisible : null
-            }
-            onMainButtonClick={onCreateRoom}
-          />
-        )
+        <MobileView
+          t={t}
+          titleProp={t("Upload")}
+          actionOptions={actions}
+          buttonOptions={!isAccountsPage ? uploadActions : null}
+          withoutButton={isRoomsFolder || isAccountsPage}
+          withMenu={!isRoomsFolder}
+          mainButtonMobileVisible={
+            mainButtonMobileVisible ? mainButtonVisible : null
+          }
+          onMainButtonClick={onCreateRoom}
+        />
       ) : isRoomsFolder ? (
         <StyledButton
           className="create-room-button"
@@ -757,6 +773,7 @@ const ArticleMainButtonContent = (props) => {
           text={mainButtonText}
           model={model}
           title={mainButtonText}
+          setRefMap={setRefMap}
         />
       )}
 
@@ -812,9 +829,10 @@ export default inject(
     filesActionsStore,
     currentQuotaStore,
     peopleStore,
+    guidanceStore,
   }) => {
     const { showArticleLoader } = clientLoadingStore;
-    const { mainButtonMobileVisible } = filesStore;
+    const { setRefMap } = guidanceStore;
     const {
       isPrivacyFolder,
       isFavoritesFolder,
@@ -843,6 +861,8 @@ export default inject(
 
     const { security } = selectedFolderStore;
 
+    const { mainButtonMobileVisible, setMainButtonVisible } = filesStore;
+
     const currentFolderId = selectedFolderStore.id;
     const currentRoomType = selectedFolderStore.roomType;
     const { parentRoomType } = selectedFolderStore;
@@ -852,7 +872,8 @@ export default inject(
 
     const { showWarningDialog, isWarningRoomsDialog } = currentQuotaStore;
 
-    const { setOformFromFolderId, oformsFilter } = oformsStore;
+    const { setOformFromFolderId, oformsFilter, defaultOformLocale } =
+      oformsStore;
     const { mainButtonItemsList } = pluginStore;
 
     const { frameConfig, isFrame } = settingsStore;
@@ -879,6 +900,7 @@ export default inject(
       setSelectFileDialogVisible,
       selectFileDialogVisible,
       setInvitePanelOptions,
+      setMainButtonVisible,
 
       currentFolderId,
       currentRoomType,
@@ -918,6 +940,8 @@ export default inject(
 
       getContactsModel: peopleStore.contextOptionsStore.getContactsModel,
       contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
+      setRefMap,
+      defaultOformLocale,
     };
   },
 )(

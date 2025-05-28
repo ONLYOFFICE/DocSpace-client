@@ -5,14 +5,12 @@
   "InvitationLanguage": "Језик позивнице",
   "InviteMembersManuallyDescription": "Позовите нове чланове у {{productName}} лично путем е-поште",
   "InviteMembersSearchPlaceholder": "Позовите чланове путем е-поште",
-  "InviteToRoomManuallyInfo": "Додајте постојеће контакте {{productName}}. Или позовите нове госте лично путем е-поште. Нови гости ће бити додати на вашу листу гостију.",
   "InviteToRoomSearchPlaceholder": "Претражи и позови по имену или емаил",
   "InviteViaLink": "Позови путем линка",
   "InviteViaLinkDescriptionAccounts": "Створите универзални линк за самопризнање у {{productName}}-у.",
-  "InviteViaLinkDescriptionRoom": "Створите универзални линк за самопризнање у соби",
   "LinkCopySuccess": "Линк је копиран",
-  "ResetChange": "Ресетуј промене",
   "SendInvitation": "Пошаљи позивницу",
   "UserMaxAvailableRoleWarning": "Гости и Корисници не могу бити постављени као Менаџери собе. Само администратори собе и {{productName}} су погодни за одређену улогу.",
-  "UsersAlreadyAdded": "Неки корисници су већ додати"
+  "UsersAlreadyAdded": "Неки корисници су већ додати",
+  "UsersCannotBeAdded": "Онемогућени контакти не могу бити додати у собу."
 }

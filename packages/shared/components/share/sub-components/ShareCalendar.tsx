@@ -63,9 +63,10 @@ const ShareCalendar = ({
     <DropDown
       className={styles.dropDown}
       open
-      isDefaultMode
+      isDefaultMode={false}
       forwardedRef={bodyRef}
       eventTypes={["mousedown"]}
+      withBackdrop={false}
     >
       {calendarComponent}
     </DropDown>

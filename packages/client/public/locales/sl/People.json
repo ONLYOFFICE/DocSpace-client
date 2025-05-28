@@ -1,5 +1,7 @@
 {
   "LblInviteAgain": "Povabi znova",
   "MessageEmailActivationInstuctionsSentOnEmail": "Navodila za aktivacijo e-mail naslova so bila poslana na <1>{{email}}</1> email naslov.",
+  "RemoveUser": "Odstrani uporabnika",
+  "RemoveUserConfirmationText": "Uporabnika boste odstranili iz sobe. Upoštevajte, da ta uporabnik aktivno sodeluje pri izpolnjevanju obrazcev. Če nadaljujete, bodo vsi obrazci, v katere je vključen, ustavljeni na trenutnem koraku.",
   "UserStatus": "Status"
 }

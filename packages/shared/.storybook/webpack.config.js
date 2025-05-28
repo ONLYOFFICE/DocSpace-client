@@ -1,8 +1,9 @@
-const CopyPlugin = require("copy-webpack-plugin");
+// const CopyPlugin = require("copy-webpack-plugin");
 const path = require("path");
 const ReactDocgenTypescriptPlugin =
   require("react-docgen-typescript-plugin").default;
-const pathToAssets = path.resolve(__dirname, "../../../public/images");
+const webpack = require("webpack");
+// const pathToAssets = path.resolve(__dirname, "../../../public/images");
 
 module.exports = ({ config }) => {
   const rules = config.module.rules;
@@ -15,6 +16,12 @@ module.exports = ({ config }) => {
   fileLoaderRule.exclude = /\.svg$/;
 
   config.plugins.push(new ReactDocgenTypescriptPlugin());
+
+  config.plugins.push(
+    new webpack.ProvidePlugin({
+      React: "react",
+    }),
+  );
 
   config.output.assetModuleFilename = (pathData) => {
     //console.log({ pathData });
@@ -61,7 +68,17 @@ module.exports = ({ config }) => {
         },
       },
       // Compiles Sass to CSS
-      "sass-loader",
+      {
+        loader: "sass-loader",
+        options: {
+          sourceMap: true,
+          implementation: require("sass"),
+          sassOptions: {
+            outputStyle: "compressed",
+            silenceDeprecations: ["legacy-js-api"],
+          },
+        },
+      },
     ],
   });
 

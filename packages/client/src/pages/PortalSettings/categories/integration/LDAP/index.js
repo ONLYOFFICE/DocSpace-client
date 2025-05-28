@@ -26,11 +26,10 @@
 
 import { useState, useEffect } from "react";
 import { isDesktop } from "react-device-detect";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-
+import { useNavigate } from "react-router";
 import { Text } from "@docspace/shared/components/text";
-import { Box } from "@docspace/shared/components/box";
 import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
 
@@ -55,6 +54,7 @@ const LDAP = ({
 }) => {
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
   const [isSmallWindow, setIsSmallWindow] = useState(false);
+  const navigate = useNavigate();
 
   const onCheckView = () => {
     if (isDesktop && window.innerWidth < 795) {
@@ -63,6 +63,9 @@ const LDAP = ({
       setIsSmallWindow(false);
     }
   };
+
+  const onGoToInvitationSettings = () =>
+    navigate(`/portal-settings/security/access-portal/invitation-settings`);
 
   useEffect(() => {
     isLdapAvailable && load(t);
@@ -74,19 +77,43 @@ const LDAP = ({
   }, [isLdapAvailable, load, t]);
 
   if (!isLoaded && isLdapAvailable) return <LdapLoader />;
+
+  const link = `${`${t("Settings:ManagementCategorySecurity")} > ${t("Settings:InvitationSettings")}.`}`;
+
   return (
     <StyledLdapPage isSmallWindow={isSmallWindow}>
-      <Text className="intro-text settings_unavailable">{t("LdapIntro")}</Text>
-      <Box marginProp="8px 0 24px 0">
-        <Link
-          color={currentColorScheme.main.accent}
-          isHovered
-          target="_blank"
-          href={ldapSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
-      </Box>
+      <Text className="intro-text settings_unavailable">
+        <Trans
+          t={t}
+          i18nKey="LdapIntro"
+          ns="Ldap"
+          values={{ productName: t("Common:ProductName"), link }}
+          components={{
+            1: (
+              <Link
+                fontSize="13px"
+                fontWeight="600"
+                lineHeight="20px"
+                color={currentColorScheme?.main?.accent}
+                isHovered
+                onClick={onGoToInvitationSettings}
+              />
+            ),
+          }}
+        />
+      </Text>
+      <div className="settings_unavailable-box">
+        {ldapSettingsUrl ? (
+          <Link
+            color={currentColorScheme.main.accent}
+            isHovered
+            target="_blank"
+            href={ldapSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
+      </div>
 
       {isMobileView ? (
         <LdapMobileView

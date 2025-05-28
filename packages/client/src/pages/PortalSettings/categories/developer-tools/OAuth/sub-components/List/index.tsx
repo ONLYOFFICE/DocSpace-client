@@ -30,8 +30,7 @@ import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import { Text } from "@docspace/shared/components/text";
 import { DeviceType } from "@docspace/shared/enums";
 import { Consumer } from "@docspace/shared/utils/context";
-import { LinkTarget, LinkType } from "@docspace/shared/components/link";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";
 
@@ -41,6 +40,7 @@ import TableView from "./TableView";
 import RowView from "./RowView";
 
 import { StyledContainer } from "./List.styled";
+import OAuthLoader from "./Loader";
 
 interface ListProps {
   clients: IClientProps[];
@@ -48,6 +48,7 @@ interface ListProps {
   currentDeviceType: DeviceType;
   apiOAuthLink: string;
   logoText: string;
+  isLoading: boolean;
 }
 
 const List = ({
@@ -56,6 +57,7 @@ const List = ({
   currentDeviceType,
   apiOAuthLink,
   logoText,
+  isLoading,
 }: ListProps) => {
   const { t } = useTranslation(["OAuth", "Common"]);
 
@@ -81,34 +83,40 @@ const List = ({
       >
         {descText}
       </Text>
-      <ColorTheme
-        target={LinkTarget.blank}
-        type={LinkType.page}
-        fontWeight={600}
-        isHovered
-        href={apiOAuthLink}
-        tag="a"
-        themeId={ThemeId.Link}
-        style={{ marginBottom: "20px" }}
-      >
-        {t("OAuth:OAuth")} {t("Common:Guide")}
-      </ColorTheme>
+      {apiOAuthLink ? (
+        <Link
+          target={LinkTarget.blank}
+          type={LinkType.page}
+          fontWeight={600}
+          isHovered
+          href={apiOAuthLink}
+          tag="a"
+          style={{ marginBottom: "20px" }}
+          color="accent"
+        >
+          {t("OAuth:OAuth")} {t("Common:Guide")}
+        </Link>
+      ) : null}
       <RegisterNewButton currentDeviceType={currentDeviceType} />
-      <Consumer>
-        {(context) =>
-          viewAs === "table" ? (
-            <TableView
-              items={clients || []}
-              sectionWidth={context.sectionWidth || 0}
-            />
-          ) : (
-            <RowView
-              items={clients || []}
-              sectionWidth={context.sectionWidth || 0}
-            />
-          )
-        }
-      </Consumer>
+      {isLoading ? (
+        <OAuthLoader viewAs={viewAs} />
+      ) : (
+        <Consumer>
+          {(context) =>
+            viewAs === "table" ? (
+              <TableView
+                items={clients || []}
+                sectionWidth={context.sectionWidth || 0}
+              />
+            ) : (
+              <RowView
+                items={clients || []}
+                sectionWidth={context.sectionWidth || 0}
+              />
+            )
+          }
+        </Consumer>
+      )}
     </StyledContainer>
   );
 };

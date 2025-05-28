@@ -27,7 +27,6 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { Box } from "@docspace/shared/components/box";
 import { StyledUsersInfoWrapper } from "../StyledDataImport";
 import { UsersInfoBlockProps } from "../types";
 
@@ -53,7 +52,7 @@ const UsersInfo = ({
           </Text>
         ) : null}
 
-        <Box className="users-info-wrapper">
+        <div className="users-info-wrapper">
           <Text className="selected-users-count" truncate>
             {t("Settings:SelectedUsersCounter", {
               selectedUsers: numberOfSelectedUsers,
@@ -78,7 +77,7 @@ const UsersInfo = ({
               </Text>
             }
           />
-        </Box>
+        </div>
       </StyledUsersInfoWrapper>
     )
   );

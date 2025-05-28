@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Tabs } from "@docspace/shared/components/tabs";
 
@@ -60,9 +60,15 @@ const MessagesDetails = ({ eventDetails }) => {
     });
   }
 
+  const [selectedItemId, setSelectedItemId] = useState(menuData[0].id);
+
   return (
     <TabsWrapper>
-      <Tabs items={menuData} />
+      <Tabs
+        items={menuData}
+        selectedItemId={selectedItemId}
+        onSelect={(e) => setSelectedItemId(e.id)}
+      />
     </TabsWrapper>
   );
 };

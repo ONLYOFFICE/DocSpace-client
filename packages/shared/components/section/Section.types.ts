@@ -24,9 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { Operation } from "../operations-progress-button/OperationsProgressButton.types";
 import { DeviceType } from "../../enums";
 import { TViewAs } from "../../types";
-import { FloatingButtonIcons } from "../floating-button";
+
 import { ContextMenuModel } from "../context-menu";
 
 export type SubInfoPanelHeaderProps = {
@@ -72,7 +73,7 @@ export type SectionBodyProps = {
 };
 
 export type SectionContainerProps = {
-  showTwoProgress?: boolean;
+  ref?: React.RefObject<HTMLDivElement | null>;
   isSectionHeaderAvailable: boolean;
   isInfoPanelVisible?: boolean;
   viewAs?: TViewAs;
@@ -119,15 +120,7 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     "children" | "isSectionHeaderAvailable" | "autoFocus" | "withScroll"
   > & {
     children: React.JSX.Element[];
-    showPrimaryProgressBar?: boolean;
-    primaryProgressBarValue?: number;
-    showPrimaryButtonAlert?: boolean;
     progressBarDropDownContent?: React.ReactNode;
-    primaryProgressBarIcon?: FloatingButtonIcons;
-    showSecondaryProgressBar?: boolean;
-    secondaryProgressBarValue?: number;
-    secondaryProgressBarIcon?: FloatingButtonIcons;
-    showSecondaryButtonAlert?: boolean;
     onOpenUploadPanel?: () => void;
     isTabletView?: boolean;
     isHeaderVisible?: boolean;
@@ -136,9 +129,23 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     maintenanceExist?: boolean;
     snackbarExist?: boolean;
     showText?: boolean;
-    clearUploadedFilesHistory?: () => void;
     isTrashFolder?: boolean;
     setIsInfoPanelVisible?: (value: boolean) => void;
+    secondaryOperationsCompleted?: boolean;
+    primaryOperationsCompleted?: boolean;
+    secondaryActiveOperations?: Operation[];
+    primaryOperationsArray?: Operation[];
+    clearSecondaryProgressData?: (
+      operationId?: string | null,
+      operation?: string | null,
+    ) => void;
+    clearPrimaryProgressData?: (operation?: string | null) => void;
+    cancelUpload?: (t: (key: string) => string) => void;
+    secondaryOperationsAlert?: boolean;
+    mainButtonVisible?: boolean;
+    primaryOperationsAlert?: boolean;
+    needErrorChecking?: boolean;
+    onCancelOperation?: (callback: () => void) => void;
   };
 
 export type SectionContextMenuProps = {

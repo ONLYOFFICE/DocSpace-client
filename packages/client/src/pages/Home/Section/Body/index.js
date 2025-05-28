@@ -30,12 +30,17 @@ import { observer, inject } from "mobx-react";
 
 import {
   clearEdgeScrollingTimer,
+  getFormFillingTipsStorageName,
   isMobile,
   isTablet,
   onEdgeScrolling,
 } from "@docspace/shared/utils";
 import { isElementInViewport } from "@docspace/shared/utils/common";
-import { DeviceType, VDRIndexingAction } from "@docspace/shared/enums";
+import {
+  DeviceType,
+  VDRIndexingAction,
+  RoomsType,
+} from "@docspace/shared/enums";
 import FilesRowContainer from "./RowsView/FilesRowContainer";
 import FilesTileContainer from "./TilesView/FilesTileContainer";
 import RoomNoAccessContainer from "../../../../components/EmptyContainer/RoomNoAccessContainer";
@@ -88,11 +93,37 @@ const SectionBodyContent = (props) => {
     isIndexEditingMode,
     changeIndex,
     isErrorRoomNotAvailable,
+    getSelectedFolder,
+    welcomeFormFillingTipsVisible,
+    formFillingTipsVisible,
+    roomType,
+    userId,
+    onEnableFormFillingGuid,
+    isArchiveFolderRoot,
   } = props;
 
   useEffect(() => {
     return () => window?.getSelection()?.removeAllRanges();
   }, []);
+
+  useEffect(() => {
+    const storageName = getFormFillingTipsStorageName(userId);
+
+    const closedFormFillingTips = localStorage.getItem(storageName);
+
+    if (isMobile()) {
+      return window.localStorage.setItem(storageName, "true");
+    }
+
+    if (
+      roomType === RoomsType.FormRoom &&
+      !closedFormFillingTips &&
+      userId &&
+      !isArchiveFolderRoot
+    ) {
+      onEnableFormFillingGuid(t, roomType);
+    }
+  }, [roomType, onEnableFormFillingGuid]);
 
   useEffect(() => {
     const customScrollElm = document.querySelector(
@@ -208,15 +239,18 @@ const SectionBodyContent = (props) => {
       indexSeparatorNode.setAttribute("style", separatorStyles);
       indexSeparatorNode.style.top = styles.top;
     }
-
     if (currentDroppable !== droppable) {
       if (currentDroppable) {
         if (viewAs === "table") {
           const value = currentDroppable.getAttribute("value");
           const classElements = document.getElementsByClassName(value);
 
-          classElements.forEach((cl) => {
-            cl.classList.remove("droppable-hover");
+          // add check for column with width = 0, because without it dark theme d`n`d have bug color
+          // 30 - it`s column padding
+          Array.from(classElements).forEach((cl) => {
+            if (cl.clientWidth - 30) {
+              cl.classList.add("droppable-hover");
+            }
           });
           if (isIndexEditingMode) {
             droppableSeparator.remove();
@@ -234,7 +268,7 @@ const SectionBodyContent = (props) => {
 
           // add check for column with width = 0, because without it dark theme d`n`d have bug color
           // 30 - it`s column padding
-          classElements.forEach((cl) => {
+          Array.from(classElements).forEach((cl) => {
             if (cl.clientWidth - 30) {
               cl.classList.add("droppable-hover");
             }
@@ -266,12 +300,9 @@ const SectionBodyContent = (props) => {
     }
   };
 
-  const onMoveTo = (destFolderId, title) => {
+  const onMoveTo = (destFolderId, title, destFolderInfo) => {
     const id = Number.isNaN(+destFolderId) ? destFolderId : +destFolderId;
-    moveDragItems(id, title, {
-      copy: t("Common:CopyOperation"),
-      move: t("Common:MoveToOperation"),
-    });
+    moveDragItems(id, title, destFolderInfo);
   };
 
   const onMouseUp = (e) => {
@@ -308,7 +339,13 @@ const SectionBodyContent = (props) => {
       ? value.split("_").slice(1, -3).join("_")
       : treeValue;
 
-    if (!isIndexEditingMode) return onMoveTo(selectedFolderId, title);
+    const selectedFolder = getSelectedFolder();
+    const destFolderInfo = selectedFolder.folders.find(
+      (folder) => folder.id == selectedFolderId,
+    );
+
+    if (!isIndexEditingMode)
+      return onMoveTo(selectedFolderId, title, destFolderInfo);
     if (filesList.length === 1) return;
 
     const replaceableItemId = Number.isNaN(+selectedFolderId)
@@ -395,7 +432,12 @@ const SectionBodyContent = (props) => {
 
   if (isEmptyFilesList && movingInProgress) return null;
 
-  if (isEmptyFilesList) return <EmptyContainer isEmptyPage={isEmptyPage} />;
+  if (
+    isEmptyFilesList &&
+    !welcomeFormFillingTipsVisible &&
+    !formFillingTipsVisible
+  )
+    return <EmptyContainer isEmptyPage={isEmptyPage} />;
 
   const FileViewComponent = fileViews[viewAs] ?? FilesRowContainer;
 
@@ -411,6 +453,9 @@ export default inject(
     filesActionsStore,
     uploadDataStore,
     indexingStore,
+    dialogsStore,
+    userStore,
+    contextOptionsStore,
   }) => {
     const {
       isEmptyFilesList,
@@ -434,6 +479,11 @@ export default inject(
       isErrorRoomNotAvailable,
     } = filesStore;
 
+    const { welcomeFormFillingTipsVisible, formFillingTipsVisible } =
+      dialogsStore;
+
+    const { onEnableFormFillingGuid } = contextOptionsStore;
+
     return {
       dragging,
       startDrag,
@@ -442,8 +492,10 @@ export default inject(
       isEmptyFilesList,
       setDragging,
       folderId: selectedFolderStore.id,
+      roomType: selectedFolderStore.roomType,
       setTooltipPosition,
       isRecycleBinFolder: treeFoldersStore.isRecycleBinFolder,
+      isArchiveFolderRoot: treeFoldersStore.isArchiveFolderRoot,
       moveDragItems: filesActionsStore.moveDragItems,
       changeIndex: filesActionsStore.changeIndex,
       viewAs,
@@ -463,10 +515,15 @@ export default inject(
       isEmptyPage,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
       isErrorRoomNotAvailable,
+      getSelectedFolder: selectedFolderStore.getSelectedFolder,
+      welcomeFormFillingTipsVisible,
+      formFillingTipsVisible,
+      userId: userStore?.user?.id,
+      onEnableFormFillingGuid,
     };
   },
 )(
-  withTranslation(["Files", "Common", "Translations"])(
+  withTranslation(["Files", "Common", "Translations", "FormFillingTipsDialog"])(
     withHotkeys(withLoader(observer(SectionBodyContent))()),
   ),
 );

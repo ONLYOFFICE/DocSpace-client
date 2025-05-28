@@ -51,8 +51,22 @@ export type TChangeUserTypeDialogData = {
   fromType: EmployeeType[];
   userIDs: string[];
   userNames: string[];
+  user?: {
+    id: string;
+    status: EmployeeStatus;
+    activationStatus: number;
+    statusType: string;
+    role: EmployeeType;
+    displayName?: string;
+  };
   successCallback?: (users?: TUser[]) => void;
   abortCallback?: VoidFunction;
+  getReassignmentProgress?: () => Promise<number>;
+  reassignUserData?: boolean;
+  cancelReassignment?: VoidFunction;
+  showDeleteProfileCheckbox?: boolean;
+  needReassignData?: boolean;
+  noRoomFilesToMove?: boolean;
 };
 
 export type TChangeUserStatusDialogData = {

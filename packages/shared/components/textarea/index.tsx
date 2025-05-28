@@ -29,7 +29,7 @@ import copy from "copy-to-clipboard";
 import classNames from "classnames";
 import TextareaAutosize from "react-autosize-textarea";
 
-import CopyIconUrl from "PUBLIC_DIR/images/copy.react.svg?url";
+import CopyIconUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
 import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 import { isJSON } from "../../utils/json";
@@ -191,6 +191,7 @@ const Textarea = ({
             {numerationValue}
           </pre>
         ) : null}
+        {/*  @ts-expect-error: Passing pointer events causes a React warning - "Unknown event handler". TextareaAutosize types are outdated */}
         <TextareaAutosize
           id={id}
           className={classNames(styles.textarea, {
@@ -217,8 +218,6 @@ const Textarea = ({
           dir="auto"
           data-dir={isRTL ? "rtl" : undefined}
           data-testid="textarea"
-          onPointerEnterCapture={() => {}}
-          onPointerLeaveCapture={() => {}}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
         />

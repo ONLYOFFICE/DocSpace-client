@@ -24,7 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useLayoutEffect,
+  useImperativeHandle,
+} from "react";
 import { isIOS, isMobile } from "react-device-detect";
 
 import ButtonAlertReactSvg from "PUBLIC_DIR/images/button.alert.react.svg";
@@ -44,25 +50,20 @@ import {
   ActionOption,
   ButtonOption,
   MainButtonMobileProps,
-  ProgressOption,
 } from "./MainButtonMobile.types";
-import { ProgressBarMobile } from "./sub-components/ProgressBar";
 
 const MainButtonMobile = (props: MainButtonMobileProps) => {
   const {
+    ref,
     className,
     style,
     opened,
     actionOptions,
-    progressOptions,
     buttonOptions,
-    percent,
-
     withoutButton,
     manualWidth,
     isOpenButton,
     onClose,
-
     alert,
     withMenu = true,
     onClick,
@@ -72,12 +73,11 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
   } = props;
 
   const [isOpen, setIsOpen] = useState(opened);
-  const [isUploading, setIsUploading] = useState(false);
+
   const [height, setHeight] = useState(`${window.innerHeight - 48}px`);
   const [openedSubmenuKey, setOpenedSubmenuKey] = useState("");
 
   const divRef = useRef<HTMLDivElement | null>(null);
-  const ref = useRef<HTMLDivElement | null>(null);
   const dropDownRef = useRef(null);
 
   const scrollElem = useRef<null | HTMLElement>(null);
@@ -85,28 +85,30 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
   const prevPosition = useRef<null | number>(null);
   const buttonBackground = useRef<boolean>(false);
 
+  const mainButtonRef = useRef<HTMLDivElement | null>(null);
+
+  useImperativeHandle(ref, () => ({
+    contains: (target: HTMLElement) => {
+      return mainButtonRef.current
+        ? mainButtonRef.current.contains(target)
+        : false;
+    },
+    getButtonElement: () => mainButtonRef,
+  }));
+
   useEffect(() => {
     setIsOpen(opened);
   }, [opened]);
 
-  const usePrevious = (value?: string) => {
-    const prevRef = useRef<string>();
-
-    useEffect(() => {
-      prevRef.current = value;
-    });
-
-    return prevRef.current;
-  };
-
-  const currentLocation = window.location.href;
-  const prevLocation = usePrevious(window.location.href);
-
   useEffect(() => {
-    if (prevLocation !== currentLocation) {
-      setIsOpen(false);
-    }
-  }, [prevLocation, currentLocation]);
+    const handlePopState = () => setIsOpen(false);
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
 
   const setDialogBackground = (scrollHeight: number) => {
     if (!buttonBackground) {
@@ -189,7 +191,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
 
   useLayoutEffect(() => {
     recalculateHeight();
-  }, [isOpen, isOpenButton, isUploading, recalculateHeight]);
+  }, [isOpen, isOpenButton, recalculateHeight]);
 
   useEffect(() => {
     window.addEventListener("resize", recalculateHeight);
@@ -203,7 +205,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
       onClose();
     }
 
-    return setIsOpen(value);
+    setIsOpen(value);
   };
 
   const onMainButtonClick = (e: React.MouseEvent) => {
@@ -217,19 +219,14 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
 
   const outsideClick = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
-    if (isOpen && ref.current && ref.current.contains(target)) return;
+    if (
+      isOpen &&
+      mainButtonRef?.current &&
+      mainButtonRef?.current?.contains(target)
+    )
+      return;
     toggle(false);
   };
-
-  React.useEffect(() => {
-    if (progressOptions) {
-      const openProgressOptions = progressOptions.filter(
-        (option: ProgressOption) => option.open,
-      );
-
-      setIsUploading(openProgressOptions.length > 0);
-    }
-  }, [progressOptions]);
 
   const noHover = isMobile;
 
@@ -277,30 +274,6 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
           })}
         </div>
 
-        <div
-          className={classNames(styles.progressContainer, {
-            [styles.isUploading]: isUploading,
-          })}
-        >
-          {progressOptions
-            ? progressOptions.map((option: ProgressOption) => (
-                <ProgressBarMobile
-                  key={option.key}
-                  label={option.label}
-                  icon={option.icon || ""}
-                  className={option.className}
-                  percent={option.percent || 0}
-                  status={option.status}
-                  open={option.open || false}
-                  onCancel={option.onCancel}
-                  onClickAction={option.onClick}
-                  hideButton={() => toggle(false)}
-                  error={option.error}
-                />
-              ))
-            : null}
-        </div>
-
         {buttonOptions ? (
           <div
             className={classNames(styles.buttonOptions, {
@@ -308,6 +281,11 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
             })}
           >
             {buttonOptions?.map((option: ButtonOption) => {
+              const optionOnClickAction = () => {
+                toggle(false);
+                option.onClick?.();
+              };
+
               if (option.items) {
                 return (
                   <SubmenuItem
@@ -340,7 +318,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
                     "drop-down-item-button",
                   )}
                   key={option.key}
-                  onClick={option.onClick}
+                  onClick={optionOnClickAction}
                 />
               );
             })}
@@ -356,18 +334,16 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
     <>
       <Backdrop zIndex={210} visible={isOpen || false} onClick={outsideClick} />
       <div
-        ref={ref}
+        ref={mainButtonRef}
         className={className}
         style={{ zIndex: `${isOpen ? "211" : "201"}`, ...style }}
         data-testid="main-button-mobile"
       >
         <FloatingButton
+          className={classNames(styles.floatingButton)}
           icon={isOpen ? FloatingButtonIcons.minus : FloatingButtonIcons.plus}
           onClick={onMainButtonClick}
-          percent={isOpen ? 0 : percent}
-          className={classNames(styles.floatingButton, {
-            [styles.hideLoading]: percent === 0 || percent === 100 || isOpen,
-          })}
+          withoutProgress
         />
 
         <DropDown
@@ -407,5 +383,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
     </>
   );
 };
+
+MainButtonMobile.displayName = "MainButtonMobile";
 
 export { MainButtonMobile };

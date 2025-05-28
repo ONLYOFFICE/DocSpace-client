@@ -35,7 +35,7 @@ import { inject, observer } from "mobx-react";
 import { DeviceType } from "@docspace/shared/enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "@docspace/shared/constants";
 import { setCookie } from "@docspace/shared/utils/cookie";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { isMobileDevice, isBetaLanguage } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Text } from "@docspace/shared/components/text";
@@ -144,6 +144,8 @@ const LanguageAndTimeZoneComponent = (props) => {
   };
 
   const checkChanges = () => {
+    if (!state.timezoneDefault || !state.languageDefault) return;
+
     let hasChanged = false;
 
     settingNames.forEach((settingName) => {
@@ -179,11 +181,7 @@ const LanguageAndTimeZoneComponent = (props) => {
       initSettings(page).then(() => setIsLoaded(true));
     }
 
-    const isLoadedSetting =
-      isLoaded &&
-      tReady &&
-      timezoneFromSessionStorage &&
-      languageFromSessionStorage;
+    const isLoadedSetting = isLoaded && tReady && timezoneFromSessionStorage;
 
     if (isLoadedSetting) {
       setIsLoadedLngTZSettings(isLoadedSetting);
@@ -315,6 +313,7 @@ const LanguageAndTimeZoneComponent = (props) => {
         newCultureNames[0];
 
       const selectedLanguageDefault =
+        languageDefaultFromSessionStorage ||
         findSelectedItemByKey(newCultureNames, portalLanguage) ||
         newCultureNames[0];
 
@@ -400,23 +399,22 @@ const LanguageAndTimeZoneComponent = (props) => {
   };
 
   const onSaveClick = () => {
-    const { translate, selectedLanguage, selectedTimezone } = state;
     const { setLanguageAndTime, user, language: lng } = props;
 
     setState((val) => ({ ...val, isLoading: true }));
-    setLanguageAndTime(selectedLanguage.key, selectedTimezone.key)
+    setLanguageAndTime(state.language.key, state.timezone.key)
       .then(() => {
         !user.cultureName &&
-          setCookie(LANGUAGE, selectedLanguage.key || "en", {
+          setCookie(LANGUAGE, state.language.key || "en", {
             "max-age": COOKIE_EXPIRATION_YEAR,
           });
-        window.timezone = selectedTimezone.key;
+        window.timezone = state.timezone.key;
       })
-      .then(() => toastr.success(translate("SuccessfullySaveSettingsMessage")))
+      .then(() => toastr.success(t("Common:SuccessfullySaveSettingsMessage")))
       .then(
         () =>
           !user.cultureName &&
-          lng !== selectedLanguage.key &&
+          lng !== state.language.key &&
           window.location.reload(),
       )
       .catch((error) => toastr.error(error))
@@ -429,8 +427,8 @@ const LanguageAndTimeZoneComponent = (props) => {
       languageDefault: state.language,
     }));
 
-    saveToSessionStorage("languageDefault", selectedLanguage);
-    saveToSessionStorage("timezoneDefault", selectedTimezone);
+    saveToSessionStorage("languageDefault", state.language);
+    saveToSessionStorage("timezoneDefault", state.timezone);
   };
 
   const onCancelClick = () => {
@@ -522,6 +520,7 @@ const LanguageAndTimeZoneComponent = (props) => {
     <StyledSettingsComponent
       hasScroll={hasScroll}
       className="category-item-wrapper"
+      withoutExternalLink={!languageAndTimeZoneSettingsUrl}
     >
       {isCustomizationView && !isMobileView ? (
         <div className="category-item-heading">
@@ -539,15 +538,17 @@ const LanguageAndTimeZoneComponent = (props) => {
         <Text>
           <Trans t={t} i18nKey="TimeLanguageSettingsSave" />
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={languageAndTimeZoneSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {languageAndTimeZoneSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={languageAndTimeZoneSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
       {settingsBlock}
       <SaveCancelButtons

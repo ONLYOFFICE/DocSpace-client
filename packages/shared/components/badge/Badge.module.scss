@@ -1,5 +1,5 @@
-@import "../../styles/variables/index.scss";
-@import "../../styles/_mixins.scss";
+@use "../../styles/variables";
+@use "../../styles/mixins";
 
 .badge {
   display: flex;
@@ -30,7 +30,7 @@
     border-radius: 6px;
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     &[data-version-badge="true"] {
       width: auto;
     }
@@ -64,7 +64,11 @@
 
 .text {
   white-space: nowrap;
-  color: var(--badge-color) !important;
+  color: var(--badge-color);
+
+  &[data-color="false"] {
+    color: var(--badge-color) !important;
+  }
 }
 
 .themed {

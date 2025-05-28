@@ -34,25 +34,33 @@ import styles from "./Settings.module.scss";
 const speed = 2;
 
 export const SettingsDSConnectSkeleton = () => {
-  const firstComponent = (
-    <div>
-      <div>
-        <RectangleSkeleton
-          height="22"
-          width="56"
-          backgroundColor={LOADER_STYLE.backgroundColor}
-          foregroundColor={LOADER_STYLE.foregroundColor}
-          backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-          foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-          speed={speed}
-          animate
-        />
-      </div>
+  const fieldComponent = (
+    <div className="rectangle-loader_field-wrapper">
+      <RectangleSkeleton
+        height="20"
+        width="215"
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
+        speed={speed}
+        animate
+      />
 
       <RectangleSkeleton
-        className="rectangle-loader-2"
-        height="46"
-        width="348"
+        height="32"
+        className="rectangle-loader_input"
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
+        speed={speed}
+        animate
+      />
+
+      <RectangleSkeleton
+        height="15"
+        width="150"
         backgroundColor={LOADER_STYLE.backgroundColor}
         foregroundColor={LOADER_STYLE.foregroundColor}
         backgroundOpacity={LOADER_STYLE.backgroundOpacity}
@@ -63,103 +71,39 @@ export const SettingsDSConnectSkeleton = () => {
     </div>
   );
 
-  // const secondComponent = (
-  //   <div>
-  //     <RectangleSkeleton
-  //       height="20"
-  //       width="101"
-  //       backgroundColor={LOADER_STYLE.backgroundColor}
-  //       foregroundColor={LOADER_STYLE.foregroundColor}
-  //       backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-  //       foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-  //       speed={speed}
-  //       animate
-  //     />
-  //     <RectangleSkeleton
-  //       className="rectangle-loader-2"
-  //       height="32"
-  //       backgroundColor={LOADER_STYLE.backgroundColor}
-  //       foregroundColor={LOADER_STYLE.foregroundColor}
-  //       backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-  //       foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-  //       speed={speed}
-  //       animate
-  //     />
-  //   </div>
-  // );
-  // const thirdComponent = (
-  //   <div>
-  //     <RectangleSkeleton
-  //       height="20"
-  //       width="138"
-  //       backgroundColor={LOADER_STYLE.backgroundColor}
-  //       foregroundColor={LOADER_STYLE.foregroundColor}
-  //       backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-  //       foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-  //       speed={speed}
-  //       animate
-  //     />
-  //     <RectangleSkeleton
-  //       className="rectangle-loader-2"
-  //       height="32"
-  //       backgroundColor={LOADER_STYLE.backgroundColor}
-  //       foregroundColor={LOADER_STYLE.foregroundColor}
-  //       backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-  //       foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-  //       speed={speed}
-  //       animate
-  //     />
-  //   </div>
-  // );
+  const descriptionComponents = (
+    <div className="rectangle-loader_description">
+      <RectangleSkeleton
+        height="16"
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
+        speed={speed}
+        animate
+      />
+      <RectangleSkeleton
+        height="16"
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
+        speed={speed}
+        animate
+      />
+      <RectangleSkeleton
+        height="16"
+        width="300"
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
+        speed={speed}
+        animate
+      />
+    </div>
+  );
 
-  // const checkboxComponent = (
-  //   <div className="rectangle-loader_checkbox">
-  //     <RectangleSkeleton
-  //       height="16"
-  //       width="16"
-  //       backgroundColor={LOADER_STYLE.backgroundColor}
-  //       foregroundColor={LOADER_STYLE.foregroundColor}
-  //       backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-  //       foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-  //       speed={speed}
-  //       animate
-  //     />
-  //     <RectangleSkeleton
-  //       height="22"
-  //       width="101"
-  //       backgroundColor={LOADER_STYLE.backgroundColor}
-  //       foregroundColor={LOADER_STYLE.foregroundColor}
-  //       backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-  //       foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-  //       speed={speed}
-  //       animate
-  //     />
-  //   </div>
-  // );
-  // const secondCheckboxComponent = (
-  //   <div className="rectangle-loader_checkbox">
-  //     <RectangleSkeleton
-  //       height="16"
-  //       width="16"
-  //       backgroundColor={LOADER_STYLE.backgroundColor}
-  //       foregroundColor={LOADER_STYLE.foregroundColor}
-  //       backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-  //       foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-  //       speed={speed}
-  //       animate
-  //     />
-  //     <RectangleSkeleton
-  //       height="20"
-  //       width="70"
-  //       backgroundColor={LOADER_STYLE.backgroundColor}
-  //       foregroundColor={LOADER_STYLE.foregroundColor}
-  //       backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-  //       foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-  //       speed={speed}
-  //       animate
-  //     />
-  //   </div>
-  // );
   const buttonsComponent = (
     <div className="rectangle-loader_buttons">
       <RectangleSkeleton
@@ -182,12 +126,43 @@ export const SettingsDSConnectSkeleton = () => {
       />
     </div>
   );
+
   return (
-    <div className={styles.smtpContent}>
+    <div className={styles.dsConnect}>
+      {descriptionComponents}
+
+      <RectangleSkeleton
+        className="rectangle-loader_link"
+        height="20"
+        width="75"
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
+        speed={speed}
+        animate
+      />
+
+      {fieldComponent}
+
+      <RectangleSkeleton
+        className="rectangle-loader_checkbox"
+        height="20"
+        width="270"
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
+        speed={speed}
+        animate
+      />
+
+      {fieldComponent}
+
       <RectangleSkeleton
         className="rectangle-loader_title"
         height="22"
-        width="128"
+        width="250"
         backgroundColor={LOADER_STYLE.backgroundColor}
         foregroundColor={LOADER_STYLE.foregroundColor}
         backgroundOpacity={LOADER_STYLE.backgroundOpacity}
@@ -195,21 +170,6 @@ export const SettingsDSConnectSkeleton = () => {
         speed={speed}
         animate
       />
-
-      <RectangleSkeleton
-        className="rectangle-loader_description"
-        height="40"
-        backgroundColor={LOADER_STYLE.backgroundColor}
-        foregroundColor={LOADER_STYLE.foregroundColor}
-        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
-        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
-        speed={speed}
-        animate
-      />
-
-      {firstComponent}
-      {firstComponent}
-      {firstComponent}
 
       {buttonsComponent}
     </div>

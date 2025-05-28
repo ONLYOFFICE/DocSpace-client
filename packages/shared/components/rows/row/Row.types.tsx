@@ -24,8 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { VDRIndexingAction } from "enums";
+import { VDRIndexingAction } from "../../../enums";
 import { ContextMenuModel } from "../../context-menu";
+
+export type RowItemType = {
+  icon?: string;
+  avatar?: string;
+  title?: string;
+  displayName?: string;
+  logo?: {
+    color?: string;
+    medium?: string;
+    cover?: string;
+    small?: string;
+    large?: string;
+  };
+};
 
 export type TData = {
   contextOptions: ContextMenuModel[];
@@ -36,9 +50,9 @@ export type TMode = "modern" | "default";
 export type RowProps = {
   /** Required for hosting the Checkbox component. Its location is always fixed in the first position.
    * If there is no value, the occupied space is distributed among the other child elements. */
-  checked: boolean;
+  checked?: boolean;
   /** Displays the child elements */
-  children?: React.ReactNode;
+  children?: React.ReactElement<{ item: RowItemType }>;
   /** Accepts class */
   className?: string;
   /** Required for displaying a certain element in the row */
@@ -74,7 +88,7 @@ export type RowProps = {
   /** Removes the borders */
   withoutBorder?: boolean;
   /** Required for index editing mode */
-  isIndexEditingMode: boolean;
+  isIndexEditingMode?: boolean;
   /** Indicates if the row represents a room */
   isRoom?: boolean;
   /** Title for the context menu */
@@ -90,5 +104,7 @@ export type RowProps = {
   /** Disables checkbox */
   isDisabled?: boolean;
   /** Callback for changing index */
-  onChangeIndex: (action: VDRIndexingAction) => void;
+  onChangeIndex?: (action: VDRIndexingAction) => void;
+  /** The item data for the row */
+  item?: RowItemType;
 };

@@ -39,7 +39,13 @@ import { isDesktop } from "@docspace/shared/utils";
 const StyledBodyContent = styled.div`
   .backup-codes-counter {
     margin-top: 16px;
+    margin-bottom: 4px;
     color: ${(props) => props.theme.client.settings.security.tfa.textColor};
+  }
+
+  .backup-codes-code {
+    font-weight: 600;
+    line-height: 20px;
   }
 `;
 
@@ -97,27 +103,36 @@ class BackupCodesDialogComponent extends React.Component {
         <ModalDialog.Header>{t("BackupCodesTitle")}</ModalDialog.Header>
         <ModalDialog.Body>
           <StyledBodyContent id="backup-codes-print-content">
-            <Text className="backup-codes-description-one">
+            <Text className="backup-codes-description-one" lineHeight="20px">
               {t("BackupCodesDescription")}
             </Text>
-            <Text className="backup-codes-description-two">
+            <Text className="backup-codes-description-two" lineHeight="20px">
               {t("BackupCodesSecondDescription")}
             </Text>
 
-            <Text className="backup-codes-counter" fontWeight={600}>
+            <Text
+              className="backup-codes-counter"
+              fontWeight={600}
+              lineHeight="20px"
+            >
               {backupCodesCount} {t("CodesCounter")}
             </Text>
 
             <Text className="backup-codes-codes" isBold>
               {backupCodes.length > 0
-                ? backupCodes.forEach((item) => {
+                ? backupCodes.map((item) => {
                     if (!item.isUsed) {
                       return (
-                        <strong key={item.code} dir="auto">
+                        <strong
+                          key={item.code}
+                          className="backup-codes-code"
+                          dir="auto"
+                        >
                           {item.code} <br />
                         </strong>
                       );
                     }
+                    return null;
                   })
                 : null}
             </Text>

@@ -30,8 +30,9 @@ import {
   EmployeeType,
   RoomsType,
   ShareAccessRights,
+  FileType,
 } from "../../enums";
-import { MergeTypes, Nullable } from "../../types";
+import { MergeTypes, Nullable, WithFlag } from "../../types";
 
 import { TFileSecurity, TFolderSecurity } from "../../api/files/types";
 import { TRoomSecurity, ICover } from "../../api/rooms/types";
@@ -43,7 +44,6 @@ import { TTabItem } from "../tabs";
 import { SelectorAccessRightsMode } from "./Selector.enums";
 
 // header
-
 type THeaderBackButton =
   | {
       onBackClick: () => void;
@@ -69,7 +69,9 @@ export type TInfoBar = {
 };
 
 export type InfoBarProps = {
+  ref?: React.RefObject<HTMLDivElement | null>;
   visible: boolean;
+  className?: string;
 };
 
 export type BreadCrumbsProps = {
@@ -82,12 +84,13 @@ export type HeaderProps = {
   isCloseable?: boolean;
 } & THeaderBackButton;
 
-export type TSelectorHeader =
-  | {
-      withHeader: true;
-      headerProps: HeaderProps;
-    }
-  | { withHeader?: undefined; headerProps?: undefined };
+export type TSelectorHeader = WithFlag<
+  "withHeader",
+  {
+    withHeader: true;
+    headerProps: HeaderProps;
+  }
+>;
 
 // bread crumbs
 type TOnBreadCrumbClick = ({
@@ -119,73 +122,74 @@ export type TDisplayedItem = {
   listItems?: TBreadCrumb[];
 };
 
-export type TSelectorBreadCrumbs =
-  | {
-      withBreadCrumbs: true;
-      isBreadCrumbsLoading: boolean;
-      breadCrumbs: TBreadCrumb[];
-      breadCrumbsLoader: React.ReactNode;
-
-      onSelectBreadCrumb: (item: TBreadCrumb) => void;
-    }
-  | {
-      withBreadCrumbs?: undefined;
-      isBreadCrumbsLoading?: undefined;
-      breadCrumbs?: undefined;
-      breadCrumbsLoader?: undefined;
-
-      onSelectBreadCrumb?: undefined;
-    };
+export type TSelectorBreadCrumbs = WithFlag<
+  "withBreadCrumbs",
+  {
+    withBreadCrumbs: true;
+    isBreadCrumbsLoading: boolean;
+    breadCrumbs: TBreadCrumb[];
+    breadCrumbsLoader: React.ReactNode;
+    onSelectBreadCrumb: (item: TBreadCrumb) => void;
+  }
+>;
 
 // tabs
-export type TSelectorTabs =
-  | { withTabs: true; tabsData: TTabItem[]; activeTabId: string }
-  | { withTabs?: undefined; tabsData?: undefined; activeTabId?: undefined };
+export type TSelectorTabs = WithFlag<
+  "withTabs",
+  {
+    withTabs: true;
+    tabsData: TTabItem[];
+    activeTabId: string;
+  }
+>;
 
 // select all
-export type TSelectorSelectAll =
-  | {
-      withSelectAll: true;
-      selectAllLabel: string;
-      selectAllIcon: string;
-      onSelectAll: () => void;
-    }
-  | {
-      withSelectAll?: undefined;
-      selectAllLabel?: undefined;
-      selectAllIcon?: undefined;
-      onSelectAll?: undefined;
-    };
+export type SelectAllProps = {
+  show: boolean;
+  isLoading: boolean;
+  rowLoader: React.ReactNode;
+};
 
+export type TSelectorSelectAll = WithFlag<
+  "withSelectAll",
+  {
+    withSelectAll: true;
+    selectAllLabel: string;
+    selectAllIcon: string;
+    onSelectAll: () => void;
+  }
+>;
 // search
+export type SearchProps = {
+  isSearch: boolean;
+};
 
-export type TSelectorSearch =
-  | {
-      withSearch: true;
-      searchLoader: React.ReactNode;
-      isSearchLoading: boolean;
-      searchPlaceholder?: string;
-      searchValue?: string;
-      onSearch: (value: string, callback?: VoidFunction) => void;
-      onClearSearch: (callback?: VoidFunction) => void;
-    }
-  | {
-      withSearch?: undefined;
-      searchLoader?: undefined;
-      isSearchLoading?: undefined;
-      searchPlaceholder?: string;
-      searchValue?: string;
-      onSearch?: undefined;
-      onClearSearch?: undefined;
-    };
+export type TSelectorSearch = WithFlag<
+  "withSearch",
+  {
+    withSearch: true;
+    searchLoader: React.ReactNode;
+    isSearchLoading: boolean;
+    searchPlaceholder?: string;
+    searchValue?: string;
+    onSearch: (value: string, callback?: VoidFunction) => void;
+    onClearSearch: (callback?: VoidFunction) => void;
+  }
+>;
+
+// empty screen form room
+export type EmptyScreenFormRoomProps = {
+  onCreateClickAction: VoidFunction;
+  createDefineRoomType: RoomsType;
+};
 
 // empty screen
-export interface EmptyScreenProps {
+export type EmptyScreenProps = {
   withSearch: boolean;
 
   items: TSelectorItem[];
   inputItemVisible: boolean;
-}
+};
 
 export type TSelectorEmptyScreen = {
   emptyScreenImage: string;
@@ -195,6 +199,54 @@ export type TSelectorEmptyScreen = {
   searchEmptyScreenImage: string;
   searchEmptyScreenHeader: string;
   searchEmptyScreenDescription: string;
+};
+
+// Pagination
+
+type TSelectorPagination = {
+  items: TSelectorItem[];
+  rowLoader: React.ReactNode;
+  hasNextPage: boolean;
+  isNextPageLoading: boolean;
+  totalItems: number;
+  isLoading: boolean;
+};
+
+// NewItem
+export type NewItemProps = {
+  label: string;
+  style: React.CSSProperties;
+  dropDownItems?: React.ReactElement[];
+  onCreateClick?: VoidFunction;
+  hotkey?: string;
+  inputItemVisible?: boolean;
+  listHeight: number;
+};
+
+// NewItemDropDown
+export type NewItemDropDownProps = {
+  dropDownItems: React.ReactElement[];
+  isEmpty?: boolean;
+  onCloseDropDown: (e?: MouseEvent) => void;
+  listHeight?: number;
+};
+
+// InputItem
+type TBaseInputProps = {
+  style: React.CSSProperties;
+  placeholder?: string;
+  color?: string;
+  icon?: string;
+};
+
+export type InputItemProps = TBaseInputProps & {
+  defaultInputValue: string;
+  onAcceptInput: (value: string) => void;
+  onCancelInput: VoidFunction;
+  roomType?: RoomsType;
+  cover?: ICover;
+  setInputItemVisible: (value: boolean) => void;
+  setSavedInputValue: (value: Nullable<string>) => void;
 };
 
 // submit button
@@ -218,19 +270,15 @@ type TSelectorFooterSubmitButton = Omit<TSelectorSubmitButton, "onSubmit"> & {
 
 // cancel button
 
-export type TSelectorCancelButton =
-  | {
-      withCancelButton: true;
-      cancelButtonLabel: string;
-      onCancel: () => void;
-      cancelButtonId?: string;
-    }
-  | {
-      withCancelButton?: undefined;
-      cancelButtonLabel?: undefined;
-      onCancel?: undefined;
-      cancelButtonId?: undefined;
-    };
+export type TSelectorCancelButton = WithFlag<
+  "withCancelButton",
+  {
+    withCancelButton: true;
+    cancelButtonLabel: string;
+    onCancel: () => void;
+    cancelButtonId?: string;
+  }
+>;
 
 // access rights
 
@@ -239,6 +287,7 @@ export type TAccessRight = {
   label: string;
   description?: string;
   access: string | number;
+  isSeparator?: boolean;
 };
 
 type TWithAccessRightsProps = {
@@ -249,52 +298,38 @@ type TWithAccessRightsProps = {
   accessRightsMode?: SelectorAccessRightsMode;
 };
 
-type TWithoutAccessRightsProps = {
-  withAccessRights?: undefined;
-  accessRights?: undefined;
-  selectedAccessRight?: undefined;
-  onAccessRightsChange?: undefined;
-  accessRightsMode?: undefined;
-};
+export type TSelectorWithAside = WithFlag<
+  "useAside",
+  {
+    useAside: true;
+    onClose: VoidFunction;
+    withoutBackground?: boolean;
+    withBlur?: boolean;
+  }
+>;
 
-export type TSelectorWithAside =
-  | {
-      useAside: true;
-      onClose: VoidFunction;
-      withoutBackground?: boolean;
-      withBlur?: boolean;
-    }
-  | {
-      useAside?: undefined;
-      onClose?: undefined;
-      withoutBackground?: undefined;
-      withBlur?: undefined;
-    };
-
-export type TSelectorAccessRights =
-  | TWithAccessRightsProps
-  | TWithoutAccessRightsProps;
+export type TSelectorAccessRights = WithFlag<
+  "withAccessRights",
+  TWithAccessRightsProps
+>;
 
 export type AccessSelectorProps = Omit<
   TWithAccessRightsProps,
   "withAccessRights"
 > & {
-  footerRef: React.RefObject<HTMLDivElement>;
+  footerRef: React.RefObject<HTMLDivElement | null>;
 };
 
 // footer input
 
-export type TSelectorInput =
-  | {
-      withFooterInput: true;
-      footerInputHeader: string;
-      currentFooterInputValue: string;
-    }
-  | {
-      withFooterInput?: undefined;
-      footerInputHeader?: undefined;
-      currentFooterInputValue?: undefined;
-    };
+export type TSelectorInput = WithFlag<
+  "withFooterInput",
+  {
+    withFooterInput: true;
+    footerInputHeader: string;
+    currentFooterInputValue: string;
+  }
+>;
 
 export type TSelectorFooterInput = TSelectorInput & {
   setNewFooterInputValue: React.Dispatch<React.SetStateAction<string>>;
@@ -302,25 +337,27 @@ export type TSelectorFooterInput = TSelectorInput & {
 
 // footer checkbox
 
-export type TSelectorCheckbox =
-  | {
-      withFooterCheckbox: true;
-      footerCheckboxLabel: string;
-      isChecked: boolean;
-    }
-  | {
-      withFooterCheckbox?: undefined;
-      footerCheckboxLabel?: undefined;
-      isChecked?: boolean;
-    };
+export type TSelectorCheckbox = WithFlag<
+  "withFooterCheckbox",
+  {
+    withFooterCheckbox: true;
+    footerCheckboxLabel: string;
+    isChecked: boolean;
+  }
+>;
 
 export type TSelectorFooterCheckbox = TSelectorCheckbox & {
   setIsFooterCheckboxChecked: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export type TSelectorInfo =
-  | { withInfo: true; infoText: string }
-  | { withInfo?: undefined; infoText?: undefined };
+export type TSelectorInfo = WithFlag<
+  "withInfo",
+  {
+    withInfo: true;
+    infoText: string;
+    withInfoBadge?: boolean;
+  }
+>;
 
 export type TRenderCustomItem = (
   label: string,
@@ -343,12 +380,12 @@ export type SelectorProps = TSelectorHeader &
   TSelectorAccessRights &
   TSelectorInput &
   TSelectorCheckbox &
-  TSelectorWithAside & {
+  TSelectorWithAside &
+  TSelectorPagination & {
     id?: string;
     className?: string;
     style?: React.CSSProperties;
 
-    items: TSelectorItem[];
     onSelect?: (
       item: TSelectorItem,
       isDoubleClick: boolean,
@@ -360,12 +397,6 @@ export type SelectorProps = TSelectorHeader &
 
     disableFirstFetch?: boolean;
     loadNextPage: (startIndex: number) => Promise<void>;
-    hasNextPage: boolean;
-    isNextPageLoading: boolean;
-    totalItems: number;
-    isLoading: boolean;
-
-    rowLoader: React.ReactNode;
 
     renderCustomItem?: TRenderCustomItem;
 
@@ -373,36 +404,38 @@ export type SelectorProps = TSelectorHeader &
     descriptionText?: string;
 
     withPadding?: boolean;
+    injectedElement?: React.ReactElement;
+
+    isSSR?: boolean;
+    selectedItem?: TSelectorItem | null; // no multiSelect only
   };
 
-export type BodyProps = TSelectorInfo & {
-  footerVisible: boolean;
-  withHeader?: boolean;
-  withPadding?: boolean;
+export type BodyProps = TSelectorInfo &
+  TSelectorPagination & {
+    footerVisible: boolean;
+    withHeader?: boolean;
+    withPadding?: boolean;
 
-  value?: string;
+    value?: string;
 
-  isMultiSelect: boolean;
+    isMultiSelect: boolean;
 
-  inputItemVisible: boolean;
-  setInputItemVisible: (value: boolean) => void;
+    inputItemVisible: boolean;
+    setInputItemVisible: (value: boolean) => void;
 
-  items: TSelectorItem[];
-  renderCustomItem?: TRenderCustomItem;
-  onSelect: (item: TSelectorItem, isDoubleClick: boolean) => void;
+    renderCustomItem?: TRenderCustomItem;
+    onSelect: (item: TSelectorItem, isDoubleClick: boolean) => void;
 
-  loadMoreItems: (startIndex: number) => void;
-  hasNextPage: boolean;
-  isNextPageLoading: boolean;
-  totalItems: number;
-  isLoading: boolean;
+    loadMoreItems: (startIndex: number) => void;
 
-  rowLoader: React.ReactNode;
+    withFooterInput?: boolean;
+    withFooterCheckbox?: boolean;
+    descriptionText?: string;
+    withInfoBadge?: boolean;
+    injectedElement?: React.ReactElement;
 
-  withFooterInput?: boolean;
-  withFooterCheckbox?: boolean;
-  descriptionText?: string;
-};
+    isSSR?: boolean;
+  };
 
 export type FooterProps = TSelectorFooterSubmitButton &
   TSelectorCancelButton &
@@ -431,6 +464,7 @@ type TSelectorItemEmpty = {
   status?: undefined;
   access?: undefined;
   fileExst?: undefined;
+  fileType?: undefined;
   shared?: undefined;
   parentId?: undefined;
   rootFolderType?: undefined;
@@ -481,6 +515,7 @@ export type TSelectorItemFile = MergeTypes<
   TSelectorItemEmpty,
   {
     fileExst: string;
+    fileType: FileType;
     parentId: string | number;
     rootFolderType: string | number;
     security: TFileSecurity;
@@ -578,6 +613,7 @@ export type TSelectorItem = TSelectorItemType & {
   disabledText?: string;
   lifetimeTooltip?: string | null;
   viewUrl?: string;
+  isTemplate?: boolean;
 };
 
 export type Data = {

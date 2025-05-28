@@ -75,6 +75,8 @@ export interface ClientFormProps {
 
   setClientSecretProps?: (value: string) => void;
   clientSecretProps?: string;
+
+  setJwtToken?: OAuthStore["setJwtToken"];
 }
 
 export interface ClientStore {

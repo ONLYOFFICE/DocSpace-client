@@ -1,0 +1,526 @@
+{
+  "key_path": "HistorySubmissionDate",
+  "content": "Submitted their part. The form was sent to the next role.",
+  "content_en_sha1_hash": "25d6df1a12d798516c51580f39929ec2f2c02654",
+  "created_at": "2025-05-19T21:30:45.791Z",
+  "updated_at": "2025-05-26T07:57:32.907Z",
+  "comment": {
+    "text": "This translation key is used to display the date when a filling form was submitted. It appears on the \"History\" panel within a filling role process, indicating a milestone in the process. The translated text will be shown instead of the original date value.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:55.684Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/filling-role-process/sub-components/role-histories/RoleHistories.tsx",
+      "line_number": 52,
+      "context": "return {\n [FillingFormStatusHistory.OpenedAtDate.toString()]: t(\n \"Common:HistoryOpenedAtDate\",\n ),\n [FillingFormStatusHistory.SubmissionDate.toString()]: t(\n \"Common:HistorySubmissionDate\",\n ),\n [FillingFormStatusHistory.StopDate.toString()]: (\n <Trans\n t={t}\n i18nKey=\"HistoryStopDate\"",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Submitted their part' is not accurately translated. 'أكملوا الجزء المخصص لهم' translates to 'They completed the assigned part.' While close, 'submitted' implies an action of sending, which isn't fully captured.",
+          "suggestion": "أرسلوا الجزء الخاص بهم (Arsalaoo al-juz' al-khaas bihim) - 'They submitted their part.'"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'The form was sent to the next role' is not entirely accurate.  'تم إرسال النموذج إلى الدور التالي' translates to 'The form was sent to the next role'. While understandable, it might be improved for clarity.",
+          "suggestion": "تم إرسال النموذج إلى المرحلة التالية (Tumma irsaal an-namoothaj ila al-marahel at-taaliyah) - 'The form was sent to the next stage.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Submitted their part\" is translated as \"Öz hissələrini təqdim etdi\". While technically correct, it's a bit formal and doesn't fully capture the casual tone of 'Submitted their part'. A more natural translation might be \"Hissələrini göndərib\" or \"Hissəsini verib\".",
+          "suggestion": "Hissələrini göndərib"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"The form was sent to the next role\" is translated as \"Forma növbəti rola göndərildi.\" While accurate, \"role\" could be better contextualized. Depending on the system, it could be a 'department' or 'user'.",
+          "suggestion": "Forma növbəti bölmədə/istifadəçiyə göndərildi."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Submitted their part\" is not perfectly captured by \"Предаде своята част\". While \"Предаде\" means 'submitted' or 'handed over', \"своята част\" is more literally \"their part\". A more natural translation for 'submitted their part' could be something like 'Изпратиха своята част' (Sent their part) or 'Предадоха своята част' emphasizing completion.",
+          "suggestion": "Изпратиха своята част"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'The form was sent to the next role' is translated as 'Формулярът беше изпратен на следващата роля'. While technically correct, it's somewhat stiff. A more natural translation might be 'Формулярът беше препратен към следващата роля' (The form was forwarded to the next role) or 'Формулярът беше изпратен към следващия етап' (The form was sent to the next stage).",
+          "suggestion": "Формулярът беше препратен към следващата роля"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Submitted their part' is best translated as 'Odevzdal svou část.' or 'Odevzdala svou část.', depending on the gender of the submitter. 'Odevzdal/a svou část' is a grammatically correct, but awkward way to represent both genders in one phrase. Since the English phrasing doesn't specify gender, it is safer to leave it ambiguous, or consider adding clarification in a broader context if possible.",
+          "suggestion": "Consider rephrasing to 'Odevzdal svou část' or 'Odevzdala svou část' depending on context, or clarify the gender in broader documentation."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'The form was sent to the next role' is adequately translated as 'Formulář byl odeslán do další role.' However, 'sent' in this context implies an active action, which may be more accurately translated as 'Formulář byl předán do další role.' ('The form was handed over to the next role').",
+          "suggestion": "Consider 'Formulář byl předán do další role.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Das Formular abgeschickt. Die Datei wurde an die nächste Rolle gesendet.\" doesn't fully capture the meaning of \"Submitted their part. The form was sent to the next role.\"  'Submitted their part' implies contribution and doesn't directly translate to just 'Formular abgeschickt' (form sent). 'Datei' (file) is also a less accurate representation of 'form'.",
+          "suggestion": "A more accurate translation could be: \"Ihr Teil eingereicht. Das Formular wurde an die nächste Rolle weitergeleitet.\" or \"Ihre Bearbeitung wurde eingereicht. Das Formular wurde an die nächste Rolle weitergeleitet.\""
+        },
+        {
+          "type": "grammatical",
+          "description": "While technically correct, \"Das Formular abgeschickt\" lacks a subject and verb, making it feel incomplete in German. It's more natural to have a subject and verb.",
+          "suggestion": "Consider adding a subject like \"Jemand hat das Formular abgeschickt\" or restructuring the sentence."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Submitted their part\" is not accurately translated. \"Υποβλήθηκε το δικό τους μέρος\" literally translates to 'Their part was submitted', which is passive and less natural than an active voice would be. A more accurate translation would convey that someone submitted the part.",
+          "suggestion": "Consider translating \"Submitted their part\" as something like \"Έστειλαν το δικό τους μέρος\" (They sent their part) or \"Έχει υποβληθεί το δικό τους μέρος\" (Their part has been submitted) depending on the desired nuance."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of 'ρόλο' (rolo) for 'role' is technically correct, but in this context, 'θέση' (thesi - position) might be more natural and convey the intended meaning better. 'Ρόλος' often implies a more theatrical or defined role.",
+          "suggestion": "Consider changing 'στον επόμενο ρόλο' to 'στην επόμενη θέση'."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Submitted their part' is not accurately translated. 'Su parte' implies possession, whereas the English refers to the action of submitting. A better translation would convey the action itself.",
+          "suggestion": "Envió su parte."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'The form was sent to the next role' is not perfectly aligned with the meaning. 'Siguiente rol' feels slightly more formal than the original English implies.",
+          "suggestion": "El formulario fue enviado al siguiente responsable."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Submitted their part\" is not accurately translated. \"Lähetti osansa\" translates to 'Sent their part,' which is close but doesn't quite capture the 'submitted' meaning, which implies a formal process. It lacks the implied formality.",
+          "suggestion": "Consider a translation like \"Jätti osansa\" (Delivered their part) or \"Toimitti osansa\" (Provided/Submitted their part) to better reflect the meaning of 'Submitted'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"The form was sent to the next role\" is adequately translated, but could be slightly improved for flow and clarity. \"Lomake lähetettiin seuraavalle roolille\" is literal and slightly awkward.",
+          "suggestion": "Consider \"Lomake siirrettiin seuraavalle roolille\" (The form was transferred to the next role) or \"Lomake lähetettiin eteenpäin seuraavalle roolille\" (The form was sent on to the next role) to create a more natural-sounding Finnish sentence."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Submitted their part' is not perfectly conveyed by 'Ils ont soumis leur section'. 'Part' implies a specific portion of something, whereas 'section' is more general. A more accurate translation might be 'Ils ont soumis leur contribution' or 'Ils ont soumis leur portion'.",
+          "suggestion": "Ils ont soumis leur contribution"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'The form was sent to the next role' is adequately translated, but 'rôle' can sometimes sound formal in this context. Depending on the overall tone of the application, a more colloquial phrasing might be better.",
+          "suggestion": "Le formulaire a été envoyé à l'étape suivante"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Submitted their part\" is not accurately translated. \"Ներկայացրել է իր մասը\" literally translates to \"Presented their part\". While close, 'submitted' implies a more formal action of submitting something for processing, which 'presented' doesn't fully convey.",
+          "suggestion": "Consider using a more precise translation for 'submitted', such as 'Պարտադրել է իր մասը' (p'artadr'el e ir masë) - 'Completed their part' or 'Արձակել է իր մասը' (ardzakel e ir masë) - 'Released their part' depending on the exact context."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"The form was sent to the next role\" is adequately translated, but could be slightly more natural in Armenian. The phrasing is a bit literal.",
+          "suggestion": "Consider rephrasing \"Ձևը ուղարկվել է հաջորդ դերին\" to something like \"Ձևը փոխանցվել է հաջորդ դերին\" (tevë ugharkvel e hajord derin) – 'The form was transferred to the next role' or \"Ձևը հասել է հաջորդ դերին\" (tevë hasel e hajord derin) - 'The form reached the next role'."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Submitted their part\" is not accurately conveyed by \"Parte completata\". \"Submitted\" implies an action of sending something, which \"Parte completata\" (part completed) does not. A better translation would capture the submission aspect.",
+          "suggestion": "Inviata la loro parte"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"The form was sent to the next role\" is not accurately conveyed by \"e inviata al ruolo successivo\". While the general meaning is present, the formality and specific meaning of \"form\" is lost.  The use of \"e\" is also somewhat clunky.",
+          "suggestion": "e inviato il modulo al ruolo successivo"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence is a bit disjointed. Combining the phrases more smoothly would improve readability. The 'e' connecting the two parts feels abrupt.",
+          "suggestion": "Parte completata e il modulo è stato inviato al ruolo successivo."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Submitted their part\" is not accurately reflected in the Japanese translation \"割り当てられた部分を提出しました\". \"割り当てられた部分を提出しました\" translates more to \"Submitted the assigned part\". The original implies the submission of *their* contribution, not necessarily a pre-assigned portion.",
+          "suggestion": "Consider a translation that emphasizes the submission of their contribution, such as \"それぞれの部分を提出しました\" (Sorezore no bubun o teishutsu shimashita) which means \"Submitted their respective parts\"."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'The form was sent to the next role' is translated as 'フォームは次の役割に送信されました'. While technically correct, it's quite formal. Depending on the intended tone, a more natural phrasing could be used.",
+          "suggestion": "Consider a slightly less formal phrasing for 'The form was sent to the next role', such as 'フォームは次の担当者に送られました' (Fōmu wa tsugi no tantōsha ni okuraremashita), meaning 'The form was sent to the next person in charge.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Submitted their part' is translated as '해당 부분이 제출되었습니다.' While technically correct, it sounds overly formal and less natural in Korean. 'Submitted their part' implies a user action, and a more natural translation would reflect that.",
+          "suggestion": "제출했습니다 (Jeonmulhaesseumnida) - 'They submitted it' - which better conveys the user action of submitting."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'The form was sent to the next role' is translated as '양식이 다음 역할에게 전송되었습니다.' '전송되었습니다' (jeonsongdoesseumnida) implies a system-initiated transfer, whereas 'sent to the next role' implies a more passive action by a person or process. A more natural translation might capture the delegation aspect.",
+          "suggestion": "다음 역할로 전달되었습니다 (Daeum yeokhal-ro jeondaeul-yeotseumnida) - 'It was passed to the next role'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Submitted their part\" is not accurately reflected in \"ຍື່ນ​ສະ​ເຫນີ​ພາກ​ສ່ວນ​ຂອງ​ເຂົາ​ເຈົ້າ.\". While \"ຍື່ນ​ສະ​ເຫນີ​ພາກ​ສ່ວນ​ຂອງ​ເຂົາ​ເຈົ້າ\" translates to \"Submitted part of their own,\" it lacks the nuance of a submission action. A more accurate translation might involve a verb emphasizing sending or submitting.",
+          "suggestion": "Consider using a verb like 'ສົ່ງ' (song - to send) or a more nuanced term depending on the precise meaning of 'Submitted their part'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"The form was sent to the next role\" is reasonably translated as \"ແບບຟອມຖືກສົ່ງໄປຫາບົດບາດຕໍ່ໄປ.\", but \"ບົດບາດຕໍ່ໄປ\" (bot bat tor pai) could be more accurately conveyed depending on context. 'Role' can have several interpretations.  Perhaps specifying a 'person' or 'responsibility' would improve clarity.",
+          "suggestion": "Consider clarifying 'ບົດບາດຕໍ່ໄປ' to be more precise depending on the nature of the 'next role'. For instance, 'ຄົນຕໍ່ໄປ' (kon tor pai - next person) or 'ຄວາມຮັບຜິດຊອບຕໍ່ໄປ' (khwam rap pit sop tor pai - next responsibility)."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Submitted their part\" is not accurately reflected in \"Iesniedza savu daļu\". While 'iesniedza' means 'submitted', 'savu daļu' directly translates to 'their part'. The original English implies a contribution or submission made by a person or group. A more accurate translation might be 'Iesniedza savu ieguldījumu' (Submitted their contribution) or 'Iesniedza darbu' (Submitted the work).",
+          "suggestion": "Consider using 'Iesniedza savu ieguldījumu' or 'Iesniedza darbu' instead of 'Iesniedza savu daļu'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'The form was sent to the next role' is not perfectly captured by 'Veidlapa tika nosūtīta nākamajai lomai'. The English implies a formal process, while the Latvian is quite literal. A more contextually appropriate translation could be 'Veidlapa tika nosūtīta nākamajam apstiprinājumam' (The form was sent for the next approval) or 'Veidlapa tika nosūtīta tālāk' (The form was sent further).",
+          "suggestion": "Consider using 'Veidlapa tika nosūtīta nākamajam apstiprinājumam' or 'Veidlapa tika nosūtīta tālāk'."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Submitted their part\" is best translated with a more precise term related to form submission. \"Przesłał(-a) swoją część\" is too generic and doesn't convey the formal nature of form submission.",
+          "suggestion": "Złsali formularz (They submitted the form)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"The form was sent to the next role\" loses some of its specific meaning. 'Rola' is not an ideal translation for a role in a workflow or a role someone fulfills in a process.",
+          "suggestion": "Formularz został przekazany do kolejnej osoby/kolejnego etapu."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Submitted their part' is not perfectly captured by 'Submeteu a sua parte'. While 'submeteu' means 'submitted', 'a sua parte' is a bit literal. A more natural translation might be 'Entregou a sua parte' or 'Cumpreu a sua parte'.",
+          "suggestion": "Entregou a sua parte"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'The form was sent to the next role' is not perfectly captured by 'O formulário foi enviado para a função seguinte'. 'Função seguinte' can sound a bit formal or technical. A more natural translation would depend on the specific context of 'role', but could be 'para a próxima etapa' (next step) or 'para o próximo responsável' (next responsible person).",
+          "suggestion": "para a próxima etapa"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Submitted their part' is better translated as 'Submeteram sua parte' or 'Entregaram sua parte' in Portuguese (Brazil) to accurately convey the meaning of submitting something. 'Enviou sua parte' implies sending, not necessarily submitting.",
+          "suggestion": "Submeteram sua parte"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'The form was sent to the next role' is a bit awkward. A more natural Portuguese translation would be something like 'O formulário foi encaminhado para a próxima etapa' or 'O formulário foi enviado para o próximo responsável'.",
+          "suggestion": "O formulário foi encaminhado para a próxima etapa"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Submitted their part\" is not accurately translated. \"A trimis fragmentul desemnat\" implies a designated fragment, which isn't the intended meaning. It should reflect the act of submission.",
+          "suggestion": "A depus partea sa / Au depus partea lor."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"next role\" is translated as \"utilizatorul cu rolul următor.\" This is too literal and sounds awkward. It doesn't accurately convey the meaning of the form being passed on.",
+          "suggestion": "următorului pas / următorului utilizator / următoarei etape"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, \"A trimis fragmentul desemnat. Formularul a fost trimis către...\" feels disjointed. A better flow might be achieved by merging the sentences.",
+          "suggestion": "Fragmentul a fost trimis către utilizatorul cu rolul următor / Fragmentul a fost depus și formularul a fost trimis către..."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Submitted their part' is not accurately reflected by 'Направил свою часть'. 'Submitted' implies a more formal submission than 'Направил', which is more like 'forwarded' or 'sent'. It lacks the sense of completion and official handover.",
+          "suggestion": "Consider alternatives like 'Предоставил свою часть' (Provided their part) or 'Отправил свою часть' (Sent their part), depending on the desired level of formality."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'The form was sent to the next role' is translated as 'Форма была отправлена участнику в следующей роли'. While understandable, it doesn't capture the nuance of 'next role'. The term 'участнику' (participant) might not be the best fit. It implies someone actively involved, whereas 'next role' suggests a process or stage.",
+          "suggestion": "Consider 'Форма была отправлена на следующий этап' (The form was sent to the next stage) or 'Форма была отправлена для обработки следующим сотрудником' (The form was sent for processing by the next employee)."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Submitted their part' is not accurately conveyed by 'ඔවුන්ගේ කොටස ඉදිරිපත් කළා.'. 'ඔවුන්ගේ කොටස ඉදිරිපත් කළා.' literally translates to 'They submitted their part.'  It lacks the sense of *who* submitted. A better translation would reflect that someone submitted.",
+          "suggestion": "තමයින් කොටස ඉදිරිපත් කළා (Tamayin kotasa idiripath kala - Someone submitted their part) or වෙනත් අයෙකු කොටස ඉදිරිපත් කළා (Venath ayakuen kotasa idiripath kala - Another person submitted their part)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'The form was sent to the next role' is not entirely accurate. 'පෝරමය ඊළඟ භූමිකාවට යවන ලදී.' translates to 'The form was sent to the next role.' This lacks a sense of *who* sent it.",
+          "suggestion": "පෝරමය ඊළඟ භූමිකාවට යවන ලදී. (Poramaya eelaga bhoomikavata yavana ladei. - The form was sent to the next role.) This can be improved by including who sent it, e.g., 'අපි පෝරමය ඊළඟ භූමිකාවට යවන ලදී.' (Api poramaya eelaga bhoomikavata yavana ladei - We sent the form to the next role)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Submitted their part\" is not perfectly captured by \"Odoslal svoju časť\". \"Their part\" implies a collective or group submission. \"Odoslal svoju časť\" translates to \"Sent their part,\" which is technically correct but lacks the nuance of the English original. A more accurate translation might consider phrasing that implies responsibility or completion of a specific task within a larger effort.",
+          "suggestion": "Consider alternatives like \"Vypracoval/a svoju časť\" (Completed their part) or \"Poslal/a svoju časť\" (Sent their part - more literally) depending on the desired emphasis."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'The form was sent to the next role' is translated as 'Formulár bol zaslaný ďalšej role.' While grammatically correct, 'role' in this context likely refers to a person or position. 'Ďalej role' feels slightly awkward. A more natural phrasing might be 'ďalej osobe' (to the next person) or 'ďalšej osobe' (to the next person).",
+          "suggestion": "Consider 'Formulár bol zaslaný ďalšej osobe' (The form was sent to the next person)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Submitted their part' implies a submission of a portion of a larger task or project. The Slovenian 'Oddali svoj del' translates literally to 'They gave away their part' which is not quite the intended meaning. A more accurate translation might be 'Poslali so svoj del' (They sent their part) or 'Predložili so svoj del' (They submitted their part).",
+          "suggestion": "Predložili so svoj del."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'The form was sent to the next role' is a bit ambiguous. 'Role' can mean a person or a function. 'Naslednji vlogi' translates to 'next role (dative case)'. While grammatically correct, it's not entirely clear whether it refers to a person or a stage in a workflow. A more specific translation could improve clarity.",
+          "suggestion": "Obrazec je bil poslan naslednji osebi.' (The form was sent to the next person.) or 'Obrazec je bil poslan naslednjemu koraku.' (The form was sent to the next step.)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Submitted their part\" is best translated as \"Урађено је њихов део\" or \"Послали су свој део\" rather than \"Послао је свој део.\" The original sentence uses a plural subject (“their part”), while the translation uses a singular subject. This changes the meaning slightly.",
+          "suggestion": "Урађено је њихов део."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"The form was sent to the next role\" could be more accurately translated to convey the action of forwarding. \"Образац је прослеђен следећој улози\" is more appropriate than \"Образац је послат следећој улози\" as it implies a process of passing the form on.",
+          "suggestion": "Образац је прослеђен следећој улози."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Submitted their part' is translated as 'Poslao je svoj deo'. While not entirely wrong, 'Poslao je svoj deo' implies a singular person submitted something. The original English implies a group or multiple people. A more accurate translation would consider that.",
+          "suggestion": "Poslali su svoj deo."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'The form was sent to the next role' is translated as 'Obrazac je poslat sledećoj ulozi'. While grammaticaly correct, 'poslat' implies passive voice. While passive voice is sometimes used, a more active and direct translation might be preferred.",
+          "suggestion": "Obrazac je prosleđen sledećoj ulozi."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Submitted their part\" is not accurately reflected in \"Kendi kısmını gönderdi.\" While \"gönderdi\" means 'sent', \"Kendi kısmını\" can be interpreted as 'their own part'. A more accurate translation might convey the action of submission.",
+          "suggestion": "Gönderim yapıldı. (Submission was made.) or Gönderilen kısmı tamamladı. (Completed and submitted their part.)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"The form was sent to the next role\" is rendered as \"Form bir sonraki role gönderildi.\" While technically correct, it's less natural. The Turkish phrase 'role' can sound slightly awkward in this context.",
+          "suggestion": "Form, bir sonraki aşamaya iletildi. (The form was forwarded to the next stage.) or Form, bir sonraki rolün sorumluluğuna devredildi. (The form was transferred to the responsibility of the next role.)"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Submitted their part\" implies an action completed by a user or entity. The Ukrainian translation \"Надіслано свою частину\" (Nadyslano svoyu chastynu) is passive voice (\"their part was submitted\") which loses some of the agency conveyed in the original. A more direct translation capturing the user's action would be preferable.",
+          "suggestion": "Відправили свою частину (Vidpravyly svoyu chastynu) - 'They sent their part'"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Форму надіслано наступній ролі\" (Formu nadyslano nastupniy roli) is grammatically correct, it's a bit formal and passive. The English \"The form was sent to the next role\" sounds somewhat formal as well, but the Ukrainian could be made slightly more natural. \"Надіслали форму наступній ролі\" (Nadyślaly formu nastupniy roli) is a slightly more active voice and perhaps a better match in tone.",
+          "suggestion": "Надіслали форму наступній ролі (Nadyślaly formu nastupniy roli)"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Submitted their part' is not accurately reflected in the translation '已提交他们填写的部分'. '他们填写的部分' (the part they filled) implies a specific portion, whereas 'Submitted their part' is more general, meaning they completed their assigned task.",
+          "suggestion": "已提交他们的工作 (Yǐ tíjiāo tāmen de gōngzuò) - Submitted their work."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, '表单已发送至下一个角色' (Form has been sent to the next role) sounds slightly formal and could be improved for natural flow.  It also lacks clarity - is it 'sent to' a person or a system?",
+          "suggestion": "表单已发送给下一个环节 (Biǎo dān yǐ fāsòng gěi xià yī gè huánjì) - The form has been sent to the next stage."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

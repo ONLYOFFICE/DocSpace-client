@@ -54,7 +54,7 @@ const Tabs = (props: TabsProps) => {
     ? 0
     : items.findIndex((item) => item.id === selectedItemId);
 
-  const [currentItem, setCurrentItem] = useState(selectedItemIndex);
+  // const [currentItem, setCurrentItem] = useState(selectedItemIndex);
   const [multipleItems, setMultipleItems] = useState(selectedItems);
 
   const tabsRef = useRef<HTMLDivElement>(null);
@@ -114,10 +114,10 @@ const Tabs = (props: TabsProps) => {
   );
 
   useEffect(() => {
-    if (!multiple) setCurrentItem(selectedItemIndex);
+    // if (!multiple) setCurrentItem(selectedItemIndex);
 
     scrollToTab(selectedItemIndex);
-  }, [selectedItemIndex, items, scrollToTab, multiple]);
+  }, [selectedItemIndex, items, scrollToTab, /* multiple, */ type]);
 
   const setSelectedItem = (selectedTabItem: TTabItem, index: number): void => {
     if (multiple) {
@@ -143,7 +143,7 @@ const Tabs = (props: TabsProps) => {
       return;
     }
 
-    setCurrentItem(index);
+    // setCurrentItem(index);
     onSelect?.(selectedTabItem);
 
     scrollToTab(index);
@@ -160,7 +160,7 @@ const Tabs = (props: TabsProps) => {
       {items.map((item, index) => {
         const isSelected = multiple
           ? multipleItems.indexOf(index) !== -1
-          : index === currentItem;
+          : index === selectedItemIndex;
 
         return (
           <div
@@ -174,6 +174,7 @@ const Tabs = (props: TabsProps) => {
               classes,
             )}
             onClick={() => {
+              if (index === selectedItemIndex) return;
               item.onClick?.();
               setSelectedItem(item, index);
             }}
@@ -204,7 +205,7 @@ const Tabs = (props: TabsProps) => {
       {!multiple ? (
         <div
           data-sticky
-          className={classNames(styles.sticky, "sticky")}
+          className={classNames(styles.sticky, classes, "sticky")}
           style={{ top: stickyTop }}
         >
           {!isViewFirstTab ? <div className={styles.blurAhead} /> : null}
@@ -212,6 +213,7 @@ const Tabs = (props: TabsProps) => {
             ref={scrollRef}
             autoHide={false}
             noScrollY
+            paddingInlineEnd="0"
             className={classNames(styles.scroll, classes)}
           >
             {renderContent}
@@ -220,9 +222,9 @@ const Tabs = (props: TabsProps) => {
         </div>
       ) : null}
       <div className={classNames(styles.stickyIndent, "sticky-indent")} />
-      {!multiple && items[currentItem]?.content ? (
+      {!multiple && items[selectedItemIndex]?.content ? (
         <div className={`${styles.tabsBody} tabs-body`}>
-          {items[currentItem].content}
+          {items[selectedItemIndex].content}
         </div>
       ) : null}
     </div>

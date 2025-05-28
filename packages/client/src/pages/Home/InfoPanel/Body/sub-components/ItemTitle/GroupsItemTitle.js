@@ -78,7 +78,7 @@ const GroupsItemTitle = ({
         </div>
         {groupName ? (
           <Text className="info-text__email" title={infoPanelSelection.email}>
-            {t("PeopleTranslations:PeopleCount", {
+            {t("PeopleTranslations:MembersCount", {
               count: infoPanelSelection.membersCount,
             })}
           </Text>
@@ -95,7 +95,6 @@ const GroupsItemTitle = ({
               fontSize="9px"
               fontWeight={800}
               noHover
-              lineHeight="13px"
             />
             <Tooltip anchorSelect={`div[id='ldap-badge-info-panel'] div`}>
               {t("PeopleTranslations:LDAPGroupTooltip")}

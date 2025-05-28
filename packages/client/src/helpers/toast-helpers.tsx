@@ -26,8 +26,7 @@
 
 import { Trans } from "react-i18next";
 
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import { LinkTarget } from "@docspace/shared/components/link";
+import { Link, LinkTarget } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { TTranslation } from "@docspace/shared/types";
 import { TFolder } from "@docspace/shared/api/files/types";
@@ -41,16 +40,16 @@ export const showSuccessExportRoomIndexToast = (
   const toastMessage = (
     <Trans
       t={t}
-      i18nKey="FileExportedToMyDocuments"
+      i18nKey="FileExportDestination"
       ns="Files"
-      values={{ fileName }}
+      values={{ fileName, sectionName: t("Common:MyFilesSection") }}
       components={{
         1: (
-          <ColorTheme
+          <Link
             tag="a"
-            themeId={ThemeId.Link}
             href={fileUrl}
             target={openOnNewPage ? LinkTarget.blank : LinkTarget.self}
+            color="accent"
           />
         ),
       }}
@@ -73,11 +72,11 @@ export const showSuccessCreateFolder = (
       values={{ folderTitle: item.title }}
       components={{
         1: (
-          <ColorTheme
+          <Link
             tag="a"
-            themeId={ThemeId.Link}
             onClick={() => onOpenFolder({ ...item, isFolder: true })}
             target={LinkTarget.self}
+            color="accent"
           />
         ),
       }}

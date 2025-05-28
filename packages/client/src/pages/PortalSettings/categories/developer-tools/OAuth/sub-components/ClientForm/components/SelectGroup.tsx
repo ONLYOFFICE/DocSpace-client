@@ -92,18 +92,7 @@ const SelectGroup = ({
           alt="img"
           src={value}
         />
-        <SelectorAddButton onClick={onClick} />
-        <Text
-          fontSize="13px"
-          fontWeight={600}
-          lineHeight="20px"
-          tag=""
-          as="p"
-          color=""
-          textAlign=""
-        >
-          {selectLabel}
-        </Text>
+        <SelectorAddButton onClick={onClick} label={selectLabel} />
       </div>
       <Text
         fontSize="12px"

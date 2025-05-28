@@ -28,6 +28,8 @@
 
 import React from "react";
 
+import { classNames } from "@docspace/shared/utils";
+
 import { ButtonKeys } from "../../enums";
 
 import { Aside } from "../aside";
@@ -36,8 +38,8 @@ import { Backdrop } from "../backdrop";
 import { Header } from "./sub-components/Header";
 import { Body } from "./sub-components/Body";
 import { Footer } from "./sub-components/Footer";
+import styles from "./Selector.module.scss";
 
-import { StyledSelector } from "./Selector.styled";
 import {
   TAccessRight,
   SelectorProps,
@@ -147,6 +149,11 @@ const Selector = ({
   onClose,
   withBlur,
   withoutBackground,
+  withInfoBadge,
+  injectedElement,
+
+  isSSR,
+  selectedItem: selectedItemProp,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
 
@@ -454,7 +461,10 @@ const Selector = ({
         (selectedItems && selectedItems.length === 0) ||
         !isMultiSelect
       ) {
-        const cloneItems = items.map((x) => ({ ...x, isSelected: false }));
+        const cloneItems = items.map((x) => ({
+          ...x,
+          isSelected: Boolean(selectedItemProp && selectedItemProp.id === x.id),
+        }));
 
         return setRenderedItems(cloneItems);
       }
@@ -474,7 +484,7 @@ const Selector = ({
       setRenderedItems(newItems);
       setNewSelectedItems(cloneSelectedItems);
     }
-  }, [items, selectedItems, isMultiSelect]);
+  }, [items, selectedItems, isMultiSelect, selectedItemProp]);
 
   const breadCrumbsProps: TSelectorBreadCrumbs = withBreadCrumbs
     ? {
@@ -567,6 +577,7 @@ const Selector = ({
     ? {
         withInfo,
         infoText,
+        withInfoBadge,
       }
     : {};
 
@@ -605,9 +616,9 @@ const Selector = ({
   }, [tabsData]);
 
   const selectorComponent = (
-    <StyledSelector
+    <div
       id={id}
-      className={className}
+      className={classNames(styles.selector, className)}
       style={style}
       data-testid="selector"
     >
@@ -635,7 +646,11 @@ const Selector = ({
           withHeader={withHeader}
           withPadding={withPadding}
           footerVisible={footerVisible || !!alwaysShowFooter}
-          items={[...renderedItems]}
+          items={
+            isSSR && renderedItems.length === 0
+              ? items.map((x) => ({ ...x, isSelected: false }))
+              : [...renderedItems]
+          }
           isMultiSelect={isMultiSelect}
           onSelect={onSelectAction}
           hasNextPage={hasNextPage}
@@ -650,6 +665,8 @@ const Selector = ({
           descriptionText={descriptionText}
           inputItemVisible={inputItemVisible}
           setInputItemVisible={setInputItemVisible}
+          injectedElement={injectedElement}
+          isSSR={isSSR}
           // info
           {...infoProps}
         />
@@ -673,7 +690,7 @@ const Selector = ({
           />
         ) : null}
       </Providers>
-    </StyledSelector>
+    </div>
   );
 
   return useAside ? (

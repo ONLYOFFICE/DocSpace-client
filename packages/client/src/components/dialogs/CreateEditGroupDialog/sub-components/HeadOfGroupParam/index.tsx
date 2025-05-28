@@ -52,8 +52,10 @@ const HeadOfGroup = ({
 
       {!groupManager ? (
         <Styled.SelectGroupManager onClick={onShowSelectGroupManagerPanel}>
-          <SelectorAddButton iconName={PlusSvgUrl} />
-          <div className="label">{t("Common:SelectAction")}</div>
+          <SelectorAddButton
+            iconName={PlusSvgUrl}
+            label={t("Common:SelectAction")}
+          />
         </Styled.SelectGroupManager>
       ) : (
         <GroupMemberRow

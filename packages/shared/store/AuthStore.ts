@@ -38,9 +38,8 @@ import { logout as logoutDesktop } from "../utils/desktop";
 import {
   frameCallEvent,
   isAdmin,
-  isPublicRoom,
   insertDataLayer,
-  isPublicPreview,
+  isPublicRoom,
 } from "../utils/common";
 import { getCookie, setCookie } from "../utils/cookie";
 import { TenantStatus } from "../enums";
@@ -175,6 +174,8 @@ class AuthStore {
 
     this.skipRequest = skipRequest ?? false;
 
+    if (window.location.pathname === "/shared/invalid-link") return;
+
     await this.settingsStore?.init();
 
     const requests = [];
@@ -184,18 +185,22 @@ class AuthStore {
     const isPortalRestore =
       this.settingsStore?.tenantStatus === TenantStatus.PortalRestore;
 
-    if (!isPortalRestore) requests.push(this.getCapabilities());
+    const isPortalEncryption =
+      this.settingsStore?.tenantStatus === TenantStatus.EncryptionProcess;
+
+    if (!isPortalRestore && !isPortalEncryption)
+      requests.push(this.getCapabilities());
 
     if (
       this.settingsStore?.isLoaded &&
-      this.settingsStore?.socketUrl &&
-      !isPublicPreview() &&
-      !isPublicRoom() &&
-      !isPortalDeactivated
+      !!this.settingsStore?.socketUrl &&
+      !isPortalDeactivated &&
+      !isPortalEncryption &&
+      !isPublicRoom()
     ) {
       requests.push(
         this.userStore?.init(i18n, this.settingsStore.culture).then(() => {
-          if (!isPortalRestore) {
+          if (!isPortalRestore && this.userStore?.isAuthenticated) {
             this.getPaymentInfo();
           } else {
             this.isPortalInfoLoaded = true;
@@ -206,22 +211,22 @@ class AuthStore {
       this.userStore?.setIsLoaded(true);
     }
 
-    if (this.isAuthenticated && !skipRequest) {
-      if (!isPortalRestore && !isPortalDeactivated)
-        requests.push(this.settingsStore?.getAdditionalResources());
-
-      if (!this.settingsStore?.passwordSettings) {
-        if (!isPortalRestore && !isPortalDeactivated) {
-          requests.push(this.settingsStore?.getCompanyInfoSettings());
-        }
-      }
-    }
-
     return Promise.all(requests).then(() => {
       const user = this.userStore?.user;
 
       if (user?.id) {
         insertDataLayer(user.id);
+      }
+
+      if (this.isAuthenticated && !skipRequest && user) {
+        if (!isPortalRestore && !isPortalDeactivated)
+          requests.push(this.settingsStore?.getAdditionalResources());
+
+        if (!this.settingsStore?.passwordSettings) {
+          if (!isPortalRestore && !isPortalDeactivated) {
+            requests.push(this.settingsStore?.getCompanyInfoSettings());
+          }
+        }
       }
 
       if (
@@ -255,7 +260,9 @@ class AuthStore {
 
     await Promise.all(request);
 
-    this.isPortalInfoLoaded = true;
+    runInAction(() => {
+      this.isPortalInfoLoaded = true;
+    });
   };
 
   setLanguage() {
@@ -464,7 +471,7 @@ class AuthStore {
       this.settingsStore?.isLoaded &&
       !!this.settingsStore?.socketUrl &&
       !isPublicRoom()
-      // || //this.userStore.isAuthenticated
+      //  this.userStore?.isAuthenticated
     );
   }
 

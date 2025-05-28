@@ -34,6 +34,9 @@
 import io, { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 
+import { TUser } from "../api/people/types";
+import { TGroup } from "../api/groups/types";
+
 import { addLog } from ".";
 
 /**
@@ -59,8 +62,19 @@ export const enum SocketEvents {
   ChangedQuotaUsedValue = "s:change-quota-used-value",
   ChangedQuotaFeatureValue = "s:change-quota-feature-value",
   ChangedQuotaUserUsedValue = "s:change-user-quota-used-value",
+  AddUser = "s:add-user",
+  UpdateUser = "s:update-user",
+  DeleteUser = "s:delete-user",
+  AddGroup = "s:add-group",
+  UpdateGroup = "s:update-group",
+  DeleteGroup = "s:delete-group",
+  AddGuest = "s:add-guest",
+  UpdateGuest = "s:update-guest",
+  DeleteGuest = "s:delete-guest",
   BackupProgress = "s:backup-progress",
   RestoreProgress = "s:restore-progress",
+  EncryptionProgress = "s:encryption-progress",
+  ChangeMyType = "s:change-my-type",
 }
 
 /**
@@ -74,6 +88,8 @@ export const enum SocketCommands {
   Unsubscribe = "unsubscribe",
   RefreshFolder = "refresh-folder",
   RestoreBackup = "restore-backup",
+  SubscribeInSpaces = "subscribeInSpaces",
+  UnsubscribeInSpaces = "unsubscribeInSpaces",
 }
 
 /**
@@ -121,14 +137,28 @@ export type TSubscribeEmitData = {
 };
 
 /**
+ * Represents the data to be emitted through a socket connection with restore backup command.
+ *
+ * @typedef {Object} TRestoreBackupEmitData
+ * @property {boolean} dump - Flag indicating if it's a dump operation
+ * @property {boolean} [individual] - Optional flag indicating if the emission is for an individual
+ */
+export type TRestoreBackupEmitData = {
+  dump: boolean;
+  individual?: boolean;
+};
+
+/**
  * A mapping between socket commands and their respective data types.
  * Each key corresponds to a command from the `SocketCommands` enum,
  */
 export type TEmitEventsDataMap = {
   [SocketCommands.Subscribe]: TSubscribeEmitData;
   [SocketCommands.Unsubscribe]: TSubscribeEmitData;
+  [SocketCommands.SubscribeInSpaces]: TSubscribeEmitData;
+  [SocketCommands.UnsubscribeInSpaces]: TSubscribeEmitData;
   [SocketCommands.RefreshFolder]: string;
-  [SocketCommands.RestoreBackup]: never;
+  [SocketCommands.RestoreBackup]: TRestoreBackupEmitData;
 };
 
 /**
@@ -221,10 +251,35 @@ export type TListenEventCallbackMap = {
   [SocketEvents.ChangedQuotaUsedValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaFeatureValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaUserUsedValue]: (data: TOptSocket) => void;
+  [SocketEvents.AddUser]: (data: { id: string; data: TUser }) => void;
+  [SocketEvents.UpdateUser]: (data: { id: string; data: TUser }) => void;
+  [SocketEvents.DeleteUser]: (data: string) => void;
+  [SocketEvents.AddGroup]: (data: { id: string; data: TGroup }) => void;
+  [SocketEvents.UpdateGroup]: (data: { id: string; data: TGroup }) => void;
+  [SocketEvents.AddGuest]: (data: { id: string; data: TUser }) => void;
+  [SocketEvents.UpdateGuest]: (data: { id: string; data: TUser }) => void;
+  [SocketEvents.DeleteGuest]: (data: string) => void;
+  [SocketEvents.DeleteGroup]: (data: string) => void;
   [SocketEvents.RestoreProgress]: (opt: {
     progress: number;
     isCompleted: boolean;
     error: string;
+  }) => void;
+  [SocketEvents.BackupProgress]: (opt: {
+    progress: number;
+    isCompleted?: boolean;
+    link?: string;
+    error?: string;
+  }) => void;
+  [SocketEvents.EncryptionProgress]: (opt: {
+    percentage: number;
+    error: string;
+  }) => void;
+  [SocketEvents.ChangeMyType]: (data: {
+    id: string;
+    data: TUser;
+    admin: string;
+    hasPersonalFolder: boolean;
   }) => void;
 };
 
@@ -277,7 +332,9 @@ const isEmitDataValid = (
 ) => {
   if (
     command !== SocketCommands.Subscribe &&
-    command !== SocketCommands.Unsubscribe
+    command !== SocketCommands.Unsubscribe &&
+    command !== SocketCommands.SubscribeInSpaces &&
+    command !== SocketCommands.UnsubscribeInSpaces
   ) {
     return true;
   }
@@ -401,7 +458,12 @@ class SocketHelper {
    */
   private tryConnect() {
     try {
-      if (!this.connectionSettings || !this.connectionSettings.url) return;
+      if (
+        !this.connectionSettings ||
+        !this.connectionSettings.url ||
+        (this.client && this.client.connected)
+      )
+        return;
 
       const { url, publicRoomKey } = this.connectionSettings;
 
@@ -622,7 +684,7 @@ class SocketHelper {
    */
   public off = <T extends SocketEvents>(
     eventName: T,
-    callback: TSocketListener<T>,
+    callback?: TSocketListener<T>,
   ) => {
     if (!this.isEnabled || !this.isReady || !this.client) {
       addLog(

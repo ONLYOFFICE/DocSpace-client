@@ -33,7 +33,6 @@ import { validateTfaCode } from "@docspace/shared/api/settings";
 import { checkConfirmLink, loginWithTfaCode } from "@docspace/shared/api/user";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import {
@@ -42,7 +41,10 @@ import {
   TextInput,
 } from "@docspace/shared/components/text-input";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { TPasswordHash } from "@docspace/shared/api/settings/types";
+import {
+  TGetColorTheme,
+  TPasswordHash,
+} from "@docspace/shared/api/settings/types";
 import { ButtonKeys } from "@docspace/shared/enums";
 
 import { TError } from "@/types";
@@ -54,6 +56,7 @@ type TfaAuthFormProps = {
   passwordHash: TPasswordHash;
   userName?: string;
   defaultPage?: string;
+  colorTheme?: TGetColorTheme;
 };
 
 const TfaAuthForm = ({
@@ -72,8 +75,8 @@ const TfaAuthForm = ({
 
   const { confirmHeader = null } = linkData;
 
-  const linkUrlData = searchParams.get("linkData");
-  const isPublicAuth = searchParams.get("publicAuth");
+  const linkUrlData = searchParams?.get("linkData");
+  const isPublicAuth = searchParams?.get("publicAuth");
 
   const onSubmit = async () => {
     try {
@@ -126,7 +129,6 @@ const TfaAuthForm = ({
 
       setError(errorMessage);
       toastr.error(errorMessage);
-    } finally {
       setIsLoading(false);
     }
   };
@@ -146,18 +148,14 @@ const TfaAuthForm = ({
 
   return (
     <>
-      <Box className="app-code-description" marginProp="0 0 32px 0">
+      <div className="app-code-description">
         <Text isBold fontSize="14px" className="app-code-text">
           {t("EnterAppCodeTitle")}
         </Text>
         <Text>{t("EnterAppCodeDescription")}</Text>
-      </Box>
-      <Box
-        displayProp="flex"
-        flexDirection="column"
-        className="app-code-wrapper"
-      >
-        <Box className="app-code-input">
+      </div>
+      <div className="app-code-wrapper">
+        <div className="app-code-input">
           <FieldContainer
             labelVisible={false}
             hasError={error ? true : false}
@@ -180,8 +178,8 @@ const TfaAuthForm = ({
               onKeyDown={onKeyPress}
             />
           </FieldContainer>
-        </Box>
-        <Box className="app-code-continue-btn">
+        </div>
+        <div className="app-code-continue-btn">
           <Button
             scale
             primary
@@ -196,8 +194,8 @@ const TfaAuthForm = ({
             isLoading={isLoading}
             onClick={onSubmit}
           />
-        </Box>
-      </Box>
+        </div>
+      </div>
     </>
   );
 };

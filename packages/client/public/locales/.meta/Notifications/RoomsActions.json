@@ -1,0 +1,326 @@
+{
+  "key_path": "RoomsActions",
+  "content": "Actions with files in Rooms",
+  "content_en_sha1_hash": "d04f737575414209895e687a21a2572ee38d26fe",
+  "created_at": "2025-05-19T21:30:54.087Z",
+  "updated_at": "2025-05-24T07:48:39.008Z",
+  "comment": {
+    "text": "This translation key is used for the text displayed on a toggle button that allows users to enable or disable file-related actions in Rooms. It appears in a notification component and is intended to provide context for translators regarding the UI element's purpose.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:28.988Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActionsContainer.js",
+      "line_number": 34,
+      "context": "import { Text } from \"@docspace/shared/components/text\";\n import { ToggleButton } from \"@docspace/shared/components/toggle-button\";\n import { NotificationsType } from \"@docspace/shared/enums\";\n import { toastr } from \"@docspace/shared/components/toast\";\n \n const RoomsActionsContainer = ({\n t,\n badgesSubscription,\n changeSubscription,\n fetchTreeFolders,\n resetTreeItemCount,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Otaqlarda fayllarla əməliyyatlar\" is a literal translation and doesn't fully capture the meaning of \"Actions with files in Rooms.\" It sounds somewhat clunky and formal. A more natural and accurate translation would focus on what those actions *are* rather than just saying 'operations'.",
+          "suggestion": "Consider a translation like \"Fayllarla işlənilən hərəkətlər otaqlarda\" (Actions involving files in Rooms) or \"Otaqlarda fayllarla edilən işlər\" (Work done with files in Rooms)."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Akce se soubory v místnostech\" is a literal translation but doesn't convey the intended meaning as naturally in Czech. It sounds slightly awkward. A more natural phrasing would be 'Akce pro soubory v místnostech' or 'Akce týkající se souborů v místnostech'.",
+          "suggestion": "Akce pro soubory v místnostech"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Huoneissa olevat toiminnot tiedostoineen\" doesn't accurately convey the meaning of \"Actions with files in Rooms.\"  \"Tiedostoineen\" implies actions *regarding* files, rather than actions *involving* files. The original English phrase suggests actions taken within Rooms that have files attached or used.",
+          "suggestion": "Huoneissa suoritettavat toiminnot tiedostoineen"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While grammatically correct, 'Actions avec des fichiers dans les Salles' is a very literal translation and doesn't quite capture the nuance of 'Actions with files in Rooms'.  'Salles' implies meeting rooms or large spaces, which might not be the intended meaning. It would be better to convey the idea of actions related to files contained within Rooms (as in, a collaborative workspace or channel).",
+          "suggestion": "Actions concernant les fichiers dans les espaces collaboratifs"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Rooms' likely refers to a platform feature, possibly collaborative workspaces or channels. A more appropriate translation might consider conveying this platform-specific meaning rather than a general 'room'.",
+          "suggestion": "Actions liées aux fichiers dans les Espaces"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Գործողություններ ֆայլերի հետ Սենյակներում' literally translates to 'Actions with files in Rooms.' While understandable, it's not the most natural or idiomatic way to express this in Armenian. A more natural phrasing might be something like 'Ֆայլերով գործողություններ Սենյակներում' (Files actions in Rooms) or 'Սենյակներում ֆայլերի հետ կապված գործողություններ' (Actions related to files in Rooms).",
+          "suggestion": "Consider 'Ֆայլերով գործողություններ Սենյակներում' or 'Սենյակներում ֆայլերի հետ կապված գործողություններ' for a more idiomatic translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Azioni con i file nelle Stanze\" is a very literal translation. A more natural and idiomatic Italian phrasing would be \"Azioni per i file nelle stanze\" or \"Azioni relative ai file nelle stanze\". The original phrasing, when directly translated, can sound awkward.",
+          "suggestion": "Azioni per i file nelle stanze"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ルームで行われたファイルのアクション\" literally translates to \"File actions performed in Rooms.\" While understandable, it doesn't quite capture the nuance of 'Actions with files in Rooms'.  It sounds passive.  A more active and accurate translation might be something that highlights what actions *can* be taken.",
+          "suggestion": "ルームのファイルに対するアクション"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"방 내 파일 관련 작업\" is a literal translation and doesn't quite capture the meaning of 'Actions with files in Rooms'. It focuses on the files themselves rather than the actions performed on them within the Rooms context. A more natural translation would imply actions or operations *regarding* files within Rooms.",
+          "suggestion": "방에서 파일 관련 작업"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ຄຳສັ່ງກັບໄຟລ໌ຢູ່ໃນຫ້ອງ' literally translates to 'Commands with files in rooms.' While not entirely wrong, it doesn't capture the nuance of 'Actions with files in Rooms.' A more accurate translation would convey the idea of actions *related* to files within Rooms.",
+          "suggestion": "ຄຳນະິຍົນຮ່ວມກັບໄຟລ໌ໃນຫ້ອງ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Darbības ar failiem telpās\" is too literal. 'Rooms' in this context likely refers to chat rooms or collaborative spaces. A more accurate translation would convey this meaning.",
+          "suggestion": "Darbības ar failiem tērzēšanas istabās"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'ficheiros' is a less common term for 'files' in Portuguese, particularly in a user interface context. 'Fichas' would be a better, more common word to use.",
+          "suggestion": "Ações com fichas em Salas"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Acţiunile efectuate cu fişierele în Sale' is inaccurate. 'Rooms' should be translated to something like 'Camere' or 'Încăperi'. 'Sale' is incorrect and doesn't convey the meaning of 'Rooms'.",
+          "suggestion": "Acţiunile efectuate cu fişierele în Camere"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'කාමරවල ගොනු සමඟ ක්‍රියාමාර්ග' is a literal translation that doesn't quite convey the intended meaning of 'Actions with files in Rooms'. It sounds a bit clunky and indirect in Sinhala. A more natural phrasing would be more suitable.",
+          "suggestion": "කාමරවල ඇති ගොනු සඳහා ක්‍රියාමාර්ග (Kaamara wala athi gonu sathaakaya kriyamaarga)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Akcije z datotekami v sobi Rooms' is overly literal and doesn't flow naturally in Slovenian. 'Sobi Rooms' is clunky and awkward. The word 'Rooms' should ideally be incorporated more seamlessly or possibly translated/adapted.",
+          "suggestion": "Akcije z datotekami v sobah / Akcije datotek v prostoru Rooms / Delovanje z datotekami v Rooms"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation retains the English word 'Rooms' without considering Slovenian conventions. It's better to either fully translate it or adapt it to a more natural Slovenian phrase.",
+          "suggestion": "Refer to the suggestions in the 'incorrect_translation' field."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Радње са датотекама у соби' is a literal translation, but 'Actions with files in Rooms' implies actions *performed* on files within Rooms. A more accurate translation would convey this action-oriented meaning.",
+          "suggestion": "Радње над датотекама у соби"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Odalardaki dosyalarla yapılan işlemler' while technically accurate, doesn't fully capture the nuance of 'Actions with files in Rooms'. It's a bit literal. A more natural Turkish phrasing would emphasize the actions *available* for files.",
+          "suggestion": "Oda'daki dosyalara yönelik işlemler"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Hành động với các tập tin trong Phòng\" is a literal translation, but it sounds unnatural in Vietnamese. 'Rooms' typically refers to chat rooms or discussion forums. A more natural phrasing would imply actions related to files *within* those rooms.",
+          "suggestion": "Hành động với tệp tin trong phòng trò chuyện"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '房间文件操作' is too literal and doesn't fully capture the meaning of 'Actions with files in Rooms'. It implies actions *on* files *within* rooms, rather than actions related to files used or managed within the Rooms feature.",
+          "suggestion": "Consider a translation like '房间内的文件操作' (File operations within rooms) or '房间文件相关操作' (File-related operations in Rooms) for more clarity. Alternatively, depending on the context, '房间文件管理' (File management in Rooms) could be appropriate."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

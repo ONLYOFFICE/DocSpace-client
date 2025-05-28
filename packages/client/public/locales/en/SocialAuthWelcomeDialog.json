@@ -1,0 +1,8 @@
+{
+  "ChangeData": "Change data and password",
+  "ClickButtonBelow": "If you'd like to log in using your email, please set your own password. <br /> Once ready, please click the button below.",
+  "ContinueToProduct": "Continue to {{productName}}",
+  "GeneratedPassword": "Generated password",
+  "ProductNameDetail": "{{productName}} name",
+  "ReviewAccountDetails": "Please take a moment to review your account details:"
+}

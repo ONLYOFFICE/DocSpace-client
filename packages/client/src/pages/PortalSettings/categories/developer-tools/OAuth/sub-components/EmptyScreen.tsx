@@ -30,8 +30,7 @@ import { useTheme } from "styled-components";
 import { EmptyView } from "@docspace/shared/components/empty-view";
 import { Text } from "@docspace/shared/components/text";
 import { globalColors } from "@docspace/shared/themes";
-import { LinkTarget, LinkType } from "@docspace/shared/components/link";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 
 import EmptyScreenOauthLightSvg from "PUBLIC_DIR/images/emptyview/empty.oauth2.light.svg";
 import EmptyScreenOauthDarkSvg from "PUBLIC_DIR/images/emptyview/empty.oauth2.dark.svg";
@@ -79,18 +78,20 @@ const OAuthEmptyScreen = ({
         {descText}
       </Text>
       <p>
-        <ColorTheme
-          target={LinkTarget.blank}
-          type={LinkType.page}
-          fontWeight={600}
-          isHovered
-          href={apiOAuthLink}
-          tag="a"
-          themeId={ThemeId.Link}
-          style={{ marginBottom: "20px" }}
-        >
-          {t("OAuth:OAuth")} {t("Common:Guide")}
-        </ColorTheme>
+        {apiOAuthLink ? (
+          <Link
+            target={LinkTarget.blank}
+            type={LinkType.page}
+            fontWeight={600}
+            isHovered
+            href={apiOAuthLink}
+            tag="a"
+            style={{ marginBottom: "20px" }}
+            color="accent"
+          >
+            {t("OAuth:OAuth")} {t("Common:Guide")}
+          </Link>
+        ) : null}
       </p>
 
       <RegisterNewButton />

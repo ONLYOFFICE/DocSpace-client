@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { inject, observer } from "mobx-react";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import { isMobile, isTablet, mobile } from "@docspace/shared/utils/device";
@@ -37,7 +37,6 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { FileInput } from "@docspace/shared/components/file-input";
 import { ProgressBar } from "@docspace/shared/components/progress-bar";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { Box } from "@docspace/shared/components/box";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { InputSize } from "@docspace/shared/components/text-input";
@@ -181,7 +180,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
   const [chunkSize, setChunkSize] = useState(0);
 
   const [failTries, setFailTries] = useState(FAIL_TRIES);
-  const uploadInterval = useRef<number>();
+  const uploadInterval = useRef<number>(undefined);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -379,7 +378,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
 
   useEffect(() => {
     if (fileLoadingStatus === "proceed") {
-      uploadInterval.current = window.setInterval(poolStatus, 1000);
+      uploadInterval.current = window.setInterval(() => poolStatus(), 1000);
     } else if (fileLoadingStatus === "done") {
       setIsSaveDisabled(false);
     }
@@ -430,7 +429,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
       ) : (
         <ErrorBlock>
           {isFileError ? (
-            <Box>
+            <div>
               <ProgressBar
                 percent={100}
                 className="complete-progress-bar"
@@ -447,11 +446,11 @@ const SelectFileStep = (props: SelectFileStepProps) => {
               >
                 {t("Settings:CheckUnsupportedFiles")}
               </Link>
-            </Box>
+            </div>
           ) : null}
 
           {isBackupEmpty ? (
-            <Box>
+            <div>
               <ProgressBar
                 percent={100}
                 className="complete-progress-bar"
@@ -460,7 +459,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
               <Text className="error-text">
                 {t("Settings:NoUsersInBackup")}
               </Text>
-            </Box>
+            </div>
           ) : null}
 
           {isNetworkError ? (

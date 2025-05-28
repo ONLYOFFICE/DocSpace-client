@@ -56,9 +56,7 @@ describe("<AdditionalResources />", () => {
   it("renders without error", () => {
     renderWithTheme(<AdditionalResources {...defaultProps} />);
 
-    expect(
-      screen.getByText("Settings:AdditionalResources"),
-    ).toBeInTheDocument();
+    expect(screen.getByText("AdditionalResources")).toBeInTheDocument();
     expect(screen.getByText("ShowFeedbackAndSupport")).toBeInTheDocument();
     expect(screen.getByText("ShowHelpCenter")).toBeInTheDocument();
   });

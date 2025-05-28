@@ -83,20 +83,13 @@ const StyledSsoPage = styled.div`
   }
 
   .service-provider-settings {
+    box-sizing: border-box;
     display: ${(props) => (!props.hideSettings ? "none" : "block")};
   }
 
   .sp-metadata {
+    box-sizing: border-box;
     display: ${(props) => (!props.hideMetadata ? "none" : "block")};
-  }
-
-  .advanced-block {
-    margin: 24px 0;
-
-    .field-label {
-      font-size: 15px;
-      font-weight: 600;
-    }
   }
 
   .metadata-field {

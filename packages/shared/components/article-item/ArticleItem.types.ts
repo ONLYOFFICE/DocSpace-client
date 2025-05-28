@@ -46,9 +46,22 @@ type PickedDivProps = Pick<
   "id" | "className" | "style"
 >;
 
+export interface ArticleItemType {
+  isRoom?: boolean;
+  rootFolderType?: string;
+  id?: string;
+  roomType?: string;
+  title?: string;
+  shared?: boolean;
+  external?: boolean;
+  security?: {
+    canCreate: boolean;
+  };
+}
+
 export type ArticleItemProps = PickedDivProps & {
   /** Catalog item icon */
-  icon: string;
+  icon?: string;
   /** Catalog item text */
   text: string;
   /** Sets the catalog item to display text */
@@ -56,7 +69,7 @@ export type ArticleItemProps = PickedDivProps & {
   /** Invokes a function upon clicking on a catalog item */
   onClick?: (e: React.MouseEvent, id?: string) => void;
   /** Invokes a function upon dragging and dropping a catalog item */
-  onDrop?: (id?: string, text?: string) => void;
+  onDrop?: (id?: string, text?: string, item?: ArticleItemType) => void;
   /** Tells when the catalog item should display initial on icon, text should be hidden */
   showInitial?: boolean;
   /** Sets the catalog item as end of block */
@@ -89,4 +102,8 @@ export type ArticleItemProps = PickedDivProps & {
   title?: string;
   /** Link data for routing */
   linkData: TArticleLinkData;
+  /** Item data */
+  item?: ArticleItemType;
+  /** Catalog item icon for SSR */
+  iconNode?: React.ReactNode;
 };

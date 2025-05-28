@@ -31,13 +31,12 @@ import { RoomsType } from "@docspace/shared/enums";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { isMobile } from "@docspace/shared/utils";
+import { isMobile, getCountTilesInRow } from "@docspace/shared/utils";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 
 import config from "PACKAGE_FILE";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { TABLE_HEADER_HEIGHT } from "@docspace/shared/components/table/Table.constants";
-import { getCountTilesInRow } from "SRC_DIR/helpers/filesUtils";
 import { encryptionUploadDialog } from "../helpers/encryptionUploadDialog";
 
 class HotkeyStore {
@@ -625,7 +624,12 @@ class HotkeyStore {
     const fileIds = [];
     const folderIds = [];
 
-    const { id: selectedItemId, roomType, security } = this.selectedFolderStore;
+    const {
+      id: selectedItemId,
+      roomType,
+      security,
+      getSelectedFolder,
+    } = this.selectedFolderStore;
     const { activeFiles, activeFolders, hotkeysClipboard } = this.filesStore;
     const { checkFileConflicts, setSelectedItems, setConflictDialogData } =
       this.filesActionsStore;
@@ -646,27 +650,35 @@ class HotkeyStore {
     selections.forEach((item) => {
       if (item.fileExst || item.contentLength) {
         const fileInAction = activeFiles.includes(item.id);
-        !fileInAction && fileIds.push(item.id);
+        if (!fileInAction) {
+          fileIds.push(item.id);
+        }
       } else if (item.id === selectedItemId) {
         toastr.error(t("Common:MoveToFolderMessage"));
       } else {
         const folderInAction = activeFolders.includes(item.id);
 
-        !folderInAction && folderIds.push(item.id);
+        if (!folderInAction) {
+          folderIds.push(item.id);
+        }
       }
     });
+
+    const itemsLength = folderIds.length + fileIds.length;
 
     if (folderIds.length || fileIds.length) {
       const operationData = {
         destFolderId: selectedItemId,
+        destFolderInfo: getSelectedFolder(),
         folderIds,
         fileIds,
         deleteAfter: false,
         isCopy,
-        translations: {
-          copy: t("Common:CopyOperation"),
-          move: t("Common:MoveToOperation"),
-        },
+        itemsCount: itemsLength,
+        ...(itemsLength === 1 && {
+          title: selections[0].title,
+          isFolder: selections[0].isFolder,
+        }),
       };
 
       if (isPublic && !selections.rootFolderType) {
@@ -676,17 +688,18 @@ class HotkeyStore {
 
       const fileTitle = hotkeysClipboard.find((f) => f.title)?.title;
       setSelectedItems(fileTitle, hotkeysClipboard.length);
+
       checkFileConflicts(selectedItemId, folderIds, fileIds)
         .then(async (conflicts) => {
           if (conflicts.length) {
             setConflictDialogData(conflicts, operationData);
           } else {
             if (!isCopy) this.filesStore.setMovingInProgress(!isCopy);
+
             await itemOperationToFolder(operationData);
           }
         })
-        .catch((e) => {
-          toastr.error(e);
+        .catch(() => {
           clearActiveOperations(fileIds, folderIds);
         })
         .finally(() => {
@@ -712,12 +725,12 @@ class HotkeyStore {
         if (f.length > 0) startUpload(f, null, t);
       })
       .catch((err) => {
-        toastr.error(err);
+        toastr.error(err, null, 0, true);
       });
   };
 
   get countTilesInRow() {
-    return getCountTilesInRow();
+    return getCountTilesInRow(this.treeFoldersStore?.isRoomsFolder);
   }
 
   get division() {
@@ -733,7 +746,7 @@ class HotkeyStore {
     const { filesList } = this.filesStore;
 
     if (this.caretIndex !== -1) {
-      return filesList[this.caretIndex].isFolder;
+      return filesList[this.caretIndex]?.isFolder;
     }
     return false;
   }
@@ -769,7 +782,6 @@ class HotkeyStore {
 
   get nextForTileDown() {
     const { filesList, folders, files } = this.filesStore;
-
     const nextTileFile = filesList[this.caretIndex + this.countTilesInRow];
     const foldersLength = folders.length;
 

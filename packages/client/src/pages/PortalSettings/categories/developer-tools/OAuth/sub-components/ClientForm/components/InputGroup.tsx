@@ -32,7 +32,7 @@ import { FieldContainer } from "@docspace/shared/components/field-container";
 import { RectangleSkeleton } from "@docspace/shared/skeletons/rectangle";
 import { InputSize, InputType } from "@docspace/shared/components/text-input";
 
-import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
+import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
 import { StyledInputGroup } from "../ClientForm.styled";
 
@@ -139,6 +139,7 @@ const InputGroup = ({
                 type={isPassword ? InputType.password : InputType.text}
                 onBlur={() => onBlur?.(name)}
                 hasError={isError}
+                noIcon={!withCopy}
               />
             )}
             {buttonLabel ? (

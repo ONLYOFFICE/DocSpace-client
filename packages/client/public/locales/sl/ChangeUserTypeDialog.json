@@ -1,11 +1,17 @@
 {
+  "ChangeContactType": "Spremeni tip kontakta",
   "ChangeGuestsTypeMessage": "Gost <strong>{{userName}}</strong> bo premaknjen v razdelek {{membersSection}} in dodeljen mu bo tip uporabnika. Uporabniki imajo svoj razdelek za {{documentsSection}}, lahko ustvarjajo in urejajo datoteke, ne morejo pa ustvarjati sob.",
   "ChangeGuestsTypeMessageMulti": "Izbrani gostje bodo premaknjeni v razdelek {{membersSection}} in dodeljen jim bo tip uporabnika. Uporabniki imajo svoj razdelek za {{documentsSection}}, lahko ustvarjajo in urejajo datoteke, ne morejo pa ustvarjati sob.",
+  "ChangeGuestsTypeToAdmin": "Gost <strong>{{userName}}</strong> bo premaknjen v razdelek {{membersSection}} in dodeljen mu bo tip <strong>'{{ secondType }}'</strong>. {{productName}} skrbniki dostopajo do {{productName}}, upravljajo in arhivirajo sobe, vabijo nove uporabnike in dodeljujejo vloge nižje od svoje vloge. Skrbniki za {{productName}} imajo dostop do razdelka {{documentsSection}}.",
+  "ChangeGuestsTypeToAdminMulti": "Izbrani gostje bodo premaknjeni v razdelek {{membersSection}} in dodeljen jim bo tip <strong>'{{ secondType }}'</strong>. Skrbniki za {{productName}} lahko dostopajo do nastavitev za {{productName}}, upravljajo in arhivirajo sobe, vabijo nove uporabnike in dodeljujejo vloge nižje od svoje. Skrbniki za {{productName}} imajo dostop do razdelka {{documentsSection}}.",
+  "ChangeGuestsTypeToManager": "Gost <strong>{{userName}}</strong> bo premaknjen v razdelek {{membersSection}} in dodeljen mu bo tip <strong>'{{ secondType }}'</strong>. Skrbniki sobe lahko ustvarijo in upravljajo dodeljene sobe, povabijo nove uporabnike in dodelijo vloge skrbnika sobe in nižje. Skrbniki sobe imajo dostop do razdelka {{documentsSection}}.",
+  "ChangeGuestsTypeToManagerMulti": "Izbrani gostje bodo premaknjeni v razdelek {{membersSection}} in dodeljen jim bo tip <strong>'{{ secondType }}'</strong>. Skrbniki sobe lahko ustvarijo in upravljajo dodeljene sobe, povabijo nove uporabnike in dodelijo vloge skrbnika sobe in nižje. Skrbniki sobe imajo dostop do razdelka {{documentsSection}}.",
   "ChangeUserTypeButton": "Spremeni tip",
-  "ChangeUserTypeHeader": "Spremeni tip uporabnika",
   "ChangeUserTypeMessage": "Uporabniki tipa <strong>'{{ firstType }}'</strong> bodo premaknjeni v <strong>'{{ secondType }}'</strong> tip.",
-  "ChangeUserTypeMessageMulti": "Izbrani uporabniki bodo premaknjeni v <strong>'{{ secondType }}'</strong> tip.",
-  "ChangeUserTypeMessageWarning": "Za skrbnike {{productName}} in zase ne morete spremeniti vrste.",
+  "ChangeUserTypeNote": "<1>Opomba:</1> ne morete spremeniti tipa za skrbnika {{productName}} in za vas.",
+  "DataReassignmentInfo": "Sobe, ki jih je ustvaril ta uporabnik, bodo samodejno dodeljene vam. Če želite sobe prerazporediti na drugo osebo, kliknite na ustrezno spodnjo povezavo.",
+  "DataReassignmentWithFilesDeletion": "Vse datoteke v skupni rabi, ki jih je ustvaril ta kontakt, bodo <1>samodejno dodeljene vam v 30 dneh</1>. Če želite sobe/datoteke v skupni rabi znova dodeliti drugi osebi, kliknite ustrezno spodnjo povezavo.",
+  "PersonalDataDeletion": "Vse datoteke in mape v razdelku {{sectionName}} tega stika bodo <1>trajno izbrisane v 30 dneh</1>.",
   "SuccessChangeGuestType": "Tip gosta je bil uspešno spremenjen",
   "SuccessChangeUserType": "Vrsta uporabnika je bila uspešno spremenjena"
 }

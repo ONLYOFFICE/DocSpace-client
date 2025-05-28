@@ -40,7 +40,7 @@ const StyledWrapper = styled(ComboBox).attrs(injectDefaultTheme)`
       `}
   }
 
-  ${({ type, theme }) =>
+  ${({ type, theme, isDisabled }) =>
     type === "onlyIcon" &&
     css`
       .combo-button {
@@ -54,7 +54,9 @@ const StyledWrapper = styled(ComboBox).attrs(injectDefaultTheme)`
       .combo-buttons_arrow-icon,
       .combo-button_selected-icon-container {
         svg path {
-          fill: ${theme.color};
+          fill: ${isDisabled
+            ? theme.comboBox.childrenButton.defaultDisabledColor
+            : theme.color};
         }
       }
     `}
@@ -95,15 +97,15 @@ const StyledItemDescription = styled.div.attrs(injectDefaultTheme)`
   color: ${(props) => props.theme.accessRightSelect.descriptionColor};
 `;
 
-const StyledItemIcon = styled(ReactSVG)<{ isShortenIcon?: boolean }>`
+const StyledItemIcon = styled(ReactSVG)<{ $isShortenIcon?: boolean }>`
   /* margin-inline-end: 8px; */
 
   path[fill] {
     fill: ${(props) => props.theme.dropDownItem.icon.color};
   }
 
-  ${({ isShortenIcon }) =>
-    isShortenIcon &&
+  ${({ $isShortenIcon }) =>
+    $isShortenIcon &&
     css`
       padding-top: 2px;
       width: 16px;

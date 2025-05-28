@@ -37,7 +37,6 @@ import type { TRoom } from "@docspace/shared/api/rooms/types";
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import PluginStore from "SRC_DIR/store/PluginStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
-import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 
 import { TInfoPanelSelection } from "../InfoPanel.types";
 
@@ -57,8 +56,6 @@ type InfoPanelHeaderContentProps = {
   infoPanelItemsList: PluginStore["infoPanelItemsList"];
 
   enablePlugins: SettingsStore["enablePlugins"];
-
-  selectedId: SelectedFolderStore["id"];
 };
 
 const InfoPanelHeaderContent = ({
@@ -72,7 +69,6 @@ const InfoPanelHeaderContent = ({
   getIsTrash,
   infoPanelItemsList,
   enablePlugins,
-  selectedId,
 }: InfoPanelHeaderContentProps) => {
   const { t } = useTranslation(["Common", "InfoPanel"]);
 
@@ -104,6 +100,11 @@ const InfoPanelHeaderContent = ({
     !isLockedSharedRoom(selection as TRoom) &&
     !(external && expired === true);
 
+  const isTemplate =
+    selection &&
+    "rootFolderType" in selection &&
+    selection.rootFolderType === FolderType.RoomTemplates;
+
   const closeInfoPanel = () => setIsVisible(false);
 
   const setMembers = () => setView("info_members");
@@ -113,10 +114,19 @@ const InfoPanelHeaderContent = ({
 
   const memberTab = {
     id: "info_members",
-    name: t("Common:Contacts"),
+    name: isTemplate ? t("Common:Accesses") : t("Common:Contacts"),
     onClick: setMembers,
     content: null,
   };
+
+  const detailsTab = {
+    id: "info_details",
+    name: t("InfoPanel:SubmenuDetails"),
+    onClick: setDetails,
+    content: null,
+  };
+
+  const templateSubmenu = [memberTab, detailsTab];
 
   const tabsData = [
     {
@@ -125,19 +135,15 @@ const InfoPanelHeaderContent = ({
       onClick: setHistory,
       content: null,
     },
-    {
-      id: "info_details",
-      name: t("InfoPanel:SubmenuDetails"),
-      onClick: setDetails,
-      content: null,
-    },
+    detailsTab,
   ];
 
   const isRoomsType =
     selection &&
     "rootFolderType" in selection &&
     (selection.rootFolderType === FolderType.Rooms ||
-      selection.rootFolderType === FolderType.Archive);
+      selection.rootFolderType === FolderType.Archive ||
+      selection.rootFolderType === FolderType.RoomTemplates);
 
   if (isRoomsType) tabsData.unshift(memberTab);
 
@@ -161,15 +167,19 @@ const InfoPanelHeaderContent = ({
 
     infoPanelItemsList.forEach((item) => {
       const onClick = async () => {
-        setView(`info_plugin`);
+        setView(`info_plugin-${item.key}`);
 
-        if (item.value.subMenu.onClick) {
-          item.value.subMenu.onClick(selectedId ? +selectedId : 0);
-        }
+        // if (
+        //   item.value.subMenu.onClick &&
+        //   selection &&
+        //   !Array.isArray(selection)
+        // ) {
+        //   item.value.subMenu.onClick(selection.id ? +selection.id : 0);
+        // }
       };
 
       const tabsItem = {
-        id: `info_plugin`,
+        id: `info_plugin-${item.key}`,
         name: item.value.subMenu.name,
         onClick,
         content: null,
@@ -218,7 +228,7 @@ const InfoPanelHeaderContent = ({
         <div className="tabs">
           <Tabs
             style={{ width: "100%" }}
-            items={tabsData}
+            items={isTemplate ? templateSubmenu : tabsData}
             selectedItemId={isRoomsType ? roomsView : fileView}
           />
         </div>

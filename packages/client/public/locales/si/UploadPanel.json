@@ -1,8 +1,6 @@
 {
-  "CancelUpload": "උඩුගත වීමට බාධා විය. ඇතැම් ගොනු උඩුගත වී නැත.",
-  "EnterPassword": "මුරපදය යොදන්න",
   "HideInput": "සඟවන්න",
   "Ready": "අහවරයි",
-  "UploadAndConvert": "ගොනු උඩුගත කර හරවන්න",
-  "Uploads": "උඩුගත කිරීම්"
+  "UploadingAndConversion": "යොමු කිරීම සහ පරිවර්තනය",
+  "UploadingError": "ගොනුපත් උඩුගත කිරීමේ දෝෂය"
 }

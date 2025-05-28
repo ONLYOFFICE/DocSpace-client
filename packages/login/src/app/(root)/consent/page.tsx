@@ -27,35 +27,50 @@
 import { cookies } from "next/headers";
 
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { LANGUAGE } from "@docspace/shared/constants";
 
 import {
   getConfig,
   getOAuthClient,
+  getOauthJWTToken,
   getScopeList,
   getSettings,
   getUser,
 } from "@/utils/actions";
 import { GreetingLoginContainer } from "@/components/GreetingContainer";
+import { LoginContainer } from "@/components/LoginContainer";
 
 import Consent from "./page.client";
 
-async function Page({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string };
-}) {
+async function Page(
+  props: {
+    searchParams: Promise<{ [key: string]: string }>;
+  }
+) {
+  const searchParams = await props.searchParams;
   const clientId = searchParams.clientId ?? searchParams.client_id;
-  const [oauthData, scopes, user, settings, config] = await Promise.all([
-    getOAuthClient(clientId),
-    getScopeList(),
+
+  const [user, settings, config] = await Promise.all([
     getUser(),
     getSettings(),
     getConfig(),
   ]);
 
-  const client = oauthData?.client;
+  const cookieStore = await cookies();
+
+  let token = cookieStore.get(`x-signature-${user!.id}`)?.value;
+  let new_token = "";
+
+  if (!token) {
+    new_token = await getOauthJWTToken();
+  }
+
+  const [data, scopes] = await Promise.all([
+    getOAuthClient(clientId),
+    getScopeList(new_token, user!.id),
+  ]);
+
+  const client = data?.client as IClientProps;
 
   if (!client || (client && !("clientId" in client)) || !scopes || !user)
     return "";
@@ -66,28 +81,25 @@ async function Page({
   const settingsCulture =
     typeof settings === "string" ? undefined : settings?.culture;
 
-  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
+  const culture = cookieStore.get(LANGUAGE)?.value ?? settingsCulture;
 
   return (
     <>
       {settings && typeof settings !== "string" && (
-        <ColorTheme
-          themeId={ThemeId.LinkForgotPassword}
-          isRegisterContainerVisible={isRegisterContainerVisible}
-        >
+        <LoginContainer isRegisterContainerVisible={isRegisterContainerVisible}>
           <>
             <GreetingLoginContainer
               greetingSettings={settings?.greetingSettings}
               culture={culture}
             />
             <Consent
-              client={client as IClientProps}
+              client={client}
               scopes={scopes}
               user={user}
               baseUrl={config?.oauth2?.origin}
             />
           </>
-        </ColorTheme>
+        </LoginContainer>
       )}
     </>
   );

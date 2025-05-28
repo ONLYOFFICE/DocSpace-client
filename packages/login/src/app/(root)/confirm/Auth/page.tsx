@@ -26,7 +26,7 @@
 
 import AuthHandler from "./page.client";
 
-async function Page() {
+function Page() {
   return <AuthHandler />;
 }
 

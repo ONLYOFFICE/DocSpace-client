@@ -36,4 +36,14 @@ export const defaultSize = {
   height: "100",
 };
 
+export const sdkVersion = {
+  "101": "1.0.1",
+  "200": "2.0.0",
+} as const;
+
+export const sdkSource = {
+  Package: "package",
+  Script: "script",
+} as const;
+
 export const defaultDimension = dimensionsModel[0];

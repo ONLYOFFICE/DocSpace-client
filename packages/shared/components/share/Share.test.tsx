@@ -27,7 +27,12 @@
 import React from "react";
 import { screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { FileStatus, FileType, FolderType, ShareAccessRights } from "enums";
+import {
+  FileStatus,
+  FileType,
+  FolderType,
+  ShareAccessRights,
+} from "../../enums";
 import Share from "./index";
 import { renderWithTheme } from "../../utils/render-with-theme";
 
@@ -62,7 +67,7 @@ describe("Share component", () => {
       canShare: true,
       comment: "Test comment",
       contentLength: "1 MB",
-      created: new Date("2025-01-09T13:47:37+03:00"),
+      created: "2025-01-09T13:47:37+03:00",
       createdBy: {
         avatarSmall: "",
         displayName: "Test User",
@@ -98,11 +103,16 @@ describe("Share component", () => {
         Rename: true,
         Review: false,
         SubmitToFormGallery: false,
+        EditForm: false,
+        Comment: false,
+        CreateRoomFrom: false,
+        CopyLink: false,
+        Embed: false,
       },
       shared: true,
       thumbnailStatus: 0,
       title: "Test Document",
-      updated: new Date("2025-01-09T13:47:37+03:00"),
+      updated: "2025-01-09T13:47:37+03:00",
       updatedBy: {
         avatarSmall: "",
         displayName: "Test User",
@@ -127,6 +137,7 @@ describe("Share component", () => {
       },
       viewUrl: "https://example.com/view",
       webUrl: "https://example.com/web",
+      fileEntryType: 1,
     },
   });
 

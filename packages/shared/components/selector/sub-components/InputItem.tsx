@@ -29,17 +29,12 @@ import React from "react";
 import AcceptIconSvgUrl from "PUBLIC_DIR/images/selector.input.accept.svg?url";
 import CancelIconSvgUrl from "PUBLIC_DIR/images/selector.input.cancel.svg?url";
 
-import { ICover } from "../../../api/rooms/types";
-
-import { RoomsType } from "../../../enums";
-import { Nullable } from "../../../types";
-
 import { InputSize, InputType, TextInput } from "../../text-input";
 import { IconButton } from "../../icon-button";
 import { RoomIcon } from "../../room-icon";
 import { RoomLogo } from "../../room-logo";
-
-import { StyledInputWrapper, StyledItem } from "../Selector.styled";
+import styles from "../Selector.module.scss";
+import { InputItemProps } from "../Selector.types";
 
 const InputItem = ({
   defaultInputValue,
@@ -56,22 +51,7 @@ const InputItem = ({
 
   setInputItemVisible,
   setSavedInputValue,
-}: {
-  defaultInputValue: string;
-  onAcceptInput: (value: string) => void;
-  onCancelInput: VoidFunction;
-  style: React.CSSProperties;
-
-  placeholder?: string;
-
-  color?: string;
-  icon?: string;
-  roomType?: RoomsType;
-  cover?: ICover;
-
-  setInputItemVisible: (value: boolean) => void;
-  setSavedInputValue: (value: Nullable<string>) => void;
-}) => {
+}: InputItemProps) => {
   const [value, setValue] = React.useState(defaultInputValue);
 
   const requestRunning = React.useRef<boolean>(false);
@@ -136,36 +116,29 @@ const InputItem = ({
   }, []);
 
   return (
-    <StyledItem
-      key="input-item"
-      isSelected={false}
-      isMultiSelect={false}
-      isDisabled={false}
-      noHover
-      style={style}
-    >
+    <div key="input-item" className={styles.selectorItem} style={style}>
       {cover ? (
         <RoomIcon
           color={color}
           title={value}
           logo={{ cover, large: "", original: "", small: "", medium: "" }}
           showDefault={false}
-          className="item-logo"
+          className={styles.itemLogo}
         />
       ) : color ? (
         <RoomIcon
           color={color}
           title={value}
           showDefault
-          className="item-logo"
+          className={styles.itemLogo}
         />
       ) : roomType ? (
-        <RoomLogo className="room-logo__container" type={roomType} />
+        <RoomLogo className={styles.roomLogoContainer} type={roomType} />
       ) : icon ? (
         <RoomIcon
           title={value}
-          className="item-logo"
-          imgClassName="room-logo"
+          className={styles.itemLogo}
+          imgClassName={styles.roomlogo}
           logo={icon}
           showDefault={false}
         />
@@ -178,13 +151,13 @@ const InputItem = ({
         forwardedRef={inputRef}
         placeholder={placeholder}
       />
-      <StyledInputWrapper onClick={onAcceptInputAction}>
+      <div className={styles.inputWrapper} onClick={onAcceptInputAction}>
         <IconButton iconName={AcceptIconSvgUrl} size={16} />
-      </StyledInputWrapper>
-      <StyledInputWrapper onClick={onCancelInputAction}>
+      </div>
+      <div className={styles.inputWrapper} onClick={onCancelInputAction}>
         <IconButton iconName={CancelIconSvgUrl} size={16} />
-      </StyledInputWrapper>
-    </StyledItem>
+      </div>
+    </div>
   );
 };
 

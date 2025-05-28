@@ -46,6 +46,7 @@ import { request } from "../client";
 
 import Filter from "./filter";
 import { TChangeTheme, TGetUserList, TUser } from "./types";
+import { TOperation } from "../files/filter";
 
 export async function getUserList(
   filter = Filter.getDefault(),
@@ -110,10 +111,15 @@ export async function getUser(userName = null, headers = null) {
 export async function getUserByEmail(
   userEmail: string,
   confirmKey: Nullable<string> = null,
+  culture?: string,
 ) {
+  const urlEmail = `/people/email?email=${userEmail}`;
+
+  const url = culture ? `${urlEmail}&culture=${culture}` : urlEmail;
+
   const options = {
     method: "get",
-    url: `/people/email?email=${userEmail}`,
+    url,
   };
 
   if (confirmKey) options.headers = { confirm: confirmKey };
@@ -158,6 +164,22 @@ export function getUserPhoto(userId) {
     method: "get",
     url: `/people/${userId}/photo`,
   });
+}
+
+export async function startEmptyPersonal() {
+  const res = (await request({
+    method: "post",
+    url: "/people/delete/personal/start",
+  })) as TOperation[];
+  return res;
+}
+
+export async function getEmptyPersonalProgress() {
+  const res = (await request({
+    method: "get",
+    url: "/people/delete/personal/progress",
+  })) as TOperation[];
+  return res;
 }
 
 export function createUser(data, confirmKey: Nullable<string> = null) {
@@ -298,6 +320,15 @@ export async function getUserById(userId: string) {
     url: `/people/${userId}`,
   })) as TUser;
 
+  res.displayName = Encoder.htmlDecode(res.displayName);
+
+  if (res.createdBy?.displayName) {
+    res.createdBy = {
+      ...res.createdBy,
+      displayName: Encoder.htmlDecode(res.createdBy.displayName),
+    };
+  }
+
   return res;
 }
 
@@ -422,6 +453,43 @@ export async function updateUserType(type: EmployeeType, userIds: string[]) {
   return res;
 }
 
+export async function downgradeUserType(
+  type: EmployeeType,
+  userId: number | string,
+  reassignUserId?: number | string,
+) {
+  return request({
+    method: "post",
+    url: "people/type",
+    data: { type, userId, reassignUserId },
+  });
+}
+
+export async function getReassignmentProgress(userId: number | string) {
+  return request({
+    method: "get",
+    url: `people/type/progress/${userId}`,
+  });
+}
+
+export async function terminateReassignment(userId: number | string) {
+  return request({
+    method: "put",
+    url: `people/type/terminate`,
+    data: { userId },
+  });
+}
+
+export async function reassignmentNecessary(
+  userId: number | string,
+  type: EmployeeType,
+) {
+  return request({
+    method: "get",
+    url: "people/reassign/necessary",
+    params: { userId, type },
+  });
+}
 export function linkOAuth(serializedProfile) {
   return request({
     method: "put",
@@ -480,6 +548,32 @@ export async function deleteGuests(userIds: string[]) {
     url: `/people/guests`,
     data: { userIds },
   });
+}
+
+export async function getLinkToShareGuest(userId: string) {
+  const link = (await request({
+    method: "get",
+    url: `people/guests/${userId}/share`,
+  })) as string;
+
+  return link;
+}
+
+export async function addGuest(
+  email: string,
+  confirmKey: Nullable<string> = null,
+) {
+  const options = {
+    method: "post",
+    url: `/people/guests/share/approve`,
+    data: { email },
+  };
+
+  if (confirmKey) options.headers = { confirm: confirmKey };
+
+  const res = await request(options);
+
+  return res;
 }
 
 export function deleteUsers(userIds: string[]) {
@@ -576,10 +670,10 @@ export async function getMembersList(
   return res;
 }
 
-export async function setCustomUserQuota(userIds: string[], quota: number) {
+export async function setCustomUserQuota(userIds: string[], quota: string) {
   const data = {
     userIds,
-    quota,
+    quota: +quota,
   };
   const options: AxiosRequestConfig = {
     method: "put",
@@ -591,6 +685,7 @@ export async function setCustomUserQuota(userIds: string[], quota: number) {
 
   return users;
 }
+
 export async function resetUserQuota(userIds: string[]) {
   const data = {
     userIds,

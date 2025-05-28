@@ -83,7 +83,6 @@ const SelectFolderDialog = ({
       withSearch
       withoutBackButton
       withCancelButton
-      headerLabel={t("Common:SaveButton")}
       disabledItems={[]}
       onSubmit={onSubmit}
       submitButtonLabel={t("Common:SaveHereButton")}

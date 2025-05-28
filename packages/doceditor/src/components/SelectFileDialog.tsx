@@ -93,7 +93,6 @@ const SelectFileDialog = ({
       rootFolderType={fileInfo.rootFolderType}
       withHeader
       headerProps={{ headerLabel, onCloseClick: onClose }}
-      headerLabel={headerLabel}
       embedded={false}
       withFooterInput={false}
       withFooterCheckbox={false}

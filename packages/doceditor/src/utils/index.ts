@@ -29,8 +29,9 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { request } from "@docspace/shared/api/client";
 import { convertFile } from "@docspace/shared/api/files";
 import { TEditHistory } from "@docspace/shared/api/files/types";
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
+import { TFormRole } from "@/types";
 
 export const getBackUrl = (
   rootFolderType: FolderType,
@@ -50,6 +51,8 @@ export const getBackUrl = (
     }
   } else if (rootFolderType === FolderType.Archive) {
     backUrl = `/rooms/archived/${folderId}/filter?folder=${folderId}`;
+  } else if (rootFolderType === FolderType.RoomTemplates) {
+    backUrl = `/rooms/shared/${folderId}/filter?folder=${folderId}&searchArea=${RoomSearchArea.Templates}`;
   } else {
     if (
       rootFolderType === FolderType.SHARE ||
@@ -248,4 +251,8 @@ export const calculateAsideHeight = (callback?: () => void) => {
       top: styles.top,
     });
   }
+};
+
+export const isFormRole = (role: unknown): role is TFormRole[] => {
+  return typeof role === "object" && Array.isArray(role) && "name" in role[0];
 };

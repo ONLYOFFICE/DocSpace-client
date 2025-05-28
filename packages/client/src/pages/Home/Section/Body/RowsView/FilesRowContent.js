@@ -26,132 +26,21 @@
 
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import styled from "styled-components";
-import {
-  isTablet,
-  mobile,
-  tablet,
-  desktop,
-  injectDefaultTheme,
-} from "@docspace/shared/utils";
+import { isTablet } from "@docspace/shared/utils";
 
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import { RowContent } from "@docspace/shared/components/rows";
-
-import { SortByFieldName } from "SRC_DIR/helpers/constants";
+import { SimpleFilesRowContent } from "@docspace/shared/styles/FilesRow.styled";
 import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
+import { getFileTypeName } from "@docspace/shared/utils/getFileType";
+
+import { SortByFieldName } from "@docspace/shared/enums";
 import withContent from "../../../../../HOCs/withContent";
 
 import {
   connectedCloudsTypeTitleTranslation,
-  getFileTypeName,
+  getRoomTypeName,
 } from "../../../../../helpers/filesUtils";
-
-const SimpleFilesRowContent = styled(RowContent).attrs(injectDefaultTheme)`
-  .row-main-container-wrapper {
-    width: 100%;
-    max-width: min-content;
-    min-width: inherit;
-    margin-inline-end: 0;
-
-    @media ${desktop} {
-      margin-top: 0px;
-    }
-  }
-
-  .row_update-text {
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .new-items {
-    min-width: 12px;
-    width: max-content;
-    margin: 0 -2px -2px;
-  }
-
-  .badge-version {
-    width: max-content;
-    margin-block: -2px;
-    margin-inline: -2px 6px;
-  }
-
-  .bagde_alert {
-    margin-inline-end: 8px;
-  }
-
-  .badge-new-version {
-    width: max-content;
-  }
-
-  .row-content-link {
-    padding-block: 12px 0;
-    padding-inline: 0 12px;
-    margin-top: ${(props) =>
-      props.theme.interfaceDirection === "rtl" ? "-14px" : "-12px"};
-  }
-
-  .item-file-exst {
-    color: ${(props) => props.theme.filesSection.tableView.fileExstColor};
-  }
-
-  @media ${tablet} {
-    .row-main-container-wrapper {
-      display: flex;
-      justify-content: space-between;
-      max-width: inherit;
-    }
-
-    .badges {
-      flex-direction: row-reverse;
-    }
-
-    .tablet-badge {
-      margin-top: 5px;
-    }
-
-    .tablet-edit,
-    .can-convert {
-      margin-top: 6px;
-      margin-inline-end: 24px;
-    }
-
-    .badge-version {
-      margin-inline-end: 22px;
-    }
-
-    .new-items {
-      min-width: 16px;
-      margin-block: 5px 0;
-      margin-inline: 0 24px;
-    }
-  }
-
-  @media ${mobile} {
-    .row-main-container-wrapper {
-      justify-content: flex-start;
-    }
-
-    .additional-badges {
-      margin-top: 0;
-    }
-
-    .tablet-edit,
-    .new-items,
-    .tablet-badge {
-      margin: 0;
-    }
-
-    .can-convert {
-      margin: 0 1px;
-    }
-
-    .row-content-link {
-      padding: 12px 0px 0px;
-    }
-  }
-`;
 
 const FilesRowContent = ({
   t,
@@ -171,6 +60,7 @@ const FilesRowContent = ({
   isDefaultRoomsQuotaSet,
   isIndexing,
   displayFileExtension,
+  isPersonalReadOnly,
 }) => {
   const {
     contentLength,
@@ -184,6 +74,7 @@ const FilesRowContent = ({
     quotaLimit,
     usedSpace,
     order,
+    roomType,
   } = item;
 
   const contentComponent = () => {
@@ -199,7 +90,10 @@ const FilesRowContent = ({
         return fileOwner;
 
       case SortByFieldName.Type:
-        return getFileTypeName(fileType);
+        return getFileTypeName(fileType, t);
+
+      case SortByFieldName.RoomType:
+        return getRoomTypeName(roomType, t);
 
       case SortByFieldName.Tags:
         if (tags?.length === 0) return "";
@@ -220,7 +114,7 @@ const FilesRowContent = ({
         );
 
       default:
-        if (isTrashFolder)
+        if (isTrashFolder || isPersonalReadOnly)
           return t("Files:DaysRemaining", {
             daysRemaining,
           });
@@ -228,21 +122,6 @@ const FilesRowContent = ({
         return updatedDate;
     }
   };
-
-  // const additionalComponent = () => {
-  //   if (isRooms) return getRoomTypeName(item.roomType, t);
-
-  //   if (!fileExst && !contentLength && !providerKey)
-  //     return `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
-  //       "Translations:Files",
-  //     )}`;
-
-  //   if (fileExst) return `${fileExst.toUpperCase().replace(/^\./, "")}`;
-
-  //   return "";
-  // };
-
-  // const additionalInfo = additionalComponent();
 
   const mainInfo = contentComponent();
 
@@ -298,20 +177,6 @@ const FilesRowContent = ({
           {mainInfo}
         </Text>
       ) : null}
-
-      {/* {additionalInfo && (
-          <Text
-            containerMinWidth="90px"
-            containerWidth="10%"
-            as="div"
-            className="row-content-text"
-            fontSize="12px"
-            fontWeight={400}
-            truncate={true}
-          >
-            {additionalInfo}
-          </Text>
-        )} */}
     </SimpleFilesRowContent>
   );
 };
@@ -325,24 +190,27 @@ export default inject(
     selectedFolderStore,
   }) => {
     const { filter, roomsFilter } = filesStore;
-    const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
-      treeFoldersStore;
+    const {
+      isRecycleBinFolder,
+      isRoomsFolder,
+      isArchiveFolder,
+      isTemplatesFolder,
+      isPersonalReadOnly,
+    } = treeFoldersStore;
     const { isIndexedFolder } = selectedFolderStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
     const filterSortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
 
-    const { isDefaultRoomsQuotaSet, isStatisticsAvailable, showStorageInfo } =
-      currentQuotaStore;
+    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
     return {
       filterSortBy,
       theme: settingsStore.theme,
       isTrashFolder: isRecycleBinFolder,
       isDefaultRoomsQuotaSet,
-      isStatisticsAvailable,
-      showStorageInfo,
       isIndexing: isIndexedFolder,
+      isPersonalReadOnly,
     };
   },
 )(

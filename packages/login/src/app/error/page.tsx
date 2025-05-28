@@ -1,10 +1,11 @@
 import InvalidError from "@/components/Invalid";
 
-async function Page({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string };
-}) {
+async function Page(
+  props: {
+    searchParams: Promise<{ [key: string]: string }>;
+  }
+) {
+  const searchParams = await props.searchParams;
   return <InvalidError match={searchParams} />;
 }
 

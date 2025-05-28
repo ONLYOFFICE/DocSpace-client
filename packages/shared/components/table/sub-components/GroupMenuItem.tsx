@@ -144,7 +144,7 @@ const GroupMenuItem = ({
   item: TGroupMenuItem;
   isBlocked?: boolean;
 }) => {
-  const buttonRef = React.useRef(null);
+  const buttonRef = React.useRef<HTMLButtonElement | null>(null);
 
   const [open, setOpen] = React.useState(false);
 
@@ -182,18 +182,19 @@ const GroupMenuItem = ({
         isDisabled={isBlocked}
         onClick={onClickAction}
         icon={<ReactSVG src={iconUrl} className="combo-button_selected-icon" />}
-        ref={buttonRef}
+        ref={buttonRef as React.RefObject<HTMLButtonElement>}
         size={ButtonSize.extraSmall}
       />
       {withDropDown ? (
         <DropDown
           open={open}
           clickOutsideAction={onClickOutside}
-          forwardedRef={buttonRef}
+          forwardedRef={buttonRef as unknown as React.RefObject<HTMLDivElement>}
           zIndex={250}
         >
           {options?.map((option) => {
             const { key, ...rest } = option;
+
             return (
               <DropDownItem key={option.key} {...rest} setOpen={setOpen} />
             );

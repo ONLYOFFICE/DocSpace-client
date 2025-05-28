@@ -50,7 +50,7 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 
-import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
+import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import HeaderUrl from "PUBLIC_DIR/images/sdk-presets_header.react.svg?url";
 import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
 import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
@@ -155,35 +155,28 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   );
 
   const fileConfig = {
+    src: window.location.origin,
+    frameId: "ds-frame",
     mode: "editor",
+    id: itemId,
     width: `${widthValue}${dataDimensions[0].label}`,
     height: `${heightValue}${dataDimensions[1].label}`,
-    frameId: "ds-frame",
     init: true,
-    id: itemId,
   };
 
   const roomConfig = {
+    src: window.location.origin,
+    frameId: "ds-frame",
+    mode: "public-room",
+    id: roomId,
     width: `${widthValue}${dataDimensions[0].label}`,
     height: `${heightValue}${dataDimensions[1].label}`,
-    frameId: "ds-frame",
     showHeader: true,
     showTitle: true,
     showMenu: false,
     showFilter: true,
-    mode: "manager",
-    init: true,
     requestToken: link?.sharedTo?.requestToken,
-    rootPath: "/rooms/share",
-    id: roomId,
-    filter: {
-      count: 100,
-      page: 1,
-      sortorder: "descending",
-      sortby: "DateAndTime",
-      search: "",
-      withSubfolders: false,
-    },
+    init: true,
   };
 
   const isFile = itemId && !isRoom;
@@ -344,7 +337,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   }, [itemId, getLinks]);
 
   const usePrevious = (value: LinkParamsLinkType | null) => {
-    const ref = useRef<LinkParamsLinkType | null>();
+    const ref = useRef<LinkParamsLinkType | null>(undefined);
     useEffect(() => {
       ref.current = value;
     });

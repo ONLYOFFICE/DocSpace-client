@@ -71,14 +71,14 @@ const UnsavedChangesDialogComponent = (props) => {
       zIndex={401}
     >
       <ModalDialog.Header>
-        {t("Settings:YouHaveUnsavedChanges")}
+        {t("Common:YouHaveUnsavedChanges")}
       </ModalDialog.Header>
       <ModalDialog.Body>
         <Text noSelect>{t("Settings:UnsavedChangesBody")}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
-          key="OkButton"
+          key="OKButton"
           label={t("Settings:CloseMenu")}
           size="normal"
           primary
@@ -97,7 +97,7 @@ const UnsavedChangesDialogComponent = (props) => {
   );
 };
 
-const UnsavedChangesDialog = withTranslation(["Files", "Settings"])(
+const UnsavedChangesDialog = withTranslation(["Files", "Settings", "Common"])(
   UnsavedChangesDialogComponent,
 );
 

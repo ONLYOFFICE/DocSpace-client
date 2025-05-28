@@ -45,6 +45,7 @@ export type TagType = {
   icon?: string;
   /** Indicates the type of provider associated with the tag. */
   providerType?: number;
+  onClick?: () => void;
 };
 
 export type TagsProps = {
@@ -61,4 +62,6 @@ export type TagsProps = {
   /** Accepts the function that is called when the tag is selected */
   onSelectTag: (tag?: object) => void;
   removeTagIcon?: boolean;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 };

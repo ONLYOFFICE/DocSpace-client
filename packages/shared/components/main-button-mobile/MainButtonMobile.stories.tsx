@@ -25,17 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useState } from "react";
-import styled, { css } from "styled-components";
 import { Meta, StoryObj } from "@storybook/react";
+import classNames from "classnames";
 
 import MobileActionsDocumentReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
 import MobileActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
 import MobileActionsSpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
 import MobileActionsFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
-import MobileActionsRemoveReactSvgUrl from "PUBLIC_DIR/images/mobile.actions.remove.react.svg?url";
 import MobileUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 
 import { MainButtonMobile } from ".";
+import styles from "./MainButtonMobile.stories.module.scss";
 
 const meta = {
   title: "Interactive Elements/MainButtonMobile",
@@ -75,22 +75,6 @@ type Story = StoryObj<typeof meta>;
 
 export default meta;
 
-const StyledWrapper = styled.div<{ isAutoDocs: boolean; isMobile?: boolean }>`
-  width: 500px;
-  height: 600px;
-  position: relative;
-
-  ${(props) =>
-    props.isAutoDocs &&
-    css`
-      width: calc(100% + 40px);
-      height: 500px;
-      position: relative;
-      margin-block: 0 -20px;
-      margin-inline: -20px 0;
-    `}
-`;
-
 const actionOptions = [
   {
     key: "1",
@@ -118,19 +102,9 @@ const Template = ({ ...args }) => {
   const maxUploads = 10;
   const maxOperations = 7;
 
-  const [isOpenUploads, setIsOpenUploads] = useState(false);
-  const [isOpenOperations, setIsOpenOperations] = useState(false);
   const [isOpenButton, setIsOpenButton] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [state, setState] = useState({ uploads: 0, operations: 0 });
-
-  const onUploadClick = () => {
-    setState({ uploads: 0, operations: 0 });
-    setIsUploading(true);
-    setIsOpenUploads(true);
-    setIsOpenOperations(true);
-    setIsOpenButton(true);
-  };
 
   useEffect(() => {
     if (!isUploading) return;
@@ -151,31 +125,6 @@ const Template = ({ ...args }) => {
 
     return () => clearInterval(interval);
   }, [isUploading, state]);
-
-  const uploadPercent = (state.uploads / maxUploads) * 100;
-  const operationPercent = (state.operations / maxOperations) * 100;
-
-  const progressOptions = [
-    {
-      key: "1",
-      label: "Uploads",
-      icon: MobileActionsRemoveReactSvgUrl,
-      percent: uploadPercent,
-      status: `${state.uploads}/${maxUploads}`,
-      open: isOpenUploads,
-      onCancel: () => setIsOpenUploads(false),
-    },
-    {
-      key: "2",
-      label: "Other operations",
-      icon: MobileActionsRemoveReactSvgUrl,
-      percent: operationPercent,
-      status: `3 files not loaded`,
-      open: isOpenOperations,
-      onCancel: () => setIsOpenOperations(false),
-      error: true,
-    },
-  ];
 
   const buttonOptions = [
     {
@@ -207,7 +156,11 @@ const Template = ({ ...args }) => {
     typeof window !== "undefined" && window?.location?.href.includes("docs");
 
   return (
-    <StyledWrapper isAutoDocs={isAutoDocs}>
+    <div
+      className={classNames(styles.wrapper, {
+        [styles.isAutoDocs]: isAutoDocs,
+      })}
+    >
       <MainButtonMobile
         {...args}
         style={{
@@ -221,15 +174,12 @@ const Template = ({ ...args }) => {
           bottom: "25px",
           insetInlineEnd: "60px",
         }}
-        progressOptions={progressOptions}
         buttonOptions={buttonOptions}
-        onUploadClick={onUploadClick}
         withButton
         isOpenButton={isOpenButton}
-        percent={uploadPercent}
         opened={false}
       />
-    </StyledWrapper>
+    </div>
   );
 };
 

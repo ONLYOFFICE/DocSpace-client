@@ -24,12 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { Box } from "@docspace/shared/components/box";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import { DeviceType, LDAPOperation } from "@docspace/shared/enums";
@@ -55,14 +54,25 @@ const ButtonContainer = ({
   openResetModal,
 }) => {
   const { t } = useTranslation(["Settings", "Common"]);
+  const [isSubmitLoading, setIsSubmitLoading] = useState(false);
 
   const onSaveClick = React.useCallback(() => {
-    saveLdapSettings(t).catch((e) => toastr.error(e));
+    setIsSubmitLoading(true);
+    saveLdapSettings(t)
+      .catch((e) => toastr.error(e))
+      .finally(() => {
+        setIsSubmitLoading(false);
+      });
   }, [saveLdapSettings, t]);
 
   const onResetClick = React.useCallback(() => {
+    setIsSubmitLoading(true);
     closeResetModal();
-    restoreToDefault(t).catch((e) => toastr.error(e));
+    restoreToDefault(t)
+      .catch((e) => toastr.error(e))
+      .finally(() => {
+        setIsSubmitLoading(false);
+      });
   }, [restoreToDefault, t]);
 
   const getTopComponent = React.useCallback(() => {
@@ -74,11 +84,13 @@ const ButtonContainer = ({
   }, [isMobileView]);
 
   const saveDisabled =
-    (!isLdapEnabled || isUIDisabled || !hasChanges) && !hasProgressError;
-  const resetDisabled = !isLdapEnabled || isUIDisabled || isDefaultSettings;
+    (isSubmitLoading || !isLdapEnabled || isUIDisabled || !hasChanges) &&
+    !hasProgressError;
+  const resetDisabled =
+    isSubmitLoading || !isLdapEnabled || isUIDisabled || isDefaultSettings;
 
   return (
-    <Box className="ldap_buttons-container">
+    <div className="ldap_buttons-container">
       <SaveCancelButtons
         className="save-cancel-buttons"
         onSaveClick={onSaveClick}
@@ -102,7 +114,7 @@ const ButtonContainer = ({
           confirmationResetModal={confirmationResetModal}
         />
       ) : null}
-    </Box>
+    </div>
   );
 };
 

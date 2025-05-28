@@ -1,0 +1,539 @@
+{
+  "key_path": "EncryptDataWarningDescription",
+  "content": "Storage encryption may take time. The spaces will be unavailable during the process. Make sure that you have enough storage and that your data is backed up. Don't forget to disable automatic backups and stop all the running ones. Otherwise, it will be done automatically.",
+  "content_en_sha1_hash": "03a845bcba913449dba261e59a77cd061046bb71",
+  "created_at": "2025-05-19T21:30:57.446Z",
+  "updated_at": "2025-05-26T07:57:33.001Z",
+  "comment": {
+    "text": "This translation key is used for a warning message that explains the potential impact of encrypting data on storage availability and recommends disabling automatic backups. It appears in the UI as a dialog or confirmation message before proceeding with encryption. Translators should provide a clear and concise message to inform users about the process.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:57.380Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/management/src/app/settings/encrypt-data/page.client.tsx",
+      "line_number": 98,
+      "context": "<div className=\"wrapper-block\">\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:Warning\")}!\n </Text>\n <Text className=\"description\">\n {t(\"EncryptDataWarningDescription\")}\n </Text>\n {encryptionBlockHelpUrl ? (\n <Text>\n <Trans\n t={t}",
+      "module": "/packages/management"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation includes a comma after \"الوقت\" (time). While not strictly incorrect, it disrupts the flow and is less common in this type of technical warning.",
+          "suggestion": "Remove the comma after \"الوقت\"."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"العمليات الجارية\" (al-'amaliyyat al-jariyah) translates literally to 'ongoing operations'. A more accurate and user-friendly translation for 'running ones' in this context would be 'النسخ الاحتياطية الجارية' (al-nusukh al-ihtiyatiyyah al-jariyah - ongoing backups).",
+          "suggestion": "Change \"العمليات الجارية\" to \"النسخ الاحتياطية الجارية\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Spaces will be unavailable' is not accurately translated. 'Sahələr' is more accurately 'Areas' not 'Spaces'.  A better translation would convey the meaning of storage volumes or locations becoming inaccessible.",
+          "suggestion": "Sahələr əlçatmaz olacaq should be replaced with something like 'Yaddaş sahələri' or 'Yaddaş yerləri' əlçatmaz olacaq."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Make sure that you have enough storage' is awkwardly translated. The word 'kifayət' (enough) is a bit clunky in this context.",
+          "suggestion": "Kifayət qədər yaddaşınız olduğundan should be replaced with 'Müəyyən miqdarda yaddaşınız olduğundan' or 'Təminatlı yaddaşınız olduğundan'."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure could be improved for better flow and readability. The use of conjunctions and phrasing feels somewhat disjointed.",
+          "suggestion": "Consider restructuring the sentences for a smoother and more natural reading experience in Azerbaijani. For instance, combining sentences or reordering clauses."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation lacks the consistent punctuation of the original. Specifically, a period should be added at the end of the sentence 'Уверете се, че имате достатъчно място за съхранение и че вашите данни са архивирани.'",
+          "suggestion": "Уверете се, че имате достатъчно място за съхранение и че вашите данни са архивирани."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'backed up' is translated as 'архивирани'. While not incorrect, 'архивирани' implies a complete archive, whereas 'backed up' more broadly refers to a copy for recovery. A better translation might be 'записани' or 'резервни'.",
+          "suggestion": "Уверете се, че имате достатъчно място за съхранение и че вашите данни са записани."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence 'Úložiště budou během procesu nedostupná' is grammatically correct but could be improved for flow. A more natural phrasing might be 'Úložiště nebudou během procesu dostupná' or 'Úložiště nebudou během procesu k dispozici'.",
+          "suggestion": "Úložiště nebudou během procesu dostupná."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'V opačném případě se bude provádět automaticky' doesn't accurately convey the original meaning. The original implies that if these steps aren't taken, the encryption will proceed *regardless*.  A better translation would emphasize this inevitability.",
+          "suggestion": "V opačném případě bude šifrování provedeno automaticky, bez ohledu na vaše akce."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'automatic backups' is translated as 'automatische Backups'. While understandable, it's more natural to use 'automatische Datensicherungen' or 'automatische Sicherungen' in this context. 'Backups' is commonly used and accepted in German technical contexts, but a more complete translation would improve clarity.",
+          "suggestion": "automatische Datensicherungen"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The final sentence 'Otherwise, they will be done automatically.' is a bit awkward in German.  It doesn't quite convey the meaning of the English original ('Otherwise, it will be done automatically').  It implies the backups will occur *regardless* of the user's action, which might not be the intent.",
+          "suggestion": "Andernfalls werden sie automatisch gestartet."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence 'Μην ξεχάσετε να απενεργοποιήσετε τα αυτόματα αντίγραφα ασφαλείας και να σταματήσετε όλα τα τρέχοντα.' is slightly awkward. 'τρέχοντα' refers to ongoing backups, but the phrasing can be improved for better flow.",
+          "suggestion": "Μην ξεχάσετε να απενεργοποιήσετε τα αυτόματα αντίγραφα ασφαλείας και να σταματήσετε τυχόν τρέχοντα."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Otherwise, it will be done automatically' (Διαφορετικά, θα γίνονται αυτόματα) doesn't quite capture the nuance of the English sentence which implies the encryption will proceed without intervention if the user doesn't take the preventative steps.",
+          "suggestion": "Διαφορετικά, η διαδικασία θα ξεκινήσει αυτόματα."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Don't forget to disable automatic backups and stop all the running ones\" is translated as \"No olvide desactivar las copias de seguridad automáticas y detener las que estén en curso.\" While technically correct, it's less natural in Spanish.  A more fluent translation would incorporate the idea of *all* running backups.",
+          "suggestion": "No olvide desactivar las copias de seguridad automáticas y detener todas las copias de seguridad en curso."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Otherwise, it will be done automatically.\" is translated as \"De lo contrario, esto se hará automáticamente.\" The \"esto\" is vague.  It's unclear what 'this' refers to.",
+          "suggestion": "De lo contrario, se hará automáticamente."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Make sure that you have enough storage\" is translated as \"Համոզվեք, որ ունեք բավարար պահեստավորման տարածք\". While technically correct, a more natural Armenian phrasing would be \"ապահովագրեք, որ ունեք բավարար պահեստավորման տարածք\" or simply \"ապահովագրեք բավարար պահեստավորման տարածք\".",
+          "suggestion": "ապահովագրեք բավարար պահեստավորման տարածք"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Don't forget to disable automatic backups\" is translated as \"Մի մոռացեք անջատել ավտոմատ կրկնօրինակումները\".  \"Կրկնօրինակումները\" (duplicates) isn't quite the right term; it should be \"պահեստային պատճենները\" (backup copies).",
+          "suggestion": "Մի մոռացեք անջատել ավտոմատ պահեստային պատճենները"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"stop all the running ones\" is translated as \"դադարեցնել բոլոր ընթացիկները\". While understandable, it's not the most idiomatic Armenian.  A better translation would be \"դադարեցնել ընթացողները\" or \"դադարեցնել գործողները\".",
+          "suggestion": "դադարեցնել ընթացողները"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Don't forget to disable automatic backups and stop all the running ones' is awkwardly translated. The original English implies stopping any *ongoing* backups. The Italian 'interrompere quelli in corso' is accurate but less clear than a more direct equivalent.",
+          "suggestion": "Non dimenticare di disabilitare i backup automatici e interrompere quelli in esecuzione."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The sentence 'In caso contrario, verranno interrotti automaticamente' loses the nuance of the English original. The English means the process will be stopped on its own if these steps aren't taken. The Italian implies the backups will be interrupted regardless.",
+          "suggestion": "Altrimenti, il processo verrà interrotto automaticamente."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Don't forget to disable automatic backups and stop all the running ones\" is slightly awkward in Japanese. A more natural phrasing would be to emphasize stopping the backups before disabling the feature.",
+          "suggestion": "自動バックアップを停止し、その後無効にすることを忘れないでください。"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence \"Otherwise, it will be done automatically.\" could be slightly more formally worded to match the overall tone.",
+          "suggestion": "そうしないと、自動的に処理されます。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"해당 공간을 사용할 수 없게 됩니다\" is a bit awkward. It literally translates to \"the corresponding space will become unavailable.\" A more natural phrasing would be something like \"해당 저장 공간은 사용할 수 없습니다\" (the corresponding storage space is unavailable).",
+          "suggestion": "해당 저장 공간은 사용할 수 없습니다"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The sentence \"아니면 자동으로 수행됩니다\" could be misinterpreted. It suggests the encryption will happen automatically regardless of user action. It’s more precise to say something like \"그렇지 않으면 자동으로 진행될 수 있습니다\" (Otherwise, it may proceed automatically).",
+          "suggestion": "그렇지 않으면 자동으로 진행될 수 있습니다"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ຫົນທາງຈະບໍ່ສາມາດໃຊ້ໄດ້\" (hon thang ja bok samat sai dai) translates literally to 'the roads will not be usable'. It's an awkward phrasing in this context. It should convey that the storage spaces/volumes will be unavailable.",
+          "suggestion": "ຫົນທາງເກັບມ້ຽນຈະບໍ່ສາມາດໃຊ້ໄດ້ (hon thang kep mien ja bok samat sai dai) or ພື້ນທີ່ເກັບມ້ຽນຈະບໍ່ສາມາດໃຊ້ໄດ້ (pheun thi kep mien ja bok samat sai dai)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase “ຢຸດການດໍາເນີນງານທີ່ກໍາລັງດໍາເນີນຢູ່ທັງໝົດ” (yut kan damnoen ngan thi kamlang damnoen yu thang mot) is a bit verbose. It translates to 'stop all the operations that are currently running'.",
+          "suggestion": "ຢຸດການສໍາຮອງຂໍ້ມູນທີ່ກໍາລັງເຮັດຢູ່ທັງໝົດ (yut kan sam hor khomun thi kamlang het yu thang mot)"
+        },
+        {
+          "type": "formatting",
+          "description": "The Lao translation is a single paragraph. While not strictly incorrect, breaking it into shorter sentences improves readability.",
+          "suggestion": "Consider breaking the translation into shorter sentences for better readability."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a slightly more formal tone than the original. While not strictly incorrect, it could be adjusted for better consistency with a typical user interface.",
+          "suggestion": "Consider a slightly less formal phrasing, e.g., replacing 'Pārliecinieties, ka jums ir pietiekami daudz vietas krātuvē' with 'Pārliecinies, ka tev ir pietiekami daudz vietas krātuvē'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'pretējā gadījumā tas tiks izdarīts automātiski' is a literal translation of 'Otherwise, it will be done automatically.' While accurate, a more natural-sounding Latvian phrasing could improve readability. It implies an automatic action which might not be clear.",
+          "suggestion": "Consider a phrasing like 'Ja to neizdarīsiet, tas notiks automātiski' or 'Ja to neizdarīsiet, process sāksies automātiski.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Dutch translation uses 'ruimtes' which, while understandable, is less common and slightly awkward in this context. 'Opslagplaatsen' or simply 'de opslag' would be more natural.",
+          "suggestion": "Consider replacing 'ruimtes' with 'opslagplaatsen' or 'de opslag'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Make sure that you have enough storage' is translated as 'Zorg ervoor dat u genoeg opslagruimte hebt'. While technically correct, a more natural phrasing for Dutch would be 'Zorg ervoor dat u voldoende opslagruimte heeft'.",
+          "suggestion": "Change 'u genoeg opslagruimte hebt' to 'u voldoende opslagruimte heeft'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Make sure that you have enough storage\" is translated as \"Upewnij się, że masz wystarczająco dużo pamięci\". While technically correct, \"pamięci\" refers to memory, not storage. A more accurate translation would be \"Upewnij się, że masz wystarczająco dużo miejsca\".",
+          "suggestion": "Upewnij się, że masz wystarczająco dużo miejsca."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'running ones' is not accurately translated in the Polish sentence 'zatrzymaj wszystkie uruchomione'. It would be more accurate to say 'trwałe'.",
+          "suggestion": "zatrzymaj wszystkie trwałe."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Certifique-se de que dispõe\" is overly formal and not the most natural way to say \"Make sure that you have\" in Portuguese. A more common and accessible phrasing would be \"Certifique-se de que você tem\" or \"Verifique se você tem\".",
+          "suggestion": "Certifique-se de que você tem"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"é feita uma cópia de segurança dos seus dados\" is grammatically correct, but a more natural translation of \"Make sure that your data is backed up\" would be \"faça um backup dos seus dados\" or \"verifique se seus dados estão salvos\".",
+          "suggestion": "faça um backup dos seus dados"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Caso contrário, isso será feito automaticamente\" is a literal translation and slightly awkward in Brazilian Portuguese. It implies the action will be done *to* something, not that it will happen automatically.",
+          "suggestion": "Caso contrário, será feito automaticamente."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Make sure that you have enough storage\" is translated as \"Verificați dacă spațiul de stocare rămas este suficient pentru salvarea backup-ului datelor.\" This is overly complex and doesn't accurately convey the original meaning. It implies the storage is needed *for* the backup, not just that it exists.",
+          "suggestion": "Verificați dacă aveți suficient spațiu de stocare."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Otherwise, it will be done automatically\" is translated as \"Altfel, se va salva automat.\" This is inaccurate. It suggests the backup will be saved automatically, when the English implies the encryption process will be automatic.",
+          "suggestion": "Altfel, procesul va continua automat."
+        },
+        {
+          "type": "formatting",
+          "description": "The original text includes a sentence fragment \"Don't forget to disable automatic backups and stop all the running ones.\" This phrasing is a bit awkward and could be improved for clarity and fluency in Romanian. It's also been broken up.",
+          "suggestion": "Nu uitați să dezactivați backup-urile automate și să opriți cele aflate în desfășurare."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"stop all the running ones\" is awkwardly translated to \"zastaviť všetky spustené procesy zálohovania\". A more natural and accurate translation would be something like \"zastaviť všetky prebiehajúce zálohovacie úlohy\" or \"zastaviť všetky bežiacie zálohy\".",
+          "suggestion": "zastaviť všetky prebiehajúce zálohovacie úlohy"
+        },
+        {
+          "type": "formatting",
+          "description": "The original English text uses sentence fragments (\"Otherwise, it will be done automatically.\"). The Slovak translation maintains a full sentence structure, which might not perfectly align with the intended tone. Consider re-evaluating whether this continuation is necessary in Slovak.",
+          "suggestion": "Consider removing or modifying \"V opačnom prípade sa to uskutoční automaticky.\" to better align with the original tone."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'The spaces will be unavailable' is not the most natural translation of 'The spaces will be unavailable'. A more natural translation would be 'Prostori ne bodo dostopni' or 'Prostori ne morete uporabljati'.",
+          "suggestion": "Prostori ne bodo dostopni"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'running ones' can be improved for clarity. While technically correct, it's a bit awkward in Slovenian. It would be more natural to say 'že potekajoče varnostne kopije'.",
+          "suggestion": "že potekajoče varnostne kopije"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Make sure that you have enough storage\" is translated as \"Уверите се да имате довољно складишног простора\". While technically correct, a more natural and common phrasing in Serbian would be \"Проверите да ли имате довољно простора.\" or \"Осигурајте да имате довољно простора.\"",
+          "suggestion": "Проверите да ли имате довољно простора."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Don't forget to disable automatic backups and stop all the running ones\" is translated as \"Не заборавите да искључите аутоматске сигурносне копије и зауставите све активне.\". While understandable, a more common and clearer phrasing would be \"Не заборавите да искључите аутоматске резервне копије и да зауставите све текуће.\"",
+          "suggestion": "Не заборавите да искључите аутоматске резервне копије и да зауставите све текуће."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'running' is translated as 'активне'. While 'активне' can mean active, in this context 'текуће' (current/ongoing) is more appropriate for backups.",
+          "suggestion": "текуће"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'резервне' is used instead of 'сигурносне'. While both are technically correct, 'резервне' is more common and accurate in the context of backups.",
+          "suggestion": "резервне"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'Prostori će biti nedostupni tokom procesa' is a bit clunky. A more natural phrasing would be 'Prostorija će biti nedostupne tokom procesa' or 'Prostor će biti nedostupan tokom procesa'.",
+          "suggestion": "Prostorija će biti nedostupne tokom procesa"
+        },
+        {
+          "type": "grammar",
+          "description": "The word 'aktivne' (active) in 'zaustavite sve aktivne' is not the best fit. 'U toku' or 'pokrenute' would be more appropriate for describing ongoing backups.",
+          "suggestion": "zaustavite sve sigurnosne kopije u toku"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Inače, to će biti automatski učinjeno' does not accurately convey the meaning of 'Otherwise, it will be done automatically.' It implies a contrasting action is being presented, which is not the intention. A more accurate translation should express a consequence if the previous steps are not followed.",
+          "suggestion": "U suprotnom, automatski će se nastaviti."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence \"Bu süreçte alanlar kullanılamaz olacaktır\" is slightly awkward. \"Bu süreçte alanlar kullanılamaz\" would be more natural.",
+          "suggestion": "Bu süreçte alanlar kullanılamaz."
+        },
+        {
+          "type": "formatting",
+          "description": "There is a slight inconsistency in sentence structure. The first two sentences combine a statement and a consequence. While understandable, it could be improved for clarity.",
+          "suggestion": "Depolama alanını şifreleme işlemi zaman alabilir. Bu süreçte alanlar kullanılamaz olacaktır. Yeterli depolama alanınızın olduğundan ve verilerinizin yedeklendiğinden emin olun."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Aksi takdirde bu işlem otomatik olarak yapılacaktır\" is a slightly unnatural translation of \"Otherwise, it will be done automatically.\" It implies an action that is not necessarily desired. The English original suggests a default behavior.",
+          "suggestion": "Aksi takdirde işlem otomatik olarak başlatılabilir."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Make sure that you have enough storage\" is translated as \"Переконайтеся, що у вас достатньо місця в сховищі\". While technically correct, it sounds slightly unnatural in Ukrainian. A more natural phrasing would be something like \"Переконайтеся, що у вас достатньо місця для зберігання даних\" or simply \"Переконайтеся, що у вас достатньо місця\".",
+          "suggestion": "Переконайтеся, що у вас достатньо місця для зберігання даних"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"data is backed up\" is translated as \"створено резервну копію даних\". While technically correct, a more concise and natural translation would be \"зроблено резервну копію даних\" or even simply \"зроблено копію\".",
+          "suggestion": "зроблено резервну копію"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure in the English content has a flow. The translation feels slightly more disjointed.  Consider restructuring some sentences to improve readability in Ukrainian. For example, the final sentence could be rephrased to better connect to the previous warnings.",
+          "suggestion": "Consider rephrasing the last sentence to create a smoother flow. Example: \"Інакше це відбудеться автоматично.\""
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'The spaces will be unavailable' is too literal. A more natural Vietnamese phrasing would be 'Các khu vực lưu trữ sẽ không thể sử dụng được' or 'Các dung lượng lưu trữ sẽ không thể sử dụng được'.",
+          "suggestion": "Các khu vực lưu trữ sẽ không thể sử dụng được"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'zones' isn't directly translatable and 'spaces' is also not the most fitting term. It needs to be adjusted to suit the specific context of storage areas.",
+          "suggestion": "Các dung lượng lưu trữ"
+        },
+        {
+          "type": "formatting",
+          "description": "The final sentence 'Otherwise, it will be done automatically' is a bit abrupt and doesn't flow well. Consider rephrasing for better readability.",
+          "suggestion": "Nếu không, quá trình này sẽ được thực hiện tự động."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Don't forget to disable automatic backups and stop all the running ones\" is not accurately translated. The Chinese translation, \"请提前禁用自动备份功能，并停止所有正在运行的备份,\" implies disabling and stopping backups *before* the encryption process, while the English original is a reminder *during* the process.",
+          "suggestion": "请注意，请提前禁用自动备份功能，并停止所有正在运行的备份。"
+        },
+        {
+          "type": "formatting",
+          "description": "The English content uses a conversational tone. The Chinese translation is slightly more formal. While not inherently an error, it changes the overall tone.  Consider adjusting the Chinese for a more conversational feel if that's preferred.",
+          "suggestion": "存储加密可能需要一些时间，在此过程中，空间将暂时无法使用。请确认您有足够的存储空间，并且所有数据已备份。请务必提前禁用自动备份功能，并停止所有正在运行的备份。"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

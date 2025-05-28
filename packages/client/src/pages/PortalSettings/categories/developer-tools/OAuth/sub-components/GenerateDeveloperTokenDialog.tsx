@@ -48,7 +48,7 @@ import { Link } from "@docspace/shared/components/link";
 import { getCorrectDate } from "@docspace/shared/utils";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 
-import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
+import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 import { StyledGenerateDevelopTokenContainer } from "../OAuth.styled";
@@ -68,7 +68,6 @@ const getDate = (date: Date, i18nArg: i18n) => {
 const GenerateDeveloperTokenDialog = ({
   client,
   email,
-
   setGenerateDeveloperTokenDialogVisible,
 }: GenerateDeveloperTokenDialogProps) => {
   const { i18n: i18nParam, t } = useTranslation([
@@ -85,6 +84,7 @@ const GenerateDeveloperTokenDialog = ({
     expires: getDate(new Date(), i18nParam),
   });
   const [requestRunning, setRequestRunning] = React.useState(false);
+  const [secret, setSecret] = React.useState("");
 
   const onCopyClick = React.useCallback(async () => {
     copy(token);
@@ -102,11 +102,7 @@ const GenerateDeveloperTokenDialog = ({
 
     setRequestRunning(true);
 
-    await api.oauth.revokeDeveloperToken(
-      token,
-      client!.clientId,
-      client!.clientSecret,
-    );
+    await api.oauth.revokeDeveloperToken(token, client!.clientId, secret);
 
     setRequestRunning(false);
 
@@ -129,8 +125,10 @@ const GenerateDeveloperTokenDialog = ({
 
     setRequestRunning(true);
 
+    const { clientSecret } = await api.oauth.getClient(client.clientId);
+
     api.oauth
-      .generateDevelopToken(client.clientId, client.clientSecret, client.scopes)
+      .generateDevelopToken(client.clientId, clientSecret, client.scopes)
       ?.then((data) => {
         setRequestRunning(false);
 
@@ -158,13 +156,22 @@ const GenerateDeveloperTokenDialog = ({
       });
   };
 
+  React.useEffect(() => {
+    const fecthClient = async () => {
+      const { clientSecret } = await api.oauth.getClient(client!.clientId);
+
+      setSecret(clientSecret);
+    };
+
+    fecthClient();
+  }, [client?.clientId]);
+
   return (
     <ModalDialog
       visible
       onClose={onClose}
       displayType={ModalDialogType.modal}
       autoMaxHeight
-      scale
     >
       <ModalDialog.Header>
         {token ? t("Token") : t("GenerateToken")}
@@ -245,7 +252,7 @@ const GenerateDeveloperTokenDialog = ({
           scale
           onClick={token ? onRevoke : onClose}
           size={ButtonSize.normal}
-          isDisabled={requestRunning}
+          isDisabled={requestRunning || !secret}
         />
       </ModalDialog.Footer>
     </ModalDialog>
@@ -268,7 +275,6 @@ export default inject(
     return {
       setGenerateDeveloperTokenDialogVisible,
       client: bufferSelection,
-
       email: user?.email,
     };
   },

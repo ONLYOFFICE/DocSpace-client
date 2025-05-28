@@ -27,7 +27,7 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 
 import { RoomsType } from "@docspace/shared/enums";
 import { isLockedSharedRoom as isLockedSharedRoomUtil } from "@docspace/shared/utils";
@@ -63,6 +63,8 @@ const InfoPanelBodyContent = ({
   setImage,
   image,
   onChangeFile,
+  templateEventVisible,
+  setIsShareFormData,
   ...props
 }) => {
   const { groupId } = useParams();
@@ -110,6 +112,8 @@ const InfoPanelBodyContent = ({
     isSeveralItems,
     isVDR: selectedItems[0]?.roomType === RoomsType.VirtualDataRoom,
     isLockedSharedRoom,
+    onOpenPanel: setIsShareFormData,
+    onlyOneLink: infoPanelSelection?.isPDFForm,
   };
 
   const viewHelper = new ViewHelper({
@@ -219,7 +223,11 @@ const InfoPanelBodyContent = ({
           image={image}
           onChangeImage={onChangeIcon}
           onClose={() => setAvatarEditorDialogVisible(false)}
-          onSave={(img) => onSaveRoomLogo(selection.id, img, selection, true)}
+          onSave={(img) =>
+            !templateEventVisible
+              ? onSaveRoomLogo(selection.id, img, selection, true)
+              : setAvatarEditorDialogVisible(false)
+          }
           onChangeFile={onChangeFile}
           classNameWrapperImageCropper="icon-editor"
           visible={image.uploadedFile}
@@ -255,7 +263,12 @@ export default inject(
       setShowSearchBlock,
     } = infoPanelStore;
 
-    const { editRoomDialogProps, createRoomDialogProps } = dialogsStore;
+    const {
+      editRoomDialogProps,
+      createRoomDialogProps,
+      templateEventVisible,
+      setIsShareFormData,
+    } = dialogsStore;
 
     const selection =
       infoPanelSelection?.length > 1 ? null : infoPanelSelection;
@@ -306,6 +319,8 @@ export default inject(
       uploadedFile,
       setImage,
       image,
+      templateEventVisible,
+      setIsShareFormData,
     };
   },
 )(observer(InfoPanelBodyContent));

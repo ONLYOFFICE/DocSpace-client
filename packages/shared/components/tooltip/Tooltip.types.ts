@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ITooltip } from "react-tooltip";
+import { ITooltip, TooltipRefProps } from "react-tooltip";
 
 export type TTooltipPlace =
   | "top"
@@ -79,4 +79,6 @@ export type TooltipProps = Pick<
   maxWidth?: string;
   /** Whether to allow fallback to the perpendicular axis of the preferred placement */
   fallbackAxisSideDirection?: TFallbackAxisSideDirection;
+  noUserSelect?: boolean;
+  ref?: React.RefObject<TooltipRefProps | null>;
 };

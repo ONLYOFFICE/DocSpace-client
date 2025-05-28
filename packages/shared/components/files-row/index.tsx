@@ -27,3 +27,4 @@
 export { FilesRow } from "./files-row";
 export { FilesRowWrapper } from "./files-row-wrapper";
 export { FilesRowContent } from "./files-row-content";
+export { FilesRowContainer } from "./files-row-container";

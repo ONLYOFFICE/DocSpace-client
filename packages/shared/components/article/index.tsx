@@ -274,7 +274,10 @@ const Article = ({
           scrollClass="article-scroller"
         >
           {showBackButton && currentDeviceType !== DeviceType.mobile ? (
-            <BackButton showText={showText} />
+            <BackButton
+              showText={showText}
+              currentDeviceType={currentDeviceType}
+            />
           ) : null}
           {articleBodyContent ? articleBodyContent.props.children : null}
           {!showArticleLoader ? (

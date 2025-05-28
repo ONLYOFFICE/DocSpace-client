@@ -528,16 +528,21 @@
     p {
       font-size: 13px;
     }
+    margin-inline-start: 12px;
   }
 
   @include tablet {
     &[data-show-article="false"] {
       justify-content: center;
     }
+    &[data-show-article="true"] {
+      margin-inline-start: 8px;
+    }
   }
 
   @include mobile {
     margin-bottom: 0;
+    margin-inline-start: 4px;
   }
 
   .arrowIcon {

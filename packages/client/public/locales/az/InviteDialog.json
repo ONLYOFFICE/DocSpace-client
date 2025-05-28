@@ -11,5 +11,6 @@
   "LinkCopySuccess": "Link köçürüldü",
   "SendInvitation": "Dəvət göndərin",
   "UserMaxAvailableRoleWarning": "Qonaq və İstifadəçilər Otaq administratoru kimi təyin edilə bilməz. Yalnız Otaq və {{productName}} administratorları göstərilən rol üçün uyğundur.",
-  "UsersAlreadyAdded": "Bəzi istifadəçilər artıq əlavə olunub"
+  "UsersAlreadyAdded": "Bəzi istifadəçilər artıq əlavə olunub",
+  "UsersCannotBeAdded": "İstifadəsiz kontaktlar otağa əlavə edilə bilməz."
 }

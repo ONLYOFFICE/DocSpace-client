@@ -13,6 +13,7 @@ import {
   Message,
   TEventDelivery,
   TAutoLogin,
+  TVariable,
 } from "./flows.types";
 import { getCookie } from "../../utils/cookie";
 
@@ -510,7 +511,7 @@ class FlowsApi {
     sender_name: string,
     session_id: string,
     flow_id: string,
-  ): Promise<Promise<Message[]>> {
+  ): Promise<Message[]> {
     const response: { data: Message[] } = await FlowsApi.getAPI().post(
       `monitor/messages`,
       {
@@ -523,6 +524,40 @@ class FlowsApi {
     );
 
     return response.data;
+  }
+
+  static async createVariable(name: string, value: string): Promise<TVariable> {
+    const res = await FlowsApi.getAPI().post("/variables/", {
+      name,
+      value,
+      type: "str",
+      default_fields: [],
+    });
+
+    return res.data as TVariable;
+  }
+
+  static async readVariable(name: string): Promise<TVariable | undefined> {
+    try {
+      const response = await FlowsApi.getAPI().get(`/variables/${name}`);
+
+      const variable = response.data as TVariable;
+
+      return variable;
+    } catch (e: unknown) {
+      console.log(e);
+      return undefined;
+    }
+  }
+
+  static async updateVariable(id: string, value: string): Promise<TVariable> {
+    const response = await FlowsApi.getAPI().patch(`/variables/${id}`, {
+      value,
+      id,
+      default_fields: [],
+    });
+
+    return response.data as TVariable;
   }
 }
 

@@ -113,6 +113,14 @@
   background-color: var(--chat-message-ai-background-color);
 }
 
+.chatMessageError {
+  background-color: var(--chat-message-error-background-color);
+
+  p {
+    color: var(--text-color) !important;
+  }
+}
+
 .chatMessageTextColor {
   color: var(--chat-message-color);
 
@@ -225,4 +233,6 @@
 .listBlock {
   padding: 0 8px 0 16px;
   margin: 0;
+
+  white-space: normal;
 }

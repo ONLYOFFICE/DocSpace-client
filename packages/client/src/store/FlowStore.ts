@@ -33,12 +33,15 @@ class FlowStore {
 
   error: Error | null = null;
 
-  apiKey: string = "";
+  apiKey: string | null = null;
 
   userId: string = "";
 
   vectorizedFiles: (TFile | SimpleFile)[] = [];
+
   wrongFiles: (TFile | SimpleFile)[] = [];
+
+  isServerAvailable = true;
 
   constructor() {
     this.api = new FlowsApi("/onlyflow/api/v1");
@@ -46,6 +49,8 @@ class FlowStore {
   }
 
   setAiChatIsVisible = (visible: boolean) => {
+    if (!this.isServerAvailable) return;
+
     this.aiChatIsVisible = visible;
   };
 
@@ -57,10 +62,13 @@ class FlowStore {
       runInAction(() => {
         this.userId = data.user_id;
         this.apiKey = getCookie(API_KEY_NAME) ?? "";
+        this.isServerAvailable = true;
       });
     } catch (error) {
       runInAction(() => {
+        this.isServerAvailable = false;
         this.error = error as Error;
+        this.apiKey = "";
       });
     } finally {
       runInAction(() => {
@@ -88,10 +96,17 @@ class FlowStore {
   };
 
   checkVectorizeDocument = async (file: TFile) => {
-    if (!this.apiKey) {
+    if (this.apiKey === null) {
       setTimeout(() => {
         this.checkVectorizeDocument(file);
       }, 300);
+      return;
+    }
+
+    if (!this.isServerAvailable) {
+      runInAction(() => {
+        this.wrongFiles = [...this.wrongFiles, file];
+      });
       return;
     }
 
@@ -140,46 +155,58 @@ class FlowStore {
       return;
     }
 
-    const response = await FlowsApi.checkFolder(String(folderId));
-
-    const msg = response.outputs[0].outputs[0].messages[0]
-      ?.message as VectorizeDocumentStatus;
-
-    if (msg === "error") {
-      toastr.error(`Error checking vectorized documents`);
+    if (!this.isServerAvailable) {
+      runInAction(() => {
+        this.wrongFiles = [...this.wrongFiles, ...filesId];
+      });
       return;
     }
 
-    if (!msg) {
+    try {
+      const response = await FlowsApi.checkFolder(String(folderId));
+
+      const msg = response.outputs[0].outputs[0].messages[0]
+        ?.message as VectorizeDocumentStatus;
+
+      if (msg === "error") {
+        toastr.error(`Error checking vectorized documents`);
+        return;
+      }
+
+      if (!msg) {
+        filesId.forEach((f) => {
+          this.vectorizeDocument(f);
+        });
+
+        return;
+      }
+
+      const files: SimpleFile[] = msg
+        .split(", ")
+        .map((s) => {
+          const [id, version] = s.split(":");
+
+          const file = filesId.find(
+            (f) => String(f.id) === id && String(f.version) === version,
+          );
+
+          if (file && !this.localCheckVectorizeDocument(file)) return file;
+
+          return null;
+        })
+        .filter(Boolean) as SimpleFile[];
+
       filesId.forEach((f) => {
-        this.vectorizeDocument(f);
+        const isFound = msg.includes(`${f.id}:${f.version}`);
+
+        if (!isFound) this.vectorizeDocument(f);
       });
 
-      return;
+      this.vectorizedFiles = [...this.vectorizedFiles, ...files];
+    } catch (error) {
+      toastr.error(`Error checking vectorized documents`);
+      this.wrongFiles = [...this.wrongFiles, ...filesId];
     }
-
-    const files: SimpleFile[] = msg
-      .split(", ")
-      .map((s) => {
-        const [id, version] = s.split(":");
-
-        const file = filesId.find(
-          (f) => String(f.id) === id && String(f.version) === version,
-        );
-
-        if (file && !this.localCheckVectorizeDocument(file)) return file;
-
-        return null;
-      })
-      .filter(Boolean) as SimpleFile[];
-
-    filesId.forEach((f) => {
-      const isFound = msg.includes(`${f.id}:${f.version}`);
-
-      if (!isFound) this.vectorizeDocument(f);
-    });
-
-    this.vectorizedFiles = [...this.vectorizedFiles, ...files];
   };
 
   vectorizeDocument = async (file: TFile | SimpleFile) => {
@@ -220,13 +247,6 @@ class FlowStore {
   };
 
   summarizeToChat = async (file: TFile) => {
-    if (!this.apiKey) {
-      setTimeout(() => {
-        this.summarizeToChat(file);
-      }, 1000);
-      return;
-    }
-
     if (!this.aiChatIsVisible) {
       this.setAiChatIsVisible(true);
     }
@@ -253,10 +273,7 @@ class FlowStore {
   };
 
   summarizeToFile = async (file: TFile) => {
-    if (!this.apiKey) {
-      setTimeout(() => {
-        this.summarizeToFile(file);
-      }, 1000);
+    if (!this.isServerAvailable) {
       return;
     }
 

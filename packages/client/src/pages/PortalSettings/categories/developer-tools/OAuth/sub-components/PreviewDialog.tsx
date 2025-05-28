@@ -284,7 +284,7 @@ const PreviewDialog = ({
         <Button
           size={ButtonSize.normal}
           scale
-          label={t("Common:OkButton")}
+          label={t("Common:OKButton")}
           onClick={onClose}
         />
       </ModalDialog.Footer>

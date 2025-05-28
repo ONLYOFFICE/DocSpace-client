@@ -1,0 +1,264 @@
+{
+  "key_path": "HeaderStarting",
+  "content": "Starting the form filling process",
+  "content_en_sha1_hash": "6ee9c62e2fdb707a20025b9ce66b0fa659b90f7a",
+  "created_at": "2025-05-19T21:30:55.139Z",
+  "updated_at": "2025-05-21T10:46:37.600Z",
+  "comment": {
+    "text": "This translation key is used to display a message starting the form filling process. It appears as the header of a guidance tip dialog in the application, providing a descriptive text for users to understand the next step in the form filling process.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:21.452Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/guidance/configs/form-filling.ts",
+      "line_number": 11,
+      "context": "import { GuidanceConfig } from \"./configs.types\";\n \n export const getFormFillingConfig = ({ t }: GuidanceConfig): GuidanceStep[] => [\n {\n id: 1,\n header: t(\"FormFillingTipsDialog:HeaderStarting\"),\n description: t(\"FormFillingTipsDialog:TitleStarting\"),\n key: \"form-filling-starting\",\n placement: \"dynamic\",\n position: [\n {",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Стартиране процеса по попълване на формуляр' is a literal translation and could be improved for naturalness. 'Starting the form filling process' often implies initiation or beginning, which isn't fully captured.",
+          "suggestion": "Започване на попълване на формуляр"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'процеса по попълване' is a little clunky. A more concise phrasing would improve readability.",
+          "suggestion": "попълването на формуляр"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Formularausfüllvorgangs' is a very long and somewhat awkward compound word. While technically correct, it might be improved for readability.",
+          "suggestion": "Starten des Formularausfüllens"
+        },
+        {
+          "type": "formatting",
+          "description": "The compound word 'Formularausfüllvorgangs' is a single word and should be treated as such in any display formatting (e.g., capitalization).",
+          "suggestion": "No change needed, but ensure correct capitalization in the UI."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"양식 작성 프로세스 시작\" is a literal translation and could be improved for naturalness. While technically correct, it sounds somewhat stiff in Korean. A more natural phrasing might be preferred depending on the tone of the overall dialog.",
+          "suggestion": "Consider alternatives like \"양식 작성 시작\" or \"양식 작성 단계 시작\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Demararea completării a formularului' is a bit literal and sounds unnatural in Romanian. 'Demarare' implies a complex or official start. A more natural phrasing would focus on 'beginning' or 'starting'.",
+          "suggestion": "Începerea completării formularului"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, 'a formularului' is a bit clunky. The article 'a' is unnecessary here.",
+          "suggestion": "Începerea completării formularului"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'පුරවීමේ' (puravimē) is slightly awkward. While technically correct, it's a more formal/verbose way of saying 'puravā' (to fill).",
+          "suggestion": "පෝරම පුරවන්නී ක්‍රියාවලිය ආරම්භ කරයි"
+        },
+        {
+          "type": "grammar",
+          "description": "While not strictly incorrect, the sentence structure 'පෝරම පුරවන්නී ක්‍රියාවලිය ආරම්භ කරයි' can be slightly improved for better flow.  It's a bit passive.",
+          "suggestion": "පෝරම පුරවන්නී ක්‍රියාවලිය ආරම්භ වේ"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"开始填写表单进程\" is not the most natural or idiomatic way to express \"Starting the form filling process.\"  While technically correct, it sounds a little stiff.",
+          "suggestion": "开始填写表单"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,358 @@
+{
+  "key_path": "RoomWatermarkDisabled",
+  "content": "Watermark for files in the room disabled",
+  "content_en_sha1_hash": "9f0daf643db9ac09f2c5d26712afdb90fbe2454d",
+  "created_at": "2025-05-19T21:30:54.954Z",
+  "updated_at": "2025-05-28T09:30:02.436Z",
+  "comment": {
+    "text": "This translation key is used to display the message \"Watermark for files in the room disabled\" in a user interface. It likely appears on a settings or configuration page related to file sharing in a room or collaboration environment, such as a button label or tooltip. The translation key provides context for translators regarding the UI element and its purpose.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:43.581Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
+      "line_number": 241,
+      "context": "case \"RoomGroupRemove\":\n return t(\"InfoPanel:RoomGroupRemove\");\n case \"RoomWatermarkSet\":\n return t(\"InfoPanel:RoomWatermarkSet\");\n case \"RoomWatermarkDisabled\":\n return t(\"InfoPanel:RoomWatermarkDisabled\");\n case \"RoomIndexingEnabled\":\n return t(\"InfoPanel:RoomIndexingEnabled\");\n case \"RoomIndexingDisabled\":\n return t(\"InfoPanel:RoomIndexingDisabled\");\n case \"RoomLifeTimeSet\": {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Otaqdakı fayllar üçün su nişanı deaktiv edilib' is a literal translation that doesn't quite capture the nuance of 'Watermark for files in the room disabled'. It sounds slightly awkward in Azerbaijani.",
+          "suggestion": "Consider a more natural phrasing like 'Otaqdakı faylların üzərinə olan nişan söndürülüb' or 'Otaqdakı fayllar üzərinə vurulan nişan ləğv edilib'."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Vodoznak pro soubory v místnosti vypnut\" doesn't fully convey the meaning of \"Watermark for files in the room disabled\". \"Vypnut\" implies something was turned off, but a more accurate translation would suggest the watermark feature is deactivated or unavailable.",
+          "suggestion": "Vodoznak pro soubory v místnosti je deaktivován"
+        },
+        {
+          "type": "grammar",
+          "description": "While \"Vodoznak pro soubory v místnosti je deaktivován\" is grammatically correct, the original translation sounds a bit abrupt. It would flow better to use a more natural phrasing.",
+          "suggestion": "Vodoznak pro soubory v místnosti byl vypnut"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Έγινε απενεργοποίηση υδατογραφήματος για τα αρχεία στο δωμάτιο' is overly verbose and literal. A more natural and concise translation would be preferred.",
+          "suggestion": "Απενεργοποίηση υδατογραφήματος για αρχεία στο δωμάτιο"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Marca de agua para los archivos de la sala desactivada' is a literal translation and doesn't flow naturally in Spanish. A more natural phrasing would convey the intended meaning.",
+          "suggestion": "Desactivar la marca de agua para los archivos en la sala"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Filigrane pour les fichiers dans la salle désactivé' is a literal translation and doesn't quite convey the natural phrasing in French. 'Filigrane' is correct for 'watermark,' but the overall sentence structure feels awkward.",
+          "suggestion": "Marquage pour les fichiers dans la salle désactivé"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically not an error, using 'Marquage' is more aligned with the style used for similar UI elements in French, which often use a more generic term instead of a direct translation.",
+          "suggestion": "Consider maintaining consistency with other UI elements and opting for a more generic term like 'Marquage'."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ջրանշանը սենյակում գտնվող ֆայլերի համար անջատված է' is a bit literal and clunky. A more natural Armenian phrasing would be more concise.",
+          "suggestion": "Սենյակի ֆայլերի ջրանշանը անջատված է"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'Watermark' is often translated as 'Marca d'acqua' in Italian, which is a more standard and accurate translation in this context, particularly when referring to a visual watermark on files. 'Filigrana' can imply a subtle, intricate design, which might not always be the intended meaning.",
+          "suggestion": "Marca d'acqua per i file nella stanza disattivata"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ルーム内のファイルの透かしは無効です' is technically correct but lacks nuance. 'Disabled' in this context implies a feature that can be toggled on or off, so a more natural phrasing might emphasize that.",
+          "suggestion": "ルーム内のファイルの透かし表示はオフになっています"
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the translation could be more concise. Removing 'は' after '透かし' could improve readability, though it's a minor point.",
+          "suggestion": "ルーム内のファイルの透かしオフになっています"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ūdenszīme failiem telpā ir atspējota' is a literal translation but doesn't flow naturally in Latvian. A more natural phrasing would convey the meaning 'Watermark functionality is disabled for files in the room'.",
+          "suggestion": "Ūdenszīmes funkcija failiem telpā ir atspējota"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Marca d'água para arquivos desativados no quarto' is too literal and doesn't flow naturally in Portuguese. 'no quarto' (in the room) is unnecessary and awkward. The watermark being disabled implies it's associated with files in the room, so specifying 'no quarto' is redundant.",
+          "suggestion": "Marca d'água desativada para arquivos"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Marca d'água para arquivos na sala desativada' is a literal translation but doesn't quite flow naturally in Portuguese. A more idiomatic translation would convey the meaning more effectively.",
+          "suggestion": "Marca d'água desativada para arquivos na sala"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Inscripționarea fișierelor din sală este dezactivată' is a literal translation that doesn't quite convey the intended meaning of 'Watermark for files in the room disabled'. It sounds overly formal and technical.",
+          "suggestion": "O variantă mai naturală ar fi: 'Marcajul pentru fișierele din sală este dezactivat' or 'Dezactivare marcare fișiere din sală'."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'В комнате отключен водяной знак для файлов' is a literal translation but sounds unnatural in Russian. A more natural phrasing would emphasize the disabling action.",
+          "suggestion": "В комнате отключено добавление водяных знаков к файлам"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the word order could be improved for better readability in Russian.  'Водяной знак' sounds slightly awkward placed after 'для файлов'.",
+          "suggestion": "В комнате отключено добавление водяных знаков к файлам"
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ගොඩබිම්වල ඇති ෆයිල් සඳහා වෝටර්මාක් අක්‍රීය කරන ලදි.' is a literal translation and doesn't convey the intended meaning as clearly as it could.  'ගොඩබිම්වල' (Godabimwala) means 'in the lands' which is awkward in this context. It's likely referring to a 'room' or 'space'.",
+          "suggestion": "Consider alternatives that more accurately reflect the English meaning of 'room'.  Possible suggestions: 'කාමරයේ ඇති ෆයිල් සඳහා වෝටර්මාක් අක්‍රීය කරන ලදි' (Kamarayethe athi file satha varmark akriya karan ladithe - Watermark disabled for files in the room) or 'කාමරයේ ෆයිල් වල වෝටර්මාක් අක්‍රීය කරන ලදි' (Kamarayethe file wala varmark akriya karan ladithe - Watermark disabled for files in the room)"
+        },
+        {
+          "type": "spelling",
+          "description": "While the word 'වෝටර්මාක්' (varmark) is commonly used for 'watermark', it is technically a transliteration. While acceptable, a closer transliteration could be considered.",
+          "suggestion": "Consider 'ජලmarks' as a more direct transliteration, although 'වෝටර්මාක්' is widely understood."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Vodoznak pre súbory v miestnosti je vypnutý' is a literal translation that sounds slightly awkward in Slovak. A more natural phrasing would be preferred.",
+          "suggestion": "Vodoznak pre súbory v miestnosti je deaktivovaný."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is not the most natural or accurate representation of the English phrase. 'Водени жиг' is a literal translation of 'watermark', but a more common and understandable phrasing would be something along the lines of 'Жиг за датотеке' or 'Водени знак за датотеке'.",
+          "suggestion": "Жиг за датотеке у соби је онемогућен"
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the phrasing 'фајлове у соби' is a bit clunky. It would flow better if rephrased.",
+          "suggestion": "жиг за датотеке у простору је онемогућен"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'fajlove' is a common misspelling. The correct spelling is 'fajlove'.",
+          "suggestion": "fajlove"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Odadaki dosyalar için filigran devre dışı bırakıldı' is a literal translation and doesn't flow naturally in Turkish. A more natural phrasing would be 'Oda içindeki dosyalarda filigran devre dışı'.",
+          "suggestion": "Oda içindeki dosyalarda filigran devre dışı"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Водяний знак для файлів у кімнаті вимкнено' is technically correct but sounds somewhat clunky and less natural in Ukrainian. A more natural phrasing would emphasize the absence of the watermark.",
+          "suggestion": "Водяний знак для файлів у кімнаті неактивовано"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Watermark cho các tập tin trong phòng đã bị vô hiệu hóa' is a bit literal and sounds unnatural in Vietnamese. A more natural phrasing would convey the same meaning.",
+          "suggestion": "Watermark cho các tập tin trong phòng đã tắt"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

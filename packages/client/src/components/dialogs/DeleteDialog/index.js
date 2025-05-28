@@ -290,7 +290,7 @@ const DeleteDialogComponent = (props) => {
       <ModalDialog.Footer>
         <Button
           id="delete-file-modal_submit"
-          key="OkButton"
+          key="OKButton"
           label={accessButtonLabel}
           size="normal"
           primary

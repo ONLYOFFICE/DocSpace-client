@@ -115,8 +115,3 @@ export interface PlaygroundEvent {
   session_id?: string;
   edit?: boolean;
 }
-
-export type TModel = {
-  id: string;
-  name: string;
-};

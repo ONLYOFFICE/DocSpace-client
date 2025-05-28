@@ -78,7 +78,7 @@ const UnsavedChangesDialogComponent = (props) => {
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
-          key="OkButton"
+          key="OKButton"
           label={t("Settings:CloseMenu")}
           size="normal"
           primary

@@ -310,8 +310,6 @@ const getBuildYear = () => {
 };
 
 module.exports = (env, argv) => {
-  console.log("ENV", { env });
-
   config.devtool = "source-map";
 
   if (argv.mode === "production") {

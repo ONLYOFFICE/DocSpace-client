@@ -52,7 +52,7 @@ const MarkdownField = ({ chatMessage }: MarkdownFieldProps) => {
   const processedChatMessage = preprocessChatMessage(chatMessage);
 
   return (
-    <div style={{ width: "100%" }}>
+    <div style={{ width: "100%", whiteSpace: "pre-line" }}>
       <Markdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
@@ -64,6 +64,7 @@ const MarkdownField = ({ chatMessage }: MarkdownFieldProps) => {
                 lineHeight="20px"
                 fontWeight={400}
                 className={styles.chatMessageTextColor}
+                style={{ whiteSpace: "pre-line" }}
               >
                 {children as React.ReactNode}
               </Text>

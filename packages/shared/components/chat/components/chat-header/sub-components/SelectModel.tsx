@@ -35,15 +35,21 @@ import {
 
 import { useModelStore } from "../../../store/modelStore";
 
+import styles from "../ChatHeader.module.scss";
+
 const SelectModel = () => {
   const { preparedModels, preparedSelectedModel, setCurrentModel } =
     useModelStore();
 
+  if (!preparedModels.length) return null;
+
   return (
     <ComboBox
-      options={preparedModels}
+      options={preparedModels.map((o) => ({
+        ...o,
+        className: styles.dropDownItemTruncate,
+      }))}
       selectedOption={preparedSelectedModel}
-      scaled={false}
       displayType={ComboBoxDisplayType.default}
       size={ComboBoxSize.content}
       showDisabledItems
@@ -52,6 +58,8 @@ const SelectModel = () => {
       noBorder
       directionX="right"
       modernView
+      style={{ overflow: "hidden", maxWidth: "fit-content" }}
+      scaledOptions
     />
   );
 };

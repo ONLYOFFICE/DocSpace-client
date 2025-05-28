@@ -1,0 +1,274 @@
+{
+  "key_path": "OAuthAccountsReadDescription",
+  "content": "View all contacts",
+  "content_en_sha1_hash": "859eb1e255d69ca6c23a42997bfd6dd2ede94b6a",
+  "created_at": "2025-05-19T21:30:46.973Z",
+  "updated_at": "2025-05-28T09:30:03.011Z",
+  "comment": {
+    "text": "This translation key is used to display a brief description of the \"View all contacts\" feature. It will appear in UI elements related to OAuth account scopes and permissions, such as buttons or dialogs, where users can choose to access their contact information.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:14.757Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/utils/oauth/index.ts",
+      "line_number": 121,
+      "context": "if (type === ScopeType.read) return t(\"Common:OAuthFilesReadDescription\");\n return t(\"Common:OAuthFilesWriteDescription\");\n case ScopeGroup.accounts:\n case ScopeGroup.contacts:\n if (type === ScopeType.read)\n return t(\"Common:OAuthAccountsReadDescription\");\n return t(\"Common:OAuthAccountsWriteDescription\");\n case ScopeGroup.profiles:\n if (type === ScopeType.read)\n return t(\"Common:OAuthProfilesReadDescription\");\n return t(\"Common:OAuthProfilesWriteDescription\");",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation \"عرض جميع الحسابات\" translates to \"View all accounts,\" not \"View all contacts.\" The English content refers to contacts, while the Arabic translation refers to accounts. This is a significant semantic error.",
+          "suggestion": "عرض جميع جهات الاتصال"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Bütün hesablara baxın' literally translates to 'View all accounts'. The English content 'View all contacts' refers to contacts, not accounts. This is a significant mistranslation.",
+          "suggestion": "Bütün əlaqələrə baxın"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Прегледайте всички профили\" does not accurately convey the meaning of \"View all contacts\". 'Профили' translates to 'profiles' which is not the same as 'contacts'.",
+          "suggestion": "Прегледайте всички контакти"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation \"Zobrazit všechny účty\" translates to \"View all accounts\", not \"View all contacts\". The English phrase 'View all contacts' refers to a list of contacts, whereas the translation refers to accounts (likely user accounts).",
+          "suggestion": "Zobrazit všechny kontakty"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation \"Προβολή όλων των λογαριασμών\" translates to \"View all accounts\", not \"View all contacts\". The English content refers to contacts, while the translation refers to accounts.",
+          "suggestion": "Προβολή όλων των επαφών"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Näytä kaikki tilit\" does not accurately convey the meaning of \"View all contacts.\" \"Tilit\" means \"accounts,\" while the English refers to \"contacts.\" The translation is a mistranslation.",
+          "suggestion": "Näytä kaikki yhteystiedot"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '모든 계정 보기' translates to 'View all accounts,' which doesn't perfectly capture the meaning of 'View all contacts'. While '계정' can sometimes mean 'account,' in this context, '연락처' (yeonrakcheo - contacts) would be more accurate.",
+          "suggestion": "모든 연락처 보기"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation 'Skatīt visus kontus' translates to 'View all accounts', not 'View all contacts'. This is a mistranslation of the English content.",
+          "suggestion": "Skatīt visus kontaktus"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Afișează toate persoane de contact' is not the most natural or accurate rendering of \"View all contacts.\" While technically correct, it sounds somewhat literal. A more idiomatic translation would be better.",
+          "suggestion": "Vezi toți contactii"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'සියළු සම්බන්ධතා බලන්න' is a literal translation but doesn't quite capture the intended meaning of \"View all contacts\" in the context of OAuth account permissions. It translates to 'See all contacts,' which is technically correct, but less natural.",
+          "suggestion": "Consider a more idiomatic translation such as 'සියළු සම්බන්ධතා දැකීම' (Siyaḷu saṁpadātatā dēkima) which translates to 'Viewing all contacts' or 'Ability to view all contacts'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'kontakata' is misspelled. The correct spelling is 'kontakata'.",
+          "suggestion": "kontakata"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

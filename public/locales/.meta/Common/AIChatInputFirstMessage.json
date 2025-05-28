@@ -1,0 +1,28 @@
+{
+  "key_path": "AIChatInputFirstMessage",
+  "content": "Start chat with AI",
+  "content_en_sha1_hash": "23ab31601070b5844f53b9d4206b25597346654c",
+  "created_at": "2025-05-28T09:32:56.758Z",
+  "updated_at": "2025-05-28T09:33:50.767Z",
+  "comment": {
+    "text": "The translation key \"AIChatInputFirstMessage\" is used to display a message that prompts the user to start a chat with AI. This message appears on a chat input component when it's the first conversation in a new session, inviting users to initiate the conversation.",
+    "is_auto": true,
+    "updated_at": "2025-05-28T09:33:50.767Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-input/index.tsx",
+      "line_number": 154,
+      "context": "}, [currentSession, clearFiles]);\n \n const withFile = files.length !== 0;\n \n const placeholder = isEmptyMessages\n ? t(\"Common:AIChatInputFirstMessage\")\n : t(\"Common:AIChatInputAskAI\");\n \n const isDisabled = !isInit ? !value : isRequestRunning ? false : !value;\n \n const sendIconProps = !isInit",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

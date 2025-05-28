@@ -54,8 +54,6 @@ const nextConfig = {
     NEXT_PUBLIC_E2E_TEST: process.env.E2E_TEST,
   },
   webpack: (config) => {
-    //console.log("ENV", { env: process.env });
-
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.(".svg"),

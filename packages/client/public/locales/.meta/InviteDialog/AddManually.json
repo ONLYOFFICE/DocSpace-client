@@ -1,0 +1,249 @@
+{
+  "key_path": "AddManually",
+  "content": "Add manually",
+  "content_en_sha1_hash": "a1d9c2688fa98be5480201c7e6b27025a703a3f7",
+  "created_at": "2025-05-19T21:30:54.711Z",
+  "updated_at": "2025-05-28T09:30:02.376Z",
+  "comment": {
+    "text": "This translation key is used for a button label that instructs users to add information manually. It appears on an invite input form and helps users understand what action they can take next.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:17.190Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
+      "line_number": 575,
+      "context": "});\n \n return (\n <>\n <StyledSubHeader>\n {t(\"AddManually\")}\n {!hideSelector ? (\n <StyledLink\n className=\"link-list\"\n fontWeight=\"600\"\n type=\"action\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Əl ilə əlavə edin\" sounds slightly awkward and literal. A more natural and idiomatic translation would be preferable.",
+          "suggestion": "Əlcəddi"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Manuell einfügen' is understandable, it's not the most natural or idiomatic translation of 'Add manually' in the context of adding an entry or contact. A more precise translation might better reflect the intent.",
+          "suggestion": "Consider 'Manuell hinzufügen' or 'Hinzufügen (manuell)'."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Προσθήκη με μη αυτόματο τρόπο' is a literal translation and sounds overly formal and technical for a user interface element like 'Add manually'. It doesn't convey the simplicity of the original English phrase.",
+          "suggestion": "Χειροκίνητη προσθήκη"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, 'Προσθήκη με μη αυτόματο τρόπο' is a lengthy phrase which may negatively impact UI layout if displayed in a constrained space. A shorter alternative is preferable.",
+          "suggestion": "Χειροκίνητη προσθήκη"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'අතින් යොදන්න' is understandable, a more accurate and natural translation for 'Add manually' in this context might be 'තුල්ලන්න' or 'අතින් එක් කරන්න'. 'අතින් යොදන්න' implies applying something manually rather than adding.",
+          "suggestion": "තුල්ලන්න"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Додај ручно' is understandable, a more natural and commonly used translation for 'Add manually' in Serbian (Cyrillic) would be 'Ручно додавање' or 'Додавање ручно'. 'Додај ручно' literally translates to 'Add manually' but doesn't flow as naturally in the context of a button label or menu item.",
+          "suggestion": "Ручно додавање"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Thêm vào một cách thủ công\" sounds a bit awkward and verbose in Vietnamese. A more natural phrasing would be preferred.",
+          "suggestion": "Thêm thủ công"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

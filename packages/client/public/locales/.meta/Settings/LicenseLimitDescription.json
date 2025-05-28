@@ -1,0 +1,432 @@
+{
+  "key_path": "LicenseLimitDescription",
+  "content": "The license limit counter consists of: already existing accounts in {{productName}} and new users that you want to import. If you import users who already have a {{productName}} account, they will not be counted again in the counter. Your {{productName}} license allows you to have a maximum of {{maxLimit}} users.",
+  "content_en_sha1_hash": "48bb127c07477ce132bbeea9ad21b81eedf91b24",
+  "created_at": "2025-05-19T21:30:51.797Z",
+  "updated_at": "2025-05-28T09:30:02.529Z",
+  "comment": {
+    "text": "This translation key is used to display a descriptive message about the license limit counter in the Portal Settings page. It explains that the limit applies to existing accounts and new users being imported, without counting duplicate users. The text appears as a tooltip when clicking the \"Help\" button on this page.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:00.533Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/UsersInfoBlock.tsx",
+      "line_number": 73,
+      "context": "<HelpButton\n place=\"right\"\n offsetRight={0}\n tooltipContent={\n <Text fontSize=\"12px\">\n {t(\"Settings:LicenseLimitDescription\", {\n productName: t(\"Common:ProductName\"),\n maxLimit: quota.max,\n })}\n </Text>\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"already existing accounts\" is translated as \"mövcud hesablar\". While technically correct, a more natural translation in Azerbaijani would be something like \"var olan hesablar\" or \"hazır hesablar\".",
+          "suggestion": "Lisenziya limiti sayğacı aşağıdakılardan ibarətdir: {{productName}}-də var olan hesablar və idxal etmək istədiyiniz yeni istifadəçilər."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"they will not be counted again\" is translated as \"onlar bir daha sayğacda sayılmayacaqlar\". A more fluid translation would be \"onlar yenidən sayılmayacaq\".",
+          "suggestion": "Artıq {{productName}} hesabı olan istifadəçiləri idxal etsəniz, onlar yenidən sayılmayacaq."
+        },
+        {
+          "type": "formatting",
+          "description": "The repetition of '{{productName}}' is slightly clunky. Consider a slight rephrasing to improve readability.",
+          "suggestion": "Lisenziya limiti sayğacı aşağıdakılardan ibarətdir: {{productName}}-də var olan hesablar və idxal etmək istədiyiniz yeni istifadəçilər. Artıq {{productName}}-ə aid hesabı olan istifadəçiləri idxal etsəniz, onlar yenidən sayılmayacaq. {{productName}} lisenziyanız maksimum {{maxLimit}} istifadəçinin mövcud olmasına imkan verir."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'входирате' (vhodirate) is a misspelling of 'вносирате' (vnosirate) which means 'to import'.",
+          "suggestion": "вносирате"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'already existing accounts' is best translated as 'съществуващи акаунти' (shestvuvashi accounti) rather than just 'вече съществуващи профили' (veche shestvuvashi profili). While the current translation isn't *wrong*, it's more verbose and less natural.",
+          "suggestion": "съществуващи акаунти"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'Pokud importujete uživatele, kteří již účet v {{productName}} mají' is slightly awkward. The word order could be improved for better flow.",
+          "suggestion": "Pokud importujete uživatele, kteří již mají účet v {{productName}},"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Vaše licence {{productName}}' is grammatically incorrect. It needs a preposition.",
+          "suggestion": "Vaše licence pro {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'uusistä' is a spelling error. It should be 'uusista'.",
+          "suggestion": "uusista"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Le compteur de la limite autorisée\" is a bit awkward. A more natural translation of 'The license limit counter' would be something like 'Le compteur de la limite de licences' or 'Le nombre maximum de licences'.",
+          "suggestion": "Le compteur de la limite de licences"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Lors de l'importation, le compteur ne prend pas en compte...\" is a bit verbose. A simpler phrasing would improve readability.",
+          "suggestion": "Si vous importez des utilisateurs qui ont déjà un compte..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Votre licence {{productName}} vous permet d'avoir...' is a bit formal and could be improved. It could be more conversational.",
+          "suggestion": "Votre licence vous permet d'avoir..."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ձեր {{productName}} լիցենզիան թույլ է տալիս ունենալ առավելագույնը {{maxLimit}} օգտվող:\" could be more accurately translated to something along the lines of \"Ձեր {{productName}} լիցենզիան թույլատրում է ունենալ առավելագույնը {{maxLimit}} օգտվող:\"  The word 'թույլ է տալիս' (allows) can sound slightly awkward in this context; 'թույլատրում է' (permits/authorizes) is a more natural fit.",
+          "suggestion": "Ձեր {{productName}} լիցենզիան թույլատրում է ունենալ առավելագույնը {{maxLimit}} օգտվող:"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'che si desidera importare' is slightly awkward and formal. It would be more natural to use a more conversational phrasing.",
+          "suggestion": "che vuoi importare"
+        },
+        {
+          "type": "grammar",
+          "description": "The use of 'questi' referring to users is a bit ambiguous. It is not immediately clear what 'questi' refers to. While technically correct, it could be improved for clarity.",
+          "suggestion": "gli utenti"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation consistently uses '{{productName}}' without proper context or explanation for the placeholder. While understandable, it's best practice to ensure the audience knows this is a placeholder for a product name.",
+          "suggestion": "Consider adding a brief explanation of the placeholder the first time it appears, e.g., '{{productName}}(제품명)' or providing instructions elsewhere on how to replace the placeholder."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase '가져오기하려는' (gaeojiha-ryeoneun) is a bit clunky.  A more natural way to say 'that you want to import' would be '선택한' (seontaekhan - selected) or '추가하려는' (chuga-haryeoneun - to add).",
+          "suggestion": "Replace '가져오기하려는' with '선택한' or '추가하려는'."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence '이미 {{productName}} 계정이 있는 사용자를 가져오기하면 해당 사용자는 카운터에 다시 계산되지 않습니다.' can be improved for flow. While grammatically correct, it reads a little stiff.",
+          "suggestion": "Consider rephrasing to something like: '이미 {{productName}} 계정이 있는 사용자를 가져오면, 해당 사용자는 카운터에 포함되지 않습니다.' (If you import a user with an existing {{productName}} account, they will not be included in the counter.)"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ເຄົາເຕີ' (counter) is a transliteration and might be better replaced with a more natural Lao equivalent for 'counter'.",
+          "suggestion": "ຕົວນັບຈຳກັດ (tuan nap chamkad) or ຈຳນວນຈຳກັດ (chamnuan chamkad)"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'ພວກເຂົາຈະບໍ່ຖືກນັບອີກເທື່ອຫນຶ່ງຢູ່ໃນເຄົາເຕີ' is slightly awkward.  It can be phrased more naturally.",
+          "suggestion": "ພວກເຂົາຈະບໍ່ຖືກນັບເຂົ້າໃນຕົວນັບຈຳກັດອີກຄັ້ງ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Licznik limitu licencji\" is a somewhat literal and less natural translation of \"license limit counter\". A more fluent translation might be \"Limit licencji\" or \"Maksymalna liczba licencji\".",
+          "suggestion": "Limit licencji"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"nie zostaną oni ponownie uwzględnieni na liczniku\" is slightly awkward. 'uwzględnieni na liczniku' could be simplified.",
+          "suggestion": "nie zostaną policzeni ponownie."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'The license limit counter' is translated as 'O contador de limite de licenças'. While technically correct, a more natural and user-friendly translation would be 'O limite de licenças' or 'A contagem de licenças'.",
+          "suggestion": "O limite de licenças"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'already existing accounts' is translated as 'contas já existentes'. While not technically incorrect, a more common and natural phrasing would be 'contas existentes'.",
+          "suggestion": "contas existentes"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'they will not be counted again in the counter' is translated as 'eles não serão contabilizados novamente no contador'. A more natural phrasing is 'eles não serão contados novamente'.",
+          "suggestion": "eles não serão contados novamente"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"nu vor fi înregistrate de contorul din nou\" is awkward and doesn't accurately convey the meaning of \"they will not be counted again in the counter.\" A more natural translation would be \"nu vor fi numărați din nou în contor\" or \"nu vor fi adăugați din nou în contor\".",
+          "suggestion": "nu vor fi numărați din nou în contor"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Numărul maxim de {{maxLimit}} utilizatori este permis conform licenței dvs {{productName}}.\" is not the most natural Romanian. It is a literal translation but sounds stiff. A better phrasing would be something like \"Licența dvs {{productName}} vă permite un număr maxim de {{maxLimit}} utilizatori.\" or \"Conform licenței dvs {{productName}}, puteți avea maximum {{maxLimit}} utilizatori.\" ",
+          "suggestion": "Conform licenței dvs {{productName}}, puteți avea maximum {{maxLimit}} utilizatori."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence \"Contorul limitei de licență este format din: conturile deja existente în spațiu {{productName}}...\" uses \"spațiu\" which isn't quite accurate. It implies a physical space. It would be better to use a word indicating the platform or system.",
+          "suggestion": "Contorul limitei de licență este format din: conturile deja existente în {{productName}}..."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'පරිශ්‍රීලකයින්' (parishreelayakayin) is used repeatedly and might be better represented with a more common or clearer term for 'users'. While technically correct, it could be perceived as slightly formal or complex for the target audience.",
+          "suggestion": "Consider replacing 'පරිශ්‍රීලකයින්' with a more commonly understood term for 'users' in Sinhala, such as 'භාවිතකරුවන්' (bhavitakaruvā) or 'පරිශීලකයන්' (parishilakayan)."
+        },
+        {
+          "type": "formatting",
+          "description": "The repetition of '{{productName}}' and '{{maxLimit}}' might make the text feel slightly clunky. While necessary for the variables, ensuring the surrounding language flows well is important.",
+          "suggestion": "Review the sentence structure to ensure the flow is natural despite the use of variables.  Consider rephrasing slightly to make the language more engaging."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'ඔබගේ {{productName}} බලපත්‍රය සඳහා' (obage {{productName}} balaptharay satha) might be slightly awkward. It's technically correct but could be more naturally expressed.",
+          "suggestion": "Consider rephrasing to 'ඔබගේ {{productName}} බලපත්‍රයට' (obage {{productName}} balaptharayata) or 'ඔබගේ {{productName}} බලපත්‍රයේ' (obage {{productName}} balaptharayē)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"The license limit counter consists of\" is not accurately translated. \"Obmedzenie licencie sa počíta takto\" literally translates to 'The license limit is calculated like this' which changes the meaning slightly. A more accurate translation would be something closer to \"The license limit is based on...\" or \"The license limit includes...\"",
+          "suggestion": "The license limit includes..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"already existing accounts\" is translated as \"už existujúce účty\". While technically correct, it sounds a bit clunky in Slovak. A more natural phrasing could be 'existing accounts' or 'established accounts'.",
+          "suggestion": "existing accounts"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Vaša licenca {{productName}} vam omogoča, da imate največ {{maxLimit}} uporabnikov\" is slightly awkward. A more natural phrasing would be \"Vaša licenca za {{productName}} omogoča največ {{maxLimit}} uporabnikov.\" or \"Vaša licenca {{productName}} omogoča največ {{maxLimit}} uporabnikov.\"",
+          "suggestion": "Vaša licenca za {{productName}} omogoča največ {{maxLimit}} uporabnikov."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Serbian translation includes the dash (-) within the productName variable which may not be desirable or consistent with other language versions. The English version does not include a dash within the variable.",
+          "suggestion": "Review if the dash (-) should be included within the variable in the Serbian translation and ensure consistency with other languages. Consider removing it: `{{productName}}`."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Serbian translation includes an unnecessary hyphen after 'productName' in multiple occurrences. It should be removed.",
+          "suggestion": "Replace '{{productName}}-u' with '{{productName}}' throughout the translation."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Vaša {{productName}} licenca vam dozvoljava' can be slightly improved for a more natural flow. While grammatically correct, it sounds a bit clunky.",
+          "suggestion": "Consider replacing with 'Vaša {{productName}} licenca omogućava' or '{{productName}} licenca vam omogućava'."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Số lượng giới hạn bản quyền' is a somewhat literal translation of 'license limit counter.' It's not the most natural way to phrase it in Vietnamese. A more natural translation would be something like 'Giới hạn số lượng bản quyền' or 'Giới hạn số lượng giấy phép'.",
+          "suggestion": "Giới hạn số lượng bản quyền"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'họ sẽ không được tính lại trong số lượng' is a bit clunky. A more natural wording would be 'họ sẽ không được tính lặp lại'.",
+          "suggestion": "họ sẽ không được tính lặp lại"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'Bản quyền {{productName}}' uses the productName variable. It's preferable to have a consistent capitalization. If 'productName' is expected to be 'productName', the translation should match.",
+          "suggestion": "Bản quyền Product Name"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"already existing accounts\" is translated as \"已存在的帐户\". While technically correct, a more natural and commonly used translation would be \"已注册的帐户\" or \"已创建的帐户\".",
+          "suggestion": "许可证限制计数器包括：{{productName}}中已注册的帐户和您要导入的新用户。"
+        },
+        {
+          "type": "formatting",
+          "description": "The spacing before and after the numbers in '{{maxLimit}} 个用户' is not ideal. There should be no space before the number.",
+          "suggestion": "许可证限制计数器包括：{{productName}}中已注册的帐户和您要导入的新用户。如果您导入已拥有{{productName}}帐户的用户，则不会再次将其计入计数器。您的{{productName}}许可证允许您最多拥有{{maxLimit}}个用户。"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

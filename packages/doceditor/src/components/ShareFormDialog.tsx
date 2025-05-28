@@ -158,6 +158,7 @@ const ShareFormDialog = ({
       buttonLabel: t("Common:Share"),
       onClick: onClickShareFile,
       icon: <ShareSvg />,
+      disabled: !file.canShare,
     },
     {
       id: "form-room",

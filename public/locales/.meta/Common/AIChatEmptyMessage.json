@@ -1,0 +1,28 @@
+{
+  "key_path": "AIChatEmptyMessage",
+  "content": "Leverage the power of AI for quick data search and analysis. Just ask a question, and we'll provide the results for you.",
+  "content_en_sha1_hash": "0548af442c80c3ab022eecca8e955ae332907c12",
+  "created_at": "2025-05-28T09:32:56.729Z",
+  "updated_at": "2025-05-28T09:33:56.500Z",
+  "comment": {
+    "text": "This translation key is used to display a message indicating that AI-powered search and analysis services are available. It appears in an empty chat screen component, providing a hint to users about the capabilities of the chat system.",
+    "is_auto": true,
+    "updated_at": "2025-05-28T09:33:56.500Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/EmptyScreen.tsx",
+      "line_number": 59,
+      "context": "fontSize=\"12px\"\n lineHeight=\"16px\"\n fontWeight={400}\n className={styles.chatMessageTextColor}\n >\n {t(\"Common:AIChatEmptyMessage\")}\n </Text>\n <IconButton\n iconName={CrossReactSvgUrl}\n isClickable\n size={12}",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

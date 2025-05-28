@@ -1,0 +1,274 @@
+{
+  "key_path": "Editor",
+  "content": "Editor",
+  "content_en_sha1_hash": "c7e9fb2ea6c3b8c3ce97645eb902c348d859f36d",
+  "created_at": "2025-05-19T21:30:44.767Z",
+  "updated_at": "2025-05-28T09:30:02.414Z",
+  "comment": {
+    "text": "The translation key \"Editor\" is used to display the label for an editing feature within a user interface, likely in a settings or configuration panel. It appears as a title and is linked to navigate to an editor view or functionality. The translated term should describe this editing capability in a neutral and descriptive manner.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:32.573Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/MembersHelper.js",
+      "line_number": 62,
+      "context": "access: ShareAccessRights.ReadOnly,\n type: \"user\",\n },\n editor: {\n key: \"editor\",\n label: this.t(\"Common:Editor\"),\n access: ShareAccessRights.Editing,\n type: \"user\",\n },\n formFiller: {\n key: \"formFiller\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
+      "line_number": 102,
+      "context": "description: t(\"JavascriptSdk:PublicRoomPresetInfo\"),\n image: theme.isBase ? PublicRoomImg : PublicRoomImgDark,\n handleOnClick: navigateToPublicRoom,\n },\n {\n title: t(\"Common:Editor\"),\n description: t(\"EditorDescription\"),\n image: theme.isBase ? EditorImg : EditorImgDark,\n handleOnClick: navigateToEditor,\n },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 502,
+      "context": "{\n id: \"portal-settings_catalog-javascript-sdk_editor\",\n key: \"7-1-4\",\n icon: \"\",\n link: \"editor\",\n tKey: \"Common:Editor\",\n },\n {\n id: \"portal-settings_catalog-javascript-sdk_viewer\",\n key: \"7-1-5\",\n icon: \"\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PublicRoom/PublicRoomPage.js",
+      "line_number": 99,
+      "context": "case ShareAccessRights.Comment:\n return t(\"Common:Commenting\");\n case ShareAccessRights.Review:\n return t(\"Common:Reviewing\");\n case ShareAccessRights.Editing:\n return t(\"Common:Editor\");\n default:\n return t(\"Common:ViewOnly\");\n }\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 162,
+      "context": "return [\n {\n access: ShareAccessRights.Editing,\n description: t(\"Common:RoleEditorDescription\"),\n key: \"editing\",\n label: t(\"Common:Editor\"),\n icon: AccessEditReactSvgUrl,\n },\n {\n access: ShareAccessRights.Review,\n description: t(\"Common:RoleReviewerDescription\"),",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 162,
+      "context": "return [\n {\n access: ShareAccessRights.Editing,\n description: t(\"Common:RoleEditorDescription\"),\n key: \"editing\",\n label: t(\"Common:Editor\"),\n icon: AccessEditReactSvgUrl,\n },\n {\n access: ShareAccessRights.Review,\n description: t(\"Common:RoleReviewerDescription\"),",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/utils/getAccessOptions.ts",
+      "line_number": 149,
+      "context": "roomType === None ? EmployeeType.User : ShareAccessRights.Collaborator,\n type: EmployeeType.User,\n },\n editor: {\n key: \"editor\",\n label: t(\"Common:Editor\"),\n description: t(\"Common:RoleEditorDescription\"),\n access: ShareAccessRights.Editing,\n type: EmployeeType.User,\n },\n formFiller: {",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/utils/room-members/getUserRoleOptions.ts",
+      "line_number": 57,
+      "context": "access: ShareAccessRights.ReadOnly,\n type: \"user\",\n },\n editor: {\n key: \"editor\",\n label: t(\"Common:Editor\"),\n access: ShareAccessRights.Editing,\n type: \"user\",\n },\n formFiller: {\n key: \"formFiller\",",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation \"Πρόγραμμα επεξεργασίας\" translates to \"Editing Program\" which is more specific than the English term \"Editor\". While functionally related, it doesn't directly convey the same meaning. A closer translation might be \"Επεξεργαστής\" or \"Επεξεργασία\".",
+          "suggestion": "Επεξεργαστής"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation 'Editori' is not the most accurate or common translation for 'Editor'. While 'Editori' is grammatically correct as a transliteration, it doesn't convey the meaning as effectively as other options.",
+          "suggestion": "Consider using 'Toimittaja' (for journalistic editor) or 'Muokkaaja' (for general editor/modifier) depending on the context.  'Editori' sounds like a transliteration rather than a natural Finnish word."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"エディタ\" (Edita) is a direct transliteration of \"Editor\" and doesn't convey the full meaning in Japanese. While understandable, a more natural and commonly used term would be something like \"編集者\" (henshasha) or \"編集機能\" (henshuu kinou) depending on the context.",
+          "suggestion": "Consider \"編集者\" (henshasha) for a person editor or \"編集機能\" (henshuu kinou) for an editor feature. Context is needed for the optimal translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"可编辑\" (ke bianji) translates to \"editable\" or \"can be edited\", not simply \"Editor\". It doesn't convey the meaning of a person or software tool that performs editing.",
+          "suggestion": "A more accurate translation might be \"编辑\" (bianji) or \"编辑器\" (bianji qi)."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

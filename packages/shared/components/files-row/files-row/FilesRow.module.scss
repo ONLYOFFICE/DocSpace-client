@@ -57,12 +57,6 @@
     margin-inline-end: 12px;
   }
 
-  &.sectionWidthMoreThan500 {
-    :global(.row_content) {
-      max-width: fit-content;
-    }
-  }
-
   :global(.badges) {
     display: flex;
     align-items: center;

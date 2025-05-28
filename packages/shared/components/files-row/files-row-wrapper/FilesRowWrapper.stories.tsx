@@ -65,6 +65,13 @@ const meta = {
     className: { table: { disable: true } },
     children: { table: { disable: true } },
   },
+  decorators: [
+    (Story) => (
+      <div style={{ paddingInline: "24px" }}>
+        <Story />
+      </div>
+    ),
+  ],
 } satisfies Meta<typeof FilesRowWrapper>;
 
 type Story = StoryObj<typeof FilesRowWrapper>;
@@ -73,13 +80,6 @@ export default meta;
 export const Default: Story = {
   args: {
     children: <RowContent>Files Row Content</RowContent>,
-  },
-};
-
-export const Checked: Story = {
-  args: {
-    checked: true,
-    children: <RowContent>Checked Row</RowContent>,
   },
 };
 
@@ -108,13 +108,6 @@ export const IndexUpdated: Story = {
   args: {
     isIndexUpdated: true,
     children: <RowContent>Index Updated Row</RowContent>,
-  },
-};
-
-export const Dragging: Story = {
-  args: {
-    isDragging: true,
-    children: <RowContent>Dragging Row</RowContent>,
   },
 };
 

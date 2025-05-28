@@ -41,6 +41,7 @@
 
 @mixin checkedStyle {
   background: var(--files-section-row-view-checked-background);
+  @include marginStyles;
 }
 
 .filesRowWrapper {
@@ -59,13 +60,6 @@
   &.checked:not(.isIndexEditingMode),
   &.isActive:not(.isIndexEditingMode) {
     @include checkedStyle;
-  }
-
-  &.checked.isFirstElem,
-  &.isActive.isFirstElem {
-    border-top-color: var(
-      --files-section-table-view-row-border-color
-    ) !important;
   }
 
   &.isIndexUpdated {
@@ -94,10 +88,12 @@
 
   &.isIndexEditingMode {
     @include mixins.can-hover {
-      cursor: pointer;
-      background: var(--files-section-table-view-row-index-active);
+      &:hover {
+        cursor: pointer;
+        background: var(--files-section-table-view-row-index-active);
 
-      @include marginStyles;
+        @include marginStyles;
+      }
     }
   }
 
@@ -131,6 +127,12 @@
 
     margin-top: 1px;
     border-top: 1px solid transparent;
+
+    &:is(.checked, .isActive):not(.showHotkeyBorder) {
+      border-top-color: var(
+        --files-section-table-view-row-border-color
+      ) !important;
+    }
 
     :global(.styled-checkbox-container) {
       padding-bottom: 5px;

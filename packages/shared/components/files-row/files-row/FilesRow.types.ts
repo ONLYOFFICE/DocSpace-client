@@ -27,7 +27,6 @@
 import { RowProps } from "../../rows/row/Row.types";
 
 export type FilesRowProps = RowProps & {
-  sectionWidth: number;
   isThirdPartyFolder?: boolean;
   isActive?: boolean;
   isFirstElem?: boolean;

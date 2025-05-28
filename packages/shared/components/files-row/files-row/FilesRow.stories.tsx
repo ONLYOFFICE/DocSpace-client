@@ -71,9 +71,6 @@ const meta = {
     folderCategory: { control: "boolean" },
     withAccess: { control: "boolean" },
     inProgress: { control: "boolean" },
-    sectionWidth: {
-      control: { type: "number", min: 300, max: 1200, step: 100 },
-    },
     contextButtonSpacerWidth: { control: "text" },
     indeterminate: { control: "boolean" },
     isRoom: { control: "boolean" },
@@ -103,7 +100,6 @@ const meta = {
     item: { table: { disable: true } },
   },
   args: {
-    sectionWidth: 300,
     contextOptions,
   },
 } satisfies Meta<typeof FilesRow>;

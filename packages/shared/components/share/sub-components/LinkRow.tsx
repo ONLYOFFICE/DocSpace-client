@@ -151,7 +151,11 @@ const LinkRow = ({
           key={`share-link-row-${index * 5}`}
         >
           {isLoaded ? (
-            <Loader className="loader" size="20px" type={LoaderTypes.track} />
+            <Loader
+              className={styles.loader}
+              size="20px"
+              type={LoaderTypes.track}
+            />
           ) : (
             <Avatar
               size={AvatarSize.min}

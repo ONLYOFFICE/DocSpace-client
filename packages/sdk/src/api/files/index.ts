@@ -49,10 +49,13 @@ import {
   folderHandler,
   foldersTreeHandler,
 } from "@docspace/shared/__mocks__/e2e";
+import { logger } from "@/../logger.mjs";
 
 const IS_TEST = process.env.E2E_TEST;
 
 export async function getFilesSettings(): Promise<TFilesSettings | undefined> {
+  logger.debug("Start GET /files/settings");
+
   const [req] = await createRequest([`/files/settings`], [["", ""]], "GET");
 
   const res = IS_TEST ? filesSettingsHandler() : await fetch(req);
@@ -65,6 +68,8 @@ export async function getFilesSettings(): Promise<TFilesSettings | undefined> {
 }
 
 export async function getFoldersTree(): Promise<TFolder[]> {
+  logger.debug("Start GET /files/@root?filterType=2&count=1");
+
   const [req] = await createRequest(
     [`/files/@root?filterType=2&count=1`],
     [["", ""]],
@@ -148,6 +153,8 @@ export async function getFolder(
       ? ["Request-Token", shareKey || shareKey || ""]
       : ["", ""];
 
+  logger.debug(`Start GET /files/${params}`);
+
   const [req] = await createRequest(
     [`/files/${params}`],
     [shareHeader],
@@ -179,6 +186,8 @@ export async function getFolder(
 }
 
 export async function validateShareFolder(share: string) {
+  logger.debug(`Start GET /files/share/${share}`);
+
   const shareHeader: [string, string] = share
     ? ["Request-Token", share]
     : ["", ""];

@@ -31,10 +31,13 @@ import { cookies } from "next/headers";
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import type { TUser } from "@docspace/shared/api/people/types";
 import { selfHandler } from "@docspace/shared/__mocks__/e2e";
+import { logger } from "@/../logger.mjs";
 
 const IS_TEST = process.env.E2E_TEST;
 
 export async function getSelf(): Promise<TUser | undefined> {
+  logger.debug("Start GET /people/@self");
+
   const cookieStore = await cookies();
   const authToken = cookieStore.get("asc_auth_key");
 

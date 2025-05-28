@@ -24,17 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { type PropsWithChildren } from "react";
+import React from "react";
 import classNames from "classnames";
 
 import { RowContainer } from "../../rows";
 
-import { FilesRowContainerProps } from "./FilesRowContainer.types";
 import styles from "./FilesRowContainer.module.scss";
+import type { RowContainerProps } from "../../rows/row-container/RowContainer.types";
 
-export const FilesRowContainer = (
-  props: PropsWithChildren<FilesRowContainerProps>,
-) => {
+export const FilesRowContainer = (props: RowContainerProps) => {
   const { className } = props;
 
   return (

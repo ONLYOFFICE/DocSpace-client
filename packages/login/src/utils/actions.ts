@@ -111,7 +111,13 @@ export async function getSettings() {
 
   if (settingsRes.status === 404) return "portal-not-found";
 
-  if (!settingsRes.ok) return;
+  if (!settingsRes.ok) {
+    logger.error(
+      `GET /settings?withPassword=true failed: ${settingsRes.statusText}`,
+    );
+
+    return;
+  }
 
   const settings = await settingsRes.json();
 

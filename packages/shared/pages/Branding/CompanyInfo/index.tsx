@@ -35,6 +35,9 @@ import {
   InputType,
   InputSize,
 } from "../../../components/text-input";
+
+import { Checkbox } from "../../../components/checkbox";
+
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 import { AboutDialog } from "../../../components/about-dialog";
 
@@ -49,6 +52,8 @@ export const CompanyInfo = ({
   onRestore,
   isLoading,
   companyInfoSettingsIsDefault,
+  displayAbout,
+  isBrandingAvailable,
   buildVersionInfo,
   standalone,
   licenseAgreementsUrl,
@@ -64,6 +69,7 @@ export const CompanyInfo = ({
     email,
     phone,
     site,
+    displayAbout: showAbout,
     companySettingsError,
     hasChanges,
     onChangeAddress,
@@ -71,19 +77,30 @@ export const CompanyInfo = ({
     onChangeEmail,
     onChangePhone,
     onChangeSite,
-  } = useCompanySettings(companySettings);
+    onChangeDisplayAbout,
+    reset,
+  } = useCompanySettings({
+    companySettings,
+    displayAbout,
+  });
 
   const onSaveAction = () => {
-    onSave(address, companyName, email, phone, site);
+    onSave(address, companyName, email, phone, site, !showAbout);
+  };
+
+  const onRestoreAction = () => {
+    reset();
+    onRestore();
   };
 
   const {
-    hasErrorAddress,
-    hasErrorCompanyName,
-    hasErrorEmail,
-    hasErrorPhone,
-    hasErrorSite,
+    address: hasErrorAddress,
+    companyName: hasErrorCompanyName,
+    email: hasErrorEmail,
+    phone: hasErrorPhone,
+    site: hasErrorSite,
   } = companySettingsError;
+
   const isDisabled =
     hasErrorAddress ||
     hasErrorCompanyName ||
@@ -172,6 +189,16 @@ export const CompanyInfo = ({
           )}
         </div>
         <div className={classNames(styles.settingsBlock, "settings-block")}>
+          <FieldContainer>
+            <Checkbox
+              isDisabled={!isBrandingAvailable || !isSettingPaid}
+              isChecked={showAbout}
+              onChange={onChangeDisplayAbout}
+              data-testid="show-about-window-checkbox"
+              label={t("Common:ShowAboutWindow")}
+            />
+          </FieldContainer>
+
           <FieldContainer
             id="fieldContainerCompanyName"
             className="field-container-width settings_unavailable"
@@ -274,7 +301,7 @@ export const CompanyInfo = ({
             "save-cancel-buttons",
           )}
           onSaveClick={onSaveAction}
-          onCancelClick={onRestore}
+          onCancelClick={onRestoreAction}
           saveButtonLabel={t("Common:SaveButton")}
           cancelButtonLabel={t("Common:Restore")}
           reminderText={t("YouHaveUnsavedChanges")}

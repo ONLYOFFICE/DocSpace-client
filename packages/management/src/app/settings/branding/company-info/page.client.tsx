@@ -44,7 +44,13 @@ import type { TPaymentQuota } from "@docspace/shared/api/portal/types";
 import type { TPortals } from "@docspace/shared/api/management/types";
 
 import useDeviceType from "@/hooks/useDeviceType";
-import { getIsCustomizationAvailable, getIsSettingsPaid } from "@/lib";
+import {
+  getIsBrandingAvailable,
+  getIsCustomizationAvailable,
+  getIsSettingsPaid,
+} from "@/lib";
+import { getSettings } from "@/lib/actions";
+import { TSettings } from "@docspace/shared/api/settings/types";
 
 export const CompanyInfoPage = ({
   portals,
@@ -55,6 +61,7 @@ export const CompanyInfoPage = ({
   buildInfo,
   isEnterprise,
   logoText,
+  displayAbout,
 }: {
   portals?: TPortals[];
   quota?: TPaymentQuota;
@@ -64,6 +71,7 @@ export const CompanyInfoPage = ({
   buildInfo: IBuildInfo;
   isEnterprise: boolean;
   logoText: string;
+  displayAbout: boolean;
 }) => {
   const { t } = useTranslation("Common");
   const { currentDeviceType } = useDeviceType();
@@ -71,9 +79,12 @@ export const CompanyInfoPage = ({
   const pathname = usePathname();
 
   const [companyData, setCompanyData] = useState(companyInfoSettingsData);
+  const [showAbout, setShowAbout] = useState(displayAbout);
   const [isLoading, startTransition] = useTransition();
 
   const isCustomizationAvailable = getIsCustomizationAvailable(quota);
+  const isBrandingAvailable = getIsBrandingAvailable(quota);
+
   const isSettingPaid = getIsSettingsPaid(isCustomizationAvailable, portals);
 
   useResponsiveNavigation({
@@ -83,18 +94,32 @@ export const CompanyInfoPage = ({
     pathname: pathname,
   });
 
+  const getCompanyData = async () => {
+    const companyData = await getCompanyInfoSettings();
+    const settings = (await getSettings()) as TSettings;
+    setShowAbout(settings.displayAbout);
+    setCompanyData(companyData);
+  };
+
   const onSave = async (
     address: string,
     companyName: string,
     email: string,
     phone: string,
     site: string,
+    hideAbout: boolean,
   ) => {
     startTransition(async () => {
       try {
-        await setCompanyInfoSettings(address, companyName, email, phone, site);
-        const companyData = await getCompanyInfoSettings();
-        setCompanyData(companyData);
+        await setCompanyInfoSettings(
+          address,
+          companyName,
+          email,
+          phone,
+          site,
+          hideAbout,
+        );
+        await getCompanyData();
         toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       } catch (error) {
         toastr.error(error!);
@@ -106,8 +131,7 @@ export const CompanyInfoPage = ({
     startTransition(async () => {
       try {
         await restoreCompanyInfoSettings();
-        const companyData = await getCompanyInfoSettings();
-        setCompanyData(companyData);
+        await getCompanyData();
         toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       } catch (error) {
         toastr.error(error!);
@@ -117,6 +141,8 @@ export const CompanyInfoPage = ({
 
   return (
     <CompanyInfo
+      displayAbout={showAbout}
+      isBrandingAvailable={isBrandingAvailable}
       isSettingPaid={isSettingPaid}
       companySettings={companyData}
       onSave={onSave}
@@ -131,4 +157,3 @@ export const CompanyInfoPage = ({
     />
   );
 };
-

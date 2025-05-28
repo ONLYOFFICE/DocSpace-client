@@ -26,7 +26,7 @@
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 import { AxiosRequestConfig } from "axios";
-import { RoomsApi } from "@onlyoffice/docspace-api-typescript";
+import { RoomsApi, FilesFilesApi } from "@onlyoffice/docspace-api-typescript";
 
 import AxiosClient, {
   TReqOption,
@@ -39,196 +39,295 @@ const { proxy: proxyConf } = defaultConfig;
 const { url: proxyURL } = proxyConf;
 
 const client = new AxiosClient();
+interface BaseApiClass {
+  [key: string]: any;
+}
 
-class EnhancedRoomsApi extends RoomsApi {
-  constructor() {
-    super(dsApiConfiguration);
+class EnhancedApiClient<T extends BaseApiClass> {
+  private static readonly DEFAULT_ERROR_MESSAGE = "Request Failed";
+  private static readonly REQUEST_LIMIT_MESSAGE = "Request limit exceeded";
+  private static readonly UNKNOWN_ERROR_MESSAGE = "Unknown error";
+
+  public apiInstance: T;
+
+  constructor(ApiClass: new (config: any) => T) {
+    this.apiInstance = new ApiClass(dsApiConfiguration);
   }
 
-  async makeApiRequest<T>(
-    apiMethod: keyof RoomsApi,
+  async makeApiRequest<R>(
+    apiMethod: keyof T,
     args: unknown[] = [],
     options: ApiOptions = {},
     skipRedirect = false,
     isOAuth = false,
-  ): Promise<T> {
+  ): Promise<R> {
     try {
-      const response = await (this[apiMethod] as Function)(...args, options);
+      const response = await this.executeApiMethod(apiMethod, args, options);
 
-      const error = client.getResponseError(response);
-      if (error) throw new Error(error);
-
-      if (response.headers?.["x-redirect-uri"] && options.withRedirect) {
-        const redirectUri = response.headers["x-redirect-uri"];
-        if (typeof redirectUri === "string" && typeof window !== "undefined") {
-          return window.location.replace(redirectUri) as unknown as T;
-        }
-      }
-
-      if (!response || !response.data || response.isAxiosError)
-        return null as unknown as T;
-
-      if (
-        response.data &&
-        typeof response.data !== "string" &&
-        typeof response.data === "object" &&
-        "total" in response.data
-      ) {
-        return {
-          total: response.data.total ? +response.data.total : 0,
-          items: response.data.response,
-        } as unknown as T;
-      }
-
-      if (response.request?.responseType === "text") return response.data;
-
-      if (options.baseURL === "/apisystem" && !response.data.response) {
-        return response.data;
-      }
-
-      if (isOAuth && !response.data.response) return response.data;
-
-      return response.data.response;
+      this.handleRedirect(response, options);
+      return this.processSuccessResponse<R>(response, options, isOAuth);
     } catch (errorParam) {
-      const error = errorParam as TError;
-      console.log("Request Failed:", { error });
+      return this.handleApiError<R>(errorParam, options, skipRedirect);
+    }
+  }
 
-      if (error?.response?.status === 401 && client.isSSR) {
-        error.response.data = {
-          ...error?.response?.data,
-          error: { ...error?.response?.data?.error, message: 401 },
-        };
-      }
+  private async executeApiMethod(
+    apiMethod: keyof T,
+    args: unknown[],
+    options: ApiOptions,
+  ) {
+    const method = this.apiInstance[apiMethod] as Function;
+    if (typeof method !== "function") {
+      throw new Error(`Method ${String(apiMethod)} not found on API instance`);
+    }
 
-      const loginURL = combineUrl(proxyURL, "/login");
+    const response = await method.call(this.apiInstance, ...args, options);
 
-      if (typeof window !== "undefined" && !client.isSSR) {
-        switch (error.response?.status) {
-          case 401: {
-            if (options.skipUnauthorized)
-              return Promise.resolve() as unknown as T;
+    const error = client.getResponseError(response);
+    if (error) {
+      throw new Error(error);
+    }
 
-            if (options.skipLogout) {
-              if (error instanceof Error) {
-                throw error;
-              } else {
-                const wrappedError = new Error(
-                  error?.message || "Unknown error",
-                );
-                Object.assign(wrappedError, error);
-                throw wrappedError;
-              }
-            }
+    return response;
+  }
 
-            console.log("Debug is SDK frame", window?.ClientConfig?.isFrame);
-
-            if (window?.ClientConfig?.isFrame) {
-              break;
-            }
-
-            const opt: AxiosRequestConfig = {
-              method: "POST",
-              url: "/authentication/logout",
-            };
-
-            client.request(opt)?.then(() => {
-              client.setWithCredentialsStatus(false);
-              window.location.href = `${loginURL}?authError=true`;
-            });
-            break;
-          }
-          case 402:
-            if (!window.location.pathname.includes("payments")) {
-              // window.location.href = client.paymentsURL;
-            }
-            break;
-          case 403: {
-            const { pathname } = window.location;
-
-            const isArchived = pathname.indexOf("/rooms/archived") !== -1;
-
-            const isRooms =
-              pathname.indexOf("/rooms/shared") !== -1 || isArchived;
-
-            if (isRooms && !skipRedirect && !window?.ClientConfig?.isFrame) {
-              setTimeout(() => {
-                window.DocSpace.navigate(isArchived ? "/archived" : "/");
-              }, 1000);
-            }
-
-            break;
-          }
-          case 429: {
-            const limitError = new Error("Request limit exceeded");
-            Object.assign(limitError, error);
-            throw limitError;
-          }
-          default:
-            break;
-        }
-
-        if (error instanceof Error) {
-          throw error;
-        } else {
-          const wrappedError = new Error(error?.message || "Unknown error");
-          Object.assign(wrappedError, error);
-          throw wrappedError;
-        }
-      }
-
-      if (error.response?.status === 401) {
-        return Promise.resolve() as unknown as T;
-      }
-
-      if (error instanceof Error) {
-        throw error;
-      } else {
-        const wrappedError = new Error(error?.message || "Unknown error");
-        Object.assign(wrappedError, error);
-        throw wrappedError;
+  private handleRedirect(response: any, options: ApiOptions): void {
+    if (response.headers?.["x-redirect-uri"] && options.withRedirect) {
+      const redirectUri = response.headers["x-redirect-uri"];
+      if (typeof redirectUri === "string" && typeof window !== "undefined") {
+        window.location.replace(redirectUri);
       }
     }
   }
+
+  private processSuccessResponse<R>(
+    response: any,
+    options: ApiOptions,
+    isOAuth: boolean,
+  ): R {
+    if (!response || !response.data || response.isAxiosError) {
+      return null as unknown as R;
+    }
+
+    if (this.isPaginatedResponse(response.data)) {
+      return {
+        total: response.data.total ? +response.data.total : 0,
+        items: response.data.response,
+      } as unknown as R;
+    }
+
+    if (response.request?.responseType === "text") {
+      return response.data;
+    }
+
+    if (options.baseURL === "/apisystem" && !response.data.response) {
+      return response.data;
+    }
+
+    if (isOAuth && !response.data.response) {
+      return response.data;
+    }
+
+    return response.data.response;
+  }
+
+  private isPaginatedResponse(data: any): boolean {
+    return (
+      data &&
+      typeof data !== "string" &&
+      typeof data === "object" &&
+      "total" in data
+    );
+  }
+
+  private async handleApiError<R>(
+    errorParam: unknown,
+    options: ApiOptions,
+    skipRedirect: boolean,
+  ): Promise<R> {
+    const error = errorParam as TError;
+    console.log(EnhancedApiClient.DEFAULT_ERROR_MESSAGE, { error });
+
+    this.handleSSRUnauthorized(error);
+    if (typeof window !== "undefined" && !client.isSSR) {
+      return this.handleClientSideError<R>(error, options, skipRedirect);
+    }
+
+    return this.handleServerSideError<R>(error);
+  }
+
+  private handleSSRUnauthorized(error: TError): void {
+    if (error?.response?.status === 401 && client.isSSR) {
+      error.response.data = {
+        ...error?.response?.data,
+        error: { ...error?.response?.data?.error, message: 401 },
+      };
+    }
+  }
+
+  private async handleClientSideError<R>(
+    error: TError,
+    options: ApiOptions,
+    skipRedirect: boolean,
+  ): Promise<R> {
+    const statusCode = error.response?.status;
+
+    switch (statusCode) {
+      case 401:
+        return this.handleUnauthorizedError<R>(error, options);
+
+      case 402:
+        this.handlePaymentRequired();
+        break;
+
+      case 403:
+        this.handleForbiddenError(skipRedirect);
+        break;
+
+      case 429:
+        this.handleRateLimitError(error);
+        break;
+    }
+
+    throw this.wrapError(error);
+  }
+
+  private async handleUnauthorizedError<R>(
+    error: TError,
+    options: ApiOptions,
+  ): Promise<R> {
+    if (options.skipUnauthorized) {
+      return null as unknown as R;
+    }
+
+    if (options.skipLogout) {
+      throw this.wrapError(error);
+    }
+
+    console.log("Debug is SDK frame", window?.ClientConfig?.isFrame);
+
+    if (!window?.ClientConfig?.isFrame) {
+      await this.performLogout();
+    }
+
+    throw this.wrapError(error);
+  }
+
+  private handlePaymentRequired(): void {
+    if (!window.location.pathname.includes("payments")) {
+      // Future: redirect to payments page
+      // window.location.href = client.paymentsURL;
+    }
+  }
+
+  private handleForbiddenError(skipRedirect: boolean): void {
+    const { pathname } = window.location;
+    const isArchived = pathname.indexOf("/rooms/archived") !== -1;
+    const isRooms = pathname.indexOf("/rooms/shared") !== -1 || isArchived;
+
+    if (isRooms && !skipRedirect && !window?.ClientConfig?.isFrame) {
+      setTimeout(() => {
+        window.DocSpace.navigate(isArchived ? "/archived" : "/");
+      }, 1000);
+    }
+  }
+
+  private handleRateLimitError(error: TError): void {
+    const limitError = new Error(EnhancedApiClient.REQUEST_LIMIT_MESSAGE);
+    Object.assign(limitError, error);
+    throw limitError;
+  }
+
+  private async performLogout(): Promise<void> {
+    const loginURL = combineUrl(proxyURL, "/login");
+
+    const logoutOptions: AxiosRequestConfig = {
+      method: "POST",
+      url: "/authentication/logout",
+    };
+
+    try {
+      await client.request(logoutOptions);
+      client.setWithCredentialsStatus(false);
+      window.location.href = `${loginURL}?authError=true`;
+    } catch (logoutError) {
+      console.error("Logout failed:", logoutError);
+      window.location.href = `${loginURL}?authError=true`;
+    }
+  }
+
+  private handleServerSideError<R>(error: TError): Promise<R> {
+    if (error.response?.status === 401) {
+      return Promise.resolve(null as unknown as R);
+    }
+
+    throw this.wrapError(error);
+  }
+
+  private wrapError(error: TError): Error {
+    if (error instanceof Error) {
+      return error;
+    }
+
+    const wrappedError = new Error(
+      error?.message || EnhancedApiClient.UNKNOWN_ERROR_MESSAGE,
+    );
+    Object.assign(wrappedError, error);
+    return wrappedError;
+  }
 }
 
-const enhancedRoomsApi = new EnhancedRoomsApi();
+const enhancedRoomsApi = new EnhancedApiClient(RoomsApi);
+const enhancedFilesApi = new EnhancedApiClient(FilesFilesApi);
 
-// Define a more specific interface for the options
 interface ApiOptions extends TReqOption, AxiosRequestConfig {
   skipRedirect?: boolean;
   isOAuth?: boolean;
   withRedirect?: boolean;
 }
 
-export const roomsClient = new Proxy(enhancedRoomsApi, {
-  get(target, prop: string | symbol) {
-    const originalProperty = Reflect.get(target, prop);
+function createEnhancedApiProxy<T extends BaseApiClass>(
+  enhancedApi: EnhancedApiClient<T>,
+): EnhancedApiClient<T> & T {
+  return new Proxy(enhancedApi, {
+    get(target, prop: string | symbol) {
+      const originalProperty = Reflect.get(target, prop);
 
-    if (typeof originalProperty === "function" && prop !== "makeApiRequest") {
-      return function wrappedApiCall(...args: unknown[]) {
-        const lastArg = args[args.length - 1];
-        const isOptionsArg =
-          lastArg && typeof lastArg === "object" && !Array.isArray(lastArg);
+      if (originalProperty !== undefined) {
+        return originalProperty;
+      }
 
-        const options: ApiOptions = isOptionsArg
-          ? (args.pop() as ApiOptions)
-          : {};
-        const skipRedirect = options.skipRedirect || false;
-        const isOAuth = options.isOAuth || false;
+      const apiProperty = Reflect.get(target.apiInstance, prop);
 
-        return target.makeApiRequest(
-          prop as keyof RoomsApi,
-          args,
-          options,
-          skipRedirect,
-          isOAuth,
-        );
-      };
-    }
+      if (typeof apiProperty === "function" && prop !== "makeApiRequest") {
+        return function wrappedApiCall(...args: unknown[]) {
+          const lastArg = args[args.length - 1];
+          const isOptionsArg =
+            lastArg && typeof lastArg === "object" && !Array.isArray(lastArg);
 
-    return originalProperty;
-  },
-});
+          const options: ApiOptions = isOptionsArg
+            ? (args.pop() as ApiOptions)
+            : {};
+          const skipRedirect = options.skipRedirect || false;
+          const isOAuth = options.isOAuth || false;
+
+          return target.makeApiRequest(
+            prop as keyof T,
+            args,
+            options,
+            skipRedirect,
+            isOAuth,
+          );
+        };
+      }
+
+      return apiProperty;
+    },
+  }) as EnhancedApiClient<T> & T;
+}
+
+export const roomsClient = createEnhancedApiProxy(enhancedRoomsApi);
+export const filesClient = createEnhancedApiProxy(enhancedFilesApi);
 
 export const initSSR = (headers: Record<string, string>) => {
   client.initSSR(headers);

@@ -24,8 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables";
-@import "../../styles/mixins";
+@use "../../styles/mixins";
 
 .links {
   margin-top: 20px;
@@ -205,7 +204,7 @@
   position: absolute;
   inset-inline-end: 32px;
 
-  @include mobile {
+  @include mixins.mobile {
     position: fixed;
     bottom: 0;
     inset-inline-start: 0;

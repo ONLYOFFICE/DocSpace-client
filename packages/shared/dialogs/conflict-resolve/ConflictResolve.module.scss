@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+@use "../../styles/mixins";
+
 .conflictResolveBodyContent {
   display: contents;
 
@@ -39,10 +41,7 @@
     :global {
       .bold {
         font-weight: 600;
-
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+        @include mixins.truncate;
       }
     }
   }

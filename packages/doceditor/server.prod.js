@@ -114,7 +114,14 @@ import("./logger.mjs").then(({ logger }) => {
         transform: "next/dist/server/web/exports/{{ kebabCase member }}",
       },
     },
-    serverExternalPackages: ["date-and-time", "nconf"],
+    serverExternalPackages: [
+      "date-and-time",
+      "nconf",
+      "winston",
+      "winston-cloudwatch",
+      "winston-daily-rotate-file",
+      "@aws-sdk/client-cloudwatch-logs",
+    ],
     experimental: {
       windowHistorySupport: false,
       serverMinification: true,

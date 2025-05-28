@@ -39,7 +39,14 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  serverExternalPackages: ["nconf"],
+  serverExternalPackages: [
+    "nconf",
+    "date-and-time",
+    "winston",
+    "winston-cloudwatch",
+    "winston-daily-rotate-file",
+    "@aws-sdk/client-cloudwatch-logs",
+  ],
   compiler: {
     styledComponents: true,
   },

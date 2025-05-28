@@ -78,7 +78,7 @@ const LinkRow = ({
   removedExpiredLink,
   isFormRoom,
 }: LinkRowProps) => {
-  const { t } = useTranslation(["Common", "Translations"]);
+  const { t } = useTranslation("Common");
   const [isMobileViewLink, setIsMobileViewLink] = useState(isMobile());
 
   const shareOptions = getShareOptions(t, availableExternalRights) as TOption[];

@@ -1972,6 +1972,13 @@
   --preview-tile-background: #{$white};
   --preview-tile-border: 1px solid #{$gray-strong};
   --preview-tile-icon-border: 1px solid #{$gray-light-mid};
+
+  --button-delete-bg: #{$gray-light};
+  --button-delete-bg-hover: #{$light-gray-hover};
+  --button-delete-border: #{$gray-light};
+  --button-delete-border-hover: #{$light-gray-hover};
+  --button-delete-text: #{$gray-text};
+  --button-delete-icon-color: #{$light-gray-dark};
 }
 
 .dark {
@@ -1986,6 +1993,13 @@
   --preview-tile-background: #{$black};
   --preview-tile-border: 1px solid #{$gray-dark-strong};
   --preview-tile-icon-border: 1px solid #{$gray-light-mid};
+
+  --button-delete-bg: #{$gray-dark-mid};
+  --button-delete-bg-hover: #{$gray-dark-strong};
+  --button-delete-border: #{$gray};
+  --button-delete-border-hover: #{$light-dark-gray-hover};
+  --button-delete-text: #{$white};
+  --button-delete-icon-color: #{$dark-gray-dark};
 }
 
 .light {

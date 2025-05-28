@@ -243,6 +243,12 @@ const Template = (args) => {
   const rowLoader = <StyledRowLoader />;
   const searchLoader = <StyledSearchLoader />;
 
+  const [rendItems, setRendItems] = React.useState(users);
+
+  const loadNextPage = React.useCallback(async (index: number) => {
+    setRendItems((val) => [...val, ...items.slice(index, index + 100)]);
+  }, []);
+
   return (
     <div
       style={{
@@ -253,6 +259,9 @@ const Template = (args) => {
     >
       <PeopleSelector
         {...args}
+        items={rendItems}
+        renderCustomItem={rendItems[0]}
+        loadNextPage={loadNextPage}
         rowLoader={rowLoader}
         searchLoader={searchLoader}
         emptyScreenImage={EmptyScreenPersonsSvgUrl}
@@ -265,6 +274,7 @@ const Template = (args) => {
         data-selector-type="people"
         data-test-id="people-selector"
         isLoading={false}
+        isSearchLoading={false}
       />
     </div>
   );
@@ -286,13 +296,11 @@ export const Default: Story = {
     searchPlaceholder: "Search users",
     isMultiSelect: false,
     submitButtonLabel: "Select",
-    headerLabel: "Room list",
     onBackClick: () => {},
     searchPlaceholder: "Search",
     searchValue: "",
 
     onSelect: () => {},
-    isMultiSelect: false,
     selectedItems: selectedUsers,
     acceptButtonLabel: "Add",
     onAccept: () => {},
@@ -316,15 +324,10 @@ export const Default: Story = {
     searchEmptyScreenDescription:
       " SEARCH !!! The list of users previously invited to DocSpace or separate rooms will appear here. You will be able to invite these users for collaboration at any time.",
     totalItems: users.length,
-    hasNextPage: true,
+    hasNextPage: false,
     isNextPageLoading: false,
     isLoading: false,
-    withBreadCrumbs: false,
-    breadCrumbs: [],
-    onSelectBreadCrumb: () => {},
     withoutBackButton: false,
-    withSearch: false,
-    isBreadCrumbsLoading: false,
     alwaysShowFooter: false,
     disableAcceptButton: false,
     descriptionText: "",

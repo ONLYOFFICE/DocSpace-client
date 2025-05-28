@@ -36,9 +36,9 @@ const TableContainer = (props: TableContainerProps) => {
     <StyledTableContainer
       id="table-container"
       className="table-container"
-      ref={forwardedRef}
       useReactWindow={useReactWindow}
       {...rest}
+      ref={forwardedRef}
     />
   );
 };

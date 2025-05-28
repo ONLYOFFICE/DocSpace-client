@@ -35,15 +35,23 @@ export interface ICompanyInfo {
     email: string,
     phone: string,
     site: string,
+    hideAbout: boolean,
   ) => void;
   onRestore: () => void;
   isLoading: boolean;
   companyInfoSettingsIsDefault: boolean;
+  displayAbout: boolean;
+  isBrandingAvailable: boolean;
   buildVersionInfo: IBuildInfo;
   standalone: boolean;
   licenseAgreementsUrl: string;
   isEnterprise: boolean;
   logoText: string;
+}
+
+export interface IUseCompanySettings {
+  companySettings: ICompanySettings;
+  displayAbout: boolean;
 }
 
 export interface ICompanySettings {
@@ -54,6 +62,7 @@ export interface ICompanySettings {
   site: string;
   isDefault: boolean;
   isLicensor: boolean;
+  hideAbout: boolean;
 }
 
 export interface ICompanySettingsError {

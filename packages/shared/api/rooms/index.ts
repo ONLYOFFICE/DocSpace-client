@@ -78,7 +78,7 @@ export async function getRoomInfo(id) {
 export async function getRoomMembers(id, filter) {
   const res = await roomsClient.getRoomSecurityInfo(id, filter.filterType);
 
-  res.forEach((item) => {
+  res.items.forEach((item) => {
     if (item.subjectType === MembersSubjectType.Group) {
       item.sharedTo.isGroup = true;
     }

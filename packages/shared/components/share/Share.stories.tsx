@@ -128,7 +128,7 @@ const createDefaultProps = (): ShareProps => ({
   },
 });
 
-const meta: Meta<typeof Share> = {
+const meta = {
   title: "Components/Share",
   component: Share,
   parameters: {
@@ -153,16 +153,18 @@ const meta: Meta<typeof Share> = {
       return <Story />;
     },
   ],
+  argTypes: {
+    infoPanelSelection: { table: { disable: true } },
+    selfId: { table: { disable: true } },
+    onlyOneLink: { control: { type: "boolean" } },
+  },
+  args: createDefaultProps(),
 } satisfies Meta<typeof Share>;
 
 export default meta;
-type Story = StoryObj<typeof Share>;
-
-const Template = (args: ShareProps) => <Share {...args} />;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: (args) => Template({ ...createDefaultProps(), ...args }),
-  args: {},
   parameters: {
     msw: {
       handlers: [

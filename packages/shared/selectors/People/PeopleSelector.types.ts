@@ -47,9 +47,6 @@ export type UserTooltipProps = {
 
   // Accessibility attributes
   "aria-label"?: string;
-  "aria-describedby"?: string;
-  "data-user-email"?: string;
-  "data-user-position"?: string;
 };
 
 export type ContactsSelectorGroups =
@@ -104,8 +101,6 @@ export type PeopleSelectorProps = TSelectorHeader &
 
     // Accessibility attributes
     "aria-label"?: string;
-    "aria-labelledby"?: string;
-    "aria-describedby"?: string;
     "data-selector-type"?: string;
     "data-test-id"?: string;
   } & ContactsSelectorGroups &

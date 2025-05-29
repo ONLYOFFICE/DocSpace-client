@@ -91,8 +91,6 @@ jest.mock("../../components/selector", () => ({
     withCancelButton,
     cancelButtonLabel,
     "aria-label": ariaLabel,
-    "aria-labelledby": ariaLabelledBy,
-    "aria-describedby": ariaDescribedBy,
     "data-selector-type": dataSelectorType,
     "data-test-id": dataTestId,
     // We're not using any other props
@@ -126,8 +124,6 @@ jest.mock("../../components/selector", () => ({
     withCancelButton?: boolean;
     cancelButtonLabel?: string;
     "aria-label"?: string;
-    "aria-labelledby"?: string;
-    "aria-describedby"?: string;
     "data-selector-type"?: string;
     "data-test-id"?: string;
     [key: string]: unknown;
@@ -141,8 +137,6 @@ jest.mock("../../components/selector", () => ({
       <div
         data-testid="selector"
         aria-label={ariaLabel || "People Selector"}
-        aria-labelledby={ariaLabelledBy}
-        aria-describedby={ariaDescribedBy}
         data-selector-type={dataSelectorType || "people"}
         data-test-id={dataTestId || "people-selector"}
         role="listbox"
@@ -155,8 +149,6 @@ jest.mock("../../components/selector", () => ({
                   key={item.id as string}
                   data-testid={`selector-item-${item.id as string}`}
                   data-user-id={item.id as string}
-                  data-user-type={item.userType as string}
-                  data-user-status={item.status as number}
                   data-selected={(item.isSelected ? "true" : "false") as string}
                   data-disabled={(item.isDisabled ? "true" : "false") as string}
                   role="option"

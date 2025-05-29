@@ -1,0 +1,21 @@
+{
+  "key_path": "Downgrade",
+  "content": "Downgrade",
+  "content_en_sha1_hash": "770fbc1a9a8c12435cd8b6a01675a29c973931f4",
+  "created_at": "2025-05-29T12:12:54.427Z",
+  "updated_at": "2025-05-29T12:12:54.427Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -29,6 +29,7 @@ import { useServicesActions } from "../hooks/useServicesActions";
 
 import WalletInfo from "../../payments/Wallet/sub-components/WalletInfo";
 import { usePaymentContext } from "../context/PaymentContext";
+import styles from "../styles/StorageSummary.module.scss";
 
 type WalletContainerProps = {
   onTopUp: () => void;
@@ -57,10 +58,12 @@ const WalletContainer = (props: WalletContainerProps) => {
     : insufficientFunds;
 
   return (
-    <WalletInfo
-      balance={formatWalletCurrency(null, 2, 2)}
-      {...(isPaymentAnavalable && !isExceedingStorageLimit && { onTopUp })}
-    />
+    <div className={styles.walletContainer}>
+      <WalletInfo
+        balance={formatWalletCurrency(null, 2, 2)}
+        {...(isPaymentAnavalable && !isExceedingStorageLimit && { onTopUp })}
+      />
+    </div>
   );
 };
 

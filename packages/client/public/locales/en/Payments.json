@@ -48,6 +48,7 @@
   "DiskStorage": "Disk storage",
   "Downgrade": "Downgrade",
   "DowngradeNow": "Downgrade now",
+  "DueToday": "Due today",
   "EnableAutoTopUp": "Enable Auto Top-up",
   "EnterAmount": "Enter an integer amount...",
   "EnterAnIntegerAmountBetween": "Enter an integer amount between {{min}} and {{max}}",

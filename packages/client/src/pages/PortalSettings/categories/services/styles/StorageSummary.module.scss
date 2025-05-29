@@ -67,6 +67,13 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-bottom: 12px;
+  margin-top: 12px;
+
+  &.withBottom {
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--aside-header-border-color);
+  }
 }
 
 .planInfoIcon {
@@ -113,13 +120,15 @@
 .totalTitle {
   margin-bottom: 12px;
 }
-.planInfoContainer {
-  margin-bottom: 12px;
-}
+
 .monthPayment {
   color: var(--payment-dialog-text);
 }
 
 .cancelDialog {
   margin-bottom: 16px;
+}
+
+.walletContainer {
+  margin-bottom: 20px;
 }

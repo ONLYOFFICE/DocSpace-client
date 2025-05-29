@@ -27,6 +27,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import classNames from "classNames";
 
 import { Text } from "@docspace/shared/components/text";
 import { calcalateWalletPayment } from "@docspace/shared/api/portal";
@@ -93,45 +94,55 @@ const PlanUpgradePreview = (props) => {
   useEffect(() => {
     return () => {
       if (timeout) clearTimeout(timeout);
+      setIsWaitingCalculation(false);
       timeout = null;
     };
   }, []);
-  return (
-    <div className={styles.planInfoContainer}>
-      <div className={styles.planInfoIcon}>
-        <UpgradeWalletIcon />
-      </div>
-      <div className={styles.planInfoBody}>
-        <Text fontWeight={600}>
-          {t("AdditionalStorage", {
-            amount: calculateDifference(amount, currentStoragePlanSize),
-            storageUnit: t("Common:Gigabyte"),
-          })}
-        </Text>
-        <Text fontWeight="600" fontSize="11px" className={styles.priceForEach}>
-          {t("RemainingDays", { count: daysUtilPayment })}
-        </Text>
-      </div>
 
-      <div className={styles.planInfoPrice}>
-        {isLoading ? (
-          <Loader color="" size="20px" type={LoaderTypes.track} />
-        ) : (
-          <>
-            <Text fontWeight="600" fontSize="14px">
-              {formatWalletCurrency(futurePayment)}
-            </Text>
-            <Text
-              fontWeight="600"
-              fontSize="11px"
-              className={styles.priceForEach}
-            >
-              {t("ForDays", { count: daysUtilPayment })}
-            </Text>
-          </>
-        )}
+  return (
+    <>
+      <Text fontWeight={700} fontSize="16px">
+        {t("DueToday")}
+      </Text>
+      <div className={classNames(styles.planInfoContainer, styles.withBottom)}>
+        <div className={styles.planInfoIcon}>
+          <UpgradeWalletIcon />
+        </div>
+        <div className={styles.planInfoBody}>
+          <Text fontWeight={600}>
+            {t("AdditionalStorage", {
+              amount: `${calculateDifference(amount, currentStoragePlanSize)} ${t("Common:Gigabyte")}`,
+            })}
+          </Text>
+          <Text
+            fontWeight="600"
+            fontSize="11px"
+            className={styles.priceForEach}
+          >
+            {t("RemainingDays", { count: daysUtilPayment })}
+          </Text>
+        </div>
+
+        <div className={styles.planInfoPrice}>
+          {isLoading ? (
+            <Loader color="" size="20px" type={LoaderTypes.track} />
+          ) : (
+            <>
+              <Text fontWeight="600" fontSize="14px">
+                {formatWalletCurrency(futurePayment)}
+              </Text>
+              <Text
+                fontWeight="600"
+                fontSize="11px"
+                className={styles.priceForEach}
+              >
+                {t("ForDays", { count: daysUtilPayment })}
+              </Text>
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

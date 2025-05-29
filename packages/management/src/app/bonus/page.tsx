@@ -49,13 +49,17 @@ async function Page() {
 
   if (settings === "access-restricted") {
     logger.info("Bonus page access-restricted");
-    redirect(`${getBaseUrl()}/${settings}`);
+
+    const baseURL = await getBaseUrl();
+    redirect(`${baseURL}/${settings}`);
   }
   if (!settings || !quota || !portalTariff || !paymentSettings) {
     logger.info(
       `Bonus page settings: ${settings}, quota: ${quota}, portalTariff: ${portalTariff}, paymentSettings: ${paymentSettings}`,
     );
-    redirect(`${getBaseUrl()}/login`);
+
+    const baseURL = await getBaseUrl();
+    redirect(`${baseURL}/login`);
   }
 
   const { logoText, externalResources } = settings;
@@ -75,8 +79,9 @@ async function Page() {
   const dataBackupUrl = `${helpcenter.domain}/administration/docspace-settings.aspx#CreatingBackup_block`;
 
   if (!openSource) {
-    logger.info(`Bonus page redirect${getBaseUrl()}/error/403`);
-    return redirect(`${getBaseUrl()}/error/403`);
+    const baseURL = await getBaseUrl();
+    logger.info(`Bonus page redirect${baseURL}/error/403`);
+    return redirect(`${baseURL}/error/403`);
   }
 
   return (

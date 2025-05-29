@@ -53,14 +53,18 @@ async function Page() {
     ]);
 
   if (settings === "access-restricted") {
+    const baseURL = await getBaseUrl();
+
     logger.info("Branding company-info page access-restricted");
-    redirect(`${getBaseUrl()}/${settings}`);
+    redirect(`${baseURL}/${settings}`);
   }
   if (!settings || !portalTariff) {
+    const baseURL = await getBaseUrl();
+
     logger.info(
       `Branding company-info page settings: ${settings}, portalTariff: ${portalTariff}`,
     );
-    redirect(`${getBaseUrl()}/login`);
+    redirect(`${baseURL}/login`);
   }
 
   const { standalone, licenseAgreementsUrl, logoText, displayAbout } = settings;

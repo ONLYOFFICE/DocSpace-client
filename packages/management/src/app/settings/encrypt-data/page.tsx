@@ -46,7 +46,12 @@ async function Page() {
     getEncryptionSettings(),
   ]);
 
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+  if (settings === "access-restricted") {
+    logger.info("EncryptData page access-restricted");
+
+    const baseURL = await getBaseUrl();
+    redirect(`${baseURL}/${settings}`);
+  }
 
   const domain = settings?.externalResources?.helpcenter?.domain;
   const path = settings?.externalResources?.helpcenter?.entries?.encryption;

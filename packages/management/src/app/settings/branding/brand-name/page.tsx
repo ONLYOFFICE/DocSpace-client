@@ -49,12 +49,16 @@ async function Page() {
   ]);
 
   if (settings === "access-restricted") {
+    const baseURL = await getBaseUrl();
+
     logger.info("Branding brand-name page access-restricted");
-    redirect(`${getBaseUrl()}/${settings}`);
+    redirect(`${baseURL}/${settings}`);
   }
   if (!settings) {
+    const baseURL = await getBaseUrl();
+
     logger.info(`Branding brand-name settings: ${settings}`);
-    redirect(`${getBaseUrl()}/login`);
+    redirect(`${baseURL}/login`);
   }
 
   const { standalone } = settings;

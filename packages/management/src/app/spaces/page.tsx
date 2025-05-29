@@ -43,8 +43,10 @@ const SpacesPage = async () => {
   ]);
 
   if (settings === "access-restricted") {
+    const baseURL = await getBaseUrl();
+
     logger.info(`Spaces page access-restricted`);
-    redirect(`${getBaseUrl()}/${settings}`);
+    redirect(`${baseURL}/${settings}`);
   }
 
   const isConnected =

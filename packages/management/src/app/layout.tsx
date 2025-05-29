@@ -67,7 +67,9 @@ export default async function RootLayout({
 
   if (settings === "access-restricted") {
     logger.info("Management layout access-restricted");
-    redirect(`${getBaseUrl()}/${settings}`);
+
+    const baseURL = await getBaseUrl();
+    redirect(`${baseURL}/${settings}`);
   }
 
   if (
@@ -76,7 +78,9 @@ export default async function RootLayout({
     !portalTariff
   ) {
     logger.info("Management layout error/403");
-    redirect(`${getBaseUrl()}/error/403`);
+
+    const baseURL = await getBaseUrl();
+    redirect(`${baseURL}/error/403`);
   }
 
   const cookieStore = await cookies();

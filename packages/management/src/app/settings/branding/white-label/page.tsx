@@ -60,12 +60,16 @@ async function Page() {
   ]);
 
   if (settings === "access-restricted") {
+    const baseURL = await getBaseUrl();
+
     logger.info("Branding white-label page access-restricted");
-    redirect(`${getBaseUrl()}/${settings}`);
+    redirect(`${baseURL}/${settings}`);
   }
   if (!settings) {
+    const baseURL = await getBaseUrl();
+
     logger.info("Branding white-label page empty settings");
-    redirect(`${getBaseUrl()}/login`);
+    redirect(`${baseURL}/login`);
   }
 
   const { displayAbout, standalone } = settings;

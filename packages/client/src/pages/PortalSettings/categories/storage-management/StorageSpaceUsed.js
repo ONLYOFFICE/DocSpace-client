@@ -28,12 +28,12 @@ import { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { Text } from "@docspace/shared/components/text";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
 import { ChangeStorageQuotaDialog } from "@docspace/shared/dialogs/change-storage-quota";
+import { Link } from "@docspace/shared/components/link";
 
 import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
 import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
@@ -130,14 +130,14 @@ const DiskSpaceUsedComponent = (props) => {
             })}
           </Text>
           {standalone && !isTenantCustomQuotaSet ? (
-            <ColorTheme
-              themeId={ThemeId.Link}
+            <Link
               fontWeight={600}
               onClick={onChangeDialogClick}
               className="disk-space_link"
+              color="accent"
             >
               {t("Common:ManageStorageQuota")}
-            </ColorTheme>
+            </Link>
           ) : null}
         </div>
         {standalone && isTenantCustomQuotaSet ? (

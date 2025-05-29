@@ -1,0 +1,279 @@
+{
+  "key_path": "NewInFolder",
+  "content": "New in folder",
+  "content_en_sha1_hash": "e5ef7b6c7c00114460d0779f23ffaafda3613917",
+  "created_at": "2025-05-19T21:30:55.884Z",
+  "updated_at": "2025-05-24T11:50:31.599Z",
+  "comment": {
+    "text": "This translation key is used to display the label \"New in folder\" in a modal dialog header. It appears in the UI when a new file is added to a folder, providing a clear indication of the file's origin within that folder.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:29.282Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/NewFilesBadge/sub-components/NewFilesPanel.tsx",
+      "line_number": 217,
+      "context": "displayType={ModalDialogType.aside}\n withFooterBorder\n withBodyScroll\n >\n <ModalDialog.Header>\n {isRooms ? t(\"NewInRooms\") : isRoom ? t(\"NewInRoom\") : t(\"NewInFolder\")}\n </ModalDialog.Header>\n <ModalDialog.Body>{content}</ModalDialog.Body>\n <ModalDialog.Footer>{markAsReadButton}</ModalDialog.Footer>\n </ModalDialog>\n );",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Qovluqda yeni' is a literal translation but doesn't fully capture the meaning of 'New in folder'. A more natural and idiomatic translation might be 'Yeni fayllar qovluğu' or 'Qovluğa yeni fayllar'.",
+          "suggestion": "Consider 'Yeni fayllar qovluğu' or 'Qovluğa yeni fayllar'."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Uutta kansiossa' is grammatically correct, but doesn't fully capture the meaning of 'New in folder.' 'Uutta' implies something newly created or added. A more accurate translation might emphasize files that are *present* in the folder and previously unseen by the user.",
+          "suggestion": "Uusia tiedostoja kansiossa"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Նոր է թղթապանակում\" literally translates to \"New is in folder.\" While understandable, it's not the most natural way to say \"New in folder\" in Armenian. A more accurate and natural translation would be \"Նոր թղթապանակում\" or \"Նորերը թղթապանակում\".",
+          "suggestion": "Նոր թղթապանակում"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"フォルダに新しい項目\" while understandable, doesn't perfectly capture the nuance of 'New in folder'. It literally translates to 'New items in folder'.  'New in folder' implies recent additions.",
+          "suggestion": "フォルダ内の新規アイテム (folder nai no shinpi itemu) - More accurately conveys 'New items in folder' as new additions. Alternatively, '新着フォルダ' (shinchaku folder) can imply 'New folder' or 'New items in folder'."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"폴더의 새 항목\" is a literal translation but may not be the most natural phrasing for a UI element. It translates to \"New items in folder\" which is technically correct but less concise and potentially less user-friendly than alternatives.",
+          "suggestion": "Consider alternatives like \"새 파일\" (New files) or \"새 항목\" (New items) depending on the context and intended meaning.  A more natural translation might be \"새로 추가된 파일\" (Newly added files) but that is longer."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"​ໃບ​ໃສ່​ໂຟນເດີ\" literally translates to \"leaf put in folder\". This does not accurately convey the meaning of \"New in folder\". A more appropriate translation would focus on the concept of 'new' or 'added'.",
+          "suggestion": "Consider alternatives like \"​ສິ່ງ​ໃໝ່​ໃນ​ໂຟນເດີ\" (sing mai nai folder - new things in folder) or \"​ເພີ່ມ​ໃສ່​ໂຟນເດີ\" (perm sai folder - added to folder)."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Jauns mapē\" is understandable, a more natural and idiomatic translation of \"New in folder\" in Latvian would be \"Jauni mapē\" (plural form to reflect multiple files).",
+          "suggestion": "Jauni mapē"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ෆෝල්ඩරයේ අලුතින් එක් කරන ලද්දක්' is too literal and verbose. It translates to 'What was newly added to the folder'. 'New in folder' generally implies a list or view of recently added files.",
+          "suggestion": "තොරතුරු ෆෝල්ඩරයට අලුතින් එක් වූ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While grammatically correct, 'ෆෝල්ඩරයේ අලුතින් එක් කරන ලද්දක්' sounds unnatural in Sinhala for this context. A more natural phrasing is needed.",
+          "suggestion": "ෆෝල්ඩරයට අලුතින් එක් වූවන්"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation 'Нови у фасцикли' doesn't perfectly capture the meaning of 'New in folder'. 'Фасцикла' typically refers to a file folder or a collection of documents, rather than just a folder. A more accurate translation would depend on the precise context, but 'Нова у директорији' or 'Нови у папки' would be better alternatives.",
+          "suggestion": "Нова у директорији"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Novi u fascikli\" is understandable, \"Novo u mapi\" would be a more natural and accurate translation of \"New in folder.\" \"Fascikli\" is an older term and \"mapa\" (folder) is more commonly used.",
+          "suggestion": "Novo u mapi"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"文件夹中新建\" (Foldering Zhong Xinjian) translates to \"Create New in Folder\", which isn't the intended meaning of \"New in folder\". It implies a creation action rather than showing what's new within an existing folder.",
+          "suggestion": "文件夹的新内容 (Foldering de Xin Neirong) - 'New content in folder' or 新的文件夹 (Xin de Foldering) - 'New folder' would be more accurate depending on the exact context."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

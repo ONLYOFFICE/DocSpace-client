@@ -26,6 +26,7 @@
 
 import React, { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { Link } from "../../../components/link";
 import { FieldContainer } from "../../../components/field-container";
@@ -34,12 +35,15 @@ import {
   InputType,
   InputSize,
 } from "../../../components/text-input";
+
+import { Checkbox } from "../../../components/checkbox";
+
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 import { AboutDialog } from "../../../components/about-dialog";
 
-import { StyledCompanyInfo } from "./CompanyInfo.styled";
 import { ICompanyInfo } from "./CompanyInfo.types";
 import { useCompanySettings } from "./useCompanySettings";
+import styles from "./CompanyInfo.module.scss";
 
 export const CompanyInfo = ({
   isSettingPaid,
@@ -48,6 +52,8 @@ export const CompanyInfo = ({
   onRestore,
   isLoading,
   companyInfoSettingsIsDefault,
+  displayAbout,
+  isBrandingAvailable,
   buildVersionInfo,
   standalone,
   licenseAgreementsUrl,
@@ -63,6 +69,7 @@ export const CompanyInfo = ({
     email,
     phone,
     site,
+    displayAbout: showAbout,
     companySettingsError,
     hasChanges,
     onChangeAddress,
@@ -70,19 +77,30 @@ export const CompanyInfo = ({
     onChangeEmail,
     onChangePhone,
     onChangeSite,
-  } = useCompanySettings(companySettings);
+    onChangeDisplayAbout,
+    reset,
+  } = useCompanySettings({
+    companySettings,
+    displayAbout,
+  });
 
   const onSaveAction = () => {
-    onSave(address, companyName, email, phone, site);
+    onSave(address, companyName, email, phone, site, !showAbout);
+  };
+
+  const onRestoreAction = () => {
+    reset();
+    onRestore();
   };
 
   const {
-    hasErrorAddress,
-    hasErrorCompanyName,
-    hasErrorEmail,
-    hasErrorPhone,
-    hasErrorSite,
+    address: hasErrorAddress,
+    companyName: hasErrorCompanyName,
+    email: hasErrorEmail,
+    phone: hasErrorPhone,
+    site: hasErrorSite,
   } = companySettingsError;
+
   const isDisabled =
     hasErrorAddress ||
     hasErrorCompanyName ||
@@ -110,16 +128,32 @@ export const CompanyInfo = ({
         isEnterprise={isEnterprise}
         logoText={logoText}
       />
-      <StyledCompanyInfo isSettingPaid={isSettingPaid}>
-        <div className="section-description settings_unavailable">
+      <div
+        className={classNames(styles.companyInfo, {
+          [styles.isSettingPaid]: isSettingPaid,
+        })}
+      >
+        <div
+          className={classNames(
+            styles.sectionDescription,
+            "section-description settings_unavailable",
+          )}
+        >
           {t("BrandingSectionDescription", {
-            productName: t("Common:ProductName"),
+            productName: t("ProductName"),
           })}
         </div>
-        <div className="header settings_unavailable">
+        <div
+          className={classNames(styles.header, "header settings_unavailable")}
+        >
           {t("CompanyInfoSettings")}
         </div>
-        <div className="description settings_unavailable">
+        <div
+          className={classNames(
+            styles.description,
+            "description settings_unavailable",
+          )}
+        >
           {isSettingPaid ? (
             <Trans
               t={t}
@@ -127,7 +161,14 @@ export const CompanyInfo = ({
               ns="Common"
               values={{ link }}
               components={{
-                1: <Link className="link" onClick={showExample} noHover />,
+                1: (
+                  <Link
+                    key="component_key"
+                    className={classNames(styles.link, "link")}
+                    onClick={showExample}
+                    noHover
+                  />
+                ),
               }}
             />
           ) : (
@@ -136,11 +177,28 @@ export const CompanyInfo = ({
               i18nKey="CompanyInfoSettingsDescription"
               ns="Common"
               values={{ link }}
-              components={{ 1: <span className="link" /> }}
+              components={{
+                1: (
+                  <span
+                    key="component_key"
+                    className={classNames(styles.link, "link")}
+                  />
+                ),
+              }}
             />
           )}
         </div>
-        <div className="settings-block">
+        <div className={classNames(styles.settingsBlock, "settings-block")}>
+          <FieldContainer>
+            <Checkbox
+              isDisabled={!isBrandingAvailable || !isSettingPaid}
+              isChecked={showAbout}
+              onChange={onChangeDisplayAbout}
+              data-testid="show-about-window-checkbox"
+              label={t("Common:ShowAboutWindow")}
+            />
+          </FieldContainer>
+
           <FieldContainer
             id="fieldContainerCompanyName"
             className="field-container-width settings_unavailable"
@@ -149,7 +207,8 @@ export const CompanyInfo = ({
           >
             <TextInput
               id="textInputContainerCompanyName"
-              className="text-input"
+              testId="company-name-input"
+              className={classNames(styles.textInput, "text-input")}
               isDisabled={!isSettingPaid}
               scale
               value={companyName}
@@ -167,7 +226,8 @@ export const CompanyInfo = ({
           >
             <TextInput
               id="textInputContainerEmail"
-              className="text-input"
+              testId="email-input"
+              className={classNames(styles.textInput, "text-input")}
               isDisabled={!isSettingPaid}
               scale
               value={email}
@@ -185,7 +245,8 @@ export const CompanyInfo = ({
           >
             <TextInput
               id="textInputContainerPhone"
-              className="text-input"
+              testId="phone-input"
+              className={classNames(styles.textInput, "text-input")}
               isDisabled={!isSettingPaid}
               scale
               value={phone}
@@ -203,7 +264,8 @@ export const CompanyInfo = ({
           >
             <TextInput
               id="textInputContainerWebsite"
-              className="text-input"
+              testId="site-input"
+              className={classNames(styles.textInput, "text-input")}
               isDisabled={!isSettingPaid}
               scale
               value={site}
@@ -221,7 +283,8 @@ export const CompanyInfo = ({
           >
             <TextInput
               id="textInputContainerAddress"
-              className="text-input"
+              testId="address-input"
+              className={classNames(styles.textInput, "text-input")}
               isDisabled={!isSettingPaid}
               scale
               value={address}
@@ -233,9 +296,12 @@ export const CompanyInfo = ({
           </FieldContainer>
         </div>
         <SaveCancelButtons
-          className="save-cancel-buttons"
+          className={classNames(
+            styles.saveCancelButtons,
+            "save-cancel-buttons",
+          )}
           onSaveClick={onSaveAction}
-          onCancelClick={onRestore}
+          onCancelClick={onRestoreAction}
           saveButtonLabel={t("Common:SaveButton")}
           cancelButtonLabel={t("Common:Restore")}
           reminderText={t("YouHaveUnsavedChanges")}
@@ -248,7 +314,7 @@ export const CompanyInfo = ({
           additionalClassSaveButton="company-info-save"
           additionalClassCancelButton="company-info-cancel"
         />
-      </StyledCompanyInfo>
+      </div>
     </>
   );
 };

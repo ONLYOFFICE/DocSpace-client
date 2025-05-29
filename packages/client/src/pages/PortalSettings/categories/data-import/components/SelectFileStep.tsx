@@ -180,7 +180,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
   const [chunkSize, setChunkSize] = useState(0);
 
   const [failTries, setFailTries] = useState(FAIL_TRIES);
-  const uploadInterval = useRef<number>();
+  const uploadInterval = useRef<number>(undefined);
   const navigate = useNavigate();
 
   useEffect(() => {

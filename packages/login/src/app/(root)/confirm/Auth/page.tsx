@@ -27,7 +27,6 @@
 import AuthHandler from "./page.client";
 
 function Page() {
-  console.log("Rendered Auth page");
   return <AuthHandler />;
 }
 

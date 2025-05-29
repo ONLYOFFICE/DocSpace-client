@@ -1,0 +1,250 @@
+{
+  "key_path": "CopyHere",
+  "content": "Copy here",
+  "content_en_sha1_hash": "92816e8a2d8cd79faa7d9b23fa0080284e21fef3",
+  "created_at": "2025-05-19T21:30:43.763Z",
+  "updated_at": "2025-05-26T07:57:32.181Z",
+  "comment": {
+    "text": "This translation key is used as a default label for a \"Copy\" button in various UI components, including files selectors and share collectors. The text is meant to encourage users to select or copy content from an interface. It appears on buttons and labels where users interact with shared documents or folders.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:56.661Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
+      "line_number": 85,
+      "context": "isFormRoom?: boolean,\n isSelectFolder?: boolean,\n ) => {\n if (isRestore) return t(\"Common:RestoreHere\");\n if (isMove) return t(\"Common:MoveHere\");\n if (isCopy && !isEditorDialog) return t(\"Common:CopyHere\");\n if (isRestoreAll) return t(\"Common:RestoreHere\");\n if (isSelect || isFormRoom || isSelectFolder) return t(\"Common:SelectAction\");\n \n if (filterParam === FilesSelectorFilterTypes.DOCX) return t(\"Common:Create\");\n // if (filterParam === FilesSelectorFilterTypes.DOCXF) return t(\"Common:SubmitToGallery\");",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/ShareCollectSelector/ShareCollectSelector.tsx",
+      "line_number": 288,
+      "context": "isPanelVisible={visible ? !conflictResolveDialogVisible : false}\n currentDeviceType={currentDeviceType}\n createDefineRoomLabel={\n createDefineRoomLabels[createDefineRoomType] ?? \"\"\n }\n submitButtonLabel={t(\"Common:CopyHere\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n cancelButtonId=\"share-collect-selector-cancel\"\n onCancel={onCancel}\n onSubmit={onSubmit}\n getIsDisabled={getIsDisabled}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/doceditor/src/components/StartFillingSelectDialog.tsx",
+      "line_number": 93,
+      "context": "createDefineRoomLabel={createDefineRoomLabels[createDefineRoomType]}\n createDefineRoomType={createDefineRoomType}\n isPanelVisible={isVisible}\n filesSettings={filesSettings}\n currentDeviceType={currentDeviceType}\n submitButtonLabel={t(\"Common:CopyHere\")}\n onSubmit={onSubmit}\n getIsDisabled={getIsDisabled}\n {...cancelButtonProps}\n disabledItems={[]}\n descriptionText=\"\"",
+      "module": "/packages/doceditor"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ここにコピー' while literally translating to 'copy here', doesn't fully convey the intended meaning of the English phrase 'Copy here', which often implies a place where something should be copied *to*.  'ここにコピー' sounds more like an instruction to copy *something* to this location. A more accurate translation might depend on the surrounding context.",
+          "suggestion": "Consider alternatives like 'ここに貼り付け' (paste here) or 'ここにコピーを' (copy *something* here) depending on the context. Without further context, 'ここにコピーをしてください' (Please copy here) is also a possibility."
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ສຳເນົາ ນີ້' translates literally to 'Copy this'. While understandable, 'Copy here' implies a location to copy to, which is better conveyed with a slightly different phrasing.  'ສຳເນົາ ບ່ອນນີ້' would be a more accurate translation, meaning 'Copy at/to this place'.",
+          "suggestion": "ສຳເນົາ ບ່ອນນີ້"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Copiere în acest loc\" is understandable, it's not the most natural or concise translation of \"Copy here.\" It's quite literal.",
+          "suggestion": "A more natural translation would be \"Copiază aici\" or \"Lipește aici\" (Paste here), depending on the context. If the UI implies copying, \"Copiază aici\" is better. If the UI offers pasting, \"Lipește aici\" is more appropriate."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'මෙතනට අලවන්න' doesn't accurately convey the meaning of 'Copy here'. 'අලවන්න' means 'paste' or 'apply', whereas 'copy' implies duplicating content. A more accurate translation would convey the action of duplicating or making a copy.",
+          "suggestion": "Consider alternatives like 'ප්‍රින්ට් කරන්න' (print), 'ඡායා පිටපත් කරන්න' (make a copy/duplicate), or 'ප්‍රකාශනය කරන්න' (reproduce)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Копирај овде' is understandable, a more natural and commonly used translation of 'Copy here' in Serbian (Cyrillic) would be 'Лепи овде' or 'Унеси овде'. 'Копирај' implies copying from somewhere else, while 'лепи' or 'унеси' is more general for pasting or entering information.",
+          "suggestion": "Лепи овде"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -52,13 +52,14 @@ async function Page() {
   if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
   if (!settings || !portalTariff) redirect(`${getBaseUrl()}/login`);
 
-  const { standalone, licenseAgreementsUrl, logoText } = settings;
+  const { standalone, licenseAgreementsUrl, logoText, displayAbout } = settings;
   const { enterprise } = portalTariff;
 
   return (
     <CompanyInfoPage
       portals={portals?.tenants}
       quota={quota}
+      displayAbout={displayAbout}
       companyInfoSettingsData={companyInfo}
       standalone={standalone}
       licenseAgreementsUrl={licenseAgreementsUrl}

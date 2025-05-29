@@ -1,0 +1,286 @@
+{
+  "key_path": "EmptyRecycleBin",
+  "content": "Empty Trash",
+  "content_en_sha1_hash": "cb42d73c6ea88185e6897f4de1facd437d4e970a",
+  "created_at": "2025-05-19T21:30:55.584Z",
+  "updated_at": "2025-05-26T07:57:32.135Z",
+  "comment": {
+    "text": "The \"EmptyRecycleBin\" translation key is used to display the text \"Empty Trash\" in a specific UI component, which triggers an action to empty the recycle bin folder when clicked. This key appears as a button's label and badge title, likely in a trash or recycling management interface.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:50.031Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/Article/Body/Items.js",
+      "line_number": 188,
+      "context": "value={value}\n showBadge={showBadge}\n labelBadge={labelBadge}\n onClickBadge={onBadgeClick}\n iconBadge={iconBadge}\n badgeTitle={labelBadge ? \"\" : t(\"EmptyRecycleBin\")}\n badgeComponent={\n <NewFilesBadge\n newFilesCount={labelBadge}\n folderId={item.id === roomsFolderId ? \"rooms\" : item.id}\n parentDOMId={folderId}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 1409,
+      "context": "if (isRecycleBinFolder) {\n return [\n {\n id: \"header_option_empty-trash\",\n key: \"empty-trash\",\n label: t(\"Files:EmptyRecycleBin\"),\n onClick: this.onEmptyTrashAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,\n },\n {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation \"سلة مهملات فارغة\" literally translates to \"Empty trash can.\" While understandable, a more accurate and idiomatic translation of \"Empty Trash\" (as a function) would be something like \"إفراغ سلة المهملات\" or \"تفريغ سلة المهملات\". \"سلة مهملات فارغة\" describes a *state* (an empty trash can), not an *action* (emptying the trash).",
+          "suggestion": "إفراغ سلة المهملات"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Boş zibil qutusu' literally translates to 'Empty trash box'. While understandable, 'Empty Trash' is better conveyed by a more concise term like 'Zibildən təmizlə' or 'Zibildəki məzmunu sil'.",
+          "suggestion": "Zibildən təmizlə"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Vysypat kos' is not the most accurate translation of 'Empty Trash'. 'Kos' refers to a basket, not a trash can. A more accurate translation would be 'Vysypat odpadkový koš' or 'Vyprazdnit odpadkový koš'.",
+          "suggestion": "Vysypat odpadkový koš"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Դատարկել աղբը\" (Datarkel aghby) is a literal translation of 'Empty Trash,' it might sound slightly awkward or overly formal in certain contexts. A more natural phrasing might be \"Մաքրել աղբարկանը\" (Makrel aghbarkany) which translates to 'Clean the trash bin/recycling bin'.",
+          "suggestion": "Մաքրել աղբարկանը"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation '空きゴミ箱' literally translates to 'Empty Trash Box'. While understandable, it's not the most natural or common phrasing for 'Empty Trash'. A more idiomatic translation would be something like 'ゴミ箱を空にする' (Gomibako o karasu).",
+          "suggestion": "ゴミ箱を空にする"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ຖັງຂີ້ເຫຍື້ອຫວ່າງເປົ່າ\" (thang khiuea wang peo) literally translates to 'trash bin empty,' it's not the natural way to express 'Empty Trash' in Lao. A more idiomatic translation would be something like 'ລ້າງຖັງຂີ້ເຫຍື້ອ' (lang thang khiuea).",
+          "suggestion": "ລ້າງຖັງຂີ້ເຫຍື້ອ (lang thang khiuea)"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Iztukšot atkritni\" is a literal translation and doesn't convey the natural meaning of \"Empty Trash\" in Latvian. While technically correct, it sounds awkward. A more natural translation would be something like \"Izliet atkritumu konteineru\" or \"Izliet miskastes\".",
+          "suggestion": "Izliet miskastes"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Golire Coș de gunoi\" is understandable, a more natural and common Romanian translation for \"Empty Trash\" would be \"Golește Coșul de gunoi\".  The imperative form ('Golește') is more appropriate for a button label or action prompt.",
+          "suggestion": "Golește Coșul de gunoi"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'කුණු' (kunu) in 'කුණුකූඩය හිස් කරන්න' might be slightly informal. While understandable, a more formal term for 'trash' or 'garbage' might be preferable depending on the overall tone of the application.",
+          "suggestion": "Consider using a more formal term like 'ගබඩා කු ප්‍රදේශය' (gabadakuru pradheshaya) which translates to 'garbage area', or 'පරණ ද්‍රව්‍ය ප්‍රදේශය' (paran dravya pradheshaya) which means 'old materials area'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation 'Празан Отпад' does not accurately convey the meaning of 'Empty Trash'. 'Отпад' generally means 'waste' or 'rubbish', not 'trash'.",
+          "suggestion": "Испени Контејнер"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Prazan Otpad\" is not the most natural or accurate translation of \"Empty Trash.\" \"Otpad\" generally refers to waste or garbage, not specifically the trash bin itself.",
+          "suggestion": "Consider \"Isprazni Koru\" or \"Očisti Koru\" which translates to \"Empty Bin\" or \"Clean Bin\" respectively. These are more accurate and commonly used phrases."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Thùng rác trống' literally translates to 'Empty Trash Can', the English 'Empty Trash' implies the action of emptying the trash. 'Thùng rác trống' describes the *state* of the trash can, not the action. A better translation would focus on the action.",
+          "suggestion": "Làm trống thùng rác"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

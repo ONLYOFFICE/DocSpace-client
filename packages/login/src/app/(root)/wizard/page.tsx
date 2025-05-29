@@ -27,7 +27,6 @@
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import {
@@ -41,17 +40,15 @@ import {
 
 import WizardForm from "./page.client";
 import WizardGreeting from "@/components/WizardGreeting/index.client";
+import { LoginContainer } from "@/components/LoginContainer";
 
 import { getUserTimezone } from "@docspace/shared/utils/common";
 import { LANGUAGE, TIMEZONE } from "@docspace/shared/constants";
 
 async function Page() {
-  console.log("start wizzard requests");
   const settings = await getSettings();
 
   const objectSettings = typeof settings === "string" ? undefined : settings;
-
-  console.log("wizzard token", objectSettings?.wizardToken);
 
   if (!objectSettings || !objectSettings.wizardToken) {
     redirect("/");
@@ -74,7 +71,7 @@ async function Page() {
   const commonResources = objectSettings?.externalResources.common.entries;
   const forumLinkUrl = objectSettings?.externalResources.forum.domain;
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const timezoneCookie = cookieStore.get(TIMEZONE);
   const userTimezone = timezoneCookie
     ? timezoneCookie.value
@@ -83,7 +80,7 @@ async function Page() {
   const culture = cookieStore.get(LANGUAGE)?.value ?? objectSettings?.culture;
 
   return (
-    <ColorTheme themeId={ThemeId.LinkForgotPassword}>
+    <LoginContainer>
       <>
         <WizardGreeting culture={culture} />
         <FormWrapper id="wizard-form">
@@ -103,7 +100,7 @@ async function Page() {
           />
         </FormWrapper>
       </>
-    </ColorTheme>
+    </LoginContainer>
   );
 }
 

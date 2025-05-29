@@ -31,12 +31,15 @@ import { PlayerBigPlayButton } from ".";
 
 // Mock BigIconPlay SVG component
 jest.mock("PUBLIC_DIR/images/media.bgplay.react.svg", () => {
-  const DummyBigIconPlay = React.forwardRef<HTMLDivElement>(
-    (props: React.HTMLAttributes<HTMLDivElement>, ref) => (
-      <div {...props} ref={ref}>
-        Play Icon
-      </div>
-    ),
+  const DummyBigIconPlay = ({
+    ref,
+    ...props
+  }: React.HTMLAttributes<HTMLDivElement> & {
+    ref?: React.RefObject<HTMLDivElement>;
+  }) => (
+    <div {...props} ref={ref}>
+      Play Icon
+    </div>
   );
   DummyBigIconPlay.displayName = "BigIconPlay";
   return DummyBigIconPlay;

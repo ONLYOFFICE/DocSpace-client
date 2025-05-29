@@ -39,10 +39,11 @@ import GuestShareLinkForm from "./page.client";
 import { GreetingGuestContainer } from "@/components/GreetingContainer";
 
 type GuestShareLinkProps = {
-  searchParams: { [key: string]: string };
+  searchParams: Promise<{ [key: string]: string }>;
 };
 
-async function Page({ searchParams }: GuestShareLinkProps) {
+async function Page(props: GuestShareLinkProps) {
+  const searchParams = await props.searchParams;
   const uid = searchParams.uid;
   const email = searchParams.email;
   const confirmKey = getStringFromSearchParams(searchParams);
@@ -56,7 +57,7 @@ async function Page({ searchParams }: GuestShareLinkProps) {
   const settingsCulture =
     typeof settings === "string" ? undefined : settings?.culture;
 
-  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
+  const culture = (await cookies()).get(LANGUAGE)?.value ?? settingsCulture;
 
   return (
     <>

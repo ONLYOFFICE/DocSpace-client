@@ -1,0 +1,262 @@
+{
+  "key_path": "ErrorUserNotFound",
+  "content": "The user could not be found",
+  "content_en_sha1_hash": "f05293a26ddd45b11f7c4227d12eecdc3d1228dd",
+  "created_at": "2025-05-19T21:30:57.286Z",
+  "updated_at": "2025-05-26T07:57:32.880Z",
+  "comment": {
+    "text": "The translation key \"ErrorUserNotFound\" represents a generic error message when a user cannot be found. This message is used in various UI elements, such as login errors or account management dialogs, to provide a clear indication of an unsuccessful search or lookup operation.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:40.062Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/login/src/utils/index.ts",
+      "line_number": 70,
+      "context": "case \"Error\":\n return t(\"Common:Error\");\n case \"None\":\n return t(\"Common:UnknownError\");\n case \"ErrorUserNotFound\":\n return t(\"Errors:ErrorUserNotFound\");\n case \"ErrorExpiredActivationLink\":\n return t(\"Errors:ErrorExpiredActivationLink\");\n case \"ErrorInvalidActivationLink\":\n return t(\"Errors:ErrorInvalidActivationLink\");\n case \"ErrorConfirmURLError\":",
+      "module": "/packages/login"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Spanish translation 'Usuario no ha sido encontrado' is not the most natural or idiomatic way to express 'The user could not be found.' It uses the present perfect tense which isn't ideal. A more common and natural phrasing would use the past tense.",
+          "suggestion": "Usuario no fue encontrado"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Käyttäjää ei löytynyt. Minne lie kadonnut.\" includes a colloquial and somewhat whimsical phrase \"Minne lie kadonnut.\" which translates to \"Wherever they've vanished to.\" This adds unnecessary levity and doesn't accurately convey the meaning of the English phrase \"The user could not be found.\" It's too informal for an error message.",
+          "suggestion": "Käyttäjää ei löydy."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While grammatically correct, the translation 'Il est impossible de trouver l'utilisateur' is a bit formal and indirect for a user-facing error message. A more natural and user-friendly translation would convey the same meaning with less formality.",
+          "suggestion": "L'utilisateur n'a pas été trouvé."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Օգտագործողին չհաջողվեց գտնել' is a literal translation that doesn't convey the intended meaning. It translates to 'The user did not succeed in being found'. A more natural and accurate translation would be something along the lines of 'The user was not found' or 'No user found'.",
+          "suggestion": "Մեկ չգտնված օգտագործող (No user found) or Օգտագործողը չգտնվեց (The user was not found)"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Lietotājs nevar būt atrasts' is a literal and awkward translation of 'The user could not be found.' It doesn't flow naturally in Latvian.",
+          "suggestion": "A more natural and accurate translation would be 'Lietotāju neizdevās atrast' or 'Lietotāju nav atrasts'."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'utilizadore' is misspelled. It should be 'utilizador'.",
+          "suggestion": "utilizador"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Imposibil de găsit utilizatorul' is a literal translation of 'Impossible to find the user'. While understandable, it lacks the natural flow of Romanian. A more idiomatic translation would be 'Utilizatorul nu a fost găsit' or 'Nu a fost găsit utilizatorul'.",
+          "suggestion": "Utilizatorul nu a fost găsit"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'පරිශ්‍රීලකයා හමු නොවිණි' while understandable, is not the most natural or common way to express 'The user could not be found' in Sinhala.  'පරිශ්‍රීලකයා' (parishreelakayaa) is a more formal term for 'user' and might sound stiff in this context.  'හමු නොවිණි' (hamu novini) is grammatically correct but less conversational.",
+          "suggestion": "Consider using a more natural phrasing like 'පරිශීලකයා නොමැත' (parishilakayaa numaetha) or 'භාවිතකරු නොමැත' (bhavithakaraya numaetha). 'භාවිතකරු' (bhavithakaraya) is a more common term for 'user'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '暂无符合条件的用户' (zan wu fu he tiao jian de yong hu) translates to 'No users meet the conditions'. While not incorrect, it's more formal and less user-friendly than a direct translation of 'The user could not be found'. A better translation would convey the sense of the user not existing rather than implying a search condition.",
+          "suggestion": "用户未找到 (yong hu wei zhao dao) - 'User not found'"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

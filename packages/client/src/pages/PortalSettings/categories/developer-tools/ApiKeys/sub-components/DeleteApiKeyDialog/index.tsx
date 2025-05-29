@@ -66,7 +66,7 @@ const DeleteApiKeyDialog = (props: DeleteApiKeyDialogProps) => {
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
-          key="OkButton"
+          key="OKButton"
           label={t("Common:Delete")}
           size={ButtonSize.normal}
           primary

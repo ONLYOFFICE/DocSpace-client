@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { type JSX } from "react";
 import { P, match } from "ts-pattern";
 import { isMobile } from "react-device-detect";
 
@@ -205,7 +205,7 @@ export const getOptions = (
     }),
     t("EmptyView:SectionsUploadDescription", {
       sectionNameFirst: t("Common:MyFilesSection"),
-      sectionNameSecond: t("Common:TrashSection"),
+      sectionNameSecond: t("Common:Rooms"),
     }),
     // TODO: need fix selector
     FilesSelectorFilterTypes.ALL,

@@ -1,6 +1,5 @@
-@import "../../styles/mixins.scss";
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/variables/devices.scss";
+@use "../../styles/mixins";
+@use "../../styles/variables/colors";
 
 .paymentsLoader {
   :global {
@@ -13,7 +12,7 @@
       height: 40px;
       margin-top: 16px;
       margin-bottom: 24px;
-      @include mobile {
+      @include mixins.mobile {
         height: 68px;
       }
     }
@@ -29,7 +28,7 @@
       grid-template-rows: 453px;
       grid-gap: 20px;
 
-      @include mobile {
+      @include mixins.mobile {
         grid-template-columns: 1fr;
       }
     }
@@ -53,7 +52,7 @@
     .payments-loader_4,
     .payments-loader_9 {
       height: 32px;
-      @include tablet-and-below {
+      @include mixins.tablet-and-below {
         height: 40px;
       }
     }
@@ -67,7 +66,7 @@
       margin-bottom: 12px;
       height: 32px;
 
-      @include mobile {
+      @include mixins.mobile {
         height: 64px;
       }
     }
@@ -75,7 +74,7 @@
       max-width: 342px;
       margin-bottom: 16px;
 
-      @include mobile {
+      @include mixins.mobile {
         max-width: 100%;
       }
     }
@@ -89,7 +88,7 @@
 
       height: 32px;
 
-      @include mobile {
+      @include mixins.mobile {
         height: 60px;
       }
     }
@@ -101,7 +100,7 @@
       max-width: 581px;
       margin-bottom: 16px;
       height: 16px;
-      @include mobile {
+      @include mixins.mobile {
         height: 32px;
       }
     }
@@ -113,7 +112,7 @@
       max-width: 110px;
       margin-bottom: 20px;
 
-      @include mobile {
+      @include mixins.mobile {
         max-width: 100%;
       }
     }
@@ -145,7 +144,7 @@
       margin-bottom: 20px;
       height: 294px;
 
-      @include mobile {
+      @include mixins.mobile {
         height: 380px;
       }
     }
@@ -181,7 +180,7 @@
       max-width: 255px;
       margin-bottom: 4px;
 
-      @include mobile {
+      @include mixins.mobile {
         max-width: 100%;
       }
     }

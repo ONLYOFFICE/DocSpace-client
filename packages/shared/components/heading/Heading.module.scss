@@ -1,9 +1,9 @@
-@import "../../styles/variables/index.scss";
-@import "../../styles/common-text-styles.scss";
-@import "../../styles/_mixins.scss";
+@use "../../styles/variables";
+@use "../../styles/common-text-styles";
+@use "../../styles/mixins";
 
 .heading {
-  @include common-text-styles;
+  @include common-text-styles.common-text-styles;
 
   font-weight: var(--heading-font-weight);
   color: var(--heading-color);
@@ -58,6 +58,6 @@
   }
 
   &.not-selectable {
-    @include no-user-select;
+    @include mixins.no-user-select;
   }
 }

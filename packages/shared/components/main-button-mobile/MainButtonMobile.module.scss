@@ -1,13 +1,13 @@
-@import "../../styles/mixins.scss";
-@import "../../styles/variables/devices.scss";
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/common-icons-style.scss";
+@use "../../styles/mixins";
+
+@use "../../styles/variables/colors";
+@use "../../styles/common-icons-style";
 
 .floatingButton {
   position: relative;
   z-index: 1010;
   background: var(--main-button-mobile-button-color);
-  -webkit-tap-highlight-color: #{$tap-highlight};
+  -webkit-tap-highlight-color: #{colors.$tap-highlight};
 
   :global {
     .circle__background {
@@ -64,11 +64,11 @@
   text-overflow: ellipsis;
   padding: 0;
 
-  @include tablet {
+  @include mixins.tablet {
     height: var(--height-prop);
   }
 
-  @include mobile {
+  @include mixins.mobile {
     width: var(--main-button-mobile-dropdown-mobile-width) !important;
     inset-inline-end: var(
       --main-button-mobile-dropdown-mobile-right
@@ -213,7 +213,7 @@
   cursor: pointer;
   vertical-align: top !important;
 
-  @include common-icons-style;
+  @include common-icons-style.common-icons-style;
 }
 
 // ProgressBar styles

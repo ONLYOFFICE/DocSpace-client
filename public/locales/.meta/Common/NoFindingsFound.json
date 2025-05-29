@@ -1,0 +1,298 @@
+{
+  "key_path": "NoFindingsFound",
+  "content": "No findings",
+  "content_en_sha1_hash": "ab5062b935491263fcc3318d6d8d558b82d2b044",
+  "created_at": "2025-05-19T21:30:46.827Z",
+  "updated_at": "2025-05-26T07:57:32.148Z",
+  "comment": {
+    "text": "This translation key is used to display the text \"No findings\" in a component that represents an empty state, likely appearing as part of a filter or search result. It provides a clear message when there are no relevant results found.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:20.203Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyFilterContainer.js",
+      "line_number": 128,
+      "context": "const imageSrc = getIconURL();\n \n return (\n <EmptyView\n icon={imageSrc}\n title={t(\"Common:NoFindingsFound\")}\n options={options}\n description={descriptionText}\n />\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Heç bir tapıntı tapılmadı' is a literal translation and doesn't quite convey the simple meaning of 'No findings'. 'Tapıntı' means 'discovery' or 'find' and the construction 'tapılmadı' means 'wasn't found.'  While technically correct, it's unnecessarily complex.",
+          "suggestion": "A more natural and accurate translation would be 'Nəticə tapılmadı' or simply 'Nəticə yoxdur'."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Keine Ergebnisse gefunden' is a literal translation, it might sound overly formal and technical for a message indicating 'No findings'. A more natural and user-friendly translation would be preferable.",
+          "suggestion": "Keine Ergebnisse / Nichts gefunden / Es wurden keine Ergebnisse gefunden"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Havaintoja ei löytynyt\" is technically correct but sounds somewhat formal and stiff for a simple message like \"No findings.\" A more natural and conversational translation would be preferred.",
+          "suggestion": "Ei löydetty"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Aucun résultat trouvé\" is grammatically correct, it's a less direct and potentially less natural translation of \"No findings.\" \"Aucune anomalie détectée\" or \"Aucun problème détecté\" would be more accurate and idiomatic in many contexts where 'findings' is used.",
+          "suggestion": "Consider 'Aucune anomalie détectée' or 'Aucun problème détecté' for a more accurate translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ոչ մի արդյունք չի գտնվել' (Not a result was found) is a bit too literal and formal for the English 'No findings'. A more natural translation would be something like 'ոչինչ չկայացավ' (nothing was found) or 'չկան արդյունքներ' (there are no results).",
+          "suggestion": "ոչինչ չկայացավ"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Nessun risultato trovato\" is technically correct, it's a more literal translation of 'No findings'.  A more natural and concise Italian equivalent for 'No findings' in a technical context would be 'Nessun riscontro' or 'Nessun problema riscontrato'.",
+          "suggestion": "Consider 'Nessun riscontro' or 'Nessun problema riscontrato'."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"검색 결과가 없습니다\" translates to \"No search results found.\" while the English content is simply \"No findings.\" The translation is too literal and doesn't convey the same meaning in context. It implies a search was performed, which may not be the case.",
+          "suggestion": "A more accurate translation could be \"결과 없음\" or \"특이사항 없음\" which more closely aligns with the meaning of 'No findings'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ບໍ່ເຫັນຜົນການຄົ້ນຫາໃດໆ' translates to 'No search results found'. While conveying a similar concept, it's more literal than the English 'No findings'. 'Findings' implies results from an investigation or audit, not necessarily a search. A more accurate translation would depend on the specific context of 'findings'.",
+          "suggestion": "Consider a more context-dependent translation, such as 'ບໍ່ພົບຜົນການກວດກາ' (No audit results) or 'ບໍ່ພົບຂໍ້ຊ້ຽນ' (No discrepancies found), depending on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Nenhum resultado encontrado\" is understandable, it's a more literal translation of \"No results found.\" \"No findings\" implies a search or investigation yielded no issues, not necessarily results. A better translation would capture the nuance of 'no issues' or 'no problems'.",
+          "suggestion": "Sem achados/problemas encontrados"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Nu s-au găsit rezultate' is a grammatically correct Romanian phrase, it's a more literal and formal translation of 'No findings'. A more natural and commonly used translation for a UI context would be 'Niciun rezultat' or 'Fără rezultate'.",
+          "suggestion": "Niciun rezultat"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"සොයාගැනීම් නැත\" is understandable, a more accurate and natural translation of \"No findings\" would be \"සිංහල:තොරතුරු නොවීය\" or \"නැහැ\" (Naha). \"සොයාගැනීම්\" implies a search was conducted, which isn't necessarily implied by 'No findings'.",
+          "suggestion": "සිංහල:තොරතුරු නොවීය / නැහැ"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Нема резултата претраге' is not an accurate translation of 'No findings'. While it translates to something like 'No search results', 'findings' in this context refers to a report or assessment, not a search.",
+          "suggestion": "A more accurate translation would be 'Нема пронађеног' or 'Нема налаза'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Nema rezultata pretrage' translates to 'No search results' rather than 'No findings'. While close in meaning, 'findings' implies a specific investigation or audit, which 'rezultata pretrage' doesn't necessarily convey.",
+          "suggestion": "Consider 'Nalazi nisu pronadjeni' or 'Nisu pronadjeni nalazi' to more accurately represent 'No findings'."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Herhangi bir bulguya rastlanmadı\" is grammatically correct, it's a rather formal and lengthy translation of \"No findings.\" A more natural and concise translation would be better for many contexts.",
+          "suggestion": "Bulgu yok."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"未找到任何结果\" is understandable, it's a bit verbose for \"No findings.\" A more concise and natural translation would be preferable.",
+          "suggestion": "未发现任何结果"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

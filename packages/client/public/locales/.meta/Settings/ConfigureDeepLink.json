@@ -1,0 +1,256 @@
+{
+  "key_path": "ConfigureDeepLink",
+  "content": "Configure deep link",
+  "content_en_sha1_hash": "edfb8002794be0c3c97a60c2efb077b54207446d",
+  "created_at": "2025-05-19T21:30:50.950Z",
+  "updated_at": "2025-05-26T07:57:32.474Z",
+  "comment": {
+    "text": "Configure deep link is used to display a title and subtitle for a configuration setting that allows users to customize a deep link within the portal settings. This translation key appears on a page in the portal settings category as part of a navigation bar, guiding users to configure their deep link.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:31.058Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/configure-deep-link.tsx",
+      "line_number": 67,
+      "context": ".save-cancel-buttons {\n margin-top: 16px;\n }\n `;\n \n const ConfigureDeepLinkComponent = (props: Props) => {\n const { isMobileView, deepLinkSettings, initSettings } = props;\n \n const { t } = useTranslation([\"Settings\", \"Common\"]);\n const navigate = useNavigate();\n const location = useLocation();",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
+      "line_number": 99,
+      "context": "url=\"/portal-settings/customization/general/portal-renaming\"\n onClickLink={onClickLink}\n />\n ) : null}\n <MobileCategoryWrapper\n title={t(\"ConfigureDeepLink\")}\n subtitle={t(\"ConfigureDeepLinkDescription\")}\n url=\"/portal-settings/customization/general/configure-deep-link\"\n onClickLink={onClickLink}\n />\n </StyledComponent>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 86,
+      "context": "{\n id: \"portal-settings_catalog-configure-deep-link\",\n key: \"0-0-4\",\n icon: \"\",\n link: \"configure-deep-link\",\n tKey: \"ConfigureDeepLink\",\n },\n ],\n },\n {\n id: \"portal-settings_catalog-branding\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Konfiguroi\" is correct for 'Configure,' \"hyperlinkki\" is a more general term for hyperlink and doesn't fully capture the meaning of 'deep link'. A deep link is a specific type of hyperlink.",
+          "suggestion": "Konfiguroi syvälinkki"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Configure deep link' is best translated as 'Configurar link profundo' in Portuguese, rather than 'Configure o deep link'. 'Configure' is an Anglicism, while 'Configurar' is the correct Portuguese verb.",
+          "suggestion": "Configurar link profundo"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'දුඹුරු සබැඳියාව සකසන්න' literally translates to 'brown link configure'. This doesn't accurately convey the meaning of 'Configure deep link'.  'Deep link' refers to a direct link to a specific screen or function within an app.  'දුඹුරු' (dūburu) means 'brown', which is irrelevant.",
+          "suggestion": "A more accurate translation would be something along the lines of 'ලී້ນක් සබැඳියාව සකසන්න' (līnək sabaeṇiyāva sakasanna) – meaning 'Configure app link' or 'Configure direct link'. Alternatively, 'ඇප සබැඳියාව සකසන්න' (æp sabaeṇiyāva sakasanna) - 'Configure app link'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Nastaviť deep link\" is a very literal translation. A more natural Slovak phrasing would be \"Konfigurovať deep link\" or \"Nastavenie deep linku\". \"Nastaviť\" implies setting something to a specific value, while \"Konfigurovať\" better conveys the process of configuring a deep link.",
+          "suggestion": "Konfigurovať deep link"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Подесите дубоки линк' is not the most natural or accurate translation of 'Configure deep link'. 'Дубоки линк' is a literal translation of 'deep link' and sounds awkward. A more idiomatic translation would incorporate the idea of configuration.",
+          "suggestion": "Подесите унутрашњу везу"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Podesite duboki link' isn't the most natural or accurate rendering of 'Configure deep link' in Serbian. While 'podesiti' is correct for 'configure', 'duboki link' is a literal translation of 'deep link' and might not be the common terminology used by Serbian speakers.",
+          "suggestion": "Consider using 'Postavite duboku vezu' or 'Konfigurišite duboku vezu'. 'Postaviti' is a very common and natural verb for setting up or configuring something, and 'veza' is a more familiar term for 'link' in many contexts."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

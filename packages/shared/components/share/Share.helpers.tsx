@@ -53,7 +53,6 @@ import type {
   TFolder,
 } from "../../api/files/types";
 import type { TOption } from "../combobox";
-import { Strong } from "./Share.styled";
 
 export const getShareOptions = (
   t: TTranslation,
@@ -301,7 +300,7 @@ export const getTranslationDate = (
         i18nKey="LinkExpireAfter"
         ns="Common"
         values={{ date }}
-        components={{ 1: <strong /> }}
+        components={{ 1: <strong key="strong-expire-after" /> }}
       />
     );
   }
@@ -312,7 +311,7 @@ export const getTranslationDate = (
       i18nKey="LinkIsValid"
       ns="Common"
       values={{ date }}
-      components={{ 1: <strong /> }}
+      components={{ 1: <strong key="strong-link-valid" /> }}
     />
   );
 };
@@ -362,7 +361,7 @@ export const copyRoomShareLink = (
       ns="Common"
       i18nKey="RoomShareLinkRole"
       values={{ role }}
-      components={{ 1: <Strong /> }}
+      components={{ 1: <strong key="strong-role" /> }}
     />
   );
 
@@ -377,14 +376,14 @@ export const copyRoomShareLink = (
       ns="Common"
       i18nKey="LinkIsValid"
       values={{ date: moment(expirationDate).format("lll") }}
-      components={{ 1: <Strong /> }}
+      components={{ 1: <strong key="strong-date" /> }}
     />
   ) : null;
 
   toastr.success(
     <span>
       {roleText} {passwordText} {restrictionText} {date}
-      {date ? <Strong>.</Strong> : null}
+      {date ? <strong>.</strong> : null}
       {linkOptions?.canShowLink && linkOptions?.onClickLink ? (
         <Link
           color={globalColors.lightBlueMain}
@@ -418,7 +417,7 @@ export const copyDocumentShareLink = (
       ns="Common"
       i18nKey="ShareLinkTitleInternal"
       values={{ productName: t("Common:ProductName"), access }}
-      components={{ 1: <Strong /> }}
+      components={{ 1: <strong key="strong-internal" /> }}
     />
   ) : (
     <Trans
@@ -426,7 +425,7 @@ export const copyDocumentShareLink = (
       ns="Common"
       i18nKey="ShareLinkTitle"
       values={{ access }}
-      components={{ 1: <Strong /> }}
+      components={{ 1: <strong key="strong-external" /> }}
     />
   );
   const date = getTranslationDate(expirationDate, t);
@@ -434,7 +433,7 @@ export const copyDocumentShareLink = (
   toastr.success(
     <span>
       {head} {date}
-      <Strong>.</Strong>
+      <strong>.</strong>
       {linkOptions?.canShowLink && linkOptions?.onClickLink ? (
         <>
           &nbsp;

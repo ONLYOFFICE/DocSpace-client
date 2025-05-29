@@ -24,9 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "./mixins.scss";
-@import "./variables/devices.scss";
-@import "./variables/_colors.scss";
+@use "mixins";
+@use "variables/colors";
 
 .headerContainer {
   width: 100%;
@@ -35,19 +34,19 @@
   :global(.table-container_group-menu) {
     margin-block: 0;
     margin-inline: -20px 0;
-    -webkit-tap-highlight-color: #{$tap-highlight};
+    -webkit-tap-highlight-color: #{colors.$tap-highlight};
 
     width: calc(100% + 40px);
     height: 68px;
 
-    @include tablet-and-below {
+    @include mixins.tablet-and-below {
       height: 61px;
       margin-block: 0;
       margin-inline: -16px 0;
       width: calc(100% + 32px);
     }
 
-    @include mobile {
+    @include mixins.mobile {
       height: 52px !important;
       margin-block: 0;
       margin-inline: -16px 0;
@@ -60,11 +59,11 @@
       min-height: 33px;
       align-items: center;
 
-      @include tablet-and-below {
+      @include mixins.tablet-and-below {
         height: 61px;
       }
 
-      @include mobile {
+      @include mixins.mobile {
         height: 53px;
       }
 
@@ -75,17 +74,17 @@
         min-width: 50px;
 
         .button-content {
-          @include truncate;
+          @include mixins.truncate;
 
           display: block;
           padding-top: 3px;
         }
 
-        @include tablet-and-below {
+        @include mixins.tablet-and-below {
           display: block;
         }
 
-        @include mobile {
+        @include mixins.mobile {
           display: none;
         }
       }
@@ -105,11 +104,11 @@
         margin-inline-start: auto;
         display: block;
 
-        @include tablet-and-below {
+        @include mixins.tablet-and-below {
           margin-inline-start: 16px;
         }
 
-        @include mobile {
+        @include mixins.mobile {
           display: none;
         }
       }
@@ -120,7 +119,7 @@
     :global {
       .header-container {
         .navigation_button {
-          @include tablet-and-below {
+          @include mixins.tablet-and-below {
             display: none;
           }
         }

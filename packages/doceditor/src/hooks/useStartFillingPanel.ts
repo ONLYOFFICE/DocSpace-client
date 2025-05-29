@@ -46,7 +46,7 @@ export const useStartFillingPanel = (
   const [startFillingPanelVisible, setStartFillingPanelVisible] =
     useState(false);
 
-  const resolveRef = useRef<() => void>();
+  const resolveRef = useRef<() => void>(undefined);
 
   const inviteUserToRoom = useCallback(
     (roomId: string, invitations: Invitation[]) => {

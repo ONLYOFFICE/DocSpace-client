@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect, useRef, useCallback, useContext } from "react";
+import { useState, useEffect, useRef, useCallback, use } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { RoomsType } from "@docspace/shared/enums";
@@ -56,7 +56,7 @@ const History = ({
   fetchMoreHistory,
   setSelectionHistory,
 }) => {
-  const scrollContext = useContext(ScrollbarContext);
+  const scrollContext = use(ScrollbarContext);
   const scrollElement = scrollContext.parentScrollbar?.scrollerElement;
 
   const isMount = useRef(true);

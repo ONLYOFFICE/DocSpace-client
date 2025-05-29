@@ -1,0 +1,429 @@
+{
+  "key_path": "CopyItems",
+  "content": "<2>{{qty}} elements</2> successfully copied to <1>{{folderName}}</1>",
+  "content_en_sha1_hash": "9e396de69dbfcb3455d1d720f76841e35a0ccf20",
+  "created_at": "2025-05-19T21:30:55.357Z",
+  "updated_at": "2025-05-24T12:32:33.943Z",
+  "comment": {
+    "text": "This translation key is used to display a success message when copying items, indicating the number of elements successfully copied and their destination folder. It appears in a toast notification after a successful copy operation.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:04.567Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/SecondaryProgressDataStore.js",
+      "line_number": 244,
+      "context": "if (operation === OPERATIONS_NAME.copy) {\n toastTranslation = isSuccess ? (\n <Trans\n t={t}\n i18nKey=\"CopyItems\"\n components={commonComponents}\n values={commonProps}\n />\n ) : (\n <Trans t={t} i18nKey=\"ErrorCopyItems\">",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'elements' has not been translated. It should be translated to its Arabic equivalent.",
+          "suggestion": "تم نسخ <2>{{qty}} العناصر</2> بنجاح إلى <1>{{folderName}}</1>"
+        },
+        {
+          "type": "formatting",
+          "description": "The angle brackets are not correctly placed in relation to the Arabic characters. They should be within the Arabic characters, reflecting the original English structure.",
+          "suggestion": "تم نسخ <2>{{qty}} العناصر</2> بنجاح إلى <1>{{folderName}}</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The word 'elementlər' is grammatically incorrect. It should agree in number with 'qty'. If 'qty' is singular, the word should be 'element'. If 'qty' is plural, it should be 'elementlər'. Assuming 'qty' can be singular or plural, a better phrasing might be '{{qty}} element/elementlər'.",
+          "suggestion": "Consider using a conditional based on the value of 'qty' to determine the correct plural form. Alternatively, rephrase to accommodate both singular and plural forms."
+        },
+        {
+          "type": "formatting",
+          "description": "The tag order is reversed. The `<2>` should be placed before the 'qty' and 'elementlər' phrase and `<1>` should be placed before the 'qovluğuna' phrase.",
+          "suggestion": "<2>{{qty}} elementlər</2> uğurla <1>{{folderName}} qovluğuna</1> kopyalandı"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrasing 'elements' is translated as 'prvků'. While 'prvky' is the plural of 'prvek' and could be used, 'prvků' suggests a possessive or related form. 'Prvky' would be a more direct and arguably better translation in this context, as it simply refers to the copied items.",
+          "suggestion": "Replace 'prvků' with 'prvky'"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The English and German versions have different tag names within the string. English uses `<2>`, German uses `<2>`. This inconsistency should be addressed to ensure proper rendering.",
+          "suggestion": "Maintain consistent tag names across languages, preferably using the English `<2>` in both."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'kopiert' is a valid translation for 'copied,' a more natural-sounding translation would be 'übertragen' or 'verschieben'. 'Kopiert' often implies duplication, while the context might be more about moving files.",
+          "suggestion": "Consider replacing 'kopiert' with 'übertragen' or 'verschieben' for better flow."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Greek translation maintains the HTML tags `<2>` and `<1>` as in the English content. While not strictly incorrect, it's unusual to leave these tags unchanged in a localized translation, as they might be specific to the original system's rendering.",
+          "suggestion": "Consider if these tags should be removed or adapted for the Greek locale's rendering requirements. For example, if they indicate bolding or other styling, ensure the styling is appropriate for Greek text and that the tags are adjusted to match the system's tags."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'successfully copied' is better translated as 'copiados' (copied) rather than 'se han copiado correctamente'. The added 'correctamente' is redundant and changes the tone.",
+          "suggestion": "<2>{{qty}} elementos</2> se copiaron correctamente en <1>{{folderName}}</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"successfully copied\" is translated as \"onnistuneesti kopioitu\". While technically correct, a more natural Finnish phrasing would be something like \"kopioitu onnistuneesti\" or just \"kopioitu\".",
+          "suggestion": "kopioitu onnistuneesti"
+        },
+        {
+          "type": "formatting",
+          "description": "The colon and space after 'folderName' are unnecessary and disrupt the flow of the sentence in Finnish. It is not a common grammatical construct in this context.",
+          "suggestion": "kopioitu {{folderName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'successfully copied' is translated as 'copiés avec succès' in French. While technically correct, a more natural and idiomatic translation would be 'copiés avec succès' or simply 'copiés'. The inclusion of 'avec succès' feels slightly redundant.",
+          "suggestion": "copiés dans <1>{{folderName}}</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation maintains the HTML tags and placeholders, which is consistent with the English content. No changes needed here.",
+          "suggestion": null
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'successfully copied' is translated as 'copiati con successo'. While not incorrect, a more natural Italian phrasing would be 'copiati con successo in' which includes the preposition 'in'.",
+          "suggestion": "<2>{{qty}} elementi</2> copiati con successo in <1>{{folderName}}</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation retains the XML-like tags from the English content. These tags are unnecessary and should be removed for a natural Japanese sentence.",
+          "suggestion": "要素が {{qty}} 個、{{folderName}} に正常にコピーされました"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'elements' is best translated as '항목' (hangmok) rather than '요소' (yoso) in this context. While '요소' is a valid Korean word, '항목' is more natural when referring to files or items being copied.",
+          "suggestion": "<2>{{qty}}개 항목</2>가 <1>{{folderName}}</1> 폴더에 복사되었습니다"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ຖືກສໍາເນົາເຂົ້າສູ່\" is a literal translation of \"copied to\" and may sound unnatural in Lao. A more natural phrasing might be something like \"ຖືກຖ່າຍເອກະສານໄປສູ່\" or \"ຖືກສໍາເນົາໄປສູ່\".",
+          "suggestion": "Consider rephrasing to something more natural in Lao, like \"ຖືກຖ່າຍເອກະສານໄປສູ່\" or \"ຖືກສໍາເນົາໄປສູ່\"."
+        },
+        {
+          "type": "grammar",
+          "description": "The repetition of \"ຢ່າງ\" is slightly awkward. While not strictly incorrect, it can be improved.",
+          "suggestion": "Remove the second instance of \"ຢ່າງ\" for better flow.  e.g., \"<2>{{qty}} ຢ່າງ</2> ຖືກສໍາເນົາເຂົ້າສູ່ <1>{{folderName}}</1> ສໍາເລັດແລ້ວ\""
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'successfully copied' is translated as 'veiksmīgi pārkopēti'. While 'pārkopēti' means 'copied', 'veiksmīgi' implies 'successfully'. A more accurate translation might be 'pārskaitīti' or a restructuring to reflect the meaning.",
+          "suggestion": "Consider alternatives like '<2>{{qty}} elementi</2> pārskaitīti uz <1>{{folderName}}</1>'"
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English \"elements\" is singularized to \"elementen\" in Dutch. It should be plural to match the original meaning of multiple items.",
+          "suggestion": "<2>{{qty}} elementen</2> succesvol gekopieerd naar <1>{{folderName}}</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Polish translation uses the form \"element(-y/-ów)\". This indicates a grammatical consideration for singular/plural agreement. However, the English uses \"elements\", which is already plural. The Polish form needs to be adjusted based on the actual number of elements being copied, or an indicator should be present to guide the correct form. A generic plural form might be more appropriate here.",
+          "suggestion": "Consider using a generic plural form like \"elementów\" or modify the application to correctly display the singular or plural form based on the value of {{qty}}."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of `<2>` and `<1>` for tags appears inconsistent between the English and Polish versions. While both use tags, their usage order is reversed. This could cause confusion during implementation. It is crucial to maintain consistent tag order.",
+          "suggestion": "Ensure the tag order `<1>` and `<2>` is consistent with the English version: `<1>{{folderName}}</1> successfully copied <2>{{qty}} elements</2>."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'successfully copied' is not accurately translated. 'Copiados com sucesso' is a literal translation but sounds less natural in Portuguese. A more natural phrasing would be 'copiados para'.",
+          "suggestion": "<2>{{qty}} elementos</2> copiados para <1>{{folderName}}</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'successfully copied' is not accurately reflected in the Portuguese translation. 'Copiados com sucesso' is a direct translation but sounds less natural and more literal than it should. A more natural phrasing would be 'copiados para'.",
+          "suggestion": "<2>{{qty}} elementos</2> copiados para <1>{{folderName}}</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Romanian translation uses the masculine plural form 'elemente' when referring to a quantity that could be singular or plural. It should be gender-neutral or adjusted based on the context of 'qty'.",
+          "suggestion": "<2>{{qty}} element(e)</2> au fost copiate cu succes în <1>{{folderName}}</1>"
+        },
+        {
+          "type": "formatting",
+          "description": "The original English uses <2> and <1> tags, while the Romanian translation maintains the same tag sequence. While technically correct, it's worth confirming this order is intentional and consistent with the application's tagging conventions.",
+          "suggestion": "Confirm tag order consistency with the application's tagging conventions."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'elements' is translated as 'අංග'. While technically correct, a more natural and common translation for 'elements' in this context (referring to files or items) might be 'ගැණුම්' or 'ලේඛන'. 'අංග' often refers to parts or components of something.",
+          "suggestion": "Consider using '<2>{{qty}} ගැණුම්</2>' or '<2>{{qty}} ලේඛන</2>'"
+        },
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation includes a space after the closing angle bracket '<2>'. This spacing may be inconsistent with the original English formatting, and can be visually jarring depending on the font and rendering.",
+          "suggestion": "Remove the space after the closing angle bracket: '<2>{{qty}} ගැණුම්</2>'"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Slovenian translation uses the plural form 'elementov' when referring to a quantity that could be singular or plural. The English uses 'elements' which is plural, but a single element could also be copied. The Slovenian translation should consider the possibility of a singular element and adjust the phrasing accordingly.",
+          "suggestion": "Consider using a more flexible wording like \"<2>{{qty}} element</2> uspesno kopiranih v <1>{{folderName}}</1>\" or incorporating a conditional based on the value of {{qty}}."
+        },
+        {
+          "type": "formatting",
+          "description": "The Slovenian translation retains the `<1>` and `<2>` tags from the English, which might be arbitrary and should be reviewed for consistency with the overall system.",
+          "suggestion": "Verify that the tags `<1>` and `<2>` have meaning in the system and adjust or remove them as needed."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The word 'елемената' should agree in number with the quantity indicated by {{qty}}. If {{qty}} is singular, it should be 'елемент'.",
+          "suggestion": "If {{qty}} is singular: <2>{{qty}} елемент</2> successfully copied to <1>{{folderName}}</1>. Otherwise, the translation is grammatically correct."
+        },
+        {
+          "type": "grammar",
+          "description": "The verb 'копирано' (copied) should agree with the number of elements. If 'елемент' is used, the verb should be 'копиран'.",
+          "suggestion": "If 'елемент' is used: <2>{{qty}} елемент</2> успешно копиран у <1>{{folderName}}</1>"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'elements' is translated as 'elemenata'. While 'elemenata' exists, a more natural and accurate translation for 'elements' in this context would be 'stavke' or 'datoteke'.",
+          "suggestion": "Consider translating 'elements' as 'stavke' or 'datoteke'."
+        },
+        {
+          "type": "grammar",
+          "description": "The verb 'copied' is translated as 'kopirano' (passive voice). While grammatically correct, the active voice 'kopirane' (feminine plural to agree with 'stavke' or 'datoteke') might be more natural.",
+          "suggestion": "Consider using 'kopirane' if the content is referring to 'stavke' or 'datoteke'."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Turkish translation uses a comma before 'başarıyla kopyalandı'. While not strictly incorrect, it deviates from common Turkish sentence structure and can feel slightly awkward. It's often preferred to omit the comma.",
+          "suggestion": "Remove the comma before 'başarıyla kopyalandı'.  Revised translation: '<2>{{qty}} öğeleri</2>, <1>{{folderName}}</1> konumuna başarıyla kopyalandı."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Ukrainian translation uses 'Елементи в кількості {{qty}}'. A more natural phrasing would be '{{qty}} елементів'.",
+          "suggestion": "{{qty}} елементів"
+        },
+        {
+          "type": "formatting",
+          "description": "The opening and closing tags seem to be incorrectly ordered. Based on the original English, opening tag `<2>` should correspond to closing tag `</1>` and vice versa.",
+          "suggestion": "<1>Елементи в кількості {{qty}}</1> успішно скопійовано до <2>{{folderName}}</2>"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'elements' is translated as 'phần'. While 'phần' can sometimes be a valid translation for 'elements' in certain contexts, in this context, it's not the most accurate. 'Phần' implies parts or sections, while 'elements' refers to individual items being copied. A more appropriate translation might be 'phần tử' or 'đồ vật' depending on the nature of the items.",
+          "suggestion": "Consider alternatives like 'phần tử' or 'đồ vật' to better reflect the meaning of 'elements'."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation includes extra spaces before and after the closing angle brackets '</2>' and '</1>'. This is likely a formatting issue that should be removed.",
+          "suggestion": "Remove the extra spaces before and after the angle brackets:  `<2> {{qty}} phần </2> được sao chép thành công vào <1>{{folderName}}</1>` becomes `<2> {{qty}} phần </2> được sao chép thành công vào <1>{{folderName}}</1>`."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

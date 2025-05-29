@@ -1,6 +1,5 @@
-@import "../../styles/mixins.scss";
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/variables/devices.scss";
+@use "../../styles/mixins";
+@use "../../styles/variables/colors";
 
 .filterLoader {
   width: 100%;
@@ -10,7 +9,7 @@
   grid-template-rows: 1fr;
   grid-column-gap: 8px;
 
-  @include mobile {
+  @include mixins.mobile {
     grid-template-columns: 1fr 50px;
   }
 }

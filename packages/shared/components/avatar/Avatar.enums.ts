@@ -34,7 +34,7 @@ export enum AvatarRole {
   none = "",
 }
 
-export const enum AvatarSize {
+export enum AvatarSize {
   max = "max",
   big = "big",
   medium = "medium",

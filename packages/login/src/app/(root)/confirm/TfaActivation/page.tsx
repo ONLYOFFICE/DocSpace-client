@@ -35,10 +35,11 @@ import { StyledForm } from "./page.styled";
 import TfaActivationForm from "./page.client";
 
 type TfaActivationProps = {
-  searchParams: { [key: string]: string };
+  searchParams: Promise<{ [key: string]: string }>;
 };
 
-async function Page({ searchParams }: TfaActivationProps) {
+async function Page(props: TfaActivationProps) {
+  const searchParams = await props.searchParams;
   const confirmKey = encodeParams(getStringFromSearchParams(searchParams));
   const uid = searchParams.uid;
 

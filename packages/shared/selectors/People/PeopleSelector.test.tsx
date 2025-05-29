@@ -321,6 +321,4 @@ describe("PeopleSelector", () => {
     const submitButton = screen.getByTestId("selector-submit");
     expect(submitButton).toBeInTheDocument();
   });
-
-  
 });

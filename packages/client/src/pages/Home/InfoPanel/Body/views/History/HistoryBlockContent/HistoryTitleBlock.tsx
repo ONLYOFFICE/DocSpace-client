@@ -76,11 +76,6 @@ const HistoryTitleBlock = ({ t, feed }: HistoryBlockContentProps) => {
         >
           {useFeedTranslation(t, feed, hasRelatedItems)}
         </Text>
-        {hasRelatedItems ? (
-          <Text as="span" className="users-counter">
-            {`(${feed.related.length + 1}).`}
-          </Text>
-        ) : null}
         {isDisplayFolderInfo ? (
           <HistoryMainTextFolderInfo feed={feed} actionType={actionType} />
         ) : null}

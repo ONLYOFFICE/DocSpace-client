@@ -32,6 +32,7 @@ import ShareLinkedinReactSvg from "PUBLIC_DIR/images/share.linkedin.react.svg";
 import ShareMicrosoftReactSvg from "PUBLIC_DIR/images/share.microsoft.react.svg";
 import ShareZoomReactSvg from "PUBLIC_DIR/images/share.zoom.react.svg";
 import { globalColors } from "../themes/globalColors";
+import { FileFillingFormStatus } from "../enums";
 
 export const LOADER_STYLE = Object.freeze({
   title: "",
@@ -64,6 +65,7 @@ export const COUNT_FOR_SHOWING_BAR = 2;
 export const PERCENTAGE_FOR_SHOWING_BAR = 90;
 
 export const LANGUAGE = "asc_language";
+export const TIMEZONE = "timezone";
 
 export const MOBILE_FOOTER_HEIGHT = "64px";
 export const ASIDE_PADDING_AFTER_LAST_ITEM = "12px";
@@ -122,7 +124,7 @@ export const PROVIDERS_DATA = Object.freeze({
   twitter: {
     label: "twitter",
     icon: ShareTwitterReactSvg,
-    iconOptions: { color: globalColors.darkBlack },
+    iconOptions: undefined,
   },
   linkedin: {
     label: "linkedin",
@@ -144,6 +146,8 @@ export const PROVIDERS_DATA = Object.freeze({
 export const PASSWORD_LIMIT_SPECIAL_CHARACTERS = "!@#$%^&*";
 
 export const EDITOR_ID = "portal_editor";
+
+export const FILLING_STATUS_ID = "fillingStatusDialog" as const;
 
 export const MEDIA_VIEW_URL = "/media/view/";
 export const PUBLIC_MEDIA_VIEW_URL = "/rooms/share/media/view";
@@ -191,6 +195,15 @@ export const ALLOWED_PASSWORD_CHARACTERS =
 
 export const GENERAL_LINK_HEADER_KEY = "general-link_header";
 
+export const FILLING_FORM_STATUS_COLORS = Object.freeze({
+  [FileFillingFormStatus.None]: globalColors.mainRed,
+  [FileFillingFormStatus.Draft]: globalColors.mainRed,
+  [FileFillingFormStatus.YourTurn]: globalColors.lightBlueMain,
+  [FileFillingFormStatus.InProgress]: globalColors.gray,
+  [FileFillingFormStatus.Completed]: globalColors.mainGreen,
+  [FileFillingFormStatus.Stopped]: globalColors.mainRed,
+});
+
 export const OPERATIONS_NAME = Object.freeze({
   trash: "trash",
   deletePermanently: "deletePermanently",
@@ -204,6 +217,7 @@ export const OPERATIONS_NAME = Object.freeze({
   other: "other",
   upload: "upload",
   deleteVersionFile: "deleteVersionFile",
+  backup: "backup",
 });
 
 export const thumbnailStatuses = {

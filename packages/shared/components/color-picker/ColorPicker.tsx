@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { HexColorPicker, HexColorInput } from "react-colorful";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
@@ -51,12 +51,12 @@ const ColorPicker = ({
   handleChange,
   hexCodeLabel = "Hex code",
 }: ColorPickerProps) => {
-  const [color, setColor] = useState(appliedColor);
+  const [color, setColor] = useState(() => appliedColor);
   const { t } = useTranslation(["Common"]);
 
-  useEffect(() => {
-    setColor(appliedColor);
-  }, [appliedColor]);
+  // useEffect(() => {
+  //   setColor(appliedColor);
+  // }, [appliedColor]);
 
   const onColorChange = (newColor: string) => {
     setColor(newColor);

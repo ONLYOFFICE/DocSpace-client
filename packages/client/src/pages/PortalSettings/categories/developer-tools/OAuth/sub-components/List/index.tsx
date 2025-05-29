@@ -41,6 +41,7 @@ import TableView from "./TableView";
 import RowView from "./RowView";
 
 import { StyledContainer } from "./List.styled";
+import OAuthLoader from "./Loader";
 
 interface ListProps {
   clients: IClientProps[];
@@ -48,6 +49,7 @@ interface ListProps {
   currentDeviceType: DeviceType;
   apiOAuthLink: string;
   logoText: string;
+  isLoading: boolean;
 }
 
 const List = ({
@@ -56,6 +58,7 @@ const List = ({
   currentDeviceType,
   apiOAuthLink,
   logoText,
+  isLoading,
 }: ListProps) => {
   const { t } = useTranslation(["OAuth", "Common"]);
 
@@ -96,21 +99,25 @@ const List = ({
         </ColorTheme>
       ) : null}
       <RegisterNewButton currentDeviceType={currentDeviceType} />
-      <Consumer>
-        {(context) =>
-          viewAs === "table" ? (
-            <TableView
-              items={clients || []}
-              sectionWidth={context.sectionWidth || 0}
-            />
-          ) : (
-            <RowView
-              items={clients || []}
-              sectionWidth={context.sectionWidth || 0}
-            />
-          )
-        }
-      </Consumer>
+      {isLoading ? (
+        <OAuthLoader viewAs={viewAs} />
+      ) : (
+        <Consumer>
+          {(context) =>
+            viewAs === "table" ? (
+              <TableView
+                items={clients || []}
+                sectionWidth={context.sectionWidth || 0}
+              />
+            ) : (
+              <RowView
+                items={clients || []}
+                sectionWidth={context.sectionWidth || 0}
+              />
+            )
+          }
+        </Consumer>
+      )}
     </StyledContainer>
   );
 };

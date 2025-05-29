@@ -84,6 +84,7 @@ const RestoreBackup = (props) => {
     errorInformation,
     setDownloadingProgress,
     setTemporaryLink,
+    setBackupProgressError,
   } = props;
 
   const [radioButtonState, setRadioButtonState] = useState(LOCAL_FILE);
@@ -130,8 +131,10 @@ const RestoreBackup = (props) => {
       if (!options) return;
 
       const { error, success } = options;
-
-      if (error) toastr.error(error);
+      if (error) {
+        toastr.error(error);
+        setBackupProgressError(error);
+      }
 
       if (success) toastr.success(success);
     });
@@ -337,6 +340,7 @@ export const Component = inject(
       errorInformation,
       setDownloadingProgress,
       setTemporaryLink,
+      setBackupProgressError,
     } = backup;
 
     const buttonSize =
@@ -359,6 +363,7 @@ export const Component = inject(
       errorInformation,
       setDownloadingProgress,
       setTemporaryLink,
+      setBackupProgressError,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(RestoreBackup)));

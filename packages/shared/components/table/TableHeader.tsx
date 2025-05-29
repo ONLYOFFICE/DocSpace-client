@@ -1158,6 +1158,7 @@ class TableHeaderComponent extends React.Component<
       columnInfoPanelStorageName,
       columns,
       infoPanelVisible,
+      withoutWideColumn = false,
     } = this.props;
 
     if (!infoPanelVisible) localStorage.removeItem(columnStorageName);
@@ -1168,7 +1169,8 @@ class TableHeaderComponent extends React.Component<
     const enableColumns = columns
       .filter((x) => x.enable)
       .filter((x) => !x.defaultSize)
-      .filter((x) => !x.default);
+      .filter((x) => !x.default)
+      .filter((x) => !x.isShort);
 
     const container = containerRef.current
       ? containerRef.current
@@ -1179,25 +1181,42 @@ class TableHeaderComponent extends React.Component<
     const defaultColumnSize =
       columns.find((col) => col.defaultSize && col.enable)?.defaultSize || 0;
 
+    const isShortColumnSize =
+      columns.find((col) => col.isShort && col.enable)?.minWidth || 0;
+
     const containerWidth =
-      container.clientWidth - defaultColumnSize - SETTINGS_SIZE;
+      container.clientWidth -
+      defaultColumnSize -
+      SETTINGS_SIZE -
+      isShortColumnSize;
 
-    const nameColumnPercent = enableColumns.length > 0 ? 40 : 100;
-    const percent = enableColumns.length > 0 ? 60 / enableColumns.length : 0;
+    let nameColumnPercent = enableColumns.length > 0 ? 40 : 100;
+    let percent = enableColumns.length > 0 ? 60 / enableColumns.length : 0;
 
-    const wideColumnSize = `${(containerWidth * nameColumnPercent) / 100}px`;
-    const otherColumns = `${(containerWidth * percent) / 100}px`;
+    if (withoutWideColumn) {
+      nameColumnPercent = 100 / columns.length;
+      percent = 100 / columns.length;
+    }
+
+    let wideColumnSize = (containerWidth * nameColumnPercent) / 100;
+    let otherColumns = (containerWidth * percent) / 100;
+
+    if (otherColumns < DEFAULT_MIN_COLUMN_SIZE) {
+      wideColumnSize -=
+        (DEFAULT_MIN_COLUMN_SIZE - otherColumns) * enableColumns.length;
+      otherColumns = DEFAULT_MIN_COLUMN_SIZE;
+    }
 
     for (const col of columns) {
       if (col.default) {
-        str += `${wideColumnSize} `;
+        str += `${wideColumnSize}px `;
       } else if (col.isShort) {
         str += `${col.minWidth}px `;
       } else {
         str += col.enable
           ? col.defaultSize
             ? `${col.defaultSize}px `
-            : `${otherColumns} `
+            : `${otherColumns}px `
           : "0px ";
       }
     }

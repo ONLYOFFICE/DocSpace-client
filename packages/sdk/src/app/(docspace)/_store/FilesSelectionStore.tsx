@@ -31,6 +31,11 @@ import { makeAutoObservable } from "mobx";
 
 import { Nullable } from "@docspace/shared/types";
 import type {
+  TDownloadedFile,
+  TSortedFiles,
+} from "@docspace/shared/dialogs/download-dialog/DownloadDialog.types";
+
+import type {
   TFileItem,
   TFolderItem,
 } from "@/app/(docspace)/_hooks/useItemList";
@@ -51,10 +56,18 @@ export class FilesSelectionStore {
   }
 
   setSelection = (items?: (TFileItem | TFolderItem)[]) => {
+    if (!items?.length && !this.selection.length) {
+      return;
+    }
+
     this.selection = items ? items : [];
   };
 
   addSelection = (item: TFileItem | TFolderItem) => {
+    if (this.bufferSelection) {
+      this.setBufferSelection(null);
+    }
+
     if (this.selection.some((i) => isSame(i, item))) {
       return this.removeSelection(item);
     }
@@ -66,11 +79,65 @@ export class FilesSelectionStore {
   };
 
   setBufferSelection = (item: Nullable<TFileItem | TFolderItem>) => {
+    if (item && this.bufferSelection && isSame(item, this.bufferSelection)) {
+      return;
+    }
     this.bufferSelection = item;
   };
 
   isCheckedItem = (item: TFileItem | TFolderItem) => {
     return this.selection.some((i) => isSame(i, item));
+  };
+
+  getSortedFilesFromSelection = (
+    isDocument: (exst: string) => boolean,
+    isSpreadsheet: (exst: string) => boolean,
+    isPresentation: (exst: string) => boolean,
+    isMasterForm: (exst: string) => boolean,
+  ) => {
+    const newSortedFiles: TSortedFiles = {
+      documents: [],
+      spreadsheets: [],
+      presentations: [],
+      masterForms: [],
+      pdfForms: [],
+      other: [],
+    };
+
+    let data = this.selection.length
+      ? this.selection
+      : this.bufferSelection
+        ? [this.bufferSelection]
+        : [];
+
+    data = JSON.parse(JSON.stringify(data));
+
+    data.forEach((item: TDownloadedFile) => {
+      item.checked = true;
+      item.format = null;
+
+      if (
+        "fileExst" in item &&
+        item.fileExst &&
+        item.viewAccessibility?.CanConvert
+      ) {
+        if (isSpreadsheet(item.fileExst)) {
+          newSortedFiles.spreadsheets.push(item);
+        } else if (isPresentation(item.fileExst)) {
+          newSortedFiles.presentations.push(item);
+        } else if (isMasterForm(item.fileExst)) {
+          newSortedFiles.masterForms.push(item);
+        } else if (isDocument(item.fileExst)) {
+          newSortedFiles.documents.push(item);
+        } else {
+          newSortedFiles.other.push(item);
+        }
+      } else {
+        newSortedFiles.other.push(item);
+      }
+    });
+
+    return newSortedFiles;
   };
 }
 

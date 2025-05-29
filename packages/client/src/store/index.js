@@ -88,8 +88,10 @@ import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 import OAuthStore from "./OAuthStore";
 
 import BrandingStore from "./portal-settings/BrandingStore";
+import FlowStore from "./FlowStore";
 
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
+const flowStore = new FlowStore();
 
 const pluginStore = new PluginStore(
   settingsStore,
@@ -116,7 +118,7 @@ const tagsStore = new TagsStore();
 const clientLoadingStore = new ClientLoadingStore();
 const publicRoomStore = new PublicRoomStore(clientLoadingStore);
 
-const infoPanelStore = new InfoPanelStore(userStore);
+const infoPanelStore = new InfoPanelStore(userStore, flowStore);
 const indexingStore = new IndexingStore(infoPanelStore, selectedFolderStore);
 
 const treeFoldersStore = new TreeFoldersStore(
@@ -163,6 +165,7 @@ const filesStore = new FilesStore(
   currentTariffStatusStore,
   settingsStore,
   indexingStore,
+  flowStore,
 );
 
 const guidanceStore = new GuidanceStore();
@@ -202,6 +205,7 @@ const profileActionsStore = new ProfileActionsStore(
   userStore,
   settingsStore,
   currentTariffStatusStore,
+  infoPanelStore,
 );
 
 const peopleStore = new PeopleStore(
@@ -214,6 +218,10 @@ const peopleStore = new PeopleStore(
   profileActionsStore,
   dialogsStore,
   currentQuotaStore,
+  treeFoldersStore,
+  setupStore,
+  filesStore,
+  selectedFolderStore,
 );
 
 const uploadDataStore = new UploadDataStore(
@@ -251,6 +259,7 @@ const filesActionsStore = new FilesActionsStore(
 
 mediaViewerDataStore.filesActionsStore = filesActionsStore;
 secondaryProgressDataStore.filesActionsStore = filesActionsStore;
+versionHistoryStore.filesActionsStore = filesActionsStore;
 
 const contextOptionsStore = new ContextOptionsStore(
   settingsStore,
@@ -273,6 +282,7 @@ const contextOptionsStore = new ContextOptionsStore(
   indexingStore,
   clientLoadingStore,
   guidanceStore,
+  flowStore,
 );
 
 const hotkeyStore = new HotkeyStore(
@@ -400,6 +410,7 @@ const store = {
   avatarEditorDialogStore,
 
   brandingStore,
+  flowStore,
 
   guidanceStore,
 };

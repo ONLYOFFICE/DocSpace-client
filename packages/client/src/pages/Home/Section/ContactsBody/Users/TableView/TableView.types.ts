@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { NavigateFunction, Location } from "react-router-dom";
+import { NavigateFunction, Location } from "react-router";
 
 import { TFilterSortBy, TUser } from "@docspace/shared/api/people/types";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";

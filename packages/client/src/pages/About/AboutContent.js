@@ -73,6 +73,15 @@ const StyledAboutBody = styled.div`
     }
   }
 
+  .tel-title.select-el {
+    direction: ltr;
+  }
+
+  .program-with-version {
+    display: inline;
+    direction: ltr;
+  }
+
   .logo-theme {
     svg {
       g:nth-child(2) {
@@ -109,6 +118,7 @@ const AboutContent = (props) => {
     licenseAgreementsUrl,
     isEnterprise,
     logoText,
+    isBrandingAvailable,
   } = props;
   const { t } = useTranslation(["About", "Common"]);
   const isCommercial = !standalone || isEnterprise;
@@ -136,6 +146,10 @@ const AboutContent = (props) => {
 
   const logo = getLogoUrl(WhiteLabelLogoType.AboutPage, !theme.isBase, true);
 
+  const logoName = isBrandingAvailable
+    ? logoText
+    : t("Common:OrganizationName");
+
   return (
     companyInfoSettingsData && (
       <StyledAboutBody>
@@ -150,56 +164,60 @@ const AboutContent = (props) => {
           <Text className="row-el" fontSize="13px">
             {t("DocumentManagement")}:
           </Text>
-          <ColorTheme
-            {...props}
-            tag="a"
-            themeId={ThemeId.Link}
-            className="row-el"
-            fontSize="13px"
-            fontWeight="600"
-            href={linkRepo}
-            target="_blank"
-            enableUserSelect
-          >
-            &nbsp;{logoText} {t("Common:ProductName")}&nbsp;
-          </ColorTheme>
+          <div className="program-with-version">
+            <ColorTheme
+              {...props}
+              tag="a"
+              themeId={ThemeId.Link}
+              className="row-el"
+              fontSize="13px"
+              fontWeight="600"
+              href={linkRepo}
+              target="_blank"
+              enableUserSelect
+            >
+              &nbsp;{logoName} {t("Common:ProductName")}&nbsp;
+            </ColorTheme>
 
-          <Text
-            className="row-el select-el"
-            fontSize="13px"
-            fontWeight="600"
-            title={`${BUILD_AT}`} // eslint-disable-line no-undef
-          >
-            v.
-            <span className="version-document-management">
-              {buildVersionInfo.docspace}
-            </span>
-          </Text>
+            <Text
+              className="row-el select-el"
+              fontSize="13px"
+              fontWeight="600"
+              title={`${BUILD_AT}`} // eslint-disable-line no-undef
+            >
+              v.
+              <span className="version-document-management">
+                {buildVersionInfo.docspace}&nbsp;
+              </span>
+            </Text>
+          </div>
         </div>
 
         <div className="row">
           <Text className="row-el" fontSize="13px">
             {t("OnlineEditors")}:
           </Text>
-          <ColorTheme
-            {...props}
-            tag="a"
-            themeId={ThemeId.Link}
-            className="row-el"
-            fontSize="13px"
-            fontWeight="600"
-            href={linkDocs}
-            target="_blank"
-            enableUserSelect
-          >
-            &nbsp;{logoText} {t("Common:ProductEditorsName")}&nbsp;
-          </ColorTheme>
-          <Text className="row-el select-el" fontSize="13px" fontWeight="600">
-            v.
-            <span className="version-online-editors">
-              {buildVersionInfo.documentServer}
-            </span>
-          </Text>
+          <div className="program-with-version">
+            <ColorTheme
+              {...props}
+              tag="a"
+              themeId={ThemeId.Link}
+              className="row-el"
+              fontSize="13px"
+              fontWeight="600"
+              href={linkDocs}
+              target="_blank"
+              enableUserSelect
+            >
+              &nbsp;{logoName} {t("Common:ProductEditorsName")}&nbsp;
+            </ColorTheme>
+            <Text className="row-el select-el" fontSize="13px" fontWeight="600">
+              v.
+              <span className="version-online-editors">
+                {buildVersionInfo.documentServer}&nbsp;
+              </span>
+            </Text>
+          </div>
         </div>
 
         <div className="row">
@@ -208,7 +226,6 @@ const AboutContent = (props) => {
           </Text>
           {isCommercial ? (
             <ColorTheme
-              {...props}
               tag="a"
               themeId={ThemeId.Link}
               className="row-el"
@@ -255,7 +272,6 @@ const AboutContent = (props) => {
           </Text>
 
           <ColorTheme
-            {...props}
             tag="a"
             themeId={ThemeId.Link}
             className="row-el"
@@ -274,7 +290,6 @@ const AboutContent = (props) => {
           </Text>
 
           <ColorTheme
-            {...props}
             tag="a"
             themeId={ThemeId.Link}
             className="row-el"
@@ -292,22 +307,26 @@ const AboutContent = (props) => {
   );
 };
 
-export default inject(({ settingsStore, currentTariffStatusStore }) => {
-  const {
-    theme,
-    companyInfoSettingsData,
-    standalone,
-    licenseAgreementsUrl,
-    logoText,
-  } = settingsStore;
-  const { isEnterprise } = currentTariffStatusStore;
+export default inject(
+  ({ settingsStore, currentTariffStatusStore, currentQuotaStore }) => {
+    const {
+      theme,
+      companyInfoSettingsData,
+      standalone,
+      licenseAgreementsUrl,
+      logoText,
+    } = settingsStore;
+    const { isBrandingAvailable } = currentQuotaStore;
+    const { isEnterprise } = currentTariffStatusStore;
 
-  return {
-    theme,
-    companyInfoSettingsData,
-    standalone,
-    licenseAgreementsUrl,
-    isEnterprise,
-    logoText,
-  };
-})(observer(AboutContent));
+    return {
+      theme,
+      companyInfoSettingsData,
+      standalone,
+      licenseAgreementsUrl,
+      isEnterprise,
+      logoText,
+      isBrandingAvailable,
+    };
+  },
+)(observer(AboutContent));

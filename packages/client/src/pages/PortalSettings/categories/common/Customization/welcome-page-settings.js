@@ -32,7 +32,7 @@ import { TextInput } from "@docspace/shared/components/text-input";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { isMobileDevice } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Text } from "@docspace/shared/components/text";
@@ -143,7 +143,6 @@ const WelcomePageSettingsComponent = (props) => {
     greetingTitleDefaultFromSessionStorage = getFromSessionStorage(
       "greetingTitleDefault",
     );
-    getGreetingSettingsIsDefault();
 
     setDocumentTitle(t("CustomTitlesWelcome"));
 
@@ -160,7 +159,10 @@ const WelcomePageSettingsComponent = (props) => {
         : greetingTitleDefaultFromSessionStorage;
 
     const page = isMobileView ? "language-and-time-zone" : "general";
-    if (!isLoaded) initSettings(page).then(() => setIsLoaded(true));
+    if (!isLoaded) {
+      initSettings(page).then(() => setIsLoaded(true));
+      getGreetingSettingsIsDefault();
+    }
 
     checkInnerWidth();
     window.addEventListener("resize", checkInnerWidth);

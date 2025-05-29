@@ -154,7 +154,7 @@ const RoomLogoCover = ({
 
   const SelectedCover = React.useMemo(() => {
     return covers?.filter((item) => item.id === cover?.cover)[0];
-  }, [cover?.cover]);
+  }, [cover?.cover, covers]);
 
   const roomColor = cover?.color
     ? `#${cover?.color}`
@@ -178,7 +178,7 @@ const RoomLogoCover = ({
         ? roomCoverDialogProps.customColor
         : roomColor,
     });
-  }, []);
+  }, [roomIcon]);
 
   const coverId = roomCoverDialogProps.icon?.id || roomIcon?.id;
 
@@ -279,9 +279,12 @@ export default inject<TStore>(({ settingsStore, dialogsStore }) => {
 
   return {
     isBaseTheme: theme?.isBase,
-    logo,
+    logo: coverSelection?.isTemplate ? coverSelection?.logo : logo,
     title,
-    cover,
+    cover: cover ?? {
+      color: coverSelection?.color,
+      cover: coverSelection?.cover?.id,
+    },
     setCover,
     setRoomCoverDialogProps,
     roomCoverDialogProps,

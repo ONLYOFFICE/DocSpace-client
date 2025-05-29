@@ -95,7 +95,7 @@
   }
 }
 
-.modern .checkboxElement:hover {
+.modern:not(.mobile) .checkboxElement:hover {
   &:not(.isIndexEditingMode) {
     .checkbox {
       display: flex;
@@ -115,12 +115,12 @@
 
   min-width: var(--row-min-width);
 
-  @include tablet {
-    white-space: nowrap;
-    overflow: var(--row-overflow);
-    text-overflow: var(--row-text-overflow);
-    height: var(--row-content-height);
-  }
+  // @include tablet-and-below {
+  //   white-space: nowrap;
+  //   overflow: var(--row-overflow);
+  //   text-overflow: var(--row-text-overflow);
+  //   height: var(--row-content-height);
+  // }
 }
 
 .contentElement {

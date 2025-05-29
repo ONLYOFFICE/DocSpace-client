@@ -24,24 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
-import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
-import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
-import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
-
 import { useEffect, useReducer } from "react";
-import { ReactSVG } from "react-svg";
+import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+
 import { Button } from "@docspace/shared/components/button";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { Text } from "@docspace/shared/components/text";
 import { saveSettingsThirdParty } from "@docspace/shared/api/files";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { toastr } from "@docspace/shared/components/toast";
-import { inject, observer } from "mobx-react";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { getOAuthToken } from "@docspace/shared/utils/common";
+import { IconButton } from "@docspace/shared/components/icon-button";
+
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
-import { useTranslation } from "react-i18next";
+import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
+import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
+import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
+
 import DeleteThirdPartyDialog from "../../../../../../components/dialogs/DeleteThirdPartyDialog";
 import { StyledBackup, StyledComboBoxItem } from "../StyledBackup";
 import { ThirdPartyServicesUrlName } from "../../../../../../helpers/constants";
@@ -93,7 +95,7 @@ const DirectThirdPartyConnection = (props) => {
     loginValue = "",
     passwordValue = "",
   ) => {
-    const { label, provider_key, provider_id } = selectedThirdPartyAccount;
+    const { label, key, provider_id } = selectedThirdPartyAccount;
     setState({ isLoading: true, isUpdatingInfo: true });
     connectDialogVisible && setConnectDialogVisible(false);
     onSelectFolder && onSelectFolder("");
@@ -106,7 +108,7 @@ const DirectThirdPartyConnection = (props) => {
         token,
         false,
         label,
-        provider_key,
+        key,
         provider_id,
       );
 
@@ -145,8 +147,7 @@ const DirectThirdPartyConnection = (props) => {
     clearLocalStorage();
     onSelectFolder && onSelectFolder("");
 
-    const { provider_key, provider_link: directConnection } =
-      selectedThirdPartyAccount;
+    const { key, provider_link: directConnection } = selectedThirdPartyAccount;
 
     if (directConnection) {
       const authModal = window.open(
@@ -155,7 +156,7 @@ const DirectThirdPartyConnection = (props) => {
         "height=600, width=1020",
       );
 
-      openConnectWindow(provider_key, authModal)
+      openConnectWindow(key, authModal)
         .then((modal) => getOAuthToken(modal))
         .then((token) => {
           authModal.close();
@@ -171,10 +172,8 @@ const DirectThirdPartyConnection = (props) => {
     }
   };
 
-  const onSelectAccount = (event) => {
-    const data = event.currentTarget.dataset;
-
-    const account = accounts.find((a) => a.key === data.thirdPartyKey);
+  const onSelectAccount = (name) => () => {
+    const account = accounts.find((a) => a.name === name);
 
     if (!account.connected) {
       setSelectedThirdPartyAccount({
@@ -183,7 +182,7 @@ const DirectThirdPartyConnection = (props) => {
       });
 
       return window.open(
-        `/portal-settings/integration/third-party-services?service=${ThirdPartyServicesUrlName[data.thirdPartyKey]}`,
+        `/portal-settings/integration/third-party-services?service=${ThirdPartyServicesUrlName[name]}`,
         "_blank",
       );
     }
@@ -208,7 +207,7 @@ const DirectThirdPartyConnection = (props) => {
         key: "Disconnect-settings",
         label: t("Common:Disconnect"),
         onClick: onDisconnect,
-        disabled: !selectedThirdPartyAccount?.storageIsConnected,
+        disabled: false,
         icon: AccessNoneReactSvgUrl,
       },
     ];
@@ -225,11 +224,13 @@ const DirectThirdPartyConnection = (props) => {
 
   const advancedOptions = accounts?.map((item) => {
     return (
-      <StyledComboBoxItem isDisabled={item.disabled} key={item.key}>
+      <StyledComboBoxItem
+        isDisabled={item.disabled}
+        key={`${item.key}_${item.name}`}
+      >
         <DropDownItem
-          onClick={onSelectAccount}
+          onClick={onSelectAccount(item.name)}
           className={item.className}
-          data-third-party-key={item.key}
           disabled={item.disabled}
         >
           <Text className="drop-down-item_text" fontWeight={600}>
@@ -237,15 +238,23 @@ const DirectThirdPartyConnection = (props) => {
           </Text>
 
           {!item.disabled && !item.connected ? (
-            <ReactSVG
-              src={ExternalLinkReactSvgUrl}
+            <IconButton
               className="drop-down-item_icon"
+              size="16"
+              onClick={onSelectAccount(item.name)}
+              iconName={ExternalLinkReactSvgUrl}
+              isFill
             />
           ) : null}
         </DropDownItem>
       </StyledComboBoxItem>
     );
   });
+
+  const updateInfo = async () => {
+    setThirdPartyAccountsInfo(t);
+  };
+
   return (
     <StyledBackup
       isConnectedAccount={
@@ -318,13 +327,13 @@ const DirectThirdPartyConnection = (props) => {
             isThirdParty
             isSelectFolder={isSelectFolder}
             isSelect={isSelect}
-            checkCreating={selectedThirdPartyAccount?.provider_key === "WebDav"}
+            checkCreating={selectedThirdPartyAccount?.key === "WebDav"}
           />
         )
       )}
       {deleteThirdPartyDialogVisible ? (
         <DeleteThirdPartyDialog
-          updateInfo={setThirdPartyAccountsInfo}
+          updateInfo={updateInfo}
           key="thirdparty-delete-dialog"
           isConnectionViaBackupModule
         />

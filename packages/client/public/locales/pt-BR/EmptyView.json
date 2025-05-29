@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Seus últimos documentos visualizados ou editados serão exibidos nesta seção.",
   "EmptyRootRoomUserDescription": "A sala compartilhada aparecerá aqui.",
   "EmptyRootRoomUserTitle": "Ainda não há salas aqui",
+  "EmptyTemplatesDescription": "Você pode criar um modelo de uma sala na seção Sala",
+  "EmptyTemplatesTitle": "Nenhum modelo aqui ainda",
   "FormFolderDefaultDescription": "Solte os formulários em PDF aqui ou faça upload do {{productName}} ou do dispositivo.",
   "FormFolderDefaultTitle": "Ainda não há formulários aqui",
   "FormFolderDefaultUserDescription": "Os formulários carregados pelos administradores aparecerão aqui.",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "Importar dados para seu {{productName}} de {{organizationName}} Workspace, Google Workspace ou Nextcloud.",
   "MigrationDataTitle": "Dados de migração",
   "PublicRoomEmptyTitle": "Bem-vindo à sala pública",
+  "SectionsUploadDescription": "Faça upload de qualquer tipo de arquivo de {{sectionNameFirst}} ou {{sectionNameSecond}}",
   "SendInvitationLetter": "Enviar uma carta-convite para adicionar novos membros ao portal",
   "ShareOptionDescription": "Copie um link de acesso público ou convide outros usuários para a sala para iniciar o processo de preenchimento do formulário.",
   "ShareOptionTitle": "Dividir uma sala",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "Carregar do seu dispositivo",
   "UploadDevicePDFFormOptionDescription": "Carregue um formulário PDF pronto para a sala a partir do seu dispositivo.",
   "UploadDevicePDFFormOptionTitle": "Carregar do dispositivo",
-  "UploadFromPortalDescription": "Carregue qualquer tipo de arquivo de Documentos ou Salas",
   "UploadFromPortalTitle": "Fazer upload de {{productName}}",
   "UploadPDFFormOptionDescription": "Selecione um formulário PDF pronto disponível em {{productName}} e carregue-o na sala.",
-  "UserEmptyDescription": "Arquivos e pastas enviados por administradores aparecerão aqui.",
   "VirtualDataRoomEmptyTitle": "Bem-vindo à Sala de Dados Virtual"
 }

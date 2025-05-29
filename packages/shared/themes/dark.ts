@@ -1492,9 +1492,9 @@ const Dark: TTheme = {
       heightWithBorder: "30px",
       heightModernView: "28px",
 
-      paddingLeft: "16px",
+      paddingLeft: "8px",
       paddingRightNoArrow: "16px",
-      paddingRight: "8px",
+      paddingRight: "4px",
 
       selectPaddingLeft: "8px",
       selectPaddingRightNoArrow: "14px",
@@ -2460,7 +2460,7 @@ const Dark: TTheme = {
       tooltipColor: darkToastInfo,
       iconColor: darkErrorStatus,
       positiveStatusColor: darkStatusPositive,
-      progressColor: lightGrayDark,
+      progressColor: grayDark,
       shareButton: {
         color: gray,
         sharedColor: lightGrayDark,
@@ -2469,6 +2469,8 @@ const Dark: TTheme = {
       loadingButton: {
         color: white,
         background: black,
+        defaultBackground: grayDark,
+        hoverColor: white,
       },
     },
     invite: {
@@ -2873,7 +2875,7 @@ const Dark: TTheme = {
         priceColor: darkGrayDark,
         storageSizeTitle: gray,
 
-        backgroundColor: darkGrayLight,
+        backgroundColor: lightDarkGrayHover,
         linkColor: link,
         tariffText: grayDark,
         border: `1px solid ${grayDarkStrong}`,
@@ -2947,7 +2949,7 @@ const Dark: TTheme = {
         color: grayDark,
         linkColor: lightBlueMain,
         spanBackground: lightBlueMain,
-        filterBorder: `1px solid ${black}`,
+        filterBorder: `1px solid ${grayDarkStrong}`,
         background: darkGrayLight,
       },
     },
@@ -3251,6 +3253,10 @@ const Dark: TTheme = {
     circleColor: grayDarkMid,
     selectedColor: black,
     circleBorder: `3px solid ${lightSecondMain}`,
+  },
+
+  socialAuthDialog: {
+    accountDetailsBackground: lightDarkGrayHover,
   },
 };
 

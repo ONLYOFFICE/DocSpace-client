@@ -1,11 +1,17 @@
 {
+  "ChangeContactType": "Thay đổi loại liên hệ",
   "ChangeGuestsTypeMessage": "Khách <strong>{{userName}}</strong> sẽ được chuyển đến phần {{membersSection}} và được chỉ định kiểu Người dùng. Người dùng có phần {{documentsSection}} riêng có thể tạo và chỉnh sửa tập tin, nhưng không thể tạo phòng.",
   "ChangeGuestsTypeMessageMulti": "Những khách được chọn sẽ được chuyển đến phần {{membersSection}} và được chỉ định kiểu Người dùng. Người dùng có phần {{documentsSection}} riêng có thể tạo và chỉnh sửa tập tin, nhưng không thể tạo phòng.",
+  "ChangeGuestsTypeToAdmin": "Khách <strong>{{userName}}</strong> sẽ được chuyển đến phần {{membersSection}} và được chỉ định loại <strong>'{{ secondType }}'</strong>. Quản trị viên {{productName}} có thể truy cập cài đặt {{productName}}, quản lý và lưu trữ phòng, mời người dùng mới và chỉ định vai trò dưới cấp của họ. Quản trị viên {{productName}} có quyền truy cập vào phần {{documentsSection}}.",
+  "ChangeGuestsTypeToAdminMulti": "Các khách được chọn sẽ được chuyển đến phần {{membersSection}} và được chỉ định loại <strong>'{{ secondType }}'</strong>. Quản trị viên {{productName}} có thể truy cập cài đặt {{productName}}, quản lý và lưu trữ phòng, mời người dùng mới và chỉ định vai trò dưới cấp của họ. Quản trị viên {{productName}} có quyền truy cập vào phần {{documentsSection}}.",
+  "ChangeGuestsTypeToManager": "Khách <strong>{{userName}}</strong> sẽ được chuyển đến phần {{membersSection}} và được chỉ định loại <strong>'{{ secondType }}'</strong> . Quản trị viên phòng có thể tạo và quản lý các phòng được chỉ định, mời người dùng mới và chỉ định vai trò từ quản trị viên Phòng trở xuống. Quản trị viên phòng có quyền truy cập vào phần {{documentsSection}}.",
+  "ChangeGuestsTypeToManagerMulti": "Khách được chọn sẽ được chuyển đến phần {{membersSection}} và chỉ định loại <strong>'{{ secondType }}'</strong>. Quản trị viên phòng có thể tạo và quản lý các phòng được chỉ định, mời người dùng mới và chỉ định vai trò từ quản trị viên Phòng trở xuống. Quản trị viên phòng có quyền truy cập vào phần {{documentsSection}}.",
   "ChangeUserTypeButton": "Thay đổi loại",
-  "ChangeUserTypeHeader": "Thay đổi loại người dùng",
   "ChangeUserTypeMessage": "Người dùng loại <strong>'{{ firstType }}'</strong> sẽ được chuyển sang loại <strong>'{{ secondType }}'</strong>.",
-  "ChangeUserTypeMessageMulti": "Người dùng đã chọn sẽ được chuyển sang loại <strong>'{{ secondType }}'</strong>.",
-  "ChangeUserTypeMessageWarning": "Bạn không thể thay đổi kiểu cho người quản trị {{productName}} và cho chính mình.",
+  "ChangeUserTypeNote": "<1>Lưu ý:</1> bạn không thể thay đổi loại cho quản trị viên {{productName}} và cho chính mình.",
+  "DataReassignmentInfo": "Phòng do người dùng này tạo sẽ tự động được chỉ định cho bạn. Để chỉ định lại phòng cho người khác, hãy nhấp vào liên kết tương ứng bên dưới.",
+  "DataReassignmentWithFilesDeletion": "Tất cả các tập tin được chia sẻ được tạo bởi liên hệ này sẽ được <1>tự động chỉ định cho bạn trong 30 ngày</1>. Để chỉ định lại phòng/tập tin được chia sẻ cho người khác, hãy nhấp vào liên kết tương ứng bên dưới.",
+  "PersonalDataDeletion": "Tất cả các tập tin và thư mục trong phần {{sectionName}} của liên hệ này sẽ bị <1> xóa vĩnh viễn trong 30 ngày</1>.",
   "SuccessChangeGuestType": "Kiểu khách đã được thay đổi thành công",
   "SuccessChangeUserType": "Loại người dùng đã được thay đổi thành công"
 }

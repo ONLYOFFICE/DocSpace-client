@@ -26,7 +26,7 @@
 
 import { ContextMenuModel } from "@docspace/shared/components/context-menu/ContextMenu.types";
 import { TFunction } from "i18next";
-import { TagType } from "components/tags/Tags.types";
+import { TagType } from "@docspace/shared/components/tags/Tags.types";
 import { TileItem } from "../tile-container/TileContainer.types";
 
 export interface RoomItem extends TileItem {

@@ -108,7 +108,9 @@ export type TFrameEvents = {
 };
 
 export type TFrameConfig = {
+  acceptButtonLabel?: string;
   buttonColor?: string;
+  cancelButtonLabel?: string;
   checkCSP?: boolean;
   destroyText?: string;
   disableActionButton?: boolean;
@@ -124,10 +126,12 @@ export type TFrameConfig = {
   id?: string | number | null;
   infoPanelVisible?: boolean;
   init?: boolean | null;
+  isSDK?: boolean;
   locale?: string | null;
   mode: TFrameMode | string;
   name?: string;
   requestToken?: string | null;
+  roomType?: RoomsType | RoomsType[];
   rootPath?: string;
   selectorType?: TFrameSelectorType;
   showFilter?: boolean;
@@ -149,7 +153,4 @@ export type TFrameConfig = {
   withBreadCrumbs?: boolean;
   withSearch?: boolean;
   withSubtitle?: boolean;
-  cancelButtonLabel?: string;
-  acceptButtonLabel?: string;
-  roomType?: RoomsType | RoomsType[];
 };

@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Vaši poslednji pregledani ili uređeni dokumenti će biti prikazani u ovom odeljku.",
   "EmptyRootRoomUserDescription": "Deljena soba će se ovde pojaviti.",
   "EmptyRootRoomUserTitle": "Još uvek nema soba ovde",
+  "EmptyTemplatesDescription": "Možete kreirati šablon iz sobe u odeljku Sobe.",
+  "EmptyTemplatesTitle": "Ovde još uvek nema šablona",
   "FormFolderDefaultDescription": "Ubacite PDF formulare ovde ili otpremite sa {{productName}} ili uređaja.",
   "FormFolderDefaultTitle": "Još uvek nema formulara ovde",
   "FormFolderDefaultUserDescription": "Formulari otpremljeni od strane administratora će se pojaviti ovde.",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "Uvezite podatke u vaš {{productName}} sa {{organizationName}} Workspace, Google Workspace ili Nextcloud.",
   "MigrationDataTitle": "Podaci o migraciji",
   "PublicRoomEmptyTitle": "Dobrodošli u Javnu sobu",
+  "SectionsUploadDescription": "Otpremite datoteke bilo kog tipa sa {{sectionNameFirst}} ili {{sectionNameSecond}}",
   "SendInvitationLetter": "Pošaljite pozivno pismo za dodavanje novih članova u portal",
   "ShareOptionDescription": "Kopirajte javni pristupni link ili pozovite druge korisnike u prostoriju da započnete proces popunjavanja formulara.",
   "ShareOptionTitle": "Podeli prostoriju",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "Otpremi sa svog Uređaja",
   "UploadDevicePDFFormOptionDescription": "Otpremite spreman PDF formular na prostoriju sa svog uređaja.",
   "UploadDevicePDFFormOptionTitle": "Otpremi sa uređaja",
-  "UploadFromPortalDescription": "Otpremi datoteke bilo kog tipa iz Dokumenti ili Prostorije",
   "UploadFromPortalTitle": "Otpremi iz {{productName}}",
   "UploadPDFFormOptionDescription": "Odaberite spreman PDF formular dostupan u {{productName}} i otpremite ga u prostoriju.",
-  "UserEmptyDescription": "Datoteke i folderi otpremljeni od strane administratora će se pojaviti ovde.",
   "VirtualDataRoomEmptyTitle": "Dobrodošli u Virtuelnu sobu za podatke"
 }

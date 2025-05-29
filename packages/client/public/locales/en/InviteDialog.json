@@ -1,18 +1,22 @@
 {
   "AddManually": "Add manually",
   "EmailErrorMessage": "Email address not valid. You can edit the email by double-clicking on it.",
+  "EmailErrorMessageUserNotFound": "User not found. You can edit the email by double-clicking on it.",
   "GroupMaxAvailableRoleWarning": "Groups can be added to a room with the {{roleName}} role as maximum. However, you can change the role of individual users in the group after it has been successfully added.",
   "InvitationLanguage": "Invitation language",
   "InviteMembersManuallyDescription": "Invite new members to {{productName}} personally via email",
   "InviteMembersSearchPlaceholder": "Invite members by email",
-  "InviteToRoomManuallyInfo": "Add existing {{productName}} contacts. Or invite new guests personally via email. New guests will be added to your Guests list.",
+  "InviteToRoomAddPlaceholder": "Add people by name or email",
+  "InviteToRoomManuallyInfoGuest": "Add existing {{productName}} contacts. Or invite new users personally via email. New users will be added to your Guests list.",
+  "InviteToRoomManuallyInfoMembers": "Add existing {{productName}} members to the room.",
   "InviteToRoomSearchPlaceholder": "Search and invite by name or email",
   "InviteViaLink": "Invite via link",
   "InviteViaLinkDescriptionAccounts": "Create a universal link for self-authorization in {{productName}}",
-  "InviteViaLinkDescriptionRoom": "Create a universal link for self-authorization in the room",
+  "InviteViaLinkDescriptionRoomGuest": "Create a universal link for self-authorization in the room as a guest.",
+  "InviteViaLinkDescriptionRoomMembers": "Create a universal link for {{productName}} members for self-authorization in the room.",
   "LinkCopySuccess": "Link has been copied",
-  "ResetChange": "Reset change",
   "SendInvitation": "Send invitation",
   "UserMaxAvailableRoleWarning": "Guests and Users cannot be assigned as Room managers. Only Room and {{productName}} admins are suitable for the specified role.",
-  "UsersAlreadyAdded": "Some users have already been added"
+  "UsersAlreadyAdded": "Some users have already been added",
+  "UsersCannotBeAdded": "Disabled contacts cannot be added to a room"
 }

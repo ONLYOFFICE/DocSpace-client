@@ -26,7 +26,7 @@
 
 import { observer } from "mobx-react";
 import React, { useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router";
 import { isMobileOnly } from "react-device-detect";
 import { useTranslation } from "react-i18next";
 
@@ -40,13 +40,13 @@ import SocketHelper, {
 } from "@docspace/shared/utils/socket";
 import "@docspace/shared/styles/custom.scss";
 
-import { useStore } from "./store";
-import SimpleHeader from "./SimpleHeader";
-
 import Main from "client/Main";
 import Layout from "client/Layout";
 import NavMenu from "client/NavMenu";
 import MainLayout from "SRC_DIR/Layout";
+
+import { useStore } from "./store";
+import SimpleHeader from "./SimpleHeader";
 
 declare global {
   interface Window {
@@ -93,9 +93,12 @@ const App = observer(() => {
       SocketHelper.emit(SocketCommands.Subscribe, {
         roomParts: "restore",
       });
+      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
+        roomParts: "restore",
+      });
     }
     if (!socketSubscribers.has("backup")) {
-      SocketHelper.emit(SocketCommands.Subscribe, {
+      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
         roomParts: "backup",
       });
     }
@@ -104,7 +107,8 @@ const App = observer(() => {
   useEffect(() => {
     return () => {
       SocketHelper.off(SocketEvents.BackupProgress);
-      SocketHelper.emit(SocketCommands.Unsubscribe, {
+
+      SocketHelper.emit(SocketCommands.UnsubscribeInSpaces, {
         roomParts: "backup",
       });
     };
@@ -113,7 +117,7 @@ const App = observer(() => {
   const rootElement = document.getElementById("root") as HTMLElement;
 
   const toast = isMobileOnly ? (
-    <Portal element={<Toast />} appendTo={rootElement} visible={true} />
+    <Portal element={<Toast />} appendTo={rootElement} visible />
   ) : (
     <Toast />
   );

@@ -48,7 +48,7 @@ import {
 } from "@docspace/shared/api/settings";
 // import { getThirdPartyCommonFolderTree } from "@docspace/shared/api/files";
 import AutoBackupLoader from "@docspace/shared/skeletons/backup/AutoBackup";
-import { FloatingButton } from "@docspace/shared/components/floating-button";
+import OperationsProgressButton from "@docspace/shared/components/operations-progress-button";
 import { Badge } from "@docspace/shared/components/badge";
 import { Link } from "@docspace/shared/components/link";
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
@@ -60,6 +60,8 @@ import {
   isManagement,
 } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
+
 import ButtonContainer from "./sub-components/ButtonContainer";
 import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
 import RoomsModule from "./sub-components/RoomsModule";
@@ -116,6 +118,7 @@ class AutomaticBackup extends React.PureComponent {
       setDownloadingProgress,
       setTemporaryLink,
       t,
+      setBackupProgressError,
     } = this.props;
 
     SocketHelper.on(SocketEvents.BackupProgress, (opt) => {
@@ -129,7 +132,10 @@ class AutomaticBackup extends React.PureComponent {
 
       const { error, success } = options;
 
-      if (error) toastr.error(error);
+      if (error) {
+        toastr.error(error);
+        setBackupProgressError(error);
+      }
       if (success) toastr.success(success);
     });
 
@@ -178,7 +184,7 @@ class AutomaticBackup extends React.PureComponent {
         await Promise.all([
           getSettingsThirdParty(),
           getBackupSchedule(isManagement()),
-          getBackupStorage(),
+          getBackupStorage(isManagement()),
           getStorageRegions(),
         ]);
       setConnectedThirdPartyAccount(account);
@@ -264,8 +270,13 @@ class AutomaticBackup extends React.PureComponent {
 
   onClickShowStorage = (e) => {
     const { seStorageType } = this.props;
+    const { isError } = this.state;
     const key = e.target.name;
     seStorageType(key);
+    if (isError)
+      this.setState({
+        isError: false,
+      });
   };
 
   onCancelModuleSettings = () => {
@@ -395,7 +406,7 @@ class AutomaticBackup extends React.PureComponent {
     } = this.props;
 
     try {
-      (isCheckedThirdParty || isCheckedDocuments) && updateBaseFolderPath();
+      // (isCheckedThirdParty || isCheckedDocuments) && updateBaseFolderPath();
 
       await createBackupSchedule(
         storageType,
@@ -409,14 +420,16 @@ class AutomaticBackup extends React.PureComponent {
       );
       const [selectedSchedule, storageInfo] = await Promise.all([
         getBackupSchedule(isManagement()),
-        getBackupStorage(),
+        getBackupStorage(isManagement()),
       ]);
       setBackupSchedule(selectedSchedule);
       setThirdPartyStorage(storageInfo);
       setDefaultOptions(t, this.periodsObject, this.weekdaysLabelArray);
       toastr.success(t("SuccessfullySaveSettingsMessage"));
+
       this.setState({
         isLoadingData: false,
+        isError: false,
       });
     } catch (error) {
       setErrorInformation(error, t);
@@ -432,7 +445,7 @@ class AutomaticBackup extends React.PureComponent {
   deleteSchedule = () => {
     const { t, deleteSchedule, setErrorInformation } = this.props;
     this.setState({ isLoadingData: true }, () => {
-      deleteBackupSchedule()
+      deleteBackupSchedule(isManagement())
         .then(() => {
           deleteSchedule(this.weekdaysLabelArray);
           toastr.success(t("SuccessfullySaveSettingsMessage"));
@@ -467,6 +480,8 @@ class AutomaticBackup extends React.PureComponent {
       currentColorScheme,
       isBackupProgressVisible,
       errorInformation,
+      setIsBackupProgressVisible,
+      backupPrgressError,
     } = this.props;
 
     const {
@@ -635,10 +650,23 @@ class AutomaticBackup extends React.PureComponent {
         />
 
         {isBackupProgressVisible ? (
-          <FloatingButton
+          <OperationsProgressButton
             className="layout-progress-bar"
-            alert={false}
-            percent={downloadingProgress}
+            operationsAlert={backupPrgressError}
+            operationsCompleted={downloadingProgress === 100}
+            operations={[
+              {
+                operation: OPERATIONS_NAME.backup,
+                label:
+                  downloadingProgress === 100
+                    ? t("Backup")
+                    : downloadingProgress === 0
+                      ? t("PreparingBackup")
+                      : t("BackupProgress", { progress: downloadingProgress }),
+                percent: downloadingProgress,
+              },
+            ]}
+            clearOperationsData={() => setIsBackupProgressVisible(false)}
           />
         ) : null}
       </StyledAutoBackup>
@@ -699,6 +727,9 @@ export default inject(
       resetDownloadingProgress,
       errorInformation,
       setErrorInformation,
+      setIsBackupProgressVisible,
+      setBackupProgressError,
+      backupPrgressError,
     } = backup;
 
     const { updateBaseFolderPath, resetNewFolderPath } = filesSelectorInput;
@@ -769,6 +800,9 @@ export default inject(
       resetDownloadingProgress,
       errorInformation,
       setErrorInformation,
+      setIsBackupProgressVisible,
+      setBackupProgressError,
+      backupPrgressError,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(AutomaticBackup)));

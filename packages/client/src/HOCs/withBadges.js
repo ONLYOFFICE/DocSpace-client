@@ -149,7 +149,7 @@ export default function withBadges(WrappedComponent) {
     onCreateRoom = () => {
       const { item, onCreateRoomFromTemplate } = this.props;
 
-      onCreateRoomFromTemplate(item);
+      onCreateRoomFromTemplate(item, true);
     };
 
     render() {
@@ -170,6 +170,8 @@ export default function withBadges(WrappedComponent) {
         isPublicRoom,
         isRecentTab,
         isTemplatesFolder,
+        isExtsCustomFilter,
+        docspaceManagingRoomsHelpUrl,
       } = this.props;
       const { fileStatus, access, mute } = item;
 
@@ -213,6 +215,8 @@ export default function withBadges(WrappedComponent) {
           canEditing={canEditing}
           onCreateRoom={this.onCreateRoom}
           isTemplatesFolder={isTemplatesFolder}
+          isExtsCustomFilter={isExtsCustomFilter}
+          customFilterExternalLink={docspaceManagingRoomsHelpUrl}
           newFilesBadge={
             <NewFilesBadge
               className="tablet-badge"
@@ -243,6 +247,7 @@ export default function withBadges(WrappedComponent) {
         publicRoomStore,
         userStore,
         settingsStore,
+        filesSettingsStore,
       },
       { item },
     ) => {
@@ -261,7 +266,12 @@ export default function withBadges(WrappedComponent) {
         checkAndOpenLocationAction,
         onCreateRoomFromTemplate,
       } = filesActionsStore;
-      const { isTabletView, isDesktopClient, theme } = settingsStore;
+      const {
+        isTabletView,
+        isDesktopClient,
+        theme,
+        docspaceManagingRoomsHelpUrl,
+      } = settingsStore;
       const { setIsVerHistoryPanel, fetchFileVersions } = versionHistoryStore;
       const { setConvertDialogVisible, setConvertItem, setConvertDialogData } =
         dialogsStore;
@@ -271,6 +281,10 @@ export default function withBadges(WrappedComponent) {
 
       const isRoom = !!roomType;
       const isMutedBadge = isRoom ? mute : isMuteCurrentRoomNotifications;
+
+      const extsCustomFilter =
+        filesSettingsStore?.extsWebCustomFilterEditing || [];
+      const isExtsCustomFilter = extsCustomFilter.includes(item.fileExst);
 
       return {
         isArchiveFolderRoot,
@@ -299,6 +313,8 @@ export default function withBadges(WrappedComponent) {
         checkAndOpenLocationAction,
         isTemplatesFolder,
         onCreateRoomFromTemplate,
+        isExtsCustomFilter,
+        docspaceManagingRoomsHelpUrl,
       };
     },
   )(observer(WithBadges));

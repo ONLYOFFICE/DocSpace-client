@@ -1,0 +1,250 @@
+{
+  "key_path": "PendingTitle",
+  "content": "Pending",
+  "content_en_sha1_hash": "96f608c16cef16caa06bf38901fb5f618a35a70b",
+  "created_at": "2025-05-19T21:30:53.490Z",
+  "updated_at": "2025-05-28T09:30:02.250Z",
+  "comment": {
+    "text": "This translation key \"PendingTitle\" is used to display a status indicating that data transfer or processing is pending. It appears in a progress indicator within a data reassignment dialog, providing users with visual feedback on the current state of the process.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:38.547Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Progress.js",
+      "line_number": 148,
+      "context": "</div>\n );\n \n const pendingNode = (\n <Text className=\"status status-pending\" noSelect>\n {t(\"PeopleTranslations:PendingTitle\")}...\n </Text>\n );\n \n const allDataTransferredNode = (\n <div className=\"transfer-information\">",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation \"Gaida apstiprinājumu\" translates to \"Awaiting confirmation\". While related to \"Pending\", it's not a direct or commonly used equivalent for the meaning of \"Pending\" in this context, which usually implies 'not yet decided' or 'in progress'.",
+          "suggestion": "Consider a more direct translation like \"Pagaidām\" or \"Neapstiprināts\" for a closer meaning to 'Pending'."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Oczekuje' doesn't perfectly capture the nuance of 'Pending' in this context. 'Pending' often implies something awaiting approval or processing, while 'Oczekuje' simply means 'waiting'. A more accurate translation might be 'W oczekiwaniu' or 'Czekające'.",
+          "suggestion": "Consider 'W oczekiwaniu' or 'Czekające' for a more accurate translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'පොරොත්තු' while generally meaning 'promise' or 'pledge', doesn't directly translate the nuance of 'Pending' which implies a state of awaiting or not yet finalized.  A more accurate translation would convey that sense of 'waiting' or 'in progress'.",
+          "suggestion": "Consider alternatives like 'සිදු කල නොමැති' (sidu kala nemathi - not yet completed), 'අguard menunggu' (a guard menunggu - awaiting), or 'ඉ menunggu' (i menunggu - in progress), depending on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation \"Nevybavené\" while technically correct, doesn't fully capture the nuance of 'Pending' in the context of a title. 'Pending' often implies a status awaiting action or review. 'Nevybavené' is more generally 'unhandled' or 'unprocessed'.",
+          "suggestion": "Consider alternatives like 'Čakajúce' (Waiting) or 'Preberané' (Being Reviewed) depending on the specific context of the title."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Na čekanju' is a literal translation of 'Pending', it doesn't convey the same nuance in this context (likely referring to a status or process). A more appropriate translation for 'Pending' in a UI or status context might be 'U toku' or 'Očekuje se'.",
+          "suggestion": "Consider 'U toku' or 'Očekuje se' for a more contextually accurate translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation \"Bekliyor\" translates to \"Waiting\" or \"Awaiting\", not \"Pending\". \"Pending\" implies a state of being unresolved or awaiting action, which isn't perfectly captured by \"Bekliyor\".",
+          "suggestion": "Consider alternatives like \"Süreşte\" (In process), \"Yapılıyor\" (Being done), or \"Hazırda\" (On hold) depending on the specific context of 'Pending'."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Đang chờ xử lý\" is a valid phrase, it's a more literal and verbose translation of \"Pending.\" A more concise and potentially more appropriate translation for a title would be \"Chờ\" or \"Đang xử lý\". \"Pending\" often implies something is awaiting action, and \"Chờ\" directly conveys this.",
+          "suggestion": "Consider \"Chờ\" or \"Đang xử lý\" for a more concise and potentially more suitable translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

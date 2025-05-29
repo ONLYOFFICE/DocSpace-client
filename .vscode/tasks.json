@@ -3,6 +3,19 @@
   "problemMatcher": [],
   "tasks": [
     {
+      "label": "Build DocEditor Translations",
+      "type": "shell",
+      "command": "node ./scripts/buildTranslations.js",
+      "options": {
+        "cwd": "${workspaceFolder}/packages/doceditor"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      }
+    },
+    {
       "label": "Backend | build CE",
       "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py",
       "type": "shell",
@@ -378,6 +391,21 @@
       }
     },
     {
+      "label": "Frontend | build:lite",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn build:lite",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Frontend | start",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; yarn start",
@@ -396,6 +424,21 @@
       "label": "Frontend | start-prod",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; yarn start-prod",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | start-prod:lite",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn start-prod:lite",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -441,6 +484,21 @@
       "label": "Frontend | build-and-start-prod",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; yarn build ; yarn start-prod",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | build-and-start-prod:lite",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn build:lite ; yarn start-prod:lite",
       "group": {
         "kind": "build",
         "isDefault": true

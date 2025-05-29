@@ -26,7 +26,7 @@
 
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import elementResizeDetectorMaker from "element-resize-detector";
 import React, {
   useEffect,
@@ -307,7 +307,7 @@ export default inject(
 
     const { isRoomsFolder, isArchiveFolder, isTrashFolder, isTemplatesFolder } =
       treeFoldersStore;
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
 
     const { columnStorageName, columnInfoPanelStorageName } = tableStore;
 
@@ -354,4 +354,4 @@ export default inject(
       deleteRefMap,
     };
   },
-)(observer(withContainer(Table)));
+)(withContainer(observer(Table)));

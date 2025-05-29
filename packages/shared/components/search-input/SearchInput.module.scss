@@ -4,6 +4,20 @@
   &.scale {
     width: 100%;
   }
+
+  :global {
+    .input-block-icon {
+      border-radius: 0px;
+      border-start-end-radius: 3px;
+      border-end-end-radius: 3px;
+    }
+  }
+
+  input {
+    border-radius: 0px;
+    border-start-start-radius: 3px;
+    border-end-start-radius: 3px;
+  }
 }
 
 .searchInputBlock > input {

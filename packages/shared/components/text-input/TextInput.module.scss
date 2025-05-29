@@ -4,6 +4,21 @@
 .textInput {
   @include common-input-styles;
 
+  &[type="search"]::-webkit-search-decoration,
+  &[type="search"]::-webkit-search-cancel-button,
+  &[type="search"]::-webkit-search-results-button,
+  &[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none !important;
+    margin: 0;
+    display: none;
+  }
+
+  &[type="search"]::-moz-search-cancel-button {
+    -webkit-appearance: none !important;
+    margin: 0;
+    display: none;
+  }
+
   appearance: var(--text-input-appearance); // Standard property
   -webkit-appearance: var(--text-input-appearance); // For Safari
   -moz-appearance: var(--text-input-appearance); // For Firefox

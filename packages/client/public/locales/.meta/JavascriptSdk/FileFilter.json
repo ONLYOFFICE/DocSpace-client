@@ -1,0 +1,262 @@
+{
+  "key_path": "FileFilter",
+  "content": "File Filter",
+  "content_en_sha1_hash": "ea6736bc0efcc52efe621b7052f08fa65d6b97a9",
+  "created_at": "2025-05-19T21:30:54.493Z",
+  "updated_at": "2025-05-28T09:30:02.578Z",
+  "comment": {
+    "text": "The \"FileFilter\" translation key is used to display the label for a filter toggle button, allowing users to select files by author. This appears in a UI component where users can manage filters on lists of files. Translators should focus on creating a clear and concise label that accurately reflects this functionality.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:39.638Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
+      "line_number": 389,
+      "context": "clearFilter();\n }, [config.id]);\n \n return \"id\" in config ? (\n <>\n <Label className=\"label\" text={t(\"FileFilter\")} />\n <ToggleButton\n className=\"toggle\"\n label={t(\"Files:ByAuthor\")}\n onChange={toggleAuthor}\n isChecked={isUserFilterSet}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"تصفية الملف\" (Tasfiya al-Malaf) is a literal translation of \"File Filter\", it's not the most natural or commonly used phrasing in Arabic. \"مرشح الملفات\" (Murashih al-Malifat) would be a more accurate and idiomatic translation.",
+          "suggestion": "مرشح الملفات"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ֆայլի Զտիչ' while literally meaning 'File Filter', may not be the most natural or commonly used term in Armenian for 'File Filter' in a technical context. It's possible a more idiomatic equivalent exists.",
+          "suggestion": "Consider alternatives such as 'Ֆայլի ֆիլտր' or investigating with a native Armenian technical expert to determine the most appropriate translation based on the intended usage."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ຕົວປ່ຽນແກ້ງລອກໄຟລ໌\" doesn't accurately convey the meaning of \"File Filter.\"  \"ຕົວປ່ຽນແກ້ງລອກໄຟລ໌\" literally translates to something like \"file copying device\" or \"file altering device,\" which is not the intended meaning. A file filter is a mechanism for selecting files based on criteria.",
+          "suggestion": "A more accurate translation might be something like \"ຕົວກັ່ນໄຟລ໌\" (tua kan file) which directly translates to \"file filter\" by borrowing the term.  Alternatively, a more descriptive translation could be \"ຕົວເລືອກໄຟລ໌\" (tua leuak file) meaning 'file selector'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation \"Jauns filtrs\" translates to \"New filter\". The English term \"File Filter\" refers to a specific feature or functionality related to filtering files, not simply a new filter. It lacks the specificity of the original.",
+          "suggestion": "Consider a translation that conveys the concept of filtering files, such as \"Failu filtrs\" (File filter) or a more descriptive phrase depending on the context of its use."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ගොනු පෙරහන' is a literal translation of 'File Filter' as 'files filter'. While understandable, a more natural and idiomatic translation in Sinhala might be 'ගොනු වර්ගීකරණය' (Gonu Vargikaranaya) which means 'File Categorization' or 'File Sorting', depending on the intended functionality. 'File Filter' often implies a process of selection or categorization.",
+          "suggestion": "Consider 'ගොනු වර්ගීකරණය' (Gonu Vargikaranaya) or a similar term that captures the functionality of filtering/categorizing files."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Filter súborov\" is a literal translation, a more natural and commonly used Slovak term for \"File Filter\" in a technical context (like a Javascript SDK) would be \"Filtrovanie súborov\" or simply \"Filtre súborov\".",
+          "suggestion": "Consider using \"Filtrovanie súborov\" or \"Filtre súborov\" for a more idiomatic translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Филтер Датотеке\" is not a natural or accurate translation of \"File Filter.\" \"Датотеке\" (Datoteke) translates to 'files', but \"File Filter\" refers to a filter *for* files, not files themselves. The term \"Filter\" should be preserved in the translation.",
+          "suggestion": "Possible corrections include: \"Филтер за Датотеке\" (Filter for Files), \"Филтар Датотека\" (File Filter - using the more common 'filter' word), or simply \"Филтер\" (Filter) if the context makes it clear it's referring to a file filter."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Filter Datoteke' is understandable, a more natural and accurate translation of 'File Filter' would be 'Filer fajlova'. 'Datoteke' is a more general term for files, while 'fajlovi' is more specific to filtering them.",
+          "suggestion": "Filer fajlova"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Bộ lọc Tập Tin\" is technically correct, a more natural and common translation for \"File Filter\" in Vietnamese would be \"Bộ Lọc File\". Using the English word \"File\" directly is prevalent in technical contexts.",
+          "suggestion": "Bộ Lọc File"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

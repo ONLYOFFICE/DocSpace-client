@@ -106,7 +106,10 @@ const QuotaPerItemComponent = (props) => {
         />
         <Text className="toggle_label" fontSize="12px">
           {type === "user"
-            ? t("SetDefaultUserQuota", { productName: t("Common:ProductName") })
+            ? t("UserDefaultQuotaDescription", {
+                productName: t("Common:ProductName"),
+                sectionName: t("Common:MyFilesSection"),
+              })
             : t("SetDefaultRoomQuota", {
                 productName: t("Common:ProductName"),
               })}

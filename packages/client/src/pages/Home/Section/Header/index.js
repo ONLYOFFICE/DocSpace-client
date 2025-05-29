@@ -35,7 +35,7 @@ import classnames from "classnames";
 
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router";
 
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import Navigation from "@docspace/shared/components/navigation";
@@ -166,9 +166,14 @@ const SectionHeaderContent = (props) => {
     setCloseEditIndexDialogVisible,
     rootFolderId,
     guidAnimationVisible,
-    setguidAnimationVisible,
+    setGuidAnimationVisible,
     setRefMap,
     deleteRefMap,
+    isPersonalReadOnly,
+    showTemplateBadge,
+    aiChatIsVisible,
+    setAiChatIsVisible,
+    withChat,
   } = props;
 
   const location = useLocation();
@@ -209,6 +214,7 @@ const SectionHeaderContent = (props) => {
   });
 
   const isSettingsPage = location.pathname.includes("/settings");
+  const isFlowsPage = location.pathname.includes("/flows");
 
   const onFileChange = React.useCallback(
     async (e) => {
@@ -240,12 +246,12 @@ const SectionHeaderContent = (props) => {
 
     const removeTimer = setTimeout(() => {
       setAnimationClasses([]);
+      setGuidAnimationVisible(false);
     }, 3000);
 
     return () => {
       clearTimeout(beforeTimer);
       clearTimeout(removeTimer);
-      setguidAnimationVisible(false);
     };
   };
 
@@ -258,9 +264,8 @@ const SectionHeaderContent = (props) => {
   };
 
   const onContextOptionsClick = () => {
-    isContactsInsideGroupPage
-      ? setGroupsBufferSelection(currentGroup)
-      : setBufferSelection(selectedFolder);
+    if (isContactsInsideGroupPage) setGroupsBufferSelection(currentGroup);
+    else if (!isContactsPage) setBufferSelection(selectedFolder);
   };
 
   const onSelect = (e) => {
@@ -303,12 +308,12 @@ const SectionHeaderContent = (props) => {
       : setSelected(checked ? "all" : "none");
   };
 
-  const onClickFolder = async (id, isRootRoom) => {
+  const onClickFolder = async (id, isRootRoom, isRootTemplates) => {
     if (isPublicRoom) {
       return moveToPublicRoom(id);
     }
 
-    if (isRootRoom) {
+    if (isRootRoom || isRootTemplates) {
       return moveToRoomsPage();
     }
 
@@ -389,7 +394,7 @@ const SectionHeaderContent = (props) => {
   const stateIsShared = location?.state?.isShared;
   const stateIsExternal = location?.state?.isExternal;
   const stateIsLifetimeEnabled = location?.state?.isLifetimeEnabled;
-  const showTemplateBadge =
+  const stateShowTemplateBadge =
     location?.state?.rootFolderType === FolderType.RoomTemplates &&
     !stateIsRoot;
 
@@ -500,18 +505,21 @@ const SectionHeaderContent = (props) => {
       isIndexEditingMode || isPublicRoom;
   }
 
-  const currentTitle = isSettingsPage
-    ? t("Common:Settings")
-    : isContactsPage
-      ? isContactsInsideGroupPage
-        ? getInsideGroupTitle()
-        : t("Common:Contacts")
-      : isLoading && stateTitle
-        ? stateTitle
-        : title;
+  const currentTitle = isFlowsPage
+    ? t("Common:Flows")
+    : isSettingsPage
+      ? t("Common:Settings")
+      : isContactsPage
+        ? isContactsInsideGroupPage
+          ? getInsideGroupTitle()
+          : t("Common:Contacts")
+        : isLoading && stateTitle
+          ? stateTitle
+          : title;
 
-  const currentCanCreate =
-    isLoading && hasOwnProperty(location?.state, "canCreate")
+  const currentCanCreate = isFlowsPage
+    ? false
+    : isLoading && hasOwnProperty(location?.state, "canCreate")
       ? stateCanCreate
       : security?.Create;
 
@@ -537,6 +545,16 @@ const SectionHeaderContent = (props) => {
       deleteRefMap(GuidanceRefKey.Uploading);
     };
   }, [deleteRefMap]);
+
+  React.useEffect(() => {
+    if (!withChat) setAiChatIsVisible(false);
+  }, [withChat]);
+
+  React.useEffect(() => {
+    return () => {
+      setAiChatIsVisible(false);
+    };
+  }, [setAiChatIsVisible]);
 
   const isCurrentRoom =
     isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
@@ -567,7 +585,26 @@ const SectionHeaderContent = (props) => {
     ? { isCloseable: true, onCloseClick: onCloseIndexMenu }
     : {};
 
-  const badgeLabel = showTemplateBadge ? t("Files:Template") : "";
+  const badgeLabel =
+    stateShowTemplateBadge || showTemplateBadge ? t("Files:Template") : "";
+
+  const warningText = isRecycleBinFolder
+    ? t("TrashErasureWarning")
+    : isPersonalReadOnly
+      ? t("PersonalFolderErasureWarning")
+      : "";
+
+  const isContextButtonVisible = () => {
+    if (isContactsPage && !isContactsInsideGroupPage) {
+      return false;
+    }
+
+    if (isPersonalReadOnly) {
+      return isRootFolder;
+    }
+
+    return (isRecycleBinFolder && !isEmptyFilesList) || !isRootFolder;
+  };
 
   return (
     <Consumer key="header">
@@ -622,8 +659,7 @@ const SectionHeaderContent = (props) => {
                 toggleInfoPanel={onToggleInfoPanel}
                 isInfoPanelVisible={isInfoPanelVisible}
                 titles={{
-                  trash: t("EmptyRecycleBin"),
-                  trashWarning: t("TrashErasureWarning"),
+                  warningText,
                   actions: isRoomsFolder
                     ? t("Common:NewRoom")
                     : t("Common:Actions"),
@@ -663,6 +699,14 @@ const SectionHeaderContent = (props) => {
                 addButtonRef={addButtonRefCallback}
                 contextButtonAnimation={contextButtonAnimation}
                 guidAnimationVisible={guidAnimationVisible}
+                setGuidAnimationVisible={setGuidAnimationVisible}
+                isContextButtonVisible={isContextButtonVisible()}
+                withChat={withChat}
+                chatOpen={aiChatIsVisible}
+                toggleChat={(visible) => {
+                  setAiChatIsVisible(visible);
+                  if (visible) setIsInfoPanelVisible(false);
+                }}
               />
               {showSignInButton ? (
                 <Button
@@ -722,6 +766,7 @@ export default inject(
     indexingStore,
     dialogsStore,
     guidanceStore,
+    flowStore,
   }) => {
     const { startUpload } = uploadDataStore;
 
@@ -759,14 +804,18 @@ export default inject(
       setIsSectionBodyLoading(param);
     };
 
-    const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
-      treeFoldersStore;
+    const {
+      isRecycleBinFolder,
+      isRoomsFolder,
+      isArchiveFolder,
+      isPersonalReadOnly,
+    } = treeFoldersStore;
 
     const {
       setReorderDialogVisible,
       setCloseEditIndexDialogVisible,
       welcomeFormFillingTipsVisible,
-      setguidAnimationVisible,
+      setGuidAnimationVisible,
       guidAnimationVisible,
     } = dialogsStore;
 
@@ -792,6 +841,7 @@ export default inject(
       security,
       rootFolderType,
       shared,
+      isAIRoom,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
@@ -863,6 +913,7 @@ export default inject(
         : pathParts?.length === 1;
 
     const isArchive = rootFolderType === FolderType.Archive;
+    const isTemplate = rootFolderType === FolderType.RoomTemplates;
 
     const isShared = shared || navigationPath.find((r) => r.shared);
 
@@ -874,6 +925,10 @@ export default inject(
     const rootFolderId = navigationPath.length
       ? navigationPath[navigationPath.length - 1]?.id
       : selectedFolder.id;
+
+    const { aiChatIsVisible, setAiChatIsVisible } = flowStore;
+
+    const withChat = isAIRoom;
 
     return {
       showText: settingsStore.showText,
@@ -903,6 +958,7 @@ export default inject(
       getHeaderMenu,
 
       isRecycleBinFolder,
+      isPersonalReadOnly,
       isEmptyFilesList,
       isEmptyArchive,
       isArchiveFolder,
@@ -943,7 +999,7 @@ export default inject(
       theme,
       isFrame,
       showTitle: frameConfig?.showTitle,
-      hideInfoPanel: isFrame && !frameConfig?.infoPanelVisible,
+      hideInfoPanel: isFrame,
       showMenu: frameConfig?.showMenu,
       currentDeviceType,
       insideGroupTempTitle,
@@ -973,9 +1029,13 @@ export default inject(
       setCloseEditIndexDialogVisible,
       welcomeFormFillingTipsVisible,
       guidAnimationVisible,
-      setguidAnimationVisible,
+      setGuidAnimationVisible,
       setRefMap,
       deleteRefMap,
+      showTemplateBadge: isTemplate && !isRoot,
+      aiChatIsVisible,
+      setAiChatIsVisible,
+      withChat,
     };
   },
 )(

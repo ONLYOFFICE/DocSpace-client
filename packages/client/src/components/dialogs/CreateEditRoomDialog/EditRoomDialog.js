@@ -77,10 +77,10 @@ const EditRoomDialog = ({
 
     if (prevParams.inviteItems && inviteItems) {
       prevInviteItems = prevParams.inviteItems.map((x) => {
-        return { id: x.id, access: x.access };
+        return { id: x.id, access: x.templateAccess };
       });
       currentInviteItems = inviteItems.map((x) => {
-        return { id: x.id, access: x.access };
+        return { id: x.id, access: x.templateAccess };
       });
     }
 
@@ -202,11 +202,11 @@ const EditRoomDialog = ({
   };
 
   const onSubmitItems = (users) => {
-    const newUsers = cloneDeep(users);
+    let newUsers = cloneDeep(users);
     const items = inviteItems.map((i) => {
       const userIndex = users.findIndex((u) => u.id === i.id);
       if (userIndex > -1) {
-        newUsers.filter((x) => x.id === i.id);
+        newUsers = newUsers.filter((x) => x.id !== i.id);
         return { ...users[userIndex], access: ShareAccessRights.ReadOnly };
       }
       return i;
@@ -219,7 +219,7 @@ const EditRoomDialog = ({
   const checkIfUserInvited = (user) => {
     return (
       inviteItems.findIndex(
-        (x) => x.id === user.id && x.access !== ShareAccessRights.None,
+        (x) => x.id === user.id && x.templateAccess !== ShareAccessRights.None,
       ) > -1
     );
   };
@@ -228,11 +228,11 @@ const EditRoomDialog = ({
     onCloseAccessSettings();
 
     const invitations = inviteItems
-      .filter((i) => !i.isOwner)
+      .filter((i) => !i.templateIsOwner)
       .map((inviteItem) => {
         return {
           id: inviteItem.id,
-          access: inviteItem.access ?? ShareAccessRights.ReadOnly,
+          access: inviteItem.templateAccess ?? ShareAccessRights.ReadOnly,
         };
       });
 
@@ -265,8 +265,8 @@ const EditRoomDialog = ({
         </ModalDialog.Container>
       ) : null}
 
-      <ModalDialog.Container>
-        {addUsersPanelVisible ? (
+      {addUsersPanelVisible ? (
+        <ModalDialog.Container>
           <TemplateAccessSelector
             roomId={item.id}
             onSubmit={onSubmitItems}
@@ -275,10 +275,11 @@ const EditRoomDialog = ({
             checkIfUserInvited={checkIfUserInvited}
             onCloseClick={onClose}
           />
-        ) : (
+        </ModalDialog.Container>
+      ) : changeRoomOwnerIsVisible ? null : (
+        <ModalDialog.Container>
           <TemplateAccessSettingsPanel
             templateItem={item}
-            usersPanelIsVisible={addUsersPanelVisible}
             setUsersPanelIsVisible={setAddUsersPanelVisible}
             onCloseAccessSettings={onCloseAccessSettings}
             onClosePanels={onClose}
@@ -290,8 +291,8 @@ const EditRoomDialog = ({
             setIsVisible={setAccessSettingsIsVisible}
             onSetAccessSettings={onSetAccessSettings}
           />
-        )}
-      </ModalDialog.Container>
+        </ModalDialog.Container>
+      )}
 
       <ModalDialog.Header>
         {isTemplate

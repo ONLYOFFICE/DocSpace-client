@@ -1,3 +1,5 @@
+import { checkIsSSR } from "../../utils";
+
 function removeSpecialSymbol(text: string): string {
   return text.replace(/[-_[\]{}()*+!?.,&\\^$|#@%]/g, "");
 }
@@ -22,4 +24,12 @@ export const getRoomTitle = (title: string) => {
   const firstAndLastChar = getFirstAndLastChar(trimText);
 
   return toUpperCase(firstAndLastChar);
+};
+
+export const encodeToBase64 = (value: string) => {
+  if (checkIsSSR()) {
+    return Buffer.from(value).toString("base64");
+  }
+
+  return window.btoa(value);
 };

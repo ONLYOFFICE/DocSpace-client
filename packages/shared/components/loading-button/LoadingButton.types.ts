@@ -33,4 +33,5 @@ export interface LoadingButtonProps {
   inConversion?: boolean;
   loaderColor?: React.CSSProperties["color"];
   backgroundColor?: React.CSSProperties["color"];
+  isDefaultMode?: boolean;
 }

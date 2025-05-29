@@ -1,11 +1,17 @@
 {
+  "ChangeContactType": "Mainīt kontakta veidu",
   "ChangeGuestsTypeMessage": "Viesis <strong>{{userName}}</strong> tiks pārvietots uz sadaļu {{membersSection}} un tam tiks piešķirts veids Lietotājs. Lietotājiem ir sava {{documentsSection}} sadaļa, viņi var izveidot un rediģēt failus, bet nevar izveidot telpas.",
   "ChangeGuestsTypeMessageMulti": "Atlasītie viesi tiks pārvietoti uz sadaļu {{membersSection}} un tiem tiks piešķirts tips Lietotājs. Lietotājiem ir sava {{documentsSection}} sadaļa, viņi var izveidot un rediģēt failus, bet nevar izveidot telpas.",
+  "ChangeGuestsTypeToAdmin": "Viesis <strong>{{userName}}</strong> tiks pārvietots uz {{membersSection}} sadaļu un tam tiks piešķirts <strong>'{{ secondType }}'</strong> tips. {{productName}} administratori var piekļūt {{productName}} iestatījumiem, pārvaldīt un arhivēt telpas, uzaicināt jaunus lietotājus un piešķirt lomas zem sava līmeņa. {{productName}} administratoriem ir piekļuve {{documentsSection}} sadaļai.",
+  "ChangeGuestsTypeToAdminMulti": "Atlasītie viesi tiks pārvietoti uz {{membersSection}} sadaļu un tiem tiks piešķirts <strong>'{{ secondType }}'</strong> tips. {{productName}} administratori var piekļūt {{productName}} iestatījumiem, pārvaldīt un arhivēt telpas, uzaicināt jaunus lietotājus un piešķirt lomas zem sava līmeņa. {{productName}} administratoriem ir piekļuve {{documentsSection}} sadaļai.",
+  "ChangeGuestsTypeToManager": "Viesis <strong>{{userName}}</strong> tiks pārvietots uz {{membersSection}} sadaļu un tam tiks piešķirts <strong>'{{ secondType }}'</strong> tips. Telpu administratori var izveidot un pārvaldīt piešķirtās telpas, uzaicināt jaunus lietotājus un piešķirt Telpas administratora un zemākas lomas. Telpas administratoriem ir piekļuve {{documentsSection}} sadaļai.",
+  "ChangeGuestsTypeToManagerMulti": "Atlasītie viesi tiks pārvietoti uz {{membersSection}} sadaļu un tiem tiks piešķirts <strong>'{{ secondType }}'</strong> tips. Telpu administratori var izveidot un pārvaldīt piešķirtās telpas, uzaicināt jaunus lietotājus un piešķirt telpas administratora un zemākas lomas. Telpas administratoriem ir piekļuve {{documentsSection}} sadaļai.",
   "ChangeUserTypeButton": "Mainīt veidu",
-  "ChangeUserTypeHeader": "Mainiet lietotāja veidu",
   "ChangeUserTypeMessage": "Lietotāji ar <strong>'{{ firstType }}'</strong> veidu tiks pārvietoti uz <strong>'{{ secondType }}'</strong> veidu.",
-  "ChangeUserTypeMessageMulti": "Atlasītie lietotāji tiks pārvietoti uz<strong>'{{ secondType }}'</strong> tipu.",
-  "ChangeUserTypeMessageWarning": "Jūs nevarat mainīt veidu {{productName}} administratoriem un sev.",
+  "ChangeUserTypeNote": "<1>Piezīme:</1> jūs nevarat mainīt veidu {{productName}} administratoram un sev.",
+  "DataReassignmentInfo": "Šī lietotāja izveidotās telpas tiks automātiski piešķirtas jums. Lai piešķirtu telpas citai personai, noklikšķiniet uz attiecīgās saites zemāk.",
+  "DataReassignmentWithFilesDeletion": "Visi kopīgotie faili, ko izveidojis šis kontakts, tiks <1>automātiski piešķirti jums pēc 30 dienām</1>. Lai piešķirtu telpas/ kopīgotu failus ar citu personu, noklikšķiniet uz attiecīgās saites zemāk.",
+  "PersonalDataDeletion": "Visi faili un mapes, kas atrodas šī kontakta {{sectionName}} sadaļā, tiks <1>neatgriezeniski dzēsti pēc 30 dienām</1>.",
   "SuccessChangeGuestType": "Viesa veids tika veiksmīgi nomainīts",
   "SuccessChangeUserType": "Lietotāja veids ir veiksmīgi nomainīts"
 }

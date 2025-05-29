@@ -26,9 +26,14 @@
 
 import React from "react";
 import { withTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+
 import { Button } from "@docspace/shared/components/button";
 import { BackupStorageType } from "@docspace/shared/enums";
+
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
+import BackupToPublicRoom from "SRC_DIR/components/dialogs/BackupToPublicRoom";
+
 import { getFromLocalStorage } from "../../../../../utils";
 
 let folder = "";
@@ -83,10 +88,12 @@ class RoomsModule extends React.Component {
   };
 
   render() {
-    const { isMaxProgress, t, buttonSize } = this.props;
+    const { isMaxProgress, t, buttonSize, backupToPublicRoomVisible } =
+      this.props;
     const { isStartCopy, selectedFolder } = this.state;
 
     const isModuleDisabled = !isMaxProgress || isStartCopy;
+
     return (
       <>
         <div className="manual-backup_folder-input">
@@ -100,6 +107,9 @@ class RoomsModule extends React.Component {
             withCreate
           />
         </div>
+        {backupToPublicRoomVisible ? (
+          <BackupToPublicRoom key="backup-to-public-room-panel" />
+        ) : null}
         <div className="manual-backup_buttons">
           <Button
             id="create-copy"
@@ -114,4 +124,11 @@ class RoomsModule extends React.Component {
     );
   }
 }
-export default withTranslation(["Settings", "Common"])(RoomsModule);
+
+export default inject(({ dialogsStore }) => {
+  const { backupToPublicRoomVisible } = dialogsStore;
+
+  return {
+    backupToPublicRoomVisible,
+  };
+})(observer(withTranslation(["Settings", "Common"])(RoomsModule)));

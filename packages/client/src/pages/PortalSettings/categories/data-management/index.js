@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useTheme } from "styled-components";
@@ -58,6 +58,7 @@ const DataManagementWrapper = (props) => {
 
     isNotPaidPeriod,
     currentDeviceType,
+    standalone,
   } = props;
 
   const navigate = useNavigate();
@@ -134,16 +135,33 @@ const DataManagementWrapper = (props) => {
     const { socketSubscribers } = SocketHelper;
 
     if (!socketSubscribers.has("backup")) {
-      SocketHelper.emit(SocketCommands.Subscribe, {
-        roomParts: "backup",
-      });
+      if (!isManagement()) {
+        SocketHelper.emit(SocketCommands.Subscribe, {
+          roomParts: "backup",
+        });
+      }
+
+      if (standalone && isManagement()) {
+        SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
+          roomParts: "backup",
+        });
+      }
     }
 
     return () => {
       SocketHelper.off(SocketEvents.BackupProgress);
-      SocketHelper.emit(SocketCommands.Unsubscribe, {
-        roomParts: "backup",
-      });
+
+      if (!isManagement()) {
+        SocketHelper.emit(SocketCommands.Unsubscribe, {
+          roomParts: "backup",
+        });
+      }
+
+      if (standalone && isManagement()) {
+        SocketHelper?.emit(SocketCommands.UnsubscribeInSpaces, {
+          roomParts: "backup",
+        });
+      }
     };
   }, []);
 
@@ -151,9 +169,12 @@ const DataManagementWrapper = (props) => {
     const url = isManagement()
       ? `/management/settings/backup/${e.id}`
       : `/portal-settings/backup/${e.id}`;
+
     navigate(
       combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url),
     );
+
+    setIsLoaded(false);
   };
 
   if (!isLoaded) return null;
@@ -182,6 +203,7 @@ export const Component = inject(
 
       currentColorScheme,
       currentDeviceType,
+      standalone,
     } = settingsStore;
 
     const buttonSize =
@@ -196,6 +218,7 @@ export const Component = inject(
       isNotPaidPeriod,
       currentColorScheme,
       currentDeviceType,
+      standalone,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));

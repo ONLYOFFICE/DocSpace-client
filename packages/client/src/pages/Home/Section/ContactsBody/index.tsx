@@ -26,8 +26,10 @@
 
 import { useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
+
+import { TfaStore } from "@docspace/shared/store/TfaStore";
 
 import withLoader from "SRC_DIR/HOCs/withLoader";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
@@ -61,6 +63,7 @@ type SectionBodyContentProps = {
   deselectAll?: ContactsHotkeysStore["deselectAll"];
   openItem?: ContactsHotkeysStore["openItem"];
   onClickBack?: FilesActionStore["onClickBack"];
+  getTfaType?: TfaStore["getTfaType"];
 };
 
 const SectionBodyContent = (props: SectionBodyContentProps) => {
@@ -82,6 +85,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     deselectAll,
     openItem,
     onClickBack,
+    getTfaType,
   } = props;
 
   const location = useLocation();
@@ -149,10 +153,11 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
   ]);
 
   useEffect(() => {
+    getTfaType && getTfaType();
     window.addEventListener("mousedown", onMouseDown);
 
     return () => window.removeEventListener("mousedown", onMouseDown);
-  }, [onMouseDown]);
+  }, [onMouseDown, getTfaType]);
 
   return contactsTab !== "groups" ? <Users /> : <Groups />;
 };
@@ -161,9 +166,11 @@ export default inject(
   ({
     peopleStore,
     filesActionsStore,
+    tfaStore,
   }: {
     peopleStore: PeopleStore;
     filesActionsStore: FilesActionStore;
+    tfaStore: TfaStore;
   }) => {
     const {
       usersStore,
@@ -203,6 +210,8 @@ export default inject(
 
     const { onClickBack } = filesActionsStore;
 
+    const { getTfaType } = tfaStore;
+
     return {
       isFiltered,
       setPeopleSelection,
@@ -223,6 +232,8 @@ export default inject(
       deselectAll,
       openItem,
       onClickBack,
+
+      getTfaType,
     };
   },
 )(

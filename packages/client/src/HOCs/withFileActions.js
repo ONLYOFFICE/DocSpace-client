@@ -148,6 +148,7 @@ export default function withFileActions(WrappedFileItem) {
           : false;
       const label = e.currentTarget.getAttribute("label");
       if (mouseButton || e.currentTarget.tagName !== "DIV" || label) {
+        if (item.isPlugin) return this.onFilesClick(e);
         return e;
       }
 
@@ -385,6 +386,7 @@ export default function withFileActions(WrappedFileItem) {
         isRecycleBinFolder,
         isRoomsFolder,
         isArchiveFolder,
+        isTemplatesFolder,
         isRecentTab,
       } = treeFoldersStore;
       const {
@@ -468,6 +470,7 @@ export default function withFileActions(WrappedFileItem) {
         isRecycleBinFolder ||
         isRoomsFolder ||
         isArchiveFolder ||
+        isTemplatesFolder ||
         settingsStore.currentDeviceType !== DeviceType.desktop ||
         inProgress;
 
@@ -495,6 +498,7 @@ export default function withFileActions(WrappedFileItem) {
         isPrivacy: isPrivacyFolder,
         isRoomsFolder,
         isArchiveFolder,
+        isTemplatesFolder,
         dragging,
         setDragging,
         startUpload,

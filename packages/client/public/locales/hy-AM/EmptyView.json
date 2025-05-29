@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Ձեր վերջին դիտված կամ խմբագրված փաստաթղթերը կցուցադրվեն այս բաժնում:",
   "EmptyRootRoomUserDescription": "Կիսված սենյակը կհայտնվի այստեղ:",
   "EmptyRootRoomUserTitle": "Այստեղ դեռ սենյակներ չկան",
+  "EmptyTemplatesDescription": "Դուք կարող եք սենյակից ստեղծել կաղապար «Սենյակներ» բաժնում։",
+  "EmptyTemplatesTitle": "Այստեղ կաղապարներ դեռ չկան",
   "FormFolderDefaultDescription": "Թողեք PDF ձևերը այստեղ կամ վերբեռնեք {{productName}}-ից կամ սարքից:",
   "FormFolderDefaultTitle": "Այստեղ դեռ ձևեր չկան",
   "FormFolderDefaultUserDescription": "Ադմինիստրատորների կողմից վերբեռնված ձևերը կհայտնվեն այստեղ:",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "Ներմուծեք տվյալները ձեր {{productName}} {{organizationName}} Workspace-ից, Google Workspace-ից կամ Nextcloud-ից: ",
   "MigrationDataTitle": "Միգրացիոն տվյալներ",
   "PublicRoomEmptyTitle": "Բարի գալուստ Հանրային սենյակ",
+  "SectionsUploadDescription": "Վերբեռնեք ցանկացած տեսակի ֆայլ {{sectionNameFirst}} կամ {{sectionNameSecond}}-ից",
   "SendInvitationLetter": "Ուղարկեք հրավեր նամակ՝ պորտալում նոր անդամներ ավելացնելու համար",
   "ShareOptionDescription": "Պատճենեք հանրային մուտքի հղումը կամ հրավիրեք այլ օգտվողների սենյակ՝ ձևաթղթերի լրացման գործընթացը սկսելու համար:",
   "ShareOptionTitle": "Կիսվել սենյակով",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "Վերբեռնեք ձեր Սարքից",
   "UploadDevicePDFFormOptionDescription": "Վերբեռնեք պատրաստի PDF ձևը սենյակ ձեր սարքից:",
   "UploadDevicePDFFormOptionTitle": "Վերբեռնել սարքից",
-  "UploadFromPortalDescription": "Վերբեռնել ցանկացած տեսակի ֆայլ փաստաթղթերից կամ սենյակներից",
   "UploadFromPortalTitle": "Վերբեռնում {{productName}}-ից",
   "UploadPDFFormOptionDescription": "Ընտրել պատրաստ PDF ձևը, որը հասանելի է {{productName}}-ում և վերբեռնեք այն սենյակ:",
-  "UserEmptyDescription": "Ադմինիստրատորների կողմից վերբեռնված ֆայլերը և թղթապանակները կհայտնվեն այստեղ:",
   "VirtualDataRoomEmptyTitle": "Բարի գալուստ Վիրտուալ Տվյալների Սենյակ"
 }

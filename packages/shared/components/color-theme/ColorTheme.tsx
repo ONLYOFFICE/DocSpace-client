@@ -35,6 +35,7 @@ import { ThemeId } from "./ColorTheme.enums";
 import IconButtonTheme from "./styled-components/iconButton";
 import IconButtonMuteTheme from "./styled-components/iconButtonMute";
 import IconButtonPinTheme from "./styled-components/iconButtonPin";
+import IconButtonCustomFilterTheme from "./styled-components/iconButtonCustomFilter";
 import IconWrapperTheme from "./styled-components/iconWrapper";
 import IndicatorLoaderTheme from "./styled-components/indicatorLoader";
 import InfoPanelToggleTheme from "./styled-components/infoPanelToggle";
@@ -45,6 +46,7 @@ import ProgressColorTheme from "./styled-components/progress";
 import VersionBadgeTheme from "./styled-components/versionBadge";
 import SubmenuTextTheme from "./styled-components/submenuText";
 import StyledIndexWrapper from "./sub-components/StyledIndexWrapper";
+import TextTheme from "./styled-components/text";
 
 const ColorTheme = forwardRef<
   HTMLDivElement,
@@ -60,7 +62,6 @@ const ColorTheme = forwardRef<
         return (
           <IconButtonTheme
             {...props}
-            themeId={themeId}
             $currentColorScheme={currentColorScheme}
           />
         );
@@ -79,7 +80,6 @@ const ColorTheme = forwardRef<
           >
             <IconButtonTheme
               {...props}
-              themeId={themeId}
               $currentColorScheme={currentColorScheme}
             />
           </StyledIndexWrapper>
@@ -90,7 +90,6 @@ const ColorTheme = forwardRef<
         return (
           <IconButtonMuteTheme
             {...props}
-            themeId={themeId}
             $currentColorScheme={currentColorScheme}
           />
         );
@@ -99,7 +98,15 @@ const ColorTheme = forwardRef<
         return (
           <IconButtonPinTheme
             {...props}
-            themeId={themeId}
+            $currentColorScheme={currentColorScheme}
+          />
+        );
+      }
+
+      case ThemeId.IconButtonCustomFilter: {
+        return (
+          <IconButtonCustomFilterTheme
+            {...props}
             $currentColorScheme={currentColorScheme}
           />
         );
@@ -159,7 +166,6 @@ const ColorTheme = forwardRef<
         return (
           <ProgressColorTheme
             {...props}
-            themeId={ThemeId.Progress}
             $currentColorScheme={currentColorScheme}
             ref={ref}
           />
@@ -185,7 +191,6 @@ const ColorTheme = forwardRef<
           <LinkTheme
             {...props}
             onClick={onClickAction}
-            themeId={ThemeId.Link}
             $currentColorScheme={currentColorScheme}
           />
         );
@@ -199,7 +204,11 @@ const ColorTheme = forwardRef<
           />
         );
       }
-
+      case ThemeId.Text: {
+        return (
+          <TextTheme {...props} $currentColorScheme={currentColorScheme} />
+        );
+      }
       default:
         return null;
     }

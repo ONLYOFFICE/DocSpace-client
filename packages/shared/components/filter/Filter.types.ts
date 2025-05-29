@@ -170,6 +170,7 @@ export type FilterBlockProps = {
   isContactsInsideGroupPage: boolean;
   isContactsGuestsPage: boolean;
 
+  isFlowsPage?: boolean;
   disableThirdParty?: boolean;
 };
 
@@ -235,4 +236,5 @@ export type FilterProps = SearchInputProps &
     sortByTitle: string;
 
     currentDeviceType: DeviceType;
+    initSelectedFilterData?: TItem[];
   };

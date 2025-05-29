@@ -26,11 +26,24 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
+
 import { BackupStorageType } from "@docspace/shared/enums";
+
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
+import BackupToPublicRoom from "SRC_DIR/components/dialogs/BackupToPublicRoom";
+
 import ScheduleComponent from "./ScheduleComponent";
 
 class RoomsModule extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    const { setSelectedFolder, isDocumentsDefault, defaultFolderId } = props;
+
+    isDocumentsDefault
+      ? setSelectedFolder(defaultFolderId)
+      : setSelectedFolder("");
+  }
+
   onSelectFolder = (id) => {
     const { setSelectedFolder } = this.props;
 
@@ -46,6 +59,7 @@ class RoomsModule extends React.PureComponent {
       isSavingProcess,
       isResetProcess,
       isDocumentsDefault,
+      backupToPublicRoomVisible,
       ...rest
     } = this.props;
 
@@ -63,12 +77,15 @@ class RoomsModule extends React.PureComponent {
             withCreate
           />
         </div>
+        {backupToPublicRoomVisible ? (
+          <BackupToPublicRoom key="backup-to-public-room-panel" />
+        ) : null}
         <ScheduleComponent isLoadingData={isLoadingData} {...rest} />
       </>
     );
   }
 }
-export default inject(({ backup }) => {
+export default inject(({ backup, dialogsStore }) => {
   const {
     setSelectedFolder,
     selectedFolderId,
@@ -77,6 +94,8 @@ export default inject(({ backup }) => {
     isSavingProcess,
     isResetProcess,
   } = backup;
+
+  const { backupToPublicRoomVisible } = dialogsStore;
 
   const isDocumentsDefault =
     defaultStorageType === `${BackupStorageType.DocumentModuleType}`;
@@ -91,5 +110,6 @@ export default inject(({ backup }) => {
     isSavingProcess,
     isResetProcess,
     isDocumentsDefault,
+    backupToPublicRoomVisible,
   };
 })(observer(RoomsModule));

@@ -1503,9 +1503,9 @@ export const getBaseTheme = () => {
         heightWithBorder: "30px",
         heightModernView: "28px",
 
-        paddingLeft: "16px",
+        paddingLeft: "8px",
         paddingRightNoArrow: "16px",
-        paddingRight: "8px",
+        paddingRight: "4px",
 
         selectPaddingLeft: "8px",
         selectPaddingRightNoArrow: "14px",
@@ -2479,6 +2479,8 @@ export const getBaseTheme = () => {
         loadingButton: {
           color: lightSecondMain,
           background: white,
+          defaultBackground: gray,
+          hoverColor: lightGrayDark,
         },
       },
       invite: {
@@ -3264,6 +3266,10 @@ export const getBaseTheme = () => {
       circleColor: grayLightMid,
       selectedColor: white,
       circleBorder: `3px solid ${lightSecondMain}`,
+    },
+
+    socialAuthDialog: {
+      accountDetailsBackground: grayLight,
     },
   };
 };

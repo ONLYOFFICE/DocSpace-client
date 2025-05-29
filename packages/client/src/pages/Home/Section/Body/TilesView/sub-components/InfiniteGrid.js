@@ -29,8 +29,8 @@ import React, { useEffect, useState } from "react";
 import uniqueid from "lodash/uniqueId";
 
 import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
+import { getCountTilesInRow } from "@docspace/shared/utils";
 
-import { getCountTilesInRow } from "SRC_DIR/helpers/filesUtils";
 import {
   StyledCard,
   StyledItem,
@@ -51,6 +51,7 @@ const Card = ({ children, countTilesInRow, ...rest }) => {
     const isFile = child?.props?.className?.includes("file");
     const isFolder = child?.props?.className?.includes("folder");
     const isRoom = child?.props?.className?.includes("room");
+    const isTemplate = child?.props?.className?.includes("template");
 
     const horizontalGap = 16;
     const verticalGap = 14;
@@ -61,10 +62,12 @@ const Card = ({ children, countTilesInRow, ...rest }) => {
     const roomHeight = 104 + verticalRoomGap;
     const fileHeight = 220 + horizontalGap;
     const titleHeight = 20 + headerMargin;
+    const templateHeight = 126 + verticalRoomGap;
 
     if (isRoom) return roomHeight;
     if (isFolder) return folderHeight;
     if (isFile) return fileHeight;
+    if (isTemplate) return templateHeight;
     return titleHeight;
   };
 
@@ -79,8 +82,14 @@ const Card = ({ children, countTilesInRow, ...rest }) => {
 
 const Item = ({ children, className, ...rest }) => {
   const isRoom = className === "isRoom";
+  const isTemplate = className === "isTemplate";
   return (
-    <StyledItem className={`Item ${className}`} isRoom={isRoom} {...rest}>
+    <StyledItem
+      className={`Item ${className}`}
+      isRoom={isRoom}
+      isTemplate={isTemplate}
+      {...rest}
+    >
       {children}
     </StyledItem>
   );
@@ -96,6 +105,7 @@ const InfiniteGrid = (props) => {
     className,
     currentFolderId,
     isRooms,
+    isTemplates,
     ...rest
   } = props;
 
@@ -139,8 +149,7 @@ const InfiniteGrid = (props) => {
   };
 
   const setTilesCount = () => {
-    if (isRooms === undefined) return;
-    const newCount = getCountTilesInRow(isRooms);
+    const newCount = getCountTilesInRow(isRooms, isTemplates);
     if (countTilesInRow !== newCount) setCountTilesInRow(newCount);
   };
 

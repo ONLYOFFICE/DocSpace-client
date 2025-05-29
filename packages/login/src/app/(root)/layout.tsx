@@ -32,17 +32,10 @@ import { getBgPattern } from "@docspace/shared/utils/common";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import SimpleNav from "@/components/SimpleNav";
-import { getColorTheme, getPortalCultures, getSettings } from "@/utils/actions";
 import { ContentWrapper, StyledPage } from "@/components/Layout.styled";
-import dynamic from "next/dynamic";
+import LanguageComboboxWrapper from "@/components/LanguageCombobox";
 import { TYPE_LINK_WITHOUT_LNG_COMBOBOX } from "@/utils/constants";
-
-const LanguageComboboxWrapper = dynamic(
-  () => import("@/components/LanguageCombobox"),
-  {
-    ssr: false,
-  },
-);
+import { getColorTheme, getPortalCultures, getSettings } from "@/utils/actions";
 
 export default async function Layout({
   children,
@@ -76,6 +69,8 @@ export default async function Layout({
   if (isComboboxVisible) {
     cultures = await getPortalCultures();
   }
+
+  console.log("render second root layout");
 
   return (
     <div style={{ width: "100%", height: "100%" }}>

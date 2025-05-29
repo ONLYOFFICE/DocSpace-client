@@ -51,7 +51,7 @@ const ScrollList = styled.div<{
 }>`
   position: absolute;
 
-  width: 100%;
+  width: calc(100% - 16px);
   height: ${(props) =>
     props.scrollAllPanelContent && props.isTotalListHeight
       ? "auto"
@@ -65,7 +65,8 @@ const ScrollList = styled.div<{
 `;
 
 const StyledBlock = styled.div`
-  padding: 0px;
+  padding-inline-start: 16px;
+  margin-inline-end: -16px;
   border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
 `;
 
@@ -84,13 +85,13 @@ const StyledInviteUserBody = styled.div`
   }
 `;
 
-const StyledSubHeader = styled(Heading)<{ inline?: boolean }>`
-  font-weight: 700;
-  font-size: 16px;
+const StyledSubHeader = styled(Heading)<{ $inline?: boolean }>`
+  font-weight: 700 !important;
+  font-size: 16px !important;
   margin: 16px 0 8px 0;
 
   ${(props) =>
-    props.inline &&
+    props.$inline &&
     css`
       display: inline-flex;
       align-items: center;
@@ -197,7 +198,7 @@ const StyledInviteInput = styled.div<{ isShowCross?: boolean }>`
   .append {
     display: ${(props) => (props.isShowCross ? "flex" : "none")};
     align-items: center;
-    padding-right: 8px;
+    padding-inline-end: 8px;
     cursor: default;
   }
 
@@ -275,8 +276,8 @@ const StyledDropDown = styled(DropDown)<{
 `;
 
 const SearchItemText = styled(Text)<{
-  primary?: boolean;
-  info?: boolean;
+  $primary?: boolean;
+  $info?: boolean;
   disabled?: boolean;
 }>`
   line-height: ${({ theme }) =>
@@ -285,14 +286,14 @@ const SearchItemText = styled(Text)<{
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: ${(props) =>
-    props.primary ? "14px" : props.info ? "11px" : "12px"};
-  font-weight: ${(props) => (props.primary || props.info ? "600" : "400")};
+    props.$primary ? "14px" : props.$info ? "11px" : "12px"};
+  font-weight: ${(props) => (props.$primary || props.$info ? "600" : "400")};
 
   color: ${(props) =>
-    (props.primary && !props.disabled) || props.info
+    (props.$primary && !props.disabled) || props.$info
       ? props.theme.text.color
       : props.theme.text.emailColor};
-  ${(props) => props.info && `margin-inline-start: auto`}
+  ${(props) => props.$info && `margin-inline-start: auto`}
 `;
 
 const iconStyles = css`
@@ -327,7 +328,7 @@ const StyledToggleButton = styled(ToggleButton)`
 `;
 
 const StyledBody = styled.div<{ isDisabled?: boolean }>`
-  display: contents;
+  padding-inline-start: 16px;
 
   ${({ isDisabled, theme }) =>
     isDisabled
@@ -389,7 +390,6 @@ const StyledTemplateAccessSettingsHeader = styled.div`
 
 const StyledTemplateAccessSettingsBody = styled.div`
   height: calc(100% - 73px);
-  padding: 0 16px;
 `;
 
 const StyledTemplateAccessSettingsFooter = styled.div`
@@ -400,6 +400,7 @@ const StyledTemplateAccessSettingsFooter = styled.div`
   padding: 0px 16px;
   background-color: ${(props) => props.theme.backgroundColor};
   border-top: ${(props) => props.theme.selector.border};
+  z-index: 1;
 
   display: flex;
   align-items: center;

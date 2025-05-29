@@ -35,7 +35,7 @@ import { inject, observer } from "mobx-react";
 import { DeviceType } from "@docspace/shared/enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "@docspace/shared/constants";
 import { setCookie } from "@docspace/shared/utils/cookie";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { isMobileDevice, isBetaLanguage } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Text } from "@docspace/shared/components/text";
@@ -181,13 +181,7 @@ const LanguageAndTimeZoneComponent = (props) => {
       initSettings(page).then(() => setIsLoaded(true));
     }
 
-    const isLoadedSetting =
-      isLoaded &&
-      tReady &&
-      timezoneFromSessionStorage &&
-      languageFromSessionStorage &&
-      state.timezoneDefault &&
-      state.languageDefault;
+    const isLoadedSetting = isLoaded && tReady && timezoneFromSessionStorage;
 
     if (isLoadedSetting) {
       setIsLoadedLngTZSettings(isLoadedSetting);
@@ -279,12 +273,7 @@ const LanguageAndTimeZoneComponent = (props) => {
       state.timezone !== prevState.current.timezone
     ) {
       const isLoadedSetting =
-        isLoaded &&
-        tReady &&
-        state.timezone &&
-        state.language &&
-        timezoneDefault &&
-        languageDefault;
+        isLoaded && tReady && state.timezone && state.language;
 
       if (isLoadedSetting) {
         setIsLoadedLngTZSettings(isLoadedSetting);

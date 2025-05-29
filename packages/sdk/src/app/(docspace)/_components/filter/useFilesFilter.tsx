@@ -7,20 +7,14 @@ import {
   TOnFilter,
 } from "@docspace/shared/components/filter/Filter.types";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { getFilterType } from "@docspace/shared/components/filter/Filter.utils";
 import {
-  getFilterType,
-  getAuthorType,
-  getSearchParams,
-  getFilterContent,
-  getRoomId,
-} from "@docspace/shared/components/filter/Filter.utils";
-import {
-  FilterType,
   FilterGroups,
-  FilterKeys,
+  FilterType,
   SortByFieldName,
 } from "@docspace/shared/enums";
 import { Nullable, TSortBy, type TViewAs } from "@docspace/shared/types";
+import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 
 import ViewRowsReactSvg from "PUBLIC_DIR/images/view-rows.react.svg";
 import ViewTilesReactSvg from "PUBLIC_DIR/images/view-tiles.react.svg";
@@ -30,7 +24,6 @@ import { PAGE_COUNT } from "@/utils/constants";
 type useFilesFiltersProps = {
   filesFilter: string;
   shareKey?: string;
-  canSearchByContent: boolean;
   filesViewAs: TViewAs | null;
   setFilesViewAs: (viewAs: TViewAs) => void;
 };
@@ -38,7 +31,6 @@ type useFilesFiltersProps = {
 export default function useFilesFilter({
   filesFilter,
   shareKey,
-  canSearchByContent,
   filesViewAs,
   setFilesViewAs,
 }: useFilesFiltersProps) {
@@ -48,13 +40,6 @@ export default function useFilesFilter({
   const [filter, setFilter] = React.useState<FilesFilter>(
     FilesFilter.getFilter({ search: `?${filesFilter}` } as Location)!,
   );
-  const [, setSelectedFilterValues] = React.useState<Nullable<TItem[]>>(null);
-
-  const isSSR = React.useRef<boolean>(true);
-
-  React.useEffect(() => {
-    isSSR.current = false;
-  }, []);
 
   React.useEffect(() => {
     setFilter(FilesFilter.getFilter(window.location)!);
@@ -151,18 +136,10 @@ export default function useFilesFilter({
     (data) => {
       const filterType = getFilterType(data) || null;
 
-      const withSubfolders = getSearchParams(data);
-      const withContent = getFilterContent(data);
-
       const newFilter = filter.clone();
       newFilter.page = 0;
 
       newFilter.filterType = filterType;
-
-      newFilter.withSubfolders =
-        withSubfolders === FilterKeys.excludeSubfolders ? false : true;
-
-      newFilter.searchInContent = withContent === "true" ? true : null;
 
       setFilter(newFilter);
 
@@ -214,9 +191,15 @@ export default function useFilesFilter({
       },
       {
         id: "filter_type-forms",
+        key: FilterType.PDFForm.toString(),
+        group: FilterGroups.filterType,
+        label: getManyPDFTitle(t, true),
+      },
+      {
+        id: "filter_type-pdf",
         key: FilterType.Pdf.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Forms").toLowerCase(),
+        label: getManyPDFTitle(t, false),
       },
       {
         id: "filter_type-archive",
@@ -238,57 +221,8 @@ export default function useFilesFilter({
       },
     ];
 
-    const foldersOptions = [
-      {
-        key: FilterGroups.filterFolders,
-        group: FilterGroups.filterFolders,
-        label: t("Common:Search"),
-        isHeader: true,
-        withoutSeparator: true,
-      },
-      {
-        id: "filter_folders",
-        key: "folders",
-        group: FilterGroups.filterFolders,
-        label: "",
-        withOptions: true,
-        options: [
-          {
-            id: "filter_folders_exclude-subfolders",
-            key: FilterKeys.excludeSubfolders,
-            label: t("ExcludeSubfolders"),
-          },
-          {
-            id: "filter_folders_with-subfolders",
-            key: FilterKeys.withSubfolders,
-            label: t("WithSubfolders"),
-          },
-        ],
-      },
-    ];
-
-    const contentOptions: TItem[] = [
-      {
-        key: FilterGroups.filterContent,
-        group: FilterGroups.filterContent,
-        isHeader: true,
-        withoutHeader: true,
-        label: "",
-      },
-    ];
-
-    if (canSearchByContent) {
-      contentOptions.push({
-        id: "filter_search-by-file-contents",
-        key: "true" as FilterGroups,
-        group: FilterGroups.filterContent,
-        label: t("SearchByContent"),
-        isCheckbox: true,
-      });
-    }
-
-    return [...foldersOptions, ...contentOptions, ...typeOptions];
-  }, [t, canSearchByContent]);
+    return [...typeOptions];
+  }, [t]);
 
   const getSelectedFilterData = React.useCallback(() => {
     const filterValues: TItem[] = [];
@@ -322,7 +256,10 @@ export default function useFilesFilter({
           label = t("Common:Files");
           break;
         case FilterType.Pdf.toString():
-          label = t("Common:Forms");
+          label = getManyPDFTitle(t, false);
+          break;
+        case FilterType.PDFForm.toString():
+          label = getManyPDFTitle(t, true);
           break;
         default:
           break;
@@ -335,68 +272,14 @@ export default function useFilesFilter({
       });
     }
 
-    if (filter.withSubfolders) {
-      filterValues.push({
-        key: FilterKeys.withSubfolders,
-        label: t("Common:WithSubfolders"),
-        group: FilterGroups.filterFolders,
-      });
-    }
+    return filterValues;
+  }, [filter.filterType, t]);
 
-    if (filter.searchInContent) {
-      filterValues.push({
-        key: "true",
-        label: t("FileContents"),
-        group: FilterGroups.filterContent,
-      });
-    }
-
-    const currentFilterValues: TItem[] = [];
-
-    setSelectedFilterValues((value: Nullable<TItem[]>) => {
-      if (!value) {
-        currentFilterValues.push(...filterValues);
-
-        return filterValues.map((f) => ({ ...f }));
-      }
-
-      const items = value.map((v) => {
-        const item = filterValues.find((f) => f.group === v.group);
-
-        if (item) {
-          if (item.isMultiSelect) {
-            let isEqual = true;
-
-            if (Array.isArray(item.key))
-              item.key.forEach((k) => {
-                if (Array.isArray(v.key) && !v.key.includes(k)) {
-                  isEqual = false;
-                }
-              });
-
-            if (isEqual) return item;
-
-            return false;
-          }
-          if (item.key === v.key) return item;
-          return false;
-        }
-        return false;
-      });
-
-      const newItems = filterValues.filter(
-        (v) => !items.find((i) => i && i.group === v.group),
-      );
-
-      const filteredItems = items.filter((i) => i) as TItem[];
-
-      currentFilterValues.push(...filteredItems);
-
-      return filteredItems;
-    });
-
-    return isSSR ? filterValues : currentFilterValues;
-  }, [filter.filterType, filter.searchInContent, filter.withSubfolders, t]);
+  const initSelectedFilterData = React.useMemo(
+    () => getSelectedFilterData(),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [], // should be calculated once
+  );
 
   const getViewSettingsData = React.useCallback(() => {
     const viewSettings = [
@@ -434,12 +317,6 @@ export default function useFilesFilter({
         newFilter.authorType = null;
         newFilter.excludeSubject = null;
       }
-      if (group === FilterGroups.filterFolders) {
-        newFilter.withSubfolders = null;
-      }
-      if (group === FilterGroups.filterContent) {
-        newFilter.searchInContent = null;
-      }
       if (group === FilterGroups.filterRoom) {
         newFilter.roomId = null;
       }
@@ -473,5 +350,6 @@ export default function useFilesFilter({
     onChangeViewAs,
     removeSelectedItem,
     clearAll,
+    initSelectedFilterData,
   };
 }

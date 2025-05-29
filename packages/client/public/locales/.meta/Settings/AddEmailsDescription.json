@@ -1,0 +1,305 @@
+{
+  "key_path": "AddEmailsDescription",
+  "content": "Check list of unimported users to import into {{organizationName}} {{productName}}.",
+  "content_en_sha1_hash": "f813ddb0fd692acc396a9c04232098593d622568",
+  "created_at": "2025-05-19T21:30:50.334Z",
+  "updated_at": "2025-05-28T09:30:02.508Z",
+  "comment": {
+    "text": "Check list of unimported users to import into {{organizationName}} {{productName}}. This description appears on a button or dialog in the Add Emails step of a data import process, providing context for users about what to expect during the import operation.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:55.737Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
+      "line_number": 73,
+      "context": "<SelectUsersStep t={t} canDisable={false} shouldSetUsers={false} />\n ),\n },\n {\n title: t(\"Settings:AddEmails\"),\n description: t(\"Settings:AddEmailsDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <AddEmailsStep t={t} />,\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Check list of unimported users\" is not perfectly translated. \"Check list of unimported users\" implies an action to review the list. The Azerbaijani translation, while technically correct, lacks the same sense of action and feels slightly passive. A more active translation would better reflect the intent.",
+          "suggestion": "Yoxlayın, {{organizationName}} {{productName}}-ə idxal etmək üçün idxal olunmamış istifadəçilər siyahısı var."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Check list of unimported users' is not accurately translated. 'Ελέγξτε τη λίστα εισαγωγής των χρηστών' translates more to 'Check the import list of users'. The original English refers to a list *of* users waiting to be imported, not a list *for* importing.",
+          "suggestion": "Ελέγξτε τη λίστα χρηστών που δεν έχουν εισαχθεί."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'to import into' is somewhat awkwardly translated as 'στο {{productName}} του {{organizationName}}'.  While understandable, it's not the most natural phrasing in Greek. It also moves the productName and organizationName from their logical placement at the end.",
+          "suggestion": "στο {{organizationName}} {{productName}}."
+        },
+        {
+          "type": "formatting",
+          "description": "The placement of placeholders is not consistent with the English source. Moving `organizationName` before `productName` feels unnatural in Greek.",
+          "suggestion": "Ελέγξτε τη λίστα χρηστών που δεν έχουν εισαχθεί στο {{organizationName}} {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"tuodaksesi ne\" is not the most natural or accurate translation of \"to import into.\" It implies bringing *them* somewhere, rather than importing *into* a system or platform. A more appropriate translation would focus on the destination of the import.",
+          "suggestion": "Katso tuomattomien käyttäjien lista tuotavaksi {{organizationName}} {{productName}}:een."
+        },
+        {
+          "type": "formatting",
+          "description": "The colon after 'teen' in the Finnish translation feels slightly abrupt. It disrupts the flow of the sentence.",
+          "suggestion": "Katso tuomattomien käyttäjien lista tuotavaksi {{organizationName}} {{productName}} ympäristöön."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Ստուգել չներմուծված օգտատերերի ցանկը՝ ներմուծելու համար {{organizationName}} {{productName}}\" can be improved for clarity and flow. A more natural phrasing would be something like 'Ստուգեք չներմուծված օգտատերերի ցանկը՝ ներմուծելու համար {{organizationName}} {{productName}}'-ում:' or 'Ստուգել չներմուծված օգտատերերի ցանկը, որպեսզի ներմուծեք դրանք {{organizationName}} {{productName}}'-ում։",
+          "suggestion": "Ստուգեք չներմուծված օգտատերերի ցանկը՝ ներմուծելու համար {{organizationName}} {{productName}}'-ում։"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation retains the template variables {{organizationName}} and {{productName}} just like the English content. This is correct and should be maintained.",
+          "suggestion": null
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"가져오기할 가져오기하지 않은\" is redundant and grammatically awkward. It literally translates to 'import-to-not-import'.",
+          "suggestion": "가져오지 않은 (gajyeooji aneun) - meaning 'not imported'."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure is somewhat unnatural in Korean. It lacks a clear verb connecting the subject and object.",
+          "suggestion": "{{organizationName}} {{productName}}으로 가져오지 않은 사용자 목록을 확인하세요. ({{organizationName}} {{productName}}-euro gajyeooji aneun sayongja mokryeogeul hwagin haseyo.) - 'Check the list of users not imported into {{organizationName}} {{productName}}.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Romanian sentence structure could be improved for better flow. 'pentru a le importa' is slightly awkward.",
+          "suggestion": "Verificați lista de utilizatori neimportați pentru importul lor în {{organizationName}} {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation retains the variable placeholders {{organizationName}} and {{productName}} just like the English, which is generally not desirable. These should ideally be replaced with the actual names or removed if unnecessary in the Sinhala context.",
+          "suggestion": "Replace {{organizationName}} and {{productName}} with the appropriate organization and product names in Sinhala, or determine if they are necessary. For example, '{{organizationName}}' could become 'සමාගම'. Consider if the template needs to be more dynamic to handle variable names."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrasing 'පරීක්ෂා කරන්න' is slightly formal. A more natural phrasing might be more suitable depending on the target audience.",
+          "suggestion": "Consider replacing 'පරීක්ෂා කරන්න' with a more colloquial equivalent such as 'බැලුවාට'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'увоз' (uvoz) is a general term for import. A more accurate translation for importing users would be 'увозом корисника' (uvozom korisnika) or 'уносом корисника' (unosom korisnika).",
+          "suggestion": "Проверите листу неувезених корисника за унос/увоз корисника у {{organizationName}} {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'neuvezenih' is not a standard Serbian word. It's likely a combination of 'neuvođenih' (unimported) and 'uvezenih' (imported), but incorrectly combined. It's unclear if 'neuvezenih' was intended to mean 'unimported'.",
+          "suggestion": "Proverite listu neuvođenih korisnika za uvoz u {{organizationName}} {{productName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Turkish translation includes double curly braces '{{' and '}}' which are not needed and might cause rendering issues. These are likely remnants from the English template.",
+          "suggestion": "Remove the unnecessary double curly braces. The translation should be '{{organizationName}}{{productName}}’e aktarılacak içe aktarılmamış kullanıcıların listesini kontrol edin.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Check list of unimported users' is better translated as 'Review the list of unimported users' or 'Examine the list of unimported users'. 'Перевірте' implies a more thorough check, which might be stronger than 'Check'.",
+          "suggestion": "Review the list of unimported users."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

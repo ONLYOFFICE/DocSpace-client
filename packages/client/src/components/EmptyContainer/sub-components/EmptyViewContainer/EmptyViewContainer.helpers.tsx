@@ -48,7 +48,7 @@ import PersonIcon from "PUBLIC_DIR/images/icons/12/person.svg";
 import FolderIcon from "PUBLIC_DIR/images/icons/12/folder.svg";
 import FormBlankIcon from "PUBLIC_DIR/images/form.blank.react.svg?url";
 
-import SharedIcon from "PUBLIC_DIR/images/emptyview/share.svg";
+import SharedIcon from "PUBLIC_DIR/images/emptyview/share-view.svg";
 
 import DocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
@@ -92,11 +92,18 @@ export const getDescription = (
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
   isPublicRoom: boolean,
+  security: Nullable<TFolderSecurity>,
 ): React.ReactNode => {
   const isNotAdmin = isUser(access);
 
   if (isRootEmptyPage)
-    return getRootDescription(t, access, rootFolderType, isPublicRoom);
+    return getRootDescription(
+      t,
+      access,
+      rootFolderType,
+      isPublicRoom,
+      security,
+    );
 
   if (isFolder)
     return getFolderDescription(
@@ -196,7 +203,10 @@ export const getOptions = (
     t("EmptyView:UploadFromPortalTitle", {
       productName: t("Common:ProductName"),
     }),
-    t("EmptyView:UploadFromPortalDescription"),
+    t("EmptyView:SectionsUploadDescription", {
+      sectionNameFirst: t("Common:MyFilesSection"),
+      sectionNameSecond: t("Common:Rooms"),
+    }),
     // TODO: need fix selector
     FilesSelectorFilterTypes.ALL,
   );
@@ -385,7 +395,9 @@ export const getOptions = (
         {
           ...actions.onGoToPersonal(),
           icon: <PersonIcon />,
-          description: t("Files:GoToPersonal"),
+          description: t("Files:GoToSection", {
+            sectionName: t("Common:MyFilesSection"),
+          }),
           key: "empty-view-goto-personal",
         },
       ])
@@ -401,7 +413,9 @@ export const getOptions = (
         {
           ...actions.onGoToPersonal(),
           icon: <PersonIcon />,
-          description: t("Files:GoToPersonal"),
+          description: t("Files:GoToSection", {
+            sectionName: t("Common:MyFilesSection"),
+          }),
           key: "empty-view-trash-goto-personal",
         },
       ])
@@ -485,6 +499,7 @@ export const getOptions = (
       ];
 
     case RoomsType.CustomRoom:
+    case RoomsType.AIRoom:
       if (isNotAdmin) return [];
 
       if (isCollaborator)

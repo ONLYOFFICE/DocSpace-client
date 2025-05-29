@@ -234,11 +234,9 @@ class CreateEditRoomStore {
 
   onSaveEditRoom = async (t, newParams, room) => {
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
-    const { cover } = this.dialogsStore;
+    const { cover, clearCoverProps } = this.dialogsStore;
     const { uploadedFile, getUploadedLogoData } = this.avatarEditorDialogStore;
     const { changeRoomOwner, updateCurrentFolder } = this.filesActionsStore;
-
-    const { id: currentFolderId } = this.selectedFolderStore;
 
     const {
       quota,
@@ -315,6 +313,7 @@ class CreateEditRoomStore {
     }
 
     const requests = [];
+    clearCoverProps();
 
     try {
       try {
@@ -342,8 +341,7 @@ class CreateEditRoomStore {
         requests.push(api.rooms.removeLogoFromRoom(room.id));
       }
 
-      if (isIndexingChanged)
-        requests.push(updateCurrentFolder(null, currentFolderId));
+      if (isIndexingChanged) requests.push(updateCurrentFolder());
 
       if (room.isTemplate && invitations?.length) {
         requests.push(
@@ -369,9 +367,27 @@ class CreateEditRoomStore {
 
   onSaveAsTemplate = async (item, roomParams, openCreatedTemplate) => {
     this.filesStore.setRoomCreated(true);
+    const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
+    const { cover, clearCoverProps } = this.dialogsStore;
 
-    const { title, icon, tags, invitations, roomType, isAvailable } =
-      roomParams;
+    const {
+      title,
+      icon,
+      tags,
+      invitations,
+      roomType,
+      isAvailable,
+      quota,
+      logo,
+    } = roomParams;
+
+    const logoCover = cover
+      ? { cover: cover.cover, color: cover.color }
+      : logo
+        ? { cover: logo.cover?.id, color: logo.color }
+        : null;
+
+    const quotaLimit = isDefaultRoomsQuotaSet ? quota : null;
 
     const tagsToAddList = tags.map((tag) => tag.name);
     const isDeleteLogo = !!item.logo.original && !icon.uploadedFile;
@@ -382,6 +398,10 @@ class CreateEditRoomStore {
       tags: tagsToAddList,
       public: isAvailable,
       copylogo: true,
+      ...(quotaLimit && {
+        quota: +quotaLimit,
+      }),
+      ...logoCover,
     };
 
     if (isDeleteLogo) {
@@ -392,6 +412,7 @@ class CreateEditRoomStore {
     if (!isDeleteLogo && typeof icon.uploadedFile !== "string") {
       const roomLogo = await this.getRoomLogo(icon);
       roomData.logo = roomLogo;
+      roomData.copylogo = false;
     }
 
     let isCompleted = false;
@@ -433,6 +454,7 @@ class CreateEditRoomStore {
       });
     }
 
+    clearCoverProps();
     return Promise.resolve(progressData);
   };
 
@@ -463,7 +485,7 @@ class CreateEditRoomStore {
     const { deleteThirdParty } = this.thirdPartyStore;
     const { createRoom, selection, bufferSelection } = this.filesStore;
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
-    const { cover } = this.dialogsStore;
+    const { cover, clearCoverProps } = this.dialogsStore;
 
     const {
       denyDownload,
@@ -491,6 +513,12 @@ class CreateEditRoomStore {
 
     const tagsToAddList = tags.map((tag) => tag.name);
 
+    const logoCover = cover
+      ? { cover: cover.cover, color: cover.color }
+      : logo
+        ? { cover: logo.cover?.id, color: logo.color }
+        : null;
+
     const createRoomData = {
       roomId,
       roomType: type,
@@ -501,19 +529,12 @@ class CreateEditRoomStore {
       ...(quotaLimit && {
         quota: +quotaLimit,
       }),
-      ...(cover && {
-        cover: cover.cover,
-        color: cover.color,
-      }),
-      ...(denyDownload && {
-        denyDownload,
-      }),
-      ...(indexing && {
-        indexing,
-      }),
-      ...(lifetime && {
-        lifetime,
-      }),
+      ...logoCover,
+
+      denyDownload,
+      indexing,
+      lifetime,
+
       ...(tagsToAddList.length && {
         tags: tagsToAddList,
       }),
@@ -526,10 +547,10 @@ class CreateEditRoomStore {
     this.setIsLoading(true);
 
     const isDeleteLogo = isTemplate
-      ? !!logo.original && !icon.uploadedFile
+      ? !!logo?.original && !icon.uploadedFile
       : false;
 
-    const copyLogo =
+    let copyLogo =
       !isDeleteLogo &&
       icon.uploadedFile &&
       typeof icon.uploadedFile === "string";
@@ -538,6 +559,7 @@ class CreateEditRoomStore {
       if (icon.uploadedFile && typeof icon.uploadedFile !== "string") {
         const roomLogo = await this.getRoomLogo(icon);
         createRoomData.logo = roomLogo;
+        copyLogo = false;
       }
 
       withConfirm && this.setConfirmDialogIsLoading(true);
@@ -557,6 +579,10 @@ class CreateEditRoomStore {
         room = await createRoom(createRoomData);
       }
 
+      if (room.errorMsg) {
+        return toastr.error(room.errorMsg);
+      }
+
       this.dialogsStore.setIsNewRoomByCurrentUser(true);
 
       // delete thirdparty account if not needed
@@ -573,18 +599,19 @@ class CreateEditRoomStore {
               ? [bufferSelection]
               : [];
 
-        preparingDataForCopyingToRoom(room, selections).catch((error) =>
-          console.error(error),
+        preparingDataForCopyingToRoom(room.id, selections, room).catch(
+          (error) => console.error(error),
         );
       }
+
+      if (successToast) toastr.success(successToast);
     } catch (err) {
       toastr.error(err);
     } finally {
-      if (successToast) toastr.success(successToast);
-
       this.setIsLoading(false);
       this.setConfirmDialogIsLoading(false);
       this.onClose();
+      clearCoverProps();
 
       processCreatingRoomFromData && setProcessCreatingRoomFromData(false);
     }
@@ -607,23 +634,16 @@ class CreateEditRoomStore {
   onCreateTemplateRoom = async (roomParams) => {
     this.filesStore.setRoomCreated(true);
 
-    const { roomId, tags, title, logo, roomType, copyLogo, color, cover } =
-      roomParams;
+    const { roomId, ...rest } = roomParams;
 
     let isFinished = false;
+    let errorMsg = false;
     let progressData;
 
-    const data = {
+    const room = await api.rooms.createRoomFromTemplate({
       templateId: roomId,
-      title,
-      logo,
-      tags,
-      CopyLogo: copyLogo,
-      color,
-      cover,
-    };
-
-    const room = await api.rooms.createRoomFromTemplate(data);
+      ...rest,
+    });
 
     progressData = room;
 
@@ -633,13 +653,15 @@ class CreateEditRoomStore {
       );
 
       isFinished = progressData.isCompleted;
+      errorMsg = progressData.error;
     }
 
     return {
       id: progressData.roomId,
-      title,
-      roomType,
+      title: roomParams.title,
+      roomType: roomParams.roomType,
       rootFolderType: FolderType.Rooms,
+      errorMsg,
     };
   };
 

@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "In questa sezione vengono visualizzati gli ultimi documenti visualizzati o modificati.",
   "EmptyRootRoomUserDescription": "La stanza condivisa apparirà qui.",
   "EmptyRootRoomUserTitle": "Qui ancora non ci sono stanze",
+  "EmptyTemplatesDescription": "Puoi creare un modello da una stanza nella sezione Stanza.",
+  "EmptyTemplatesTitle": "Nessun modello presente",
   "FormFolderDefaultDescription": "Trascina qui i moduli PDF o caricali da {{productName}} o dal dispositivo.",
   "FormFolderDefaultTitle": "Nessun modulo qui ancora",
   "FormFolderDefaultUserDescription": "I moduli caricati dagli amministratori verranno visualizzati qui.",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "Importa i dati nel tuo {{productName}} da {{organizationName}} Workspace, Google Workspace o Nextcloud.",
   "MigrationDataTitle": "Dati di migrazione",
   "PublicRoomEmptyTitle": "Benvenuto nella stanza pubblica",
+  "SectionsUploadDescription": "Carica qualsiasi tipo di file da {{sectionNameFirst}} o {{sectionNameSecond}}",
   "SendInvitationLetter": "Invia di una lettera di invito per aggiungere nuovi membri al portale",
   "ShareOptionDescription": "Copia un link di accesso pubblico o invita altri utenti nella stanza per avviare il processo di compilazione del modulo.",
   "ShareOptionTitle": "Condividi una stanza",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "Carica dal tuo dispositivo",
   "UploadDevicePDFFormOptionDescription": "Carica un modulo PDF pronto nella stanza dal tuo dispositivo.",
   "UploadDevicePDFFormOptionTitle": "Carica dal dispositivo",
-  "UploadFromPortalDescription": "Carica file di qualsiasi tipo da Documenti o Stanze",
   "UploadFromPortalTitle": "Carica da {{productName}}",
   "UploadPDFFormOptionDescription": "Seleziona un modulo PDF pronto disponibile in {{productName}} e caricalo nella stanza.",
-  "UserEmptyDescription": "I file e le cartelle caricati dagli amministratori verranno visualizzati qui.",
   "VirtualDataRoomEmptyTitle": "Benvenuto nella Virtual Data Room"
 }

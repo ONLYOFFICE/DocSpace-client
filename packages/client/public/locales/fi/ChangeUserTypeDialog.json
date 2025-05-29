@@ -1,11 +1,17 @@
 {
+  "ChangeContactType": "Muuta yhteystyyppiä",
   "ChangeGuestsTypeMessage": "Vieras <strong>{{userName}}</strong> siirretään {{membersSection}}-osioon ja hänelle osoitetaan käyttäjätyyppi. Käyttäjillä on oma {{documentsSection}}-osio, he voivat luoda ja muokata tiedostoja, mutta eivät voi luoda huoneita.",
   "ChangeGuestsTypeMessageMulti": "Valitut vieraat siirretään {{membersSection}}-osioon ja heille osoitetaan käyttäjätyyppi. Käyttäjillä on oma {{documentsSection}}-osionsa, he voivat luoda ja muokata tiedostoja, mutta eivät voi luoda huoneita. ",
+  "ChangeGuestsTypeToAdmin": "Vieras <strong>{{userName}}</strong> siirretään {{membersSection}} osioon ja määrätään <strong>'{{ secondType }}'</strong> tyyppiin. {{productName}} pääkäyttäjät pääsevät {{productName}} asetuksiin, hallitsemaan ja arkistoimaan huoneita, kutsumaan uusia käyttäjiä ja määräämään rooleja alapuolellaan. {{productName}} pääkäyttäjillä on pääsy {{documentsSection}} osioon.",
+  "ChangeGuestsTypeToAdminMulti": "Valitut vieraat siirretään {{membersSection}} osioon ja heille määrätään <strong>'{{ secondType }}'</strong> tyyppi. {{productName}}:n pääkäyttäjillä on pääsy {{productName}}:n asetuksiin, he voivat hallita ja arkistoida huoneita, kutsua uusia käyttäjiä ja määrätä rooleja alapuolellaan. {{productName}} :n pääkäyttäjillä on oikeudet {{documentsSection}} -osioon.",
+  "ChangeGuestsTypeToManager": "Vieras <strong>{{userName}}</strong> siirretään {{membersSection}} osioon ja hänelle määrätään <strong>'{{ secondType }}'</strong> tyyppi. Huoneen pääkäyttäjät voivat luoda ja hallita heille määrättyjä huoneita, kutsua uusia käyttäjiä ja määrätä huoneen pääkäyttäjän ja sen alla olevia rooleja. Huoneen pääkäyttäjillä on pääsy {{documentsSection}} -osioon.",
+  "ChangeGuestsTypeToManagerMulti": "Valitut vieraat siirretään {{membersSection}}-osioon ja heille määrätään <strong>'{{ secondType }}'</strong> tyyppi. Huoneen pääkäyttäjät voivat luoda ja hallita heille määrättyjä huoneita, kutsua uusia käyttäjiä ja määrätä huoneen pääkäyttäjän ja sen alla olevia rooleja. Huoneen pääkäyttäjillä on pääsy {{documentsSection}} -osioon.",
   "ChangeUserTypeButton": "Vaihda tyyppiä",
-  "ChangeUserTypeHeader": "Muuta käyttäjän tyyppiä",
-  "ChangeUserTypeMessage": "Käyttäjät, joiden tyyppi on <strong>’{{firstType}}’</strong>, siirretään tyypiksi <strong>’{{secondType}}’</strong>.",
-  "ChangeUserTypeMessageMulti": "Valitut käyttäjät siirretään <strong>'{{secondType}}'</strong>.",
-  "ChangeUserTypeMessageWarning": "Et voi muuttaa {{productName}}-järjestelmänvalvojien tai omaa tilaasi.",
+  "ChangeUserTypeMessage": "Käyttäjät, joiden tyyppi on <strong>’{{ firstType }}’</strong>, siirretään tyypiksi <strong>’{{ secondType }}’</strong>.",
+  "ChangeUserTypeNote": "<1>Huom:</1> et voi muuttaa {{productName}} :n pääkäyttäjän ja omaa tyyppiäsi.",
+  "DataReassignmentInfo": "Tämän käyttäjän luomat huoneet määrätään automaattisesti sinulle. Määrätäksesi huoneet uudelleen, klikkaa alla olevaa linkkiä.",
+  "DataReassignmentWithFilesDeletion": "Kaikki tämän yhteyden luomat jaetut tiedostot <1>määrätään automaattisesti sinulle 30 päivän kuluessa</1>. Määrätäksesi huoneet/jaetut tiedostot toiselle henkilölle, klikkaa alla olevaa linkkiä. ",
+  "PersonalDataDeletion": "Kaikki tämän yhteyden tiedostot ja kansiot {{sectionName}} -osiossa <1>poistetaan lopullisesti 30 päivän kuluessa</1>.",
   "SuccessChangeGuestType": "Vierastyyppi on onnistuneesti muutettu",
   "SuccessChangeUserType": "Käyttäjän tila muutettu onnistuneesti"
 }

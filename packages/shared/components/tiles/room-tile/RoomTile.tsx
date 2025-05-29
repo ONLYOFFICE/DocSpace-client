@@ -28,17 +28,12 @@ import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Tags } from "@docspace/shared/components/tags";
 import classNames from "classnames";
-import { TagType } from "components/tags/Tags.types";
+import { TagType } from "@docspace/shared/components/tags/Tags.types";
 import { RoomTileProps, RoomItem } from "./RoomTile.types";
 import { BaseTile } from "../base-tile/BaseTile";
 import { TileItem } from "../tile-container/TileContainer.types";
 
 import styles from "./RoomTile.module.scss";
-
-const assertTileItem = (roomItem: RoomItem): TileItem => {
-  const { title, roomType, ...tileItem } = roomItem;
-  return tileItem;
-};
 
 export const RoomTile = ({
   item,
@@ -166,7 +161,7 @@ export const RoomTile = ({
       checked={checked}
       isActive={isActive}
       isEdit={isEdit}
-      item={assertTileItem(item)}
+      item={item}
       onSelect={onSelectTileItem}
       isHovered={isHovered}
       onHover={onHover}

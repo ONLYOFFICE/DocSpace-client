@@ -45,6 +45,7 @@ import { DropDown } from "@docspace/shared/components/drop-down";
 import { Text } from "@docspace/shared/components/text";
 
 import { injectDefaultTheme } from "@docspace/shared/utils";
+import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 
 const UserInputContainer = styled.div`
   position: relative;
@@ -129,6 +130,11 @@ export const FilterBlock = ({ t, config, setConfig }) => {
       label: t("Common:CustomRoomTitle"),
       roomType: RoomsType.CustomRoom,
     },
+    {
+      key: "room-type-ai",
+      label: t("Common:AIRoomTitle"),
+      roomType: RoomsType.AIRoom,
+    },
   ];
 
   const filterOptions = [
@@ -174,7 +180,12 @@ export const FilterBlock = ({ t, config, setConfig }) => {
     },
     {
       key: "filter-type-forms",
-      label: t("Files:Forms"),
+      label: getManyPDFTitle(t, true),
+      typeKey: FilterType.PDFForm,
+    },
+    {
+      key: "filter-type-pdf",
+      label: getManyPDFTitle(t, false),
       typeKey: FilterType.Pdf,
     },
   ];

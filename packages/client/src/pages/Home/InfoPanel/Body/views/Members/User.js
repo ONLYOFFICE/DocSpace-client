@@ -46,7 +46,7 @@ import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link } from "@docspace/shared/components/link";
 import api from "@docspace/shared/api";
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, RoomSecurityError } from "@docspace/shared/enums";
 import { StyledUserTypeHeader, StyledUser } from "../../styles/members";
 
 const User = ({
@@ -64,6 +64,7 @@ const User = ({
   searchValue,
   setEditMembersGroup,
   setEditGroupMembersDialogVisible,
+  setRemoveUserConfirmation,
 }) => {
   const theme = useTheme();
 
@@ -101,15 +102,22 @@ const User = ({
       .catch((err) => toastr.error(err));
   };
 
-  const updateRole = (option) => {
+  const updateRole = (option, force) => {
     return api.rooms
       .updateRoomMemberRole(infoPanelSelection.id, {
         invitations: [{ id: user.id, access: option.access }],
         notify: false,
         sharingMessage: "",
+        force,
       })
-      .then(async () => {
+      .then(async (item) => {
         setIsLoading(false);
+
+        if (item?.error === RoomSecurityError.FormRoleBlockingDeletion) {
+          return setRemoveUserConfirmation(true, () => {
+            return updateRole(option, true);
+          });
+        }
 
         if (option.key === "remove") {
           const newMembersFilter = JSON.parse(JSON.stringify(membersFilter));
@@ -178,7 +186,7 @@ const User = ({
               users: [...newUsers, ...fetchedMembers.users],
               expected: [...newExpected, ...fetchedMembers.expected],
               groups: [...newGroups, ...fetchedMembers.groups],
-              guests: [...newMembersFilter.guests],
+              guests: [...newGuests, ...fetchedMembers.guests],
             };
 
             setInfoPanelMembers({
@@ -367,8 +375,11 @@ export default inject(
 
     const { changeType: changeUserType } = peopleStore.usersStore;
 
-    const { setEditMembersGroup, setEditGroupMembersDialogVisible } =
-      dialogsStore;
+    const {
+      setEditMembersGroup,
+      setEditGroupMembersDialogVisible,
+      setRemoveUserConfirmation,
+    } = dialogsStore;
 
     return {
       infoPanelSelection,
@@ -382,6 +393,7 @@ export default inject(
       searchValue,
       setEditMembersGroup,
       setEditGroupMembersDialogVisible,
+      setRemoveUserConfirmation,
     };
   },
 )(observer(User));

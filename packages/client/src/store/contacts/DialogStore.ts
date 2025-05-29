@@ -47,8 +47,6 @@ class DialogStore {
 
   dataReassignmentDeleteProfile = false;
 
-  isDeletingUserWithReassignment = false;
-
   changeEmailVisible = false;
 
   deleteGroupDialogVisible = false;
@@ -67,12 +65,6 @@ class DialogStore {
     dataReassignmentDeleteProfile: boolean,
   ) => {
     this.dataReassignmentDeleteProfile = dataReassignmentDeleteProfile;
-  };
-
-  setIsDeletingUserWithReassignment = (
-    isDeletingUserWithReassignment: boolean,
-  ) => {
-    this.isDeletingUserWithReassignment = isDeletingUserWithReassignment;
   };
 
   setChangeOwnerDialogVisible = (visible: boolean) => {

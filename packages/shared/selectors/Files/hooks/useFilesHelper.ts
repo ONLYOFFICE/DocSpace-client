@@ -32,12 +32,7 @@ import FolderSvgUrl from "PUBLIC_DIR/images/icons/32/folder.svg?url";
 
 import { getFolder, getFolderInfo } from "../../../api/files";
 import FilesFilter from "../../../api/files/filter";
-import {
-  ApplyFilterOption,
-  FilesSelectorFilterTypes,
-  FilterType,
-  FolderType,
-} from "../../../enums";
+import { FolderType } from "../../../enums";
 import { toastr } from "../../../components/toast";
 import { TSelectorItem } from "../../../components/selector";
 import { TData } from "../../../components/toast/Toast.type";
@@ -49,6 +44,7 @@ import { LoadersContext } from "../contexts/Loaders";
 import { PAGE_COUNT } from "../FilesSelector.constants";
 import { UseFilesHelpersProps } from "../FilesSelector.types";
 import {
+  configureFilterByFilterParam,
   convertFilesToItems,
   convertFoldersToItems,
   getDefaultBreadCrumb,
@@ -65,6 +61,7 @@ const useFilesHelper = ({
   setIsRoot,
   searchValue,
   disabledItems,
+  includedItems,
   setSelectedItemSecurity,
   isThirdParty,
   setSelectedTreeNode,
@@ -86,6 +83,8 @@ const useFilesHelper = ({
   setSelectedItemId,
   setSelectedItemType,
   shareKey,
+
+  applyFilterOption,
 }: UseFilesHelpersProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -147,77 +146,12 @@ const useFilesHelper = ({
       filter.applyFilterOption = null;
       filter.withSubfolders = false;
       if (filterParam) {
-        filter.applyFilterOption = ApplyFilterOption.Files;
-        switch (filterParam) {
-          case FilesSelectorFilterTypes.DOCX:
-            filter.extension = FilesSelectorFilterTypes.DOCX;
-            break;
-
-          case FilesSelectorFilterTypes.IMG:
-            filter.filterType = FilterType.ImagesOnly;
-            break;
-
-          case FilesSelectorFilterTypes.BackupOnly:
-            filter.extension = "gz,tar";
-            break;
-
-          case FilesSelectorFilterTypes.XLSX:
-            filter.filterType = FilterType.SpreadsheetsOnly;
-            break;
-
-          case FilesSelectorFilterTypes.PDF:
-            filter.filterType = FilterType.Pdf;
-            break;
-
-          case FilterType.DocumentsOnly:
-            filter.filterType = FilterType.DocumentsOnly;
-            break;
-
-          case FilterType.PDFForm:
-            filter.filterType = FilterType.PDFForm;
-            break;
-
-          case FilterType.PresentationsOnly:
-            filter.filterType = FilterType.PresentationsOnly;
-            break;
-
-          case FilterType.SpreadsheetsOnly:
-            filter.filterType = FilterType.SpreadsheetsOnly;
-            break;
-
-          case FilterType.ImagesOnly:
-            filter.filterType = FilterType.ImagesOnly;
-            break;
-
-          case FilterType.MediaOnly:
-            filter.filterType = FilterType.MediaOnly;
-            break;
-
-          case FilterType.ArchiveOnly:
-            filter.filterType = FilterType.ArchiveOnly;
-            break;
-
-          case FilterType.FoldersOnly:
-            filter.filterType = FilterType.FoldersOnly;
-            break;
-
-          case FilterType.FilesOnly:
-            filter.filterType = FilterType.FilesOnly;
-            break;
-
-          case FilesSelectorFilterTypes.ALL:
-            filter.applyFilterOption = ApplyFilterOption.All;
-            filter.filterType = FilterType.None;
-            break;
-
-          case "EditorSupportedTypes":
-            filter.extension = extsWebEdited
-              .map((extension) => extension.slice(1))
-              .join(",");
-            break;
-
-          default:
-        }
+        configureFilterByFilterParam(
+          filter,
+          filterParam,
+          extsWebEdited,
+          applyFilterOption,
+        );
       }
 
       const id = selectedItemId ?? (isUserOnly ? "@my" : "");
@@ -278,6 +212,7 @@ const useFilesHelper = ({
           files,
           getIcon,
           filterParam,
+          includedItems,
         );
 
         const itemList = [...foldersList, ...filesList];
@@ -453,6 +388,8 @@ const useFilesHelper = ({
       setSelectedItemId,
       rootThirdPartyId,
       shareKey,
+      applyFilterOption,
+      includedItems,
     ],
   );
 

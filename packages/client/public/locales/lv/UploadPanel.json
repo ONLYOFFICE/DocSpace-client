@@ -1,6 +1,7 @@
 {
   "CancelUpload": "Augšupielāde ir pārtraukta. Daži faili nav augšupielādēti.",
-  "EnterPassword": "Ievadiet paroli",
   "HideInput": "Paslēpt",
-  "Ready": "Gatavs"
+  "Ready": "Gatavs",
+  "UploadingAndConversion": "Augšupielāde un konvertēšana",
+  "UploadingError": "Kļūda augšupielādē"
 }

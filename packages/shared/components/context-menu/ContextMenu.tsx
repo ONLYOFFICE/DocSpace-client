@@ -423,6 +423,51 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
       };
     }, [documentResizeListener, onHide, visible]);
 
+    const createSyntheticMouseEvent = (
+      e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+    ): MouseEvent => {
+      const eventX = "clientX" in e ? e.clientX : 0;
+      const eventY = "clientY" in e ? e.clientY : 0;
+      const eventPageX = "pageX" in e ? e.pageX : 0;
+      const eventPageY = "pageY" in e ? e.pageY : 0;
+
+      return {
+        clientX: eventX,
+        clientY: eventY,
+        pageX: eventPageX,
+        pageY: eventPageY,
+        preventDefault: () => {},
+        stopPropagation: () => {},
+      } as unknown as MouseEvent;
+    };
+
+    const calculateSubMenuWidth = (items: ContextMenuModel[]): number => {
+      const MIN_SUBMENU_WIDTH = 180;
+      const MAX_SUBMENU_WIDTH = 400;
+      const CHAR_WIDTH = 8;
+      const PADDING_AND_ICONS = 60;
+
+      let maxLength = 0;
+      if (items && items.length > 0) {
+        items.forEach((item) => {
+          if (
+            !("isSeparator" in item && item.isSeparator) &&
+            "label" in item &&
+            item.label
+          ) {
+            const labelLength =
+              typeof item.label === "string" ? item.label.length : 10;
+            maxLength = Math.max(maxLength, labelLength);
+          }
+        });
+      }
+
+      return Math.min(
+        Math.max(maxLength * CHAR_WIDTH + PADDING_AND_ICONS, MIN_SUBMENU_WIDTH),
+        MAX_SUBMENU_WIDTH,
+      );
+    };
+
     const onMobileItemClick = async (
       e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
       label: string,
@@ -437,6 +482,24 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
       setMobileSubMenuItems(res);
 
       setMobileHeader(label);
+
+      if (res && menuRef.current) {
+        const height =
+          menuRef.current && menuRef.current.offsetParent
+            ? menuRef.current.offsetHeight
+            : DomHelpers.getHiddenElementOuterHeight(menuRef.current);
+
+        const mobileView =
+          isMobileUtils() && (height > 210 || ignoreChangeView);
+
+        const syntheticEvent = createSyntheticMouseEvent(e);
+
+        if (!mobileView) {
+          const estimatedWidth = calculateSubMenuWidth(res);
+          menuRef.current.style.width = `${estimatedWidth}px`;
+          position(syntheticEvent);
+        }
+      }
     };
 
     const onBackClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -613,8 +676,8 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
 
     const root =
       typeof window !== "undefined" && document.getElementById("root");
-    if (root && isMobileUtil) {
-      const portal = <Portal element={contextMenu} appendTo={root} />;
+    if (isMobileUtil) {
+      const portal = <Portal element={contextMenu} appendTo={root || null} />;
 
       return portal;
     }

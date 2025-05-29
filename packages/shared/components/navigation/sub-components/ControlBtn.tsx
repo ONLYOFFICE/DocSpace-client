@@ -36,7 +36,8 @@ import { TControlButtonProps } from "../Navigation.types";
 import ToggleInfoPanelButton from "./ToggleInfoPanelBtn";
 import PlusButton from "./PlusBtn";
 import ContextButton from "./ContextBtn";
-import TrashWarning from "./TrashWarning";
+import WarningComponent from "./WarningComponent";
+import ChatBtn from "./ChatBtn";
 
 const ControlButtons = ({
   isRootFolder,
@@ -66,9 +67,7 @@ const ControlButtons = ({
 
   // Visibility controls
   isDesktop,
-  isEmptyFilesList,
   showTitle,
-  isEmptyPage,
 
   // Tariff bar
   tariffBar,
@@ -79,6 +78,13 @@ const ControlButtons = ({
   buttonRef,
   contextButtonAnimation,
   guidAnimationVisible,
+  setGuidAnimationVisible,
+  isContextButtonVisible,
+
+  // Chat props
+  withChat,
+  chatOpen,
+  toggleChat,
 }: TControlButtonProps) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel?.();
@@ -113,7 +119,7 @@ const ControlButtons = ({
   };
 
   const renderPlusButton = () => {
-    if (isMobile || !canCreate) return null;
+    if ((isMobile && !isFrame) || !canCreate) return null;
 
     return (
       <PlusButton
@@ -146,6 +152,7 @@ const ControlButtons = ({
         onContextOptionsClick={onContextOptionsClick}
         contextButtonAnimation={contextButtonAnimation}
         guidAnimationVisible={guidAnimationVisible}
+        setGuidAnimationVisible={setGuidAnimationVisible}
       />
     );
   };
@@ -163,25 +170,30 @@ const ControlButtons = ({
     );
   };
 
-  const renderTrashWarning = () => {
-    if (!isDesktop || !isTrashFolder || isEmptyPage) return null;
+  const renderWarning = () => {
+    if (!isDesktop || !titles?.warningText) return null;
 
-    return <TrashWarning title={titles?.trashWarning} />;
+    return <WarningComponent title={titles?.warningText} />;
+  };
+
+  const renderChatButton = () => {
+    if (!withChat || isDesktop) return null;
+
+    return <ChatBtn chatOpen={chatOpen} toggleChat={toggleChat} />;
   };
 
   return (
     <div
       className={styles.controlButtonContainer}
-      data-frame={isFrame}
+      data-is-frame={isFrame}
       data-show-title={showTitle}
     >
       {renderPlusButton()}
-      {renderContextButton(
-        (!isRootFolder || (isTrashFolder && !isEmptyFilesList)) ?? false,
-      )}
+      {renderContextButton((isContextButtonVisible && !isPublicRoom) ?? false)}
+      {renderChatButton()}
       {renderToggleInfoPanel()}
       {renderContextButton((isPublicRoom && containVisible) ?? false)}
-      {renderTrashWarning()}
+      {renderWarning()}
       {!isTabletView ? renderNavigationButton() : null}
       {renderTariffBar()}
       {isTabletView ? renderNavigationButton() : null}

@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "您最新查看或编辑的文档将显示在这里。",
   "EmptyRootRoomUserDescription": "已共享的房间将显示在此处",
   "EmptyRootRoomUserTitle": "此处暂无房间",
+  "EmptyTemplatesDescription": "你可以在“房间”板块中从现有房间创建一个模板",
+  "EmptyTemplatesTitle": "这里还没有模板",
   "FormFolderDefaultDescription": "将 PDF 表单拖放到此处或从{{productName}}或设备上传。",
   "FormFolderDefaultTitle": "此处尚无表单",
   "FormFolderDefaultUserDescription": "管理员上传的表单将显示在此处。",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "从{{organizationName}}工作区、Google 工作区或 Nextcloud 导入数据到您的{{productName}}。",
   "MigrationDataTitle": "迁移数据",
   "PublicRoomEmptyTitle": "欢迎来到公共房间",
+  "SectionsUploadDescription": "可从{{sectionNameFirst}}或{{sectionNameSecond}}上传任何类型的文件",
   "SendInvitationLetter": "发送邀请函以添加新成员至门户",
   "ShareOptionDescription": "复制公共访问链接或邀请其他用户加入房间以开始表单填写流程。",
   "ShareOptionTitle": "共享房间",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "从您的设备上传",
   "UploadDevicePDFFormOptionDescription": "从您的设备将准备好的 PDF 表单上传到房间。",
   "UploadDevicePDFFormOptionTitle": "从设备上传",
-  "UploadFromPortalDescription": "从文档或房间上传任何类型的文件",
   "UploadFromPortalTitle": "从{{productName}}上传",
   "UploadPDFFormOptionDescription": "选择{{productName}}中可用的现成 PDF 表单并将其上传到房间。",
-  "UserEmptyDescription": "管理员上传的文件和文件夹将显示在此处。",
   "VirtualDataRoomEmptyTitle": "欢迎来到虚拟数据房间"
 }

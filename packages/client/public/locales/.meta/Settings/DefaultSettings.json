@@ -1,0 +1,260 @@
+{
+  "key_path": "DefaultSettings",
+  "content": "Default settings",
+  "content_en_sha1_hash": "57afbebd04d4d02458682eb7fa90339a9d41caac",
+  "created_at": "2025-05-19T21:30:51.088Z",
+  "updated_at": "2025-05-28T09:30:02.630Z",
+  "comment": {
+    "text": "This translation key is used to display a label for a button or dialog that refers to default settings. It appears in various UI components such as buttons and save/cancel dialogs, prompting users to reset to default settings when they have unsaved changes. The exact placement may vary across different files.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:25.567Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
+      "line_number": 410,
+      "context": "<SaveCancelButtons\n onSaveClick={onSubmit}\n onCancelClick={onReset}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Settings:DefaultSettings\")}\n reminderText={t(\"Settings:YouHaveUnsavedChanges\")}\n saveButtonDisabled={saveButtonDisabled}\n disableRestoreToDefault={\n isDefaultSettings || isSaveLoading || isResetLoading\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ButtonsContainer.js",
+      "line_number": 99,
+      "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={openResetModal}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Settings:DefaultSettings\")}\n displaySettings\n hasScroll\n hideBorder\n saveButtonDisabled={saveDisabled}\n disableRestoreToDefault={resetDisabled}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/ButtonContainer.js",
+      "line_number": 225,
+      "context": "isDisabled={isLoading || !isValidForm() || isSMTPInitialSettings}\n isLoading={buttonOperation.save}\n scale={currentDeviceType === DeviceType.mobile}\n />\n <Button\n label={t(\"Settings:DefaultSettings\")}\n size={buttonSize}\n onClick={onClickDefaultSettings}\n isLoading={buttonOperation.reset}\n isDisabled={isLoading || isDefaultSettings}\n scale={currentDeviceType === DeviceType.mobile}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/SubmitButton.js",
+      "line_number": 59,
+      "context": "className=\"save-cancel-buttons\"\n onSaveClick={() => saveSsoSettings(t)}\n onCancelClick={isSsoEnabled ? openResetModal : resetForm}\n showReminder\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Settings:DefaultSettings\")}\n displaySettings\n hasScroll\n isSaving={isSubmitLoading}\n saveButtonDisabled={isDisabledSaveButton}\n disableRestoreToDefault={",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'defolt' is a misspelling of 'default'.",
+          "suggestion": "default"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'parametrler' is a valid word, 'parametrlar' is the more common and appropriate pluralization in Azerbaijani for 'parameters'. 'Settings:DefaultSettings' implies 'parameters' rather than a more general word.",
+          "suggestion": "Default parametrlər"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"По умолчанию\" while literally meaning \"by default,\" doesn't fully capture the meaning of \"Default settings.\" It lacks the 'settings' portion. A more accurate translation would incorporate that concept.",
+          "suggestion": "Настройки по умолчанию"
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'පෙරනිමි' is a somewhat uncommon or archaic form. A more common and clearer translation for 'Default' would be 'පොහොසතාහակի' or 'පෙරහුන්'.",
+          "suggestion": "පොහොසතාහակի සැකසුම්"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'පෙරනිමි' can loosely mean 'default', it's not the most natural or accurate translation in this context. It sounds overly formal and potentially confusing for the average user.",
+          "suggestion": "පොහොසතාහակի සැකසුම්"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Подразумевана подешавања\" while understandable, isn't the most natural or direct translation of 'Default settings'.  'Подразумевана' implies 'assumed' or 'implied' rather than 'default'.",
+          "suggestion": "A more accurate and common translation would be 'Примерна подешавања' (Primerna podešavanja) or 'Злазная подешавања' (Zlazna podešavanja)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

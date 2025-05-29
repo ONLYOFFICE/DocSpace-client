@@ -1,0 +1,28 @@
+{
+  "key_path": "PriceForEach",
+  "content": "{{amount}} each",
+  "content_en_sha1_hash": "d9e2d3c7fedc0c8458f60d4bfbbb93735e5136cf",
+  "created_at": "2025-05-28T09:33:06.783Z",
+  "updated_at": "2025-05-28T09:35:25.779Z",
+  "comment": {
+    "text": "This translation key is used to display the price per item in a formatted manner. It appears in a pricing context, likely on a product or service page, and should be translated to indicate the unit price of an item.",
+    "is_auto": true,
+    "updated_at": "2025-05-28T09:35:25.779Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/Total.tsx",
+      "line_number": 85,
+      "context": "2,\n 2,\n )}\n </Text>\n <Text fontWeight=\"600\" fontSize=\"11px\" className={styles.priceForEach}>\n {t(\"PriceForEach\", {\n amount: formatCurrencyValue(\n language,\n value,\n walletCodeCurrency || \"\",\n 2,",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

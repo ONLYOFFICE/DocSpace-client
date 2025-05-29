@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
@@ -40,6 +41,9 @@ import {
 
 import WizardForm from "./page.client";
 import WizardGreeting from "@/components/WizardGreeting/index.client";
+
+import { getUserTimezone } from "@docspace/shared/utils/common";
+import { LANGUAGE, TIMEZONE } from "@docspace/shared/constants";
 
 async function Page() {
   console.log("start wizzard requests");
@@ -70,10 +74,18 @@ async function Page() {
   const commonResources = objectSettings?.externalResources.common.entries;
   const forumLinkUrl = objectSettings?.externalResources.forum.domain;
 
+  const cookieStore = cookies();
+  const timezoneCookie = cookieStore.get(TIMEZONE);
+  const userTimezone = timezoneCookie
+    ? timezoneCookie.value
+    : getUserTimezone();
+
+  const culture = cookieStore.get(LANGUAGE)?.value ?? objectSettings?.culture;
+
   return (
     <ColorTheme themeId={ThemeId.LinkForgotPassword}>
       <>
-        <WizardGreeting />
+        <WizardGreeting culture={culture} />
         <FormWrapper id="wizard-form">
           <WizardForm
             passwordSettings={passwordSettings}
@@ -82,12 +94,12 @@ async function Page() {
             portalCultures={portalCultures}
             portalTimeZones={portalTimeZones}
             licenseUrl={commonResources.license}
-            culture={objectSettings?.culture}
             forumLinkUrl={forumLinkUrl}
             wizardToken={objectSettings?.wizardToken}
             passwordHash={objectSettings?.passwordHash}
             documentationEmail={commonResources.documentationemail}
             isAmi={objectSettings?.isAmi}
+            userTimeZone={userTimezone}
           />
         </FormWrapper>
       </>

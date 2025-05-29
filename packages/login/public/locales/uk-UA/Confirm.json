@@ -1,6 +1,5 @@
 {
   "AccountWillBeCreated": "Для <1>{{email}}</1> буде створено обліковий запис {{productName}}. Завершіть реєстрацію:",
-  "ChangePasswordSuccess": "Пароль успішно змінено",
   "ConfirmOwnerPortalSuccessMessage": "Власника {{productName}} успішно змінено. Через 10 секунд вас буде перенаправлено.",
   "ConfirmOwnerPortalTitle": "Підтвердьте, що хочете змінити власника {{productName}} на {{newOwner}}.",
   "CurrentNumber": "Ваш поточний номер мобільного телефону",

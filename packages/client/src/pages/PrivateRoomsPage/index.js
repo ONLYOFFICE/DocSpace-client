@@ -36,7 +36,7 @@ import Section from "@docspace/shared/components/section";
 import SectionWrapper from "SRC_DIR/components/Section";
 import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
 import { Trans, withTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import { isMobile } from "react-device-detect";
 import { toastr } from "@docspace/shared/components/toast";
 import { checkProtocol } from "../../helpers/files-helpers";

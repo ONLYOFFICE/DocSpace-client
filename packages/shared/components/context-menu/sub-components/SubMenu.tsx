@@ -52,6 +52,7 @@ import styles from "../ContextMenu.module.scss";
 
 const SUBMENU_LIST_MARGIN = 4; // Indentation of the second level menu from the first level
 const SECTION_PADDING = 16; // Screen margin
+const MIN_SUBMENU_WIDTH = 240; // Minimum width for submenu on mobile devices
 
 type SubMenuProps = {
   model: ContextMenuModel[];
@@ -107,7 +108,8 @@ const SubMenu = (props: SubMenuProps) => {
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
     item: ContextMenuType,
   ) => {
-    const { disabled, url, onClick, items, action, label } = item;
+    const { disabled, url, onClick, items, action, label, preventNewTab } =
+      item;
 
     if (isMobile() && label && (items || item.onLoad)) {
       e.preventDefault();
@@ -123,7 +125,7 @@ const SubMenu = (props: SubMenuProps) => {
       return;
     }
 
-    if (!url) {
+    if (!url || (onClick && preventNewTab)) {
       e.preventDefault();
     }
 
@@ -167,6 +169,8 @@ const SubMenu = (props: SubMenuProps) => {
 
       if (root) subListWidth = subListWidth || widthMaxContent;
       else subListWidth = Math.max(subListWidth, widthMaxContent);
+    } else if (isMobile()) {
+      subListWidth = subListWidth || MIN_SUBMENU_WIDTH;
     }
 
     if (subMenuRef.current) {
@@ -175,6 +179,8 @@ const SubMenu = (props: SubMenuProps) => {
       if (!isMobile()) {
         if (root) subMenuRef.current.style.width = `${subListWidth}px`;
         else subMenuRef.current.style.width = `${subListWidth}px`;
+      } else {
+        setWidthSubMenu(subListWidth);
       }
 
       if (!isMobile() && !root) {
@@ -593,12 +599,17 @@ const SubMenu = (props: SubMenuProps) => {
             className,
             "not-selectable",
             styles.styledList,
-            { [styles.withSubMenu]: !!widthSubMenu },
+            { [styles.withSubMenu]: !!widthSubMenu || isMobile() },
           )}
           style={
             {
               "--list-height": `${height + paddingList}px`,
-              "--submenu-width": `${widthSubMenu}px`,
+              "--submenu-width": `${isMobile() ? widthSubMenu || MIN_SUBMENU_WIDTH : widthSubMenu}px`,
+              ...(isMobile() &&
+                !root && {
+                  width: `${widthSubMenu || MIN_SUBMENU_WIDTH}px`,
+                  minWidth: `${widthSubMenu || MIN_SUBMENU_WIDTH}px`,
+                }),
             } as React.CSSProperties
           }
         >

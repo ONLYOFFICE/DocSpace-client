@@ -27,15 +27,16 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import config from "PACKAGE_FILE";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 import { Button } from "@docspace/shared/components/button";
-import { FloatingButton } from "@docspace/shared/components/floating-button";
+import OperationsProgressButton from "@docspace/shared/components/operations-progress-button";
 import { TenantStatus } from "@docspace/shared/enums";
 import { startRestore } from "@docspace/shared/api/portal";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
 
 const ButtonContainer = (props) => {
   const {
@@ -57,6 +58,8 @@ const ButtonContainer = (props) => {
     uploadLocalFile,
     isBackupProgressVisible,
     setErrorInformation,
+    setIsBackupProgressVisible,
+    backupPrgressError,
   } = props;
 
   const navigate = useNavigate();
@@ -113,7 +116,7 @@ const ButtonContainer = (props) => {
       );
       setTenantStatus(TenantStatus.PortalRestore);
 
-      SocketHelper.emit(SocketCommands.RestoreBackup);
+      SocketHelper.emit(SocketCommands.RestoreBackup, { dump: isManagement() });
 
       navigate(
         combineUrl(
@@ -150,10 +153,23 @@ const ButtonContainer = (props) => {
       />
 
       {isBackupProgressVisible ? (
-        <FloatingButton
+        <OperationsProgressButton
           className="layout-progress-bar"
-          alert={false}
-          percent={downloadingProgress}
+          operationsAlert={backupPrgressError}
+          operationsCompleted={downloadingProgress === 100}
+          operations={[
+            {
+              operation: OPERATIONS_NAME.backup,
+              label:
+                downloadingProgress === 100
+                  ? t("Backup")
+                  : downloadingProgress === 0
+                    ? t("PreparingBackup")
+                    : t("BackupProgress", { progress: downloadingProgress }),
+              percent: downloadingProgress,
+            },
+          ]}
+          clearOperationsData={() => setIsBackupProgressVisible(false)}
         />
       ) : null}
     </div>
@@ -170,6 +186,8 @@ export default inject(({ settingsStore, backup, currentQuotaStore }) => {
     uploadLocalFile,
     isBackupProgressVisible,
     setErrorInformation,
+    setIsBackupProgressVisible,
+    backupPrgressError,
   } = backup;
 
   const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
@@ -185,5 +203,7 @@ export default inject(({ settingsStore, backup, currentQuotaStore }) => {
     restoreResource,
     isBackupProgressVisible,
     setErrorInformation,
+    setIsBackupProgressVisible,
+    backupPrgressError,
   };
 })(observer(ButtonContainer));

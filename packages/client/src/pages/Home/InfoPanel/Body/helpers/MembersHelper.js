@@ -53,7 +53,7 @@ class MembersHelper {
       },
       viewer: {
         key: "viewer",
-        label: this.t("Translations:RoleViewer"),
+        label: this.t("Common:RoleViewer"),
         access: ShareAccessRights.ReadOnly,
         type: "user",
       },
@@ -65,19 +65,19 @@ class MembersHelper {
       },
       formFiller: {
         key: "formFiller",
-        label: this.t("Translations:RoleFormFiller"),
+        label: this.t("Common:RoleFormFiller"),
         access: ShareAccessRights.FormFilling,
         type: "user",
       },
       reviewer: {
         key: "reviewer",
-        label: this.t("Translations:RoleReviewer"),
+        label: this.t("Common:RoleReviewer"),
         access: ShareAccessRights.Review,
         type: "user",
       },
       commentator: {
         key: "commentator",
-        label: this.t("Translations:RoleCommentator"),
+        label: this.t("Common:RoleCommentator"),
         access: ShareAccessRights.Comment,
         type: "user",
       },
@@ -134,6 +134,7 @@ class MembersHelper {
           ...deleteOption,
         ];
       case RoomsType.CustomRoom:
+      case RoomsType.AIRoom:
         return [
           options.roomAdmin,
           options.collaborator,
@@ -158,6 +159,7 @@ class MembersHelper {
           options.roomAdmin,
           options.collaborator,
           options.editor,
+          options.formFiller,
           options.viewer,
           ...deleteOption,
         ];

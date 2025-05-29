@@ -29,6 +29,7 @@ import { useCallback, useEffect, useMemo } from "react";
 import classnames from "classnames";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useSearchParams } from "next/navigation";
 
 import Navigation, {
   TNavigationItem,
@@ -52,11 +53,25 @@ import type { HeaderProps } from "./Header.types";
 
 export type { HeaderProps };
 
-const Header = ({ current, pathParts, isEmptyList }: HeaderProps) => {
+const Header = ({
+  current,
+  pathParts,
+  isEmptyList,
+  showTitle = true,
+}: HeaderProps) => {
+  const searchParams = useSearchParams();
+
+  const getValue = (key: string) => {
+    const value = searchParams.get(key);
+    return value === "true" ? true : value === "false" ? false : value;
+  };
+
+  showTitle = getValue("showTitle") as boolean;
+
   const navigationStore = useNavigationStore();
   const filesSelectionStore = useFilesSelectionStore();
   const filesListStore = useFilesListStore();
-  const { currentDeviceType } = useSettingsStore();
+  const { currentDeviceType, displayAbout } = useSettingsStore();
   const { getHeaderContextMenuModel } = useContextMenuModel({});
   const { getHeaderMenu, onCheckboxChange } = useHeaderMenu({});
   const { isBase: isBaseTheme } = useTheme();
@@ -73,15 +88,22 @@ const Header = ({ current, pathParts, isEmptyList }: HeaderProps) => {
 
   const isRoomsFolder = pathParts[0].id === rootFolderId;
 
-  const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !isBaseTheme);
-  const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, !isBaseTheme);
+  const logo = displayAbout
+    ? getLogoUrl(WhiteLabelLogoType.LightSmall, !isBaseTheme)
+    : "";
+
+  const burgerLogo = displayAbout
+    ? getLogoUrl(WhiteLabelLogoType.LeftMenu, !isBaseTheme)
+    : "";
 
   const navigationItems: TNavigationItem[] = useMemo(() => {
-    const items = pathParts.map((p) => ({
-      id: p.id,
-      title: p.title,
-      isRootRoom: !!p.roomType,
-    }));
+    const items = pathParts
+      .map((p) => ({
+        id: p.id,
+        title: p.title,
+        isRootRoom: !p.roomType,
+      }))
+      .filter((item) => item.isRootRoom);
 
     items.pop();
 
@@ -166,7 +188,7 @@ const Header = ({ current, pathParts, isEmptyList }: HeaderProps) => {
             titleIconTooltip=""
             showNavigationButton={false}
             isCurrentFolderInfo={false}
-            showTitle
+            showTitle={showTitle}
             isPublicRoom
             isRoom={!!current.roomType}
             isInfoPanelVisible={false}

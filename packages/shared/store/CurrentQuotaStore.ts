@@ -38,6 +38,7 @@ import {
   TPaymentQuota,
   TNumericPaymentFeature,
   TBooleanPaymentFeature,
+  TStringPaymentFeature,
 } from "../api/portal/types";
 import {
   MANAGER,
@@ -123,6 +124,14 @@ class CurrentQuotasStore {
       TOTAL_SIZE,
     ) as TNumericPaymentFeature;
     return result?.used?.value || 0;
+  }
+
+  get usedTotalStorageSizeTitle() {
+    const result = this.currentPortalQuotaFeatures.get(
+      TOTAL_SIZE,
+    ) as TPaymentFeature;
+
+    return result?.used?.title;
   }
 
   get maxFileSizeByQuota() {
@@ -214,6 +223,13 @@ class CurrentQuotasStore {
   get isAuditAvailable() {
     const result = this.currentPortalQuotaFeatures.get(
       "audit",
+    ) as TBooleanPaymentFeature;
+    return result?.value;
+  }
+
+  get isBrandingAvailable() {
+    const result = this.currentPortalQuotaFeatures.get(
+      "branding",
     ) as TBooleanPaymentFeature;
     return result?.value;
   }

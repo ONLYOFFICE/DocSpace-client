@@ -25,11 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useContext, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { FolderType, RoomsType } from "@docspace/shared/enums";
+import {
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
 import { isDesktop } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
@@ -272,9 +276,14 @@ const Members = ({
   const showPublicRoomBar =
     ((primaryLink && !isArchiveFolder) || isPublicRoom) &&
     withPublicRoomBlock &&
-    !withoutTitlesAndLinks;
+    !withoutTitlesAndLinks &&
+    !isTemplate;
 
   const publicRoomItemsLength = publicRoomItems.length;
+
+  const isTemplateOwner =
+    infoPanelSelection?.access === ShareAccessRights.None ||
+    infoPanelSelection?.access === ShareAccessRights.FullAccess;
 
   if (isTemplate && templateAvailable) {
     return (
@@ -287,16 +296,18 @@ const Members = ({
                 productName: t("Common:ProductName"),
               })}
             </div>
-            <Link
-              className="template-access_link"
-              isHovered
-              type="action"
-              fontWeight={600}
-              fontSize="13px"
-              onClick={onOpenAccessSettings}
-            >
-              {t("Files:AccessSettings")}
-            </Link>
+            {isTemplateOwner ? (
+              <Link
+                className="template-access_link"
+                isHovered
+                type="action"
+                fontWeight={600}
+                fontSize="13px"
+                onClick={onOpenAccessSettings}
+              >
+                {t("Files:AccessSettings")}
+              </Link>
+            ) : null}
           </>
         }
       />

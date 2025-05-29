@@ -94,7 +94,7 @@
   }
 
   @media (hover: hover) {
-    :hover:not(:active) {
+    &:hover:not(:active) {
       background: var(--empty-view-link-bg-color-hover);
       & > * {
         opacity: 0.86;
@@ -170,7 +170,7 @@
   .arrowIcon {
     flex: 0 0 12px;
 
-    [dir="rtl"] & {
+    [data-dir="rtl"] & {
       transform: scaleX(-1);
     }
   }

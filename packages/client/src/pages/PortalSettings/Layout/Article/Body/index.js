@@ -27,7 +27,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
@@ -155,8 +155,12 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["9-0"]);
       }
 
-      if (location.pathname.includes("bonus")) {
+      if (location.pathname.includes("services")) {
         setSelectedKeys(["10-0"]);
+      }
+
+      if (location.pathname.includes("bonus")) {
+        setSelectedKeys(["11-0"]);
       }
     }
   }, [
@@ -230,6 +234,8 @@ const ArticleBodyContent = (props) => {
         return t("DataImport");
       case "StorageManagement":
         return t("StorageManagement");
+      case "Services":
+        return t("Services");
       default:
         throw new Error("Unexpected translation key");
     }
@@ -276,15 +282,23 @@ const ArticleBodyContent = (props) => {
 
     if (selectedKeys.length === 0) return null;
 
-    resultTree.forEach((item) => {
+    const resultTreeLength = resultTree.length;
+
+    resultTree.forEach((item, index) => {
       const icon = getCatalogIconUrlByType(item.type, {
         isSettingsCatalog: true,
       });
+
+      const isLastIndex = resultTreeLength - 1 === index;
 
       const patternSearching = selectedKeys[0].split("-");
       const selectedKey = patternSearching[0];
       const title = mapKeys(item.tKey);
       const linkData = getLinkData(item.key);
+
+      const style = isLastIndex
+        ? { margin: `${item.key.includes(9) ? "16px 0px" : "0"}` }
+        : { marginTop: `${item.key.includes(9) ? "16px" : "0"}` };
 
       items.push(
         <ArticleItem
@@ -299,9 +313,7 @@ const ArticleBodyContent = (props) => {
           onClick={(e) => onSelect(item.key, e)}
           linkData={linkData}
           folderId={item.id}
-          style={{
-            marginTop: `${item.key.includes(9) ? "16px" : "0"}`,
-          }}
+          style={style}
           $currentColorScheme={currentColorScheme}
         />,
       );

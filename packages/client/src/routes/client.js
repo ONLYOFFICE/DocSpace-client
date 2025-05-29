@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router";
 
 import componentLoader from "@docspace/shared/utils/component-loader";
 
@@ -352,14 +352,14 @@ const ClientRoutes = [
           {
             path: "rooms/templates/:room",
             async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
+              const { FlowsView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Flows"),
               );
 
               const Component = () => {
                 return (
                   <PrivateRoute>
-                    <FilesView />
+                    <FlowsView />
                   </PrivateRoute>
                 );
               };
@@ -404,6 +404,42 @@ const ClientRoutes = [
             },
           },
           ...contanctsRoutes,
+          {
+            path: "flows",
+            async lazy() {
+              const { FlowsView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Flows"),
+              );
+
+              const Component = () => {
+                return (
+                  <PrivateRoute>
+                    <FlowsView />
+                  </PrivateRoute>
+                );
+              };
+
+              return { Component };
+            },
+          },
+          {
+            path: "flows/filter",
+            async lazy() {
+              const { FlowsView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Flows"),
+              );
+
+              const Component = () => {
+                return (
+                  <PrivateRoute>
+                    <FlowsView />
+                  </PrivateRoute>
+                );
+              };
+
+              return { Component };
+            },
+          },
         ],
       },
       {
@@ -622,6 +658,22 @@ const ClientRoutes = [
             <AccessRestricted />
           </ErrorBoundary>
         </PublicRoute>
+      );
+
+      return { Component };
+    },
+  },
+  {
+    path: "/encryption-portal",
+    async lazy() {
+      const { EncryptionPortal } = await componentLoader(
+        () => import("@docspace/shared/pages/EncryptionPortal"),
+      );
+
+      const Component = () => (
+        <ErrorBoundary>
+          <EncryptionPortal />
+        </ErrorBoundary>
       );
 
       return { Component };

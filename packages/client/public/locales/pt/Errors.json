@@ -1,6 +1,4 @@
 {
   "ErrorEmptyResponse": "Resposta vazia",
-  "ErrorUnavailableText": "O {{productName}} não está disponível",
-  "LinkDoesNotExist": "O link que você está tentando abrir não existe.",
-  "LinkHasExpired": "O link que você seguiu expirou."
+  "ErrorUnavailableText": "O {{productName}} não está disponível"
 }

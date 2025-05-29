@@ -4,7 +4,6 @@
   "DataReassignment": "Opätovné priradenie údajov",
   "DeleteProfileIsFinished": "Vymazať profil po dokončení opätovného priradenia",
   "DescriptionDataReassignment": "Budú prenesené miestnosti vytvorené používateľom a dokumenty uložené v miestnostiach používateľa.",
-  "InProgress": "Práve prebieha",
   "Interrupted": "Prerušené, niektoré údaje nie je možné preniesť",
   "MoreAboutDataTransfer": "Viac informácií o prenose údajov",
   "NewDataOwner": "Nový vlastník údajov",
@@ -14,6 +13,7 @@
   "ReassignData": "Opätovné priradenie údajov",
   "ReassigningDataToAnother": "Začal sa proces opätovného priradenia údajov od používateľa <0>{{{fromUser}}</0> k používateľovi <1>{{{toUser}}</1>. Upozorňujeme, že to môže trvať dlhšie.",
   "ReassigningDataToItself": "Začal sa proces opätovného priradenia údajov od používateľa <0>{{{fromUser}}</0> k používateľovi <1>{{{toUser}}</1> <2>{{{you}}</2>. Upozorňujeme, že to môže trvať dlhšie.",
+  "RoomsOnlyReassignment": "Presunieme miestnosti vytvorené kontaktom.",
   "StartTransferAgain": "Znovu začať prenos",
   "UserToWhomTheDataWillBeTransferred": "Používateľ, ktorému sa údaje prenesú"
 }

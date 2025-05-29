@@ -28,7 +28,7 @@ import styled from "styled-components";
 
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
 import { Tabs } from "@docspace/shared/components/tabs";
@@ -58,8 +58,6 @@ const Wrapper = styled.div`
 const StyledTabs = styled(Tabs)`
   > .sticky {
     z-index: 201;
-    margin-inline-end: -16px;
-    padding-inline-end: 16px;
   }
 `;
 
@@ -132,7 +130,7 @@ const SectionBodyContent = (props) => {
 export default inject(({ settingsStore, clientLoadingStore, authStore }) => {
   const { showProfileLoader } = clientLoadingStore;
 
-  const { identityServerEnabled } = authStore.capabilities;
+  const identityServerEnabled = authStore?.capabilities?.identityServerEnabled;
 
   return {
     currentDeviceType: settingsStore.currentDeviceType,

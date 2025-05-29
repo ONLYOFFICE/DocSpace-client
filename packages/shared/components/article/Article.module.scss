@@ -95,7 +95,6 @@
   display: flex;
   gap: 8px;
   align-items: center;
-  border: var(--files-article-body-dev-tools-border);
   border-radius: 6px;
 
   @include mobile {
@@ -121,6 +120,19 @@
       fill: var(--files-article-body-dev-tools-color);
     }
   }
+}
+
+.wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--files-article-body-dev-tools-background-color);
+  opacity: var(--files-article-body-dev-tools-background-opacity);
+  border-radius: 6px;
+  z-index: -1;
 }
 
 .hideArticleMenuButton {
@@ -390,8 +402,8 @@
   position: relative;
   overflow: hidden;
   background: var(--article-catalog-background);
-  min-width: 251px;
-  max-width: 251px;
+  min-width: 252px;
+  max-width: 252px;
   box-sizing: border-box;
   user-select: none;
   border-inline-end: var(--article-catalog-vertical-line);
@@ -439,11 +451,20 @@
   &[data-with-main-button="true"] {
     :global(.article-body__scrollbar) {
       height: calc(100% - 190px) !important;
+
+      @include mobile {
+        height: 100% !important;
+      }
     }
   }
+
   &[data-with-main-button="false"] {
     :global(.article-body__scrollbar) {
       height: calc(100% - 150px) !important;
+
+      @include mobile {
+        height: 100% !important;
+      }
     }
   }
 
@@ -475,7 +496,7 @@
 
       @include mobile {
         display: block;
-        padding-bottom: 20px;
+        padding: 0 8px 20px 8px !important;
       }
     }
   }
@@ -488,5 +509,59 @@
   &[data-mobile-article="true"] {
     padding: 0;
     margin: 0;
+  }
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  cursor: pointer;
+
+  p {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  @include desktop {
+    p {
+      font-size: 13px;
+    }
+    margin-inline-start: 12px;
+  }
+
+  @include tablet {
+    &[data-show-article="false"] {
+      justify-content: center;
+    }
+    &[data-show-article="true"] {
+      margin-inline-start: 8px;
+    }
+  }
+
+  @include mobile {
+    margin-bottom: 0;
+    margin-inline-start: 4px;
+  }
+
+  .arrowIcon {
+    @include desktop {
+      width: 16px !important;
+      height: 16px !important;
+
+      svg {
+        width: 16px !important;
+        height: 16px !important;
+      }
+    }
+
+    width: 20px;
+    height: 20px;
+
+    svg {
+      height: 20px;
+      width: 20px;
+    }
   }
 }

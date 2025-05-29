@@ -27,7 +27,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import AppLoader from "@docspace/shared/components/app-loader";
 import RoomSelector from "@docspace/shared/selectors/Room";
 import {
@@ -36,7 +36,8 @@ import {
   createPasswordHash,
   frameCallCommand,
 } from "@docspace/shared/utils/common";
-import { RoomsType, FilterType } from "@docspace/shared/enums";
+import { getSelectFormatTranslation } from "@docspace/shared/utils";
+import { RoomsType } from "@docspace/shared/enums";
 import api from "@docspace/shared/api";
 import FilesSelector from "../../components/FilesSelector";
 
@@ -58,38 +59,6 @@ const Sdk = ({
   logoText,
 }) => {
   const [isDataReady, setIsDataReady] = useState(false);
-
-  const formatsDescription = {
-    [FilterType.DocumentsOnly]: t("Common:SelectTypeFiles", {
-      type: t("Common:Documents").toLowerCase(),
-    }),
-    [FilterType.SpreadsheetsOnly]: t("Common:SelectTypeFiles", {
-      type: t("Common:Spreadsheets").toLowerCase(),
-    }),
-    [FilterType.PresentationsOnly]: t("Common:SelectTypeFiles", {
-      type: t("Common:Presentations").toLowerCase(),
-    }),
-    [FilterType.ImagesOnly]: t("Common:SelectTypeFiles", {
-      type: t("Common:Images").toLowerCase(),
-    }),
-    [FilterType.MediaOnly]: t("Common:SelectExtensionFiles", {
-      extension: t("Common:Media").toLowerCase(),
-    }),
-    [FilterType.ArchiveOnly]: t("Common:SelectTypeFiles", {
-      type: t("Common:Archives").toLowerCase(),
-    }),
-    [FilterType.FoldersOnly]: t("Common:SelectTypeFiles", {
-      type: t("Common:Folders").toLowerCase(),
-    }),
-    [FilterType.Pdf]: t("Common:SelectTypeFiles", {
-      type: t("Files:Forms").toLowerCase(),
-    }),
-    EditorSupportedTypes: t("Common:SelectTypeFiles", {
-      type: t("AllTypesAvailableForEditing", {
-        organizationName: logoText,
-      }),
-    }),
-  };
 
   const callCommand = useCallback(
     () => frameCallCommand("setConfig", { src: window.location.origin }),
@@ -298,7 +267,11 @@ const Sdk = ({
           cancelButtonLabel={frameConfig?.cancelButtonLabel}
           currentFolderId={frameConfig?.id}
           openRoot={selectorOpenRoot}
-          descriptionText={formatsDescription[frameConfig?.filterParam] || ""}
+          descriptionText={getSelectFormatTranslation(
+            t,
+            frameConfig?.filterParam || "",
+            logoText,
+          )}
           headerProps={{ isCloseable: false }}
           withPadding={frameConfig?.showSelectorHeader}
         />

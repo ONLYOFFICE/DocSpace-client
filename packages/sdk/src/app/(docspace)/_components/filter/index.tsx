@@ -30,6 +30,10 @@ import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 
 import FilterComponent from "@docspace/shared/components/filter";
+import {
+  convertFilterDataToSelectedFilterValues,
+  convertFilterDataToSelectedItems,
+} from "@docspace/shared/components/filter/Filter.utils";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 
 import type { FilterProps } from "./Filter.types";
@@ -37,75 +41,73 @@ import useFilesFilter from "./useFilesFilter";
 
 export type { FilterProps };
 
-export const Filter = observer(
-  ({ filesFilter, shareKey, filesSettings }: FilterProps) => {
-    const { t } = useTranslation(["Common"]);
-    const { filesViewAs, setFilesViewAs, currentDeviceType } =
-      useSettingsStore();
+export const Filter = observer(({ filesFilter, shareKey }: FilterProps) => {
+  const { t } = useTranslation(["Common"]);
+  const { filesViewAs, setFilesViewAs, currentDeviceType } = useSettingsStore();
 
-    const {
-      getFilterData,
-      getSortData,
-      getViewSettingsData,
-      onClearFilter,
-      onSearch,
-      getSelectedInputValue,
-      getSelectedSortData,
-      onSort,
-      clearAll,
-      onFilter,
-      getSelectedFilterData,
-      removeSelectedItem,
-      onChangeViewAs,
-    } = useFilesFilter({
-      filesFilter,
-      shareKey,
-      canSearchByContent: filesSettings.canSearchByContent,
-      filesViewAs,
-      setFilesViewAs,
-    });
+  const {
+    getFilterData,
+    getSortData,
+    getViewSettingsData,
+    onClearFilter,
+    onSearch,
+    getSelectedInputValue,
+    getSelectedSortData,
+    onSort,
+    clearAll,
+    onFilter,
+    getSelectedFilterData,
+    removeSelectedItem,
+    onChangeViewAs,
+    initSelectedFilterData,
+  } = useFilesFilter({
+    filesFilter,
+    shareKey,
+    filesViewAs,
+    setFilesViewAs,
+  });
 
-    const initSearchValue = getSelectedInputValue();
+  const initSearchValue = getSelectedInputValue();
 
-    return (
-      <FilterComponent
-        onSearch={onSearch}
-        onChangeViewAs={onChangeViewAs}
-        onClearFilter={onClearFilter}
-        onFilter={onFilter}
-        onSort={onSort}
-        onSortButtonClick={() => {}}
-        clearSearch={false}
-        setClearSearch={() => {}}
-        getSelectedFilterData={getSelectedFilterData}
-        getViewSettingsData={getViewSettingsData}
-        clearAll={clearAll}
-        removeSelectedItem={removeSelectedItem}
-        isRooms={false}
-        isContactsPage={false}
-        isContactsPeoplePage={false}
-        isContactsGroupsPage={false}
-        isContactsInsideGroupPage={false}
-        isContactsGuestsPage={false}
-        getSelectedInputValue={getSelectedInputValue}
-        isIndexEditingMode={false}
-        getSortData={getSortData}
-        getSelectedSortData={getSelectedSortData}
-        viewAs={filesViewAs || "row"}
-        viewSelectorVisible
-        getFilterData={getFilterData}
-        userId=""
-        isRecentFolder
-        currentDeviceType={currentDeviceType}
-        filterHeader={t("Common:AdvancedFilter")}
-        placeholder={t("Common:Search")}
-        view={t("Common:View")}
-        filterTitle={t("Common:Filter")}
-        sortByTitle={t("Common:SortBy")}
-        selectorLabel=""
-        isIndexing={false}
-        initSearchValue={initSearchValue}
-      />
-    );
-  },
-);
+  return (
+    <FilterComponent
+      onSearch={onSearch}
+      onChangeViewAs={onChangeViewAs}
+      onClearFilter={onClearFilter}
+      onFilter={onFilter}
+      onSort={onSort}
+      onSortButtonClick={() => {}}
+      clearSearch={false}
+      setClearSearch={() => {}}
+      getSelectedFilterData={getSelectedFilterData}
+      getViewSettingsData={getViewSettingsData}
+      clearAll={clearAll}
+      removeSelectedItem={removeSelectedItem}
+      isRooms={false}
+      isContactsPage={false}
+      isContactsPeoplePage={false}
+      isContactsGroupsPage={false}
+      isContactsInsideGroupPage={false}
+      isContactsGuestsPage={false}
+      getSelectedInputValue={getSelectedInputValue}
+      isIndexEditingMode={false}
+      getSortData={getSortData}
+      getSelectedSortData={getSelectedSortData}
+      viewAs={filesViewAs || "row"}
+      viewSelectorVisible
+      getFilterData={getFilterData}
+      userId=""
+      isRecentFolder
+      currentDeviceType={currentDeviceType}
+      filterHeader={t("Common:AdvancedFilter")}
+      placeholder={t("Common:Search")}
+      view={t("Common:View")}
+      filterTitle={t("Common:Filter")}
+      sortByTitle={t("Common:SortBy")}
+      selectorLabel=""
+      isIndexing={false}
+      initSearchValue={initSearchValue}
+      initSelectedFilterData={initSelectedFilterData}
+    />
+  );
+});

@@ -44,7 +44,6 @@ const DEFAULT_SEARCH_TYPE: boolean | null = null; // withSubfolders
 const DEFAULT_SEARCH: string | null = null;
 const DEFAULT_AUTHOR_TYPE: string | null = null;
 const DEFAULT_ROOM_ID: number | null = null;
-const DEFAULT_SELECTED_ITEM = {};
 const DEFAULT_FOLDER = "@my";
 const DEFAULT_SEARCH_IN_CONTENT: boolean | null = null;
 const DEFAULT_EXCLUDE_SUBJECT: boolean | null = null;
@@ -99,9 +98,13 @@ const getOtherSearchParams = () => {
     KEY,
   ];
 
-  filterSearchParams.forEach((param) => {
-    if (searchParams.get(param)) {
-      searchParams.delete(param);
+  Array.from(searchParams.keys()).forEach((key) => {
+    if (
+      filterSearchParams.some(
+        (param) => param.toLowerCase() === key.toLowerCase(),
+      )
+    ) {
+      searchParams.delete(key);
     }
   });
 
@@ -130,8 +133,6 @@ class FilesFilter {
   authorType: string | null;
 
   total: number;
-
-  selectedItem: { key?: string | number };
 
   folder: string;
 
@@ -209,7 +210,6 @@ class FilesFilter {
       search,
       roomId,
       authorType,
-      defaultFilter.selectedItem,
       folder,
       searchInContent,
       excludeSubject,
@@ -234,7 +234,6 @@ class FilesFilter {
     search = DEFAULT_SEARCH,
     roomId = DEFAULT_ROOM_ID,
     authorType = DEFAULT_AUTHOR_TYPE,
-    selectedItem = DEFAULT_SELECTED_ITEM,
     folder = DEFAULT_FOLDER,
     searchInContent = DEFAULT_SEARCH_IN_CONTENT,
     excludeSubject = DEFAULT_EXCLUDE_SUBJECT,
@@ -254,7 +253,6 @@ class FilesFilter {
     this.roomId = roomId;
     this.authorType = authorType;
     this.total = total;
-    this.selectedItem = selectedItem;
     this.folder = folder;
     this.searchInContent = searchInContent;
     this.excludeSubject = excludeSubject;
@@ -410,7 +408,6 @@ class FilesFilter {
       this.search,
       this.roomId,
       this.authorType,
-      this.selectedItem,
       this.folder,
       this.searchInContent,
       this.excludeSubject,
@@ -432,7 +429,6 @@ class FilesFilter {
       this.sortOrder === filter.sortOrder &&
       this.viewAs === filter.viewAs &&
       this.page === filter.page &&
-      this.selectedItem.key === filter.selectedItem.key &&
       this.folder === filter.folder &&
       this.pageCount === filter.pageCount &&
       this.searchInContent === filter.searchInContent &&

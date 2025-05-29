@@ -57,7 +57,7 @@ const HistoryTableHeader = (props) => {
     columnInfoPanelStorageName,
     setHideColumns,
   } = props;
-  const { t, ready } = useTranslation(["Webhooks", "People"]);
+  const { t } = useTranslation(["Webhooks", "People"]);
 
   const [columns, setColumns] = useState(getColumns([], userId));
 
@@ -95,6 +95,13 @@ const HistoryTableHeader = (props) => {
       onChange: onColumnChange,
     },
     {
+      key: "Trigger",
+      title: t("EventType"),
+      enable: true,
+      resizable: true,
+      onChange: onColumnChange,
+    },
+    {
       key: "Delivery",
       title: t("Delivery"),
       enable: true,
@@ -104,12 +111,8 @@ const HistoryTableHeader = (props) => {
   ];
 
   useEffect(() => {
-    ready && setColumns(getColumns(defaultColumns, userId));
-  }, [ready]);
-
-  useEffect(() => {
     setColumns(getColumns(defaultColumns, userId));
-  }, [userId, defaultColumns]);
+  }, []);
 
   return (
     <TableHeader

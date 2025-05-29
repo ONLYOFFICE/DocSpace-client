@@ -28,7 +28,7 @@
 /* eslint-disable no-multi-str */
 /* eslint-disable no-plusplus */
 
-import type { Location } from "@remix-run/router";
+import type { Location } from "react-router";
 import find from "lodash/find";
 import moment from "moment-timezone";
 import { findWindows } from "windows-iana";
@@ -67,12 +67,14 @@ import {
   ErrorKeys,
   WhiteLabelLogoType,
   EmployeeType,
+  UrlActionType,
 } from "../enums";
 import {
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
   PUBLIC_MEDIA_VIEW_URL,
   RTL_LANGUAGES,
+  TIMEZONE,
 } from "../constants";
 
 import { TI18n, TTranslation } from "../types";
@@ -87,6 +89,7 @@ import { combineUrl } from "./combineUrl";
 import { getCookie, setCookie } from "./cookie";
 import { checkIsSSR } from "./device";
 import { hasOwnProperty } from "./object";
+import { TFrameConfig } from "../types/Frame";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -1242,16 +1245,21 @@ export const getUserTypeDescription = (
   t: TTranslation,
 ) => {
   if (isPortalAdmin)
-    return t("Translations:RolePortalAdminDescription", {
+    return t("Common:RolePortalAdminDescription", {
       productName: t("Common:ProductName"),
+      sectionName: t("Common:MyFilesSection"),
     });
 
-  if (isRoomAdmin) return t("Translations:RoleRoomAdminDescription");
+  if (isRoomAdmin)
+    return t("Common:RoleRoomAdminDescription", {
+      sectionName: t("Common:MyFilesSection"),
+    });
 
-  if (isCollaborator) return t("Translations:RoleNewUserDescription");
+  if (isCollaborator) return t("Common:RoleNewUserDescription");
 
   return t("Translations:RoleGuestDescriprion");
 };
+
 export function setLanguageForUnauthorized(culture: string) {
   setCookie(LANGUAGE, culture, {
     "max-age": COOKIE_EXPIRATION_YEAR,
@@ -1265,10 +1273,16 @@ export function setLanguageForUnauthorized(culture: string) {
   if (prevCulture) {
     const newUrl = window.location.href.replace(`&culture=${prevCulture}`, ``);
 
-    window.history.pushState("", "", newUrl);
+    window.history.pushState({}, "", newUrl);
   }
 
   window.location.reload();
+}
+
+export function setTimezoneForUnauthorized(timezone: string) {
+  setCookie(TIMEZONE, timezone, {
+    "max-age": COOKIE_EXPIRATION_YEAR,
+  });
 }
 
 export const imageProcessing = async (file: File, maxSize?: number) => {
@@ -1360,4 +1374,36 @@ export const getBackupProgressInfo = (
 
     return { success: t("Settings:BackupCreatedSuccess") };
   }
+};
+
+type OpenUrlParams = {
+  url: string;
+  action: UrlActionType;
+  replace?: boolean;
+  isFrame?: boolean;
+  frameConfig?: TFrameConfig | null;
+};
+
+export const openUrl = ({
+  url,
+  action,
+  replace,
+  isFrame,
+  frameConfig,
+}: OpenUrlParams) => {
+  if (action === UrlActionType.Download) {
+    return isFrame &&
+      frameConfig?.downloadToEvent &&
+      frameConfig?.events?.onDownload
+      ? frameCallEvent({ event: "onDownload", data: url })
+      : replace
+        ? (window.location.href = url)
+        : window.open(url, "_self");
+  }
+};
+
+export const getSdkScriptUrl = (version: string) => {
+  return typeof window !== "undefined"
+    ? `${window.location.origin}/static/scripts/sdk/${version}/api.js`
+    : "";
 };

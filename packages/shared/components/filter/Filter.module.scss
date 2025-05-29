@@ -273,7 +273,7 @@
 
   &.selected {
     font-weight: 600;
-    color: var(--accent-text);
+    color: var(--filter-block-selected-item-color);
   }
 }
 
@@ -359,12 +359,12 @@
   cursor: pointer;
 
   &[data-selected="true"] {
-    background: var(--accent-main);
-    border-color: var(--accent-main);
+    background: var(--filter-block-selected-backgroud-color);
+    border-color: var(--filter-block-selected-backgroud-color);
 
     &:hover {
-      background: var(--accent-main);
-      border-color: var(--accent-main);
+      background: var(--filter-block-selected-backgroud-color);
+      border-color: var(--filter-block-selected-backgroud-color);
     }
   }
 
@@ -539,5 +539,11 @@
         transform: rotate(180deg);
       }
     }
+  }
+}
+
+.viewSelector {
+  @include tablet-and-below {
+    display: none;
   }
 }

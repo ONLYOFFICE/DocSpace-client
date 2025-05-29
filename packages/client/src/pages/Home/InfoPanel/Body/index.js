@@ -27,7 +27,7 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 
 import { RoomsType } from "@docspace/shared/enums";
 import { isLockedSharedRoom as isLockedSharedRoomUtil } from "@docspace/shared/utils";
@@ -64,6 +64,7 @@ const InfoPanelBodyContent = ({
   image,
   onChangeFile,
   templateEventVisible,
+  setIsShareFormData,
   ...props
 }) => {
   const { groupId } = useParams();
@@ -111,6 +112,8 @@ const InfoPanelBodyContent = ({
     isSeveralItems,
     isVDR: selectedItems[0]?.roomType === RoomsType.VirtualDataRoom,
     isLockedSharedRoom,
+    onOpenPanel: setIsShareFormData,
+    onlyOneLink: infoPanelSelection?.isPDFForm,
   };
 
   const viewHelper = new ViewHelper({
@@ -152,6 +155,7 @@ const InfoPanelBodyContent = ({
         return viewHelper.DetailsView();
       case "info_share":
         return viewHelper.ShareView();
+
       default:
         break;
     }
@@ -260,8 +264,12 @@ export default inject(
       setShowSearchBlock,
     } = infoPanelStore;
 
-    const { editRoomDialogProps, createRoomDialogProps, templateEventVisible } =
-      dialogsStore;
+    const {
+      editRoomDialogProps,
+      createRoomDialogProps,
+      templateEventVisible,
+      setIsShareFormData,
+    } = dialogsStore;
 
     const selection =
       infoPanelSelection?.length > 1 ? null : infoPanelSelection;
@@ -313,6 +321,7 @@ export default inject(
       setImage,
       image,
       templateEventVisible,
+      setIsShareFormData,
     };
   },
 )(observer(InfoPanelBodyContent));

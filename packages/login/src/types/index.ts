@@ -43,7 +43,8 @@ import {
   ThemeKeys,
 } from "@docspace/shared/enums";
 
-import { AuthenticatedAction, ValidationResult } from "@/utils/enums";
+import { ValidationResult } from "@/utils/enums";
+import { TUser } from "@docspace/shared/api/people/types";
 
 export type TError =
   | {
@@ -72,12 +73,12 @@ export type TCulturesOption =
       isBeta?: boolean;
       key: string | number;
       label: string;
-      icon?: string;
+      icon?: string | React.ReactElement | React.ElementType;
     }
   | {
       isBeta?: boolean;
       key: string | number;
-      icon?: string;
+      icon?: string | React.ReactElement | React.ElementType;
     };
 
 export type TDataContext = {
@@ -114,6 +115,7 @@ export type TConfirmLinkParams = {
   first?: string;
   roomId?: string;
   linkData?: string;
+  culture?: string;
 };
 
 export type TConfirmLinkResult = {
@@ -156,18 +158,16 @@ export type TTfaSecretKeyAndQR = {
 };
 
 export interface ConfirmRouteProps {
-  doAuthenticated?: AuthenticatedAction;
-  defaultPage?: string;
   socketUrl?: string;
   children: ReactNode;
   confirmLinkResult: TConfirmLinkResult;
   confirmLinkParams: TConfirmLinkParams;
+  user?: TUser;
 }
 
 export type GreetingCreateUserContainerProps = {
   type: string;
-  firstName?: string;
-  lastName?: string;
+  displayName?: string;
   culture?: string;
   hostName?: string;
 };

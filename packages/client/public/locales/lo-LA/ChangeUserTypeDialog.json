@@ -1,8 +1,17 @@
 {
+  "ChangeContactType": "ປ່ຽນປະເພດຕິດຕໍ່",
+  "ChangeGuestsTypeMessage": "แขກຮັບເຊີນ <strong>{{userName}}</strong> ຈະຖືກຍ້າຍໄປທີ່ພາກສ່ວນ {{membersSection}} ແລະຖືກມອບຫມາຍເປັນປະເພດຜູ້ໃຊ້. ຜູ້ໃຊ້ມີພາກສ່ວນ {{documentsSection}} ຂອງຕົນເອງ, ສາມາດສ້າງ ແລະແກ້ໄຂເອກະສານໄດ້, ແຕ່ບໍ່ສາມາດສ້າງຫ້ອງໄດ້.",
+  "ChangeGuestsTypeMessageMulti": "ບັນດາແຂກຮັບເຊີນທີ່ຖືກເລືອກຈະຖືກຍ້າຍໄປທີ່ພາກສ່ວນ {{membersSection}} ແລະຖືກມອບຫມາຍໃຫ້ເປັນປະເພດຜູ້ໃຊ້ (User). ຜູ້ໃຊ້ມີພາກສ່ວນ {{documentsSection}} ຂອງຕົນເອງ, ສາມາດສ້າງ ແລະແກ້ໄຂເອກະສານໄດ້, ແຕ່ບໍ່ສາມາດສ້າງຫ້ອງໄດ້.",
+  "ChangeGuestsTypeToAdmin": "แขກຮັບເຊີນ <strong>{{userName}}</strong> ຈະຖືກຍ້າຍໄປທີ່ພາກສ່ວນ {{membersSection}} ແລະຖືກມອບຫມາຍໃຫ້ເປັນປະເພດ <strong>'{{ secondType }}'</strong>។ ຄູກູ້ນຂອງ {{productName}} ສາມາດເຂົ້າເຖິງການຕັ້ງຄ່າ {{productName}}, ຈັດການແລະເກັບມ້ຽນຫ້ອງ,ເຊີນຜູ້ໃຊ້ບໍານານ ແລະມອບຫມາຍບົດບາດຂ້າງລຸ່ມລະດັບຂອງເຂົາເຈົ້າ ຜູ້ບໍລິຫານ {{productName}} ມີສິດເຂົ້າເຖິງພາກສ່ວນ {{documentsSection}}",
+  "ChangeGuestsTypeToAdminMulti": "ບັນດາແຂກຮັບເຊີນທີ່ຖືກເລືອກຈະຖືກຍ້າຍໄປທີ່ພາກສ່ວນ {{membersSection}} ແລະຖືກມອບຫມາຍປະເພດ <strong>'{{ secondType }}'</strong>. ຜູ້ປົກຄອງ {{productName}} ສາມາດເຂົ້າເຖິງການຕັ້ງຄ່າ {{productName}} ຈັດການແລະເກັບມ້ຽນຫ້ອງເຊิญຜູ້ໃຊ້ບໍານົນ ແລະມອບຫມາຍບົດບາດຂ້າງລຸ່ມລະດັບຂອງເຂົາເຈົ້າ ຜູ້ປົກຄອງ {{productName}} ມີສິດເຂົ້າເຖິງພາກສ່ວນ {{documentsSection}}.",
+  "ChangeGuestsTypeToManager": "แขກຮັບເຊີນ <strong>{{userName}}</strong> ຈະຖືກຍ້າຍໄປທີ່ພາກສ່ວນ {{membersSection}} ແລະຖືກມອບຫມາຍໃຫ້ເປັນປະເພດ <strong>'{{ secondType }}'</strong>។ ຜູ້ປົກຄອງຫ້ອງສາມາດສ້າງ ແລະ ຈັດການຫ້ອງທີ່ຖືກມອບຫມາຍ,ເຊີນຜູ້ໃຊ້ໃໝ່ ແລະ ມອບບົດບາດຂອງຜູ້ປົກຄອງຫ້ອງ ແລະ ຕ່ຳກວ່າ. ຜູ້ປົກຄອງຫ້ອງສາມາດເຂົ້າເຖິງພາກສ່ວນ {{documentsSection}} ໄດ້.",
+  "ChangeGuestsTypeToManagerMulti": "ບັນດາແຂກຮັບເຊີນທີ່ຖືກເລືອກຈະຖືກຍ້າຍໄປທີ່ພາກສ່ວນ {{membersSection}} ແລະຖືກມອບໝາຍໃຫ້ເປັນປະເພດ <strong>'{{ secondType }}'</strong>. ຜູ້ປົກຄອງຫ້ອງສາມາດສ້າງ ແລະ ຈັດການຫ້ອງທີ່ຖືກມອບໝາຍ,ເຊີນຜູ້ໃຊ້ໃໝ່, ແລະມອບບົດບາດຂອງຜູ້ປົກຄອງຫ້ອງ ແລະ ຕ່ຳກວ່າ. ຜູ້ປົກຄອງຫ້ອງສາມາດເຂົ້າເຖິງພາກສ່ວນ {{documentsSection}}.",
   "ChangeUserTypeButton": "ປ່ຽນປະເພດ",
-  "ChangeUserTypeHeader": "ປ່ຽນປະເພດຜູ້ໃຊ້",
-  "ChangeUserTypeMessage": "ຜູ້ໃຊ້ທີ່ມີປະເພດ <strong>'{{firstType}}'</strong> ຈະຖືກຍ້າຍໄປປະເພດ <strong>'{{secondType}}'</strong>.",
-  "ChangeUserTypeMessageMulti": "ຜູ້ໃຊ້ທີ່ເລືອກຈະຖືກຍ້າຍໄປໃສ່ປະເພດ <strong>'{{secondType}}'</strong>.",
-  "ChangeUserTypeMessageWarning": "ທ່ານບໍ່ສາມາດປ່ຽນປະເພດ ສຳລັບຜູ້ບໍລິຫານ {{productName}} ແລ ະຕົວທ່ານເອງ.",
+  "ChangeUserTypeMessage": "ຜູ້ໃຊ້ທີ່ມີປະເພດ <strong>'{{ firstType }}'</strong> ຈະຖືກຍ້າຍໄປປະເພດ <strong>'{{ secondType }}'</strong>.",
+  "ChangeUserTypeNote": "<1>ໝາຍເດືອນ:</1> ທ່ານບໍ່ສາມາດປ່ຽນປະເພດສຳລັບຜູ້ບໍລິຫານ {{productName}} ແລະຕົວທ່ານເອງໄດ້.",
+  "DataReassignmentInfo": "ຫ້ອງທີ່ຜູ້ໃຊສ້າງໄວ້ຈະຖືກມອບຫມາຍໃຫ້ທ່ານໂດຍອັດຕະໂນມັດ ຖ້າຕ້ອງການມອບຫມາຍຫ້ອງໃຫ້ຄົນອື່ນ ກະລຸນາຄລິກລິ້ງລຸ່ມນີ້.",
+  "DataReassignmentWithFilesDeletion": "ເອກະສານທີ່ແບ່ງປັນທັງໝົດທີ່ສ້າງໂດຍຜູ້ຕິດຕໍ່ນີ້ຈະຖືກ <1>ມອບໝາຍໃຫ້ທ່ານໂດຍອັດຕະໂນມັດໃນເວລາ 30 ວັນ</1> ຖ້າຕ້ອງການມອບໝາຍຫ້ອງ/ເອກະສານທີ່ແບ່ງປັນໃຫ້ຜູ້ອື່ນ, ກະລຸນາຄລິກລິ້ງລຸ່ມນີ້.",
+  "PersonalDataDeletion": "ເອກະສານ ແລະ ໂຟນເດີທັງໝົດໃນພາກສ່ວນ {{sectionName}} ຂອງການຕິດຕໍ່ນີ້ຈະຖືກ <1>ລົບຖິ້ມຢ່າງຖາວອນໃນ 30 ວັນ</1>.",
+  "SuccessChangeGuestType": "ການປ່ຽນປະເພດແຂກສຳເລັດດ້ວຍດີ",
   "SuccessChangeUserType": "ປະເພດຜູ້ໃຊ້ຖືກປ່ຽນແປງສຳເລັດຜົນແລ້ວ."
 }

@@ -87,4 +87,10 @@ export interface BackdropProps {
    * @param e - React mouse event
    */
   onClick?: (e: React.MouseEvent) => void;
+
+  /**
+   * Indicates if the backdrop should be shown
+   * @default false
+   */
+  shouldShowBackdrop?: boolean;
 }

@@ -27,7 +27,13 @@
 import { TError } from "../../utils/axiosClient";
 import { TariffState } from "../../enums";
 
-export type TQuotas = { id: number; quantity: number };
+export type TQuotas = {
+  id: number;
+  quantity: number;
+  wallet?: boolean;
+  dueDate?: string;
+  nextQuantity?: number;
+};
 
 export type TPortalTariff = {
   id: number;
@@ -54,6 +60,10 @@ export type TBasePaymentFeature = {
   };
 };
 
+export type TStringPaymentFeature = TBasePaymentFeature & {
+  title: string;
+};
+
 export type TNumericPaymentFeature = TBasePaymentFeature & {
   value: number;
 };
@@ -62,7 +72,10 @@ export type TBooleanPaymentFeature = TBasePaymentFeature & {
   value: boolean;
 };
 
-export type TPaymentFeature = TNumericPaymentFeature | TBooleanPaymentFeature;
+export type TPaymentFeature =
+  | TNumericPaymentFeature
+  | TBooleanPaymentFeature
+  | TStringPaymentFeature;
 
 export type TPaymentQuota = {
   id: number;
@@ -70,6 +83,7 @@ export type TPaymentQuota = {
   price: {
     value: string;
     currencySymbol?: string;
+    isoCurrencySymbol?: string;
   };
   nonProfit: boolean;
   free: boolean;
@@ -124,4 +138,44 @@ export type TTariff = {
 export type TRestoreProgress = {
   progress: number;
   error?: TError;
+};
+
+export type TCustomerInfo = {
+  paymentMethodStatus: number;
+  email: string | null;
+  portalId: string | null;
+};
+
+export type TBalance =
+  | {
+      accountNumber?: number;
+      subAccounts: [{ currency: string; amount: number }];
+    }
+  | 0;
+
+export type TTransactionCollection = {
+  date: string;
+  service?: string;
+  serviceUnit?: string;
+  quantity: number;
+  amount: number;
+  credit: number;
+  withdrawal: number;
+  currency: string;
+};
+
+export type TTransactionHistory = {
+  collection: TTransactionCollection[];
+  offset: number;
+  limit: number;
+  totalQuantity: number;
+  totalPage: number;
+  currentPage: number;
+};
+
+export type TAutoTopUpSettings = {
+  enabled: boolean;
+  minBalance: number;
+  upToBalance: number;
+  currency: string | null;
 };

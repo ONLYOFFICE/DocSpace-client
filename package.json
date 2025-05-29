@@ -1,6 +1,6 @@
 {
   "name": "docspace",
-  "version": "3.0.4",
+  "version": "3.1.1",
   "private": true,
   "workspaces": {
     "packages": [
@@ -13,11 +13,13 @@
   },
   "scripts": {
     "build": "node ./common/scripts/before-build.js && yarn workspaces foreach -vptiR -j 5 --from '{@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management,@docspace/sdk}' run build",
+    "build:lite": "node ./common/scripts/before-build.js && yarn workspaces foreach -vptiR -j 3 --from '{@docspace/client,@docspace/login,@docspace/doceditor}' run build",
     "bump": "yarn version apply --all",
     "clean": "yarn workspaces foreach -vptiR run clean",
     "deploy": "shx rm -rf ../publish/web && yarn workspaces foreach -ptR -j 5 --from '{@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management,@docspace/sdk}' run deploy && shx cp -r public ../publish/web/ && node common/scripts/minify-common-locales.js",
     "start": "node ./common/scripts/before-build.js && yarn workspaces foreach -vptiR -j 5 --from '{@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management,@docspace/sdk}' run start",
     "start-prod": "yarn workspaces foreach -vptiR -j 5 --from '{@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management,@docspace/sdk}' run start-prod",
+    "start-prod:lite": "yarn workspaces foreach -vptiR -j 3 --from '{@docspace/client,@docspace/login,@docspace/doceditor}' run start-prod",
     "start:internal": "node ./common/scripts/before-build.js && yarn workspaces foreach -vptiR -j 5 --from '{@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management,@docspace/sdk}' run start:internal",
     "start-prod:internal": "yarn workspaces foreach -vptiR -j 5 --from '{@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management,@docspace/sdk}' run start-prod:internal",
     "storybook": "yarn workspace @docspace/shared storybook",

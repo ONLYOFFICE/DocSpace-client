@@ -49,13 +49,14 @@ export const ThemeProvider = ({
     root.setAttribute("data-theme", themeStr);
     root.setAttribute("data-dir", dir);
     root.style.setProperty("--interface-direction", dir);
+    root.style.setProperty("--font-family", theme.fontFamily);
 
     const body = document.body;
     body.classList.remove("light", "dark");
     body.classList.remove("ltr", "rtl");
     body.classList.add(themeStr);
     body.classList.add(dir);
-  }, [theme.isBase, theme.interfaceDirection]);
+  }, [theme.isBase, theme.interfaceDirection, theme.fontFamily]);
 
   useEffect(() => {
     const root = document.documentElement;

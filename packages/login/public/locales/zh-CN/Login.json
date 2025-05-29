@@ -1,4 +1,5 @@
 {
+  "ChangePasswordSuccess": "密码已成功更改",
   "CodeTitle": "代码已通过电子邮件发送给您的",
   "ErrorInvalidText": "10 秒后，您将被重定向到<1>{{productName}}</1>",
   "ForgotPassword": "忘记密码？",

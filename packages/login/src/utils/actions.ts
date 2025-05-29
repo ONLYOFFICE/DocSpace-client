@@ -45,6 +45,7 @@ import {
   TThirdPartyProvider,
   TTimeZone,
   TVersionBuild,
+  TInvitationSettings,
 } from "@docspace/shared/api/settings/types";
 import { Encoder } from "@docspace/shared/utils/encoder";
 import {
@@ -72,6 +73,7 @@ import {
   scopesHandler,
   companyInfoHandler,
   oauthSignInHelper,
+  invitationSettingsHandler,
 } from "@docspace/shared/__mocks__/e2e";
 
 const IS_TEST = process.env.E2E_TEST;
@@ -142,9 +144,9 @@ export async function getColorTheme() {
   return colorTheme.response as TGetColorTheme;
 }
 
-export async function getThirdPartyProviders() {
+export async function getThirdPartyProviders(inviteView: boolean = false) {
   const [getThirdParty] = createRequest(
-    [`/people/thirdparty/providers`],
+    [`/people/thirdparty/providers?inviteView=${inviteView}`],
     [["", ""]],
     "GET",
   );
@@ -204,7 +206,54 @@ export async function getUser() {
   return user.response as TUser;
 }
 
-export async function getScopeList(token?: string) {
+export async function getUserByName() {
+  const hdrs = headers();
+  const cookie = hdrs.get("cookie");
+
+  const [getUser] = createRequest(
+    [`/people/firstname.lastname`],
+    [["", ""]],
+    "GET",
+  );
+
+  if (!cookie?.includes("asc_auth_key")) return undefined;
+  const userRes = IS_TEST ? selfHandler() : await fetch(getUser);
+
+  if (userRes.status === 401) return undefined;
+
+  if (!userRes.ok) return;
+
+  const user = await userRes.json();
+
+  return user.response as TUser;
+}
+
+export async function getUserByEmail(
+  userEmail: string,
+  confirmKey: string | null = null,
+) {
+  const [getUserByEmai] = createRequest(
+    [`/people/email?email=${userEmail}`],
+    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
+    "GET",
+  );
+
+  const res = IS_TEST
+    ? selfHandler(null, headers())
+    : await fetch(getUserByEmai);
+
+  if (!res.ok) return;
+
+  const user = await res.json();
+
+  if (user.response && user.response.displayName) {
+    user.response.displayName = Encoder.htmlDecode(user.response.displayName);
+  }
+
+  return user.response as TUser;
+}
+
+export async function getScopeList(token?: string, userId?: string) {
   const headers: [string, string][] = token
     ? [["Cookie", `x-signature=${token}`]]
     : [["", ""]];
@@ -433,56 +482,7 @@ export async function getAvailablePortals(data: {
   recaptchaResponse?: string | null | undefined;
   recaptchaType?: unknown | undefined;
 }) {
-  const config = await getConfig();
-
   const path = `/portal/signin`;
-
-  if (config?.oauth2?.apiSystem.length) {
-    const urls: string[] = config.oauth2.apiSystem.map(
-      (url: string) => `https://${url}/apisystem${path}`,
-    );
-
-    const actions = await Promise.allSettled(
-      urls.map((url: string) =>
-        fetch(url, {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-            ...new Headers(headers()),
-          },
-        }),
-      ),
-    );
-
-    const fullFiledActions = actions.filter(
-      (action) => action.status === "fulfilled",
-    );
-
-    if (fullFiledActions.length) {
-      const portalsRes = fullFiledActions
-        .filter((action) => {
-          return action.value.ok;
-        })
-        .map((action) => action.value);
-
-      if (!portalsRes.length) {
-        const portals = await fullFiledActions[0].value.json();
-
-        return { ...portals, status: fullFiledActions[0].status };
-      }
-
-      const portals = (await Promise.all(portalsRes.map((res) => res.json())))
-        .map(
-          (portals: {
-            tenants: { portalLink: string; portalName: string }[];
-          }) => portals.tenants,
-        )
-        .flat();
-
-      return portals;
-    }
-  }
 
   const portalsRes = IS_TEST
     ? oauthSignInHelper()
@@ -519,4 +519,22 @@ export async function getOauthJWTToken() {
   const jwtToken = await res.json();
 
   return jwtToken.response as string;
+}
+
+export async function getInvitationSettings() {
+  const [getInvitationSettings] = createRequest(
+    [`/settings/invitationsettings`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = IS_TEST
+    ? invitationSettingsHandler()
+    : await fetch(getInvitationSettings);
+
+  if (!res.ok) return;
+
+  const invitationSettings = await res.json();
+
+  return invitationSettings.response as TInvitationSettings;
 }

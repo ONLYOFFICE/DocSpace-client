@@ -257,6 +257,10 @@
     position: relative;
     border-radius: 6px 6px 0 0;
 
+    &:hover {
+      cursor: pointer;
+    }
+
     .thumbnailImage {
       pointer-events: none;
       position: absolute;

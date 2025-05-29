@@ -1,0 +1,473 @@
+{
+  "key_path": "DocumentServiceLocationUrlPortal",
+  "content": "{{productName}} address for internal requests from the Document Service",
+  "content_en_sha1_hash": "d3815a656c220dde785b033d7fcf88dd267536a4",
+  "created_at": "2025-05-19T21:30:51.400Z",
+  "updated_at": "2025-05-28T09:30:02.630Z",
+  "comment": {
+    "text": "This translation key is used to display the address of the Document Service for internal requests. It appears as a label in an input field on the Portal Settings page. The value should match the product name to provide a specific location URL for internal requests.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:16.255Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
+      "line_number": 379,
+      "context": "</Text>\n </div>\n <div className=\"input-wrapper\">\n <Label\n htmlFor=\"portalAdress\"\n text={t(\"Settings:DocumentServiceLocationUrlPortal\", {\n productName: t(\"Common:ProductName\"),\n })}\n />\n <InputBlock\n id=\"portalAdress\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"عنوان {{productName}} للطلبات من خدمات المستند\" doesn't accurately convey the meaning of \"{{productName}} address for internal requests from the Document Service\".  'Address' is not well translated here. A better translation would specify the purpose of the address.",
+          "suggestion": "عنوان {{productName}} لطلبات داخلية من خدمات المستندات ({{productName}} address for internal requests from the Document Service)"
+        },
+        {
+          "type": "formatting",
+          "description": "The Arabic translation lacks proper punctuation or word order for clarity. While not strictly incorrect, it could be improved for better readability in Arabic.",
+          "suggestion": "عنوان {{productName}} لطلبات داخلية من خدمات المستندات."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is incomplete and doesn't fully convey the meaning of '{{productName}} address for internal requests'. It's missing the context that it's the address, and specifically for internal requests.",
+          "suggestion": "Sənəd Xidmətindən daxili sorğular üçün {{productName}} ünvanı"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'Sənəd Xidmətindən' lacks a preposition, which is needed to indicate 'from'.",
+          "suggestion": "Sənəd Xidmətindən"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'address for internal requests' isn't accurately conveyed by 'адрес за заявки'. A more precise translation would be something like 'адрес за вътрешни заявки' or 'адрес за вътрешни нужди'. 'Заявки' simply means 'requests', and doesn't imply that they are internal.",
+          "suggestion": "адрес за вътрешни заявки"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation doesn't fully capture the meaning of 'address for internal requests'. 'Adresa' simply means address. It's missing the 'for internal requests from'.",
+          "suggestion": "Adresa {{productName}} pro interní požadavky z Dokumentové služby"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is not accurate. \"Sie\" is an impersonal pronoun and doesn't fit the context. It should be replaced with something indicating possession or location.",
+          "suggestion": "Die Adresse für interne Anfragen des Dokumenten Services von {{productName}}"
+        },
+        {
+          "type": "grammar",
+          "description": "The word order is awkward and grammatically incorrect in German. The preposition 'von' should be placed before the product name.",
+          "suggestion": "Die Adresse für interne Anfragen des Dokumenten Services von {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Διεύθυνση {{productName}} για αιτήσεις από την υπηρεσία εγγράφων' is a literal translation that doesn't quite capture the nuance of 'address for internal requests'. A more natural Greek phrasing would be something like 'Διεύθυνση {{productName}} για εσωτερικές αιτήσεις στην υπηρεσία εγγράφων' or 'Τοποθεσία {{productName}} για εσωτερικές αιτήσεις στην υπηρεσία εγγράφων'.",
+          "suggestion": "Διεύθυνση {{productName}} για εσωτερικές αιτήσεις στην υπηρεσία εγγράφων"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Dirección del {{productName}} para realizar peticiones desde el Servicio de Documentos\" doesn't fully capture the meaning of \"{{productName}} address for internal requests from the Document Service.\" \"Address\" here refers to a URL or endpoint, not just a location. The use of \"realizar peticiones\" is grammatically correct, but it's a bit formal and can be improved.",
+          "suggestion": "Dirección URL del {{productName}} para solicitudes internas desde el Servicio de Documentos"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, using 'URL' clarifies the meaning for Spanish-speaking audiences familiar with web terminology and enhances understanding, particularly as 'dirección' can have multiple meanings.",
+          "suggestion": "No change needed if 'dirección' is preferred, otherwise include 'URL'."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'internal requests' isn't accurately conveyed. 'Internal' implies a location for requests originating within the company. The Finnish translation focuses on the origin of the request ('that come from the Document Service'). A more accurate translation of 'internal' would involve conveying that this is an address for requests *destined* for the Document Service.",
+          "suggestion": "{{productName}}-osoite Asiakirjapalvelulle suunnatuille pyynnöille"
+        },
+        {
+          "type": "formatting",
+          "description": "The Finnish translation uses 'Asiakirjapalvelusta', which implies an origin. It's preferable to match the English's subject-object relationship, suggesting the address is *for* the Document Service.",
+          "suggestion": "Consider rephrasing the sentence to clarify the address's purpose, aligning it with the original English's focus on the address's recipient. For example: \"{{productName}}-osoite Asiakirjapalvelun käyttöön\" or \"{{productName}}-osoite Asiakirjapalvelulle\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'internal requests' is not accurately reflected in the French translation. 'Demandes provenant' is too general. A more accurate translation would consider the internal nature of the requests.",
+          "suggestion": "Adresse du {{productName}} pour les demandes internes du service de documents"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'address for internal requests' is not accurately reflected in the Armenian translation. 'Հարցումների համար' implies requests in general, not specifically internal requests.",
+          "suggestion": "{{productName}} հասցեն ներքին հարցումների համար ({{productName}} address for internal requests)"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Address per le richieste dal Document Service' is not the most natural or accurate translation of 'address for internal requests from the Document Service'. 'Address' is technically correct but feels awkward. 'Indirizzo' would be more common.",
+          "suggestion": "Indirizzo per le richieste interne al Document Service"
+        },
+        {
+          "type": "grammatical",
+          "description": "The phrase 'dal Document Service' could be improved for clarity and flow. 'al Document Service' would be more correct in this context.",
+          "suggestion": "al Document Service"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '{{productName}}のドキュメントサービスのアドレス' doesn't fully capture the meaning of '{{productName}} address for internal requests from the Document Service.' It misses the 'internal requests' part, which is crucial for understanding the purpose of the address.",
+          "suggestion": "{{productName}}のドキュメントサービスからの内部リクエスト用アドレス"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '문서 서비스의 요청을 위한 {{productName}} 주소' is a literal translation that doesn't quite convey the meaning of 'address for internal requests'. It implies a direct address, rather than the purpose of the address.",
+          "suggestion": "문서 서비스 내부 요청을 위한 {{productName}} 주소"
+        },
+        {
+          "type": "grammar",
+          "description": "While technically grammatical, the sentence flow could be improved for a more natural Korean feel.",
+          "suggestion": "문서 서비스 내부 요청 시 사용할 {{productName}} 주소"
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ທີ່ຢູ່ {{productName}} ສໍາລັບການຮ້ອງຂໍຈາກບໍລິການເອກະສານ\" doesn't fully convey the meaning of \"{{productName}} address for internal requests from the Document Service\".  It translates to \"{{productName}} address for requests from the document service\". It lacks the 'internal' aspect, which is crucial context.",
+          "suggestion": "ທີ່ຢູ່ {{productName}} ສໍາລັບການຮ້ອງຂໍພາຍໃນຈາກບໍລິການເອກະສານ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'adrese pieprasījumiem no Dokumentu dienesta' is too literal and doesn't fully convey the meaning of 'address for internal requests'.  'Dokumentu dienesta' (Document Service) is technically correct, but the phrasing is awkward.",
+          "suggestion": "Consider a more natural translation like '{{productName}} adrese iekšējiem pieprasījumiem no Dokumentu dienesta' or '{{productName}} iekšējā adrese Dokumentu dienesta pieprasījumiem'."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'adres' is a literal translation of 'address' but in this context, 'locatie' would be a more natural and accurate translation, as it refers to a specific location rather than just a mailing address. 'Locatie' better conveys the intended meaning of the English phrase 'Document Service Location URL'.",
+          "suggestion": "{{productName}} locatie voor verzoeken van de Document Service"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Adres {{productName}} dla żądań z Document Service\" is not the most natural or accurate rendering of \"{{productName}} address for internal requests from the Document Service\". It lacks clarity regarding the purpose of the address.",
+          "suggestion": "Adres {{productName}} służący do wewnętrznych zapytań do Document Service"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, using 'służący do' is more formal and possibly unnecessary. A simpler alternative could improve readability.",
+          "suggestion": "Adres {{productName}} do wewnętrznych zapytań do Document Service"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Endereço {{productName}} para solicitações do Document Service\" doesn't accurately convey the meaning of \"{{productName}} address for internal requests from the Document Service\". It implies that the address *is* the product name, rather than being an address *of* the product. A better translation would clarify that it's the address related to the product.",
+          "suggestion": "Endereço relacionado ao {{productName}} para solicitações internas do Document Service"
+        },
+        {
+          "type": "formatting",
+          "description": "The Portuguese translation lacks an article before '{{productName}}'.",
+          "suggestion": "Endereço do {{productName}} para solicitações internas do Document Service"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"{{productName}} address\" is not accurately reflected in the Portuguese translation \"Endereço do {{productName}}\". A more accurate translation would be something like \"Localização do {{productName}}\" or \"Endereço de {{productName}}\" if referring to a specific address.",
+          "suggestion": "Localização do {{productName}}"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'internal requests' is missing context. While 'solicitações' is correct for requests, it doesn't explicitly convey that they're *internal* requests. This is key to understanding the purpose of the URL.",
+          "suggestion": "Solicitações internas do serviço de documentos"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Adresa spațiului {{productName}} pentru solicitări de la Serviciu Documente\" doesn't accurately convey the meaning of \"{{productName}} address for internal requests from the Document Service\". 'Spațiu' implies a physical space, while the English refers to an address (URL).",
+          "suggestion": "Adresa {{productName}} pentru solicitări interne către Serviciul Documente"
+        },
+        {
+          "type": "grammar",
+          "description": "While not strictly incorrect, using 'către' would be more natural than 'de la' in this context when referring to requests going *to* a service.",
+          "suggestion": "Adresa {{productName}} pentru solicitări interne către Serviciul Documente"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Адрес {{productName}} для запросов от Службы документов' doesn't fully capture the meaning of '{{productName}} address for internal requests from the Document Service'. It's missing the nuance of it being a specific address *of* the product.",
+          "suggestion": "Адрес {{productName}}, используемый для внутренних запросов от Службы документов"
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ලේඛන සේවාවෙන් ඉල්ලීම් සඳහා {{productName}} ලිපිනය' doesn't fully convey the meaning of '{{productName}} address for internal requests from the Document Service'. A more accurate translation would clarify that it's the address used *by* or *for* {{productName}} regarding requests from the Document Service.",
+          "suggestion": "ලේඛන සේවාවෙන් ලැබෙන ඉල්ලීම් සඳහා {{productName}} භාවිත කරන ලිපිනය ({{productName}} udatha lipinaya)"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation does not consistently utilize capitalization, which is common in Sinhala for headings or key phrases. Consider capitalizing the key phrases within the sentence.",
+          "suggestion": "ලේඛන සේවාවෙන් ලැබෙන ඉල්ලීම් සඳහා {{productName}} ලිපිනය"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'pre požiadavky zo Služby dokumentu' isn't the most natural or accurate rendering of 'for internal requests from the Document Service'. A better translation would convey the intended meaning more clearly.",
+          "suggestion": "Adresa {{productName}} pre interné žiadosti zo Služby dokumentov"
+        },
+        {
+          "type": "formatting",
+          "description": "The Slovak translation could benefit from capitalization. 'Služby dokumentu' should be capitalized as it's a proper noun (service name).",
+          "suggestion": "Adresa {{productName}} pre interné žiadosti zo Služby dokumentov"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Naslov {{productName}} za zahteve iz storitve za dokumente\" doesn't accurately convey the meaning of '{{productName}} address for internal requests from the Document Service'. It literally translates to 'Address {{productName}} for requests from the document service'. It needs to clarify that it's the *address of* {{productName}}.",
+          "suggestion": "Naslov {{productName}} za interne zahteve iz storitve za dokumente"
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, the phrase 'za zahteve' is a little clunky. Using 'za' twice is not ideal.",
+          "suggestion": "za zahteve iz storitve za dokumente"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"адреса за захтеве из Документ сервиса\" doesn't fully convey the meaning of \"address for internal requests from the Document Service.\"  'адреса' (addresses) implies multiple addresses, while the English suggests a single location.  Also, \"из Документ сервиса\" is a literal translation of 'from the Document Service' and could be improved.",
+          "suggestion": "Consider a more accurate translation like: \"{{productName}} адреса за унутрашње захтеве према Документ сервису\" or \"{{productName}} адреса за унутрашње захтеве ка Документ сервису\""
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'adresa za zahteve iz Dokument servisa' doesn't accurately convey the meaning of 'address for internal requests from the Document Service'. It implies a direct address, whereas the original suggests an endpoint or a location for making requests *to* the Document Service.",
+          "suggestion": "{{productName}} adresa za interne zahteve ka Dokument servisa"
+        },
+        {
+          "type": "grammar",
+          "description": "The use of 'ka' after 'zahteve' requires a case agreement. While 'ka' is acceptable, 'u' could provide a smoother flow.",
+          "suggestion": "{{productName}} adresa za interne zahteve u Dokument servisa"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Belge Hizmetinden gelen talepler için {{productName}} adresi\" is a literal translation that doesn't quite capture the meaning of \"address for internal requests from the Document Service\". It implies a physical address rather than a URL endpoint. A better translation would convey the purpose of the URL.",
+          "suggestion": "Belge Hizmeti'nden gelen dahili istekler için {{productName}} bağlantı adresi"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'bağlantı adresi' might be more specific and clear in the Turkish translation to indicate a URL endpoint.",
+          "suggestion": "Consider using 'bağlantı adresi' instead of 'adresi' for greater clarity."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Адреса {{productName}} для запитів зі служби документів\" doesn't fully convey the meaning of \"{{productName}} address for internal requests from the Document Service.\" The phrase 'for internal requests' is missing a nuance in the Ukrainian translation. While 'для запитів' (for requests) is correct, it doesn't explicitly state the requests are internal.",
+          "suggestion": "Адреса {{productName}} для внутрішніх запитів зі служби документів"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Địa chỉ {{productName}} cho các yêu cầu từ Dịch vụ Tài liệu\" doesn't fully capture the nuance of \"address for internal requests from the Document Service.\"  'Address' here refers to the location or URL, not a physical address. It might be better to convey this is a URL or location specific to internal use.",
+          "suggestion": "Địa chỉ URL/Vị trí {{productName}} cho các yêu cầu nội bộ từ Dịch vụ Tài liệu"
+        },
+        {
+          "type": "formatting",
+          "description": "The term 'nội bộ' could be placed closer to the verb 'cho' for better flow and readability in Vietnamese.",
+          "suggestion": "Địa chỉ URL/Vị trí {{productName}} cho các yêu cầu từ Dịch vụ Tài liệu nội bộ"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '来自文档服务的请求的{{productName}}地址' is not a natural or accurate rendering of '{{productName}} address for internal requests from the Document Service'. It's too literal and reads awkwardly. The phrase '来自文档服务的请求' (requests from the Document Service) is unnecessary and verbose.",
+          "suggestion": "Consider a more concise and natural translation like '文档服务内部请求的{{productName}}地址' ({{productName}} address for internal Document Service requests) or '文档服务内部{{productName}}地址' ({{productName}} address for the Document Service internal)."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

@@ -88,13 +88,13 @@
 .wrapper {
   .selectedItem {
     cursor: pointer;
-
+    margin-bottom: 0;
     .calendarIcon {
       width: 12px;
       height: 12px;
       padding: 0 10px 0 2px;
       path {
-        fill: #{$light-gray-dark};
+        fill: var(--data-picker-calendar-icon);
       }
     }
   }

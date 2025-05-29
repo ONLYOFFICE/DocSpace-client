@@ -1,8 +1,6 @@
 {
   "DeleteForeverButton": "Həmişəlik sil",
-  "DeleteForeverNote": "Zibil qutusundan elementlər həmişəlik silinəcək. Siz onları bərpa edə bilməyəcəksiniz.",
-  "DeleteForeverNoteArchive": "Arxivlənmiş bütün elementlər həmişəlik silinəcək. Onları bərpa edə bilməyəcəksiniz.",
+  "DeleteForeverNote": "{{sectionName}} bölməsindəki bütün elementlər həmişəlik silinəcək. Onları bərpa etmək mümkün deyil.",
   "DeleteForeverTitle": "Həmişəlik silinsin?",
-  "SuccessEmptyArchived": "Arxivi boşaldıldı",
-  "SuccessEmptyTrash": "Zibil qutusu təmizləndi"
+  "SuccessEmptyAction": "{{sectionName}} bölməsi boşaldıldı"
 }

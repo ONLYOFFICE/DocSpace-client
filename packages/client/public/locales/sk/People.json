@@ -1,5 +1,7 @@
 {
   "LblInviteAgain": "Pozvať znova",
   "MessageEmailActivationInstuctionsSentOnEmail": "Pokyny na aktiváciu e-mailu boli odoslané na <1>{{email}}</1> e-mail.",
+  "RemoveUser": "Odstrániť používateľa",
+  "RemoveUserConfirmationText": "Práve sa chystáte odstrániť používateľa z miestnosti. Upozorňujeme, že tento používateľ sa aktívne zúčastňuje na vypĺňaní formulára. V prípade, že budete pokračovať, všetky formuláre, na ktorých sa podieľa, budú v tomto kroku zastavené.",
   "UserStatus": "Stav"
 }

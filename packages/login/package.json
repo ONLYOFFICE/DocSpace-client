@@ -1,10 +1,10 @@
 {
   "name": "@docspace/login",
-  "version": "3.0.4",
+  "version": "3.1.1",
   "private": true,
   "scripts": {
     "build": "node ./scripts/buildTranslations.js && next build",
-    "start": "node ./scripts/buildTranslations.js && NODE_ENV=development node server.js",
+    "start": "node ./scripts/buildTranslations.js && NODE_ENV=development PORT=5011 node server.js",
     "start-prod": "NODE_ENV=production node server.js",
     "start:internal": "node ./scripts/buildTranslations.js && NODE_ENV=development API_HOST=http://127.0.0.1 node server.js",
     "start-prod:internal": "NODE_ENV=production API_HOST=http://127.0.0.1 node server.js",
@@ -21,7 +21,7 @@
     "@hcaptcha/react-hcaptcha": "1.11.0",
     "csvjson-json_beautifier": "^5.0.4",
     "i18next": "20.6.1",
-    "next": "14.2.15",
+    "next": "14.2.26",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-google-recaptcha": "3.1.0",
@@ -39,7 +39,7 @@
     "@types/react-google-recaptcha": "2.1.9",
     "babel-plugin-styled-components": "2.1.4",
     "eslint": "8.57.1",
-    "eslint-config-next": "14.2.15",
+    "eslint-config-next": "14.2.26",
     "prettier": "3.3.3",
     "shx": "0.3.4",
     "typescript": "5.6.3"

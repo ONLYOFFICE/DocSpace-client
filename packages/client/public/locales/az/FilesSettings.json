@@ -1,4 +1,5 @@
 {
+  "CancellaionNotification": "Ləğvetmə bildirişini yenidən göstərməyin",
   "DisplayFileExtension": "Fayl adının yanında fayl uzantısını göstərin",
   "DisplayNotification": "Zibil qutusuna atılan zaman bildirişi göstər",
   "OpenSameTab": "Eyni tabda {{organizationName}} redaktorunu açın",

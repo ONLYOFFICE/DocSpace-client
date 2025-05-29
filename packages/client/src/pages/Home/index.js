@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useLocation, Outlet } from "react-router-dom";
+import { useLocation, Outlet } from "react-router";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -63,6 +63,7 @@ import {
   useOperations,
   useContacts,
   useSettings,
+  useFlows,
 } from "./Hooks";
 
 const PureHome = (props) => {
@@ -165,6 +166,13 @@ const PureHome = (props) => {
     hideConfirmCancelOperation,
     welcomeFormFillingTipsVisible,
     formFillingTipsVisible,
+    chatFiles,
+    vectorizedFiles,
+    wrongFiles,
+    removeActiveItem,
+    allowInvitingGuests,
+    checkGuests,
+    hasGuests,
   } = props;
 
   // console.log(t("ComingSoon"))
@@ -175,7 +183,14 @@ const PureHome = (props) => {
     location.pathname.includes("settings") &&
     !location.pathname.includes("settings/plugins");
 
-  const contactsView = getContactsView(location);
+  const view = getContactsView(location);
+  if (allowInvitingGuests === false && view === "guests") checkGuests();
+  const contactsView = allowInvitingGuests
+    ? view
+    : typeof hasGuests === "boolean" && view === "guests" && !hasGuests
+      ? "people"
+      : view;
+
   const isContactsPage = !!contactsView;
   const isContactsEmptyView =
     contactsView === "groups" ? isEmptyGroups : isUsersEmptyView;
@@ -189,6 +204,8 @@ const PureHome = (props) => {
     },
     [setIsSectionHeaderLoading, setIsSectionBodyLoading],
   );
+
+  useFlows({ vectorizedFiles, removeActiveItem, wrongFiles });
 
   const { onDrop } = useFiles({
     t,
@@ -317,6 +334,7 @@ const PureHome = (props) => {
       isLoaded: !firstLoad,
       viewAs: contactsViewAs,
       isAccounts: isContactsPage,
+      chatFiles,
     };
 
     if (!isContactsPage) {
@@ -390,11 +408,9 @@ const PureHome = (props) => {
           <SectionSubmenuContent />
         </Section.SectionSubmenu>
 
-        {isRecycleBinFolder && !isEmptyPage ? (
-          <Section.SectionWarning>
-            <SectionWarningContent />
-          </Section.SectionWarning>
-        ) : null}
+        <Section.SectionWarning>
+          <SectionWarningContent />
+        </Section.SectionWarning>
 
         {shouldRenderSectionFilter ? (
           <Section.SectionFilter>
@@ -441,6 +457,7 @@ export const Component = inject(
     indexingStore,
     dialogsStore,
     filesSettingsStore,
+    flowStore,
   }) => {
     const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
     const {
@@ -496,6 +513,8 @@ export const Component = inject(
       scrollToTop,
       wsCreatedPDFForm,
       mainButtonVisible,
+
+      removeActiveItem,
     } = filesStore;
 
     const { gallerySelected } = oformsStore;
@@ -542,6 +561,9 @@ export const Component = inject(
       enablePlugins,
       getSettings,
       showGuestReleaseTip,
+      allowInvitingGuests,
+      checkGuests,
+      hasGuests,
     } = settingsStore;
 
     const {
@@ -682,6 +704,14 @@ export const Component = inject(
       isErrorChecking,
       setOperationCancelVisible,
       hideConfirmCancelOperation,
+
+      chatFiles: filesStore.filesList,
+      vectorizedFiles: flowStore.vectorizedFiles,
+      wrongFiles: flowStore.wrongFiles,
+      removeActiveItem,
+      allowInvitingGuests,
+      checkGuests,
+      hasGuests,
     };
   },
 )(observer(Home));

@@ -28,7 +28,7 @@ import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 
 import React from "react";
 import styled, { css } from "styled-components";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -78,16 +78,16 @@ const SectionHeaderContent = () => {
   return (
     <StyledWrapper>
       <StyledHeader>
-        {!item?.isHeader && (
+        {!item?.isHeader ? (
           <IconButton
             iconName={ArrowPathReactSvgUrl}
             size={17}
-            isFill={true}
+            isFill
             onClick={onBackToParent}
             className="arrow-button"
           />
-        )}
-        <Heading type="content" truncate={true}>
+        ) : null}
+        <Heading type="content" truncate>
           <div className="header">{t(item?.tKey)}</div>
         </Heading>
       </StyledHeader>

@@ -299,7 +299,6 @@ const config = {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: "static/styles/[name].[contenthash].css",
-      chunkFilename: "static/styles/[id].[contenthash].css",
       ignoreOrder: true,
     }),
     new ExternalTemplateRemotesPlugin(),
@@ -333,8 +332,6 @@ const getBuildYear = () => {
 };
 
 module.exports = (env, argv) => {
-  console.log("ENV", { env });
-
   config.devtool = "source-map";
 
   const isProduction = argv.mode === "production";
@@ -381,6 +378,20 @@ module.exports = (env, argv) => {
     };
   }
 
+  // Extract css processed by MiniCssExtractPlugin in a single file
+  config.optimization = {
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: "styles",
+          type: "css/mini-extract",
+          chunks: "all",
+          enforce: true,
+        },
+      },
+    },
+  };
+
   config.plugins.push(
     new ModuleFederationPlugin({
       name: "client",
@@ -418,18 +429,8 @@ module.exports = (env, argv) => {
         "./ConnectDialog": "./src/components/dialogs/ConnectDialog",
       },
       shared: {
-        ...Object.entries(deps).reduce((acc, [key, value]) => {
-          if (key !== "@onlyoffice/docspace-sdk-js") {
-            acc[key] = value;
-          }
-          return acc;
-        }, {}),
+        ...deps,
         ...sharedDeps,
-        "@onlyoffice/docspace-sdk-js": {
-          singleton: true,
-          eager: true,
-          requiredVersion: deps["@onlyoffice/docspace-sdk-js"],
-        },
       },
     }),
   );
@@ -463,6 +464,9 @@ module.exports = (env, argv) => {
   } else {
     htmlTemplate.browserDetectorUrl = `/static/scripts/browserDetector.js?hash=${
       runtime.checksums["browserDetector.js"] || dateHash
+    }`;
+    htmlTemplate.chatWidget = `/static/scripts/chatWidget.js?hash=${
+      runtime.checksums["chatWidget.js"] || dateHash
     }`;
     htmlTemplate.configUrl = `/static/scripts/config.json?hash=${
       runtime.checksums["config.json"] || dateHash

@@ -99,14 +99,14 @@ class OAuthStore {
   }
 
   setJwtToken = async () => {
-    let cookieToken = getOAuthJWTSignature();
+    let cookieToken = getOAuthJWTSignature(this.userStore!.user!.id);
 
     if (cookieToken) return;
 
     if (this.setJwtTokenRunning) {
       await new Promise((resolve) => {
         setInterval(() => {
-          cookieToken = getOAuthJWTSignature();
+          cookieToken = getOAuthJWTSignature(this.userStore!.user!.id);
           if (cookieToken) resolve(cookieToken);
         }, 100);
       });
@@ -118,7 +118,7 @@ class OAuthStore {
 
     this.setJwtTokenRunning = true;
 
-    await setOAuthJWTSignature();
+    await setOAuthJWTSignature(this.userStore!.user!.id);
 
     this.setJwtTokenRunning = false;
   };
@@ -212,9 +212,14 @@ class OAuthStore {
     this.setInfoDialogVisible(false);
     this.setPreviewDialogVisible(false);
 
-    window?.DocSpace?.navigate(
-      `/portal-settings/developer-tools/oauth/${clientId}`,
-    );
+    const isPortalSettings =
+      window?.DocSpace?.location.pathname.includes("portal-settings");
+
+    const basePath = isPortalSettings ? "/portal-settings" : "";
+
+    const path = `${basePath}/developer-tools/oauth/${clientId}`;
+
+    window?.DocSpace?.navigate(path);
   };
 
   fetchClients = async () => {
@@ -224,30 +229,38 @@ class OAuthStore {
       this.setClientsIsLoading(true);
       const clientList: IClientListProps = await getClientList(0, PAGE_LIMIT);
 
-      const { id, displayName, avatarSmall } = this.userStore!.user!;
+      const fetchUsers = async () => {
+        const { id, displayName, avatarSmall } = this.userStore!.user!;
 
-      const newUsers = clientList.data
-        .filter((c) => c.createdBy !== id)
-        .map((c) => c.createdBy)
-        .filter((c, idx, arr) => arr.indexOf(c) === idx);
+        const newUsers = clientList.data
+          .filter((c) => c.createdBy !== id)
+          .map((c) => c.createdBy)
+          .filter((c, idx, arr) => arr.indexOf(c) === idx);
 
-      const users = await Promise.all(
-        newUsers.map((u) => api.people.getUserById(u)),
-      );
+        const users = await Promise.all(
+          newUsers.map((u) => api.people.getUserById(u)),
+        );
 
-      clientList.data.forEach((client) => {
-        const user = users.find((u) => u.id === client.createdBy);
+        clientList.data.forEach((client) => {
+          const user = users.find((u) => u.id === client.createdBy);
 
-        if (user) {
-          client.creatorAvatar = user.avatarSmall;
-          client.creatorDisplayName = user.displayName;
-        }
+          if (user) {
+            client.creatorAvatar = user.avatarSmall;
+            client.creatorDisplayName = user.displayName;
+          }
 
-        if (client.createdBy === id) {
-          client.creatorAvatar = avatarSmall;
-          client.creatorDisplayName = displayName;
-        }
-      });
+          if (client.createdBy === id) {
+            client.creatorAvatar = avatarSmall;
+            client.creatorDisplayName = displayName;
+          }
+        });
+
+        runInAction(() => {
+          this.clients = [...clientList.data];
+        });
+      };
+
+      fetchUsers();
 
       runInAction(() => {
         this.clients = [...clientList.data];
@@ -286,38 +299,46 @@ class OAuthStore {
       PAGE_LIMIT,
     );
 
-    const { id, displayName, avatarSmall } = this.userStore!.user!;
+    const fetchUsers = async () => {
+      const { id, displayName, avatarSmall } = this.userStore!.user!;
 
-    const newUsers = clientList.data
-      .filter(
-        (c) =>
-          c.createdBy !== id ||
-          !this.clientList.find((cl) => cl.createdBy === c.createdBy),
-      )
-      .map((c) => c.createdBy)
-      .filter((c, idx, arr) => arr.indexOf(c) === idx);
+      const newUsers = clientList.data
+        .filter(
+          (c) =>
+            c.createdBy !== id ||
+            !this.clientList.find((cl) => cl.createdBy === c.createdBy),
+        )
+        .map((c) => c.createdBy)
+        .filter((c, idx, arr) => arr.indexOf(c) === idx);
 
-    const users = await Promise.all(
-      newUsers.map((u) => api.people.getUserById(u)),
-    );
+      const users = await Promise.all(
+        newUsers.map((u) => api.people.getUserById(u)),
+      );
 
-    clientList.data.forEach((client) => {
-      const user =
-        users.find((u) => u.id === client.createdBy) ??
-        this.clientList.find((cl) => cl.createdBy === client.createdBy);
+      clientList.data.forEach((client) => {
+        const user =
+          users.find((u) => u.id === client.createdBy) ??
+          this.clientList.find((cl) => cl.createdBy === client.createdBy);
 
-      if (user) {
-        client.creatorAvatar =
-          "avatarSmall" in user ? user.avatarSmall : user.creatorAvatar;
-        client.creatorDisplayName =
-          "displayName" in user ? user.displayName : user.creatorDisplayName;
-      }
+        if (user) {
+          client.creatorAvatar =
+            "avatarSmall" in user ? user.avatarSmall : user.creatorAvatar;
+          client.creatorDisplayName =
+            "displayName" in user ? user.displayName : user.creatorDisplayName;
+        }
 
-      if (client.createdBy === id) {
-        client.creatorAvatar = avatarSmall;
-        client.creatorDisplayName = displayName;
-      }
-    });
+        if (client.createdBy === id) {
+          client.creatorAvatar = avatarSmall;
+          client.creatorDisplayName = displayName;
+        }
+      });
+
+      runInAction(() => {
+        this.clients = [...this.clients, ...clientList.data];
+      });
+    };
+
+    fetchUsers();
 
     runInAction(() => {
       this.currentPage = clientList.page;
@@ -716,6 +737,7 @@ class OAuthStore {
       icon: CodeReactSvgUrl,
       label: t("AuthButton"),
       onClick: onShowPreview,
+      disabled: !item.enabled,
     };
 
     const enableOption = {
@@ -737,6 +759,7 @@ class OAuthStore {
       icon: GenerateIconUrl,
       label: t("OAuth:GenerateToken"),
       onClick: onGenerateDeveloperToken,
+      disabled: !item.enabled,
     };
 
     const revokeDeveloperTokenOption = {
@@ -744,6 +767,7 @@ class OAuthStore {
       icon: RevokeIconUrl,
       label: t("OAuth:RevokeDialogHeader"),
       onClick: onRevokeDeveloperToken,
+      disabled: !item.enabled,
     };
 
     const contextOptions: ContextMenuModel[] = [
@@ -769,10 +793,11 @@ class OAuthStore {
         contextOptions.unshift(enableOption);
       }
 
-      contextOptions.unshift({
-        key: "Separator dropdownItem",
-        isSeparator: true,
-      });
+      if (item.enabled)
+        contextOptions.unshift({
+          key: "Separator dropdownItem",
+          isSeparator: true,
+        });
 
       contextOptions.unshift(revokeDeveloperTokenOption);
       contextOptions.unshift(generateDeveloperTokenOption);

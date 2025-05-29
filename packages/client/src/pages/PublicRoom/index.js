@@ -26,7 +26,7 @@
 
 import React, { useEffect } from "react";
 import { observer, inject } from "mobx-react";
-import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
+import { useNavigate, useLocation, useSearchParams } from "react-router";
 import Section from "@docspace/shared/components/section";
 import { Loader } from "@docspace/shared/components/loader";
 import { ValidationStatus } from "@docspace/shared/enums";
@@ -68,14 +68,15 @@ const PublicRoom = (props) => {
     const filterObj = FilesFilter.getFilter(window.location);
 
     if (filterObj?.folder && filterObj?.folder !== "@my") {
-      const url = `${location.pathname}?key=${key}&${filterObj.toUrlParams()}`;
+      const url = `${location.pathname}?${filterObj.toUrlParams()}`;
 
       navigate(url);
     } else {
       const newFilter = FilesFilter.getDefault();
       newFilter.folder = roomId;
+      newFilter.key = key;
 
-      const url = `${location.pathname}?key=${key}&${newFilter.toUrlParams()}`;
+      const url = `${location.pathname}?${newFilter.toUrlParams()}`;
 
       navigate(url);
     }

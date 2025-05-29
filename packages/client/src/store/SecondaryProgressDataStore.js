@@ -74,7 +74,8 @@ class SecondaryProgressDataStore {
 
     const { error, title, itemsCount, destFolderInfo, isFolder } =
       currentOperation;
-    const t = (key, options) => i18n.t(key, { ...options, ns: "Files" });
+    const t = (key, options) =>
+      i18n.t(key, { ...options, ns: ["Files", "Common"] });
 
     let toastTranslation = "";
 
@@ -82,11 +83,14 @@ class SecondaryProgressDataStore {
 
     const onClickLocation = () => {
       toastr.clear();
+
       const { visible, setMediaViewerData } = this.mediaViewerDataStore;
 
       if (visible) {
         setMediaViewerData({ visible: false, id: null });
       }
+
+      if (window.ClientConfig?.isFrame) return;
 
       window.DocSpace.navigate(url, { state });
     };
@@ -162,6 +166,7 @@ class SecondaryProgressDataStore {
           ) : (
             <Trans
               t={t}
+              ns="Common"
               i18nKey="CopyItem"
               components={commonComponents}
               values={commonProps}
@@ -309,6 +314,7 @@ class SecondaryProgressDataStore {
         alert: progressInfo.alert,
         items: updatedItems,
         completed: isCompleted,
+        percent: progressInfo.percent,
       };
     } else {
       const progress = {
@@ -317,6 +323,7 @@ class SecondaryProgressDataStore {
         items: [progressInfo],
         label: getOperationsProgressTitle(operation),
         completed: progressInfo.completed,
+        percent: progressInfo.percent,
       };
 
       this.secondaryOperationsArray = [

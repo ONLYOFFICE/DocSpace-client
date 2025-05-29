@@ -51,6 +51,8 @@ class SettingsStore {
   // Use CSS media queries for SSR components.
   currentDeviceType: DeviceType = DeviceType.desktop;
 
+  displayAbout: boolean = true;
+
   constructor(initData?: TSettingsStoreInitData) {
     if (initData?.viewAs) {
       this.filesViewAs = initData.viewAs;
@@ -83,6 +85,10 @@ class SettingsStore {
 
   setCurrentDeviceType = (value: DeviceType) => {
     this.currentDeviceType = value;
+  };
+
+  setDisplayAbout = (value: boolean) => {
+    this.displayAbout = value;
   };
 }
 

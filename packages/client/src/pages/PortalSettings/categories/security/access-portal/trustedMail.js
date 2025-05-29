@@ -26,7 +26,7 @@
 
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
@@ -267,7 +267,6 @@ const TrustedMail = (props) => {
 
       {type === "1" ? (
         <UserFields
-          isAutoFocussed
           inputs={domains}
           buttonLabel={t("AddTrustedDomain")}
           onChangeInput={onChangeInput}
@@ -275,6 +274,7 @@ const TrustedMail = (props) => {
           onClickAdd={onClickAdd}
           regexp={regexp}
           classNameAdditional="add-trusted-domain"
+          isAutoFocussed
         />
       ) : null}
 

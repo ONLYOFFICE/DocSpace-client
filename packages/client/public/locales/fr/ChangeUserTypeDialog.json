@@ -1,11 +1,17 @@
 {
+  "ChangeContactType": "Modifier le type de contact",
   "ChangeGuestsTypeMessage": "L'invité <strong>{{userName}}</strong> sera déplacé dans la section {{membersSection}} et se verra attribuer le type Utilisateur. Les utilisateurs ont leur propre section {{documentsSection}} , peuvent créer et modifier des fichiers, mais ne peuvent pas créer de salles.",
   "ChangeGuestsTypeMessageMulti": "Les invités sélectionnés seront déplacés dans la section {{membersSection}} et se verront attribuer le type Utilisateur. Les utilisateurs ont leur propre section {{documentsSection}}, peuvent créer et modifier des fichiers, mais ne peuvent pas créer de salles.",
+  "ChangeGuestsTypeToAdmin": "L'invité <strong>{{userName}}</strong> sera déplacé dans la section {{membersSection}} et se verra attribuer le type <strong>'{{ secondType }}'</strong>. Les administrateurs de {{productName}} peuvent accéder aux paramètres de {{productName}}, gérer et archiver les salles, inviter de nouveaux utilisateurs et attribuer des rôles inférieurs à leur niveau. Les administrateurs de {{productName}} ont accès à la section {{documentsSection}}.",
+  "ChangeGuestsTypeToAdminMulti": "Les invités sélectionnés seront déplacés dans la section {{membersSection}} et se verront attribuer le type <strong>'{{ secondType }}'</strong>. Les administrateurs de {{productName}} peuvent accéder aux paramètres de {{productName}}, gérer et archiver les salles, inviter de nouveaux utilisateurs et attribuer des rôles inférieurs à leur niveau. Les administrateurs de {{productName}} ont accès à la section {{documentsSection}}.",
+  "ChangeGuestsTypeToManager": "L'invité <strong>{{userName}}</strong> sera déplacé dans la section {{membersSection}} et se verra attribuer le type <strong>'{{ secondType }}'</strong>. Les administrateurs de salle peuvent créer et gérer les salles qui leur sont attribuées, inviter de nouveaux utilisateurs et attribuer les rôles d'administrateur de salle et d'inférieur. Les administrateurs de salle ont accès à la section {{documentsSection}}.",
+  "ChangeGuestsTypeToManagerMulti": "Les invités sélectionnés seront déplacés dans la section {{membersSection}} et se verront attribuer le type <strong>'{{ secondType }}'</strong>. Les administrateurs de salle peuvent créer et gérer les salles qui leur sont attribuées, inviter de nouveaux utilisateurs et attribuer les rôles d'administrateur de salle et d'inférieur. Les administrateurs de salle ont accès à la section {{documentsSection}}.",
   "ChangeUserTypeButton": "Modifier le type",
-  "ChangeUserTypeHeader": "Changer le type d'utilisateur",
   "ChangeUserTypeMessage": "Les utilisateurs du type <strong>'{{ firstType }}'</strong> seront transférés vers le type <strong>'{{ secondType }}'</strong>.",
-  "ChangeUserTypeMessageMulti": "Les utilisateurs sélectionnés seront déplacés vers le type <strong>'{{ secondType }}'</strong>.",
-  "ChangeUserTypeMessageWarning": "Vous ne pouvez pas changer le type pour les administrateurs de {{productName}} ainsi que pour vous même.",
+  "ChangeUserTypeNote": "<1>Note :</1> vous ne pouvez pas modifier le type pour l'administrateur {{productName}} et pour vous-même.",
+  "DataReassignmentInfo": "Les salles créées par cet utilisateur vous seront automatiquement attribuées. Pour réattribuer les salles à une autre personne, cliquez sur le lien correspondant ci-dessous.",
+  "DataReassignmentWithFilesDeletion": "Tous les fichiers partagés créés par ce contact vous seront <1>automatiquement attribués dans 30 jours</1>. Pour réattribuer les salles/fichiers partagés à une autre personne, cliquez sur le lien correspondant ci-dessous.",
+  "PersonalDataDeletion": "Tous les fichiers et dossiers de la section {{sectionName}} de ce contact seront <1>supprimés de façon permanente dans 30 jours</1>.",
   "SuccessChangeGuestType": "Le type d'invité a été modifié avec succès",
   "SuccessChangeUserType": "Le type de l'utilisateur a été modifié avec succès"
 }

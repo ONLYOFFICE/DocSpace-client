@@ -1,0 +1,262 @@
+{
+  "key_path": "Commenting",
+  "content": "commenting",
+  "content_en_sha1_hash": "17e804d39985b2a5398ed68ed204d2de943b9a85",
+  "created_at": "2025-05-19T21:30:43.560Z",
+  "updated_at": "2025-05-28T09:30:02.828Z",
+  "comment": {
+    "text": "This translation key is used to display the text \"Commenting\" in a public room page, specifically on a share access control element. It appears as part of a UI that indicates the current permissions and viewing rights.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:03.641Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PublicRoom/PublicRoomPage.js",
+      "line_number": 95,
+      "context": "const getAccessTranslation = () => {\n switch (access) {\n case ShareAccessRights.ReadOnly:\n return t(\"Common:ViewOnly\");\n case ShareAccessRights.Comment:\n return t(\"Common:Commenting\");\n case ShareAccessRights.Review:\n return t(\"Common:Reviewing\");\n case ShareAccessRights.Editing:\n return t(\"Common:Editor\");\n default:",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Şərh edir\" means \"commenting/commenting (someone)\" or \"commenting (in progress)\".  It doesn't directly translate the English noun \"commenting\". A better translation would be something like \"şərhlər\" (comments) or \"kommenting\" (transliteration).",
+          "suggestion": "şərhlər or kommenting"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'մեկնաբանելով' (meknabanelov) can translate to 'commenting' or 'interpreting', it carries a stronger connotation of interpretation or explanation. 'Մեկնաբանելով' implies a more detailed analysis or commentary, not simply the act of adding a comment. A more direct translation for 'commenting' might be something like 'նշումներ անելով' (nshumner anelov) or 'մեկնաբանություն ավելացնելով' (meknabanutyun avelacnelov), depending on the intended nuance.",
+          "suggestion": "Consider 'նշումներ անելով' (nshumner anelov) or 'մեկնաբանություն ավելացնելով' (meknabanutyun avelacnelov) for a closer match to the English meaning of 'commenting'."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation 'コメントの追加' literally translates to 'Adding Comments'. While it conveys the general concept, 'commenting' implies the action or state of commenting, not just the act of adding them. A more accurate translation might be 'コメント' or 'コメント機能' depending on the context.",
+          "suggestion": "コメント or コメント機能"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"주석 추가\" (jusok chuga) translates to \"adding annotations\" or \"adding comments\" but isn't the most natural or direct translation of \"commenting\" in all contexts. While acceptable, it lacks nuance. A more direct or common translation might be \"댓글 달기\" (comment dalki) or simply \"댓글\" (comment).",
+          "suggestion": "Consider \"댓글 달기\" (comment dalki) or \"댓글\" (comment) as more direct translations depending on the specific context."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"comentar\" can mean \"to comment\", it's a verb. \"Commenting\" is a noun referring to the act of commenting. A more accurate translation would consider a noun form, such as \"comentários\".",
+          "suggestion": "comentários"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation \"comentaristas\" means \"commentators\" or \"people who comment.\" The English word \"commenting\" refers to the action of commenting, not the people doing it. A more appropriate translation would be something like \"comentários\" (comments) or \"escrever comentários\" (writing comments).",
+          "suggestion": "comentários"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Comentarii\" is the plural form of \"comment.\" The English term \"commenting\" refers to the act of commenting, which should be translated to a verbal noun or a more descriptive phrase.",
+          "suggestion": "Consider alternatives like \"comentarea\" (the act of commenting) or \"lasarea comentarii\" (leaving comments)."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation \"Yorum Yapılıyor\" translates to \"Commenting is being done\" or \"Comments are being made.\" It doesn't directly translate to \"commenting.\" A more accurate and concise translation would be \"Yorum\" or \"Yorumlama\".",
+          "suggestion": "Yorum"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Nhận xét' is a general term for 'comments' or 'remarks'. While not inherently wrong, it's a more formal translation of 'commenting'. A more direct and natural translation would be 'bình luận'.",
+          "suggestion": "bình luận"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

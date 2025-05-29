@@ -62,4 +62,5 @@ export {
   getContactsUrl,
   createGroup,
   editGroup,
+  shareGuest,
 } from "./utils";

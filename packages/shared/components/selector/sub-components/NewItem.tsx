@@ -26,12 +26,14 @@
 
 import React from "react";
 
-import { Text } from "../../text";
+import { classNames } from "@docspace/shared/utils";
 import { SelectorAddButton } from "../../selector-add-button";
 
-import { StyledItem } from "../Selector.styled";
 import NewItemDropDown from "./NewItemDropDown";
 import useCreateDropDown from "../hooks/useCreateDropDown";
+import { NewItemProps } from "../Selector.types";
+
+import styles from "../Selector.module.scss";
 
 const NewItem = ({
   label,
@@ -41,15 +43,7 @@ const NewItem = ({
   hotkey,
   inputItemVisible,
   listHeight,
-}: {
-  label: string;
-  style: React.CSSProperties;
-  dropDownItems?: React.ReactElement[];
-  onCreateClick?: VoidFunction;
-  hotkey?: string;
-  inputItemVisible?: boolean;
-  listHeight: number;
-}) => {
+}: NewItemProps) => {
   const { isOpenDropDown, onCloseDropDown, setIsOpenDropDown } =
     useCreateDropDown();
 
@@ -90,26 +84,22 @@ const NewItem = ({
   }, [hotkey, onCreateClickAction, onKeyDown]);
 
   return (
-    <StyledItem
+    <div
       key="create-new-item"
       style={style}
-      isSelected={false}
-      isMultiSelect={false}
-      noHover
+      className={classNames(styles.selectorItem, styles.hoverable)}
     >
-      <SelectorAddButton onClick={onCreateClickAction} isAction />
-      <Text
-        className="label label-disabled clicked-label"
-        fontWeight={600}
-        fontSize="14px"
-        noSelect
-        truncate
-        dir="auto"
+      <SelectorAddButton
         onClick={onCreateClickAction}
-        title={label}
-      >
-        {label}
-      </Text>
+        isAction
+        label={label}
+        titleText={label}
+        fontSize="14px"
+        lineHeight="18px"
+        noSelect
+        dir="auto"
+        truncate
+      />
       {isOpenDropDown && dropDownItems && dropDownItems.length > 0 ? (
         <NewItemDropDown
           dropDownItems={dropDownItems}
@@ -117,7 +107,7 @@ const NewItem = ({
           listHeight={listHeight}
         />
       ) : null}
-    </StyledItem>
+    </div>
   );
 };
 

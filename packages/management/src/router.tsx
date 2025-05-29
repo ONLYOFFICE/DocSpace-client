@@ -25,23 +25,26 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { createBrowserRouter, Navigate } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router";
+
+import Error404 from "@docspace/shared/components/errors/Error404";
+import { PreparationPortal } from "@docspace/shared/pages/PreparationPortal";
+import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
+
+import { WhiteLabel } from "client/WhiteLabelPage";
+import { BrandName } from "client/BrandNamePage";
+import { CompanyInfoSettings } from "client/CompanyInfoPage";
+import { AdditionalResources } from "client/AdditionalResPage";
 
 import App from "./App";
 
 import Spaces from "./categories/spaces";
 import Settings from "./categories/settings";
-import { WhiteLabel } from "client/WhiteLabelPage";
-import { BrandName } from "client/BrandNamePage";
-import { CompanyInfoSettings } from "client/CompanyInfoPage";
-import { AdditionalResources } from "client/AdditionalResPage";
 import Payments from "./categories/payments";
 import Bonus from "./categories/bonus";
+
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import PrivateRouteWrapper from "./components/PrivateRouterWrapper";
-
-import Error404 from "@docspace/shared/components/errors/Error404";
-import { PreparationPortal } from "@docspace/shared/pages/PreparationPortal";
 
 const routes = [
   {
@@ -52,6 +55,9 @@ const routes = [
           <App />
         </PrivateRouteWrapper>
       </ErrorBoundary>
+    ),
+    hydrateFallbackElement: (
+      <Loader className="pageLoader" type={LoaderTypes.rombs} size="40px" />
     ),
     errorElement: <Error404 />,
     children: [
@@ -97,6 +103,10 @@ const routes = [
         element: <Settings />,
       },
       {
+        path: "/management/settings/encrypt-data",
+        element: <Settings />,
+      },
+      {
         path: "/management/payments",
         element: <Payments />,
       },
@@ -105,7 +115,7 @@ const routes = [
         element: <Bonus />,
       },
       {
-        path: "preparation-portal",
+        path: "/management/preparation-portal",
         element: <PreparationPortal />,
       },
     ],

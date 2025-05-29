@@ -185,6 +185,30 @@ class TreeFoldersStore {
     return this.rootFoldersTitles[FolderType.TRASH];
   }
 
+  get personalFolderId() {
+    return this.rootFoldersTitles[FolderType.USER]?.id;
+  }
+
+  get personalUserFolderTitle() {
+    return this.rootFoldersTitles[FolderType.USER]?.title;
+  }
+
+  get trashFolderTitle() {
+    return this.rootFoldersTitles[FolderType.TRASH]?.title;
+  }
+
+  get archiveFolderTitle() {
+    return this.rootFoldersTitles[FolderType.Archive]?.title;
+  }
+
+  get isPersonalReadOnly() {
+    return (
+      this.isPersonalRoom &&
+      this.rootFoldersTitles[FolderType.USER]?.security?.Read &&
+      !this.rootFoldersTitles[FolderType.USER]?.security?.Create
+    );
+  }
+
   /**
    * @type {import("@docspace/shared/api/files/types").TFolder=}
    */
@@ -311,6 +335,10 @@ class TreeFoldersStore {
       this.recycleBinFolder &&
       this.selectedFolderStore.id === this.recycleBinFolder.id
     );
+  }
+
+  get isFlowsFolder() {
+    return window.location.pathname.includes("/flows");
   }
 
   get isRoomsFolder() {

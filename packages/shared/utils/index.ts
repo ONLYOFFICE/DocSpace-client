@@ -79,14 +79,23 @@ import {
   isBetaLanguage,
   getLogoUrl,
 } from "./common";
-import { DeviceType, FilterType, RoomsType } from "../enums";
+import {
+  DeviceType,
+  FilterType,
+  RoomsType,
+  FileFillingFormStatus,
+  FolderType,
+} from "../enums";
 import { TFile } from "../api/files/types";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
 import type { TRoom } from "../api/rooms/types";
 import { injectDefaultTheme } from "./injectDefaultTheme";
 import { getFromSessionStorage } from "./getFromSessionStorage";
 import { saveToSessionStorage } from "./saveToSessionStorage";
+import { getFromLocalStorage } from "./getFromLocalStorage";
 import { fakeFormFillingList } from "./formFillingTourData";
+import { getCountTilesInRow } from "./getCountTilesInRow";
+import { getSelectFormatTranslation } from "./getSelectFormatTranslation";
 
 export {
   isBetaLanguage,
@@ -144,8 +153,11 @@ export {
   getTextColor,
   getFromSessionStorage,
   saveToSessionStorage,
+  getFromLocalStorage,
   getFormFillingTipsStorageName,
   fakeFormFillingList,
+  getCountTilesInRow,
+  getSelectFormatTranslation,
 };
 
 export const getModalType = () => {
@@ -243,6 +255,45 @@ export const addLog = (log: string, category: "socket") => {
   }
 };
 
+export const getFillingStatusLabel = (
+  status: FileFillingFormStatus | undefined,
+  t: TTranslation,
+) => {
+  switch (status) {
+    case FileFillingFormStatus.Draft:
+      return t("Common:BadgeMyDraftTitle");
+    case FileFillingFormStatus.YourTurn:
+      return t("Common:YourTurn");
+    case FileFillingFormStatus.InProgress:
+      return t("Common:InProgress");
+    case FileFillingFormStatus.Stopped:
+      return t("Common:Stopped");
+    case FileFillingFormStatus.Completed:
+      return t("Common:Complete");
+    default:
+      return "";
+  }
+};
+export const getFillingStatusTitle = (
+  status: FileFillingFormStatus | undefined,
+  t: TTranslation,
+) => {
+  switch (status) {
+    case FileFillingFormStatus.Draft:
+      return t("Common:BadgeDraftTitle");
+    case FileFillingFormStatus.YourTurn:
+      return t("Common:BadgeYourTurnTitle");
+    case FileFillingFormStatus.InProgress:
+      return t("Common:BadgeInProgressTitle");
+    case FileFillingFormStatus.Stopped:
+      return t("Common:BadgeStoppedTitle");
+    case FileFillingFormStatus.Completed:
+      return t("Common:BadgeCompletedTitle");
+    default:
+      return "";
+  }
+};
+
 export const getCheckboxItemId = (key: string | FilterType | RoomsType) => {
   switch (key) {
     case "all":
@@ -265,6 +316,7 @@ export const getCheckboxItemId = (key: string | FilterType | RoomsType) => {
       return "selected-only-files";
 
     case `room-${RoomsType.CustomRoom}`:
+    case `room-${RoomsType.AIRoom}`:
       return "selected-only-custom-room";
     case `room-${RoomsType.EditingRoom}`:
       return "selected-only-collaboration-rooms";
@@ -311,6 +363,9 @@ export const getCheckboxItemLabel = (
     case `room-${RoomsType.FormRoom}`:
       return t("Common:FormRoom");
 
+    case `room-${RoomsType.AIRoom}`:
+      return "AI Room";
+
     case `room-${RoomsType.PublicRoom}`:
       return t("Common:PublicRoomLabel");
     case `room-${RoomsType.VirtualDataRoom}`:
@@ -319,4 +374,13 @@ export const getCheckboxItemLabel = (
     default:
       return "";
   }
+};
+
+export const isSystemFolder = (folderType: FolderType) => {
+  return (
+    folderType === FolderType.InProgress ||
+    folderType === FolderType.Done ||
+    folderType === FolderType.SubFolderDone ||
+    folderType === FolderType.SubFolderInProgress
+  );
 };

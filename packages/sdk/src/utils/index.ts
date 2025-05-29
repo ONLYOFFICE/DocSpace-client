@@ -37,10 +37,19 @@ import {
 import type { TTranslation } from "@docspace/shared/types";
 
 export const getIconBySize = (path: string, size: number = 32) => {
-  const getOrDefault = (container: TIconContainer): string =>
-    container.has(path)
+  const getOrDefault = (container: TIconContainer): string => {
+    const iconPath = container.has(path)
       ? (container.get(path) ?? "")
       : (container.get("file.svg") ?? "");
+
+    const publicIndex = iconPath.indexOf("/public");
+
+    if (publicIndex !== -1) {
+      return iconPath.substring(publicIndex).replace("/public", "/static");
+    }
+
+    return iconPath;
+  };
 
   switch (+size) {
     case 24:
@@ -69,6 +78,9 @@ export const getRoomsIcon = (
     switch (roomType) {
       case RoomsType.CustomRoom:
         path = "customRoom.svg";
+        break;
+      case RoomsType.AIRoom:
+        path = "aiRoom.svg";
         break;
       case RoomsType.EditingRoom:
         path = "editingRoom.svg";

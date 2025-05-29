@@ -12,10 +12,7 @@
 
 .rowContent {
   width: 100%;
-  display: inline-flex;
-
   display: block;
-  height: var(--row-content-height);
 }
 
 .mainContainerWrapper {
@@ -72,10 +69,6 @@
 }
 
 .tabletSideInfo {
-  display: none;
+  display: block;
   @include truncate;
-
-  @include tablet-and-below {
-    display: block;
-  }
 }

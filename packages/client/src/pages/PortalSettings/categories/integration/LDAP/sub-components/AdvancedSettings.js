@@ -74,6 +74,7 @@ const AdvancedSettings = ({
           label={t("Settings:DisableEmailVerification")}
           isChecked={disableEmailVerification}
           onChange={onChangeDisableEmailVerification}
+          isDisabled={!isLdapEnabled || isUIDisabled}
         />
         <HelpButton
           tooltipContent={t("Settings:DisableEmailDescription", {

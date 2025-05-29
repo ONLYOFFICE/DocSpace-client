@@ -1,4 +1,5 @@
 {
+  "ChangePasswordSuccess": "Heslo bolo úspešne zmenené",
   "CodeTitle": "Kód vám bol zaslaný na e-mail",
   "ErrorInvalidText": "O 10 sekúnd budete presmerovaní na <1>{{productName}}</1>",
   "ForgotPassword": "Zabudli ste heslo?",

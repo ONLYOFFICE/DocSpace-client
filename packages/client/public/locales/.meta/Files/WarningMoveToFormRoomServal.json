@@ -1,0 +1,361 @@
+{
+  "key_path": "WarningMoveToFormRoomServal",
+  "content": "Moving several files to the Form Filling room is not supported. Move one {{ organizationName }} PDF form at a time.",
+  "content_en_sha1_hash": "5d1a343d603e24511ebf4ad531954a1b50dacf6d",
+  "created_at": "2025-05-19T21:30:56.345Z",
+  "updated_at": "2025-05-28T09:30:02.129Z",
+  "comment": {
+    "text": "This translation key is used to display a warning message when moving multiple files to a specific room. The message informs users that this action is not supported and suggests moving one PDF form at a time instead. This message appears in the FilesSelector component when the user attempts to move several files.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:56.171Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FilesSelector/index.tsx",
+      "line_number": 223,
+      "context": "? t(\"Files:WarningCopyToFormRoomServal\", option)\n : t(\"Common:WarningCopyToFormRoom\", option);\n \n if (isMove)\n return several\n ? t(\"Files:WarningMoveToFormRoomServal\", option)\n : t(\"Files:WarningMoveToFormRoom\", option);\n \n return \"\";\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Moving several files' is translated as 'لا يُسمح بنقل أكثر من ملف واحد'. While technically correct, it's a bit passive. A more direct translation, reflecting the prohibition, would be better. The original emphasizes the action being unsupported.",
+          "suggestion": "يُمنع نقل أكثر من ملف واحد"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of '{{ organizationName }}' should be consistent with the application’s implementation. Verify it’s correctly handled during rendering.",
+          "suggestion": "No change needed, verify application rendering"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Moving several files' is translated as 'Birdən çox faylın...köçürülməsi'. While technically correct, a more natural translation would be 'Bir neçə faylın...köçürülməsi' or 'Çox sayda faylın...köçürülməsi'.",
+          "suggestion": "Bir neçə faylın Forma Doldurma otağına köçürülməsi dəstəklənmir."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Czech translation uses a lowercase 'p' in 'přesunujte'. It should be capitalized to match the first instance 'Přesunutí' which is a noun and should align with the subject of the sentence. The imperative form should be capitalized.",
+          "suggestion": "Přesunujte"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses 'à la fois' which is grammatically correct but sounds slightly less natural in this context than 'un par un'.",
+          "suggestion": "Déplacez un formulaire PDF {{ organizationName }} un par un."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The colon after 'սենյակ' in the Armenian translation seems misplaced. It disrupts the flow of the sentence.",
+          "suggestion": "Remove the colon after 'սենյակ'. The sentence should read: 'Մի քանի ֆայլ տեղափոխելը Ձևաթղթերի լրացման սենյակ չի աջակցվում: Միանգամից տեղափոխեք մեկ {{ organizationName }} PDF ձև' or restructure the sentence."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Մի քանի ֆայլ տեղափոխելը\" could be more accurately translated to reflect the negative connotation. It's a bit literal.",
+          "suggestion": "Consider a more natural phrasing like: 'Մի քանի ֆայլերի տեղափոխումը' or 'Բազմաֆայլ տեղափոխումը'."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"stanza di compilazione dei moduli\" is a literal translation of \"Form Filling room\" and sounds unnatural in Italian. A more natural phrasing would be \"area di compilazione moduli\" or \"stanza per la compilazione dei moduli\".",
+          "suggestion": "Consider replacing \"stanza di compilazione dei moduli\" with \"area di compilazione moduli\" or \"stanza per la compilazione dei moduli\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ລູກ' (luk) is used with 'ໄຟລ໌' (files). While 'ລູກ' means 'child' or 'piece', it's not the appropriate term to describe files. It implies individual pieces of the file.",
+          "suggestion": "Consider using 'ເອກະບຸคคล' (ek-ka-buk-kon) which means 'individual' or removing it entirely as the context is already clear."
+        },
+        {
+          "type": "formatting",
+          "description": "The variable {{ organizationName }} is correctly placed but the Lao translation reads a little awkwardly because of its placement. A slight rephrasing could improve readability.",
+          "suggestion": "ການເຄື່ອນແບບຟອມ PDF ຂອງ {{ organizationName }} ຫນຶ່ງຢ່າງຄັ້ງລະຫນຶ່ງ."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Polish translation retains the English phrasing 'Pokoju do wypełniania formularzy' which is a bit clunky. A more natural phrasing would be 'Pokoju wypełniania formularzy' or 'Pokoju formularzy'.",
+          "suggestion": "Przenoszenie kilku plików do Pokoju wypełniania formularzy nie jest obsługiwane. Przenoś po jednym formularzu PDF {{ organizationName }} na raz."
+        },
+        {
+          "type": "grammar",
+          "description": "While not incorrect, using 'Przenieś' instead of 'Przenoś' would make the sentence flow more naturally and is more common in instructions.",
+          "suggestion": "Przenoszenie kilku plików do Pokoju do wypełniania formularzy nie jest obsługiwane. Przenieś po jednym formularzu PDF {{ organizationName }} na raz."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'formularío PDF' is redundant and doesn't accurately convey the English 'PDF form'.",
+          "suggestion": "Não há suporte para a movimentação de vários arquivos para a sala de preenchimento de formulários. Mova um formulário PDF {{ organizationName }} de cada vez."
+        },
+        {
+          "type": "grammar",
+          "description": "The repetition of 'PDF' creates an awkward phrasing. A better flow is needed.",
+          "suggestion": "Não há suporte para a movimentação de vários arquivos para a sala de preenchimento de formulários. Mova um formulário PDF {{ organizationName }} de cada vez."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Romanian translation uses 'Deplasați câte un formular PDF {{ organizationName }}.' which could be improved for readability. It's a little abrupt. It should be more natural.",
+          "suggestion": "Deplasați câte un PDF {{ organizationName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ආකෘතියක්' (aakrutiyak) is a bit awkward. While technically correct, it can be improved for natural flow.",
+          "suggestion": "ආකෘතියක් වෙනුවට 'පෝරමයක්' භාවිතා කරන්න."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrasing 'එකවරක් යවන්න' (ekavarak yavanna) is grammatically correct but sounds slightly formal and unnatural in this context. It's a bit clunky.",
+          "suggestion": "එකවරක් යවන්න වෙනුවට 'එකවරම යවන්න' භාවිතා කරන්න."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The use of 'Premiestňujte' (imperative form) is slightly awkward. It's better to use a more neutral phrasing.",
+          "suggestion": "Presúvajte jeden {{ organizationName }} PDF formulár naraz."
+        },
+        {
+          "type": "formatting",
+          "description": "Consistency in the word 'formulár' (singular) is slightly off. The English uses 'form' but the Slovak uses 'formulár'.",
+          "suggestion": "Presúvajte jeden {{ organizationName }} PDF formulár naraz."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The term 'PDF' is repeated unnecessarily. It's not needed after 'obrazec'.",
+          "suggestion": "Premikanje več datotek v prostor za izpolnjevanje obrazcev ni podprto. Premaknite po en obrazec {{ organizationName }} naenkrat."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'преместите' is used twice. While technically correct, using a more consistent verb form would improve readability. 'Премештајте' is more standard for addressing someone.",
+          "suggestion": "Премештајте"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'fajlova' is a less common and somewhat archaic form. 'Datoteka' or 'fajl' are more modern and preferred.",
+          "suggestion": "Premještanje više datoteka u sobu za popunjavanje obrazaca nije podržano. Premestite jedan {{ organizationName }} PDF obrazac u isto vreme."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Ukrainian translation uses a hyphenated 'PDF-форму'. While technically correct, a more common and natural phrasing would be 'PDF форму'.",
+          "suggestion": "PDF форму"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"several files\" as \"một số tập tin\" is accurate, but the overall phrasing is a bit awkward. A more natural Vietnamese phrasing for the entire first part of the sentence would improve readability. The current translation sounds somewhat literal.",
+          "suggestion": "Consider rephrasing the first part of the sentence to something like \"Không hỗ trợ việc di chuyển nhiều tập tin...\" or \"Không được phép di chuyển nhiều tập tin...\""
+        },
+        {
+          "type": "formatting",
+          "description": "The placement of the variable '{{ organizationName }}' feels slightly unnatural in the Vietnamese translation. While technically correct, it disrupts the flow.",
+          "suggestion": "Consider restructuring the sentence to integrate '{{ organizationName }}' more smoothly, perhaps by saying: '...từng biểu mẫu PDF của {{ organizationName }} mỗi lần.' or '...từng biểu mẫu PDF {{ organizationName }} một lần.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase '表单填写房间' (Form Filling Room) is a literal translation and might not be the most natural or idiomatic way to refer to the room in Chinese. A more common and clearer term might be used depending on the specific context of the application.",
+          "suggestion": "Consider alternatives like '表单处理房间' (Form Processing Room), '表单上传房间' (Form Upload Room), or a room name specific to the application if available."
+        },
+        {
+          "type": "formatting",
+          "description": "The variable {{ organizationName }} is correctly placed in the Chinese translation, maintaining the same functionality as in the English source.",
+          "suggestion": "No change needed."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

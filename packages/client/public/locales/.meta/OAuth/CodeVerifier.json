@@ -1,0 +1,273 @@
+{
+  "key_path": "CodeVerifier",
+  "content": "Code verifier",
+  "content_en_sha1_hash": "6759c875043759924123fb3399e7f60b0fd94fca",
+  "created_at": "2025-05-19T21:30:53.842Z",
+  "updated_at": "2025-05-28T09:30:02.604Z",
+  "comment": {
+    "text": "The \"CodeVerifier\" translation key is used to display a specific term in a portal settings category, indicating a developer tool for OAuth. It appears as a label within a preview dialog. Translators should provide a clear and concise equivalent phrase to maintain UI consistency.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:53.749Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/PreviewDialog.tsx",
+      "line_number": 270,
+      "context": "fontWeight={600}\n lineHeight=\"20px\"\n fontSize=\"13px\"\n noSelect\n >\n {t(\"OAuth:CodeVerifier\")}\n </Text>\n <Textarea\n heightTextArea={64}\n enableCopy\n isReadOnly",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Проверка на код\" while literally meaning \"Code Check\", doesn't accurately convey the meaning of \"Code verifier\". A 'Code verifier' is a string used during OAuth flows, and a more accurate translation would reflect that.",
+          "suggestion": "Код за проверка"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Koodin varmentaja\" is a literal translation and doesn't quite capture the nuance of \"Code verifier\" in the OAuth context. \"Varmentaja\" implies a validator or authenticator.  A more accurate translation would convey the purpose of the code verifier, which is a random string used for generating a code challenge.",
+          "suggestion": "Consider alternatives like \"Koodin vahvistusmerkkijono\" or \"Koodin varmistuskoodi\" which better reflect the role of a code verifier."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ծածկագրի վերիֆիկատոր\" is a literal translation of 'Code Verifier' but doesn't fully capture the technical meaning in the context of OAuth. While 'վերիֆիկատոր' is correct for 'verifier', \"ծածկագրի\" (of code) feels slightly awkward. A more natural phrasing might be preferred.",
+          "suggestion": "Consider alternatives like \"կոդի վերիֆիկատոր\" or simply \"վերիֆիկատոր\" if the context is well understood."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"コード検証者\" (kōdo kenshōsha) literally translates to \"code verifier (person)\".  It implies a person is doing the verification, not the code itself being verified. \"Code verifier\" refers to the code itself, not a person.",
+          "suggestion": "コード検証 (kōdo kenshō) - code verification; コードベリファイア (kōdo berifaiā) - code verifier (transliteration)"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"코드 검증자\" (code geomjeongja) is a literal translation but not the most natural or commonly used term in Korean for 'code verifier'. It's overly technical and sounds stiff. A more common and understandable translation would be something like '코드 확인자' (code hwaginja) or '검증 코드' (geomjeong kodeu, meaning 'verification code').",
+          "suggestion": "Consider '코드 확인자' (code hwaginja) or '검증 코드' (geomjeong kodeu)."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Koda verificētājs\" is a literal translation of \"Code verifier,\" but it's not the most natural or common way to express this concept in Latvian within a technical context. A more accurate and idiomatic translation would be \"Koda apstiprinājums\" or \"Verifikācijas kods\". \"Koda verificētājs\" sounds awkward and emphasizes the act of verifying rather than the code itself.",
+          "suggestion": "Consider \"Koda apstiprinājums\" or \"Verifikācijas kods\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Verificare cod' is a literal translation that doesn't accurately convey the meaning of 'Code verifier'. 'Code verifier' refers to a string of random characters used in the OAuth 2.0 authorization code flow. A more accurate translation would be 'Cod de verificare' or 'Verificator de cod'.",
+          "suggestion": "Cod de verificare"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation includes the English term in parentheses after the Sinhala transliteration. While understandable, it's generally preferred to provide a fully translated term if possible.  It might be confusing to users unfamiliar with English.",
+          "suggestion": "Consider a fully translated Sinhala equivalent, if one exists. If not, maintaining the transliteration without the English term might be slightly cleaner."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Verifikator koda\" is understandable, a more accurate and commonly used translation of \"Code verifier\" in Serbian (Latin) would be \"Kôd verifikator\" or \"Verifikacioni kod\". \"Verifikator koda\" sounds a bit unnatural and literally translates to \"code verifier\" as a job title rather than a technical term.",
+          "suggestion": "Kôd verifikator"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Перевіряльник коду\" is a literal translation, it sounds awkward and unnatural in Ukrainian. \"Code verifier\" often refers to a string used for OAuth flows, and a more accurate and natural translation would better reflect that context.",
+          "suggestion": "Валідатор коду"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Перевіряльник коду\" suggests an active agent or a tool, rather than the string value itself. This might cause confusion in the context of OAuth.",
+          "suggestion": "Рядок перевірки коду"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

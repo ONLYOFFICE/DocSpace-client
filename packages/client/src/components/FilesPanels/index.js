@@ -35,6 +35,7 @@ import {
   FilterType,
 } from "@docspace/shared/enums";
 
+import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
 import { Guidance } from "@docspace/shared/components/guidance";
 import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
 
@@ -46,6 +47,7 @@ import {
   EditLinkPanel,
   EmbeddingPanel,
   ConversionPanel,
+  ShareFormPanel,
 } from "../panels";
 import {
   ConnectDialog,
@@ -63,7 +65,6 @@ import {
   UnsavedChangesDialog,
   DeleteLinkDialog,
   MoveToPublicRoom,
-  BackupToPublicRoom,
   SettingsPluginDialog,
   PluginDialog,
   DeletePluginDialog,
@@ -73,6 +74,8 @@ import {
   FormFillingTipsDialog,
   DeleteVersionDialog,
   CancelOperationDialog,
+  ReducedRightsDialog,
+  SocialAuthWelcomeDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -87,11 +90,12 @@ import ReorderIndexDialog from "../dialogs/ReorderIndexDialog";
 import LifetimeDialog from "../dialogs/LifetimeDialog";
 import { SharePDFFormDialog } from "../dialogs/SharePDFFormDialog";
 import { FillPDFDialog } from "../dialogs/FillPDFDialog";
-import { ShareCollectSelector } from "../ShareCollectSelector";
-
 import { PasswordEntryDialog } from "../dialogs/PasswordEntryDialog";
 import CloseEditIndexDialog from "../dialogs/CloseEditIndexDialog";
+import FillingStatusPanel from "../panels/FillingStatusPanel";
 import TemplateAccessSettingsPanel from "../panels/TemplateAccessSettingsPanel";
+import RemoveUserConfirmationDialog from "../dialogs/RemoveUserConfirmationDialog";
+import AssignRoles from "../dialogs/AssignRoles";
 
 const Panels = (props) => {
   const {
@@ -133,7 +137,6 @@ const Panels = (props) => {
     deleteLinkDialogVisible,
     embeddingPanelData,
     moveToPublicRoomVisible,
-    backupToPublicRoomVisible,
     settingsPluginDialogVisible,
     pluginDialogVisible,
     leaveRoomDialogVisible,
@@ -143,7 +146,6 @@ const Panels = (props) => {
     selectFileFormRoomOpenRoot,
     reorderDialogVisible,
     fillPDFDialogData,
-    shareCollectSelector,
     createRoomTemplateDialogVisible,
     templateAccessSettingsVisible,
 
@@ -157,6 +159,9 @@ const Panels = (props) => {
     closeEditIndexDialogVisible,
     conversionVisible,
     deleteVersionDialogVisible,
+
+    setStopFillingDialogVisible,
+    stopFillingDialogData,
     operationCancelVisible,
     setFormFillingTipsDialog,
     formFillingTipsVisible,
@@ -164,6 +169,11 @@ const Panels = (props) => {
     userId,
     getRefElement,
     config,
+    isShareFormData,
+    reducedRightsVisible,
+    removeUserConfirmation,
+    assignRolesDialogVisible,
+    socialAuthWelcomeDialogVisible,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -171,6 +181,10 @@ const Panels = (props) => {
     data: null,
     onClose: null,
   });
+
+  const onCloseStopFillingDialog = () => {
+    setStopFillingDialogVisible(false);
+  };
 
   const { t } = useTranslation(["Translations", "Common", "PDFFormDialog"]);
 
@@ -341,9 +355,7 @@ const Panels = (props) => {
     moveToPublicRoomVisible && (
       <MoveToPublicRoom key="move-to-public-room-panel" />
     ),
-    backupToPublicRoomVisible && (
-      <BackupToPublicRoom key="backup-to-public-room-panel" />
-    ),
+
     leaveRoomDialogVisible && <LeaveRoomDialog key="leave-room-dialog" />,
     changeRoomOwnerIsVisible && (
       <ChangeRoomOwnerPanel key="change-room-owner" />
@@ -362,12 +374,6 @@ const Panels = (props) => {
     fillPDFDialogData.visible && (
       <FillPDFDialog key="fill-pdf-form-dialog" {...fillPDFDialogData} />
     ),
-    shareCollectSelector.visible && (
-      <ShareCollectSelector
-        key="share-collect-dialog"
-        {...shareCollectSelector}
-      />
-    ),
     roomLogoCoverDialogVisible && (
       <RoomLogoCoverDialog key="room-logo-cover-dialog" />
     ),
@@ -381,8 +387,18 @@ const Panels = (props) => {
     closeEditIndexDialogVisible && (
       <CloseEditIndexDialog key="close-edit-index-dialog-dialog" />
     ),
+    <FillingStatusPanel key="filling-status-panel" />,
     deleteVersionDialogVisible && (
       <DeleteVersionDialog key="delete-version-dialog" />
+    ),
+
+    stopFillingDialogData.visible && (
+      <StopFillingDialog
+        key="stop-filling-dialog"
+        visible={stopFillingDialogData.visible}
+        formId={stopFillingDialogData.formId}
+        onClose={onCloseStopFillingDialog}
+      />
     ),
     operationCancelVisible && (
       <CancelOperationDialog key="cancel-operation-dialog" />
@@ -399,6 +415,21 @@ const Panels = (props) => {
         config={config}
       />
     ) : null,
+
+    isShareFormData.visible && (
+      <ShareFormPanel key="share-form-dialog" {...isShareFormData} />
+    ),
+    reducedRightsVisible ? (
+      <ReducedRightsDialog key="reduced-rights-dialog" />
+    ) : null,
+
+    removeUserConfirmation && (
+      <RemoveUserConfirmationDialog key="remove-user-confirmation-dialog" />
+    ),
+    assignRolesDialogVisible && <AssignRoles key="assign-roles-dialog" />,
+    socialAuthWelcomeDialogVisible && (
+      <SocialAuthWelcomeDialog key="joining-space-dialog" />
+    ),
   ];
 };
 
@@ -454,14 +485,12 @@ export default inject(
       deleteLinkDialogVisible,
       embeddingPanelData,
       moveToPublicRoomVisible,
-      backupToPublicRoomVisible,
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
       shareFolderDialogVisible,
       selectFileFormRoomOpenRoot,
       reorderDialogVisible,
       fillPDFDialogData,
-      shareCollectSelector,
       roomLogoCoverDialogVisible,
       createRoomTemplateDialogVisible,
       templateAccessSettingsVisible,
@@ -474,10 +503,18 @@ export default inject(
       passwordEntryDialogDate,
       guestReleaseTipDialogVisible,
       closeEditIndexDialogVisible,
+
+      setStopFillingDialogVisible,
+      stopFillingDialogData,
       operationCancelVisible,
 
       setFormFillingTipsDialog,
       formFillingTipsVisible,
+      isShareFormData,
+      reducedRightsData,
+      removeUserConfirmation,
+      assignRolesDialogData,
+      socialAuthWelcomeDialogVisible,
     } = dialogsStore;
 
     const { viewAs } = filesStore;
@@ -559,7 +596,6 @@ export default inject(
       deleteLinkDialogVisible,
       embeddingPanelData,
       moveToPublicRoomVisible,
-      backupToPublicRoomVisible,
       settingsPluginDialogVisible,
       pluginDialogVisible,
       leaveRoomDialogVisible,
@@ -569,7 +605,6 @@ export default inject(
       selectFileFormRoomOpenRoot,
       reorderDialogVisible,
       fillPDFDialogData,
-      shareCollectSelector,
       roomLogoCoverDialogVisible,
       createRoomTemplateDialogVisible,
       templateAccessSettingsVisible,
@@ -583,6 +618,9 @@ export default inject(
       closeEditIndexDialogVisible,
       conversionVisible,
       deleteVersionDialogVisible,
+
+      setStopFillingDialogVisible,
+      stopFillingDialogData,
       operationCancelVisible,
       setFormFillingTipsDialog,
       formFillingTipsVisible,
@@ -590,6 +628,11 @@ export default inject(
       userId: userStore?.user?.id,
       getRefElement,
       config,
+      isShareFormData,
+      reducedRightsVisible: reducedRightsData.visible,
+      removeUserConfirmation: removeUserConfirmation.visible,
+      assignRolesDialogVisible: assignRolesDialogData.visible,
+      socialAuthWelcomeDialogVisible,
     };
   },
 )(observer(Panels));

@@ -1,6 +1,5 @@
 {
   "AccountWillBeCreated": "Tiks izveidots {{productName}} konts <1>{{email}}</1>. Pabeidziet reģistrāciju:",
-  "ChangePasswordSuccess": "Parole ir veiksmīgi nomainīta",
   "ConfirmOwnerPortalSuccessMessage": "{{productName}} īpašnieks ir veiksmīgi nomainīts. Jūs tiksiet novirzīts pēc 10 sekundēm.",
   "ConfirmOwnerPortalTitle": "Lūdzu, apstipriniet, ka vēlaties mainīt {{productName}} īpašnieku uz {{newOwner}}.",
   "CurrentNumber": "Jūsu pašreizējais mobilā tālruņa numurs",

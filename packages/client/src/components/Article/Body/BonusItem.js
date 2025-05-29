@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import { ArticleItem } from "@docspace/shared/components/article-item";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import GiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 

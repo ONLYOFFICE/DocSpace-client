@@ -136,7 +136,7 @@ const ConflictResolve = (props: ConflictResolveProps) => {
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
-          key="OkButton"
+          key="OKButton"
           label={submitButtonLabel}
           size={ButtonSize.normal}
           primary

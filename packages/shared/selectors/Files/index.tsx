@@ -29,7 +29,7 @@
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 
-import { createFolder, deleteFolder } from "../../api/files";
+import { createFile, deleteFile } from "../../api/files";
 
 import { FolderType, RoomsType, DeviceType } from "../../enums";
 
@@ -55,6 +55,7 @@ import { getDefaultBreadCrumb } from "./FilesSelector.utils";
 const FilesSelectorComponent = (props: FilesSelectorProps) => {
   const {
     disabledItems,
+    includedItems,
     filterParam,
 
     treeFolders,
@@ -97,6 +98,9 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     initSearchValue,
     initTotal,
     initHasNextPage,
+
+    applyFilterOption,
+    onSelectItem,
   } = props;
   const { t } = useTranslation(["Common"]);
   const { isFirstLoad, setIsFirstLoad, showLoader } =
@@ -220,6 +224,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     selectedItemId,
     searchValue,
     disabledItems,
+    includedItems,
     isThirdParty,
     filterParam,
     isRoomsOnly,
@@ -231,6 +236,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     shareKey,
 
     withInit,
+    applyFilterOption,
   });
 
   const onClickBreadCrumb = React.useCallback(
@@ -311,6 +317,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
       isDoubleClick: boolean,
       doubleClickCallback: () => Promise<void>,
     ) => {
+      onSelectItem?.(item);
       if (item.isFolder) {
         if (isDoubleClick) return;
 
@@ -342,13 +349,10 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
           setSelectedItemType("files");
         }
 
-        if (checkCreating && breadCrumbs.length === 1 && item.id) {
+        if (checkCreating && item.id) {
           try {
-            const folderInfo = await createFolder(
-              item.id,
-              t("Common:NewFolder"),
-            );
-            await deleteFolder(folderInfo.id, true, true);
+            const fileInfo = await createFile(item.id, t("Common:NewDocument"));
+            await deleteFile(fileInfo.id, true, true);
             setIsDisabledFolder(false);
           } catch (e) {
             console.log(e);
@@ -368,6 +372,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
           id: item.id,
           title: item.label,
           fileExst: item.fileExst,
+          fileType: item.fileType,
           viewUrl: item.viewUrl,
           inPublic,
         });
@@ -390,6 +395,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
       setSelectedItemType,
       t,
       setIsDisabledFolder,
+      onSelectItem,
     ],
   );
 
@@ -457,6 +463,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
 
   const onSearchAction = (value: string, callback?: VoidFunction) => {
     if (selectedItemId !== currentSelectedItemId.current) {
+      setSearchValue("");
       return;
     }
     setSearchValue(value);

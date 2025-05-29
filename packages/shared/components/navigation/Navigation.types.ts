@@ -34,7 +34,7 @@ export type TTitles = {
   infoPanel?: string;
   actions?: string;
   contextMenu?: string;
-  trashWarning?: string;
+  warningText?: string;
 };
 
 export type TContextButtonProps = {
@@ -51,6 +51,7 @@ export type TContextButtonProps = {
     setAnimationClasses: (classes: string[]) => void,
   ) => () => void;
   guidAnimationVisible?: boolean;
+  setGuidAnimationVisible?: (visible: boolean) => void;
 };
 
 export type TPlusButtonProps = {
@@ -78,6 +79,12 @@ export type TArrowButtonProps = {
   onBackToParentFolder: TOnBackToParenFolder;
 };
 
+export type TBadgesProps = {
+  titleIcon: string;
+  isRootFolder: boolean;
+  titleIconTooltip?: string;
+};
+
 export type TTextProps = {
   title: string;
   isOpen: boolean;
@@ -98,6 +105,7 @@ export type TNavigationLogoProps = {
 export type TOnNavigationItemClick = (
   id: string | number,
   isRootRoom: boolean,
+  isRootTemplates?: boolean,
 ) => void;
 
 export type TNavigationItemProps = {
@@ -109,12 +117,14 @@ export type TNavigationItemProps = {
   withLogo: boolean | string;
   currentDeviceType: DeviceType;
   style?: React.CSSProperties;
+  isRootTemplates?: boolean;
 };
 
 export type TNavigationItem = {
   id: string | number;
   title: string;
   isRootRoom: boolean;
+  isRootTemplates?: boolean;
 };
 
 export type TRowParam = {
@@ -124,7 +134,17 @@ export type TRowParam = {
 
 export type TRowData = [TNavigationItem[], TOnNavigationItemClick, TRowParam];
 
-export type TControlButtonProps = Omit<TToggleInfoPanelButtonProps, "id"> &
+export type TChatProps = {
+  chatOpen?: boolean;
+  toggleChat?: (value: boolean) => void;
+};
+
+type TChat = {
+  withChat?: boolean;
+} & TChatProps;
+
+export type TControlButtonProps = TChat &
+  Omit<TToggleInfoPanelButtonProps, "id"> &
   Omit<TPlusButtonProps, "getData" | "className"> &
   Omit<TContextButtonProps, "getData" | "className" | "id"> & {
     /** Controls visibility of PlusButton */
@@ -156,6 +176,7 @@ export type TControlButtonProps = Omit<TToggleInfoPanelButtonProps, "id"> &
     /** Used for guidance */
     addButtonRef?: RefObject<HTMLDivElement>;
     buttonRef?: LegacyRef<HTMLButtonElement>;
+    isContextButtonVisible?: boolean;
   };
 
 export type TDropBoxProps = TArrowButtonProps &
@@ -166,7 +187,6 @@ export type TDropBoxProps = TArrowButtonProps &
     | "onNavigationButtonClick"
     | "navigationButtonLabel"
     | "showTitle"
-    | "isPublicRoom"
     | "isMobile"
   > &
   TRowParam & {

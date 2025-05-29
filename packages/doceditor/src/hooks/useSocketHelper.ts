@@ -33,7 +33,7 @@ import SocketHelper, {
   SocketEvents,
 } from "@docspace/shared/utils/socket";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { getRestoreProgress } from "@docspace/shared/api/portal";
+
 import { EDITOR_ID } from "@docspace/shared/constants";
 
 import { UseSocketHelperProps } from "@/types";
@@ -42,6 +42,7 @@ const useSocketHelper = ({
   socketUrl,
   user,
   shareKey,
+  standalone,
 }: UseSocketHelperProps) => {
   React.useEffect(() => {
     SocketHelper?.connect(socketUrl, shareKey ?? "");
@@ -56,6 +57,14 @@ const useSocketHelper = ({
       roomParts: user?.id || "",
     });
   }, [user?.id]);
+
+  React.useEffect(() => {
+    if (standalone) {
+      SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
+        roomParts: "restore",
+      });
+    }
+  }, [standalone]);
 
   React.useEffect(() => {
     const callback = async () => {

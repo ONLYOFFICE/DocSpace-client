@@ -36,6 +36,9 @@ import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { DropDown } from "@docspace/shared/components/drop-down";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Link } from "@docspace/shared/components/link";
+
 import api from "@docspace/shared/api";
 
 import { ReactSVG } from "react-svg";
@@ -67,6 +70,8 @@ const Appearance = (props) => {
     t,
     currentDeviceType,
     resetIsInit,
+
+    appearanceBlockHelpUrl,
   } = props;
 
   const defaultAppliedColorAccent = currentColorScheme.main?.accent;
@@ -167,6 +172,8 @@ const Appearance = (props) => {
     ],
     [previewAccent, selectThemeId, colorCheckImg, tReady],
   );
+
+  const [selectedItemId, setSelectedItemId] = useState(arrayItems[0].id);
 
   // const getSettings = () => {
   //   const selectColorId = getFromSessionStorage("selectColorId");
@@ -771,8 +778,33 @@ const Appearance = (props) => {
           showSaveButtonDialog={showSaveButtonDialog}
           onSaveColorSchemeDialog={onSaveColorSchemeDialog}
         />
-        <div className="header preview-header">{t("Common:Preview")}</div>
-        <Tabs items={arrayItems} type={TabsTypes.Secondary} />
+        <div className="header preview-header">
+          {t("Common:Preview")}
+          <HelpButton
+            place="right"
+            tooltipContent={
+              <div>
+                <Text fontSize="12px" fontWeight={400}>
+                  {t("Settings:PreviewTooltipDescription")}
+                </Text>
+                <Link
+                  isHovered
+                  type="page"
+                  href={appearanceBlockHelpUrl}
+                  target="_blank"
+                >
+                  {t("Common:LearnMore")}
+                </Link>
+              </div>
+            }
+          />
+        </div>
+        <Tabs
+          items={arrayItems}
+          type={TabsTypes.Secondary}
+          onSelect={(e) => setSelectedItemId(e.id)}
+          selectedItemId={selectedItemId}
+        />
 
         <div className="buttons-container">
           <Button
@@ -816,6 +848,8 @@ export default inject(({ settingsStore, common }) => {
 
     theme,
     currentDeviceType,
+
+    appearanceBlockHelpUrl,
   } = settingsStore;
 
   const { resetIsInit } = common;
@@ -830,5 +864,7 @@ export default inject(({ settingsStore, common }) => {
     currentDeviceType,
     theme,
     resetIsInit,
+
+    appearanceBlockHelpUrl,
   };
 })(withTranslation(["Profile", "Common", "Settings"])(observer(Appearance)));

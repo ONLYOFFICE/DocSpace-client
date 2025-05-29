@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Ihre zuletzt angesehenen oder bearbeiteten Dokumente werden in diesem Bereich angezeigt.",
   "EmptyRootRoomUserDescription": "Der geteilte Raum wird hier angezeigt.",
   "EmptyRootRoomUserTitle": "Es gibt noch keine Räume hier",
+  "EmptyTemplatesDescription": "Sie können eine Vorlage aus einem Raum im Bereich \"Räume\" erstellen",
+  "EmptyTemplatesTitle": "Noch keine Vorlagen vorhanden",
   "FormFolderDefaultDescription": "Legen Sie PDF-Formulare hier ab oder laden Sie sie von {{productName}} oder einem Gerät hoch.",
   "FormFolderDefaultTitle": "Noch keine Formulare vorhanden",
   "FormFolderDefaultUserDescription": "Die von den Administratoren hochgeladenen Formulare werden hier angezeigt.",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "Daten in Ihr {{productName}} aus dem {{organizationName}} Workspace, Google Workspace oder Nextcloud importieren.",
   "MigrationDataTitle": "Migrationsdaten",
   "PublicRoomEmptyTitle": "Willkommen im öffentlichen Raum",
+  "SectionsUploadDescription": "Laden Sie beliebige Dateitypen von {{sectionNameFirst}} oder {{sectionNameSecond}} hoch",
   "SendInvitationLetter": "Senden Sie ein Einladungsschreiben, um dem Portal neue Mitglieder hinzuzufügen",
   "ShareOptionDescription": "Kopieren Sie einen Link für den öffentlichen Zugang oder laden Sie andere Benutzer in den Raum ein, um das Ausfüllen des Formulars zu starten.",
   "ShareOptionTitle": "Raum teilen",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "Hochladen von Ihrem Gerät",
   "UploadDevicePDFFormOptionDescription": "Laden Sie ein fertiges PDF-Formular von Ihrem Gerät in den Raum hoch.",
   "UploadDevicePDFFormOptionTitle": "Hochladen vom Gerät",
-  "UploadFromPortalDescription": "Laden Sie beliebige Dateien aus Dokumenten oder Räumen hoch",
   "UploadFromPortalTitle": "Von {{productName}} hochladen",
   "UploadPDFFormOptionDescription": "Wählen Sie ein fertiges PDF-Formular, das in {{productName}} verfügbar ist, und laden Sie es in den Raum hoch.",
-  "UserEmptyDescription": "Von Administratoren hochgeladene Dateien und Ordner werden hier angezeigt.",
   "VirtualDataRoomEmptyTitle": "Willkommen im virtuellen Datenraum"
 }

@@ -41,6 +41,7 @@
   "StartupTitle": "Bạn đang sử dụng gói dịch vụ {{planName}} miễn phí",
   "StripeCustomerPortal": "truy cập cổng thông tin khách hàng trên Stripe",
   "TotalPricePerMonth": "<1>{{currencySymbol}} </1><2>{{price}} </2><3>/tháng</3>",
+  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/năm</3>",
   "UpgradeNow": "Nâng cấp ngay",
   "UpgradePlan": "Nâng cấp gói dịch vụ",
   "UserNotFound": "Không tìm thấy người dùng<1>{{email}}</1>.",

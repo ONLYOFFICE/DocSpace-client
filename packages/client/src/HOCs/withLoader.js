@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { observer, inject } from "mobx-react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import { TableSkeleton, RowsSkeleton } from "@docspace/shared/skeletons";
 import { TilesSkeleton } from "@docspace/shared/skeletons/tiles";
 
@@ -55,7 +55,7 @@ const withLoader = (WrappedComponent) => (Loader) => {
         ? accountsViewAs
         : viewAs;
 
-    const showLoader = window.ClientConfig.loaders.showLoader;
+    const showLoader = window?.ClientConfig?.loaders?.showLoader;
 
     return (!isEditor && firstLoad && !isGallery) ||
       !isLoaded ||

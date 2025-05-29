@@ -47,9 +47,14 @@ const withLoading = (WrappedComponent) => {
     } = props;
 
     const viewMobile = deviceType === DeviceType.mobile;
+    const pathname = window.location.pathname;
+    const index = pathname.lastIndexOf("/");
+    const setting = pathname.slice(index + 1);
 
     useEffect(() => {
-      if (window.location.pathname.includes("profile")) {
+      if (pathname.includes("developer-tools"))
+        return setIsBurgerLoading(false);
+      if (pathname.includes("profile")) {
         if (!isLoadedArticleBody) {
           setIsBurgerLoading(true);
         } else {
@@ -63,10 +68,6 @@ const withLoading = (WrappedComponent) => {
         setIsBurgerLoading(true);
       }
     }, [isLoadedArticleBody, setIsBurgerLoading]);
-
-    const pathname = window.location.pathname;
-    const index = pathname.lastIndexOf("/");
-    const setting = pathname.slice(index + 1);
 
     const loadedPortalRenaming = enablePortalRename
       ? isLoadedPortalRenaming

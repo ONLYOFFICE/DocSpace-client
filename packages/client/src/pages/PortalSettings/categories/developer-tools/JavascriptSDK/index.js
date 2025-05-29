@@ -26,7 +26,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { withTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import { inject, observer } from "mobx-react";
 
@@ -111,13 +111,13 @@ const PortalIntegration = (props) => {
       handleOnClick: navigateToViewer,
     },
     {
-      title: t("RoomSelector"),
+      title: t("Common:RoomSelector"),
       description: t("RoomSelectorDescription"),
       image: theme.isBase ? RoomSelectorImg : RoomSelectorImgDark,
       handleOnClick: navigateToRoomSelector,
     },
     {
-      title: t("FileSelector"),
+      title: t("Common:FileSelector"),
       description: t("FileSelectorDescription"),
       image: theme.isBase ? FileSelectorImg : FileSelectorImgDark,
       handleOnClick: navigateToFileSelector,

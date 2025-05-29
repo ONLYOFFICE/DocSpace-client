@@ -80,6 +80,7 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
     formId,
     action,
     toForm,
+    share,
   } = searchParams;
 
   if (!parentId || !fileTitle) redirect(baseURL);
@@ -180,6 +181,10 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
     searchParams.append("fileId", fileId?.toString() ?? "");
     if (action) {
       searchParams.append("action", action);
+    }
+
+    if (share) {
+      searchParams.append("share", share);
     }
 
     log.debug(

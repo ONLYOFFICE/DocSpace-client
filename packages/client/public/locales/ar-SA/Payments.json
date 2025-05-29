@@ -41,6 +41,7 @@
   "StartupTitle": "أنت تستخدم خطة {{planName}} المجانية",
   "StripeCustomerPortal": "انتقل إلى بوابة عملاء سترب",
   "TotalPricePerMonth": "<1> {{currencySymbol}} </1> <2> {{price}} </2> <3> / شهر </ 3>",
+  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/سنة</3>",
   "UpgradeNow": "قم بالترقية الآن",
   "UpgradePlan": "قم بالترقية إلى خطة جديدة",
   "UserNotFound": "المستخدم <1> {{email}} </1> غير موجود.",

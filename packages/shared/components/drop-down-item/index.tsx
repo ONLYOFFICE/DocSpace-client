@@ -46,21 +46,29 @@ const IconComponent = ({
   icon,
   fillIcon = true,
 }: {
-  icon: string;
+  icon: string | React.ReactElement | React.ElementType;
   fillIcon?: boolean;
 }) => {
-  if (
-    (!icon.includes("images/") && !icon.includes(".svg")) ||
-    icon.includes("webplugins")
-  ) {
+  const isImageSrc = (src: string) =>
+    (!src.includes("images/") && !src.includes(".svg")) ||
+    src.includes("webplugins");
+
+  if (typeof icon === "string" && isImageSrc(icon)) {
     return (
       <img className="drop-down-icon_image" src={icon} alt="plugin-logo" />
     );
   }
 
+  if (
+    typeof icon === "function" &&
+    React.isValidElement(React.createElement(icon))
+  ) {
+    return <div>{React.createElement(icon)}</div>;
+  }
+
   return (
     <ReactSVG
-      src={icon}
+      src={typeof icon === "string" ? icon : ""}
       className={
         fillIcon
           ? classNames(styles.dropDownItemIcon, "drop-down-item_icon")
@@ -101,6 +109,8 @@ const DropDownItem = ({
   isModern,
   style,
   isPaidBadge,
+  heightTablet,
+  badgeLabel,
   ...rest
 }: DropDownItemProps) => {
   const { t } = useTranslation(["Common"]);
@@ -142,7 +152,7 @@ const DropDownItem = ({
           [styles.activeDescendant]: isActiveDescendant && !disabled,
           [styles.textOverflow]: textOverflow,
           [styles.modern]: isModern,
-          [styles.disabled]: disabled,
+          [styles.disabled]: disabled && !isSelected,
         },
         className,
       )}
@@ -231,7 +241,7 @@ const DropDownItem = ({
                 ? globalColors.favoritesStatus
                 : globalColors.favoriteStatusDark
             }
-            label={t("Common:Paid")}
+            label={badgeLabel || t("Common:Paid")}
             isPaidBadge
           />
         </div>

@@ -28,6 +28,7 @@
 /* eslint-disable prefer-regex-literals */
 import { makeAutoObservable, runInAction } from "mobx";
 
+import Filter from "../api/people/filter";
 import { TFrameConfig } from "../types/Frame";
 import api from "../api";
 import { TFolder } from "../api/files/types";
@@ -61,6 +62,7 @@ import {
   isPublicRoom,
   insertTagManager,
   isManagement,
+  openUrl,
 } from "../utils/common";
 import { setCookie, getCookie } from "../utils/cookie";
 import { combineUrl } from "../utils/combineUrl";
@@ -321,6 +323,14 @@ class SettingsStore {
 
   logoText = "";
 
+  limitedAccessDevToolsForUsers = false;
+
+  allowInvitingGuests: boolean | null = null;
+
+  allowInvitingMembers: boolean | null = null;
+
+  hasGuests: boolean | null = null;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -336,6 +346,10 @@ class SettingsStore {
   setShowGuestReleaseTip = (showGuestReleaseTip: boolean) => {
     this.showGuestReleaseTip = showGuestReleaseTip;
   };
+
+  get wizardCompleted() {
+    return this.isLoaded && !this.wizardToken;
+  }
 
   get helpCenterDomain() {
     return this.externalResources?.helpcenter?.domain;
@@ -641,6 +655,12 @@ class SettingsStore {
       : this.apiDomain;
   }
 
+  get apiKeysLink() {
+    return this.apiDomain && this.apiEntries?.apikeys
+      ? `${this.apiDomain}${this.apiEntries.apikeys}`
+      : this.apiDomain;
+  }
+
   get forEnterprisesUrl() {
     return this.siteDomain && this.siteEntries?.forenterprises
       ? `${this.siteDomain}${this.siteEntries.forenterprises}`
@@ -753,6 +773,31 @@ class SettingsStore {
 
   get bookTrainingEmail() {
     return this.externalResources?.common.entries?.booktrainingemail;
+  }
+
+  get appearanceBlockHelpUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.appearance
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.appearance}`
+      : this.helpCenterDomain;
+  }
+
+  get limitedDevToolsBlockHelpUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.limiteddevtools
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.limiteddevtools}`
+      : this.helpCenterDomain;
+  }
+
+  get encryptionBlockHelpUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.encryption
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.encryption}`
+      : this.helpCenterDomain;
+  }
+
+  get docspaceManagingRoomsHelpUrl() {
+    return this.helpCenterDomain &&
+      this.helpCenterEntries?.docspacemanagingrooms
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.docspacemanagingrooms}`
+      : this.helpCenterDomain;
   }
 
   setIsDesktopClientInit = (isDesktopClientInit: boolean) => {
@@ -1282,6 +1327,27 @@ class SettingsStore {
     this.ipRestrictionEnable = res.enable;
   };
 
+  getInvitationSettings = async () => {
+    const res = await api.settings.getInvitationSettings();
+
+    this.allowInvitingGuests = res.allowInvitingGuests;
+    this.allowInvitingMembers = res.allowInvitingMembers;
+  };
+
+  setInvitationSettings = async (
+    allowInvitingGuests: boolean,
+    allowInvitingMembers: boolean,
+  ) => {
+    const data = {
+      allowInvitingGuests,
+      allowInvitingMembers,
+    };
+    const res = await api.settings.setInvitationSettings(data);
+
+    this.allowInvitingGuests = res.allowInvitingGuests;
+    this.allowInvitingMembers = res.allowInvitingMembers;
+  };
+
   setMessageSettings = async (turnOn: boolean) => {
     await api.settings.setMessageSettings(turnOn);
     this.enableAdmMess = turnOn;
@@ -1446,15 +1512,13 @@ class SettingsStore {
   }
 
   openUrl = (url: string, action: UrlActionType, replace: boolean = false) => {
-    if (action === UrlActionType.Download) {
-      return this.isFrame &&
-        this.frameConfig?.downloadToEvent &&
-        this.frameConfig?.events?.onDownload
-        ? frameCallEvent({ event: "onDownload", data: url })
-        : replace
-          ? (window.location.href = url)
-          : window.open(url, "_self");
-    }
+    openUrl({
+      url,
+      action,
+      replace,
+      isFrame: this.isFrame,
+      frameConfig: this.frameConfig,
+    });
   };
 
   checkEnablePortalSettings = (isPaid: boolean) => {
@@ -1463,6 +1527,23 @@ class SettingsStore {
 
   setIsBannerVisible = (visible: boolean) => {
     this.isBannerVisible = visible;
+  };
+
+  setDevToolsAccessSettings = async (enable: string) => {
+    const boolEnable = enable === "true";
+    await api.settings.setLimitedAccessForUsers(boolEnable);
+    this.limitedAccessDevToolsForUsers = boolEnable;
+  };
+
+  get accessDevToolsForUsers() {
+    return this.limitedAccessDevToolsForUsers.toString();
+  }
+
+  checkGuests = async () => {
+    const filterDefault = Filter.getDefault();
+    filterDefault.area = "guests";
+    const res = await api.people.getUserList(filterDefault);
+    this.hasGuests = !!res.total;
   };
 }
 

@@ -24,6 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { makeAutoObservable, runInAction } from "mobx";
+
+import { toastr } from "@docspace/shared/components/toast";
+
 import {
   createWebhook,
   getAllWebhooks,
@@ -32,7 +36,6 @@ import {
   toggleEnabledWebhook,
   updateWebhook,
 } from "@docspace/shared/api/settings";
-import { makeAutoObservable, runInAction } from "mobx";
 
 class WebhooksStore {
   settingsStore;
@@ -94,6 +97,9 @@ class WebhooksStore {
           enabled: data.configs.enabled,
           ssl: data.configs.ssl,
           status: data.status,
+          triggers: data.configs.triggers,
+          createdBy: data.configs.createdBy,
+          targetId: data.configs.targetId,
         }));
       });
     } catch (error) {
@@ -107,6 +113,8 @@ class WebhooksStore {
       webhook.uri,
       webhook.secretKey,
       webhook.ssl,
+      webhook.triggers,
+      webhook.targetId,
     );
 
     this.webhooks = [
@@ -118,16 +126,28 @@ class WebhooksStore {
         enabled: webhookData.enabled,
         secretKey: webhookData.secretKey,
         ssl: webhookData.ssl,
+        triggers: webhookData.triggers,
+        createdBy: webhookData.createdBy,
+        targetId: webhookData.targetId,
       },
     ];
   };
 
-  toggleEnabled = async (desiredWebhook) => {
-    await toggleEnabledWebhook(desiredWebhook);
-    const index = this.webhooks.findIndex(
-      (webhook) => webhook.id === desiredWebhook.id,
-    );
-    this.webhooks[index].enabled = !this.webhooks[index].enabled;
+  toggleEnabled = async (desiredWebhook, t) => {
+    try {
+      await toggleEnabledWebhook(desiredWebhook);
+      const index = this.webhooks.findIndex(
+        (webhook) => webhook.id === desiredWebhook.id,
+      );
+      this.webhooks[index].enabled = !this.webhooks[index].enabled;
+      toastr.success(
+        this.webhooks[index].enabled
+          ? t("WebhookEnabled")
+          : t("WebhookDisabled"),
+      );
+    } catch (error) {
+      toastr.error(error);
+    }
   };
 
   deleteWebhook = async (webhook) => {
@@ -144,6 +164,8 @@ class WebhooksStore {
       webhookInfo.uri,
       webhookInfo.secretKey || prevWebhook.secretKey,
       webhookInfo.ssl,
+      webhookInfo.triggers,
+      webhookInfo.targetId,
     );
     this.webhooks = this.webhooks.map((webhook) =>
       webhook.id === prevWebhook.id
@@ -159,7 +181,7 @@ class WebhooksStore {
       count: 1,
     });
 
-    this.configName = historyData.items[0].configName;
+    this.configName = historyData.items[0]?.configName || "";
   };
 
   clearConfigName = () => {

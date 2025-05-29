@@ -1,11 +1,17 @@
 {
+  "ChangeContactType": "更改联系人类型",
   "ChangeGuestsTypeMessage": "访客<strong>{{userName}}</strong>将被移动到“{{membersSection}}”部分，并分配为用户类型。用户拥有自己的“{{documentsSection}}”部分，可以创建和编辑文件，但无法创建房间。",
   "ChangeGuestsTypeMessageMulti": "所选访客将被移动到“{{membersSection}}”部分，并分配为用户类型。用户拥有自己的“{{documentsSection}}”部分，可以创建和编辑文件，但无法创建房间。",
+  "ChangeGuestsTypeToAdmin": "访客<strong>{{userName}} </strong>将被移至{{membersSection}}部分，并被分配<strong>'{{ secondType }}'</strong>类型。{{productName}}管理员可以访问{{productName}}设置，管理和归档房间，邀请新用户并分配其级别以下的权限。{{productName}}管理员拥有{{documentsSection}}部分的访问权限。",
+  "ChangeGuestsTypeToAdminMulti": "选定的访客将被移至{{membersSection}}部分，并被分配<strong>'{{ secondType }}'</strong>类型。 {{productName}}管理员可以访问{{productName}}设置、管理和归档房间、邀请新用户并分配其级别以下的权限。{{productName}}管理员可访问{{documentsSection}}部分。",
+  "ChangeGuestsTypeToManager": "访客<strong>{{userName}}</strong>将被移至{{membersSection}}部分，并被分配<strong>'{{ secondType }}'</strong>类型。房间管理员可以创建和管理所分配的房间、邀请新用户并分配房间管理员及以下的权限。房间管理员可访问{{documentsSection}}部分。",
+  "ChangeGuestsTypeToManagerMulti": "选定的访客将被移至{{membersSection}}部分，并被分配<strong>'{{ secondType }}'</strong>类型。房间管理员可以创建和管理所分配的房间、邀请新用户并分配房间管理员及以下的权限。房间管理员可访问{{documentsSection}}部分。",
   "ChangeUserTypeButton": "变更类型",
-  "ChangeUserTypeHeader": "变更用户类型",
   "ChangeUserTypeMessage": "<strong>‘{{ firstType }}’</strong>类型的用户将被移动至<strong>‘{{ secondType }}’</strong>类型。",
-  "ChangeUserTypeMessageMulti": "选择的用户将被移动至<strong>'{{ secondType }}'</strong>类型。",
-  "ChangeUserTypeMessageWarning": " 您无法更改{{productName}}管理员和您自己的类型。",
+  "ChangeUserTypeNote": "<1>注意：</1>您无法更改{{productName}}管理员及您自身的类型。",
+  "DataReassignmentInfo": "该用户创建的房间将自动分配给您。要将房间重新分配给其他人，请点击下方对应链接。",
+  "DataReassignmentWithFilesDeletion": "该联系人创建的所有共享文件将<1>在 30 天后自动分配给您</1>。要将房间/共享文件重新分配给其他人，请点击下方对应链接。",
+  "PersonalDataDeletion": "此联系人的{{sectionName}}部分中的所有文件和文件夹将<1>在 30 天后永久删除</1>。",
   "SuccessChangeGuestType": "该访客类型已成功更改",
   "SuccessChangeUserType": "用户类型已成功变更"
 }

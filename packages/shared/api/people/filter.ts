@@ -27,7 +27,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import type { Location } from "@remix-run/router";
+import type { Location } from "react-router";
 
 import {
   AccountLoginType,
@@ -61,6 +61,7 @@ const DEFAULT_INVITER_ID = null;
 const DEFAULT_INVITED_BY_ME = false;
 const DEFAULT_AREA = null;
 const DEFAULT_INCLUDE_STRANGERS = false;
+const DEFAULT_INCLUDE_SHARED = null;
 
 const ACTIVE_EMPLOYEE_STATUS = EmployeeStatus.Active;
 
@@ -82,6 +83,7 @@ const INVITER_ID = "inviterid";
 const INVITED_BY_ME = "invitedbyme";
 const AREA = "area";
 const INCLUDE_STRANGERS = "includeStrangers";
+const INCLUDE_SHARED = "includeShared";
 
 class Filter {
   static getDefault(total = DEFAULT_TOTAL) {
@@ -109,6 +111,7 @@ class Filter {
       DEFAULT_INVITER_ID,
       DEFAULT_AREA,
       DEFAULT_INCLUDE_STRANGERS,
+      DEFAULT_INCLUDE_SHARED,
     );
   }
 
@@ -226,6 +229,7 @@ class Filter {
     public inviterId: Nullable<string> = DEFAULT_INVITER_ID,
     public area: Nullable<TFilterArea> = DEFAULT_AREA,
     public includeStrangers: boolean = DEFAULT_INCLUDE_STRANGERS,
+    public includeShared: Nullable<boolean> = DEFAULT_INCLUDE_SHARED,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -278,6 +282,7 @@ class Filter {
       inviterId,
       area,
       includeStrangers,
+      includeShared,
     } = this;
 
     let employeetype = null;
@@ -305,6 +310,7 @@ class Filter {
       inviterId,
       area,
       includeStrangers,
+      includeShared,
     };
 
     dtoFilter = { ...dtoFilter, ...employeetype };
@@ -332,6 +338,7 @@ class Filter {
       inviterId,
       area,
       includeStrangers,
+      includeShared,
     } = this;
 
     const dtoFilter: {
@@ -352,6 +359,7 @@ class Filter {
       [INVITER_ID]?: typeof inviterId;
       [AREA]?: typeof area;
       [INCLUDE_STRANGERS]?: typeof includeStrangers;
+      [INCLUDE_SHARED]?: typeof includeShared;
     } = {
       page: page + 1,
       sortby: sortBy,
@@ -385,6 +393,8 @@ class Filter {
     if (area) dtoFilter[AREA] = area;
 
     if (includeStrangers) dtoFilter[INCLUDE_STRANGERS] = includeStrangers;
+
+    if (includeShared) dtoFilter[INCLUDE_SHARED] = includeShared;
 
     const str = toUrlParams(dtoFilter, true);
 
@@ -420,6 +430,7 @@ class Filter {
           this.inviterId,
           this.area,
           this.includeStrangers,
+          this.includeShared,
         );
   }
 
@@ -441,7 +452,8 @@ class Filter {
       this.invitedByMe === filter.invitedByMe &&
       this.inviterId === filter.inviterId &&
       this.area === filter.area &&
-      this.includeStrangers === filter.includeStrangers;
+      this.includeStrangers === filter.includeStrangers &&
+      this.includeShared === filter.includeShared;
 
     return equals;
   }

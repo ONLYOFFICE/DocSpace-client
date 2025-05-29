@@ -27,7 +27,7 @@
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
@@ -46,6 +46,8 @@ import ListLoader from "@docspace/shared/skeletons/list";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { HelpButton } from "@docspace/shared/components/help-button";
+import { isManagement } from "@docspace/shared/utils/common";
+
 import config from "PACKAGE_FILE";
 import { TenantStatus } from "@docspace/shared/enums";
 import styled from "styled-components";
@@ -94,7 +96,7 @@ const BackupListModalDialog = (props) => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    getBackupHistory()
+    getBackupHistory(isManagement())
       .then((filesList) =>
         setState((val) => ({ ...val, filesList, isLoading: false })),
       )
@@ -116,8 +118,8 @@ const BackupListModalDialog = (props) => {
 
   const onCleanBackupList = () => {
     setState((val) => ({ ...val, isLoading: true }));
-    deleteBackupHistory()
-      .then(() => getBackupHistory())
+    deleteBackupHistory(isManagement())
+      .then(() => getBackupHistory(isManagement()))
       .then((filesList) =>
         setState((val) => ({ ...val, filesList, isLoading: false })),
       )
@@ -131,7 +133,7 @@ const BackupListModalDialog = (props) => {
 
     setState((val) => ({ ...val, isLoading: true }));
     deleteBackup(backupId)
-      .then(() => getBackupHistory())
+      .then(() => getBackupHistory(isManagement()))
       .then((filesList) =>
         setState((val) => ({
           ...val,
@@ -167,7 +169,9 @@ const BackupListModalDialog = (props) => {
     startRestore(backupId, storageType, storageParams, isNotify)
       .then(() => setTenantStatus(TenantStatus.PortalRestore))
       .then(() => {
-        SocketHelper.emit(SocketCommands.RestoreBackup);
+        SocketHelper.emit(SocketCommands.RestoreBackup, {
+          dump: isManagement(),
+        });
       })
       .then(() =>
         navigate(

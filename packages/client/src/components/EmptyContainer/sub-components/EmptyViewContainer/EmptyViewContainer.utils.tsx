@@ -82,6 +82,9 @@ import DefaultFolderLight from "PUBLIC_DIR/images/emptyview/empty.default.folder
 import DefaultFolderUserDark from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.dark.svg";
 import DefaultFolderUserLight from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.light.svg";
 
+import EmptyFlowsLightIcon from "PUBLIC_DIR/images/emptyview/empty.flows.light.svg";
+import EmptyFlowsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.flows.dark.svg";
+
 import {
   FilesSelectorFilterTypes,
   FilterType,
@@ -152,7 +155,7 @@ export const getFolderDescription = (
       t("EmptyView:DefaultFolderDescription"),
     )
     .with([P._, DefaultFolderType, P.when(isUser)], () =>
-      t("EmptyView:UserEmptyDescription"),
+      t("Common:UserEmptyDescription"),
     )
     .otherwise(() => "");
 };
@@ -163,7 +166,7 @@ export const getRoomDescription = (
   isArchiveFolderRoot: boolean,
 ) => {
   if (isNotAdmin || isArchiveFolderRoot)
-    return t("EmptyView:UserEmptyDescription");
+    return t("Common:UserEmptyDescription");
 
   return t("EmptyView:EmptyDescription");
 };
@@ -173,6 +176,7 @@ export const getRootDescription = (
   access: AccessType,
   rootFolderType: Nullable<FolderType>,
   isPublicRoom: boolean,
+  security: Nullable<TFolderSecurity>,
 ) => {
   return match([rootFolderType, access])
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
@@ -186,12 +190,12 @@ export const getRootDescription = (
     )
     .with([FolderType.Rooms, P.when(() => isPublicRoom)], () => (
       <>
-        <span>{t("Files:RoomEmptyAtTheMoment")}</span>
+        <span>{t("Common:RoomEmptyAtTheMoment")}</span>
         <br />
-        <span>{t("Files:FilesWillAppearHere")}</span>
+        <span>{t("Common:FilesWillAppearHere")}</span>
       </>
     ))
-    .with([FolderType.USER, ShareAccessRights.None], () =>
+    .with([FolderType.USER, P.when(() => security?.Create)], () =>
       t("EmptyView:DefaultFolderDescription"),
     )
     .with([FolderType.Recent, P._], () => t("EmptyView:EmptyRecentDescription"))
@@ -242,7 +246,7 @@ export const getFolderTitle = (
     .with([FolderType.FormRoom, DefaultFolderType, P._], () =>
       t("EmptyView:FormFolderDefaultTitle"),
     )
-    .with([P._, DefaultFolderType, P._], () => t("Files:EmptyScreenFolder"))
+    .with([P._, DefaultFolderType, P._], () => t("Common:EmptyScreenFolder"))
     .otherwise(() => "");
 };
 
@@ -257,7 +261,7 @@ export const getRoomTitle = (
 
   if (isCollaborator) return t("EmptyView:CollaboratorEmptyTitle");
 
-  if (isNotAdmin || isArchiveFolderRoot) return t("Files:EmptyScreenFolder");
+  if (isNotAdmin || isArchiveFolderRoot) return t("Common:EmptyScreenFolder");
 
   switch (type) {
     case RoomsType.FormRoom:
@@ -293,7 +297,7 @@ export const getRootTitle = (
         ),
       ],
       () =>
-        t("Files:EmptyRootRoomHeader", {
+        t("Common:EmptyRootRoomHeader", {
           productName: t("Common:ProductName"),
         }),
     )
@@ -304,11 +308,12 @@ export const getRootTitle = (
       t("EmptyView:EmptyTemplatesTitle"),
     )
     .with([FolderType.USER, ShareAccessRights.None], () =>
-      t("Files:EmptyScreenFolder"),
+      t("Common:EmptyScreenFolder"),
     )
     .with([FolderType.Recent, P._], () => t("Files:NoFilesHereYet"))
     .with([FolderType.Archive, P._], () => t("Files:ArchiveEmptyScreenHeader"))
-    .with([FolderType.TRASH, P._], () => t("Files:EmptyScreenFolder"))
+    .with([FolderType.TRASH, P._], () => t("Common:EmptyScreenFolder"))
+    .with([FolderType.Flows, P._], () => t("Files:NoFlowsHereYet"))
     .otherwise(() => "");
 };
 
@@ -431,6 +436,25 @@ export const getRoomIcon = (
           <EmptyCustomRoomCollaboratorDarkIcon />
         ),
       )
+      .with(
+        [
+          RoomsType.AIRoom,
+          P.union(ShareAccessRights.None, ShareAccessRights.RoomManager), // owner, docspace admin, room admin
+        ],
+        () =>
+          isBaseTheme ? (
+            <EmptyCustomRoomLightIcon />
+          ) : (
+            <EmptyCustomRoomDarkIcon />
+          ),
+      )
+      .with([RoomsType.AIRoom, ShareAccessRights.Collaborator], () =>
+        isBaseTheme ? (
+          <EmptyCustomRoomCollaboratorLightIcon />
+        ) : (
+          <EmptyCustomRoomCollaboratorDarkIcon />
+        ),
+      )
       .with([P._, P.when(isUser)], () =>
         isBaseTheme ? <DefaultFolderUserLight /> : <DefaultFolderUserDark />,
       )
@@ -492,6 +516,9 @@ export const getRootIcon = (
     )
     .with([FolderType.TRASH, P._], () =>
       isBaseTheme ? <EmptyTrashLightIcon /> : <EmptyTrashDarkIcon />,
+    )
+    .with([FolderType.Flows, P._], () =>
+      isBaseTheme ? <EmptyFlowsLightIcon /> : <EmptyFlowsDarkIcon />,
     )
     .otherwise(() => <div />);
 };

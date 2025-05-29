@@ -29,6 +29,7 @@ export const enum ThemeId {
   IconButton = "iconButton",
   IconButtonPin = "iconButtonPin",
   IconButtonMute = "iconButtonMute",
+  IconButtonCustomFilter = "iconButtonCustomFilter",
   IndicatorFilterButton = "indicatorFilterButton",
   FilterBlockItemTag = "filterBlockItemTag",
   VersionBadge = "versionBadge",
@@ -40,4 +41,5 @@ export const enum ThemeId {
   Progress = "progress",
   SubmenuText = "submenuText",
   IndexIconButton = "indexIconButton",
+  Text = "text",
 }

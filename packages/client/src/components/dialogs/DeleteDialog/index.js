@@ -161,7 +161,7 @@ const DeleteDialogComponent = (props) => {
 
   const moveToTrashTitle = () => {
     if (unsubscribe) return t("UnsubscribeTitle");
-    return t("MoveToTrashTitle");
+    return t("Common:MoveToTrashTitle");
   };
 
   const moveToTrashNoteText = () => {
@@ -195,8 +195,8 @@ const DeleteDialogComponent = (props) => {
           t("DeleteFolder")
         ) : (
           <>
-            <>{t("DeleteFile")} </>
-            <>{t("FilePermanentlyDeleted")} </>
+            <>{t("Common:DeleteFile")} </>
+            <>{t("Common:FilePermanentlyDeleted")} </>
             <>{t("Common:WantToContinue")}</>
           </>
         )
@@ -219,8 +219,8 @@ const DeleteDialogComponent = (props) => {
           </>
         ) : (
           <>
-            <>{t("DeleteFile")} </>
-            <>{t("FilePermanentlyDeleted")} </>
+            <>{t("Common:DeleteFile")} </>
+            <>{t("Common:FilePermanentlyDeleted")} </>
             <>{t("Common:WantToContinue")}</>
           </>
         )
@@ -244,9 +244,9 @@ const DeleteDialogComponent = (props) => {
           </>
         ) : (
           <>
-            <>{t("DeleteFile")} </>
+            <>{t("Common:DeleteFile")} </>
             <>{t("DeleteSharedNote")} </>
-            {!isThirdParty ? <>{t("FilePermanentlyDeleted")} </> : null}
+            {!isThirdParty ? <>{t("Common:FilePermanentlyDeleted")} </> : null}
             <>{t("Common:WantToContinue")}</>
           </>
         )
@@ -290,7 +290,7 @@ const DeleteDialogComponent = (props) => {
       <ModalDialog.Footer>
         <Button
           id="delete-file-modal_submit"
-          key="OkButton"
+          key="OKButton"
           label={accessButtonLabel}
           size="normal"
           primary

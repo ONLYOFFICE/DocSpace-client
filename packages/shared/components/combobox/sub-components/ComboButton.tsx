@@ -38,14 +38,14 @@ import {
   StyledLoader,
   StyledPlusBadge,
   DescriptiveContainer,
-} from "../Combobox.styled";
+} from "../ComboBox.styled";
 
 import { Text } from "../../text";
 import { Badge } from "../../badge";
 
-import ComboButtonTheme from "../Combobox.theme";
+import ComboButtonTheme from "../ComboBox.theme";
 
-import { ComboBoxSize } from "../Combobox.enums";
+import { ComboBoxSize } from "../ComboBox.enums";
 import type { TComboButtonProps } from "../ComboBox.types";
 
 const ComboButton: React.FC<TComboButtonProps> = ({

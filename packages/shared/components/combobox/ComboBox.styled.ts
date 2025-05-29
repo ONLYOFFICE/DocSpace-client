@@ -38,7 +38,7 @@ import {
 
 import { Loader } from "../loader";
 
-import { ComboBoxSize } from "./Combobox.enums";
+import { ComboBoxSize } from "./ComboBox.enums";
 import type { TCombobox } from "./ComboBox.types";
 
 // for ComboButton with plusBadge (StyledGroupsCombobox)

@@ -33,7 +33,7 @@ import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg";
 import { ComboBox } from "./ComboBox";
 import { TComboboxProps } from "./ComboBox.types";
 import { globalColors } from "../../themes";
-import { ComboBoxDisplayType, ComboBoxSize } from "./Combobox.enums";
+import { ComboBoxDisplayType, ComboBoxSize } from "./ComboBox.enums";
 
 const meta = {
   title: "Components/ComboBox",

@@ -28,7 +28,7 @@ import { TContextMenuValueTypeOnClick } from "../context-menu/ContextMenu.types"
 import { ShareAccessRights } from "../../enums";
 import { TColorScheme } from "../../themes";
 import { TDirectionX, TDirectionY } from "../../types";
-import { ComboBoxDisplayType, ComboBoxSize } from "./Combobox.enums";
+import { ComboBoxDisplayType, ComboBoxSize } from "./ComboBox.enums";
 
 export type TCombobox = null | "badge" | "onlyIcon" | "descriptive";
 

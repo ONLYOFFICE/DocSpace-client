@@ -27,7 +27,7 @@
 import React, { PropsWithChildren, use } from "react";
 import { ThemeContext } from "styled-components";
 
-import { StyledThemeComboButton } from "./Combobox.styled";
+import { StyledThemeComboButton } from "./ComboBox.styled";
 import type { TComboButtonThemeProps } from "./ComboBox.types";
 
 const ComboButtonTheme = ({

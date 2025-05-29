@@ -41,6 +41,7 @@ import {
   getInvitationSettings,
 } from "@/utils/actions";
 import CreateUserForm from "./page.client";
+import { logger } from "logger.mjs";
 
 type LinkInviteProps = {
   searchParams: Promise<{ [key: string]: string }>;
@@ -48,10 +49,14 @@ type LinkInviteProps = {
 };
 
 async function Page(props: LinkInviteProps) {
+  logger.info("Invite page");
+
   const params = await props.params;
   const searchParams = await props.searchParams;
-  if (params.Invite !== "LinkInvite" && params.Invite !== "EmpInvite")
+  if (params.Invite !== "LinkInvite" && params.Invite !== "EmpInvite") {
+    logger.info(`Invite page notFound params.Invite: ${params.Invite}`);
     return notFound();
+  }
 
   const type = searchParams.type;
   const uid = searchParams.uid;

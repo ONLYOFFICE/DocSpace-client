@@ -30,8 +30,11 @@ import { GreetingContainer } from "@/components/GreetingContainer";
 import { getCompanyInfoSettings, getSettings } from "@/utils/actions";
 
 import RemovePortalForm from "./page.client";
+import { logger } from "logger.mjs";
 
 async function Page() {
+  logger.info("PortalRemove page");
+
   const [settings, companyInfoSettings] = await Promise.all([
     getSettings(),
     getCompanyInfoSettings(),

@@ -30,8 +30,11 @@ import { GreetingContainer } from "@/components/GreetingContainer";
 import { getSettings } from "@/utils/actions";
 
 import ContinuePortalForm from "./page.client";
+import { logger } from "logger.mjs";
 
 async function Page() {
+  logger.info("PortalContinue page");
+
   const settings = await getSettings();
 
   return (

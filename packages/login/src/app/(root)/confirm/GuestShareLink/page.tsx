@@ -37,12 +37,15 @@ import { getStringFromSearchParams } from "@/utils";
 
 import GuestShareLinkForm from "./page.client";
 import { GreetingGuestContainer } from "@/components/GreetingContainer";
+import { logger } from "logger.mjs";
 
 type GuestShareLinkProps = {
   searchParams: Promise<{ [key: string]: string }>;
 };
 
 async function Page(props: GuestShareLinkProps) {
+  logger.info("GuestShareLink page");
+
   const searchParams = await props.searchParams;
   const uid = searchParams.uid;
   const email = searchParams.email;

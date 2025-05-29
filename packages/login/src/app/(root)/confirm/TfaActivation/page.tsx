@@ -33,12 +33,15 @@ import {
 
 import { StyledForm } from "./page.styled";
 import TfaActivationForm from "./page.client";
+import { logger } from "logger.mjs";
 
 type TfaActivationProps = {
   searchParams: Promise<{ [key: string]: string }>;
 };
 
 async function Page(props: TfaActivationProps) {
+  logger.info("TfaActivation page");
+
   const searchParams = await props.searchParams;
   const confirmKey = encodeParams(getStringFromSearchParams(searchParams));
   const uid = searchParams.uid;

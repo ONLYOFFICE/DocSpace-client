@@ -31,12 +31,15 @@ import { getPortalPasswordSettings, getSettings } from "@/utils/actions";
 import { getStringFromSearchParams } from "@/utils";
 
 import PasswordChangeForm from "./page.client";
+import { logger } from "logger.mjs";
 
 type PasswordChangeProps = {
   searchParams: Promise<{ [key: string]: string }>;
 };
 
 async function Page(props: PasswordChangeProps) {
+  logger.info("PasswordChange page");
+
   const searchParams = await props.searchParams;
   const confirmKey = getStringFromSearchParams(searchParams);
 

@@ -7,12 +7,13 @@ import { LoginContainer } from "@/components/LoginContainer";
 import { getSettings } from "@/utils/actions";
 
 import TenantList from "./page.client";
+import { logger } from "logger.mjs";
 
-export default async function Page(
-  props: {
-    searchParams: Promise<{ [key: string]: string }>;
-  }
-) {
+export default async function Page(props: {
+  searchParams: Promise<{ [key: string]: string }>;
+}) {
+  logger.info("Tenant list page");
+
   const searchParams = await props.searchParams;
   const settings = await getSettings();
 

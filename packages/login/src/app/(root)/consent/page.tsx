@@ -41,12 +41,13 @@ import { GreetingLoginContainer } from "@/components/GreetingContainer";
 import { LoginContainer } from "@/components/LoginContainer";
 
 import Consent from "./page.client";
+import { logger } from "logger.mjs";
 
-async function Page(
-  props: {
-    searchParams: Promise<{ [key: string]: string }>;
-  }
-) {
+async function Page(props: {
+  searchParams: Promise<{ [key: string]: string }>;
+}) {
+  logger.info("Consent page");
+
   const searchParams = await props.searchParams;
   const clientId = searchParams.clientId ?? searchParams.client_id;
 
@@ -62,6 +63,7 @@ async function Page(
   let new_token = "";
 
   if (!token) {
+    logger.info("Consent page missing token");
     new_token = await getOauthJWTToken();
   }
 

@@ -31,12 +31,15 @@ import { getStringFromSearchParams } from "@/utils";
 import { getSettings, getUserFromConfirm } from "@/utils/actions";
 
 import ChangeOwnerForm from "./page.client";
+import { logger } from "logger.mjs";
 
 type PortalOwnerChangeProps = {
   searchParams: Promise<{ [key: string]: string }>;
 };
 
 async function Page(props: PortalOwnerChangeProps) {
+  logger.info("PortalOwnerChange page");
+
   const searchParams = await props.searchParams;
   const uid = searchParams.uid;
   const confirmKey = getStringFromSearchParams(searchParams);

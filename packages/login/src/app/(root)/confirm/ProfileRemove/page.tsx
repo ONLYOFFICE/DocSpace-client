@@ -27,8 +27,11 @@
 import { getSettings } from "@/utils/actions";
 
 import ProfileRemoveForm from "./page.client";
+import { logger } from "logger.mjs";
 
 async function Page() {
+  logger.info("ProfileRemove page");
+
   const settings = await getSettings();
 
   return (

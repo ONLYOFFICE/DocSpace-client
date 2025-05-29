@@ -30,8 +30,10 @@ import { GreetingContainer } from "@/components/GreetingContainer";
 import { getSettings } from "@/utils/actions";
 
 import ChangePhoneForm from "./page.client";
+import { logger } from "logger.mjs";
 
 async function Page() {
+  logger.info("PhoneActivation page");
   const settings = await getSettings();
 
   return (

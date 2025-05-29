@@ -30,8 +30,11 @@ import { GreetingContainer } from "@/components/GreetingContainer";
 import { getCompanyInfoSettings, getSettings } from "@/utils/actions";
 
 import DeactivatePortalForm from "./page.client";
+import { logger } from "logger.mjs";
 
 async function Page() {
+  logger.info("PortalSuspend page");
+
   const [settings, companyInfoSettings] = await Promise.all([
     getSettings(),
     getCompanyInfoSettings(),

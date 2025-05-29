@@ -31,12 +31,15 @@ import { getStringFromSearchParams, encodeParams } from "@/utils";
 import { getSettings, getUserFromConfirm } from "@/utils/actions";
 
 import TfaAuthForm from "./page.client";
+import { logger } from "logger.mjs";
 
 type TfaAuthProps = {
   searchParams: Promise<{ [key: string]: string }>;
 };
 
 async function Page(props: TfaAuthProps) {
+  logger.info("TfaAuth page");
+
   const searchParams = await props.searchParams;
   const confirmKey = encodeParams(getStringFromSearchParams(searchParams));
   const uid = searchParams.uid;

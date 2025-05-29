@@ -60,22 +60,15 @@ const AuthHandler = () => {
   const { linkData } = useContext(ConfirmRouteContext);
   const { email = "", key = "" } = linkData;
 
-  console.log("Rendered Auth page");
-  console.log(linkData);
-  console.log(email, key);
-
   const referenceUrl = searchParams?.get("referenceUrl");
   const isFileHandler =
     referenceUrl && referenceUrl.indexOf("filehandler.ashx") !== -1;
   const isExternalDownloading =
     referenceUrl && referenceUrl.indexOf("action=download") !== -1;
 
-  console.log(isFileHandler, isExternalDownloading);
-
   const replaced = useRef(false);
 
   useLayoutEffect(() => {
-    console.log("call useLauoutEffect");
     if (!email || !key) return;
 
     async function loginWithKey() {
@@ -91,7 +84,6 @@ const AuthHandler = () => {
           },
         });
 
-        //console.log("Login with confirm key success", res);
         frameCallEvent({ event: "onAuthSuccess" });
 
         const wizard = searchParams?.get("wizard");
@@ -161,8 +153,6 @@ const AuthHandler = () => {
     }
 
     loginWithKey();
-
-    console.log("call useEffect");
   }, [
     email,
     key,
@@ -171,8 +161,6 @@ const AuthHandler = () => {
     isExternalDownloading,
     searchParams,
   ]);
-
-  console.log("render");
 
   return isFileHandler && isExternalDownloading ? (
     <OperationContainer

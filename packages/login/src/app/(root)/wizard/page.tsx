@@ -46,12 +46,9 @@ import { getUserTimezone } from "@docspace/shared/utils/common";
 import { LANGUAGE, TIMEZONE } from "@docspace/shared/constants";
 
 async function Page() {
-  console.log("start wizzard requests");
   const settings = await getSettings();
 
   const objectSettings = typeof settings === "string" ? undefined : settings;
-
-  console.log("wizzard token", objectSettings?.wizardToken);
 
   if (!objectSettings || !objectSettings.wizardToken) {
     redirect("/");

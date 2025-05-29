@@ -24,73 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import styled from "styled-components";
+import nconf from "nconf";
+import path from "path";
 
-import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
-import { Text } from "../../text";
+nconf
+  .argv()
+  .env()
+  .file("config", path.join(process.cwd(), "config", "config.json"));
 
-import { mobile } from "../../../utils";
-import { globalColors } from "../../../themes";
+let appsettings = nconf.get("app")?.appsettings;
 
-const StyledWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+if (!path.isAbsolute(appsettings)) {
+  appsettings = path.join(process.cwd(), appsettings);
+}
 
-  @media ${mobile} {
-    display: none;
+nconf.file("appsettings", path.join(appsettings, "appsettings.json"));
+nconf.file(
+  "appsettingsServices",
+  path.join(appsettings, "appsettings.services.json"),
+);
+
+const logPath = nconf.get("logPath");
+
+if (logPath != null) {
+  if (!path.isAbsolute(logPath)) {
+    nconf.set("logPath", path.join(process.cwd(), "..", logPath));
   }
+}
 
-  .avatar {
-    height: 124px;
-    width: 124px;
-    align-self: center;
-  }
-
-  .name-preview {
-    max-width: 198px;
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    padding: 8px;
-    border: 1px solid ${globalColors.grayLightMid};
-    border-radius: 6px;
-  }
-`;
-
-const AvatarPreview = ({
-  avatar,
-  userName,
-}: {
-  avatar: string;
-  userName: string;
-}) => {
-  return (
-    <StyledWrapper>
-      <Avatar
-        className="avatar"
-        size={AvatarSize.max}
-        role={AvatarRole.user}
-        source={avatar}
-        userName={userName}
-        editing={false}
-      />
-      <div className="name-preview">
-        <Avatar
-          size={AvatarSize.min}
-          role={AvatarRole.user}
-          source={avatar}
-          userName={userName}
-          editing={false}
-        />
-        <Text fontWeight={600} fontSize="15px" truncate>
-          {userName}
-        </Text>
-      </div>
-    </StyledWrapper>
-  );
-};
-
-export default AvatarPreview;
+export default nconf;

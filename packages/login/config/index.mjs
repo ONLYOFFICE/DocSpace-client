@@ -24,66 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import nconf from "nconf";
+import path from "path";
 
-import { globalColors } from "../../themes";
+nconf
+  .argv()
+  .env()
+  .file("config", path.join(process.cwd(), "config", "config.json"));
 
-const StyledBodyContent = styled.div`
-  display: contents;
+let appsettings = nconf.get("app")?.appsettings;
 
-  .radio {
-    padding-bottom: 8px;
+if (!path.isAbsolute(appsettings)) {
+  appsettings = path.join(process.cwd(), appsettings);
+}
+
+nconf.file("appsettings", path.join(appsettings, "appsettings.json"));
+nconf.file(
+  "appsettingsServices",
+  path.join(appsettings, "appsettings.services.json"),
+);
+
+const logPath = nconf.get("logPath");
+
+if (logPath != null) {
+  if (!path.isAbsolute(logPath)) {
+    nconf.set("logPath", path.join(process.cwd(), "..", logPath));
   }
+}
 
-  .message {
-    margin-bottom: 16px;
-
-    .bold {
-      font-weight: 600;
-    }
-
-    .truncate {
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-  }
-
-  .select-action {
-    margin-bottom: 12px;
-  }
-
-  .conflict-resolve-radio-button {
-    label {
-      display: flex;
-      align-items: flex-start;
-      &:not(:last-child) {
-        margin-bottom: 12px;
-      }
-    }
-
-    svg {
-      overflow: visible;
-      margin-inline-end: 8px;
-      margin-top: 3px;
-    }
-
-    .radio-option-title {
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 16px;
-    }
-
-    .radio-option-description {
-      font-size: 12px;
-      line-height: 16px;
-      color: ${globalColors.gray};
-    }
-  }
-
-  .conflict-resolve_file-name {
-    display: flex;
-  }
-`;
-
-export { StyledBodyContent };
+export default nconf;

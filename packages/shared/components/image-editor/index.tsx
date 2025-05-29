@@ -24,12 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import Dropzone from "./Dropzone";
 import ImageCropper from "./ImageCropper";
 import ButtonDelete from "./ButtonDelete";
 
 import { ImageEditorProps } from "./ImageEditor.types";
-import AvatarPreview from "./AvatarPreview";
 
 const ImageEditor = ({
   t,
@@ -83,4 +81,4 @@ const ImageEditor = ({
   );
 };
 
-export { ImageEditor, AvatarPreview, Dropzone, ButtonDelete };
+export { ImageEditor, ButtonDelete };

@@ -37,6 +37,8 @@ import { AvatarRole } from "../../components/avatar";
 import { SelectorAccessRightsMode } from "../../components/selector";
 import { TSelectorItem } from "../../components/selector/Selector.types";
 
+import { createGetPeopleHandler } from "../../__mocks__/storybook/handlers/people/getPeople";
+
 import PeopleSelector from "./index";
 
 const StyledRowLoader = styled.div`
@@ -56,8 +58,6 @@ const meta = {
     withHeader: { control: "boolean" },
     withSearch: { control: "boolean" },
     isMultiSelect: { control: "boolean" },
-    withGroups: { control: "boolean" },
-    withGuests: { control: "boolean" },
     withCancelButton: { control: "boolean" },
     withAccessRights: { control: "boolean" },
     withFooterCheckbox: { control: "boolean" },
@@ -282,6 +282,11 @@ const Template = (args) => {
 
 export const Default: Story = {
   render: (args) => <Template {...args} />,
+  parameters: {
+    msw: {
+      handlers: [createGetPeopleHandler()],
+    },
+  },
   args: {
     items: users,
     withHeader: true,
@@ -336,6 +341,11 @@ export const Default: Story = {
 
 export const WithMultiSelect: Story = {
   render: (args) => <Template {...args} />,
+  parameters: {
+    msw: {
+      handlers: [createGetPeopleHandler()],
+    },
+  },
   args: {
     ...Default.args,
     isMultiSelect: true,
@@ -343,24 +353,17 @@ export const WithMultiSelect: Story = {
   },
 };
 
-export const WithGroups: Story = {
-  render: (args) => <Template {...args} />,
-  args: {
-    ...Default.args,
-    withGroups: true,
-  },
-};
 
-export const WithGuests: Story = {
-  render: (args) => <Template {...args} />,
-  args: {
-    ...Default.args,
-    withGuests: true,
-  },
-};
+
+
 
 export const WithAccessRights: Story = {
   render: (args) => <Template {...args} />,
+  parameters: {
+    msw: {
+      handlers: [createGetPeopleHandler()],
+    },
+  },
   args: {
     ...Default.args,
     withAccessRights: true,
@@ -373,6 +376,11 @@ export const WithAccessRights: Story = {
 
 export const WithCancelButton: Story = {
   render: (args) => <Template {...args} />,
+  parameters: {
+    msw: {
+      handlers: [createGetPeopleHandler()],
+    },
+  },
   args: {
     ...Default.args,
     withCancelButton: true,
@@ -382,6 +390,11 @@ export const WithCancelButton: Story = {
 
 export const WithFooterCheckbox: Story = {
   render: (args) => <Template {...args} />,
+  parameters: {
+    msw: {
+      handlers: [createGetPeopleHandler()],
+    },
+  },
   args: {
     ...Default.args,
     withFooterCheckbox: true,
@@ -392,6 +405,11 @@ export const WithFooterCheckbox: Story = {
 
 export const WithInfo: Story = {
   render: (args) => <Template {...args} />,
+  parameters: {
+    msw: {
+      handlers: [createGetPeopleHandler()],
+    },
+  },
   args: {
     ...Default.args,
     withInfo: true,
@@ -399,22 +417,15 @@ export const WithInfo: Story = {
   },
 };
 
-export const GroupsOnly: Story = {
-  render: (args) => <Template {...args} />,
-  args: {
-    ...Default.args,
-    items: groups,
-    withGroups: true,
-    isGroupsOnly: true,
-    headerProps: {
-      headerLabel: "Select Groups",
-    },
-    searchPlaceholder: "Search groups",
-  },
-};
+
 
 export const WithDisabledUsers: Story = {
   render: (args) => <Template {...args} />,
+  parameters: {
+    msw: {
+      handlers: [createGetPeopleHandler()],
+    },
+  },
   args: {
     ...Default.args,
     disableInvitedUsers: [users[1].id, users[3].id],

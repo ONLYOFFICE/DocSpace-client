@@ -96,7 +96,7 @@ export const parseHistory = (
 
   feedActions.forEach((feed) => {
     const feedDay = moment(feed.date).format("YYYY-MM-DD");
-    if (feedActions.length && parsedFeeds.at(-1)?.day === feedDay)
+    if (parsedFeeds.length && parsedFeeds.at(-1)?.day === feedDay)
       parsedFeeds.at(-1)?.feeds.push({ ...feed });
     else
       parsedFeeds.push({

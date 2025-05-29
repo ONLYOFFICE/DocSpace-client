@@ -34,7 +34,7 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { toastr } from "@docspace/shared/components/toast";
 import { updateWalletPayment } from "@docspace/shared/api/portal";
-import QuantityPicker from "@docspace/shared/components/select-count-container";
+import QuantityPicker from "@docspace/shared/components/quantity-picker";
 
 import styles from "./styles/index.module.scss";
 import StorageSummary from "./sub-components/StorageSummary";

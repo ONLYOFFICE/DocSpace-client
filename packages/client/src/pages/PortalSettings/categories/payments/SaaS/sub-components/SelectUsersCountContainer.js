@@ -26,10 +26,10 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import QuantityPicker from "@docspace/shared/components/select-count-container";
-
 import { useTranslation } from "react-i18next";
+
 import { getConvertedSize } from "@docspace/shared/utils/common";
+import QuantityPicker from "@docspace/shared/components/quantity-picker";
 
 let formattedSizeTitle = null;
 const SelectUsersCountContainer = ({

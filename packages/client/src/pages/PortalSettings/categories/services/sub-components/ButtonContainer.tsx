@@ -35,6 +35,7 @@ import { usePaymentContext } from "../context/PaymentContext";
 interface ButtonContainerProps {
   onClose: () => void;
   onBuy: () => void;
+  onSendRequest: () => void;
   isLoading: boolean;
   isExceedingStorageLimit: boolean;
   amount: number;

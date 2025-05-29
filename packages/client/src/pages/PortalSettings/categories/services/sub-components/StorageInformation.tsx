@@ -45,7 +45,6 @@ const StorageInformation: React.FC<StorageInformationProps> = (props) => {
   } = props;
 
   const { t } = useServicesActions();
-  console.log("StorageInformation render");
 
   return (
     <div className={styles.storageInfo}>

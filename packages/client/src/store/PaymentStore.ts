@@ -132,8 +132,6 @@ class PaymentStore {
 
   isTransactionHistoryExist = false;
 
-  payerInfo = null;
-
   autoPayments: TAutoTopUpSettings | null = null;
 
   minBalance: string = "";

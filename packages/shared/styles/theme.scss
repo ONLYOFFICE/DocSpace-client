@@ -2346,6 +2346,8 @@
 }
 
 .light {
+  --combobox-background: #{$light-gray-selected};
+
   --combobox-button-bg: #{$white};
   --combobox-button-color: #{$black};
   --combobox-button-disabled-color: #{$gray-strong};
@@ -2378,6 +2380,8 @@
 }
 
 .dark {
+  --combobox-background: #{$black};
+
   --combobox-button-bg: #{$black};
   --combobox-button-color: #{$gray-dark};
   --combobox-button-disabled-color: #{$gray-dark};

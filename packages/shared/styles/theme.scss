@@ -1566,7 +1566,7 @@
   --input-bg: #{$dark-gray-light};
   --input-color: #{$white};
   --input-border-color: #{$gray-dark-strong};
-  --input-border-hover: #{$gray-dark};
+  --input-border-hover: #{$gray-dark-text};
   --input-border-focus: #{$white};
 
   --input-disabled-bg: #{$gray-dark-strong};
@@ -1582,7 +1582,7 @@
   --input-warning-border-hover: #{$dark-status-warning};
   --input-warning-border-focus: #{$dark-status-warning};
 
-  --text-input-placeholder-color: #{$gray-dark};
+  --text-input-placeholder-color: #{$gray-dark-text};
   --text-input-placeholder-disabled-color: #{$gray-dark-text};
 
   // Dimensions
@@ -2343,6 +2343,16 @@
 
 .dark {
   --modal-dialog-resolve-color: #{$gray};
+}
+
+.light {
+  --search-input-default-icon-fill: #{$gray-strong};
+  --search-input-filled-icon-fill: #{$gray};
+}
+
+.dark {
+  --search-input-default-icon-fill: #{$gray-dark-strong};
+  --search-input-filled-icon-fill: #{$gray-dark};
 }
 
 .light {

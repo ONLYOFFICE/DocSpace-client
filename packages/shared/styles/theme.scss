@@ -2220,6 +2220,7 @@
   --payment-price-container-disable-color: #{$gray};
   --payment-price-container-disable-background: #{$gray-light};
   --payment-price-container-feature-text-color: #{$gray};
+  --wallet-color-icon: var(--color-scheme-main-buttons);
 }
 .dark {
   --payment-price-container-disable-color: #{$light-dark-gray-hover};
@@ -2228,4 +2229,5 @@
   --payment-price-container-disable-color: #{$gray-dark};
   --payment-price-container-disable-background: #{$dark-gray-light};
   --payment-price-container-feature-text-color: #{$gray-dark};
+  --wallet-color-icon: var(--color-scheme-main-buttons);
 }

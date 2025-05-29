@@ -36,58 +36,47 @@ import { formatCurrencyValue } from "../../payments/Wallet/utils";
 
 import styles from "../styles/StorageSummary.module.scss";
 import PlanInfo from "./PlanInfo";
+import { useServicesActions } from "../hooks/useServicesActions";
+import DueToday from "./DueToday";
+import { calculateTotalPrice } from "../hooks/resourceUtils";
 
 type StorageSummaryProps = {
-  amount?: string | number;
+  amount?: number;
   stepValue?: number;
-  isInsufficientFunds?: boolean;
-  totalPrice?: number;
-  language?: string;
-  walletBalance?: number;
-  walletCodeCurrency?: string;
   onTopUp?: () => void;
-  maxValue?: number;
-  moreThanLimit?: boolean;
-  isCurrentTariff?: boolean;
-  walletDueDate?: string;
+  isExceedingStorageLimit?: boolean;
+  isCurrentStoragePlan?: boolean;
+  storageExpiryDate?: string;
   hasScheduledStorageChange?: boolean;
   onCancelChange?: () => void;
-  nextStoragePlanSize?: number;
   hasStorageSubscription?: boolean;
   currentStoragePlanSize?: number;
 };
 
-const StorageSummary: React.FC<StorageSummaryProps> = ({
-  language,
-  walletCodeCurrency,
-  amount,
-  stepValue,
-  isInsufficientFunds,
-  totalPrice,
-  walletBalance = 0,
-  onTopUp,
-  maxValue,
-  hasStorageSubscription,
-  moreThanLimit,
-  isCurrentTariff,
-  walletDueDate,
-  hasScheduledStorageChange,
-  onCancelChange,
-  nextStoragePlanSize,
-  currentStoragePlanSize,
-}) => {
-  const balanceValue = formatCurrencyValue(
-    language || "en",
-    walletBalance,
-    walletCodeCurrency || "",
-    2,
-    2,
-  );
+const StorageSummary: React.FC<StorageSummaryProps> = (props) => {
+  const {
+    amount,
+    stepValue,
+    onTopUp,
+    hasStorageSubscription,
+    isExceedingStorageLimit,
+    isCurrentStoragePlan,
+    storageExpiryDate,
+    hasScheduledStorageChange,
+    onCancelChange,
+    currentStoragePlanSize,
+  } = props;
 
-  const { t } = useTranslation("Payments");
+  const {
+    t,
+    isWalletBalanceInsufficient,
+    formatWalletCurrency,
+    isStorageCancellation,
+    isPlanUpgrade,
+  } = useServicesActions();
 
   const getTitle = () => {
-    if (isCurrentTariff) {
+    if (isCurrentStoragePlan) {
       if (hasScheduledStorageChange) return t("ChangeShedule");
 
       return t("YourCurrentPayment");
@@ -101,21 +90,25 @@ const StorageSummary: React.FC<StorageSummaryProps> = ({
   const getDescription = () => {
     if (!hasStorageSubscription) return t("NewStorageImmidiatelyAvailable");
 
-    if (hasScheduledStorageChange && nextStoragePlanSize === 0) {
+    if (isStorageCancellation()) {
       return t("SubscriptionAutoCancellation", {
-        finalDate: walletDueDate,
+        finalDate: storageExpiryDate,
       });
     }
 
     if (amount)
       return t("SubscriptionAutoRenewed", {
-        finalDate: walletDueDate,
+        finalDate: storageExpiryDate,
       });
 
     return t("SubscriptionAutoCancellation", {
-      finalDate: walletDueDate,
+      finalDate: storageExpiryDate,
     });
   };
+
+  const totalPrice = calculateTotalPrice(amount, stepValue);
+  const insufficientFunds = isWalletBalanceInsufficient(totalPrice);
+  const isUpgradeStoragePlan = isPlanUpgrade(amount);
 
   return (
     <div>
@@ -126,6 +119,10 @@ const StorageSummary: React.FC<StorageSummaryProps> = ({
             storageUnit: t("Common:Gigabyte"),
           })}
         </div>
+      ) : null}
+
+      {isUpgradeStoragePlan && !isExceedingStorageLimit ? (
+        <DueToday amount={amount} />
       ) : null}
 
       <div
@@ -141,60 +138,42 @@ const StorageSummary: React.FC<StorageSummaryProps> = ({
         </Text>
         <PlanInfo
           amount={amount}
-          walletCodeCurrency={walletCodeCurrency!}
-          language={language!}
           totalPrice={totalPrice}
-          value={stepValue}
-          maxValue={maxValue}
-          moreThanLimit={moreThanLimit}
-          isCurrentTariff={isCurrentTariff}
+          isExceedingStorageLimit={isExceedingStorageLimit}
+          isCurrentStoragePlan={isCurrentStoragePlan}
+          isUpgradeStoragePlan={isUpgradeStoragePlan}
         />
 
         {!hasScheduledStorageChange ? (
           <WalletInfo
-            balance={balanceValue}
-            {...(isInsufficientFunds && { onTopUp })}
+            balance={formatWalletCurrency()}
+            {...(insufficientFunds && !isExceedingStorageLimit && { onTopUp })}
           />
         ) : (
           <Link textDecoration="underline dashed" onClick={onCancelChange}>
             {t("CancelChange")}
           </Link>
         )}
-
-        {isInsufficientFunds && !moreThanLimit ? (
-          <Text className={styles.balanceWarning} fontSize="12px">
-            {t("BalanceNotEnough")}
-          </Text>
-        ) : null}
       </div>
     </div>
   );
 };
 
-export default inject(
-  ({ paymentStore, authStore, currentTariffStatusStore }: TStore) => {
-    const { language } = authStore;
-    const { walletBalance, walletCodeCurrency, storageQuotaIncrementPrice } =
-      paymentStore;
-    const {
-      hasScheduledStorageChange,
-      hasStorageSubscription,
-      nextStoragePlanSize,
-      currentStoragePlanSize,
-      storageExpiryDate,
-    } = currentTariffStatusStore;
+export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
+  const { storageQuotaIncrementPrice } = paymentStore;
+  const {
+    hasScheduledStorageChange,
+    hasStorageSubscription,
+    currentStoragePlanSize,
+    storageExpiryDate,
+  } = currentTariffStatusStore;
 
-    const { value } = storageQuotaIncrementPrice;
-    return {
-      walletBalance,
-      walletCodeCurrency,
-      language,
-      stepValue: value,
-      hasScheduledStorageChange,
-      walletDueDate: storageExpiryDate,
-      hasStorageSubscription,
-      nextStoragePlanSize,
-      currentStoragePlanSize,
-    };
-  },
-)(observer(StorageSummary));
+  const { value } = storageQuotaIncrementPrice;
+  return {
+    stepValue: value,
+    hasScheduledStorageChange,
+    storageExpiryDate,
+    hasStorageSubscription,
+    currentStoragePlanSize,
+  };
+})(observer(StorageSummary));

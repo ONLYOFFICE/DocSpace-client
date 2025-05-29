@@ -12,6 +12,7 @@
   "AutoTopUp": "Auto top-up",
   "AutoTopUpEnabled": "Auto top-up is enabled.",
   "Balance": "Balance: <1>{{balance}}</1>",
+  "BalanceInsufficient": "Balance: <1>{{balance}}</1> | Insufficient funds",
   "BalanceNotEnough": "Your wallet has insufficient funds. Please top up your wallet and try purchasing again.",
   "BalanceText": "Balance",
   "BalanceTopUp": "Balance top-up",
@@ -52,6 +53,7 @@
   "EnterAnIntegerAmountBetween": "Enter an integer amount between {{min}} and {{max}}",
   "ErrorNotification": "Failed to update tariff plan. Try again later or contact the sales department.",
   "FirstAddPaymentMethod": "First you need to add a payment method",
+  "ForDays": "for days: {{count}}",
   "FromTo": "From <1>{{fromDate}}</1> To <2>{{toDate}}</2>",
   "GoToStripe": "Go to the Stripe",
   "GracePeriodActivatedDescription": "During the grace period, admins cannot create new rooms and add new users. After the due date of the grace period, {{productName}} will become unavailable until the payment is made.",
@@ -82,6 +84,7 @@
   "PriceForEach": "{{currency}} per {{amount}} {{storageUnit}}",
   "ProductNameWallet": "{{productName}} Wallet",
   "Quantity": "Quantity",
+  "RemainingDays": "The remaining days of the billing cycle: {{count}}",
   "RenewSubscription": "Renew subscription to {{planName}} plan",
   "RoomManagerDescription": "Room administration and archiving, user invitation and management. Several admins can be assigned to the room.",
   "RoomsQuotaAlmostExhausted": "The quota of rooms is almost exhausted.",
@@ -116,11 +119,11 @@
   "Wallet": "Wallet",
   "WalletDescription": "The {{productName}} Wallet lets you easily purchase storage space and AI tools. Add funds to your wallet and select the services you need in the Services section to get started.",
   "WalletRefilled": "Wallet refilled",
+  "Warning": "You will keep your full {{amount}} {{storageUnit}} access until the end of your paid billing period. If your storage exceeds the new limit at the start of the next period, you’ll be charged for the actual usage, rounded to the nearest {{storageUnit}}.",
   "WhenBalanceDropsTo": "When the balance drops to {{min}}, the wallet will be automatically topped up to {{max}}.",
   "WhenBalanceGoesBellow": "When balance goes bellow",
   "WouldYouLikeToEnableAutoTopUps": "Would you like to enable automatic top-ups so your balance never runs out?",
   "YouHaveNotAddedAnyPayment": "You have not added any payment",
   "YourCurrentPayment": "Your current payment",
-  "YourPrice": "Your price",
-  "Warning": "You will keep your full {{amount}} {{storageUnit}} access until the end of your paid billing period. If your storage exceeds the new limit at the start of the next period, you’ll be charged for the actual usage, rounded to the nearest {{storageUnit}}."
+  "YourPrice": "Your price"
 }

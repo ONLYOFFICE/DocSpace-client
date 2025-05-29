@@ -42,6 +42,7 @@ import { inject, observer } from "mobx-react";
 import styles from "./styles/index.module.scss";
 import StorageSummary from "./sub-components/StorageSummary";
 import TopUpModal from "../payments/Wallet/TopUpModal";
+import { useServicesActions } from "./hooks/useServicesActions";
 
 type StorageDialogProps = {
   visible: boolean;
@@ -64,8 +65,6 @@ const StorageDialog: React.FC<StorageDialogProps> = ({
   usedTotalStorageSizeCount = 0,
   maxTotalSizeByQuota,
   usedTotalStorageSizeTitle,
-  walletBalance = 0,
-  stepValue = 0,
   hasStorageSubscription,
   currentStoragePlanSize,
   fetchPortalTariff,
@@ -77,22 +76,25 @@ const StorageDialog: React.FC<StorageDialogProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [isVisibleContainer, setIsVisible] = useState(false);
 
-  const maxStorageLimit = 9999;
-  const isExceedingStorageLimit = amount > maxStorageLimit;
-  const isStorageUpgrade = amount > currentStoragePlanSize;
-  const calculateTotalStoragePrice = () => {
-    return (amount * stepValue).toFixed(2);
-  };
-  const totalStoragePrice = calculateTotalStoragePrice();
+  const {
+    maxStorageLimit,
+    buttonTitle,
+    isExceedingPlanLimit,
+    isCurrentPlan,
+    calculateDifferenceBetweenPlan,
+  } = useServicesActions();
+
+  const isExceedingStorageLimit = isExceedingPlanLimit(amount);
+  const isCurrentStoragePlan = isCurrentPlan(amount);
 
   const handleStoragePlanChange = async (isCancellation = false) => {
     const timerId = setTimeout(() => {
       setIsLoading(true);
     }, 200);
 
-    const difference = amount ? Math.abs(currentStoragePlanSize - amount) : 0;
+    const difference = calculateDifferenceBetweenPlan(amount);
 
-    const productType = isStorageUpgrade ? 1 : 0;
+    const productType = isCurrentStoragePlan ? 1 : 0;
     const value = isCancellation ? null : difference;
 
     try {
@@ -132,24 +134,8 @@ const StorageDialog: React.FC<StorageDialogProps> = ({
 
   const onSendRequest = () => {};
 
-  const isCurrentStoragePlan =
-    hasStorageSubscription && amount === currentStoragePlanSize;
-
-  const isWalletBalanceInsufficient =
-    (walletBalance || 0) < parseFloat(totalStoragePrice);
-
   const onChangeNumber = (value: number) => {
     setAmount(value);
-  };
-
-  const buttonTitle = () => {
-    if (isExceedingStorageLimit) return t("SendRequest");
-
-    if (!hasStorageSubscription) return t("Buy");
-
-    if (isStorageUpgrade) return t("Upgrade");
-
-    return t("Downgrade");
   };
 
   const container = (
@@ -202,18 +188,22 @@ const StorageDialog: React.FC<StorageDialogProps> = ({
             showPlusSign
             onChange={onChangeNumber}
             isDisabled={hasScheduledStorageChange}
+            items={[
+              { value: 100, name: `100 ${t("Common:Gigabyte")}` },
+              { value: 200, name: `200 ${t("Common:Gigabyte")}` },
+              { value: 500, name: `300 ${t("Common:Gigabyte")}` },
+              { value: 800, name: `400 ${t("Common:Gigabyte")}` },
+              { value: 1024, name: `1 ${t("Common:Terabyte")}` },
+            ]}
           />
 
           {amount || hasStorageSubscription ? (
             <div className={styles.totalContainer}>
               <StorageSummary
                 amount={amount}
-                isInsufficientFunds={isWalletBalanceInsufficient}
-                totalPrice={parseFloat(totalStoragePrice)}
                 onTopUp={() => setIsVisible(true)}
-                maxValue={maxStorageLimit}
-                moreThanLimit={isExceedingStorageLimit}
-                isCurrentTariff={isCurrentStoragePlan}
+                isExceedingStorageLimit={isExceedingStorageLimit}
+                isCurrentStoragePlan={isCurrentStoragePlan}
                 onCancelChange={onCancelChange}
               />
             </div>
@@ -223,7 +213,7 @@ const StorageDialog: React.FC<StorageDialogProps> = ({
       <ModalDialog.Footer>
         <Button
           key="OkButton"
-          label={buttonTitle()}
+          label={buttonTitle(amount)}
           size={ButtonSize.normal}
           primary
           scale

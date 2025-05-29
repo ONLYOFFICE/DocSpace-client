@@ -23,95 +23,41 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import moment from "moment";
 
-.totalWrapper {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  position: relative;
-  padding: 0;
-  box-sizing: border-box;
-  border-radius: 6px;
-  margin: 0;
-  flex: 0 0 50%;
-  margin-top: 16px;
+export const calculateDifference = (
+  quantity: number,
+  currentAllocated: number,
+): number => {
+  if (!quantity) return 0;
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--payment-background-color);
-    border-radius: 6px;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    z-index: -1;
-    pointer-events: none;
-  }
+  return Math.abs(currentAllocated - quantity);
+};
 
-  &.withBackground {
-    padding: 16px;
-    &::before {
-      opacity: 1;
-    }
-  }
-}
+export const getDaysUntilPayment = (date) => {
+  const today = moment();
+  const dueDate = moment(date);
+  return dueDate.diff(today, "days");
+};
 
-.warningBlock {
-  background-color: var(--payment-background-color);
-  padding: 16px;
-}
-.planInfoContainer {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+export const calculateTotalPrice = (
+  quantity: number,
+  unitPrice: number,
+): number => {
+  return Number((quantity * unitPrice).toFixed(2));
+};
 
-.planInfoIcon {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background-color: var(--payment-icon-background);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  svg {
-    path {
-      fill: var(--wallet-color-icon);
-    }
-  }
-}
+export const isUpgrade = (quantity: number, current: number) =>
+  quantity > current;
 
-.planInfoBody {
-  flex: 1;
-}
+export const isDowngrade = (quantity: number, current: number) =>
+  quantity < current;
 
-.planInfoDetails {
-  display: flex;
-  flex-direction: column;
-  color: var(--payment-dialog-text);
-}
+export const isExceedingLimit = (quantity: number, limit: number) =>
+  quantity > limit;
 
-.planInfoPrice {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.priceForEach {
-  color: var(--payment-dialog-text);
-}
-
-.balanceWarning {
-  color: var(--warning-color);
-  margin-top: 4px;
-}
-
-.totalTitle {
-  margin-bottom: 12px;
-}
-.planInfoContainer {
-  margin-bottom: 12px;
-}
+export const isSamePlan = (
+  quantity: number,
+  hasSubscription: boolean,
+  current: number,
+) => hasSubscription && quantity === current;

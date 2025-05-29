@@ -27,46 +27,43 @@
 import React from "react";
 import { Text } from "@docspace/shared/components/text";
 
-import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import PaymentSpeacialIcon from "PUBLIC_DIR/images/payment.special.react.svg";
-
+import UpgradeWalletIcon from "PUBLIC_DIR/images/icons/16/upgrade.react.svg";
+import DowngradeWalletIcon from "PUBLIC_DIR/images/icons/16/downgrade.react.svg";
+import DiskStorageIcon from "PUBLIC_DIR/images/icons/16/catalog-settings-storage-management.svg";
 import styles from "../styles/StorageSummary.module.scss";
-import { formatCurrencyValue } from "../../payments/Wallet/utils";
+import { useServicesActions } from "../hooks/useServicesActions";
 
 type PlanInfoProps = {
   amount: number | string;
-  walletCodeCurrency: string;
-  language: string;
   totalPrice: number;
-  value: number;
-  maxValue?: number;
-  moreThanLimit?: boolean;
-  isCurrentTariff?: boolean;
+  isExceedingStorageLimit?: boolean;
+  isCurrentStoragePlan?: boolean;
   hasStorageSubscription?: boolean;
   nextStoragePlanSize?: number;
   currentStoragePlanSize?: number;
   hasScheduledStorageChange?: boolean;
   storageQuotaIncrement?: number;
+  stepValue?: number;
+  isUpgradeStoragePlan?: boolean;
 };
 
 const PlanInfo: React.FC<PlanInfoProps> = ({
   amount,
-  walletCodeCurrency,
-  language,
   totalPrice,
-  value,
-  moreThanLimit,
-  maxValue,
-  isCurrentTariff,
+  isExceedingStorageLimit,
+  isCurrentStoragePlan,
   hasStorageSubscription,
   nextStoragePlanSize,
   currentStoragePlanSize,
   hasScheduledStorageChange,
   storageQuotaIncrement,
+  stepValue,
+  isUpgradeStoragePlan,
 }) => {
-  const { t } = useTranslation("Payments");
+  const { maxStorageLimit, formatWalletCurrency, t, isStorageCancellation } =
+    useServicesActions();
 
   const getStorageStatusText = () => {
     if (!hasStorageSubscription) {
@@ -76,7 +73,7 @@ const PlanInfo: React.FC<PlanInfoProps> = ({
       });
     }
 
-    if (!isCurrentTariff) {
+    if (!isCurrentStoragePlan) {
       return t("StorageUpgradeMessage", {
         fromSize: currentStoragePlanSize,
         toSize: amount,
@@ -96,33 +93,29 @@ const PlanInfo: React.FC<PlanInfoProps> = ({
   };
 
   const getSubscriptionStatusText = () => {
-    if (!amount || (hasScheduledStorageChange && nextStoragePlanSize === 0)) {
+    if (!amount || isStorageCancellation()) {
       return t("SubscriptionCancellation");
     }
 
     return t("BilledMonthly");
   };
 
-  const formatWalletCurrency = (currency: number) => {
-    return formatCurrencyValue(
-      language,
-      currency,
-      walletCodeCurrency || "",
-      2,
-      7,
-    );
-  };
-
   return (
     <div className={styles.planInfoContainer}>
       <div className={styles.planInfoIcon}>
-        <PaymentSpeacialIcon />
+        {isCurrentStoragePlan ? (
+          <DiskStorageIcon />
+        ) : isUpgradeStoragePlan ? (
+          <UpgradeWalletIcon />
+        ) : (
+          <DowngradeWalletIcon />
+        )}
       </div>
       <div className={styles.planInfoBody}>
-        {moreThanLimit ? (
+        {isExceedingStorageLimit ? (
           <Text fontWeight="600" fontSize="14px">
             {t("StorageUponRequest", {
-              amount: maxValue,
+              amount: maxStorageLimit,
               storageUnit: t("Common:Gigabyte"),
             })}
           </Text>
@@ -143,7 +136,7 @@ const PlanInfo: React.FC<PlanInfoProps> = ({
           </>
         )}
       </div>
-      {!moreThanLimit && amount ? (
+      {!isExceedingStorageLimit && amount ? (
         <div className={styles.planInfoPrice}>
           <Text fontWeight="600" fontSize="14px" className={styles.totalPrice}>
             {t("CurrencyPerMonth", {
@@ -156,7 +149,7 @@ const PlanInfo: React.FC<PlanInfoProps> = ({
             className={styles.priceForEach}
           >
             {t("PriceForEach", {
-              currency: formatWalletCurrency(value),
+              currency: formatWalletCurrency(stepValue),
               amount: storageQuotaIncrement,
               storageUnit: t("Common:Gigabyte"),
             })}
@@ -167,28 +160,22 @@ const PlanInfo: React.FC<PlanInfoProps> = ({
   );
 };
 
-export default inject(
-  ({ paymentStore, authStore, currentTariffStatusStore }: TStore) => {
-    const { language } = authStore;
-    const { walletBalance, walletCodeCurrency, storageQuotaIncrementPrice } =
-      paymentStore;
-    const {
-      nextStoragePlanSize,
-      hasStorageSubscription,
-      currentStoragePlanSize,
-      hasScheduledStorageChange,
-    } = currentTariffStatusStore;
+export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
+  const { walletBalance, storageQuotaIncrementPrice } = paymentStore;
+  const {
+    nextStoragePlanSize,
+    hasStorageSubscription,
+    currentStoragePlanSize,
+    hasScheduledStorageChange,
+  } = currentTariffStatusStore;
 
-    const { value } = storageQuotaIncrementPrice;
-    return {
-      walletBalance,
-      walletCodeCurrency,
-      language,
-      stepValue: value,
-      nextStoragePlanSize,
-      hasStorageSubscription,
-      currentStoragePlanSize,
-      hasScheduledStorageChange,
-    };
-  },
-)(observer(PlanInfo));
+  const { value } = storageQuotaIncrementPrice;
+  return {
+    walletBalance,
+    nextStoragePlanSize,
+    hasStorageSubscription,
+    currentStoragePlanSize,
+    hasScheduledStorageChange,
+    stepValue: value,
+  };
+})(observer(PlanInfo));

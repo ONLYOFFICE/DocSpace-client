@@ -21,7 +21,7 @@
   "CreateSamplePublicRoom": "Créer un exemple d'intégration d'une salle publique",
   "CreateSampleRoomSelector": "Créer un exemple de sélecteur de salle intégré",
   "CreateSampleViewer": "Créer un exemple de visualisation intégrée",
-  "CSPDescription": "Saisissez l'adresse du service dans lequel vous souhaitez intégrer ou connecter votre {{nom de l'organisation}} {{productName}}.",
+  "CSPDescription": "Saisissez l'adresse du service dans lequel vous souhaitez intégrer ou connecter votre {{organizationName}} {{productName}}.",
   "CSPHeader": "Ajoutez les domaines autorisés pour ce {{productName}}",
   "CSPHelp": "Ce paramètre est un mécanisme de sécurité qui peut être utilisé pour se protéger contre les attaques par injection de contenu. Le CSP décrit des sources de téléchargement de ressources sécurisées. Le téléchargement de ressources non incluses dans la \"liste blanche\" est bloqué. Spécifiez les domaines (ainsi que le protocole) avec lesquels il fonctionnera.",
   "CSPInfoBarDescription": "Veuillez activer le protocole HTTPS pour votre {{productName}} afin d’assurer le bon fonctionnement de la configuration.",

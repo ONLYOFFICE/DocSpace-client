@@ -28,7 +28,6 @@ import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import styled from "styled-components";
 
-import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import EmptyScreenFilter from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.light.svg";
 import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
 
@@ -166,46 +165,6 @@ const users: TSelectorItem[] = [
     status: EmployeeStatus.Active,
     "aria-label": "User David Wilson",
     "data-user-id": "user-5",
-  },
-];
-
-// Create groups
-const groups: TSelectorItem[] = [
-  {
-    id: "group-1",
-    key: "group-1",
-    label: "Marketing Team",
-    name: "Marketing Team",
-    isGroup: true,
-    "aria-label": "Group Marketing Team",
-    "data-group-id": "group-1",
-  },
-  {
-    id: "group-2",
-    key: "group-2",
-    label: "Development Team",
-    name: "Development Team",
-    isGroup: true,
-    "aria-label": "Group Development Team",
-    "data-group-id": "group-2",
-  },
-  {
-    id: "group-3",
-    key: "group-3",
-    label: "Design Team",
-    name: "Design Team",
-    isGroup: true,
-    "aria-label": "Group Design Team",
-    "data-group-id": "group-3",
-  },
-  {
-    id: "group-4",
-    key: "group-4",
-    label: "Sales Department",
-    name: "Sales Department",
-    isGroup: true,
-    "aria-label": "Group Sales Department",
-    "data-group-id": "group-4",
   },
 ];
 
@@ -353,10 +312,6 @@ export const WithMultiSelect: Story = {
   },
 };
 
-
-
-
-
 export const WithAccessRights: Story = {
   render: (args) => <Template {...args} />,
   parameters: {
@@ -416,8 +371,6 @@ export const WithInfo: Story = {
     infoText: "Select users to collaborate with",
   },
 };
-
-
 
 export const WithDisabledUsers: Story = {
   render: (args) => <Template {...args} />,

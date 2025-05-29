@@ -24,36 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+@use "../../styles/mixins";
 
-import { globalColors } from "../../themes";
-
-const StyledBodyContent = styled.div`
+.conflictResolveBodyContent {
   display: contents;
 
   .radio {
     padding-bottom: 8px;
   }
 
-  .message {
+  .conflictResolveFileName {
+    display: flex;
+
     margin-bottom: 16px;
 
-    .bold {
-      font-weight: 600;
-    }
-
-    .truncate {
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
+    :global {
+      .bold {
+        font-weight: 600;
+        @include mixins.truncate;
+      }
     }
   }
 
-  .select-action {
+  .selectAction {
     margin-bottom: 12px;
   }
 
-  .conflict-resolve-radio-button {
+  .conflictResolveRadioButton {
     label {
       display: flex;
       align-items: flex-start;
@@ -68,22 +65,18 @@ const StyledBodyContent = styled.div`
       margin-top: 3px;
     }
 
-    .radio-option-title {
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 16px;
-    }
+    :global {
+      .radio-option-title {
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 16px;
+      }
 
-    .radio-option-description {
-      font-size: 12px;
-      line-height: 16px;
-      color: ${globalColors.gray};
+      .radio-option-description {
+        font-size: 12px;
+        line-height: 16px;
+        color: var(--modal-dialog-resolve-color);
+      }
     }
   }
-
-  .conflict-resolve_file-name {
-    display: flex;
-  }
-`;
-
-export { StyledBodyContent };
+}

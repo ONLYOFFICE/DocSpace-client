@@ -2336,3 +2336,11 @@
   --rombs-loader-green-colorStep_2: #{$black};
   --rombs-loader-green-colorStep_3: #{$dark-romb};
 }
+
+.light {
+  --modal-dialog-resolve-color: #{$gray};
+}
+
+.dark {
+  --modal-dialog-resolve-color: #{$gray};
+}

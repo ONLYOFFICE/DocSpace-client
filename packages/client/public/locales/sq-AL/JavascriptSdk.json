@@ -53,7 +53,7 @@
   "GetCode": "Merrni kodin për të futur",
   "Header": "Kreu",
   "HeaderDescription": "Mund të çaktivizoni kokën në versionin celular për të kufizuar aksesin në seksionet {{productName}} (ashtu si çaktivizimi i menysë së majtë në versionin e desktopit).",
-  "HtmlCodeDescription": "Duke futur {{productName}} ose një pjesë të tij duke përdorur etiketën <skript>. Kopjoni kodin HTML më poshtë dhe futeni në skedarin tuaj HTML.",
+  "HtmlCodeDescription": "Duke futur {{productName}} ose një pjesë të tij duke përdorur etiketën <script>. Kopjoni kodin HTML më poshtë dhe futeni në skedarin tuaj HTML.",
   "InitializeSDK": "Zgjidhni një nga mënyrat e sugjeruara ose përdorni Custom për të konfiguruar manualisht të gjithë parametrat.",
   "InLeftPanel": "në panelin e majtë\"",
   "IntegrationDescription": "Kontrollo integrimet e gatshme për përdorim të {{productName}}",

@@ -26,7 +26,6 @@
   "LdapGroupNameAttribute": "Atributi i emrit të grupit",
   "LdapGroupNameAttributeTooltip": "Ju lutem specifikoni atributin e objektit që korrespondon me emrin e grupit.",
   "LdapGroupUserAttributeTooltip": "Futni atributin e objektit të përdoruesit që përdoret për të përcaktuar nëse ky përdorues është anëtar i grupeve.\"",
-  "LdapIntro": "LDAP është një mënyrë për të importuar përdorues dhe grupe nga një server LDAP, si dhe për të siguruar vërtetimin e përdoruesit në portal duke përdorur hyrje/fjalëkalime të ruajtura në serverin LDAP. Përdoruesit do të importohen menjëherë pasi të ruhen cilësimet. Përdoruesit e shtuar më vonë do të importohen gjatë vërtetimit të tyre të parë në portal.",
   "LdapLoginAttribute": "Atributi i hyrjes",
   "LdapLoginAttributeTooltip": "Futni atributin e objektit që korrespondon me hyrjen e përdoruesit.",
   "LdapLoginTooltip": "Ju lutemi specifikoni përdoruesin e hyrjes që ka të drejta aksesi për leximin e serverit LDAP.",

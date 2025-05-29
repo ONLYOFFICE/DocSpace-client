@@ -275,7 +275,7 @@
   "TwoFactorAuth": "Autentifikimi me dy faktorë",
   "TwoFactorAuthEnableDescription": "Aktivizo vërtetimin me dy faktorë për një akses më të sigurt të {{productName}} për përdoruesit.",
   "TwoFactorAuthMobileDescription": "Autentifikimi me dy faktorë është një mënyrë më e sigurt për përdoruesit për të hyrë në portal. Pasi të futen kredencialet, përdoruesi do të duhet të fusë kodin nga SMS-ja e marrë në celular me numrin që është specifikuar në hyrjen e parë të portalit ose kodin nga një aplikacion vërtetimi.",
-  "TwoFactorAuthSave": "Klikoni butonin <fortë>Ruani</fortë> më poshtë për të aplikuar.",
+  "TwoFactorAuthSave": "Klikoni butonin <strong>Ruani</strong> më poshtë për të aplikuar.",
   "TypesAndPrivileges": "<1>Llojet e llogarisë së administratorit dhe privilegjet e tyre</1> <br> <br> <2>{{Emriproduktit}} administratori</2> <br> {{productName}} konfigurimi, krijimi dhe administrimi i dhomës, aftësia për të ftuar dhe menaxhoni përdoruesit në {{Emriproduktit}} dhe në dhomat virtuale, aftësinë për të menaxhuar të drejtat e aksesit. <br> <br> <3>Administrja e dhomës</3> <br> Administrimi dhe arkivimi i dhomës, ftesa e përdoruesit dhe menaxhimi. Në një dhomë mund të caktohen disa administratorë. <br> <br> <4>Përdoruesi</4> <br> Përdoruesit mund të krijojnë dhe modifikojnë skedarë në dhomë, por nuk mund të krijojnë dhoma, të menaxhojnë përdoruesit ose të kenë qasje te cilësimet.",
   "UnsavedChangesBody": "Nëse mbyllni menunë e cilësimeve të lidhjes tani, ndryshimet tuaja nuk do të ruhen.",
   "UnsupportedFilesDescription": "Disa nga skedarët rezervë nuk mbështeten. Kliko \"Kontrolloni skedarët e pambështetur\" për të shkarkuar listën e artikujve të pambështetur",

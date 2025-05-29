@@ -241,12 +241,8 @@ const PayerInformation = ({
 
 export default inject(
   ({ settingsStore, paymentStore, userStore, currentTariffStatusStore }) => {
-    const {
-      accountLink,
-      isStripePortalAvailable,
-      payerInfo: walletPayer,
-      payer,
-    } = paymentStore;
+    const { accountLink, isStripePortalAvailable, walletPayer, isPayerExist } =
+      paymentStore;
     const { theme } = settingsStore;
     const {
       isGracePeriod,
@@ -264,7 +260,7 @@ export default inject(
       accountLink,
       isGracePeriod,
       isNotPaidPeriod,
-      email: payer,
+      email: isPayerExist,
       payerInfo,
     };
   },

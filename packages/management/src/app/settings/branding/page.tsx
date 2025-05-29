@@ -42,8 +42,11 @@ import {
 import { getIsDefaultWhiteLabel } from "@/lib";
 
 import BrandingPage from "./page.client";
+import { logger } from "../../../../logger.mjs";
 
 async function Page() {
+  logger.info("Branding page");
+
   const [
     settings,
     buildInfo,
@@ -98,4 +101,3 @@ async function Page() {
 }
 
 export default Page;
-

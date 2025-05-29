@@ -70,9 +70,15 @@ export async function getUser() {
   if (!cookie?.includes("asc_auth_key")) return undefined;
   const userRes = await fetch(getUser);
 
-  if (userRes.status === 401) return undefined;
+  if (userRes.status === 401) {
+    logger.error(`GET /people/@self failed: ${userRes.status}`);
+    return undefined;
+  }
 
-  if (!userRes.ok) return;
+  if (!userRes.ok) {
+    logger.error(`GET /people/@self failed: ${userRes.status}`);
+    return;
+  }
 
   const user = await userRes.json();
 
@@ -97,9 +103,19 @@ export async function getSettings(share?: string) {
 
   const settingsRes = await fetch(getSettings);
 
-  if (settingsRes.status === 403) return `access-restricted`;
+  if (settingsRes.status === 403) {
+    logger.error(
+      `GET /settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"} failed: access-restricted`,
+    );
+    return `access-restricted`;
+  }
 
-  if (!settingsRes.ok) return;
+  if (!settingsRes.ok) {
+    logger.error(
+      `GET /settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"} failed: ${settingsRes.statusText}`,
+    );
+    return;
+  }
 
   const settings = await settingsRes.json();
 
@@ -117,7 +133,10 @@ export async function getVersionBuild() {
 
   const res = await fetch(getSettings);
 
-  if (!res.ok) return;
+  if (!res.ok) {
+    logger.error(`GET /settings/version/build failed: ${res.statusText}`);
+    return;
+  }
 
   const versionBuild = await res.json();
 
@@ -136,12 +155,21 @@ export async function getQuota() {
     "GET",
   );
 
-  if (!cookie?.includes("asc_auth_key")) return undefined;
+  if (!cookie?.includes("asc_auth_key")) {
+    logger.debug(`GET /portal/payment/quota failed: missing asc_auth_key`);
+    return undefined;
+  }
   const quotaRes = await fetch(getQuota);
 
-  if (quotaRes.status === 401) return undefined;
+  if (quotaRes.status === 401) {
+    logger.error(`GET /portal/payment/quota failed: ${quotaRes.statusText}`);
+    return undefined;
+  }
 
-  if (!quotaRes.ok) return;
+  if (!quotaRes.ok) {
+    logger.error(`GET /portal/payment/quota failed: ${quotaRes.statusText}`);
+    return;
+  }
 
   const quota = await quotaRes.json();
 
@@ -161,7 +189,12 @@ export async function getAllPortals() {
 
   const portalsRes = await fetch(getAllPortals);
 
-  if (!portalsRes.ok) return;
+  if (!portalsRes.ok) {
+    logger.error(
+      `GET /portal/get?statistics=true failed: ${portalsRes.statusText}`,
+    );
+    return;
+  }
 
   const portals = await portalsRes.json();
 
@@ -180,12 +213,21 @@ export async function getPortalTariff() {
     "GET",
   );
 
-  if (!cookie?.includes("asc_auth_key")) return undefined;
+  if (!cookie?.includes("asc_auth_key")) {
+    logger.debug(`GET /portal/tariff failed: missing asc_auth_key`);
+    return undefined;
+  }
   const portalTariffRes = await fetch(getPortalTariff);
 
-  if (portalTariffRes.status === 401) return undefined;
+  if (portalTariffRes.status === 401) {
+    logger.error(`GET /portal/tariff failed: ${portalTariffRes.statusText}`);
+    return undefined;
+  }
 
-  if (!portalTariffRes.ok) return;
+  if (!portalTariffRes.ok) {
+    logger.error(`GET /portal/tariff failed: ${portalTariffRes.statusText}`);
+    return;
+  }
 
   const portalTariff = await portalTariffRes.json();
 
@@ -203,7 +245,10 @@ export async function getColorTheme() {
 
   const res = await fetch(getSettings);
 
-  if (!res.ok) return;
+  if (!res.ok) {
+    logger.error(`GET /settings/colortheme failed: ${res.statusText}`);
+    return;
+  }
 
   const colorTheme = await res.json();
 
@@ -221,7 +266,12 @@ export async function getWhiteLabelLogos() {
 
   const logosRes = await fetch(getWhiteLabelLogos);
 
-  if (!logosRes.ok) return;
+  if (!logosRes.ok) {
+    logger.error(
+      `GET /settings/whitelabel/logos?isDefault=true failed: ${logosRes.statusText}`,
+    );
+    return;
+  }
 
   const logos = await logosRes.json();
 
@@ -239,7 +289,12 @@ export async function getWhiteLabelText() {
 
   const textRes = await fetch(getWhiteLabelText);
 
-  if (!textRes.ok) return;
+  if (!textRes.ok) {
+    logger.error(
+      `GET /settings/whitelabel/logotext?isDefault=true failed: ${textRes.statusText}`,
+    );
+    return;
+  }
 
   const text = await textRes.json();
 
@@ -257,7 +312,12 @@ export async function getWhiteLabelIsDefault() {
 
   const isDefaultRes = await fetch(getWhiteLabelIsDefault);
 
-  if (!isDefaultRes.ok) return;
+  if (!isDefaultRes.ok) {
+    logger.error(
+      `GET /settings/whitelabel/logos/isdefault?isDefault=true failed: ${isDefaultRes.statusText}`,
+    );
+    return;
+  }
 
   const isDefault = await isDefaultRes.json();
 
@@ -275,7 +335,12 @@ export async function getAdditionalResources() {
 
   const additionalResourcesRes = await fetch(getAdditionalResources);
 
-  if (!additionalResourcesRes.ok) return;
+  if (!additionalResourcesRes.ok) {
+    logger.error(
+      `GET /settings/rebranding/additional failed: ${additionalResourcesRes.statusText}`,
+    );
+    return;
+  }
 
   const additionalResources = await additionalResourcesRes.json();
 
@@ -293,7 +358,12 @@ export async function getCompanyInfo() {
 
   const companyInfoRes = await fetch(getCompanyInfo);
 
-  if (!companyInfoRes.ok) return;
+  if (!companyInfoRes.ok) {
+    logger.error(
+      `GET /settings/rebranding/company failed: ${companyInfoRes.statusText}`,
+    );
+    return;
+  }
 
   const companyInfo = await companyInfoRes.json();
 
@@ -311,7 +381,12 @@ export async function getPaymentSettings() {
 
   const paymentSettingsRes = await fetch(getPaymentSettings);
 
-  if (!paymentSettingsRes.ok) return;
+  if (!paymentSettingsRes.ok) {
+    logger.error(
+      `GET /settings/payment failed: ${paymentSettingsRes.statusText}`,
+    );
+    return;
+  }
 
   const paymentSettings = await paymentSettingsRes.json();
 
@@ -331,7 +406,12 @@ export async function getSettingsThirdParty() {
     next: { tags: ["backup"] },
   });
 
-  if (!settingsThirdParty.ok) return;
+  if (!settingsThirdParty.ok) {
+    logger.error(
+      `GET /files/thirdparty/backup failed: ${settingsThirdParty.statusText}`,
+    );
+    return;
+  }
 
   const settingsThirdPartyRes = await settingsThirdParty.json();
 
@@ -355,7 +435,12 @@ export async function getBackupSchedule(dump: boolean = true) {
     next: { tags: ["backup"] },
   });
 
-  if (!backupScheduleRes.ok) return;
+  if (!backupScheduleRes.ok) {
+    logger.error(
+      `GET /portal/getbackupschedule?${searchParams} failed: ${backupScheduleRes.statusText}`,
+    );
+    return;
+  }
 
   const backupSchedule = await backupScheduleRes.json();
 
@@ -378,7 +463,12 @@ export async function getBackupStorage(dump: boolean = false) {
     next: { tags: ["backup"] },
   });
 
-  if (!backupStorageRes.ok) return;
+  if (!backupStorageRes.ok) {
+    logger.error(
+      `GET /settings/storage/backup?${searchParams} failed: ${backupStorageRes.statusText}`,
+    );
+    return;
+  }
 
   const backupStorage = await backupStorageRes.json();
 
@@ -396,7 +486,12 @@ export async function getStorageRegions() {
 
   const storageRegionsRes = await fetch(getStorageRegions);
 
-  if (!storageRegionsRes.ok) return;
+  if (!storageRegionsRes.ok) {
+    logger.error(
+      `GET /settings/storage/s3/regions failed: ${storageRegionsRes.statusText}`,
+    );
+    return;
+  }
 
   const storageRegions = await storageRegionsRes.json();
 
@@ -414,7 +509,10 @@ export async function getSettingsFiles(): Promise<TFilesSettings> {
 
   const settingsFilesRes = await fetch(getSettingsFiles);
 
-  if (!settingsFilesRes.ok) return {} as TFilesSettings;
+  if (!settingsFilesRes.ok) {
+    logger.error(`GET /files/settings failed: ${settingsFilesRes.statusText}`);
+    return {} as TFilesSettings;
+  }
 
   const settingsFiles = await settingsFilesRes.json();
 
@@ -443,6 +541,7 @@ export async function getBackupProgress(dump = true) {
 
     return backupProgress.response as TBackupProgress | undefined;
   } catch (error) {
+    logger.error(`getBackupProgress failed: ${error}`);
     return error as TError;
   }
 }
@@ -458,7 +557,12 @@ export async function getFoldersTree() {
 
   const foldersTreeRes = await fetch(getFoldersTree);
 
-  if (!foldersTreeRes.ok) return [];
+  if (!foldersTreeRes.ok) {
+    logger.error(
+      `GET /files/@root?filterType=2&count=1 failed: ${foldersTreeRes.status}`,
+    );
+    return [];
+  }
 
   const foldersTree = await foldersTreeRes.json();
 
@@ -511,7 +615,12 @@ export async function getEncryptionSettings() {
 
   const encryptionSettingsRes = await fetch(getEncryptionSettings);
 
-  if (!encryptionSettingsRes.ok) return;
+  if (!encryptionSettingsRes.ok) {
+    logger.error(
+      `GET /settings/encryption/settings failed: ${encryptionSettingsRes.status}`,
+    );
+    return;
+  }
 
   const encryptionSettings = await encryptionSettingsRes.json();
 

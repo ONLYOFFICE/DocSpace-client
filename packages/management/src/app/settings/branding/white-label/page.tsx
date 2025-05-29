@@ -38,8 +38,11 @@ import {
 import { getIsDefaultWhiteLabel } from "@/lib";
 
 import { WhiteLabelPage } from "./page.client";
+import { logger } from "../../../../../logger.mjs";
 
 async function Page() {
+  logger.info("Branding white-label page");
+
   const [
     settings,
     quota,
@@ -56,8 +59,14 @@ async function Page() {
     getWhiteLabelIsDefault(),
   ]);
 
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
-  if (!settings) redirect(`${getBaseUrl()}/login`);
+  if (settings === "access-restricted") {
+    logger.info("Branding white-label page access-restricted");
+    redirect(`${getBaseUrl()}/${settings}`);
+  }
+  if (!settings) {
+    logger.info("Branding white-label page empty settings");
+    redirect(`${getBaseUrl()}/login`);
+  }
 
   const { displayAbout, standalone } = settings;
   const showAbout = standalone && displayAbout;
@@ -78,4 +87,3 @@ async function Page() {
 }
 
 export default Page;
-

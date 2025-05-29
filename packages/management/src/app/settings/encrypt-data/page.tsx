@@ -35,8 +35,11 @@ import {
 } from "@/lib/actions";
 
 import EncryptDataPage from "./page.client";
+import { logger } from "../../../../logger.mjs";
 
 async function Page() {
+  logger.info("EncryptData page");
+
   const [settings, portals, encryptionSettings] = await Promise.all([
     getSettings(),
     getAllPortals(),
@@ -62,4 +65,3 @@ async function Page() {
 }
 
 export default Page;
-

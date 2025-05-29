@@ -48,6 +48,7 @@ import { ManagementDialogs } from "@/dialogs";
 
 import "@/styles/globals.scss";
 import "@docspace/shared/styles/theme.scss";
+import { logger } from "../../logger.mjs";
 
 export default async function RootLayout({
   children,
@@ -64,14 +65,19 @@ export default async function RootLayout({
     ],
   );
 
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+  if (settings === "access-restricted") {
+    logger.info("Management layout access-restricted");
+    redirect(`${getBaseUrl()}/${settings}`);
+  }
 
   if (
     (user && !user.isAdmin) ||
     (settings && settings.limitedAccessSpace) ||
     !portalTariff
-  )
+  ) {
+    logger.info("Management layout error/403");
     redirect(`${getBaseUrl()}/error/403`);
+  }
 
   const cookieStore = await cookies();
 
@@ -125,4 +131,3 @@ export default async function RootLayout({
     </html>
   );
 }
-

@@ -35,8 +35,11 @@ import {
 } from "@/lib/actions";
 
 import PaymentsPage from "./page.client";
+import { logger } from "../../../logger.mjs";
 
 async function Page() {
+  logger.info("Payments page");
+
   const [settings, quota, portalTariff, paymentSettings] = await Promise.all([
     getSettings(),
     getQuota(),
@@ -44,16 +47,26 @@ async function Page() {
     getPaymentSettings(),
   ]);
 
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
-  if (!settings || !quota || !portalTariff || !paymentSettings)
+  if (settings === "access-restricted") {
+    logger.info("Payments page access-restricted");
+    redirect(`${getBaseUrl()}/${settings}`);
+  }
+  if (!settings || !quota || !portalTariff || !paymentSettings) {
+    logger.info(
+      `Payments page settings: ${settings}, quota: ${quota}, portalTariff: ${portalTariff}, paymentSettings: ${paymentSettings}`,
+    );
     redirect(`${getBaseUrl()}/login`);
+  }
 
   const { logoText } = settings;
   const { trial } = quota;
   const { enterprise, developer, dueDate, openSource } = portalTariff;
   const { salesEmail, buyUrl } = paymentSettings;
 
-  if (openSource) return redirect(`${getBaseUrl()}/error/403`);
+  if (openSource) {
+    logger.info(`Payments page redirect${getBaseUrl()}/error/403`);
+    return redirect(`${getBaseUrl()}/error/403`);
+  }
 
   return (
     <PaymentsPage
@@ -69,4 +82,3 @@ async function Page() {
 }
 
 export default Page;
-

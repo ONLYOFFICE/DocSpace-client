@@ -32,14 +32,20 @@ import { getAllPortals, getSettings } from "@/lib/actions";
 
 import { MultipleSpaces } from "./multiple";
 import { ConfigurationSpaces } from "./configuration";
+import { logger } from "../../../logger.mjs";
 
 const SpacesPage = async () => {
+  logger.info(`Spaces page`);
+
   const [portals, settings] = await Promise.all([
     getAllPortals(),
     getSettings(),
   ]);
 
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+  if (settings === "access-restricted") {
+    logger.info(`Spaces page access-restricted`);
+    redirect(`${getBaseUrl()}/${settings}`);
+  }
 
   const isConnected =
     settings?.baseDomain &&
@@ -49,6 +55,10 @@ const SpacesPage = async () => {
 
   const domainValidator: TDomainValidator | undefined =
     settings?.domainValidator;
+
+  logger.info(
+    `Spaces page isMultipleSpaces: ${isConnected && portals && portals?.tenants?.length > 0}`,
+  );
 
   if (isConnected && portals && portals?.tenants?.length > 0)
     return (
@@ -62,4 +72,3 @@ const SpacesPage = async () => {
 };
 
 export default SpacesPage;
-

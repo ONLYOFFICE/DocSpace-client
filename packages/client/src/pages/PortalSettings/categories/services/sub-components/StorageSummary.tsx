@@ -29,13 +29,14 @@ import classNames from "classnames";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
 
 import styles from "../styles/StorageSummary.module.scss";
 import PlanInfo from "./PlanInfo";
 import { useServicesActions } from "../hooks/useServicesActions";
 import PlanUpgradePreview from "./PlanUpgradePreview";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+
+import StorageWarning from "./StorageWarning";
 
 type StorageSummaryProps = {
   amount: number;
@@ -99,16 +100,7 @@ const StorageSummary: React.FC<StorageSummaryProps> = (props) => {
 
   return (
     <div>
-      {hasScheduledStorageChange ? (
-        <div className={styles.warningBlock}>
-          <Text>
-            {t("Warning", {
-              amount: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
-              storageUnit: t("Common:Gigabyte"),
-            })}
-          </Text>
-        </div>
-      ) : null}
+      {hasScheduledStorageChange ? <StorageWarning /> : null}
 
       {isUpgradeStoragePlan && !isExceedingStorageLimit ? (
         <PlanUpgradePreview amount={amount} />

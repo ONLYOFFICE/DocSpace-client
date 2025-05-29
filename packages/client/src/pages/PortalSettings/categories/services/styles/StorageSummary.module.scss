@@ -62,6 +62,18 @@
 .warningBlock {
   background-color: var(--payment-background-color);
   padding: 16px;
+  .warningTitle {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 4px;
+
+    svg {
+      path {
+        fill: var(--payment-warning-color);
+      }
+    }
+  }
 }
 .planInfoContainer {
   display: flex;
@@ -119,14 +131,6 @@
 
 .totalTitle {
   margin-bottom: 12px;
-}
-
-.monthPayment {
-  color: var(--payment-dialog-text);
-}
-
-.cancelDialog {
-  margin-bottom: 16px;
 }
 
 .walletContainer {

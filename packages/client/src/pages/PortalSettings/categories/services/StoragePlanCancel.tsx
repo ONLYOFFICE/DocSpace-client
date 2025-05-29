@@ -41,7 +41,8 @@ import { Text } from "@docspace/shared/components/text";
 import { useServicesActions } from "./hooks/useServicesActions";
 import { PaymentProvider } from "./context/PaymentContext";
 import { calculateTotalPrice } from "./hooks/resourceUtils";
-import styles from "./styles/StorageSummary.module.scss";
+import styles from "./styles/index.module.scss";
+import StorageWarning from "./sub-components/StorageWarning";
 
 type StorageDialogProps = {
   visible: boolean;
@@ -140,14 +141,7 @@ const StoragePlanCancel: React.FC<StorageDialogProps> = ({
               />
             </Text>
           </div>
-          <div className={styles.warningBlock}>
-            <Text>
-              {t("Warning", {
-                amount: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
-                storageUnit: t("Common:Gigabyte"),
-              })}
-            </Text>
-          </div>
+          <StorageWarning />
         </ModalDialog.Body>
         <ModalDialog.Footer>
           <Button

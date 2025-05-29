@@ -2220,6 +2220,7 @@
   --payment-price-container-disable-color: #{$gray};
   --payment-price-container-disable-background: #{$gray-light};
   --payment-price-container-feature-text-color: #{$gray};
+  --payment-warning-color: #{$light-status-warning};
   --wallet-color-icon: var(--color-scheme-main-buttons);
 }
 .dark {
@@ -2229,5 +2230,6 @@
   --payment-price-container-disable-color: #{$gray-dark};
   --payment-price-container-disable-background: #{$dark-gray-light};
   --payment-price-container-feature-text-color: #{$gray-dark};
+  --payment-warning-color: #{$dark-status-warning};
   --wallet-color-icon: var(--color-scheme-main-buttons);
 }

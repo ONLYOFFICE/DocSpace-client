@@ -3,7 +3,7 @@
   "content": "An error has been encountered. Please contact your administrator.",
   "content_en_sha1_hash": "e2b260a35f7f80d6f2d9a7c35cf36bc67d70ff17",
   "created_at": "2025-05-19T21:30:50.653Z",
-  "updated_at": "2025-05-21T05:05:55.694Z",
+  "updated_at": "2025-05-26T07:57:32.972Z",
   "comment": {
     "text": "This translation key \"BackupCreatedError\" is used to display an error message when a backup file upload fails. The message appears in a toast notification when uploading a local file and the upload process has not completed successfully.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/restore-backup/sub-components/ButtonComponent.js",
+      "file_path": "/packages/shared/pages/restore-backup/sub-components/button-component/ButtonComponent.tsx",
       "line_number": 95,
       "context": "if (isCheckedLocalFile) {\n const uploadedFile = await uploadLocalFile();\n \n if (!uploadedFile) {\n toastr.error(t(\"BackupCreatedError\"));\n setIsLoading(false);\n return;\n }\n \n if (!uploadedFile.data.EndUpload) {",
-      "module": "/packages/client"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/restore-backup/sub-components/ButtonComponent.js",
+      "file_path": "/packages/shared/pages/restore-backup/sub-components/button-component/ButtonComponent.tsx",
       "line_number": 95,
       "context": "if (isCheckedLocalFile) {\n const uploadedFile = await uploadLocalFile();\n \n if (!uploadedFile) {\n toastr.error(t(\"BackupCreatedError\"));\n setIsLoading(false);\n return;\n }\n \n if (!uploadedFile.data.EndUpload) {",
-      "module": "/packages/client"
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Czech translation uses 'Vašeho Administrátora'. It's more natural and common to use the more informal 'jeho Administrátora' or 'správce' (administrator) in this context.",
-          "suggestion": "Došlo k chybě. Prosím kontaktujte jeho Administrátora. / Došlo k chybě. Prosím kontaktujte správce."
+          "description": "The translation uses a capitalized 'Vašeho' which is more formal. While not incorrect, it might be preferable to use the less formal 'jeho' or a more conversational alternative depending on the application's tone.",
+          "suggestion": "Consider using 'jeho' or a more conversational alternative to 'Vašeho' for better user experience."
         }
       ],
       "approved_at": null
@@ -84,13 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"On tapahtunut jokin outo virhe. Tosi outo. Ota yhteys järjestelmänvalvojaan.\" is overly informal and deviates significantly from the original English content's professional tone.  The repetition of \"Tosi outo\" (Really weird) is unnecessary and unprofessional for an error message.",
+          "description": "The Finnish translation 'On tapahtunut jokin outo virhe. Tosi outo. Ota yhteys järjestelmänvalvojaan.' is too informal and overly repetitive ('Tosi outo' - 'really weird') for an error message. The English version is professional and direct. The Finnish translation injects unnecessary colloquialisms.",
           "suggestion": "On tapahtunut virhe. Ota yhteys järjestelmänvalvojaan."
-        },
-        {
-          "type": "formatting",
-          "description": "The translated phrase is too verbose and conversational for a system error message. It lacks the conciseness expected in technical communication.",
-          "suggestion": "Keep the translation concise and professional, similar to the original 'An error has been encountered. Please contact your administrator.'"
         }
       ],
       "approved_at": null
@@ -104,7 +99,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation uses a colon and a space after 'Սխալ է տեղի ունեցել:'. While not strictly incorrect, it's more common to use just a colon in this context.",
+          "suggestion": "Remove the space after the colon: Սխալ է տեղի ունեցել։"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -119,13 +120,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Japanese translation uses a very formal and slightly awkward phrasing. The use of 'しまいました' implies a sense of regret or surprise, which may not be appropriate for a generic error message.  '連絡ください' is also overly formal. A more natural and polite phrasing would be better.",
-          "suggestion": "エラーが発生しました。管理者にお問い合わせください。"
+          "description": "The Japanese translation uses \"連絡ください\" which is a less formal way of saying \"contact\". For a notification/error message, a more polite and formal phrasing would be better suited.",
+          "suggestion": "管理者に連絡してください (Kanrijin ni renraku shite kudasai)"
         },
         {
           "type": "incorrect_translation",
-          "description": "While '連絡ください' translates literally to 'Please contact', it's more natural to use 'お問い合わせください' in this context, which is the standard phrasing for 'Please contact' when referring to customer support or administrator contact.",
-          "suggestion": "管理者にお問い合わせください"
+          "description": "While technically correct, \"エラーが発生してしまいました\" (error has occurred) is a bit too verbose and negative for a simple error message. It conveys a sense of regret.",
+          "suggestion": "エラーが発生しました。(Error has occurred.) or エラーが見つかりました。(An error was found.)"
         }
       ],
       "approved_at": null
@@ -141,9 +142,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ພົບຂໍ້ຜິດພາດ. ກະລຸນາຕິດຕໍ່ຜູ້ເບິ່ງແຍງລະບົບຂອງເຈົ້າ.' is a literal translation, but 'ຜູ້ເບິ່ງແຍງລະບົບຂອງເຈົ້າ' (your system administrator) is overly formal and specific for a general error message. It might be better to use a more general term for 'administrator'.",
-          "suggestion": "ພົບຂໍ້ຜິດພາດ. ກະລຸນາຕິດຕໍ່ຜູ້ປົກຄອງ."
+          "type": "spelling",
+          "description": "The term 'ເຈົ້າ' (jâo) translates to 'you' in a familiar/informal context. For a more formal and professional setting (contacting an administrator), 'ທ່ານ' (tâan) would be more appropriate.",
+          "suggestion": "ພົບຂໍ້ຜິດພາດ. ກະລຸນາຕິດຕໍ່ຜູ້ເບິ່ງແຍງລະບົບຂອງທ່ານ."
         }
       ],
       "approved_at": null
@@ -196,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පරිපාලක' (paripalaka) is a direct transliteration of 'administrator' but might sound slightly unnatural in Sinhala. A more common and natural word for 'administrator' in this context would be 'ඇඳුනි' (adunne) or 'පහසුකාරයා' (pahasukariyaa).",
-          "suggestion": "Consider using 'ඇඳුනි' or 'පහසුකාරයා' instead of 'පරිපාලක'."
+          "description": "The word 'පරිපාලක' (paripaalaka) is spelled correctly, but a more common and easily understood term for 'administrator' in this context might be 'වැඩපති' (vaedpathi).",
+          "suggestion": "ඔබගේ වැඩපති අමතන්න."
         }
       ],
       "approved_at": null
@@ -220,8 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Наишла' should be 'Догодила' or 'Појавила се'. 'Наишла' means 'arrived' and doesn't fit the context of an error.",
-          "suggestion": "Догодила је грешка. Молимо контактирајте вашег администратора."
+          "description": "The word 'наишла' should be 'догодила'. 'Наишла' means 'found' or 'approached', which doesn't fit the context of an error.",
+          "suggestion": "догодила"
         }
       ],
       "approved_at": null
@@ -232,8 +233,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'naišla' is incorrect. It should be 'nastala'. 'Naišla' means 'arrived' or 'found', while 'nastala' means 'occurred' or 'arose'.",
-          "suggestion": "nastala"
+          "description": "The word 'Naišla' is likely a misspelling. It should be 'Nastala'.",
+          "suggestion": "Nastala je greška."
         }
       ],
       "approved_at": null
@@ -259,7 +260,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '遇到错误。请联系您的管理员。' is a literal translation but lacks the nuance of 'An error has been encountered'. It sounds a little abrupt and doesn't convey the severity implied by the English.",
+          "suggestion": "发生错误。请联系您的管理员。"
+        }
+      ],
       "approved_at": null
     }
   }

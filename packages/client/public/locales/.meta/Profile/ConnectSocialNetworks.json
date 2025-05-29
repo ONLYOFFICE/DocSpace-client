@@ -3,7 +3,7 @@
   "content": "Connect your social networks",
   "content_en_sha1_hash": "3a18b50746f026e86d03625c28c76cefe4402bb9",
   "created_at": "2025-05-19T21:30:53.342Z",
-  "updated_at": "2025-05-21T05:46:44.380Z",
+  "updated_at": "2025-05-24T06:15:55.758Z",
   "comment": {
     "text": "This translation key is used to display the text \"Connect your social networks\" in the profile section of a client application. It appears as a bold heading below a set of buttons, prompting users to connect their social media accounts.",
     "is_auto": true,
@@ -66,7 +66,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation uses Cyrillic characters (Russian) instead of Spanish. The phrase \"Connect your social networks\" should be translated to Spanish.",
+          "description": "The translation 'Сonecte sus redes sociales' uses Cyrillic characters, which is Russian, not Spanish. The correct Spanish translation should be 'Conecta tus redes sociales' or 'Conecte sus redes sociales'.",
           "suggestion": "Conecta tus redes sociales"
         }
       ],
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"SNSに接続する\" is understandable, a more natural and user-friendly translation of \"Connect your social networks\" would be something like \"ソーシャルネットワークに接続する\" (Social networks ni tsunagu). \"SNS\" is an abbreviation and might not be immediately understood by all users, particularly if the context isn't clear.",
-          "suggestion": "ソーシャルネットワークに接続する"
+          "description": "While \"SNSに接続する\" (SNS ni tsunagu suru) is understandable, it's a very literal translation. It might be perceived as a bit technical or abrupt in some contexts. A more natural and user-friendly translation would be something like \"ソーシャルネットワークと連携する\" (so-sharu netto-waku to rensei suru) or \"ソーシャルネットワークとつなぐ\" (so-sharu netto-waku to tsunagu).",
+          "suggestion": "ソーシャルネットワークと連携する (so-sharu netto-waku to rensei suru) or ソーシャルネットワークとつなぐ (so-sharu netto-waku to tsunagu)"
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Connect your social networks' implies a linking or integration of social media accounts. The Dutch translation 'Sluit uw sociale netwerken aan' literally translates to 'Close your social networks,' which suggests disconnecting or shutting them down. This is the opposite of the intended meaning.",
-          "suggestion": "A more accurate translation would be something like 'Koppel uw sociale netwerken' (Link your social networks) or 'Verbind uw sociale netwerken' (Connect your social networks)."
+          "description": "The translation 'Sluit uw sociale netwerken aan' is a literal translation of 'Connect your social networks' that doesn't convey the intended meaning naturally in Dutch. 'Sluit aan' implies joining or closing, not connecting in the context of social networks. A more natural translation would imply linking or associating.",
+          "suggestion": "Koppel uw sociale netwerken"
         }
       ],
       "approved_at": null
@@ -174,13 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ඔබගේ සමාජ ජාල සබඳින්න' doesn't accurately convey the meaning of 'Connect your social networks'. 'සබඳින්න' means 'relationships' or 'connections,' but it's not the most natural way to express 'connecting' in this context. It's a bit awkward.",
-          "suggestion": "Consider using a more direct translation for 'connect,' such as 'සම්බන්ධ කරන්න' (sambandhadha karanna) or 'එක් කරන්න' (ek karanna)."
-        },
-        {
-          "type": "spelling",
-          "description": "While not strictly incorrect, 'සමාජ' (samaja) is more common than 'සමාජ ජාල' (samaja jaala) when referring to 'social networks' in this context.",
-          "suggestion": "Consider using 'ඔබගේ සමාජ සබඳින්න' (obage samaja sabandinna) as a slightly more natural phrasing."
+          "description": "The translation \"ඔබගේ සමාජ ජාල සබඳින්න\" is not the most natural or accurate translation of \"Connect your social networks.\" 'සබඳින්න' implies establishing a relationship, but 'Connect' suggests linking or integrating.",
+          "suggestion": "Possible better translations include: \"ඔබගේ සමාජ ජාලාංගම් සම්බන්ධ කරන්න\" (Connect your social network accounts), \"ඔබගේ සමාජ ජාලාංගම් ඒකාංග කරන්න\" (Integrate your social network accounts) or simply \"සමාජ ජාලාංගම් සම්බන්ධ කරන්න\" (Connect social network accounts)."
         }
       ],
       "approved_at": null
@@ -203,13 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Повежи' is a verb in the imperative form, but it's more accurately translated as 'Connect'. The correct form of the verb for connecting in this context should be in the present tense.",
-          "suggestion": "Повежите своје друштвене мреже"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Повежи' can technically mean 'Connect,' it carries a slightly different connotation that isn't ideal for a user interface label. 'Повежите' (plural imperative) is more appropriate to be inclusive of all users and fits the tone better.",
-          "suggestion": "Повежите своје друштвене мреже"
+          "description": "The word 'Повежи' is a grammatical incorrect form. It should be 'Уповежи'.",
+          "suggestion": "Уповежи"
         }
       ],
       "approved_at": null

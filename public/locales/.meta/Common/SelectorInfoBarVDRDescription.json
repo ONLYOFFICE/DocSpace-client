@@ -3,7 +3,7 @@
   "content": "Share your form to a Virtual Data Room. Assign roles to the room participants to fill out the form. Select an existing room or create a new one.",
   "content_en_sha1_hash": "a1fad26982aedd280bbc995fc51025041a8925ca",
   "created_at": "2025-05-19T21:30:48.486Z",
-  "updated_at": "2025-05-22T11:56:37.514Z",
+  "updated_at": "2025-05-26T07:57:32.198Z",
   "comment": {
     "text": "\"Describe a Virtual Data Room option to share forms and manage room roles. This text is used in the selector bar when creating or selecting a form room in collaboration tools.\"",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\ShareCollectSelector\\ShareCollectSelector.tsx",
+      "file_path": "/packages/client/src/components/ShareCollectSelector/ShareCollectSelector.tsx",
       "line_number": 256,
       "context": "const infoBarData: TInfoBarData = {\n title: t(\"Common:SelectorInfoBarTitle\"),\n description:\n createDefineRoomType === RoomsType.FormRoom\n ? t(\"Common:SelectorInfoBarDescription\")\n : t(\"Common:SelectorInfoBarVDRDescription\"),\n icon: InfoIcon,\n onClose: onCloseInfoBar,\n };\n \n const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\StartFillingSelectDialog.tsx",
+      "file_path": "/packages/doceditor/src/components/StartFillingSelectDialog.tsx",
       "line_number": 67,
       "context": "const infoBarData: TInfoBarData = {\n title: t(\"Common:SelectorInfoBarTitle\"),\n description:\n createDefineRoomType === RoomsType.FormRoom\n ? t(\"Common:SelectorInfoBarDescription\")\n : t(\"Common:SelectorInfoBarVDRDescription\"),\n icon: InfoIcon,\n onClose: onCloseInfoBar,\n };\n \n const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {
@@ -33,7 +33,18 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Share your form\" is translated as \"شاركوا النموذج الخاص بكم\" which literally translates to 'Share your form with you'. It's slightly awkward and could be improved. A more natural translation might be 'شارك نموذجكم' (Share your form).",
+          "suggestion": "شارك نموذجكم"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Assign roles to the room participants' is translated as 'عيّنوا أدوارًا للمشاركين في الغرفة'. While technically correct, a more natural and concise phrasing might be 'حددوا أدوارًا للمشاركين' (Define roles for participants).",
+          "suggestion": "حددوا أدوارًا للمشاركين"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -45,19 +56,24 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Virtual Data Room' is translated as 'Виртуалната стая за данни'. While technically correct, 'Виртуална стая за данни' is a very literal translation and sounds awkward in Bulgarian. A more natural and commonly used term would be 'Виртуална среда за документи' or simply 'Виртуална среда'.",
+          "suggestion": "Споделете своя формуляр във Виртуална среда за документи."
+        },
+        {
+          "type": "formatting",
+          "description": "The full stop at the end of the first and second sentences is grammatically correct but could be improved for readability.  A semicolon might flow better connecting these closely related actions.",
+          "suggestion": "Споделете своя формуляр във Виртуална среда за документи; Назначете роли на участниците в стаята, за да попълнят формуляра."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Virtual Data Room' is translated as 'virtuální datové místnosti'. While technically correct, a more common and natural translation in a professional context might be 'virtuální datová skříňka' or 'bezpečná datová místnost'.",
-          "suggestion": "Consider using 'virtuální datová skříňka' or 'bezpečná datová místnost' for a more idiomatic translation of 'Virtual Data Room'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -66,13 +82,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Share your form\" is translated as \"Teilen Sie Ihr Formular\". While technically correct, it's slightly awkward in German. A more natural phrasing would be 'Geben Sie Ihr Formular...'.",
-          "suggestion": "Geben Sie Ihr Formular in einem virtuellen Datenraum..."
+          "description": "The phrase \"Share your form\" is translated as \"Teilen Sie Ihr Formular\". While technically correct, it's less natural in German. A more suitable translation would be \"Geben Sie Ihr Formular bereit...\" or \"Stellen Sie Ihr Formular bereit...\"",
+          "suggestion": "Geben Sie Ihr Formular bereit für einen virtuellen Datenraum."
         },
         {
           "type": "incorrect_translation",
-          "description": "The sentence 'Assign roles to the room participants to fill out the form' is translated as 'Weisen Sie den Raumteilnehmern Rollen zum Ausfüllen des Formulars zu.'. A more natural flow in German would be to emphasize the assignment *for* filling out the form. ",
-          "suggestion": "Weisen Sie den Raumteilnehmern Rollen zur Bearbeitung des Formulars zu."
+          "description": "The phrase 'Assign roles' is translated as 'Weisen Sie Rollen zu'. A more natural and active phrasing would be 'Vergeben Sie Rollen'.",
+          "suggestion": "Vergeben Sie den Raumteilnehmern Rollen zum Ausfüllen des Formulars."
         }
       ],
       "approved_at": null
@@ -89,13 +105,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Share your form' is not ideally translated. While 'Comparta su formulario' is understandable, a more natural phrasing in Spanish would be 'Comparte tu formulario' (using 'tu' instead of 'su' for a more direct and user-friendly tone).",
-          "suggestion": "Comparte tu formulario"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Virtual Data Room' is accurately translated as 'sala de datos virtuales'. However, depending on the target audience and common industry terminology in Spanish-speaking regions, 'Data Room Virtual' might be equally or even more common and understandable. This is a stylistic preference rather than a strict error.",
-          "suggestion": "sala de datos virtual (alternative - sala virtual de datos)"
+          "description": "The phrase 'Virtual Data Room' is best translated as 'Habitación de Datos Virtuales' or 'Sala Virtual de Datos' for greater clarity and accuracy in a Spanish-speaking context. 'Sala de datos virtuales' is technically correct but less idiomatic.",
+          "suggestion": "Comparta su formulario en una Habitación de Datos Virtuales / Sala Virtual de Datos."
         }
       ],
       "approved_at": null
@@ -106,8 +117,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Assign roles to the room participants' is not perfectly translated. 'Määrää roleja huoneen osallistujille' is a bit clunky. A more natural Finnish phrasing would be 'Anna osallistujille rooleja' or 'Määritä roolit huoneen osallistujille'.",
-          "suggestion": "Anna osallistujille rooleja"
+          "description": "The term 'roleja' is not the most natural or precise translation of 'roles' in this context. It implies a more general type of role rather than specific permissions or access levels within the VDR.",
+          "suggestion": "Määrää käyttöoikeuksia huoneen osallistujille, jotta he voivat täyttää lomakkeen."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of 'huoneen osallistujille' is a bit verbose and could be simplified.",
+          "suggestion": "Anna huoneen osallistujille käyttöoikeuksia, jotta he voivat täyttää lomakkeen."
         }
       ],
       "approved_at": null
@@ -121,13 +137,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Assign roles to the room participants to fill out the form\" is not accurately translated. The Armenian reads more like 'Specify the roles of the room participants for completing the form'.  A better translation might convey the assignment of roles more directly.",
-          "suggestion": "Կիսվեք ձեր ձևով Վիրտուալ Տվյալների Սենյակում։ Ձևը լրացնելու համար տեղաբաշխեք դերեր սենյակի մասնակիցներին։ Ընտրեք գոյություն ունեցող սենյակ կամ ստեղծեք նորը։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -139,7 +149,23 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Share your form\" is translated as \"フォームを共有します\" (Form o kyōyū shimasu). While technically correct, a more natural translation in this context might be \"フォームを送信します\" (Form o sōshin shimasu) or \"フォームをアップロードします\" (Form o appurōdo shimasu) as it implies sharing the form *to* the VDR. 'Share' can have slightly different connotations.",
+          "suggestion": "フォームを送信します or フォームをアップロードします"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Assign roles to the room participants\" is translated as \"ルームの参加者に役割を割り当てて\". While understandable, a more precise translation, especially considering a business context, might be \"ルームの参加者に権限を付与します\" (Rūmu no sanka-sha ni kengen o fuyō shimasu) or something similar, highlighting the assignment of permissions or access levels.",
+          "suggestion": "ルームの参加者に権限を付与します"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure could be slightly improved for better flow in Japanese. Combining the second and third sentences would improve readability. Currently, it feels slightly disjointed.",
+          "suggestion": "ルームの参加者に役割を割り当ててフォームを記入させます。既存のルームを選択するか、新しいルームを作成します。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -148,13 +174,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Assign roles to the room participants to fill out the form' is not the most natural or accurate translation of the English intent. It implies the participants fill out the *form* itself, whereas the English suggests assigning roles to manage access and participation within the VDR.",
-          "suggestion": "양식에 대한 접근 권한 및 참여를 관리하기 위해 룸 참여자에게 역할을 할당하세요. (Assign roles to room participants to manage access and participation in the form.)"
+          "description": "The phrase \"Assign roles to the room participants to fill out the form\" is a bit awkward in Korean. A more natural phrasing would be to specify they will fill out the form *within* the room, or that the roles are for form-related activities.",
+          "suggestion": "가상 데이터 룸에 양식을 공유하세요. 룸 참여자에게 양식 작성을 위한 역할을 할당하세요. (Share your form to a Virtual Data Room. Assign roles to room participants for form completion.) OR 가상 데이터 룸에 양식을 공유하세요. 룸 참여자에게 양식 작성을 위한 역할을 할당하세요. 양식 작성 활동을 위해 역할을 할당하세요.(Share your form to a Virtual Data Room. Assign roles to room participants for form completion. Assign roles for form-related activities.)"
         },
         {
-          "type": "formatting",
-          "description": "The Korean sentence structure is slightly long and could benefit from being broken into smaller sentences for better readability. While grammatically correct, it can feel dense.",
-          "suggestion": "가상 데이터 룸에 양식을 공유하세요. 룸 참여자에게 역할을 할당하여 접근 권한을 관리하세요. 기존 룸을 선택하거나 새 룸을 생성하세요."
+          "type": "spelling",
+          "description": "The term '가상 데이터 룸' (Virtual Data Room) is correctly translated, however, the context might benefit from adding a brief explanation of what a Virtual Data Room *is* for a novice user, if appropriate for the overall UI.",
+          "suggestion": "Consider adding a tooltip or brief explanation when '가상 데이터 룸' is first encountered."
         }
       ],
       "approved_at": null
@@ -174,13 +200,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "“Data Room” is better translated as “Data Ruimte” rather than “Data Kamer.” While 'kamer' is technically correct, 'ruimte' is more commonly used and conveys the meaning more naturally in Dutch.",
-          "suggestion": "Deel uw formulier met een Virtuele Data Ruimte."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -207,13 +227,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Share your form\" as \"Partajați formularul\" is accurate in meaning but sounds slightly formal and less natural in Romanian. A more conversational and common translation would be \"Împărtășiți formularul\" or \"Distribuiți formularul\".",
-          "suggestion": "Împărtășiți formularul"
+          "description": "The term 'Virtual Data Room' is better translated as 'Camera Virtuală de Date' instead of 'Sala virtuală de date'. While 'sală' is understandable, 'camera' is the more precise and industry-standard term.",
+          "suggestion": "Partajați formularul în Camera Virtuală de Date."
         },
         {
           "type": "incorrect_translation",
-          "description": "The repeated use of 'sală' (room) feels slightly clunky. While technically correct, it might be more fluid to rephrase some instances to avoid repetition.",
-          "suggestion": "Consider replacing the second 'sală' with 'un spațiu virtual' or similar for better flow."
+          "description": "The word 'participanților' is grammatically correct, but 'membri' or 'utilizatori' (users) might be more natural sounding in this context.",
+          "suggestion": "Partajați formularul în Camera Virtuală de Date. Atribuiți roluri membrilor/utilizatorilor sălii pentru completarea formularului."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation lacks the consistency in capitalization seen in the English original. While not a critical error, keeping consistent capitalization improves readability.",
+          "suggestion": "Partajați Formularul în Camera Virtuală de Date. Atribuiți roluri membrilor/utilizatorilor sălii pentru completarea formularului. Selectați o cameră existentă sau creați o nouă cameră."
         }
       ],
       "approved_at": null
@@ -230,13 +255,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Assign roles to the room participants to fill out the form\" is not accurately translated. 'භූමිකා පැවරන්න' implies assigning roles for something else, not necessarily specifically for filling out the form.  A more accurate translation would clarify the purpose of role assignment.",
-          "suggestion": "ඔබේ ආකෘතිය පිරවීමට කාමරයේ සහභාගිවන්නන් සඳහා වන භූමිකා පිරවන්න. (Assign roles for the room participants to fill out the form)."
+          "description": "The phrase 'Virtual Data Room' is translated as 'අන්තර්ජාල දත්ත කාමරය'. While technically correct, a more common and understood term in Sinhala might be 'සංඛ්‍යාත්මක දත්ත ගබඩාව' or a similarly adapted term, particularly for a more professional context. 'අන්තර්ජාල දත්ත කාමරය' sounds somewhat literal and potentially less natural.",
+          "suggestion": "Consider translating 'Virtual Data Room' as 'සංඛ්‍යාත්මක දත්ත ගබඩාව' or a similarly adapted term that is commonly used for virtual data rooms in Sinhala."
         },
         {
-          "type": "formatting",
-          "description": "The sentence structure in Sinhala could be improved for better readability. While technically correct, it's a bit clunky.",
-          "suggestion": "ඔබේ ආකෘතිය අන්තර්ජාල දත්ත කාමරයක බෙදා ගන්න. ආකෘතිය පිරවීමට කාමරයේ සහභාගිවන්නන් සඳහා වන භූමිකා පිරවීමට, දැනට තිබෙන කාමරයක් තෝරා ගන්න, නැත්නම් නව කාමරයක් සාදන්න."
+          "type": "incorrect_translation",
+          "description": "The word 'භූමිකා' (bhoomikaa) meaning 'role' is accurate, but the nuance of assigning roles to participants within the context of a VDR might be better conveyed with a more specific term like 'අ潅තාර්ථය' (akavarththayaa) which emphasizes responsibility or permission.",
+          "suggestion": "Consider replacing 'භූමිකා' with 'අ潅තාර්ථය' to better convey the meaning of assigning roles with responsibilities/permissions within the VDR context."
         }
       ],
       "approved_at": null
@@ -259,13 +284,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Виртуелну Собу за податке\" is a literal translation of \"Virtual Data Room\" but may not be the most natural or commonly used term in Serbian. While understandable, a more established term might be preferred.",
-          "suggestion": "Consider using a more common Serbian term for 'Virtual Data Room,' such as 'Виртуелна просторија података' or checking for industry-standard terminology."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"да попуне образац\" is grammatically correct but sounds a little awkward. It translates to 'to fill out the form'.",
-          "suggestion": "Consider rephrasing to something like \"да попуни образац\" (to fill the form) or \"за попуњавање обрасца\" (for filling out the form)."
+          "description": "The term 'Virtual Data Room' is translated as 'Виртуелну Собу за податке'. While technically correct, a more common and natural translation would be 'Виртуелна просторија за податке' or 'Виртуелна документарна просторија'.",
+          "suggestion": "Consider translating 'Virtual Data Room' as 'Виртуелна просторија за податке' or 'Виртуелна документарна просторија'."
         }
       ],
       "approved_at": null
@@ -273,19 +293,19 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Virtual Data Room' is not well understood in Serbian. 'Virtuelna Sobu za podatke' is a literal translation but may not convey the intended meaning. It would be better to use a more commonly understood term for VDR, or rephrase to be more clear.",
+          "suggestion": "Consider using a phrase like 'Bezbednu digitalnu sobu' (Secure Digital Room) or 'Platformu za deljenje dokumenata' (Document Sharing Platform), or describe it as 'sobu za sigurnu razmenu podataka' (room for secure data exchange)."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Assign roles to the room participants to fill out the form' is not perfectly translated. The Turkish translation 'Formu doldurmaları için oda katılımcılarına roller atayın' implies the roles are for *filling out the form*, whereas the English implies roles are for accessing and managing the VDR.  A more accurate translation would emphasize the VDR management aspects.",
-          "suggestion": "Formu doldurmaları ve Sanal Veri Odası’nı yönetmeleri için oda katılımcılarına roller atayın."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -303,13 +323,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term \"虚拟数据房间\" (xū nǐ shù jù fáng jiān) is a literal translation of \"Virtual Data Room\" and while understandable, a more natural and common term in Chinese business contexts would be something like “数据房间” (shù jù fáng jiān) or “安全数据间” (ān quán shù jù jiān). Using just \"数据房间\" is generally preferred for conciseness and better flow.",
-          "suggestion": "将表单共享至数据房间，并为房间成员分配填写角色。可选择现有房间或创建新房间。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Search options",
   "content_en_sha1_hash": "5616c8722256385e28abb27ee4233728e13a8882",
   "created_at": "2025-05-19T21:30:42.953Z",
-  "updated_at": "2025-05-22T11:56:37.635Z",
+  "updated_at": "2025-05-26T07:57:32.461Z",
   "comment": {
     "text": "AdvancedFilter key is used to display a filter button that allows users to adjust search settings, appearing on the Home page's filter section.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Filter\\index.js",
-      "line_number": 1420,
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 1378,
       "context": "onChangeViewAs={onChangeViewAs}\n getViewSettingsData={getViewSettingsData}\n onSearch={onSearch}\n onClearFilter={onClearFilter}\n getSelectedInputValue={getSelectedInputValue}\n filterHeader={t(\"Common:AdvancedFilter\")}\n placeholder={t(\"Common:Search\")}\n view={t(\"Common:View\")}\n isFavoritesFolder={isFavoritesFolder}\n isPersonalRoom={isPersonalRoom}\n isRooms={isRooms}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Որոնման ընտրանքներ\" (Qronman entrankner) is a very literal translation of \"Search options\". A more natural and idiomatic Armenian translation might be something like \"Փնտրելու եղանակներ\" (Pntrelu eganak) which translates to 'Search methods' or 'Search ways'. \"Որոնման ընտրանքներ\" sounds a bit clunky and formal.",
-          "suggestion": "Consider using \"Փնտրելու եղանակներ\" (Pntrelu eganak) or a similar phrasing that sounds more natural in Armenian."
+          "description": "While 'Որոնման ընտրանքներ' is a literal translation of 'Search options', it's a bit clunky and not the most natural way to express it in Armenian. A more idiomatic translation might be preferable.",
+          "suggestion": "Consider 'Փնտրելու ընտրություններ' (P'nrelu entrankut'yunner) or 'Փնտրելու տարբերակներ' (P'nrelu tarberakner)"
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation 'Opções de pesquisa' is Portuguese, not Polish. It translates to 'Search options' in Portuguese.",
-          "suggestion": "The correct Polish translation should be something like 'Opcje wyszukiwania' or 'Możliwości wyszukiwania'."
+          "description": "The Polish translation \"Opções de pesquisa\" uses Portuguese for 'Search options'. The correct Polish translation should be something like 'Opcje wyszukiwania' or 'Możliwości wyszukiwania'.",
+          "suggestion": "Opcje wyszukiwania"
         }
       ],
       "approved_at": null
@@ -159,13 +159,25 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Параметры поиска' is a valid translation, 'Параметры поиска' is more literal and less natural than alternatives for 'Search options'.  'Опции поиска' or 'Варианты поиска' would be more idiomatic.",
+          "suggestion": "Consider 'Опции поиска' or 'Варианты поиска'."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Sinhala word 'සෙවුම්' (Sewum) is a correct transliteration of 'Search'. The word 'විකල්ප' (Wikalpa) correctly translates to 'options'.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,13 +195,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Претражи опције\" is a very literal translation and sounds unnatural in Serbian. A more idiomatic translation for \"Search options\" would be something like \"Opcije pretrage\" or \"Filtri pretrage\".",
+          "suggestion": "Opcije pretrage"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Pretraži opcije' is understandable, a more accurate and natural translation of 'Search options' would be 'Opcije pretrage' or 'Opcije za pretragu'. 'Pretraži opcije' implies searching *for* options, not options related to search.",
+          "suggestion": "Opcije pretrage"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -201,7 +225,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Параметри пошуку' (Parametry poshuku) is a technically correct translation for 'Search options', it might sound slightly formal for a user interface element. A more user-friendly and commonly used alternative could be considered.",
+          "suggestion": "Розширений пошук (Rozshirenyi poshuk) or Фільтри пошуку (Filtry poshuku)"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

@@ -3,7 +3,7 @@
   "content": "Folders moved to Trash.",
   "content_en_sha1_hash": "839f71d0f29b83415a366762ebd381369313b22b",
   "created_at": "2025-05-19T21:30:54.854Z",
-  "updated_at": "2025-05-22T11:56:37.590Z",
+  "updated_at": "2025-05-26T07:57:32.423Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that files have been moved to the trash. It appears in the UI on information panels related to file actions and history, likely as an action confirmation or status indicator.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\History\\useFeedTranslation.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 116,
       "context": "count,\n });\n return t(\"InfoPanel:FolderMoved\");\n case \"FolderMovedToTrash\":\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderMovedToTrashCount\", {\n count,\n });\n return t(\"InfoPanel:FolderMovedToTrash\");\n case \"FolderCopied\":\n if (hasRelatedItems)",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"köçürüldü\" (moved) sounds slightly awkward in this context. A more natural phrasing would imply a permanent action, like disposal. Considering the context of moving to trash, a more appropriate verb would be \"silindi\" (deleted) or \"çıxarıldı\" (removed).",
+          "suggestion": "Qovluqlar zibil qutusuna silindi."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -66,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Carpetas movidas a la papelera' is understandable, a more accurate and common translation for 'Trash' in this context would be 'basura' or 'cesta de papel'. 'Papelera' usually refers to a wastepaper basket within a room.",
-          "suggestion": "Carpetas movidas a la basura."
+          "description": "The translation 'Carpetas movidas a la papelera' is not the most accurate or natural translation of 'Folders moved to Trash.' While technically correct, 'papelera' often refers to a physical trash bin. A more appropriate term for a digital trash or recycle bin is 'cesta de reciclaje' or 'basura'.",
+          "suggestion": "Carpetas movidas a la cesta de reciclaje."
         }
       ],
       "approved_at": null
@@ -78,7 +84,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'moved to Trash' implies a completed action. The Finnish translation 'siirretään' uses the present continuous tense, implying an ongoing action. A more accurate translation would reflect the completed action.",
+          "description": "The English phrase 'Folders moved to Trash' implies an action that has already happened. The Finnish translation 'Kansiot siirretään roskakoriin' translates to 'Folders are being moved to the trash', implying an ongoing action.  A more accurate translation would reflect that the folders *have* been moved.",
           "suggestion": "Kansiot on siirretty roskakoriin."
         }
       ],
@@ -96,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Թղթապանակները տեղափոխվեցին աղբարկղ:\" literally translates to 'The folders were moved to trash:'. While understandable, a more natural and idiomatic phrasing in Armenian for a UI message indicating folders *have been* moved to trash would be something like 'ֆայլերը տեղափոխվեցին ջնջելու ցուցակ:\" (file-ler telagapojehcin jncelu cucak) or \"ֆայլերը տեղափոխվեցին զրկելուց:\" (file-ler telagapojehcin zerkeluc).  The current phrasing sounds slightly awkward.",
-          "suggestion": "Consider using a more idiomatic Armenian phrasing like \"ֆայլերը տեղափոխվեցին ջնջելու ցուցակ:\" or \"ֆայլերը տեղափոխվեցին զրկելուց:\""
+          "description": "The Armenian translation \"Թղթապանակները տեղափոխվեցին աղբարկղ:\" literally translates to 'Folders were moved to trash.' While understandable, a more natural and idiomatic Armenian phrasing for a notification like this would be something closer to 'The folders have been moved to the trash' or 'Folders moved to trash bin'. The current phrasing sounds slightly awkward.",
+          "suggestion": "Consider using a more idiomatic translation like \"Թղթապանակները տեղափոխվեցին զրկումային ցուցանակ:\" (Folders moved to the removal bin) or  \"Թղթապանակները տեղադրվեցին զրկումային ցուցանակում:\" (Folders placed in the removal bin)."
         }
       ],
       "approved_at": null
@@ -126,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ໂຟນເດີຍັງຖືກຍ້າຍໄປສູ່ກະດິ່ງຂີ້ກໍາຈັດ' literally translates to 'Folders are still moved to the trash bin.' The 'ຍັງ' (still) is unnecessary and changes the meaning. It implies the action is ongoing.",
-          "suggestion": "ໂຟນເດີຖືກຍ້າຍໄປສູ່ກະດິ່ງຂີ້ກໍາຈັດ"
+          "description": "The Lao translation \"ໂຟນເດີຍັງຖືກຍ້າຍໄປສູ່ກະດິ່ງຂີ້ກໍາຈັດ\" literally translates to \"Folders are still moved to the trash can.\" The \"ຍັງ\" (still) is unnecessary and changes the meaning slightly. It implies that the folders are *continuing* to be moved.",
+          "suggestion": "ໂຟນເດີຍ້າຍໄປສູ່ກະດິ່ງຂີ້ກໍາຈັດ"
         }
       ],
       "approved_at": null
@@ -138,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Trash' is best translated as 'Papirkštju kaste' in Latvian, not 'Atkritni'. While 'Atkritni' technically means 'waste' or 'rubbish,' 'Papirkštju kaste' is the standard and most understandable term for the trash bin, especially in a user interface context.",
-          "suggestion": "Papirkštju kaste"
+          "description": "The translation 'Mapes ir pārvietotas uz Atkritni' is not the most natural or accurate translation of 'Folders moved to Trash'. A more accurate and common translation would be 'Mapes pārvietotas uz Papildu lietām' or 'Mapes pārvietotas uz Miskaudumiem'. 'Atkritni' translates to 'Trash Can' rather than the general concept of a trash folder/bin.",
+          "suggestion": "Mapes pārvietotas uz Papildu lietām"
         }
       ],
       "approved_at": null
@@ -174,7 +180,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'mutale' is incorrect. The correct past participle of the verb 'a muta' (to move) is 'mutate'.",
+          "description": "The Romanian translation 'Foldere au fost mutale în coșul de gunoi' is not the most natural or accurate translation of \"Folders moved to Trash.\" The verb 'mutale' is incorrect. The correct verb conjugation for 'move' in this context would be 'mutate'.",
           "suggestion": "Foldere au fost mutate în coșul de gunoi."
         }
       ],
@@ -192,13 +198,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ෆෝල්ඩර් ට්‍රෑෂ් එකට ගෙන ගියා' is a literal translation and doesn't convey the intended meaning of 'Folders moved to Trash' naturally in Sinhala. It sounds awkward.",
-          "suggestion": "A more natural translation would be something like 'ෆෝල්ඩර් ට්‍රැෂ් කූඩයට දැම්මා' or 'ෆෝල්ඩර් ට්‍රැෂ් කූඩයට යවා ඇත' (Folder was sent to the trash bin)."
+          "description": "The translation \"ෆෝල්ඩර් ට්‍රෑෂ් එකට ගෙන ගියා.\" literally translates to \"Folders were taken to the trash.\" While understandable, it doesn't convey the passive voice of 'moved to'. A more accurate translation would indicate the action of moving.",
+          "suggestion": "ෆෝල්ඩර් ට්‍රෑෂ් එකට යවා ඇත."
         },
         {
-          "type": "spelling",
-          "description": "While 'ෆෝල්ඩර්' is a reasonable transliteration of 'Folder', it might be beneficial to consider alternatives based on common usage and consistency within the overall application. It’s acceptable as is, but could benefit from review if a more localized term is preferred.",
-          "suggestion": "Consider reviewing the transliteration 'ෆෝල්ඩර්' for optimal consistency and user understanding. If applicable, research the standard term for 'Folder' in Sinhala UI contexts."
+          "type": "formatting",
+          "description": "The word 'Trash' is transliterated but not rendered in a way that aligns with common Sinhala conventions for foreign words.  Ideally, it should have a consistent rendering across the application.",
+          "suggestion": "Consider standardizing the transliteration of 'Trash' (e.g., use 'ට්‍රැෂ්' consistently)."
         }
       ],
       "approved_at": null
@@ -221,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Фолдери су пребачени у корпу' is not the most natural or accurate rendering of 'Folders moved to Trash.' 'Корпа' translates to 'basket,' but the English 'Trash' typically refers to a bin or wastepaper basket. A more accurate term would be 'ћивот за смеће'.",
-          "suggestion": "Фолдери су пребачени у ћивот за смеће."
+          "description": "The English phrase 'Folders moved to Trash' is better translated as 'Фолдери пребачени у памету кошницу' instead of 'Фолдери су пребачени у корпу'. 'Корпу' refers to a basket or container, whereas 'памету кошницу' (pametu košnicu) is the standard term for 'Trash' or 'Recycle Bin' in Serbian.",
+          "suggestion": "Фолдери пребачени у памету кошницу"
         }
       ],
       "approved_at": null
@@ -233,8 +239,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Folders moved to Trash' implies a plural form (multiple folders). The Serbian translation 'Folderi su prebačeni u korpu' translates to 'Folders were moved to the bin'. However, 'folderi' is plural, which is correct for the English meaning. The overall translation is accurate in conveying the meaning.",
-          "suggestion": null
+          "description": "The English phrase \"Folders moved to Trash\" implies a plural form (multiple folders). The Serbian translation \"Folderi su prebačeni u korpu\" is technically correct but sounds slightly unnatural. A more natural phrasing would be \"Foldere su prebačeni u korpu.\" Using the plural form aligns better with the English original.",
+          "suggestion": "Foldere su prebačeni u korpu."
         }
       ],
       "approved_at": null
@@ -248,7 +254,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Ukrainian translation \"Папки переміщено до Кошика\" uses the passive voice (переміщено). While grammatically correct, it sounds slightly awkward in this context. A more natural phrasing would use the active voice. Consider using 'Папки було переміщено до Кошика' or 'Переміщено папки до Кошика'.",
+          "suggestion": "Переміщено папки до Кошика."
+        }
+      ],
       "approved_at": null
     },
     "vi": {

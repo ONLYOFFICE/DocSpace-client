@@ -3,7 +3,7 @@
   "content": "Opened the form to fill out",
   "content_en_sha1_hash": "ba71e193153034a9fff8236f5236eb1cacef1cb3",
   "created_at": "2025-05-19T21:30:45.773Z",
-  "updated_at": "2025-05-22T11:56:37.845Z",
+  "updated_at": "2025-05-26T07:57:32.906Z",
   "comment": {
     "text": "\"This translation key defines the content for a status message indicating when a form was opened, typically displayed on a button or in a dialogue related to role history management.\"",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\components\\filling-role-process\\sub-components\\role-histories\\RoleHistories.tsx",
+      "file_path": "/packages/shared/components/filling-role-process/sub-components/role-histories/RoleHistories.tsx",
       "line_number": 49,
       "context": "const stoppedByUserName = stoppedBy ? decode(stoppedBy.displayName) : \"\";\n \n const historyTexts = useMemo(() => {\n return {\n [FillingFormStatusHistory.OpenedAtDate.toString()]: t(\n \"Common:HistoryOpenedAtDate\",\n ),\n [FillingFormStatusHistory.SubmissionDate.toString()]: t(\n \"Common:HistorySubmissionDate\",\n ),\n [FillingFormStatusHistory.StopDate.toString()]: (",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Opened the form to fill out\" implies an action of initiating the form-filling process. The Arabic translation \"تم فتح النموذج للتعبئة\" (tam fatah an-namوذج lil-ta'bi'ah) literally translates to 'The form was opened for filling.' While conveying a similar meaning, it lacks the active voice present in the original. A more accurate translation would imply action by a user.",
+          "suggestion": "قامت بفتح النموذج للتعبئة (qamat bi fatah an-namوذج lil-ta'bi'ah) - 'She/He opened the form to fill out' or فتحت النموذج للتعبئة (fatahat an-namوذج lil-ta'bi'ah) - 'Opened the form to fill out'"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -36,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Forma doldurulmaq üçün açıldı\" is a literal translation and doesn't convey the intended meaning of \"Opened the form to fill out.\" It implies the form itself opened something for filling, rather than someone opening the form.",
-          "suggestion": "A more accurate translation would be something like \"Forma doldurmağa başlandı\" (The form was started to be filled) or \"Forma doldurulması üçün açıldı\" (The form was opened to be filled)."
+          "description": "The translation 'Forma doldurulmaq üçün açıldı' is a literal translation but doesn't quite capture the meaning of 'Opened the form to fill out'. It implies the form *itself* opened to be filled, rather than someone opening it with that intention.",
+          "suggestion": "Consider alternatives like 'Forma doldurmağa başlanıldı' (Form filling started) or 'Forma doldurmaq üçün açılıb' (The form was opened to be filled)."
         }
       ],
       "approved_at": null
@@ -48,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Opened the form to fill out\" implies an action of opening a form with the intention of filling it. The Bulgarian translation \"Отвори формуляра за попълване\" simply means \"Opened the form for filling.\" It lacks the implied intention. While not a *strictly* incorrect translation, it's a less accurate rendering of the original meaning.",
-          "suggestion": "Consider a translation that better conveys the intention, such as \"Отворих формуляра, за да го попълня\" (I opened the form to fill it out) or \"Отворих формуляра за попълване\" - in case it is acceptable to remove the intention of doing something with it."
+          "description": "The English phrase \"Opened the form to fill out\" implies an action (opening a form with the intention of filling it). The Bulgarian translation \"Отвори формуляра за попълване\" simply means \"Opened the form for filling.\" While not drastically wrong, it lacks the implied purpose conveyed in the original.",
+          "suggestion": "Consider a more nuanced translation that reflects the purpose, such as \"Отвори формуляра, за да го попълня\" (Opened the form to fill it out) or \"Отвори формуляра с цел попълване\" (Opened the form with the purpose of filling it out)."
         }
       ],
       "approved_at": null
@@ -60,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation \"Otevřený formulář k vyplnění\" translates to \"Opened form to fill out\" or \"Open form to fill out\", not \"Opened the form to fill out\". It describes the state of the form, not the action of opening it.",
-          "suggestion": "Zobrazuje se datum a čas, kdy byl formulář otevřen (Display the date and time when the form was opened)"
+          "description": "The Czech translation 'Otevřený formulář k vyplnění' translates to 'Opened form to be filled out' or 'An opened form to fill out.' It doesn't accurately convey the meaning of 'Opened the form to fill out,' which implies an action of opening the form. A more accurate translation would reflect the action.",
+          "suggestion": "Zobrazuje se formulář k vyplnění"
         }
       ],
       "approved_at": null
@@ -72,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Das Formular zum Ausfüllen geöffnet' is a literal translation of 'Opened the form to fill out' but doesn't convey the intended meaning in a natural German way. It sounds awkward and passive.",
-          "suggestion": "A more natural translation would be something like 'Das Formular wurde geöffnet, um es auszufüllen' or 'Das Formular zum Ausfüllen wurde geöffnet' or simply 'Das Formular geöffnet'."
+          "description": "The translation 'Das Formular zum Ausfüllen geöffnet' is a literal translation of 'Opened the form to fill out' but doesn't sound natural in German. It uses the past participle 'geöffnet' without a proper auxiliary verb, implying the form opened itself. A more natural phrasing would be something like 'Das Formular zum Ausfüllen wurde geöffnet' or 'Ich habe das Formular zum Ausfüllen geöffnet'.",
+          "suggestion": "Das Formular zum Ausfüllen wurde geöffnet"
         }
       ],
       "approved_at": null
@@ -84,8 +90,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Άνοιξε τη φόρμα για να τη συμπληρώσετε' translates to 'Opened the form to fill it out'. While understandable, it's not the most natural or precise translation of 'Opened the form to fill out'. It implies that someone else will fill it out ('to fill it out'). The original English implies the person who opened the form will fill it out.",
-          "suggestion": "Άνοιξε τη φόρμα για να τη συμπληρώσει"
+          "description": "The English phrase 'Opened the form to fill out' implies an action performed by someone. The Greek translation 'Άνοιξε τη φόρμα για να τη συμπληρώσετε' translates to 'Opened the form to fill it out' which is technically correct but lacks the specific action implied in the original English. A more accurate translation would convey the act of *opening* the form to start the filling process.",
+          "suggestion": "Άνοιξε τη φόρμα για να αρχίσετε να τη συμπληρώσετε"
+        },
+        {
+          "type": "grammar",
+          "description": "The verb form 'συμπληρώσετε' (to fill out - formal plural) is used. This implies a formal plural 'you'. If the form is being filled out by a single user, the verb should be in the singular form.",
+          "suggestion": "Άνοιξε τη φόρμα για να τη συμπληρώσετε (αν πρόκειται για μια ομάδα) or Άνοιξε τη φόρμα για να τη συμπληρώσεις (αν πρόκειται για ένα άτομο)"
         }
       ],
       "approved_at": null
@@ -96,8 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Opened the form to fill out\" implies an action in the past, but the Spanish translation \"Ha abierto el formulario para rellenarlo\" uses the present perfect tense, suggesting an action that has recently happened or continues to have relevance. A more accurate past tense translation would better reflect the original meaning.",
-          "suggestion": "Abrió el formulario para rellenarlo"
+          "description": "The translation 'Ha abierto el formulario para rellenarlo' is a literal translation and doesn't quite capture the meaning of 'Opened the form to fill out'. It implies someone *already* opened it. A more accurate translation would convey the action of opening for the purpose of filling it out.",
+          "suggestion": "Consider 'Abrió el formulario para completarlo' or 'Se abrió el formulario para rellenarlo' to better convey the original intent."
         }
       ],
       "approved_at": null
@@ -108,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Opened the form to fill out' doesn't directly translate to 'Lomake avattu täytettäväksi'. While the Finnish translation conveys a similar idea, it's more literally 'Form opened for filling'. A more natural translation would be something like 'Form opened for completion' or 'The form was opened to be filled out'.",
-          "suggestion": "Formi avattiin täytettäväksi"
+          "description": "The translation 'Lomake avattu täytettäväksi' doesn't fully capture the meaning of 'Opened the form to fill out'. While it translates to 'Form opened to be filled', it loses the sense of action. A more accurate translation would convey the act of opening the form.",
+          "suggestion": "Lomake avattiin täytettäväksi"
         }
       ],
       "approved_at": null
@@ -120,8 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ouvrir le formulaire à remplir' doesn't accurately convey the meaning of 'Opened the form to fill out.' It translates to 'To open the form to fill out,' indicating a future action, whereas the original refers to a past action (it has already been opened).",
-          "suggestion": "A more accurate translation would be something like 'Le formulaire a été ouvert pour être rempli' or 'Le formulaire a été ouvert pour le remplir'."
+          "description": "The English phrase \"Opened the form to fill out\" implies an action that has already happened. The French translation \"Ouvrir le formulaire à remplir\" translates to \"To open the form to fill out\" which is an imperative or a general statement, not a past action.",
+          "suggestion": "Formulated with past tense to align with English meaning. Possible suggestions: \"Le formulaire a été ouvert pour être rempli\" or \"Le formulaire a été ouvert pour le remplissage\"."
         }
       ],
       "approved_at": null
@@ -132,8 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Բացվել է ձևը լրացնելու համար\" (Bacvel e gev um lracnelu hamar) literally translates to 'The form has been opened to fill out.' While understandable, it doesn't capture the nuance of 'Opened the form to fill out.' It implies the form opened itself rather than the user opening it. A more accurate translation would be something along the lines of 'Անձը բացել է ձևը լրացնելու համար' (Anz@ bacvel e gev um lracnelu hamar) which means 'The person opened the form to fill out,' or simply 'Բացել է ձևը' (Bacvel e gev) which means 'Opened the form'.",
-          "suggestion": "Բացել է ձևը"
+          "description": "The translation \"Բացվել է ձևը լրացնելու համար\" (Bacvel e vformn lcancnelu hamar) literally translates to 'The form has been opened to fill out.' While conveying a similar meaning to 'Opened the form to fill out,' it's a passive construction in Armenian which can sound awkward. A more natural phrasing would be something more active.",
+          "suggestion": "Consider a more active phrasing like \"Լրացնելու համար բացեցի ձևը\" (Lracnelu hamar bacvec dzvorn) - 'I opened the form to fill out' or a simplified \"Բացեցի ձևը լրացնելու համար\" (Bacvec dzvorn lracnelu hamar) - 'Opened the form to fill out'."
         }
       ],
       "approved_at": null
@@ -144,8 +155,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Modulo aperto per la compilazione\" doesn't fully capture the meaning of \"Opened the form to fill out.\" It translates to \"Form opened for completion.\" While similar, it misses the action of opening the form.",
-          "suggestion": "Consider a translation like \"Apertura del modulo per la compilazione\" or \"Formulario aperto per essere compilato\" to better reflect the original meaning."
+          "description": "The Italian translation 'Modulo aperto per la compilazione' doesn't fully capture the meaning of 'Opened the form to fill out'. It translates to 'Form opened for completion'. It lacks the nuance of the user actively opening the form.",
+          "suggestion": "Consider 'Ho aperto il modulo per la compilazione' (I opened the form for completion) or 'Modulo aperto per essere compilato' (Form opened to be completed)."
         }
       ],
       "approved_at": null
@@ -156,8 +167,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English \"Opened the form to fill out\" implies an action of opening the form with the *intention* to fill it out. The Japanese \"フォームを開いて記入しました\" translates to \"Opened the form and filled it in.\" It lacks the nuance of the initial opening action related to the intent to fill out.",
-          "suggestion": "Consider \"フォームを開いて記入するつもりでした\" (Form was opened with the intention of filling it out) or \"フォームを開いて記入に取り掛かりました\" (Opened the form and started filling it out)."
+          "description": "The translation 'フォームを開いて記入しました' implies that the form was opened and *already* filled out. The English 'Opened the form to fill out' indicates the action of opening the form with the *intention* of filling it out.",
+          "suggestion": "フォームを開いて記入するつもりです"
         }
       ],
       "approved_at": null
@@ -168,13 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"작성하기 위해 양식을 열었습니다\" (for 'Opened the form to fill out') is a bit literal and formal. It emphasizes the *purpose* of opening the form, which isn't necessarily the focus of the original English phrase. A more natural translation would focus on the action of opening the form.",
-          "suggestion": "양식을 열었습니다 (Yeolligs-eul yeoll-eossseumnida) - Simply 'Opened the form'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While grammatically correct, the current translation sounds slightly awkward in natural Korean conversation. It implies a deliberate action with a specific goal. The English phrase is more casual.",
-          "suggestion": "양식을 켰습니다 (Yeolligs-eul kyeossseumnida) - 'Opened the form' (using a more common verb for opening a digital form)."
+          "description": "The English phrase 'Opened the form to fill out' is more accurately conveyed as 'Opened the form for completion' or 'Opened the form to begin filling'. The current translation, '작성하기 위해 양식을 열었습니다', emphasizes writing (작성) rather than the action of opening the form to fill it out.",
+          "suggestion": "Consider alternatives like '작성할 양식을 열었습니다' (Opened the form to write) or '작성할 양식을 시작했습니다' (Started the form for writing)."
         }
       ],
       "approved_at": null
@@ -185,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Opened the form to fill out\" implies the user initiated the process of opening the form. The Lao translation \"ໄດ້ເປີດແບບຟອມເພື່ອຕື່ມຂໍ້ມູນໃສ່\" literally translates to 'Opened the form to fill in information'. While not incorrect, it's a bit more literal and less natural in this context. A more natural phrasing might capture the initiation aspect.",
-          "suggestion": "Consider a phrasing like \"ເລີ່ມຕົ້ນຕື່ມແບບຟອມ\" (Reim toem baep form) which means 'Started filling out the form' or \"ໄດ້ເລີ່ມຕົ້ນຕື່ມແບບຟອມ\" (Dai reim toem baep form) which means 'Started filling out the form'."
+          "description": "The English phrase \"Opened the form to fill out\" is not perfectly captured by the Lao translation \"ໄດ້ເປີດແບບຟອມເພື່ອຕື່ມຂໍ້ມູນໃສ່\". A more literal and accurate translation would focus on the 'opening' action as the initial event for filling the form. \"ໄດ້ເປີດແບບຟອມເພື່ອຕື່ມຂໍ້ມູນໃສ່\" implies the opening was done specifically *in order* to fill the form, which might not be the case. It's more neutral to simply state the form was opened.",
+          "suggestion": "ໄດ້ເປີດແບບຟອມ"
         }
       ],
       "approved_at": null
@@ -197,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Veidlapa atvērta aizpildīšanai' (Form opened for filling) doesn't fully capture the meaning of 'Opened the form to fill out'. It implies the form was simply opened, not necessarily with the intention of filling it out. A more accurate translation would convey the action of *starting* to fill out the form.",
-          "suggestion": "Veidlapu atvērta, lai aizpildītu"
+          "description": "The translation 'Veidlapa atvērta aizpildīšanai' doesn't fully capture the meaning of 'Opened the form to fill out'. It translates to 'Form opened for filling'. While technically correct, it lacks the active voice and sense of initiation that 'Opened the form to fill out' conveys. A more accurate translation would be something like 'Es atvērsu veidlapu aizpildīšanai' (I opened the form to fill out).",
+          "suggestion": "Es atvērsu veidlapu aizpildīšanai"
         }
       ],
       "approved_at": null
@@ -209,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Het formulier geopend om in te vullen\" is a literal translation and doesn't fully capture the meaning of \"Opened the form to fill out\". It implies the form *is* open, not that the action of opening it occurred. A better translation would convey the action of opening the form.",
-          "suggestion": "Het formulier werd geopend om in te vullen"
+          "description": "The translation \"Het formulier geopend om in te vullen\" doesn't fully capture the meaning of \"Opened the form to fill out\". It's more like 'The form was opened to fill out'. A better translation would convey the action of opening the form.",
+          "suggestion": "Het formulier is geopend om in te vullen"
         }
       ],
       "approved_at": null
@@ -221,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Opened the form to fill out' implies an action performed by someone. The Polish translation 'Otworzono formularz do wypełnienia' uses the passive voice ('formularz opened'), which shifts the focus. While grammatically correct, it's less direct and might not accurately convey the original meaning.",
-          "suggestion": "Consider a more active phrasing that aligns with the original meaning, such as 'Użytkownik otworzył formularz do wypełnienia' (User opened the form to fill out) or 'Formularz został otwarty do wypełnienia' (The form was opened to fill out - still passive but closer)."
+          "description": "The translation 'Otworzono formularz do wypełnienia' doesn't fully capture the nuance of 'Opened the form to fill out'. While it's not *wrong*, it's a more passive and formal rendering. 'Opened the form to fill out' implies an action initiated by someone, while the Polish translates to 'The form was opened for filling out.'",
+          "suggestion": "Consider a more active voice translation like 'Użytkownik otworzył formularz do wypełnienia' (User opened the form to fill out) or 'Formularz został otwarty do wypełnienia' (The form was opened to fill out - slightly more active than the current translation)."
         }
       ],
       "approved_at": null
@@ -233,8 +239,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Abriu o formulário para preencher\" is a literal translation but doesn't quite capture the nuance of \"Opened the form to fill out.\" A more natural phrasing in Portuguese might convey the action of *starting* the form rather than just opening it.",
-          "suggestion": "Consider alternatives like \"Iniciou o formulário para preencher\" (Started the form to fill out) or \"Começou a preencher o formulário\" (Began to fill out the form)."
+          "description": "The English content \"Opened the form to fill out\" is a more active description of an event. The Portuguese translation \"Abriu o formulário para preencher\" translates to \"Opened the form to fill\", which is technically correct, but lacks the implication of the action being taken to *begin* the process of filling it out. A more accurate translation would convey the initiation of the action.",
+          "suggestion": "Consider alternatives like \"Iniciou o preenchimento do formulário\" (Started filling out the form) or \"Começou a preencher o formulário\" (Began filling out the form)."
         }
       ],
       "approved_at": null
@@ -257,8 +263,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Opened the form to fill out\" implies an action performed by a user. The Russian translation \"Открыта форма для заполнения\" (Otkryta forma dlya zapolneniya) translates to \"The form is open for filling.\" It's passive voice and doesn't convey the action of opening the form. A more accurate translation would focus on the action of opening.",
-          "suggestion": "Раскрыта форма для заполнения (Raskryta forma dlya zapolneniya) - 'The form has been revealed/displayed for filling' or, for a more active phrasing, 'Я открыл(а) форму для заполнения' (Ya otkryl(a) formu dlya zapolneniya) - 'I opened the form for filling' (masculine/feminine respectively)."
+          "description": "The translation \"Открыта форма для заполнения\" (Opened form for filling) doesn't directly convey the meaning of 'Opened the form to fill out'. It implies the form is already open, rather than the action of opening it. A more accurate translation would emphasize the action of opening.",
+          "suggestion": "Возникла форма для заполнения"
         }
       ],
       "approved_at": null
@@ -269,8 +275,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Opened the form to fill out' implies an action taken. The Sinhala translation 'පිරවීම සඳහා පෝරමය විවෘත කළා' literally translates to 'Opened the form for filling.' While understandable, it doesn't capture the sense of *initiating* the filling process. A more accurate translation might emphasize that.",
-          "suggestion": "පෝරමය පිරවීමට විවෘත කළා (Poramava piravimata vivruta kala)"
+          "description": "The English content \"Opened the form to fill out\" implies an action of opening a form with the intent to fill it. The Sinhala translation \"පිරවීම සඳහා පෝරමය විවෘත කළා\" literally translates to \"Opened the form for filling.\" While not strictly incorrect, it lacks the implied intention. A more accurate translation would convey the action of opening the form *to* fill it out.",
+          "suggestion": "පිරවීමට පෝරමය විවෘත කළා"
         }
       ],
       "approved_at": null
@@ -281,13 +287,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Otvoriť formulár a vyplniť ho' is too literal and doesn't capture the nuance of 'Opened the form to fill out'. It implies an action to be performed, rather than a completed action. A better translation would reflect the fact that the form was already opened.",
-          "suggestion": "Formulár bol otvorený na vyplnenie."
-        },
-        {
-          "type": "grammatical",
-          "description": "While not strictly incorrect, 'Otvoriť formulár a vyplniť ho' sounds slightly awkward. Combining the actions into a single verb phrase is more natural in Slovak in this context.",
-          "suggestion": "Formulár bol otvorený na vyplnenie."
+          "description": "The Slovak translation \"Otvoriť formulár a vyplniť ho\" is a more literal translation of 'Open the form and fill it out'. The English content 'Opened the form to fill out' implies the action has already occurred.  A better translation would reflect that the form *was* opened.",
+          "suggestion": "Bol otvorený formulár na vyplnenie."
         }
       ],
       "approved_at": null
@@ -298,8 +299,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Opened the form to fill out\" implies an action of opening a form with the intent of filling it. The Slovenian translation \"Odprl obrazec za izpolnjevanje\" literally translates to \"Opened form for filling\". It lacks the nuance of intent or the 'to' verb.",
-          "suggestion": "Odprl obrazec za izpolnitev"
+          "description": "The translation 'Odprl obrazec za izpolnjevanje' translates to 'Opened the form for filling out.' While not entirely wrong, it misses the nuance of the English phrase 'Opened the form to fill out'. The Slovenian version implies the form was opened *in order* for it to be filled out, which isn't necessarily the meaning. A more accurate translation would capture the action of opening the form.",
+          "suggestion": "Odprl sem obrazec za izpolnjevanje."
         }
       ],
       "approved_at": null
@@ -310,8 +311,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Отворено је за попуњавање\" doesn't accurately convey the meaning of \"Opened the form to fill out.\" It literally translates to \"It has been opened for filling.\" The English implies an action performed by a user, while the Serbian is passive and describes a state. A better translation would convey the action of opening the form.",
-          "suggestion": "Инициран је образац за попуњавање"
+          "description": "The Serbian translation 'Отворено је за попуњавање' literally translates to 'It was opened for filling out'. While it conveys a similar idea, it's not as direct or natural as 'Opened the form to fill out'.  A more accurate and natural translation would be 'Отворени формулар за попуњавање' or 'Отворена форма за попуњавање'.",
+          "suggestion": "Отворени формулар за попуњавање"
         }
       ],
       "approved_at": null
@@ -322,13 +323,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Otvoreno je za popunjavanje' literally translates to 'It is open for filling out.' While conveying a similar idea, it's not as direct or natural as 'Opened the form to fill out.' A more accurate translation would capture the action of opening the form.",
-          "suggestion": "Otvorio/Otvorila je obrazac za popunjavanje"
-        },
-        {
-          "type": "grammar",
-          "description": "The passive voice 'Otvoreno je...' sounds less natural in Serbian compared to an active voice construction. The original English uses an active construction.",
-          "suggestion": "Otvorio/Otvorila je obrazac za popunjavanje"
+          "description": "The translation 'Otvoreno je za popunjavanje' does not accurately reflect the English meaning 'Opened the form to fill out'. It translates to 'It is open for filling out' which implies a state rather than an action.",
+          "suggestion": "Otvorio/Otvorila obrazac za popunjavanje"
         }
       ],
       "approved_at": null
@@ -339,13 +335,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Formu doldurmak için açtı\" literally translates to \"Opened to fill out the form.\" While understandable, it doesn't perfectly capture the nuance of \"Opened the form to fill out.\" It implies a purpose behind the opening, which isn't explicitly stated in the translation. A more accurate translation would focus on the action of opening for filling.",
-          "suggestion": "Formu doldurmak üzere açtı"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Formu doldurmak için açtı\" uses \"için\" which implies 'in order to'. A more natural phrasing in Turkish would depend on the intended emphasis. \"Üzere\" can often convey the purpose more smoothly in this context.",
-          "suggestion": "Formu doldurmak üzere açtı"
+          "description": "The translation \"Formu doldurmak için açtı\" (Opened the form to fill out) doesn't fully capture the nuance of \"Opened the form to fill out\". It literally translates to 'Opened to fill out the form'. While understandable, it's not the most natural way to express the action in Turkish. It implies intention rather than the action itself.",
+          "suggestion": "Consider a more accurate translation such as \"Formu doldurmaya başladı\" (Started to fill out the form) or \"Formu açtı doldurmak için\" (Opened the form to fill out - though slightly more verbose)."
         }
       ],
       "approved_at": null
@@ -362,8 +353,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Opened the form to fill out\" implies a specific action of opening a form with the intention of filling it. The Vietnamese translation \"Mở biểu mẫu để điền\" simply means 'Open form to fill', which lacks the nuance of the original meaning. It is a literal translation, but not an accurate one in this context.",
-          "suggestion": "Mở biểu mẫu để điền thông tin"
+          "description": "The English phrase \"Opened the form to fill out\" implies the user began the form-filling process. The Vietnamese translation \"Mở biểu mẫu để điền\" literally means \"Open form to fill.\" While not entirely incorrect, it lacks the nuance of the English, which describes an action, not just the state of the form being open. A more accurate translation might convey the act of starting the filling process.",
+          "suggestion": "Bắt đầu điền biểu mẫu"
         }
       ],
       "approved_at": null
@@ -374,8 +365,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '已打开要填写的表单' is a literal translation but doesn't fully capture the nuance of 'Opened the form to fill out'. It lacks the implication of the user initiating the action. A more natural translation would imply starting the process of filling out the form.",
-          "suggestion": "可以考虑更自然的表达，例如：'开始填写表单' (Started filling out the form) 或 '准备填写表单' (Ready to fill out the form)."
+          "description": "The English content 'Opened the form to fill out' implies an action taken - the user initiated the form opening. The Chinese translation '已打开要填写的表单' simply states the form is open, not necessarily that the user opened it. This lacks the implied action.",
+          "suggestion": "Consider translating as '开始填写表单' (Started filling out the form) or '打开并开始填写表单' (Opened and started filling out the form) to better convey the original meaning."
         }
       ],
       "approved_at": null

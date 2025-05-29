@@ -3,7 +3,7 @@
   "content": "bytes",
   "content_en_sha1_hash": "daf529a73101c2be626b99fc6938163e7a27620b",
   "created_at": "2025-05-19T21:30:43.348Z",
-  "updated_at": "2025-05-22T11:56:37.511Z",
+  "updated_at": "2025-05-26T07:57:32.913Z",
   "comment": {
     "text": "The \"Bytes\" translation key is used to display the unit \"byte\" in various parts of the application. It appears on a quota form, where users can select options such as kilobytes or gigabytes, indicating that this key is used for file size units in a UI context.",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\QuotaForm\\index.js",
-      "line_number": 70,
-      "context": "return 2;\n };\n \n const getOptions = (t) => [\n { key: 0, label: t(\"Common:Bytes\") },\n { key: 1, label: t(\"Common:Kilobyte\") },\n { key: 2, label: t(\"Common:Megabyte\") },\n { key: 3, label: t(\"Common:Gigabyte\") },\n { key: 4, label: t(\"Common:Terabyte\") },\n ];",
-      "module": "\\packages\\client"
+      "file_path": "/packages/shared/components/quota-form/index.tsx",
+      "line_number": 78,
+      "context": "return 2;\n };\n \n const getOptions = (t: TTranslation) => [\n { key: 0, label: t(\"Common:Bytes\") },\n { key: 1, label: t(\"Common:Kilobyte\") },\n { key: 2, label: t(\"Common:Megabyte\") },\n { key: 3, label: t(\"Common:Gigabyte\") },\n { key: 4, label: t(\"Common:Terabyte\") },\n ];",
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\utils\\common.ts",
-      "line_number": 681,
+      "file_path": "/packages/shared/utils/common.ts",
+      "line_number": 685,
       "context": "export const getConvertedSize = (t: (key: string) => string, bytes: number) => {\n let power = 0;\n let resultSize = bytes;\n \n const sizeNames = [\n t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\utils\\common.ts",
-      "line_number": 681,
+      "file_path": "/packages/shared/utils/common.ts",
+      "line_number": 685,
       "context": "export const getConvertedSize = (t: (key: string) => string, bytes: number) => {\n let power = 0;\n let resultSize = bytes;\n \n const sizeNames = [\n t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -84,7 +84,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation 'bitit' translates to 'bits' in English, not 'bytes'. The correct translation for 'bytes' in Finnish is 'tavuja'.",
+          "description": "The Finnish translation 'bitit' translates to 'bits', not 'bytes'. 'Bytes' in Finnish is 'tavuja'.",
           "suggestion": "tavuja"
         }
       ],
@@ -165,13 +165,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The singular form \"байт\" (bajt) is provided for the English word \"bytes\" which is plural. The singular form of 'byte' is correct, but the provided translation doesn't account for the plural form.",
-          "suggestion": "байт(ы)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -192,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation \"bajtov\" is the genitive plural form of \"bajt.\"  The English word \"bytes\" is a plural noun, but the context is not provided to justify the genitive case. The nominative plural, \"baji\" or the singular \"bajt\" might be more appropriate depending on the intended meaning.",
-          "suggestion": "Consider \"baji\" (nominative plural) or \"bajt\" (singular) if the genitive case is not necessary. More context is needed to determine the correct translation."
+          "description": "The Slovenian translation 'bajtov' is the genitive plural form of 'bajt'. While 'bytes' can sometimes imply a plural quantity, 'bajtov' strongly implies possession or relationship ('of bytes'). A more accurate and neutral translation would be 'bajtov' (nominative plural) or 'bajti' (plural direct).",
+          "suggestion": "Consider 'bajtov' (nominative plural) or 'bajti' (plural direct)."
         }
       ],
       "approved_at": null
@@ -210,7 +204,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Bajtovi\" is a plural form. The English content is a singular noun (\"bytes\"). While \"Bajtovi\" can be used in some contexts, a more accurate singular translation would be \"Bajt\".",
+          "description": "The Serbian translation 'Bajtovi' is a plural form, but the English word 'bytes' is singular in this context. While 'Bajtovi' could be used if referring to multiple bytes, a singular form might be more appropriate.",
           "suggestion": "Bajt"
         }
       ],

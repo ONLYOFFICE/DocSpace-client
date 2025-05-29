@@ -3,7 +3,7 @@
   "content": "Install now",
   "content_en_sha1_hash": "8607e4bae1d0e9652aa19e26a8ea7706b6066429",
   "created_at": "2025-05-19T21:30:53.433Z",
-  "updated_at": "2025-05-21T05:48:09.093Z",
+  "updated_at": "2025-05-24T06:17:21.951Z",
   "comment": {
     "text": "This translation key is used for a button label that says \"Install now\" and is typically displayed as a link in private room invitations. Its purpose is to prompt users to initiate the installation process of a privacy-related feature.",
     "is_auto": true,
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Şimdi kur\" while understandable, is a very literal and slightly awkward translation of \"Install now\". A more natural Turkish phrasing would be \"Hemen kur\" or \"Şimdi yükle\".",
-          "suggestion": "Hemen kur"
+          "description": "The translation \"Şimdi kur\" while understandable, is a bit too literal. A more natural and idiomatic translation for \"Install now\" would be something like \"Hemen yükle\" or \"Şimdi yükleyin\". \"Kur\" implies a more foundational installation, while \"yükle\" is more commonly used for software.",
+          "suggestion": "Hemen yükle"
         }
       ],
       "approved_at": null

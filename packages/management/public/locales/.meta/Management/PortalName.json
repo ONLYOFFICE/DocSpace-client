@@ -3,7 +3,7 @@
   "content": "{{productName}} name",
   "content_en_sha1_hash": "0f1403b43faa94c0dc6b13a5e45c10558ce66b12",
   "created_at": "2025-05-19T21:30:57.465Z",
-  "updated_at": "2025-05-20T09:47:54.627Z",
+  "updated_at": "2025-05-26T07:57:33.004Z",
   "comment": {
     "text": "The translation key \"PortalName\" is used to display a portal name in a user interface. It typically appears as a label on a configuration input field in the \"Create Portal Dialog\". Its purpose is to provide a human-readable representation of the portal's identifier for validation and accessibility.",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/management/src/categories/spaces/sub-components/ConfigurationSection.tsx",
+      "file_path": "/packages/management/src/app/spaces/configuration/body.tsx",
       "line_number": 40,
-      "context": "InputSize,\n InputType,\n } from \"@docspace/shared/components/text-input\";\n import { Text } from \"@docspace/shared/components/text\";\n import { toastr } from \"@docspace/shared/components/toast\";\n import { parseDomain, validatePortalName } from \"@docspace/shared/utils/common\";\n \n import { TranslationType } from \"SRC_DIR/types/spaces\";\n import { useStore } from \"SRC_DIR/store\";\n import { ConfigurationWrapper } from \"../StyledSpaces\";",
+      "context": "TextInput,\n InputType,\n InputSize,\n } from \"@docspace/shared/components/text-input\";\n import { Button, ButtonSize } from \"@docspace/shared/components/button\";\n import { parseDomain, validatePortalName } from \"@docspace/shared/utils/common\";\n import {\n setDomainName,\n setPortalName,\n checkDomain,\n } from \"@docspace/shared/api/management\";",
       "module": "/packages/management"
     },
     {
-      "file_path": "/packages/management/src/categories/spaces/sub-components/dialogs/CreatePortalDialog/index.tsx",
-      "line_number": 45,
-      "context": "TextInput,\n InputSize,\n InputType,\n } from \"@docspace/shared/components/text-input\";\n import { Checkbox } from \"@docspace/shared/components/checkbox\";\n import { validatePortalName } from \"@docspace/shared/utils/common\";\n \n import { useStore } from \"SRC_DIR/store\";\n \n const StyledBodyContent = styled.div`\n display: contents;",
+      "file_path": "/packages/management/src/dialogs/create-portal/index.tsx",
+      "line_number": 48,
+      "context": "TextInput,\n InputType,\n InputSize,\n } from \"@docspace/shared/components/text-input\";\n import { Checkbox } from \"@docspace/shared/components/checkbox\";\n import { validatePortalName } from \"@docspace/shared/utils/common\";\n \n import type { TDomainValidator } from \"@docspace/shared/api/settings/types\";\n import type { TUser } from \"@docspace/shared/api/people/types\";\n \n import { useStores } from \"@/hooks/useStores\";",
       "module": "/packages/management"
     }
   ],
@@ -57,7 +57,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The German translation lacks a space after the productName placeholder, which can make it harder to read and integrate into the application.",
+          "suggestion": "\"{{productName}} Name\""
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -165,19 +171,37 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Meno {{productName}}' is a literal translation of '{{productName}} name'. A more natural Slovak translation would be 'Názov produktu {{productName}}' or 'Produkt {{productName}}'. 'Meno' typically refers to a person's name, not a product's name.",
+          "suggestion": "Názov produktu {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content '{{productName}} name' implies a possessive or descriptive relationship. The Slovenian translation 'Ime {{productName}}' simply translates to 'Name {{productName}}', which is less idiomatic. A more accurate translation would incorporate a possessive or descriptive element.",
+          "suggestion": "Ime izdelka {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation '{{productName}} име' is not an accurate translation of '{{productName}} name'. 'Име' translates to 'name' but doesn't convey the intended meaning which implies a specific portal's name. A more accurate translation would be 'Назив {{productName}}' or 'Назив портала {{productName}}'.",
+          "suggestion": "Назив {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -195,7 +219,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ім’я простору {{productName}}' is not an accurate translation of '{{productName}} name'. 'Простору' implies 'space', which doesn't directly translate the meaning of 'name' in this context. A more accurate translation would be 'Назва {{productName}}' or '{{productName}}: назва'.",
+          "suggestion": "Назва {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

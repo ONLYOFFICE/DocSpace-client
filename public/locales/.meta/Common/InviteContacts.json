@@ -3,7 +3,7 @@
   "content": "Invite contacts",
   "content_en_sha1_hash": "43f0bde391682834922b0b6b0e4c82714e94586e",
   "created_at": "2025-05-19T21:30:45.983Z",
-  "updated_at": "2025-05-22T11:56:37.445Z",
+  "updated_at": "2025-05-26T07:57:32.156Z",
   "comment": {
     "text": "The translation key \"InviteContacts\" is used to display the phrase \"Invite contacts\". It appears as a button label on a UI element, allowing users to add new contact information.",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\EmptyContainer\\sub-components\\EmptyViewContainer\\EmptyViewContainer.helpers.tsx",
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
       "line_number": 221,
       "context": "t(\"EmptyView:UploadDevicePDFFormOptionDescription\"),\n \"pdf\",\n );\n \n const inviteUser = createInviteOption(\n t(\"Common:InviteContacts\"),\n t(\"EmptyView:InviteUsersOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n );",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\sub-components\\ItemTitle\\Rooms\\index.js",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/Rooms/index.js",
       "line_number": 188,
       "context": "id=\"info_add-user\"\n className=\"icon\"\n title={\n isTemplate\n ? t(\"Files:AccessSettings\")\n : t(\"Common:InviteContacts\")\n }\n iconName={PersonPlusReactSvgUrl}\n isFill\n onClick={\n isTemplate ? onOpenTemplateAccessOptions : onClickInviteUsers",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\ContextOptionsStore.js",
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
       "line_number": 1887,
       "context": "disabled: !isTemplateOwner,\n },\n {\n id: \"option_invite-users-to-room\",\n key: \"invite-users-to-room\",\n label: t(\"Common:InviteContacts\"),\n icon: PersonReactSvgUrl,\n onClick: (e) => this.onClickInviteUsers(e, item.roomType),\n disabled: false,\n action: item.id,\n },",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Əlaqələri dəvət edin' is a literal translation but doesn't quite capture the natural phrasing for inviting contacts. It sounds slightly formal and robotic.",
-          "suggestion": "Consider a more natural phrasing like 'Yaşayışdakıları dəvət et' or 'Əlaqələrinizi dəvət etmələri üçün' depending on the specific context of the invite button/link."
+          "description": "The translation 'Əlaqələri dəvət edin' is a literal translation and doesn't quite capture the nuance of 'Invite contacts' in a user interface context. It sounds a bit formal and less natural.",
+          "suggestion": "Consider a more natural phrasing like 'Əlaqələrə dəvət göndər' or 'Əlaqələrə qoşulmağınızı dəvət edin' depending on the specific functionality.  'Əlaqələrə dəvət et' is also a possibility."
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Позовите контакте\" is not the most natural or accurate translation of \"Invite contacts.\" While \"Позовите\" (Pozovite) means 'Invite', the noun 'kontakte' is a less common and slightly awkward form.  A more natural translation would use the plural nominative form.",
-          "suggestion": "Позовите контакти"
+          "description": "The Serbian translation \"Позовите контакте\" is a literal translation of \"Invite contacts\" but it's grammatically awkward and doesn't sound natural in Serbian. The correct imperative form to use would be \"Позовите контаке\" (Pozovite kontakte).",
+          "suggestion": "Позовите контаке"
         }
       ],
       "approved_at": null
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Pozovite kontakte' is not the most natural or accurate translation of 'Invite contacts'. 'Pozovite' implies calling someone, which isn't the intended meaning of 'invite'.",
-          "suggestion": "Dodajte kontakte"
+          "description": "The translation 'Pozovite kontakte' is not an accurate translation of 'Invite contacts'. 'Pozovite' means 'Call' or 'Invite (to call)', but in this context, 'Invite' should imply an invitation to connect or add.",
+          "suggestion": "Pozovite kontakte na vezu"
         }
       ],
       "approved_at": null
@@ -228,7 +228,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Mời liên hệ\" is not an ideal translation for \"Invite contacts.\" While \"Mời\" means 'invite', \"liên hệ\" is more accurately 'contact' rather than 'contacts'. It doesn't convey the plural sense.",
+          "description": "The translation \"Mời liên hệ\" doesn't accurately convey the meaning of \"Invite contacts.\" It translates to \"Invite contact(s)\" which is closer but still not ideal. It lacks the nuance of extending an invitation to multiple contacts.",
           "suggestion": "Mời thêm liên hệ"
         }
       ],

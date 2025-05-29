@@ -3,7 +3,7 @@
   "content": "File name",
   "content_en_sha1_hash": "09979a78c9954035af250cb7f4619ed9d606f0ef",
   "created_at": "2025-05-19T21:30:57.128Z",
-  "updated_at": "2025-05-22T11:56:37.810Z",
+  "updated_at": "2025-05-26T07:57:32.848Z",
   "comment": {
     "text": "File name is displayed as a header in a footer input field within a select folder dialog, prompting users to enter or select a file name. This translation key is used in a save button's tooltip and modal footer.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\SelectFolderDialog.tsx",
+      "file_path": "/packages/doceditor/src/components/SelectFolderDialog.tsx",
       "line_number": 90,
       "context": "withCancelButton\n disabledItems={[]}\n onSubmit={onSubmit}\n submitButtonLabel={t(\"Common:SaveHereButton\")}\n submitButtonId=\"select-file-modal-submit\"\n footerInputHeader={t(\"Editor:FileName\")}\n currentFooterInputValue={titleSelectorFolder}\n footerCheckboxLabel={t(\"Editor:OpenSavedDocument\")}\n isPanelVisible={isVisible}\n isRoomsOnly={false}\n isThirdParty={false}",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"ֆայլի անուն\" is a literal translation of 'file's name' instead of simply 'filename'. While understandable, it's less idiomatic for a label.",
+          "suggestion": "Consider \"ֆայլի վերնանվաճանապարհ\" or \"ֆայլի անվանում\" for a more natural translation of 'filename'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Lao word 'ຊື່' (pronounced 'seua') is more accurately translated as 'name' rather than 'file'.  While it's commonly used in this context, a more precise translation would reflect that it's the 'name of the file'.",
+          "suggestion": "ຊື່ເອກະສານ (Seua Ekan)"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -171,7 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Име датотеке\" is a literal translation of \"File name\" but sounds unnatural in Serbian. A more natural translation would be \"Назив датотеке\" or \"Име фајла\".",
+          "suggestion": "Назив датотеке"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -201,7 +219,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While '文件名称' is understandable, '文件名' is a more concise and common translation for 'File name' in Chinese. '名称' adds unnecessary length and formality.",
+          "suggestion": "文件名"
+        }
+      ],
       "approved_at": null
     }
   }

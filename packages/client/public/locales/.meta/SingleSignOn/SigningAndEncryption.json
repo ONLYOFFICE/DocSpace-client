@@ -3,7 +3,7 @@
   "content": "Signing and encryption",
   "content_en_sha1_hash": "5533490cb1522e35d43bd8fdc3c4facfa9076a63",
   "created_at": "2025-05-19T21:30:50.142Z",
-  "updated_at": "2025-05-21T01:58:47.928Z",
+  "updated_at": "2025-05-24T03:11:54.737Z",
   "comment": {
     "text": "This translation key is used for the label \"Signing and Encryption\" in a modal combo box for single sign-on settings, providing a human-readable name for an option related to signing and encryption processes.",
     "is_auto": true,
@@ -155,9 +155,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "While \"අත්සන් තැබීම හා සංකේතනය\" is a literal translation, it might be too technical for a general user. \"Signing\" could be interpreted more simply as \"සත්‍යාපන කිරීම\" (satyāpna karaṁ) or \"අනුමැතිය ලබා ගැනීම\" (anumatiyā laba geṇum) depending on the context. \"Encryption\" could be \"රහස්‍යකරණය\" (rahasyakaraṇaya).",
-          "suggestion": "Consider alternatives like \"සත්‍යාපන කිරීම හා රහස්‍යකරණය\" or \"අනුමැතිය ලබා ගැනීම හා රහස්‍යකරණය\" based on intended meaning."
+          "type": "spelling",
+          "description": "The Sinhala word 'සංකේතනය' (sankētanaya) is generally translated as 'encryption' but can also mean 'coding' or 'symbolism'. While technically not incorrect, it's not the most precise translation for 'encryption' in a technical context. A more accurate term might be 'කේතූගත කිරීම' (kētūgata kirīma).",
+          "suggestion": "Consider using 'කේතූගත කිරීම' (kētūgata kirīma) for a more precise translation of 'encryption'."
         }
       ],
       "approved_at": null
@@ -180,7 +180,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Пријављивање и шифровање\" does not accurately convey the meaning of \"Signing and encryption.\"  \"Пријављивање\" means \"Login\" or \"Sign-in,\" while \"Signing\" refers to a cryptographic signature process.  \"Шифровање\" is a correct translation of \"encryption,\" but the initial term is inaccurate.",
+          "description": "The Serbian translation \"Пријављивање и шифровање\" translates to 'Login and encryption,' which is not the same as 'Signing and encryption.' 'Signing' implies digital signature, which isn't captured by 'Login'.",
           "suggestion": "Потписивање и шифровање"
         }
       ],
@@ -192,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Prijavljivanje i šifrovanje\" doesn't accurately convey the meaning of \"Signing and encryption\". 'Prijavljivanje' translates to 'Login/Sign-in,' which is different from 'Signing'. 'Šifrovanje' is a correct translation of 'encryption'.",
+          "description": "The term 'Signing' is better translated as 'Potpisivanje' rather than 'Prijavljivanje'. 'Prijavljivanje' refers to the act of logging in.",
           "suggestion": "Potpisivanje i šifrovanje"
         }
       ],

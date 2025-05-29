@@ -3,7 +3,7 @@
   "content": "Disable applications",
   "content_en_sha1_hash": "aed213929cbfdd694528e2d66ce136d449480a31",
   "created_at": "2025-05-19T21:30:53.868Z",
-  "updated_at": "2025-05-21T07:16:58.358Z",
+  "updated_at": "2025-05-24T07:31:11.576Z",
   "comment": {
     "text": "This translation key is used to display a title that indicates disabling applications. It appears in a modal dialog window and is displayed when the user selects an option to disable applications.",
     "is_auto": true,
@@ -45,13 +45,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Zakázat aplikace\" is understandable, a more accurate and natural translation of \"Disable applications\" would be \"Vypnout aplikace\" or \"Deaktivovat aplikace\". \"Zakázat\" implies a more permanent or legal restriction, which isn't necessarily the intention of 'disable'.",
-          "suggestion": "Vypnout aplikace"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -78,7 +72,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Ota sovellukset pois käytöstä' is understandable, a more natural and precise translation of 'Disable applications' would be 'Poista sovellukset käytöstä'. 'Ota...pois käytöstä' implies taking something *out* of use, whereas 'Poista...käytöstä' is a more common phrasing for disabling something.",
+          "description": "While 'Ota sovellukset pois käytöstä' is understandable, a more natural and commonly used Finnish translation for 'Disable applications' would be 'Poista sovellukset käytöstä'. 'Ota...pois käytöstä' implies taking something *out* of use, while 'Poista...käytöstä' is more direct and common for disabling.",
           "suggestion": "Poista sovellukset käytöstä"
         }
       ],
@@ -192,7 +186,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Onemogući aplikacije' is not the most natural or accurate translation of 'Disable applications'. 'Onemogući' implies making something impossible, whereas 'Disable' suggests removing functionality. A more appropriate translation would convey the meaning of deactivating or turning off.",
+          "description": "The translation 'Onemogući aplikacije' while technically meaning 'disable applications', isn't the most natural or commonly used phrasing in Serbian. A more common and fluent translation would be 'Isključite aplikacije'. 'Onemogući' can sound slightly formal or awkward in this context.",
           "suggestion": "Isključite aplikacije"
         }
       ],
@@ -222,7 +216,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"禁用多个应用\" (Disable multiple applications) implies a plurality of applications, while the English phrase \"Disable applications\" is more general and could refer to disabling a single application. The translation is too specific.",
+          "description": "The translation \"禁用多个应用\" (Disable multiple applications) is more specific than the English \"Disable applications.\" It implies multiple applications are being disabled, while the English term is more general.",
           "suggestion": "禁用应用"
         }
       ],

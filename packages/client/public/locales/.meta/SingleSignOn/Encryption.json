@@ -3,7 +3,7 @@
   "content": "Encryption",
   "content_en_sha1_hash": "0af149c2ed169b89f192451f70ee9a3ae70eab02",
   "created_at": "2025-05-19T21:30:50.079Z",
-  "updated_at": "2025-05-21T02:13:10.132Z",
+  "updated_at": "2025-05-24T03:26:19.893Z",
   "comment": {
     "text": "This translation key is used for the label \"Encryption\" in a dropdown menu within a modal component, likely related to single sign-on settings. It appears as one of several options for configuring signing and encryption actions.",
     "is_auto": true,

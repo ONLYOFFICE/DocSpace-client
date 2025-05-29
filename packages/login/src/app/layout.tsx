@@ -123,8 +123,6 @@ export default async function RootLayout({
     settings.culture = cookieLng.value;
   }
 
-  console.log("Render root layout");
-
   const locale =
     queryParams?.culture ||
     (settings && typeof settings !== "string" ? settings.culture : "en");

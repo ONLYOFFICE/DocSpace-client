@@ -3,7 +3,7 @@
   "content": "Accept the terms of the ",
   "content_en_sha1_hash": "6341a4cf83f663ba51323a308123aa63ec3bb91b",
   "created_at": "2025-05-19T21:30:57.218Z",
-  "updated_at": "2025-05-20T09:47:50.043Z",
+  "updated_at": "2025-05-24T14:54:02.386Z",
   "comment": {
     "text": "The translation key \"License\" is used to display the copyright notice and licensing terms on the login wizard page. It appears in a footer or disclaimer section, indicating that the software is licensed under the GNU Affero General Public License (AGPL) version 3.",
     "is_auto": true,
@@ -27,19 +27,37 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation \"قبول شروط اتفاقية الترخيص\" translates to \"Accepting the terms of the license agreement\". While not entirely wrong, it's more formal than the English \"Accept the terms of the \". A more accurate and natural translation closer to the original would be \"موافقة على شروط\" (Muwaafaqa 'ala shuroot) or \"الموافقة على شروط\" (Al-muwaafaqa 'ala shuroot).",
+          "suggestion": "موافقة على شروط"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Şərtlərini qəbul edin\" doesn't fully capture the meaning of \"Accept the terms of the\". It literally translates to \"Accept the terms\". The context implies accepting the terms *of something*, which is missing here.",
+          "suggestion": "Şərtlərini qəbul edin"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Приеми условията на \" is a literal translation of \"Accept the terms of the \" but it lacks the necessary trailing punctuation (a quotation mark) which is important for accurately representing the original English content, especially given the key name \"Wizard:License\".  It's a command, which doesn't quite fit the context of a license agreement.",
+          "suggestion": "Приеми условията на \" "
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -51,13 +69,25 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation \"Akzeptieren\" only translates to \"Accept\" and is incomplete. It's missing the rest of the phrase \"the terms of the\".",
+          "suggestion": "Akzeptieren Sie die Bedingungen der"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Αποδοχή των όρων\" is a more general translation of \"Acceptance of the terms.\" While not entirely wrong, it doesn't directly convey the action of 'Accepting'. A more accurate translation that captures the action would be something like \"Αποδοχή των\" (Apodehi ton) or \"Συμφωνία με τους\" (Symfonia me tous).",
+          "suggestion": "Συμφωνία με τους"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,7 +99,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Hyväksy ehdot\" is a literal translation of \"Accept the terms\". A more natural Finnish phrasing for a license agreement context would be something like \"Olenna hyväksyn ehdot\" (I accept the terms) or simply \"Hyväksyn ehdot\" (Accept terms).",
+          "suggestion": "Hyväksyn ehdot"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +117,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Ընդունեք պայմանները՝ \" is a command form (imperative) while the English content \"Accept the terms of the \" implies a request or an option. A more appropriate translation would be something like \"Ընդունել պայմանները՝ \" (Accepting the terms of...) or \"Համաձայնել պայմաններին՝ \" (Agreeing to the terms).",
+          "suggestion": "Ընդունել պայմանները՝"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,25 +135,49 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"の条件を受け入れます \" is incomplete and lacks the subject and verb that correctly translates \"Accept the terms of the \". It translates to \"... of the terms, I accept\".  The phrase \"Accept the terms of the\" requires more context to be accurately translated. It lacks a direct equivalent of 'Accept'.",
+          "suggestion": "Consider a translation like \"～の利用規約に同意します\" (~ no riyou kiyaku ni doui shimasu) which translates to 'I agree to the terms of...' or \"～の条項に同意します\" (~ no jōkō ni doui shimasu) which translates to 'I agree to the clauses of...'"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '다음 약관에 동의합니다: ' literally translates to 'Agree to the following terms:'. While acceptable, it is more natural to use a more passive phrasing when referring to agreeing to terms, especially when prompted. A more accurate and natural translation would be something like '다음 약관에 동의합니다.' (Agree to the following terms.)",
+          "suggestion": "다음 약관에 동의합니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ຍອມຮັບເງື່ອນໄຂຂອງ\" translates to 'Accept the conditions of'. While close, the English content refers specifically to 'terms' (as in terms of service or licensing agreement). 'Conditions' is a broader term.",
+          "suggestion": "Consider a more precise translation that captures the nuance of 'terms,' perhaps something like 'ຕົກລົງຮັບຊໍາ່ເອົາຂໍ້ກໍານົດຂອງ'"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Piekrītiet noteikumiem' is a general 'Agree to the terms'. The English phrase \"Accept the terms of the \" implies accepting the terms *of a specific document*. A more accurate translation would reflect this specificity.",
+          "suggestion": "Piekrītu noteikumiem"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -123,13 +189,25 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation \"Zaakceptuj warunki \" lacks the rest of the English phrase \"the \"Wizard:License\" terms\". It's an incomplete translation.",
+          "suggestion": "Zaakceptuj warunki \"Wizard:License\""
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Aceitar os termos dos' is not a complete and accurate translation of \"Accept the terms of the \". It is missing the word 'license'. A more accurate translation would include the noun being accepted.",
+          "suggestion": "Aceitar os termos da licença"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -147,13 +225,30 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Принять условия \" is a literal translation of \"Accept the terms of \" but lacks the rest of the phrase. It's incomplete.",
+          "suggestion": "Принять условия лицензионного соглашения"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"මෙහි අඩංගු නියම පිළිගන්න:\" while understandable, isn't the most natural or accurate translation of \"Accept the terms of the \". A more direct and common translation would be something like \"නීතීන්ට අනුගමනය කරන්න\" or \"නීති වලට පිළිගන්න\". The current translation literally means \"Accept the rules contained herein:\".",
+          "suggestion": "නීතීන්ට අනුගමනය කරන්න"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation includes a colon (:) at the end. This might not be appropriate depending on the UI context where it's used and it's better to remove it.",
+          "suggestion": "නීතීන්ට අනුගමනය කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -165,31 +260,61 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sprejmite pogoje ' is technically correct, but lacks the rest of the original phrase 'Accept the terms of the '. It's incomplete.  A more complete translation would include the rest of the phrase.",
+          "suggestion": "Sprejmite pogoje \" "
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Прихватите услове\" does not accurately convey the meaning of \"Accept the terms of the \". \"Прихватите услове\" translates to something like \"Take the conditions\" which is not equivalent to accepting terms.  A more accurate translation would include the word 'уговор' (ugovor - contract/agreement).",
+          "suggestion": "Прихватите услове уговора"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Prihvatite uslove\" doesn't fully convey the meaning of \"Accept the terms of the\". It translates to \"Accept the conditions/terms\" but misses the implied reference to a license agreement.",
+          "suggestion": "Prihvatite uslove licenze"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation \"Şartlarını kabul edin \" translates to \"Accept their terms\" rather than \"Accept the terms of the\". The 'their' is incorrect. It should be a more general 'the'.",
+          "suggestion": "Şartlarını kabul ediyorum"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Прийняти умови \" is a literal translation but lacks context. It's incomplete and doesn't convey the full meaning of \"Accept the terms of the\". A more accurate translation would include the name of the license being accepted.",
+          "suggestion": "Прийняти умови ліцензії "
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -201,7 +326,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"接受条款:\" is a literal translation of \"Accept the terms of the \" but doesn't fully convey the implied continuation. It's grammatically correct, but feels incomplete in a user interface context. It's missing the 'Wizard:License' part.",
+          "suggestion": "接受《妙Wizard:License》条款"
+        }
+      ],
       "approved_at": null
     }
   }

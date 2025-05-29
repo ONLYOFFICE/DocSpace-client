@@ -3,7 +3,7 @@
   "content": "Link copied to clipboard",
   "content_en_sha1_hash": "cf544a801cb0075732ebc8f8196db5c590adc7e6",
   "created_at": "2025-05-19T21:30:46.130Z",
-  "updated_at": "2025-05-22T11:56:37.865Z",
+  "updated_at": "2025-05-26T07:57:32.928Z",
   "comment": {
     "text": "The translation key \"LinkCopiedToClipboard\" is used to display a message indicating that a link has been successfully copied to the clipboard. This text appears in UI elements where users can share links, such as buttons or dialogs, and helps inform the user of the action's outcome.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\components\\share\\Share.helpers.tsx",
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
       "line_number": 451,
       "context": "{t(\"Notifications:ManageNotifications\")}\n </Link>\n </>\n ) : null}\n </span>,\n t(\"Common:LinkCopiedToClipboard\"),\n );\n };\n \n export const getExpirationDate = (\n diffExpiredDate: number | null | undefined,",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"buferə\" can mean 'to the buffer', \"clipboard\" is more accurately translated as \"keçid xətti\". \"Buferə\" is less commonly used in this context.",
-          "suggestion": "Link keçid xəttinə kopyalandı"
+          "description": "While technically correct, 'buferə' is an older, less common term for clipboard. 'Keçid lövhəsinə kopyalandı' is a more natural and contemporary translation.",
+          "suggestion": "Keçid lövhəsinə kopyalandı"
         }
       ],
       "approved_at": null
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"системния буфер\" (system buffer) is not the most natural or commonly used phrasing for \"clipboard\" in Bulgarian in this context. Users would expect something more colloquial.",
-          "suggestion": "Линкът е копиран в клипборда"
+          "description": "While the translation is understandable, 'системния буфер' (system buffer) is a very technical term. A more natural and user-friendly translation for 'clipboard' would be 'на клипборда' or 'в клипборда'.",
+          "suggestion": "Линкът е копиран на клипборда"
         }
       ],
       "approved_at": null
@@ -66,8 +66,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Link in die Zwischenablage kopiert\" is a literal translation and sounds unnatural in German. A more idiomatic translation would be something like \"Link zur Zwischenablage kopiert\" or \"Link kopiert\"",
+          "description": "The translation 'Link in die Zwischenablage kopiert' is technically correct but sounds a bit awkward and formal for a user-facing message. 'Zwischenablage' is accurate for 'clipboard,' but the construction 'in die Zwischenablage kopiert' is less natural than alternatives.",
           "suggestion": "Link zur Zwischenablage kopiert"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Link in die Zwischenablage kopiert' is understandable, a more natural phrasing for a notification would be 'Link kopiert' or 'Link in die Zwischenablage'.",
+          "suggestion": "Link kopiert"
         }
       ],
       "approved_at": null
@@ -84,7 +89,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Spanish translation includes a trailing space after the punctuation.",
+          "description": "The Spanish translation includes a trailing space.",
           "suggestion": "Enlace copiado en el portapapeles"
         }
       ],
@@ -105,13 +110,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Հղումը պատճենվեց սեղմատախտակին' while technically correct, is a bit literal. A more natural Armenian phrasing would be preferable.",
-          "suggestion": "Հղումը արդեն կրկնօրինակվեց սեղմատախտակին։ or Տեղափոխվեց սեղմատախտակին։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -135,13 +134,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ຄລິບບອດ' (clipboard) is spelled correctly, but it's important to ensure consistency with other translations where 'clipboard' is used. It's a loanword and consistent spelling across the application is crucial.",
-          "suggestion": "No change needed, ensure consistency throughout the application."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -180,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'clipboard' is often understood as 'aglomează' in Romanian. Using 'aglomează' is more natural in this context.",
-          "suggestion": "Link-ul a fost copiat în aglomomează"
+          "description": "The word 'clipboard' is a direct loanword from English and may sound unnatural in Romanian. While understandable, a more natural Romanian equivalent would be 'aglifiere'.",
+          "suggestion": "Link-ul a fost copiat în aglifiere"
         }
       ],
       "approved_at": null
@@ -192,7 +185,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ссылка' is misspelled. It should be 'Ссылка'.",
+          "description": "The word 'ссылка' is misspelled. The correct spelling is 'Ссылка'.",
           "suggestion": "Ссылка"
         }
       ],
@@ -203,24 +196,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'සබැඳිය' (sabandiya) is correct for 'link'.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'පසුරු' (pasuru) meaning 'past' or 'previous' is used for clipboard. While understandable, a more accurate term would be 'පුවාටුව' (puwatuvata) or similar to directly mean 'clipboard'.",
-          "suggestion": "පුවාටුවට"
-        },
-        {
-          "type": "grammar",
-          "description": "While understandable, the sentence structure could be improved for better flow and naturalness. The literal translation feels a bit awkward.",
-          "suggestion": "සබැඳිය පුවාටුවට පිටපත් කරන ලදී"
-        },
-        {
           "type": "incorrect_translation",
-          "description": "The direct translation ' පිටපත් කරන ලදී' (pithapatha karana ladee) for 'copied' is accurate, but a more commonly used phrasing for this context in Sinhala might be more natural.  Consider alternatives that convey the same action more idiomatically.",
-          "suggestion": "පිටපත් විය"
+          "description": "The translation 'සබැඳිය පසුරු පුවරුවට පිටපත් කරන ලදී' while conveying the general meaning, is a bit literal and not the most natural way to express this in Sinhala. A more natural translation would emphasize the action of copying the link.",
+          "suggestion": "Possible alternatives: 'සබැඳිය ක්ලිප්බෝඩ් වෙත පිටපත් විය', 'සබැඳිය ක්ලිප්බෝඩ් වෙත යවා ඇත'."
+        },
+        {
+          "type": "formatting",
+          "description": "While not technically incorrect, using the English loanword 'පසුරු' (pasuru) for 'clipboard' may not be ideal for all audiences.  'ක්ලිප්බෝඩ්' is generally understood and preferred in technical contexts.",
+          "suggestion": "Replace 'පසුරු' with 'ක්ලිප්බෝඩ්'."
         }
       ],
       "approved_at": null
@@ -243,13 +226,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'цлипбоард' is a direct transliteration of 'clipboard' and not a natural Serbian equivalent. While understood, it's not the preferred term.",
-          "suggestion": "Линк је копиран у међускладност"
+          "description": "The term \"цлипбоард\" is a direct transliteration of \"clipboard\" and isn't commonly used or understood in Serbian. While technically correct, it sounds unnatural.",
+          "suggestion": "Линк је копиран у меморију"
         },
         {
           "type": "formatting",
-          "description": "While the sentence is grammatically correct, using 'је' is stylistically not preferred in modern Serbian. It sounds slightly archaic in this context.",
-          "suggestion": "Линк копиран у међускладност"
+          "description": "While not strictly incorrect, the phrasing could be more natural in Serbian. Using a more idiomatic construction improves readability.",
+          "suggestion": "Копиран је линк у меморију"
         }
       ],
       "approved_at": null
@@ -260,8 +243,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'clipboard' is a direct transliteration and might not be the most natural way to express the concept in Serbian. While understandable, 'osečak' would be a more appropriate translation for 'clipboard'.",
-          "suggestion": "Link je kopiran u ošekać"
+          "description": "The word 'clipboard' is an Anglicism. A more natural Serbian translation would use a term that reflects the concept of a temporary storage area for copied data.",
+          "suggestion": "Link je kopiran u isečak"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the inclusion of the English term 'clipboard' directly can feel awkward. Using a more integrated Serbian equivalent improves flow.",
+          "suggestion": "Link je kopiran u isečak"
         }
       ],
       "approved_at": null
@@ -275,19 +263,19 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'буфера' is often written as 'буферу' in this context, indicating the dative case and better flow. While 'буфера' isn't strictly incorrect, 'буферу' is more natural.",
+          "suggestion": "Посилання скопійовано до буферу обміну"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Đã sao chép liên kết vào bộ nhớ tạm\" is a bit literal and formal. A more natural and user-friendly translation would be preferred.",
-          "suggestion": "Đã chép liên kết vào clipboard"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

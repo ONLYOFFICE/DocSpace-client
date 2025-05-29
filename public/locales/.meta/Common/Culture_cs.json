@@ -3,7 +3,7 @@
   "content": "Český (Česká republika)",
   "content_en_sha1_hash": "1e684322685b13f58f4df111901bda4f4ac77f86",
   "created_at": "2025-05-19T21:30:43.968Z",
-  "updated_at": "2025-05-21T00:05:01.051Z",
+  "updated_at": "2025-05-24T01:18:36.702Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -188,13 +188,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Vietnamese translation is identical to the English content. This indicates that the translation was not performed.",
-          "suggestion": "Translate 'Český (Česká republika)' into Vietnamese. A possible translation is 'Cộng hòa Séc (Cộng hòa Séc).' "
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

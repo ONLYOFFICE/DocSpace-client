@@ -3,7 +3,7 @@
   "content": "Next synchronization",
   "content_en_sha1_hash": "7c46b7de7bce35436d1cddf897a7b461379290d9",
   "created_at": "2025-05-19T21:30:54.246Z",
-  "updated_at": "2025-05-21T08:11:44.799Z",
+  "updated_at": "2025-05-24T08:25:27.900Z",
   "comment": {
     "text": "This translation key describes the text displayed next to a synchronization date in a PortalSettings page, indicating the next scheduled synchronization time. It is used in an auto-sync button and appears on-screen when LDAP integration is enabled or allowed.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The term 'սինխրոնիզացիան' appears to be a transliteration of 'synchronization' and is not a standard Armenian word. While understandable due to the loanword nature, a more established Armenian equivalent might be preferable for a technical context.",
+          "suggestion": "Consider using a more established Armenian term for 'synchronization' if available and appropriate.  Researching commonly used terms for 'synchronization' in Armenian technical documentation might be helpful."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -108,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ການເຊື່ອມໂອ້ານຕໍ່ໄປ\" literally translates to 'next connection' or 'next joining', which isn't quite the intended meaning of 'Next synchronization'. 'Synchronization' implies bringing two systems or data sets into alignment. A more accurate translation would convey that meaning.",
-          "suggestion": "Consider alternatives like \"ການຊິງຂໍ້ມູນຕໍ່ໄປ\" (next data synchronization) or \"ການອັບເດດຂໍ້ມູນຕໍ່ໄປ\" (next data update)."
+          "description": "While \"ການເຊື່ອມໂອ້ານຕໍ່ໄປ\" is a literal translation, \"Next synchronization\" implies a time-based event or automated process. A more accurate translation might convey the idea of a scheduled or upcoming synchronization.",
+          "suggestion": "Consider alternatives like \"ເວລາເຊື່ອມໂອ້ານຄັ້ງຕໍ່ໄປ\" (Time of next synchronization) or \"ການເຊື່ອມໂອ້ານຄັ້ງຕໍ່ໄປທີ່ກຳນົດໄວ້\" (Scheduled next synchronization) depending on the specific context."
         }
       ],
       "approved_at": null
@@ -159,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ඊළඟ සමకాలීකරණය' is a literal translation of 'Next synchronization', it sounds slightly unnatural in Sinhala. A more common and natural phrasing might be 'ඊළඟ සංකීර්ණකරණය' or 'ඊළඟ කාලීන යාවත්කාලීකරණය'.",
+          "suggestion": "Consider 'ඊළඟ සංකීර්ණකරණය' or 'ඊළඟ කාලීන යාවත්කාලීකරණය'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

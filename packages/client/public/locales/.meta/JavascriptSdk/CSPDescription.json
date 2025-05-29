@@ -3,7 +3,7 @@
   "content": "To start the embedding process, add the {{productName}} URL to the allow list.",
   "content_en_sha1_hash": "9008df430d1e4c8b9144d12ffc8a0beeaaf77ccf",
   "created_at": "2025-05-19T21:30:54.410Z",
-  "updated_at": "2025-05-21T09:22:32.559Z",
+  "updated_at": "2025-05-24T09:34:46.164Z",
   "comment": {
     "text": "This translation key is used to display a message instructing users to add the product URL to the allow list to start the embedding process. It appears in a dialog or settings page, specifically in a category header, and provides context for translators familiar with content security policies (CSP).",
     "is_auto": true,
@@ -30,13 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"لتضمين {{productName}} بشكل آمن كإطار iframe في موقع ويب، قم بإضافة عنوان URL الخاص به إلى قائمة السماح لديك\" is too literal and doesn't convey the original meaning of 'to start the embedding process'. A better translation would focus on initiating the embedding.",
-          "suggestion": "للبدء في عملية تضمين {{productName}}، أضف عنوان URL الخاص به إلى قائمة السماح لديك."
+          "description": "The translation \"لتضمين {{productName}} بشكل آمن كإطار iframe في موقع ويب، قم بإضافة عنوان URL الخاص به إلى قائمة السماح لديك\" is overly technical. While technically correct, it includes jargon ('iframe') that's unnecessary for the target audience and less user-friendly. The original English emphasizes *starting* the embedding process. The current translation focuses on safe embedding, which isn't the primary message.",
+          "suggestion": "لتفعيل عملية تضمين {{productName}}، أضف عنوان URL الخاص به إلى قائمة السماح."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'بشكل آمن كإطار iframe' (as a secure iframe) is overly technical and not necessary for the target audience.  The original English doesn't mention 'iframe'.",
-          "suggestion": "Remove 'كإطار iframe' as it's unnecessary and adds technical jargon."
+          "type": "formatting",
+          "description": "The translation includes the phrase 'قائمة السماح لديك' which is redundant. 'قائمة السماح' is sufficient.",
+          "suggestion": "لتفعيل عملية تضمين {{productName}}، أضف عنوان URL الخاص به إلى قائمة السماح."
         }
       ],
       "approved_at": null
@@ -47,13 +47,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"təhlükəsiz şəkildə yerləşdirmək\" (in an unsafe way) doesn't accurately convey the meaning of 'embedding'. Embedding implies integrating, not necessarily in an unsafe manner. The English sentence implies a secure integration.",
-          "suggestion": "Consider a more neutral term like \"birgələşdirilmiş\" (integrated) or \"daxil edilmiş\" (included). A possible correction would be: \"{{productName}}-i vebsaytda birgələşdirilmiş üçün onun URL-ni icazələr siyahısına əlavə edin.\""
+          "description": "The translation 'təhlükəsiz şəkildə yerləşdirmək' (in a risky way) doesn't accurately convey the meaning of 'to start the embedding process'. The English phrase implies initiation, not a risk assessment.",
+          "suggestion": "Consider a more neutral phrasing like 'təhlükəsizliyi təmin etmək üçün' (to ensure security) or 'daxil etmək üçün' (to embed)."
         },
         {
-          "type": "formatting",
-          "description": "The translation uses a colon (:) after 'icazələr siyahısına', which is not standard Azerbaijani punctuation.",
-          "suggestion": "Remove the colon: \"{{productName}}-i vebsaytda birgələşdirilmiş üçün onun URL-ni icazələr siyahısına əlavə edin.\""
+          "type": "incorrect_translation",
+          "description": "The phrase 'icazələr siyahısına əlavə edin' literally translates to 'add to the permissions list.' While understandable, it is not the most natural phrasing. A more common term for 'allow list' in this context might be preferable.",
+          "suggestion": "Consider using 'tətbiqət siyahısına əlavə edin' (add to the application list) or 'məqbul siyahıya əlavə edin' (add to the approved list)."
         }
       ],
       "approved_at": null
@@ -64,8 +64,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"За безопасно вграждане на {{productName}} като iframe в уебсайт, добавете URL адреса му към вашия списък с разрешени.\" implies embedding via iframe, which isn't explicitly stated in the English original. While iframe embedding is a common use case, the original text is broader and doesn't restrict it to iframes. A more accurate translation would avoid this assumption.",
-          "suggestion": "За да стартирате процеса на вграждане, добавете URL адреса на {{productName}} към вашия списък с разрешени."
+          "description": "The translation is overly literal and doesn't fully convey the intended meaning of \"allow list\". While technically correct, it sounds clunky and less user-friendly. The phrase \"като iframe в уебсайт\" is also a bit too technical for a general user.",
+          "suggestion": "За да включите {{productName}} в уебсайта си, добавете URL адреса му към списъка с разрешени сайтове."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of \"URL адреса му\" is grammatically correct but could be slightly improved for flow and readability.",
+          "suggestion": "URL адреса на {{productName}}"
         }
       ],
       "approved_at": null
@@ -76,13 +81,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation focuses on embedding as an iframe and mentions 'webové stránky' which isn't explicitly mentioned in the English original. The English implies a more general 'starting the embedding process'. While technically correct, it adds unnecessary specificity.",
+          "description": "The Czech translation, \"Chcete-li bezpečně vložit {{productName}} jako iframe do webové stránky, přidejte její adresu URL do seznamu povolených adres,\" implies embedding via iframe. The English source text does not specify an iframe. The translation adds implied functionality.",
           "suggestion": "Chcete-li zahájit proces vkládání, přidejte URL {{productName}} do seznamu povolených adres."
-        },
-        {
-          "type": "formatting",
-          "description": "The Czech translation uses a slightly more formal tone than the English original. Consider adjusting for a more casual feel if appropriate for the product’s target audience.",
-          "suggestion": "Není potřeba žádná konkrétní úprava, ale zvažte, zda by formálnější tón byl pro daný produkt vhodný."
         }
       ],
       "approved_at": null
@@ -93,13 +93,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'To start the embedding process' has been translated as 'Um {{productName}} sicher als iFrame in eine Website einzubetten'. While not entirely wrong, it's a more complex phrasing than the original. The original is a straightforward instruction to add the URL to the allow list.",
-          "suggestion": "Um den Einbettungsprozess zu starten, fügen Sie die URL zu Ihrer Zulassungsliste hinzu."
+          "description": "The translation's phrasing \"Um {{productName}} sicher als iFrame in eine Website einzubetten\" deviates from the original's instruction to 'start the embedding process.' While technically correct, it's more verbose and less direct. The emphasis shifts from initiation to security.",
+          "suggestion": "Um den Einbettungsprozess zu starten, fügen Sie die {{productName}} URL zu Ihrer Zulassungsliste hinzu."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The original text implies a general 'embedding process'. The translation specifically mentions 'iFrame', which might not always be the intended embedding method.  This makes it less general.",
-          "suggestion": "Um die Einbettung zu starten, fügen Sie die URL zu Ihrer Zulassungsliste hinzu."
+          "type": "formatting",
+          "description": "While not strictly incorrect, the phrase 'Ihre Zulassungsliste' feels slightly formal. A less formal alternative might improve readability, depending on the target audience.",
+          "suggestion": "Ihre Liste der erlaubten URLs"
         }
       ],
       "approved_at": null
@@ -110,7 +110,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Για να ενσωματώσετε με ασφάλεια το {{productName}} ως iframe σε έναν ιστότοπο, προσθέστε τη διεύθυνση URL του στη λίστα αδειών σας' is overly specific. The English text refers to 'embedding process' which is more general than embedding as an iframe.  It introduces concepts (iframe, website) not explicitly mentioned in the original.",
+          "description": "The translation focuses on embedding as an iframe, while the English content is more general about starting the embedding process. The Greek translation introduces a specific method (iframe) not explicitly mentioned in the original.",
           "suggestion": "Για να ξεκινήσετε τη διαδικασία ενσωμάτωσης, προσθέστε τη διεύθυνση URL του {{productName}} στη λίστα αδειών σας."
         }
       ],
@@ -122,13 +122,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Para incrustar {{productName}} de forma segura como iframe en un sitio web, añada su URL a la lista de direcciones permitidas.\" is too literal and adds unnecessary detail. While technically correct, it's overly technical for the intended audience. The original implies a simple addition to an allow list, while the translation suggests embedding as an iframe, which might not be what the user needs to know.",
-          "suggestion": "Para iniciar el proceso de integración, añada la URL de {{productName}} a la lista de direcciones permitidas."
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase \"de forma segura como iframe en un sitio web\" is a bit clunky in Spanish. It feels like an added detail that could be removed without losing meaning.",
-          "suggestion": "Removing the unnecessary details makes the sentence flow better."
+          "description": "The translation \"Para incrustar {{productName}} de forma segura como iframe en un sitio web, añada su URL a la lista de direcciones permitidas.\" implies embedding via iframe and explicitly mentions 'securely'. The original English text is more general and doesn't specify the embedding method or security.",
+          "suggestion": "Para iniciar el proceso de incrustación, añada la URL de {{productName}} a la lista de direcciones permitidas."
         }
       ],
       "approved_at": null
@@ -138,14 +133,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase 'Lisää {{productName}}:n URL' could be improved for clarity. While grammatically not incorrect, it's slightly awkward. A more natural phrasing would be 'Lisää {{productName}}-osoite'.",
-          "suggestion": "Lisää {{productName}}-osoite"
-        },
-        {
           "type": "formatting",
-          "description": "While the colon after '{{productName}}' is technically correct, it's preferable to use a hyphen in this context, as it's referring to a URL and not an attribute-value pair.",
-          "suggestion": "Lisää {{productName}}-osoite"
+          "description": "The colon after '{{productName}}' feels slightly unnatural in Finnish. While grammatically correct, it can be improved for flow.",
+          "suggestion": "Lisää {{productName}} URL:n luotettujen listalle aloittaaksesi upotusprosessin."
         }
       ],
       "approved_at": null
@@ -156,13 +146,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Pour intégrer {{productName}} en toute sécurité sous la forme de cadre intégré dans un site web' is a more elaborate explanation than the original English, which simply states 'To start the embedding process'. While technically correct, it adds unnecessary detail.",
+          "description": "The translation \"Pour intégrer {{productName}} en toute sécurité sous la forme de cadre intégré dans un site web, ajoutez son URL à votre liste d'autorisations.\" is overly verbose and doesn't accurately reflect the simplicity of the English original. The phrase \"sous la forme de cadre intégré\" is unnecessary and technically inaccurate (it doesn't necessarily involve an iframe).",
           "suggestion": "Pour démarrer le processus d'intégration, ajoutez l'URL de {{productName}} à votre liste d'autorisations."
         },
         {
-          "type": "formatting",
-          "description": "The French translation introduces 'sous la forme de cadre intégré dans un site web'.  The English doesn't mention frames specifically. Maintaining this level of detail might confuse users. While not strictly incorrect, the more direct translation aligns better with the original intention.",
-          "suggestion": "Remove 'sous la forme de cadre intégré dans un site web'."
+          "type": "incorrect_translation",
+          "description": "The addition of 'en toute sécurité' ('securely') doesn't align with the original meaning. The original focuses on enabling the embedding process, not necessarily emphasizing security.",
+          "suggestion": "Remove 'en toute sécurité'."
         }
       ],
       "approved_at": null
@@ -173,13 +163,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"անվտանգ ներկառուցելու համար\" (to safely embed) doesn't accurately convey the meaning of 'add the {{productName}} URL to the allow list.' It implies a security measure rather than simply adding to a list. A more accurate translation would focus on the action of adding the URL to the allow list.",
-          "suggestion": "Consider a translation like: \"{{productName}}-ը iframe վեբկայքում գործարկելու համար, ավելացրեք նրա URL-ը ձեր թույլտվությունների ցանկում:\" (To run {{productName}} in an iframe website, add its URL to your allow list.)"
+          "description": "The Armenian translation emphasizes embedding via iframe, which isn't explicitly stated in the English content. The English implies adding the URL to an allowlist for general access, not solely for iframe embedding. 'անվտանգ ներկառուցելու համար' (safely embed) is too specific.",
+          "suggestion": "Consider a more general translation that reflects adding the URL to an allowlist for access, such as: \"{{productName}}-ը թույլատրվելու ցուցակում գրանցեք, որպեսզի այն աշխատի:\". This implies functionality rather than specific embedding method."
         },
         {
           "type": "formatting",
-          "description": "The phrase \"ձեր թույլտվությունների ցանկում:\" ends with a colon. It's generally better to end a sentence with a period.",
-          "suggestion": "Change the colon to a period: \"ձեր թույլտվությունների ցանկում\"."
+          "description": "The colon (:) at the end of the Armenian sentence feels abrupt. It might be more natural to soften the ending.",
+          "suggestion": "Replace the colon with a period or a more nuanced phrasing to avoid a harsh ending. For example: '... ձեր թույլտվությունների ցանկում։' or '... ձեր թույլտվությունների ցանկում' ."
         }
       ],
       "approved_at": null
@@ -190,13 +180,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Per incorporare {{productName}} come iframe in un sito web in modo sicuro\" introduces the concept of an iframe, which isn't explicitly mentioned in the English source. The English text simply refers to adding the URL to an allow list for embedding, not necessarily through an iframe.",
-          "suggestion": "Per avviare il processo di incorporamento, aggiungi l'URL di {{productName}} all'elenco consentiti."
+          "description": "The Italian translation implies embedding via iframe, which might not be the intended method. The original English text simply refers to adding the URL to an allow list, which is a more general concept.",
+          "suggestion": "Consider a more general translation that doesn't specify iframe, such as: 'Per consentire l'accesso a {{productName}}, aggiungi il suo URL all'elenco consentiti.'"
         },
         {
-          "type": "formatting",
-          "description": "The translation adds the phrase \"in modo sicuro\" which isn't present in the original English. While not inherently incorrect, it deviates from the original and potentially adds unnecessary context.",
-          "suggestion": "Per avviare il processo di incorporamento, aggiungi l'URL di {{productName}} all'elenco consentiti."
+          "type": "spelling",
+          "description": "The word 'incorporare' is technically correct, but can sound overly formal or technical in this context.",
+          "suggestion": "Consider using 'aggiungere' or 'includere' as a more natural alternative to 'incorporare'."
         }
       ],
       "approved_at": null
@@ -207,13 +197,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'To start the embedding process' is not fully captured by the Japanese translation 'ウェブサイトに埋め込むには'. While '埋め込むには' translates to 'to embed', it lacks the nuance of 'to start the embedding process'.",
-          "suggestion": "ウェブサイトに{{productName}}を安全に埋め込むための初期設定として、そのURLを許可リストに追加してください。"
+          "description": "The English phrase 'To start the embedding process' is not accurately conveyed by the Japanese translation 'iframeとして安全にウェブサイトに埋め込むには'.  The English implies an initial step, while the Japanese directly describes a method of embedding. A more accurate translation for 'To start the embedding process' might be something like '埋め込みを開始するには' or '埋め込みの手順を開始するには'.",
+          "suggestion": "埋め込みを開始するには、{{productName}}のURLを許可リストに追加してください。"
         },
         {
-          "type": "formatting",
-          "description": "While functionally correct, the phrase 'そのURLを許可リストに追加してください' is slightly less natural in Japanese. It could be improved for smoother reading.",
-          "suggestion": "そのURLを許可リストに追加してください。"
+          "type": "incorrect_translation",
+          "description": "The English phrase 'add the {{productName}} URL to the allow list' is not as concise in Japanese. While technically correct, it's a bit verbose.  The current translation '{{productName}}のURLを許可リストに追加してください' is acceptable, but could be improved for a smoother read.",
+          "suggestion": "{{productName}}のURLを許可リストに登録してください。"
         }
       ],
       "approved_at": null
@@ -224,8 +214,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '웹사이트에 {{productName}}를 iframe으로 안전하게 임베드하려면 해당 URL을 허용 목록에 추가하세요' implies embedding via iframe, whereas the English 'To start the embedding process, add the {{productName}} URL to the allow list' is more general and doesn't specify iframe. It simply refers to embedding the URL.",
-          "suggestion": "웹사이트에 {{productName}} URL을 임베드하려면 해당 URL을 허용 목록에 추가하세요."
+          "description": "The translation implies embedding the URL within an iframe, which isn't necessarily what the original text means. The original text simply refers to adding the URL to an allow list for embedding purposes.  The Korean translation is overly specific.",
+          "suggestion": "웹사이트에 {{productName}}를 임베드하려면 해당 URL을 허용 목록에 추가하세요."
         }
       ],
       "approved_at": null
@@ -242,12 +232,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Lai tīmekļa vietnē {{productName}} droši iegultu kā iframe\" is not a direct or clear translation of \"To start the embedding process...\".  The use of 'iframe' is specific and not necessarily implied in the English.",
-          "suggestion": "Lai sāktu iegūšanas procesu, pievienojiet {{productName}} URL savam atļauju sarakstam."
+          "description": "The phrase \"Lai tīmekļa vietnē {{productName}} droši iegultu kā iframe\" is not the most natural way to express \"To start the embedding process...\" in Latvian. While technically correct, it’s overly literal and complex. A simpler phrasing would be better for clarity.",
+          "suggestion": "Lai sāktu ieguldēšanas procesu, pievienojiet {{productName}} URL savam atļauju sarakstam."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'vietrādi' is awkward and doesn't accurately convey the meaning of 'URL' in this context. It seems like an attempt to convey a location, but is inaccurate.",
+          "description": "The phrase \"vietrādi URL\" is not a standard term and is likely a mistranslation of 'URL'.",
           "suggestion": "URL"
         }
       ],
@@ -259,13 +249,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation focuses on embedding the product as an iframe for security. The original English text simply states to add the URL to an allow list to 'start the embedding process', which is broader. The Dutch translation implies a specific security concern and framing.",
-          "suggestion": "Om het inbeddingsproces te starten, voegt u de {{productName}} URL toe aan uw toestaan-lijst."
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'voegt u de URL toe' is slightly formal. While grammatically correct, it could be more conversational.",
-          "suggestion": "voeg de URL toe"
+          "description": "The translation 'Om {{productName}} veilig in te sluiten als een iframe in een website, voegt u de URL toe aan uw toestaan-lijst' is not a direct or accurate translation of 'To start the embedding process, add the {{productName}} URL to the allow list.' The Dutch translation implies embedding as an iframe which is not explicitly stated in the English content. A more literal translation would be better.  The word 'veilig' (safely) is also not present in the English original.",
+          "suggestion": "Om de inbeddingsprocedure te starten, voegt u de {{productName}} URL toe aan uw toestaanlijst."
         }
       ],
       "approved_at": null
@@ -276,8 +261,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Aby bezpiecznie osadzić {{productName}} jako element iframe na swojej stronie internetowej, dodaj jego adres URL do swojej listy dozwolonych\" is overly verbose and adds unnecessary details (specifically mentioning 'iframe'). The English text focuses on simply adding the URL to the allow list to start the embedding process. The Polish translation introduces a technical detail not present in the original.",
-          "suggestion": "Aby rozpocząć proces osadzania, dodaj adres URL {{productName}} do listy dozwolonych."
+          "description": "The translation adds \"Aby bezpiecznie osadzić {{productName}} jako element iframe na swojej stronie internetowej,\" which isn't directly present in the English source. While embedding via iframe might be implied, it's an addition that changes the meaning slightly. The core message of adding the URL to the allow list isn't emphasized as strongly.",
+          "suggestion": "Aby rozpocząć proces osadzania, dodaj adres URL {{productName}} do swojej listy dozwolonych."
+        },
+        {
+          "type": "formatting",
+          "description": "The Polish translation uses a slightly more formal tone than the English. While not strictly incorrect, it could be adjusted to match the original's brevity.",
+          "suggestion": "Consider a more conversational tone, though this is a minor point."
         }
       ],
       "approved_at": null
@@ -288,13 +278,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Para incorporar com segurança o {{productName}} como um iframe num Website, adicione o seu URL à sua lista de permissões.\" implies embedding within an iframe, which might not be the intended meaning of 'add the {{productName}} URL to the allow list'. A more direct translation of 'to start the embedding process' is needed. The English phrasing is broader and doesn't necessarily mean iframe embedding.",
+          "description": "The phrase \"incorporar com segurança o {{productName}} como um iframe num Website\" is a more technical explanation than the original English. The original simply states to add the URL to an allow list.  A better translation would convey the essence of adding the URL to a list for access, without explicitly mentioning iframe or security.",
           "suggestion": "Para iniciar o processo de incorporação, adicione o URL do {{productName}} à sua lista de permissões."
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'como um iframe num Website' is slightly awkward. While technically correct, it could be more naturally expressed.",
-          "suggestion": "The suggested correction in the previous point addresses this."
         }
       ],
       "approved_at": null
@@ -305,8 +290,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Para incorporar com segurança o {{productName}} como um iframe em um site, adicione seu URL à sua lista de permissões' is too specific. The English phrase 'To start the embedding process' is more general and doesn't inherently imply embedding via iframe or security concerns. It just indicates the first step to begin embedding.",
+          "description": "The translation \"Para incorporar com segurança o {{productName}} como um iframe em um site, adicione seu URL à sua lista de permissões\" implies embedding via iframe. The original English text refers to adding the URL to an allow list to *start* the embedding process, which is broader than just iframe embedding. The translation is too specific.",
           "suggestion": "Para iniciar o processo de incorporação, adicione o URL do {{productName}} à sua lista de permissões."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'ao seu URL' is a bit awkward. It could be improved for better flow.",
+          "suggestion": "ao URL do {{productName}}"
         }
       ],
       "approved_at": null
@@ -317,13 +307,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Pentru a încorpora spațiul {{productName}} bazat pe iFrame într-o pagina web\" is not a direct and natural translation of \"To start the embedding process, add the {{productName}} URL to the allow list.\" While technically correct, it's overly literal and includes unnecessary details (iFrame, webpage).  A more natural translation would focus on the core meaning of starting the embedding process.",
-          "suggestion": "Pentru a începe procesul de încorporare, adăugați adresa URL a {{productName}} la lista de permisiuni."
+          "description": "The translation 'Pentru a încorpora spațiul {{productName}} bazat pe iFrame într-o pagina web' is not a direct or accurate translation of 'To start the embedding process...'.  It introduces the concept of 'iFrame' and 'pagina web' without it being directly implied in the English content. A more accurate translation should focus on the embedding action.",
+          "suggestion": "Pentru a începe procesul de integrare, adăugați adresa URL a {{productName}} la lista de permisiuni."
         },
         {
-          "type": "formatting",
-          "description": "The translated text includes \"într-o pagina web\" which should be \"într-o pagină web\".",
-          "suggestion": "Într-o pagină web"
+          "type": "spelling",
+          "description": "The word 'într-o' can be improved for better flow. While grammatically correct, it could be more natural.",
+          "suggestion": "Pentru a începe procesul de integrare, adăugați adresa URL a {{productName}} la lista de permisiuni."
         }
       ],
       "approved_at": null
@@ -334,8 +324,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Чтобы безопасно встроить {{productName}} в качестве iframe в веб-сайт, добавьте его URL-адрес в список разрешенных\" implies embedding via iframe, which might not be the intended method. The English version simply mentions 'embedding'.",
-          "suggestion": "Чтобы начать процесс встраивания {{productName}}, добавьте его URL-адрес в список разрешенных."
+          "description": "The translation introduces the concept of embedding as an iframe, which isn't explicitly mentioned in the English content. The English implies adding the URL to a list to initiate the embedding process, not specifying how it's embedded.",
+          "suggestion": "Чтобы начать процесс интеграции {{productName}}, добавьте его URL-адрес в список разрешенных."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'в качестве iframe' is unnecessary and changes the meaning. It's better to keep the phrasing more general.",
+          "suggestion": "Remove 'в качестве iframe'."
         }
       ],
       "approved_at": null
@@ -346,13 +341,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'add the {{productName}} URL to the allow list' is not accurate. 'ඒ.ස.නි.' is an abbreviation for URL but its placement is awkward and unclear in Sinhala. A more natural translation would be to simply use 'ලිංක්' (link) or rephrase the sentence.",
-          "suggestion": "කාවැද්දීමේ ක්‍රියාවලිය ඇරඹීමට, ඉඩ දෙන ලැයිස්තුවට {{productName}} ලිංක් එක් කරන්න."
+          "description": "The translation of \"add the {{productName}} URL to the allow list\" is not entirely accurate. 'ඒ.ස.නි.' seems to be an abbreviation for 'URL' but is not commonly used in this context and may be confusing to Sinhala speakers.  A more natural translation would avoid the abbreviation.",
+          "suggestion": "කාවැද්දීමේ ක්‍රියාවලිය ඇරඹීමට, ඉඩ දෙන ලැයිස්තුවට {{productName}} වෙබ් අඩවිය එක් කරන්න."
         },
         {
           "type": "formatting",
-          "description": "The abbreviation 'ඒ.ස.නි.' placed immediately after '{{productName}}' is visually jarring and disrupts the flow of the sentence. It needs spacing.",
-          "suggestion": "කාවැද්දීමේ ක්‍රියාවලිය ඇරඹීමට, ඉඩ දෙන ලැයිස්තුවට {{productName}} ඒ.ස.නි. එක් කරන්න."
+          "description": "While technically not incorrect, using the Sinhala abbreviation for URL, 'ඒ.ස.නි.', might disrupt the flow and readability for some users. It's more standard to use the English term or a Sinhala alternative.",
+          "suggestion": "Consider using a more common term or phrasing for 'URL' in Sinhala."
         }
       ],
       "approved_at": null
@@ -363,13 +358,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Pokiaľ chcete bezpečne umiestniť {{productName}} na webovú stránku ako iframe, pridajte jeho URL do zoznamu povolených adries.' implies embedding as an iframe. The original English text refers to adding the URL to an allow list to *start* the embedding process, which is a more general step and not necessarily limited to iframes. The Slovak translation is too specific.",
-          "suggestion": "Pokiaľ chcete začať s procesom vkladania {{productName}}, pridajte jeho URL do zoznamu povolených adries."
+          "description": "The translation \"Pokiaľ chcete bezpečne umiestniť {{productName}} na webovú stránku ako iframe\" implies the content is to be embedded as an iframe. The original English text refers to adding the URL to an allow list for embedding, which is a more general process. While iframe embedding is a *possible* use case, the Slovak translation is too specific.",
+          "suggestion": "Pokiaľ chcete začať s procesom vloženia {{productName}}, pridajte jeho URL do zoznamu povolených adries."
         },
         {
-          "type": "grammatical",
-          "description": "While technically correct, the phrasing 'jeho URL' can be slightly improved for a more natural flow in Slovak.",
-          "suggestion": "jeho adresy"
+          "type": "formatting",
+          "description": "The Slovak translation uses \"zoznamu povolených adries\" which is a bit literal and could be more natural.  Consider a more idiomatic Slovak expression.",
+          "suggestion": "Pokiaľ chcete začať s procesom vloženia {{productName}}, pridajte jeho URL do zoznamu povolených."
         }
       ],
       "approved_at": null
@@ -380,13 +375,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Če želite varno vdelati {{productName}} kot iframe na spletno mesto, dodajte njegov URL na seznam dovoljenih' is a bit too literal and doesn't quite convey the intended meaning of 'to start the embedding process'. 'Varno vdelati kot iframe na spletno mesto' implies a specific method (embedding as an iframe) which may not be the only way to embed. A more general translation is needed.",
-          "suggestion": "Če želite začeti postopek vdelave {{productName}}, dodajte njegov URL na seznam dovoljenih."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses 'njegov URL' which is grammatically correct but sounds slightly formal. A more common phrasing might improve readability.",
-          "suggestion": "Če želite začeti postopek vdelave {{productName}}, dodajte URL na seznam dovoljenih."
+          "description": "The translation \"Če želite varno vdelati {{productName}} kot iframe na spletno mesto, dodajte njegov URL na seznam dovoljenih.\" is not a direct or natural translation of \"To start the embedding process, add the {{productName}} URL to the allow list.\" While technically correct, the phrase 'varno vdelati... kot iframe na spletno mesto' implies specifically embedding as an iframe which isn't necessarily stated in the English original. A more accurate translation focusing on the process of adding to the allow list would be better.",
+          "suggestion": "Če želite začeti postopek vdelave, dodajte URL {{productName}} na seznam dovoljenih."
         }
       ],
       "approved_at": null
@@ -409,13 +399,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is too verbose and doesn't accurately reflect the simplicity of the original English sentence. \"To start the embedding process\" is not accurately conveyed by \"'i bir web sitesine iframe olarak güvenli bir şekilde gömmek için\".",
-          "suggestion": "'i yerleştirmek için"
+          "description": "The translation 'to embed {{productName}} as an iframe on a website securely' is overly literal and doesn't quite capture the simplicity of the English sentence. The English sentence focuses on adding the URL to an allow list to *start* the embedding process, while the Turkish translation implies a complete embedding action. The nuance of 'to start' is lost.",
+          "suggestion": "'{{productName}}'i bir web sitesine gömmek için URL'yi izin verilenler listenize ekleyin."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"izin verilenler listenize ekleyin\" is too formal and doesn't align with the informal tone of the original.  A more user-friendly equivalent is needed.",
-          "suggestion": "izinler listenize ekleyin"
+          "type": "formatting",
+          "description": "While not strictly incorrect, the phrase 'URL bağlantısını' is somewhat redundant. 'URL' itself implies a connection or link.",
+          "suggestion": "'URL'yi izin verilenler listenize ekleyin."
         }
       ],
       "approved_at": null
@@ -426,13 +416,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"To start the embedding process\" is translated as \"Щоб безпечно впровадити {{productName}} на вебсайті як вбудований фрейм\". While not entirely incorrect, it's overly verbose and introduces the concept of a 'frame' which wasn't in the original. A more direct and simpler translation would be better.",
-          "suggestion": "Щоб розпочати процес вбудовування..."
+          "description": "The translation uses 'Щоб безпечно впровадити {{productName}} на вебсайті як вбудований фрейм'. A more accurate translation would be something along the lines of 'To embed {{productName}}, add its URL to the allow list'. The current translation is overly verbose and introduces technical terms that may not be necessary for the user.",
+          "suggestion": "Щоб вбудувати {{productName}}, додайте його URL-адресу до списку дозволених."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"allow list\" is translated as \"списку дозволених\". While technically correct, a more common and easier-to-understand phrasing might be preferable.",
-          "suggestion": "списку дозволів"
+          "type": "formatting",
+          "description": "The phrasing 'URL-адресу' is a bit clunky. While grammatically correct, it could be slightly more natural.",
+          "suggestion": "URL до списку дозволених"
         }
       ],
       "approved_at": null
@@ -443,8 +433,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Để nhúng {{productName}} một cách an toàn dưới dạng iframe trong một trang web, hãy thêm URL của nó vào danh sách cho phép của bạn\" doesn't directly convey the meaning of the English content \"To start the embedding process, add the {{productName}} URL to the allow list.\" The Vietnamese translation includes 'iframe' and 'an toàn' (safe) which aren't present in the English, and it's more detailed than the original.",
+          "description": "The translation 'Để nhúng {{productName}} một cách an toàn dưới dạng iframe trong một trang web' is too verbose and doesn't accurately reflect the simplicity of the English sentence.  'Một cách an toàn dưới dạng iframe trong một trang web' adds unnecessary detail.",
           "suggestion": "Để bắt đầu quá trình nhúng, hãy thêm URL của {{productName}} vào danh sách cho phép."
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, 'dưới dạng' isn't the most natural phrasing in this context. It's more formal than necessary.",
+          "suggestion": "Consider removing 'dưới dạng' entirely for a more conversational tone."
         }
       ],
       "approved_at": null

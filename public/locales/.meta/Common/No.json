@@ -3,7 +3,7 @@
   "content": "No",
   "content_en_sha1_hash": "816c52fd2bdd94a63cd0944823a6c0aa9384c103",
   "created_at": "2025-05-19T21:30:46.818Z",
-  "updated_at": "2025-05-22T11:56:37.313Z",
+  "updated_at": "2025-05-26T07:57:32.213Z",
   "comment": {
     "text": "This translation key is used to display the word \"No\" in various contexts, such as a confirm button in a cancel operation dialog and a button in a cancel upload dialog. It is used to provide an option for users to decline or cancel an action.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\CancelOperationDialog\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/CancelOperationDialog/index.tsx",
       "line_number": 110,
       "context": "/>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button label={t(\"Common:Yes\")} onClick={onConfirm} primary scale />\n <Button label={t(\"Common:No\")} onClick={onClose} scale />\n </ModalDialog.Footer>\n </ModalDialog>\n );\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\CancelUploadDialog\\index.js",
+      "file_path": "/packages/client/src/components/dialogs/CancelUploadDialog/index.js",
       "line_number": 71,
       "context": "primary\n onClick={onCancelProcess}\n isLoading={loading}\n />\n <Button\n label={t(\"Common:No\")}\n size=\"normal\"\n scale\n onClick={onClose}\n isDisabled={loading}\n />",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English word \"No\" is best translated as \"Yox\" in Azerbaijani, not \"Xeyr\". \"Xeyr\" typically means 'goodbye' or 'no, thank you'.",
-          "suggestion": "Change \"Xeyr\" to \"Yox\"."
+          "description": "'Xeyr' is a valid translation for 'No', often used as a polite refusal or to mean 'okay' in some contexts. However, it's more formal and less common than other options for a simple 'No'. Depending on the context, a more direct translation like 'Yox' might be more suitable.",
+          "suggestion": "Consider 'Yox' as an alternative translation for a more direct 'No'."
         }
       ],
       "approved_at": null

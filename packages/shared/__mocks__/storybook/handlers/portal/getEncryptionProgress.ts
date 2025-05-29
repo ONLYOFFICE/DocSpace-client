@@ -52,7 +52,7 @@ export const createGetEncryptionProgressHandler = ({
     if (error) {
       // Return an error response that matches the expected format
       return HttpResponse.json(
-        { 
+        {
           error: { message: error },
         },
         { status: 500 },
@@ -71,5 +71,3 @@ export const createGetEncryptionHistoryHandler = (
     // Return the history data in the expected format with a 'response' property
     return HttpResponse.json({ response: historyData });
   });
-
-

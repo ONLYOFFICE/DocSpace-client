@@ -35,6 +35,7 @@ import styles from "../styles/StorageSummary.module.scss";
 import PlanInfo from "./PlanInfo";
 import { useServicesActions } from "../hooks/useServicesActions";
 import PlanUpgradePreview from "./PlanUpgradePreview";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 type StorageSummaryProps = {
   amount: number;
@@ -100,10 +101,12 @@ const StorageSummary: React.FC<StorageSummaryProps> = (props) => {
     <div>
       {hasScheduledStorageChange ? (
         <div className={styles.warningBlock}>
-          {t("Warning", {
-            amount: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
-            storageUnit: t("Common:Gigabyte"),
-          })}
+          <Text>
+            {t("Warning", {
+              amount: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
+              storageUnit: t("Common:Gigabyte"),
+            })}
+          </Text>
         </div>
       ) : null}
 
@@ -131,9 +134,15 @@ const StorageSummary: React.FC<StorageSummaryProps> = (props) => {
         />
 
         {hasScheduledStorageChange ? (
-          <Link textDecoration="underline dashed" onClick={onCancelChange}>
+          <ColorTheme
+            textDecoration="underline dashed"
+            onClick={onCancelChange}
+            themeId={ThemeId.Link}
+            $isUnderline
+            fontWeight={600}
+          >
             {t("CancelChange")}
-          </Link>
+          </ColorTheme>
         ) : null}
       </div>
     </div>

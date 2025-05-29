@@ -44,6 +44,7 @@ import {
   TPaymentQuota,
 } from "@docspace/shared/api/portal/types";
 import PaymentStore from "./PaymentStore";
+import { TOTAL_SIZE } from "@docspace/shared/constants";
 
 class ServicesStore {
   userStore: UserStore | null = null;
@@ -80,7 +81,7 @@ class ServicesStore {
 
   get storageSizeIncrement() {
     return (
-      (this.servicesQuotasFeatures.get("total_size") as TNumericPaymentFeature)
+      (this.servicesQuotasFeatures.get(TOTAL_SIZE) as TNumericPaymentFeature)
         ?.value || 0
     );
   }
@@ -130,7 +131,8 @@ class ServicesStore {
 
       if (!quotas) throw new Error();
 
-      const { setPayerInfo, payerInfo } = this.currentTariffStatusStore;
+      const { setPayerInfo, payerInfo, hasStorageSubscription } =
+        this.currentTariffStatusStore;
 
       if (isPayerExist && !payerInfo) await setPayerInfo(isPayerExist);
 
@@ -145,6 +147,10 @@ class ServicesStore {
       }
 
       quotas[0].features.forEach((feature) => {
+        if (feature.id === TOTAL_SIZE) {
+          feature.enabled = hasStorageSubscription;
+        }
+
         this.servicesQuotasFeatures.set(feature.id, feature);
       });
 

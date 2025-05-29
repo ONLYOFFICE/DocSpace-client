@@ -86,6 +86,7 @@
 
 .planInfoBody {
   flex: 1;
+  height: 35px;
 }
 
 .planInfoDetails {
@@ -114,4 +115,11 @@
 }
 .planInfoContainer {
   margin-bottom: 12px;
+}
+.monthPayment {
+  color: var(--payment-dialog-text);
+}
+
+.cancelDialog {
+  margin-bottom: 16px;
 }

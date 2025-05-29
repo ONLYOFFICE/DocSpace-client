@@ -57,7 +57,7 @@ type StorageDialogProps = {
   hasScheduledStorageChange?: boolean;
 };
 
-const StorageDialog: React.FC<StorageDialogProps> = ({
+const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   visible,
   onClose,
   hasStorageSubscription,
@@ -253,4 +253,4 @@ export default inject(
       storagePriceIncrement,
     };
   },
-)(observer(StorageDialog));
+)(observer(StoragePlanUpgrade));

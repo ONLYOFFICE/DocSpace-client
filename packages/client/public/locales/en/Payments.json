@@ -76,6 +76,7 @@
   "Pay": "Pay",
   "Payer": "Payer",
   "PayerDescription": "This user has access to payment details and is the only user who can adjust the quota and make payments. The {{productName}} owner, as well as the paying manager themselves, can reassign the paying manager role using the Stripe customer portal.",
+  "PaymentDue": "Payment due: {{payment}}",
   "PaymentMethod": "Payment method",
   "PaymentNonRefundable": "Payments for plan upgrades are <1>non-refundable</1>.",
   "PerStorage": "{{currency}} per {{amount}} / month",
@@ -95,6 +96,7 @@
   "StartupTitle": "You are using free {{planName}} plan",
   "StorageUpgradeMessage": "{{fromSize}} → {{toSize}} in total",
   "StorageUponRequest": "Additional storage exceeding {{amount}} is available upon request.",
+  "StorageUsed": "<1>Storage used:</1> {{amount}}",
   "StripeCustomerPortal": "go to the Stripe customer portal",
   "SubscriptionAutoCancellation": "Subscription will be automatically canceled on {{finalDate}}",
   "SubscriptionAutoRenewed": "Subscription will be automatically renewed on {{finalDate}} with updated pricing and specifications.",
@@ -119,12 +121,13 @@
   "Wallet": "Wallet",
   "WalletDescription": "The {{productName}} Wallet lets you easily purchase storage space and AI tools. Add funds to your wallet and select the services you need in the Services section to get started.",
   "WalletRefilled": "Wallet refilled",
+  "WantToCancelStoragePlan": "Are you sure you want to cancel your additional storage subscription?",
   "Warning": "You will keep your full {{amount}} access until the end of your paid billing period. If your storage exceeds the new limit at the start of the next period, you’ll be charged for the actual usage, rounded to the nearest {{storageUnit}}.",
   "WhenBalanceDropsTo": "When the balance drops to {{min}}, the wallet will be automatically topped up to {{max}}.",
   "WhenBalanceGoesBellow": "When balance goes bellow",
   "WouldYouLikeToEnableAutoTopUps": "Would you like to enable automatic top-ups so your balance never runs out?",
   "YouHaveNotAddedAnyPayment": "You have not added any payment",
   "YourCurrentPayment": "Your current payment",
-  "YourPrice": "Your price",
-  "PaymentDue": "Payment due: {{payment}}"
+  "YourCurrentPlan": "<1>Your current plan:</1> {{amount}} <2>({{price}}/month)</2>",
+  "YourPrice": "Your price"
 }

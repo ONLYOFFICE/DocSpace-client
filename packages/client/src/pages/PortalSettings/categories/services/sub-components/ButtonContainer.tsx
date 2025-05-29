@@ -78,7 +78,7 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
       />
       <Button
         key="CancelButton"
-        label={t("CancelButton")}
+        label={t("Common:CancelButton")}
         size={ButtonSize.normal}
         scale
         onClick={onClose}

@@ -26,38 +26,32 @@
 
 import React from "react";
 import classNames from "classnames";
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
-import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import WalletInfo from "../../payments/Wallet/sub-components/WalletInfo";
-import { formatCurrencyValue } from "../../payments/Wallet/utils";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 
 import styles from "../styles/StorageSummary.module.scss";
 import PlanInfo from "./PlanInfo";
 import { useServicesActions } from "../hooks/useServicesActions";
-import DueToday from "./DueToday";
-import { calculateTotalPrice } from "../hooks/resourceUtils";
+import PlanUpgradePreview from "./PlanUpgradePreview";
 
 type StorageSummaryProps = {
-  amount?: number;
-  stepValue?: number;
-  onTopUp?: () => void;
+  amount: number;
+  totalPrice: number;
+  onCancelChange: () => void;
   isExceedingStorageLimit?: boolean;
   isCurrentStoragePlan?: boolean;
   storageExpiryDate?: string;
   hasScheduledStorageChange?: boolean;
-  onCancelChange?: () => void;
   hasStorageSubscription?: boolean;
   currentStoragePlanSize?: number;
+  isUpgradeStoragePlan?: boolean;
 };
 
 const StorageSummary: React.FC<StorageSummaryProps> = (props) => {
   const {
     amount,
-    stepValue,
-    onTopUp,
     hasStorageSubscription,
     isExceedingStorageLimit,
     isCurrentStoragePlan,
@@ -65,15 +59,11 @@ const StorageSummary: React.FC<StorageSummaryProps> = (props) => {
     hasScheduledStorageChange,
     onCancelChange,
     currentStoragePlanSize,
+    isUpgradeStoragePlan,
+    totalPrice,
   } = props;
 
-  const {
-    t,
-    isWalletBalanceInsufficient,
-    formatWalletCurrency,
-    isStorageCancellation,
-    isPlanUpgrade,
-  } = useServicesActions();
+  const { t, isStorageCancellation } = useServicesActions();
 
   const getTitle = () => {
     if (isCurrentStoragePlan) {
@@ -106,23 +96,19 @@ const StorageSummary: React.FC<StorageSummaryProps> = (props) => {
     });
   };
 
-  const totalPrice = calculateTotalPrice(amount, stepValue);
-  const insufficientFunds = isWalletBalanceInsufficient(totalPrice);
-  const isUpgradeStoragePlan = isPlanUpgrade(amount);
-
   return (
     <div>
       {hasScheduledStorageChange ? (
         <div className={styles.warningBlock}>
           {t("Warning", {
-            amount: currentStoragePlanSize,
+            amount: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
             storageUnit: t("Common:Gigabyte"),
           })}
         </div>
       ) : null}
 
       {isUpgradeStoragePlan && !isExceedingStorageLimit ? (
-        <DueToday amount={amount} />
+        <PlanUpgradePreview amount={amount} />
       ) : null}
 
       <div
@@ -144,23 +130,17 @@ const StorageSummary: React.FC<StorageSummaryProps> = (props) => {
           isUpgradeStoragePlan={isUpgradeStoragePlan}
         />
 
-        {!hasScheduledStorageChange ? (
-          <WalletInfo
-            balance={formatWalletCurrency()}
-            {...(insufficientFunds && !isExceedingStorageLimit && { onTopUp })}
-          />
-        ) : (
+        {hasScheduledStorageChange ? (
           <Link textDecoration="underline dashed" onClick={onCancelChange}>
             {t("CancelChange")}
           </Link>
-        )}
+        ) : null}
       </div>
     </div>
   );
 };
 
-export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
-  const { storageQuotaIncrementPrice } = paymentStore;
+export default inject(({ currentTariffStatusStore }: TStore) => {
   const {
     hasScheduledStorageChange,
     hasStorageSubscription,
@@ -168,9 +148,7 @@ export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
     storageExpiryDate,
   } = currentTariffStatusStore;
 
-  const { value } = storageQuotaIncrementPrice;
   return {
-    stepValue: value,
     hasScheduledStorageChange,
     storageExpiryDate,
     hasStorageSubscription,

@@ -25,33 +25,31 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
-import { getConvertedSize } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
 import { updateWalletPayment } from "@docspace/shared/api/portal";
 import QuantityPicker from "@docspace/shared/components/select-count-container";
-
-import { useTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
 
 import styles from "./styles/index.module.scss";
 import StorageSummary from "./sub-components/StorageSummary";
 import TopUpModal from "../payments/Wallet/TopUpModal";
 import { useServicesActions } from "./hooks/useServicesActions";
+import { PaymentProvider } from "./context/PaymentContext";
+import ButtonContainer from "./sub-components/ButtonContainer";
+import { calculateTotalPrice } from "./hooks/resourceUtils";
+import StorageInformation from "./sub-components/StorageInformation";
+import WalletContainer from "./sub-components/WalletContainer";
 
 type StorageDialogProps = {
   visible: boolean;
   onClose: () => void;
-  usedTotalStorageSizeCount?: number;
-  maxTotalSizeByQuota?: number;
-  usedTotalStorageSizeTitle?: string;
-  walletBalance?: number;
-  stepValue?: number;
+  storagePriceIncrement?: number;
   hasStorageSubscription?: boolean;
   currentStoragePlanSize?: number;
   fetchPortalTariff?: () => void;
@@ -62,14 +60,12 @@ type StorageDialogProps = {
 const StorageDialog: React.FC<StorageDialogProps> = ({
   visible,
   onClose,
-  usedTotalStorageSizeCount = 0,
-  maxTotalSizeByQuota,
-  usedTotalStorageSizeTitle,
   hasStorageSubscription,
   currentStoragePlanSize,
   fetchPortalTariff,
   fetchBalance,
   hasScheduledStorageChange,
+  storagePriceIncrement,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
   const [amount, setAmount] = useState<number>(currentStoragePlanSize);
@@ -78,14 +74,18 @@ const StorageDialog: React.FC<StorageDialogProps> = ({
 
   const {
     maxStorageLimit,
-    buttonTitle,
     isExceedingPlanLimit,
     isCurrentPlan,
     calculateDifferenceBetweenPlan,
+    isWalletBalanceInsufficient,
+    isPlanUpgrade,
   } = useServicesActions();
 
   const isExceedingStorageLimit = isExceedingPlanLimit(amount);
   const isCurrentStoragePlan = isCurrentPlan(amount);
+  const totalPrice = calculateTotalPrice(amount, storagePriceIncrement);
+  const insufficientFunds = isWalletBalanceInsufficient(totalPrice);
+  const isUpgradeStoragePlan = isPlanUpgrade(amount);
 
   const handleStoragePlanChange = async (isCancellation = false) => {
     const timerId = setTimeout(() => {
@@ -94,7 +94,7 @@ const StorageDialog: React.FC<StorageDialogProps> = ({
 
     const difference = calculateDifferenceBetweenPlan(amount);
 
-    const productType = isCurrentStoragePlan ? 1 : 0;
+    const productType = isCurrentStoragePlan && !isCancellation ? 1 : 0;
     const value = isCancellation ? null : difference;
 
     try {
@@ -115,6 +115,9 @@ const StorageDialog: React.FC<StorageDialogProps> = ({
 
       await Promise.all(requests);
 
+      if (value === 0) {
+        setAmount(currentStoragePlanSize);
+      }
       if (isCancellation) {
         setAmount(currentStoragePlanSize);
 
@@ -138,7 +141,7 @@ const StorageDialog: React.FC<StorageDialogProps> = ({
     setAmount(value);
   };
 
-  const container = (
+  const container = isVisibleContainer ? (
     <TopUpModal
       visible={isVisibleContainer}
       onClose={() => setIsVisible(false)}
@@ -148,134 +151,106 @@ const StorageDialog: React.FC<StorageDialogProps> = ({
         onCloseClick: () => setIsVisible(false),
       }}
     />
-  );
+  ) : null;
+
+  const amountTabs = () => {
+    const amounts = [100, 200, 500, 800, 1024];
+    return amounts.map((item) => {
+      const name =
+        item > 800
+          ? `1 ${t("Common:Terabyte")}`
+          : `${item} ${t("Common:Gigabyte")}`;
+      return { value: item, name };
+    });
+  };
 
   return (
-    <ModalDialog
-      visible={visible}
-      onClose={onClose}
-      displayType={ModalDialogType.aside}
-      containerVisible={isVisibleContainer}
-    >
-      <ModalDialog.Container>{container}</ModalDialog.Container>
-      <ModalDialog.Header>{t("DiskStorage")}</ModalDialog.Header>
-      <ModalDialog.Body>
-        <div className={styles.dialogBody}>
-          <div className={styles.storageInfo}>
-            <Text isBold noSelect fontSize="14px">
-              {usedTotalStorageSizeTitle}{" "}
-              <Text
-                className={styles.currentTariffCount}
-                as="span"
-                isBold
-                fontSize="14px"
-              >
-                {getConvertedSize(t, usedTotalStorageSizeCount)}
-                {maxTotalSizeByQuota
-                  ? `/${getConvertedSize(t, maxTotalSizeByQuota)}`
-                  : ""}
-              </Text>
-            </Text>
+    <PaymentProvider>
+      <ModalDialog
+        visible={visible}
+        onClose={onClose}
+        displayType={ModalDialogType.aside}
+        containerVisible={isVisibleContainer}
+      >
+        <ModalDialog.Container>{container}</ModalDialog.Container>
+        <ModalDialog.Header>{t("DiskStorage")}</ModalDialog.Header>
+        <ModalDialog.Body>
+          <div className={styles.dialogBody}>
+            <StorageInformation />
+
+            <QuantityPicker
+              className="select-users-count-container"
+              value={amount}
+              minValue={0}
+              maxValue={maxStorageLimit}
+              step={1}
+              title={"Additional storage (GB)"}
+              showPlusSign
+              onChange={onChangeNumber}
+              isDisabled={hasScheduledStorageChange || isLoading}
+              items={amountTabs()}
+            />
+
+            {amount || hasStorageSubscription ? (
+              <div className={styles.totalContainer}>
+                <StorageSummary
+                  amount={amount}
+                  totalPrice={totalPrice}
+                  isExceedingStorageLimit={isExceedingStorageLimit}
+                  isCurrentStoragePlan={isCurrentStoragePlan}
+                  onCancelChange={onCancelChange}
+                  isUpgradeStoragePlan={isUpgradeStoragePlan}
+                />
+              </div>
+            ) : null}
+
+            <WalletContainer
+              onTopUp={() => setIsVisible(true)}
+              insufficientFunds={insufficientFunds}
+              isExceedingStorageLimit={isExceedingStorageLimit}
+              hasScheduledStorageChange={hasScheduledStorageChange}
+              isUpgradeStoragePlan={isUpgradeStoragePlan}
+            />
           </div>
-
-          <QuantityPicker
-            className="select-users-count-container"
-            value={amount}
-            minValue={0}
-            maxValue={maxStorageLimit}
-            step={1}
-            title={"Additional storage (GB)"}
-            showPlusSign
-            onChange={onChangeNumber}
-            isDisabled={hasScheduledStorageChange}
-            items={[
-              { value: 100, name: `100 ${t("Common:Gigabyte")}` },
-              { value: 200, name: `200 ${t("Common:Gigabyte")}` },
-              { value: 500, name: `300 ${t("Common:Gigabyte")}` },
-              { value: 800, name: `400 ${t("Common:Gigabyte")}` },
-              { value: 1024, name: `1 ${t("Common:Terabyte")}` },
-            ]}
+        </ModalDialog.Body>
+        <ModalDialog.Footer>
+          <ButtonContainer
+            amount={amount}
+            isCurrentStoragePlan={isCurrentStoragePlan}
+            isUpgradeStoragePlan={isUpgradeStoragePlan}
+            insufficientFunds={insufficientFunds}
+            isExceedingStorageLimit={isExceedingStorageLimit}
+            onClose={onClose}
+            isLoading={isLoading}
+            onBuy={onBuy}
+            onSendRequest={onSendRequest}
           />
-
-          {amount || hasStorageSubscription ? (
-            <div className={styles.totalContainer}>
-              <StorageSummary
-                amount={amount}
-                onTopUp={() => setIsVisible(true)}
-                isExceedingStorageLimit={isExceedingStorageLimit}
-                isCurrentStoragePlan={isCurrentStoragePlan}
-                onCancelChange={onCancelChange}
-              />
-            </div>
-          ) : null}
-        </div>
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          key="OkButton"
-          label={buttonTitle(amount)}
-          size={ButtonSize.normal}
-          primary
-          scale
-          //  isDisabled={isButtonDisabled}
-          onClick={isExceedingStorageLimit ? onSendRequest : onBuy}
-          isLoading={isLoading}
-        />
-        <Button
-          key="CancelButton"
-          label={t("Common:CancelButton")}
-          size={ButtonSize.normal}
-          scale
-          onClick={onClose}
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
+        </ModalDialog.Footer>
+      </ModalDialog>
+    </PaymentProvider>
   );
 };
 
 export default inject(
-  ({
-    currentQuotaStore,
-    paymentStore,
-    currentTariffStatusStore,
-    authStore,
-  }: TStore) => {
-    const {
-      usedTotalStorageSizeCount,
-      usedTotalStorageSizeTitle,
-      maxTotalSizeByQuota,
-    } = currentQuotaStore;
+  ({ paymentStore, currentTariffStatusStore, servicesStore }: TStore) => {
     const {
       fetchPortalTariff,
       hasScheduledStorageChange,
       hasStorageSubscription,
       currentStoragePlanSize,
     } = currentTariffStatusStore;
-    const {
-      walletCodeCurrency,
-      storageQuotaIncrementPrice,
-      fetchBalance,
-      walletBalance,
-    } = paymentStore;
-    const { value, isoCurrencySymbol } = storageQuotaIncrementPrice;
-    const { language } = authStore;
+    const { fetchBalance, walletBalance } = paymentStore;
+    const { storageSizeIncrement, storagePriceIncrement } = servicesStore;
 
     return {
-      usedTotalStorageSizeCount,
-      usedTotalStorageSizeTitle,
-      maxTotalSizeByQuota,
-      walletCodeCurrency,
-      storageQuotaIncrementPrice,
-      language,
-      stepValue: value,
+      storageSizeIncrement,
       hasStorageSubscription,
       currentStoragePlanSize,
-      isoCurrencySymbol,
       fetchPortalTariff,
       fetchBalance,
       walletBalance,
-
       hasScheduledStorageChange,
+      storagePriceIncrement,
     };
   },
 )(observer(StorageDialog));

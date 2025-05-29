@@ -94,8 +94,8 @@ const Services: React.FC<ServicesProps> = ({
   );
 };
 
-export const Component = inject(({ paymentStore }: TStore) => {
-  const { servicesInit, isInitServicesPage } = paymentStore;
+export const Component = inject(({ servicesStore }: TStore) => {
+  const { servicesInit, isInitServicesPage } = servicesStore;
 
   return {
     servicesInit,

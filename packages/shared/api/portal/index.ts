@@ -395,7 +395,12 @@ export function calcalateWalletPayment(
       productQuantityType,
     },
     signal,
-  });
+  }) as {
+    operationId: number;
+    amount: number;
+    currency: string;
+    quantity: number;
+  };
 }
 
 export function getCurrencies() {

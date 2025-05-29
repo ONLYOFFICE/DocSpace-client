@@ -36,7 +36,7 @@ import { getConvertedSize } from "@docspace/shared/utils/common";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 
 import styles from "./styles/AdditionalStorage.module.scss";
-import { formatCurrencyValue } from "../payments/Wallet/utils";
+import { useServicesActions } from "./hooks/useServicesActions";
 
 interface ServiceQuotaFeature {
   title: string;
@@ -48,24 +48,21 @@ type AdditionalStorageProps = {
   isEnabled?: boolean;
   // onToggle?: (enabled: boolean) => void;
   servicesQuotasFeatures?: Map<string, ServiceQuotaFeature>;
-  storageQuotaIncrement?: number;
-  isoCurrencySymbol?: string;
+  storageSizeIncrement?: number;
   onClick?: () => void;
-  language?: string;
-  value?: number;
+  storagePriceIncrement?: number;
   isPayer?: boolean;
   cardLinkedOnFreeTariff?: boolean;
   isFreeTariff?: boolean;
+  payerInfo?: { displayName: string };
 };
 
 const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
   servicesQuotasFeatures,
-  storageQuotaIncrement,
-  isoCurrencySymbol,
+  storageSizeIncrement,
   onClick,
   isEnabled,
-  language,
-  value,
+  storagePriceIncrement,
   cardLinkedOnFreeTariff,
   isFreeTariff,
   isPayer,
@@ -82,6 +79,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
   // };
 
   const { t } = useTranslation(["Payments", "Common"]);
+  const { formatWalletCurrency } = useServicesActions();
 
   const textTooltip = () => {
     return payerInfo ? (
@@ -145,15 +143,8 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
               <div className={styles.priceContainer}>
                 <Text fontSize="12px" fontWeight={600}>
                   {t("PerStorage", {
-                    currency: formatCurrencyValue(
-                      language!,
-                      value!,
-                      isoCurrencySymbol!,
-                      0,
-                      7,
-                    ),
-
-                    amount: getConvertedSize(t, storageQuotaIncrement || 0),
+                    currency: formatWalletCurrency(storagePriceIncrement),
+                    amount: getConvertedSize(t, storageSizeIncrement || 0),
                   })}
                 </Text>
               </div>
@@ -180,36 +171,30 @@ export default inject(
   ({
     paymentStore,
     currentTariffStatusStore,
-    authStore,
     currentQuotaStore,
+    servicesStore,
   }: TStore) => {
+    const { cardLinkedOnFreeTariff, isPayer, walletPayer } = paymentStore;
     const {
       servicesQuotasFeatures,
-      storageQuotaIncrementPrice,
-      storageQuotaIncrement,
-      cardLinkedOnFreeTariff,
-      isPayer,
-      walletPayer,
-    } = paymentStore;
+      storageSizeIncrement,
+      storagePriceIncrement,
+    } = servicesStore;
     const { walletQuotas, payerInfo: paymentPayer } = currentTariffStatusStore;
     const isEnabled = walletQuotas.length;
-    const { language } = authStore;
-    const { value, isoCurrencySymbol } = storageQuotaIncrementPrice;
     const { isFreeTariff } = currentQuotaStore;
 
     const payerInfo = paymentPayer ?? walletPayer;
 
     return {
       servicesQuotasFeatures,
-      value,
-      isoCurrencySymbol,
-      storageQuotaIncrement,
+      storageSizeIncrement,
       isEnabled,
-      language,
       isPayer,
       cardLinkedOnFreeTariff,
       isFreeTariff,
       payerInfo,
+      storagePriceIncrement,
     };
   },
 )(observer(AdditionalStorage));

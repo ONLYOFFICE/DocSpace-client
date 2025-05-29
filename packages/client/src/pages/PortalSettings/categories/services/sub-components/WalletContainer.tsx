@@ -23,39 +23,51 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { inject, observer } from "mobx-react";
 
-.dialogBody {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
+import { useServicesActions } from "../hooks/useServicesActions";
 
-.storageInfo {
-  display: flex;
-  min-height: 40px;
-  background: var(--payment-background-color);
-  margin-bottom: 24px;
-  flex-wrap: wrap;
-  margin-top: 14px;
-  padding: 12px 16px;
-  box-sizing: border-box;
-  padding-bottom: 0;
-  border-radius: 6px;
-}
-.totalContainer {
-  margin-top: auto;
-  margin-bottom: 12px;
-}
+import WalletInfo from "../../payments/Wallet/sub-components/WalletInfo";
+import { usePaymentContext } from "../context/PaymentContext";
 
-.currentTariffCount {
-  display: inline;
-}
+type WalletContainerProps = {
+  onTopUp: () => void;
+  insufficientFunds: boolean;
+  isExceedingStorageLimit: boolean;
+  hasScheduledStorageChange?: boolean;
+  isUpgradeStoragePlan?: boolean;
+};
 
-.moreStorage {
-  color: var(--payment-text-color);
-}
+const WalletContainer = (props: WalletContainerProps) => {
+  const {
+    onTopUp,
+    insufficientFunds,
+    isExceedingStorageLimit,
+    hasScheduledStorageChange,
+    isUpgradeStoragePlan,
+  } = props;
+  const { formatWalletCurrency, isWalletBalanceInsufficient } =
+    useServicesActions();
+  const { futurePayment } = usePaymentContext();
 
-.currentPayment,
-.currentPaymentWrapper {
-  margin-bottom: 8px;
-}
+  if (hasScheduledStorageChange) return null;
+
+  const isPaymentAnavalable = isUpgradeStoragePlan
+    ? isWalletBalanceInsufficient(futurePayment)
+    : insufficientFunds;
+
+  return (
+    <WalletInfo
+      balance={formatWalletCurrency(null, 2, 2)}
+      {...(isPaymentAnavalable && !isExceedingStorageLimit && { onTopUp })}
+    />
+  );
+};
+
+export default inject(({ currentTariffStatusStore }: TStore) => {
+  const { hasScheduledStorageChange } = currentTariffStatusStore;
+
+  return {
+    hasScheduledStorageChange,
+  };
+})(observer(WalletContainer));

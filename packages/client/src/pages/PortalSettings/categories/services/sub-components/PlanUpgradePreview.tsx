@@ -25,40 +25,41 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useState } from "react";
-
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
+import { Text } from "@docspace/shared/components/text";
+import { calcalateWalletPayment } from "@docspace/shared/api/portal";
+import { toastr } from "@docspace/shared/components/toast";
+import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
+
 import UpgradeWalletIcon from "PUBLIC_DIR/images/icons/16/upgrade.react.svg";
 
-import { Text } from "@docspace/shared/components/text";
-
 import styles from "../styles/StorageSummary.module.scss";
-
 import { useServicesActions } from "../hooks/useServicesActions";
 import {
   getDaysUntilPayment,
   calculateDifference,
 } from "../hooks/resourceUtils";
-import { calcalateWalletPayment } from "@docspace/shared/api/portal";
-import { toastr } from "@docspace/shared/components/toast";
-import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
+import { usePaymentContext } from "../context/PaymentContext";
 
-let timeout, controller;
+let timeout: NodeJS.Timeout;
+let controller: AbortController;
 
-const DueToday = (props) => {
+const PlanUpgradePreview = (props) => {
   const { currentStoragePlanSize, amount, daysUtilPayment } = props;
+  const { setFuturePayment, futurePayment, setIsWaitingCalculation } =
+    usePaymentContext();
   const { t } = useTranslation("Payments");
+  const [isLoading, setIsLoading] = useState(false);
 
   const { formatWalletCurrency, calculateDifferenceBetweenPlan } =
     useServicesActions();
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [payment, setPayment] = useState(0);
-
   useEffect(() => {
     const calcalatePayment = () => {
       setIsLoading(true);
+      setIsWaitingCalculation(true);
 
       if (timeout) clearTimeout(timeout);
       timeout = setTimeout(async () => {
@@ -76,8 +77,10 @@ const DueToday = (props) => {
 
           if (!currentWriteOff) return;
 
-          setPayment(currentWriteOff.amount);
+          const paymentAmount = currentWriteOff.amount;
+          setFuturePayment(paymentAmount);
           setIsLoading(false);
+          setIsWaitingCalculation(false);
         } catch (e) {
           toastr.error(e);
         }
@@ -116,7 +119,7 @@ const DueToday = (props) => {
         ) : (
           <>
             <Text fontWeight="600" fontSize="14px">
-              {formatWalletCurrency(payment)}
+              {formatWalletCurrency(futurePayment)}
             </Text>
             <Text
               fontWeight="600"
@@ -140,4 +143,4 @@ export default inject(({ currentTariffStatusStore }: TStore) => {
     currentStoragePlanSize,
     daysUtilPayment: getDaysUntilPayment(storageExpiryDate),
   };
-})(observer(DueToday));
+})(observer(PlanUpgradePreview));

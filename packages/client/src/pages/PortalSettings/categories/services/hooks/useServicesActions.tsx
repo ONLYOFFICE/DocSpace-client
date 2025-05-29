@@ -26,11 +26,8 @@
 
 import { useTranslation } from "react-i18next";
 
-import { toastr } from "@docspace/shared/components/toast";
-import { updateWalletPayment } from "@docspace/shared/api/portal";
 import { formatCurrencyValue } from "../../payments/Wallet/utils";
 import store from "../../../../../store";
-import { useState } from "react";
 import {
   calculateDifference,
   isDowngrade,
@@ -42,31 +39,31 @@ import {
 export const useServicesActions = () => {
   const { t } = useTranslation(["Payments", "Common"]);
 
-  const { currentTariffStatusStore, paymentStore, servicesStore, authStore } =
-    store;
+  const { currentTariffStatusStore, paymentStore, authStore } = store;
   const {
-    fetchPortalTariff,
     currentStoragePlanSize,
     hasScheduledStorageChange,
     nextStoragePlanSize,
     hasStorageSubscription,
   } = currentTariffStatusStore;
-  const { fetchBalance, walletCodeCurrency, walletBalance } = paymentStore;
-  //   const { additionalStorage, difference, setIsLoading, setAdditionalStorage } =
-  //     servicesStore;
+  const { walletCodeCurrency, walletBalance } = paymentStore;
   const { language } = authStore;
 
   const maxStorageLimit = 9999;
 
-  const formatWalletCurrency = (quantity?: number) => {
+  const formatWalletCurrency = (
+    quantity?: number,
+    minimumFractionDigits: number = 2,
+    maximumFractionDigits: number = 7,
+  ) => {
     const amount = quantity ?? walletBalance;
 
     return formatCurrencyValue(
       language,
       amount,
       walletCodeCurrency || "",
-      2,
-      7,
+      minimumFractionDigits,
+      maximumFractionDigits,
     );
   };
 
@@ -81,6 +78,10 @@ export const useServicesActions = () => {
 
   const isPlanUpgrade = (quantity: number, type = "storage") => {
     const plan = type === "storage" ? currentStoragePlanSize : 0;
+    const hasSub = type === "storage" ? hasStorageSubscription : false;
+
+    if (!hasSub) return false;
+
     return isUpgrade(quantity, plan);
   };
 

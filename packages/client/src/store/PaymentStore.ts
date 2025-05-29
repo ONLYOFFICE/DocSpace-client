@@ -783,10 +783,11 @@ class PaymentStore {
     email: string,
     userName: string,
     message: string,
+    t,
   ) => {
     try {
       await api.portal.sendPaymentRequest(email, userName, message);
-      // toastr.success(t("SuccessfullySentMessage"));
+      toastr.success(t("SuccessfullySentMessage"));
     } catch (e) {
       toastr.error(e as TData);
     }

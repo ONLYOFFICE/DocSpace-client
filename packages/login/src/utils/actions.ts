@@ -96,10 +96,7 @@ export async function getSettings() {
     [["", ""]],
     "GET",
   );
-
-  const settingsRes = IS_TEST
-    ? settingsHandler(await headers())
-    : await fetch(getSettings);
+  const settingsRes = await fetch(getSettings);
 
   if (settingsRes.status === 403) return `access-restricted`;
 
@@ -135,7 +132,7 @@ export async function getColorTheme() {
     "GET",
   );
 
-  const res = IS_TEST ? colorThemeHandler() : await fetch(getColorTheme);
+  const res = await fetch(getColorTheme);
 
   if (!res.ok) return;
 
@@ -366,9 +363,7 @@ export async function getUserFromConfirm(
     "GET",
   );
 
-  const res = IS_TEST
-    ? selfHandler(null, await headers())
-    : await fetch(getUserFromConfirm);
+  const res = await fetch(getUserFromConfirm);
 
   if (!res.ok) return;
 
@@ -452,7 +447,7 @@ export async function getTfaSecretKeyAndQR(confirmKey: string | null = null) {
     "GET",
   );
 
-  const res = IS_TEST ? tfaAppHandler() : await fetch(getTfaSecretKeyAndQR);
+  const res = await fetch(getTfaSecretKeyAndQR);
 
   if (!res.ok) throw new Error(res.statusText);
 
@@ -469,9 +464,7 @@ export async function checkConfirmLink(data: TConfirmLinkParams) {
     JSON.stringify(data),
   );
 
-  const response = IS_TEST
-    ? confirmHandler(await headers())
-    : await fetch(checkConfirmLink);
+  const response = await fetch(checkConfirmLink);
 
   if (!response.ok) throw new Error(response.statusText);
 

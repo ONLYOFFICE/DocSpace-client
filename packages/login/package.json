@@ -10,7 +10,7 @@
     "start-prod:internal": "NODE_ENV=production API_HOST=http://127.0.0.1 node server.js",
     "lint": "next lint --max-warnings=0",
     "clean": "shx rm -rf .next",
-    "deploy": "shx --silent mkdir -p ../../../publish/web/login && shx --silent mkdir -p ../../../publish/web/login/.next && shx --silent mkdir -p ../../../publish/web/login/node_modules && shx --silent mkdir -p ../../../publish/web/login/.next/static && shx cp -r .next/standalone/node_modules/* ../../../publish/web/login/node_modules && shx cp -r .next/static/* ../../../publish/web/login/.next/static    && shx cp -r .next/standalone/packages/login/.next/* ../../../publish/web/login/.next &&  shx cp -f server.prod.js ../../../publish/web/login/server.js",
+    "deploy": "shx --silent mkdir -p ../../../publish/web/login && shx --silent mkdir -p ../../../publish/web/login/.next && shx --silent mkdir -p ../../../publish/web/login/node_modules && shx --silent mkdir -p ../../../publish/web/login/.next/static && shx cp -r .next/standalone/node_modules/* ../../../publish/web/login/node_modules && shx cp -r .next/static/* ../../../publish/web/login/.next/static    && shx cp -r .next/standalone/packages/login/.next/* ../../../publish/web/login/.next &&  shx cp -f server.prod.js ../../../publish/web/login/server.js && shx cp -f logger.mjs ../../../publish/web/login/logger.mjs && shx --silent mkdir -p ../../../publish/web/login/config && shx cp -r config/* ../../../publish/web/login/config",
     "test:build": "node ./scripts/buildTranslations.js && E2E_TEST=true next build",
     "test:start": "PORT=5111 NODE_ENV=production E2E_TEST=true node server.js",
     "test:e2e:docker:build": "docker-compose build",
@@ -20,7 +20,9 @@
   "dependencies": {
     "@hcaptcha/react-hcaptcha": "1.11.0",
     "csvjson-json_beautifier": "^5.0.4",
+    "date-and-time": "3.6.0",
     "i18next": "20.6.1",
+    "nconf": "0.12.1",
     "next": "15.3.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
@@ -29,10 +31,15 @@
     "react-i18next": "13.5.0",
     "resize-image": "^0.1.0",
     "sass": "1.79.5",
-    "styled-components": "5.3.11"
+    "styled-components": "5.3.11",
+    "winston": "3.17.0",
+    "winston-cloudwatch": "6.3.0",
+    "winston-daily-rotate-file": "5.0.0"
   },
   "devDependencies": {
+    "@aws-sdk/client-cloudwatch-logs": "3.816.0",
     "@svgr/webpack": "8.1.0",
+    "@types/nconf": "^0",
     "@types/node": "22.7.5",
     "@types/react": "19.1.4",
     "@types/react-dom": "19.1.5",

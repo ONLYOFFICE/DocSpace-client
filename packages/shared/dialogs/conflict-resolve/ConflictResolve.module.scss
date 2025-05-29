@@ -24,10 +24,59 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import AuthHandler from "./page.client";
+@use "../../styles/mixins";
 
-function Page() {
-  return <AuthHandler />;
+.conflictResolveBodyContent {
+  display: contents;
+
+  .radio {
+    padding-bottom: 8px;
+  }
+
+  .conflictResolveFileName {
+    display: flex;
+
+    margin-bottom: 16px;
+
+    :global {
+      .bold {
+        font-weight: 600;
+        @include mixins.truncate;
+      }
+    }
+  }
+
+  .selectAction {
+    margin-bottom: 12px;
+  }
+
+  .conflictResolveRadioButton {
+    label {
+      display: flex;
+      align-items: flex-start;
+      &:not(:last-child) {
+        margin-bottom: 12px;
+      }
+    }
+
+    svg {
+      overflow: visible;
+      margin-inline-end: 8px;
+      margin-top: 3px;
+    }
+
+    :global {
+      .radio-option-title {
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 16px;
+      }
+
+      .radio-option-description {
+        font-size: 12px;
+        line-height: 16px;
+        color: var(--modal-dialog-resolve-color);
+      }
+    }
+  }
 }
-
-export default Page;

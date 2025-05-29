@@ -2334,6 +2334,14 @@
 }
 
 .light {
+  --modal-dialog-resolve-color: #{$gray};
+}
+
+.dark {
+  --modal-dialog-resolve-color: #{$gray};
+}
+
+.light {
   --icon-button-color: #{$gray};
 }
 

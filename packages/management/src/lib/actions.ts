@@ -57,7 +57,11 @@ import {
 } from "@docspace/shared/utils/common";
 import { TError } from "@docspace/shared/utils/axiosClient";
 
+import { logger } from "@/../logger.mjs";
+
 export async function getUser() {
+  logger.debug(`Start GET /people/@self`);
+
   const hdrs = await headers();
   const cookie = hdrs.get("cookie");
 
@@ -79,6 +83,10 @@ export async function getSettings(share?: string) {
   const hdrs = await headers();
   const cookie = hdrs.get("cookie");
 
+  logger.debug(
+    `Start GET /settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"}`,
+  );
+
   const [getSettings] = await createRequest(
     [
       `/settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"}`,
@@ -99,6 +107,8 @@ export async function getSettings(share?: string) {
 }
 
 export async function getVersionBuild() {
+  logger.debug("Start GET /settings/version/build");
+
   const [getSettings] = await createRequest(
     [`/settings/version/build`],
     [["", ""]],
@@ -115,6 +125,8 @@ export async function getVersionBuild() {
 }
 
 export async function getQuota() {
+  logger.debug("Start GET /portal/payment/quota");
+
   const hdrs = await headers();
   const cookie = hdrs.get("cookie");
 
@@ -137,6 +149,8 @@ export async function getQuota() {
 }
 
 export async function getAllPortals() {
+  logger.debug("Start GET /portal/get?statistics=true");
+
   const [getAllPortals] = await createRequest(
     [`/portal/get?statistics=true`],
     [["", ""]],
@@ -155,6 +169,8 @@ export async function getAllPortals() {
 }
 
 export async function getPortalTariff() {
+  logger.debug("Start GET /portal/tariff");
+
   const hdrs = await headers();
   const cookie = hdrs.get("cookie");
 
@@ -177,6 +193,8 @@ export async function getPortalTariff() {
 }
 
 export async function getColorTheme() {
+  logger.debug("Start GET /settings/colortheme");
+
   const [getSettings] = await createRequest(
     [`/settings/colortheme`],
     [["", ""]],
@@ -193,6 +211,8 @@ export async function getColorTheme() {
 }
 
 export async function getWhiteLabelLogos() {
+  logger.debug("Start GET /settings/whitelabel/logos?isDefault=true");
+
   const [getWhiteLabelLogos] = await createRequest(
     [`/settings/whitelabel/logos?isDefault=true`],
     [["", ""]],
@@ -209,6 +229,8 @@ export async function getWhiteLabelLogos() {
 }
 
 export async function getWhiteLabelText() {
+  logger.debug("Start GET /settings/whitelabel/logotext?isDefault=true");
+
   const [getWhiteLabelText] = await createRequest(
     [`/settings/whitelabel/logotext?isDefault=true`],
     [["", ""]],
@@ -225,6 +247,8 @@ export async function getWhiteLabelText() {
 }
 
 export async function getWhiteLabelIsDefault() {
+  logger.debug("Start GET /settings/whitelabel/logos/isdefault?isDefault=true");
+
   const [getWhiteLabelIsDefault] = await createRequest(
     [`/settings/whitelabel/logos/isdefault?isDefault=true`],
     [["", ""]],
@@ -241,6 +265,8 @@ export async function getWhiteLabelIsDefault() {
 }
 
 export async function getAdditionalResources() {
+  logger.debug("Start GET /settings/rebranding/additional");
+
   const [getAdditionalResources] = await createRequest(
     [`/settings/rebranding/additional`],
     [["", ""]],
@@ -257,6 +283,8 @@ export async function getAdditionalResources() {
 }
 
 export async function getCompanyInfo() {
+  logger.debug("Start GET /settings/rebranding/company");
+
   const [getCompanyInfo] = await createRequest(
     [`/settings/rebranding/company`],
     [["", ""]],
@@ -273,6 +301,8 @@ export async function getCompanyInfo() {
 }
 
 export async function getPaymentSettings() {
+  logger.debug("Start GET /settings/payment");
+
   const [getPaymentSettings] = await createRequest(
     [`/settings/payment`],
     [["", ""]],
@@ -289,6 +319,8 @@ export async function getPaymentSettings() {
 }
 
 export async function getSettingsThirdParty() {
+  logger.debug("Start GET /files/thirdparty/backup");
+
   const [getSettingsThirdParty] = await createRequest(
     [`/files/thirdparty/backup`],
     [["", ""]],
@@ -310,6 +342,8 @@ export async function getBackupSchedule(dump: boolean = true) {
   const searchParams = new URLSearchParams();
 
   searchParams.append("dump", dump.toString());
+
+  logger.debug(`Start GET /portal/getbackupschedule?${searchParams}`);
 
   const [getBackupSchedule] = await createRequest(
     [`/portal/getbackupschedule?${searchParams}`],
@@ -333,6 +367,8 @@ export async function getBackupStorage(dump: boolean = false) {
 
   searchParams.append("dump", dump.toString());
 
+  logger.debug(`Start GET /settings/storage/backup?${searchParams}`);
+
   const [getBackupStorage] = await createRequest(
     [`/settings/storage/backup?${searchParams}`],
     [["", ""]],
@@ -350,6 +386,8 @@ export async function getBackupStorage(dump: boolean = false) {
 }
 
 export async function getStorageRegions() {
+  logger.debug("Start GET /settings/storage/s3/regions");
+
   const [getStorageRegions] = await createRequest(
     [`/settings/storage/s3/regions`],
     [["", ""]],
@@ -366,6 +404,8 @@ export async function getStorageRegions() {
 }
 
 export async function getSettingsFiles(): Promise<TFilesSettings> {
+  logger.debug("Start GET /files/settings");
+
   const [getSettingsFiles] = await createRequest(
     [`/files/settings`],
     [["", ""]],
@@ -385,6 +425,8 @@ export async function getBackupProgress(dump = true) {
   const searchParams = new URLSearchParams();
 
   searchParams.append("dump", dump.toString());
+
+  logger.debug(`Start GET /portal/getbackupprogress?${searchParams}`);
 
   try {
     const [getBackupProgress] = await createRequest(
@@ -406,6 +448,8 @@ export async function getBackupProgress(dump = true) {
 }
 
 export async function getFoldersTree() {
+  logger.debug("Start GET /files/@root?filterType=2&count=1");
+
   const [getFoldersTree] = await createRequest(
     ["/files/@root?filterType=2&count=1"],
     [["", ""]],
@@ -457,6 +501,8 @@ export async function getFoldersTree() {
 }
 
 export async function getEncryptionSettings() {
+  logger.debug("Start GET /settings/encryption/settings");
+
   const [getEncryptionSettings] = await createRequest(
     [`/settings/encryption/settings`],
     [["", ""]],

@@ -23,7 +23,7 @@
   "StorageQuotaHeader": "Shuma e hapësirës ruajtëse është gati të tejkalohet: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Mund të hiqni skedarët e panevojshëm ose të ndryshoni kuotën te <1>Cilësimet e menaxhimit të hapësirës ruajtëse.</1>",
   "UserQuotaHeader": "Numri i administratorëve do të tejkalohet: {{currentValue}} / {{maxValue}}",
-  "UserTariffAlmostReached": "Pasi të arrihet kufiri, të gjithë përdoruesit do të shtohen vetëm me lejet e përdoruesit. Për të qenë në gjendje të shtoni administratorë të tjerë, kontaktoni administratorin e {{Emriproduktit}} për të përmirësuar planin tarifor.",
+  "UserTariffAlmostReached": "Pasi të arrihet kufiri, të gjithë përdoruesit do të shtohen vetëm me lejet e përdoruesit. Për të qenë në gjendje të shtoni administratorë të tjerë, kontaktoni administratorin e {{productName}} për të përmirësuar planin tarifor.",
   "UserTariffAlmostReachedForAdmins": "Pasi të arrihet kufiri, të gjithë përdoruesit do të shtohen vetëm me lejet e përdoruesit. Për të qenë në gjendje të shtoni administratorë të tjerë, <1>kliko këtu</1> për të përmirësuar planin tuaj tarifor.",
   "UserTariffLimitHeader": "Është arritur kufiri për numrin e administratorëve: {{currentValue}} / {{maxValue}}",
   "UserTariffReached": "Të gjithë përdoruesit do të shtohen vetëm me lejet e përdoruesit. Për të qenë në gjendje të shtoni administratorë të tjerë, kontaktoni administratorin e {{productName}} për të përmirësuar planin tarifor.",

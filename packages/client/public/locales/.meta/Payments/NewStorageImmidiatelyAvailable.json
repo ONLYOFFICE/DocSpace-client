@@ -1,0 +1,21 @@
+{
+  "key_path": "NewStorageImmidiatelyAvailable",
+  "content": "The new storage will be available immediately after payment.",
+  "content_en_sha1_hash": "25dd62a1090b423b3777643df6c7f4865d623f39",
+  "created_at": "2025-05-29T12:12:54.464Z",
+  "updated_at": "2025-05-29T12:12:54.464Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

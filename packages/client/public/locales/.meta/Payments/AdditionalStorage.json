@@ -1,0 +1,21 @@
+{
+  "key_path": "AdditionalStorage",
+  "content": "Additional {{amount}} {{storageUnit}}",
+  "content_en_sha1_hash": "95538e29b5fab891adff7d263f8c903c9ad6d7ed",
+  "created_at": "2025-05-29T12:12:54.332Z",
+  "updated_at": "2025-05-29T12:12:54.332Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

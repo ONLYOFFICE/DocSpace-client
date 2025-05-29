@@ -92,6 +92,7 @@
   "RoomsQuotaAlmostExhausted": "The quota of rooms is almost exhausted.",
   "SelectAdditionalCapacity": "Select additional capacity",
   "SelectAndPayServices": "Select and pay for the services you need.",
+  "ServiceConfigurationNotice": "This section is used to connect and configure the services. Please note, only the payer can make changes. Reach out to them for any updates.",
   "StartingNextMonth": "Starting next month",
   "StartupSuggestion": "Do more with {{planName}} plan",
   "StartupTitle": "You are using free {{planName}} plan",

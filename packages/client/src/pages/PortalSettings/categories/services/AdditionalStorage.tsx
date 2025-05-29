@@ -37,6 +37,7 @@ import { Tooltip } from "@docspace/shared/components/tooltip";
 
 import styles from "./styles/AdditionalStorage.module.scss";
 import { useServicesActions } from "./hooks/useServicesActions";
+import PayerInformation from "../payments/PayerInformation";
 
 interface ServiceQuotaFeature {
   title: string;
@@ -66,9 +67,11 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
   cardLinkedOnFreeTariff,
   isFreeTariff,
   isPayer,
-  payerInfo,
   onToggle,
+  payerInfo,
 }) => {
+  const isDisabled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
+
   const handleToggle = (
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
     id: string,
@@ -77,17 +80,21 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
     e.preventDefault();
     e.stopPropagation();
 
-    onToggle(id, enabled);
+    if (!isDisabled) onToggle(id, enabled);
   };
 
   const { formatWalletCurrency, t } = useServicesActions();
 
-  const isDisabled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
   return (
     <div>
       <Text className={styles.storageDescription}>
-        {t("SelectAndPayServices")}
+        {isPayer ? t("SelectAndPayServices") : t("ServiceConfigurationNotice")}
       </Text>
+      {payerInfo ? (
+        <div className={styles.payerContainer}>
+          <PayerInformation />
+        </div>
+      ) : null}
       {Array.from(servicesQuotasFeatures?.values() || []).map((item) => {
         if (!item.title || !item.image) return null;
 

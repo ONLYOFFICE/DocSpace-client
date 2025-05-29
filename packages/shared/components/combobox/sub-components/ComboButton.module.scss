@@ -32,15 +32,20 @@
 .comboButton {
   display: flex;
   align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: variables.$tap-highlight;
+  height: 30px;
+  padding-inline-start: 8px;
+  padding-inline-end: 14px;
+  color: var(--combobox-button-color);
+  background: var(--combobox-button-bg);
+  box-sizing: border-box;
+
+  @include mixins.no-user-select;
 
   &.type {
     gap: 4px;
   }
-
-  justify-content: center;
-  -webkit-tap-highlight-color: variables.$tap-highlight;
-
-  height: 30px;
 
   &.noBorder {
     height: 18px;
@@ -76,28 +81,17 @@
     width: 100%;
   }
 
-  @include mixins.no-user-select;
-
-  padding-inline-start: 8px;
-  padding-inline-end: 14px;
-
   &.displayArrow {
     padding-inline-end: 8px;
   }
-
-  background: var(--combobox-button-bg);
 
   &.noBorder {
     background: none;
   }
 
-  color: var(--combobox-button-color);
-
   &.isDisabled {
     color: var(--combobox-button-disabled-color);
   }
-
-  box-sizing: border-box;
 
   &:not(.noBorder) {
     border: var(--combobox-button-border);
@@ -297,11 +291,11 @@
 
   visibility: visible;
 
+  @include mixins.flip-in-rtl;
+
   &.isLoading {
     visibility: hidden;
   }
-
-  @include mixins.flip-in-rtl;
 
   .comboButtonSelectedIcon path {
     fill: var(--combobox-children-button-color);

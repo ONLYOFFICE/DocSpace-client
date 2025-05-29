@@ -30,6 +30,12 @@
 @use "../../styles/mixins";
 
 .combobox {
+  position: relative;
+  outline: 0;
+  -webkit-tap-highlight-color: variables.$tap-highlight;
+
+  padding: 4px 0;
+
   &.base {
     width: 173px;
   }
@@ -54,12 +60,6 @@
     width: 100%;
   }
 
-  position: relative;
-  outline: 0;
-  -webkit-tap-highlight-color: variables.$tap-highlight;
-
-  padding: 4px 0;
-
   &.withoutPadding {
     padding: 0;
   }
@@ -76,6 +76,8 @@
   }
 
   &:not(.disableMobileView) {
+    -webkit-user-select: none;
+
     &:global(.dropdown-container) {
       @include mixins.mobile {
         position: fixed;
@@ -91,8 +93,6 @@
       }
     }
   }
-
-  -webkit-user-select: none;
 
   :global(.backdrop-active) {
     z-index: 210;

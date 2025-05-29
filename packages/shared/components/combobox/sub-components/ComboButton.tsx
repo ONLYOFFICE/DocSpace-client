@@ -87,7 +87,7 @@ export const ComboButton: React.FC<TComboButtonProps> = ({
       [styles.isLoading]: isLoading,
       [styles.type]: type,
       [styles.descriptive]: type === "descriptive",
-      [styles.plusBageValue]: plusBadgeValue,
+      [styles.plusBadgeValue]: plusBadgeValue,
     },
   );
 

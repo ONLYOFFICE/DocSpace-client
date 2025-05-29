@@ -56,6 +56,7 @@ type QuantityPickerProps = {
   onChange: (value: number) => void;
   className?: string;
   items?: Array<number | TabItemObject>;
+  isLarge?: boolean;
 };
 
 const QuantityPicker: React.FC<QuantityPickerProps> = ({
@@ -71,6 +72,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
   onChange,
   className,
   items,
+  isLarge,
 }) => {
   const displayValue = showPlusSign
     ? value > maxValue
@@ -85,6 +87,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
 
   const inputClass = classNames(styles.countInput, {
     [styles.disabled]: isDisabled,
+    [styles.isLarge]: isLarge,
   });
   const circleClass = classNames(styles.circle, {
     [styles.disabled]: isDisabled,
@@ -125,7 +128,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
     const { target } = e;
     let inputValue = target.value;
 
-    if (value > maxValue) {
+    if (!displayValue.includes("+") && value > maxValue) {
       inputValue = inputValue.slice(0, -1);
     }
 

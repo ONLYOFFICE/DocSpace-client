@@ -60,7 +60,10 @@ export async function getFilesSettings(): Promise<TFilesSettings | undefined> {
 
   const res = IS_TEST ? filesSettingsHandler() : await fetch(req);
 
-  if (!res.ok) return;
+  if (!res.ok) {
+    logger.error(`GET /files/settings failed: ${res.status}`);
+    return;
+  }
 
   const filesSettings = await res.json();
 
@@ -70,59 +73,67 @@ export async function getFilesSettings(): Promise<TFilesSettings | undefined> {
 export async function getFoldersTree(): Promise<TFolder[]> {
   logger.debug("Start GET /files/@root?filterType=2&count=1");
 
-  const [req] = await createRequest(
-    [`/files/@root?filterType=2&count=1`],
-    [["", ""]],
-    "GET",
-  );
+  try {
+    const [req] = await createRequest(
+      [`/files/@root?filterType=2&count=1`],
+      [["", ""]],
+      "GET",
+    );
 
-  const res = IS_TEST
-    ? foldersTreeHandler()
-    : await fetch(req, { next: { revalidate: 300 } });
+    const res = IS_TEST
+      ? foldersTreeHandler()
+      : await fetch(req, { next: { revalidate: 300 } });
 
-  if (!res.ok) {
+    if (!res.ok) {
+      logger.error(
+        `GET /files/@root?filterType=2&count=1 failed: ${res.status}`,
+      );
+      throw new Error("Failed to get folders tree");
+    }
+
+    const resJson = await res.json();
+    const folders = resJson.response as TGetFolder[];
+
+    const sortedFolders = sortInDisplayOrder(folders);
+
+    return sortedFolders.map((data, index) => {
+      const { new: newItems, pathParts, current } = data;
+
+      const {
+        parentId,
+        title,
+        id,
+        rootFolderType,
+        security,
+        foldersCount,
+        filesCount,
+      } = current;
+
+      const type = +rootFolderType;
+
+      const name = getFolderClassNameByType(type);
+
+      return {
+        ...current,
+        id,
+        key: `0-${index}`,
+        parentId,
+        title,
+        rootFolderType: type,
+        folderClassName: name,
+        folders: null,
+        pathParts,
+        foldersCount,
+        filesCount,
+        newItems,
+        security,
+        new: newItems,
+      } as TFolder;
+    });
+  } catch (error) {
+    logger.error(`getFoldersTree error ${error}`);
     throw new Error("Failed to get folders tree");
   }
-
-  const resJson = await res.json();
-  const folders = resJson.response as TGetFolder[];
-
-  const sortedFolders = sortInDisplayOrder(folders);
-
-  return sortedFolders.map((data, index) => {
-    const { new: newItems, pathParts, current } = data;
-
-    const {
-      parentId,
-      title,
-      id,
-      rootFolderType,
-      security,
-      foldersCount,
-      filesCount,
-    } = current;
-
-    const type = +rootFolderType;
-
-    const name = getFolderClassNameByType(type);
-
-    return {
-      ...current,
-      id,
-      key: `0-${index}`,
-      parentId,
-      title,
-      rootFolderType: type,
-      folderClassName: name,
-      folders: null,
-      pathParts,
-      foldersCount,
-      filesCount,
-      newItems,
-      security,
-      new: newItems,
-    } as TFolder;
-  });
 }
 
 export async function getFolder(
@@ -131,6 +142,8 @@ export async function getFolder(
   signal?: AbortSignal,
   share?: string,
 ): Promise<TGetFolder> {
+  logger.debug(`Start GET /files/params`);
+
   const hdrs = await headers();
 
   const shareKey = hdrs.get(SHARE_KEY_HEADER);
@@ -169,6 +182,7 @@ export async function getFolder(
     : await fetch(req, { next: { revalidate: 300 } });
 
   if (!res.ok) {
+    logger.error(`GET /files/${params} failed: ${res.status}`);
     throw new Error("Failed to get folder");
   }
 
@@ -201,6 +215,7 @@ export async function validateShareFolder(share: string) {
   const res = await fetch(req, { next: { revalidate: 300 } });
 
   if (!res.ok) {
+    logger.error(`GET /files/share/${share} failed: ${res.status}`);
     throw new Error("Failed to validate share folder");
   }
 

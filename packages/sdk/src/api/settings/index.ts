@@ -59,11 +59,26 @@ export async function getSettings(
     ? settingsHandler()
     : await fetch(req, { next: { revalidate: 300 } });
 
-  if (res.status === 403) return `access-restricted`;
+  if (res.status === 403) {
+    logger.error(
+      `GET /settings?withPassword=${withPassword} failed: ${res.status}`,
+    );
+    return `access-restricted`;
+  }
 
-  if (res.status === 404) return "portal-not-found";
+  if (res.status === 404) {
+    logger.error(
+      `GET /settings?withPassword=${withPassword} failed: ${res.status}`,
+    );
+    return "portal-not-found";
+  }
 
-  if (!res.ok) return;
+  if (!res.ok) {
+    logger.error(
+      `GET /settings?withPassword=${withPassword} failed: ${res.status}`,
+    );
+    return;
+  }
 
   const settings = await res.json();
 
@@ -83,7 +98,10 @@ export async function getColorTheme(): Promise<TGetColorTheme | undefined> {
     ? colorThemeHandler()
     : await fetch(req, { next: { revalidate: 300 } });
 
-  if (!res.ok) return;
+  if (!res.ok) {
+    logger.error(`GET /settings/colortheme failed: ${res.status}`);
+    return;
+  }
 
   const colorTheme = await res.json();
 
@@ -101,7 +119,10 @@ export async function getBuildInfo() {
 
   const res = await fetch(req, { next: { revalidate: 300 } });
 
-  if (!res.ok) return;
+  if (!res.ok) {
+    logger.error(`GET /settings/version/build failed: ${res.status}`);
+    return;
+  }
 
   const buildInfo = await res.json();
 
@@ -115,7 +136,10 @@ export async function getCapabilities() {
 
   const res = await fetch(req, { next: { revalidate: 300 } });
 
-  if (!res.ok) return;
+  if (!res.ok) {
+    logger.error(`GET /capabilities failed: ${res.status}`);
+    return;
+  }
 
   const capabilities = await res.json();
 
@@ -136,6 +160,7 @@ export async function getPortalCultures(): Promise<TPortalCultures> {
     : await fetch(getPortalCultures, { next: { revalidate: 300 } });
 
   if (!res.ok) {
+    logger.error(`GET /settings/cultures failed: ${res.status}`);
     throw new Error("Failed to get portal cultures");
   }
 

@@ -50,6 +50,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  logger.info("SDK layout");
+
   const hdrs = await headers();
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {

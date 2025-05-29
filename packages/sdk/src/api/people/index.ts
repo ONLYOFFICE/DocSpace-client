@@ -49,6 +49,7 @@ export async function getSelf(): Promise<TUser | undefined> {
     : await fetch(req, { next: { revalidate: 300 } });
 
   if (res.status === 401 || !res.ok) {
+    logger.error(`GET /people/@self failed: ${res.status}`);
     return;
   }
 

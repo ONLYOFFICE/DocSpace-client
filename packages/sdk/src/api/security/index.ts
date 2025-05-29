@@ -37,7 +37,10 @@ export async function getCSP(): Promise<TGetCSPSettings | undefined> {
 
   const res = await fetch(req, { next: { revalidate: 300 } });
 
-  if (!res.ok) return;
+  if (!res.ok) {
+    logger.error(`GET /security/csp failed: ${res.status}`);
+    return;
+  }
 
   const csp = await res.json();
 

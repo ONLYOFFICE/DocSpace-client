@@ -1,9 +1,9 @@
 {
-  "key_path": "CurrencyPerMonth",
-  "content": "{{currency}}/month",
-  "content_en_sha1_hash": "07d88a8bbfdeee28f45bb577ddf0c5ce0722bd10",
-  "created_at": "2025-05-29T12:12:54.415Z",
-  "updated_at": "2025-05-29T12:12:54.415Z",
+  "key_path": "CancelChange",
+  "content": "Cancel change",
+  "content_en_sha1_hash": "ee482cca4ea179eb40c0a3f042dd6082445ae2a4",
+  "created_at": "2025-05-29T12:12:54.387Z",
+  "updated_at": "2025-05-29T12:12:54.387Z",
   "comment": {
     "text": "",
     "is_auto": false,

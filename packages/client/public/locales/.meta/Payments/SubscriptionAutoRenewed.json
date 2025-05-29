@@ -1,0 +1,21 @@
+{
+  "key_path": "SubscriptionAutoRenewed",
+  "content": "Subscription will be automatically renewed on {{finalDate}} with updated pricing and specifications.",
+  "content_en_sha1_hash": "8307de2dd47b43d6e83883bbbf81a6111a782a4a",
+  "created_at": "2025-05-29T12:12:54.535Z",
+  "updated_at": "2025-05-29T12:12:54.535Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

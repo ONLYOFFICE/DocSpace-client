@@ -1,9 +1,9 @@
 {
-  "key_path": "CurrencyPerMonth",
-  "content": "{{currency}}/month",
-  "content_en_sha1_hash": "07d88a8bbfdeee28f45bb577ddf0c5ce0722bd10",
-  "created_at": "2025-05-29T12:12:54.415Z",
-  "updated_at": "2025-05-29T12:12:54.415Z",
+  "key_path": "Upgrade",
+  "content": "Upgrade",
+  "content_en_sha1_hash": "a6f47e00e036c5589eb12e237894b37fb015d365",
+  "created_at": "2025-05-29T12:12:54.565Z",
+  "updated_at": "2025-05-29T12:12:54.565Z",
   "comment": {
     "text": "",
     "is_auto": false,

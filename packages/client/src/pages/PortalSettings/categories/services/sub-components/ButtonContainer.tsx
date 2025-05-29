@@ -53,12 +53,11 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
     isCurrentStoragePlan,
     isUpgradeStoragePlan,
     onBuy,
+    onSendRequest,
   } = props;
 
   const { buttonTitle, isWalletBalanceInsufficient, t } = useServicesActions();
   const { futurePayment, isWaitingCalculation } = usePaymentContext();
-
-  const onSendRequest = () => {};
 
   const isPaymentAnavalable = isUpgradeStoragePlan
     ? isWalletBalanceInsufficient(futurePayment)
@@ -74,7 +73,10 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
         scale
         onClick={isExceedingStorageLimit ? onSendRequest : onBuy}
         isLoading={isLoading || isWaitingCalculation}
-        isDisabled={isPaymentAnavalable || isCurrentStoragePlan}
+        isDisabled={
+          !isExceedingStorageLimit &&
+          (isPaymentAnavalable || isCurrentStoragePlan)
+        }
       />
       <Button
         key="CancelButton"

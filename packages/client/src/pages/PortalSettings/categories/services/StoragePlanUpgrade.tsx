@@ -45,6 +45,7 @@ import ButtonContainer from "./sub-components/ButtonContainer";
 import { calculateTotalPrice } from "./hooks/resourceUtils";
 import StorageInformation from "./sub-components/StorageInformation";
 import WalletContainer from "./sub-components/WalletContainer";
+import SalesDepartmentRequestDialog from "../../../../components/dialogs/SalesDepartmentRequestDialog";
 
 type StorageDialogProps = {
   visible: boolean;
@@ -71,6 +72,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   const [amount, setAmount] = useState<number>(currentStoragePlanSize);
   const [isLoading, setIsLoading] = useState(false);
   const [isVisibleContainer, setIsVisible] = useState(false);
+  const [isRequestDialog, setIsRequestDialog] = useState(false);
 
   const {
     maxStorageLimit,
@@ -135,7 +137,9 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   const onBuy = () => handleStoragePlanChange();
   const onCancelChange = () => handleStoragePlanChange(true);
 
-  const onSendRequest = () => {};
+  const onSendRequest = () => {
+    setIsRequestDialog(true);
+  };
 
   const onChangeNumber = (value: number) => {
     setAmount(value);
@@ -164,6 +168,15 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     });
   };
 
+  if (isRequestDialog) {
+    return (
+      <SalesDepartmentRequestDialog
+        visible={isRequestDialog}
+        onClose={() => setIsRequestDialog(false)}
+      />
+    );
+  }
+
   return (
     <PaymentProvider>
       <ModalDialog
@@ -189,6 +202,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
               onChange={onChangeNumber}
               isDisabled={hasScheduledStorageChange || isLoading}
               items={amountTabs()}
+              isLarge
             />
 
             {amount || hasStorageSubscription ? (

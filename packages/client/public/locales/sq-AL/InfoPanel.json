@@ -56,7 +56,6 @@
   "RoomExternalLinkRevoked": "Lidhja e mëparshme<1>«{{linkTitle}}»</1> revokohet <br/> Lidhja e re <1>«{{linkTitle}}»</1> u krijua",
   "RoomGroupAdded": "Grupet u shtuan.",
   "RoomGroupRemove": "Grupi u fshi",
-  "RoomIndexExportSaved": "Eksportimi i indeksit të dhomës u ruajt te dokumentet",
   "RoomIndexingDisabled": "Indeksimi automatik i skedarëve është çaktivizuar në dhomë",
   "RoomIndexingEnabled": "Indeksimi automatik i skedarëve është aktivizuar në dhomë",
   "RoomInviteResend": "Ftesat u dërguan sërish:",

@@ -44,7 +44,6 @@
   "URL": "URL",
   "ViewRawPayload": "Shikoni ngarkesën e papërpunuar",
   "WebhookCreated": "Webhook u kriju",
-  "WebhookCreationHint": "Ky webhook do t'u caktohet të gjitha ngjarjeve në {{productName}}",
   "WebhookDetails": "Detajet e Webhook",
   "WebhookEditedSuccessfully": "Konfigurimi i webhook u modifikua me sukses",
   "WebhookHistory": "Historia e Webhook-ut",

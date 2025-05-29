@@ -1,6 +1,5 @@
 {
   "AccountWillBeCreated": "Një llogari e {{productName}} do të krijohet për <1>{{email}}</1>. Ju lutem plotësoni regjistrimin tuaj:",
-  "ChangePasswordSuccess": "Fjalëkalimi është ndryshuar me sukses",
   "ConfirmOwnerPortalSuccessMessage": "Pronari i {{productName}} është ndryshuar me sukses. Do të ridrejtoheni për 10 sekonda.",
   "ConfirmOwnerPortalTitle": "Ju lutemi konfirmoni që dëshironi të ndryshoni zotëruesin e {{productName}} në {{newOwner}}.",
   "CurrentNumber": "Numri juaj aktual i telefonit celular",

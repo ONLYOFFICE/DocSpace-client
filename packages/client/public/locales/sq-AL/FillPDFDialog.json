@@ -2,8 +2,5 @@
   "FillOutButtonLabel": "Plotësoni",
   "FillOutDescription": "Plotësoni fushat e formularit origjinal në dritaren e redaktorit.",
   "FillOutTitle": "Plotësoni vetë formularin",
-  "FillPDFDialogTitle": "Plotësoni si",
-  "ShareCollectButtonLabel": "Kopjoni në dhomë",
-  "ShareCollectDescription": "Ndani formularin tuaj dhe mblidhni përgjigjet përmes një dhome plotësimi të formularit.",
-  "ShareCollectTitle": "Shpërndani"
+  "FillPDFDialogTitle": "Plotësoni si"
 }

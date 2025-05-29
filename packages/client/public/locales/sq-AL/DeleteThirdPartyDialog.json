@@ -1,5 +1,4 @@
 {
-  "DisconnectCloudMessage": "Jeni të sigurt që dëshironi të hiqni {{service}}? Kjo nuk do të ndikojë në asnjë mënyrë llogarinë tuaj të{{account}}.",
   "DisconnectCloudTitle": "Shkëputni renë",
   "SuccessDeleteThirdParty": "{{service}} i palës së tretë është fshirë"
 }

@@ -3,10 +3,8 @@
   "DocumentsFileType": "dokumente",
   "ErrorConnectionLost": "Lidhja është e humbur",
   "FileLocation": "Hap vendndodhjen e skedarit",
-  "FileName": "Emri skedarit",
   "ImageFileType": "imazhet",
   "MailMergeFileType": "Selektoni skedarin .XLSX",
-  "OpenSavedDocument": "Hapni dokumentin e ruajtur në skedën e re",
   "SelectFilesType": "Zgjidhni llojin e skedarëve: {{fileType}}",
   "UsersWithoutAccess": "Disa përdorues që dëshironi të përmendni nuk kanë qasje në dhomë: {{users}}"
 }

@@ -1,6 +1,4 @@
 {
   "ErrorEmptyResponse": "Përgjigje boshe",
-  "ErrorUnavailableText": "{{productName}} e padisponueshme",
-  "LinkDoesNotExist": "Lidhja që ju po mundoheni të hapni nuk ekziston.",
-  "LinkHasExpired": "Lidhja që keni ndjekur ka skaduar."
+  "ErrorUnavailableText": "{{productName}} e padisponueshme"
 }

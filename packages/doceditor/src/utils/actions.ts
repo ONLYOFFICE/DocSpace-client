@@ -75,6 +75,8 @@ export async function getFillingSession(
 
     if (response.ok) return await response.json();
 
+    logger.error(`GET /files/file/fillresult failed: ${response.status}`);
+
     throw new Error("Something went wrong", {
       cause: await response.json(),
     });
@@ -227,10 +229,13 @@ export async function createFile(
 
     const fileRes = await fetch(createFile);
 
-    if (!fileRes.ok) console.log("fileRes", fileRes);
+    if (!fileRes.ok) {
+      logger.error(`POST /files/${parentId}/file failed: ${fileRes.status}`);
+      console.log("fileRes", fileRes);
+    }
 
     if (fileRes.status === 401) {
-      logger.debug(`POST /files/${parentId}/file user auth failed`);
+      logger.error(`POST /files/${parentId}/file user auth failed`);
 
       return {
         file: undefined,
@@ -238,7 +243,10 @@ export async function createFile(
       };
     }
 
-    if (!fileRes.ok && fileRes.status !== 403) return;
+    if (!fileRes.ok && fileRes.status !== 403) {
+      logger.error(`POST /files/${parentId}/file failed: ${fileRes.status}`);
+      return;
+    }
 
     const file = await fileRes.json();
 

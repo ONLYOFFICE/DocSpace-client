@@ -329,6 +329,8 @@ export async function getUserById(userId: string) {
     };
   }
 
+  console.log("userById", res);
+
   return res;
 }
 

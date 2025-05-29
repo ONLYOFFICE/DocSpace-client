@@ -31,6 +31,7 @@
 import { AxiosRequestConfig } from "axios";
 
 import moment from "moment";
+import { Nullable } from "types";
 import { FolderType, MembersSubjectType, ShareAccessRights } from "../../enums";
 import { request } from "../client";
 import {
@@ -45,7 +46,10 @@ import {
   TPublicRoomPassword,
   TValidateShareRoom,
   TRoom,
+  TGetRoomMembers,
+  TFeed,
 } from "./types";
+import FilesFilter from "../files/filter";
 
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
   let params;
@@ -89,7 +93,7 @@ export function getRoomInfo(id) {
   });
 }
 
-export function getRoomMembers(id, filter) {
+export async function getRoomMembers(id: string, filter) {
   let params = "";
 
   const str = toUrlParams(filter);
@@ -100,15 +104,16 @@ export function getRoomMembers(id, filter) {
     url: `/files/rooms/${id}/share${params}`,
   };
 
-  return request(options).then((res) => {
-    res.items.forEach((item) => {
-      if (item.subjectType === MembersSubjectType.Group) {
-        item.sharedTo.isGroup = true;
-      }
-    });
+  const res = (await request(options)) as TGetRoomMembers;
+  console.log("getRoomMembers", res);
 
-    return res;
+  res.items.forEach((item) => {
+    if (item.subjectType === MembersSubjectType.Group) {
+      item.sharedTo.isGroup = true;
+    }
   });
+
+  return res;
 }
 
 export function updateRoomMemberRole(id, data) {
@@ -125,10 +130,10 @@ export function updateRoomMemberRole(id, data) {
 
 export function getHistory(
   selectionType: "file" | "folder",
-  id,
-  requestToken,
-  filter,
-  signal = null,
+  id: number | string,
+  requestToken?: string,
+  filter: FilesFilter,
+  signal: Nullable<AbortSignal> = null,
 ) {
   let params = "";
 
@@ -143,7 +148,7 @@ export function getHistory(
 
   if (requestToken) options.headers = { "Request-Token": requestToken };
 
-  return request(options).then((res) => res);
+  return request<TFeed>(options).then((res) => res);
 }
 
 export function getRoomHistory(id) {
@@ -599,7 +604,7 @@ export function getTemplateAvailable(id: number) {
     url: `/files/roomtemplate/${id}/public`,
   };
 
-  return request(options);
+  return request(options) as Promise<boolean>;
 }
 
 export function setTemplateAvailable(id: number, isAvailable: boolean) {

@@ -91,6 +91,8 @@ import FilesStore from "../FilesStore";
 import DialogsStore from "../DialogsStore";
 import SelectedFolderStore from "../SelectedFolderStore";
 
+export type TPeopleListItem = ReturnType<UsersStore["getPeopleListItem"]>; // TODO replace on it where used
+
 class UsersStore {
   filter = Filter.getDefault();
 
@@ -98,9 +100,9 @@ class UsersStore {
 
   users: TUser[] = [];
 
-  selection: ReturnType<typeof this.getPeopleListItem>[] = [];
+  selection: TPeopleListItem[] = [];
 
-  bufferSelection: Nullable<ReturnType<typeof this.getPeopleListItem>> = null;
+  bufferSelection: Nullable<TPeopleListItem> = null;
 
   selectionUsersRights = {
     isVisitor: 0,

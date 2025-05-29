@@ -33,6 +33,8 @@ import {
   ValidationStatus,
 } from "../../enums";
 import { TCreatedBy, TPathParts } from "../../types";
+import { TUser } from "../people/types";
+import { TGroup } from "../groups/types";
 
 export type ICover = {
   data: string;
@@ -181,3 +183,111 @@ export type TValidateShareRoom =
       status: number;
       tenantId: number;
     };
+
+export type RoomMember = {
+  access: number;
+  canEditAccess: boolean;
+  isLocked: boolean;
+  isOwner: boolean;
+  subjectType: number;
+  sharedTo: TUser | TGroup;
+};
+
+export type TGetRoomMembers = {
+  total: number;
+  items: RoomMember[];
+};
+
+export enum FeedAction {
+  Create = "create",
+  Upload = "upload",
+  Update = "update",
+  Convert = "convert",
+  Delete = "delete",
+  Rename = "rename",
+  Move = "move",
+  Copy = "copy",
+  Revoke = "revoke",
+  Change = "changeIndex",
+  Reorder = "reorderIndex",
+  Submitted = "submitted",
+  StartedFilling = "startedFilling",
+  Locked = "locked",
+  Unlocked = "unlocked",
+  Archived = "archived",
+  Unarchived = "unarchived",
+  Export = "export",
+  Invite = "invite",
+  CHANGE_COLOR = "changeColor",
+  CHANGE_COVER = "changeCover",
+  DeleteVersion = "deleteVersion",
+  FormStartedToFill = "formStartedToFill",
+  FormPartiallyFilled = "formPartiallyFilled",
+  FormCompletelyFilled = "formCompletelyFilled",
+  FormStopped = "formStopped",
+  CustomFilterDisabled = "customFilterDisabled",
+  CustomFilterEnabled = "customFilterEnabled",
+}
+
+export type CapitalizedFeedAction = Capitalize<FeedAction>;
+
+type TAccessibility = {
+  ImageView: boolean;
+  MediaView: boolean;
+  WebView: boolean;
+  WebEdit: boolean;
+  WebReview: boolean;
+  WebCustomFilterEditing: boolean;
+  WebRestrictedEditing: boolean;
+  WebComment: boolean;
+  CoAuhtoring: boolean;
+  CanConvert: boolean;
+  MustConvert: boolean;
+};
+
+export interface TFeedData {
+  accessibility?: TAccessibility;
+  parentId: number;
+  toFolderId: number;
+  parentTitle: string;
+  parentType: number;
+  fromParentType: number;
+  fromParentTitle: string;
+  fromFolderId?: number;
+  id: string | number;
+  title?: string;
+  newTitle?: string;
+  oldTitle?: string;
+  oldIndex?: number;
+  newIndex?: number;
+  viewUrl?: string;
+}
+
+interface Initiator {
+  id: string | number;
+  avatar: string;
+  avatarSmall: string;
+  avatarMedium: string;
+  avatarMax: string;
+  avatarOriginal: string;
+  displayName: string;
+  hasAvatar: boolean;
+  isAnonim: boolean;
+  profileUrl: string;
+}
+
+export type TFeedAction<T = TFeedData> = {
+  action: {
+    id: number;
+    key: CapitalizedFeedAction;
+  };
+  data: T;
+  date: string;
+  initiator: Initiator;
+  related: Omit<TFeedAction<T>, "related">[];
+};
+
+export type TFeed = {
+  total: number;
+  items: TFeedAction[];
+};

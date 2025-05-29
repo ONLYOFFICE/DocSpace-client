@@ -56,6 +56,7 @@ type InfoPanelHeaderContentProps = {
   infoPanelItemsList: PluginStore["infoPanelItemsList"];
 
   enablePlugins: SettingsStore["enablePlugins"];
+  isSeveralItems: boolean;
 };
 
 const InfoPanelHeaderContent = ({
@@ -69,14 +70,13 @@ const InfoPanelHeaderContent = ({
   getIsTrash,
   infoPanelItemsList,
   enablePlugins,
+  isSeveralItems,
 }: InfoPanelHeaderContentProps) => {
   const { t } = useTranslation(["Common", "InfoPanel"]);
 
   const isGallery = getIsGallery();
   const isContacts = getIsContacts();
   const isTrash = getIsTrash();
-
-  const isSeveralItems = selection && Array.isArray(selection);
 
   const isRoot =
     !isSeveralItems &&
@@ -250,6 +250,7 @@ export default inject(
 
     const {
       infoPanelSelection,
+      infoPanelSelectedItems,
       setIsVisible,
       roomsView,
       fileView,
@@ -263,6 +264,7 @@ export default inject(
 
     return {
       selection: infoPanelSelection,
+      isSeveralItems: infoPanelSelectedItems.length > 1,
       setIsVisible,
       roomsView,
       fileView,

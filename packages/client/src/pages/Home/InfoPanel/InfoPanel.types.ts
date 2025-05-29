@@ -27,16 +27,93 @@
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { TGroup } from "@docspace/shared/api/groups/types";
 import { TUser } from "@docspace/shared/api/people/types";
-import { TRoom } from "@docspace/shared/api/rooms/types";
 
-export type TInfoPanelSelection =
+import {
+  RoomMember,
+  TFeedAction,
+  TFeedData,
+  TLogo,
+  TRoom,
+} from "@docspace/shared/api/rooms/types";
+
+import { Nullable } from "@docspace/shared/types";
+import { TPeopleListItem } from "SRC_DIR/store/contacts/UsersStore";
+import { TSelectedFolder } from "SRC_DIR/store/SelectedFolderStore";
+
+// export type TInfoPanelSelection =
+//   | TFile
+//   | TFolder
+//   | (TFile | TFolder)[]
+//   | TRoom
+//   | TRoom[]
+//   | TUser
+//   | TUser[]
+//   | TGroup
+//   | TGroup[]
+//   | null;
+
+export enum TInfoPanelMemberType {
+  users = "users",
+  groups = "groups",
+  expected = "expected",
+  guests = "guests",
+  administrators = "administrators",
+}
+
+export const enum InfoPanelView {
+  infoMembers = "info_members",
+  infoHistory = "info_history",
+  infoDetails = "info_details",
+  infoShare = "info_share",
+}
+
+export type HistoryFilter = {
+  page: number;
+  pageCount: number;
+  total: number;
+  startIndex: number;
+};
+
+export type TTitleMember = {
+  id: TInfoPanelMemberType;
+  displayName: string;
+  isTitle: true;
+  isExpect?: boolean;
+};
+
+export type TInfoPanelMember = {
+  access: number;
+  canEditAccess: boolean;
+  isExpect?: boolean;
+} & (TUser | TGroup);
+
+export type TInfoPanelMembers = Record<
+  TInfoPanelMemberType,
+  TInfoPanelMember[]
+> & {
+  roomId: number | string;
+};
+
+type TMember = TTitleMember | TInfoPanelMember;
+
+export type TMemberTuple = TMember[];
+
+export type TSelection = (
   | TFile
   | TFolder
-  | (TFile | TFolder)[]
-  | TRoom
-  | TRoom[]
-  | TUser
-  | TUser[]
+  | TPeopleListItem
   | TGroup
-  | TGroup[]
-  | null;
+  | TSelectedFolder
+  | TRoom
+) & {
+  isRoom?: boolean;
+  logo?: Nullable<TLogo>;
+  icon?: string | TLogo;
+};
+
+export type TInfoPanelSelection = Nullable<TSelection>;
+
+export type TSelectionHistory = {
+  day: string;
+  feeds: TFeedAction<TFeedData | RoomMember>[];
+};

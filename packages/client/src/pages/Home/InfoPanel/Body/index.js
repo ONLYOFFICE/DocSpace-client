@@ -100,6 +100,8 @@ const InfoPanelBodyContent = ({
     isNoItemGallery ||
     (isRoot && !isGallery);
 
+  console.log("isNoItem", isNoItem);
+
   const defaultProps = {
     infoPanelSelection,
     isFiles,
@@ -139,8 +141,8 @@ const InfoPanelBodyContent = ({
   const getView = () => {
     const currentView = isRooms ? roomsView : fileView;
 
-    if (isNoItem) return viewHelper.NoItemView();
     if (isSeveralItems) return viewHelper.SeveralItemsView();
+    if (isNoItem) return viewHelper.NoItemView();
 
     if (isGallery) return viewHelper.GalleryView();
     if (isUsers || isGuests) return viewHelper.UsersView();

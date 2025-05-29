@@ -123,6 +123,7 @@ const HistoryRoomExternalLink = ({
 
 export default inject<TStore>(({ dialogsStore, infoPanelStore }) => {
   const { infoPanelSelection } = infoPanelStore;
+  console.log(infoPanelSelection);
   const { setLinkParams, setEditLinkPanelIsVisible } = dialogsStore;
   const { id, roomType, security } = infoPanelSelection!;
   const { EditRoom } = security || {};

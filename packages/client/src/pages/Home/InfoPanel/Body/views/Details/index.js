@@ -120,8 +120,6 @@ const Details = ({
 
   const badgeUrl = getRoomBadgeUrl(selection, 24);
 
-  // console.log("InfoPanel->Details render", { selection });
-
   const isLoadedRoomIcon = !!selection.logo?.cover || !!selection.logo?.large;
   const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
 
@@ -152,7 +150,6 @@ const Details = ({
                 >
                   {t("Files:RoomTemplateDescription")}
                 </Text>
-
                 <Button
                   label={t("Common:CreateRoom")}
                   className="room-template_button"
@@ -250,6 +247,7 @@ export default inject(
       setNewInfoPanelSelection,
       infoPanelRoom,
     } = infoPanelStore;
+
     const { createThumbnail } = filesStore;
     const { culture } = settingsStore;
     const { user } = userStore;

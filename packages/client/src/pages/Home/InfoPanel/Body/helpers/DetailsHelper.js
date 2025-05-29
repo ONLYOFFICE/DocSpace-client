@@ -82,7 +82,7 @@ const tagList = (tags, selectTag) => (
 export const decodeString = (str) => {
   const regex = /&#([0-9]{1,4});/gi;
   return str
-    ? str.replace(regex, (match, numStr) => String.fromCharCode(+numStr))
+    ? str.replace(regex, (_, numStr) => String.fromCharCode(+numStr))
     : "...";
 };
 

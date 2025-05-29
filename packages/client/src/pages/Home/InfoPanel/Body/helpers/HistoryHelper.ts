@@ -26,11 +26,19 @@
 
 import moment from "moment-timezone";
 
+import {
+  RoomMember,
+  TFeed,
+  TFeedAction,
+  TFeedData,
+} from "@docspace/shared/api/rooms/types";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie } from "@docspace/shared/utils";
+import { TTranslation } from "@docspace/shared/types";
 import { getFeedInfo } from "../views/History/FeedInfo";
+import { TSelectionHistory } from "../../InfoPanel.types";
 
-export const getRelativeDateDay = (t, date) => {
+export const getRelativeDateDay = (t: TTranslation, date: Date) => {
   moment.locale(getCookie(LANGUAGE));
 
   const given = moment(date).tz(window.timezone);
@@ -56,17 +64,17 @@ export const getRelativeDateDay = (t, date) => {
   return longDate.charAt(0).toUpperCase() + longDate.slice(1);
 };
 
-export const getDateTime = (date) => {
+export const getDateTime = (date: Date | string) => {
   moment.locale(getCookie(LANGUAGE));
 
   const given = moment(date);
   return given.format("LT");
 };
 
-export const addLinksToHistory = (fetchedHistory, links) => {
-  if (!fetchedHistory) return null;
-  if (!links) return fetchedHistory;
-
+export const addLinksToHistory = (
+  fetchedHistory: TFeed,
+  links: RoomMember[],
+) => {
   const historyWithLinks = fetchedHistory?.items.map((feed) => {
     const { actionType, targetType } = getFeedInfo(feed);
     if (targetType !== "roomExternalLink") return feed;
@@ -81,23 +89,21 @@ export const addLinksToHistory = (fetchedHistory, links) => {
   return { ...fetchedHistory, items: historyWithLinks };
 };
 
-export const parseHistory = (fetchedHistory) => {
-  if (!fetchedHistory) return null;
+export const parseHistory = (
+  feedActions: TFeedAction<TFeedData | RoomMember>[],
+) => {
+  const parsedFeeds: TSelectionHistory[] = [];
 
-  const feeds = fetchedHistory?.items;
-  const parsedFeeds = [];
-
-  for (let i = 0; i < feeds.length; i++) {
-    const feedDay = moment(feeds[i].date).format("YYYY-MM-DD");
-
-    if (parsedFeeds.length && parsedFeeds.at(-1).day === feedDay)
-      parsedFeeds.at(-1).feeds.push({ ...feeds[i] });
+  feedActions.forEach((feed) => {
+    const feedDay = moment(feed.date).format("YYYY-MM-DD");
+    if (feedActions.length && parsedFeeds.at(-1)?.day === feedDay)
+      parsedFeeds.at(-1)?.feeds.push({ ...feed });
     else
       parsedFeeds.push({
         day: feedDay,
-        feeds: [{ ...feeds[i] }],
+        feeds: [{ ...feed }],
       });
-  }
+  });
 
   return parsedFeeds;
 };

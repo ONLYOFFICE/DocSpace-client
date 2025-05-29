@@ -37,21 +37,13 @@ import PreparationPortalLoader from "../../skeletons/preparation-portal";
 import { getEncryptionProgress } from "../../api/settings";
 import SocketHelper, { SocketEvents } from "../../utils/socket";
 import { returnToPortal } from "./EncryptionPortal.utils";
-import {
-  EncryptionPortalProps,
-  StorybookProps,
-} from "./EncryptionPortal.types";
+import { EncryptionPortalProps } from "./EncryptionPortal.types";
 
 import styles from "./EncryptionPortal.module.scss";
 
 let requestsCount = 0;
 
-export const EncryptionPortal: React.FC<EncryptionPortalProps> = (props) => {
-  // Extract storybook props if they exist
-  const storybook = (
-    props as EncryptionPortalProps & { storybook?: StorybookProps | undefined }
-  )?.storybook;
-
+export const EncryptionPortal: React.FC<EncryptionPortalProps> = () => {
   const { t, ready } = useTranslation("Common");
 
   const errorInternalServer = t("Common:ErrorInternalServer");
@@ -60,16 +52,13 @@ export const EncryptionPortal: React.FC<EncryptionPortalProps> = (props) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const getProgress = useCallback(async () => {
-    // Use mockAPI for Storybook if available
-    const encryptionProgressFn =
-      storybook?.mockAPI?.getEncryptionProgress || getEncryptionProgress;
     const setMessage = (error?: unknown) => {
       const errorText = error ?? errorInternalServer;
       setErrorMessage(errorText);
     };
 
     try {
-      const percentage = (await encryptionProgressFn()) as number;
+      const percentage = (await getEncryptionProgress()) as number;
       const roundedPercentage = Math.round(percentage);
 
       if (!roundedPercentage) {
@@ -109,7 +98,7 @@ export const EncryptionPortal: React.FC<EncryptionPortalProps> = (props) => {
 
       setMessage(message);
     }
-  }, [errorInternalServer, storybook?.mockAPI?.getEncryptionProgress]);
+  }, [errorInternalServer]);
 
   useEffect(() => {
     SocketHelper?.on(SocketEvents.EncryptionProgress, (opt) => {
@@ -131,24 +120,9 @@ export const EncryptionPortal: React.FC<EncryptionPortalProps> = (props) => {
   }, [getProgress]);
 
   useEffect(() => {
-    // For Storybook, use provided values if available
-    if (storybook) {
-      if (storybook.error) {
-        setErrorMessage(storybook.error);
-      } else if (storybook.progress !== undefined) {
-        setPercent(storybook.progress);
-
-        if (storybook.progress === 100) {
-          returnToPortal();
-        }
-      }
-      return;
-    }
-
-    // Normal behavior for actual app
     if (!ready) return;
     getProgress();
-  }, [ready, getProgress, storybook]);
+  }, [ready, getProgress]);
 
   const headerText = errorMessage ? t("Error") : t("EncryptionPortalTitle");
 
@@ -196,11 +170,7 @@ export const EncryptionPortal: React.FC<EncryptionPortalProps> = (props) => {
             errorMessage && percent >= 100 ? "true" : undefined
           }
         >
-          {(!ready && !storybook) || storybook?.isLoading ? (
-            <PreparationPortalLoader />
-          ) : (
-            componentBody
-          )}
+          {!ready ? <PreparationPortalLoader /> : componentBody}
         </div>
       </ErrorContainer>
     </div>

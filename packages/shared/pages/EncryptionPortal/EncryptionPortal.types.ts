@@ -33,12 +33,3 @@ export type EncryptionPortalProps = PropsWithChildren & {
   /** Optional className for custom styling */
   className?: string;
 };
-
-export type StorybookProps = {
-  mockAPI?: {
-    getEncryptionProgress: () => Promise<number>;
-  };
-  progress?: number;
-  error?: string | null;
-  isLoading?: boolean;
-};

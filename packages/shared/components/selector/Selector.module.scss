@@ -89,7 +89,7 @@
   :global {
     .combo-button {
       min-height: 40px;
-      padding-inline-start: 16px;
+      padding-inline-start: 16px !important;
     }
 
     .combo-button-label,
@@ -99,8 +99,6 @@
     }
   }
 }
-
-
 
 .footer {
   width: calc(100% - 32px);
@@ -330,9 +328,9 @@
     }
   }
   .arrowRightSvg {
-      path {
-        fill: var(--selector-breadcrumbs-arrow-right-color);
-      }
+    path {
+      fill: var(--selector-breadcrumbs-arrow-right-color);
+    }
 
     &.rtl {
       transform: scaleX(-1);

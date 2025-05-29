@@ -10,10 +10,7 @@ export default {
   component: SelectionArea,
   parameters: {
     docs: {
-      description: {
-        component:
-          "A component that allows users to select multiple items by dragging a selection box",
-      },
+      disable: true,
     },
   },
   decorators: [
@@ -57,27 +54,25 @@ const Template: Story<SelectionAreaProps> = (args) => {
   };
 
   return (
-    <>
-      <div className={`${styles.itemsContainer} items-container`}>
-        {Array.from({ length: 12 }).map((_, index) => (
-          <div
-            key={`${index}test`}
-            data-id={`item-${index}`}
-            className={`${styles.item} selectable-item ${selectedItems.includes(`item-${index}`) ? "selected" : ""}`}
-          >
-            Item {index + 1}
-          </div>
-        ))}
-        <SelectionArea
-          {...args}
-          onMove={handleMove}
-          containerClass="selection-container"
-          itemsContainerClass="items-container"
-          selectableClass="selectable-item"
-          scrollClass="scroll-container"
-        />
-      </div>
-    </>
+    <div className={`${styles.itemsContainer} items-container`}>
+      {Array.from({ length: 12 }).map((_, index) => (
+        <div
+          key={`${index}test`}
+          data-id={`item-${index}`}
+          className={`${styles.item} selectable-item ${selectedItems.includes(`item-${index}`) ? "selected" : ""}`}
+        >
+          Item {index + 1}
+        </div>
+      ))}
+      <SelectionArea
+        {...args}
+        onMove={handleMove}
+        containerClass="selection-container"
+        itemsContainerClass="items-container"
+        selectableClass="selectable-item"
+        scrollClass="scroll-container"
+      />
+    </div>
   );
 };
 

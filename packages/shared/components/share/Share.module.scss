@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 @use "../../styles/mixins";
+@use "../../styles/variables";
 
 .links {
   margin-top: 20px;
@@ -32,7 +33,7 @@
   .titleLink {
     margin-bottom: 12px;
     line-height: 16px;
-    color: var(--text-color);
+    color: variables.$gray;
   }
 
   .additionalLink {

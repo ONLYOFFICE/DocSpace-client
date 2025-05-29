@@ -54,6 +54,7 @@ import SkReactSvg from "PUBLIC_DIR/images/flags/sk.react.svg";
 import SlReactSvg from "PUBLIC_DIR/images/flags/sl.react.svg";
 import SiReactSvg from "PUBLIC_DIR/images/flags/si.react.svg";
 import SrReactSvg from "PUBLIC_DIR/images/flags/sr.react.svg";
+import SqALReactSvg from "PUBLIC_DIR/images/flags/sq-AL.react.svg";
 import TrReactSvg from "PUBLIC_DIR/images/flags/tr.react.svg";
 import UkUAReactSvg from "PUBLIC_DIR/images/flags/uk-UA.react.svg";
 import ViReactSvg from "PUBLIC_DIR/images/flags/vi.react.svg";
@@ -89,7 +90,8 @@ export const flagsIcons = new Map([
   ["sk.react.svg", SkReactSvg],
   ["sl.react.svg", SlReactSvg],
   ["si.react.svg", SiReactSvg],
-  ["sr.react.svg", SrReactSvg],
+  ["sr.react.svg", SrReactSvg], // Assuming 'sr' is used for both Cyrillic and Latin scripts
+  ["sq-AL.react.svg", SqALReactSvg],
   ["tr.react.svg", TrReactSvg],
   ["uk-UA.react.svg", UkUAReactSvg],
   ["vi.react.svg", ViReactSvg],

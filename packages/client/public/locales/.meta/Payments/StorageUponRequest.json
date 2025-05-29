@@ -1,0 +1,21 @@
+{
+  "key_path": "StorageUponRequest",
+  "content": "Additional storage exceeding {{amount}} {{storageUnit}} is available upon request.",
+  "content_en_sha1_hash": "80a3b4d7508dc2fdf51b9bcc39fd5450e9724a33",
+  "created_at": "2025-05-29T12:12:54.529Z",
+  "updated_at": "2025-05-29T12:12:54.529Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

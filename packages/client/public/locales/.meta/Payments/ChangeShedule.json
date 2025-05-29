@@ -1,0 +1,21 @@
+{
+  "key_path": "ChangeShedule",
+  "content": "Change scheduled",
+  "content_en_sha1_hash": "1e9b5cbe7b9f524d1cec8d09c12e7c0472706f50",
+  "created_at": "2025-05-29T12:12:54.397Z",
+  "updated_at": "2025-05-29T12:12:54.397Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

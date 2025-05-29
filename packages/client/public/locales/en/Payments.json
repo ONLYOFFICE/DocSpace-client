@@ -116,11 +116,11 @@
   "Wallet": "Wallet",
   "WalletDescription": "The {{productName}} Wallet lets you easily purchase storage space and AI tools. Add funds to your wallet and select the services you need in the Services section to get started.",
   "WalletRefilled": "Wallet refilled",
+  "Warning": "You will keep your full {{amount}} {{storageUnit}} access until the end of your paid billing period. If your storage exceeds the new limit at the start of the next period, you’ll be charged for the actual usage, rounded to the nearest {{storageUnit}}.",
   "WhenBalanceDropsTo": "When the balance drops to {{min}}, the wallet will be automatically topped up to {{max}}.",
   "WhenBalanceGoesBellow": "When balance goes bellow",
   "WouldYouLikeToEnableAutoTopUps": "Would you like to enable automatic top-ups so your balance never runs out?",
   "YouHaveNotAddedAnyPayment": "You have not added any payment",
   "YourCurrentPayment": "Your current payment",
-  "YourPrice": "Your price",
-  "Warning": "You will keep your full {{amount}} {{storageUnit}} access until the end of your paid billing period. If your storage exceeds the new limit at the start of the next period, you’ll be charged for the actual usage, rounded to the nearest {{storageUnit}}."
+  "YourPrice": "Your price"
 }

@@ -17,7 +17,15 @@ export default {
   },
 } as Meta;
 
-const Template: Story<TNavigationProps> = (args) => <Navigation {...args} />;
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
+  <div style={{ height: "140px" }}>{children}</div>
+);
+
+const Template: Story<TNavigationProps> = (args) => (
+  <Wrapper>
+    <Navigation {...args} />
+  </Wrapper>
+);
 
 export const Default = Template.bind({});
 Default.args = {

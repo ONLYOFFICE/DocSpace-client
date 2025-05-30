@@ -47,6 +47,7 @@ import StorageInformation from "./sub-components/StorageInformation";
 import WalletContainer from "./sub-components/WalletContainer";
 import SalesDepartmentRequestDialog from "../../../../components/dialogs/SalesDepartmentRequestDialog";
 import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
+import { getConvertedSize } from "@docspace/shared/utils/common";
 
 type StorageDialogProps = {
   visible: boolean;
@@ -56,7 +57,10 @@ type StorageDialogProps = {
   currentStoragePlanSize?: number;
   fetchPortalTariff?: () => void;
   fetchBalance?: () => void;
+  handleServicesQuotas?: () => void;
   hasScheduledStorageChange?: boolean;
+  nextStoragePlanSize?: boolean;
+  storageSizeIncrement?: number;
 };
 
 const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
@@ -70,6 +74,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   storagePriceIncrement,
   nextStoragePlanSize,
   handleServicesQuotas,
+  storageSizeIncrement,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
   const [amount, setAmount] = useState<number>(currentStoragePlanSize);
@@ -84,6 +89,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     calculateDifferenceBetweenPlan,
     isWalletBalanceInsufficient,
     isPlanUpgrade,
+    formatWalletCurrency,
   } = useServicesActions();
 
   const { isRTL } = useInterfaceDirection();
@@ -221,6 +227,10 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
               isDisabled={hasScheduledStorageChange || isLoading}
               items={amountTabs()}
               withoutContorls={hasScheduledStorageChange}
+              underContorlsTitle={t("PerStorage", {
+                currency: formatWalletCurrency(storagePriceIncrement),
+                amount: getConvertedSize(t, storageSizeIncrement || 0),
+              })}
               {...disableValueProps}
               isLarge
             />

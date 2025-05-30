@@ -80,7 +80,7 @@
   "PaymentDue": "Payment due: {{payment}}",
   "PaymentMethod": "Payment method",
   "PaymentNonRefundable": "Payments for plan upgrades are <1>non-refundable</1>.",
-  "PerStorage": "{{currency}} per {{amount}} / month",
+  "PerStorage": "{{currency}} per {{amount}}/month",
   "PlanUpgrade": "Plan upgrade",
   "PriceCalculation": "Calculate your price",
   "PriceForEach": "{{currency}} per {{amount}}",

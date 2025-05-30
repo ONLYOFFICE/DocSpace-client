@@ -90,6 +90,10 @@ const meta = {
     isDefaultMode: { control: "boolean" },
     comboIcon: { control: "text" },
     usePortalBackdrop: { control: "boolean" },
+    type: {
+      control: { type: "select" },
+      options: [undefined, "badge", "onlyIcon", "descriptive"],
+    },
 
     className: { table: { disable: true } },
     onSelect: { table: { disable: true } },

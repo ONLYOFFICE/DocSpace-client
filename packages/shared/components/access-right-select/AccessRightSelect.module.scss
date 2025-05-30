@@ -37,11 +37,11 @@
 
   &.onlyIcon {
     :global(.combo-button) {
-      padding-right: 4px;
+      padding-inline-end: 4px;
     }
 
     :global(.combo-button_selected-icon-container) {
-      margin-right: 0;
+      margin-inline-end: 0;
     }
 
     :global(.combo-buttons_arrow-icon),

@@ -1,7 +1,6 @@
 {
   "CancellaionNotification": "Don't display cancellation notification again",
   "DisplayFileExtension": "Display file extension next to file name",
-  "DisplayNotification": "",
   "OpenSameTab": "Open {{organizationName}} editor in same tab",
   "OriginalCopy": "Save the file copy in the original format as well",
   "TrashMoveConfirmation": "Display notification when moving items to {{sectionName}}"

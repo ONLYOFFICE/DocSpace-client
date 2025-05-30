@@ -27,7 +27,7 @@
 "use server";
 
 import { headers } from "next/headers";
-
+import { isDynamicServerError } from "next/dist/client/components/hooks-server-context";
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import type { TUser } from "@docspace/shared/api/people/types";
 import type {
@@ -84,6 +84,9 @@ export async function getUser() {
 
     return user.response as TUser;
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     logger.error(`Error in getUser: ${error}`);
     return;
   }
@@ -123,6 +126,9 @@ export async function getSettings(share?: string) {
 
     return settings.response as TSettings;
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     logger.error(`Error in getSettings: ${error}`);
     return;
   }
@@ -148,6 +154,9 @@ export async function getVersionBuild() {
 
     return versionBuild.response as TVersionBuild;
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     logger.error(`Error in getVersionBuild: ${error}`);
     return;
   }
@@ -185,6 +194,9 @@ export async function getQuota() {
 
     return quota.response as TPaymentQuota;
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     logger.error(`Error in getQuota: ${error}`);
     return;
   }
@@ -214,6 +226,9 @@ export async function getAllPortals() {
 
     return portals as TGetAllPortals;
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     logger.error(`Error in getAllPortals: ${error}`);
     return;
   }
@@ -252,6 +267,9 @@ export async function getPortalTariff() {
 
     return portalTariff.response as TPortalTariff;
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     logger.error(`Error in getPortalTariff: ${error}`);
     return;
   }
@@ -277,6 +295,9 @@ export async function getColorTheme() {
 
     return colorTheme.response as TGetColorTheme;
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     logger.error(`Error in getColorTheme: ${error}`);
     return;
   }
@@ -304,6 +325,9 @@ export async function getWhiteLabelLogos() {
 
     return logos.response;
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     logger.error(`Error in getWhiteLabelLogos: ${error}`);
     return;
   }
@@ -331,6 +355,9 @@ export async function getWhiteLabelText() {
 
     return text.response;
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     logger.error(`Error in getWhiteLabelText: ${error}`);
     return;
   }
@@ -358,6 +385,9 @@ export async function getWhiteLabelIsDefault() {
 
     return isDefault.response;
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     logger.error(`Error in getWhiteLabelIsDefault: ${error}`);
     return;
   }
@@ -385,6 +415,9 @@ export async function getAdditionalResources() {
 
     return additionalResources.response;
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     logger.error(`Error in getAdditionalResources: ${error}`);
     return;
   }
@@ -412,6 +445,9 @@ export async function getCompanyInfo() {
 
     return companyInfo.response;
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     logger.error(`Error in getCompanyInfo: ${error}`);
     return;
   }
@@ -439,6 +475,9 @@ export async function getPaymentSettings() {
 
     return paymentSettings.response as TPaymentSettings;
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     logger.error(`Error in getPaymentSettings: ${error}`);
     return;
   }
@@ -468,6 +507,9 @@ export async function getSettingsThirdParty() {
 
     return settingsThirdPartyRes.response as SettingsThirdPartyType;
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     logger.error(`Error in getSettingsThirdParty: ${error}`);
     return;
   }
@@ -502,6 +544,9 @@ export async function getBackupSchedule(dump: boolean = true) {
 
     return backupSchedule.response as TBackupSchedule;
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     logger.error(`Error in getBackupSchedule: ${error}`);
     return;
   }
@@ -535,6 +580,9 @@ export async function getBackupStorage(dump: boolean = false) {
 
     return backupStorage.response as TStorageBackup[];
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     logger.error(`Error in getBackupStorage: ${error}`);
     return;
   }
@@ -562,6 +610,9 @@ export async function getStorageRegions() {
 
     return storageRegions.response as TStorageRegion[];
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     logger.error(`Error in getStorageRegions: ${error}`);
     return;
   }
@@ -589,6 +640,9 @@ export async function getSettingsFiles(): Promise<TFilesSettings> {
 
     return settingsFiles.response as TFilesSettings;
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     logger.error(`Error in getSettingsFiles: ${error}`);
     return {} as TFilesSettings;
   }
@@ -623,6 +677,9 @@ export async function getBackupProgress(dump = true) {
 
     return backupProgress.response as TBackupProgress | undefined;
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     logger.error(`Error in getBackupProgress: ${error}`);
     return error as TError;
   }
@@ -685,6 +742,9 @@ export async function getFoldersTree() {
       } as TFolder;
     });
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     logger.error(`Error in getFoldersTree: ${error}`);
     return;
   }
@@ -712,6 +772,9 @@ export async function getEncryptionSettings() {
 
     return encryptionSettings.response as TEncryptionSettings;
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     logger.error(`Error in getEncryptionSettings: ${error}`);
     return;
   }

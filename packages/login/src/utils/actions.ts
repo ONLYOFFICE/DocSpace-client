@@ -27,7 +27,7 @@
 "use server";
 
 import { headers } from "next/headers";
-
+import { isDynamicServerError } from "next/dist/client/components/hooks-server-context";
 import {
   createRequest,
   getBaseUrl,
@@ -140,6 +140,9 @@ export async function getSettings() {
 
     return settings.response as TSettings;
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     logger.error(`Error in getSettings: ${error}`);
     return;
   }
@@ -190,6 +193,9 @@ export async function getColorTheme() {
 
     return colorTheme.response as TGetColorTheme;
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     logger.error(`Error in getColorTheme: ${error}`);
     return;
   }
@@ -493,6 +499,9 @@ export async function getCompanyInfoSettings() {
 
     return passwordSettings.response as TCompanyInfo;
   } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     logger.error(`Error in getCompanyInfoSettings: ${error}`);
     return;
   }

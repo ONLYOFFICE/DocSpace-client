@@ -75,6 +75,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
   isLarge,
   withoutContorls,
   disableValue,
+  underContorlsTitle,
 }) => {
   const displayValue = showPlusSign
     ? value > maxValue
@@ -236,6 +237,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
         )}
       </div>
 
+      <Text className={styles.underContorlsText}>{underContorlsTitle}</Text>
       {showSlider ? (
         <div className={styles.sliderWrapper}>
           <Slider

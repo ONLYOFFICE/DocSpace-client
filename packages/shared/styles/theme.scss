@@ -2214,22 +2214,32 @@
 }
 
 .light {
-  --payment-price-container-disable-color: #{$light-gray-hover};
+  // --quantity-picker-disable-color: #{$light-gray-hover};
   --payment-rectangle-color: #{$light-gray-hover};
-  --payment-price-container-track-number-color: #{$gray};
-  --payment-price-container-disable-color: #{$gray};
+
   --payment-price-container-disable-background: #{$gray-light};
-  --payment-price-container-feature-text-color: #{$gray};
+
   --payment-warning-color: #{$light-status-warning};
   --payment-accent-color: var(--color-scheme-main-buttons);
 }
 .dark {
-  --payment-price-container-disable-color: #{$light-dark-gray-hover};
+  // --quantity-picker-disable-color: #{$light-dark-gray-hover};
   --payment-rectangle-color: #{$light-dark-gray-hover};
-  --payment-price-container-track-number-color: #{$gray-dark};
-  --payment-price-container-disable-color: #{$gray-dark};
+
   --payment-price-container-disable-background: #{$dark-gray-light};
-  --payment-price-container-feature-text-color: #{$gray-dark};
   --payment-warning-color: #{$dark-status-warning};
   --payment-accent-color: var(--color-scheme-main-buttons);
+}
+
+.light {
+  --quantity-picker-disable-color: #{$gray};
+  --quantity-picker-additional-title: #{$gray};
+  --quantity-picker-track-number: #{$gray};
+  --quantity-picker-rectangle-color: #{$light-gray-hover};
+}
+.dark {
+  --quantity-picker-disable-color: #{$gray-dark};
+  --quantity-picker-additional-title: #{$gray-dark};
+  --quantity-picker-track-number: #{$gray-dark};
+  --quantity-picker-rectangle-color: #{$light-dark-gray-hover};
 }

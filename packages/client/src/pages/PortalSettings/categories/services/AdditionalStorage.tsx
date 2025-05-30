@@ -24,11 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React from "react";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { getConvertedSize } from "@docspace/shared/utils/common";
@@ -58,7 +57,10 @@ type AdditionalStorageProps = {
   isPayer?: boolean;
   cardLinkedOnFreeTariff?: boolean;
   isFreeTariff?: boolean;
-  payerInfo?: { displayName: string };
+  currentStoragePlanSize?: number;
+  nextStoragePlanSize?: number;
+  storageExpiryDate?: string;
+  isCardLinkedToPortal?: boolean;
 };
 
 const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
@@ -70,16 +72,21 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
   isFreeTariff,
   isPayer,
   onToggle,
-  payerInfo,
+  currentStoragePlanSize,
+  nextStoragePlanSize,
+  storageExpiryDate,
+  isCardLinkedToPortal,
 }) => {
   const isDisabled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
+  const { formatWalletCurrency, t } = useServicesActions();
 
   const handleToggle = (
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
   ) => {
     const dataset = (e.currentTarget as HTMLElement).dataset;
-    const isDisabled = dataset.disabled?.toLowerCase() === "true";
-    if (isDisabled) return;
+    const handleDisabled = dataset.disabled?.toLowerCase() === "true";
+
+    if (handleDisabled) return;
 
     e.preventDefault();
     e.stopPropagation();
@@ -90,14 +97,34 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
     onToggle(id, isEnabled);
   };
 
-  const { formatWalletCurrency, t } = useServicesActions();
+  const textTooltip = () => {
+    return (
+      <>
+        <Text fontWeight={600} fontSize="12px">
+          {t("StorageUpgradeMessage", {
+            fromSize: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
+            toSize: `${nextStoragePlanSize} ${t("Common:Gigabyte")}`,
+          })}
+        </Text>
+        <Text fontSize="12px">
+          {nextStoragePlanSize === 0
+            ? t("SubscriptionAutoCancellation", {
+                finalDate: storageExpiryDate,
+              })
+            : t("SubscriptionAutoRenewed", {
+                finalDate: storageExpiryDate,
+              })}
+        </Text>
+      </>
+    );
+  };
 
   return (
     <div>
       <Text className={styles.storageDescription}>
         {isPayer ? t("SelectAndPayServices") : t("ServiceConfigurationNotice")}
       </Text>
-      {payerInfo ? (
+      {isCardLinkedToPortal ? (
         <div className={styles.payerContainer}>
           <PayerInformation />
         </div>
@@ -109,11 +136,10 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
         return (
           <div
             key={item.id}
-            className={classNames(styles.storageContainer, {
+            className={classNames(styles.serviceContainer, {
               [styles.disabled]: isDisabled,
             })}
             {...(!isDisabled ? { onClick } : {})}
-            data-tooltip-id="serviceTooltip"
           >
             <div className={styles.headerContainer}>
               <div className={styles.iconWrapper}>
@@ -149,11 +175,22 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                 {item.priceTitle}
               </Text>
               {item.cancellation ? (
-                <div className={styles.changeShedule}>
+                <div
+                  className={styles.changeShedule}
+                  data-tooltip-id="serviceTooltip"
+                >
                   <InfoIcon />
                   <Text fontWeight={600} fontSize="12px">
                     {t("ChangeShedule")}
                   </Text>
+
+                  <Tooltip
+                    id="serviceTooltip"
+                    place="bottom"
+                    maxWidth="300px"
+                    float
+                    getContent={textTooltip}
+                  />
                 </div>
               ) : null}
               <div className={styles.priceContainer}>
@@ -179,17 +216,17 @@ export default inject(
     currentQuotaStore,
     servicesStore,
   }: TStore) => {
-    const { cardLinkedOnFreeTariff, isPayer, walletPayer } = paymentStore;
+    const { cardLinkedOnFreeTariff, isPayer, isCardLinkedToPortal } =
+      paymentStore;
     const {
       servicesQuotasFeatures,
       storageSizeIncrement,
       storagePriceIncrement,
     } = servicesStore;
-    const { payerInfo: paymentPayer } = currentTariffStatusStore;
+    const { currentStoragePlanSize, nextStoragePlanSize, storageExpiryDate } =
+      currentTariffStatusStore;
 
     const { isFreeTariff } = currentQuotaStore;
-
-    const payerInfo = paymentPayer ?? walletPayer;
 
     return {
       servicesQuotasFeatures,
@@ -197,8 +234,12 @@ export default inject(
       isPayer,
       cardLinkedOnFreeTariff,
       isFreeTariff,
-      payerInfo,
+
       storagePriceIncrement,
+      currentStoragePlanSize,
+      nextStoragePlanSize,
+      storageExpiryDate,
+      isCardLinkedToPortal,
     };
   },
 )(observer(AdditionalStorage));

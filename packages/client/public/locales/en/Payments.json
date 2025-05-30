@@ -53,6 +53,7 @@
   "EnterAmount": "Enter an integer amount...",
   "EnterAnIntegerAmountBetween": "Enter an integer amount between {{min}} and {{max}}",
   "ErrorNotification": "Failed to update tariff plan. Try again later or contact the sales department.",
+  "ExtraStorage": "Additional storage ({{storageUnit}})",
   "FirstAddPaymentMethod": "First you need to add a payment method",
   "ForDays": "for days: {{count}}",
   "FromTo": "From <1>{{fromDate}}</1> To <2>{{toDate}}</2>",

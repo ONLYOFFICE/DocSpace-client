@@ -57,6 +57,9 @@ type QuantityPickerProps = {
   className?: string;
   items?: Array<number | TabItemObject>;
   isLarge?: boolean;
+  withoutContorls?: boolean;
+  disableValue?: string;
+  underContorlsTitle?: string;
 };
 
 const QuantityPicker: React.FC<QuantityPickerProps> = ({
@@ -183,7 +186,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
   return (
     <div className={containerClass}>
       {title ? (
-        <Text noSelect fontWeight={600} className={titleClass}>
+        <Text noSelect fontWeight={600} fontSize="16px" className={titleClass}>
           {title}
         </Text>
       ) : null}

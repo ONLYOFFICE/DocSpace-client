@@ -35,6 +35,8 @@ import {
 import { toastr } from "@docspace/shared/components/toast";
 import { updateWalletPayment } from "@docspace/shared/api/portal";
 import QuantityPicker from "@docspace/shared/components/quantity-picker";
+import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
+import { getConvertedSize } from "@docspace/shared/utils/common";
 
 import styles from "./styles/index.module.scss";
 import StorageSummary from "./sub-components/StorageSummary";
@@ -46,8 +48,6 @@ import { calculateTotalPrice } from "./hooks/resourceUtils";
 import StorageInformation from "./sub-components/StorageInformation";
 import WalletContainer from "./sub-components/WalletContainer";
 import SalesDepartmentRequestDialog from "../../../../components/dialogs/SalesDepartmentRequestDialog";
-import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
-import { getConvertedSize } from "@docspace/shared/utils/common";
 
 type StorageDialogProps = {
   visible: boolean;
@@ -221,7 +221,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
               minValue={0}
               maxValue={maxStorageLimit}
               step={1}
-              title={"Additional storage (GB)"}
+              title={t("ExtraStorage", { storageUnit: t("Common:Gigabyte") })}
               showPlusSign
               onChange={onChangeNumber}
               isDisabled={hasScheduledStorageChange || isLoading}

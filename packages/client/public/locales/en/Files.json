@@ -11,6 +11,7 @@
   "AddUsersOrGroupsInfo": "Only <1>{{productName}}</1> and <1>Room admins</1> are shown here",
   "AddUsersOrGroupsInfoGroups": "Only <1>{{productName}}</1> and <1>Room admins</1> from the selected groups will be able to create rooms using this template.",
   "AfterFilesWillBeDeletedPermanently": "After files will be deleted permanently.",
+  "AfterFilesWillBeMovedToTrash": "",
   "AllLinksAreDisabled": "All links are disabled",
   "AppointNewOwner": "You have appointed a new owner.",
   "ArchiveAction": "Empty archive",
@@ -75,6 +76,7 @@
   "EmptyFormSubFolderDoneDescriptionText": "Here you will find forms which have been completely filled out by other users.",
   "EmptyFormSubFolderHeaderText": "No files in this folder yet",
   "EmptyFormSubFolderProgressDescriptionText": "Here you will find forms in progress, i.e., forms which users have started to fill out but haven't completed.",
+  "EmptyRecycleBin": "",
   "EmptySection": "Empty {{sectionName}}",
   "EnableNotifications": "Enable notifications",
   "ErrorChangeIndex": "Error when changing index. The problem may be caused on the server side. Reload the page or check your Internet connection settings.",
@@ -229,9 +231,11 @@
   "WantToRestoreTheRoom": "All shared links in this room will become active, and its contents will be available to everyone with the link. Do you want to restore the room?",
   "WantToRestoreTheRooms": "All shared links in restored rooms will become active, and their contents will be available to everyone with the room links. Do you want to restore the rooms?",
   "WarningCopyToFormRoomServal": "Copying several files to the Form Filling room is not supported. Copy one {{ organizationName }} PDF form at a time.",
+  "WarningCreationFormRoom": "",
   "WarningMoveToFormRoom": "The file cannot be moved to this room. Please try to move the {{ organizationName }} PDF form.",
   "WarningMoveToFormRoomServal": "Moving several files to the Form Filling room is not supported. Move one {{ organizationName }} PDF form at a time.",
   "WillBeDeletedPermanently": "{{date}} will be deleted permanently",
+  "WillBeMovedToTrash": "",
   "YouLeftTheRoom": "You have left the room",
   "YourUserTypeHasChanged": "Your user type has been changed to <1>“{{userType}}”</1> by the {{productName}} admin <1>{{adminName}}</1>."
 }

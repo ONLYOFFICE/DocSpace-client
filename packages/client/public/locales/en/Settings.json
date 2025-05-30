@@ -234,7 +234,6 @@
   "SharedFiles": "Shared files",
   "SharedFilesImportLocation": "Files shared by other users will be imported into {{sectionName}} > Recently accessible via link. Please note: some access rights may get lost during import.",
   "SharedFolders": "Shared folders",
-  "SharedFoldersDescription": "Shared folders will be imported into the Rooms section as rooms with users who were granted access. Please note: some access rights may get lost during import",
   "SingleSignOn": "Single Sign-On",
   "SMTPSettings": "SMTP Settings",
   "SMTPSettingsDescription": "The SMTP settings are needed to set up an email account which will be used to send notifications from the portal using your own SMTP server instead of the one {{organizationName}} uses. Please fill in all the fields and click the 'Save' button. You can use the 'Send Test Mail' button to check if all the settings you entered are correct and work as supposed.",

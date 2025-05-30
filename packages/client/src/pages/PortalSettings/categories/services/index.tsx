@@ -28,11 +28,12 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
+import { TOTAL_SIZE } from "@docspace/shared/constants";
 
 import AdditionalStorage from "./AdditionalStorage";
 import StoragePlanUpgrade from "./StoragePlanUpgrade";
 import ServicesLoader from "./ServicesLoader";
-import { TOTAL_SIZE } from "@docspace/shared/constants";
+
 import StoragePlanCancel from "./StoragePlanCancel";
 
 type ServicesProps = {

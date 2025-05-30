@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 /* eslint-disable jsx-a11y/tabindex-no-positive */
-import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 
+import classNames from "classnames";
 import { Trans } from "react-i18next";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
@@ -42,7 +42,8 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { RadioButton } from "@docspace/shared/components/radio-button";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
-import { StyledBody } from "./AmazonSettings.styled";
+import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
+
 import {
   bucket,
   CUSTOMER_MANAGER,
@@ -60,6 +61,7 @@ import {
   USE_HTTP,
 } from "./AmazonSettings.constants";
 import { AmazonSettingsProps } from "./AmazonSettings.types";
+import styles from "./AmazonSettings.module.scss";
 
 const AmazonSettings = ({
   selectedStorage,
@@ -253,16 +255,24 @@ const AmazonSettings = ({
       : MANAGED_KEYS[0];
 
   return (
-    <div data-testid="amazon-settings-wrapper">
-      <StyledBody data-testid="amazon-settings-bucket">
-        <div className="backup_storage-tooltip">
+    <div
+      className={styles.amazonSettings}
+      data-testid="amazon-settings-wrapper"
+    >
+      <div className={styles.body} data-testid="amazon-settings-bucket">
+        <div
+          className={classNames(
+            styles.backupStorageTooltip,
+            "backup_storage-tooltip",
+          )}
+        >
           <Text isBold>{bucketPlaceholder}</Text>
           {renderTooltip(t("Common:AmazonBucketTip"), "bucket-tooltip")}
         </div>
         <TextInput
           id="bucket-input"
           name={bucket}
-          className="backup_text-input"
+          className={classNames(styles.backupTextInput, "backup_text-input")}
           scale
           value={formSettings[bucket]}
           hasError={isError[bucket]}
@@ -273,14 +283,22 @@ const AmazonSettings = ({
           size={InputSize.base}
           testId="amazon-bucket-input"
         />
-      </StyledBody>
-      <StyledBody data-testid="amazon-settings-region">
-        <div className="backup_storage-tooltip">
+      </div>
+      <div className={styles.body} data-testid="amazon-settings-region">
+        <div
+          className={classNames(
+            styles.backupStorageTooltip,
+            "backup_storage-tooltip",
+          )}
+        >
           <Text isBold>{regionPlaceholder}</Text>
           {renderTooltip(t("Common:AmazonRegionTip"), "region-tooltip")}
         </div>
         <ComboBox
-          className="region-combo-box backup_text-input"
+          className={classNames(
+            styles.backupTextInput,
+            "region-combo-box backup_text-input",
+          )}
           options={regions}
           selectedOption={region}
           directionY="both"
@@ -293,17 +311,22 @@ const AmazonSettings = ({
           tabIndex={2}
           showDisabledItems
         />
-      </StyledBody>
+      </div>
 
-      <StyledBody data-testid="amazon-settings-service-url">
-        <div className="backup_storage-tooltip">
+      <div className={styles.body} data-testid="amazon-settings-service-url">
+        <div
+          className={classNames(
+            styles.backupStorageTooltip,
+            "backup_storage-tooltip",
+          )}
+        >
           <Text isBold>{serviceUrlPlaceholder}</Text>
           {renderTooltip(t("Common:AmazonServiceTip"), "service-tooltip")}
         </div>
         <TextInput
           id="service-url-input"
           name={SERVICE_URL}
-          className="backup_text-input"
+          className={classNames(styles.backupTextInput, "backup_text-input")}
           scale
           value={formSettings[SERVICE_URL]}
           hasError={isError[SERVICE_URL]}
@@ -314,9 +337,12 @@ const AmazonSettings = ({
           size={InputSize.base}
           testId="amazon-service-url-input"
         />
-      </StyledBody>
+      </div>
 
-      <StyledBody data-testid="amazon-settings-force-path-style">
+      <div
+        className={styles.body}
+        data-testid="amazon-settings-force-path-style"
+      >
         <Checkbox
           id="force-path-style"
           name={FORCEPATH_STYLE}
@@ -328,7 +354,12 @@ const AmazonSettings = ({
           tabIndex={4}
           data-testid="amazon-force-path-style-checkbox"
           helpButton={
-            <div className="backup_storage-tooltip">
+            <div
+              className={classNames(
+                styles.backupStorageTooltip,
+                "backup_storage-tooltip",
+              )}
+            >
               {renderTooltip(
                 t("Common:AmazonForcePathStyleTip"),
                 "force-path-style-tooltip",
@@ -336,8 +367,8 @@ const AmazonSettings = ({
             </div>
           }
         />
-      </StyledBody>
-      <StyledBody data-testid="amazon-settings-use-http">
+      </div>
+      <div className={styles.body} data-testid="amazon-settings-use-http">
         <Checkbox
           id="use-http"
           className="backup_checkbox"
@@ -350,19 +381,32 @@ const AmazonSettings = ({
           tabIndex={5}
           data-testid="amazon-use-http-checkbox"
           helpButton={
-            <div className="backup_storage-tooltip">
+            <div
+              className={classNames(
+                styles.backupStorageTooltip,
+                "backup_storage-tooltip",
+              )}
+            >
               {renderTooltip(t("Common:AmazonHTTPTip"), "http-tooltip")}
             </div>
           }
         />
-      </StyledBody>
-      <StyledBody data-testid="amazon-settings-sse-method">
-        <div className="backup_storage-tooltip">
+      </div>
+      <div className={styles.body} data-testid="amazon-settings-sse-method">
+        <div
+          className={classNames(
+            styles.backupStorageTooltip,
+            "backup_storage-tooltip",
+          )}
+        >
           <Text isBold>{SSEPlaceholder}</Text>
           {renderTooltip(t("Common:AmazonSSETip"), "sse-method-tooltip")}
         </div>
         <ComboBox
-          className="sse-method-combo-box backup_text-input"
+          className={classNames(
+            styles.backupTextInput,
+            "sse-method-combo-box backup_text-input",
+          )}
           options={availableEncryptions}
           selectedOption={{
             key: 0,
@@ -379,13 +423,16 @@ const AmazonSettings = ({
           showDisabledItems
           data-testid="amazon-sse-method-combobox"
         />
-      </StyledBody>
+      </div>
 
       {selectedEncryption === serverSideEncryption ? (
         <>
           <RadioButton
             id="sse-s3"
-            className="backup_radio-button-settings"
+            className={classNames(
+              styles.backupRadioButtonSettings,
+              "backup_radio-button-settings",
+            )}
             value=""
             label={sseS3}
             isChecked={formSettings[SSE] === SSE_S3}
@@ -397,7 +444,10 @@ const AmazonSettings = ({
 
           <RadioButton
             id="sse-kms"
-            className="backup_radio-button-settings"
+            className={classNames(
+              styles.backupRadioButtonSettings,
+              "backup_radio-button-settings",
+            )}
             value=""
             label={sseKms}
             isChecked={formSettings[SSE] === SSE_KMS}
@@ -411,7 +461,10 @@ const AmazonSettings = ({
             <>
               <Text isBold>Managed CMK</Text>
               <ComboBox
-                className="managed-cmk-combo-box backup_text-input"
+                className={classNames(
+                  styles.backupTextInput,
+                  "managed-cmk-combo-box backup_text-input",
+                )}
                 options={MANAGED_KEYS}
                 selectedOption={{
                   key: 0,
@@ -434,7 +487,10 @@ const AmazonSettings = ({
                   <TextInput
                     id="customer-manager-kms-key-id"
                     name={SSE_KEY}
-                    className="backup_text-input"
+                    className={classNames(
+                      styles.backupTextInput,
+                      "backup_text-input",
+                    )}
                     scale
                     value={formSettings[SSE_KEY]}
                     hasError={isError[SSE_KEY]}
@@ -458,7 +514,7 @@ const AmazonSettings = ({
           <TextInput
             id="client-side-encryption-kms-key-id"
             name={SSE_KEY}
-            className="backup_text-input"
+            className={classNames(styles.backupTextInput, "backup_text-input")}
             scale
             value={formSettings[SSE_KEY]}
             hasError={isError[SSE_KEY]}
@@ -476,7 +532,7 @@ const AmazonSettings = ({
         <TextInput
           id="file-path-input"
           name="filePath"
-          className="backup_text-input"
+          className={classNames(styles.backupTextInput, "backup_text-input")}
           scale
           value={formSettings[filePath]}
           onChange={onChangeText}

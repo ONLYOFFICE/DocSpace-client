@@ -69,6 +69,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   hasScheduledStorageChange,
   storagePriceIncrement,
   nextStoragePlanSize,
+  handleServicesQuotas,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
   const [amount, setAmount] = useState<number>(currentStoragePlanSize);
@@ -115,7 +116,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
         return;
       }
 
-      const requests = [fetchPortalTariff!()];
+      const requests = [fetchPortalTariff!(), handleServicesQuotas()!];
 
       if (!isCancellation) requests.push(fetchBalance!());
 
@@ -274,7 +275,11 @@ export default inject(
       nextStoragePlanSize,
     } = currentTariffStatusStore;
     const { fetchBalance, walletBalance } = paymentStore;
-    const { storageSizeIncrement, storagePriceIncrement } = servicesStore;
+    const {
+      storageSizeIncrement,
+      storagePriceIncrement,
+      handleServicesQuotas,
+    } = servicesStore;
 
     return {
       storageSizeIncrement,
@@ -286,6 +291,7 @@ export default inject(
       hasScheduledStorageChange,
       storagePriceIncrement,
       nextStoragePlanSize,
+      handleServicesQuotas,
     };
   },
 )(observer(StoragePlanUpgrade));

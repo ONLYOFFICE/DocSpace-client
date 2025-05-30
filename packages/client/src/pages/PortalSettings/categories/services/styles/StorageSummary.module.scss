@@ -102,7 +102,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background-color: var(--wallet-color-icon);
+    background-color: var(--payment-accent-color);
     opacity: 0.1;
     border-radius: 50%;
     z-index: 0;
@@ -112,7 +112,7 @@
     position: relative;
     z-index: 1;
     path {
-      fill: var(--wallet-color-icon);
+      fill: var(--payment-accent-color);
     }
   }
 }

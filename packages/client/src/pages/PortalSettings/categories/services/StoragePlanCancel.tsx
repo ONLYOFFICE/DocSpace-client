@@ -63,6 +63,7 @@ const StoragePlanCancel: React.FC<StorageDialogProps> = ({
   fetchBalance,
   totalPrice,
   usedTotalStorageSizeCount,
+  handleServicesQuotas,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -85,7 +86,7 @@ const StoragePlanCancel: React.FC<StorageDialogProps> = ({
         return;
       }
 
-      await fetchPortalTariff!();
+      await Promise.all([fetchPortalTariff!(), handleServicesQuotas()!]);
 
       onClose();
       fetchBalance!();
@@ -174,7 +175,11 @@ export default inject(
     const { fetchPortalTariff, currentStoragePlanSize } =
       currentTariffStatusStore;
     const { fetchBalance } = paymentStore;
-    const { storageSizeIncrement, storagePriceIncrement } = servicesStore;
+    const {
+      storageSizeIncrement,
+      storagePriceIncrement,
+      handleServicesQuotas,
+    } = servicesStore;
     const { usedTotalStorageSizeCount } = currentQuotaStore;
 
     const totalPrice = calculateTotalPrice(
@@ -189,6 +194,7 @@ export default inject(
       usedTotalStorageSizeCount,
       totalPrice,
       currentStoragePlanSize,
+      handleServicesQuotas,
     };
   },
 )(observer(StoragePlanCancel));

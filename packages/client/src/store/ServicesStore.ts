@@ -104,6 +104,28 @@ class ServicesStore {
     this.isInitServicesPage = isInitServicesPage;
   };
 
+  handleServicesQuotas = async () => {
+    const res = await getServicesQuotas();
+
+    if (!res) return;
+
+    const { hasStorageSubscription, hasScheduledStorageChange } =
+      this.currentTariffStatusStore;
+
+    res[0].features.forEach((feature) => {
+      if (feature.id === TOTAL_SIZE) {
+        feature.enabled = hasStorageSubscription;
+        feature.cancellation = hasScheduledStorageChange;
+      }
+
+      this.servicesQuotasFeatures.set(feature.id, feature);
+    });
+
+    this.servicesQuotas = res[0];
+
+    return res;
+  };
+
   servicesInit = async (t: TTranslation) => {
     const isRefresh = window.location.href.includes("complete=true");
 
@@ -119,7 +141,7 @@ class ServicesStore {
     } = this.paymentStore;
 
     const requests = [
-      getServicesQuotas(),
+      this.handleServicesQuotas(),
       fetchBalance(isRefresh),
       fetchWalletPayer(isRefresh),
     ];
@@ -131,8 +153,7 @@ class ServicesStore {
 
       if (!quotas) throw new Error();
 
-      const { setPayerInfo, payerInfo, hasStorageSubscription } =
-        this.currentTariffStatusStore;
+      const { setPayerInfo, payerInfo } = this.currentTariffStatusStore;
 
       if (isPayerExist && !payerInfo) await setPayerInfo(isPayerExist);
 
@@ -145,16 +166,6 @@ class ServicesStore {
       } else {
         requests.push(fetchCardLinked());
       }
-
-      quotas[0].features.forEach((feature) => {
-        if (feature.id === TOTAL_SIZE) {
-          feature.enabled = hasStorageSubscription;
-        }
-
-        this.servicesQuotasFeatures.set(feature.id, feature);
-      });
-
-      this.servicesQuotas = quotas[0];
 
       this.setIsInitServicesPage(true);
     } catch (e) {

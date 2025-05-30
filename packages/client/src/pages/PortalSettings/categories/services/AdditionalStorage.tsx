@@ -26,14 +26,15 @@
 
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
-import { Trans, useTranslation } from "react-i18next";
-import { isMobile } from "react-device-detect";
 import classNames from "classnames";
 
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { Tooltip } from "@docspace/shared/components/tooltip";
+
+import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg";
 
 import styles from "./styles/AdditionalStorage.module.scss";
 import { useServicesActions } from "./hooks/useServicesActions";
@@ -44,7 +45,8 @@ interface ServiceQuotaFeature {
   image: string;
   priceTitle: string;
   id: string;
-  enabled: boolean;
+  enabled?: boolean;
+  cancellation?: boolean;
 }
 
 type AdditionalStorageProps = {
@@ -74,13 +76,18 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
 
   const handleToggle = (
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
-    id: string,
-    enabled: boolean,
   ) => {
+    const dataset = (e.currentTarget as HTMLElement).dataset;
+    const isDisabled = dataset.disabled?.toLowerCase() === "true";
+    if (isDisabled) return;
+
     e.preventDefault();
     e.stopPropagation();
 
-    if (!isDisabled) onToggle(id, enabled);
+    const isEnabled = dataset.enabled?.toLowerCase() === "true";
+    const id = dataset.id;
+
+    onToggle(id, isEnabled);
   };
 
   const { formatWalletCurrency, t } = useServicesActions();
@@ -97,6 +104,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
       ) : null}
       {Array.from(servicesQuotasFeatures?.values() || []).map((item) => {
         if (!item.title || !item.image) return null;
+        const eventDisabled = isDisabled || item.cancellation;
 
         return (
           <div
@@ -116,24 +124,38 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
               </div>
 
               <div
-                onClick={(e) => handleToggle(e, item.id, item.enabled)}
+                onClick={handleToggle}
                 className={styles.toggleWrapper}
                 data-id={item.id}
+                data-enabled={item.enabled}
+                data-disabled={eventDisabled}
               >
                 <ToggleButton
                   isChecked={item.enabled}
                   className={styles.serviceToggle}
-                  isDisabled={isDisabled}
+                  isDisabled={eventDisabled}
                 />
               </div>
             </div>
             <div className={styles.contentContainer}>
-              <Text fontWeight={600} fontSize="14px">
+              <Text
+                fontWeight={600}
+                fontSize="14px"
+                className={styles.containerTitle}
+              >
                 {item.title}
               </Text>
               <Text fontSize="12px" className={styles.priceDescription}>
                 {item.priceTitle}
               </Text>
+              {item.cancellation ? (
+                <div className={styles.changeShedule}>
+                  <InfoIcon />
+                  <Text fontWeight={600} fontSize="12px">
+                    {t("ChangeShedule")}
+                  </Text>
+                </div>
+              ) : null}
               <div className={styles.priceContainer}>
                 <Text fontSize="12px" fontWeight={600}>
                   {t("PerStorage", {

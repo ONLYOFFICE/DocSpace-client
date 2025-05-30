@@ -65,7 +65,7 @@ export const Default: Story = {
     selectedOption: data[0],
     scaledOptions: false,
     scaled: false,
-    directionX: "left",
+    directionX: "right",
     size: ComboBoxSize.content,
     manualWidth: "fit-content",
   },

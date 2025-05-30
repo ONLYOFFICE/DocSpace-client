@@ -73,6 +73,8 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
   className,
   items,
   isLarge,
+  withoutContorls,
+  disableValue,
 }) => {
   const displayValue = showPlusSign
     ? value > maxValue
@@ -88,6 +90,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
   const inputClass = classNames(styles.countInput, {
     [styles.disabled]: isDisabled,
     [styles.isLarge]: isLarge,
+    [styles.isContant]: disableValue,
   });
   const circleClass = classNames(styles.circle, {
     [styles.disabled]: isDisabled,
@@ -198,16 +201,18 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
       ) : null}
 
       <div className={styles.countControls}>
-        <div
-          className={`${circleClass} ${styles.minusIcon}`}
-          {...buttonProps}
-          data-operation="minus"
-        >
-          <MinusIcon className={controlButtonClass} />
-        </div>
+        {withoutContorls ? null : (
+          <div
+            className={`${circleClass} ${styles.minusIcon}`}
+            {...buttonProps}
+            data-operation="minus"
+          >
+            <MinusIcon className={controlButtonClass} />
+          </div>
+        )}
 
         {isDisabled ? (
-          <Text className={inputClass}>{displayValue}</Text>
+          <Text className={inputClass}>{disableValue ?? displayValue}</Text>
         ) : (
           <TextInput
             type={InputType.text}
@@ -220,13 +225,15 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
           />
         )}
 
-        <div
-          className={`${circleClass} ${styles.plusIcon}`}
-          {...buttonProps}
-          data-operation="plus"
-        >
-          <PlusIcon className={controlButtonClass} />
-        </div>
+        {withoutContorls ? null : (
+          <div
+            className={`${circleClass} ${styles.plusIcon}`}
+            {...buttonProps}
+            data-operation="plus"
+          >
+            <PlusIcon className={controlButtonClass} />
+          </div>
+        )}
       </div>
 
       {showSlider ? (
@@ -265,7 +272,6 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
             type={TabsTypes.Secondary}
             allowNoSelection
             withoutStickyIntend
-            withoutScroll
           />
         </div>
       ) : null}

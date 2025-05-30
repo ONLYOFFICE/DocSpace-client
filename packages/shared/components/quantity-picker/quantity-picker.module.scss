@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 .container {
-  max-width: 272px;
+  width: 100%;
   margin: 0 auto;
 
   .sliderWrapper {
@@ -133,6 +133,9 @@
     &.isLarge {
       width: 140px;
     }
+    &.isContant {
+      width: fit-content;
+    }
   }
 
   .countTitle {
@@ -157,7 +160,6 @@
 
   .tabsWrapper {
     margin-top: 16px;
-    display: flex;
-    justify-content: center;
+    width: calc(100% - 16px);
   }
 }

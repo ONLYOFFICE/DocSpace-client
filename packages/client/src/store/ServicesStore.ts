@@ -130,20 +130,18 @@ class ServicesStore {
     const isRefresh = window.location.href.includes("complete=true");
 
     const {
-      fetchBalance,
-      fetchWalletPayer,
       fetchAutoPayments,
       fetchCardLinked,
       setPaymentAccount,
       walletCustomerEmail,
       isPayerExist,
       isPayer,
+      initWalletPayerAndBalance,
     } = this.paymentStore;
 
     const requests = [
       this.handleServicesQuotas(),
-      fetchBalance(isRefresh),
-      fetchWalletPayer(isRefresh),
+      initWalletPayerAndBalance(isRefresh),
     ];
 
     if (!this.currentTariffStatusStore) return;

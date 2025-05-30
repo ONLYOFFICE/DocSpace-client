@@ -374,25 +374,28 @@ class PaymentStore {
     this.isVisibleWalletSettings = isVisibleWalletSettings;
   };
 
+  initWalletPayerAndBalance = async (isRefresh) => {
+    const { setPayerInfo, payerInfo } = this.currentTariffStatusStore;
+
+    await Promise.all([
+      this.fetchWalletPayer(isRefresh),
+      this.fetchBalance(isRefresh),
+    ]);
+
+    if (this.isPayerExist && !payerInfo) await setPayerInfo(this.isPayerExist);
+  };
+
   walletInit = async (t: TTranslation) => {
     const requests = [];
 
     const isRefresh = window.location.href.includes("complete=true");
     if (!this.currentTariffStatusStore) return;
 
-    const { setPayerInfo, payerInfo } = this.currentTariffStatusStore;
     this.setVisibleWalletSetting(false);
 
     try {
-      await Promise.all([
-        this.fetchWalletPayer(isRefresh),
-        this.fetchBalance(isRefresh),
-      ]);
-
+      await this.initWalletPayerAndBalance(isRefresh);
       this.previousBalance = this.balance;
-
-      if (this.isPayerExist && !payerInfo)
-        await setPayerInfo(this.isPayerExist);
 
       if (this.walletCustomerEmail) {
         if (this.isPayer) {
@@ -760,6 +763,18 @@ class PaymentStore {
       return false;
 
     return true;
+  }
+
+  get isCardLinkedToPortal() {
+    if (!this.currentQuotaStore) return false;
+
+    const { isNonProfit, isFreeTariff } = this.currentQuotaStore;
+
+    return (
+      this.cardLinkedOnNonProfit ||
+      this.cardLinkedOnFreeTariff ||
+      (!isNonProfit && !isFreeTariff)
+    );
   }
 
   setRangeStepByQuota = () => {

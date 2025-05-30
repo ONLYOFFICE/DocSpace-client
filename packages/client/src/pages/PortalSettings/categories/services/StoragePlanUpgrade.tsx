@@ -100,7 +100,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     }, 200);
 
     const difference = calculateDifferenceBetweenPlan(amount);
-    const productType = isCurrentStoragePlan && !isCancellation ? 1 : 0;
+    const productType = isUpgradeStoragePlan && !isCancellation ? 1 : 0;
     const quantity = isUpgradeStoragePlan ? difference : amount;
     const value = isCancellation ? null : quantity;
 
@@ -238,13 +238,14 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
               </div>
             ) : null}
 
-            <WalletContainer
-              onTopUp={() => setIsVisible(true)}
-              insufficientFunds={insufficientFunds}
-              isExceedingStorageLimit={isExceedingStorageLimit}
-              hasScheduledStorageChange={hasScheduledStorageChange}
-              isUpgradeStoragePlan={isUpgradeStoragePlan}
-            />
+            {amount || hasStorageSubscription ? (
+              <WalletContainer
+                onTopUp={() => setIsVisible(true)}
+                insufficientFunds={insufficientFunds}
+                isExceedingStorageLimit={isExceedingStorageLimit}
+                isUpgradeStoragePlan={isUpgradeStoragePlan}
+              />
+            ) : null}
           </div>
         </ModalDialog.Body>
         <ModalDialog.Footer>

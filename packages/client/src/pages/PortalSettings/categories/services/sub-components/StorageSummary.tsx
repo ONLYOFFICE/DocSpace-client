@@ -102,7 +102,9 @@ const StorageSummary: React.FC<StorageSummaryProps> = (props) => {
     <div>
       {hasScheduledStorageChange ? <StorageWarning /> : null}
 
-      {isUpgradeStoragePlan && !isExceedingStorageLimit ? (
+      {currentStoragePlanSize &&
+      isUpgradeStoragePlan &&
+      !isExceedingStorageLimit ? (
         <PlanUpgradePreview amount={amount} />
       ) : null}
 

@@ -73,6 +73,7 @@ type WalletProps = {
   cardLinkedOnNonProfit: boolean;
   isVisibleWalletSettings: boolean;
   wasChangeBalance?: boolean;
+  isCardLinkedToPortal?: boolean;
   fetchBalance?: () => Promise<void>;
   fetchTransactionHistory?: () => Promise<void>;
   canUpdateTariff: VoidFunction;
@@ -94,7 +95,7 @@ const Wallet = (props: WalletProps) => {
     language,
     walletCodeCurrency,
     cardLinkedOnFreeTariff,
-    isFreeTariff,
+    isCardLinkedToPortal,
     cardLinkedOnNonProfit,
     isVisibleWalletSettings,
     wasChangeBalance,
@@ -102,7 +103,6 @@ const Wallet = (props: WalletProps) => {
     fetchTransactionHistory,
     canUpdateTariff,
     setVisibleWalletSetting,
-    isNonProfit,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
@@ -174,11 +174,7 @@ const Wallet = (props: WalletProps) => {
       <Text className={styles.walletDescription}>
         {t("WalletDescription", { productName: t("Common:ProductName") })}
       </Text>
-      {cardLinkedOnNonProfit ||
-      cardLinkedOnFreeTariff ||
-      (!isNonProfit && !isFreeTariff) ? (
-        <PayerInformation />
-      ) : null}
+      {isCardLinkedToPortal ? <PayerInformation /> : null}
 
       <div className={styles.balanceWrapper}>
         <div className={styles.headerContainer}>
@@ -245,8 +241,9 @@ export default inject(
       canUpdateTariff,
       setVisibleWalletSetting,
       cardLinkedOnNonProfit,
+      isCardLinkedToPortal,
     } = paymentStore;
-    const { isFreeTariff, isNonProfit } = currentQuotaStore;
+    const { isFreeTariff } = currentQuotaStore;
 
     return {
       walletBalance,
@@ -263,7 +260,7 @@ export default inject(
       fetchTransactionHistory,
       canUpdateTariff,
       setVisibleWalletSetting,
-      isNonProfit,
+      isCardLinkedToPortal,
     };
   },
 )(observer(Wallet));

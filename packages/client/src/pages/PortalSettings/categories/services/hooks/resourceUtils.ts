@@ -23,48 +23,41 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import moment from "moment";
 
-.dialogBody {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  margin-bottom: 20px;
-}
+export const calculateDifference = (
+  quantity: number,
+  currentAllocated: number,
+): number => {
+  if (!quantity) return 0;
 
-.storageInfo {
-  display: flex;
-  min-height: 40px;
-  background: var(--payment-background-color);
-  margin-bottom: 24px;
-  flex-wrap: wrap;
-  margin-top: 14px;
-  padding: 12px 16px;
-  box-sizing: border-box;
-  padding-bottom: 0;
-  border-radius: 6px;
-}
-.totalContainer {
-  margin-top: auto;
-  margin-bottom: 12px;
-}
+  return Math.abs(currentAllocated - quantity);
+};
 
-.currentTariffCount {
-  display: inline;
-}
+export const getDaysUntilPayment = (date) => {
+  const today = moment();
+  const dueDate = moment(date);
+  return dueDate.diff(today, "days");
+};
 
-.moreStorage {
-  color: var(--payment-text-color);
-}
+export const calculateTotalPrice = (
+  quantity: number,
+  unitPrice: number,
+): number => {
+  return Number((quantity * unitPrice).toFixed(2));
+};
 
-.currentPayment,
-.currentPaymentWrapper {
-  margin-bottom: 8px;
-}
+export const isUpgrade = (quantity: number, current: number) =>
+  quantity > current;
 
-.monthPayment {
-  color: var(--payment-dialog-text);
-}
+export const isDowngrade = (quantity: number, current: number) =>
+  quantity < current;
 
-.cancelDialog {
-  margin-bottom: 16px;
-}
+export const isExceedingLimit = (quantity: number, limit: number) =>
+  quantity > limit;
+
+export const isSamePlan = (
+  quantity: number,
+  hasSubscription: boolean,
+  current: number,
+) => hasSubscription && quantity === current;

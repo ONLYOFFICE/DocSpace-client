@@ -62,20 +62,50 @@
 .warningBlock {
   background-color: var(--payment-background-color);
   padding: 16px;
+  .warningTitle {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 4px;
+
+    svg {
+      path {
+        fill: var(--payment-warning-color);
+      }
+    }
+  }
 }
 .planInfoContainer {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 8px;
+  margin-bottom: 12px;
+  margin-top: 12px;
+
+  &.withBottom {
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--aside-header-border-color);
+  }
 }
 
 .planInfoIcon {
   width: 32px;
   height: 32px;
+  border-radius: 50%;
+  background-color: var(--payment-icon-background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg {
+    path {
+      fill: var(--wallet-color-icon);
+    }
+  }
 }
 
 .planInfoBody {
   flex: 1;
+  height: 35px;
 }
 
 .planInfoDetails {
@@ -90,10 +120,6 @@
   align-items: flex-end;
 }
 
-.totalPrice {
-  margin-bottom: 4px;
-}
-
 .priceForEach {
   color: var(--payment-dialog-text);
 }
@@ -106,6 +132,7 @@
 .totalTitle {
   margin-bottom: 12px;
 }
-.planInfoContainer {
-  margin-bottom: 12px;
+
+.walletContainer {
+  margin-bottom: 20px;
 }

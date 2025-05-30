@@ -26,7 +26,7 @@
 
 import React from "react";
 import { useTranslation, Trans } from "react-i18next";
-
+import classNames from "classnames";
 import { ReactSVG } from "react-svg";
 
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
@@ -58,14 +58,20 @@ const WalletInfo = (props: WalletInfoProps) => {
         >
           {t("ProductNameWallet", { productName: t("Common:ProductName") })}
         </Text>
-        <div className={styles.walletInfoBalance}>
+        <div
+          className={classNames(styles.walletInfoBalance, {
+            [styles.warningColor]: !!onTopUp,
+          })}
+        >
           <Trans
             t={t}
-            i18nKey="Balance"
+            i18nKey={onTopUp ? "BalanceInsufficient" : "Balance"}
             ns="Payments"
             values={{ balance }}
             components={{
-              1: (
+              1: onTopUp ? (
+                <Text as="span" fontWeight={600} />
+              ) : (
                 <ColorTheme themeId={ThemeId.Text} fontWeight={600} isInline />
               ),
             }}

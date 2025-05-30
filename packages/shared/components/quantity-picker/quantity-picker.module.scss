@@ -130,6 +130,9 @@
     &.disabled {
       color: var(--payment-price-container-disable-color);
     }
+    &.isLarge {
+      width: 140px;
+    }
   }
 
   .countTitle {

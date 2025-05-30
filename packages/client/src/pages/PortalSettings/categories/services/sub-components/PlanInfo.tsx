@@ -25,70 +25,65 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Text } from "@docspace/shared/components/text";
-
-import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import PaymentSpeacialIcon from "PUBLIC_DIR/images/payment.special.react.svg";
+import { Text } from "@docspace/shared/components/text";
+import { getConvertedSize } from "@docspace/shared/utils/common";
 
+import UpgradeWalletIcon from "PUBLIC_DIR/images/icons/16/upgrade.react.svg";
+import DowngradeWalletIcon from "PUBLIC_DIR/images/icons/16/downgrade.react.svg";
+import DiskStorageIcon from "PUBLIC_DIR/images/icons/16/catalog-settings-storage-management.svg";
 import styles from "../styles/StorageSummary.module.scss";
-import { formatCurrencyValue } from "../../payments/Wallet/utils";
+import { useServicesActions } from "../hooks/useServicesActions";
 
 type PlanInfoProps = {
   amount: number | string;
-  walletCodeCurrency: string;
-  language: string;
   totalPrice: number;
-  value: number;
-  maxValue?: number;
-  moreThanLimit?: boolean;
-  isCurrentTariff?: boolean;
+  isExceedingStorageLimit?: boolean;
+  isCurrentStoragePlan?: boolean;
   hasStorageSubscription?: boolean;
   nextStoragePlanSize?: number;
   currentStoragePlanSize?: number;
   hasScheduledStorageChange?: boolean;
-  storageQuotaIncrement?: number;
+  storageSizeIncrement?: number;
+  storagePriceIncrement?: number;
+  isUpgradeStoragePlan?: boolean;
 };
 
 const PlanInfo: React.FC<PlanInfoProps> = ({
   amount,
-  walletCodeCurrency,
-  language,
   totalPrice,
-  value,
-  moreThanLimit,
-  maxValue,
-  isCurrentTariff,
+  isExceedingStorageLimit,
+  isCurrentStoragePlan,
   hasStorageSubscription,
   nextStoragePlanSize,
   currentStoragePlanSize,
   hasScheduledStorageChange,
-  storageQuotaIncrement,
+  storageSizeIncrement,
+  storagePriceIncrement,
+  isUpgradeStoragePlan,
 }) => {
-  const { t } = useTranslation("Payments");
+  const { maxStorageLimit, formatWalletCurrency, t, isStorageCancellation } =
+    useServicesActions();
 
   const getStorageStatusText = () => {
     if (!hasStorageSubscription) {
       return t("AdditionalStorage", {
-        amount,
-        storageUnit: t("Common:Gigabyte"),
+        amount: `${amount} ${t("Common:Gigabyte")}`,
       });
     }
 
-    if (!isCurrentTariff) {
+    if (!isCurrentStoragePlan) {
       return t("StorageUpgradeMessage", {
-        fromSize: currentStoragePlanSize,
-        toSize: amount,
-        storageUnit: t("Common:Gigabyte"),
+        fromSize: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
+        toSize: `${amount} ${t("Common:Gigabyte")}`,
       });
     }
 
     if (hasScheduledStorageChange) {
       return t("StorageUpgradeMessage", {
-        fromSize: currentStoragePlanSize,
-        toSize: nextStoragePlanSize,
-        storageUnit: t("Common:Gigabyte"),
+        fromSize: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
+        toSize: `${nextStoragePlanSize} ${t("Common:Gigabyte")}`,
       });
     }
 
@@ -96,34 +91,29 @@ const PlanInfo: React.FC<PlanInfoProps> = ({
   };
 
   const getSubscriptionStatusText = () => {
-    if (!amount || (hasScheduledStorageChange && nextStoragePlanSize === 0)) {
+    if (!amount || isStorageCancellation()) {
       return t("SubscriptionCancellation");
     }
 
     return t("BilledMonthly");
   };
 
-  const formatWalletCurrency = (currency: number) => {
-    return formatCurrencyValue(
-      language,
-      currency,
-      walletCodeCurrency || "",
-      2,
-      7,
-    );
-  };
-
   return (
     <div className={styles.planInfoContainer}>
       <div className={styles.planInfoIcon}>
-        <PaymentSpeacialIcon />
+        {isCurrentStoragePlan ? (
+          <DiskStorageIcon />
+        ) : isUpgradeStoragePlan ? (
+          <UpgradeWalletIcon />
+        ) : (
+          <DowngradeWalletIcon />
+        )}
       </div>
       <div className={styles.planInfoBody}>
-        {moreThanLimit ? (
+        {isExceedingStorageLimit ? (
           <Text fontWeight="600" fontSize="14px">
             {t("StorageUponRequest", {
-              amount: maxValue,
-              storageUnit: t("Common:Gigabyte"),
+              amount: `${maxStorageLimit} ${t("Common:Gigabyte")}`,
             })}
           </Text>
         ) : (
@@ -143,7 +133,7 @@ const PlanInfo: React.FC<PlanInfoProps> = ({
           </>
         )}
       </div>
-      {!moreThanLimit && amount ? (
+      {!isStorageCancellation() && !isExceedingStorageLimit && amount ? (
         <div className={styles.planInfoPrice}>
           <Text fontWeight="600" fontSize="14px" className={styles.totalPrice}>
             {t("CurrencyPerMonth", {
@@ -156,9 +146,8 @@ const PlanInfo: React.FC<PlanInfoProps> = ({
             className={styles.priceForEach}
           >
             {t("PriceForEach", {
-              currency: formatWalletCurrency(value),
-              amount: storageQuotaIncrement,
-              storageUnit: t("Common:Gigabyte"),
+              currency: formatWalletCurrency(storagePriceIncrement),
+              amount: getConvertedSize(t, storageSizeIncrement),
             })}
           </Text>
         </div>
@@ -168,10 +157,8 @@ const PlanInfo: React.FC<PlanInfoProps> = ({
 };
 
 export default inject(
-  ({ paymentStore, authStore, currentTariffStatusStore }: TStore) => {
-    const { language } = authStore;
-    const { walletBalance, walletCodeCurrency, storageQuotaIncrementPrice } =
-      paymentStore;
+  ({ paymentStore, currentTariffStatusStore, servicesStore }: TStore) => {
+    const { walletBalance } = paymentStore;
     const {
       nextStoragePlanSize,
       hasStorageSubscription,
@@ -179,16 +166,16 @@ export default inject(
       hasScheduledStorageChange,
     } = currentTariffStatusStore;
 
-    const { value } = storageQuotaIncrementPrice;
+    const { storageSizeIncrement, storagePriceIncrement } = servicesStore;
+
     return {
       walletBalance,
-      walletCodeCurrency,
-      language,
-      stepValue: value,
       nextStoragePlanSize,
       hasStorageSubscription,
       currentStoragePlanSize,
       hasScheduledStorageChange,
+      storageSizeIncrement,
+      storagePriceIncrement,
     };
   },
 )(observer(PlanInfo));

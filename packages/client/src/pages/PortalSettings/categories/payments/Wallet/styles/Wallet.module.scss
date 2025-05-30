@@ -150,6 +150,9 @@
 .walletInfoBalance {
   font-size: 14px;
   line-height: 16px;
+  &.warningColor {
+    color: var(--warning-color);
+  }
 }
 
 .walletInfoTopUp {

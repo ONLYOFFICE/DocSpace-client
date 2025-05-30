@@ -24,47 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-.dialogBody {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  margin-bottom: 20px;
-}
+import React, { createContext, useContext, useState, useMemo } from "react";
 
-.storageInfo {
-  display: flex;
-  min-height: 40px;
-  background: var(--payment-background-color);
-  margin-bottom: 24px;
-  flex-wrap: wrap;
-  margin-top: 14px;
-  padding: 12px 16px;
-  box-sizing: border-box;
-  padding-bottom: 0;
-  border-radius: 6px;
-}
-.totalContainer {
-  margin-top: auto;
-  margin-bottom: 12px;
-}
+type PaymentContextType = {
+  futurePayment: number;
+  isWaitingCalculation: boolean;
+  setIsWaitingCalculation: React.Dispatch<React.SetStateAction<boolean>>;
+  setFuturePayment: React.Dispatch<React.SetStateAction<number>>;
+};
 
-.currentTariffCount {
-  display: inline;
-}
+const initialPaymentContext: PaymentContextType = {
+  futurePayment: 0,
+  setFuturePayment: () => {},
+  isWaitingCalculation: false,
+  setIsWaitingCalculation: () => {},
+};
 
-.moreStorage {
-  color: var(--payment-text-color);
-}
+const PaymentContext = createContext<PaymentContextType>(initialPaymentContext);
 
-.currentPayment,
-.currentPaymentWrapper {
-  margin-bottom: 8px;
-}
+export const PaymentProvider: React.FC<{
+  children: React.ReactNode;
+}> = ({ children }) => {
+  const [futurePayment, setFuturePayment] = useState<number>(0);
+  const [isWaitingCalculation, setIsWaitingCalculation] = useState(false);
 
-.monthPayment {
-  color: var(--payment-dialog-text);
-}
+  const value = useMemo(
+    () => ({
+      futurePayment,
+      isWaitingCalculation,
+      setFuturePayment,
+      setIsWaitingCalculation,
+    }),
+    [futurePayment, isWaitingCalculation],
+  );
 
-.cancelDialog {
-  margin-bottom: 16px;
-}
+  return (
+    <PaymentContext.Provider value={value}>{children}</PaymentContext.Provider>
+  );
+};
+
+export const usePaymentContext = () => useContext(PaymentContext);

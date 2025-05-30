@@ -1078,6 +1078,11 @@
   --info-panel-blur-color: #{$blur-light};
   --info-panel-bg: #{$white};
   --info-panel-border: #{$gray-light-mid};
+  --info-panel-avatar-color: #{$gray-text};
+  --info-panel-link-expired: #{$gray};
+  --info-panel-links-color: #{$light-blue-main};
+  --info-panel-links-primary-color: #{$gray-text};
+  --info-panel-members-create-link: #{$black};
 }
 
 .dark {
@@ -1085,6 +1090,11 @@
   --info-panel-blur-color: #{$blur-dark};
   --info-panel-bg: #{$black};
   --info-panel-border: #{$gray-dark-strong};
+  --info-panel-avatar-color: #{$gray};
+  --info-panel-link-expired: #{$gray};
+  --info-panel-links-color: #{$light-blue-main};
+  --info-panel-links-primary-color: #{$dark-gray-dark};
+  --info-panel-members-create-link: #{$gray-dark};
 }
 
 .light {
@@ -1562,7 +1572,7 @@
   --input-bg: #{$dark-gray-light};
   --input-color: #{$white};
   --input-border-color: #{$gray-dark-strong};
-  --input-border-hover: #{$gray-dark};
+  --input-border-hover: #{$gray-dark-text};
   --input-border-focus: #{$white};
 
   --input-disabled-bg: #{$gray-dark-strong};
@@ -1578,7 +1588,7 @@
   --input-warning-border-hover: #{$dark-status-warning};
   --input-warning-border-focus: #{$dark-status-warning};
 
-  --text-input-placeholder-color: #{$gray-dark};
+  --text-input-placeholder-color: #{$gray-dark-text};
   --text-input-placeholder-disabled-color: #{$gray-dark-text};
 
   // Dimensions
@@ -2339,6 +2349,16 @@
 
 .dark {
   --modal-dialog-resolve-color: #{$gray};
+}
+
+.light {
+  --search-input-default-icon-fill: #{$gray-strong};
+  --search-input-filled-icon-fill: #{$gray};
+}
+
+.dark {
+  --search-input-default-icon-fill: #{$gray-dark-strong};
+  --search-input-filled-icon-fill: #{$gray-dark};
 }
 
 .light {

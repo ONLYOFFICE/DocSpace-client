@@ -40,18 +40,16 @@ import { logger } from "@/../logger.mjs";
 
 import "@/styles/globals.scss";
 
-const log = logger.child({ module: "Root layout" });
-
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const hdrs = headers();
-  const cookieStore = cookies();
+  const hdrs = await headers();
+  const cookieStore = await cookies();
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
-    log.info("get health check and return empty layout");
+    logger.info("get health check and return empty layout");
     return <></>;
   }
 

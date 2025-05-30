@@ -74,17 +74,19 @@ export type SdkSearchParams = {
 };
 
 export type RootPageProps = {
-  searchParams: Partial<{
-    fileId: string;
-    fileid: string;
-    version: string;
-    doc: string;
-    action: ActionType;
-    share: string;
-    editorType: string;
-    error?: string;
-  }> &
-    SdkSearchParams;
+  searchParams: Promise<
+    Partial<{
+      fileId: string;
+      fileid: string;
+      version: string;
+      doc: string;
+      action: ActionType;
+      share: string;
+      editorType: string;
+      error?: string;
+    }> &
+      SdkSearchParams
+  >;
 };
 export type TDocumentInfo = {
   favorite: boolean;
@@ -198,7 +200,7 @@ export interface IInitialConfig {
   document: TDocument;
   documentType: TDocumentType;
   editorConfig: TEditorConfig;
-  editorType: number;
+  editorType: string;
   editorUrl: string;
   file: TFile;
   token: string;
@@ -264,6 +266,7 @@ export type EditorProps = {
   isSkipError?: boolean;
   filesSettings?: TFilesSettings;
   organizationName?: string;
+  shareKey?: string;
 
   onDownloadAs?: (obj: object) => void;
   openShareFormDialog?: () => void;
@@ -391,6 +394,7 @@ export interface UseEventsProps {
 
   sdkConfig?: TFrameConfig | null;
   organizationName: string;
+  shareKey?: string;
   setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
   openShareFormDialog?: VoidFunction;
   onStartFillingVDRPanel?: (roles: TFormRole[]) => void;

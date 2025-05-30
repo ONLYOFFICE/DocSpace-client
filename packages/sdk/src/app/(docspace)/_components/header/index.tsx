@@ -50,6 +50,7 @@ import useContextMenuModel from "../../_hooks/useContextMenuModel";
 import useHeaderMenu from "../../_hooks/useHeaderMenu";
 
 import type { HeaderProps } from "./Header.types";
+import useDeviceType from "@/hooks/useDeviceType";
 
 export type { HeaderProps };
 
@@ -71,7 +72,8 @@ const Header = ({
   const navigationStore = useNavigationStore();
   const filesSelectionStore = useFilesSelectionStore();
   const filesListStore = useFilesListStore();
-  const { currentDeviceType, displayAbout } = useSettingsStore();
+  const { displayAbout } = useSettingsStore();
+  const { currentDeviceType } = useDeviceType();
   const { getHeaderContextMenuModel } = useContextMenuModel({});
   const { getHeaderMenu, onCheckboxChange } = useHeaderMenu({});
   const { isBase: isBaseTheme } = useTheme();

@@ -1,6 +1,5 @@
 {
   "AccountWillBeCreated": "Účet {{productName}} bude vytvorený pre <1>{{email}}</1>. Dokončite prosím svoju registráciu:",
-  "ChangePasswordSuccess": "Heslo bolo úspešne zmenené",
   "ConfirmOwnerPortalSuccessMessage": "Vlastník {{productName}} bol úspešne zmenený. O 10 sekúnd budete presmerovaní.",
   "ConfirmOwnerPortalTitle": "Potvrďte, že chcete zmeniť vlastníka {{productName}} na {{newOwner}}.",
   "CurrentNumber": "Vaše aktuálne číslo mobilného telefónu",

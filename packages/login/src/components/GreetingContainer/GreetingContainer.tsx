@@ -37,12 +37,19 @@ import { getLogoUrl } from "@docspace/shared/utils/common";
 
 export const GreetingContainer = ({
   greetingText,
+  culture,
 }: {
   greetingText?: string | undefined;
+  culture?: string;
 }) => {
   const theme = useTheme();
 
-  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
+  const logoUrl = getLogoUrl(
+    WhiteLabelLogoType.LoginPage,
+    !theme.isBase,
+    false,
+    culture,
+  );
 
   return (
     <>

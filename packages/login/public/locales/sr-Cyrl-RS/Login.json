@@ -1,4 +1,5 @@
 {
+  "ChangePasswordSuccess": "Лозинка је успешно промењена",
   "CodeTitle": "Код вам је послат емаил-ом",
   "ErrorInvalidText": "За 10 секунди биц́ете преусмерени на <1>{{productName}}</1>",
   "ForgotPassword": "Заборавили сте вашу лозинку?",

@@ -87,7 +87,7 @@ const LeaveRoomDialog = (props) => {
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
-          key="OkButton"
+          key="OKButton"
           label={isRoomOwner ? t("Files:AssignOwner") : t("Common:OKButton")}
           size="normal"
           primary

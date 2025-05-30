@@ -38,14 +38,14 @@ import {
   StyledLoader,
   StyledPlusBadge,
   DescriptiveContainer,
-} from "../ComboBox.styled";
+} from "../Combobox.styled";
 
 import { Text } from "../../text";
 import { Badge } from "../../badge";
 
-import ComboButtonTheme from "../ComboBox.theme";
+import ComboButtonTheme from "../Combobox.theme";
 
-import { ComboBoxSize } from "../ComboBox.enums";
+import { ComboBoxSize } from "../Combobox.enums";
 import type { TComboButtonProps } from "../ComboBox.types";
 
 const ComboButton: React.FC<TComboButtonProps> = ({
@@ -80,7 +80,7 @@ const ComboButton: React.FC<TComboButtonProps> = ({
 
   const comboButtonClassName = `combo-button combo-button_${isOpen ? "open" : "closed"}`;
 
-  const Icon = selectedOption.icon;
+  const Icon = selectedOption?.icon;
   const isIconReactElement =
     Icon &&
     typeof Icon === "function" &&
@@ -140,7 +140,6 @@ const ComboButton: React.FC<TComboButtonProps> = ({
           ) : null}
         </StyledIcon>
       ) : null}
-
       {type === "badge" ? (
         <Badge
           label={selectedOption.label}
@@ -187,13 +186,11 @@ const ComboButton: React.FC<TComboButtonProps> = ({
           {selectedOption?.label}
         </Text>
       ) : null}
-
       {plusBadgeValue ? (
         <StyledPlusBadge
           isOpen={isOpen}
         >{`+${plusBadgeValue}`}</StyledPlusBadge>
       ) : null}
-
       <StyledArrowIcon
         displayArrow={displayArrow}
         isOpen={isOpen}
@@ -219,7 +216,6 @@ const ComboButton: React.FC<TComboButtonProps> = ({
           )
         ) : null}
       </StyledArrowIcon>
-
       {isLoading ? (
         <StyledLoader displaySize={size} type={LoaderTypes.track} size="20px" />
       ) : null}

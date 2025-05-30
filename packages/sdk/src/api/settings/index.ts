@@ -40,13 +40,16 @@ import {
   portalCulturesHandler,
   settingsHandler,
 } from "@docspace/shared/__mocks__/e2e";
+import { logger } from "@/../logger.mjs";
 
 const IS_TEST = process.env.E2E_TEST;
 
 export async function getSettings(
   withPassword = false,
 ): Promise<TSettings | string | undefined> {
-  const [req] = createRequest(
+  logger.debug(`Start GET /settings?withPassword=${withPassword}`);
+
+  const [req] = await createRequest(
     [`/settings?withPassword=${withPassword}`],
     [["", ""]],
     "GET",
@@ -68,7 +71,13 @@ export async function getSettings(
 }
 
 export async function getColorTheme(): Promise<TGetColorTheme | undefined> {
-  const [req] = createRequest([`/settings/colortheme`], [["", ""]], "GET");
+  logger.debug("Start GET /settings/colortheme");
+
+  const [req] = await createRequest(
+    [`/settings/colortheme`],
+    [["", ""]],
+    "GET",
+  );
 
   const res = IS_TEST
     ? colorThemeHandler()
@@ -82,7 +91,13 @@ export async function getColorTheme(): Promise<TGetColorTheme | undefined> {
 }
 
 export async function getBuildInfo() {
-  const [req] = createRequest([`/settings/version/build`], [["", ""]], "GET");
+  logger.debug("Start GET /settings/version/build");
+
+  const [req] = await createRequest(
+    [`/settings/version/build`],
+    [["", ""]],
+    "GET",
+  );
 
   const res = await fetch(req, { next: { revalidate: 300 } });
 
@@ -94,7 +109,9 @@ export async function getBuildInfo() {
 }
 
 export async function getCapabilities() {
-  const [req] = createRequest([`/capabilities`], [["", ""]], "GET");
+  logger.debug("Start GET /capabilities");
+
+  const [req] = await createRequest([`/capabilities`], [["", ""]], "GET");
 
   const res = await fetch(req, { next: { revalidate: 300 } });
 
@@ -106,7 +123,9 @@ export async function getCapabilities() {
 }
 
 export async function getPortalCultures(): Promise<TPortalCultures> {
-  const [getPortalCultures] = createRequest(
+  logger.debug("Start GET /settings/cultures");
+
+  const [getPortalCultures] = await createRequest(
     [`/settings/cultures`],
     [["", ""]],
     "GET",

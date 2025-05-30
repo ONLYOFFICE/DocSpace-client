@@ -25,10 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
-import { useTheme } from "styled-components";
-import { globalColors } from "@docspace/shared/themes";
+import classNames from "classnames";
 import { Nullable } from "types";
+
+import { globalColors } from "@docspace/shared/themes";
+
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 import { Text } from "../../../components/text";
 import { Badge } from "../../../components/badge";
@@ -38,16 +41,15 @@ import {
   InputType,
   InputSize,
 } from "../../../components/text-input";
+import { useTheme } from "../../../hooks/useTheme";
 
-import { StyledBrandName } from "./BrandName.styled";
-import { IBrandNameProps } from "./BreandName.types";
-import { NotAvailable } from "./NotAvailable";
+import { NotAvailable } from "../WhiteLabel/NotAvailable";
 import { IWhiteLabelData } from "../WhiteLabel/WhiteLabel.types";
-import { useResponsiveNavigation } from "../../../hooks/useResponsiveNavigation";
-import { brandingRedirectUrl } from "../constants";
+
+import { IBrandNameProps } from "./BrandName.types";
+import styles from "./BrandName.module.scss";
 
 export const BrandName = ({
-  t,
   showNotAvailable,
   isSettingPaid,
   standalone,
@@ -55,15 +57,10 @@ export const BrandName = ({
   isBrandNameLoaded,
   defaultBrandName,
   brandName,
-  deviceType,
 }: IBrandNameProps) => {
-  useResponsiveNavigation({
-    redirectUrl: brandingRedirectUrl,
-    currentLocation: "brand-name",
-    deviceType,
-  });
+  const { t } = useTranslation("Common");
 
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const [brandNameWhiteLabel, setBrandNameWhiteLabel] =
     useState<Nullable<string>>(null);
@@ -94,22 +91,22 @@ export const BrandName = ({
   const showReminder = !isEqualText && brandNameWhiteLabel !== null;
 
   return (
-    <StyledBrandName>
-      {showNotAvailable ? <NotAvailable t={t} /> : null}
+    <div className={styles.brandName}>
+      {showNotAvailable ? <NotAvailable /> : null}
 
-      <div className="header-container">
+      <div className={classNames(styles.headerContainer, "header-container")}>
         <Text fontSize="16px" fontWeight="700">
           {t("BrandName")}
         </Text>
 
         {!isSettingPaid && !standalone ? (
           <Badge
-            className="paid-badge"
+            className={classNames(styles.paidBadge, "paid-badge")}
             fontWeight="700"
             label={t("Common:Paid")}
             isPaidBadge
             backgroundColor={
-              theme.isBase
+              isBase
                 ? globalColors.favoritesStatus
                 : globalColors.favoriteStatusDark
             }
@@ -117,7 +114,13 @@ export const BrandName = ({
         ) : null}
       </div>
 
-      <Text className="wl-subtitle settings_unavailable" fontSize="13px">
+      <Text
+        className={classNames(
+          styles.wlSubtitle,
+          "wl-subtitle settings_unavailable",
+        )}
+        fontSize="13px"
+      >
         {t("BrandNameSubtitle", { productName: t("Common:ProductName") })}
       </Text>
 
@@ -142,7 +145,10 @@ export const BrandName = ({
           />
           <SaveCancelButtons
             id="btnBrandName"
-            className="brand-name-buttons"
+            className={classNames(
+              styles.brandNameButtons,
+              "brand-name-buttons",
+            )}
             onSaveClick={onSaveAction}
             onCancelClick={onCancelAction}
             saveButtonLabel={t("Common:SaveButton")}
@@ -155,6 +161,6 @@ export const BrandName = ({
           />
         </FieldContainer>
       </div>
-    </StyledBrandName>
+    </div>
   );
 };

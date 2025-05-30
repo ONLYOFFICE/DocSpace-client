@@ -1471,7 +1471,12 @@ class FilesActionStore {
               ...pbData,
             });
 
-            return toastr.error(err.message ? err.message : err, null, 0, true);
+            return toastr.error(
+              err.message ? err.message : err.error ? err.error : err,
+              null,
+              0,
+              true,
+            );
           })
           .finally(() => {
             clearActiveOperations(null, items);
@@ -2959,7 +2964,11 @@ class FilesActionStore {
     this.isGroupMenuBlocked = blocked;
   };
 
-  preparingDataForCopyingToRoom = async (destFolderId, selections) => {
+  preparingDataForCopyingToRoom = async (
+    destFolderId,
+    selections,
+    destFolderInfo,
+  ) => {
     const fileIds = [];
     let folderIds = [];
 
@@ -2998,6 +3007,7 @@ class FilesActionStore {
 
     const operationData = {
       destFolderId,
+      destFolderInfo,
       folderIds,
       fileIds,
       deleteAfter: false,

@@ -1,0 +1,414 @@
+{
+  "key_path": "RolePowerUserFormRoomDescription",
+  "content": "Users can upload forms to the room and have full access to the Complete and In Process folders.",
+  "content_en_sha1_hash": "9849e1297fdc864b5fce1c89ec6168c9f10bf41d",
+  "created_at": "2025-05-19T21:30:48.077Z",
+  "updated_at": "2025-05-26T07:57:32.993Z",
+  "comment": {
+    "text": "This translation key is used to describe a user's role and access permissions in the room. It appears on options screens or in UI elements that display role descriptions. Translators should focus on conveying the idea of full access to specific folders, as stated in the English content.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:35.712Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/utils/getAccessOptions.ts",
+      "line_number": 66,
+      "context": "};\n \n const getUserDescription = (roomType: RoomsType, t: TTranslation) => {\n switch (roomType) {\n case RoomsType.FormRoom:\n return t(\"Common:RolePowerUserFormRoomDescription\");\n case None:\n return t(\"Common:RoleNewUserDescription\");\n default:\n return t(\"Common:RoleContentCreatorDescription\");\n }",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"حق الوصول التام\" (full access) is a bit literal and formal for this context. A more natural and user-friendly translation might be better.",
+          "suggestion": "يمكن للمستخدمين رفع النماذج إلى الغرفة ويستطيعون الوصول الكامل إلى مجلدي \"مكتمل\" و\"قيد المعالجة\" or يمكن للمستخدمين رفع النماذج إلى الغرفة مع إمكانية الوصول الكامل إلى مجلدي \"مكتمل\" و\"قيد المعالجة\"."
+        },
+        {
+          "type": "formatting",
+          "description": "The folder names 'Complete' and 'In Process' are in English. While common, it's best to confirm if there are standard Arabic translations for these within the organization or context, or keep them as is. If kept as English, consistency with other translations is critical.",
+          "suggestion": "If Arabic translations are available for 'Complete' and 'In Process', use them here. Otherwise, consider keeping them in English and ensuring consistency across the application."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'have full access' is a bit clunky in Azerbaijani. A more natural phrasing would be 'tam hüquqları olsun' or 'tam imkanı olsun'.",
+          "suggestion": "Istifadəçilər otağa formalar yükləyə və Tamamlanmış və Prosesdə olan qovluqlara tam hüquqları olsun/tam imkanı olsun."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Im Nicht ausgefüllt\" is not a correct translation of \"In Process\". It literally means \"In Not Filled\". The correct term should reflect the meaning of 'In Progress' or 'Being Processed'.",
+          "suggestion": "Consider using a term like \"In Bearbeitung\" or \"Zur Bearbeitung\" to better represent 'In Process'."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'User' should be 'Benutzer' in German.",
+          "suggestion": "Replace 'User' with 'Benutzer'."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Complete and In Process' is translated as 'Ολοκληρωμένα και Σε εξέλιξη'. While technically correct, a more natural Greek translation for 'Complete' in this context, referring to folders, might be 'Ολοκληρωμένο'. Using 'Ολοκληρωμένο' consistently would improve readability.",
+          "suggestion": "Οι χρήστες μπορούν να ανεβάζουν φόρμες στο δωμάτιο και να έχουν πλήρη πρόσβαση στους φακέλους Ολοκληρωμένο και Σε εξέλιξη."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'advanced users' ('avanzados') doesn't accurately translate 'users'. It implies a higher level of skill or permission beyond simply being a user. 'Usuarios' would be a more direct translation.",
+          "suggestion": "Usuarios pueden cargar formularios en la sala y tienen acceso completo a las carpetas Completado y En curso."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, 'Completado y En curso' could be improved for better flow and consistency in Spanish. Using 'Completadas y En proceso' maintains parallelism with the structure of the English sentence.",
+          "suggestion": "Usuarios pueden cargar formularios en la sala y tienen acceso completo a las carpetas Completadas y En proceso."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The verb 'voivat' (can) agrees with 'käyttäjä' (user), which is singular in the English sentence's subject. While 'Käyttäjä' is technically masculine singular, it's commonly used as a general user, so it's acceptable in plural form to indicate multiple users.",
+          "suggestion": "Käyttäjät voivat ladata huoneeseen lomakkeita ja saada täydet oikeudet Valmiit- ja Keskeneräiset-kansioihin."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'täydet oikeudet' (full rights) is accurate, the English implies 'full access' rather than just rights.  It's slightly different nuance.",
+          "suggestion": "Käyttäjät voivat ladata huoneeseen lomakkeita ja heillä on täysi pääsy Valmiit- ja Keskeneräiset-kansioihin."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "“Les avancés” is an incorrect translation of 'Users'. 'Les avancés' translates to 'the advanced ones' or 'the experienced ones', which doesn't accurately represent 'users'.",
+          "suggestion": "Les utilisateurs"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“Salle” translates to 'room' but in a more generic sense. Given the context, it would be better to use a more specific term that suggests a digital space, such as a 'workspace' or 'environment'.",
+          "suggestion": "l'espace de travail"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ձևաթղթեր վերբեռնել սենյակ' translates literally to 'upload forms to room'. A more natural Armenian phrasing would be 'ձևաթղթեր վերբեռնել սենյակում' (upload forms *into* the room) or 'սենյակում ձևաթղթեր վերբեռնել'.",
+          "suggestion": "Օգտատերերը կարող են ձևաթղթեր վերբեռնել սենյակում"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'have full access' is translated as 'ունենալ ամբողջական մուտք'. While technically correct, it sounds somewhat formal and clunky in Armenian. A more natural rendering might be 'ունենալ լրիվ մուտք' or 'ունենալ անսահմանափակ մուտք'.",
+          "suggestion": "Օգտատերերը կարող են ձևաթղթեր վերբեռնել սենյակում և ունենալ լրիվ մուտք"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Power User' is translated as 'esperti'. While 'esperti' can mean experts, it doesn't accurately convey the role of a power user which implies access and permissions rather than necessarily expertise. A more accurate translation would consider terms like 'utenti avanzati' or 'utenti privilegiati'.",
+          "suggestion": "Consider translating 'Power User' as 'utenti avanzati' or 'utenti privilegiati'."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The bracketed words '[完了]' and '[処理中]' appear unnecessarily. They should be integrated into the sentence more naturally.",
+          "suggestion": "ユーザーはフォームをルームにアップロードでき、完了フォルダと処理中フォルダに完全なアクセス権限があります。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ຫ້ອງ\" (room) is accurate, but the overall phrasing is slightly awkward and doesn't fully capture the nuance of \"users can upload forms *to* the room.\" A more natural phrasing might improve readability.",
+          "suggestion": "ຜູ້ໃຊ້ສາມາດອັບໂຫຼດແບບຟອມສູ່ຫ້ອງ..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ຢ່າງເຕັມທີ່' (fully) is redundant and can be omitted without losing meaning. It makes the sentence more verbose.",
+          "suggestion": "ມີສິດເຂົ້າເຖິງກັບໂຟນເອກະສານ..."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ໂຟນເອກະສານ' (documents) appears to be a transliteration of 'folders'.  While understandable, it might be clearer to use a more direct translation of 'folders' if such a word exists in Lao or adapt the wording.",
+          "suggestion": "Consider if a more direct Lao equivalent for 'folders' exists; if not, rephrase for clarity: 'ໂຟນເອກະສານທີ່ສໍາເລັດ ແລະ ກໍາລັງຢູ່ໃນຂັ້ນຕອນ' (documents that are complete and in process)."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The English content uses parentheses to translate terms, while the Latvian translation uses them inconsistently. 'Complete' and 'In Process' are translated, but not consistently formatted.",
+          "suggestion": "Maintain consistent formatting. Consider using parentheses around both translated terms: 'Complete (Pabeigts)' and 'In Process (Notiek apstrāde)' or removing parentheses entirely."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Avançados' doesn't accurately translate 'Users'. 'Avançados' implies advanced users, while the English text refers to all users.",
+          "suggestion": "Utilizadores podem carregar formulários na sala e ter acesso total às pastas Concluído e Em processamento."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the Portuguese translation uses lowercase 'Concluído' and 'Em processamento'.  It's generally more consistent to capitalize the first letter in folder names, mirroring the English.",
+          "suggestion": "Utilizadores podem carregar formulários na sala e ter acesso total às pastas Concluído e Em Processamento."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"Avançados\" (Advanced users) doesn't accurately convey the meaning of \"Users\" in the English context. It implies a higher level of technical expertise rather than simply anyone who is authorized to use the feature.",
+          "suggestion": "Utilize a more general term like 'Usuários' or 'Participantes' to represent 'Users'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Concluídas' and 'Em Processamento' are correct translations for 'Complete' and 'In Process,' it might be more natural to use synonyms for better flow in the sentence.",
+          "suggestion": "Consider 'Finalizadas' instead of 'Concluídas' and 'Em Andamento' instead of 'Em Processamento' for a more idiomatic flow. Alternatively, retaining the original translations is acceptable if the target audience understands them without confusion."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Avansați' (Advanced) is not an accurate translation of 'Users' in this context. It implies a level of experience or permission beyond simply being a user.",
+          "suggestion": "Utilizatori"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'sunt oferite acces complet' is awkward. A more natural translation for 'have full access' would be 'au acces complet'.",
+          "suggestion": "au acces complet"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'În curs de completare' is not the standard term for 'In Process'.",
+          "suggestion": "În lucru"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'formulare' should consistently use one form (either singular or plural) within the sentence. While grammatically correct, consistency improves readability.",
+          "suggestion": "formular"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'have full access' is not accurately translated. 'සම්පූර්ණ ප්‍රවේශයක් ලබා ගත හැකිය' while literally meaning 'can obtain full access' doesn't fully capture the nuance of 'have full access'. A better translation would convey they *possess* the access.",
+          "suggestion": "පරිශීලකයින් කාමරයට ආකෘති උඩුගත කර සම්පූර්ණ සහ ක්‍රියාවලිය යටතේ ඇති ෆෝල්ඩර් වෙත සම්පූර්ණ අයිතියක් හිමිවිය."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'Complete and In Process' is directly translated. While understandable, it might be more natural in Sinhala to use a more standard phrasing for those states.",
+          "suggestion": "පරිශීලකයින් කාමරයට ආකෘති උඩුගත කර සම්පූර්ණතම සහ පවත්නා ෆෝල්ඩර් වෙත සම්පූර්ණ අයිතියක් හිමිවිය."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Serbian translation uses lowercase for the folder names 'Завршено' and 'У Процесу'. Consistency with English (Complete and In Process) would suggest capitalizing them as 'Завршено' and 'У Процесу'.",
+          "suggestion": "Корисници могу отпремити формуларе у просторију и имати пун приступ Завршено и У Процесу фолдерима."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Završeno i U Procesu folderima\" is a literal translation and doesn't flow naturally in Serbian.  'Complete' should be translated more idiomatically.  'In Process' is also a bit awkward.",
+          "suggestion": "Korisnici mogu otpremiti formulare u prostoriju i imaju pun pristup folderima 'Završeni' i 'U toku'."
+        },
+        {
+          "type": "formatting",
+          "description": "The translated sentence lacks a period at the end.",
+          "suggestion": "Korisnici mogu otpremiti formulare u prostoriju i imaju pun pristup folderima 'Završeni' i 'U toku'."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'have full access' is a bit clunky in Turkish. A more natural phrasing would be 'tam erişim yetkisine sahip olabilirler'.",
+          "suggestion": "Kullanıcılar odaya form yükleyebilir ve Tamamlandı ve İşleniyor klasörlerine tam erişim yetkisine sahip olabilirler."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'have full access' is not perfectly conveyed by 'мають повний доступ'. A more natural phrasing would be 'мають необмежений доступ' or 'мають повний, необмежений доступ'. While 'повний доступ' isn't *wrong*, it's a bit less idiomatic.",
+          "suggestion": "Користувачі можуть передавати форми до кімнати та мають необмежений доступ до папок «Заповнені» та «В процесі»."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Complete' is translated as 'Đang hoàn thành'. While understandable, a more accurate translation of 'Complete' in this context, referring to a folder name, might be 'Hoàn thành'.",
+          "suggestion": "Replace 'Đang hoàn thành' with 'Hoàn thành'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'In Process' is translated as 'Đang xử lý'. While not incorrect, 'Đang thực hiện' might be a better fit, especially when referring to a folder name implying ongoing work.",
+          "suggestion": "Replace 'Đang xử lý' with 'Đang thực hiện'."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

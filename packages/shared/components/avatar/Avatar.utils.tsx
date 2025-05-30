@@ -25,37 +25,32 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 import classNames from "classnames";
 
 import AdministratorReactSvg from "PUBLIC_DIR/images/administrator.react.svg";
 import OwnerReactSvg from "PUBLIC_DIR/images/owner.react.svg";
 import CameraReactSvg from "PUBLIC_DIR/images/camera.react.svg";
 
-import { IconSizeType, commonIconsStyles } from "../../utils";
+import { IconSizeType } from "../../utils";
 import { AvatarSize, AvatarRole } from "./Avatar.enums";
 
 import styles from "./Avatar.module.scss";
-
-const StyledAdministratorIcon = styled(AdministratorReactSvg)`
-  ${commonIconsStyles}
-`;
-const StyledOwnerIcon = styled(OwnerReactSvg)`
-  ${commonIconsStyles}
-`;
 
 export const getRoleIcon = (role: AvatarRole) => {
   switch (role) {
     case "admin":
       return (
-        <StyledAdministratorIcon
-          size={IconSizeType.scale}
-          className="admin_icon"
+        <AdministratorReactSvg
+          data-size={IconSizeType.scale}
+          className={classNames(styles.adminIcon, "admin_icon")}
         />
       );
     case "owner":
       return (
-        <StyledOwnerIcon size={IconSizeType.scale} className="owner_icon" />
+        <OwnerReactSvg
+          data-size={IconSizeType.scale}
+          className={classNames(styles.ownerIcon, "owner_icon")}
+        />
       );
     default:
       return null;
@@ -92,5 +87,5 @@ export const Initials = ({
 );
 
 export const EmptyIcon = ({ size }: { size: IconSizeType }) => {
-  return <CameraReactSvg className={styles.empty_icon} data-size={size} />;
+  return <CameraReactSvg className={styles.emptyIcon} data-size={size} />;
 };

@@ -73,12 +73,12 @@ export type TCulturesOption =
       isBeta?: boolean;
       key: string | number;
       label: string;
-      icon?: string | React.ReactElement;
+      icon?: string | React.ElementType | React.ReactElement;
     }
   | {
       isBeta?: boolean;
       key: string | number;
-      icon?: string | React.ReactElement;
+      icon?: string | React.ElementType | React.ReactElement;
     };
 
 export type TDataContext = {
@@ -115,6 +115,7 @@ export type TConfirmLinkParams = {
   first?: string;
   roomId?: string;
   linkData?: string;
+  culture?: string;
 };
 
 export type TConfirmLinkResult = {

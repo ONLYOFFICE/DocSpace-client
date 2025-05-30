@@ -1020,7 +1020,7 @@ const SectionFilterContent = ({
         filterOptions.push({
           key: FilterGroups.roomFilterProviderType,
           group: FilterGroups.roomFilterProviderType,
-          label: t("Settings:ThirdPartyResource"),
+          label: t("Common:ThirdPartyResource"),
           isHeader: true,
           isLast: true,
         });

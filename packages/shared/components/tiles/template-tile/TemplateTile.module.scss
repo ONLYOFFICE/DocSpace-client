@@ -24,13 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../styles/variables/index.scss";
-@import "../../../styles/variables/_colors.scss";
-@import "../../../styles/_mixins.scss";
+@use "../../../styles/variables";
+@use "../../../styles/variables/colors";
+@use "../../../styles/mixins";
 
 .templateTile {
-  height: 128px;
-  gap: 12px;
+  max-height: 128px;
+  row-gap: 12px;
+  padding: 12px 0px;
 
   :global {
     .content {
@@ -90,6 +91,10 @@
 
       box-sizing: border-box;
       overflow: hidden;
+    }
+
+    .topContent {
+      height: 44px;
     }
   }
 }

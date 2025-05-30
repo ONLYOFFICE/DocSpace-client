@@ -1,0 +1,285 @@
+{
+  "key_path": "FillOutTitle",
+  "content": "Fill out the form yourself",
+  "content_en_sha1_hash": "d179132f94ff8d37a61af92182c4ddb7a2e22f4c",
+  "created_at": "2025-05-19T21:30:55.166Z",
+  "updated_at": "2025-05-26T07:57:32.307Z",
+  "comment": {
+    "text": "The translation key \"FillOutTitle\" is used to display a message that encourages users to fill out a form on their own. This text appears as the title of a dialog or component where users need to input information, such as a PDF editing interface. It serves to inform users to take responsibility for completing the form themselves.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:40:17.573Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/FillPDFDialog/FillPDFDialog.tsx",
+      "line_number": 106,
+      "context": ");\n \n const cards = [\n {\n id: \"form-yourself\",\n title: t(\"FillPDFDialog:FillOutTitle\"),\n description: t(\"FillPDFDialog:FillOutDescription\"),\n buttonLabel: t(\"FillPDFDialog:FillOutButtonLabel\"),\n onClick: openEditorFill,\n icon: <FillOutYourselfIcon />,\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Formular selbst ausfüllen\" is a literal translation and sounds a bit unnatural in German. A more natural and idiomatic phrasing would be something like \"Füllen Sie das Formular selbst aus\" or \"Bitte füllen Sie das Formular selbst aus\".",
+          "suggestion": "Füllen Sie das Formular selbst aus"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While grammatically correct, 'Συμπληρώστε μόνοι σας τη φόρμα' translates more literally to 'Fill out the form yourself'.  A more natural and user-friendly translation emphasizing user empowerment might be 'Γεμίστε τη φόρμα μόνοι σας' or 'Συμπληρώστε τη φόρμα εσείς'.",
+          "suggestion": "Γεμίστε τη φόρμα μόνοι σας"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"自分で記入する\" is a literal translation, but it doesn't convey the meaning 'Fill out the form yourself' as naturally as possible in Japanese. It can sound slightly awkward or overly direct. A more natural phrasing would be 'ご自身でご記入ください' (go jishin de go kinyuu kudasai) or 'お客様ご自身でご記入ください' (Okyakusama jishin de go kinyuu kudasai).",
+          "suggestion": "ご自身でご記入ください (Go jishin de go kinyuu kudasai)"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"직접 양식 작성\" while understandable, doesn't fully capture the nuance of \"Fill out the form yourself.\" It's more literal and doesn't convey the implication of avoiding assistance.",
+          "suggestion": "Consider a translation like \"직접 양식에 기입하세요\" (Please fill out the form directly) or \"직접 작성해 주세요\" (Please fill it out yourself)."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Latvian translation \"Aizpildiet veidlapu pats (-i)\" uses the imperative form which is grammatically correct, but might sound a bit abrupt depending on the overall tone of the UI. While accurate, a slightly softened phrasing might be more user-friendly. The parenthesis suggests both masculine and feminine forms are acceptable, which is good for inclusivity.",
+          "suggestion": "Consider a slightly softened phrasing like \"Lūdzu, aizpildiet veidlapu pats (-i)\" (Please fill out the form yourself) or \"Aizpildiet veidlapu, lūdzu\" (Please fill out the form)."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Completați formularul de sine stătător' is a literal translation and doesn't convey the intended meaning of 'Fill out the form yourself'. It's awkward and not natural Romanian.",
+          "suggestion": "Completați singur formularul"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඔබම ආකෘතිය පිරවන්න.' is a literal translation and while understandable, it doesn't convey the nuance of 'Fill out the form yourself'. A more natural and helpful translation might focus on user agency and responsibility.",
+          "suggestion": "Consider a phrasing like 'ඔබ විසින් ආකෘතිය පිරවන්න.' (You should fill out the form) or 'ආකෘතිය ඔබ විසින් පිරවන්න.' (The form should be filled by you)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Vyplniť formulár samostatne\" is a literal translation but doesn't quite capture the nuance of 'Fill out the form yourself.' It sounds a bit formal and less natural in Slovak. A more natural translation would imply responsibility and agency.",
+          "suggestion": "Consider alternatives like \"Zaplňte formulár sami\" or \"Vyplňte formulár sám/sama\" (depending on context - singular or plural)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ponovno izpolni obrazec' translates more accurately to 'Fill out the form again'. It doesn't convey the original meaning of 'Fill out the form yourself', which implies doing it directly.",
+          "suggestion": "Izpolni obrazec sam/a"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Попуни формулар сам' doesn't accurately convey the meaning of 'Fill out the form yourself'. 'Попуни' is a command form (imperative) that means 'fill in' or 'populate', which is not a perfect match. The 'сам' (sam) adds the meaning of 'yourself', but the core verb 'fill out' is not fully captured.  A more natural translation would emphasize the user taking action.",
+          "suggestion": "Испуни образац сам"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Popuni formular sam\" is not the most natural or accurate translation of \"Fill out the form yourself\". \"Popuni formular sam\" literally translates to \"Fill the form myself\".",
+          "suggestion": "Popunite obrazac sami"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Ukrainian translation 'Заповнити форму самому(ій)' is grammatically awkward. It implies the action is done by oneself and not clearly addresses the user being instructed to do it.",
+          "suggestion": "Заповніть форму самостійно"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The literal translation doesn't fully capture the meaning of 'Fill out the form yourself'. It lacks the directive element.",
+          "suggestion": "Заповніть форму власноруч"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

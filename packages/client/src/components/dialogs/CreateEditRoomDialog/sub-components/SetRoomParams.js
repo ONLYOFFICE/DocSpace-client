@@ -265,7 +265,6 @@ const SetRoomParams = ({
 
     if (newValue.match(folderFormValidation)) {
       setIsWrongTitle(true);
-      // toastr.warning(t("Files:ContainsSpecCharacter"));
     } else {
       setIsWrongTitle(false);
     }
@@ -456,7 +455,7 @@ const SetRoomParams = ({
           onBlur={() => setForceHideRoomTypeDropdown(false)}
           errorMessage={
             isWrongTitle
-              ? t("Files:ContainsSpecCharacter")
+              ? t("Common:ContainsSpecCharacter")
               : t("Common:RequiredField")
           }
           onKeyUp={onKeyUp}

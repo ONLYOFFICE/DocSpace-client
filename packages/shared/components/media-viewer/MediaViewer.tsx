@@ -30,6 +30,7 @@ import React, {
   useMemo,
   useEffect,
   useRef,
+  type JSX,
 } from "react";
 
 import { isMobile as isMobileUtils, isTablet } from "../../utils";
@@ -82,11 +83,11 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     ...other
   } = props;
 
-  const TiffAbortSignalRef = useRef<AbortController>();
-  const HeicAbortSignalRef = useRef<AbortController>();
+  const TiffAbortSignalRef = useRef<AbortController>(undefined);
+  const HeicAbortSignalRef = useRef<AbortController>(undefined);
 
   const isWillUnmountRef = useRef(false);
-  const lastRemovedFileIdRefRef = useRef<number>();
+  const lastRemovedFileIdRefRef = useRef<number>(undefined);
 
   const [title, setTitle] = useState<string>("");
   const [fileUrl, setFileUrl] = useState<string | undefined>(() => {

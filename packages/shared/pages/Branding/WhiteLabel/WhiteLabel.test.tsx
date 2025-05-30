@@ -30,8 +30,8 @@ import "@testing-library/jest-dom";
 
 import { WhiteLabel } from ".";
 import { DeviceType, WhiteLabelLogoType } from "../../../enums";
-import { ILogo } from "./WhiteLabel.types";
 import { renderWithTheme } from "../../../utils/render-with-theme";
+import { mockLogos } from "./mockData";
 
 jest.mock("../../../hooks/useResponsiveNavigation", () => ({
   useResponsiveNavigation: jest.fn(),
@@ -47,93 +47,6 @@ jest.mock("./WhiteLabel.helper", () => ({
     },
   }),
 }));
-
-export const mockLogos: ILogo[] = [
-  {
-    name: "LightSmall",
-    size: {
-      width: 422,
-      height: 48,
-      isEmpty: false,
-    },
-    path: {
-      light: "light_small.svg",
-      dark: "light_small_dark.svg",
-    },
-  },
-  {
-    name: "LoginPage",
-    size: {
-      width: 772,
-      height: 88,
-      isEmpty: false,
-    },
-    path: {
-      light: "login.svg",
-      dark: "login_dark.svg",
-    },
-  },
-  {
-    name: "Favicon",
-    size: {
-      width: 32,
-      height: 32,
-      isEmpty: false,
-    },
-    path: {
-      light: "favicon.svg",
-      dark: "",
-    },
-  },
-  {
-    name: "DocsEditor",
-    size: {
-      width: 172,
-      height: 40,
-      isEmpty: false,
-    },
-    path: {
-      light: "docs_editor.svg",
-      dark: "",
-    },
-  },
-  {
-    name: "DocsEditorEmbed",
-    size: {
-      width: 172,
-      height: 40,
-      isEmpty: false,
-    },
-    path: {
-      light: "docs_editor_embed.svg",
-      dark: "",
-    },
-  },
-  {
-    name: "LeftMenu",
-    size: {
-      width: 56,
-      height: 56,
-      isEmpty: false,
-    },
-    path: {
-      light: "left_menu.svg",
-      dark: "left_menu_dark.svg",
-    },
-  },
-  {
-    name: "AboutPage",
-    size: {
-      width: 442,
-      height: 48,
-      isEmpty: false,
-    },
-    path: {
-      light: "about.svg",
-      dark: "about_dark.svg",
-    },
-  },
-];
 
 const defaultProps = {
   t: (key: string) => key,
@@ -183,7 +96,16 @@ describe("<WhiteLabel />", () => {
 
   it("calls onSave when save button is clicked", () => {
     const onSave = jest.fn();
-    renderWithTheme(<WhiteLabel {...defaultProps} onSave={onSave} />);
+
+    const newLogoUrls = mockLogos.map((logo, i) => {
+      return i === 0
+        ? { ...logo, size: { ...logo.size, width: 999999 } }
+        : logo;
+    });
+
+    renderWithTheme(
+      <WhiteLabel {...defaultProps} logoUrls={newLogoUrls} onSave={onSave} />,
+    );
 
     const saveButton = screen.getByTestId("save-button");
     fireEvent.click(saveButton);
@@ -229,7 +151,7 @@ describe("<WhiteLabel />", () => {
     renderWithTheme(<WhiteLabel {...props} />);
 
     const input = screen.getByTestId("logo-text-input");
-    const button = screen.getByTestId("use-as-logo-button");
+    const button = screen.getByTestId("generate-logo-button");
 
     fireEvent.change(input, { target: { value: "Test" } });
     fireEvent.click(button);

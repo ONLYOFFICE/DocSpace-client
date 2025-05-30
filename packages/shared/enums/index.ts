@@ -772,3 +772,22 @@ export enum RoomSecurityError {
   None,
   FormRoleBlockingDeletion,
 }
+
+export enum BackupStorageLocalKey {
+  StorageType = "LocalCopyStorageType",
+  Folder = "LocalCopyFolder",
+  Storage = "LocalCopyStorage",
+  ThirdPartyStorageType = "LocalCopyThirdPartyStorageType",
+  ThirdPartyStorageValues = "LocalCopyThirdPartyStorageValues",
+}
+
+export enum ProvidersType {
+  Box = "Box",
+  DropBox = "DropBox",
+  GoogleDrive = "Google Drive",
+  kDrive = "kDrive",
+  OneDrive = "OneDrive",
+  SharePoint = "SharePoint",
+  WebDav = "WebDav",
+  Yandex = "Yandex",
+}

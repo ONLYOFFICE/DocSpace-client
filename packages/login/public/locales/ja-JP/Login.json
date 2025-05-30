@@ -1,4 +1,5 @@
 {
+  "ChangePasswordSuccess": "パスワードの変更に成功しました。",
   "CodeTitle": "コードを送りました",
   "ErrorInvalidText": "10秒後、<1>{{productName}}</1>にリダイレクトされます。",
   "ForgotPassword": "パスワードをお忘れですか？",

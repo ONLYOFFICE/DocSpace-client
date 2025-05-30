@@ -24,13 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TTranslation } from "../../../types";
-import { DeviceType } from "../../../enums";
+import type { IBuildInfo } from "../../../components/about-dialog/About.types";
 
 export interface ICompanyInfo {
-  t: TTranslation;
   isSettingPaid: boolean;
-  onShowExample: () => void;
   companySettings: ICompanySettings;
   onSave: (
     address: string,
@@ -38,11 +35,23 @@ export interface ICompanyInfo {
     email: string,
     phone: string,
     site: string,
+    hideAbout: boolean,
   ) => void;
   onRestore: () => void;
   isLoading: boolean;
   companyInfoSettingsIsDefault: boolean;
-  deviceType: DeviceType;
+  displayAbout: boolean;
+  isBrandingAvailable: boolean;
+  buildVersionInfo: IBuildInfo;
+  standalone: boolean;
+  licenseAgreementsUrl: string;
+  isEnterprise: boolean;
+  logoText: string;
+}
+
+export interface IUseCompanySettings {
+  companySettings: ICompanySettings;
+  displayAbout: boolean;
 }
 
 export interface ICompanySettings {
@@ -53,6 +62,7 @@ export interface ICompanySettings {
   site: string;
   isDefault: boolean;
   isLicensor: boolean;
+  hideAbout: boolean;
 }
 
 export interface ICompanySettingsError {

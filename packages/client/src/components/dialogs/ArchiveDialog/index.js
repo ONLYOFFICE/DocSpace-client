@@ -92,7 +92,7 @@ const ArchiveDialogComponent = (props) => {
       <ModalDialog.Footer>
         <Button
           id="shared_move-to-archived-modal_submit"
-          key="OkButton"
+          key="OKButton"
           label={t("Common:OKButton")}
           size="normal"
           primary

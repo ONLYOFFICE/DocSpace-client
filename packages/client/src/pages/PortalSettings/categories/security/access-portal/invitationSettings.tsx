@@ -187,7 +187,7 @@ const InvitationSettings = ({
       });
       setShowReminder(false);
 
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error as TData);
     }

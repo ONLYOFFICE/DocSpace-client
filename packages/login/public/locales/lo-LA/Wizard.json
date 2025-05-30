@@ -1,11 +1,13 @@
 {
   "Desc": "ກະລຸນາຕັ້ງຄ່າຂໍ້ມູນການລົງທະບຽນ {{productName}}",
   "ErrorEmail": "ທີ່ຢູ່ອີເມວບໍ່ຖືກຕ້ອງ",
+  "ErrorInstanceId": "ລະຫັດຕົວຢ່າງບໍ່ຖືກຕ້ອງ",
   "ErrorLicenseBody": "ໃບອະນຸຍາດບໍ່ຖືກຕ້ອງ. ໃຫ້ແນ່ໃຈວ່າທ່ານເລືອກເອກະສານທີ່ຖືກຕ້ອງແລ້ວ",
   "ErrorPassword": "ລະຫັດຜ່ານບໍ່ຖືກຕ້ອງຕາມຂໍ້ກຳນົດ",
   "ErrorUploadLicenseFile": "ເລືອກຟາຍໃບອະນຸຍາດ",
   "License": "ຍອມຮັບເງື່ອນໄຂຂອງ",
   "LicenseLink": "ຂໍ້ຕົກລົງການອະນຸຍາດ",
   "PlaceholderLicense": "ຟາຍໃບອະນຍາດຂອງທ່ານ",
-  "Timezone": "ເຂດເວລາ:"
+  "Timezone": "ເຂດເວລາ:",
+  "WelcomeTitle": "ຕ້ອນຮັບສູ່ {{productName}} ຂອງທ່ານ!"
 }

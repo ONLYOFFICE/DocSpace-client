@@ -1,0 +1,265 @@
+{
+  "key_path": "HistoryStopDate",
+  "content": "Filling was stopped by <1>{{userName}}</1>",
+  "content_en_sha1_hash": "093cefe1472a16419b884b4d52a6896fc3d841fb",
+  "created_at": "2025-05-19T21:30:45.782Z",
+  "updated_at": "2025-05-26T07:57:32.907Z",
+  "comment": {
+    "text": "This translation key is used to display a message indicating when filling was stopped by a user. It typically appears in a UI element related to filling or process management, such as a history summary or report. The exact appearance depends on the surrounding context and usage in the application.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:56.029Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/components/filling-role-process/sub-components/role-histories/RoleHistories.tsx",
+      "line_number": 57,
+      "context": "\"Common:HistorySubmissionDate\",\n ),\n [FillingFormStatusHistory.StopDate.toString()]: (\n <Trans\n t={t}\n i18nKey=\"HistoryStopDate\"\n ns=\"Common\"\n values={{ userName: stoppedByUserName }}\n components={{ 1: <strong title={stoppedByUserName} /> }}\n />\n ),",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"Formanın\" (of the form) doesn't quite fit the context of 'Filling'. It implies possession, but 'Filling' refers to the action of filling something out. A better translation would be something like 'Doldurulması' (the filling of) or 'Önəmlərin doldurulması' (the filling of the fields).",
+          "suggestion": "Doldurulması"
+        },
+        {
+          "type": "grammatical",
+          "description": "While grammatically correct, the sentence structure is slightly awkward. A more natural phrasing would place the subject closer to the verb.",
+          "suggestion": " <1>{{userName}}</1> tərəfindən formanın doldurulması dayandırıldı"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"կողմից\" is technically correct but sounds slightly formal for this context. A more natural phrasing might be preferred depending on the overall tone.",
+          "suggestion": "Consider alternatives like \"մասին\" or a more colloquial phrasing if appropriate for the application."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '記入は<1>{{userName}}</1>によって停止されました' while generally conveying the meaning, is a bit formal and passive. A more natural and direct translation might be preferable depending on the desired tone. '記入は<1>{{userName}}</1>によって停止' would be more concise and common.",
+          "suggestion": "記入は<1>{{userName}}</1>によって停止"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Filling\" is not accurately translated. \"Filling\" in this context likely refers to the process of writing or adding information, not a physical filling. A more accurate translation would be something like \"작업\" (gwaek-up) which means \"work\" or \"task\".",
+          "suggestion": "<1>{{userName}}</1>님이 작업을 중지했습니다"
+        },
+        {
+          "type": "formatting",
+          "description": "The tags <1>{{userName}}</1> are consistent between the English and Korean versions, which is good. No formatting issues detected beyond this.",
+          "suggestion": null
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation ' විසින් පිරවීම නතර කරන ලදී' is a bit clunky and doesn't flow naturally. While technically correct, it's not the most idiomatic way to express 'Filling was stopped by'.",
+          "suggestion": "පිරවීම <1>{{userName}}</1> විසින් නතර කරන ලදී"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "A more natural and common way to express the English sentence would be something like: '<1>{{userName}}</1> පිරවීම නවතා දැමීය'.",
+          "suggestion": "<1>{{userName}}</1> පිරවීම නවතා දැමීය"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Vietnamese translation retains the XML-like tags `<1>` and `</1>` which are unnecessary and should be removed.",
+          "suggestion": "Remove the tags `<1>` and `</1>` from the translation. The translation should be 'Việc điền thông tin đã bị dừng bởi {{userName}}'"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"填写已被<1>{{userName}}</1>停止\" doesn't accurately convey the meaning of \"Filling was stopped by <1>{{userName}}</1>\". The word \"填写\" (filling, as in the act of filling something out) is not the correct nuance. It should more accurately convey the concept of the filling process being halted.",
+          "suggestion": "停止了<1>{{userName}}</1>停止了填充"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

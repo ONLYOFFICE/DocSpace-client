@@ -32,27 +32,11 @@ import { CompanyInfo } from ".";
 import { DeviceType } from "../../../enums";
 import { renderWithTheme } from "../../../utils/render-with-theme";
 
-interface TransProps {
-  t: (key: string, values?: Record<string, unknown>) => string;
-  i18nKey: string;
-  values?: Record<string, unknown>;
-  components?: Record<string, React.ReactElement>;
-  ns?: string;
-  children?: React.ReactNode;
-}
-
-jest.mock("react-i18next", () => ({
-  Trans: ({ t, i18nKey, values }: TransProps) => {
-    return t(i18nKey, { ...values });
-  },
-}));
-
 jest.mock("../../../hooks/useResponsiveNavigation", () => ({
   useResponsiveNavigation: jest.fn(),
 }));
 
 const defaultProps = {
-  t: (key: string) => key,
   isSettingPaid: true,
   onShowExample: jest.fn(),
   companySettings: {
@@ -63,12 +47,26 @@ const defaultProps = {
     site: "https://example.com",
     isDefault: true,
     isLicensor: false,
+    hideAbout: false,
   },
+  displayAbout: true,
+  isBrandingAvailable: true,
   onSave: jest.fn(),
   onRestore: jest.fn(),
   isLoading: false,
   companyInfoSettingsIsDefault: false,
   deviceType: DeviceType.desktop,
+  licenseAgreementsUrl: "https://example.com",
+  isEnterprise: true,
+  logoText: "ONLYOFFICE",
+  standalone: true,
+  buildVersionInfo: {
+    version: "",
+    buildDate: "",
+    docSpace: "",
+    communityServer: "",
+    documentServer: "",
+  },
 };
 
 describe("<CompanyInfo />", () => {
@@ -79,9 +77,7 @@ describe("<CompanyInfo />", () => {
   it("renders without error", () => {
     renderWithTheme(<CompanyInfo {...defaultProps} />);
 
-    expect(
-      screen.getByText("Settings:CompanyInfoSettings"),
-    ).toBeInTheDocument();
+    expect(screen.getByText("CompanyInfoSettings")).toBeInTheDocument();
   });
 
   it("disables inputs when isSettingPaid is false", () => {

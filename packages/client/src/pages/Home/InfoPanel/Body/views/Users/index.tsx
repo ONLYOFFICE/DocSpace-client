@@ -224,7 +224,7 @@ const Users = ({
       </div>
       <div className="data__body">
         <Text className="info_field first-row" noSelect title={t("Data")}>
-          {t("ConnectDialog:Account")}
+          {t("Common:Account")}
         </Text>
         <Text
           className="info_data first-row"
@@ -258,7 +258,7 @@ const Users = ({
           </>
         ) : null}
 
-        {isGuests && infoPanelSelection.status === EmployeeStatus.Active ? (
+        {infoPanelSelection.status === EmployeeStatus.Active ? (
           <>
             <Text
               className="info_field"

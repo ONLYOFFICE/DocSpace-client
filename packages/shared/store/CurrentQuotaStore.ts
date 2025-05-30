@@ -218,6 +218,13 @@ class CurrentQuotasStore {
     return result?.value;
   }
 
+  get isBrandingAvailable() {
+    const result = this.currentPortalQuotaFeatures.get(
+      "branding",
+    ) as TBooleanPaymentFeature;
+    return result?.value;
+  }
+
   get currentTariffPlanTitle() {
     return this.currentPortalQuota?.title;
   }

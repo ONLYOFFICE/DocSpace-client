@@ -102,7 +102,7 @@ const EmptyTrashDialogComponent = (props) => {
       <ModalDialog.Footer>
         <Button
           id="empty-archive_delete-submit"
-          key="OkButton"
+          key="OKButton"
           label={t("DeleteForeverButton")}
           size="normal"
           primary

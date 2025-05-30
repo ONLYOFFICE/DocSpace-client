@@ -1,4 +1,5 @@
 {
+  "ChangePasswordSuccess": "Le mot de passe a bien été modifié",
   "CodeTitle": "Le code vous a été envoyé par e-mail",
   "ErrorInvalidText": "En 10 secondes, vous serez redirigé vers <1>{{productName}}</1>",
   "ForgotPassword": "Mot de passe oublié ?",

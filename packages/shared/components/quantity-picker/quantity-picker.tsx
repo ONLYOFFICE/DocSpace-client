@@ -215,6 +215,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
             withBorder={false}
             className={inputClass}
             value={displayValue}
+            style={{ boxShadow: "none" }}
             {...inputProps}
           />
         )}

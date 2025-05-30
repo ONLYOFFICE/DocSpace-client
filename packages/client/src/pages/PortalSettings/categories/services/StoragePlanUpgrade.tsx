@@ -35,6 +35,8 @@ import {
 import { toastr } from "@docspace/shared/components/toast";
 import { updateWalletPayment } from "@docspace/shared/api/portal";
 import QuantityPicker from "@docspace/shared/components/quantity-picker";
+import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
+import { getConvertedSize } from "@docspace/shared/utils/common";
 
 import styles from "./styles/index.module.scss";
 import StorageSummary from "./sub-components/StorageSummary";
@@ -55,7 +57,10 @@ type StorageDialogProps = {
   currentStoragePlanSize?: number;
   fetchPortalTariff?: () => void;
   fetchBalance?: () => void;
+  handleServicesQuotas?: () => void;
   hasScheduledStorageChange?: boolean;
+  nextStoragePlanSize?: boolean;
+  storageSizeIncrement?: number;
 };
 
 const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
@@ -67,6 +72,9 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   fetchBalance,
   hasScheduledStorageChange,
   storagePriceIncrement,
+  nextStoragePlanSize,
+  handleServicesQuotas,
+  storageSizeIncrement,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
   const [amount, setAmount] = useState<number>(currentStoragePlanSize);
@@ -81,7 +89,10 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     calculateDifferenceBetweenPlan,
     isWalletBalanceInsufficient,
     isPlanUpgrade,
+    formatWalletCurrency,
   } = useServicesActions();
+
+  const { isRTL } = useInterfaceDirection();
 
   const isExceedingStorageLimit = isExceedingPlanLimit(amount);
   const isCurrentStoragePlan = isCurrentPlan(amount);
@@ -95,9 +106,9 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     }, 200);
 
     const difference = calculateDifferenceBetweenPlan(amount);
-
-    const productType = isCurrentStoragePlan && !isCancellation ? 1 : 0;
-    const value = isCancellation ? null : difference;
+    const productType = isUpgradeStoragePlan && !isCancellation ? 1 : 0;
+    const quantity = isUpgradeStoragePlan ? difference : amount;
+    const value = isCancellation ? null : quantity;
 
     try {
       const res = await updateWalletPayment(value, productType);
@@ -111,7 +122,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
         return;
       }
 
-      const requests = [fetchPortalTariff!()];
+      const requests = [fetchPortalTariff!(), handleServicesQuotas()!];
 
       if (!isCancellation) requests.push(fetchBalance!());
 
@@ -177,6 +188,19 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     );
   }
 
+  const getDirectionalText = (from, to) => {
+    return isRTL ? `${from} ← ${to}` : `${from} → ${to}`;
+  };
+
+  const disableValueProps = hasScheduledStorageChange
+    ? {
+        disableValue: getDirectionalText(
+          currentStoragePlanSize,
+          nextStoragePlanSize,
+        ),
+      }
+    : {};
+
   return (
     <PaymentProvider>
       <ModalDialog
@@ -197,11 +221,17 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
               minValue={0}
               maxValue={maxStorageLimit}
               step={1}
-              title={"Additional storage (GB)"}
+              title={t("ExtraStorage", { storageUnit: t("Common:Gigabyte") })}
               showPlusSign
               onChange={onChangeNumber}
               isDisabled={hasScheduledStorageChange || isLoading}
               items={amountTabs()}
+              withoutContorls={hasScheduledStorageChange}
+              underContorlsTitle={t("PerStorage", {
+                currency: formatWalletCurrency(storagePriceIncrement),
+                amount: getConvertedSize(t, storageSizeIncrement || 0),
+              })}
+              {...disableValueProps}
               isLarge
             />
 
@@ -218,13 +248,14 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
               </div>
             ) : null}
 
-            <WalletContainer
-              onTopUp={() => setIsVisible(true)}
-              insufficientFunds={insufficientFunds}
-              isExceedingStorageLimit={isExceedingStorageLimit}
-              hasScheduledStorageChange={hasScheduledStorageChange}
-              isUpgradeStoragePlan={isUpgradeStoragePlan}
-            />
+            {amount || hasStorageSubscription ? (
+              <WalletContainer
+                onTopUp={() => setIsVisible(true)}
+                insufficientFunds={insufficientFunds}
+                isExceedingStorageLimit={isExceedingStorageLimit}
+                isUpgradeStoragePlan={isUpgradeStoragePlan}
+              />
+            ) : null}
           </div>
         </ModalDialog.Body>
         <ModalDialog.Footer>
@@ -252,9 +283,14 @@ export default inject(
       hasScheduledStorageChange,
       hasStorageSubscription,
       currentStoragePlanSize,
+      nextStoragePlanSize,
     } = currentTariffStatusStore;
     const { fetchBalance, walletBalance } = paymentStore;
-    const { storageSizeIncrement, storagePriceIncrement } = servicesStore;
+    const {
+      storageSizeIncrement,
+      storagePriceIncrement,
+      handleServicesQuotas,
+    } = servicesStore;
 
     return {
       storageSizeIncrement,
@@ -265,6 +301,8 @@ export default inject(
       walletBalance,
       hasScheduledStorageChange,
       storagePriceIncrement,
+      nextStoragePlanSize,
+      handleServicesQuotas,
     };
   },
 )(observer(StoragePlanUpgrade));

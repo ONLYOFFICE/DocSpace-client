@@ -24,16 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-.storageContainer {
+.serviceContainer {
   display: flex;
   flex-direction: column;
   padding: 16px;
   border: 1px solid var(--border-service-color);
   border-radius: 6px;
   margin-bottom: 16px;
-  max-width: 320px;
+  width: 320px;
+  height: 192px;
   box-sizing: border-box;
   cursor: pointer;
+
   &:not(.disabled):hover {
     background-color: var(--background-service-color);
   }
@@ -59,16 +61,32 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  width: 100%;
+  height: 100%;
+
+  rect {
+    fill: var(--payment-accent-color);
+    opacity: 0.1;
+  }
+
+  path {
+    fill: var(--payment-accent-color);
+    opacity: 1;
+  }
 }
 
 .contentContainer {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  height: 100%;
+  .containerTitle {
+    margin-bottom: 4px;
+  }
 }
 
 .priceContainer {
-  margin-top: 12px;
+  margin-top: auto;
+  padding-top: 12px;
 }
 
 .iconsContainer {
@@ -90,4 +108,21 @@
 }
 .payerContainer {
   margin-bottom: 20px;
+}
+
+.changeShedule {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 12px;
+  color: var(--payment-warning-color);
+  svg {
+    path {
+      fill: var(--payment-warning-color);
+    }
+  }
+}
+
+.spacer {
+  flex-grow: 1;
 }

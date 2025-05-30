@@ -147,11 +147,11 @@ const PlanUpgradePreview = (props) => {
 };
 
 export default inject(({ currentTariffStatusStore }: TStore) => {
-  const { currentStoragePlanSize, storageExpiryDate } =
+  const { currentStoragePlanSize, storageSubscriptionExpiryDate } =
     currentTariffStatusStore;
 
   return {
     currentStoragePlanSize,
-    daysUtilPayment: getDaysUntilPayment(storageExpiryDate),
+    daysUtilPayment: getDaysUntilPayment(storageSubscriptionExpiryDate),
   };
 })(observer(PlanUpgradePreview));

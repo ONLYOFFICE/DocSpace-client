@@ -47,7 +47,6 @@ const Tabs = (props: TabsProps) => {
     multiple = false,
     allowNoSelection = false,
     withoutStickyIntend = false,
-    withoutScroll = false,
     ...rest
   } = props;
 
@@ -205,9 +204,9 @@ const Tabs = (props: TabsProps) => {
 
   return (
     <div className={classNames(styles.tabs, classes)} {...rest}>
-      {multiple || withoutScroll ? renderContent : null}
+      {multiple ? renderContent : null}
 
-      {!multiple && !withoutScroll ? (
+      {!multiple ? (
         <div
           data-sticky
           className={classNames(styles.sticky, classes, "sticky")}

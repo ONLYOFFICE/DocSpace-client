@@ -57,6 +57,9 @@ type QuantityPickerProps = {
   className?: string;
   items?: Array<number | TabItemObject>;
   isLarge?: boolean;
+  withoutContorls?: boolean;
+  disableValue?: string;
+  underContorlsTitle?: string;
 };
 
 const QuantityPicker: React.FC<QuantityPickerProps> = ({
@@ -73,6 +76,9 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
   className,
   items,
   isLarge,
+  withoutContorls,
+  disableValue,
+  underContorlsTitle,
 }) => {
   const displayValue = showPlusSign
     ? value > maxValue
@@ -88,6 +94,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
   const inputClass = classNames(styles.countInput, {
     [styles.disabled]: isDisabled,
     [styles.isLarge]: isLarge,
+    [styles.isContant]: disableValue,
   });
   const circleClass = classNames(styles.circle, {
     [styles.disabled]: isDisabled,
@@ -179,7 +186,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
   return (
     <div className={containerClass}>
       {title ? (
-        <Text noSelect fontWeight={600} className={titleClass}>
+        <Text noSelect fontWeight={600} fontSize="16px" className={titleClass}>
           {title}
         </Text>
       ) : null}
@@ -198,16 +205,18 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
       ) : null}
 
       <div className={styles.countControls}>
-        <div
-          className={`${circleClass} ${styles.minusIcon}`}
-          {...buttonProps}
-          data-operation="minus"
-        >
-          <MinusIcon className={controlButtonClass} />
-        </div>
+        {withoutContorls ? null : (
+          <div
+            className={`${circleClass} ${styles.minusIcon}`}
+            {...buttonProps}
+            data-operation="minus"
+          >
+            <MinusIcon className={controlButtonClass} />
+          </div>
+        )}
 
         {isDisabled ? (
-          <Text className={inputClass}>{displayValue}</Text>
+          <Text className={inputClass}>{disableValue ?? displayValue}</Text>
         ) : (
           <TextInput
             type={InputType.text}
@@ -215,19 +224,23 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
             withBorder={false}
             className={inputClass}
             value={displayValue}
+            style={{ boxShadow: "none" }}
             {...inputProps}
           />
         )}
 
-        <div
-          className={`${circleClass} ${styles.plusIcon}`}
-          {...buttonProps}
-          data-operation="plus"
-        >
-          <PlusIcon className={controlButtonClass} />
-        </div>
+        {withoutContorls ? null : (
+          <div
+            className={`${circleClass} ${styles.plusIcon}`}
+            {...buttonProps}
+            data-operation="plus"
+          >
+            <PlusIcon className={controlButtonClass} />
+          </div>
+        )}
       </div>
 
+      <Text className={styles.underContorlsText}>{underContorlsTitle}</Text>
       {showSlider ? (
         <div className={styles.sliderWrapper}>
           <Slider
@@ -264,7 +277,6 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
             type={TabsTypes.Secondary}
             allowNoSelection
             withoutStickyIntend
-            withoutScroll
           />
         </div>
       ) : null}

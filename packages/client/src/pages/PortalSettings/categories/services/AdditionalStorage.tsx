@@ -24,16 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React from "react";
 import { inject, observer } from "mobx-react";
-import { Trans, useTranslation } from "react-i18next";
-import { isMobile } from "react-device-detect";
 import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { Tooltip } from "@docspace/shared/components/tooltip";
+
+import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg";
 
 import styles from "./styles/AdditionalStorage.module.scss";
 import { useServicesActions } from "./hooks/useServicesActions";
@@ -44,7 +44,8 @@ interface ServiceQuotaFeature {
   image: string;
   priceTitle: string;
   id: string;
-  enabled: boolean;
+  enabled?: boolean;
+  cancellation?: boolean;
 }
 
 type AdditionalStorageProps = {
@@ -56,7 +57,10 @@ type AdditionalStorageProps = {
   isPayer?: boolean;
   cardLinkedOnFreeTariff?: boolean;
   isFreeTariff?: boolean;
-  payerInfo?: { displayName: string };
+  currentStoragePlanSize?: number;
+  nextStoragePlanSize?: number;
+  storageExpiryDate?: string;
+  isCardLinkedToPortal?: boolean;
 };
 
 const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
@@ -68,44 +72,74 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
   isFreeTariff,
   isPayer,
   onToggle,
-  payerInfo,
+  currentStoragePlanSize,
+  nextStoragePlanSize,
+  storageExpiryDate,
+  isCardLinkedToPortal,
 }) => {
   const isDisabled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
+  const { formatWalletCurrency, t } = useServicesActions();
 
   const handleToggle = (
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
-    id: string,
-    enabled: boolean,
   ) => {
+    const dataset = (e.currentTarget as HTMLElement).dataset;
+    const handleDisabled = dataset.disabled?.toLowerCase() === "true";
+
+    if (handleDisabled) return;
+
     e.preventDefault();
     e.stopPropagation();
 
-    if (!isDisabled) onToggle(id, enabled);
+    const isEnabled = dataset.enabled?.toLowerCase() === "true";
+    const id = dataset.id;
+
+    onToggle(id, isEnabled);
   };
 
-  const { formatWalletCurrency, t } = useServicesActions();
+  const textTooltip = () => {
+    return (
+      <>
+        <Text fontWeight={600} fontSize="12px">
+          {t("StorageUpgradeMessage", {
+            fromSize: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
+            toSize: `${nextStoragePlanSize} ${t("Common:Gigabyte")}`,
+          })}
+        </Text>
+        <Text fontSize="12px">
+          {nextStoragePlanSize === 0
+            ? t("SubscriptionAutoCancellation", {
+                finalDate: storageExpiryDate,
+              })
+            : t("SubscriptionAutoRenewed", {
+                finalDate: storageExpiryDate,
+              })}
+        </Text>
+      </>
+    );
+  };
 
   return (
     <div>
       <Text className={styles.storageDescription}>
         {isPayer ? t("SelectAndPayServices") : t("ServiceConfigurationNotice")}
       </Text>
-      {payerInfo ? (
+      {isCardLinkedToPortal ? (
         <div className={styles.payerContainer}>
           <PayerInformation />
         </div>
       ) : null}
       {Array.from(servicesQuotasFeatures?.values() || []).map((item) => {
         if (!item.title || !item.image) return null;
+        const eventDisabled = isDisabled || item.cancellation;
 
         return (
           <div
             key={item.id}
-            className={classNames(styles.storageContainer, {
+            className={classNames(styles.serviceContainer, {
               [styles.disabled]: isDisabled,
             })}
             {...(!isDisabled ? { onClick } : {})}
-            data-tooltip-id="serviceTooltip"
           >
             <div className={styles.headerContainer}>
               <div className={styles.iconWrapper}>
@@ -116,24 +150,49 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
               </div>
 
               <div
-                onClick={(e) => handleToggle(e, item.id, item.enabled)}
+                onClick={handleToggle}
                 className={styles.toggleWrapper}
                 data-id={item.id}
+                data-enabled={item.enabled}
+                data-disabled={eventDisabled}
               >
                 <ToggleButton
                   isChecked={item.enabled}
                   className={styles.serviceToggle}
-                  isDisabled={isDisabled}
+                  isDisabled={eventDisabled}
                 />
               </div>
             </div>
             <div className={styles.contentContainer}>
-              <Text fontWeight={600} fontSize="14px">
+              <Text
+                fontWeight={600}
+                fontSize="14px"
+                className={styles.containerTitle}
+              >
                 {item.title}
               </Text>
               <Text fontSize="12px" className={styles.priceDescription}>
                 {item.priceTitle}
               </Text>
+              {item.cancellation ? (
+                <div
+                  className={styles.changeShedule}
+                  data-tooltip-id="serviceTooltip"
+                >
+                  <InfoIcon />
+                  <Text fontWeight={600} fontSize="12px">
+                    {t("ChangeShedule")}
+                  </Text>
+
+                  <Tooltip
+                    id="serviceTooltip"
+                    place="bottom"
+                    maxWidth="300px"
+                    float
+                    getContent={textTooltip}
+                  />
+                </div>
+              ) : null}
               <div className={styles.priceContainer}>
                 <Text fontSize="12px" fontWeight={600}>
                   {t("PerStorage", {
@@ -157,17 +216,17 @@ export default inject(
     currentQuotaStore,
     servicesStore,
   }: TStore) => {
-    const { cardLinkedOnFreeTariff, isPayer, walletPayer } = paymentStore;
+    const { cardLinkedOnFreeTariff, isPayer, isCardLinkedToPortal } =
+      paymentStore;
     const {
       servicesQuotasFeatures,
       storageSizeIncrement,
       storagePriceIncrement,
     } = servicesStore;
-    const { payerInfo: paymentPayer } = currentTariffStatusStore;
+    const { currentStoragePlanSize, nextStoragePlanSize, storageExpiryDate } =
+      currentTariffStatusStore;
 
     const { isFreeTariff } = currentQuotaStore;
-
-    const payerInfo = paymentPayer ?? walletPayer;
 
     return {
       servicesQuotasFeatures,
@@ -175,8 +234,12 @@ export default inject(
       isPayer,
       cardLinkedOnFreeTariff,
       isFreeTariff,
-      payerInfo,
+
       storagePriceIncrement,
+      currentStoragePlanSize,
+      nextStoragePlanSize,
+      storageExpiryDate,
+      isCardLinkedToPortal,
     };
   },
 )(observer(AdditionalStorage));

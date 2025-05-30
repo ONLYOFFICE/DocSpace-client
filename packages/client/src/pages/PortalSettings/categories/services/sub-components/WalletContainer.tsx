@@ -37,6 +37,7 @@ type WalletContainerProps = {
   isExceedingStorageLimit: boolean;
   hasScheduledStorageChange?: boolean;
   isUpgradeStoragePlan?: boolean;
+  currentStoragePlanSize?: boolean;
 };
 
 const WalletContainer = (props: WalletContainerProps) => {
@@ -46,6 +47,7 @@ const WalletContainer = (props: WalletContainerProps) => {
     isExceedingStorageLimit,
     hasScheduledStorageChange,
     isUpgradeStoragePlan,
+    currentStoragePlanSize,
   } = props;
   const { formatWalletCurrency, isWalletBalanceInsufficient } =
     useServicesActions();
@@ -53,9 +55,10 @@ const WalletContainer = (props: WalletContainerProps) => {
 
   if (hasScheduledStorageChange) return null;
 
-  const isPaymentAnavalable = isUpgradeStoragePlan
-    ? isWalletBalanceInsufficient(futurePayment)
-    : insufficientFunds;
+  const isPaymentAnavalable =
+    isUpgradeStoragePlan && currentStoragePlanSize
+      ? isWalletBalanceInsufficient(futurePayment)
+      : insufficientFunds;
 
   return (
     <div className={styles.walletContainer}>
@@ -68,9 +71,11 @@ const WalletContainer = (props: WalletContainerProps) => {
 };
 
 export default inject(({ currentTariffStatusStore }: TStore) => {
-  const { hasScheduledStorageChange } = currentTariffStatusStore;
+  const { hasScheduledStorageChange, currentStoragePlanSize } =
+    currentTariffStatusStore;
 
   return {
     hasScheduledStorageChange,
+    currentStoragePlanSize,
   };
 })(observer(WalletContainer));

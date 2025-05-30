@@ -92,13 +92,27 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: var(--payment-icon-background);
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--payment-accent-color);
+    opacity: 0.1;
+    border-radius: 50%;
+    z-index: 0;
+  }
+
   svg {
+    position: relative;
+    z-index: 1;
     path {
-      fill: var(--wallet-color-icon);
+      fill: var(--payment-accent-color);
     }
   }
 }

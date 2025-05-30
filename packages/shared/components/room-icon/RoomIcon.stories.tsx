@@ -27,6 +27,8 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 
+import CollaborateImageUrl from "PUBLIC_DIR/images/notifications/collaborate.png";
+import PlanetIcon from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
 import EditPenSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 
@@ -108,6 +110,7 @@ export const WithImage: Story = {
   args: {
     ...Default.args,
     showDefault: false,
+    logo: CollaborateImageUrl,
   },
 };
 
@@ -117,6 +120,11 @@ export const WithEditing: Story = {
     withEditing: true,
     model: mockModel,
   },
+  render: (args) => (
+    <div style={{ height: "200px" }}>
+      <RoomIcon {...args} />
+    </div>
+  ),
 };
 
 export const EmptyState: Story = {
@@ -125,6 +133,11 @@ export const EmptyState: Story = {
     isEmptyIcon: true,
     model: mockModel,
   },
+  render: (args) => (
+    <div style={{ height: "200px" }}>
+      <RoomIcon {...args} />
+    </div>
+  ),
 };
 
 export const Archive: Story = {
@@ -136,9 +149,33 @@ export const Archive: Story = {
 
 export const WithBadge: Story = {
   args: {
-    ...Default.args,
-    badgeUrl: PlusSvgUrl,
+    title: "Badge",
+    color: "3B72A7",
+    size: "96px",
+    radius: "6px",
+    badgeUrl: PlanetIcon,
+    onBadgeClick: () => console.log("Badge clicked"),
+    withEditing: false,
+    showDefault: true,
   },
+  render: (args) => (
+    <div
+      style={{
+        position: "relative",
+        width: "120px",
+        height: "120px",
+      }}
+    >
+      <div
+        style={{
+          position: "relative",
+          transformOrigin: "center",
+        }}
+      >
+        <RoomIcon {...args} />
+      </div>
+    </div>
+  ),
 };
 
 export const WithHover: Story = {
@@ -147,34 +184,3 @@ export const WithHover: Story = {
     hoverSrc: "https://picsum.photos/200",
   },
 };
-
-// export const AllSizes: Story = {
-//   render: () => (
-//     <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
-//       <RoomIcon {...Default.args} size="32px" />
-//       <RoomIcon {...Default.args} size="48px" />
-//       <RoomIcon {...Default.args} size="96px" />
-//     </div>
-//   ),
-// };
-
-// export const AllStates: Story = {
-//   render: () => (
-//     <div
-//       style={{
-//         display: "flex",
-//         gap: "16px",
-//         alignItems: "center",
-//         flexWrap: "wrap",
-//       }}
-//     >
-//       <RoomIcon {...Default.args} />
-//       <RoomIcon {...WithImage.args} />
-//       <RoomIcon {...WithEditing.args} />
-//       <RoomIcon {...EmptyState.args} />
-//       <RoomIcon {...Archive.args} />
-//       <RoomIcon {...WithBadge.args} />
-//       <RoomIcon {...WithHover.args} />
-//     </div>
-//   ),
-// };

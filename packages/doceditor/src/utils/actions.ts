@@ -61,32 +61,37 @@ export async function getFillingSession(
 ) {
   logger.debug("Start GET /files/file/fillresult");
 
-  const [request] = await createRequest(
-    [`/files/file/fillresult?fillingSessionId=${fillingSessionId}`],
-    [
-      ["Content-Type", "application/json;charset=utf-8"],
-      share ? ["Request-Token", share] : ["", ""],
-    ],
-    "GET",
-  );
-
   try {
-    const response = await fetch(request);
-
-    if (response.ok) return await response.json();
-
-    logger.error(`GET /files/file/fillresult failed: ${response.status}`);
-
-    throw new Error("Something went wrong", {
-      cause: await response.json(),
-    });
-  } catch (error) {
-    const hdrs = await headers();
-
-    const hostname = hdrs.get("x-forwarded-host");
-    logger.error(
-      `error: ${error}, fillingSessionId: ${fillingSessionId}, url: ${hostname} Get filling session faile`,
+    const [request] = await createRequest(
+      [`/files/file/fillresult?fillingSessionId=${fillingSessionId}`],
+      [
+        ["Content-Type", "application/json;charset=utf-8"],
+        share ? ["Request-Token", share] : ["", ""],
+      ],
+      "GET",
     );
+
+    try {
+      const response = await fetch(request);
+
+      if (response.ok) return await response.json();
+
+      logger.error(`GET /files/file/fillresult failed: ${response.status}`);
+
+      throw new Error("Something went wrong", {
+        cause: await response.json(),
+      });
+    } catch (error) {
+      const hdrs = await headers();
+
+      const hostname = hdrs.get("x-forwarded-host");
+      logger.error(
+        `error: ${error}, fillingSessionId: ${fillingSessionId}, url: ${hostname} Get filling session faile`,
+      );
+    }
+  } catch (error) {
+    logger.error(`Error in getFillingSession: ${error}`);
+    return;
   }
 }
 
@@ -113,9 +118,8 @@ export async function fileCopyAs(
     }
   | undefined
 > {
+  logger.debug(`Start POST /files/file/${fileId}/copyas`);
   try {
-    logger.debug(`Start POST /files/file/${fileId}/copyas`);
-
     const [createFile] = await createRequest(
       [`/files/file/${fileId}/copyas`],
       [["Content-Type", "application/json;charset=utf-8"]],
@@ -217,9 +221,8 @@ export async function createFile(
     }
   | undefined
 > {
+  logger.debug(`Start POST /files/${parentId}/file`);
   try {
-    logger.debug(`Start POST /files/${parentId}/file`);
-
     const [createFile] = await createRequest(
       [`/files/${parentId}/file`],
       [["Content-Type", "application/json;charset=utf-8"]],
@@ -228,11 +231,6 @@ export async function createFile(
     );
 
     const fileRes = await fetch(createFile);
-
-    if (!fileRes.ok) {
-      logger.error(`POST /files/${parentId}/file failed: ${fileRes.status}`);
-      console.log("fileRes", fileRes);
-    }
 
     if (fileRes.status === 401) {
       logger.error(`POST /files/${parentId}/file user auth failed`);
@@ -423,147 +421,148 @@ export async function getData(
 export async function getUser(share?: string) {
   logger.debug("Start GET /people/@self");
 
-  const hdrs = await headers();
-  const cookie = hdrs.get("cookie");
-
-  const [getUser] = await createRequest(
-    [`/people/@self`],
-    [share ? ["Request-Token", share] : ["", ""]],
-    "GET",
-    undefined,
-  );
-
-  if (!cookie?.includes("asc_auth_key")) return undefined;
-  const userRes = await fetch(getUser);
-
-  if (userRes.status === 401) return undefined;
-
-  if (!userRes.ok) {
+  try {
     const hdrs = await headers();
+    const cookie = hdrs.get("cookie");
 
-    const hostname = hdrs.get("x-forwarded-host");
+    const [getUser] = await createRequest(
+      [`/people/@self`],
+      [share ? ["Request-Token", share] : ["", ""]],
+      "GET",
+      undefined,
+    );
 
-    if (!share)
-      logger.error(
-        `error: ${userRes}, url: ${hostname} GET /people/@self failed`,
-      );
+    if (!cookie?.includes("asc_auth_key")) return undefined;
+    const userRes = await fetch(getUser);
 
+    if (userRes.status === 401) return undefined;
+
+    if (!userRes.ok) {
+      const hdrs = await headers();
+
+      const hostname = hdrs.get("x-forwarded-host");
+
+      if (!share)
+        logger.error(
+          `error: ${userRes}, url: ${hostname} GET /people/@self failed`,
+        );
+
+      return;
+    }
+
+    const user = await userRes.json();
+
+    return user.response as TUser;
+  } catch (error) {
+    logger.error(`Error in getUser: ${error}`);
     return;
   }
-
-  const user = await userRes.json();
-
-  return user.response as TUser;
 }
 
 export async function getSettings(share?: string) {
   logger.debug("Start GET /settings");
 
-  const hdrs = await headers();
-  const cookie = hdrs.get("cookie");
-
-  const [getSettings] = await createRequest(
-    [
-      `/settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"}`,
-    ],
-    [share ? ["Request-Token", share] : ["", ""]],
-    "GET",
-    undefined,
-  );
-
-  const settingsRes = await fetch(getSettings);
-
-  if (settingsRes.status === 403) return `access-restricted`;
-
-  if (!settingsRes.ok) {
+  try {
     const hdrs = await headers();
+    const cookie = hdrs.get("cookie");
 
-    const hostname = hdrs.get("x-forwarded-host");
-
-    logger.error(
-      `error: ${settingsRes}, url: ${hostname} GET /settings failed`,
+    const [getSettings] = await createRequest(
+      [
+        `/settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"}`,
+      ],
+      [share ? ["Request-Token", share] : ["", ""]],
+      "GET",
+      undefined,
     );
 
+    const settingsRes = await fetch(getSettings);
+
+    if (settingsRes.status === 403) return `access-restricted`;
+
+    if (!settingsRes.ok) {
+      const hdrs = await headers();
+
+      const hostname = hdrs.get("x-forwarded-host");
+
+      logger.error(
+        `error: ${settingsRes}, url: ${hostname} GET /settings failed`,
+      );
+
+      return;
+    }
+
+    const settings = await settingsRes.json();
+
+    return settings.response as TSettings;
+  } catch (error) {
+    logger.error(`Error in getSettings: ${error}`);
     return;
   }
-
-  const settings = await settingsRes.json();
-
-  return settings.response as TSettings;
 }
 
 export const checkIsAuthenticated = async () => {
   logger.debug("Start GET /authentication");
 
-  const [request] = await createRequest(["/authentication"], [["", ""]], "GET");
-
-  const res = await fetch(request);
-
-  if (!res.ok) {
-    const hdrs = await headers();
-
-    const hostname = hdrs.get("x-forwarded-host");
-
-    logger.error(
-      `error: ${request}, url: ${hostname} GET /authentication failed`,
+  try {
+    const [request] = await createRequest(
+      ["/authentication"],
+      [["", ""]],
+      "GET",
     );
 
+    const res = await fetch(request);
+
+    if (!res.ok) {
+      const hdrs = await headers();
+
+      const hostname = hdrs.get("x-forwarded-host");
+
+      logger.error(
+        `error: ${request}, url: ${hostname} GET /authentication failed`,
+      );
+
+      return;
+    }
+
+    const isAuth = await res.json();
+
+    return isAuth.response as boolean;
+  } catch (error) {
+    logger.error(`Error in checkIsAuthenticated: ${error}`);
     return;
   }
-
-  const isAuth = await res.json();
-
-  return isAuth.response as boolean;
 };
 
 export async function validatePublicRoomKey(key: string, fileId?: string) {
   logger.debug("Start GET /files/share");
 
-  const [validatePublicRoomKey] = await createRequest(
-    [`/files/share/${key}?fileid=${fileId}`],
-    [key ? ["Request-Token", key] : ["", ""]],
-    "GET",
-  );
+  try {
+    const [validatePublicRoomKey] = await createRequest(
+      [`/files/share/${key}?fileid=${fileId}`],
+      [key ? ["Request-Token", key] : ["", ""]],
+      "GET",
+    );
 
-  const res = await fetch(validatePublicRoomKey);
-  if (res.status === 401) return undefined;
-  if (!res.ok) {
-    const hdrs = await headers();
+    const res = await fetch(validatePublicRoomKey);
+    if (res.status === 401) return undefined;
+    if (!res.ok) {
+      const hdrs = await headers();
 
-    const hostname = hdrs.get("x-forwarded-host");
+      const hostname = hdrs.get("x-forwarded-host");
 
-    logger.error(`error: ${res}, url: ${hostname} GET /files/share failed`);
+      logger.error(`error: ${res}, url: ${hostname} GET /files/share failed`);
 
+      return;
+    }
+
+    const room = await res.json();
+
+    return room;
+  } catch (error) {
+    logger.error(`Error in validatePublicRoomKey: ${error}`);
     return;
   }
-
-  const room = await res.json();
-
-  return room;
 }
-
-// export async function checkFillFromDraft(
-//   templateFileId: number,
-//   share?: string,
-// ) {
-//   const [checkFillFormDraft] = await createRequest(
-//     [`/files/masterform/${templateFileId}/checkfillformdraft`],
-//     [
-//       share ? ["Request-Token", share] : ["", ""],
-//       ["Content-Type", "application/json;charset=utf-8"],
-//     ],
-//     "POST",
-//     JSON.stringify({ fileId: templateFileId }),
-//   );
-
-//   const response = await fetch(checkFillFormDraft);
-
-//   if (!response.ok) return null;
-
-//   const { response: formUrl } = await response.json();
-
-//   return formUrl as string;
-// }
 
 export async function openEdit(
   fileId: number | string,
@@ -572,72 +571,80 @@ export async function openEdit(
 ) {
   logger.debug(`Start GET /files/file/${fileId}/openedit`);
 
-  const hdrs = await headers();
-  const cookie = hdrs.get("cookie");
+  try {
+    const hdrs = await headers();
+    const cookie = hdrs.get("cookie");
 
-  const [getConfig] = await createRequest(
-    [`/files/file/${fileId}/openedit?${searchParams}`],
-    [share ? ["Request-Token", share] : ["", ""]],
-    "GET",
-    undefined,
-  );
-
-  const res = await fetch(getConfig);
-
-  const hostname = hdrs.get("x-forwarded-host");
-
-  if (res.status !== 404) {
-    const config = await res.json();
-
-    if (res.ok) {
-      config.response.editorUrl = (
-        config.response as IInitialConfig
-      ).editorUrl.replace(REPLACED_URL_PATH, "");
-      return { ...config.response } as IInitialConfig;
-    }
-
-    const isAuth = share ? true : await checkIsAuthenticated();
-
-    const editorUrl = isAuth
-      ? (await getEditorUrl("", share))?.docServiceUrl
-      : "";
-
-    const status =
-      config.error?.type === EditorConfigErrorType.NotFoundScope
-        ? "not-found"
-        : config.error?.type === EditorConfigErrorType.AccessDeniedScope &&
-            isAuth
-          ? "access-denied"
-          : config.error?.type === EditorConfigErrorType.TenantQuotaException
-            ? "quota-exception"
-            : res.status === 415
-              ? "not-supported"
-              : undefined;
-
-    const message = status ? config.error.message : undefined;
-
-    const error = isAuth
-      ? config.error.type === EditorConfigErrorType.LinkScope
-        ? { message: message ?? "unauthorized", status, editorUrl }
-        : { ...config.error, status, editorUrl }
-      : { message: "unauthorized", status, editorUrl };
-
-    logger.error(
-      `fileId: ${fileId}, error: ${error} url: ${hostname} GET /files/file/${fileId}/openedit failed`,
+    const [getConfig] = await createRequest(
+      [`/files/file/${fileId}/openedit?${searchParams}`],
+      [share ? ["Request-Token", share] : ["", ""]],
+      "GET",
+      undefined,
     );
 
-    return error as TError;
+    const res = await fetch(getConfig);
+
+    const hostname = hdrs.get("x-forwarded-host");
+
+    if (res.status !== 404) {
+      const config = await res.json();
+
+      if (res.ok) {
+        config.response.editorUrl = (
+          config.response as IInitialConfig
+        ).editorUrl.replace(REPLACED_URL_PATH, "");
+        return { ...config.response } as IInitialConfig;
+      }
+
+      const isAuth = share ? true : await checkIsAuthenticated();
+
+      const editorUrl = isAuth
+        ? (await getEditorUrl("", share))?.docServiceUrl
+        : "";
+
+      const status =
+        config.error?.type === EditorConfigErrorType.NotFoundScope
+          ? "not-found"
+          : config.error?.type === EditorConfigErrorType.AccessDeniedScope &&
+              isAuth
+            ? "access-denied"
+            : config.error?.type === EditorConfigErrorType.TenantQuotaException
+              ? "quota-exception"
+              : res.status === 415
+                ? "not-supported"
+                : undefined;
+
+      const message = status ? config.error.message : undefined;
+
+      const error = isAuth
+        ? config.error.type === EditorConfigErrorType.LinkScope
+          ? { message: message ?? "unauthorized", status, editorUrl }
+          : { ...config.error, status, editorUrl }
+        : { message: "unauthorized", status, editorUrl };
+
+      logger.error(
+        `fileId: ${fileId}, error: ${error} url: ${hostname} GET /files/file/${fileId}/openedit failed`,
+      );
+
+      return error as TError;
+    }
+
+    const editorUrl =
+      cookie?.includes("asc_auth_key") || share
+        ? (await getEditorUrl("", share))?.docServiceUrl
+        : "";
+
+    return {
+      status: "not-found",
+      editorUrl,
+    } as TError;
+  } catch (error) {
+    logger.error(`Error in openEdit: ${error}`);
+    return {
+      status: "error",
+      message: "An unexpected error occurred",
+    } as TError;
   }
-
-  const editorUrl =
-    cookie?.includes("asc_auth_key") || share
-      ? (await getEditorUrl("", share))?.docServiceUrl
-      : "";
-
-  return {
-    status: "not-found",
-    editorUrl,
-  } as TError;
 }
 
 export async function getEditorUrl(
@@ -646,162 +653,185 @@ export async function getEditorUrl(
 ) {
   logger.debug(`Start GET /files/docservice`);
 
-  const [request] = await createRequest(
-    [`/files/docservice?${editorSearchParams ? editorSearchParams : ""}`],
-    [share ? ["Request-Token", share] : ["", ""]],
-    "GET",
-    undefined,
-  );
+  try {
+    const [request] = await createRequest(
+      [`/files/docservice?${editorSearchParams ? editorSearchParams : ""}`],
+      [share ? ["Request-Token", share] : ["", ""]],
+      "GET",
+      undefined,
+    );
 
-  const res = await fetch(request);
+    const res = await fetch(request);
 
-  if (!res.ok) {
-    const hdrs = await headers();
+    if (!res.ok) {
+      const hdrs = await headers();
 
-    const hostname = hdrs.get("x-forwarded-host");
+      const hostname = hdrs.get("x-forwarded-host");
 
-    logger.error(`error: ${res} url: ${hostname} GET /files/docservice failed`);
+      logger.error(
+        `error: ${res} url: ${hostname} GET /files/docservice failed`,
+      );
 
+      return;
+    }
+
+    const editorUrl = await res.json();
+
+    return editorUrl.response as TDocServiceLocation;
+  } catch (error) {
+    logger.error(`Error in getEditorUrl: ${error}`);
     return;
   }
-
-  const editorUrl = await res.json();
-
-  return editorUrl.response as TDocServiceLocation;
 }
 
 export async function getColorTheme() {
   logger.debug(`Start GET /settings/colortheme`);
 
-  const [getSettings] = await createRequest(
-    [`/settings/colortheme`],
-    [["", ""]],
-    "GET",
-  );
-
-  const res = await fetch(getSettings);
-
-  if (!res.ok) {
-    const hdrs = await headers();
-
-    const hostname = hdrs.get("x-forwarded-host");
-
-    logger.error(
-      `error: ${res} url: ${hostname} GET /settings/colortheme failed`,
+  try {
+    const [getSettings] = await createRequest(
+      [`/settings/colortheme`],
+      [["", ""]],
+      "GET",
     );
+
+    const res = await fetch(getSettings);
+
+    if (!res.ok) {
+      const hdrs = await headers();
+
+      const hostname = hdrs.get("x-forwarded-host");
+
+      logger.error(
+        `error: ${res} url: ${hostname} GET /settings/colortheme failed`,
+      );
+      return;
+    }
+
+    const colorTheme = await res.json();
+
+    return colorTheme.response as TGetColorTheme;
+  } catch (error) {
+    logger.error(`Error in getColorTheme: ${error}`);
     return;
   }
-
-  const colorTheme = await res.json();
-
-  return colorTheme.response as TGetColorTheme;
 }
 
 export async function getDeepLinkSettings() {
   logger.debug(`Start GET /settings/deeplink`);
 
-  const [getSettings] = await createRequest(
-    [`/settings/deeplink`],
-    [["", ""]],
-    "GET",
-  );
-
-  const res = await fetch(getSettings);
-
-  if (!res.ok) {
-    const hdrs = await headers();
-
-    const hostname = hdrs.get("x-forwarded-host");
-
-    logger.error(
-      `error: ${res} url: ${hostname} GET /settings/deeplink failed`,
+  try {
+    const [getSettings] = await createRequest(
+      [`/settings/deeplink`],
+      [["", ""]],
+      "GET",
     );
+
+    const res = await fetch(getSettings);
+
+    if (!res.ok) {
+      const hdrs = await headers();
+
+      const hostname = hdrs.get("x-forwarded-host");
+
+      logger.error(
+        `error: ${res} url: ${hostname} GET /settings/deeplink failed`,
+      );
+      return;
+    }
+
+    const deepLinkSettings = await res.json();
+
+    return deepLinkSettings.response;
+  } catch (error) {
+    logger.error(`Error in getDeepLinkSettings: ${error}`);
     return;
   }
-
-  const deepLinkSettings = await res.json();
-
-  return deepLinkSettings.response;
 }
 
 export async function getFormFillingStatus(formId: string | number) {
   logger.debug(`Start GET /files/file/${formId}/formroles`);
 
-  const [getFormFillingStatus] = await createRequest(
-    [`/files/file/${formId}/formroles`],
-    [["", ""]],
-    "GET",
-  );
+  try {
+    const [getFormFillingStatus] = await createRequest(
+      [`/files/file/${formId}/formroles`],
+      [["", ""]],
+      "GET",
+    );
 
-  const response = await fetch(getFormFillingStatus);
+    const response = await fetch(getFormFillingStatus);
 
-  if (response.ok)
-    return (await response.json()).response as TFileFillingFormStatus[];
+    if (response.ok)
+      return (await response.json()).response as TFileFillingFormStatus[];
 
-  const hdrs = await headers();
+    const hdrs = await headers();
 
-  const hostname = hdrs.get("x-forwarded-host");
+    const hostname = hdrs.get("x-forwarded-host");
 
-  logger.error(
-    `error: ${response} url: ${hostname} GET /files/file/${formId}/formroles failed`,
-  );
+    logger.error(
+      `error: ${response} url: ${hostname} GET /files/file/${formId}/formroles failed`,
+    );
 
-  return [];
+    return [];
+  } catch (error) {
+    logger.error(`Error in getFormFillingStatus: ${error}`);
+    return [];
+  }
 }
 
 export async function getFileById(fileId: number | string) {
   logger.debug(`Start GET /files/file/${fileId}`);
 
-  const [getFile] = await createRequest(
-    [`/files/file/${fileId}`],
-    [["", ""]],
-    "GET",
-  );
+  try {
+    const [getFile] = await createRequest(
+      [`/files/file/${fileId}`],
+      [["", ""]],
+      "GET",
+    );
 
-  const response = await fetch(getFile);
+    const response = await fetch(getFile);
 
-  if (response.ok) return (await response.json()).response as TFile;
+    if (response.ok) return (await response.json()).response as TFile;
 
-  const hdrs = await headers();
+    const hdrs = await headers();
 
-  const hostname = hdrs.get("x-forwarded-host");
+    const hostname = hdrs.get("x-forwarded-host");
 
-  logger.error(
-    `error: ${response} url: ${hostname} GET /files/file/${fileId} failed`,
-  );
+    logger.error(
+      `error: ${response} url: ${hostname} GET /files/file/${fileId} failed`,
+    );
 
-  return null;
+    return null;
+  } catch (error) {
+    logger.error(`Error in getFileById: ${error}`);
+    return null;
+  }
 }
 
 export async function getFileLink(fileId: number | string) {
   logger.debug(`Start GET /files/file/${fileId}/link`);
 
-  const [getFileLink] = await createRequest(
-    [`/files/file/${fileId}/link`],
-    [["", ""]],
-    "GET",
-  );
+  try {
+    const [getFileLink] = await createRequest(
+      [`/files/file/${fileId}/link`],
+      [["", ""]],
+      "GET",
+    );
 
-  const response = await fetch(getFileLink);
+    const response = await fetch(getFileLink);
 
-  if (response.ok) return (await response.json()) as TFileLink;
+    if (response.ok) return (await response.json()) as TFileLink;
 
-  const hdrs = await headers();
+    const hdrs = await headers();
 
-  const hostname = hdrs.get("x-forwarded-host");
+    const hostname = hdrs.get("x-forwarded-host");
 
-  logger.error(
-    `error: ${response} url: ${hostname} GET /files/file/${fileId}/link failed`,
-  );
+    logger.error(
+      `error: ${response} url: ${hostname} GET /files/file/${fileId}/link failed`,
+    );
 
-  return null;
+    return null;
+  } catch (error) {
+    logger.error(`Error in getFileLink: ${error}`);
+    return null;
+  }
 }
-
-// export async function getFileLink(fileId: number) {
-//   const res = (await request({
-//     method: "get",
-//     url: `/files/file/${fileId}/link`,
-//   })) as TFileLink;
-
-//   return res;
-// }

@@ -56,18 +56,23 @@ const IS_TEST = process.env.E2E_TEST;
 export async function getFilesSettings(): Promise<TFilesSettings | undefined> {
   logger.debug("Start GET /files/settings");
 
-  const [req] = await createRequest([`/files/settings`], [["", ""]], "GET");
+  try {
+    const [req] = await createRequest([`/files/settings`], [["", ""]], "GET");
 
-  const res = IS_TEST ? filesSettingsHandler() : await fetch(req);
+    const res = IS_TEST ? filesSettingsHandler() : await fetch(req);
 
-  if (!res.ok) {
-    logger.error(`GET /files/settings failed: ${res.status}`);
+    if (!res.ok) {
+      logger.error(`GET /files/settings failed: ${res.status}`);
+      return;
+    }
+
+    const filesSettings = await res.json();
+
+    return filesSettings.response;
+  } catch (error) {
+    logger.error(`Error in getFilesSettings: ${error}`);
     return;
   }
-
-  const filesSettings = await res.json();
-
-  return filesSettings.response;
 }
 
 export async function getFoldersTree(): Promise<TFolder[]> {
@@ -131,8 +136,8 @@ export async function getFoldersTree(): Promise<TFolder[]> {
       } as TFolder;
     });
   } catch (error) {
-    logger.error(`getFoldersTree error ${error}`);
-    throw new Error("Failed to get folders tree");
+    logger.error(`Error in getFoldersTree: ${error}`);
+    throw error;
   }
 }
 
@@ -144,83 +149,93 @@ export async function getFolder(
 ): Promise<TGetFolder> {
   logger.debug(`Start GET /files/params`);
 
-  const hdrs = await headers();
+  try {
+    const hdrs = await headers();
 
-  const shareKey = hdrs.get(SHARE_KEY_HEADER);
+    const shareKey = hdrs.get(SHARE_KEY_HEADER);
 
-  let params = folderIdParam;
-  let folderId = folderIdParam;
+    let params = folderIdParam;
+    let folderId = folderIdParam;
 
-  if (folderId && typeof folderId === "string") {
-    folderId = encodeURIComponent(folderId.replace(/\\\\/g, "\\"));
+    if (folderId && typeof folderId === "string") {
+      folderId = encodeURIComponent(folderId.replace(/\\\\/g, "\\"));
+    }
+
+    if (filter) {
+      checkFilterInstance(filter, FilesFilter);
+
+      params = `${folderId}?${filter.toApiUrlParams()}`;
+    }
+
+    const shareHeader: [string, string] =
+      share || shareKey
+        ? ["Request-Token", shareKey || shareKey || ""]
+        : ["", ""];
+
+    logger.debug(`Start GET /files/${params}`);
+
+    const [req] = await createRequest(
+      [`/files/${params}`],
+      [shareHeader],
+      "GET",
+      undefined,
+      undefined,
+      [signal],
+    );
+
+    const res = IS_TEST
+      ? folderHandler(await headers())
+      : await fetch(req, { next: { revalidate: 300 } });
+
+    if (!res.ok) {
+      logger.error(`GET /files/${params} failed: ${res.status}`);
+      throw new Error("Failed to get folder");
+    }
+
+    const resJson = await res.json();
+    const folder = resJson.response as TGetFolder;
+
+    folder.files = decodeDisplayName(folder.files);
+    folder.folders = decodeDisplayName(folder.folders);
+
+    folder.current.isArchive =
+      !!folder.current.roomType &&
+      folder.current.rootFolderType === FolderType.Archive;
+
+    return folder;
+  } catch (error) {
+    logger.error(`Error in getFolder: ${error}`);
+    throw error;
   }
-
-  if (filter) {
-    checkFilterInstance(filter, FilesFilter);
-
-    params = `${folderId}?${filter.toApiUrlParams()}`;
-  }
-
-  const shareHeader: [string, string] =
-    share || shareKey
-      ? ["Request-Token", shareKey || shareKey || ""]
-      : ["", ""];
-
-  logger.debug(`Start GET /files/${params}`);
-
-  const [req] = await createRequest(
-    [`/files/${params}`],
-    [shareHeader],
-    "GET",
-    undefined,
-    undefined,
-    [signal],
-  );
-
-  const res = IS_TEST
-    ? folderHandler(await headers())
-    : await fetch(req, { next: { revalidate: 300 } });
-
-  if (!res.ok) {
-    logger.error(`GET /files/${params} failed: ${res.status}`);
-    throw new Error("Failed to get folder");
-  }
-
-  const resJson = await res.json();
-  const folder = resJson.response as TGetFolder;
-
-  folder.files = decodeDisplayName(folder.files);
-  folder.folders = decodeDisplayName(folder.folders);
-
-  folder.current.isArchive =
-    !!folder.current.roomType &&
-    folder.current.rootFolderType === FolderType.Archive;
-
-  return folder;
 }
 
 export async function validateShareFolder(share: string) {
   logger.debug(`Start GET /files/share/${share}`);
 
-  const shareHeader: [string, string] = share
-    ? ["Request-Token", share]
-    : ["", ""];
+  try {
+    const shareHeader: [string, string] = share
+      ? ["Request-Token", share]
+      : ["", ""];
 
-  const [req] = await createRequest(
-    [`/files/share/${share}`],
-    [shareHeader],
-    "GET",
-  );
+    const [req] = await createRequest(
+      [`/files/share/${share}`],
+      [shareHeader],
+      "GET",
+    );
 
-  const res = await fetch(req, { next: { revalidate: 300 } });
+    const res = await fetch(req, { next: { revalidate: 300 } });
 
-  if (!res.ok) {
-    logger.error(`GET /files/share/${share} failed: ${res.status}`);
-    throw new Error("Failed to validate share folder");
+    if (!res.ok) {
+      logger.error(`GET /files/share/${share} failed: ${res.status}`);
+      throw new Error("Failed to validate share folder");
+    }
+
+    const resJson = await res.json();
+    const shareKey = resJson.response as TValidateShareRoom;
+
+    return shareKey;
+  } catch (error) {
+    logger.error(`Error in validateShareFolder: ${error}`);
+    throw error;
   }
-
-  const resJson = await res.json();
-  const shareKey = resJson.response as TValidateShareRoom;
-
-  return shareKey;
 }

@@ -61,472 +61,547 @@ import { logger } from "@/../logger.mjs";
 
 export async function getUser() {
   logger.debug(`Start GET /people/@self`);
+  try {
+    const hdrs = await headers();
+    const cookie = hdrs.get("cookie");
 
-  const hdrs = await headers();
-  const cookie = hdrs.get("cookie");
+    const [getUser] = await createRequest([`/people/@self`], [["", ""]], "GET");
 
-  const [getUser] = await createRequest([`/people/@self`], [["", ""]], "GET");
+    if (!cookie?.includes("asc_auth_key")) return undefined;
+    const userRes = await fetch(getUser);
 
-  if (!cookie?.includes("asc_auth_key")) return undefined;
-  const userRes = await fetch(getUser);
+    if (userRes.status === 401) {
+      logger.error(`GET /people/@self failed: ${userRes.status}`);
+      return undefined;
+    }
 
-  if (userRes.status === 401) {
-    logger.error(`GET /people/@self failed: ${userRes.status}`);
-    return undefined;
-  }
+    if (!userRes.ok) {
+      logger.error(`GET /people/@self failed: ${userRes.status}`);
+      return;
+    }
 
-  if (!userRes.ok) {
-    logger.error(`GET /people/@self failed: ${userRes.status}`);
+    const user = await userRes.json();
+
+    return user.response as TUser;
+  } catch (error) {
+    logger.error(`Error in getUser: ${error}`);
     return;
   }
-
-  const user = await userRes.json();
-
-  return user.response as TUser;
 }
 
 export async function getSettings(share?: string) {
-  const hdrs = await headers();
-  const cookie = hdrs.get("cookie");
+  logger.debug(`Start GET /settings?withPassword={}`);
+  try {
+    const hdrs = await headers();
+    const cookie = hdrs.get("cookie");
 
-  logger.debug(
-    `Start GET /settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"}`,
-  );
-
-  const [getSettings] = await createRequest(
-    [
-      `/settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"}`,
-    ],
-    [share ? ["Request-Token", share] : ["", ""]],
-    "GET",
-  );
-
-  const settingsRes = await fetch(getSettings);
-
-  if (settingsRes.status === 403) {
-    logger.error(
-      `GET /settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"} failed: access-restricted`,
+    const [getSettings] = await createRequest(
+      [
+        `/settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"}`,
+      ],
+      [share ? ["Request-Token", share] : ["", ""]],
+      "GET",
     );
-    return `access-restricted`;
-  }
 
-  if (!settingsRes.ok) {
-    logger.error(
-      `GET /settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"} failed: ${settingsRes.statusText}`,
-    );
+    const settingsRes = await fetch(getSettings);
+
+    if (settingsRes.status === 403) {
+      logger.error(
+        `GET /settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"} failed: access-restricted`,
+      );
+      return `access-restricted`;
+    }
+
+    if (!settingsRes.ok) {
+      logger.error(
+        `GET /settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"} failed: ${settingsRes.statusText}`,
+      );
+      return;
+    }
+
+    const settings = await settingsRes.json();
+
+    return settings.response as TSettings;
+  } catch (error) {
+    logger.error(`Error in getSettings: ${error}`);
     return;
   }
-
-  const settings = await settingsRes.json();
-
-  return settings.response as TSettings;
 }
 
 export async function getVersionBuild() {
   logger.debug("Start GET /settings/version/build");
+  try {
+    const [getSettings] = await createRequest(
+      [`/settings/version/build`],
+      [["", ""]],
+      "GET",
+    );
 
-  const [getSettings] = await createRequest(
-    [`/settings/version/build`],
-    [["", ""]],
-    "GET",
-  );
+    const res = await fetch(getSettings);
 
-  const res = await fetch(getSettings);
+    if (!res.ok) {
+      logger.error(`GET /settings/version/build failed: ${res.statusText}`);
+      return;
+    }
 
-  if (!res.ok) {
-    logger.error(`GET /settings/version/build failed: ${res.statusText}`);
+    const versionBuild = await res.json();
+
+    return versionBuild.response as TVersionBuild;
+  } catch (error) {
+    logger.error(`Error in getVersionBuild: ${error}`);
     return;
   }
-
-  const versionBuild = await res.json();
-
-  return versionBuild.response as TVersionBuild;
 }
 
 export async function getQuota() {
   logger.debug("Start GET /portal/payment/quota");
+  try {
+    const hdrs = await headers();
+    const cookie = hdrs.get("cookie");
 
-  const hdrs = await headers();
-  const cookie = hdrs.get("cookie");
+    const [getQuota] = await createRequest(
+      [`/portal/payment/quota`],
+      [["", ""]],
+      "GET",
+    );
 
-  const [getQuota] = await createRequest(
-    [`/portal/payment/quota`],
-    [["", ""]],
-    "GET",
-  );
+    if (!cookie?.includes("asc_auth_key")) {
+      logger.debug(`GET /portal/payment/quota failed: missing asc_auth_key`);
+      return undefined;
+    }
+    const quotaRes = await fetch(getQuota);
 
-  if (!cookie?.includes("asc_auth_key")) {
-    logger.debug(`GET /portal/payment/quota failed: missing asc_auth_key`);
-    return undefined;
-  }
-  const quotaRes = await fetch(getQuota);
+    if (quotaRes.status === 401) {
+      logger.error(`GET /portal/payment/quota failed: ${quotaRes.statusText}`);
+      return undefined;
+    }
 
-  if (quotaRes.status === 401) {
-    logger.error(`GET /portal/payment/quota failed: ${quotaRes.statusText}`);
-    return undefined;
-  }
+    if (!quotaRes.ok) {
+      logger.error(`GET /portal/payment/quota failed: ${quotaRes.statusText}`);
+      return;
+    }
 
-  if (!quotaRes.ok) {
-    logger.error(`GET /portal/payment/quota failed: ${quotaRes.statusText}`);
+    const quota = await quotaRes.json();
+
+    return quota.response as TPaymentQuota;
+  } catch (error) {
+    logger.error(`Error in getQuota: ${error}`);
     return;
   }
-
-  const quota = await quotaRes.json();
-
-  return quota.response as TPaymentQuota;
 }
 
 export async function getAllPortals() {
   logger.debug("Start GET /portal/get?statistics=true");
-
-  const [getAllPortals] = await createRequest(
-    [`/portal/get?statistics=true`],
-    [["", ""]],
-    "GET",
-    undefined,
-    true,
-  );
-
-  const portalsRes = await fetch(getAllPortals);
-
-  if (!portalsRes.ok) {
-    logger.error(
-      `GET /portal/get?statistics=true failed: ${portalsRes.statusText}`,
+  try {
+    const [getAllPortals] = await createRequest(
+      [`/portal/get?statistics=true`],
+      [["", ""]],
+      "GET",
+      undefined,
+      true,
     );
+
+    const portalsRes = await fetch(getAllPortals);
+
+    if (!portalsRes.ok) {
+      logger.error(
+        `GET /portal/get?statistics=true failed: ${portalsRes.statusText}`,
+      );
+      return;
+    }
+
+    const portals = await portalsRes.json();
+
+    return portals as TGetAllPortals;
+  } catch (error) {
+    logger.error(`Error in getAllPortals: ${error}`);
     return;
   }
-
-  const portals = await portalsRes.json();
-
-  return portals as TGetAllPortals;
 }
 
 export async function getPortalTariff() {
   logger.debug("Start GET /portal/tariff");
+  try {
+    const hdrs = await headers();
+    const cookie = hdrs.get("cookie");
 
-  const hdrs = await headers();
-  const cookie = hdrs.get("cookie");
+    const [getPortalTariff] = await createRequest(
+      [`/portal/tariff`],
+      [["", ""]],
+      "GET",
+    );
 
-  const [getPortalTariff] = await createRequest(
-    [`/portal/tariff`],
-    [["", ""]],
-    "GET",
-  );
+    if (!cookie?.includes("asc_auth_key")) {
+      logger.debug(`GET /portal/tariff failed: missing asc_auth_key`);
+      return undefined;
+    }
 
-  if (!cookie?.includes("asc_auth_key")) {
-    logger.debug(`GET /portal/tariff failed: missing asc_auth_key`);
-    return undefined;
-  }
-  const portalTariffRes = await fetch(getPortalTariff);
+    const portalTariffRes = await fetch(getPortalTariff);
 
-  if (portalTariffRes.status === 401) {
-    logger.error(`GET /portal/tariff failed: ${portalTariffRes.statusText}`);
-    return undefined;
-  }
+    if (portalTariffRes.status === 401) {
+      logger.error(`GET /portal/tariff failed: ${portalTariffRes.statusText}`);
+      return undefined;
+    }
 
-  if (!portalTariffRes.ok) {
-    logger.error(`GET /portal/tariff failed: ${portalTariffRes.statusText}`);
+    if (!portalTariffRes.ok) {
+      logger.error(`GET /portal/tariff failed: ${portalTariffRes.statusText}`);
+      return;
+    }
+
+    const portalTariff = await portalTariffRes.json();
+
+    return portalTariff.response as TPortalTariff;
+  } catch (error) {
+    logger.error(`Error in getPortalTariff: ${error}`);
     return;
   }
-
-  const portalTariff = await portalTariffRes.json();
-
-  return portalTariff.response as TPortalTariff;
 }
 
 export async function getColorTheme() {
   logger.debug("Start GET /settings/colortheme");
+  try {
+    const [getColorTheme] = await createRequest(
+      [`/settings/colortheme`],
+      [["", ""]],
+      "GET",
+    );
 
-  const [getSettings] = await createRequest(
-    [`/settings/colortheme`],
-    [["", ""]],
-    "GET",
-  );
+    const colorThemeRes = await fetch(getColorTheme);
 
-  const res = await fetch(getSettings);
+    if (!colorThemeRes.ok) {
+      logger.error(`GET /settings/colortheme failed: ${colorThemeRes.status}`);
+      return;
+    }
 
-  if (!res.ok) {
-    logger.error(`GET /settings/colortheme failed: ${res.statusText}`);
+    const colorTheme = await colorThemeRes.json();
+
+    return colorTheme.response as TGetColorTheme;
+  } catch (error) {
+    logger.error(`Error in getColorTheme: ${error}`);
     return;
   }
-
-  const colorTheme = await res.json();
-
-  return colorTheme.response as TGetColorTheme;
 }
 
 export async function getWhiteLabelLogos() {
   logger.debug("Start GET /settings/whitelabel/logos?isDefault=true");
-
-  const [getWhiteLabelLogos] = await createRequest(
-    [`/settings/whitelabel/logos?isDefault=true`],
-    [["", ""]],
-    "GET",
-  );
-
-  const logosRes = await fetch(getWhiteLabelLogos);
-
-  if (!logosRes.ok) {
-    logger.error(
-      `GET /settings/whitelabel/logos?isDefault=true failed: ${logosRes.statusText}`,
+  try {
+    const [getWhiteLabelLogos] = await createRequest(
+      [`/settings/whitelabel/logos?isDefault=true`],
+      [["", ""]],
+      "GET",
     );
+
+    const logosRes = await fetch(getWhiteLabelLogos);
+
+    if (!logosRes.ok) {
+      logger.error(
+        `GET /settings/whitelabel/logos?isDefault=true failed: ${logosRes.statusText}`,
+      );
+      return;
+    }
+
+    const logos = await logosRes.json();
+
+    return logos.response;
+  } catch (error) {
+    logger.error(`Error in getWhiteLabelLogos: ${error}`);
     return;
   }
-
-  const logos = await logosRes.json();
-
-  return logos.response;
 }
 
 export async function getWhiteLabelText() {
   logger.debug("Start GET /settings/whitelabel/logotext?isDefault=true");
-
-  const [getWhiteLabelText] = await createRequest(
-    [`/settings/whitelabel/logotext?isDefault=true`],
-    [["", ""]],
-    "GET",
-  );
-
-  const textRes = await fetch(getWhiteLabelText);
-
-  if (!textRes.ok) {
-    logger.error(
-      `GET /settings/whitelabel/logotext?isDefault=true failed: ${textRes.statusText}`,
+  try {
+    const [getWhiteLabelText] = await createRequest(
+      [`/settings/whitelabel/logotext?isDefault=true`],
+      [["", ""]],
+      "GET",
     );
+
+    const textRes = await fetch(getWhiteLabelText);
+
+    if (!textRes.ok) {
+      logger.error(
+        `GET /settings/whitelabel/logotext?isDefault=true failed: ${textRes.statusText}`,
+      );
+      return;
+    }
+
+    const text = await textRes.json();
+
+    return text.response;
+  } catch (error) {
+    logger.error(`Error in getWhiteLabelText: ${error}`);
     return;
   }
-
-  const text = await textRes.json();
-
-  return text.response;
 }
 
 export async function getWhiteLabelIsDefault() {
   logger.debug("Start GET /settings/whitelabel/logos/isdefault?isDefault=true");
-
-  const [getWhiteLabelIsDefault] = await createRequest(
-    [`/settings/whitelabel/logos/isdefault?isDefault=true`],
-    [["", ""]],
-    "GET",
-  );
-
-  const isDefaultRes = await fetch(getWhiteLabelIsDefault);
-
-  if (!isDefaultRes.ok) {
-    logger.error(
-      `GET /settings/whitelabel/logos/isdefault?isDefault=true failed: ${isDefaultRes.statusText}`,
+  try {
+    const [getWhiteLabelIsDefault] = await createRequest(
+      [`/settings/whitelabel/logos/isdefault?isDefault=true`],
+      [["", ""]],
+      "GET",
     );
+
+    const isDefaultRes = await fetch(getWhiteLabelIsDefault);
+
+    if (!isDefaultRes.ok) {
+      logger.error(
+        `GET /settings/whitelabel/logos/isdefault?isDefault=true failed: ${isDefaultRes.statusText}`,
+      );
+      return;
+    }
+
+    const isDefault = await isDefaultRes.json();
+
+    return isDefault.response;
+  } catch (error) {
+    logger.error(`Error in getWhiteLabelIsDefault: ${error}`);
     return;
   }
-
-  const isDefault = await isDefaultRes.json();
-
-  return isDefault.response;
 }
 
 export async function getAdditionalResources() {
   logger.debug("Start GET /settings/rebranding/additional");
-
-  const [getAdditionalResources] = await createRequest(
-    [`/settings/rebranding/additional`],
-    [["", ""]],
-    "GET",
-  );
-
-  const additionalResourcesRes = await fetch(getAdditionalResources);
-
-  if (!additionalResourcesRes.ok) {
-    logger.error(
-      `GET /settings/rebranding/additional failed: ${additionalResourcesRes.statusText}`,
+  try {
+    const [getAdditionalResources] = await createRequest(
+      [`/settings/rebranding/additional`],
+      [["", ""]],
+      "GET",
     );
+
+    const additionalResourcesRes = await fetch(getAdditionalResources);
+
+    if (!additionalResourcesRes.ok) {
+      logger.error(
+        `GET /settings/rebranding/additional failed: ${additionalResourcesRes.statusText}`,
+      );
+      return;
+    }
+
+    const additionalResources = await additionalResourcesRes.json();
+
+    return additionalResources.response;
+  } catch (error) {
+    logger.error(`Error in getAdditionalResources: ${error}`);
     return;
   }
-
-  const additionalResources = await additionalResourcesRes.json();
-
-  return additionalResources.response;
 }
 
 export async function getCompanyInfo() {
   logger.debug("Start GET /settings/rebranding/company");
-
-  const [getCompanyInfo] = await createRequest(
-    [`/settings/rebranding/company`],
-    [["", ""]],
-    "GET",
-  );
-
-  const companyInfoRes = await fetch(getCompanyInfo);
-
-  if (!companyInfoRes.ok) {
-    logger.error(
-      `GET /settings/rebranding/company failed: ${companyInfoRes.statusText}`,
+  try {
+    const [getCompanyInfo] = await createRequest(
+      [`/settings/rebranding/company`],
+      [["", ""]],
+      "GET",
     );
+
+    const companyInfoRes = await fetch(getCompanyInfo);
+
+    if (!companyInfoRes.ok) {
+      logger.error(
+        `GET /settings/rebranding/company failed: ${companyInfoRes.statusText}`,
+      );
+      return;
+    }
+
+    const companyInfo = await companyInfoRes.json();
+
+    return companyInfo.response;
+  } catch (error) {
+    logger.error(`Error in getCompanyInfo: ${error}`);
     return;
   }
-
-  const companyInfo = await companyInfoRes.json();
-
-  return companyInfo.response;
 }
 
 export async function getPaymentSettings() {
   logger.debug("Start GET /settings/payment");
-
-  const [getPaymentSettings] = await createRequest(
-    [`/settings/payment`],
-    [["", ""]],
-    "GET",
-  );
-
-  const paymentSettingsRes = await fetch(getPaymentSettings);
-
-  if (!paymentSettingsRes.ok) {
-    logger.error(
-      `GET /settings/payment failed: ${paymentSettingsRes.statusText}`,
+  try {
+    const [getPaymentSettings] = await createRequest(
+      [`/settings/payment`],
+      [["", ""]],
+      "GET",
     );
+
+    const paymentSettingsRes = await fetch(getPaymentSettings);
+
+    if (!paymentSettingsRes.ok) {
+      logger.error(
+        `GET /settings/payment failed: ${paymentSettingsRes.statusText}`,
+      );
+      return;
+    }
+
+    const paymentSettings = await paymentSettingsRes.json();
+
+    return paymentSettings.response as TPaymentSettings;
+  } catch (error) {
+    logger.error(`Error in getPaymentSettings: ${error}`);
     return;
   }
-
-  const paymentSettings = await paymentSettingsRes.json();
-
-  return paymentSettings.response as TPaymentSettings;
 }
 
 export async function getSettingsThirdParty() {
   logger.debug("Start GET /files/thirdparty/backup");
-
-  const [getSettingsThirdParty] = await createRequest(
-    [`/files/thirdparty/backup`],
-    [["", ""]],
-    "GET",
-  );
-
-  const settingsThirdParty = await fetch(getSettingsThirdParty, {
-    next: { tags: ["backup"] },
-  });
-
-  if (!settingsThirdParty.ok) {
-    logger.error(
-      `GET /files/thirdparty/backup failed: ${settingsThirdParty.statusText}`,
+  try {
+    const [getSettingsThirdParty] = await createRequest(
+      [`/files/thirdparty/backup`],
+      [["", ""]],
+      "GET",
     );
+
+    const settingsThirdParty = await fetch(getSettingsThirdParty, {
+      next: { tags: ["backup"] },
+    });
+
+    if (!settingsThirdParty.ok) {
+      logger.error(
+        `GET /files/thirdparty/backup failed: ${settingsThirdParty.statusText}`,
+      );
+      return;
+    }
+
+    const settingsThirdPartyRes = await settingsThirdParty.json();
+
+    return settingsThirdPartyRes.response as SettingsThirdPartyType;
+  } catch (error) {
+    logger.error(`Error in getSettingsThirdParty: ${error}`);
     return;
   }
-
-  const settingsThirdPartyRes = await settingsThirdParty.json();
-
-  return settingsThirdPartyRes.response as SettingsThirdPartyType;
 }
 
 export async function getBackupSchedule(dump: boolean = true) {
-  const searchParams = new URLSearchParams();
+  try {
+    const searchParams = new URLSearchParams();
 
-  searchParams.append("dump", dump.toString());
+    searchParams.append("dump", dump.toString());
 
-  logger.debug(`Start GET /portal/getbackupschedule?${searchParams}`);
+    logger.debug(`Start GET /portal/getbackupschedule?${searchParams}`);
 
-  const [getBackupSchedule] = await createRequest(
-    [`/portal/getbackupschedule?${searchParams}`],
-    [["", ""]],
-    "GET",
-  );
-
-  const backupScheduleRes = await fetch(getBackupSchedule, {
-    next: { tags: ["backup"] },
-  });
-
-  if (!backupScheduleRes.ok) {
-    logger.error(
-      `GET /portal/getbackupschedule?${searchParams} failed: ${backupScheduleRes.statusText}`,
+    const [getBackupSchedule] = await createRequest(
+      [`/portal/getbackupschedule?${searchParams}`],
+      [["", ""]],
+      "GET",
     );
+
+    const backupScheduleRes = await fetch(getBackupSchedule, {
+      next: { tags: ["backup"] },
+    });
+
+    if (!backupScheduleRes.ok) {
+      logger.error(
+        `GET /portal/getbackupschedule?${searchParams} failed: ${backupScheduleRes.statusText}`,
+      );
+      return;
+    }
+
+    const backupSchedule = await backupScheduleRes.json();
+
+    return backupSchedule.response as TBackupSchedule;
+  } catch (error) {
+    logger.error(`Error in getBackupSchedule: ${error}`);
     return;
   }
-
-  const backupSchedule = await backupScheduleRes.json();
-
-  return backupSchedule.response as TBackupSchedule;
 }
 
 export async function getBackupStorage(dump: boolean = false) {
-  const searchParams = new URLSearchParams();
+  try {
+    const searchParams = new URLSearchParams();
 
-  searchParams.append("dump", dump.toString());
+    searchParams.append("dump", dump.toString());
 
-  logger.debug(`Start GET /settings/storage/backup?${searchParams}`);
+    logger.debug(`Start GET /settings/storage/backup?${searchParams}`);
 
-  const [getBackupStorage] = await createRequest(
-    [`/settings/storage/backup?${searchParams}`],
-    [["", ""]],
-    "GET",
-  );
-  const backupStorageRes = await fetch(getBackupStorage, {
-    next: { tags: ["backup"] },
-  });
-
-  if (!backupStorageRes.ok) {
-    logger.error(
-      `GET /settings/storage/backup?${searchParams} failed: ${backupStorageRes.statusText}`,
+    const [getBackupStorage] = await createRequest(
+      [`/settings/storage/backup?${searchParams}`],
+      [["", ""]],
+      "GET",
     );
+    const backupStorageRes = await fetch(getBackupStorage, {
+      next: { tags: ["backup"] },
+    });
+
+    if (!backupStorageRes.ok) {
+      logger.error(
+        `GET /settings/storage/backup?${searchParams} failed: ${backupStorageRes.statusText}`,
+      );
+      return;
+    }
+
+    const backupStorage = await backupStorageRes.json();
+
+    return backupStorage.response as TStorageBackup[];
+  } catch (error) {
+    logger.error(`Error in getBackupStorage: ${error}`);
     return;
   }
-
-  const backupStorage = await backupStorageRes.json();
-
-  return backupStorage.response as TStorageBackup[];
 }
 
 export async function getStorageRegions() {
   logger.debug("Start GET /settings/storage/s3/regions");
-
-  const [getStorageRegions] = await createRequest(
-    [`/settings/storage/s3/regions`],
-    [["", ""]],
-    "GET",
-  );
-
-  const storageRegionsRes = await fetch(getStorageRegions);
-
-  if (!storageRegionsRes.ok) {
-    logger.error(
-      `GET /settings/storage/s3/regions failed: ${storageRegionsRes.statusText}`,
+  try {
+    const [getStorageRegions] = await createRequest(
+      [`/settings/storage/s3/regions`],
+      [["", ""]],
+      "GET",
     );
+
+    const storageRegionsRes = await fetch(getStorageRegions);
+
+    if (!storageRegionsRes.ok) {
+      logger.error(
+        `GET /settings/storage/s3/regions failed: ${storageRegionsRes.statusText}`,
+      );
+      return;
+    }
+
+    const storageRegions = await storageRegionsRes.json();
+
+    return storageRegions.response as TStorageRegion[];
+  } catch (error) {
+    logger.error(`Error in getStorageRegions: ${error}`);
     return;
   }
-
-  const storageRegions = await storageRegionsRes.json();
-
-  return storageRegions.response as TStorageRegion[];
 }
 
 export async function getSettingsFiles(): Promise<TFilesSettings> {
   logger.debug("Start GET /files/settings");
+  try {
+    const [getSettingsFiles] = await createRequest(
+      [`/files/settings`],
+      [["", ""]],
+      "GET",
+    );
 
-  const [getSettingsFiles] = await createRequest(
-    [`/files/settings`],
-    [["", ""]],
-    "GET",
-  );
+    const settingsFilesRes = await fetch(getSettingsFiles);
 
-  const settingsFilesRes = await fetch(getSettingsFiles);
+    if (!settingsFilesRes.ok) {
+      logger.error(
+        `GET /files/settings failed: ${settingsFilesRes.statusText}`,
+      );
+      return {} as TFilesSettings;
+    }
 
-  if (!settingsFilesRes.ok) {
-    logger.error(`GET /files/settings failed: ${settingsFilesRes.statusText}`);
+    const settingsFiles = await settingsFilesRes.json();
+
+    return settingsFiles.response as TFilesSettings;
+  } catch (error) {
+    logger.error(`Error in getSettingsFiles: ${error}`);
     return {} as TFilesSettings;
   }
-
-  const settingsFiles = await settingsFilesRes.json();
-
-  return settingsFiles.response;
 }
 
 export async function getBackupProgress(dump = true) {
-  const searchParams = new URLSearchParams();
-
-  searchParams.append("dump", dump.toString());
-
-  logger.debug(`Start GET /portal/getbackupprogress?${searchParams}`);
-
   try {
+    const searchParams = new URLSearchParams();
+
+    searchParams.append("dump", dump.toString());
+
+    logger.debug(`Start GET /portal/getbackupprogress?${searchParams}`);
+
     const [getBackupProgress] = await createRequest(
       [`/portal/getbackupprogress?${searchParams}`],
       [["", ""]],
@@ -537,92 +612,107 @@ export async function getBackupProgress(dump = true) {
       next: { tags: ["backup"] },
     });
 
+    if (!backupProgressRes.ok) {
+      logger.error(
+        `GET /portal/getbackupprogress?${searchParams} failed: ${backupProgressRes.statusText}`,
+      );
+      return;
+    }
+
     const backupProgress = await backupProgressRes.json();
 
     return backupProgress.response as TBackupProgress | undefined;
   } catch (error) {
-    logger.error(`getBackupProgress failed: ${error}`);
+    logger.error(`Error in getBackupProgress: ${error}`);
     return error as TError;
   }
 }
 
 export async function getFoldersTree() {
   logger.debug("Start GET /files/@root?filterType=2&count=1");
-
-  const [getFoldersTree] = await createRequest(
-    ["/files/@root?filterType=2&count=1"],
-    [["", ""]],
-    "GET",
-  );
-
-  const foldersTreeRes = await fetch(getFoldersTree);
-
-  if (!foldersTreeRes.ok) {
-    logger.error(
-      `GET /files/@root?filterType=2&count=1 failed: ${foldersTreeRes.status}`,
+  try {
+    const [getFoldersTree] = await createRequest(
+      ["/files/@root?filterType=2&count=1"],
+      [["", ""]],
+      "GET",
     );
-    return [];
+
+    const foldersTreeRes = await fetch(getFoldersTree);
+
+    if (!foldersTreeRes.ok) {
+      logger.error(
+        `GET /files/@root?filterType=2&count=1 failed: ${foldersTreeRes.status}`,
+      );
+      return [];
+    }
+
+    const foldersTree = await foldersTreeRes.json();
+
+    const folders = sortInDisplayOrder(foldersTree.response);
+
+    return folders.map((data, index) => {
+      const { new: newItems, pathParts, current } = data;
+
+      const {
+        parentId,
+        title,
+        id,
+        rootFolderType,
+        security,
+        foldersCount,
+        filesCount,
+      } = current;
+
+      const type = +rootFolderType;
+
+      const name = getFolderClassNameByType(type);
+
+      return {
+        ...current,
+        id,
+        key: `0-${index}`,
+        parentId,
+        title,
+        rootFolderType: type,
+        folderClassName: name,
+        folders: null,
+        pathParts,
+        foldersCount,
+        filesCount,
+        newItems,
+        security,
+        new: newItems,
+      } as TFolder;
+    });
+  } catch (error) {
+    logger.error(`Error in getFoldersTree: ${error}`);
+    return;
   }
-
-  const foldersTree = await foldersTreeRes.json();
-
-  const folders = sortInDisplayOrder(foldersTree.response);
-
-  return folders.map((data, index) => {
-    const { new: newItems, pathParts, current } = data;
-
-    const {
-      parentId,
-      title,
-      id,
-      rootFolderType,
-      security,
-      foldersCount,
-      filesCount,
-    } = current;
-
-    const type = +rootFolderType;
-
-    const name = getFolderClassNameByType(type);
-
-    return {
-      ...current,
-      id,
-      key: `0-${index}`,
-      parentId,
-      title,
-      rootFolderType: type,
-      folderClassName: name,
-      folders: null,
-      pathParts,
-      foldersCount,
-      filesCount,
-      newItems,
-      security,
-      new: newItems,
-    } as TFolder;
-  });
 }
 
 export async function getEncryptionSettings() {
   logger.debug("Start GET /settings/encryption/settings");
-
-  const [getEncryptionSettings] = await createRequest(
-    [`/settings/encryption/settings`],
-    [["", ""]],
-    "GET",
-  );
-
-  const encryptionSettingsRes = await fetch(getEncryptionSettings);
-
-  if (!encryptionSettingsRes.ok) {
-    logger.error(
-      `GET /settings/encryption/settings failed: ${encryptionSettingsRes.status}`,
+  try {
+    const [getEncryptionSettings] = await createRequest(
+      [`/settings/encryption/settings`],
+      [["", ""]],
+      "GET",
     );
+
+    const encryptionSettingsRes = await fetch(getEncryptionSettings);
+
+    if (!encryptionSettingsRes.ok) {
+      logger.error(
+        `GET /settings/encryption/settings failed: ${encryptionSettingsRes.status}`,
+      );
+      return;
+    }
+
+    const encryptionSettings = await encryptionSettingsRes.json();
+
+    return encryptionSettings.response as TEncryptionSettings;
+  } catch (error) {
+    logger.error(`Error in getEncryptionSettings: ${error}`);
     return;
   }
-
-  const encryptionSettings = await encryptionSettingsRes.json();
-
-  return encryptionSettings.response as TEncryptionSettings;
 }

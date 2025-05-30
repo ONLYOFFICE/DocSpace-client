@@ -111,7 +111,7 @@ const AmazonSettings = ({
     key: string;
     label: string;
     systemName: string;
-  }>();
+  }>(null);
 
   const regions = useMemo(() => {
     return storageRegions.map((storageRegion, index) => {
@@ -253,8 +253,8 @@ const AmazonSettings = ({
       : MANAGED_KEYS[0];
 
   return (
-    <>
-      <StyledBody>
+    <div data-testid="amazon-settings-wrapper">
+      <StyledBody data-testid="amazon-settings-bucket">
         <div className="backup_storage-tooltip">
           <Text isBold>{bucketPlaceholder}</Text>
           {renderTooltip(t("Common:AmazonBucketTip"), "bucket-tooltip")}
@@ -271,9 +271,10 @@ const AmazonSettings = ({
           tabIndex={1}
           type={InputType.text}
           size={InputSize.base}
+          testId="amazon-bucket-input"
         />
       </StyledBody>
-      <StyledBody>
+      <StyledBody data-testid="amazon-settings-region">
         <div className="backup_storage-tooltip">
           <Text isBold>{regionPlaceholder}</Text>
           {renderTooltip(t("Common:AmazonRegionTip"), "region-tooltip")}
@@ -294,7 +295,7 @@ const AmazonSettings = ({
         />
       </StyledBody>
 
-      <StyledBody>
+      <StyledBody data-testid="amazon-settings-service-url">
         <div className="backup_storage-tooltip">
           <Text isBold>{serviceUrlPlaceholder}</Text>
           {renderTooltip(t("Common:AmazonServiceTip"), "service-tooltip")}
@@ -311,10 +312,11 @@ const AmazonSettings = ({
           tabIndex={3}
           type={InputType.text}
           size={InputSize.base}
+          testId="amazon-service-url-input"
         />
       </StyledBody>
 
-      <StyledBody>
+      <StyledBody data-testid="amazon-settings-force-path-style">
         <Checkbox
           id="force-path-style"
           name={FORCEPATH_STYLE}
@@ -324,6 +326,7 @@ const AmazonSettings = ({
           isDisabled={isDisabled}
           onChange={onChangeCheckbox}
           tabIndex={4}
+          data-testid="amazon-force-path-style-checkbox"
           helpButton={
             <div className="backup_storage-tooltip">
               {renderTooltip(
@@ -334,7 +337,7 @@ const AmazonSettings = ({
           }
         />
       </StyledBody>
-      <StyledBody>
+      <StyledBody data-testid="amazon-settings-use-http">
         <Checkbox
           id="use-http"
           className="backup_checkbox"
@@ -345,6 +348,7 @@ const AmazonSettings = ({
           isDisabled={isDisabled}
           onChange={onChangeCheckbox}
           tabIndex={5}
+          data-testid="amazon-use-http-checkbox"
           helpButton={
             <div className="backup_storage-tooltip">
               {renderTooltip(t("Common:AmazonHTTPTip"), "http-tooltip")}
@@ -352,7 +356,7 @@ const AmazonSettings = ({
           }
         />
       </StyledBody>
-      <StyledBody>
+      <StyledBody data-testid="amazon-settings-sse-method">
         <div className="backup_storage-tooltip">
           <Text isBold>{SSEPlaceholder}</Text>
           {renderTooltip(t("Common:AmazonSSETip"), "sse-method-tooltip")}
@@ -373,6 +377,7 @@ const AmazonSettings = ({
           isDisabled={isDisabled}
           tabIndex={7}
           showDisabledItems
+          data-testid="amazon-sse-method-combobox"
         />
       </StyledBody>
 
@@ -387,6 +392,7 @@ const AmazonSettings = ({
             onClick={onSelectEncryptionMode}
             name={SSE_S3}
             isDisabled={isDisabled}
+            testId="amazon-sse-s3-radio"
           />
 
           <RadioButton
@@ -398,6 +404,7 @@ const AmazonSettings = ({
             onClick={onSelectEncryptionMode}
             name={SSE_KMS}
             isDisabled={isDisabled}
+            testId="amazon-sse-kms-radio"
           />
 
           {formSettings[SSE] === sseKms ? (
@@ -436,6 +443,7 @@ const AmazonSettings = ({
                     tabIndex={9}
                     type={InputType.text}
                     size={InputSize.base}
+                    testId="amazon-customer-kms-key-input"
                   />
                 </>
               ) : null}
@@ -459,6 +467,7 @@ const AmazonSettings = ({
             tabIndex={8}
             type={InputType.text}
             size={InputSize.base}
+            testId="amazon-client-side-kms-key-input"
           />
         </>
       ) : null}
@@ -476,39 +485,11 @@ const AmazonSettings = ({
           hasError={isError[filePath]}
           type={InputType.text}
           size={InputSize.base}
+          testId="amazon-file-path-input"
         />
       ) : null}
-    </>
+    </div>
   );
 };
 
 export default AmazonSettings;
-
-// export default inject(({ settingsStore, backup }) => {
-//   const {
-//     setRequiredFormSettings,
-//     formSettings,
-//     errorsFieldsBeforeSafe,
-
-//     setIsThirdStorageChanged,
-//     addValueInFormSettings,
-//     deleteValueFormSetting,
-//     storageRegions,
-//     requiredFormSettings,
-//     defaultFormSettings,
-//   } = backup;
-//   const defaultRegion = defaultFormSettings.region;
-//   const { theme } = settingsStore;
-//   return {
-//     setRequiredFormSettings,
-//     formSettings,
-//     errorsFieldsBeforeSafe,
-//     storageRegions,
-//     setIsThirdStorageChanged,
-//     addValueInFormSettings,
-//     deleteValueFormSetting,
-//     defaultRegion,
-//     requiredFormSettings,
-//     theme,
-//   };
-// })(observer(AmazonSettings));

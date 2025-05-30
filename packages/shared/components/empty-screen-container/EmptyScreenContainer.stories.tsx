@@ -102,7 +102,7 @@ const ResetFilterButton = () => (
 );
 
 const HomeButton = () => (
-  <Link type={LinkType.action} isHovered href="/">
+  <Link type={LinkType.action} isHovered>
     Go to home
   </Link>
 );

@@ -185,7 +185,11 @@ const Item = ({
         labelBadge={labelBadge}
         onClickBadge={onBadgeClick}
         iconBadge={iconBadge}
-        badgeTitle={labelBadge ? "" : t("EmptyRecycleBin")}
+        badgeTitle={
+          labelBadge
+            ? ""
+            : t("EmptySection", { sectionName: t("Common:TrashSection") })
+        }
         badgeComponent={
           <NewFilesBadge
             newFilesCount={labelBadge}

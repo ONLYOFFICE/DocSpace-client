@@ -36,7 +36,6 @@ import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 import PersonReactSvg from "PUBLIC_DIR/images/person.react.svg?url";
 import QuestionReactSvg from "PUBLIC_DIR/images/question.react.svg?url";
 import SettingsReactSvg from "PUBLIC_DIR/images/settings.react.svg?url";
-
 import { IconButton } from ".";
 
 const meta = {
@@ -170,7 +169,7 @@ export const WithClickState: Story = {
   args: {
     ...Default.args,
     iconClickName: InfoReactSvgUrl,
-    clickColor: "#666",
+    clickColor: "green",
   },
 };
 
@@ -204,17 +203,10 @@ export const WithCustomNode: Story = {
         style={{
           width: 25,
           height: 25,
-          backgroundColor: "blue",
+          backgroundColor: "#999",
           borderRadius: "50%",
         }}
       />
     ),
-  },
-};
-
-export const WithTooltip: Story = {
-  args: {
-    ...Default.args,
-    dataTip: "This is a tooltip",
   },
 };

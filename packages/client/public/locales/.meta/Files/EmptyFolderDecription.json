@@ -3,7 +3,7 @@
   "content": "Drop files here or create new ones",
   "content_en_sha1_hash": "aa6a8fc5bf26fbe1d55eef58b96e6b7f23766ea3",
   "created_at": "2025-05-19T21:30:55.542Z",
-  "updated_at": "2025-05-24T12:20:38.201Z",
+  "updated_at": "2025-06-02T10:20:51.012Z",
   "comment": {
     "text": "This translation key is used to display a message that allows users to drop files or create new ones on an empty folder. It appears in the UI as a placeholder text on an empty screen when choosing a folder type. Translators should provide a clear and concise message that encourages users to take action.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
       "line_number": 99,
-      "context": "} = props;\n \n const navigate = useNavigate();\n const location = useLocation();\n \n const personalDescription = t(\"EmptyFolderDecription\");\n const emptyScreenHeader = t(\"Common:EmptyScreenFolder\");\n const archiveHeader = t(\"ArchiveEmptyScreenHeader\");\n const noFilesHeader = t(\"NoFilesHereYet\");\n const trashDescription = t(\"TrashEmptyDescription\");\n const favoritesDescription = t(\"FavoritesEmptyContainerDescription\");",
+      "context": "} = props;\n \n const navigate = useNavigate();\n const location = useLocation();\n \n const personalDescription = t(\"EmptyFolderDecription\");\n const emptyScreenHeader = t(\"Common:EmptyScreenFolder\");\n const archiveHeader = t(\"ArchiveEmptyScreenHeader\");\n const noFilesHeader = t(\"NoFilesHereYet\");\n const trashDescription = t(\"TrashFunctionalityDescription\", {\n sectionName: t(\"Common:TrashSection\"),",
       "module": "/packages/client"
     }
   ],

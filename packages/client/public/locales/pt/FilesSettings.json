@@ -1,7 +1,6 @@
 {
   "CancellaionNotification": "Não volte a apresentar a notificação de cancelamento",
   "DisplayFileExtension": "Exibir extensão de arquivo ao lado do nome do arquivo",
-  "DisplayNotification": "Mostrar notificação ao mover itens para a Lixo",
   "OpenSameTab": "Abra o editor {{organizationName}} na mesma guia",
   "OriginalCopy": "Guardar a cópia do ficheiro também no formato original"
 }

@@ -3,7 +3,7 @@
   "content": "Guest",
   "content_en_sha1_hash": "face83ee3014bdc8f98203cc94e2e89222452e90",
   "created_at": "2025-05-19T21:30:45.686Z",
-  "updated_at": "2025-05-26T07:57:32.301Z",
+  "updated_at": "2025-06-02T10:20:51.142Z",
   "comment": {
     "text": "The translation key \"Common:Guest\" is used to display a text indicating that the user being referred to is a guest. This text is typically displayed in a dialog or UI element, such as an icon badge, to provide context for users.",
     "is_auto": true,
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
-      "line_number": 51,
+      "line_number": 50,
       "context": "<Trans\n t={t}\n ns=\"Files\"\n i18nKey=\"YourUserTypeHasChanged\"\n values={{\n userType: t(\"Common:Guest\"),\n productName: t(\"Common:ProductName\"),\n adminName,\n }}\n components={{ 1: <span style={{ fontWeight: 600 }} /> }}\n />",
       "module": "/packages/client"
     },

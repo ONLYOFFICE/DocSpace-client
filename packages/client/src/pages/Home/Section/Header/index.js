@@ -436,7 +436,9 @@ const SectionHeaderContent = (props) => {
       })}. ${
         lifetime.deletePermanently
           ? t("Files:AfterFilesWillBeDeletedPermanently")
-          : t("Files:AfterFilesWillBeMovedToTrash")
+          : t("Files:FilesMovedToTrashNotice", {
+              sectionName: t("Common:TrashSection"),
+            })
       }`;
 
     return null;
@@ -570,7 +572,9 @@ const SectionHeaderContent = (props) => {
   const badgeLabel = showTemplateBadge ? t("Files:Template") : "";
 
   const warningText = isRecycleBinFolder
-    ? t("TrashErasureWarning")
+    ? t("TrashAutoDeleteWarning", {
+        sectionName: t("Common:TrashSection"),
+      })
     : isPersonalReadOnly
       ? t("PersonalFolderErasureWarning")
       : "";

@@ -3116,9 +3116,9 @@ class FilesStore {
         isRooms ? this.setRoomsFilter(newFilter) : this.setFilter(newFilter);
         this.setFiles(files);
         this.setFolders(folders);
-        this.setTempActionFilesIds([]);
         this.setHotkeysClipboard(hotkeysClipboard);
-        this.setTempActionFoldersIds([]);
+        if (fileIds) this.setTempActionFilesIds([]);
+        if (folderIds) this.setTempActionFoldersIds([]);
       });
 
       showToast && showToast();
@@ -3139,8 +3139,8 @@ class FilesStore {
         isRooms ? this.setRoomsFilter(newFilter) : this.setFilter(newFilter);
         this.setFiles(files);
         this.setFolders(folders);
-        this.setTempActionFilesIds([]);
-        this.setTempActionFoldersIds([]);
+        if (fileIds) this.setTempActionFilesIds([]);
+        if (folderIds) this.setTempActionFoldersIds([]);
       });
 
       showToast && showToast();
@@ -3175,8 +3175,8 @@ class FilesStore {
           toastr.error(err);
         })
         .finally(() => {
-          this.setTempActionFilesIds([]);
-          this.setTempActionFoldersIds([]);
+          if (fileIds) this.setTempActionFilesIds([]);
+          if (folderIds) this.setTempActionFoldersIds([]);
         });
     }
     api.files
@@ -3207,8 +3207,8 @@ class FilesStore {
         toastr.error(err);
       })
       .finally(() => {
-        this.setTempActionFilesIds([]);
-        this.setTempActionFoldersIds([]);
+        if (fileIds) this.setTempActionFilesIds([]);
+        if (folderIds) this.setTempActionFoldersIds([]);
       });
   };
 

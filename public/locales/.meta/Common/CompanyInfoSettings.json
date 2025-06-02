@@ -3,7 +3,7 @@
   "content": "Company info settings",
   "content_en_sha1_hash": "192f2a8a9bec6d013a113f97fc1ce9b3cdd0c794",
   "created_at": "2025-05-26T07:15:41.404Z",
-  "updated_at": "2025-05-26T08:06:30.719Z",
+  "updated_at": "2025-06-02T10:20:51.481Z",
   "comment": {
     "text": "This translation key is used for the label \"Company info settings\" that appears on a page, likely in a portal or branding section, and is displayed as a header or button. It provides a brief description of the content users will access when clicking the link or navigating to this setting. The text is typically shown in a dialog or modal context.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 120,
-      "context": "{t(\"BrandingSectionDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </div>\n <div className=\"header settings_unavailable\">\n {t(\"CompanyInfoSettings\")}\n </div>\n <div className=\"description settings_unavailable\">\n {isSettingPaid ? (\n <Trans\n t={t}",
+      "line_number": 149,
+      "context": "})}\n </div>\n <div\n className={classNames(styles.header, \"header settings_unavailable\")}\n >\n {t(\"CompanyInfoSettings\")}\n </div>\n <div\n className={classNames(\n styles.description,\n \"description settings_unavailable\",",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/pages/Branding/mobile-view.tsx",
-      "line_number": 73,
+      "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
+      "line_number": 69,
       "context": "badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}\n />\n {displayAbout ? (\n <MobileCategoryWrapper\n title={t(\"CompanyInfoSettings\")}\n subtitle={t(\"BrandingSectionDescription\", {\n productName: t(\"ProductName\"),\n })}\n url={`${baseUrl}/branding/company-info`}\n withPaidBadge={!isSettingPaid}",
       "module": "/packages/shared"
     },

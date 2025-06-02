@@ -1,0 +1,28 @@
+{
+  "key_path": "ShowAboutWindow",
+  "content": "Show the About window",
+  "content_en_sha1_hash": "98aa21413f85ee58c0e572a4de32cd4c30502a72",
+  "created_at": "2025-06-02T10:19:17.147Z",
+  "updated_at": "2025-06-02T10:21:21.794Z",
+  "comment": {
+    "text": "Show the About window button label in a checkbox within a branding company info page.",
+    "is_auto": true,
+    "updated_at": "2025-06-02T10:21:21.794Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
+      "line_number": 198,
+      "context": "<Checkbox\n isDisabled={!isBrandingAvailable || !isSettingPaid}\n isChecked={showAbout}\n onChange={onChangeDisplayAbout}\n data-testid=\"show-about-window-checkbox\"\n label={t(\"Common:ShowAboutWindow\")}\n />\n </FieldContainer>\n \n <FieldContainer\n id=\"fieldContainerCompanyName\"",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

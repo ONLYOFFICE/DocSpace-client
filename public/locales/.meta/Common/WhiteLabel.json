@@ -3,7 +3,7 @@
   "content": "Logo settings",
   "content_en_sha1_hash": "cde0dbbc94f797482701f082adcc8ce183018e62",
   "created_at": "2025-05-26T07:15:49.607Z",
-  "updated_at": "2025-05-26T08:01:52.421Z",
+  "updated_at": "2025-06-02T10:20:51.480Z",
   "comment": {
     "text": "The \"Logo settings\" translation key is used to display a description for a logo-related setting in the portal settings. It appears in the branding section of the portal and might be seen in a header or on a button related to logo customization. Translators should provide a clear and concise text that explains the purpose of logo settings.",
     "is_auto": true,
@@ -17,15 +17,15 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/shared/pages/Branding/WhiteLabel/WhiteLabelHeader.tsx",
-      "line_number": 47,
-      "context": "import { Button, ButtonSize } from \"../../../components/button\";\n \n import { NotAvailable } from \"./NotAvailable\";\n import {\n StyledHeader,\n StyledWhiteLabelInput,\n StyledCrossIcon,\n } from \"./WhiteLabel.styled\";\n import { IHeaderProps } from \"./WhiteLabel.types\";\n \n export const WhiteLabelHeader = ({",
+      "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
+      "line_number": 60,
+      "context": "withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"WhiteLabel\")}\n subtitle={t(\"BrandingSubtitleMobile\")}\n url={`${baseUrl}/branding/white-label`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/pages/Branding/mobile-view.tsx",
-      "line_number": 64,
-      "context": "withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"WhiteLabel\")}\n subtitle={t(\"BrandingSubtitleMobile\")}\n url={`${baseUrl}/branding/white-label`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}",
+      "file_path": "/packages/shared/pages/Branding/WhiteLabel/WhiteLabelHeader.tsx",
+      "line_number": 48,
+      "context": "} from \"../../../components/text-input\";\n import { Button, ButtonSize } from \"../../../components/button\";\n import { useTheme } from \"../../../hooks/useTheme\";\n \n import { NotAvailable } from \"./NotAvailable\";\n import { IHeaderProps } from \"./WhiteLabel.types\";\n import styles from \"./WhiteLabel.module.scss\";\n \n export const WhiteLabelHeader = ({\n showNotAvailable,\n isSettingPaid,",
       "module": "/packages/shared"
     },
     {

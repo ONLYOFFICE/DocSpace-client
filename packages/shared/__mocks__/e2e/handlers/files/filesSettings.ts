@@ -26,7 +26,11 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import { http } from "msw";
 import { TFilesSettings } from "../../../../api/files/types";
+import { API_PREFIX } from "../../utils";
+
+export const PATH = "files/settings";
 
 const getFilesSettings = (): TFilesSettings => {
   return {
@@ -1159,6 +1163,12 @@ const getFilesSettings = (): TFilesSettings => {
   };
 };
 
-export const filesSettingsHandler = (): Response => {
-  return new Response(JSON.stringify({ response: getFilesSettings() }));
+export const filesSettingsResolver = () => {
+  return new Response(JSON.stringify(getFilesSettings()));
+};
+
+export const filesSettingsHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+    return filesSettingsResolver();
+  });
 };

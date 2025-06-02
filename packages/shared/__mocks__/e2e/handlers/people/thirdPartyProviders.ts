@@ -23,15 +23,11 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import {
-  API_PREFIX,
-  BASE_URL,
-  HEADER_LIST_THIRD_PARTY_PROVIDERS,
-} from "../../utils";
 
-const PATH = "people/thirdparty/providers";
+import { http } from "msw";
+import { API_PREFIX, HEADER_LIST_THIRD_PARTY_PROVIDERS } from "../../utils";
 
-const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
+export const PATH = "people/thirdparty/providers";
 
 export const successThirdpartyProviders = {
   response: [
@@ -69,7 +65,7 @@ export const successThirdpartyProviders = {
   count: 6,
   links: [
     {
-      href: url,
+      href: `/${API_PREFIX}/${PATH}`,
       action: "GET",
     },
   ],
@@ -82,7 +78,7 @@ export const emptyThirdPartyProviders = {
   count: 0,
   links: [
     {
-      href: url,
+      href: `/${API_PREFIX}/${PATH}`,
       action: "GET",
     },
   ],
@@ -90,10 +86,21 @@ export const emptyThirdPartyProviders = {
   statusCode: 200,
 };
 
-export const thirdPartyProvider = (headers?: Headers) => {
-  if (headers?.get(HEADER_LIST_THIRD_PARTY_PROVIDERS)) {
+export const thirdPartyProvidersResolver = (
+  isEmpty: boolean = true,
+): Response => {
+  if (!isEmpty) {
     return new Response(JSON.stringify(successThirdpartyProviders));
   }
 
   return new Response(JSON.stringify(emptyThirdPartyProviders));
+};
+
+export const thirdPartyProvidersHandler = (
+  port: string,
+  isEmpty: boolean = true,
+) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+    return thirdPartyProvidersResolver(isEmpty);
+  });
 };

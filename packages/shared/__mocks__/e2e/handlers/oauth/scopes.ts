@@ -24,6 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { API_PREFIX } from "../../utils";
+import { http } from "msw";
+
+export const PATH = "scopes";
+
 export const successScopes = [
   {
     name: "accounts.self:read",
@@ -72,6 +77,12 @@ export const successScopes = [
   },
 ];
 
-export const scopesHandler = () => {
+export const scopesResolver = () => {
   return new Response(JSON.stringify(successScopes));
+};
+
+export const scopesHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+    return scopesResolver();
+  });
 };

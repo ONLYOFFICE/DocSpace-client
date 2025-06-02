@@ -26,7 +26,11 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import { http } from "msw";
 import type { TGetRootFolder } from "../../../../api/files/types";
+import { API_PREFIX } from "../../utils";
+
+export const PATH = "files/@root";
 
 const getFoldersTree = (): TGetRootFolder[] => {
   return [
@@ -571,6 +575,12 @@ const getFoldersTree = (): TGetRootFolder[] => {
   ];
 };
 
-export const foldersTreeHandler = (): Response => {
+export const foldersTreeResolver = () => {
   return new Response(JSON.stringify({ response: getFoldersTree() }));
+};
+
+export const foldersTreeHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+    return foldersTreeResolver();
+  });
 };

@@ -26,6 +26,11 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import { API_PREFIX } from "../../utils";
+import { http } from "msw";
+
+export const PATH_VALIDATE_PUBLIC_ROOM_KEY = "files/share/:key";
+
 const validateSuccess = {
   response: {
     status: 0,
@@ -41,6 +46,15 @@ const validateSuccess = {
   statusCode: 200,
 };
 
-export const validatePublicRoomKeyHandler = (): Response => {
+export const validatePublicRoomKeyResolver = (): Response => {
   return new Response(JSON.stringify(validateSuccess));
+};
+
+export const validatePublicRoomKeyHandler = (port: string) => {
+  return http.get(
+    `http://localhost:${port}/${API_PREFIX}/${PATH_VALIDATE_PUBLIC_ROOM_KEY}`,
+    () => {
+      return validatePublicRoomKeyResolver();
+    },
+  );
 };

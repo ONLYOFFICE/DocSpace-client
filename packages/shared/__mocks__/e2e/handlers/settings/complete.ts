@@ -24,18 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+import { http } from "msw";
+import { API_PREFIX } from "../../utils";
 
 export const PATH = "settings/wizard/complete";
-
-const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 
 export const completeSuccess = {
   response: true,
   count: 1,
   links: [
     {
-      href: url,
+      href: `/${API_PREFIX}/${PATH}`,
       action: "GET",
     },
   ],
@@ -44,6 +43,12 @@ export const completeSuccess = {
   ok: true,
 };
 
-export const complete = (): Response => {
+export const completeResolver = (): Response => {
   return new Response(JSON.stringify(completeSuccess));
+};
+
+export const completeHandler = (port: string) => {
+  return http.post(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+    return completeResolver();
+  });
 };

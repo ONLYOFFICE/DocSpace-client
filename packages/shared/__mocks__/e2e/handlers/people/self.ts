@@ -24,22 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  API_PREFIX,
-  BASE_URL,
-  HEADER_SELF_ERROR_400,
-  HEADER_SELF_ERROR_404,
-} from "../../utils";
+import { http } from "msw";
+import { API_PREFIX } from "../../utils";
 
-export const PATH = "people";
+export const PATH = "people/:userId";
 export const PATH_CHANGE_AUTH_DATA = "people/**/password";
 export const PATH_ACTIVATION_STATUS = "people/activationstatus/*";
 export const PATH_UPDATE_USER = "people/*";
 export const PATH_DELETE_USER = "people/@self";
-export const PATH_USER_BY_EMAIL = "people/email?email=**";
+export const PATH_USER_BY_EMAIL = "people/email**";
 export const PATH_ADD_GUEST = "people/guests/share/approve";
-
-const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 
 export const successSelf = {
   response: {
@@ -74,14 +68,14 @@ export const successSelf = {
       "/static/images/default_user_photo_size_48-48.png?hash=1780467874",
     avatarSmall:
       "/static/images/default_user_photo_size_32-32.png?hash=1780467874",
-    profileUrl: `${BASE_URL}/accounts/people/filter?search=test%40gmail.com`,
+    profileUrl: "/accounts/people/filter?search=test%40gmail.com",
     hasAvatar: false,
     isAnonim: false,
   },
   count: 1,
   links: [
     {
-      href: url,
+      href: `/${API_PREFIX}/${PATH}`,
       action: "GET",
     },
   ],
@@ -113,15 +107,75 @@ export const selfError400 = {
   statusCode: 400,
 };
 
-export const self = (
+export const selfResolver = (
   errorStatus: 400 | 404 | null = null,
-  headers?: Headers,
-) => {
-  if (errorStatus === 404 || headers?.get(HEADER_SELF_ERROR_404))
-    return new Response(JSON.stringify(selfError404));
+): Response => {
+  if (errorStatus === 404) return new Response(JSON.stringify(selfError404));
 
-  if (errorStatus === 400 || headers?.get(HEADER_SELF_ERROR_400))
-    return new Response(JSON.stringify(selfError400));
+  if (errorStatus === 400) return new Response(JSON.stringify(selfError400));
 
   return new Response(JSON.stringify(successSelf));
+};
+
+export const selfHandler = (
+  port: string,
+  errorStatus: 400 | 404 | null = null,
+) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+    return selfResolver(errorStatus);
+  });
+};
+
+export const selfUpdateHandler = (port: string) => {
+  return http.put(
+    `http://localhost:${port}/${API_PREFIX}/${PATH_UPDATE_USER}`,
+    () => {
+      return selfResolver();
+    },
+  );
+};
+
+export const selfDeleteHandler = (port: string) => {
+  return http.delete(
+    `http://localhost:${port}/${API_PREFIX}/${PATH_DELETE_USER}`,
+    () => {
+      return selfResolver();
+    },
+  );
+};
+
+export const selfChangeAuthDataHandler = (port: string) => {
+  return http.put(
+    `http://localhost:${port}/${API_PREFIX}/${PATH_CHANGE_AUTH_DATA}`,
+    () => {
+      return selfResolver();
+    },
+  );
+};
+
+export const selfActivationStatusHandler = (port: string) => {
+  return http.get(
+    `http://localhost:${port}/${API_PREFIX}/${PATH_ACTIVATION_STATUS}`,
+    () => {
+      return selfResolver();
+    },
+  );
+};
+
+export const selfGetByEmailHandler = (port: string) => {
+  return http.get(
+    `http://localhost:${port}/${API_PREFIX}/${PATH_USER_BY_EMAIL}`,
+    () => {
+      return selfResolver();
+    },
+  );
+};
+
+export const selfAddGuestHandler = (port: string) => {
+  return http.post(
+    `http://localhost:${port}/${API_PREFIX}/${PATH_ADD_GUEST}`,
+    () => {
+      return selfResolver();
+    },
+  );
 };

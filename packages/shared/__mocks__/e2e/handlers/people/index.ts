@@ -24,12 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import {
+  selfHandler,
+  selfUpdateHandler,
+  selfDeleteHandler,
+  selfChangeAuthDataHandler,
+  selfActivationStatusHandler,
+  selfGetByEmailHandler,
+  selfAddGuestHandler,
+} from "./self";
+import { thirdPartyProvidersHandler } from "./thirdPartyProviders";
+
 export {
-  thirdPartyProvider as thirdPartyProviderHandler,
+  PATH as THIRD_PARTY_PROVIDERS_PATH,
+  thirdPartyProvidersResolver,
   successThirdpartyProviders,
 } from "./thirdPartyProviders";
-
-export { self as selfHandler, successSelf } from "./self";
 
 export {
   PATH as SELF_PATH,
@@ -39,4 +49,17 @@ export {
   PATH_DELETE_USER as SELF_PATH_DELETE_USER,
   PATH_USER_BY_EMAIL as SELF_PATH_USER_BY_EMAIL,
   PATH_ADD_GUEST,
+  selfResolver,
+  successSelf,
 } from "./self";
+
+export const peopleHandlers = (port: string) => [
+  selfHandler(port),
+  selfUpdateHandler(port),
+  selfDeleteHandler(port),
+  selfChangeAuthDataHandler(port),
+  selfActivationStatusHandler(port),
+  selfGetByEmailHandler(port),
+  selfAddGuestHandler(port),
+  thirdPartyProvidersHandler(port),
+];

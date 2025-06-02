@@ -24,11 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+import { http } from "msw";
+import { API_PREFIX } from "../../utils";
 
 export const PATH = "settings/license";
-
-const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 
 export const licenseSuccess = {
   response:
@@ -36,7 +35,7 @@ export const licenseSuccess = {
   count: 1,
   links: [
     {
-      href: url,
+      href: `/${API_PREFIX}/${PATH}`,
       action: "GET",
     },
   ],
@@ -44,6 +43,12 @@ export const licenseSuccess = {
   statusCode: 200,
 };
 
-export const license = (): Response => {
+export const licenseResolver = (): Response => {
   return new Response(JSON.stringify(licenseSuccess));
+};
+
+export const licenseHandler = (port: string) => {
+  return http.post(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+    return licenseResolver();
+  });
 };

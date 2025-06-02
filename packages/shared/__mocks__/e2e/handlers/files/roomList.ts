@@ -24,10 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { http } from "msw";
 import { TGetRooms, TRoom } from "../../../../api/rooms/types";
-import { HEADER_FILTERED_ROOMS_LIST, HEADER_ROOMS_LIST } from "../../utils";
+import { API_PREFIX } from "../../utils";
 
-export const PATH_ROOMS_LIST = "files/rooms?*";
+export const PATH_ROOMS_LIST = "files/rooms*";
+
+export type TRoomList = "isFiltered" | "isDefault";
 
 const current = {
   parentId: 0,
@@ -1995,14 +1998,23 @@ const getEmptyRoomList = (): TGetRooms => {
   };
 };
 
-export const roomListHandler = (headers?: Headers): Response => {
-  if (headers?.get(HEADER_FILTERED_ROOMS_LIST)) {
+export const roomListResolver = (rooListType?: TRoomList) => {
+  if (rooListType === "isFiltered") {
     return new Response(JSON.stringify({ response: getRoomList(true) }));
   }
 
-  if (headers?.get(HEADER_ROOMS_LIST)) {
+  if (rooListType === "isDefault") {
     return new Response(JSON.stringify({ response: getRoomList() }));
   }
 
   return new Response(JSON.stringify({ response: getEmptyRoomList() }));
+};
+
+export const roomListHandler = (port: string, rooListType?: TRoomList) => {
+  return http.get(
+    `http://localhost:${port}/${API_PREFIX}/${PATH_ROOMS_LIST}`,
+    () => {
+      return roomListResolver(rooListType);
+    },
+  );
 };

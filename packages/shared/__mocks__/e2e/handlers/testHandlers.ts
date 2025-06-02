@@ -24,64 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { http } from "msw";
-import { API_PREFIX } from "../../utils";
+import { http, HttpResponse } from "msw";
+import { API_PREFIX } from "../utils";
+import { 
+  tfaAppSuccess, 
+  settingsNoAuth, 
+  successSelf, 
+  getSuccessColorTheme, 
+  getConfirmSuccess 
+} from "../";
 
-export const PATH = "settings/cultures";
-
-export const portalCulturesSuccess = {
-  response: [
-    "az",
-    "cs",
-    "de",
-    "en-GB",
-    "en-US",
-    "es",
-    "fr",
-    "it",
-    "lv",
-    "nl",
-    "pl",
-    "pt-BR",
-    "pt",
-    "ro",
-    "sk",
-    "sl",
-    "fi",
-    "vi",
-    "tr",
-    "el-GR",
-    "bg",
-    "ru",
-    "sr-Cyrl-RS",
-    "sr-Latn-RS",
-    "uk-UA",
-    "hy-AM",
-    "ar-SA",
-    "si",
-    "lo-LA",
-    "zh-CN",
-    "ja-JP",
-    "ko-KR",
-  ],
-  count: 32,
-  links: [
-    {
-      href: `/${API_PREFIX}/${PATH}`,
-      action: "GET",
+/**
+ * Creates handlers for TFA activation tests with dynamic port
+ * @param port - Server port to use in URLs
+ * @returns Array of MSW handlers
+ */
+export const getTfaTestHandlers = (port: string) => [
+  http.get(
+    `http://localhost:${port}/${API_PREFIX}/settings/tfaapp/setup`,
+    () => {
+      return HttpResponse.json(tfaAppSuccess);
     },
-  ],
-  status: 0,
-  statusCode: 200,
-  ok: true,
-};
-
-export const portalCulturesResolver = (): Response => {
-  return new Response(JSON.stringify(portalCulturesSuccess));
-};
-
-export const portalCulturesHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
-    return portalCulturesResolver();
-  });
-};
+  ),
+  http.get(
+    `http://localhost:${port}/${API_PREFIX}/settings?withPassword=true`,
+    () => {
+      return HttpResponse.json(settingsNoAuth);
+    },
+  ),
+  http.get(`http://localhost:${port}/${API_PREFIX}/people/:id`, () => {
+    return HttpResponse.json(successSelf);
+  }),
+  http.get(`http://localhost:${port}/${API_PREFIX}/settings/colortheme`, () => {
+    return HttpResponse.json(getSuccessColorTheme());
+  }),
+  http.post(
+    `http://localhost:${port}/${API_PREFIX}/authentication/confirm`,
+    () => {
+      return HttpResponse.json(getConfirmSuccess());
+    },
+  ),
+];

@@ -23,11 +23,10 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { API_PREFIX, BASE_URL } from "../../utils";
+import { http } from "msw";
+import { API_PREFIX } from "../../utils";
 
-const PATH = "settings/ssov2";
-
-const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
+export const PATH = "settings/ssov2";
 
 export const emptySSO = {
   response: {
@@ -36,7 +35,7 @@ export const emptySSO = {
   count: 1,
   links: [
     {
-      href: url,
+      href: `/${API_PREFIX}/${PATH}`,
       action: "GET",
     },
   ],
@@ -44,6 +43,12 @@ export const emptySSO = {
   statusCode: 200,
 };
 
-export const sso = () => {
+export const ssoResolver = () => {
   return new Response(JSON.stringify(emptySSO));
+};
+
+export const ssoHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+    return ssoResolver();
+  });
 };

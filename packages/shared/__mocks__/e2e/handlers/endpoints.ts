@@ -25,13 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
-  loginHandler,
   LOGIN_PATH,
   LOGIN_PATH_WITH_PARAMS,
   CONFIRM_PATH,
-  confirmHandler,
+  loginResolver,
+  confirmResolver,
 } from "./authentication";
-import { OAUTH_SIGN_IN_PATH, oauthSignInHelper } from "./oauth/signIn";
+import { OAUTH_SIGN_IN_PATH, oauthSignInResolver } from "./oauth/signIn";
 import {
   SELF_PATH,
   SELF_PATH_ACTIVATION_STATUS,
@@ -40,38 +40,32 @@ import {
   SELF_PATH_UPDATE_USER,
   SELF_PATH_USER_BY_EMAIL,
   PATH_ADD_GUEST,
-  selfHandler,
+  selfResolver,
 } from "./people";
 import {
   COMPLETE_PATH,
-  completeHandler,
+  completeResolver,
   LICENCE_PATH,
-  licenseHandler,
+  licenseResolver,
   OWNER_PATH,
-  ownerHandler,
+  ownerResolver,
   TFA_APP_VALIDATE_PATH,
-  tfaAppValidateHandler,
+  tfaAppValidateResolver,
 } from "./settings";
 import {
   CONTINUE_PATH,
-  continuePortalHandler,
+  continuePortalResolver,
   DELETE_PATH,
-  deletePortalHandler,
+  deletePortalResolver,
   SUSPEND_PATH,
-  suspendHandler,
+  suspendPortalResolver,
 } from "./portal";
 import {
-  folderHandler,
+  folderResolver,
   PATH_FOLDER,
   PATH_ROOMS_LIST,
-  roomListHandler,
+  roomListResolver,
 } from "./files";
-import {
-  HEADER_EMPTY_FOLDER,
-  HEADER_FILTERED_FOLDER,
-  HEADER_FILTERED_ROOMS_LIST,
-  HEADER_ROOMS_LIST,
-} from "../utils";
 
 export type TEndpoint = {
   url: string;
@@ -87,71 +81,71 @@ const BASE_URL = "*/**/api/2.0/";
 export const endpoints: TEndpoints = {
   wizardComplete: {
     url: `${BASE_URL}${COMPLETE_PATH}`,
-    dataHandler: completeHandler,
+    dataHandler: completeResolver,
   },
   license: {
     url: `${BASE_URL}${LICENCE_PATH}`,
-    dataHandler: licenseHandler,
+    dataHandler: licenseResolver,
   },
   changeOwner: {
     url: `${BASE_URL}${OWNER_PATH}`,
-    dataHandler: ownerHandler,
+    dataHandler: ownerResolver,
   },
   createUser: {
     url: `${BASE_URL}${SELF_PATH}`,
-    dataHandler: selfHandler,
+    dataHandler: selfResolver,
   },
   updateUser: {
     url: `${BASE_URL}${SELF_PATH_UPDATE_USER}`,
-    dataHandler: selfHandler,
+    dataHandler: selfResolver,
   },
   removeUser: {
     url: `${BASE_URL}${SELF_PATH_DELETE_USER}`,
-    dataHandler: selfHandler,
+    dataHandler: selfResolver,
   },
   changePassword: {
     url: `${BASE_URL}${SELF_PATH_CHANGE_AUTH_DATA}`,
-    dataHandler: selfHandler,
+    dataHandler: selfResolver,
   },
   changeEmail: {
     url: `${BASE_URL}${SELF_PATH_CHANGE_AUTH_DATA}`,
-    dataHandler: selfHandler,
+    dataHandler: selfResolver,
   },
   changeEmailError: {
     url: `${BASE_URL}${SELF_PATH_CHANGE_AUTH_DATA}`,
-    dataHandler: selfHandler.bind(null, 400),
+    dataHandler: selfResolver.bind(null, 400),
   },
   activationStatus: {
     url: `${BASE_URL}${SELF_PATH_ACTIVATION_STATUS}`,
-    dataHandler: selfHandler,
+    dataHandler: selfResolver,
   },
   activationStatusError: {
     url: `${BASE_URL}${SELF_PATH_ACTIVATION_STATUS}`,
-    dataHandler: selfHandler.bind(null, 400),
+    dataHandler: selfResolver.bind(null, 400),
   },
   getUserByEmail: {
     url: `${BASE_URL}${SELF_PATH_USER_BY_EMAIL}`,
-    dataHandler: selfHandler,
+    dataHandler: selfResolver,
   },
   checkConfirmLink: {
     url: `${BASE_URL}${CONFIRM_PATH}`,
-    dataHandler: confirmHandler,
+    dataHandler: confirmResolver,
   },
   login: {
     url: `${BASE_URL}${LOGIN_PATH}`,
-    dataHandler: loginHandler,
+    dataHandler: loginResolver,
   },
   loginWithTfaCode: {
     url: `${BASE_URL}${LOGIN_PATH_WITH_PARAMS}`,
-    dataHandler: loginHandler,
+    dataHandler: loginResolver,
   },
   tfaAppValidate: {
     url: `${BASE_URL}${TFA_APP_VALIDATE_PATH}`,
-    dataHandler: tfaAppValidateHandler,
+    dataHandler: tfaAppValidateResolver,
   },
   tfaAppValidateError: {
     url: `${BASE_URL}${TFA_APP_VALIDATE_PATH}`,
-    dataHandler: tfaAppValidateHandler.bind(null, 400),
+    dataHandler: tfaAppValidateResolver.bind(null, 400),
   },
   logout: {
     url: `${BASE_URL}authentication/logout`,
@@ -159,52 +153,48 @@ export const endpoints: TEndpoints = {
   },
   oauthSignIn: {
     url: `*/**/${OAUTH_SIGN_IN_PATH}`,
-    dataHandler: oauthSignInHelper,
+    dataHandler: oauthSignInResolver,
   },
   suspendPortal: {
     url: `${BASE_URL}${SUSPEND_PATH}`,
-    dataHandler: suspendHandler,
+    dataHandler: suspendPortalResolver,
   },
   continuePortal: {
     url: `${BASE_URL}${CONTINUE_PATH}`,
-    dataHandler: continuePortalHandler,
+    dataHandler: continuePortalResolver,
   },
   deletePortal: {
     url: `${BASE_URL}${DELETE_PATH}`,
-    dataHandler: deletePortalHandler,
+    dataHandler: deletePortalResolver,
   },
 
   roomList: {
     url: `${BASE_URL}${PATH_ROOMS_LIST}`,
-    dataHandler: () =>
-      roomListHandler(new Headers({ [HEADER_ROOMS_LIST]: "true" })),
+    dataHandler: () => roomListResolver("isDefault"),
   },
   filteredRoomList: {
     url: `${BASE_URL}${PATH_ROOMS_LIST}`,
-    dataHandler: () =>
-      roomListHandler(new Headers({ [HEADER_FILTERED_ROOMS_LIST]: "true" })),
+    dataHandler: () => roomListResolver("isFiltered"),
   },
   emptyRoomList: {
     url: `${BASE_URL}${PATH_ROOMS_LIST}`,
-    dataHandler: roomListHandler,
+    dataHandler: roomListResolver,
   },
-
   folder: {
     url: `${BASE_URL}${PATH_FOLDER}`,
-    dataHandler: folderHandler,
+    dataHandler: folderResolver,
   },
+
   filteredFolder: {
     url: `${BASE_URL}${PATH_FOLDER}`,
-    dataHandler: () =>
-      folderHandler(new Headers({ [HEADER_FILTERED_FOLDER]: "true" })),
+    dataHandler: () => folderResolver("isFiltered"),
   },
   emptyFolder: {
     url: `${BASE_URL}${PATH_FOLDER}`,
-    dataHandler: () =>
-      folderHandler(new Headers({ [HEADER_EMPTY_FOLDER]: "true" })),
+    dataHandler: () => folderResolver("isEmpty"),
   },
   addGuest: {
     url: `${BASE_URL}${PATH_ADD_GUEST}`,
-    dataHandler: selfHandler,
+    dataHandler: selfResolver,
   },
 };

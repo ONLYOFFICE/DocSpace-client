@@ -24,11 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+import { http } from "msw";
+import { API_PREFIX } from "../../utils";
 
 export const PATH = "settings/invitationsettings";
-
-const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 
 export const invitationSettingsSuccess = {
   response: {
@@ -38,7 +37,7 @@ export const invitationSettingsSuccess = {
   count: 1,
   links: [
     {
-      href: url,
+      href: `/${API_PREFIX}/${PATH}`,
       action: "GET",
     },
   ],
@@ -46,6 +45,12 @@ export const invitationSettingsSuccess = {
   statusCode: 200,
 };
 
-export const invitationSettings = (): Response => {
+export const invitationSettingsResolver = (): Response => {
   return new Response(JSON.stringify(invitationSettingsSuccess));
+};
+
+export const invitationSettingsHandler = (port: string) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+    return invitationSettingsResolver();
+  });
 };

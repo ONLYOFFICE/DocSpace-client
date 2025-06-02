@@ -24,64 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { http } from "msw";
-import { API_PREFIX } from "../../utils";
+import {
+  capabilitiesHandler,
+  capabilitiesResolver,
+  emptySuccessCapabilities,
+  successCapabilities,
+  PATH as CAPABILITIES_PATH,
+} from "./capabilities";
 
-export const PATH = "settings/cultures";
-
-export const portalCulturesSuccess = {
-  response: [
-    "az",
-    "cs",
-    "de",
-    "en-GB",
-    "en-US",
-    "es",
-    "fr",
-    "it",
-    "lv",
-    "nl",
-    "pl",
-    "pt-BR",
-    "pt",
-    "ro",
-    "sk",
-    "sl",
-    "fi",
-    "vi",
-    "tr",
-    "el-GR",
-    "bg",
-    "ru",
-    "sr-Cyrl-RS",
-    "sr-Latn-RS",
-    "uk-UA",
-    "hy-AM",
-    "ar-SA",
-    "si",
-    "lo-LA",
-    "zh-CN",
-    "ja-JP",
-    "ko-KR",
-  ],
-  count: 32,
-  links: [
-    {
-      href: `/${API_PREFIX}/${PATH}`,
-      action: "GET",
-    },
-  ],
-  status: 0,
-  statusCode: 200,
-  ok: true,
+export {
+  capabilitiesHandler,
+  capabilitiesResolver,
+  emptySuccessCapabilities,
+  successCapabilities,
+  CAPABILITIES_PATH,
 };
 
-export const portalCulturesResolver = (): Response => {
-  return new Response(JSON.stringify(portalCulturesSuccess));
-};
-
-export const portalCulturesHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
-    return portalCulturesResolver();
-  });
-};
+export const capabilitiesHandlers = (port: string) => [
+  capabilitiesHandler(port),
+];

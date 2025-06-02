@@ -24,17 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+import { http } from "msw";
+import { API_PREFIX } from "../../utils";
 
 export const PATH = "settings/owner";
-
-const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 
 export const ownerSuccess = {
   count: 0,
   links: [
     {
-      href: url,
+      href: `/${API_PREFIX}/${PATH}`,
       action: "PUT",
     },
   ],
@@ -43,6 +42,12 @@ export const ownerSuccess = {
   ok: true,
 };
 
-export const owner = (): Response => {
+export const ownerResolver = (): Response => {
   return new Response(JSON.stringify(ownerSuccess));
+};
+
+export const ownerHandler = (port: string) => {
+  return http.put(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+    return ownerResolver();
+  });
 };

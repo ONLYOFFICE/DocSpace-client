@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { BASE_URL } from "../../utils";
+import { http } from "msw";
+import { API_PREFIX, BASE_URL } from "../../utils";
 
 export const OAUTH_SIGN_IN_PATH = "apisystem/portal/signin";
 
@@ -54,6 +55,15 @@ export const oauthSignIn = {
   ],
 };
 
-export const oauthSignInHelper = () => {
+export const oauthSignInResolver = () => {
   return new Response(JSON.stringify(oauthListSignIn));
+};
+
+export const oauthSignInHandler = (port: string) => {
+  return http.get(
+    `http://localhost:${port}/${API_PREFIX}/${OAUTH_SIGN_IN_PATH}`,
+    () => {
+      return oauthSignInResolver();
+    },
+  );
 };

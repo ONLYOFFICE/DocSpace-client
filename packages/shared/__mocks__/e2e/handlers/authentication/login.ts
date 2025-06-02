@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { http } from "msw";
 import { API_PREFIX, BASE_URL } from "../../utils";
 
 export const PATH = "authentication";
@@ -49,6 +50,12 @@ export const successLogin = {
   statusCode: 200,
 };
 
-export const login = () => {
+export const loginResolver = () => {
   return new Response(JSON.stringify(successLogin));
+};
+
+export const loginHandler = (port: string) => {
+  return http.post(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+    return loginResolver();
+  });
 };

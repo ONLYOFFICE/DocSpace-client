@@ -24,18 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+import { http } from "msw";
+import { API_PREFIX } from "../../utils";
 
 export const PATH = "settings/tfaapp/validate";
-
-const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 
 export const tfaAppValidateSuccess = {
   response: true,
   count: 1,
   links: [
     {
-      href: url,
+      href: `/${API_PREFIX}/${PATH}`,
       action: "POST",
     },
   ],
@@ -54,9 +53,20 @@ export const tfaAppNotValidateError = {
   statusCode: 400,
 };
 
-export const tfaAppValidate = (errorSatus: 400 | null = null): Response => {
-  if (errorSatus === 400)
+export const tfaAppValidateResolver = (
+  errorStatus: 400 | null = null,
+): Response => {
+  if (errorStatus === 400)
     return new Response(JSON.stringify(tfaAppNotValidateError));
 
   return new Response(JSON.stringify(tfaAppValidateSuccess));
+};
+
+export const tfaAppValidateHandler = (
+  port: string,
+  errorStatus: 400 | null = null,
+) => {
+  return http.post(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+    return tfaAppValidateResolver(errorStatus);
+  });
 };

@@ -76,7 +76,9 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
   const deleteOptions = [
     {
       key: 1,
-      label: t("Common:MoveToTrash"),
+      label: t("Common:MoveToSection", {
+        sectionName: t("Common:TrashSection"),
+      }),
       value: false,
     },
     {

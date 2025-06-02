@@ -1,6 +1,5 @@
 {
   "ChooseFromList": "Виберіть зі списку",
-  "DeleteFromTrash": "Вибрані елементи успішно видалено з кошика",
   "FileLocked": "Файл заблоковано",
   "FileProtected": "Файл захищено паролем",
   "FileUnlocked": "Файл розблоковано",
@@ -13,7 +12,6 @@
   "FolderTitleSkyDrive": "Каталог OneDrive",
   "FolderTitleWebDav": "Каталог WebDAV",
   "FolderTitleYandex": "Каталог Yandex",
-  "GuestReleaseTipDescripton": "Всі раніше додані користувачі стають гостями й тепер доступні в списку контактів лише в адміністраторів {{productName}}. Гості більше не належать до жодних груп. Ви завжди зможете за потреби змінити їхній тип і додати їх до групи.",
   "GuestReleaseTipLink": "Дізнайтеся більше про типи користувачів",
   "LinkHasExpiredAndHasBeenDisabled": "Термін дії посилання закінчився, і його було вимкнено",
   "LinkValidTime": "Це посилання дійсне лише протягом {{days_count}} дн.",

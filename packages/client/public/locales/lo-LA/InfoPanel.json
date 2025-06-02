@@ -58,7 +58,6 @@
   "MembersEmptyScreenText": "ເບິ່ງລາຍລະອຽດສະມາຊິກຢູ່ທີ່ນີ້",
   "NoRecordsFound": "ບໍ່ພົບຂໍ້ມູນໃດໆ",
   "Properties": "ຄຸນສົມບັດ",
-  "RoomArchived": "ຫ້ອງຍ້າຍໄປເກັບຮັກສາແລ້ວ",
   "RoomCreateUser": "ຜູ້ໃຊ້ເພີ່ມເຕີມ",
   "RoomCreateUserCount": "ຜູ້ໃຊ້ເພີ່ມເຕີມ ({{count}}).",
   "RoomDenyDownloadDisabled": "ດາວໂຫຼດ ແລະ ກ໊ອບີ້ແບບບໍ່ຈຳກັດ",

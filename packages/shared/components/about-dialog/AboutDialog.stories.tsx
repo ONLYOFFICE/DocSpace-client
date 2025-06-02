@@ -27,12 +27,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
 
-import { TCompanyInfo } from "../../api/settings/types";
 import { Button, ButtonSize } from "../button";
 import { createGetLogoHandler } from "../../__mocks__/storybook/handlers/logo/getLogo";
 
-import { IBuildInfo, IDialogProps } from "./About.types";
+import { IDialogProps } from "./About.types";
 import { AboutDialog } from "./index";
+import { mockBuildInfo, mockCompanyInfo } from "./mockData";
 
 interface AboutDialogStoryProps
   extends Omit<IDialogProps, "visible" | "onClose"> {
@@ -105,27 +105,11 @@ const meta: Meta<typeof AboutDialogStory> = {
 export default meta;
 type Story = StoryObj<typeof AboutDialogStory>;
 
-const mockBuildInfo: IBuildInfo = {
-  docSpace: "4.2.0",
-  communityServer: "10.5.0",
-  documentServer: "7.3.0",
-};
-
-const mockCompanyInfo: TCompanyInfo = {
-  companyName: "Company Name",
-  email: "info@example.com",
-  phone: "+1 (123) 456-7890",
-  site: "https://www.example.com",
-  address: "123 Main Street, Anytown, USA",
-  hideAbout: false,
-  isLicensor: true,
-  isDefault: false,
-};
-
 export const Default: Story = {
   args: {
     buildVersionInfo: mockBuildInfo,
     companyInfoSettingsData: mockCompanyInfo,
+    previewData: mockCompanyInfo,
     standalone: false,
     licenseAgreementsUrl: "https://www.example.com/license-agreements",
     isEnterprise: true,

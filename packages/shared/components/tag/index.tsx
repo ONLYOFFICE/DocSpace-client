@@ -57,8 +57,11 @@ const TagPure = ({
   removeTagIcon,
   roomType,
   providerType,
+  withIcon = false,
+  iconClassName,
   onMouseEnter,
   onMouseLeave,
+  advancedPopup,
 }: TagProps) => {
   const [openDropdown, setOpenDropdown] = React.useState(false);
 
@@ -107,6 +110,7 @@ const TagPure = ({
     (e: React.MouseEvent | React.ChangeEvent) => {
       if (onClick && !isDisabled && !isDeleted) {
         const target = e.target as HTMLDivElement;
+
         onClick({ roomType, label: target.dataset.tag, providerType });
       }
     },
@@ -122,100 +126,120 @@ const TagPure = ({
     [onDelete, tag, tagRef],
   );
 
-  return advancedOptions ? (
-    <>
-      <div
-        id={id}
-        className={classNames(styles.tag, "advanced-tag", className, {
-          [styles.isDisabled]: isDisabled,
-          [styles.isDeleted]: isDeleted,
-          [styles.isClickable]: !!onClick,
-          [styles.isLast]: isLast,
-        })}
-        style={{ ...style, maxWidth: tagMaxWidth }}
-        ref={tagRef}
-        onClick={openDropdownAction}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        data-testid="tag"
-      >
-        <Text className={styles.tagText} fontSize="13px" noSelect>
-          ...
-        </Text>
-      </div>
-      <DropDown
-        open={openDropdown}
-        forwardedRef={tagRef}
-        clickOutsideAction={onClickOutside}
-        manualY="4px"
-      >
-        {advancedOptions.map((t, index) => (
-          <DropDownItem
-            className="tag__dropdown-item tag"
-            key={`${t}_${index * 50}`}
-            onClick={onClickAction}
-            data-tag={t}
+  const commonClassName = classNames(styles.tag, className, {
+    [styles.isNewTag]: isNewTag,
+    [styles.isDisabled]: isDisabled,
+    [styles.isDeleted]: isDeleted,
+    [styles.isClickable]: !!onClick,
+    [styles.isLast]: isLast,
+  });
+
+  const commonStyle = { ...style, maxWidth: tagMaxWidth };
+
+  if (advancedOptions) {
+    return (
+      <>
+        <div
+          id={id}
+          className={classNames(commonClassName, "advanced-tag")}
+          style={commonStyle}
+          ref={tagRef}
+          onClick={openDropdownAction}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          data-testid="tag"
+        >
+          <Text className={styles.tagText} fontSize="13px" noSelect>
+            +{label}
+          </Text>
+        </div>
+
+        {advancedPopup ? (
+          advancedPopup(openDropdown, tagRef, onClickOutside)
+        ) : (
+          <DropDown
+            open={openDropdown}
+            forwardedRef={tagRef}
+            clickOutsideAction={onClickOutside}
+            manualY="4px"
           >
-            <Text
-              className={classNames(styles.dropdownText, {
-                [styles.removeTagIcon]: removeTagIcon,
-              })}
-              fontWeight={600}
-              fontSize="12px"
-              truncate
-            >
-              {t}
-            </Text>
-          </DropDownItem>
-        ))}
-      </DropDown>
-    </>
-  ) : (
+            {advancedOptions.map((t, index) => (
+              <DropDownItem
+                className="tag__dropdown-item tag"
+                key={`${t}_${index * 50}`}
+                onClick={onClickAction}
+                data-tag={t}
+              >
+                <Text
+                  className={classNames(styles.dropdownText, {
+                    [styles.removeTagIcon]: removeTagIcon,
+                  })}
+                  fontWeight={600}
+                  fontSize="12px"
+                  truncate
+                >
+                  {t}
+                </Text>
+              </DropDownItem>
+            ))}
+          </DropDown>
+        )}
+      </>
+    );
+  }
+
+  const renderTag = () => {
+    const onlyIcon = !withIcon;
+
+    if (icon && onlyIcon) {
+      return <ReactSVG className={styles.thirdPartyTag} src={icon} />;
+    }
+
+    return (
+      <>
+        {withIcon && icon ? (
+          <ReactSVG className={iconClassName} src={icon} />
+        ) : null}
+        <Text
+          className={classNames(styles.tagText, {
+            [styles.isDefault]: isDefault,
+          })}
+          title={label}
+          fontSize="13px"
+          noSelect
+          truncate
+        >
+          {label}
+        </Text>
+        {isNewTag && !!onDelete ? (
+          <IconButton
+            className={styles.tagIcon}
+            iconName={CrossIconReactSvgUrl}
+            size={12}
+            onClick={onDeleteAction}
+          />
+        ) : null}
+      </>
+    );
+  };
+
+  return (
     <div
+      id={id}
       title={label}
       onClick={onClickAction}
-      className={classNames(styles.tag, "tag", className, {
-        [styles.isNewTag]: isNewTag,
-        [styles.isDisabled]: isDisabled,
-        [styles.isDeleted]: isDeleted,
-        [styles.isClickable]: !!onClick,
-        [styles.isLast]: isLast,
+      className={classNames(commonClassName, "tag", {
         [styles.thirdPartyTag]: icon,
       })}
-      style={{ ...style, maxWidth: tagMaxWidth }}
       data-tag={label}
-      id={id}
       data-testid="tag"
       aria-label={label}
+      style={commonStyle}
       aria-disabled={isDisabled}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      {icon ? (
-        <ReactSVG className={styles.thirdPartyTag} src={icon} />
-      ) : (
-        <>
-          <Text
-            className={classNames(styles.tagText, {
-              [styles.isDefault]: isDefault,
-            })}
-            title={label}
-            fontSize="13px"
-            noSelect
-            truncate
-          >
-            {label}
-          </Text>
-          {isNewTag && !!onDelete ? (
-            <IconButton
-              className={styles.tagIcon}
-              iconName={CrossIconReactSvgUrl}
-              size={12}
-              onClick={onDeleteAction}
-            />
-          ) : null}
-        </>
-      )}
+      {renderTag()}
     </div>
   );
 };

@@ -61,6 +61,14 @@ export type TagProps = {
   roomType?: number;
   /** Indicates the type of provider associated with the tag */
   providerType?: number;
+  withIcon?: boolean;
+  iconClassName?: string;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
+
+  advancedPopup?: (
+    isOpen: boolean,
+    reference: React.RefObject<HTMLElement | null>,
+    onClose: (event: MouseEvent) => void,
+  ) => React.ReactNode;
 };

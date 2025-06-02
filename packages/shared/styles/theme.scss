@@ -2354,3 +2354,11 @@
   --search-input-default-icon-fill: #{$gray-dark-strong};
   --search-input-filled-icon-fill: #{$gray-dark};
 }
+
+.light {
+  --settings-backup-separator-border: 1px solid #{$gray-light-mid};
+}
+
+.dark {
+  --settings-backup-separator-border: 1px solid #{$gray-dark-strong};
+}

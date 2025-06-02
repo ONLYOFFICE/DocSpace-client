@@ -28,13 +28,14 @@
 
 "use client";
 
+import { Reducer, useReducer } from "react";
+import { useTranslation } from "react-i18next";
+import classNames from "classnames";
+
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
-
-import { Reducer, useReducer } from "react";
-import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
@@ -53,15 +54,12 @@ import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 import type { ConnectedThirdPartyAccountType } from "@docspace/shared/types";
 
-import {
-  StyledBackup,
-  StyledComboBoxItem,
-} from "./DirectThirdPartyConnection.styled";
 import { initialState } from "./DirectThirdPartyConnection.constants";
 import {
   DirectThirdPartyConnectionProps,
   DirectThirdPartyConnectionState,
 } from "./DirectThirdPartyConnection.types";
+import styles from "./DirectThirdPartyConnection.module.scss";
 
 const reducer: Reducer<
   DirectThirdPartyConnectionState,
@@ -259,9 +257,11 @@ const DirectThirdPartyConnection = ({
     <div style={{ display: "contents" }}>
       {accounts?.map((item) => {
         return (
-          <StyledComboBoxItem
-            isDisabled={item.disabled}
+          <div
             key={`${item.key}_${item.name}`}
+            className={classNames(styles.comboboxItem, {
+              [styles.isDisabled]: item.disabled,
+            })}
           >
             <DropDownItem
               onClick={() => onSelectAccount(item.name)}
@@ -269,13 +269,22 @@ const DirectThirdPartyConnection = ({
               data-third-party-key={item.key}
               disabled={item.disabled}
             >
-              <Text className="drop-down-item_text" fontWeight={600}>
+              <Text
+                className={classNames(
+                  styles.dropDownItemText,
+                  "drop-down-item_text",
+                )}
+                fontWeight={600}
+              >
                 {item.title}
               </Text>
 
               {!item.disabled && !item.connected ? (
                 <IconButton
-                  className="drop-down-item_icon"
+                  className={classNames(
+                    styles.dropDownItemIcon,
+                    "drop-down-item_icon",
+                  )}
                   size={16}
                   onClick={() => onSelectAccount(item.name)}
                   iconName={ExternalLinkReactSvgUrl}
@@ -283,7 +292,7 @@ const DirectThirdPartyConnection = ({
                 />
               ) : null}
             </DropDownItem>
-          </StyledComboBoxItem>
+          </div>
         );
       })}
     </div>
@@ -293,11 +302,13 @@ const DirectThirdPartyConnection = ({
     Boolean(connectedThirdPartyAccount) && isTheSameThirdPartyAccount;
 
   return (
-    <StyledBackup
-      isConnectedAccount={isConnectedAccount}
-      isMobileScale={isMobileScale}
+    <div
+      className={classNames(styles.directThirdPartyConnection, {
+        [styles.isConnectedAccount]: isConnectedAccount,
+        [styles.isMobileScale]: isMobileScale,
+      })}
     >
-      <div className="backup_connection">
+      <div className={classNames(styles.backupConnection, "backup_connection")}>
         <ComboBox
           scaled
           options={[]}
@@ -327,7 +338,10 @@ const DirectThirdPartyConnection = ({
         isTheSameThirdPartyAccount ? (
           <ContextMenuButton
             zIndex={402}
-            className="backup_third-party-context"
+            className={classNames(
+              styles.backupThirdPartyContext,
+              "backup_third-party-context",
+            )}
             iconName={VerticalDotsReactSvgUrl}
             size={15}
             getData={getContextOptions}
@@ -388,7 +402,7 @@ const DirectThirdPartyConnection = ({
           removeItem={removeItem}
         />
       ) : null}
-    </StyledBackup>
+    </div>
   );
 };
 

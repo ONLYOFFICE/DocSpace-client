@@ -63,6 +63,11 @@ import {
   DirectThirdPartyConnectionState,
 } from "./DirectThirdPartyConnection.types";
 
+const reducer: Reducer<
+  DirectThirdPartyConnectionState,
+  Partial<DirectThirdPartyConnectionState>
+> = (prevState, newState) => ({ ...prevState, ...newState });
+
 const DirectThirdPartyConnection = ({
   openConnectWindow,
   onSelectFolder,
@@ -106,12 +111,7 @@ const DirectThirdPartyConnection = ({
   toDefault,
   checkCreating = false,
 }: DirectThirdPartyConnectionProps) => {
-  const [state, setState] = useReducer<
-    Reducer<
-      DirectThirdPartyConnectionState,
-      Partial<DirectThirdPartyConnectionState>
-    >
-  >((prevState, newState) => ({ ...prevState, ...newState }), initialState);
+  const [state, setState] = useReducer(reducer, initialState);
 
   const { t } = useTranslation(["Common"]);
 
@@ -255,35 +255,39 @@ const DirectThirdPartyConnection = ({
   const folderList: Partial<ConnectedThirdPartyAccountType> =
     connectedThirdPartyAccount ?? {};
 
-  const advancedOptions = accounts?.map((item) => {
-    return (
-      <StyledComboBoxItem
-        isDisabled={item.disabled}
-        key={`${item.key}_${item.name}`}
-      >
-        <DropDownItem
-          onClick={() => onSelectAccount(item.name)}
-          className={item.className}
-          data-third-party-key={item.key}
-          disabled={item.disabled}
-        >
-          <Text className="drop-down-item_text" fontWeight={600}>
-            {item.title}
-          </Text>
-
-          {!item.disabled && !item.connected ? (
-            <IconButton
-              className="drop-down-item_icon"
-              size={16}
+  const advancedOptions = (
+    <div style={{ display: "contents" }}>
+      {accounts?.map((item) => {
+        return (
+          <StyledComboBoxItem
+            isDisabled={item.disabled}
+            key={`${item.key}_${item.name}`}
+          >
+            <DropDownItem
               onClick={() => onSelectAccount(item.name)}
-              iconName={ExternalLinkReactSvgUrl}
-              isFill
-            />
-          ) : null}
-        </DropDownItem>
-      </StyledComboBoxItem>
-    );
-  });
+              className={item.className}
+              data-third-party-key={item.key}
+              disabled={item.disabled}
+            >
+              <Text className="drop-down-item_text" fontWeight={600}>
+                {item.title}
+              </Text>
+
+              {!item.disabled && !item.connected ? (
+                <IconButton
+                  className="drop-down-item_icon"
+                  size={16}
+                  onClick={() => onSelectAccount(item.name)}
+                  iconName={ExternalLinkReactSvgUrl}
+                  isFill
+                />
+              ) : null}
+            </DropDownItem>
+          </StyledComboBoxItem>
+        );
+      })}
+    </div>
+  );
 
   const isConnectedAccount =
     Boolean(connectedThirdPartyAccount) && isTheSameThirdPartyAccount;

@@ -32,6 +32,7 @@ import { createServer, Server } from "http";
 import { parse } from "url";
 import { AddressInfo } from "net";
 import { setupServer, SetupServerApi } from "msw/node";
+import { allHandlers } from "@docspace/shared/__mocks__/e2e/handlers";
 // Mock prerender bypass value instead of importing JSON file
 const MOCK_PRERENDER_BYPASS_VALUE = "test-prerender-id";
 
@@ -68,7 +69,10 @@ export const test = base.extend<{
   },
   port: [
     async ({}, use) => {
-      const app = next({ dev: false, dir: path.resolve(__dirname, "../..") });
+      const app = next({
+        dev: false,
+        dir: path.resolve(__dirname, "../.."),
+      });
       await app.prepare();
 
       const handle = app.getRequestHandler();
@@ -94,7 +98,7 @@ export const test = base.extend<{
     },
   ],
   requestInterceptor: [
-    async ({}, use) => {
+    async ({ port }, use) => {
       await use(
         (() => {
           const requestInterceptor = setupServer();
@@ -103,12 +107,15 @@ export const test = base.extend<{
             onUnhandledRequest: "error",
           });
 
+          requestInterceptor.use(...allHandlers(port));
+
           return requestInterceptor;
         })(),
       );
     },
     {
       scope: "worker",
+      auto: true,
     },
   ],
 });

@@ -359,6 +359,7 @@ const DirectThirdPartyConnection = ({
           onClick={onConnect}
           size={buttonSize}
           isDisabled={isDisabledComponent}
+          testId="connect-button"
         />
       ) : (
         folderList.id &&

@@ -26,18 +26,19 @@
 
 import type { Meta, StoryObj } from "@storybook/react";
 import { ButtonSize } from "@docspace/shared/components/button";
-import type {
-  ThirdPartyAccountType,
-  ConnectedThirdPartyAccountType,
-} from "@docspace/shared/types";
-import type { TThirdParties } from "@docspace/shared/api/files/types";
-import type { FilesSelectorSettings } from "@docspace/shared/components/files-selector-input/FilesSelectorInput.types";
 
 import DirectThirdPartyConnection from "./DirectThirdPartyConnection";
 import {
   createGetFolderHandler,
   createGetFolderInfoHandler,
 } from "../../__mocks__/storybook/handlers/files/folders";
+
+import {
+  mockAccounts,
+  mockConnectedAccount,
+  mockProviders,
+  mockFilesSelectorSettings,
+} from "./mockData";
 
 const meta: Meta<typeof DirectThirdPartyConnection> = {
   title: "Components/DirectThirdPartyConnection",
@@ -61,203 +62,9 @@ const meta: Meta<typeof DirectThirdPartyConnection> = {
 export default meta;
 type Story = StoryObj<typeof DirectThirdPartyConnection>;
 
-const mockAccounts: ThirdPartyAccountType[] = [
-  {
-    name: "ownCloud",
-    label: "ownCloud",
-    title: "ownCloud",
-    provider_key: "ownCloud",
-    key: "WebDav",
-    storageIsConnected: false,
-    connected: true,
-    disabled: false,
-  },
-  {
-    name: "Nextcloud",
-    label: "Nextcloud",
-    title: "Nextcloud",
-    provider_key: "Nextcloud",
-    key: "WebDav",
-    storageIsConnected: false,
-    connected: true,
-    disabled: false,
-  },
-  {
-    name: "WebDav",
-    label: "WebDAV",
-    title: "WebDAV",
-    provider_key: "WebDav",
-    key: "WebDav",
-    storageIsConnected: false,
-    connected: true,
-    disabled: false,
-  },
-  {
-    name: "kDrive",
-    label: "kDrive",
-    title: "kDrive",
-    provider_key: "kDrive",
-    key: "WebDav",
-    storageIsConnected: false,
-    connected: true,
-    disabled: false,
-  },
-  {
-    name: "Box",
-    label: "Box (activation required)",
-    title: "Box (activation required)",
-    provider_key: "Box",
-    key: "Box",
-    storageIsConnected: false,
-    connected: false,
-    disabled: false,
-  },
-  {
-    name: "Dropbox",
-    label: "Dropbox (activation required)",
-    title: "Dropbox (activation required)",
-    provider_key: "DropboxV2",
-    key: "DropboxV2",
-    storageIsConnected: false,
-    connected: false,
-    disabled: false,
-  },
-  {
-    name: "GoogleDrive",
-    label: "Google Drive (activation required)",
-    title: "Google Drive (activation required)",
-    provider_key: "GoogleDrive",
-    key: "GoogleDrive",
-    storageIsConnected: false,
-    connected: false,
-    disabled: false,
-  },
-  {
-    name: "OneDrive",
-    label: "OneDrive (activation required)",
-    title: "OneDrive (activation required)",
-    provider_key: "OneDrive",
-    key: "OneDrive",
-    storageIsConnected: false,
-    connected: false,
-    disabled: false,
-  },
-];
-
-const mockConnectedAccount: ConnectedThirdPartyAccountType = {
-  id: "dropbox-123",
-  title: "Dropbox",
-  providerId: "dropbox",
-  providerKey: "dropbox",
-};
-
-const mockProviders: TThirdParties = [
-  {
-    corporate: false,
-    roomsStorage: false,
-    customerTitle: "Google Drive",
-    providerId: "google",
-    providerKey: "google",
-    provider_id: "google",
-    customer_title: "Google Drive",
-  },
-  {
-    corporate: false,
-    roomsStorage: false,
-    customerTitle: "Dropbox",
-    providerId: "dropbox",
-    providerKey: "dropbox",
-    provider_id: "dropbox",
-    customer_title: "Dropbox",
-  },
-  {
-    corporate: false,
-    roomsStorage: false,
-    customerTitle: "OneDrive",
-    providerId: "onedrive",
-    providerKey: "onedrive",
-    provider_id: "onedrive",
-    customer_title: "OneDrive",
-  },
-];
-
-const mockFilesSelectorSettings: FilesSelectorSettings = {
-  filesSettings: {
-    automaticallyCleanUp: {
-      gap: 30,
-      isAutoCleanUp: false,
-    },
-    canSearchByContent: true,
-    chunkUploadSize: 1024,
-    maxUploadThreadCount: 2,
-    confirmDelete: true,
-    convertNotify: true,
-    defaultOrder: { is_asc: true, property: 0 },
-    defaultSharingAccessRights: [0, 1],
-    downloadTarGz: true,
-    enableThirdParty: true,
-    externalShare: true,
-    externalShareSocialMedia: true,
-    extsArchive: [".zip", ".rar"],
-    extsAudio: [".mp3", ".wav"],
-    extsCoAuthoring: [".docx", ".xlsx"],
-    extsConvertible: { docx: [".doc", ".docx"] },
-    extsDocument: [".doc", ".docx", ".pdf"],
-    extsImage: [".jpg", ".png"],
-    extsImagePreviewed: [".jpg", ".png"],
-    extsMediaPreviewed: [".mp4", ".avi"],
-    extsMustConvert: [".doc"],
-    extsPresentation: [".ppt", ".pptx"],
-    extsSpreadsheet: [".xls", ".xlsx"],
-    extsUploadable: [
-      ".doc",
-      ".docx",
-      ".xls",
-      ".xlsx",
-      ".ppt",
-      ".pptx",
-      ".pdf",
-      ".txt",
-      ".jpg",
-      ".png",
-    ],
-    extsVideo: [".mp4", ".avi"],
-    extsWebCommented: [".docx", ".xlsx"],
-    extsWebCustomFilterEditing: [".xlsx"],
-    extsWebEdited: [".docx", ".xlsx", ".pptx"],
-    extsWebEncrypt: [".docx", ".xlsx"],
-    extsWebPreviewed: [".docx", ".xlsx", ".pptx", ".pdf"],
-    extsWebRestrictedEditing: [".docx"],
-    extsWebReviewed: [".docx"],
-    extsWebTemplate: [".docx", ".xlsx"],
-    favoritesSection: true,
-    fileDownloadUrlString: "download",
-    fileRedirectPreviewUrlString: "preview",
-    fileThumbnailUrlString: "thumbnail",
-    fileWebEditorExternalUrlString: "edit",
-    fileWebEditorUrlString: "edit",
-    fileWebViewerExternalUrlString: "view",
-    fileWebViewerUrlString: "view",
-    forcesave: true,
-    hideConfirmConvertOpen: false,
-    hideConfirmConvertSave: false,
-    internalFormats: {
-      Document: "docx",
-      Presentation: "pptx",
-      Spreadsheet: "xlsx",
-      Pdf: "pdf",
-    },
-    keepNewFileName: true,
-    masterFormExtension: ".docxf",
-    paramOutType: "out",
-    paramVersion: "version",
-    recentSection: true,
-    storeForcesave: true,
-    storeOriginalFiles: true,
-    templatesSection: true,
-    openEditorInSameTab: true,
-    displayFileExtension: true,
-  },
+const accountWithProviderLink = {
+  ...mockAccounts[0],
+  provider_link: "https://example.com/oauth",
 };
 
 const baseArgs = {
@@ -290,9 +97,9 @@ const baseArgs = {
 export const Default: Story = {
   args: {
     ...baseArgs,
-    connectedThirdPartyAccount: null,
-    selectedThirdPartyAccount: mockAccounts[0],
     isTheSameThirdPartyAccount: false,
+    selectedThirdPartyAccount: accountWithProviderLink,
+    connectedThirdPartyAccount: null,
   },
 };
 

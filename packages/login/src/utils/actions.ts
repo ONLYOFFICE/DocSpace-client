@@ -55,28 +55,6 @@ import {
 } from "@/types";
 import { TScope } from "@docspace/shared/utils/oauth/types";
 import { transformToClientProps } from "@docspace/shared/utils/oauth";
-import {
-  licenseRequiredHandler,
-  settingsHandler,
-  colorThemeHandler,
-  portalCulturesHandler,
-  portalPasswordSettingHandler,
-  machineNameHandler,
-  portalTimeZoneHandler,
-  capabilitiesHandler,
-  ssoHandler,
-  selfHandler,
-  thirdPartyProviderHandler,
-  getClientHandler,
-  confirmHandler,
-  tfaAppHandler,
-  scopesHandler,
-  companyInfoHandler,
-  oauthSignInHelper,
-  invitationSettingsHandler,
-} from "@docspace/shared/__mocks__/e2e";
-
-const IS_TEST = process.env.E2E_TEST;
 
 export const checkIsAuthenticated = async () => {
   const [request] = await createRequest(["/authentication"], [["", ""]], "GET");
@@ -148,9 +126,7 @@ export async function getThirdPartyProviders(inviteView: boolean = false) {
     "GET",
   );
 
-  const res = IS_TEST
-    ? thirdPartyProviderHandler(await headers())
-    : await fetch(getThirdParty);
+  const res = await fetch(getThirdParty);
 
   if (!res.ok) return;
 
@@ -166,9 +142,7 @@ export async function getCapabilities() {
     "GET",
   );
 
-  const res = IS_TEST
-    ? capabilitiesHandler(await headers())
-    : await fetch(getCapabilities);
+  const res = await fetch(getCapabilities);
 
   if (!res.ok) return;
 
@@ -180,7 +154,7 @@ export async function getCapabilities() {
 export async function getSSO() {
   const [getSSO] = await createRequest([`/settings/ssov2`], [["", ""]], "GET");
 
-  const res = IS_TEST ? ssoHandler() : await fetch(getSSO);
+  const res = await fetch(getSSO);
 
   if (!res.ok) return;
 
@@ -196,7 +170,7 @@ export async function getUser() {
   const [getUser] = await createRequest([`/people/@self`], [["", ""]], "GET");
 
   if (!cookie?.includes("asc_auth_key")) return undefined;
-  const userRes = IS_TEST ? selfHandler() : await fetch(getUser);
+  const userRes = await fetch(getUser);
 
   if (userRes.status === 401) return undefined;
 
@@ -218,7 +192,7 @@ export async function getUserByName() {
   );
 
   if (!cookie?.includes("asc_auth_key")) return undefined;
-  const userRes = IS_TEST ? selfHandler() : await fetch(getUser);
+  const userRes = await fetch(getUser);
 
   if (userRes.status === 401) return undefined;
 
@@ -239,9 +213,7 @@ export async function getUserByEmail(
     "GET",
   );
 
-  const res = IS_TEST
-    ? selfHandler(null, await headers())
-    : await fetch(getUserByEmai);
+  const res = await fetch(getUserByEmai);
 
   if (!res.ok) return;
 
@@ -261,7 +233,7 @@ export async function getScopeList(token?: string, userId?: string) {
 
   const [getScopeList] = await createRequest([`/scopes`], headers, "GET");
 
-  const scopeList = IS_TEST ? scopesHandler() : await fetch(getScopeList);
+  const scopeList = await fetch(getScopeList);
 
   if (!scopeList.ok) return;
 
@@ -276,9 +248,9 @@ export async function getOAuthClient(clientId: string) {
 
     const request = await createRequest([route], [["", ""]], "GET");
 
-    const oauthClient = IS_TEST ? getClientHandler() : await fetch(request[0]);
+    const oauthClient = await fetch(request[0]);
 
-    if (!oauthClient) return;
+    if (!oauthClient.ok) return;
 
     const client = await oauthClient.json();
 
@@ -295,9 +267,7 @@ export async function getPortalCultures() {
     "GET",
   );
 
-  const res = IS_TEST
-    ? portalCulturesHandler()
-    : await fetch(getPortalCultures);
+  const res = await fetch(getPortalCultures);
 
   if (!res.ok) return;
 
@@ -309,9 +279,9 @@ export async function getPortalCultures() {
 export async function getConfig() {
   const baseUrl = getBaseUrl();
 
-  const config = IS_TEST
-    ? new Response(JSON.stringify({}))
-    : await (await fetch(`${baseUrl}/static/scripts/config.json`)).json();
+  const config = await (
+    await fetch(`${baseUrl}/static/scripts/config.json`)
+  ).json();
 
   return config;
 }
@@ -323,9 +293,7 @@ export async function getCompanyInfoSettings() {
     "GET",
   );
 
-  const res = IS_TEST
-    ? companyInfoHandler()
-    : await fetch(getCompanyInfoSettings);
+  const res = await fetch(getCompanyInfoSettings);
 
   if (!res.ok) return;
 
@@ -342,9 +310,7 @@ export async function getPortalPasswordSettings(
     [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
     "GET",
   );
-  const res = IS_TEST
-    ? portalPasswordSettingHandler()
-    : await fetch(getPortalPasswordSettings);
+  const res = await fetch(getPortalPasswordSettings);
 
   if (!res.ok) return;
 
@@ -383,7 +349,7 @@ export async function getMachineName(confirmKey: string | null = null) {
     "GET",
   );
 
-  const res = IS_TEST ? machineNameHandler() : await fetch(getMachineName);
+  const res = await fetch(getMachineName);
 
   if (!res.ok) throw new Error(res.statusText);
 
@@ -399,9 +365,7 @@ export async function getIsLicenseRequired() {
     "GET",
   );
 
-  const res = IS_TEST
-    ? licenseRequiredHandler(await headers())
-    : await fetch(getIsLicenseRequired);
+  const res = await fetch(getIsLicenseRequired);
 
   if (!res.ok) throw new Error(res.statusText);
 
@@ -417,9 +381,7 @@ export async function getPortalTimeZones(confirmKey: string | null = null) {
     "GET",
   );
 
-  const res = IS_TEST
-    ? portalTimeZoneHandler()
-    : await fetch(getPortalTimeZones);
+  const res = await fetch(getPortalTimeZones);
 
   if (!res.ok) throw new Error(res.statusText);
 
@@ -431,7 +393,7 @@ export async function getPortalTimeZones(confirmKey: string | null = null) {
 export async function getPortal() {
   const [getPortal] = await createRequest([`/portal`], [["", ""]], "GET");
 
-  const res = IS_TEST ? portalTimeZoneHandler() : await fetch(getPortal);
+  const res = await fetch(getPortal);
 
   if (!res.ok) throw new Error(res.statusText);
 
@@ -488,7 +450,7 @@ export async function getAvailablePortals(data: {
     true,
   );
 
-  const portalsRes = IS_TEST ? oauthSignInHelper() : await fetch(request[0]);
+  const portalsRes = await fetch(request[0]);
 
   const portals = await portalsRes.json();
 
@@ -504,9 +466,7 @@ export async function getOauthJWTToken() {
     "GET",
   );
 
-  const res = IS_TEST
-    ? new Response(JSON.stringify({ response: "123456" }))
-    : await fetch(getJWTToken);
+  const res = await fetch(getJWTToken);
 
   if (!res.ok) throw new Error(res.statusText);
 
@@ -522,9 +482,7 @@ export async function getInvitationSettings() {
     "GET",
   );
 
-  const res = IS_TEST
-    ? invitationSettingsHandler()
-    : await fetch(getInvitationSettings);
+  const res = await fetch(getInvitationSettings);
 
   if (!res.ok) return;
 

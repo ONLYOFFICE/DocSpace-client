@@ -77,6 +77,7 @@ const ContextMenuButtonPure = ({
   zIndex,
   usePortal = true,
   iconName,
+  fixedDirection = false,
 }: ContextMenuButtonProps) => {
   const ref = React.useRef<HTMLDivElement | null>(null);
   const throttledResize = React.useRef<null | DebouncedFunc<() => void>>(null);
@@ -230,6 +231,7 @@ const ContextMenuButtonPure = ({
       {state.displayType === ContextMenuButtonDisplayType.dropdown ? (
         <DropDown
           className={dropDownClassName}
+          fixedDirection={fixedDirection}
           directionX={directionX}
           directionY={directionY}
           open={state.isOpen}

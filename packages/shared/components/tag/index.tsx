@@ -63,6 +63,7 @@ const TagPure = ({
   directionY,
   fixedDirection,
   manualY,
+  manualX,
 }: TagProps) => {
   const [openDropdown, setOpenDropdown] = React.useState(false);
 
@@ -153,6 +154,7 @@ const TagPure = ({
         clickOutsideAction={onClickOutside}
         isDefaultMode={isDefaultMode}
         manualY={manualY}
+        manualX={manualX}
         directionY={directionY}
         fixedDirection={fixedDirection}
       >

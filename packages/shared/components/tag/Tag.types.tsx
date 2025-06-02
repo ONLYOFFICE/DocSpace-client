@@ -75,4 +75,6 @@ export type TagProps = {
   fixedDirection?: boolean;
   /** Required for specifying the exact distance from the parent component */
   manualY?: string;
+  /** Required for specifying the exact distance from the parent component */
+  manualX?: string;
 };

@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
+import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 
@@ -38,7 +38,7 @@ import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_alt_dark.sv
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import { TPeopleListItem } from "SRC_DIR/helpers/contacts";
 
-import { StyledSeveralItemsContainer } from "../../styles/SeveralItems";
+import styles from "./SeveralItems.module.scss";
 
 type SeveralItemsProps = {
   isGroups: boolean;
@@ -73,19 +73,13 @@ const SeveralItems = ({
       : t("InfoPanel:ItemsSelected");
 
   return (
-    <StyledSeveralItemsContainer className="no-thumbnail-img-wrapper">
+    <div className={classNames("no-thumbnail-img-wrapper", styles.container)}>
       <img src={imgSrc} alt="Several items" />
       <Text fontSize="16px" fontWeight={700}>
         {`${itemsText}: ${selectedItems.length}`}
       </Text>
-    </StyledSeveralItemsContainer>
+    </div>
   );
 };
 
-export default inject(({ infoPanelStore }: TStore) => {
-  const selectedItems = infoPanelStore.infoPanelSelectedItems;
-
-  return {
-    selectedItems,
-  };
-})(observer(SeveralItems));
+export default SeveralItems;

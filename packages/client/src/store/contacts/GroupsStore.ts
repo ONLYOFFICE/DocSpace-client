@@ -48,11 +48,7 @@ import {
   getContactsUrl,
   setContactsGroupsFilterUrl,
 } from "SRC_DIR/helpers/contacts";
-import {
-  setInfoPanelGroup,
-  setInfoPanelSelectedGroup,
-  showInfoPanel,
-} from "SRC_DIR/helpers/info-panel";
+import { showInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 import ClientLoadingStore from "../ClientLoadingStore";
 
@@ -113,10 +109,14 @@ class GroupsStore {
         const idx = this.groups.findIndex((x) => x.id === group.id);
 
         if (idx !== -1) {
-          this.groups[idx] = group;
+          runInAction(() => {
+            this.groups[idx] = group;
+            this.updateSelection();
+          });
           return;
         }
-        this.groups.push(group);
+
+        this.groups = [group, ...this.groups];
         this.groupsFilter.total += 1;
       });
     });
@@ -134,9 +134,6 @@ class GroupsStore {
 
       const group = await api.groups.getGroupById(id, true);
 
-      setInfoPanelGroup(group);
-      setInfoPanelSelectedGroup(group);
-
       if (contactsTab !== "groups") {
         this.currentGroup = group;
         return;
@@ -144,13 +141,13 @@ class GroupsStore {
 
       runInAction(() => {
         this.groups[idx] = group;
+
+        this.updateSelection();
       });
     });
 
     SocketHelper.on(SocketEvents.DeleteGroup, (id) => {
       const { contactsTab } = this.peopleStore.usersStore;
-
-      const idx = this.groups.findIndex((x) => x.id === id);
 
       if (contactsTab !== "groups") {
         window.DocSpace.navigate("/accounts/groups/filter");
@@ -158,8 +155,9 @@ class GroupsStore {
       }
 
       runInAction(() => {
-        this.groups.splice(idx, 1);
+        this.groups = this.groups.filter((x) => x.id !== id);
         this.groupsFilter.total -= 1;
+        this.updateSelection();
       });
     });
   }
@@ -287,8 +285,9 @@ class GroupsStore {
 
   setSelection = (selection: TGroup[]) => (this.selection = selection);
 
-  setBufferSelection = (bufferSelection: Nullable<TGroup>) =>
-    (this.bufferSelection = bufferSelection);
+  setBufferSelection = (bufferSelection: Nullable<TGroup>) => {
+    this.bufferSelection = bufferSelection;
+  };
 
   setSelected = (selected: "all" | "none") => {
     const { hotkeyCaret, setHotkeyCaret } =
@@ -363,6 +362,19 @@ class GroupsStore {
     this.setSelection(newSelections);
   };
 
+  updateSelection = () => {
+    if (this.bufferSelection) {
+      this.bufferSelection =
+        this.groups.find((g) => g.id === this.bufferSelection?.id) ?? null;
+    }
+
+    if (this.selection) {
+      this.selection = this.selection
+        .map((g) => this.groups.find((g2) => g2.id === g.id) ?? null)
+        .filter(Boolean) as TGroup[];
+    }
+  };
+
   onDeleteClick = (name: string) => {
     this.setGroupName(name);
     this.dialogStore.setDeleteGroupDialogVisible(true);
@@ -389,12 +401,10 @@ class GroupsStore {
       );
       this.setSelection([]);
       this.getGroups(this.groupsFilter, true);
-      setInfoPanelGroup(null);
       this.setIsLoading(false);
       this.dialogStore.setDeleteGroupDialogVisible(false);
 
       if (isDeletingCurrentGroup) {
-        setInfoPanelSelectedGroup(null);
         this.setBufferSelection(null);
         window.DocSpace.navigate(`accounts/groups`);
       }
@@ -535,7 +545,7 @@ class GroupsStore {
       });
     }
 
-    return options;
+    return options as ContextMenuModel[];
   };
 
   getModel = (t: TFunction, item: TGroup) => {
@@ -605,9 +615,6 @@ class GroupsStore {
         this.setInsideGroupTempTitle(res.name);
         this.peopleStore.usersStore!.getUsersList();
       }
-
-      setInfoPanelGroup(res);
-      setInfoPanelSelectedGroup(res);
     } catch (err: unknown) {
       toastr.error((err as { message: string }).message);
     }

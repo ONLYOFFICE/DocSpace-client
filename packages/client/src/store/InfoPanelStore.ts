@@ -189,10 +189,6 @@ class InfoPanelStore {
 
   // Setters
 
-  setInfoPanelSelectedGroup = (group: TGroup | null) => {
-    this.infoPanelSelectedGroup = group;
-  };
-
   setIsVisible = (visiable: boolean) => {
     const selectedFolderIsRoomOrFolderInRoom =
       this.selectedFolderStore &&
@@ -393,7 +389,6 @@ class InfoPanelStore {
         !newInfoPanelSelection.parentId
       ) {
         this.setSelectionHistory(null, null);
-        this.setInfoPanelSelectedGroup(null);
       }
     }
 

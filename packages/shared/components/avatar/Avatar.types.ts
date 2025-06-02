@@ -46,7 +46,7 @@ export type AvatarProps = {
   /** Adds a table of user roles */
   role: AvatarRole;
   /** Displays as `Picture` in case the url is specified and as `Icon` in case the path to the .svg file is specified */
-  source: string;
+  source?: string;
   /** Allows to display a user name as initials when `source` is set to blank */
   userName?: string;
   /** Enables avatar editing */

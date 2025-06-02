@@ -38,6 +38,7 @@ import ItemTitle from "./sub-components/ItemTitle";
 import { StyledInfoPanelBody } from "./styles/common";
 
 import Users from "./views/Users";
+import Groups from "./views/Groups";
 
 const InfoPanelBodyContent = ({
   infoPanelSelection,
@@ -138,6 +139,8 @@ const InfoPanelBodyContent = ({
 
     if (isUsers || isGuests) return <Users isGuests={isGuests} />;
 
+    if (isGroups) return <Groups />;
+
     if (isSeveralItems) return viewHelper.SeveralItemsView();
 
     if (isNoItem) return viewHelper.NoItemView();
@@ -208,6 +211,7 @@ const InfoPanelBodyContent = ({
       {!isNoItem ? (
         <ItemTitle
           {...defaultProps}
+          isContacts={isUsers || isGuests || isGroups}
           selectionLength={selectedItems.length}
           isNoItem={isNoItem}
         />

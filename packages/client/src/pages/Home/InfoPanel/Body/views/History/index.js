@@ -35,7 +35,7 @@ import HistoryItemLoader from "@docspace/shared/skeletons/info-panel/body/views/
 import { StyledHistoryList, StyledHistorySubtitle } from "../../styles/history";
 import { getRelativeDateDay } from "../../helpers/HistoryHelper";
 import HistoryBlock from "./HistoryBlock";
-import NoHistory from "../NoItem/NoHistory";
+import NoHistory from "../../sub-components/NoItem/NoHistory";
 import ThirdPartyComponent from "./HistoryBlockContent/ThirdParty";
 
 const History = ({

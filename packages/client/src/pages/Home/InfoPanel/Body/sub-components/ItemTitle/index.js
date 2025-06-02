@@ -26,52 +26,24 @@
 
 import { inject, observer } from "mobx-react";
 
-import UsersItemTitle from "./UsersItemTitle";
 import GalleryItemTitle from "./GalleryItemTitle";
 import RoomsItemHeader from "./Rooms";
-import GroupsItemTitle from "./GroupsItemTitle";
 
 const ItemTitle = ({
   infoPanelSelection,
   gallerySelected,
   isNoItem,
-  isUsers,
-  isGuests,
-  isInsideGroup,
-  isGroups,
+
   isGallery,
-  isSeveralItems,
-  selectionLength,
+
   currentColorScheme,
   getIcon,
-  getUserContextOptions,
   setCalendarDay,
   roomsView,
-  getGroupContextOptions,
   isVDR,
+  isContacts,
 }) => {
-  if (!infoPanelSelection) return null;
-  if (isNoItem) return null;
-
-  if (isUsers || isInsideGroup || isGuests)
-    return (
-      <UsersItemTitle
-        infoPanelSelection={infoPanelSelection}
-        isSeveralItems={isSeveralItems}
-        getUserContextOptions={getUserContextOptions}
-        selectionLength={selectionLength}
-      />
-    );
-
-  if (isGroups)
-    return (
-      <GroupsItemTitle
-        infoPanelSelection={infoPanelSelection}
-        isSeveralItems={isSeveralItems}
-        getGroupContextOptions={getGroupContextOptions}
-        selectionLength={selectionLength}
-      />
-    );
+  if (isNoItem || isContacts || !infoPanelSelection) return null;
 
   if (isGallery)
     return (
@@ -101,7 +73,6 @@ export default inject(
   }) => {
     const { currentColorScheme } = settingsStore;
     const { getIcon } = filesSettingsStore;
-    const { getUserContextOptions } = peopleStore.contextOptionsStore;
     const { getGroupContextOptions } = peopleStore.groupsStore;
     const { gallerySelected } = oformsStore;
     const { roomsView, setCalendarDay } = infoPanelStore;
@@ -109,7 +80,6 @@ export default inject(
     return {
       currentColorScheme,
       gallerySelected,
-      getUserContextOptions,
       getGroupContextOptions,
       getIcon,
       roomsView,

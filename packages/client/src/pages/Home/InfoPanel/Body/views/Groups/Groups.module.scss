@@ -24,20 +24,73 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+.groupsContent {
+  margin-inline-start: auto;
 
-const StyledSeveralItemsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 32px;
-  padding-top: 80px;
-
-  img {
-    width: 75px;
-    height: 75px;
+  :global(.group-member-row-loader) {
+    padding: 0;
   }
-`;
 
-export { StyledSeveralItemsContainer };
+  .groupMember {
+    height: 48px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    .mainWrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      width: 100%;
+      overflow: hidden;
+
+      .nameWrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+
+        .name {
+          font-size: 14px;
+          font-weight: 600;
+          line-height: 16px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+
+      .email {
+        color: var(--info-panel-group-text-color);
+        font-size: 12px;
+        line-height: 16px;
+        font-style: normal;
+        font-weight: 400;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+    .contextBtnWrapper {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+      margin-inline-start: 8px;
+
+      .groupManagerTag {
+        white-space: nowrap;
+        color: var(--info-panel-group-tag-color);
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 16px;
+      }
+    }
+
+    .contextBtnWrapper:empty {
+      display: none;
+    }
+  }
+}

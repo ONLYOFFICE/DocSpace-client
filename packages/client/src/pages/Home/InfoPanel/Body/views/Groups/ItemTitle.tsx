@@ -25,66 +25,97 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useRef } from "react";
-import { withTranslation } from "react-i18next";
-import { matchPath } from "react-router";
+import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+
 import { Text } from "@docspace/shared/components/text";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
-import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
-import { inject, observer } from "mobx-react";
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/shared/components/avatar";
 import { decode } from "he";
 import { Badge } from "@docspace/shared/components/badge";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { globalColors } from "@docspace/shared/themes";
-import { StyledUsersTitle } from "../../styles/Users";
+import { TGroup } from "@docspace/shared/api/groups/types";
 
-const GroupsItemTitle = ({
-  t,
+import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
+
+import styles from "../Users/Users.module.scss";
+
+type ItemTitleProps = {
+  isRoomAdmin?: boolean;
+  isCollaborator?: boolean;
+  groupSelection: TGroup;
+  getGroupContextOptions?: GroupsStore["getGroupContextOptions"];
+};
+
+const ItemTitle = ({
   isRoomAdmin,
-  isUser,
-  isSeveralItems,
-  infoPanelSelection,
+  isCollaborator,
+  groupSelection,
   getGroupContextOptions,
-}) => {
-  const itemTitleRef = useRef();
+}: ItemTitleProps) => {
+  const { t } = useTranslation([
+    "People",
+    "PeopleTranslations",
+    "InfoPanel",
+    "Common",
+    "Translations",
+    "DeleteProfileEverDialog",
+  ]);
 
-  const isInsideGroup = matchPath(
-    "/accounts/groups/:groupId/filter",
-    window.location.pathname,
-  );
+  const itemTitleRef = useRef<HTMLDivElement>(null);
 
   const getContextOptions = () =>
-    getGroupContextOptions(t, infoPanelSelection, true, isInsideGroup);
+    getGroupContextOptions?.(t, groupSelection, true, false);
 
-  const groupName = infoPanelSelection.name
-    ? decode(infoPanelSelection.name).trim()
+  const groupName = groupSelection.name
+    ? decode(groupSelection.name).trim()
     : "";
 
-  if (isSeveralItems) return null;
-
   return (
-    <StyledUsersTitle ref={itemTitleRef}>
+    <div className={styles.userTitle} ref={itemTitleRef}>
       <Avatar
-        className="avatar"
+        className={styles.avatar}
         size={AvatarSize.big}
-        userName={infoPanelSelection.name}
+        role={AvatarRole.user}
+        userName={groupSelection.name}
         isGroup
       />
 
-      <div className="info-panel__info-text">
-        <div className="info-panel__info-wrapper">
-          <Text className="info-text__name" noSelect title={groupName} truncate>
+      <div className={styles.infoText}>
+        <div className={styles.infoWrapper}>
+          <Text
+            className={styles.infoTextName}
+            noSelect
+            title={groupName}
+            truncate
+            fontSize="16px"
+            fontWeight={700}
+            lineHeight="22px"
+          >
             {groupName}
           </Text>
         </div>
         {groupName ? (
-          <Text className="info-text__email" title={infoPanelSelection.email}>
+          <Text
+            className={styles.infoTextEmail}
+            title={groupSelection.name}
+            fontSize="13px"
+            fontWeight={600}
+            lineHeight="20px"
+            noSelect
+          >
             {t("PeopleTranslations:MembersCount", {
-              count: infoPanelSelection.membersCount,
+              count: groupSelection.membersCount,
             })}
           </Text>
         ) : null}
 
-        {infoPanelSelection?.isLDAP ? (
+        {groupSelection?.isLDAP ? (
           <>
             <Badge
               id="ldap-badge-info-panel"
@@ -103,27 +134,27 @@ const GroupsItemTitle = ({
         ) : null}
       </div>
 
-      {!isRoomAdmin && !isUser && !infoPanelSelection.isLDAP ? (
+      {!isRoomAdmin &&
+      !isCollaborator &&
+      !groupSelection.isLDAP &&
+      getContextOptions ? (
         <ContextMenuButton
           id="info-accounts-options"
-          className="context-button"
-          getData={getContextOptions}
+          className={styles.contextButton}
+          getData={getContextOptions as () => ContextMenuModel[]}
         />
       ) : null}
-    </StyledUsersTitle>
+    </div>
   );
 };
 
-export default inject(({ peopleStore }) => ({
-  isRoomAdmin: peopleStore.userStore.user.isRoomAdmin,
-  isUser: peopleStore.userStore.user.isUser,
-}))(
-  withTranslation([
-    "People",
-    "PeopleTranslations",
-    "InfoPanel",
-    "Common",
-    "Translations",
-    "DeleteProfileEverDialog",
-  ])(observer(GroupsItemTitle)),
-);
+export default inject(({ peopleStore }: TStore) => {
+  const { userStore, groupsStore } = peopleStore;
+
+  if (!userStore || !groupsStore) return {};
+
+  const { isRoomAdmin, isCollaborator } = userStore.user!;
+  const { getGroupContextOptions } = groupsStore;
+
+  return { isRoomAdmin, isCollaborator, getGroupContextOptions };
+})(observer(ItemTitle));

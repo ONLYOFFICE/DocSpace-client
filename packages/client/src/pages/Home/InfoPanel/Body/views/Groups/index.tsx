@@ -25,51 +25,47 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import { withTranslation } from "react-i18next";
-import { useParams } from "react-router";
 import { useState, useEffect, useRef } from "react";
 
-import withLoader from "SRC_DIR/HOCs/withLoader";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import api from "@docspace/shared/api";
 import AccountsFilter from "@docspace/shared/api/people/filter";
+import { TGroup } from "@docspace/shared/api/groups/types";
+import { TUser } from "@docspace/shared/api/people/types";
+import { Nullable } from "@docspace/shared/types";
 import {
   MIN_LOADER_TIMER,
   SHOW_LOADER_TIMER,
 } from "@docspace/shared/selectors/utils/constants";
 
 import GroupMember from "./GroupMember";
-import * as Styled from "../../styles/groups.styled";
-import useFetchGroup from "./useFetchGroup";
-import { GroupMembersList } from "./GroupMembersList/GroupMembersList";
 
-const Groups = ({
-  infoPanelSelection,
-  currentGroup,
-  setCurrentGroup,
-  infoPanelSelectedGroup,
-  setInfoPanelSelectedGroup,
-}) => {
+import { GroupMembersList } from "./GroupMembersList";
+import styles from "./Groups.module.scss";
+import ItemTitle from "./ItemTitle";
+import NoItem from "../../sub-components/NoItem";
+import SeveralItems from "../../sub-components/SeveralItems";
+
+type GroupsProps = {
+  groupSelection: TGroup[] | Nullable<TGroup>;
+};
+
+const Groups = ({ groupSelection }: GroupsProps) => {
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [showLoader, setShowLoader] = useState(false);
-  const [groupMembers, setGroupMembers] = useState(null);
+  const [groupMembers, setGroupMembers] = useState<TUser[]>([]);
   const [total, setTotal] = useState(0);
 
   const abortControllerRef = useRef(new AbortController());
-  const startLoader = useRef(null);
-  const loaderTimeout = useRef(null);
 
-  const { groupId: paramsGroupId } = useParams();
-  const isInsideGroup = !!paramsGroupId;
+  const startLoader = useRef<Date>(null);
+  const loaderTimeout = useRef<NodeJS.Timeout>(null);
 
-  const group = isInsideGroup ? currentGroup : infoPanelSelectedGroup;
+  const loadNextPage = async (startIndex: number) => {
+    if (!groupSelection || Array.isArray(groupSelection)) return;
 
-  const groupId = isInsideGroup ? paramsGroupId : infoPanelSelection?.id;
-  const setGroup = isInsideGroup ? setCurrentGroup : setInfoPanelSelectedGroup;
-
-  const groupManager = group?.manager;
-
-  const loadNextPage = async (startIndex) => {
+    const groupId = groupSelection.id;
+    const groupManager = groupSelection.manager;
     try {
       abortControllerRef.current = new AbortController();
 
@@ -133,21 +129,21 @@ const Groups = ({
     }
   };
 
-  useFetchGroup(groupId, group?.id, setGroup);
-
   useEffect(() => {
+    if (!groupSelection || Array.isArray(groupSelection)) return;
+
     setIsFirstLoad(true);
-  }, [infoPanelSelection.id]);
+  }, [groupSelection]);
 
   useEffect(() => {
-    if (group) {
+    if (groupSelection) {
       loadNextPage(0);
     }
 
     return () => {
       abortControllerRef.current.abort();
     };
-  }, [group]);
+  }, [groupSelection]);
 
   useEffect(() => {
     calculateLoader();
@@ -159,43 +155,54 @@ const Groups = ({
     };
   }, []);
 
-  if (showLoader) {
+  const getContent = () => {
+    if (showLoader) {
+      return <InfoPanelViewLoader view="groups" />;
+    }
+
+    return isFirstLoad || !groupMembers ? null : (
+      <>
+        {groupManager ? (
+          <GroupMember groupMember={groupManager} isManager />
+        ) : null}
+        <GroupMembersList
+          members={groupMembers}
+          hasNextPage={groupMembers.length < totalWithoutManager}
+          loadNextPage={loadNextPage}
+          total={totalWithoutManager}
+        />
+      </>
+    );
+  };
+
+  if (!groupSelection) return <NoItem isGroups />;
+
+  if (Array.isArray(groupSelection)) {
     return (
-      <Styled.GroupsContent>
-        <InfoPanelViewLoader view="groups" />
-      </Styled.GroupsContent>
+      <SeveralItems isGroups isUsers={false} selectedItems={groupSelection} />
     );
   }
+
+  const groupManager = groupSelection.manager;
 
   const totalWithoutManager = groupManager ? total - 1 : total;
 
   return (
-    <Styled.GroupsContent>
-      {isFirstLoad || !groupMembers ? null : (
-        <>
-          {groupManager ? (
-            <GroupMember groupMember={groupManager} isManager />
-          ) : null}
-          <GroupMembersList
-            members={groupMembers}
-            hasNextPage={groupMembers.length < totalWithoutManager}
-            loadNextPage={loadNextPage}
-            total={totalWithoutManager}
-            managerId={groupManager?.id}
-          />
-        </>
-      )}
-    </Styled.GroupsContent>
+    <>
+      <ItemTitle groupSelection={groupSelection} />
+      <div className={styles.groupsContent}>{getContent()}</div>
+    </>
   );
 };
 
-export default inject(({ peopleStore, infoPanelStore }) => ({
-  currentGroup: peopleStore.groupsStore.currentGroup,
-  setCurrentGroup: peopleStore.groupsStore.setCurrentGroup,
-  infoPanelSelectedGroup: infoPanelStore.infoPanelSelectedGroup,
-  setInfoPanelSelectedGroup: infoPanelStore.setInfoPanelSelectedGroup,
-}))(
-  withTranslation([])(
-    withLoader(observer(Groups))(<InfoPanelViewLoader view="accounts" />),
-  ),
-);
+export default inject(({ peopleStore }: TStore) => {
+  const { selection, bufferSelection } = peopleStore.groupsStore!;
+
+  const groupSelection = selection.length
+    ? selection.length === 1
+      ? selection[0]
+      : selection
+    : bufferSelection;
+
+  return { groupSelection };
+})(observer(Groups));

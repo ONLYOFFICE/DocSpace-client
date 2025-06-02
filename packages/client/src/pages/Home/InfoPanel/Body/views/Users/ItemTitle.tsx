@@ -47,22 +47,20 @@ import { globalColors } from "@docspace/shared/themes";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 
 import Badges from "SRC_DIR/pages/Home/Section/ContactsBody/Badges";
-import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import ContactsConextOptionsStore from "SRC_DIR/store/contacts/ContactsContextOptionsStore";
+import { TPeopleListItem } from "SRC_DIR/helpers/contacts";
 
-import { StyledUsersTitle } from "../../styles/Users";
+import styles from "./Users.module.scss";
 
-type UsersItemTitleProps = {
-  isSeveralItems: boolean;
-  infoPanelSelection: ReturnType<UsersStore["getPeopleListItem"]>;
+type ItemTitleProps = {
+  userSelection: TPeopleListItem;
   getUserContextOptions: ContactsConextOptionsStore["getUserContextOptions"];
 };
 
-const UsersItemTitle = ({
-  isSeveralItems,
-  infoPanelSelection,
+const ItemTitle = ({
+  userSelection,
   getUserContextOptions,
-}: UsersItemTitleProps) => {
+}: ItemTitleProps) => {
   const { t } = useTranslation([
     "People",
     "PeopleTranslations",
@@ -73,6 +71,7 @@ const UsersItemTitle = ({
   ]);
 
   const theme = useTheme();
+
   const itemTitleRef = useRef<HTMLDivElement | null>(null);
   const contextMenuRef = useRef<ContextMenuRefType>(null);
 
@@ -83,71 +82,77 @@ const UsersItemTitle = ({
     if (contextMenuRef.current) contextMenuRef.current.show(e);
   };
 
-  if (isSeveralItems) {
-    return null;
-  }
-
   const isPending =
-    infoPanelSelection.statusType === "pending" ||
-    infoPanelSelection.statusType === "disabled";
+    userSelection.statusType === "pending" ||
+    userSelection.statusType === "disabled";
 
   const getData = () => {
-    const newOptions = infoPanelSelection.options?.filter(
+    const newOptions = userSelection.options?.filter(
       (option) => option !== "details",
     );
     return getUserContextOptions(
       t,
       newOptions || [],
-      infoPanelSelection,
+      userSelection,
     ) as unknown as ContextMenuModel[];
   };
 
   const contextOptions = getData();
 
-  const userAvatar = infoPanelSelection.hasAvatar
-    ? infoPanelSelection.avatarMax
+  const userAvatar = userSelection.hasAvatar
+    ? userSelection.avatarMax
     : DefaultUserPhoto;
-  const isSSO = infoPanelSelection.isSSO || false;
-  const isLDAP = infoPanelSelection.isLDAP || false;
-  const displayName = infoPanelSelection.displayName
-    ? decode(infoPanelSelection.displayName).trim()
+  const isSSO = userSelection.isSSO || false;
+  const isLDAP = userSelection.isLDAP || false;
+  const displayName = userSelection.displayName
+    ? decode(userSelection.displayName).trim()
     : "";
 
-  const role = getUserAvatarRoleByType(infoPanelSelection.role);
+  const role = getUserAvatarRoleByType(userSelection.role);
 
   return (
-    <StyledUsersTitle ref={itemTitleRef}>
+    <div className={styles.userTitle} ref={itemTitleRef}>
       <Avatar
-        className="avatar"
+        className={styles.avatar}
         role={role}
         size={AvatarSize.big}
         source={userAvatar}
         noClick
       />
-      <div className="info-panel__info-text">
-        <div className="info-panel__info-wrapper">
+      <div className={styles.infoText}>
+        <div className={styles.infoWrapper}>
           <Text
-            className="info-text__name"
+            className={styles.infoTextName}
             noSelect
             title={displayName}
             truncate
+            fontSize="16px"
+            fontWeight={700}
+            lineHeight="22px"
           >
-            {isPending || !displayName ? infoPanelSelection.email : displayName}
+            {isPending || !displayName ? userSelection.email : displayName}
           </Text>
           {isPending ? (
-            <Badges withoutPaid statusType={infoPanelSelection.statusType} />
+            <Badges withoutPaid statusType={userSelection.statusType} />
           ) : null}
         </div>
         {!isPending && !!displayName ? (
-          <Text className="info-text__email" title={infoPanelSelection.email}>
-            {infoPanelSelection.email}
+          <Text
+            className={styles.infoTextEmail}
+            title={userSelection.email}
+            fontSize="13px"
+            fontWeight={600}
+            lineHeight="20px"
+            noSelect
+          >
+            {userSelection.email}
           </Text>
         ) : null}
         {isSSO ? (
           <>
             <Badge
               id="sso-badge-info-panel"
-              className="sso-badge"
+              className={styles.ssoBadge}
               label={t("Common:SSO")}
               color={globalColors.white}
               backgroundColor={
@@ -169,7 +174,7 @@ const UsersItemTitle = ({
           <>
             <Badge
               id="ldap-badge-info-panel"
-              className="ldap-badge"
+              className={styles.ldapBadge}
               label={t("Common:LDAP")}
               color={globalColors.white}
               backgroundColor={
@@ -187,25 +192,24 @@ const UsersItemTitle = ({
           </>
         ) : null}
       </div>
-      <>
-        <ContextMenu
-          ref={contextMenuRef}
-          model={contextOptions || []}
-          getContextModel={getData}
-          withBackdrop
+
+      <ContextMenu
+        ref={contextMenuRef}
+        model={contextOptions || []}
+        getContextModel={getData}
+        withBackdrop
+      />
+      {contextOptions.length ? (
+        <ContextMenuButton
+          id="info-accounts-options"
+          className={styles.contextButton}
+          onClick={onClickContextMenu}
+          getData={getData}
+          displayType={ContextMenuButtonDisplayType.toggle}
         />
-        {contextOptions.length ? (
-          <ContextMenuButton
-            id="info-accounts-options"
-            className="context-button"
-            onClick={onClickContextMenu}
-            getData={getData}
-            displayType={ContextMenuButtonDisplayType.toggle}
-          />
-        ) : null}
-      </>
-    </StyledUsersTitle>
+      ) : null}
+    </div>
   );
 };
 
-export default UsersItemTitle;
+export default ItemTitle;

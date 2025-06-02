@@ -79,23 +79,6 @@ const InfoPanelActions = ({ setIsVisible }: TInfoPanelActionsProps) => {
     };
   }, [setIsVisible]);
 
-  // Set info panel group
-  useEffect(() => {
-    const setInfoPanelGroupHandler = (e: CustomEvent<{ group: TGroup }>) => {};
-
-    window.addEventListener(
-      InfoPanelEvents.setInfoPanelGroup,
-      setInfoPanelGroupHandler as EventListener,
-    );
-
-    return () => {
-      window.removeEventListener(
-        InfoPanelEvents.setInfoPanelGroup,
-        setInfoPanelGroupHandler as EventListener,
-      );
-    };
-  }, []);
-
   // Set info panel file
   useEffect(() => {
     const setInfoPanelFileHandler = (e: CustomEvent<{ file: TFile }>) => {};
@@ -236,25 +219,6 @@ const InfoPanelActions = ({ setIsVisible }: TInfoPanelActionsProps) => {
       window.removeEventListener(
         InfoPanelEvents.setInfoPanelSelectedRoom,
         setInfoPanelSelectedRoomHandler as EventListener,
-      );
-    };
-  }, []);
-
-  // Set selected group
-  useEffect(() => {
-    const setInfoPanelSelectedGroupHandler = (
-      e: CustomEvent<{ group: TGroup }>,
-    ) => {};
-
-    window.addEventListener(
-      InfoPanelEvents.setInfoPanelSelectedGroup,
-      setInfoPanelSelectedGroupHandler as EventListener,
-    );
-
-    return () => {
-      window.removeEventListener(
-        InfoPanelEvents.setInfoPanelSelectedGroup,
-        setInfoPanelSelectedGroupHandler as EventListener,
       );
     };
   }, []);

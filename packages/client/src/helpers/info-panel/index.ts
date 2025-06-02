@@ -45,14 +45,6 @@ export const hideInfoPanel = () => {
   window.dispatchEvent(event);
 };
 
-export const setInfoPanelGroup = (group: Nullable<TGroup>) => {
-  const event = new CustomEvent(InfoPanelEvents.setInfoPanelGroup, {
-    detail: { group },
-  });
-
-  window.dispatchEvent(event);
-};
-
 export const setInfoPanelFile = (file: TFile) => {
   const event = new CustomEvent(InfoPanelEvents.setInfoPanelFile, {
     detail: { file },
@@ -80,14 +72,6 @@ export const setInfoPanelRoom = (room: TRoom) => {
 export const setInfoPanelSelectedRoom = (room: TRoom) => {
   const event = new CustomEvent(InfoPanelEvents.setInfoPanelSelectedRoom, {
     detail: { room },
-  });
-
-  window.dispatchEvent(event);
-};
-
-export const setInfoPanelSelectedGroup = (group: Nullable<TGroup>) => {
-  const event = new CustomEvent(InfoPanelEvents.setInfoPanelSelectedGroup, {
-    detail: { group },
   });
 
   window.dispatchEvent(event);

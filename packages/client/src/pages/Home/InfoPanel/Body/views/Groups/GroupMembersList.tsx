@@ -38,24 +38,17 @@ import styled from "styled-components";
 import { TUser } from "@docspace/shared/api/people/types";
 import { RowLoader } from "@docspace/shared/skeletons/selector";
 
-import GroupMember from "../GroupMember";
+import GroupMember from "./GroupMember";
 
 const ROW_HEIGHT = 50;
 
-export const StyledList = styled(List)`
-  width: ${({ width }) => `${width - 40}px`} !important;
-
-  .group-member-row-loader {
-    padding: 0;
-  }
-`;
-
-interface GroupMembersListProps {
+type GroupMembersListProps = {
   members: TUser[];
-  loadNextPage: (startIndex: number) => Promise<void>;
   hasNextPage: boolean;
   total: number;
-}
+
+  loadNextPage: (startIndex: number) => Promise<void>;
+};
 
 export const GroupMembersList = ({
   members,
@@ -94,7 +87,7 @@ export const GroupMembersList = ({
     return (
       <div key={key} style={style}>
         {item ? (
-          <GroupMember groupMember={item} />
+          <GroupMember groupMember={item} isManager={false} />
         ) : (
           <RowLoader
             className="group-member-row-loader"
@@ -131,7 +124,7 @@ export const GroupMembersList = ({
             const scrollRect = scrollElement.getBoundingClientRect();
 
             return (
-              <StyledList
+              <List
                 autoHeight
                 height={height || scrollRect.height}
                 onRowsRendered={onRowsRendered}
@@ -139,7 +132,7 @@ export const GroupMembersList = ({
                 rowCount={itemsCount}
                 rowHeight={ROW_HEIGHT}
                 rowRenderer={renderRow}
-                width={scrollRect.width}
+                width={scrollRect.width - 40}
                 isScrolling={isScrolling}
                 overscanRowCount={3}
                 scrollTop={scrollTop}

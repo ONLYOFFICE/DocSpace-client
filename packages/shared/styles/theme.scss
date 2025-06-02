@@ -2344,3 +2344,15 @@
 .dark {
   --modal-dialog-resolve-color: #{$gray};
 }
+
+.light {
+  --info-panel-name-color: #{$gray-dark};
+  --info-panel-group-text-color: #{$gray};
+  --info-panel-group-tag-color: #{$gray-strong};
+}
+
+.dark {
+  --info-panel-name-color: #{$gray};
+  --info-panel-group-text-color: #{$gray-dark};
+  --info-panel-group-tag-color: #{$gray-dark-strong};
+}

@@ -24,13 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { mobile, tablet, TextUserSelect } from "@docspace/shared/utils";
+@use "@docspace/shared/styles/mixins";
 
-const StyledUsersTitle = styled.div`
+.userTitle {
   min-height: 80px;
   height: 80px;
   max-height: 104px;
+
   display: flex;
   align-items: center;
   justify-content: start;
@@ -40,15 +40,15 @@ const StyledUsersTitle = styled.div`
   margin-inline-start: -20px;
   padding-block: 24px;
   padding-inline: 20px 0;
-  background: ${(props) => props.theme.infoPanel.backgroundColor};
+  background: var(--background-color);
   z-index: 100;
 
-  @media ${tablet} {
+  @include mixins.tablet-and-below {
     width: 440px;
     padding: 24px 20px;
   }
 
-  @media ${mobile} {
+  @include mixins.mobile {
     width: calc(100vw - 32px);
     padding-inline-end: 0;
   }
@@ -57,97 +57,89 @@ const StyledUsersTitle = styled.div`
     min-width: 80px;
   }
 
-  .info-panel__info-text {
+  .infoText {
     display: flex;
     flex-direction: column;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 
-    .info-panel__info-wrapper {
+    .infoWrapper {
       display: flex;
       flex-direction: row;
     }
 
-    .badges {
+    :global(.badges) {
       height: 22px;
       margin-inline-start: 8px;
     }
 
-    .info-text__name {
-      font-weight: 700;
-      font-size: 16px;
-      line-height: 22px;
-      ${TextUserSelect}
-    }
-
-    .info-text__email {
-      font-weight: 600;
-      font-size: 13px;
-      line-height: 20px;
-      color: ${(props) => props.theme.infoPanel.nameColor};
+    .infoTextName {
+      -webkit-touch-callout: text;
+      -webkit-user-select: text;
+      -khtml-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
       user-select: text;
     }
 
-    .sso-badge,
-    .ldap-badge {
+    .infoTextEmail {
+      color: var(--info-panel-name-color);
+    }
+
+    .ssoBadge,
+    .ldapBadge {
       margin-top: 8px;
     }
   }
 
-  .context-button {
+  .contextButton {
     margin-inline-start: auto;
   }
-`;
+}
 
-const StyledUsersContent = styled.div`
+.userContent {
   margin-block: 0;
   margin-inline: 0 auto;
 
-  .data__header {
+  .header {
     width: 100%;
     padding: 24px 0;
-
-    .header__text {
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 16px;
-    }
   }
 
-  .data__body {
+  .body {
     display: grid;
     grid-template-rows: 28px 28px 28px 1fr;
     grid-template-columns: fit-content(50%) 1fr;
     grid-gap: 0 24px;
     align-items: center;
 
-    .type-combobox {
+    .typeCombobox {
       margin-inline-start: -8px;
 
-      .combo-button {
+      :global(.combo-button) {
         padding-inline-start: 8px;
       }
 
-      .backdrop-active {
+      :global(.backdrop-active) {
         height: 100%;
         width: 100%;
         z-index: 1000;
       }
     }
 
-    .info_field {
+    .infoField {
       line-height: 20px;
 
       padding: 4px 0;
     }
 
-    .info_field_groups {
+    .infoFieldGroups {
       margin-top: 8px;
       height: 100%;
     }
 
-    .info_groups {
+    .groups {
       align-self: start;
       margin-top: 4px;
       display: flex;
@@ -157,6 +149,4 @@ const StyledUsersContent = styled.div`
       overflow: hidden;
     }
   }
-`;
-
-export { StyledUsersTitle, StyledUsersContent };
+}

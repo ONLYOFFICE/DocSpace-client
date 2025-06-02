@@ -24,13 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Avatar } from "@docspace/shared/components/avatar";
-import { inject } from "mobx-react";
 import { useTranslation } from "react-i18next";
+
 import { EmployeeStatus } from "@docspace/shared/enums";
+import { TUser } from "@docspace/shared/api/people/types";
+
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/shared/components/avatar";
+
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 
-const GroupMember = ({ groupMember, isManager }) => {
+import styles from "./Groups.module.scss";
+
+type GroupMemberProps = {
+  groupMember: TUser;
+  isManager: boolean;
+};
+
+const GroupMember = ({ groupMember, isManager }: GroupMemberProps) => {
   const { t } = useTranslation([
     "People",
     "Profile",
@@ -38,88 +52,39 @@ const GroupMember = ({ groupMember, isManager }) => {
     "Common",
   ]);
 
-  // const iconRef = useRef(null);
-  // const buttonMenuRef = useRef(null);
-
-  // const [isOpen, setIsOpen] = useState(false);
-
-  // const onClick = (e) => {
-  //   if (!isOpen) buttonMenuRef?.current?.show(e);
-  //   else buttonMenuRef?.current?.hide(e);
-  //   setIsOpen(!isOpen);
-  // };
-
-  // const onHide = () => {
-  //   setIsOpen(false);
-  // };
-
-  // const model = getUserContextOptionsModel(
-  //   t,
-  //   getUserContextOptions(
-  //     groupMember.id === userId,
-  //     getUserStatus(groupMember),
-  //     getUserType(groupMember),
-  //     groupMember.status,
-  //   ),
-  //   groupMember,
-  // );
-
   return (
-    <div className="group-member">
+    <div className={styles.groupMember}>
       <Avatar
-        className="avatar"
-        role={groupMember.role || "user"}
-        size="min"
+        className={styles.avatar}
+        role={AvatarRole.user}
+        size={AvatarSize.min}
         source={groupMember.avatar}
         noClick
       />
 
-      <div className="main-wrapper">
-        <div className="name-wrapper">
-          <div className="name" style={{}} title={groupMember.displayName}>
+      <div className={styles.mainWrapper}>
+        <div className={styles.nameWrapper}>
+          <div className={styles.name} title={groupMember.displayName}>
             {groupMember.displayName}
           </div>
           {groupMember.status === EmployeeStatus.Pending ? (
             <StyledSendClockIcon />
           ) : null}
         </div>
-        <div className="email" title={groupMember.email}>
+        <div className={styles.email} title={groupMember.email}>
           {groupMember.email}
         </div>
       </div>
 
-      <div className="context-btn-wrapper">
+      <div className={styles.contextBtnWrapper}>
         {isManager ? (
-          <div className="group-manager-tag">{t("Common:HeadOfGroup")}</div>
-        ) : null}
-
-        {/* {!groupMember.isLDAP && (
-          <div className="context-btn" ref={iconRef}>
-            <ContextMenuButton
-              isFill
-              className="expandButton"
-              directionX="right"
-              displayType="toggle"
-              onClick={onClick}
-              getData={() => model}
-            />
-            <StyledContextMenu
-              model={model}
-              containerRef={iconRef}
-              ref={buttonMenuRef}
-              onHide={onHide}
-              scaled={false}
-            />
+          <div className={styles.groupManagerTag}>
+            {t("Common:HeadOfGroup")}
           </div>
-        )} */}
+        ) : null}
       </div>
     </div>
   );
 };
 
-export default inject(({ peopleStore }) => ({
-  userId: peopleStore.userStore.user.id,
-  getUserContextOptions: peopleStore.usersStore.getUserContextOptions,
-  getUserContextOptionsModel:
-    peopleStore.contextOptionsStore.getUserContextOptions,
-}))(GroupMember);
+export default GroupMember;

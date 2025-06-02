@@ -28,7 +28,6 @@ export const enum InfoPanelEvents {
   showInfoPanel = "SHOW_INFO_PANEL_EVENT",
   hideInfoPanel = "HIDE_INFO_PANEL_EVENT",
 
-  setInfoPanelGroup = "SET_INFO_PANEL_GROUP_EVENT",
   setInfoPanelFile = "SET_INFO_PANEL_FILE_EVENT",
   setInfoPanelFolder = "SET_INFO_PANEL_FOLDER_EVENT",
   setInfoPanelRoom = "SET_INFO_PANEL_ROOM_EVENT",
@@ -39,7 +38,6 @@ export const enum InfoPanelEvents {
   updateInfoPanelRoom = "UPDATE_INFO_PANEL_ROOM_EVENT",
 
   setInfoPanelSelectedRoom = "SET_INFO_PANEL_SELECTED_ROOM_EVENT",
-  setInfoPanelSelectedGroup = "SET_INFO_PANEL_SELECTED_GROUP_EVENT",
 
   openShareTab = "OPEN_INFO_PANEL_SHARE_TAB_EVENT",
   openMembersTab = "OPEN_INFO_PANEL_MEMBERS_TAB_EVENT",

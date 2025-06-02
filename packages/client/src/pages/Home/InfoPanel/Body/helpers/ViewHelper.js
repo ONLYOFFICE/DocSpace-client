@@ -29,12 +29,10 @@ import React from "react";
 import Members from "../views/Members";
 import History from "../views/History";
 import Details from "../views/Details";
-import Gallery from "../views/Gallery";
 import NoItem from "../sub-components/NoItem";
 import SeveralItems from "../sub-components/SeveralItems";
 import Share from "../views/Share";
 import Plugin from "../views/Plugin";
-import Groups from "../views/Groups";
 
 class ViewHelper {
   constructor(props) {
@@ -61,14 +59,6 @@ class ViewHelper {
 
   ShareView = () => {
     return <Share {...this.defaultProps} />;
-  };
-
-  GroupsView = () => {
-    return <Groups {...this.defaultProps} {...this.groupsProps} />;
-  };
-
-  GalleryView = () => {
-    return <Gallery {...this.defaultProps} {...this.galleryProps} />;
   };
 
   NoItemView = () => {

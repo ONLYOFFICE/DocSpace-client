@@ -25,22 +25,23 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTheme } from "styled-components";
+import { useTranslation } from "react-i18next";
 
 import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
 import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
 
 import { Text } from "@docspace/shared/components/text";
-import { TTranslation } from "@docspace/shared/types";
 
 import { StyledNoItemContainer } from "../../styles/NoItem";
 
 type NoContactsItemProps = {
-  t: TTranslation;
   isGroups?: boolean;
   isGuests?: boolean;
 };
 
-const NoContactsItem = ({ t, isGroups, isGuests }: NoContactsItemProps) => {
+const NoContactsItem = ({ isGroups, isGuests }: NoContactsItemProps) => {
+  const { t } = useTranslation(["InfoPanel"]);
+
   const theme = useTheme();
 
   const imgSrc = theme.isBase

@@ -26,7 +26,6 @@
 
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
 import { useParams } from "react-router";
 
 import { RoomsType } from "@docspace/shared/enums";
@@ -40,6 +39,7 @@ import { StyledInfoPanelBody } from "./styles/common";
 import Users from "./views/Users";
 import Groups from "./views/Groups";
 import Gallery from "./views/Gallery";
+import { getContactsView } from "SRC_DIR/helpers/contacts";
 
 const InfoPanelBodyContent = ({
   infoPanelSelection,
@@ -49,9 +49,7 @@ const InfoPanelBodyContent = ({
   fileView,
   getIsFiles,
   getIsRooms,
-  getIsContacts,
-  getIsGallery,
-  gallerySelected,
+
   isRootFolder,
   showSearchBlock,
   setShowSearchBlock,
@@ -74,16 +72,14 @@ const InfoPanelBodyContent = ({
 }) => {
   const { groupId } = useParams();
 
-  const { t } = useTranslation("Common");
-
   const [selectedItems, setSelectedItems] = useState(props.selectedItems);
   const [selectedFolder, setSelectedFolder] = useState(props.selectedFolder);
 
-  const contactsView = getIsContacts();
+  const contactsView = getContactsView();
 
   const isFiles = getIsFiles();
   const isRooms = getIsRooms();
-  const isGallery = getIsGallery();
+  const isGallery = window.location.pathname.includes("form-gallery");
   const isGroups = contactsView === "groups";
   const isGuests = contactsView === "guests";
   const isUsers =
@@ -93,7 +89,6 @@ const InfoPanelBodyContent = ({
 
   const isLockedSharedRoom = isLockedSharedRoomUtil(infoPanelSelection);
 
-  const isNoItemGallery = isGallery && !gallerySelected;
   const isRoot =
     infoPanelSelection?.isFolder &&
     infoPanelSelection?.id === infoPanelSelection?.rootFolderId;
@@ -102,7 +97,6 @@ const InfoPanelBodyContent = ({
     (infoPanelSelection.expired && infoPanelSelection.external) ||
     isLockedSharedRoom ||
     ((isUsers || isGuests || isGroups) && !selectedItems.length) ||
-    isNoItemGallery ||
     (isRoot && !isGallery);
 
   const defaultProps = {
@@ -130,10 +124,6 @@ const InfoPanelBodyContent = ({
     galleryProps: {},
     pluginProps: { isRooms, roomsView, fileView },
   });
-
-  const onChangeIcon = (icon) => {
-    setImage(icon);
-  };
 
   const getView = () => {
     const currentView = isRooms ? roomsView : fileView;
@@ -222,9 +212,8 @@ const InfoPanelBodyContent = ({
       !editRoomDialogProps.visible &&
       !createRoomDialogProps.visible ? (
         <AvatarEditorDialog
-          t={t}
           image={image}
-          onChangeImage={onChangeIcon}
+          onChangeImage={setImage}
           onClose={() => setAvatarEditorDialogVisible(false)}
           onSave={(img) =>
             !templateEventVisible
@@ -244,7 +233,6 @@ const InfoPanelBodyContent = ({
 export default inject(
   ({
     selectedFolderStore,
-    oformsStore,
     infoPanelStore,
     settingsStore,
     avatarEditorDialogStore,
@@ -258,10 +246,8 @@ export default inject(
       fileView,
       getIsFiles,
       getIsRooms,
-      getIsGallery,
       infoPanelSelectedItems,
       getInfoPanelSelectedFolder,
-      getIsContacts,
       showSearchBlock,
       setShowSearchBlock,
     } = infoPanelStore;
@@ -286,7 +272,6 @@ export default inject(
       image,
     } = avatarEditorDialogStore;
 
-    const { gallerySelected } = oformsStore;
     const { isRootFolder } = selectedFolderStore;
 
     return {
@@ -299,14 +284,11 @@ export default inject(
       fileView,
       getIsFiles,
       getIsRooms,
-      getIsContacts,
-      getIsGallery,
 
       selectedItems: infoPanelSelectedItems,
       selectedFolder: getInfoPanelSelectedFolder(),
 
       isRootFolder,
-      gallerySelected,
 
       showSearchBlock,
       setShowSearchBlock,

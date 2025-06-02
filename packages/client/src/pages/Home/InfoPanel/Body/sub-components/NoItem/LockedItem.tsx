@@ -25,43 +25,39 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { useTheme } from "styled-components";
+import { useTranslation } from "react-i18next";
+
+import { Text } from "@docspace/shared/components/text";
+import type { TRoom } from "@docspace/shared/api/rooms/types";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import LockedSharedRoomLightIconURL from "PUBLIC_DIR/images/locked.shared.room.svg?url";
 import LockedSharedRoomDarkIconURL from "PUBLIC_DIR/images/locked.shared.room.dark.svg?url";
 import LockIcon from "PUBLIC_DIR/images/icons/12/lock.react.svg";
 
-import { Text } from "@docspace/shared/components/text";
-import type { TTranslation } from "@docspace/shared/types";
-import type { TRoom } from "@docspace/shared/api/rooms/types";
+import DialogsStore from "SRC_DIR/store/DialogsStore";
 
 import {
   LockedSharedRoomButton,
   StyledNoItemContainer,
 } from "../../styles/NoItem";
 
-interface InjectedLockedItemProps {
-  setPasswordEntryDialog: (visible?: boolean, item?: TRoom) => void;
-}
-
-interface ExternalLockedItemProps {
-  t: TTranslation;
+type LockedItemProps = {
   item: TRoom;
-}
+  setPasswordEntryDialog?: DialogsStore["setPasswordEntryDialog"];
+};
 
-interface LockedItemProps
-  extends InjectedLockedItemProps,
-    ExternalLockedItemProps {}
+const LockedItem = ({ item, setPasswordEntryDialog }: LockedItemProps) => {
+  const { t } = useTranslation(["Common"]);
 
-const LockedItem = ({ t, item, setPasswordEntryDialog }: LockedItemProps) => {
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
-  const imageSrc = theme.isBase
+  const imageSrc = isBase
     ? LockedSharedRoomLightIconURL
     : LockedSharedRoomDarkIconURL;
 
   const openModal = () => {
-    setPasswordEntryDialog(true, item);
+    setPasswordEntryDialog?.(true, item);
   };
 
   return (
@@ -86,4 +82,4 @@ export default inject<TStore>(({ dialogsStore }) => {
   return {
     setPasswordEntryDialog,
   };
-})(observer(LockedItem as React.FC<ExternalLockedItemProps>));
+})(observer(LockedItem));

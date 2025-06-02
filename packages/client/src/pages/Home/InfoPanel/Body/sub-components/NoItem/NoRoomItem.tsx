@@ -24,15 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useTranslation } from "react-i18next";
+
+import { Text } from "@docspace/shared/components/text";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
+
 import InfoPanelRoomEmptyScreenSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate.svg?url";
 import InfoPanelRoomEmptyScreenDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate_dark.svg?url";
-import { inject, observer } from "mobx-react";
-import { Text } from "@docspace/shared/components/text";
 
 import { StyledNoItemContainer } from "../../styles/NoItem";
 
-const NoRoomItem = ({ t, theme }) => {
-  const imageSrc = theme.isBase
+const NoRoomItem = () => {
+  const { isBase } = useTheme();
+  const { t } = useTranslation(["InfoPanel"]);
+
+  const imageSrc = isBase
     ? InfoPanelRoomEmptyScreenSvgUrl
     : InfoPanelRoomEmptyScreenDarkSvgUrl;
 
@@ -48,8 +54,4 @@ const NoRoomItem = ({ t, theme }) => {
   );
 };
 
-export default inject(({ settingsStore }) => {
-  return {
-    theme: settingsStore.theme,
-  };
-})(observer(NoRoomItem));
+export default NoRoomItem;

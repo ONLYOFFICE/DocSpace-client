@@ -24,34 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import EmptyScreenRecentUrl from "PUBLIC_DIR/images/empty_screen_recent.svg?url";
-import EmptyScreenRecentDarkUrl from "PUBLIC_DIR/images/empty_screen_recent_dark.svg?url";
+import { useTranslation } from "react-i18next";
 
-import React from "react";
-import { inject, observer } from "mobx-react";
-import { Text } from "@docspace/shared/components/text";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
+
+import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/empty_screen_alt.svg?url";
+import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_alt_dark.svg?url";
 
 import { StyledNoItemContainer } from "../../styles/NoItem";
 
-const NoHistory = ({ t, theme }) => {
-  const imageSrc = theme.isBase
-    ? EmptyScreenRecentUrl
-    : EmptyScreenRecentDarkUrl;
+const NoFileOrFolderItem = () => {
+  const { t } = useTranslation(["InfoPanel"]);
+
+  const { isBase } = useTheme();
+
+  const imgSrc = isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl;
 
   return (
-    <StyledNoItemContainer className="info-panel_gallery-empty-screen">
+    <StyledNoItemContainer>
       <div className="no-thumbnail-img-wrapper">
-        <img src={imageSrc} alt="No History" />
+        <img className="no-thumbnail-img" src={imgSrc} alt="No item" />
       </div>
-      <Text className="no-history-text" textAlign="center">
-        {t("HistoryEmptyScreenText")}
-      </Text>
+
+      <div className="no-item-text">{t("FilesEmptyScreenText")}</div>
     </StyledNoItemContainer>
   );
 };
 
-export default inject(({ settingsStore }) => {
-  return {
-    theme: settingsStore.theme,
-  };
-})(observer(NoHistory));
+export default NoFileOrFolderItem;

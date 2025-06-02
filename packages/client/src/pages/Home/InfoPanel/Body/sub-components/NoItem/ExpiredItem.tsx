@@ -50,7 +50,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import CanceledLightIconURL from "PUBLIC_DIR/images/emptyview/empty.canceled.light.svg?url";
@@ -62,14 +61,15 @@ import {
   HeadingLevel,
   HeadingSize,
 } from "@docspace/shared/components/heading";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import { StyledNoItemContainer } from "../../styles/NoItem";
 
 const ExpiredItem = () => {
-  const theme = useTheme();
+  const { isBase } = useTheme();
   const { t } = useTranslation(["Common"]);
 
-  const imageSrc = theme.isBase ? CanceledLightIconURL : CanceledDarkIconURL;
+  const imageSrc = isBase ? CanceledLightIconURL : CanceledDarkIconURL;
 
   return (
     <StyledNoItemContainer>

@@ -68,14 +68,14 @@ const NoItem = ({
 
   if (infoPanelSelection?.expired && infoPanelSelection?.external)
     return <ExpiredItem />;
-  if (isLockedSharedRoom) return <LockedItem t={t} item={infoPanelSelection} />;
+  if (isLockedSharedRoom) return <LockedItem item={infoPanelSelection} />;
 
   if (isGroups || isUsers || isGuests)
-    return <NoContactsItem t={t} isGuests={isGuests} isGroups={isGroups} />;
+    return <NoContactsItem isGuests={isGuests} isGroups={isGroups} />;
   if (isGallery) return <NoGalleryItem />;
 
-  if (isFiles) return <NoFileOrFolderItem t={t} theme={undefined} />;
-  if (isRooms) return <NoRoomItem t={t} theme={undefined} />;
+  if (isFiles) return <NoFileOrFolderItem />;
+  if (isRooms) return <NoRoomItem />;
 
   return null;
 };

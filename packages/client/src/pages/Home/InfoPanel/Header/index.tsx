@@ -41,6 +41,7 @@ import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import { TInfoPanelSelection } from "../InfoPanel.types";
 
 import { StyledInfoPanelHeader } from "./Header.styled";
+import { getContactsView } from "SRC_DIR/helpers/contacts";
 
 type InfoPanelHeaderContentProps = {
   // TODO change InfoPanelStore["infoPanelSelection"]
@@ -49,8 +50,7 @@ type InfoPanelHeaderContentProps = {
   roomsView: InfoPanelStore["roomsView"];
   fileView: InfoPanelStore["fileView"];
   setView: InfoPanelStore["setView"];
-  getIsGallery: InfoPanelStore["getIsGallery"];
-  getIsContacts: InfoPanelStore["getIsContacts"];
+
   getIsTrash: InfoPanelStore["getIsTrash"];
 
   infoPanelItemsList: PluginStore["infoPanelItemsList"];
@@ -65,8 +65,7 @@ const InfoPanelHeaderContent = ({
   roomsView,
   fileView,
   setView,
-  getIsGallery,
-  getIsContacts,
+
   getIsTrash,
   infoPanelItemsList,
   enablePlugins,
@@ -74,8 +73,8 @@ const InfoPanelHeaderContent = ({
 }: InfoPanelHeaderContentProps) => {
   const { t } = useTranslation(["Common", "InfoPanel"]);
 
-  const isGallery = getIsGallery();
-  const isContacts = getIsContacts();
+  const isGallery = window.location.pathname.includes("form-gallery");
+  const isContacts = getContactsView();
   const isTrash = getIsTrash();
 
   const isRoot =
@@ -247,8 +246,7 @@ export default inject(
       roomsView,
       fileView,
       setView,
-      getIsGallery,
-      getIsContacts,
+
       getIsTrash,
     } = infoPanelStore;
 
@@ -261,8 +259,7 @@ export default inject(
       roomsView,
       fileView,
       setView,
-      getIsGallery,
-      getIsContacts,
+
       getIsTrash,
 
       infoPanelItemsList,

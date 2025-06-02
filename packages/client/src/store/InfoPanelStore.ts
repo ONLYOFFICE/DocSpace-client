@@ -317,7 +317,7 @@ class InfoPanelStore {
     const isRooms = this.getIsRooms();
     const currentGroup = this.peopleStore.groupsStore?.currentGroup;
 
-    if (this.getIsContacts() === "groups") {
+    if (getContactsView() === "groups") {
       return {
         ...currentGroup,
         isGroup: true,
@@ -595,8 +595,8 @@ class InfoPanelStore {
   getCanDisplay = () => {
     const isFiles = this.getIsFiles();
     const isRooms = this.getIsRooms();
-    const isAccounts = this.getIsContacts();
-    const isGallery = this.getIsGallery();
+    const isAccounts = getContactsView() !== false;
+    const isGallery = window.location.pathname.includes("form-gallery");
     return isRooms || isFiles || isGallery || isAccounts;
   };
 
@@ -614,15 +614,6 @@ class InfoPanelStore {
     return (
       pathname.indexOf("rooms") !== -1 && !(pathname.indexOf("personal") !== -1)
     );
-  };
-
-  getIsContacts = () => {
-    return getContactsView();
-  };
-
-  getIsGallery = (givenPathName?: string) => {
-    const pathname = givenPathName || window.location.pathname.toLowerCase();
-    return pathname.indexOf("form-gallery") !== -1;
   };
 
   getIsTrash = (givenPathName?: string) => {
@@ -651,16 +642,6 @@ class InfoPanelStore {
 
   setInfoPanelSelection = (infoPanelSelection: TInfoPanelSelection) => {
     if (isEqual(infoPanelSelection, this.infoPanelSelection)) return;
-
-    if (
-      this.getIsContacts() &&
-      (!this.isPeopleListItem(infoPanelSelection) ||
-        !infoPanelSelection.email ||
-        !infoPanelSelection.displayName)
-    ) {
-      this.infoPanelSelection = infoPanelSelection;
-      return;
-    }
 
     this.setInfoPanelMembers(null);
     this.infoPanelSelection = infoPanelSelection;

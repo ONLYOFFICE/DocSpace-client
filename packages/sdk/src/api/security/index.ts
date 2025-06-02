@@ -28,8 +28,11 @@
 
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import { TGetCSPSettings } from "@docspace/shared/api/settings/types";
+import { logger } from "@/../logger.mjs";
 
 export async function getCSP(): Promise<TGetCSPSettings | undefined> {
+  logger.debug("Start GET /security/csp");
+
   const [req] = await createRequest([`/security/csp`], [["", ""]], "GET");
 
   const res = await fetch(req, { next: { revalidate: 300 } });

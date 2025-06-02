@@ -44,6 +44,8 @@ const CompanyInfoSettingsComponent = (props) => {
   const {
     t,
     isSettingPaid,
+    isBrandingAvailable,
+    displayAbout,
     companyInfoSettingsIsDefault,
     companyInfoSettingsData,
     tReady,
@@ -72,11 +74,18 @@ const CompanyInfoSettingsComponent = (props) => {
   }, [companyInfoSettingsData, tReady]);
 
   const onSave = useCallback(
-    async (address, companyName, email, phone, site) => {
+    async (address, companyName, email, phone, site, hideAbout) => {
       setIsLoading(true);
 
       try {
-        await setCompanyInfoSettings(address, companyName, email, phone, site);
+        await setCompanyInfoSettings(
+          address,
+          companyName,
+          email,
+          phone,
+          site,
+          hideAbout,
+        );
         await getCompanyInfoSettings();
         toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       } catch (error) {
@@ -116,6 +125,8 @@ const CompanyInfoSettingsComponent = (props) => {
       buildVersionInfo={buildVersionInfo}
       standalone={standalone}
       licenseAgreementsUrl={licenseAgreementsUrl}
+      isBrandingAvailable={isBrandingAvailable}
+      displayAbout={displayAbout}
       isEnterprise={isEnterprise}
     />
   );
@@ -140,13 +151,15 @@ export const CompanyInfoSettings = inject(
       checkEnablePortalSettings,
       deviceType,
       getCompanyInfoSettings,
+      displayAbout,
       standalone,
       licenseAgreementsUrl,
     } = settingsStore;
 
+    const { isCustomizationAvailable, isBrandingAvailable } = currentQuotaStore;
+
     const { isEnterprise } = currentTariffStatusStore;
 
-    const { isCustomizationAvailable } = currentQuotaStore;
     const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
 
     return {
@@ -156,7 +169,9 @@ export const CompanyInfoSettings = inject(
       isLoadedCompanyInfoSettingsData,
       buildVersionInfo,
       isSettingPaid,
+      isBrandingAvailable,
       deviceType,
+      displayAbout,
       getCompanyInfoSettings,
       standalone,
       licenseAgreementsUrl,

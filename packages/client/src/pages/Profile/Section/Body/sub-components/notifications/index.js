@@ -44,7 +44,7 @@ import { StyledSectionBodyContent, StyledTextContent } from "./StyledComponent";
 const { Badges, RoomsActivity, DailyFeed, UsefulTips } = NotificationsType;
 
 const Notifications = ({ setSubscriptions, isFirstSubscriptionsLoad }) => {
-  const { t, ready } = useTranslation("Notifications");
+  const { t, ready } = useTranslation(["Notifications", "Common"]);
 
   const [isLoading, setIsLoading] = useState(false);
 

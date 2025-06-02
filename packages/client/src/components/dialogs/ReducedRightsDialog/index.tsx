@@ -91,7 +91,7 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
   );
 };
 
-export default inject(({ dialogsStore, treeFoldersStore }: TStore) => {
+export default inject(({ dialogsStore }: TStore) => {
   const { reducedRightsData, setReducedRightsData } = dialogsStore;
 
   return {

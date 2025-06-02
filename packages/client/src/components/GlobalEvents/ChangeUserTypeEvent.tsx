@@ -180,7 +180,7 @@ const ChangeUserTypeEvent = ({
   );
 };
 
-export default inject(({ peopleStore, treeFoldersStore }: TStore) => {
+export default inject(({ peopleStore }: TStore) => {
   const { dialogStore, usersStore } = peopleStore;
 
   const { data: dialogData } = dialogStore!;

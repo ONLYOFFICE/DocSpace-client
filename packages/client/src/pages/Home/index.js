@@ -53,7 +53,11 @@ import AccountsDialogs from "./Section/ContactsBody/Dialogs";
 import FilesSelectionArea from "./SelectionArea/FilesSelectionArea";
 import ContactsSelectionArea from "./SelectionArea/ContactsSelectionArea";
 
-import { InfoPanelBodyContent, InfoPanelHeaderContent } from "./InfoPanel";
+import {
+  InfoPanelActions,
+  InfoPanelBodyContent,
+  InfoPanelHeaderContent,
+} from "./InfoPanel";
 
 import MediaViewer from "./MediaViewer";
 
@@ -425,6 +429,7 @@ const PureHome = (props) => {
           <InfoPanelBodyContent />
         </Section.InfoPanelBody>
       </SectionWrapper>
+      <InfoPanelActions />
     </>
   );
 };

@@ -258,7 +258,7 @@ export default inject(({ peopleStore, infoPanelStore }: TStore) => {
   const { setInfoPanelSelection, isVisible: infoPanelVisible } = infoPanelStore;
 
   return {
-    needResetUserSelection,
+    needResetUserSelection: !infoPanelVisible || needResetUserSelection,
     updateUserStatus,
 
     setSelected,

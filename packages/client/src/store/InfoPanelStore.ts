@@ -57,12 +57,7 @@ import {
   getPrimaryLinkIfNotExistCreate,
 } from "@docspace/shared/api/files";
 import isEqual from "lodash/isEqual";
-import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
-import {
-  addLinksToHistory,
-  parseHistory,
-} from "SRC_DIR/pages/Home/InfoPanel/Body/helpers/HistoryHelper";
-import { getContactsView } from "SRC_DIR/helpers/contacts";
+
 import api from "@docspace/shared/api";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TGroup } from "@docspace/shared/api/groups/types";
@@ -72,13 +67,19 @@ import { Nullable, TTranslation } from "@docspace/shared/types";
 import { ShareProps } from "@docspace/shared/components/share/Share.types";
 import { TError } from "@docspace/shared/utils/axiosClient";
 import FilesFilter from "@docspace/shared/api/files/filter";
+
+import { getUserStatus } from "../helpers/people-helpers";
+import { type TPeopleListItem, getContactsView } from "../helpers/contacts";
+import {
+  addLinksToHistory,
+  parseHistory,
+} from "../pages/Home/InfoPanel/Body/helpers/HistoryHelper";
 import SelectedFolderStore, { TSelectedFolder } from "./SelectedFolderStore";
 import FilesSettingsStore from "./FilesSettingsStore";
 import FilesStore from "./FilesStore";
 import PeopleStore from "./contacts/PeopleStore";
 import PublicRoomStore from "./PublicRoomStore";
 import TreeFoldersStore from "./TreeFoldersStore";
-import { TPeopleListItem } from "./contacts/UsersStore";
 import {
   HistoryFilter,
   InfoPanelView,
@@ -164,11 +165,27 @@ class InfoPanelStore {
     startIndex: 0,
   };
 
+  userSelection: Nullable<TPeopleListItem> | TPeopleListItem[] = null;
+
   constructor(userStore: UserStore) {
     this.userStore = userStore;
 
     makeAutoObservable(this);
   }
+
+  setUserSelection = (user: Nullable<TPeopleListItem> | TPeopleListItem[]) => {
+    this.userSelection = user;
+  };
+
+  updateUserSelection = (user: TPeopleListItem) => {
+    if (
+      this.isVisible &&
+      this.userSelection &&
+      !Array.isArray(this.userSelection) &&
+      this.userSelection.id === user.id
+    )
+      this.userSelection = user;
+  };
 
   // Setters
 

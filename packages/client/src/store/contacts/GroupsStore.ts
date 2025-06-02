@@ -48,8 +48,12 @@ import {
   getContactsUrl,
   setContactsGroupsFilterUrl,
 } from "SRC_DIR/helpers/contacts";
+import {
+  setInfoPanelGroup,
+  setInfoPanelSelectedGroup,
+  showInfoPanel,
+} from "SRC_DIR/helpers/info-panel";
 
-import InfoPanelStore from "../InfoPanelStore";
 import ClientLoadingStore from "../ClientLoadingStore";
 
 import DialogStore from "./DialogStore";
@@ -81,14 +85,12 @@ class GroupsStore {
 
   constructor(
     public peopleStore: TStore["peopleStore"],
-    public infoPanelStore: InfoPanelStore,
     public clientLoadingStore: ClientLoadingStore,
     public userStore: UserStore,
     public settingsStore: SettingsStore,
     public dialogStore: DialogStore,
   ) {
     this.peopleStore = peopleStore;
-    this.infoPanelStore = infoPanelStore;
     this.clientLoadingStore = clientLoadingStore;
     this.userStore = userStore;
     this.settingsStore = settingsStore;
@@ -120,12 +122,6 @@ class GroupsStore {
     });
 
     SocketHelper.on(SocketEvents.UpdateGroup, async (value) => {
-      const {
-        infoPanelSelection,
-        setInfoPanelSelection,
-        setInfoPanelSelectedGroup,
-      } = this.infoPanelStore;
-
       const { contactsTab } = this.peopleStore.usersStore;
 
       const { id, data } = value;
@@ -138,10 +134,8 @@ class GroupsStore {
 
       const group = await api.groups.getGroupById(id, true);
 
-      if ((infoPanelSelection as unknown as TGroup)?.id === group.id) {
-        setInfoPanelSelection(group);
-        setInfoPanelSelectedGroup(group);
-      }
+      setInfoPanelGroup(group);
+      setInfoPanelSelectedGroup(group);
 
       if (contactsTab !== "groups") {
         this.currentGroup = group;
@@ -375,7 +369,6 @@ class GroupsStore {
   };
 
   onDeleteGroup = async (t: TFunction, groupId: string) => {
-    const { setInfoPanelSelectedGroup } = this.infoPanelStore;
     const isDeletingCurrentGroup =
       this.peopleStore.usersStore!.contactsTab === "inside_group" &&
       this.currentGroup?.id === groupId;
@@ -396,7 +389,7 @@ class GroupsStore {
       );
       this.setSelection([]);
       this.getGroups(this.groupsFilter, true);
-      this.infoPanelStore.setInfoPanelSelection(null);
+      setInfoPanelGroup(null);
       this.setIsLoading(false);
       this.dialogStore.setDeleteGroupDialogVisible(false);
 
@@ -457,7 +450,7 @@ class GroupsStore {
         label: t("Common:Info"),
         title: t("Common:Info"),
         icon: InfoReactSvgUrl,
-        onClick: () => this.infoPanelStore.setIsVisible(true),
+        onClick: showInfoPanel,
       },
       {
         key: "separator",
@@ -522,7 +515,7 @@ class GroupsStore {
             this.peopleStore.usersStore!.setSelection([]);
             this.peopleStore.usersStore!.setBufferSelection(null);
           }
-          this.infoPanelStore.setIsVisible(true);
+          showInfoPanel();
         },
       });
 
@@ -591,12 +584,6 @@ class GroupsStore {
     membersToAdd: string[],
     membersToRemove: string[],
   ) => {
-    const {
-      infoPanelSelection,
-      setInfoPanelSelection,
-      setInfoPanelSelectedGroup,
-    } = this.infoPanelStore;
-
     try {
       const res = await groupsApi.updateGroup(
         groupId,
@@ -619,10 +606,8 @@ class GroupsStore {
         this.peopleStore.usersStore!.getUsersList();
       }
 
-      if ((infoPanelSelection as unknown as TGroup)?.id === res.id) {
-        setInfoPanelSelection(res);
-        setInfoPanelSelectedGroup(res);
-      }
+      setInfoPanelGroup(res);
+      setInfoPanelSelectedGroup(res);
     } catch (err: unknown) {
       toastr.error((err as { message: string }).message);
     }

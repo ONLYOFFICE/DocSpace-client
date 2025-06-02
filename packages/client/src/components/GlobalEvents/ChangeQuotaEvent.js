@@ -140,11 +140,14 @@ export default inject(
       infoPanelSelection,
       setNewInfoPanelSelection,
       setInfoPanelSelection,
+      isVisible: infoPanelVisible,
     } = infoPanelStore;
 
     const inRoom = !!infoPanelSelection?.navigationPath;
     const needResetSelection =
-      type === "user" ? needResetUserSelection : needResetFilesSelection;
+      type === "user"
+        ? !infoPanelVisible || needResetUserSelection
+        : needResetFilesSelection;
 
     return {
       setCustomRoomQuota,

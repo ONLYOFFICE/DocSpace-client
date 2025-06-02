@@ -49,7 +49,11 @@ import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url"
 import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
 import DefaultQuotaReactSvgUrl from "PUBLIC_DIR/images/default.quota.react.svg?url";
 
-import InfoPanelStore from "../InfoPanelStore";
+import {
+  getInfoPanelOpen,
+  setInfoPanelUser,
+  showInfoPanel,
+} from "SRC_DIR/helpers/info-panel";
 
 import GroupsStore from "./GroupsStore";
 import UsersStore from "./UsersStore";
@@ -62,7 +66,6 @@ class HeaderMenuStore {
     public usersStore: UsersStore,
     public dialogStore: DialogStore,
     public contextOptionsStore: AccountsContextOptionsStore,
-    public infoPanelStore: InfoPanelStore,
     public userStore: UserStore,
   ) {
     this.groupsStore = groupsStore;
@@ -79,15 +82,8 @@ class HeaderMenuStore {
     setDeleteGroupDialogVisible(true);
   };
 
-  onOpenInfoPanel = () => {
-    const { setIsVisible } = this.infoPanelStore;
-
-    setIsVisible(true);
-  };
-
   resetUserQuota = async (users: (TUser | string)[], t: TTranslation) => {
     const { getPeopleListItem } = this.usersStore;
-    const { setInfoPanelSelection } = this.infoPanelStore;
 
     const userIDs = users.map((user) => {
       return typeof user === "string" ? user : user.id;
@@ -97,9 +93,9 @@ class HeaderMenuStore {
       const items = await api.people.resetUserQuota(userIDs);
 
       if (items.length === 1) {
-        setInfoPanelSelection(getPeopleListItem(items[0]));
+        setInfoPanelUser(getPeopleListItem(items[0]));
       } else {
-        setInfoPanelSelection(items);
+        setInfoPanelUser(items.map((item) => getPeopleListItem(item)));
       }
 
       toastr.success(t("Common:StorageQuotaReset"));
@@ -110,19 +106,18 @@ class HeaderMenuStore {
 
   disableUserQuota = async (users: (TUser | string)[], t: TTranslation) => {
     const { getPeopleListItem } = this.usersStore!;
-    const { setInfoPanelSelection } = this.infoPanelStore;
 
     const userIDs = users.map((user) => {
       return typeof user === "string" ? user : user.id;
     });
 
     try {
-      const items = await api.people.setCustomUserQuota(userIDs, -1);
+      const items = await api.people.setCustomUserQuota(userIDs, "-1");
 
       if (items.length === 1) {
-        setInfoPanelSelection(getPeopleListItem(items[0]));
+        setInfoPanelUser(getPeopleListItem(items[0]));
       } else {
-        setInfoPanelSelection(items);
+        setInfoPanelUser(items.map((item) => getPeopleListItem(item)));
       }
 
       toastr.success(t("Common:StorageQuotaDisabled"));
@@ -149,8 +144,9 @@ class HeaderMenuStore {
     const { setSendInviteDialogVisible, setRemoveGuestDialogVisible } =
       this.dialogStore;
     const { toggleDeleteProfileEverDialog } = this.contextOptionsStore;
-    const { isVisible } = this.infoPanelStore;
     const { isRoomAdmin, isCollaborator } = this.userStore.user!;
+
+    const isInfoPanelVisible = getInfoPanelOpen();
 
     const isGuests = contactsTab === "guests";
 
@@ -192,10 +188,10 @@ class HeaderMenuStore {
         key: "info",
         label: t("Common:Info"),
         disabled:
-          isVisible ||
+          isInfoPanelVisible ||
           !(isTablet() || isMobile() || !isDesktop()) ||
           selection.length > 1,
-        onClick: this.onOpenInfoPanel,
+        onClick: showInfoPanel,
         iconUrl: InfoReactSvgUrl,
       },
       {

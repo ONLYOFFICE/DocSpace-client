@@ -32,34 +32,30 @@ import { useNavigate } from "react-router";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import { ComboBox, ComboBoxSize } from "@docspace/shared/components/combobox";
+import {
+  ComboBox,
+  ComboBoxSize,
+  TOption,
+} from "@docspace/shared/components/combobox";
 import { TContextMenuValueTypeOnClick } from "@docspace/shared/components/context-menu/ContextMenu.types";
 
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
-import { TUser } from "@docspace/shared/api/people/types";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { EmployeeStatus } from "@docspace/shared/enums";
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
-import { getContactsUrl } from "SRC_DIR/helpers/contacts";
+import { getContactsUrl, TPeopleListItem } from "SRC_DIR/helpers/contacts";
 import ContactsConextOptionsStore from "SRC_DIR/store/contacts/ContactsContextOptionsStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
-import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
 
 import { StyledUsersContent } from "../../styles/Users";
 
-type TInfoPanelSelection = ReturnType<UsersStore["getPeopleListItem"]>;
-
 type UsersProps = {
-  infoPanelSelection: TInfoPanelSelection;
-  setInfoPanelSelection: InfoPanelStore["setInfoPanelSelection"];
-
   canChangeUserType: AccessRightsStore["canChangeUserType"];
 
-  getPeopleListItem: UsersStore["getPeopleListItem"];
   setUsersSelection: UsersStore["setSelection"];
   setUsersBufferSelection: UsersStore["setBufferSelection"];
   getUsersChangeTypeOptions: ContactsConextOptionsStore["getUsersChangeTypeOptions"];
@@ -68,20 +64,20 @@ type UsersProps = {
 
   standalone: SettingsStore["standalone"];
 
+  userSelection: TPeopleListItem;
+
   isGuests: boolean;
 };
 
 const Users = ({
-  infoPanelSelection,
   canChangeUserType,
-  setInfoPanelSelection,
-  getPeopleListItem,
   setUsersSelection,
   setUsersBufferSelection,
   getUsersChangeTypeOptions,
 
   showStorageInfo,
   standalone,
+  userSelection,
   isGuests,
 }: UsersProps) => {
   const { t, ready } = useTranslation([
@@ -102,12 +98,12 @@ const Users = ({
   const [statusLabel, setStatusLabel] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const { role, isVisitor, isCollaborator } = infoPanelSelection;
+  const { role, isVisitor, isCollaborator } = userSelection;
 
   const getStatusLabel = React.useCallback(() => {
     let label = "";
 
-    switch (infoPanelSelection.status) {
+    switch (userSelection.status) {
       case EmployeeStatus.Pending:
         label = t("PeopleTranslations:PendingInviteTitle");
         break;
@@ -123,28 +119,27 @@ const Users = ({
     }
 
     setStatusLabel(label);
-  }, [infoPanelSelection.status, t]);
+  }, [userSelection.status, t]);
 
   React.useEffect(() => {
     getStatusLabel();
-  }, [infoPanelSelection, getStatusLabel]);
+  }, [userSelection, getStatusLabel]);
 
   const onAbort = () => {
     setIsLoading(false);
   };
 
-  const onSuccess = (users: TUser[]) => {
-    if (users) {
-      const items = users.map((u) => getPeopleListItem(u));
-
-      if (items.length === 1) {
-        setInfoPanelSelection(items[0]);
-      } else {
-        setInfoPanelSelection(items);
-      }
-    }
-    setIsLoading(false);
-  };
+  // const onSuccess = () => {
+  //   if (users) {
+  //     const items = users.map((u) => getPeopleListItem(u));
+  //     if (items.length === 1) {
+  //       setInfoPanelSelection(items[0]);
+  //     } else {
+  //       setInfoPanelSelection(items);
+  //     }
+  //   }
+  //   setIsLoading(false);
+  // };
 
   const onGroupClick = (groupId: string) => {
     const url = getContactsUrl("inside_group", groupId);
@@ -154,7 +149,7 @@ const Users = ({
   };
 
   const renderTypeData = () => {
-    const typesOptions = getUsersChangeTypeOptions(t, infoPanelSelection);
+    const typesOptions = getUsersChangeTypeOptions(t, userSelection);
 
     const typeLabel = getUserTypeTranslation(role, t);
 
@@ -172,21 +167,18 @@ const Users = ({
       </Text>
     );
 
-    const status = getUserStatus(infoPanelSelection);
+    const status = getUserStatus(userSelection);
 
     const canChange = canChangeUserType({
-      ...infoPanelSelection,
+      ...userSelection,
       statusType: status,
     });
 
     if (!canChange || isGuests || !selectedOption) return text;
 
-    const onSelect = (
-      option: TContextMenuValueTypeOnClick & {
-        onClick: (e: TContextMenuValueTypeOnClick) => void;
-      },
-    ) => {
-      if (option.onClick) option.onClick({ ...option });
+    const onSelect = (option: TOption) => {
+      if (option.onClick)
+        option.onClick(option as unknown as TContextMenuValueTypeOnClick);
     };
 
     const combobox = (
@@ -241,7 +233,7 @@ const Users = ({
         </Text>
         {typeData}
 
-        {isGuests && infoPanelSelection.createdBy?.displayName ? (
+        {isGuests && userSelection.createdBy?.displayName ? (
           <>
             <Text className="info_field" noSelect title={t("Common:Inviter")}>
               {t("Common:Inviter")}
@@ -253,12 +245,12 @@ const Users = ({
               noSelect
               title={statusLabel}
             >
-              {infoPanelSelection.createdBy.displayName}
+              {userSelection.createdBy.displayName}
             </Text>
           </>
         ) : null}
 
-        {infoPanelSelection.status === EmployeeStatus.Active ? (
+        {userSelection.status === EmployeeStatus.Active ? (
           <>
             <Text
               className="info_field"
@@ -272,9 +264,9 @@ const Users = ({
               fontSize="13px"
               fontWeight={600}
               noSelect
-              title={infoPanelSelection.registrationDate}
+              title={userSelection.registrationDate}
             >
-              {infoPanelSelection.registrationDate}
+              {userSelection.registrationDate}
             </Text>
           </>
         ) : null}
@@ -301,15 +293,15 @@ const Users = ({
             </Text>
             <SpaceQuota
               type="user"
-              item={infoPanelSelection}
+              item={userSelection}
               className="type-combobox"
-              onSuccess={onSuccess}
+              // onSuccess={onSuccess}
               onAbort={onAbort}
             />
           </>
         ) : null}
 
-        {infoPanelSelection?.groups?.length && !isGuests ? (
+        {userSelection?.groups?.length && !isGuests ? (
           <>
             <Text
               className="info_field info_field_groups"
@@ -320,7 +312,7 @@ const Users = ({
             </Text>
 
             <div className="info_groups">
-              {infoPanelSelection.groups.map((group) => (
+              {userSelection.groups.map((group) => (
                 <Link
                   key={group.id}
                   className="info_data info_group"
@@ -347,7 +339,6 @@ export default inject(
   ({
     peopleStore,
     accessRightsStore,
-    infoPanelStore,
     currentQuotaStore,
     settingsStore,
   }: TStore) => {
@@ -355,12 +346,9 @@ export default inject(
 
     const { canChangeUserType } = accessRightsStore;
 
-    const { setInfoPanelSelection } = infoPanelStore;
-
     const {
       setSelection: setUsersSelection,
       setBufferSelection: setUsersBufferSelection,
-      getPeopleListItem,
     } = usersStore!;
 
     const { getUsersChangeTypeOptions } = contextOptionsStore!;
@@ -370,8 +358,7 @@ export default inject(
 
     return {
       canChangeUserType,
-      getPeopleListItem,
-      setInfoPanelSelection,
+
       setUsersSelection,
       setUsersBufferSelection,
       getUsersChangeTypeOptions,

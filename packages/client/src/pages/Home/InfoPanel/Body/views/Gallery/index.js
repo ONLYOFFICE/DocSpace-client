@@ -124,8 +124,5 @@ export default inject(({ settingsStore, filesSettingsStore, oformsStore }) => {
 })(
   withTranslation(["InfoPanel", "FormGallery", "Common", "Translations"])(
     Gallery,
-    // withLoader(observer(Gallery))(
-    //   <Loaders.InfoPanelViewLoader view="gallery" />
-    // )
   ),
 );

@@ -24,44 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export {
-  CONTACTS_ROUTE,
-  PEOPLE_ROUTE,
-  GROUPS_ROUTE,
-  GUESTS_ROUTE,
-  INSIDE_GROUP_ROUTE,
-  PEOPLE_ROUTE_WITH_FILTER,
-  GROUPS_ROUTE_WITH_FILTER,
-  GUESTS_ROUTE_WITH_FILTER,
-  INSIDE_GROUP_ROUTE_WITH_FILTER,
-} from "./constants";
+export const enum InfoPanelEvents {
+  showInfoPanel = "SHOW_INFO_PANEL_EVENT",
+  hideInfoPanel = "HIDE_INFO_PANEL_EVENT",
 
-export type {
-  TContactsSelected,
-  TContactsTab,
-  TContactsViewAs,
-  TContactsMenuItemdId,
-  TChangeUserTypeDialogData,
-  TChangeUserStatusDialogData,
-  TPeopleListItem,
-} from "./types";
+  setInfoPanelUser = "SET_INFO_PANEL_USER_EVENT",
+  setInfoPanelGroup = "SET_INFO_PANEL_GROUP_EVENT",
+  setInfoPanelFile = "SET_INFO_PANEL_FILE_EVENT",
+  setInfoPanelFolder = "SET_INFO_PANEL_FOLDER_EVENT",
+  setInfoPanelRoom = "SET_INFO_PANEL_ROOM_EVENT",
 
-export {
-  setContactsUsersFilterUrl,
-  setContactsGroupsFilterUrl,
-  resetFilter,
-  resetContactsGroupsFilter,
-  employeeWrapperToMemberModel,
-  getUserChecked,
-  getContactsMenuItemId,
-  getContactsCheckboxItemLabel,
-  changeUserQuota,
-  onDeletePersonalDataClick,
-  onInviteAgainClick,
-  onInviteMultipleAgain,
-  getContactsView,
-  getContactsUrl,
-  createGroup,
-  editGroup,
-  shareGuest,
-} from "./utils";
+  updateInfoPanelUser = "UPDATE_INFO_PANEL_USER_EVENT",
+  updateInfoPanelGroup = "UPDATE_INFO_PANEL_GROUP_EVENT",
+  updateInfoPanelFile = "UPDATE_INFO_PANEL_FILE_EVENT",
+  updateInfoPanelFolder = "UPDATE_INFO_PANEL_FOLDER_EVENT",
+  updateInfoPanelRoom = "UPDATE_INFO_PANEL_ROOM_EVENT",
+
+  setInfoPanelSelectedRoom = "SET_INFO_PANEL_SELECTED_ROOM_EVENT",
+  setInfoPanelSelectedGroup = "SET_INFO_PANEL_SELECTED_GROUP_EVENT",
+
+  openShareTab = "OPEN_INFO_PANEL_SHARE_TAB_EVENT",
+  openMembersTab = "OPEN_INFO_PANEL_MEMBERS_TAB_EVENT",
+
+  setFileView = "SET_INFO_PANEL_FILE_VIEW_EVENT",
+  setRoomsView = "SET_INFO_PANEL_ROOMS_VIEW_EVENT",
+}

@@ -298,31 +298,35 @@ const DataReassignmentDialog = ({
   );
 };
 
-export default inject(({ settingsStore, peopleStore, userStore }) => {
-  const {
-    setDataReassignmentDialogVisible,
-    dataReassignmentDeleteProfile,
-    setDataReassignmentDeleteProfile,
-  } = peopleStore.dialogStore;
-  const { currentColorScheme, dataReassignmentUrl } = settingsStore;
+export default inject(
+  ({ settingsStore, peopleStore, userStore, infoPanelStore }) => {
+    const {
+      setDataReassignmentDialogVisible,
+      dataReassignmentDeleteProfile,
+      setDataReassignmentDeleteProfile,
+    } = peopleStore.dialogStore;
+    const { currentColorScheme, dataReassignmentUrl } = settingsStore;
 
-  const { user: currentUser } = userStore;
+    const { user: currentUser } = userStore;
 
-  const { needResetUserSelection, setSelected } = peopleStore.usersStore;
+    const { needResetUserSelection, setSelected } = peopleStore.usersStore;
 
-  return {
-    setDataReassignmentDialogVisible,
-    theme: settingsStore.theme,
-    currentColorScheme,
-    currentUser,
-    deleteProfile: dataReassignmentDeleteProfile,
-    setDataReassignmentDeleteProfile,
+    const { isVisible: infoPanelVisible } = infoPanelStore;
 
-    dataReassignmentUrl,
-    needResetUserSelection,
-    setSelected,
-  };
-})(
+    return {
+      setDataReassignmentDialogVisible,
+      theme: settingsStore.theme,
+      currentColorScheme,
+      currentUser,
+      deleteProfile: dataReassignmentDeleteProfile,
+      setDataReassignmentDeleteProfile,
+
+      dataReassignmentUrl,
+      needResetUserSelection: !infoPanelVisible || needResetUserSelection,
+      setSelected,
+    };
+  },
+)(
   observer(
     withTranslation([
       "Common",

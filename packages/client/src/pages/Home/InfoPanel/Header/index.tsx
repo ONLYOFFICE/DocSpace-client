@@ -168,14 +168,6 @@ const InfoPanelHeaderContent = ({
     infoPanelItemsList.forEach((item) => {
       const onClick = async () => {
         setView(`info_plugin-${item.key}`);
-
-        // if (
-        //   item.value.subMenu.onClick &&
-        //   selection &&
-        //   !Array.isArray(selection)
-        // ) {
-        //   item.value.subMenu.onClick(selection.id ? +selection.id : 0);
-        // }
       };
 
       const tabsItem = {

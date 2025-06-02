@@ -37,6 +37,8 @@ import ViewHelper from "./helpers/ViewHelper";
 import ItemTitle from "./sub-components/ItemTitle";
 import { StyledInfoPanelBody } from "./styles/common";
 
+import Users from "./views/Users";
+
 const InfoPanelBodyContent = ({
   infoPanelSelection,
   setNewInfoPanelSelection,
@@ -65,6 +67,9 @@ const InfoPanelBodyContent = ({
   onChangeFile,
   templateEventVisible,
   setIsShareFormData,
+
+  userSelection,
+
   ...props
 }) => {
   const { groupId } = useParams();
@@ -100,8 +105,6 @@ const InfoPanelBodyContent = ({
     isNoItemGallery ||
     (isRoot && !isGallery);
 
-  console.log("isNoItem", isNoItem);
-
   const defaultProps = {
     infoPanelSelection,
     isFiles,
@@ -123,16 +126,10 @@ const InfoPanelBodyContent = ({
     detailsProps: {},
     membersProps: {},
     historyProps: { selectedFolder },
-    usersProps: {},
     groupsProps: {},
     galleryProps: {},
     pluginProps: { isRooms, roomsView, fileView },
   });
-
-  // const onChangeFile = async (e) => {
-  //   const uploadedFile = await uploadFile(t, e);
-  //   setImage({ ...image, uploadedFile: uploadedFile });
-  // };
 
   const onChangeIcon = (icon) => {
     setImage(icon);
@@ -141,11 +138,26 @@ const InfoPanelBodyContent = ({
   const getView = () => {
     const currentView = isRooms ? roomsView : fileView;
 
+    if (isUsers || isGuests) {
+      if (!userSelection) return viewHelper.NoItemView();
+
+      if (Array.isArray(userSelection) && userSelection.length > 1)
+        return viewHelper.SeveralItemsView();
+
+      return (
+        <Users
+          userSelection={
+            Array.isArray(userSelection) ? userSelection[0] : userSelection
+          }
+        />
+      );
+    }
+
     if (isSeveralItems) return viewHelper.SeveralItemsView();
+
     if (isNoItem) return viewHelper.NoItemView();
 
     if (isGallery) return viewHelper.GalleryView();
-    if (isUsers || isGuests) return viewHelper.UsersView();
     if (isGroups) return viewHelper.GroupsView();
 
     switch (currentView) {
@@ -263,6 +275,8 @@ export default inject(
       getIsContacts,
       showSearchBlock,
       setShowSearchBlock,
+
+      userSelection,
     } = infoPanelStore;
 
     const {
@@ -323,6 +337,8 @@ export default inject(
       image,
       templateEventVisible,
       setIsShareFormData,
+
+      userSelection,
     };
   },
 )(observer(InfoPanelBodyContent));

@@ -24,23 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  API_PREFIX,
-  BASE_URL,
-  endpoints,
-  getConfirmSuccess,
-  getSuccessColorTheme,
-  HEADER_SELF_ERROR_404,
-  settingsNoAuth,
-  successSelf,
-  tfaAppSuccess,
-} from "@docspace/shared/__mocks__/e2e";
-import { createGetTfaSecretKeyAndQRHandler } from "@docspace/shared/__mocks__/login/handlers/getTfaSecretKeyAndQR";
+import { API_PREFIX, endpoints } from "@docspace/shared/__mocks__/e2e";
 import { expect, test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { http, HttpResponse } from "msw";
+import { selfHandler } from "@docspace/shared/__mocks__/e2e/handlers/people/self";
+
 const URL = "/login/confirm/TfaActivation";
-const NEXT_REQUEST_URL = "*/**/login/confirm/TfaActivation";
 
 const QUERY_PARAMS = [
   {
@@ -54,57 +44,22 @@ const QUERY_PARAMS = [
   },
 ];
 
-// const QUERY_PARAMS_WITH_LINK_DATA = QUERY_PARAMS.concat([
-//   {
-//     name: "linkData",
-//     value: "yJ0eXBlIjoiTGlua0ludml",
-//   },
-//   {
-//     name: "publicAuth",
-//     value: "null",
-//   },
-// ]);
+const QUERY_PARAMS_WITH_LINK_DATA = QUERY_PARAMS.concat([
+  {
+    name: "linkData",
+    value: "yJ0eXBlIjoiTGlua0ludml",
+  },
+  {
+    name: "publicAuth",
+    value: "null",
+  },
+]);
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
-// const URL_WITH_LINK_DATA_PARAMS = getUrlWithQueryParams(
-//   URL,
-//   QUERY_PARAMS_WITH_LINK_DATA,
-// );
-// const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
-//   NEXT_REQUEST_URL,
-//   QUERY_PARAMS,
-// );
-
-const getHandlers = (port: string) => [
-  http.get(
-    `http://localhost:${port}/${API_PREFIX}/settings/tfaapp/setup`,
-    () => {
-      return HttpResponse.json(tfaAppSuccess);
-    },
-  ),
-  http.get(
-    `http://localhost:${port}/${API_PREFIX}/settings?withPassword=true`,
-    () => {
-      return HttpResponse.json(settingsNoAuth);
-    },
-  ),
-  http.get(`http://localhost:${port}/${API_PREFIX}/people/*`, () => {
-    return HttpResponse.json(successSelf);
-  }),
-  http.get(`http://localhost:${port}/${API_PREFIX}/settings/colortheme`, () => {
-    return HttpResponse.json(getSuccessColorTheme());
-  }),
-  http.post(
-    `http://localhost:${port}/${API_PREFIX}/authentication/confirm`,
-    () => {
-      return HttpResponse.json(getConfirmSuccess());
-    },
-  ),
-];
-
-test.beforeAll(async ({ requestInterceptor, port }) => {
-  requestInterceptor.use(...getHandlers(port));
-});
+const URL_WITH_LINK_DATA_PARAMS = getUrlWithQueryParams(
+  URL,
+  QUERY_PARAMS_WITH_LINK_DATA,
+);
 
 test("tfa activation render", async ({ page, port }) => {
   await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
@@ -116,67 +71,78 @@ test("tfa activation render", async ({ page, port }) => {
   ]);
 });
 
-// test("tfa activation success", async ({ page, mockRequest }) => {
-//   await mockRequest.router([
-//     endpoints.tfaAppValidate,
-//     endpoints.loginWithTfaCode,
-//   ]);
-//   await page.goto(URL_WITH_PARAMS);
+test("tfa activation success", async ({ page, mockRequest, port }) => {
+  await mockRequest.router([
+    endpoints.tfaAppValidate,
+    endpoints.loginWithTfaCode,
+  ]);
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
-//   await page.getByTestId("text-input").fill("123456");
+  await page.getByTestId("text-input").fill("123456");
 
-//   await expect(page).toHaveScreenshot([
-//     "desktop",
-//     "tfa-activation",
-//     "tfa-activation-success.png",
-//   ]);
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "tfa-activation",
+    "tfa-activation-success.png",
+  ]);
 
-//   await page.getByTestId("button").click();
+  await page.getByTestId("button").click();
 
-//   await page.waitForURL("/profile", { waitUntil: "load" });
+  await page.waitForURL(`http://localhost:${port}/profile`, {
+    waitUntil: "load",
+  });
 
-//   await expect(page).toHaveScreenshot([
-//     "desktop",
-//     "tfa-activation",
-//     "tfa-activation-success-redirect.png",
-//   ]);
-// });
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "tfa-activation",
+    "tfa-activation-success-redirect.png",
+  ]);
+});
 
-// test("tfa activation success with link data", async ({ page, mockRequest }) => {
-//   await mockRequest.router([
-//     endpoints.tfaAppValidate,
-//     endpoints.loginWithTfaCode,
-//     endpoints.checkConfirmLink,
-//   ]);
-//   await page.goto(URL_WITH_LINK_DATA_PARAMS);
+test("tfa activation success with link data", async ({
+  page,
+  mockRequest,
+  port,
+}) => {
+  await mockRequest.router([
+    endpoints.tfaAppValidate,
+    endpoints.loginWithTfaCode,
+    endpoints.checkConfirmLink,
+  ]);
+  await page.goto(`http://localhost:${port}${URL_WITH_LINK_DATA_PARAMS}`);
 
-//   await page.getByTestId("text-input").fill("123456");
+  await page.getByTestId("text-input").fill("123456");
 
-//   await page.getByTestId("button").click();
+  await page.getByTestId("button").click();
 
-//   await page.waitForURL("/profile", { waitUntil: "load" });
+  await page.waitForURL(`http://localhost:${port}/profile`, {
+    waitUntil: "load",
+  });
 
-//   await expect(page).toHaveScreenshot([
-//     "desktop",
-//     "tfa-activation",
-//     "tfa-activation-with-link-data-success.png",
-//   ]);
-// });
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "tfa-activation",
+    "tfa-activation-with-link-data-success.png",
+  ]);
+});
 
-// test("tfa activation error not validated", async ({ page, mockRequest }) => {
-//   await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-//     HEADER_SELF_ERROR_404,
-//   ]);
-//   await mockRequest.router([endpoints.tfaAppValidateError]);
-//   await page.goto(URL_WITH_PARAMS);
+test("tfa activation error not validated", async ({
+  page,
+  mockRequest,
+  port,
+  requestInterceptor,
+}) => {
+  requestInterceptor.use(selfHandler(port, 404));
+  await mockRequest.router([endpoints.tfaAppValidateError]);
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
-//   await page.getByTestId("text-input").fill("123456");
+  await page.getByTestId("text-input").fill("123456");
 
-//   await page.getByTestId("button").click();
+  await page.getByTestId("button").click();
 
-//   await expect(page).toHaveScreenshot([
-//     "desktop",
-//     "tfa-activation",
-//     "tfa-activation-error-not-validated.png",
-//   ]);
-// });
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "tfa-activation",
+    "tfa-activation-error-not-validated.png",
+  ]);
+});

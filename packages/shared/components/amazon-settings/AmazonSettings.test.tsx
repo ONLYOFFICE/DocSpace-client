@@ -130,7 +130,7 @@ describe("AmazonSettings", () => {
 
     expect(mockAddValueInFormSettings).toHaveBeenCalledWith(
       bucket,
-      "bucket text1234"
+      "bucket text1234",
     );
     expect(mockSetIsThirdStorageChanged).toHaveBeenCalledWith(true);
   });
@@ -139,11 +139,13 @@ describe("AmazonSettings", () => {
     renderWithTheme(<AmazonSettings {...defaultProps} />);
 
     const serviceUrlInput = screen.getByTestId("amazon-service-url-input");
-    fireEvent.change(serviceUrlInput, { target: { value: "custom.s3.amazonaws.com" } });
+    fireEvent.change(serviceUrlInput, {
+      target: { value: "custom.s3.amazonaws.com" },
+    });
 
     expect(mockAddValueInFormSettings).toHaveBeenCalledWith(
       SERVICE_URL,
-      "custom.s3.amazonaws.com"
+      "custom.s3.amazonaws.com",
     );
     expect(mockSetIsThirdStorageChanged).toHaveBeenCalledWith(true);
   });
@@ -156,7 +158,7 @@ describe("AmazonSettings", () => {
 
     expect(mockAddValueInFormSettings).toHaveBeenCalledWith(
       FORCEPATH_STYLE,
-      "false"
+      "false",
     );
     expect(mockSetIsThirdStorageChanged).toHaveBeenCalledWith(true);
   });

@@ -2354,3 +2354,11 @@
   --search-input-default-icon-fill: #{$gray-dark-strong};
   --search-input-filled-icon-fill: #{$gray-dark};
 }
+
+.light {
+  --about-logo-color: #{$black};
+}
+
+.dark {
+  --about-logo-color: #{$white};
+}

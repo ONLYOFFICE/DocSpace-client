@@ -35,19 +35,12 @@ import { TRoom } from "@docspace/shared/api/rooms/types";
 
 import { InfoPanelEvents } from "SRC_DIR/helpers/info-panel/enums";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
-import { TPeopleListItem } from "SRC_DIR/helpers/contacts";
 
 type TInfoPanelActionsProps = {
-  setUserSelection?: InfoPanelStore["setUserSelection"];
-  updateUserSelection?: InfoPanelStore["updateUserSelection"];
   setIsVisible?: InfoPanelStore["setIsVisible"];
 };
 
-const InfoPanelActions = ({
-  setUserSelection,
-  updateUserSelection,
-  setIsVisible,
-}: TInfoPanelActionsProps) => {
+const InfoPanelActions = ({ setIsVisible }: TInfoPanelActionsProps) => {
   // Show info panel
   useEffect(() => {
     const showInfoPanelHandler = () => {
@@ -85,48 +78,6 @@ const InfoPanelActions = ({
       );
     };
   }, [setIsVisible]);
-
-  // Set info panel user
-  useEffect(() => {
-    const setInfoPanelUserHandler = (
-      e: CustomEvent<{ user: Nullable<TPeopleListItem> | TPeopleListItem[] }>,
-    ) => {
-      setUserSelection!(e.detail.user);
-    };
-
-    window.addEventListener(
-      InfoPanelEvents.setInfoPanelUser,
-      setInfoPanelUserHandler as EventListener,
-    );
-
-    return () => {
-      window.removeEventListener(
-        InfoPanelEvents.setInfoPanelUser,
-        setInfoPanelUserHandler as EventListener,
-      );
-    };
-  }, [setUserSelection]);
-
-  // Update info panel user
-  useEffect(() => {
-    const updateInfoPanelUserHandler = (
-      e: CustomEvent<{ user: TPeopleListItem }>,
-    ) => {
-      updateUserSelection!(e.detail.user);
-    };
-
-    window.addEventListener(
-      InfoPanelEvents.updateInfoPanelUser,
-      updateInfoPanelUserHandler as EventListener,
-    );
-
-    return () => {
-      window.removeEventListener(
-        InfoPanelEvents.updateInfoPanelUser,
-        updateInfoPanelUserHandler as EventListener,
-      );
-    };
-  }, []);
 
   // Set info panel group
   useEffect(() => {
@@ -380,8 +331,7 @@ const InfoPanelActions = ({
 
 export default inject(
   ({ infoPanelStore }: { infoPanelStore: InfoPanelStore }) => {
-    const { setUserSelection, updateUserSelection, setIsVisible } =
-      infoPanelStore;
-    return { setUserSelection, updateUserSelection, setIsVisible };
+    const { setIsVisible } = infoPanelStore;
+    return { setIsVisible };
   },
 )(observer(InfoPanelActions));

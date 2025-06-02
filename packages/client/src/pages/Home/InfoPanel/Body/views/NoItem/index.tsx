@@ -28,6 +28,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import type { TRoom } from "@docspace/shared/api/rooms/types";
+import { WithFlag } from "@docspace/shared/types";
 
 import NoGalleryItem from "./NoGalleryItem";
 import NoRoomItem from "./NoRoomItem";
@@ -36,16 +37,22 @@ import NoContactsItem from "./NoContactsItem";
 import ExpiredItem from "./ExpiredItem";
 import LockedItem from "./LockedItem";
 
+type SharedRoom = WithFlag<
+  "isLockedSharedRoom",
+  {
+    isLockedSharedRoom: true;
+    infoPanelSelection: TRoom;
+  }
+>;
+
 type NoItemsProps = {
-  isUsers: boolean;
-  isGroups: boolean;
-  isGuests: boolean;
-  isGallery: boolean;
-  isRooms: boolean;
-  isFiles: boolean;
-  isLockedSharedRoom: boolean;
-  infoPanelSelection: TRoom;
-};
+  isUsers?: boolean;
+  isGroups?: boolean;
+  isGuests?: boolean;
+  isGallery?: boolean;
+  isRooms?: boolean;
+  isFiles?: boolean;
+} & SharedRoom;
 
 const NoItem = ({
   isUsers,

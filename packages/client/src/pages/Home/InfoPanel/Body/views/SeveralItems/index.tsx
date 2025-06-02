@@ -36,20 +36,19 @@ import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/empty_screen_alt.svg?url";
 import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_alt_dark.svg?url";
 
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+import { TPeopleListItem } from "SRC_DIR/helpers/contacts";
 
 import { StyledSeveralItemsContainer } from "../../styles/SeveralItems";
 
 type SeveralItemsProps = {
   isGroups: boolean;
   isUsers: boolean;
-  isGuests: boolean;
-  selectedItems: InfoPanelStore["infoPanelSelectedItems"];
+  selectedItems: TPeopleListItem[] | InfoPanelStore["infoPanelSelectedItems"];
 };
 
 const SeveralItems = ({
   isGroups,
   isUsers,
-  isGuests,
   selectedItems,
 }: SeveralItemsProps) => {
   const { t } = useTranslation(["InfoPanel"]);
@@ -63,7 +62,7 @@ const SeveralItems = ({
     ? EmptyScreenPersonSvgUrl
     : EmptyScreenPersonSvgDarkUrl;
 
-  const isContacts = isGroups || isUsers || isGuests;
+  const isContacts = isGroups || isUsers;
 
   const imgSrc = isContacts ? emptyScreenPerson : emptyScreenAlt;
 

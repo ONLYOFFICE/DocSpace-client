@@ -36,8 +36,8 @@ import { StyledNoItemContainer } from "../../styles/NoItem";
 
 type NoContactsItemProps = {
   t: TTranslation;
-  isGroups: boolean;
-  isGuests: boolean;
+  isGroups?: boolean;
+  isGuests?: boolean;
 };
 
 const NoContactsItem = ({ t, isGroups, isGuests }: NoContactsItemProps) => {

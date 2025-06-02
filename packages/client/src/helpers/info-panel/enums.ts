@@ -28,13 +28,11 @@ export const enum InfoPanelEvents {
   showInfoPanel = "SHOW_INFO_PANEL_EVENT",
   hideInfoPanel = "HIDE_INFO_PANEL_EVENT",
 
-  setInfoPanelUser = "SET_INFO_PANEL_USER_EVENT",
   setInfoPanelGroup = "SET_INFO_PANEL_GROUP_EVENT",
   setInfoPanelFile = "SET_INFO_PANEL_FILE_EVENT",
   setInfoPanelFolder = "SET_INFO_PANEL_FOLDER_EVENT",
   setInfoPanelRoom = "SET_INFO_PANEL_ROOM_EVENT",
 
-  updateInfoPanelUser = "UPDATE_INFO_PANEL_USER_EVENT",
   updateInfoPanelGroup = "UPDATE_INFO_PANEL_GROUP_EVENT",
   updateInfoPanelFile = "UPDATE_INFO_PANEL_FILE_EVENT",
   updateInfoPanelFolder = "UPDATE_INFO_PANEL_FOLDER_EVENT",

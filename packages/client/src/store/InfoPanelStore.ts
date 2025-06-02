@@ -165,7 +165,9 @@ class InfoPanelStore {
     startIndex: 0,
   };
 
-  userSelection: Nullable<TPeopleListItem> | TPeopleListItem[] = null;
+  groupSelection: Nullable<TGroup> | TGroup[] = null;
+
+  selectedGroup: Nullable<TGroup> = null;
 
   constructor(userStore: UserStore) {
     this.userStore = userStore;
@@ -173,18 +175,16 @@ class InfoPanelStore {
     makeAutoObservable(this);
   }
 
-  setUserSelection = (user: Nullable<TPeopleListItem> | TPeopleListItem[]) => {
-    this.userSelection = user;
+  setGroupSelection = (group: Nullable<TGroup> | TGroup[]) => {
+    this.groupSelection = group;
   };
 
-  updateUserSelection = (user: TPeopleListItem) => {
-    if (
-      this.isVisible &&
-      this.userSelection &&
-      !Array.isArray(this.userSelection) &&
-      this.userSelection.id === user.id
-    )
-      this.userSelection = user;
+  updateGroupSelection = (group: TGroup | null) => {
+    this.groupSelection = group;
+  };
+
+  setGroup = (group: TGroup | null) => {
+    this.selectedGroup = group;
   };
 
   // Setters

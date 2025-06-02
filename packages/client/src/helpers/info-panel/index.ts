@@ -45,24 +45,6 @@ export const hideInfoPanel = () => {
   window.dispatchEvent(event);
 };
 
-export const setInfoPanelUser = (
-  user: Nullable<TPeopleListItem> | TPeopleListItem[],
-) => {
-  const event = new CustomEvent(InfoPanelEvents.setInfoPanelUser, {
-    detail: { user },
-  });
-
-  window.dispatchEvent(event);
-};
-
-export const updateInfoPanelUser = (user: TPeopleListItem) => {
-  const event = new CustomEvent(InfoPanelEvents.updateInfoPanelUser, {
-    detail: { user },
-  });
-
-  window.dispatchEvent(event);
-};
-
 export const setInfoPanelGroup = (group: Nullable<TGroup>) => {
   const event = new CustomEvent(InfoPanelEvents.setInfoPanelGroup, {
     detail: { group },

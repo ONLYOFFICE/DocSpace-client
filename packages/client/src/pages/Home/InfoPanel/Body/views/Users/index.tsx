@@ -38,11 +38,11 @@ import {
   TOption,
 } from "@docspace/shared/components/combobox";
 import { TContextMenuValueTypeOnClick } from "@docspace/shared/components/context-menu/ContextMenu.types";
-
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { EmployeeStatus } from "@docspace/shared/enums";
+import { Nullable } from "@docspace/shared/types";
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
@@ -52,21 +52,23 @@ import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import AccessRightsStore from "SRC_DIR/store/AccessRightsStore";
 
 import { StyledUsersContent } from "../../styles/Users";
+import SeveralItems from "../SeveralItems";
+import NoItem from "../NoItem";
 
 type UsersProps = {
-  canChangeUserType: AccessRightsStore["canChangeUserType"];
+  canChangeUserType?: AccessRightsStore["canChangeUserType"];
 
-  setUsersSelection: UsersStore["setSelection"];
-  setUsersBufferSelection: UsersStore["setBufferSelection"];
-  getUsersChangeTypeOptions: ContactsConextOptionsStore["getUsersChangeTypeOptions"];
+  setUsersSelection?: UsersStore["setSelection"];
+  setUsersBufferSelection?: UsersStore["setBufferSelection"];
+  getUsersChangeTypeOptions?: ContactsConextOptionsStore["getUsersChangeTypeOptions"];
 
   showStorageInfo: CurrentQuotasStore["showStorageInfo"];
 
-  standalone: SettingsStore["standalone"];
+  standalone?: SettingsStore["standalone"];
 
-  userSelection: TPeopleListItem;
+  userSelection?: TPeopleListItem[] | Nullable<TPeopleListItem>;
 
-  isGuests: boolean;
+  isGuests?: boolean;
 };
 
 const Users = ({
@@ -98,9 +100,9 @@ const Users = ({
   const [statusLabel, setStatusLabel] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const { role, isVisitor, isCollaborator } = userSelection;
-
   const getStatusLabel = React.useCallback(() => {
+    if (!userSelection || Array.isArray(userSelection)) return;
+
     let label = "";
 
     switch (userSelection.status) {
@@ -119,7 +121,7 @@ const Users = ({
     }
 
     setStatusLabel(label);
-  }, [userSelection.status, t]);
+  }, [userSelection, t]);
 
   React.useEffect(() => {
     getStatusLabel();
@@ -129,27 +131,18 @@ const Users = ({
     setIsLoading(false);
   };
 
-  // const onSuccess = () => {
-  //   if (users) {
-  //     const items = users.map((u) => getPeopleListItem(u));
-  //     if (items.length === 1) {
-  //       setInfoPanelSelection(items[0]);
-  //     } else {
-  //       setInfoPanelSelection(items);
-  //     }
-  //   }
-  //   setIsLoading(false);
-  // };
-
   const onGroupClick = (groupId: string) => {
     const url = getContactsUrl("inside_group", groupId);
     navigate(url);
-    setUsersSelection([]);
-    setUsersBufferSelection(null);
+    setUsersSelection!([]);
+    setUsersBufferSelection!(null);
   };
 
   const renderTypeData = () => {
-    const typesOptions = getUsersChangeTypeOptions(t, userSelection);
+    if (!userSelection || Array.isArray(userSelection)) return;
+    const { role } = userSelection;
+
+    const typesOptions = getUsersChangeTypeOptions!(t, userSelection);
 
     const typeLabel = getUserTypeTranslation(role, t);
 
@@ -169,7 +162,7 @@ const Users = ({
 
     const status = getUserStatus(userSelection);
 
-    const canChange = canChangeUserType({
+    const canChange = canChangeUserType!({
       ...userSelection,
       statusType: status,
     });
@@ -200,7 +193,16 @@ const Users = ({
     return combobox;
   };
 
+  if (!userSelection) return <NoItem isGuests={isGuests!} />;
+
+  if (Array.isArray(userSelection))
+    return (
+      <SeveralItems isUsers isGroups={false} selectedItems={userSelection} />
+    );
+
   const typeData = renderTypeData();
+
+  const { isVisitor, isCollaborator } = userSelection;
 
   const statusText =
     isVisitor || isCollaborator ? t("Common:Free") : t("Common:Paid");
@@ -295,7 +297,6 @@ const Users = ({
               type="user"
               item={userSelection}
               className="type-combobox"
-              // onSuccess={onSuccess}
               onAbort={onAbort}
             />
           </>
@@ -349,12 +350,21 @@ export default inject(
     const {
       setSelection: setUsersSelection,
       setBufferSelection: setUsersBufferSelection,
+
+      selection,
+      bufferSelection,
     } = usersStore!;
 
     const { getUsersChangeTypeOptions } = contextOptionsStore!;
 
     const { showStorageInfo } = currentQuotaStore;
     const { standalone } = settingsStore;
+
+    const userSelection = selection.length
+      ? selection.length > 1
+        ? selection
+        : selection[0]
+      : bufferSelection;
 
     return {
       canChangeUserType,
@@ -365,6 +375,8 @@ export default inject(
 
       showStorageInfo,
       standalone,
+
+      userSelection,
     };
   },
 )(observer(Users));

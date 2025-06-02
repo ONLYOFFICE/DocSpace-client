@@ -49,11 +49,7 @@ import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url"
 import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
 import DefaultQuotaReactSvgUrl from "PUBLIC_DIR/images/default.quota.react.svg?url";
 
-import {
-  getInfoPanelOpen,
-  setInfoPanelUser,
-  showInfoPanel,
-} from "SRC_DIR/helpers/info-panel";
+import { getInfoPanelOpen, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 import GroupsStore from "./GroupsStore";
 import UsersStore from "./UsersStore";
@@ -83,20 +79,12 @@ class HeaderMenuStore {
   };
 
   resetUserQuota = async (users: (TUser | string)[], t: TTranslation) => {
-    const { getPeopleListItem } = this.usersStore;
-
     const userIDs = users.map((user) => {
       return typeof user === "string" ? user : user.id;
     });
 
     try {
-      const items = await api.people.resetUserQuota(userIDs);
-
-      if (items.length === 1) {
-        setInfoPanelUser(getPeopleListItem(items[0]));
-      } else {
-        setInfoPanelUser(items.map((item) => getPeopleListItem(item)));
-      }
+      await api.people.resetUserQuota(userIDs);
 
       toastr.success(t("Common:StorageQuotaReset"));
     } catch (e) {
@@ -105,20 +93,12 @@ class HeaderMenuStore {
   };
 
   disableUserQuota = async (users: (TUser | string)[], t: TTranslation) => {
-    const { getPeopleListItem } = this.usersStore!;
-
     const userIDs = users.map((user) => {
       return typeof user === "string" ? user : user.id;
     });
 
     try {
-      const items = await api.people.setCustomUserQuota(userIDs, "-1");
-
-      if (items.length === 1) {
-        setInfoPanelUser(getPeopleListItem(items[0]));
-      } else {
-        setInfoPanelUser(items.map((item) => getPeopleListItem(item)));
-      }
+      await api.people.setCustomUserQuota(userIDs, "-1");
 
       toastr.success(t("Common:StorageQuotaDisabled"));
     } catch (e) {

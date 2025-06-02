@@ -78,7 +78,7 @@ import type {
   TPeopleListItem,
 } from "SRC_DIR/helpers/contacts";
 
-import { getInfoPanelOpen, setInfoPanelUser } from "SRC_DIR/helpers/info-panel";
+import { getInfoPanelOpen } from "SRC_DIR/helpers/info-panel";
 
 import AccessRightsStore from "../AccessRightsStore";
 import ClientLoadingStore from "../ClientLoadingStore";
@@ -212,7 +212,7 @@ class UsersStore {
         this.filter.total -= 1;
       });
 
-      setInfoPanelUser(null);
+      this.updateSelection();
     };
 
     const changeMyType = async (value: {
@@ -939,8 +939,6 @@ class UsersStore {
   setSelection = (selection: TPeopleListItem[]) => {
     this.selection = selection;
 
-    setInfoPanelUser(selection);
-
     if (selection.length === 0) this.resetUsersRight();
   };
 
@@ -1017,7 +1015,6 @@ class UsersStore {
 
   setBufferSelection = (bufferSelection: typeof this.bufferSelection) => {
     this.bufferSelection = bufferSelection;
-    setInfoPanelUser(bufferSelection);
   };
 
   selectUser = (user: TPeopleListItem) => {

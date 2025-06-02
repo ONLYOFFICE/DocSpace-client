@@ -67,7 +67,7 @@ import { StyledNoItemContainer } from "../../styles/NoItem";
 
 const ExpiredItem = () => {
   const theme = useTheme();
-  const { t } = useTranslation();
+  const { t } = useTranslation(["Common"]);
 
   const imageSrc = theme.isBase ? CanceledLightIconURL : CanceledDarkIconURL;
 

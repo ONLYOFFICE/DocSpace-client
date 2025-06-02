@@ -68,8 +68,6 @@ const InfoPanelBodyContent = ({
   templateEventVisible,
   setIsShareFormData,
 
-  userSelection,
-
   ...props
 }) => {
   const { groupId } = useParams();
@@ -138,20 +136,7 @@ const InfoPanelBodyContent = ({
   const getView = () => {
     const currentView = isRooms ? roomsView : fileView;
 
-    if (isUsers || isGuests) {
-      if (!userSelection) return viewHelper.NoItemView();
-
-      if (Array.isArray(userSelection) && userSelection.length > 1)
-        return viewHelper.SeveralItemsView();
-
-      return (
-        <Users
-          userSelection={
-            Array.isArray(userSelection) ? userSelection[0] : userSelection
-          }
-        />
-      );
-    }
+    if (isUsers || isGuests) return <Users isGuests={isGuests} />;
 
     if (isSeveralItems) return viewHelper.SeveralItemsView();
 
@@ -275,8 +260,6 @@ export default inject(
       getIsContacts,
       showSearchBlock,
       setShowSearchBlock,
-
-      userSelection,
     } = infoPanelStore;
 
     const {
@@ -337,8 +320,6 @@ export default inject(
       image,
       templateEventVisible,
       setIsShareFormData,
-
-      userSelection,
     };
   },
 )(observer(InfoPanelBodyContent));

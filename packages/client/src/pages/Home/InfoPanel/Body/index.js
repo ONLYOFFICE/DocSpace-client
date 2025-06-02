@@ -39,6 +39,7 @@ import { StyledInfoPanelBody } from "./styles/common";
 
 import Users from "./views/Users";
 import Groups from "./views/Groups";
+import Gallery from "./views/Gallery";
 
 const InfoPanelBodyContent = ({
   infoPanelSelection,
@@ -141,12 +142,11 @@ const InfoPanelBodyContent = ({
 
     if (isGroups) return <Groups />;
 
+    if (isGallery) return <Gallery />;
+
     if (isSeveralItems) return viewHelper.SeveralItemsView();
 
     if (isNoItem) return viewHelper.NoItemView();
-
-    if (isGallery) return viewHelper.GalleryView();
-    if (isGroups) return viewHelper.GroupsView();
 
     switch (currentView) {
       case "info_members":

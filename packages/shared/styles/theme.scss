@@ -2349,10 +2349,14 @@
   --info-panel-name-color: #{$gray-dark};
   --info-panel-group-text-color: #{$gray};
   --info-panel-group-tag-color: #{$gray-strong};
+  --info-panel-gallery-border-color: #{$gray-strong};
+  --info-panel-gallery-description-color: #{$light-gray-dark};
 }
 
 .dark {
   --info-panel-name-color: #{$gray};
   --info-panel-group-text-color: #{$gray-dark};
   --info-panel-group-tag-color: #{$gray-dark-strong};
+  --info-panel-gallery-border-color: #{$black};
+  --info-panel-gallery-description-color: #{$white};
 }

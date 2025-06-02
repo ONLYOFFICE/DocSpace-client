@@ -25,63 +25,78 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useRef } from "react";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-import { ContextMenu } from "@docspace/shared/components/context-menu";
-import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
-import { inject } from "mobx-react";
-
-import { Text } from "@docspace/shared/components/text";
+import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
-import styled from "styled-components";
+
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { Text } from "@docspace/shared/components/text";
+import {
+  ContextMenu,
+  ContextMenuRefType,
+} from "@docspace/shared/components/context-menu";
+import {
+  ContextMenuButton,
+  ContextMenuButtonDisplayType,
+} from "@docspace/shared/components/context-menu-button";
+
+import OformsStore from "SRC_DIR/store/OformsStore";
+import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
+import ContextOptionsStore from "SRC_DIR/store/ContextOptionsStore";
+
 import { StyledTitle } from "../../styles/common";
 
-const StyledGalleryContextOptions = styled.div`
-  height: 16px;
-  margin-block: 0;
-  margin-inline: 8px 0;
-`;
+import styles from "./Gallery.module.scss";
 
-const GalleryItemTitle = ({
-  t,
+type ItemTitleProps = {
+  gallerySelected: OformsStore["gallerySelected"] | any;
+  getIcon?: FilesSettingsStore["getIcon"];
+  currentColorScheme?: SettingsStore["currentColorScheme"];
+  getFormGalleryContextOptions?: ContextOptionsStore["getFormGalleryContextOptions"];
+};
 
+const ItemTitle = ({
   gallerySelected,
   getIcon,
   currentColorScheme,
 
   getFormGalleryContextOptions,
-}) => {
-  const itemTitleRef = useRef();
-  const contextMenuRef = useRef();
+}: ItemTitleProps) => {
+  const { t } = useTranslation(["FormGallery", "Common"]);
+
+  const itemTitleRef = useRef<HTMLDivElement>(null);
+  const contextMenuRef = useRef<ContextMenuRefType>(null);
 
   const navigate = useNavigate();
 
   const onGetContextOptions = () => {
-    let options = getFormGalleryContextOptions(gallerySelected, t, navigate);
+    if (!getFormGalleryContextOptions) return [];
+    let options = getFormGalleryContextOptions?.(gallerySelected, t, navigate);
     options = options.filter((option) => option.key !== "template-info");
     return options;
   };
 
-  const onClickContextMenu = (e) => {
-    e.button === 2;
-    if (!contextMenuRef.current.menuRef.current) itemTitleRef.current.click(e);
-    contextMenuRef.current.show(e);
+  const onClickContextMenu = (e: React.MouseEvent) => {
+    if (!contextMenuRef.current?.menuRef.current) itemTitleRef.current?.click();
+    contextMenuRef.current?.show(e);
   };
 
   return (
-    <StyledTitle ref={itemTitleRef}>
-      <ReactSVG className="icon" src={getIcon(32, ".pdf")} />
+    <StyledTitle ref={itemTitleRef} withBottomBorder={false}>
+      <ReactSVG className="icon" src={getIcon?.(32, ".pdf") ?? ""} />
       <Text className="text">{gallerySelected?.attributes?.name_form}</Text>
 
-      <Text color={currentColorScheme.main?.accent} className="free-label">
+      <Text color={currentColorScheme?.main?.accent} className="free-label">
         {t("Common:Free")}
       </Text>
       {gallerySelected ? (
-        <StyledGalleryContextOptions>
+        <div className={styles.contextOptions}>
           <ContextMenu
             ref={contextMenuRef}
             getContextModel={onGetContextOptions}
             withBackdrop={false}
+            model={onGetContextOptions()}
           />
           <ContextMenuButton
             id="info-options"
@@ -90,15 +105,19 @@ const GalleryItemTitle = ({
             onClick={onClickContextMenu}
             getData={onGetContextOptions}
             directionX="right"
-            displayType="toggle"
+            displayType={ContextMenuButtonDisplayType.toggle}
           />
-        </StyledGalleryContextOptions>
+        </div>
       ) : null}
     </StyledTitle>
   );
 };
 
-export default inject(({ contextOptionsStore }) => ({
-  getFormGalleryContextOptions:
-    contextOptionsStore.getFormGalleryContextOptions,
-}))(withTranslation(["FormGallery", "Common"])(GalleryItemTitle));
+export default inject(
+  ({ contextOptionsStore, settingsStore, filesSettingsStore }: TStore) => ({
+    getFormGalleryContextOptions:
+      contextOptionsStore.getFormGalleryContextOptions,
+    currentColorScheme: settingsStore.currentColorScheme,
+    getIcon: filesSettingsStore.getIcon,
+  }),
+)(observer(ItemTitle));

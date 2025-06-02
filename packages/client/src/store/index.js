@@ -175,7 +175,7 @@ const mediaViewerDataStore = new MediaViewerDataStore(
   selectedFolderStore,
 );
 
-const oformsStore = new OformsStore(settingsStore, infoPanelStore, userStore);
+const oformsStore = new OformsStore(settingsStore, userStore);
 
 const secondaryProgressDataStore = new SecondaryProgressDataStore(
   treeFoldersStore,

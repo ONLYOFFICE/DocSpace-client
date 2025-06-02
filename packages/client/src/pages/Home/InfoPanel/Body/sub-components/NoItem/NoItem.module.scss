@@ -24,49 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { isMobileOnly } from "react-device-detect";
-import { globalColors } from "@docspace/shared/themes";
-import { injectDefaultTheme } from "@docspace/shared/utils";
-
-const StyledGalleryThumbnail = styled.div.attrs(injectDefaultTheme)`
-  box-sizing: border-box;
-  width: 100%;
-  overflow: hidden;
-  border-radius: 6px;
-  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
-  height: ${isMobileOnly ? "335px" : "346px"};
-  border: ${(props) =>
-    `solid 1px ${props.theme.infoPanel.gallery.borderColor}`};
-
-  .info-panel_gallery-img {
+.galleryEmptyScreen {
+  .galleryEmptyScreenImg {
     display: block;
     margin: 0 auto;
+    padding: 80px 0 32px;
   }
-`;
 
-const StyledGalleryNoThumbnail = styled.div`
-  height: auto;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 16px;
-  .no-thumbnail-img {
-    height: 96px;
-    width: 96px;
+  .galleryEmptyScreenText {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
+    text-align: center;
   }
-`;
-
-const StyledGalleryFormDescription = styled.div.attrs(injectDefaultTheme)`
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 20px;
-  color: ${(props) => props.theme.infoPanel.gallery.descriptionColor};
-  white-space: pre-line;
-`;
-
-export {
-  StyledGalleryThumbnail,
-  StyledGalleryNoThumbnail,
-  StyledGalleryFormDescription,
-};
+}

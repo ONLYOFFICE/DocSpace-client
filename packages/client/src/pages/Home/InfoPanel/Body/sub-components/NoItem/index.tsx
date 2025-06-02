@@ -72,7 +72,8 @@ const NoItem = ({
 
   if (isGroups || isUsers || isGuests)
     return <NoContactsItem t={t} isGuests={isGuests} isGroups={isGroups} />;
-  if (isGallery) return <NoGalleryItem t={t} />;
+  if (isGallery) return <NoGalleryItem />;
+
   if (isFiles) return <NoFileOrFolderItem t={t} theme={undefined} />;
   if (isRooms) return <NoRoomItem t={t} theme={undefined} />;
 

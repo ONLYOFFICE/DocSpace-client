@@ -24,33 +24,47 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject } from "mobx-react";
-import { withTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
+import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
+import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 
-import { Link } from "@docspace/shared/components/link";
-import { parseAndFormatDate } from "../../helpers/DetailsHelper";
-import {
-  StyledGalleryNoThumbnail,
-  StyledGalleryThumbnail,
-  StyledGalleryFormDescription,
-} from "../../styles/gallery";
+import { getCorrectDate } from "@docspace/shared/utils";
+
+import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
+import OformsStore from "SRC_DIR/store/OformsStore";
+
 import {
   StyledLink,
   StyledProperties,
   StyledSubtitle,
 } from "../../styles/common";
 
-const Gallery = ({
-  t,
-  gallerySelected,
-  getIcon,
-  culture,
-  currentColorScheme,
-}) => {
-  const thumbnailBlank = getIcon(96, ".pdf");
+import NoItem from "../../sub-components/NoItem";
+
+import styles from "./Gallery.module.scss";
+import ItemTitle from "./ItemTitle";
+
+type GalleryProps = {
+  gallerySelected?: OformsStore["gallerySelected"] | any;
+  getIcon?: FilesSettingsStore["getIcon"];
+  culture?: string;
+};
+
+const Gallery = ({ gallerySelected, getIcon, culture }: GalleryProps) => {
+  const { t } = useTranslation([
+    "InfoPanel",
+    "FormGallery",
+    "Common",
+    "Translations",
+  ]);
+
+  if (!gallerySelected) return <NoItem isGallery />;
+
+  const thumbnailBlank = getIcon?.(96, ".pdf");
   const thumbnailUrl =
     gallerySelected?.attributes?.template_image?.data?.attributes?.formats
       ?.small?.url;
@@ -59,24 +73,33 @@ const Gallery = ({
 
   return (
     <>
+      <ItemTitle gallerySelected={gallerySelected} />
       {thumbnailUrl ? (
-        <StyledGalleryThumbnail>
-          <img className="info-panel_gallery-img" src={thumbnailUrl} alt="" />
-        </StyledGalleryThumbnail>
+        <div className={styles.galleryThumbnail}>
+          <img className={styles.galleryImg} src={thumbnailUrl} alt="" />
+        </div>
       ) : (
-        <StyledGalleryNoThumbnail className="no-thumbnail-img-wrapper">
-          <ReactSVG className="no-thumbnail-img" src={thumbnailBlank} />
-        </StyledGalleryNoThumbnail>
+        <div
+          className={classNames(
+            styles.galleryNoThumbnail,
+            "no-thumbnail-img-wrapper",
+          )}
+        >
+          <ReactSVG
+            className={styles.noThumbnailImg}
+            src={thumbnailBlank ?? ""}
+          />
+        </div>
       )}
 
       <StyledLink>
         <Link
           className="link"
           href={`mailto:marketing@onlyoffice.com?subject=Suggesting changes for ${formTitle}&body=Suggesting changes for ${formTitle}.`}
-          target="_blank"
-          type="action"
+          target={LinkTarget.blank}
+          type={LinkType.action}
           isHovered
-          color={currentColorScheme.main?.accent}
+          color="accent"
         >
           {t("FormGallery:SuggestChanges")}
         </Link>
@@ -88,10 +111,15 @@ const Gallery = ({
         </Text>
       </StyledSubtitle>
 
-      <StyledGalleryFormDescription>
+      <Text
+        className={styles.galleryFormDescription}
+        fontSize="13px"
+        fontWeight={400}
+        lineHeight="20px"
+      >
         {gallerySelected?.attributes?.template_desc ||
           gallerySelected?.attributes?.description_card}
-      </StyledGalleryFormDescription>
+      </Text>
 
       <StyledSubtitle>
         <Text fontWeight="600" fontSize="14px">
@@ -103,7 +131,10 @@ const Gallery = ({
         <div className="property">
           <Text className="property-title">{t("InfoPanel:DateModified")}</Text>
           <Text className="property-content">
-            {parseAndFormatDate(gallerySelected.attributes.updatedAt, culture)}
+            {getCorrectDate(
+              culture ?? "en",
+              gallerySelected.attributes.updatedAt,
+            )}
           </Text>
         </div>
       </StyledProperties>
@@ -111,18 +142,19 @@ const Gallery = ({
   );
 };
 
-export default inject(({ settingsStore, filesSettingsStore, oformsStore }) => {
-  const { culture, currentColorScheme } = settingsStore;
-  const { gallerySelected } = oformsStore;
-  const { getIcon } = filesSettingsStore;
-  return {
-    getIcon,
-    gallerySelected,
-    culture,
-    currentColorScheme,
-  };
-})(
-  withTranslation(["InfoPanel", "FormGallery", "Common", "Translations"])(
-    Gallery,
-  ),
-);
+export default inject(
+  ({ settingsStore, filesSettingsStore, oformsStore }: TStore) => {
+    const { culture } = settingsStore;
+
+    const { gallerySelected } = oformsStore;
+
+    const { getIcon } = filesSettingsStore;
+
+    return {
+      getIcon,
+
+      gallerySelected,
+      culture,
+    };
+  },
+)(observer(Gallery));

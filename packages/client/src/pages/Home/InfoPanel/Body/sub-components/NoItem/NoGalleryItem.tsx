@@ -24,37 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useTranslation } from "react-i18next";
+
 import FormGalleryEmptyInfoReactSvgUrl from "PUBLIC_DIR/images/form-gallery-empty-info.react.svg?url";
-import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 
-const StyledGalleryEmptyScreen = styled.div`
-  .info-panel_gallery-empty-screen-img {
-    display: block;
-    margin: 0 auto;
-    padding: 80px 0 32px;
-  }
+import styles from "./NoItem.module.scss";
 
-  .info-panel_gallery-empty-screen-text {
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 22px;
-    text-align: center;
-  }
-`;
+const NoGalleryItem = () => {
+  const { t } = useTranslation(["FormGallery"]);
 
-const NoGalleryItem = ({ t }) => {
   return (
-    <StyledGalleryEmptyScreen className="info-panel_gallery-empty-screen">
+    <div className={styles.galleryEmptyScreen}>
       <img
-        className="info-panel_gallery-empty-screen-img"
+        className={styles.galleryEmptyScreenImg}
         src={FormGalleryEmptyInfoReactSvgUrl}
         alt="Empty Screen Gallery"
       />
-      <Text className="info-panel_gallery-empty-screen-text">
+      <Text className={styles.galleryEmptyScreenText}>
         {t("InfoPanel:GalleryEmptyScreenText")}
       </Text>
-    </StyledGalleryEmptyScreen>
+    </div>
   );
 };
 export default NoGalleryItem;

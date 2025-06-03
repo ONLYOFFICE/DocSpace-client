@@ -352,14 +352,14 @@ const ClientRoutes = [
           {
             path: "rooms/templates/:room",
             async lazy() {
-              const { FlowsView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Flows"),
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
               );
 
               const Component = () => {
                 return (
                   <PrivateRoute>
-                    <FlowsView />
+                    <FilesView />
                   </PrivateRoute>
                 );
               };
@@ -404,42 +404,6 @@ const ClientRoutes = [
             },
           },
           ...contanctsRoutes,
-          {
-            path: "flows",
-            async lazy() {
-              const { FlowsView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Flows"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FlowsView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
-          },
-          {
-            path: "flows/filter",
-            async lazy() {
-              const { FlowsView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Flows"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FlowsView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
-          },
         ],
       },
       {

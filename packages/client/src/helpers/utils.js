@@ -186,9 +186,6 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
     case CategoryType.Accounts:
       return PEOPLE_ROUTE_WITH_FILTER;
 
-    case CategoryType.Flows:
-      return "/flows";
-
     case CategoryType.Settings:
       return "/settings/personal";
 

@@ -550,7 +550,6 @@ const ShellWrapper = inject(
     userStore,
     currentTariffStatusStore,
     dialogsStore,
-    flowStore,
   }) => {
     const { i18n } = useTranslation();
 
@@ -615,7 +614,7 @@ const ShellWrapper = inject(
 
     return {
       loadBaseInfo: async () => {
-        await Promise.all([init(false, i18n), flowStore.autoLogin()]);
+        await init(false, i18n);
 
         setModuleInfo(config.homepage, "home");
         setProductVersion(config.version);

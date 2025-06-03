@@ -38,7 +38,6 @@ import {
   TPaymentQuota,
   TNumericPaymentFeature,
   TBooleanPaymentFeature,
-  TStringPaymentFeature,
 } from "../api/portal/types";
 import {
   MANAGER,

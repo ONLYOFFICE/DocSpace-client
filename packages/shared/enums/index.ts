@@ -221,7 +221,6 @@ export const enum PageType {
   bonus = "bonus",
   dataImport = "dataImport",
   storageManagement = "storageManagement",
-  flows = "flows",
   services = "services",
 }
 
@@ -255,7 +254,6 @@ export const enum FolderType {
   SubFolderInProgress = 28,
   VirtualDataRoom = 29,
   RoomTemplates = 30,
-  Flows = 31,
 }
 
 export const enum ShareAccessRights {

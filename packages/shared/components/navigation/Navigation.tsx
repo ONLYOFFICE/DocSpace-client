@@ -34,7 +34,6 @@ import ControlButtons from "./sub-components/ControlBtn";
 import ToggleInfoPanelButton from "./sub-components/ToggleInfoPanelBtn";
 import NavigationLogo from "./sub-components/LogoBlock";
 import DropBox from "./sub-components/DropBox";
-import ChatBtn from "./sub-components/ChatBtn";
 
 import NavigationText from "./sub-components/Text";
 
@@ -89,10 +88,6 @@ const Navigation = ({
   guidAnimationVisible,
   setGuidAnimationVisible,
   isContextButtonVisible,
-
-  withChat,
-  chatOpen,
-  toggleChat,
 
   ...rest
 }: TNavigationProps) => {
@@ -270,9 +265,6 @@ const Navigation = ({
                 currentDeviceType={currentDeviceType}
                 navigationTitleContainerNode={navigationTitleContainerNode}
                 onCloseDropBox={onCloseDropBox}
-                withChat={withChat}
-                chatOpen={chatOpen}
-                toggleChat={toggleChat}
                 isFrame={isFrame}
                 isContextButtonVisible={isContextButtonVisible}
                 isPublicRoom={isPublicRoom}
@@ -338,14 +330,9 @@ const Navigation = ({
               guidAnimationVisible={guidAnimationVisible}
               setGuidAnimationVisible={setGuidAnimationVisible}
               isContextButtonVisible={isContextButtonVisible}
-              withChat={withChat}
-              chatOpen={chatOpen}
-              toggleChat={toggleChat}
             />
           </div>
-          {withChat && isDesktop ? (
-            <ChatBtn chatOpen={chatOpen!} toggleChat={toggleChat!} />
-          ) : null}
+
           {isDesktop && !hideInfoPanel ? (
             <ToggleInfoPanelButton
               id="info-panel-toggle--open"

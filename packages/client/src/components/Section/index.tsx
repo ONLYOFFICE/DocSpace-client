@@ -48,16 +48,11 @@ export default inject(
     dialogsStore,
     infoPanelStore,
     indexingStore,
-    flowStore,
-    filesSettingsStore,
-    selectedFolderStore,
-    userStore,
   }: {
     settingsStore: any;
     dialogsStore: any;
     infoPanelStore: any;
     indexingStore: any;
-    flowStore: any;
     filesSettingsStore: any;
     selectedFolderStore: any;
     userStore: any;
@@ -85,13 +80,6 @@ export default inject(
       createRoomDialogVisible || invitePanelOptions.visible;
 
     const { isScrollLocked: isInfoPanelScrollLocked } = infoPanelStore;
-    const { aiChatIsVisible, setAiChatIsVisible, vectorizedFiles } = flowStore;
-
-    const { getIcon, displayFileExtension } = filesSettingsStore;
-
-    const { id } = selectedFolderStore;
-
-    const { user } = userStore;
 
     return {
       isDesktop,
@@ -107,14 +95,6 @@ export default inject(
       snackbarExist,
       showText,
       isInfoPanelScrollLocked,
-      aiChatIsVisible,
-      setAiChatIsVisible,
-      getIcon,
-      displayFileExtension,
-      aiSelectedFolder: id,
-      aiUserId: flowStore.userId,
-      vectorizedFiles,
-      user,
     };
   },
 )(observer(SectionWrapper));

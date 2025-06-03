@@ -216,7 +216,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
             <DatePicker
               initialDate={startDate}
               onChange={onStartDateChange}
-              selectDateText={t("SelectStartDate")}
+              selectDateText={t("Common:SelectDate")}
               locale={moment.locale()}
               openDate={startDate}
               minDate={undefined}
@@ -229,7 +229,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
             <DatePicker
               initialDate={endDate}
               onChange={onEndDateChange}
-              selectDateText={t("SelectEndDate")}
+              selectDateText={t("Common:SelectDate")}
               locale={moment.locale()}
               openDate={endDate}
               minDate={startDate}

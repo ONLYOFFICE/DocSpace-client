@@ -109,6 +109,7 @@
   "TopUp": "Top up",
   "TopUpBalance": "Top up balance",
   "TopUpWallet": "Top up wallet",
+  "Total": "Total",
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/month</3>",
   "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/year</3>",
   "TransactionHistory": "Transaction history",

@@ -116,14 +116,16 @@ const Template = ({
         value="demo@gmail.com"
       />
 
-      <PasswordInput
-        {...args}
-        inputValue={value}
-        onChange={onChangeHandler}
-        tooltipPasswordLength={`${tooltipPasswordLength} ${passwordSettings?.minLength}`}
-        passwordSettings={fakeSettings}
-        onValidateInput={onValidateInputHandler}
-      />
+      <div style={{ backgroundColor: "transparent" }}>
+        <PasswordInput
+          {...args}
+          inputValue={value}
+          onChange={onChangeHandler}
+          tooltipPasswordLength={`${tooltipPasswordLength} ${passwordSettings?.minLength}`}
+          passwordSettings={fakeSettings}
+          onValidateInput={onValidateInputHandler}
+        />
+      </div>
     </div>
   );
 };
@@ -145,7 +147,7 @@ export const Default: Story = {
     isDisabled: false,
     passwordSettings: basePasswordSettings,
     simpleView: false,
-    inputName: "demoPasswordInput",
+    inputName: "demoPasswordInput-default",
     emailInputName: "demoEmailInput",
     isDisableTooltip: false,
     tooltipPasswordTitle: "Password must contain:",
@@ -165,6 +167,7 @@ export const SimpleView: Story = {
   args: {
     ...Default.args,
     simpleView: true,
+    inputName: "demoPasswordInput-simple",
   },
   parameters: {
     docs: {
@@ -187,6 +190,7 @@ export const CustomValidation: Story = {
       digits: true,
       specSymbols: false,
     },
+    inputName: "demoPasswordInput-custom",
   },
   parameters: {
     docs: {
@@ -203,6 +207,7 @@ export const WithCustomWidth: Story = {
   args: {
     ...Default.args,
     inputWidth: "400px",
+    inputName: "demoPasswordInput-width",
   },
   parameters: {
     docs: {
@@ -218,6 +223,7 @@ export const Small: Story = {
   args: {
     ...Default.args,
     size: InputSize.base,
+    inputName: "demoPasswordInput-small",
   },
   parameters: {
     docs: {
@@ -233,6 +239,7 @@ export const Large: Story = {
   args: {
     ...Default.args,
     size: InputSize.large,
+    inputName: "demoPasswordInput-large",
   },
   parameters: {
     docs: {
@@ -248,6 +255,7 @@ export const Disabled: Story = {
   args: {
     ...Default.args,
     isDisabled: true,
+    inputName: "demoPasswordInput-disabled",
   },
   parameters: {
     docs: {
@@ -263,6 +271,7 @@ export const WithError: Story = {
   args: {
     ...Default.args,
     hasError: true,
+    inputName: "demoPasswordInput-error",
   },
   parameters: {
     docs: {
@@ -278,6 +287,7 @@ export const WithWarning: Story = {
   args: {
     ...Default.args,
     hasWarning: true,
+    inputName: "demoPasswordInput-warning",
   },
   parameters: {
     docs: {
@@ -293,6 +303,7 @@ export const WithScale: Story = {
   args: {
     ...Default.args,
     scale: true,
+    inputName: "demoPasswordInput-scale",
   },
   parameters: {
     docs: {

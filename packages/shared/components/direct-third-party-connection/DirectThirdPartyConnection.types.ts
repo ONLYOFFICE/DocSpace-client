@@ -38,15 +38,6 @@ import type {
 } from "@docspace/shared/components/files-selector-input/FilesSelectorInput.types";
 import type { TThirdParties } from "@docspace/shared/api/files/types";
 
-export type StyledComboBoxItemProps = {
-  isDisabled?: boolean;
-};
-
-export type StyledBackupProps = {
-  isConnectedAccount?: boolean;
-  isMobileScale?: boolean;
-};
-
 export type DirectThirdPartyConnectionState = {
   // folderList: {};
   isLoading: boolean;

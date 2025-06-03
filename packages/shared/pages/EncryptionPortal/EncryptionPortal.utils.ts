@@ -25,14 +25,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const returnToPortal = () => {
-  const isStorybook =
-    window.location.href.includes("iframe.html") ||
-    window.location.href.includes("viewMode=docs") ||
-    window.location.href.includes("story-") ||
-    window.location.href.includes("storybook");
+export const isStorybook = (): boolean => {
+  if (typeof window === "undefined" || typeof document === "undefined")
+    return false;
 
-  if (isStorybook) {
+  return document.querySelector('[class^="sb-"]') !== null;
+};
+
+export const returnToPortal = () => {
+  if (isStorybook()) {
     return;
   }
 

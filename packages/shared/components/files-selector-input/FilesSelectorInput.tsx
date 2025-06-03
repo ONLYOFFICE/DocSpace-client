@@ -26,6 +26,7 @@
 
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { DeviceType, FolderType } from "@docspace/shared/enums";
 import FilesSelector from "@docspace/shared/selectors/Files";
@@ -39,7 +40,6 @@ import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import type { FilesSelectorProps } from "@docspace/shared/selectors/Files/FilesSelector.types";
 
-import { StyledBodyWrapper } from "./FilesSelectorInput.styled";
 import {
   getAcceptButtonLabel,
   // getHeaderLabel,
@@ -50,6 +50,8 @@ import type {
   FileInfoType,
   FilesSelectorInputProps,
 } from "./FilesSelectorInput.types";
+
+import styles from "./FilesSelectorInput.module.scss";
 
 const FilesSelectorInput = ({
   id,
@@ -240,7 +242,10 @@ const FilesSelectorInput = ({
   );
 
   return (
-    <StyledBodyWrapper maxWidth={maxWidth} className={className}>
+    <div
+      className={classNames(styles.filesSelectorInput, className)}
+      style={{ maxWidth }}
+    >
       <FileInput
         scale
         fromStorage
@@ -254,22 +259,8 @@ const FilesSelectorInput = ({
         placeholder={t("Common:SelectAction")}
       />
       <Portal element={<div>{selectorComponent}</div>} />
-    </StyledBodyWrapper>
+    </div>
   );
 };
 
 export default FilesSelectorInput;
-
-// export default inject(({ filesSelectorInput }) => {
-//   const { basePath, newPath, setNewPath, setBasePath, toDefault, isErrorPath } =
-//     filesSelectorInput;
-
-//   return {
-//     isErrorPath,
-//     setBasePath,
-//     basePath,
-//     newPath,
-//     setNewPath,
-//     toDefault,
-//   };
-// })(withTranslation(["Common"])(observer(FilesSelectorInput)));

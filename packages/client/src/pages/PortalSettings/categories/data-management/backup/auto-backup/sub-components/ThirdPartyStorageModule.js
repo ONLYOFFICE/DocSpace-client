@@ -27,13 +27,20 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { ThirdPartyStorages } from "@docspace/shared/enums";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Text } from "@docspace/shared/components/text";
+
+import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
+
 import GoogleCloudStorage from "./storages/GoogleCloudStorage";
 import RackspaceStorage from "./storages/RackspaceStorage";
 import SelectelStorage from "./storages/SelectelStorage";
 import AmazonStorage from "./storages/AmazonStorage";
-import { StyledAutoBackup } from "../../StyledBackup";
+import { StyledAutoBackup, StyledComboBoxItem } from "../../StyledBackup";
 import { getOptions } from "../../common-container/GetThirdPartyStoragesOptions";
 
 class ThirdPartyStorageModule extends React.PureComponent {
@@ -52,11 +59,22 @@ class ThirdPartyStorageModule extends React.PureComponent {
     };
   }
 
-  onSelect = (option) => {
-    const selectedStorageId = option.key;
+  componentWillUnmount() {
+    const { defaultStorageId, setStorageId } = this.props;
+    !defaultStorageId && setStorageId(null);
+  }
+
+  onSelect = (key) => () => {
     const { storagesInfo } = this.state;
     const { setStorageId } = this.props;
-    const storage = storagesInfo[selectedStorageId];
+    const storage = storagesInfo[key];
+
+    if (!storage.isSet) {
+      return window.open(
+        `/portal-settings/integration/third-party-services?service=${key}`,
+        "_blank",
+      );
+    }
 
     setStorageId(storage.id);
   };
@@ -73,24 +91,53 @@ class ThirdPartyStorageModule extends React.PureComponent {
     const { GoogleId, RackspaceId, SelectelId, AmazonId } = ThirdPartyStorages;
 
     const storageTitle = storagesInfo[selectedStorageId]?.title;
+    const advancedOptions = comboBoxOptions?.map((item) => {
+      return (
+        <StyledComboBoxItem isDisabled={item.disabled} key={item.key}>
+          <DropDownItem
+            onClick={this.onSelect(item.key)}
+            className={item.className}
+            disabled={item.disabled}
+          >
+            <Text className="drop-down-item_text" fontWeight={600}>
+              {item.label}
+            </Text>
+
+            {!item.disabled && !item.connected ? (
+              <IconButton
+                className="drop-down-item_icon"
+                size="16"
+                onClick={this.onSelect(item.key)}
+                iconName={ExternalLinkReactSvgUrl}
+                isFill
+              />
+            ) : null}
+          </DropDownItem>
+        </StyledComboBoxItem>
+      );
+    });
 
     return (
       <StyledAutoBackup>
         <div className="auto-backup_storages-module">
           <ComboBox
-            options={comboBoxOptions}
-            selectedOption={{
-              key: 0,
-              label: storageTitle,
-            }}
+            options={[]}
+            advancedOptions={advancedOptions}
+            selectedOption={{ key: 0, label: storageTitle }}
             onSelect={this.onSelect}
             isDisabled={isLoadingData}
+            size="content"
+            manualWidth="400px"
+            directionY="both"
+            displaySelectedOption
             noBorder={false}
-            scaled
+            isDefaultMode
+            hideMobileView={false}
+            forceCloseClickOutside
             scaledOptions
-            dropDownMaxHeight={300}
-            className="backup_combo"
             showDisabledItems
+            displayArrow
+            className="backup_combo"
           />
 
           {selectedStorageId === GoogleId ? (

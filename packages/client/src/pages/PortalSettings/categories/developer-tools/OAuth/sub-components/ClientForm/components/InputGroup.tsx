@@ -139,6 +139,7 @@ const InputGroup = ({
                 type={isPassword ? InputType.password : InputType.text}
                 onBlur={() => onBlur?.(name)}
                 hasError={isError}
+                noIcon={!withCopy}
               />
             )}
             {buttonLabel ? (

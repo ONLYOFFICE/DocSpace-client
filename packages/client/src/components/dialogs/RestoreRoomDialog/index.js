@@ -103,7 +103,7 @@ const RestoreRoomDialogComponent = (props) => {
       <ModalDialog.Footer>
         <Button
           id="restore-all_submit"
-          key="OkButton"
+          key="OKButton"
           label={t("Common:Restore")}
           size="normal"
           primary

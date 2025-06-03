@@ -167,6 +167,8 @@ const CreateRoomDialog = ({
       }));
       return;
     }
+
+    if (isScrollLocked) setIsScrollLocked(false);
     setRoomParams({ ...startRoomParams });
   };
 
@@ -195,7 +197,8 @@ const CreateRoomDialog = ({
     setTemplateItem({ ...item, title: item.label });
 
     const newRoomParams = getFetchedRoomParams(
-      { ...roomParams, id: item?.id, title: item?.label, logo: item?.logo },
+      // { ...roomParams, id: item?.id, title: item?.label, logo: item?.logo },
+      { ...roomParams, ...item },
       getThirdPartyIcon,
       isDefaultRoomsQuotaSet,
     );

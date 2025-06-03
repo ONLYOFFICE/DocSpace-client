@@ -848,6 +848,14 @@
   --navigation-background: #{$black};
   --navigation-box-shadow: 0px 8px 16px 0px #{$box-shadow-dark-color};
   --navigation-icon-stroke: #{$gray-dark-strong};
+  --navigation-guid-animation-small-border: 1px solid
+    var(--accent-main, #{$light-second-main});
+  --navigation-guid-animation-border: 2px solid
+    var(--accent-main, #{$light-second-main});
+  --navigation-guid-animation-icon-color: var(
+    --accent-main,
+    #{$light-second-main}
+  );
   --navigation-header-icon-fill: #{$dark-gray-dark};
   --navigation-lifetime-enabled-fill: none;
   --navigation-lifetime-enabled-stroke: #{$main-red};
@@ -1095,10 +1103,12 @@
   --selector-add-button-background: #{$gray-light-mid};
   --selector-add-button-hover-background: #{$light-gray-selected};
   --selector-add-button-active-background: #{$gray-strong};
+  --selector-add-button-disabled-background: #{$light-gray-hover};
 
   --selector-add-button-icon-color: #{$light-gray-dark};
   --selector-add-button-icon-color-hover: #{$light-gray-dark};
   --selector-add-button-icon-color-active: #{$light-gray-dark};
+  --selector-add-button-icon-color-disabled: #{$gray};
 
   --selector-add-button-border: none;
   --selector-add-button-box-sizing: border-box;
@@ -1108,19 +1118,25 @@
   --selector-add-button-padding: 10px;
   --selector-add-button-color: #{$light-gray-dark};
   --selector-add-button-hover-color: #{$black};
+
+  --selector-add-button-text-disabled: #{$gray-strong};
 }
 
 .dark {
   --selector-add-button-background: #{$gray-dark-mid};
-  --selector-add-button-hover-background: #{$dark-gray-light};
+  --selector-add-button-hover-background: #{$gray-dark-strong};
   --selector-add-button-active-background: #{$gray-dark-mid};
+  --selector-add-button-disabled-background: #{$light-dark-gray-hover};
 
-  --selector-add-button-icon-color: #{$gray-dark};
+  --selector-add-button-icon-color: #{$dark-gray-dark};
   --selector-add-button-icon-color-hover: #{$white};
-  --selector-add-button-icon-color-active: #{$dark-gray-dark};
+  --selector-add-button-icon-color-active: #{$gray-dark-pressed};
+  --selector-add-button-icon-color-disabled: #{$gray-dark};
 
   --selector-add-button-color: #{$gray-dark};
   --selector-add-button-hover-color: #{$white};
+
+  --selector-add-button-text-disabled: #{$gray-dark-text};
 }
 
 .light {
@@ -2052,4 +2068,12 @@
   --download-dialog-bg: #{$dark-gray-light};
   --download-dialog-text-color: #{$gray-dark};
   --download-dialog-warning-color: #{$dark-error-status};
+}
+
+.light {
+  --modal-dialog-border-color: #{$gray-light-mid};
+}
+
+.dark {
+  --modal-dialog-border-color: #{$gray-dark-strong};
 }

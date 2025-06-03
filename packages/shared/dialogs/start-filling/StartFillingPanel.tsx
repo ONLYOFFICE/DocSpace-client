@@ -67,6 +67,7 @@ const StartFillingPanel = ({
   settings,
   inviteUserToRoom,
   setStartFillingPanelVisible,
+  withBorder,
   ...props
 }: IStartFillingPanelProps) => {
   const [infoBarVisible, setInfoBarVisible] = useLocalStorage(
@@ -230,6 +231,7 @@ const StartFillingPanel = ({
     <ModalDialog
       visible
       withBodyScroll
+      withBorder={withBorder}
       onClose={closeStartFillingPanel}
       displayType={ModalDialogType.aside}
       containerVisible={isRoleSelectorVisible || isInvitePanelVisible}
@@ -324,7 +326,7 @@ const StartFillingPanel = ({
       <ModalDialog.Footer>
         <Button
           id="shared_move-to-archived-modal_submit"
-          key="OkButton"
+          key="OKButton"
           label={t("Common:Start")}
           size={ButtonSize.normal}
           primary

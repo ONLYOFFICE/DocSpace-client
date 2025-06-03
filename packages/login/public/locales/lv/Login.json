@@ -1,4 +1,5 @@
 {
+  "ChangePasswordSuccess": "Parole ir veiksmīgi nomainīta",
   "CodeTitle": "Kods jums tika nosūtīts pa e-pastu",
   "ErrorInvalidText": "Pēc 10 sekundēm jūs tiksiet novirzīts uz <1>{{productName}}</1>",
   "ForgotPassword": "Vai aizmirsāt savu paroli?",

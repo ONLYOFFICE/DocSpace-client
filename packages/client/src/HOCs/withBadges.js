@@ -149,7 +149,7 @@ export default function withBadges(WrappedComponent) {
     onCreateRoom = () => {
       const { item, onCreateRoomFromTemplate } = this.props;
 
-      onCreateRoomFromTemplate(item);
+      onCreateRoomFromTemplate(item, true);
     };
 
     render() {

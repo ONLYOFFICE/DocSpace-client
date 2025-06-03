@@ -23,6 +23,8 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import isNil from "lodash/isNil";
+
 import { StartFillingMode } from "@docspace/shared/enums";
 
 import { logger } from "@/../logger.mjs";
@@ -32,6 +34,7 @@ import {
   getFileById,
   getFillingSession,
   getFormFillingStatus,
+  getSettings,
   getUser,
 } from "@/utils/actions";
 import { CompletedVDRForm } from "@/components/completed-form/CompletedVDRForm";
@@ -44,19 +47,27 @@ interface PageProps {
 }
 
 async function Page({ searchParams }: PageProps) {
-  const { share, fillingSessionId, roomId, is_file, formId, type } =
+  const { share, fillingSessionId, roomId, is_file, formId, type, isSDK } =
     searchParams;
 
   log.info("Open completed form page");
 
   if (type && type === StartFillingMode.StartFilling.toString()) {
-    const [formFillingStatus, file, user] = await Promise.all([
+    const [formFillingStatus, file, user, settings] = await Promise.all([
       getFormFillingStatus(formId!),
       getFileById(formId!),
       getUser(formId!),
+      getSettings(share),
     ]);
 
-    if (!file || !user || !roomId) return <CompletedFormEmpty />;
+    if (
+      !file ||
+      !user ||
+      !roomId ||
+      !settings ||
+      settings === "access-restricted"
+    )
+      return <CompletedFormEmpty />;
 
     return (
       <CompletedVDRForm
@@ -64,16 +75,25 @@ async function Page({ searchParams }: PageProps) {
         user={user}
         roomId={roomId}
         formFillingStatus={formFillingStatus}
+        settings={settings}
       />
     );
   }
 
-  const session = await getFillingSession(fillingSessionId!, share);
+  if (isNil(fillingSessionId)) return <CompletedFormEmpty />;
+
+  const session = await getFillingSession(fillingSessionId, share);
 
   const isShareFile = is_file === "true";
+  const isSDKForm = isSDK === "true";
 
   return (
-    <CompletedForm session={session} share={share} isShareFile={isShareFile} />
+    <CompletedForm
+      session={session}
+      share={share}
+      isShareFile={isShareFile}
+      isSDK={isSDKForm}
+    />
   );
 }
 

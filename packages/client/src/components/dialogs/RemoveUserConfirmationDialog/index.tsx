@@ -85,7 +85,7 @@ const RemoveUserConfirmationDialog = ({
       <ModalDialog.Footer>
         <Button
           id="delete-file-modal_submit"
-          key="OkButton"
+          key="OKButton"
           label={t("Common:Remove")}
           size={ButtonSize.normal}
           primary

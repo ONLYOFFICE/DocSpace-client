@@ -645,6 +645,7 @@ class FilesStore {
           }
 
           const navigationPath = [...this.selectedFolderStore.navigationPath];
+          const pathParts = [...this.selectedFolderStore.pathParts];
 
           const idx = navigationPath.findIndex((p) => p.id === f.id);
 
@@ -656,6 +657,7 @@ class FilesStore {
             this.selectedFolderStore.setSelectedFolder({
               ...f,
               navigationPath,
+              pathParts,
             });
           }
 
@@ -3595,7 +3597,7 @@ class FilesStore {
         type,
         hasDraft,
         isForm,
-        isPDFForm: item.isForm,
+        isPDFForm: item.isForm || item.isPDFForm,
         requestToken,
         lastOpened,
         quotaLimit,
@@ -3715,6 +3717,7 @@ class FilesStore {
       presentations: [],
       masterForms: [],
       other: [],
+      pdfForms: [],
     };
 
     let selection = this.selection.length
@@ -3736,8 +3739,10 @@ class FilesStore {
           sortedFiles.presentations.push(item);
         } else if (isMasterFormExtension(item.fileExst)) {
           sortedFiles.masterForms.push(item);
-        } else if (isDocument(item.fileExst)) {
+        } else if (!item.isPDFForm && isDocument(item.fileExst)) {
           sortedFiles.documents.push(item);
+        } else if (item.isPDFForm) {
+          sortedFiles.pdfForms.push(item);
         } else {
           sortedFiles.other.push(item);
         }

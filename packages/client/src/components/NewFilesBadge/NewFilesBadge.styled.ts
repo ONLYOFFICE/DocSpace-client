@@ -44,7 +44,7 @@ export const StyledPanel = styled.div<{ position: TPanelPosition }>`
   border: 1px solid ${(props) => props.theme.newFilesPanel.borderColor};
   border-radius: ${(props) => props.theme.newFilesPanel.borderRadius};
 
-  box-shadows: ${(props) => props.theme.newFilesPanel.boxShadow};
+  box-shadow: ${(props) => props.theme.newFilesPanel.boxShadow};
   z-index: 600;
 
   box-sizing: border-box;
@@ -149,7 +149,7 @@ export const StyledFileItem = styled.div<{ isRooms: boolean }>`
   align-items: center;
   gap: 16px;
 
-  curstor: pointer;
+  cursor: pointer;
 
   .info-container {
     max-width: calc(100% - 32px);

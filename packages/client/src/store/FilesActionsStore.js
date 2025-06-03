@@ -804,9 +804,6 @@ class FilesActionStore {
               ? data
               : await this.uploadDataStore.loopFilesOperations(data, pbData);
 
-          clearActiveOperations(fileIds, folderIds);
-          setDownloadItems([]);
-
           if (item.url) {
             openUrl(item.url, UrlActionType.Download, true);
           }
@@ -822,8 +819,6 @@ class FilesActionStore {
         },
       );
     } catch (err) {
-      clearActiveOperations(fileIds, folderIds);
-
       setSecondaryProgressBarData({
         operation: operationName,
         alert: true,
@@ -854,6 +849,9 @@ class FilesActionStore {
       }
 
       return toastr.error(err, null, 0, true);
+    } finally {
+      clearActiveOperations(fileIds, folderIds);
+      setDownloadItems([]);
     }
   };
 
@@ -906,6 +904,16 @@ class FilesActionStore {
           {
             id: selectedItem.id,
             isFolder: selectedItem.isFolder,
+          },
+          false,
+          false,
+        );
+        break;
+      case FileAction.RestoreVersion:
+        this.onSelectItem(
+          {
+            id: selectedItem.id,
+            isFolder: false,
           },
           false,
           false,
@@ -1463,7 +1471,12 @@ class FilesActionStore {
               ...pbData,
             });
 
-            return toastr.error(err.message ? err.message : err, null, 0, true);
+            return toastr.error(
+              err.message ? err.message : err.error ? err.error : err,
+              null,
+              0,
+              true,
+            );
           })
           .finally(() => {
             clearActiveOperations(null, items);
@@ -2949,7 +2962,11 @@ class FilesActionStore {
     this.isGroupMenuBlocked = blocked;
   };
 
-  preparingDataForCopyingToRoom = async (destFolderId, selections) => {
+  preparingDataForCopyingToRoom = async (
+    destFolderId,
+    selections,
+    destFolderInfo,
+  ) => {
     const fileIds = [];
     let folderIds = [];
 
@@ -2988,6 +3005,7 @@ class FilesActionStore {
 
     const operationData = {
       destFolderId,
+      destFolderInfo,
       folderIds,
       fileIds,
       deleteAfter: false,
@@ -3097,10 +3115,12 @@ class FilesActionStore {
     await refreshFiles();
   };
 
-  onCreateRoomFromTemplate = (item) => {
+  onCreateRoomFromTemplate = (item, addSelection) => {
     const event = new Event(Events.ROOM_CREATE);
     event.item = item;
     window.dispatchEvent(event);
+
+    if (addSelection) this.filesStore.setBufferSelection(item);
   };
 
   copyFromTemplateForm = async (fileInfo) => {
@@ -3394,7 +3414,7 @@ class FilesActionStore {
         res = await this.loopExportRoomIndexStatusChecking(pbData);
       }
 
-      if (res.status === ExportRoomIndexTaskStatus.Failed) {
+      if (res.error || res.status === ExportRoomIndexTaskStatus.Failed) {
         toastr.error(res.error);
 
         setSecondaryProgressBarData({

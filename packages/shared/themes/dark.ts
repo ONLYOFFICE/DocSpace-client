@@ -3254,6 +3254,10 @@ const Dark: TTheme = {
     selectedColor: black,
     circleBorder: `3px solid ${lightSecondMain}`,
   },
+
+  socialAuthDialog: {
+    accountDetailsBackground: lightDarkGrayHover,
+  },
 };
 
 export default Dark;

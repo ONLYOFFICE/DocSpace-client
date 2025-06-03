@@ -1,0 +1,288 @@
+{
+  "key_path": "RolesAreSet",
+  "content": "Roles already set for the selected users.",
+  "content_en_sha1_hash": "257dd5e7c55b84f09c6e056798f95277ffabdfb9",
+  "created_at": "2025-05-19T21:30:52.435Z",
+  "updated_at": "2025-05-22T11:56:37.673Z",
+  "comment": {
+    "text": "This translation key is used to display a message indicating that roles have already been set for selected users. It appears as a label in a UI component to inform users about their role settings.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:37.749Z"
+  },
+  "usage": [
+    {
+      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\GoogleWorkspace\\Stepper\\index.tsx",
+      "line_number": 72,
+      "context": "},\n {\n title: t(\"Settings:SelectUserTypes\"),\n description: isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>\n {t(\"Settings:UsersAreRegistered\", {\n productName: t(\"Common:ProductName\"),\n })}\n </div>",
+      "module": "\\packages\\client"
+    },
+    {
+      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\NextcloudWorkspace\\Stepper\\index.tsx",
+      "line_number": 83,
+      "context": "},\n {\n title: t(\"Settings:SelectUserTypes\"),\n description: isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>{t(\"Settings:UsersAreRegistered\")}</div>\n </>\n ) : (\n <>\n <Trans",
+      "module": "\\packages\\client"
+    },
+    {
+      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\OnlyofficeWorkspace\\Stepper\\index.tsx",
+      "line_number": 76,
+      "context": "},\n {\n title: t(\"Settings:SelectUserTypes\"),\n description: isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>{t(\"Settings:UsersAreRegistered\")}</div>\n </>\n ) : (\n <>\n <Trans",
+      "module": "\\packages\\client"
+    },
+    {
+      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\utils\\getStepDescription.js",
+      "line_number": 46,
+      "context": "organizationName: logoText,\n });\n case 3:\n return isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>{t(\"Settings:UsersAreRegistered\")}</div>\n </>\n ) : (\n <>\n <Trans",
+      "module": "\\packages\\client"
+    },
+    {
+      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\utils\\getStepDescription.js",
+      "line_number": 46,
+      "context": "organizationName: logoText,\n });\n case 3:\n return isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>{t(\"Settings:UsersAreRegistered\")}</div>\n </>\n ) : (\n <>\n <Trans",
+      "module": "\\packages\\client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'الأدوار التي تم تعيينها بالفعل للمستخدمين المحددين.' is a literal translation and a bit verbose for a user interface message. It doesn't convey the meaning as concisely as the English original.",
+          "suggestion": "أدوار المستخدمين مُحددة."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'محددين' (al-muḥaddadīn) implies that the users were specifically chosen, which might not be the case. It's more likely that the roles were applied to a selection of users.",
+          "suggestion": "أدوار المستخدمين مُعيّنة."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Seçilmiş istifadəçilər üçün əvvəlcədən təyin edilmiş rollar' is a bit literal and doesn't flow naturally. 'əvvəlcədən təyin edilmiş' (pre-defined) isn't the most common way to express this in Azerbaijani. It could be misinterpreted.",
+          "suggestion": "Seçilmiş istifadəçilər üçün rollar artıq təyin edilib."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the phrasing 'artıq' (already) makes the sentence more natural and clearer in Azerbaijani.",
+          "suggestion": "Adding 'artıq' makes the translation more idiomatic."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ບົດບາດຖືກກຳນົດໄວ້ແລ້ວ ສຳລັບຜູ້ໃຊ້ທີ່ເລືອກ' is a literal translation and could be improved for naturalness.  A more natural phrasing would convey the sense that roles have been assigned.",
+          "suggestion": "ບົດບາດຖືກມອບໝາຍໃຫ້ຜູ້ໃຊ້ທີ່ເລືອກແລ້ວ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Funções já definidas para os usuários selecionados' is a literal translation but sounds slightly unnatural in Portuguese. A more natural phrasing would emphasize that the roles *have been assigned* or *are configured*.",
+          "suggestion": "Papéis já atribuídos aos usuários selecionados."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'පහත තෝරාගත් පරිශීලකයින් සඳහා කාර්යභාර දැනටමත් සැකසී ඇත.' doesn't accurately convey the meaning of 'Roles already set for the selected users.' 'පහත' (below) isn't needed and changes the meaning. 'පරිශීලකයින්' (enthusiasts/devotees) is not the correct word for 'users'. 'කාර්යභාර' (duties/tasks) doesn't accurately reflect 'roles'. 'සැකසී ඇත' (arranged/prepared) is a weak substitute for 'set'.",
+          "suggestion": "තෝරාගත් පරිශීලකයින් සඳහා වන භූमिकාවන් දැනටමත් සකසා ඇත."
+        },
+        {
+          "type": "spelling",
+          "description": "While 'පරිශීලකයින්' isn't inherently wrong, it’s not the best fit for 'users' in this context. It implies enthusiasts.",
+          "suggestion": "පරිශ්‍රමකරුවන් (parishramakaruwan - workers) or ක්‍රියාකරුවන් (kriyakarawan - actors/operators)"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure could be improved for better flow and naturalness in Sinhala. While grammatically understandable, it feels slightly unnatural.",
+          "suggestion": "Consider restructuring the sentence to be more idiomatic in Sinhala. A native Sinhala speaker could refine it further."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Улоге су већ постављене за одабране кориснике' is a literal translation and sounds slightly unnatural in Serbian. A more natural phrasing would emphasize the action being done *to* the users.",
+          "suggestion": "Одабраним корисницима су већ додељене улоге."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

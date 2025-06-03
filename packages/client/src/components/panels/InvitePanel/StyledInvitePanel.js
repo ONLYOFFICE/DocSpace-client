@@ -340,6 +340,10 @@ const StyledDropDown = styled(DropDown)`
     gap: 8px;
     height: 53px;
 
+    .avatar-disabled {
+      opacity: 0.5;
+    }
+
     .list-item_content {
       text-overflow: ellipsis;
       overflow: hidden;
@@ -406,7 +410,7 @@ const SearchItemText = styled(Text).attrs(injectDefaultTheme)`
     (props.primary && !props.disabled) || props.info
       ? props.theme.text.color
       : props.theme.text.emailColor};
-  ${(props) => props.info && `margin-inline-start: auto`}
+  ${(props) => (props.info || props.disabled) && `margin-inline-start: auto`}
 `;
 
 const StyledEditButton = styled(Button)`
@@ -459,16 +463,6 @@ const StyledButtons = styled.div.attrs(injectDefaultTheme)`
 
 const StyledLink = styled(Link)`
   float: inline-end;
-`;
-
-const ResetLink = styled(Link)`
-  float: inline-start;
-  padding: 0 16px;
-  margin-bottom: 16px;
-  font-size: 13px;
-  color: ${(props) => props.theme.createEditRoomDialog.commonParam.textColor};
-  font-style: normal;
-  line-height: 15px;
 `;
 
 const StyledToggleButton = styled(ToggleButton)`
@@ -554,7 +548,6 @@ export {
   StyledDeleteIcon,
   StyledButtons,
   StyledLink,
-  ResetLink,
   ScrollList,
   StyledToggleButton,
   StyledDescription,

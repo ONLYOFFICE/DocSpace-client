@@ -182,36 +182,9 @@ const Guid = ({
   const isLastStep = currentStep === totalSteps - 1;
   const { placement = "side" } = currentGuidance || {};
 
-  const modalPosition = useMemo(
-    () =>
-      getModalPosition(
-        positions,
-        placement,
-        isRTL,
-        windowWidth,
-        windowHeight,
-        modalWidth,
-        modalHeight,
-        viewAs,
-        currentGuidance,
-      ),
-    [
-      positions,
-      placement,
-      isRTL,
-      windowWidth,
-      windowHeight,
-      modalWidth,
-      modalHeight,
-      viewAs,
-      currentGuidance,
-    ],
-  );
-
   const clippedElements = useMemo(
     () =>
-      positions.map((position, index) => ({
-        key: `guid-element-${index}`,
+      positions.map((position) => ({
         style: {
           ["--backdrop-filter-value" as string]: theme.isBase
             ? "contrast(165%)"
@@ -229,21 +202,30 @@ const Guid = ({
   );
 
   const renderClippedElements = useCallback(() => {
-    return clippedElements.map((element, index) => {
+    return clippedElements.map((element) => {
+      const { style } = element;
+      const left = parseInt(style.left, 10);
+      const top = parseInt(style.top, 10);
+      const width = parseInt(style.width, 10);
+      const height = parseInt(style.height, 10);
+
+      const elementKey = `guid-${currentGuidance?.id}-pos-${left}-${top}-${width}-${height}`;
+
       const elementClippedClassName = classNames(styles.guidElement, {
-        [styles.smallBorderRadius]:
-          currentGuidance?.position[index]?.smallBorder,
+        [styles.smallBorderRadius]: width === height,
       });
 
       return (
         <div
-          key={element.key}
+          key={elementKey}
           className={elementClippedClassName}
-          style={element.style}
+          style={style}
         />
       );
     });
   }, [clippedElements, currentGuidance]);
+
+  const maskId = "guidance-mask";
 
   const tipsCircles = useMemo(
     () =>
@@ -257,6 +239,50 @@ const Guid = ({
       )),
     [guidanceConfig, currentStep],
   );
+
+  const renderMask = useMemo(() => {
+    if (!clippedElements.length) return null;
+
+    return (
+      <svg
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          zIndex: 998,
+        }}
+      >
+        <defs>
+          <mask id={maskId}>
+            <rect width="100%" height="100%" fill="white" />
+            {clippedElements.map((element) => {
+              const { style } = element;
+              const left = parseInt(style.left, 10);
+              const top = parseInt(style.top, 10);
+              const width = parseInt(style.width, 10);
+              const height = parseInt(style.height, 10);
+
+              const elementKey = `mask-${currentGuidance?.id}-pos-${left}-${top}-${width}-${height}`;
+
+              return (
+                <rect
+                  key={elementKey}
+                  x={left}
+                  y={top}
+                  width={width}
+                  height={height}
+                  fill="black"
+                  rx={width === height ? "4" : "7"}
+                />
+              );
+            })}
+          </mask>
+        </defs>
+      </svg>
+    );
+  }, [clippedElements, currentGuidance]);
 
   const closeBackdrop = useCallback(
     (e: React.MouseEvent) => {
@@ -273,9 +299,15 @@ const Guid = ({
 
   return (
     <div className="guidance">
+      {renderMask}
       <div
         className={classNames(styles.guidBackdrop)}
         onClick={closeBackdrop}
+        style={{
+          mask: `url(#${maskId})`,
+          WebkitMask: `url(#${maskId})`,
+          opacity: clippedElements.length ? 1 : 0,
+        }}
       />
       {renderClippedElements()}
       <div
@@ -284,8 +316,28 @@ const Guid = ({
         role="dialog"
         className={classNames(styles.dialog, "not-selectable", "dialog")}
         style={{
-          left: modalPosition.left,
-          top: modalPosition.top,
+          left: getModalPosition(
+            positions,
+            placement,
+            isRTL,
+            windowWidth,
+            windowHeight,
+            modalWidth,
+            modalHeight,
+            viewAs,
+            currentGuidance,
+          ).left,
+          top: getModalPosition(
+            positions,
+            placement,
+            isRTL,
+            windowWidth,
+            windowHeight,
+            modalWidth,
+            modalHeight,
+            viewAs,
+            currentGuidance,
+          ).top,
         }}
       >
         <div

@@ -292,6 +292,7 @@ class BackupStore {
     //     ? serviceTitle === this.connectedThirdPartyAccount?.title
     //     : provider.name === this.connectedThirdPartyAccount?.title;
     const isConnected =
+      provider.name === this.connectedThirdPartyAccount?.providerKey ||
       provider.name === this.connectedThirdPartyAccount?.title;
 
     const isDisabled = !provider.connected && !this.authStore.isAdmin;
@@ -377,7 +378,7 @@ class BackupStore {
       this.defaultPeriodNumber = `${period}`;
       this.defaultMaxCopiesNumber = `${backupsStored}`;
       this.defaultStorageType = `${storageType}`;
-      this.defaultFolderId = `${folderId}`;
+      this.defaultFolderId = module ? "" : `${folderId}`;
       if (module) this.defaultStorageId = `${module}`;
 
       this.selectedDay = this.defaultDay;
@@ -385,7 +386,7 @@ class BackupStore {
       this.selectedPeriodNumber = this.defaultPeriodNumber;
       this.selectedMaxCopiesNumber = this.defaultMaxCopiesNumber;
       this.selectedStorageType = this.defaultStorageType;
-      this.selectedFolderId = this.defaultFolderId;
+      this.selectedFolderId = module ? "" : this.defaultFolderId;
 
       this.defaultPeriodLabel = periodObj[+this.defaultPeriodNumber].label;
       this.selectedPeriodLabel = this.defaultPeriodLabel;

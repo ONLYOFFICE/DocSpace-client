@@ -1,6 +1,5 @@
 {
   "AccountWillBeCreated": "Θα δημιουργηθεί ένας λογαριασμός {{productName}} για το <1>{{email}}</1>. Ολοκληρώστε την εγγραφή σας:",
-  "ChangePasswordSuccess": "Ο κωδικός πρόσβασης άλλαξε με επιτυχία",
   "ConfirmOwnerPortalSuccessMessage": "Ο κάτοχος της {{productName}} άλλαξε επιτυχώς. Σε 10 δευτερόλεπτα θα ανακατευθυνθείτε.",
   "ConfirmOwnerPortalTitle": "Επιβεβαιώστε ότι θέλετε να αλλάξετε τον κάτοχο της {{productName}} σε {{newOwner}}.",
   "CurrentNumber": "Ο τωρινός αριθμός κινητού τηλεφώνου σας",

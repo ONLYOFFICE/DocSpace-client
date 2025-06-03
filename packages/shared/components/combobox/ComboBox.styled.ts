@@ -484,9 +484,11 @@ const StyledArrowIcon = styled.div.attrs(injectDefaultTheme)<{
 
 const StyledLoader = styled(Loader)<{ displaySize?: ComboBoxSize }>`
   position: absolute;
-  margin-inline-start: ${({ displaySize }) =>
-    displaySize === "content" ? "-16px" : "-8px"};
   margin-top: 2px;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const getDefaultStyles = ({

@@ -100,6 +100,7 @@ export class FilesSelectionStore {
       spreadsheets: [],
       presentations: [],
       masterForms: [],
+      pdfForms: [],
       other: [],
     };
 

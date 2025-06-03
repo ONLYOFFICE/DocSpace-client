@@ -11,8 +11,8 @@
   "InviteViaLinkDescriptionAccounts": "Vytvoření univerzálního odkazu pro samoautorizaci v {{productName}}",
   "InviteViaLinkDescriptionRoom": "Vytvoření univerzálního odkazu pro sebeautorizaci v místnosti",
   "LinkCopySuccess": "Odkaz byl zkopírován",
-  "ResetChange": "Obnovit změnu",
   "SendInvitation": "Odeslat pozvánku",
   "UserMaxAvailableRoleWarning": "Hosty a uživatele nelze přiřadit jako správce místnosti. Pro zadanou roli jsou vhodní pouze správci místností a {{productName}}.",
-  "UsersAlreadyAdded": "Někteří uživatelé již byli přidáni"
+  "UsersAlreadyAdded": "Někteří uživatelé již byli přidáni",
+  "UsersCannotBeAdded": "Vypnuté kontakty nelze přidat do místnosti."
 }

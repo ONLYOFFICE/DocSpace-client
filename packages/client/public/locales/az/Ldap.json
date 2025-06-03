@@ -3,7 +3,7 @@
   "LdapAdvancedSettings": "Qabaqcıl Parametrlər",
   "LdapAdvancedSettingsTooltip": "LDAP serverinizlə sinxronizasiya etmək istədiyiniz istifadəçi xüsusiyyətlərini seçin.",
   "LdapAttributeMapping": "Xüsusiyyət xəritələşdirilməsi",
-  "LdapAuthenticationTooltip": "Cari Windows istifadəçisinin LDAP server oxumaq hüququ yoxdursa, bu seçimi aktivləşdirin və oxumaq hüququ olan başqa istifadəçinin məlumatlarını daxil edin.",
+  "LdapAuthenticationTooltip": "Cari istifadəçisinin LDAP server oxumaq hüququ yoxdursa, bu seçimi aktivləşdirin və oxumaq hüququ olan başqa istifadəçinin məlumatlarını daxil edin.",
   "LdapAutoSyncToggle": "Avtomatik sinxronizasiya",
   "LdapAutoSyncToggleDescription": "Sinxronizasiya bütün məlumatların portaldan yüklənməsinə və parametrlər dəyişdirildikdən sonra yeni məlumatların yenilənməsinə imkan verəcək. Portalda istifadəçilər üçün hər dəfə yeni məlumatınız olduqda sinxronizasiya edin.",
   "LdapAvatar": "Profil şəkli",

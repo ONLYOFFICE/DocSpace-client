@@ -74,6 +74,7 @@ import {
   LANGUAGE,
   PUBLIC_MEDIA_VIEW_URL,
   RTL_LANGUAGES,
+  TIMEZONE,
 } from "../constants";
 
 import { TI18n, TTranslation } from "../types";
@@ -1258,6 +1259,7 @@ export const getUserTypeDescription = (
 
   return t("Translations:RoleGuestDescriprion");
 };
+
 export function setLanguageForUnauthorized(culture: string) {
   setCookie(LANGUAGE, culture, {
     "max-age": COOKIE_EXPIRATION_YEAR,
@@ -1271,10 +1273,16 @@ export function setLanguageForUnauthorized(culture: string) {
   if (prevCulture) {
     const newUrl = window.location.href.replace(`&culture=${prevCulture}`, ``);
 
-    window.history.pushState("", "", newUrl);
+    window.history.pushState({}, "", newUrl);
   }
 
   window.location.reload();
+}
+
+export function setTimezoneForUnauthorized(timezone: string) {
+  setCookie(TIMEZONE, timezone, {
+    "max-age": COOKIE_EXPIRATION_YEAR,
+  });
 }
 
 export const imageProcessing = async (file: File, maxSize?: number) => {

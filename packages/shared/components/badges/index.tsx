@@ -290,9 +290,7 @@ const Badges = ({
             label={fillingStatusLabel}
             title={fillingStatusTitle}
             {...versionBadgeProps}
-            style={{
-              width: "max-content",
-            }}
+            maxWidth="max-content"
           />
         </BadgeWrapper>
       ) : null}
@@ -396,7 +394,6 @@ const Badges = ({
             themeId={ThemeId.IconButtonCustomFilter}
             iconName={iconCustomFilter}
             size={sizeBadge}
-            isClickable
             data-tooltip-id="customFilterTooltip"
             className="badge is-custom-filter tablet-badge"
           />
@@ -405,7 +402,6 @@ const Badges = ({
             id="customFilterTooltip"
             place="bottom-start"
             getContent={getTooltipContent}
-            openOnClick
             clickable
             maxWidth="238px"
             className={styles.customFilterTooltip}

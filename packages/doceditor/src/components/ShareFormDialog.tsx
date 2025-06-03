@@ -158,6 +158,7 @@ const ShareFormDialog = ({
       buttonLabel: t("Common:Share"),
       onClick: onClickShareFile,
       icon: <ShareSvg />,
+      disabled: !file.canShare,
     },
     {
       id: "form-room",
@@ -180,6 +181,7 @@ const ShareFormDialog = ({
   return (
     <ShareFormDialogComponent
       visible
+      withBorder
       cards={cards}
       onClose={handleClose}
       containerVisible={isVisibleStartFillingSelectDialog}

@@ -530,15 +530,11 @@ class CreateEditRoomStore {
         quota: +quotaLimit,
       }),
       ...logoCover,
-      ...(denyDownload && {
-        denyDownload,
-      }),
-      ...(indexing && {
-        indexing,
-      }),
-      ...(lifetime && {
-        lifetime,
-      }),
+
+      denyDownload,
+      indexing,
+      lifetime,
+
       ...(tagsToAddList.length && {
         tags: tagsToAddList,
       }),
@@ -603,8 +599,8 @@ class CreateEditRoomStore {
               ? [bufferSelection]
               : [];
 
-        preparingDataForCopyingToRoom(room.id, selections).catch((error) =>
-          console.error(error),
+        preparingDataForCopyingToRoom(room.id, selections, room).catch(
+          (error) => console.error(error),
         );
       }
 
@@ -636,42 +632,18 @@ class CreateEditRoomStore {
   };
 
   onCreateTemplateRoom = async (roomParams) => {
-    const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
-
     this.filesStore.setRoomCreated(true);
 
-    const {
-      roomId,
-      tags,
-      title,
-      logo,
-      roomType,
-      copyLogo,
-      color,
-      cover,
-      quota,
-    } = roomParams;
-
-    const quotaLimit = isDefaultRoomsQuotaSet ? quota : null;
+    const { roomId, ...rest } = roomParams;
 
     let isFinished = false;
     let errorMsg = false;
     let progressData;
 
-    const data = {
+    const room = await api.rooms.createRoomFromTemplate({
       templateId: roomId,
-      title,
-      logo,
-      tags,
-      CopyLogo: copyLogo,
-      color,
-      cover,
-      ...(quotaLimit && {
-        quota: +quotaLimit,
-      }),
-    };
-
-    const room = await api.rooms.createRoomFromTemplate(data);
+      ...rest,
+    });
 
     progressData = room;
 
@@ -686,8 +658,8 @@ class CreateEditRoomStore {
 
     return {
       id: progressData.roomId,
-      title,
-      roomType,
+      title: roomParams.title,
+      roomType: roomParams.roomType,
       rootFolderType: FolderType.Rooms,
       errorMsg,
     };

@@ -232,12 +232,12 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   const tabsItems = [
     {
       id: "all",
-      name: "All",
+      name: t("Common:All"),
       content: null,
     },
     {
       id: "restricted",
-      name: "Restricted",
+      name: t("Common:Restricted"),
       content: (
         <div className="api-key_permission-tab">
           <div className="api-key_permission-container">
@@ -266,7 +266,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
     },
     {
       id: "readonly",
-      name: "Read only",
+      name: t("Common:ReadOnly"),
       content: null,
     },
   ];
@@ -404,9 +404,6 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   const editIsDisabled = isEdit
     ? inputValue === actionItem?.name && !checkIsChanged()
     : false;
-
-  const generateButtonIsDisabled =
-    isRequestRunning || editIsDisabled || generateIsDisabled;
 
   const createBody = (
     <StyledBodyContent>
@@ -551,13 +548,13 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   const createFooter = (
     <>
       <Button
-        key="OkButton"
+        key="OKButton"
         label={isEdit ? t("Common:EditButton") : t("Webhooks:Generate")}
         size={ButtonSize.normal}
         primary
         onClick={onGenerate}
         scale
-        isDisabled={generateButtonIsDisabled}
+        isDisabled={isRequestRunning || editIsDisabled || generateIsDisabled}
       />
       <Button
         key="CancelButton"
@@ -571,7 +568,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
 
   const keyFooter = (
     <Button
-      key="OkButton"
+      key="OKButton"
       label={t("Common:Done")}
       size={ButtonSize.normal}
       primary

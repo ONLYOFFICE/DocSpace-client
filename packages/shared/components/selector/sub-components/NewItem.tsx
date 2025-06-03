@@ -26,7 +26,6 @@
 
 import React from "react";
 
-import { Text } from "../../text";
 import { SelectorAddButton } from "../../selector-add-button";
 
 import { StyledItem } from "../Selector.styled";
@@ -97,19 +96,17 @@ const NewItem = ({
       isMultiSelect={false}
       noHover
     >
-      <SelectorAddButton onClick={onCreateClickAction} isAction />
-      <Text
-        className="label label-disabled clicked-label"
-        fontWeight={600}
-        fontSize="14px"
-        noSelect
-        truncate
-        dir="auto"
+      <SelectorAddButton
         onClick={onCreateClickAction}
-        title={label}
-      >
-        {label}
-      </Text>
+        isAction
+        label={label}
+        titleText={label}
+        fontSize="14px"
+        lineHeight="18px"
+        noSelect
+        dir="auto"
+        truncate
+      />
       {isOpenDropDown && dropDownItems && dropDownItems.length > 0 ? (
         <NewItemDropDown
           dropDownItems={dropDownItems}

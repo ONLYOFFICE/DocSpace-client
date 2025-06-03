@@ -45,7 +45,7 @@ import { DropDownItem } from "../drop-down-item";
 import { Text } from "../text";
 import { IconButton } from "../icon-button";
 
-import { getRoomTitle } from "./RoomIcon.utils";
+import { encodeToBase64, getRoomTitle } from "./RoomIcon.utils";
 import styles from "./RoomIcon.module.scss";
 import type { RoomIconProps } from "./RoomIcon.types";
 import { Tooltip } from "../tooltip";
@@ -101,7 +101,7 @@ const RoomIcon = ({
     ? typeof logo === "string"
       ? logo
       : logo.cover
-        ? `data:image/svg+xml;base64, ${window.btoa(logo?.cover?.data)}`
+        ? `data:image/svg+xml;base64, ${encodeToBase64(logo?.cover?.data)}`
         : typeof logo === "object" && logo.medium
           ? logo.medium
           : undefined
@@ -237,7 +237,10 @@ const RoomIcon = ({
               />
             ) : (
               <ReactSVG
-                className="template-icon-svg-icon"
+                className={classNames(
+                  "room-icon-cover template-icon-svg-icon",
+                  styles.roomIconCover,
+                )}
                 src={imgSrc as string}
               />
             )}

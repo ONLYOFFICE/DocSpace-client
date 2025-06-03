@@ -51,6 +51,7 @@ export type TContextButtonProps = {
     setAnimationClasses: (classes: string[]) => void,
   ) => () => void;
   guidAnimationVisible?: boolean;
+  setGuidAnimationVisible?: (visible: boolean) => void;
 };
 
 export type TPlusButtonProps = {
@@ -176,7 +177,6 @@ export type TDropBoxProps = TArrowButtonProps &
     | "onNavigationButtonClick"
     | "navigationButtonLabel"
     | "showTitle"
-    | "isPublicRoom"
     | "isMobile"
   > &
   TRowParam & {

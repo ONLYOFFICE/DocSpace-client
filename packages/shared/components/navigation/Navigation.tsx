@@ -86,6 +86,7 @@ const Navigation = ({
   addButtonRef,
   contextButtonAnimation,
   guidAnimationVisible,
+  setGuidAnimationVisible,
   isContextButtonVisible,
   ...rest
 }: TNavigationProps) => {
@@ -264,6 +265,8 @@ const Navigation = ({
                 navigationTitleContainerNode={navigationTitleContainerNode}
                 onCloseDropBox={onCloseDropBox}
                 isFrame={isFrame}
+                isContextButtonVisible={isContextButtonVisible}
+                isPublicRoom={isPublicRoom}
               />
             </>
           ) : null}
@@ -324,6 +327,7 @@ const Navigation = ({
               isMobile={currentDeviceType !== DeviceType.desktop}
               contextButtonAnimation={contextButtonAnimation}
               guidAnimationVisible={guidAnimationVisible}
+              setGuidAnimationVisible={setGuidAnimationVisible}
               isContextButtonVisible={isContextButtonVisible}
             />
           </div>

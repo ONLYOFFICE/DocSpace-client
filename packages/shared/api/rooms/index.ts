@@ -33,12 +33,11 @@ import { FolderType, MembersSubjectType, ShareAccessRights } from "../../enums";
 import { request, roomsClient } from "../client";
 import { decodeDisplayName, toUrlParams } from "../../utils/common";
 import RoomsFilter from "./filter";
-import {
-  TExportRoomIndexTask,
-  TPublicRoomPassword,
-  TValidateShareRoom,
-  TRoom,
-} from "./types";
+
+import type {
+  ExternalShareDto,
+  RoomLinkRequest,
+} from "@onlyoffice/docspace-api-typescript";
 
 export async function getRooms(filter?: RoomsFilter, signal?: AbortSignal) {
   const res = await roomsClient.getRoomsFolder(
@@ -72,7 +71,7 @@ export async function getRoomInfo(id) {
 
   if (res.rootFolderType === FolderType.Archive) res.isArchive = true;
 
-  return res as TRoom;
+  return res;
 }
 
 export async function getRoomMembers(id, filter) {
@@ -266,18 +265,18 @@ export async function editExternalLink(
   return res;
 }
 
-export async function getExternalLinks(roomId, type) {
-  const res = await roomsClient.getRoomLinks(roomId, type);
+export async function getExternalLinks(id, type) {
+  const res = await roomsClient.getRoomLinks(id, type);
   return res;
 }
 
-export async function getPrimaryLink(roomId) {
-  const res = await roomsClient.getRoomLinks(roomId);
+export async function getPrimaryLink(id) {
+  const res = await roomsClient.getRoomLinks(id);
   return res;
 }
 
 export function validatePublicRoomKey(key) {
-  return request<TValidateShareRoom>({
+  return request<RoomLinkRequest>({
     method: "get",
     url: `files/share/${key}`,
   });
@@ -293,7 +292,7 @@ export async function validatePublicRoomPassword(
     url: `files/share/${key}/password`,
     data: { password: passwordHash },
     signal,
-  })) as TPublicRoomPassword;
+  })) as ExternalShareDto;
 
   return res;
 }
@@ -330,33 +329,22 @@ export async function getRoomCovers() {
   return res;
 }
 
-export async function exportRoomIndex(roomId: number) {
-  const res = await roomsClient.startRoomIndexExport(roomId);
-  return res as TExportRoomIndexTask;
+export async function exportRoomIndex(id) {
+  const res = await roomsClient.startRoomIndexExport(id);
+  return res;
 }
 
 export async function getExportRoomIndexProgress() {
   const res = await roomsClient.getRoomIndexExport();
-  return res as TExportRoomIndexTask;
-}
-
-export async function setRoomCover(roomId, cover) {
-  const res = await roomsClient.changeRoomCover(roomId, {
-    color: cover.color,
-    cover: cover.cover,
-  });
   return res;
 }
 
-export async function createTemplate(data: {
-  roomId: number;
-  title: string;
-  logo: TRoom["logo"];
-  share;
-  tags: TRoom["tags"];
-  public: boolean;
-  quota: number;
-}) {
+export async function setRoomCover(id, cover) {
+  const res = await roomsClient.changeRoomCover(id, cover);
+  return res;
+}
+
+export async function createTemplate(data) {
   const res = await roomsClient.createTemplate(data);
   return res;
 }
@@ -376,12 +364,12 @@ export async function getCreateRoomFromTemplateProgress() {
   return res;
 }
 
-export async function getTemplateAvailable(id: number) {
+export async function getTemplateAvailable(id) {
   const res = await roomsClient.isPublic(id);
   return res;
 }
 
-export async function setTemplateAvailable(id: number, isAvailable: boolean) {
+export async function setTemplateAvailable(id, isAvailable) {
   const res = await roomsClient.setPublic({
     id,
     public: isAvailable,

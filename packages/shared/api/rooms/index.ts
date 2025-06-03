@@ -30,13 +30,20 @@
 
 import moment from "moment";
 import { FolderType, MembersSubjectType, ShareAccessRights } from "../../enums";
-import { request, roomsClient, filesClient, sharingClient } from "../client";
+import {
+  request,
+  roomsClient,
+  filesClient,
+  sharingClient,
+  filesSettingsClient,
+} from "../client";
 import { decodeDisplayName, toUrlParams } from "../../utils/common";
 import RoomsFilter from "./filter";
 
 import type {
   ExternalShareDto,
   RoomLinkRequest,
+  RoomInvitationRequest,
 } from "@onlyoffice/docspace-api-typescript";
 
 export async function getRooms(filter?: RoomsFilter, signal?: AbortSignal) {
@@ -209,7 +216,7 @@ export async function getRoomSecurityInfo(id) {
   return res;
 }
 
-export async function setRoomSecurity(id, data) {
+export async function setRoomSecurity(id: number, data: RoomInvitationRequest) {
   const res = await roomsClient.setRoomSecurity(id, data);
 
   res.members.forEach((item) => {
@@ -353,12 +360,7 @@ export async function setTemplateAvailable(id, isAvailable) {
   return res;
 }
 
-export function hideConfirmRoomLifetime(val: boolean) {
-  const options = {
-    method: "put",
-    url: "/files/hideconfirmroomlifetime",
-    data: { set: val },
-  };
-
-  return request(options);
+export function hideConfirmRoomLifetime(val) {
+  const res = filesSettingsClient.hideConfirmRoomLifetime({ set: val });
+  return res;
 }

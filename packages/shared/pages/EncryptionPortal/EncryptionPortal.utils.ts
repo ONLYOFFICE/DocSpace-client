@@ -26,6 +26,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export const returnToPortal = () => {
+  const isStorybook =
+    window.location.href.includes("iframe.html") ||
+    window.location.href.includes("viewMode=docs") ||
+    window.location.href.includes("story-") ||
+    window.location.href.includes("storybook");
+
+  if (isStorybook) {
+    return;
+  }
+
   setTimeout(() => {
     window.location.replace("/");
   }, 5000);

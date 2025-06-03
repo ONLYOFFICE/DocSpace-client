@@ -39,6 +39,7 @@ import {
   PortalUsersApi,
   FilesSharingApi,
   FilesQuotaApi,
+  FilesSettingsApi,
 } from "@onlyoffice/docspace-api-typescript";
 
 import AxiosClient, {
@@ -282,6 +283,7 @@ const enhancedQuotaApi = new ApiClient(PortalQuotaApi);
 const enhancedUsersApi = new ApiClient(PortalUsersApi);
 const enhancedSharingApi = new ApiClient(FilesSharingApi);
 const enhancedFilesQuotaApi = new ApiClient(FilesQuotaApi);
+const enhancedFilesSettingsApi = new ApiClient(FilesSettingsApi);
 
 interface ApiOptions extends TReqOption, AxiosRequestConfig {
   skipRedirect?: boolean;
@@ -349,6 +351,7 @@ export const quotaClient = createApiProxy(enhancedQuotaApi);
 export const usersClient = createApiProxy(enhancedUsersApi);
 export const sharingClient = createApiProxy(enhancedSharingApi);
 export const filesQuotaClient = createApiProxy(enhancedFilesQuotaApi);
+export const filesSettingsClient = createApiProxy(enhancedFilesSettingsApi);
 
 export const initSSR = (headers: Record<string, string>) => {
   client.initSSR(headers);

@@ -83,6 +83,10 @@ export const GreetingLoginContainer = ({
 
   const { type, roomName, displayName, spaceAddress } = invitationLinkData;
 
+  const keyProp = roomName
+    ? { tKey: "InvitationToRoom" }
+    : { tKey: "InvitationToPortal" };
+
   return (
     <>
       <img src={logoUrl} className="logo-wrapper" alt="greeting-logo" />
@@ -104,7 +108,7 @@ export const GreetingLoginContainer = ({
           <Text fontSize="16px">
             <Trans
               t={t}
-              i18nKey={roomName ? "InvitationToRoom" : "InvitationToPortal"}
+              i18nKey={keyProp.tKey}
               ns="Common"
               defaults={roomName ? DEFAULT_ROOM_TEXT : DEFAULT_PORTAL_TEXT}
               values={{

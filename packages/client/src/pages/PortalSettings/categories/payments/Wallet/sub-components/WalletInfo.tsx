@@ -45,6 +45,10 @@ const WalletInfo = (props: WalletInfoProps) => {
   const { balance, onTopUp } = props;
   const { t } = useTranslation(["Payments", "Common"]);
 
+  const keyProp = onTopUp
+    ? { tKey: "BalanceInsufficient" }
+    : { tKey: "Balance" };
+
   return (
     <div className={styles.walletInfoContainer}>
       <div className={styles.walletInfoIcon}>
@@ -65,7 +69,7 @@ const WalletInfo = (props: WalletInfoProps) => {
         >
           <Trans
             t={t}
-            i18nKey={onTopUp ? "BalanceInsufficient" : "Balance"}
+            i18nKey={keyProp.tKey}
             ns="Payments"
             values={{ balance }}
             components={{

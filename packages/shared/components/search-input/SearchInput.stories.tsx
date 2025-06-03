@@ -69,15 +69,16 @@ const Template = ({ value, onChange, ...args }: SearchInputProps) => {
   const [searchValue, setSearchValue] = useState(value);
 
   return (
-    <SearchInput
-      {...args}
-      style={{ width: "20%" }}
-      value={searchValue}
-      onChange={(v: string) => {
-        onChange?.(v);
-        setSearchValue(v);
-      }}
-    />
+    <div style={{ width: "300px" }}>
+      <SearchInput
+        {...args}
+        value={searchValue}
+        onChange={(v: string) => {
+          onChange?.(v);
+          setSearchValue(v);
+        }}
+      />
+    </div>
   );
 };
 
@@ -98,30 +99,22 @@ export const Default: Story = {
 export const Sizes: Story = {
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-      <SearchInput
-        size={InputSize.base}
-        value="Base size"
-        showClearButton
-        style={{ width: "20%" }}
-      />
-      <SearchInput
-        size={InputSize.middle}
-        value="Middle size"
-        showClearButton
-        style={{ width: "20%" }}
-      />
-      <SearchInput
-        size={InputSize.big}
-        value="Big size"
-        showClearButton
-        style={{ width: "20%" }}
-      />
-      <SearchInput
-        size={InputSize.huge}
-        value="Huge size"
-        showClearButton
-        style={{ width: "20%" }}
-      />
+      <div style={{ width: "300px" }}>
+        <SearchInput size={InputSize.base} value="Base size" showClearButton />
+      </div>
+      <div style={{ width: "300px" }}>
+        <SearchInput
+          size={InputSize.middle}
+          value="Middle size"
+          showClearButton
+        />
+      </div>
+      <div style={{ width: "300px" }}>
+        <SearchInput size={InputSize.big} value="Big size" showClearButton />
+      </div>
+      <div style={{ width: "300px" }}>
+        <SearchInput size={InputSize.huge} value="Huge size" showClearButton />
+      </div>
     </div>
   ),
 };
@@ -129,26 +122,29 @@ export const Sizes: Story = {
 export const States: Story = {
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-      <SearchInput
-        size={InputSize.base}
-        value="Normal state"
-        showClearButton
-        style={{ width: "20%" }}
-      />
-      <SearchInput
-        size={InputSize.base}
-        value="Disabled state"
-        isDisabled
-        showClearButton
-        style={{ width: "20%" }}
-      />
-      <SearchInput
-        size={InputSize.base}
-        value="With scale"
-        scale
-        showClearButton
-        style={{ width: "20%" }}
-      />
+      <div style={{ width: "300px" }}>
+        <SearchInput
+          size={InputSize.base}
+          value="Normal state"
+          showClearButton
+        />
+      </div>
+      <div style={{ width: "300px" }}>
+        <SearchInput
+          size={InputSize.base}
+          value="Disabled state"
+          isDisabled
+          showClearButton
+        />
+      </div>
+      <div style={{ width: "300px" }}>
+        <SearchInput
+          size={InputSize.base}
+          value="With scale"
+          scale
+          showClearButton
+        />
+      </div>
     </div>
   ),
 };
@@ -156,26 +152,29 @@ export const States: Story = {
 export const Behaviors: Story = {
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-      <SearchInput
-        size={InputSize.base}
-        value="With clear button"
-        showClearButton
-        style={{ width: "20%" }}
-      />
-      <SearchInput
-        size={InputSize.base}
-        value="Auto refresh enabled"
-        autoRefresh
-        refreshTimeout={1000}
-        style={{ width: "20%" }}
-      />
-      <SearchInput
-        size={InputSize.base}
-        placeholder="With placeholder"
-        showClearButton
-        style={{ width: "20%" }}
-        value=""
-      />
+      <div style={{ width: "300px" }}>
+        <SearchInput
+          size={InputSize.base}
+          value="With clear button"
+          showClearButton
+        />
+      </div>
+      <div style={{ width: "300px" }}>
+        <SearchInput
+          size={InputSize.base}
+          value="Auto refresh enabled"
+          autoRefresh
+          refreshTimeout={1000}
+        />
+      </div>
+      <div style={{ width: "300px" }}>
+        <SearchInput
+          size={InputSize.base}
+          placeholder="With placeholder"
+          showClearButton
+          value=""
+        />
+      </div>
     </div>
   ),
 };

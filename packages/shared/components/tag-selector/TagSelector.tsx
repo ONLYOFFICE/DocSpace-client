@@ -32,6 +32,7 @@ import React, {
   useMemo,
   useRef,
   useState,
+  useOptimistic,
 } from "react";
 import { computePosition, offset, flip, shift } from "@floating-ui/dom";
 
@@ -43,6 +44,8 @@ import CheckIconURL from "PUBLIC_DIR/images/check.edit.react.svg?url";
 import CrossIconReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
 import { useClickOutside } from "../../utils/useClickOutside";
+import { useIsMobile } from "../../hooks/useIsMobile";
+import { ModalDialog, ModalDialogType } from "../modal-dialog";
 
 import { Tag } from "../tag";
 import { Text } from "../text";
@@ -66,6 +69,7 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
   tags: propsTags,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
   const [tags, setTags] = useState<TTag[]>(() => {
     return propsTags.map((tag) => ({
       name: tag,
@@ -79,10 +83,11 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
 
   const deferredTagValue = useDeferredValue(newTagValue);
 
-  useClickOutside(ref, onClose, [onClose]);
+  const isMobile = useIsMobile();
+  useClickOutside(isMobile ? modalRef : ref, onClose, [onClose]);
 
   useLayoutEffect(() => {
-    if (!reference.current || !ref.current) return;
+    if (!reference.current || !ref.current || isMobile) return;
 
     computePosition(reference.current, ref.current, {
       placement: "bottom-start",
@@ -100,7 +105,7 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
         ref.current.style.top = `${y}px`;
       }
     });
-  }, [reference, ref]);
+  }, [reference, ref, isMobile]);
 
   const onChangeTitleTag = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewTagValue(event.target.value);
@@ -197,13 +202,15 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
       <div
         className={styles.wrapperList}
         style={{
-          height: Math.min(
-            MAX_BODY_HEIGHT,
-            filteredTags.length * ROW_HEIGHT + MARGIN_BOTTOM,
-          ),
+          height: isMobile
+            ? "100%"
+            : Math.min(
+                MAX_BODY_HEIGHT,
+                filteredTags.length * ROW_HEIGHT + MARGIN_BOTTOM,
+              ),
         }}
       >
-        <Scrollbar fixedSize>
+        <Scrollbar fixedSize className={styles.scrollbar}>
           {filteredTags.map((tag, index) => {
             return (
               <div key={tag.name} className={styles.row}>
@@ -267,6 +274,16 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
       </div>
     </div>
   );
+
+  if (isMobile) {
+    return (
+      <ModalDialog visible autoMaxHeight displayType={ModalDialogType.modal}>
+        <ModalDialog.Body className={styles.modalBody} ref={modalRef}>
+          {element}
+        </ModalDialog.Body>
+      </ModalDialog>
+    );
+  }
 
   return createPortal(element, document.body);
 };

@@ -25,6 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 @use "../../styles/variables/colors";
 
+@use "../../styles/mixins";
+
 .tagSelector {
   position: fixed;
 
@@ -46,6 +48,14 @@
 
   display: flex;
   flex-direction: column;
+
+  @include mixins.mobile {
+    width: 100%;
+    padding: 6px 0 0 0;
+    position: static;
+    box-shadow: none;
+    height: 300px;
+  }
 }
 
 .divider {
@@ -91,6 +101,10 @@
 
 .wrapperList {
   margin-inline-end: -17px;
+
+  @include mixins.mobile {
+    margin-inline-end: -8px;
+  }
 }
 
 .text {
@@ -162,4 +176,12 @@
   padding: 1px 7px;
 
   box-sizing: border-box;
+}
+
+.modalBody {
+  padding-block-end: 10px !important;
+}
+
+.scrollbar {
+  --scrollbar-padding-inline-end-mobile: 12px;
 }

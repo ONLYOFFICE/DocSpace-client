@@ -82,6 +82,8 @@ const TagPure = ({
   }, []);
 
   React.useEffect(() => {
+    if (advancedPopup) return;
+
     if (openDropdown) {
       return document.addEventListener("click", onClickOutside);
     }
@@ -90,7 +92,7 @@ const TagPure = ({
     return () => {
       document.removeEventListener("click", onClickOutside);
     };
-  }, [openDropdown, onClickOutside]);
+  }, [openDropdown, onClickOutside, advancedPopup]);
 
   React.useEffect(() => {
     return () => {

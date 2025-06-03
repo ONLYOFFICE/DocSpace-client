@@ -25,13 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
-import type {
-  FilesSelectorProps,
-  TGetIcon,
-} from "@docspace/shared/selectors/Files/FilesSelector.types";
+import type { FilesSelectorProps } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import type { TFilesSettings } from "@docspace/shared/api/files/types";
 import type { DeviceType } from "@docspace/shared/enums";
 import type { BackupToPublicRoomOptionType } from "@docspace/shared/types";
+
+import { TGetIcon } from "../../selectors/utils/types";
 
 export type FileInfoType = {
   id: string | number;

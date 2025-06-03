@@ -1,15 +1,34 @@
 {
   "key_path": "StorageUpgradeMessage",
-  "content": "{{fromSize}} {{storageUnit}} → {{toSize}} {{storageUnit}} in total",
-  "content_en_sha1_hash": "8aa4e63562d68f897b88c530e236ad896283bb22",
-  "created_at": "2025-05-29T12:12:54.527Z",
-  "updated_at": "2025-05-29T12:12:54.527Z",
+  "content": "{{fromSize}} → {{toSize}} in total",
+  "content_en_sha1_hash": "f5956c89eebee8013effcde95cc2ef4fb441a16b",
+  "created_at": "2025-06-03T20:59:26.840Z",
+  "updated_at": "2025-06-03T21:00:26.224Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display a tooltip indicating the total storage upgrade from one plan size to another. It appears in a plan info section of a UI component and provides context about storage size changes. The format includes \"fromSize\" and \"toSize\" variables that represent the original and upgraded storage sizes, respectively.",
+    "is_auto": true,
+    "updated_at": "2025-06-03T21:00:26.224Z"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/AdditionalStorage.tsx",
+      "line_number": 104,
+      "context": "const textTooltip = () => {\n return (\n <>\n <Text fontWeight={600} fontSize=\"12px\">\n {t(\"StorageUpgradeMessage\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n toSize: `${nextStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n })}\n </Text>\n <Text fontSize=\"12px\">",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/PlanInfo.tsx",
+      "line_number": 77,
+      "context": "amount: `${amount} ${t(\"Common:Gigabyte\")}`,\n });\n }\n \n if (!isCurrentStoragePlan) {\n return t(\"StorageUpgradeMessage\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n toSize: `${amount} ${t(\"Common:Gigabyte\")}`,\n });\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/PlanInfo.tsx",
+      "line_number": 77,
+      "context": "amount: `${amount} ${t(\"Common:Gigabyte\")}`,\n });\n }\n \n if (!isCurrentStoragePlan) {\n return t(\"StorageUpgradeMessage\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n toSize: `${amount} ${t(\"Common:Gigabyte\")}`,\n });\n }",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

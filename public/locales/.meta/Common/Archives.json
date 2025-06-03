@@ -3,7 +3,7 @@
   "content": "Archives",
   "content_en_sha1_hash": "a50710e773e144dc2bef188e769e70476bfa5af3",
   "created_at": "2025-05-19T21:30:43.070Z",
-  "updated_at": "2025-05-28T09:30:02.464Z",
+  "updated_at": "2025-06-03T20:59:42.050Z",
   "comment": {
     "text": "This translation key is used for the label \"Archives\" in a filter dropdown menu, likely found on a page or button related to document or file management. It appears in the UI when filtering by type and selecting \"ArchiveOnly\". The translator should consider how this term will be displayed to users.",
     "is_auto": true,
@@ -30,13 +30,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 163,
+      "line_number": 158,
       "context": "label: t(\"Common:Spreadsheets\"),\n typeKey: FilterType.SpreadsheetsOnly,\n },\n {\n key: \"filter-type-archives\",\n label: t(\"Common:Archives\"),\n typeKey: FilterType.ArchiveOnly,\n },\n {\n key: \"filter-type-presentations\",\n label: t(\"Common:Presentations\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 354,
+      "line_number": 353,
       "context": "case FilterType.ImagesOnly:\n return t(\"Common:Images\");\n case FilterType.MediaOnly:\n return t(\"Common:Media\");\n case FilterType.ArchiveOnly:\n return t(\"Common:Archives\");\n case FilterType.FilesOnly:\n return t(\"Common:Files\");\n \n case `room-${RoomsType.CustomRoom}`:\n return t(\"Common:CustomRooms\");",
       "module": "/packages/shared"
     }

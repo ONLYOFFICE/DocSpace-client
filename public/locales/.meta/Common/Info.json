@@ -3,7 +3,7 @@
   "content": "Info",
   "content_en_sha1_hash": "4b631f69842530d659306c8f06dbad594a6b1807",
   "created_at": "2025-05-19T21:30:45.900Z",
-  "updated_at": "2025-05-28T09:30:02.455Z",
+  "updated_at": "2025-06-03T20:59:42.044Z",
   "comment": {
     "text": "This translation key is used for the text \"Info\", which is displayed as a header or label in various UI components, including an info panel and an OAuth information dialog. The purpose of this text is to provide basic information or context, often accompanied by icons. It appears in places such as headers, dialogs, and context options.",
     "is_auto": true,
@@ -17,12 +17,6 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/Section/FlowsBody/index.tsx",
-      "line_number": 324,
-      "context": "},\n //   {\n //     id: \"option_details\",\n //     key: \"info\",\n //     icon: InfoOutlineReactSvgUrl,\n //     label: t(\"Common:Info\"),\n //     onClick: handleInfoClick,\n //   },\n //   {\n //     id: \"run\",\n //     key: \"Run flow\",",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/InfoDialog.tsx",
       "line_number": 124,
       "context": "visible={visible}\n displayType={ModalDialogType.aside}\n onClose={onClose}\n withBodyScroll\n >\n <ModalDialog.Header>{t(\"Common:Info\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledInfoContainer\n showDescription={showDescription}\n withShowText={withShowText}\n >",
@@ -30,13 +24,13 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1997,
+      "line_number": 1950,
       "context": "// onLoad: () => this.onLoadLinks(t, item),\n },\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: t(\"Common:Info\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => this.onShowInfoPanel(item),\n disabled: isPublicRoom || Boolean(item.external && item.expired),\n },\n ...pinOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1997,
+      "line_number": 1950,
       "context": "// onLoad: () => this.onLoadLinks(t, item),\n },\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: t(\"Common:Info\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => this.onShowInfoPanel(item),\n disabled: isPublicRoom || Boolean(item.external && item.expired),\n },\n ...pinOptions,",
       "module": "/packages/client"
     },

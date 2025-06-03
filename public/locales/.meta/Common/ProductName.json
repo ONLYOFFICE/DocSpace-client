@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2025-05-28T09:30:02.075Z",
+  "updated_at": "2025-06-03T20:59:41.776Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -72,19 +72,19 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 151,
+      "line_number": 148,
       "context": "],\n () => t(\"EmptyView:FormFolderDefaultUserDescription\"),\n )\n .with([FolderType.FormRoom, DefaultFolderType, P._], () =>\n t(\"EmptyView:FormFolderDefaultDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n .with([P._, DefaultFolderType, P.when(isAdmin)], () =>\n t(\"EmptyView:DefaultFolderDescription\"),\n )",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 151,
+      "line_number": 148,
       "context": "],\n () => t(\"EmptyView:FormFolderDefaultUserDescription\"),\n )\n .with([FolderType.FormRoom, DefaultFolderType, P._], () =>\n t(\"EmptyView:FormFolderDefaultDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n .with([P._, DefaultFolderType, P.when(isAdmin)], () =>\n t(\"EmptyView:DefaultFolderDescription\"),\n )",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 151,
+      "line_number": 148,
       "context": "],\n () => t(\"EmptyView:FormFolderDefaultUserDescription\"),\n )\n .with([FolderType.FormRoom, DefaultFolderType, P._], () =>\n t(\"EmptyView:FormFolderDefaultDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n .with([P._, DefaultFolderType, P.when(isAdmin)], () =>\n t(\"EmptyView:DefaultFolderDescription\"),\n )",
       "module": "/packages/client"
     },
@@ -1129,13 +1129,13 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/WalletContainer.tsx",
       "line_number": 175,
-      "context": "};\n \n return (\n <div className={styles.walletContainer}>\n <Text className={styles.walletDescription}>\n {t(\"WalletDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n {cardLinkedOnNonProfit ||\n cardLinkedOnFreeTariff ||\n (!isNonProfit && !isFreeTariff) ? (\n <PayerInformation />",
+      "context": "};\n \n return (\n <div className={styles.walletContainer}>\n <Text className={styles.walletDescription}>\n {t(\"WalletDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n {isCardLinkedToPortal ? <PayerInformation /> : null}\n \n <div className={styles.balanceWrapper}>\n <div className={styles.headerContainer}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/WalletInfo.tsx",
-      "line_number": 59,
-      "context": "<Text\n className={styles.walletInfoTitle}\n fontWeight=\"600\"\n fontSize=\"14px\"\n >\n {t(\"ProductNameWallet\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <div className={styles.walletInfoBalance}>\n <Trans\n t={t}\n i18nKey=\"Balance\"",
+      "line_number": 63,
+      "context": "<Text\n className={styles.walletInfoTitle}\n fontWeight=\"600\"\n fontSize=\"14px\"\n >\n {t(\"ProductNameWallet\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <div\n className={classNames(styles.walletInfoBalance, {\n [styles.warningColor]: !!onTopUp,\n })}",
       "module": "/packages/client"
     },
     {
@@ -1244,12 +1244,6 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/index.js",
       "line_number": 56,
       "context": "const location = useLocation();\n \n const data = [\n {\n id: \"access-portal\",\n name: t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n content: <AccessPortal />,\n },\n {\n id: \"login-history\",\n name: t(\"LoginHistoryTitle\"),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/Total.tsx",
-      "line_number": 65,
-      "context": "<PaymentSpeacialIcon />\n </div>\n <div className={styles.planInfoBody}>\n <Text className={styles.planInfoTitle} fontWeight=\"600\" fontSize=\"14px\">\n {t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <div className={styles.planInfoDetails}>\n <Text fontSize=\"12px\" fontWeight=\"600\">\n {t(\"QtyBilledMonthly\", { amount })}",
       "module": "/packages/client"
     },
     {
@@ -1416,13 +1410,13 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2033,
+      "line_number": 1986,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2033,
+      "line_number": 1986,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
@@ -1512,8 +1506,8 @@
     },
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingLoginContainer.tsx",
-      "line_number": 112,
-      "context": "i18nKey={roomName ? \"InvitationToRoom\" : \"InvitationToPortal\"}\n ns=\"Common\"\n defaults={roomName ? DEFAULT_ROOM_TEXT : DEFAULT_PORTAL_TEXT}\n values={{\n displayName,\n productName: t(\"Common:ProductName\"),\n ...(roomName ? { roomName } : { spaceAddress }),\n }}\n components={{\n 1: <Text fontWeight={600} as=\"strong\" fontSize=\"16px\" />,\n }}",
+      "line_number": 116,
+      "context": "i18nKey={keyProp.tKey}\n ns=\"Common\"\n defaults={roomName ? DEFAULT_ROOM_TEXT : DEFAULT_PORTAL_TEXT}\n values={{\n displayName,\n productName: t(\"Common:ProductName\"),\n ...(roomName ? { roomName } : { spaceAddress }),\n }}\n components={{\n 1: <Text fontWeight={600} as=\"strong\" fontSize=\"16px\" />,\n }}",
       "module": "/packages/login"
     },
     {

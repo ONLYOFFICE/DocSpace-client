@@ -1,25 +1,25 @@
 {
   "key_path": "PerStorage",
-  "content": "{{currency}} per {{amount}} / month",
-  "content_en_sha1_hash": "2fc1a6e73f7e89281e28d6e3f9ec086386df5c85",
-  "created_at": "2025-05-28T09:33:06.776Z",
-  "updated_at": "2025-05-28T09:35:33.784Z",
+  "content": "{{currency}} per {{amount}}/month",
+  "content_en_sha1_hash": "b3e722041cae4be17aabcb1fd49cf3f279e601f0",
+  "created_at": "2025-06-03T20:59:26.797Z",
+  "updated_at": "2025-06-03T21:00:37.686Z",
   "comment": {
-    "text": "This translation key is used to display the price per amount information in a currency format. It appears on a form component, where users can input an amount and see the corresponding price.",
+    "text": "This translation key is used to format a price string displaying storage costs per month. It is displayed as a text element in a UI component, likely an upgrade plan or settings page, and includes placeholders for currency and amount values.",
     "is_auto": true,
-    "updated_at": "2025-05-28T09:35:33.784Z"
+    "updated_at": "2025-06-03T21:00:37.686Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/AdditionalStorage.tsx",
-      "line_number": 147,
-      "context": "<Text fontSize=\"12px\" className={styles.priceDescription}>\n {item.priceTitle}\n </Text>\n <div className={styles.priceContainer}>\n <Text fontSize=\"12px\" fontWeight={600}>\n {t(\"PerStorage\", {\n currency: formatCurrencyValue(\n language!,\n value!,\n isoCurrencySymbol!,\n 0,",
+      "line_number": 198,
+      "context": "/>\n </div>\n ) : null}\n <div className={styles.priceContainer}>\n <Text fontSize=\"12px\" fontWeight={600}>\n {t(\"PerStorage\", {\n currency: formatWalletCurrency(storagePriceIncrement),\n amount: getConvertedSize(t, storageSizeIncrement || 0),\n })}\n </Text>\n </div>",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/Amount.tsx",
-      "line_number": 144,
-      "context": "type={InputType.text}\n placeholder={t(\"EnterAmount\")}\n />\n \n <Text fontSize=\"12px\" className={styles.storagePerMonth}>\n {t(\"PerStorage\", {\n currency: formatCurrencyValue(\n language!,\n stepValue,\n isoCurrencySymbol!,\n 0,",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/StoragePlanUpgrade.tsx",
+      "line_number": 230,
+      "context": "showPlusSign\n onChange={onChangeNumber}\n isDisabled={hasScheduledStorageChange || isLoading}\n items={amountTabs()}\n withoutContorls={hasScheduledStorageChange}\n underContorlsTitle={t(\"PerStorage\", {\n currency: formatWalletCurrency(storagePriceIncrement),\n amount: getConvertedSize(t, storageSizeIncrement || 0),\n })}\n {...disableValueProps}\n isLarge",
       "module": "/packages/client"
     }
   ],
